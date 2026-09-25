@@ -76,9 +76,25 @@ for(const e of entities){
  matches.push({id:e.id,name:e.name,cuatm_key:keys[0]||null,legal_id:null,legal_name:null,legal_type:null,legal_source:'BNS CUATM',match_method:null,confidence:null,unmatched_reason:reason,name_candidate_count:nameHits.length,parent_official_code:parentCode});
 }
 const matched=matches.filter(x=>x.legal_id), unmatched=matches.filter(x=>!x.legal_id);
+const matchById=new Map(matches.map(x=>[x.id,x]));
+const noKeyDiagnostics=entities.filter(e=>![e.osm?.cuatm_unique_id,e.osm?.cuatm_code].some(Boolean)).map(e=>{
+ const parent=entityById.get(e.parent_id)||null;
+ const parentMatch=parent?matchById.get(parent.id):null;
+ const verifiedParentLegalId=parentMatch?.legal_id||null;
+ const candidates=(byName.get(norm(e.name))||[]).map(h=>({legal_id:h.code,legal_name:h.name,parent_code:h.parent_code||null,parent_name:h.parent_name||null,official_sheet:h.sheet,official_row:h.row,parent_matches_verified_osm_parent:Boolean(verifiedParentLegalId&&h.parent_code===verifiedParentLegalId)}));
+ let category;
+ if(!candidates.length)category='no_official_name_candidate';
+ else if(!verifiedParentLegalId)category='osm_parent_not_reconciled';
+ else if(candidates.some(x=>x.parent_matches_verified_osm_parent))category='exact_name_parent_match_available';
+ else if(candidates.some(x=>!x.parent_code))category='official_parent_parse_suspect';
+ else category='child_name_match_parent_mismatch';
+ return {id:e.id,name:e.name,osm_relation_id:e.osm?.relation_id??null,osm_parent_id:e.parent_id||null,osm_parent_name:parent?.name||null,osm_parent_relation_id:parent?.osm?.relation_id??null,verified_osm_parent_legal_id:verifiedParentLegalId,verified_osm_parent_legal_name:parentMatch?.legal_name||null,normalized_child_name:norm(e.name),official_name_candidate_count:candidates.length,official_name_candidates:candidates,diagnostic_category:category};
+});
+const diagnosticCounts=noKeyDiagnostics.reduce((a,x)=>(a[x.diagnostic_category]=(a[x.diagnostic_category]||0)+1,a),{});
+await writeFile('data/current/md-cuatm-pair-diagnostics.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',entity_count:noKeyDiagnostics.length,by_category:diagnosticCounts,policy:'Diagnostic only. No legal fields are assigned from this file.',items:noKeyDiagnostics},null,2)+'\\n');
 const reasons=unmatched.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const methods=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,a),{});
 const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high), or exact normalized name plus verified official parent when unique (medium). Fuzzy and name-only matches never auto-assign.',matches};
 if(!matched.length)throw new Error('CUATM reconciliation produced zero verified matches');
 await writeFile(OUTPUT,JSON.stringify(out,null,2)+'\n');
-console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons},null,2));
+console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts},null,2));
