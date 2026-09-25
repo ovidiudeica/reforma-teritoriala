@@ -91,10 +91,25 @@ const noKeyDiagnostics=entities.filter(e=>![e.osm?.cuatm_unique_id,e.osm?.cuatm_
  return {id:e.id,name:e.name,osm_relation_id:e.osm?.relation_id??null,osm_parent_id:e.parent_id||null,osm_parent_name:parent?.name||null,osm_parent_relation_id:parent?.osm?.relation_id??null,verified_osm_parent_legal_id:verifiedParentLegalId,verified_osm_parent_legal_name:parentMatch?.legal_name||null,normalized_child_name:norm(e.name),official_name_candidate_count:candidates.length,official_name_candidates:candidates,diagnostic_category:category};
 });
 const diagnosticCounts=noKeyDiagnostics.reduce((a,x)=>(a[x.diagnostic_category]=(a[x.diagnostic_category]||0)+1,a),{});
+const mismatchMatrix=new Map();
+for(const d of noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch')){
+ const parentMatch=d.osm_parent_id?matchById.get(d.osm_parent_id):null;
+ const osmParentType=parentMatch?.legal_type||'unknown';
+ for(const cand of d.official_name_candidates){
+  const officialParent=(byCode.get(cand.parent_code)||[])[0]||null;
+  const officialParentType=officialParent?.legal_type||'unknown';
+  const key=osmParentType+'|'+officialParentType;
+  if(!mismatchMatrix.has(key))mismatchMatrix.set(key,{verified_osm_parent_legal_type:osmParentType,candidate_official_parent_legal_type:officialParentType,count:0,examples:[]});
+  const cell=mismatchMatrix.get(key); cell.count++;
+  if(cell.examples.length<8)cell.examples.push({child_name:d.name,osm_parent_name:d.osm_parent_name,verified_osm_parent_legal_id:d.verified_osm_parent_legal_id,verified_osm_parent_legal_name:d.verified_osm_parent_legal_name,candidate_legal_id:cand.legal_id,candidate_legal_name:cand.legal_name,candidate_parent_code:cand.parent_code,candidate_parent_name:cand.parent_name});
+ }
+}
+const mismatchRows=[...mismatchMatrix.values()].sort((a,b)=>b.count-a.count);
+await writeFile('data/current/md-cuatm-parent-mismatch-matrix.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',mismatch_entity_count:noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch').length,matrix_candidate_pair_count:mismatchRows.reduce((n,x)=>n+x.count,0),matrix:mismatchRows},null,2)+'\\n');
 await writeFile('data/current/md-cuatm-pair-diagnostics.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',entity_count:noKeyDiagnostics.length,by_category:diagnosticCounts,policy:'Diagnostic only. No legal fields are assigned from this file.',items:noKeyDiagnostics},null,2)+'\\n');
 const reasons=unmatched.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const methods=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,a),{});
 const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high), or exact normalized name plus verified official parent when unique (medium). Fuzzy and name-only matches never auto-assign.',matches};
 if(!matched.length)throw new Error('CUATM reconciliation produced zero verified matches');
 await writeFile(OUTPUT,JSON.stringify(out,null,2)+'\n');
-console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts},null,2));
+console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_legal_type:x.verified_osm_parent_legal_type,candidate_official_parent_legal_type:x.candidate_official_parent_legal_type,count:x.count,examples:x.examples.slice(0,3)}))},null,2));
