@@ -16,11 +16,18 @@ async function fetchOfficial(){
  const buf=Buffer.from(await r.arrayBuffer()); if(buf.length<10000)throw new Error('CUATM download unexpectedly small: '+buf.length);
  const wb=XLSX.read(buf,{type:'buffer'}), records=[];
  for(const sheet of wb.SheetNames){
-  const rows=XLSX.utils.sheet_to_json(wb.Sheets[sheet],{defval:null,raw:false,range:0});
-  for(let i=0;i<rows.length;i++){
-   const x=rows[i], code=digits(x['CodUnic']??x['﻿CodUnic']), name=String(x['DenumireRO']??'').trim();
+  const matrix=XLSX.utils.sheet_to_json(wb.Sheets[sheet],{header:1,defval:null,raw:false,blankrows:false});
+  if(!matrix.length)continue;
+  const headers=(matrix[0]||[]).map(v=>String(v??'').replace(/^\\uFEFF/,'').trim());
+  const col=name=>headers.indexOf(name);
+  const required=['CodUnic','ParentCodUnic','CodStatistic','ParentCodStatistic','Statut','DenumireRO','DenumireRU'];
+  const missing=required.filter(h=>col(h)<0);
+  if(missing.length)throw new Error('CUATM schema missing columns in '+sheet+': '+missing.join(', '));
+  for(let i=1;i<matrix.length;i++){
+   const row=matrix[i]||[];
+   const code=digits(row[col('CodUnic')]), name=String(row[col('DenumireRO')]??'').trim();
    if(!/^\\d{3,10}$/.test(code)||!name)continue;
-   records.push({code,parent_code:digits(x.ParentCodUnic)||null,statistical_code:digits(x.CodStatistic)||null,parent_statistical_code:digits(x.ParentCodStatistic)||null,status_code:digits(x.Statut)||null,name,name_ru:String(x.DenumireRU??'').trim()||null,normalized_name:norm(name),sheet,row:i+2});
+   records.push({code,parent_code:digits(row[col('ParentCodUnic')])||null,statistical_code:digits(row[col('CodStatistic')])||null,parent_statistical_code:digits(row[col('ParentCodStatistic')])||null,status_code:digits(row[col('Statut')])||null,name,name_ru:String(row[col('DenumireRU')]??'').trim()||null,normalized_name:norm(name),sheet,row:i+1});
   }
  }
  const deduped=[...new Map(records.map(x=>[x.code,x])).values()];
