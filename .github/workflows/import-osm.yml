@@ -19,6 +19,8 @@ jobs:
       - run: npm install
       - run: npm run import:osm
       - run: npm run audit:admin
+      - name: Inspect official CUATM workbook schema
+        run: node scripts/process/inspect-cuatm-workbook.mjs
       - run: npm run reconcile:cuatm
       - name: Commit generated catalog, GeoJSON and audit
         run: |
