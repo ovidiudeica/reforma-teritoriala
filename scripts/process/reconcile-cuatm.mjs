@@ -11,41 +11,25 @@ const entities=(catalog.entities||[]).filter(e=>e.jurisdiction==='MD');
 const entityById=new Map(entities.map(e=>[e.id,e]));
 
 async function fetchOfficial(){
- const r=await fetch(URL,{headers:{'user-agent':'reforma-teritoriala-cuatm/1.1'}});
+ const r=await fetch(URL,{headers:{'user-agent':'reforma-teritoriala-cuatm/1.2'}});
  if(!r.ok)throw new Error('CUATM download failed: HTTP '+r.status);
  const buf=Buffer.from(await r.arrayBuffer()); if(buf.length<10000)throw new Error('CUATM download unexpectedly small: '+buf.length);
- const wb=XLSX.read(buf,{type:'buffer'}), rows=[];
+ const wb=XLSX.read(buf,{type:'buffer'}), records=[];
  for(const sheet of wb.SheetNames){
-  const matrix=XLSX.utils.sheet_to_json(wb.Sheets[sheet],{header:1,defval:null,raw:false});
-  for(let i=0;i<matrix.length;i++){
-   const cells=(matrix[i]||[]).map(x=>String(x??'').trim());
-   const ci=cells.findIndex(x=>/^\d{3,10}$/.test(x.replace(/\s/g,''))); if(ci<0)continue;
-   const code=digits(cells[ci]), text=cells.filter((x,j)=>j!==ci&&x&&!/^\d+$/.test(x)).sort((a,b)=>b.length-a.length)[0]||null;
-   if(text)rows.push({code,name:text,normalized_name:norm(text),legal_type:legalType(text),sheet,row:i+1});
+  const rows=XLSX.utils.sheet_to_json(wb.Sheets[sheet],{defval:null,raw:false});
+  for(let i=0;i<rows.length;i++){
+   const x=rows[i], code=digits(x.CodUnic), name=String(x.DenumireRO??'').trim();
+   if(!/^\\d{3,10}$/.test(code)||!name)continue;
+   records.push({code,parent_code:digits(x.ParentCodUnic)||null,statistical_code:digits(x.CodStatistic)||null,parent_statistical_code:digits(x.ParentCodStatistic)||null,status_code:digits(x.Statut)||null,name,name_ru:String(x.DenumireRU??'').trim()||null,normalized_name:norm(name),sheet,row:i+2});
   }
  }
- const records=[...new Map(rows.map(x=>[x.code+'|'+x.normalized_name,x])).values()];
- if(records.length<500)throw new Error('CUATM parse produced too few records: '+records.length);
- return {source_url:URL,fetched_at:new Date().toISOString(),record_count:records.length,records};
-}
-function legalType(name){const n=String(name||'').toLowerCase();if(n.includes('municip'))return'municipality';if(n.includes('raion'))return'district';if(n.includes('sector'))return'sector';if(n.includes('oraș')||n.includes('oras'))return'town';if(n.includes('comun'))return'commune';if(n.includes('sat'))return'village';return'administrative_or_territorial_unit';}
-function hierarchyRank(type){return ({district:1,municipality:1,sector:2,town:2,commune:2,village:3,administrative_or_territorial_unit:9})[type]??9;}
-function attachOfficialParents(records){
- const bySheet=new Map(); for(const r of records){if(!bySheet.has(r.sheet))bySheet.set(r.sheet,[]);bySheet.get(r.sheet).push(r);}
- for(const rows of bySheet.values()){
-  rows.sort((a,b)=>a.row-b.row); const stack=[];
-  for(const r of rows){
-   const rank=hierarchyRank(r.legal_type);
-   while(stack.length&&stack.at(-1).rank>=rank)stack.pop();
-   const parent=stack.at(-1)?.record||null;
-   r.parent_code=parent?.code||null; r.parent_name=parent?.name||null;
-   if(rank<9)stack.push({rank,record:r});
-  }
- }
- return records;
+ const deduped=[...new Map(records.map(x=>[x.code,x])).values()];
+ if(deduped.length<500)throw new Error('CUATM parse produced too few records: '+deduped.length);
+ const byCode=new Map(deduped.map(x=>[x.code,x]));
+ for(const x of deduped)x.parent_name=x.parent_code?byCode.get(x.parent_code)?.name||null:null;
+ return {source_url:URL,fetched_at:new Date().toISOString(),schema:{legal_id:'CodUnic',parent_code:'ParentCodUnic',statistical_code:'CodStatistic',parent_statistical_code:'ParentCodStatistic',status_code:'Statut',name:'DenumireRO',name_ru:'DenumireRU'},record_count:deduped.length,records:deduped};
 }
 const official=await fetchOfficial();
-official.records=attachOfficialParents(official.records);
  await mkdir('data/sources',{recursive:true}); await writeFile(SNAPSHOT,JSON.stringify(official,null,2)+'\n');
 const byCode=new Map(),byName=new Map();
 for(const r of official.records){for(const [m,k] of [[byCode,r.code],[byName,r.normalized_name]]){if(!m.has(k))m.set(k,[]);m.get(k).push(r);}}
@@ -64,16 +48,16 @@ function parentCompatible(child,parentCode){return Boolean(parentCode&&child.par
 const matches=[];
 for(const e of entities){
  const ec=exactCode.get(e.id);
- if(ec){const h=ec.hit;matches.push({id:e.id,name:e.name,cuatm_key:ec.key,legal_id:h.code,legal_name:h.name,legal_type:h.legal_type,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'explicit_cuatm_key',confidence:'high',unmatched_reason:null});continue;}
+ if(ec){const h=ec.hit;matches.push({id:e.id,name:e.name,cuatm_key:ec.key,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'explicit_cuatm_key',confidence:'high',unmatched_reason:null});continue;}
  const keys=[e.osm?.cuatm_unique_id,e.osm?.cuatm_code].filter(Boolean).map(digits);
  let reason='no_explicit_cuatm_key';
  if(keys.length){const counts=keys.map(k=>(byCode.get(k)||[]).length);reason=counts.some(n=>n>1)?'code_non_unique':'code_absent_from_official_snapshot';}
  const nameHits=byName.get(norm(e.name))||[], parentCode=officialParentCode(e), parentHits=nameHits.filter(h=>parentCompatible(h,parentCode));
- if(!keys.length&&parentCode&&parentHits.length===1){const h=parentHits[0];matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,legal_type:h.legal_type,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'exact_normalized_name_and_official_parent',confidence:'medium',unmatched_reason:null});continue;}
+ if(!keys.length&&parentCode&&parentHits.length===1){const h=parentHits[0];matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'exact_normalized_name_and_official_parent',confidence:'medium',unmatched_reason:null});continue;}
  if(!keys.length&&nameHits.length===1&&!parentCode)reason='unique_name_but_parent_unverified';
  else if(!keys.length&&nameHits.length>1)reason=parentCode?'name_ambiguous_with_parent':'name_ambiguous';
  else if(!keys.length&&nameHits.length===0)reason='name_absent_from_official_snapshot';
- matches.push({id:e.id,name:e.name,cuatm_key:keys[0]||null,legal_id:null,legal_name:null,legal_type:null,legal_source:'BNS CUATM',match_method:null,confidence:null,unmatched_reason:reason,name_candidate_count:nameHits.length,parent_official_code:parentCode});
+ matches.push({id:e.id,name:e.name,cuatm_key:keys[0]||null,legal_id:null,legal_name:null,status_code:null,legal_source:'BNS CUATM',match_method:null,confidence:null,unmatched_reason:reason,name_candidate_count:nameHits.length,parent_official_code:parentCode});
 }
 const matched=matches.filter(x=>x.legal_id), unmatched=matches.filter(x=>!x.legal_id);
 const matchById=new Map(matches.map(x=>[x.id,x]));
@@ -94,12 +78,12 @@ const diagnosticCounts=noKeyDiagnostics.reduce((a,x)=>(a[x.diagnostic_category]=
 const mismatchMatrix=new Map();
 for(const d of noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch')){
  const parentMatch=d.osm_parent_id?matchById.get(d.osm_parent_id):null;
- const osmParentType=parentMatch?.legal_type||'unknown';
+ const osmParentType=parentMatch?.status_code||'unknown';
  for(const cand of d.official_name_candidates){
   const officialParent=(byCode.get(cand.parent_code)||[])[0]||null;
-  const officialParentType=officialParent?.legal_type||'unknown';
+  const officialParentType=officialParent?.status_code||'unknown';
   const key=osmParentType+'|'+officialParentType;
-  if(!mismatchMatrix.has(key))mismatchMatrix.set(key,{verified_osm_parent_legal_type:osmParentType,candidate_official_parent_legal_type:officialParentType,count:0,examples:[]});
+  if(!mismatchMatrix.has(key))mismatchMatrix.set(key,{verified_osm_parent_status_code:osmParentType,candidate_official_parent_status_code:officialParentType,count:0,examples:[]});
   const cell=mismatchMatrix.get(key); cell.count++;
   if(cell.examples.length<8)cell.examples.push({child_name:d.name,osm_parent_name:d.osm_parent_name,verified_osm_parent_legal_id:d.verified_osm_parent_legal_id,verified_osm_parent_legal_name:d.verified_osm_parent_legal_name,candidate_legal_id:cand.legal_id,candidate_legal_name:cand.legal_name,candidate_parent_code:cand.parent_code,candidate_parent_name:cand.parent_name});
  }
@@ -112,4 +96,4 @@ const methods=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,
 const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high), or exact normalized name plus verified official parent when unique (medium). Fuzzy and name-only matches never auto-assign.',matches};
 if(!matched.length)throw new Error('CUATM reconciliation produced zero verified matches');
 await writeFile(OUTPUT,JSON.stringify(out,null,2)+'\n');
-console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_legal_type:x.verified_osm_parent_legal_type,candidate_official_parent_legal_type:x.candidate_official_parent_legal_type,count:x.count,examples:x.examples.slice(0,3)}))},null,2));
+console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_status_code:x.verified_osm_parent_status_code,candidate_official_parent_status_code:x.candidate_official_parent_status_code,count:x.count,examples:x.examples.slice(0,3)}))},null,2));
