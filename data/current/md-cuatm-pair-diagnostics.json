@@ -1,11 +1,12 @@
 {
-  "generated_at": "2026-09-25T23:24:02.604Z",
+  "generated_at": "2026-09-25T23:36:25.600Z",
   "jurisdiction": "MD",
   "entity_count": 244,
   "by_category": {
-    "child_name_match_parent_mismatch": 189,
-    "no_official_name_candidate": 48,
-    "osm_parent_not_reconciled": 7
+    "exact_name_parent_match_available": 185,
+    "official_parent_parse_suspect": 1,
+    "child_name_match_parent_mismatch": 12,
+    "no_official_name_candidate": 46
   },
   "policy": "Diagnostic only. No legal fields are assigned from this file.",
   "items": [
@@ -24,14 +25,14 @@
         {
           "legal_id": "9211",
           "legal_name": "Agronomovca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1471,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706624",
@@ -48,14 +49,14 @@
         {
           "legal_id": "8510",
           "legal_name": "Alava",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1360,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628520",
@@ -72,14 +73,14 @@
         {
           "legal_id": "4310",
           "legal_name": "Albinețul Vechi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 571,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1660998",
@@ -91,9 +92,46 @@
       "verified_osm_parent_legal_id": "9200",
       "verified_osm_parent_legal_name": "Ungheni",
       "normalized_child_name": "alexeevca",
-      "official_name_candidate_count": 0,
-      "official_name_candidates": [],
-      "diagnostic_category": "no_official_name_candidate"
+      "official_name_candidate_count": 4,
+      "official_name_candidates": [
+        {
+          "legal_id": "4153",
+          "legal_name": "Alexeevca",
+          "parent_code": "4100",
+          "parent_name": "Edineț",
+          "official_sheet": "Sheet 1",
+          "official_row": 525,
+          "parent_matches_verified_osm_parent": false
+        },
+        {
+          "legal_id": "4510",
+          "legal_name": "Alexeevca",
+          "parent_code": "4500",
+          "parent_name": "Florești",
+          "official_sheet": "Sheet 1",
+          "official_row": 649,
+          "parent_matches_verified_osm_parent": false
+        },
+        {
+          "legal_id": "9214",
+          "legal_name": "Alexeevca",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
+          "official_sheet": "Sheet 1",
+          "official_row": 1474,
+          "parent_matches_verified_osm_parent": true
+        },
+        {
+          "legal_id": "9635",
+          "legal_name": "Alexeevca",
+          "parent_code": "9634",
+          "parent_name": "Svetlîi",
+          "official_sheet": "Sheet 1",
+          "official_row": 1573,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496849",
@@ -110,8 +148,8 @@
         {
           "legal_id": "1000",
           "legal_name": "Anenii Noi",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": null,
+          "parent_name": null,
           "official_sheet": "Sheet 1",
           "official_row": 47,
           "parent_matches_verified_osm_parent": false
@@ -119,14 +157,14 @@
         {
           "legal_id": "1001",
           "legal_name": "Anenii Noi",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 48,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1811531",
@@ -143,8 +181,8 @@
         {
           "legal_id": "2110",
           "legal_name": "Antonești",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2100",
+          "parent_name": "Cantemir",
           "official_sheet": "Sheet 1",
           "official_row": 202,
           "parent_matches_verified_osm_parent": false
@@ -152,14 +190,14 @@
         {
           "legal_id": "8512",
           "legal_name": "Antonești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1362,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1167568",
@@ -176,14 +214,14 @@
         {
           "legal_id": "2710",
           "legal_name": "Baccealia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 301,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10629202",
@@ -200,8 +238,8 @@
         {
           "legal_id": "2112",
           "legal_name": "Baimaclia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2100",
+          "parent_name": "Cantemir",
           "official_sheet": "Sheet 1",
           "official_row": 204,
           "parent_matches_verified_osm_parent": false
@@ -209,14 +247,14 @@
         {
           "legal_id": "2310",
           "legal_name": "Baimaclia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 305,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628802",
@@ -233,14 +271,14 @@
         {
           "legal_id": "4811",
           "legal_name": "Balatina",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 723,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18821811",
@@ -257,14 +295,14 @@
         {
           "legal_id": "5510",
           "legal_name": "Bardar",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 822,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12207955",
@@ -281,14 +319,14 @@
         {
           "legal_id": "0300",
           "legal_name": "Bălți",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": null,
+          "parent_name": null,
           "official_sheet": "Sheet 1",
           "official_row": 42,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "official_parent_parse_suspect"
     },
     {
       "id": "osm-r9191731",
@@ -305,14 +343,14 @@
         {
           "legal_id": "4314",
           "legal_name": "Bocani",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 575,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10624606",
@@ -329,14 +367,14 @@
         {
           "legal_id": "9217",
           "legal_name": "Boghenii Noi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1477,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1303141",
@@ -353,14 +391,14 @@
         {
           "legal_id": "8513",
           "legal_name": "Brezoaia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1363,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1643217",
@@ -377,14 +415,14 @@
         {
           "legal_id": "9222",
           "legal_name": "Buciumeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1482,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496669",
@@ -401,23 +439,23 @@
         {
           "legal_id": "1014",
           "legal_name": "Bulboaca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 56,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "1417",
           "legal_name": "Bulboaca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1400",
+          "parent_name": "Briceni",
           "official_sheet": "Sheet 1",
           "official_row": 116,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661027",
@@ -434,14 +472,14 @@
         {
           "legal_id": "9224",
           "legal_name": "Bumbăta",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1485,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1643042",
@@ -458,14 +496,14 @@
         {
           "legal_id": "9225",
           "legal_name": "Bușila",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1486,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18821817",
@@ -482,14 +520,14 @@
         {
           "legal_id": "5318",
           "legal_name": "Buțeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5300",
+          "parent_name": "Hîncești",
           "official_sheet": "Sheet 1",
           "official_row": 766,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628803",
@@ -506,14 +544,14 @@
         {
           "legal_id": "4816",
           "legal_name": "Cajba",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 728,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496671",
@@ -530,14 +568,14 @@
         {
           "legal_id": "1015",
           "legal_name": "Calfa",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 57,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628804",
@@ -554,23 +592,23 @@
         {
           "legal_id": "4817",
           "legal_name": "Camenca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 729,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "1901",
           "legal_name": "Camenca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9800",
+          "parent_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
           "official_sheet": "Sheet 1",
           "official_row": 1577,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706625",
@@ -587,14 +625,14 @@
         {
           "legal_id": "8514",
           "legal_name": "Carahasani",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1364,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628618",
@@ -611,14 +649,14 @@
         {
           "legal_id": "4341",
           "legal_name": "Catranîc",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 576,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10629199",
@@ -635,14 +673,14 @@
         {
           "legal_id": "2301",
           "legal_name": "Căinari",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 299,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r19314571",
@@ -659,14 +697,14 @@
         {
           "legal_id": "4315",
           "legal_name": "Călinești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 577,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628620",
@@ -683,14 +721,14 @@
         {
           "legal_id": "4319",
           "legal_name": "Călugăr",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 578,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706627",
@@ -707,14 +745,14 @@
         {
           "legal_id": "8515",
           "legal_name": "Căplani",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1365,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822474",
@@ -731,14 +769,14 @@
         {
           "legal_id": "2313",
           "legal_name": "Cărbuna",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 823,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12459799",
@@ -755,8 +793,8 @@
         {
           "legal_id": "2700",
           "legal_name": "Căușeni",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": null,
+          "parent_name": null,
           "official_sheet": "Sheet 1",
           "official_row": 297,
           "parent_matches_verified_osm_parent": false
@@ -764,14 +802,14 @@
         {
           "legal_id": "2701",
           "legal_name": "Căușeni",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 298,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661034",
@@ -788,14 +826,14 @@
         {
           "legal_id": "9226",
           "legal_name": "Cetireni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1487,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496851",
@@ -812,23 +850,23 @@
         {
           "legal_id": "1017",
           "legal_name": "Chetrosu",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 59,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "3614",
           "legal_name": "Chetrosu",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "3600",
+          "parent_name": "Drochia",
           "official_sheet": "Sheet 1",
           "official_row": 466,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r448022",
@@ -845,14 +883,14 @@
         {
           "legal_id": "2712",
           "legal_name": "Chircăiești",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 307,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10629200",
@@ -869,14 +907,14 @@
         {
           "legal_id": "2314",
           "legal_name": "Chircăieștii Noi",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 308,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1643211",
@@ -893,8 +931,8 @@
         {
           "legal_id": "7447",
           "legal_name": "Chirileni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7446",
+          "parent_name": "Drăgănești",
           "official_sheet": "Sheet 1",
           "official_row": 1185,
           "parent_matches_verified_osm_parent": false
@@ -902,14 +940,14 @@
         {
           "legal_id": "9227",
           "legal_name": "Chirileni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1488,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822473",
@@ -926,14 +964,14 @@
         {
           "legal_id": "2316",
           "legal_name": "Cigîrleni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 824,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496668",
@@ -950,23 +988,23 @@
         {
           "legal_id": "1020",
           "legal_name": "Ciobanovca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 63,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "7129",
           "legal_name": "Ciobanovca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7128",
+          "parent_name": "Grinăuți",
           "official_sheet": "Sheet 1",
           "official_row": 1113,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1811552",
@@ -983,23 +1021,23 @@
         {
           "legal_id": "8516",
           "legal_name": "Cioburciu",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1366,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "7615",
           "legal_name": "Cioburciu",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9800",
+          "parent_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
           "official_sheet": "Sheet 1",
           "official_row": 1606,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r9192133",
@@ -1016,14 +1054,14 @@
         {
           "legal_id": "4323",
           "legal_name": "Ciolacu Nou",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 584,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1643223",
@@ -1040,14 +1078,14 @@
         {
           "legal_id": "9228",
           "legal_name": "Cioropcani",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1489,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628689",
@@ -1064,14 +1102,14 @@
         {
           "legal_id": "4821",
           "legal_name": "Ciuciulea",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 733,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10629201",
@@ -1088,14 +1126,14 @@
         {
           "legal_id": "2317",
           "legal_name": "Ciuflești",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 313,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10629204",
@@ -1112,14 +1150,14 @@
         {
           "legal_id": "2713",
           "legal_name": "Cîrnățeni",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 314,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12463612",
@@ -1136,14 +1174,14 @@
         {
           "legal_id": "2318",
           "legal_name": "Cîrnățenii Noi",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 315,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628801",
@@ -1160,14 +1198,14 @@
         {
           "legal_id": "4822",
           "legal_name": "Cobani",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 734,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661038",
@@ -1184,14 +1222,14 @@
         {
           "legal_id": "9231",
           "legal_name": "Condrătești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1492,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1813319",
@@ -1232,14 +1270,14 @@
         {
           "legal_id": "7616",
           "legal_name": "Copanca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 317,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1301117",
@@ -1256,23 +1294,23 @@
         {
           "legal_id": "8517",
           "legal_name": "Copceac",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1367,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "9626",
           "legal_name": "Copceac",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9600",
+          "parent_name": "Unitatea Teritorială Autonomă Găgăuzia",
           "official_sheet": "Sheet 1",
           "official_row": 1563,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10624607",
@@ -1289,8 +1327,8 @@
         {
           "legal_id": "5362",
           "legal_name": "Cornești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5361",
+          "parent_name": "Secăreni",
           "official_sheet": "Sheet 1",
           "official_row": 814,
           "parent_matches_verified_osm_parent": false
@@ -1298,23 +1336,23 @@
         {
           "legal_id": "9202",
           "legal_name": "Cornești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1469,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "9233",
           "legal_name": "Cornești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1494,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10624608",
@@ -1331,8 +1369,8 @@
         {
           "legal_id": "5362",
           "legal_name": "Cornești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5361",
+          "parent_name": "Secăreni",
           "official_sheet": "Sheet 1",
           "official_row": 814,
           "parent_matches_verified_osm_parent": false
@@ -1340,23 +1378,23 @@
         {
           "legal_id": "9202",
           "legal_name": "Cornești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1469,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "9233",
           "legal_name": "Cornești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1494,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661050",
@@ -1373,14 +1411,14 @@
         {
           "legal_id": "9234",
           "legal_name": "Cornova",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1495,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r13014027",
@@ -1397,8 +1435,8 @@
         {
           "legal_id": "5334",
           "legal_name": "Costești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5333",
+          "parent_name": "Ivanovca",
           "official_sheet": "Sheet 1",
           "official_row": 784,
           "parent_matches_verified_osm_parent": false
@@ -1406,23 +1444,23 @@
         {
           "legal_id": "5515",
           "legal_name": "Costești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 825,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "7122",
           "legal_name": "Costești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7100",
+          "parent_name": "Rîșcani",
           "official_sheet": "Sheet 1",
           "official_row": 1092,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661173",
@@ -1439,14 +1477,14 @@
         {
           "legal_id": "9235",
           "legal_name": "Costuleni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1496,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496855",
@@ -1463,14 +1501,14 @@
         {
           "legal_id": "2323",
           "legal_name": "Coșcalia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 318,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1216706",
@@ -1487,23 +1525,23 @@
         {
           "legal_id": "0703",
           "legal_name": "Cremenciug",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 319,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "7819",
           "legal_name": "Cremenciug",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7800",
+          "parent_name": "Soroca",
           "official_sheet": "Sheet 1",
           "official_row": 1226,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706626",
@@ -1520,14 +1558,14 @@
         {
           "legal_id": "8518",
           "legal_name": "Crocmaz",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1368,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628686",
@@ -1544,14 +1582,14 @@
         {
           "legal_id": "4823",
           "legal_name": "Cuhnești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 735,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628806",
@@ -1568,14 +1606,14 @@
         {
           "legal_id": "4827",
           "legal_name": "Danu",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 740,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822137",
@@ -1592,14 +1630,14 @@
         {
           "legal_id": "5516",
           "legal_name": "Dănceni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 830,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628688",
@@ -1616,14 +1654,14 @@
         {
           "legal_id": "4830",
           "legal_name": "Dușmani",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 743,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628617",
@@ -1640,14 +1678,14 @@
         {
           "legal_id": "4328",
           "legal_name": "Egorovca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 589,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628644",
@@ -1664,14 +1702,14 @@
         {
           "legal_id": "0301",
           "legal_name": "Elizaveta",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "0300",
+          "parent_name": "Bălți",
           "official_sheet": "Sheet 1",
           "official_row": 43,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706593",
@@ -1688,14 +1726,14 @@
         {
           "legal_id": "8519",
           "legal_name": "Ermoclia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1369,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628594",
@@ -1712,8 +1750,8 @@
         {
           "legal_id": "4300",
           "legal_name": "Fălești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": null,
+          "parent_name": null,
           "official_sheet": "Sheet 1",
           "official_row": 568,
           "parent_matches_verified_osm_parent": false
@@ -1721,14 +1759,14 @@
         {
           "legal_id": "4301",
           "legal_name": "Fălești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 569,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628619",
@@ -1745,14 +1783,14 @@
         {
           "legal_id": "4330",
           "legal_name": "Făleștii Noi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 592,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1811553",
@@ -1769,14 +1807,14 @@
         {
           "legal_id": "8520",
           "legal_name": "Feștelița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1370,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12463200",
@@ -1793,23 +1831,23 @@
         {
           "legal_id": "2714",
           "legal_name": "Fîrlădeni",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 320,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "5331",
           "legal_name": "Fîrlădeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5300",
+          "parent_name": "Hîncești",
           "official_sheet": "Sheet 1",
           "official_row": 781,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12209989",
@@ -1826,14 +1864,14 @@
         {
           "legal_id": "9236",
           "legal_name": "Florițoaia Veche",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1497,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18821816",
@@ -1850,14 +1888,14 @@
         {
           "legal_id": "5332",
           "legal_name": "Fundul Galbenei",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5300",
+          "parent_name": "Hîncești",
           "official_sheet": "Sheet 1",
           "official_row": 782,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628693",
@@ -1874,14 +1912,14 @@
         {
           "legal_id": "4831",
           "legal_name": "Fundurii Noi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 744,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628694",
@@ -1898,14 +1936,14 @@
         {
           "legal_id": "4832",
           "legal_name": "Fundurii Vechi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 745,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822476",
@@ -1922,14 +1960,14 @@
         {
           "legal_id": "2324",
           "legal_name": "Gangura",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 826,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496852",
@@ -1946,14 +1984,14 @@
         {
           "legal_id": "1028",
           "legal_name": "Geamăna",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 72,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12215667",
@@ -1970,14 +2008,14 @@
         {
           "legal_id": "2715",
           "legal_name": "Gîsca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 322,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r5736380",
@@ -1994,8 +2032,8 @@
         {
           "legal_id": "4800",
           "legal_name": "Glodeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": null,
+          "parent_name": null,
           "official_sheet": "Sheet 1",
           "official_row": 720,
           "parent_matches_verified_osm_parent": false
@@ -2003,14 +2041,14 @@
         {
           "legal_id": "4801",
           "legal_name": "Glodeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 721,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12459562",
@@ -2027,14 +2065,14 @@
         {
           "legal_id": "8521",
           "legal_name": "Grădinița",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 323,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1167594",
@@ -2051,14 +2089,14 @@
         {
           "legal_id": "2716",
           "legal_name": "Grigorievca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 326,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496672",
@@ -2075,14 +2113,14 @@
         {
           "legal_id": "1030",
           "legal_name": "Gura Bîcului",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 74,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r448023",
@@ -2094,9 +2132,19 @@
       "verified_osm_parent_legal_id": "2700",
       "verified_osm_parent_legal_name": "Căușeni",
       "normalized_child_name": "hagimus",
-      "official_name_candidate_count": 0,
-      "official_name_candidates": [],
-      "diagnostic_category": "no_official_name_candidate"
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "2717",
+          "legal_name": "Hagimus",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
+          "official_sheet": "Sheet 1",
+          "official_row": 327,
+          "parent_matches_verified_osm_parent": true
+        }
+      ],
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18821815",
@@ -2113,14 +2161,14 @@
         {
           "legal_id": "5517",
           "legal_name": "Hansca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 831,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692517",
@@ -2137,23 +2185,23 @@
         {
           "legal_id": "4333",
           "legal_name": "Hiliuți",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 595,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "7130",
           "legal_name": "Hiliuți",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7100",
+          "parent_name": "Rîșcani",
           "official_sheet": "Sheet 1",
           "official_row": 1114,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628805",
@@ -2170,23 +2218,23 @@
         {
           "legal_id": "4833",
           "legal_name": "Hîjdieni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 746,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "6411",
           "legal_name": "Hîjdieni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "6410",
+          "parent_name": "Berezlogi",
           "official_sheet": "Sheet 1",
           "official_row": 973,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1376945",
@@ -2203,23 +2251,23 @@
         {
           "legal_id": "1031",
           "legal_name": "Hîrbovăț",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 75,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "2531",
           "legal_name": "Hîrbovăț",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2530",
+          "parent_name": "Onișcani",
           "official_sheet": "Sheet 1",
           "official_row": 275,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661057",
@@ -2236,14 +2284,14 @@
         {
           "legal_id": "9239",
           "legal_name": "Hîrcești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1500,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692448",
@@ -2260,23 +2308,23 @@
         {
           "legal_id": "4335",
           "legal_name": "Horești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 598,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "5518",
           "legal_name": "Horești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 832,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822471",
@@ -2293,8 +2341,8 @@
         {
           "legal_id": "4335",
           "legal_name": "Horești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 598,
           "parent_matches_verified_osm_parent": false
@@ -2302,14 +2350,14 @@
         {
           "legal_id": "5518",
           "legal_name": "Horești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 832,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822131",
@@ -2326,8 +2374,8 @@
         {
           "legal_id": "6032",
           "legal_name": "Horodca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "6031",
+          "parent_name": "Drăgușenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 780,
           "parent_matches_verified_osm_parent": false
@@ -2335,14 +2383,14 @@
         {
           "legal_id": "5519",
           "legal_name": "Horodca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 833,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628807",
@@ -2359,14 +2407,14 @@
         {
           "legal_id": "4834",
           "legal_name": "Iabloana",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 747,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692519",
@@ -2383,14 +2431,14 @@
         {
           "legal_id": "4338",
           "legal_name": "Ilenuța",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 601,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r9286287",
@@ -2407,14 +2455,14 @@
         {
           "legal_id": "4339",
           "legal_name": "Ișcălău",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 602,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692449",
@@ -2431,17 +2479,17 @@
         {
           "legal_id": "4343",
           "legal_name": "Izvoare",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 605,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "4537",
           "legal_name": "Izvoare",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4500",
+          "parent_name": "Florești",
           "official_sheet": "Sheet 1",
           "official_row": 683,
           "parent_matches_verified_osm_parent": false
@@ -2449,8 +2497,8 @@
         {
           "legal_id": "6459",
           "legal_name": "Izvoare",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "6458",
+          "parent_name": "Pohrebeni",
           "official_sheet": "Sheet 1",
           "official_row": 1022,
           "parent_matches_verified_osm_parent": false
@@ -2458,14 +2506,14 @@
         {
           "legal_id": "7456",
           "legal_name": "Izvoare",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7400",
+          "parent_name": "Sîngerei",
           "official_sheet": "Sheet 1",
           "official_row": 1197,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r19314570",
@@ -2482,8 +2530,8 @@
         {
           "legal_id": "5700",
           "legal_name": "Leova",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": null,
+          "parent_name": null,
           "official_sheet": "Sheet 1",
           "official_row": 855,
           "parent_matches_verified_osm_parent": false
@@ -2491,14 +2539,14 @@
         {
           "legal_id": "5701",
           "legal_name": "Leova",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5700",
+          "parent_name": "Leova",
           "official_sheet": "Sheet 1",
           "official_row": 856,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628692",
@@ -2515,14 +2563,14 @@
         {
           "legal_id": "4836",
           "legal_name": "Limbenii Noi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 749,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628691",
@@ -2539,14 +2587,14 @@
         {
           "legal_id": "4837",
           "legal_name": "Limbenii Vechi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 750,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692520",
@@ -2563,14 +2611,14 @@
         {
           "legal_id": "4344",
           "legal_name": "Logofteni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 606,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822134",
@@ -2587,14 +2635,14 @@
         {
           "legal_id": "5520",
           "legal_name": "Malcoci",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 834,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706628",
@@ -2611,14 +2659,14 @@
         {
           "legal_id": "8524",
           "legal_name": "Marianca de Jos",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1371,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661171",
@@ -2635,14 +2683,14 @@
         {
           "legal_id": "9244",
           "legal_name": "Măcărești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1505,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10624604",
@@ -2659,14 +2707,14 @@
         {
           "legal_id": "9246",
           "legal_name": "Măgurele",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1507,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10624567",
@@ -2683,14 +2731,14 @@
         {
           "legal_id": "9247",
           "legal_name": "Mănoilești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1508,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628616",
@@ -2707,14 +2755,14 @@
         {
           "legal_id": "4345",
           "legal_name": "Mărăndeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 608,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r13014026",
@@ -2731,14 +2779,14 @@
         {
           "legal_id": "5521",
           "legal_name": "Mileștii Mici",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 835,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822472",
@@ -2755,8 +2803,8 @@
         {
           "legal_id": "4820",
           "legal_name": "Molești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4817",
+          "parent_name": "Camenca",
           "official_sheet": "Sheet 1",
           "official_row": 732,
           "parent_matches_verified_osm_parent": false
@@ -2764,14 +2812,14 @@
         {
           "legal_id": "5523",
           "legal_name": "Molești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 837,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10624568",
@@ -2788,14 +2836,14 @@
         {
           "legal_id": "9251",
           "legal_name": "Morenii Noi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1512,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628519",
@@ -2812,14 +2860,14 @@
         {
           "legal_id": "4346",
           "legal_name": "Musteața",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 609,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628625",
@@ -2836,14 +2884,14 @@
         {
           "legal_id": "4347",
           "legal_name": "Natalievca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 610,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661055",
@@ -2860,14 +2908,14 @@
         {
           "legal_id": "9254",
           "legal_name": "Năpădeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1514,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692521",
@@ -2884,14 +2932,14 @@
         {
           "legal_id": "4353",
           "legal_name": "Năvîrneț",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 616,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1643003",
@@ -2908,8 +2956,8 @@
         {
           "legal_id": "9255",
           "legal_name": "Negurenii Vechi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1515,
           "parent_matches_verified_osm_parent": false
@@ -2932,14 +2980,14 @@
         {
           "legal_id": "5524",
           "legal_name": "Nimoreni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 838,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692522",
@@ -2956,14 +3004,14 @@
         {
           "legal_id": "4354",
           "legal_name": "Obreja Veche",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 617,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496853",
@@ -2980,14 +3028,14 @@
         {
           "legal_id": "2328",
           "legal_name": "Ochiul Roș",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 79,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1811532",
@@ -3004,14 +3052,14 @@
         {
           "legal_id": "8525",
           "legal_name": "Olănești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1372,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12462197",
@@ -3028,14 +3076,14 @@
         {
           "legal_id": "2718",
           "legal_name": "Opaci",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 328,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706629",
@@ -3052,8 +3100,8 @@
         {
           "legal_id": "2525",
           "legal_name": "Palanca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2522",
+          "parent_name": "Hîrjauca",
           "official_sheet": "Sheet 1",
           "official_row": 269,
           "parent_matches_verified_osm_parent": false
@@ -3061,8 +3109,8 @@
         {
           "legal_id": "3627",
           "legal_name": "Palanca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "3600",
+          "parent_name": "Drochia",
           "official_sheet": "Sheet 1",
           "official_row": 483,
           "parent_matches_verified_osm_parent": false
@@ -3070,14 +3118,14 @@
         {
           "legal_id": "8526",
           "legal_name": "Palanca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1373,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496854",
@@ -3094,17 +3142,17 @@
         {
           "legal_id": "2330",
           "legal_name": "Pervomaisc",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 329,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "4364",
           "legal_name": "Pervomaisc",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4363",
+          "parent_name": "Pompa",
           "official_sheet": "Sheet 1",
           "official_row": 626,
           "parent_matches_verified_osm_parent": false
@@ -3112,8 +3160,8 @@
         {
           "legal_id": "6928",
           "legal_name": "Pervomaisc",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "6927",
+          "parent_name": "Lenin",
           "official_sheet": "Sheet 1",
           "official_row": 1665,
           "parent_matches_verified_osm_parent": false
@@ -3121,14 +3169,14 @@
         {
           "legal_id": "7628",
           "legal_name": "Pervomaisc",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9800",
+          "parent_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
           "official_sheet": "Sheet 1",
           "official_row": 1682,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1643269",
@@ -3145,14 +3193,14 @@
         {
           "legal_id": "9259",
           "legal_name": "Petrești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1519,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628808",
@@ -3169,14 +3217,14 @@
         {
           "legal_id": "4838",
           "legal_name": "Petrunea",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 751,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r9192105",
@@ -3193,14 +3241,14 @@
         {
           "legal_id": "4356",
           "legal_name": "Pietrosu",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 619,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692524",
@@ -3217,14 +3265,14 @@
         {
           "legal_id": "4359",
           "legal_name": "Pînzăreni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 622,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661217",
@@ -3241,8 +3289,8 @@
         {
           "legal_id": "4362",
           "legal_name": "Pîrlița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 624,
           "parent_matches_verified_osm_parent": false
@@ -3250,8 +3298,8 @@
         {
           "legal_id": "7838",
           "legal_name": "Pîrlița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7800",
+          "parent_name": "Soroca",
           "official_sheet": "Sheet 1",
           "official_row": 1248,
           "parent_matches_verified_osm_parent": false
@@ -3259,14 +3307,14 @@
         {
           "legal_id": "9261",
           "legal_name": "Pîrlița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1522,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628636",
@@ -3283,17 +3331,17 @@
         {
           "legal_id": "4362",
           "legal_name": "Pîrlița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 624,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "7838",
           "legal_name": "Pîrlița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7800",
+          "parent_name": "Soroca",
           "official_sheet": "Sheet 1",
           "official_row": 1248,
           "parent_matches_verified_osm_parent": false
@@ -3301,14 +3349,14 @@
         {
           "legal_id": "9261",
           "legal_name": "Pîrlița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1522,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12459563",
@@ -3325,14 +3373,14 @@
         {
           "legal_id": "2719",
           "legal_name": "Plop-Știubei",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 331,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628626",
@@ -3349,14 +3397,14 @@
         {
           "legal_id": "4363",
           "legal_name": "Pompa",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 625,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706630",
@@ -3373,14 +3421,14 @@
         {
           "legal_id": "8527",
           "legal_name": "Popeasca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1374,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692523",
@@ -3397,14 +3445,14 @@
         {
           "legal_id": "4366",
           "legal_name": "Pruteni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 628,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822536",
@@ -3421,14 +3469,14 @@
         {
           "legal_id": "5526",
           "legal_name": "Puhoi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 840,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1811533",
@@ -3445,14 +3493,14 @@
         {
           "legal_id": "8528",
           "legal_name": "Purcari",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1375,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661040",
@@ -3469,14 +3517,14 @@
         {
           "legal_id": "9262",
           "legal_name": "Rădenii Vechi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1524,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1811554",
@@ -3493,14 +3541,14 @@
         {
           "legal_id": "8530",
           "legal_name": "Răscăieți",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1377,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628637",
@@ -3517,14 +3565,14 @@
         {
           "legal_id": "4370",
           "legal_name": "Răuțel",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 632,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822475",
@@ -3541,14 +3589,14 @@
         {
           "legal_id": "2334",
           "legal_name": "Răzeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 841,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1692450",
@@ -3565,14 +3613,14 @@
         {
           "legal_id": "4371",
           "legal_name": "Risipeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 633,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496670",
@@ -3589,17 +3637,17 @@
         {
           "legal_id": "1038",
           "legal_name": "Roșcani",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 82,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "6736",
           "legal_name": "Roșcani",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "6735",
+          "parent_name": "Pereni",
           "official_sheet": "Sheet 1",
           "official_row": 1075,
           "parent_matches_verified_osm_parent": false
@@ -3607,14 +3655,14 @@
         {
           "legal_id": "8035",
           "legal_name": "Roșcani",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8000",
+          "parent_name": "Strășeni",
           "official_sheet": "Sheet 1",
           "official_row": 1316,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18821813",
@@ -3631,14 +3679,14 @@
         {
           "legal_id": "5527",
           "legal_name": "Ruseștii Noi",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 843,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628645",
@@ -3655,14 +3703,14 @@
         {
           "legal_id": "4839",
           "legal_name": "Sadovoe",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "0300",
+          "parent_name": "Bălți",
           "official_sheet": "Sheet 1",
           "official_row": 44,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10629206",
@@ -3679,14 +3727,14 @@
         {
           "legal_id": "2720",
           "legal_name": "Săiți",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 332,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12462200",
@@ -3703,14 +3751,14 @@
         {
           "legal_id": "2721",
           "legal_name": "Sălcuța",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 333,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r9289143",
@@ -3727,14 +3775,14 @@
         {
           "legal_id": "4373",
           "legal_name": "Sărata Veche",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 635,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1643249",
@@ -3751,14 +3799,14 @@
         {
           "legal_id": "9263",
           "legal_name": "Sculeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1525,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r9300562",
@@ -3775,14 +3823,14 @@
         {
           "legal_id": "4376",
           "legal_name": "Scumpia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 638,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1303701",
@@ -3799,8 +3847,8 @@
         {
           "legal_id": "5346",
           "legal_name": "Semionovca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5345",
+          "parent_name": "Mingir",
           "official_sheet": "Sheet 1",
           "official_row": 795,
           "parent_matches_verified_osm_parent": false
@@ -3808,14 +3856,14 @@
         {
           "legal_id": "8532",
           "legal_name": "Semionovca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1379,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661058",
@@ -3832,14 +3880,14 @@
         {
           "legal_id": "9267",
           "legal_name": "Sinești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1529,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706631",
@@ -3856,23 +3904,23 @@
         {
           "legal_id": "8533",
           "legal_name": "Slobozia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1380,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "7601",
           "legal_name": "Slobozia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9800",
+          "parent_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
           "official_sheet": "Sheet 1",
           "official_row": 1586,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18821814",
@@ -3889,14 +3937,14 @@
         {
           "legal_id": "5529",
           "legal_name": "Sociteni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 845,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r6879649",
@@ -3927,23 +3975,23 @@
         {
           "legal_id": "1041",
           "legal_name": "Speia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 83,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "5032",
           "legal_name": "Speia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9800",
+          "parent_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
           "official_sheet": "Sheet 1",
           "official_row": 1699,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628695",
@@ -3960,14 +4008,14 @@
         {
           "legal_id": "4840",
           "legal_name": "Sturzovca",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 752,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822136",
@@ -3984,14 +4032,14 @@
         {
           "legal_id": "5530",
           "legal_name": "Suruceni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 846,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706633",
@@ -4008,8 +4056,8 @@
         {
           "legal_id": "8500",
           "legal_name": "Ștefan Vodă",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": null,
+          "parent_name": null,
           "official_sheet": "Sheet 1",
           "official_row": 1358,
           "parent_matches_verified_osm_parent": false
@@ -4017,14 +4065,14 @@
         {
           "legal_id": "8501",
           "legal_name": "Ștefan Vodă",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1359,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706595",
@@ -4041,8 +4089,8 @@
         {
           "legal_id": "2725",
           "legal_name": "Ștefănești",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2723",
+          "parent_name": "Tănătarii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 337,
           "parent_matches_verified_osm_parent": false
@@ -4050,8 +4098,8 @@
         {
           "legal_id": "4557",
           "legal_name": "Ștefănești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4500",
+          "parent_name": "Florești",
           "official_sheet": "Sheet 1",
           "official_row": 707,
           "parent_matches_verified_osm_parent": false
@@ -4059,14 +4107,14 @@
         {
           "legal_id": "8534",
           "legal_name": "Ștefănești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1381,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1811555",
@@ -4083,14 +4131,14 @@
         {
           "legal_id": "8535",
           "legal_name": "Talmaza",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1382,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10629203",
@@ -4107,8 +4155,8 @@
         {
           "legal_id": "2148",
           "legal_name": "Taraclia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2145",
+          "parent_name": "Plopi",
           "official_sheet": "Sheet 1",
           "official_row": 239,
           "parent_matches_verified_osm_parent": false
@@ -4116,8 +4164,8 @@
         {
           "legal_id": "2153",
           "legal_name": "Taraclia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2152",
+          "parent_name": "Sadîc",
           "official_sheet": "Sheet 1",
           "official_row": 242,
           "parent_matches_verified_osm_parent": false
@@ -4125,17 +4173,17 @@
         {
           "legal_id": "2336",
           "legal_name": "Taraclia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 334,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "8700",
           "legal_name": "Taraclia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": null,
+          "parent_name": null,
           "official_sheet": "Sheet 1",
           "official_row": 1385,
           "parent_matches_verified_osm_parent": false
@@ -4143,14 +4191,14 @@
         {
           "legal_id": "8701",
           "legal_name": "Taraclia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8700",
+          "parent_name": "Taraclia",
           "official_sheet": "Sheet 1",
           "official_row": 1386,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r9622330",
@@ -4162,9 +4210,19 @@
       "verified_osm_parent_legal_id": "4300",
       "verified_osm_parent_legal_name": "Fălești",
       "normalized_child_name": "taxobeni",
-      "official_name_candidate_count": 0,
-      "official_name_candidates": [],
-      "diagnostic_category": "no_official_name_candidate"
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "4380",
+          "legal_name": "Taxobeni",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
+          "official_sheet": "Sheet 1",
+          "official_row": 642,
+          "parent_matches_verified_osm_parent": true
+        }
+      ],
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12462734",
@@ -4181,14 +4239,14 @@
         {
           "legal_id": "2722",
           "legal_name": "Tănătari",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 335,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12462735",
@@ -4205,14 +4263,14 @@
         {
           "legal_id": "2723",
           "legal_name": "Tănătarii Noi",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 336,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r16641731",
@@ -4222,21 +4280,21 @@
       "osm_parent_name": "Raionul Sîngerei",
       "osm_parent_relation_id": 58996,
       "verified_osm_parent_legal_id": "7400",
-      "verified_osm_parent_legal_name": "Сынджерей",
+      "verified_osm_parent_legal_name": "Sîngerei",
       "normalized_child_name": "taura veche",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
         {
           "legal_id": "7471",
           "legal_name": "Tăura Veche",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7400",
+          "parent_name": "Sîngerei",
           "official_sheet": "Sheet 1",
           "official_row": 1208,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496667",
@@ -4253,14 +4311,14 @@
         {
           "legal_id": "1043",
           "legal_name": "Telița",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 85,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10624605",
@@ -4277,14 +4335,14 @@
         {
           "legal_id": "9269",
           "legal_name": "Teșcureni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1531,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12462199",
@@ -4301,14 +4359,14 @@
         {
           "legal_id": "2727",
           "legal_name": "Tocuz",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 339,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661215",
@@ -4325,8 +4383,8 @@
         {
           "legal_id": "1046",
           "legal_name": "Todirești",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1017",
+          "parent_name": "Chetrosu",
           "official_sheet": "Sheet 1",
           "official_row": 60,
           "parent_matches_verified_osm_parent": false
@@ -4334,14 +4392,14 @@
         {
           "legal_id": "9271",
           "legal_name": "Todirești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1532,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706632",
@@ -4358,14 +4416,14 @@
         {
           "legal_id": "8536",
           "legal_name": "Tudora",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1383,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822537",
@@ -4382,14 +4440,14 @@
         {
           "legal_id": "5531",
           "legal_name": "Țipala",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 847,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12496850",
@@ -4406,23 +4464,23 @@
         {
           "legal_id": "1050",
           "legal_name": "Țînțăreni",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 87,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "8957",
           "legal_name": "Țînțăreni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8900",
+          "parent_name": "Telenești",
           "official_sheet": "Sheet 1",
           "official_row": 1461,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10629205",
@@ -4439,14 +4497,14 @@
         {
           "legal_id": "2728",
           "legal_name": "Ucrainca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 340,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822132",
@@ -4463,23 +4521,23 @@
         {
           "legal_id": "5534",
           "legal_name": "Ulmu",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 850,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "6947",
           "legal_name": "Ulmu",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9800",
+          "parent_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
           "official_sheet": "Sheet 1",
           "official_row": 1709,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1661035",
@@ -4496,14 +4554,14 @@
         {
           "legal_id": "9273",
           "legal_name": "Unțești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1534,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1140441",
@@ -4520,8 +4578,8 @@
         {
           "legal_id": "1729",
           "legal_name": "Ursoaia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1727",
+          "parent_name": "Lebedenco",
           "official_sheet": "Sheet 1",
           "official_row": 180,
           "parent_matches_verified_osm_parent": false
@@ -4529,14 +4587,14 @@
         {
           "legal_id": "2730",
           "legal_name": "Ursoaia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 342,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628690",
@@ -4553,8 +4611,8 @@
         {
           "legal_id": "3844",
           "legal_name": "Ustia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "3800",
+          "parent_name": "Dubăsari",
           "official_sheet": "Sheet 1",
           "official_row": 517,
           "parent_matches_verified_osm_parent": false
@@ -4562,14 +4620,14 @@
         {
           "legal_id": "4841",
           "legal_name": "Ustia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 753,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10624569",
@@ -4586,14 +4644,14 @@
         {
           "legal_id": "9274",
           "legal_name": "Valea Mare",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1535,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r8289510",
@@ -4610,14 +4668,14 @@
         {
           "legal_id": "0502",
           "legal_name": "Varnița",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 89,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822477",
@@ -4634,23 +4692,23 @@
         {
           "legal_id": "2337",
           "legal_name": "Văratic",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 851,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "7160",
           "legal_name": "Văratic",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7100",
+          "parent_name": "Rîșcani",
           "official_sheet": "Sheet 1",
           "official_row": 1142,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18822133",
@@ -4667,23 +4725,23 @@
         {
           "legal_id": "5535",
           "legal_name": "Văsieni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 852,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "8958",
           "legal_name": "Văsieni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8900",
+          "parent_name": "Telenești",
           "official_sheet": "Sheet 1",
           "official_row": 1462,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r10628687",
@@ -4700,8 +4758,8 @@
         {
           "legal_id": "4151",
           "legal_name": "Viișoara",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4100",
+          "parent_name": "Edineț",
           "official_sheet": "Sheet 1",
           "official_row": 565,
           "parent_matches_verified_osm_parent": false
@@ -4709,23 +4767,23 @@
         {
           "legal_id": "4842",
           "legal_name": "Viișoara",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4800",
+          "parent_name": "Glodeni",
           "official_sheet": "Sheet 1",
           "official_row": 754,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         },
         {
           "legal_id": "8529",
           "legal_name": "Viișoara",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8528",
+          "parent_name": "Purcari",
           "official_sheet": "Sheet 1",
           "official_row": 1376,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1706594",
@@ -4742,14 +4800,14 @@
         {
           "legal_id": "8537",
           "legal_name": "Volintiri",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8500",
+          "parent_name": "Ștefan Vodă",
           "official_sheet": "Sheet 1",
           "official_row": 1384,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r18176298",
@@ -4766,14 +4824,14 @@
         {
           "legal_id": "9277",
           "legal_name": "Zagarancea",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1539,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12462198",
@@ -4790,14 +4848,14 @@
         {
           "legal_id": "2731",
           "legal_name": "Zaim",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 343,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r13014028",
@@ -4814,14 +4872,14 @@
         {
           "legal_id": "5536",
           "legal_name": "Zîmbreni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5500",
+          "parent_name": "Ialoveni",
           "official_sheet": "Sheet 1",
           "official_row": 853,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r1709500",
@@ -4838,14 +4896,14 @@
         {
           "legal_id": "2338",
           "legal_name": "Zolotievca",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1000",
+          "parent_name": "Anenii Noi",
           "official_sheet": "Sheet 1",
           "official_row": 90,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r12104636",
@@ -4857,532 +4915,9 @@
       "verified_osm_parent_legal_id": "3136",
       "verified_osm_parent_legal_name": "Hrușova",
       "normalized_child_name": "",
-      "official_name_candidate_count": 58,
-      "official_name_candidates": [
-        {
-          "legal_id": "0111",
-          "legal_name": "Сынджера",
-          "parent_code": "0110",
-          "parent_name": "Sectorul Botanica",
-          "official_sheet": "Sheet 1",
-          "official_row": 4,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "1032",
-          "legal_name": "Максимовка",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 76,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9414",
-          "legal_name": "Александерфелд",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 147,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9410",
-          "legal_name": "Александру Иоан Куза",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 148,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "2146",
-          "legal_name": "Александровка",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 237,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "2526",
-          "legal_name": "Ходжинешть",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 270,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "2341",
-          "legal_name": "Кэинарь, н.п.ж.-д.ст.",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 300,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "2717",
-          "legal_name": "Хаджимус",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 327,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "2733",
-          "legal_name": "Заим, н.п.ж.-д.ст.",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 345,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "2322",
-          "legal_name": "Злоць, н.п.ж.-д.ст.",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 358,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "2930",
-          "legal_name": "Максимень",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
-          "official_sheet": "Sheet 1",
-          "official_row": 372,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "3151",
-          "legal_name": "Рышкова Рышкова",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 427,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "3621",
-          "legal_name": "Хэснэшений  Ной",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 475,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7165",
-          "legal_name": "Пелиния, н.п.ж.-д.ст.",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 487,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4111",
-          "legal_name": "Алексэндрень",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 520,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4153",
-          "legal_name": "Алексеевка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 525,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4117",
-          "legal_name": "Бэдраджий Ной",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 526,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4121",
-          "legal_name": "Буздуджень",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 534,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4383",
-          "legal_name": "Катранык, н.п.ж.-д.ст.",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 590,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4380",
-          "legal_name": "Таксобень",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 642,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4510",
-          "legal_name": "Алексеевка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 649,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4523",
-          "legal_name": "Домулджень",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 669,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4563",
-          "legal_name": "Цыра, н.п.ж.-д.ст.",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 675,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "4560",
-          "legal_name": "Александровка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 712,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "5345",
-          "legal_name": "Минджир",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 794,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "2325",
-          "legal_name": "Александровка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 827,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "5717",
-          "legal_name": "Казанджик",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 865,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "6222",
-          "legal_name": "Дынджень",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 949,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "6410",
-          "legal_name": "Березлоджь",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 972,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7111",
-          "legal_name": "Алексэндрешть",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1097,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7400",
-          "legal_name": "Сынджерей",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1144,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7401",
-          "legal_name": "Сынджерей",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1145,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7411",
-          "legal_name": "Алексэндрень",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1148,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7440",
-          "legal_name": "Алексеука",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1177,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7469",
-          "legal_name": "Сынджереий Ной",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1210,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7812",
-          "legal_name": "Бэксань",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1219,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7843",
-          "legal_name": "Реджина Мария",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1253,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7865",
-          "legal_name": "Александру чел Бун",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1282,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "8341",
-          "legal_name": "Рогожень, н.п.ж.-д. ст.",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1350,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "8735",
-          "legal_name": "Дерменджи",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1397,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9214",
-          "legal_name": "Алексеевка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1474,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9281",
-          "legal_name": "Петрешть, н.п.ж.-д.ст.",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1521,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9600",
-          "legal_name": "Автономного Территориального Образования Гагаузия",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1542,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9637",
-          "legal_name": "Вулкэнешть, н.п.ж.-д.ст.",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1546,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9639",
-          "legal_name": "Етулия, н.п.ж.-д.ст.",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1567,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9635",
-          "legal_name": "Алексеевка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1573,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9800",
-          "legal_name": "Административно-Территориальные Единицы Левобережья Днестра",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1575,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "0700",
-          "legal_name": "Тирасполь",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1576,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "5001",
-          "legal_name": "Григориополь",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1582,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "0702",
-          "legal_name": "Тирасполул  Ноу",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1587,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "5015",
-          "legal_name": "Катериновка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1600,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "6955",
-          "legal_name": "Кобасна, н.п.ж.-д.ст.",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1608,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "6918",
-          "legal_name": "Красненькое",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1618,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "1915",
-          "legal_name": "Александровка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1622,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "3822",
-          "legal_name": "Александровка Ноуэ",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1625,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "1924",
-          "legal_name": "Христофоровка",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1660,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "5037",
-          "legal_name": "Токмаджиу",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1706,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "7633",
-          "legal_name": "Никольское",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
-          "official_sheet": "Sheet 1",
-          "official_row": 1722,
-          "parent_matches_verified_osm_parent": false
-        }
-      ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "official_name_candidate_count": 0,
+      "official_name_candidates": [],
+      "diagnostic_category": "no_official_name_candidate"
     },
     {
       "id": "osm-r21303540",
@@ -5399,14 +4934,14 @@
         {
           "legal_id": "7450",
           "legal_name": "Bocancea-Schit",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7449",
+          "parent_name": "Dumbrăvița",
           "official_sheet": "Sheet 1",
           "official_row": 1188,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303543",
@@ -5423,8 +4958,8 @@
         {
           "legal_id": "4518",
           "legal_name": "Ciutulești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4500",
+          "parent_name": "Florești",
           "official_sheet": "Sheet 1",
           "official_row": 657,
           "parent_matches_verified_osm_parent": false
@@ -5447,8 +4982,8 @@
         {
           "legal_id": "8316",
           "legal_name": "Cobîlea",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8300",
+          "parent_name": "Șoldănești",
           "official_sheet": "Sheet 1",
           "official_row": 1332,
           "parent_matches_verified_osm_parent": false
@@ -5471,8 +5006,8 @@
         {
           "legal_id": "4825",
           "legal_name": "Cot",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4823",
+          "parent_name": "Cuhnești",
           "official_sheet": "Sheet 1",
           "official_row": 737,
           "parent_matches_verified_osm_parent": false
@@ -5480,14 +5015,14 @@
         {
           "legal_id": "8315",
           "legal_name": "Cot",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8314",
+          "parent_name": "Climăuții de Jos",
           "official_sheet": "Sheet 1",
           "official_row": 1331,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303542",
@@ -5504,8 +5039,8 @@
         {
           "legal_id": "6029",
           "legal_name": "Cristești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "6000",
+          "parent_name": "Nisporeni",
           "official_sheet": "Sheet 1",
           "official_row": 914,
           "parent_matches_verified_osm_parent": false
@@ -5520,22 +5055,22 @@
       "osm_parent_id": "osm-r1661057",
       "osm_parent_name": "Hîrcești",
       "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": null,
-      "verified_osm_parent_legal_name": null,
+      "verified_osm_parent_legal_id": "9239",
+      "verified_osm_parent_legal_name": "Hîrcești",
       "normalized_child_name": "drujba",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
         {
           "legal_id": "9240",
           "legal_name": "Drujba",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9239",
+          "parent_name": "Hîrcești",
           "official_sheet": "Sheet 1",
           "official_row": 1501,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "osm_parent_not_reconciled"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303533",
@@ -5552,8 +5087,8 @@
         {
           "legal_id": "7449",
           "legal_name": "Dumbrăvița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7400",
+          "parent_name": "Sîngerei",
           "official_sheet": "Sheet 1",
           "official_row": 1187,
           "parent_matches_verified_osm_parent": false
@@ -5576,8 +5111,8 @@
         {
           "legal_id": "5512",
           "legal_name": "Frumușica",
-          "parent_code": "0110",
-          "parent_name": "Sectorul Botanica",
+          "parent_code": "5511",
+          "parent_name": "Băcioi",
           "official_sheet": "Sheet 1",
           "official_row": 9,
           "parent_matches_verified_osm_parent": false
@@ -5585,8 +5120,8 @@
         {
           "legal_id": "1723",
           "legal_name": "Frumușica",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "1718",
+          "parent_name": "Chioselia Mare",
           "official_sheet": "Sheet 1",
           "official_row": 161,
           "parent_matches_verified_osm_parent": false
@@ -5594,8 +5129,8 @@
         {
           "legal_id": "4320",
           "legal_name": "Frumușica",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4319",
+          "parent_name": "Călugăr",
           "official_sheet": "Sheet 1",
           "official_row": 579,
           "parent_matches_verified_osm_parent": false
@@ -5603,8 +5138,8 @@
         {
           "legal_id": "4524",
           "legal_name": "Frumușica",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4500",
+          "parent_name": "Florești",
           "official_sheet": "Sheet 1",
           "official_row": 670,
           "parent_matches_verified_osm_parent": false
@@ -5612,8 +5147,8 @@
         {
           "legal_id": "5718",
           "legal_name": "Frumușica",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "5717",
+          "parent_name": "Cazangic",
           "official_sheet": "Sheet 1",
           "official_row": 866,
           "parent_matches_verified_osm_parent": false
@@ -5636,8 +5171,8 @@
         {
           "legal_id": "4332",
           "legal_name": "Glinjeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
           "official_sheet": "Sheet 1",
           "official_row": 594,
           "parent_matches_verified_osm_parent": false
@@ -5645,8 +5180,8 @@
         {
           "legal_id": "8322",
           "legal_name": "Glinjeni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8300",
+          "parent_name": "Șoldănești",
           "official_sheet": "Sheet 1",
           "official_row": 1342,
           "parent_matches_verified_osm_parent": false
@@ -5661,22 +5196,22 @@
       "osm_parent_id": "osm-r1661057",
       "osm_parent_name": "Hîrcești",
       "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": null,
-      "verified_osm_parent_legal_name": null,
+      "verified_osm_parent_legal_id": "9239",
+      "verified_osm_parent_legal_name": "Hîrcești",
       "normalized_child_name": "hircesti",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
         {
           "legal_id": "9239",
           "legal_name": "Hîrcești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1500,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "osm_parent_not_reconciled"
+      "diagnostic_category": "child_name_match_parent_mismatch"
     },
     {
       "id": "osm-r12104607",
@@ -6301,16 +5836,16 @@
       "osm_parent_id": "osm-r1661057",
       "osm_parent_name": "Hîrcești",
       "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": null,
-      "verified_osm_parent_legal_name": null,
+      "verified_osm_parent_legal_id": "9239",
+      "verified_osm_parent_legal_name": "Hîrcești",
       "normalized_child_name": "leordoaia",
       "official_name_candidate_count": 2,
       "official_name_candidates": [
         {
           "legal_id": "2523",
           "legal_name": "Leordoaia",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2522",
+          "parent_name": "Hîrjauca",
           "official_sheet": "Sheet 1",
           "official_row": 267,
           "parent_matches_verified_osm_parent": false
@@ -6318,14 +5853,14 @@
         {
           "legal_id": "9241",
           "legal_name": "Leordoaia",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9239",
+          "parent_name": "Hîrcești",
           "official_sheet": "Sheet 1",
           "official_row": 1502,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "osm_parent_not_reconciled"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303538",
@@ -6334,22 +5869,22 @@
       "osm_parent_id": "osm-r12462198",
       "osm_parent_name": "Zaim",
       "osm_parent_relation_id": 12462198,
-      "verified_osm_parent_legal_id": null,
-      "verified_osm_parent_legal_name": null,
+      "verified_osm_parent_legal_id": "2731",
+      "verified_osm_parent_legal_name": "Zaim",
       "normalized_child_name": "marianca de sus",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
         {
           "legal_id": "2732",
           "legal_name": "Marianca de Sus",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2731",
+          "parent_name": "Zaim",
           "official_sheet": "Sheet 1",
           "official_row": 344,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "osm_parent_not_reconciled"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303526",
@@ -6358,22 +5893,22 @@
       "osm_parent_id": "osm-r1661057",
       "osm_parent_name": "Hîrcești",
       "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": null,
-      "verified_osm_parent_legal_name": null,
+      "verified_osm_parent_legal_id": "9239",
+      "verified_osm_parent_legal_name": "Hîrcești",
       "normalized_child_name": "minzatesti",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
         {
           "legal_id": "9242",
           "legal_name": "Mînzătești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9239",
+          "parent_name": "Hîrcești",
           "official_sheet": "Sheet 1",
           "official_row": 1503,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "osm_parent_not_reconciled"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303535",
@@ -6390,14 +5925,14 @@
         {
           "legal_id": "6418",
           "legal_name": "Mîrzaci",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "6419",
+          "parent_name": "Mîrzești",
           "official_sheet": "Sheet 1",
           "official_row": 1010,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303534",
@@ -6414,8 +5949,8 @@
         {
           "legal_id": "6419",
           "legal_name": "Mîrzești",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "6400",
+          "parent_name": "Orhei",
           "official_sheet": "Sheet 1",
           "official_row": 1009,
           "parent_matches_verified_osm_parent": false
@@ -6438,14 +5973,14 @@
         {
           "legal_id": "7451",
           "legal_name": "Valea lui Vlad",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "7449",
+          "parent_name": "Dumbrăvița",
           "official_sheet": "Sheet 1",
           "official_row": 1189,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303539",
@@ -6454,22 +5989,22 @@
       "osm_parent_id": "osm-r1661057",
       "osm_parent_name": "Hîrcești",
       "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": null,
-      "verified_osm_parent_legal_name": null,
+      "verified_osm_parent_legal_id": "9239",
+      "verified_osm_parent_legal_name": "Hîrcești",
       "normalized_child_name": "veverita",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
         {
           "legal_id": "9243",
           "legal_name": "Veverița",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "9239",
+          "parent_name": "Hîrcești",
           "official_sheet": "Sheet 1",
           "official_row": 1504,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "osm_parent_not_reconciled"
+      "diagnostic_category": "exact_name_parent_match_available"
     },
     {
       "id": "osm-r21303532",
@@ -6486,8 +6021,8 @@
         {
           "legal_id": "8042",
           "legal_name": "Vorniceni",
-          "parent_code": "3128",
-          "parent_name": "Valea Satului",
+          "parent_code": "8000",
+          "parent_name": "Strășeni",
           "official_sheet": "Sheet 1",
           "official_row": 1322,
           "parent_matches_verified_osm_parent": false
@@ -6502,22 +6037,22 @@
       "osm_parent_id": "osm-r12462198",
       "osm_parent_name": "Zaim",
       "osm_parent_relation_id": 12462198,
-      "verified_osm_parent_legal_id": null,
-      "verified_osm_parent_legal_name": null,
+      "verified_osm_parent_legal_id": "2731",
+      "verified_osm_parent_legal_name": "Zaim",
       "normalized_child_name": "zaim",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
         {
           "legal_id": "2731",
           "legal_name": "Zaim",
-          "parent_code": "0150",
-          "parent_name": "Sectorul Rîșcani",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
           "official_sheet": "Sheet 1",
           "official_row": 343,
           "parent_matches_verified_osm_parent": false
         }
       ],
-      "diagnostic_category": "osm_parent_not_reconciled"
+      "diagnostic_category": "child_name_match_parent_mismatch"
     }
   ]
 }\n
