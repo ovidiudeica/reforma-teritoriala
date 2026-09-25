@@ -38,8 +38,7 @@ function classify(country,t={}){
  if(country==='RO'){
   if(l===4)return {type:n.includes('bucurești')||p==='city'?'capital_municipality':'county',confidence:'high'};
   if(l===9){
-   if(/^sectorul [1-6]$/.test(n))return {type:'sector',confidence:'high'};
-   return {type:'subdivision_or_mistagged_boundary',confidence:'low',reason:'RO admin_level=9 is only a Bucharest sector when the name identifies Sectorul 1–6'};
+   return {type:'subdivision_or_mistagged_boundary',confidence:'low',reason:'RO admin_level=9 requires post-parent validation; only Sector 1–6 inside București is a sector'};
   }
   if(l===8){
    if(n==='cristești')return {type:'commune',confidence:'high',reason:'Official Romanian source identifies Cristești, Botoșani as a comună'};
@@ -84,7 +83,7 @@ function entity(country,feature){
  const t=feature.properties?.tags||feature.properties||{}, rid=relationId(feature), c=classify(country,t);
  return {id:`osm-r${rid}`,name:t['name:ro']||t.name||null,official_name:t.official_name||null,jurisdiction:country,category:'administrative',type:c.type,status:'current',parent_id:null,
   osm:{element_type:'relation',relation_id:rid,admin_level:t.admin_level?Number(t.admin_level):null,boundary:t.boundary||null,relation_type:t.type||null,place:t.place||null,designation:t.designation||null,name_prefix:t['name:prefix']||null,full_name:t.full_name||null,cuatm_code:t['ref:cuatm']||t['ref:cuatm:cod']||null,cuatm_unique_id:t['ref:cuatm:codunic']||null,wikidata:t.wikidata||null,wikipedia:t.wikipedia||null},
-  classification:{version:'2.1',confidence:c.confidence,reason:c.reason||null},
+  classification:{version:'2.2',confidence:c.confidence,reason:c.reason||null},
   source:'OpenStreetMap',source_url:`https://www.openstreetmap.org/relation/${rid}`,imported_at:new Date().toISOString(),review_required:c.confidence==='low'};
 }
 function assignParents(entities,featuresById){
@@ -96,16 +95,28 @@ function assignParents(entities,featuresById){
   containing.sort((a,b)=>(b.osm.admin_level??0)-(a.osm.admin_level??0));
   child.parent_id=containing[0]?.id||child.jurisdiction;
  }
+
+}
+function finalizeAfterParents(entities){
+ const byId=new Map(entities.map(e=>[e.id,e]));
+ for(const e of entities){
+  if(e.jurisdiction!=='RO'||e.osm.admin_level!==9)continue;
+  const n=norm(e.name), parent=byId.get(e.parent_id);
+  const parentName=norm(parent?.name);
+  if(/^sector(?:ul)? [1-6]$/.test(n)&&parent?.osm?.admin_level===4&&parentName.includes('bucurești')){
+   e.type='sector'; e.classification={version:'2.2',confidence:'high',reason:'Sector 1–6 validated only when its geometric parent is București'}; e.review_required=false;
+  }
+ }
 }
 async function main(){
  await mkdir('data/current',{recursive:true}); await mkdir('public/geo/current',{recursive:true});
- const all=[], report={generated_at:new Date().toISOString(),classifier_version:'2.1',countries:{},warnings:[]};
+ const all=[], report={generated_at:new Date().toISOString(),classifier_version:'2.2',countries:{},warnings:[]};
  for(const [code,cfg] of Object.entries(countries)){
   const raw=await overpass(queryFor(cfg)), geo=osmtogeojson(raw,{flatProperties:false});
   const polygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const entities=polygons.map(f=>entity(code,f));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));
-  assignParents(entities,byId); all.push(...entities);
+  assignParents(entities,byId); finalizeAfterParents(entities); all.push(...entities);
   const entityById=new Map(entities.map(e=>[e.id,e]));
   const fc={type:'FeatureCollection',features:polygons.map(f=>{const id=`osm-r${relationId(f)}`;const e=entityById.get(id);return {...f,properties:{...f.properties,catalog_id:id,parent_id:e?.parent_id||null,jurisdiction:code,entity_type:e?.type||'unclassified',classification_confidence:e?.classification?.confidence||'low'}};})};
   await writeFile(`public/geo/current/${code.toLowerCase()}-administrative.geojson`,JSON.stringify(fc));
@@ -114,8 +125,8 @@ async function main(){
    confidence:confidence?Object.fromEntries(Object.entries(confidence).map(([k,v])=>[k,v.length])):{}};
  }
  all.sort((a,b)=>a.jurisdiction.localeCompare(b.jurisdiction)||(a.osm.admin_level??99)-(b.osm.admin_level??99)||(a.name||'').localeCompare(b.name||'','ro'));
- await writeFile('data/current/entities.json',JSON.stringify({schema_version:2,generated_at:new Date().toISOString(),classifier_version:'2.1',source:'OpenStreetMap via Overpass API',license:'ODbL',entity_count:all.length,entities:all},null,2)+'\n');
+ await writeFile('data/current/entities.json',JSON.stringify({schema_version:2,generated_at:new Date().toISOString(),classifier_version:'2.2',source:'OpenStreetMap via Overpass API',license:'ODbL',entity_count:all.length,entities:all},null,2)+'\n');
  await writeFile('data/current/import-report.json',JSON.stringify(report,null,2)+'\n');
- console.log('Catalog:',all.length,'entities; classifier v2.1');
+ console.log('Catalog:',all.length,'entities; classifier v2.2');
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});

@@ -19,11 +19,12 @@ jobs:
       - run: npm install
       - run: npm run import:osm
       - run: npm run audit:admin
+      - run: npm run reconcile:cuatm
       - name: Commit generated catalog, GeoJSON and audit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json data/current/admin-review.json public/geo/current/
+          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json data/current/admin-review.json data/current/md-cuatm-reconciliation.json public/geo/current/
           git diff --cached --quiet || git commit -m "data: refresh OSM administrative catalog"
           git pull --rebase origin main
           git push origin HEAD:main
