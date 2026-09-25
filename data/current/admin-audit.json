@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-25T21:55:55.424Z",
-  "source_generated_at": "2026-09-25T21:55:54.983Z",
+  "generated_at": "2026-09-25T22:22:04.918Z",
+  "source_generated_at": "2026-09-25T22:22:04.622Z",
   "entity_count": 5823,
   "countries": {
     "RO": {
       "feature_count": 3233,
-      "review_required": 1,
+      "review_required": 12,
       "distributions": {
         "admin_level": {
           "4": 42,
@@ -29,10 +29,9 @@
           "county": 41,
           "capital_municipality": 1,
           "municipality": 100,
-          "commune": 2861,
-          "sector": 12,
-          "town": 217,
-          "local_uat": 1
+          "commune": 2862,
+          "subdivision_or_mistagged_boundary": 12,
+          "town": 217
         }
       },
       "combinations": [
@@ -73,7 +72,7 @@
           "place": "∅",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "sector",
+          "entity_type": "subdivision_or_mistagged_boundary",
           "count": 11
         },
         {
@@ -89,7 +88,7 @@
           "place": "∅",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "local_uat",
+          "entity_type": "commune",
           "count": 1
         },
         {
@@ -97,7 +96,7 @@
           "place": "city",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "sector",
+          "entity_type": "subdivision_or_mistagged_boundary",
           "count": 1
         }
       ]
