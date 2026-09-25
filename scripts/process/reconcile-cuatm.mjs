@@ -70,9 +70,12 @@ for(const e of entities){
  const nameHits=byName.get(norm(e.name))||[], parentCode=officialParentCode(e), parentHits=nameHits.filter(h=>parentCompatible(h,parentCode));
  const osmParent=entityById.get(e.parent_id);
  const osmParentExact=osmParent?exactCode.get(osmParent.id)?.hit:null;
- const selfParentHit=!keys.length&&osmParentExact&&norm(e.name)===osmParentExact.normalized_name&&nameHits.find(h=>h.code===osmParentExact.code);
- if(selfParentHit){const h=selfParentHit;matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'osm_self_parent_same_legal_entity',confidence:'medium',unmatched_reason:null});continue;}
+ // A distinct official child under the verified parent takes precedence over a same-name parent entity.
+ // This prevents collisions such as district 1000 Anenii Noi vs town 1001 Anenii Noi.
  if(!keys.length&&parentCode&&parentHits.length===1){const h=parentHits[0];matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'exact_normalized_name_and_official_parent',confidence:'medium',unmatched_reason:null});continue;}
+ const distinctChildExists=Boolean(osmParentExact&&nameHits.some(h=>h.code!==osmParentExact.code&&h.parent_code===osmParentExact.code));
+ const selfParentHit=!keys.length&&osmParentExact&&!distinctChildExists&&norm(e.name)===osmParentExact.normalized_name&&nameHits.find(h=>h.code===osmParentExact.code);
+ if(selfParentHit){const h=selfParentHit;matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'osm_self_parent_same_legal_entity',confidence:'medium',unmatched_reason:null});continue;}
  if(!keys.length&&nameHits.length===1&&!parentCode)reason='unique_name_but_parent_unverified';
  else if(!keys.length&&nameHits.length>1)reason=parentCode?'name_ambiguous_with_parent':'name_ambiguous';
  else if(!keys.length&&nameHits.length===0)reason='name_absent_from_official_snapshot';
