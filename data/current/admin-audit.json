@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-25T21:45:24.866Z",
-  "source_generated_at": "2026-09-25T21:45:24.520Z",
+  "generated_at": "2026-09-25T21:55:55.424Z",
+  "source_generated_at": "2026-09-25T21:55:54.983Z",
   "entity_count": 5823,
   "countries": {
     "RO": {
@@ -269,6 +269,7 @@
     "RO": {
       "checked": 3233,
       "root_parent": 43,
+      "unexpected_root": 1,
       "entity_parent": 3190,
       "null_parent": 0,
       "missing_parent": 0,
@@ -276,12 +277,20 @@
       "parent_level_not_lower": 0,
       "geometry_missing": 0,
       "point_outside_parent": 0,
-      "issues": [],
-      "issue_count": 0
+      "issues": [
+        {
+          "id": "osm-r18967922",
+          "name": "Ungheni",
+          "admin_level": 9,
+          "issue": "unexpected_root"
+        }
+      ],
+      "issue_count": 1
     },
     "MD": {
       "checked": 2590,
       "root_parent": 37,
+      "unexpected_root": 0,
       "entity_parent": 2553,
       "null_parent": 0,
       "missing_parent": 0,
