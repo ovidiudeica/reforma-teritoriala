@@ -1,17 +1,28 @@
 {
-  "generated_at": "2026-09-25T21:28:27.794Z",
+  "generated_at": "2026-09-25T21:44:40.579Z",
+  "classifier_version": 2,
   "countries": {
     "RO": {
       "name": "România",
       "count": 3233,
-      "review_required": 100,
-      "geojson_features": 3233
+      "review_required": 1,
+      "geojson_features": 3233,
+      "confidence": {
+        "high": 536,
+        "medium": 2696,
+        "low": 1
+      }
     },
     "MD": {
       "name": "Republica Moldova",
       "count": 2590,
-      "review_required": 2542,
-      "geojson_features": 2590
+      "review_required": 266,
+      "geojson_features": 2590,
+      "confidence": {
+        "medium": 2244,
+        "high": 80,
+        "low": 266
+      }
     }
   },
   "warnings": []

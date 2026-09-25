@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-25T21:29:04.948Z",
-  "source_generated_at": "2026-09-25T21:29:04.602Z",
+  "generated_at": "2026-09-25T21:45:24.866Z",
+  "source_generated_at": "2026-09-25T21:45:24.520Z",
   "entity_count": 5823,
   "countries": {
     "RO": {
       "feature_count": 3233,
-      "review_required": 100,
+      "review_required": 1,
       "distributions": {
         "admin_level": {
           "4": 42,
@@ -26,11 +26,13 @@
           "boundary": 3233
         },
         "entity_type": {
-          "county": 42,
-          "municipality_or_city": 100,
-          "local_uat": 2862,
+          "county": 41,
+          "capital_municipality": 1,
+          "municipality": 100,
+          "commune": 2861,
           "sector": 12,
-          "town": 217
+          "town": 217,
+          "local_uat": 1
         }
       },
       "combinations": [
@@ -39,7 +41,7 @@
           "place": "municipality",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "local_uat",
+          "entity_type": "commune",
           "count": 2861
         },
         {
@@ -55,7 +57,7 @@
           "place": "city",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "municipality_or_city",
+          "entity_type": "municipality",
           "count": 100
         },
         {
@@ -79,7 +81,7 @@
           "place": "city",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "county",
+          "entity_type": "capital_municipality",
           "count": 1
         },
         {
@@ -102,7 +104,7 @@
     },
     "MD": {
       "feature_count": 2590,
-      "review_required": 2542,
+      "review_required": 266,
       "distributions": {
         "admin_level": {
           "4": 37,
@@ -127,10 +129,16 @@
           "multipolygon": 54
         },
         "entity_type": {
-          "level_2_or_special_unit": 37,
-          "commune_village_or_local_uat": 934,
-          "town": 48,
-          "sector_or_subdivision": 1571
+          "level_2_municipality": 3,
+          "district": 32,
+          "level_1_uat": 548,
+          "commune_or_independent_village_uat": 372,
+          "special_territorial_unit": 2,
+          "municipality_or_city_uat": 14,
+          "town_uat": 48,
+          "non_administrative_or_auxiliary_area": 122,
+          "subdivision_or_component_area": 3,
+          "component_locality": 1446
         }
       },
       "combinations": [
@@ -139,7 +147,7 @@
           "place": "village",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "sector_or_subdivision",
+          "entity_type": "component_locality",
           "count": 1391
         },
         {
@@ -147,7 +155,7 @@
           "place": "municipality",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "commune_village_or_local_uat",
+          "entity_type": "level_1_uat",
           "count": 407
         },
         {
@@ -155,7 +163,7 @@
           "place": "village",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "commune_village_or_local_uat",
+          "entity_type": "commune_or_independent_village_uat",
           "count": 372
         },
         {
@@ -163,7 +171,7 @@
           "place": "∅",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "commune_village_or_local_uat",
+          "entity_type": "level_1_uat",
           "count": 141
         },
         {
@@ -171,7 +179,7 @@
           "place": "allotments",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "sector_or_subdivision",
+          "entity_type": "non_administrative_or_auxiliary_area",
           "count": 69
         },
         {
@@ -179,7 +187,7 @@
           "place": "allotments",
           "designation": "∅",
           "osm_type": "multipolygon",
-          "entity_type": "sector_or_subdivision",
+          "entity_type": "non_administrative_or_auxiliary_area",
           "count": 53
         },
         {
@@ -187,7 +195,7 @@
           "place": "town",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "town",
+          "entity_type": "town_uat",
           "count": 48
         },
         {
@@ -195,7 +203,7 @@
           "place": "town",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "sector_or_subdivision",
+          "entity_type": "component_locality",
           "count": 45
         },
         {
@@ -203,7 +211,7 @@
           "place": "district",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "level_2_or_special_unit",
+          "entity_type": "district",
           "count": 32
         },
         {
@@ -211,7 +219,7 @@
           "place": "city",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "commune_village_or_local_uat",
+          "entity_type": "municipality_or_city_uat",
           "count": 14
         },
         {
@@ -219,7 +227,7 @@
           "place": "city",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "sector_or_subdivision",
+          "entity_type": "component_locality",
           "count": 10
         },
         {
@@ -227,7 +235,7 @@
           "place": "municipality",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "level_2_or_special_unit",
+          "entity_type": "level_2_municipality",
           "count": 3
         },
         {
@@ -235,7 +243,7 @@
           "place": "region",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "level_2_or_special_unit",
+          "entity_type": "special_territorial_unit",
           "count": 2
         },
         {
@@ -243,7 +251,7 @@
           "place": "∅",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "sector_or_subdivision",
+          "entity_type": "subdivision_or_component_area",
           "count": 2
         },
         {
@@ -251,7 +259,7 @@
           "place": "∅",
           "designation": "∅",
           "osm_type": "multipolygon",
-          "entity_type": "sector_or_subdivision",
+          "entity_type": "subdivision_or_component_area",
           "count": 1
         }
       ]
