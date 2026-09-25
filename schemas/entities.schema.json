@@ -42,10 +42,10 @@
     },
     "classifier_version": {
       "type": [
+        "string",
         "integer",
         "null"
-      ],
-      "minimum": 1
+      ]
     }
   },
   "$defs": {
@@ -175,6 +175,30 @@
                 "string",
                 "null"
               ]
+            },
+            "name_prefix": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "full_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cuatm_code": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cuatm_unique_id": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
@@ -206,8 +230,10 @@
           ],
           "properties": {
             "version": {
-              "type": "integer",
-              "minimum": 1
+              "type": [
+                "string",
+                "integer"
+              ]
             },
             "confidence": {
               "enum": [
