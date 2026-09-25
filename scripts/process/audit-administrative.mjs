@@ -20,7 +20,7 @@ const report={
 };
 const review={generated_at:new Date().toISOString(),source_generated_at:catalog.generated_at,classifier_version:catalog.classifier_version||null,items:[]};
 function reviewItem(e,issue,extra={}){
- return {jurisdiction:e.jurisdiction,id:e.id,name:e.name,osm_relation_id:e.osm?.relation_id??null,admin_level:e.osm?.admin_level??null,place:e.osm?.place??null,designation:e.osm?.designation??null,entity_type:e.type,classification_confidence:e.classification?.confidence??null,classification_reason:e.classification?.reason??null,parent_id:e.parent_id,osm_url:e.source_url||null,issue,...extra};
+ return {jurisdiction:e.jurisdiction,id:e.id,name:e.name,osm_relation_id:e.osm?.relation_id??null,admin_level:e.osm?.admin_level??null,place:e.osm?.place??null,designation:e.osm?.designation??null,name_prefix:e.osm?.name_prefix??null,full_name:e.osm?.full_name??null,cuatm_code:e.osm?.cuatm_code??null,cuatm_unique_id:e.osm?.cuatm_unique_id??null,entity_type:e.type,classification_confidence:e.classification?.confidence??null,classification_reason:e.classification?.reason??null,parent_id:e.parent_id,osm_url:e.source_url||null,issue,...extra};
 }
 
 for(const country of countries){
