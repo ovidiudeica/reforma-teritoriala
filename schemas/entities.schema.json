@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ovidiudeica.github.io/reforma-teritoriala/schemas/entities.schema.json",
+  "title": "Reforma Teritorială — catalog de entități",
+  "type": "object",
+  "required": ["schema_version", "source", "entity_count", "entities"],
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "generated_at": { "type": ["string", "null"], "format": "date-time" },
+    "source": { "type": "string" },
+    "license": { "type": ["string", "null"] },
+    "entity_count": { "type": "integer", "minimum": 0 },
+    "entities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entity" }
+    }
+  },
+  "$defs": {
+    "entity": {
+      "type": "object",
+      "required": ["id", "name", "jurisdiction", "category", "type", "status", "osm", "source"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^osm-r[0-9]+$" },
+        "name": { "type": ["string", "null"] },
+        "official_name": { "type": ["string", "null"] },
+        "jurisdiction": { "enum": ["RO", "MD"] },
+        "category": { "const": "administrative" },
+        "type": { "type": "string" },
+        "status": { "const": "current" },
+        "parent_id": { "type": ["string", "null"] },
+        "center": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "array", "prefixItems": [{"type":"number"},{"type":"number"}], "items": false }
+          ]
+        },
+        "osm": {
+          "type": "object",
+          "required": ["element_type", "relation_id", "admin_level", "boundary"],
+          "properties": {
+            "element_type": { "const": "relation" },
+            "relation_id": { "type": "integer", "minimum": 1 },
+            "admin_level": { "type": ["integer", "null"] },
+            "boundary": { "type": ["string", "null"] },
+            "wikidata": { "type": ["string", "null"] },
+            "wikipedia": { "type": ["string", "null"] }
+          }
+        },
+        "source": { "type": "string" },
+        "source_url": { "type": ["string", "null"], "format": "uri" },
+        "imported_at": { "type": ["string", "null"], "format": "date-time" },
+        "review_required": { "type": "boolean" }
+      }
+    }
+  }
+}
