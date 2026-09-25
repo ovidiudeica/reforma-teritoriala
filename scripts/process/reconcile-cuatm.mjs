@@ -16,9 +16,9 @@ async function fetchOfficial(){
  const buf=Buffer.from(await r.arrayBuffer()); if(buf.length<10000)throw new Error('CUATM download unexpectedly small: '+buf.length);
  const wb=XLSX.read(buf,{type:'buffer'}), records=[];
  for(const sheet of wb.SheetNames){
-  const rows=XLSX.utils.sheet_to_json(wb.Sheets[sheet],{defval:null,raw:false});
+  const rows=XLSX.utils.sheet_to_json(wb.Sheets[sheet],{defval:null,raw:false,range:0});
   for(let i=0;i<rows.length;i++){
-   const x=rows[i], code=digits(x.CodUnic), name=String(x.DenumireRO??'').trim();
+   const x=rows[i], code=digits(x['CodUnic']??x['﻿CodUnic']), name=String(x['DenumireRO']??'').trim();
    if(!/^\\d{3,10}$/.test(code)||!name)continue;
    records.push({code,parent_code:digits(x.ParentCodUnic)||null,statistical_code:digits(x.CodStatistic)||null,parent_statistical_code:digits(x.ParentCodStatistic)||null,status_code:digits(x.Statut)||null,name,name_ru:String(x.DenumireRU??'').trim()||null,normalized_name:norm(name),sheet,row:i+2});
   }
