@@ -1,0 +1,288 @@
+{
+  "generated_at": "2026-09-25T21:27:26.347Z",
+  "source_generated_at": "2026-09-25T21:27:25.904Z",
+  "entity_count": 5823,
+  "countries": {
+    "RO": {
+      "feature_count": 3233,
+      "review_required": 100,
+      "distributions": {
+        "admin_level": {
+          "4": 42,
+          "8": 3179,
+          "9": 12
+        },
+        "place": {
+          "county": 41,
+          "city": 102,
+          "municipality": 2861,
+          "∅": 12,
+          "town": 217
+        },
+        "designation": {
+          "∅": 3233
+        },
+        "osm_type": {
+          "boundary": 3233
+        },
+        "entity_type": {
+          "county": 42,
+          "municipality_or_city": 100,
+          "local_uat": 2862,
+          "sector": 12,
+          "town": 217
+        }
+      },
+      "combinations": [
+        {
+          "admin_level": "8",
+          "place": "municipality",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "local_uat",
+          "count": 2861
+        },
+        {
+          "admin_level": "8",
+          "place": "town",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "town",
+          "count": 217
+        },
+        {
+          "admin_level": "8",
+          "place": "city",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "municipality_or_city",
+          "count": 100
+        },
+        {
+          "admin_level": "4",
+          "place": "county",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "county",
+          "count": 41
+        },
+        {
+          "admin_level": "9",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "sector",
+          "count": 11
+        },
+        {
+          "admin_level": "4",
+          "place": "city",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "county",
+          "count": 1
+        },
+        {
+          "admin_level": "8",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "local_uat",
+          "count": 1
+        },
+        {
+          "admin_level": "9",
+          "place": "city",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "sector",
+          "count": 1
+        }
+      ]
+    },
+    "MD": {
+      "feature_count": 2590,
+      "review_required": 2542,
+      "distributions": {
+        "admin_level": {
+          "4": 37,
+          "8": 982,
+          "9": 1571
+        },
+        "place": {
+          "municipality": 410,
+          "district": 32,
+          "∅": 144,
+          "village": 1763,
+          "region": 2,
+          "city": 24,
+          "town": 93,
+          "allotments": 122
+        },
+        "designation": {
+          "∅": 2590
+        },
+        "osm_type": {
+          "boundary": 2536,
+          "multipolygon": 54
+        },
+        "entity_type": {
+          "level_2_or_special_unit": 37,
+          "commune_village_or_local_uat": 934,
+          "town": 48,
+          "sector_or_subdivision": 1571
+        }
+      },
+      "combinations": [
+        {
+          "admin_level": "9",
+          "place": "village",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "sector_or_subdivision",
+          "count": 1391
+        },
+        {
+          "admin_level": "8",
+          "place": "municipality",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "commune_village_or_local_uat",
+          "count": 407
+        },
+        {
+          "admin_level": "8",
+          "place": "village",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "commune_village_or_local_uat",
+          "count": 372
+        },
+        {
+          "admin_level": "8",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "commune_village_or_local_uat",
+          "count": 141
+        },
+        {
+          "admin_level": "9",
+          "place": "allotments",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "sector_or_subdivision",
+          "count": 69
+        },
+        {
+          "admin_level": "9",
+          "place": "allotments",
+          "designation": "∅",
+          "osm_type": "multipolygon",
+          "entity_type": "sector_or_subdivision",
+          "count": 53
+        },
+        {
+          "admin_level": "8",
+          "place": "town",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "town",
+          "count": 48
+        },
+        {
+          "admin_level": "9",
+          "place": "town",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "sector_or_subdivision",
+          "count": 45
+        },
+        {
+          "admin_level": "4",
+          "place": "district",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "level_2_or_special_unit",
+          "count": 32
+        },
+        {
+          "admin_level": "8",
+          "place": "city",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "commune_village_or_local_uat",
+          "count": 14
+        },
+        {
+          "admin_level": "9",
+          "place": "city",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "sector_or_subdivision",
+          "count": 10
+        },
+        {
+          "admin_level": "4",
+          "place": "municipality",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "level_2_or_special_unit",
+          "count": 3
+        },
+        {
+          "admin_level": "4",
+          "place": "region",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "level_2_or_special_unit",
+          "count": 2
+        },
+        {
+          "admin_level": "9",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "sector_or_subdivision",
+          "count": 2
+        },
+        {
+          "admin_level": "9",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "multipolygon",
+          "entity_type": "sector_or_subdivision",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "parent_validation": {
+    "RO": {
+      "checked": 3233,
+      "root_parent": 43,
+      "entity_parent": 3190,
+      "null_parent": 0,
+      "missing_parent": 0,
+      "parent_wrong_jurisdiction": 0,
+      "parent_level_not_lower": 0,
+      "geometry_missing": 0,
+      "point_outside_parent": 0,
+      "issues": [],
+      "issue_count": 0
+    },
+    "MD": {
+      "checked": 2590,
+      "root_parent": 37,
+      "entity_parent": 2553,
+      "null_parent": 0,
+      "missing_parent": 0,
+      "parent_wrong_jurisdiction": 0,
+      "parent_level_not_lower": 0,
+      "geometry_missing": 0,
+      "point_outside_parent": 0,
+      "issues": [],
+      "issue_count": 0
+    }
+  }
+}
