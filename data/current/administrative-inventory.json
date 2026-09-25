@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-09-25",
+  "countries": {
+    "RO": {
+      "name": "România",
+      "levels": [
+        {"type":"state","osm_admin_level":2},
+        {"type":"county","label":"județ","osm_admin_level":4},
+        {"type":"municipality","label":"municipiu","osm_admin_level":8},
+        {"type":"town","label":"oraș","osm_admin_level":8},
+        {"type":"commune","label":"comună","osm_admin_level":8},
+        {"type":"sector","label":"sector București","osm_admin_level":9},
+        {"type":"component_locality","label":"localitate componentă / sat","osm_admin_level":null}
+      ]
+    },
+    "MD": {
+      "name": "Republica Moldova",
+      "levels": [
+        {"type":"state","osm_admin_level":2},
+        {"type":"district","label":"raion","osm_admin_level":4},
+        {"type":"level_2_municipality","label":"municipiu de nivelul II","osm_admin_level":4},
+        {"type":"special_territorial_unit","label":"unitate teritorială cu regim special","osm_admin_level":4},
+        {"type":"level_1_municipality","label":"municipiu de nivelul I","osm_admin_level":6},
+        {"type":"town","label":"oraș","osm_admin_level":8},
+        {"type":"commune","label":"comună","osm_admin_level":8},
+        {"type":"independent_village","label":"sat care nu formează comună","osm_admin_level":8},
+        {"type":"chisinau_sector","label":"sector Chișinău","osm_admin_level":9},
+        {"type":"locality","label":"localitate componentă","osm_admin_level":null}
+      ],
+      "special_cases":["UTA Găgăuzia","unitățile administrativ-teritoriale din stânga Nistrului","Bender/Tighina"]
+    }
+  }
+}
