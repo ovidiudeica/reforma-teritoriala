@@ -18,6 +18,10 @@ const report={
   countries:{},
   parent_validation:{}
 };
+const review={generated_at:new Date().toISOString(),source_generated_at:catalog.generated_at,classifier_version:catalog.classifier_version||null,items:[]};
+function reviewItem(e,issue,extra={}){
+ return {jurisdiction:e.jurisdiction,id:e.id,name:e.name,osm_relation_id:e.osm?.relation_id??null,admin_level:e.osm?.admin_level??null,place:e.osm?.place??null,designation:e.osm?.designation??null,entity_type:e.type,classification_confidence:e.classification?.confidence??null,classification_reason:e.classification?.reason??null,parent_id:e.parent_id,osm_url:e.source_url||null,issue,...extra};
+}
 
 for(const country of countries){
   const geo=JSON.parse(await readFile(`public/geo/current/${country.toLowerCase()}-administrative.geojson`,'utf8'));
@@ -38,11 +42,14 @@ for(const country of countries){
 
   const comboRows=Object.entries(combinations).map(([k,count])=>({...JSON.parse(k),count})).sort((a,b)=>b.count-a.count);
   const countryEntities=entities.filter(e=>e.jurisdiction===country);
-  const pv={checked:countryEntities.length,root_parent:0,entity_parent:0,null_parent:0,missing_parent:0,parent_wrong_jurisdiction:0,parent_level_not_lower:0,geometry_missing:0,point_outside_parent:0,issues:[]};
+  const minLevel=Math.min(...countryEntities.map(e=>e.osm?.admin_level??99));
+  const pv={checked:countryEntities.length,root_parent:0,unexpected_root:0,entity_parent:0,null_parent:0,missing_parent:0,parent_wrong_jurisdiction:0,parent_level_not_lower:0,geometry_missing:0,point_outside_parent:0,issues:[]};
+  for(const e of countryEntities.filter(e=>e.review_required)) review.items.push(reviewItem(e,'classification_review'));
+
 
   for(const e of countryEntities){
     if(e.parent_id==null){pv.null_parent++;pv.issues.push({id:e.id,name:e.name,issue:'null_parent'});continue;}
-    if(e.parent_id===country){pv.root_parent++;continue;}
+    if(e.parent_id===country){pv.root_parent++;if((e.osm?.admin_level??99)>minLevel){pv.unexpected_root++;pv.issues.push({id:e.id,name:e.name,admin_level:e.osm?.admin_level,issue:'unexpected_root'});review.items.push(reviewItem(e,'unexpected_root',{minimum_admin_level:minLevel}));}continue;}
     pv.entity_parent++;
     const p=byId.get(e.parent_id);
     if(!p){pv.missing_parent++;pv.issues.push({id:e.id,name:e.name,parent_id:e.parent_id,issue:'missing_parent'});continue;}
@@ -68,7 +75,12 @@ for(const country of countries){
   report.parent_validation[country]=pv;
 }
 
+review.items.sort((a,b)=>a.jurisdiction.localeCompare(b.jurisdiction)||(a.admin_level??99)-(b.admin_level??99)||(a.name||'').localeCompare(b.name||'','ro'));
+review.item_count=review.items.length;
+review.by_issue=review.items.reduce((o,x)=>(o[x.issue]=(o[x.issue]||0)+1,o),{});
+review.by_jurisdiction=review.items.reduce((o,x)=>(o[x.jurisdiction]=(o[x.jurisdiction]||0)+1,o),{});
 await writeFile('data/current/admin-audit.json',JSON.stringify(report,null,2)+'\n');
+await writeFile('data/current/admin-review.json',JSON.stringify(review,null,2)+'\n');
 console.log(JSON.stringify({
   entity_count:report.entity_count,
   countries:Object.fromEntries(countries.map(c=>[c,{
