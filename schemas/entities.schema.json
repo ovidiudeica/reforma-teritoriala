@@ -41,11 +41,7 @@
       }
     },
     "classifier_version": {
-      "type": [
-        "integer",
-        "null"
-      ],
-      "minimum": 1
+      "type": ["string", "integer", "null"]
     }
   },
   "$defs": {
@@ -206,8 +202,7 @@
           ],
           "properties": {
             "version": {
-              "type": "integer",
-              "minimum": 1
+              "type": ["string", "integer"]
             },
             "confidence": {
               "enum": [
