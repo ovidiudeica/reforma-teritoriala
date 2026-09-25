@@ -18,7 +18,7 @@ async function fetchOfficial(){
  for(const sheet of wb.SheetNames){
   const matrix=XLSX.utils.sheet_to_json(wb.Sheets[sheet],{header:1,defval:null,raw:false,blankrows:false});
   if(!matrix.length)continue;
-  const headers=(matrix[0]||[]).map(v=>String(v??'').replace(/^\\uFEFF/,'').trim());
+  const headers=(matrix[0]||[]).map(v=>String(v??'').replace(/^\uFEFF/,'').trim());
   const col=name=>headers.indexOf(name);
   const required=['CodUnic','ParentCodUnic','CodStatistic','ParentCodStatistic','Statut','DenumireRO','DenumireRU'];
   const missing=required.filter(h=>col(h)<0);
@@ -26,7 +26,7 @@ async function fetchOfficial(){
   for(let i=1;i<matrix.length;i++){
    const row=matrix[i]||[];
    const code=digits(row[col('CodUnic')]), name=String(row[col('DenumireRO')]??'').trim();
-   if(!/^\\d{3,10}$/.test(code)||!name)continue;
+   if(!/^\d{3,10}$/.test(code)||!name)continue;
    records.push({code,parent_code:digits(row[col('ParentCodUnic')])||null,statistical_code:digits(row[col('CodStatistic')])||null,parent_statistical_code:digits(row[col('ParentCodStatistic')])||null,status_code:digits(row[col('Statut')])||null,name,name_ru:String(row[col('DenumireRU')]??'').trim()||null,normalized_name:norm(name),sheet,row:i+1});
   }
  }
