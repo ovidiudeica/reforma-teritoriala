@@ -82,6 +82,22 @@ const noKeyDiagnostics=entities.filter(e=>![e.osm?.cuatm_unique_id,e.osm?.cuatm_
  return {id:e.id,name:e.name,osm_relation_id:e.osm?.relation_id??null,osm_parent_id:e.parent_id||null,osm_parent_name:parent?.name||null,osm_parent_relation_id:parent?.osm?.relation_id??null,verified_osm_parent_legal_id:verifiedParentLegalId,verified_osm_parent_legal_name:parentMatch?.legal_name||null,normalized_child_name:norm(e.name),official_name_candidate_count:candidates.length,official_name_candidates:candidates,diagnostic_category:category};
 });
 const diagnosticCounts=noKeyDiagnostics.reduce((a,x)=>(a[x.diagnostic_category]=(a[x.diagnostic_category]||0)+1,a),{});
+const edgeAudit=noKeyDiagnostics.filter(d=>{
+ const m=matchById.get(d.id);
+ return d.diagnostic_category==='child_name_match_parent_mismatch'||(d.diagnostic_category==='exact_name_parent_match_available'&&m?.match_method!=='exact_normalized_name_and_official_parent');
+}).map(d=>{
+ const m=matchById.get(d.id);
+ const matchingCandidates=d.official_name_candidates.filter(x=>x.parent_matches_verified_osm_parent);
+ let audit_category='genuine_parent_disagreement';
+ if(d.diagnostic_category==='exact_name_parent_match_available'){
+  audit_category=matchingCandidates.length>1?'multiple_official_candidates_under_same_parent':'diagnostic_match_not_auto_assigned';
+ }else if(d.verified_osm_parent_legal_id&&d.official_name_candidates.some(x=>x.legal_id===d.verified_osm_parent_legal_id)){
+  audit_category='osm_self_parent_same_legal_entity';
+ }
+ return {...d,reconciliation_match_method:m?.match_method||null,reconciliation_unmatched_reason:m?.unmatched_reason||null,matching_candidate_count:matchingCandidates.length,matching_candidates:matchingCandidates,audit_category};
+});
+const edgeAuditCounts=edgeAudit.reduce((a,x)=>(a[x.audit_category]=(a[x.audit_category]||0)+1,a),{});
+await writeFile('data/current/md-cuatm-edge-case-audit.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',scope:{parent_mismatch:noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch').length,diagnostic_parent_match_not_auto_assigned:edgeAudit.filter(x=>x.diagnostic_category==='exact_name_parent_match_available').length},by_category:edgeAuditCounts,items:edgeAudit},null,2)+'\\n');
 const mismatchMatrix=new Map();
 for(const d of noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch')){
  const parentMatch=d.osm_parent_id?matchById.get(d.osm_parent_id):null;
@@ -103,4 +119,4 @@ const methods=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,
 const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high), or exact normalized name plus verified official parent when unique (medium). Fuzzy and name-only matches never auto-assign.',matches};
 if(!matched.length)throw new Error('CUATM reconciliation produced zero verified matches');
 await writeFile(OUTPUT,JSON.stringify(out,null,2)+'\n');
-console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_status_code:x.verified_osm_parent_status_code,candidate_official_parent_status_code:x.candidate_official_parent_status_code,count:x.count,examples:x.examples.slice(0,3)}))},null,2));
+console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,edge_case_audit:{count:edgeAudit.length,by_category:edgeAuditCounts,items:edgeAudit},parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_status_code:x.verified_osm_parent_status_code,candidate_official_parent_status_code:x.candidate_official_parent_status_code,count:x.count,examples:x.examples.slice(0,3)}))},null,2));
