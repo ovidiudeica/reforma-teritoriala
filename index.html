@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reforma Teritorială</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div><strong>REFORMA TERITORIALĂ</strong><span>Atlas teritorial România · Republica Moldova</span></div>
+<nav><button class="mode active" data-mode="actual">ACTUAL</button><button class="mode" data-mode="istoric">ISTORIC</button></nav></header>
+<main>
+<aside>
+<h2>Straturi</h2>
+<section><h3>Teritoriu</h3><label><input type="checkbox" checked disabled> Hartă de bază</label><label><input type="checkbox" disabled> România — limite administrative</label><label><input type="checkbox" disabled> Republica Moldova — limite administrative</label></section>
+<section><h3>Categorii</h3><div class="chips"><span>Administrație</span><span>Regiuni</span><span>Instituții</span><span>Biserică</span><span>Statistică</span><span>Infrastructură</span></div></section>
+<div class="status"><b>Versiune inițială</b><p>Interfața hărții este funcțională. Straturile teritoriale vor fi adăugate prin pipeline-ul de date.</p></div>
+</aside>
+<div id="map"></div>
+</main>
+<footer><span>Proiect cartografic documentar</span><span id="modeLabel">Mod: ACTUAL</span></footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="app.js"></script>
+</body></html>
