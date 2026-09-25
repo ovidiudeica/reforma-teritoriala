@@ -47,9 +47,17 @@ for(const e of entities){
  for(const k of keys){const hs=byCode.get(k)||[];if(hs.length===1){hit=hs[0];key=k;break;}}
  if(hit)exactCode.set(e.id,{hit,key}); else unresolved.push({e,keys});
 }
+function resolvedLegalCode(e){
+ if(!e)return null;
+ const exact=exactCode.get(e.id)?.hit?.code;
+ if(exact)return exact;
+ const parent=entityById.get(e.parent_id);
+ const parentExact=parent?exactCode.get(parent.id)?.hit:null;
+ if(parentExact&&norm(e.name)===parentExact.normalized_name)return parentExact.code;
+ return null;
+}
 function officialParentCode(e){
- const p=entityById.get(e.parent_id); if(!p)return null;
- return exactCode.get(p.id)?.hit?.code||null;
+ return resolvedLegalCode(entityById.get(e.parent_id));
 }
 function parentCompatible(child,parentCode){return Boolean(parentCode&&child.parent_code===parentCode);}
 const matches=[];
@@ -60,6 +68,10 @@ for(const e of entities){
  let reason='no_explicit_cuatm_key';
  if(keys.length){const counts=keys.map(k=>(byCode.get(k)||[]).length);reason=counts.some(n=>n>1)?'code_non_unique':'code_absent_from_official_snapshot';}
  const nameHits=byName.get(norm(e.name))||[], parentCode=officialParentCode(e), parentHits=nameHits.filter(h=>parentCompatible(h,parentCode));
+ const osmParent=entityById.get(e.parent_id);
+ const osmParentExact=osmParent?exactCode.get(osmParent.id)?.hit:null;
+ const selfParentHit=!keys.length&&osmParentExact&&norm(e.name)===osmParentExact.normalized_name&&nameHits.find(h=>h.code===osmParentExact.code);
+ if(selfParentHit){const h=selfParentHit;matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'osm_self_parent_same_legal_entity',confidence:'medium',unmatched_reason:null});continue;}
  if(!keys.length&&parentCode&&parentHits.length===1){const h=parentHits[0];matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'exact_normalized_name_and_official_parent',confidence:'medium',unmatched_reason:null});continue;}
  if(!keys.length&&nameHits.length===1&&!parentCode)reason='unique_name_but_parent_unverified';
  else if(!keys.length&&nameHits.length>1)reason=parentCode?'name_ambiguous_with_parent':'name_ambiguous';
@@ -116,7 +128,7 @@ await writeFile('data/current/md-cuatm-parent-mismatch-matrix.json',JSON.stringi
 await writeFile('data/current/md-cuatm-pair-diagnostics.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',entity_count:noKeyDiagnostics.length,by_category:diagnosticCounts,policy:'Diagnostic only. No legal fields are assigned from this file.',items:noKeyDiagnostics},null,2)+'\\n');
 const reasons=unmatched.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const methods=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,a),{});
-const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high), or exact normalized name plus verified official parent when unique (medium). Fuzzy and name-only matches never auto-assign.',matches};
+const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.',matches};
 if(!matched.length)throw new Error('CUATM reconciliation produced zero verified matches');
 await writeFile(OUTPUT,JSON.stringify(out,null,2)+'\n');
 console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,edge_case_audit:{count:edgeAudit.length,by_category:edgeAuditCounts,items:edgeAudit},parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_status_code:x.verified_osm_parent_status_code,candidate_official_parent_status_code:x.candidate_official_parent_status_code,count:x.count,examples:x.examples.slice(0,3)}))},null,2));
