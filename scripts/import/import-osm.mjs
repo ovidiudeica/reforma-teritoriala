@@ -3,7 +3,9 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import osmtogeojson from 'osmtogeojson';
 import { pointOnFeature, booleanPointInPolygon } from '@turf/turf';
 
-const ENDPOINTS=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
+const ENDPOINTS=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://overpass.nchc.org.tw/api/interpreter'];
+const RETRIES_PER_ENDPOINT=3;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9]},
  MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9]}
@@ -12,11 +14,17 @@ const countries={
 async function overpass(query){
  let last;
  for(const endpoint of ENDPOINTS){
-  try{
-   const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-import/0.3'},body:new URLSearchParams({data:query})});
-   if(!r.ok) throw new Error(endpoint+' HTTP '+r.status);
-   return await r.json();
-  }catch(e){last=e;}
+  for(let attempt=1;attempt<=RETRIES_PER_ENDPOINT;attempt++){
+   try{
+    const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-import/0.4'},body:new URLSearchParams({data:query})});
+    if(!r.ok) throw new Error(endpoint+' HTTP '+r.status);
+    return await r.json();
+   }catch(e){
+    last=e;
+    console.warn(`Overpass attempt ${attempt}/${RETRIES_PER_ENDPOINT} failed for ${endpoint}: ${e.message}`);
+    if(attempt<RETRIES_PER_ENDPOINT) await sleep(5000*attempt);
+   }
+  }
  }
  throw last;
 }
