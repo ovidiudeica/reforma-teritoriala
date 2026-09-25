@@ -5,6 +5,9 @@ on:
     - cron: '17 3 1 * *'
 permissions:
   contents: write
+concurrency:
+  group: osm-administrative-import
+  cancel-in-progress: false
 jobs:
   import:
     runs-on: ubuntu-24.04
@@ -20,6 +23,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json public/geo/current/
+          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json data/current/admin-review.json public/geo/current/
           git diff --cached --quiet || git commit -m "data: refresh OSM administrative catalog"
           git push
