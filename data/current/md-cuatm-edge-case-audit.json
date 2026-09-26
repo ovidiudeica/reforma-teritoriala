@@ -1,15 +1,14 @@
 {
-  "generated_at": "2026-09-25T23:58:40.283Z",
+  "generated_at": "2026-09-26T00:03:50.994Z",
   "jurisdiction": "MD",
   "scope": {
     "parent_mismatch": 12,
-    "diagnostic_parent_match_not_auto_assigned": 7
+    "diagnostic_parent_match_not_auto_assigned": 2
   },
   "by_category": {
     "genuine_parent_disagreement": 2,
     "multiple_official_candidates_under_same_parent": 2,
-    "osm_self_parent_same_legal_entity": 10,
-    "diagnostic_match_not_auto_assigned": 5
+    "osm_self_parent_same_legal_entity": 10
   },
   "items": [
     {
@@ -290,45 +289,6 @@
       "audit_category": "osm_self_parent_same_legal_entity"
     },
     {
-      "id": "osm-r21303527",
-      "name": "Drujba",
-      "osm_relation_id": 21303527,
-      "osm_parent_id": "osm-r1661057",
-      "osm_parent_name": "Hîrcești",
-      "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": "9239",
-      "verified_osm_parent_legal_name": "Hîrcești",
-      "normalized_child_name": "drujba",
-      "official_name_candidate_count": 1,
-      "official_name_candidates": [
-        {
-          "legal_id": "9240",
-          "legal_name": "Drujba",
-          "parent_code": "9239",
-          "parent_name": "Hîrcești",
-          "official_sheet": "Sheet 1",
-          "official_row": 1501,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "diagnostic_category": "exact_name_parent_match_available",
-      "reconciliation_match_method": null,
-      "reconciliation_unmatched_reason": "unique_name_but_parent_unverified",
-      "matching_candidate_count": 1,
-      "matching_candidates": [
-        {
-          "legal_id": "9240",
-          "legal_name": "Drujba",
-          "parent_code": "9239",
-          "parent_name": "Hîrcești",
-          "official_sheet": "Sheet 1",
-          "official_row": 1501,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "audit_category": "diagnostic_match_not_auto_assigned"
-    },
-    {
       "id": "osm-r21303533",
       "name": "Dumbrăvița",
       "osm_relation_id": 21303533,
@@ -484,136 +444,10 @@
       ],
       "diagnostic_category": "child_name_match_parent_mismatch",
       "reconciliation_match_method": null,
-      "reconciliation_unmatched_reason": "unique_name_but_parent_unverified",
+      "reconciliation_unmatched_reason": "no_explicit_cuatm_key",
       "matching_candidate_count": 0,
       "matching_candidates": [],
       "audit_category": "osm_self_parent_same_legal_entity"
-    },
-    {
-      "id": "osm-r21303529",
-      "name": "Leordoaia",
-      "osm_relation_id": 21303529,
-      "osm_parent_id": "osm-r1661057",
-      "osm_parent_name": "Hîrcești",
-      "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": "9239",
-      "verified_osm_parent_legal_name": "Hîrcești",
-      "normalized_child_name": "leordoaia",
-      "official_name_candidate_count": 2,
-      "official_name_candidates": [
-        {
-          "legal_id": "2523",
-          "legal_name": "Leordoaia",
-          "parent_code": "2522",
-          "parent_name": "Hîrjauca",
-          "official_sheet": "Sheet 1",
-          "official_row": 267,
-          "parent_matches_verified_osm_parent": false
-        },
-        {
-          "legal_id": "9241",
-          "legal_name": "Leordoaia",
-          "parent_code": "9239",
-          "parent_name": "Hîrcești",
-          "official_sheet": "Sheet 1",
-          "official_row": 1502,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "diagnostic_category": "exact_name_parent_match_available",
-      "reconciliation_match_method": null,
-      "reconciliation_unmatched_reason": "name_ambiguous",
-      "matching_candidate_count": 1,
-      "matching_candidates": [
-        {
-          "legal_id": "9241",
-          "legal_name": "Leordoaia",
-          "parent_code": "9239",
-          "parent_name": "Hîrcești",
-          "official_sheet": "Sheet 1",
-          "official_row": 1502,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "audit_category": "diagnostic_match_not_auto_assigned"
-    },
-    {
-      "id": "osm-r21303538",
-      "name": "Marianca de Sus",
-      "osm_relation_id": 21303538,
-      "osm_parent_id": "osm-r12462198",
-      "osm_parent_name": "Zaim",
-      "osm_parent_relation_id": 12462198,
-      "verified_osm_parent_legal_id": "2731",
-      "verified_osm_parent_legal_name": "Zaim",
-      "normalized_child_name": "marianca de sus",
-      "official_name_candidate_count": 1,
-      "official_name_candidates": [
-        {
-          "legal_id": "2732",
-          "legal_name": "Marianca de Sus",
-          "parent_code": "2731",
-          "parent_name": "Zaim",
-          "official_sheet": "Sheet 1",
-          "official_row": 344,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "diagnostic_category": "exact_name_parent_match_available",
-      "reconciliation_match_method": null,
-      "reconciliation_unmatched_reason": "unique_name_but_parent_unverified",
-      "matching_candidate_count": 1,
-      "matching_candidates": [
-        {
-          "legal_id": "2732",
-          "legal_name": "Marianca de Sus",
-          "parent_code": "2731",
-          "parent_name": "Zaim",
-          "official_sheet": "Sheet 1",
-          "official_row": 344,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "audit_category": "diagnostic_match_not_auto_assigned"
-    },
-    {
-      "id": "osm-r21303526",
-      "name": "Mînzătești",
-      "osm_relation_id": 21303526,
-      "osm_parent_id": "osm-r1661057",
-      "osm_parent_name": "Hîrcești",
-      "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": "9239",
-      "verified_osm_parent_legal_name": "Hîrcești",
-      "normalized_child_name": "minzatesti",
-      "official_name_candidate_count": 1,
-      "official_name_candidates": [
-        {
-          "legal_id": "9242",
-          "legal_name": "Mînzătești",
-          "parent_code": "9239",
-          "parent_name": "Hîrcești",
-          "official_sheet": "Sheet 1",
-          "official_row": 1503,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "diagnostic_category": "exact_name_parent_match_available",
-      "reconciliation_match_method": null,
-      "reconciliation_unmatched_reason": "unique_name_but_parent_unverified",
-      "matching_candidate_count": 1,
-      "matching_candidates": [
-        {
-          "legal_id": "9242",
-          "legal_name": "Mînzătești",
-          "parent_code": "9239",
-          "parent_name": "Hîrcești",
-          "official_sheet": "Sheet 1",
-          "official_row": 1503,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "audit_category": "diagnostic_match_not_auto_assigned"
     },
     {
       "id": "osm-r21303534",
@@ -643,45 +477,6 @@
       "matching_candidate_count": 0,
       "matching_candidates": [],
       "audit_category": "osm_self_parent_same_legal_entity"
-    },
-    {
-      "id": "osm-r21303539",
-      "name": "Veverița",
-      "osm_relation_id": 21303539,
-      "osm_parent_id": "osm-r1661057",
-      "osm_parent_name": "Hîrcești",
-      "osm_parent_relation_id": 1661057,
-      "verified_osm_parent_legal_id": "9239",
-      "verified_osm_parent_legal_name": "Hîrcești",
-      "normalized_child_name": "veverita",
-      "official_name_candidate_count": 1,
-      "official_name_candidates": [
-        {
-          "legal_id": "9243",
-          "legal_name": "Veverița",
-          "parent_code": "9239",
-          "parent_name": "Hîrcești",
-          "official_sheet": "Sheet 1",
-          "official_row": 1504,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "diagnostic_category": "exact_name_parent_match_available",
-      "reconciliation_match_method": null,
-      "reconciliation_unmatched_reason": "unique_name_but_parent_unverified",
-      "matching_candidate_count": 1,
-      "matching_candidates": [
-        {
-          "legal_id": "9243",
-          "legal_name": "Veverița",
-          "parent_code": "9239",
-          "parent_name": "Hîrcești",
-          "official_sheet": "Sheet 1",
-          "official_row": 1504,
-          "parent_matches_verified_osm_parent": true
-        }
-      ],
-      "audit_category": "diagnostic_match_not_auto_assigned"
     },
     {
       "id": "osm-r21303532",
@@ -736,7 +531,7 @@
       ],
       "diagnostic_category": "child_name_match_parent_mismatch",
       "reconciliation_match_method": null,
-      "reconciliation_unmatched_reason": "unique_name_but_parent_unverified",
+      "reconciliation_unmatched_reason": "no_explicit_cuatm_key",
       "matching_candidate_count": 0,
       "matching_candidates": [],
       "audit_category": "osm_self_parent_same_legal_entity"
