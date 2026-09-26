@@ -170,18 +170,25 @@ const edgeAudit=noKeyDiagnostics.filter(d=>{
  return {...d,reconciliation_match_method:m?.match_method||null,reconciliation_unmatched_reason:m?.unmatched_reason||null,matching_candidate_count:matchingCandidates.length,matching_candidates:matchingCandidates,self_parent_predicates:selfParentPredicates,audit_category};
 });
 const resolvedRepresentationCases=edgeAudit.filter(x=>x.audit_category==='osm_self_parent_same_legal_entity'&&x.reconciliation_match_method==='osm_self_parent_same_legal_entity');
-const unresolvedReviewCases=edgeAudit.filter(x=>!resolvedRepresentationCases.includes(x));
+const resolvedReviewedOverrides=edgeAudit.filter(x=>x.reconciliation_match_method==='reviewed_override');
+const resolvedEdgeCases=[...resolvedRepresentationCases,...resolvedReviewedOverrides];
+const resolvedIds=new Set(resolvedEdgeCases.map(x=>x.id));
+const unresolvedReviewCases=edgeAudit.filter(x=>!resolvedIds.has(x.id));
 const countByCategory=items=>items.reduce((a,x)=>(a[x.audit_category]=(a[x.audit_category]||0)+1,a),{});
 const edgeAuditCounts=countByCategory(edgeAudit);
 const resolvedRepresentationCounts=countByCategory(resolvedRepresentationCases);
+const resolvedReviewedOverrideCounts=countByCategory(resolvedReviewedOverrides);
+const resolvedEdgeCounts=countByCategory(resolvedEdgeCases);
 const unresolvedReviewCounts=countByCategory(unresolvedReviewCases);
 await writeFile('data/current/md-cuatm-edge-case-audit.json',JSON.stringify({
  generated_at:new Date().toISOString(),
  jurisdiction:'MD',
  scope:{parent_mismatch:noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch').length,diagnostic_parent_match_not_auto_assigned:edgeAudit.filter(x=>x.diagnostic_category==='exact_name_parent_match_available').length},
- summary:{all_edge_cases:edgeAudit.length,resolved_representation_cases:resolvedRepresentationCases.length,unresolved_review_cases:unresolvedReviewCases.length},
+ summary:{all_edge_cases:edgeAudit.length,resolved_edge_cases:resolvedEdgeCases.length,resolved_representation_cases:resolvedRepresentationCases.length,resolved_reviewed_overrides:resolvedReviewedOverrides.length,unresolved_review_cases:unresolvedReviewCases.length},
  by_category:edgeAuditCounts,
+ resolved_edge_cases:{count:resolvedEdgeCases.length,by_category:resolvedEdgeCounts,items:resolvedEdgeCases},
  resolved_representation_cases:{count:resolvedRepresentationCases.length,by_category:resolvedRepresentationCounts,items:resolvedRepresentationCases},
+ resolved_reviewed_overrides:{count:resolvedReviewedOverrides.length,by_category:resolvedReviewedOverrideCounts,items:resolvedReviewedOverrides},
  unresolved_review_cases:{count:unresolvedReviewCases.length,by_category:unresolvedReviewCounts,items:unresolvedReviewCases},
  items:edgeAudit
 },null,2)+'\\n');
