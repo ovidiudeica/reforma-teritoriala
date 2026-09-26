@@ -3,12 +3,14 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import * as XLSX from 'xlsx';
 
 const URL=process.env.CUATM_URL||'https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx';
-const SNAPSHOT='data/sources/cuatm-current.json', OUTPUT='data/current/md-cuatm-reconciliation.json';
+const SNAPSHOT='data/sources/cuatm-current.json', OUTPUT='data/current/md-cuatm-reconciliation.json', OVERRIDES='data/sources/md-cuatm-reviewed-overrides.json';
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[„”"'’]/g,'').replace(/\b(municipiul|municipiu|orasul|oras|comuna|satul|sat|raionul|raion|sectorul|sector)\b/g,' ').replace(/[^a-z0-9ăâîșț]+/gi,' ').trim().replace(/\s+/g,' ');
 const digits=v=>String(v??'').replace(/\.0$/,'').replace(/\s/g,'').trim();
 const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const entities=(catalog.entities||[]).filter(e=>e.jurisdiction==='MD');
 const entityById=new Map(entities.map(e=>[e.id,e]));
+const entityByRelationId=new Map(entities.filter(e=>e.osm?.relation_id!=null).map(e=>[String(e.osm.relation_id),e]));
+const reviewedOverrides=JSON.parse(await readFile(OVERRIDES,'utf8'));
 
 async function fetchOfficial(){
  const r=await fetch(URL,{headers:{'user-agent':'reforma-teritoriala-cuatm/1.2'}});
@@ -59,10 +61,19 @@ function resolvedLegalCode(e){
 function parentCompatible(child,parentCode){return Boolean(parentCode&&child.parent_code===parentCode);}
 const matchById=new Map();
 const makeMatch=(e,h,method,confidence,key=null)=>({id:e.id,name:e.name,cuatm_key:key,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:method,confidence,unmatched_reason:null});
+// Pass 0: human-reviewed overrides. These are explicit audited mappings, not
+// heuristic rules, and therefore take precedence over automatic reconciliation.
+for(const o of reviewedOverrides.overrides||[]){
+ const e=entityByRelationId.get(String(o.osm_relation_id));
+ if(!e)throw new Error('Reviewed CUATM override OSM relation not found: '+o.osm_relation_id);
+ const hits=byCode.get(digits(o.cuatm_legal_id))||[];
+ if(hits.length!==1)throw new Error('Reviewed CUATM override legal ID must resolve uniquely: '+o.cuatm_legal_id);
+ matchById.set(e.id,{...makeMatch(e,hits[0],'reviewed_override','high',digits(o.cuatm_legal_id)),reviewed_override:{source_url:o.source_url,source_label:o.source_label,reason:o.reason}});
+}
 // Pass 1a: authoritative explicit CUATM keys.
 for(const e of entities){
  const ec=exactCode.get(e.id);
- if(ec)matchById.set(e.id,makeMatch(e,ec.hit,'explicit_cuatm_key','high',ec.key));
+ if(ec&&!matchById.has(e.id))matchById.set(e.id,makeMatch(e,ec.hit,'explicit_cuatm_key','high',ec.key));
 }
 // Passes 1b and 2 share one deterministic fixpoint. Each round first applies
 // the strict self-parent rule, then exact name + verified official parent. A match

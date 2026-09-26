@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "MD",
+  "policy": "Human-reviewed reconciliation overrides. Each mapping must identify one OSM relation and one official CUATM legal ID, with documentary source and rationale. These mappings are applied explicitly and are not heuristic rules.",
+  "overrides": [
+    {
+      "osm_relation_id": 10624607,
+      "cuatm_legal_id": "9202",
+      "source_url": "https://www.legis.md/cautare/downloadpdf/44807",
+      "source_label": "Republica Moldova — official administrative locality/code listing",
+      "reason": "Official source distinguishes 9202 as or. Cornești in Ungheni; reviewed mapping assigns the OSM relation representing the town to that legal entity."
+    },
+    {
+      "osm_relation_id": 1813319,
+      "cuatm_legal_id": "0123",
+      "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+      "source_label": "BNS CUATM current official workbook",
+      "reason": "CUATM identifies Condrița as legal ID 0123 under Sectorul Buiucani (0120); geometric OSM containment under Strășeni must not override the reviewed legal hierarchy."
+    },
+    {
+      "osm_relation_id": 1643003,
+      "cuatm_legal_id": "9255",
+      "source_url": "https://www.legis.md/cautare/downloadpdf/44807",
+      "source_label": "Republica Moldova — official administrative locality/code listing",
+      "reason": "Official source identifies 9255 as sat. Negurenii Vechi in Ungheni; reviewed mapping resolves the OSM relation despite conflicting geometric parent assignment."
+    }
+  ],
+  "pending_review": [
+    {
+      "osm_relation_id": 10624608,
+      "candidate_cuatm_legal_id": "9233",
+      "reason": "Do not apply until the OSM relation is directly verified as the distinct sat. Cornești rather than inferred by elimination."
+    }
+  ]
+}
