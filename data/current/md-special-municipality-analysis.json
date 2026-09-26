@@ -1,0 +1,722 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T07:40:13.529Z",
+  "jurisdiction": "MD",
+  "scope": "Special same-CUATM municipality/city representation chains",
+  "policy": "Diagnostic only. CUATM structure and OSM history are recorded separately; no OSM relation or reconciliation mapping is removed or changed.",
+  "results": [
+    {
+      "legal_id": "0100",
+      "legal_name": "Chișinău",
+      "diagnostic_class": "municipality_uat_and_city_locality_representations",
+      "official_cuatm": {
+        "record": {
+          "code": "0100",
+          "parent_code": null,
+          "status_code": "5",
+          "name": "Chișinău",
+          "statistical_code": "0101000",
+          "parent_statistical_code": null,
+          "row": 2
+        },
+        "direct_children": [
+          {
+            "code": "0110",
+            "parent_code": "0100",
+            "status_code": "4",
+            "name": "Sectorul Botanica",
+            "statistical_code": "0110000",
+            "parent_statistical_code": "0101000",
+            "row": 3
+          },
+          {
+            "code": "0120",
+            "parent_code": "0100",
+            "status_code": "4",
+            "name": "Sectorul Buiucani",
+            "statistical_code": "0120000",
+            "parent_statistical_code": "0101000",
+            "row": 11
+          },
+          {
+            "code": "0130",
+            "parent_code": "0100",
+            "status_code": "4",
+            "name": "Sectorul Centru",
+            "statistical_code": "0130000",
+            "parent_statistical_code": "0101000",
+            "row": 18
+          },
+          {
+            "code": "0140",
+            "parent_code": "0100",
+            "status_code": "4",
+            "name": "Sectorul Ciocana",
+            "statistical_code": "0140000",
+            "parent_statistical_code": "0101000",
+            "row": 20
+          },
+          {
+            "code": "0150",
+            "parent_code": "0100",
+            "status_code": "4",
+            "name": "Sectorul Rîșcani",
+            "statistical_code": "0150000",
+            "parent_statistical_code": "0101000",
+            "row": 33
+          }
+        ]
+      },
+      "osm": {
+        "chain": {
+          "legal_id": "0100",
+          "legal_name": "Chișinău",
+          "count": 2,
+          "family": "special_chain",
+          "subtype": "special_non_8_to_9",
+          "level_pairs": [
+            "4>8"
+          ],
+          "edges": [
+            {
+              "child": {
+                "id": "osm-r1748490",
+                "name": "Chișinău",
+                "admin_level": 8,
+                "place": "city",
+                "name_prefix": "municipiul",
+                "designation": null,
+                "relation_type": "boundary"
+              },
+              "parent": {
+                "id": "osm-r1691801",
+                "name": "Municipiul Chișinău",
+                "admin_level": 4,
+                "place": "municipality",
+                "name_prefix": null,
+                "designation": null,
+                "relation_type": "boundary"
+              }
+            }
+          ]
+        },
+        "representations": [
+          {
+            "relation_id": 1691801,
+            "admin_level": "4",
+            "place": "municipality",
+            "name": "Municipiul Chișinău",
+            "name_prefix": null,
+            "official_name": null,
+            "full_name": null,
+            "cuatm": "0100"
+          },
+          {
+            "relation_id": 1748490,
+            "admin_level": "8",
+            "place": "city",
+            "name": "Chișinău",
+            "name_prefix": "municipiul",
+            "official_name": "municipiul Chișinău",
+            "full_name": null,
+            "cuatm": "0100"
+          }
+        ],
+        "history": [
+          {
+            "relation_id": 1691801,
+            "created_at": "2011-07-30T22:02:27Z",
+            "created_changeset": 8876391,
+            "current_version": 102,
+            "last_modified_at": "2026-08-05T09:08:15Z",
+            "last_changeset": 186966287,
+            "current_tags": {
+              "admin_level": "4",
+              "alt_name:en": "Municipality of Chisinau",
+              "boundary": "administrative",
+              "ISO3166-2": "MD-CU",
+              "name": "Municipiul Chișinău",
+              "name:de": "Munizip Kischinau",
+              "name:en": "Chișinău Municipality",
+              "name:fr": "Municipalité de Chișinău",
+              "name:ro": "Municipiul Chișinău",
+              "name:ru": "муниципий Кишинэу",
+              "name:sk": "Kišiňov",
+              "name:uk": "Муніципій Кишинів",
+              "place": "municipality",
+              "place:ro": "municipiu",
+              "ref": "CU",
+              "ref:cuatm:codstatistic": "0100000",
+              "ref:cuatm:codunic": "0100",
+              "ref:cuatm:statut": "5",
+              "ref:nuts:1": "MD1",
+              "ref:nuts:2": "MD11",
+              "ref:nuts:3": "MD115",
+              "type": "boundary",
+              "wikidata": "Q17176229",
+              "wikipedia": "ro:municipiul Chișinău"
+            },
+            "current_member_count": 92
+          },
+          {
+            "relation_id": 1748490,
+            "created_at": "2011-09-10T11:35:08Z",
+            "created_changeset": 9261340,
+            "current_version": 146,
+            "last_modified_at": "2026-08-30T15:32:41Z",
+            "last_changeset": 188254854,
+            "current_tags": {
+              "admin_level": "8",
+              "alt_name:de": "Kischinjow",
+              "alt_name:en": "Kishinev",
+              "boundary": "administrative",
+              "capital": "yes",
+              "capital_ISO3166-1": "yes",
+              "name": "Chișinău",
+              "name:af": "Chișinău",
+              "name:als": "Kischinau",
+              "name:am": "ኪሺንው",
+              "name:ar": "كيشيناو",
+              "name:ast": "Quixináu",
+              "name:az": "Kişinyov",
+              "name:bat-smg": "Kišėniuovs",
+              "name:be": "Кішынёў",
+              "name:be-tarask": "Кішынёў",
+              "name:bg": "Кишинев",
+              "name:bo": "ཅི་སི་ནའུ།",
+              "name:br": "Chișinău",
+              "name:bs": "Kišinjev",
+              "name:ca": "Chisinau",
+              "name:cbk-zam": "Chisinau",
+              "name:ckb": "کیشیناو",
+              "name:co": "Chișinău",
+              "name:crh": "Kișineu",
+              "name:cs": "Kišiněv",
+              "name:cv": "Кишинэу",
+              "name:cy": "Chișinău",
+              "name:de": "Kischinau",
+              "name:diq": "Kișinew",
+              "name:el": "Κισινάου",
+              "name:en": "Chișinău",
+              "name:eo": "Kiŝinevo",
+              "name:es": "Chisináu",
+              "name:eu": "Chisinau",
+              "name:fa": "کیشیناو",
+              "name:fo": "Chișinău",
+              "name:fr": "Chișinău",
+              "name:ga": "Císineá",
+              "name:gag": "Kișinöv",
+              "name:gd": "Chișinău",
+              "name:gl": "Chișinău",
+              "name:he": "קישינב",
+              "name:hi": "चिशिनाउ",
+              "name:hif": "Chișinău",
+              "name:hr": "Kišinjev",
+              "name:hsb": "Kišinjow",
+              "name:ht": "Chisinaou",
+              "name:hu": "Chișinău",
+              "name:hy": "Քիշնև",
+              "name:id": "Kishinev",
+              "name:io": "Chisinau",
+              "name:is": "Kisínev",
+              "name:ja": "キシナウ",
+              "name:jv": "Chișinău",
+              "name:ka": "კიშინიოვი",
+              "name:kk": "Кишинев",
+              "name:kn": "ಕಿಶಿನೆವ್",
+              "name:ko": "키시너우",
+              "name:kv": "Кишинэу",
+              "name:la": "Chisla Nova",
+              "name:lb": "Chișinău",
+              "name:lij": "Chișinău",
+              "name:lmo": "Chișinău",
+              "name:lt": "Kišiniovas",
+              "name:lv": "Kišiņeva",
+              "name:mi": "Chișinău",
+              "name:mk": "Кишињев",
+              "name:mr": "चिशिनाउ",
+              "name:nan": "Chișinău",
+              "name:nl": "Chisinau",
+              "name:nn": "Chișinău",
+              "name:no": "Chișinău",
+              "name:nov": "Kishinau",
+              "name:oc": "Chișinău",
+              "name:os": "Кишинэу",
+              "name:pa": "ਕਿਸ਼ਨਾਓ",
+              "name:pl": "Kiszyniów",
+              "name:pms": "Chișinău",
+              "name:pnb": "کشینیف",
+              "name:prefix": "municipiul",
+              "name:pt": "Chişinău",
+              "name:qu": "Chişinău",
+              "name:ro": "Chișinău",
+              "name:ru": "Кишинэу",
+              "name:sa": "चिशिनौ",
+              "name:sah": "Кишинэу",
+              "name:scn": "Chișinău",
+              "name:sco": "Chișinău",
+              "name:sh": "Kišinjev",
+              "name:simple": "Chișinău",
+              "name:sk": "Kišiňov",
+              "name:sl": "Kišinjev",
+              "name:sq": "Kishinau",
+              "name:sr": "Кишињев",
+              "name:sv": "Chisinau",
+              "name:sw": "Kishineu",
+              "name:ta": "சிஷினோ",
+              "name:tg": "Кишинэу",
+              "name:th": "คีชีเนา",
+              "name:tl": "Chișinău",
+              "name:tr": "Kişinev",
+              "name:udm": "Кишинэу",
+              "name:ug": "كىشىنېۋ",
+              "name:uk": "Кишинів",
+              "name:ur": "کیشیناو",
+              "name:vec": "Chișinău",
+              "name:vep": "Kišinöv",
+              "name:vi": "Chișinău",
+              "name:yi": "קעשענעוו",
+              "name:yo": "Chișinău",
+              "name:zh": "基希訥烏",
+              "official_name": "municipiul Chișinău",
+              "old_name:de": "Kischinew;Kischenau",
+              "place": "city",
+              "place:ro": "municipiu",
+              "population": "750000",
+              "ref:cuatm:2:codstatistic": "0100000",
+              "ref:cuatm:2:codunic": "0100",
+              "ref:cuatm:codstatistic": "0101000",
+              "ref:cuatm:codunic": "0100",
+              "ref:cuatm:statut": "5",
+              "ref:nuts:1": "MD1",
+              "ref:nuts:2": "MD11",
+              "ref:nuts:3": "MD115",
+              "type": "boundary",
+              "wikidata": "Q21197",
+              "wikipedia": "ro:Chișinău"
+            },
+            "current_member_count": 138
+          }
+        ],
+        "pair_signals": [
+          {
+            "relations": [
+              1691801,
+              1748490
+            ],
+            "same_creation_changeset": false,
+            "created_within_7_days": false,
+            "same_last_changeset": false
+          }
+        ]
+      },
+      "review_conclusion": "Keep all geometries. Treat the admin_level=4 municipality boundary as the UAT-level representation and lower-level same-identity city boundaries as locality/urban representations pending geometry canonicalization."
+    },
+    {
+      "legal_id": "0300",
+      "legal_name": "Bălți",
+      "diagnostic_class": "municipality_uat_intermediate_city_and_component_city_chain",
+      "official_cuatm": {
+        "record": {
+          "code": "0300",
+          "parent_code": null,
+          "status_code": "5",
+          "name": "Bălți",
+          "statistical_code": "0301000",
+          "parent_statistical_code": null,
+          "row": 42
+        },
+        "direct_children": [
+          {
+            "code": "0301",
+            "parent_code": "0300",
+            "status_code": "8",
+            "name": "Elizaveta",
+            "statistical_code": "0310000",
+            "parent_statistical_code": "0301000",
+            "row": 43
+          },
+          {
+            "code": "4839",
+            "parent_code": "0300",
+            "status_code": "8",
+            "name": "Sadovoe",
+            "statistical_code": "0311000",
+            "parent_statistical_code": "0301000",
+            "row": 44
+          }
+        ]
+      },
+      "osm": {
+        "chain": {
+          "legal_id": "0300",
+          "legal_name": "Bălți",
+          "count": 3,
+          "family": "special_chain",
+          "subtype": "special_non_8_to_9",
+          "level_pairs": [
+            "4>8",
+            "8>9"
+          ],
+          "edges": [
+            {
+              "child": {
+                "id": "osm-r12207955",
+                "name": "Bălți",
+                "admin_level": 8,
+                "place": null,
+                "name_prefix": "orașul",
+                "designation": null,
+                "relation_type": "boundary"
+              },
+              "parent": {
+                "id": "osm-r58983",
+                "name": "Municipiul Bălți",
+                "admin_level": 4,
+                "place": "municipality",
+                "name_prefix": null,
+                "designation": null,
+                "relation_type": "boundary"
+              }
+            },
+            {
+              "child": {
+                "id": "osm-r18967626",
+                "name": "Bălți",
+                "admin_level": 9,
+                "place": "city",
+                "name_prefix": "municipiul",
+                "designation": null,
+                "relation_type": "boundary"
+              },
+              "parent": {
+                "id": "osm-r12207955",
+                "name": "Bălți",
+                "admin_level": 8,
+                "place": null,
+                "name_prefix": "orașul",
+                "designation": null,
+                "relation_type": "boundary"
+              }
+            }
+          ]
+        },
+        "representations": [
+          {
+            "relation_id": 58983,
+            "admin_level": "4",
+            "place": "municipality",
+            "name": "Municipiul Bălți",
+            "name_prefix": null,
+            "official_name": null,
+            "full_name": null,
+            "cuatm": "0300"
+          },
+          {
+            "relation_id": 12207955,
+            "admin_level": "8",
+            "place": null,
+            "name": "Bălți",
+            "name_prefix": "orașul",
+            "official_name": null,
+            "full_name": null,
+            "cuatm": null
+          },
+          {
+            "relation_id": 18967626,
+            "admin_level": "9",
+            "place": "city",
+            "name": "Bălți",
+            "name_prefix": "municipiul",
+            "official_name": "municipiul Bălți",
+            "full_name": "municipiul Bălți",
+            "cuatm": "0300"
+          }
+        ],
+        "history": [
+          {
+            "relation_id": 58983,
+            "created_at": "2008-12-18T15:47:43Z",
+            "created_changeset": 456591,
+            "current_version": 56,
+            "last_modified_at": "2025-09-05T06:15:19Z",
+            "last_changeset": 171480574,
+            "current_tags": {
+              "admin_level": "4",
+              "alt_name:ru": "Муниципий Бельцы",
+              "boundary": "administrative",
+              "ISO3166-2": "MD-BA",
+              "name": "Municipiul Bălți",
+              "name:de": "Munizip Bălți",
+              "name:en": "Bălți Municipality",
+              "name:ro": "Municipiul Bălți",
+              "name:ru": "Муниципий Бэлць",
+              "name:uk": "Муніципій Бєльці",
+              "place": "municipality",
+              "place:ro": "municipiu",
+              "ref": "BL",
+              "ref:cuatm:codstatistic": "0300000",
+              "ref:cuatm:codunic": "0300",
+              "ref:cuatm:statut": "5",
+              "ref:nuts:1": "MD1",
+              "ref:nuts:2": "MD11",
+              "ref:nuts:3": "MD111",
+              "type": "boundary",
+              "wikidata": "Q29017181",
+              "wikipedia": "ro:municipiul Bălți"
+            },
+            "current_member_count": 27
+          },
+          {
+            "relation_id": 12207955,
+            "created_at": "2021-01-19T00:24:56Z",
+            "created_changeset": 97726476,
+            "current_version": 21,
+            "last_modified_at": "2026-07-12T01:26:59Z",
+            "last_changeset": 185567442,
+            "current_tags": {
+              "admin_level": "8",
+              "alt_name:ru": "Бельцы",
+              "boundary": "administrative",
+              "name": "Bălți",
+              "name:prefix": "orașul",
+              "name:ro": "Bălți",
+              "name:ru": "Бэлць",
+              "name:uk": "Бєльці",
+              "name:zh": "伯尔兹",
+              "type": "boundary",
+              "wikidata": "Q37801",
+              "wikipedia": "en:Bălți"
+            },
+            "current_member_count": 22
+          },
+          {
+            "relation_id": 18967626,
+            "created_at": "2025-04-09T17:48:35Z",
+            "created_changeset": 164736346,
+            "current_version": 6,
+            "last_modified_at": "2026-08-18T07:32:40Z",
+            "last_changeset": 187623522,
+            "current_tags": {
+              "admin_level": "9",
+              "boundary": "administrative",
+              "full_name": "municipiul Bălți",
+              "name": "Bălți",
+              "name:prefix": "municipiul",
+              "name:ro": "Bălți",
+              "name:ru": "Бельцы",
+              "name:suffix:en": "municipality",
+              "official_name": "municipiul Bălți",
+              "place": "city",
+              "ref:cuatm:codunic": "0300",
+              "type": "boundary"
+            },
+            "current_member_count": 4
+          }
+        ],
+        "pair_signals": [
+          {
+            "relations": [
+              58983,
+              12207955
+            ],
+            "same_creation_changeset": false,
+            "created_within_7_days": false,
+            "same_last_changeset": false
+          },
+          {
+            "relations": [
+              58983,
+              18967626
+            ],
+            "same_creation_changeset": false,
+            "created_within_7_days": false,
+            "same_last_changeset": false
+          },
+          {
+            "relations": [
+              12207955,
+              18967626
+            ],
+            "same_creation_changeset": false,
+            "created_within_7_days": false,
+            "same_last_changeset": false
+          }
+        ]
+      },
+      "review_conclusion": "Keep all geometries. Treat the admin_level=4 municipality boundary as the UAT-level representation and lower-level same-identity city boundaries as locality/urban representations pending geometry canonicalization."
+    },
+    {
+      "legal_id": "0500",
+      "legal_name": "Bender",
+      "diagnostic_class": "municipality_uat_and_city_locality_representations",
+      "official_cuatm": {
+        "record": {
+          "code": "0500",
+          "parent_code": null,
+          "status_code": "5",
+          "name": "Bender",
+          "statistical_code": "0501000",
+          "parent_statistical_code": null,
+          "row": 45
+        },
+        "direct_children": [
+          {
+            "code": "0501",
+            "parent_code": "0500",
+            "status_code": "8",
+            "name": "Proteagailovca",
+            "statistical_code": "0510000",
+            "parent_statistical_code": "0501000",
+            "row": 46
+          }
+        ]
+      },
+      "osm": {
+        "chain": {
+          "legal_id": "0500",
+          "legal_name": "Bender",
+          "count": 2,
+          "family": "special_chain",
+          "subtype": "special_non_8_to_9",
+          "level_pairs": [
+            "4>8"
+          ],
+          "edges": [
+            {
+              "child": {
+                "id": "osm-r12463379",
+                "name": "Bender",
+                "admin_level": 8,
+                "place": "city",
+                "name_prefix": "municipiul",
+                "designation": null,
+                "relation_type": "boundary"
+              },
+              "parent": {
+                "id": "osm-r9581354",
+                "name": "Municipiul Bender",
+                "admin_level": 4,
+                "place": "municipality",
+                "name_prefix": null,
+                "designation": null,
+                "relation_type": "boundary"
+              }
+            }
+          ]
+        },
+        "representations": [
+          {
+            "relation_id": 9581354,
+            "admin_level": "4",
+            "place": "municipality",
+            "name": "Municipiul Bender",
+            "name_prefix": null,
+            "official_name": null,
+            "full_name": null,
+            "cuatm": "0500"
+          },
+          {
+            "relation_id": 12463379,
+            "admin_level": "8",
+            "place": "city",
+            "name": "Бендеры",
+            "name_prefix": "municipiul",
+            "official_name": "город Бендеры",
+            "full_name": null,
+            "cuatm": "0500"
+          }
+        ],
+        "history": [
+          {
+            "relation_id": 9581354,
+            "created_at": "2019-05-11T23:36:54Z",
+            "created_changeset": 70149362,
+            "current_version": 36,
+            "last_modified_at": "2025-09-07T14:00:47Z",
+            "last_changeset": 171586193,
+            "current_tags": {
+              "admin_level": "4",
+              "alt_name": "Municipiul Tighina",
+              "boundary": "administrative",
+              "ISO3166-2": "MD-BD",
+              "name": "Municipiul Bender",
+              "name:de": "Munizip Bender",
+              "name:en": "Bender Municipality",
+              "name:es": "Municipio de Bender",
+              "name:ro": "Municipiul Bender",
+              "name:ru": "Муниципий Бендеры",
+              "name:uk": "Муніципій Бендер",
+              "note": "This is the official border of Bender municipality in conformity with Republic of Moldova laws. Don't mess this relation with the Bender City Council border in conformity with PMR's laws ( https://www.openstreetmap.org/relation/944727)!",
+              "place": "municipality",
+              "place:ro": "municipiu",
+              "ref": "BD",
+              "ref:cuatm:codstatistic": "0500000",
+              "ref:cuatm:codunic": "0500",
+              "ref:cuatm:statut": "5",
+              "ref:nuts:1": "MD1",
+              "ref:nuts:2": "MD12",
+              "ref:nuts:3": "MD121",
+              "type": "boundary",
+              "wikidata": "Q18088065",
+              "wikipedia": "ro:municipiul Bender"
+            },
+            "current_member_count": 30
+          },
+          {
+            "relation_id": 12463379,
+            "created_at": "2021-03-18T22:47:56Z",
+            "created_changeset": 101288586,
+            "current_version": 19,
+            "last_modified_at": "2026-07-31T19:59:13Z",
+            "last_changeset": 186727422,
+            "current_tags": {
+              "admin_level": "8",
+              "alt_name": "Тигина",
+              "alt_name:en": "Tigina",
+              "boundary": "administrative",
+              "name": "Бендеры",
+              "name:en": "Bender",
+              "name:es": "Bender",
+              "name:md": "Бендер",
+              "name:prefix": "municipiul",
+              "name:ro": "Bender",
+              "name:ru": "Бендеры",
+              "name:uk": "Бендери",
+              "official_name": "город Бендеры",
+              "place": "city",
+              "place:ro": "municipiu",
+              "ref:cuatm:2:codstatistic": "0500000",
+              "ref:cuatm:2:codunic": "0500",
+              "ref:cuatm:codstatistic": "0501000",
+              "ref:cuatm:codunic": "0500",
+              "ref:cuatm:statut": "5",
+              "ref:nuts:1": "MD1",
+              "ref:nuts:2": "MD12",
+              "ref:nuts:3": "MD121",
+              "short_name": "Bender",
+              "short_name:en": "Bender",
+              "short_name:ro": "Bender",
+              "type": "boundary",
+              "wikidata": "Q192176",
+              "wikipedia": "ru:Бендеры"
+            },
+            "current_member_count": 21
+          }
+        ],
+        "pair_signals": [
+          {
+            "relations": [
+              9581354,
+              12463379
+            ],
+            "same_creation_changeset": false,
+            "created_within_7_days": false,
+            "same_last_changeset": false
+          }
+        ]
+      },
+      "review_conclusion": "Keep all geometries. Treat the admin_level=4 municipality boundary as the UAT-level representation and lower-level same-identity city boundaries as locality/urban representations pending geometry canonicalization."
+    }
+  ]
+}
