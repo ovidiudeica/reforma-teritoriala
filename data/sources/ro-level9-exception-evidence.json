@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "RO",
+  "policy": "Legal identity/status is documented separately from OSM boundary geometry. These records do not assert that OSM geometry is legally authoritative.",
+  "primary_legal_source": {
+    "title": "Legea nr. 2/1968 privind organizarea administrativă a teritoriului României, forma actualizată",
+    "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837"
+  },
+  "items": [
+    {
+      "osm_relation_id": 12557978,
+      "name": "Bărdești",
+      "legal_status": "sat",
+      "legal_parent_name": "Sântana de Mureș",
+      "legal_parent_type": "comună",
+      "osm_parent_relation_id": 11318833,
+      "legal_hierarchy_verified": true,
+      "legal_geometry_verified": false,
+      "semantic_classification": "component_village_boundary_representation"
+    },
+    {
+      "osm_relation_id": 11366847,
+      "name": "Cristești",
+      "legal_status": "sat",
+      "legal_parent_name": "Cristești",
+      "legal_parent_type": "comună",
+      "osm_parent_relation_id": 11318838,
+      "legal_hierarchy_verified": true,
+      "legal_geometry_verified": false,
+      "semantic_classification": "component_village_boundary_representation"
+    },
+    {
+      "osm_relation_id": 11366846,
+      "name": "Vălureni",
+      "legal_status": "sat",
+      "legal_parent_name": "Cristești",
+      "legal_parent_type": "comună",
+      "osm_parent_relation_id": 11318838,
+      "legal_hierarchy_verified": true,
+      "legal_geometry_verified": false,
+      "semantic_classification": "component_village_boundary_representation"
+    },
+    {
+      "osm_relation_id": 11283027,
+      "name": "Mureșeni",
+      "legal_status": "localitate componentă",
+      "legal_parent_name": "Târgu Mureș",
+      "legal_parent_type": "municipiu",
+      "osm_parent_relation_id": 8334767,
+      "legal_hierarchy_verified": true,
+      "legal_geometry_verified": false,
+      "semantic_classification": "municipality_component_locality_boundary_representation"
+    },
+    {
+      "osm_relation_id": 11283576,
+      "name": "Remetea",
+      "legal_status": "localitate componentă",
+      "legal_parent_name": "Târgu Mureș",
+      "legal_parent_type": "municipiu",
+      "osm_parent_relation_id": 8334767,
+      "legal_hierarchy_verified": true,
+      "legal_geometry_verified": false,
+      "semantic_classification": "municipality_component_locality_boundary_representation"
+    }
+  ]
+}
