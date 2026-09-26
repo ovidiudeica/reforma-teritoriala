@@ -167,18 +167,11 @@ async function fromOfficialArcgis(){
   const allTypeLabels=[...new Set(g.children.map(x=>x.type).filter(Boolean))];
   for(const t of typeLabels)seatTypeCounts[t]=(seatTypeCounts[t]||0)+1;
   const locCodes=new Set(g.children.map(x=>x.loc).filter(Number.isFinite));
-  let legalType=null;
-  if([...locCodes].some(x=>[9,10,11].includes(x)))legalType='municipality';
-  else if([...locCodes].some(x=>[17,18,19].includes(x)))legalType='town';
-  else if([...locCodes].some(x=>[22,23].includes(x)))legalType='commune';
-  else{
-   legalType=legalTypeFromName(g.rawParent);
-   if(legalType==='commune'){
-    const joined=allTypeLabels.join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-    if(/resedinta de municipiu|municipiu/.test(joined))legalType='municipality';
-    else if(/resedinta de oras|\boras\b|urban/.test(joined))legalType='town';
-   }
-  }
+  const joined=allTypeLabels.join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  let legalType=legalTypeFromName(g.rawParent);
+  if(/resedinta de municipiu|municipiu/.test(joined))legalType='municipality';
+  else if(legalType!=='municipality'&&locCodes.has(1))legalType='town';
+  else if(legalType!=='municipality'&&legalType!=='town')legalType='commune';
   return {
    siruta:g.siruta,name:parentName,parent_siruta:null,parent_name:g.county||null,type_code:null,level:2,
    county_code:g.countyCode,county_name:g.county||null,legal_type:legalType,official_parent_label:g.rawParent,
@@ -206,7 +199,7 @@ async function fromOfficialArcgis(){
    derived_uat_type_counts:typeCounts,
    seat_locality_type_labels:seatTypeCounts,
    license:null,
-   note:'UAT identity/type is reconstructed from unique official SIRUTA_SUP + DEN_SUPERIOR + JUDET values and TipLocalitate of the same-name seat locality. Locality/intravilan geometry is not imported or treated as UAT legal geometry.'
+   note:'UAT identity/type is reconstructed from unique official SIRUTA_SUP + DEN_SUPERIOR + JUDET values. TipLocalitate identifies municipalities; LOC is the official INS Urban/Rural subtype and distinguishes the remaining towns from rural communes. Locality/intravilan geometry is not imported or treated as UAT legal geometry.'
   }
  };
 }
