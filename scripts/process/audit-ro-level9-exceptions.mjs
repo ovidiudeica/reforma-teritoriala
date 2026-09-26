@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { area, bbox, pointOnFeature, booleanPointInPolygon } from '@turf/turf';
+import { area, bbox, pointOnFeature, booleanPointInPolygon, booleanWithin } from '@turf/turf';
 
 const evidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
 const geo=JSON.parse(await readFile('public/geo/current/ro-administrative.geojson','utf8'));
@@ -84,11 +84,14 @@ function geometrySummary(feature,parent){
   geometry_type:feature?.geometry?.type||null,
   area_km2:feature?area(feature)/1e6:null,
   bbox:feature?bbox(feature):null,
-  point_inside_expected_parent:null
+  point_inside_expected_parent:null,
+  fully_within_expected_parent:null
  };
  if(feature&&parent){
   try{result.point_inside_expected_parent=booleanPointInPolygon(pointOnFeature(feature),parent);}
   catch{result.point_inside_expected_parent=false;}
+  try{result.fully_within_expected_parent=booleanWithin(feature,parent);}
+  catch{result.fully_within_expected_parent=false;}
  }
  return result;
 }
@@ -167,9 +170,9 @@ const checks=[
   detail:{missing:parentIds.filter(id=>!byId.has(id))}
  },
  {
-  name:'all_geometrically_within_expected_parent',
-  ok:items.every(x=>x.geometry.point_inside_expected_parent===true),
-  detail:{failed:items.filter(x=>x.geometry.point_inside_expected_parent!==true).map(x=>x.osm_relation_id)}
+  name:'all_polygons_fully_within_expected_parent',
+  ok:items.every(x=>x.geometry.fully_within_expected_parent===true),
+  detail:{failed:items.filter(x=>x.geometry.fully_within_expected_parent!==true).map(x=>x.osm_relation_id)}
  },
  {
   name:'all_legal_hierarchies_verified',
