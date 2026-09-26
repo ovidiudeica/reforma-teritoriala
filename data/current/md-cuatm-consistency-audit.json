@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T06:49:50.979Z",
+  "generated_at": "2026-09-26T06:54:25.248Z",
   "jurisdiction": "MD",
   "scope": "CUATM matched entities; duplicate OSM representations collapsed logically by legal identity",
   "matched_count": 2465,
@@ -17,6 +17,20 @@
     "consistent_root": 41,
     "consistent_identity_parent": 2380,
     "identity_parent_mismatch": 44
+  },
+  "unique_legal_identity_issue_summary": {
+    "count": 23,
+    "by_class": {
+      "chisinau_sector_geometry_gap": 17,
+      "cross_legal_parent_conflict": 6
+    }
+  },
+  "targeted_duplicate_review_summary": {
+    "count": 5,
+    "by_class": {
+      "conflict_real": 3,
+      "parallel_same_parent": 2
+    }
   },
   "duplicate_legal_ids": [
     {
@@ -26352,7 +26366,572 @@
       ]
     }
   ],
-  "legal_identity_parent_issues": [
+  "unique_legal_identity_issues": [
+    {
+      "legal_id": "5511",
+      "legal_name": "Băcioi",
+      "expected_legal_parent_id": "0110",
+      "expected_legal_parent_name": "Sectorul Botanica",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1748489",
+        "osm-r18967382"
+      ]
+    },
+    {
+      "legal_id": "0142",
+      "legal_name": "Bubuieci",
+      "expected_legal_parent_id": "0140",
+      "expected_legal_parent_name": "Sectorul Ciocana",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1751286",
+        "osm-r18966886"
+      ]
+    },
+    {
+      "legal_id": "3120",
+      "legal_name": "Budești",
+      "expected_legal_parent_id": "0140",
+      "expected_legal_parent_name": "Sectorul Ciocana",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1759153",
+        "osm-r18967693"
+      ]
+    },
+    {
+      "legal_id": "0152",
+      "legal_name": "Ciorescu",
+      "expected_legal_parent_id": "0150",
+      "expected_legal_parent_name": "Sectorul Rîșcani",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1782040",
+        "osm-r18967240"
+      ]
+    },
+    {
+      "legal_id": "0131",
+      "legal_name": "Codru",
+      "expected_legal_parent_id": "0130",
+      "expected_legal_parent_name": "Sectorul Centru",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1751297",
+        "osm-r18966979"
+      ]
+    },
+    {
+      "legal_id": "0149",
+      "legal_name": "Colonița",
+      "expected_legal_parent_id": "0140",
+      "expected_legal_parent_name": "Sectorul Ciocana",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1752519",
+        "osm-r18967773"
+      ]
+    },
+    {
+      "legal_id": "0123",
+      "legal_name": "Condrița",
+      "expected_legal_parent_id": "0120",
+      "expected_legal_parent_name": "Sectorul Buiucani",
+      "observed_distinct_parent_legal_ids": [
+        "8000"
+      ],
+      "diagnostic_class": "cross_legal_parent_conflict",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1813319",
+        "osm-r18968176"
+      ]
+    },
+    {
+      "legal_id": "0151",
+      "legal_name": "Cricova",
+      "expected_legal_parent_id": "0150",
+      "expected_legal_parent_name": "Sectorul Rîșcani",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1782039",
+        "osm-r18967527"
+      ]
+    },
+    {
+      "legal_id": "0144",
+      "legal_name": "Cruzești",
+      "expected_legal_parent_id": "0140",
+      "expected_legal_parent_name": "Sectorul Ciocana",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1759154",
+        "osm-r18967935"
+      ]
+    },
+    {
+      "legal_id": "6432",
+      "legal_name": "Donici",
+      "expected_legal_parent_id": "6400",
+      "expected_legal_parent_name": "Orhei",
+      "observed_distinct_parent_legal_ids": [
+        "8000"
+      ],
+      "diagnostic_class": "cross_legal_parent_conflict",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r19082496",
+        "osm-r18967778"
+      ]
+    },
+    {
+      "legal_id": "0121",
+      "legal_name": "Durlești",
+      "expected_legal_parent_id": "0120",
+      "expected_legal_parent_name": "Sectorul Buiucani",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1759185",
+        "osm-r18967541"
+      ]
+    },
+    {
+      "legal_id": "0124",
+      "legal_name": "Ghidighici",
+      "expected_legal_parent_id": "0120",
+      "expected_legal_parent_name": "Sectorul Buiucani",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1768341",
+        "osm-r18967349"
+      ]
+    },
+    {
+      "legal_id": "0155",
+      "legal_name": "Grătiești",
+      "expected_legal_parent_id": "0150",
+      "expected_legal_parent_name": "Sectorul Rîșcani",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1782038",
+        "osm-r18966800"
+      ]
+    },
+    {
+      "legal_id": "9255",
+      "legal_name": "Negurenii Vechi",
+      "expected_legal_parent_id": "9200",
+      "expected_legal_parent_name": "Ungheni",
+      "observed_distinct_parent_legal_ids": [
+        "4300"
+      ],
+      "diagnostic_class": "cross_legal_parent_conflict",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1643003",
+        "osm-r18967752"
+      ]
+    },
+    {
+      "legal_id": "6453",
+      "legal_name": "Peresecina",
+      "expected_legal_parent_id": "6400",
+      "expected_legal_parent_name": "Orhei",
+      "observed_distinct_parent_legal_ids": [
+        "3100"
+      ],
+      "diagnostic_class": "cross_legal_parent_conflict",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r19082505",
+        "osm-r18968022"
+      ]
+    },
+    {
+      "legal_id": "0111",
+      "legal_name": "Sîngera",
+      "expected_legal_parent_id": "0110",
+      "expected_legal_parent_name": "Sectorul Botanica",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1748491",
+        "osm-r18968179"
+      ]
+    },
+    {
+      "legal_id": "3153",
+      "legal_name": "Stăuceni",
+      "expected_legal_parent_id": "0150",
+      "expected_legal_parent_name": "Sectorul Rîșcani",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1782011",
+        "osm-r18966966"
+      ]
+    },
+    {
+      "legal_id": "0146",
+      "legal_name": "Tohatin",
+      "expected_legal_parent_id": "0140",
+      "expected_legal_parent_name": "Sectorul Ciocana",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1752520",
+        "osm-r18967916"
+      ]
+    },
+    {
+      "legal_id": "8039",
+      "legal_name": "Trușeni",
+      "expected_legal_parent_id": "0120",
+      "expected_legal_parent_name": "Sectorul Buiucani",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1759186",
+        "osm-r18967321"
+      ]
+    },
+    {
+      "legal_id": "0141",
+      "legal_name": "Vadul lui Vodă",
+      "expected_legal_parent_id": "0140",
+      "expected_legal_parent_name": "Sectorul Ciocana",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1752811",
+        "osm-r18968190"
+      ]
+    },
+    {
+      "legal_id": "0122",
+      "legal_name": "Vatra",
+      "expected_legal_parent_id": "0120",
+      "expected_legal_parent_name": "Sectorul Buiucani",
+      "observed_distinct_parent_legal_ids": [
+        "0100"
+      ],
+      "diagnostic_class": "chisinau_sector_geometry_gap",
+      "representation_count": 2,
+      "affected_representations": [
+        "osm-r1768340",
+        "osm-r18968027"
+      ]
+    },
+    {
+      "legal_id": "8961",
+      "legal_name": "Bondareuca",
+      "expected_legal_parent_id": "8960",
+      "expected_legal_parent_name": "Zgărdești",
+      "observed_distinct_parent_legal_ids": [
+        "7433"
+      ],
+      "diagnostic_class": "cross_legal_parent_conflict",
+      "representation_count": 1,
+      "affected_representations": [
+        "osm-r18967570"
+      ]
+    },
+    {
+      "legal_id": "9639",
+      "legal_name": "Etulia, loc.st.c.f.",
+      "expected_legal_parent_id": "9629",
+      "expected_legal_parent_name": "Etulia",
+      "observed_distinct_parent_legal_ids": [
+        "9621"
+      ],
+      "diagnostic_class": "cross_legal_parent_conflict",
+      "representation_count": 1,
+      "affected_representations": [
+        "osm-r18968043"
+      ]
+    }
+  ],
+  "targeted_duplicate_review": [
+    {
+      "legal_id": "1050",
+      "legal_name": "Țînțăreni",
+      "count": 3,
+      "duplicate_class": "conflict_real",
+      "same_identity_edges": [
+        {
+          "child": "osm-r18967632",
+          "parent": "osm-r12496850"
+        }
+      ],
+      "parallel_sets": [
+        {
+          "osm_parent_id": "osm-r1692078",
+          "items": [
+            "osm-r12496850",
+            "osm-r19090932"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "osm-r12496850",
+          "name": "Țînțăreni",
+          "match_method": "exact_normalized_name_and_official_parent",
+          "confidence": "medium",
+          "cuatm_key": null,
+          "osm_parent_id": "osm-r1692078"
+        },
+        {
+          "id": "osm-r19090932",
+          "name": "Țînțăreni",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "1050",
+          "osm_parent_id": "osm-r1692078"
+        },
+        {
+          "id": "osm-r18967632",
+          "name": "Țînțăreni",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "1050",
+          "osm_parent_id": "osm-r12496850"
+        }
+      ]
+    },
+    {
+      "legal_id": "3417",
+      "legal_name": "Dondușeni",
+      "count": 3,
+      "duplicate_class": "conflict_real",
+      "same_identity_edges": [
+        {
+          "child": "osm-r18967876",
+          "parent": "osm-r19055800"
+        }
+      ],
+      "parallel_sets": [
+        {
+          "osm_parent_id": "osm-r59007",
+          "items": [
+            "osm-r19055800",
+            "osm-r19055814"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "osm-r19055800",
+          "name": "Dondușeni",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "3417",
+          "osm_parent_id": "osm-r59007"
+        },
+        {
+          "id": "osm-r19055814",
+          "name": "Dondușeni",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "3417",
+          "osm_parent_id": "osm-r59007"
+        },
+        {
+          "id": "osm-r18967876",
+          "name": "Dondușeni",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "3417",
+          "osm_parent_id": "osm-r19055800"
+        }
+      ]
+    },
+    {
+      "legal_id": "7160",
+      "legal_name": "Văratic",
+      "count": 3,
+      "duplicate_class": "conflict_real",
+      "same_identity_edges": [
+        {
+          "child": "osm-r18966798",
+          "parent": "osm-r19045254"
+        }
+      ],
+      "parallel_sets": [
+        {
+          "osm_parent_id": "osm-r1693908",
+          "items": [
+            "osm-r19045240",
+            "osm-r19045254"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "osm-r19045240",
+          "name": "Văratic",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "7160",
+          "osm_parent_id": "osm-r1693908"
+        },
+        {
+          "id": "osm-r19045254",
+          "name": "Văratic",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "7160",
+          "osm_parent_id": "osm-r1693908"
+        },
+        {
+          "id": "osm-r18966798",
+          "name": "Văratic",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "7160",
+          "osm_parent_id": "osm-r19045254"
+        }
+      ]
+    },
+    {
+      "legal_id": "8034",
+      "legal_name": "Recea",
+      "count": 3,
+      "duplicate_class": "parallel_same_parent",
+      "same_identity_edges": [],
+      "parallel_sets": [
+        {
+          "osm_parent_id": "osm-r85827",
+          "items": [
+            "osm-r19100165",
+            "osm-r19100169",
+            "osm-r19100182"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "osm-r19100165",
+          "name": "Recea",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "8034",
+          "osm_parent_id": "osm-r85827"
+        },
+        {
+          "id": "osm-r19100169",
+          "name": "Recea",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "8034",
+          "osm_parent_id": "osm-r85827"
+        },
+        {
+          "id": "osm-r19100182",
+          "name": "Recea",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "8034",
+          "osm_parent_id": "osm-r85827"
+        }
+      ]
+    },
+    {
+      "legal_id": "8341",
+      "legal_name": "Rogojeni, loc.st.c.f.",
+      "count": 2,
+      "duplicate_class": "parallel_same_parent",
+      "same_identity_edges": [],
+      "parallel_sets": [
+        {
+          "osm_parent_id": "osm-r19080662",
+          "items": [
+            "osm-r20181256",
+            "osm-r18968117"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "osm-r20181256",
+          "name": "Rogojeni",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "8341",
+          "osm_parent_id": "osm-r19080662"
+        },
+        {
+          "id": "osm-r18968117",
+          "name": "Rogojeni, loc. st. c. f.",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "8341",
+          "osm_parent_id": "osm-r19080662"
+        }
+      ]
+    }
+  ],
+  "legal_identity_parent_issues_by_representation": [
     {
       "legal_id": "5511",
       "legal_name": "Băcioi",
