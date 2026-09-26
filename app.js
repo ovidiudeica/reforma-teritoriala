@@ -8,7 +8,7 @@ const hover={weight:3,fillOpacity:.18};
 
 const queries={
  ro:'[out:json][timeout:60];area["ISO3166-1"="RO"][boundary=administrative]->.a;relation(area.a)[boundary=administrative][admin_level=4];out body;>;out skel qt;',
- md:'[out:json][timeout:60];area["ISO3166-1"="MD"][boundary=administrative]->.a;relation(area.a)[boundary=administrative][admin_level=6];out body;>;out skel qt;'
+ md:null
 };
 const endpoints=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
 
@@ -32,13 +32,29 @@ function popup(feature){
 async function load(key){
  const group=groups[key]; group.clearLayers();
  try{
-  const data=await overpass(queries[key]);
-  const geo=osmtogeojson(data);
+  let geo;
+  if(key==='md'){
+   const [data,gate]=await Promise.all([
+    fetch('public/geo/current/md-administrative.geojson',{cache:'no-cache'}),
+    fetch('data/current/md-release-gate.json',{cache:'no-cache'})
+   ]);
+   if(!data.ok||!gate.ok) throw new Error('Snapshot MD indisponibil');
+   const gateData=await gate.json();
+   if(gateData.status!=='PASS') throw new Error('Snapshot MD nu a trecut release gate');
+   geo=await data.json();
+   const stamp=gateData.generated_at?new Date(gateData.generated_at).toLocaleString('ro-RO'):'—';
+   const el=document.getElementById('md-source-status');
+   if(el) el.textContent='MD: snapshot local validat · '+stamp;
+  }else{
+   const data=await overpass(queries[key]);
+   geo=osmtogeojson(data);
+  }
   L.geoJSON(geo,{style,onEachFeature:(f,l)=>{
    l.bindPopup(popup(f));
    l.on({mouseover:e=>e.target.setStyle(hover),mouseout:e=>e.target.setStyle(style)});
   }}).addTo(group);
  }catch(e){
+  if(key==='md'){const el=document.getElementById('md-source-status');if(el) el.textContent='MD: snapshot local indisponibil';}
   console.error('Nu s-a putut încărca stratul '+key,e);
  }
 }
