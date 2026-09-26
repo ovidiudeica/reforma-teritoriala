@@ -175,7 +175,7 @@ const namePattern=x=>{
  const n=(x.name||'').trim();
  if(!n)return 'missing_name';
  if(/^sovetul\\s+sătesc\\b/i.test(n))return 'sovetul_satesc';
- if(/^(?:î\\.?p\\.?|i\\.?p\\.?)\\s*[„"']/i.test(n))return 'horticultural_association_prefix';
+ if(/^(?:î|i)\\s*\\.?\\s*p\\s*\\.?\\s*(?=[„"'«]|$)/iu.test(n))return 'horticultural_association_prefix';
  return 'other_named';
 };
 const structuralPattern=x=>{
