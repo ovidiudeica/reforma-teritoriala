@@ -148,7 +148,11 @@ const edgeAudit=noKeyDiagnostics.filter(d=>{
  const sameLegalId=Boolean(parentMatch?.legal_id&&d.official_name_candidates.some(x=>x.legal_id===parentMatch.legal_id));
  const exactNormalizedName=Boolean(parentMatch?.legal_name&&d.normalized_child_name===norm(parentMatch.legal_name));
  const distinctChildren=parentMatch?.legal_id?d.official_name_candidates.filter(x=>x.legal_id!==parentMatch.legal_id&&x.parent_code===parentMatch.legal_id):[];
- const selfParentPredicates={parentMatch:Boolean(parentMatch?.legal_id),parent_legal_id:parentMatch?.legal_id||null,same_legal_id:sameLegalId,exact_normalized_name:exactNormalizedName,distinct_children_count:distinctChildren.length,distinct_children:distinctChildren};
+ const entity=entityById.get(d.id);
+ const rawCuatmUniqueId=entity?.osm?.cuatm_unique_id??null, rawCuatmCode=entity?.osm?.cuatm_code??null;
+ const normalizedExplicitKeys=[rawCuatmUniqueId,rawCuatmCode].filter(Boolean).map(digits);
+ const explicitKeyLookups=normalizedExplicitKeys.map(key=>({key,official_candidate_count:(byCode.get(key)||[]).length,official_candidates:(byCode.get(key)||[]).map(h=>({legal_id:h.code,legal_name:h.name,parent_code:h.parent_code||null,parent_name:h.parent_name||null,status_code:h.status_code||null}))}));
+ const selfParentPredicates={parentMatch:Boolean(parentMatch?.legal_id),parent_legal_id:parentMatch?.legal_id||null,same_legal_id:sameLegalId,exact_normalized_name:exactNormalizedName,distinct_children_count:distinctChildren.length,distinct_children:distinctChildren,raw_cuatm_unique_id:rawCuatmUniqueId,raw_cuatm_code:rawCuatmCode,normalized_explicit_keys:normalizedExplicitKeys,explicit_key_count:normalizedExplicitKeys.length,explicit_key_lookups:explicitKeyLookups};
  return {...d,reconciliation_match_method:m?.match_method||null,reconciliation_unmatched_reason:m?.unmatched_reason||null,matching_candidate_count:matchingCandidates.length,matching_candidates:matchingCandidates,self_parent_predicates:selfParentPredicates,audit_category};
 });
 const edgeAuditCounts=edgeAudit.reduce((a,x)=>(a[x.audit_category]=(a[x.audit_category]||0)+1,a),{});
