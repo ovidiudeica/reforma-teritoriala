@@ -1,0 +1,1910 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T08:19:54.603Z",
+  "source": "OpenStreetMap API 0.6 relation history, way history and changeset metadata",
+  "policy": "Diagnostic only. Changeset comments/source tags are mapper-provided metadata and are evidence of editing intent, not authoritative legal evidence.",
+  "relations": [
+    {
+      "relation_id": 12207955,
+      "current_tags": {
+        "admin_level": "8",
+        "alt_name:ru": "Бельцы",
+        "boundary": "administrative",
+        "name": "Bălți",
+        "name:prefix": "orașul",
+        "name:ro": "Bălți",
+        "name:ru": "Бэлць",
+        "name:uk": "Бєльці",
+        "name:zh": "伯尔兹",
+        "type": "boundary",
+        "wikidata": "Q37801",
+        "wikipedia": "en:Bălți"
+      },
+      "created_changeset": 97726476,
+      "created_changeset_metadata": {
+        "changeset_id": 97726476,
+        "created_at": "2021-01-19T00:24:53Z",
+        "closed_at": "2021-01-19T00:24:56Z",
+        "user": "Moldovan_Merkator",
+        "uid": 6837259,
+        "changes_count": 17,
+        "tags": {
+          "changesets_count": "2481",
+          "comment": "minor corrections, added Bălți city boundary",
+          "created_by": "iD 2.19.5",
+          "host": "https://www.openstreetmap.org/edit",
+          "imagery_used": "Custom (https://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,maps:Linemap_2017&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={width} )",
+          "locale": "en"
+        }
+      },
+      "relation_versions": [
+        {
+          "version": 1,
+          "timestamp": "2021-01-19T00:24:56Z",
+          "changeset": 97726476,
+          "changeset_metadata": {
+            "changeset_id": 97726476,
+            "created_at": "2021-01-19T00:24:53Z",
+            "closed_at": "2021-01-19T00:24:56Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 17,
+            "tags": {
+              "changesets_count": "2481",
+              "comment": "minor corrections, added Bălți city boundary",
+              "created_by": "iD 2.19.5",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (https://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,maps:Linemap_2017&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={width} )",
+              "locale": "en"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "admin_level",
+              "from": null,
+              "to": "8"
+            },
+            {
+              "key": "alt_name:ru",
+              "from": null,
+              "to": "Бельцы"
+            },
+            {
+              "key": "boundary",
+              "from": null,
+              "to": "administrative"
+            },
+            {
+              "key": "name",
+              "from": null,
+              "to": "Bălți"
+            },
+            {
+              "key": "name:prefix",
+              "from": null,
+              "to": "Orașul"
+            },
+            {
+              "key": "name:ru",
+              "from": null,
+              "to": "Бэлць"
+            },
+            {
+              "key": "name:uk",
+              "from": null,
+              "to": "Бєльці"
+            },
+            {
+              "key": "type",
+              "from": null,
+              "to": "boundary"
+            }
+          ],
+          "members": {
+            "count": 8,
+            "added": [
+              "way:363915819:outer",
+              "way:378117971:outer",
+              "way:378117973:outer",
+              "way:378117972:outer",
+              "way:157685150:outer",
+              "way:378117975:outer",
+              "way:119068255:outer",
+              "way:157685145:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 2,
+          "timestamp": "2021-01-19T14:00:12Z",
+          "changeset": 97773989,
+          "changeset_metadata": {
+            "changeset_id": 97773989,
+            "created_at": "2021-01-19T14:00:09Z",
+            "closed_at": "2021-01-19T14:00:12Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 4,
+            "tags": {
+              "changesets_count": "2482",
+              "comment": "minor corrections",
+              "created_by": "iD 2.19.5",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (https://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,maps:Linemap_2017&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={width} );OpenStreetMap (Stan",
+              "locale": "en"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 9,
+            "added": [
+              "node:266185307:admin_centre"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 3,
+          "timestamp": "2021-06-28T16:28:27Z",
+          "changeset": 107099448,
+          "changeset_metadata": {
+            "changeset_id": 107099448,
+            "created_at": "2021-06-28T16:28:19Z",
+            "closed_at": "2021-06-28T16:28:27Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 183,
+            "tags": {
+              "changesets_count": "3265",
+              "comment": "Details and corrections",
+              "created_by": "iD 2.19.6",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,2020_ortofoto_moldova_centru,sector_cadastral&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={w",
+              "locale": "en"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 13,
+            "added": [
+              "way:958898918:outer",
+              "way:958898923:outer",
+              "way:958898919:outer",
+              "way:958898921:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 4,
+          "timestamp": "2021-06-28T21:51:47Z",
+          "changeset": 107112039,
+          "changeset_metadata": {
+            "changeset_id": 107112039,
+            "created_at": "2021-06-28T21:51:35Z",
+            "closed_at": "2021-06-28T21:51:48Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 124,
+            "tags": {
+              "changesets_count": "3266",
+              "comment": "minor fixes",
+              "created_by": "iD 2.19.6",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,2020_ortofoto_moldova_centru,terenuri,sector_cadastral&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1",
+              "locale": "en"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 16,
+            "added": [
+              "way:958974972:outer",
+              "way:378117974:outer",
+              "way:958974974:outer",
+              "way:958974973:outer"
+            ],
+            "removed": [
+              "way:378117975:outer"
+            ]
+          }
+        },
+        {
+          "version": 5,
+          "timestamp": "2021-06-28T22:08:30Z",
+          "changeset": 107112420,
+          "changeset_metadata": {
+            "changeset_id": 107112420,
+            "created_at": "2021-06-28T22:08:25Z",
+            "closed_at": "2021-06-28T22:08:30Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 30,
+            "tags": {
+              "changesets_count": "3267",
+              "comment": "Details and corrections",
+              "created_by": "iD 2.19.6",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,2020_ortofoto_moldova_centru,terenuri,sector_cadastral&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1",
+              "locale": "en",
+              "resolved:mismatched_geometry:unclosed_multipolygon_part": "1"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 21,
+            "added": [
+              "way:569453385:outer",
+              "way:958976983:outer",
+              "way:958976986:outer",
+              "way:958976987:outer",
+              "way:958976982:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 6,
+          "timestamp": "2021-06-29T14:21:20Z",
+          "changeset": 107153676,
+          "changeset_metadata": {
+            "changeset_id": 107153676,
+            "created_at": "2021-06-29T14:21:20Z",
+            "closed_at": "2021-06-29T14:21:21Z",
+            "user": "user_177389",
+            "uid": 177389,
+            "changes_count": 3,
+            "tags": {
+              "comment": "members sorted",
+              "created_by": "JOSM/1.5 (17919 de)"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 21,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 7,
+          "timestamp": "2022-12-16T11:38:12Z",
+          "changeset": 130152381,
+          "changeset_metadata": {
+            "changeset_id": 130152381,
+            "created_at": "2022-12-16T11:38:12Z",
+            "closed_at": "2022-12-16T11:38:13Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 279,
+            "tags": {
+              "changesets_count": "3834",
+              "comment": "details and corrections",
+              "created_by": "iD 2.23.2",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Moldova Ortophoto (2016);Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,2021_ortofoto_moldova_sud,cadastru_data:terenuri,cladiri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSP",
+              "locale": "en",
+              "resolved:outdated_tags:incomplete_tags": "2",
+              "warnings:crossing_ways:highway-waterway": "2"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 24,
+            "added": [
+              "way:1122604577:outer",
+              "way:1122604576:outer",
+              "way:1122604574:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 8,
+          "timestamp": "2024-01-15T23:37:29Z",
+          "changeset": 146301930,
+          "changeset_metadata": {
+            "changeset_id": 146301930,
+            "created_at": "2024-01-15T23:37:28Z",
+            "closed_at": "2024-01-15T23:37:29Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 185,
+            "tags": {
+              "changesets_count": "4024",
+              "comment": "details and corrections",
+              "created_by": "iD 2.27.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,cadastru_data:terenuri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={width} )",
+              "locale": "en"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 27,
+            "added": [
+              "way:1240022732:outer",
+              "way:1240022729:outer",
+              "way:1240022728:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 9,
+          "timestamp": "2024-01-16T00:55:30Z",
+          "changeset": 146303108,
+          "changeset_metadata": {
+            "changeset_id": 146303108,
+            "created_at": "2024-01-16T00:55:30Z",
+            "closed_at": "2024-01-16T00:55:31Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 178,
+            "tags": {
+              "changesets_count": "4025",
+              "comment": "details and corrections",
+              "created_by": "iD 2.27.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Esri World Imagery (Clarity) Beta;Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,cadastru_data:terenuri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&",
+              "locale": "en"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 29,
+            "added": [
+              "way:1240034790:outer",
+              "way:1240034789:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 10,
+          "timestamp": "2024-01-18T03:20:07Z",
+          "changeset": 146387738,
+          "changeset_metadata": {
+            "changeset_id": 146387738,
+            "created_at": "2024-01-18T03:20:07Z",
+            "closed_at": "2024-01-18T03:20:08Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 735,
+            "tags": {
+              "changesets_count": "4029",
+              "comment": "details and corrections",
+              "created_by": "iD 2.27.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,2021_ortofoto_moldova_sud,cadastru_data:terenuri,cladiri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&",
+              "locale": "en",
+              "resolved:crossing_ways:building-building": "1"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 31,
+            "added": [
+              "way:1240654268:outer",
+              "way:1240654267:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 11,
+          "timestamp": "2024-01-22T01:43:02Z",
+          "changeset": 146533484,
+          "changeset_metadata": {
+            "changeset_id": 146533484,
+            "created_at": "2024-01-22T01:43:02Z",
+            "closed_at": "2024-01-22T01:43:02Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 273,
+            "tags": {
+              "changesets_count": "4037",
+              "comment": "details and corrections",
+              "created_by": "iD 2.27.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,2021_ortofoto_moldova_sud,cadastru_data:terenuri,cladiri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&",
+              "locale": "en"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 33,
+            "added": [
+              "way:1241802040:outer",
+              "way:1241802041:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 12,
+          "timestamp": "2025-04-27T01:43:38Z",
+          "changeset": 165486600,
+          "changeset_metadata": {
+            "changeset_id": 165486600,
+            "created_at": "2025-04-27T00:27:10Z",
+            "closed_at": "2025-04-27T01:43:40Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 6669,
+            "tags": {
+              "comment": "boundaries in Rîșcani district",
+              "created_by": "JOSM/1.5 (19369 en)"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 31,
+            "added": [
+              "way:1381570246:outer",
+              "way:1381570237:outer",
+              "way:1381570232:outer",
+              "way:1381570231:outer",
+              "way:1381570236:outer",
+              "way:1381570245:outer"
+            ],
+            "removed": [
+              "way:958974972:outer",
+              "way:1241802040:outer",
+              "way:1241802041:outer",
+              "way:157685150:outer",
+              "way:958898921:outer",
+              "way:958898919:outer",
+              "way:958898923:outer",
+              "way:958898918:outer"
+            ]
+          }
+        },
+        {
+          "version": 13,
+          "timestamp": "2025-05-03T22:57:41Z",
+          "changeset": 165779231,
+          "changeset_metadata": {
+            "changeset_id": 165779231,
+            "created_at": "2025-05-03T22:39:53Z",
+            "closed_at": "2025-05-03T22:57:42Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 4846,
+            "tags": {
+              "comment": "boundaries in Sîngerei district",
+              "created_by": "JOSM/1.5 (19396 en)"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 22,
+            "added": [
+              "way:1383351068:outer",
+              "way:1383351096:outer",
+              "way:1383351067:outer",
+              "way:1383351076:outer"
+            ],
+            "removed": [
+              "way:363915819:outer",
+              "way:378117972:outer",
+              "way:378117973:outer",
+              "way:1240654268:outer",
+              "way:1240034790:outer",
+              "way:378117971:outer",
+              "way:1240034789:outer",
+              "way:1240022732:outer",
+              "way:1240022729:outer",
+              "way:1240022728:outer",
+              "way:1122604577:outer",
+              "way:1122604576:outer",
+              "way:1122604574:outer"
+            ]
+          }
+        },
+        {
+          "version": 14,
+          "timestamp": "2025-06-14T17:05:55Z",
+          "changeset": 167621478,
+          "changeset_metadata": {
+            "changeset_id": 167621478,
+            "created_at": "2025-06-14T17:05:47Z",
+            "closed_at": "2025-06-14T17:27:56Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 5413,
+            "tags": {
+              "comment": "See pages 61-64 from Address System Guide",
+              "created_by": "JOSM/1.5 (19412 en)",
+              "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "name:prefix",
+              "from": "Orașul",
+              "to": "orașul"
+            },
+            {
+              "key": "test",
+              "from": null,
+              "to": "test"
+            }
+          ],
+          "members": {
+            "count": 22,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 15,
+          "timestamp": "2025-06-14T18:03:39Z",
+          "changeset": 167623335,
+          "changeset_metadata": {
+            "changeset_id": 167623335,
+            "created_at": "2025-06-14T18:03:31Z",
+            "closed_at": "2025-06-14T18:03:51Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 5403,
+            "tags": {
+              "comment": "See pages 61-64 from Address System Guide",
+              "created_by": "JOSM/1.5 (19412 en)",
+              "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "test",
+              "from": "test",
+              "to": null
+            }
+          ],
+          "members": {
+            "count": 22,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 16,
+          "timestamp": "2025-07-07T14:38:05Z",
+          "changeset": 168609158,
+          "changeset_metadata": {
+            "changeset_id": 168609158,
+            "created_at": "2025-07-07T14:38:04Z",
+            "closed_at": "2025-07-07T14:38:05Z",
+            "user": "Gikü",
+            "uid": 23047360,
+            "changes_count": 25,
+            "tags": {
+              "changesets_count": "16",
+              "comment": "adding wikidata IDs to communes in miscellaneous Central Moldova districts",
+              "created_by": "iD 2.34.1",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Moldova Extended Orthophoto (2016)",
+              "locale": "en-US"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "wikidata",
+              "from": null,
+              "to": "Q37801"
+            },
+            {
+              "key": "wikipedia",
+              "from": null,
+              "to": "en:Bălți"
+            }
+          ],
+          "members": {
+            "count": 22,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 17,
+          "timestamp": "2025-08-21T12:34:03Z",
+          "changeset": 170777428,
+          "changeset_metadata": {
+            "changeset_id": 170777428,
+            "created_at": "2025-08-21T12:34:01Z",
+            "closed_at": "2025-08-21T12:34:04Z",
+            "user": "jack walker2",
+            "uid": 22831835,
+            "changes_count": 32,
+            "tags": {
+              "changesets_count": "124",
+              "comment": "add name:zh",
+              "created_by": "iD 2.35.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Moldova Extended Orthophoto (2016);OpenStreetMap (Standard)",
+              "locale": "zh-CN"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "name:zh",
+              "from": null,
+              "to": "伯尔兹"
+            }
+          ],
+          "members": {
+            "count": 22,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 18,
+          "timestamp": "2026-01-31T23:22:18Z",
+          "changeset": 177947047,
+          "changeset_metadata": {
+            "changeset_id": 177947047,
+            "created_at": "2026-01-31T23:22:18Z",
+            "closed_at": "2026-01-31T23:22:19Z",
+            "user": "Oleg_MD",
+            "uid": 2995251,
+            "changes_count": 9,
+            "tags": {
+              "comment": "Denumiri de localități - municipiile Bălți și Bender",
+              "created_by": "JOSM/1.5 (19439 en)",
+              "source": "Esri World Imagery; Legea nr. 764/2001 &#10;privind organizarea administrativ-teritorială a Republicii Moldova (https://www.legis.md/cautare/getResults?doc_id=149266&lang=ro#)"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "name:ro",
+              "from": null,
+              "to": "Bălți"
+            }
+          ],
+          "members": {
+            "count": 22,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 19,
+          "timestamp": "2026-06-17T20:54:59Z",
+          "changeset": 184245310,
+          "changeset_metadata": {
+            "changeset_id": 184245310,
+            "created_at": "2026-06-17T20:54:50Z",
+            "closed_at": "2026-06-17T20:54:59Z",
+            "user": "Русский Человек",
+            "uid": 8671833,
+            "changes_count": 5,
+            "tags": {
+              "changesets_count": "37",
+              "comment": "Clarification of names of some settlements according to sources: Oxford Regional Economic Atlas, Atlas östliches und südöstliches Europa, etc.",
+              "created_by": "iD 2.40.0",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Moldova Extended Orthophoto (2016)",
+              "locale": "ru"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "alt_name:ru",
+              "from": "Бельцы",
+              "to": null
+            },
+            {
+              "key": "name",
+              "from": "Bălți",
+              "to": "Beltsy"
+            },
+            {
+              "key": "name:ru",
+              "from": "Бэлць",
+              "to": "Бельцы"
+            },
+            {
+              "key": "wikidata",
+              "from": "Q37801",
+              "to": null
+            },
+            {
+              "key": "wikipedia",
+              "from": "en:Bălți",
+              "to": "en:Beltsy"
+            }
+          ],
+          "members": {
+            "count": 22,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 20,
+          "timestamp": "2026-06-18T16:14:07Z",
+          "changeset": 184278938,
+          "changeset_metadata": {
+            "changeset_id": 184278938,
+            "created_at": "2026-06-18T16:14:07Z",
+            "closed_at": "2026-06-18T16:14:07Z",
+            "user": "Русский Человек",
+            "uid": 8671833,
+            "changes_count": 5,
+            "tags": {
+              "changesets_count": "38",
+              "comment": "Revert.",
+              "created_by": "osm-revert git#c8b2ad4",
+              "host": "https://revert.monicz.dev",
+              "revert:id": "https://www.openstreetmap.org/changeset/184245310"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "alt_name:ru",
+              "from": null,
+              "to": "Бельцы"
+            },
+            {
+              "key": "name",
+              "from": "Beltsy",
+              "to": "Bălți"
+            },
+            {
+              "key": "name:ru",
+              "from": "Бельцы",
+              "to": "Бэлць"
+            },
+            {
+              "key": "wikidata",
+              "from": null,
+              "to": "Q37801"
+            },
+            {
+              "key": "wikipedia",
+              "from": "en:Beltsy",
+              "to": "en:Bălți"
+            }
+          ],
+          "members": {
+            "count": 22,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 21,
+          "timestamp": "2026-07-12T01:26:59Z",
+          "changeset": 185567442,
+          "changeset_metadata": {
+            "changeset_id": 185567442,
+            "created_at": "2026-07-12T01:26:59Z",
+            "closed_at": "2026-07-12T01:27:00Z",
+            "user": "Fizzie-DWG",
+            "uid": 461130,
+            "changes_count": 36,
+            "tags": {
+              "changesets_count": "36651",
+              "comment": "DWG revert - invalid changes, abusive language",
+              "created_by": "osm-revert git#c8b2ad4",
+              "host": "https://revert.monicz.dev",
+              "revert:fix:node": "3",
+              "revert:fix:relation": "13",
+              "revert:id": "159590408;164843656;165912074;170606233;184201872;184202494;184202956;184202991;184203202;184203290;184203666;184204063;184204381;184204554;184204634;184244115;184244692;184244771;184245310;184278938"
+            }
+          },
+          "tag_changes": [],
+          "members": {
+            "count": 22,
+            "added": [],
+            "removed": []
+          }
+        }
+      ]
+    },
+    {
+      "relation_id": 18967626,
+      "current_tags": {
+        "admin_level": "9",
+        "boundary": "administrative",
+        "full_name": "municipiul Bălți",
+        "name": "Bălți",
+        "name:prefix": "municipiul",
+        "name:ro": "Bălți",
+        "name:ru": "Бельцы",
+        "name:suffix:en": "municipality",
+        "official_name": "municipiul Bălți",
+        "place": "city",
+        "ref:cuatm:codunic": "0300",
+        "type": "boundary"
+      },
+      "created_changeset": 164736346,
+      "created_changeset_metadata": {
+        "changeset_id": 164736346,
+        "created_at": "2025-04-09T17:48:05Z",
+        "closed_at": "2025-04-09T17:48:43Z",
+        "user": "Moldovan_Merkator",
+        "uid": 6837259,
+        "changes_count": 8558,
+        "tags": {
+          "comment": "added intravilan boundaries",
+          "created_by": "JOSM/1.5 (19369 en)"
+        }
+      },
+      "relation_versions": [
+        {
+          "version": 1,
+          "timestamp": "2025-04-09T17:48:35Z",
+          "changeset": 164736346,
+          "changeset_metadata": {
+            "changeset_id": 164736346,
+            "created_at": "2025-04-09T17:48:05Z",
+            "closed_at": "2025-04-09T17:48:43Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 8558,
+            "tags": {
+              "comment": "added intravilan boundaries",
+              "created_by": "JOSM/1.5 (19369 en)"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "admin_level",
+              "from": null,
+              "to": "9"
+            },
+            {
+              "key": "boundary",
+              "from": null,
+              "to": "administrative"
+            },
+            {
+              "key": "cuatm",
+              "from": null,
+              "to": "0300"
+            },
+            {
+              "key": "full_name",
+              "from": null,
+              "to": "municipiul Bălți"
+            },
+            {
+              "key": "name",
+              "from": null,
+              "to": "Bălți"
+            },
+            {
+              "key": "name:prefix",
+              "from": null,
+              "to": "Municipiul"
+            },
+            {
+              "key": "name:suffix:en",
+              "from": null,
+              "to": "Municipality"
+            },
+            {
+              "key": "official_name",
+              "from": null,
+              "to": "municipiul Bălți"
+            },
+            {
+              "key": "place",
+              "from": null,
+              "to": "city"
+            },
+            {
+              "key": "type",
+              "from": null,
+              "to": "boundary"
+            }
+          ],
+          "members": {
+            "count": 4,
+            "added": [
+              "way:1376180066:outer",
+              "way:1376178594:outer",
+              "way:1376179095:outer",
+              "way:1376178593:outer"
+            ],
+            "removed": []
+          }
+        },
+        {
+          "version": 2,
+          "timestamp": "2025-05-04T19:43:33Z",
+          "changeset": 165816761,
+          "changeset_metadata": {
+            "changeset_id": 165816761,
+            "created_at": "2025-05-04T19:43:32Z",
+            "closed_at": "2025-05-04T19:43:40Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 1767,
+            "tags": {
+              "comment": "fix",
+              "created_by": "JOSM/1.5 (19396 en)"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "cuatm",
+              "from": "0300",
+              "to": null
+            },
+            {
+              "key": "ref:cuatm:codunic",
+              "from": null,
+              "to": "0300"
+            }
+          ],
+          "members": {
+            "count": 4,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 3,
+          "timestamp": "2025-06-14T17:06:03Z",
+          "changeset": 167621478,
+          "changeset_metadata": {
+            "changeset_id": 167621478,
+            "created_at": "2025-06-14T17:05:47Z",
+            "closed_at": "2025-06-14T17:27:56Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 5413,
+            "tags": {
+              "comment": "See pages 61-64 from Address System Guide",
+              "created_by": "JOSM/1.5 (19412 en)",
+              "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "name:prefix",
+              "from": "Municipiul",
+              "to": "municipiul"
+            },
+            {
+              "key": "name:suffix:en",
+              "from": "Municipality",
+              "to": "municipality"
+            },
+            {
+              "key": "test",
+              "from": null,
+              "to": "test"
+            }
+          ],
+          "members": {
+            "count": 4,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 4,
+          "timestamp": "2025-06-14T18:03:47Z",
+          "changeset": 167623335,
+          "changeset_metadata": {
+            "changeset_id": 167623335,
+            "created_at": "2025-06-14T18:03:31Z",
+            "closed_at": "2025-06-14T18:03:51Z",
+            "user": "Moldovan_Merkator",
+            "uid": 6837259,
+            "changes_count": 5403,
+            "tags": {
+              "comment": "See pages 61-64 from Address System Guide",
+              "created_by": "JOSM/1.5 (19412 en)",
+              "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "test",
+              "from": "test",
+              "to": null
+            }
+          ],
+          "members": {
+            "count": 4,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 5,
+          "timestamp": "2026-01-31T23:22:18Z",
+          "changeset": 177947047,
+          "changeset_metadata": {
+            "changeset_id": 177947047,
+            "created_at": "2026-01-31T23:22:18Z",
+            "closed_at": "2026-01-31T23:22:19Z",
+            "user": "Oleg_MD",
+            "uid": 2995251,
+            "changes_count": 9,
+            "tags": {
+              "comment": "Denumiri de localități - municipiile Bălți și Bender",
+              "created_by": "JOSM/1.5 (19439 en)",
+              "source": "Esri World Imagery; Legea nr. 764/2001 &#10;privind organizarea administrativ-teritorială a Republicii Moldova (https://www.legis.md/cautare/getResults?doc_id=149266&lang=ro#)"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "name:ro",
+              "from": null,
+              "to": "Bălți"
+            }
+          ],
+          "members": {
+            "count": 4,
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "version": 6,
+          "timestamp": "2026-08-18T07:32:40Z",
+          "changeset": 187623522,
+          "changeset_metadata": {
+            "changeset_id": 187623522,
+            "created_at": "2026-08-18T07:32:40Z",
+            "closed_at": "2026-08-18T07:32:41Z",
+            "user": "Maturi0n",
+            "uid": 2052948,
+            "changes_count": 9,
+            "tags": {
+              "changesets_count": "73640",
+              "comment": "details",
+              "created_by": "iD 2.42.0",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Moldova Extended Orthophoto (2016)",
+              "locale": "ru"
+            }
+          },
+          "tag_changes": [
+            {
+              "key": "name:ru",
+              "from": null,
+              "to": "Бельцы"
+            }
+          ],
+          "members": {
+            "count": 4,
+            "added": [],
+            "removed": []
+          }
+        }
+      ]
+    }
+  ],
+  "semantic_changesets": [
+    {
+      "changeset_id": 8544932,
+      "created_at": "2011-06-25T17:27:28Z",
+      "user": "Badarau Andrei",
+      "changes_count": 485,
+      "semantic_tags": {
+        "comment": "acoperire glodeni",
+        "created_by": "JOSM/1.5 (4064 it)"
+      }
+    },
+    {
+      "changeset_id": 11164476,
+      "created_at": "2012-03-31T10:36:02Z",
+      "user": "Jekader",
+      "changes_count": 103,
+      "semantic_tags": {
+        "comment": "replacing non-ODbL data",
+        "created_by": "JOSM/1.5 (5138 ru)"
+      }
+    },
+    {
+      "changeset_id": 35053100,
+      "created_at": "2015-11-03T10:46:54Z",
+      "user": "Kostik",
+      "changes_count": 185,
+      "semantic_tags": {
+        "comment": "fix (правки ошибок адресации)",
+        "created_by": "JOSM/1.5 (8969 ru)"
+      }
+    },
+    {
+      "changeset_id": 57158735,
+      "created_at": "2018-03-13T21:18:11Z",
+      "user": "Anatolie GOLOVCO - Lightcyphers",
+      "changes_count": 9245,
+      "semantic_tags": {
+        "source": "maps.md",
+        "comment": "add railway land",
+        "created_by": "JOSM/1.5 (13500 en)"
+      }
+    },
+    {
+      "changeset_id": 97726476,
+      "created_at": "2021-01-19T00:24:53Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 17,
+      "semantic_tags": {
+        "comment": "minor corrections, added Bălți city boundary",
+        "locale": "en",
+        "created_by": "iD 2.19.5"
+      }
+    },
+    {
+      "changeset_id": 97773989,
+      "created_at": "2021-01-19T14:00:09Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 4,
+      "semantic_tags": {
+        "comment": "minor corrections",
+        "locale": "en",
+        "created_by": "iD 2.19.5"
+      }
+    },
+    {
+      "changeset_id": 107099448,
+      "created_at": "2021-06-28T16:28:19Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 183,
+      "semantic_tags": {
+        "comment": "Details and corrections",
+        "locale": "en",
+        "created_by": "iD 2.19.6"
+      }
+    },
+    {
+      "changeset_id": 107112039,
+      "created_at": "2021-06-28T21:51:35Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 124,
+      "semantic_tags": {
+        "comment": "minor fixes",
+        "locale": "en",
+        "created_by": "iD 2.19.6"
+      }
+    },
+    {
+      "changeset_id": 107112420,
+      "created_at": "2021-06-28T22:08:25Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 30,
+      "semantic_tags": {
+        "comment": "Details and corrections",
+        "locale": "en",
+        "created_by": "iD 2.19.6"
+      }
+    },
+    {
+      "changeset_id": 107153676,
+      "created_at": "2021-06-29T14:21:20Z",
+      "user": "user_177389",
+      "changes_count": 3,
+      "semantic_tags": {
+        "comment": "members sorted",
+        "created_by": "JOSM/1.5 (17919 de)"
+      }
+    },
+    {
+      "changeset_id": 130152381,
+      "created_at": "2022-12-16T11:38:12Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 279,
+      "semantic_tags": {
+        "comment": "details and corrections",
+        "locale": "en",
+        "created_by": "iD 2.23.2"
+      }
+    },
+    {
+      "changeset_id": 144278137,
+      "created_at": "2023-11-21T09:12:25Z",
+      "user": "Mihai Spătaru",
+      "changes_count": 949,
+      "semantic_tags": {
+        "comment": "Actualizări zona Bălți.",
+        "locale": "en",
+        "created_by": "iD 2.27.3"
+      }
+    },
+    {
+      "changeset_id": 146301930,
+      "created_at": "2024-01-15T23:37:28Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 185,
+      "semantic_tags": {
+        "comment": "details and corrections",
+        "locale": "en",
+        "created_by": "iD 2.27.3"
+      }
+    },
+    {
+      "changeset_id": 146303108,
+      "created_at": "2024-01-16T00:55:30Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 178,
+      "semantic_tags": {
+        "comment": "details and corrections",
+        "locale": "en",
+        "created_by": "iD 2.27.3"
+      }
+    },
+    {
+      "changeset_id": 146387738,
+      "created_at": "2024-01-18T03:20:07Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 735,
+      "semantic_tags": {
+        "comment": "details and corrections",
+        "locale": "en",
+        "created_by": "iD 2.27.3"
+      }
+    },
+    {
+      "changeset_id": 146461096,
+      "created_at": "2024-01-19T23:19:47Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 205,
+      "semantic_tags": {
+        "comment": "details and corrections",
+        "locale": "en",
+        "created_by": "iD 2.27.3"
+      }
+    },
+    {
+      "changeset_id": 146533484,
+      "created_at": "2024-01-22T01:43:02Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 273,
+      "semantic_tags": {
+        "comment": "details and corrections",
+        "locale": "en",
+        "created_by": "iD 2.27.3"
+      }
+    },
+    {
+      "changeset_id": 164736346,
+      "created_at": "2025-04-09T17:48:05Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 8558,
+      "semantic_tags": {
+        "comment": "added intravilan boundaries",
+        "created_by": "JOSM/1.5 (19369 en)"
+      }
+    },
+    {
+      "changeset_id": 165486600,
+      "created_at": "2025-04-27T00:27:10Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 6669,
+      "semantic_tags": {
+        "comment": "boundaries in Rîșcani district",
+        "created_by": "JOSM/1.5 (19369 en)"
+      }
+    },
+    {
+      "changeset_id": 165779231,
+      "created_at": "2025-05-03T22:39:53Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 4846,
+      "semantic_tags": {
+        "comment": "boundaries in Sîngerei district",
+        "created_by": "JOSM/1.5 (19396 en)"
+      }
+    },
+    {
+      "changeset_id": 165816761,
+      "created_at": "2025-05-04T19:43:32Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 1767,
+      "semantic_tags": {
+        "comment": "fix",
+        "created_by": "JOSM/1.5 (19396 en)"
+      }
+    },
+    {
+      "changeset_id": 167621478,
+      "created_at": "2025-06-14T17:05:47Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 5413,
+      "semantic_tags": {
+        "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf",
+        "comment": "See pages 61-64 from Address System Guide",
+        "created_by": "JOSM/1.5 (19412 en)"
+      }
+    },
+    {
+      "changeset_id": 167623335,
+      "created_at": "2025-06-14T18:03:31Z",
+      "user": "Moldovan_Merkator",
+      "changes_count": 5403,
+      "semantic_tags": {
+        "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf",
+        "comment": "See pages 61-64 from Address System Guide",
+        "created_by": "JOSM/1.5 (19412 en)"
+      }
+    },
+    {
+      "changeset_id": 168609158,
+      "created_at": "2025-07-07T14:38:04Z",
+      "user": "Gikü",
+      "changes_count": 25,
+      "semantic_tags": {
+        "comment": "adding wikidata IDs to communes in miscellaneous Central Moldova districts",
+        "locale": "en-US",
+        "created_by": "iD 2.34.1"
+      }
+    },
+    {
+      "changeset_id": 170777428,
+      "created_at": "2025-08-21T12:34:01Z",
+      "user": "jack walker2",
+      "changes_count": 32,
+      "semantic_tags": {
+        "comment": "add name:zh",
+        "locale": "zh-CN",
+        "created_by": "iD 2.35.3"
+      }
+    },
+    {
+      "changeset_id": 174274364,
+      "created_at": "2025-11-06T08:02:39Z",
+      "user": "Mihai Spătaru",
+      "changes_count": 849,
+      "semantic_tags": {
+        "comment": "Actualizări zona Nord.",
+        "locale": "en",
+        "created_by": "iD 2.37.3"
+      }
+    },
+    {
+      "changeset_id": 177947047,
+      "created_at": "2026-01-31T23:22:18Z",
+      "user": "Oleg_MD",
+      "changes_count": 9,
+      "semantic_tags": {
+        "source": "Esri World Imagery; Legea nr. 764/2001 &#10;privind organizarea administrativ-teritorială a Republicii Moldova (https://www.legis.md/cautare/getResults?doc_id=149266&lang=ro#)",
+        "comment": "Denumiri de localități - municipiile Bălți și Bender",
+        "created_by": "JOSM/1.5 (19439 en)"
+      }
+    },
+    {
+      "changeset_id": 184245310,
+      "created_at": "2026-06-17T20:54:50Z",
+      "user": "Русский Человек",
+      "changes_count": 5,
+      "semantic_tags": {
+        "comment": "Clarification of names of some settlements according to sources: Oxford Regional Economic Atlas, Atlas östliches und südöstliches Europa, etc.",
+        "locale": "ru",
+        "created_by": "iD 2.40.0"
+      }
+    },
+    {
+      "changeset_id": 184278938,
+      "created_at": "2026-06-18T16:14:07Z",
+      "user": "Русский Человек",
+      "changes_count": 5,
+      "semantic_tags": {
+        "comment": "Revert.",
+        "created_by": "osm-revert git#c8b2ad4"
+      }
+    },
+    {
+      "changeset_id": 184519539,
+      "created_at": "2026-06-24T11:40:18Z",
+      "user": "LakeTorrens",
+      "changes_count": 54,
+      "semantic_tags": {
+        "source": "Mapbox Satellite; Mapillary",
+        "comment": "Modified geometry near Bălți #adt",
+        "hashtags": "#adt",
+        "created_by": "JOSM/1.5 (19481 en)"
+      }
+    },
+    {
+      "changeset_id": 185567442,
+      "created_at": "2026-07-12T01:26:59Z",
+      "user": "Fizzie-DWG",
+      "changes_count": 36,
+      "semantic_tags": {
+        "comment": "DWG revert - invalid changes, abusive language",
+        "created_by": "osm-revert git#c8b2ad4"
+      }
+    },
+    {
+      "changeset_id": 187623522,
+      "created_at": "2026-08-18T07:32:40Z",
+      "user": "Maturi0n",
+      "changes_count": 9,
+      "semantic_tags": {
+        "comment": "details",
+        "locale": "ru",
+        "created_by": "iD 2.42.0"
+      }
+    }
+  ],
+  "all_changesets": {
+    "8544932": {
+      "changeset_id": 8544932,
+      "created_at": "2011-06-25T17:27:28Z",
+      "closed_at": "2011-06-25T17:28:14Z",
+      "user": "Badarau Andrei",
+      "uid": 174344,
+      "changes_count": 485,
+      "tags": {
+        "comment": "acoperire glodeni",
+        "created_by": "JOSM/1.5 (4064 it)"
+      }
+    },
+    "11164476": {
+      "changeset_id": 11164476,
+      "created_at": "2012-03-31T10:36:02Z",
+      "closed_at": "2012-03-31T10:36:33Z",
+      "user": "Jekader",
+      "uid": 48157,
+      "changes_count": 103,
+      "tags": {
+        "comment": "replacing non-ODbL data",
+        "created_by": "JOSM/1.5 (5138 ru)"
+      }
+    },
+    "35053100": {
+      "changeset_id": 35053100,
+      "created_at": "2015-11-03T10:46:54Z",
+      "closed_at": "2015-11-03T10:47:11Z",
+      "user": "Kostik",
+      "uid": 384084,
+      "changes_count": 185,
+      "tags": {
+        "comment": "fix (правки ошибок адресации)",
+        "created_by": "JOSM/1.5 (8969 ru)"
+      }
+    },
+    "57158735": {
+      "changeset_id": 57158735,
+      "created_at": "2018-03-13T21:18:11Z",
+      "closed_at": "2018-03-13T21:24:03Z",
+      "user": "Anatolie GOLOVCO - Lightcyphers",
+      "uid": 7753308,
+      "changes_count": 9245,
+      "tags": {
+        "comment": "add railway land",
+        "created_by": "JOSM/1.5 (13500 en)",
+        "source": "maps.md"
+      }
+    },
+    "97726476": {
+      "changeset_id": 97726476,
+      "created_at": "2021-01-19T00:24:53Z",
+      "closed_at": "2021-01-19T00:24:56Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 17,
+      "tags": {
+        "changesets_count": "2481",
+        "comment": "minor corrections, added Bălți city boundary",
+        "created_by": "iD 2.19.5",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Custom (https://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,maps:Linemap_2017&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={width} )",
+        "locale": "en"
+      }
+    },
+    "97773989": {
+      "changeset_id": 97773989,
+      "created_at": "2021-01-19T14:00:09Z",
+      "closed_at": "2021-01-19T14:00:12Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 4,
+      "tags": {
+        "changesets_count": "2482",
+        "comment": "minor corrections",
+        "created_by": "iD 2.19.5",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Custom (https://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,maps:Linemap_2017&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={width} );OpenStreetMap (Stan",
+        "locale": "en"
+      }
+    },
+    "107099448": {
+      "changeset_id": 107099448,
+      "created_at": "2021-06-28T16:28:19Z",
+      "closed_at": "2021-06-28T16:28:27Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 183,
+      "tags": {
+        "changesets_count": "3265",
+        "comment": "Details and corrections",
+        "created_by": "iD 2.19.6",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,2020_ortofoto_moldova_centru,sector_cadastral&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={w",
+        "locale": "en"
+      }
+    },
+    "107112039": {
+      "changeset_id": 107112039,
+      "created_at": "2021-06-28T21:51:35Z",
+      "closed_at": "2021-06-28T21:51:48Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 124,
+      "tags": {
+        "changesets_count": "3266",
+        "comment": "minor fixes",
+        "created_by": "iD 2.19.6",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,2020_ortofoto_moldova_centru,terenuri,sector_cadastral&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1",
+        "locale": "en"
+      }
+    },
+    "107112420": {
+      "changeset_id": 107112420,
+      "created_at": "2021-06-28T22:08:25Z",
+      "closed_at": "2021-06-28T22:08:30Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 30,
+      "tags": {
+        "changesets_count": "3267",
+        "comment": "Details and corrections",
+        "created_by": "iD 2.19.6",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,2020_ortofoto_moldova_centru,terenuri,sector_cadastral&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1",
+        "locale": "en",
+        "resolved:mismatched_geometry:unclosed_multipolygon_part": "1"
+      }
+    },
+    "107153676": {
+      "changeset_id": 107153676,
+      "created_at": "2021-06-29T14:21:20Z",
+      "closed_at": "2021-06-29T14:21:21Z",
+      "user": "user_177389",
+      "uid": 177389,
+      "changes_count": 3,
+      "tags": {
+        "comment": "members sorted",
+        "created_by": "JOSM/1.5 (17919 de)"
+      }
+    },
+    "130152381": {
+      "changeset_id": 130152381,
+      "created_at": "2022-12-16T11:38:12Z",
+      "closed_at": "2022-12-16T11:38:13Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 279,
+      "tags": {
+        "changesets_count": "3834",
+        "comment": "details and corrections",
+        "created_by": "iD 2.23.2",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Moldova Ortophoto (2016);Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,2021_ortofoto_moldova_sud,cadastru_data:terenuri,cladiri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSP",
+        "locale": "en",
+        "resolved:outdated_tags:incomplete_tags": "2",
+        "warnings:crossing_ways:highway-waterway": "2"
+      }
+    },
+    "144278137": {
+      "changeset_id": 144278137,
+      "created_at": "2023-11-21T09:12:25Z",
+      "closed_at": "2023-11-21T09:12:26Z",
+      "user": "Mihai Spătaru",
+      "uid": 9020094,
+      "changes_count": 949,
+      "tags": {
+        "changesets_count": "2974",
+        "comment": "Actualizări zona Bălți.",
+        "created_by": "iD 2.27.3",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Moldova Ortophoto (2016)",
+        "locale": "en",
+        "resolved:crossing_ways:highway-waterway": "4",
+        "resolved:outdated_tags:incomplete_tags": "2",
+        "warnings:crossing_ways:highway-waterway": "1",
+        "warnings:impossible_oneway:waterway": "3",
+        "warnings:suspicious_name:generic_name": "1"
+      }
+    },
+    "146301930": {
+      "changeset_id": 146301930,
+      "created_at": "2024-01-15T23:37:28Z",
+      "closed_at": "2024-01-15T23:37:29Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 185,
+      "tags": {
+        "changesets_count": "4024",
+        "comment": "details and corrections",
+        "created_by": "iD 2.27.3",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,cadastru_data:terenuri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={width} )",
+        "locale": "en"
+      }
+    },
+    "146303108": {
+      "changeset_id": 146303108,
+      "created_at": "2024-01-16T00:55:30Z",
+      "closed_at": "2024-01-16T00:55:31Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 178,
+      "tags": {
+        "changesets_count": "4025",
+        "comment": "details and corrections",
+        "created_by": "iD 2.27.3",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Esri World Imagery (Clarity) Beta;Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,cadastru_data:terenuri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&",
+        "locale": "en"
+      }
+    },
+    "146387738": {
+      "changeset_id": 146387738,
+      "created_at": "2024-01-18T03:20:07Z",
+      "closed_at": "2024-01-18T03:20:08Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 735,
+      "tags": {
+        "changesets_count": "4029",
+        "comment": "details and corrections",
+        "created_by": "iD 2.27.3",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,2021_ortofoto_moldova_sud,cadastru_data:terenuri,cladiri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&",
+        "locale": "en",
+        "resolved:crossing_ways:building-building": "1"
+      }
+    },
+    "146461096": {
+      "changeset_id": 146461096,
+      "created_at": "2024-01-19T23:19:47Z",
+      "closed_at": "2024-01-19T23:19:48Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 205,
+      "tags": {
+        "changesets_count": "4035",
+        "comment": "details and corrections",
+        "created_by": "iD 2.27.3",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Moldova Ortophoto (2016);Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,cadastru_data:terenuri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={wi",
+        "locale": "en"
+      }
+    },
+    "146533484": {
+      "changeset_id": 146533484,
+      "created_at": "2024-01-22T01:43:02Z",
+      "closed_at": "2024-01-22T01:43:02Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 273,
+      "tags": {
+        "changesets_count": "4037",
+        "comment": "details and corrections",
+        "created_by": "iD 2.27.3",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortochis_2014,2021_ortofoto_moldova_sud,cadastru_data:terenuri,cladiri&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&",
+        "locale": "en"
+      }
+    },
+    "164736346": {
+      "changeset_id": 164736346,
+      "created_at": "2025-04-09T17:48:05Z",
+      "closed_at": "2025-04-09T17:48:43Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 8558,
+      "tags": {
+        "comment": "added intravilan boundaries",
+        "created_by": "JOSM/1.5 (19369 en)"
+      }
+    },
+    "165486600": {
+      "changeset_id": 165486600,
+      "created_at": "2025-04-27T00:27:10Z",
+      "closed_at": "2025-04-27T01:43:40Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 6669,
+      "tags": {
+        "comment": "boundaries in Rîșcani district",
+        "created_by": "JOSM/1.5 (19369 en)"
+      }
+    },
+    "165779231": {
+      "changeset_id": 165779231,
+      "created_at": "2025-05-03T22:39:53Z",
+      "closed_at": "2025-05-03T22:57:42Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 4846,
+      "tags": {
+        "comment": "boundaries in Sîngerei district",
+        "created_by": "JOSM/1.5 (19396 en)"
+      }
+    },
+    "165816761": {
+      "changeset_id": 165816761,
+      "created_at": "2025-05-04T19:43:32Z",
+      "closed_at": "2025-05-04T19:43:40Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 1767,
+      "tags": {
+        "comment": "fix",
+        "created_by": "JOSM/1.5 (19396 en)"
+      }
+    },
+    "167621478": {
+      "changeset_id": 167621478,
+      "created_at": "2025-06-14T17:05:47Z",
+      "closed_at": "2025-06-14T17:27:56Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 5413,
+      "tags": {
+        "comment": "See pages 61-64 from Address System Guide",
+        "created_by": "JOSM/1.5 (19412 en)",
+        "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf"
+      }
+    },
+    "167623335": {
+      "changeset_id": 167623335,
+      "created_at": "2025-06-14T18:03:31Z",
+      "closed_at": "2025-06-14T18:03:51Z",
+      "user": "Moldovan_Merkator",
+      "uid": 6837259,
+      "changes_count": 5403,
+      "tags": {
+        "comment": "See pages 61-64 from Address System Guide",
+        "created_by": "JOSM/1.5 (19412 en)",
+        "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf"
+      }
+    },
+    "168609158": {
+      "changeset_id": 168609158,
+      "created_at": "2025-07-07T14:38:04Z",
+      "closed_at": "2025-07-07T14:38:05Z",
+      "user": "Gikü",
+      "uid": 23047360,
+      "changes_count": 25,
+      "tags": {
+        "changesets_count": "16",
+        "comment": "adding wikidata IDs to communes in miscellaneous Central Moldova districts",
+        "created_by": "iD 2.34.1",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Moldova Extended Orthophoto (2016)",
+        "locale": "en-US"
+      }
+    },
+    "170777428": {
+      "changeset_id": 170777428,
+      "created_at": "2025-08-21T12:34:01Z",
+      "closed_at": "2025-08-21T12:34:04Z",
+      "user": "jack walker2",
+      "uid": 22831835,
+      "changes_count": 32,
+      "tags": {
+        "changesets_count": "124",
+        "comment": "add name:zh",
+        "created_by": "iD 2.35.3",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Moldova Extended Orthophoto (2016);OpenStreetMap (Standard)",
+        "locale": "zh-CN"
+      }
+    },
+    "174274364": {
+      "changeset_id": 174274364,
+      "created_at": "2025-11-06T08:02:39Z",
+      "closed_at": "2025-11-06T08:02:40Z",
+      "user": "Mihai Spătaru",
+      "uid": 9020094,
+      "changes_count": 849,
+      "tags": {
+        "changesets_count": "6236",
+        "comment": "Actualizări zona Nord.",
+        "created_by": "iD 2.37.3",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Moldova Orthophoto (2016);Bing Maps Aerial",
+        "locale": "en",
+        "resolved:crossing_ways:building-highway": "3",
+        "resolved:outdated_tags:incomplete_tags": "1"
+      }
+    },
+    "177947047": {
+      "changeset_id": 177947047,
+      "created_at": "2026-01-31T23:22:18Z",
+      "closed_at": "2026-01-31T23:22:19Z",
+      "user": "Oleg_MD",
+      "uid": 2995251,
+      "changes_count": 9,
+      "tags": {
+        "comment": "Denumiri de localități - municipiile Bălți și Bender",
+        "created_by": "JOSM/1.5 (19439 en)",
+        "source": "Esri World Imagery; Legea nr. 764/2001 &#10;privind organizarea administrativ-teritorială a Republicii Moldova (https://www.legis.md/cautare/getResults?doc_id=149266&lang=ro#)"
+      }
+    },
+    "184245310": {
+      "changeset_id": 184245310,
+      "created_at": "2026-06-17T20:54:50Z",
+      "closed_at": "2026-06-17T20:54:59Z",
+      "user": "Русский Человек",
+      "uid": 8671833,
+      "changes_count": 5,
+      "tags": {
+        "changesets_count": "37",
+        "comment": "Clarification of names of some settlements according to sources: Oxford Regional Economic Atlas, Atlas östliches und südöstliches Europa, etc.",
+        "created_by": "iD 2.40.0",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Moldova Extended Orthophoto (2016)",
+        "locale": "ru"
+      }
+    },
+    "184278938": {
+      "changeset_id": 184278938,
+      "created_at": "2026-06-18T16:14:07Z",
+      "closed_at": "2026-06-18T16:14:07Z",
+      "user": "Русский Человек",
+      "uid": 8671833,
+      "changes_count": 5,
+      "tags": {
+        "changesets_count": "38",
+        "comment": "Revert.",
+        "created_by": "osm-revert git#c8b2ad4",
+        "host": "https://revert.monicz.dev",
+        "revert:id": "https://www.openstreetmap.org/changeset/184245310"
+      }
+    },
+    "184519539": {
+      "changeset_id": 184519539,
+      "created_at": "2026-06-24T11:40:18Z",
+      "closed_at": "2026-06-24T11:40:20Z",
+      "user": "LakeTorrens",
+      "uid": 23310642,
+      "changes_count": 54,
+      "tags": {
+        "comment": "Modified geometry near Bălți #adt",
+        "created_by": "JOSM/1.5 (19481 en)",
+        "hashtags": "#adt",
+        "source": "Mapbox Satellite; Mapillary"
+      }
+    },
+    "185567442": {
+      "changeset_id": 185567442,
+      "created_at": "2026-07-12T01:26:59Z",
+      "closed_at": "2026-07-12T01:27:00Z",
+      "user": "Fizzie-DWG",
+      "uid": 461130,
+      "changes_count": 36,
+      "tags": {
+        "changesets_count": "36651",
+        "comment": "DWG revert - invalid changes, abusive language",
+        "created_by": "osm-revert git#c8b2ad4",
+        "host": "https://revert.monicz.dev",
+        "revert:fix:node": "3",
+        "revert:fix:relation": "13",
+        "revert:id": "159590408;164843656;165912074;170606233;184201872;184202494;184202956;184202991;184203202;184203290;184203666;184204063;184204381;184204554;184204634;184244115;184244692;184244771;184245310;184278938"
+      }
+    },
+    "187623522": {
+      "changeset_id": 187623522,
+      "created_at": "2026-08-18T07:32:40Z",
+      "closed_at": "2026-08-18T07:32:41Z",
+      "user": "Maturi0n",
+      "uid": 2052948,
+      "changes_count": 9,
+      "tags": {
+        "changesets_count": "73640",
+        "comment": "details",
+        "created_by": "iD 2.42.0",
+        "host": "https://www.openstreetmap.org/edit",
+        "imagery_used": "Moldova Extended Orthophoto (2016)",
+        "locale": "ru"
+      }
+    }
+  }
+}

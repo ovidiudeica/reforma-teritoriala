@@ -1,24 +1,14 @@
 {
-  "schema_version": 2,
-  "generated_at": "2026-09-26T08:13:18.231Z",
+  "schema_version": 3,
+  "generated_at": "2026-09-26T08:19:27.961Z",
   "jurisdiction": "MD",
   "scope": "Special same-CUATM municipality/city representation chains",
   "policy": "Diagnostic only. CUATM structure and OSM history are recorded separately; no OSM relation or reconciliation mapping is removed or changed.",
   "summary": {
     "municipality_uat_with_city_locality": 2,
-    "municipality_uat_with_multiple_city_representations": 1
+    "municipality_uat_with_parallel_independently_maintained_city_boundaries": 1
   },
-  "geometry_review_queue": [
-    {
-      "legal_id": "0300",
-      "legal_name": "Bălți",
-      "relation_ids": [
-        12207955,
-        18967626
-      ],
-      "reason": "Multiple lower-level city representations remain; compare geometry before selecting a canonical city representation."
-    }
-  ],
+  "geometry_review_queue": [],
   "results": [
     {
       "legal_id": "0100",
@@ -32,6 +22,7 @@
         "required": false,
         "reason": "Single lower-level city/locality representation; retain alongside municipality UAT."
       },
+      "representation_review": null,
       "official_cuatm": {
         "record": {
           "code": "0100",
@@ -340,15 +331,28 @@
     {
       "legal_id": "0300",
       "legal_name": "Bălți",
-      "diagnostic_class": "municipality_uat_with_multiple_city_representations",
+      "diagnostic_class": "municipality_uat_with_parallel_independently_maintained_city_boundaries",
       "canonical_uat_relation_id": 58983,
       "city_representation_relation_ids": [
         12207955,
         18967626
       ],
       "geometry_review": {
-        "required": true,
-        "reason": "Multiple lower-level city representations remain; compare geometry before selecting a canonical city representation."
+        "required": false,
+        "reason": "Completed: the two city boundaries overlap strongly but use disjoint current way sets and have independent maintenance histories; geometry alone does not select a canonical city boundary."
+      },
+      "representation_review": {
+        "classification": "parallel_independently_maintained_city_boundaries",
+        "canonical_city_relation_id": null,
+        "evidence": {
+          "intersection_over_smaller": 0.9936257148050224,
+          "intersection_over_union": 0.9510093052225684,
+          "symmetric_difference_km2": 2.1295731104369504,
+          "shared_current_way_count": 0,
+          "relation_12207955_current_way_count": 21,
+          "relation_18967626_current_way_count": 4
+        },
+        "next_review": "Resolve semantic/source intent from OSM changesets/tags before any canonical city-boundary selection."
       },
       "official_cuatm": {
         "record": {
@@ -456,7 +460,7 @@
             "official_name": null,
             "full_name": null,
             "cuatm": null,
-            "representation_role": "city_representation_candidate"
+            "representation_role": "parallel_city_boundary"
           },
           {
             "relation_id": 18967626,
@@ -467,7 +471,7 @@
             "official_name": "municipiul Bălți",
             "full_name": "municipiul Bălți",
             "cuatm": "0300",
-            "representation_role": "city_representation_candidate"
+            "representation_role": "parallel_city_boundary"
           }
         ],
         "history": [
@@ -595,6 +599,7 @@
         "required": false,
         "reason": "Single lower-level city/locality representation; retain alongside municipality UAT."
       },
+      "representation_review": null,
       "official_cuatm": {
         "record": {
           "code": "0500",
