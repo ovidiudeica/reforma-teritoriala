@@ -146,6 +146,28 @@ const unmatchedGeneral=unmatched.map(m=>{
 const unmatchedGeneralByReason=unmatchedGeneral.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const unmatchedGroups=Object.fromEntries(Object.entries(unmatchedGeneralByReason).sort().map(([reason,count])=>[reason,{count,items:unmatchedGeneral.filter(x=>x.unmatched_reason===reason)}]));
 await writeFile('data/current/md-cuatm-unmatched-review.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'Unreconciled general catalog entities only; resolved edge cases are excluded.',count:unmatchedGeneral.length,by_reason:unmatchedGeneralByReason,groups:unmatchedGroups},null,2)+'\n');
+const codeAbsent=unmatchedGeneral.filter(x=>x.unmatched_reason==='code_absent_from_official_snapshot');
+const bucket=(items,keyFn)=>items.reduce((a,x)=>{const k=keyFn(x);a[k]=(a[k]||0)+1;return a;},{});
+const codeShape=x=>{
+ const key=x.normalized_explicit_keys?.[0]||'';
+ const parent=x.verified_parent_legal_id||'';
+ if(key&&parent&&key.startsWith(parent))return `parent_prefix_plus_${key.length-parent.length}_chars`;
+ return `${key.length}_char_other`;
+};
+const codeAbsentClassified=codeAbsent.map(x=>({...x,classification:{admin_level:String(x.osm_admin_level??'missing'),place:x.osm_place??'missing',code_shape:codeShape(x),parent_relation:x.verified_parent_legal_id?'verified_parent':'unverified_parent'}}));
+await writeFile('data/current/md-cuatm-code-absent-classification.json',JSON.stringify({
+ generated_at:new Date().toISOString(),jurisdiction:'MD',
+ scope:'Entities whose explicit OSM CUATM key is absent from the current official CUATM snapshot; diagnostic only.',
+ count:codeAbsentClassified.length,
+ dimensions:{
+  admin_level:bucket(codeAbsentClassified,x=>x.classification.admin_level),
+  place:bucket(codeAbsentClassified,x=>x.classification.place),
+  code_shape:bucket(codeAbsentClassified,x=>x.classification.code_shape),
+  parent_relation:bucket(codeAbsentClassified,x=>x.classification.parent_relation)
+ },
+ combinations:bucket(codeAbsentClassified,x=>[x.classification.admin_level,x.classification.place,x.classification.code_shape,x.classification.parent_relation].join('|')),
+ items:codeAbsentClassified
+},null,2)+'\n');
 
 const noKeyDiagnostics=entities.filter(e=>![e.osm?.cuatm_unique_id,e.osm?.cuatm_code].some(Boolean)).map(e=>{
  const parent=entityById.get(e.parent_id)||null;
