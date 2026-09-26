@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T09:15:48.875Z",
+  "generated_at": "2026-09-26T09:33:51.817Z",
   "jurisdiction": "MD",
   "status": "PASS",
   "policy": "Release gate permits only explicitly documented exception classes and the sole unresolved identity relation 12104636. New exception classes or identities fail the gate.",
@@ -40,7 +40,6 @@
       "detail": {
         "issueClasses": [
           "chisinau_sector_geometry_gap",
-          "cross_legal_parent_conflict",
           "verified_legal_parent_geometry_conflict"
         ]
       }

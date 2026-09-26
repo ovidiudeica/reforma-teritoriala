@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-09-26T09:14:05.331Z",
+  "generated_at": "2026-09-26T09:32:33.787Z",
   "classifier_version": "2.2",
   "countries": {
     "RO": {
       "name": "România",
-      "count": 3233,
-      "review_required": 6,
-      "geojson_features": 3233,
+      "count": 3232,
+      "review_required": 5,
+      "geojson_features": 3232,
       "confidence": {
         "high": 533,
         "medium": 2694,
-        "low": 6
+        "low": 5
       }
     },
     "MD": {
@@ -25,5 +25,13 @@
       }
     }
   },
-  "warnings": []
+  "warnings": [
+    {
+      "type": "outside_country_boundary_excluded",
+      "jurisdiction": "RO",
+      "relation_ids": [
+        18967922
+      ]
+    }
+  ]
 }

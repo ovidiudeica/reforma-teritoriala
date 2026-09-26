@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T09:33:52.288Z",
+  "jurisdiction": "RO",
+  "status": "PASS",
+  "policy": "Exact documented baseline only; known cross-jurisdiction Ungheni contamination is a hard blocker.",
+  "checks": [
+    {
+      "name": "no_new_ro_review_exceptions",
+      "ok": true,
+      "detail": {
+        "actual": [
+          "12557978|classification_review",
+          "11366847|classification_review",
+          "11283027|classification_review",
+          "11283576|classification_review",
+          "11366846|classification_review"
+        ]
+      }
+    },
+    {
+      "name": "documented_ro_exception_set_is_stable",
+      "ok": true,
+      "detail": {
+        "expected": [
+          "12557978|classification_review",
+          "11366847|classification_review",
+          "11283027|classification_review",
+          "11283576|classification_review",
+          "11366846|classification_review"
+        ]
+      }
+    },
+    {
+      "name": "documented_exception_classifications_are_stable",
+      "ok": true,
+      "detail": {}
+    },
+    {
+      "name": "all_ro_features_have_polygonal_geometry",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    },
+    {
+      "name": "known_cross_jurisdiction_ungheni_removed",
+      "ok": true,
+      "detail": {
+        "present": 0
+      }
+    }
+  ],
+  "failures": []
+}

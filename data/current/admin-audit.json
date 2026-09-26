@@ -1,29 +1,29 @@
 {
-  "generated_at": "2026-09-26T09:14:49.845Z",
-  "source_generated_at": "2026-09-26T09:14:49.457Z",
-  "entity_count": 5823,
+  "generated_at": "2026-09-26T09:33:18.776Z",
+  "source_generated_at": "2026-09-26T09:33:18.403Z",
+  "entity_count": 5822,
   "countries": {
     "RO": {
-      "feature_count": 3233,
-      "review_required": 6,
+      "feature_count": 3232,
+      "review_required": 5,
       "distributions": {
         "admin_level": {
           "4": 42,
           "8": 3179,
-          "9": 12
+          "9": 11
         },
         "place": {
           "county": 41,
-          "city": 102,
+          "city": 101,
           "municipality": 2861,
           "∅": 12,
           "town": 217
         },
         "designation": {
-          "∅": 3233
+          "∅": 3232
         },
         "osm_type": {
-          "boundary": 3233
+          "boundary": 3232
         },
         "entity_type": {
           "county": 41,
@@ -32,7 +32,7 @@
           "commune": 2862,
           "sector": 6,
           "town": 217,
-          "subdivision_or_mistagged_boundary": 6
+          "subdivision_or_mistagged_boundary": 5
         }
       },
       "combinations": [
@@ -98,14 +98,6 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "commune",
-          "count": 1
-        },
-        {
-          "admin_level": "9",
-          "place": "city",
-          "designation": "∅",
-          "osm_type": "boundary",
-          "entity_type": "subdivision_or_mistagged_boundary",
           "count": 1
         }
       ]
@@ -275,9 +267,9 @@
   },
   "parent_validation": {
     "RO": {
-      "checked": 3233,
-      "root_parent": 43,
-      "unexpected_root": 1,
+      "checked": 3232,
+      "root_parent": 42,
+      "unexpected_root": 0,
       "entity_parent": 3190,
       "null_parent": 0,
       "missing_parent": 0,
@@ -285,15 +277,8 @@
       "parent_level_not_lower": 0,
       "geometry_missing": 0,
       "point_outside_parent": 0,
-      "issues": [
-        {
-          "id": "osm-r18967922",
-          "name": "Ungheni",
-          "admin_level": 9,
-          "issue": "unexpected_root"
-        }
-      ],
-      "issue_count": 1
+      "issues": [],
+      "issue_count": 0
     },
     "MD": {
       "checked": 2590,
