@@ -1,40 +1,35 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T09:33:52.288Z",
+  "generated_at": "2026-09-26T10:40:05.401Z",
   "jurisdiction": "RO",
   "status": "PASS",
-  "policy": "Exact documented baseline only; known cross-jurisdiction Ungheni contamination is a hard blocker.",
+  "policy": "No unresolved RO review exceptions are allowed; audited level-9 semantic classifications must be encoded in the catalog, and known cross-jurisdiction Ungheni contamination is a hard blocker.",
   "checks": [
     {
       "name": "no_new_ro_review_exceptions",
       "ok": true,
       "detail": {
-        "actual": [
-          "12557978|classification_review",
-          "11366847|classification_review",
-          "11283027|classification_review",
-          "11283576|classification_review",
-          "11366846|classification_review"
-        ]
+        "actual": []
       }
     },
     {
       "name": "documented_ro_exception_set_is_stable",
       "ok": true,
       "detail": {
-        "expected": [
-          "12557978|classification_review",
-          "11366847|classification_review",
-          "11283027|classification_review",
-          "11283576|classification_review",
-          "11366846|classification_review"
-        ]
+        "expected": []
       }
     },
     {
       "name": "documented_exception_classifications_are_stable",
       "ok": true,
       "detail": {}
+    },
+    {
+      "name": "audited_ro_level9_semantics_are_encoded",
+      "ok": true,
+      "detail": {
+        "unresolved": []
+      }
     },
     {
       "name": "all_ro_features_have_polygonal_geometry",
