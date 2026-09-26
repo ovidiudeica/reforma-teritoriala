@@ -64,18 +64,26 @@ for(const e of entities){
  const ec=exactCode.get(e.id);
  if(ec)matchById.set(e.id,makeMatch(e,ec.hit,'explicit_cuatm_key','high',ec.key));
 }
-// Pass 1b: safe OSM wrapper/self-parent cases only. A distinct official child under
-// the verified parent always takes precedence, preventing district/town homonyms.
-for(const e of entities){
- if(matchById.has(e.id))continue;
- const keys=[e.osm?.cuatm_unique_id,e.osm?.cuatm_code].filter(Boolean).map(digits);
- if(keys.length)continue;
- const osmParent=entityById.get(e.parent_id), parentMatch=osmParent?matchById.get(osmParent.id):null;
- if(!parentMatch)continue;
- const nameHits=byName.get(norm(e.name))||[];
- const distinctChildren=nameHits.filter(h=>h.code!==parentMatch.legal_id&&h.parent_code===parentMatch.legal_id);
- const self=nameHits.find(h=>h.code===parentMatch.legal_id);
- if(self&&distinctChildren.length===0&&norm(e.name)===norm(parentMatch.legal_name))matchById.set(e.id,makeMatch(e,self,'osm_self_parent_same_legal_entity','medium'));
+// Pass 1b: safe OSM wrapper/self-parent cases to a fixpoint. Keep the same strict
+// conditions: same legal ID, exact normalized name, and no distinct official child
+// under the verified parent. Newly resolved wrappers may unlock deeper wrappers.
+let selfParentChanged=true;
+while(selfParentChanged){
+ selfParentChanged=false;
+ for(const e of entities){
+  if(matchById.has(e.id))continue;
+  const keys=[e.osm?.cuatm_unique_id,e.osm?.cuatm_code].filter(Boolean).map(digits);
+  if(keys.length)continue;
+  const osmParent=entityById.get(e.parent_id), parentMatch=osmParent?matchById.get(osmParent.id):null;
+  if(!parentMatch)continue;
+  const nameHits=byName.get(norm(e.name))||[];
+  const distinctChildren=nameHits.filter(h=>h.code!==parentMatch.legal_id&&h.parent_code===parentMatch.legal_id);
+  const self=nameHits.find(h=>h.code===parentMatch.legal_id);
+  if(self&&distinctChildren.length===0&&norm(e.name)===norm(parentMatch.legal_name)){
+   matchById.set(e.id,makeMatch(e,self,'osm_self_parent_same_legal_entity','medium'));
+   selfParentChanged=true;
+  }
+ }
 }
 // Pass 2: deterministic fixpoint. Newly verified parents can unlock children on
 // the next iteration, but only a unique exact-name candidate under that parent.
