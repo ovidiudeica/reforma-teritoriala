@@ -15,7 +15,8 @@
     "audit:md-individual-cases": "node scripts/process/audit-md-cuatm-individual-cases.mjs",
     "audit:md-release-gate": "node scripts/process/audit-md-release-gate.mjs",
     "audit:ro-release-gate": "node scripts/process/audit-ro-release-gate.mjs",
-    "reconcile:cuatm": "node scripts/process/reconcile-cuatm.mjs"
+    "reconcile:cuatm": "node scripts/process/reconcile-cuatm.mjs",
+    "audit:ro-level9-exceptions": "node scripts/process/audit-ro-level9-exceptions.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
