@@ -29,11 +29,13 @@ jobs:
         run: npm run import:ro-siruta
       - name: Reconcile current RO OSM level 8 against SIRUTA
         run: npm run audit:ro-official-reconciliation
+      - name: Audit RO official reconciliation edge cases
+        run: npm run audit:ro-official-edge-cases
       - name: Commit official snapshot and reconciliation report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/sources/ro-siruta-current.json data/current/ro-official-reconciliation.json
+          git add data/sources/ro-siruta-current.json data/current/ro-official-reconciliation.json data/current/ro-official-edge-case-audit.json
           git diff --cached --quiet || git commit -m "data: refresh official RO SIRUTA reconciliation"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
