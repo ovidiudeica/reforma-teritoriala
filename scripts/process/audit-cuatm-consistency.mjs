@@ -57,8 +57,21 @@ for(const [legal_id,xs] of groups){
  uniqueIdentityIssues.push({legal_id,legal_name:first.legal_name,expected_legal_parent_id:expected,expected_legal_parent_name:first.expected_legal_parent_name,observed_distinct_parent_legal_ids:observed,diagnostic_class:chisinauSectorGap?'chisinau_sector_geometry_gap':reviewedGeometryConflictIds.has(legal_id)?'verified_legal_parent_geometry_conflict':geometryHistoryReviewIds.has(legal_id)?'needs_geometry_history_review':'cross_legal_parent_conflict',representation_count:xs.length,affected_representations:bad.map(x=>x.representative_osm_id)});
 }
 const uniqueIssueByClass=uniqueIdentityIssues.reduce((a,x)=>(a[x.diagnostic_class]=(a[x.diagnostic_class]||0)+1,a),{});
-const targetedDuplicateReview=duplicateGroups.filter(g=>g.duplicate_class==='mixed_parallel_and_chain_representations'||g.duplicate_class==='parallel_same_parent');
+const reviewedRepresentationClasses=new Map([
+ ['1050','uat_and_component_locality_with_parallel_uat_boundary'],
+ ['3417','component_locality_with_parallel_uat_boundaries_same_changeset'],
+ ['7160','component_locality_with_parallel_uat_boundaries_same_changeset'],
+ ['8034','parallel_boundaries_same_identity_same_changeset'],
+ ['8341','later_duplicate_same_identity']
+]);
+for(const g of duplicateGroups){
+ const reviewed=reviewedRepresentationClasses.get(g.legal_id);
+ if(reviewed){g.structural_duplicate_class=g.duplicate_class;g.duplicate_class=reviewed;g.review_basis='OSM relation history audit';}
+}
+const reviewedRepresentationIds=new Set(reviewedRepresentationClasses.keys());
+const reviewedDupByClass=duplicateGroups.reduce((a,g)=>(a[g.duplicate_class]=(a[g.duplicate_class]||0)+1,a),{});
+const targetedDuplicateReview=duplicateGroups.filter(g=>reviewedRepresentationIds.has(g.legal_id));
 
-const audit={generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'CUATM matched entities; duplicate OSM representations collapsed logically by legal identity',matched_count:matched.length,policy:'Diagnostic only. No reconciliation, classification or source data are altered.',duplicate_identity_summary:{duplicate_legal_id_count:duplicateGroups.length,entities_in_duplicate_groups:duplicateGroups.reduce((n,g)=>n+g.count,0),by_class:dupByClass},legal_identity_parent_summary:byResult,unique_legal_identity_issue_summary:{count:uniqueIdentityIssues.length,by_class:uniqueIssueByClass},targeted_duplicate_review_summary:{count:targetedDuplicateReview.length,by_class:targetedDuplicateReview.reduce((a,g)=>(a[g.duplicate_class]=(a[g.duplicate_class]||0)+1,a),{})},duplicate_legal_ids:duplicateGroups,unique_legal_identity_issues:uniqueIdentityIssues,targeted_duplicate_review:targetedDuplicateReview,legal_identity_parent_issues_by_representation:identityIssues};
+const audit={generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'CUATM matched entities; duplicate OSM representations collapsed logically by legal identity',matched_count:matched.length,policy:'Diagnostic only. No reconciliation, classification or source data are altered.',duplicate_identity_summary:{duplicate_legal_id_count:duplicateGroups.length,entities_in_duplicate_groups:duplicateGroups.reduce((n,g)=>n+g.count,0),by_class:reviewedDupByClass},legal_identity_parent_summary:byResult,unique_legal_identity_issue_summary:{count:uniqueIdentityIssues.length,by_class:uniqueIssueByClass},targeted_duplicate_review_summary:{count:targetedDuplicateReview.length,by_class:targetedDuplicateReview.reduce((a,g)=>(a[g.duplicate_class]=(a[g.duplicate_class]||0)+1,a),{})},duplicate_legal_ids:duplicateGroups,unique_legal_identity_issues:uniqueIdentityIssues,targeted_duplicate_review:targetedDuplicateReview,legal_identity_parent_issues_by_representation:identityIssues};
 await mkdir('data/current',{recursive:true});await writeFile('data/current/md-cuatm-consistency-audit.json',JSON.stringify(audit,null,2)+'\n');
 console.log(JSON.stringify({matched_count:matched.length,...audit.duplicate_identity_summary,legal_identity_parent_summary:byResult,unique_legal_identity_issue_summary:audit.unique_legal_identity_issue_summary,targeted_duplicate_review_summary:audit.targeted_duplicate_review_summary},null,2));
