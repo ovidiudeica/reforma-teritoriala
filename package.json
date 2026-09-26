@@ -10,6 +10,7 @@
     "audit:md-special-municipalities": "node scripts/process/audit-md-special-municipalities.mjs",
     "audit:balti-geometry": "node scripts/process/compare-balti-geometries.mjs",
     "audit:balti-components": "node scripts/process/audit-balti-component-localities.mjs",
+    "audit:balti-way-history": "node scripts/process/audit-balti-way-history.mjs",
     "reconcile:cuatm": "node scripts/process/reconcile-cuatm.mjs"
   },
   "dependencies": {
