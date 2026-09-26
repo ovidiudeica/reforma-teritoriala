@@ -1,0 +1,458 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T09:54:21.047Z",
+  "jurisdiction": "RO",
+  "scope": "Five remaining admin_level=9 release-gate review exceptions",
+  "policy": "Resolve semantic identity/status without promoting OSM geometry to official legal geometry. Romania OSM project documentation lists admin_level=9 as Sector; non-sector level-9 polygons are treated as OSM component-locality representations pending any separate geometry authority evidence.",
+  "osm_convention_source": "https://wiki.openstreetmap.org/wiki/Ro:WikiProject_Romania/Unit%C4%83%C8%9Bi_administrativ_teritoriale",
+  "legal_source": {
+    "title": "Legea nr. 2/1968 privind organizarea administrativă a teritoriului României, forma actualizată",
+    "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837"
+  },
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "all_five_relations_present_in_ro_snapshot",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "all_expected_parents_present",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "all_geometrically_within_expected_parent",
+      "ok": true,
+      "detail": {
+        "failed": []
+      }
+    },
+    {
+      "name": "all_legal_hierarchies_verified",
+      "ok": true,
+      "detail": {
+        "failed": []
+      }
+    },
+    {
+      "name": "no_legal_geometry_claims",
+      "ok": true,
+      "detail": {}
+    },
+    {
+      "name": "all_osm_histories_available",
+      "ok": true,
+      "detail": {
+        "errors": []
+      }
+    }
+  ],
+  "items": [
+    {
+      "osm_relation_id": 12557978,
+      "name": "Bărdești",
+      "current_osm": {
+        "admin_level": 9,
+        "boundary": "administrative",
+        "type": "boundary",
+        "name_prefix": "Sat",
+        "official_name": null,
+        "place": null,
+        "place_ro": "sat",
+        "fixme": null,
+        "source": null,
+        "expected_parent_relation_id": 11318833,
+        "actual_catalog_parent_relation_id": 11318833
+      },
+      "legal_evidence": {
+        "status": "sat",
+        "parent_name": "Sântana de Mureș",
+        "parent_type": "comună",
+        "hierarchy_verified": true,
+        "geometry_verified": false,
+        "source": {
+          "title": "Legea nr. 2/1968 privind organizarea administrativă a teritoriului României, forma actualizată",
+          "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837"
+        }
+      },
+      "geometry": {
+        "geometry_type": "Polygon",
+        "area_km2": 6.406254196039856,
+        "bbox": [
+          24.4898796,
+          46.5831252,
+          24.5386149,
+          46.608505
+        ],
+        "point_inside_expected_parent": true
+      },
+      "history": {
+        "relation_id": 12557978,
+        "created_at": "2021-04-09T12:21:14Z",
+        "created_changeset": 102642609,
+        "current_version": 2,
+        "last_modified_at": "2023-06-06T15:54:59Z",
+        "last_changeset": 137020799,
+        "current_tags": {
+          "admin_level": "9",
+          "boundary": "administrative",
+          "name": "Bărdești",
+          "name:hu": "Marosbárdos",
+          "name:prefix": "Sat",
+          "place:ro": "sat",
+          "type": "boundary"
+        },
+        "current_member_count": 5,
+        "history_signals": {
+          "admin_level_values": [
+            "9"
+          ],
+          "boundary_values": [
+            "administrative"
+          ],
+          "name_values": [
+            "Bărdești"
+          ],
+          "source_values": [],
+          "versions_with_member_changes": 1
+        }
+      },
+      "interpretation": {
+        "romanian_osm_level9_sector_rule_matches": false,
+        "legal_unit_is_standalone_uat": false,
+        "osm_geometry_is_legal_authority": false,
+        "semantic_classification": "component_village_boundary_representation",
+        "review_status": "resolved_semantic_classification",
+        "rationale": "Verified legal component locality/village inside its level-8 parent; admin_level=9 is not the documented Romanian sector convention and the OSM polygon is retained only as an OSM representation, not official legal geometry."
+      }
+    },
+    {
+      "osm_relation_id": 11366847,
+      "name": "Cristești",
+      "current_osm": {
+        "admin_level": 9,
+        "boundary": "administrative",
+        "type": "boundary",
+        "name_prefix": "Sat",
+        "official_name": "Sat Cristești",
+        "place": null,
+        "place_ro": "sat",
+        "fixme": null,
+        "source": null,
+        "expected_parent_relation_id": 11318838,
+        "actual_catalog_parent_relation_id": 11318838
+      },
+      "legal_evidence": {
+        "status": "sat",
+        "parent_name": "Cristești",
+        "parent_type": "comună",
+        "hierarchy_verified": true,
+        "geometry_verified": false,
+        "source": {
+          "title": "Legea nr. 2/1968 privind organizarea administrativă a teritoriului României, forma actualizată",
+          "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837"
+        }
+      },
+      "geometry": {
+        "geometry_type": "Polygon",
+        "area_km2": 6.775932868621024,
+        "bbox": [
+          24.4536647,
+          46.4887026,
+          24.5159322,
+          46.5131575
+        ],
+        "point_inside_expected_parent": true
+      },
+      "history": {
+        "relation_id": 11366847,
+        "created_at": "2020-07-30T20:14:56Z",
+        "created_changeset": 88750825,
+        "current_version": 2,
+        "last_modified_at": "2023-06-06T15:54:59Z",
+        "last_changeset": 137020799,
+        "current_tags": {
+          "admin_level": "9",
+          "boundary": "administrative",
+          "name": "Cristești",
+          "name:hu": "Maroskeresztúr",
+          "name:prefix": "Sat",
+          "official_name": "Sat Cristești",
+          "place:ro": "sat",
+          "type": "boundary"
+        },
+        "current_member_count": 7,
+        "history_signals": {
+          "admin_level_values": [
+            "9"
+          ],
+          "boundary_values": [
+            "administrative"
+          ],
+          "name_values": [
+            "Cristești"
+          ],
+          "source_values": [],
+          "versions_with_member_changes": 0
+        }
+      },
+      "interpretation": {
+        "romanian_osm_level9_sector_rule_matches": false,
+        "legal_unit_is_standalone_uat": false,
+        "osm_geometry_is_legal_authority": false,
+        "semantic_classification": "component_village_boundary_representation",
+        "review_status": "resolved_semantic_classification",
+        "rationale": "Verified legal component locality/village inside its level-8 parent; admin_level=9 is not the documented Romanian sector convention and the OSM polygon is retained only as an OSM representation, not official legal geometry."
+      }
+    },
+    {
+      "osm_relation_id": 11366846,
+      "name": "Vălureni",
+      "current_osm": {
+        "admin_level": 9,
+        "boundary": "administrative",
+        "type": "boundary",
+        "name_prefix": "Sat",
+        "official_name": "Sat Vălureni",
+        "place": null,
+        "place_ro": "sat",
+        "fixme": null,
+        "source": null,
+        "expected_parent_relation_id": 11318838,
+        "actual_catalog_parent_relation_id": 11318838
+      },
+      "legal_evidence": {
+        "status": "sat",
+        "parent_name": "Cristești",
+        "parent_type": "comună",
+        "hierarchy_verified": true,
+        "geometry_verified": false,
+        "source": {
+          "title": "Legea nr. 2/1968 privind organizarea administrativă a teritoriului României, forma actualizată",
+          "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837"
+        }
+      },
+      "geometry": {
+        "geometry_type": "Polygon",
+        "area_km2": 6.4222164730464915,
+        "bbox": [
+          24.5149637,
+          46.4894341,
+          24.569891,
+          46.5122899
+        ],
+        "point_inside_expected_parent": true
+      },
+      "history": {
+        "relation_id": 11366846,
+        "created_at": "2020-07-30T20:14:56Z",
+        "created_changeset": 88750825,
+        "current_version": 2,
+        "last_modified_at": "2023-06-06T15:54:59Z",
+        "last_changeset": 137020799,
+        "current_tags": {
+          "admin_level": "9",
+          "boundary": "administrative",
+          "name": "Vălureni",
+          "name:hu": "Székelykakasd",
+          "name:prefix": "Sat",
+          "official_name": "Sat Vălureni",
+          "place:ro": "sat",
+          "type": "boundary"
+        },
+        "current_member_count": 5,
+        "history_signals": {
+          "admin_level_values": [
+            "9"
+          ],
+          "boundary_values": [
+            "administrative"
+          ],
+          "name_values": [
+            "Vălureni"
+          ],
+          "source_values": [],
+          "versions_with_member_changes": 0
+        }
+      },
+      "interpretation": {
+        "romanian_osm_level9_sector_rule_matches": false,
+        "legal_unit_is_standalone_uat": false,
+        "osm_geometry_is_legal_authority": false,
+        "semantic_classification": "component_village_boundary_representation",
+        "review_status": "resolved_semantic_classification",
+        "rationale": "Verified legal component locality/village inside its level-8 parent; admin_level=9 is not the documented Romanian sector convention and the OSM polygon is retained only as an OSM representation, not official legal geometry."
+      }
+    },
+    {
+      "osm_relation_id": 11283027,
+      "name": "Mureșeni",
+      "current_osm": {
+        "admin_level": 9,
+        "boundary": "administrative",
+        "type": "boundary",
+        "name_prefix": null,
+        "official_name": null,
+        "place": null,
+        "place_ro": null,
+        "fixme": "Verify if it is really an administrative boundary",
+        "source": null,
+        "expected_parent_relation_id": 8334767,
+        "actual_catalog_parent_relation_id": 8334767
+      },
+      "legal_evidence": {
+        "status": "localitate componentă",
+        "parent_name": "Târgu Mureș",
+        "parent_type": "municipiu",
+        "hierarchy_verified": true,
+        "geometry_verified": false,
+        "source": {
+          "title": "Legea nr. 2/1968 privind organizarea administrativă a teritoriului României, forma actualizată",
+          "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837"
+        }
+      },
+      "geometry": {
+        "geometry_type": "Polygon",
+        "area_km2": 1.4300550257165383,
+        "bbox": [
+          24.5066678,
+          46.5160111,
+          24.5288815,
+          46.5291809
+        ],
+        "point_inside_expected_parent": true
+      },
+      "history": {
+        "relation_id": 11283027,
+        "created_at": "2020-07-08T11:34:25Z",
+        "created_changeset": 87707968,
+        "current_version": 5,
+        "last_modified_at": "2023-06-06T15:54:59Z",
+        "last_changeset": 137020799,
+        "current_tags": {
+          "admin_level": "9",
+          "boundary": "administrative",
+          "fixme": "Verify if it is really an administrative boundary",
+          "name": "Mureșeni",
+          "name:hu": "Meggyesfalva",
+          "type": "boundary"
+        },
+        "current_member_count": 3,
+        "history_signals": {
+          "admin_level_values": [
+            "8",
+            "9"
+          ],
+          "boundary_values": [
+            "administrative",
+            "place"
+          ],
+          "name_values": [
+            "Mureșeni"
+          ],
+          "source_values": [],
+          "versions_with_member_changes": 1
+        }
+      },
+      "interpretation": {
+        "romanian_osm_level9_sector_rule_matches": false,
+        "legal_unit_is_standalone_uat": false,
+        "osm_geometry_is_legal_authority": false,
+        "semantic_classification": "municipality_component_locality_boundary_representation",
+        "review_status": "resolved_semantic_classification",
+        "rationale": "Verified legal component locality/village inside its level-8 parent; admin_level=9 is not the documented Romanian sector convention and the OSM polygon is retained only as an OSM representation, not official legal geometry."
+      }
+    },
+    {
+      "osm_relation_id": 11283576,
+      "name": "Remetea",
+      "current_osm": {
+        "admin_level": 9,
+        "boundary": "administrative",
+        "type": "boundary",
+        "name_prefix": null,
+        "official_name": null,
+        "place": null,
+        "place_ro": null,
+        "fixme": null,
+        "source": null,
+        "expected_parent_relation_id": 8334767,
+        "actual_catalog_parent_relation_id": 8334767
+      },
+      "legal_evidence": {
+        "status": "localitate componentă",
+        "parent_name": "Târgu Mureș",
+        "parent_type": "municipiu",
+        "hierarchy_verified": true,
+        "geometry_verified": false,
+        "source": {
+          "title": "Legea nr. 2/1968 privind organizarea administrativă a teritoriului României, forma actualizată",
+          "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837"
+        }
+      },
+      "geometry": {
+        "geometry_type": "Polygon",
+        "area_km2": 4.016030911494599,
+        "bbox": [
+          24.4934325,
+          46.5557858,
+          24.5428991,
+          46.5869876
+        ],
+        "point_inside_expected_parent": true
+      },
+      "history": {
+        "relation_id": 11283576,
+        "created_at": "2020-07-08T14:01:44Z",
+        "created_changeset": 87715066,
+        "current_version": 5,
+        "last_modified_at": "2023-06-06T15:54:59Z",
+        "last_changeset": 137020799,
+        "current_tags": {
+          "admin_level": "9",
+          "boundary": "administrative",
+          "name": "Remetea",
+          "name:hu": "Remeteszeg",
+          "type": "boundary"
+        },
+        "current_member_count": 6,
+        "history_signals": {
+          "admin_level_values": [
+            "8",
+            "9"
+          ],
+          "boundary_values": [
+            "administrative",
+            "place"
+          ],
+          "name_values": [
+            "Remetea"
+          ],
+          "source_values": [],
+          "versions_with_member_changes": 2
+        }
+      },
+      "interpretation": {
+        "romanian_osm_level9_sector_rule_matches": false,
+        "legal_unit_is_standalone_uat": false,
+        "osm_geometry_is_legal_authority": false,
+        "semantic_classification": "municipality_component_locality_boundary_representation",
+        "review_status": "resolved_semantic_classification",
+        "rationale": "Verified legal component locality/village inside its level-8 parent; admin_level=9 is not the documented Romanian sector convention and the OSM polygon is retained only as an OSM representation, not official legal geometry."
+      }
+    }
+  ],
+  "summary": {
+    "item_count": 5,
+    "resolved_semantic_classification_count": 5,
+    "component_village_boundary_representation": 3,
+    "municipality_component_locality_boundary_representation": 2,
+    "legal_geometry_verified_count": 0
+  },
+  "failures": []
+}
