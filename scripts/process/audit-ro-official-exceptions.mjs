@@ -6,6 +6,7 @@ const reconciliation=JSON.parse(await readFile('data/current/ro-official-reconci
 const official=JSON.parse(await readFile('data/sources/ro-siruta-current.json','utf8'));
 const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const geo=JSON.parse(await readFile('public/geo/current/ro-administrative.geojson','utf8'));
+const reviewed=JSON.parse(await readFile('data/sources/ro-siruta-reviewed-overrides.json','utf8'));
 
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[„”"'’]/g,' ')
@@ -95,7 +96,8 @@ function parseHistory(xml,id){
 const targetIds=[...new Set([
  ...(reconciliation.unmatched_osm||[]).map(x=>x.osm_relation_id),
  ...(reconciliation.duplicate_legal_mappings||[]).flatMap(x=>x.osm_relation_ids||[]),
- ...(reconciliation.type_mismatches||[]).map(x=>x.osm_relation_id)
+ ...(reconciliation.type_mismatches||[]).map(x=>x.osm_relation_id),
+ ...(reviewed.mappings||[]).map(x=>Number(x.osm_relation_id))
 ].filter(Boolean))];
 const histories=[],historyErrors=[];
 for(const id of targetIds){
@@ -159,7 +161,8 @@ for(const g of reconciliation.duplicate_legal_mappings||[]){
 }
 const allCandidateCodes=[
  ...provisionalUnmatched.flatMap(x=>x.candidateIds),
- ...duplicateCandidateIds
+ ...duplicateCandidateIds,
+ ...(reviewed.mappings||[]).map(x=>String(x.legal_id))
 ];
 let officialLocalityFeatures=[],officialLocalityGeometryError=null;
 try{officialLocalityFeatures=await fetchOfficialLocalityGeometries(allCandidateCodes);}
@@ -226,6 +229,25 @@ const duplicateGroups=(reconciliation.duplicate_legal_mappings||[]).map(g=>{
  return {...g,items,overlap};
 });
 
+const reviewedOverrideValidation=(reviewed.mappings||[]).map(x=>{
+ const relationId=Number(x.osm_relation_id),legalId=String(x.legal_id);
+ const entity=entityByRelation.get(relationId)||null;
+ const uat=uatByCode.get(legalId)||null;
+ const containment=containmentEvidence(relationId,[legalId])[0]||null;
+ const containmentOk=officialLocalityGeometryError?null:Boolean(containment&&containment.official_locality_count>0&&containment.inside_count===containment.official_locality_count);
+ return {
+  osm_relation_id:relationId,
+  osm_name:entity?.name||x.osm_name||null,
+  legal_id:legalId,
+  legal_name:uat?.name||x.legal_name||null,
+  resolution:x.resolution||null,
+  relation_present:Boolean(entity),
+  official_uat_present:Boolean(uat),
+  official_locality_containment:containment,
+  identity_containment_ok:containmentOk
+ };
+});
+
 const typeMismatches=(reconciliation.type_mismatches||[]).map(x=>({
  ...x,
  current_osm_tags:tagsOf(featureByRelation.get(x.osm_relation_id)),
@@ -241,6 +263,14 @@ if(officialLocalityGeometryError)warnings.push({name:'official_locality_geometry
 check('all_unmatched_cases_audited',unmatched.length===(reconciliation.unmatched_osm||[]).length,{count:unmatched.length});
 check('all_duplicate_groups_audited',duplicateGroups.length===(reconciliation.duplicate_legal_mappings||[]).length,{count:duplicateGroups.length});
 check('all_type_mismatches_audited',typeMismatches.length===(reconciliation.type_mismatches||[]).length,{count:typeMismatches.length});
+const missingReviewedRelations=reviewedOverrideValidation.filter(x=>!x.relation_present).map(x=>x.osm_relation_id);
+const missingReviewedUats=reviewedOverrideValidation.filter(x=>!x.official_uat_present).map(x=>({osm_relation_id:x.osm_relation_id,legal_id:x.legal_id}));
+check('reviewed_override_relations_present',missingReviewedRelations.length===0,{missing:missingReviewedRelations});
+check('reviewed_override_uats_present',missingReviewedUats.length===0,{missing:missingReviewedUats});
+if(!officialLocalityGeometryError){
+ const badContainment=reviewedOverrideValidation.filter(x=>x.identity_containment_ok!==true).map(x=>({osm_relation_id:x.osm_relation_id,legal_id:x.legal_id,containment:x.official_locality_containment}));
+ check('reviewed_override_identity_containment_stable',badContainment.length===0,{failed:badContainment});
+}
 
 const report={
  schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',
@@ -255,10 +285,12 @@ const report={
   requires_review_count:unmatched.filter(x=>x.audit_classification==='requires_review').length,
   duplicate_group_count:duplicateGroups.length,
   type_mismatch_count:typeMismatches.length,
+  reviewed_override_count:reviewedOverrideValidation.length,
+  reviewed_override_containment_failure_count:reviewedOverrideValidation.filter(x=>x.identity_containment_ok===false).length,
   history_error_count:historyErrors.length,
   diagnostic_warning_count:warnings.length
  },
- unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,warnings,failures
+ unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,reviewed_overrides:reviewedOverrideValidation,warnings,failures
 };
 const historyOut={schema_version:1,generated_at:report.generated_at,source:'OpenStreetMap API 0.6 relation history',relation_count:targetIds.length,history_count:histories.length,error_count:historyErrors.length,errors:historyErrors,relations:histories};
 await mkdir('data/current',{recursive:true});await mkdir('data/sources',{recursive:true});
