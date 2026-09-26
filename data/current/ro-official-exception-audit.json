@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T12:08:56.266Z",
+  "generated_at": "2026-09-26T12:17:10.223Z",
   "jurisdiction": "RO",
   "scope": "Targeted audit of unresolved/duplicate/type-conflict cases from official SIRUTA reconciliation.",
   "policy": "Diagnostic only. Exact SIRUTA hierarchy and OSM provenance are recorded; no fuzzy candidate is auto-assigned. OSM geometry is not treated as legal authority.",
@@ -14,10 +14,18 @@
       }
     },
     {
+      "name": "official_locality_geometry_available",
+      "ok": true,
+      "detail": {
+        "error": null,
+        "feature_count": 676
+      }
+    },
+    {
       "name": "all_unmatched_cases_audited",
       "ok": true,
       "detail": {
-        "count": 15
+        "count": 28
       }
     },
     {
@@ -31,17 +39,18 @@
       "name": "all_type_mismatches_audited",
       "ok": true,
       "detail": {
-        "count": 4
+        "count": 5
       }
     }
   ],
   "summary": {
-    "target_relation_count": 21,
-    "unmatched_case_count": 15,
-    "exact_component_locality_single_uat_count": 6,
-    "requires_review_count": 9,
+    "target_relation_count": 35,
+    "unmatched_case_count": 28,
+    "single_official_uat_locality_containment_count": 26,
+    "exact_component_locality_single_uat_count": 0,
+    "requires_review_count": 2,
     "duplicate_group_count": 1,
-    "type_mismatch_count": 4,
+    "type_mismatch_count": 5,
     "history_error_count": 0
   },
   "unmatched": [
@@ -118,44 +127,100 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "143888",
-          "legal_name": "ALȚINA",
+          "legal_name": "ALTINA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SIBIU",
+          "legal_parent_name": "SIBIU",
           "edit_distance": 1
         },
         {
           "legal_id": "146012",
           "legal_name": "ALMA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SIBIU",
+          "legal_parent_name": "SIBIU",
           "edit_distance": 3
         },
         {
           "legal_id": "143646",
-          "legal_name": "TÂRNAVA",
+          "legal_name": "TARNAVA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SIBIU",
+          "legal_parent_name": "SIBIU",
           "edit_distance": 4
         },
         {
           "legal_id": "143682",
-          "legal_name": "AGNITA",
+          "legal_name": "ORAS AGNITA",
           "legal_type": "town",
-          "legal_parent_name": "JUDEȚUL SIBIU",
+          "legal_parent_name": "SIBIU",
           "edit_distance": 4
         },
         {
           "legal_id": "143995",
-          "legal_name": "AȚEL",
+          "legal_name": "ATEL",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SIBIU",
+          "legal_parent_name": "SIBIU",
           "edit_distance": 4
         }
       ],
-      "audit_classification": "requires_review"
+      "official_locality_containment": [
+        {
+          "legal_id": "143888",
+          "legal_name": "ALTINA",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 3,
+          "inside_count": 3,
+          "inside_localities": [
+            {
+              "siruta": "143904",
+              "name": "Beneşti"
+            },
+            {
+              "siruta": "143913",
+              "name": "Ghijasa de Sus"
+            },
+            {
+              "siruta": "143897",
+              "name": "Alţina"
+            }
+          ]
+        },
+        {
+          "legal_id": "143646",
+          "legal_name": "TARNAVA",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "143682",
+          "legal_name": "ORAS AGNITA",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "143995",
+          "legal_name": "ATEL",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "146012",
+          "legal_name": "ALMA",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r14743203",
@@ -181,7 +246,7 @@
         {
           "siruta": "155662",
           "name": "BARA",
-          "county_name": "JUDEȚUL TIMIȘ",
+          "county_name": "TIMIS",
           "legal_type": "commune"
         }
       ],
@@ -235,44 +300,453 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "121386",
           "legal_name": "BIRA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL NEAMȚ",
+          "legal_parent_name": "NEAMT",
           "edit_distance": 1
         },
         {
           "legal_id": "121153",
           "legal_name": "BAHNA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL NEAMȚ",
+          "legal_parent_name": "NEAMT",
           "edit_distance": 2
         },
         {
           "legal_id": "121652",
           "legal_name": "BORCA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL NEAMȚ",
+          "legal_parent_name": "NEAMT",
           "edit_distance": 2
         },
         {
           "legal_id": "120922",
           "legal_name": "HORIA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL NEAMȚ",
+          "legal_parent_name": "NEAMT",
           "edit_distance": 3
         },
         {
           "legal_id": "120968",
-          "legal_name": "BICAZ",
+          "legal_name": "ORAS BICAZ",
           "legal_type": "town",
-          "legal_parent_name": "JUDEȚUL NEAMȚ",
+          "legal_parent_name": "NEAMT",
           "edit_distance": 3
         }
       ],
-      "audit_classification": "requires_review"
+      "official_locality_containment": [
+        {
+          "legal_id": "121386",
+          "legal_name": "BIRA",
+          "legal_parent_name": "NEAMT",
+          "official_locality_count": 3,
+          "inside_count": 3,
+          "inside_localities": [
+            {
+              "siruta": "121395",
+              "name": "Bira"
+            },
+            {
+              "siruta": "121420",
+              "name": "Negreşti"
+            },
+            {
+              "siruta": "121448",
+              "name": "Rediu"
+            }
+          ]
+        },
+        {
+          "legal_id": "120922",
+          "legal_name": "HORIA",
+          "legal_parent_name": "NEAMT",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "120968",
+          "legal_name": "ORAS BICAZ",
+          "legal_parent_name": "NEAMT",
+          "official_locality_count": 7,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "121153",
+          "legal_name": "BAHNA",
+          "legal_parent_name": "NEAMT",
+          "official_locality_count": 8,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "121652",
+          "legal_name": "BORCA",
+          "legal_parent_name": "NEAMT",
+          "official_locality_count": 7,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "155662",
+          "legal_name": "BARA",
+          "legal_parent_name": "TIMIS",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r9695110",
+      "osm_relation_id": 9695110,
+      "osm_name": "Bârca",
+      "osm_parent_id": "osm-r2366970",
+      "osm_parent_name": "Dolj",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Bârca",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q252005",
+        "wikipedia": "ro:Comuna Bârca, Dolj"
+      },
+      "history": {
+        "relation_id": 9695110,
+        "created_at": "2019-06-16T16:53:11Z",
+        "current_version": 4,
+        "last_modified_at": "2022-03-06T15:13:18Z",
+        "last_changeset": 118162952,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Bârca",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q252005",
+          "wikipedia": "ro:Comuna Bârca, Dolj"
+        },
+        "current_member_count": 6,
+        "history_signals": {
+          "name_values": [
+            "Bârca"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "6",
+            "9",
+            "8"
+          ],
+          "place_values": [
+            "town",
+            "district",
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ancpi",
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "70940",
+          "legal_name": "BIRCA",
+          "legal_type": "commune",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 1
+        },
+        {
+          "legal_id": "72276",
+          "legal_name": "FARCAS",
+          "legal_type": "commune",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 2
+        },
+        {
+          "legal_id": "74859",
+          "legal_name": "CARCEA",
+          "legal_type": "commune",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 2
+        },
+        {
+          "legal_id": "74867",
+          "legal_name": "CARNA",
+          "legal_type": "commune",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 2
+        },
+        {
+          "legal_id": "70502",
+          "legal_name": "ORAS SEGARCEA",
+          "legal_type": "town",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 4
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "70940",
+          "legal_name": "BIRCA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 1,
+          "inside_count": 1,
+          "inside_localities": [
+            {
+              "siruta": "70959",
+              "name": "Bârca"
+            }
+          ]
+        },
+        {
+          "legal_id": "70502",
+          "legal_name": "ORAS SEGARCEA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "72276",
+          "legal_name": "FARCAS",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "74859",
+          "legal_name": "CARCEA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "74867",
+          "legal_name": "CARNA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r10514436",
+      "osm_relation_id": 10514436,
+      "osm_name": "Bârghiș",
+      "osm_parent_id": "osm-r2248586",
+      "osm_parent_name": "Sibiu",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Bârghiș",
+        "name:hu": "Bürkös",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary"
+      },
+      "history": {
+        "relation_id": 10514436,
+        "created_at": "2019-12-30T18:58:05Z",
+        "current_version": 3,
+        "last_modified_at": "2024-09-09T10:16:50Z",
+        "last_changeset": 156387215,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Bârghiș",
+          "name:hu": "Bürkös",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary"
+        },
+        "current_member_count": 7,
+        "history_signals": {
+          "name_values": [
+            "Bârghiș"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "9",
+            "8"
+          ],
+          "place_values": [
+            "district",
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "144232",
+          "legal_name": "BIRGHIS",
+          "legal_type": "commune",
+          "legal_parent_name": "SIBIU",
+          "edit_distance": 1
+        },
+        {
+          "legal_id": "144410",
+          "legal_name": "BRUIU",
+          "legal_type": "commune",
+          "legal_parent_name": "SIBIU",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "144553",
+          "legal_name": "DARLOS",
+          "legal_type": "commune",
+          "legal_parent_name": "SIBIU",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "143646",
+          "legal_name": "TARNAVA",
+          "legal_type": "commune",
+          "legal_parent_name": "SIBIU",
+          "edit_distance": 5
+        },
+        {
+          "legal_id": "143682",
+          "legal_name": "ORAS AGNITA",
+          "legal_type": "town",
+          "legal_parent_name": "SIBIU",
+          "edit_distance": 5
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "144232",
+          "legal_name": "BIRGHIS",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 6,
+          "inside_count": 6,
+          "inside_localities": [
+            {
+              "siruta": "144278",
+              "name": "Pelişor"
+            },
+            {
+              "siruta": "144287",
+              "name": "Vecerd"
+            },
+            {
+              "siruta": "144296",
+              "name": "Zlagna"
+            },
+            {
+              "siruta": "144250",
+              "name": "Apoş"
+            },
+            {
+              "siruta": "144269",
+              "name": "Ighişu Vechi"
+            },
+            {
+              "siruta": "144241",
+              "name": "Bârghiş"
+            }
+          ]
+        },
+        {
+          "legal_id": "143646",
+          "legal_name": "TARNAVA",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "143682",
+          "legal_name": "ORAS AGNITA",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "144410",
+          "legal_name": "BRUIU",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "144553",
+          "legal_name": "DARLOS",
+          "legal_parent_name": "SIBIU",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r14739568",
@@ -297,20 +771,20 @@
       "candidates": [
         {
           "siruta": "40704",
-          "name": "BUNEȘTI",
-          "county_name": "JUDEȚUL BRAȘOV",
+          "name": "BUNESTI",
+          "county_name": "BRASOV",
           "legal_type": "commune"
         },
         {
           "siruta": "147465",
-          "name": "BUNEȘTI",
-          "county_name": "JUDEȚUL SUCEAVA",
+          "name": "BUNESTI",
+          "county_name": "SUCEAVA",
           "legal_type": "commune"
         },
         {
           "siruta": "168960",
-          "name": "BUNEȘTI",
-          "county_name": "JUDEȚUL VÂLCEA",
+          "name": "BUNESTI",
+          "county_name": "VALCEA",
           "legal_type": "commune"
         }
       ],
@@ -361,54 +835,156 @@
           "siruta_code_values": []
         }
       },
-      "exact_component_locality_candidates": [
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
         {
-          "component_siruta": "162951",
-          "component_name": "BUNEȘTI",
           "legal_id": "162924",
-          "legal_name": "BUNEȘTI-AVEREȘTI",
+          "legal_name": "BUNESTI-AVERESTI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VASLUI"
+          "legal_parent_name": "VASLUI"
         }
       ],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "162381",
-          "legal_name": "BĂCEȘTI",
+          "legal_name": "BACESTI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VASLUI",
+          "legal_parent_name": "VASLUI",
           "edit_distance": 2
         },
         {
           "legal_id": "162871",
-          "legal_name": "BOȚEȘTI",
+          "legal_name": "BOTESTI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VASLUI",
+          "legal_parent_name": "VASLUI",
           "edit_distance": 2
         },
         {
           "legal_id": "163253",
-          "legal_name": "DĂNEȘTI",
+          "legal_name": "DANESTI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VASLUI",
+          "legal_parent_name": "VASLUI",
           "edit_distance": 2
         },
         {
           "legal_id": "163734",
-          "legal_name": "DUMEȘTI",
+          "legal_name": "DUMESTI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VASLUI",
+          "legal_parent_name": "VASLUI",
           "edit_distance": 2
         },
         {
           "legal_id": "165470",
-          "legal_name": "PUIEȘTI",
+          "legal_name": "PUIESTI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VASLUI",
+          "legal_parent_name": "VASLUI",
           "edit_distance": 2
         }
       ],
-      "audit_classification": "exact_component_locality_points_to_single_uat"
+      "official_locality_containment": [
+        {
+          "legal_id": "162924",
+          "legal_name": "BUNESTI-AVERESTI",
+          "legal_parent_name": "VASLUI",
+          "official_locality_count": 7,
+          "inside_count": 7,
+          "inside_localities": [
+            {
+              "siruta": "162979",
+              "name": "Podu Oprii"
+            },
+            {
+              "siruta": "162960",
+              "name": "Plopi"
+            },
+            {
+              "siruta": "162988",
+              "name": "Roşiori"
+            },
+            {
+              "siruta": "162933",
+              "name": "Avereşti"
+            },
+            {
+              "siruta": "162951",
+              "name": "Buneşti"
+            },
+            {
+              "siruta": "162997",
+              "name": "Tăbălăeşti"
+            },
+            {
+              "siruta": "162942",
+              "name": "Armăşeni"
+            }
+          ]
+        },
+        {
+          "legal_id": "147465",
+          "legal_name": "BUNESTI",
+          "legal_parent_name": "SUCEAVA",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "162381",
+          "legal_name": "BACESTI",
+          "legal_parent_name": "VASLUI",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "162871",
+          "legal_name": "BOTESTI",
+          "legal_parent_name": "VASLUI",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "163253",
+          "legal_name": "DANESTI",
+          "legal_parent_name": "VASLUI",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "163734",
+          "legal_name": "DUMESTI",
+          "legal_parent_name": "VASLUI",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "165470",
+          "legal_name": "PUIESTI",
+          "legal_parent_name": "VASLUI",
+          "official_locality_count": 13,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "168960",
+          "legal_name": "BUNESTI",
+          "legal_parent_name": "VALCEA",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "40704",
+          "legal_name": "BUNESTI",
+          "legal_parent_name": "BRASOV",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r10541621",
@@ -486,54 +1062,315 @@
           "siruta_code_values": []
         }
       },
-      "exact_component_locality_candidates": [
-        {
-          "component_siruta": "92113",
-          "component_name": "CERTEJU DE JOS",
-          "legal_id": "92097",
-          "legal_name": "VORȚA",
-          "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HUNEDOARA"
-        }
-      ],
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "89240",
           "legal_name": "CERTEJU DE SUS",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HUNEDOARA",
+          "legal_parent_name": "HUNEDOARA",
           "edit_distance": 2
         },
         {
           "legal_id": "89954",
-          "legal_name": "LĂPUGIU DE JOS",
+          "legal_name": "LAPUGIU DE JOS",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HUNEDOARA",
+          "legal_parent_name": "HUNEDOARA",
           "edit_distance": 6
         },
         {
           "legal_id": "90208",
           "legal_name": "LUNCOIU DE JOS",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HUNEDOARA",
+          "legal_parent_name": "HUNEDOARA",
           "edit_distance": 6
         },
         {
           "legal_id": "91795",
-          "legal_name": "VAȚA DE JOS",
+          "legal_name": "VATA DE JOS",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HUNEDOARA",
+          "legal_parent_name": "HUNEDOARA",
           "edit_distance": 6
         },
         {
           "legal_id": "90878",
-          "legal_name": "RÂU DE MORI",
+          "legal_name": "RAU DE MORI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HUNEDOARA",
+          "legal_parent_name": "HUNEDOARA",
           "edit_distance": 8
         }
       ],
-      "audit_classification": "exact_component_locality_points_to_single_uat"
+      "official_locality_containment": [
+        {
+          "legal_id": "89240",
+          "legal_name": "CERTEJU DE SUS",
+          "legal_parent_name": "HUNEDOARA",
+          "official_locality_count": 9,
+          "inside_count": 9,
+          "inside_localities": [
+            {
+              "siruta": "89320",
+              "name": "Topliţa Mureşului"
+            },
+            {
+              "siruta": "89268",
+              "name": "Bocşa Mare"
+            },
+            {
+              "siruta": "89302",
+              "name": "Nojag"
+            },
+            {
+              "siruta": "89277",
+              "name": "Bocşa Mică"
+            },
+            {
+              "siruta": "89295",
+              "name": "Măgura-Topliţa"
+            },
+            {
+              "siruta": "89339",
+              "name": "Vărmaga"
+            },
+            {
+              "siruta": "89259",
+              "name": "Certeju de Sus"
+            },
+            {
+              "siruta": "89286",
+              "name": "Hondol"
+            },
+            {
+              "siruta": "89311",
+              "name": "Săcărâmb"
+            }
+          ]
+        },
+        {
+          "legal_id": "89954",
+          "legal_name": "LAPUGIU DE JOS",
+          "legal_parent_name": "HUNEDOARA",
+          "official_locality_count": 10,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "90208",
+          "legal_name": "LUNCOIU DE JOS",
+          "legal_parent_name": "HUNEDOARA",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "90878",
+          "legal_name": "RAU DE MORI",
+          "legal_parent_name": "HUNEDOARA",
+          "official_locality_count": 11,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "91795",
+          "legal_name": "VATA DE JOS",
+          "legal_parent_name": "HUNEDOARA",
+          "official_locality_count": 13,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r3277038",
+      "osm_relation_id": 3277038,
+      "osm_name": "Cluj-Napoca",
+      "osm_parent_id": "osm-r91733",
+      "osm_parent_name": "Cluj",
+      "osm_entity_type": "municipality",
+      "explicit_siruta_tag": {
+        "key": "siruta:code",
+        "value": "54984"
+      },
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "explicit_siruta_code_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Cluj-Napoca",
+        "name:de": "Klausenburg",
+        "name:hu": "Kolozsvár",
+        "name:la": "Claudiopolis",
+        "name:prefix": "Municipiul",
+        "name:ro": "Cluj-Napoca",
+        "name:ru": "Клуж-Напока",
+        "name:sk": "Kluž",
+        "place": "city",
+        "place:ro": "municipiu",
+        "population": "324576",
+        "siruta:code": "54984",
+        "source": "ANCPI 3rd order set form data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q100188",
+        "wikipedia": "ro:Cluj-Napoca"
+      },
+      "history": {
+        "relation_id": 3277038,
+        "created_at": "2013-10-17T10:25:31Z",
+        "current_version": 23,
+        "last_modified_at": "2025-04-25T13:59:25Z",
+        "last_changeset": 165426275,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Cluj-Napoca",
+          "name:de": "Klausenburg",
+          "name:hu": "Kolozsvár",
+          "name:la": "Claudiopolis",
+          "name:prefix": "Municipiul",
+          "name:ro": "Cluj-Napoca",
+          "name:ru": "Клуж-Напока",
+          "name:sk": "Kluž",
+          "place": "city",
+          "place:ro": "municipiu",
+          "population": "324576",
+          "siruta:code": "54984",
+          "source": "ANCPI 3rd order set form data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q100188",
+          "wikipedia": "ro:Cluj-Napoca"
+        },
+        "current_member_count": 8,
+        "history_signals": {
+          "name_values": [
+            "Cluj-Napoca"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "6",
+            "8"
+          ],
+          "place_values": [
+            "city"
+          ],
+          "place_ro_values": [
+            "municipiu"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set from data.gov.ro",
+            "ANCPI 3rd order set form data.gov.ro"
+          ],
+          "siruta_code_values": [
+            "54984"
+          ]
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
+        {
+          "legal_id": "54975",
+          "legal_name": "CLUJ-NAPOCA",
+          "legal_type": "municipality",
+          "legal_parent_name": "CLUJ"
+        }
+      ],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "54975",
+          "legal_name": "CLUJ-NAPOCA",
+          "legal_type": "municipality",
+          "legal_parent_name": "CLUJ",
+          "edit_distance": 0
+        },
+        {
+          "legal_id": "57350",
+          "legal_name": "COJOCNA",
+          "legal_type": "commune",
+          "legal_parent_name": "CLUJ",
+          "edit_distance": 7
+        },
+        {
+          "legal_id": "58311",
+          "legal_name": "LUNA",
+          "legal_type": "commune",
+          "legal_parent_name": "CLUJ",
+          "edit_distance": 7
+        },
+        {
+          "legal_id": "55062",
+          "legal_name": "CUZDRIOARA",
+          "legal_type": "commune",
+          "legal_parent_name": "CLUJ",
+          "edit_distance": 8
+        },
+        {
+          "legal_id": "55623",
+          "legal_name": "ALUNIS",
+          "legal_type": "commune",
+          "legal_parent_name": "CLUJ",
+          "edit_distance": 8
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "54975",
+          "legal_name": "CLUJ-NAPOCA",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 1,
+          "inside_count": 1,
+          "inside_localities": [
+            {
+              "siruta": "54984",
+              "name": "Cluj-Napoca"
+            }
+          ]
+        },
+        {
+          "legal_id": "55062",
+          "legal_name": "CUZDRIOARA",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "55623",
+          "legal_name": "ALUNIS",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "57350",
+          "legal_name": "COJOCNA",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 8,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "58311",
+          "legal_name": "LUNA",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r14783943",
@@ -608,44 +1445,92 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "10514",
-          "legal_name": "COVĂSINȚ",
+          "legal_name": "COVASINT",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL ARAD",
+          "legal_parent_name": "ARAD",
           "edit_distance": 1
         },
         {
           "legal_id": "10346",
-          "legal_name": "CĂRAND",
+          "legal_name": "CARAND",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL ARAD",
+          "legal_parent_name": "ARAD",
           "edit_distance": 4
         },
         {
           "legal_id": "10943",
-          "legal_name": "GURAHONȚ",
+          "legal_name": "GURAHONT",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL ARAD",
+          "legal_parent_name": "ARAD",
           "edit_distance": 5
         },
         {
           "legal_id": "11478",
           "legal_name": "MONEASA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL ARAD",
+          "legal_parent_name": "ARAD",
           "edit_distance": 5
         },
         {
           "legal_id": "11842",
-          "legal_name": "SĂVÂRȘIN",
+          "legal_name": "SAVARSIN",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL ARAD",
+          "legal_parent_name": "ARAD",
           "edit_distance": 5
         }
       ],
-      "audit_classification": "requires_review"
+      "official_locality_containment": [
+        {
+          "legal_id": "10514",
+          "legal_name": "COVASINT",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 1,
+          "inside_count": 1,
+          "inside_localities": [
+            {
+              "siruta": "10523",
+              "name": "Covăsinţ"
+            }
+          ]
+        },
+        {
+          "legal_id": "10346",
+          "legal_name": "CARAND",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "10943",
+          "legal_name": "GURAHONT",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 10,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "11478",
+          "legal_name": "MONEASA",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "11842",
+          "legal_name": "SAVARSIN",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 9,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r14871174",
@@ -717,54 +1602,108 @@
           "siruta_code_values": []
         }
       },
-      "exact_component_locality_candidates": [
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
         {
-          "component_siruta": "140841",
-          "component_name": "CRISTUR-CRIȘENI",
           "legal_id": "140823",
-          "legal_name": "CRIȘENI",
+          "legal_name": "CRISENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SĂLAJ"
+          "legal_parent_name": "SALAJ"
         }
       ],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "140823",
-          "legal_name": "CRIȘENI",
+          "legal_name": "CRISENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SĂLAJ",
+          "legal_parent_name": "SALAJ",
           "edit_distance": 8
         },
         {
           "legal_id": "141535",
           "legal_name": "HOROATU CRASNEI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SĂLAJ",
+          "legal_parent_name": "SALAJ",
           "edit_distance": 8
         },
         {
           "legal_id": "140770",
-          "legal_name": "CRISTOLȚ",
+          "legal_name": "CRISTOLT",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SĂLAJ",
+          "legal_parent_name": "SALAJ",
           "edit_distance": 10
         },
         {
           "legal_id": "140379",
           "legal_name": "BUCIUMI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SĂLAJ",
+          "legal_parent_name": "SALAJ",
           "edit_distance": 11
         },
         {
           "legal_id": "140477",
           "legal_name": "CARASTELEC",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SĂLAJ",
+          "legal_parent_name": "SALAJ",
           "edit_distance": 11
         }
       ],
-      "audit_classification": "exact_component_locality_points_to_single_uat"
+      "official_locality_containment": [
+        {
+          "legal_id": "140823",
+          "legal_name": "CRISENI",
+          "legal_parent_name": "SALAJ",
+          "official_locality_count": 3,
+          "inside_count": 3,
+          "inside_localities": [
+            {
+              "siruta": "140841",
+              "name": "Cristur-Crişeni"
+            },
+            {
+              "siruta": "140850",
+              "name": "Gârceiu"
+            },
+            {
+              "siruta": "140832",
+              "name": "Crişeni"
+            }
+          ]
+        },
+        {
+          "legal_id": "140379",
+          "legal_name": "BUCIUMI",
+          "legal_parent_name": "SALAJ",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "140477",
+          "legal_name": "CARASTELEC",
+          "legal_parent_name": "SALAJ",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "140770",
+          "legal_name": "CRISTOLT",
+          "legal_parent_name": "SALAJ",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "141535",
+          "legal_name": "HOROATU CRASNEI",
+          "legal_parent_name": "SALAJ",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r14786139",
@@ -836,14 +1775,13 @@
           "siruta_code_values": []
         }
       },
-      "exact_component_locality_candidates": [
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
         {
-          "component_siruta": "137559",
-          "component_name": "CULCIU MARE",
           "legal_id": "137540",
           "legal_name": "CULCIU",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SATU MARE"
+          "legal_parent_name": "SATU-MARE"
         }
       ],
       "nearest_official_uat_candidates": [
@@ -851,39 +1789,524 @@
           "legal_id": "136483",
           "legal_name": "SATU MARE",
           "legal_type": "municipality",
-          "legal_parent_name": "JUDEȚUL SATU MARE",
+          "legal_parent_name": "SATU-MARE",
           "edit_distance": 5
         },
         {
           "legal_id": "137540",
           "legal_name": "CULCIU",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SATU MARE",
+          "legal_parent_name": "SATU-MARE",
           "edit_distance": 5
         },
         {
           "legal_id": "139009",
           "legal_name": "TARNA MARE",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SATU MARE",
+          "legal_parent_name": "SATU-MARE",
           "edit_distance": 6
         },
         {
           "legal_id": "137504",
-          "legal_name": "CRUCIȘOR",
+          "legal_name": "CRUCISOR",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL SATU MARE",
+          "legal_parent_name": "SATU-MARE",
           "edit_distance": 7
         },
         {
           "legal_id": "136526",
           "legal_name": "CAREI",
           "legal_type": "municipality",
-          "legal_parent_name": "JUDEȚUL SATU MARE",
+          "legal_parent_name": "SATU-MARE",
           "edit_distance": 8
         }
       ],
-      "audit_classification": "exact_component_locality_points_to_single_uat"
+      "official_locality_containment": [
+        {
+          "legal_id": "137540",
+          "legal_name": "CULCIU",
+          "legal_parent_name": "SATU-MARE",
+          "official_locality_count": 6,
+          "inside_count": 6,
+          "inside_localities": [
+            {
+              "siruta": "137568",
+              "name": "Apateu"
+            },
+            {
+              "siruta": "137586",
+              "name": "Corod"
+            },
+            {
+              "siruta": "137595",
+              "name": "Culciu Mic"
+            },
+            {
+              "siruta": "137602",
+              "name": "Lipău"
+            },
+            {
+              "siruta": "137559",
+              "name": "Culciu Mare"
+            },
+            {
+              "siruta": "137577",
+              "name": "Cărăşeu"
+            }
+          ]
+        },
+        {
+          "legal_id": "136483",
+          "legal_name": "SATU MARE",
+          "legal_parent_name": "SATU-MARE",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "136526",
+          "legal_name": "CAREI",
+          "legal_parent_name": "SATU-MARE",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "137504",
+          "legal_name": "CRUCISOR",
+          "legal_parent_name": "SATU-MARE",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "139009",
+          "legal_name": "TARNA MARE",
+          "legal_parent_name": "SATU-MARE",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r13954482",
+      "osm_relation_id": 13954482,
+      "osm_name": "Fântânele",
+      "osm_parent_id": "osm-r2248721",
+      "osm_parent_name": "Arad",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_ambiguous",
+      "candidates": [
+        {
+          "siruta": "63334",
+          "name": "FANTANELE",
+          "county_name": "CONSTANTA",
+          "legal_type": "commune"
+        },
+        {
+          "siruta": "100317",
+          "name": "FANTANELE",
+          "county_name": "IASI",
+          "legal_type": "commune"
+        },
+        {
+          "siruta": "116796",
+          "name": "FANTANELE",
+          "county_name": "MURES",
+          "legal_type": "commune"
+        },
+        {
+          "siruta": "133278",
+          "name": "FANTANELE",
+          "county_name": "PRAHOVA",
+          "legal_type": "commune"
+        },
+        {
+          "siruta": "148453",
+          "name": "FANTANELE",
+          "county_name": "SUCEAVA",
+          "legal_type": "commune"
+        },
+        {
+          "siruta": "155118",
+          "name": "FANTANELE",
+          "county_name": "TELEORMAN",
+          "legal_type": "commune"
+        }
+      ],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Fântânele",
+        "name:hu": "Angyalkút",
+        "name:prefix": "Comuna",
+        "name:ro": "Fântânele",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary"
+      },
+      "history": {
+        "relation_id": 13954482,
+        "created_at": "2022-03-23T12:15:34Z",
+        "current_version": 3,
+        "last_modified_at": "2024-11-21T21:29:49Z",
+        "last_changeset": 159436253,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Fântânele",
+          "name:hu": "Angyalkút",
+          "name:prefix": "Comuna",
+          "name:ro": "Fântânele",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary"
+        },
+        "current_member_count": 5,
+        "history_signals": {
+          "name_values": [
+            "Fântânele"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "9280",
+          "legal_name": "FANTINELE",
+          "legal_type": "commune",
+          "legal_parent_name": "ARAD",
+          "edit_distance": 1
+        },
+        {
+          "legal_id": "12091",
+          "legal_name": "ORAS SANTANA",
+          "legal_type": "town",
+          "legal_parent_name": "ARAD",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "11174",
+          "legal_name": "HALMAGEL",
+          "legal_type": "commune",
+          "legal_parent_name": "ARAD",
+          "edit_distance": 5
+        },
+        {
+          "legal_id": "10346",
+          "legal_name": "CARAND",
+          "legal_type": "commune",
+          "legal_parent_name": "ARAD",
+          "edit_distance": 6
+        },
+        {
+          "legal_id": "12689",
+          "legal_name": "VARFURILE",
+          "legal_type": "commune",
+          "legal_parent_name": "ARAD",
+          "edit_distance": 6
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "9280",
+          "legal_name": "FANTINELE",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 2,
+          "inside_count": 2,
+          "inside_localities": [
+            {
+              "siruta": "9324",
+              "name": "Tisa Nouă"
+            },
+            {
+              "siruta": "9299",
+              "name": "Fântânele"
+            }
+          ]
+        },
+        {
+          "legal_id": "100317",
+          "legal_name": "FANTANELE",
+          "legal_parent_name": "IASI",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "10346",
+          "legal_name": "CARAND",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "11174",
+          "legal_name": "HALMAGEL",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "116796",
+          "legal_name": "FANTANELE",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "12091",
+          "legal_name": "ORAS SANTANA",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "12689",
+          "legal_name": "VARFURILE",
+          "legal_parent_name": "ARAD",
+          "official_locality_count": 8,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "133278",
+          "legal_name": "FANTANELE",
+          "legal_parent_name": "PRAHOVA",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "148453",
+          "legal_name": "FANTANELE",
+          "legal_parent_name": "SUCEAVA",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "155118",
+          "legal_name": "FANTANELE",
+          "legal_parent_name": "TELEORMAN",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "63334",
+          "legal_name": "FANTANELE",
+          "legal_parent_name": "CONSTANTA",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r9695114",
+      "osm_relation_id": 9695114,
+      "osm_name": "Gângiova",
+      "osm_parent_id": "osm-r2366970",
+      "osm_parent_name": "Dolj",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Gângiova",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q16426459",
+        "wikipedia": "ro:Comuna Gângiova, Dolj"
+      },
+      "history": {
+        "relation_id": 9695114,
+        "created_at": "2019-06-16T16:53:11Z",
+        "current_version": 4,
+        "last_modified_at": "2022-03-06T15:13:18Z",
+        "last_changeset": 118162952,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Gângiova",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q16426459",
+          "wikipedia": "ro:Comuna Gângiova, Dolj"
+        },
+        "current_member_count": 7,
+        "history_signals": {
+          "name_values": [
+            "Gângiova"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "6",
+            "9",
+            "8"
+          ],
+          "place_values": [
+            "town",
+            "district",
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ancpi",
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "72579",
+          "legal_name": "GINGIOVA",
+          "legal_type": "commune",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 1
+        },
+        {
+          "legal_id": "69900",
+          "legal_name": "CRAIOVA",
+          "legal_type": "municipality",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "73996",
+          "legal_name": "SADOVA",
+          "legal_type": "commune",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "70986",
+          "legal_name": "BRABOVA",
+          "legal_type": "commune",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 5
+        },
+        {
+          "legal_id": "72463",
+          "legal_name": "GIGHERA",
+          "legal_type": "commune",
+          "legal_parent_name": "DOLJ",
+          "edit_distance": 5
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "72579",
+          "legal_name": "GINGIOVA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 2,
+          "inside_count": 2,
+          "inside_localities": [
+            {
+              "siruta": "72597",
+              "name": "Comoşteni"
+            },
+            {
+              "siruta": "72588",
+              "name": "Gângiova"
+            }
+          ]
+        },
+        {
+          "legal_id": "69900",
+          "legal_name": "CRAIOVA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 9,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "70986",
+          "legal_name": "BRABOVA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "72463",
+          "legal_name": "GIGHERA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "73996",
+          "legal_name": "SADOVA",
+          "legal_parent_name": "DOLJ",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r9744206",
@@ -908,20 +2331,20 @@
       "candidates": [
         {
           "siruta": "52990",
-          "name": "GRĂDINARI",
-          "county_name": "JUDEȚUL CARAȘ-SEVERIN",
+          "name": "GRADINARI",
+          "county_name": "CARAS-SEVERIN",
           "legal_type": "commune"
         },
         {
           "siruta": "103407",
-          "name": "GRĂDINARI",
-          "county_name": "JUDEȚUL GIURGIU",
+          "name": "GRADINARI",
+          "county_name": "GIURGIU",
           "legal_type": "commune"
         },
         {
           "siruta": "127171",
-          "name": "GRĂDINARI",
-          "county_name": "JUDEȚUL OLT",
+          "name": "GRADINARI",
+          "county_name": "OLT",
           "legal_type": "commune"
         }
       ],
@@ -975,44 +2398,335 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "170346",
           "legal_name": "GRĂDIȘTEA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VÂLCEA",
+          "legal_parent_name": "VALCEA",
           "edit_distance": 4
         },
         {
           "legal_id": "171209",
-          "legal_name": "MĂDULARI",
+          "legal_name": "MADULARI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VÂLCEA",
+          "legal_parent_name": "VALCEA",
           "edit_distance": 4
         },
         {
           "legal_id": "167981",
-          "legal_name": "DRĂGĂȘANI",
+          "legal_name": "DRAGASANI",
           "legal_type": "municipality",
-          "legal_parent_name": "JUDEȚUL VÂLCEA",
+          "legal_parent_name": "VALCEA",
           "edit_distance": 5
         },
         {
           "legal_id": "169119",
-          "legal_name": "CÂINENI",
+          "legal_name": "CAINENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VÂLCEA",
+          "legal_parent_name": "VALCEA",
           "edit_distance": 5
         },
         {
           "legal_id": "173061",
-          "legal_name": "SLĂTIOARA",
+          "legal_name": "SLATIOARA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL VÂLCEA",
+          "legal_parent_name": "VALCEA",
           "edit_distance": 5
         }
       ],
-      "audit_classification": "requires_review"
+      "official_locality_containment": [
+        {
+          "legal_id": "127171",
+          "legal_name": "GRADINARI",
+          "legal_parent_name": "OLT",
+          "official_locality_count": 4,
+          "inside_count": 4,
+          "inside_localities": [
+            {
+              "siruta": "127199",
+              "name": "Petculeşti"
+            },
+            {
+              "siruta": "127206",
+              "name": "Runcu Mare"
+            },
+            {
+              "siruta": "127215",
+              "name": "Satu Nou"
+            },
+            {
+              "siruta": "127180",
+              "name": "Grădinari"
+            }
+          ]
+        },
+        {
+          "legal_id": "103407",
+          "legal_name": "GRADINARI",
+          "legal_parent_name": "GIURGIU",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "167981",
+          "legal_name": "DRAGASANI",
+          "legal_parent_name": "VALCEA",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "169119",
+          "legal_name": "CAINENI",
+          "legal_parent_name": "VALCEA",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "170346",
+          "legal_name": "GRĂDIȘTEA",
+          "legal_parent_name": "VALCEA",
+          "official_locality_count": 9,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "171209",
+          "legal_name": "MADULARI",
+          "legal_parent_name": "VALCEA",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "173061",
+          "legal_name": "SLATIOARA",
+          "legal_parent_name": "VALCEA",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "52990",
+          "legal_name": "GRADINARI",
+          "legal_parent_name": "CARAS-SEVERIN",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r1207838",
+      "osm_relation_id": 1207838,
+      "osm_name": "Iași",
+      "osm_parent_id": "osm-r2256747",
+      "osm_parent_name": "Iași",
+      "osm_entity_type": "municipality",
+      "explicit_siruta_tag": {
+        "key": "siruta:code",
+        "value": "95079"
+      },
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "explicit_siruta_code_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "alt_name:lv": "Jaši",
+        "alt_name:sr": "Јаш",
+        "boundary": "administrative",
+        "name": "Iași",
+        "name:be": "Ясы",
+        "name:bg": "Яш",
+        "name:cs": "Jasy",
+        "name:hu": "Jászvásár",
+        "name:kk": "Яссы",
+        "name:la": "Iassium",
+        "name:lt": "Jasai",
+        "name:lv": "Jasi",
+        "name:mk": "Јаш",
+        "name:pl": "Jassy",
+        "name:prefix": "Municipiul",
+        "name:ru": "Яссы",
+        "name:sk": "Jasy",
+        "name:sr": "Јаши",
+        "name:uk": "Ясси",
+        "name:zh": "雅西",
+        "place": "city",
+        "place:ro": "municipiu",
+        "siruta:code": "95079",
+        "source": "ANCPI 3rd order set form data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q46852"
+      },
+      "history": {
+        "relation_id": 1207838,
+        "created_at": "2010-10-05T16:16:10Z",
+        "current_version": 27,
+        "last_modified_at": "2025-10-22T07:46:52Z",
+        "last_changeset": 173613626,
+        "current_tags": {
+          "admin_level": "8",
+          "alt_name:lv": "Jaši",
+          "alt_name:sr": "Јаш",
+          "boundary": "administrative",
+          "name": "Iași",
+          "name:be": "Ясы",
+          "name:bg": "Яш",
+          "name:cs": "Jasy",
+          "name:hu": "Jászvásár",
+          "name:kk": "Яссы",
+          "name:la": "Iassium",
+          "name:lt": "Jasai",
+          "name:lv": "Jasi",
+          "name:mk": "Јаш",
+          "name:pl": "Jassy",
+          "name:prefix": "Municipiul",
+          "name:ru": "Яссы",
+          "name:sk": "Jasy",
+          "name:sr": "Јаши",
+          "name:uk": "Ясси",
+          "name:zh": "雅西",
+          "place": "city",
+          "place:ro": "municipiu",
+          "siruta:code": "95079",
+          "source": "ANCPI 3rd order set form data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q46852"
+        },
+        "current_member_count": 10,
+        "history_signals": {
+          "name_values": [
+            "Iași"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "6",
+            "8"
+          ],
+          "place_values": [
+            "city"
+          ],
+          "place_ro_values": [
+            "municipiu"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set form data.gov.ro"
+          ],
+          "siruta_code_values": [
+            "95079"
+          ]
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
+        {
+          "legal_id": "95060",
+          "legal_name": "IASI",
+          "legal_type": "municipality",
+          "legal_parent_name": "IASI"
+        }
+      ],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "95060",
+          "legal_name": "IASI",
+          "legal_type": "municipality",
+          "legal_parent_name": "IASI",
+          "edit_distance": 0
+        },
+        {
+          "legal_id": "100273",
+          "legal_name": "BALS",
+          "legal_type": "commune",
+          "legal_parent_name": "IASI",
+          "edit_distance": 3
+        },
+        {
+          "legal_id": "99441",
+          "legal_name": "TANSA",
+          "legal_type": "commune",
+          "legal_parent_name": "IASI",
+          "edit_distance": 3
+        },
+        {
+          "legal_id": "95239",
+          "legal_name": "REDIU",
+          "legal_type": "commune",
+          "legal_parent_name": "IASI",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "95391",
+          "legal_name": "PASCANI",
+          "legal_type": "municipality",
+          "legal_parent_name": "IASI",
+          "edit_distance": 4
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "95060",
+          "legal_name": "IASI",
+          "legal_parent_name": "IASI",
+          "official_locality_count": 1,
+          "inside_count": 1,
+          "inside_localities": [
+            {
+              "siruta": "95079",
+              "name": "Iaşi"
+            }
+          ]
+        },
+        {
+          "legal_id": "100273",
+          "legal_name": "BALS",
+          "legal_parent_name": "IASI",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "95239",
+          "legal_name": "REDIU",
+          "legal_parent_name": "IASI",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "95391",
+          "legal_name": "PASCANI",
+          "legal_parent_name": "IASI",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "99441",
+          "legal_name": "TANSA",
+          "legal_parent_name": "IASI",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r10514937",
@@ -1087,41 +2801,263 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "41471",
           "legal_name": "MOIECIU",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL BRAȘOV",
+          "legal_parent_name": "BRASOV",
           "edit_distance": 8
         },
         {
           "legal_id": "41382",
-          "legal_name": "MĂIERUȘ",
+          "legal_name": "MAIERUS",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL BRAȘOV",
+          "legal_parent_name": "BRASOV",
           "edit_distance": 9
         },
         {
           "legal_id": "42464",
-          "legal_name": "SÂMBĂTA DE SUS",
+          "legal_name": "SAMBATA DE SUS",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL BRAȘOV",
+          "legal_parent_name": "BRASOV",
           "edit_distance": 9
         },
         {
           "legal_id": "40303",
-          "legal_name": "PREDEAL",
+          "legal_name": "ORAS PREDEAL",
           "legal_type": "town",
-          "legal_parent_name": "JUDEȚUL BRAȘOV",
+          "legal_parent_name": "BRASOV",
           "edit_distance": 10
         },
         {
           "legal_id": "40544",
           "legal_name": "BECLEAN",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL BRAȘOV",
+          "legal_parent_name": "BRASOV",
           "edit_distance": 10
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "41471",
+          "legal_name": "MOIECIU",
+          "legal_parent_name": "BRASOV",
+          "official_locality_count": 6,
+          "inside_count": 6,
+          "inside_localities": [
+            {
+              "siruta": "41505",
+              "name": "Drumul Carului"
+            },
+            {
+              "siruta": "41523",
+              "name": "Moieciu de Sus"
+            },
+            {
+              "siruta": "41514",
+              "name": "Măgura"
+            },
+            {
+              "siruta": "41499",
+              "name": "Cheia"
+            },
+            {
+              "siruta": "41480",
+              "name": "Moieciu de Jos"
+            },
+            {
+              "siruta": "41532",
+              "name": "Peştera"
+            }
+          ]
+        },
+        {
+          "legal_id": "40303",
+          "legal_name": "ORAS PREDEAL",
+          "legal_parent_name": "BRASOV",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "40544",
+          "legal_name": "BECLEAN",
+          "legal_parent_name": "BRASOV",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "41382",
+          "legal_name": "MAIERUS",
+          "legal_parent_name": "BRASOV",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "42464",
+          "legal_name": "SAMBATA DE SUS",
+          "legal_parent_name": "BRASOV",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r14786213",
+      "osm_relation_id": 14786213,
+      "osm_name": "Petreu",
+      "osm_parent_id": "osm-r91731",
+      "osm_parent_name": "Bihor",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Petreu",
+        "name:hu": "Monospetri",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set from data.gov.ro",
+        "type": "boundary"
+      },
+      "history": {
+        "relation_id": 14786213,
+        "created_at": "2022-11-08T03:35:50Z",
+        "current_version": 3,
+        "last_modified_at": "2024-09-06T08:26:31Z",
+        "last_changeset": 156262235,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Petreu",
+          "name:hu": "Monospetri",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set from data.gov.ro",
+          "type": "boundary"
+        },
+        "current_member_count": 6,
+        "history_signals": {
+          "name_values": [
+            "Abrămuț",
+            "Petreu"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set from data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "28415",
+          "legal_name": "CETARIU",
+          "legal_type": "commune",
+          "legal_parent_name": "BIHOR",
+          "edit_distance": 3
+        },
+        {
+          "legal_id": "32161",
+          "legal_name": "PALEU",
+          "legal_type": "commune",
+          "legal_parent_name": "BIHOR",
+          "edit_distance": 3
+        },
+        {
+          "legal_id": "26742",
+          "legal_name": "ASTILEU",
+          "legal_type": "commune",
+          "legal_parent_name": "BIHOR",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "26840",
+          "legal_name": "ORAS STEI",
+          "legal_type": "town",
+          "legal_parent_name": "BIHOR",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "27212",
+          "legal_name": "AUSEU",
+          "legal_type": "commune",
+          "legal_parent_name": "BIHOR",
+          "edit_distance": 4
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "26742",
+          "legal_name": "ASTILEU",
+          "legal_parent_name": "BIHOR",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "26840",
+          "legal_name": "ORAS STEI",
+          "legal_parent_name": "BIHOR",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "27212",
+          "legal_name": "AUSEU",
+          "legal_parent_name": "BIHOR",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "28415",
+          "legal_name": "CETARIU",
+          "legal_parent_name": "BIHOR",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "32161",
+          "legal_name": "PALEU",
+          "legal_parent_name": "BIHOR",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
         }
       ],
       "audit_classification": "requires_review"
@@ -1196,14 +3132,13 @@
           "siruta_code_values": []
         }
       },
-      "exact_component_locality_candidates": [
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
         {
-          "component_siruta": "85216",
-          "component_name": "PORUMBENII MARI",
           "legal_id": "86487",
           "legal_name": "PORUMBENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HARGHITA"
+          "legal_parent_name": "HARGHITA"
         }
       ],
       "nearest_official_uat_candidates": [
@@ -1211,39 +3146,90 @@
           "legal_id": "86487",
           "legal_name": "PORUMBENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HARGHITA",
+          "legal_parent_name": "HARGHITA",
           "edit_distance": 6
         },
         {
           "legal_id": "83375",
-          "legal_name": "PĂULENI-CIUC",
+          "legal_name": "PAULENI-CIUC",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HARGHITA",
+          "legal_parent_name": "HARGHITA",
           "edit_distance": 9
         },
         {
           "legal_id": "86339",
-          "legal_name": "VOȘLĂBENI",
+          "legal_name": "VOSLABENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HARGHITA",
+          "legal_parent_name": "HARGHITA",
           "edit_distance": 10
         },
         {
           "legal_id": "86446",
           "legal_name": "COZMENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HARGHITA",
+          "legal_parent_name": "HARGHITA",
           "edit_distance": 10
         },
         {
           "legal_id": "86501",
           "legal_name": "SATU MARE",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL HARGHITA",
+          "legal_parent_name": "HARGHITA",
           "edit_distance": 10
         }
       ],
-      "audit_classification": "exact_component_locality_points_to_single_uat"
+      "official_locality_containment": [
+        {
+          "legal_id": "86487",
+          "legal_name": "PORUMBENI",
+          "legal_parent_name": "HARGHITA",
+          "official_locality_count": 2,
+          "inside_count": 2,
+          "inside_localities": [
+            {
+              "siruta": "85225",
+              "name": "Porumbenii Mici"
+            },
+            {
+              "siruta": "85216",
+              "name": "Porumbenii Mari"
+            }
+          ]
+        },
+        {
+          "legal_id": "83375",
+          "legal_name": "PAULENI-CIUC",
+          "legal_parent_name": "HARGHITA",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "86339",
+          "legal_name": "VOSLABENI",
+          "legal_parent_name": "HARGHITA",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "86446",
+          "legal_name": "COZMENI",
+          "legal_parent_name": "HARGHITA",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "86501",
+          "legal_name": "SATU MARE",
+          "legal_parent_name": "HARGHITA",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r14523067",
@@ -1268,8 +3254,8 @@
       "candidates": [
         {
           "siruta": "150114",
-          "name": "RÂȘCA",
-          "county_name": "JUDEȚUL SUCEAVA",
+          "name": "RASCA",
+          "county_name": "SUCEAVA",
           "legal_type": "commune"
         }
       ],
@@ -1327,44 +3313,284 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "59238",
-          "legal_name": "RIȘCA",
+          "legal_name": "RISCA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL CLUJ",
+          "legal_parent_name": "CLUJ",
           "edit_distance": 1
         },
         {
           "legal_id": "55160",
           "legal_name": "MICA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL CLUJ",
+          "legal_parent_name": "CLUJ",
           "edit_distance": 3
         },
         {
           "legal_id": "57314",
-          "legal_name": "CÂȚCĂU",
+          "legal_name": "CATCAU",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL CLUJ",
+          "legal_parent_name": "CLUJ",
           "edit_distance": 3
         },
         {
           "legal_id": "57546",
-          "legal_name": "DĂBÂCA",
+          "legal_name": "DABACA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL CLUJ",
+          "legal_parent_name": "CLUJ",
           "edit_distance": 3
         },
         {
           "legal_id": "57742",
           "legal_name": "FRATA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL CLUJ",
+          "legal_parent_name": "CLUJ",
           "edit_distance": 3
         }
       ],
-      "audit_classification": "requires_review"
+      "official_locality_containment": [
+        {
+          "legal_id": "59238",
+          "legal_name": "RISCA",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 4,
+          "inside_count": 4,
+          "inside_localities": [
+            {
+              "siruta": "59247",
+              "name": "Râşca"
+            },
+            {
+              "siruta": "59256",
+              "name": "Dealu Mare"
+            },
+            {
+              "siruta": "59274",
+              "name": "Mărceşti"
+            },
+            {
+              "siruta": "59265",
+              "name": "Lăpuşteşti"
+            }
+          ]
+        },
+        {
+          "legal_id": "150114",
+          "legal_name": "RASCA",
+          "legal_parent_name": "SUCEAVA",
+          "official_locality_count": 5,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "55160",
+          "legal_name": "MICA",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 7,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "57314",
+          "legal_name": "CATCAU",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "57546",
+          "legal_name": "DABACA",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "57742",
+          "legal_name": "FRATA",
+          "legal_parent_name": "CLUJ",
+          "official_locality_count": 8,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r14654340",
+      "osm_relation_id": 14654340,
+      "osm_name": "Rimetea",
+      "osm_parent_id": "osm-r194271",
+      "osm_parent_name": "Alba",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Rimetea",
+        "name:hu": "Torockó",
+        "name:prefix": "Comuna",
+        "name:ro": "Rimetea",
+        "official_name": "Comuna Rimetea",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q16467066",
+        "wikipedia": "en:Rimetea"
+      },
+      "history": {
+        "relation_id": 14654340,
+        "created_at": "2022-10-04T14:06:27Z",
+        "current_version": 4,
+        "last_modified_at": "2026-05-20T11:40:50Z",
+        "last_changeset": 182923617,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Rimetea",
+          "name:hu": "Torockó",
+          "name:prefix": "Comuna",
+          "name:ro": "Rimetea",
+          "official_name": "Comuna Rimetea",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q16467066",
+          "wikipedia": "en:Rimetea"
+        },
+        "current_member_count": 7,
+        "history_signals": {
+          "name_values": [
+            "Rimetea"
+          ],
+          "official_name_values": [
+            "Comuna Rimetea"
+          ],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "6592",
+          "legal_name": "RAMETEA",
+          "legal_type": "commune",
+          "legal_parent_name": "ALBA",
+          "edit_distance": 1
+        },
+        {
+          "legal_id": "5577",
+          "legal_name": "METES",
+          "legal_type": "commune",
+          "legal_parent_name": "ALBA",
+          "edit_distance": 3
+        },
+        {
+          "legal_id": "6627",
+          "legal_name": "RAMET",
+          "legal_type": "commune",
+          "legal_parent_name": "ALBA",
+          "edit_distance": 3
+        },
+        {
+          "legal_id": "3039",
+          "legal_name": "BISTRA",
+          "legal_type": "commune",
+          "legal_parent_name": "ALBA",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "1874",
+          "legal_name": "SEBES",
+          "legal_type": "municipality",
+          "legal_parent_name": "ALBA",
+          "edit_distance": 5
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "6592",
+          "legal_name": "RAMETEA",
+          "legal_parent_name": "ALBA",
+          "official_locality_count": 2,
+          "inside_count": 2,
+          "inside_localities": [
+            {
+              "siruta": "6618",
+              "name": "Colţeşti"
+            },
+            {
+              "siruta": "6609",
+              "name": "Râmetea"
+            }
+          ]
+        },
+        {
+          "legal_id": "1874",
+          "legal_name": "SEBES",
+          "legal_parent_name": "ALBA",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "3039",
+          "legal_name": "BISTRA",
+          "legal_parent_name": "ALBA",
+          "official_locality_count": 35,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "5577",
+          "legal_name": "METES",
+          "legal_parent_name": "ALBA",
+          "official_locality_count": 12,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "6627",
+          "legal_name": "RAMET",
+          "legal_parent_name": "ALBA",
+          "official_locality_count": 13,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r10664072",
@@ -1441,44 +3667,440 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "151870",
-          "legal_name": "ROȘIORI DE VEDE",
+          "legal_name": "ROSIORI DE VEDE",
           "legal_type": "municipality",
-          "legal_parent_name": "JUDEȚUL TELEORMAN",
+          "legal_parent_name": "TELEORMAN",
           "edit_distance": 1
         },
         {
           "legal_id": "152868",
-          "legal_name": "DRĂGĂNEȘTI DE VEDE",
+          "legal_name": "DRAGANESTI DE VEDE",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL TELEORMAN",
+          "legal_parent_name": "TELEORMAN",
           "edit_distance": 8
         },
         {
           "legal_id": "151905",
-          "legal_name": "VIDELE",
+          "legal_name": "ORAS VIDELE",
           "legal_type": "town",
-          "legal_parent_name": "JUDEȚUL TELEORMAN",
+          "legal_parent_name": "TELEORMAN",
           "edit_distance": 12
         },
         {
           "legal_id": "152467",
-          "legal_name": "CĂLMĂȚUIU DE SUS",
+          "legal_name": "CALMATUIU DE SUS",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL TELEORMAN",
+          "legal_parent_name": "TELEORMAN",
           "edit_distance": 12
         },
         {
           "legal_id": "153865",
-          "legal_name": "RĂDOIEȘTI",
+          "legal_name": "RADOIESTI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL TELEORMAN",
+          "legal_parent_name": "TELEORMAN",
           "edit_distance": 12
         }
       ],
-      "audit_classification": "requires_review"
+      "official_locality_containment": [
+        {
+          "legal_id": "151870",
+          "legal_name": "ROSIORI DE VEDE",
+          "legal_parent_name": "TELEORMAN",
+          "official_locality_count": 1,
+          "inside_count": 1,
+          "inside_localities": [
+            {
+              "siruta": "151889",
+              "name": "Rosiori de Vede"
+            }
+          ]
+        },
+        {
+          "legal_id": "151905",
+          "legal_name": "ORAS VIDELE",
+          "legal_parent_name": "TELEORMAN",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "152467",
+          "legal_name": "CALMATUIU DE SUS",
+          "legal_parent_name": "TELEORMAN",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "152868",
+          "legal_name": "DRAGANESTI DE VEDE",
+          "legal_parent_name": "TELEORMAN",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "153865",
+          "legal_name": "RADOIESTI",
+          "legal_parent_name": "TELEORMAN",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r14879053",
+      "osm_relation_id": 14879053,
+      "osm_name": "Sânmihaiu de Câmpie",
+      "osm_parent_id": "osm-r55466",
+      "osm_parent_name": "Bistrița-Năsăud",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Sânmihaiu de Câmpie",
+        "name:hu": "Mezőszentmihály",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set from data.gov.ro",
+        "type": "boundary"
+      },
+      "history": {
+        "relation_id": 14879053,
+        "created_at": "2022-11-12T16:34:41Z",
+        "current_version": 2,
+        "last_modified_at": "2024-09-09T11:11:31Z",
+        "last_changeset": 156389321,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Sânmihaiu de Câmpie",
+          "name:hu": "Mezőszentmihály",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set from data.gov.ro",
+          "type": "boundary"
+        },
+        "current_member_count": 9,
+        "history_signals": {
+          "name_values": [
+            "Sânmihaiu de Câmpie"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set from data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "34477",
+          "legal_name": "SANMIHAIU DE CIMPIE",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 1
+        },
+        {
+          "legal_id": "34422",
+          "legal_name": "SILIVASU DE CIMPIE",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 6
+        },
+        {
+          "legal_id": "33845",
+          "legal_name": "MICESTII DE CAMPIE",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 8
+        },
+        {
+          "legal_id": "32811",
+          "legal_name": "CAIANU MIC",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 12
+        },
+        {
+          "legal_id": "32599",
+          "legal_name": "ORAS SANGEORZ-BAI",
+          "legal_type": "town",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 13
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "34477",
+          "legal_name": "SANMIHAIU DE CIMPIE",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 6,
+          "inside_count": 6,
+          "inside_localities": [
+            {
+              "siruta": "34501",
+              "name": "La Curte"
+            },
+            {
+              "siruta": "34495",
+              "name": "Brăteni"
+            },
+            {
+              "siruta": "34510",
+              "name": "Sălcuţa"
+            },
+            {
+              "siruta": "34529",
+              "name": "Stupini"
+            },
+            {
+              "siruta": "34538",
+              "name": "Zoreni"
+            },
+            {
+              "siruta": "34486",
+              "name": "Sânmihaiu de Câmpie"
+            }
+          ]
+        },
+        {
+          "legal_id": "32599",
+          "legal_name": "ORAS SANGEORZ-BAI",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "32811",
+          "legal_name": "CAIANU MIC",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "33845",
+          "legal_name": "MICESTII DE CAMPIE",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "34422",
+          "legal_name": "SILIVASU DE CIMPIE",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r14872810",
+      "osm_relation_id": 14872810,
+      "osm_name": "Silivașu de Câmpie",
+      "osm_parent_id": "osm-r55466",
+      "osm_parent_name": "Bistrița-Năsăud",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Silivașu de Câmpie",
+        "name:hu": "Mezőszilvás",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set from data.gov.ro",
+        "type": "boundary"
+      },
+      "history": {
+        "relation_id": 14872810,
+        "created_at": "2022-11-11T05:46:12Z",
+        "current_version": 2,
+        "last_modified_at": "2024-09-09T12:07:51Z",
+        "last_changeset": 156391456,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Silivașu de Câmpie",
+          "name:hu": "Mezőszilvás",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set from data.gov.ro",
+          "type": "boundary"
+        },
+        "current_member_count": 6,
+        "history_signals": {
+          "name_values": [
+            "Silivașu de Câmpie"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set from data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "34422",
+          "legal_name": "SILIVASU DE CIMPIE",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 1
+        },
+        {
+          "legal_id": "34477",
+          "legal_name": "SANMIHAIU DE CIMPIE",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 6
+        },
+        {
+          "legal_id": "33845",
+          "legal_name": "MICESTII DE CAMPIE",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 7
+        },
+        {
+          "legal_id": "33337",
+          "legal_name": "ILVA MARE",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 11
+        },
+        {
+          "legal_id": "33364",
+          "legal_name": "ILVA MICA",
+          "legal_type": "commune",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "edit_distance": 11
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "34422",
+          "legal_name": "SILIVASU DE CIMPIE",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 4,
+          "inside_count": 4,
+          "inside_localities": [
+            {
+              "siruta": "34440",
+              "name": "Draga"
+            },
+            {
+              "siruta": "34468",
+              "name": "Porumbenii"
+            },
+            {
+              "siruta": "34431",
+              "name": "Silivaşu de Câmpie"
+            },
+            {
+              "siruta": "34459",
+              "name": "Fânaţele Silivaşului"
+            }
+          ]
+        },
+        {
+          "legal_id": "33337",
+          "legal_name": "ILVA MARE",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "33364",
+          "legal_name": "ILVA MICA",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "33845",
+          "legal_name": "MICESTII DE CAMPIE",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "34477",
+          "legal_name": "SANMIHAIU DE CIMPIE",
+          "legal_parent_name": "BISTRITA-NASAUD",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r12578308",
@@ -1554,54 +4176,285 @@
           "siruta_code_values": []
         }
       },
-      "exact_component_locality_candidates": [
-        {
-          "component_siruta": "116251",
-          "component_name": "SOCOLU DE CÂMPIE",
-          "legal_id": "116224",
-          "legal_name": "COZMA",
-          "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL MUREȘ"
-        }
-      ],
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "115959",
-          "legal_name": "CEUAȘU DE CÂMPIE",
+          "legal_name": "CEUASU DE CAMPIE",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL MUREȘ",
+          "legal_parent_name": "MURES",
           "edit_distance": 5
         },
         {
           "legal_id": "118370",
-          "legal_name": "MIHEȘU DE CÂMPIE",
+          "legal_name": "MIHESU DE CAMPIE",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL MUREȘ",
+          "legal_parent_name": "MURES",
           "edit_distance": 5
         },
         {
           "legal_id": "120370",
-          "legal_name": "ZAU DE CÂMPIE",
+          "legal_name": "ZAU DE CAMPIE",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL MUREȘ",
+          "legal_parent_name": "MURES",
           "edit_distance": 5
         },
         {
           "legal_id": "119527",
-          "legal_name": "SÂNPETRU DE CÂMPIE",
+          "legal_name": "SANPETRU DE CAMPIE",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL MUREȘ",
+          "legal_parent_name": "MURES",
           "edit_distance": 6
         },
         {
           "legal_id": "117275",
-          "legal_name": "GREBENIȘU DE CÂMPIE",
+          "legal_name": "GREBENISU DE CAMPIE",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL MUREȘ",
+          "legal_parent_name": "MURES",
           "edit_distance": 8
         }
       ],
-      "audit_classification": "exact_component_locality_points_to_single_uat"
+      "official_locality_containment": [
+        {
+          "legal_id": "115959",
+          "legal_name": "CEUASU DE CAMPIE",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 8,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "117275",
+          "legal_name": "GREBENISU DE CAMPIE",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "118370",
+          "legal_name": "MIHESU DE CAMPIE",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 8,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "119527",
+          "legal_name": "SANPETRU DE CAMPIE",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "120370",
+          "legal_name": "ZAU DE CAMPIE",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 9,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "requires_review"
+    },
+    {
+      "osm_id": "osm-r8334767",
+      "osm_relation_id": 8334767,
+      "osm_name": "Târgu Mureș",
+      "osm_parent_id": "osm-r2248573",
+      "osm_parent_name": "Mureș",
+      "osm_entity_type": "municipality",
+      "explicit_siruta_tag": {
+        "key": "siruta:code",
+        "value": "114328"
+      },
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "explicit_siruta_code_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Târgu Mureș",
+        "name:bg": "Търгу Муреш",
+        "name:de": "Neumarkt am Mieresch",
+        "name:el": "Τίργκου Μούρες",
+        "name:hu": "Marosvásárhely",
+        "name:la": "Novum Forum Siculorum",
+        "name:prefix": "Municipiul",
+        "name:ro": "Târgu Mureș",
+        "name:ru": "Тыргу-Муреш",
+        "name:zh": "特尔古穆列什",
+        "place": "city",
+        "place:ro": "municipiu",
+        "population": "134290",
+        "siruta:code": "114328",
+        "type": "boundary",
+        "wikidata": "Q186349"
+      },
+      "history": {
+        "relation_id": 8334767,
+        "created_at": "2018-05-28T14:23:30Z",
+        "current_version": 12,
+        "last_modified_at": "2023-06-06T15:54:59Z",
+        "last_changeset": 137020799,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Târgu Mureș",
+          "name:bg": "Търгу Муреш",
+          "name:de": "Neumarkt am Mieresch",
+          "name:el": "Τίργκου Μούρες",
+          "name:hu": "Marosvásárhely",
+          "name:la": "Novum Forum Siculorum",
+          "name:prefix": "Municipiul",
+          "name:ro": "Târgu Mureș",
+          "name:ru": "Тыргу-Муреш",
+          "name:zh": "特尔古穆列什",
+          "place": "city",
+          "place:ro": "municipiu",
+          "population": "134290",
+          "siruta:code": "114328",
+          "type": "boundary",
+          "wikidata": "Q186349"
+        },
+        "current_member_count": 19,
+        "history_signals": {
+          "name_values": [
+            "Târgu Mureș"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "6",
+            "8"
+          ],
+          "place_values": [
+            "city"
+          ],
+          "place_ro_values": [
+            "municipiu"
+          ],
+          "source_values": [
+            "geoportal.ancpi.ro"
+          ],
+          "siruta_code_values": [
+            "114328"
+          ]
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
+        {
+          "legal_id": "114319",
+          "legal_name": "TARGU MURES",
+          "legal_type": "municipality",
+          "legal_parent_name": "MURES"
+        }
+      ],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "114319",
+          "legal_name": "TARGU MURES",
+          "legal_type": "municipality",
+          "legal_parent_name": "MURES",
+          "edit_distance": 0
+        },
+        {
+          "legal_id": "115076",
+          "legal_name": "ADAMUS",
+          "legal_type": "commune",
+          "legal_parent_name": "MURES",
+          "edit_distance": 7
+        },
+        {
+          "legal_id": "119858",
+          "legal_name": "TAURENI",
+          "legal_type": "commune",
+          "legal_parent_name": "MURES",
+          "edit_distance": 7
+        },
+        {
+          "legal_id": "114382",
+          "legal_name": "SANCRAIU DE MURES",
+          "legal_type": "commune",
+          "legal_parent_name": "MURES",
+          "edit_distance": 8
+        },
+        {
+          "legal_id": "114453",
+          "legal_name": "SANTANA DE MURES",
+          "legal_type": "commune",
+          "legal_parent_name": "MURES",
+          "edit_distance": 8
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "114319",
+          "legal_name": "TARGU MURES",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 3,
+          "inside_count": 3,
+          "inside_localities": [
+            {
+              "siruta": "114328",
+              "name": "Târgu Mureş"
+            },
+            {
+              "siruta": "114337",
+              "name": "Mureşeni"
+            },
+            {
+              "siruta": "114346",
+              "name": "Remetea"
+            }
+          ]
+        },
+        {
+          "legal_id": "114382",
+          "legal_name": "SANCRAIU DE MURES",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "114453",
+          "legal_name": "SANTANA DE MURES",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "115076",
+          "legal_name": "ADAMUS",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 6,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "119858",
+          "legal_name": "TAURENI",
+          "legal_parent_name": "MURES",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r14701887",
@@ -1672,44 +4525,305 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "135789",
           "legal_name": "TELEGA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL PRAHOVA",
+          "legal_parent_name": "PRAHOVA",
           "edit_distance": 2
         },
         {
           "legal_id": "130954",
-          "legal_name": "AZUGA",
+          "legal_name": "ORAS AZUGA",
           "legal_type": "town",
-          "legal_parent_name": "JUDEȚUL PRAHOVA",
+          "legal_parent_name": "PRAHOVA",
           "edit_distance": 3
         },
         {
           "legal_id": "133394",
           "legal_name": "FULGA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL PRAHOVA",
+          "legal_parent_name": "PRAHOVA",
           "edit_distance": 3
         },
         {
           "legal_id": "135654",
           "legal_name": "TALEA",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL PRAHOVA",
+          "legal_parent_name": "PRAHOVA",
           "edit_distance": 3
         },
         {
           "legal_id": "131103",
-          "legal_name": "BREAZA",
+          "legal_name": "ORAS BREAZA",
           "legal_type": "town",
-          "legal_parent_name": "JUDEȚUL PRAHOVA",
+          "legal_parent_name": "PRAHOVA",
           "edit_distance": 4
         }
       ],
-      "audit_classification": "requires_review"
+      "official_locality_containment": [
+        {
+          "legal_id": "135789",
+          "legal_name": "TELEGA",
+          "legal_parent_name": "PRAHOVA",
+          "official_locality_count": 6,
+          "inside_count": 6,
+          "inside_localities": [
+            {
+              "siruta": "135805",
+              "name": "Boşilceşti"
+            },
+            {
+              "siruta": "135841",
+              "name": "Ţonţeşti"
+            },
+            {
+              "siruta": "135823",
+              "name": "Doftana"
+            },
+            {
+              "siruta": "135832",
+              "name": "Meliceşti"
+            },
+            {
+              "siruta": "135814",
+              "name": "Buştenari"
+            },
+            {
+              "siruta": "135798",
+              "name": "Telega"
+            }
+          ]
+        },
+        {
+          "legal_id": "130954",
+          "legal_name": "ORAS AZUGA",
+          "legal_parent_name": "PRAHOVA",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "131103",
+          "legal_name": "ORAS BREAZA",
+          "legal_parent_name": "PRAHOVA",
+          "official_locality_count": 10,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "133394",
+          "legal_name": "FULGA",
+          "legal_parent_name": "PRAHOVA",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "135654",
+          "legal_name": "TALEA",
+          "legal_parent_name": "PRAHOVA",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r6927733",
+      "osm_relation_id": 6927733,
+      "osm_name": "Timișoara",
+      "osm_parent_id": "osm-r2366863",
+      "osm_parent_name": "Timiș",
+      "osm_entity_type": "municipality",
+      "explicit_siruta_tag": {
+        "key": "siruta:code",
+        "value": "155252"
+      },
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "explicit_siruta_code_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Timișoara",
+        "name:de": "Temeswar",
+        "name:el": "Τιμισοάρα",
+        "name:hu": "Temesvár",
+        "name:prefix": "Municipiul",
+        "name:ro": "Timișoara",
+        "name:ru": "Тимишоара",
+        "name:sk": "Temešvár",
+        "name:sr": "Темишвар",
+        "old_name:de": "Temeschwar;Temeschburg",
+        "place": "city",
+        "place:ro": "municipiu",
+        "siruta:code": "155252",
+        "source": "ANCPI 3rd order set form data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q83404",
+        "wikipedia": "ro:Timișoara"
+      },
+      "history": {
+        "relation_id": 6927733,
+        "created_at": "2017-01-30T09:14:58Z",
+        "current_version": 22,
+        "last_modified_at": "2024-03-12T07:08:15Z",
+        "last_changeset": 148534903,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Timișoara",
+          "name:de": "Temeswar",
+          "name:el": "Τιμισοάρα",
+          "name:hu": "Temesvár",
+          "name:prefix": "Municipiul",
+          "name:ro": "Timișoara",
+          "name:ru": "Тимишоара",
+          "name:sk": "Temešvár",
+          "name:sr": "Темишвар",
+          "old_name:de": "Temeschwar;Temeschburg",
+          "place": "city",
+          "place:ro": "municipiu",
+          "siruta:code": "155252",
+          "source": "ANCPI 3rd order set form data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q83404",
+          "wikipedia": "ro:Timișoara"
+        },
+        "current_member_count": 11,
+        "history_signals": {
+          "name_values": [
+            "Timișoara"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "6",
+            "8"
+          ],
+          "place_values": [
+            "city"
+          ],
+          "place_ro_values": [
+            "municipiu"
+          ],
+          "source_values": [
+            "geospatial.org",
+            "geoportal.ancpi.ro",
+            "ANCPI 3rd order set form data.gov.ro"
+          ],
+          "siruta_code_values": [
+            "155252"
+          ]
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
+        {
+          "legal_id": "155243",
+          "legal_name": "TIMISOARA",
+          "legal_type": "municipality",
+          "legal_parent_name": "TIMIS"
+        }
+      ],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "155243",
+          "legal_name": "TIMISOARA",
+          "legal_type": "municipality",
+          "legal_parent_name": "TIMIS",
+          "edit_distance": 0
+        },
+        {
+          "legal_id": "158010",
+          "legal_name": "ORTISOARA",
+          "legal_type": "commune",
+          "legal_parent_name": "TIMIS",
+          "edit_distance": 3
+        },
+        {
+          "legal_id": "155494",
+          "legal_name": "ORAS JIMBOLIA",
+          "legal_type": "town",
+          "legal_parent_name": "TIMIS",
+          "edit_distance": 5
+        },
+        {
+          "legal_id": "158136",
+          "legal_name": "PIETROASA",
+          "legal_type": "commune",
+          "legal_parent_name": "TIMIS",
+          "edit_distance": 5
+        },
+        {
+          "legal_id": "155289",
+          "legal_name": "GHIRODA",
+          "legal_type": "commune",
+          "legal_parent_name": "TIMIS",
+          "edit_distance": 6
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "155243",
+          "legal_name": "TIMISOARA",
+          "legal_parent_name": "TIMIS",
+          "official_locality_count": 1,
+          "inside_count": 1,
+          "inside_localities": [
+            {
+              "siruta": "155252",
+              "name": "Timişoara"
+            }
+          ]
+        },
+        {
+          "legal_id": "155289",
+          "legal_name": "GHIRODA",
+          "legal_parent_name": "TIMIS",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "155494",
+          "legal_name": "ORAS JIMBOLIA",
+          "legal_parent_name": "TIMIS",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "158010",
+          "legal_name": "ORTISOARA",
+          "legal_parent_name": "TIMIS",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "158136",
+          "legal_name": "PIETROASA",
+          "legal_parent_name": "TIMIS",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     },
     {
       "osm_id": "osm-r11497419",
@@ -1734,20 +4848,20 @@
       "candidates": [
         {
           "siruta": "125123",
-          "name": "VĂLENI",
-          "county_name": "JUDEȚUL NEAMȚ",
+          "name": "VALENI",
+          "county_name": "NEAMT",
           "legal_type": "commune"
         },
         {
           "siruta": "129763",
-          "name": "VĂLENI",
-          "county_name": "JUDEȚUL OLT",
+          "name": "VALENI",
+          "county_name": "OLT",
           "legal_type": "commune"
         },
         {
           "siruta": "166636",
-          "name": "VĂLENI",
-          "county_name": "JUDEȚUL VASLUI",
+          "name": "VALENI",
+          "county_name": "VASLUI",
           "legal_type": "commune"
         }
       ],
@@ -1799,44 +4913,316 @@
         }
       },
       "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [
+        {
+          "legal_id": "69303",
+          "legal_name": "VALENI-DIMBOVITA",
+          "legal_type": "commune",
+          "legal_parent_name": "DAMBOVITA"
+        }
+      ],
       "nearest_official_uat_candidates": [
         {
           "legal_id": "66198",
-          "legal_name": "BĂLENI",
+          "legal_name": "BALENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL DÂMBOVIȚA",
+          "legal_parent_name": "DAMBOVITA",
           "edit_distance": 1
         },
         {
           "legal_id": "179711",
-          "legal_name": "VLĂDENI",
+          "legal_name": "VLADENI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL DÂMBOVIȚA",
+          "legal_parent_name": "DAMBOVITA",
           "edit_distance": 2
         },
         {
           "legal_id": "65609",
-          "legal_name": "FIENI",
+          "legal_name": "ORAS FIENI",
           "legal_type": "town",
-          "legal_parent_name": "JUDEȚUL DÂMBOVIȚA",
+          "legal_parent_name": "DAMBOVITA",
           "edit_distance": 3
         },
         {
           "legal_id": "65841",
           "legal_name": "MORENI",
           "legal_type": "municipality",
-          "legal_parent_name": "JUDEȚUL DÂMBOVIȚA",
+          "legal_parent_name": "DAMBOVITA",
           "edit_distance": 3
         },
         {
           "legal_id": "65501",
           "legal_name": "ULMI",
           "legal_type": "commune",
-          "legal_parent_name": "JUDEȚUL DÂMBOVIȚA",
+          "legal_parent_name": "DAMBOVITA",
           "edit_distance": 4
         }
       ],
-      "audit_classification": "requires_review"
+      "official_locality_containment": [
+        {
+          "legal_id": "69303",
+          "legal_name": "VALENI-DIMBOVITA",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 2,
+          "inside_count": 2,
+          "inside_localities": [
+            {
+              "siruta": "69321",
+              "name": "Mesteacăn"
+            },
+            {
+              "siruta": "69312",
+              "name": "Văleni-Dâmboviţa"
+            }
+          ]
+        },
+        {
+          "legal_id": "125123",
+          "legal_name": "VALENI",
+          "legal_parent_name": "NEAMT",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "129763",
+          "legal_name": "VALENI",
+          "legal_parent_name": "OLT",
+          "official_locality_count": 4,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "166636",
+          "legal_name": "VALENI",
+          "legal_parent_name": "VASLUI",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "179711",
+          "legal_name": "VLADENI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "65501",
+          "legal_name": "ULMI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 8,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "65609",
+          "legal_name": "ORAS FIENI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "65841",
+          "legal_name": "MORENI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "66198",
+          "legal_name": "BALENI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 2,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
+    },
+    {
+      "osm_id": "osm-r13855204",
+      "osm_relation_id": 13855204,
+      "osm_name": "Vârfuri",
+      "osm_parent_id": "osm-r2355471",
+      "osm_parent_name": "Dâmbovița",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": null,
+      "legal_name": null,
+      "legal_type": null,
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": null,
+      "match_method": null,
+      "confidence": null,
+      "matched": false,
+      "parent_matches": null,
+      "type_matches": null,
+      "issue": "name_absent_from_official_snapshot",
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Vârfuri",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary"
+      },
+      "history": {
+        "relation_id": 13855204,
+        "created_at": "2022-02-26T16:01:22Z",
+        "current_version": 2,
+        "last_modified_at": "2022-02-27T11:10:40Z",
+        "last_changeset": 117903992,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Vârfuri",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary"
+        },
+        "current_member_count": 5,
+        "history_signals": {
+          "name_values": [
+            "Vârfuri"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set form data.gov.ro",
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "exact_component_locality_candidates": [],
+      "official_name_contains_candidates": [],
+      "nearest_official_uat_candidates": [
+        {
+          "legal_id": "69447",
+          "legal_name": "VIRFURI",
+          "legal_type": "commune",
+          "legal_parent_name": "DAMBOVITA",
+          "edit_distance": 1
+        },
+        {
+          "legal_id": "68627",
+          "legal_name": "ORAS RACARI",
+          "legal_type": "town",
+          "legal_parent_name": "DAMBOVITA",
+          "edit_distance": 4
+        },
+        {
+          "legal_id": "179711",
+          "legal_name": "VLADENI",
+          "legal_type": "commune",
+          "legal_parent_name": "DAMBOVITA",
+          "edit_distance": 5
+        },
+        {
+          "legal_id": "179891",
+          "legal_name": "RACIU",
+          "legal_type": "commune",
+          "legal_parent_name": "DAMBOVITA",
+          "edit_distance": 5
+        },
+        {
+          "legal_id": "65681",
+          "legal_name": "ORAS GAESTI",
+          "legal_type": "town",
+          "legal_parent_name": "DAMBOVITA",
+          "edit_distance": 5
+        }
+      ],
+      "official_locality_containment": [
+        {
+          "legal_id": "69447",
+          "legal_name": "VIRFURI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 7,
+          "inside_count": 7,
+          "inside_localities": [
+            {
+              "siruta": "69456",
+              "name": "Vârfuri"
+            },
+            {
+              "siruta": "69517",
+              "name": "Ulmetu"
+            },
+            {
+              "siruta": "69474",
+              "name": "Cojoiu"
+            },
+            {
+              "siruta": "69508",
+              "name": "Şuviţa"
+            },
+            {
+              "siruta": "69465",
+              "name": "Cârlăneşti"
+            },
+            {
+              "siruta": "69483",
+              "name": "Merişoru"
+            },
+            {
+              "siruta": "69492",
+              "name": "Stăteşti"
+            }
+          ]
+        },
+        {
+          "legal_id": "179711",
+          "legal_name": "VLADENI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "179891",
+          "legal_name": "RACIU",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 3,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "65681",
+          "legal_name": "ORAS GAESTI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 1,
+          "inside_count": 0,
+          "inside_localities": []
+        },
+        {
+          "legal_id": "68627",
+          "legal_name": "ORAS RACARI",
+          "legal_parent_name": "DAMBOVITA",
+          "official_locality_count": 8,
+          "inside_count": 0,
+          "inside_localities": []
+        }
+      ],
+      "audit_classification": "single_official_uat_localities_inside_osm_polygon"
     }
   ],
   "duplicate_groups": [
@@ -1902,7 +5288,38 @@
               ],
               "siruta_code_values": []
             }
-          }
+          },
+          "official_locality_containment": [
+            {
+              "legal_id": "105348",
+              "legal_name": "STOENESTI",
+              "legal_parent_name": "GIURGIU",
+              "official_locality_count": 3,
+              "inside_count": 3,
+              "inside_localities": [
+                {
+                  "siruta": "105366",
+                  "name": "Ianculeşti"
+                },
+                {
+                  "siruta": "105357",
+                  "name": "Stoeneşti"
+                },
+                {
+                  "siruta": "105375",
+                  "name": "Mirău"
+                }
+              ]
+            },
+            {
+              "legal_id": "102794",
+              "legal_name": "FLORESTI-STOENESTI",
+              "legal_parent_name": "GIURGIU",
+              "official_locality_count": 3,
+              "inside_count": 0,
+              "inside_localities": []
+            }
+          ]
         },
         {
           "relation_id": 13799978,
@@ -1955,7 +5372,38 @@
               ],
               "siruta_code_values": []
             }
-          }
+          },
+          "official_locality_containment": [
+            {
+              "legal_id": "102794",
+              "legal_name": "FLORESTI-STOENESTI",
+              "legal_parent_name": "GIURGIU",
+              "official_locality_count": 3,
+              "inside_count": 3,
+              "inside_localities": [
+                {
+                  "siruta": "102801",
+                  "name": "Stoeneşti"
+                },
+                {
+                  "siruta": "102829",
+                  "name": "Palanca"
+                },
+                {
+                  "siruta": "102810",
+                  "name": "Floreşti"
+                }
+              ]
+            },
+            {
+              "legal_id": "105348",
+              "legal_name": "STOENESTI",
+              "legal_parent_name": "GIURGIU",
+              "official_locality_count": 3,
+              "inside_count": 0,
+              "inside_localities": []
+            }
+          ]
         }
       ],
       "overlap": {
@@ -1977,9 +5425,9 @@
       "legal_id": "174860",
       "legal_name": "ADJUD",
       "legal_type": "municipality",
-      "legal_type_code": "4",
-      "legal_parent_id": "396",
-      "legal_parent_name": "JUDEȚUL VRANCEA",
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": "VRANCEA",
       "match_method": "exact_normalized_name_and_county",
       "confidence": "medium",
       "matched": true,
@@ -2040,6 +5488,79 @@
       "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
     },
     {
+      "osm_id": "osm-r11520343",
+      "osm_relation_id": 11520343,
+      "osm_name": "Băneasa",
+      "osm_parent_id": "osm-r2367022",
+      "osm_parent_name": "Constanța",
+      "osm_entity_type": "commune",
+      "explicit_siruta_tag": null,
+      "legal_id": "61069",
+      "legal_name": "ORAS BANEASA",
+      "legal_type": "town",
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": "CONSTANTA",
+      "match_method": "exact_normalized_name_and_county",
+      "confidence": "medium",
+      "matched": true,
+      "parent_matches": true,
+      "type_matches": false,
+      "issue": null,
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Băneasa",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q276042"
+      },
+      "history": {
+        "relation_id": 11520343,
+        "created_at": "2020-08-19T18:49:36Z",
+        "current_version": 5,
+        "last_modified_at": "2024-12-29T00:07:11Z",
+        "last_changeset": 160734199,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Băneasa",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q276042"
+        },
+        "current_member_count": 8,
+        "history_signals": {
+          "name_values": [
+            "Băneasa"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set form data.gov.ro",
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
+    },
+    {
       "osm_id": "osm-r14743725",
       "osm_relation_id": 14743725,
       "osm_name": "Cehal",
@@ -2050,9 +5571,9 @@
       "legal_id": "137363",
       "legal_name": "CEHAL",
       "legal_type": "commune",
-      "legal_type_code": "3",
-      "legal_parent_id": "305",
-      "legal_parent_name": "JUDEȚUL SATU MARE",
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": "SATU-MARE",
       "match_method": "exact_normalized_name_and_county",
       "confidence": "medium",
       "matched": true,
@@ -2120,11 +5641,11 @@
       "osm_entity_type": "town",
       "explicit_siruta_tag": null,
       "legal_id": "92701",
-      "legal_name": "FETEȘTI",
+      "legal_name": "FETESTI",
       "legal_type": "municipality",
-      "legal_type_code": "4",
-      "legal_parent_id": "216",
-      "legal_parent_name": "JUDEȚUL IALOMIȚA",
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": "IALOMITA",
       "match_method": "exact_normalized_name_and_county",
       "confidence": "medium",
       "matched": true,
@@ -2192,11 +5713,11 @@
       "osm_entity_type": "commune",
       "explicit_siruta_tag": null,
       "legal_id": "146370",
-      "legal_name": "SALCEA",
+      "legal_name": "ORAS SALCEA",
       "legal_type": "town",
-      "legal_type_code": "2",
-      "legal_parent_id": "332",
-      "legal_parent_name": "JUDEȚUL SUCEAVA",
+      "legal_type_code": null,
+      "legal_parent_id": null,
+      "legal_parent_name": "SUCEAVA",
       "match_method": "exact_normalized_name_and_county",
       "confidence": "medium",
       "matched": true,
