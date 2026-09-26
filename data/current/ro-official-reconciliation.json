@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T12:31:29.310Z",
+  "generated_at": "2026-09-26T12:34:51.757Z",
   "jurisdiction": "RO",
   "scope": "Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.",
   "policy": "Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.",
