@@ -12,7 +12,22 @@
       "last_verified": "2026-09-26",
       "dataset_updated": "2026-08-11",
       "license": "CC BY 4.0",
-      "reconciliation_policy": "Prefer explicit SIRUTA codes. Otherwise accept only exact normalized UAT name plus exact county; fuzzy matches never auto-assign legal identity or type. OSM remains geometry/provenance, SIRUTA remains legal identity/status."
+      "reconciliation_policy": "Prefer explicit SIRUTA codes. Otherwise accept only exact normalized UAT name plus exact county; fuzzy matches never auto-assign legal identity or type. OSM remains geometry/provenance, SIRUTA remains legal identity/status.",
+      "fallback_official_source": {
+        "authority": "Institutul Național de Statistică",
+        "name": "INS WebGIS Operational/Localitati",
+        "url": "https://webgis.insse.ro/servicii/rest/services/Operational/Localitati/MapServer/0",
+        "fields_used": [
+          "siruta",
+          "siruta_sup",
+          "denumire",
+          "den_superior",
+          "judet",
+          "cod_jud",
+          "tiplocalitate"
+        ],
+        "policy": "Used only to reconstruct SIRUTA UAT identity/type when data.gov.ro is unreachable. No WebGIS geometry is promoted to legal UAT geometry."
+      }
     },
     {
       "jurisdiction": "RO",
