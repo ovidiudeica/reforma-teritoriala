@@ -33,13 +33,13 @@ const explicitSiruta=t=>{
 const records=official.records||[];
 const byCode=new Map(records.map(x=>[String(x.siruta),x]));
 const counties=records.filter(x=>Number(x.level)===1);
-const uats=records.filter(x=>Number(x.level)===2&&typeFromTip(x.type_code));
+const uats=records.filter(x=>Number(x.level)===2&&(x.legal_type||typeFromTip(x.type_code)));
 const countyByJud=new Map();
 for(const c of counties)if(c.county_code&&!countyByJud.has(String(c.county_code)))countyByJud.set(String(c.county_code),c);
 const officialCounty=x=>byCode.get(String(x.parent_siruta||''))||countyByJud.get(String(x.county_code||''))||null;
 const officialRows=uats.map(x=>{
  const county=officialCounty(x);
- return {...x,normalized_name:norm(x.name),legal_type:typeFromTip(x.type_code),county_name:county?.name||x.parent_name||null,normalized_county:norm(county?.name||x.parent_name||'')};
+ return {...x,normalized_name:norm(x.name),legal_type:x.legal_type||typeFromTip(x.type_code),county_name:x.county_name||county?.name||x.parent_name||null,normalized_county:norm(x.county_name||county?.name||x.parent_name||'')};
 });
 const officialByCode=new Map(officialRows.map(x=>[String(x.siruta),x]));
 const officialByName=new Map();
@@ -121,7 +121,7 @@ const parentMismatches=matched.filter(x=>x.parent_matches===false);
 const checks=[],failures=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail});};
 check('official_snapshot_is_siruta_2026',official.registry==='SIRUTA'&&Number(official.reference_year)===2026,{registry:official.registry,reference_year:official.reference_year});
-check('official_snapshot_has_uat_level',officialRows.length>=3100,{official_uat_count:officialRows.length});
+check('official_snapshot_has_uat_level',officialRows.length>=3100,{official_uat_count:officialRows.length,source_type:official.source?.source_type||null});
 check('official_siruta_codes_are_unique',officialByCode.size===officialRows.length,{official_uat_count:officialRows.length,unique_code_count:officialByCode.size});
 check('all_osm_admin_level_8_entities_accounted',results.length===entities.length,{osm_admin_level_8_count:entities.length,result_count:results.length});
 const report={
