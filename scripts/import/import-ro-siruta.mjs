@@ -164,17 +164,19 @@ async function fromOfficialArcgis(){
   const parentName=stripLegalPrefix(g.rawParent),parentKey=nameKey(parentName);
   const sameNameChildren=g.children.filter(x=>nameKey(x.name)===parentKey);
   const typeLabels=[...new Set(sameNameChildren.map(x=>x.type).filter(Boolean))];
+  const allTypeLabels=[...new Set(g.children.map(x=>x.type).filter(Boolean))];
   for(const t of typeLabels)seatTypeCounts[t]=(seatTypeCounts[t]||0)+1;
   let legalType=legalTypeFromName(g.rawParent);
   if(legalType==='commune'){
-   const joined=typeLabels.join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-   if(/municip/.test(joined))legalType='municipality';
-   else if(/oras|urban/.test(joined))legalType='town';
+   const joined=allTypeLabels.join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+   if(/resedinta de municipiu|municipiu/.test(joined))legalType='municipality';
+   else if(/resedinta de oras|\boras\b|urban/.test(joined))legalType='town';
   }
   return {
    siruta:g.siruta,name:parentName,parent_siruta:null,parent_name:g.county||null,type_code:null,level:2,
    county_code:g.countyCode,county_name:g.county||null,legal_type:legalType,official_parent_label:g.rawParent,
-   seat_locality_type_labels:typeLabels
+   seat_locality_type_labels:typeLabels,
+   uat_locality_type_labels:allTypeLabels
   };
  }).sort((a,b)=>Number(a.siruta)-Number(b.siruta));
  if(records.length<3100)throw new Error('INS ArcGIS derived too few UAT records: '+records.length);
