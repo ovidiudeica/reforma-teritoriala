@@ -1,21 +1,20 @@
 {
-  "generated_at": "2026-09-26T00:44:06.944Z",
+  "generated_at": "2026-09-26T00:49:21.273Z",
   "jurisdiction": "MD",
   "official_source": "BNS CUATM",
   "official_source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
   "official_snapshot_records": 1721,
   "official_parent_links": 1684,
   "entity_count": 2590,
-  "matched_count": 2464,
-  "unmatched_count": 126,
+  "matched_count": 2465,
+  "unmatched_count": 125,
   "matched_by_method": {
     "explicit_cuatm_key": 2267,
     "exact_normalized_name_and_official_parent": 183,
     "osm_self_parent_same_legal_entity": 11,
-    "reviewed_override": 3
+    "reviewed_override": 4
   },
   "unmatched_by_reason": {
-    "name_ambiguous_with_parent": 1,
     "name_absent_from_official_snapshot": 46,
     "code_absent_from_official_snapshot": 79
   },
@@ -4089,6 +4088,25 @@
     {
       "id": "osm-r10624607",
       "name": "Cornești",
+      "cuatm_key": "9233",
+      "legal_id": "9233",
+      "legal_name": "Cornești",
+      "status_code": "8",
+      "legal_parent_id": "9200",
+      "legal_parent_name": "Ungheni",
+      "legal_source": "BNS CUATM",
+      "match_method": "reviewed_override",
+      "confidence": "high",
+      "unmatched_reason": null,
+      "reviewed_override": {
+        "source_url": "https://api.openstreetmap.org/api/0.6/relation/10624607.json",
+        "source_label": "OpenStreetMap relation 10624607 tags + official CUATM identity",
+        "reason": "Direct OSM inspection identifies relation 10624607 as satul Cornești (name:prefix=satul, official_name=satul Cornești, place=village); official CUATM distinguishes 9233 as sat. Cornești under Ungheni."
+      }
+    },
+    {
+      "id": "osm-r10624608",
+      "name": "Cornești",
       "cuatm_key": "9202",
       "legal_id": "9202",
       "legal_name": "Cornești",
@@ -4100,24 +4118,10 @@
       "confidence": "high",
       "unmatched_reason": null,
       "reviewed_override": {
-        "source_url": "https://www.legis.md/cautare/downloadpdf/44807",
-        "source_label": "Republica Moldova — official administrative locality/code listing",
-        "reason": "Official source distinguishes 9202 as or. Cornești in Ungheni; reviewed mapping assigns the OSM relation representing the town to that legal entity."
+        "source_url": "https://api.openstreetmap.org/api/0.6/relation/10624608.json",
+        "source_label": "OpenStreetMap relation 10624608 tags + official CUATM identity",
+        "reason": "Direct OSM inspection identifies relation 10624608 as orașul Cornești (name:prefix=orașul, official_name=orașul Cornești, place=town); official CUATM distinguishes 9202 as or. Cornești under Ungheni."
       }
-    },
-    {
-      "id": "osm-r10624608",
-      "name": "Cornești",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_ambiguous_with_parent",
-      "name_candidate_count": 3,
-      "parent_official_code": "9200"
     },
     {
       "id": "osm-r1661050",
