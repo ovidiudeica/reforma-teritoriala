@@ -5,10 +5,10 @@
   "overrides": [
     {
       "osm_relation_id": 10624607,
-      "cuatm_legal_id": "9202",
-      "source_url": "https://www.legis.md/cautare/downloadpdf/44807",
-      "source_label": "Republica Moldova — official administrative locality/code listing",
-      "reason": "Official source distinguishes 9202 as or. Cornești in Ungheni; reviewed mapping assigns the OSM relation representing the town to that legal entity."
+      "cuatm_legal_id": "9233",
+      "source_url": "https://api.openstreetmap.org/api/0.6/relation/10624607.json",
+      "source_label": "OpenStreetMap relation 10624607 tags + official CUATM identity",
+      "reason": "Direct OSM inspection identifies relation 10624607 as satul Cornești (name:prefix=satul, official_name=satul Cornești, place=village); official CUATM distinguishes 9233 as sat. Cornești under Ungheni."
     },
     {
       "osm_relation_id": 1813319,
@@ -23,13 +23,14 @@
       "source_url": "https://www.legis.md/cautare/downloadpdf/44807",
       "source_label": "Republica Moldova — official administrative locality/code listing",
       "reason": "Official source identifies 9255 as sat. Negurenii Vechi in Ungheni; reviewed mapping resolves the OSM relation despite conflicting geometric parent assignment."
-    }
-  ],
-  "pending_review": [
+    },
     {
       "osm_relation_id": 10624608,
-      "candidate_cuatm_legal_id": "9233",
-      "reason": "Do not apply until the OSM relation is directly verified as the distinct sat. Cornești rather than inferred by elimination."
+      "cuatm_legal_id": "9202",
+      "source_url": "https://api.openstreetmap.org/api/0.6/relation/10624608.json",
+      "source_label": "OpenStreetMap relation 10624608 tags + official CUATM identity",
+      "reason": "Direct OSM inspection identifies relation 10624608 as orașul Cornești (name:prefix=orașul, official_name=orașul Cornești, place=town); official CUATM distinguishes 9202 as or. Cornești under Ungheni."
     }
-  ]
+  ],
+  "pending_review": []
 }
