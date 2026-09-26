@@ -56,33 +56,60 @@ function resolvedLegalCode(e){
  if(parentExact&&norm(e.name)===parentExact.normalized_name)return parentExact.code;
  return null;
 }
-function officialParentCode(e){
- return resolvedLegalCode(entityById.get(e.parent_id));
-}
 function parentCompatible(child,parentCode){return Boolean(parentCode&&child.parent_code===parentCode);}
-const matches=[];
+const matchById=new Map();
+const makeMatch=(e,h,method,confidence,key=null)=>({id:e.id,name:e.name,cuatm_key:key,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:method,confidence,unmatched_reason:null});
+// Pass 1a: authoritative explicit CUATM keys.
 for(const e of entities){
  const ec=exactCode.get(e.id);
- if(ec){const h=ec.hit;matches.push({id:e.id,name:e.name,cuatm_key:ec.key,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'explicit_cuatm_key',confidence:'high',unmatched_reason:null});continue;}
+ if(ec)matchById.set(e.id,makeMatch(e,ec.hit,'explicit_cuatm_key','high',ec.key));
+}
+// Pass 1b: safe OSM wrapper/self-parent cases only. A distinct official child under
+// the verified parent always takes precedence, preventing district/town homonyms.
+for(const e of entities){
+ if(matchById.has(e.id))continue;
+ const keys=[e.osm?.cuatm_unique_id,e.osm?.cuatm_code].filter(Boolean).map(digits);
+ if(keys.length)continue;
+ const osmParent=entityById.get(e.parent_id), parentMatch=osmParent?matchById.get(osmParent.id):null;
+ if(!parentMatch)continue;
+ const nameHits=byName.get(norm(e.name))||[];
+ const distinctChildren=nameHits.filter(h=>h.code!==parentMatch.legal_id&&h.parent_code===parentMatch.legal_id);
+ const self=nameHits.find(h=>h.code===parentMatch.legal_id);
+ if(self&&distinctChildren.length===0&&norm(e.name)===norm(parentMatch.legal_name))matchById.set(e.id,makeMatch(e,self,'osm_self_parent_same_legal_entity','medium'));
+}
+// Pass 2: deterministic fixpoint. Newly verified parents can unlock children on
+// the next iteration, but only a unique exact-name candidate under that parent.
+let changed=true;
+while(changed){
+ changed=false;
+ for(const e of entities){
+  if(matchById.has(e.id))continue;
+  const keys=[e.osm?.cuatm_unique_id,e.osm?.cuatm_code].filter(Boolean).map(digits);
+  if(keys.length)continue;
+  const parent=entityById.get(e.parent_id), parentMatch=parent?matchById.get(parent.id):null;
+  const parentCode=parentMatch?.legal_id||null;
+  if(!parentCode)continue;
+  const parentHits=(byName.get(norm(e.name))||[]).filter(h=>parentCompatible(h,parentCode));
+  if(parentHits.length===1){matchById.set(e.id,makeMatch(e,parentHits[0],'exact_normalized_name_and_official_parent','medium'));changed=true;}
+ }
+}
+const matches=[];
+for(const e of entities){
+ const resolved=matchById.get(e.id);
+ if(resolved){matches.push(resolved);continue;}
  const keys=[e.osm?.cuatm_unique_id,e.osm?.cuatm_code].filter(Boolean).map(digits);
  let reason='no_explicit_cuatm_key';
  if(keys.length){const counts=keys.map(k=>(byCode.get(k)||[]).length);reason=counts.some(n=>n>1)?'code_non_unique':'code_absent_from_official_snapshot';}
- const nameHits=byName.get(norm(e.name))||[], parentCode=officialParentCode(e), parentHits=nameHits.filter(h=>parentCompatible(h,parentCode));
- const osmParent=entityById.get(e.parent_id);
- const osmParentExact=osmParent?exactCode.get(osmParent.id)?.hit:null;
- // A distinct official child under the verified parent takes precedence over a same-name parent entity.
- // This prevents collisions such as district 1000 Anenii Noi vs town 1001 Anenii Noi.
- if(!keys.length&&parentCode&&parentHits.length===1){const h=parentHits[0];matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'exact_normalized_name_and_official_parent',confidence:'medium',unmatched_reason:null});continue;}
- const distinctChildExists=Boolean(osmParentExact&&nameHits.some(h=>h.code!==osmParentExact.code&&h.parent_code===osmParentExact.code));
- const selfParentHit=!keys.length&&osmParentExact&&!distinctChildExists&&norm(e.name)===osmParentExact.normalized_name&&nameHits.find(h=>h.code===osmParentExact.code);
- if(selfParentHit){const h=selfParentHit;matches.push({id:e.id,name:e.name,cuatm_key:null,legal_id:h.code,legal_name:h.name,status_code:h.status_code,legal_parent_id:h.parent_code,legal_parent_name:h.parent_name,legal_source:'BNS CUATM',match_method:'osm_self_parent_same_legal_entity',confidence:'medium',unmatched_reason:null});continue;}
+ const nameHits=byName.get(norm(e.name))||[], parent=entityById.get(e.parent_id), parentCode=parent?matchById.get(parent.id)?.legal_id||null:null;
+ const parentHits=nameHits.filter(h=>parentCompatible(h,parentCode));
  if(!keys.length&&nameHits.length===1&&!parentCode)reason='unique_name_but_parent_unverified';
  else if(!keys.length&&nameHits.length>1)reason=parentCode?'name_ambiguous_with_parent':'name_ambiguous';
  else if(!keys.length&&nameHits.length===0)reason='name_absent_from_official_snapshot';
  matches.push({id:e.id,name:e.name,cuatm_key:keys[0]||null,legal_id:null,legal_name:null,status_code:null,legal_source:'BNS CUATM',match_method:null,confidence:null,unmatched_reason:reason,name_candidate_count:nameHits.length,parent_official_code:parentCode});
+ matchById.set(e.id,matches[matches.length-1]);
 }
 const matched=matches.filter(x=>x.legal_id), unmatched=matches.filter(x=>!x.legal_id);
-const matchById=new Map(matches.map(x=>[x.id,x]));
+
 const noKeyDiagnostics=entities.filter(e=>![e.osm?.cuatm_unique_id,e.osm?.cuatm_code].some(Boolean)).map(e=>{
  const parent=entityById.get(e.parent_id)||null;
  const parentMatch=parent?matchById.get(parent.id):null;
