@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "RO",
+  "registry": "SIRUTA",
+  "reference_year": 2026,
+  "reviewed_at": "2026-09-26",
+  "policy": "Reviewed identity mappings only. Each OSM relation was matched to one official SIRUTA UAT using the official registry plus INS locality/intravilan containment as identity evidence. INS WebGIS geometry is diagnostic evidence and is not promoted to authoritative UAT boundary geometry.",
+  "evidence": {
+    "audit": "data/current/ro-official-exception-audit.json",
+    "official_snapshot": "data/sources/ro-siruta-current.json",
+    "osm_history": "data/sources/ro-osm-official-exception-history.json",
+    "ins_webgis": "https://webgis.insse.ro/servicii/rest/services/Operational/Localitati/MapServer/0"
+  },
+  "mappings": [
+    {
+      "osm_relation_id": 10514102,
+      "osm_name": "Alțâna",
+      "legal_id": "143888",
+      "legal_name": "ALȚINA",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 14743203,
+      "osm_name": "Bâra",
+      "legal_id": "121386",
+      "legal_name": "BIRA",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 14739568,
+      "osm_name": "Bunești",
+      "legal_id": "162924",
+      "legal_name": "BUNEȘTI-AVEREȘTI",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 10541621,
+      "osm_name": "Certeju de Jos",
+      "legal_id": "89240",
+      "legal_name": "CERTEJU DE SUS",
+      "resolution": "official_locality_containment_exact_and_osm_wikipedia_identity"
+    },
+    {
+      "osm_relation_id": 14783943,
+      "osm_name": "Covăsânț",
+      "legal_id": "10514",
+      "legal_name": "COVĂSINȚ",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 14871174,
+      "osm_name": "Cristur-Crișeni",
+      "legal_id": "140823",
+      "legal_name": "CRIȘENI",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 14786139,
+      "osm_name": "Culciu Mare",
+      "legal_id": "137540",
+      "legal_name": "CULCIU",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 9744206,
+      "osm_name": "Grădinari",
+      "legal_id": "127171",
+      "legal_name": "GRĂDINARI",
+      "resolution": "official_locality_containment_exact_cross_county_parent_conflict"
+    },
+    {
+      "osm_relation_id": 10514937,
+      "osm_name": "Moeciu de Jos",
+      "legal_id": "41471",
+      "legal_name": "MOIECIU",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 14879305,
+      "osm_name": "Porumbenii Mari",
+      "legal_id": "86487",
+      "legal_name": "PORUMBENI",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 14523067,
+      "osm_name": "Râșca",
+      "legal_id": "59238",
+      "legal_name": "RIȘCA",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 10664072,
+      "osm_name": "Roșiorii de Vede",
+      "legal_id": "151870",
+      "legal_name": "ROȘIORI DE VEDE",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 12578308,
+      "osm_name": "Socolu de Câmpie",
+      "legal_id": "116224",
+      "legal_name": "COZMA",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 14701887,
+      "osm_name": "Tega",
+      "legal_id": "135789",
+      "legal_name": "TELEGA",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 11497419,
+      "osm_name": "Văleni",
+      "legal_id": "69303",
+      "legal_name": "VĂLENI-DÂMBOVIȚA",
+      "resolution": "official_locality_containment_exact"
+    },
+    {
+      "osm_relation_id": 13799978,
+      "osm_name": "Stoenești",
+      "legal_id": "102794",
+      "legal_name": "FLOREȘTI-STOENEȘTI",
+      "resolution": "duplicate_disambiguated_by_official_locality_containment"
+    }
+  ]
+}
