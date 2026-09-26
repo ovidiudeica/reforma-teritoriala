@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-09-26T00:33:08.136Z",
+  "generated_at": "2026-09-26T00:39:28.587Z",
   "jurisdiction": "MD",
   "official_source": "BNS CUATM",
   "official_source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
   "official_snapshot_records": 1721,
   "official_parent_links": 1684,
   "entity_count": 2590,
-  "matched_count": 2461,
-  "unmatched_count": 129,
+  "matched_count": 2464,
+  "unmatched_count": 126,
   "matched_by_method": {
     "explicit_cuatm_key": 2267,
     "exact_normalized_name_and_official_parent": 183,
-    "osm_self_parent_same_legal_entity": 11
+    "osm_self_parent_same_legal_entity": 11,
+    "reviewed_override": 3
   },
   "unmatched_by_reason": {
-    "no_explicit_cuatm_key": 2,
-    "name_ambiguous_with_parent": 2,
+    "name_ambiguous_with_parent": 1,
     "name_absent_from_official_snapshot": 46,
     "code_absent_from_official_snapshot": 79
   },
@@ -3888,16 +3888,21 @@
     {
       "id": "osm-r1813319",
       "name": "Condrița",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
+      "cuatm_key": "0123",
+      "legal_id": "0123",
+      "legal_name": "Condrița",
+      "status_code": "8",
+      "legal_parent_id": "0120",
+      "legal_parent_name": "Sectorul Buiucani",
       "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "no_explicit_cuatm_key",
-      "name_candidate_count": 1,
-      "parent_official_code": "8000"
+      "match_method": "reviewed_override",
+      "confidence": "high",
+      "unmatched_reason": null,
+      "reviewed_override": {
+        "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+        "source_label": "BNS CUATM current official workbook",
+        "reason": "CUATM identifies Condrița as legal ID 0123 under Sectorul Buiucani (0120); geometric OSM containment under Strășeni must not override the reviewed legal hierarchy."
+      }
     },
     {
       "id": "osm-r19118609",
@@ -4084,16 +4089,21 @@
     {
       "id": "osm-r10624607",
       "name": "Cornești",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
+      "cuatm_key": "9202",
+      "legal_id": "9202",
+      "legal_name": "Cornești",
+      "status_code": "3",
+      "legal_parent_id": "9200",
+      "legal_parent_name": "Ungheni",
       "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_ambiguous_with_parent",
-      "name_candidate_count": 3,
-      "parent_official_code": "9200"
+      "match_method": "reviewed_override",
+      "confidence": "high",
+      "unmatched_reason": null,
+      "reviewed_override": {
+        "source_url": "https://www.legis.md/cautare/downloadpdf/44807",
+        "source_label": "Republica Moldova — official administrative locality/code listing",
+        "reason": "Official source distinguishes 9202 as or. Cornești in Ungheni; reviewed mapping assigns the OSM relation representing the town to that legal entity."
+      }
     },
     {
       "id": "osm-r10624608",
@@ -8536,16 +8546,21 @@
     {
       "id": "osm-r1643003",
       "name": "Negurenii Vechi",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
+      "cuatm_key": "9255",
+      "legal_id": "9255",
+      "legal_name": "Negurenii Vechi",
+      "status_code": "8",
+      "legal_parent_id": "9200",
+      "legal_parent_name": "Ungheni",
       "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "no_explicit_cuatm_key",
-      "name_candidate_count": 1,
-      "parent_official_code": "4300"
+      "match_method": "reviewed_override",
+      "confidence": "high",
+      "unmatched_reason": null,
+      "reviewed_override": {
+        "source_url": "https://www.legis.md/cautare/downloadpdf/44807",
+        "source_label": "Republica Moldova — official administrative locality/code listing",
+        "reason": "Official source identifies 9255 as sat. Negurenii Vechi in Ungheni; reviewed mapping resolves the OSM relation despite conflicting geometric parent assignment."
+      }
     },
     {
       "id": "osm-r19110263",
