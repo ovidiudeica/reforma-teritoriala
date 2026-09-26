@@ -13,6 +13,7 @@
     "audit:balti-way-history": "node scripts/process/audit-balti-way-history.mjs",
     "audit:balti-semantics": "node scripts/process/audit-balti-changeset-semantics.mjs",
     "audit:md-individual-cases": "node scripts/process/audit-md-cuatm-individual-cases.mjs",
+    "audit:md-release-gate": "node scripts/process/audit-md-release-gate.mjs",
     "reconcile:cuatm": "node scripts/process/reconcile-cuatm.mjs"
   },
   "dependencies": {
