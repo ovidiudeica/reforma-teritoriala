@@ -10,6 +10,7 @@ on:
     paths:
       - scripts/import/import-ro-siruta.mjs
       - scripts/process/audit-ro-official-reconciliation.mjs
+      - scripts/process/audit-ro-official-exceptions.mjs
       - package.json
       - .github/workflows/refresh-ro-official.yml
 permissions:
