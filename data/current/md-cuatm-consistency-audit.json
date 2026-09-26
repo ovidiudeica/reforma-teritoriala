@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T07:17:04.320Z",
+  "generated_at": "2026-09-26T07:24:42.116Z",
   "jurisdiction": "MD",
   "scope": "CUATM matched entities; duplicate OSM representations collapsed logically by legal identity",
   "matched_count": 2465,
@@ -8,8 +8,10 @@
     "duplicate_legal_id_count": 847,
     "entities_in_duplicate_groups": 1699,
     "by_class": {
-      "mixed_parallel_and_chain_representations": 3,
-      "parallel_same_parent": 2,
+      "uat_and_component_locality_with_parallel_uat_boundary": 1,
+      "component_locality_with_parallel_uat_boundaries_same_changeset": 2,
+      "parallel_boundaries_same_identity_same_changeset": 1,
+      "later_duplicate_same_identity": 1,
       "same_identity_parent_child_chain": 842
     }
   },
@@ -28,8 +30,10 @@
   "targeted_duplicate_review_summary": {
     "count": 5,
     "by_class": {
-      "mixed_parallel_and_chain_representations": 3,
-      "parallel_same_parent": 2
+      "uat_and_component_locality_with_parallel_uat_boundary": 1,
+      "component_locality_with_parallel_uat_boundaries_same_changeset": 2,
+      "parallel_boundaries_same_identity_same_changeset": 1,
+      "later_duplicate_same_identity": 1
     }
   },
   "duplicate_legal_ids": [
@@ -37,7 +41,7 @@
       "legal_id": "1050",
       "legal_name": "Țînțăreni",
       "count": 3,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
+      "duplicate_class": "uat_and_component_locality_with_parallel_uat_boundary",
       "same_identity_edges": [
         {
           "child": "osm-r18967632",
@@ -78,13 +82,15 @@
           "cuatm_key": "1050",
           "osm_parent_id": "osm-r12496850"
         }
-      ]
+      ],
+      "structural_duplicate_class": "mixed_parallel_and_chain_representations",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "3417",
       "legal_name": "Dondușeni",
       "count": 3,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
+      "duplicate_class": "component_locality_with_parallel_uat_boundaries_same_changeset",
       "same_identity_edges": [
         {
           "child": "osm-r18967876",
@@ -125,13 +131,15 @@
           "cuatm_key": "3417",
           "osm_parent_id": "osm-r19055800"
         }
-      ]
+      ],
+      "structural_duplicate_class": "mixed_parallel_and_chain_representations",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "7160",
       "legal_name": "Văratic",
       "count": 3,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
+      "duplicate_class": "component_locality_with_parallel_uat_boundaries_same_changeset",
       "same_identity_edges": [
         {
           "child": "osm-r18966798",
@@ -172,13 +180,15 @@
           "cuatm_key": "7160",
           "osm_parent_id": "osm-r19045254"
         }
-      ]
+      ],
+      "structural_duplicate_class": "mixed_parallel_and_chain_representations",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "8034",
       "legal_name": "Recea",
       "count": 3,
-      "duplicate_class": "parallel_same_parent",
+      "duplicate_class": "parallel_boundaries_same_identity_same_changeset",
       "same_identity_edges": [],
       "parallel_sets": [
         {
@@ -215,13 +225,15 @@
           "cuatm_key": "8034",
           "osm_parent_id": "osm-r85827"
         }
-      ]
+      ],
+      "structural_duplicate_class": "parallel_same_parent",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "8341",
       "legal_name": "Rogojeni, loc.st.c.f.",
       "count": 2,
-      "duplicate_class": "parallel_same_parent",
+      "duplicate_class": "later_duplicate_same_identity",
       "same_identity_edges": [],
       "parallel_sets": [
         {
@@ -249,7 +261,9 @@
           "cuatm_key": "8341",
           "osm_parent_id": "osm-r19080662"
         }
-      ]
+      ],
+      "structural_duplicate_class": "parallel_same_parent",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "0100",
@@ -26716,7 +26730,7 @@
       "legal_id": "1050",
       "legal_name": "Țînțăreni",
       "count": 3,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
+      "duplicate_class": "uat_and_component_locality_with_parallel_uat_boundary",
       "same_identity_edges": [
         {
           "child": "osm-r18967632",
@@ -26757,13 +26771,15 @@
           "cuatm_key": "1050",
           "osm_parent_id": "osm-r12496850"
         }
-      ]
+      ],
+      "structural_duplicate_class": "mixed_parallel_and_chain_representations",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "3417",
       "legal_name": "Dondușeni",
       "count": 3,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
+      "duplicate_class": "component_locality_with_parallel_uat_boundaries_same_changeset",
       "same_identity_edges": [
         {
           "child": "osm-r18967876",
@@ -26804,13 +26820,15 @@
           "cuatm_key": "3417",
           "osm_parent_id": "osm-r19055800"
         }
-      ]
+      ],
+      "structural_duplicate_class": "mixed_parallel_and_chain_representations",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "7160",
       "legal_name": "Văratic",
       "count": 3,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
+      "duplicate_class": "component_locality_with_parallel_uat_boundaries_same_changeset",
       "same_identity_edges": [
         {
           "child": "osm-r18966798",
@@ -26851,13 +26869,15 @@
           "cuatm_key": "7160",
           "osm_parent_id": "osm-r19045254"
         }
-      ]
+      ],
+      "structural_duplicate_class": "mixed_parallel_and_chain_representations",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "8034",
       "legal_name": "Recea",
       "count": 3,
-      "duplicate_class": "parallel_same_parent",
+      "duplicate_class": "parallel_boundaries_same_identity_same_changeset",
       "same_identity_edges": [],
       "parallel_sets": [
         {
@@ -26894,13 +26914,15 @@
           "cuatm_key": "8034",
           "osm_parent_id": "osm-r85827"
         }
-      ]
+      ],
+      "structural_duplicate_class": "parallel_same_parent",
+      "review_basis": "OSM relation history audit"
     },
     {
       "legal_id": "8341",
       "legal_name": "Rogojeni, loc.st.c.f.",
       "count": 2,
-      "duplicate_class": "parallel_same_parent",
+      "duplicate_class": "later_duplicate_same_identity",
       "same_identity_edges": [],
       "parallel_sets": [
         {
@@ -26928,7 +26950,9 @@
           "cuatm_key": "8341",
           "osm_parent_id": "osm-r19080662"
         }
-      ]
+      ],
+      "structural_duplicate_class": "parallel_same_parent",
+      "review_basis": "OSM relation history audit"
     }
   ],
   "legal_identity_parent_issues_by_representation": [
