@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T10:40:05.401Z",
+  "generated_at": "2026-09-26T12:36:35.789Z",
   "jurisdiction": "RO",
   "status": "PASS",
-  "policy": "No unresolved RO review exceptions are allowed; audited level-9 semantic classifications must be encoded in the catalog, and known cross-jurisdiction Ungheni contamination is a hard blocker.",
+  "policy": "RO release requires zero unresolved/duplicate SIRUTA matches, complete official application, and only the exact documented residual official-only, parent and OSM-semantic conflicts. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.",
   "checks": [
     {
       "name": "no_new_ro_review_exceptions",
@@ -29,6 +29,87 @@
       "ok": true,
       "detail": {
         "unresolved": []
+      }
+    },
+    {
+      "name": "ro_official_reconciliation_pass",
+      "ok": true,
+      "detail": {
+        "status": "PASS"
+      }
+    },
+    {
+      "name": "ro_official_reconciliation_has_no_unmatched",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    },
+    {
+      "name": "ro_official_reconciliation_has_no_duplicates",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    },
+    {
+      "name": "ro_official_application_pass",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "summary": {
+          "ro_level8_count": 3179,
+          "applied_count": 3179,
+          "type_changed_count": 4,
+          "legal_parent_conflict_count": 1,
+          "osm_semantic_type_conflict_count": 3,
+          "official_only_count": 1,
+          "represented_at_other_osm_level_count": 1
+        }
+      }
+    },
+    {
+      "name": "ro_official_application_is_complete",
+      "ok": true,
+      "detail": {
+        "applied": 3179,
+        "expected": 3179
+      }
+    },
+    {
+      "name": "ro_official_only_set_is_stable",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "unexpected": [],
+        "changed": []
+      }
+    },
+    {
+      "name": "ro_represented_at_other_level_set_is_stable",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "unexpected": [],
+        "changed": []
+      }
+    },
+    {
+      "name": "ro_legal_parent_mismatch_set_is_stable",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "unexpected": [],
+        "changed": []
+      }
+    },
+    {
+      "name": "ro_osm_semantic_type_conflict_set_is_stable",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "unexpected": [],
+        "changed": []
       }
     },
     {

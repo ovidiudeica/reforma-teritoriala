@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T12:36:32.899Z",
+  "jurisdiction": "RO",
+  "status": "PASS",
+  "policy": "SIRUTA is authoritative for RO level-8 legal identity/type. OSM remains the geometry/provenance representation. OSM geometric parent_id is never rewritten from legal hierarchy; legal parent is stored separately.",
+  "source": {
+    "official_snapshot": "data/sources/ro-siruta-current.json",
+    "reconciliation": "data/current/ro-official-reconciliation.json"
+  },
+  "checks": [
+    {
+      "name": "all_ro_level8_entities_applied",
+      "ok": true,
+      "detail": {
+        "applied_count": 3179,
+        "ro_level8_count": 3179
+      }
+    },
+    {
+      "name": "all_applied_entities_have_siruta_legal_identity",
+      "ok": true,
+      "detail": {}
+    },
+    {
+      "name": "all_ro_level8_geojson_features_have_siruta_identity",
+      "ok": true,
+      "detail": {}
+    }
+  ],
+  "summary": {
+    "ro_level8_count": 3179,
+    "applied_count": 3179,
+    "type_changed_count": 4,
+    "legal_parent_conflict_count": 1,
+    "osm_semantic_type_conflict_count": 3,
+    "official_only_count": 1,
+    "represented_at_other_osm_level_count": 1
+  },
+  "type_changes": [
+    {
+      "osm_relation_id": 10715570,
+      "name": "Adjud",
+      "osm_inferred_type": "commune",
+      "official_legal_type": "municipality",
+      "legal_id": "174860"
+    },
+    {
+      "osm_relation_id": 14743725,
+      "name": "Cehal",
+      "osm_inferred_type": "town",
+      "official_legal_type": "commune",
+      "legal_id": "137363"
+    },
+    {
+      "osm_relation_id": 10697874,
+      "name": "Fetești",
+      "osm_inferred_type": "town",
+      "official_legal_type": "municipality",
+      "legal_id": "92701"
+    },
+    {
+      "osm_relation_id": 14778262,
+      "name": "Salcea",
+      "osm_inferred_type": "commune",
+      "official_legal_type": "town",
+      "legal_id": "146370"
+    }
+  ],
+  "legal_parent_conflicts": [
+    {
+      "osm_relation_id": 9744206,
+      "name": "Grădinari",
+      "osm_geometry_parent_id": "osm-r2261289",
+      "osm_geometry_parent_name": "Vâlcea",
+      "legal_id": "127171",
+      "legal_parent_id": "289",
+      "legal_parent_name": "JUDEȚUL OLT"
+    }
+  ],
+  "osm_semantic_type_conflicts": [
+    {
+      "osm_relation_id": 14743725,
+      "name": "Cehal",
+      "osm_claimed_legal_type": "town",
+      "official_legal_type": "commune",
+      "legal_id": "137363"
+    },
+    {
+      "osm_relation_id": 10697874,
+      "name": "Fetești",
+      "osm_claimed_legal_type": "town",
+      "official_legal_type": "municipality",
+      "legal_id": "92701"
+    },
+    {
+      "osm_relation_id": 14778262,
+      "name": "Salcea",
+      "osm_claimed_legal_type": "commune",
+      "official_legal_type": "town",
+      "legal_id": "146370"
+    }
+  ],
+  "failures": []
+}
