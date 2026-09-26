@@ -134,10 +134,12 @@ const matched=matches.filter(x=>x.legal_id), unmatched=matches.filter(x=>!x.lega
 
 // Reviewed semantic class: OSM allotment boundaries are retained as geographic
 // entities but are outside current legal CUATM reconciliation. Require the full
-// reviewed population signature; do not generalize this to every level-9 feature.
+// reviewed population signature; accept both stale/absent explicit codes and names absent
+// from the official snapshot, but do not generalize this to every level-9 feature.
 const isNonCuatmAllotment=m=>{
  const e=entityById.get(m.id);
- if(m.unmatched_reason!=='code_absent_from_official_snapshot'||e?.osm?.admin_level!==9||e?.osm?.place!=='allotments')return false;
+ const eligibleReason=m.unmatched_reason==='code_absent_from_official_snapshot'||m.unmatched_reason==='name_absent_from_official_snapshot';
+ if(!eligibleReason||e?.osm?.admin_level!==9||e?.osm?.place!=='allotments')return false;
  const parent=e?.parent_id?entityById.get(e.parent_id):null;
  const parentMatch=parent?matchById.get(parent.id):null;
  return Boolean(parentMatch?.legal_id);
