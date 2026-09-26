@@ -45,8 +45,8 @@ for(const m of matched){
  identityChecks.push(row);if(result==='identity_parent_mismatch'||result==='identity_parent_not_resolved')identityIssues.push(row);
 }
 const byResult=identityChecks.reduce((a,x)=>(a[x.result]=(a[x.result]||0)+1,a),{});
-const reviewedGeometryConflictIds=new Set(['0123','6432','9255','6453','8961']);
-const geometryHistoryReviewIds=new Set(['9639']);
+const reviewedGeometryConflictIds=new Set(['0123','6432','9255','6453','8961','9639']);
+const geometryHistoryReviewIds=new Set([]);
 const uniqueIdentityIssues=[];
 for(const [legal_id,xs] of groups){
  const rows=identityChecks.filter(x=>x.legal_id===legal_id);
