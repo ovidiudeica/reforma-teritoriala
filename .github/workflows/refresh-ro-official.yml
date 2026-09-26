@@ -1,0 +1,39 @@
+name: Refresh official Romania SIRUTA snapshot
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 4 2 * *'
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/import/import-ro-siruta.mjs
+      - scripts/process/audit-ro-official-reconciliation.mjs
+      - package.json
+      - .github/workflows/refresh-ro-official.yml
+permissions:
+  contents: write
+concurrency:
+  group: ro-official-siruta-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+      - run: npm install
+      - name: Fetch official INS SIRUTA snapshot
+        run: npm run import:ro-siruta
+      - name: Reconcile current RO OSM level 8 against SIRUTA
+        run: npm run audit:ro-official-reconciliation
+      - name: Commit official snapshot and reconciliation report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/sources/ro-siruta-current.json data/current/ro-official-reconciliation.json
+          git diff --cached --quiet || git commit -m "data: refresh official RO SIRUTA reconciliation"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

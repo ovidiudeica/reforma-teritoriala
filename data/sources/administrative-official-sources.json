@@ -1,6 +1,34 @@
 {
-  "as_of": "2026-09-25",
+  "as_of": "2026-09-26",
   "sources": [
+    {
+      "jurisdiction": "RO",
+      "name": "SIRUTA_s1 2026 — Registrul unităților administrativ-teritoriale ale României",
+      "authority": "Institutul Național de Statistică / data.gov.ro",
+      "purpose": "Canonical legal identity, hierarchy and UAT type for Romania reconciliation",
+      "url": "https://data.gov.ro/ro/dataset/siruta_s1-2026",
+      "dataset_id": "721c9059-5f87-4c79-9854-a1d5c18f58d5",
+      "reference_year": 2026,
+      "last_verified": "2026-09-26",
+      "dataset_updated": "2026-08-11",
+      "license": "CC BY 4.0",
+      "reconciliation_policy": "Prefer explicit SIRUTA codes. Otherwise accept only exact normalized UAT name plus exact county; fuzzy matches never auto-assign legal identity or type. OSM remains geometry/provenance, SIRUTA remains legal identity/status.",
+      "fallback_official_source": {
+        "authority": "Institutul Național de Statistică",
+        "name": "INS WebGIS Operational/Localitati",
+        "url": "https://webgis.insse.ro/servicii/rest/services/Operational/Localitati/MapServer/0",
+        "fields_used": [
+          "siruta",
+          "siruta_sup",
+          "denumire",
+          "den_superior",
+          "judet",
+          "cod_jud",
+          "tiplocalitate"
+        ],
+        "policy": "Used only to reconstruct SIRUTA UAT identity/type when data.gov.ro is unreachable. No WebGIS geometry is promoted to legal UAT geometry."
+      }
+    },
     {
       "jurisdiction": "RO",
       "name": "Portal Legislativ — Ordin 3840/2024",
