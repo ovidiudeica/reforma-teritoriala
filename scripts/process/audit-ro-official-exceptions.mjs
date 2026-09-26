@@ -115,10 +115,17 @@ async function fetchOfficialLocalityGeometries(codes){
    outFields:'siruta,siruta_sup,denumire,den_superior,judet,cod_jud,loc,tiplocalitate',
    returnGeometry:'true',outSR:'4326',f:'geojson'
   });
-  const r=await fetch(INS_LOCALITIES+'?'+params,{headers:{'user-agent':'reforma-teritoriala-ro-official-exception-audit/0.2'},signal:AbortSignal.timeout(30000)});
-  if(!r.ok)throw new Error('INS locality geometry HTTP '+r.status);
-  const j=await r.json();
-  if(j.error)throw new Error('INS locality geometry '+JSON.stringify(j.error));
+  let j=null,last=null;
+  for(let attempt=1;attempt<=3;attempt++){
+   try{
+    const r=await fetch(INS_LOCALITIES+'?'+params,{headers:{'user-agent':'reforma-teritoriala-ro-official-exception-audit/0.2'},signal:AbortSignal.timeout(30000)});
+    if(!r.ok)throw new Error('INS locality geometry HTTP '+r.status);
+    j=await r.json();
+    if(j.error)throw new Error('INS locality geometry '+JSON.stringify(j.error));
+    break;
+   }catch(e){last=e;if(attempt<3)await new Promise(r=>setTimeout(r,2000*attempt));}
+  }
+  if(!j)throw last||new Error('INS locality geometry unavailable');
   features.push(...(j.features||[]));
  }
  return features;
@@ -226,10 +233,11 @@ const typeMismatches=(reconciliation.type_mismatches||[]).map(x=>({
  audit_classification:'official_legal_type_conflicts_with_osm_classifier'
 }));
 
-const checks=[],failures=[];
+const checks=[],failures=[],warnings=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail});};
 check('all_exception_histories_available',historyErrors.length===0,{errors:historyErrors});
-check('official_locality_geometry_available',officialLocalityGeometryError===null,{error:officialLocalityGeometryError,feature_count:officialLocalityFeatures.length});
+checks.push({name:'official_locality_geometry_available',ok:officialLocalityGeometryError===null,diagnostic:true,detail:{error:officialLocalityGeometryError,feature_count:officialLocalityFeatures.length}});
+if(officialLocalityGeometryError)warnings.push({name:'official_locality_geometry_unavailable',detail:{error:officialLocalityGeometryError}});
 check('all_unmatched_cases_audited',unmatched.length===(reconciliation.unmatched_osm||[]).length,{count:unmatched.length});
 check('all_duplicate_groups_audited',duplicateGroups.length===(reconciliation.duplicate_legal_mappings||[]).length,{count:duplicateGroups.length});
 check('all_type_mismatches_audited',typeMismatches.length===(reconciliation.type_mismatches||[]).length,{count:typeMismatches.length});
@@ -247,9 +255,10 @@ const report={
   requires_review_count:unmatched.filter(x=>x.audit_classification==='requires_review').length,
   duplicate_group_count:duplicateGroups.length,
   type_mismatch_count:typeMismatches.length,
-  history_error_count:historyErrors.length
+  history_error_count:historyErrors.length,
+  diagnostic_warning_count:warnings.length
  },
- unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,failures
+ unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,warnings,failures
 };
 const historyOut={schema_version:1,generated_at:report.generated_at,source:'OpenStreetMap API 0.6 relation history',relation_count:targetIds.length,history_count:histories.length,error_count:historyErrors.length,errors:historyErrors,relations:histories};
 await mkdir('data/current',{recursive:true});await mkdir('data/sources',{recursive:true});
