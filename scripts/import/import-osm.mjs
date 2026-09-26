@@ -86,16 +86,31 @@ function entity(country,feature){
   classification:{version:'2.2',confidence:c.confidence,reason:c.reason||null},
   source:'OpenStreetMap',source_url:`https://www.openstreetmap.org/relation/${rid}`,imported_at:new Date().toISOString(),review_required:c.confidence==='low'};
 }
-function assignParents(entities,featuresById){
+function assignParents(entities,featuresById,warnings=[]){
  for(const child of entities){
   const cf=featuresById.get(child.id); if(!cf)continue;
-  const pt=pointOnFeature(cf), cl=child.osm.admin_level??99;
+  let pt;
+  try{
+   pt=pointOnFeature(cf);
+  }catch(e){
+   warnings.push({type:'invalid_child_geometry',entity_id:child.id,relation_id:child.osm.relation_id,message:e.message});
+   child.parent_id=child.jurisdiction;
+   continue;
+  }
+  const cl=child.osm.admin_level??99;
   const candidates=entities.filter(p=>p.jurisdiction===child.jurisdiction&&(p.osm.admin_level??99)<cl);
-  const containing=candidates.filter(p=>{const pf=featuresById.get(p.id);try{return pf&&booleanPointInPolygon(pt,pf);}catch{return false;}});
+  const containing=candidates.filter(p=>{
+   const pf=featuresById.get(p.id);
+   if(!pf)return false;
+   try{return booleanPointInPolygon(pt,pf);}
+   catch(e){
+    warnings.push({type:'invalid_parent_geometry',entity_id:p.id,relation_id:p.osm.relation_id,child_id:child.id,message:e.message});
+    return false;
+   }
+  });
   containing.sort((a,b)=>(b.osm.admin_level??0)-(a.osm.admin_level??0));
   child.parent_id=containing[0]?.id||child.jurisdiction;
  }
-
 }
 function finalizeAfterParents(entities){
  const byId=new Map(entities.map(e=>[e.id,e]));
@@ -116,7 +131,7 @@ async function main(){
   const polygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const entities=polygons.map(f=>entity(code,f));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));
-  assignParents(entities,byId); finalizeAfterParents(entities); all.push(...entities);
+  assignParents(entities,byId,report.warnings); finalizeAfterParents(entities); all.push(...entities);
   const entityById=new Map(entities.map(e=>[e.id,e]));
   const fc={type:'FeatureCollection',features:polygons.map(f=>{const id=`osm-r${relationId(f)}`;const e=entityById.get(id);return {...f,properties:{...f.properties,catalog_id:id,parent_id:e?.parent_id||null,jurisdiction:code,entity_type:e?.type||'unclassified',classification_confidence:e?.classification?.confidence||'low'}};})};
   await writeFile(`public/geo/current/${code.toLowerCase()}-administrative.geojson`,JSON.stringify(fc));
