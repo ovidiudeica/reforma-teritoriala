@@ -12,7 +12,7 @@ function classifyGroup([legal_id,xs]){
  const parallelPairs=[]; const byParent=new Map();
  for(const x of xs){const p=byEntity.get(x.id)?.parent_id||null;if(!byParent.has(p))byParent.set(p,[]);byParent.get(p).push(x.id);}
  for(const [p,a] of byParent)if(a.length>1)parallelPairs.push({osm_parent_id:p,items:a});
- let duplicate_class='conflict_real';
+ let duplicate_class='mixed_parallel_and_chain_representations';
  if(edges.length===xs.length-1){
   const roots=xs.filter(x=>!children.has(x.id)); // nodes not children in same-id edges
   // connected undirected chain/tree with one external/root representation
@@ -21,7 +21,7 @@ function classifyGroup([legal_id,xs]){
   const seen=new Set(), stack=[xs[0].id];while(stack.length){const n=stack.pop();if(seen.has(n))continue;seen.add(n);for(const q of adj.get(n))stack.push(q);}
   if(seen.size===xs.length&&roots.length===1)duplicate_class='same_identity_parent_child_chain';
  }
- if(duplicate_class==='conflict_real'&&edges.length===0&&parallelPairs.length&&parallelPairs.reduce((n,p)=>n+p.items.length,0)===xs.length)duplicate_class='parallel_same_parent';
+ if(duplicate_class==='mixed_parallel_and_chain_representations'&&edges.length===0&&parallelPairs.length&&parallelPairs.reduce((n,p)=>n+p.items.length,0)===xs.length)duplicate_class='parallel_same_parent';
  return {legal_id,legal_name:xs[0].legal_name,count:xs.length,duplicate_class,same_identity_edges:edges.map(([child,parent])=>({child,parent})),parallel_sets:parallelPairs,items:xs.map(x=>({id:x.id,name:x.name,match_method:x.match_method,confidence:x.confidence,cuatm_key:x.cuatm_key,osm_parent_id:byEntity.get(x.id)?.parent_id||null}))};
 }
 const duplicateGroups=[...groups.entries()].filter(([,xs])=>xs.length>1).map(classifyGroup).sort((a,b)=>a.duplicate_class.localeCompare(b.duplicate_class)||a.legal_id.localeCompare(b.legal_id));
@@ -45,6 +45,8 @@ for(const m of matched){
  identityChecks.push(row);if(result==='identity_parent_mismatch'||result==='identity_parent_not_resolved')identityIssues.push(row);
 }
 const byResult=identityChecks.reduce((a,x)=>(a[x.result]=(a[x.result]||0)+1,a),{});
+const reviewedGeometryConflictIds=new Set(['0123','6432','9255','6453','8961']);
+const geometryHistoryReviewIds=new Set(['9639']);
 const uniqueIdentityIssues=[];
 for(const [legal_id,xs] of groups){
  const rows=identityChecks.filter(x=>x.legal_id===legal_id);
@@ -52,10 +54,10 @@ for(const [legal_id,xs] of groups){
  if(!bad.length)continue;
  const first=bad[0], expected=first.expected_legal_parent_id, observed=[...new Set(bad.map(x=>x.resolved_distinct_parent_legal_id).filter(Boolean))];
  const chisinauSectorGap=['0110','0120','0130','0140','0150'].includes(expected)&&observed.length===1&&observed[0]==='0100';
- uniqueIdentityIssues.push({legal_id,legal_name:first.legal_name,expected_legal_parent_id:expected,expected_legal_parent_name:first.expected_legal_parent_name,observed_distinct_parent_legal_ids:observed,diagnostic_class:chisinauSectorGap?'chisinau_sector_geometry_gap':'cross_legal_parent_conflict',representation_count:xs.length,affected_representations:bad.map(x=>x.representative_osm_id)});
+ uniqueIdentityIssues.push({legal_id,legal_name:first.legal_name,expected_legal_parent_id:expected,expected_legal_parent_name:first.expected_legal_parent_name,observed_distinct_parent_legal_ids:observed,diagnostic_class:chisinauSectorGap?'chisinau_sector_geometry_gap':reviewedGeometryConflictIds.has(legal_id)?'verified_legal_parent_geometry_conflict':geometryHistoryReviewIds.has(legal_id)?'needs_geometry_history_review':'cross_legal_parent_conflict',representation_count:xs.length,affected_representations:bad.map(x=>x.representative_osm_id)});
 }
 const uniqueIssueByClass=uniqueIdentityIssues.reduce((a,x)=>(a[x.diagnostic_class]=(a[x.diagnostic_class]||0)+1,a),{});
-const targetedDuplicateReview=duplicateGroups.filter(g=>g.duplicate_class==='conflict_real'||g.duplicate_class==='parallel_same_parent');
+const targetedDuplicateReview=duplicateGroups.filter(g=>g.duplicate_class==='mixed_parallel_and_chain_representations'||g.duplicate_class==='parallel_same_parent');
 
 const audit={generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'CUATM matched entities; duplicate OSM representations collapsed logically by legal identity',matched_count:matched.length,policy:'Diagnostic only. No reconciliation, classification or source data are altered.',duplicate_identity_summary:{duplicate_legal_id_count:duplicateGroups.length,entities_in_duplicate_groups:duplicateGroups.reduce((n,g)=>n+g.count,0),by_class:dupByClass},legal_identity_parent_summary:byResult,unique_legal_identity_issue_summary:{count:uniqueIdentityIssues.length,by_class:uniqueIssueByClass},targeted_duplicate_review_summary:{count:targetedDuplicateReview.length,by_class:targetedDuplicateReview.reduce((a,g)=>(a[g.duplicate_class]=(a[g.duplicate_class]||0)+1,a),{})},duplicate_legal_ids:duplicateGroups,unique_legal_identity_issues:uniqueIdentityIssues,targeted_duplicate_review:targetedDuplicateReview,legal_identity_parent_issues_by_representation:identityIssues};
 await mkdir('data/current',{recursive:true});await writeFile('data/current/md-cuatm-consistency-audit.json',JSON.stringify(audit,null,2)+'\n');
