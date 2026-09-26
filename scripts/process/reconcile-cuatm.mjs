@@ -64,12 +64,15 @@ for(const e of entities){
  const ec=exactCode.get(e.id);
  if(ec)matchById.set(e.id,makeMatch(e,ec.hit,'explicit_cuatm_key','high',ec.key));
 }
-// Pass 1b: safe OSM wrapper/self-parent cases to a fixpoint. Keep the same strict
-// conditions: same legal ID, exact normalized name, and no distinct official child
-// under the verified parent. Newly resolved wrappers may unlock deeper wrappers.
-let selfParentChanged=true;
-while(selfParentChanged){
- selfParentChanged=false;
+// Passes 1b and 2 share one deterministic fixpoint. Each round first applies
+// the strict self-parent rule, then exact name + verified official parent. A match
+// created by either rule may unlock the other rule in the next round.
+let changed=true;
+while(changed){
+ changed=false;
+
+ // Pass 1b: same legal ID, exact normalized name, and no distinct official child
+ // under the verified parent. Existing safeguards are intentionally unchanged.
  for(const e of entities){
   if(matchById.has(e.id))continue;
   const keys=[e.osm?.cuatm_unique_id,e.osm?.cuatm_code].filter(Boolean).map(digits);
@@ -81,15 +84,12 @@ while(selfParentChanged){
   const self=nameHits.find(h=>h.code===parentMatch.legal_id);
   if(self&&distinctChildren.length===0&&norm(e.name)===norm(parentMatch.legal_name)){
    matchById.set(e.id,makeMatch(e,self,'osm_self_parent_same_legal_entity','medium'));
-   selfParentChanged=true;
+   changed=true;
   }
  }
-}
-// Pass 2: deterministic fixpoint. Newly verified parents can unlock children on
-// the next iteration, but only a unique exact-name candidate under that parent.
-let changed=true;
-while(changed){
- changed=false;
+
+ // Pass 2: unique exact-name candidate under an already verified official parent.
+ // Existing safeguards are intentionally unchanged.
  for(const e of entities){
   if(matchById.has(e.id))continue;
   const keys=[e.osm?.cuatm_unique_id,e.osm?.cuatm_code].filter(Boolean).map(digits);
@@ -98,7 +98,10 @@ while(changed){
   const parentCode=parentMatch?.legal_id||null;
   if(!parentCode)continue;
   const parentHits=(byName.get(norm(e.name))||[]).filter(h=>parentCompatible(h,parentCode));
-  if(parentHits.length===1){matchById.set(e.id,makeMatch(e,parentHits[0],'exact_normalized_name_and_official_parent','medium'));changed=true;}
+  if(parentHits.length===1){
+   matchById.set(e.id,makeMatch(e,parentHits[0],'exact_normalized_name_and_official_parent','medium'));
+   changed=true;
+  }
  }
 }
 const matches=[];
