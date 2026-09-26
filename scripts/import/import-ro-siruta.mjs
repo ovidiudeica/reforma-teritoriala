@@ -140,42 +140,47 @@ async function arcgisPage(offset){
  return {url,j};
 }
 async function fromOfficialArcgis(){
- const features=[]; let offset=0,lastUrl=null;
+ const features=[]; let offset=0;
  for(let page=0;page<20;page++){
-  const {url,j}=await arcgisPage(offset); lastUrl=url;
+  const {j}=await arcgisPage(offset);
   const batch=j.features||[]; features.push(...batch);
   if(!j.exceededTransferLimit&&batch.length<2000)break;
   if(!batch.length)break;
   offset+=batch.length;
  }
  if(features.length<10000)throw new Error('INS ArcGIS Localitati returned too few locality records: '+features.length);
- const byUat=new Map();
+ const nameKey=v=>normalizeRomanian(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('ro').replace(/[^a-z0-9]+/g,' ').trim();
+ const groups=new Map();
  for(const f of features){
   const a=f.attributes||{},siruta=digits(a.siruta_sup),rawParent=normalizeRomanian(a.den_superior),county=normalizeRomanian(a.judet);
   if(!/^\d+$/.test(siruta)||!rawParent)continue;
-  const candidate={
-   siruta,
-   name:stripLegalPrefix(rawParent),
-   parent_siruta:null,
-   parent_name:county||null,
-   type_code:null,
-   level:2,
-   county_code:digits(a.cod_jud)||null,
-   county_name:county||null,
-   legal_type:legalTypeFromName(rawParent),
-   official_parent_label:rawParent
-  };
-  const prev=byUat.get(siruta);
-  if(prev&&(prev.name!==candidate.name||prev.county_name!==candidate.county_name||prev.legal_type!==candidate.legal_type)){
-   throw new Error('Conflicting INS ArcGIS UAT identity for SIRUTA '+siruta+': '+JSON.stringify([prev,candidate]));
-  }
-  byUat.set(siruta,candidate);
+  if(!groups.has(siruta))groups.set(siruta,{siruta,rawParent,county,countyCode:digits(a.cod_jud)||null,children:[]});
+  const g=groups.get(siruta);
+  if(g.rawParent!==rawParent||g.county!==county)throw new Error('Conflicting INS ArcGIS UAT identity for SIRUTA '+siruta);
+  g.children.push({name:normalizeRomanian(a.denumire),type:normalizeRomanian(a.tiplocalitate)});
  }
- const records=[...byUat.values()].sort((a,b)=>Number(a.siruta)-Number(b.siruta));
+ const seatTypeCounts={};
+ const records=[...groups.values()].map(g=>{
+  const parentName=stripLegalPrefix(g.rawParent),parentKey=nameKey(parentName);
+  const sameNameChildren=g.children.filter(x=>nameKey(x.name)===parentKey);
+  const typeLabels=[...new Set(sameNameChildren.map(x=>x.type).filter(Boolean))];
+  for(const t of typeLabels)seatTypeCounts[t]=(seatTypeCounts[t]||0)+1;
+  let legalType=legalTypeFromName(g.rawParent);
+  if(legalType==='commune'){
+   const joined=typeLabels.join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+   if(/municip/.test(joined))legalType='municipality';
+   else if(/oras|urban/.test(joined))legalType='town';
+  }
+  return {
+   siruta:g.siruta,name:parentName,parent_siruta:null,parent_name:g.county||null,type_code:null,level:2,
+   county_code:g.countyCode,county_name:g.county||null,legal_type:legalType,official_parent_label:g.rawParent,
+   seat_locality_type_labels:typeLabels
+  };
+ }).sort((a,b)=>Number(a.siruta)-Number(b.siruta));
  if(records.length<3100)throw new Error('INS ArcGIS derived too few UAT records: '+records.length);
  const typeCounts=records.reduce((a,x)=>(a[x.legal_type]=(a[x.legal_type]||0)+1,a),{});
  if((typeCounts.commune||0)<2800||(typeCounts.municipality||0)<90||(typeCounts.town||0)<200){
-  throw new Error('Unexpected INS ArcGIS UAT type counts: '+JSON.stringify(typeCounts));
+  throw new Error('Unexpected INS ArcGIS UAT type counts: '+JSON.stringify(typeCounts)+'; seat types='+JSON.stringify(seatTypeCounts));
  }
  return {
   records,
@@ -187,12 +192,14 @@ async function fromOfficialArcgis(){
    query_endpoint:INS_ARCGIS,
    query_fields:['siruta','siruta_sup','denumire','den_superior','judet','cod_jud','tiplocalitate'],
    locality_record_count:features.length,
+   derived_uat_count:records.length,
+   derived_uat_type_counts:typeCounts,
+   seat_locality_type_labels:seatTypeCounts,
    license:null,
-   note:'UAT identity is reconstructed from unique official SIRUTA_SUP + DEN_SUPERIOR + JUDET values. Locality/intravilan geometry is not imported or treated as UAT legal geometry.'
+   note:'UAT identity/type is reconstructed from unique official SIRUTA_SUP + DEN_SUPERIOR + JUDET values and TipLocalitate of the same-name seat locality. Locality/intravilan geometry is not imported or treated as UAT legal geometry.'
   }
  };
 }
-
 let imported,primaryError=null;
 try{imported=await fromOfficialCsv();}
 catch(e){
