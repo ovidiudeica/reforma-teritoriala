@@ -172,10 +172,16 @@ await writeFile('data/current/md-cuatm-non-cuatm-allotments.json',JSON.stringify
 },null,2)+'\n');
 const nameAbsent=unmatchedGeneral.filter(x=>x.unmatched_reason==='name_absent_from_official_snapshot');
 const namePattern=x=>{
- const n=(x.name||'').trim();
+ const n=(x.name||'').normalize('NFC').trim();
  if(!n)return 'missing_name';
- if(/^sovetul\\s+sătesc\\b/i.test(n))return 'sovetul_satesc';
- if(/^(?:î|i)\\s*\\.?\\s*p\\s*\\.?\\s*(?=[„"'«]|$)/iu.test(n))return 'horticultural_association_prefix';
+ if(/^sovetul\\s+sătesc\\b/iu.test(n))return 'sovetul_satesc';
+ // Normalize only the leading abbreviation token. OSM contains variants such
+ // as Î.P., Î.P, I.P. and optional whitespace before the organization name.
+ const prefix=(n.match(/^[^\\p{L}]*[ÎIi]\\s*\\.?\\s*[Pp]\\s*\\.?/u)||[])[0]||'';
+ if(prefix){
+  const compact=prefix.normalize('NFD').replace(/\\p{M}/gu,'').replace(/[^A-Za-z]/g,'').toUpperCase();
+  if(compact==='IP')return 'horticultural_association_prefix';
+ }
  return 'other_named';
 };
 const structuralPattern=x=>{
