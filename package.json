@@ -8,6 +8,7 @@
     "audit:osm-history": "node scripts/process/audit-osm-relation-history.mjs",
     "audit:cuatm-chains": "node scripts/process/audit-cuatm-chain-patterns.mjs",
     "audit:md-special-municipalities": "node scripts/process/audit-md-special-municipalities.mjs",
+    "audit:balti-geometry": "node scripts/process/compare-balti-geometries.mjs",
     "reconcile:cuatm": "node scripts/process/reconcile-cuatm.mjs"
   },
   "dependencies": {
