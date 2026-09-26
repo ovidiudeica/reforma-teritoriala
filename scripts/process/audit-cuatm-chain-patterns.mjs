@@ -10,19 +10,25 @@ function classify(g){
  const edges=g.same_identity_edges.map(x=>({child:sig(byId.get(x.child)),parent:sig(byId.get(x.parent))}));
  const levelPairs=edges.map(x=>String(x.parent.admin_level||'?')+'>'+String(x.child.admin_level||'?'));
  const canonical=edges.length===1&&levelPairs[0]==='8>9';
- let pattern=canonical?'uat_level8_to_component_level9':'noncanonical_chain_shape';
+ let family=canonical?'uat8_to_component_locality9':'special_chain';
+ let subtype='special_non_8_to_9';
  if(canonical){
   const c=edges[0].child,p=edges[0].parent;
-  if(norm(c.place)==='village'&&['comuna','municipality','town','city','village',null].includes(norm(p.place)))pattern='uat8_to_locality9_village';
-  else pattern='uat8_to_locality9_other_tags';
+  const cp=norm(c.place),pp=norm(p.place);
+  if(cp==='village')subtype='village';
+  else if(cp==='town')subtype='town';
+  else if(cp==='city')subtype='city';
+  else subtype='tagging_other';
+  if(!c.place)subtype='tagging_other';
  }
- return {legal_id:g.legal_id,legal_name:g.legal_name,count:g.count,pattern,level_pairs:levelPairs,edges};
+ return {legal_id:g.legal_id,legal_name:g.legal_name,count:g.count,family,subtype,level_pairs:levelPairs,edges};
 }
 const rows=chains.map(classify);
-const byPattern=rows.reduce((a,x)=>(a[x.pattern]=(a[x.pattern]||0)+1,a),{});
+const byFamily=rows.reduce((a,x)=>(a[x.family]=(a[x.family]||0)+1,a),{});
+const bySubtype=rows.filter(x=>x.family==='uat8_to_component_locality9').reduce((a,x)=>(a[x.subtype]=(a[x.subtype]||0)+1,a),{});
 const levelPairs=rows.flatMap(x=>x.level_pairs).reduce((a,x)=>(a[x]=(a[x]||0)+1,a),{});
-const exceptions=rows.filter(x=>x.pattern!=='uat8_to_locality9_village');
-const out={generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'same_identity_parent_child_chain',policy:'Diagnostic only; no OSM entity or CUATM reconciliation is altered.',chain_group_count:chains.length,summary:{by_pattern:byPattern,by_admin_level_edge:levelPairs,exception_count:exceptions.length},exceptions,groups:rows};
+const exceptions=rows.filter(x=>x.family==='special_chain');
+const out={generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'same_identity_parent_child_chain',policy:'Diagnostic only; no OSM entity or CUATM reconciliation is altered.',chain_group_count:chains.length,summary:{by_family:byFamily,normal_family_subtypes:bySubtype,by_admin_level_edge:levelPairs,normal_family_count:rows.length-exceptions.length,exception_count:exceptions.length},exceptions,groups:rows};
 await mkdir('data/current',{recursive:true});
 await writeFile('data/current/md-cuatm-chain-pattern-audit.json',JSON.stringify(out,null,2)+'\n');
 console.log(JSON.stringify({chain_group_count:out.chain_group_count,...out.summary},null,2));
