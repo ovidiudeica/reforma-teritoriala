@@ -9,6 +9,7 @@
     "audit:cuatm-chains": "node scripts/process/audit-cuatm-chain-patterns.mjs",
     "audit:md-special-municipalities": "node scripts/process/audit-md-special-municipalities.mjs",
     "audit:balti-geometry": "node scripts/process/compare-balti-geometries.mjs",
+    "audit:balti-components": "node scripts/process/audit-balti-component-localities.mjs",
     "reconcile:cuatm": "node scripts/process/reconcile-cuatm.mjs"
   },
   "dependencies": {
