@@ -30,7 +30,9 @@ async function overpass(query){
 }
 function queryFor({iso,levels}){
  const filters=levels.map(l=>`relation(area.country)["boundary"="administrative"]["admin_level"="${l}"];`).join('\n');
- return `[out:json][timeout:300];area["ISO3166-1"="${iso}"]["boundary"="administrative"]->.country;(${filters});out body;>;out skel qt;`;
+ // Include the country relation itself so candidate geometries can be validated
+ // spatially against the actual country polygon after osmtogeojson conversion.
+ return `[out:json][timeout:300];relation["ISO3166-1"="${iso}"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;${filters});out body;>;out skel qt;`;
 }
 function norm(v){return (v||'').trim().toLowerCase();}
 function classify(country,t={}){
@@ -128,7 +130,16 @@ async function main(){
  const all=[], report={generated_at:new Date().toISOString(),classifier_version:'2.2',countries:{},warnings:[]};
  for(const [code,cfg] of Object.entries(countries)){
   const raw=await overpass(queryFor(cfg)), geo=osmtogeojson(raw,{flatProperties:false});
-  const polygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
+  const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
+  const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
+  if(!countryFeature) throw new Error(`Missing country boundary geometry for ${code}`);
+  const polygons=allPolygons.filter(f=>{
+   if(f===countryFeature)return false;
+   try{return booleanPointInPolygon(pointOnFeature(f),countryFeature);}
+   catch(e){report.warnings.push({type:'country_membership_geometry_error',jurisdiction:code,relation_id:relationId(f),message:e.message});return false;}
+  });
+  const excluded=allPolygons.filter(f=>f!==countryFeature&&!polygons.includes(f)).map(f=>relationId(f));
+  if(excluded.length) report.warnings.push({type:'outside_country_boundary_excluded',jurisdiction:code,relation_ids:excluded});
   const entities=polygons.map(f=>entity(code,f));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));
   assignParents(entities,byId,report.warnings); finalizeAfterParents(entities); all.push(...entities);
