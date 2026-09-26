@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T06:54:25.248Z",
+  "generated_at": "2026-09-26T07:07:45.307Z",
   "jurisdiction": "MD",
   "scope": "CUATM matched entities; duplicate OSM representations collapsed logically by legal identity",
   "matched_count": 2465,
@@ -8,7 +8,7 @@
     "duplicate_legal_id_count": 847,
     "entities_in_duplicate_groups": 1699,
     "by_class": {
-      "conflict_real": 3,
+      "mixed_parallel_and_chain_representations": 3,
       "parallel_same_parent": 2,
       "same_identity_parent_child_chain": 842
     }
@@ -22,13 +22,14 @@
     "count": 23,
     "by_class": {
       "chisinau_sector_geometry_gap": 17,
-      "cross_legal_parent_conflict": 6
+      "verified_legal_parent_geometry_conflict": 5,
+      "needs_geometry_history_review": 1
     }
   },
   "targeted_duplicate_review_summary": {
     "count": 5,
     "by_class": {
-      "conflict_real": 3,
+      "mixed_parallel_and_chain_representations": 3,
       "parallel_same_parent": 2
     }
   },
@@ -37,7 +38,7 @@
       "legal_id": "1050",
       "legal_name": "Țînțăreni",
       "count": 3,
-      "duplicate_class": "conflict_real",
+      "duplicate_class": "mixed_parallel_and_chain_representations",
       "same_identity_edges": [
         {
           "child": "osm-r18967632",
@@ -84,7 +85,7 @@
       "legal_id": "3417",
       "legal_name": "Dondușeni",
       "count": 3,
-      "duplicate_class": "conflict_real",
+      "duplicate_class": "mixed_parallel_and_chain_representations",
       "same_identity_edges": [
         {
           "child": "osm-r18967876",
@@ -131,7 +132,7 @@
       "legal_id": "7160",
       "legal_name": "Văratic",
       "count": 3,
-      "duplicate_class": "conflict_real",
+      "duplicate_class": "mixed_parallel_and_chain_representations",
       "same_identity_edges": [
         {
           "child": "osm-r18966798",
@@ -26465,7 +26466,7 @@
       "observed_distinct_parent_legal_ids": [
         "8000"
       ],
-      "diagnostic_class": "cross_legal_parent_conflict",
+      "diagnostic_class": "verified_legal_parent_geometry_conflict",
       "representation_count": 2,
       "affected_representations": [
         "osm-r1813319",
@@ -26510,7 +26511,7 @@
       "observed_distinct_parent_legal_ids": [
         "8000"
       ],
-      "diagnostic_class": "cross_legal_parent_conflict",
+      "diagnostic_class": "verified_legal_parent_geometry_conflict",
       "representation_count": 2,
       "affected_representations": [
         "osm-r19082496",
@@ -26570,7 +26571,7 @@
       "observed_distinct_parent_legal_ids": [
         "4300"
       ],
-      "diagnostic_class": "cross_legal_parent_conflict",
+      "diagnostic_class": "verified_legal_parent_geometry_conflict",
       "representation_count": 2,
       "affected_representations": [
         "osm-r1643003",
@@ -26585,7 +26586,7 @@
       "observed_distinct_parent_legal_ids": [
         "3100"
       ],
-      "diagnostic_class": "cross_legal_parent_conflict",
+      "diagnostic_class": "verified_legal_parent_geometry_conflict",
       "representation_count": 2,
       "affected_representations": [
         "osm-r19082505",
@@ -26690,7 +26691,7 @@
       "observed_distinct_parent_legal_ids": [
         "7433"
       ],
-      "diagnostic_class": "cross_legal_parent_conflict",
+      "diagnostic_class": "verified_legal_parent_geometry_conflict",
       "representation_count": 1,
       "affected_representations": [
         "osm-r18967570"
@@ -26704,7 +26705,7 @@
       "observed_distinct_parent_legal_ids": [
         "9621"
       ],
-      "diagnostic_class": "cross_legal_parent_conflict",
+      "diagnostic_class": "needs_geometry_history_review",
       "representation_count": 1,
       "affected_representations": [
         "osm-r18968043"
@@ -26716,7 +26717,7 @@
       "legal_id": "1050",
       "legal_name": "Țînțăreni",
       "count": 3,
-      "duplicate_class": "conflict_real",
+      "duplicate_class": "mixed_parallel_and_chain_representations",
       "same_identity_edges": [
         {
           "child": "osm-r18967632",
@@ -26763,7 +26764,7 @@
       "legal_id": "3417",
       "legal_name": "Dondușeni",
       "count": 3,
-      "duplicate_class": "conflict_real",
+      "duplicate_class": "mixed_parallel_and_chain_representations",
       "same_identity_edges": [
         {
           "child": "osm-r18967876",
@@ -26810,7 +26811,7 @@
       "legal_id": "7160",
       "legal_name": "Văratic",
       "count": 3,
-      "duplicate_class": "conflict_real",
+      "duplicate_class": "mixed_parallel_and_chain_representations",
       "same_identity_edges": [
         {
           "child": "osm-r18966798",
