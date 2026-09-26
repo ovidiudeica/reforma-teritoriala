@@ -170,6 +170,21 @@ await writeFile('data/current/md-cuatm-non-cuatm-allotments.json',JSON.stringify
  count:nonCuatmAllotments.length,
  items:nonCuatmAllotments
 },null,2)+'\n');
+const nameAbsent=unmatchedGeneral.filter(x=>x.unmatched_reason==='name_absent_from_official_snapshot');
+const namePattern=x=>{
+ const n=(x.name||'').trim();
+ if(!n)return 'missing_name';
+ if(/^sovetul\\s+sătesc\\b/i.test(n))return 'sovetul_satesc';
+ if(/^(?:î\\.?p\\.?|i\\.?p\\.?)\\s*[„"']/i.test(n))return 'horticultural_association_prefix';
+ return 'other_named';
+};
+const structuralPattern=x=>{
+ if(x.osm_admin_level===9&&x.osm_place==='allotments')return 'level9_allotments';
+ if(x.osm_admin_level===9&&!x.osm_place)return 'level9_place_missing';
+ if(x.osm_admin_level===8&&!x.osm_place)return 'level8_place_missing';
+ return 'other';
+};
+const nameAbsentClassified=nameAbsent.map(x=>({...x,classification:{admin_level:String(x.osm_admin_level??'missing'),place:x.osm_place??'missing',parent_relation:x.verified_parent_legal_id?'verified_parent':'unverified_parent',name_pattern:namePattern(x),structural_pattern:structuralPattern(x)}}));
 const codeAbsent=unmatched.filter(x=>x.unmatched_reason==='code_absent_from_official_snapshot');
 const bucket=(items,keyFn)=>items.reduce((a,x)=>{const k=keyFn(x);a[k]=(a[k]||0)+1;return a;},{});
 const codeShape=x=>{
@@ -191,6 +206,20 @@ await writeFile('data/current/md-cuatm-code-absent-classification.json',JSON.str
  },
  combinations:bucket(codeAbsentClassified,x=>[x.classification.admin_level,x.classification.place,x.classification.code_shape,x.classification.parent_relation].join('|')),
  items:codeAbsentClassified
+},null,2)+'\n');
+await writeFile('data/current/md-cuatm-name-absent-classification.json',JSON.stringify({
+ generated_at:new Date().toISOString(),jurisdiction:'MD',
+ scope:'Current legal-unmatched entities whose normalized OSM name is absent from the current official CUATM snapshot; diagnostic only.',
+ count:nameAbsentClassified.length,
+ dimensions:{
+  admin_level:bucket(nameAbsentClassified,x=>x.classification.admin_level),
+  place:bucket(nameAbsentClassified,x=>x.classification.place),
+  parent_relation:bucket(nameAbsentClassified,x=>x.classification.parent_relation),
+  name_pattern:bucket(nameAbsentClassified,x=>x.classification.name_pattern),
+  structural_pattern:bucket(nameAbsentClassified,x=>x.classification.structural_pattern)
+ },
+ combinations:bucket(nameAbsentClassified,x=>[x.classification.admin_level,x.classification.place,x.classification.parent_relation,x.classification.name_pattern,x.classification.structural_pattern].join('|')),
+ items:nameAbsentClassified
 },null,2)+'\n');
 
 const noKeyDiagnostics=entities.filter(e=>![e.osm?.cuatm_unique_id,e.osm?.cuatm_code].some(Boolean)).map(e=>{
