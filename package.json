@@ -5,6 +5,7 @@
   "scripts": {
     "import:osm": "node scripts/import/import-osm.mjs",
     "audit:admin": "node scripts/process/audit-administrative.mjs",
+    "audit:osm-history": "node scripts/process/audit-osm-relation-history.mjs",
     "reconcile:cuatm": "node scripts/process/reconcile-cuatm.mjs"
   },
   "dependencies": {
