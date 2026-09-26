@@ -179,7 +179,7 @@ const namePattern=x=>{
  // as Î.P., Î.P, I.P. and optional whitespace before the organization name.
  const prefix=(n.match(/^[^\\p{L}]*[ÎIi]\\s*\\.?\\s*[Pp]\\s*\\.?/u)||[])[0]||'';
  if(prefix){
-  const compact=prefix.normalize('NFD').replace(/\\p{M}/gu,'').replace(/[^A-Za-z]/g,'').toUpperCase();
+  const compact=prefix.normalize('NFD').replace(/\p{M}/gu,'').replace(/[^A-Za-z]/g,'').toUpperCase();
   if(compact==='IP')return 'horticultural_association_prefix';
  }
  return 'other_named';
