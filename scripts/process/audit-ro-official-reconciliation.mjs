@@ -24,6 +24,14 @@ const typeFromTip=tip=>{
  }
 };
 const tagsOf=f=>f?.properties?.tags||f?.properties||{};
+const osmClaimedLegalType=t=>{
+ const fold=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+ const prefix=fold(t?.['name:prefix']||t?.name_prefix),placeRo=fold(t?.['place:ro']),place=fold(t?.place),official=fold(t?.official_name);
+ if(prefix.startsWith('municipiul')||placeRo==='municipiu'||official.startsWith('municipiul')||place==='city')return 'municipality';
+ if(prefix.startsWith('orasul')||placeRo==='oras'||official.startsWith('orasul')||place==='town')return 'town';
+ if(prefix.startsWith('comuna')||placeRo==='comuna'||official.startsWith('comuna')||place==='municipality')return 'commune';
+ return null;
+};
 const explicitSiruta=t=>{
  for(const k of ['siruta:code','ref:siruta','siruta','ref:ins:siruta','natCode','natcode']){
   const v=digits(t?.[k]);
@@ -103,7 +111,8 @@ for(const e of entities){
   else reason='name_ambiguous';
  }
  const parentMatches=officialRow?Boolean(osmCounty&&officialRow.normalized_county===osmCounty):null;
- const typeMatches=officialRow?e.type===officialRow.legal_type:null;
+ const osmClaimedType=osmClaimedLegalType(tags);
+ const typeMatches=officialRow&&osmClaimedType?osmClaimedType===officialRow.legal_type:null;
  results.push({
   osm_id:e.id,
   osm_relation_id:e.osm?.relation_id??null,
@@ -111,6 +120,7 @@ for(const e of entities){
   osm_parent_id:e.parent_id||null,
   osm_parent_name:parent?.name||null,
   osm_entity_type:e.type,
+  osm_claimed_legal_type:osmClaimedType,
   explicit_siruta_tag:explicit,
   reviewed_override:reviewedOverride?{legal_id:String(reviewedOverride.legal_id),resolution:reviewedOverride.resolution||null}:null,
   legal_id:officialRow?.siruta||null,
