@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-26T08:01:26.019Z",
-  "source_generated_at": "2026-09-26T08:01:25.572Z",
-  "entity_count": 5695,
+  "generated_at": "2026-09-26T08:08:30.098Z",
+  "source_generated_at": "2026-09-26T08:08:29.638Z",
+  "entity_count": 5823,
   "countries": {
     "RO": {
       "feature_count": 3233,
@@ -111,42 +111,42 @@
       ]
     },
     "MD": {
-      "feature_count": 2462,
-      "review_required": 227,
+      "feature_count": 2590,
+      "review_required": 266,
       "distributions": {
         "admin_level": {
           "4": 37,
-          "8": 985,
-          "9": 1440
+          "8": 982,
+          "9": 1571
         },
         "place": {
-          "borough": 5,
-          "municipality": 412,
+          "municipality": 410,
           "district": 32,
-          "∅": 141,
-          "village": 1672,
+          "∅": 144,
+          "village": 1763,
           "region": 2,
           "city": 24,
           "town": 93,
-          "allotments": 81
+          "allotments": 122
         },
         "designation": {
-          "∅": 2462
+          "∅": 2590
         },
         "osm_type": {
-          "boundary": 2462
+          "boundary": 2536,
+          "multipolygon": 54
         },
         "entity_type": {
-          "subdivision_or_component_area": 5,
           "level_2_municipality": 3,
           "district": 32,
-          "level_1_uat": 550,
-          "commune_or_independent_village_uat": 373,
+          "level_1_uat": 548,
+          "commune_or_independent_village_uat": 372,
           "special_territorial_unit": 2,
           "municipality_or_city_uat": 14,
           "town_uat": 48,
-          "component_locality": 1354,
-          "non_administrative_or_auxiliary_area": 81
+          "non_administrative_or_auxiliary_area": 122,
+          "subdivision_or_component_area": 3,
+          "component_locality": 1446
         }
       },
       "combinations": [
@@ -156,7 +156,7 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "component_locality",
-          "count": 1299
+          "count": 1391
         },
         {
           "admin_level": "8",
@@ -164,7 +164,7 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "level_1_uat",
-          "count": 409
+          "count": 407
         },
         {
           "admin_level": "8",
@@ -172,7 +172,7 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "commune_or_independent_village_uat",
-          "count": 373
+          "count": 372
         },
         {
           "admin_level": "8",
@@ -188,7 +188,15 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "non_administrative_or_auxiliary_area",
-          "count": 81
+          "count": 69
+        },
+        {
+          "admin_level": "9",
+          "place": "allotments",
+          "designation": "∅",
+          "osm_type": "multipolygon",
+          "entity_type": "non_administrative_or_auxiliary_area",
+          "count": 53
         },
         {
           "admin_level": "8",
@@ -231,14 +239,6 @@
           "count": 10
         },
         {
-          "admin_level": "9",
-          "place": "borough",
-          "designation": "∅",
-          "osm_type": "boundary",
-          "entity_type": "subdivision_or_component_area",
-          "count": 5
-        },
-        {
           "admin_level": "4",
           "place": "municipality",
           "designation": "∅",
@@ -253,6 +253,22 @@
           "osm_type": "boundary",
           "entity_type": "special_territorial_unit",
           "count": 2
+        },
+        {
+          "admin_level": "9",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "subdivision_or_component_area",
+          "count": 2
+        },
+        {
+          "admin_level": "9",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "multipolygon",
+          "entity_type": "subdivision_or_component_area",
+          "count": 1
         }
       ]
     }
@@ -280,43 +296,18 @@
       "issue_count": 1
     },
     "MD": {
-      "checked": 2462,
-      "root_parent": 41,
-      "unexpected_root": 4,
-      "entity_parent": 2421,
+      "checked": 2590,
+      "root_parent": 37,
+      "unexpected_root": 0,
+      "entity_parent": 2553,
       "null_parent": 0,
       "missing_parent": 0,
       "parent_wrong_jurisdiction": 0,
       "parent_level_not_lower": 0,
       "geometry_missing": 0,
       "point_outside_parent": 0,
-      "issues": [
-        {
-          "id": "osm-r18967964",
-          "name": "Bogdanovca",
-          "admin_level": 9,
-          "issue": "unexpected_root"
-        },
-        {
-          "id": "osm-r18966979",
-          "name": "Codru",
-          "admin_level": 9,
-          "issue": "unexpected_root"
-        },
-        {
-          "id": "osm-r18967353",
-          "name": "Puhoi",
-          "admin_level": 9,
-          "issue": "unexpected_root"
-        },
-        {
-          "id": "osm-r18968027",
-          "name": "Vatra",
-          "admin_level": 9,
-          "issue": "unexpected_root"
-        }
-      ],
-      "issue_count": 4
+      "issues": [],
+      "issue_count": 0
     }
   }
 }

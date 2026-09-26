@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T07:59:13.817Z",
+  "generated_at": "2026-09-26T08:07:33.150Z",
   "classifier_version": "2.2",
   "countries": {
     "RO": {
@@ -15,40 +15,15 @@
     },
     "MD": {
       "name": "Republica Moldova",
-      "count": 2462,
-      "review_required": 227,
-      "geojson_features": 2462,
+      "count": 2590,
+      "review_required": 266,
+      "geojson_features": 2590,
       "confidence": {
-        "low": 227,
-        "medium": 2155,
-        "high": 80
+        "medium": 2244,
+        "high": 80,
+        "low": 266
       }
     }
   },
-  "warnings": [
-    {
-      "type": "invalid_child_geometry",
-      "entity_id": "osm-r18966979",
-      "relation_id": 18966979,
-      "message": "First and last coordinates in a ring must be the same"
-    },
-    {
-      "type": "invalid_child_geometry",
-      "entity_id": "osm-r18967353",
-      "relation_id": 18967353,
-      "message": "First and last coordinates in a ring must be the same"
-    },
-    {
-      "type": "invalid_child_geometry",
-      "entity_id": "osm-r18967964",
-      "relation_id": 18967964,
-      "message": "First and last coordinates in a ring must be the same"
-    },
-    {
-      "type": "invalid_child_geometry",
-      "entity_id": "osm-r18968027",
-      "relation_id": 18968027,
-      "message": "First and last coordinates in a ring must be the same"
-    }
-  ]
+  "warnings": []
 }

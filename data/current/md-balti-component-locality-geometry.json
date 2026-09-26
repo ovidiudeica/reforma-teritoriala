@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T08:08:38.233Z",
+  "legal_id": "0300",
+  "legal_name": "Bălți",
+  "policy": "Diagnostic only. Localizes the symmetric difference and tests overlap with reconciled Elizaveta and Sadovoe representations; no canonical geometry is selected.",
+  "difference_regions": {
+    "city_12207955_minus_18967626": {
+      "area_km2": 1.864374952370634,
+      "bbox": [
+        27.8375297,
+        47.728628,
+        27.973984,
+        47.7982578
+      ],
+      "centroid": [
+        27.89040284461841,
+        47.749766162585935
+      ]
+    },
+    "city_18967626_minus_12207955": {
+      "area_km2": 0.26519815806631614,
+      "bbox": [
+        27.837542106288673,
+        47.72891109456052,
+        27.9835402,
+        47.7978514
+      ],
+      "centroid": [
+        27.87868100376372,
+        47.748065325831696
+      ]
+    }
+  },
+  "components": [
+    {
+      "legal_id": "0301",
+      "name": "Elizaveta",
+      "relations": [
+        10628644,
+        18967193
+      ],
+      "representations": [
+        {
+          "relation_id": 10628644,
+          "area_km2": 24.477539160397633,
+          "with_city_12207955": {
+            "intersects": true,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_city_18967626": {
+            "intersects": true,
+            "intersection_km2": 0.22288520324960157,
+            "fraction_of_a": 0.009105703060633193,
+            "fraction_of_b": 0.005357220111881299
+          },
+          "with_difference_12207955_minus_18967626": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_difference_18967626_minus_12207955": {
+            "intersects": true,
+            "intersection_km2": 0.22288520324960157,
+            "fraction_of_a": 0.009105703060633193,
+            "fraction_of_b": 0.8404477801609253
+          },
+          "with_uat_58983": {
+            "intersects": true,
+            "intersection_km2": 24.477539160384776,
+            "fraction_of_a": 0.9999999999994748,
+            "fraction_of_b": 0.31626779408886596
+          }
+        },
+        {
+          "relation_id": 18967193,
+          "area_km2": 2.456023925669748,
+          "with_city_12207955": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_city_18967626": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_difference_12207955_minus_18967626": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_difference_18967626_minus_12207955": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_uat_58983": {
+            "intersects": true,
+            "intersection_km2": 2.4560239256751113,
+            "fraction_of_a": 1.0000000000021838,
+            "fraction_of_b": 0.03173363401088453
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4839",
+      "name": "Sadovoe",
+      "relations": [
+        10628645,
+        18968062
+      ],
+      "representations": [
+        {
+          "relation_id": 10628645,
+          "area_km2": 9.713623880954,
+          "with_city_12207955": {
+            "intersects": true,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_city_18967626": {
+            "intersects": true,
+            "intersection_km2": 0.0014117946099632282,
+            "fraction_of_a": 0.0001453417002002112,
+            "fraction_of_b": 0.00003393358719228545
+          },
+          "with_difference_12207955_minus_18967626": {
+            "intersects": true,
+            "intersection_km2": 2.7724246968989246e-14,
+            "fraction_of_a": 2.85416105346117e-15,
+            "fraction_of_b": 1.4870531774596444e-14
+          },
+          "with_difference_18967626_minus_12207955": {
+            "intersects": true,
+            "intersection_km2": 0.0014117945159095556,
+            "fraction_of_a": 0.00014534169051755582,
+            "fraction_of_b": 0.005323545707118066
+          },
+          "with_uat_58983": {
+            "intersects": true,
+            "intersection_km2": 9.713623880968921,
+            "fraction_of_a": 1.000000000001536,
+            "fraction_of_b": 0.12550715892286118
+          }
+        },
+        {
+          "relation_id": 18968062,
+          "area_km2": 0.7310561095837671,
+          "with_city_12207955": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_city_18967626": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_difference_12207955_minus_18967626": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_difference_18967626_minus_12207955": {
+            "intersects": false,
+            "intersection_km2": 0,
+            "fraction_of_a": 0,
+            "fraction_of_b": 0
+          },
+          "with_uat_58983": {
+            "intersects": true,
+            "intersection_km2": 0.7310561095815323,
+            "fraction_of_a": 0.9999999999969431,
+            "fraction_of_b": 0.009445782176777651
+          }
+        }
+      ]
+    }
+  ]
+}
