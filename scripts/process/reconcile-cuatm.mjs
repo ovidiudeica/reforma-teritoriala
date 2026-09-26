@@ -145,7 +145,7 @@ const unmatchedGeneral=unmatched.map(m=>{
 });
 const unmatchedGeneralByReason=unmatchedGeneral.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const unmatchedGroups=Object.fromEntries(Object.entries(unmatchedGeneralByReason).sort().map(([reason,count])=>[reason,{count,items:unmatchedGeneral.filter(x=>x.unmatched_reason===reason)}]));
-await writeFile('data/current/md-cuatm-unmatched-review.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'Unreconciled general catalog entities only; resolved edge cases are excluded.',count:unmatchedGeneral.length,by_reason:unmatchedGeneralByReason,groups:unmatchedGroups},null,2)+'\\n');
+await writeFile('data/current/md-cuatm-unmatched-review.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'Unreconciled general catalog entities only; resolved edge cases are excluded.',count:unmatchedGeneral.length,by_reason:unmatchedGeneralByReason,groups:unmatchedGroups},null,2)+'\n');
 
 const noKeyDiagnostics=entities.filter(e=>![e.osm?.cuatm_unique_id,e.osm?.cuatm_code].some(Boolean)).map(e=>{
  const parent=entityById.get(e.parent_id)||null;
