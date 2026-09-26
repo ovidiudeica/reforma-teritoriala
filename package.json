@@ -19,7 +19,8 @@
     "audit:ro-level9-exceptions": "node scripts/process/audit-ro-level9-exceptions.mjs",
     "import:ro-siruta": "node scripts/import/import-ro-siruta.mjs",
     "audit:ro-official-reconciliation": "node scripts/process/audit-ro-official-reconciliation.mjs",
-    "audit:ro-official-exceptions": "node scripts/process/audit-ro-official-exceptions.mjs"
+    "audit:ro-official-exceptions": "node scripts/process/audit-ro-official-exceptions.mjs",
+    "apply:ro-official-reconciliation": "node scripts/process/apply-ro-official-reconciliation.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
