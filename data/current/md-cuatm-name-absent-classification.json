@@ -1,33 +1,31 @@
 {
-  "generated_at": "2026-09-26T06:26:22.424Z",
+  "generated_at": "2026-09-26T06:37:48.809Z",
   "jurisdiction": "MD",
   "scope": "Current legal-unmatched entities whose normalized OSM name is absent from the current official CUATM snapshot; diagnostic only.",
-  "count": 3,
+  "count": 2,
   "dimensions": {
     "admin_level": {
       "8": 1,
-      "9": 2
+      "9": 1
     },
     "place": {
-      "missing": 3
+      "missing": 2
     },
     "parent_relation": {
-      "verified_parent": 3
+      "verified_parent": 2
     },
     "name_pattern": {
       "sovetul_satesc": 1,
-      "missing_name": 1,
-      "horticultural_association_prefix": 1
+      "missing_name": 1
     },
     "structural_pattern": {
       "level8_place_missing": 1,
-      "level9_place_missing": 2
+      "level9_place_missing": 1
     }
   },
   "combinations": {
     "8|missing|verified_parent|sovetul_satesc|level8_place_missing": 1,
-    "9|missing|verified_parent|missing_name|level9_place_missing": 1,
-    "9|missing|verified_parent|horticultural_association_prefix|level9_place_missing": 1
+    "9|missing|verified_parent|missing_name|level9_place_missing": 1
   },
   "items": [
     {
@@ -89,37 +87,6 @@
         "place": "missing",
         "parent_relation": "verified_parent",
         "name_pattern": "missing_name",
-        "structural_pattern": "level9_place_missing"
-      }
-    },
-    {
-      "id": "osm-r12104738",
-      "name": "Î.P. „Mure Dulci”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "3111",
-      "osm_relation_id": 12104738,
-      "osm_admin_level": 9,
-      "osm_place": null,
-      "osm_parent_id": "osm-r19090926",
-      "osm_parent_name": "Bălăbănești",
-      "verified_parent_legal_id": "3111",
-      "verified_parent_legal_name": "Bălăbănești",
-      "raw_cuatm_unique_id": null,
-      "raw_cuatm_code": null,
-      "normalized_explicit_keys": [],
-      "classification": {
-        "admin_level": "9",
-        "place": "missing",
-        "parent_relation": "verified_parent",
-        "name_pattern": "horticultural_association_prefix",
         "structural_pattern": "level9_place_missing"
       }
     }
