@@ -6,9 +6,11 @@ on:
   push:
     branches:
       - main
+      - audit/ro-official-edge-cases
     paths:
       - scripts/import/import-ro-siruta.mjs
       - scripts/process/audit-ro-official-reconciliation.mjs
+      - scripts/process/audit-ro-official-edge-cases.mjs
       - package.json
       - .github/workflows/refresh-ro-official.yml
 permissions:
