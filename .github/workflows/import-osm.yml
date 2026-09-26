@@ -25,6 +25,8 @@ jobs:
         run: node scripts/process/audit-cuatm-consistency.mjs
       - name: Audit CUATM same-identity chain patterns
         run: npm run audit:cuatm-chains
+      - name: Analyze special municipality CUATM and OSM representations
+        run: npm run audit:md-special-municipalities
       - name: Inspect official CUATM workbook schema
         run: node scripts/process/inspect-cuatm-workbook.mjs
       - run: npm run reconcile:cuatm
@@ -32,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json data/current/admin-review.json data/current/md-cuatm-reconciliation.json data/current/md-cuatm-pair-diagnostics.json data/current/md-cuatm-parent-mismatch-matrix.json data/current/md-cuatm-edge-case-audit.json data/current/md-cuatm-unmatched-review.json data/current/md-cuatm-code-absent-classification.json data/current/md-cuatm-non-cuatm-allotments.json data/current/md-cuatm-consistency-audit.json data/current/md-cuatm-name-absent-classification.json data/current/md-cuatm-chain-pattern-audit.json data/sources/cuatm-current.json data/sources/md-osm-multiple-representation-history.json public/geo/current/
+          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json data/current/admin-review.json data/current/md-cuatm-reconciliation.json data/current/md-cuatm-pair-diagnostics.json data/current/md-cuatm-parent-mismatch-matrix.json data/current/md-cuatm-edge-case-audit.json data/current/md-cuatm-unmatched-review.json data/current/md-cuatm-code-absent-classification.json data/current/md-cuatm-non-cuatm-allotments.json data/current/md-cuatm-consistency-audit.json data/current/md-cuatm-name-absent-classification.json data/current/md-cuatm-chain-pattern-audit.json data/current/md-special-municipality-analysis.json data/sources/cuatm-current.json data/sources/md-osm-multiple-representation-history.json public/geo/current/
           git diff --cached --quiet || git commit -m "data: refresh OSM administrative catalog"
           git pull --rebase origin main
           git push origin HEAD:main
