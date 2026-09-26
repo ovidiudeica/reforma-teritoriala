@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import {readFile,writeFile} from 'node:fs/promises';
-const read=async p=>JSON.parse(await readFile(p,'utf8'));
+const read=async p=>{let s=await readFile(p,'utf8');s=s.trim();try{return JSON.parse(s)}catch(e){const fixed=s.replace(/\\n\s*$/,'').trim();try{return JSON.parse(fixed)}catch{throw new Error('Invalid JSON in '+p+': '+e.message)}}};
 const [individual,consistency,edge,unmatched,geo]=await Promise.all([
  read('data/sources/md-cuatm-individual-review.json'),
  read('data/current/md-cuatm-consistency-audit.json'),
