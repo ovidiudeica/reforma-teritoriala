@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T08:01:35.166Z",
+  "legal_id": "0300",
+  "legal_name": "Bălți",
+  "policy": "Geometry diagnostic only; no canonical city representation is selected and no OSM geometry or CUATM reconciliation is changed.",
+  "areas_km2": {
+    "uat_58983": 77.3949785835325,
+    "city_12207955": 43.20381554216642,
+    "city_18967626": 41.60463793194939
+  },
+  "comparisons": {
+    "city_candidates": {
+      "relations": [
+        12207955,
+        18967626
+      ],
+      "area_km2": {
+        "12207955": 43.20381554216642,
+        "18967626": 41.60463793194939
+      },
+      "intersection_km2": 41.33943810412708,
+      "intersection_over_smaller": 0.9936257147999682,
+      "intersection_over_union": 0.9510093051858747,
+      "difference_km2": {
+        "12207955_minus_18967626": 1.864374952370634,
+        "18967626_minus_12207955": 0.26519815806631614
+      },
+      "symmetric_difference_km2": 2.1295731104369504,
+      "containment": {
+        "12207955_contains_18967626": false,
+        "18967626_contains_12207955": false,
+        "12207955_within_18967626": false,
+        "18967626_within_12207955": false
+      }
+    },
+    "uat_vs_city_level8": {
+      "relations": [
+        58983,
+        12207955
+      ],
+      "area_km2": {
+        "58983": 77.3949785835325,
+        "12207955": 43.20381554216642
+      },
+      "intersection_km2": 43.20381554218129,
+      "intersection_over_smaller": 1.0000000000003442,
+      "intersection_over_union": 0.5582250468040333,
+      "difference_km2": {
+        "58983_minus_12207955": 34.1911630413537,
+        "12207955_minus_58983": 0
+      },
+      "symmetric_difference_km2": 34.1911630413537,
+      "containment": {
+        "58983_contains_12207955": true,
+        "12207955_contains_58983": false,
+        "58983_within_12207955": false,
+        "12207955_within_58983": true
+      }
+    },
+    "uat_vs_city_level9": {
+      "relations": [
+        58983,
+        18967626
+      ],
+      "area_km2": {
+        "58983": 77.3949785835325,
+        "18967626": 41.60463793194939
+      },
+      "intersection_km2": 41.563735109411496,
+      "intersection_over_smaller": 0.9990168686816888,
+      "intersection_over_union": 0.5367503327230573,
+      "difference_km2": {
+        "58983_minus_18967626": 35.83124100026806,
+        "18967626_minus_58983": 0.040901160206858814
+      },
+      "symmetric_difference_km2": 35.872142160474915,
+      "containment": {
+        "58983_contains_18967626": false,
+        "18967626_contains_58983": false,
+        "58983_within_18967626": false,
+        "18967626_within_58983": false
+      }
+    }
+  }
+}

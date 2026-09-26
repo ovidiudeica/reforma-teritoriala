@@ -1,31 +1,27 @@
 {
-  "generated_at": "2026-09-26T07:44:32.860Z",
+  "generated_at": "2026-09-26T08:01:40.569Z",
   "jurisdiction": "MD",
   "scope": "Current legal-unmatched entities whose normalized OSM name is absent from the current official CUATM snapshot; diagnostic only.",
-  "count": 2,
+  "count": 1,
   "dimensions": {
     "admin_level": {
-      "8": 1,
-      "9": 1
+      "8": 1
     },
     "place": {
-      "missing": 2
+      "missing": 1
     },
     "parent_relation": {
-      "verified_parent": 2
+      "verified_parent": 1
     },
     "name_pattern": {
-      "sovetul_satesc": 1,
-      "missing_name": 1
+      "sovetul_satesc": 1
     },
     "structural_pattern": {
-      "level8_place_missing": 1,
-      "level9_place_missing": 1
+      "level8_place_missing": 1
     }
   },
   "combinations": {
-    "8|missing|verified_parent|sovetul_satesc|level8_place_missing": 1,
-    "9|missing|verified_parent|missing_name|level9_place_missing": 1
+    "8|missing|verified_parent|sovetul_satesc|level8_place_missing": 1
   },
   "items": [
     {
@@ -57,37 +53,6 @@
         "parent_relation": "verified_parent",
         "name_pattern": "sovetul_satesc",
         "structural_pattern": "level8_place_missing"
-      }
-    },
-    {
-      "id": "osm-r12104636",
-      "name": null,
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "3136",
-      "osm_relation_id": 12104636,
-      "osm_admin_level": 9,
-      "osm_place": null,
-      "osm_parent_id": "osm-r19090918",
-      "osm_parent_name": "Hrușova",
-      "verified_parent_legal_id": "3136",
-      "verified_parent_legal_name": "Hrușova",
-      "raw_cuatm_unique_id": null,
-      "raw_cuatm_code": null,
-      "normalized_explicit_keys": [],
-      "classification": {
-        "admin_level": "9",
-        "place": "missing",
-        "parent_relation": "verified_parent",
-        "name_pattern": "missing_name",
-        "structural_pattern": "level9_place_missing"
       }
     }
   ]
