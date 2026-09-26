@@ -5,7 +5,7 @@ on:
     - cron: '41 4 2 * *'
   push:
     branches:
-      - feat/ro-official-reconciliation
+      - main
     paths:
       - scripts/import/import-ro-siruta.mjs
       - scripts/process/audit-ro-official-reconciliation.mjs
