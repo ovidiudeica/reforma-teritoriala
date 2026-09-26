@@ -1,28 +1,495 @@
 {
-  "generated_at": "2026-09-26T08:46:31.237Z",
+  "generated_at": "2026-09-26T09:15:48.608Z",
   "jurisdiction": "MD",
   "scope": {
-    "parent_mismatch": 2,
+    "parent_mismatch": 12,
     "diagnostic_parent_match_not_auto_assigned": 2
   },
   "summary": {
-    "all_edge_cases": 4,
-    "resolved_edge_cases": 4,
-    "resolved_representation_cases": 0,
+    "all_edge_cases": 14,
+    "resolved_edge_cases": 14,
+    "resolved_representation_cases": 10,
     "resolved_reviewed_overrides": 4,
     "unresolved_review_cases": 0
   },
   "by_category": {
     "genuine_parent_disagreement": 2,
-    "multiple_official_candidates_under_same_parent": 2
+    "multiple_official_candidates_under_same_parent": 2,
+    "osm_self_parent_same_legal_entity": 10
   },
   "resolved_edge_cases": {
-    "count": 4,
+    "count": 14,
     "by_category": {
+      "osm_self_parent_same_legal_entity": 10,
       "genuine_parent_disagreement": 2,
       "multiple_official_candidates_under_same_parent": 2
     },
     "items": [
+      {
+        "id": "osm-r21303543",
+        "name": "Ciutulești",
+        "osm_relation_id": 21303543,
+        "osm_parent_id": "osm-r19072262",
+        "osm_parent_name": "Ciutulești",
+        "osm_parent_relation_id": 19072262,
+        "verified_osm_parent_legal_id": "4518",
+        "verified_osm_parent_legal_name": "Ciutulești",
+        "normalized_child_name": "ciutulesti",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "4518",
+            "legal_name": "Ciutulești",
+            "parent_code": "4500",
+            "parent_name": "Florești",
+            "official_sheet": "Sheet 1",
+            "official_row": 657,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "4518",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303528",
+        "name": "Cobîlea",
+        "osm_relation_id": 21303528,
+        "osm_parent_id": "osm-r19080658",
+        "osm_parent_name": "Cobîlea",
+        "osm_parent_relation_id": 19080658,
+        "verified_osm_parent_legal_id": "8316",
+        "verified_osm_parent_legal_name": "Cobîlea",
+        "normalized_child_name": "cobilea",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "8316",
+            "legal_name": "Cobîlea",
+            "parent_code": "8300",
+            "parent_name": "Șoldănești",
+            "official_sheet": "Sheet 1",
+            "official_row": 1332,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "8316",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303542",
+        "name": "Cristești",
+        "osm_relation_id": 21303542,
+        "osm_parent_id": "osm-r19105121",
+        "osm_parent_name": "Cristești",
+        "osm_parent_relation_id": 19105121,
+        "verified_osm_parent_legal_id": "6029",
+        "verified_osm_parent_legal_name": "Cristești",
+        "normalized_child_name": "cristesti",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "6029",
+            "legal_name": "Cristești",
+            "parent_code": "6000",
+            "parent_name": "Nisporeni",
+            "official_sheet": "Sheet 1",
+            "official_row": 914,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "6029",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303533",
+        "name": "Dumbrăvița",
+        "osm_relation_id": 21303533,
+        "osm_parent_id": "osm-r19076872",
+        "osm_parent_name": "Dumbrăvița",
+        "osm_parent_relation_id": 19076872,
+        "verified_osm_parent_legal_id": "7449",
+        "verified_osm_parent_legal_name": "Dumbrăvița",
+        "normalized_child_name": "dumbravita",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "7449",
+            "legal_name": "Dumbrăvița",
+            "parent_code": "7400",
+            "parent_name": "Sîngerei",
+            "official_sheet": "Sheet 1",
+            "official_row": 1187,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "7449",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303536",
+        "name": "Frumușica",
+        "osm_relation_id": 21303536,
+        "osm_parent_id": "osm-r19072274",
+        "osm_parent_name": "Frumușica",
+        "osm_parent_relation_id": 19072274,
+        "verified_osm_parent_legal_id": "4524",
+        "verified_osm_parent_legal_name": "Frumușica",
+        "normalized_child_name": "frumusica",
+        "official_name_candidate_count": 5,
+        "official_name_candidates": [
+          {
+            "legal_id": "5512",
+            "legal_name": "Frumușica",
+            "parent_code": "5511",
+            "parent_name": "Băcioi",
+            "official_sheet": "Sheet 1",
+            "official_row": 9,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "1723",
+            "legal_name": "Frumușica",
+            "parent_code": "1718",
+            "parent_name": "Chioselia Mare",
+            "official_sheet": "Sheet 1",
+            "official_row": 161,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "4320",
+            "legal_name": "Frumușica",
+            "parent_code": "4319",
+            "parent_name": "Călugăr",
+            "official_sheet": "Sheet 1",
+            "official_row": 579,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "4524",
+            "legal_name": "Frumușica",
+            "parent_code": "4500",
+            "parent_name": "Florești",
+            "official_sheet": "Sheet 1",
+            "official_row": 670,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "5718",
+            "legal_name": "Frumușica",
+            "parent_code": "5717",
+            "parent_name": "Cazangic",
+            "official_sheet": "Sheet 1",
+            "official_row": 866,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "4524",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303544",
+        "name": "Glinjeni",
+        "osm_relation_id": 21303544,
+        "osm_parent_id": "osm-r9357284",
+        "osm_parent_name": "Glinjeni",
+        "osm_parent_relation_id": 9357284,
+        "verified_osm_parent_legal_id": "4332",
+        "verified_osm_parent_legal_name": "Glinjeni",
+        "normalized_child_name": "glinjeni",
+        "official_name_candidate_count": 2,
+        "official_name_candidates": [
+          {
+            "legal_id": "4332",
+            "legal_name": "Glinjeni",
+            "parent_code": "4300",
+            "parent_name": "Fălești",
+            "official_sheet": "Sheet 1",
+            "official_row": 594,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "8322",
+            "legal_name": "Glinjeni",
+            "parent_code": "8300",
+            "parent_name": "Șoldănești",
+            "official_sheet": "Sheet 1",
+            "official_row": 1342,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "4332",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303530",
+        "name": "Hîrcești",
+        "osm_relation_id": 21303530,
+        "osm_parent_id": "osm-r1661057",
+        "osm_parent_name": "Hîrcești",
+        "osm_parent_relation_id": 1661057,
+        "verified_osm_parent_legal_id": "9239",
+        "verified_osm_parent_legal_name": "Hîrcești",
+        "normalized_child_name": "hircesti",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "9239",
+            "legal_name": "Hîrcești",
+            "parent_code": "9200",
+            "parent_name": "Ungheni",
+            "official_sheet": "Sheet 1",
+            "official_row": 1500,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "9239",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303534",
+        "name": "Mîrzești",
+        "osm_relation_id": 21303534,
+        "osm_parent_id": "osm-r19082498",
+        "osm_parent_name": "Mîrzești",
+        "osm_parent_relation_id": 19082498,
+        "verified_osm_parent_legal_id": "6419",
+        "verified_osm_parent_legal_name": "Mîrzești",
+        "normalized_child_name": "mirzesti",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "6419",
+            "legal_name": "Mîrzești",
+            "parent_code": "6400",
+            "parent_name": "Orhei",
+            "official_sheet": "Sheet 1",
+            "official_row": 1009,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "6419",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303532",
+        "name": "Vorniceni",
+        "osm_relation_id": 21303532,
+        "osm_parent_id": "osm-r19100180",
+        "osm_parent_name": "Vorniceni",
+        "osm_parent_relation_id": 19100180,
+        "verified_osm_parent_legal_id": "8042",
+        "verified_osm_parent_legal_name": "Vorniceni",
+        "normalized_child_name": "vorniceni",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "8042",
+            "legal_name": "Vorniceni",
+            "parent_code": "8000",
+            "parent_name": "Strășeni",
+            "official_sheet": "Sheet 1",
+            "official_row": 1322,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "8042",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303537",
+        "name": "Zaim",
+        "osm_relation_id": 21303537,
+        "osm_parent_id": "osm-r12462198",
+        "osm_parent_name": "Zaim",
+        "osm_parent_relation_id": 12462198,
+        "verified_osm_parent_legal_id": "2731",
+        "verified_osm_parent_legal_name": "Zaim",
+        "normalized_child_name": "zaim",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "2731",
+            "legal_name": "Zaim",
+            "parent_code": "2700",
+            "parent_name": "Căușeni",
+            "official_sheet": "Sheet 1",
+            "official_row": 343,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "2731",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
       {
         "id": "osm-r1813319",
         "name": "Condrița",
@@ -306,9 +773,477 @@
     ]
   },
   "resolved_representation_cases": {
-    "count": 0,
-    "by_category": {},
-    "items": []
+    "count": 10,
+    "by_category": {
+      "osm_self_parent_same_legal_entity": 10
+    },
+    "items": [
+      {
+        "id": "osm-r21303543",
+        "name": "Ciutulești",
+        "osm_relation_id": 21303543,
+        "osm_parent_id": "osm-r19072262",
+        "osm_parent_name": "Ciutulești",
+        "osm_parent_relation_id": 19072262,
+        "verified_osm_parent_legal_id": "4518",
+        "verified_osm_parent_legal_name": "Ciutulești",
+        "normalized_child_name": "ciutulesti",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "4518",
+            "legal_name": "Ciutulești",
+            "parent_code": "4500",
+            "parent_name": "Florești",
+            "official_sheet": "Sheet 1",
+            "official_row": 657,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "4518",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303528",
+        "name": "Cobîlea",
+        "osm_relation_id": 21303528,
+        "osm_parent_id": "osm-r19080658",
+        "osm_parent_name": "Cobîlea",
+        "osm_parent_relation_id": 19080658,
+        "verified_osm_parent_legal_id": "8316",
+        "verified_osm_parent_legal_name": "Cobîlea",
+        "normalized_child_name": "cobilea",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "8316",
+            "legal_name": "Cobîlea",
+            "parent_code": "8300",
+            "parent_name": "Șoldănești",
+            "official_sheet": "Sheet 1",
+            "official_row": 1332,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "8316",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303542",
+        "name": "Cristești",
+        "osm_relation_id": 21303542,
+        "osm_parent_id": "osm-r19105121",
+        "osm_parent_name": "Cristești",
+        "osm_parent_relation_id": 19105121,
+        "verified_osm_parent_legal_id": "6029",
+        "verified_osm_parent_legal_name": "Cristești",
+        "normalized_child_name": "cristesti",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "6029",
+            "legal_name": "Cristești",
+            "parent_code": "6000",
+            "parent_name": "Nisporeni",
+            "official_sheet": "Sheet 1",
+            "official_row": 914,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "6029",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303533",
+        "name": "Dumbrăvița",
+        "osm_relation_id": 21303533,
+        "osm_parent_id": "osm-r19076872",
+        "osm_parent_name": "Dumbrăvița",
+        "osm_parent_relation_id": 19076872,
+        "verified_osm_parent_legal_id": "7449",
+        "verified_osm_parent_legal_name": "Dumbrăvița",
+        "normalized_child_name": "dumbravita",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "7449",
+            "legal_name": "Dumbrăvița",
+            "parent_code": "7400",
+            "parent_name": "Sîngerei",
+            "official_sheet": "Sheet 1",
+            "official_row": 1187,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "7449",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303536",
+        "name": "Frumușica",
+        "osm_relation_id": 21303536,
+        "osm_parent_id": "osm-r19072274",
+        "osm_parent_name": "Frumușica",
+        "osm_parent_relation_id": 19072274,
+        "verified_osm_parent_legal_id": "4524",
+        "verified_osm_parent_legal_name": "Frumușica",
+        "normalized_child_name": "frumusica",
+        "official_name_candidate_count": 5,
+        "official_name_candidates": [
+          {
+            "legal_id": "5512",
+            "legal_name": "Frumușica",
+            "parent_code": "5511",
+            "parent_name": "Băcioi",
+            "official_sheet": "Sheet 1",
+            "official_row": 9,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "1723",
+            "legal_name": "Frumușica",
+            "parent_code": "1718",
+            "parent_name": "Chioselia Mare",
+            "official_sheet": "Sheet 1",
+            "official_row": 161,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "4320",
+            "legal_name": "Frumușica",
+            "parent_code": "4319",
+            "parent_name": "Călugăr",
+            "official_sheet": "Sheet 1",
+            "official_row": 579,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "4524",
+            "legal_name": "Frumușica",
+            "parent_code": "4500",
+            "parent_name": "Florești",
+            "official_sheet": "Sheet 1",
+            "official_row": 670,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "5718",
+            "legal_name": "Frumușica",
+            "parent_code": "5717",
+            "parent_name": "Cazangic",
+            "official_sheet": "Sheet 1",
+            "official_row": 866,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "4524",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303544",
+        "name": "Glinjeni",
+        "osm_relation_id": 21303544,
+        "osm_parent_id": "osm-r9357284",
+        "osm_parent_name": "Glinjeni",
+        "osm_parent_relation_id": 9357284,
+        "verified_osm_parent_legal_id": "4332",
+        "verified_osm_parent_legal_name": "Glinjeni",
+        "normalized_child_name": "glinjeni",
+        "official_name_candidate_count": 2,
+        "official_name_candidates": [
+          {
+            "legal_id": "4332",
+            "legal_name": "Glinjeni",
+            "parent_code": "4300",
+            "parent_name": "Fălești",
+            "official_sheet": "Sheet 1",
+            "official_row": 594,
+            "parent_matches_verified_osm_parent": false
+          },
+          {
+            "legal_id": "8322",
+            "legal_name": "Glinjeni",
+            "parent_code": "8300",
+            "parent_name": "Șoldănești",
+            "official_sheet": "Sheet 1",
+            "official_row": 1342,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "4332",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303530",
+        "name": "Hîrcești",
+        "osm_relation_id": 21303530,
+        "osm_parent_id": "osm-r1661057",
+        "osm_parent_name": "Hîrcești",
+        "osm_parent_relation_id": 1661057,
+        "verified_osm_parent_legal_id": "9239",
+        "verified_osm_parent_legal_name": "Hîrcești",
+        "normalized_child_name": "hircesti",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "9239",
+            "legal_name": "Hîrcești",
+            "parent_code": "9200",
+            "parent_name": "Ungheni",
+            "official_sheet": "Sheet 1",
+            "official_row": 1500,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "9239",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303534",
+        "name": "Mîrzești",
+        "osm_relation_id": 21303534,
+        "osm_parent_id": "osm-r19082498",
+        "osm_parent_name": "Mîrzești",
+        "osm_parent_relation_id": 19082498,
+        "verified_osm_parent_legal_id": "6419",
+        "verified_osm_parent_legal_name": "Mîrzești",
+        "normalized_child_name": "mirzesti",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "6419",
+            "legal_name": "Mîrzești",
+            "parent_code": "6400",
+            "parent_name": "Orhei",
+            "official_sheet": "Sheet 1",
+            "official_row": 1009,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "6419",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303532",
+        "name": "Vorniceni",
+        "osm_relation_id": 21303532,
+        "osm_parent_id": "osm-r19100180",
+        "osm_parent_name": "Vorniceni",
+        "osm_parent_relation_id": 19100180,
+        "verified_osm_parent_legal_id": "8042",
+        "verified_osm_parent_legal_name": "Vorniceni",
+        "normalized_child_name": "vorniceni",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "8042",
+            "legal_name": "Vorniceni",
+            "parent_code": "8000",
+            "parent_name": "Strășeni",
+            "official_sheet": "Sheet 1",
+            "official_row": 1322,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "8042",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      },
+      {
+        "id": "osm-r21303537",
+        "name": "Zaim",
+        "osm_relation_id": 21303537,
+        "osm_parent_id": "osm-r12462198",
+        "osm_parent_name": "Zaim",
+        "osm_parent_relation_id": 12462198,
+        "verified_osm_parent_legal_id": "2731",
+        "verified_osm_parent_legal_name": "Zaim",
+        "normalized_child_name": "zaim",
+        "official_name_candidate_count": 1,
+        "official_name_candidates": [
+          {
+            "legal_id": "2731",
+            "legal_name": "Zaim",
+            "parent_code": "2700",
+            "parent_name": "Căușeni",
+            "official_sheet": "Sheet 1",
+            "official_row": 343,
+            "parent_matches_verified_osm_parent": false
+          }
+        ],
+        "diagnostic_category": "child_name_match_parent_mismatch",
+        "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+        "reconciliation_unmatched_reason": null,
+        "matching_candidate_count": 0,
+        "matching_candidates": [],
+        "self_parent_predicates": {
+          "parentMatch": true,
+          "parent_legal_id": "2731",
+          "same_legal_id": true,
+          "exact_normalized_name": true,
+          "distinct_children_count": 0,
+          "distinct_children": [],
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": [],
+          "explicit_key_count": 0,
+          "explicit_key_lookups": []
+        },
+        "audit_category": "osm_self_parent_same_legal_entity"
+      }
+    ]
   },
   "resolved_reviewed_overrides": {
     "count": 4,
@@ -884,6 +1819,471 @@
         "explicit_key_lookups": []
       },
       "audit_category": "genuine_parent_disagreement"
+    },
+    {
+      "id": "osm-r21303543",
+      "name": "Ciutulești",
+      "osm_relation_id": 21303543,
+      "osm_parent_id": "osm-r19072262",
+      "osm_parent_name": "Ciutulești",
+      "osm_parent_relation_id": 19072262,
+      "verified_osm_parent_legal_id": "4518",
+      "verified_osm_parent_legal_name": "Ciutulești",
+      "normalized_child_name": "ciutulesti",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "4518",
+          "legal_name": "Ciutulești",
+          "parent_code": "4500",
+          "parent_name": "Florești",
+          "official_sheet": "Sheet 1",
+          "official_row": 657,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "4518",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303528",
+      "name": "Cobîlea",
+      "osm_relation_id": 21303528,
+      "osm_parent_id": "osm-r19080658",
+      "osm_parent_name": "Cobîlea",
+      "osm_parent_relation_id": 19080658,
+      "verified_osm_parent_legal_id": "8316",
+      "verified_osm_parent_legal_name": "Cobîlea",
+      "normalized_child_name": "cobilea",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "8316",
+          "legal_name": "Cobîlea",
+          "parent_code": "8300",
+          "parent_name": "Șoldănești",
+          "official_sheet": "Sheet 1",
+          "official_row": 1332,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "8316",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303542",
+      "name": "Cristești",
+      "osm_relation_id": 21303542,
+      "osm_parent_id": "osm-r19105121",
+      "osm_parent_name": "Cristești",
+      "osm_parent_relation_id": 19105121,
+      "verified_osm_parent_legal_id": "6029",
+      "verified_osm_parent_legal_name": "Cristești",
+      "normalized_child_name": "cristesti",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "6029",
+          "legal_name": "Cristești",
+          "parent_code": "6000",
+          "parent_name": "Nisporeni",
+          "official_sheet": "Sheet 1",
+          "official_row": 914,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "6029",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303533",
+      "name": "Dumbrăvița",
+      "osm_relation_id": 21303533,
+      "osm_parent_id": "osm-r19076872",
+      "osm_parent_name": "Dumbrăvița",
+      "osm_parent_relation_id": 19076872,
+      "verified_osm_parent_legal_id": "7449",
+      "verified_osm_parent_legal_name": "Dumbrăvița",
+      "normalized_child_name": "dumbravita",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "7449",
+          "legal_name": "Dumbrăvița",
+          "parent_code": "7400",
+          "parent_name": "Sîngerei",
+          "official_sheet": "Sheet 1",
+          "official_row": 1187,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "7449",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303536",
+      "name": "Frumușica",
+      "osm_relation_id": 21303536,
+      "osm_parent_id": "osm-r19072274",
+      "osm_parent_name": "Frumușica",
+      "osm_parent_relation_id": 19072274,
+      "verified_osm_parent_legal_id": "4524",
+      "verified_osm_parent_legal_name": "Frumușica",
+      "normalized_child_name": "frumusica",
+      "official_name_candidate_count": 5,
+      "official_name_candidates": [
+        {
+          "legal_id": "5512",
+          "legal_name": "Frumușica",
+          "parent_code": "5511",
+          "parent_name": "Băcioi",
+          "official_sheet": "Sheet 1",
+          "official_row": 9,
+          "parent_matches_verified_osm_parent": false
+        },
+        {
+          "legal_id": "1723",
+          "legal_name": "Frumușica",
+          "parent_code": "1718",
+          "parent_name": "Chioselia Mare",
+          "official_sheet": "Sheet 1",
+          "official_row": 161,
+          "parent_matches_verified_osm_parent": false
+        },
+        {
+          "legal_id": "4320",
+          "legal_name": "Frumușica",
+          "parent_code": "4319",
+          "parent_name": "Călugăr",
+          "official_sheet": "Sheet 1",
+          "official_row": 579,
+          "parent_matches_verified_osm_parent": false
+        },
+        {
+          "legal_id": "4524",
+          "legal_name": "Frumușica",
+          "parent_code": "4500",
+          "parent_name": "Florești",
+          "official_sheet": "Sheet 1",
+          "official_row": 670,
+          "parent_matches_verified_osm_parent": false
+        },
+        {
+          "legal_id": "5718",
+          "legal_name": "Frumușica",
+          "parent_code": "5717",
+          "parent_name": "Cazangic",
+          "official_sheet": "Sheet 1",
+          "official_row": 866,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "4524",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303544",
+      "name": "Glinjeni",
+      "osm_relation_id": 21303544,
+      "osm_parent_id": "osm-r9357284",
+      "osm_parent_name": "Glinjeni",
+      "osm_parent_relation_id": 9357284,
+      "verified_osm_parent_legal_id": "4332",
+      "verified_osm_parent_legal_name": "Glinjeni",
+      "normalized_child_name": "glinjeni",
+      "official_name_candidate_count": 2,
+      "official_name_candidates": [
+        {
+          "legal_id": "4332",
+          "legal_name": "Glinjeni",
+          "parent_code": "4300",
+          "parent_name": "Fălești",
+          "official_sheet": "Sheet 1",
+          "official_row": 594,
+          "parent_matches_verified_osm_parent": false
+        },
+        {
+          "legal_id": "8322",
+          "legal_name": "Glinjeni",
+          "parent_code": "8300",
+          "parent_name": "Șoldănești",
+          "official_sheet": "Sheet 1",
+          "official_row": 1342,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "4332",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303530",
+      "name": "Hîrcești",
+      "osm_relation_id": 21303530,
+      "osm_parent_id": "osm-r1661057",
+      "osm_parent_name": "Hîrcești",
+      "osm_parent_relation_id": 1661057,
+      "verified_osm_parent_legal_id": "9239",
+      "verified_osm_parent_legal_name": "Hîrcești",
+      "normalized_child_name": "hircesti",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "9239",
+          "legal_name": "Hîrcești",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
+          "official_sheet": "Sheet 1",
+          "official_row": 1500,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "9239",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303534",
+      "name": "Mîrzești",
+      "osm_relation_id": 21303534,
+      "osm_parent_id": "osm-r19082498",
+      "osm_parent_name": "Mîrzești",
+      "osm_parent_relation_id": 19082498,
+      "verified_osm_parent_legal_id": "6419",
+      "verified_osm_parent_legal_name": "Mîrzești",
+      "normalized_child_name": "mirzesti",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "6419",
+          "legal_name": "Mîrzești",
+          "parent_code": "6400",
+          "parent_name": "Orhei",
+          "official_sheet": "Sheet 1",
+          "official_row": 1009,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "6419",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303532",
+      "name": "Vorniceni",
+      "osm_relation_id": 21303532,
+      "osm_parent_id": "osm-r19100180",
+      "osm_parent_name": "Vorniceni",
+      "osm_parent_relation_id": 19100180,
+      "verified_osm_parent_legal_id": "8042",
+      "verified_osm_parent_legal_name": "Vorniceni",
+      "normalized_child_name": "vorniceni",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "8042",
+          "legal_name": "Vorniceni",
+          "parent_code": "8000",
+          "parent_name": "Strășeni",
+          "official_sheet": "Sheet 1",
+          "official_row": 1322,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "8042",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
+    },
+    {
+      "id": "osm-r21303537",
+      "name": "Zaim",
+      "osm_relation_id": 21303537,
+      "osm_parent_id": "osm-r12462198",
+      "osm_parent_name": "Zaim",
+      "osm_parent_relation_id": 12462198,
+      "verified_osm_parent_legal_id": "2731",
+      "verified_osm_parent_legal_name": "Zaim",
+      "normalized_child_name": "zaim",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "2731",
+          "legal_name": "Zaim",
+          "parent_code": "2700",
+          "parent_name": "Căușeni",
+          "official_sheet": "Sheet 1",
+          "official_row": 343,
+          "parent_matches_verified_osm_parent": false
+        }
+      ],
+      "diagnostic_category": "child_name_match_parent_mismatch",
+      "reconciliation_match_method": "osm_self_parent_same_legal_entity",
+      "reconciliation_unmatched_reason": null,
+      "matching_candidate_count": 0,
+      "matching_candidates": [],
+      "self_parent_predicates": {
+        "parentMatch": true,
+        "parent_legal_id": "2731",
+        "same_legal_id": true,
+        "exact_normalized_name": true,
+        "distinct_children_count": 0,
+        "distinct_children": [],
+        "raw_cuatm_unique_id": null,
+        "raw_cuatm_code": null,
+        "normalized_explicit_keys": [],
+        "explicit_key_count": 0,
+        "explicit_key_lookups": []
+      },
+      "audit_category": "osm_self_parent_same_legal_entity"
     }
   ]
 }\n

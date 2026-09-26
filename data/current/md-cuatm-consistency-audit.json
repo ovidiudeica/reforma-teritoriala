@@ -1,32 +1,32 @@
 {
-  "generated_at": "2026-09-26T08:45:52.464Z",
+  "generated_at": "2026-09-26T09:14:55.610Z",
   "jurisdiction": "MD",
   "scope": "CUATM matched entities; duplicate OSM representations collapsed logically by legal identity",
-  "matched_count": 2465,
+  "matched_count": 2380,
   "policy": "Diagnostic only. No reconciliation, classification or source data are altered.",
   "duplicate_identity_summary": {
-    "duplicate_legal_id_count": 847,
-    "entities_in_duplicate_groups": 1699,
+    "duplicate_legal_id_count": 795,
+    "entities_in_duplicate_groups": 1598,
     "by_class": {
-      "mixed_parallel_and_chain_representations": 52,
       "uat_and_component_locality_with_parallel_uat_boundary": 1,
+      "mixed_parallel_and_chain_representations": 3,
       "component_locality_with_parallel_uat_boundaries_same_changeset": 2,
       "parallel_boundaries_same_identity_same_changeset": 1,
       "later_duplicate_same_identity": 1,
-      "same_identity_parent_child_chain": 790
+      "same_identity_parent_child_chain": 787
     }
   },
   "legal_identity_parent_summary": {
     "consistent_root": 41,
-    "consistent_identity_parent": 2288,
-    "identity_parent_mismatch": 47,
-    "identity_parent_not_resolved": 89
+    "consistent_identity_parent": 2291,
+    "identity_parent_mismatch": 44,
+    "identity_parent_not_resolved": 4
   },
   "unique_legal_identity_issue_summary": {
-    "count": 115,
+    "count": 27,
     "by_class": {
       "chisinau_sector_geometry_gap": 17,
-      "cross_legal_parent_conflict": 92,
+      "cross_legal_parent_conflict": 4,
       "verified_legal_parent_geometry_conflict": 6
     }
   },
@@ -40,32 +40,6 @@
     }
   },
   "duplicate_legal_ids": [
-    {
-      "legal_id": "1012",
-      "legal_name": "Botnărești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19090936",
-          "name": "Botnărești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1012",
-          "osm_parent_id": "osm-r1692078"
-        },
-        {
-          "id": "osm-r20701982",
-          "name": "Botnărești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1012",
-          "osm_parent_id": null
-        }
-      ]
-    },
     {
       "legal_id": "1050",
       "legal_name": "Țînțăreni",
@@ -116,392 +90,80 @@
       "review_basis": "OSM relation history audit"
     },
     {
-      "legal_id": "1414",
-      "legal_name": "Bogdănești",
-      "count": 2,
+      "legal_id": "1413",
+      "legal_name": "Berlinți",
+      "count": 3,
       "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
+      "same_identity_edges": [
+        {
+          "child": "osm-r18967833",
+          "parent": "osm-r19034098"
+        }
+      ],
       "parallel_sets": [],
       "items": [
         {
-          "id": "osm-r19034086",
-          "name": "Bogdănești",
+          "id": "osm-r19034092",
+          "name": "Berlinți",
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
-          "cuatm_key": "1414",
+          "cuatm_key": "1413",
+          "osm_parent_id": null
+        },
+        {
+          "id": "osm-r19034098",
+          "name": "Berlinți",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "1413",
           "osm_parent_id": "osm-r59002"
         },
         {
-          "id": "osm-r20701925",
-          "name": "Bogdănești",
+          "id": "osm-r18967833",
+          "name": "Berlinți",
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
-          "cuatm_key": "1414",
-          "osm_parent_id": null
+          "cuatm_key": "1413",
+          "osm_parent_id": "osm-r19034098"
         }
       ]
     },
     {
-      "legal_id": "1417",
-      "legal_name": "Bulboaca",
-      "count": 2,
+      "legal_id": "1428",
+      "legal_name": "Grimăncăuți",
+      "count": 3,
       "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
+      "same_identity_edges": [
+        {
+          "child": "osm-r18967716",
+          "parent": "osm-r19034087"
+        }
+      ],
       "parallel_sets": [],
       "items": [
         {
-          "id": "osm-r19034082",
-          "name": "Bulboaca",
+          "id": "osm-r19034087",
+          "name": "Grimăncăuți",
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
-          "cuatm_key": "1417",
+          "cuatm_key": "1428",
           "osm_parent_id": "osm-r59002"
         },
         {
-          "id": "osm-r20701923",
-          "name": "Bulboaca",
+          "id": "osm-r19034104",
+          "name": "Grimăncăuți",
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
-          "cuatm_key": "1417",
+          "cuatm_key": "1428",
           "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1423",
-      "legal_name": "Coteala",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19034084",
-          "name": "Coteala",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1423",
-          "osm_parent_id": "osm-r59002"
         },
         {
-          "id": "osm-r20701919",
-          "name": "Coteala",
+          "id": "osm-r18967716",
+          "name": "Grimăncăuți",
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
-          "cuatm_key": "1423",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1437",
-      "legal_name": "Medveja",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19034077",
-          "name": "Medveja",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1437",
-          "osm_parent_id": "osm-r59002"
-        },
-        {
-          "id": "osm-r20701918",
-          "name": "Medveja",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1437",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1441",
-      "legal_name": "Pererita",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19034102",
-          "name": "Pererita",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1441",
-          "osm_parent_id": "osm-r59002"
-        },
-        {
-          "id": "osm-r20701921",
-          "name": "Pererîta",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1441",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1443",
-      "legal_name": "Slobozia-Șirăuți",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19034088",
-          "name": "Slobozia-Șirăuți",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1443",
-          "osm_parent_id": "osm-r59002"
-        },
-        {
-          "id": "osm-r20701920",
-          "name": "Slobozia-Șirăuți",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1443",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1444",
-      "legal_name": "Tabani",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19034085",
-          "name": "Tabani",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1444",
-          "osm_parent_id": "osm-r59002"
-        },
-        {
-          "id": "osm-r20701922",
-          "name": "Tabani",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1444",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1927",
-      "legal_name": "Japca",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072239",
-          "name": "Japca",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1927",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701949",
-          "name": "Japca",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1927",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1929",
-      "legal_name": "Năpadova",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072258",
-          "name": "Năpadova",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1929",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701947",
-          "name": "Napadova",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1929",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1939",
-      "legal_name": "Sănătăuca",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072264",
-          "name": "Sănătăuca",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1939",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701948",
-          "name": "Sănătăuca",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1939",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1942",
-      "legal_name": "Temeleuți",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072266",
-          "name": "Temeleuți",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1942",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701945",
-          "name": "Temeleuți",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1942",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "1950",
-      "legal_name": "Zăluceni",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072253",
-          "name": "Zăluceni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1950",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701946",
-          "name": "Zăluceni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1950",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "2138",
-      "legal_name": "Lărguța",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19114021",
-          "name": "Lărguța",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "2138",
-          "osm_parent_id": "osm-r1699022"
-        },
-        {
-          "id": "osm-r20701985",
-          "name": "Lărguța",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "2138",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "2731",
-      "legal_name": "Zaim",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r12462198",
-          "name": "Zaim",
-          "match_method": "exact_normalized_name_and_official_parent",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": "osm-r65343"
-        },
-        {
-          "id": "osm-r21303537",
-          "name": "Zaim",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "3129",
-      "legal_name": "Drăsliceni",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19090922",
-          "name": "Drăsliceni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "3129",
-          "osm_parent_id": "osm-r1692126"
-        },
-        {
-          "id": "osm-r20725062",
-          "name": "Drăsliceni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "3129",
-          "osm_parent_id": null
+          "cuatm_key": "1428",
+          "osm_parent_id": "osm-r19034087"
         }
       ]
     },
@@ -555,630 +217,6 @@
       "review_basis": "OSM relation history audit"
     },
     {
-      "legal_id": "3838",
-      "legal_name": "Molovata",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19090942",
-          "name": "Molovata",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "3838",
-          "osm_parent_id": "osm-r1692123"
-        },
-        {
-          "id": "osm-r20701973",
-          "name": "Molovata",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "3838",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4117",
-      "legal_name": "Bădragii Noi",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19038970",
-          "name": "Bădragii Noi",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4117",
-          "osm_parent_id": "osm-r59000"
-        },
-        {
-          "id": "osm-r20701927",
-          "name": "Bădragii Noi",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4117",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4138",
-      "legal_name": "Parcova",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19038980",
-          "name": "Parcova",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4138",
-          "osm_parent_id": "osm-r59000"
-        },
-        {
-          "id": "osm-r20701929",
-          "name": "Parcova",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4138",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4315",
-      "legal_name": "Călinești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19314571",
-          "name": "Călinești",
-          "match_method": "exact_normalized_name_and_official_parent",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": "osm-r58984"
-        },
-        {
-          "id": "osm-r20701967",
-          "name": "Călinești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4315",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4332",
-      "legal_name": "Glinjeni",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r9357284",
-          "name": "Glinjeni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4332",
-          "osm_parent_id": "osm-r58984"
-        },
-        {
-          "id": "osm-r21303544",
-          "name": "Glinjeni",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4343",
-      "legal_name": "Izvoare",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r1692449",
-          "name": "Izvoare",
-          "match_method": "exact_normalized_name_and_official_parent",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": "osm-r58984"
-        },
-        {
-          "id": "osm-r20701968",
-          "name": "Izvoare",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4343",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4516",
-      "legal_name": "Cernița",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072251",
-          "name": "Cernița",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4516",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701944",
-          "name": "Cernița",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4516",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4518",
-      "legal_name": "Ciutulești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072262",
-          "name": "Ciutulești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4518",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r21303543",
-          "name": "Ciutulești",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4523",
-      "legal_name": "Domulgeni",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072237",
-          "name": "Domulgeni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4523",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701956",
-          "name": "Domulgeni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4523",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4524",
-      "legal_name": "Frumușica",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072274",
-          "name": "Frumușica",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4524",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r21303536",
-          "name": "Frumușica",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4535",
-      "legal_name": "Iliciovca",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072269",
-          "name": "Iliciovca",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4535",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701935",
-          "name": "Iliciovca",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4535",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4550",
-      "legal_name": "Putinești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072244",
-          "name": "Putinești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4550",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701937",
-          "name": "Putinești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4550",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4551",
-      "legal_name": "Rădulenii Vechi",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072246",
-          "name": "Rădulenii Vechi",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4551",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701940",
-          "name": "Rădulenii Vechi",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4551",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "4559",
-      "legal_name": "Trifănești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19072248",
-          "name": "Trifănești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4559",
-          "osm_parent_id": "osm-r1693560"
-        },
-        {
-          "id": "osm-r20701934",
-          "name": "Trifănești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "4559",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "5333",
-      "legal_name": "Ivanovca",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19110252",
-          "name": "Ivanovca",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "5333",
-          "osm_parent_id": "osm-r58991"
-        },
-        {
-          "id": "osm-r20701981",
-          "name": "Ivanovca",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "5333",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6012",
-      "legal_name": "Bălăurești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19105122",
-          "name": "Bălăurești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6012",
-          "osm_parent_id": "osm-r58990"
-        },
-        {
-          "id": "osm-r20701978",
-          "name": "Bălăurești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6012",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6021",
-      "legal_name": "Bursuc",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19105114",
-          "name": "Bursuc",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6021",
-          "osm_parent_id": "osm-r58990"
-        },
-        {
-          "id": "osm-r20701975",
-          "name": "Bursuc",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6021",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6029",
-      "legal_name": "Cristești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19105121",
-          "name": "Cristești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6029",
-          "osm_parent_id": "osm-r58990"
-        },
-        {
-          "id": "osm-r21303542",
-          "name": "Cristești",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6035",
-      "legal_name": "Iurceni",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19105107",
-          "name": "Iurceni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6035",
-          "osm_parent_id": "osm-r58990"
-        },
-        {
-          "id": "osm-r20701976",
-          "name": "Iurceni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6035",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6419",
-      "legal_name": "Mîrzești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19082498",
-          "name": "Mîrzești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6419",
-          "osm_parent_id": "osm-r1692172"
-        },
-        {
-          "id": "osm-r21303534",
-          "name": "Mîrzești",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6729",
-      "legal_name": "Mincenii de Jos",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19080866",
-          "name": "Mincenii de Jos",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6729",
-          "osm_parent_id": "osm-r1435790"
-        },
-        {
-          "id": "osm-r20701964",
-          "name": "Mincenii de Jos",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6729",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6731",
-      "legal_name": "Otac",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19080847",
-          "name": "Otac",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6731",
-          "osm_parent_id": "osm-r1435790"
-        },
-        {
-          "id": "osm-r20701965",
-          "name": "Otac",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6731",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6738",
-      "legal_name": "Pripiceni-Răzeși",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19080869",
-          "name": "Pripiceni-Răzeși",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6738",
-          "osm_parent_id": "osm-r1435790"
-        },
-        {
-          "id": "osm-r20701960",
-          "name": "Pripiceni-Răzeși",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6738",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "6746",
-      "legal_name": "Trifești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19080860",
-          "name": "Trifești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6746",
-          "osm_parent_id": "osm-r1435790"
-        },
-        {
-          "id": "osm-r20701962",
-          "name": "Trifești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "6746",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
       "legal_id": "7160",
       "legal_name": "Văratic",
       "count": 3,
@@ -1228,314 +266,41 @@
       "review_basis": "OSM relation history audit"
     },
     {
-      "legal_id": "7427",
-      "legal_name": "Ciuciuieni",
-      "count": 2,
+      "legal_id": "7162",
+      "legal_name": "Duruitoarea Nouă",
+      "count": 3,
       "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
+      "same_identity_edges": [
         {
-          "id": "osm-r19076869",
-          "name": "Ciuciuieni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "7427",
-          "osm_parent_id": "osm-r58996"
-        },
-        {
-          "id": "osm-r20701970",
-          "name": "Ciuciuieni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "7427",
-          "osm_parent_id": null
+          "child": "osm-r18967636",
+          "parent": "osm-r19045259"
         }
-      ]
-    },
-    {
-      "legal_id": "7449",
-      "legal_name": "Dumbrăvița",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
+      ],
       "parallel_sets": [],
       "items": [
         {
-          "id": "osm-r19076872",
-          "name": "Dumbrăvița",
+          "id": "osm-r19045259",
+          "name": "Duruitoarea Nouă",
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
-          "cuatm_key": "7449",
-          "osm_parent_id": "osm-r58996"
+          "cuatm_key": "7162",
+          "osm_parent_id": "osm-r1693908"
         },
         {
-          "id": "osm-r21303533",
-          "name": "Dumbrăvița",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "8038",
-      "legal_name": "Tătărești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19100176",
-          "name": "Tătărești",
+          "id": "osm-r19045262",
+          "name": "Duruitoarea Nouă",
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
-          "cuatm_key": "8038",
-          "osm_parent_id": "osm-r85827"
+          "cuatm_key": "7162",
+          "osm_parent_id": null
         },
         {
-          "id": "osm-r20701974",
-          "name": "Tătărești",
+          "id": "osm-r18967636",
+          "name": "Duruitoarea Nouă",
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
-          "cuatm_key": "8038",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "8042",
-      "legal_name": "Vorniceni",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19100180",
-          "name": "Vorniceni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8042",
-          "osm_parent_id": "osm-r85827"
-        },
-        {
-          "id": "osm-r21303532",
-          "name": "Vorniceni",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "8316",
-      "legal_name": "Cobîlea",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19080658",
-          "name": "Cobîlea",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8316",
-          "osm_parent_id": "osm-r1693561"
-        },
-        {
-          "id": "osm-r21303528",
-          "name": "Cobîlea",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "8330",
-      "legal_name": "Dobrușa",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19080651",
-          "name": "Dobrușa",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8330",
-          "osm_parent_id": "osm-r1693561"
-        },
-        {
-          "id": "osm-r20701959",
-          "name": "Dobrușa",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8330",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "8338",
-      "legal_name": "Vadul-Rașcov",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19080663",
-          "name": "Vadul-Rașcov",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8338",
-          "osm_parent_id": "osm-r1693561"
-        },
-        {
-          "id": "osm-r20701951",
-          "name": "Vadul-Rașcov",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8338",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "8514",
-      "legal_name": "Carahasani",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r1706625",
-          "name": "Carahasani",
-          "match_method": "exact_normalized_name_and_official_parent",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": "osm-r65344"
-        },
-        {
-          "id": "osm-r20701984",
-          "name": "Carahasani",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8514",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "8935",
-      "legal_name": "Mîndrești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19082850",
-          "name": "Mîndrești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8935",
-          "osm_parent_id": "osm-r58993"
-        },
-        {
-          "id": "osm-r20701971",
-          "name": "Mîndrești",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8935",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "8958",
-      "legal_name": "Văsieni",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19082839",
-          "name": "Văsieni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8958",
-          "osm_parent_id": "osm-r58993"
-        },
-        {
-          "id": "osm-r20701972",
-          "name": "Văsieni",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "8958",
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "9239",
-      "legal_name": "Hîrcești",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r1661057",
-          "name": "Hîrcești",
-          "match_method": "exact_normalized_name_and_official_parent",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": "osm-r58985"
-        },
-        {
-          "id": "osm-r21303530",
-          "name": "Hîrcești",
-          "match_method": "osm_self_parent_same_legal_entity",
-          "confidence": "medium",
-          "cuatm_key": null,
-          "osm_parent_id": null
-        }
-      ]
-    },
-    {
-      "legal_id": "9617",
-      "legal_name": "Chioselia Rusă",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19118602",
-          "name": "Chioselia Rusă",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "9617",
-          "osm_parent_id": "osm-r1699032"
-        },
-        {
-          "id": "osm-r20701986",
-          "name": "Chioselia Rusă",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "9617",
-          "osm_parent_id": null
+          "cuatm_key": "7162",
+          "osm_parent_id": "osm-r19045259"
         }
       ]
     },
@@ -3214,37 +1979,6 @@
       ]
     },
     {
-      "legal_id": "1413",
-      "legal_name": "Berlinți",
-      "count": 2,
-      "duplicate_class": "same_identity_parent_child_chain",
-      "same_identity_edges": [
-        {
-          "child": "osm-r18967833",
-          "parent": "osm-r19034098"
-        }
-      ],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19034098",
-          "name": "Berlinți",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1413",
-          "osm_parent_id": "osm-r59002"
-        },
-        {
-          "id": "osm-r18967833",
-          "name": "Berlinți",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1413",
-          "osm_parent_id": "osm-r19034098"
-        }
-      ]
-    },
-    {
       "legal_id": "1419",
       "legal_name": "Caracușenii Vechi",
       "count": 2,
@@ -3427,37 +2161,6 @@
           "confidence": "high",
           "cuatm_key": "1426",
           "osm_parent_id": "osm-r19034091"
-        }
-      ]
-    },
-    {
-      "legal_id": "1428",
-      "legal_name": "Grimăncăuți",
-      "count": 2,
-      "duplicate_class": "same_identity_parent_child_chain",
-      "same_identity_edges": [
-        {
-          "child": "osm-r18967716",
-          "parent": "osm-r19034087"
-        }
-      ],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19034087",
-          "name": "Grimăncăuți",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1428",
-          "osm_parent_id": "osm-r59002"
-        },
-        {
-          "id": "osm-r18967716",
-          "name": "Grimăncăuți",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "1428",
-          "osm_parent_id": "osm-r19034087"
         }
       ]
     },
@@ -19241,37 +17944,6 @@
       ]
     },
     {
-      "legal_id": "7162",
-      "legal_name": "Duruitoarea Nouă",
-      "count": 2,
-      "duplicate_class": "same_identity_parent_child_chain",
-      "same_identity_edges": [
-        {
-          "child": "osm-r18967636",
-          "parent": "osm-r19045259"
-        }
-      ],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r19045259",
-          "name": "Duruitoarea Nouă",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "7162",
-          "osm_parent_id": "osm-r1693908"
-        },
-        {
-          "id": "osm-r18967636",
-          "name": "Duruitoarea Nouă",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "7162",
-          "osm_parent_id": "osm-r19045259"
-        }
-      ]
-    },
-    {
       "legal_id": "7163",
       "legal_name": "Zăicani",
       "count": 2,
@@ -26140,51 +24812,15 @@
       ]
     },
     {
-      "legal_id": "4117",
-      "legal_name": "Bădragii Noi",
-      "expected_legal_parent_id": "4100",
-      "expected_legal_parent_name": "Edineț",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701927"
-      ]
-    },
-    {
-      "legal_id": "6012",
-      "legal_name": "Bălăurești",
-      "expected_legal_parent_id": "6000",
-      "expected_legal_parent_name": "Nisporeni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701978"
-      ]
-    },
-    {
-      "legal_id": "1414",
-      "legal_name": "Bogdănești",
+      "legal_id": "1413",
+      "legal_name": "Berlinți",
       "expected_legal_parent_id": "1400",
       "expected_legal_parent_name": "Briceni",
       "observed_distinct_parent_legal_ids": [],
       "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
+      "representation_count": 3,
       "affected_representations": [
-        "osm-r20701925"
-      ]
-    },
-    {
-      "legal_id": "1012",
-      "legal_name": "Botnărești",
-      "expected_legal_parent_id": "1000",
-      "expected_legal_parent_name": "Anenii Noi",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701982"
+        "osm-r19034092"
       ]
     },
     {
@@ -26218,78 +24854,6 @@
       ]
     },
     {
-      "legal_id": "1417",
-      "legal_name": "Bulboaca",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701923"
-      ]
-    },
-    {
-      "legal_id": "6021",
-      "legal_name": "Bursuc",
-      "expected_legal_parent_id": "6000",
-      "expected_legal_parent_name": "Nisporeni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701975"
-      ]
-    },
-    {
-      "legal_id": "8514",
-      "legal_name": "Carahasani",
-      "expected_legal_parent_id": "8500",
-      "expected_legal_parent_name": "Ștefan Vodă",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701984"
-      ]
-    },
-    {
-      "legal_id": "4315",
-      "legal_name": "Călinești",
-      "expected_legal_parent_id": "4300",
-      "expected_legal_parent_name": "Fălești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701967"
-      ]
-    },
-    {
-      "legal_id": "4516",
-      "legal_name": "Cernița",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701944"
-      ]
-    },
-    {
-      "legal_id": "9617",
-      "legal_name": "Chioselia Rusă",
-      "expected_legal_parent_id": "9600",
-      "expected_legal_parent_name": "Unitatea Teritorială Autonomă Găgăuzia",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701986"
-      ]
-    },
-    {
       "legal_id": "0152",
       "legal_name": "Ciorescu",
       "expected_legal_parent_id": "0150",
@@ -26302,42 +24866,6 @@
       "affected_representations": [
         "osm-r1782040",
         "osm-r18967240"
-      ]
-    },
-    {
-      "legal_id": "7427",
-      "legal_name": "Ciuciuieni",
-      "expected_legal_parent_id": "7400",
-      "expected_legal_parent_name": "Sîngerei",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701970"
-      ]
-    },
-    {
-      "legal_id": "4518",
-      "legal_name": "Ciutulești",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303543"
-      ]
-    },
-    {
-      "legal_id": "8316",
-      "legal_name": "Cobîlea",
-      "expected_legal_parent_id": "8300",
-      "expected_legal_parent_name": "Șoldănești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303528"
       ]
     },
     {
@@ -26386,18 +24914,6 @@
       ]
     },
     {
-      "legal_id": "1423",
-      "legal_name": "Coteala",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701919"
-      ]
-    },
-    {
       "legal_id": "0151",
       "legal_name": "Cricova",
       "expected_legal_parent_id": "0150",
@@ -26410,18 +24926,6 @@
       "affected_representations": [
         "osm-r1782039",
         "osm-r18967527"
-      ]
-    },
-    {
-      "legal_id": "6029",
-      "legal_name": "Cristești",
-      "expected_legal_parent_id": "6000",
-      "expected_legal_parent_name": "Nisporeni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303542"
       ]
     },
     {
@@ -26440,30 +24944,6 @@
       ]
     },
     {
-      "legal_id": "8330",
-      "legal_name": "Dobrușa",
-      "expected_legal_parent_id": "8300",
-      "expected_legal_parent_name": "Șoldănești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701959"
-      ]
-    },
-    {
-      "legal_id": "4523",
-      "legal_name": "Domulgeni",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701956"
-      ]
-    },
-    {
       "legal_id": "6432",
       "legal_name": "Donici",
       "expected_legal_parent_id": "6400",
@@ -26476,30 +24956,6 @@
       "affected_representations": [
         "osm-r19082496",
         "osm-r18967778"
-      ]
-    },
-    {
-      "legal_id": "3129",
-      "legal_name": "Drăsliceni",
-      "expected_legal_parent_id": "3100",
-      "expected_legal_parent_name": "Criuleni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20725062"
-      ]
-    },
-    {
-      "legal_id": "7449",
-      "legal_name": "Dumbrăvița",
-      "expected_legal_parent_id": "7400",
-      "expected_legal_parent_name": "Sîngerei",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303533"
       ]
     },
     {
@@ -26518,15 +24974,15 @@
       ]
     },
     {
-      "legal_id": "4524",
-      "legal_name": "Frumușica",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
+      "legal_id": "7162",
+      "legal_name": "Duruitoarea Nouă",
+      "expected_legal_parent_id": "7100",
+      "expected_legal_parent_name": "Rîșcani",
       "observed_distinct_parent_legal_ids": [],
       "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
+      "representation_count": 3,
       "affected_representations": [
-        "osm-r21303536"
+        "osm-r19045262"
       ]
     },
     {
@@ -26545,18 +25001,6 @@
       ]
     },
     {
-      "legal_id": "4332",
-      "legal_name": "Glinjeni",
-      "expected_legal_parent_id": "4300",
-      "expected_legal_parent_name": "Fălești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303544"
-      ]
-    },
-    {
       "legal_id": "0155",
       "legal_name": "Grătiești",
       "expected_legal_parent_id": "0150",
@@ -26572,159 +25016,15 @@
       ]
     },
     {
-      "legal_id": "9239",
-      "legal_name": "Hîrcești",
-      "expected_legal_parent_id": "9200",
-      "expected_legal_parent_name": "Ungheni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303530"
-      ]
-    },
-    {
-      "legal_id": "4535",
-      "legal_name": "Iliciovca",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701935"
-      ]
-    },
-    {
-      "legal_id": "6035",
-      "legal_name": "Iurceni",
-      "expected_legal_parent_id": "6000",
-      "expected_legal_parent_name": "Nisporeni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701976"
-      ]
-    },
-    {
-      "legal_id": "5333",
-      "legal_name": "Ivanovca",
-      "expected_legal_parent_id": "5300",
-      "expected_legal_parent_name": "Hîncești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701981"
-      ]
-    },
-    {
-      "legal_id": "4343",
-      "legal_name": "Izvoare",
-      "expected_legal_parent_id": "4300",
-      "expected_legal_parent_name": "Fălești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701968"
-      ]
-    },
-    {
-      "legal_id": "1927",
-      "legal_name": "Japca",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701949"
-      ]
-    },
-    {
-      "legal_id": "2138",
-      "legal_name": "Lărguța",
-      "expected_legal_parent_id": "2100",
-      "expected_legal_parent_name": "Cantemir",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701985"
-      ]
-    },
-    {
-      "legal_id": "1437",
-      "legal_name": "Medveja",
+      "legal_id": "1428",
+      "legal_name": "Grimăncăuți",
       "expected_legal_parent_id": "1400",
       "expected_legal_parent_name": "Briceni",
       "observed_distinct_parent_legal_ids": [],
       "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
+      "representation_count": 3,
       "affected_representations": [
-        "osm-r20701918"
-      ]
-    },
-    {
-      "legal_id": "6729",
-      "legal_name": "Mincenii de Jos",
-      "expected_legal_parent_id": "6700",
-      "expected_legal_parent_name": "Rezina",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701964"
-      ]
-    },
-    {
-      "legal_id": "8935",
-      "legal_name": "Mîndrești",
-      "expected_legal_parent_id": "8900",
-      "expected_legal_parent_name": "Telenești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701971"
-      ]
-    },
-    {
-      "legal_id": "6419",
-      "legal_name": "Mîrzești",
-      "expected_legal_parent_id": "6400",
-      "expected_legal_parent_name": "Orhei",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303534"
-      ]
-    },
-    {
-      "legal_id": "3838",
-      "legal_name": "Molovata",
-      "expected_legal_parent_id": "3800",
-      "expected_legal_parent_name": "Dubăsari",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701973"
-      ]
-    },
-    {
-      "legal_id": "1929",
-      "legal_name": "Năpadova",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701947"
+        "osm-r19034104"
       ]
     },
     {
@@ -26743,42 +25043,6 @@
       ]
     },
     {
-      "legal_id": "6731",
-      "legal_name": "Otac",
-      "expected_legal_parent_id": "6700",
-      "expected_legal_parent_name": "Rezina",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701965"
-      ]
-    },
-    {
-      "legal_id": "4138",
-      "legal_name": "Parcova",
-      "expected_legal_parent_id": "4100",
-      "expected_legal_parent_name": "Edineț",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701929"
-      ]
-    },
-    {
-      "legal_id": "1441",
-      "legal_name": "Pererita",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701921"
-      ]
-    },
-    {
       "legal_id": "6453",
       "legal_name": "Peresecina",
       "expected_legal_parent_id": "6400",
@@ -26791,54 +25055,6 @@
       "affected_representations": [
         "osm-r19082505",
         "osm-r18968022"
-      ]
-    },
-    {
-      "legal_id": "6738",
-      "legal_name": "Pripiceni-Răzeși",
-      "expected_legal_parent_id": "6700",
-      "expected_legal_parent_name": "Rezina",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701960"
-      ]
-    },
-    {
-      "legal_id": "4550",
-      "legal_name": "Putinești",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701937"
-      ]
-    },
-    {
-      "legal_id": "4551",
-      "legal_name": "Rădulenii Vechi",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701940"
-      ]
-    },
-    {
-      "legal_id": "1939",
-      "legal_name": "Sănătăuca",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701948"
       ]
     },
     {
@@ -26857,18 +25073,6 @@
       ]
     },
     {
-      "legal_id": "1443",
-      "legal_name": "Slobozia-Șirăuți",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701920"
-      ]
-    },
-    {
       "legal_id": "3153",
       "legal_name": "Stăuceni",
       "expected_legal_parent_id": "0150",
@@ -26884,42 +25088,6 @@
       ]
     },
     {
-      "legal_id": "1444",
-      "legal_name": "Tabani",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701922"
-      ]
-    },
-    {
-      "legal_id": "8038",
-      "legal_name": "Tătărești",
-      "expected_legal_parent_id": "8000",
-      "expected_legal_parent_name": "Strășeni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701974"
-      ]
-    },
-    {
-      "legal_id": "1942",
-      "legal_name": "Temeleuți",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701945"
-      ]
-    },
-    {
       "legal_id": "0146",
       "legal_name": "Tohatin",
       "expected_legal_parent_id": "0140",
@@ -26932,30 +25100,6 @@
       "affected_representations": [
         "osm-r1752520",
         "osm-r18967916"
-      ]
-    },
-    {
-      "legal_id": "4559",
-      "legal_name": "Trifănești",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701934"
-      ]
-    },
-    {
-      "legal_id": "6746",
-      "legal_name": "Trifești",
-      "expected_legal_parent_id": "6700",
-      "expected_legal_parent_name": "Rezina",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701962"
       ]
     },
     {
@@ -26989,18 +25133,6 @@
       ]
     },
     {
-      "legal_id": "8338",
-      "legal_name": "Vadul-Rașcov",
-      "expected_legal_parent_id": "8300",
-      "expected_legal_parent_name": "Șoldănești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701951"
-      ]
-    },
-    {
       "legal_id": "0122",
       "legal_name": "Vatra",
       "expected_legal_parent_id": "0120",
@@ -27013,102 +25145,6 @@
       "affected_representations": [
         "osm-r1768340",
         "osm-r18968027"
-      ]
-    },
-    {
-      "legal_id": "8958",
-      "legal_name": "Văsieni",
-      "expected_legal_parent_id": "8900",
-      "expected_legal_parent_name": "Telenești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701972"
-      ]
-    },
-    {
-      "legal_id": "8042",
-      "legal_name": "Vorniceni",
-      "expected_legal_parent_id": "8000",
-      "expected_legal_parent_name": "Strășeni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303532"
-      ]
-    },
-    {
-      "legal_id": "2731",
-      "legal_name": "Zaim",
-      "expected_legal_parent_id": "2700",
-      "expected_legal_parent_name": "Căușeni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r21303537"
-      ]
-    },
-    {
-      "legal_id": "1950",
-      "legal_name": "Zăluceni",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r20701946"
-      ]
-    },
-    {
-      "legal_id": "4560",
-      "legal_name": "Alexandrovca",
-      "expected_legal_parent_id": "4559",
-      "expected_legal_parent_name": "Trifănești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701933"
-      ]
-    },
-    {
-      "legal_id": "1415",
-      "legal_name": "Bezeda",
-      "expected_legal_parent_id": "1414",
-      "expected_legal_parent_name": "Bogdănești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701924"
-      ]
-    },
-    {
-      "legal_id": "4538",
-      "legal_name": "Bezeni",
-      "expected_legal_parent_id": "4537",
-      "expected_legal_parent_name": "Izvoare",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701931"
-      ]
-    },
-    {
-      "legal_id": "7450",
-      "legal_name": "Bocancea-Schit",
-      "expected_legal_parent_id": "7449",
-      "expected_legal_parent_name": "Dumbrăvița",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303540"
       ]
     },
     {
@@ -27126,106 +25162,6 @@
       ]
     },
     {
-      "legal_id": "1928",
-      "legal_name": "Bursuc",
-      "expected_legal_parent_id": "1927",
-      "expected_legal_parent_name": "Japca",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701950"
-      ]
-    },
-    {
-      "legal_id": "1418",
-      "legal_name": "Caracușenii Noi",
-      "expected_legal_parent_id": "1413",
-      "expected_legal_parent_name": "Berlinți",
-      "observed_distinct_parent_legal_ids": [
-        "1400"
-      ],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r18967747"
-      ]
-    },
-    {
-      "legal_id": "4511",
-      "legal_name": "Chirilovca",
-      "expected_legal_parent_id": "4510",
-      "expected_legal_parent_name": "Alexeevca",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701942"
-      ]
-    },
-    {
-      "legal_id": "5334",
-      "legal_name": "Costești",
-      "expected_legal_parent_id": "5333",
-      "expected_legal_parent_name": "Ivanovca",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701980"
-      ]
-    },
-    {
-      "legal_id": "8315",
-      "legal_name": "Cot",
-      "expected_legal_parent_id": "8314",
-      "expected_legal_parent_name": "Climăuții de Jos",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303531"
-      ]
-    },
-    {
-      "legal_id": "9240",
-      "legal_name": "Drujba",
-      "expected_legal_parent_id": "9239",
-      "expected_legal_parent_name": "Hîrcești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303527"
-      ]
-    },
-    {
-      "legal_id": "7161",
-      "legal_name": "Dumeni",
-      "expected_legal_parent_id": "7162",
-      "expected_legal_parent_name": "Duruitoarea Nouă",
-      "observed_distinct_parent_legal_ids": [
-        "7100"
-      ],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r18967535"
-      ]
-    },
-    {
-      "legal_id": "4512",
-      "legal_name": "Dumitreni",
-      "expected_legal_parent_id": "4510",
-      "expected_legal_parent_name": "Alexeevca",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701941"
-      ]
-    },
-    {
       "legal_id": "9639",
       "legal_name": "Etulia, loc.st.c.f.",
       "expected_legal_parent_id": "9629",
@@ -27240,341 +25176,15 @@
       ]
     },
     {
-      "legal_id": "4139",
-      "legal_name": "Fîntîna Albă",
-      "expected_legal_parent_id": "4138",
-      "expected_legal_parent_name": "Parcova",
+      "legal_id": "0110",
+      "legal_name": "Sectorul Botanica",
+      "expected_legal_parent_id": "0100",
+      "expected_legal_parent_name": "Chișinău",
       "observed_distinct_parent_legal_ids": [],
       "diagnostic_class": "cross_legal_parent_conflict",
       "representation_count": 1,
       "affected_representations": [
-        "osm-r20701930"
-      ]
-    },
-    {
-      "legal_id": "7438",
-      "legal_name": "Flămînzeni",
-      "expected_legal_parent_id": "7436",
-      "expected_legal_parent_name": "Coșcodeni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701969"
-      ]
-    },
-    {
-      "legal_id": "5335",
-      "legal_name": "Frasin",
-      "expected_legal_parent_id": "5333",
-      "expected_legal_parent_name": "Ivanovca",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701979"
-      ]
-    },
-    {
-      "legal_id": "1416",
-      "legal_name": "Grimești",
-      "expected_legal_parent_id": "1414",
-      "expected_legal_parent_name": "Bogdănești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701926"
-      ]
-    },
-    {
-      "legal_id": "4532",
-      "legal_name": "Gvozdova",
-      "expected_legal_parent_id": "4530",
-      "expected_legal_parent_name": "Gura Camencii",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701943"
-      ]
-    },
-    {
-      "legal_id": "9270",
-      "legal_name": "Hristoforovca",
-      "expected_legal_parent_id": "9261",
-      "expected_legal_parent_name": "Pîrlița",
-      "observed_distinct_parent_legal_ids": [
-        "9233"
-      ],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r18967315"
-      ]
-    },
-    {
-      "legal_id": "4519",
-      "legal_name": "Ion Vodă",
-      "expected_legal_parent_id": "4518",
-      "expected_legal_parent_name": "Ciutulești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701954"
-      ]
-    },
-    {
-      "legal_id": "9241",
-      "legal_name": "Leordoaia",
-      "expected_legal_parent_id": "9239",
-      "expected_legal_parent_name": "Hîrcești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303529"
-      ]
-    },
-    {
-      "legal_id": "3130",
-      "legal_name": "Logănești",
-      "expected_legal_parent_id": "3129",
-      "expected_legal_parent_name": "Drăsliceni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20725061"
-      ]
-    },
-    {
-      "legal_id": "4536",
-      "legal_name": "Maiscoe",
-      "expected_legal_parent_id": "4535",
-      "expected_legal_parent_name": "Iliciovca",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701936"
-      ]
-    },
-    {
-      "legal_id": "2732",
-      "legal_name": "Marianca de Sus",
-      "expected_legal_parent_id": "2731",
-      "expected_legal_parent_name": "Zaim",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303538"
-      ]
-    },
-    {
-      "legal_id": "4520",
-      "legal_name": "Mărinești",
-      "expected_legal_parent_id": "4518",
-      "expected_legal_parent_name": "Ciutulești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701955"
-      ]
-    },
-    {
-      "legal_id": "6730",
-      "legal_name": "Mincenii de Sus",
-      "expected_legal_parent_id": "6729",
-      "expected_legal_parent_name": "Mincenii de Jos",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701963"
-      ]
-    },
-    {
-      "legal_id": "9242",
-      "legal_name": "Mînzătești",
-      "expected_legal_parent_id": "9239",
-      "expected_legal_parent_name": "Hîrcești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303526"
-      ]
-    },
-    {
-      "legal_id": "6418",
-      "legal_name": "Mîrzaci",
-      "expected_legal_parent_id": "6419",
-      "expected_legal_parent_name": "Mîrzești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303535"
-      ]
-    },
-    {
-      "legal_id": "6036",
-      "legal_name": "Mîrzoaia",
-      "expected_legal_parent_id": "6035",
-      "expected_legal_parent_name": "Iurceni",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701977"
-      ]
-    },
-    {
-      "legal_id": "6739",
-      "legal_name": "Pripiceni-Curchi",
-      "expected_legal_parent_id": "6738",
-      "expected_legal_parent_name": "Pripiceni-Răzeși",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701961"
-      ]
-    },
-    {
-      "legal_id": "4513",
-      "legal_name": "Rădulenii Noi",
-      "expected_legal_parent_id": "4510",
-      "expected_legal_parent_name": "Alexeevca",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701939"
-      ]
-    },
-    {
-      "legal_id": "8329",
-      "legal_name": "Recești",
-      "expected_legal_parent_id": "8330",
-      "expected_legal_parent_name": "Dobrușa",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701958"
-      ]
-    },
-    {
-      "legal_id": "1013",
-      "legal_name": "Salcia",
-      "expected_legal_parent_id": "1012",
-      "expected_legal_parent_name": "Botnărești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701983"
-      ]
-    },
-    {
-      "legal_id": "4539",
-      "legal_name": "Scăieni",
-      "expected_legal_parent_id": "4537",
-      "expected_legal_parent_name": "Izvoare",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701932"
-      ]
-    },
-    {
-      "legal_id": "1438",
-      "legal_name": "Slobozia-Medveja",
-      "expected_legal_parent_id": "1437",
-      "expected_legal_parent_name": "Medveja",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701917"
-      ]
-    },
-    {
-      "legal_id": "8339",
-      "legal_name": "Socola",
-      "expected_legal_parent_id": "8338",
-      "expected_legal_parent_name": "Vadul-Rașcov",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701952"
-      ]
-    },
-    {
-      "legal_id": "7451",
-      "legal_name": "Valea lui Vlad",
-      "expected_legal_parent_id": "7449",
-      "expected_legal_parent_name": "Dumbrăvița",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303541"
-      ]
-    },
-    {
-      "legal_id": "4543",
-      "legal_name": "Valea Rădoaiei",
-      "expected_legal_parent_id": "4542",
-      "expected_legal_parent_name": "Nicolaevca",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701953"
-      ]
-    },
-    {
-      "legal_id": "9243",
-      "legal_name": "Veverița",
-      "expected_legal_parent_id": "9239",
-      "expected_legal_parent_name": "Hîrcești",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r21303539"
-      ]
-    },
-    {
-      "legal_id": "8331",
-      "legal_name": "Zahorna",
-      "expected_legal_parent_id": "8330",
-      "expected_legal_parent_name": "Dobrușa",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701957"
-      ]
-    },
-    {
-      "legal_id": "4534",
-      "legal_name": "Zarojeni",
-      "expected_legal_parent_id": "4533",
-      "expected_legal_parent_name": "Gura Căinarului",
-      "observed_distinct_parent_legal_ids": [],
-      "diagnostic_class": "cross_legal_parent_conflict",
-      "representation_count": 1,
-      "affected_representations": [
-        "osm-r20701938"
+        "osm-r1813306"
       ]
     }
   ],
@@ -27828,6 +25438,18 @@
       "result": "identity_parent_mismatch"
     },
     {
+      "legal_id": "1413",
+      "legal_name": "Berlinți",
+      "representative_osm_id": "osm-r19034092",
+      "expected_legal_parent_id": "1400",
+      "expected_legal_parent_name": "Briceni",
+      "resolved_distinct_parent_legal_id": null,
+      "resolved_distinct_parent_name": null,
+      "collapsed_same_identity_depth": 0,
+      "path": [],
+      "result": "identity_parent_not_resolved"
+    },
+    {
       "legal_id": "0142",
       "legal_name": "Bubuieci",
       "representative_osm_id": "osm-r1751286",
@@ -28008,6 +25630,18 @@
       "result": "identity_parent_mismatch"
     },
     {
+      "legal_id": "7162",
+      "legal_name": "Duruitoarea Nouă",
+      "representative_osm_id": "osm-r19045262",
+      "expected_legal_parent_id": "7100",
+      "expected_legal_parent_name": "Rîșcani",
+      "resolved_distinct_parent_legal_id": null,
+      "resolved_distinct_parent_name": null,
+      "collapsed_same_identity_depth": 0,
+      "path": [],
+      "result": "identity_parent_not_resolved"
+    },
+    {
       "legal_id": "0124",
       "legal_name": "Ghidighici",
       "representative_osm_id": "osm-r1768341",
@@ -28042,6 +25676,18 @@
         }
       ],
       "result": "identity_parent_mismatch"
+    },
+    {
+      "legal_id": "1428",
+      "legal_name": "Grimăncăuți",
+      "representative_osm_id": "osm-r19034104",
+      "expected_legal_parent_id": "1400",
+      "expected_legal_parent_name": "Briceni",
+      "resolved_distinct_parent_legal_id": null,
+      "resolved_distinct_parent_name": null,
+      "collapsed_same_identity_depth": 0,
+      "path": [],
+      "result": "identity_parent_not_resolved"
     },
     {
       "legal_id": "9255",
@@ -28188,18 +25834,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "4560",
-      "legal_name": "Alexandrovca",
-      "representative_osm_id": "osm-r20701933",
-      "expected_legal_parent_id": "4559",
-      "expected_legal_parent_name": "Trifănești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "5511",
       "legal_name": "Băcioi",
       "representative_osm_id": "osm-r18967382",
@@ -28223,78 +25857,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "4117",
-      "legal_name": "Bădragii Noi",
-      "representative_osm_id": "osm-r20701927",
-      "expected_legal_parent_id": "4100",
-      "expected_legal_parent_name": "Edineț",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6012",
-      "legal_name": "Bălăurești",
-      "representative_osm_id": "osm-r20701978",
-      "expected_legal_parent_id": "6000",
-      "expected_legal_parent_name": "Nisporeni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1415",
-      "legal_name": "Bezeda",
-      "representative_osm_id": "osm-r20701924",
-      "expected_legal_parent_id": "1414",
-      "expected_legal_parent_name": "Bogdănești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4538",
-      "legal_name": "Bezeni",
-      "representative_osm_id": "osm-r20701931",
-      "expected_legal_parent_id": "4537",
-      "expected_legal_parent_name": "Izvoare",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "7450",
-      "legal_name": "Bocancea-Schit",
-      "representative_osm_id": "osm-r21303540",
-      "expected_legal_parent_id": "7449",
-      "expected_legal_parent_name": "Dumbrăvița",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1414",
-      "legal_name": "Bogdănești",
-      "representative_osm_id": "osm-r20701925",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "8961",
       "legal_name": "Bondareuca",
       "representative_osm_id": "osm-r18967570",
@@ -28311,18 +25873,6 @@
         }
       ],
       "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "1012",
-      "legal_name": "Botnărești",
-      "representative_osm_id": "osm-r20701982",
-      "expected_legal_parent_id": "1000",
-      "expected_legal_parent_name": "Anenii Noi",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
     },
     {
       "legal_id": "0142",
@@ -28371,125 +25921,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "1417",
-      "legal_name": "Bulboaca",
-      "representative_osm_id": "osm-r20701923",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1928",
-      "legal_name": "Bursuc",
-      "representative_osm_id": "osm-r20701950",
-      "expected_legal_parent_id": "1927",
-      "expected_legal_parent_name": "Japca",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6021",
-      "legal_name": "Bursuc",
-      "representative_osm_id": "osm-r20701975",
-      "expected_legal_parent_id": "6000",
-      "expected_legal_parent_name": "Nisporeni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1418",
-      "legal_name": "Caracușenii Noi",
-      "representative_osm_id": "osm-r18967747",
-      "expected_legal_parent_id": "1413",
-      "expected_legal_parent_name": "Berlinți",
-      "resolved_distinct_parent_legal_id": "1400",
-      "resolved_distinct_parent_name": "Briceni",
-      "collapsed_same_identity_depth": 0,
-      "path": [
-        {
-          "id": "osm-r19034092",
-          "name": "Berlinți",
-          "legal_id": null
-        },
-        {
-          "id": "osm-r59002",
-          "name": "Raionul Briceni",
-          "legal_id": "1400"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "8514",
-      "legal_name": "Carahasani",
-      "representative_osm_id": "osm-r20701984",
-      "expected_legal_parent_id": "8500",
-      "expected_legal_parent_name": "Ștefan Vodă",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4315",
-      "legal_name": "Călinești",
-      "representative_osm_id": "osm-r20701967",
-      "expected_legal_parent_id": "4300",
-      "expected_legal_parent_name": "Fălești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4516",
-      "legal_name": "Cernița",
-      "representative_osm_id": "osm-r20701944",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "9617",
-      "legal_name": "Chioselia Rusă",
-      "representative_osm_id": "osm-r20701986",
-      "expected_legal_parent_id": "9600",
-      "expected_legal_parent_name": "Unitatea Teritorială Autonomă Găgăuzia",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4511",
-      "legal_name": "Chirilovca",
-      "representative_osm_id": "osm-r20701942",
-      "expected_legal_parent_id": "4510",
-      "expected_legal_parent_name": "Alexeevca",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "0152",
       "legal_name": "Ciorescu",
       "representative_osm_id": "osm-r18967240",
@@ -28511,42 +25942,6 @@
         }
       ],
       "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "7427",
-      "legal_name": "Ciuciuieni",
-      "representative_osm_id": "osm-r20701970",
-      "expected_legal_parent_id": "7400",
-      "expected_legal_parent_name": "Sîngerei",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4518",
-      "legal_name": "Ciutulești",
-      "representative_osm_id": "osm-r21303543",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "8316",
-      "legal_name": "Cobîlea",
-      "representative_osm_id": "osm-r21303528",
-      "expected_legal_parent_id": "8300",
-      "expected_legal_parent_name": "Șoldănești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
     },
     {
       "legal_id": "0131",
@@ -28618,42 +26013,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "5334",
-      "legal_name": "Costești",
-      "representative_osm_id": "osm-r20701980",
-      "expected_legal_parent_id": "5333",
-      "expected_legal_parent_name": "Ivanovca",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "8315",
-      "legal_name": "Cot",
-      "representative_osm_id": "osm-r21303531",
-      "expected_legal_parent_id": "8314",
-      "expected_legal_parent_name": "Climăuții de Jos",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1423",
-      "legal_name": "Coteala",
-      "representative_osm_id": "osm-r20701919",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "0151",
       "legal_name": "Cricova",
       "representative_osm_id": "osm-r18967527",
@@ -28675,18 +26034,6 @@
         }
       ],
       "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "6029",
-      "legal_name": "Cristești",
-      "representative_osm_id": "osm-r21303542",
-      "expected_legal_parent_id": "6000",
-      "expected_legal_parent_name": "Nisporeni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
     },
     {
       "legal_id": "0144",
@@ -28712,30 +26059,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "8330",
-      "legal_name": "Dobrușa",
-      "representative_osm_id": "osm-r20701959",
-      "expected_legal_parent_id": "8300",
-      "expected_legal_parent_name": "Șoldănești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4523",
-      "legal_name": "Domulgeni",
-      "representative_osm_id": "osm-r20701956",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "6432",
       "legal_name": "Donici",
       "representative_osm_id": "osm-r18967778",
@@ -28757,77 +26080,6 @@
         }
       ],
       "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "3129",
-      "legal_name": "Drăsliceni",
-      "representative_osm_id": "osm-r20725062",
-      "expected_legal_parent_id": "3100",
-      "expected_legal_parent_name": "Criuleni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "9240",
-      "legal_name": "Drujba",
-      "representative_osm_id": "osm-r21303527",
-      "expected_legal_parent_id": "9239",
-      "expected_legal_parent_name": "Hîrcești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "7449",
-      "legal_name": "Dumbrăvița",
-      "representative_osm_id": "osm-r21303533",
-      "expected_legal_parent_id": "7400",
-      "expected_legal_parent_name": "Sîngerei",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "7161",
-      "legal_name": "Dumeni",
-      "representative_osm_id": "osm-r18967535",
-      "expected_legal_parent_id": "7162",
-      "expected_legal_parent_name": "Duruitoarea Nouă",
-      "resolved_distinct_parent_legal_id": "7100",
-      "resolved_distinct_parent_name": "Rîșcani",
-      "collapsed_same_identity_depth": 0,
-      "path": [
-        {
-          "id": "osm-r19045262",
-          "name": "Duruitoarea Nouă",
-          "legal_id": null
-        },
-        {
-          "id": "osm-r1693908",
-          "name": "raionul Rîșcani",
-          "legal_id": "7100"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "4512",
-      "legal_name": "Dumitreni",
-      "representative_osm_id": "osm-r20701941",
-      "expected_legal_parent_id": "4510",
-      "expected_legal_parent_name": "Alexeevca",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
     },
     {
       "legal_id": "0121",
@@ -28871,54 +26123,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "4139",
-      "legal_name": "Fîntîna Albă",
-      "representative_osm_id": "osm-r20701930",
-      "expected_legal_parent_id": "4138",
-      "expected_legal_parent_name": "Parcova",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "7438",
-      "legal_name": "Flămînzeni",
-      "representative_osm_id": "osm-r20701969",
-      "expected_legal_parent_id": "7436",
-      "expected_legal_parent_name": "Coșcodeni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "5335",
-      "legal_name": "Frasin",
-      "representative_osm_id": "osm-r20701979",
-      "expected_legal_parent_id": "5333",
-      "expected_legal_parent_name": "Ivanovca",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4524",
-      "legal_name": "Frumușica",
-      "representative_osm_id": "osm-r21303536",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "0124",
       "legal_name": "Ghidighici",
       "representative_osm_id": "osm-r18967349",
@@ -28940,18 +26144,6 @@
         }
       ],
       "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "4332",
-      "legal_name": "Glinjeni",
-      "representative_osm_id": "osm-r21303544",
-      "expected_legal_parent_id": "4300",
-      "expected_legal_parent_name": "Fălești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
     },
     {
       "legal_id": "0155",
@@ -28977,324 +26169,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "1416",
-      "legal_name": "Grimești",
-      "representative_osm_id": "osm-r20701926",
-      "expected_legal_parent_id": "1414",
-      "expected_legal_parent_name": "Bogdănești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4532",
-      "legal_name": "Gvozdova",
-      "representative_osm_id": "osm-r20701943",
-      "expected_legal_parent_id": "4530",
-      "expected_legal_parent_name": "Gura Camencii",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "9239",
-      "legal_name": "Hîrcești",
-      "representative_osm_id": "osm-r21303530",
-      "expected_legal_parent_id": "9200",
-      "expected_legal_parent_name": "Ungheni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "9270",
-      "legal_name": "Hristoforovca",
-      "representative_osm_id": "osm-r18967315",
-      "expected_legal_parent_id": "9261",
-      "expected_legal_parent_name": "Pîrlița",
-      "resolved_distinct_parent_legal_id": "9233",
-      "resolved_distinct_parent_name": "Cornești",
-      "collapsed_same_identity_depth": 0,
-      "path": [
-        {
-          "id": "osm-r10624607",
-          "name": "Cornești",
-          "legal_id": "9233"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "4535",
-      "legal_name": "Iliciovca",
-      "representative_osm_id": "osm-r20701935",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4519",
-      "legal_name": "Ion Vodă",
-      "representative_osm_id": "osm-r20701954",
-      "expected_legal_parent_id": "4518",
-      "expected_legal_parent_name": "Ciutulești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6035",
-      "legal_name": "Iurceni",
-      "representative_osm_id": "osm-r20701976",
-      "expected_legal_parent_id": "6000",
-      "expected_legal_parent_name": "Nisporeni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "5333",
-      "legal_name": "Ivanovca",
-      "representative_osm_id": "osm-r20701981",
-      "expected_legal_parent_id": "5300",
-      "expected_legal_parent_name": "Hîncești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4343",
-      "legal_name": "Izvoare",
-      "representative_osm_id": "osm-r20701968",
-      "expected_legal_parent_id": "4300",
-      "expected_legal_parent_name": "Fălești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1927",
-      "legal_name": "Japca",
-      "representative_osm_id": "osm-r20701949",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "2138",
-      "legal_name": "Lărguța",
-      "representative_osm_id": "osm-r20701985",
-      "expected_legal_parent_id": "2100",
-      "expected_legal_parent_name": "Cantemir",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "9241",
-      "legal_name": "Leordoaia",
-      "representative_osm_id": "osm-r21303529",
-      "expected_legal_parent_id": "9239",
-      "expected_legal_parent_name": "Hîrcești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "3130",
-      "legal_name": "Logănești",
-      "representative_osm_id": "osm-r20725061",
-      "expected_legal_parent_id": "3129",
-      "expected_legal_parent_name": "Drăsliceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4536",
-      "legal_name": "Maiscoe",
-      "representative_osm_id": "osm-r20701936",
-      "expected_legal_parent_id": "4535",
-      "expected_legal_parent_name": "Iliciovca",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "2732",
-      "legal_name": "Marianca de Sus",
-      "representative_osm_id": "osm-r21303538",
-      "expected_legal_parent_id": "2731",
-      "expected_legal_parent_name": "Zaim",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4520",
-      "legal_name": "Mărinești",
-      "representative_osm_id": "osm-r20701955",
-      "expected_legal_parent_id": "4518",
-      "expected_legal_parent_name": "Ciutulești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1437",
-      "legal_name": "Medveja",
-      "representative_osm_id": "osm-r20701918",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6729",
-      "legal_name": "Mincenii de Jos",
-      "representative_osm_id": "osm-r20701964",
-      "expected_legal_parent_id": "6700",
-      "expected_legal_parent_name": "Rezina",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6730",
-      "legal_name": "Mincenii de Sus",
-      "representative_osm_id": "osm-r20701963",
-      "expected_legal_parent_id": "6729",
-      "expected_legal_parent_name": "Mincenii de Jos",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "8935",
-      "legal_name": "Mîndrești",
-      "representative_osm_id": "osm-r20701971",
-      "expected_legal_parent_id": "8900",
-      "expected_legal_parent_name": "Telenești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "9242",
-      "legal_name": "Mînzătești",
-      "representative_osm_id": "osm-r21303526",
-      "expected_legal_parent_id": "9239",
-      "expected_legal_parent_name": "Hîrcești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6418",
-      "legal_name": "Mîrzaci",
-      "representative_osm_id": "osm-r21303535",
-      "expected_legal_parent_id": "6419",
-      "expected_legal_parent_name": "Mîrzești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6419",
-      "legal_name": "Mîrzești",
-      "representative_osm_id": "osm-r21303534",
-      "expected_legal_parent_id": "6400",
-      "expected_legal_parent_name": "Orhei",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6036",
-      "legal_name": "Mîrzoaia",
-      "representative_osm_id": "osm-r20701977",
-      "expected_legal_parent_id": "6035",
-      "expected_legal_parent_name": "Iurceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "3838",
-      "legal_name": "Molovata",
-      "representative_osm_id": "osm-r20701973",
-      "expected_legal_parent_id": "3800",
-      "expected_legal_parent_name": "Dubăsari",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1929",
-      "legal_name": "Năpadova",
-      "representative_osm_id": "osm-r20701947",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "9255",
       "legal_name": "Negurenii Vechi",
       "representative_osm_id": "osm-r18967752",
@@ -29316,42 +26190,6 @@
         }
       ],
       "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "6731",
-      "legal_name": "Otac",
-      "representative_osm_id": "osm-r20701965",
-      "expected_legal_parent_id": "6700",
-      "expected_legal_parent_name": "Rezina",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4138",
-      "legal_name": "Parcova",
-      "representative_osm_id": "osm-r20701929",
-      "expected_legal_parent_id": "4100",
-      "expected_legal_parent_name": "Edineț",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1441",
-      "legal_name": "Pererita",
-      "representative_osm_id": "osm-r20701921",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
     },
     {
       "legal_id": "6453",
@@ -29377,107 +26215,11 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "6739",
-      "legal_name": "Pripiceni-Curchi",
-      "representative_osm_id": "osm-r20701961",
-      "expected_legal_parent_id": "6738",
-      "expected_legal_parent_name": "Pripiceni-Răzeși",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6738",
-      "legal_name": "Pripiceni-Răzeși",
-      "representative_osm_id": "osm-r20701960",
-      "expected_legal_parent_id": "6700",
-      "expected_legal_parent_name": "Rezina",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4550",
-      "legal_name": "Putinești",
-      "representative_osm_id": "osm-r20701937",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4513",
-      "legal_name": "Rădulenii Noi",
-      "representative_osm_id": "osm-r20701939",
-      "expected_legal_parent_id": "4510",
-      "expected_legal_parent_name": "Alexeevca",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4551",
-      "legal_name": "Rădulenii Vechi",
-      "representative_osm_id": "osm-r20701940",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "8329",
-      "legal_name": "Recești",
-      "representative_osm_id": "osm-r20701958",
-      "expected_legal_parent_id": "8330",
-      "expected_legal_parent_name": "Dobrușa",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1013",
-      "legal_name": "Salcia",
-      "representative_osm_id": "osm-r20701983",
-      "expected_legal_parent_id": "1012",
-      "expected_legal_parent_name": "Botnărești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1939",
-      "legal_name": "Sănătăuca",
-      "representative_osm_id": "osm-r20701948",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4539",
-      "legal_name": "Scăieni",
-      "representative_osm_id": "osm-r20701932",
-      "expected_legal_parent_id": "4537",
-      "expected_legal_parent_name": "Izvoare",
+      "legal_id": "0110",
+      "legal_name": "Sectorul Botanica",
+      "representative_osm_id": "osm-r1813306",
+      "expected_legal_parent_id": "0100",
+      "expected_legal_parent_name": "Chișinău",
       "resolved_distinct_parent_legal_id": null,
       "resolved_distinct_parent_name": null,
       "collapsed_same_identity_depth": 0,
@@ -29508,42 +26250,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "1438",
-      "legal_name": "Slobozia-Medveja",
-      "representative_osm_id": "osm-r20701917",
-      "expected_legal_parent_id": "1437",
-      "expected_legal_parent_name": "Medveja",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1443",
-      "legal_name": "Slobozia-Șirăuți",
-      "representative_osm_id": "osm-r20701920",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "8339",
-      "legal_name": "Socola",
-      "representative_osm_id": "osm-r20701952",
-      "expected_legal_parent_id": "8338",
-      "expected_legal_parent_name": "Vadul-Rașcov",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "3153",
       "legal_name": "Stăuceni",
       "representative_osm_id": "osm-r18966966",
@@ -29567,42 +26273,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "1444",
-      "legal_name": "Tabani",
-      "representative_osm_id": "osm-r20701922",
-      "expected_legal_parent_id": "1400",
-      "expected_legal_parent_name": "Briceni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "8038",
-      "legal_name": "Tătărești",
-      "representative_osm_id": "osm-r20701974",
-      "expected_legal_parent_id": "8000",
-      "expected_legal_parent_name": "Strășeni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1942",
-      "legal_name": "Temeleuți",
-      "representative_osm_id": "osm-r20701945",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "0146",
       "legal_name": "Tohatin",
       "representative_osm_id": "osm-r18967916",
@@ -29624,30 +26294,6 @@
         }
       ],
       "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "4559",
-      "legal_name": "Trifănești",
-      "representative_osm_id": "osm-r20701934",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "6746",
-      "legal_name": "Trifești",
-      "representative_osm_id": "osm-r20701962",
-      "expected_legal_parent_id": "6700",
-      "expected_legal_parent_name": "Rezina",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
     },
     {
       "legal_id": "8039",
@@ -29696,42 +26342,6 @@
       "result": "identity_parent_mismatch"
     },
     {
-      "legal_id": "8338",
-      "legal_name": "Vadul-Rașcov",
-      "representative_osm_id": "osm-r20701951",
-      "expected_legal_parent_id": "8300",
-      "expected_legal_parent_name": "Șoldănești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "7451",
-      "legal_name": "Valea lui Vlad",
-      "representative_osm_id": "osm-r21303541",
-      "expected_legal_parent_id": "7449",
-      "expected_legal_parent_name": "Dumbrăvița",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4543",
-      "legal_name": "Valea Rădoaiei",
-      "representative_osm_id": "osm-r20701953",
-      "expected_legal_parent_id": "4542",
-      "expected_legal_parent_name": "Nicolaevca",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
       "legal_id": "0122",
       "legal_name": "Vatra",
       "representative_osm_id": "osm-r18968027",
@@ -29753,90 +26363,6 @@
         }
       ],
       "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "8958",
-      "legal_name": "Văsieni",
-      "representative_osm_id": "osm-r20701972",
-      "expected_legal_parent_id": "8900",
-      "expected_legal_parent_name": "Telenești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "9243",
-      "legal_name": "Veverița",
-      "representative_osm_id": "osm-r21303539",
-      "expected_legal_parent_id": "9239",
-      "expected_legal_parent_name": "Hîrcești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "8042",
-      "legal_name": "Vorniceni",
-      "representative_osm_id": "osm-r21303532",
-      "expected_legal_parent_id": "8000",
-      "expected_legal_parent_name": "Strășeni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "8331",
-      "legal_name": "Zahorna",
-      "representative_osm_id": "osm-r20701957",
-      "expected_legal_parent_id": "8330",
-      "expected_legal_parent_name": "Dobrușa",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "2731",
-      "legal_name": "Zaim",
-      "representative_osm_id": "osm-r21303537",
-      "expected_legal_parent_id": "2700",
-      "expected_legal_parent_name": "Căușeni",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "4534",
-      "legal_name": "Zarojeni",
-      "representative_osm_id": "osm-r20701938",
-      "expected_legal_parent_id": "4533",
-      "expected_legal_parent_name": "Gura Căinarului",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
-    },
-    {
-      "legal_id": "1950",
-      "legal_name": "Zăluceni",
-      "representative_osm_id": "osm-r20701946",
-      "expected_legal_parent_id": "4500",
-      "expected_legal_parent_name": "Florești",
-      "resolved_distinct_parent_legal_id": null,
-      "resolved_distinct_parent_name": null,
-      "collapsed_same_identity_depth": 0,
-      "path": [],
-      "result": "identity_parent_not_resolved"
     }
   ]
 }

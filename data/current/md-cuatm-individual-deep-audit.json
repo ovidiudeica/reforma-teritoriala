@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-09-26T08:46:26.534Z",
+  "schema_version": 2,
+  "generated_at": "2026-09-26T09:15:43.921Z",
   "jurisdiction": "MD",
   "scope": "Individual audit of unresolved relations 6879649 and 12104636",
   "policy": "Diagnostic only. OSM history/geometry and official CUATM structure are kept separate; no reconciliation, deletion or reclassification is performed automatically.",
@@ -2109,16 +2109,16 @@
         ]
       },
       "review": {
-        "identity_status": "administrative_semantics_review",
+        "identity_status": "chitcani_de_facto_administrative_representation",
         "automatic_reconciliation": false,
-        "reason": "Legacy/de-facto terminology must not be equated automatically with a current CUATM identity."
+        "reason": "Chițcani identity is resolved; the OSM boundary is retained as a de-facto administrative representation distinct from authoritative CUATM/legal geometry."
       }
     },
     {
       "relation_id": 12104636,
       "imported_reconciliation": {
         "id": "osm-r12104636",
-        "name": null,
+        "name": "Întovărășire Pomilegumicolă (neautorizată)",
         "cuatm_key": null,
         "legal_id": null,
         "legal_name": null,
@@ -2150,21 +2150,14 @@
             "admin_level": "9",
             "boundary": "administrative",
             "landuse": "allotments",
-            "name": "Întovărășire Pomilegumicolă (neautorizată)",
-            "name:prefix": "Întovărășirea pomicolă",
-            "name:suffix:en": "Fruit growing association",
-            "official_name": "Întovărășirea pomicolă „-”",
-            "place": "allotments",
-            "ref:rson:idno": "0",
-            "short_name": "-",
-            "type": "multipolygon"
+            "type": "boundary"
           },
           "relations": [],
           "meta": {},
           "catalog_id": "osm-r12104636",
           "parent_id": "osm-r19090918",
           "jurisdiction": "MD",
-          "entity_type": "non_administrative_or_auxiliary_area",
+          "entity_type": "subdivision_or_component_area",
           "classification_confidence": "low"
         }
       },

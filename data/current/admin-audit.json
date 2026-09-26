@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-26T08:45:45.805Z",
-  "source_generated_at": "2026-09-26T08:45:45.342Z",
-  "entity_count": 5733,
+  "generated_at": "2026-09-26T09:14:49.845Z",
+  "source_generated_at": "2026-09-26T09:14:49.457Z",
+  "entity_count": 5823,
   "countries": {
     "RO": {
       "feature_count": 3233,
@@ -111,42 +111,42 @@
       ]
     },
     "MD": {
-      "feature_count": 2500,
-      "review_required": 261,
+      "feature_count": 2590,
+      "review_required": 266,
       "distributions": {
         "admin_level": {
           "4": 37,
-          "8": 985,
-          "9": 1478
+          "8": 982,
+          "9": 1571
         },
         "place": {
-          "municipality": 412,
+          "municipality": 410,
           "district": 32,
-          "∅": 143,
-          "village": 1676,
+          "∅": 144,
+          "village": 1763,
           "region": 2,
           "city": 24,
           "town": 93,
-          "allotments": 118
+          "allotments": 122
         },
         "designation": {
-          "∅": 2500
+          "∅": 2590
         },
         "osm_type": {
-          "boundary": 2453,
-          "multipolygon": 47
+          "boundary": 2536,
+          "multipolygon": 54
         },
         "entity_type": {
           "level_2_municipality": 3,
           "district": 32,
-          "level_1_uat": 550,
-          "commune_or_independent_village_uat": 373,
+          "level_1_uat": 548,
+          "commune_or_independent_village_uat": 372,
           "special_territorial_unit": 2,
           "municipality_or_city_uat": 14,
           "town_uat": 48,
-          "subdivision_or_component_area": 2,
-          "non_administrative_or_auxiliary_area": 118,
-          "component_locality": 1358
+          "non_administrative_or_auxiliary_area": 122,
+          "subdivision_or_component_area": 3,
+          "component_locality": 1446
         }
       },
       "combinations": [
@@ -156,7 +156,7 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "component_locality",
-          "count": 1303
+          "count": 1391
         },
         {
           "admin_level": "8",
@@ -164,7 +164,7 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "level_1_uat",
-          "count": 409
+          "count": 407
         },
         {
           "admin_level": "8",
@@ -172,7 +172,7 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "commune_or_independent_village_uat",
-          "count": 373
+          "count": 372
         },
         {
           "admin_level": "8",
@@ -188,7 +188,15 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "non_administrative_or_auxiliary_area",
-          "count": 72
+          "count": 69
+        },
+        {
+          "admin_level": "9",
+          "place": "allotments",
+          "designation": "∅",
+          "osm_type": "multipolygon",
+          "entity_type": "non_administrative_or_auxiliary_area",
+          "count": 53
         },
         {
           "admin_level": "8",
@@ -197,14 +205,6 @@
           "osm_type": "boundary",
           "entity_type": "town_uat",
           "count": 48
-        },
-        {
-          "admin_level": "9",
-          "place": "allotments",
-          "designation": "∅",
-          "osm_type": "multipolygon",
-          "entity_type": "non_administrative_or_auxiliary_area",
-          "count": 46
         },
         {
           "admin_level": "9",
@@ -260,7 +260,7 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "subdivision_or_component_area",
-          "count": 1
+          "count": 2
         },
         {
           "admin_level": "9",
@@ -296,10 +296,10 @@
       "issue_count": 1
     },
     "MD": {
-      "checked": 2500,
+      "checked": 2590,
       "root_parent": 37,
       "unexpected_root": 0,
-      "entity_parent": 2463,
+      "entity_parent": 2553,
       "null_parent": 0,
       "missing_parent": 0,
       "parent_wrong_jurisdiction": 0,

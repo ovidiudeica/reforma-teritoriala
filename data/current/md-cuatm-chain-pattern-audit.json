@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-09-26T08:45:52.693Z",
+  "generated_at": "2026-09-26T09:14:55.770Z",
   "jurisdiction": "MD",
   "scope": "same_identity_parent_child_chain",
   "policy": "Diagnostic only; no OSM entity or CUATM reconciliation is altered.",
-  "chain_group_count": 790,
+  "chain_group_count": 787,
   "summary": {
     "by_family": {
       "special_chain": 3,
-      "uat8_to_component_locality9": 787
+      "uat8_to_component_locality9": 784
     },
     "normal_family_subtypes": {
       "town": 45,
-      "village": 733,
+      "village": 730,
       "city": 9
     },
     "by_admin_level_edge": {
       "4>8": 3,
-      "8>9": 788
+      "8>9": 785
     },
-    "normal_family_count": 787,
+    "normal_family_count": 784,
     "exception_count": 3
   },
   "exceptions": [
@@ -1795,38 +1795,6 @@
       ]
     },
     {
-      "legal_id": "1413",
-      "legal_name": "Berlinți",
-      "count": 2,
-      "family": "uat8_to_component_locality9",
-      "subtype": "village",
-      "level_pairs": [
-        "8>9"
-      ],
-      "edges": [
-        {
-          "child": {
-            "id": "osm-r18967833",
-            "name": "Berlinți",
-            "admin_level": 9,
-            "place": "village",
-            "name_prefix": "satul",
-            "designation": null,
-            "relation_type": "boundary"
-          },
-          "parent": {
-            "id": "osm-r19034098",
-            "name": "Berlinți",
-            "admin_level": 8,
-            "place": "municipality",
-            "name_prefix": "comuna",
-            "designation": null,
-            "relation_type": "boundary"
-          }
-        }
-      ]
-    },
-    {
       "legal_id": "1419",
       "legal_name": "Caracușenii Vechi",
       "count": 2,
@@ -2009,38 +1977,6 @@
           "parent": {
             "id": "osm-r19034091",
             "name": "Drepcăuți",
-            "admin_level": 8,
-            "place": "village",
-            "name_prefix": "satul",
-            "designation": null,
-            "relation_type": "boundary"
-          }
-        }
-      ]
-    },
-    {
-      "legal_id": "1428",
-      "legal_name": "Grimăncăuți",
-      "count": 2,
-      "family": "uat8_to_component_locality9",
-      "subtype": "village",
-      "level_pairs": [
-        "8>9"
-      ],
-      "edges": [
-        {
-          "child": {
-            "id": "osm-r18967716",
-            "name": "Grimăncăuți",
-            "admin_level": 9,
-            "place": "village",
-            "name_prefix": "satul",
-            "designation": null,
-            "relation_type": "boundary"
-          },
-          "parent": {
-            "id": "osm-r19034087",
-            "name": "Grimăncăuți",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
@@ -18329,38 +18265,6 @@
           "parent": {
             "id": "osm-r19045246",
             "name": "Vasileuți",
-            "admin_level": 8,
-            "place": "municipality",
-            "name_prefix": "comuna",
-            "designation": null,
-            "relation_type": "boundary"
-          }
-        }
-      ]
-    },
-    {
-      "legal_id": "7162",
-      "legal_name": "Duruitoarea Nouă",
-      "count": 2,
-      "family": "uat8_to_component_locality9",
-      "subtype": "village",
-      "level_pairs": [
-        "8>9"
-      ],
-      "edges": [
-        {
-          "child": {
-            "id": "osm-r18967636",
-            "name": "Duruitoarea Nouă",
-            "admin_level": 9,
-            "place": "village",
-            "name_prefix": "satul",
-            "designation": null,
-            "relation_type": "boundary"
-          },
-          "parent": {
-            "id": "osm-r19045259",
-            "name": "Duruitoarea Nouă",
             "admin_level": 8,
             "place": "municipality",
             "name_prefix": "comuna",

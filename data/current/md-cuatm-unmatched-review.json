@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-26T08:46:31.232Z",
+  "generated_at": "2026-09-26T09:15:48.604Z",
   "jurisdiction": "MD",
   "scope": "Unreconciled general catalog entities only; resolved edge cases are excluded.",
-  "count": 1,
+  "count": 2,
   "by_reason": {
-    "name_absent_from_official_snapshot": 1
+    "name_absent_from_official_snapshot": 2
   },
   "groups": {
     "name_absent_from_official_snapshot": {
-      "count": 1,
+      "count": 2,
       "items": [
         {
           "id": "osm-r6879649",
@@ -30,6 +30,30 @@
           "osm_parent_name": "Raionul Căușeni",
           "verified_parent_legal_id": "2700",
           "verified_parent_legal_name": "Căușeni",
+          "raw_cuatm_unique_id": null,
+          "raw_cuatm_code": null,
+          "normalized_explicit_keys": []
+        },
+        {
+          "id": "osm-r12104636",
+          "name": null,
+          "cuatm_key": null,
+          "legal_id": null,
+          "legal_name": null,
+          "status_code": null,
+          "legal_source": "BNS CUATM",
+          "match_method": null,
+          "confidence": null,
+          "unmatched_reason": "name_absent_from_official_snapshot",
+          "name_candidate_count": 0,
+          "parent_official_code": "3136",
+          "osm_relation_id": 12104636,
+          "osm_admin_level": 9,
+          "osm_place": null,
+          "osm_parent_id": "osm-r19090918",
+          "osm_parent_name": "Hrușova",
+          "verified_parent_legal_id": "3136",
+          "verified_parent_legal_name": "Hrușova",
           "raw_cuatm_unique_id": null,
           "raw_cuatm_code": null,
           "normalized_explicit_keys": []

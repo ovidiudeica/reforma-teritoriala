@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T09:15:48.875Z",
+  "jurisdiction": "MD",
+  "status": "PASS",
+  "policy": "Release gate permits only explicitly documented exception classes and the sole unresolved identity relation 12104636. New exception classes or identities fail the gate.",
+  "checks": [
+    {
+      "name": "exactly_one_documented_unresolved_identity",
+      "ok": true,
+      "detail": {
+        "queue": [
+          {
+            "osm_relation_id": 12104636,
+            "osm_id": "osm-r12104636",
+            "verified_parent_legal_id": "3136",
+            "reason": "No positive identity evidence."
+          }
+        ]
+      }
+    },
+    {
+      "name": "chitcani_semantic_classification",
+      "ok": true,
+      "detail": {
+        "review_status": "resolved_semantic_classification",
+        "classification_action": "chitcani_de_facto_administrative_representation"
+      }
+    },
+    {
+      "name": "no_new_duplicate_identity_classes",
+      "ok": true,
+      "detail": {
+        "unknownClasses": []
+      }
+    },
+    {
+      "name": "no_new_unique_identity_issue_classes",
+      "ok": true,
+      "detail": {
+        "issueClasses": [
+          "chisinau_sector_geometry_gap",
+          "cross_legal_parent_conflict",
+          "verified_legal_parent_geometry_conflict"
+        ]
+      }
+    },
+    {
+      "name": "unmatched_does_not_introduce_unknown_ids",
+      "ok": true,
+      "detail": {
+        "unresolved_ids": []
+      }
+    },
+    {
+      "name": "all_md_features_have_polygonal_geometry",
+      "ok": true,
+      "detail": {
+        "bad_geometry_ids": []
+      }
+    },
+    {
+      "name": "no_unreviewed_edge_cases",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    }
+  ],
+  "failures": []
+}
