@@ -1,24 +1,25 @@
 {
-  "generated_at": "2026-09-26T08:08:35.799Z",
+  "generated_at": "2026-09-26T08:13:18.101Z",
   "jurisdiction": "MD",
   "scope": "same_identity_parent_child_chain",
   "policy": "Diagnostic only; no OSM entity or CUATM reconciliation is altered.",
-  "chain_group_count": 786,
+  "chain_group_count": 842,
   "summary": {
     "by_family": {
       "special_chain": 3,
-      "uat8_to_component_locality9": 783
+      "uat8_to_component_locality9": 839
     },
     "normal_family_subtypes": {
       "town": 45,
-      "village": 729,
+      "village": 784,
+      "tagging_other": 1,
       "city": 9
     },
     "by_admin_level_edge": {
       "4>8": 3,
-      "8>9": 784
+      "8>9": 840
     },
-    "normal_family_count": 783,
+    "normal_family_count": 839,
     "exception_count": 3
   },
   "exceptions": [
@@ -796,6 +797,38 @@
             "admin_level": 8,
             "place": null,
             "name_prefix": null,
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1012",
+      "legal_name": "Botnărești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701982",
+            "name": "Botnărești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19090936",
+            "name": "Botnărești",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -1795,6 +1828,102 @@
       ]
     },
     {
+      "legal_id": "1413",
+      "legal_name": "Berlinți",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r18967833",
+            "name": "Berlinți",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034098",
+            "name": "Berlinți",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1414",
+      "legal_name": "Bogdănești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701925",
+            "name": "Bogdănești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034086",
+            "name": "Bogdănești",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1417",
+      "legal_name": "Bulboaca",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701923",
+            "name": "Bulboaca",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034082",
+            "name": "Bulboaca",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "1419",
       "legal_name": "Caracușenii Vechi",
       "count": 2,
@@ -1891,6 +2020,38 @@
       ]
     },
     {
+      "legal_id": "1423",
+      "legal_name": "Coteala",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "tagging_other",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701919",
+            "name": "Coteala",
+            "admin_level": 9,
+            "place": null,
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034084",
+            "name": "Coteala",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "1424",
       "legal_name": "Cotiujeni",
       "count": 2,
@@ -1977,6 +2138,38 @@
           "parent": {
             "id": "osm-r19034091",
             "name": "Drepcăuți",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1428",
+      "legal_name": "Grimăncăuți",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r18967716",
+            "name": "Grimăncăuți",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034087",
+            "name": "Grimăncăuți",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
@@ -2115,6 +2308,38 @@
       ]
     },
     {
+      "legal_id": "1437",
+      "legal_name": "Medveja",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701918",
+            "name": "Medveja",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034077",
+            "name": "Medveja",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "1439",
       "legal_name": "Mihăileni",
       "count": 2,
@@ -2140,6 +2365,102 @@
             "admin_level": 8,
             "place": "municipality",
             "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1441",
+      "legal_name": "Pererita",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701921",
+            "name": "Pererîta",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034102",
+            "name": "Pererita",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1443",
+      "legal_name": "Slobozia-Șirăuți",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701920",
+            "name": "Slobozia-Șirăuți",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034088",
+            "name": "Slobozia-Șirăuți",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1444",
+      "legal_name": "Tabani",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701922",
+            "name": "Tabani",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19034085",
+            "name": "Tabani",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -3043,6 +3364,70 @@
       ]
     },
     {
+      "legal_id": "1927",
+      "legal_name": "Japca",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701949",
+            "name": "Japca",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072239",
+            "name": "Japca",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1929",
+      "legal_name": "Năpadova",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701947",
+            "name": "Napadova",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072258",
+            "name": "Năpadova",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "1930",
       "legal_name": "Nimereuca",
       "count": 2,
@@ -3068,6 +3453,70 @@
             "admin_level": 8,
             "place": "municipality",
             "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1939",
+      "legal_name": "Sănătăuca",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701948",
+            "name": "Sănătăuca",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072264",
+            "name": "Sănătăuca",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1942",
+      "legal_name": "Temeleuți",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701945",
+            "name": "Temeleuți",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072266",
+            "name": "Temeleuți",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -3161,6 +3610,38 @@
           "parent": {
             "id": "osm-r19072272",
             "name": "Vertiujeni",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "1950",
+      "legal_name": "Zăluceni",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701946",
+            "name": "Zăluceni",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072253",
+            "name": "Zăluceni",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
@@ -3609,6 +4090,38 @@
           "parent": {
             "id": "osm-r19114020",
             "name": "Haragîș",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "2138",
+      "legal_name": "Lărguța",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701985",
+            "name": "Lărguța",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19114021",
+            "name": "Lărguța",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
@@ -5731,6 +6244,38 @@
       ]
     },
     {
+      "legal_id": "2731",
+      "legal_name": "Zaim",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303537",
+            "name": "Zaim",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r12462198",
+            "name": "Zaim",
+            "admin_level": 8,
+            "place": null,
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "2901",
       "legal_name": "Cimișlia",
       "count": 2,
@@ -6620,6 +7165,38 @@
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "3129",
+      "legal_name": "Drăsliceni",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20725062",
+            "name": "Drăsliceni",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19090922",
+            "name": "Drăsliceni",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -8707,6 +9284,38 @@
       ]
     },
     {
+      "legal_id": "3838",
+      "legal_name": "Molovata",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701973",
+            "name": "Molovata",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19090942",
+            "name": "Molovata",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "3841",
       "legal_name": "Oxentea",
       "count": 2,
@@ -8953,6 +9562,38 @@
           "parent": {
             "id": "osm-r19038977",
             "name": "Brînzeni",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4117",
+      "legal_name": "Bădragii Noi",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701927",
+            "name": "Bădragii Noi",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19038970",
+            "name": "Bădragii Noi",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
@@ -9379,6 +10020,38 @@
       ]
     },
     {
+      "legal_id": "4138",
+      "legal_name": "Parcova",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701929",
+            "name": "Parcova",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19038980",
+            "name": "Parcova",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "4140",
       "legal_name": "Rotunda",
       "count": 2,
@@ -9795,6 +10468,38 @@
       ]
     },
     {
+      "legal_id": "4315",
+      "legal_name": "Călinești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701967",
+            "name": "Călinești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19314571",
+            "name": "Călinești",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "4319",
       "legal_name": "Călugăr",
       "count": 2,
@@ -9916,6 +10621,38 @@
             "admin_level": 8,
             "place": null,
             "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4332",
+      "legal_name": "Glinjeni",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303544",
+            "name": "Glinjeni",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r9357284",
+            "name": "Glinjeni",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "satul",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -10076,6 +10813,38 @@
             "admin_level": 8,
             "place": null,
             "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4343",
+      "legal_name": "Izvoare",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701968",
+            "name": "Izvoare",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r1692449",
+            "name": "Izvoare",
+            "admin_level": 8,
+            "place": null,
+            "name_prefix": null,
             "designation": null,
             "relation_type": "boundary"
           }
@@ -10268,6 +11037,38 @@
             "admin_level": 8,
             "place": null,
             "name_prefix": null,
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4356",
+      "legal_name": "Pietrosu",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20690338",
+            "name": "Pietrosu",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r9192105",
+            "name": "Pietrosu",
+            "admin_level": 8,
+            "place": null,
+            "name_prefix": "comuna",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -10755,6 +11556,38 @@
       ]
     },
     {
+      "legal_id": "4516",
+      "legal_name": "Cernița",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701944",
+            "name": "Cernița",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072251",
+            "name": "Cernița",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "4517",
       "legal_name": "Ciripcău",
       "count": 2,
@@ -10787,6 +11620,38 @@
       ]
     },
     {
+      "legal_id": "4518",
+      "legal_name": "Ciutulești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303543",
+            "name": "Ciutulești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072262",
+            "name": "Ciutulești",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "4522",
       "legal_name": "Coșernița",
       "count": 2,
@@ -10812,6 +11677,70 @@
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4523",
+      "legal_name": "Domulgeni",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701956",
+            "name": "Domulgeni",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072237",
+            "name": "Domulgeni",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4524",
+      "legal_name": "Frumușica",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303536",
+            "name": "Frumușica",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072274",
+            "name": "Frumușica",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -10873,6 +11802,38 @@
           "parent": {
             "id": "osm-r19072247",
             "name": "Gura Camencii",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4535",
+      "legal_name": "Iliciovca",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701935",
+            "name": "Iliciovca",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072269",
+            "name": "Iliciovca",
             "admin_level": 8,
             "place": "municipality",
             "name_prefix": "comuna",
@@ -11043,6 +12004,70 @@
       ]
     },
     {
+      "legal_id": "4550",
+      "legal_name": "Putinești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701937",
+            "name": "Putinești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072244",
+            "name": "Putinești",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4551",
+      "legal_name": "Rădulenii Vechi",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701940",
+            "name": "Rădulenii Vechi",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072246",
+            "name": "Rădulenii Vechi",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "4552",
       "legal_name": "Roșietici",
       "count": 2,
@@ -11097,6 +12122,38 @@
           "parent": {
             "id": "osm-r19072271",
             "name": "Ștefănești",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "4559",
+      "legal_name": "Trifănești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701934",
+            "name": "Trifănești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19072248",
+            "name": "Trifănești",
             "admin_level": 8,
             "place": "municipality",
             "name_prefix": "comuna",
@@ -12252,6 +13309,38 @@
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "5333",
+      "legal_name": "Ivanovca",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701981",
+            "name": "Ivanovca",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19110252",
+            "name": "Ivanovca",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -14275,6 +15364,38 @@
       ]
     },
     {
+      "legal_id": "6012",
+      "legal_name": "Bălăurești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701978",
+            "name": "Bălăurești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19105122",
+            "name": "Bălăurești",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "6013",
       "legal_name": "Bărboieni",
       "count": 2,
@@ -14396,6 +15517,38 @@
             "admin_level": 8,
             "place": "municipality",
             "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "6021",
+      "legal_name": "Bursuc",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701975",
+            "name": "Bursuc",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19105114",
+            "name": "Bursuc",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -14563,6 +15716,38 @@
       ]
     },
     {
+      "legal_id": "6029",
+      "legal_name": "Cristești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303542",
+            "name": "Cristești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19105121",
+            "name": "Cristești",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "6030",
       "legal_name": "Dolna",
       "count": 2,
@@ -14652,6 +15837,38 @@
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "6035",
+      "legal_name": "Iurceni",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701976",
+            "name": "Iurceni",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19105107",
+            "name": "Iurceni",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -15836,6 +17053,38 @@
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "6419",
+      "legal_name": "Mîrzești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303534",
+            "name": "Mîrzești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19082498",
+            "name": "Mîrzești",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -17155,6 +18404,70 @@
       ]
     },
     {
+      "legal_id": "6729",
+      "legal_name": "Mincenii de Jos",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701964",
+            "name": "Mincenii de Jos",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19080866",
+            "name": "Mincenii de Jos",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "6731",
+      "legal_name": "Otac",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701965",
+            "name": "Otac",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19080847",
+            "name": "Otac",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "6732",
       "legal_name": "Păpăuți",
       "count": 2,
@@ -17283,6 +18596,38 @@
       ]
     },
     {
+      "legal_id": "6738",
+      "legal_name": "Pripiceni-Răzeși",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701960",
+            "name": "Pripiceni-Răzeși",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19080869",
+            "name": "Pripiceni-Răzeși",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "6740",
       "legal_name": "Saharna Nouă",
       "count": 2,
@@ -17372,6 +18717,38 @@
             "admin_level": 8,
             "place": "municipality",
             "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "6746",
+      "legal_name": "Trifești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701962",
+            "name": "Trifești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19080860",
+            "name": "Trifești",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
             "designation": null,
             "relation_type": "boundary"
           }
@@ -18243,6 +19620,38 @@
       ]
     },
     {
+      "legal_id": "7162",
+      "legal_name": "Duruitoarea Nouă",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r18967636",
+            "name": "Duruitoarea Nouă",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19045259",
+            "name": "Duruitoarea Nouă",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "7163",
       "legal_name": "Zăicani",
       "count": 2,
@@ -18531,6 +19940,38 @@
       ]
     },
     {
+      "legal_id": "7427",
+      "legal_name": "Ciuciuieni",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701970",
+            "name": "Ciuciuieni",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19076869",
+            "name": "Ciuciuieni",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "7429",
       "legal_name": "Copăceni",
       "count": 2,
@@ -18649,6 +20090,38 @@
           "parent": {
             "id": "osm-r19076875",
             "name": "Dobrogea Veche",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "7449",
+      "legal_name": "Dumbrăvița",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303533",
+            "name": "Dumbrăvița",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19076872",
+            "name": "Dumbrăvița",
             "admin_level": 8,
             "place": "municipality",
             "name_prefix": "comuna",
@@ -20419,6 +21892,38 @@
       ]
     },
     {
+      "legal_id": "8038",
+      "legal_name": "Tătărești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701974",
+            "name": "Tătărești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19100176",
+            "name": "Tătărești",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "8039",
       "legal_name": "Trușeni",
       "count": 2,
@@ -20473,6 +21978,38 @@
           "parent": {
             "id": "osm-r19100167",
             "name": "Țigănești",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "8042",
+      "legal_name": "Vorniceni",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303532",
+            "name": "Vorniceni",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19100180",
+            "name": "Vorniceni",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
@@ -20601,6 +22138,38 @@
           "parent": {
             "id": "osm-r19080667",
             "name": "Chipeșca",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "8316",
+      "legal_name": "Cobîlea",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303528",
+            "name": "Cobîlea",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19080658",
+            "name": "Cobîlea",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
@@ -20963,6 +22532,38 @@
       ]
     },
     {
+      "legal_id": "8330",
+      "legal_name": "Dobrușa",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701959",
+            "name": "Dobrușa",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19080651",
+            "name": "Dobrușa",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "8332",
       "legal_name": "Rogojeni",
       "count": 2,
@@ -21123,6 +22724,38 @@
       ]
     },
     {
+      "legal_id": "8338",
+      "legal_name": "Vadul-Rașcov",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701951",
+            "name": "Vadul-Rașcov",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19080663",
+            "name": "Vadul-Rașcov",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "8501",
       "legal_name": "Ștefan Vodă",
       "count": 2,
@@ -21243,6 +22876,38 @@
             "name": "Brezoaia",
             "admin_level": 8,
             "place": "village",
+            "name_prefix": null,
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "8514",
+      "legal_name": "Carahasani",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701984",
+            "name": "Carahasani",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r1706625",
+            "name": "Carahasani",
+            "admin_level": 8,
+            "place": null,
             "name_prefix": null,
             "designation": null,
             "relation_type": "boundary"
@@ -22787,6 +24452,38 @@
       ]
     },
     {
+      "legal_id": "8935",
+      "legal_name": "Mîndrești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701971",
+            "name": "Mîndrești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19082850",
+            "name": "Mîndrești",
+            "admin_level": 8,
+            "place": "municipality",
+            "name_prefix": "comuna",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
       "legal_id": "8937",
       "legal_name": "Negureni",
       "count": 2,
@@ -23097,6 +24794,38 @@
           "parent": {
             "id": "osm-r19082860",
             "name": "Țînțăreni",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "8958",
+      "legal_name": "Văsieni",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701972",
+            "name": "Văsieni",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19082839",
+            "name": "Văsieni",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
@@ -23641,6 +25370,38 @@
           "parent": {
             "id": "osm-r12209989",
             "name": "Florițoaia Veche",
+            "admin_level": 8,
+            "place": null,
+            "name_prefix": null,
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "9239",
+      "legal_name": "Hîrcești",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r21303530",
+            "name": "Hîrcești",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r1661057",
+            "name": "Hîrcești",
             "admin_level": 8,
             "place": null,
             "name_prefix": null,
@@ -24825,6 +26586,38 @@
           "parent": {
             "id": "osm-r19118612",
             "name": "Cazaclia",
+            "admin_level": 8,
+            "place": "village",
+            "name_prefix": "satul",
+            "designation": null,
+            "relation_type": "boundary"
+          }
+        }
+      ]
+    },
+    {
+      "legal_id": "9617",
+      "legal_name": "Chioselia Rusă",
+      "count": 2,
+      "family": "uat8_to_component_locality9",
+      "subtype": "village",
+      "level_pairs": [
+        "8>9"
+      ],
+      "edges": [
+        {
+          "child": {
+            "id": "osm-r20701986",
+            "name": "Chioselia Rusă",
+            "admin_level": 9,
+            "place": "village",
+            "name_prefix": "Satul",
+            "designation": null,
+            "relation_type": "boundary"
+          },
+          "parent": {
+            "id": "osm-r19118602",
+            "name": "Chioselia Rusă",
             "admin_level": 8,
             "place": "village",
             "name_prefix": "satul",
