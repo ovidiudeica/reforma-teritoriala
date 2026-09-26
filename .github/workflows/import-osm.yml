@@ -33,6 +33,8 @@ jobs:
         run: npm run audit:balti-components
       - name: Audit Bălți boundary member way histories
         run: npm run audit:balti-way-history
+      - name: Audit Bălți boundary changeset semantics
+        run: npm run audit:balti-semantics
       - name: Inspect official CUATM workbook schema
         run: node scripts/process/inspect-cuatm-workbook.mjs
       - run: npm run reconcile:cuatm
@@ -40,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json data/current/admin-review.json data/current/md-cuatm-reconciliation.json data/current/md-cuatm-pair-diagnostics.json data/current/md-cuatm-parent-mismatch-matrix.json data/current/md-cuatm-edge-case-audit.json data/current/md-cuatm-unmatched-review.json data/current/md-cuatm-code-absent-classification.json data/current/md-cuatm-non-cuatm-allotments.json data/current/md-cuatm-consistency-audit.json data/current/md-cuatm-name-absent-classification.json data/current/md-cuatm-chain-pattern-audit.json data/current/md-special-municipality-analysis.json data/current/md-balti-geometry-comparison.json data/current/md-balti-component-locality-geometry.json data/sources/cuatm-current.json data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json public/geo/current/
+          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json data/current/admin-review.json data/current/md-cuatm-reconciliation.json data/current/md-cuatm-pair-diagnostics.json data/current/md-cuatm-parent-mismatch-matrix.json data/current/md-cuatm-edge-case-audit.json data/current/md-cuatm-unmatched-review.json data/current/md-cuatm-code-absent-classification.json data/current/md-cuatm-non-cuatm-allotments.json data/current/md-cuatm-consistency-audit.json data/current/md-cuatm-name-absent-classification.json data/current/md-cuatm-chain-pattern-audit.json data/current/md-special-municipality-analysis.json data/current/md-balti-geometry-comparison.json data/current/md-balti-component-locality-geometry.json data/sources/cuatm-current.json data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json data/sources/md-balti-city-boundary-changeset-semantics.json public/geo/current/
           git diff --cached --quiet || git commit -m "data: refresh OSM administrative catalog"
           git pull --rebase origin main
           git push origin HEAD:main
