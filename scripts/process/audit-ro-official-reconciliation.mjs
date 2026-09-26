@@ -3,9 +3,11 @@ import {mkdir,readFile,writeFile} from 'node:fs/promises';
 
 const SNAPSHOT='data/sources/ro-siruta-current.json';
 const OUTPUT='data/current/ro-official-reconciliation.json';
+const OVERRIDES='data/sources/ro-siruta-reviewed-overrides.json';
 const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const geo=JSON.parse(await readFile('public/geo/current/ro-administrative.geojson','utf8'));
 const official=JSON.parse(await readFile(SNAPSHOT,'utf8'));
+const reviewed=JSON.parse(await readFile(OVERRIDES,'utf8'));
 
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[„”"'’]/g,' ')
@@ -52,6 +54,13 @@ const officialUatForAnySirutaCode=code=>{
  const row=current&&Number(current.level)===2?officialByCode.get(String(current.siruta)):null;
  return row?{row,method:'explicit_siruta_locality_code_to_parent_uat'}:null;
 };
+const overrideRows=reviewed.mappings||[];
+const overrideByRelation=new Map();
+for(const x of overrideRows){
+ const id=Number(x.osm_relation_id);
+ if(!id||overrideByRelation.has(id))throw new Error('Duplicate/invalid reviewed override relation: '+x.osm_relation_id);
+ overrideByRelation.set(id,x);
+}
 const officialByName=new Map();
 for(const r of officialRows){
  if(!officialByName.has(r.normalized_name))officialByName.set(r.normalized_name,[]);
@@ -67,12 +76,21 @@ for(const e of entities){
  const parent=entityById.get(e.parent_id)||null;
  const osmCounty=norm(parent?.name||'');
  const explicit=explicitSiruta(tags);
+ const reviewedOverride=overrideByRelation.get(Number(e.osm?.relation_id))||null;
  let officialRow=null,method=null,confidence=null,reason=null,candidates=[];
  if(explicit){
   const resolved=officialUatForAnySirutaCode(explicit.value);
   officialRow=resolved?.row||null;
   if(officialRow){method=resolved.method;confidence='high';}
-  else reason='explicit_siruta_code_absent_from_official_snapshot';
+  else if(reviewedOverride){
+   officialRow=officialByCode.get(String(reviewedOverride.legal_id))||null;
+   if(officialRow){method='reviewed_siruta_override';confidence='high';}
+   else reason='reviewed_override_legal_id_absent_from_official_snapshot';
+  }else reason='explicit_siruta_code_absent_from_official_snapshot';
+ }else if(reviewedOverride){
+  officialRow=officialByCode.get(String(reviewedOverride.legal_id))||null;
+  if(officialRow){method='reviewed_siruta_override';confidence='high';}
+  else reason='reviewed_override_legal_id_absent_from_official_snapshot';
  }else{
   const nameHits=officialByName.get(norm(e.name))||[];
   const parentHits=osmCounty?nameHits.filter(x=>x.normalized_county===osmCounty):[];
@@ -94,6 +112,7 @@ for(const e of entities){
   osm_parent_name:parent?.name||null,
   osm_entity_type:e.type,
   explicit_siruta_tag:explicit,
+  reviewed_override:reviewedOverride?{legal_id:String(reviewedOverride.legal_id),resolution:reviewedOverride.resolution||null}:null,
   legal_id:officialRow?.siruta||null,
   legal_name:officialRow?.name||null,
   legal_type:officialRow?.legal_type||null,
@@ -135,16 +154,22 @@ check('official_snapshot_is_siruta_2026',official.registry==='SIRUTA'&&Number(of
 check('official_snapshot_has_uat_level',officialRows.length>=3100,{official_uat_count:officialRows.length,source_type:official.source?.source_type||null});
 check('official_siruta_codes_are_unique',officialByCode.size===officialRows.length,{official_uat_count:officialRows.length,unique_code_count:officialByCode.size});
 check('all_osm_admin_level_8_entities_accounted',results.length===entities.length,{osm_admin_level_8_count:entities.length,result_count:results.length});
+const missingOverrideRelations=overrideRows.filter(x=>!entities.some(e=>Number(e.osm?.relation_id)===Number(x.osm_relation_id))).map(x=>x.osm_relation_id);
+const missingOverrideLegalIds=overrideRows.filter(x=>!officialByCode.has(String(x.legal_id))).map(x=>({osm_relation_id:x.osm_relation_id,legal_id:x.legal_id}));
+check('reviewed_override_relations_exist',missingOverrideRelations.length===0,{missing:missingOverrideRelations});
+check('reviewed_override_legal_ids_exist',missingOverrideLegalIds.length===0,{missing:missingOverrideLegalIds});
 const report={
  schema_version:1,
  generated_at:new Date().toISOString(),
  jurisdiction:'RO',
  scope:'Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.',
- policy:'Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.',
+ policy:'Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.',
  status:failures.length?'FAIL':'PASS',
  source:{
   official_snapshot:SNAPSHOT,
   official_dataset:official.source,
+  reviewed_overrides:OVERRIDES,
+  reviewed_override_count:overrideRows.length,
   osm_catalog_generated_at:catalog.generated_at
  },
  checks,
@@ -158,6 +183,7 @@ const report={
   duplicate_legal_mapping_count:duplicates.length,
   parent_mismatch_count:parentMismatches.length,
   type_mismatch_count:typeMismatches.length,
+  reviewed_override_count:overrideRows.length,
   match_methods:byMethod,
   unmatched_by_reason:byIssue
  },
