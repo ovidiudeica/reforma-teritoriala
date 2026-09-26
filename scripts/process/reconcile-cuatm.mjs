@@ -132,6 +132,21 @@ for(const e of entities){
 }
 const matched=matches.filter(x=>x.legal_id), unmatched=matches.filter(x=>!x.legal_id);
 
+// General unmatched queue: intentionally separate from the resolved edge-case audit.
+// This is the actionable population for subsequent cleanup of stale/invalid OSM CUATM
+// codes and names absent from the current official snapshot.
+const unmatchedGeneral=unmatched.map(m=>{
+ const e=entityById.get(m.id);
+ const parent=e?.parent_id?entityById.get(e.parent_id):null;
+ const parentMatch=parent?matchById.get(parent.id):null;
+ const rawKeys=[e?.osm?.cuatm_unique_id,e?.osm?.cuatm_code].filter(Boolean);
+ const normalizedKeys=rawKeys.map(digits);
+ return {...m,osm_relation_id:e?.osm?.relation_id??null,osm_admin_level:e?.osm?.admin_level??null,osm_place:e?.osm?.place??null,osm_parent_id:e?.parent_id||null,osm_parent_name:parent?.name||null,verified_parent_legal_id:parentMatch?.legal_id||null,verified_parent_legal_name:parentMatch?.legal_name||null,raw_cuatm_unique_id:e?.osm?.cuatm_unique_id??null,raw_cuatm_code:e?.osm?.cuatm_code??null,normalized_explicit_keys:normalizedKeys};
+});
+const unmatchedGeneralByReason=unmatchedGeneral.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
+const unmatchedGroups=Object.fromEntries(Object.entries(unmatchedGeneralByReason).sort().map(([reason,count])=>[reason,{count,items:unmatchedGeneral.filter(x=>x.unmatched_reason===reason)}]));
+await writeFile('data/current/md-cuatm-unmatched-review.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'Unreconciled general catalog entities only; resolved edge cases are excluded.',count:unmatchedGeneral.length,by_reason:unmatchedGeneralByReason,groups:unmatchedGroups},null,2)+'\\n');
+
 const noKeyDiagnostics=entities.filter(e=>![e.osm?.cuatm_unique_id,e.osm?.cuatm_code].some(Boolean)).map(e=>{
  const parent=entityById.get(e.parent_id)||null;
  const parentMatch=parent?matchById.get(parent.id):null;
