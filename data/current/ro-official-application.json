@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T12:36:32.899Z",
+  "generated_at": "2026-09-26T15:38:42.790Z",
   "jurisdiction": "RO",
   "status": "PASS",
   "policy": "SIRUTA is authoritative for RO level-8 legal identity/type. OSM remains the geometry/provenance representation. OSM geometric parent_id is never rewritten from legal hierarchy; legal parent is stored separately.",
@@ -31,42 +31,13 @@
   "summary": {
     "ro_level8_count": 3179,
     "applied_count": 3179,
-    "type_changed_count": 4,
+    "type_changed_count": 0,
     "legal_parent_conflict_count": 1,
     "osm_semantic_type_conflict_count": 3,
     "official_only_count": 1,
     "represented_at_other_osm_level_count": 1
   },
-  "type_changes": [
-    {
-      "osm_relation_id": 10715570,
-      "name": "Adjud",
-      "osm_inferred_type": "commune",
-      "official_legal_type": "municipality",
-      "legal_id": "174860"
-    },
-    {
-      "osm_relation_id": 14743725,
-      "name": "Cehal",
-      "osm_inferred_type": "town",
-      "official_legal_type": "commune",
-      "legal_id": "137363"
-    },
-    {
-      "osm_relation_id": 10697874,
-      "name": "Fetești",
-      "osm_inferred_type": "town",
-      "official_legal_type": "municipality",
-      "legal_id": "92701"
-    },
-    {
-      "osm_relation_id": 14778262,
-      "name": "Salcea",
-      "osm_inferred_type": "commune",
-      "official_legal_type": "town",
-      "legal_id": "146370"
-    }
-  ],
+  "type_changes": [],
   "legal_parent_conflicts": [
     {
       "osm_relation_id": 9744206,
