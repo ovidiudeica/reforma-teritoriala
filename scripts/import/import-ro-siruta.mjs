@@ -125,7 +125,7 @@ async function fromOfficialCsv(){
 async function arcgisPage(offset){
  const params=new URLSearchParams({
   where:'1=1',
-  outFields:'objectid,siruta,siruta_sup,denumire,den_superior,judet,cod_jud,tiplocalitate',
+  outFields:'objectid,siruta,siruta_sup,denumire,den_superior,judet,cod_jud,loc,tiplocalitate',
   returnGeometry:'false',
   orderByFields:'objectid',
   resultOffset:String(offset),
@@ -157,7 +157,7 @@ async function fromOfficialArcgis(){
   if(!groups.has(siruta))groups.set(siruta,{siruta,rawParent,county,countyCode:digits(a.cod_jud)||null,children:[]});
   const g=groups.get(siruta);
   if(g.rawParent!==rawParent||g.county!==county)throw new Error('Conflicting INS ArcGIS UAT identity for SIRUTA '+siruta);
-  g.children.push({name:normalizeRomanian(a.denumire),type:normalizeRomanian(a.tiplocalitate)});
+  g.children.push({name:normalizeRomanian(a.denumire),type:normalizeRomanian(a.tiplocalitate),loc:Number(a.loc)||null});
  }
  const seatTypeCounts={};
  const records=[...groups.values()].map(g=>{
@@ -166,17 +166,25 @@ async function fromOfficialArcgis(){
   const typeLabels=[...new Set(sameNameChildren.map(x=>x.type).filter(Boolean))];
   const allTypeLabels=[...new Set(g.children.map(x=>x.type).filter(Boolean))];
   for(const t of typeLabels)seatTypeCounts[t]=(seatTypeCounts[t]||0)+1;
-  let legalType=legalTypeFromName(g.rawParent);
-  if(legalType==='commune'){
-   const joined=allTypeLabels.join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-   if(/resedinta de municipiu|municipiu/.test(joined))legalType='municipality';
-   else if(/resedinta de oras|\boras\b|urban/.test(joined))legalType='town';
+  const locCodes=new Set(g.children.map(x=>x.loc).filter(Number.isFinite));
+  let legalType=null;
+  if([...locCodes].some(x=>[9,10,11].includes(x)))legalType='municipality';
+  else if([...locCodes].some(x=>[17,18,19].includes(x)))legalType='town';
+  else if([...locCodes].some(x=>[22,23].includes(x)))legalType='commune';
+  else{
+   legalType=legalTypeFromName(g.rawParent);
+   if(legalType==='commune'){
+    const joined=allTypeLabels.join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+    if(/resedinta de municipiu|municipiu/.test(joined))legalType='municipality';
+    else if(/resedinta de oras|\boras\b|urban/.test(joined))legalType='town';
+   }
   }
   return {
    siruta:g.siruta,name:parentName,parent_siruta:null,parent_name:g.county||null,type_code:null,level:2,
    county_code:g.countyCode,county_name:g.county||null,legal_type:legalType,official_parent_label:g.rawParent,
    seat_locality_type_labels:typeLabels,
-   uat_locality_type_labels:allTypeLabels
+   uat_locality_type_labels:allTypeLabels,
+   uat_locality_type_codes:[...locCodes].sort((a,b)=>a-b)
   };
  }).sort((a,b)=>Number(a.siruta)-Number(b.siruta));
  if(records.length<3100)throw new Error('INS ArcGIS derived too few UAT records: '+records.length);
@@ -192,7 +200,7 @@ async function fromOfficialArcgis(){
    dataset_title:'Operational/Localitati — SIRUTA locality registry fields',
    dataset_url:'https://webgis.insse.ro/servicii/rest/services/Operational/Localitati/MapServer/0',
    query_endpoint:INS_ARCGIS,
-   query_fields:['siruta','siruta_sup','denumire','den_superior','judet','cod_jud','tiplocalitate'],
+   query_fields:['siruta','siruta_sup','denumire','den_superior','judet','cod_jud','loc','tiplocalitate'],
    locality_record_count:features.length,
    derived_uat_count:records.length,
    derived_uat_type_counts:typeCounts,
