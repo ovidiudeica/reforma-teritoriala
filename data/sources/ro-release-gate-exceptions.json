@@ -1,32 +1,6 @@
 {
   "schema_version": 1,
   "jurisdiction": "RO",
-  "policy": "Exact reviewed baseline after jurisdiction filtering; new review items fail.",
-  "allowed_review_items": [
-    {
-      "osm_relation_id": 12557978,
-      "issue": "classification_review",
-      "classification": "subdivision_or_mistagged_boundary"
-    },
-    {
-      "osm_relation_id": 11366847,
-      "issue": "classification_review",
-      "classification": "subdivision_or_mistagged_boundary"
-    },
-    {
-      "osm_relation_id": 11283027,
-      "issue": "classification_review",
-      "classification": "subdivision_or_mistagged_boundary"
-    },
-    {
-      "osm_relation_id": 11283576,
-      "issue": "classification_review",
-      "classification": "subdivision_or_mistagged_boundary"
-    },
-    {
-      "osm_relation_id": 11366846,
-      "issue": "classification_review",
-      "classification": "subdivision_or_mistagged_boundary"
-    }
-  ]
+  "policy": "No unresolved review exceptions after audited level-9 semantic classification.",
+  "allowed_review_items": []
 }
