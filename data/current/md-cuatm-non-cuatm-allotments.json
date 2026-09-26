@@ -1,25 +1,9 @@
 {
-  "generated_at": "2026-09-26T01:14:41.491Z",
+  "generated_at": "2026-09-26T01:14:41.490Z",
   "jurisdiction": "MD",
-  "scope": "Entities whose explicit OSM CUATM key is absent from the current official CUATM snapshot; diagnostic only.",
+  "reconciliation_class": "non_cuatm_allotment_boundary",
+  "policy": "Retained geographic entities outside current legal CUATM reconciliation. Raw OSM identifiers, geometry linkage and verified legal parent are preserved.",
   "count": 79,
-  "dimensions": {
-    "admin_level": {
-      "missing": 79
-    },
-    "place": {
-      "missing": 79
-    },
-    "code_shape": {
-      "0_char_other": 79
-    },
-    "parent_relation": {
-      "unverified_parent": 79
-    }
-  },
-  "combinations": {
-    "missing|missing|0_char_other|unverified_parent": 79
-  },
   "items": [
     {
       "id": "osm-r18967159",
@@ -34,12 +18,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3143",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967159,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090944",
+      "osm_parent_name": "Miclești",
+      "verified_parent_legal_id": "3143",
+      "verified_parent_legal_name": "Miclești",
+      "raw_cuatm_unique_id": "314301",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968041",
@@ -54,12 +42,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5524",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968041,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822135",
+      "osm_parent_name": "Nimoreni",
+      "verified_parent_legal_id": "5524",
+      "verified_parent_legal_name": "Nimoreni",
+      "raw_cuatm_unique_id": "552401",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967824",
@@ -74,12 +66,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967824,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553001",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967520",
@@ -94,12 +90,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5511",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967520,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1748489",
+      "osm_parent_name": "Băcioi",
+      "verified_parent_legal_id": "5511",
+      "verified_parent_legal_name": "Băcioi",
+      "raw_cuatm_unique_id": "551101",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966859",
@@ -114,12 +114,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966859,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553002",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967907",
@@ -134,12 +138,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5524",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967907,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822135",
+      "osm_parent_name": "Nimoreni",
+      "verified_parent_legal_id": "5524",
+      "verified_parent_legal_name": "Nimoreni",
+      "raw_cuatm_unique_id": "552402",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967559",
@@ -154,12 +162,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 1,
       "parent_official_code": "1701",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967559,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115707",
+      "osm_parent_name": "Cahul",
+      "verified_parent_legal_id": "1701",
+      "verified_parent_legal_name": "Cahul",
+      "raw_cuatm_unique_id": "170102",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967095",
@@ -174,12 +186,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 1,
       "parent_official_code": "9603",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967095,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19117343",
+      "osm_parent_name": "Vulcănești",
+      "verified_parent_legal_id": "9603",
+      "verified_parent_legal_name": "Vulcănești",
+      "raw_cuatm_unique_id": "960301",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967061",
@@ -194,12 +210,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4345",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967061,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r10628616",
+      "osm_parent_name": "Mărăndeni",
+      "verified_parent_legal_id": "4345",
+      "verified_parent_legal_name": "Mărăndeni",
+      "raw_cuatm_unique_id": "434501",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966898",
@@ -214,12 +234,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4347",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966898,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r10628625",
+      "osm_parent_name": "Natalievca",
+      "verified_parent_legal_id": "4347",
+      "verified_parent_legal_name": "Natalievca",
+      "raw_cuatm_unique_id": "434701",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967275",
@@ -234,12 +258,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3125",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967275,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090950",
+      "osm_parent_name": "Cruglic",
+      "verified_parent_legal_id": "3125",
+      "verified_parent_legal_name": "Cruglic",
+      "raw_cuatm_unique_id": "312501",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968127",
@@ -254,12 +282,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "7864",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968127,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19068363",
+      "osm_parent_name": "Volovița",
+      "verified_parent_legal_id": "7864",
+      "verified_parent_legal_name": "Volovița",
+      "raw_cuatm_unique_id": "786401",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967066",
@@ -274,12 +306,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "7864",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967066,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19068363",
+      "osm_parent_name": "Volovița",
+      "verified_parent_legal_id": "7864",
+      "verified_parent_legal_name": "Volovița",
+      "raw_cuatm_unique_id": "786402",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967576",
@@ -294,12 +330,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "0142",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967576,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1751286",
+      "osm_parent_name": "Bubuieci",
+      "verified_parent_legal_id": "0142",
+      "verified_parent_legal_name": "Bubuieci",
+      "raw_cuatm_unique_id": "014203",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967489",
@@ -314,12 +354,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "7866",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967489,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19068364",
+      "osm_parent_name": "Zastînca",
+      "verified_parent_legal_id": "7866",
+      "verified_parent_legal_name": "Zastînca",
+      "raw_cuatm_unique_id": "786601",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966830",
@@ -334,12 +378,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 1,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966830,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173101",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966971",
@@ -354,12 +402,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 1,
       "parent_official_code": "9603",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966971,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19117343",
+      "osm_parent_name": "Vulcănești",
+      "verified_parent_legal_id": "9603",
+      "verified_parent_legal_name": "Vulcănești",
+      "raw_cuatm_unique_id": "960302",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967192",
@@ -374,12 +426,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 1,
       "parent_official_code": "4345",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967192,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r10628616",
+      "osm_parent_name": "Mărăndeni",
+      "verified_parent_legal_id": "4345",
+      "verified_parent_legal_name": "Mărăndeni",
+      "raw_cuatm_unique_id": "434502",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966972",
@@ -394,12 +450,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 2,
       "parent_official_code": "4301",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966972,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r10628594",
+      "osm_parent_name": "Fălești",
+      "verified_parent_legal_id": "4301",
+      "verified_parent_legal_name": "Fălești",
+      "raw_cuatm_unique_id": "430102",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967281",
@@ -414,12 +474,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3143",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967281,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090944",
+      "osm_parent_name": "Miclești",
+      "verified_parent_legal_id": "3143",
+      "verified_parent_legal_name": "Miclești",
+      "raw_cuatm_unique_id": "314302",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967455",
@@ -434,12 +498,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1701",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967455,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115707",
+      "osm_parent_name": "Cahul",
+      "verified_parent_legal_id": "1701",
+      "verified_parent_legal_name": "Cahul",
+      "raw_cuatm_unique_id": "170103",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966939",
@@ -454,12 +522,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966939,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553003",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967220",
@@ -474,12 +546,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4345",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967220,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r10628616",
+      "osm_parent_name": "Mărăndeni",
+      "verified_parent_legal_id": "4345",
+      "verified_parent_legal_name": "Mărăndeni",
+      "raw_cuatm_unique_id": "434503",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12118101",
@@ -494,12 +570,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3146",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12118101,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090915",
+      "osm_parent_name": "Onițcani",
+      "verified_parent_legal_id": "3146",
+      "verified_parent_legal_name": "Onițcani",
+      "raw_cuatm_unique_id": "314609",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12118104",
@@ -514,12 +594,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3146",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12118104,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090915",
+      "osm_parent_name": "Onițcani",
+      "verified_parent_legal_id": "3146",
+      "verified_parent_legal_name": "Onițcani",
+      "raw_cuatm_unique_id": "314611",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967895",
@@ -534,12 +618,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967895,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173102",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12104679",
@@ -554,12 +642,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "0141",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12104679,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1752811",
+      "osm_parent_name": "Vadul lui Vodă",
+      "verified_parent_legal_id": "0141",
+      "verified_parent_legal_name": "Vadul lui Vodă",
+      "raw_cuatm_unique_id": "315809",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12118106",
@@ -574,12 +666,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3146",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12118106,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090915",
+      "osm_parent_name": "Onițcani",
+      "verified_parent_legal_id": "3146",
+      "verified_parent_legal_name": "Onițcani",
+      "raw_cuatm_unique_id": "314602",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12118103",
@@ -594,12 +690,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3146",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12118103,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090915",
+      "osm_parent_name": "Onițcani",
+      "verified_parent_legal_id": "3146",
+      "verified_parent_legal_name": "Onițcani",
+      "raw_cuatm_unique_id": "314603",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12104684",
@@ -614,12 +714,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "0141",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12104684,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1752811",
+      "osm_parent_name": "Vadul lui Vodă",
+      "verified_parent_legal_id": "0141",
+      "verified_parent_legal_name": "Vadul lui Vodă",
+      "raw_cuatm_unique_id": "315801",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12118100",
@@ -634,12 +738,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3146",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12118100,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090915",
+      "osm_parent_name": "Onițcani",
+      "verified_parent_legal_id": "3146",
+      "verified_parent_legal_name": "Onițcani",
+      "raw_cuatm_unique_id": "314605",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12118148",
@@ -654,12 +762,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3146",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12118148,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090915",
+      "osm_parent_name": "Onițcani",
+      "verified_parent_legal_id": "3146",
+      "verified_parent_legal_name": "Onițcani",
+      "raw_cuatm_unique_id": "314607",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12104685",
@@ -674,12 +786,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "0141",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12104685,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1752811",
+      "osm_parent_name": "Vadul lui Vodă",
+      "verified_parent_legal_id": "0141",
+      "verified_parent_legal_name": "Vadul lui Vodă",
+      "raw_cuatm_unique_id": "315808",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r12118102",
@@ -694,12 +810,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3146",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 12118102,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090915",
+      "osm_parent_name": "Onițcani",
+      "verified_parent_legal_id": "3146",
+      "verified_parent_legal_name": "Onițcani",
+      "raw_cuatm_unique_id": "314613",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967986",
@@ -714,12 +834,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4362",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967986,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r10628636",
+      "osm_parent_name": "Pîrlița",
+      "verified_parent_legal_id": "4362",
+      "verified_parent_legal_name": "Pîrlița",
+      "raw_cuatm_unique_id": "436201",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967705",
@@ -734,12 +858,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4839",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967705,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r10628645",
+      "osm_parent_name": "Sadovoe",
+      "verified_parent_legal_id": "4839",
+      "verified_parent_legal_name": "Sadovoe",
+      "raw_cuatm_unique_id": "483901",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967283",
@@ -754,12 +882,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4333",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967283,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1692517",
+      "osm_parent_name": "Hiliuți",
+      "verified_parent_legal_id": "4333",
+      "verified_parent_legal_name": "Hiliuți",
+      "raw_cuatm_unique_id": "433301",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966887",
@@ -774,12 +906,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966887,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553004",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966779",
@@ -794,12 +930,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966779,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173103",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967186",
@@ -814,12 +954,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5501",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967186,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r5736377",
+      "osm_parent_name": "Ialoveni",
+      "verified_parent_legal_id": "5501",
+      "verified_parent_legal_name": "Ialoveni",
+      "raw_cuatm_unique_id": "550102",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966801",
@@ -834,12 +978,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3143",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966801,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090944",
+      "osm_parent_name": "Miclești",
+      "verified_parent_legal_id": "3143",
+      "verified_parent_legal_name": "Miclești",
+      "raw_cuatm_unique_id": "314303",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967872",
@@ -854,12 +1002,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "0142",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967872,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1751286",
+      "osm_parent_name": "Bubuieci",
+      "verified_parent_legal_id": "0142",
+      "verified_parent_legal_name": "Bubuieci",
+      "raw_cuatm_unique_id": "014201",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967669",
@@ -874,12 +1026,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967669,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173104",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968007",
@@ -894,12 +1050,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "9603",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968007,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19117343",
+      "osm_parent_name": "Vulcănești",
+      "verified_parent_legal_id": "9603",
+      "verified_parent_legal_name": "Vulcănești",
+      "raw_cuatm_unique_id": "960303",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967312",
@@ -914,12 +1074,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5524",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967312,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822135",
+      "osm_parent_name": "Nimoreni",
+      "verified_parent_legal_id": "5524",
+      "verified_parent_legal_name": "Nimoreni",
+      "raw_cuatm_unique_id": "552403",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967018",
@@ -934,12 +1098,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "7864",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967018,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19068363",
+      "osm_parent_name": "Volovița",
+      "verified_parent_legal_id": "7864",
+      "verified_parent_legal_name": "Volovița",
+      "raw_cuatm_unique_id": "786403",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967049",
@@ -954,12 +1122,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1701",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967049,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115707",
+      "osm_parent_name": "Cahul",
+      "verified_parent_legal_id": "1701",
+      "verified_parent_legal_name": "Cahul",
+      "raw_cuatm_unique_id": "170104",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968050",
@@ -974,12 +1146,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1428",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968050,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19034087",
+      "osm_parent_name": "Grimăncăuți",
+      "verified_parent_legal_id": "1428",
+      "verified_parent_legal_name": "Grimăncăuți",
+      "raw_cuatm_unique_id": "142801",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968191",
@@ -994,12 +1170,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3143",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968191,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090944",
+      "osm_parent_name": "Miclești",
+      "verified_parent_legal_id": "3143",
+      "verified_parent_legal_name": "Miclești",
+      "raw_cuatm_unique_id": "314304",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967521",
@@ -1014,12 +1194,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967521,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173105",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967641",
@@ -1034,12 +1218,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967641,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553005",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r20701966",
@@ -1054,12 +1242,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 2,
       "parent_official_code": "6420",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 20701966,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19082504",
+      "osm_parent_name": "Chiperceni",
+      "verified_parent_legal_id": "6420",
+      "verified_parent_legal_name": "Chiperceni",
+      "raw_cuatm_unique_id": "642001",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966852",
@@ -1074,12 +1266,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "0142",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966852,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1751286",
+      "osm_parent_name": "Bubuieci",
+      "verified_parent_legal_id": "0142",
+      "verified_parent_legal_name": "Bubuieci",
+      "raw_cuatm_unique_id": "014202",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968054",
@@ -1094,12 +1290,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3143",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968054,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090944",
+      "osm_parent_name": "Miclești",
+      "verified_parent_legal_id": "3143",
+      "verified_parent_legal_name": "Miclești",
+      "raw_cuatm_unique_id": "314305",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967009",
@@ -1114,12 +1314,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3143",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967009,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090944",
+      "osm_parent_name": "Miclești",
+      "verified_parent_legal_id": "3143",
+      "verified_parent_legal_name": "Miclești",
+      "raw_cuatm_unique_id": "314306",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968116",
@@ -1134,12 +1338,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3143",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968116,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090944",
+      "osm_parent_name": "Miclești",
+      "verified_parent_legal_id": "3143",
+      "verified_parent_legal_name": "Miclești",
+      "raw_cuatm_unique_id": "314307",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967934",
@@ -1154,12 +1362,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967934,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553006",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967146",
@@ -1174,12 +1386,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1034",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967146,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19090939",
+      "osm_parent_name": "Mereni",
+      "verified_parent_legal_id": "1034",
+      "verified_parent_legal_name": "Mereni",
+      "raw_cuatm_unique_id": "103401",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967715",
@@ -1194,12 +1410,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967715,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173106",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966877",
@@ -1214,12 +1434,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5524",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966877,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822135",
+      "osm_parent_name": "Nimoreni",
+      "verified_parent_legal_id": "5524",
+      "verified_parent_legal_name": "Nimoreni",
+      "raw_cuatm_unique_id": "552404",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967363",
@@ -1234,12 +1458,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "7864",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967363,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19068363",
+      "osm_parent_name": "Volovița",
+      "verified_parent_legal_id": "7864",
+      "verified_parent_legal_name": "Volovița",
+      "raw_cuatm_unique_id": "786404",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966809",
@@ -1254,12 +1482,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966809,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173107",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968093",
@@ -1274,12 +1506,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968093,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553007",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967250",
@@ -1294,12 +1530,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967250,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173108",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968051",
@@ -1314,12 +1554,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5524",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968051,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822135",
+      "osm_parent_name": "Nimoreni",
+      "verified_parent_legal_id": "5524",
+      "verified_parent_legal_name": "Nimoreni",
+      "raw_cuatm_unique_id": "552405",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967734",
@@ -1334,12 +1578,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "6202",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967734,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19038438",
+      "osm_parent_name": "Frunză",
+      "verified_parent_legal_id": "6202",
+      "verified_parent_legal_name": "Frunză",
+      "raw_cuatm_unique_id": "620201",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967239",
@@ -1354,12 +1602,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967239,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173109",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967195",
@@ -1374,12 +1626,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967195,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173110",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967720",
@@ -1394,12 +1650,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "7864",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967720,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19068363",
+      "osm_parent_name": "Volovița",
+      "verified_parent_legal_id": "7864",
+      "verified_parent_legal_name": "Volovița",
+      "raw_cuatm_unique_id": "786405",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r20701928",
@@ -1414,12 +1674,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4142",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 20701928,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19038953",
+      "osm_parent_name": "Ruseni",
+      "verified_parent_legal_id": "4142",
+      "verified_parent_legal_name": "Ruseni",
+      "raw_cuatm_unique_id": "414201",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967041",
@@ -1434,12 +1698,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967041,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173111",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968066",
@@ -1454,12 +1722,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "9603",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968066,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19117343",
+      "osm_parent_name": "Vulcănești",
+      "verified_parent_legal_id": "9603",
+      "verified_parent_legal_name": "Vulcănești",
+      "raw_cuatm_unique_id": "960304",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967945",
@@ -1474,12 +1746,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4345",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967945,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r10628616",
+      "osm_parent_name": "Mărăndeni",
+      "verified_parent_legal_id": "4345",
+      "verified_parent_legal_name": "Mărăndeni",
+      "raw_cuatm_unique_id": "434504",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967475",
@@ -1494,12 +1770,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967475,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553008",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968144",
@@ -1514,12 +1794,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5530",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968144,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r18822136",
+      "osm_parent_name": "Suruceni",
+      "verified_parent_legal_id": "5530",
+      "verified_parent_legal_name": "Suruceni",
+      "raw_cuatm_unique_id": "553009",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967463",
@@ -1534,12 +1818,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "6213",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967463,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19038428",
+      "osm_parent_name": "Bîrnova",
+      "verified_parent_legal_id": "6213",
+      "verified_parent_legal_name": "Bîrnova",
+      "raw_cuatm_unique_id": "621301",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18967069",
@@ -1554,12 +1842,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "0142",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18967069,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1751286",
+      "osm_parent_name": "Bubuieci",
+      "verified_parent_legal_id": "0142",
+      "verified_parent_legal_name": "Bubuieci",
+      "raw_cuatm_unique_id": "014204",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18968182",
@@ -1574,12 +1866,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "5511",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18968182,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r1748489",
+      "osm_parent_name": "Băcioi",
+      "verified_parent_legal_id": "5511",
+      "verified_parent_legal_name": "Băcioi",
+      "raw_cuatm_unique_id": "5511/03",
+      "raw_cuatm_code": null
     },
     {
       "id": "osm-r18966963",
@@ -1594,12 +1890,16 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731",
-      "classification": {
-        "admin_level": "missing",
-        "place": "missing",
-        "code_shape": "0_char_other",
-        "parent_relation": "unverified_parent"
-      }
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "osm_relation_id": 18966963,
+      "osm_admin_level": 9,
+      "osm_place": "allotments",
+      "osm_parent_id": "osm-r19115701",
+      "osm_parent_name": "Lucești",
+      "verified_parent_legal_id": "1731",
+      "verified_parent_legal_name": "Lucești",
+      "raw_cuatm_unique_id": "173112",
+      "raw_cuatm_code": null
     }
   ]
 }
