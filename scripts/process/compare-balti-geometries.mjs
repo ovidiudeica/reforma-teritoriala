@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {area,intersect,difference,booleanContains,booleanWithin,featureCollection} from '@turf/turf';
-const geo=JSON.parse(await readFile('public/geo/current/md.geojson','utf8'));
+const geo=JSON.parse(await readFile('public/geo/current/md-administrative.geojson','utf8'));
 const wanted=new Map([[58983,'uat'],[12207955,'city_level8'],[18967626,'city_level9']]);
 const relId=f=>Number(f.properties?.osm_relation_id??f.properties?.relation_id??String(f.properties?.id||'').replace(/^osm-r/,''));
 const by=new Map(geo.features.filter(f=>wanted.has(relId(f))).map(f=>[relId(f),f]));
