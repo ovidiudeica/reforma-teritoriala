@@ -2,13 +2,13 @@
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 
-const DATASET_IDS=['siruta_s1-2026','721c9059-5f87-4c79-9854-a1d5c18f58d5'];
+const DATASET_IDS=['721c9059-5f87-4c79-9854-a1d5c18f58d5','siruta_s1-2026'];
 const CKAN_BASES=['https://data.gov.ro/api/3/action','https://data.gov.ro/ro/api/3/action'];
 const SNAPSHOT='data/sources/ro-siruta-current.json';
 const EXPECTED_YEAR=2026;
 
 async function fetchJson(url){
- const r=await fetch(url,{headers:{'user-agent':'reforma-teritoriala-siruta/1.0','accept':'application/json'}});
+ const r=await fetch(url,{signal:AbortSignal.timeout(20000),headers:{'user-agent':'reforma-teritoriala-siruta/1.0','accept':'application/json'}});
  if(!r.ok)throw new Error(url+' HTTP '+r.status);
  const j=await r.json();
  if(!j?.success||!j.result)throw new Error('Invalid CKAN response from '+url);
@@ -65,7 +65,7 @@ const resource=resources.find(r=>String(r.format||'').toLowerCase()==='csv'&&/si
  ||resources.find(r=>String(r.format||'').toLowerCase()==='csv');
 if(!resource?.url)throw new Error('Official SIRUTA package has no CSV resource');
 const resourceUrl=new URL(resource.url,'https://data.gov.ro').href;
-const response=await fetch(resourceUrl,{headers:{'user-agent':'reforma-teritoriala-siruta/1.0'}});
+const response=await fetch(resourceUrl,{signal:AbortSignal.timeout(60000),headers:{'user-agent':'reforma-teritoriala-siruta/1.0'}});
 if(!response.ok)throw new Error('SIRUTA CSV download failed: HTTP '+response.status);
 const buffer=Buffer.from(await response.arrayBuffer());
 if(buffer.length<100000)throw new Error('SIRUTA CSV unexpectedly small: '+buffer.length);
