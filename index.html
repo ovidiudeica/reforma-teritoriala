@@ -14,16 +14,15 @@
 <h2>Straturi</h2>
 <section><h3>Teritoriu actual</h3>
 <label><input type="checkbox" checked disabled> Hartă de bază OpenStreetMap</label>
-<label><input id="layer-ro" type="checkbox" checked> România — județe</label>
+<label><input id="layer-ro" type="checkbox" checked> România — snapshot administrativ validat</label>
 <label><input id="layer-md" type="checkbox" checked> Republica Moldova — snapshot administrativ validat</label>
 </section>
 <section><h3>Categorii</h3><div class="chips"><span>Administrație</span><span>Regiuni</span><span>Instituții</span><span>Biserică</span><span>Statistică</span><span>Infrastructură</span></div></section>
-<div class="status"><b>Proveniența limitelor</b><p>România este încărcată din OpenStreetMap prin Overpass. Republica Moldova folosește snapshot-ul GeoJSON local generat din OSM și acceptat numai după release gate-ul proiectului.</p><p id="md-source-status">MD: verificare snapshot…</p></div>
+<div class="status"><b>Proveniența limitelor</b><p>România și Republica Moldova folosesc snapshot-uri GeoJSON locale generate din OSM și afișate numai când release gate-ul jurisdicției este PASS. OSM/Overpass rămâne sursă de import, nu backend-ul aplicației publice.</p><p id="ro-source-status">RO: verificare snapshot…</p><p id="md-source-status">MD: verificare snapshot…</p></div>
 </aside>
 <div id="map"></div>
 </main>
 <footer><span>Date administrative: © OpenStreetMap contributors</span><span id="modeLabel">Mod: ACTUAL</span></footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/osmtogeojson@3.0.0-beta.5/osmtogeojson.js"></script>
 <script src="app.js"></script>
 </body></html>
