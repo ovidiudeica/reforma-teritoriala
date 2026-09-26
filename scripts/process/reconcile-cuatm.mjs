@@ -132,10 +132,27 @@ for(const e of entities){
 }
 const matched=matches.filter(x=>x.legal_id), unmatched=matches.filter(x=>!x.legal_id);
 
+// Reviewed semantic class: OSM allotment boundaries are retained as geographic
+// entities but are outside current legal CUATM reconciliation. Require the full
+// reviewed population signature; do not generalize this to every level-9 feature.
+const isNonCuatmAllotment=m=>{
+ const e=entityById.get(m.id);
+ if(m.unmatched_reason!=='code_absent_from_official_snapshot'||e?.osm?.admin_level!==9||e?.osm?.place!=='allotments')return false;
+ const parent=e?.parent_id?entityById.get(e.parent_id):null;
+ const parentMatch=parent?matchById.get(parent.id):null;
+ return Boolean(parentMatch?.legal_id);
+};
+const nonCuatmAllotments=unmatched.filter(isNonCuatmAllotment).map(m=>{
+ const e=entityById.get(m.id), parent=entityById.get(e.parent_id), parentMatch=matchById.get(parent.id);
+ return {...m,reconciliation_class:'non_cuatm_allotment_boundary',osm_relation_id:e.osm?.relation_id??null,osm_admin_level:e.osm?.admin_level??null,osm_place:e.osm?.place??null,osm_parent_id:e.parent_id||null,osm_parent_name:parent?.name||null,verified_parent_legal_id:parentMatch?.legal_id||null,verified_parent_legal_name:parentMatch?.legal_name||null,raw_cuatm_unique_id:e.osm?.cuatm_unique_id??null,raw_cuatm_code:e.osm?.cuatm_code??null};
+});
+const nonCuatmAllotmentIds=new Set(nonCuatmAllotments.map(x=>x.id));
+const legalUnmatched=unmatched.filter(x=>!nonCuatmAllotmentIds.has(x.id));
+
 // General unmatched queue: intentionally separate from the resolved edge-case audit.
 // This is the actionable population for subsequent cleanup of stale/invalid OSM CUATM
 // codes and names absent from the current official snapshot.
-const unmatchedGeneral=unmatched.map(m=>{
+const unmatchedGeneral=legalUnmatched.map(m=>{
  const e=entityById.get(m.id);
  const parent=e?.parent_id?entityById.get(e.parent_id):null;
  const parentMatch=parent?matchById.get(parent.id):null;
@@ -146,7 +163,14 @@ const unmatchedGeneral=unmatched.map(m=>{
 const unmatchedGeneralByReason=unmatchedGeneral.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const unmatchedGroups=Object.fromEntries(Object.entries(unmatchedGeneralByReason).sort().map(([reason,count])=>[reason,{count,items:unmatchedGeneral.filter(x=>x.unmatched_reason===reason)}]));
 await writeFile('data/current/md-cuatm-unmatched-review.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'Unreconciled general catalog entities only; resolved edge cases are excluded.',count:unmatchedGeneral.length,by_reason:unmatchedGeneralByReason,groups:unmatchedGroups},null,2)+'\n');
-const codeAbsent=unmatchedGeneral.filter(x=>x.unmatched_reason==='code_absent_from_official_snapshot');
+await writeFile('data/current/md-cuatm-non-cuatm-allotments.json',JSON.stringify({
+ generated_at:new Date().toISOString(),jurisdiction:'MD',
+ reconciliation_class:'non_cuatm_allotment_boundary',
+ policy:'Retained geographic entities outside current legal CUATM reconciliation. Raw OSM identifiers, geometry linkage and verified legal parent are preserved.',
+ count:nonCuatmAllotments.length,
+ items:nonCuatmAllotments
+},null,2)+'\n');
+const codeAbsent=unmatched.filter(x=>x.unmatched_reason==='code_absent_from_official_snapshot');
 const bucket=(items,keyFn)=>items.reduce((a,x)=>{const k=keyFn(x);a[k]=(a[k]||0)+1;return a;},{});
 const codeShape=x=>{
  const key=x.normalized_explicit_keys?.[0]||'';
@@ -245,9 +269,9 @@ for(const d of noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_ma
 const mismatchRows=[...mismatchMatrix.values()].sort((a,b)=>b.count-a.count);
 await writeFile('data/current/md-cuatm-parent-mismatch-matrix.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',mismatch_entity_count:noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch').length,matrix_candidate_pair_count:mismatchRows.reduce((n,x)=>n+x.count,0),matrix:mismatchRows},null,2)+'\\n');
 await writeFile('data/current/md-cuatm-pair-diagnostics.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',entity_count:noKeyDiagnostics.length,by_category:diagnosticCounts,policy:'Diagnostic only. No legal fields are assigned from this file.',items:noKeyDiagnostics},null,2)+'\\n');
-const reasons=unmatched.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
+const reasons=legalUnmatched.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const methods=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,a),{});
-const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.',matches};
+const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:legalUnmatched.length,non_cuatm_count:nonCuatmAllotments.length,non_cuatm_by_class:{non_cuatm_allotment_boundary:nonCuatmAllotments.length},matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.',matches};
 if(!matched.length)throw new Error('CUATM reconciliation produced zero verified matches');
 await writeFile(OUTPUT,JSON.stringify(out,null,2)+'\n');
-console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:unmatched.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,edge_case_audit:{count:edgeAudit.length,by_category:edgeAuditCounts,items:edgeAudit},parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_status_code:x.verified_osm_parent_status_code,candidate_official_parent_status_code:x.candidate_official_parent_status_code,count:x.count,examples:x.examples.slice(0,3)}))},null,2));
+console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:legalUnmatched.length,non_cuatm_allotments:nonCuatmAllotments.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,edge_case_audit:{count:edgeAudit.length,by_category:edgeAuditCounts,items:edgeAudit},parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_status_code:x.verified_osm_parent_status_code,candidate_official_parent_status_code:x.candidate_official_parent_status_code,count:x.count,examples:x.examples.slice(0,3)}))},null,2));
