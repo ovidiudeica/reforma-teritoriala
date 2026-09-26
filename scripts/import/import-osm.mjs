@@ -50,7 +50,6 @@ function classify(country,t={}){
    return {type:'subdivision_or_mistagged_boundary',confidence:'low',reason:'RO admin_level=9 requires post-parent validation; only Sector 1–6 inside București is a sector'};
   }
   if(l===8){
-   if(n==='cristești')return {type:'commune',confidence:'high',reason:'Official Romanian source identifies Cristești, Botoșani as a comună'};
    if(p==='city')return {type:'municipality',confidence:'high'};
    if(p==='town')return {type:'town',confidence:'high'};
    if(p==='municipality'){

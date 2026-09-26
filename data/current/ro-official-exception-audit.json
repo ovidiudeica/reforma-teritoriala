@@ -1,0 +1,875 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T12:36:32.109Z",
+  "jurisdiction": "RO",
+  "scope": "Targeted audit of unresolved/duplicate/type-conflict cases from official SIRUTA reconciliation.",
+  "policy": "Diagnostic only. Exact SIRUTA hierarchy and OSM provenance are recorded; no fuzzy candidate is auto-assigned. OSM geometry is not treated as legal authority.",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "all_exception_histories_available",
+      "ok": true,
+      "detail": {
+        "errors": []
+      }
+    },
+    {
+      "name": "official_locality_geometry_available",
+      "ok": true,
+      "diagnostic": true,
+      "detail": {
+        "error": null,
+        "feature_count": 65
+      }
+    },
+    {
+      "name": "all_unmatched_cases_audited",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    },
+    {
+      "name": "all_duplicate_groups_audited",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    },
+    {
+      "name": "all_type_mismatches_audited",
+      "ok": true,
+      "detail": {
+        "count": 3
+      }
+    },
+    {
+      "name": "reviewed_override_relations_present",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "reviewed_override_uats_present",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "reviewed_override_identity_containment_stable",
+      "ok": true,
+      "detail": {
+        "failed": []
+      }
+    }
+  ],
+  "summary": {
+    "target_relation_count": 19,
+    "unmatched_case_count": 0,
+    "single_official_uat_locality_containment_count": 0,
+    "exact_component_locality_single_uat_count": 0,
+    "requires_review_count": 0,
+    "duplicate_group_count": 0,
+    "type_mismatch_count": 3,
+    "reviewed_override_count": 16,
+    "reviewed_override_containment_failure_count": 0,
+    "history_error_count": 0,
+    "diagnostic_warning_count": 0
+  },
+  "unmatched": [],
+  "duplicate_groups": [],
+  "type_mismatches": [
+    {
+      "osm_id": "osm-r14743725",
+      "osm_relation_id": 14743725,
+      "osm_name": "Cehal",
+      "osm_parent_id": "osm-r72482",
+      "osm_parent_name": "Satu Mare",
+      "osm_entity_type": "town",
+      "osm_claimed_legal_type": "town",
+      "explicit_siruta_tag": null,
+      "reviewed_override": null,
+      "legal_id": "137363",
+      "legal_name": "CEHAL",
+      "legal_type": "commune",
+      "legal_type_code": "3",
+      "legal_parent_id": "305",
+      "legal_parent_name": "JUDEȚUL SATU MARE",
+      "match_method": "exact_normalized_name_and_county",
+      "confidence": "medium",
+      "matched": true,
+      "parent_matches": true,
+      "type_matches": false,
+      "issue": null,
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Cehal",
+        "name:hu": "Oláhcsaholy",
+        "name:prefix": "Orașul",
+        "place": "town",
+        "place:ro": "oraș",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary"
+      },
+      "history": {
+        "relation_id": 14743725,
+        "created_at": "2022-10-28T20:51:36Z",
+        "current_version": 2,
+        "last_modified_at": "2024-09-06T09:56:58Z",
+        "last_changeset": 156266213,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Cehal",
+          "name:hu": "Oláhcsaholy",
+          "name:prefix": "Orașul",
+          "place": "town",
+          "place:ro": "oraș",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary"
+        },
+        "current_member_count": 8,
+        "history_signals": {
+          "name_values": [
+            "Cehal"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "town"
+          ],
+          "place_ro_values": [
+            "oraș"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
+    },
+    {
+      "osm_id": "osm-r10697874",
+      "osm_relation_id": 10697874,
+      "osm_name": "Fetești",
+      "osm_parent_id": "osm-r2355517",
+      "osm_parent_name": "Ialomița",
+      "osm_entity_type": "town",
+      "osm_claimed_legal_type": "town",
+      "explicit_siruta_tag": null,
+      "reviewed_override": null,
+      "legal_id": "92701",
+      "legal_name": "FETEȘTI",
+      "legal_type": "municipality",
+      "legal_type_code": "4",
+      "legal_parent_id": "216",
+      "legal_parent_name": "JUDEȚUL IALOMIȚA",
+      "match_method": "exact_normalized_name_and_county",
+      "confidence": "medium",
+      "matched": true,
+      "parent_matches": true,
+      "type_matches": false,
+      "issue": null,
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Fetești",
+        "name:prefix": "Orașul",
+        "place": "town",
+        "place:ro": "oraș",
+        "source": "ANCPI 3rd order set form data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q598577"
+      },
+      "history": {
+        "relation_id": 10697874,
+        "created_at": "2020-02-10T13:14:00Z",
+        "current_version": 2,
+        "last_modified_at": "2024-12-31T16:03:56Z",
+        "last_changeset": 160839380,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Fetești",
+          "name:prefix": "Orașul",
+          "place": "town",
+          "place:ro": "oraș",
+          "source": "ANCPI 3rd order set form data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q598577"
+        },
+        "current_member_count": 5,
+        "history_signals": {
+          "name_values": [
+            "Fetești"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "town"
+          ],
+          "place_ro_values": [
+            "oraș"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set form data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
+    },
+    {
+      "osm_id": "osm-r14778262",
+      "osm_relation_id": 14778262,
+      "osm_name": "Salcea",
+      "osm_parent_id": "osm-r2077868",
+      "osm_parent_name": "Suceava",
+      "osm_entity_type": "commune",
+      "osm_claimed_legal_type": "commune",
+      "explicit_siruta_tag": null,
+      "reviewed_override": null,
+      "legal_id": "146370",
+      "legal_name": "SALCEA",
+      "legal_type": "town",
+      "legal_type_code": "2",
+      "legal_parent_id": "332",
+      "legal_parent_name": "JUDEȚUL SUCEAVA",
+      "match_method": "exact_normalized_name_and_county",
+      "confidence": "medium",
+      "matched": true,
+      "parent_matches": true,
+      "type_matches": false,
+      "issue": null,
+      "candidates": [],
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Salcea",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q253825"
+      },
+      "history": {
+        "relation_id": 14778262,
+        "created_at": "2022-11-06T15:08:10Z",
+        "current_version": 2,
+        "last_modified_at": "2025-01-06T16:07:21Z",
+        "last_changeset": 161064681,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Salcea",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q253825"
+        },
+        "current_member_count": 8,
+        "history_signals": {
+          "name_values": [
+            "Salcea"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
+    }
+  ],
+  "reviewed_overrides": [
+    {
+      "osm_relation_id": 10514102,
+      "osm_name": "Alțâna",
+      "legal_id": "143888",
+      "legal_name": "ALȚINA",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "143888",
+        "legal_name": "ALȚINA",
+        "legal_parent_name": "JUDEȚUL SIBIU",
+        "official_locality_count": 3,
+        "inside_count": 3,
+        "inside_localities": [
+          {
+            "siruta": "143904",
+            "name": "Beneşti"
+          },
+          {
+            "siruta": "143913",
+            "name": "Ghijasa de Sus"
+          },
+          {
+            "siruta": "143897",
+            "name": "Alţina"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 14743203,
+      "osm_name": "Bâra",
+      "legal_id": "121386",
+      "legal_name": "BIRA",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "121386",
+        "legal_name": "BIRA",
+        "legal_parent_name": "JUDEȚUL NEAMȚ",
+        "official_locality_count": 3,
+        "inside_count": 3,
+        "inside_localities": [
+          {
+            "siruta": "121395",
+            "name": "Bira"
+          },
+          {
+            "siruta": "121420",
+            "name": "Negreşti"
+          },
+          {
+            "siruta": "121448",
+            "name": "Rediu"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 14739568,
+      "osm_name": "Bunești",
+      "legal_id": "162924",
+      "legal_name": "BUNEȘTI-AVEREȘTI",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "162924",
+        "legal_name": "BUNEȘTI-AVEREȘTI",
+        "legal_parent_name": "JUDEȚUL VASLUI",
+        "official_locality_count": 7,
+        "inside_count": 7,
+        "inside_localities": [
+          {
+            "siruta": "162979",
+            "name": "Podu Oprii"
+          },
+          {
+            "siruta": "162960",
+            "name": "Plopi"
+          },
+          {
+            "siruta": "162988",
+            "name": "Roşiori"
+          },
+          {
+            "siruta": "162933",
+            "name": "Avereşti"
+          },
+          {
+            "siruta": "162951",
+            "name": "Buneşti"
+          },
+          {
+            "siruta": "162997",
+            "name": "Tăbălăeşti"
+          },
+          {
+            "siruta": "162942",
+            "name": "Armăşeni"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 10541621,
+      "osm_name": "Certeju de Jos",
+      "legal_id": "89240",
+      "legal_name": "CERTEJU DE SUS",
+      "resolution": "official_locality_containment_exact_and_osm_wikipedia_identity",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "89240",
+        "legal_name": "CERTEJU DE SUS",
+        "legal_parent_name": "JUDEȚUL HUNEDOARA",
+        "official_locality_count": 9,
+        "inside_count": 9,
+        "inside_localities": [
+          {
+            "siruta": "89320",
+            "name": "Topliţa Mureşului"
+          },
+          {
+            "siruta": "89268",
+            "name": "Bocşa Mare"
+          },
+          {
+            "siruta": "89302",
+            "name": "Nojag"
+          },
+          {
+            "siruta": "89277",
+            "name": "Bocşa Mică"
+          },
+          {
+            "siruta": "89295",
+            "name": "Măgura-Topliţa"
+          },
+          {
+            "siruta": "89339",
+            "name": "Vărmaga"
+          },
+          {
+            "siruta": "89259",
+            "name": "Certeju de Sus"
+          },
+          {
+            "siruta": "89286",
+            "name": "Hondol"
+          },
+          {
+            "siruta": "89311",
+            "name": "Săcărâmb"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 14783943,
+      "osm_name": "Covăsânț",
+      "legal_id": "10514",
+      "legal_name": "COVĂSINȚ",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "10514",
+        "legal_name": "COVĂSINȚ",
+        "legal_parent_name": "JUDEȚUL ARAD",
+        "official_locality_count": 1,
+        "inside_count": 1,
+        "inside_localities": [
+          {
+            "siruta": "10523",
+            "name": "Covăsinţ"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 14871174,
+      "osm_name": "Cristur-Crișeni",
+      "legal_id": "140823",
+      "legal_name": "CRIȘENI",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "140823",
+        "legal_name": "CRIȘENI",
+        "legal_parent_name": "JUDEȚUL SĂLAJ",
+        "official_locality_count": 3,
+        "inside_count": 3,
+        "inside_localities": [
+          {
+            "siruta": "140841",
+            "name": "Cristur-Crişeni"
+          },
+          {
+            "siruta": "140850",
+            "name": "Gârceiu"
+          },
+          {
+            "siruta": "140832",
+            "name": "Crişeni"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 14786139,
+      "osm_name": "Culciu Mare",
+      "legal_id": "137540",
+      "legal_name": "CULCIU",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "137540",
+        "legal_name": "CULCIU",
+        "legal_parent_name": "JUDEȚUL SATU MARE",
+        "official_locality_count": 6,
+        "inside_count": 6,
+        "inside_localities": [
+          {
+            "siruta": "137568",
+            "name": "Apateu"
+          },
+          {
+            "siruta": "137586",
+            "name": "Corod"
+          },
+          {
+            "siruta": "137595",
+            "name": "Culciu Mic"
+          },
+          {
+            "siruta": "137602",
+            "name": "Lipău"
+          },
+          {
+            "siruta": "137559",
+            "name": "Culciu Mare"
+          },
+          {
+            "siruta": "137577",
+            "name": "Cărăşeu"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 9744206,
+      "osm_name": "Grădinari",
+      "legal_id": "127171",
+      "legal_name": "GRĂDINARI",
+      "resolution": "official_locality_containment_exact_cross_county_parent_conflict",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "127171",
+        "legal_name": "GRĂDINARI",
+        "legal_parent_name": "JUDEȚUL OLT",
+        "official_locality_count": 4,
+        "inside_count": 4,
+        "inside_localities": [
+          {
+            "siruta": "127199",
+            "name": "Petculeşti"
+          },
+          {
+            "siruta": "127206",
+            "name": "Runcu Mare"
+          },
+          {
+            "siruta": "127215",
+            "name": "Satu Nou"
+          },
+          {
+            "siruta": "127180",
+            "name": "Grădinari"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 10514937,
+      "osm_name": "Moeciu de Jos",
+      "legal_id": "41471",
+      "legal_name": "MOIECIU",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "41471",
+        "legal_name": "MOIECIU",
+        "legal_parent_name": "JUDEȚUL BRAȘOV",
+        "official_locality_count": 6,
+        "inside_count": 6,
+        "inside_localities": [
+          {
+            "siruta": "41505",
+            "name": "Drumul Carului"
+          },
+          {
+            "siruta": "41523",
+            "name": "Moieciu de Sus"
+          },
+          {
+            "siruta": "41514",
+            "name": "Măgura"
+          },
+          {
+            "siruta": "41499",
+            "name": "Cheia"
+          },
+          {
+            "siruta": "41480",
+            "name": "Moieciu de Jos"
+          },
+          {
+            "siruta": "41532",
+            "name": "Peştera"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 14879305,
+      "osm_name": "Porumbenii Mari",
+      "legal_id": "86487",
+      "legal_name": "PORUMBENI",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "86487",
+        "legal_name": "PORUMBENI",
+        "legal_parent_name": "JUDEȚUL HARGHITA",
+        "official_locality_count": 2,
+        "inside_count": 2,
+        "inside_localities": [
+          {
+            "siruta": "85225",
+            "name": "Porumbenii Mici"
+          },
+          {
+            "siruta": "85216",
+            "name": "Porumbenii Mari"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 14523067,
+      "osm_name": "Râșca",
+      "legal_id": "59238",
+      "legal_name": "RIȘCA",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "59238",
+        "legal_name": "RIȘCA",
+        "legal_parent_name": "JUDEȚUL CLUJ",
+        "official_locality_count": 4,
+        "inside_count": 4,
+        "inside_localities": [
+          {
+            "siruta": "59247",
+            "name": "Râşca"
+          },
+          {
+            "siruta": "59256",
+            "name": "Dealu Mare"
+          },
+          {
+            "siruta": "59274",
+            "name": "Mărceşti"
+          },
+          {
+            "siruta": "59265",
+            "name": "Lăpuşteşti"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 10664072,
+      "osm_name": "Roșiorii de Vede",
+      "legal_id": "151870",
+      "legal_name": "ROȘIORI DE VEDE",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "151870",
+        "legal_name": "ROȘIORI DE VEDE",
+        "legal_parent_name": "JUDEȚUL TELEORMAN",
+        "official_locality_count": 1,
+        "inside_count": 1,
+        "inside_localities": [
+          {
+            "siruta": "151889",
+            "name": "Rosiori de Vede"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 12578308,
+      "osm_name": "Socolu de Câmpie",
+      "legal_id": "116224",
+      "legal_name": "COZMA",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "116224",
+        "legal_name": "COZMA",
+        "legal_parent_name": "JUDEȚUL MUREȘ",
+        "official_locality_count": 5,
+        "inside_count": 5,
+        "inside_localities": [
+          {
+            "siruta": "116260",
+            "name": "Valea Sasului"
+          },
+          {
+            "siruta": "116279",
+            "name": "Valea Ungurului"
+          },
+          {
+            "siruta": "116251",
+            "name": "Socolu de Câmpie"
+          },
+          {
+            "siruta": "116242",
+            "name": "Fânaţele Socolului"
+          },
+          {
+            "siruta": "116233",
+            "name": "Cozma"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 14701887,
+      "osm_name": "Tega",
+      "legal_id": "135789",
+      "legal_name": "TELEGA",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "135789",
+        "legal_name": "TELEGA",
+        "legal_parent_name": "JUDEȚUL PRAHOVA",
+        "official_locality_count": 6,
+        "inside_count": 6,
+        "inside_localities": [
+          {
+            "siruta": "135805",
+            "name": "Boşilceşti"
+          },
+          {
+            "siruta": "135841",
+            "name": "Ţonţeşti"
+          },
+          {
+            "siruta": "135823",
+            "name": "Doftana"
+          },
+          {
+            "siruta": "135832",
+            "name": "Meliceşti"
+          },
+          {
+            "siruta": "135814",
+            "name": "Buştenari"
+          },
+          {
+            "siruta": "135798",
+            "name": "Telega"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 11497419,
+      "osm_name": "Văleni",
+      "legal_id": "69303",
+      "legal_name": "VĂLENI-DÂMBOVIȚA",
+      "resolution": "official_locality_containment_exact",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "69303",
+        "legal_name": "VĂLENI-DÂMBOVIȚA",
+        "legal_parent_name": "JUDEȚUL DÂMBOVIȚA",
+        "official_locality_count": 2,
+        "inside_count": 2,
+        "inside_localities": [
+          {
+            "siruta": "69321",
+            "name": "Mesteacăn"
+          },
+          {
+            "siruta": "69312",
+            "name": "Văleni-Dâmboviţa"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    },
+    {
+      "osm_relation_id": 13799978,
+      "osm_name": "Stoenești",
+      "legal_id": "102794",
+      "legal_name": "FLOREȘTI-STOENEȘTI",
+      "resolution": "duplicate_disambiguated_by_official_locality_containment",
+      "relation_present": true,
+      "official_uat_present": true,
+      "official_locality_containment": {
+        "legal_id": "102794",
+        "legal_name": "FLOREȘTI-STOENEȘTI",
+        "legal_parent_name": "JUDEȚUL GIURGIU",
+        "official_locality_count": 3,
+        "inside_count": 3,
+        "inside_localities": [
+          {
+            "siruta": "102801",
+            "name": "Stoeneşti"
+          },
+          {
+            "siruta": "102829",
+            "name": "Palanca"
+          },
+          {
+            "siruta": "102810",
+            "name": "Floreşti"
+          }
+        ]
+      },
+      "identity_containment_ok": true
+    }
+  ],
+  "warnings": [],
+  "failures": []
+}

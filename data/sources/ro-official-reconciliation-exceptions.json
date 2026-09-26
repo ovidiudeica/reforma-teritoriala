@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "RO",
+  "policy": "Exact documented residuals after full SIRUTA reconciliation. New unmatched/duplicate/official-only/parent/type conflicts fail the RO release gate.",
+  "allowed_official_only": [
+    {
+      "legal_id": "64096",
+      "legal_name": "BREȚCU",
+      "legal_type": "commune",
+      "legal_parent_name": "JUDEȚUL COVASNA"
+    }
+  ],
+  "allowed_represented_at_other_osm_level": [
+    {
+      "legal_id": "179132",
+      "osm_relation_id": 377733,
+      "admin_level": 4
+    }
+  ],
+  "allowed_parent_mismatches": [
+    {
+      "osm_relation_id": 9744206,
+      "legal_id": "127171",
+      "osm_parent_name": "Vâlcea",
+      "legal_parent_name": "JUDEȚUL OLT"
+    }
+  ],
+  "allowed_osm_semantic_type_conflicts": [
+    {
+      "osm_relation_id": 14743725,
+      "legal_id": "137363",
+      "osm_claimed_legal_type": "town",
+      "legal_type": "commune"
+    },
+    {
+      "osm_relation_id": 10697874,
+      "legal_id": "92701",
+      "osm_claimed_legal_type": "town",
+      "legal_type": "municipality"
+    },
+    {
+      "osm_relation_id": 14778262,
+      "legal_id": "146370",
+      "osm_claimed_legal_type": "commune",
+      "legal_type": "town"
+    }
+  ]
+}
