@@ -45,6 +45,18 @@ for(const m of matched){
  identityChecks.push(row);if(result==='identity_parent_mismatch'||result==='identity_parent_not_resolved')identityIssues.push(row);
 }
 const byResult=identityChecks.reduce((a,x)=>(a[x.result]=(a[x.result]||0)+1,a),{});
-const audit={generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'CUATM matched entities; duplicate OSM representations collapsed logically by legal identity',matched_count:matched.length,policy:'Diagnostic only. No reconciliation, classification or source data are altered.',duplicate_identity_summary:{duplicate_legal_id_count:duplicateGroups.length,entities_in_duplicate_groups:duplicateGroups.reduce((n,g)=>n+g.count,0),by_class:dupByClass},legal_identity_parent_summary:byResult,duplicate_legal_ids:duplicateGroups,legal_identity_parent_issues:identityIssues};
+const uniqueIdentityIssues=[];
+for(const [legal_id,xs] of groups){
+ const rows=identityChecks.filter(x=>x.legal_id===legal_id);
+ const bad=rows.filter(x=>x.result==='identity_parent_mismatch'||x.result==='identity_parent_not_resolved');
+ if(!bad.length)continue;
+ const first=bad[0], expected=first.expected_legal_parent_id, observed=[...new Set(bad.map(x=>x.resolved_distinct_parent_legal_id).filter(Boolean))];
+ const chisinauSectorGap=['0110','0120','0130','0140','0150'].includes(expected)&&observed.length===1&&observed[0]==='0100';
+ uniqueIdentityIssues.push({legal_id,legal_name:first.legal_name,expected_legal_parent_id:expected,expected_legal_parent_name:first.expected_legal_parent_name,observed_distinct_parent_legal_ids:observed,diagnostic_class:chisinauSectorGap?'chisinau_sector_geometry_gap':'cross_legal_parent_conflict',representation_count:xs.length,affected_representations:bad.map(x=>x.representative_osm_id)});
+}
+const uniqueIssueByClass=uniqueIdentityIssues.reduce((a,x)=>(a[x.diagnostic_class]=(a[x.diagnostic_class]||0)+1,a),{});
+const targetedDuplicateReview=duplicateGroups.filter(g=>g.duplicate_class==='conflict_real'||g.duplicate_class==='parallel_same_parent');
+
+const audit={generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'CUATM matched entities; duplicate OSM representations collapsed logically by legal identity',matched_count:matched.length,policy:'Diagnostic only. No reconciliation, classification or source data are altered.',duplicate_identity_summary:{duplicate_legal_id_count:duplicateGroups.length,entities_in_duplicate_groups:duplicateGroups.reduce((n,g)=>n+g.count,0),by_class:dupByClass},legal_identity_parent_summary:byResult,unique_legal_identity_issue_summary:{count:uniqueIdentityIssues.length,by_class:uniqueIssueByClass},targeted_duplicate_review_summary:{count:targetedDuplicateReview.length,by_class:targetedDuplicateReview.reduce((a,g)=>(a[g.duplicate_class]=(a[g.duplicate_class]||0)+1,a),{})},duplicate_legal_ids:duplicateGroups,unique_legal_identity_issues:uniqueIdentityIssues,targeted_duplicate_review:targetedDuplicateReview,legal_identity_parent_issues_by_representation:identityIssues};
 await mkdir('data/current',{recursive:true});await writeFile('data/current/md-cuatm-consistency-audit.json',JSON.stringify(audit,null,2)+'\n');
-console.log(JSON.stringify({matched_count:matched.length,...audit.duplicate_identity_summary,legal_identity_parent_summary:byResult,legal_identity_parent_issue_count:identityIssues.length},null,2));
+console.log(JSON.stringify({matched_count:matched.length,...audit.duplicate_identity_summary,legal_identity_parent_summary:byResult,unique_legal_identity_issue_summary:audit.unique_legal_identity_issue_summary,targeted_duplicate_review_summary:audit.targeted_duplicate_review_summary},null,2));
