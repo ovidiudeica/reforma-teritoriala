@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "MD",
+  "policy": "Human-reviewed semantic overrides for OSM geographic entities confirmed outside current legal CUATM reconciliation. Entries are explicit exceptions and do not define automatic classification rules.",
+  "overrides": [
+    {
+      "osm_relation_id": 12104738,
+      "osm_id": "osm-r12104738",
+      "name": "Î.P. „Mure Dulci”",
+      "reconciliation_class": "non_cuatm_allotment_boundary",
+      "reviewed_parent_legal_id": "3111",
+      "reviewed_parent_name": "Bălăbănești",
+      "reason": "Individually reviewed: public documentation lists Mure Dulci as an întovărășire pomicolă in com. Bălăbănești. The OSM relation is retained as a non-CUATM allotment boundary despite the missing place=allotments tag.",
+      "source_url": "https://www.calm.md/wp-content/uploads/2025/05/Anexe-la-proiectul-Ordinului_Model-de-evaluare-a-loturilor-din-intovarasirile-pomicole.pdf",
+      "source_locator": "Anexa nr. 3, row 235: r-nul Criuleni, com. Bălăbănești — Mure Dulci"
+    }
+  ]
+}

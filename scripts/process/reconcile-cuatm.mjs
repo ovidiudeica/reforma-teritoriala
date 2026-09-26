@@ -3,10 +3,12 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import * as XLSX from 'xlsx';
 
 const URL=process.env.CUATM_URL||'https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx';
-const SNAPSHOT='data/sources/cuatm-current.json', OUTPUT='data/current/md-cuatm-reconciliation.json', OVERRIDES='data/sources/md-cuatm-reviewed-overrides.json';
+const SNAPSHOT='data/sources/cuatm-current.json', OUTPUT='data/current/md-cuatm-reconciliation.json', OVERRIDES='data/sources/md-cuatm-reviewed-overrides.json', NON_CUATM_OVERRIDES='data/sources/md-cuatm-reviewed-non-cuatm-overrides.json';
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[„”"'’]/g,'').replace(/\b(municipiul|municipiu|orasul|oras|comuna|satul|sat|raionul|raion|sectorul|sector)\b/g,' ').replace(/[^a-z0-9ăâîșț]+/gi,' ').trim().replace(/\s+/g,' ');
 const digits=v=>String(v??'').replace(/\.0$/,'').replace(/\s/g,'').trim();
 const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
+const reviewedNonCuatm=JSON.parse(await readFile(NON_CUATM_OVERRIDES,'utf8')).overrides||[];
+const reviewedNonCuatmById=new Map(reviewedNonCuatm.map(x=>[x.osm_id,x]));
 const entities=(catalog.entities||[]).filter(e=>e.jurisdiction==='MD');
 const entityById=new Map(entities.map(e=>[e.id,e]));
 const entityByRelationId=new Map(entities.filter(e=>e.osm?.relation_id!=null).map(e=>[String(e.osm.relation_id),e]));
@@ -144,9 +146,14 @@ const isNonCuatmAllotment=m=>{
  const parentMatch=parent?matchById.get(parent.id):null;
  return Boolean(parentMatch?.legal_id);
 };
-const nonCuatmAllotments=unmatched.filter(isNonCuatmAllotment).map(m=>{
- const e=entityById.get(m.id), parent=entityById.get(e.parent_id), parentMatch=matchById.get(parent.id);
- return {...m,reconciliation_class:'non_cuatm_allotment_boundary',osm_relation_id:e.osm?.relation_id??null,osm_admin_level:e.osm?.admin_level??null,osm_place:e.osm?.place??null,osm_parent_id:e.parent_id||null,osm_parent_name:parent?.name||null,verified_parent_legal_id:parentMatch?.legal_id||null,verified_parent_legal_name:parentMatch?.legal_name||null,raw_cuatm_unique_id:e.osm?.cuatm_unique_id??null,raw_cuatm_code:e.osm?.cuatm_code??null};
+const nonCuatmAllotments=unmatched.filter(m=>isNonCuatmAllotment(m)||reviewedNonCuatmById.has(m.id)).map(m=>{
+ const e=entityById.get(m.id), parent=entityById.get(e.parent_id), parentMatch=matchById.get(parent.id), reviewed=reviewedNonCuatmById.get(m.id)||null;
+ if(reviewed){
+  if(reviewed.reconciliation_class!=='non_cuatm_allotment_boundary')throw new Error('Unsupported reviewed non-CUATM class for '+m.id);
+  if(Number(reviewed.osm_relation_id)!==Number(e.osm?.relation_id))throw new Error('Reviewed non-CUATM relation mismatch for '+m.id);
+  if(reviewed.reviewed_parent_legal_id&&reviewed.reviewed_parent_legal_id!==parentMatch?.legal_id)throw new Error('Reviewed non-CUATM parent mismatch for '+m.id);
+ }
+ return {...m,reconciliation_class:'non_cuatm_allotment_boundary',classification_method:reviewed?'reviewed_override':'structural_rule',reviewed_override:reviewed,osm_relation_id:e.osm?.relation_id??null,osm_admin_level:e.osm?.admin_level??null,osm_place:e.osm?.place??null,osm_parent_id:e.parent_id||null,osm_parent_name:parent?.name||null,verified_parent_legal_id:parentMatch?.legal_id||null,verified_parent_legal_name:parentMatch?.legal_name||null,raw_cuatm_unique_id:e.osm?.cuatm_unique_id??null,raw_cuatm_code:e.osm?.cuatm_code??null};
 });
 const nonCuatmAllotmentIds=new Set(nonCuatmAllotments.map(x=>x.id));
 const legalUnmatched=unmatched.filter(x=>!nonCuatmAllotmentIds.has(x.id));
