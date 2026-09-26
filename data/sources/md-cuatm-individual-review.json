@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "MD",
+  "policy": "Human-reviewed unresolved OSM/CUATM cases. Entries document the current evidence and investigation status only. They do not reconcile, reclassify, suppress, or create automatic rules.",
+  "cases": [
+    {
+      "osm_id": "osm-r6879649",
+      "osm_relation_id": 6879649,
+      "osm_name": "Sovetul sătesc Chițcani",
+      "osm_admin_level": 8,
+      "osm_place": null,
+      "verified_parent_legal_id": "2700",
+      "verified_parent_name": "Raionul Căușeni",
+      "review_status": "administrative_identity_semantics_review",
+      "classification_action": "none",
+      "reconciliation_action": "none",
+      "finding": "Current Moldovan statistical sources refer to comuna Chițcani, including the villages Merenești and Zahorna. The OSM label «Sovetul sătesc Chițcani» therefore cannot be equated to a current CUATM identity solely by name; the relation requires separate review of its geometry, provenance and administrative semantics.",
+      "next_evidence_needed": [
+        "Inspect current OSM relation tags, members and history for relation 6879649.",
+        "Compare its geometry/members with the legal/current commune Chițcani identity and component localities.",
+        "Determine whether «Sovetul sătesc» represents legacy/de facto terminology, a mapping convention, or a distinct boundary object."
+      ],
+      "sources": [
+        {
+          "url": "https://statistica.gov.md/index.php/ro/rezultatele-finale-ale-recensamantului-populatiei-si-locuintelor-2024-distributi-10121_61877.html",
+          "note": "BNS 2024 census results explicitly refer to comuna Chițcani and include Merenești and Zahorna."
+        }
+      ]
+    },
+    {
+      "osm_id": "osm-r12104636",
+      "osm_relation_id": 12104636,
+      "osm_name": null,
+      "osm_admin_level": 9,
+      "osm_place": null,
+      "verified_parent_legal_id": "3136",
+      "verified_parent_name": "Hrușova",
+      "review_status": "unidentified_osm_object",
+      "classification_action": "none",
+      "reconciliation_action": "none",
+      "finding": "The relation has no name and no place tag in the imported metadata. A verified Hrușova parent is insufficient to identify the object because multiple distinct subordinate/allotment-type entities may exist under the same locality. No identity is assigned by inference.",
+      "next_evidence_needed": [
+        "Inspect current OSM relation tags, members and history for relation 12104636.",
+        "Identify any stable name, operator, ref, cadastral/local identifier or relation history linking the geometry to a documented entity.",
+        "Only after positive identity evidence, decide whether it belongs to non-CUATM allotments or another class."
+      ],
+      "sources": []
+    }
+  ]
+}
