@@ -15,10 +15,10 @@
 <section><h3>Teritoriu actual</h3>
 <label><input type="checkbox" checked disabled> Hartă de bază OpenStreetMap</label>
 <label><input id="layer-ro" type="checkbox" checked> România — județe</label>
-<label><input id="layer-md" type="checkbox" checked> Republica Moldova — nivel II</label>
+<label><input id="layer-md" type="checkbox" checked> Republica Moldova — snapshot administrativ validat</label>
 </section>
 <section><h3>Categorii</h3><div class="chips"><span>Administrație</span><span>Regiuni</span><span>Instituții</span><span>Biserică</span><span>Statistică</span><span>Infrastructură</span></div></section>
-<div class="status"><b>Limite administrative OSM</b><p>Primele straturi reale sunt încărcate direct din OpenStreetMap prin Overpass. Apasă pe un teritoriu pentru denumire și metadatele OSM.</p></div>
+<div class="status"><b>Proveniența limitelor</b><p>România este încărcată din OpenStreetMap prin Overpass. Republica Moldova folosește snapshot-ul GeoJSON local generat din OSM și acceptat numai după release gate-ul proiectului.</p><p id="md-source-status">MD: verificare snapshot…</p></div>
 </aside>
 <div id="map"></div>
 </main>
