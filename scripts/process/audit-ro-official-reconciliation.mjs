@@ -42,6 +42,16 @@ const officialRows=uats.map(x=>{
  return {...x,normalized_name:norm(x.name),legal_type:x.legal_type||typeFromTip(x.type_code),county_name:x.county_name||county?.name||x.parent_name||null,normalized_county:norm(x.county_name||county?.name||x.parent_name||'')};
 });
 const officialByCode=new Map(officialRows.map(x=>[String(x.siruta),x]));
+const officialUatForAnySirutaCode=code=>{
+ const direct=officialByCode.get(String(code));
+ if(direct)return {row:direct,method:'explicit_siruta_code'};
+ const record=byCode.get(String(code));
+ if(!record)return null;
+ let current=record,guard=0;
+ while(current&&Number(current.level)!==2&&current.parent_siruta&&guard++<8)current=byCode.get(String(current.parent_siruta));
+ const row=current&&Number(current.level)===2?officialByCode.get(String(current.siruta)):null;
+ return row?{row,method:'explicit_siruta_locality_code_to_parent_uat'}:null;
+};
 const officialByName=new Map();
 for(const r of officialRows){
  if(!officialByName.has(r.normalized_name))officialByName.set(r.normalized_name,[]);
@@ -59,8 +69,9 @@ for(const e of entities){
  const explicit=explicitSiruta(tags);
  let officialRow=null,method=null,confidence=null,reason=null,candidates=[];
  if(explicit){
-  officialRow=officialByCode.get(explicit.value)||null;
-  if(officialRow){method='explicit_siruta_code';confidence='high';}
+  const resolved=officialUatForAnySirutaCode(explicit.value);
+  officialRow=resolved?.row||null;
+  if(officialRow){method=resolved.method;confidence='high';}
   else reason='explicit_siruta_code_absent_from_official_snapshot';
  }else{
   const nameHits=officialByName.get(norm(e.name))||[];
@@ -129,7 +140,7 @@ const report={
  generated_at:new Date().toISOString(),
  jurisdiction:'RO',
  scope:'Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.',
- policy:'Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; otherwise only exact normalized name plus exact county is auto-matched. Fuzzy matching is never automatic.',
+ policy:'Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.',
  status:failures.length?'FAIL':'PASS',
  source:{
   official_snapshot:SNAPSHOT,
