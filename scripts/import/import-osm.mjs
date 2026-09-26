@@ -1,15 +1,22 @@
 #!/usr/bin/env node
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import osmtogeojson from 'osmtogeojson';
 import { pointOnFeature, booleanPointInPolygon } from '@turf/turf';
 
 const ENDPOINTS=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://overpass.nchc.org.tw/api/interpreter'];
 const RETRIES_PER_ENDPOINT=3;
+const CLASSIFIER_VERSION='2.3';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9]},
  MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9]}
 };
+const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
+const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
+const RO_SEMANTIC_CLASSES=new Set([
+ 'component_village_boundary_representation',
+ 'municipality_component_locality_boundary_representation'
+]);
 
 async function overpass(query){
  let last;
@@ -85,7 +92,7 @@ function entity(country,feature){
  const t=feature.properties?.tags||feature.properties||{}, rid=relationId(feature), c=classify(country,t);
  return {id:`osm-r${rid}`,name:t['name:ro']||t.name||null,official_name:t.official_name||null,jurisdiction:country,category:'administrative',type:c.type,status:'current',parent_id:null,
   osm:{element_type:'relation',relation_id:rid,admin_level:t.admin_level?Number(t.admin_level):null,boundary:t.boundary||null,relation_type:t.type||null,place:t.place||null,designation:t.designation||null,name_prefix:t['name:prefix']||null,full_name:t.full_name||null,cuatm_code:t['ref:cuatm']||t['ref:cuatm:cod']||null,cuatm_unique_id:t['ref:cuatm:codunic']||null,wikidata:t.wikidata||null,wikipedia:t.wikipedia||null},
-  classification:{version:'2.2',confidence:c.confidence,reason:c.reason||null},
+  classification:{version:CLASSIFIER_VERSION,confidence:c.confidence,reason:c.reason||null},
   source:'OpenStreetMap',source_url:`https://www.openstreetmap.org/relation/${rid}`,imported_at:new Date().toISOString(),review_required:c.confidence==='low'};
 }
 function assignParents(entities,featuresById,warnings=[]){
@@ -121,13 +128,33 @@ function finalizeAfterParents(entities){
   const n=norm(e.name), parent=byId.get(e.parent_id);
   const parentName=norm(parent?.name);
   if(/^sector(?:ul)? [1-6]$/.test(n)&&parent?.osm?.admin_level===4&&parentName.includes('bucurești')){
-   e.type='sector'; e.classification={version:'2.2',confidence:'high',reason:'Sector 1–6 validated only when its geometric parent is București'}; e.review_required=false;
+   e.type='sector';
+   e.classification={version:CLASSIFIER_VERSION,confidence:'high',reason:'Sector 1–6 validated only when its geometric parent is București'};
+   e.review_required=false;
+   continue;
+  }
+  const ev=roSemanticByRelation.get(e.osm.relation_id);
+  const expectedParent=ev?.osm_parent_relation_id?`osm-r${ev.osm_parent_relation_id}`:null;
+  const evidenceMatches=ev
+   && ev.legal_hierarchy_verified===true
+   && ev.legal_geometry_verified===false
+   && RO_SEMANTIC_CLASSES.has(ev.semantic_classification)
+   && e.parent_id===expectedParent;
+  if(evidenceMatches){
+   e.type=ev.semantic_classification;
+   e.classification={
+    version:CLASSIFIER_VERSION,
+    confidence:'high',
+    reason:'Semantic classification resolved by audited RO level-9 evidence; OSM geometry remains a representation and is not promoted to official legal geometry.',
+    evidence:'data/sources/ro-level9-exception-evidence.json'
+   };
+   e.review_required=false;
   }
  }
 }
 async function main(){
  await mkdir('data/current',{recursive:true}); await mkdir('public/geo/current',{recursive:true});
- const all=[], report={generated_at:new Date().toISOString(),classifier_version:'2.2',countries:{},warnings:[]};
+ const all=[], report={generated_at:new Date().toISOString(),classifier_version:CLASSIFIER_VERSION,countries:{},warnings:[]};
  for(const [code,cfg] of Object.entries(countries)){
   const raw=await overpass(queryFor(cfg)), geo=osmtogeojson(raw,{flatProperties:false});
   const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
@@ -151,8 +178,8 @@ async function main(){
    confidence:confidence?Object.fromEntries(Object.entries(confidence).map(([k,v])=>[k,v.length])):{}};
  }
  all.sort((a,b)=>a.jurisdiction.localeCompare(b.jurisdiction)||(a.osm.admin_level??99)-(b.osm.admin_level??99)||(a.name||'').localeCompare(b.name||'','ro'));
- await writeFile('data/current/entities.json',JSON.stringify({schema_version:2,generated_at:new Date().toISOString(),classifier_version:'2.2',source:'OpenStreetMap via Overpass API',license:'ODbL',entity_count:all.length,entities:all},null,2)+'\n');
+ await writeFile('data/current/entities.json',JSON.stringify({schema_version:2,generated_at:new Date().toISOString(),classifier_version:CLASSIFIER_VERSION,source:'OpenStreetMap via Overpass API',license:'ODbL',entity_count:all.length,entities:all},null,2)+'\n');
  await writeFile('data/current/import-report.json',JSON.stringify(report,null,2)+'\n');
- console.log('Catalog:',all.length,'entities; classifier v2.2');
+ console.log('Catalog:',all.length,'entities; classifier v'+CLASSIFIER_VERSION);
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});
