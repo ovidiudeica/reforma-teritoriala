@@ -1,14 +1,37 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-09-26T07:40:13.529Z",
+  "schema_version": 2,
+  "generated_at": "2026-09-26T07:44:28.710Z",
   "jurisdiction": "MD",
   "scope": "Special same-CUATM municipality/city representation chains",
   "policy": "Diagnostic only. CUATM structure and OSM history are recorded separately; no OSM relation or reconciliation mapping is removed or changed.",
+  "summary": {
+    "municipality_uat_with_city_locality": 2,
+    "municipality_uat_with_multiple_city_representations": 1
+  },
+  "geometry_review_queue": [
+    {
+      "legal_id": "0300",
+      "legal_name": "Bălți",
+      "relation_ids": [
+        12207955,
+        18967626
+      ],
+      "reason": "Multiple lower-level city representations remain; compare geometry before selecting a canonical city representation."
+    }
+  ],
   "results": [
     {
       "legal_id": "0100",
       "legal_name": "Chișinău",
-      "diagnostic_class": "municipality_uat_and_city_locality_representations",
+      "diagnostic_class": "municipality_uat_with_city_locality",
+      "canonical_uat_relation_id": 1691801,
+      "city_representation_relation_ids": [
+        1748490
+      ],
+      "geometry_review": {
+        "required": false,
+        "reason": "Single lower-level city/locality representation; retain alongside municipality UAT."
+      },
       "official_cuatm": {
         "record": {
           "code": "0100",
@@ -109,7 +132,8 @@
             "name_prefix": null,
             "official_name": null,
             "full_name": null,
-            "cuatm": "0100"
+            "cuatm": "0100",
+            "representation_role": "municipality_uat"
           },
           {
             "relation_id": 1748490,
@@ -119,7 +143,8 @@
             "name_prefix": "municipiul",
             "official_name": "municipiul Chișinău",
             "full_name": null,
-            "cuatm": "0100"
+            "cuatm": "0100",
+            "representation_role": "city_locality"
           }
         ],
         "history": [
@@ -310,12 +335,21 @@
           }
         ]
       },
-      "review_conclusion": "Keep all geometries. Treat the admin_level=4 municipality boundary as the UAT-level representation and lower-level same-identity city boundaries as locality/urban representations pending geometry canonicalization."
+      "review_conclusion": "Keep all geometries. The admin_level=4 relation is classified as the municipality/UAT representation; lower-level same-identity relations are city/locality representations. No lower-level geometry is deleted or made canonical by this audit."
     },
     {
       "legal_id": "0300",
       "legal_name": "Bălți",
-      "diagnostic_class": "municipality_uat_intermediate_city_and_component_city_chain",
+      "diagnostic_class": "municipality_uat_with_multiple_city_representations",
+      "canonical_uat_relation_id": 58983,
+      "city_representation_relation_ids": [
+        12207955,
+        18967626
+      ],
+      "geometry_review": {
+        "required": true,
+        "reason": "Multiple lower-level city representations remain; compare geometry before selecting a canonical city representation."
+      },
       "official_cuatm": {
         "record": {
           "code": "0300",
@@ -410,7 +444,8 @@
             "name_prefix": null,
             "official_name": null,
             "full_name": null,
-            "cuatm": "0300"
+            "cuatm": "0300",
+            "representation_role": "municipality_uat"
           },
           {
             "relation_id": 12207955,
@@ -420,7 +455,8 @@
             "name_prefix": "orașul",
             "official_name": null,
             "full_name": null,
-            "cuatm": null
+            "cuatm": null,
+            "representation_role": "city_representation_candidate"
           },
           {
             "relation_id": 18967626,
@@ -430,7 +466,8 @@
             "name_prefix": "municipiul",
             "official_name": "municipiul Bălți",
             "full_name": "municipiul Bălți",
-            "cuatm": "0300"
+            "cuatm": "0300",
+            "representation_role": "city_representation_candidate"
           }
         ],
         "history": [
@@ -544,12 +581,20 @@
           }
         ]
       },
-      "review_conclusion": "Keep all geometries. Treat the admin_level=4 municipality boundary as the UAT-level representation and lower-level same-identity city boundaries as locality/urban representations pending geometry canonicalization."
+      "review_conclusion": "Keep all geometries. The admin_level=4 relation is classified as the municipality/UAT representation; lower-level same-identity relations are city/locality representations. No lower-level geometry is deleted or made canonical by this audit."
     },
     {
       "legal_id": "0500",
       "legal_name": "Bender",
-      "diagnostic_class": "municipality_uat_and_city_locality_representations",
+      "diagnostic_class": "municipality_uat_with_city_locality",
+      "canonical_uat_relation_id": 9581354,
+      "city_representation_relation_ids": [
+        12463379
+      ],
+      "geometry_review": {
+        "required": false,
+        "reason": "Single lower-level city/locality representation; retain alongside municipality UAT."
+      },
       "official_cuatm": {
         "record": {
           "code": "0500",
@@ -614,7 +659,8 @@
             "name_prefix": null,
             "official_name": null,
             "full_name": null,
-            "cuatm": "0500"
+            "cuatm": "0500",
+            "representation_role": "municipality_uat"
           },
           {
             "relation_id": 12463379,
@@ -624,7 +670,8 @@
             "name_prefix": "municipiul",
             "official_name": "город Бендеры",
             "full_name": null,
-            "cuatm": "0500"
+            "cuatm": "0500",
+            "representation_role": "city_locality"
           }
         ],
         "history": [
@@ -716,7 +763,7 @@
           }
         ]
       },
-      "review_conclusion": "Keep all geometries. Treat the admin_level=4 municipality boundary as the UAT-level representation and lower-level same-identity city boundaries as locality/urban representations pending geometry canonicalization."
+      "review_conclusion": "Keep all geometries. The admin_level=4 relation is classified as the municipality/UAT representation; lower-level same-identity relations are city/locality representations. No lower-level geometry is deleted or made canonical by this audit."
     }
   ]
 }
