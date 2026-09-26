@@ -1,0 +1,2390 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T08:46:26.534Z",
+  "jurisdiction": "MD",
+  "scope": "Individual audit of unresolved relations 6879649 and 12104636",
+  "policy": "Diagnostic only. OSM history/geometry and official CUATM structure are kept separate; no reconciliation, deletion or reclassification is performed automatically.",
+  "results": [
+    {
+      "relation_id": 6879649,
+      "imported_reconciliation": {
+        "id": "osm-r6879649",
+        "name": "Sovetul sătesc Chițcani",
+        "cuatm_key": null,
+        "legal_id": null,
+        "legal_name": null,
+        "status_code": null,
+        "legal_source": "BNS CUATM",
+        "match_method": null,
+        "confidence": null,
+        "unmatched_reason": "name_absent_from_official_snapshot",
+        "name_candidate_count": 0,
+        "parent_official_code": "2700"
+      },
+      "geometry": {
+        "area_km2": 73.33394743199621,
+        "bbox": [
+          29.516406,
+          46.7046719,
+          29.6744743,
+          46.8340752
+        ],
+        "centroid": [
+          29.58482194701837,
+          46.77691457775228
+        ],
+        "geometry_type": "Polygon",
+        "properties": {
+          "type": "relation",
+          "id": 6879649,
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary",
+            "wikidata": "Q119145367",
+            "wikipedia": "en:Chițcani"
+          },
+          "relations": [],
+          "meta": {},
+          "catalog_id": "osm-r6879649",
+          "parent_id": "osm-r65343",
+          "jurisdiction": "MD",
+          "entity_type": "level_1_uat",
+          "classification_confidence": "low"
+        }
+      },
+      "current": {
+        "version": 40,
+        "timestamp": "2026-09-10T19:15:09Z",
+        "tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Кицканский сельский совет",
+          "name:md": "Советул сэтеск Кицкань",
+          "name:ro": "Sovetul sătesc Chițcani",
+          "name:ru": "Кицканский сельский совет",
+          "name:uk": "Кіцканська сільська рада",
+          "short_name": "Кицканы",
+          "short_name:de": "Kizkany",
+          "short_name:en": "Kitskany",
+          "short_name:md": "Кицкань",
+          "short_name:ro": "Chițcani",
+          "short_name:ru": "Кицканы",
+          "short_name:uk": "Кіцкани",
+          "type": "boundary",
+          "wikidata": "Q119145367",
+          "wikipedia": "en:Chițcani"
+        },
+        "members": [
+          {
+            "type": "node",
+            "ref": 273184231,
+            "role": "admin_centre"
+          },
+          {
+            "type": "way",
+            "ref": 484264262,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 511674142,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 587464794,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 231630685,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 231645460,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 515171916,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1374704576,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 231646249,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 231630683,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 511673394,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 60741672,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 680241449,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 52118809,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 556859342,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 918465805,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 683799407,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 556857877,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 582468884,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 470185165,
+            "role": "outer"
+          }
+        ],
+        "member_summary": {
+          "node": 1,
+          "way": 19
+        }
+      },
+      "history": [
+        {
+          "version": 1,
+          "timestamp": "2017-01-14T11:54:04Z",
+          "changeset": 45158451,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 1,
+          "members_added": [
+            "way:465857212:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 45158451,
+            "created_at": "2017-01-14T11:54:03Z",
+            "closed_at": "2017-01-14T11:54:04Z",
+            "user": "Maturi0n",
+            "changes_count": 1,
+            "tags": {
+              "comment": "Details",
+              "created_by": "iD 2.0.2",
+              "host": "https://www.openstreetmap.org/id",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 2,
+          "timestamp": "2017-01-14T12:01:20Z",
+          "changeset": 45158600,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 2,
+          "members_added": [
+            "node:273184231:admin_centre"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 45158600,
+            "created_at": "2017-01-14T12:01:19Z",
+            "closed_at": "2017-01-14T12:01:21Z",
+            "user": "Maturi0n",
+            "changes_count": 4,
+            "tags": {
+              "comment": "Details",
+              "created_by": "iD 2.0.2",
+              "host": "https://www.openstreetmap.org/id",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 3,
+          "timestamp": "2017-01-14T12:25:54Z",
+          "changeset": 45159029,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 2,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 45159029,
+            "created_at": "2017-01-14T12:25:52Z",
+            "closed_at": "2017-01-14T12:25:55Z",
+            "user": "Maturi0n",
+            "changes_count": 16,
+            "tags": {
+              "comment": "Details",
+              "created_by": "iD 2.0.2",
+              "host": "https://www.openstreetmap.org/id",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 4,
+          "timestamp": "2017-01-30T11:04:52Z",
+          "changeset": 45647778,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 4,
+          "members_added": [
+            "way:470185167:outer",
+            "way:470185164:outer",
+            "way:470185169:outer"
+          ],
+          "members_removed": [
+            "way:465857212:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 45647778,
+            "created_at": "2017-01-30T11:04:42Z",
+            "closed_at": "2017-01-30T11:04:54Z",
+            "user": "Maturi0n",
+            "changes_count": 171,
+            "tags": {
+              "comment": "Fixing",
+              "created_by": "iD 2.0.2",
+              "host": "http://www.openstreetmap.org/id",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 5,
+          "timestamp": "2017-01-30T11:43:56Z",
+          "changeset": 45648686,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 5,
+          "members_added": [
+            "way:470190662:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 45648686,
+            "created_at": "2017-01-30T11:43:55Z",
+            "closed_at": "2017-01-30T11:43:57Z",
+            "user": "Maturi0n",
+            "changes_count": 7,
+            "tags": {
+              "comment": "Fixing border relation",
+              "created_by": "iD 2.0.2",
+              "host": "http://www.openstreetmap.org/id",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 6,
+          "timestamp": "2017-04-01T19:30:41Z",
+          "changeset": 47365416,
+          "user": "sushi_klaus",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 7,
+          "members_added": [
+            "way:484264263:outer",
+            "way:484264262:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 47365416,
+            "created_at": "2017-04-01T19:30:37Z",
+            "closed_at": "2017-04-01T19:30:41Z",
+            "user": "sushi_klaus",
+            "changes_count": 23,
+            "tags": {
+              "comment": "#maproulette Open_Rings_(Europe)",
+              "created_by": "JOSM/1.5 (11639 de)",
+              "source": "tms[22]:https://api.mapbox.com/styles/v1/hot/cj0mm2ob1009u2snzk6a70l9v/tiles/256/{z}/{x}/{y}[REDACTED_SECRET]SI6ImNqMGxuZjR0ZDAwMDMzM28zMnRkb2FhZnEifQ.kp7PPmJ0RGtOybLWrHXYlg"
+            }
+          }
+        },
+        {
+          "version": 7,
+          "timestamp": "2017-07-31T08:27:25Z",
+          "changeset": 50712167,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 9,
+          "members_added": [
+            "way:231630683:outer",
+            "way:511668348:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 50712167,
+            "created_at": "2017-07-31T08:27:21Z",
+            "closed_at": "2017-07-31T08:27:40Z",
+            "user": "Maturi0n",
+            "changes_count": 52,
+            "tags": {
+              "comment": "Admin center",
+              "created_by": "iD 2.3.2",
+              "host": "http://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 8,
+          "timestamp": "2017-07-31T08:47:35Z",
+          "changeset": 50712637,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 14,
+          "members_added": [
+            "way:511673396:outer",
+            "way:81100471:outer",
+            "way:231630685:outer",
+            "way:231645460:outer",
+            "way:231646249:outer",
+            "way:511673395:outer",
+            "way:511673394:outer"
+          ],
+          "members_removed": [
+            "way:470190662:outer",
+            "way:470185164:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 50712637,
+            "created_at": "2017-07-31T08:47:32Z",
+            "closed_at": "2017-07-31T08:47:37Z",
+            "user": "Maturi0n",
+            "changes_count": 48,
+            "tags": {
+              "comment": "Admin center",
+              "created_by": "iD 2.3.2",
+              "host": "http://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 9,
+          "timestamp": "2017-07-31T08:51:06Z",
+          "changeset": 50712755,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 14,
+          "members_added": [
+            "way:511674142:outer"
+          ],
+          "members_removed": [
+            "way:81100471:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 50712755,
+            "created_at": "2017-07-31T08:51:04Z",
+            "closed_at": "2017-07-31T08:51:08Z",
+            "user": "Maturi0n",
+            "changes_count": 14,
+            "tags": {
+              "comment": "Admin center",
+              "created_by": "iD 2.3.2",
+              "host": "http://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 10,
+          "timestamp": "2017-08-13T09:39:24Z",
+          "changeset": 51076633,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 16,
+          "members_added": [
+            "way:515171917:outer",
+            "way:515171916:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 51076633,
+            "created_at": "2017-08-13T09:39:18Z",
+            "closed_at": "2017-08-13T09:39:24Z",
+            "user": "Maturi0n",
+            "changes_count": 59,
+            "tags": {
+              "comment": "Sukleya Commune",
+              "created_by": "iD 2.3.2",
+              "host": "http://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 11,
+          "timestamp": "2018-01-29T21:54:37Z",
+          "changeset": 55874312,
+          "user": "mike140",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 17,
+          "members_added": [
+            "way:556857877:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 55874312,
+            "created_at": "2018-01-29T21:54:30Z",
+            "closed_at": "2018-01-29T21:54:38Z",
+            "user": "mike140",
+            "changes_count": 38,
+            "tags": {
+              "comment": "Добавил правки в районе Приднестровья",
+              "created_by": "JOSM/1.5 (13367 ru)",
+              "source": "Bing"
+            }
+          }
+        },
+        {
+          "version": 12,
+          "timestamp": "2018-01-29T22:03:24Z",
+          "changeset": 55874499,
+          "user": "mike140",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 19,
+          "members_added": [
+            "way:60741672:outer",
+            "way:52118809:outer",
+            "way:556859342:outer"
+          ],
+          "members_removed": [
+            "way:511668348:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 55874499,
+            "created_at": "2018-01-29T22:02:13Z",
+            "closed_at": "2018-01-29T22:03:25Z",
+            "user": "mike140",
+            "changes_count": 15,
+            "tags": {
+              "comment": "Добавил правки в районе Приднестровья",
+              "created_by": "JOSM/1.5 (13367 ru)",
+              "source": "Bing"
+            }
+          }
+        },
+        {
+          "version": 13,
+          "timestamp": "2018-04-21T14:34:39Z",
+          "changeset": 58291715,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 19,
+          "members_added": [
+            "way:582276450:outer"
+          ],
+          "members_removed": [
+            "way:556859342:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 58291715,
+            "created_at": "2018-04-21T14:34:37Z",
+            "closed_at": "2018-04-21T14:34:39Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 26,
+            "tags": {
+              "changesets_count": "66",
+              "comment": "removed a incorrect border relation, added new",
+              "created_by": "iD 2.8.0",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "OpenStreetMap (Standard);Bing aerial imagery",
+              "locale": "ro",
+              "source": ""
+            }
+          }
+        },
+        {
+          "version": 14,
+          "timestamp": "2018-04-22T07:58:22Z",
+          "changeset": 58304274,
+          "user": "user_177389",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 20,
+          "members_added": [
+            "way:582465774:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 58304274,
+            "created_at": "2018-04-22T07:56:57Z",
+            "closed_at": "2018-04-22T07:58:22Z",
+            "user": "user_177389",
+            "changes_count": 14,
+            "tags": {
+              "comment": "boundary correction",
+              "created_by": "JOSM/1.5 (13576 de)"
+            }
+          }
+        },
+        {
+          "version": 15,
+          "timestamp": "2018-04-22T08:21:47Z",
+          "changeset": 58304607,
+          "user": "user_177389",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 23,
+          "members_added": [
+            "way:582468890:outer",
+            "way:81100474:outer",
+            "way:582468884:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 58304607,
+            "created_at": "2018-04-22T08:19:31Z",
+            "closed_at": "2018-04-22T08:21:48Z",
+            "user": "user_177389",
+            "changes_count": 39,
+            "tags": {
+              "comment": "boundary correction",
+              "created_by": "JOSM/1.5 (13576 de)"
+            }
+          }
+        },
+        {
+          "version": 16,
+          "timestamp": "2018-05-09T19:45:27Z",
+          "changeset": 58829948,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 19,
+          "members_added": [
+            "way:556859342:outer"
+          ],
+          "members_removed": [
+            "way:582465774:outer",
+            "way:582468890:outer",
+            "way:582276450:outer",
+            "way:81100474:outer",
+            "way:582468884:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 58829948,
+            "created_at": "2018-05-09T19:33:35Z",
+            "closed_at": "2018-05-09T19:45:39Z",
+            "user": "Maturi0n",
+            "changes_count": 727,
+            "tags": {
+              "comment": "Reverting politically motivated edits by Moldovan_Merkator. They violate OSM's \"on the ground\" rule. The borders changed and/or created by this user do not reflect the situation that exists on the ground.",
+              "created_by": "reverter;JOSM/1.5 (13710 de)"
+            }
+          }
+        },
+        {
+          "version": 17,
+          "timestamp": "2018-05-09T23:51:07Z",
+          "changeset": 58834970,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 20,
+          "members_added": [
+            "way:582468884:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 58834970,
+            "created_at": "2018-05-09T23:50:57Z",
+            "closed_at": "2018-05-09T23:51:07Z",
+            "user": "Maturi0n",
+            "changes_count": 97,
+            "tags": {
+              "changesets_count": "53368",
+              "comment": "Fixing the status of Copanca, which is not controlled by Transnistria.",
+              "created_by": "iD 2.8.1",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 18,
+          "timestamp": "2018-05-11T11:42:57Z",
+          "changeset": 58876210,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:ro": "Comuna Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 21,
+          "members_added": [
+            "way:587464794:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 58876210,
+            "created_at": "2018-05-11T11:42:50Z",
+            "closed_at": "2018-05-11T11:42:57Z",
+            "user": "Maturi0n",
+            "changes_count": 34,
+            "tags": {
+              "changesets_count": "53403",
+              "comment": "Names",
+              "created_by": "iD 2.8.1",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 19,
+          "timestamp": "2018-06-03T08:58:09Z",
+          "changeset": 59502625,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 21,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 59502625,
+            "created_at": "2018-06-03T08:58:09Z",
+            "closed_at": "2018-06-03T08:58:09Z",
+            "user": "Maturi0n",
+            "changes_count": 1,
+            "tags": {
+              "changesets_count": "53803",
+              "comment": "Names",
+              "created_by": "iD 2.8.2",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 20,
+          "timestamp": "2018-12-16T01:40:05Z",
+          "changeset": 65512972,
+          "user": "KKS",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [
+            "way:511673395:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 65512972,
+            "created_at": "2018-12-16T01:39:37Z",
+            "closed_at": "2018-12-16T01:40:07Z",
+            "user": "KKS",
+            "changes_count": 89,
+            "tags": {
+              "comment": "Дністер",
+              "created_by": "JOSM/1.5 (14460 uk)",
+              "source": "knowledge; Bing"
+            }
+          }
+        },
+        {
+          "version": 21,
+          "timestamp": "2019-03-29T01:20:42Z",
+          "changeset": 68648397,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 21,
+          "members_added": [
+            "way:680241449:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 68648397,
+            "created_at": "2019-03-29T01:20:37Z",
+            "closed_at": "2019-03-29T01:20:43Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 51,
+            "tags": {
+              "changesets_count": "568",
+              "comment": "Fixes.",
+              "created_by": "iD 2.14.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery;Custom (https://moldova-map.md/geoserver/gwc/service/wmts?layer=orthophoto%3AOrtofoto_2007&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{zoom}&TileCol={x}&T",
+              "locale": "ro-RO"
+            }
+          }
+        },
+        {
+          "version": 22,
+          "timestamp": "2019-04-14T22:40:27Z",
+          "changeset": 69215666,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 22,
+          "members_added": [
+            "way:683799407:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 69215666,
+            "created_at": "2019-04-14T22:40:19Z",
+            "closed_at": "2019-04-14T22:40:28Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 110,
+            "tags": {
+              "changesets_count": "662",
+              "comment": "boundary fixes.",
+              "created_by": "iD 2.14.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "OpenStreetMap (Standard);Bing aerial imagery",
+              "locale": "ro"
+            }
+          }
+        },
+        {
+          "version": 23,
+          "timestamp": "2019-04-17T19:31:29Z",
+          "changeset": 69321835,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 21,
+          "members_added": [],
+          "members_removed": [
+            "way:683799407:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 69321835,
+            "created_at": "2019-04-17T19:31:20Z",
+            "closed_at": "2019-04-17T19:31:30Z",
+            "user": "Maturi0n",
+            "changes_count": 111,
+            "tags": {
+              "comment": "Reverting a changeset that does not conform to local on-the-ground-truth",
+              "created_by": "reverter;JOSM/1.5 (14945 de)"
+            }
+          }
+        },
+        {
+          "version": 24,
+          "timestamp": "2019-04-17T20:33:57Z",
+          "changeset": 69323392,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 22,
+          "members_added": [
+            "way:683799407:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 69323392,
+            "created_at": "2019-04-17T20:33:48Z",
+            "closed_at": "2019-04-17T20:33:58Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 111,
+            "tags": {
+              "comment": "reverted changeset because my changeset is REAL and is based on ON-THE-GROUND-RULE, and is not POLITICAL MOTIVATED.",
+              "created_by": "reverter;JOSM/1.5 (14945 en)",
+              "source": "Cadastral map #ARFC"
+            }
+          }
+        },
+        {
+          "version": 25,
+          "timestamp": "2019-04-17T20:55:49Z",
+          "changeset": 69323866,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [
+            "way:470185169:outer",
+            "way:470185167:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 69323866,
+            "created_at": "2019-04-17T20:55:48Z",
+            "closed_at": "2019-04-17T20:55:50Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 24,
+            "tags": {
+              "changesets_count": "679",
+              "comment": "fix.",
+              "created_by": "iD 2.14.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (https://moldova-map.md/geoserver/gwc/service/wmts?layer=orthophoto%3AOrtofoto_2007&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{zoom}&TileCol={x}&TileRow={y})",
+              "locale": "ro"
+            }
+          }
+        },
+        {
+          "version": 26,
+          "timestamp": "2019-04-17T21:20:09Z",
+          "changeset": 69324303,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "type": "boundary"
+          },
+          "member_count": 19,
+          "members_added": [],
+          "members_removed": [
+            "way:511673396:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 69324303,
+            "created_at": "2019-04-17T21:20:06Z",
+            "closed_at": "2019-04-17T21:20:09Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 11,
+            "tags": {
+              "changesets_count": "683",
+              "comment": "fixes.",
+              "created_by": "iD 2.14.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (https://moldova-map.md/geoserver/gwc/service/wmts?layer=orthophoto%3AOrtofoto_2007&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{zoom}&TileCol={x}&TileRow={y})",
+              "locale": "ro"
+            }
+          }
+        },
+        {
+          "version": 27,
+          "timestamp": "2019-05-15T10:52:07Z",
+          "changeset": 70269606,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary"
+          },
+          "member_count": 19,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 70269606,
+            "created_at": "2019-05-15T10:52:06Z",
+            "closed_at": "2019-05-15T10:52:07Z",
+            "user": "Maturi0n",
+            "changes_count": 1,
+            "tags": {
+              "changesets_count": "60506",
+              "comment": "tagging",
+              "created_by": "iD 2.14.3",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 28,
+          "timestamp": "2019-06-05T07:36:37Z",
+          "changeset": 70946570,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary"
+          },
+          "member_count": 19,
+          "members_added": [
+            "node:273184231:label"
+          ],
+          "members_removed": [
+            "node:273184231:admin_centre"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 70946570,
+            "created_at": "2019-06-05T07:36:37Z",
+            "closed_at": "2019-06-05T07:36:37Z",
+            "user": "Maturi0n",
+            "changes_count": 23,
+            "tags": {
+              "changesets_count": "61281",
+              "comment": "set label",
+              "created_by": "iD 2.15.1",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Maxar Premium Imagery (Beta)",
+              "locale": "de"
+            }
+          }
+        },
+        {
+          "version": 29,
+          "timestamp": "2021-01-18T22:56:34Z",
+          "changeset": 97724729,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary"
+          },
+          "member_count": 18,
+          "members_added": [
+            "way:470185165:outer"
+          ],
+          "members_removed": [
+            "way:515171917:outer",
+            "way:484264263:outer"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 97724729,
+            "created_at": "2021-01-18T22:56:31Z",
+            "closed_at": "2021-01-18T22:56:34Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 160,
+            "tags": {
+              "changesets_count": "2478",
+              "comment": "minor corrections",
+              "created_by": "iD 2.19.5",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Maxar Premium Imagery (Beta)",
+              "locale": "en"
+            }
+          }
+        },
+        {
+          "version": 30,
+          "timestamp": "2021-03-17T22:46:40Z",
+          "changeset": 101216645,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary"
+          },
+          "member_count": 19,
+          "members_added": [
+            "way:918465805:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 101216645,
+            "created_at": "2021-03-17T22:46:39Z",
+            "closed_at": "2021-03-17T22:46:41Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 329,
+            "tags": {
+              "changesets_count": "2706",
+              "comment": "added villages boundary",
+              "created_by": "iD 2.19.6",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Custom (http://moldova-map.md/geoserver/ows?BBOX={bbox}&FORMAT=image/png&HEIGHT={height}&LAYERS=orthophoto:Ortofoto_2016_RM,2020_ortofoto_moldova_centru&REQUEST=GetMap&SERVICE=WMS&SRS={proj}&STYLES=&TRANSPARENT=TRUE&VERSION=1.1.1&WIDTH={width} );Maxar Pre",
+              "locale": "en"
+            }
+          }
+        },
+        {
+          "version": 31,
+          "timestamp": "2025-04-04T13:01:13Z",
+          "changeset": 164507261,
+          "user": "Mihai Spătaru",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary"
+          },
+          "member_count": 20,
+          "members_added": [
+            "way:1374704576:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 164507261,
+            "created_at": "2025-04-04T13:01:12Z",
+            "closed_at": "2025-04-04T13:01:13Z",
+            "user": "Mihai Spătaru",
+            "changes_count": 273,
+            "tags": {
+              "changesets_count": "5220",
+              "comment": "Actualizări zona Stanga Nistrului.",
+              "created_by": "iD 2.32.0",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing Maps Aerial;Moldova Orthophoto (2007);Esri World Imagery",
+              "locale": "en",
+              "resolved:crossing_ways:highway-waterway": "1",
+              "resolved:missing_role": "2"
+            }
+          }
+        },
+        {
+          "version": 32,
+          "timestamp": "2025-06-14T17:05:55Z",
+          "changeset": 167621478,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "test": "test",
+            "type": "boundary"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 167621478,
+            "created_at": "2025-06-14T17:05:47Z",
+            "closed_at": "2025-06-14T17:27:56Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 5413,
+            "tags": {
+              "comment": "See pages 61-64 from Address System Guide",
+              "created_by": "JOSM/1.5 (19412 en)",
+              "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf"
+            }
+          }
+        },
+        {
+          "version": 33,
+          "timestamp": "2025-06-14T18:03:39Z",
+          "changeset": 167623335,
+          "user": "Moldovan_Merkator",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 167623335,
+            "created_at": "2025-06-14T18:03:31Z",
+            "closed_at": "2025-06-14T18:03:51Z",
+            "user": "Moldovan_Merkator",
+            "changes_count": 5403,
+            "tags": {
+              "comment": "See pages 61-64 from Address System Guide",
+              "created_by": "JOSM/1.5 (19412 en)",
+              "source": "https://www.asp.gov.md/sites/default/files/documents/servicii/bunuri-imobile/Address_System_Guide_RO_actualizat.pdf"
+            }
+          }
+        },
+        {
+          "version": 34,
+          "timestamp": "2025-07-07T11:13:48Z",
+          "changeset": 168599695,
+          "user": "Gikü",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary",
+            "wikidata": "Q119145367",
+            "wikipedia": "en:Chițcani"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 168599695,
+            "created_at": "2025-07-07T11:13:48Z",
+            "closed_at": "2025-07-07T11:13:49Z",
+            "user": "Gikü",
+            "changes_count": 73,
+            "tags": {
+              "changesets_count": "14",
+              "comment": "adding wikidata IDs to communes in miscellaneous Central Moldova districts + removed non-sensical Russian/Ukrainian names + corrected some typos here and there",
+              "created_by": "iD 2.34.1",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Moldova Extended Orthophoto (2016)",
+              "locale": "en-US"
+            }
+          }
+        },
+        {
+          "version": 35,
+          "timestamp": "2025-11-30T19:05:58Z",
+          "changeset": 175327166,
+          "user": "Oleg_MD",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Chițcani",
+            "name:ro": "Chițcani",
+            "name:ru": "Кицкань",
+            "name:uk": "Кіцкань",
+            "short_name": "Chițcani",
+            "short_name:de": "Chițcani",
+            "short_name:en": "Chițcani",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Chițcani",
+            "short_name:uk": "Кіцкань",
+            "type": "boundary",
+            "wikidata": "Q119145367",
+            "wikipedia": "en:Chițcani"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 175327166,
+            "created_at": "2025-11-30T19:05:58Z",
+            "closed_at": "2025-11-30T19:05:59Z",
+            "user": "Oleg_MD",
+            "changes_count": 111,
+            "tags": {
+              "comment": "Denumiri",
+              "created_by": "JOSM/1.5 (19439 en)",
+              "source": "geodata.gov.md - orthophoto:Ortofoto_2007; Legea nr. 764/2001 privind organizarea administrativ-teritorială&#10;a Republicii Moldova (https://www.legis.md/cautare/getResults?doc_id=149266&lang=ro)"
+            }
+          }
+        },
+        {
+          "version": 36,
+          "timestamp": "2025-12-01T14:51:57Z",
+          "changeset": 175362152,
+          "user": "Maturi0n",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary",
+            "wikidata": "Q119145367",
+            "wikipedia": "en:Chițcani"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 175362152,
+            "created_at": "2025-12-01T14:51:57Z",
+            "closed_at": "2025-12-01T14:51:57Z",
+            "user": "Maturi0n",
+            "changes_count": 111,
+            "tags": {
+              "changesets_count": "73101",
+              "comment": "Reverted because it destroyed valid names, confused PMR administrative division with Moldovan ones and violates on the ground truth",
+              "created_by": "osm-revert git#6d91dd8",
+              "host": "https://revert.monicz.dev",
+              "revert:fix:node": "3",
+              "revert:id": "https://www.openstreetmap.org/changeset/175327166"
+            }
+          }
+        },
+        {
+          "version": 37,
+          "timestamp": "2026-06-16T23:58:55Z",
+          "changeset": 184203666,
+          "user": "Русский Человек",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary",
+            "wikidata": "Q119145367",
+            "wikipedia": "ru:Кицканы"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 184203666,
+            "created_at": "2026-06-16T23:58:54Z",
+            "closed_at": "2026-06-16T23:58:55Z",
+            "user": "Русский Человек",
+            "changes_count": 12,
+            "tags": {
+              "changesets_count": "29",
+              "comment": "In accordance with the official language.",
+              "created_by": "iD 2.40.0",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing Maps Aerial",
+              "locale": "ru"
+            }
+          }
+        },
+        {
+          "version": 38,
+          "timestamp": "2026-06-17T00:30:06Z",
+          "changeset": 184204063,
+          "user": "Русский Человек",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "official_name": "Кицканский сельский совет",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary",
+            "wikidata": "Q119145367",
+            "wikipedia": "ru:Кицканы"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 184204063,
+            "created_at": "2026-06-17T00:30:03Z",
+            "closed_at": "2026-06-17T00:30:06Z",
+            "user": "Русский Человек",
+            "changes_count": 8,
+            "tags": {
+              "changesets_count": "30",
+              "comment": "Мелкие поправки.",
+              "created_by": "iD 2.40.0",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing Maps Aerial",
+              "locale": "ru"
+            }
+          }
+        },
+        {
+          "version": 39,
+          "timestamp": "2026-07-12T01:26:59Z",
+          "changeset": 185567442,
+          "user": "Fizzie-DWG",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary",
+            "wikidata": "Q119145367",
+            "wikipedia": "en:Chițcani"
+          },
+          "member_count": 20,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 185567442,
+            "created_at": "2026-07-12T01:26:59Z",
+            "closed_at": "2026-07-12T01:27:00Z",
+            "user": "Fizzie-DWG",
+            "changes_count": 36,
+            "tags": {
+              "changesets_count": "36651",
+              "comment": "DWG revert - invalid changes, abusive language",
+              "created_by": "osm-revert git#c8b2ad4",
+              "host": "https://revert.monicz.dev",
+              "revert:fix:node": "3",
+              "revert:fix:relation": "13",
+              "revert:id": "159590408;164843656;165912074;170606233;184201872;184202494;184202956;184202991;184203202;184203290;184203666;184204063;184204381;184204554;184204634;184244115;184244692;184244771;184245310;184278938"
+            }
+          }
+        },
+        {
+          "version": 40,
+          "timestamp": "2026-09-10T19:15:09Z",
+          "changeset": 188841242,
+          "user": "ard4",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Кицканский сельский совет",
+            "name:md": "Советул сэтеск Кицкань",
+            "name:ro": "Sovetul sătesc Chițcani",
+            "name:ru": "Кицканский сельский совет",
+            "name:uk": "Кіцканська сільська рада",
+            "short_name": "Кицканы",
+            "short_name:de": "Kizkany",
+            "short_name:en": "Kitskany",
+            "short_name:md": "Кицкань",
+            "short_name:ro": "Chițcani",
+            "short_name:ru": "Кицканы",
+            "short_name:uk": "Кіцкани",
+            "type": "boundary",
+            "wikidata": "Q119145367",
+            "wikipedia": "en:Chițcani"
+          },
+          "member_count": 20,
+          "members_added": [
+            "node:273184231:admin_centre"
+          ],
+          "members_removed": [
+            "node:273184231:label"
+          ],
+          "changeset_metadata": {
+            "changeset_id": 188841242,
+            "created_at": "2026-09-10T19:15:09Z",
+            "closed_at": "2026-09-10T19:15:09Z",
+            "user": "ard4",
+            "changes_count": 1,
+            "tags": {
+              "changesets_count": "229",
+              "comment": "update admin centers",
+              "created_by": "iD 2.42.2",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing Maps Aerial",
+              "locale": "en"
+            }
+          }
+        }
+      ],
+      "cuatm_context": {
+        "verified_parent": {
+          "code": "2700",
+          "parent_code": null,
+          "statistical_code": "2700000",
+          "parent_statistical_code": null,
+          "status_code": "2",
+          "name": "Căușeni",
+          "name_ru": "Кэушень",
+          "normalized_name": "causeni",
+          "sheet": "Sheet 1",
+          "row": 297,
+          "parent_name": null
+        },
+        "direct_children": [
+          {
+            "code": "2701",
+            "parent_code": "2700",
+            "statistical_code": "2701000",
+            "parent_statistical_code": "2700000",
+            "status_code": "3",
+            "name": "Căușeni",
+            "name_ru": "Кэушень",
+            "normalized_name": "causeni",
+            "sheet": "Sheet 1",
+            "row": 298,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2301",
+            "parent_code": "2700",
+            "statistical_code": "2702000",
+            "parent_statistical_code": "2700000",
+            "status_code": "3",
+            "name": "Căinari",
+            "name_ru": "Кэинарь",
+            "normalized_name": "cainari",
+            "sheet": "Sheet 1",
+            "row": 299,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2710",
+            "parent_code": "2700",
+            "statistical_code": "2710000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Baccealia",
+            "name_ru": "Бакчалия",
+            "normalized_name": "baccealia",
+            "sheet": "Sheet 1",
+            "row": 301,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2310",
+            "parent_code": "2700",
+            "statistical_code": "2711000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Baimaclia",
+            "name_ru": "Баймаклия",
+            "normalized_name": "baimaclia",
+            "sheet": "Sheet 1",
+            "row": 305,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2712",
+            "parent_code": "2700",
+            "statistical_code": "2712000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Chircăiești",
+            "name_ru": "Киркэешть",
+            "normalized_name": "chircaiesti",
+            "sheet": "Sheet 1",
+            "row": 307,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2314",
+            "parent_code": "2700",
+            "statistical_code": "2713000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Chircăieștii Noi",
+            "name_ru": "Киркэештий Ной",
+            "normalized_name": "chircaiestii noi",
+            "sheet": "Sheet 1",
+            "row": 308,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "7612",
+            "parent_code": "2700",
+            "statistical_code": "2714000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Chițcani",
+            "name_ru": "Кицкань",
+            "normalized_name": "chitcani",
+            "sheet": "Sheet 1",
+            "row": 310,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2317",
+            "parent_code": "2700",
+            "statistical_code": "2715000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Ciuflești",
+            "name_ru": "Чуфлешть",
+            "normalized_name": "ciuflesti",
+            "sheet": "Sheet 1",
+            "row": 313,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2713",
+            "parent_code": "2700",
+            "statistical_code": "2716000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Cîrnățeni",
+            "name_ru": "Кырнэцень",
+            "normalized_name": "cirnateni",
+            "sheet": "Sheet 1",
+            "row": 314,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2318",
+            "parent_code": "2700",
+            "statistical_code": "2717000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Cîrnățenii Noi",
+            "name_ru": "Кырнэцений Ной",
+            "normalized_name": "cirnatenii noi",
+            "sheet": "Sheet 1",
+            "row": 315,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "7616",
+            "parent_code": "2700",
+            "statistical_code": "2718000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Copanca",
+            "name_ru": "Копанка",
+            "normalized_name": "copanca",
+            "sheet": "Sheet 1",
+            "row": 317,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2323",
+            "parent_code": "2700",
+            "statistical_code": "2719000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Coșcalia",
+            "name_ru": "Кошкалия",
+            "normalized_name": "coscalia",
+            "sheet": "Sheet 1",
+            "row": 318,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "0703",
+            "parent_code": "2700",
+            "statistical_code": "2720000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Cremenciug",
+            "name_ru": "Кременчуг",
+            "normalized_name": "cremenciug",
+            "sheet": "Sheet 1",
+            "row": 319,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2714",
+            "parent_code": "2700",
+            "statistical_code": "2721000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Fîrlădeni",
+            "name_ru": "Фырлэдень",
+            "normalized_name": "firladeni",
+            "sheet": "Sheet 1",
+            "row": 320,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2715",
+            "parent_code": "2700",
+            "statistical_code": "2722000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Gîsca",
+            "name_ru": "Гыска",
+            "normalized_name": "gisca",
+            "sheet": "Sheet 1",
+            "row": 322,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "8521",
+            "parent_code": "2700",
+            "statistical_code": "2723000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Grădinița",
+            "name_ru": "Грэдиница",
+            "normalized_name": "gradinita",
+            "sheet": "Sheet 1",
+            "row": 323,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2716",
+            "parent_code": "2700",
+            "statistical_code": "2724000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Grigorievca",
+            "name_ru": "Григорьевка",
+            "normalized_name": "grigorievca",
+            "sheet": "Sheet 1",
+            "row": 326,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2717",
+            "parent_code": "2700",
+            "statistical_code": "2725000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Hagimus",
+            "name_ru": "Хаджимус",
+            "normalized_name": "hagimus",
+            "sheet": "Sheet 1",
+            "row": 327,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2718",
+            "parent_code": "2700",
+            "statistical_code": "2726000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Opaci",
+            "name_ru": "Опачь",
+            "normalized_name": "opaci",
+            "sheet": "Sheet 1",
+            "row": 328,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2330",
+            "parent_code": "2700",
+            "statistical_code": "2727000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Pervomaisc",
+            "name_ru": "Первомайск",
+            "normalized_name": "pervomaisc",
+            "sheet": "Sheet 1",
+            "row": 329,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2719",
+            "parent_code": "2700",
+            "statistical_code": "2728000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Plop-Știubei",
+            "name_ru": "Плоп-Штюбей",
+            "normalized_name": "plop stiubei",
+            "sheet": "Sheet 1",
+            "row": 331,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2720",
+            "parent_code": "2700",
+            "statistical_code": "2729000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Săiți",
+            "name_ru": "Сэиць",
+            "normalized_name": "saiti",
+            "sheet": "Sheet 1",
+            "row": 332,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2721",
+            "parent_code": "2700",
+            "statistical_code": "2730000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Sălcuța",
+            "name_ru": "Сэлкуца",
+            "normalized_name": "salcuta",
+            "sheet": "Sheet 1",
+            "row": 333,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2336",
+            "parent_code": "2700",
+            "statistical_code": "2731000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Taraclia",
+            "name_ru": "Тараклия",
+            "normalized_name": "taraclia",
+            "sheet": "Sheet 1",
+            "row": 334,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2722",
+            "parent_code": "2700",
+            "statistical_code": "2732000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Tănătari",
+            "name_ru": "Тэнэтарь",
+            "normalized_name": "tanatari",
+            "sheet": "Sheet 1",
+            "row": 335,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2723",
+            "parent_code": "2700",
+            "statistical_code": "2733000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Tănătarii Noi",
+            "name_ru": "Тэнэтарий Ной",
+            "normalized_name": "tanatarii noi",
+            "sheet": "Sheet 1",
+            "row": 336,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2727",
+            "parent_code": "2700",
+            "statistical_code": "2734000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Tocuz",
+            "name_ru": "Токуз",
+            "normalized_name": "tocuz",
+            "sheet": "Sheet 1",
+            "row": 339,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2728",
+            "parent_code": "2700",
+            "statistical_code": "2735000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Ucrainca",
+            "name_ru": "Украинка",
+            "normalized_name": "ucrainca",
+            "sheet": "Sheet 1",
+            "row": 340,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2730",
+            "parent_code": "2700",
+            "statistical_code": "2736000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Ursoaia",
+            "name_ru": "Урсоая",
+            "normalized_name": "ursoaia",
+            "sheet": "Sheet 1",
+            "row": 342,
+            "parent_name": "Căușeni"
+          },
+          {
+            "code": "2731",
+            "parent_code": "2700",
+            "statistical_code": "2737000",
+            "parent_statistical_code": "2700000",
+            "status_code": "8",
+            "name": "Zaim",
+            "name_ru": "Заим",
+            "normalized_name": "zaim",
+            "sheet": "Sheet 1",
+            "row": 343,
+            "parent_name": "Căușeni"
+          }
+        ]
+      },
+      "review": {
+        "identity_status": "administrative_semantics_review",
+        "automatic_reconciliation": false,
+        "reason": "Legacy/de-facto terminology must not be equated automatically with a current CUATM identity."
+      }
+    },
+    {
+      "relation_id": 12104636,
+      "imported_reconciliation": {
+        "id": "osm-r12104636",
+        "name": null,
+        "cuatm_key": null,
+        "legal_id": null,
+        "legal_name": null,
+        "status_code": null,
+        "legal_source": "BNS CUATM",
+        "match_method": null,
+        "confidence": null,
+        "unmatched_reason": "name_absent_from_official_snapshot",
+        "name_candidate_count": 0,
+        "parent_official_code": "3136"
+      },
+      "geometry": {
+        "area_km2": 0.2527214492262491,
+        "bbox": [
+          28.9706026,
+          47.0988854,
+          28.9809992,
+          47.1052796
+        ],
+        "centroid": [
+          28.9747457375,
+          47.101796158333336
+        ],
+        "geometry_type": "Polygon",
+        "properties": {
+          "type": "relation",
+          "id": 12104636,
+          "tags": {
+            "admin_level": "9",
+            "boundary": "administrative",
+            "landuse": "allotments",
+            "name": "Întovărășire Pomilegumicolă (neautorizată)",
+            "name:prefix": "Întovărășirea pomicolă",
+            "name:suffix:en": "Fruit growing association",
+            "official_name": "Întovărășirea pomicolă „-”",
+            "place": "allotments",
+            "ref:rson:idno": "0",
+            "short_name": "-",
+            "type": "multipolygon"
+          },
+          "relations": [],
+          "meta": {},
+          "catalog_id": "osm-r12104636",
+          "parent_id": "osm-r19090918",
+          "jurisdiction": "MD",
+          "entity_type": "non_administrative_or_auxiliary_area",
+          "classification_confidence": "low"
+        }
+      },
+      "current": {
+        "version": 5,
+        "timestamp": "2026-08-31T12:01:53Z",
+        "tags": {
+          "admin_level": "9",
+          "boundary": "administrative",
+          "landuse": "allotments",
+          "type": "boundary"
+        },
+        "members": [
+          {
+            "type": "way",
+            "ref": 889101842,
+            "role": "outer"
+          }
+        ],
+        "member_summary": {
+          "way": 1
+        }
+      },
+      "history": [
+        {
+          "version": 1,
+          "timestamp": "2020-12-28T16:51:17Z",
+          "changeset": 96549606,
+          "user": "Mihai Spătaru",
+          "tags": {
+            "type": "multipolygon"
+          },
+          "member_count": 1,
+          "members_added": [
+            "way:889101842:outer"
+          ],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 96549606,
+            "created_at": "2020-12-28T16:51:16Z",
+            "closed_at": "2020-12-28T16:51:17Z",
+            "user": "Mihai Spătaru",
+            "changes_count": 1,
+            "tags": {
+              "comment": "IP Moldova",
+              "created_by": "JOSM/1.5 (17329 en)",
+              "source": "BNS"
+            }
+          }
+        },
+        {
+          "version": 2,
+          "timestamp": "2020-12-28T16:56:35Z",
+          "changeset": 96549846,
+          "user": "Mihai Spătaru",
+          "tags": {
+            "landuse": "allotments",
+            "type": "multipolygon"
+          },
+          "member_count": 1,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 96549846,
+            "created_at": "2020-12-28T16:56:33Z",
+            "closed_at": "2020-12-28T16:56:35Z",
+            "user": "Mihai Spătaru",
+            "changes_count": 5,
+            "tags": {
+              "changesets_count": "106",
+              "comment": "IP Moldova",
+              "created_by": "iD 2.19.5",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Bing aerial imagery",
+              "locale": "en",
+              "resolved:missing_tag:descriptive": "5"
+            }
+          }
+        },
+        {
+          "version": 3,
+          "timestamp": "2023-09-26T12:49:34Z",
+          "changeset": 141773533,
+          "user": "Mihai Spătaru",
+          "tags": {
+            "landuse": "allotments",
+            "name": "Întovărășire Pomilegumicolă (neautorizată)",
+            "type": "multipolygon"
+          },
+          "member_count": 1,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 141773533,
+            "created_at": "2023-09-26T12:49:34Z",
+            "closed_at": "2023-09-26T12:49:35Z",
+            "user": "Mihai Spătaru",
+            "changes_count": 526,
+            "tags": {
+              "changesets_count": "2898",
+              "comment": "Actualizări zona Criuleni.",
+              "created_by": "iD 2.27.1",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Moldova Ortophoto (2016);Moldova Ortophoto, Center part (2020)",
+              "locale": "en"
+            }
+          }
+        },
+        {
+          "version": 4,
+          "timestamp": "2026-06-29T13:30:39Z",
+          "changeset": 184795985,
+          "user": "Mihai Spătaru",
+          "tags": {
+            "admin_level": "9",
+            "boundary": "administrative",
+            "landuse": "allotments",
+            "name": "Întovărășire Pomilegumicolă (neautorizată)",
+            "name:prefix": "Întovărășirea pomicolă",
+            "name:suffix:en": "Fruit growing association",
+            "official_name": "Întovărășirea pomicolă „-”",
+            "place": "allotments",
+            "ref:rson:idno": "0",
+            "short_name": "-",
+            "type": "multipolygon"
+          },
+          "member_count": 1,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 184795985,
+            "created_at": "2026-06-29T13:30:39Z",
+            "closed_at": "2026-06-29T13:30:39Z",
+            "user": "Mihai Spătaru",
+            "changes_count": 64,
+            "tags": {
+              "changesets_count": "7200",
+              "comment": "Actualizări regiunea Centru.",
+              "created_by": "iD 2.41.1",
+              "host": "https://www.openstreetmap.org/edit",
+              "imagery_used": "Moldova Orthophoto, Center part (2020)",
+              "locale": "en"
+            }
+          }
+        },
+        {
+          "version": 5,
+          "timestamp": "2026-08-31T12:01:53Z",
+          "changeset": 188302188,
+          "user": "ard4",
+          "tags": {
+            "admin_level": "9",
+            "boundary": "administrative",
+            "landuse": "allotments",
+            "type": "boundary"
+          },
+          "member_count": 1,
+          "members_added": [],
+          "members_removed": [],
+          "changeset_metadata": {
+            "changeset_id": 188302188,
+            "created_at": "2026-08-31T12:01:52Z",
+            "closed_at": "2026-08-31T12:01:53Z",
+            "user": "ard4",
+            "changes_count": 21,
+            "tags": {
+              "comment": "remove generic name from allotments",
+              "created_by": "JOSM/1.5 (19555 ru)"
+            }
+          }
+        }
+      ],
+      "cuatm_context": {
+        "verified_parent": {
+          "code": "3136",
+          "parent_code": "3100",
+          "statistical_code": "3121000",
+          "parent_statistical_code": "3100000",
+          "status_code": "8",
+          "name": "Hrușova",
+          "name_ru": "Хрушова",
+          "normalized_name": "hrusova",
+          "sheet": "Sheet 1",
+          "row": 412,
+          "parent_name": "Criuleni"
+        },
+        "direct_children": [
+          {
+            "code": "3137",
+            "parent_code": "3136",
+            "statistical_code": "3121001",
+            "parent_statistical_code": "3121000",
+            "status_code": "9",
+            "name": "Chetroasa",
+            "name_ru": "Кетроаса",
+            "normalized_name": "chetroasa",
+            "sheet": "Sheet 1",
+            "row": 413,
+            "parent_name": "Hrușova"
+          },
+          {
+            "code": "3138",
+            "parent_code": "3136",
+            "statistical_code": "3121002",
+            "parent_statistical_code": "3121000",
+            "status_code": "9",
+            "name": "Ciopleni",
+            "name_ru": "Чоплень",
+            "normalized_name": "ciopleni",
+            "sheet": "Sheet 1",
+            "row": 414,
+            "parent_name": "Hrușova"
+          }
+        ]
+      },
+      "review": {
+        "identity_status": "unresolved_identity",
+        "automatic_reconciliation": false,
+        "reason": "No identity is inferred from geometry or parent alone."
+      }
+    }
+  ]
+}

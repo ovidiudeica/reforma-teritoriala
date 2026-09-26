@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-09-26T08:19:58.662Z",
+  "generated_at": "2026-09-26T08:46:31.240Z",
   "jurisdiction": "MD",
   "official_source": "BNS CUATM",
   "official_source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
   "official_snapshot_records": 1721,
   "official_parent_links": 1684,
-  "entity_count": 2590,
-  "matched_count": 2465,
-  "unmatched_count": 2,
-  "non_cuatm_count": 123,
+  "entity_count": 2500,
+  "matched_count": 2380,
+  "unmatched_count": 1,
+  "non_cuatm_count": 119,
   "non_cuatm_by_class": {
-    "non_cuatm_allotment_boundary": 123
+    "non_cuatm_allotment_boundary": 119
   },
   "matched_by_method": {
-    "explicit_cuatm_key": 2267,
-    "exact_normalized_name_and_official_parent": 183,
-    "osm_self_parent_same_legal_entity": 11,
+    "explicit_cuatm_key": 2201,
+    "exact_normalized_name_and_official_parent": 174,
+    "osm_self_parent_same_legal_entity": 1,
     "reviewed_override": 4
   },
   "unmatched_by_reason": {
-    "name_absent_from_official_snapshot": 2
+    "name_absent_from_official_snapshot": 1
   },
   "policy": "Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.",
   "matches": [
@@ -1418,6 +1418,20 @@
       "status_code": "8",
       "legal_parent_id": "6400",
       "legal_parent_name": "Orhei",
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r19034092",
+      "name": "Berlinți",
+      "cuatm_key": "1413",
+      "legal_id": "1413",
+      "legal_name": "Berlinți",
+      "status_code": "8",
+      "legal_parent_id": "1400",
+      "legal_parent_name": "Briceni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -5247,6 +5261,20 @@
       "unmatched_reason": null
     },
     {
+      "id": "osm-r9288287",
+      "name": "Dubăsari",
+      "cuatm_key": "3801",
+      "legal_id": "3801",
+      "legal_name": "Dubăsari",
+      "status_code": "3",
+      "legal_parent_id": "9800",
+      "legal_parent_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
       "id": "osm-r19090930",
       "name": "Dubăsarii Vechi",
       "cuatm_key": "3133",
@@ -5304,6 +5332,20 @@
     },
     {
       "id": "osm-r19045259",
+      "name": "Duruitoarea Nouă",
+      "cuatm_key": "7162",
+      "legal_id": "7162",
+      "legal_name": "Duruitoarea Nouă",
+      "status_code": "8",
+      "legal_parent_id": "7100",
+      "legal_parent_name": "Rîșcani",
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r19045262",
       "name": "Duruitoarea Nouă",
       "cuatm_key": "7162",
       "legal_id": "7162",
@@ -6228,6 +6270,20 @@
     },
     {
       "id": "osm-r19034087",
+      "name": "Grimăncăuți",
+      "cuatm_key": "1428",
+      "legal_id": "1428",
+      "legal_name": "Grimăncăuți",
+      "status_code": "8",
+      "legal_parent_id": "1400",
+      "legal_parent_name": "Briceni",
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r19034104",
       "name": "Grimăncăuți",
       "cuatm_key": "1428",
       "legal_id": "1428",
@@ -11328,20 +11384,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r9288287",
-      "name": "Sovetul orășenesc Dubăsari",
-      "cuatm_key": "3801",
-      "legal_id": "3801",
-      "legal_name": "Dubăsari",
-      "status_code": "3",
-      "legal_parent_id": "9800",
-      "legal_parent_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r7431238",
       "name": "Sovetul sătesc Bîcioc",
       "cuatm_key": "5011",
@@ -14310,20 +14352,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r12104636",
-      "name": null,
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "3136"
-    },
-    {
       "id": "osm-r18966933",
       "name": "Abaclia",
       "cuatm_key": "1210",
@@ -14350,6 +14378,20 @@
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
       "unmatched_reason": null
+    },
+    {
+      "id": "osm-r18967706",
+      "name": "Agriș",
+      "cuatm_key": "314601",
+      "legal_id": null,
+      "legal_name": null,
+      "status_code": null,
+      "legal_source": "BNS CUATM",
+      "match_method": null,
+      "confidence": null,
+      "unmatched_reason": "code_absent_from_official_snapshot",
+      "name_candidate_count": 0,
+      "parent_official_code": "3146"
     },
     {
       "id": "osm-r18967159",
@@ -14528,20 +14570,6 @@
       "status_code": "9",
       "legal_parent_id": "2145",
       "legal_parent_name": "Plopi",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701933",
-      "name": "Alexandrovca",
-      "cuatm_key": "4560",
-      "legal_id": "4560",
-      "legal_name": "Alexandrovca",
-      "status_code": "9",
-      "legal_parent_id": "4559",
-      "legal_parent_name": "Trifănești",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -15332,20 +15360,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701927",
-      "name": "Bădragii Noi",
-      "cuatm_key": "4117",
-      "legal_id": "4117",
-      "legal_name": "Bădragii Noi",
-      "status_code": "8",
-      "legal_parent_id": "4100",
-      "legal_parent_name": "Edineț",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967731",
       "name": "Bădragii Vechi",
       "cuatm_key": "4118",
@@ -15452,20 +15466,6 @@
       "status_code": "8",
       "legal_parent_id": "7400",
       "legal_parent_name": "Sîngerei",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701978",
-      "name": "Bălăurești",
-      "cuatm_key": "6012",
-      "legal_id": "6012",
-      "legal_name": "Bălăurești",
-      "status_code": "8",
-      "legal_parent_id": "6000",
-      "legal_parent_name": "Nisporeni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -15724,34 +15724,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701924",
-      "name": "Bezeda",
-      "cuatm_key": "1415",
-      "legal_id": "1415",
-      "legal_name": "Bezeda",
-      "status_code": "9",
-      "legal_parent_id": "1414",
-      "legal_parent_name": "Bogdănești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701931",
-      "name": "Bezeni",
-      "cuatm_key": "4538",
-      "legal_id": "4538",
-      "legal_name": "Bezeni",
-      "status_code": "9",
-      "legal_parent_id": "4537",
-      "legal_parent_name": "Izvoare",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967045",
       "name": "Biești",
       "cuatm_key": "6412",
@@ -15948,20 +15920,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r21303540",
-      "name": "Bocancea-Schit",
-      "cuatm_key": null,
-      "legal_id": "7450",
-      "legal_name": "Bocancea-Schit",
-      "status_code": "9",
-      "legal_parent_id": "7449",
-      "legal_parent_name": "Dumbrăvița",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r20181251",
       "name": "Bocani",
       "cuatm_key": "4314",
@@ -16054,20 +16012,6 @@
       "status_code": "6",
       "legal_parent_id": "2901",
       "legal_parent_name": "Cimișlia",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701925",
-      "name": "Bogdănești",
-      "cuatm_key": "1414",
-      "legal_id": "1414",
-      "legal_name": "Bogdănești",
-      "status_code": "8",
-      "legal_parent_id": "1400",
-      "legal_parent_name": "Briceni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -16264,20 +16208,6 @@
       "status_code": "6",
       "legal_parent_id": "6701",
       "legal_parent_name": "Rezina",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701982",
-      "name": "Botnărești",
-      "cuatm_key": "1012",
-      "legal_id": "1012",
-      "legal_name": "Botnărești",
-      "status_code": "8",
-      "legal_parent_id": "1000",
-      "legal_parent_name": "Anenii Noi",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -16872,20 +16802,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701923",
-      "name": "Bulboaca",
-      "cuatm_key": "1417",
-      "legal_id": "1417",
-      "legal_name": "Bulboaca",
-      "status_code": "8",
-      "legal_parent_id": "1400",
-      "legal_parent_name": "Briceni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967126",
       "name": "Bulboci",
       "cuatm_key": "7813",
@@ -17034,34 +16950,6 @@
       "status_code": "8",
       "legal_parent_id": "4100",
       "legal_parent_name": "Edineț",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701950",
-      "name": "Bursuc",
-      "cuatm_key": "1928",
-      "legal_id": "1928",
-      "legal_name": "Bursuc",
-      "status_code": "9",
-      "legal_parent_id": "1927",
-      "legal_parent_name": "Japca",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701975",
-      "name": "Bursuc",
-      "cuatm_key": "6021",
-      "legal_id": "6021",
-      "legal_name": "Bursuc",
-      "status_code": "8",
-      "legal_parent_id": "6000",
-      "legal_parent_name": "Nisporeni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -17404,20 +17292,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701984",
-      "name": "Carahasani",
-      "cuatm_key": "8514",
-      "legal_id": "8514",
-      "legal_name": "Carahasani",
-      "status_code": "8",
-      "legal_parent_id": "8500",
-      "legal_parent_name": "Ștefan Vodă",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18966957",
       "name": "Caraiman",
       "cuatm_key": "3423",
@@ -17594,20 +17468,6 @@
       "status_code": "8",
       "legal_parent_id": "6000",
       "legal_parent_name": "Nisporeni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701967",
-      "name": "Călinești",
-      "cuatm_key": "4315",
-      "legal_id": "4315",
-      "legal_name": "Călinești",
-      "status_code": "8",
-      "legal_parent_id": "4300",
-      "legal_parent_name": "Fălești",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -17880,20 +17740,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701944",
-      "name": "Cernița",
-      "cuatm_key": "4516",
-      "legal_id": "4516",
-      "legal_name": "Cernița",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967046",
       "name": "Cernoleuca",
       "cuatm_key": "3413",
@@ -18118,20 +17964,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701986",
-      "name": "Chioselia Rusă",
-      "cuatm_key": "9617",
-      "legal_id": "9617",
-      "legal_name": "Chioselia Rusă",
-      "status_code": "8",
-      "legal_parent_id": "9600",
-      "legal_parent_name": "Unitatea Teritorială Autonomă Găgăuzia",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967317",
       "name": "Chiperceni",
       "cuatm_key": "6420",
@@ -18280,20 +18112,6 @@
       "status_code": "9",
       "legal_parent_id": "8730",
       "legal_parent_name": "Vinogradovca",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701942",
-      "name": "Chirilovca",
-      "cuatm_key": "4511",
-      "legal_id": "4511",
-      "legal_name": "Chirilovca",
-      "status_code": "9",
-      "legal_parent_id": "4510",
-      "legal_parent_name": "Alexeevca",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -18706,20 +18524,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701970",
-      "name": "Ciuciuieni",
-      "cuatm_key": "7427",
-      "legal_id": "7427",
-      "legal_name": "Ciuciuieni",
-      "status_code": "8",
-      "legal_parent_id": "7400",
-      "legal_parent_name": "Sîngerei",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967646",
       "name": "Ciuciulea",
       "cuatm_key": "4821",
@@ -18815,20 +18619,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303543",
-      "name": "Ciutulești",
-      "cuatm_key": null,
-      "legal_id": "4518",
-      "legal_name": "Ciutulești",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -19109,20 +18899,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303528",
-      "name": "Cobîlea",
-      "cuatm_key": null,
-      "legal_id": "8316",
-      "legal_name": "Cobîlea",
-      "status_code": "8",
-      "legal_parent_id": "8300",
-      "legal_parent_name": "Șoldănești",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -19840,20 +19616,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701980",
-      "name": "Costești",
-      "cuatm_key": "5334",
-      "legal_id": "5334",
-      "legal_name": "Costești",
-      "status_code": "9",
-      "legal_parent_id": "5333",
-      "legal_parent_name": "Ivanovca",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967344",
       "name": "Costuleni",
       "cuatm_key": "9235",
@@ -19974,34 +19736,6 @@
       "status_code": "9",
       "legal_parent_id": "4823",
       "legal_parent_name": "Cuhnești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303531",
-      "name": "Cot",
-      "cuatm_key": null,
-      "legal_id": "8315",
-      "legal_name": "Cot",
-      "status_code": "9",
-      "legal_parent_id": "8314",
-      "legal_parent_name": "Climăuții de Jos",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701919",
-      "name": "Coteala",
-      "cuatm_key": "1423",
-      "legal_id": "1423",
-      "legal_name": "Coteala",
-      "status_code": "8",
-      "legal_parent_id": "1400",
-      "legal_parent_name": "Briceni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -20243,20 +19977,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303542",
-      "name": "Cristești",
-      "cuatm_key": null,
-      "legal_id": "6029",
-      "legal_name": "Cristești",
-      "status_code": "8",
-      "legal_parent_id": "6000",
-      "legal_parent_name": "Nisporeni",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -20792,6 +20512,20 @@
       "unmatched_reason": null
     },
     {
+      "id": "osm-r18967359",
+      "name": "Dealul Verde",
+      "cuatm_key": "314604",
+      "legal_id": null,
+      "legal_name": null,
+      "status_code": null,
+      "legal_source": "BNS CUATM",
+      "match_method": null,
+      "confidence": null,
+      "unmatched_reason": "code_absent_from_official_snapshot",
+      "name_candidate_count": 0,
+      "parent_official_code": "3146"
+    },
+    {
       "id": "osm-r18967277",
       "name": "Decebal",
       "cuatm_key": "3441",
@@ -20974,20 +20708,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701959",
-      "name": "Dobrușa",
-      "cuatm_key": "8330",
-      "legal_id": "8330",
-      "legal_name": "Dobrușa",
-      "status_code": "8",
-      "legal_parent_id": "8300",
-      "legal_parent_name": "Șoldănești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967502",
       "name": "Doina",
       "cuatm_key": "2130",
@@ -21038,20 +20758,6 @@
       "status_code": "8",
       "legal_parent_id": "3600",
       "legal_parent_name": "Drochia",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701956",
-      "name": "Domulgeni",
-      "cuatm_key": "4523",
-      "legal_id": "4523",
-      "legal_name": "Domulgeni",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -21156,20 +20862,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20725062",
-      "name": "Drăsliceni",
-      "cuatm_key": "3129",
-      "legal_id": "3129",
-      "legal_name": "Drăsliceni",
-      "status_code": "8",
-      "legal_parent_id": "3100",
-      "legal_parent_name": "Criuleni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18966909",
       "name": "Drepcăuți",
       "cuatm_key": "1426",
@@ -21252,20 +20944,6 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 1,
       "parent_official_code": "9603"
-    },
-    {
-      "id": "osm-r21303527",
-      "name": "Drujba",
-      "cuatm_key": null,
-      "legal_id": "9240",
-      "legal_name": "Drujba",
-      "status_code": "9",
-      "legal_parent_id": "9239",
-      "legal_parent_name": "Hîrcești",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
-      "unmatched_reason": null
     },
     {
       "id": "osm-r18966782",
@@ -21408,20 +21086,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r21303533",
-      "name": "Dumbrăvița",
-      "cuatm_key": null,
-      "legal_id": "7449",
-      "legal_name": "Dumbrăvița",
-      "status_code": "8",
-      "legal_parent_id": "7400",
-      "legal_parent_name": "Sîngerei",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967535",
       "name": "Dumeni",
       "cuatm_key": "7161",
@@ -21430,20 +21094,6 @@
       "status_code": "9",
       "legal_parent_id": "7162",
       "legal_parent_name": "Duruitoarea Nouă",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701941",
-      "name": "Dumitreni",
-      "cuatm_key": "4512",
-      "legal_id": "4512",
-      "legal_name": "Dumitreni",
-      "status_code": "9",
-      "legal_parent_id": "4510",
-      "legal_parent_name": "Alexeevca",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -21912,20 +21562,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701930",
-      "name": "Fîntîna Albă",
-      "cuatm_key": "4139",
-      "legal_id": "4139",
-      "legal_name": "Fîntîna Albă",
-      "status_code": "9",
-      "legal_parent_id": "4138",
-      "legal_parent_name": "Parcova",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967037",
       "name": "Fîntînița",
       "cuatm_key": "3420",
@@ -21976,20 +21612,6 @@
       "status_code": "9",
       "legal_parent_id": "2714",
       "legal_parent_name": "Fîrlădeni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701969",
-      "name": "Flămînzeni",
-      "cuatm_key": "7438",
-      "legal_id": "7438",
-      "legal_name": "Flămînzeni",
-      "status_code": "9",
-      "legal_parent_id": "7436",
-      "legal_parent_name": "Coșcodeni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -22164,20 +21786,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701979",
-      "name": "Frasin",
-      "cuatm_key": "5335",
-      "legal_id": "5335",
-      "legal_name": "Frasin",
-      "status_code": "9",
-      "legal_parent_id": "5333",
-      "legal_parent_name": "Ivanovca",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967670",
       "name": "Frăsinești",
       "cuatm_key": "9245",
@@ -22259,20 +21867,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303536",
-      "name": "Frumușica",
-      "cuatm_key": null,
-      "legal_id": "4524",
-      "legal_name": "Frumușica",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -22724,20 +22318,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r21303544",
-      "name": "Glinjeni",
-      "cuatm_key": null,
-      "legal_id": "4332",
-      "legal_name": "Glinjeni",
-      "status_code": "8",
-      "legal_parent_id": "4300",
-      "legal_parent_name": "Fălești",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967080",
       "name": "Glodeni",
       "cuatm_key": "4801",
@@ -23046,20 +22626,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701926",
-      "name": "Grimești",
-      "cuatm_key": "1416",
-      "legal_id": "1416",
-      "legal_name": "Grimești",
-      "status_code": "9",
-      "legal_parent_id": "1414",
-      "legal_parent_name": "Bogdănești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967051",
       "name": "Grinăuți",
       "cuatm_key": "6223",
@@ -23226,20 +22792,6 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "4345"
-    },
-    {
-      "id": "osm-r20701943",
-      "name": "Gvozdova",
-      "cuatm_key": "4532",
-      "legal_id": "4532",
-      "legal_name": "Gvozdova",
-      "status_code": "9",
-      "legal_parent_id": "4530",
-      "legal_parent_name": "Gura Camencii",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
     },
     {
       "id": "osm-r18967000",
@@ -23603,20 +23155,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303530",
-      "name": "Hîrcești",
-      "cuatm_key": null,
-      "legal_id": "9239",
-      "legal_name": "Hîrcești",
-      "status_code": "8",
-      "legal_parent_id": "9200",
-      "legal_parent_name": "Ungheni",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -24376,20 +23914,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701935",
-      "name": "Iliciovca",
-      "cuatm_key": "4535",
-      "legal_id": "4535",
-      "legal_name": "Iliciovca",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18968158",
       "name": "Inculeț",
       "cuatm_key": "6480",
@@ -24426,20 +23950,6 @@
       "status_code": "9",
       "legal_parent_id": "7857",
       "legal_parent_name": "Vasilcău",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701954",
-      "name": "Ion Vodă",
-      "cuatm_key": "4519",
-      "legal_id": "4519",
-      "legal_name": "Ion Vodă",
-      "status_code": "9",
-      "legal_parent_id": "4518",
-      "legal_parent_name": "Ciutulești",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -24558,20 +24068,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701976",
-      "name": "Iurceni",
-      "cuatm_key": "6035",
-      "legal_id": "6035",
-      "legal_name": "Iurceni",
-      "status_code": "8",
-      "legal_parent_id": "6000",
-      "legal_parent_name": "Nisporeni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18966982",
       "name": "Iurievca",
       "cuatm_key": "2925",
@@ -24628,20 +24124,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701981",
-      "name": "Ivanovca",
-      "cuatm_key": "5333",
-      "legal_id": "5333",
-      "legal_name": "Ivanovca",
-      "status_code": "8",
-      "legal_parent_id": "5300",
-      "legal_parent_name": "Hîncești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967143",
       "name": "Ivanovca Nouă",
       "cuatm_key": "2927",
@@ -24692,20 +24174,6 @@
       "status_code": "8",
       "legal_parent_id": "4500",
       "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701968",
-      "name": "Izvoare",
-      "cuatm_key": "4343",
-      "legal_id": "4343",
-      "legal_name": "Izvoare",
-      "status_code": "8",
-      "legal_parent_id": "4300",
-      "legal_parent_name": "Fălești",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -24782,20 +24250,6 @@
       "parent_official_code": "3146"
     },
     {
-      "id": "osm-r12103939",
-      "name": "Î.P. „Alimarita”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "0124"
-    },
-    {
       "id": "osm-r12104684",
       "name": "Î.P. „Antropo-Service”",
       "cuatm_key": "315801",
@@ -24852,20 +24306,6 @@
       "parent_official_code": "3147"
     },
     {
-      "id": "osm-r12118108",
-      "name": "Î.P. „Crîngul Privighetorilor”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "3140"
-    },
-    {
       "id": "osm-r12118092",
       "name": "Î.P. „Dacvilagro”",
       "cuatm_key": null,
@@ -24908,20 +24348,6 @@
       "parent_official_code": "0155"
     },
     {
-      "id": "osm-r12103940",
-      "name": "Î.P. „Fîntînilor”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "0124"
-    },
-    {
       "id": "osm-r12118088",
       "name": "Î.P. „Flacăra-UPO”",
       "cuatm_key": null,
@@ -24948,20 +24374,6 @@
       "unmatched_reason": "name_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "0144"
-    },
-    {
-      "id": "osm-r12172925",
-      "name": "Î.P. „Grădina Satului”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "8039"
     },
     {
       "id": "osm-r12114282",
@@ -25104,20 +24516,6 @@
       "parent_official_code": "0146"
     },
     {
-      "id": "osm-r12102645",
-      "name": "Î.P. „Nectar-Agro”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "0122"
-    },
-    {
       "id": "osm-r12104620",
       "name": "Î.P. „Nucăria-ECO”",
       "cuatm_key": null,
@@ -25130,20 +24528,6 @@
       "unmatched_reason": "name_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3136"
-    },
-    {
-      "id": "osm-r12172924",
-      "name": "Î.P. „Odihna Satului”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "8039"
     },
     {
       "id": "osm-r12118096",
@@ -25186,20 +24570,6 @@
       "unmatched_reason": "name_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "3842"
-    },
-    {
-      "id": "osm-r12102647",
-      "name": "Î.P. „Polinizatorul”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "0122"
     },
     {
       "id": "osm-r12118097",
@@ -25342,20 +24712,6 @@
       "parent_official_code": "3136"
     },
     {
-      "id": "osm-r12102739",
-      "name": "Î.P. „Vara”",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "8015"
-    },
-    {
       "id": "osm-r12104562",
       "name": "Î.P. „Victoria-Aura”",
       "cuatm_key": null,
@@ -25440,18 +24796,32 @@
       "parent_official_code": "3118"
     },
     {
-      "id": "osm-r20701949",
-      "name": "Japca",
-      "cuatm_key": "1927",
-      "legal_id": "1927",
-      "legal_name": "Japca",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
+      "id": "osm-r12104636",
+      "name": "Întovărășire Pomilegumicolă (neautorizată)",
+      "cuatm_key": null,
+      "legal_id": null,
+      "legal_name": null,
+      "status_code": null,
       "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
+      "match_method": null,
+      "confidence": null,
+      "unmatched_reason": "name_absent_from_official_snapshot",
+      "name_candidate_count": 0,
+      "parent_official_code": "3136"
+    },
+    {
+      "id": "osm-r18967869",
+      "name": "Înviorarea",
+      "cuatm_key": "314606",
+      "legal_id": null,
+      "legal_name": null,
+      "status_code": null,
+      "legal_source": "BNS CUATM",
+      "match_method": null,
+      "confidence": null,
+      "unmatched_reason": "code_absent_from_official_snapshot",
+      "name_candidate_count": 0,
+      "parent_official_code": "3146"
     },
     {
       "id": "osm-r18966980",
@@ -25720,20 +25090,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701985",
-      "name": "Lărguța",
-      "cuatm_key": "2138",
-      "legal_id": "2138",
-      "legal_name": "Lărguța",
-      "status_code": "8",
-      "legal_parent_id": "2100",
-      "legal_parent_name": "Cantemir",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967334",
       "name": "Lebedenco",
       "cuatm_key": "1727",
@@ -25801,20 +25157,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303529",
-      "name": "Leordoaia",
-      "cuatm_key": null,
-      "legal_id": "9241",
-      "legal_name": "Leordoaia",
-      "status_code": "9",
-      "legal_parent_id": "9239",
-      "legal_parent_name": "Hîrcești",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -26070,20 +25412,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20725061",
-      "name": "Logănești",
-      "cuatm_key": "3130",
-      "legal_id": "3130",
-      "legal_name": "Logănești",
-      "status_code": "9",
-      "legal_parent_id": "3129",
-      "legal_parent_name": "Drăsliceni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18966870",
       "name": "Logofteni",
       "cuatm_key": "4344",
@@ -26252,20 +25580,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701936",
-      "name": "Maiscoe",
-      "cuatm_key": "4536",
-      "legal_id": "4536",
-      "legal_name": "Maiscoe",
-      "status_code": "9",
-      "legal_parent_id": "4535",
-      "legal_parent_name": "Iliciovca",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18968071",
       "name": "Malcoci",
       "cuatm_key": "5520",
@@ -26375,20 +25689,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303538",
-      "name": "Marianca de Sus",
-      "cuatm_key": null,
-      "legal_id": "2732",
-      "legal_name": "Marianca de Sus",
-      "status_code": "9",
-      "legal_parent_id": "2731",
-      "legal_parent_name": "Zaim",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -26770,20 +26070,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701955",
-      "name": "Mărinești",
-      "cuatm_key": "4520",
-      "legal_id": "4520",
-      "legal_name": "Mărinești",
-      "status_code": "9",
-      "legal_parent_id": "4518",
-      "legal_parent_name": "Ciutulești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967669",
       "name": "Mecita",
       "cuatm_key": "173104",
@@ -26806,20 +26092,6 @@
       "status_code": "9",
       "legal_parent_id": "9259",
       "legal_parent_name": "Petrești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701918",
-      "name": "Medveja",
-      "cuatm_key": "1437",
-      "legal_id": "1437",
-      "legal_name": "Medveja",
-      "status_code": "8",
-      "legal_parent_id": "1400",
-      "legal_parent_name": "Briceni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -27204,34 +26476,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701964",
-      "name": "Mincenii de Jos",
-      "cuatm_key": "6729",
-      "legal_id": "6729",
-      "legal_name": "Mincenii de Jos",
-      "status_code": "8",
-      "legal_parent_id": "6700",
-      "legal_parent_name": "Rezina",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701963",
-      "name": "Mincenii de Sus",
-      "cuatm_key": "6730",
-      "legal_id": "6730",
-      "legal_name": "Mincenii de Sus",
-      "status_code": "9",
-      "legal_parent_id": "6729",
-      "legal_parent_name": "Mincenii de Jos",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18966902",
       "name": "Mingir",
       "cuatm_key": "5345",
@@ -27372,20 +26616,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701971",
-      "name": "Mîndrești",
-      "cuatm_key": "8935",
-      "legal_id": "8935",
-      "legal_name": "Mîndrești",
-      "status_code": "8",
-      "legal_parent_id": "8900",
-      "legal_parent_name": "Telenești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967407",
       "name": "Mîndreștii Noi",
       "cuatm_key": "7419",
@@ -27394,62 +26624,6 @@
       "status_code": "9",
       "legal_parent_id": "7417",
       "legal_parent_name": "Bilicenii Noi",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303526",
-      "name": "Mînzătești",
-      "cuatm_key": null,
-      "legal_id": "9242",
-      "legal_name": "Mînzătești",
-      "status_code": "9",
-      "legal_parent_id": "9239",
-      "legal_parent_name": "Hîrcești",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303535",
-      "name": "Mîrzaci",
-      "cuatm_key": null,
-      "legal_id": "6418",
-      "legal_name": "Mîrzaci",
-      "status_code": "9",
-      "legal_parent_id": "6419",
-      "legal_parent_name": "Mîrzești",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303534",
-      "name": "Mîrzești",
-      "cuatm_key": null,
-      "legal_id": "6419",
-      "legal_name": "Mîrzești",
-      "status_code": "8",
-      "legal_parent_id": "6400",
-      "legal_parent_name": "Orhei",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701977",
-      "name": "Mîrzoaia",
-      "cuatm_key": "6036",
-      "legal_id": "6036",
-      "legal_name": "Mîrzoaia",
-      "status_code": "9",
-      "legal_parent_id": "6035",
-      "legal_parent_name": "Iurceni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -27520,20 +26694,6 @@
       "status_code": "9",
       "legal_parent_id": "4817",
       "legal_parent_name": "Camenca",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701973",
-      "name": "Molovata",
-      "cuatm_key": "3838",
-      "legal_id": "3838",
-      "legal_name": "Molovata",
-      "status_code": "8",
-      "legal_parent_id": "3800",
-      "legal_parent_name": "Dubăsari",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -27720,20 +26880,6 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731"
-    },
-    {
-      "id": "osm-r20701947",
-      "name": "Napadova",
-      "cuatm_key": "1929",
-      "legal_id": "1929",
-      "legal_name": "Năpadova",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
     },
     {
       "id": "osm-r18967549",
@@ -28184,6 +27330,20 @@
       "unmatched_reason": null
     },
     {
+      "id": "osm-r18966885",
+      "name": "Nucușor Unic",
+      "cuatm_key": "314608",
+      "legal_id": null,
+      "legal_name": null,
+      "status_code": null,
+      "legal_source": "BNS CUATM",
+      "match_method": null,
+      "confidence": null,
+      "unmatched_reason": "code_absent_from_official_snapshot",
+      "name_candidate_count": 0,
+      "parent_official_code": "3146"
+    },
+    {
       "id": "osm-r18966882",
       "name": "Obileni",
       "cuatm_key": "5351",
@@ -28406,20 +27566,6 @@
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
       "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701966",
-      "name": "Odaia",
-      "cuatm_key": "642001",
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "code_absent_from_official_snapshot",
-      "name_candidate_count": 2,
-      "parent_official_code": "6420"
     },
     {
       "id": "osm-r18966842",
@@ -28646,20 +27792,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701965",
-      "name": "Otac",
-      "cuatm_key": "6731",
-      "legal_id": "6731",
-      "legal_name": "Otac",
-      "status_code": "8",
-      "legal_parent_id": "6700",
-      "legal_parent_name": "Rezina",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18968015",
       "name": "Otaci",
       "cuatm_key": "6203",
@@ -28794,20 +27926,6 @@
       "status_code": "8",
       "legal_parent_id": "8300",
       "legal_parent_name": "Șoldănești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701929",
-      "name": "Parcova",
-      "cuatm_key": "4138",
-      "legal_id": "4138",
-      "legal_name": "Parcova",
-      "status_code": "8",
-      "legal_parent_id": "4100",
-      "legal_parent_name": "Edineț",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -29088,20 +28206,6 @@
       "status_code": "9",
       "legal_parent_id": "5354",
       "legal_parent_name": "Pașcani",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701921",
-      "name": "Pererîta",
-      "cuatm_key": "1441",
-      "legal_id": "1441",
-      "legal_name": "Pererita",
-      "status_code": "8",
-      "legal_parent_id": "1400",
-      "legal_parent_name": "Briceni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -30032,34 +29136,6 @@
       "parent_official_code": "1731"
     },
     {
-      "id": "osm-r20701961",
-      "name": "Pripiceni-Curchi",
-      "cuatm_key": "6739",
-      "legal_id": "6739",
-      "legal_name": "Pripiceni-Curchi",
-      "status_code": "9",
-      "legal_parent_id": "6738",
-      "legal_parent_name": "Pripiceni-Răzeși",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701960",
-      "name": "Pripiceni-Răzeși",
-      "cuatm_key": "6738",
-      "legal_id": "6738",
-      "legal_name": "Pripiceni-Răzeși",
-      "status_code": "8",
-      "legal_parent_id": "6700",
-      "legal_parent_name": "Rezina",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967268",
       "name": "Prisaca",
       "cuatm_key": "2922",
@@ -30072,6 +29148,20 @@
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
       "unmatched_reason": null
+    },
+    {
+      "id": "osm-r18967097",
+      "name": "Privighetoarea",
+      "cuatm_key": "314610",
+      "legal_id": null,
+      "legal_name": null,
+      "status_code": null,
+      "legal_source": "BNS CUATM",
+      "match_method": null,
+      "confidence": null,
+      "unmatched_reason": "code_absent_from_official_snapshot",
+      "name_candidate_count": 0,
+      "parent_official_code": "3146"
     },
     {
       "id": "osm-r18967177",
@@ -30166,20 +29256,6 @@
       "status_code": "8",
       "legal_parent_id": "8500",
       "legal_parent_name": "Ștefan Vodă",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701937",
-      "name": "Putinești",
-      "cuatm_key": "4550",
-      "legal_id": "4550",
-      "legal_name": "Putinești",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -30396,34 +29472,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701939",
-      "name": "Rădulenii Noi",
-      "cuatm_key": "4513",
-      "legal_id": "4513",
-      "legal_name": "Rădulenii Noi",
-      "status_code": "9",
-      "legal_parent_id": "4510",
-      "legal_parent_name": "Alexeevca",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701940",
-      "name": "Rădulenii Vechi",
-      "cuatm_key": "4551",
-      "legal_id": "4551",
-      "legal_name": "Rădulenii Vechi",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967540",
       "name": "Rămăzan",
       "cuatm_key": "7144",
@@ -30544,20 +29592,6 @@
       "status_code": "8",
       "legal_parent_id": "7100",
       "legal_parent_name": "Rîșcani",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701958",
-      "name": "Recești",
-      "cuatm_key": "8329",
-      "legal_id": "8329",
-      "legal_name": "Recești",
-      "status_code": "9",
-      "legal_parent_id": "8330",
-      "legal_parent_name": "Dobrușa",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -31404,20 +30438,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701983",
-      "name": "Salcia",
-      "cuatm_key": "1013",
-      "legal_id": "1013",
-      "legal_name": "Salcia",
-      "status_code": "9",
-      "legal_parent_id": "1012",
-      "legal_parent_name": "Botnărești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967384",
       "name": "Samurza",
       "cuatm_key": "8722",
@@ -31556,20 +30576,6 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731"
-    },
-    {
-      "id": "osm-r20701948",
-      "name": "Sănătăuca",
-      "cuatm_key": "1939",
-      "legal_id": "1939",
-      "legal_name": "Sănătăuca",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
     },
     {
       "id": "osm-r18967343",
@@ -31768,20 +30774,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701932",
-      "name": "Scăieni",
-      "cuatm_key": "4539",
-      "legal_id": "4539",
-      "legal_name": "Scăieni",
-      "status_code": "9",
-      "legal_parent_id": "4537",
-      "legal_parent_name": "Izvoare",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18966820",
       "name": "Schineni",
       "cuatm_key": "7847",
@@ -31916,6 +30908,20 @@
       "status_code": "9",
       "legal_parent_id": "5361",
       "legal_parent_name": "Secăreni",
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r1813306",
+      "name": "sectorul Botanica",
+      "cuatm_key": "0110",
+      "legal_id": "0110",
+      "legal_name": "Sectorul Botanica",
+      "status_code": "4",
+      "legal_parent_id": "0100",
+      "legal_parent_name": "Chișinău",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -32328,20 +31334,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701917",
-      "name": "Slobozia-Medveja",
-      "cuatm_key": "1438",
-      "legal_id": "1438",
-      "legal_name": "Slobozia-Medveja",
-      "status_code": "9",
-      "legal_parent_id": "1437",
-      "legal_parent_name": "Medveja",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967448",
       "name": "Slobozia-Recea",
       "cuatm_key": "7146",
@@ -32350,20 +31342,6 @@
       "status_code": "9",
       "legal_parent_id": "7145",
       "legal_parent_name": "Recea",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701920",
-      "name": "Slobozia-Șirăuți",
-      "cuatm_key": "1443",
-      "legal_id": "1443",
-      "legal_name": "Slobozia-Șirăuți",
-      "status_code": "8",
-      "legal_parent_id": "1400",
-      "legal_parent_name": "Briceni",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -32448,20 +31426,6 @@
       "status_code": "8",
       "legal_parent_id": "5500",
       "legal_parent_name": "Ialoveni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701952",
-      "name": "Socola",
-      "cuatm_key": "8339",
-      "legal_id": "8339",
-      "legal_name": "Socola",
-      "status_code": "9",
-      "legal_parent_id": "8338",
-      "legal_parent_name": "Vadul-Rașcov",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -32634,20 +31598,6 @@
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
       "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701928",
-      "name": "Speranța Avante",
-      "cuatm_key": "414201",
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
-      "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "code_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "4142"
     },
     {
       "id": "osm-r18968104",
@@ -33504,20 +32454,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701922",
-      "name": "Tabani",
-      "cuatm_key": "1444",
-      "legal_id": "1444",
-      "legal_name": "Tabani",
-      "status_code": "8",
-      "legal_parent_id": "1400",
-      "legal_parent_name": "Briceni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967110",
       "name": "Tabăra",
       "cuatm_key": "6477",
@@ -33770,20 +32706,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701974",
-      "name": "Tătărești",
-      "cuatm_key": "8038",
-      "legal_id": "8038",
-      "legal_name": "Tătărești",
-      "status_code": "8",
-      "legal_parent_id": "8000",
-      "legal_parent_name": "Strășeni",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967982",
       "name": "Telenești",
       "cuatm_key": "8901",
@@ -33876,20 +32798,6 @@
       "status_code": "8",
       "legal_parent_id": "2500",
       "legal_parent_name": "Călărași",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701945",
-      "name": "Temeleuți",
-      "cuatm_key": "1942",
-      "legal_id": "1942",
-      "legal_name": "Temeleuți",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -34246,20 +33154,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701934",
-      "name": "Trifănești",
-      "cuatm_key": "4559",
-      "legal_id": "4559",
-      "legal_name": "Trifănești",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967721",
       "name": "Trifăuți",
       "cuatm_key": "7860",
@@ -34268,20 +33162,6 @@
       "status_code": "8",
       "legal_parent_id": "7800",
       "legal_parent_name": "Soroca",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701962",
-      "name": "Trifești",
-      "cuatm_key": "6746",
-      "legal_id": "6746",
-      "legal_name": "Trifești",
-      "status_code": "8",
-      "legal_parent_id": "6700",
-      "legal_parent_name": "Rezina",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -35044,20 +33924,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701951",
-      "name": "Vadul-Rașcov",
-      "cuatm_key": "8338",
-      "legal_id": "8338",
-      "legal_name": "Vadul-Rașcov",
-      "status_code": "8",
-      "legal_parent_id": "8300",
-      "legal_parent_name": "Șoldănești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18966816",
       "name": "Valea",
       "cuatm_key": "7823",
@@ -35083,20 +33949,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303541",
-      "name": "Valea lui Vlad",
-      "cuatm_key": null,
-      "legal_id": "7451",
-      "legal_name": "Valea lui Vlad",
-      "status_code": "9",
-      "legal_parent_id": "7449",
-      "legal_parent_name": "Dumbrăvița",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -35150,20 +34002,6 @@
       "status_code": "8",
       "legal_parent_id": "8700",
       "legal_parent_name": "Taraclia",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701953",
-      "name": "Valea Rădoaiei",
-      "cuatm_key": "4543",
-      "legal_id": "4543",
-      "legal_name": "Valea Rădoaiei",
-      "status_code": "9",
-      "legal_parent_id": "4542",
-      "legal_parent_name": "Nicolaevca",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -35492,20 +34330,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701972",
-      "name": "Văsieni",
-      "cuatm_key": "8958",
-      "legal_id": "8958",
-      "legal_name": "Văsieni",
-      "status_code": "8",
-      "legal_parent_id": "8900",
-      "legal_parent_name": "Telenești",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967574",
       "name": "Verejeni",
       "cuatm_key": "8959",
@@ -35545,20 +34369,6 @@
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303539",
-      "name": "Veverița",
-      "cuatm_key": null,
-      "legal_id": "9243",
-      "legal_name": "Veverița",
-      "status_code": "9",
-      "legal_parent_id": "9239",
-      "legal_parent_name": "Hîrcești",
-      "legal_source": "BNS CUATM",
-      "match_method": "exact_normalized_name_and_official_parent",
-      "confidence": "medium",
       "unmatched_reason": null
     },
     {
@@ -35800,20 +34610,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r21303532",
-      "name": "Vorniceni",
-      "cuatm_key": null,
-      "legal_id": "8042",
-      "legal_name": "Vorniceni",
-      "status_code": "8",
-      "legal_parent_id": "8000",
-      "legal_parent_name": "Strășeni",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18967478",
       "name": "Voroteț",
       "cuatm_key": "6422",
@@ -35968,34 +34764,6 @@
       "unmatched_reason": null
     },
     {
-      "id": "osm-r20701957",
-      "name": "Zahorna",
-      "cuatm_key": "8331",
-      "legal_id": "8331",
-      "legal_name": "Zahorna",
-      "status_code": "9",
-      "legal_parent_id": "8330",
-      "legal_parent_name": "Dobrușa",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r21303537",
-      "name": "Zaim",
-      "cuatm_key": null,
-      "legal_id": "2731",
-      "legal_name": "Zaim",
-      "status_code": "8",
-      "legal_parent_id": "2700",
-      "legal_parent_name": "Căușeni",
-      "legal_source": "BNS CUATM",
-      "match_method": "osm_self_parent_same_legal_entity",
-      "confidence": "medium",
-      "unmatched_reason": null
-    },
-    {
       "id": "osm-r18966942",
       "name": "Zamciogi",
       "cuatm_key": "8033",
@@ -36022,20 +34790,6 @@
       "unmatched_reason": "code_absent_from_official_snapshot",
       "name_candidate_count": 0,
       "parent_official_code": "1731"
-    },
-    {
-      "id": "osm-r20701938",
-      "name": "Zarojeni",
-      "cuatm_key": "4534",
-      "legal_id": "4534",
-      "legal_name": "Zarojeni",
-      "status_code": "9",
-      "legal_parent_id": "4533",
-      "legal_parent_name": "Gura Căinarului",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
     },
     {
       "id": "osm-r18967398",
@@ -36116,20 +34870,6 @@
       "status_code": "9",
       "legal_parent_id": "8945",
       "legal_parent_name": "Ratuș",
-      "legal_source": "BNS CUATM",
-      "match_method": "explicit_cuatm_key",
-      "confidence": "high",
-      "unmatched_reason": null
-    },
-    {
-      "id": "osm-r20701946",
-      "name": "Zăluceni",
-      "cuatm_key": "1950",
-      "legal_id": "1950",
-      "legal_name": "Zăluceni",
-      "status_code": "8",
-      "legal_parent_id": "4500",
-      "legal_parent_name": "Florești",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
