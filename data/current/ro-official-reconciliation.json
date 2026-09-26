@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T11:58:48.531Z",
+  "generated_at": "2026-09-26T12:08:47.733Z",
   "jurisdiction": "RO",
   "scope": "Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.",
-  "policy": "Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; otherwise only exact normalized name plus exact county is auto-matched. Fuzzy matching is never automatic.",
+  "policy": "Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.",
   "status": "PASS",
   "source": {
     "official_snapshot": "data/sources/ro-siruta-current.json",
@@ -63,22 +63,22 @@
   "summary": {
     "osm_admin_level_8_count": 3179,
     "official_uat_count": 3181,
-    "matched_count": 3160,
-    "unmatched_osm_count": 19,
-    "official_only_count": 20,
-    "represented_at_other_osm_level_count": 2,
+    "matched_count": 3164,
+    "unmatched_osm_count": 15,
+    "official_only_count": 17,
+    "represented_at_other_osm_level_count": 1,
     "duplicate_legal_mapping_count": 1,
     "parent_mismatch_count": 0,
     "type_mismatch_count": 4,
     "match_methods": {
       "exact_normalized_name_and_county": 3158,
-      "explicit_siruta_code": 2
+      "explicit_siruta_code": 2,
+      "explicit_siruta_locality_code_to_parent_uat": 4
     },
     "unmatched_by_reason": {
       "name_absent_from_official_snapshot": 10,
       "exact_name_but_county_mismatch": 2,
-      "name_ambiguous": 3,
-      "explicit_siruta_code_absent_from_official_snapshot": 4
+      "name_ambiguous": 3
     }
   },
   "unmatched_osm": [
@@ -197,31 +197,6 @@
       "candidates": []
     },
     {
-      "osm_id": "osm-r3277038",
-      "osm_relation_id": 3277038,
-      "osm_name": "Cluj-Napoca",
-      "osm_parent_id": "osm-r91733",
-      "osm_parent_name": "Cluj",
-      "osm_entity_type": "municipality",
-      "explicit_siruta_tag": {
-        "key": "siruta:code",
-        "value": "54984"
-      },
-      "legal_id": null,
-      "legal_name": null,
-      "legal_type": null,
-      "legal_type_code": null,
-      "legal_parent_id": null,
-      "legal_parent_name": null,
-      "match_method": null,
-      "confidence": null,
-      "matched": false,
-      "parent_matches": null,
-      "type_matches": null,
-      "issue": "explicit_siruta_code_absent_from_official_snapshot",
-      "candidates": []
-    },
-    {
       "osm_id": "osm-r14783943",
       "osm_relation_id": 14783943,
       "osm_name": "Covăsânț",
@@ -327,31 +302,6 @@
           "legal_type": "commune"
         }
       ]
-    },
-    {
-      "osm_id": "osm-r1207838",
-      "osm_relation_id": 1207838,
-      "osm_name": "Iași",
-      "osm_parent_id": "osm-r2256747",
-      "osm_parent_name": "Iași",
-      "osm_entity_type": "municipality",
-      "explicit_siruta_tag": {
-        "key": "siruta:code",
-        "value": "95079"
-      },
-      "legal_id": null,
-      "legal_name": null,
-      "legal_type": null,
-      "legal_type_code": null,
-      "legal_parent_id": null,
-      "legal_parent_name": null,
-      "match_method": null,
-      "confidence": null,
-      "matched": false,
-      "parent_matches": null,
-      "type_matches": null,
-      "issue": "explicit_siruta_code_absent_from_official_snapshot",
-      "candidates": []
     },
     {
       "osm_id": "osm-r10514937",
@@ -471,31 +421,6 @@
       "candidates": []
     },
     {
-      "osm_id": "osm-r8334767",
-      "osm_relation_id": 8334767,
-      "osm_name": "Târgu Mureș",
-      "osm_parent_id": "osm-r2248573",
-      "osm_parent_name": "Mureș",
-      "osm_entity_type": "municipality",
-      "explicit_siruta_tag": {
-        "key": "siruta:code",
-        "value": "114328"
-      },
-      "legal_id": null,
-      "legal_name": null,
-      "legal_type": null,
-      "legal_type_code": null,
-      "legal_parent_id": null,
-      "legal_parent_name": null,
-      "match_method": null,
-      "confidence": null,
-      "matched": false,
-      "parent_matches": null,
-      "type_matches": null,
-      "issue": "explicit_siruta_code_absent_from_official_snapshot",
-      "candidates": []
-    },
-    {
       "osm_id": "osm-r14701887",
       "osm_relation_id": 14701887,
       "osm_name": "Tega",
@@ -515,31 +440,6 @@
       "parent_matches": null,
       "type_matches": null,
       "issue": "name_absent_from_official_snapshot",
-      "candidates": []
-    },
-    {
-      "osm_id": "osm-r6927733",
-      "osm_relation_id": 6927733,
-      "osm_name": "Timișoara",
-      "osm_parent_id": "osm-r2366863",
-      "osm_parent_name": "Timiș",
-      "osm_entity_type": "municipality",
-      "explicit_siruta_tag": {
-        "key": "siruta:code",
-        "value": "155252"
-      },
-      "legal_id": null,
-      "legal_name": null,
-      "legal_type": null,
-      "legal_type_code": null,
-      "legal_parent_id": null,
-      "legal_parent_name": null,
-      "match_method": null,
-      "confidence": null,
-      "matched": false,
-      "parent_matches": null,
-      "type_matches": null,
-      "issue": "explicit_siruta_code_absent_from_official_snapshot",
       "candidates": []
     },
     {
@@ -602,14 +502,6 @@
       "legal_parent_name": "JUDEȚUL BRAȘOV"
     },
     {
-      "legal_id": "54975",
-      "legal_name": "CLUJ-NAPOCA",
-      "legal_type": "municipality",
-      "legal_type_code": "1",
-      "legal_parent_id": "127",
-      "legal_parent_name": "JUDEȚUL CLUJ"
-    },
-    {
       "legal_id": "59238",
       "legal_name": "RIȘCA",
       "legal_type": "commune",
@@ -656,14 +548,6 @@
       "legal_type_code": "3",
       "legal_parent_id": "207",
       "legal_parent_name": "JUDEȚUL HUNEDOARA"
-    },
-    {
-      "legal_id": "114319",
-      "legal_name": "TÂRGU MUREȘ",
-      "legal_type": "municipality",
-      "legal_type_code": "1",
-      "legal_parent_id": "261",
-      "legal_parent_name": "JUDEȚUL MUREȘ"
     },
     {
       "legal_id": "116224",
@@ -730,14 +614,6 @@
       "legal_parent_name": "JUDEȚUL TELEORMAN"
     },
     {
-      "legal_id": "155243",
-      "legal_name": "TIMIȘOARA",
-      "legal_type": "municipality",
-      "legal_type_code": "1",
-      "legal_parent_id": "350",
-      "legal_parent_name": "JUDEȚUL TIMIȘ"
-    },
-    {
       "legal_id": "162924",
       "legal_name": "BUNEȘTI-AVEREȘTI",
       "legal_type": "commune",
@@ -747,20 +623,6 @@
     }
   ],
   "represented_at_other_osm_level": [
-    {
-      "legal_id": "95060",
-      "legal_name": "IAȘI",
-      "legal_type": "municipality",
-      "osm": [
-        {
-          "id": "osm-r2256747",
-          "relation_id": 2256747,
-          "admin_level": 4,
-          "name": "Iași",
-          "type": "county"
-        }
-      ]
-    },
     {
       "legal_id": "179132",
       "legal_name": "BUCUREȘTI",
@@ -16901,6 +16763,31 @@
       "candidates": []
     },
     {
+      "osm_id": "osm-r3277038",
+      "osm_relation_id": 3277038,
+      "osm_name": "Cluj-Napoca",
+      "osm_parent_id": "osm-r91733",
+      "osm_parent_name": "Cluj",
+      "osm_entity_type": "municipality",
+      "explicit_siruta_tag": {
+        "key": "siruta:code",
+        "value": "54984"
+      },
+      "legal_id": "54975",
+      "legal_name": "CLUJ-NAPOCA",
+      "legal_type": "municipality",
+      "legal_type_code": "1",
+      "legal_parent_id": "127",
+      "legal_parent_name": "JUDEȚUL CLUJ",
+      "match_method": "explicit_siruta_locality_code_to_parent_uat",
+      "confidence": "high",
+      "matched": true,
+      "parent_matches": true,
+      "type_matches": true,
+      "issue": null,
+      "candidates": []
+    },
+    {
       "osm_id": "osm-r14743576",
       "osm_relation_id": 14743576,
       "osm_name": "Coarnele Caprei",
@@ -32162,6 +32049,31 @@
       "legal_parent_name": "JUDEȚUL SUCEAVA",
       "match_method": "exact_normalized_name_and_county",
       "confidence": "medium",
+      "matched": true,
+      "parent_matches": true,
+      "type_matches": true,
+      "issue": null,
+      "candidates": []
+    },
+    {
+      "osm_id": "osm-r1207838",
+      "osm_relation_id": 1207838,
+      "osm_name": "Iași",
+      "osm_parent_id": "osm-r2256747",
+      "osm_parent_name": "Iași",
+      "osm_entity_type": "municipality",
+      "explicit_siruta_tag": {
+        "key": "siruta:code",
+        "value": "95079"
+      },
+      "legal_id": "95060",
+      "legal_name": "IAȘI",
+      "legal_type": "municipality",
+      "legal_type_code": "1",
+      "legal_parent_id": "225",
+      "legal_parent_name": "JUDEȚUL IAȘI",
+      "match_method": "explicit_siruta_locality_code_to_parent_uat",
+      "confidence": "high",
       "matched": true,
       "parent_matches": true,
       "type_matches": true,
@@ -61608,6 +61520,31 @@
       "candidates": []
     },
     {
+      "osm_id": "osm-r8334767",
+      "osm_relation_id": 8334767,
+      "osm_name": "Târgu Mureș",
+      "osm_parent_id": "osm-r2248573",
+      "osm_parent_name": "Mureș",
+      "osm_entity_type": "municipality",
+      "explicit_siruta_tag": {
+        "key": "siruta:code",
+        "value": "114328"
+      },
+      "legal_id": "114319",
+      "legal_name": "TÂRGU MUREȘ",
+      "legal_type": "municipality",
+      "legal_type_code": "1",
+      "legal_parent_id": "261",
+      "legal_parent_name": "JUDEȚUL MUREȘ",
+      "match_method": "explicit_siruta_locality_code_to_parent_uat",
+      "confidence": "high",
+      "matched": true,
+      "parent_matches": true,
+      "type_matches": true,
+      "issue": null,
+      "candidates": []
+    },
+    {
       "osm_id": "osm-r10761202",
       "osm_relation_id": 10761202,
       "osm_name": "Târgu Neamț",
@@ -62437,6 +62374,31 @@
       "legal_parent_name": "JUDEȚUL NEAMȚ",
       "match_method": "exact_normalized_name_and_county",
       "confidence": "medium",
+      "matched": true,
+      "parent_matches": true,
+      "type_matches": true,
+      "issue": null,
+      "candidates": []
+    },
+    {
+      "osm_id": "osm-r6927733",
+      "osm_relation_id": 6927733,
+      "osm_name": "Timișoara",
+      "osm_parent_id": "osm-r2366863",
+      "osm_parent_name": "Timiș",
+      "osm_entity_type": "municipality",
+      "explicit_siruta_tag": {
+        "key": "siruta:code",
+        "value": "155252"
+      },
+      "legal_id": "155243",
+      "legal_name": "TIMIȘOARA",
+      "legal_type": "municipality",
+      "legal_type_code": "1",
+      "legal_parent_id": "350",
+      "legal_parent_name": "JUDEȚUL TIMIȘ",
+      "match_method": "explicit_siruta_locality_code_to_parent_uat",
+      "confidence": "high",
       "matched": true,
       "parent_matches": true,
       "type_matches": true,
