@@ -6,7 +6,10 @@ const groups=[
  {legal_id:'3417',legal_name:'Dondușeni',relations:[19055800,19055814,18967876]},
  {legal_id:'7160',legal_name:'Văratic',relations:[19045240,19045254,18966798]},
  {legal_id:'8034',legal_name:'Recea',relations:[19100165,19100169,19100182]},
- {legal_id:'8341',legal_name:'Rogojeni, loc.st.c.f.',relations:[20181256,18968117]}
+ {legal_id:'8341',legal_name:'Rogojeni, loc.st.c.f.',relations:[20181256,18968117]},
+ {legal_id:'0100',legal_name:'Chișinău',relations:[1691801,1748490]},
+ {legal_id:'0300',legal_name:'Bălți',relations:[58983,12207955,18967626]},
+ {legal_id:'0500',legal_name:'Bender',relations:[9581354,12463379]}
 ];
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fetchText(url){
