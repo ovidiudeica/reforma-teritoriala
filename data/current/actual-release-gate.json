@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T11:27:05.005Z",
+  "generated_at": "2026-09-27T11:28:04.117Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-dc764ebc99f7e8c6",
+  "snapshot_id": "actual-e0db2fb869fcf3d3",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "2bcba70147dd53c58b6d1828119478bf95b7147380c14011e9322d6fae6c4a48",
+  "manifest_sha256": "ab4eb91fadec72a323bdc1d8657451f71ba15a7b3926b7cf5a0d4223f90207e0",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.",
   "checks": [
@@ -52,24 +52,24 @@
       "name": "release_fingerprint_matches_current_components",
       "ok": true,
       "detail": {
-        "expected": "dc764ebc99f7e8c6dce7c2f1b6afcc1b911c8c8a494c63fde5b57c564aabec8e",
-        "actual": "dc764ebc99f7e8c6dce7c2f1b6afcc1b911c8c8a494c63fde5b57c564aabec8e"
+        "expected": "e0db2fb869fcf3d3d70bd475939c6e6b02838865208a2f21b76bc99a086d205e",
+        "actual": "e0db2fb869fcf3d3d70bd475939c6e6b02838865208a2f21b76bc99a086d205e"
       }
     },
     {
       "name": "snapshot_id_matches_release_fingerprint",
       "ok": true,
       "detail": {
-        "expected": "actual-dc764ebc99f7e8c6",
-        "actual": "actual-dc764ebc99f7e8c6"
+        "expected": "actual-e0db2fb869fcf3d3",
+        "actual": "actual-e0db2fb869fcf3d3"
       }
     },
     {
       "name": "manifest_generated_at_matches_snapshot_watermark",
       "ok": true,
       "detail": {
-        "expected": "2026-09-27T11:26:59.587Z",
-        "actual": "2026-09-27T11:26:59.587Z"
+        "expected": "2026-09-27T11:27:57.523Z",
+        "actual": "2026-09-27T11:27:57.523Z"
       }
     },
     {
@@ -305,11 +305,11 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "RO": "2026-09-27T11:26:59.587Z",
+          "RO": "2026-09-27T11:27:57.523Z",
           "MD": "2026-09-27T11:26:58.906Z"
         },
         "actual": {
-          "RO": "2026-09-27T11:26:59.587Z",
+          "RO": "2026-09-27T11:27:57.523Z",
           "MD": "2026-09-27T11:26:58.906Z"
         }
       }
