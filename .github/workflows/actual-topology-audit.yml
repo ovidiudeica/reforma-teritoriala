@@ -47,8 +47,16 @@ jobs:
         with:
           node-version: 20
       - run: npm install --no-audit --no-fund
+      - name: Detect persisted release snapshot
+        id: persisted
+        run: |
+          if [ -f data/current/actual-release-persisted.json ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Verify committed release snapshot before regeneration
-        if: ${{ hashFiles('data/current/actual-release-persisted.json') != '' }}
+        if: ${{ steps.persisted.outputs.present == 'true' }}
         run: |
           npm run audit:actual-release-gate
           node --input-type=module <<'NODE'
@@ -69,51 +77,73 @@ jobs:
           NODE
       - name: Check import script syntax
         run: node --check scripts/import/import-osm.mjs
-      - run: npm run audit:osm-12463200
+      - if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:osm-12463200
       - name: Regenerate OSM ACTUAL master
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run import:osm
       - name: Verify regenerated topology
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:actual-topology
       - name: Audit RO+MD statistical levels and state polygons
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:actual-statistical-levels
       - name: Reconcile RO against official SIRUTA
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:ro-official-reconciliation
       - name: Audit RO reconciliation exceptions
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:ro-official-exceptions
       - name: Audit RO county SIRUTA bridge
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:ro-county-siruta-bridge
       - name: Apply RO official identity
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run apply:ro-official-reconciliation
       - name: Reconcile MD against official CUATM
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run reconcile:cuatm
       - name: Audit MD CUATM semantic subtype bridge
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:md-cuatm-semantic-bridge
       - name: Apply reviewed MD official identity
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run apply:md-reviewed-reconciliation
       - name: Regenerate administrative review
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:admin
       - name: Regenerate MD CUATM consistency audit
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: node scripts/process/audit-cuatm-consistency.mjs
       - name: Run MD release gate
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:md-release-gate
       - name: Run RO release gate
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:ro-release-gate
       - name: Regenerate public ACTUAL contract
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run build:actual-public-data
       - name: Audit Chișinău sector identity propagation
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:md-chisinau-sectors
       - name: Audit structural completeness
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:actual-structural-completeness
       - name: Audit official identity propagation for all ACTUAL entities
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:actual-official-identity
       - name: Audit ACTUAL count regression
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:actual-regression
       - name: Build release manifest from this run
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run build:actual-release-manifest
       - name: Run release gate against generated snapshot
+        if: ${{ steps.persisted.outputs.present != 'true' }}
         run: npm run audit:actual-release-gate
       - name: Persist validated release snapshot
-        if: ${{ success() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'actual/topology-audit-ro-md' && hashFiles('data/current/actual-release-persisted.json') == '' }}
+        if: ${{ success() && steps.persisted.outputs.present != 'true' && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'actual/topology-audit-ro-md' }}
         env:
           SNAPSHOT_BRANCH: ${{ github.head_ref }}
           SOURCE_RUN_ID: ${{ github.run_id }}
