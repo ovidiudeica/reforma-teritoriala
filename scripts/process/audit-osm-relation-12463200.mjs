@@ -7,7 +7,8 @@ import IsValidOp from 'jsts/org/locationtech/jts/operation/valid/IsValidOp.js';
 const RID=12463200, ID='osm-r12463200', OUT='data/current/osm-12463200-audit.json'; // Fîrlădeni, Căușeni
 const reader=new GeoJSONReader();
 const endpoints=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://overpass.nchc.org.tw/api/interpreter','https://overpass.private.coffee/api/interpreter'];
-async function overpass(q){let last;for(const url of endpoints){try{const r=await fetch(url,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-audit/1.0'},body:new URLSearchParams({data:q})});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json();}catch(e){last=e;}}throw last;}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function overpass(q){let last;for(const url of endpoints){for(let attempt=1;attempt<=3;attempt++){try{const r=await fetch(url,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-audit/1.0'},body:new URLSearchParams({data:q})});if(!r.ok)throw new Error(url+' HTTP '+r.status);return await r.json();}catch(e){last=e;console.warn(`Overpass attempt ${attempt}/3 failed for ${url}: ${e.message}`);if(attempt<3)await sleep(5000*attempt);}}}throw last;}
 function valid(g){try{const op=new IsValidOp(reader.read(g));const ok=op.isValid(),e=op.getValidationError();return {valid:ok,error:ok?null:{message:e?.getMessage?.()??null,coordinate:e?.getCoordinate?.()?.toString?.()??null}};}catch(e){return {valid:false,error:{message:String(e.message||e)}};}}
 const raw=await overpass(`[out:json][timeout:120];relation(${RID});out meta;>;out meta qt;`);
 const relation=raw.elements.find(x=>x.type==='relation'&&x.id===RID);
