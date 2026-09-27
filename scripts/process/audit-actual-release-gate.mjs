@@ -10,9 +10,12 @@ let topology=null;
 try{topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));}catch{}
 
 const OUTPUT='data/current/actual-release-gate.json';
+const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const manifestBuf=await readFile(MANIFEST);
+const settlementPolicyBuf=await readFile(SETTLEMENT_POLICY);
 const manifest=JSON.parse(manifestBuf.toString('utf8'));
+const settlementPolicy=JSON.parse(settlementPolicyBuf.toString('utf8'));
 const paths=Object.fromEntries(Object.entries(manifest.components||{}).map(([key,value])=>[key,value?.path]).filter(([,path])=>path));
 const buffers={};
 for(const [key,path] of Object.entries(paths))buffers[key]=await readFile(path);
@@ -28,7 +31,6 @@ const siruta=json('ro_official');
 const cuatm=json('md_official');
 const mdIndividual=json('md_individual_review');
 const mdSemantic=json('md_semantic_bridge');
-const settlementPolicy=json('settlement_policy');
 const jurisdictions=['RO','MD'];
 const tierKeys=['ro_overview','ro_local','ro_detail','md_overview','md_local','md_detail'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -64,8 +66,8 @@ check('manifest_records_current_settlement_policy',
  manifest.settlement_policy?.schema_version===settlementPolicy.schema_version
  && manifest.settlement_policy?.policy_version===settlementPolicy.policy_version
  && manifest.settlement_policy?.scope===settlementPolicy.scope
- && manifest.settlement_policy?.sha256===currentHashes.settlement_policy,
- {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,scope:settlementPolicy.scope??null,sha256:currentHashes.settlement_policy??null}});
+ && manifest.settlement_policy?.sha256===sha256(settlementPolicyBuf),
+ {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,scope:settlementPolicy.scope??null,sha256:sha256(settlementPolicyBuf)}});
 check('md_semantic_bridge_passes',mdSemantic.status==='PASS',{status:mdSemantic.status??null,summary:mdSemantic.summary??null});
 check('manifest_records_current_md_semantic_bridge',manifest.semantic_bridges?.MD?.status==='PASS'&&manifest.semantic_bridges?.MD?.sha256===currentHashes.md_semantic_bridge,{manifest:manifest.semantic_bridges?.MD??null,actual:{status:mdSemantic.status??null,sha256:currentHashes.md_semantic_bridge??null}});
 check('manifest_mode_is_actual',manifest.mode==='ACTUAL',{mode:manifest.mode});
