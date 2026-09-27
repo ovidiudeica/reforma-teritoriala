@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T11:09:47.083Z",
+  "generated_at": "2026-09-27T11:25:31.914Z",
   "jurisdiction": "RO",
   "scope": "Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.",
   "policy": "Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Reviewed official UATs without a distinct OSM boundary may be classified separately only when their covering OSM representation remains structurally stable; reviewed UATs represented at a jurisdiction-specific exceptional OSM admin_level may likewise be resolved only when that representation remains structurally stable. Reviewed OSM semantic type metadata conflicts may be resolved only when exact name+county identity, OSM parent and official legal type all remain stable. No OSM geometry is promoted to legal geometry. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.",
@@ -29,7 +29,7 @@
     "reviewed_official_only_resolutions": "data/sources/ro-official-only-reviewed-resolutions.json",
     "reviewed_other_level_resolutions": "data/sources/ro-other-level-reviewed-resolutions.json",
     "reviewed_semantic_type_resolutions": "data/sources/ro-semantic-type-reviewed-resolutions.json",
-    "osm_catalog_generated_at": "2026-09-27T11:09:46.146Z"
+    "osm_catalog_generated_at": "2026-09-27T11:25:31.146Z"
   },
   "checks": [
     {

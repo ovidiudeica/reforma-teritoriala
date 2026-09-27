@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "mode": "ACTUAL",
-  "snapshot_id": "actual-6075aed923de66ec",
-  "generated_at": "2026-09-27T11:10:44.436Z",
-  "release_fingerprint_sha256": "6075aed923de66ec79747395ab0148aac5220d467dd755fc0af132549cadb8df",
+  "snapshot_id": "actual-dc764ebc99f7e8c6",
+  "generated_at": "2026-09-27T11:26:59.587Z",
+  "release_fingerprint_sha256": "dc764ebc99f7e8c6dce7c2f1b6afcc1b911c8c8a494c63fde5b57c564aabec8e",
   "policy": "Immutable content fingerprint for the current public RO+MD administrative snapshot. The manifest binds validated master catalog/GeoJSON, official registries, jurisdiction gates, the public entity contract and tiered web geometries to exact bytes.",
   "jurisdictions": [
     "RO",
@@ -12,7 +12,7 @@
   "catalog": {
     "path": "data/current/entities.json",
     "schema_version": 2,
-    "generated_at": "2026-09-27T11:09:46.146Z",
+    "generated_at": "2026-09-27T11:25:31.146Z",
     "classifier_version": "2.3",
     "source": "OpenStreetMap via Overpass API",
     "license": "ODbL",
@@ -22,7 +22,7 @@
       "RO": 3232,
       "MD": 2590
     },
-    "sha256": "3ca1b9fd6d7eede3be10f4109ef83fd29ba42a143724d89b8e51ef6a2cf93062"
+    "sha256": "fe3ffd1b79ad7e4cef1070cd16996a4cde98d605a583a056b59b352036bd32dc"
   },
   "administrative_model": {
     "path": "data/current/administrative-inventory.json",
@@ -46,7 +46,7 @@
     "path": "public/data/actual-entities.json",
     "contract": "actual-public-entity-v1",
     "schema_version": 1,
-    "generated_at": "2026-09-27T11:09:46.146Z",
+    "generated_at": "2026-09-27T11:25:31.146Z",
     "entity_count": 5822,
     "entity_count_by_jurisdiction": {
       "RO": 3232,
@@ -59,40 +59,40 @@
       "unresolved": 1,
       "not_bound_to_official_registry": 53
     },
-    "sha256": "d04f6f7786dbc65840053ddff6b4c24d6cc84f64f4c06f293ccd10090bc1de95",
+    "sha256": "64611373f7e304b871aafdd0868c05f08bd50baa479eca70aea67cc9fbc520de",
     "geometry_tiers": {
       "RO": {
         "overview": {
           "path": "public/geo/actual/ro-overview.geojson",
           "feature_count": 42,
-          "sha256": "fda5dcbfc95fd0f6b67184ab4a047b51744f31462900f638adb14287c62a28e1"
+          "sha256": "7416d1d8cfd318d13b2b250447b06b6c58ddc7ff65840455b713aa4acbe692f9"
         },
         "local": {
           "path": "public/geo/actual/ro-local.geojson",
           "feature_count": 3179,
-          "sha256": "d50360fdf307cec984772f49e2eb8dd218cb424b44f1c43e9656279a99c82a85"
+          "sha256": "3bb98efbe291124b243916f6418df3489ac7b46b4a17004d993dfcec23583dda"
         },
         "detail": {
           "path": "public/geo/actual/ro-detail.geojson",
           "feature_count": 11,
-          "sha256": "16ccdb3f4340fae39c864b16b6f08f3032bd4ad48303e39e06406788d8bc83d7"
+          "sha256": "a0e5c06348ab2678179c04bc6d8be53f506a6e5447087f63b42c2425b6b0e9da"
         }
       },
       "MD": {
         "overview": {
           "path": "public/geo/actual/md-overview.geojson",
           "feature_count": 37,
-          "sha256": "24ad679c4f6cb51c806f64c4a051f5a8f047cd74f16878d8b673a2f691977844"
+          "sha256": "54cb59d144a72806bb7ef19cddb50b74ae24f3547bfeadcfd3e59d36971317f0"
         },
         "local": {
           "path": "public/geo/actual/md-local.geojson",
           "feature_count": 982,
-          "sha256": "f5ecd5ee5b9049dd4982e593ac50fec17dd899bdf9493d2bc45434372aef5ae3"
+          "sha256": "d96dfe72cafadf14258483c0cb97c6c079c327a7ef6f757a014c78cfb7929c1e"
         },
         "detail": {
           "path": "public/geo/actual/md-detail.geojson",
           "feature_count": 1571,
-          "sha256": "08ba8715a108e7a78a810f6af6c4d8be29bb5fc25acc587d3b725821c3cb21d8"
+          "sha256": "4453f10cbd1c2b5d0f95adfb8ba9c380e1e0a82ed69af6fcd37a877b8af7ad31"
         }
       }
     }
@@ -101,14 +101,14 @@
     "RO": {
       "path": "data/current/ro-release-gate.json",
       "status": "PASS",
-      "generated_at": "2026-09-27T11:10:44.436Z",
-      "sha256": "0f3593ad7af31818f5b33b3a36e4662a0adb599dc82b266bc2386ff6643092a3"
+      "generated_at": "2026-09-27T11:26:59.587Z",
+      "sha256": "99b9903e2183084e13b11a72da5e89f432dd85519daf936ad48319d6baf7f7df"
     },
     "MD": {
       "path": "data/current/md-release-gate.json",
       "status": "PASS",
-      "generated_at": "2026-09-27T11:10:43.589Z",
-      "sha256": "b6c4649ba6985645ad93bb2392de8ca73f4b872d549b0d13d33c025db02baf88"
+      "generated_at": "2026-09-27T11:26:58.906Z",
+      "sha256": "22b49364756eca5777ca00240b81bb5dce487254cde4edd53eb98c1486f6afb8"
     }
   },
   "official_sources": {
@@ -128,15 +128,15 @@
       "authority": "Biroul Național de Statistică al Republicii Moldova",
       "path": "data/sources/cuatm-current.json",
       "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
-      "fetched_at": "2026-09-27T11:10:43.157Z",
+      "fetched_at": "2026-09-27T11:26:58.553Z",
       "record_count": 1721,
-      "sha256": "6ac9967c99e7ebd52ae5b40358e64471afbabe4fd681fb9c477e6200575b627e"
+      "sha256": "9fd4a17d96c7c1d8ebe46e617d83229c91b8020f7b737f6a69389ed51f7234d0"
     }
   },
   "components": {
     "catalog": {
       "path": "data/current/entities.json",
-      "sha256": "3ca1b9fd6d7eede3be10f4109ef83fd29ba42a143724d89b8e51ef6a2cf93062",
+      "sha256": "fe3ffd1b79ad7e4cef1070cd16996a4cde98d605a583a056b59b352036bd32dc",
       "bytes": 8715044
     },
     "inventory": {
@@ -156,47 +156,47 @@
     },
     "public_index": {
       "path": "public/data/actual-entities.json",
-      "sha256": "d04f6f7786dbc65840053ddff6b4c24d6cc84f64f4c06f293ccd10090bc1de95",
-      "bytes": 11737237
+      "sha256": "64611373f7e304b871aafdd0868c05f08bd50baa479eca70aea67cc9fbc520de",
+      "bytes": 11783850
     },
     "ro_overview": {
       "path": "public/geo/actual/ro-overview.geojson",
-      "sha256": "fda5dcbfc95fd0f6b67184ab4a047b51744f31462900f638adb14287c62a28e1",
-      "bytes": 332448
+      "sha256": "7416d1d8cfd318d13b2b250447b06b6c58ddc7ff65840455b713aa4acbe692f9",
+      "bytes": 5315062
     },
     "ro_local": {
       "path": "public/geo/actual/ro-local.geojson",
-      "sha256": "d50360fdf307cec984772f49e2eb8dd218cb424b44f1c43e9656279a99c82a85",
-      "bytes": 5451373
+      "sha256": "3bb98efbe291124b243916f6418df3489ac7b46b4a17004d993dfcec23583dda",
+      "bytes": 37460510
     },
     "ro_detail": {
       "path": "public/geo/actual/ro-detail.geojson",
-      "sha256": "16ccdb3f4340fae39c864b16b6f08f3032bd4ad48303e39e06406788d8bc83d7",
-      "bytes": 22069
+      "sha256": "a0e5c06348ab2678179c04bc6d8be53f506a6e5447087f63b42c2425b6b0e9da",
+      "bytes": 188518
     },
     "md_overview": {
       "path": "public/geo/actual/md-overview.geojson",
-      "sha256": "24ad679c4f6cb51c806f64c4a051f5a8f047cd74f16878d8b673a2f691977844",
-      "bytes": 136808
+      "sha256": "54cb59d144a72806bb7ef19cddb50b74ae24f3547bfeadcfd3e59d36971317f0",
+      "bytes": 1680875
     },
     "md_local": {
       "path": "public/geo/actual/md-local.geojson",
-      "sha256": "f5ecd5ee5b9049dd4982e593ac50fec17dd899bdf9493d2bc45434372aef5ae3",
-      "bytes": 1103187
+      "sha256": "d96dfe72cafadf14258483c0cb97c6c079c327a7ef6f757a014c78cfb7929c1e",
+      "bytes": 6643107
     },
     "md_detail": {
       "path": "public/geo/actual/md-detail.geojson",
-      "sha256": "08ba8715a108e7a78a810f6af6c4d8be29bb5fc25acc587d3b725821c3cb21d8",
-      "bytes": 1571552
+      "sha256": "4453f10cbd1c2b5d0f95adfb8ba9c380e1e0a82ed69af6fcd37a877b8af7ad31",
+      "bytes": 10903341
     },
     "ro_gate": {
       "path": "data/current/ro-release-gate.json",
-      "sha256": "0f3593ad7af31818f5b33b3a36e4662a0adb599dc82b266bc2386ff6643092a3",
+      "sha256": "99b9903e2183084e13b11a72da5e89f432dd85519daf936ad48319d6baf7f7df",
       "bytes": 4863
     },
     "md_gate": {
       "path": "data/current/md-release-gate.json",
-      "sha256": "b6c4649ba6985645ad93bb2392de8ca73f4b872d549b0d13d33c025db02baf88",
+      "sha256": "22b49364756eca5777ca00240b81bb5dce487254cde4edd53eb98c1486f6afb8",
       "bytes": 1725
     },
     "ro_official": {
@@ -206,7 +206,7 @@
     },
     "md_official": {
       "path": "data/sources/cuatm-current.json",
-      "sha256": "6ac9967c99e7ebd52ae5b40358e64471afbabe4fd681fb9c477e6200575b627e",
+      "sha256": "9fd4a17d96c7c1d8ebe46e617d83229c91b8020f7b737f6a69389ed51f7234d0",
       "bytes": 611165
     },
     "md_individual_review": {
