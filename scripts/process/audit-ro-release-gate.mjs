@@ -8,7 +8,9 @@ const catalog=await read('data/current/entities.json');
 const semanticEvidence=await read('data/sources/ro-level9-exception-evidence.json');
 const official=await read('data/current/ro-official-reconciliation.json');
 const officialApplication=await read('data/current/ro-official-application.json');
+const officialExceptionAudit=await read('data/current/ro-official-exception-audit.json');
 const officialAllowed=await read('data/sources/ro-official-reconciliation-exceptions.json');
+const officialOnlyReviewed=await read('data/sources/ro-official-only-reviewed-resolutions.json');
 const failures=[],checks=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail})};
 const ro=(review.items||[]).filter(x=>x.jurisdiction==='RO');
@@ -41,6 +43,7 @@ check('audited_ro_level9_semantics_are_encoded',unresolvedSemantic.length===0,{u
 check('ro_official_reconciliation_pass',official.status==='PASS',{status:official.status});
 check('ro_official_reconciliation_has_no_unmatched',official.summary?.unmatched_osm_count===0,{count:official.summary?.unmatched_osm_count});
 check('ro_official_reconciliation_has_no_duplicates',official.summary?.duplicate_legal_mapping_count===0,{count:official.summary?.duplicate_legal_mapping_count});
+check('ro_official_reconciliation_has_no_unresolved_official_only',official.summary?.official_only_count===0,{count:official.summary?.official_only_count});
 check('ro_official_application_pass',officialApplication.status==='PASS',{status:officialApplication.status,summary:officialApplication.summary});
 check('ro_official_application_is_complete',officialApplication.summary?.applied_count===official.summary?.osm_admin_level_8_count,{applied:officialApplication.summary?.applied_count,expected:official.summary?.osm_admin_level_8_count});
 
@@ -62,6 +65,17 @@ exactSetCheck(
  official.official_only,officialAllowed.allowed_official_only,
  x=>String(x.legal_id),['legal_name','legal_type','legal_parent_name']
 );
+exactSetCheck(
+ 'ro_reviewed_official_only_resolution_set_is_stable',
+ official.reviewed_official_only_resolutions,officialOnlyReviewed.items,
+ x=>String(x.legal_id),['legal_name','legal_type','legal_parent_name','classification','covering_osm_relation_id','covering_osm_relation_legal_id','expected_parent_osm_relation_id']
+);
+const officialOnlyAuditById=new Map((officialExceptionAudit.reviewed_official_only_resolutions||[]).map(x=>[String(x.legal_id),x]));
+const unstableReviewedOfficialOnly=(officialOnlyReviewed.items||[]).flatMap(x=>{
+ const audit=officialOnlyAuditById.get(String(x.legal_id));
+ return audit?.stable===true?[]:[{legal_id:String(x.legal_id),audit:audit||null}];
+});
+check('ro_reviewed_official_only_geometry_audit_pass',unstableReviewedOfficialOnly.length===0,{failed:unstableReviewedOfficialOnly});
 const represented=(official.represented_at_other_osm_level||[]).flatMap(x=>(x.osm||[]).map(o=>({legal_id:x.legal_id,osm_relation_id:o.relation_id,admin_level:o.admin_level})));
 exactSetCheck(
  'ro_represented_at_other_level_set_is_stable',
@@ -83,6 +97,6 @@ const bad=(geo.features||[]).filter(f=>!f.geometry||!['Polygon','MultiPolygon'].
 check('all_ro_features_have_polygonal_geometry',bad.length===0,{count:bad.length});
 const ungheni=(geo.features||[]).filter(f=>Number(f.properties?.osm_relation_id)===18967922||f.properties?.catalog_id==='osm-r18967922');
 check('known_cross_jurisdiction_ungheni_removed',ungheni.length===0,{present:ungheni.length});
-const report={schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',status:failures.length?'FAIL':'PASS',policy:'RO release requires zero unresolved/duplicate SIRUTA matches, complete official application, and only the exact documented residual official-only, parent and OSM-semantic conflicts. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.',checks,failures};
+const report={schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',status:failures.length?'FAIL':'PASS',policy:'RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, complete official application, and only exact documented semantic residuals. Reviewed UATs without a distinct OSM boundary must pass official-locality containment and provenance checks; no covering OSM geometry is promoted to legal geometry. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.',checks,failures};
 await writeFile('data/current/ro-release-gate.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));if(failures.length)process.exit(1);
