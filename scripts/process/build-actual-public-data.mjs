@@ -79,7 +79,7 @@ function legalFor(e){
   const m=mdMatchById.get(e.id);
   if(m?.legal_id){
    const semantic=mdSemanticByLegalId.get(String(m.legal_id))||null;
-   if(['3','8'].includes(String(m.status_code))&&!semantic)throw new Error('Missing MD semantic subtype for reconciled CUATM '+m.legal_id+' ('+m.legal_name+')');
+   if(['3','5','8'].includes(String(m.status_code))&&!semantic)throw new Error('Missing MD semantic subtype for reconciled CUATM '+m.legal_id+' ('+m.legal_name+')');
    return {
     registry:'CUATM',
     id:String(m.legal_id),
