@@ -1,31 +1,33 @@
 {
   "generated_at": "2026-09-27T20:37:24.316Z",
   "source_generated_at": "2026-09-27T20:37:24.316Z",
-  "entity_count": 5827,
+  "entity_count": 5829,
   "countries": {
     "RO": {
-      "feature_count": 3232,
+      "feature_count": 3233,
       "review_required": 0,
       "distributions": {
         "admin_level": {
+          "2": 1,
           "4": 42,
           "8": 3179,
           "9": 11
         },
         "place": {
+          "∅": 13,
           "county": 41,
           "city": 101,
           "municipality": 2861,
-          "∅": 12,
           "town": 217
         },
         "designation": {
-          "∅": 3232
+          "∅": 3233
         },
         "osm_type": {
-          "boundary": 3232
+          "boundary": 3233
         },
         "entity_type": {
+          "state": 1,
           "county": 42,
           "municipality": 102,
           "commune": 2861,
@@ -93,6 +95,14 @@
           "count": 2
         },
         {
+          "admin_level": "2",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "state",
+          "count": 1
+        },
+        {
           "admin_level": "4",
           "place": "city",
           "designation": "∅",
@@ -143,17 +153,18 @@
       ]
     },
     "MD": {
-      "feature_count": 2595,
+      "feature_count": 2596,
       "review_required": 267,
       "distributions": {
         "admin_level": {
+          "2": 1,
           "4": 37,
           "7": 5,
           "8": 982,
           "9": 1571
         },
         "place": {
-          "∅": 149,
+          "∅": 150,
           "municipality": 410,
           "district": 32,
           "village": 1763,
@@ -163,13 +174,14 @@
           "allotments": 122
         },
         "designation": {
-          "∅": 2595
+          "∅": 2596
         },
         "osm_type": {
-          "boundary": 2541,
+          "boundary": 2542,
           "multipolygon": 54
         },
         "entity_type": {
+          "state": 1,
           "unclassified": 1,
           "level_2_municipality": 3,
           "district": 32,
@@ -306,6 +318,14 @@
           "count": 2
         },
         {
+          "admin_level": "2",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "state",
+          "count": 1
+        },
+        {
           "admin_level": "7",
           "place": "∅",
           "designation": "∅",
@@ -327,6 +347,7 @@
   "parent_validation": {
     "RO": {
       "checked": 3232,
+      "context_excluded": 1,
       "root_parent": 42,
       "unexpected_root": 0,
       "entity_parent": 3190,
@@ -341,6 +362,7 @@
     },
     "MD": {
       "checked": 2595,
+      "context_excluded": 1,
       "root_parent": 37,
       "unexpected_root": 0,
       "entity_parent": 2558,

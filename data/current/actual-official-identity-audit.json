@@ -6,19 +6,34 @@
     "MD"
   ],
   "policy": "Fail closed on any loss, invention, contradiction or propagation drift of positive SIRUTA/CUATM identity and bridged MD semantic subtype across catalog/reconciliation, public index and public geometry. Geometry coordinates are not modified.",
-  "entity_count": 5827,
+  "entity_count": 5829,
   "expected_positive_official_identity_count": 5692,
   "legal_identity_status_counts": {
+    "not_bound_to_official_registry": 13,
     "reconciled": 5692,
     "unresolved": 1,
-    "outside_current_legal_registry": 123,
-    "not_bound_to_official_registry": 11
+    "outside_current_legal_registry": 123
   },
   "status": "PASS",
   "blocking_issue_count": 0,
   "blocking_issue_summary": {},
   "blocking_issues": [],
   "entities": [
+    {
+      "entity_id": "osm-r58974",
+      "jurisdiction": "MD",
+      "name": "Moldova",
+      "expected_official_registry": null,
+      "expected_official_id": null,
+      "expected_semantic_type": null,
+      "public_official_registry": null,
+      "public_official_id": null,
+      "public_semantic_type": null,
+      "legal_identity_status": "not_bound_to_official_registry",
+      "master_geometry": true,
+      "public_entity": true,
+      "public_geometry": true
+    },
     {
       "entity_id": "osm-r1699032",
       "jurisdiction": "MD",
@@ -38940,6 +38955,21 @@
       "public_official_id": "2729",
       "public_semantic_type": null,
       "legal_identity_status": "reconciled",
+      "master_geometry": true,
+      "public_entity": true,
+      "public_geometry": true
+    },
+    {
+      "entity_id": "osm-r90689",
+      "jurisdiction": "RO",
+      "name": "România",
+      "expected_official_registry": null,
+      "expected_official_id": null,
+      "expected_semantic_type": null,
+      "public_official_registry": null,
+      "public_official_id": null,
+      "public_semantic_type": null,
+      "legal_identity_status": "not_bound_to_official_registry",
       "master_geometry": true,
       "public_entity": true,
       "public_geometry": true

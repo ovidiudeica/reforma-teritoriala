@@ -1,14 +1,14 @@
 {
   "schema_version": 9,
   "mode": "ACTUAL",
-  "snapshot_id": "actual-926d9b00b221d650",
+  "snapshot_id": "actual-5f174ce51b754eed",
   "generated_at": "2026-09-27T20:37:28.323Z",
-  "release_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
-  "content_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
-  "component_byte_fingerprint_sha256": "58b73081f6f5c0bf2c3f67833d9a5c7545d08f4c0f41207a457a92df092afb7f",
+  "release_fingerprint_sha256": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
+  "content_fingerprint_sha256": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
+  "component_byte_fingerprint_sha256": "e8772b10b16f2e6573bdb8acaba7567174c9578ff3d0535575b2d41315d0d49f",
   "content_identity": {
     "algorithm": "actual-semantic-v2",
-    "sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+    "sha256": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
     "release_identity_basis": "semantic_content_v2",
     "reused_base_release": false
   },
@@ -78,17 +78,17 @@
   "catalog": {
     "path": "data/current/entities.json",
     "schema_version": 2,
-    "generated_at": "2026-09-27T20:33:04.478Z",
+    "generated_at": "2026-09-27T20:37:24.316Z",
     "classifier_version": "2.3",
     "source": "OpenStreetMap via Overpass API",
     "license": "ODbL",
-    "entity_count": 5827,
-    "declared_entity_count": 5827,
+    "entity_count": 5829,
+    "declared_entity_count": 5829,
     "entity_count_by_jurisdiction": {
-      "RO": 3232,
-      "MD": 2595
+      "RO": 3233,
+      "MD": 2596
     },
-    "sha256": "d2a4701f016f1e1378798d150e7175d4fd36a46df76ca3af6e46da4fef6ce816"
+    "sha256": "4ac07a874a3b0cd66d8ffeb3bd12f8ce4b3eb7b9464140c0793600d222f000ac"
   },
   "administrative_model": {
     "path": "data/current/administrative-inventory.json",
@@ -119,72 +119,72 @@
   "geometry": {
     "RO": {
       "path": "public/geo/current/ro-administrative.geojson",
-      "feature_count": 3232,
-      "sha256": "e22a4bc1051c32094277110d77f5fc9c3da7b32ac829d37a2de0b95a11222163"
+      "feature_count": 3233,
+      "sha256": "d131ea3de6509a2f8134e4fe5f43fd288fa061cd4c13c82846904f1276e11c93"
     },
     "MD": {
       "path": "public/geo/current/md-administrative.geojson",
-      "feature_count": 2595,
-      "sha256": "774cbe6d69bad316a7e6febdf0ce7b2344509cc120e698d818d9f35e1473844a"
+      "feature_count": 2596,
+      "sha256": "56bda127997f4dec3f930b7963f61abfed1116ff9647b906c07141dd3be45670"
     }
   },
   "public_contract": {
     "path": "public/data/actual-entities.json",
     "contract": "actual-public-entity-v1",
     "schema_version": 1,
-    "generated_at": "2026-09-27T20:33:04.478Z",
-    "entity_count": 5827,
+    "generated_at": "2026-09-27T20:37:24.316Z",
+    "entity_count": 5829,
     "entity_count_by_jurisdiction": {
-      "RO": 3232,
-      "MD": 2595
+      "RO": 3233,
+      "MD": 2596
     },
     "legal_identity_status_counts": {
+      "not_bound_to_official_registry": 13,
       "reconciled": 5692,
       "outside_current_legal_registry": 123,
-      "unresolved": 1,
-      "not_bound_to_official_registry": 11
+      "unresolved": 1
     },
-    "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
+    "sha256": "4f264ac452b5552c1caf4dc8b9b714aa3357aad46607bac6b2b34de44e2372aa",
     "geometry_chunks": {
       "path": "public/data/actual-geometry-chunks.json",
       "contract": "actual-public-geometry-chunks-v1",
       "schema_version": 1,
       "chunk_count": 115,
-      "sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784"
+      "sha256": "e24977c331d3e52f2f6add64e7b23b1675b04145bca342afcd6bb19fb73acd0b"
     },
     "geometry_tiers": {
       "RO": {
         "overview": {
           "path": "public/geo/actual/ro-overview.geojson",
-          "feature_count": 42,
-          "sha256": "27e0873cf07c1eaa19e2447c09f32f951d9b93b0746a501acce1de57a9e8eedd"
+          "feature_count": 43,
+          "sha256": "6ed6bbd22951332ed7c479ee4e07da9290c2c0abb83e885347071569578f1e4c"
         },
         "local": {
           "path": "public/geo/actual/ro-local.geojson",
           "feature_count": 3179,
-          "sha256": "3bb98efbe291124b243916f6418df3489ac7b46b4a17004d993dfcec23583dda"
+          "sha256": "0baf057bcea4402f052164c61a329847a942e5724c3aa750865dd259351c448d"
         },
         "detail": {
           "path": "public/geo/actual/ro-detail.geojson",
           "feature_count": 11,
-          "sha256": "a0e5c06348ab2678179c04bc6d8be53f506a6e5447087f63b42c2425b6b0e9da"
+          "sha256": "c28d4b350d75001bf1843ba95bb8ace70ea9edef0b9def43209f28ff9183c8a9"
         }
       },
       "MD": {
         "overview": {
           "path": "public/geo/actual/md-overview.geojson",
-          "feature_count": 37,
-          "sha256": "3aa8866f5da806eb7eb99d94fbba562e7ff598119a8ff32d2fc51da50e31ca72"
+          "feature_count": 38,
+          "sha256": "4d61649bf78625de9d69d736bc566972c5ecf5e9b760dfb289a72060f03a750b"
         },
         "local": {
           "path": "public/geo/actual/md-local.geojson",
           "feature_count": 987,
-          "sha256": "c07dcd7750eeda984e5cc98733a46694f3e5ecbcc90ef6d5d1355871c8865ce0"
+          "sha256": "5848510a20112f48e94cea8e2577b179571b18d817075bd1a61ac64527bd1953"
         },
         "detail": {
           "path": "public/geo/actual/md-detail.geojson",
           "feature_count": 1571,
-          "sha256": "98c1e99771c36bb89a7af13ef3a7a05d8c65a04fcf4ced807d071668f69370e0"
+          "sha256": "fb21a07ed33adf725782b1eb5c5a235ed0d0cca3e41a78bb1e80d9456dac1739"
         }
       }
     }
@@ -213,13 +213,13 @@
       "path": "data/current/actual-topology-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "37130250fac5846db0ddaa1a1bd5a40142a719899d36858c5dff9ae469247fcc"
+      "sha256": "99d22a121c44f9ab7b7a7452869ce4dd3671eb44d8f80a9c8885f62aeef82e71"
     },
     "regression": {
       "path": "data/current/actual-regression-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "96160edcc284797f452a64e557527769f4e8ce2ecf01c7e9b60cf62e3a78bb9a"
+      "sha256": "bb05b34e708172e42f74802177d805916b30937e9492113d8f61bc89370541fa"
     },
     "structural_completeness": {
       "path": "data/current/actual-structural-completeness-audit.json",
@@ -227,13 +227,13 @@
       "blocking_gap_count": 0,
       "blocking_policy_violation_count": 0,
       "blocking_issue_count": 0,
-      "sha256": "8532a7e1397856987bedc9594ad4ab43d43e691cc8baced4707ec2270189ab95"
+      "sha256": "cf1c3d2216d5605e867611dade592b8371eb1b32d0532da9937fda05e629861e"
     },
     "official_identity": {
       "path": "data/current/actual-official-identity-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "def25c3381d5b94b7d0999c88da961f2133fb13b8cbd6aa043ff59fd62411aae"
+      "sha256": "15fb476a64178550a60a22921197be500020b90d573824585f00896d0f9fbf51"
     }
   },
   "jurisdiction_gates": {
@@ -275,8 +275,8 @@
   "components": {
     "catalog": {
       "path": "data/current/entities.json",
-      "sha256": "d2a4701f016f1e1378798d150e7175d4fd36a46df76ca3af6e46da4fef6ce816",
-      "bytes": 8755755
+      "sha256": "4ac07a874a3b0cd66d8ffeb3bd12f8ce4b3eb7b9464140c0793600d222f000ac",
+      "bytes": 8758223
     },
     "inventory": {
       "path": "data/current/administrative-inventory.json",
@@ -285,53 +285,53 @@
     },
     "ro_geojson": {
       "path": "public/geo/current/ro-administrative.geojson",
-      "sha256": "e22a4bc1051c32094277110d77f5fc9c3da7b32ac829d37a2de0b95a11222163",
-      "bytes": 45743879
+      "sha256": "d131ea3de6509a2f8134e4fe5f43fd288fa061cd4c13c82846904f1276e11c93",
+      "bytes": 46332646
     },
     "md_geojson": {
       "path": "public/geo/current/md-administrative.geojson",
-      "sha256": "774cbe6d69bad316a7e6febdf0ce7b2344509cc120e698d818d9f35e1473844a",
-      "bytes": 20611143
+      "sha256": "56bda127997f4dec3f930b7963f61abfed1116ff9647b906c07141dd3be45670",
+      "bytes": 21022600
     },
     "public_index": {
       "path": "public/data/actual-entities.json",
-      "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
-      "bytes": 11938124
+      "sha256": "4f264ac452b5552c1caf4dc8b9b714aa3357aad46607bac6b2b34de44e2372aa",
+      "bytes": 12366898
     },
     "public_chunks": {
       "path": "public/data/actual-geometry-chunks.json",
-      "sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784",
+      "sha256": "e24977c331d3e52f2f6add64e7b23b1675b04145bca342afcd6bb19fb73acd0b",
       "bytes": 35786
     },
     "ro_overview": {
       "path": "public/geo/actual/ro-overview.geojson",
-      "sha256": "27e0873cf07c1eaa19e2447c09f32f951d9b93b0746a501acce1de57a9e8eedd",
-      "bytes": 5314915
+      "sha256": "6ed6bbd22951332ed7c479ee4e07da9290c2c0abb83e885347071569578f1e4c",
+      "bytes": 5761171
     },
     "ro_local": {
       "path": "public/geo/actual/ro-local.geojson",
-      "sha256": "3bb98efbe291124b243916f6418df3489ac7b46b4a17004d993dfcec23583dda",
-      "bytes": 37460510
+      "sha256": "0baf057bcea4402f052164c61a329847a942e5724c3aa750865dd259351c448d",
+      "bytes": 37628997
     },
     "ro_detail": {
       "path": "public/geo/actual/ro-detail.geojson",
-      "sha256": "a0e5c06348ab2678179c04bc6d8be53f506a6e5447087f63b42c2425b6b0e9da",
-      "bytes": 188518
+      "sha256": "c28d4b350d75001bf1843ba95bb8ace70ea9edef0b9def43209f28ff9183c8a9",
+      "bytes": 189101
     },
     "md_overview": {
       "path": "public/geo/actual/md-overview.geojson",
-      "sha256": "3aa8866f5da806eb7eb99d94fbba562e7ff598119a8ff32d2fc51da50e31ca72",
-      "bytes": 1680929
+      "sha256": "4d61649bf78625de9d69d736bc566972c5ecf5e9b760dfb289a72060f03a750b",
+      "bytes": 1976286
     },
     "md_local": {
       "path": "public/geo/actual/md-local.geojson",
-      "sha256": "c07dcd7750eeda984e5cc98733a46694f3e5ecbcc90ef6d5d1355871c8865ce0",
-      "bytes": 6766908
+      "sha256": "5848510a20112f48e94cea8e2577b179571b18d817075bd1a61ac64527bd1953",
+      "bytes": 6819219
     },
     "md_detail": {
       "path": "public/geo/actual/md-detail.geojson",
-      "sha256": "98c1e99771c36bb89a7af13ef3a7a05d8c65a04fcf4ced807d071668f69370e0",
-      "bytes": 10908702
+      "sha256": "fb21a07ed33adf725782b1eb5c5a235ed0d0cca3e41a78bb1e80d9456dac1739",
+      "bytes": 10991965
     },
     "ro_gate": {
       "path": "data/current/ro-release-gate.json",
@@ -365,23 +365,23 @@
     },
     "topology_audit": {
       "path": "data/current/actual-topology-audit.json",
-      "sha256": "37130250fac5846db0ddaa1a1bd5a40142a719899d36858c5dff9ae469247fcc",
+      "sha256": "99d22a121c44f9ab7b7a7452869ce4dd3671eb44d8f80a9c8885f62aeef82e71",
       "bytes": 6823
     },
     "regression_audit": {
       "path": "data/current/actual-regression-audit.json",
-      "sha256": "96160edcc284797f452a64e557527769f4e8ce2ecf01c7e9b60cf62e3a78bb9a",
-      "bytes": 791
+      "sha256": "bb05b34e708172e42f74802177d805916b30937e9492113d8f61bc89370541fa",
+      "bytes": 854
     },
     "structural_completeness_audit": {
       "path": "data/current/actual-structural-completeness-audit.json",
-      "sha256": "8532a7e1397856987bedc9594ad4ab43d43e691cc8baced4707ec2270189ab95",
-      "bytes": 27541
+      "sha256": "cf1c3d2216d5605e867611dade592b8371eb1b32d0532da9937fda05e629861e",
+      "bytes": 27681
     },
     "official_identity_audit": {
       "path": "data/current/actual-official-identity-audit.json",
-      "sha256": "def25c3381d5b94b7d0999c88da961f2133fb13b8cbd6aa043ff59fd62411aae",
-      "bytes": 2844748
+      "sha256": "15fb476a64178550a60a22921197be500020b90d573824585f00896d0f9fbf51",
+      "bytes": 2845709
     },
     "settlement_policy": {
       "path": "data/sources/actual-settlement-policy.json",
