@@ -56,16 +56,35 @@
         "component_locality"
       ],
       "accepted_paths": {
-        "official_identity": {
+        "official_locality_identity": {
           "registry": "CUATM",
           "legal_identity_status": "reconciled",
           "allowed_status_codes": [
             "6",
             "9"
           ],
-          "official_record_must_exist": true
+          "official_record_must_exist": true,
+          "interpretation": "The OSM settlement representation is positively bound to an official CUATM component-locality identity."
+        },
+        "reconciled_uat_settlement_representation": {
+          "registry": "CUATM",
+          "legal_identity_status": "reconciled",
+          "allowed_status_codes": [
+            "3",
+            "5",
+            "8"
+          ],
+          "semantic_types": [
+            "town",
+            "level_1_municipality",
+            "level_2_municipality",
+            "commune",
+            "independent_village"
+          ],
+          "interpretation": "A lower-level OSM settlement polygon may represent the inhabited-place footprint/settlement representation of an already reconciled administrative UAT identity. It remains a representation, is not counted as a distinct official component-locality identity, and does not assert that the OSM polygon is authoritative legal UAT geometry."
         }
-      }
+      },
+      "identity_geometry_separation": "Catalog type component_locality describes the OSM representation role, while CUATM legal status/type describes legal identity. A status 3/5/8 identity on a level-9 component_locality representation is not reclassified as an official status 6/9 component locality and is already counted under its UAT completeness type."
     }
   }
 }
