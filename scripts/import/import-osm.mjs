@@ -9,7 +9,7 @@ const CLASSIFIER_VERSION='2.3';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9]},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9,10]}
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9]}
 };
 const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
 const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
@@ -77,6 +77,7 @@ function classify(country,t={}){
    return {type:'level_1_uat',confidence:'low',reason:'MD admin_level=8 lacks a usable place/legal discriminator'};
   }
   if(l===9){
+   if(p==='borough'&&norm(t['place:ro'])==='sector'&&/^01[1-5]0$/.test(String(t['ref:cuatm:codunic']||'')))return {type:'chisinau_sector',confidence:'high',reason:'Chișinău sector identified by OSM borough/sector semantics and explicit CUATM code 0110–0150'};
    if(['village','town','city'].includes(p))return {type:'component_locality',confidence:'medium',reason:'Nested locality boundary; exact legal subtype requires official-list cross-check'};
    if(p==='allotments')return {type:'non_administrative_or_auxiliary_area',confidence:'low',reason:'place=allotments is not sufficient evidence of an administrative unit'};
    return {type:'subdivision_or_component_area',confidence:'low',reason:'MD admin_level=9 is heterogeneous in current OSM data'};
