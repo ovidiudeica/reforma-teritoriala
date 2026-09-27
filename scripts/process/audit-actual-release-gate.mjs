@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
+import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual-semantic-fingerprint.mjs';
 const MANIFEST='data/current/actual-release-manifest.json';
 const TOPOLOGY_AUDIT='data/current/actual-topology-audit.json';
 const topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));
@@ -36,13 +37,23 @@ const featureCounts={
  MD:Array.isArray(mdGeo.features)?mdGeo.features.length:0
 };
 const currentHashes=Object.fromEntries(Object.entries(buffers).map(([key,buf])=>[key,sha256(buf)]));
-const fingerprintPayload={
+const legacyFingerprintPayload={
  mode:'ACTUAL',
  jurisdictions,
  components:Object.fromEntries(Object.keys(manifest.components||{}).map(key=>[key,currentHashes[key]??null]))
 };
-const fingerprint=sha256(Buffer.from(JSON.stringify(fingerprintPayload),'utf8'));
-const expectedSnapshotId='actual-'+fingerprint.slice(0,16);
+const legacyFingerprint=sha256(Buffer.from(JSON.stringify(legacyFingerprintPayload),'utf8'));
+const byteFingerprint=byteFingerprintFromHashes(Object.fromEntries(Object.keys(manifest.components||{}).map(key=>[key,currentHashes[key]??null])));
+const semanticFingerprint=actualSemanticFingerprint({
+ catalog,
+ inventory,
+ roGeo,
+ mdGeo,
+ roOfficial:siruta,
+ mdOfficial:cuatm,
+ mdIndividualReview:mdIndividual,
+ settlementPolicy
+});
 const failures=[],checks=[];
 const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
 
@@ -91,10 +102,42 @@ for(const [key,entry] of Object.entries(manifest.components||{})){
  if(actual!==entry?.sha256)componentDrift.push({key,path:entry?.path??null,expected:entry?.sha256??null,actual});
 }
 check('manifest_component_hashes_match_current_snapshot',componentDrift.length===0,{drift:componentDrift});
-check('release_fingerprint_matches_current_components',
- manifest.release_fingerprint_sha256===fingerprint,
- {expected:manifest.release_fingerprint_sha256,actual:fingerprint});
-check('snapshot_id_matches_release_fingerprint',manifest.snapshot_id===expectedSnapshotId,{expected:expectedSnapshotId,actual:manifest.snapshot_id});
+if((manifest.schema_version??0)>=3){
+ check('manifest_component_byte_fingerprint_matches_current_snapshot',
+  manifest.component_byte_fingerprint_sha256===byteFingerprint.sha256,
+  {expected:manifest.component_byte_fingerprint_sha256??null,actual:byteFingerprint.sha256});
+ check('manifest_semantic_content_fingerprint_matches_current_snapshot',
+  manifest.content_identity?.algorithm===semanticFingerprint.algorithm
+  && manifest.content_fingerprint_sha256===semanticFingerprint.sha256
+  && manifest.content_identity?.sha256===semanticFingerprint.sha256,
+  {manifest:manifest.content_identity??null,expected:semanticFingerprint.sha256,actual:manifest.content_fingerprint_sha256??null});
+ const reused=manifest.content_identity?.reused_base_release===true;
+ const expectedReleaseFingerprint=reused
+  ?manifest.content_identity?.base_release_fingerprint_sha256
+  :semanticFingerprint.sha256;
+ check('release_identity_basis_is_valid',
+  reused
+   ?manifest.content_identity?.release_identity_basis==='base_release_compatibility_reuse'
+     && manifest.content_identity?.base_content_sha256===semanticFingerprint.sha256
+     && typeof manifest.content_identity?.base_snapshot_id==='string'
+   :manifest.content_identity?.release_identity_basis==='semantic_content_v1',
+  {content_identity:manifest.content_identity??null});
+ check('release_fingerprint_matches_semantic_identity',
+  manifest.release_fingerprint_sha256===expectedReleaseFingerprint,
+  {expected:expectedReleaseFingerprint??null,actual:manifest.release_fingerprint_sha256??null,reused_base_release:reused});
+ const expectedSnapshotId=reused
+  ?manifest.content_identity?.base_snapshot_id
+  :'actual-'+semanticFingerprint.sha256.slice(0,16);
+ check('snapshot_id_matches_stable_release_identity',
+  manifest.snapshot_id===expectedSnapshotId,
+  {expected:expectedSnapshotId??null,actual:manifest.snapshot_id,reused_base_release:reused});
+}else{
+ const expectedSnapshotId='actual-'+legacyFingerprint.slice(0,16);
+ check('release_fingerprint_matches_current_components',
+  manifest.release_fingerprint_sha256===legacyFingerprint,
+  {expected:manifest.release_fingerprint_sha256,actual:legacyFingerprint});
+ check('snapshot_id_matches_release_fingerprint',manifest.snapshot_id===expectedSnapshotId,{expected:expectedSnapshotId,actual:manifest.snapshot_id});
+}
 
 const validTimes=[
  catalog.generated_at,roGate.generated_at,mdGate.generated_at,siruta.fetched_at,cuatm.fetched_at

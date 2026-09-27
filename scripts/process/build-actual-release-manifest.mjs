@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual-semantic-fingerprint.mjs';
 
 const OUTPUT='data/current/actual-release-manifest.json';
 const PATHS={
@@ -45,6 +47,7 @@ const structuralCompletenessAudit=json('structural_completeness_audit');
 const officialIdentityAudit=json('official_identity_audit');
 const mdSemanticBridge=json('md_semantic_bridge');
 const settlementPolicy=json('settlement_policy');
+const mdIndividualReview=json('md_individual_review');
 
 const jurisdictions=['RO','MD'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -58,12 +61,57 @@ const components=Object.fromEntries(Object.entries(PATHS).map(([key,path])=>[key
  sha256:sha256(buffers[key]),
  bytes:buffers[key].byteLength
 }]));
-const fingerprintPayload={
- mode:'ACTUAL',
- jurisdictions,
- components:Object.fromEntries(Object.entries(components).map(([key,value])=>[key,value.sha256]))
+const componentHashes=Object.fromEntries(Object.entries(components).map(([key,value])=>[key,value.sha256]));
+const byteFingerprint=byteFingerprintFromHashes(componentHashes);
+const semanticDocuments={
+ catalog,
+ inventory,
+ roGeo,
+ mdGeo,
+ roOfficial:siruta,
+ mdOfficial:cuatm,
+ mdIndividualReview,
+ settlementPolicy
 };
-const releaseFingerprint=sha256(Buffer.from(JSON.stringify(fingerprintPayload),'utf8'));
+const semanticFingerprint=actualSemanticFingerprint(semanticDocuments);
+const BASE_REF=process.env.ACTUAL_BASE_REF||null;
+let releaseFingerprint=semanticFingerprint.sha256;
+let snapshotId='actual-'+releaseFingerprint.slice(0,16);
+let contentIdentity={
+ algorithm:semanticFingerprint.algorithm,
+ sha256:semanticFingerprint.sha256,
+ release_identity_basis:'semantic_content_v1',
+ reused_base_release:false
+};
+if(BASE_REF){
+ const gitBuffer=path=>execFileSync('git',['show',BASE_REF+':'+path],{maxBuffer:256*1024*1024});
+ const gitJson=path=>JSON.parse(gitBuffer(path).toString('utf8'));
+ const baseMarker=gitJson('data/current/actual-release-persisted.json');
+ const baseDocuments={
+  catalog:gitJson(PATHS.catalog),
+  inventory:gitJson(PATHS.inventory),
+  roGeo:gitJson(PATHS.ro_geojson),
+  mdGeo:gitJson(PATHS.md_geojson),
+  roOfficial:gitJson(PATHS.ro_official),
+  mdOfficial:gitJson(PATHS.md_official),
+  mdIndividualReview:gitJson(PATHS.md_individual_review),
+  settlementPolicy:gitJson(PATHS.settlement_policy)
+ };
+ const baseSemantic=actualSemanticFingerprint(baseDocuments);
+ if(baseSemantic.sha256===semanticFingerprint.sha256){
+  releaseFingerprint=baseMarker.release_fingerprint_sha256;
+  snapshotId=baseMarker.snapshot_id;
+  contentIdentity={
+   ...contentIdentity,
+   release_identity_basis:'base_release_compatibility_reuse',
+   reused_base_release:true,
+   base_ref:BASE_REF,
+   base_snapshot_id:baseMarker.snapshot_id,
+   base_release_fingerprint_sha256:baseMarker.release_fingerprint_sha256,
+   base_content_sha256:baseSemantic.sha256
+  };
+ }
+}
 const validTimes=[
  catalog.generated_at,roGate.generated_at,mdGate.generated_at,siruta.fetched_at,cuatm.fetched_at
 ].filter(Boolean).map(x=>new Date(x)).filter(x=>Number.isFinite(x.getTime()));
@@ -79,12 +127,15 @@ const tier=(jurisdiction,name)=>{
 };
 
 const manifest={
- schema_version:2,
+ schema_version:3,
  mode:'ACTUAL',
- snapshot_id:'actual-'+releaseFingerprint.slice(0,16),
+ snapshot_id:snapshotId,
  generated_at:generatedAt,
  release_fingerprint_sha256:releaseFingerprint,
- policy:'Immutable content fingerprint for the current public RO+MD administrative snapshot. The manifest binds validated master catalog/GeoJSON, official registries, jurisdiction gates, the public entity contract and tiered web geometries to exact bytes.',
+ content_fingerprint_sha256:semanticFingerprint.sha256,
+ component_byte_fingerprint_sha256:byteFingerprint.sha256,
+ content_identity:contentIdentity,
+ policy:'Stable administrative-content identity separated from exact-byte integrity. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values remain mandatory integrity bindings.',
  jurisdictions,
  catalog:{
   path:PATHS.catalog,
@@ -173,6 +224,9 @@ console.log(JSON.stringify({
  snapshot_id:manifest.snapshot_id,
  generated_at:manifest.generated_at,
  release_fingerprint_sha256:manifest.release_fingerprint_sha256,
+ content_fingerprint_sha256:manifest.content_fingerprint_sha256,
+ component_byte_fingerprint_sha256:manifest.component_byte_fingerprint_sha256,
+ release_identity_basis:manifest.content_identity?.release_identity_basis??null,
  entity_count:manifest.catalog.entity_count,
  public_contract:manifest.public_contract.contract,
  feature_count:{RO:manifest.geometry.RO.feature_count,MD:manifest.geometry.MD.feature_count},

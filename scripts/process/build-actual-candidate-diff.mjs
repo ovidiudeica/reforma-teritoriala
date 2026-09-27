@@ -2,6 +2,7 @@
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFile,writeFile} from 'node:fs/promises';
+import {actualSemanticFingerprint,semanticCatalogEntities} from '../lib/actual-semantic-fingerprint.mjs';
 
 const BASE_REF=process.env.ACTUAL_BASE_REF;
 if(!BASE_REF)throw new Error('ACTUAL_BASE_REF is required and must identify the persisted release commit/ref.');
@@ -9,6 +10,10 @@ const MANIFEST='data/current/actual-release-manifest.json';
 const GATE='data/current/actual-release-gate.json';
 const PERSISTED='data/current/actual-release-persisted.json';
 const PUBLIC='public/data/actual-entities.json';
+const CATALOG='data/current/entities.json';
+const INVENTORY='data/current/administrative-inventory.json';
+const REVIEW='data/sources/md-cuatm-individual-review.json';
+const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const GEO={RO:'public/geo/current/ro-administrative.geojson',MD:'public/geo/current/md-administrative.geojson'};
 const OFFICIAL={RO:'data/sources/ro-siruta-current.json',MD:'data/sources/cuatm-current.json'};
 const OUTPUT='data/current/actual-candidate-diff.json';
@@ -26,11 +31,15 @@ const stripVolatile=value=>{
  return value;
 };
 const manifestBytes=await readFile(MANIFEST);
-const [manifest,gate,candidatePublic]=await Promise.all([readJson(MANIFEST),readJson(GATE),readJson(PUBLIC)]);
+const [manifest,gate,candidatePublic,candidateCatalog,candidateInventory,candidateReview,candidateSettlementPolicy]=await Promise.all([readJson(MANIFEST),readJson(GATE),readJson(PUBLIC),readJson(CATALOG),readJson(INVENTORY),readJson(REVIEW),readJson(SETTLEMENT_POLICY)]);
 const baselineMarker=gitJson(PERSISTED);
 const baselineManifestBytes=gitBuffer(MANIFEST);
 const baselineManifest=JSON.parse(baselineManifestBytes.toString('utf8'));
 const baselinePublic=gitJson(PUBLIC);
+const baselineCatalog=gitJson(CATALOG);
+const baselineInventory=gitJson(INVENTORY);
+const baselineReview=gitJson(REVIEW);
+const baselineSettlementPolicy=gitJson(SETTLEMENT_POLICY);
 const baselineManifestSha=sha256(baselineManifestBytes);
 const failures=[];
 const requireCheck=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
@@ -42,6 +51,28 @@ requireCheck(baselineMarker.manifest_sha256===baselineManifestSha,'baseline_mani
 requireCheck(gate.status==='PASS','candidate_release_gate_not_pass',{status:gate.status});
 requireCheck(gate.snapshot_id===manifest.snapshot_id,'candidate_gate_snapshot_mismatch',{gate:gate.snapshot_id,manifest:manifest.snapshot_id});
 requireCheck(manifest.mode==='ACTUAL','candidate_manifest_mode',{actual:manifest.mode});
+const baselineSemantic=actualSemanticFingerprint({
+ catalog:baselineCatalog,
+ inventory:baselineInventory,
+ roGeo:gitJson(GEO.RO),
+ mdGeo:gitJson(GEO.MD),
+ roOfficial:gitJson(OFFICIAL.RO),
+ mdOfficial:gitJson(OFFICIAL.MD),
+ mdIndividualReview:baselineReview,
+ settlementPolicy:baselineSettlementPolicy
+});
+const candidateSemantic=actualSemanticFingerprint({
+ catalog:candidateCatalog,
+ inventory:candidateInventory,
+ roGeo:await readJson(GEO.RO),
+ mdGeo:await readJson(GEO.MD),
+ roOfficial:await readJson(OFFICIAL.RO),
+ mdOfficial:await readJson(OFFICIAL.MD),
+ mdIndividualReview:candidateReview,
+ settlementPolicy:candidateSettlementPolicy
+});
+requireCheck(manifest.content_fingerprint_sha256===candidateSemantic.sha256,'candidate_semantic_fingerprint_mismatch',{manifest:manifest.content_fingerprint_sha256??null,actual:candidateSemantic.sha256});
+
 
 const entityList=doc=>Array.isArray(doc.entities)?doc.entities:[];
 const byId=list=>new Map(list.map(x=>[x.id,x]));
@@ -104,12 +135,23 @@ for(const key of [...new Set([...Object.keys(baselineManifest.components||{}),..
  const before=baselineManifest.components?.[key]??null,after=manifest.components?.[key]??null;
  if(before?.sha256!==after?.sha256)componentChanges.push({key,path:after?.path??before?.path??null,before_sha256:before?.sha256??null,after_sha256:after?.sha256??null});
 }
-const substantiveChangeCount=added.length+removed.length+legalChanged.length+classificationChanged.length+geometryChangedTotal+semanticRegistryChanges;
+const beforeSemanticEntities=new Map(semanticCatalogEntities(baselineCatalog).map(x=>[x.id,hashValue(x)]));
+const afterSemanticEntities=new Map(semanticCatalogEntities(candidateCatalog).map(x=>[x.id,hashValue(x)]));
+const entityContentChanged=[...afterSemanticEntities.keys()].filter(id=>beforeSemanticEntities.has(id)&&beforeSemanticEntities.get(id)!==afterSemanticEntities.get(id)).sort();
+const semanticChanged=baselineSemantic.sha256!==candidateSemantic.sha256;
+const detailedChangeCount=added.length+removed.length+entityContentChanged.length+geometryChangedTotal+semanticRegistryChanges;
+const semanticScopeOnlyChangeCount=semanticChanged&&detailedChangeCount===0?1:0;
+const substantiveChangeCount=detailedChangeCount+semanticScopeOnlyChangeCount;
+if(!semanticChanged){
+ requireCheck(manifest.snapshot_id===baselineMarker.snapshot_id,'no_change_snapshot_identity_churn',{base:baselineMarker.snapshot_id,candidate:manifest.snapshot_id});
+ requireCheck(manifest.release_fingerprint_sha256===baselineMarker.release_fingerprint_sha256,'no_change_release_fingerprint_churn',{base:baselineMarker.release_fingerprint_sha256,candidate:manifest.release_fingerprint_sha256});
+}
+const disposition=failures.length?'FAIL':semanticChanged?'CHANGE':'NO_CHANGE';
 const report={
- schema_version:1,
+ schema_version:2,
  generated_at:new Date().toISOString(),
  mode:'ACTUAL_CANDIDATE_DIFF',
- status:failures.length?'FAIL':'PASS',
+ status:disposition,
  base_ref:BASE_REF,
  base_release:{
   snapshot_id:baselineMarker.snapshot_id,
@@ -120,7 +162,8 @@ const report={
   snapshot_id:manifest.snapshot_id,
   release_fingerprint_sha256:manifest.release_fingerprint_sha256,
   manifest_sha256:sha256(manifestBytes),
-  release_gate_status:gate.status
+  release_gate_status:gate.status,
+  content_fingerprint_sha256:candidateSemantic.sha256
  },
  summary:{
   entity_count_before:beforeEntities.length,
@@ -132,15 +175,20 @@ const report={
   geometry_change_count:geometryChangedTotal,
   semantic_registry_changed_count:semanticRegistryChanges,
   component_hash_changed_count:componentChanges.length,
+  entity_content_changed_count:entityContentChanged.length,
+  semantic_scope_only_change_count:semanticScopeOnlyChangeCount,
+  semantic_content_changed:semanticChanged,
+  base_content_fingerprint_sha256:baselineSemantic.sha256,
+  candidate_content_fingerprint_sha256:candidateSemantic.sha256,
   substantive_change_count:substantiveChangeCount,
-  review_required:substantiveChangeCount>0
+  review_required:semanticChanged
  },
- entities:{added_ids:added,removed_ids:removed,legal_identity_changed_ids:legalChanged,classification_changed_ids:classificationChanged,legal_change_samples:legalChangeSamples,classification_change_samples:classificationChangeSamples},
+ entities:{added_ids:added,removed_ids:removed,content_changed_ids:entityContentChanged,legal_identity_changed_ids:legalChanged,classification_changed_ids:classificationChanged,legal_change_samples:legalChangeSamples,classification_change_samples:classificationChangeSamples},
  geometry,
  official_registries:registries,
  component_hash_changes:componentChanges,
  failures,
- policy:'Candidate comparison is fail-closed on persisted-baseline integrity and candidate release-gate validity. Differences are reported, never auto-accepted. Promotion always requires explicit acknowledgement of the candidate snapshot.'
+ policy:'Candidate disposition is derived from canonical administrative content. NO_CHANGE retains the base release identity and is terminal; CHANGE requires explicit review and promotion. Exact component-byte drift is reported separately and remains release-gated.'
 };
 await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
 const diffBytes=await readFile(OUTPUT);
@@ -157,7 +205,7 @@ const marker={
  review_required:report.summary.review_required,
  substantive_change_count:substantiveChangeCount,
  source:{workflow_run_id:process.env.GITHUB_RUN_ID??null,workflow_run_attempt:process.env.GITHUB_RUN_ATTEMPT??null,source_sha:process.env.GITHUB_SHA??null},
- policy:'A candidate may be promoted only while its base persisted release still matches main, its exact manifest and release gate remain valid, and promotion explicitly acknowledges the candidate snapshot.'
+ policy:'NO_CHANGE candidates retain the persisted snapshot identity and cannot be promoted. CHANGE candidates may be promoted only while their persisted base remains unchanged and exact candidate bytes still pass the release gate.'
 };
 await writeFile(MARKER,JSON.stringify(marker,null,2)+'\n');
 console.log(JSON.stringify({status:report.status,base_snapshot_id:report.base_release.snapshot_id,candidate_snapshot_id:report.candidate.snapshot_id,summary:report.summary,diff_report_sha256:marker.diff_report_sha256},null,2));
