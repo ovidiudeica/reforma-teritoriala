@@ -8,6 +8,13 @@ const PATHS={
  inventory:'data/current/administrative-inventory.json',
  ro_geojson:'public/geo/current/ro-administrative.geojson',
  md_geojson:'public/geo/current/md-administrative.geojson',
+ public_index:'public/data/actual-entities.json',
+ ro_overview:'public/geo/actual/ro-overview.geojson',
+ ro_local:'public/geo/actual/ro-local.geojson',
+ ro_detail:'public/geo/actual/ro-detail.geojson',
+ md_overview:'public/geo/actual/md-overview.geojson',
+ md_local:'public/geo/actual/md-local.geojson',
+ md_detail:'public/geo/actual/md-detail.geojson',
  ro_gate:'data/current/ro-release-gate.json',
  md_gate:'data/current/md-release-gate.json',
  ro_official:'data/sources/ro-siruta-current.json',
@@ -20,6 +27,7 @@ const catalog=json('catalog');
 const inventory=json('inventory');
 const roGeo=json('ro_geojson');
 const mdGeo=json('md_geojson');
+const publicIndex=json('public_index');
 const roGate=json('ro_gate');
 const mdGate=json('md_gate');
 const siruta=json('ro_official');
@@ -47,14 +55,23 @@ const validTimes=[
  catalog.generated_at,roGate.generated_at,mdGate.generated_at,siruta.fetched_at,cuatm.fetched_at
 ].filter(Boolean).map(x=>new Date(x)).filter(x=>Number.isFinite(x.getTime()));
 const generatedAt=(validTimes.length?new Date(Math.max(...validTimes.map(x=>x.getTime()))):new Date(0)).toISOString();
+const tier=(jurisdiction,name)=>{
+ const key=jurisdiction.toLowerCase()+'_'+name;
+ const doc=json(key);
+ return {
+  path:PATHS[key],
+  feature_count:Array.isArray(doc.features)?doc.features.length:0,
+  sha256:components[key].sha256
+ };
+};
 
 const manifest={
- schema_version:1,
+ schema_version:2,
  mode:'ACTUAL',
  snapshot_id:'actual-'+releaseFingerprint.slice(0,16),
  generated_at:generatedAt,
  release_fingerprint_sha256:releaseFingerprint,
- policy:'Immutable content fingerprint for the current public RO+MD administrative snapshot. Jurisdiction release gates and official registries remain authoritative for their respective validation domains; this manifest binds their validated outputs to the exact catalog and GeoJSON bytes served by the public ACTUAL mode.',
+ policy:'Immutable content fingerprint for the current public RO+MD administrative snapshot. The manifest binds validated master catalog/GeoJSON, official registries, jurisdiction gates, the public entity contract and tiered web geometries to exact bytes.',
  jurisdictions,
  catalog:{
   path:PATHS.catalog,
@@ -77,6 +94,20 @@ const manifest={
  geometry:{
   RO:{path:PATHS.ro_geojson,feature_count:featureCounts.RO,sha256:components.ro_geojson.sha256},
   MD:{path:PATHS.md_geojson,feature_count:featureCounts.MD,sha256:components.md_geojson.sha256}
+ },
+ public_contract:{
+  path:PATHS.public_index,
+  contract:publicIndex.contract??null,
+  schema_version:publicIndex.schema_version??null,
+  generated_at:publicIndex.generated_at??null,
+  entity_count:publicIndex.entity_count??null,
+  entity_count_by_jurisdiction:publicIndex.entity_count_by_jurisdiction??null,
+  legal_identity_status_counts:publicIndex.legal_identity_status_counts??null,
+  sha256:components.public_index.sha256,
+  geometry_tiers:{
+   RO:{overview:tier('RO','overview'),local:tier('RO','local'),detail:tier('RO','detail')},
+   MD:{overview:tier('MD','overview'),local:tier('MD','local'),detail:tier('MD','detail')}
+  }
  },
  jurisdiction_gates:{
   RO:{path:PATHS.ro_gate,status:roGate.status??null,generated_at:roGate.generated_at??null,sha256:components.ro_gate.sha256},
@@ -114,7 +145,7 @@ console.log(JSON.stringify({
  generated_at:manifest.generated_at,
  release_fingerprint_sha256:manifest.release_fingerprint_sha256,
  entity_count:manifest.catalog.entity_count,
- entity_count_by_jurisdiction:manifest.catalog.entity_count_by_jurisdiction,
+ public_contract:manifest.public_contract.contract,
  feature_count:{RO:manifest.geometry.RO.feature_count,MD:manifest.geometry.MD.feature_count},
  gates:{RO:manifest.jurisdiction_gates.RO.status,MD:manifest.jurisdiction_gates.MD.status}
 },null,2));
