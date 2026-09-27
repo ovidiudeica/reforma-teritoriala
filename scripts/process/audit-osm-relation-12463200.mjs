@@ -33,3 +33,4 @@ else if(convertedValidity.valid&&!masterValidity.valid)report.diagnosis='current
 else if(!convertedValidity.valid)report.diagnosis='current_osm_conversion_invalid_with_different_master_signature';
 else report.diagnosis='no_current_topology_failure_reproduced';
 await writeFile(OUT,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+// neighboring relation membership is intentionally read-only
