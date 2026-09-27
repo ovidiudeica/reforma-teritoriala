@@ -113,6 +113,7 @@ for(const e of entities){
  if(!source)throw new Error('Missing ACTUAL geometry for '+e.id);
  const f=source.feature;
  const legal=legalFor(e);
+ const publicType=publicTypeFor(e,legal);
  const bounds=turf.bbox(f);
  const center=turf.centroid(f).geometry.coordinates;
  const parent=entityById.get(e.parent_id)||null;
