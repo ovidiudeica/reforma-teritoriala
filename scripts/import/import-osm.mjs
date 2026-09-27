@@ -249,3 +249,4 @@ async function main(){
  console.log('Catalog:',all.length,'entities; classifier v'+CLASSIFIER_VERSION);
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});
+
