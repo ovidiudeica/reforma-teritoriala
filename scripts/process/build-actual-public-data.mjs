@@ -35,6 +35,11 @@ if(featureById.size!==entities.length)throw new Error('Catalog/geometry cardinal
 const cleanText=value=>value==null?null:String(value);
 const uniqueStrings=values=>[...new Set(values.filter(Boolean).map(x=>String(x).trim()).filter(Boolean))];
 
+function publicTypeFor(e,legal){
+ if(e.jurisdiction==='MD'&&legal?.registry==='CUATM'&&String(legal.status_code)==='4'&&String(legal.parent_id)==='0100'&&e.parent_id==='osm-r1691801')return 'chisinau_sector';
+ return e.type||null;
+}
+
 function legalFor(e){
  if(e.jurisdiction==='RO'&&e.legal?.registry==='SIRUTA'&&e.legal?.id){
   return {
@@ -122,7 +127,7 @@ for(const e of entities){
   name:e.name||null,
   official_name:e.official_name||legal?.name||null,
   display_name:legal?.name||e.official_name||e.name||e.id,
-  display_type:legal?.type||e.type||'administrative',
+  display_type:legal?.type||publicType||'administrative',
   searchable_names:uniqueStrings([e.name,e.official_name,legal?.name]),
   legal,
   hierarchy:{
@@ -137,7 +142,7 @@ for(const e of entities){
    osm_relation_id:e.osm?.relation_id??null,
    admin_level:level,
    place:e.osm?.place||null,
-   inferred_type:e.classification?.osm_inferred_type||e.type||null,
+   inferred_type:e.classification?.osm_inferred_type||publicType||null,
    geometry_source:'OpenStreetMap administrative relation',
    geometry_role:'current_representation',
    public_geometry_precision:'master_coordinate_fidelity',
