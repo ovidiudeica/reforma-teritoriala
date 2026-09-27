@@ -31,3 +31,20 @@ A successful promotion run does **not** push the candidate directly to `main`. I
 `Import OSM administrative data` is intentionally deprecated. It cannot replace the persisted release. The supported release path is:
 
 `candidate build -> review diff -> explicit promotion -> protected PR -> main`.
+
+
+## Stable release identity and NO_CHANGE
+
+Release identity is based on canonical administrative content, not regeneration timestamps or informational OSM metadata. Exact SHA256 hashes of every manifest component remain mandatory integrity checks, but they do not by themselves create a new release identity.
+
+The canonical content fingerprint covers the administrative catalog, master geometry, official SIRUTA/CUATM records, reviewed identity decisions, the administrative inventory and settlement policy. Volatile timestamps and informational Wikipedia/Wikidata links are excluded from release identity.
+
+When a regenerated candidate has the same canonical content as the persisted release:
+
+- the candidate reuses the persisted snapshot ID and release fingerprint;
+- its disposition is `NO_CHANGE`;
+- exact byte drift remains visible in the diff report;
+- no candidate branch is created;
+- promotion is rejected.
+
+Only a `CHANGE` candidate receives a new semantic release identity and may proceed to explicit promotion.
