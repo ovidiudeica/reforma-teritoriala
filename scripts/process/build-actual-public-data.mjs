@@ -24,6 +24,14 @@ const mdMatchById=new Map((mdRecon.matches||[]).map(x=>[x.id,x]));
 const mdNonCuatmById=new Map((mdNonCuatm.items||[]).map(x=>[x.id,x]));
 const mdIndividualById=new Map((mdIndividual.cases||[]).map(x=>[x.osm_id,x]));
 const roCountyById=new Map((roCountyBridge.matches||[]).map(x=>[x.entity_id,x]));
+if(roCountyById.size!==42)throw new Error('RO county SIRUTA bridge must contain exactly 42 unique entity mappings');
+for(const [id,m] of roCountyById){
+ const e=entityById.get(id);
+ if(!e||e.jurisdiction!=='RO'||Number(e.osm?.admin_level)!==4)throw new Error('RO county bridge points to non-county catalog entity '+id);
+ if(e.legal?.registry!=='SIRUTA'||e.legal?.type!=='county'||String(e.legal?.id||'')!==String(m.county_code)){
+  throw new Error('RO county official identity was not applied to catalog for '+id);
+ }
+}
 const featureById=new Map();
 for(const [jurisdiction,geo] of [['RO',roGeo],['MD',mdGeo]]){
  for(const f of geo.features||[]){
@@ -44,10 +52,6 @@ function publicTypeFor(e,legal){
 }
 
 function legalFor(e){
- const county=roCountyById.get(e.id);
- if(e.jurisdiction==='RO'&&county){
-  return {registry:'SIRUTA',id:String(county.county_code),name:county.official_name||e.name||null,type:'county',status_code:null,parent_id:null,parent_name:'România',reference_year:2026,match_method:county.match_method,confidence:'high',source:'data/sources/ro-siruta-current.json'};
- }
  if(e.jurisdiction==='RO'&&e.legal?.registry==='SIRUTA'&&e.legal?.id){
   return {
    registry:'SIRUTA',
