@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T08:24:07.344Z",
+  "generated_at": "2026-09-27T08:25:35.396Z",
   "jurisdiction": "RO",
   "status": "PASS",
   "policy": "RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, zero unresolved cross-level UAT representations, complete official application, and only exact documented semantic residuals. Reviewed UATs without a distinct OSM boundary and reviewed jurisdiction-specific exceptional OSM admin levels must pass dedicated structural/provenance checks; no OSM geometry is promoted to legal geometry. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.",
@@ -74,7 +74,7 @@
         "summary": {
           "ro_level8_count": 3179,
           "applied_count": 3179,
-          "type_changed_count": 5,
+          "type_changed_count": 0,
           "legal_parent_conflict_count": 0,
           "osm_semantic_type_conflict_count": 3,
           "official_only_count": 0,
