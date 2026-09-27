@@ -95,14 +95,7 @@ jobs:
           BASE_SNAPSHOT="$(node -p "require('./data/current/actual-release-candidate.json').base_release.snapshot_id")"
           REVIEW_REQUIRED="$(node -p "require('./data/current/actual-release-candidate.json').review_required")"
           CHANGE_COUNT="$(node -p "require('./data/current/actual-release-candidate.json').substantive_change_count")"
-          BODY="Explicit ACTUAL candidate promotion.
-
-Candidate: `$SNAPSHOT_ID`
-Base persisted release: `$BASE_SNAPSHOT`
-Substantive diff count: `$CHANGE_COUNT`
-Candidate review_required: `$REVIEW_REQUIRED`
-
-The candidate release gate passed before this PR was created. The required `verify-persisted-release` check must pass on the promotion PR before merge."
+          BODY="Explicit ACTUAL candidate promotion. Candidate: $SNAPSHOT_ID. Base persisted release: $BASE_SNAPSHOT. Substantive diff count: $CHANGE_COUNT. Candidate review_required: $REVIEW_REQUIRED. The candidate release gate passed before this PR was created. The required verify-persisted-release check must pass on the promotion PR before merge."
           URL="$(gh pr create --base main --head "$CANDIDATE_BRANCH" --title "Promote ACTUAL candidate $SNAPSHOT_ID" --body "$BODY")"
           echo "### Promotion PR" >> "$GITHUB_STEP_SUMMARY"
           echo "$URL" >> "$GITHUB_STEP_SUMMARY"
