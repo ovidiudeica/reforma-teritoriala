@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-29T00:40:59.419Z",
+  "generated_at": "2026-09-27T20:37:28.323Z",
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "c603313de0035cea5f4dbc15d1630fda66f85c26773f2229b6ff119aa2581e1a",
+  "manifest_sha256": "a4e05edb6fb62703eeeefa9ed092814b1c239502da42334fa5e669c33ee1e891",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -299,8 +299,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
-          "sha256": "d2f18a0f785e7c800e7502ff416d8688b58367dac991ebe20695d126e81e8f61"
+          "environment_fingerprint_sha256": "88cc18fb871f9dae2cc78c8bc025bae7d26f95b68bbc59ea8340fa1d47ddcccb",
+          "sha256": "eea74c5da2003c8f82154cc4cdc6d5e6c3a301da654d475e99cc3a63dc72feb4"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -309,8 +309,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
-          "sha256": "d2f18a0f785e7c800e7502ff416d8688b58367dac991ebe20695d126e81e8f61"
+          "environment_fingerprint_sha256": "88cc18fb871f9dae2cc78c8bc025bae7d26f95b68bbc59ea8340fa1d47ddcccb",
+          "sha256": "eea74c5da2003c8f82154cc4cdc6d5e6c3a301da654d475e99cc3a63dc72feb4"
         }
       }
     },
@@ -371,7 +371,7 @@
           "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
           "release_identity_basis": "base_release_compatibility_reuse",
           "reused_base_release": true,
-          "base_ref": "b9b29faf3d6d842c95bfb644504e95695e559b09",
+          "base_ref": "901d25b07114b5459ed8f7cfa440a8e316c44938",
           "base_snapshot_id": "actual-5383ff3db7cf3f67",
           "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
           "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
@@ -389,7 +389,7 @@
           "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
           "release_identity_basis": "base_release_compatibility_reuse",
           "reused_base_release": true,
-          "base_ref": "b9b29faf3d6d842c95bfb644504e95695e559b09",
+          "base_ref": "901d25b07114b5459ed8f7cfa440a8e316c44938",
           "base_snapshot_id": "actual-5383ff3db7cf3f67",
           "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
           "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
