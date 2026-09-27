@@ -1,15 +1,8 @@
 {
   "schema_version": 1,
   "jurisdiction": "RO",
-  "policy": "Exact documented residuals after full SIRUTA reconciliation. New unmatched/duplicate/official-only/parent/type conflicts fail the RO release gate.",
-  "allowed_official_only": [
-    {
-      "legal_id": "64096",
-      "legal_name": "BREȚCU",
-      "legal_type": "commune",
-      "legal_parent_name": "JUDEȚUL COVASNA"
-    }
-  ],
+  "policy": "Exact documented unresolved residuals after full SIRUTA reconciliation. Reviewed missing-distinct-boundary classifications are tracked separately and must pass their own release-gate audit.",
+  "allowed_official_only": [],
   "allowed_represented_at_other_osm_level": [
     {
       "legal_id": "179132",
