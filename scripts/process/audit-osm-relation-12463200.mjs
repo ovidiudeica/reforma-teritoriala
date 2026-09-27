@@ -15,6 +15,11 @@ if(!relation)throw new Error('relation missing from Overpass');
 const ways=new Map(raw.elements.filter(x=>x.type==='way').map(x=>[x.id,x]));
 const nodes=new Map(raw.elements.filter(x=>x.type==='node').map(x=>[x.id,x]));
 const members=(relation.members||[]).map((m,i)=>{const w=m.type==='way'?ways.get(m.ref):null;const first=w?.nodes?.[0],last=w?.nodes?.at(-1);return {index:i,type:m.type,ref:m.ref,role:m.role||'',way_node_count:w?.nodes?.length??null,closed:w?first===last:null,first_node:first??null,last_node:last??null};});
+const parentRelations={};
+for(const wid of [76585146,94511352,76583058,918853574]){
+  const rr=await overpass(`[out:json][timeout:60];way(${wid});rel(bw);out meta;`);
+  parentRelations[wid]=rr.elements.filter(x=>x.type==='relation').map(r=>({id:r.id,version:r.version,timestamp:r.timestamp,tags:r.tags||{},members:(r.members||[]).filter(m=>m.type==='way'&&[76585146,94511352,76583058,918853574].includes(m.ref))}));
+}
 const geo=osmtogeojson(raw,{flatProperties:false});
 const converted=geo.features.find(f=>String(f.id)==='relation/'+RID);
 const master=JSON.parse(await readFile('public/geo/current/md-administrative.geojson','utf8')).features.find(f=>f.properties?.catalog_id===ID);
@@ -24,7 +29,7 @@ const targetNodes=[...nodes.values()].filter(n=>Math.abs(n.lon-target.lon)<1e-9&
 const targetWays=[...ways.values()].filter(w=>(w.nodes||[]).some(n=>targetNodes.includes(n))).map(w=>({id:w.id,node_indexes:(w.nodes||[]).map((n,i)=>targetNodes.includes(n)?i:null).filter(i=>i!==null),nodes:w.nodes}));
 const endpointDegree=new Map();for(const m of members.filter(x=>x.type==='way')){for(const n of [m.first_node,m.last_node])endpointDegree.set(n,(endpointDegree.get(n)||0)+1);}
 const anomalousEndpoints=[...endpointDegree].filter(([,degree])=>degree!==2).map(([node_id,degree])=>({node_id,degree,coordinate:nodes.has(node_id)?[nodes.get(node_id).lon,nodes.get(node_id).lat]:null}));
-const report={schema_version:1,generated_at:new Date().toISOString(),relation_id:RID,name:relation.tags?.name??null,relation_version:relation.version??null,changeset:relation.changeset??null,timestamp:relation.timestamp??null,tags:relation.tags??{},member_count:members.length,members,source_counts:{ways:ways.size,nodes:nodes.size},intersection_probe:{coordinate:[target.lon,target.lat],exact_osm_node_ids:targetNodes,ways_using_exact_node:targetWays,outer_endpoint_degree_anomalies:anomalousEndpoints},converted_geometry:{type:converted?.geometry?.type??null,validity:convertedValidity},master_geometry:{type:master?.geometry?.type??null,validity:masterValidity,exactly_matches_fresh_osmtogeojson:JSON.stringify(master?.geometry)===JSON.stringify(converted?.geometry)},diagnosis:null};
+const report={schema_version:1,generated_at:new Date().toISOString(),relation_id:RID,name:relation.tags?.name??null,relation_version:relation.version??null,changeset:relation.changeset??null,timestamp:relation.timestamp??null,tags:relation.tags??{},member_count:members.length,members,source_counts:{ways:ways.size,nodes:nodes.size},parent_relations_by_way:parentRelations,intersection_probe:{coordinate:[target.lon,target.lat],exact_osm_node_ids:targetNodes,ways_using_exact_node:targetWays,outer_endpoint_degree_anomalies:anomalousEndpoints},converted_geometry:{type:converted?.geometry?.type??null,validity:convertedValidity},master_geometry:{type:master?.geometry?.type??null,validity:masterValidity,exactly_matches_fresh_osmtogeojson:JSON.stringify(master?.geometry)===JSON.stringify(converted?.geometry)},diagnosis:null};
 if(!convertedValidity.valid&&masterValidity.error?.coordinate===convertedValidity.error?.coordinate)report.diagnosis='self_intersection_reproduced_from_current_osm_relation_through_fresh_osmtogeojson';
 else if(convertedValidity.valid&&!masterValidity.valid)report.diagnosis='current_osm_conversion_valid_but_repository_master_stale_or_pipeline_specific';
 else if(!convertedValidity.valid)report.diagnosis='current_osm_conversion_invalid_with_different_master_signature';
