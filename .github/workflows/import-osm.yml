@@ -1,17 +1,20 @@
-name: Import OSM administrative data (deprecated)
+name: Refresh OSM administrative source snapshot
 
 on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: osm-source-refresh
+  cancel-in-progress: false
 
 jobs:
-  deprecated:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Use candidate release pipeline
-        run: |
-          echo "Direct refreshes of the persisted ACTUAL release are disabled."
-          echo "Run 'Build ACTUAL candidate snapshot', review its diff, then run 'Promote ACTUAL candidate'."
-          exit 1
+  refresh-through-candidate:
+    uses: ./.github/workflows/actual-candidate.yml
+    with:
+      candidate_branch: ''
+      refresh_ro_siruta: false
+      refresh_md_cuatm: false
+      source_trigger: 'osm-refresh'
