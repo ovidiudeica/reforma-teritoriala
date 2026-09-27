@@ -25,6 +25,14 @@ const nodeParents=await osmApi('node/8527658244/ways.json');
 const waysAtIntersection=(nodeParents.elements||[]).filter(x=>x.type==='way').map(w=>({id:w.id,version:w.version,timestamp:w.timestamp,tags:w.tags||{},node_indexes:(w.nodes||[]).map((n,i)=>n===8527658244?i:null).filter(i=>i!==null)}));
 const geo=osmtogeojson(raw,{flatProperties:false});
 const converted=geo.features.find(f=>String(f.id)==='relation/'+RID);
+const simulated=structuredClone(raw);
+const syntheticNodeId=-8527658244;
+simulated.elements.push({type:'node',id:syntheticNodeId,lat:46.7587398,lon:29.2405257});
+for(const e of simulated.elements.filter(e=>e.type==='way'&&[94511352,918853574].includes(e.id))) e.nodes=e.nodes.map(n=>n===8527658244?syntheticNodeId:n);
+const simGeo=osmtogeojson(simulated,{flatProperties:false});
+const simFeature=simGeo.features.find(f=>String(f.id)==='relation/'+RID);
+const simValidity=validity(simFeature?.geometry);
+
 const master=JSON.parse(await readFile('public/geo/current/md-administrative.geojson','utf8')).features.find(f=>f.properties?.catalog_id===ID);
 const convertedValidity=valid(converted?.geometry),masterValidity=valid(master?.geometry);
 const target={lon:29.2405257,lat:46.7587398};
