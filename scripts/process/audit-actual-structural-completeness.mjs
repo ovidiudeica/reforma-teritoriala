@@ -38,7 +38,7 @@ for(const x of mdSemantic.classifications||[]){
 }
 const officialByType={
  district:md.filter(r=>r.status_code==='2'&&!/gagauz/i.test(r.name||'')),
- level_2_municipality:md.filter(r=>r.status_code==='5'),
+ level_2_municipality:semanticByType.get('level_2_municipality')||[],
  special_territorial_unit:md.filter(r=>r.status_code==='2'&&/gagauz/i.test(r.name||''),),
  level_1_municipality:semanticByType.get('level_1_municipality')||[],
  town:semanticByType.get('town')||[],
@@ -54,7 +54,7 @@ for(const type of ['district','level_2_municipality','special_territorial_unit',
  }).map(r=>({id:String(r.code??r.legal_id),name:r.name??r.legal_name??null,parent_id:r.parent_code??r.parent_id??null,parent_name:r.parent_name??null,status_code:r.status_code??null,semantic_type:r.semantic_type??type}));
  add('MD',type,official.length,official.length-missing.length,missing,missing.length?'FAIL':'PASS',{
   official_registry:'CUATM',exhaustive:true,
-  semantic_bridge:['level_1_municipality','town','commune','independent_village'].includes(type)?'data/current/md-cuatm-semantic-bridge.json':null
+  semantic_bridge:['level_2_municipality','level_1_municipality','town','commune','independent_village'].includes(type)?'data/current/md-cuatm-semantic-bridge.json':null
  });
 }
 add('MD','state',1,null,[],'OBSERVATIONAL',{reason:'State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/6/8/9; country geometry is used as import containment context, not a catalog entity.'});
