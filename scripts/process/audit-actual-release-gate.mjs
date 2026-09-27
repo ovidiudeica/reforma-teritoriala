@@ -5,7 +5,7 @@ import {spawnSync} from 'node:child_process';
 
 const MANIFEST='data/current/actual-release-manifest.json';
 const TOPOLOGY_AUDIT='data/current/actual-topology-audit.json';
-const topologyRun=spawnSync(process.execPath,['scripts/process/audit-actual-topology.mjs'],{encoding:'utf8'});
+const topologyRun=spawnSync(process.execPath,['scripts/process/audit-actual-topology.mjs'],{stdio:'ignore'});
 let topology=null;
 try{topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));}catch{}
 
