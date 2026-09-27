@@ -77,6 +77,26 @@ function legalFor(e){
  }
  if(e.jurisdiction==='MD'){
   const m=mdMatchById.get(e.id);
+  if(e.legal?.registry==='CUATM'&&e.legal?.id){
+   if(!m?.legal_id||String(m.legal_id)!==String(e.legal.id))throw new Error('Catalog/reconciliation CUATM identity mismatch for '+e.id);
+   const semantic=mdSemanticByLegalId.get(String(m.legal_id))||null;
+   if(['3','5','8'].includes(String(m.status_code))&&!semantic)throw new Error('Missing MD semantic subtype for reconciled CUATM '+m.legal_id+' ('+m.legal_name+')');
+   if(e.legal.type&&semantic?.semantic_type&&e.legal.type!==semantic.semantic_type)throw new Error('Catalog/semantic bridge type mismatch for '+e.id);
+   return {
+    registry:'CUATM',
+    id:String(e.legal.id),
+    name:e.legal.name||m.legal_name||null,
+    type:e.legal.type||semantic?.semantic_type||null,
+    status_code:m.status_code||e.legal.status_code||null,
+    parent_id:e.legal.parent_id==null?(m.legal_parent_id==null?null:String(m.legal_parent_id)):String(e.legal.parent_id),
+    parent_name:e.legal.parent_name||m.legal_parent_name||null,
+    reference_year:null,
+    match_method:e.legal.match_method||m.match_method||null,
+    confidence:e.legal.match_confidence||m.confidence||null,
+    source:e.legal.source||'data/sources/cuatm-current.json',
+    geometry_equivalence_asserted:e.legal.geometry_equivalence_asserted??null
+   };
+  }
   if(m?.legal_id){
    const semantic=mdSemanticByLegalId.get(String(m.legal_id))||null;
    if(['3','5','8'].includes(String(m.status_code))&&!semantic)throw new Error('Missing MD semantic subtype for reconciled CUATM '+m.legal_id+' ('+m.legal_name+')');
@@ -91,7 +111,8 @@ function legalFor(e){
     reference_year:null,
     match_method:m.match_method||null,
     confidence:m.confidence||null,
-    source:'data/sources/cuatm-current.json'
+    source:'data/sources/cuatm-current.json',
+    geometry_equivalence_asserted:null
    };
   }
  }
