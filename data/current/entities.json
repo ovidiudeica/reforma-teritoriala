@@ -157243,8 +157243,8 @@
         "type": "commune",
         "parent_id": "289",
         "parent_name": "JUDEȚUL OLT",
-        "match_method": "reviewed_siruta_override",
-        "match_confidence": "high",
+        "match_method": "exact_normalized_name_and_county",
+        "match_confidence": "medium",
         "source": "data/sources/ro-siruta-current.json",
         "reconciliation": "data/current/ro-official-reconciliation.json",
         "parent_matches_osm_geometry_parent": true
@@ -255186,7 +255186,7 @@
     "RO": {
       "registry": "SIRUTA",
       "reference_year": 2026,
-      "applied_at": "2026-09-27T06:29:05.052Z",
+      "applied_at": "2026-09-27T06:37:03.763Z",
       "source": "data/sources/ro-siruta-current.json",
       "reconciliation": "data/current/ro-official-reconciliation.json",
       "applied_count": 3179

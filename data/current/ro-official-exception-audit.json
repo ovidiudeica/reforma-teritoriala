@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T06:29:04.236Z",
+  "generated_at": "2026-09-27T06:37:03.209Z",
   "jurisdiction": "RO",
   "scope": "Targeted audit of unresolved/duplicate/type-conflict cases from official SIRUTA reconciliation.",
   "policy": "Diagnostic only. Exact SIRUTA hierarchy and OSM provenance are recorded; no fuzzy candidate is auto-assigned. OSM geometry is not treated as legal authority.",
@@ -19,7 +19,7 @@
       "diagnostic": true,
       "detail": {
         "error": null,
-        "feature_count": 65
+        "feature_count": 61
       }
     },
     {
@@ -47,8 +47,15 @@
       "name": "cross_county_parent_conflicts_audited",
       "ok": true,
       "detail": {
-        "expected": 1,
-        "audited": 1
+        "expected": 0,
+        "audited": 0
+      }
+    },
+    {
+      "name": "reviewed_parent_assignment_resolutions_stable",
+      "ok": true,
+      "detail": {
+        "failed": []
       }
     },
     {
@@ -81,8 +88,9 @@
     "requires_review_count": 0,
     "duplicate_group_count": 0,
     "type_mismatch_count": 3,
-    "cross_county_parent_conflict_count": 1,
-    "reviewed_override_count": 16,
+    "cross_county_parent_conflict_count": 0,
+    "reviewed_parent_assignment_resolution_count": 1,
+    "reviewed_override_count": 15,
     "reviewed_override_containment_failure_count": 0,
     "history_error_count": 0,
     "diagnostic_warning_count": 0
@@ -96,7 +104,7 @@
       "osm_name": "Cehal",
       "osm_parent_id": "osm-r72482",
       "osm_parent_name": "Satu Mare",
-      "osm_entity_type": "town",
+      "osm_entity_type": "commune",
       "osm_claimed_legal_type": "town",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -332,7 +340,7 @@
       "osm_name": "Fetești",
       "osm_parent_id": "osm-r2355517",
       "osm_parent_name": "Ialomița",
-      "osm_entity_type": "town",
+      "osm_entity_type": "municipality",
       "osm_claimed_legal_type": "town",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -523,7 +531,7 @@
       "osm_name": "Salcea",
       "osm_parent_id": "osm-r2077868",
       "osm_parent_name": "Suceava",
-      "osm_entity_type": "commune",
+      "osm_entity_type": "town",
       "osm_claimed_legal_type": "commune",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -754,61 +762,31 @@
       "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
     }
   ],
-  "cross_county_parent_conflicts": [
+  "cross_county_parent_conflicts": [],
+  "reviewed_parent_assignment_resolutions": [
     {
       "osm_relation_id": 9744206,
       "osm_name": "Grădinari",
       "legal_id": "127171",
       "legal_name": "GRĂDINARI",
-      "legal_parent_name": "JUDEȚUL OLT",
-      "legal_parent_osm_relation_id": 2366978,
-      "geometric_parent_id": "osm-r2366978",
-      "geometric_parent_name": "Olt",
-      "geometric_parent_osm_relation_id": 2366978,
-      "representative_point": [
-        24.2864604,
-        44.5687255
-      ],
-      "representative_point_inside_geometric_parent": true,
-      "representative_point_inside_legal_parent": true,
-      "legal_parent_overlap": {
+      "expected_parent_osm_relation_id": 2366978,
+      "actual_parent_osm_relation_id": 2366978,
+      "actual_parent_name": "Olt",
+      "reconciliation_match_method": "exact_normalized_name_and_county",
+      "reviewed_identity_override_present": false,
+      "expected_parent_overlap": {
         "available": true,
         "child_area_km2": 20.2409290451344,
         "intersection_km2": 20.240929045120236,
         "child_coverage_ratio": 0.9999999999993002
       },
-      "geometric_parent_overlap": {
+      "previous_parent_overlap": {
         "available": true,
         "child_area_km2": 20.2409290451344,
-        "intersection_km2": 20.240929045120236,
-        "child_coverage_ratio": 0.9999999999993002
+        "intersection_km2": 0,
+        "child_coverage_ratio": 0
       },
-      "official_locality_containment": {
-        "legal_id": "127171",
-        "legal_name": "GRĂDINARI",
-        "legal_parent_name": "JUDEȚUL OLT",
-        "official_locality_count": 4,
-        "inside_count": 4,
-        "inside_localities": [
-          {
-            "siruta": "127199",
-            "name": "Petculeşti"
-          },
-          {
-            "siruta": "127206",
-            "name": "Runcu Mare"
-          },
-          {
-            "siruta": "127215",
-            "name": "Satu Nou"
-          },
-          {
-            "siruta": "127180",
-            "name": "Grădinari"
-          }
-        ]
-      },
-      "osm_history": {
+      "history": {
         "relation_id": 9744206,
         "created_at": "2019-07-02T11:40:54Z",
         "created_changeset": 71818466,
@@ -978,7 +956,13 @@
           "siruta_code_values": []
         }
       },
-      "audit_classification": "ambiguous_parent_overlap"
+      "resolution": {
+        "classification": "point_on_feature_parent_assignment_artifact",
+        "algorithm": "strict representative-point containment with ignoreBoundary=true, then positive polygon-area-overlap fallback at the nearest parent admin level",
+        "geometry_modified": false,
+        "legal_geometry_claimed": false
+      },
+      "stable": true
     }
   ],
   "reviewed_overrides": [
@@ -1238,41 +1222,6 @@
           {
             "siruta": "137577",
             "name": "Cărăşeu"
-          }
-        ]
-      },
-      "identity_containment_ok": true
-    },
-    {
-      "osm_relation_id": 9744206,
-      "osm_name": "Grădinari",
-      "legal_id": "127171",
-      "legal_name": "GRĂDINARI",
-      "resolution": "official_locality_containment_exact_cross_county_parent_conflict",
-      "relation_present": true,
-      "official_uat_present": true,
-      "official_locality_containment": {
-        "legal_id": "127171",
-        "legal_name": "GRĂDINARI",
-        "legal_parent_name": "JUDEȚUL OLT",
-        "official_locality_count": 4,
-        "inside_count": 4,
-        "inside_localities": [
-          {
-            "siruta": "127199",
-            "name": "Petculeşti"
-          },
-          {
-            "siruta": "127206",
-            "name": "Runcu Mare"
-          },
-          {
-            "siruta": "127215",
-            "name": "Satu Nou"
-          },
-          {
-            "siruta": "127180",
-            "name": "Grădinari"
           }
         ]
       },

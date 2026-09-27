@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T06:29:04.236Z",
+  "generated_at": "2026-09-27T06:37:03.209Z",
   "source": "OpenStreetMap API 0.6 relation history",
   "relation_count": 19,
   "history_count": 19,
@@ -1956,176 +1956,6 @@
       }
     },
     {
-      "relation_id": 9744206,
-      "created_at": "2019-07-02T11:40:54Z",
-      "created_changeset": 71818466,
-      "current_version": 2,
-      "last_modified_at": "2022-02-27T11:10:33Z",
-      "last_changeset": 117903992,
-      "current_tags": {
-        "admin_level": "8",
-        "boundary": "administrative",
-        "name": "Grădinari",
-        "name:prefix": "Comuna",
-        "place": "municipality",
-        "place:ro": "comună",
-        "source": "ANCPI 3rd order set data.gov.ro",
-        "type": "boundary"
-      },
-      "current_member_count": 6,
-      "current_members": [
-        {
-          "type": "way",
-          "ref": 701062558,
-          "role": "outer"
-        },
-        {
-          "type": "way",
-          "ref": 701062647,
-          "role": "outer"
-        },
-        {
-          "type": "way",
-          "ref": 701062703,
-          "role": "outer"
-        },
-        {
-          "type": "way",
-          "ref": 701062556,
-          "role": "outer"
-        },
-        {
-          "type": "way",
-          "ref": 701062557,
-          "role": "outer"
-        },
-        {
-          "type": "node",
-          "ref": 419806239,
-          "role": "admin_centre"
-        }
-      ],
-      "versions": [
-        {
-          "version": 1,
-          "timestamp": "2019-07-02T11:40:54Z",
-          "changeset": 71818466,
-          "user": "ted3sco",
-          "tags": {
-            "admin_level": "9",
-            "boundary": "administrative",
-            "name": "Grădinari",
-            "name:prefix": "Comuna",
-            "place": "district",
-            "place:ro": "comună",
-            "source": "ANCPI 3rd order set data.gov.ro",
-            "type": "boundary"
-          },
-          "members": [
-            {
-              "type": "way",
-              "ref": 701062558,
-              "role": "outer"
-            },
-            {
-              "type": "way",
-              "ref": 701062647,
-              "role": "outer"
-            },
-            {
-              "type": "way",
-              "ref": 701062703,
-              "role": "outer"
-            },
-            {
-              "type": "way",
-              "ref": 701062556,
-              "role": "outer"
-            },
-            {
-              "type": "way",
-              "ref": 701062557,
-              "role": "outer"
-            },
-            {
-              "type": "node",
-              "ref": 419806239,
-              "role": "admin_centre"
-            }
-          ]
-        },
-        {
-          "version": 2,
-          "timestamp": "2022-02-27T11:10:33Z",
-          "changeset": 117903992,
-          "user": "ted3sco",
-          "tags": {
-            "admin_level": "8",
-            "boundary": "administrative",
-            "name": "Grădinari",
-            "name:prefix": "Comuna",
-            "place": "municipality",
-            "place:ro": "comună",
-            "source": "ANCPI 3rd order set data.gov.ro",
-            "type": "boundary"
-          },
-          "members": [
-            {
-              "type": "way",
-              "ref": 701062558,
-              "role": "outer"
-            },
-            {
-              "type": "way",
-              "ref": 701062647,
-              "role": "outer"
-            },
-            {
-              "type": "way",
-              "ref": 701062703,
-              "role": "outer"
-            },
-            {
-              "type": "way",
-              "ref": 701062556,
-              "role": "outer"
-            },
-            {
-              "type": "way",
-              "ref": 701062557,
-              "role": "outer"
-            },
-            {
-              "type": "node",
-              "ref": 419806239,
-              "role": "admin_centre"
-            }
-          ]
-        }
-      ],
-      "history_signals": {
-        "name_values": [
-          "Grădinari"
-        ],
-        "official_name_values": [],
-        "admin_level_values": [
-          "9",
-          "8"
-        ],
-        "place_values": [
-          "district",
-          "municipality"
-        ],
-        "place_ro_values": [
-          "comună"
-        ],
-        "source_values": [
-          "ANCPI 3rd order set data.gov.ro"
-        ],
-        "siruta_code_values": []
-      }
-    },
-    {
       "relation_id": 10514937,
       "created_at": "2019-12-30T20:30:57Z",
       "created_changeset": 79029907,
@@ -3642,6 +3472,176 @@
           "8"
         ],
         "place_values": [
+          "municipality"
+        ],
+        "place_ro_values": [
+          "comună"
+        ],
+        "source_values": [
+          "ANCPI 3rd order set data.gov.ro"
+        ],
+        "siruta_code_values": []
+      }
+    },
+    {
+      "relation_id": 9744206,
+      "created_at": "2019-07-02T11:40:54Z",
+      "created_changeset": 71818466,
+      "current_version": 2,
+      "last_modified_at": "2022-02-27T11:10:33Z",
+      "last_changeset": 117903992,
+      "current_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Grădinari",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary"
+      },
+      "current_member_count": 6,
+      "current_members": [
+        {
+          "type": "way",
+          "ref": 701062558,
+          "role": "outer"
+        },
+        {
+          "type": "way",
+          "ref": 701062647,
+          "role": "outer"
+        },
+        {
+          "type": "way",
+          "ref": 701062703,
+          "role": "outer"
+        },
+        {
+          "type": "way",
+          "ref": 701062556,
+          "role": "outer"
+        },
+        {
+          "type": "way",
+          "ref": 701062557,
+          "role": "outer"
+        },
+        {
+          "type": "node",
+          "ref": 419806239,
+          "role": "admin_centre"
+        }
+      ],
+      "versions": [
+        {
+          "version": 1,
+          "timestamp": "2019-07-02T11:40:54Z",
+          "changeset": 71818466,
+          "user": "ted3sco",
+          "tags": {
+            "admin_level": "9",
+            "boundary": "administrative",
+            "name": "Grădinari",
+            "name:prefix": "Comuna",
+            "place": "district",
+            "place:ro": "comună",
+            "source": "ANCPI 3rd order set data.gov.ro",
+            "type": "boundary"
+          },
+          "members": [
+            {
+              "type": "way",
+              "ref": 701062558,
+              "role": "outer"
+            },
+            {
+              "type": "way",
+              "ref": 701062647,
+              "role": "outer"
+            },
+            {
+              "type": "way",
+              "ref": 701062703,
+              "role": "outer"
+            },
+            {
+              "type": "way",
+              "ref": 701062556,
+              "role": "outer"
+            },
+            {
+              "type": "way",
+              "ref": 701062557,
+              "role": "outer"
+            },
+            {
+              "type": "node",
+              "ref": 419806239,
+              "role": "admin_centre"
+            }
+          ]
+        },
+        {
+          "version": 2,
+          "timestamp": "2022-02-27T11:10:33Z",
+          "changeset": 117903992,
+          "user": "ted3sco",
+          "tags": {
+            "admin_level": "8",
+            "boundary": "administrative",
+            "name": "Grădinari",
+            "name:prefix": "Comuna",
+            "place": "municipality",
+            "place:ro": "comună",
+            "source": "ANCPI 3rd order set data.gov.ro",
+            "type": "boundary"
+          },
+          "members": [
+            {
+              "type": "way",
+              "ref": 701062558,
+              "role": "outer"
+            },
+            {
+              "type": "way",
+              "ref": 701062647,
+              "role": "outer"
+            },
+            {
+              "type": "way",
+              "ref": 701062703,
+              "role": "outer"
+            },
+            {
+              "type": "way",
+              "ref": 701062556,
+              "role": "outer"
+            },
+            {
+              "type": "way",
+              "ref": 701062557,
+              "role": "outer"
+            },
+            {
+              "type": "node",
+              "ref": 419806239,
+              "role": "admin_centre"
+            }
+          ]
+        }
+      ],
+      "history_signals": {
+        "name_values": [
+          "Grădinari"
+        ],
+        "official_name_values": [],
+        "admin_level_values": [
+          "9",
+          "8"
+        ],
+        "place_values": [
+          "district",
           "municipality"
         ],
         "place_ro_values": [
