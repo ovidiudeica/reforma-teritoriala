@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T11:23:20.680Z",
+  "generated_at": "2026-09-27T21:58:41.786Z",
   "classifier_version": "2.3",
   "countries": {
     "RO": {
@@ -15,13 +15,13 @@
     },
     "MD": {
       "name": "Republica Moldova",
-      "count": 2590,
-      "review_required": 266,
-      "geojson_features": 2590,
+      "count": 2595,
+      "review_required": 267,
+      "geojson_features": 2595,
       "confidence": {
+        "low": 267,
         "medium": 2244,
-        "high": 80,
-        "low": 266
+        "high": 84
       }
     }
   },
@@ -186,6 +186,17 @@
       "selected_relation_id": 91685
     },
     {
+      "type": "official_point_touch_multipolygon_normalized",
+      "jurisdiction": "MD",
+      "relation_id": 12463200,
+      "coordinate": [
+        29.2405257,
+        46.7587398
+      ],
+      "component_count": 2,
+      "coordinate_edit": false
+    },
+    {
       "type": "parent_assignment_overlap_resolution",
       "child_id": "osm-r1643003",
       "child_relation_id": 1643003,
@@ -326,5 +337,35 @@
       ],
       "selected_relation_id": 1699022
     }
-  ]
+  ],
+  "overpass": {
+    "endpoint_order": [
+      "https://overpass-api.de/api/interpreter",
+      "https://overpass.kumi.systems/api/interpreter",
+      "https://overpass.private.coffee/api/interpreter"
+    ],
+    "request_timeout_ms": 90000,
+    "retries_per_endpoint": 2,
+    "retry_backoff_ms": 5000,
+    "attempts": [
+      {
+        "context": "RO",
+        "endpoint": "https://overpass-api.de/api/interpreter",
+        "attempt": 1,
+        "started_at": "2026-09-27T21:58:41.787Z",
+        "duration_ms": 22696,
+        "status": "success",
+        "element_count": 783495
+      },
+      {
+        "context": "MD",
+        "endpoint": "https://overpass-api.de/api/interpreter",
+        "attempt": 1,
+        "started_at": "2026-09-27T22:00:15.415Z",
+        "duration_ms": 12761,
+        "status": "success",
+        "element_count": 560394
+      }
+    ]
+  }
 }

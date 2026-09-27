@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_CANDIDATE",
+  "status": "PASS",
+  "generated_at": "2026-09-27T22:02:25.929Z",
+  "base_ref": "9d259784cabd9c74c22d0501ac7c8b1a45d42a9f",
+  "base_release": {
+    "snapshot_id": "actual-5383ff3db7cf3f67",
+    "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+    "manifest_sha256": "0c9ed50433e66d952dfb244e0c4bec7ccf69bab2dc620139b715eee1bcb18ac2"
+  },
+  "candidate": {
+    "snapshot_id": "actual-538d3d0a45bf35cf",
+    "release_fingerprint_sha256": "538d3d0a45bf35cf9c2ce45c5f393ca79f6273a5ff2422a28cc521af3eafb21f",
+    "manifest_sha256": "c56d4f820a54dd59f1d19c76d07bd94626a3799a13abf95b8c0c5392c03b5c04",
+    "release_gate_status": "PASS"
+  },
+  "diff_report_path": "data/current/actual-candidate-diff.json",
+  "diff_report_sha256": "b0f3d379fa063911d1c642824fdccf7232e756b0946e678d5b02e6e84e33277f",
+  "review_required": false,
+  "substantive_change_count": 0,
+  "source": {
+    "workflow_run_id": "36353622842",
+    "workflow_run_attempt": "1",
+    "source_sha": "9d259784cabd9c74c22d0501ac7c8b1a45d42a9f"
+  },
+  "policy": "A candidate may be promoted only while its base persisted release still matches main, its exact manifest and release gate remain valid, and promotion explicitly acknowledges the candidate snapshot."
+}

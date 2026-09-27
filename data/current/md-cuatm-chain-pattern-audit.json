@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-27T11:26:00.931Z",
+  "generated_at": "2026-09-27T22:01:27.106Z",
   "jurisdiction": "MD",
   "scope": "same_identity_parent_child_chain",
   "policy": "Diagnostic only; no OSM entity or CUATM reconciliation is altered.",
-  "chain_group_count": 842,
+  "chain_group_count": 841,
   "summary": {
     "by_family": {
-      "special_chain": 3,
-      "uat8_to_component_locality9": 839
+      "uat8_to_component_locality9": 839,
+      "special_chain": 2
     },
     "normal_family_subtypes": {
       "town": 45,
@@ -16,45 +16,13 @@
       "city": 9
     },
     "by_admin_level_edge": {
-      "4>8": 3,
-      "8>9": 840
+      "8>9": 840,
+      "4>8": 2
     },
     "normal_family_count": 839,
-    "exception_count": 3
+    "exception_count": 2
   },
   "exceptions": [
-    {
-      "legal_id": "0100",
-      "legal_name": "Chișinău",
-      "count": 2,
-      "family": "special_chain",
-      "subtype": "special_non_8_to_9",
-      "level_pairs": [
-        "4>8"
-      ],
-      "edges": [
-        {
-          "child": {
-            "id": "osm-r1748490",
-            "name": "Chișinău",
-            "admin_level": 8,
-            "place": "city",
-            "name_prefix": "municipiul",
-            "designation": null,
-            "relation_type": "boundary"
-          },
-          "parent": {
-            "id": "osm-r1691801",
-            "name": "Municipiul Chișinău",
-            "admin_level": 4,
-            "place": "municipality",
-            "name_prefix": null,
-            "designation": null,
-            "relation_type": "boundary"
-          }
-        }
-      ]
-    },
     {
       "legal_id": "0300",
       "legal_name": "Bălți",
@@ -142,38 +110,6 @@
     }
   ],
   "groups": [
-    {
-      "legal_id": "0100",
-      "legal_name": "Chișinău",
-      "count": 2,
-      "family": "special_chain",
-      "subtype": "special_non_8_to_9",
-      "level_pairs": [
-        "4>8"
-      ],
-      "edges": [
-        {
-          "child": {
-            "id": "osm-r1748490",
-            "name": "Chișinău",
-            "admin_level": 8,
-            "place": "city",
-            "name_prefix": "municipiul",
-            "designation": null,
-            "relation_type": "boundary"
-          },
-          "parent": {
-            "id": "osm-r1691801",
-            "name": "Municipiul Chișinău",
-            "admin_level": 4,
-            "place": "municipality",
-            "name_prefix": null,
-            "designation": null,
-            "relation_type": "boundary"
-          }
-        }
-      ]
-    },
     {
       "legal_id": "0111",
       "legal_name": "Sîngera",

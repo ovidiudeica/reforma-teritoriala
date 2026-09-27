@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T22:02:25.929Z",
+  "mode": "ACTUAL_CANDIDATE_DIFF",
+  "status": "PASS",
+  "base_ref": "9d259784cabd9c74c22d0501ac7c8b1a45d42a9f",
+  "base_release": {
+    "snapshot_id": "actual-5383ff3db7cf3f67",
+    "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+    "manifest_sha256": "0c9ed50433e66d952dfb244e0c4bec7ccf69bab2dc620139b715eee1bcb18ac2"
+  },
+  "candidate": {
+    "snapshot_id": "actual-538d3d0a45bf35cf",
+    "release_fingerprint_sha256": "538d3d0a45bf35cf9c2ce45c5f393ca79f6273a5ff2422a28cc521af3eafb21f",
+    "manifest_sha256": "c56d4f820a54dd59f1d19c76d07bd94626a3799a13abf95b8c0c5392c03b5c04",
+    "release_gate_status": "PASS"
+  },
+  "summary": {
+    "entity_count_before": 5827,
+    "entity_count_after": 5827,
+    "entity_added_count": 0,
+    "entity_removed_count": 0,
+    "legal_identity_changed_count": 0,
+    "classification_changed_count": 0,
+    "geometry_change_count": 0,
+    "semantic_registry_changed_count": 0,
+    "component_hash_changed_count": 10,
+    "substantive_change_count": 0,
+    "review_required": false
+  },
+  "entities": {
+    "added_ids": [],
+    "removed_ids": [],
+    "legal_identity_changed_ids": [],
+    "classification_changed_ids": [],
+    "legal_change_samples": [],
+    "classification_change_samples": []
+  },
+  "geometry": {
+    "RO": {
+      "before_feature_count": 3232,
+      "after_feature_count": 3232,
+      "added_count": 0,
+      "removed_count": 0,
+      "changed_count": 0,
+      "added_ids": [],
+      "removed_ids": [],
+      "changed_ids": []
+    },
+    "MD": {
+      "before_feature_count": 2595,
+      "after_feature_count": 2595,
+      "added_count": 0,
+      "removed_count": 0,
+      "changed_count": 0,
+      "added_ids": [],
+      "removed_ids": [],
+      "changed_ids": []
+    }
+  },
+  "official_registries": {
+    "RO": {
+      "semantic_changed": false,
+      "before_semantic_sha256": "c9891f7b4c9c9045e8a05bc86e68affa5589823804ce8ee81a68de7d9ab8ee83",
+      "after_semantic_sha256": "c9891f7b4c9c9045e8a05bc86e68affa5589823804ce8ee81a68de7d9ab8ee83",
+      "before_record_count": 16978,
+      "after_record_count": 16978,
+      "before_manifest_sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f",
+      "after_manifest_sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f"
+    },
+    "MD": {
+      "semantic_changed": false,
+      "before_semantic_sha256": "0f6052b3b9d2680c8e793c69fb7d26f1c18e450615b8ece96f2bd9c40353f011",
+      "after_semantic_sha256": "0f6052b3b9d2680c8e793c69fb7d26f1c18e450615b8ece96f2bd9c40353f011",
+      "before_record_count": 1721,
+      "after_record_count": 1721,
+      "before_manifest_sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575",
+      "after_manifest_sha256": "c80f865656248fce2cf6f90ec61e48ca110191d40096e720e942990d2fe227c9"
+    }
+  },
+  "component_hash_changes": [
+    {
+      "key": "catalog",
+      "path": "data/current/entities.json",
+      "before_sha256": "d2a4701f016f1e1378798d150e7175d4fd36a46df76ca3af6e46da4fef6ce816",
+      "after_sha256": "153e5e04db75dfc5dcec69af018cc0320a6f30494f1f22c15b2b50f2bcef32f5"
+    },
+    {
+      "key": "md_gate",
+      "path": "data/current/md-release-gate.json",
+      "before_sha256": "7b3444d94b19cd2affabde31e1726fd62158a4d0f5077d051aec97bc4938b8f3",
+      "after_sha256": "673951a7b4ac2aad1bdab43a6e9c2a3cddd4760a136cfbcf15e3e3f4552c9ac1"
+    },
+    {
+      "key": "md_geojson",
+      "path": "public/geo/current/md-administrative.geojson",
+      "before_sha256": "774cbe6d69bad316a7e6febdf0ce7b2344509cc120e698d818d9f35e1473844a",
+      "after_sha256": "20bf3aaecd5ddd7c640572a3caacd6f8240d0df5cc04bb7b8d947533e4667d32"
+    },
+    {
+      "key": "md_official",
+      "path": "data/sources/cuatm-current.json",
+      "before_sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575",
+      "after_sha256": "c80f865656248fce2cf6f90ec61e48ca110191d40096e720e942990d2fe227c9"
+    },
+    {
+      "key": "md_semantic_bridge",
+      "path": "data/current/md-cuatm-semantic-bridge.json",
+      "before_sha256": "b587bd9a00563ba34123030ef0a1748b4218b1c9427302492b0043034a044f42",
+      "after_sha256": "3a821c72b4f2197e5b889be1f321630202e86b5ea08d6f186013883783077084"
+    },
+    {
+      "key": "public_index",
+      "path": "public/data/actual-entities.json",
+      "before_sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
+      "after_sha256": "3e5402f68ff6b93a8b772c60cf4d931b5f57b20128b8f0bc0c42cfdf4ea92928"
+    },
+    {
+      "key": "regression_audit",
+      "path": "data/current/actual-regression-audit.json",
+      "before_sha256": "96160edcc284797f452a64e557527769f4e8ce2ecf01c7e9b60cf62e3a78bb9a",
+      "after_sha256": "a556edb32ca316d1355afdf15ec89cfd79e0490822a8067adef2ba09146605d9"
+    },
+    {
+      "key": "ro_gate",
+      "path": "data/current/ro-release-gate.json",
+      "before_sha256": "5c3498993511b465b35037483c8c458b03bd6d8addb4d5730aae20fa3d255c72",
+      "after_sha256": "ee4539335bb56cdf2cd68690a36442663002101ec8476664cd3ed6877cfabd04"
+    },
+    {
+      "key": "structural_completeness_audit",
+      "path": "data/current/actual-structural-completeness-audit.json",
+      "before_sha256": "d215636430cc8b76b97e7a77a73c90287f7006c4cc23d1dce23752481703a557",
+      "after_sha256": "06d106f20bc1b88e232d4ef1290379da47d9134fc067fc7add30dc737f475337"
+    },
+    {
+      "key": "topology_audit",
+      "path": "data/current/actual-topology-audit.json",
+      "before_sha256": "37130250fac5846db0ddaa1a1bd5a40142a719899d36858c5dff9ae469247fcc",
+      "after_sha256": "420516c997e392efbc669831056ce4db00ec597832a0eb77e71881b59bb4adce"
+    }
+  ],
+  "failures": [],
+  "policy": "Candidate comparison is fail-closed on persisted-baseline integrity and candidate release-gate validity. Differences are reported, never auto-accepted. Promotion always requires explicit acknowledgement of the candidate snapshot."
+}

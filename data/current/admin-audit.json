@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-27T11:27:55.692Z",
-  "source_generated_at": "2026-09-27T11:25:31.146Z",
-  "entity_count": 5822,
+  "generated_at": "2026-09-27T22:01:13.426Z",
+  "source_generated_at": "2026-09-27T22:00:51.041Z",
+  "entity_count": 5827,
   "countries": {
     "RO": {
       "feature_count": 3232,
@@ -26,8 +26,7 @@
           "boundary": 3232
         },
         "entity_type": {
-          "county": 41,
-          "capital_municipality": 1,
+          "county": 42,
           "municipality": 102,
           "commune": 2861,
           "sector": 6,
@@ -98,7 +97,7 @@
           "place": "city",
           "designation": "∅",
           "osm_type": "boundary",
-          "entity_type": "capital_municipality",
+          "entity_type": "county",
           "count": 1
         },
         {
@@ -144,18 +143,19 @@
       ]
     },
     "MD": {
-      "feature_count": 2590,
-      "review_required": 266,
+      "feature_count": 2595,
+      "review_required": 267,
       "distributions": {
         "admin_level": {
           "4": 37,
+          "7": 5,
           "8": 982,
           "9": 1571
         },
         "place": {
+          "∅": 149,
           "municipality": 410,
           "district": 32,
-          "∅": 144,
           "village": 1763,
           "region": 2,
           "city": 24,
@@ -163,13 +163,14 @@
           "allotments": 122
         },
         "designation": {
-          "∅": 2590
+          "∅": 2595
         },
         "osm_type": {
-          "boundary": 2536,
+          "boundary": 2541,
           "multipolygon": 54
         },
         "entity_type": {
+          "unclassified": 1,
           "level_2_municipality": 3,
           "district": 32,
           "level_1_uat": 548,
@@ -177,6 +178,7 @@
           "special_territorial_unit": 2,
           "municipality_or_city_uat": 14,
           "town_uat": 48,
+          "chisinau_sector": 4,
           "non_administrative_or_auxiliary_area": 122,
           "subdivision_or_component_area": 3,
           "component_locality": 1446
@@ -272,6 +274,14 @@
           "count": 10
         },
         {
+          "admin_level": "7",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "chisinau_sector",
+          "count": 4
+        },
+        {
           "admin_level": "4",
           "place": "municipality",
           "designation": "∅",
@@ -294,6 +304,14 @@
           "osm_type": "boundary",
           "entity_type": "subdivision_or_component_area",
           "count": 2
+        },
+        {
+          "admin_level": "7",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "boundary",
+          "entity_type": "unclassified",
+          "count": 1
         },
         {
           "admin_level": "9",
@@ -322,10 +340,10 @@
       "issue_count": 0
     },
     "MD": {
-      "checked": 2590,
+      "checked": 2595,
       "root_parent": 37,
       "unexpected_root": 0,
-      "entity_parent": 2553,
+      "entity_parent": 2558,
       "null_parent": 0,
       "missing_parent": 0,
       "parent_wrong_jurisdiction": 0,
