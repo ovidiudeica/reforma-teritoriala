@@ -51,3 +51,4 @@ await writeFile(OUT,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringi
 console.log('SIMULATED_OSM_FIX '+JSON.stringify(report.simulated_osm_fix));
 // neighboring relation membership and simulated repair is intentionally read-only and coordinate-preserving
 
+
