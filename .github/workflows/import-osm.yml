@@ -3,6 +3,13 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '17 3 1 * *'
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/import/import-osm.mjs
+      - data/sources/ro-official-reconciliation-exceptions.json
+      - .github/workflows/import-osm.yml
 permissions:
   contents: write
 concurrency:
