@@ -10,6 +10,7 @@ on:
       - scripts/import/import-osm.mjs
       - scripts/process/build-actual-release-manifest.mjs
       - scripts/process/audit-actual-release-gate.mjs
+      - package.json
       - data/sources/ro-official-reconciliation-exceptions.json
       - data/sources/ro-semantic-type-reviewed-resolutions.json
       - data/sources/ro-other-level-reviewed-resolutions.json
