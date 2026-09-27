@@ -32,5 +32,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: actual-topology-audit
-          path: |\n            data/current/actual-topology-audit.json\n            data/current/osm-12463200-audit.json
+          path: |
+            data/current/actual-topology-audit.json
+            data/current/osm-12463200-audit.json
           if-no-files-found: error
