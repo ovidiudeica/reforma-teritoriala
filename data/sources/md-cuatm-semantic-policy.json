@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "MD",
+  "as_of": "2026-09-27",
+  "policy": "Official semantic subtype bridge for current CUATM administrative UATs. CUATM supplies identity, parent/child hierarchy and status codes; Law 764/2001 art. 8 supplies the exhaustive current municipality-name set. OSM tags/admin_level are not legal subtype evidence.",
+  "sources": [
+    {
+      "authority": "Biroul Național de Statistică al Republicii Moldova",
+      "label": "CUATM current Excel",
+      "url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+      "role": "official_identity_hierarchy_status"
+    },
+    {
+      "authority": "Parlamentul Republicii Moldova / legis.md",
+      "label": "Legea nr. 764/2001 privind organizarea administrativ-teritorială, text consolidat, art. 8",
+      "url": "https://www.legis.md/cautare/downloadpdf/138831",
+      "role": "exhaustive_current_municipality_list"
+    }
+  ],
+  "current_municipalities": [
+    "Chișinău",
+    "Bălți",
+    "Bender",
+    "Cahul",
+    "Ceadîr-Lunga",
+    "Comrat",
+    "Edineț",
+    "Hîncești",
+    "Orhei",
+    "Soroca",
+    "Strășeni",
+    "Tiraspol",
+    "Ungheni"
+  ],
+  "rules": {
+    "status_3": {
+      "semantic_type": "town",
+      "rule": "A CUATM status_code=3 record is classified as town only after the exhaustive municipality list is proven to resolve exactly to status_code=5 and to have zero overlap with status_code=3. Any municipality-list drift fails closed.",
+      "level_1_municipality_policy": "No current status_code=3 identity may be classified as level_1_municipality under this bridge."
+    },
+    "status_8": {
+      "commune": "status_code=8 with one or more direct CUATM children, all of status_code=9",
+      "independent_village": "status_code=8 with zero direct CUATM children",
+      "fail_closed": "Any status_code=8 child whose status_code is not 9, duplicate code, broken child reference or other unclassified structure is a blocking issue."
+    }
+  },
+  "settlement_policy_separation": "CUATM status_code 6/9 component localities are intentionally outside this bridge. Their polygon-exhaustiveness policy remains separately NOT_DETERMINED."
+}
