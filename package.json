@@ -24,7 +24,8 @@
     "build:actual-release-manifest": "node scripts/process/build-actual-release-manifest.mjs",
     "audit:actual-release-gate": "node scripts/process/audit-actual-release-gate.mjs",
     "build:actual-public-data": "node scripts/process/build-actual-public-data.mjs",
-    "audit:actual-topology": "node scripts/process/audit-actual-topology.mjs"
+    "audit:actual-topology": "node scripts/process/audit-actual-topology.mjs",
+    "audit:osm-12463200": "node scripts/process/audit-osm-relation-12463200.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
