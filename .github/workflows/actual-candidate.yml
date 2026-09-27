@@ -151,6 +151,8 @@ jobs:
         run: npm run audit:actual-regression
 
       - name: Build candidate release manifest
+        env:
+          ACTUAL_BASE_REF: ${{ steps.base.outputs.base_release_commit }}
         run: npm run build:actual-release-manifest
 
       - name: Validate exact candidate snapshot
@@ -161,10 +163,20 @@ jobs:
           ACTUAL_BASE_REF: ${{ steps.base.outputs.base_release_commit }}
         run: npm run build:actual-candidate-diff
 
+      - name: Read candidate disposition
+        id: disposition
+        run: |
+          STATUS="$(node -p "require('./data/current/actual-release-candidate.json').status")"
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+          echo "### ACTUAL candidate disposition" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Status: `$STATUS`" >> "$GITHUB_STEP_SUMMARY"
+          node -e "const d=require('./data/current/actual-candidate-diff.json'); console.log('- Base snapshot: `'+d.base_release.snapshot_id+'`\n- Candidate snapshot: `'+d.candidate.snapshot_id+'`\n- Semantic content changed: `'+d.summary.semantic_content_changed+'`\n- Substantive changes: `'+d.summary.substantive_change_count+'`')" >> "$GITHUB_STEP_SUMMARY"
+
       - name: Preserve base persisted marker
         run: git checkout "${{ steps.base.outputs.base_release_commit }}" -- data/current/actual-release-persisted.json
 
-      - name: Commit candidate snapshot to isolated branch
+      - name: Commit changed candidate snapshot to isolated branch
+        if: steps.disposition.outputs.status == 'CHANGE'
         env:
           CANDIDATE_BRANCH: ${{ steps.base.outputs.candidate_branch }}
         run: |
@@ -176,10 +188,17 @@ jobs:
           SNAPSHOT_ID="$(node -p "require('./data/current/actual-release-candidate.json').candidate.snapshot_id")"
           git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
           git push origin "HEAD:$CANDIDATE_BRANCH"
-          echo "### ACTUAL candidate" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Promotable ACTUAL candidate" >> "$GITHUB_STEP_SUMMARY"
           echo "- Branch: `$CANDIDATE_BRANCH`" >> "$GITHUB_STEP_SUMMARY"
           echo "- Snapshot: `$SNAPSHOT_ID`" >> "$GITHUB_STEP_SUMMARY"
-          node -e "const d=require('./data/current/actual-candidate-diff.json'); console.log('- Substantive changes: `'+d.summary.substantive_change_count+'`\n- Review required: `'+d.summary.review_required+'`')" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Confirm no-change candidate is terminal
+        if: steps.disposition.outputs.status == 'NO_CHANGE'
+        run: |
+          BASE="$(node -p "require('./data/current/actual-release-candidate.json').base_release.snapshot_id")"
+          CANDIDATE="$(node -p "require('./data/current/actual-release-candidate.json').candidate.snapshot_id")"
+          test "$BASE" = "$CANDIDATE"
+          echo "NO_CHANGE: release identity retained; no candidate branch or promotion PR will be created." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload candidate review bundle
         uses: actions/upload-artifact@v4
