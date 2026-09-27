@@ -7,18 +7,20 @@ const RO_GEO='public/geo/current/ro-administrative.geojson';
 const MD_GEO='public/geo/current/md-administrative.geojson';
 const MD_RECON='data/current/md-cuatm-reconciliation.json';
 const MD_NON_CUATM='data/current/md-cuatm-non-cuatm-allotments.json';
+const MD_INDIVIDUAL='data/sources/md-cuatm-individual-review.json';
 const OUT_INDEX='public/data/actual-entities.json';
 const OUT_DIR='public/geo/actual';
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
-const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm]=await Promise.all([
- read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM)
+const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual]=await Promise.all([
+ read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL)
 ]);
 
 const entities=catalog.entities||[];
 const entityById=new Map(entities.map(e=>[e.id,e]));
 const mdMatchById=new Map((mdRecon.matches||[]).map(x=>[x.id,x]));
 const mdNonCuatmById=new Map((mdNonCuatm.items||[]).map(x=>[x.id,x]));
+const mdIndividualById=new Map((mdIndividual.cases||[]).map(x=>[x.osm_id,x]));
 const featureById=new Map();
 for(const [jurisdiction,geo] of [['RO',roGeo],['MD',mdGeo]]){
  for(const f of geo.features||[]){
@@ -73,14 +75,19 @@ function legalFor(e){
 function validationFor(e,legal){
  const mdMatch=e.jurisdiction==='MD'?mdMatchById.get(e.id):null;
  const nonCuatm=e.jurisdiction==='MD'?mdNonCuatmById.get(e.id):null;
+ const individualReview=e.jurisdiction==='MD'?mdIndividualById.get(e.id):null;
  let legalIdentityStatus;
  if(legal)legalIdentityStatus='reconciled';
  else if(nonCuatm)legalIdentityStatus='outside_current_legal_registry';
+ else if(individualReview?.review_status==='resolved_semantic_classification')legalIdentityStatus='reviewed_representation_without_legal_identity';
+ else if(individualReview?.review_status==='unresolved_identity')legalIdentityStatus='unresolved';
  else if(e.jurisdiction==='MD'&&mdMatch&&!mdMatch.legal_id)legalIdentityStatus='unresolved';
  else legalIdentityStatus='not_bound_to_official_registry';
  return {
   legal_identity_status:legalIdentityStatus,
-  reconciliation_class:nonCuatm?.reconciliation_class||null,
+  reconciliation_class:nonCuatm?.reconciliation_class||individualReview?.classification_action||null,
+  review_status:individualReview?.review_status||null,
+  review_source:individualReview?MD_INDIVIDUAL:null,
   match_confidence:legal?.confidence||null,
   representation_confidence:e.classification?.confidence||null,
   review_required:Boolean(e.review_required)
