@@ -77,10 +77,10 @@ jobs:
         run: npm run audit:actual-topology
       - name: Audit ACTUAL count regression
         run: npm run audit:actual-regression
-      - name: Audit ACTUAL structural completeness
-        run: npm run audit:actual-structural-completeness
       - name: Build public ACTUAL entity contract and tiered web geometry
         run: npm run build:actual-public-data
+      - name: Audit ACTUAL structural completeness
+        run: npm run audit:actual-structural-completeness
       - name: Build ACTUAL RO+MD release manifest
         run: npm run build:actual-release-manifest
       - name: ACTUAL RO+MD release gate
