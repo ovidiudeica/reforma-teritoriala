@@ -5,11 +5,13 @@ const SNAPSHOT='data/sources/ro-siruta-current.json';
 const OUTPUT='data/current/ro-official-reconciliation.json';
 const OVERRIDES='data/sources/ro-siruta-reviewed-overrides.json';
 const OFFICIAL_ONLY_RESOLUTIONS='data/sources/ro-official-only-reviewed-resolutions.json';
+const OTHER_LEVEL_RESOLUTIONS='data/sources/ro-other-level-reviewed-resolutions.json';
 const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const geo=JSON.parse(await readFile('public/geo/current/ro-administrative.geojson','utf8'));
 const official=JSON.parse(await readFile(SNAPSHOT,'utf8'));
 const reviewed=JSON.parse(await readFile(OVERRIDES,'utf8'));
 const officialOnlyReviewed=JSON.parse(await readFile(OFFICIAL_ONLY_RESOLUTIONS,'utf8'));
+const otherLevelReviewed=JSON.parse(await readFile(OTHER_LEVEL_RESOLUTIONS,'utf8'));
 
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[„”"'’]/g,' ')
@@ -72,6 +74,13 @@ for(const x of overrideRows){
  overrideByRelation.set(id,x);
 }
 const officialOnlyResolutionRows=officialOnlyReviewed.items||[];
+const otherLevelResolutionRows=otherLevelReviewed.items||[];
+const otherLevelResolutionByLegalId=new Map();
+for(const x of otherLevelResolutionRows){
+ const legalId=String(x.legal_id||'');
+ if(!legalId||otherLevelResolutionByLegalId.has(legalId))throw new Error('Duplicate/invalid reviewed other-level legal id: '+x.legal_id);
+ otherLevelResolutionByLegalId.set(legalId,x);
+}
 const officialOnlyResolutionByLegalId=new Map();
 for(const x of officialOnlyResolutionRows){
  const legalId=String(x.legal_id||'');
@@ -155,13 +164,42 @@ for(const x of matched){
 }
 const duplicates=[...mappings.entries()].filter(([,v])=>v.length>1).map(([legal_id,items])=>({legal_id,osm_ids:items.map(x=>x.osm_id),osm_relation_ids:items.map(x=>x.osm_relation_id)}));
 const matchedLegalIds=new Set(matched.map(x=>x.legal_id));
-const representedElsewhere=[];
+const rawRepresentedElsewhere=[];
 const roOther=(catalog.entities||[]).filter(e=>e.jurisdiction==='RO'&&Number(e.osm?.admin_level)!==8);
 for(const r of officialRows.filter(x=>!matchedLegalIds.has(x.siruta))){
  const alt=roOther.filter(e=>norm(e.name)===r.normalized_name);
- if(alt.length)representedElsewhere.push({legal_id:r.siruta,legal_name:r.name,legal_type:r.legal_type,osm:alt.map(e=>({id:e.id,relation_id:e.osm?.relation_id,admin_level:e.osm?.admin_level,name:e.name,type:e.type}))});
+ if(alt.length)rawRepresentedElsewhere.push({legal_id:r.siruta,legal_name:r.name,legal_type:r.legal_type,legal_parent_id:r.parent_siruta,legal_parent_name:r.county_name,osm:alt.map(e=>({id:e.id,relation_id:e.osm?.relation_id,admin_level:e.osm?.admin_level,name:e.name,type:e.type,parent_id:e.parent_id||null}))});
 }
-const elsewhereIds=new Set(representedElsewhere.map(x=>x.legal_id));
+const reviewedOtherLevelResolutions=[],representedElsewhere=[];
+for(const row of rawRepresentedElsewhere){
+ const resolution=otherLevelResolutionByLegalId.get(String(row.legal_id))||null;
+ if(!resolution){representedElsewhere.push(row);continue;}
+ const matches=(row.osm||[]).filter(o=>Number(o.relation_id)===Number(resolution.osm_relation_id));
+ const osm=matches.length===1?matches[0]:null;
+ const stable=Boolean(
+  osm
+  && Number(osm.admin_level)===Number(resolution.osm_admin_level)
+  && norm(osm.name)===norm(resolution.osm_relation_name)
+  && osm.type===resolution.osm_entity_type
+  && String(osm.parent_id||'')===String(resolution.expected_catalog_parent_id||'')
+  && norm(row.legal_name)===norm(resolution.legal_name)
+  && row.legal_type===resolution.legal_type
+  && String(row.legal_parent_id||'')===String(resolution.legal_parent_id||'')
+  && norm(row.legal_parent_name)===norm(resolution.legal_parent_name)
+ );
+ if(!stable){representedElsewhere.push(row);continue;}
+ reviewedOtherLevelResolutions.push({
+  ...row,
+  classification:resolution.classification,
+  osm_relation_id:Number(resolution.osm_relation_id),
+  osm_relation_name:osm.name,
+  osm_admin_level:Number(osm.admin_level),
+  osm_entity_type:osm.type,
+  expected_catalog_parent_id:String(resolution.expected_catalog_parent_id||''),
+  evidence_registry:OTHER_LEVEL_RESOLUTIONS
+ });
+}
+const elsewhereIds=new Set(rawRepresentedElsewhere.map(x=>x.legal_id));
 const rawOfficialOnly=officialRows.filter(x=>!matchedLegalIds.has(x.siruta)&&!elsewhereIds.has(x.siruta)).map(x=>({legal_id:x.siruta,legal_name:x.name,legal_type:x.legal_type,legal_type_code:x.type_code,legal_parent_id:x.parent_siruta,legal_parent_name:x.county_name}));
 const reviewedOfficialOnlyResolutions=[],officialOnly=[];
 for(const row of rawOfficialOnly){
@@ -209,12 +247,18 @@ const unresolvedReviewedOfficialOnly=officialOnlyResolutionRows.filter(x=>!revie
 check('reviewed_official_only_legal_ids_exist',missingOfficialOnlyResolutionLegalIds.length===0,{missing:missingOfficialOnlyResolutionLegalIds});
 check('reviewed_official_only_covering_relations_exist',missingOfficialOnlyCoveringRelations.length===0,{missing:missingOfficialOnlyCoveringRelations});
 check('reviewed_official_only_structural_resolution_stable',unresolvedReviewedOfficialOnly.length===0,{unresolved:unresolvedReviewedOfficialOnly});
+const missingOtherLevelLegalIds=otherLevelResolutionRows.filter(x=>!officialByCode.has(String(x.legal_id))).map(x=>x.legal_id);
+const missingOtherLevelRelations=otherLevelResolutionRows.filter(x=>!entityById.has('osm-r'+Number(x.osm_relation_id))).map(x=>x.osm_relation_id);
+const unresolvedReviewedOtherLevel=otherLevelResolutionRows.filter(x=>!reviewedOtherLevelResolutions.some(y=>String(y.legal_id)===String(x.legal_id))).map(x=>x.legal_id);
+check('reviewed_other_level_legal_ids_exist',missingOtherLevelLegalIds.length===0,{missing:missingOtherLevelLegalIds});
+check('reviewed_other_level_osm_relations_exist',missingOtherLevelRelations.length===0,{missing:missingOtherLevelRelations});
+check('reviewed_other_level_structural_resolution_stable',unresolvedReviewedOtherLevel.length===0,{unresolved:unresolvedReviewedOtherLevel});
 const report={
  schema_version:1,
  generated_at:new Date().toISOString(),
  jurisdiction:'RO',
  scope:'Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.',
- policy:'Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Reviewed official UATs without a distinct OSM boundary may be classified separately only when their covering OSM representation remains structurally stable; no covering OSM geometry is promoted to legal geometry. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.',
+ policy:'Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Reviewed official UATs without a distinct OSM boundary may be classified separately only when their covering OSM representation remains structurally stable; reviewed UATs represented at a jurisdiction-specific exceptional OSM admin_level may likewise be resolved only when that representation remains structurally stable. No OSM geometry is promoted to legal geometry. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.',
  status:failures.length?'FAIL':'PASS',
  source:{
   official_snapshot:SNAPSHOT,
@@ -222,6 +266,7 @@ const report={
   reviewed_overrides:OVERRIDES,
   reviewed_override_count:overrideRows.length,
   reviewed_official_only_resolutions:OFFICIAL_ONLY_RESOLUTIONS,
+  reviewed_other_level_resolutions:OTHER_LEVEL_RESOLUTIONS,
   osm_catalog_generated_at:catalog.generated_at
  },
  checks,
@@ -232,6 +277,7 @@ const report={
   unmatched_osm_count:unmatched.length,
   official_only_count:officialOnly.length,
   reviewed_official_only_resolution_count:reviewedOfficialOnlyResolutions.length,
+  reviewed_other_level_resolution_count:reviewedOtherLevelResolutions.length,
   represented_at_other_osm_level_count:representedElsewhere.length,
   duplicate_legal_mapping_count:duplicates.length,
   parent_mismatch_count:parentMismatches.length,
@@ -243,6 +289,7 @@ const report={
  unmatched_osm:unmatched,
  official_only:officialOnly,
  reviewed_official_only_resolutions:reviewedOfficialOnlyResolutions,
+ reviewed_other_level_resolutions:reviewedOtherLevelResolutions,
  represented_at_other_osm_level:representedElsewhere,
  duplicate_legal_mappings:duplicates,
  parent_mismatches:parentMismatches,
