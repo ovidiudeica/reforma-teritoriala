@@ -7,22 +7,62 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><div><strong>REFORMA TERITORIALĂ</strong><span>Atlas teritorial România · Republica Moldova</span></div>
-<nav><button class="mode active" data-mode="actual">ACTUAL</button><button class="mode" data-mode="istoric">ISTORIC</button></nav></header>
+<header>
+  <div><strong>REFORMA TERITORIALĂ</strong><span>Atlas teritorial România · Republica Moldova</span></div>
+  <nav>
+    <button class="mode active" data-mode="actual">ACTUAL</button>
+    <button class="mode" data-mode="istoric" disabled title="Modul ISTORIC va fi activat după publicarea primului corpus istoric">ISTORIC · în pregătire</button>
+  </nav>
+</header>
 <main>
-<aside>
-<h2>Straturi</h2>
-<section><h3>Teritoriu actual</h3>
-<label><input type="checkbox" checked disabled> Hartă de bază OpenStreetMap</label>
-<label><input id="layer-ro" type="checkbox" checked> România — snapshot administrativ validat</label>
-<label><input id="layer-md" type="checkbox" checked> Republica Moldova — snapshot administrativ validat</label>
-</section>
-<section><h3>Categorii</h3><div class="chips"><span>Administrație</span><span>Regiuni</span><span>Instituții</span><span>Biserică</span><span>Statistică</span><span>Infrastructură</span></div></section>
-<div class="status"><b>Proveniența limitelor</b><p>România și Republica Moldova folosesc snapshot-uri GeoJSON locale generate din OSM. Modul ACTUAL este afișat numai când gate-ul combinat RO+MD și gate-ul fiecărei jurisdicții sunt PASS; manifestul public fixează exact catalogul, geometriile și versiunile surselor oficiale. OSM/Overpass rămâne sursă de import, nu backend-ul aplicației publice.</p><p id="actual-release-status">ACTUAL: verificare release…</p><p id="ro-source-status">RO: verificare snapshot…</p><p id="md-source-status">MD: verificare snapshot…</p></div>
+<aside class="controls">
+  <h2>Teritoriu actual</h2>
+
+  <section>
+    <h3>Căutare</h3>
+    <input id="entity-search" class="search" type="search" placeholder="Nume, SIRUTA/CUATM sau OSM…" autocomplete="off">
+    <div id="search-results" class="search-results" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <h3>Jurisdicții</h3>
+    <label><input id="layer-ro" type="checkbox" checked> România</label>
+    <label><input id="layer-md" type="checkbox" checked> Republica Moldova</label>
+  </section>
+
+  <section>
+    <h3>Tipuri administrative</h3>
+    <div id="filter-list" class="filter-list"><span class="muted">Se încarcă…</span></div>
+  </section>
+
+  <section>
+    <h3>Nivel de detaliu</h3>
+    <p class="hint">Limitele regionale sunt încărcate imediat. UAT-urile locale apar de la zoom 7, iar sectoarele și reprezentările de detaliu de la zoom 10.</p>
+  </section>
+
+  <div class="status">
+    <b>Release și proveniență</b>
+    <p>Identitatea juridică și reprezentarea geometrică sunt afișate separat. SIRUTA/CUATM furnizează identitatea oficială când există o reconciliere pozitivă; geometria publică este o derivată simplificată a snapshot-ului OSM validat.</p>
+    <p id="actual-release-status">ACTUAL: verificare release…</p>
+    <p id="ro-source-status">RO: verificare snapshot…</p>
+    <p id="md-source-status">MD: verificare snapshot…</p>
+  </div>
 </aside>
+
 <div id="map"></div>
+
+<aside id="details-panel" class="details" aria-live="polite">
+  <div class="details-head">
+    <div><span class="eyebrow">Entitate selectată</span><h2 id="details-title">Nicio selecție</h2></div>
+    <button id="details-close" class="icon-button" type="button" title="Închide detaliile">×</button>
+  </div>
+  <div id="details-body" class="details-body">
+    <p class="muted">Selectează o limită de pe hartă sau caută o entitate după nume ori identificator.</p>
+  </div>
+</aside>
 </main>
-<footer><span>Date administrative: © OpenStreetMap contributors</span><span id="modeLabel">Mod: ACTUAL</span></footer>
+<footer><span>Date cartografice: © OpenStreetMap contributors · identitate oficială: INS SIRUTA / BNS CUATM</span><span id="modeLabel">Mod: ACTUAL</span></footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>

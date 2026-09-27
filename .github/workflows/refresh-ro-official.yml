@@ -12,7 +12,9 @@ on:
       - scripts/process/audit-ro-official-exceptions.mjs
       - scripts/process/apply-ro-official-reconciliation.mjs
       - scripts/process/audit-ro-release-gate.mjs
+      - scripts/process/build-actual-public-data.mjs
       - scripts/process/build-actual-release-manifest.mjs
+      - schemas/actual-public-entity.schema.json
       - scripts/process/audit-actual-release-gate.mjs
       - data/sources/ro-siruta-reviewed-overrides.json
       - data/sources/ro-parent-assignment-reviewed-resolutions.json
@@ -51,6 +53,8 @@ jobs:
         run: npm run audit:admin
       - name: RO release gate
         run: npm run audit:ro-release-gate
+      - name: Build public ACTUAL entity contract and tiered web geometry
+        run: npm run build:actual-public-data
       - name: Build ACTUAL RO+MD release manifest
         run: npm run build:actual-release-manifest
       - name: ACTUAL RO+MD release gate
@@ -59,7 +63,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/sources/ro-siruta-current.json data/current/ro-official-reconciliation.json data/current/ro-official-exception-audit.json data/current/ro-official-application.json data/current/entities.json data/current/admin-audit.json data/current/admin-review.json data/current/ro-release-gate.json data/current/actual-release-manifest.json data/current/actual-release-gate.json data/sources/ro-osm-official-exception-history.json public/geo/current/ro-administrative.geojson
+          git add data/sources/ro-siruta-current.json data/current/ro-official-reconciliation.json data/current/ro-official-exception-audit.json data/current/ro-official-application.json data/current/entities.json data/current/admin-audit.json data/current/admin-review.json data/current/ro-release-gate.json data/current/actual-release-manifest.json data/current/actual-release-gate.json public/data/actual-entities.json public/geo/actual/ data/sources/ro-osm-official-exception-history.json public/geo/current/ro-administrative.geojson
           git diff --cached --quiet || git commit -m "data: refresh official RO SIRUTA reconciliation"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
