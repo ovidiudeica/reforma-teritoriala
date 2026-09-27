@@ -15,11 +15,9 @@ if(!relation)throw new Error('relation missing from Overpass');
 const ways=new Map(raw.elements.filter(x=>x.type==='way').map(x=>[x.id,x]));
 const nodes=new Map(raw.elements.filter(x=>x.type==='node').map(x=>[x.id,x]));
 const members=(relation.members||[]).map((m,i)=>{const w=m.type==='way'?ways.get(m.ref):null;const first=w?.nodes?.[0],last=w?.nodes?.at(-1);return {index:i,type:m.type,ref:m.ref,role:m.role||'',way_node_count:w?.nodes?.length??null,closed:w?first===last:null,first_node:first??null,last_node:last??null};});
+const reverse=await overpass(`[out:json][timeout:120];way(id:76585146,94511352,76583058,918853574)->.w;rel(bw.w);out meta;`);
 const parentRelations={};
-for(const wid of [76585146,94511352,76583058,918853574]){
-  const rr=await overpass(`[out:json][timeout:60];way(${wid});rel(bw);out meta;`);
-  parentRelations[wid]=rr.elements.filter(x=>x.type==='relation').map(r=>({id:r.id,version:r.version,timestamp:r.timestamp,tags:r.tags||{},members:(r.members||[]).filter(m=>m.type==='way'&&[76585146,94511352,76583058,918853574].includes(m.ref))}));
-}
+for(const wid of [76585146,94511352,76583058,918853574]) parentRelations[wid]=reverse.elements.filter(x=>x.type==='relation'&&(x.members||[]).some(m=>m.type==='way'&&m.ref===wid)).map(r=>({id:r.id,version:r.version,timestamp:r.timestamp,tags:r.tags||{},members:(r.members||[]).filter(m=>m.type==='way'&&[76585146,94511352,76583058,918853574].includes(m.ref))}));
 const geo=osmtogeojson(raw,{flatProperties:false});
 const converted=geo.features.find(f=>String(f.id)==='relation/'+RID);
 const master=JSON.parse(await readFile('public/geo/current/md-administrative.geojson','utf8')).features.find(f=>f.properties?.catalog_id===ID);
