@@ -8,6 +8,7 @@ const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const geo=JSON.parse(await readFile('public/geo/current/ro-administrative.geojson','utf8'));
 const reviewed=JSON.parse(await readFile('data/sources/ro-siruta-reviewed-overrides.json','utf8'));
 const parentAssignmentReviewed=JSON.parse(await readFile('data/sources/ro-parent-assignment-reviewed-resolutions.json','utf8'));
+const officialOnlyReviewed=JSON.parse(await readFile('data/sources/ro-official-only-reviewed-resolutions.json','utf8'));
 
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[„”"'’]/g,' ')
@@ -104,7 +105,8 @@ const targetIds=[...new Set([
  ...(reconciliation.duplicate_legal_mappings||[]).flatMap(x=>x.osm_relation_ids||[]),
  ...(reconciliation.type_mismatches||[]).map(x=>x.osm_relation_id),
  ...(reviewed.mappings||[]).map(x=>Number(x.osm_relation_id)),
- ...(parentAssignmentReviewed.items||[]).map(x=>Number(x.osm_relation_id))
+ ...(parentAssignmentReviewed.items||[]).map(x=>Number(x.osm_relation_id)),
+ ...(officialOnlyReviewed.items||[]).map(x=>Number(x.covering_osm_relation_id))
 ].filter(Boolean))];
 const histories=[],historyErrors=[];
 for(const id of targetIds){
@@ -169,7 +171,8 @@ for(const g of reconciliation.duplicate_legal_mappings||[]){
 const allCandidateCodes=[
  ...provisionalUnmatched.flatMap(x=>x.candidateIds),
  ...duplicateCandidateIds,
- ...(reviewed.mappings||[]).map(x=>String(x.legal_id))
+ ...(reviewed.mappings||[]).map(x=>String(x.legal_id)),
+ ...(officialOnlyReviewed.items||[]).flatMap(x=>[String(x.legal_id),String(x.covering_osm_relation_legal_id||'')])
 ];
 let officialLocalityFeatures=[],officialLocalityGeometryError=null;
 try{officialLocalityFeatures=await fetchOfficialLocalityGeometries(allCandidateCodes);}
@@ -366,6 +369,51 @@ const parentAssignmentResolutions=(parentAssignmentReviewed.items||[]).map(x=>{
  };
 });
 
+const officialOnlyResolutionValidation=(officialOnlyReviewed.items||[]).map(x=>{
+ const legalId=String(x.legal_id),coveringLegalId=String(x.covering_osm_relation_legal_id||'');
+ const relationId=Number(x.covering_osm_relation_id);
+ const reviewedResolution=(reconciliation.reviewed_official_only_resolutions||[]).find(y=>String(y.legal_id)===legalId)||null;
+ const entity=entityByRelation.get(relationId)||null;
+ const parent=entity?.parent_id?entityById.get(entity.parent_id)||null:null;
+ const feature=featureByRelation.get(relationId)||null;
+ const primaryContainment=containmentEvidence(relationId,[legalId])[0]||null;
+ const coveringContainment=coveringLegalId?containmentEvidence(relationId,[coveringLegalId])[0]||null:null;
+ const history=historyById.get(relationId)||null;
+ let relationAreaKm2=null;
+ try{relationAreaKm2=feature?area(feature)/1e6:null;}catch{}
+ const primaryInsideAll=Boolean(primaryContainment&&primaryContainment.official_locality_count>0&&primaryContainment.inside_count===primaryContainment.official_locality_count);
+ const coveringInsideAll=Boolean(coveringContainment&&coveringContainment.official_locality_count>0&&coveringContainment.inside_count===coveringContainment.official_locality_count);
+ const stable=Boolean(
+  reviewedResolution
+  && reviewedResolution.classification===x.classification
+  && entity
+  && Number(entity.osm?.admin_level)===8
+  && norm(entity.name)===norm(x.covering_osm_relation_name)
+  && Number(parent?.osm?.relation_id)===Number(x.expected_parent_osm_relation_id)
+  && primaryInsideAll
+  && coveringInsideAll
+  && history
+ );
+ return {
+  legal_id:legalId,
+  legal_name:x.legal_name,
+  legal_type:x.legal_type,
+  legal_parent_name:x.legal_parent_name,
+  classification:x.classification,
+  covering_osm_relation_id:relationId,
+  covering_osm_relation_name:entity?.name||null,
+  covering_osm_relation_legal_id:coveringLegalId||null,
+  covering_osm_parent_relation_id:parent?.osm?.relation_id??null,
+  covering_relation_area_km2:relationAreaKm2,
+  official_locality_containment:primaryContainment,
+  covering_uat_official_locality_containment:coveringContainment,
+  osm_history:history,
+  geometry_modified:false,
+  legal_geometry_claimed:false,
+  stable
+ };
+});
+
 const typeMismatches=(reconciliation.type_mismatches||[]).map(x=>({
  ...x,
  current_osm_tags:tagsOf(featureByRelation.get(x.osm_relation_id)),
@@ -384,6 +432,8 @@ check('all_type_mismatches_audited',typeMismatches.length===(reconciliation.type
 check('cross_county_parent_conflicts_audited',crossCountyParentAudits.length===crossCountyReviewed.length,{expected:crossCountyReviewed.length,audited:crossCountyParentAudits.length});
 const unstableParentAssignments=parentAssignmentResolutions.filter(x=>!x.stable);
 check('reviewed_parent_assignment_resolutions_stable',unstableParentAssignments.length===0,{failed:unstableParentAssignments});
+const unstableOfficialOnlyResolutions=officialOnlyResolutionValidation.filter(x=>!x.stable);
+check('reviewed_official_only_resolutions_stable',unstableOfficialOnlyResolutions.length===0,{failed:unstableOfficialOnlyResolutions});
 const missingReviewedRelations=reviewedOverrideValidation.filter(x=>!x.relation_present).map(x=>x.osm_relation_id);
 const missingReviewedUats=reviewedOverrideValidation.filter(x=>!x.official_uat_present).map(x=>({osm_relation_id:x.osm_relation_id,legal_id:x.legal_id}));
 check('reviewed_override_relations_present',missingReviewedRelations.length===0,{missing:missingReviewedRelations});
@@ -395,8 +445,8 @@ if(!officialLocalityGeometryError){
 
 const report={
  schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',
- scope:'Targeted audit of unresolved/duplicate/type-conflict cases from official SIRUTA reconciliation.',
- policy:'Diagnostic only. Exact SIRUTA hierarchy and OSM provenance are recorded; no fuzzy candidate is auto-assigned. OSM geometry is not treated as legal authority.',
+ scope:'Targeted audit of unresolved/duplicate/type-conflict cases and reviewed missing-distinct-boundary cases from official SIRUTA reconciliation.',
+ policy:'Exact SIRUTA hierarchy, official locality containment and OSM provenance are recorded; no fuzzy candidate is auto-assigned. An OSM relation that overcovers multiple legal UAT locality sets is retained only as representation evidence and is never promoted to legal geometry for the missing UAT.',
  status:failures.length?'FAIL':'PASS',checks,
  summary:{
   target_relation_count:targetIds.length,
@@ -408,12 +458,13 @@ const report={
   type_mismatch_count:typeMismatches.length,
   cross_county_parent_conflict_count:crossCountyParentAudits.length,
   reviewed_parent_assignment_resolution_count:parentAssignmentResolutions.length,
+  reviewed_official_only_resolution_count:officialOnlyResolutionValidation.length,
   reviewed_override_count:reviewedOverrideValidation.length,
   reviewed_override_containment_failure_count:reviewedOverrideValidation.filter(x=>x.identity_containment_ok===false).length,
   history_error_count:historyErrors.length,
   diagnostic_warning_count:warnings.length
  },
- unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,cross_county_parent_conflicts:crossCountyParentAudits,reviewed_parent_assignment_resolutions:parentAssignmentResolutions,reviewed_overrides:reviewedOverrideValidation,warnings,failures
+ unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,cross_county_parent_conflicts:crossCountyParentAudits,reviewed_parent_assignment_resolutions:parentAssignmentResolutions,reviewed_official_only_resolutions:officialOnlyResolutionValidation,reviewed_overrides:reviewedOverrideValidation,warnings,failures
 };
 const historyOut={schema_version:1,generated_at:report.generated_at,source:'OpenStreetMap API 0.6 relation history',relation_count:targetIds.length,history_count:histories.length,error_count:historyErrors.length,errors:historyErrors,relations:histories};
 await mkdir('data/current',{recursive:true});await mkdir('data/sources',{recursive:true});
