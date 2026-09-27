@@ -23,7 +23,8 @@ for(const type of ['municipality','town','commune','sector']){
  add('RO',type,official.length,official.length-missing.length,missing,missing.length?'FAIL':'PASS',{official_registry:'SIRUTA',exhaustive:true,reviewed_exception_coverage_count:official.filter(r=>reviewedRoCoverage.has(String(r.siruta))).length});
 }
 const roCounties=[...new Map(roUat.filter(r=>r.county_code).map(r=>[String(r.county_code),r.county_name||null])).entries()];
-add('RO','county',roCounties.length,null,[], 'NOT_DETERMINED',{official_registry:'SIRUTA',exhaustive:true,reason:'Current SIRUTA snapshot identifies county codes/names but public county entities are not bound to SIRUTA legal IDs; requires a county-code identity bridge before exact identity completeness can be asserted.'});
+const missingRoCounties=roCounties.filter(([code])=>!publicLegal.has('SIRUTA:'+code)).map(([id,name])=>({id,name}));
+add('RO','county',roCounties.length,roCounties.length-missingRoCounties.length,missingRoCounties,missingRoCounties.length?'FAIL':'PASS',{official_registry:'SIRUTA',exhaustive:true,identity_bridge:'data/current/ro-county-siruta-bridge.json'});
 add('RO','state',1,null,[],'OBSERVATIONAL',{reason:'State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/8/9; country geometry is used as import containment context, not a catalog entity.'});
 add('RO','component_locality',sir.filter(r=>Number(r.level)!==2).length,null,[],'NOT_DETERMINED',{official_registry:'SIRUTA',reason:'Inventory declares component localities, but ACTUAL geometry policy does not currently require exhaustive polygon boundaries for settlements.'});
 
