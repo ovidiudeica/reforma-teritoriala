@@ -1,8 +1,14 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
+import {spawnSync} from 'node:child_process';
 
 const MANIFEST='data/current/actual-release-manifest.json';
+const TOPOLOGY_AUDIT='data/current/actual-topology-audit.json';
+const topologyRun=spawnSync(process.execPath,['scripts/process/audit-actual-topology.mjs'],{encoding:'utf8'});
+let topology=null;
+try{topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));}catch{}
+
 const OUTPUT='data/current/actual-release-gate.json';
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const manifestBuf=await readFile(MANIFEST);
@@ -39,6 +45,8 @@ const fingerprint=sha256(Buffer.from(JSON.stringify(fingerprintPayload),'utf8'))
 const expectedSnapshotId='actual-'+fingerprint.slice(0,16);
 const failures=[],checks=[];
 const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
+
+check('master_topology_audit_passes',topologyRun.status===0&&topology?.status==='PASS',{status:topology?.status??null,blocking_issue_count:topology?.blocking_issue_count??null,observation_count:topology?.observation_count??null,process_status:topologyRun.status,error:topologyRun.error?String(topologyRun.error):null});
 
 check('manifest_mode_is_actual',manifest.mode==='ACTUAL',{mode:manifest.mode});
 check('manifest_jurisdictions_are_exactly_ro_md',
@@ -195,7 +203,7 @@ const report={
  manifest_path:MANIFEST,
  manifest_sha256:sha256(manifestBuf),
  status:failures.length?'FAIL':'PASS',
- policy:'The public ACTUAL RO+MD release is publishable only when both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.',
+ policy:'The public ACTUAL RO+MD release is publishable only when master topology has no blocking structural corruption, both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.',
  checks,
  failures
 };
