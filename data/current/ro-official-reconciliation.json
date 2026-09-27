@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T08:25:17.276Z",
+  "generated_at": "2026-09-27T09:02:28.952Z",
   "jurisdiction": "RO",
   "scope": "Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.",
-  "policy": "Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Reviewed official UATs without a distinct OSM boundary may be classified separately only when their covering OSM representation remains structurally stable; reviewed UATs represented at a jurisdiction-specific exceptional OSM admin_level may likewise be resolved only when that representation remains structurally stable. No OSM geometry is promoted to legal geometry. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.",
+  "policy": "Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Reviewed official UATs without a distinct OSM boundary may be classified separately only when their covering OSM representation remains structurally stable; reviewed UATs represented at a jurisdiction-specific exceptional OSM admin_level may likewise be resolved only when that representation remains structurally stable. Reviewed OSM semantic type metadata conflicts may be resolved only when exact name+county identity, OSM parent and official legal type all remain stable. No OSM geometry is promoted to legal geometry. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.",
   "status": "PASS",
   "source": {
     "official_snapshot": "data/sources/ro-siruta-current.json",
@@ -28,7 +28,8 @@
     "reviewed_override_count": 15,
     "reviewed_official_only_resolutions": "data/sources/ro-official-only-reviewed-resolutions.json",
     "reviewed_other_level_resolutions": "data/sources/ro-other-level-reviewed-resolutions.json",
-    "osm_catalog_generated_at": "2026-09-27T08:23:01.883Z"
+    "reviewed_semantic_type_resolutions": "data/sources/ro-semantic-type-reviewed-resolutions.json",
+    "osm_catalog_generated_at": "2026-09-27T09:02:27.975Z"
   },
   "checks": [
     {
@@ -118,6 +119,27 @@
       "detail": {
         "unresolved": []
       }
+    },
+    {
+      "name": "reviewed_semantic_type_legal_ids_exist",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "reviewed_semantic_type_osm_relations_exist",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "reviewed_semantic_type_structural_resolution_stable",
+      "ok": true,
+      "detail": {
+        "unresolved": []
+      }
     }
   ],
   "summary": {
@@ -128,10 +150,11 @@
     "official_only_count": 0,
     "reviewed_official_only_resolution_count": 1,
     "reviewed_other_level_resolution_count": 1,
+    "reviewed_semantic_type_resolution_count": 3,
     "represented_at_other_osm_level_count": 0,
     "duplicate_legal_mapping_count": 0,
     "parent_mismatch_count": 0,
-    "type_mismatch_count": 3,
+    "type_mismatch_count": 0,
     "reviewed_override_count": 15,
     "match_methods": {
       "exact_normalized_name_and_county": 3158,
@@ -185,17 +208,14 @@
       "evidence_registry": "data/sources/ro-other-level-reviewed-resolutions.json"
     }
   ],
-  "represented_at_other_osm_level": [],
-  "duplicate_legal_mappings": [],
-  "parent_mismatches": [],
-  "type_mismatches": [
+  "reviewed_semantic_type_resolutions": [
     {
       "osm_id": "osm-r14743725",
       "osm_relation_id": 14743725,
       "osm_name": "Cehal",
       "osm_parent_id": "osm-r72482",
       "osm_parent_name": "Satu Mare",
-      "osm_entity_type": "commune",
+      "osm_entity_type": "town",
       "osm_claimed_legal_type": "town",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -211,7 +231,10 @@
       "parent_matches": true,
       "type_matches": false,
       "issue": null,
-      "candidates": []
+      "candidates": [],
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "expected_parent_osm_relation_id": 72482,
+      "evidence_registry": "data/sources/ro-semantic-type-reviewed-resolutions.json"
     },
     {
       "osm_id": "osm-r10697874",
@@ -219,7 +242,7 @@
       "osm_name": "Fetești",
       "osm_parent_id": "osm-r2355517",
       "osm_parent_name": "Ialomița",
-      "osm_entity_type": "municipality",
+      "osm_entity_type": "town",
       "osm_claimed_legal_type": "town",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -235,7 +258,10 @@
       "parent_matches": true,
       "type_matches": false,
       "issue": null,
-      "candidates": []
+      "candidates": [],
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "expected_parent_osm_relation_id": 2355517,
+      "evidence_registry": "data/sources/ro-semantic-type-reviewed-resolutions.json"
     },
     {
       "osm_id": "osm-r14778262",
@@ -243,7 +269,7 @@
       "osm_name": "Salcea",
       "osm_parent_id": "osm-r2077868",
       "osm_parent_name": "Suceava",
-      "osm_entity_type": "town",
+      "osm_entity_type": "commune",
       "osm_claimed_legal_type": "commune",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -259,9 +285,16 @@
       "parent_matches": true,
       "type_matches": false,
       "issue": null,
-      "candidates": []
+      "candidates": [],
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "expected_parent_osm_relation_id": 2077868,
+      "evidence_registry": "data/sources/ro-semantic-type-reviewed-resolutions.json"
     }
   ],
+  "represented_at_other_osm_level": [],
+  "duplicate_legal_mappings": [],
+  "parent_mismatches": [],
+  "type_mismatches": [],
   "matches": [
     {
       "osm_id": "osm-r9882383",
@@ -533,7 +566,7 @@
       "osm_name": "Adjud",
       "osm_parent_id": "osm-r2260187",
       "osm_parent_name": "Vrancea",
-      "osm_entity_type": "municipality",
+      "osm_entity_type": "commune",
       "osm_claimed_legal_type": "municipality",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -15041,7 +15074,7 @@
       "osm_name": "Cehal",
       "osm_parent_id": "osm-r72482",
       "osm_parent_name": "Satu Mare",
-      "osm_entity_type": "commune",
+      "osm_entity_type": "town",
       "osm_claimed_legal_type": "town",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -21122,7 +21155,7 @@
       "osm_name": "Cristești",
       "osm_parent_id": "osm-r2248573",
       "osm_parent_name": "Mureș",
-      "osm_entity_type": "commune",
+      "osm_entity_type": "local_uat",
       "osm_claimed_legal_type": "commune",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -27248,7 +27281,7 @@
       "osm_name": "Fetești",
       "osm_parent_id": "osm-r2355517",
       "osm_parent_name": "Ialomița",
-      "osm_entity_type": "municipality",
+      "osm_entity_type": "town",
       "osm_claimed_legal_type": "town",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -56687,7 +56720,7 @@
       "osm_name": "Salcea",
       "osm_parent_id": "osm-r2077868",
       "osm_parent_name": "Suceava",
-      "osm_entity_type": "town",
+      "osm_entity_type": "commune",
       "osm_claimed_legal_type": "commune",
       "explicit_siruta_tag": null,
       "reviewed_override": null,

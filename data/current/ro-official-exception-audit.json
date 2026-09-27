@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T08:25:32.494Z",
+  "generated_at": "2026-09-27T09:02:36.766Z",
   "jurisdiction": "RO",
-  "scope": "Targeted audit of unresolved/duplicate/type-conflict cases, reviewed missing-distinct-boundary cases, and reviewed exceptional cross-level OSM representations from official SIRUTA reconciliation.",
-  "policy": "Exact SIRUTA hierarchy, official locality containment and OSM provenance are recorded; no fuzzy candidate is auto-assigned. An OSM relation that overcovers multiple legal UAT locality sets is retained only as representation evidence and is never promoted to legal geometry for the missing UAT. Jurisdiction-specific exceptional OSM admin levels are accepted only through reviewed structural resolutions with stable legal identity, hierarchy, nested subdivisions and OSM history.",
+  "scope": "Targeted audit of unresolved/duplicate/type-conflict cases, reviewed missing-distinct-boundary cases, reviewed exceptional cross-level OSM representations, and reviewed OSM semantic type metadata conflicts from official SIRUTA reconciliation.",
+  "policy": "Exact SIRUTA hierarchy, official locality containment and OSM provenance are recorded; no fuzzy candidate is auto-assigned. An OSM relation that overcovers multiple legal UAT locality sets is retained only as representation evidence and is never promoted to legal geometry for the missing UAT. Jurisdiction-specific exceptional OSM admin levels and OSM semantic type metadata conflicts are accepted only through reviewed resolutions with stable legal identity, hierarchy, geometry containment and OSM history.",
   "status": "PASS",
   "checks": [
     {
@@ -19,7 +19,7 @@
       "diagnostic": true,
       "detail": {
         "error": null,
-        "feature_count": 66
+        "feature_count": 78
       }
     },
     {
@@ -40,7 +40,7 @@
       "name": "all_type_mismatches_audited",
       "ok": true,
       "detail": {
-        "count": 3
+        "count": 0
       }
     },
     {
@@ -67,6 +67,13 @@
     },
     {
       "name": "reviewed_other_level_resolutions_stable",
+      "ok": true,
+      "detail": {
+        "failed": []
+      }
+    },
+    {
+      "name": "reviewed_semantic_type_resolutions_stable",
       "ok": true,
       "detail": {
         "failed": []
@@ -101,11 +108,12 @@
     "exact_component_locality_single_uat_count": 0,
     "requires_review_count": 0,
     "duplicate_group_count": 0,
-    "type_mismatch_count": 3,
+    "type_mismatch_count": 0,
     "cross_county_parent_conflict_count": 0,
     "reviewed_parent_assignment_resolution_count": 1,
     "reviewed_official_only_resolution_count": 1,
     "reviewed_other_level_resolution_count": 1,
+    "reviewed_semantic_type_resolution_count": 3,
     "reviewed_override_count": 15,
     "reviewed_override_containment_failure_count": 0,
     "history_error_count": 0,
@@ -113,671 +121,7 @@
   },
   "unmatched": [],
   "duplicate_groups": [],
-  "type_mismatches": [
-    {
-      "osm_id": "osm-r14743725",
-      "osm_relation_id": 14743725,
-      "osm_name": "Cehal",
-      "osm_parent_id": "osm-r72482",
-      "osm_parent_name": "Satu Mare",
-      "osm_entity_type": "commune",
-      "osm_claimed_legal_type": "town",
-      "explicit_siruta_tag": null,
-      "reviewed_override": null,
-      "legal_id": "137363",
-      "legal_name": "CEHAL",
-      "legal_type": "commune",
-      "legal_type_code": "3",
-      "legal_parent_id": "305",
-      "legal_parent_name": "JUDEȚUL SATU MARE",
-      "match_method": "exact_normalized_name_and_county",
-      "confidence": "medium",
-      "matched": true,
-      "parent_matches": true,
-      "type_matches": false,
-      "issue": null,
-      "candidates": [],
-      "current_osm_tags": {
-        "admin_level": "8",
-        "boundary": "administrative",
-        "name": "Cehal",
-        "name:hu": "Oláhcsaholy",
-        "name:prefix": "Orașul",
-        "place": "town",
-        "place:ro": "oraș",
-        "source": "ANCPI 3rd order set data.gov.ro",
-        "type": "boundary"
-      },
-      "history": {
-        "relation_id": 14743725,
-        "created_at": "2022-10-28T20:51:36Z",
-        "created_changeset": 128190989,
-        "current_version": 2,
-        "last_modified_at": "2024-09-06T09:56:58Z",
-        "last_changeset": 156266213,
-        "current_tags": {
-          "admin_level": "8",
-          "boundary": "administrative",
-          "name": "Cehal",
-          "name:hu": "Oláhcsaholy",
-          "name:prefix": "Orașul",
-          "place": "town",
-          "place:ro": "oraș",
-          "source": "ANCPI 3rd order set data.gov.ro",
-          "type": "boundary"
-        },
-        "current_member_count": 8,
-        "current_members": [
-          {
-            "type": "node",
-            "ref": 463186504,
-            "role": "admin_centre"
-          },
-          {
-            "type": "way",
-            "ref": 775618965,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 775618966,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 21850509,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 1107056260,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 775619454,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 1107056259,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 1107059503,
-            "role": "outer"
-          }
-        ],
-        "versions": [
-          {
-            "version": 1,
-            "timestamp": "2022-10-28T20:51:36Z",
-            "changeset": 128190989,
-            "user": "ted3sco",
-            "tags": {
-              "admin_level": "8",
-              "boundary": "administrative",
-              "name": "Cehal",
-              "name:prefix": "Orașul",
-              "place": "town",
-              "place:ro": "oraș",
-              "source": "ANCPI 3rd order set data.gov.ro",
-              "type": "boundary"
-            },
-            "members": [
-              {
-                "type": "node",
-                "ref": 463186504,
-                "role": "admin_centre"
-              },
-              {
-                "type": "way",
-                "ref": 775618965,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 775618966,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 21850509,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1107056260,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 775619454,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1107056259,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1107059503,
-                "role": "outer"
-              }
-            ]
-          },
-          {
-            "version": 2,
-            "timestamp": "2024-09-06T09:56:58Z",
-            "changeset": 156266213,
-            "user": "grozsa11",
-            "tags": {
-              "admin_level": "8",
-              "boundary": "administrative",
-              "name": "Cehal",
-              "name:hu": "Oláhcsaholy",
-              "name:prefix": "Orașul",
-              "place": "town",
-              "place:ro": "oraș",
-              "source": "ANCPI 3rd order set data.gov.ro",
-              "type": "boundary"
-            },
-            "members": [
-              {
-                "type": "node",
-                "ref": 463186504,
-                "role": "admin_centre"
-              },
-              {
-                "type": "way",
-                "ref": 775618965,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 775618966,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 21850509,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1107056260,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 775619454,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1107056259,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1107059503,
-                "role": "outer"
-              }
-            ]
-          }
-        ],
-        "history_signals": {
-          "name_values": [
-            "Cehal"
-          ],
-          "official_name_values": [],
-          "admin_level_values": [
-            "8"
-          ],
-          "place_values": [
-            "town"
-          ],
-          "place_ro_values": [
-            "oraș"
-          ],
-          "source_values": [
-            "ANCPI 3rd order set data.gov.ro"
-          ],
-          "siruta_code_values": []
-        }
-      },
-      "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
-    },
-    {
-      "osm_id": "osm-r10697874",
-      "osm_relation_id": 10697874,
-      "osm_name": "Fetești",
-      "osm_parent_id": "osm-r2355517",
-      "osm_parent_name": "Ialomița",
-      "osm_entity_type": "municipality",
-      "osm_claimed_legal_type": "town",
-      "explicit_siruta_tag": null,
-      "reviewed_override": null,
-      "legal_id": "92701",
-      "legal_name": "FETEȘTI",
-      "legal_type": "municipality",
-      "legal_type_code": "4",
-      "legal_parent_id": "216",
-      "legal_parent_name": "JUDEȚUL IALOMIȚA",
-      "match_method": "exact_normalized_name_and_county",
-      "confidence": "medium",
-      "matched": true,
-      "parent_matches": true,
-      "type_matches": false,
-      "issue": null,
-      "candidates": [],
-      "current_osm_tags": {
-        "admin_level": "8",
-        "boundary": "administrative",
-        "name": "Fetești",
-        "name:prefix": "Orașul",
-        "place": "town",
-        "place:ro": "oraș",
-        "source": "ANCPI 3rd order set form data.gov.ro",
-        "type": "boundary",
-        "wikidata": "Q598577"
-      },
-      "history": {
-        "relation_id": 10697874,
-        "created_at": "2020-02-10T13:14:00Z",
-        "created_changeset": 80797689,
-        "current_version": 2,
-        "last_modified_at": "2024-12-31T16:03:56Z",
-        "last_changeset": 160839380,
-        "current_tags": {
-          "admin_level": "8",
-          "boundary": "administrative",
-          "name": "Fetești",
-          "name:prefix": "Orașul",
-          "place": "town",
-          "place:ro": "oraș",
-          "source": "ANCPI 3rd order set form data.gov.ro",
-          "type": "boundary",
-          "wikidata": "Q598577"
-        },
-        "current_member_count": 5,
-        "current_members": [
-          {
-            "type": "node",
-            "ref": 118231456,
-            "role": "admin_centre"
-          },
-          {
-            "type": "way",
-            "ref": 771315610,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 771315612,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 771315606,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 771315614,
-            "role": "outer"
-          }
-        ],
-        "versions": [
-          {
-            "version": 1,
-            "timestamp": "2020-02-10T13:14:00Z",
-            "changeset": 80797689,
-            "user": "ted3sco",
-            "tags": {
-              "admin_level": "8",
-              "boundary": "administrative",
-              "name": "Fetești",
-              "name:prefix": "Orașul",
-              "place": "town",
-              "place:ro": "oraș",
-              "source": "ANCPI 3rd order set form data.gov.ro",
-              "type": "boundary"
-            },
-            "members": [
-              {
-                "type": "node",
-                "ref": 118231456,
-                "role": "admin_centre"
-              },
-              {
-                "type": "way",
-                "ref": 771315610,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 771315612,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 771315606,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 771315614,
-                "role": "outer"
-              }
-            ]
-          },
-          {
-            "version": 2,
-            "timestamp": "2024-12-31T16:03:56Z",
-            "changeset": 160839380,
-            "user": "ooohhh",
-            "tags": {
-              "admin_level": "8",
-              "boundary": "administrative",
-              "name": "Fetești",
-              "name:prefix": "Orașul",
-              "place": "town",
-              "place:ro": "oraș",
-              "source": "ANCPI 3rd order set form data.gov.ro",
-              "type": "boundary",
-              "wikidata": "Q598577"
-            },
-            "members": [
-              {
-                "type": "node",
-                "ref": 118231456,
-                "role": "admin_centre"
-              },
-              {
-                "type": "way",
-                "ref": 771315610,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 771315612,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 771315606,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 771315614,
-                "role": "outer"
-              }
-            ]
-          }
-        ],
-        "history_signals": {
-          "name_values": [
-            "Fetești"
-          ],
-          "official_name_values": [],
-          "admin_level_values": [
-            "8"
-          ],
-          "place_values": [
-            "town"
-          ],
-          "place_ro_values": [
-            "oraș"
-          ],
-          "source_values": [
-            "ANCPI 3rd order set form data.gov.ro"
-          ],
-          "siruta_code_values": []
-        }
-      },
-      "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
-    },
-    {
-      "osm_id": "osm-r14778262",
-      "osm_relation_id": 14778262,
-      "osm_name": "Salcea",
-      "osm_parent_id": "osm-r2077868",
-      "osm_parent_name": "Suceava",
-      "osm_entity_type": "town",
-      "osm_claimed_legal_type": "commune",
-      "explicit_siruta_tag": null,
-      "reviewed_override": null,
-      "legal_id": "146370",
-      "legal_name": "SALCEA",
-      "legal_type": "town",
-      "legal_type_code": "2",
-      "legal_parent_id": "332",
-      "legal_parent_name": "JUDEȚUL SUCEAVA",
-      "match_method": "exact_normalized_name_and_county",
-      "confidence": "medium",
-      "matched": true,
-      "parent_matches": true,
-      "type_matches": false,
-      "issue": null,
-      "candidates": [],
-      "current_osm_tags": {
-        "admin_level": "8",
-        "boundary": "administrative",
-        "name": "Salcea",
-        "name:prefix": "Comuna",
-        "place": "municipality",
-        "place:ro": "comună",
-        "source": "ANCPI 3rd order set data.gov.ro",
-        "type": "boundary",
-        "wikidata": "Q253825"
-      },
-      "history": {
-        "relation_id": 14778262,
-        "created_at": "2022-11-06T15:08:10Z",
-        "created_changeset": 128559224,
-        "current_version": 2,
-        "last_modified_at": "2025-01-06T16:07:21Z",
-        "last_changeset": 161064681,
-        "current_tags": {
-          "admin_level": "8",
-          "boundary": "administrative",
-          "name": "Salcea",
-          "name:prefix": "Comuna",
-          "place": "municipality",
-          "place:ro": "comună",
-          "source": "ANCPI 3rd order set data.gov.ro",
-          "type": "boundary",
-          "wikidata": "Q253825"
-        },
-        "current_member_count": 8,
-        "current_members": [
-          {
-            "type": "node",
-            "ref": 340928449,
-            "role": "admin_centre"
-          },
-          {
-            "type": "way",
-            "ref": 1110769814,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 1110769800,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 759235085,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 1110769807,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 1110769797,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 1110769810,
-            "role": "outer"
-          },
-          {
-            "type": "way",
-            "ref": 1110769809,
-            "role": "outer"
-          }
-        ],
-        "versions": [
-          {
-            "version": 1,
-            "timestamp": "2022-11-06T15:08:10Z",
-            "changeset": 128559224,
-            "user": "ted3sco",
-            "tags": {
-              "admin_level": "8",
-              "boundary": "administrative",
-              "name": "Salcea",
-              "name:prefix": "Comuna",
-              "place": "municipality",
-              "place:ro": "comună",
-              "source": "ANCPI 3rd order set data.gov.ro",
-              "type": "boundary"
-            },
-            "members": [
-              {
-                "type": "node",
-                "ref": 340928449,
-                "role": "admin_centre"
-              },
-              {
-                "type": "way",
-                "ref": 1110769814,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769800,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 759235085,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769807,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769797,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769810,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769809,
-                "role": "outer"
-              }
-            ]
-          },
-          {
-            "version": 2,
-            "timestamp": "2025-01-06T16:07:21Z",
-            "changeset": 161064681,
-            "user": "ooohhh",
-            "tags": {
-              "admin_level": "8",
-              "boundary": "administrative",
-              "name": "Salcea",
-              "name:prefix": "Comuna",
-              "place": "municipality",
-              "place:ro": "comună",
-              "source": "ANCPI 3rd order set data.gov.ro",
-              "type": "boundary",
-              "wikidata": "Q253825"
-            },
-            "members": [
-              {
-                "type": "node",
-                "ref": 340928449,
-                "role": "admin_centre"
-              },
-              {
-                "type": "way",
-                "ref": 1110769814,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769800,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 759235085,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769807,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769797,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769810,
-                "role": "outer"
-              },
-              {
-                "type": "way",
-                "ref": 1110769809,
-                "role": "outer"
-              }
-            ]
-          }
-        ],
-        "history_signals": {
-          "name_values": [
-            "Salcea"
-          ],
-          "official_name_values": [],
-          "admin_level_values": [
-            "8"
-          ],
-          "place_values": [
-            "municipality"
-          ],
-          "place_ro_values": [
-            "comună"
-          ],
-          "source_values": [
-            "ANCPI 3rd order set data.gov.ro"
-          ],
-          "siruta_code_values": []
-        }
-      },
-      "audit_classification": "official_legal_type_conflicts_with_osm_classifier"
-    }
-  ],
+  "type_mismatches": [],
   "cross_county_parent_conflicts": [],
   "reviewed_parent_assignment_resolutions": [
     {
@@ -11984,6 +11328,776 @@
           "siruta_code_values": []
         }
       },
+      "geometry_modified": false,
+      "legal_geometry_claimed": false,
+      "stable": true
+    }
+  ],
+  "reviewed_semantic_type_resolutions": [
+    {
+      "osm_relation_id": 14743725,
+      "osm_name": "Cehal",
+      "legal_id": "137363",
+      "legal_name": "CEHAL",
+      "legal_type": "commune",
+      "legal_parent_name": "JUDEȚUL SATU MARE",
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "osm_claimed_legal_type": "town",
+      "expected_parent_osm_relation_id": 72482,
+      "actual_parent_osm_relation_id": 72482,
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Cehal",
+        "name:hu": "Oláhcsaholy",
+        "name:prefix": "Orașul",
+        "place": "town",
+        "place:ro": "oraș",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary"
+      },
+      "expected_osm_tags": {
+        "name:prefix": "Orașul",
+        "place": "town",
+        "place:ro": "oraș"
+      },
+      "current_tags_match": true,
+      "official_locality_containment": {
+        "legal_id": "137363",
+        "legal_name": "CEHAL",
+        "legal_parent_name": "JUDEȚUL SATU MARE",
+        "official_locality_count": 3,
+        "inside_count": 3,
+        "inside_localities": [
+          {
+            "siruta": "137390",
+            "name": "Orbău"
+          },
+          {
+            "siruta": "137381",
+            "name": "Cehal"
+          },
+          {
+            "siruta": "137372",
+            "name": "Cehăluţ"
+          }
+        ]
+      },
+      "expected_component_locality_ids": [
+        "137372",
+        "137381",
+        "137390"
+      ],
+      "actual_component_locality_ids": [
+        "137372",
+        "137381",
+        "137390"
+      ],
+      "component_locality_ids_match": true,
+      "osm_history": {
+        "relation_id": 14743725,
+        "created_at": "2022-10-28T20:51:36Z",
+        "created_changeset": 128190989,
+        "current_version": 2,
+        "last_modified_at": "2024-09-06T09:56:58Z",
+        "last_changeset": 156266213,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Cehal",
+          "name:hu": "Oláhcsaholy",
+          "name:prefix": "Orașul",
+          "place": "town",
+          "place:ro": "oraș",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary"
+        },
+        "current_member_count": 8,
+        "current_members": [
+          {
+            "type": "node",
+            "ref": 463186504,
+            "role": "admin_centre"
+          },
+          {
+            "type": "way",
+            "ref": 775618965,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 775618966,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 21850509,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1107056260,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 775619454,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1107056259,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1107059503,
+            "role": "outer"
+          }
+        ],
+        "versions": [
+          {
+            "version": 1,
+            "timestamp": "2022-10-28T20:51:36Z",
+            "changeset": 128190989,
+            "user": "ted3sco",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Cehal",
+              "name:prefix": "Orașul",
+              "place": "town",
+              "place:ro": "oraș",
+              "source": "ANCPI 3rd order set data.gov.ro",
+              "type": "boundary"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 463186504,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 775618965,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 775618966,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 21850509,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107056260,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 775619454,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107056259,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107059503,
+                "role": "outer"
+              }
+            ]
+          },
+          {
+            "version": 2,
+            "timestamp": "2024-09-06T09:56:58Z",
+            "changeset": 156266213,
+            "user": "grozsa11",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Cehal",
+              "name:hu": "Oláhcsaholy",
+              "name:prefix": "Orașul",
+              "place": "town",
+              "place:ro": "oraș",
+              "source": "ANCPI 3rd order set data.gov.ro",
+              "type": "boundary"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 463186504,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 775618965,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 775618966,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 21850509,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107056260,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 775619454,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107056259,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107059503,
+                "role": "outer"
+              }
+            ]
+          }
+        ],
+        "history_signals": {
+          "name_values": [
+            "Cehal"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "town"
+          ],
+          "place_ro_values": [
+            "oraș"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "semantic_tags_stable_across_history": true,
+      "geometry_modified": false,
+      "legal_geometry_claimed": false,
+      "stable": true
+    },
+    {
+      "osm_relation_id": 10697874,
+      "osm_name": "Fetești",
+      "legal_id": "92701",
+      "legal_name": "FETEȘTI",
+      "legal_type": "municipality",
+      "legal_parent_name": "JUDEȚUL IALOMIȚA",
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "osm_claimed_legal_type": "town",
+      "expected_parent_osm_relation_id": 2355517,
+      "actual_parent_osm_relation_id": 2355517,
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Fetești",
+        "name:prefix": "Orașul",
+        "place": "town",
+        "place:ro": "oraș",
+        "source": "ANCPI 3rd order set form data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q598577"
+      },
+      "expected_osm_tags": {
+        "name:prefix": "Orașul",
+        "place": "town",
+        "place:ro": "oraș"
+      },
+      "current_tags_match": true,
+      "official_locality_containment": {
+        "legal_id": "92701",
+        "legal_name": "FETEȘTI",
+        "legal_parent_name": "JUDEȚUL IALOMIȚA",
+        "official_locality_count": 4,
+        "inside_count": 4,
+        "inside_localities": [
+          {
+            "siruta": "92747",
+            "name": "Vlaşca"
+          },
+          {
+            "siruta": "92738",
+            "name": "Feteşti-Gară"
+          },
+          {
+            "siruta": "92710",
+            "name": "Feteşti"
+          },
+          {
+            "siruta": "92729",
+            "name": "Buliga"
+          }
+        ]
+      },
+      "expected_component_locality_ids": [
+        "92710",
+        "92729",
+        "92738",
+        "92747"
+      ],
+      "actual_component_locality_ids": [
+        "92710",
+        "92729",
+        "92738",
+        "92747"
+      ],
+      "component_locality_ids_match": true,
+      "osm_history": {
+        "relation_id": 10697874,
+        "created_at": "2020-02-10T13:14:00Z",
+        "created_changeset": 80797689,
+        "current_version": 2,
+        "last_modified_at": "2024-12-31T16:03:56Z",
+        "last_changeset": 160839380,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Fetești",
+          "name:prefix": "Orașul",
+          "place": "town",
+          "place:ro": "oraș",
+          "source": "ANCPI 3rd order set form data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q598577"
+        },
+        "current_member_count": 5,
+        "current_members": [
+          {
+            "type": "node",
+            "ref": 118231456,
+            "role": "admin_centre"
+          },
+          {
+            "type": "way",
+            "ref": 771315610,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 771315612,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 771315606,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 771315614,
+            "role": "outer"
+          }
+        ],
+        "versions": [
+          {
+            "version": 1,
+            "timestamp": "2020-02-10T13:14:00Z",
+            "changeset": 80797689,
+            "user": "ted3sco",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Fetești",
+              "name:prefix": "Orașul",
+              "place": "town",
+              "place:ro": "oraș",
+              "source": "ANCPI 3rd order set form data.gov.ro",
+              "type": "boundary"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 118231456,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 771315610,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 771315612,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 771315606,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 771315614,
+                "role": "outer"
+              }
+            ]
+          },
+          {
+            "version": 2,
+            "timestamp": "2024-12-31T16:03:56Z",
+            "changeset": 160839380,
+            "user": "ooohhh",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Fetești",
+              "name:prefix": "Orașul",
+              "place": "town",
+              "place:ro": "oraș",
+              "source": "ANCPI 3rd order set form data.gov.ro",
+              "type": "boundary",
+              "wikidata": "Q598577"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 118231456,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 771315610,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 771315612,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 771315606,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 771315614,
+                "role": "outer"
+              }
+            ]
+          }
+        ],
+        "history_signals": {
+          "name_values": [
+            "Fetești"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "town"
+          ],
+          "place_ro_values": [
+            "oraș"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set form data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "semantic_tags_stable_across_history": true,
+      "geometry_modified": false,
+      "legal_geometry_claimed": false,
+      "stable": true
+    },
+    {
+      "osm_relation_id": 14778262,
+      "osm_name": "Salcea",
+      "legal_id": "146370",
+      "legal_name": "SALCEA",
+      "legal_type": "town",
+      "legal_parent_name": "JUDEȚUL SUCEAVA",
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "osm_claimed_legal_type": "commune",
+      "expected_parent_osm_relation_id": 2077868,
+      "actual_parent_osm_relation_id": 2077868,
+      "current_osm_tags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Salcea",
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună",
+        "source": "ANCPI 3rd order set data.gov.ro",
+        "type": "boundary",
+        "wikidata": "Q253825"
+      },
+      "expected_osm_tags": {
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună"
+      },
+      "current_tags_match": true,
+      "official_locality_containment": {
+        "legal_id": "146370",
+        "legal_name": "SALCEA",
+        "legal_parent_name": "JUDEȚUL SUCEAVA",
+        "official_locality_count": 5,
+        "inside_count": 5,
+        "inside_localities": [
+          {
+            "siruta": "146405",
+            "name": "Plopeni"
+          },
+          {
+            "siruta": "146414",
+            "name": "Prelipca"
+          },
+          {
+            "siruta": "146389",
+            "name": "Salcea"
+          },
+          {
+            "siruta": "146398",
+            "name": "Mereni"
+          },
+          {
+            "siruta": "146423",
+            "name": "Văratec"
+          }
+        ]
+      },
+      "expected_component_locality_ids": [
+        "146389",
+        "146398",
+        "146405",
+        "146414",
+        "146423"
+      ],
+      "actual_component_locality_ids": [
+        "146389",
+        "146398",
+        "146405",
+        "146414",
+        "146423"
+      ],
+      "component_locality_ids_match": true,
+      "osm_history": {
+        "relation_id": 14778262,
+        "created_at": "2022-11-06T15:08:10Z",
+        "created_changeset": 128559224,
+        "current_version": 2,
+        "last_modified_at": "2025-01-06T16:07:21Z",
+        "last_changeset": 161064681,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "name": "Salcea",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q253825"
+        },
+        "current_member_count": 8,
+        "current_members": [
+          {
+            "type": "node",
+            "ref": 340928449,
+            "role": "admin_centre"
+          },
+          {
+            "type": "way",
+            "ref": 1110769814,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1110769800,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 759235085,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1110769807,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1110769797,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1110769810,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1110769809,
+            "role": "outer"
+          }
+        ],
+        "versions": [
+          {
+            "version": 1,
+            "timestamp": "2022-11-06T15:08:10Z",
+            "changeset": 128559224,
+            "user": "ted3sco",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Salcea",
+              "name:prefix": "Comuna",
+              "place": "municipality",
+              "place:ro": "comună",
+              "source": "ANCPI 3rd order set data.gov.ro",
+              "type": "boundary"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 340928449,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 1110769814,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769800,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 759235085,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769807,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769797,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769810,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769809,
+                "role": "outer"
+              }
+            ]
+          },
+          {
+            "version": 2,
+            "timestamp": "2025-01-06T16:07:21Z",
+            "changeset": 161064681,
+            "user": "ooohhh",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Salcea",
+              "name:prefix": "Comuna",
+              "place": "municipality",
+              "place:ro": "comună",
+              "source": "ANCPI 3rd order set data.gov.ro",
+              "type": "boundary",
+              "wikidata": "Q253825"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 340928449,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 1110769814,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769800,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 759235085,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769807,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769797,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769810,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1110769809,
+                "role": "outer"
+              }
+            ]
+          }
+        ],
+        "history_signals": {
+          "name_values": [
+            "Salcea"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "semantic_tags_stable_across_history": true,
       "geometry_modified": false,
       "legal_geometry_claimed": false,
       "stable": true
