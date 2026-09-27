@@ -28,6 +28,7 @@ const siruta=json('ro_official');
 const cuatm=json('md_official');
 const mdIndividual=json('md_individual_review');
 const mdSemantic=json('md_semantic_bridge');
+const settlementPolicy=json('settlement_policy');
 const jurisdictions=['RO','MD'];
 const tierKeys=['ro_overview','ro_local','ro_detail','md_overview','md_local','md_detail'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -49,7 +50,22 @@ const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!
 
 check('master_topology_audit_passes',topologyRun.status===0&&topology?.status==='PASS',{status:topology?.status??null,blocking_issue_count:topology?.blocking_issue_count??null,observation_count:topology?.observation_count??null,process_status:topologyRun.status,error:topologyRun.error?String(topologyRun.error):null});
 
-check('manifest_quality_gates_pass',manifest.quality_gates?.topology?.status==='PASS'&&manifest.quality_gates?.regression?.status==='PASS'&&manifest.quality_gates?.structural_completeness?.status==='PASS',{topology:manifest.quality_gates?.topology?.status??null,regression:manifest.quality_gates?.regression?.status??null,structural_completeness:manifest.quality_gates?.structural_completeness?.status??null});
+check('manifest_quality_gates_pass',manifest.quality_gates?.topology?.status==='PASS'&&manifest.quality_gates?.regression?.status==='PASS'&&manifest.quality_gates?.structural_completeness?.status==='PASS',{topology:manifest.quality_gates?.topology?.status??null,regression:manifest.quality_gates?.regression?.status??null,structural_completeness:manifest.quality_gates?.structural_completeness?.status??null,structural_blocking_issue_count:manifest.quality_gates?.structural_completeness?.blocking_issue_count??null});
+check('settlement_policy_is_explicit_and_fail_closed',
+ settlementPolicy.schema_version===1
+ && settlementPolicy.mode==='ACTUAL'
+ && settlementPolicy.scope==='settlements_and_component_localities'
+ && settlementPolicy.common_requirements?.exhaustive_polygon_coverage_required===false
+ && settlementPolicy.common_requirements?.missing_official_settlement_polygon_is_blocking===false
+ && settlementPolicy.common_requirements?.geometry_coordinate_mutation_allowed===false
+ && settlementPolicy.common_requirements?.unreviewed_identity_inference_allowed===false,
+ {schema_version:settlementPolicy.schema_version??null,mode:settlementPolicy.mode??null,scope:settlementPolicy.scope??null,common_requirements:settlementPolicy.common_requirements??null});
+check('manifest_records_current_settlement_policy',
+ manifest.settlement_policy?.schema_version===settlementPolicy.schema_version
+ && manifest.settlement_policy?.policy_version===settlementPolicy.policy_version
+ && manifest.settlement_policy?.scope===settlementPolicy.scope
+ && manifest.settlement_policy?.sha256===currentHashes.settlement_policy,
+ {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,scope:settlementPolicy.scope??null,sha256:currentHashes.settlement_policy??null}});
 check('md_semantic_bridge_passes',mdSemantic.status==='PASS',{status:mdSemantic.status??null,summary:mdSemantic.summary??null});
 check('manifest_records_current_md_semantic_bridge',manifest.semantic_bridges?.MD?.status==='PASS'&&manifest.semantic_bridges?.MD?.sha256===currentHashes.md_semantic_bridge,{manifest:manifest.semantic_bridges?.MD??null,actual:{status:mdSemantic.status??null,sha256:currentHashes.md_semantic_bridge??null}});
 check('manifest_mode_is_actual',manifest.mode==='ACTUAL',{mode:manifest.mode});
