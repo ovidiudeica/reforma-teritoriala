@@ -2,9 +2,9 @@
   "schema_version": 2,
   "generated_at": "2026-09-27T20:37:27.458Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-6a7eac47d66d6701",
+  "snapshot_id": "actual-a9e5a4ddcb5277ef",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "313e3c645d9773394dd7f59a6c4ed591f25ed711896485b7cfbf795573dde0c6",
+  "manifest_sha256": "242099b55683c56358cd36e318008f3def61c76b1a7a23c226c8513f8f20cb7b",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -74,7 +74,7 @@
             "contract": "actual-geometry-role-v1",
             "schema_version": 1
           },
-          "public_contract": "actual-public-entity-v2",
+          "public_contract": "actual-public-entity-v3",
           "administrative_geometry_fallbacks": {
             "RO": {
               "path": "data/sources/ro-ancpi-uat-fallbacks.json",
@@ -112,7 +112,7 @@
               ]
             }
           },
-          "sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5"
+          "sha256": "27c3e9fb1b1b3c87d2489320268ad5c85bf26dc53368d19d098fda476fbe2d2d"
         },
         "actual": {
           "schema_version": 1,
@@ -124,8 +124,8 @@
             "contract": "actual-geometry-role-v1",
             "schema_version": 1
           },
-          "sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5",
-          "public_contract": "actual-public-entity-v2",
+          "sha256": "27c3e9fb1b1b3c87d2489320268ad5c85bf26dc53368d19d098fda476fbe2d2d",
+          "public_contract": "actual-public-entity-v3",
           "administrative_geometry_fallbacks": {
             "RO": {
               "path": "data/sources/ro-ancpi-uat-fallbacks.json",
@@ -473,8 +473,8 @@
       "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "85d1647b5eb9bf4ba8c7f2776e2c0f1029e09e8b7cdb9a687da663d9bbd41089",
-        "actual": "85d1647b5eb9bf4ba8c7f2776e2c0f1029e09e8b7cdb9a687da663d9bbd41089"
+        "expected": "596a7fa13222f9e5126a49ab6b7e4c402d1e6c133750ced132f664a5ad98234c",
+        "actual": "596a7fa13222f9e5126a49ab6b7e4c402d1e6c133750ced132f664a5ad98234c"
       }
     },
     {
@@ -482,13 +482,13 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "algorithm": "actual-semantic-v2",
-          "sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-          "release_identity_basis": "semantic_content_v2",
+          "algorithm": "actual-semantic-v3",
+          "sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+          "release_identity_basis": "semantic_content_v3",
           "reused_base_release": false
         },
-        "expected": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-        "actual": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09"
+        "expected": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+        "actual": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446"
       }
     },
     {
@@ -496,9 +496,9 @@
       "ok": true,
       "detail": {
         "content_identity": {
-          "algorithm": "actual-semantic-v2",
-          "sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-          "release_identity_basis": "semantic_content_v2",
+          "algorithm": "actual-semantic-v3",
+          "sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+          "release_identity_basis": "semantic_content_v3",
           "reused_base_release": false
         }
       }
@@ -507,8 +507,8 @@
       "name": "release_fingerprint_matches_semantic_identity",
       "ok": true,
       "detail": {
-        "expected": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-        "actual": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
+        "expected": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+        "actual": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
         "reused_base_release": false
       }
     },
@@ -516,8 +516,8 @@
       "name": "snapshot_id_matches_stable_release_identity",
       "ok": true,
       "detail": {
-        "expected": "actual-6a7eac47d66d6701",
-        "actual": "actual-6a7eac47d66d6701",
+        "expected": "actual-a9e5a4ddcb5277ef",
+        "actual": "actual-a9e5a4ddcb5277ef",
         "reused_base_release": false
       }
     },
@@ -617,13 +617,13 @@
       "name": "public_contract_identity_set_matches_catalog",
       "ok": true,
       "detail": {
-        "expected_contract": "actual-public-entity-v2",
-        "contract": "actual-public-entity-v2",
-        "expected_schema_version": 2,
-        "schema_version": 2,
-        "public_count": 5830,
+        "expected_contract": "actual-public-entity-v3",
+        "contract": "actual-public-entity-v3",
+        "expected_schema_version": 3,
+        "schema_version": 3,
+        "public_count": 5848,
         "administrative_catalog_count": 5830,
-        "statistical_only_count": 0,
+        "statistical_only_count": 18,
         "missing": [],
         "unexpected": []
       }
@@ -647,12 +647,12 @@
       "ok": true,
       "detail": {
         "public": {
-          "RO": 3234,
-          "MD": 2596
+          "RO": 3246,
+          "MD": 2602
         },
         "expected": {
-          "RO": 3234,
-          "MD": 2596
+          "RO": 3246,
+          "MD": 2602
         },
         "administrative": {
           "RO": 3234,
@@ -675,7 +675,7 @@
         "missing": [],
         "administrative_geometry_count": 5830,
         "administrative_entity_count": 5830,
-        "public_entity_count": 5830
+        "public_entity_count": 5848
       }
     },
     {
@@ -706,21 +706,22 @@
       "detail": {
         "manifest": {
           "path": "public/data/actual-entities.json",
-          "contract": "actual-public-entity-v2",
-          "schema_version": 2,
+          "contract": "actual-public-entity-v3",
+          "schema_version": 3,
           "generated_at": "2026-10-05T23:50:05.218Z",
-          "entity_count": 5830,
+          "entity_count": 5848,
           "entity_count_by_jurisdiction": {
-            "RO": 3234,
-            "MD": 2596
+            "RO": 3246,
+            "MD": 2602
           },
           "legal_identity_status_counts": {
-            "not_bound_to_official_registry": 13,
             "reconciled": 5693,
             "outside_current_legal_registry": 123,
-            "unresolved": 1
+            "unresolved": 1,
+            "statistical_identity": 18,
+            "not_bound_to_official_registry": 13
           },
-          "sha256": "b9f60d1e1463e324961b21b211ec66f7124918aa9a787ee43d07c73c481640ea",
+          "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
           "geometry_chunks": {
             "path": "public/data/actual-geometry-chunks.json",
             "contract": "actual-public-geometry-chunks-v1",
@@ -763,12 +764,251 @@
                 "sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe"
               }
             }
+          },
+          "hierarchy": {
+            "path": "public/data/actual-consolidated-tree.json",
+            "contract": "actual-consolidated-hierarchy-v1",
+            "node_count": 5848,
+            "root_ids": [
+              "osm-r90689",
+              "osm-r58974"
+            ],
+            "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+          },
+          "statistical_geometry": {
+            "RO": {
+              "path": "public/geo/actual/ro-statistical.geojson",
+              "contract": "actual-public-statistical-geometry-v1",
+              "feature_count": 12,
+              "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7"
+            },
+            "MD": {
+              "path": "public/geo/actual/md-statistical.geojson",
+              "contract": "actual-public-statistical-geometry-v1",
+              "feature_count": 6,
+              "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc"
+            }
           }
         },
         "actual": {
-          "contract": "actual-public-entity-v2",
-          "entity_count": 5830,
-          "sha256": "b9f60d1e1463e324961b21b211ec66f7124918aa9a787ee43d07c73c481640ea"
+          "contract": "actual-public-entity-v3",
+          "entity_count": 5848,
+          "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700"
+        }
+      }
+    },
+    {
+      "name": "statistical_public_contract_counts_are_exact",
+      "ok": true,
+      "detail": {
+        "administrative": 5830,
+        "statistical_only": 18,
+        "reused": 45,
+        "total_roles": 63
+      }
+    },
+    {
+      "name": "statistical_model_is_activated_and_bound",
+      "ok": true,
+      "detail": {
+        "model": {
+          "policy": {
+            "path": "data/sources/actual-statistical-policy.json",
+            "phase": "P2_ACTIVATED",
+            "activated": true,
+            "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662"
+          },
+          "contract": {
+            "path": "schemas/actual-statistical-hierarchy-contract.json",
+            "contract": "actual-statistical-hierarchy-v1",
+            "schema_version": 1,
+            "phase": "P2_ACTIVATED",
+            "sha256": "1e3d2c68a22d7e25c48915157e717fa8d0a8169fc851cbe4ce064d0d35e1517f"
+          },
+          "source_bundle": {
+            "path": "data/sources/actual-statistical-source-bundle.json",
+            "mode": "ACTUAL_STATISTICAL_SOURCE_BUNDLE",
+            "bundle_fingerprint_algorithm": "actual-statistical-source-bundle-v1",
+            "bundle_fingerprint_sha256": "5be2a110805f38fafd76ea1b2c3672a71770672faceca8814ed2ad22549b2f3f",
+            "sha256": "3aee28691f87451768335988f9306a7e6fd5c4f5595ab0207562579877c0af94"
+          },
+          "layers": {
+            "RO": {
+              "path": "data/p2/actual-statistical-ro.json",
+              "contract": "actual-statistical-ro-v1",
+              "fingerprint_sha256": "8550a45ed0525735a185f1223349c9d7ada66b23fe79fad4e795d40871a6c08f",
+              "sha256": "cbf0d68a549bcc24774ccd8548436f7e51c5e0376c9139beab72460daecca2b8"
+            },
+            "MD": {
+              "path": "data/p2/actual-statistical-md.json",
+              "contract": "actual-statistical-md-v1",
+              "fingerprint_sha256": "ed29c79d23ed940e2db5cce074b7cb09745b0c90181b168fc8a6b435d74252a8",
+              "sha256": "2f78320c41b5a957b4a854eaade0fafae88ef3dc66e80f98aec77d7bce1a9f6e"
+            }
+          },
+          "hierarchy": {
+            "path": "public/data/actual-consolidated-tree.json",
+            "contract": "actual-consolidated-hierarchy-v1",
+            "node_count": 5848,
+            "root_ids": [
+              "osm-r90689",
+              "osm-r58974"
+            ],
+            "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+          },
+          "geometry": {
+            "RO": {
+              "path": "public/geo/actual/ro-statistical.geojson",
+              "contract": "actual-public-statistical-geometry-v1",
+              "feature_count": 12,
+              "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7"
+            },
+            "MD": {
+              "path": "public/geo/actual/md-statistical.geojson",
+              "contract": "actual-public-statistical-geometry-v1",
+              "feature_count": 6,
+              "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "consolidated_tree_is_exact_and_bound",
+      "ok": true,
+      "detail": {
+        "tree": {
+          "contract": "actual-consolidated-hierarchy-v1",
+          "node_count": 5848,
+          "roots": [
+            "osm-r90689",
+            "osm-r58974"
+          ]
+        },
+        "manifest": {
+          "path": "public/data/actual-consolidated-tree.json",
+          "contract": "actual-consolidated-hierarchy-v1",
+          "node_count": 5848,
+          "root_ids": [
+            "osm-r90689",
+            "osm-r58974"
+          ],
+          "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+        }
+      }
+    },
+    {
+      "name": "statistical_geometry_is_exactly_partitioned_and_bound",
+      "ok": true,
+      "detail": {
+        "RO": 12,
+        "MD": 6,
+        "manifest": {
+          "RO": {
+            "path": "public/geo/actual/ro-statistical.geojson",
+            "contract": "actual-public-statistical-geometry-v1",
+            "feature_count": 12,
+            "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7"
+          },
+          "MD": {
+            "path": "public/geo/actual/md-statistical.geojson",
+            "contract": "actual-public-statistical-geometry-v1",
+            "feature_count": 6,
+            "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc"
+          }
+        }
+      }
+    },
+    {
+      "name": "md121_never_becomes_public_statistical_identity",
+      "ok": true,
+      "detail": {
+        "md120": {
+          "id": "stat-MD120",
+          "status": "current",
+          "jurisdiction": "MD",
+          "category": "statistical",
+          "name": "Unitățile administrativ-teritoriale din stînga Nistrului",
+          "official_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
+          "display_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
+          "display_type": "statistical_level_3",
+          "searchable_names": [
+            "Unitățile administrativ-teritoriale din stînga Nistrului",
+            "MD120"
+          ],
+          "roles": [
+            "statistical"
+          ],
+          "legal": null,
+          "statistical": {
+            "classification": "NUTS_MOLDOVA",
+            "version": "2017",
+            "code": "MD120",
+            "level": 3,
+            "parent_code": "MD12",
+            "parent_entity_id": "stat-MD12",
+            "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+            "source": "data/sources/md-nuts-2017.json"
+          },
+          "hierarchy": {
+            "parent_catalog_id": null,
+            "parent_name": null,
+            "legal_parent_id": null,
+            "legal_parent_name": null,
+            "administrative_parent_id": null,
+            "statistical_parent_id": "stat-MD12",
+            "statistical_parent_name": "Partea de Est (partea stîngă a Nistrului)",
+            "consolidated_parent_id": "stat-MD12",
+            "consolidated_parent_name": "Partea de Est (partea stîngă a Nistrului)"
+          },
+          "representation": {
+            "source": "OpenStreetMap",
+            "source_url": "https://www.openstreetmap.org/relation/18976350",
+            "osm_relation_id": 18976350,
+            "source_feature_id": null,
+            "source_inspire_id": null,
+            "partition_mode": null,
+            "outer_shell_source": null,
+            "internal_boundary_source": null,
+            "osm_shell_relation_id": null,
+            "admin_level": null,
+            "place": null,
+            "inferred_type": "statistical_level_3",
+            "geometry_source": "OpenStreetMap statistical relation",
+            "geometry_role": "current_representation",
+            "canonical_geometry_role": "statistical_boundary",
+            "geometry_scope": "nuts_moldova_level_3",
+            "public_geometry_precision": "master_coordinate_fidelity",
+            "master_geometry_path": "data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz",
+            "statistical_identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+            "osm_statistical_ref": "MD121",
+            "osm_ref_is_identity_authority": false,
+            "identity_ref_conflict": "official_MD120_osm_MD121",
+            "geometry_review_class": null
+          },
+          "validation": {
+            "legal_identity_status": "statistical_identity",
+            "statistical_identity_status": "official",
+            "reconciliation_class": null,
+            "review_status": null,
+            "review_source": null,
+            "match_confidence": "official",
+            "representation_confidence": "reviewed",
+            "review_required": false
+          },
+          "map": {
+            "tier": "overview",
+            "bbox": [
+              28.4914719,
+              46.5467104,
+              29.9800238,
+              48.1824491
+            ],
+            "center": [
+              29.39400790058528,
+              47.217003764880616
+            ]
+          }
         }
       }
     },

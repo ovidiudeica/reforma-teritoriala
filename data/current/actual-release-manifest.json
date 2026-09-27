@@ -1,15 +1,15 @@
 {
-  "schema_version": 9,
+  "schema_version": 10,
   "mode": "ACTUAL",
-  "snapshot_id": "actual-6a7eac47d66d6701",
+  "snapshot_id": "actual-a9e5a4ddcb5277ef",
   "generated_at": "2026-09-27T20:37:27.458Z",
-  "release_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-  "content_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-  "component_byte_fingerprint_sha256": "85d1647b5eb9bf4ba8c7f2776e2c0f1029e09e8b7cdb9a687da663d9bbd41089",
+  "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+  "content_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+  "component_byte_fingerprint_sha256": "596a7fa13222f9e5126a49ab6b7e4c402d1e6c133750ced132f664a5ad98234c",
   "content_identity": {
-    "algorithm": "actual-semantic-v2",
-    "sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-    "release_identity_basis": "semantic_content_v2",
+    "algorithm": "actual-semantic-v3",
+    "sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "release_identity_basis": "semantic_content_v3",
     "reused_base_release": false
   },
   "policy": "Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance, explicit host-trust provenance, kernel-enforced network-denial proof and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle, host-trust, network-denial and build-environment bindings remain mandatory integrity constraints.",
@@ -107,7 +107,7 @@
       "contract": "actual-geometry-role-v1",
       "schema_version": 1
     },
-    "public_contract": "actual-public-entity-v2",
+    "public_contract": "actual-public-entity-v3",
     "administrative_geometry_fallbacks": {
       "RO": {
         "path": "data/sources/ro-ancpi-uat-fallbacks.json",
@@ -145,7 +145,7 @@
         ]
       }
     },
-    "sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5"
+    "sha256": "27c3e9fb1b1b3c87d2489320268ad5c85bf26dc53368d19d098fda476fbe2d2d"
   },
   "geometry_role_contract": {
     "path": "schemas/actual-geometry-role-contract.json",
@@ -166,23 +166,84 @@
       "sha256": "e5db08df6b32b458f5c2451d4b685a34815778181cc23b903c38abd0fa7731c1"
     }
   },
+  "statistical_model": {
+    "policy": {
+      "path": "data/sources/actual-statistical-policy.json",
+      "phase": "P2_ACTIVATED",
+      "activated": true,
+      "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662"
+    },
+    "contract": {
+      "path": "schemas/actual-statistical-hierarchy-contract.json",
+      "contract": "actual-statistical-hierarchy-v1",
+      "schema_version": 1,
+      "phase": "P2_ACTIVATED",
+      "sha256": "1e3d2c68a22d7e25c48915157e717fa8d0a8169fc851cbe4ce064d0d35e1517f"
+    },
+    "source_bundle": {
+      "path": "data/sources/actual-statistical-source-bundle.json",
+      "mode": "ACTUAL_STATISTICAL_SOURCE_BUNDLE",
+      "bundle_fingerprint_algorithm": "actual-statistical-source-bundle-v1",
+      "bundle_fingerprint_sha256": "5be2a110805f38fafd76ea1b2c3672a71770672faceca8814ed2ad22549b2f3f",
+      "sha256": "3aee28691f87451768335988f9306a7e6fd5c4f5595ab0207562579877c0af94"
+    },
+    "layers": {
+      "RO": {
+        "path": "data/p2/actual-statistical-ro.json",
+        "contract": "actual-statistical-ro-v1",
+        "fingerprint_sha256": "8550a45ed0525735a185f1223349c9d7ada66b23fe79fad4e795d40871a6c08f",
+        "sha256": "cbf0d68a549bcc24774ccd8548436f7e51c5e0376c9139beab72460daecca2b8"
+      },
+      "MD": {
+        "path": "data/p2/actual-statistical-md.json",
+        "contract": "actual-statistical-md-v1",
+        "fingerprint_sha256": "ed29c79d23ed940e2db5cce074b7cb09745b0c90181b168fc8a6b435d74252a8",
+        "sha256": "2f78320c41b5a957b4a854eaade0fafae88ef3dc66e80f98aec77d7bce1a9f6e"
+      }
+    },
+    "hierarchy": {
+      "path": "public/data/actual-consolidated-tree.json",
+      "contract": "actual-consolidated-hierarchy-v1",
+      "node_count": 5848,
+      "root_ids": [
+        "osm-r90689",
+        "osm-r58974"
+      ],
+      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+    },
+    "geometry": {
+      "RO": {
+        "path": "public/geo/actual/ro-statistical.geojson",
+        "contract": "actual-public-statistical-geometry-v1",
+        "feature_count": 12,
+        "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7"
+      },
+      "MD": {
+        "path": "public/geo/actual/md-statistical.geojson",
+        "contract": "actual-public-statistical-geometry-v1",
+        "feature_count": 6,
+        "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc"
+      }
+    }
+  },
   "public_contract": {
     "path": "public/data/actual-entities.json",
-    "contract": "actual-public-entity-v2",
-    "schema_version": 2,
+    "contract": "actual-public-entity-v3",
+    "schema_version": 3,
     "generated_at": "2026-10-05T23:50:05.218Z",
-    "entity_count": 5830,
+    "entity_count": 5848,
     "entity_count_by_jurisdiction": {
-      "RO": 3234,
-      "MD": 2596
+      "RO": 3246,
+      "MD": 2602
     },
     "legal_identity_status_counts": {
-      "not_bound_to_official_registry": 13,
       "reconciled": 5693,
       "outside_current_legal_registry": 123,
-      "unresolved": 1
+      "unresolved": 1,
+      "statistical_identity": 18,
+      "not_bound_to_official_registry": 13
     },
-    "sha256": "b9f60d1e1463e324961b21b211ec66f7124918aa9a787ee43d07c73c481640ea",
+    "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
     "geometry_chunks": {
       "path": "public/data/actual-geometry-chunks.json",
       "contract": "actual-public-geometry-chunks-v1",
@@ -224,6 +285,30 @@
           "feature_count": 1571,
           "sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe"
         }
+      }
+    },
+    "hierarchy": {
+      "path": "public/data/actual-consolidated-tree.json",
+      "contract": "actual-consolidated-hierarchy-v1",
+      "node_count": 5848,
+      "root_ids": [
+        "osm-r90689",
+        "osm-r58974"
+      ],
+      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+    },
+    "statistical_geometry": {
+      "RO": {
+        "path": "public/geo/actual/ro-statistical.geojson",
+        "contract": "actual-public-statistical-geometry-v1",
+        "feature_count": 12,
+        "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7"
+      },
+      "MD": {
+        "path": "public/geo/actual/md-statistical.geojson",
+        "contract": "actual-public-statistical-geometry-v1",
+        "feature_count": 6,
+        "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc"
       }
     }
   },
@@ -271,7 +356,7 @@
       "path": "data/current/actual-official-identity-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "58f7bd9a5dbb5ef40499527576bc01a763367d89be57ed7b4ae9b2cb94d54e65"
+      "sha256": "c95573ff6b1b69bad4e2e7d2436ce2380db1cf6dd908e07de7875c1fbf03612a"
     }
   },
   "jurisdiction_gates": {
@@ -333,8 +418,8 @@
     },
     "public_index": {
       "path": "public/data/actual-entities.json",
-      "sha256": "b9f60d1e1463e324961b21b211ec66f7124918aa9a787ee43d07c73c481640ea",
-      "bytes": 13646876
+      "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
+      "bytes": 15390013
     },
     "public_chunks": {
       "path": "public/data/actual-geometry-chunks.json",
@@ -418,13 +503,53 @@
     },
     "official_identity_audit": {
       "path": "data/current/actual-official-identity-audit.json",
-      "sha256": "58f7bd9a5dbb5ef40499527576bc01a763367d89be57ed7b4ae9b2cb94d54e65",
-      "bytes": 2846191
+      "sha256": "c95573ff6b1b69bad4e2e7d2436ce2380db1cf6dd908e07de7875c1fbf03612a",
+      "bytes": 2846418
     },
     "settlement_policy": {
       "path": "data/sources/actual-settlement-policy.json",
-      "sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5",
-      "bytes": 6344
+      "sha256": "27c3e9fb1b1b3c87d2489320268ad5c85bf26dc53368d19d098fda476fbe2d2d",
+      "bytes": 8259
+    },
+    "statistical_policy": {
+      "path": "data/sources/actual-statistical-policy.json",
+      "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662",
+      "bytes": 3904
+    },
+    "statistical_contract": {
+      "path": "schemas/actual-statistical-hierarchy-contract.json",
+      "sha256": "1e3d2c68a22d7e25c48915157e717fa8d0a8169fc851cbe4ce064d0d35e1517f",
+      "bytes": 2615
+    },
+    "statistical_source_bundle": {
+      "path": "data/sources/actual-statistical-source-bundle.json",
+      "sha256": "3aee28691f87451768335988f9306a7e6fd5c4f5595ab0207562579877c0af94",
+      "bytes": 740
+    },
+    "ro_statistical_layer": {
+      "path": "data/p2/actual-statistical-ro.json",
+      "sha256": "cbf0d68a549bcc24774ccd8548436f7e51c5e0376c9139beab72460daecca2b8",
+      "bytes": 50143
+    },
+    "md_statistical_layer": {
+      "path": "data/p2/actual-statistical-md.json",
+      "sha256": "2f78320c41b5a957b4a854eaade0fafae88ef3dc66e80f98aec77d7bce1a9f6e",
+      "bytes": 26162
+    },
+    "consolidated_tree": {
+      "path": "public/data/actual-consolidated-tree.json",
+      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f",
+      "bytes": 2102707
+    },
+    "ro_statistical_geometry": {
+      "path": "public/geo/actual/ro-statistical.geojson",
+      "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7",
+      "bytes": 3755486
+    },
+    "md_statistical_geometry": {
+      "path": "public/geo/actual/md-statistical.geojson",
+      "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc",
+      "bytes": 1085802
     },
     "geometry_role_contract": {
       "path": "schemas/actual-geometry-role-contract.json",

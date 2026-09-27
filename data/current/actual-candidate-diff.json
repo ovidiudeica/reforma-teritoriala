@@ -2,55 +2,72 @@
   "schema_version": 3,
   "mode": "ACTUAL_CANDIDATE_DIFF",
   "status": "CHANGE",
-  "base_ref": "5f634518a4961c7085a18f82702a14355715cc07",
+  "base_ref": "9dcd945eefbc5e2018ac17e298624bee7b7fbca4",
   "base_release": {
-    "snapshot_id": "actual-149e27f4142b02e2",
-    "release_fingerprint_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
-    "manifest_sha256": "4475d67a6a438994545a5b92d0ef3909dc57566e5c6b4f86f91bfe6d372148e8",
-    "source_bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
-    "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
-    "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
-    "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-    "build_environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c"
-  },
-  "candidate": {
     "snapshot_id": "actual-6a7eac47d66d6701",
     "release_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-    "manifest_sha256": "fa14f2ad386913a806a414e632b87f7567b253370b44203561be9153828b82ba",
-    "release_gate_status": "PASS",
-    "content_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
+    "manifest_sha256": "313e3c645d9773394dd7f59a6c4ed591f25ed711896485b7cfbf795573dde0c6",
     "source_bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
     "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
-    "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-    "build_environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
+    "host_trust_fingerprint_sha256": "734d94265dd1a862a03fe400408ec3d83ce2d065909a0aa7077a9bf15c158ae8",
+    "build_environment_fingerprint_sha256": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543"
+  },
+  "candidate": {
+    "snapshot_id": "actual-a9e5a4ddcb5277ef",
+    "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "manifest_sha256": "242099b55683c56358cd36e318008f3def61c76b1a7a23c226c8513f8f20cb7b",
+    "release_gate_status": "PASS",
+    "content_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "source_bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
+    "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+    "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
+    "host_trust_fingerprint_sha256": "734d94265dd1a862a03fe400408ec3d83ce2d065909a0aa7077a9bf15c158ae8",
+    "build_environment_fingerprint_sha256": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
     "semantic_manifest_binding": "explicit_manifest_fingerprint",
     "exact_base_manifest_bytes_reused": false
   },
   "summary": {
     "entity_count_before": 5830,
-    "entity_count_after": 5830,
-    "entity_added_count": 0,
+    "entity_count_after": 5848,
+    "entity_added_count": 18,
     "entity_removed_count": 0,
     "legal_identity_changed_count": 0,
     "classification_changed_count": 0,
-    "geometry_change_count": 27,
+    "geometry_change_count": 0,
     "semantic_registry_changed_count": 0,
-    "component_hash_changed_count": 10,
-    "delivery_component_changed_count": 1,
-    "delivery_component_changed_keys": [
-      "public_chunks"
-    ],
+    "component_hash_changed_count": 11,
+    "delivery_component_changed_count": 0,
+    "delivery_component_changed_keys": [],
     "entity_content_changed_count": 0,
     "semantic_scope_only_change_count": 0,
     "semantic_content_changed": true,
-    "base_content_fingerprint_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
-    "candidate_content_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-    "substantive_change_count": 28,
+    "base_content_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
+    "candidate_content_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "substantive_change_count": 18,
     "review_required": true
   },
   "entities": {
-    "added_ids": [],
+    "added_ids": [
+      "stat-MD11",
+      "stat-MD111",
+      "stat-MD112",
+      "stat-MD113",
+      "stat-MD12",
+      "stat-MD120",
+      "stat-RO1",
+      "stat-RO11",
+      "stat-RO12",
+      "stat-RO2",
+      "stat-RO21",
+      "stat-RO22",
+      "stat-RO3",
+      "stat-RO31",
+      "stat-RO32",
+      "stat-RO4",
+      "stat-RO41",
+      "stat-RO42"
+    ],
     "removed_ids": [],
     "content_changed_ids": [],
     "legal_identity_changed_ids": [],
@@ -64,49 +81,20 @@
       "after_feature_count": 3234,
       "added_count": 0,
       "removed_count": 0,
-      "changed_count": 12,
+      "changed_count": 0,
       "added_ids": [],
       "removed_ids": [],
-      "changed_ids": [
-        "osm-r10493446",
-        "osm-r10493447",
-        "osm-r10494275",
-        "osm-r10541478",
-        "osm-r10694432",
-        "osm-r10697338",
-        "osm-r10761201",
-        "osm-r14772881",
-        "osm-r14783812",
-        "osm-r14783815",
-        "osm-r9982551",
-        "osm-r9982552"
-      ]
+      "changed_ids": []
     },
     "MD": {
       "before_feature_count": 2596,
       "after_feature_count": 2596,
       "added_count": 0,
       "removed_count": 0,
-      "changed_count": 15,
+      "changed_count": 0,
       "added_ids": [],
       "removed_ids": [],
-      "changed_ids": [
-        "osm-r1691800",
-        "osm-r1691801",
-        "osm-r1782011",
-        "osm-r1782039",
-        "osm-r1782040",
-        "osm-r1813297",
-        "osm-r1813319",
-        "osm-r18822134",
-        "osm-r18822135",
-        "osm-r18967099",
-        "osm-r18968071",
-        "osm-r19100157",
-        "osm-r20690338",
-        "osm-r58512",
-        "osm-r85827"
-      ]
+      "changed_ids": []
     }
   },
   "official_registries": {
@@ -131,64 +119,70 @@
   },
   "component_hash_changes": [
     {
-      "key": "md_detail",
-      "path": "public/geo/actual/md-detail.geojson",
-      "before_sha256": "fb21a07ed33adf725782b1eb5c5a235ed0d0cca3e41a78bb1e80d9456dac1739",
-      "after_sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe"
+      "key": "consolidated_tree",
+      "path": "public/data/actual-consolidated-tree.json",
+      "before_sha256": null,
+      "after_sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
     },
     {
-      "key": "md_geojson",
-      "path": "public/geo/current/md-administrative.geojson",
-      "before_sha256": "d10d1d6da37f88104cd87861e8da5fd4bf6fcd3c8b3640c7b2ff619be7fb96c3",
-      "after_sha256": "e5db08df6b32b458f5c2451d4b685a34815778181cc23b903c38abd0fa7731c1"
+      "key": "md_statistical_geometry",
+      "path": "public/geo/actual/md-statistical.geojson",
+      "before_sha256": null,
+      "after_sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc"
     },
     {
-      "key": "md_local",
-      "path": "public/geo/actual/md-local.geojson",
-      "before_sha256": "604b7bd1031f91c5442444cd60a24c573549cecf81e19397f8277b58aafd420a",
-      "after_sha256": "f037d148065475b486cb6a6165db4e350966add1ef5b1c49e9d0a0b2270ea649"
+      "key": "md_statistical_layer",
+      "path": "data/p2/actual-statistical-md.json",
+      "before_sha256": null,
+      "after_sha256": "2f78320c41b5a957b4a854eaade0fafae88ef3dc66e80f98aec77d7bce1a9f6e"
     },
     {
-      "key": "md_overview",
-      "path": "public/geo/actual/md-overview.geojson",
-      "before_sha256": "4d61649bf78625de9d69d736bc566972c5ecf5e9b760dfb289a72060f03a750b",
-      "after_sha256": "833aed09237fcebecc1e15bfa33c59e3ba5e685603df64c7fb321d37ab88b5fb"
-    },
-    {
-      "key": "public_chunks",
-      "path": "public/data/actual-geometry-chunks.json",
-      "before_sha256": "9b5e3826d420693c133d622fb49e72c63bc34f46a376621f5b2af76dca64dbcc",
-      "after_sha256": "f09bdc0fff9e63185020ede4b83d1d359b2e03f2d35834e91170b507dd12136d"
+      "key": "official_identity_audit",
+      "path": "data/current/actual-official-identity-audit.json",
+      "before_sha256": "58f7bd9a5dbb5ef40499527576bc01a763367d89be57ed7b4ae9b2cb94d54e65",
+      "after_sha256": "c95573ff6b1b69bad4e2e7d2436ce2380db1cf6dd908e07de7875c1fbf03612a"
     },
     {
       "key": "public_index",
       "path": "public/data/actual-entities.json",
-      "before_sha256": "620a8e55bfb1ac2f2872c5291f1303a5e574dbc3cf26c8c548f2323134bdba32",
-      "after_sha256": "b9f60d1e1463e324961b21b211ec66f7124918aa9a787ee43d07c73c481640ea"
+      "before_sha256": "b9f60d1e1463e324961b21b211ec66f7124918aa9a787ee43d07c73c481640ea",
+      "after_sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700"
     },
     {
-      "key": "ro_geojson",
-      "path": "public/geo/current/ro-administrative.geojson",
-      "before_sha256": "30794b2a6e2d0b4793945d56ca3aa54d5f43388ccd1dd7c13bd089b38c89635f",
-      "after_sha256": "47fd6765e4b8768b5daccb19849f12d7dab3fe2b4fd0ee2a29fa682b888275fa"
+      "key": "ro_statistical_geometry",
+      "path": "public/geo/actual/ro-statistical.geojson",
+      "before_sha256": null,
+      "after_sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7"
     },
     {
-      "key": "ro_local",
-      "path": "public/geo/actual/ro-local.geojson",
-      "before_sha256": "5d6aac8058bad7af6ac680eed67ff0968a98a9be1c22f05219ad58de31db6047",
-      "after_sha256": "6fd4fed8d11664e475d962b33085665982b785dd88f7273cd9232ad32169d771"
+      "key": "ro_statistical_layer",
+      "path": "data/p2/actual-statistical-ro.json",
+      "before_sha256": null,
+      "after_sha256": "cbf0d68a549bcc24774ccd8548436f7e51c5e0376c9139beab72460daecca2b8"
     },
     {
-      "key": "ro_overview",
-      "path": "public/geo/actual/ro-overview.geojson",
-      "before_sha256": "6ed6bbd22951332ed7c479ee4e07da9290c2c0abb83e885347071569578f1e4c",
-      "after_sha256": "d2cd172869befc38ad90614b44201da428ed68cd825de6f2683d36f566f4414b"
+      "key": "settlement_policy",
+      "path": "data/sources/actual-settlement-policy.json",
+      "before_sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5",
+      "after_sha256": "27c3e9fb1b1b3c87d2489320268ad5c85bf26dc53368d19d098fda476fbe2d2d"
     },
     {
-      "key": "topology_audit",
-      "path": "data/current/actual-topology-audit.json",
-      "before_sha256": "67a4cc831d89c3691d12f6c66cbb7bc7b58f3f1b3d333e14c7d7e6e3dc3540bb",
-      "after_sha256": "02cde46761ff8be0d40bc931d5989e0b65cb2cdf5be98f32430a055b1123ae23"
+      "key": "statistical_contract",
+      "path": "schemas/actual-statistical-hierarchy-contract.json",
+      "before_sha256": null,
+      "after_sha256": "1e3d2c68a22d7e25c48915157e717fa8d0a8169fc851cbe4ce064d0d35e1517f"
+    },
+    {
+      "key": "statistical_policy",
+      "path": "data/sources/actual-statistical-policy.json",
+      "before_sha256": null,
+      "after_sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662"
+    },
+    {
+      "key": "statistical_source_bundle",
+      "path": "data/sources/actual-statistical-source-bundle.json",
+      "before_sha256": null,
+      "after_sha256": "3aee28691f87451768335988f9306a7e6fd5c4f5595ab0207562579877c0af94"
     }
   ],
   "failures": [],

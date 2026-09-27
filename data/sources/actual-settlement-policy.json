@@ -95,7 +95,7 @@
     "contract": "actual-geometry-role-v1",
     "schema_version": 1
   },
-  "public_contract": "actual-public-entity-v2",
+  "public_contract": "actual-public-entity-v3",
   "administrative_geometry_fallbacks": {
     "RO": {
       "path": "data/sources/ro-ancpi-uat-fallbacks.json",
@@ -132,5 +132,45 @@
         }
       ]
     }
+  },
+  "statistical_hierarchy": {
+    "activated": true,
+    "contract": "actual-statistical-hierarchy-v1",
+    "hierarchy_contract": "actual-consolidated-hierarchy-v1",
+    "public_contract": "actual-public-entity-v3",
+    "expected_public_entity_count": 5848,
+    "expected_administrative_entity_count": 5830,
+    "expected_statistical_only_entity_count": 18,
+    "expected_statistical_role_entity_count": 63,
+    "expected_entity_count_by_jurisdiction": {
+      "RO": 3246,
+      "MD": 2602
+    },
+    "statistical_policy": {
+      "path": "data/sources/actual-statistical-policy.json",
+      "sha256": "a018f41ca24c5a4957929f6d1056f58acdf063c59bd212343429b524e979ec9c"
+    },
+    "statistical_contract": {
+      "path": "schemas/actual-statistical-hierarchy-contract.json",
+      "sha256": "8332ec916222920831d0c921057e7e3f65b5654b499d214601a9ff723e0fac72"
+    },
+    "source_bundle": {
+      "path": "data/sources/actual-statistical-source-bundle.json",
+      "sha256": "3aee28691f87451768335988f9306a7e6fd5c4f5595ab0207562579877c0af94",
+      "fingerprint_sha256": "5be2a110805f38fafd76ea1b2c3672a71770672faceca8814ed2ad22549b2f3f"
+    },
+    "layers": {
+      "RO": {
+        "path": "data/p2/actual-statistical-ro.json",
+        "sha256": "cbf0d68a549bcc24774ccd8548436f7e51c5e0376c9139beab72460daecca2b8",
+        "fingerprint_sha256": "8550a45ed0525735a185f1223349c9d7ada66b23fe79fad4e795d40871a6c08f"
+      },
+      "MD": {
+        "path": "data/p2/actual-statistical-md.json",
+        "sha256": "2f78320c41b5a957b4a854eaade0fafae88ef3dc66e80f98aec77d7bce1a9f6e",
+        "fingerprint_sha256": "ed29c79d23ed940e2db5cce074b7cb09745b0c90181b168fc8a6b435d74252a8"
+      }
+    },
+    "geometry_policy": "Administrative master geometry is immutable. Reused statistical roles share the existing territorial geometry; statistical-only geometry is extracted exactly from the reviewed OSM statistical snapshots."
   }
 }
