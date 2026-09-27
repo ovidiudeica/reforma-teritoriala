@@ -20,6 +20,7 @@ const PATHS={
  ro_official:'data/sources/ro-siruta-current.json',
  md_official:'data/sources/cuatm-current.json',
  md_individual_review:'data/sources/md-cuatm-individual-review.json',
+ md_semantic_bridge:'data/current/md-cuatm-semantic-bridge.json',
  topology_audit:'data/current/actual-topology-audit.json',
  regression_audit:'data/current/actual-regression-audit.json',
  structural_completeness_audit:'data/current/actual-structural-completeness-audit.json'
@@ -39,6 +40,7 @@ const cuatm=json('md_official');
 const topologyAudit=json('topology_audit');
 const regressionAudit=json('regression_audit');
 const structuralCompletenessAudit=json('structural_completeness_audit');
+const mdSemanticBridge=json('md_semantic_bridge');
 
 const jurisdictions=['RO','MD'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -115,6 +117,9 @@ const manifest={
    RO:{overview:tier('RO','overview'),local:tier('RO','local'),detail:tier('RO','detail')},
    MD:{overview:tier('MD','overview'),local:tier('MD','local'),detail:tier('MD','detail')}
   }
+ },
+ semantic_bridges:{
+  MD:{path:PATHS.md_semantic_bridge,status:mdSemanticBridge.status??null,summary:mdSemanticBridge.summary??null,sha256:components.md_semantic_bridge.sha256}
  },
  quality_gates:{
   topology:{path:PATHS.topology_audit,status:topologyAudit.status??null,blocking_issue_count:topologyAudit.blocking_issue_count??null,sha256:components.topology_audit.sha256},
