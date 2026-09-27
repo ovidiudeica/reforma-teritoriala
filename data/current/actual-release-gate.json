@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T20:37:28.323Z",
+  "generated_at": "2026-09-27T20:37:27.458Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-5f174ce51b754eed",
+  "snapshot_id": "actual-990c892d9d27fa46",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "d9d6970d1f71d4388499a518a027732fc4629aed572e9bf3d7c71afb2edab4b9",
+  "manifest_sha256": "c3a293a0e080373267036ca006226406a3817de0d3e83fc764eb2bda6020f71c",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -66,7 +66,7 @@
         "manifest": {
           "path": "data/sources/actual-settlement-policy.json",
           "schema_version": 1,
-          "policy_version": "2026-10-02-v1.1",
+          "policy_version": "2026-10-03-v1.2",
           "coverage_contract_version": 2,
           "scope": "settlements_and_component_localities",
           "geometry_role_contract": {
@@ -74,11 +74,27 @@
             "contract": "actual-geometry-role-v1",
             "schema_version": 1
           },
-          "sha256": "d3ec38c4b08d0f7160173d4198bba9d3ca544cbce5b317c035991cd147f8847e"
+          "public_contract": "actual-public-entity-v2",
+          "administrative_geometry_fallbacks": {
+            "RO": {
+              "path": "data/sources/ro-ancpi-uat-fallbacks.json",
+              "mode": "ACTUAL_RO_ANCPI_UAT_FALLBACKS",
+              "authority": "Agenția Națională de Cadastru și Publicitate Imobiliară",
+              "arcgis_item_id": "466b7199c19f4904831e14bc7f407af9",
+              "geometry_role": "administrative_boundary",
+              "geometry_scope": "uat_fallback",
+              "legal_ids": [
+                "64096"
+              ],
+              "legal_identity_authority": "SIRUTA",
+              "legal_geometry_equivalence_asserted": false
+            }
+          },
+          "sha256": "00c35b8d336afa9dae742aa1a79eb7fa9eff5613f3c7b2aac57b45ceb361a558"
         },
         "actual": {
           "schema_version": 1,
-          "policy_version": "2026-10-02-v1.1",
+          "policy_version": "2026-10-03-v1.2",
           "coverage_contract_version": 2,
           "scope": "settlements_and_component_localities",
           "geometry_role_contract": {
@@ -86,7 +102,23 @@
             "contract": "actual-geometry-role-v1",
             "schema_version": 1
           },
-          "sha256": "d3ec38c4b08d0f7160173d4198bba9d3ca544cbce5b317c035991cd147f8847e"
+          "sha256": "00c35b8d336afa9dae742aa1a79eb7fa9eff5613f3c7b2aac57b45ceb361a558",
+          "public_contract": "actual-public-entity-v2",
+          "administrative_geometry_fallbacks": {
+            "RO": {
+              "path": "data/sources/ro-ancpi-uat-fallbacks.json",
+              "mode": "ACTUAL_RO_ANCPI_UAT_FALLBACKS",
+              "authority": "Agenția Națională de Cadastru și Publicitate Imobiliară",
+              "arcgis_item_id": "466b7199c19f4904831e14bc7f407af9",
+              "geometry_role": "administrative_boundary",
+              "geometry_scope": "uat_fallback",
+              "legal_ids": [
+                "64096"
+              ],
+              "legal_identity_authority": "SIRUTA",
+              "legal_geometry_equivalence_asserted": false
+            }
+          }
         }
       }
     },
@@ -163,9 +195,9 @@
       "detail": {
         "validation_status": "PASS",
         "gate_status": "PASS",
-        "gate_bundle_sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6",
-        "actual_bundle_sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6",
-        "fingerprint": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f"
+        "gate_bundle_sha256": "5960c58f16d5b07507759a63ca405c49fe2acffe57d8373c172724d69339d83b",
+        "actual_bundle_sha256": "5960c58f16d5b07507759a63ca405c49fe2acffe57d8373c172724d69339d83b",
+        "fingerprint": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da"
       }
     },
     {
@@ -178,8 +210,8 @@
           "mode": "ACTUAL_SOURCE_BUNDLE",
           "source_watermark": "2026-09-27T20:37:24.316Z",
           "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
-          "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
-          "sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6"
+          "bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
+          "sha256": "5960c58f16d5b07507759a63ca405c49fe2acffe57d8373c172724d69339d83b"
         },
         "actual": {
           "path": "data/current/actual-source-bundle-manifest.json",
@@ -187,8 +219,8 @@
           "mode": "ACTUAL_SOURCE_BUNDLE",
           "source_watermark": "2026-09-27T20:37:24.316Z",
           "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
-          "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
-          "sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6"
+          "bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
+          "sha256": "5960c58f16d5b07507759a63ca405c49fe2acffe57d8373c172724d69339d83b"
         }
       }
     },
@@ -397,8 +429,8 @@
       "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "e8772b10b16f2e6573bdb8acaba7567174c9578ff3d0535575b2d41315d0d49f",
-        "actual": "e8772b10b16f2e6573bdb8acaba7567174c9578ff3d0535575b2d41315d0d49f"
+        "expected": "0c7b851d07cc2c710c981deaf2378d43f1ad56d62e56e8f19de4a075f13c9e00",
+        "actual": "0c7b851d07cc2c710c981deaf2378d43f1ad56d62e56e8f19de4a075f13c9e00"
       }
     },
     {
@@ -407,12 +439,12 @@
       "detail": {
         "manifest": {
           "algorithm": "actual-semantic-v2",
-          "sha256": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
+          "sha256": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
           "release_identity_basis": "semantic_content_v2",
           "reused_base_release": false
         },
-        "expected": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
-        "actual": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067"
+        "expected": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
+        "actual": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220"
       }
     },
     {
@@ -421,7 +453,7 @@
       "detail": {
         "content_identity": {
           "algorithm": "actual-semantic-v2",
-          "sha256": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
+          "sha256": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
           "release_identity_basis": "semantic_content_v2",
           "reused_base_release": false
         }
@@ -431,8 +463,8 @@
       "name": "release_fingerprint_matches_semantic_identity",
       "ok": true,
       "detail": {
-        "expected": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
-        "actual": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
+        "expected": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
+        "actual": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
         "reused_base_release": false
       }
     },
@@ -440,8 +472,8 @@
       "name": "snapshot_id_matches_stable_release_identity",
       "ok": true,
       "detail": {
-        "expected": "actual-5f174ce51b754eed",
-        "actual": "actual-5f174ce51b754eed",
+        "expected": "actual-990c892d9d27fa46",
+        "actual": "actual-990c892d9d27fa46",
         "reused_base_release": false
       }
     },
@@ -449,25 +481,25 @@
       "name": "manifest_generated_at_matches_snapshot_watermark",
       "ok": true,
       "detail": {
-        "expected": "2026-09-27T20:37:28.323Z",
-        "actual": "2026-09-27T20:37:28.323Z"
+        "expected": "2026-09-27T20:37:27.458Z",
+        "actual": "2026-09-27T20:37:27.458Z"
       }
     },
     {
       "name": "catalog_declared_entity_count_is_consistent",
       "ok": true,
       "detail": {
-        "declared": 5829,
-        "actual": 5829
+        "declared": 5830,
+        "actual": 5830
       }
     },
     {
       "name": "manifest_catalog_entity_count_is_current",
       "ok": true,
       "detail": {
-        "manifest": 5829,
-        "catalog_declared": 5829,
-        "actual": 5829
+        "manifest": 5830,
+        "catalog_declared": 5830,
+        "actual": 5830
       }
     },
     {
@@ -482,11 +514,11 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "RO": 3233,
+          "RO": 3234,
           "MD": 2596
         },
         "actual": {
-          "RO": 3233,
+          "RO": 3234,
           "MD": 2596
         }
       }
@@ -519,7 +551,7 @@
       "name": "public_geojson_feature_counts_are_nonzero",
       "ok": true,
       "detail": {
-        "RO": 3233,
+        "RO": 3234,
         "MD": 2596
       }
     },
@@ -528,11 +560,11 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "RO": 3233,
+          "RO": 3234,
           "MD": 2596
         },
         "actual": {
-          "RO": 3233,
+          "RO": 3234,
           "MD": 2596
         }
       }
@@ -541,9 +573,12 @@
       "name": "public_contract_identity_set_matches_catalog",
       "ok": true,
       "detail": {
-        "contract": "actual-public-entity-v1",
-        "public_count": 5829,
-        "catalog_count": 5829,
+        "expected_contract": "actual-public-entity-v2",
+        "contract": "actual-public-entity-v2",
+        "expected_schema_version": 2,
+        "schema_version": 2,
+        "public_count": 5830,
+        "catalog_count": 5830,
         "missing": [],
         "unexpected": []
       }
@@ -567,11 +602,11 @@
       "ok": true,
       "detail": {
         "public": {
-          "RO": 3233,
+          "RO": 3234,
           "MD": 2596
         },
         "actual": {
-          "RO": 3233,
+          "RO": 3234,
           "MD": 2596
         }
       }
@@ -589,8 +624,8 @@
       "detail": {
         "issues": [],
         "missing": [],
-        "geometry_count": 5829,
-        "entity_count": 5829
+        "geometry_count": 5830,
+        "entity_count": 5830
       }
     },
     {
@@ -598,7 +633,7 @@
       "ok": true,
       "detail": {
         "issues": [],
-        "checked_geometry_count": 5829
+        "checked_geometry_count": 5830
       }
     },
     {
@@ -606,11 +641,11 @@
       "ok": true,
       "detail": {
         "public": {
-          "RO": 3233,
+          "RO": 3234,
           "MD": 2596
         },
         "master": {
-          "RO": 3233,
+          "RO": 3234,
           "MD": 2596
         }
       }
@@ -621,27 +656,27 @@
       "detail": {
         "manifest": {
           "path": "public/data/actual-entities.json",
-          "contract": "actual-public-entity-v1",
-          "schema_version": 1,
+          "contract": "actual-public-entity-v2",
+          "schema_version": 2,
           "generated_at": "2026-09-27T20:37:24.316Z",
-          "entity_count": 5829,
+          "entity_count": 5830,
           "entity_count_by_jurisdiction": {
-            "RO": 3233,
+            "RO": 3234,
             "MD": 2596
           },
           "legal_identity_status_counts": {
             "not_bound_to_official_registry": 13,
-            "reconciled": 5692,
+            "reconciled": 5693,
             "outside_current_legal_registry": 123,
             "unresolved": 1
           },
-          "sha256": "4f264ac452b5552c1caf4dc8b9b714aa3357aad46607bac6b2b34de44e2372aa",
+          "sha256": "4c26d527c6001651123b9085732ffa69d10dd7b95e40de145c35cad11e7255cd",
           "geometry_chunks": {
             "path": "public/data/actual-geometry-chunks.json",
             "contract": "actual-public-geometry-chunks-v1",
             "schema_version": 1,
             "chunk_count": 115,
-            "sha256": "e24977c331d3e52f2f6add64e7b23b1675b04145bca342afcd6bb19fb73acd0b"
+            "sha256": "3a0a09df8166f1576ca98bf42ed0281273bfb7b1c306633d6a8ccc618b928539"
           },
           "geometry_tiers": {
             "RO": {
@@ -652,8 +687,8 @@
               },
               "local": {
                 "path": "public/geo/actual/ro-local.geojson",
-                "feature_count": 3179,
-                "sha256": "0baf057bcea4402f052164c61a329847a942e5724c3aa750865dd259351c448d"
+                "feature_count": 3180,
+                "sha256": "d30c3e05100dd3c0a7a67ce1bbe6fc4c9f3bdd317cc48c7c5f5c2af4a1fdc66b"
               },
               "detail": {
                 "path": "public/geo/actual/ro-detail.geojson",
@@ -681,9 +716,9 @@
           }
         },
         "actual": {
-          "contract": "actual-public-entity-v1",
-          "entity_count": 5829,
-          "sha256": "4f264ac452b5552c1caf4dc8b9b714aa3357aad46607bac6b2b34de44e2372aa"
+          "contract": "actual-public-entity-v2",
+          "entity_count": 5830,
+          "sha256": "4c26d527c6001651123b9085732ffa69d10dd7b95e40de145c35cad11e7255cd"
         }
       }
     },
@@ -706,14 +741,14 @@
           "contract": "actual-public-geometry-chunks-v1",
           "schema_version": 1,
           "chunk_count": 115,
-          "sha256": "e24977c331d3e52f2f6add64e7b23b1675b04145bca342afcd6bb19fb73acd0b"
+          "sha256": "3a0a09df8166f1576ca98bf42ed0281273bfb7b1c306633d6a8ccc618b928539"
         },
         "actual": {
           "path": "public/data/actual-geometry-chunks.json",
           "contract": "actual-public-geometry-chunks-v1",
           "schema_version": 1,
           "chunk_count": 115,
-          "sha256": "e24977c331d3e52f2f6add64e7b23b1675b04145bca342afcd6bb19fb73acd0b"
+          "sha256": "3a0a09df8166f1576ca98bf42ed0281273bfb7b1c306633d6a8ccc618b928539"
         }
       }
     },
@@ -722,11 +757,11 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "RO": "2026-09-27T20:37:28.323Z",
+          "RO": "2026-09-27T20:37:24.316Z",
           "MD": "2026-09-27T20:37:27.458Z"
         },
         "actual": {
-          "RO": "2026-09-27T20:37:28.323Z",
+          "RO": "2026-09-27T20:37:24.316Z",
           "MD": "2026-09-27T20:37:27.458Z"
         }
       }
