@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T10:59:19.221Z",
+  "generated_at": "2026-09-27T11:00:39.498Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-feaca5fbf943e3e9",
+  "snapshot_id": "actual-8abd98dc764b77f1",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "9e62e622537298d5ca9b46b5c38213e16c5469f9e726f435fb29c2dff9462d7b",
+  "manifest_sha256": "902ec270f9387fedb4fff21f4513dea24d7aec59707783823bed2c615d98555b",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity. Any drift fails closed.",
   "checks": [
@@ -52,24 +52,24 @@
       "name": "release_fingerprint_matches_current_components",
       "ok": true,
       "detail": {
-        "expected": "feaca5fbf943e3e90552fe3a927cbc4ebe805f47c2e3c064ddeb08275fe08a66",
-        "actual": "feaca5fbf943e3e90552fe3a927cbc4ebe805f47c2e3c064ddeb08275fe08a66"
+        "expected": "8abd98dc764b77f19001e57ca2323477c5f3dcd12ce05dd08a5445c20d918a9f",
+        "actual": "8abd98dc764b77f19001e57ca2323477c5f3dcd12ce05dd08a5445c20d918a9f"
       }
     },
     {
       "name": "snapshot_id_matches_release_fingerprint",
       "ok": true,
       "detail": {
-        "expected": "actual-feaca5fbf943e3e9",
-        "actual": "actual-feaca5fbf943e3e9"
+        "expected": "actual-8abd98dc764b77f1",
+        "actual": "actual-8abd98dc764b77f1"
       }
     },
     {
       "name": "manifest_generated_at_matches_snapshot_watermark",
       "ok": true,
       "detail": {
-        "expected": "2026-09-27T10:59:15.802Z",
-        "actual": "2026-09-27T10:59:15.802Z"
+        "expected": "2026-09-27T11:00:36.517Z",
+        "actual": "2026-09-27T11:00:36.517Z"
       }
     },
     {
@@ -289,11 +289,11 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "RO": "2026-09-27T10:59:15.802Z",
+          "RO": "2026-09-27T11:00:36.517Z",
           "MD": "2026-09-27T10:59:15.174Z"
         },
         "actual": {
-          "RO": "2026-09-27T10:59:15.802Z",
+          "RO": "2026-09-27T11:00:36.517Z",
           "MD": "2026-09-27T10:59:15.174Z"
         }
       }
