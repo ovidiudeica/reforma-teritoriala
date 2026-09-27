@@ -85,7 +85,24 @@ function classify(country,t={}){
  return {type:'unclassified',confidence:'low',reason:'No classifier rule matched'};
 }
 function relationId(feature){
- const id=String(feature.id||''); const m=id.match(/relation\/(\d+)/); return m?Number(m[1]):null;
+ const id=String(feature.id||''); const m=id.match(/relation\\/(\\d+)/); return m?Number(m[1]):null;
+}
+const MD_OFFICIAL_POINT_TOUCH_NORMALIZATIONS=new Map([[12463200,{classification:'official_point_touch_multipolygon',coordinate:[29.2405257,46.7587398],rings:[
+ [76585146,76583058],
+ [94511352,60741665,918930470,918853567,918853573,918853568,918853569,125859262,918853574]
+]}]]);
+function ringFromWays(raw,wayIds){
+ const wayById=new Map(raw.elements.filter(x=>x.type==='way').map(x=>[x.id,x]));
+ const nodeById=new Map(raw.elements.filter(x=>x.type==='node').map(x=>[x.id,x]));
+ const unused=wayIds.map(id=>wayById.get(id)); if(unused.some(x=>!x))throw new Error('Missing normalization way');
+ const chain=[...unused.shift().nodes];
+ while(unused.length){const end=chain.at(-1);const i=unused.findIndex(w=>w.nodes[0]===end||w.nodes.at(-1)===end);if(i<0)throw new Error('Cannot close normalization ring');const w=unused.splice(i,1)[0];const ns=w.nodes[0]===end?w.nodes:[...w.nodes].reverse();chain.push(...ns.slice(1));}
+ if(chain[0]!==chain.at(-1))throw new Error('Normalization ring is not closed');
+ return chain.map(id=>{const n=nodeById.get(id);if(!n)throw new Error('Missing normalization node '+id);return [n.lon,n.lat];});
+}
+function normalizeOfficialPointTouch(country,raw,geo,report){
+ if(country!=='MD')return;
+ for(const [rid,cfg] of MD_OFFICIAL_POINT_TOUCH_NORMALIZATIONS){const f=geo.features.find(x=>relationId(x)===rid);if(!f)throw new Error('Missing official point-touch relation '+rid);const rings=cfg.rings.map(ids=>ringFromWays(raw,ids));f.geometry={type:'MultiPolygon',coordinates:rings.map(r=>[r])};f.properties={...f.properties,topology_normalization:cfg.classification,topology_evidence:'I.P. Cadastrul Bunurilor Imobile WMS w_rsuat:mv_uat3; audit PR #94'};report.warnings.push({type:'official_point_touch_multipolygon_normalized',jurisdiction:country,relation_id:rid,coordinate:cfg.coordinate,component_count:rings.length,coordinate_edit:false});}
 }
 function entity(country,feature){
  const t=feature.properties?.tags||feature.properties||{}, rid=relationId(feature), c=classify(country,t);
@@ -205,6 +222,7 @@ async function main(){
  const all=[], report={generated_at:new Date().toISOString(),classifier_version:CLASSIFIER_VERSION,countries:{},warnings:[]};
  for(const [code,cfg] of Object.entries(countries)){
   const raw=await overpass(queryFor(cfg)), geo=osmtogeojson(raw,{flatProperties:false});
+  normalizeOfficialPointTouch(code,raw,geo,report);
   const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
   if(!countryFeature) throw new Error(`Missing country boundary geometry for ${code}`);
