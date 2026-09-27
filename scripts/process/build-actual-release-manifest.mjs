@@ -18,7 +18,8 @@ const PATHS={
  ro_gate:'data/current/ro-release-gate.json',
  md_gate:'data/current/md-release-gate.json',
  ro_official:'data/sources/ro-siruta-current.json',
- md_official:'data/sources/cuatm-current.json'
+ md_official:'data/sources/cuatm-current.json',
+ md_individual_review:'data/sources/md-cuatm-individual-review.json'
 };
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const buffers=Object.fromEntries(await Promise.all(Object.entries(PATHS).map(async([key,path])=>[key,await readFile(path)])));
