@@ -8,19 +8,22 @@ const MD_GEO='public/geo/current/md-administrative.geojson';
 const MD_RECON='data/current/md-cuatm-reconciliation.json';
 const MD_NON_CUATM='data/current/md-cuatm-non-cuatm-allotments.json';
 const MD_INDIVIDUAL='data/sources/md-cuatm-individual-review.json';
+const RO_COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const OUT_INDEX='public/data/actual-entities.json';
 const OUT_DIR='public/geo/actual';
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
-const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual]=await Promise.all([
- read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL)
+const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge]=await Promise.all([
+ read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE)
 ]);
+if(roCountyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
 
 const entities=catalog.entities||[];
 const entityById=new Map(entities.map(e=>[e.id,e]));
 const mdMatchById=new Map((mdRecon.matches||[]).map(x=>[x.id,x]));
 const mdNonCuatmById=new Map((mdNonCuatm.items||[]).map(x=>[x.id,x]));
 const mdIndividualById=new Map((mdIndividual.cases||[]).map(x=>[x.osm_id,x]));
+const roCountyById=new Map((roCountyBridge.matches||[]).map(x=>[x.entity_id,x]));
 const featureById=new Map();
 for(const [jurisdiction,geo] of [['RO',roGeo],['MD',mdGeo]]){
  for(const f of geo.features||[]){
@@ -41,6 +44,10 @@ function publicTypeFor(e,legal){
 }
 
 function legalFor(e){
+ const county=roCountyById.get(e.id);
+ if(e.jurisdiction==='RO'&&county){
+  return {registry:'SIRUTA',id:String(county.county_code),name:county.official_name||e.name||null,type:'county',status_code:null,parent_id:null,parent_name:'România',reference_year:2026,match_method:county.match_method,confidence:'high',source:'data/sources/ro-siruta-current.json'};
+ }
  if(e.jurisdiction==='RO'&&e.legal?.registry==='SIRUTA'&&e.legal?.id){
   return {
    registry:'SIRUTA',
