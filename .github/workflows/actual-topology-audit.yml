@@ -35,6 +35,8 @@ jobs:
         run: npm run import:osm
       - name: Verify regenerated topology
         run: npm run audit:actual-topology
+      - name: Audit RO+MD statistical levels and state polygons
+        run: npm run audit:actual-statistical-levels
       - name: Reconcile RO against official SIRUTA
         run: npm run audit:ro-official-reconciliation
       - name: Audit RO reconciliation exceptions
