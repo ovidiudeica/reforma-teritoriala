@@ -6,12 +6,14 @@ const OUTPUT='data/current/ro-official-reconciliation.json';
 const OVERRIDES='data/sources/ro-siruta-reviewed-overrides.json';
 const OFFICIAL_ONLY_RESOLUTIONS='data/sources/ro-official-only-reviewed-resolutions.json';
 const OTHER_LEVEL_RESOLUTIONS='data/sources/ro-other-level-reviewed-resolutions.json';
+const SEMANTIC_TYPE_RESOLUTIONS='data/sources/ro-semantic-type-reviewed-resolutions.json';
 const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const geo=JSON.parse(await readFile('public/geo/current/ro-administrative.geojson','utf8'));
 const official=JSON.parse(await readFile(SNAPSHOT,'utf8'));
 const reviewed=JSON.parse(await readFile(OVERRIDES,'utf8'));
 const officialOnlyReviewed=JSON.parse(await readFile(OFFICIAL_ONLY_RESOLUTIONS,'utf8'));
 const otherLevelReviewed=JSON.parse(await readFile(OTHER_LEVEL_RESOLUTIONS,'utf8'));
+const semanticTypeReviewed=JSON.parse(await readFile(SEMANTIC_TYPE_RESOLUTIONS,'utf8'));
 
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[„”"'’]/g,' ')
@@ -75,6 +77,13 @@ for(const x of overrideRows){
 }
 const officialOnlyResolutionRows=officialOnlyReviewed.items||[];
 const otherLevelResolutionRows=otherLevelReviewed.items||[];
+const semanticTypeResolutionRows=semanticTypeReviewed.items||[];
+const semanticTypeResolutionByKey=new Map();
+for(const x of semanticTypeResolutionRows){
+ const key=String(x.osm_relation_id)+'|'+String(x.legal_id);
+ if(!x.osm_relation_id||!x.legal_id||semanticTypeResolutionByKey.has(key))throw new Error('Duplicate/invalid reviewed semantic-type resolution: '+key);
+ semanticTypeResolutionByKey.set(key,x);
+}
 const otherLevelResolutionByLegalId=new Map();
 for(const x of otherLevelResolutionRows){
  const legalId=String(x.legal_id||'');
@@ -229,7 +238,30 @@ for(const row of rawOfficialOnly){
 }
 const byIssue=unmatched.reduce((a,x)=>(a[x.issue]=(a[x.issue]||0)+1,a),{});
 const byMethod=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,a),{});
-const typeMismatches=matched.filter(x=>x.type_matches===false);
+const rawTypeMismatches=matched.filter(x=>x.type_matches===false);
+const reviewedSemanticTypeResolutions=[],typeMismatches=[];
+for(const row of rawTypeMismatches){
+ const resolution=semanticTypeResolutionByKey.get(String(row.osm_relation_id)+'|'+String(row.legal_id))||null;
+ if(!resolution){typeMismatches.push(row);continue;}
+ const stable=Boolean(
+  row.match_method==='exact_normalized_name_and_county'
+  && row.parent_matches===true
+  && !row.reviewed_override
+  && row.osm_parent_id==='osm-r'+Number(resolution.expected_parent_osm_relation_id)
+  && norm(row.osm_name)===norm(resolution.osm_name)
+  && norm(row.legal_name)===norm(resolution.legal_name)
+  && row.legal_type===resolution.legal_type
+  && norm(row.legal_parent_name)===norm(resolution.legal_parent_name)
+  && row.osm_claimed_legal_type===resolution.osm_claimed_legal_type
+ );
+ if(!stable){typeMismatches.push(row);continue;}
+ reviewedSemanticTypeResolutions.push({
+  ...row,
+  classification:resolution.classification,
+  expected_parent_osm_relation_id:Number(resolution.expected_parent_osm_relation_id),
+  evidence_registry:SEMANTIC_TYPE_RESOLUTIONS
+ });
+}
 const parentMismatches=matched.filter(x=>x.parent_matches===false);
 const checks=[],failures=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail});};
@@ -253,12 +285,18 @@ const unresolvedReviewedOtherLevel=otherLevelResolutionRows.filter(x=>!reviewedO
 check('reviewed_other_level_legal_ids_exist',missingOtherLevelLegalIds.length===0,{missing:missingOtherLevelLegalIds});
 check('reviewed_other_level_osm_relations_exist',missingOtherLevelRelations.length===0,{missing:missingOtherLevelRelations});
 check('reviewed_other_level_structural_resolution_stable',unresolvedReviewedOtherLevel.length===0,{unresolved:unresolvedReviewedOtherLevel});
+const missingSemanticTypeLegalIds=semanticTypeResolutionRows.filter(x=>!officialByCode.has(String(x.legal_id))).map(x=>x.legal_id);
+const missingSemanticTypeRelations=semanticTypeResolutionRows.filter(x=>!entities.some(e=>Number(e.osm?.relation_id)===Number(x.osm_relation_id))).map(x=>x.osm_relation_id);
+const unresolvedReviewedSemanticTypes=semanticTypeResolutionRows.filter(x=>!reviewedSemanticTypeResolutions.some(y=>Number(y.osm_relation_id)===Number(x.osm_relation_id)&&String(y.legal_id)===String(x.legal_id))).map(x=>({osm_relation_id:x.osm_relation_id,legal_id:x.legal_id}));
+check('reviewed_semantic_type_legal_ids_exist',missingSemanticTypeLegalIds.length===0,{missing:missingSemanticTypeLegalIds});
+check('reviewed_semantic_type_osm_relations_exist',missingSemanticTypeRelations.length===0,{missing:missingSemanticTypeRelations});
+check('reviewed_semantic_type_structural_resolution_stable',unresolvedReviewedSemanticTypes.length===0,{unresolved:unresolvedReviewedSemanticTypes});
 const report={
  schema_version:1,
  generated_at:new Date().toISOString(),
  jurisdiction:'RO',
  scope:'Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.',
- policy:'Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Reviewed official UATs without a distinct OSM boundary may be classified separately only when their covering OSM representation remains structurally stable; reviewed UATs represented at a jurisdiction-specific exceptional OSM admin_level may likewise be resolved only when that representation remains structurally stable. No OSM geometry is promoted to legal geometry. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.',
+ policy:'Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Reviewed official UATs without a distinct OSM boundary may be classified separately only when their covering OSM representation remains structurally stable; reviewed UATs represented at a jurisdiction-specific exceptional OSM admin_level may likewise be resolved only when that representation remains structurally stable. Reviewed OSM semantic type metadata conflicts may be resolved only when exact name+county identity, OSM parent and official legal type all remain stable. No OSM geometry is promoted to legal geometry. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.',
  status:failures.length?'FAIL':'PASS',
  source:{
   official_snapshot:SNAPSHOT,
@@ -267,6 +305,7 @@ const report={
   reviewed_override_count:overrideRows.length,
   reviewed_official_only_resolutions:OFFICIAL_ONLY_RESOLUTIONS,
   reviewed_other_level_resolutions:OTHER_LEVEL_RESOLUTIONS,
+  reviewed_semantic_type_resolutions:SEMANTIC_TYPE_RESOLUTIONS,
   osm_catalog_generated_at:catalog.generated_at
  },
  checks,
@@ -278,6 +317,7 @@ const report={
   official_only_count:officialOnly.length,
   reviewed_official_only_resolution_count:reviewedOfficialOnlyResolutions.length,
   reviewed_other_level_resolution_count:reviewedOtherLevelResolutions.length,
+  reviewed_semantic_type_resolution_count:reviewedSemanticTypeResolutions.length,
   represented_at_other_osm_level_count:representedElsewhere.length,
   duplicate_legal_mapping_count:duplicates.length,
   parent_mismatch_count:parentMismatches.length,
@@ -290,6 +330,7 @@ const report={
  official_only:officialOnly,
  reviewed_official_only_resolutions:reviewedOfficialOnlyResolutions,
  reviewed_other_level_resolutions:reviewedOtherLevelResolutions,
+ reviewed_semantic_type_resolutions:reviewedSemanticTypeResolutions,
  represented_at_other_osm_level:representedElsewhere,
  duplicate_legal_mappings:duplicates,
  parent_mismatches:parentMismatches,
