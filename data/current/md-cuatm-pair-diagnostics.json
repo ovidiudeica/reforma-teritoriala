@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-09-27T11:26:58.579Z",
+  "generated_at": "2026-09-27T20:51:14.173Z",
   "jurisdiction": "MD",
-  "entity_count": 244,
+  "entity_count": 245,
   "by_category": {
-    "exact_name_parent_match_available": 186,
+    "exact_name_parent_match_available": 187,
     "official_parent_parse_suspect": 1,
     "child_name_match_parent_mismatch": 11,
     "no_official_name_candidate": 46
   },
   "policy": "Diagnostic only. No legal fields are assigned from this file.",
   "items": [
+    {
+      "id": "osm-r58512",
+      "name": "sectorul Centru",
+      "osm_relation_id": 58512,
+      "osm_parent_id": "osm-r1691801",
+      "osm_parent_name": "Municipiul Chișinău",
+      "osm_parent_relation_id": 1691801,
+      "verified_osm_parent_legal_id": "0100",
+      "verified_osm_parent_legal_name": "Chișinău",
+      "normalized_child_name": "centru",
+      "official_name_candidate_count": 1,
+      "official_name_candidates": [
+        {
+          "legal_id": "0130",
+          "legal_name": "Sectorul Centru",
+          "parent_code": "0100",
+          "parent_name": "Chișinău",
+          "official_sheet": "Sheet 1",
+          "official_row": 18,
+          "parent_matches_verified_osm_parent": true
+        }
+      ],
+      "diagnostic_category": "exact_name_parent_match_available"
+    },
     {
       "id": "osm-r1660993",
       "name": "Agronomovca",
