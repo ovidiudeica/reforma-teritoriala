@@ -32,7 +32,8 @@
     "audit:actual-official-identity": "node scripts/process/audit-actual-official-identity.mjs",
     "audit:md-chisinau-sectors": "node scripts/process/audit-md-chisinau-sectors.mjs",
     "audit:ro-county-siruta-bridge": "node scripts/process/audit-ro-county-siruta-bridge.mjs",
-    "audit:md-cuatm-semantic-bridge": "node scripts/process/audit-md-cuatm-semantic-bridge.mjs"
+    "audit:md-cuatm-semantic-bridge": "node scripts/process/audit-md-cuatm-semantic-bridge.mjs",
+    "apply:md-reviewed-reconciliation": "node scripts/process/apply-md-reviewed-reconciliation.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
