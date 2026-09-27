@@ -36,7 +36,8 @@
     "apply:md-reviewed-reconciliation": "node scripts/process/apply-md-reviewed-reconciliation.mjs",
     "build:actual-candidate-diff": "node scripts/process/build-actual-candidate-diff.mjs",
     "prepare:actual-candidate-promotion": "node scripts/process/prepare-actual-candidate-promotion.mjs",
-    "test:actual-candidate-lifecycle": "node --test scripts/test/actual-candidate-lifecycle.test.mjs scripts/test/ro-siruta-refresh-routing.test.mjs scripts/test/workflow-write-boundaries.test.mjs"
+    "test:actual-candidate-lifecycle": "node --test scripts/test/actual-candidate-lifecycle.test.mjs scripts/test/ro-siruta-refresh-routing.test.mjs scripts/test/workflow-write-boundaries.test.mjs",
+    "import:md-cuatm": "node scripts/import/import-md-cuatm.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
