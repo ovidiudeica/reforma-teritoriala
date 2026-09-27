@@ -1,69 +1,21 @@
 name: Refresh official Romania SIRUTA snapshot
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '41 4 2 * *'
-  push:
-    branches:
-      - main
-    paths:
-      - scripts/import/import-ro-siruta.mjs
-      - scripts/process/audit-ro-official-reconciliation.mjs
-      - scripts/process/audit-ro-official-exceptions.mjs
-      - scripts/process/apply-ro-official-reconciliation.mjs
-      - scripts/process/audit-ro-release-gate.mjs
-      - scripts/process/build-actual-public-data.mjs
-      - scripts/process/build-actual-release-manifest.mjs
-      - schemas/actual-public-entity.schema.json
-      - scripts/process/audit-actual-release-gate.mjs
-      - data/sources/ro-siruta-reviewed-overrides.json
-      - data/sources/ro-parent-assignment-reviewed-resolutions.json
-      - data/sources/ro-official-only-reviewed-resolutions.json
-      - data/sources/ro-other-level-reviewed-resolutions.json
-      - data/sources/ro-semantic-type-reviewed-resolutions.json
-      - data/sources/ro-official-reconciliation-exceptions.json
-      - package.json
-      - .github/workflows/refresh-ro-official.yml
+
 permissions:
   contents: write
+
 concurrency:
-  group: administrative-data-writers
+  group: ro-siruta-source-refresh
   cancel-in-progress: false
+
 jobs:
-  refresh:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          ref: main
-          fetch-depth: 0
-      - uses: actions/setup-node@v5
-        with:
-          node-version: '24'
-      - run: npm install
-      - name: Fetch official INS SIRUTA snapshot
-        run: npm run import:ro-siruta
-      - name: Reconcile current RO OSM level 8 against SIRUTA
-        run: npm run audit:ro-official-reconciliation
-      - name: Audit unresolved and reviewed RO official reconciliation cases
-        run: npm run audit:ro-official-exceptions
-      - name: Apply official SIRUTA identity and legal type to RO level 8
-        run: npm run apply:ro-official-reconciliation
-      - name: Rebuild administrative audit after official application
-        run: npm run audit:admin
-      - name: RO release gate
-        run: npm run audit:ro-release-gate
-      - name: Build public ACTUAL entity contract and tiered web geometry
-        run: npm run build:actual-public-data
-      - name: Build ACTUAL RO+MD release manifest
-        run: npm run build:actual-release-manifest
-      - name: ACTUAL RO+MD release gate
-        run: npm run audit:actual-release-gate
-      - name: Commit official snapshot and reconciliation report
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/sources/ro-siruta-current.json data/current/ro-official-reconciliation.json data/current/ro-official-exception-audit.json data/current/ro-official-application.json data/current/entities.json data/current/admin-audit.json data/current/admin-review.json data/current/ro-release-gate.json data/current/actual-release-manifest.json data/current/actual-release-gate.json public/data/actual-entities.json public/geo/actual/ data/sources/ro-osm-official-exception-history.json public/geo/current/ro-administrative.geojson
-          git diff --cached --quiet || git commit -m "data: refresh official RO SIRUTA reconciliation"
-          git pull --rebase origin "${GITHUB_REF_NAME}"
-          git push origin HEAD:"${GITHUB_REF_NAME}"
+  refresh-through-candidate:
+    uses: ./.github/workflows/actual-candidate.yml
+    with:
+      candidate_branch: ''
+      refresh_ro_siruta: true
+      source_trigger: 'ro-siruta-refresh'

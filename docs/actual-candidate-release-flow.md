@@ -48,3 +48,16 @@ When a regenerated candidate has the same canonical content as the persisted rel
 - promotion is rejected.
 
 Only a `CHANGE` candidate receives a new semantic release identity and may proceed to explicit promotion.
+
+
+## Romania SIRUTA source refresh
+
+The scheduled/manual `Refresh official Romania SIRUTA snapshot` workflow is a source trigger only. It calls the ACTUAL candidate workflow with `refresh_ro_siruta=true`; it does not reconcile, build, commit or push a release directly.
+
+The candidate order is intentional:
+
+`refresh SIRUTA -> regenerate raw OSM catalog -> RO reconciliation -> county bridge/application -> release gates -> semantic diff`.
+
+This ordering prevents a stage-mismatch regression observed in Actions run `36356055091`. The persisted catalog already represents OSM relation `377733` (București) after the RO county bridge as legal SIRUTA county/code `40` and catalog type `county`. The reviewed SIRUTA UAT `179132` resolution correctly describes the earlier raw OSM reconciliation stage, where relation `377733` is `capital_municipality` at admin_level 4. Running the raw reconciliation audit against the already post-bridge persisted catalog therefore produced a false structural failure. The reviewed resolution is not changed; the workflow stage is corrected.
+
+If the official SIRUTA fetch is unavailable and the importer preserves the last valid official CSV snapshot, candidate generation continues against that exact preserved source. If a refreshed SIRUTA snapshot is semantically unchanged, the lifecycle terminates as `NO_CHANGE`. A real official-registry change becomes a `CHANGE` candidate and can reach `main` only through explicit promotion and the protected PR path.

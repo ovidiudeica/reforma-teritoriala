@@ -8,6 +8,30 @@ on:
         required: false
         type: string
         default: ''
+      refresh_ro_siruta:
+        description: 'Refresh official RO SIRUTA source before reconciliation'
+        required: false
+        type: boolean
+        default: false
+      source_trigger:
+        description: 'Audit label for the source that requested this candidate build'
+        required: false
+        type: string
+        default: 'manual'
+  workflow_call:
+    inputs:
+      candidate_branch:
+        required: false
+        type: string
+        default: ''
+      refresh_ro_siruta:
+        required: false
+        type: boolean
+        default: false
+      source_trigger:
+        required: false
+        type: string
+        default: 'reusable'
 
 permissions:
   contents: write
@@ -63,6 +87,17 @@ jobs:
           NODE
 
       - run: npm install --no-audit --no-fund
+
+      - name: Refresh official RO SIRUTA source inside candidate workspace
+        if: inputs.refresh_ro_siruta == true
+        timeout-minutes: 5
+        run: npm run import:ro-siruta
+
+      - name: Record candidate source trigger
+        run: |
+          echo "### Candidate source trigger" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Trigger: ${{ inputs.source_trigger }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Regenerate OSM ACTUAL master
         timeout-minutes: 20
@@ -189,8 +224,8 @@ jobs:
           git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
           git push origin "HEAD:$CANDIDATE_BRANCH"
           echo "### Promotable ACTUAL candidate" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Branch: `$CANDIDATE_BRANCH`" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Snapshot: `$SNAPSHOT_ID`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Branch: $CANDIDATE_BRANCH" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Snapshot: $SNAPSHOT_ID" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Confirm no-change candidate is terminal
         if: steps.disposition.outputs.status == 'NO_CHANGE'
