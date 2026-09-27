@@ -48,6 +48,7 @@ const typeLabels={
 const statusLabels={
  reconciled:'identitate oficială reconciliată',
  outside_current_legal_registry:'reprezentare în afara registrului legal curent',
+ reviewed_representation_without_legal_identity:'reprezentare de-facto auditată, fără geometrie juridică atribuită',
  unresolved:'identitate oficială nerezolvată',
  not_bound_to_official_registry:'fără legătură cu registrul oficial în contract'
 };
