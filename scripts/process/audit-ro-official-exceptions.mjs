@@ -383,6 +383,9 @@ const officialOnlyResolutionValidation=(officialOnlyReviewed.items||[]).map(x=>{
  try{relationAreaKm2=feature?area(feature)/1e6:null;}catch{}
  const primaryInsideAll=Boolean(primaryContainment&&primaryContainment.official_locality_count>0&&primaryContainment.inside_count===primaryContainment.official_locality_count);
  const coveringInsideAll=Boolean(coveringContainment&&coveringContainment.official_locality_count>0&&coveringContainment.inside_count===coveringContainment.official_locality_count);
+ const expectedComponentIds=[...(x.official_component_locality_ids||[])].map(String).sort();
+ const actualComponentIds=[...(primaryContainment?.inside_localities||[])].map(y=>String(y.siruta)).filter(Boolean).sort();
+ const componentIdsMatch=expectedComponentIds.length>0&&expectedComponentIds.length===actualComponentIds.length&&expectedComponentIds.every((id,i)=>id===actualComponentIds[i]);
  const stable=Boolean(
   reviewedResolution
   && reviewedResolution.classification===x.classification
@@ -392,6 +395,7 @@ const officialOnlyResolutionValidation=(officialOnlyReviewed.items||[]).map(x=>{
   && Number(parent?.osm?.relation_id)===Number(x.expected_parent_osm_relation_id)
   && primaryInsideAll
   && coveringInsideAll
+  && componentIdsMatch
   && history
  );
  return {
@@ -407,6 +411,9 @@ const officialOnlyResolutionValidation=(officialOnlyReviewed.items||[]).map(x=>{
   covering_relation_area_km2:relationAreaKm2,
   official_locality_containment:primaryContainment,
   covering_uat_official_locality_containment:coveringContainment,
+  expected_component_locality_ids:expectedComponentIds,
+  actual_component_locality_ids:actualComponentIds,
+  component_locality_ids_match:componentIdsMatch,
   osm_history:history,
   geometry_modified:false,
   legal_geometry_claimed:false,
