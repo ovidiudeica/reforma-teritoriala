@@ -57,6 +57,24 @@ check('release_fingerprint_matches_current_components',
  {expected:manifest.release_fingerprint_sha256,actual:fingerprint});
 check('snapshot_id_matches_release_fingerprint',manifest.snapshot_id===expectedSnapshotId,{expected:expectedSnapshotId,actual:manifest.snapshot_id});
 
+const summarizedHashDrift=[
+ ['catalog',manifest.catalog?.sha256,currentHashes.catalog],
+ ['administrative_model',manifest.administrative_model?.sha256,currentHashes.inventory],
+ ['geometry.RO',manifest.geometry?.RO?.sha256,currentHashes.ro_geojson],
+ ['geometry.MD',manifest.geometry?.MD?.sha256,currentHashes.md_geojson],
+ ['jurisdiction_gates.RO',manifest.jurisdiction_gates?.RO?.sha256,currentHashes.ro_gate],
+ ['jurisdiction_gates.MD',manifest.jurisdiction_gates?.MD?.sha256,currentHashes.md_gate],
+ ['official_sources.RO',manifest.official_sources?.RO?.sha256,currentHashes.ro_official],
+ ['official_sources.MD',manifest.official_sources?.MD?.sha256,currentHashes.md_official]
+].filter(([,expected,actual])=>expected!==actual).map(([section,expected,actual])=>({section,expected,actual}));
+check('manifest_summary_hashes_match_current_snapshot',summarizedHashDrift.length===0,{drift:summarizedHashDrift});
+
+const validTimes=[
+ catalog.generated_at,roGate.generated_at,mdGate.generated_at,siruta.fetched_at,cuatm.fetched_at
+].filter(Boolean).map(x=>new Date(x)).filter(x=>Number.isFinite(x.getTime()));
+const expectedGeneratedAt=(validTimes.length?new Date(Math.max(...validTimes.map(x=>x.getTime()))):new Date(0)).toISOString();
+check('manifest_generated_at_matches_snapshot_watermark',manifest.generated_at===expectedGeneratedAt,{expected:expectedGeneratedAt,actual:manifest.generated_at});
+
 check('catalog_declared_entity_count_is_consistent',
  catalog.entity_count===entities.length,
  {declared:catalog.entity_count,actual:entities.length});
