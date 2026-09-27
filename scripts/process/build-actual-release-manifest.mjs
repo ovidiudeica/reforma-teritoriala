@@ -19,7 +19,9 @@ const PATHS={
  md_gate:'data/current/md-release-gate.json',
  ro_official:'data/sources/ro-siruta-current.json',
  md_official:'data/sources/cuatm-current.json',
- md_individual_review:'data/sources/md-cuatm-individual-review.json'
+ md_individual_review:'data/sources/md-cuatm-individual-review.json',
+ topology_audit:'data/current/actual-topology-audit.json',
+ regression_audit:'data/current/actual-regression-audit.json'
 };
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const buffers=Object.fromEntries(await Promise.all(Object.entries(PATHS).map(async([key,path])=>[key,await readFile(path)])));
@@ -33,6 +35,8 @@ const roGate=json('ro_gate');
 const mdGate=json('md_gate');
 const siruta=json('ro_official');
 const cuatm=json('md_official');
+const topologyAudit=json('topology_audit');
+const regressionAudit=json('regression_audit');
 
 const jurisdictions=['RO','MD'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -109,6 +113,10 @@ const manifest={
    RO:{overview:tier('RO','overview'),local:tier('RO','local'),detail:tier('RO','detail')},
    MD:{overview:tier('MD','overview'),local:tier('MD','local'),detail:tier('MD','detail')}
   }
+ },
+ quality_gates:{
+  topology:{path:PATHS.topology_audit,status:topologyAudit.status??null,blocking_issue_count:topologyAudit.blocking_issue_count??null,sha256:components.topology_audit.sha256},
+  regression:{path:PATHS.regression_audit,status:regressionAudit.status??null,blocking_issue_count:regressionAudit.blocking_issue_count??null,sha256:components.regression_audit.sha256}
  },
  jurisdiction_gates:{
   RO:{path:PATHS.ro_gate,status:roGate.status??null,generated_at:roGate.generated_at??null,sha256:components.ro_gate.sha256},
