@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_id": "actual-83ef4c0ce09e5e42",
-  "release_fingerprint_sha256": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae",
-  "manifest_sha256": "89e9afe4f7c0b4ee6efdcf9e81c76f8719daa92278f107898baf17f6d054880f",
+  "snapshot_id": "actual-212ababc869cbdec",
+  "release_fingerprint_sha256": "212ababc869cbdece9df43c32bc6cb7bd4a100a3c7d488021d2f8d4c4d3e503d",
+  "manifest_sha256": "218bb6c04eca9d9506d41865ab3302b7feff9f9d6c639f28de26a921635e31d9",
   "source_bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
@@ -10,18 +10,14 @@
   "build_environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
-    "base_snapshot_id": "actual-990c892d9d27fa46",
-    "base_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
-    "diff_report_sha256": "1a41382b425975cfbcae984a4d442f6b6f4191b215e64116391a5f9251a3f8af",
+    "base_snapshot_id": "actual-83ef4c0ce09e5e42",
+    "base_commit_sha": "1d0868c49cf530d393b1d2b52638eb00f1d0f358",
+    "diff_report_sha256": "b741acbc722ee995c1382e93bced63569c07a1e696f0dfc1f11f75e189e3b4c1",
     "review_required": true,
-    "substantive_change_count": 3,
-    "candidate_identity_sha256": "eb53b31c397817df323ccbc218d3eade8495d919f6075dd677cb2e61c1450925",
-    "candidate_commit_sha": "d799704194638d824589aefdb0dc5a0bfa95b08b",
+    "substantive_change_count": 5,
+    "candidate_identity_sha256": "2ec5e5ba14c216b5ed426b758b5c863d3ec57a45282437a3dd4b0c3de92092f1",
+    "candidate_commit_sha": "c54c228cfb5c7ef67dd6ec0c3e39358c06495584",
     "promotion_audit_path": "data/current/actual-candidate-promotion-audit.json"
   },
-  "policy": "Persisted ACTUAL marker rebound after promotion workflow policy compatibility hardening. Semantic snapshot identity is unchanged; the build-environment and release provenance are rebound only after exact regenerated gates pass.",
-  "provenance_hardening": {
-    "previous_manifest_sha256": "fa438acf293faed70898d7b8cfe4c2a5b8a2a5c6df17c9fd0024c5560d8407a0",
-    "reason": "promotion-pr-handoff-policy-compatibility"
-  }
+  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes."
 }
