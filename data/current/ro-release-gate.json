@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T07:25:58.245Z",
+  "generated_at": "2026-09-27T08:24:07.344Z",
   "jurisdiction": "RO",
   "status": "PASS",
-  "policy": "RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, complete official application, and only exact documented semantic residuals. Reviewed UATs without a distinct OSM boundary must pass official-locality containment and provenance checks; no covering OSM geometry is promoted to legal geometry. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.",
+  "policy": "RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, zero unresolved cross-level UAT representations, complete official application, and only exact documented semantic residuals. Reviewed UATs without a distinct OSM boundary and reviewed jurisdiction-specific exceptional OSM admin levels must pass dedicated structural/provenance checks; no OSM geometry is promoted to legal geometry. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.",
   "checks": [
     {
       "name": "no_new_ro_review_exceptions",
@@ -60,6 +60,13 @@
       }
     },
     {
+      "name": "ro_official_reconciliation_has_no_unresolved_other_level",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    },
+    {
       "name": "ro_official_application_pass",
       "ok": true,
       "detail": {
@@ -72,7 +79,8 @@
           "osm_semantic_type_conflict_count": 3,
           "official_only_count": 0,
           "reviewed_official_only_resolution_count": 1,
-          "represented_at_other_osm_level_count": 1
+          "reviewed_other_level_resolution_count": 1,
+          "represented_at_other_osm_level_count": 0
         }
       }
     },
@@ -116,6 +124,22 @@
         "missing": [],
         "unexpected": [],
         "changed": []
+      }
+    },
+    {
+      "name": "ro_reviewed_other_level_resolution_set_is_stable",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "unexpected": [],
+        "changed": []
+      }
+    },
+    {
+      "name": "ro_reviewed_other_level_structure_audit_pass",
+      "ok": true,
+      "detail": {
+        "failed": []
       }
     },
     {
