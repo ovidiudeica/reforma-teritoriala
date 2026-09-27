@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import osmtogeojson from 'osmtogeojson';
-import { pointOnFeature, booleanPointInPolygon } from '@turf/turf';
+import { area, intersect, featureCollection, pointOnFeature, booleanPointInPolygon } from '@turf/turf';
 
 const ENDPOINTS=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://overpass.nchc.org.tw/api/interpreter'];
 const RETRIES_PER_ENDPOINT=3;
@@ -97,9 +97,10 @@ function entity(country,feature){
 function assignParents(entities,featuresById,warnings=[]){
  for(const child of entities){
   const cf=featuresById.get(child.id); if(!cf)continue;
-  let pt;
+  let pt,childArea;
   try{
    pt=pointOnFeature(cf);
+   childArea=area(cf);
   }catch(e){
    warnings.push({type:'invalid_child_geometry',entity_id:child.id,relation_id:child.osm.relation_id,message:e.message});
    child.parent_id=child.jurisdiction;
@@ -107,17 +108,61 @@ function assignParents(entities,featuresById,warnings=[]){
   }
   const cl=child.osm.admin_level??99;
   const candidates=entities.filter(p=>p.jurisdiction===child.jurisdiction&&(p.osm.admin_level??99)<cl);
-  const containing=candidates.filter(p=>{
-   const pf=featuresById.get(p.id);
-   if(!pf)return false;
-   try{return booleanPointInPolygon(pt,pf);}
-   catch(e){
-    warnings.push({type:'invalid_parent_geometry',entity_id:p.id,relation_id:p.osm.relation_id,child_id:child.id,message:e.message});
-    return false;
+  const levels=[...new Set(candidates.map(p=>p.osm.admin_level??0))].sort((a,b)=>b-a);
+  let selected=null;
+  for(const level of levels){
+   const peers=candidates.filter(p=>(p.osm.admin_level??0)===level);
+   const strict=[];
+   for(const p of peers){
+    const pf=featuresById.get(p.id);
+    if(!pf)continue;
+    try{
+     if(booleanPointInPolygon(pt,pf,{ignoreBoundary:true}))strict.push(p);
+    }catch(e){
+     warnings.push({type:'invalid_parent_geometry',entity_id:p.id,relation_id:p.osm.relation_id,child_id:child.id,message:e.message});
+    }
    }
-  });
-  containing.sort((a,b)=>(b.osm.admin_level??0)-(a.osm.admin_level??0));
-  child.parent_id=containing[0]?.id||child.jurisdiction;
+   if(strict.length===1){selected=strict[0];break;}
+
+   // A representative point may land exactly on a shared administrative border.
+   // When strict containment is ambiguous or absent, resolve the closest parent
+   // level by positive polygon-area overlap; boundary-only contact has zero area.
+   const scored=[];
+   for(const p of peers){
+    const pf=featuresById.get(p.id);
+    if(!pf)continue;
+    try{
+     const overlap=intersect(featureCollection([cf,pf]));
+     const overlapArea=overlap?area(overlap):0;
+     const coverage=childArea?overlapArea/childArea:0;
+     if(coverage>1e-12)scored.push({parent:p,coverage,overlap_area_m2:overlapArea});
+    }catch(e){
+     warnings.push({type:'parent_overlap_geometry_error',entity_id:p.id,relation_id:p.osm.relation_id,child_id:child.id,message:e.message});
+    }
+   }
+   scored.sort((a,b)=>b.coverage-a.coverage-(Number(a.parent.osm?.relation_id)||0)+(Number(b.parent.osm?.relation_id)||0));
+   if(scored.length){
+    selected=scored[0].parent;
+    if(strict.length!==1||scored.length>1)warnings.push({
+     type:'parent_assignment_overlap_resolution',
+     child_id:child.id,
+     child_relation_id:child.osm.relation_id,
+     admin_level:level,
+     representative_point:pt.geometry?.coordinates||null,
+     strict_candidate_relation_ids:strict.map(p=>p.osm.relation_id),
+     overlap_candidates:scored.map(x=>({relation_id:x.parent.osm.relation_id,coverage:x.coverage,overlap_area_m2:x.overlap_area_m2})),
+     selected_relation_id:selected.osm.relation_id
+    });
+    break;
+   }
+   if(strict.length>1){
+    strict.sort((a,b)=>(Number(a.osm?.relation_id)||0)-(Number(b.osm?.relation_id)||0));
+    selected=strict[0];
+    warnings.push({type:'ambiguous_strict_parent_fallback',child_id:child.id,child_relation_id:child.osm.relation_id,admin_level:level,candidate_relation_ids:strict.map(p=>p.osm.relation_id),selected_relation_id:selected.osm.relation_id});
+    break;
+   }
+  }
+  child.parent_id=selected?.id||child.jurisdiction;
  }
 }
 function finalizeAfterParents(entities){
