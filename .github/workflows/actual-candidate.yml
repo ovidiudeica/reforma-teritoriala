@@ -65,6 +65,11 @@ jobs:
       - run: npm install --no-audit --no-fund
 
       - name: Regenerate OSM ACTUAL master
+        timeout-minutes: 20
+        env:
+          OVERPASS_REQUEST_TIMEOUT_MS: '90000'
+          OVERPASS_RETRIES_PER_ENDPOINT: '2'
+          OVERPASS_RETRY_BACKOFF_MS: '5000'
         run: npm run import:osm
 
       - name: Audit ACTUAL master topology
