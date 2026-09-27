@@ -212,7 +212,6 @@ function renderTier(jurisdiction,tier){
  const data=tierData.get(key);
  if(!group||!data)return;
  group.clearLayers();
- selectedLayer=null;
  L.geoJSON(data,{
   filter:feature=>{
    const entity=entityById.get(feature.properties?.entity_id);
@@ -312,8 +311,11 @@ async function selectEntity(id,zoom=false,clickedLayer=null){
  await syncTiers();
  if(clickedLayer){clickedLayer.setStyle(selectedStyle);selectedLayer=clickedLayer;return;}
  for(const group of Object.values(tierGroups)){
-  group.eachLayer(layer=>{
-   if(layer.feature?.properties?.entity_id===id){layer.setStyle(selectedStyle);selectedLayer=layer;}
+  group.eachLayer(container=>{
+   const inspect=layer=>{
+    if(layer.feature?.properties?.entity_id===id){layer.setStyle(selectedStyle);selectedLayer=layer;}
+   };
+   if(typeof container.eachLayer==='function')container.eachLayer(inspect);else inspect(container);
   });
  }
 }
