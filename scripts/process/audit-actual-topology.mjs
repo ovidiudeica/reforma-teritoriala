@@ -78,7 +78,7 @@ for(const e of entities){
  const child=featureById.get(e.id);
  if(!child)continue;
  const parentId=e.parent_id??e.parent?.id??e.parent_entity_id??null;
- if(!parentId)continue;
+ if(!parentId||parentId===e.jurisdiction)continue;
  const parent=featureById.get(parentId);
  if(!parent){add(observations,e.jurisdiction,e.id,'parent_geometry_not_available',{parent_id:parentId});continue;}
  const childBox=bboxById.get(e.id),parentBox=bboxById.get(parentId);
