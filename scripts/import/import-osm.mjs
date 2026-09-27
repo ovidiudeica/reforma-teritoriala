@@ -140,7 +140,11 @@ function assignParents(entities,featuresById,warnings=[]){
      warnings.push({type:'parent_overlap_geometry_error',entity_id:p.id,relation_id:p.osm.relation_id,child_id:child.id,message:e.message});
     }
    }
-   scored.sort((a,b)=>b.coverage-a.coverage-(Number(a.parent.osm?.relation_id)||0)+(Number(b.parent.osm?.relation_id)||0));
+   scored.sort((a,b)=>{
+    const coverageDelta=b.coverage-a.coverage;
+    if(Math.abs(coverageDelta)>1e-12)return coverageDelta;
+    return (Number(a.parent.osm?.relation_id)||0)-(Number(b.parent.osm?.relation_id)||0);
+   });
    if(scored.length){
     selected=scored[0].parent;
     if(strict.length!==1||scored.length>1)warnings.push({
