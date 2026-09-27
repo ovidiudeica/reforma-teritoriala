@@ -88,8 +88,8 @@ function relationId(feature){
  const id=String(feature.id||''); const m=id.match(/relation\/(\d+)/); return m?Number(m[1]):null;
 }
 const MD_OFFICIAL_POINT_TOUCH_NORMALIZATIONS=new Map([[12463200,{classification:'official_point_touch_multipolygon',coordinate:[29.2405257,46.7587398],rings:[
- [76585146,76583058],
- [94511352,60741665,918930470,918853567,918853573,918853568,918853569,125859262,918853574]
+ [76585146,918853569,918853568,918853573,918853567,918930470,60741665,94511352],
+ [76583058,125859262,918853574]
 ]}]]);
 function ringFromWays(raw,wayIds){
  const wayById=new Map(raw.elements.filter(x=>x.type==='way').map(x=>[x.id,x]));
