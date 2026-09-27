@@ -120,8 +120,14 @@ check('md_reviewed_public_identity_status_is_stable',reviewedStatusIssues.length
 
 const tierDocs=Object.fromEntries(tierKeys.map(key=>[key,json(key)]));
 const tierIssues=[];
+const fidelityIssues=[];
 const seenGeometryIds=new Set();
 const publicById=new Map(publicEntities.map(x=>[x.id,x]));
+const masterGeometryById=new Map(
+ [...(roGeo.features||[]),...(mdGeo.features||[])]
+  .filter(f=>f.properties?.catalog_id)
+  .map(f=>[f.properties.catalog_id,f.geometry])
+);
 for(const key of tierKeys){
  const doc=tierDocs[key];
  const [jurisdictionRaw,tier]=key.split('_');
@@ -133,6 +139,10 @@ for(const key of tierKeys){
   if(entity&&entity.jurisdiction!==jurisdiction)tierIssues.push({key,entity_id:p.entity_id,issue:'jurisdiction_mismatch'});
   if(entity&&entity.map?.tier!==tier)tierIssues.push({key,entity_id:p.entity_id,issue:'tier_mismatch',expected:entity.map?.tier});
   if('tags' in p)tierIssues.push({key,entity_id:p.entity_id,issue:'raw_tags_leaked'});
+  if(p.geometry_precision!=='master_coordinate_fidelity')fidelityIssues.push({key,entity_id:p.entity_id,issue:'precision_marker_mismatch',actual:p.geometry_precision??null});
+  const masterGeometry=masterGeometryById.get(p.entity_id);
+  if(!masterGeometry)fidelityIssues.push({key,entity_id:p.entity_id,issue:'master_geometry_missing'});
+  else if(JSON.stringify(f.geometry)!==JSON.stringify(masterGeometry))fidelityIssues.push({key,entity_id:p.entity_id,issue:'coordinate_drift'});
   if(seenGeometryIds.has(p.entity_id))tierIssues.push({key,entity_id:p.entity_id,issue:'duplicate_public_geometry'});
   seenGeometryIds.add(p.entity_id);
  }
@@ -141,6 +151,9 @@ const missingGeometry=[...publicIds].filter(id=>!seenGeometryIds.has(id));
 check('tiered_public_geometry_matches_public_contract',
  tierIssues.length===0&&missingGeometry.length===0&&seenGeometryIds.size===publicEntities.length,
  {issues:tierIssues.slice(0,25),missing:missingGeometry.slice(0,25),geometry_count:seenGeometryIds.size,entity_count:publicEntities.length});
+check('tiered_public_geometry_preserves_master_coordinates',
+ fidelityIssues.length===0,
+ {issues:fidelityIssues.slice(0,25),checked_geometry_count:seenGeometryIds.size});
 
 const publicTierCounts={
  RO:['ro_overview','ro_local','ro_detail'].reduce((n,key)=>n+(tierDocs[key].features||[]).length,0),
@@ -182,7 +195,7 @@ const report={
  manifest_path:MANIFEST,
  manifest_sha256:sha256(manifestBuf),
  status:failures.length?'FAIL':'PASS',
- policy:'The public ACTUAL RO+MD release is publishable only when both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity. Any drift fails closed.',
+ policy:'The public ACTUAL RO+MD release is publishable only when both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.',
  checks,
  failures
 };
