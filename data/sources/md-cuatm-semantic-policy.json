@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "jurisdiction": "MD",
+  "as_of": "2026-09-27",
+  "policy": "Official semantic subtype bridge for current CUATM administrative UATs. CUATM supplies legal identity, hierarchy and status codes; Law 764/2001 supplies the exhaustive municipality set and the legal distinction between level-I and level-II municipalities. OSM tags/admin_level are not legal subtype evidence.",
+  "sources": [
+    {
+      "authority": "Biroul Național de Statistică al Republicii Moldova",
+      "label": "CUATM current Excel",
+      "url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+      "role": "official_identity_hierarchy_status"
+    },
+    {
+      "authority": "Parlamentul Republicii Moldova / legis.md",
+      "label": "Legea nr. 764/2001 privind organizarea administrativ-teritorială, text consolidat",
+      "url": "https://www.legis.md/cautare/downloadpdf/101218",
+      "role": "official_municipality_status_and_administrative_level"
+    }
+  ],
+  "current_municipalities": [
+    "Chișinău",
+    "Bălți",
+    "Bender",
+    "Cahul",
+    "Ceadîr-Lunga",
+    "Comrat",
+    "Edineț",
+    "Hîncești",
+    "Orhei",
+    "Soroca",
+    "Strășeni",
+    "Tiraspol",
+    "Ungheni"
+  ],
+  "level_2_municipalities": [
+    "Chișinău",
+    "Bălți"
+  ],
+  "rules": {
+    "status_5": {
+      "level_2_municipality": "status_code=5 identity whose official name is exactly one of the exhaustive level-II municipality set: Chișinău, Bălți.",
+      "level_1_municipality": "Any other status_code=5 identity, after proving the complete status_code=5 population equals the exhaustive current municipality set.",
+      "fail_closed": "Any missing, duplicate, unexpected or cross-status municipality identity blocks the bridge."
+    },
+    "status_3": {
+      "semantic_type": "town",
+      "rule": "Every current CUATM status_code=3 identity is a town. Municipality status is represented by status_code=5 and is validated separately against Law 764/2001; OSM admin_level/place is not used."
+    },
+    "status_8": {
+      "commune": "status_code=8 with one or more direct CUATM children, all of status_code=9.",
+      "independent_village": "status_code=8 with zero direct CUATM children.",
+      "fail_closed": "Any status_code=8 child whose status_code is not 9, duplicate code, broken parent reference or unclassified structure is blocking."
+    }
+  },
+  "settlement_policy_separation": "CUATM status_code 6/9 component localities are intentionally outside this bridge. Their polygon-exhaustiveness policy remains separately NOT_DETERMINED."
+}

@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T20:37:20.899Z",
+  "jurisdiction": "RO",
+  "registry": "SIRUTA",
+  "status": "PASS",
+  "policy": "Fail-closed 1:1 bridge between current RO admin_level=4 OSM representations and unique SIRUTA county codes using exact normalized county names only; no fuzzy matching.",
+  "summary": {
+    "osm_level4_count": 42,
+    "official_county_count": 42,
+    "matched_count": 42,
+    "issue_count": 0
+  },
+  "matches": [
+    {
+      "entity_id": "osm-r194271",
+      "osm_relation_id": 194271,
+      "osm_name": "Alba",
+      "county_code": "1",
+      "official_name": "JUDEȚUL ALBA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248721",
+      "osm_relation_id": 2248721,
+      "osm_name": "Arad",
+      "county_code": "2",
+      "official_name": "JUDEȚUL ARAD",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2261315",
+      "osm_relation_id": 2261315,
+      "osm_name": "Argeș",
+      "county_code": "3",
+      "official_name": "JUDEȚUL ARGEȘ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248681",
+      "osm_relation_id": 2248681,
+      "osm_name": "Bacău",
+      "county_code": "4",
+      "official_name": "JUDEȚUL BACĂU",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r91731",
+      "osm_relation_id": 91731,
+      "osm_name": "Bihor",
+      "county_code": "5",
+      "official_name": "JUDEȚUL BIHOR",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r55466",
+      "osm_relation_id": 55466,
+      "osm_name": "Bistrița-Năsăud",
+      "county_code": "6",
+      "official_name": "JUDEȚUL BISTRIȚA-NĂSĂUD",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2256729",
+      "osm_relation_id": 2256729,
+      "osm_name": "Botoșani",
+      "county_code": "7",
+      "official_name": "JUDEȚUL BOTOȘANI",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248612",
+      "osm_relation_id": 2248612,
+      "osm_name": "Brașov",
+      "county_code": "8",
+      "official_name": "JUDEȚUL BRAȘOV",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2355512",
+      "osm_relation_id": 2355512,
+      "osm_name": "Brăila",
+      "county_code": "9",
+      "official_name": "JUDEȚUL BRĂILA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r377733",
+      "osm_relation_id": 377733,
+      "osm_name": "București",
+      "county_code": "40",
+      "official_name": "MUNICIPIUL BUCUREȘTI",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2355511",
+      "osm_relation_id": 2355511,
+      "osm_name": "Buzău",
+      "county_code": "10",
+      "official_name": "JUDEȚUL BUZĂU",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2366873",
+      "osm_relation_id": 2366873,
+      "osm_name": "Caraș-Severin",
+      "county_code": "11",
+      "official_name": "JUDEȚUL CARAȘ-SEVERIN",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2367015",
+      "osm_relation_id": 2367015,
+      "osm_name": "Călărași",
+      "county_code": "51",
+      "official_name": "JUDEȚUL CĂLĂRAȘI",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r91733",
+      "osm_relation_id": 91733,
+      "osm_name": "Cluj",
+      "county_code": "12",
+      "official_name": "JUDEȚUL CLUJ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2367022",
+      "osm_relation_id": 2367022,
+      "osm_name": "Constanța",
+      "county_code": "13",
+      "official_name": "JUDEȚUL CONSTANȚA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248621",
+      "osm_relation_id": 2248621,
+      "osm_name": "Covasna",
+      "county_code": "14",
+      "official_name": "JUDEȚUL COVASNA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2355471",
+      "osm_relation_id": 2355471,
+      "osm_name": "Dâmbovița",
+      "county_code": "15",
+      "official_name": "JUDEȚUL DÂMBOVIȚA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2366970",
+      "osm_relation_id": 2366970,
+      "osm_name": "Dolj",
+      "county_code": "16",
+      "official_name": "JUDEȚUL DOLJ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2260192",
+      "osm_relation_id": 2260192,
+      "osm_name": "Galați",
+      "county_code": "17",
+      "official_name": "JUDEȚUL GALAȚI",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2366987",
+      "osm_relation_id": 2366987,
+      "osm_name": "Giurgiu",
+      "county_code": "52",
+      "official_name": "JUDEȚUL GIURGIU",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2261275",
+      "osm_relation_id": 2261275,
+      "osm_name": "Gorj",
+      "county_code": "18",
+      "official_name": "JUDEȚUL GORJ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248660",
+      "osm_relation_id": 2248660,
+      "osm_name": "Harghita",
+      "county_code": "19",
+      "official_name": "JUDEȚUL HARGHITA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248737",
+      "osm_relation_id": 2248737,
+      "osm_name": "Hunedoara",
+      "county_code": "20",
+      "official_name": "JUDEȚUL HUNEDOARA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2355517",
+      "osm_relation_id": 2355517,
+      "osm_name": "Ialomița",
+      "county_code": "21",
+      "official_name": "JUDEȚUL IALOMIȚA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2256747",
+      "osm_relation_id": 2256747,
+      "osm_name": "Iași",
+      "county_code": "22",
+      "official_name": "JUDEȚUL IAȘI",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2366996",
+      "osm_relation_id": 2366996,
+      "osm_name": "Ilfov",
+      "county_code": "23",
+      "official_name": "JUDEȚUL ILFOV",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r72481",
+      "osm_relation_id": 72481,
+      "osm_name": "Maramureș",
+      "county_code": "24",
+      "official_name": "JUDEȚUL MARAMUREȘ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2366962",
+      "osm_relation_id": 2366962,
+      "osm_name": "Mehedinți",
+      "county_code": "25",
+      "official_name": "JUDEȚUL MEHEDINȚI",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248573",
+      "osm_relation_id": 2248573,
+      "osm_name": "Mureș",
+      "county_code": "26",
+      "official_name": "JUDEȚUL MUREȘ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248675",
+      "osm_relation_id": 2248675,
+      "osm_name": "Neamț",
+      "county_code": "27",
+      "official_name": "JUDEȚUL NEAMȚ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2366978",
+      "osm_relation_id": 2366978,
+      "osm_name": "Olt",
+      "county_code": "28",
+      "official_name": "JUDEȚUL OLT",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2355507",
+      "osm_relation_id": 2355507,
+      "osm_name": "Prahova",
+      "county_code": "29",
+      "official_name": "JUDEȚUL PRAHOVA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r72482",
+      "osm_relation_id": 72482,
+      "osm_name": "Satu Mare",
+      "county_code": "30",
+      "official_name": "JUDEȚUL SATU MARE",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r91685",
+      "osm_relation_id": 91685,
+      "osm_name": "Sălaj",
+      "county_code": "31",
+      "official_name": "JUDEȚUL SĂLAJ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2248586",
+      "osm_relation_id": 2248586,
+      "osm_name": "Sibiu",
+      "county_code": "32",
+      "official_name": "JUDEȚUL SIBIU",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2077868",
+      "osm_relation_id": 2077868,
+      "osm_name": "Suceava",
+      "county_code": "33",
+      "official_name": "JUDEȚUL SUCEAVA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2366986",
+      "osm_relation_id": 2366986,
+      "osm_name": "Teleorman",
+      "county_code": "34",
+      "official_name": "JUDEȚUL TELEORMAN",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2366863",
+      "osm_relation_id": 2366863,
+      "osm_name": "Timiș",
+      "county_code": "35",
+      "official_name": "JUDEȚUL TIMIȘ",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2367044",
+      "osm_relation_id": 2367044,
+      "osm_name": "Tulcea",
+      "county_code": "36",
+      "official_name": "JUDEȚUL TULCEA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2256753",
+      "osm_relation_id": 2256753,
+      "osm_name": "Vaslui",
+      "county_code": "37",
+      "official_name": "JUDEȚUL VASLUI",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2261289",
+      "osm_relation_id": 2261289,
+      "osm_name": "Vâlcea",
+      "county_code": "38",
+      "official_name": "JUDEȚUL VÂLCEA",
+      "match_method": "exact_normalized_county_name"
+    },
+    {
+      "entity_id": "osm-r2260187",
+      "osm_relation_id": 2260187,
+      "osm_name": "Vrancea",
+      "county_code": "39",
+      "official_name": "JUDEȚUL VRANCEA",
+      "match_method": "exact_normalized_county_name"
+    }
+  ],
+  "issues": []
+}

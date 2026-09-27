@@ -23,11 +23,22 @@
     "apply:ro-official-reconciliation": "node scripts/process/apply-ro-official-reconciliation.mjs",
     "build:actual-release-manifest": "node scripts/process/build-actual-release-manifest.mjs",
     "audit:actual-release-gate": "node scripts/process/audit-actual-release-gate.mjs",
-    "build:actual-public-data": "node scripts/process/build-actual-public-data.mjs"
+    "build:actual-public-data": "node scripts/process/build-actual-public-data.mjs",
+    "audit:actual-topology": "node scripts/process/audit-actual-topology.mjs",
+    "audit:actual-regression": "node scripts/process/audit-actual-regression.mjs",
+    "audit:actual-structural-completeness": "node scripts/process/audit-actual-structural-completeness.mjs",
+    "audit:osm-12463200": "node scripts/process/audit-osm-relation-12463200.mjs",
+    "audit:actual-statistical-levels": "node scripts/process/audit-actual-statistical-levels.mjs",
+    "audit:actual-official-identity": "node scripts/process/audit-actual-official-identity.mjs",
+    "audit:md-chisinau-sectors": "node scripts/process/audit-md-chisinau-sectors.mjs",
+    "audit:ro-county-siruta-bridge": "node scripts/process/audit-ro-county-siruta-bridge.mjs",
+    "audit:md-cuatm-semantic-bridge": "node scripts/process/audit-md-cuatm-semantic-bridge.mjs",
+    "apply:md-reviewed-reconciliation": "node scripts/process/apply-md-reviewed-reconciliation.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
     "osmtogeojson": "^3.0.0-beta.5",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "jsts": "^2.12.1"
   }
 }

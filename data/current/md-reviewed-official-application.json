@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T20:37:25.008Z",
+  "jurisdiction": "MD",
+  "status": "PASS",
+  "policy": "Apply only explicitly reviewed positive legal-identity overrides to the master catalog and GeoJSON metadata. Geometry coordinates and OSM hierarchy are never rewritten; geometry equivalence remains explicitly false.",
+  "selected_override_count": 1,
+  "applied_count": 1,
+  "applied": [
+    {
+      "entity_id": "osm-r6879649",
+      "osm_relation_id": 6879649,
+      "legal_id": "7612",
+      "legal_type": "commune",
+      "representation_class": "chitcani_de_facto_administrative_representation"
+    }
+  ],
+  "failures": []
+}

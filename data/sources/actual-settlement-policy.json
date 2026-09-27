@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL",
+  "policy_version": "2026-09-27",
+  "scope": "settlements_and_component_localities",
+  "principle": "ACTUAL is exhaustive for administrative UAT identities where the official registry and subtype model are exhaustive. Settlements/component localities are an official identity inventory but not an exhaustive polygon-boundary layer: SIRUTA/CUATM do not supply an exhaustive authoritative polygon set, and OSM settlement boundaries are incomplete and heterogeneous. Missing settlement polygons therefore do not block ACTUAL. Any settlement representation that is included must itself satisfy a fail-closed identity-or-review path and preserve OSM geometry without asserting legal geometry equivalence.",
+  "common_requirements": {
+    "exhaustive_polygon_coverage_required": false,
+    "missing_official_settlement_polygon_is_blocking": false,
+    "geometry_source": "OpenStreetMap",
+    "allowed_geometry_types": [
+      "Polygon",
+      "MultiPolygon"
+    ],
+    "current_status_required": true,
+    "geometry_coordinate_mutation_allowed": false,
+    "official_registry_remains_identity_authority": true,
+    "unreviewed_identity_inference_allowed": false
+  },
+  "jurisdictions": {
+    "RO": {
+      "declared_type": "component_locality",
+      "official_registry": "SIRUTA",
+      "official_inventory_selector": "SIRUTA records whose level is not 2",
+      "inclusion_catalog_types": [
+        "component_locality",
+        "component_village_boundary_representation",
+        "municipality_component_locality_boundary_representation"
+      ],
+      "accepted_paths": {
+        "official_identity": {
+          "registry": "SIRUTA",
+          "official_record_must_be_component_locality": true
+        },
+        "reviewed_representation": {
+          "catalog_types": [
+            "component_village_boundary_representation",
+            "municipality_component_locality_boundary_representation"
+          ],
+          "classification_confidence": "high",
+          "evidence": "data/sources/ro-level9-exception-evidence.json",
+          "review_required": false,
+          "legal_geometry_equivalence_asserted": false
+        }
+      }
+    },
+    "MD": {
+      "declared_type": "locality",
+      "official_registry": "CUATM",
+      "official_status_codes": [
+        "6",
+        "9"
+      ],
+      "official_inventory_selector": "CUATM status_code 6 or 9",
+      "inclusion_catalog_types": [
+        "component_locality"
+      ],
+      "accepted_paths": {
+        "official_locality_identity": {
+          "registry": "CUATM",
+          "legal_identity_status": "reconciled",
+          "allowed_status_codes": [
+            "6",
+            "9"
+          ],
+          "official_record_must_exist": true,
+          "interpretation": "The OSM settlement representation is positively bound to an official CUATM component-locality identity."
+        },
+        "reconciled_uat_settlement_representation": {
+          "registry": "CUATM",
+          "legal_identity_status": "reconciled",
+          "allowed_status_codes": [
+            "3",
+            "5",
+            "8"
+          ],
+          "semantic_types": [
+            "town",
+            "level_1_municipality",
+            "level_2_municipality",
+            "commune",
+            "independent_village"
+          ],
+          "interpretation": "A lower-level OSM settlement polygon may represent the inhabited-place footprint/settlement representation of an already reconciled administrative UAT identity. It remains a representation, is not counted as a distinct official component-locality identity, and does not assert that the OSM polygon is authoritative legal UAT geometry."
+        }
+      },
+      "identity_geometry_separation": "Catalog type component_locality describes the OSM representation role, while CUATM legal status/type describes legal identity. A status 3/5/8 identity on a level-9 component_locality representation is not reclassified as an official status 6/9 component locality and is already counted under its UAT completeness type."
+    }
+  }
+}

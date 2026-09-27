@@ -8,19 +8,38 @@ const MD_GEO='public/geo/current/md-administrative.geojson';
 const MD_RECON='data/current/md-cuatm-reconciliation.json';
 const MD_NON_CUATM='data/current/md-cuatm-non-cuatm-allotments.json';
 const MD_INDIVIDUAL='data/sources/md-cuatm-individual-review.json';
+const RO_COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
+const MD_SEMANTIC_BRIDGE='data/current/md-cuatm-semantic-bridge.json';
 const OUT_INDEX='public/data/actual-entities.json';
 const OUT_DIR='public/geo/actual';
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
-const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual]=await Promise.all([
- read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL)
+const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge]=await Promise.all([
+ read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE),read(MD_SEMANTIC_BRIDGE)
 ]);
+if(roCountyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
+if(mdSemanticBridge.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
 
 const entities=catalog.entities||[];
 const entityById=new Map(entities.map(e=>[e.id,e]));
 const mdMatchById=new Map((mdRecon.matches||[]).map(x=>[x.id,x]));
 const mdNonCuatmById=new Map((mdNonCuatm.items||[]).map(x=>[x.id,x]));
 const mdIndividualById=new Map((mdIndividual.cases||[]).map(x=>[x.osm_id,x]));
+const roCountyById=new Map((roCountyBridge.matches||[]).map(x=>[x.entity_id,x]));
+const mdSemanticByLegalId=new Map();
+for(const x of mdSemanticBridge.classifications||[]){
+ const id=String(x.legal_id);
+ if(mdSemanticByLegalId.has(id))throw new Error('Duplicate MD semantic bridge legal ID '+id);
+ mdSemanticByLegalId.set(id,x);
+}
+if(roCountyById.size!==42)throw new Error('RO county SIRUTA bridge must contain exactly 42 unique entity mappings');
+for(const [id,m] of roCountyById){
+ const e=entityById.get(id);
+ if(!e||e.jurisdiction!=='RO'||Number(e.osm?.admin_level)!==4)throw new Error('RO county bridge points to non-county catalog entity '+id);
+ if(e.legal?.registry!=='SIRUTA'||e.legal?.type!=='county'||String(e.legal?.id||'')!==String(m.county_code)){
+  throw new Error('RO county official identity was not applied to catalog for '+id);
+ }
+}
 const featureById=new Map();
 for(const [jurisdiction,geo] of [['RO',roGeo],['MD',mdGeo]]){
  for(const f of geo.features||[]){
@@ -34,6 +53,11 @@ if(featureById.size!==entities.length)throw new Error('Catalog/geometry cardinal
 
 const cleanText=value=>value==null?null:String(value);
 const uniqueStrings=values=>[...new Set(values.filter(Boolean).map(x=>String(x).trim()).filter(Boolean))];
+
+function publicTypeFor(e,legal){
+ if(e.jurisdiction==='MD'&&legal?.registry==='CUATM'&&String(legal.status_code)==='4'&&String(legal.parent_id)==='0100'&&e.parent_id==='osm-r1691801')return 'chisinau_sector';
+ return e.type||null;
+}
 
 function legalFor(e){
  if(e.jurisdiction==='RO'&&e.legal?.registry==='SIRUTA'&&e.legal?.id){
@@ -53,19 +77,42 @@ function legalFor(e){
  }
  if(e.jurisdiction==='MD'){
   const m=mdMatchById.get(e.id);
+  if(e.legal?.registry==='CUATM'&&e.legal?.id){
+   if(!m?.legal_id||String(m.legal_id)!==String(e.legal.id))throw new Error('Catalog/reconciliation CUATM identity mismatch for '+e.id);
+   const semantic=mdSemanticByLegalId.get(String(m.legal_id))||null;
+   if(['3','5','8'].includes(String(m.status_code))&&!semantic)throw new Error('Missing MD semantic subtype for reconciled CUATM '+m.legal_id+' ('+m.legal_name+')');
+   if(e.legal.type&&semantic?.semantic_type&&e.legal.type!==semantic.semantic_type)throw new Error('Catalog/semantic bridge type mismatch for '+e.id);
+   return {
+    registry:'CUATM',
+    id:String(e.legal.id),
+    name:e.legal.name||m.legal_name||null,
+    type:e.legal.type||semantic?.semantic_type||null,
+    status_code:m.status_code||e.legal.status_code||null,
+    parent_id:e.legal.parent_id==null?(m.legal_parent_id==null?null:String(m.legal_parent_id)):String(e.legal.parent_id),
+    parent_name:e.legal.parent_name||m.legal_parent_name||null,
+    reference_year:null,
+    match_method:e.legal.match_method||m.match_method||null,
+    confidence:e.legal.match_confidence||m.confidence||null,
+    source:e.legal.source||'data/sources/cuatm-current.json',
+    geometry_equivalence_asserted:e.legal.geometry_equivalence_asserted??null
+   };
+  }
   if(m?.legal_id){
+   const semantic=mdSemanticByLegalId.get(String(m.legal_id))||null;
+   if(['3','5','8'].includes(String(m.status_code))&&!semantic)throw new Error('Missing MD semantic subtype for reconciled CUATM '+m.legal_id+' ('+m.legal_name+')');
    return {
     registry:'CUATM',
     id:String(m.legal_id),
     name:m.legal_name||null,
-    type:null,
+    type:semantic?.semantic_type||null,
     status_code:m.status_code||null,
     parent_id:m.legal_parent_id==null?null:String(m.legal_parent_id),
     parent_name:m.legal_parent_name||null,
     reference_year:null,
     match_method:m.match_method||null,
     confidence:m.confidence||null,
-    source:'data/sources/cuatm-current.json'
+    source:'data/sources/cuatm-current.json',
+    geometry_equivalence_asserted:null
    };
   }
  }
@@ -108,6 +155,7 @@ for(const e of entities){
  if(!source)throw new Error('Missing ACTUAL geometry for '+e.id);
  const f=source.feature;
  const legal=legalFor(e);
+ const publicType=publicTypeFor(e,legal);
  const bounds=turf.bbox(f);
  const center=turf.centroid(f).geometry.coordinates;
  const parent=entityById.get(e.parent_id)||null;
@@ -122,7 +170,7 @@ for(const e of entities){
   name:e.name||null,
   official_name:e.official_name||legal?.name||null,
   display_name:legal?.name||e.official_name||e.name||e.id,
-  display_type:legal?.type||e.type||'administrative',
+  display_type:legal?.type||publicType||'administrative',
   searchable_names:uniqueStrings([e.name,e.official_name,legal?.name]),
   legal,
   hierarchy:{
@@ -137,7 +185,7 @@ for(const e of entities){
    osm_relation_id:e.osm?.relation_id??null,
    admin_level:level,
    place:e.osm?.place||null,
-   inferred_type:e.classification?.osm_inferred_type||e.type||null,
+   inferred_type:e.classification?.osm_inferred_type||publicType||null,
    geometry_source:'OpenStreetMap administrative relation',
    geometry_role:'current_representation',
    public_geometry_precision:'master_coordinate_fidelity',

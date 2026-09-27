@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
-
 const MANIFEST='data/current/actual-release-manifest.json';
+const TOPOLOGY_AUDIT='data/current/actual-topology-audit.json';
+const topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));
+
 const OUTPUT='data/current/actual-release-gate.json';
+const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const manifestBuf=await readFile(MANIFEST);
+const settlementPolicyBuf=await readFile(SETTLEMENT_POLICY);
 const manifest=JSON.parse(manifestBuf.toString('utf8'));
+const settlementPolicy=JSON.parse(settlementPolicyBuf.toString('utf8'));
 const paths=Object.fromEntries(Object.entries(manifest.components||{}).map(([key,value])=>[key,value?.path]).filter(([,path])=>path));
 const buffers={};
 for(const [key,path] of Object.entries(paths))buffers[key]=await readFile(path);
@@ -21,6 +26,7 @@ const mdGate=json('md_gate');
 const siruta=json('ro_official');
 const cuatm=json('md_official');
 const mdIndividual=json('md_individual_review');
+const mdSemantic=json('md_semantic_bridge');
 const jurisdictions=['RO','MD'];
 const tierKeys=['ro_overview','ro_local','ro_detail','md_overview','md_local','md_detail'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -40,6 +46,36 @@ const expectedSnapshotId='actual-'+fingerprint.slice(0,16);
 const failures=[],checks=[];
 const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
 
+check('master_topology_audit_passes',topology?.status==='PASS',{status:topology?.status??null,blocking_issue_count:topology?.blocking_issue_count??null,observation_count:topology?.observation_count??null,source:TOPOLOGY_AUDIT,mutation:false});
+
+check('manifest_quality_gates_pass',
+ manifest.quality_gates?.topology?.status==='PASS'
+ && manifest.quality_gates?.regression?.status==='PASS'
+ && manifest.quality_gates?.structural_completeness?.status==='PASS'
+ && manifest.quality_gates?.official_identity?.status==='PASS',
+ {topology:manifest.quality_gates?.topology?.status??null,
+  regression:manifest.quality_gates?.regression?.status??null,
+  structural_completeness:manifest.quality_gates?.structural_completeness?.status??null,
+  structural_blocking_issue_count:manifest.quality_gates?.structural_completeness?.blocking_issue_count??null,
+  official_identity:manifest.quality_gates?.official_identity?.status??null,
+  official_identity_blocking_issue_count:manifest.quality_gates?.official_identity?.blocking_issue_count??null});
+check('settlement_policy_is_explicit_and_fail_closed',
+ settlementPolicy.schema_version===1
+ && settlementPolicy.mode==='ACTUAL'
+ && settlementPolicy.scope==='settlements_and_component_localities'
+ && settlementPolicy.common_requirements?.exhaustive_polygon_coverage_required===false
+ && settlementPolicy.common_requirements?.missing_official_settlement_polygon_is_blocking===false
+ && settlementPolicy.common_requirements?.geometry_coordinate_mutation_allowed===false
+ && settlementPolicy.common_requirements?.unreviewed_identity_inference_allowed===false,
+ {schema_version:settlementPolicy.schema_version??null,mode:settlementPolicy.mode??null,scope:settlementPolicy.scope??null,common_requirements:settlementPolicy.common_requirements??null});
+check('manifest_records_current_settlement_policy',
+ manifest.settlement_policy?.schema_version===settlementPolicy.schema_version
+ && manifest.settlement_policy?.policy_version===settlementPolicy.policy_version
+ && manifest.settlement_policy?.scope===settlementPolicy.scope
+ && manifest.settlement_policy?.sha256===sha256(settlementPolicyBuf),
+ {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,scope:settlementPolicy.scope??null,sha256:sha256(settlementPolicyBuf)}});
+check('md_semantic_bridge_passes',mdSemantic.status==='PASS',{status:mdSemantic.status??null,summary:mdSemantic.summary??null});
+check('manifest_records_current_md_semantic_bridge',manifest.semantic_bridges?.MD?.status==='PASS'&&manifest.semantic_bridges?.MD?.sha256===currentHashes.md_semantic_bridge,{manifest:manifest.semantic_bridges?.MD??null,actual:{status:mdSemantic.status??null,sha256:currentHashes.md_semantic_bridge??null}});
 check('manifest_mode_is_actual',manifest.mode==='ACTUAL',{mode:manifest.mode});
 check('manifest_jurisdictions_are_exactly_ro_md',
  Array.isArray(manifest.jurisdictions)&&manifest.jurisdictions.length===2&&manifest.jurisdictions[0]==='RO'&&manifest.jurisdictions[1]==='MD',
@@ -109,12 +145,16 @@ check('public_contract_jurisdiction_counts_match_catalog',
 const reviewedPublicById=new Map(publicEntities.map(x=>[x.id,x]));
 const reviewedStatusIssues=(mdIndividual.cases||[]).flatMap(review=>{
  const entity=reviewedPublicById.get(review.osm_id);
- const expected=review.review_status==='resolved_semantic_classification'
-  ?'reviewed_representation_without_legal_identity'
-  :review.review_status==='unresolved_identity'?'unresolved':null;
- return entity&&expected&&entity.validation?.legal_identity_status===expected
+ const expected=review.review_status==='resolved_positive_identity'
+  ?'reconciled'
+  :review.review_status==='resolved_semantic_classification'
+   ?'reviewed_representation_without_legal_identity'
+   :review.review_status==='unresolved_identity'?'unresolved':null;
+ const identityOk=review.review_status!=='resolved_positive_identity'
+  ||(entity?.legal?.registry==='CUATM'&&String(entity?.legal?.id||'')===String(review.official_legal_id||'')&&entity?.legal?.geometry_equivalence_asserted===false);
+ return entity&&expected&&entity.validation?.legal_identity_status===expected&&identityOk
   ?[]
-  :[{osm_id:review.osm_id,review_status:review.review_status,expected,actual:entity?.validation?.legal_identity_status??null}];
+  :[{osm_id:review.osm_id,review_status:review.review_status,expected,expected_legal_id:review.official_legal_id??null,actual:entity?.validation?.legal_identity_status??null,actual_legal:entity?.legal??null}];
 });
 check('md_reviewed_public_identity_status_is_stable',reviewedStatusIssues.length===0,{issues:reviewedStatusIssues});
 
@@ -195,7 +235,7 @@ const report={
  manifest_path:MANIFEST,
  manifest_sha256:sha256(manifestBuf),
  status:failures.length?'FAIL':'PASS',
- policy:'The public ACTUAL RO+MD release is publishable only when both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.',
+ policy:'The public ACTUAL RO+MD release is publishable only when master topology has no blocking structural corruption, both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.',
  checks,
  failures
 };

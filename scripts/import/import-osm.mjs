@@ -9,7 +9,7 @@ const CLASSIFIER_VERSION='2.3';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9]},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9]}
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316]}
 };
 const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
 const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
@@ -35,11 +35,12 @@ async function overpass(query){
  }
  throw last;
 }
-function queryFor({iso,levels}){
+function queryFor({iso,levels,requiredRelations=[]}){
  const filters=levels.map(l=>`relation(area.country)["boundary"="administrative"]["admin_level"="${l}"];`).join('\n');
+ const required=requiredRelations.map(id=>`relation(${id});`).join('\n');
  // Include the country relation itself so candidate geometries can be validated
  // spatially against the actual country polygon after osmtogeojson conversion.
- return `[out:json][timeout:300];relation["ISO3166-1"="${iso}"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;${filters});out body;>;out skel qt;`;
+ return `[out:json][timeout:300];relation["ISO3166-1"="${iso}"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;${filters}${required ? `\n${required}` : ''});out body;>;out skel qt;`;
 }
 function norm(v){return (v||'').trim().toLowerCase();}
 function classify(country,t={}){
@@ -77,6 +78,7 @@ function classify(country,t={}){
    return {type:'level_1_uat',confidence:'low',reason:'MD admin_level=8 lacks a usable place/legal discriminator'};
   }
   if(l===9){
+   if(p==='borough'&&norm(t['place:ro'])==='sector'&&/^01[1-5]0$/.test(String(t['ref:cuatm:codunic']||'')))return {type:'chisinau_sector',confidence:'high',reason:'Chișinău sector identified by OSM borough/sector semantics and explicit CUATM code 0110–0150'};
    if(['village','town','city'].includes(p))return {type:'component_locality',confidence:'medium',reason:'Nested locality boundary; exact legal subtype requires official-list cross-check'};
    if(p==='allotments')return {type:'non_administrative_or_auxiliary_area',confidence:'low',reason:'place=allotments is not sufficient evidence of an administrative unit'};
    return {type:'subdivision_or_component_area',confidence:'low',reason:'MD admin_level=9 is heterogeneous in current OSM data'};
@@ -86,6 +88,23 @@ function classify(country,t={}){
 }
 function relationId(feature){
  const id=String(feature.id||''); const m=id.match(/relation\/(\d+)/); return m?Number(m[1]):null;
+}
+const MD_OFFICIAL_POINT_TOUCH_NORMALIZATIONS=new Map([[12463200,{classification:'official_point_touch_multipolygon',coordinate:[29.2405257,46.7587398],rings:[
+ [76585146,918853569,918853568,918853573,918853567,918930470,60741665,94511352],
+ [76583058,125859262,918853574]
+]}]]);
+function ringFromWays(raw,wayIds){
+ const wayById=new Map(raw.elements.filter(x=>x.type==='way').map(x=>[x.id,x]));
+ const nodeById=new Map(raw.elements.filter(x=>x.type==='node').map(x=>[x.id,x]));
+ const unused=wayIds.map(id=>wayById.get(id)); if(unused.some(x=>!x))throw new Error('Missing normalization way');
+ const chain=[...unused.shift().nodes];
+ while(unused.length){const end=chain.at(-1);const i=unused.findIndex(w=>w.nodes[0]===end||w.nodes.at(-1)===end);if(i<0)throw new Error('Cannot close normalization ring');const w=unused.splice(i,1)[0];const ns=w.nodes[0]===end?w.nodes:[...w.nodes].reverse();chain.push(...ns.slice(1));}
+ if(chain[0]!==chain.at(-1))throw new Error('Normalization ring is not closed');
+ return chain.map(id=>{const n=nodeById.get(id);if(!n)throw new Error('Missing normalization node '+id);return [n.lon,n.lat];});
+}
+function normalizeOfficialPointTouch(country,raw,geo,report){
+ if(country!=='MD')return;
+ for(const [rid,cfg] of MD_OFFICIAL_POINT_TOUCH_NORMALIZATIONS){const f=geo.features.find(x=>relationId(x)===rid);if(!f)throw new Error('Missing official point-touch relation '+rid);const rings=cfg.rings.map(ids=>ringFromWays(raw,ids));f.geometry={type:'MultiPolygon',coordinates:rings.map(r=>[r])};f.properties={...f.properties,topology_normalization:cfg.classification,topology_evidence:'I.P. Cadastrul Bunurilor Imobile WMS w_rsuat:mv_uat3; audit PR #94'};report.warnings.push({type:'official_point_touch_multipolygon_normalized',jurisdiction:country,relation_id:rid,coordinate:cfg.coordinate,component_count:rings.length,coordinate_edit:false});}
 }
 function entity(country,feature){
  const t=feature.properties?.tags||feature.properties||{}, rid=relationId(feature), c=classify(country,t);
@@ -172,6 +191,15 @@ function assignParents(entities,featuresById,warnings=[]){
 function finalizeAfterParents(entities){
  const byId=new Map(entities.map(e=>[e.id,e]));
  for(const e of entities){
+  if(e.jurisdiction==='MD'){
+   const parent=byId.get(e.parent_id);
+   const cuatm=String(e.osm?.cuatm_unique_id||e.osm?.cuatm_code||'');
+   if(parent?.osm?.relation_id===1691801&&/^01[1-5]0$/.test(cuatm)){
+    e.type='chisinau_sector';
+    e.classification={version:CLASSIFIER_VERSION,confidence:'high',reason:'Chișinău sector validated by official CUATM code 0110–0150 and geometric municipality parent; OSM admin_level is not used as legal subtype evidence'};
+    e.review_required=false;
+   }
+  }
   if(e.jurisdiction!=='RO'||e.osm.admin_level!==9)continue;
   const n=norm(e.name), parent=byId.get(e.parent_id);
   const parentName=norm(parent?.name);
@@ -205,6 +233,7 @@ async function main(){
  const all=[], report={generated_at:new Date().toISOString(),classifier_version:CLASSIFIER_VERSION,countries:{},warnings:[]};
  for(const [code,cfg] of Object.entries(countries)){
   const raw=await overpass(queryFor(cfg)), geo=osmtogeojson(raw,{flatProperties:false});
+  normalizeOfficialPointTouch(code,raw,geo,report);
   const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
   if(!countryFeature) throw new Error(`Missing country boundary geometry for ${code}`);
@@ -231,3 +260,4 @@ async function main(){
  console.log('Catalog:',all.length,'entities; classifier v'+CLASSIFIER_VERSION);
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});
+

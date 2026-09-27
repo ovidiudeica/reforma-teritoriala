@@ -19,7 +19,13 @@ const PATHS={
  md_gate:'data/current/md-release-gate.json',
  ro_official:'data/sources/ro-siruta-current.json',
  md_official:'data/sources/cuatm-current.json',
- md_individual_review:'data/sources/md-cuatm-individual-review.json'
+ md_individual_review:'data/sources/md-cuatm-individual-review.json',
+ md_semantic_bridge:'data/current/md-cuatm-semantic-bridge.json',
+ topology_audit:'data/current/actual-topology-audit.json',
+ regression_audit:'data/current/actual-regression-audit.json',
+ structural_completeness_audit:'data/current/actual-structural-completeness-audit.json',
+ official_identity_audit:'data/current/actual-official-identity-audit.json',
+ settlement_policy:'data/sources/actual-settlement-policy.json'
 };
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const buffers=Object.fromEntries(await Promise.all(Object.entries(PATHS).map(async([key,path])=>[key,await readFile(path)])));
@@ -33,6 +39,12 @@ const roGate=json('ro_gate');
 const mdGate=json('md_gate');
 const siruta=json('ro_official');
 const cuatm=json('md_official');
+const topologyAudit=json('topology_audit');
+const regressionAudit=json('regression_audit');
+const structuralCompletenessAudit=json('structural_completeness_audit');
+const officialIdentityAudit=json('official_identity_audit');
+const mdSemanticBridge=json('md_semantic_bridge');
+const settlementPolicy=json('settlement_policy');
 
 const jurisdictions=['RO','MD'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -92,6 +104,13 @@ const manifest={
   as_of:inventory.as_of??null,
   sha256:components.inventory.sha256
  },
+ settlement_policy:{
+  path:PATHS.settlement_policy,
+  schema_version:settlementPolicy.schema_version??null,
+  policy_version:settlementPolicy.policy_version??null,
+  scope:settlementPolicy.scope??null,
+  sha256:components.settlement_policy.sha256
+ },
  geometry:{
   RO:{path:PATHS.ro_geojson,feature_count:featureCounts.RO,sha256:components.ro_geojson.sha256},
   MD:{path:PATHS.md_geojson,feature_count:featureCounts.MD,sha256:components.md_geojson.sha256}
@@ -109,6 +128,15 @@ const manifest={
    RO:{overview:tier('RO','overview'),local:tier('RO','local'),detail:tier('RO','detail')},
    MD:{overview:tier('MD','overview'),local:tier('MD','local'),detail:tier('MD','detail')}
   }
+ },
+ semantic_bridges:{
+  MD:{path:PATHS.md_semantic_bridge,status:mdSemanticBridge.status??null,summary:mdSemanticBridge.summary??null,sha256:components.md_semantic_bridge.sha256}
+ },
+ quality_gates:{
+  topology:{path:PATHS.topology_audit,status:topologyAudit.status??null,blocking_issue_count:topologyAudit.blocking_issue_count??null,sha256:components.topology_audit.sha256},
+  regression:{path:PATHS.regression_audit,status:regressionAudit.status??null,blocking_issue_count:regressionAudit.blocking_issue_count??null,sha256:components.regression_audit.sha256},
+  structural_completeness:{path:PATHS.structural_completeness_audit,status:structuralCompletenessAudit.status??null,blocking_gap_count:structuralCompletenessAudit.blocking_gap_count??null,blocking_policy_violation_count:structuralCompletenessAudit.blocking_policy_violation_count??null,blocking_issue_count:structuralCompletenessAudit.blocking_issue_count??null,sha256:components.structural_completeness_audit.sha256},
+  official_identity:{path:PATHS.official_identity_audit,status:officialIdentityAudit.status??null,blocking_issue_count:officialIdentityAudit.blocking_issue_count??null,sha256:components.official_identity_audit.sha256}
  },
  jurisdiction_gates:{
   RO:{path:PATHS.ro_gate,status:roGate.status??null,generated_at:roGate.generated_at??null,sha256:components.ro_gate.sha256},

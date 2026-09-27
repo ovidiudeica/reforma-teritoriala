@@ -1,0 +1,227 @@
+name: ACTUAL topology audit
+
+on:
+  pull_request:
+    paths:
+      - 'public/geo/current/**'
+      - 'data/current/entities.json'
+      - 'data/current/actual-release-persisted.json'
+      - 'scripts/process/audit-actual-topology.mjs'
+      - 'scripts/process/audit-actual-release-gate.mjs'
+      - 'scripts/process/audit-md-release-gate.mjs'
+      - 'scripts/process/audit-ro-release-gate.mjs'
+      - 'scripts/process/audit-cuatm-consistency.mjs'
+      - 'scripts/process/audit-administrative.mjs'
+      - 'scripts/process/audit-actual-regression.mjs'
+      - 'scripts/process/build-actual-release-manifest.mjs'
+      - 'scripts/process/audit-actual-structural-completeness.mjs'
+      - 'scripts/process/audit-actual-official-identity.mjs'
+      - 'scripts/process/apply-ro-official-reconciliation.mjs'
+      - 'scripts/process/audit-ro-county-siruta-bridge.mjs'
+      - 'scripts/process/audit-md-cuatm-semantic-bridge.mjs'
+      - 'scripts/process/apply-md-reviewed-reconciliation.mjs'
+      - 'data/sources/md-cuatm-reviewed-overrides.json'
+      - 'data/sources/md-cuatm-individual-review.json'
+      - 'data/sources/md-cuatm-semantic-policy.json'
+      - 'data/sources/actual-settlement-policy.json'
+      - 'scripts/process/build-actual-public-data.mjs'
+      - 'scripts/process/audit-osm-relation-12463200.mjs'
+      - 'scripts/import/import-osm.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/actual-topology-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  topology:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-audit --no-fund
+      - name: Detect persisted release snapshot
+        id: persisted
+        run: |
+          if [ -f data/current/actual-release-persisted.json ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Verify committed release snapshot before regeneration
+        if: ${{ steps.persisted.outputs.present == 'true' }}
+        run: |
+          npm run audit:actual-release-gate
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {readFile} from 'node:fs/promises';
+          const [marker,manifest]=await Promise.all([
+            readFile('data/current/actual-release-persisted.json','utf8').then(JSON.parse),
+            readFile('data/current/actual-release-manifest.json','utf8').then(JSON.parse)
+          ]);
+          const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+          const manifestSha=createHash('sha256').update(manifestBytes).digest('hex');
+          const errors=[];
+          if(marker.snapshot_id!==manifest.snapshot_id)errors.push('snapshot_id');
+          if(marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256)errors.push('release_fingerprint_sha256');
+          if(marker.manifest_sha256!==manifestSha)errors.push('manifest_sha256');
+          if(errors.length)throw new Error('Persisted release marker mismatch: '+errors.join(', '));
+          console.log(JSON.stringify({status:'PASS',snapshot_id:manifest.snapshot_id,release_fingerprint_sha256:manifest.release_fingerprint_sha256,manifest_sha256:manifestSha},null,2));
+          NODE
+      - name: Check import script syntax
+        run: node --check scripts/import/import-osm.mjs
+      - if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:osm-12463200
+      - name: Regenerate OSM ACTUAL master
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run import:osm
+      - name: Verify regenerated topology
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:actual-topology
+      - name: Audit RO+MD statistical levels and state polygons
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:actual-statistical-levels
+      - name: Reconcile RO against official SIRUTA
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:ro-official-reconciliation
+      - name: Audit RO reconciliation exceptions
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:ro-official-exceptions
+      - name: Audit RO county SIRUTA bridge
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:ro-county-siruta-bridge
+      - name: Apply RO official identity
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run apply:ro-official-reconciliation
+      - name: Reconcile MD against official CUATM
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run reconcile:cuatm
+      - name: Audit MD CUATM semantic subtype bridge
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:md-cuatm-semantic-bridge
+      - name: Apply reviewed MD official identity
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run apply:md-reviewed-reconciliation
+      - name: Regenerate administrative review
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:admin
+      - name: Regenerate MD CUATM consistency audit
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: node scripts/process/audit-cuatm-consistency.mjs
+      - name: Run MD release gate
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:md-release-gate
+      - name: Run RO release gate
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:ro-release-gate
+      - name: Regenerate public ACTUAL contract
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run build:actual-public-data
+      - name: Audit Chișinău sector identity propagation
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:md-chisinau-sectors
+      - name: Audit structural completeness
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:actual-structural-completeness
+      - name: Audit official identity propagation for all ACTUAL entities
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:actual-official-identity
+      - name: Audit ACTUAL count regression
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:actual-regression
+      - name: Build release manifest from this run
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run build:actual-release-manifest
+      - name: Run release gate against generated snapshot
+        if: ${{ steps.persisted.outputs.present != 'true' }}
+        run: npm run audit:actual-release-gate
+      - name: Persist validated release snapshot
+        if: ${{ success() && steps.persisted.outputs.present != 'true' && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'actual/topology-audit-ro-md' }}
+        env:
+          SNAPSHOT_BRANCH: ${{ github.head_ref }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+          SOURCE_RUN_ATTEMPT: ${{ github.run_attempt }}
+          SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {readFile,writeFile} from 'node:fs/promises';
+          const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+          const manifest=JSON.parse(manifestBytes);
+          const gate=JSON.parse(await readFile('data/current/actual-release-gate.json','utf8'));
+          if(gate.status!=='PASS'||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Refusing to persist a non-PASS or mismatched release');
+          const marker={
+            schema_version:1,
+            snapshot_id:manifest.snapshot_id,
+            release_fingerprint_sha256:manifest.release_fingerprint_sha256,
+            manifest_sha256:createHash('sha256').update(manifestBytes).digest('hex'),
+            validated_release_gate_status:gate.status,
+            validated_from_run_id:process.env.SOURCE_RUN_ID,
+            validated_from_run_attempt:process.env.SOURCE_RUN_ATTEMPT,
+            source_head_sha:process.env.SOURCE_HEAD_SHA,
+            policy:'Marker for the exact ACTUAL snapshot bytes committed only after the final release gate passes. It is not part of the release fingerprint.'
+          };
+          await writeFile('data/current/actual-release-persisted.json',JSON.stringify(marker,null,2)+'\n');
+          console.log(JSON.stringify(marker,null,2));
+          NODE
+          node --input-type=module <<'NODE' > /tmp/release-component-paths
+          import {readFile} from 'node:fs/promises';
+          const manifest=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
+          for(const value of Object.values(manifest.components||{}))if(value?.path)console.log(value.path);
+          NODE
+          while IFS= read -r file; do git add -- "$file"; done < /tmp/release-component-paths
+          git add --             data/current/actual-release-manifest.json             data/current/actual-release-gate.json             data/current/actual-release-persisted.json             data/current/osm-12463200-audit.json             data/current/ro-county-siruta-bridge.json             data/current/ro-official-application.json             data/current/md-reviewed-official-application.json             data/current/admin-review.json             data/current/md-cuatm-consistency-audit.json             data/current/md-cuatm-edge-case-audit.json             data/current/md-cuatm-unmatched-review.json
+          SNAPSHOT_ID="$(node -p "require('./data/current/actual-release-manifest.json').snapshot_id")"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Persist validated ACTUAL snapshot $SNAPSHOT_ID"
+          git push origin "HEAD:$SNAPSHOT_BRANCH"
+      - name: Upload topology report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: actual-topology-audit
+          path: |
+            data/current/actual-topology-audit.json
+            data/current/osm-12463200-audit.json
+            data/current/ro-county-siruta-bridge.json
+            data/current/ro-official-application.json
+            data/current/md-cuatm-semantic-bridge.json
+            data/current/md-reviewed-official-application.json
+            data/current/actual-structural-completeness-audit.json
+            data/current/actual-official-identity-audit.json
+            data/current/actual-regression-audit.json
+            data/current/admin-review.json
+            data/current/md-cuatm-consistency-audit.json
+            data/current/md-cuatm-edge-case-audit.json
+            data/current/md-cuatm-unmatched-review.json
+            data/current/ro-release-gate.json
+            data/current/md-release-gate.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-gate.json
+            data/current/actual-release-persisted.json
+            data/current/entities.json
+            data/current/administrative-inventory.json
+            public/data/actual-entities.json
+            public/geo/current/ro-administrative.geojson
+            public/geo/current/md-administrative.geojson
+            public/geo/actual/ro-overview.geojson
+            public/geo/actual/ro-local.geojson
+            public/geo/actual/ro-detail.geojson
+            public/geo/actual/md-overview.geojson
+            public/geo/actual/md-local.geojson
+            public/geo/actual/md-detail.geojson
+            data/sources/ro-siruta-current.json
+            data/sources/cuatm-current.json
+            data/sources/md-cuatm-individual-review.json
+            data/sources/actual-settlement-policy.json
+          if-no-files-found: error
+
+

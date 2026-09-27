@@ -30,6 +30,16 @@
       "source_url": "https://api.openstreetmap.org/api/0.6/relation/10624608.json",
       "source_label": "OpenStreetMap relation 10624608 tags + official CUATM identity",
       "reason": "Direct OSM inspection identifies relation 10624608 as orașul Cornești (name:prefix=orașul, official_name=orașul Cornești, place=town); official CUATM distinguishes 9202 as or. Cornești under Ungheni."
+    },
+    {
+      "osm_relation_id": 6879649,
+      "cuatm_legal_id": "7612",
+      "source_url": "https://statistica.gov.md/index.php/ro/rezultatele-finale-ale-recensamantului-populatiei-si-locuintelor-2024-distributi-10121_61877.html",
+      "source_label": "BNS 2024 census Chițcani commune identity + current CUATM legal identity",
+      "reason": "Reviewed positive identity: OSM relation 6879649 is the stable «Sovetul sătesc Chițcani» administrative representation, while current CUATM identifies comuna Chițcani as legal ID 7612 under Căușeni (2700). This override binds legal identity only; it does not assert that the OSM boundary is authoritative CUATM/legal geometry.",
+      "identity_scope": "legal_identity_only",
+      "geometry_equivalence_asserted": false,
+      "representation_class": "chitcani_de_facto_administrative_representation"
     }
   ],
   "pending_review": []
