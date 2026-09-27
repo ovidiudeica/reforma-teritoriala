@@ -8,6 +8,7 @@ on:
       - 'scripts/process/audit-actual-topology.mjs'
       - 'scripts/process/audit-actual-release-gate.mjs'
       - 'scripts/process/audit-osm-relation-12463200.mjs'
+      - 'scripts/import/import-osm.mjs'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/actual-topology-audit.yml'
@@ -26,6 +27,10 @@ jobs:
           node-version: 20
       - run: npm install --no-audit --no-fund
       - run: npm run audit:osm-12463200
+      - name: Regenerate OSM ACTUAL master
+        run: npm run import:osm
+      - name: Verify regenerated topology
+        run: npm run audit:actual-topology
       - run: npm run audit:actual-release-gate
       - name: Upload topology report
         if: always()
