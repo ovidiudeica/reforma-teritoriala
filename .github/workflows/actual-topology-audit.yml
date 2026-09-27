@@ -48,6 +48,8 @@ jobs:
         run: npm run reconcile:cuatm
       - name: Regenerate public ACTUAL contract
         run: npm run build:actual-public-data
+      - name: Audit Chișinău sector identity propagation
+        run: npm run audit:md-chisinau-sectors
       - name: Audit structural completeness
         run: npm run audit:actual-structural-completeness
       - name: Audit official identity propagation for all ACTUAL entities
