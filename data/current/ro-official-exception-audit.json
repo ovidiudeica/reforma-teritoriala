@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T06:37:03.209Z",
+  "generated_at": "2026-09-27T07:11:18.808Z",
   "jurisdiction": "RO",
-  "scope": "Targeted audit of unresolved/duplicate/type-conflict cases from official SIRUTA reconciliation.",
-  "policy": "Diagnostic only. Exact SIRUTA hierarchy and OSM provenance are recorded; no fuzzy candidate is auto-assigned. OSM geometry is not treated as legal authority.",
+  "scope": "Targeted audit of unresolved/duplicate/type-conflict cases and reviewed missing-distinct-boundary cases from official SIRUTA reconciliation.",
+  "policy": "Exact SIRUTA hierarchy, official locality containment and OSM provenance are recorded; no fuzzy candidate is auto-assigned. An OSM relation that overcovers multiple legal UAT locality sets is retained only as representation evidence and is never promoted to legal geometry for the missing UAT.",
   "status": "PASS",
   "checks": [
     {
@@ -19,7 +19,7 @@
       "diagnostic": true,
       "detail": {
         "error": null,
-        "feature_count": 61
+        "feature_count": 66
       }
     },
     {
@@ -59,6 +59,13 @@
       }
     },
     {
+      "name": "reviewed_official_only_resolutions_stable",
+      "ok": true,
+      "detail": {
+        "failed": []
+      }
+    },
+    {
       "name": "reviewed_override_relations_present",
       "ok": true,
       "detail": {
@@ -81,7 +88,7 @@
     }
   ],
   "summary": {
-    "target_relation_count": 19,
+    "target_relation_count": 20,
     "unmatched_case_count": 0,
     "single_official_uat_locality_containment_count": 0,
     "exact_component_locality_single_uat_count": 0,
@@ -90,6 +97,7 @@
     "type_mismatch_count": 3,
     "cross_county_parent_conflict_count": 0,
     "reviewed_parent_assignment_resolution_count": 1,
+    "reviewed_official_only_resolution_count": 1,
     "reviewed_override_count": 15,
     "reviewed_override_containment_failure_count": 0,
     "history_error_count": 0,
@@ -962,6 +970,370 @@
         "geometry_modified": false,
         "legal_geometry_claimed": false
       },
+      "stable": true
+    }
+  ],
+  "reviewed_official_only_resolutions": [
+    {
+      "legal_id": "64096",
+      "legal_name": "BREȚCU",
+      "legal_type": "commune",
+      "legal_parent_name": "JUDEȚUL COVASNA",
+      "classification": "official_uat_without_distinct_osm_boundary_representation",
+      "covering_osm_relation_id": 14735731,
+      "covering_osm_relation_name": "Ojdula",
+      "covering_osm_relation_legal_id": "64602",
+      "covering_osm_parent_relation_id": 2248621,
+      "covering_relation_area_km2": 224.99278220558173,
+      "official_locality_containment": {
+        "legal_id": "64096",
+        "legal_name": "BREȚCU",
+        "legal_parent_name": "JUDEȚUL COVASNA",
+        "official_locality_count": 3,
+        "inside_count": 3,
+        "inside_localities": [
+          {
+            "siruta": "64121",
+            "name": "Oituz"
+          },
+          {
+            "siruta": "64103",
+            "name": "Breţcu"
+          },
+          {
+            "siruta": "64112",
+            "name": "Mărtănuş"
+          }
+        ]
+      },
+      "covering_uat_official_locality_containment": {
+        "legal_id": "64602",
+        "legal_name": "OJDULA",
+        "legal_parent_name": "JUDEȚUL COVASNA",
+        "official_locality_count": 2,
+        "inside_count": 2,
+        "inside_localities": [
+          {
+            "siruta": "64620",
+            "name": "Hilib"
+          },
+          {
+            "siruta": "64611",
+            "name": "Ojdula"
+          }
+        ]
+      },
+      "expected_component_locality_ids": [
+        "64103",
+        "64112",
+        "64121"
+      ],
+      "actual_component_locality_ids": [
+        "64103",
+        "64112",
+        "64121"
+      ],
+      "component_locality_ids_match": true,
+      "osm_history": {
+        "relation_id": 14735731,
+        "created_at": "2022-10-26T20:19:04Z",
+        "created_changeset": 128100659,
+        "current_version": 4,
+        "last_modified_at": "2025-06-24T16:46:54Z",
+        "last_changeset": 168058312,
+        "current_tags": {
+          "admin_level": "8",
+          "boundary": "administrative",
+          "fixme": "separate Brețcu, Mărtănuș and Oituz into Brețcu Commune",
+          "name": "Ojdula",
+          "name:hu": "Ozsdola",
+          "name:prefix": "Comuna",
+          "place": "municipality",
+          "place:ro": "comună",
+          "source": "ANCPI 3rd order set data.gov.ro",
+          "type": "boundary",
+          "wikidata": "Q5059285"
+        },
+        "current_member_count": 7,
+        "current_members": [
+          {
+            "type": "node",
+            "ref": 394679685,
+            "role": "admin_centre"
+          },
+          {
+            "type": "way",
+            "ref": 772777504,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1107193296,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 22101253,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 772767900,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 22101249,
+            "role": "outer"
+          },
+          {
+            "type": "way",
+            "ref": 1107193322,
+            "role": "outer"
+          }
+        ],
+        "versions": [
+          {
+            "version": 1,
+            "timestamp": "2022-10-26T20:19:04Z",
+            "changeset": 128100659,
+            "user": "ted3sco",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Ojdula",
+              "name:prefix": "Comuna",
+              "place": "municipality",
+              "place:ro": "comună",
+              "source": "ANCPI 3rd order set data.gov.ro",
+              "type": "boundary"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 394679685,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 772777504,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107193296,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 22101253,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 772767900,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 22101249,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107193322,
+                "role": "outer"
+              }
+            ]
+          },
+          {
+            "version": 2,
+            "timestamp": "2023-01-21T23:19:52Z",
+            "changeset": 131556359,
+            "user": "GBAB",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Ojdula",
+              "name:hu": "Ozsdola",
+              "name:prefix": "Comuna",
+              "place": "municipality",
+              "place:ro": "comună",
+              "source": "ANCPI 3rd order set data.gov.ro",
+              "type": "boundary"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 394679685,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 772777504,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107193296,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 22101253,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 772767900,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 22101249,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107193322,
+                "role": "outer"
+              }
+            ]
+          },
+          {
+            "version": 3,
+            "timestamp": "2024-12-25T22:38:09Z",
+            "changeset": 160618503,
+            "user": "ooohhh",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "name": "Ojdula",
+              "name:hu": "Ozsdola",
+              "name:prefix": "Comuna",
+              "place": "municipality",
+              "place:ro": "comună",
+              "source": "ANCPI 3rd order set data.gov.ro",
+              "type": "boundary",
+              "wikidata": "Q5059285"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 394679685,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 772777504,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107193296,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 22101253,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 772767900,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 22101249,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107193322,
+                "role": "outer"
+              }
+            ]
+          },
+          {
+            "version": 4,
+            "timestamp": "2025-06-24T16:46:54Z",
+            "changeset": 168058312,
+            "user": "RaresC",
+            "tags": {
+              "admin_level": "8",
+              "boundary": "administrative",
+              "fixme": "separate Brețcu, Mărtănuș and Oituz into Brețcu Commune",
+              "name": "Ojdula",
+              "name:hu": "Ozsdola",
+              "name:prefix": "Comuna",
+              "place": "municipality",
+              "place:ro": "comună",
+              "source": "ANCPI 3rd order set data.gov.ro",
+              "type": "boundary",
+              "wikidata": "Q5059285"
+            },
+            "members": [
+              {
+                "type": "node",
+                "ref": 394679685,
+                "role": "admin_centre"
+              },
+              {
+                "type": "way",
+                "ref": 772777504,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107193296,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 22101253,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 772767900,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 22101249,
+                "role": "outer"
+              },
+              {
+                "type": "way",
+                "ref": 1107193322,
+                "role": "outer"
+              }
+            ]
+          }
+        ],
+        "history_signals": {
+          "name_values": [
+            "Ojdula"
+          ],
+          "official_name_values": [],
+          "admin_level_values": [
+            "8"
+          ],
+          "place_values": [
+            "municipality"
+          ],
+          "place_ro_values": [
+            "comună"
+          ],
+          "source_values": [
+            "ANCPI 3rd order set data.gov.ro"
+          ],
+          "siruta_code_values": []
+        }
+      },
+      "geometry_modified": false,
+      "legal_geometry_claimed": false,
       "stable": true
     }
   ],

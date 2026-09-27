@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T06:36:57.551Z",
+  "generated_at": "2026-09-27T07:11:09.953Z",
   "jurisdiction": "RO",
   "scope": "Reconciliation of all current OSM admin_level=8 administrative entities against the official INS SIRUTA 2026 snapshot.",
-  "policy": "Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.",
+  "policy": "Official SIRUTA supplies legal identity, hierarchy and UAT type. OSM supplies imported geometry and mapping provenance. Explicit SIRUTA codes are preferred; when an OSM code identifies a component locality, its official SIRUTA parent chain may resolve the NIV=2 UAT. Reviewed relation-to-SIRUTA overrides may resolve audited identity exceptions. Reviewed official UATs without a distinct OSM boundary may be classified separately only when their covering OSM representation remains structurally stable; no covering OSM geometry is promoted to legal geometry. Otherwise only exact normalized UAT name plus exact county is auto-matched. Fuzzy matching is never automatic.",
   "status": "PASS",
   "source": {
     "official_snapshot": "data/sources/ro-siruta-current.json",
@@ -26,6 +26,7 @@
     },
     "reviewed_overrides": "data/sources/ro-siruta-reviewed-overrides.json",
     "reviewed_override_count": 15,
+    "reviewed_official_only_resolutions": "data/sources/ro-official-only-reviewed-resolutions.json",
     "osm_catalog_generated_at": "2026-09-27T06:28:54.453Z"
   },
   "checks": [
@@ -74,6 +75,27 @@
       "detail": {
         "missing": []
       }
+    },
+    {
+      "name": "reviewed_official_only_legal_ids_exist",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "reviewed_official_only_covering_relations_exist",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "reviewed_official_only_structural_resolution_stable",
+      "ok": true,
+      "detail": {
+        "unresolved": []
+      }
     }
   ],
   "summary": {
@@ -81,7 +103,8 @@
     "official_uat_count": 3181,
     "matched_count": 3179,
     "unmatched_osm_count": 0,
-    "official_only_count": 1,
+    "official_only_count": 0,
+    "reviewed_official_only_resolution_count": 1,
     "represented_at_other_osm_level_count": 1,
     "duplicate_legal_mapping_count": 0,
     "parent_mismatch_count": 0,
@@ -96,14 +119,21 @@
     "unmatched_by_reason": {}
   },
   "unmatched_osm": [],
-  "official_only": [
+  "official_only": [],
+  "reviewed_official_only_resolutions": [
     {
       "legal_id": "64096",
       "legal_name": "BREȚCU",
       "legal_type": "commune",
       "legal_type_code": "3",
       "legal_parent_id": "145",
-      "legal_parent_name": "JUDEȚUL COVASNA"
+      "legal_parent_name": "JUDEȚUL COVASNA",
+      "classification": "official_uat_without_distinct_osm_boundary_representation",
+      "covering_osm_relation_id": 14735731,
+      "covering_osm_relation_name": "Ojdula",
+      "covering_osm_relation_legal_id": "64602",
+      "expected_parent_osm_relation_id": 2248621,
+      "evidence_registry": "data/sources/ro-official-only-reviewed-resolutions.json"
     }
   ],
   "represented_at_other_osm_level": [

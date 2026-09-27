@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T06:37:05.687Z",
+  "generated_at": "2026-09-27T07:11:21.659Z",
   "jurisdiction": "RO",
   "status": "PASS",
-  "policy": "RO release requires zero unresolved/duplicate SIRUTA matches, complete official application, and only the exact documented residual official-only, parent and OSM-semantic conflicts. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.",
+  "policy": "RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, complete official application, and only exact documented semantic residuals. Reviewed UATs without a distinct OSM boundary must pass official-locality containment and provenance checks; no covering OSM geometry is promoted to legal geometry. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.",
   "checks": [
     {
       "name": "no_new_ro_review_exceptions",
@@ -53,6 +53,13 @@
       }
     },
     {
+      "name": "ro_official_reconciliation_has_no_unresolved_official_only",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    },
+    {
       "name": "ro_official_application_pass",
       "ok": true,
       "detail": {
@@ -63,7 +70,8 @@
           "type_changed_count": 0,
           "legal_parent_conflict_count": 0,
           "osm_semantic_type_conflict_count": 3,
-          "official_only_count": 1,
+          "official_only_count": 0,
+          "reviewed_official_only_resolution_count": 1,
           "represented_at_other_osm_level_count": 1
         }
       }
@@ -83,6 +91,22 @@
         "missing": [],
         "unexpected": [],
         "changed": []
+      }
+    },
+    {
+      "name": "ro_reviewed_official_only_resolution_set_is_stable",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "unexpected": [],
+        "changed": []
+      }
+    },
+    {
+      "name": "ro_reviewed_official_only_geometry_audit_pass",
+      "ok": true,
+      "detail": {
+        "failed": []
       }
     },
     {
