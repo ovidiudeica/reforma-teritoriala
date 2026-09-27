@@ -52,7 +52,17 @@ const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!
 
 check('master_topology_audit_passes',topologyRun.status===0&&topology?.status==='PASS',{status:topology?.status??null,blocking_issue_count:topology?.blocking_issue_count??null,observation_count:topology?.observation_count??null,process_status:topologyRun.status,error:topologyRun.error?String(topologyRun.error):null});
 
-check('manifest_quality_gates_pass',manifest.quality_gates?.topology?.status==='PASS'&&manifest.quality_gates?.regression?.status==='PASS'&&manifest.quality_gates?.structural_completeness?.status==='PASS',{topology:manifest.quality_gates?.topology?.status??null,regression:manifest.quality_gates?.regression?.status??null,structural_completeness:manifest.quality_gates?.structural_completeness?.status??null,structural_blocking_issue_count:manifest.quality_gates?.structural_completeness?.blocking_issue_count??null});
+check('manifest_quality_gates_pass',
+ manifest.quality_gates?.topology?.status==='PASS'
+ && manifest.quality_gates?.regression?.status==='PASS'
+ && manifest.quality_gates?.structural_completeness?.status==='PASS'
+ && manifest.quality_gates?.official_identity?.status==='PASS',
+ {topology:manifest.quality_gates?.topology?.status??null,
+  regression:manifest.quality_gates?.regression?.status??null,
+  structural_completeness:manifest.quality_gates?.structural_completeness?.status??null,
+  structural_blocking_issue_count:manifest.quality_gates?.structural_completeness?.blocking_issue_count??null,
+  official_identity:manifest.quality_gates?.official_identity?.status??null,
+  official_identity_blocking_issue_count:manifest.quality_gates?.official_identity?.blocking_issue_count??null});
 check('settlement_policy_is_explicit_and_fail_closed',
  settlementPolicy.schema_version===1
  && settlementPolicy.mode==='ACTUAL'
