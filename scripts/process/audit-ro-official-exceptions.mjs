@@ -7,6 +7,7 @@ const official=JSON.parse(await readFile('data/sources/ro-siruta-current.json','
 const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const geo=JSON.parse(await readFile('public/geo/current/ro-administrative.geojson','utf8'));
 const reviewed=JSON.parse(await readFile('data/sources/ro-siruta-reviewed-overrides.json','utf8'));
+const parentAssignmentReviewed=JSON.parse(await readFile('data/sources/ro-parent-assignment-reviewed-resolutions.json','utf8'));
 
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[„”"'’]/g,' ')
@@ -102,7 +103,8 @@ const targetIds=[...new Set([
  ...(reconciliation.unmatched_osm||[]).map(x=>x.osm_relation_id),
  ...(reconciliation.duplicate_legal_mappings||[]).flatMap(x=>x.osm_relation_ids||[]),
  ...(reconciliation.type_mismatches||[]).map(x=>x.osm_relation_id),
- ...(reviewed.mappings||[]).map(x=>Number(x.osm_relation_id))
+ ...(reviewed.mappings||[]).map(x=>Number(x.osm_relation_id)),
+ ...(parentAssignmentReviewed.items||[]).map(x=>Number(x.osm_relation_id))
 ].filter(Boolean))];
 const histories=[],historyErrors=[];
 for(const id of targetIds){
@@ -315,6 +317,55 @@ const crossCountyParentAudits=crossCountyReviewed.map(x=>{
  };
 });
 
+
+const parentAssignmentResolutions=(parentAssignmentReviewed.items||[]).map(x=>{
+ const relationId=Number(x.osm_relation_id),legalId=String(x.legal_id);
+ const entity=entityByRelation.get(relationId)||null;
+ const actualParent=entity?.parent_id?entityById.get(entity.parent_id)||null:null;
+ const expectedParent=entityByRelation.get(Number(x.resolved_parent_osm_relation_id))||null;
+ const previousParent=entityByRelation.get(Number(x.previous_incorrect_parent_osm_relation_id))||null;
+ const childFeature=featureByRelation.get(relationId)||null;
+ const expectedParentFeature=expectedParent?featureByRelation.get(Number(expectedParent.osm?.relation_id))||null:null;
+ const previousParentFeature=previousParent?featureByRelation.get(Number(previousParent.osm?.relation_id))||null:null;
+ const expectedOverlap=overlapEvidence(childFeature,expectedParentFeature);
+ const previousOverlap=overlapEvidence(childFeature,previousParentFeature);
+ const reconciliationMatch=(reconciliation.matches||[]).find(m=>Number(m.osm_relation_id)===relationId)||null;
+ const overridePresent=(reviewed.mappings||[]).some(m=>Number(m.osm_relation_id)===relationId);
+ const legalUat=uatByCode.get(legalId)||null;
+ const history=historyById.get(relationId)||null;
+ const ok=Boolean(
+  entity
+  && actualParent
+  && Number(actualParent.osm?.relation_id)===Number(x.resolved_parent_osm_relation_id)
+  && legalUat
+  && norm(legalUat.county_name)===norm(x.legal_parent_name)
+  && reconciliationMatch
+  && String(reconciliationMatch.legal_id)===legalId
+  && reconciliationMatch.match_method==='exact_normalized_name_and_county'
+  && !overridePresent
+  && expectedOverlap.available===true
+  && Number(expectedOverlap.child_coverage_ratio)>=0.95
+  && previousOverlap.available===true
+  && Number(previousOverlap.child_coverage_ratio)<=0.05
+ );
+ return {
+  osm_relation_id:relationId,
+  osm_name:entity?.name||x.osm_name||null,
+  legal_id:legalId,
+  legal_name:legalUat?.name||x.legal_name||null,
+  expected_parent_osm_relation_id:Number(x.resolved_parent_osm_relation_id),
+  actual_parent_osm_relation_id:actualParent?.osm?.relation_id??null,
+  actual_parent_name:actualParent?.name||null,
+  reconciliation_match_method:reconciliationMatch?.match_method||null,
+  reviewed_identity_override_present:overridePresent,
+  expected_parent_overlap:expectedOverlap,
+  previous_parent_overlap:previousOverlap,
+  history,
+  resolution:x.resolution||null,
+  stable:ok
+ };
+});
+
 const typeMismatches=(reconciliation.type_mismatches||[]).map(x=>({
  ...x,
  current_osm_tags:tagsOf(featureByRelation.get(x.osm_relation_id)),
@@ -331,6 +382,8 @@ check('all_unmatched_cases_audited',unmatched.length===(reconciliation.unmatched
 check('all_duplicate_groups_audited',duplicateGroups.length===(reconciliation.duplicate_legal_mappings||[]).length,{count:duplicateGroups.length});
 check('all_type_mismatches_audited',typeMismatches.length===(reconciliation.type_mismatches||[]).length,{count:typeMismatches.length});
 check('cross_county_parent_conflicts_audited',crossCountyParentAudits.length===crossCountyReviewed.length,{expected:crossCountyReviewed.length,audited:crossCountyParentAudits.length});
+const unstableParentAssignments=parentAssignmentResolutions.filter(x=>!x.stable);
+check('reviewed_parent_assignment_resolutions_stable',unstableParentAssignments.length===0,{failed:unstableParentAssignments});
 const missingReviewedRelations=reviewedOverrideValidation.filter(x=>!x.relation_present).map(x=>x.osm_relation_id);
 const missingReviewedUats=reviewedOverrideValidation.filter(x=>!x.official_uat_present).map(x=>({osm_relation_id:x.osm_relation_id,legal_id:x.legal_id}));
 check('reviewed_override_relations_present',missingReviewedRelations.length===0,{missing:missingReviewedRelations});
@@ -354,12 +407,13 @@ const report={
   duplicate_group_count:duplicateGroups.length,
   type_mismatch_count:typeMismatches.length,
   cross_county_parent_conflict_count:crossCountyParentAudits.length,
+  reviewed_parent_assignment_resolution_count:parentAssignmentResolutions.length,
   reviewed_override_count:reviewedOverrideValidation.length,
   reviewed_override_containment_failure_count:reviewedOverrideValidation.filter(x=>x.identity_containment_ok===false).length,
   history_error_count:historyErrors.length,
   diagnostic_warning_count:warnings.length
  },
- unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,cross_county_parent_conflicts:crossCountyParentAudits,reviewed_overrides:reviewedOverrideValidation,warnings,failures
+ unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,cross_county_parent_conflicts:crossCountyParentAudits,reviewed_parent_assignment_resolutions:parentAssignmentResolutions,reviewed_overrides:reviewedOverrideValidation,warnings,failures
 };
 const historyOut={schema_version:1,generated_at:report.generated_at,source:'OpenStreetMap API 0.6 relation history',relation_count:targetIds.length,history_count:histories.length,error_count:historyErrors.length,errors:historyErrors,relations:histories};
 await mkdir('data/current',{recursive:true});await mkdir('data/sources',{recursive:true});
