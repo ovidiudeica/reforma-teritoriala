@@ -8,6 +8,7 @@ on:
       - 'scripts/process/audit-actual-topology.mjs'
       - 'scripts/process/audit-actual-release-gate.mjs'
       - 'scripts/process/audit-actual-structural-completeness.mjs'
+      - 'scripts/process/audit-actual-official-identity.mjs'
       - 'scripts/process/build-actual-public-data.mjs'
       - 'scripts/process/audit-osm-relation-12463200.mjs'
       - 'scripts/import/import-osm.mjs'
@@ -49,6 +50,8 @@ jobs:
         run: npm run build:actual-public-data
       - name: Audit structural completeness
         run: npm run audit:actual-structural-completeness
+      - name: Audit official identity propagation for all ACTUAL entities
+        run: npm run audit:actual-official-identity
       - run: npm run audit:actual-release-gate
       - name: Upload topology report
         if: always()
@@ -59,6 +62,7 @@ jobs:
             data/current/actual-topology-audit.json
             data/current/osm-12463200-audit.json
             data/current/actual-structural-completeness-audit.json
+            data/current/actual-official-identity-audit.json
           if-no-files-found: error
 
 
