@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "ACTUAL",
-  "policy_version": "2026-10-02-v1.1",
+  "policy_version": "2026-10-03-v1.2",
   "scope": "settlements_and_component_localities",
   "principle": "ACTUAL is exhaustive for administrative UAT identities where the official registry and subtype model are exhaustive. Settlements/component localities are an official identity inventory but not an exhaustive polygon-boundary layer: SIRUTA/CUATM do not supply an exhaustive authoritative polygon set, and OSM settlement boundaries are incomplete and heterogeneous. Missing settlement polygons therefore do not block ACTUAL. Any settlement representation that is included must itself satisfy a fail-closed identity-or-review path and preserve OSM geometry without asserting legal geometry equivalence.",
   "common_requirements": {
@@ -94,5 +94,21 @@
     "path": "schemas/actual-geometry-role-contract.json",
     "contract": "actual-geometry-role-v1",
     "schema_version": 1
+  },
+  "public_contract": "actual-public-entity-v2",
+  "administrative_geometry_fallbacks": {
+    "RO": {
+      "path": "data/sources/ro-ancpi-uat-fallbacks.json",
+      "mode": "ACTUAL_RO_ANCPI_UAT_FALLBACKS",
+      "authority": "Agenția Națională de Cadastru și Publicitate Imobiliară",
+      "arcgis_item_id": "466b7199c19f4904831e14bc7f407af9",
+      "geometry_role": "administrative_boundary",
+      "geometry_scope": "uat_fallback",
+      "legal_ids": [
+        "64096"
+      ],
+      "legal_identity_authority": "SIRUTA",
+      "legal_geometry_equivalence_asserted": false
+    }
   }
 }

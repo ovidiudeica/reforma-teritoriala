@@ -3,8 +3,8 @@
   "mode": "ACTUAL_SOURCE_BUNDLE",
   "source_watermark": "2026-09-27T20:37:24.316Z",
   "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
-  "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
-  "policy": "Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, and the official MD CUATM snapshot. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.",
+  "bundle_fingerprint_sha256": "a6ecc8e438b717b8a2ef028057826aaecc83e3e2538a100435500cf1831829be",
+  "policy": "Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, and materialized ANCPI/RELUAT RO UAT fallback geometries. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.",
   "sources": {
     "osm": {
       "manifest_path": "data/sources/osm-current.json",
@@ -48,6 +48,20 @@
       "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
       "fetched_at": "2026-09-27T20:37:24.316Z",
       "record_count": 1721
+    },
+    "ancpi_ro_uat_fallbacks": {
+      "path": "data/sources/ro-ancpi-uat-fallbacks.json",
+      "sha256": "2b4123f41424f6beac888b6dce0a1c19b9ec416618028f482dcc382bb2e272b4",
+      "authority": "Agenția Națională de Cadastru și Publicitate Imobiliară",
+      "dataset": "AU Unități administrative (RELUAT)",
+      "arcgis_item_id": "466b7199c19f4904831e14bc7f407af9",
+      "layer_id": 1,
+      "item_modified_at": "2026-02-12T11:35:22.000Z",
+      "raw_response_sha256": "5e57c42deaff189dd9f962a73a3996c8479bdf2558d4c4dc2e3f9d9f74da8a62",
+      "feature_count": 1,
+      "legal_ids": [
+        "64096"
+      ]
     }
   }
 }

@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T20:37:21.852Z",
+  "generated_at": "2026-09-27T20:37:24.316Z",
   "jurisdiction": "RO",
   "status": "PASS",
-  "policy": "SIRUTA is authoritative for RO level-8 legal identity/type and for the exhaustive 42-county legal identity bridge. OSM remains the geometry/provenance representation. Geometry coordinates and OSM geometric parent_id are never rewritten from legal hierarchy; legal parent is stored separately.",
+  "policy": "SIRUTA is authoritative for RO legal identity/type and the exhaustive county/UAT inventory. OSM remains the primary geometry source. A reviewed UAT with no distinct OSM boundary may use an exact materialized ANCPI/RELUAT administrative polygon as a fallback, with provenance kept separate from legal identity and without fabricating OSM metadata.",
   "source": {
     "official_snapshot": "data/sources/ro-siruta-current.json",
-    "reconciliation": "data/current/ro-official-reconciliation.json"
+    "reconciliation": "data/current/ro-official-reconciliation.json",
+    "ancpi_uat_fallbacks": "data/sources/ro-ancpi-uat-fallbacks.json"
   },
   "checks": [
     {
@@ -44,6 +45,23 @@
       "name": "all_ro_county_geojson_features_have_siruta_identity",
       "ok": true,
       "detail": {}
+    },
+    {
+      "name": "ancpi_bretcu_fallback_activation_is_exact",
+      "ok": true,
+      "detail": {
+        "enabled": true,
+        "fallback_applied": [
+          {
+            "entity_id": "siruta-u64096",
+            "legal_id": "64096",
+            "legal_type": "commune",
+            "parent_id": "osm-r2248621",
+            "source_object_id": 1227,
+            "inspire_id_local_id": "1.145.64096"
+          }
+        ]
+      }
     }
   ],
   "summary": {
@@ -51,6 +69,7 @@
     "applied_count": 3179,
     "ro_county_count": 42,
     "county_applied_count": 42,
+    "ancpi_fallback_applied_count": 1,
     "type_changed_count": 5,
     "legal_parent_conflict_count": 0,
     "osm_semantic_type_conflict_count": 0,
@@ -60,6 +79,16 @@
     "reviewed_semantic_type_resolution_count": 3,
     "represented_at_other_osm_level_count": 0
   },
+  "ancpi_fallbacks": [
+    {
+      "entity_id": "siruta-u64096",
+      "legal_id": "64096",
+      "legal_type": "commune",
+      "parent_id": "osm-r2248621",
+      "source_object_id": 1227,
+      "inspire_id_local_id": "1.145.64096"
+    }
+  ],
   "type_changes": [
     {
       "osm_relation_id": 10715570,
