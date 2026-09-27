@@ -61,3 +61,15 @@ The candidate order is intentional:
 This ordering prevents a stage-mismatch regression observed in Actions run `36356055091`. The persisted catalog already represents OSM relation `377733` (București) after the RO county bridge as legal SIRUTA county/code `40` and catalog type `county`. The reviewed SIRUTA UAT `179132` resolution correctly describes the earlier raw OSM reconciliation stage, where relation `377733` is `capital_municipality` at admin_level 4. Running the raw reconciliation audit against the already post-bridge persisted catalog therefore produced a false structural failure. The reviewed resolution is not changed; the workflow stage is corrected.
 
 If the official SIRUTA fetch is unavailable and the importer preserves the last valid official CSV snapshot, candidate generation continues against that exact preserved source. If a refreshed SIRUTA snapshot is semantically unchanged, the lifecycle terminates as `NO_CHANGE`. A real official-registry change becomes a `CHANGE` candidate and can reach `main` only through explicit promotion and the protected PR path.
+
+
+## Workflow write boundary
+
+The ACTUAL topology audit is verification-only. It has `contents: read`, validates the exact persisted release in read-only gate mode, audits the committed master topology, uploads the generated audit report, restores that report and fails if any tracked repository file changed.
+
+Only two workflows may contain a direct `git push`:
+
+- `actual-candidate.yml` — pushes a validated `CHANGE` candidate to its isolated candidate branch.
+- `actual-promote-candidate.yml` — updates that isolated candidate branch with the explicit promotion marker before opening the protected PR.
+
+No topology, source-refresh or auxiliary audit workflow may commit or push release data.
