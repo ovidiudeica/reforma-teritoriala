@@ -30,6 +30,8 @@ const relationId=f=>{
 };
 const featureByRelation=new Map((geo.features||[]).map(f=>[relationId(f),f]).filter(([id])=>id));
 const entityByRelation=new Map((catalog.entities||[]).filter(e=>e.jurisdiction==='RO').map(e=>[Number(e.osm?.relation_id),e]));
+const entityById=new Map((catalog.entities||[]).map(e=>[e.id,e]));
+const roAdmin4Entities=(catalog.entities||[]).filter(e=>e.jurisdiction==='RO'&&Number(e.osm?.admin_level)===4);
 const byCode=new Map((official.records||[]).map(x=>[String(x.siruta),x]));
 const uats=(official.records||[]).filter(x=>Number(x.level)===2);
 const countyName=x=>{
@@ -80,11 +82,14 @@ function parseHistory(xml,id){
  return {
   relation_id:id,
   created_at:versions[0].timestamp,
+  created_changeset:versions[0].changeset,
   current_version:versions.at(-1).version,
   last_modified_at:versions.at(-1).timestamp,
   last_changeset:versions.at(-1).changeset,
   current_tags:versions.at(-1).tags,
   current_member_count:versions.at(-1).members.length,
+  current_members:versions.at(-1).members,
+  versions:versions.map(v=>({version:v.version,timestamp:v.timestamp,changeset:v.changeset,user:v.user,tags:v.tags,members:v.members})),
   history_signals:{
    name_values:unique('name'),official_name_values:unique('official_name'),admin_level_values:unique('admin_level'),
    place_values:unique('place'),place_ro_values:unique('place:ro'),source_values:unique('source'),
@@ -248,6 +253,68 @@ const reviewedOverrideValidation=(reviewed.mappings||[]).map(x=>{
  };
 });
 
+
+function overlapEvidence(child,parent){
+ if(!child||!parent)return {available:false,reason:'missing_geometry'};
+ try{
+  const childArea=area(child);
+  const overlap=intersect(featureCollection([child,parent]));
+  const overlapArea=overlap?area(overlap):0;
+  return {
+   available:true,
+   child_area_km2:childArea/1e6,
+   intersection_km2:overlapArea/1e6,
+   child_coverage_ratio:childArea?overlapArea/childArea:null
+  };
+ }catch(e){return {available:false,reason:e.message};}
+}
+const crossCountyReviewed=(reviewed.mappings||[]).filter(x=>String(x.resolution||'').includes('cross_county_parent_conflict'));
+const crossCountyParentAudits=crossCountyReviewed.map(x=>{
+ const relationId=Number(x.osm_relation_id),legalId=String(x.legal_id);
+ const childEntity=entityByRelation.get(relationId)||null;
+ const childFeature=featureByRelation.get(relationId)||null;
+ const legalUat=uatByCode.get(legalId)||null;
+ const geometricParent=childEntity?.parent_id?entityById.get(childEntity.parent_id)||null:null;
+ const legalParent=legalUat?.county_name?roAdmin4Entities.find(e=>norm(e.name)===norm(legalUat.county_name))||null:null;
+ const geometricParentFeature=geometricParent?featureByRelation.get(Number(geometricParent.osm?.relation_id))||null:null;
+ const legalParentFeature=legalParent?featureByRelation.get(Number(legalParent.osm?.relation_id))||null:null;
+ let representativePoint=null,pointInsideGeometricParent=null,pointInsideLegalParent=null;
+ try{
+  representativePoint=childFeature?pointOnFeature(childFeature):null;
+  if(representativePoint&&geometricParentFeature)pointInsideGeometricParent=booleanPointInPolygon(representativePoint,geometricParentFeature);
+  if(representativePoint&&legalParentFeature)pointInsideLegalParent=booleanPointInPolygon(representativePoint,legalParentFeature);
+ }catch{}
+ const geometricOverlap=overlapEvidence(childFeature,geometricParentFeature);
+ const legalOverlap=overlapEvidence(childFeature,legalParentFeature);
+ const gc=geometricOverlap.child_coverage_ratio,lc=legalOverlap.child_coverage_ratio;
+ let auditClassification='geometry_or_parent_conflict_requires_review';
+ if(Number.isFinite(lc)&&Number.isFinite(gc)){
+  if(lc>=0.95&&gc<=0.05)auditClassification='point_on_feature_parent_assignment_artifact';
+  else if(lc>gc)auditClassification='legal_parent_dominant_overlap_parent_assignment_conflict';
+  else if(gc>lc)auditClassification='osm_geometry_dominantly_in_geometric_parent';
+  else auditClassification='ambiguous_parent_overlap';
+ }
+ return {
+  osm_relation_id:relationId,
+  osm_name:childEntity?.name||x.osm_name||null,
+  legal_id:legalId,
+  legal_name:legalUat?.name||x.legal_name||null,
+  legal_parent_name:legalUat?.county_name||null,
+  legal_parent_osm_relation_id:legalParent?.osm?.relation_id??null,
+  geometric_parent_id:childEntity?.parent_id||null,
+  geometric_parent_name:geometricParent?.name||null,
+  geometric_parent_osm_relation_id:geometricParent?.osm?.relation_id??null,
+  representative_point:representativePoint?.geometry?.coordinates||null,
+  representative_point_inside_geometric_parent:pointInsideGeometricParent,
+  representative_point_inside_legal_parent:pointInsideLegalParent,
+  legal_parent_overlap:legalOverlap,
+  geometric_parent_overlap:geometricOverlap,
+  official_locality_containment:containmentEvidence(relationId,[legalId])[0]||null,
+  osm_history:historyById.get(relationId)||null,
+  audit_classification:auditClassification
+ };
+});
+
 const typeMismatches=(reconciliation.type_mismatches||[]).map(x=>({
  ...x,
  current_osm_tags:tagsOf(featureByRelation.get(x.osm_relation_id)),
@@ -263,6 +330,7 @@ if(officialLocalityGeometryError)warnings.push({name:'official_locality_geometry
 check('all_unmatched_cases_audited',unmatched.length===(reconciliation.unmatched_osm||[]).length,{count:unmatched.length});
 check('all_duplicate_groups_audited',duplicateGroups.length===(reconciliation.duplicate_legal_mappings||[]).length,{count:duplicateGroups.length});
 check('all_type_mismatches_audited',typeMismatches.length===(reconciliation.type_mismatches||[]).length,{count:typeMismatches.length});
+check('cross_county_parent_conflicts_audited',crossCountyParentAudits.length===crossCountyReviewed.length,{expected:crossCountyReviewed.length,audited:crossCountyParentAudits.length});
 const missingReviewedRelations=reviewedOverrideValidation.filter(x=>!x.relation_present).map(x=>x.osm_relation_id);
 const missingReviewedUats=reviewedOverrideValidation.filter(x=>!x.official_uat_present).map(x=>({osm_relation_id:x.osm_relation_id,legal_id:x.legal_id}));
 check('reviewed_override_relations_present',missingReviewedRelations.length===0,{missing:missingReviewedRelations});
@@ -285,12 +353,13 @@ const report={
   requires_review_count:unmatched.filter(x=>x.audit_classification==='requires_review').length,
   duplicate_group_count:duplicateGroups.length,
   type_mismatch_count:typeMismatches.length,
+  cross_county_parent_conflict_count:crossCountyParentAudits.length,
   reviewed_override_count:reviewedOverrideValidation.length,
   reviewed_override_containment_failure_count:reviewedOverrideValidation.filter(x=>x.identity_containment_ok===false).length,
   history_error_count:historyErrors.length,
   diagnostic_warning_count:warnings.length
  },
- unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,reviewed_overrides:reviewedOverrideValidation,warnings,failures
+ unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,cross_county_parent_conflicts:crossCountyParentAudits,reviewed_overrides:reviewedOverrideValidation,warnings,failures
 };
 const historyOut={schema_version:1,generated_at:report.generated_at,source:'OpenStreetMap API 0.6 relation history',relation_count:targetIds.length,history_count:histories.length,error_count:historyErrors.length,errors:historyErrors,relations:histories};
 await mkdir('data/current',{recursive:true});await mkdir('data/sources',{recursive:true});
