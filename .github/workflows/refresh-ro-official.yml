@@ -14,6 +14,7 @@ on:
       - scripts/process/audit-ro-release-gate.mjs
       - data/sources/ro-siruta-reviewed-overrides.json
       - data/sources/ro-parent-assignment-reviewed-resolutions.json
+      - data/sources/ro-official-only-reviewed-resolutions.json
       - data/sources/ro-official-reconciliation-exceptions.json
       - package.json
       - .github/workflows/refresh-ro-official.yml

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "RO",
+  "reviewed_at": "2026-09-27",
+  "policy": "Reviewed official UATs that lack a distinct current OSM administrative-boundary representation. These classifications preserve official legal identity while explicitly prohibiting promotion of another OSM relation to legal geometry.",
+  "items": [
+    {
+      "legal_id": "64096",
+      "legal_name": "BREȚCU",
+      "legal_type": "commune",
+      "legal_parent_name": "JUDEȚUL COVASNA",
+      "classification": "official_uat_without_distinct_osm_boundary_representation",
+      "covering_osm_relation_id": 14735731,
+      "covering_osm_relation_name": "Ojdula",
+      "covering_osm_relation_legal_id": "64602",
+      "expected_parent_osm_relation_id": 2248621,
+      "official_component_locality_ids": [
+        "64103",
+        "64112",
+        "64121"
+      ],
+      "official_component_locality_names": [
+        "Brețcu",
+        "Mărtănuș",
+        "Oituz"
+      ],
+      "official_area_ha": 11603,
+      "evidence": {
+        "official_registry": "data/sources/ro-siruta-current.json",
+        "official_locality_geometry": "INS WebGIS Operational/Localitati MapServer/0",
+        "county_spatial_plan_2026": "https://ro.cjcv.ro/fileman/Uploads/PATJ/2026/04/01_scrisa/PATJ_Covasna_Partea_II_anexa4.pdf",
+        "osm_snapshot": "public/geo/current/ro-administrative.geojson"
+      },
+      "review_conclusion": "SIRUTA 64096 is a current legal UAT, but the imported OSM administrative snapshot contains no distinct Brețcu/Bereck boundary relation. Relation 14735731 is tagged Ojdula and spatially overcovers the official locality representations of both Brețcu and Ojdula. Retain Brețcu as an official legal identity without assigning relation 14735731, or any derived geometry, as its legal boundary."
+    }
+  ]
+}
