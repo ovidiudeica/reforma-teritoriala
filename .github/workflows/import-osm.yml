@@ -9,6 +9,7 @@ on:
     paths:
       - scripts/import/import-osm.mjs
       - data/sources/ro-official-reconciliation-exceptions.json
+      - data/sources/ro-semantic-type-reviewed-resolutions.json
       - data/sources/ro-other-level-reviewed-resolutions.json
       - .github/workflows/import-osm.yml
 permissions:
