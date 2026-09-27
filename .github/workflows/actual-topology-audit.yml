@@ -7,6 +7,8 @@ on:
       - 'data/current/entities.json'
       - 'scripts/process/audit-actual-topology.mjs'
       - 'scripts/process/audit-actual-release-gate.mjs'
+      - 'scripts/process/audit-actual-structural-completeness.mjs'
+      - 'scripts/process/build-actual-public-data.mjs'
       - 'scripts/process/audit-osm-relation-12463200.mjs'
       - 'scripts/import/import-osm.mjs'
       - 'package.json'
@@ -33,6 +35,10 @@ jobs:
         run: npm run import:osm
       - name: Verify regenerated topology
         run: npm run audit:actual-topology
+      - name: Regenerate public ACTUAL contract
+        run: npm run build:actual-public-data
+      - name: Audit structural completeness
+        run: npm run audit:actual-structural-completeness
       - run: npm run audit:actual-release-gate
       - name: Upload topology report
         if: always()
@@ -42,6 +48,7 @@ jobs:
           path: |
             data/current/actual-topology-audit.json
             data/current/osm-12463200-audit.json
+            data/current/actual-structural-completeness-audit.json
           if-no-files-found: error
 
 
