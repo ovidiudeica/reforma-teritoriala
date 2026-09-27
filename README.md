@@ -64,6 +64,6 @@ Aplicația nu consumă direct GeoJSON-urile master de zeci de MB. `scripts/proce
 - `public/geo/actual/{ro,md}-local.geojson` — UAT-uri locale;
 - `public/geo/actual/{ro,md}-detail.geojson` — sectoare, localități și reprezentări de detaliu.
 
-Contractul separă explicit `legal` de `representation`. O identitate SIRUTA/CUATM este publicată numai când reconcilierea oficială este pozitivă; lipsa unei identități este păstrată ca `null`, nu dedusă din tagurile OSM. GeoJSON-urile publice sunt simplificate exclusiv pentru afișare și păstrează legătura prin `entity_id` către catalogul master.
+Contractul separă explicit `legal` de `representation`. O identitate SIRUTA/CUATM este publicată numai când reconcilierea oficială este pozitivă; lipsa unei identități este păstrată ca `null`, nu dedusă din tagurile OSM. GeoJSON-urile publice sunt împărțite pe niveluri pentru încărcare progresivă, fără simplificarea coordonatelor, și păstrează legătura prin `entity_id` către catalogul master.
 
 Straturile web și indexul public sunt incluse în fingerprint-ul `actual-release-manifest.json`; gate-ul ACTUAL verifică fail-closed cardinalitatea 1:1 între catalog, contract și geometriile publice.
