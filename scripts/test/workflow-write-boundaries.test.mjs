@@ -27,6 +27,7 @@ test('ACTUAL topology audit is strictly read-only',async()=>{
  assert.doesNotMatch(content,/\bgit\s+commit\b/);
  assert.doesNotMatch(content,/Persist validated release snapshot/);
  assert.doesNotMatch(content,/npm run import:osm/);
+ assert.doesNotMatch(content,/npm run build:osm-actual/);
  assert.doesNotMatch(content,/audit:ro-official-reconciliation/);
  assert.doesNotMatch(content,/reconcile:cuatm/);
  assert.doesNotMatch(content,/build:actual-release-manifest/);
