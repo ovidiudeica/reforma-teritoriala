@@ -9,7 +9,7 @@ const CLASSIFIER_VERSION='2.3';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9]},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9]}
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316]}
 };
 const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
 const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
@@ -35,11 +35,12 @@ async function overpass(query){
  }
  throw last;
 }
-function queryFor({iso,levels}){
+function queryFor({iso,levels,requiredRelations=[]}){
  const filters=levels.map(l=>`relation(area.country)["boundary"="administrative"]["admin_level"="${l}"];`).join('\n');
+ const required=requiredRelations.map(id=>`relation(${id});`).join('\n');
  // Include the country relation itself so candidate geometries can be validated
  // spatially against the actual country polygon after osmtogeojson conversion.
- return `[out:json][timeout:300];relation["ISO3166-1"="${iso}"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;${filters});out body;>;out skel qt;`;
+ return `[out:json][timeout:300];relation["ISO3166-1"="${iso}"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;${filters}${required ? `\n${required}` : ''});out body;>;out skel qt;`;
 }
 function norm(v){return (v||'').trim().toLowerCase();}
 function classify(country,t={}){
