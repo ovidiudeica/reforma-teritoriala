@@ -2,11 +2,11 @@
   "schema_version": 2,
   "mode": "ACTUAL_CANDIDATE",
   "status": "CHANGE",
-  "base_ref": "436f3a5d9f5ff6951b786ab94e73ab5591f9faff",
+  "base_ref": "cc76d4192b6446dd22385d84e95d0c43e250aa7b",
   "base_release": {
-    "snapshot_id": "actual-83ef4c0ce09e5e42",
-    "release_fingerprint_sha256": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae",
-    "manifest_sha256": "89e9afe4f7c0b4ee6efdcf9e81c76f8719daa92278f107898baf17f6d054880f",
+    "snapshot_id": "actual-b7e7d80db0d2d313",
+    "release_fingerprint_sha256": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
+    "manifest_sha256": "164396cde2904c37a9020e491c7a896a2dac9d026c704dd677b2783ab23f6441",
     "source_bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
     "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
@@ -14,11 +14,11 @@
     "build_environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa"
   },
   "candidate": {
-    "snapshot_id": "actual-b7e7d80db0d2d313",
-    "release_fingerprint_sha256": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
-    "manifest_sha256": "164396cde2904c37a9020e491c7a896a2dac9d026c704dd677b2783ab23f6441",
+    "snapshot_id": "actual-2041d1665e7dc536",
+    "release_fingerprint_sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
+    "manifest_sha256": "74b9014c35a0c0223bdd813afaede929c70c4b0b5cc1a1d4c1eb287eaea0505f",
     "release_gate_status": "PASS",
-    "content_fingerprint_sha256": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
+    "content_fingerprint_sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
     "source_bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
     "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
@@ -28,10 +28,10 @@
     "exact_base_manifest_bytes_reused": false
   },
   "diff_report_path": "data/current/actual-candidate-diff.json",
-  "diff_report_sha256": "0b168bb504c14a9f0e73e474d2ca5fdfb20fa6e376541c6dfdc6186c478db8f8",
+  "diff_report_sha256": "f1f0ba9d1657ea31f4a8336615449d2e763223a04cb719bcd72b9f17009c27b2",
   "candidate_identity_algorithm": "actual-candidate-v1",
-  "candidate_identity_sha256": "56d075f190e1c9285e73b795b67a032c3f285a922bf4ede6e47374a9b5e3cf4b",
+  "candidate_identity_sha256": "3368a5527c9b2c90665253eb485fc9647321cd5ae54496d46803499ddcc9213f",
   "review_required": true,
-  "substantive_change_count": 5,
+  "substantive_change_count": 2,
   "policy": "Candidate tree identity is deterministic from the immutable base, exact candidate release provenance and exact diff bytes. Runtime timestamps and GitHub run metadata are execution-receipt data only and must never enter a committed candidate tree."
 }

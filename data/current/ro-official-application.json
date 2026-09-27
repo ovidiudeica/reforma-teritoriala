@@ -65,7 +65,10 @@
             "outer_shell_evidence_sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
             "outer_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
             "outer_shell_source_snapshot_id": "actual-990c892d9d27fa46",
-            "source": "OSM shell + ANCPI shared boundary",
+            "source": "OSM shell + ANCPI shared boundary + reviewed terminal adaptations",
+            "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+            "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
+            "terminal_closure_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
             "source_object_id": 1167,
             "inspire_id_local_id": "1.145.64602",
             "paired_legal_id": "64096",
@@ -98,6 +101,8 @@
               "osm_shell_source_snapshot_id": "actual-990c892d9d27fa46",
               "ancpi_ojdula_source_object_id": 1167,
               "ancpi_bretcu_source_object_id": 1227,
+              "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+              "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
               "audit": {
                 "method": "osm_shell_ancpi_shared_boundary_terminal_clip_v2",
                 "osm_shell_area_m2": 224992782.20558172,
@@ -121,6 +126,25 @@
                 "ancpi_clipped_end_m": 0,
                 "connector_start_m": 0,
                 "connector_end_m": 82.59576607343764,
+                "ancpi_terminal_start_original_coordinate": [
+                  26.2494278855332,
+                  46.0209763990113
+                ],
+                "ancpi_terminal_start_final_coordinate": [
+                  26.24944651925884,
+                  46.02097300906347
+                ],
+                "ancpi_terminal_start_mode": "ancpi_terminal_clip_to_osm_shell",
+                "ancpi_terminal_end_original_coordinate": [
+                  26.434568703767,
+                  46.0065843376564
+                ],
+                "ancpi_terminal_end_final_coordinate": [
+                  26.43554442709978,
+                  46.0062802747671
+                ],
+                "ancpi_terminal_end_mode": "non_ancpi_terminal_closure_to_osm_shell",
+                "non_ancpi_terminal_closure_count": 1,
                 "partition_polygons_valid": true,
                 "bretcu_overlap_with_ancpi_m2": 112473055.22575855,
                 "ojdula_overlap_with_ancpi_m2": 112261625.88606882
@@ -171,6 +195,8 @@
         "osm_shell_source_snapshot_id": "actual-990c892d9d27fa46",
         "ancpi_ojdula_source_object_id": 1167,
         "ancpi_bretcu_source_object_id": 1227,
+        "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+        "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
         "audit": {
           "method": "osm_shell_ancpi_shared_boundary_terminal_clip_v2",
           "osm_shell_area_m2": 224992782.20558172,
@@ -194,6 +220,25 @@
           "ancpi_clipped_end_m": 0,
           "connector_start_m": 0,
           "connector_end_m": 82.59576607343764,
+          "ancpi_terminal_start_original_coordinate": [
+            26.2494278855332,
+            46.0209763990113
+          ],
+          "ancpi_terminal_start_final_coordinate": [
+            26.24944651925884,
+            46.02097300906347
+          ],
+          "ancpi_terminal_start_mode": "ancpi_terminal_clip_to_osm_shell",
+          "ancpi_terminal_end_original_coordinate": [
+            26.434568703767,
+            46.0065843376564
+          ],
+          "ancpi_terminal_end_final_coordinate": [
+            26.43554442709978,
+            46.0062802747671
+          ],
+          "ancpi_terminal_end_mode": "non_ancpi_terminal_closure_to_osm_shell",
+          "non_ancpi_terminal_closure_count": 1,
           "partition_polygons_valid": true,
           "bretcu_overlap_with_ancpi_m2": 112473055.22575855,
           "ojdula_overlap_with_ancpi_m2": 112261625.88606882

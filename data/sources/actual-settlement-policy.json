@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "ACTUAL",
-  "policy_version": "2026-10-04-v1.4",
+  "policy_version": "2026-10-04-v1.5",
   "scope": "settlements_and_component_localities",
   "principle": "ACTUAL is exhaustive for administrative UAT identities where the official registry and subtype model are exhaustive. Settlements/component localities are an official identity inventory but not an exhaustive polygon-boundary layer: SIRUTA/CUATM do not supply an exhaustive authoritative polygon set, and OSM settlement boundaries are incomplete and heterogeneous. Missing settlement polygons therefore do not block ACTUAL. Any settlement representation that is included must itself satisfy a fail-closed identity-or-review path and preserve OSM geometry without asserting legal geometry equivalence.",
   "common_requirements": {
@@ -120,7 +120,10 @@
           "outer_shell_evidence_sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
           "outer_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
           "outer_shell_source_snapshot_id": "actual-990c892d9d27fa46",
-          "source": "OSM shell + ANCPI shared boundary",
+          "source": "OSM shell + ANCPI shared boundary + reviewed terminal adaptations",
+          "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+          "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
+          "terminal_closure_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
           "source_object_id": 1167,
           "inspire_id_local_id": "1.145.64602",
           "paired_legal_id": "64096",
