@@ -1,0 +1,22 @@
+name: Refresh official Moldova CUATM snapshot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '53 4 2 * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: md-cuatm-source-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh-through-candidate:
+    uses: ./.github/workflows/actual-candidate.yml
+    with:
+      candidate_branch: ''
+      refresh_ro_siruta: false
+      refresh_md_cuatm: true
+      source_trigger: 'md-cuatm-refresh'

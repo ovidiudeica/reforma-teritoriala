@@ -1,8 +1,6 @@
 #!/usr/bin/env node
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import * as XLSX from 'xlsx';
+import { readFile, writeFile } from 'node:fs/promises';
 
-const URL=process.env.CUATM_URL||'https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx';
 const SNAPSHOT='data/sources/cuatm-current.json', OUTPUT='data/current/md-cuatm-reconciliation.json', OVERRIDES='data/sources/md-cuatm-reviewed-overrides.json', NON_CUATM_OVERRIDES='data/sources/md-cuatm-reviewed-non-cuatm-overrides.json';
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[„”"'’]/g,'').replace(/\b(municipiul|municipiu|orasul|oras|comuna|satul|sat|raionul|raion|sectorul|sector)\b/g,' ').replace(/[^a-z0-9ăâîșț]+/gi,' ').trim().replace(/\s+/g,' ');
 const digits=v=>String(v??'').replace(/\.0$/,'').replace(/\s/g,'').trim();
@@ -14,34 +12,24 @@ const entityById=new Map(entities.map(e=>[e.id,e]));
 const entityByRelationId=new Map(entities.filter(e=>e.osm?.relation_id!=null).map(e=>[String(e.osm.relation_id),e]));
 const reviewedOverrides=JSON.parse(await readFile(OVERRIDES,'utf8'));
 
-async function fetchOfficial(){
- const r=await fetch(URL,{headers:{'user-agent':'reforma-teritoriala-cuatm/1.2'}});
- if(!r.ok)throw new Error('CUATM download failed: HTTP '+r.status);
- const buf=Buffer.from(await r.arrayBuffer()); if(buf.length<10000)throw new Error('CUATM download unexpectedly small: '+buf.length);
- const wb=XLSX.read(buf,{type:'buffer'}), records=[];
- for(const sheet of wb.SheetNames){
-  const matrix=XLSX.utils.sheet_to_json(wb.Sheets[sheet],{header:1,defval:null,raw:false,blankrows:false});
-  if(!matrix.length)continue;
-  const headers=(matrix[0]||[]).map(v=>String(v??'').replace(/^\uFEFF/,'').trim());
-  const col=name=>headers.indexOf(name);
-  const required=['CodUnic','ParentCodUnic','CodStatistic','ParentCodStatistic','Statut','DenumireRO','DenumireRU'];
-  const missing=required.filter(h=>col(h)<0);
-  if(missing.length)throw new Error('CUATM schema missing columns in '+sheet+': '+missing.join(', '));
-  for(let i=1;i<matrix.length;i++){
-   const row=matrix[i]||[];
-   const code=digits(row[col('CodUnic')]), name=String(row[col('DenumireRO')]??'').trim();
-   if(!/^\d{3,10}$/.test(code)||!name)continue;
-   records.push({code,parent_code:digits(row[col('ParentCodUnic')])||null,statistical_code:digits(row[col('CodStatistic')])||null,parent_statistical_code:digits(row[col('ParentCodStatistic')])||null,status_code:digits(row[col('Statut')])||null,name,name_ru:String(row[col('DenumireRU')]??'').trim()||null,normalized_name:norm(name),sheet,row:i+1});
-  }
+function validateOfficialSnapshot(snapshot){
+ if(!snapshot||typeof snapshot!=='object')throw new Error('CUATM snapshot must be an object');
+ if(!Array.isArray(snapshot.records)||snapshot.records.length<500)throw new Error('CUATM snapshot has too few records');
+ if(Number(snapshot.record_count)!==snapshot.records.length)throw new Error('CUATM snapshot record_count mismatch');
+ const requiredSchema=['CodUnic','ParentCodUnic','CodStatistic','ParentCodStatistic','Statut','DenumireRO','DenumireRU'];
+ const schemaValues=Object.values(snapshot.schema||{});
+ const missing=requiredSchema.filter(name=>!schemaValues.includes(name));
+ if(missing.length)throw new Error('CUATM snapshot schema mapping incomplete: '+missing.join(', '));
+ const seen=new Set();
+ for(const row of snapshot.records){
+  if(!/^\d{3,10}$/.test(String(row.code||'')))throw new Error('CUATM snapshot contains invalid code');
+  if(!String(row.name||'').trim())throw new Error('CUATM snapshot contains empty name');
+  if(seen.has(row.code))throw new Error('CUATM snapshot contains duplicate code '+row.code);
+  seen.add(row.code);
  }
- const deduped=[...new Map(records.map(x=>[x.code,x])).values()];
- if(deduped.length<500)throw new Error('CUATM parse produced too few records: '+deduped.length);
- const byCode=new Map(deduped.map(x=>[x.code,x]));
- for(const x of deduped)x.parent_name=x.parent_code?byCode.get(x.parent_code)?.name||null:null;
- return {source_url:URL,fetched_at:new Date().toISOString(),schema:{legal_id:'CodUnic',parent_code:'ParentCodUnic',statistical_code:'CodStatistic',parent_statistical_code:'ParentCodStatistic',status_code:'Statut',name:'DenumireRO',name_ru:'DenumireRU'},record_count:deduped.length,records:deduped};
+ return snapshot;
 }
-const official=await fetchOfficial();
- await mkdir('data/sources',{recursive:true}); await writeFile(SNAPSHOT,JSON.stringify(official,null,2)+'\n');
+const official=validateOfficialSnapshot(JSON.parse(await readFile(SNAPSHOT,'utf8')));
 const byCode=new Map(),byName=new Map();
 for(const r of official.records){for(const [m,k] of [[byCode,r.code],[byName,r.normalized_name]]){if(!m.has(k))m.set(k,[]);m.get(k).push(r);}}
 const exactCode=new Map(), unresolved=[];
@@ -314,7 +302,7 @@ await writeFile('data/current/md-cuatm-parent-mismatch-matrix.json',JSON.stringi
 await writeFile('data/current/md-cuatm-pair-diagnostics.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',entity_count:noKeyDiagnostics.length,by_category:diagnosticCounts,policy:'Diagnostic only. No legal fields are assigned from this file.',items:noKeyDiagnostics},null,2)+'\\n');
 const reasons=legalUnmatched.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const methods=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,a),{});
-const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:URL,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:legalUnmatched.length,non_cuatm_count:nonCuatmAllotments.length,non_cuatm_by_class:{non_cuatm_allotment_boundary:nonCuatmAllotments.length},matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.',matches};
+const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:official.source_url,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:legalUnmatched.length,non_cuatm_count:nonCuatmAllotments.length,non_cuatm_by_class:{non_cuatm_allotment_boundary:nonCuatmAllotments.length},matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.',matches};
 if(!matched.length)throw new Error('CUATM reconciliation produced zero verified matches');
 await writeFile(OUTPUT,JSON.stringify(out,null,2)+'\n');
 console.log(JSON.stringify({official_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entities:matches.length,matched:matched.length,unmatched:legalUnmatched.length,non_cuatm_allotments:nonCuatmAllotments.length,matched_by_method:methods,unmatched_by_reason:reasons,no_key_pair_diagnostics:diagnosticCounts,edge_case_audit:{count:edgeAudit.length,by_category:edgeAuditCounts,items:edgeAudit},parent_mismatch_matrix:mismatchRows.map(x=>({verified_osm_parent_status_code:x.verified_osm_parent_status_code,candidate_official_parent_status_code:x.candidate_official_parent_status_code,count:x.count,examples:x.examples.slice(0,3)}))},null,2));

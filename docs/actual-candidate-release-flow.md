@@ -73,3 +73,20 @@ Only two workflows may contain a direct `git push`:
 - `actual-promote-candidate.yml` — updates that isolated candidate branch with the explicit promotion marker before opening the protected PR.
 
 No topology, source-refresh or auxiliary audit workflow may commit or push release data.
+
+
+## Moldova CUATM source refresh
+
+The official Moldova CUATM source refresh is separated from reconciliation.
+
+`scripts/import/import-md-cuatm.mjs` is the only networked CUATM source step. It downloads the official BNS workbook with a bounded request timeout and retry count, validates the required workbook schema and record population, and materializes `data/sources/cuatm-current.json`. If the official workbook is unavailable but the committed snapshot is still structurally valid, the importer preserves that exact last valid snapshot. If the downloaded records are semantically unchanged, it does not rewrite the snapshot.
+
+`scripts/process/reconcile-cuatm.mjs` is deterministic and network-free. It validates and reads only the materialized CUATM snapshot before applying the existing reviewed reconciliation rules.
+
+The scheduled/manual `Refresh official Moldova CUATM snapshot` workflow is a source trigger only. It calls the reusable ACTUAL candidate workflow with `refresh_md_cuatm=true`; it cannot reconcile, build, commit or publish a release directly.
+
+The candidate ordering is:
+
+`optional official-source refreshes -> regenerate raw OSM catalog -> RO reconciliation -> MD CUATM reconciliation -> jurisdiction gates -> ACTUAL semantic diff`.
+
+An unchanged CUATM registry terminates as `NO_CHANGE`. A real official-registry change becomes a `CHANGE` candidate and can reach `main` only through explicit promotion and the protected PR path.
