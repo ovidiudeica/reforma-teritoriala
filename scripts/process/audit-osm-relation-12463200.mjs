@@ -4,7 +4,7 @@ import osmtogeojson from 'osmtogeojson';
 import GeoJSONReader from 'jsts/org/locationtech/jts/io/GeoJSONReader.js';
 import IsValidOp from 'jsts/org/locationtech/jts/operation/valid/IsValidOp.js';
 
-const RID=12463200, ID='osm-r12463200', OUT='data/current/osm-12463200-audit.json';
+const RID=12463200, ID='osm-r12463200', OUT='data/current/osm-12463200-audit.json'; // Fîrlădeni, Căușeni
 const reader=new GeoJSONReader();
 const endpoints=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
 async function overpass(q){let last;for(const url of endpoints){try{const r=await fetch(url,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-audit/1.0'},body:new URLSearchParams({data:q})});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json();}catch(e){last=e;}}throw last;}
