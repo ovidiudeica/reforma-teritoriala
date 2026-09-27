@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-26T10:40:04.195Z",
+  "generated_at": "2026-09-27T06:29:58.796Z",
   "jurisdiction": "MD",
   "scope": {
-    "parent_mismatch": 12,
-    "diagnostic_parent_match_not_auto_assigned": 2
+    "parent_mismatch": 11,
+    "diagnostic_parent_match_not_auto_assigned": 3
   },
   "summary": {
     "all_edge_cases": 14,
@@ -13,16 +13,18 @@
     "unresolved_review_cases": 0
   },
   "by_category": {
-    "genuine_parent_disagreement": 2,
+    "genuine_parent_disagreement": 1,
     "multiple_official_candidates_under_same_parent": 2,
+    "diagnostic_match_not_auto_assigned": 1,
     "osm_self_parent_same_legal_entity": 10
   },
   "resolved_edge_cases": {
     "count": 14,
     "by_category": {
       "osm_self_parent_same_legal_entity": 10,
-      "genuine_parent_disagreement": 2,
-      "multiple_official_candidates_under_same_parent": 2
+      "genuine_parent_disagreement": 1,
+      "multiple_official_candidates_under_same_parent": 2,
+      "diagnostic_match_not_auto_assigned": 1
     },
     "items": [
       {
@@ -494,11 +496,11 @@
         "id": "osm-r1813319",
         "name": "Condrița",
         "osm_relation_id": 1813319,
-        "osm_parent_id": "osm-r85827",
-        "osm_parent_name": "Raionul Strășeni",
-        "osm_parent_relation_id": 85827,
-        "verified_osm_parent_legal_id": "8000",
-        "verified_osm_parent_legal_name": "Strășeni",
+        "osm_parent_id": "osm-r1691801",
+        "osm_parent_name": "Municipiul Chișinău",
+        "osm_parent_relation_id": 1691801,
+        "verified_osm_parent_legal_id": "0100",
+        "verified_osm_parent_legal_name": "Chișinău",
         "normalized_child_name": "condrita",
         "official_name_candidate_count": 1,
         "official_name_candidates": [
@@ -519,7 +521,7 @@
         "matching_candidates": [],
         "self_parent_predicates": {
           "parentMatch": true,
-          "parent_legal_id": "8000",
+          "parent_legal_id": "0100",
           "same_legal_id": false,
           "exact_normalized_name": false,
           "distinct_children_count": 0,
@@ -732,11 +734,11 @@
         "id": "osm-r1643003",
         "name": "Negurenii Vechi",
         "osm_relation_id": 1643003,
-        "osm_parent_id": "osm-r58984",
-        "osm_parent_name": "Raionul Fălești",
-        "osm_parent_relation_id": 58984,
-        "verified_osm_parent_legal_id": "4300",
-        "verified_osm_parent_legal_name": "Fălești",
+        "osm_parent_id": "osm-r58985",
+        "osm_parent_name": "Raionul Ungheni",
+        "osm_parent_relation_id": 58985,
+        "verified_osm_parent_legal_id": "9200",
+        "verified_osm_parent_legal_name": "Ungheni",
         "normalized_child_name": "negurenii vechi",
         "official_name_candidate_count": 1,
         "official_name_candidates": [
@@ -747,28 +749,48 @@
             "parent_name": "Ungheni",
             "official_sheet": "Sheet 1",
             "official_row": 1515,
-            "parent_matches_verified_osm_parent": false
+            "parent_matches_verified_osm_parent": true
           }
         ],
-        "diagnostic_category": "child_name_match_parent_mismatch",
+        "diagnostic_category": "exact_name_parent_match_available",
         "reconciliation_match_method": "reviewed_override",
         "reconciliation_unmatched_reason": null,
-        "matching_candidate_count": 0,
-        "matching_candidates": [],
+        "matching_candidate_count": 1,
+        "matching_candidates": [
+          {
+            "legal_id": "9255",
+            "legal_name": "Negurenii Vechi",
+            "parent_code": "9200",
+            "parent_name": "Ungheni",
+            "official_sheet": "Sheet 1",
+            "official_row": 1515,
+            "parent_matches_verified_osm_parent": true
+          }
+        ],
         "self_parent_predicates": {
           "parentMatch": true,
-          "parent_legal_id": "4300",
+          "parent_legal_id": "9200",
           "same_legal_id": false,
           "exact_normalized_name": false,
-          "distinct_children_count": 0,
-          "distinct_children": [],
+          "distinct_children_count": 1,
+          "distinct_children": [
+            {
+              "legal_id": "9255",
+              "legal_name": "Negurenii Vechi",
+              "parent_code": "9200",
+              "parent_name": "Ungheni",
+              "official_sheet": "Sheet 1",
+              "official_row": 1515,
+              "parent_matches_verified_osm_parent": true
+            }
+          ],
           "raw_cuatm_unique_id": null,
           "raw_cuatm_code": null,
           "normalized_explicit_keys": [],
           "explicit_key_count": 0,
           "explicit_key_lookups": []
         },
-        "audit_category": "genuine_parent_disagreement"
+        "audit_category": "diagnostic_match_not_auto_assigned"
       }
     ]
   },
@@ -1248,19 +1270,20 @@
   "resolved_reviewed_overrides": {
     "count": 4,
     "by_category": {
-      "genuine_parent_disagreement": 2,
-      "multiple_official_candidates_under_same_parent": 2
+      "genuine_parent_disagreement": 1,
+      "multiple_official_candidates_under_same_parent": 2,
+      "diagnostic_match_not_auto_assigned": 1
     },
     "items": [
       {
         "id": "osm-r1813319",
         "name": "Condrița",
         "osm_relation_id": 1813319,
-        "osm_parent_id": "osm-r85827",
-        "osm_parent_name": "Raionul Strășeni",
-        "osm_parent_relation_id": 85827,
-        "verified_osm_parent_legal_id": "8000",
-        "verified_osm_parent_legal_name": "Strășeni",
+        "osm_parent_id": "osm-r1691801",
+        "osm_parent_name": "Municipiul Chișinău",
+        "osm_parent_relation_id": 1691801,
+        "verified_osm_parent_legal_id": "0100",
+        "verified_osm_parent_legal_name": "Chișinău",
         "normalized_child_name": "condrita",
         "official_name_candidate_count": 1,
         "official_name_candidates": [
@@ -1281,7 +1304,7 @@
         "matching_candidates": [],
         "self_parent_predicates": {
           "parentMatch": true,
-          "parent_legal_id": "8000",
+          "parent_legal_id": "0100",
           "same_legal_id": false,
           "exact_normalized_name": false,
           "distinct_children_count": 0,
@@ -1494,11 +1517,11 @@
         "id": "osm-r1643003",
         "name": "Negurenii Vechi",
         "osm_relation_id": 1643003,
-        "osm_parent_id": "osm-r58984",
-        "osm_parent_name": "Raionul Fălești",
-        "osm_parent_relation_id": 58984,
-        "verified_osm_parent_legal_id": "4300",
-        "verified_osm_parent_legal_name": "Fălești",
+        "osm_parent_id": "osm-r58985",
+        "osm_parent_name": "Raionul Ungheni",
+        "osm_parent_relation_id": 58985,
+        "verified_osm_parent_legal_id": "9200",
+        "verified_osm_parent_legal_name": "Ungheni",
         "normalized_child_name": "negurenii vechi",
         "official_name_candidate_count": 1,
         "official_name_candidates": [
@@ -1509,28 +1532,48 @@
             "parent_name": "Ungheni",
             "official_sheet": "Sheet 1",
             "official_row": 1515,
-            "parent_matches_verified_osm_parent": false
+            "parent_matches_verified_osm_parent": true
           }
         ],
-        "diagnostic_category": "child_name_match_parent_mismatch",
+        "diagnostic_category": "exact_name_parent_match_available",
         "reconciliation_match_method": "reviewed_override",
         "reconciliation_unmatched_reason": null,
-        "matching_candidate_count": 0,
-        "matching_candidates": [],
+        "matching_candidate_count": 1,
+        "matching_candidates": [
+          {
+            "legal_id": "9255",
+            "legal_name": "Negurenii Vechi",
+            "parent_code": "9200",
+            "parent_name": "Ungheni",
+            "official_sheet": "Sheet 1",
+            "official_row": 1515,
+            "parent_matches_verified_osm_parent": true
+          }
+        ],
         "self_parent_predicates": {
           "parentMatch": true,
-          "parent_legal_id": "4300",
+          "parent_legal_id": "9200",
           "same_legal_id": false,
           "exact_normalized_name": false,
-          "distinct_children_count": 0,
-          "distinct_children": [],
+          "distinct_children_count": 1,
+          "distinct_children": [
+            {
+              "legal_id": "9255",
+              "legal_name": "Negurenii Vechi",
+              "parent_code": "9200",
+              "parent_name": "Ungheni",
+              "official_sheet": "Sheet 1",
+              "official_row": 1515,
+              "parent_matches_verified_osm_parent": true
+            }
+          ],
           "raw_cuatm_unique_id": null,
           "raw_cuatm_code": null,
           "normalized_explicit_keys": [],
           "explicit_key_count": 0,
           "explicit_key_lookups": []
         },
-        "audit_category": "genuine_parent_disagreement"
+        "audit_category": "diagnostic_match_not_auto_assigned"
       }
     ]
   },
@@ -1544,11 +1587,11 @@
       "id": "osm-r1813319",
       "name": "Condrița",
       "osm_relation_id": 1813319,
-      "osm_parent_id": "osm-r85827",
-      "osm_parent_name": "Raionul Strășeni",
-      "osm_parent_relation_id": 85827,
-      "verified_osm_parent_legal_id": "8000",
-      "verified_osm_parent_legal_name": "Strășeni",
+      "osm_parent_id": "osm-r1691801",
+      "osm_parent_name": "Municipiul Chișinău",
+      "osm_parent_relation_id": 1691801,
+      "verified_osm_parent_legal_id": "0100",
+      "verified_osm_parent_legal_name": "Chișinău",
       "normalized_child_name": "condrita",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
@@ -1569,7 +1612,7 @@
       "matching_candidates": [],
       "self_parent_predicates": {
         "parentMatch": true,
-        "parent_legal_id": "8000",
+        "parent_legal_id": "0100",
         "same_legal_id": false,
         "exact_normalized_name": false,
         "distinct_children_count": 0,
@@ -1782,11 +1825,11 @@
       "id": "osm-r1643003",
       "name": "Negurenii Vechi",
       "osm_relation_id": 1643003,
-      "osm_parent_id": "osm-r58984",
-      "osm_parent_name": "Raionul Fălești",
-      "osm_parent_relation_id": 58984,
-      "verified_osm_parent_legal_id": "4300",
-      "verified_osm_parent_legal_name": "Fălești",
+      "osm_parent_id": "osm-r58985",
+      "osm_parent_name": "Raionul Ungheni",
+      "osm_parent_relation_id": 58985,
+      "verified_osm_parent_legal_id": "9200",
+      "verified_osm_parent_legal_name": "Ungheni",
       "normalized_child_name": "negurenii vechi",
       "official_name_candidate_count": 1,
       "official_name_candidates": [
@@ -1797,28 +1840,48 @@
           "parent_name": "Ungheni",
           "official_sheet": "Sheet 1",
           "official_row": 1515,
-          "parent_matches_verified_osm_parent": false
+          "parent_matches_verified_osm_parent": true
         }
       ],
-      "diagnostic_category": "child_name_match_parent_mismatch",
+      "diagnostic_category": "exact_name_parent_match_available",
       "reconciliation_match_method": "reviewed_override",
       "reconciliation_unmatched_reason": null,
-      "matching_candidate_count": 0,
-      "matching_candidates": [],
+      "matching_candidate_count": 1,
+      "matching_candidates": [
+        {
+          "legal_id": "9255",
+          "legal_name": "Negurenii Vechi",
+          "parent_code": "9200",
+          "parent_name": "Ungheni",
+          "official_sheet": "Sheet 1",
+          "official_row": 1515,
+          "parent_matches_verified_osm_parent": true
+        }
+      ],
       "self_parent_predicates": {
         "parentMatch": true,
-        "parent_legal_id": "4300",
+        "parent_legal_id": "9200",
         "same_legal_id": false,
         "exact_normalized_name": false,
-        "distinct_children_count": 0,
-        "distinct_children": [],
+        "distinct_children_count": 1,
+        "distinct_children": [
+          {
+            "legal_id": "9255",
+            "legal_name": "Negurenii Vechi",
+            "parent_code": "9200",
+            "parent_name": "Ungheni",
+            "official_sheet": "Sheet 1",
+            "official_row": 1515,
+            "parent_matches_verified_osm_parent": true
+          }
+        ],
         "raw_cuatm_unique_id": null,
         "raw_cuatm_code": null,
         "normalized_explicit_keys": [],
         "explicit_key_count": 0,
         "explicit_key_lookups": []
       },
-      "audit_category": "genuine_parent_disagreement"
+      "audit_category": "diagnostic_match_not_auto_assigned"
     },
     {
       "id": "osm-r21303543",

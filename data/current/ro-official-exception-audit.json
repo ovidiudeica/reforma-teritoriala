@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T06:21:03.675Z",
+  "generated_at": "2026-09-27T06:29:04.236Z",
   "jurisdiction": "RO",
   "scope": "Targeted audit of unresolved/duplicate/type-conflict cases from official SIRUTA reconciliation.",
   "policy": "Diagnostic only. Exact SIRUTA hierarchy and OSM provenance are recorded; no fuzzy candidate is auto-assigned. OSM geometry is not treated as legal authority.",
@@ -96,7 +96,7 @@
       "osm_name": "Cehal",
       "osm_parent_id": "osm-r72482",
       "osm_parent_name": "Satu Mare",
-      "osm_entity_type": "commune",
+      "osm_entity_type": "town",
       "osm_claimed_legal_type": "town",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -332,7 +332,7 @@
       "osm_name": "Fetești",
       "osm_parent_id": "osm-r2355517",
       "osm_parent_name": "Ialomița",
-      "osm_entity_type": "municipality",
+      "osm_entity_type": "town",
       "osm_claimed_legal_type": "town",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -523,7 +523,7 @@
       "osm_name": "Salcea",
       "osm_parent_id": "osm-r2077868",
       "osm_parent_name": "Suceava",
-      "osm_entity_type": "town",
+      "osm_entity_type": "commune",
       "osm_claimed_legal_type": "commune",
       "explicit_siruta_tag": null,
       "reviewed_override": null,
@@ -762,9 +762,9 @@
       "legal_name": "GRĂDINARI",
       "legal_parent_name": "JUDEȚUL OLT",
       "legal_parent_osm_relation_id": 2366978,
-      "geometric_parent_id": "osm-r2261289",
-      "geometric_parent_name": "Vâlcea",
-      "geometric_parent_osm_relation_id": 2261289,
+      "geometric_parent_id": "osm-r2366978",
+      "geometric_parent_name": "Olt",
+      "geometric_parent_osm_relation_id": 2366978,
       "representative_point": [
         24.2864604,
         44.5687255
@@ -780,8 +780,8 @@
       "geometric_parent_overlap": {
         "available": true,
         "child_area_km2": 20.2409290451344,
-        "intersection_km2": 0,
-        "child_coverage_ratio": 0
+        "intersection_km2": 20.240929045120236,
+        "child_coverage_ratio": 0.9999999999993002
       },
       "official_locality_containment": {
         "legal_id": "127171",
@@ -978,7 +978,7 @@
           "siruta_code_values": []
         }
       },
-      "audit_classification": "point_on_feature_parent_assignment_artifact"
+      "audit_classification": "ambiguous_parent_overlap"
     }
   ],
   "reviewed_overrides": [

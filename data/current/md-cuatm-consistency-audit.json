@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T10:39:23.369Z",
+  "generated_at": "2026-09-27T06:29:17.119Z",
   "jurisdiction": "MD",
   "scope": "CUATM matched entities; duplicate OSM representations collapsed logically by legal identity",
   "matched_count": 2465,
@@ -17,14 +17,14 @@
   },
   "legal_identity_parent_summary": {
     "consistent_root": 41,
-    "consistent_identity_parent": 2380,
-    "identity_parent_mismatch": 44
+    "consistent_identity_parent": 2386,
+    "identity_parent_mismatch": 38
   },
   "unique_legal_identity_issue_summary": {
-    "count": 23,
+    "count": 20,
     "by_class": {
-      "chisinau_sector_geometry_gap": 17,
-      "verified_legal_parent_geometry_conflict": 6
+      "chisinau_sector_geometry_gap": 18,
+      "verified_legal_parent_geometry_conflict": 2
     }
   },
   "targeted_duplicate_review_summary": {
@@ -408,7 +408,7 @@
           "match_method": "reviewed_override",
           "confidence": "high",
           "cuatm_key": "0123",
-          "osm_parent_id": "osm-r85827"
+          "osm_parent_id": "osm-r1691801"
         },
         {
           "id": "osm-r18968176",
@@ -16850,7 +16850,7 @@
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
           "cuatm_key": "6432",
-          "osm_parent_id": "osm-r85827"
+          "osm_parent_id": "osm-r1692172"
         },
         {
           "id": "osm-r18967778",
@@ -17160,7 +17160,7 @@
           "match_method": "explicit_cuatm_key",
           "confidence": "high",
           "cuatm_key": "6453",
-          "osm_parent_id": "osm-r1692126"
+          "osm_parent_id": "osm-r1692172"
         },
         {
           "id": "osm-r18968022",
@@ -24879,7 +24879,7 @@
           "match_method": "reviewed_override",
           "confidence": "high",
           "cuatm_key": "9255",
-          "osm_parent_id": "osm-r58984"
+          "osm_parent_id": "osm-r58985"
         },
         {
           "id": "osm-r18967752",
@@ -26477,9 +26477,9 @@
       "expected_legal_parent_id": "0120",
       "expected_legal_parent_name": "Sectorul Buiucani",
       "observed_distinct_parent_legal_ids": [
-        "8000"
+        "0100"
       ],
-      "diagnostic_class": "verified_legal_parent_geometry_conflict",
+      "diagnostic_class": "chisinau_sector_geometry_gap",
       "representation_count": 2,
       "affected_representations": [
         "osm-r1813319",
@@ -26514,21 +26514,6 @@
       "affected_representations": [
         "osm-r1759154",
         "osm-r18967935"
-      ]
-    },
-    {
-      "legal_id": "6432",
-      "legal_name": "Donici",
-      "expected_legal_parent_id": "6400",
-      "expected_legal_parent_name": "Orhei",
-      "observed_distinct_parent_legal_ids": [
-        "8000"
-      ],
-      "diagnostic_class": "verified_legal_parent_geometry_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r19082496",
-        "osm-r18967778"
       ]
     },
     {
@@ -26574,36 +26559,6 @@
       "affected_representations": [
         "osm-r1782038",
         "osm-r18966800"
-      ]
-    },
-    {
-      "legal_id": "9255",
-      "legal_name": "Negurenii Vechi",
-      "expected_legal_parent_id": "9200",
-      "expected_legal_parent_name": "Ungheni",
-      "observed_distinct_parent_legal_ids": [
-        "4300"
-      ],
-      "diagnostic_class": "verified_legal_parent_geometry_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r1643003",
-        "osm-r18967752"
-      ]
-    },
-    {
-      "legal_id": "6453",
-      "legal_name": "Peresecina",
-      "expected_legal_parent_id": "6400",
-      "expected_legal_parent_name": "Orhei",
-      "observed_distinct_parent_legal_ids": [
-        "3100"
-      ],
-      "diagnostic_class": "verified_legal_parent_geometry_conflict",
-      "representation_count": 2,
-      "affected_representations": [
-        "osm-r19082505",
-        "osm-r18968022"
       ]
     },
     {
@@ -27070,14 +27025,14 @@
       "representative_osm_id": "osm-r1813319",
       "expected_legal_parent_id": "0120",
       "expected_legal_parent_name": "Sectorul Buiucani",
-      "resolved_distinct_parent_legal_id": "8000",
-      "resolved_distinct_parent_name": "Strășeni",
+      "resolved_distinct_parent_legal_id": "0100",
+      "resolved_distinct_parent_name": "Chișinău",
       "collapsed_same_identity_depth": 0,
       "path": [
         {
-          "id": "osm-r85827",
-          "name": "Raionul Strășeni",
-          "legal_id": "8000"
+          "id": "osm-r1691801",
+          "name": "Municipiul Chișinău",
+          "legal_id": "0100"
         }
       ],
       "result": "identity_parent_mismatch"
@@ -27114,24 +27069,6 @@
           "id": "osm-r1691801",
           "name": "Municipiul Chișinău",
           "legal_id": "0100"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "6432",
-      "legal_name": "Donici",
-      "representative_osm_id": "osm-r19082496",
-      "expected_legal_parent_id": "6400",
-      "expected_legal_parent_name": "Orhei",
-      "resolved_distinct_parent_legal_id": "8000",
-      "resolved_distinct_parent_name": "Strășeni",
-      "collapsed_same_identity_depth": 0,
-      "path": [
-        {
-          "id": "osm-r85827",
-          "name": "Raionul Strășeni",
-          "legal_id": "8000"
         }
       ],
       "result": "identity_parent_mismatch"
@@ -27186,42 +27123,6 @@
           "id": "osm-r1691801",
           "name": "Municipiul Chișinău",
           "legal_id": "0100"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "9255",
-      "legal_name": "Negurenii Vechi",
-      "representative_osm_id": "osm-r1643003",
-      "expected_legal_parent_id": "9200",
-      "expected_legal_parent_name": "Ungheni",
-      "resolved_distinct_parent_legal_id": "4300",
-      "resolved_distinct_parent_name": "Fălești",
-      "collapsed_same_identity_depth": 0,
-      "path": [
-        {
-          "id": "osm-r58984",
-          "name": "Raionul Fălești",
-          "legal_id": "4300"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "6453",
-      "legal_name": "Peresecina",
-      "representative_osm_id": "osm-r19082505",
-      "expected_legal_parent_id": "6400",
-      "expected_legal_parent_name": "Orhei",
-      "resolved_distinct_parent_legal_id": "3100",
-      "resolved_distinct_parent_name": "Criuleni",
-      "collapsed_same_identity_depth": 0,
-      "path": [
-        {
-          "id": "osm-r1692126",
-          "name": "Raionul Criuleni",
-          "legal_id": "3100"
         }
       ],
       "result": "identity_parent_mismatch"
@@ -27496,8 +27397,8 @@
       "representative_osm_id": "osm-r18968176",
       "expected_legal_parent_id": "0120",
       "expected_legal_parent_name": "Sectorul Buiucani",
-      "resolved_distinct_parent_legal_id": "8000",
-      "resolved_distinct_parent_name": "Strășeni",
+      "resolved_distinct_parent_legal_id": "0100",
+      "resolved_distinct_parent_name": "Chișinău",
       "collapsed_same_identity_depth": 1,
       "path": [
         {
@@ -27506,9 +27407,9 @@
           "legal_id": "0123"
         },
         {
-          "id": "osm-r85827",
-          "name": "Raionul Strășeni",
-          "legal_id": "8000"
+          "id": "osm-r1691801",
+          "name": "Municipiul Chișinău",
+          "legal_id": "0100"
         }
       ],
       "result": "identity_parent_mismatch"
@@ -27555,29 +27456,6 @@
           "id": "osm-r1691801",
           "name": "Municipiul Chișinău",
           "legal_id": "0100"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "6432",
-      "legal_name": "Donici",
-      "representative_osm_id": "osm-r18967778",
-      "expected_legal_parent_id": "6400",
-      "expected_legal_parent_name": "Orhei",
-      "resolved_distinct_parent_legal_id": "8000",
-      "resolved_distinct_parent_name": "Strășeni",
-      "collapsed_same_identity_depth": 1,
-      "path": [
-        {
-          "id": "osm-r19082496",
-          "name": "Donici",
-          "legal_id": "6432"
-        },
-        {
-          "id": "osm-r85827",
-          "name": "Raionul Strășeni",
-          "legal_id": "8000"
         }
       ],
       "result": "identity_parent_mismatch"
@@ -27665,52 +27543,6 @@
           "id": "osm-r1691801",
           "name": "Municipiul Chișinău",
           "legal_id": "0100"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "9255",
-      "legal_name": "Negurenii Vechi",
-      "representative_osm_id": "osm-r18967752",
-      "expected_legal_parent_id": "9200",
-      "expected_legal_parent_name": "Ungheni",
-      "resolved_distinct_parent_legal_id": "4300",
-      "resolved_distinct_parent_name": "Fălești",
-      "collapsed_same_identity_depth": 1,
-      "path": [
-        {
-          "id": "osm-r1643003",
-          "name": "Negurenii Vechi",
-          "legal_id": "9255"
-        },
-        {
-          "id": "osm-r58984",
-          "name": "Raionul Fălești",
-          "legal_id": "4300"
-        }
-      ],
-      "result": "identity_parent_mismatch"
-    },
-    {
-      "legal_id": "6453",
-      "legal_name": "Peresecina",
-      "representative_osm_id": "osm-r18968022",
-      "expected_legal_parent_id": "6400",
-      "expected_legal_parent_name": "Orhei",
-      "resolved_distinct_parent_legal_id": "3100",
-      "resolved_distinct_parent_name": "Criuleni",
-      "collapsed_same_identity_depth": 1,
-      "path": [
-        {
-          "id": "osm-r19082505",
-          "name": "Peresecina",
-          "legal_id": "6453"
-        },
-        {
-          "id": "osm-r1692126",
-          "name": "Raionul Criuleni",
-          "legal_id": "3100"
         }
       ],
       "result": "identity_parent_mismatch"
