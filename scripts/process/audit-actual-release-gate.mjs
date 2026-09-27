@@ -106,8 +106,9 @@ check('public_contract_jurisdiction_counts_match_catalog',
  jurisdictions.every(j=>publicIndex.entity_count_by_jurisdiction?.[j]===entityCounts[j]),
  {public:publicIndex.entity_count_by_jurisdiction,actual:entityCounts});
 
+const reviewedPublicById=new Map(publicEntities.map(x=>[x.id,x]));
 const reviewedStatusIssues=(mdIndividual.cases||[]).flatMap(review=>{
- const entity=publicById.get(review.osm_id);
+ const entity=reviewedPublicById.get(review.osm_id);
  const expected=review.review_status==='resolved_semantic_classification'
   ?'reviewed_representation_without_legal_identity'
   :review.review_status==='unresolved_identity'?'unresolved':null;
