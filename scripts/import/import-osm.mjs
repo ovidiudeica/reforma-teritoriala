@@ -9,7 +9,7 @@ const CLASSIFIER_VERSION='2.3';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9]},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9]}
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9,10]}
 };
 const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
 const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
