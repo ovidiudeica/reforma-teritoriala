@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "mode": "ACTUAL",
-  "snapshot_id": "actual-48dd4b847e743dc4",
-  "generated_at": "2026-09-27T09:48:46.985Z",
-  "release_fingerprint_sha256": "48dd4b847e743dc4ce23febbd1bf98148f89008a89e7257775924bcda3d3e7a9",
+  "snapshot_id": "actual-c03f42cbf7c1ed60",
+  "generated_at": "2026-09-27T09:50:59.188Z",
+  "release_fingerprint_sha256": "c03f42cbf7c1ed6059e306946fddaa1abbd279bb46cd97401d7ddecd9fffdfc7",
   "policy": "Immutable content fingerprint for the current public RO+MD administrative snapshot. Jurisdiction release gates and official registries remain authoritative for their respective validation domains; this manifest binds their validated outputs to the exact catalog and GeoJSON bytes served by the public ACTUAL mode.",
   "jurisdictions": [
     "RO",
@@ -22,7 +22,7 @@
       "RO": 3232,
       "MD": 2590
     },
-    "sha256": "94f7943b24b2399c3b8ecd6bf824540413be188ec566431b821b2cd69dffc9be"
+    "sha256": "64a7a3363278741e7165490614a4cb1d4d95a02d2a401df535dd601a8a0eec73"
   },
   "administrative_model": {
     "path": "data/current/administrative-inventory.json",
@@ -46,8 +46,8 @@
     "RO": {
       "path": "data/current/ro-release-gate.json",
       "status": "PASS",
-      "generated_at": "2026-09-27T09:48:46.985Z",
-      "sha256": "e610519ccebb26082191f2f0f2ba0f63082f555951802ad31dbb9f47f6b7c033"
+      "generated_at": "2026-09-27T09:50:59.188Z",
+      "sha256": "cfca271019eb0493131e65f5153b123bb1d13e70226e69f7e6ac8088b457a3a0"
     },
     "MD": {
       "path": "data/current/md-release-gate.json",
@@ -81,7 +81,7 @@
   "components": {
     "catalog": {
       "path": "data/current/entities.json",
-      "sha256": "94f7943b24b2399c3b8ecd6bf824540413be188ec566431b821b2cd69dffc9be",
+      "sha256": "64a7a3363278741e7165490614a4cb1d4d95a02d2a401df535dd601a8a0eec73",
       "bytes": 8715044
     },
     "inventory": {
@@ -101,7 +101,7 @@
     },
     "ro_gate": {
       "path": "data/current/ro-release-gate.json",
-      "sha256": "e610519ccebb26082191f2f0f2ba0f63082f555951802ad31dbb9f47f6b7c033",
+      "sha256": "cfca271019eb0493131e65f5153b123bb1d13e70226e69f7e6ac8088b457a3a0",
       "bytes": 4863
     },
     "md_gate": {
