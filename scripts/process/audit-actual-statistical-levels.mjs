@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import {writeFile} from 'node:fs/promises';
-const ENDPOINTS=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
+const ENDPOINTS=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://overpass.private.coffee/api/interpreter'];
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const official={
  RO:{source:'Eurostat NUTS 2024',levels:{1:{expected:4},2:{expected:8},3:{expected:42}}},
  MD:{source:'BNS Moldova, HG 570/2017',levels:{1:{expected:1},2:{expected:2},3:{expected:6}}}
 };
-async function overpass(q){let last;for(const endpoint of ENDPOINTS){try{const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-statistical-audit/1.0'},body:new URLSearchParams({data:q})});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json();}catch(e){last=e}}throw last}
+async function overpass(q){let last;for(const endpoint of ENDPOINTS){for(let attempt=1;attempt<=3;attempt++){try{const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-statistical-audit/1.0'},body:new URLSearchParams({data:q})});if(!r.ok)throw new Error(endpoint+' HTTP '+r.status);return await r.json();}catch(e){last=e;if(attempt<3)await sleep(4000*attempt);}}}throw last}
 const q=iso=>`[out:json][timeout:300];(relation["ISO3166-1"="${iso}"]["boundary"="administrative"];relation["boundary"="statistical"]["ref:nuts"~"^${iso}"];relation["boundary"="statistical"]["ref:NUTS"~"^${iso}"];relation["boundary"="statistical"]["nuts"~"^${iso}"];relation["boundary"="statistical"]["ref:nuts:1"~"^${iso}"];relation["boundary"="statistical"]["ref:nuts:2"~"^${iso}"];relation["boundary"="statistical"]["ref:nuts:3"~"^${iso}"];);out tags center;`;
 const results={};
 for(const iso of ['RO','MD']){
