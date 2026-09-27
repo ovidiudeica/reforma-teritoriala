@@ -1,15 +1,9 @@
 {
   "schema_version": 1,
   "jurisdiction": "RO",
-  "policy": "Exact documented unresolved residuals after full SIRUTA reconciliation. Reviewed missing-distinct-boundary classifications are tracked separately and must pass their own release-gate audit.",
+  "policy": "Exact documented unresolved residuals after full SIRUTA reconciliation. Reviewed missing-distinct-boundary and exceptional cross-level OSM representations are tracked separately and must pass their own release-gate audits.",
   "allowed_official_only": [],
-  "allowed_represented_at_other_osm_level": [
-    {
-      "legal_id": "179132",
-      "osm_relation_id": 377733,
-      "admin_level": 4
-    }
-  ],
+  "allowed_represented_at_other_osm_level": [],
   "allowed_parent_mismatches": [],
   "allowed_osm_semantic_type_conflicts": [
     {
