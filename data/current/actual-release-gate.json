@@ -2,9 +2,9 @@
   "schema_version": 2,
   "generated_at": "2026-09-27T20:37:27.458Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-2041d1665e7dc536",
+  "snapshot_id": "actual-149e27f4142b02e2",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "74b9014c35a0c0223bdd813afaede929c70c4b0b5cc1a1d4c1eb287eaea0505f",
+  "manifest_sha256": "8b41f5ab04566873b224084100513e1cc3c08cce22ecb0b79b18cd300b28515f",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -14,7 +14,7 @@
       "detail": {
         "status": "PASS",
         "blocking_issue_count": 0,
-        "observation_count": 15,
+        "observation_count": 14,
         "source": "data/current/actual-topology-audit.json",
         "mutation": false
       }
@@ -473,8 +473,8 @@
       "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "d613a216e2ef0a37d92bb0a8b2d579c81d33a9e79dc07dd3decb73874068bdf7",
-        "actual": "d613a216e2ef0a37d92bb0a8b2d579c81d33a9e79dc07dd3decb73874068bdf7"
+        "expected": "32eedc44e66c60335034850f14b722d3f9f50ed220d2c73e88afa9ffcf2c3657",
+        "actual": "32eedc44e66c60335034850f14b722d3f9f50ed220d2c73e88afa9ffcf2c3657"
       }
     },
     {
@@ -483,12 +483,12 @@
       "detail": {
         "manifest": {
           "algorithm": "actual-semantic-v2",
-          "sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
+          "sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
           "release_identity_basis": "semantic_content_v2",
           "reused_base_release": false
         },
-        "expected": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
-        "actual": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f"
+        "expected": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
+        "actual": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b"
       }
     },
     {
@@ -497,7 +497,7 @@
       "detail": {
         "content_identity": {
           "algorithm": "actual-semantic-v2",
-          "sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
+          "sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
           "release_identity_basis": "semantic_content_v2",
           "reused_base_release": false
         }
@@ -507,8 +507,8 @@
       "name": "release_fingerprint_matches_semantic_identity",
       "ok": true,
       "detail": {
-        "expected": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
-        "actual": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
+        "expected": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
+        "actual": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
         "reused_base_release": false
       }
     },
@@ -516,8 +516,8 @@
       "name": "snapshot_id_matches_stable_release_identity",
       "ok": true,
       "detail": {
-        "expected": "actual-2041d1665e7dc536",
-        "actual": "actual-2041d1665e7dc536",
+        "expected": "actual-149e27f4142b02e2",
+        "actual": "actual-149e27f4142b02e2",
         "reused_base_release": false
       }
     },
@@ -714,13 +714,13 @@
             "outside_current_legal_registry": 123,
             "unresolved": 1
           },
-          "sha256": "cc77722d0065788c9cb6dac06a835e5625f95519f09e7065d0a7bb49b4b1c4ca",
+          "sha256": "620a8e55bfb1ac2f2872c5291f1303a5e574dbc3cf26c8c548f2323134bdba32",
           "geometry_chunks": {
             "path": "public/data/actual-geometry-chunks.json",
             "contract": "actual-public-geometry-chunks-v1",
             "schema_version": 1,
             "chunk_count": 115,
-            "sha256": "a55fdf9b13528a5c906a10f787f3c66387bb69d7b6e0d1091f354504a9c29ee4"
+            "sha256": "9b5e3826d420693c133d622fb49e72c63bc34f46a376621f5b2af76dca64dbcc"
           },
           "geometry_tiers": {
             "RO": {
@@ -749,7 +749,7 @@
               "local": {
                 "path": "public/geo/actual/md-local.geojson",
                 "feature_count": 987,
-                "sha256": "5848510a20112f48e94cea8e2577b179571b18d817075bd1a61ac64527bd1953"
+                "sha256": "604b7bd1031f91c5442444cd60a24c573549cecf81e19397f8277b58aafd420a"
               },
               "detail": {
                 "path": "public/geo/actual/md-detail.geojson",
@@ -762,7 +762,7 @@
         "actual": {
           "contract": "actual-public-entity-v2",
           "entity_count": 5830,
-          "sha256": "cc77722d0065788c9cb6dac06a835e5625f95519f09e7065d0a7bb49b4b1c4ca"
+          "sha256": "620a8e55bfb1ac2f2872c5291f1303a5e574dbc3cf26c8c548f2323134bdba32"
         }
       }
     },
@@ -785,14 +785,14 @@
           "contract": "actual-public-geometry-chunks-v1",
           "schema_version": 1,
           "chunk_count": 115,
-          "sha256": "a55fdf9b13528a5c906a10f787f3c66387bb69d7b6e0d1091f354504a9c29ee4"
+          "sha256": "9b5e3826d420693c133d622fb49e72c63bc34f46a376621f5b2af76dca64dbcc"
         },
         "actual": {
           "path": "public/data/actual-geometry-chunks.json",
           "contract": "actual-public-geometry-chunks-v1",
           "schema_version": 1,
           "chunk_count": 115,
-          "sha256": "a55fdf9b13528a5c906a10f787f3c66387bb69d7b6e0d1091f354504a9c29ee4"
+          "sha256": "9b5e3826d420693c133d622fb49e72c63bc34f46a376621f5b2af76dca64dbcc"
         }
       }
     },
