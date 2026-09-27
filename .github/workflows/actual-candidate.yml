@@ -1,0 +1,200 @@
+name: Build ACTUAL candidate snapshot
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_branch:
+        description: 'New branch for this candidate (leave empty for actual/candidate-<run_id>)'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actual-candidate-build
+  cancel-in-progress: false
+
+jobs:
+  build-candidate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out persisted release
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+
+      - name: Capture immutable candidate base
+        id: base
+        run: |
+          BASE_RELEASE_COMMIT="$(git rev-parse HEAD)"
+          CANDIDATE_BRANCH="${{ inputs.candidate_branch }}"
+          if [ -z "$CANDIDATE_BRANCH" ]; then CANDIDATE_BRANCH="actual/candidate-${GITHUB_RUN_ID}"; fi
+          if git ls-remote --exit-code --heads origin "$CANDIDATE_BRANCH" >/dev/null 2>&1; then
+            echo "Candidate branch already exists: $CANDIDATE_BRANCH"
+            exit 1
+          fi
+          echo "base_release_commit=$BASE_RELEASE_COMMIT" >> "$GITHUB_OUTPUT"
+          echo "candidate_branch=$CANDIDATE_BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Verify persisted base release before generation
+        env:
+          ACTUAL_RELEASE_GATE_READ_ONLY: '1'
+        run: |
+          node scripts/process/audit-actual-release-gate.mjs
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {readFile} from 'node:fs/promises';
+          const marker=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+          const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+          const manifest=JSON.parse(manifestBytes);
+          const sha=createHash('sha256').update(manifestBytes).digest('hex');
+          if(marker.validated_release_gate_status!=='PASS'||marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha){
+            throw new Error('Persisted base release is not internally consistent.');
+          }
+          console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha},null,2));
+          NODE
+
+      - run: npm install --no-audit --no-fund
+
+      - name: Regenerate OSM ACTUAL master
+        run: npm run import:osm
+
+      - name: Audit ACTUAL master topology
+        run: npm run audit:actual-topology
+
+      - name: Audit RO+MD statistical levels and state polygons
+        run: npm run audit:actual-statistical-levels
+
+      - name: Reconcile RO against official SIRUTA
+        run: npm run audit:ro-official-reconciliation
+
+      - name: Audit RO official reconciliation exceptions
+        run: npm run audit:ro-official-exceptions
+
+      - name: Audit RO county SIRUTA bridge
+        run: npm run audit:ro-county-siruta-bridge
+
+      - name: Apply RO official identity
+        run: npm run apply:ro-official-reconciliation
+
+      - name: Audit administrative catalog
+        run: npm run audit:admin
+
+      - name: Audit remaining RO level 9 exceptions
+        run: npm run audit:ro-level9-exceptions
+
+      - name: Audit selected OSM relation histories
+        run: npm run audit:osm-history
+
+      - name: Audit CUATM consistency
+        run: node scripts/process/audit-cuatm-consistency.mjs
+
+      - name: Audit CUATM same-identity chain patterns
+        run: npm run audit:cuatm-chains
+
+      - name: Compare Bălți candidate geometries
+        run: npm run audit:balti-geometry
+
+      - name: Localize Bălți component-locality differences
+        run: npm run audit:balti-components
+
+      - name: Audit Bălți member way histories
+        run: npm run audit:balti-way-history
+
+      - name: Audit Bălți changeset semantics
+        run: npm run audit:balti-semantics
+
+      - name: Analyze special municipality representations
+        run: npm run audit:md-special-municipalities
+
+      - name: Deep-audit MD individual cases
+        run: npm run audit:md-individual-cases
+
+      - name: Inspect official CUATM workbook schema
+        run: node scripts/process/inspect-cuatm-workbook.mjs
+
+      - name: Reconcile MD against CUATM
+        run: npm run reconcile:cuatm
+
+      - name: Audit MD semantic subtype bridge
+        run: npm run audit:md-cuatm-semantic-bridge
+
+      - name: Apply reviewed MD official identity
+        run: npm run apply:md-reviewed-reconciliation
+
+      - name: MD release gate
+        run: npm run audit:md-release-gate
+
+      - name: RO release gate
+        run: npm run audit:ro-release-gate
+
+      - name: Build public ACTUAL contract
+        run: npm run build:actual-public-data
+
+      - name: Audit Chișinău sector propagation
+        run: npm run audit:md-chisinau-sectors
+
+      - name: Audit structural completeness
+        run: npm run audit:actual-structural-completeness
+
+      - name: Audit official identity propagation
+        run: npm run audit:actual-official-identity
+
+      - name: Audit ACTUAL count regression
+        run: npm run audit:actual-regression
+
+      - name: Build candidate release manifest
+        run: npm run build:actual-release-manifest
+
+      - name: Validate exact candidate snapshot
+        run: npm run audit:actual-release-gate
+
+      - name: Diff candidate against persisted release
+        env:
+          ACTUAL_BASE_REF: ${{ steps.base.outputs.base_release_commit }}
+        run: npm run build:actual-candidate-diff
+
+      - name: Preserve base persisted marker
+        run: git checkout "${{ steps.base.outputs.base_release_commit }}" -- data/current/actual-release-persisted.json
+
+      - name: Commit candidate snapshot to isolated branch
+        env:
+          CANDIDATE_BRANCH: ${{ steps.base.outputs.candidate_branch }}
+        run: |
+          git checkout -b "$CANDIDATE_BRANCH"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/current/ public/data/actual-entities.json public/geo/current/ public/geo/actual/             data/sources/ro-siruta-current.json data/sources/cuatm-current.json             data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json             data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json             data/sources/md-balti-city-boundary-changeset-semantics.json
+          git diff --cached --quiet && { echo "Candidate generation produced no committed changes."; exit 1; }
+          SNAPSHOT_ID="$(node -p "require('./data/current/actual-release-candidate.json').candidate.snapshot_id")"
+          git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
+          git push origin "HEAD:$CANDIDATE_BRANCH"
+          echo "### ACTUAL candidate" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Branch: `$CANDIDATE_BRANCH`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Snapshot: `$SNAPSHOT_ID`" >> "$GITHUB_STEP_SUMMARY"
+          node -e "const d=require('./data/current/actual-candidate-diff.json'); console.log('- Substantive changes: `'+d.summary.substantive_change_count+'`\n- Review required: `'+d.summary.review_required+'`')" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload candidate review bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: actual-candidate-${{ github.run_id }}
+          path: |
+            data/current/actual-release-candidate.json
+            data/current/actual-candidate-diff.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-gate.json
+            data/current/actual-topology-audit.json
+            data/current/actual-structural-completeness-audit.json
+            data/current/actual-official-identity-audit.json
+            data/current/actual-regression-audit.json
+            data/current/ro-release-gate.json
+            data/current/md-release-gate.json
+          if-no-files-found: error

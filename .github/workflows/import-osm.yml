@@ -1,96 +1,17 @@
-name: Import OSM administrative data
+name: Import OSM administrative data (deprecated)
+
 on:
   workflow_dispatch:
-    inputs:
-      replace_persisted_release:
-        description: 'Explicitly allow replacing the persisted ACTUAL release on main'
-        required: true
-        type: boolean
-        default: false
-permissions:
-  contents: write
-concurrency:
-  group: administrative-data-writers
-  cancel-in-progress: false
-jobs:
-  import:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          ref: main
-          fetch-depth: 0
-      - uses: actions/setup-node@v5
-        with:
-          node-version: '24'
-      - name: Refuse accidental persisted release overwrite
-        run: |
-          if [ -f data/current/actual-release-persisted.json ] && [ "${{ inputs.replace_persisted_release }}" != "true" ]; then
-            echo "A persisted ACTUAL release exists. Re-run manually with replace_persisted_release=true only when intentionally publishing a new release."
-            exit 1
-          fi
-      - run: npm install
-      - run: npm run import:osm
-      - name: Reconcile RO admin level 8 against official SIRUTA snapshot
-        run: npm run audit:ro-official-reconciliation
-      - name: Audit unresolved and reviewed RO official reconciliation cases
-        run: npm run audit:ro-official-exceptions
-      - name: Audit RO county SIRUTA bridge
-        run: npm run audit:ro-county-siruta-bridge
-      - name: Apply official SIRUTA identity and legal type to RO UATs
 
-        run: npm run apply:ro-official-reconciliation
-      - run: npm run audit:admin
-      - name: Audit remaining RO level 9 exceptions
-        run: npm run audit:ro-level9-exceptions
-      - name: Audit selected OSM relation histories
-        run: npm run audit:osm-history
-      - name: Audit reconciled CUATM consistency
-        run: node scripts/process/audit-cuatm-consistency.mjs
-      - name: Audit CUATM same-identity chain patterns
-        run: npm run audit:cuatm-chains
-      - name: Compare Bălți candidate geometries
-        run: npm run audit:balti-geometry
-      - name: Localize Bălți differences against component localities
-        run: npm run audit:balti-components
-      - name: Audit Bălți boundary member way histories
-        run: npm run audit:balti-way-history
-      - name: Audit Bălți boundary changeset semantics
-        run: npm run audit:balti-semantics
-      - name: Analyze special municipality CUATM and OSM representations
-        run: npm run audit:md-special-municipalities
-      - name: Deep-audit unresolved MD individual cases
-        run: npm run audit:md-individual-cases
-      - name: Inspect official CUATM workbook schema
-        run: node scripts/process/inspect-cuatm-workbook.mjs
-      - run: npm run reconcile:cuatm
-      - name: Audit MD CUATM semantic subtype bridge
-        run: npm run audit:md-cuatm-semantic-bridge
-      - name: Apply reviewed MD official identity
-        run: npm run apply:md-reviewed-reconciliation
-      - name: MD release gate
-        run: npm run audit:md-release-gate
-      - name: RO release gate
-        run: npm run audit:ro-release-gate
-      - name: Audit ACTUAL master topology
-        run: npm run audit:actual-topology
-      - name: Audit ACTUAL count regression
-        run: npm run audit:actual-regression
-      - name: Build public ACTUAL entity contract and tiered web geometry
-        run: npm run build:actual-public-data
-      - name: Audit ACTUAL structural completeness
-        run: npm run audit:actual-structural-completeness
-      - name: Audit official identity and semantic propagation
-        run: npm run audit:actual-official-identity
-      - name: Build ACTUAL RO+MD release manifest
-        run: npm run build:actual-release-manifest
-      - name: ACTUAL RO+MD release gate
-        run: npm run audit:actual-release-gate
-      - name: Commit generated catalog, GeoJSON and audit
+permissions:
+  contents: read
+
+jobs:
+  deprecated:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use candidate release pipeline
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/entities.json data/current/import-report.json data/current/admin-audit.json data/current/admin-review.json data/current/md-cuatm-reconciliation.json data/current/md-cuatm-semantic-bridge.json data/current/md-reviewed-official-application.json data/current/md-cuatm-pair-diagnostics.json data/current/md-cuatm-parent-mismatch-matrix.json data/current/md-cuatm-edge-case-audit.json data/current/md-cuatm-unmatched-review.json data/current/md-cuatm-code-absent-classification.json data/current/md-cuatm-non-cuatm-allotments.json data/current/md-cuatm-consistency-audit.json data/current/md-cuatm-name-absent-classification.json data/current/md-cuatm-chain-pattern-audit.json data/current/md-special-municipality-analysis.json data/current/md-balti-geometry-comparison.json data/current/md-balti-component-locality-geometry.json data/current/md-cuatm-individual-deep-audit.json data/current/md-release-gate.json data/current/ro-release-gate.json data/current/actual-release-manifest.json data/current/actual-release-gate.json data/current/actual-topology-audit.json data/current/actual-regression-audit.json data/current/actual-structural-completeness-audit.json data/current/actual-official-identity-audit.json public/data/actual-entities.json public/geo/actual/ data/current/ro-level9-exception-audit.json data/current/ro-official-reconciliation.json data/current/ro-official-exception-audit.json data/current/ro-county-siruta-bridge.json data/current/ro-official-application.json data/sources/ro-siruta-current.json data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json data/sources/cuatm-current.json data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json data/sources/md-balti-city-boundary-changeset-semantics.json public/geo/current/
-          git diff --cached --quiet || git commit -m "data: refresh OSM administrative catalog"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          echo "Direct refreshes of the persisted ACTUAL release are disabled."
+          echo "Run 'Build ACTUAL candidate snapshot', review its diff, then run 'Promote ACTUAL candidate'."
+          exit 1

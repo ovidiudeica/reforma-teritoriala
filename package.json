@@ -33,7 +33,9 @@
     "audit:md-chisinau-sectors": "node scripts/process/audit-md-chisinau-sectors.mjs",
     "audit:ro-county-siruta-bridge": "node scripts/process/audit-ro-county-siruta-bridge.mjs",
     "audit:md-cuatm-semantic-bridge": "node scripts/process/audit-md-cuatm-semantic-bridge.mjs",
-    "apply:md-reviewed-reconciliation": "node scripts/process/apply-md-reviewed-reconciliation.mjs"
+    "apply:md-reviewed-reconciliation": "node scripts/process/apply-md-reviewed-reconciliation.mjs",
+    "build:actual-candidate-diff": "node scripts/process/build-actual-candidate-diff.mjs",
+    "prepare:actual-candidate-promotion": "node scripts/process/prepare-actual-candidate-promotion.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
