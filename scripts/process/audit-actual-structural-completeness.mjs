@@ -244,35 +244,56 @@ const mdSettlementPolicy=settlementPolicy.jurisdictions.MD;
 const mdSettlementStatusCodes=new Set((mdSettlementPolicy.official_status_codes||[]).map(String));
 const mdOfficialSettlements=md.filter(r=>mdSettlementStatusCodes.has(String(r.status_code)));
 const mdOfficialSettlementById=new Map(mdOfficialSettlements.map(r=>[String(r.code),r]));
+const mdOfficialById=new Map(md.map(r=>[String(r.code),r]));
 const mdSettlementTypes=new Set(mdSettlementPolicy.inclusion_catalog_types||[]);
 const mdIncluded=catalogEntities.filter(e=>e.jurisdiction==='MD'&&mdSettlementTypes.has(e.type));
 const mdSettlementViolations=[];
-let mdOfficialIdentityPathCount=0;
+let mdOfficialLocalityIdentityPathCount=0,mdReconciledUatRepresentationPathCount=0;
 for(const e of mdIncluded){
  const p=publicById.get(e.id);
  const issues=validateCommonSettlementRepresentation(e,p);
  const m=mdReconById.get(e.id);
  const legalId=p?.legal?.id==null?null:String(p.legal.id);
- const official=legalId?mdOfficialSettlementById.get(legalId):null;
- const allowedStatus=new Set((mdSettlementPolicy.accepted_paths?.official_identity?.allowed_status_codes||[]).map(String));
- const officialPath=Boolean(
-  p?.legal?.registry===mdSettlementPolicy.accepted_paths.official_identity.registry
+ const officialAny=legalId?mdOfficialById.get(legalId):null;
+ const officialLocality=legalId?mdOfficialSettlementById.get(legalId):null;
+ const localityPathPolicy=mdSettlementPolicy.accepted_paths?.official_locality_identity||{};
+ const uatPathPolicy=mdSettlementPolicy.accepted_paths?.reconciled_uat_settlement_representation||{};
+ const localityAllowedStatus=new Set((localityPathPolicy.allowed_status_codes||[]).map(String));
+ const uatAllowedStatus=new Set((uatPathPolicy.allowed_status_codes||[]).map(String));
+ const uatSemanticTypes=new Set(uatPathPolicy.semantic_types||[]);
+ const baseIdentityOk=Boolean(
+  p?.legal?.registry==='CUATM'
   && legalId
-  && official
-  && allowedStatus.has(String(p.legal.status_code))
-  && String(official.status_code)===String(p.legal.status_code)
-  && p?.validation?.legal_identity_status===mdSettlementPolicy.accepted_paths.official_identity.legal_identity_status
+  && officialAny
+  && p?.validation?.legal_identity_status==='reconciled'
   && m?.legal_id
   && String(m.legal_id)===legalId
   && String(m.status_code)===String(p.legal.status_code)
-  && String(p.legal.parent_id??'')===String(official.parent_code??'')
+  && String(officialAny.status_code)===String(p.legal.status_code)
+  && String(p.legal.parent_id??'')===String(officialAny.parent_code??'')
  );
- if(officialPath)mdOfficialIdentityPathCount++;
+ const officialLocalityPath=Boolean(
+  baseIdentityOk
+  && p?.legal?.registry===localityPathPolicy.registry
+  && officialLocality
+  && localityAllowedStatus.has(String(p.legal.status_code))
+  && p?.validation?.legal_identity_status===localityPathPolicy.legal_identity_status
+ );
+ const reconciledUatRepresentationPath=Boolean(
+  baseIdentityOk
+  && p?.legal?.registry===uatPathPolicy.registry
+  && uatAllowedStatus.has(String(p.legal.status_code))
+  && uatSemanticTypes.has(String(p.legal.type||''))
+  && p?.validation?.legal_identity_status===uatPathPolicy.legal_identity_status
+  && Number(e.osm?.admin_level)===9
+ );
+ if(officialLocalityPath)mdOfficialLocalityIdentityPathCount++;
+ else if(reconciledUatRepresentationPath)mdReconciledUatRepresentationPathCount++;
  else issues.push({
-  issue:'settlement_has_no_valid_official_identity_path',
+  issue:'settlement_has_no_valid_identity_or_uat_representation_path',
   legal:p?.legal??null,
   reconciliation:m??null,
-  official_record:official??null
+  official_record:officialAny??null
  });
  if(issues.length)mdSettlementViolations.push({entity_id:e.id,name:e.name,osm_relation_id:e.osm?.relation_id??null,catalog_type:e.type,issues});
 }
@@ -287,7 +308,8 @@ add('MD','locality',mdOfficialSettlements.length,null,[],mdSettlementViolations.
  missing_official_settlement_polygon_is_blocking:false,
  included_representation_count:mdIncluded.length,
  policy_conformant_representation_count:mdIncluded.length-mdSettlementViolations.length,
- official_identity_path_count:mdOfficialIdentityPathCount,
+ official_locality_identity_path_count:mdOfficialLocalityIdentityPathCount,
+ reconciled_uat_settlement_representation_path_count:mdReconciledUatRepresentationPathCount,
  reviewed_representation_path_count:0,
  policy_violation_count:mdSettlementViolations.length,
  policy_violations:mdSettlementViolations
