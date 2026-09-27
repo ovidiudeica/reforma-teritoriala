@@ -44,6 +44,8 @@ jobs:
         run: npm run audit:ro-official-exceptions
       - name: Apply RO official identity
         run: npm run apply:ro-official-reconciliation
+      - name: Audit RO county SIRUTA bridge
+        run: npm run audit:ro-county-siruta-bridge
       - name: Reconcile MD against official CUATM
         run: npm run reconcile:cuatm
       - name: Regenerate public ACTUAL contract
