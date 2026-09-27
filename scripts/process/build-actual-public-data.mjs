@@ -101,15 +101,6 @@ function tierFor(level){
  return 'detail';
 }
 
-function simplifyFeature(feature,tier){
- const tolerance={overview:0.003,local:0.0015,detail:0.00075}[tier];
- try{
-  return turf.simplify(feature,{tolerance,highQuality:true,mutate:false});
- }catch{
-  return feature;
- }
-}
-
 const publicEntities=[];
 const publicById=new Map();
 for(const e of entities){
@@ -149,7 +140,7 @@ for(const e of entities){
    inferred_type:e.classification?.osm_inferred_type||e.type||null,
    geometry_source:'OpenStreetMap administrative relation',
    geometry_role:'current_representation',
-   public_geometry_precision:'simplified_for_web',
+   public_geometry_precision:'master_coordinate_fidelity',
    master_geometry_path:source.jurisdiction==='RO'?RO_GEO:MD_GEO
   },
   validation,
@@ -172,7 +163,6 @@ for(const [id,source] of featureById){
  const item=publicById.get(id);
  if(!item)throw new Error('Public geometry points to unknown entity '+id);
  const key=item.jurisdiction+'_'+item.map.tier;
- const sf=simplifyFeature(source.feature,item.map.tier);
  tierFeatures[key].push({
   type:'Feature',
   properties:{
@@ -189,9 +179,9 @@ for(const [id,source] of featureById){
    osm_relation_id:item.representation.osm_relation_id,
    legal_identity_status:item.validation.legal_identity_status,
    geometry_source:'OpenStreetMap',
-   geometry_precision:'simplified_for_web'
+   geometry_precision:'master_coordinate_fidelity'
   },
-  geometry:sf.geometry
+  geometry:source.feature.geometry
  });
 }
 
@@ -203,7 +193,7 @@ const index={
  contract:'actual-public-entity-v1',
  mode:'ACTUAL',
  generated_at:catalog.generated_at??null,
- policy:'Public contract separates official legal identity from OSM representation. Null legal fields are preserved when no positive official identity is bound; OSM metadata never creates legal identity. Web geometries are simplified display derivatives of the master current GeoJSON.',
+ policy:'Public contract separates official legal identity from OSM representation. Null legal fields are preserved when no positive official identity is bound; OSM metadata never creates legal identity. Public web geometries preserve the exact master feature coordinates and are partitioned only for progressive loading.',
  entity_count:publicEntities.length,
  entity_count_by_jurisdiction:countsByJurisdiction,
  feature_count_by_tier:countsByTier,
@@ -241,7 +231,7 @@ for(const jurisdiction of ['RO','MD']){
     tier,
     feature_count:tierFeatures[key].length,
     geometry_source:'OpenStreetMap',
-    geometry_precision:'simplified_for_web'
+    geometry_precision:'master_coordinate_fidelity'
    },
    features:tierFeatures[key]
   };
