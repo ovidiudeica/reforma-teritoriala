@@ -9,6 +9,8 @@ on:
       - 'scripts/process/audit-actual-release-gate.mjs'
       - 'scripts/process/audit-actual-structural-completeness.mjs'
       - 'scripts/process/audit-actual-official-identity.mjs'
+      - 'scripts/process/apply-ro-official-reconciliation.mjs'
+      - 'scripts/process/audit-ro-county-siruta-bridge.mjs'
       - 'scripts/process/build-actual-public-data.mjs'
       - 'scripts/process/audit-osm-relation-12463200.mjs'
       - 'scripts/import/import-osm.mjs'
@@ -42,10 +44,10 @@ jobs:
         run: npm run audit:ro-official-reconciliation
       - name: Audit RO reconciliation exceptions
         run: npm run audit:ro-official-exceptions
-      - name: Apply RO official identity
-        run: npm run apply:ro-official-reconciliation
       - name: Audit RO county SIRUTA bridge
         run: npm run audit:ro-county-siruta-bridge
+      - name: Apply RO official identity
+        run: npm run apply:ro-official-reconciliation
       - name: Reconcile MD against official CUATM
         run: npm run reconcile:cuatm
       - name: Regenerate public ACTUAL contract
@@ -65,6 +67,8 @@ jobs:
           path: |
             data/current/actual-topology-audit.json
             data/current/osm-12463200-audit.json
+            data/current/ro-county-siruta-bridge.json
+            data/current/ro-official-application.json
             data/current/actual-structural-completeness-audit.json
             data/current/actual-official-identity-audit.json
           if-no-files-found: error
