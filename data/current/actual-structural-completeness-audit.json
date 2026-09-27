@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T20:37:32.171Z",
+  "generated_at": "2026-09-27T20:37:24.316Z",
   "mode": "ACTUAL",
   "scope": [
     "RO",
@@ -16,7 +16,13 @@
   "settlement_policy": {
     "path": "data/sources/actual-settlement-policy.json",
     "schema_version": 1,
-    "policy_version": "2026-09-27",
+    "policy_version": "2026-10-02-v1.1",
+    "coverage_contract_version": 2,
+    "geometry_role_contract": {
+      "path": "schemas/actual-geometry-role-contract.json",
+      "contract": "actual-geometry-role-v1",
+      "schema_version": 1
+    },
     "policy_issue_count": 0
   },
   "declared_type_count": 17,
@@ -102,7 +108,7 @@
     {
       "jurisdiction": "RO",
       "type": "component_locality",
-      "official_count": 13797,
+      "official_count": 13755,
       "covered_official_identity_count": null,
       "missing_official_identity_count": 0,
       "coverage_status": "PASS",
@@ -111,7 +117,7 @@
       "exhaustive": false,
       "completeness_basis": "policy_conformance_not_exhaustive_polygon_coverage",
       "policy_path": "data/sources/actual-settlement-policy.json",
-      "policy_version": "2026-09-27",
+      "policy_version": "2026-10-02-v1.1",
       "official_identity_inventory_exhaustive": true,
       "exhaustive_polygon_coverage_required": false,
       "missing_official_settlement_polygon_is_blocking": false,
@@ -232,21 +238,738 @@
       "jurisdiction": "MD",
       "type": "locality",
       "official_count": 705,
-      "covered_official_identity_count": null,
-      "missing_official_identity_count": 0,
+      "covered_official_identity_count": 603,
+      "missing_official_identity_count": 102,
       "coverage_status": "PASS",
-      "missing_official_identities": [],
+      "missing_official_identities": [
+        {
+          "id": "2120",
+          "name": "Flocoasa",
+          "parent_id": "2119",
+          "parent_name": "Ciobalaccia",
+          "status_code": "9"
+        },
+        {
+          "id": "2121",
+          "name": "Victorovca",
+          "parent_id": "2119",
+          "parent_name": "Ciobalaccia",
+          "status_code": "9"
+        },
+        {
+          "id": "2140",
+          "name": "Crăciun",
+          "parent_id": "2139",
+          "parent_name": "Lingura",
+          "status_code": "9"
+        },
+        {
+          "id": "2141",
+          "name": "Popovca",
+          "parent_id": "2139",
+          "parent_name": "Lingura",
+          "status_code": "9"
+        },
+        {
+          "id": "7613",
+          "name": "Merenești",
+          "parent_id": "7612",
+          "parent_name": "Chițcani",
+          "status_code": "9"
+        },
+        {
+          "id": "7614",
+          "name": "Zahorna",
+          "parent_id": "7612",
+          "parent_name": "Chițcani",
+          "status_code": "9"
+        },
+        {
+          "id": "2733",
+          "name": "Zaim, loc.st.c.f.",
+          "parent_id": "2731",
+          "parent_name": "Zaim",
+          "status_code": "9"
+        },
+        {
+          "id": "2322",
+          "name": "Zloți, loc.st.c.f.",
+          "parent_id": "2320",
+          "parent_name": "Codreni",
+          "status_code": "9"
+        },
+        {
+          "id": "3127",
+          "name": "Valea Coloniței",
+          "parent_id": "3126",
+          "parent_name": "Dolinnoe",
+          "status_code": "9"
+        },
+        {
+          "id": "3128",
+          "name": "Valea Satului",
+          "parent_id": "3126",
+          "parent_name": "Dolinnoe",
+          "status_code": "9"
+        },
+        {
+          "id": "3421",
+          "name": "Ghizdita, loc.st.c.f.",
+          "parent_id": "3420",
+          "parent_name": "Fîntînița",
+          "status_code": "9"
+        },
+        {
+          "id": "7165",
+          "name": "Pelinia, loc.st.c.f.",
+          "parent_id": "7135",
+          "parent_name": "Pelinia",
+          "status_code": "9"
+        },
+        {
+          "id": "3611",
+          "name": "Sergheuca",
+          "parent_id": "3630",
+          "parent_name": "Pervomaiscoe",
+          "status_code": "9"
+        },
+        {
+          "id": "3811",
+          "name": "Vasilievca",
+          "parent_id": "3810",
+          "parent_name": "Cocieri",
+          "status_code": "9"
+        },
+        {
+          "id": "3817",
+          "name": "Mahala",
+          "parent_id": "3816",
+          "parent_name": "Corjova",
+          "status_code": "9"
+        },
+        {
+          "id": "3840",
+          "name": "Roghi",
+          "parent_id": "3839",
+          "parent_name": "Molovata Nouă",
+          "status_code": "9"
+        },
+        {
+          "id": "4384",
+          "name": "Fabrica de Zahăr",
+          "parent_id": "4301",
+          "parent_name": "Fălești",
+          "status_code": "6"
+        },
+        {
+          "id": "4525",
+          "name": "Frumușica Nouă",
+          "parent_id": "4524",
+          "parent_name": "Frumușica",
+          "status_code": "9"
+        },
+        {
+          "id": "4556",
+          "name": "Ivanovca",
+          "parent_id": "4555",
+          "parent_name": "Sevirova",
+          "status_code": "9"
+        },
+        {
+          "id": "1947",
+          "name": "Făgădău",
+          "parent_id": "1946",
+          "parent_name": "Văscăuți",
+          "status_code": "9"
+        },
+        {
+          "id": "5732",
+          "name": "Sărata-Răzeși",
+          "parent_id": "5701",
+          "parent_name": "Leova",
+          "status_code": "6"
+        },
+        {
+          "id": "6473",
+          "name": "Butuceni",
+          "parent_id": "6472",
+          "parent_name": "Trebujeni",
+          "status_code": "9"
+        },
+        {
+          "id": "6474",
+          "name": "Morovaia",
+          "parent_id": "6472",
+          "parent_name": "Trebujeni",
+          "status_code": "9"
+        },
+        {
+          "id": "6745",
+          "name": "Tarasova",
+          "parent_id": "6744",
+          "parent_name": "Solonceni",
+          "status_code": "9"
+        },
+        {
+          "id": "7423",
+          "name": "Slobozia-Măgura",
+          "parent_id": "7422",
+          "parent_name": "Bursuceni",
+          "status_code": "9"
+        },
+        {
+          "id": "7440",
+          "name": "Alexeuca",
+          "parent_id": "7439",
+          "parent_name": "Cotiujenii Mici",
+          "status_code": "9"
+        },
+        {
+          "id": "7441",
+          "name": "Gura-Oituz",
+          "parent_id": "7439",
+          "parent_name": "Cotiujenii Mici",
+          "status_code": "9"
+        },
+        {
+          "id": "7447",
+          "name": "Chirileni",
+          "parent_id": "7446",
+          "parent_name": "Drăgănești",
+          "status_code": "9"
+        },
+        {
+          "id": "7448",
+          "name": "Sacarovca",
+          "parent_id": "7446",
+          "parent_name": "Drăgănești",
+          "status_code": "9"
+        },
+        {
+          "id": "7453",
+          "name": "Trifănești",
+          "parent_id": "7452",
+          "parent_name": "Heciul Nou",
+          "status_code": "9"
+        },
+        {
+          "id": "7457",
+          "name": "Valea Norocului",
+          "parent_id": "7456",
+          "parent_name": "Izvoare",
+          "status_code": "9"
+        },
+        {
+          "id": "7472",
+          "name": "Tăura Nouă",
+          "parent_id": "7471",
+          "parent_name": "Tăura Veche",
+          "status_code": "9"
+        },
+        {
+          "id": "8021",
+          "name": "Mărtinești",
+          "parent_id": "8020",
+          "parent_name": "Greblești",
+          "status_code": "9"
+        },
+        {
+          "id": "9280",
+          "name": "Buciumeni, loc.st.c.f.",
+          "parent_id": "9222",
+          "parent_name": "Buciumeni",
+          "status_code": "9"
+        },
+        {
+          "id": "1910",
+          "name": "Solnecinoe",
+          "parent_id": "1901",
+          "parent_name": "Camenca",
+          "status_code": "6"
+        },
+        {
+          "id": "5010",
+          "name": "Crasnoe",
+          "parent_id": "5001",
+          "parent_name": "Grigoriopol",
+          "status_code": "6"
+        },
+        {
+          "id": "6911",
+          "name": "Pîcalova",
+          "parent_id": "6910",
+          "parent_name": "Andreevca",
+          "status_code": "9"
+        },
+        {
+          "id": "6912",
+          "name": "Șmalena",
+          "parent_id": "6910",
+          "parent_name": "Andreevca",
+          "status_code": "9"
+        },
+        {
+          "id": "5012",
+          "name": "Novovladimirovca",
+          "parent_id": "5011",
+          "parent_name": "Bîcioc",
+          "status_code": "9"
+        },
+        {
+          "id": "5014",
+          "name": "India",
+          "parent_id": "5013",
+          "parent_name": "Butor",
+          "status_code": "9"
+        },
+        {
+          "id": "5016",
+          "name": "Cotovca",
+          "parent_id": "5015",
+          "parent_name": "Carmanova",
+          "status_code": "9"
+        },
+        {
+          "id": "5017",
+          "name": "Fedoseevca",
+          "parent_id": "5015",
+          "parent_name": "Carmanova",
+          "status_code": "9"
+        },
+        {
+          "id": "5018",
+          "name": "Mocearovca",
+          "parent_id": "5015",
+          "parent_name": "Carmanova",
+          "status_code": "9"
+        },
+        {
+          "id": "1912",
+          "name": "Sadchi",
+          "parent_id": "1911",
+          "parent_name": "Caterinovca",
+          "status_code": "9"
+        },
+        {
+          "id": "6955",
+          "name": "Cobasna, loc.st.c.f.",
+          "parent_id": "6916",
+          "parent_name": "Cobasna",
+          "status_code": "9"
+        },
+        {
+          "id": "6917",
+          "name": "Suhaia Rîbnița",
+          "parent_id": "6916",
+          "parent_name": "Cobasna",
+          "status_code": "9"
+        },
+        {
+          "id": "5020",
+          "name": "Crasnaia Besarabia",
+          "parent_id": "5019",
+          "parent_name": "Colosova",
+          "status_code": "9"
+        },
+        {
+          "id": "5021",
+          "name": "Pobeda",
+          "parent_id": "5019",
+          "parent_name": "Colosova",
+          "status_code": "9"
+        },
+        {
+          "id": "3813",
+          "name": "Bosca",
+          "parent_id": "3812",
+          "parent_name": "Comisarovca Nouă",
+          "status_code": "9"
+        },
+        {
+          "id": "3814",
+          "name": "Coșnița Nouă",
+          "parent_id": "3812",
+          "parent_name": "Comisarovca Nouă",
+          "status_code": "9"
+        },
+        {
+          "id": "3815",
+          "name": "Pohrebea Nouă",
+          "parent_id": "3812",
+          "parent_name": "Comisarovca Nouă",
+          "status_code": "9"
+        },
+        {
+          "id": "6919",
+          "name": "Dimitrova",
+          "parent_id": "6918",
+          "parent_name": "Crasnencoe",
+          "status_code": "9"
+        },
+        {
+          "id": "6920",
+          "name": "Ivanovca",
+          "parent_id": "6918",
+          "parent_name": "Crasnencoe",
+          "status_code": "9"
+        },
+        {
+          "id": "1915",
+          "name": "Alexandrovca",
+          "parent_id": "1914",
+          "parent_name": "Crasnîi Octeabri",
+          "status_code": "9"
+        },
+        {
+          "id": "3821",
+          "name": "Afanasievca",
+          "parent_id": "3820",
+          "parent_name": "Crasnîi Vinogradari",
+          "status_code": "9"
+        },
+        {
+          "id": "3822",
+          "name": "Alexandrovca Nouă",
+          "parent_id": "3820",
+          "parent_name": "Crasnîi Vinogradari",
+          "status_code": "9"
+        },
+        {
+          "id": "3823",
+          "name": "Calinovca",
+          "parent_id": "3820",
+          "parent_name": "Crasnîi Vinogradari",
+          "status_code": "9"
+        },
+        {
+          "id": "3824",
+          "name": "Lunga Nouă",
+          "parent_id": "3820",
+          "parent_name": "Crasnîi Vinogradari",
+          "status_code": "9"
+        },
+        {
+          "id": "1923",
+          "name": "Voitovca",
+          "parent_id": "1922",
+          "parent_name": "Cuzmin",
+          "status_code": "9"
+        },
+        {
+          "id": "5024",
+          "name": "Crasnaia Gorca",
+          "parent_id": "5023",
+          "parent_name": "Delacău",
+          "status_code": "9"
+        },
+        {
+          "id": "3826",
+          "name": "Coicova",
+          "parent_id": "3825",
+          "parent_name": "Doibani I",
+          "status_code": "9"
+        },
+        {
+          "id": "3827",
+          "name": "Doibani II",
+          "parent_id": "3825",
+          "parent_name": "Doibani I",
+          "status_code": "9"
+        },
+        {
+          "id": "3830",
+          "name": "Goianul Nou",
+          "parent_id": "3829",
+          "parent_name": "Dubău",
+          "status_code": "9"
+        },
+        {
+          "id": "7619",
+          "name": "Andriașevca Nouă",
+          "parent_id": "7618",
+          "parent_name": "Frunză",
+          "status_code": "9"
+        },
+        {
+          "id": "7620",
+          "name": "Andriașevca Veche",
+          "parent_id": "7618",
+          "parent_name": "Frunză",
+          "status_code": "9"
+        },
+        {
+          "id": "7621",
+          "name": "Novocotovsc",
+          "parent_id": "7618",
+          "parent_name": "Frunză",
+          "status_code": "9"
+        },
+        {
+          "id": "7622",
+          "name": "Novosavițcaia, loc.st.c.f.",
+          "parent_id": "7618",
+          "parent_name": "Frunză",
+          "status_code": "9"
+        },
+        {
+          "id": "7623",
+          "name": "Prioziornoe",
+          "parent_id": "7618",
+          "parent_name": "Frunză",
+          "status_code": "9"
+        },
+        {
+          "id": "7624",
+          "name": "Uiutnoe",
+          "parent_id": "7618",
+          "parent_name": "Frunză",
+          "status_code": "9"
+        },
+        {
+          "id": "3833",
+          "name": "Iagorlîc",
+          "parent_id": "3832",
+          "parent_name": "Goian",
+          "status_code": "9"
+        },
+        {
+          "id": "6924",
+          "name": "Mihailovca Nouă",
+          "parent_id": "6923",
+          "parent_name": "Hîrjău",
+          "status_code": "9"
+        },
+        {
+          "id": "6925",
+          "name": "Sărăței",
+          "parent_id": "6923",
+          "parent_name": "Hîrjău",
+          "status_code": "9"
+        },
+        {
+          "id": "5026",
+          "name": "Bruslachi",
+          "parent_id": "5025",
+          "parent_name": "Hîrtop",
+          "status_code": "9"
+        },
+        {
+          "id": "5027",
+          "name": "Marian",
+          "parent_id": "5025",
+          "parent_name": "Hîrtop",
+          "status_code": "9"
+        },
+        {
+          "id": "5028",
+          "name": "Mocreachi",
+          "parent_id": "5025",
+          "parent_name": "Hîrtop",
+          "status_code": "9"
+        },
+        {
+          "id": "1926",
+          "name": "Frunzăuca",
+          "parent_id": "1925",
+          "parent_name": "Hrușca",
+          "status_code": "9"
+        },
+        {
+          "id": "6928",
+          "name": "Pervomaisc",
+          "parent_id": "6927",
+          "parent_name": "Lenin",
+          "status_code": "9"
+        },
+        {
+          "id": "6929",
+          "name": "Pobeda",
+          "parent_id": "6927",
+          "parent_name": "Lenin",
+          "status_code": "9"
+        },
+        {
+          "id": "6930",
+          "name": "Stanislavca",
+          "parent_id": "6927",
+          "parent_name": "Lenin",
+          "status_code": "9"
+        },
+        {
+          "id": "5031",
+          "name": "Cernița",
+          "parent_id": "5030",
+          "parent_name": "Mălăiești",
+          "status_code": "9"
+        },
+        {
+          "id": "6933",
+          "name": "Basarabca",
+          "parent_id": "6932",
+          "parent_name": "Mocra",
+          "status_code": "9"
+        },
+        {
+          "id": "6934",
+          "name": "Șevcenco",
+          "parent_id": "6932",
+          "parent_name": "Mocra",
+          "status_code": "9"
+        },
+        {
+          "id": "6935",
+          "name": "Zaporojeț",
+          "parent_id": "6932",
+          "parent_name": "Mocra",
+          "status_code": "9"
+        },
+        {
+          "id": "6938",
+          "name": "Novaia Jizni",
+          "parent_id": "6937",
+          "parent_name": "Ofatinți",
+          "status_code": "9"
+        },
+        {
+          "id": "1933",
+          "name": "Podoimița",
+          "parent_id": "1932",
+          "parent_name": "Podoima",
+          "status_code": "9"
+        },
+        {
+          "id": "6941",
+          "name": "Chirov",
+          "parent_id": "6940",
+          "parent_name": "Popencu",
+          "status_code": "9"
+        },
+        {
+          "id": "6942",
+          "name": "Vladimirovca",
+          "parent_id": "6940",
+          "parent_name": "Popencu",
+          "status_code": "9"
+        },
+        {
+          "id": "6943",
+          "name": "Zăzuleni",
+          "parent_id": "6940",
+          "parent_name": "Popencu",
+          "status_code": "9"
+        },
+        {
+          "id": "1935",
+          "name": "Iantarnoe",
+          "parent_id": "1934",
+          "parent_name": "Rașcov",
+          "status_code": "9"
+        },
+        {
+          "id": "1937",
+          "name": "Bodeni",
+          "parent_id": "1936",
+          "parent_name": "Rotari",
+          "status_code": "9"
+        },
+        {
+          "id": "1938",
+          "name": "Socolovca",
+          "parent_id": "1936",
+          "parent_name": "Rotari",
+          "status_code": "9"
+        },
+        {
+          "id": "6945",
+          "name": "Vasilievca",
+          "parent_id": "6944",
+          "parent_name": "Sovietscoe",
+          "status_code": "9"
+        },
+        {
+          "id": "5034",
+          "name": "Vesioloe",
+          "parent_id": "5033",
+          "parent_name": "Șipca",
+          "status_code": "9"
+        },
+        {
+          "id": "5037",
+          "name": "Tocmagiu",
+          "parent_id": "5036",
+          "parent_name": "Teiu",
+          "status_code": "9"
+        },
+        {
+          "id": "6948",
+          "name": "Lîsaia Gora",
+          "parent_id": "6947",
+          "parent_name": "Ulmu",
+          "status_code": "9"
+        },
+        {
+          "id": "6949",
+          "name": "Ulmul Mic",
+          "parent_id": "6947",
+          "parent_name": "Ulmu",
+          "status_code": "9"
+        },
+        {
+          "id": "6951",
+          "name": "Molochișul Mic",
+          "parent_id": "6950",
+          "parent_name": "Vadul Turcului",
+          "status_code": "9"
+        },
+        {
+          "id": "1945",
+          "name": "Constantinovca",
+          "parent_id": "1944",
+          "parent_name": "Valea Adîncă",
+          "status_code": "9"
+        },
+        {
+          "id": "6953",
+          "name": "Buschi",
+          "parent_id": "6952",
+          "parent_name": "Vărăncău",
+          "status_code": "9"
+        },
+        {
+          "id": "6954",
+          "name": "Gherșunovca",
+          "parent_id": "6952",
+          "parent_name": "Vărăncău",
+          "status_code": "9"
+        },
+        {
+          "id": "7632",
+          "name": "Constantinovca",
+          "parent_id": "7631",
+          "parent_name": "Vladimirovca",
+          "status_code": "9"
+        },
+        {
+          "id": "7633",
+          "name": "Nicolscoe",
+          "parent_id": "7631",
+          "parent_name": "Vladimirovca",
+          "status_code": "9"
+        }
+      ],
       "official_registry": "CUATM",
       "exhaustive": false,
       "completeness_basis": "policy_conformance_not_exhaustive_polygon_coverage",
       "policy_path": "data/sources/actual-settlement-policy.json",
-      "policy_version": "2026-09-27",
+      "policy_version": "2026-10-02-v1.1",
       "official_identity_inventory_exhaustive": true,
       "exhaustive_polygon_coverage_required": false,
       "missing_official_settlement_polygon_is_blocking": false,
       "included_representation_count": 1446,
       "policy_conformant_representation_count": 1446,
-      "official_locality_identity_path_count": 604,
+      "official_locality_identity_path_count": 603,
+      "official_locality_representation_path_count": 604,
+      "reconciled_uat_settlement_identity_path_count": 842,
       "reconciled_uat_settlement_representation_path_count": 842,
       "reviewed_representation_path_count": 0,
       "policy_violation_count": 0,

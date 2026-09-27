@@ -2,9 +2,9 @@
   "schema_version": 2,
   "generated_at": "2026-09-27T20:37:28.323Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-5383ff3db7cf3f67",
+  "snapshot_id": "actual-926d9b00b221d650",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "6e0d586c17f5770ecfab6f3784644de188dcc96af0bd4245adee465f551d7b2e",
+  "manifest_sha256": "23d017818449cd9e967263e5a8021cb535ede83de4766230902e081d978e95c1",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -38,6 +38,12 @@
         "schema_version": 1,
         "mode": "ACTUAL",
         "scope": "settlements_and_component_localities",
+        "coverage_contract_version": 2,
+        "geometry_role_contract": {
+          "path": "schemas/actual-geometry-role-contract.json",
+          "contract": "actual-geometry-role-v1",
+          "schema_version": 1
+        },
         "common_requirements": {
           "exhaustive_polygon_coverage_required": false,
           "missing_official_settlement_polygon_is_blocking": false,
@@ -50,9 +56,7 @@
           "geometry_coordinate_mutation_allowed": false,
           "official_registry_remains_identity_authority": true,
           "unreviewed_identity_inference_allowed": false
-        },
-        "coverage_contract_version": 1,
-        "geometry_role_contract": null
+        }
       }
     },
     {
@@ -62,19 +66,27 @@
         "manifest": {
           "path": "data/sources/actual-settlement-policy.json",
           "schema_version": 1,
-          "policy_version": "2026-09-27",
+          "policy_version": "2026-10-02-v1.1",
+          "coverage_contract_version": 2,
           "scope": "settlements_and_component_localities",
-          "sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843",
-          "coverage_contract_version": 1,
-          "geometry_role_contract": null
+          "geometry_role_contract": {
+            "path": "schemas/actual-geometry-role-contract.json",
+            "contract": "actual-geometry-role-v1",
+            "schema_version": 1
+          },
+          "sha256": "d3ec38c4b08d0f7160173d4198bba9d3ca544cbce5b317c035991cd147f8847e"
         },
         "actual": {
           "schema_version": 1,
-          "policy_version": "2026-09-27",
+          "policy_version": "2026-10-02-v1.1",
+          "coverage_contract_version": 2,
           "scope": "settlements_and_component_localities",
-          "sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843",
-          "coverage_contract_version": 1,
-          "geometry_role_contract": null
+          "geometry_role_contract": {
+            "path": "schemas/actual-geometry-role-contract.json",
+            "contract": "actual-geometry-role-v1",
+            "schema_version": 1
+          },
+          "sha256": "d3ec38c4b08d0f7160173d4198bba9d3ca544cbce5b317c035991cd147f8847e"
         }
       }
     },
@@ -82,8 +94,14 @@
       "name": "geometry_role_contract_binding_is_current",
       "ok": true,
       "detail": {
-        "enabled": false,
-        "manifest": null,
+        "enabled": true,
+        "manifest": {
+          "path": "schemas/actual-geometry-role-contract.json",
+          "schema_version": 1,
+          "contract": "actual-geometry-role-v1",
+          "mode": "ACTUAL",
+          "sha256": "9a73dbecbdb94fc0a9a6615fd9b51695cb7f5590c5dcbc24b32549670d1bd6bd"
+        },
         "actual": {
           "path": "schemas/actual-geometry-role-contract.json",
           "schema_version": 1,
@@ -379,8 +397,8 @@
       "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "370725df565633895ec8c4d2a6c1f5dc135ef5d7345bc7093d4004c376482af2",
-        "actual": "370725df565633895ec8c4d2a6c1f5dc135ef5d7345bc7093d4004c376482af2"
+        "expected": "58b73081f6f5c0bf2c3f67833d9a5c7545d08f4c0f41207a457a92df092afb7f",
+        "actual": "58b73081f6f5c0bf2c3f67833d9a5c7545d08f4c0f41207a457a92df092afb7f"
       }
     },
     {
@@ -388,17 +406,13 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "algorithm": "actual-semantic-v1",
-          "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
-          "release_identity_basis": "base_release_compatibility_reuse",
-          "reused_base_release": true,
-          "base_ref": "1390b27c0a248559416cdc36af5e7270f7c3ce73",
-          "base_snapshot_id": "actual-5383ff3db7cf3f67",
-          "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-          "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
+          "algorithm": "actual-semantic-v2",
+          "sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+          "release_identity_basis": "semantic_content_v2",
+          "reused_base_release": false
         },
-        "expected": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
-        "actual": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
+        "expected": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+        "actual": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b"
       }
     },
     {
@@ -406,14 +420,10 @@
       "ok": true,
       "detail": {
         "content_identity": {
-          "algorithm": "actual-semantic-v1",
-          "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
-          "release_identity_basis": "base_release_compatibility_reuse",
-          "reused_base_release": true,
-          "base_ref": "1390b27c0a248559416cdc36af5e7270f7c3ce73",
-          "base_snapshot_id": "actual-5383ff3db7cf3f67",
-          "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-          "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
+          "algorithm": "actual-semantic-v2",
+          "sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+          "release_identity_basis": "semantic_content_v2",
+          "reused_base_release": false
         }
       }
     },
@@ -421,18 +431,18 @@
       "name": "release_fingerprint_matches_semantic_identity",
       "ok": true,
       "detail": {
-        "expected": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-        "actual": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-        "reused_base_release": true
+        "expected": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+        "actual": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+        "reused_base_release": false
       }
     },
     {
       "name": "snapshot_id_matches_stable_release_identity",
       "ok": true,
       "detail": {
-        "expected": "actual-5383ff3db7cf3f67",
-        "actual": "actual-5383ff3db7cf3f67",
-        "reused_base_release": true
+        "expected": "actual-926d9b00b221d650",
+        "actual": "actual-926d9b00b221d650",
+        "reused_base_release": false
       }
     },
     {

@@ -1,14 +1,14 @@
 {
   "schema_version": 2,
   "mode": "ACTUAL_BYTE_REPRODUCIBILITY",
-  "base_ref": "1390b27c0a248559416cdc36af5e7270f7c3ce73",
+  "base_ref": "39bf98fff0c5e56e91f8a09baddb8b4909b752ee",
   "stable_source_timestamp": "2026-09-27T20:37:24.316Z",
   "status": "PASS",
   "stabilized_file_count": 58,
   "release_component_count": 22,
   "auxiliary_data_current_json_count": 36,
-  "restored_or_already_base_count": 47,
-  "substantive_or_source_changed_file_count": 11,
+  "restored_or_already_base_count": 55,
+  "substantive_or_source_changed_file_count": 3,
   "components": [
     {
       "key": "catalog",
@@ -241,13 +241,13 @@
     {
       "key": "structural_completeness_audit",
       "path": "data/current/actual-structural-completeness-audit.json",
-      "action": "RESTORE_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "d215636430cc8b76b97e7a77a73c90287f7006c4cc23d1dce23752481703a557",
-      "after_sha256": "d215636430cc8b76b97e7a77a73c90287f7006c4cc23d1dce23752481703a557",
+      "after_sha256": "8532a7e1397856987bedc9594ad4ab43d43e691cc8baced4707ec2270189ab95",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
@@ -265,25 +265,25 @@
     {
       "key": "settlement_policy",
       "path": "data/sources/actual-settlement-policy.json",
-      "action": "ALREADY_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843",
-      "after_sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843",
-      "changed_before_stabilization": false,
-      "matches_base_after_stabilization": true,
+      "after_sha256": "d3ec38c4b08d0f7160173d4198bba9d3ca544cbce5b317c035991cd147f8847e",
+      "changed_before_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
       "key": "aux:actual-build-environment-gate",
       "path": "data/current/actual-build-environment-gate.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "ALREADY_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "7b14ab1369f32bbeaf71069357bf785d3dcb22608f789d5a4c8fb69fc6e25eb6",
-      "after_sha256": "cfcdbd82e7cbca1fa4287f9bd07a7cfea5d561d7eb37e7a84b814c9c5b3cdf9e",
-      "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "base_sha256": "bee5462f9a01081ed90d50559fa328d89d96ba11ea0df170165cc10fd230b60a",
+      "after_sha256": "bee5462f9a01081ed90d50559fa328d89d96ba11ea0df170165cc10fd230b60a",
+      "changed_before_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -292,8 +292,8 @@
       "action": "ALREADY_BASE_BYTES",
       "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "aea064fec297380ddf1b9509f90e4d8dbfdd44d197279f880c0050a8b1ebebaa",
-      "after_sha256": "aea064fec297380ddf1b9509f90e4d8dbfdd44d197279f880c0050a8b1ebebaa",
+      "base_sha256": "2abdb47f3487ccd7a722fb54160a623507d0f38eea92933059a18a5062d5a2eb",
+      "after_sha256": "2abdb47f3487ccd7a722fb54160a623507d0f38eea92933059a18a5062d5a2eb",
       "changed_before_stabilization": false,
       "matches_base_after_stabilization": true,
       "idempotent": true
@@ -352,8 +352,8 @@
       "action": "ALREADY_BASE_BYTES",
       "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "15ca2cc579b952e48c1e5fe8afe93042bb7f5396e3377f7d9823d6f85ee1a2f0",
-      "after_sha256": "15ca2cc579b952e48c1e5fe8afe93042bb7f5396e3377f7d9823d6f85ee1a2f0",
+      "base_sha256": "bcbf6242f319e464517894de092e85cf5c177ba1e721914d638a844b392f9148",
+      "after_sha256": "bcbf6242f319e464517894de092e85cf5c177ba1e721914d638a844b392f9148",
       "changed_before_stabilization": false,
       "matches_base_after_stabilization": true,
       "idempotent": true
@@ -421,37 +421,37 @@
     {
       "key": "aux:admin-audit",
       "path": "data/current/admin-audit.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "d91b5c9b81227f5a38f88741297a06a0088a828771a9bdeb06af71a2459dff0d",
+      "base_sha256": "4befe6d147b4b17ed889b2cf951452176164c162f78f0192908d7cf20caadd68",
       "after_sha256": "4befe6d147b4b17ed889b2cf951452176164c162f78f0192908d7cf20caadd68",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
       "key": "aux:admin-review",
       "path": "data/current/admin-review.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "b831d0de28cae10d59bbac2846117d84d38371d3fd05cbe83dc7e66bcba42a92",
+      "base_sha256": "a2e2d296d5ec577883b20f6ed480521267945e3559e7a2388cc1ab55e14984fb",
       "after_sha256": "a2e2d296d5ec577883b20f6ed480521267945e3559e7a2388cc1ab55e14984fb",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
       "key": "aux:import-report",
       "path": "data/current/import-report.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "8cdbe0ab96b426e850873bd20f0b10b703e02bfeae79f8054cb2f4b0bf79ef51",
+      "base_sha256": "d8a553af3b603f002f023c759c2646a4bb1cbcf747fbfc0e47c4ef267dc6a21b",
       "after_sha256": "d8a553af3b603f002f023c759c2646a4bb1cbcf747fbfc0e47c4ef267dc6a21b",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -481,13 +481,13 @@
     {
       "key": "aux:md-cuatm-chain-pattern-audit",
       "path": "data/current/md-cuatm-chain-pattern-audit.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "457f47bd575ca4b377ad61098984f43f62289836d6978c2a0851b4278d37356a",
+      "base_sha256": "a03cd83fd4f58291f85817b7ef60a15b2fbd5dc7f6fb4ec9e4e08003bc9688cd",
       "after_sha256": "a03cd83fd4f58291f85817b7ef60a15b2fbd5dc7f6fb4ec9e4e08003bc9688cd",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -508,8 +508,8 @@
       "action": "CANONICALIZE_CHANGED_CONTENT",
       "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "8a811115cb7aa64ff7955a968d8ea67d8a454ecd0469bed0f44cdfbff8bb7cb9",
-      "after_sha256": "9915d7f544e97db36ad7b4b338acec64eda2b3ea47c1a71b36fb7c950a1872c4",
+      "base_sha256": "9915d7f544e97db36ad7b4b338acec64eda2b3ea47c1a71b36fb7c950a1872c4",
+      "after_sha256": "5b7c8a088d871978fedd57337b48ff2ffc9c244a611ccc4970a8f982e9db98b8",
       "changed_before_stabilization": true,
       "matches_base_after_stabilization": false,
       "idempotent": true
@@ -541,13 +541,13 @@
     {
       "key": "aux:md-cuatm-name-absent-classification",
       "path": "data/current/md-cuatm-name-absent-classification.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "1abed360a2efa69a58311096d80beda542e0f1d10ed8926a655af4e09f5e020c",
+      "base_sha256": "6e95a8dbbc52bf24d7f019ae58239263bfb635aa07e36aeb689fcf225784e325",
       "after_sha256": "6e95a8dbbc52bf24d7f019ae58239263bfb635aa07e36aeb689fcf225784e325",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -565,13 +565,13 @@
     {
       "key": "aux:md-cuatm-pair-diagnostics",
       "path": "data/current/md-cuatm-pair-diagnostics.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "58d0c0d3e3ba91679e78b643845a277258e059feb2ab0bf4d81136c207bdba1d",
+      "base_sha256": "8e7992ba03a5db457b6681ca5ee66b3cb8dc598219e160ea8b6ee7cc28fca0d4",
       "after_sha256": "8e7992ba03a5db457b6681ca5ee66b3cb8dc598219e160ea8b6ee7cc28fca0d4",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -589,13 +589,13 @@
     {
       "key": "aux:md-cuatm-reconciliation",
       "path": "data/current/md-cuatm-reconciliation.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "6e0ce892dc45aadfed744958b9977def592d8e743f7bc76626d073802a50b79c",
+      "base_sha256": "65c92967236b7520be5954ad4635544b554ef23edd656c5fc8110178d2fbd293",
       "after_sha256": "65c92967236b7520be5954ad4635544b554ef23edd656c5fc8110178d2fbd293",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -625,13 +625,13 @@
     {
       "key": "aux:md-special-municipality-analysis",
       "path": "data/current/md-special-municipality-analysis.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "3ae6e962f2f2bd9152a3b43a02dd7f0d99051939ca93fe4d9a2e45ce2f0ac48f",
+      "base_sha256": "770e816853cc33193f945414c2530cd09fe4b3e2985cf79922c03ffce5b10712",
       "after_sha256": "770e816853cc33193f945414c2530cd09fe4b3e2985cf79922c03ffce5b10712",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -697,13 +697,13 @@
     {
       "key": "aux:ro-official-reconciliation",
       "path": "data/current/ro-official-reconciliation.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "47fe869114afd4d58bfdc4f15de93c863bf2a5fe16550926d6dc58347ce5359b",
+      "base_sha256": "9828aac5d840f6c43764370f5ff169148fc7f83caaa062a63328fdf364909705",
       "after_sha256": "9828aac5d840f6c43764370f5ff169148fc7f83caaa062a63328fdf364909705",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     }
   ],
