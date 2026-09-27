@@ -85,7 +85,7 @@ function classify(country,t={}){
  return {type:'unclassified',confidence:'low',reason:'No classifier rule matched'};
 }
 function relationId(feature){
- const id=String(feature.id||''); const m=id.match(/relation\\/(\\d+)/); return m?Number(m[1]):null;
+ const id=String(feature.id||''); const m=id.match(/relation\/(\d+)/); return m?Number(m[1]):null;
 }
 const MD_OFFICIAL_POINT_TOUCH_NORMALIZATIONS=new Map([[12463200,{classification:'official_point_touch_multipolygon',coordinate:[29.2405257,46.7587398],rings:[
  [76585146,76583058],
