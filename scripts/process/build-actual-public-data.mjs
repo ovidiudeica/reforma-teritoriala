@@ -9,14 +9,16 @@ const MD_RECON='data/current/md-cuatm-reconciliation.json';
 const MD_NON_CUATM='data/current/md-cuatm-non-cuatm-allotments.json';
 const MD_INDIVIDUAL='data/sources/md-cuatm-individual-review.json';
 const RO_COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
+const MD_SEMANTIC_BRIDGE='data/current/md-cuatm-semantic-bridge.json';
 const OUT_INDEX='public/data/actual-entities.json';
 const OUT_DIR='public/geo/actual';
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
-const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge]=await Promise.all([
- read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE)
+const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge]=await Promise.all([
+ read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE),read(MD_SEMANTIC_BRIDGE)
 ]);
 if(roCountyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
+if(mdSemanticBridge.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
 
 const entities=catalog.entities||[];
 const entityById=new Map(entities.map(e=>[e.id,e]));
@@ -24,6 +26,12 @@ const mdMatchById=new Map((mdRecon.matches||[]).map(x=>[x.id,x]));
 const mdNonCuatmById=new Map((mdNonCuatm.items||[]).map(x=>[x.id,x]));
 const mdIndividualById=new Map((mdIndividual.cases||[]).map(x=>[x.osm_id,x]));
 const roCountyById=new Map((roCountyBridge.matches||[]).map(x=>[x.entity_id,x]));
+const mdSemanticByLegalId=new Map();
+for(const x of mdSemanticBridge.classifications||[]){
+ const id=String(x.legal_id);
+ if(mdSemanticByLegalId.has(id))throw new Error('Duplicate MD semantic bridge legal ID '+id);
+ mdSemanticByLegalId.set(id,x);
+}
 if(roCountyById.size!==42)throw new Error('RO county SIRUTA bridge must contain exactly 42 unique entity mappings');
 for(const [id,m] of roCountyById){
  const e=entityById.get(id);
@@ -70,11 +78,13 @@ function legalFor(e){
  if(e.jurisdiction==='MD'){
   const m=mdMatchById.get(e.id);
   if(m?.legal_id){
+   const semantic=mdSemanticByLegalId.get(String(m.legal_id))||null;
+   if(['3','8'].includes(String(m.status_code))&&!semantic)throw new Error('Missing MD semantic subtype for reconciled CUATM '+m.legal_id+' ('+m.legal_name+')');
    return {
     registry:'CUATM',
     id:String(m.legal_id),
     name:m.legal_name||null,
-    type:null,
+    type:semantic?.semantic_type||null,
     status_code:m.status_code||null,
     parent_id:m.legal_parent_id==null?null:String(m.legal_parent_id),
     parent_name:m.legal_parent_name||null,
