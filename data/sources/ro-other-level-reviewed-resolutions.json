@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "RO",
+  "reviewed_at": "2026-09-27",
+  "policy": "Reviewed official UATs whose single current OSM administrative representation intentionally uses a jurisdiction-specific admin_level different from the ordinary Romanian level-8 UAT convention. These resolutions preserve the OSM representation level and the official SIRUTA legal identity separately; OSM geometry is never promoted to legal geometry.",
+  "items": [
+    {
+      "legal_id": "179132",
+      "legal_name": "BUCUREȘTI",
+      "legal_type": "municipality",
+      "legal_parent_id": "403",
+      "legal_parent_name": "MUNICIPIUL BUCUREȘTI",
+      "classification": "official_uat_represented_at_exceptional_osm_admin_level",
+      "osm_relation_id": 377733,
+      "osm_relation_name": "București",
+      "osm_admin_level": 4,
+      "osm_entity_type": "capital_municipality",
+      "expected_catalog_parent_id": "RO",
+      "official_sector_ids": [
+        "179141",
+        "179150",
+        "179169",
+        "179178",
+        "179187",
+        "179196"
+      ],
+      "osm_sector_relations": [
+        {"relation_id": 7960954, "name": "Sector 1"},
+        {"relation_id": 7960953, "name": "Sector 2"},
+        {"relation_id": 7960937, "name": "Sector 3"},
+        {"relation_id": 7960957, "name": "Sector 4"},
+        {"relation_id": 7960956, "name": "Sector 5"},
+        {"relation_id": 7960955, "name": "Sector 6"}
+      ],
+      "evidence": {
+        "official_registry": "data/sources/ro-siruta-current.json",
+        "osm_snapshot": "public/geo/current/ro-administrative.geojson",
+        "osm_relation": "https://www.openstreetmap.org/relation/377733"
+      },
+      "review_conclusion": "SIRUTA models BUCUREȘTI as a level-2 municipality under the level-1 MUNICIPIUL BUCUREȘTI record, while current Romanian OSM convention represents the same capital municipality directly as relation 377733 at admin_level=4, with six sector boundaries nested at admin_level=9. This is a structural cross-model level difference, not a missing UAT. Keep the OSM representation at level 4 and the SIRUTA legal identity separately; do not synthesize a duplicate level-8 boundary."
+    }
+  ]
+}
