@@ -11,19 +11,23 @@
       "osm_place": null,
       "verified_parent_legal_id": "2700",
       "verified_parent_name": "Raionul Căușeni",
-      "review_status": "resolved_semantic_classification",
+      "review_status": "resolved_positive_identity",
       "classification_action": "chitcani_de_facto_administrative_representation",
-      "reconciliation_action": "do_not_auto_reconcile_to_legal_geometry",
-      "finding": "OSM relation 6879649 has a stable Chițcani territorial identity and a long-lived administrative-boundary history. Its current «Sovetul sătesc Chițcani» semantics are retained as a de-facto administrative representation distinct from the official CUATM/legal geometry model.",
+      "reconciliation_action": "reviewed_override_to_cuatm_identity_only",
+      "finding": "OSM relation 6879649 has a stable Chițcani territorial identity and is positively bound, by reviewed override, to CUATM 7612 (comuna Chițcani). The OSM polygon remains a de-facto administrative representation; this identity binding does not assert equivalence with authoritative legal/cadastral geometry.",
       "next_evidence_needed": [
-        "Authoritative geometry may be compared later if the project needs a legal-boundary equivalence; this is not an identity-review blocker."
+        "Authoritative geometry may be compared later if the project needs legal-boundary equivalence; this is not an identity-review blocker."
       ],
       "sources": [
         {
           "url": "https://statistica.gov.md/index.php/ro/rezultatele-finale-ale-recensamantului-populatiei-si-locuintelor-2024-distributi-10121_61877.html",
           "note": "BNS 2024 census results explicitly refer to comuna Chițcani and include Merenești and Zahorna."
         }
-      ]
+      ],
+      "official_legal_registry": "CUATM",
+      "official_legal_id": "7612",
+      "official_legal_type": "commune",
+      "geometry_equivalence_asserted": false
     },
     {
       "osm_id": "osm-r12104636",
