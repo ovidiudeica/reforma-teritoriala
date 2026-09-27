@@ -26,7 +26,7 @@ const waysAtIntersection=(nodeParents.elements||[]).filter(x=>x.type==='way').ma
 const geo=osmtogeojson(raw,{flatProperties:false});
 const converted=geo.features.find(f=>String(f.id)==='relation/'+RID);
 const simulated=structuredClone(raw);
-const syntheticNodeId=-8527658244;
+const syntheticNodeId=98527658244;
 simulated.elements.push({type:'node',id:syntheticNodeId,lat:46.7587398,lon:29.2405257});
 for(const e of simulated.elements.filter(e=>e.type==='way'&&[94511352,918853574].includes(e.id))) e.nodes=e.nodes.map(n=>n===8527658244?syntheticNodeId:n);
 const simGeo=osmtogeojson(simulated,{flatProperties:false});
@@ -49,6 +49,6 @@ else if(!convertedValidity.valid)report.diagnosis='current_osm_conversion_invali
 else report.diagnosis='no_current_topology_failure_reproduced';
 await writeFile(OUT,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
 console.log('SIMULATED_OSM_FIX '+JSON.stringify(report.simulated_osm_fix));
-// neighboring relation membership and simulated repair is intentionally read-only and coordinate-preserving
+// neighboring relation membership and simulated repair uses a positive synthetic node id and is intentionally read-only and coordinate-preserving
 
 
