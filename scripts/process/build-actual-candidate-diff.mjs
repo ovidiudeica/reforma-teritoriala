@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFile,writeFile} from 'node:fs/promises';
 import {actualSemanticFingerprint,semanticCatalogEntities} from '../lib/actual-semantic-fingerprint.mjs';
+import {classifyCandidateDisposition} from '../lib/actual-candidate-lifecycle.mjs';
 
 const BASE_REF=process.env.ACTUAL_BASE_REF;
 if(!BASE_REF)throw new Error('ACTUAL_BASE_REF is required and must identify the persisted release commit/ref.');
@@ -138,15 +139,18 @@ for(const key of [...new Set([...Object.keys(baselineManifest.components||{}),..
 const beforeSemanticEntities=new Map(semanticCatalogEntities(baselineCatalog).map(x=>[x.id,hashValue(x)]));
 const afterSemanticEntities=new Map(semanticCatalogEntities(candidateCatalog).map(x=>[x.id,hashValue(x)]));
 const entityContentChanged=[...afterSemanticEntities.keys()].filter(id=>beforeSemanticEntities.has(id)&&beforeSemanticEntities.get(id)!==afterSemanticEntities.get(id)).sort();
-const semanticChanged=baselineSemantic.sha256!==candidateSemantic.sha256;
 const detailedChangeCount=added.length+removed.length+entityContentChanged.length+geometryChangedTotal+semanticRegistryChanges;
-const semanticScopeOnlyChangeCount=semanticChanged&&detailedChangeCount===0?1:0;
-const substantiveChangeCount=detailedChangeCount+semanticScopeOnlyChangeCount;
-if(!semanticChanged){
- requireCheck(manifest.snapshot_id===baselineMarker.snapshot_id,'no_change_snapshot_identity_churn',{base:baselineMarker.snapshot_id,candidate:manifest.snapshot_id});
- requireCheck(manifest.release_fingerprint_sha256===baselineMarker.release_fingerprint_sha256,'no_change_release_fingerprint_churn',{base:baselineMarker.release_fingerprint_sha256,candidate:manifest.release_fingerprint_sha256});
-}
-const disposition=failures.length?'FAIL':semanticChanged?'CHANGE':'NO_CHANGE';
+const lifecycle=classifyCandidateDisposition({
+ baseContentFingerprint:baselineSemantic.sha256,
+ candidateContentFingerprint:candidateSemantic.sha256,
+ baseSnapshotId:baselineMarker.snapshot_id,
+ baseReleaseFingerprint:baselineMarker.release_fingerprint_sha256,
+ candidateSnapshotId:manifest.snapshot_id,
+ candidateReleaseFingerprint:manifest.release_fingerprint_sha256,
+ detailedChangeCount
+});
+failures.push(...lifecycle.failures);
+const disposition=failures.length?'FAIL':lifecycle.status;
 const report={
  schema_version:2,
  generated_at:new Date().toISOString(),
@@ -176,12 +180,12 @@ const report={
   semantic_registry_changed_count:semanticRegistryChanges,
   component_hash_changed_count:componentChanges.length,
   entity_content_changed_count:entityContentChanged.length,
-  semantic_scope_only_change_count:semanticScopeOnlyChangeCount,
-  semantic_content_changed:semanticChanged,
+  semantic_scope_only_change_count:lifecycle.semantic_scope_only_change_count,
+  semantic_content_changed:lifecycle.semantic_content_changed,
   base_content_fingerprint_sha256:baselineSemantic.sha256,
   candidate_content_fingerprint_sha256:candidateSemantic.sha256,
-  substantive_change_count:substantiveChangeCount,
-  review_required:semanticChanged
+  substantive_change_count:lifecycle.substantive_change_count,
+  review_required:lifecycle.review_required
  },
  entities:{added_ids:added,removed_ids:removed,content_changed_ids:entityContentChanged,legal_identity_changed_ids:legalChanged,classification_changed_ids:classificationChanged,legal_change_samples:legalChangeSamples,classification_change_samples:classificationChangeSamples},
  geometry,
@@ -203,7 +207,7 @@ const marker={
  diff_report_path:OUTPUT,
  diff_report_sha256:sha256(diffBytes),
  review_required:report.summary.review_required,
- substantive_change_count:substantiveChangeCount,
+ substantive_change_count:lifecycle.substantive_change_count,
  source:{workflow_run_id:process.env.GITHUB_RUN_ID??null,workflow_run_attempt:process.env.GITHUB_RUN_ATTEMPT??null,source_sha:process.env.GITHUB_SHA??null},
  policy:'NO_CHANGE candidates retain the persisted snapshot identity and cannot be promoted. CHANGE candidates may be promoted only while their persisted base remains unchanged and exact candidate bytes still pass the release gate.'
 };
