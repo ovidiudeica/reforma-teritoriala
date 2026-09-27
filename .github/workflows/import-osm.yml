@@ -1,32 +1,12 @@
 name: Import OSM administrative data
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '17 3 1 * *'
-  push:
-    branches:
-      - main
-    paths:
-      - scripts/import/import-osm.mjs
-      - scripts/process/build-actual-public-data.mjs
-      - scripts/process/build-actual-release-manifest.mjs
-      - schemas/actual-public-entity.schema.json
-      - scripts/process/audit-actual-release-gate.mjs
-      - scripts/process/audit-actual-topology.mjs
-      - scripts/process/audit-actual-regression.mjs
-      - scripts/process/audit-actual-structural-completeness.mjs
-      - scripts/process/audit-md-cuatm-semantic-bridge.mjs
-      - scripts/process/apply-md-reviewed-reconciliation.mjs
-      - scripts/process/audit-ro-county-siruta-bridge.mjs
-      - data/sources/md-cuatm-semantic-policy.json
-      - data/sources/actual-settlement-policy.json
-      - package.json
-      - data/sources/md-cuatm-individual-review.json
-      - data/sources/md-cuatm-reviewed-overrides.json
-      - data/sources/ro-official-reconciliation-exceptions.json
-      - data/sources/ro-semantic-type-reviewed-resolutions.json
-      - data/sources/ro-other-level-reviewed-resolutions.json
-      - .github/workflows/import-osm.yml
+    inputs:
+      replace_persisted_release:
+        description: 'Explicitly allow replacing the persisted ACTUAL release on main'
+        required: true
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -43,6 +23,12 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+      - name: Refuse accidental persisted release overwrite
+        run: |
+          if [ -f data/current/actual-release-persisted.json ] && [ "${{ inputs.replace_persisted_release }}" != "true" ]; then
+            echo "A persisted ACTUAL release exists. Re-run manually with replace_persisted_release=true only when intentionally publishing a new release."
+            exit 1
+          fi
       - run: npm install
       - run: npm run import:osm
       - name: Reconcile RO admin level 8 against official SIRUTA snapshot

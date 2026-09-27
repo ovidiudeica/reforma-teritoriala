@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "mode": "ACTUAL",
-  "snapshot_id": "actual-95e583345aa3195e",
-  "generated_at": "2026-09-27T20:51:16.432Z",
-  "release_fingerprint_sha256": "95e583345aa3195ed008b93267fd5ee275a4ca43c755d9e6a641ae94bc2e9645",
+  "snapshot_id": "actual-5383ff3db7cf3f67",
+  "generated_at": "2026-09-27T20:37:28.323Z",
+  "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
   "policy": "Immutable content fingerprint for the current public RO+MD administrative snapshot. The manifest binds validated master catalog/GeoJSON, official registries, jurisdiction gates, the public entity contract and tiered web geometries to exact bytes.",
   "jurisdictions": [
     "RO",
@@ -12,7 +12,7 @@
   "catalog": {
     "path": "data/current/entities.json",
     "schema_version": 2,
-    "generated_at": "2026-09-27T20:50:00.609Z",
+    "generated_at": "2026-09-27T20:33:04.478Z",
     "classifier_version": "2.3",
     "source": "OpenStreetMap via Overpass API",
     "license": "ODbL",
@@ -22,7 +22,7 @@
       "RO": 3232,
       "MD": 2595
     },
-    "sha256": "9cf8c0b519e8b0b8ddfbf2ffc1840d561cb73c1500d3cf499f5eb4a763905c9a"
+    "sha256": "d2a4701f016f1e1378798d150e7175d4fd36a46df76ca3af6e46da4fef6ce816"
   },
   "administrative_model": {
     "path": "data/current/administrative-inventory.json",
@@ -46,14 +46,14 @@
     "MD": {
       "path": "public/geo/current/md-administrative.geojson",
       "feature_count": 2595,
-      "sha256": "20bf3aaecd5ddd7c640572a3caacd6f8240d0df5cc04bb7b8d947533e4667d32"
+      "sha256": "774cbe6d69bad316a7e6febdf0ce7b2344509cc120e698d818d9f35e1473844a"
     }
   },
   "public_contract": {
     "path": "public/data/actual-entities.json",
     "contract": "actual-public-entity-v1",
     "schema_version": 1,
-    "generated_at": "2026-09-27T20:50:00.609Z",
+    "generated_at": "2026-09-27T20:33:04.478Z",
     "entity_count": 5827,
     "entity_count_by_jurisdiction": {
       "RO": 3232,
@@ -65,7 +65,7 @@
       "unresolved": 1,
       "not_bound_to_official_registry": 11
     },
-    "sha256": "776555c3944d78442a896ed7875aceb579e4c58ffc7ecb6bb4fae6195d3bde62",
+    "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
     "geometry_tiers": {
       "RO": {
         "overview": {
@@ -119,7 +119,7 @@
         "independent_village_count": 498,
         "issue_count": 0
       },
-      "sha256": "a2d44415a87ecdf63b4eaf3635feed950fb3e04d12e6e8ddba9b320dd227cb53"
+      "sha256": "b587bd9a00563ba34123030ef0a1748b4218b1c9427302492b0043034a044f42"
     }
   },
   "quality_gates": {
@@ -127,13 +127,13 @@
       "path": "data/current/actual-topology-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "22542f5eaa567c15fcc82a55ee8c185dc55b944f1815878f628b5030419d2cd6"
+      "sha256": "37130250fac5846db0ddaa1a1bd5a40142a719899d36858c5dff9ae469247fcc"
     },
     "regression": {
       "path": "data/current/actual-regression-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "0cbb35115f2979fd5f3d1d150130ff143969be5b938323fc9f51b7507bf223f6"
+      "sha256": "96160edcc284797f452a64e557527769f4e8ce2ecf01c7e9b60cf62e3a78bb9a"
     },
     "structural_completeness": {
       "path": "data/current/actual-structural-completeness-audit.json",
@@ -141,7 +141,7 @@
       "blocking_gap_count": 0,
       "blocking_policy_violation_count": 0,
       "blocking_issue_count": 0,
-      "sha256": "00a4b77864a2916c9ac8c8ccce642a758645874e3d0d4f32169211b16a1709a9"
+      "sha256": "d215636430cc8b76b97e7a77a73c90287f7006c4cc23d1dce23752481703a557"
     },
     "official_identity": {
       "path": "data/current/actual-official-identity-audit.json",
@@ -154,14 +154,14 @@
     "RO": {
       "path": "data/current/ro-release-gate.json",
       "status": "PASS",
-      "generated_at": "2026-09-27T20:51:16.432Z",
-      "sha256": "406c962c4388f4a7a2901aac5daf5c749e75e5868a756f052e1e370d50821618"
+      "generated_at": "2026-09-27T20:37:28.323Z",
+      "sha256": "5c3498993511b465b35037483c8c458b03bd6d8addb4d5730aae20fa3d255c72"
     },
     "MD": {
       "path": "data/current/md-release-gate.json",
       "status": "PASS",
-      "generated_at": "2026-09-27T20:51:15.586Z",
-      "sha256": "ee64e05daa77d239f9ede6ad052082ff50983e99c688fb6f6e6ac066a9ab7c51"
+      "generated_at": "2026-09-27T20:37:27.458Z",
+      "sha256": "7b3444d94b19cd2affabde31e1726fd62158a4d0f5077d051aec97bc4938b8f3"
     }
   },
   "official_sources": {
@@ -181,15 +181,15 @@
       "authority": "Biroul Național de Statistică al Republicii Moldova",
       "path": "data/sources/cuatm-current.json",
       "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
-      "fetched_at": "2026-09-27T20:51:14.138Z",
+      "fetched_at": "2026-09-27T20:37:24.316Z",
       "record_count": 1721,
-      "sha256": "2634556044797b8b844cf12da85aba44baf807ce854283329ef143642a3a66be"
+      "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575"
     }
   },
   "components": {
     "catalog": {
       "path": "data/current/entities.json",
-      "sha256": "9cf8c0b519e8b0b8ddfbf2ffc1840d561cb73c1500d3cf499f5eb4a763905c9a",
+      "sha256": "d2a4701f016f1e1378798d150e7175d4fd36a46df76ca3af6e46da4fef6ce816",
       "bytes": 8755755
     },
     "inventory": {
@@ -204,12 +204,12 @@
     },
     "md_geojson": {
       "path": "public/geo/current/md-administrative.geojson",
-      "sha256": "20bf3aaecd5ddd7c640572a3caacd6f8240d0df5cc04bb7b8d947533e4667d32",
+      "sha256": "774cbe6d69bad316a7e6febdf0ce7b2344509cc120e698d818d9f35e1473844a",
       "bytes": 20611143
     },
     "public_index": {
       "path": "public/data/actual-entities.json",
-      "sha256": "776555c3944d78442a896ed7875aceb579e4c58ffc7ecb6bb4fae6195d3bde62",
+      "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
       "bytes": 11938124
     },
     "ro_overview": {
@@ -244,12 +244,12 @@
     },
     "ro_gate": {
       "path": "data/current/ro-release-gate.json",
-      "sha256": "406c962c4388f4a7a2901aac5daf5c749e75e5868a756f052e1e370d50821618",
+      "sha256": "5c3498993511b465b35037483c8c458b03bd6d8addb4d5730aae20fa3d255c72",
       "bytes": 4934
     },
     "md_gate": {
       "path": "data/current/md-release-gate.json",
-      "sha256": "ee64e05daa77d239f9ede6ad052082ff50983e99c688fb6f6e6ac066a9ab7c51",
+      "sha256": "7b3444d94b19cd2affabde31e1726fd62158a4d0f5077d051aec97bc4938b8f3",
       "bytes": 1884
     },
     "ro_official": {
@@ -259,7 +259,7 @@
     },
     "md_official": {
       "path": "data/sources/cuatm-current.json",
-      "sha256": "2634556044797b8b844cf12da85aba44baf807ce854283329ef143642a3a66be",
+      "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575",
       "bytes": 611165
     },
     "md_individual_review": {
@@ -269,22 +269,22 @@
     },
     "md_semantic_bridge": {
       "path": "data/current/md-cuatm-semantic-bridge.json",
-      "sha256": "a2d44415a87ecdf63b4eaf3635feed950fb3e04d12e6e8ddba9b320dd227cb53",
+      "sha256": "b587bd9a00563ba34123030ef0a1748b4218b1c9427302492b0043034a044f42",
       "bytes": 346815
     },
     "topology_audit": {
       "path": "data/current/actual-topology-audit.json",
-      "sha256": "22542f5eaa567c15fcc82a55ee8c185dc55b944f1815878f628b5030419d2cd6",
+      "sha256": "37130250fac5846db0ddaa1a1bd5a40142a719899d36858c5dff9ae469247fcc",
       "bytes": 6823
     },
     "regression_audit": {
       "path": "data/current/actual-regression-audit.json",
-      "sha256": "0cbb35115f2979fd5f3d1d150130ff143969be5b938323fc9f51b7507bf223f6",
+      "sha256": "96160edcc284797f452a64e557527769f4e8ce2ecf01c7e9b60cf62e3a78bb9a",
       "bytes": 791
     },
     "structural_completeness_audit": {
       "path": "data/current/actual-structural-completeness-audit.json",
-      "sha256": "00a4b77864a2916c9ac8c8ccce642a758645874e3d0d4f32169211b16a1709a9",
+      "sha256": "d215636430cc8b76b97e7a77a73c90287f7006c4cc23d1dce23752481703a557",
       "bytes": 9221
     },
     "official_identity_audit": {
