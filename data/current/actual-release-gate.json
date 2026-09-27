@@ -2,9 +2,9 @@
   "schema_version": 2,
   "generated_at": "2026-09-27T20:37:27.458Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-990c892d9d27fa46",
+  "snapshot_id": "actual-83ef4c0ce09e5e42",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "c3a293a0e080373267036ca006226406a3817de0d3e83fc764eb2bda6020f71c",
+  "manifest_sha256": "fa438acf293faed70898d7b8cfe4c2a5b8a2a5c6df17c9fd0024c5560d8407a0",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -66,7 +66,7 @@
         "manifest": {
           "path": "data/sources/actual-settlement-policy.json",
           "schema_version": 1,
-          "policy_version": "2026-10-03-v1.2",
+          "policy_version": "2026-10-03-v1.3",
           "coverage_contract_version": 2,
           "scope": "settlements_and_component_localities",
           "geometry_role_contract": {
@@ -87,14 +87,27 @@
                 "64096"
               ],
               "legal_identity_authority": "SIRUTA",
-              "legal_geometry_equivalence_asserted": false
+              "legal_geometry_equivalence_asserted": false,
+              "reviewed_geometry_overrides": [
+                {
+                  "legal_id": "64602",
+                  "entity_id": "osm-r14735731",
+                  "osm_relation_id": 14735731,
+                  "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
+                  "evidence_sha256": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084",
+                  "source": "ANCPI RELUAT",
+                  "source_object_id": 1167,
+                  "inspire_id_local_id": "1.145.64602",
+                  "disposition": "replace_osm_geometry_keep_stable_entity_id"
+                }
+              ]
             }
           },
-          "sha256": "00c35b8d336afa9dae742aa1a79eb7fa9eff5613f3c7b2aac57b45ceb361a558"
+          "sha256": "8bd1c7b03a4b323fcac0b02a9408de0fffc8f3ccc06aa7fc5161015d5b6611d0"
         },
         "actual": {
           "schema_version": 1,
-          "policy_version": "2026-10-03-v1.2",
+          "policy_version": "2026-10-03-v1.3",
           "coverage_contract_version": 2,
           "scope": "settlements_and_component_localities",
           "geometry_role_contract": {
@@ -102,7 +115,7 @@
             "contract": "actual-geometry-role-v1",
             "schema_version": 1
           },
-          "sha256": "00c35b8d336afa9dae742aa1a79eb7fa9eff5613f3c7b2aac57b45ceb361a558",
+          "sha256": "8bd1c7b03a4b323fcac0b02a9408de0fffc8f3ccc06aa7fc5161015d5b6611d0",
           "public_contract": "actual-public-entity-v2",
           "administrative_geometry_fallbacks": {
             "RO": {
@@ -116,7 +129,20 @@
                 "64096"
               ],
               "legal_identity_authority": "SIRUTA",
-              "legal_geometry_equivalence_asserted": false
+              "legal_geometry_equivalence_asserted": false,
+              "reviewed_geometry_overrides": [
+                {
+                  "legal_id": "64602",
+                  "entity_id": "osm-r14735731",
+                  "osm_relation_id": 14735731,
+                  "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
+                  "evidence_sha256": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084",
+                  "source": "ANCPI RELUAT",
+                  "source_object_id": 1167,
+                  "inspire_id_local_id": "1.145.64602",
+                  "disposition": "replace_osm_geometry_keep_stable_entity_id"
+                }
+              ]
             }
           }
         }
@@ -429,8 +455,8 @@
       "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "0c7b851d07cc2c710c981deaf2378d43f1ad56d62e56e8f19de4a075f13c9e00",
-        "actual": "0c7b851d07cc2c710c981deaf2378d43f1ad56d62e56e8f19de4a075f13c9e00"
+        "expected": "c55d69a8fa75e4598d2a4073b258e48fe8c181f4c098681eb70a898b15360e78",
+        "actual": "c55d69a8fa75e4598d2a4073b258e48fe8c181f4c098681eb70a898b15360e78"
       }
     },
     {
@@ -439,12 +465,12 @@
       "detail": {
         "manifest": {
           "algorithm": "actual-semantic-v2",
-          "sha256": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
+          "sha256": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae",
           "release_identity_basis": "semantic_content_v2",
           "reused_base_release": false
         },
-        "expected": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
-        "actual": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220"
+        "expected": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae",
+        "actual": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae"
       }
     },
     {
@@ -453,7 +479,7 @@
       "detail": {
         "content_identity": {
           "algorithm": "actual-semantic-v2",
-          "sha256": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
+          "sha256": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae",
           "release_identity_basis": "semantic_content_v2",
           "reused_base_release": false
         }
@@ -463,8 +489,8 @@
       "name": "release_fingerprint_matches_semantic_identity",
       "ok": true,
       "detail": {
-        "expected": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
-        "actual": "990c892d9d27fa462601d8fe072a04fd013d431dc9d6acb999db774c49822220",
+        "expected": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae",
+        "actual": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae",
         "reused_base_release": false
       }
     },
@@ -472,8 +498,8 @@
       "name": "snapshot_id_matches_stable_release_identity",
       "ok": true,
       "detail": {
-        "expected": "actual-990c892d9d27fa46",
-        "actual": "actual-990c892d9d27fa46",
+        "expected": "actual-83ef4c0ce09e5e42",
+        "actual": "actual-83ef4c0ce09e5e42",
         "reused_base_release": false
       }
     },
@@ -670,13 +696,13 @@
             "outside_current_legal_registry": 123,
             "unresolved": 1
           },
-          "sha256": "4c26d527c6001651123b9085732ffa69d10dd7b95e40de145c35cad11e7255cd",
+          "sha256": "2b8788a3de1f608c96510c144a8fdcf8004ec04724556c9fc3e66da49846387c",
           "geometry_chunks": {
             "path": "public/data/actual-geometry-chunks.json",
             "contract": "actual-public-geometry-chunks-v1",
             "schema_version": 1,
             "chunk_count": 115,
-            "sha256": "3a0a09df8166f1576ca98bf42ed0281273bfb7b1c306633d6a8ccc618b928539"
+            "sha256": "87264134a979068d4f57e3ece7b21629a352d1c1c5c2e66ab62a25795b165e1a"
           },
           "geometry_tiers": {
             "RO": {
@@ -688,7 +714,7 @@
               "local": {
                 "path": "public/geo/actual/ro-local.geojson",
                 "feature_count": 3180,
-                "sha256": "d30c3e05100dd3c0a7a67ce1bbe6fc4c9f3bdd317cc48c7c5f5c2af4a1fdc66b"
+                "sha256": "99a6d54fc375648a72310a9b910f7acb7bbbc8b565c08e67efc7e9aad783962a"
               },
               "detail": {
                 "path": "public/geo/actual/ro-detail.geojson",
@@ -718,7 +744,7 @@
         "actual": {
           "contract": "actual-public-entity-v2",
           "entity_count": 5830,
-          "sha256": "4c26d527c6001651123b9085732ffa69d10dd7b95e40de145c35cad11e7255cd"
+          "sha256": "2b8788a3de1f608c96510c144a8fdcf8004ec04724556c9fc3e66da49846387c"
         }
       }
     },
@@ -741,14 +767,14 @@
           "contract": "actual-public-geometry-chunks-v1",
           "schema_version": 1,
           "chunk_count": 115,
-          "sha256": "3a0a09df8166f1576ca98bf42ed0281273bfb7b1c306633d6a8ccc618b928539"
+          "sha256": "87264134a979068d4f57e3ece7b21629a352d1c1c5c2e66ab62a25795b165e1a"
         },
         "actual": {
           "path": "public/data/actual-geometry-chunks.json",
           "contract": "actual-public-geometry-chunks-v1",
           "schema_version": 1,
           "chunk_count": 115,
-          "sha256": "3a0a09df8166f1576ca98bf42ed0281273bfb7b1c306633d6a8ccc618b928539"
+          "sha256": "87264134a979068d4f57e3ece7b21629a352d1c1c5c2e66ab62a25795b165e1a"
         }
       }
     },

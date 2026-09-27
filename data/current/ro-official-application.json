@@ -47,18 +47,45 @@
       "detail": {}
     },
     {
-      "name": "ancpi_bretcu_fallback_activation_is_exact",
+      "name": "ancpi_reviewed_fallback_activation_is_exact",
       "ok": true,
       "detail": {
         "enabled": true,
+        "authorized_ids": [
+          "64096"
+        ],
+        "reviewed_geometry_overrides": [
+          {
+            "legal_id": "64602",
+            "entity_id": "osm-r14735731",
+            "osm_relation_id": 14735731,
+            "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
+            "evidence_sha256": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084",
+            "source": "ANCPI RELUAT",
+            "source_object_id": 1167,
+            "inspire_id_local_id": "1.145.64602",
+            "disposition": "replace_osm_geometry_keep_stable_entity_id"
+          }
+        ],
         "fallback_applied": [
           {
+            "mode": "add_missing_uat",
             "entity_id": "siruta-u64096",
             "legal_id": "64096",
             "legal_type": "commune",
             "parent_id": "osm-r2248621",
             "source_object_id": 1227,
             "inspire_id_local_id": "1.145.64096"
+          },
+          {
+            "mode": "replace_osm_geometry",
+            "entity_id": "osm-r14735731",
+            "legal_id": "64602",
+            "legal_type": "commune",
+            "parent_id": "osm-r2248621",
+            "source_object_id": 1167,
+            "inspire_id_local_id": "1.145.64602",
+            "replaced_osm_relation_id": 14735731
           }
         ]
       }
@@ -69,7 +96,7 @@
     "applied_count": 3179,
     "ro_county_count": 42,
     "county_applied_count": 42,
-    "ancpi_fallback_applied_count": 1,
+    "ancpi_fallback_applied_count": 2,
     "type_changed_count": 5,
     "legal_parent_conflict_count": 0,
     "osm_semantic_type_conflict_count": 0,
@@ -81,12 +108,23 @@
   },
   "ancpi_fallbacks": [
     {
+      "mode": "add_missing_uat",
       "entity_id": "siruta-u64096",
       "legal_id": "64096",
       "legal_type": "commune",
       "parent_id": "osm-r2248621",
       "source_object_id": 1227,
       "inspire_id_local_id": "1.145.64096"
+    },
+    {
+      "mode": "replace_osm_geometry",
+      "entity_id": "osm-r14735731",
+      "legal_id": "64602",
+      "legal_type": "commune",
+      "parent_id": "osm-r2248621",
+      "source_object_id": 1167,
+      "inspire_id_local_id": "1.145.64602",
+      "replaced_osm_relation_id": 14735731
     }
   ],
   "type_changes": [
