@@ -1,28 +1,9 @@
 {
   "schema_version": 1,
   "jurisdiction": "RO",
-  "policy": "Exact documented unresolved residuals after full SIRUTA reconciliation. Reviewed missing-distinct-boundary and exceptional cross-level OSM representations are tracked separately and must pass their own release-gate audits.",
+  "policy": "Exact documented unresolved residuals after full SIRUTA reconciliation. Reviewed missing-distinct-boundary, exceptional cross-level OSM, and semantic-type metadata resolutions are tracked separately and must pass their own release-gate audits.",
   "allowed_official_only": [],
   "allowed_represented_at_other_osm_level": [],
   "allowed_parent_mismatches": [],
-  "allowed_osm_semantic_type_conflicts": [
-    {
-      "osm_relation_id": 14743725,
-      "legal_id": "137363",
-      "osm_claimed_legal_type": "town",
-      "legal_type": "commune"
-    },
-    {
-      "osm_relation_id": 10697874,
-      "legal_id": "92701",
-      "osm_claimed_legal_type": "town",
-      "legal_type": "municipality"
-    },
-    {
-      "osm_relation_id": 14778262,
-      "legal_id": "146370",
-      "osm_claimed_legal_type": "commune",
-      "legal_type": "town"
-    }
-  ]
+  "allowed_osm_semantic_type_conflicts": []
 }
