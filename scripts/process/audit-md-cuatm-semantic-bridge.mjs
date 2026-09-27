@@ -25,18 +25,16 @@ for(const name of municipalityNames){
  if(municipalityNorm.has(k))issues.push({issue:'duplicate_policy_municipality_name',name});
  municipalityNorm.set(k,name);
 }
+const status5=records.filter(r=>String(r.status_code)==='5');
 const officialMunicipalities=[];
 for(const [k,policyName] of municipalityNorm){
- const hits=records.filter(r=>norm(r.name)===k);
+ const hits=status5.filter(r=>norm(r.name)===k);
  if(hits.length!==1){
-  issues.push({issue:'municipality_name_resolution',name:policyName,candidate_count:hits.length,candidates:hits.map(r=>({code:r.code,name:r.name,status_code:r.status_code}))});
+  issues.push({issue:'municipality_status_5_resolution',name:policyName,candidate_count:hits.length,candidates:hits.map(r=>({code:r.code,name:r.name,status_code:r.status_code}))});
   continue;
  }
- const r=hits[0];
- officialMunicipalities.push(r);
- if(String(r.status_code)!=='5')issues.push({issue:'municipality_not_status_5',name:policyName,code:r.code,status_code:r.status_code});
+ officialMunicipalities.push(hits[0]);
 }
-const status5=records.filter(r=>String(r.status_code)==='5');
 const status5Unexpected=status5.filter(r=>!municipalityNorm.has(norm(r.name)));
 for(const r of status5Unexpected)issues.push({issue:'status_5_not_in_exhaustive_municipality_policy',code:r.code,name:r.name});
 if(status5.length!==municipalityNames.length)issues.push({issue:'municipality_cardinality',policy_count:municipalityNames.length,status_5_count:status5.length});
