@@ -23,7 +23,8 @@
     "apply:ro-official-reconciliation": "node scripts/process/apply-ro-official-reconciliation.mjs",
     "build:actual-release-manifest": "node scripts/process/build-actual-release-manifest.mjs",
     "audit:actual-release-gate": "node scripts/process/audit-actual-release-gate.mjs",
-    "build:actual-public-data": "node scripts/process/build-actual-public-data.mjs"
+    "build:actual-public-data": "node scripts/process/build-actual-public-data.mjs",
+    "audit:actual-topology": "node scripts/process/audit-actual-topology.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
