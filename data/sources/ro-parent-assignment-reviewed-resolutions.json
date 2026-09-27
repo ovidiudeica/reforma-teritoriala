@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "RO",
+  "reviewed_at": "2026-09-27",
+  "policy": "Reviewed resolutions of OSM parent-assignment artifacts. OSM geometry is preserved unchanged; SIRUTA supplies legal identity and hierarchy, while this registry records why a geometric parent assignment was corrected.",
+  "items": [
+    {
+      "osm_relation_id": 9744206,
+      "osm_name": "Grădinari",
+      "legal_id": "127171",
+      "legal_name": "GRĂDINARI",
+      "legal_parent_name": "JUDEȚUL OLT",
+      "resolved_parent_osm_relation_id": 2366978,
+      "previous_incorrect_parent_osm_relation_id": 2261289,
+      "root_cause": "pointOnFeature landed on the shared Olt–Vâlcea boundary; boundary-inclusive point-in-polygon admitted both same-level county parents and ordering selected Vâlcea despite zero polygon-area overlap.",
+      "geometry_evidence": {
+        "representative_point": [
+          24.2864604,
+          44.5687255
+        ],
+        "child_area_km2": 20.2409290451344,
+        "legal_parent_overlap_km2": 20.240929045120236,
+        "legal_parent_child_coverage_ratio": 0.9999999999993002,
+        "previous_parent_overlap_km2": 0,
+        "previous_parent_child_coverage_ratio": 0,
+        "official_locality_count": 4,
+        "official_locality_inside_count": 4,
+        "official_localities": [
+          {
+            "siruta": "127199",
+            "name": "Petculeşti"
+          },
+          {
+            "siruta": "127206",
+            "name": "Runcu Mare"
+          },
+          {
+            "siruta": "127215",
+            "name": "Satu Nou"
+          },
+          {
+            "siruta": "127180",
+            "name": "Grădinari"
+          }
+        ]
+      },
+      "osm_history": {
+        "created_at": "2019-07-02T11:40:54Z",
+        "created_changeset": 71818466,
+        "current_version": 2,
+        "last_modified_at": "2022-02-27T11:10:33Z",
+        "last_changeset": 117903992,
+        "admin_level_history": [
+          "9",
+          "8"
+        ],
+        "place_history": [
+          "district",
+          "municipality"
+        ],
+        "current_member_way_ids": [
+          701062558,
+          701062647,
+          701062703,
+          701062556,
+          701062557
+        ],
+        "admin_centre_node_id": 419806239,
+        "member_set_changed_between_versions": false
+      },
+      "resolution": {
+        "classification": "point_on_feature_parent_assignment_artifact",
+        "algorithm": "strict representative-point containment with ignoreBoundary=true, then positive polygon-area-overlap fallback at the nearest parent admin level",
+        "geometry_modified": false,
+        "legal_geometry_claimed": false
+      }
+    }
+  ]
+}
