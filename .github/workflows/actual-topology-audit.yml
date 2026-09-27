@@ -1,0 +1,34 @@
+name: ACTUAL topology audit
+
+on:
+  pull_request:
+    paths:
+      - 'public/geo/current/**'
+      - 'data/current/entities.json'
+      - 'scripts/process/audit-actual-topology.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/actual-topology-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  topology:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run audit:actual-topology
+      - name: Upload topology report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: actual-topology-audit
+          path: data/current/actual-topology-audit.json
+          if-no-files-found: error
