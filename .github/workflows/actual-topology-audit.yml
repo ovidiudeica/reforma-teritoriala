@@ -26,6 +26,8 @@ jobs:
         with:
           node-version: 20
       - run: npm install --no-audit --no-fund
+      - name: Check import script syntax
+        run: node --check scripts/import/import-osm.mjs
       - run: npm run audit:osm-12463200
       - name: Regenerate OSM ACTUAL master
         run: npm run import:osm
