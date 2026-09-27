@@ -7,6 +7,11 @@ on:
       - 'data/current/entities.json'
       - 'scripts/process/audit-actual-topology.mjs'
       - 'scripts/process/audit-actual-release-gate.mjs'
+      - 'scripts/process/audit-md-release-gate.mjs'
+      - 'scripts/process/audit-ro-release-gate.mjs'
+      - 'scripts/process/audit-cuatm-consistency.mjs'
+      - 'scripts/process/audit-administrative.mjs'
+      - 'scripts/process/audit-actual-regression.mjs'
       - 'scripts/process/build-actual-release-manifest.mjs'
       - 'scripts/process/audit-actual-structural-completeness.mjs'
       - 'scripts/process/audit-actual-official-identity.mjs'
@@ -61,6 +66,14 @@ jobs:
         run: npm run audit:md-cuatm-semantic-bridge
       - name: Apply reviewed MD official identity
         run: npm run apply:md-reviewed-reconciliation
+      - name: Regenerate administrative review
+        run: npm run audit:admin
+      - name: Regenerate MD CUATM consistency audit
+        run: node scripts/process/audit-cuatm-consistency.mjs
+      - name: Run MD release gate
+        run: npm run audit:md-release-gate
+      - name: Run RO release gate
+        run: npm run audit:ro-release-gate
       - name: Regenerate public ACTUAL contract
         run: npm run build:actual-public-data
       - name: Audit Chișinău sector identity propagation
@@ -69,7 +82,12 @@ jobs:
         run: npm run audit:actual-structural-completeness
       - name: Audit official identity propagation for all ACTUAL entities
         run: npm run audit:actual-official-identity
-      - run: npm run audit:actual-release-gate
+      - name: Audit ACTUAL count regression
+        run: npm run audit:actual-regression
+      - name: Build release manifest from this run
+        run: npm run build:actual-release-manifest
+      - name: Run release gate against generated snapshot
+        run: npm run audit:actual-release-gate
       - name: Upload topology report
         if: always()
         uses: actions/upload-artifact@v4
@@ -84,6 +102,15 @@ jobs:
             data/current/md-reviewed-official-application.json
             data/current/actual-structural-completeness-audit.json
             data/current/actual-official-identity-audit.json
+            data/current/actual-regression-audit.json
+            data/current/admin-review.json
+            data/current/md-cuatm-consistency-audit.json
+            data/current/md-cuatm-edge-case-audit.json
+            data/current/md-cuatm-unmatched-review.json
+            data/current/ro-release-gate.json
+            data/current/md-release-gate.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-gate.json
             data/sources/actual-settlement-policy.json
           if-no-files-found: error
 
