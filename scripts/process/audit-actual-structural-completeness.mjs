@@ -50,3 +50,5 @@ const audited=new Set(rows.map(x=>x.jurisdiction+':'+x.type));
 const undeclaredCoverage=declared.filter(x=>!audited.has(x));
 const report={schema_version:1,generated_at:new Date().toISOString(),mode:'ACTUAL',scope:['RO','MD'],status:blocking.length?'FAIL':'PASS',policy:{pass:'Exact official-identity coverage where the official registry and subtype mapping are exhaustive.',fail:'At least one official identity in an exactly auditable declared type is absent from the public ACTUAL legal-identity set.',not_determined:'Declared types whose official source or current semantic classifier is insufficient for an exact per-type completeness assertion. This is never treated as PASS.'},declared_type_count:declared.length,audited_type_count:rows.length,undeclared_coverage:undeclaredCoverage,blocking_gap_count:blocking.reduce((n,x)=>n+x.missing_count,0),blocking_gaps:blocking,types:rows};
 await mkdir('data/current',{recursive:true});await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(blocking.length)process.exit(1);
+
+// CI validation trigger: structural completeness runs only after regenerated public contract.
