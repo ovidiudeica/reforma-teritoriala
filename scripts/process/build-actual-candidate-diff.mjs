@@ -139,12 +139,14 @@ const beforeSemanticEntities=new Map(semanticCatalogEntities(baselineCatalog).ma
 const afterSemanticEntities=new Map(semanticCatalogEntities(candidateCatalog).map(x=>[x.id,hashValue(x)]));
 const entityContentChanged=[...afterSemanticEntities.keys()].filter(id=>beforeSemanticEntities.has(id)&&beforeSemanticEntities.get(id)!==afterSemanticEntities.get(id)).sort();
 const semanticChanged=baselineSemantic.sha256!==candidateSemantic.sha256;
-const substantiveChangeCount=added.length+removed.length+entityContentChanged.length+geometryChangedTotal+semanticRegistryChanges;
-const disposition=failures.length?'FAIL':semanticChanged?'CHANGE':'NO_CHANGE';
+const detailedChangeCount=added.length+removed.length+entityContentChanged.length+geometryChangedTotal+semanticRegistryChanges;
+const semanticScopeOnlyChangeCount=semanticChanged&&detailedChangeCount===0?1:0;
+const substantiveChangeCount=detailedChangeCount+semanticScopeOnlyChangeCount;
 if(!semanticChanged){
  requireCheck(manifest.snapshot_id===baselineMarker.snapshot_id,'no_change_snapshot_identity_churn',{base:baselineMarker.snapshot_id,candidate:manifest.snapshot_id});
  requireCheck(manifest.release_fingerprint_sha256===baselineMarker.release_fingerprint_sha256,'no_change_release_fingerprint_churn',{base:baselineMarker.release_fingerprint_sha256,candidate:manifest.release_fingerprint_sha256});
 }
+const disposition=failures.length?'FAIL':semanticChanged?'CHANGE':'NO_CHANGE';
 const report={
  schema_version:2,
  generated_at:new Date().toISOString(),
@@ -174,6 +176,7 @@ const report={
   semantic_registry_changed_count:semanticRegistryChanges,
   component_hash_changed_count:componentChanges.length,
   entity_content_changed_count:entityContentChanged.length,
+  semantic_scope_only_change_count:semanticScopeOnlyChangeCount,
   semantic_content_changed:semanticChanged,
   base_content_fingerprint_sha256:baselineSemantic.sha256,
   candidate_content_fingerprint_sha256:candidateSemantic.sha256,
@@ -185,7 +188,7 @@ const report={
  official_registries:registries,
  component_hash_changes:componentChanges,
  failures,
- policy:'Candidate comparison is fail-closed on persisted-baseline integrity and candidate release-gate validity. Differences are reported, never auto-accepted. Promotion always requires explicit acknowledgement of the candidate snapshot.'
+ policy:'Candidate disposition is derived from canonical administrative content. NO_CHANGE retains the base release identity and is terminal; CHANGE requires explicit review and promotion. Exact component-byte drift is reported separately and remains release-gated.'
 };
 await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
 const diffBytes=await readFile(OUTPUT);
