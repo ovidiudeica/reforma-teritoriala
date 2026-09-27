@@ -24,6 +24,7 @@ const PATHS={
  topology_audit:'data/current/actual-topology-audit.json',
  regression_audit:'data/current/actual-regression-audit.json',
  structural_completeness_audit:'data/current/actual-structural-completeness-audit.json',
+ official_identity_audit:'data/current/actual-official-identity-audit.json',
  settlement_policy:'data/sources/actual-settlement-policy.json'
 };
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
@@ -41,6 +42,7 @@ const cuatm=json('md_official');
 const topologyAudit=json('topology_audit');
 const regressionAudit=json('regression_audit');
 const structuralCompletenessAudit=json('structural_completeness_audit');
+const officialIdentityAudit=json('official_identity_audit');
 const mdSemanticBridge=json('md_semantic_bridge');
 const settlementPolicy=json('settlement_policy');
 
@@ -133,7 +135,8 @@ const manifest={
  quality_gates:{
   topology:{path:PATHS.topology_audit,status:topologyAudit.status??null,blocking_issue_count:topologyAudit.blocking_issue_count??null,sha256:components.topology_audit.sha256},
   regression:{path:PATHS.regression_audit,status:regressionAudit.status??null,blocking_issue_count:regressionAudit.blocking_issue_count??null,sha256:components.regression_audit.sha256},
-  structural_completeness:{path:PATHS.structural_completeness_audit,status:structuralCompletenessAudit.status??null,blocking_gap_count:structuralCompletenessAudit.blocking_gap_count??null,blocking_policy_violation_count:structuralCompletenessAudit.blocking_policy_violation_count??null,blocking_issue_count:structuralCompletenessAudit.blocking_issue_count??null,sha256:components.structural_completeness_audit.sha256}
+  structural_completeness:{path:PATHS.structural_completeness_audit,status:structuralCompletenessAudit.status??null,blocking_gap_count:structuralCompletenessAudit.blocking_gap_count??null,blocking_policy_violation_count:structuralCompletenessAudit.blocking_policy_violation_count??null,blocking_issue_count:structuralCompletenessAudit.blocking_issue_count??null,sha256:components.structural_completeness_audit.sha256},
+  official_identity:{path:PATHS.official_identity_audit,status:officialIdentityAudit.status??null,blocking_issue_count:officialIdentityAudit.blocking_issue_count??null,sha256:components.official_identity_audit.sha256}
  },
  jurisdiction_gates:{
   RO:{path:PATHS.ro_gate,status:roGate.status??null,generated_at:roGate.generated_at??null,sha256:components.ro_gate.sha256},
