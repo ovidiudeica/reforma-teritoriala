@@ -7,6 +7,7 @@ on:
       - 'data/current/entities.json'
       - 'scripts/process/audit-actual-topology.mjs'
       - 'scripts/process/audit-actual-release-gate.mjs'
+      - 'scripts/process/build-actual-release-manifest.mjs'
       - 'scripts/process/audit-actual-structural-completeness.mjs'
       - 'scripts/process/audit-actual-official-identity.mjs'
       - 'scripts/process/apply-ro-official-reconciliation.mjs'
@@ -16,6 +17,7 @@ on:
       - 'data/sources/md-cuatm-reviewed-overrides.json'
       - 'data/sources/md-cuatm-individual-review.json'
       - 'data/sources/md-cuatm-semantic-policy.json'
+      - 'data/sources/actual-settlement-policy.json'
       - 'scripts/process/build-actual-public-data.mjs'
       - 'scripts/process/audit-osm-relation-12463200.mjs'
       - 'scripts/import/import-osm.mjs'
@@ -82,6 +84,7 @@ jobs:
             data/current/md-reviewed-official-application.json
             data/current/actual-structural-completeness-audit.json
             data/current/actual-official-identity-audit.json
+            data/sources/actual-settlement-policy.json
           if-no-files-found: error
 
 
