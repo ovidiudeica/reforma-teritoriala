@@ -1,26 +1,30 @@
 #!/usr/bin/env node
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
-const [inventory,catalog,pub,siruta,cuatm,mdRecon]=await Promise.all([
+const [inventory,catalog,pub,siruta,cuatm,mdRecon,roOfficialOnly,roOtherLevel]=await Promise.all([
  read('data/current/administrative-inventory.json'),read('data/current/entities.json'),read('public/data/actual-entities.json'),
- read('data/sources/ro-siruta-current.json'),read('data/sources/cuatm-current.json'),read('data/current/md-cuatm-reconciliation.json')
+ read('data/sources/ro-siruta-current.json'),read('data/sources/cuatm-current.json'),read('data/current/md-cuatm-reconciliation.json'),
+ read('data/sources/ro-official-only-reviewed-resolutions.json'),read('data/sources/ro-other-level-reviewed-resolutions.json')
 ]);
 const OUTPUT='data/current/actual-structural-completeness-audit.json';
 const publicEntities=pub.entities||[], catalogEntities=catalog.entities||[];
 const publicLegal=new Map();
 for(const e of publicEntities){const r=e.legal?.registry,id=e.legal?.id;if(r&&id){const k=r+':'+String(id);if(!publicLegal.has(k))publicLegal.set(k,[]);publicLegal.get(k).push(e.id);}}
+const reviewedRoOfficialOnly=new Set((roOfficialOnly.items||[]).map(x=>String(x.legal_id)));
+const reviewedRoOtherLevel=new Set((roOtherLevel.items||[]).map(x=>String(x.legal_id)));
+const reviewedRoCoverage=new Set([...reviewedRoOfficialOnly,...reviewedRoOtherLevel]);
 const rows=[],blocking=[];
 const add=(jurisdiction,type,official,covered,missing,mode,detail={})=>{const row={jurisdiction,type,official_count:official,covered_official_identity_count:covered,missing_official_identity_count:missing.length,coverage_status:mode,missing_official_identities:missing,...detail};rows.push(row);if(mode==='FAIL')blocking.push({jurisdiction,type,missing_count:missing.length,missing_official_identities:missing});};
 const sir=siruta.records||[];
 const roUat=sir.filter(r=>Number(r.level)===2);
 for(const type of ['municipality','town','commune','sector']){
  const official=roUat.filter(r=>(r.legal_type||'commune')===type);
- const missing=official.filter(r=>!publicLegal.has('SIRUTA:'+String(r.siruta))).map(r=>({id:String(r.siruta),name:r.name,parent_id:r.parent_siruta??null,parent_name:r.parent_name??null}));
- add('RO',type,official.length,official.length-missing.length,missing,missing.length?'FAIL':'PASS',{official_registry:'SIRUTA',exhaustive:true});
+ const missing=official.filter(r=>!publicLegal.has('SIRUTA:'+String(r.siruta))&&!reviewedRoCoverage.has(String(r.siruta))).map(r=>({id:String(r.siruta),name:r.name,parent_id:r.parent_siruta??null,parent_name:r.parent_name??null}));
+ add('RO',type,official.length,official.length-missing.length,missing,missing.length?'FAIL':'PASS',{official_registry:'SIRUTA',exhaustive:true,reviewed_exception_coverage_count:official.filter(r=>reviewedRoCoverage.has(String(r.siruta))).length});
 }
 const roCounties=[...new Map(roUat.filter(r=>r.county_code).map(r=>[String(r.county_code),r.county_name||null])).entries()];
 add('RO','county',roCounties.length,null,[], 'NOT_DETERMINED',{official_registry:'SIRUTA',exhaustive:true,reason:'Current SIRUTA snapshot identifies county codes/names but public county entities are not bound to SIRUTA legal IDs; requires a county-code identity bridge before exact identity completeness can be asserted.'});
-{const covered=catalogEntities.some(e=>e.jurisdiction==='RO'&&String(e.osm?.admin_level)==='2');add('RO','state',1,covered?1:0,covered?[]:[{id:'RO',name:'România'}],covered?'OBSERVATIONAL':'FAIL',{reason:'State is outside SIRUTA UAT identity and is checked by ACTUAL representation presence.'});}
+add('RO','state',1,null,[],'OBSERVATIONAL',{reason:'State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/8/9; country geometry is used as import containment context, not a catalog entity.'});
 add('RO','component_locality',sir.filter(r=>Number(r.level)!==2).length,null,[],'NOT_DETERMINED',{official_registry:'SIRUTA',reason:'Inventory declares component localities, but ACTUAL geometry policy does not currently require exhaustive polygon boundaries for settlements.'});
 
 const md=cuatm.records||[];
@@ -43,7 +47,7 @@ for(const type of ['district','level_2_municipality','special_territorial_unit',
  const missing=official.filter(r=>!publicLegal.has('CUATM:'+String(r.code))).map(r=>({id:String(r.code),name:r.name,parent_id:r.parent_code??null,parent_name:r.parent_name??null,status_code:r.status_code}));
  add('MD',type,official.length,official.length-missing.length,missing,missing.length?'FAIL':'PASS',{official_registry:'CUATM',exhaustive:true});
 }
-{const covered=catalogEntities.some(e=>e.jurisdiction==='MD'&&String(e.osm?.admin_level)==='2');add('MD','state',1,covered?1:0,covered?[]:[{id:'MD',name:'Republica Moldova'}],covered?'OBSERVATIONAL':'FAIL',{reason:'State is outside CUATM UAT identity and is checked by ACTUAL representation presence.'});}
+add('MD','state',1,null,[],'OBSERVATIONAL',{reason:'State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/6/8/9; country geometry is used as import containment context, not a catalog entity.'});
 add('MD','locality',md.filter(r=>['6','9'].includes(String(r.status_code))).length,null,[],'NOT_DETERMINED',{official_registry:'CUATM',reason:'Inventory declares component localities, but ACTUAL geometry policy does not currently require exhaustive polygon boundaries for settlements.'});
 const declared=Object.entries(inventory.countries).flatMap(([j,c])=>c.levels.map(x=>j+':'+x.type));
 const audited=new Set(rows.map(x=>x.jurisdiction+':'+x.type));
