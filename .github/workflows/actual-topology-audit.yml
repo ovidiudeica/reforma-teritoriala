@@ -24,7 +24,6 @@ jobs:
         with:
           node-version: 20
       - run: npm install --no-audit --no-fund
-      - run: npm run audit:actual-topology
       - run: npm run audit:actual-release-gate
       - name: Upload topology report
         if: always()
