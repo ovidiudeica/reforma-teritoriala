@@ -3,10 +3,26 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import osmtogeojson from 'osmtogeojson';
 import { area, intersect, featureCollection, pointOnFeature, booleanPointInPolygon } from '@turf/turf';
 
-const ENDPOINTS=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://overpass.nchc.org.tw/api/interpreter'];
-const RETRIES_PER_ENDPOINT=3;
+const DEFAULT_ENDPOINTS=[
+ 'https://overpass-api.de/api/interpreter',
+ 'https://overpass.kumi.systems/api/interpreter',
+ 'https://overpass.private.coffee/api/interpreter'
+];
+const positiveInt=(value,fallback)=>{
+ const n=Number(value);
+ return Number.isInteger(n)&&n>0?n:fallback;
+};
+const ENDPOINTS=(process.env.OVERPASS_ENDPOINTS||'')
+ .split(',')
+ .map(x=>x.trim())
+ .filter(Boolean);
+if(!ENDPOINTS.length)ENDPOINTS.push(...DEFAULT_ENDPOINTS);
+const RETRIES_PER_ENDPOINT=positiveInt(process.env.OVERPASS_RETRIES_PER_ENDPOINT,2);
+const REQUEST_TIMEOUT_MS=positiveInt(process.env.OVERPASS_REQUEST_TIMEOUT_MS,90000);
+const RETRY_BACKOFF_MS=positiveInt(process.env.OVERPASS_RETRY_BACKOFF_MS,5000);
 const CLASSIFIER_VERSION='2.3';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const overpassAttempts=[];
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9]},
  MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316]}
@@ -18,22 +34,44 @@ const RO_SEMANTIC_CLASSES=new Set([
  'municipality_component_locality_boundary_representation'
 ]);
 
-async function overpass(query){
+async function overpass(query,context='unknown'){
  let last;
  for(const endpoint of ENDPOINTS){
   for(let attempt=1;attempt<=RETRIES_PER_ENDPOINT;attempt++){
+   const startedAt=new Date().toISOString();
+   const started=Date.now();
+   const controller=new AbortController();
+   const timer=setTimeout(()=>controller.abort(new Error(`Overpass request timeout after ${REQUEST_TIMEOUT_MS}ms`)),REQUEST_TIMEOUT_MS);
    try{
-    const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-import/0.4'},body:new URLSearchParams({data:query})});
-    if(!r.ok) throw new Error(endpoint+' HTTP '+r.status);
-    return await r.json();
+    const r=await fetch(endpoint,{
+     method:'POST',
+     headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-import/0.5'},
+     body:new URLSearchParams({data:query}),
+     signal:controller.signal
+    });
+    const body=await r.text();
+    if(!r.ok)throw new Error(`${endpoint} HTTP ${r.status}: ${body.slice(0,240).replace(/\\s+/g,' ')}`);
+    let data;
+    try{data=JSON.parse(body);}catch(e){throw new Error(`${endpoint} returned invalid JSON: ${e.message}`);}
+    if(!data||!Array.isArray(data.elements))throw new Error(`${endpoint} returned no Overpass elements array`);
+    if(data.elements.length===0)throw new Error(`${endpoint} returned an empty Overpass result`);
+    overpassAttempts.push({context,endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:data.elements.length});
+    console.log(`Overpass ${context}: accepted ${data.elements.length} elements from ${endpoint} on attempt ${attempt}/${RETRIES_PER_ENDPOINT}`);
+    return data;
    }catch(e){
-    last=e;
-    console.warn(`Overpass attempt ${attempt}/${RETRIES_PER_ENDPOINT} failed for ${endpoint}: ${e.message}`);
-    if(attempt<RETRIES_PER_ENDPOINT) await sleep(5000*attempt);
+    const timedOut=controller.signal.aborted;
+    const message=timedOut?`request timeout after ${REQUEST_TIMEOUT_MS}ms`:String(e?.message||e);
+    last=new Error(`Overpass ${context} failed at ${endpoint} attempt ${attempt}/${RETRIES_PER_ENDPOINT}: ${message}`);
+    overpassAttempts.push({context,endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'failure',timeout:timedOut,error:message});
+    console.warn(last.message);
+    if(attempt<RETRIES_PER_ENDPOINT)await sleep(RETRY_BACKOFF_MS*attempt);
+   }finally{
+    clearTimeout(timer);
    }
   }
  }
- throw last;
+ const summary=overpassAttempts.filter(x=>x.context===context).map(x=>({endpoint:x.endpoint,attempt:x.attempt,status:x.status,timeout:x.timeout??false,error:x.error??null}));
+ throw new Error(`All Overpass endpoints failed closed for ${context}: ${JSON.stringify(summary)}`,{cause:last});
 }
 function queryFor({iso,levels,requiredRelations=[]}){
  const filters=levels.map(l=>`relation(area.country)["boundary"="administrative"]["admin_level"="${l}"];`).join('\n');
@@ -230,9 +268,21 @@ function finalizeAfterParents(entities){
 }
 async function main(){
  await mkdir('data/current',{recursive:true}); await mkdir('public/geo/current',{recursive:true});
- const all=[], report={generated_at:new Date().toISOString(),classifier_version:CLASSIFIER_VERSION,countries:{},warnings:[]};
+ const all=[], report={
+  generated_at:new Date().toISOString(),
+  classifier_version:CLASSIFIER_VERSION,
+  countries:{},
+  warnings:[],
+  overpass:{
+   endpoint_order:[...ENDPOINTS],
+   request_timeout_ms:REQUEST_TIMEOUT_MS,
+   retries_per_endpoint:RETRIES_PER_ENDPOINT,
+   retry_backoff_ms:RETRY_BACKOFF_MS,
+   attempts:overpassAttempts
+  }
+ };
  for(const [code,cfg] of Object.entries(countries)){
-  const raw=await overpass(queryFor(cfg)), geo=osmtogeojson(raw,{flatProperties:false});
+  const raw=await overpass(queryFor(cfg),code), geo=osmtogeojson(raw,{flatProperties:false});
   normalizeOfficialPointTouch(code,raw,geo,report);
   const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
