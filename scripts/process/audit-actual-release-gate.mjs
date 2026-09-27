@@ -121,12 +121,16 @@ check('public_contract_jurisdiction_counts_match_catalog',
 const reviewedPublicById=new Map(publicEntities.map(x=>[x.id,x]));
 const reviewedStatusIssues=(mdIndividual.cases||[]).flatMap(review=>{
  const entity=reviewedPublicById.get(review.osm_id);
- const expected=review.review_status==='resolved_semantic_classification'
-  ?'reviewed_representation_without_legal_identity'
-  :review.review_status==='unresolved_identity'?'unresolved':null;
- return entity&&expected&&entity.validation?.legal_identity_status===expected
+ const expected=review.review_status==='resolved_positive_identity'
+  ?'reconciled'
+  :review.review_status==='resolved_semantic_classification'
+   ?'reviewed_representation_without_legal_identity'
+   :review.review_status==='unresolved_identity'?'unresolved':null;
+ const identityOk=review.review_status!=='resolved_positive_identity'
+  ||(entity?.legal?.registry==='CUATM'&&String(entity?.legal?.id||'')===String(review.official_legal_id||'')&&entity?.legal?.geometry_equivalence_asserted===false);
+ return entity&&expected&&entity.validation?.legal_identity_status===expected&&identityOk
   ?[]
-  :[{osm_id:review.osm_id,review_status:review.review_status,expected,actual:entity?.validation?.legal_identity_status??null}];
+  :[{osm_id:review.osm_id,review_status:review.review_status,expected,expected_legal_id:review.official_legal_id??null,actual:entity?.validation?.legal_identity_status??null,actual_legal:entity?.legal??null}];
 });
 check('md_reviewed_public_identity_status_is_stable',reviewedStatusIssues.length===0,{issues:reviewedStatusIssues});
 
