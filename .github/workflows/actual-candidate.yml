@@ -120,9 +120,6 @@ jobs:
       - name: Deep-audit MD individual cases
         run: npm run audit:md-individual-cases
 
-      - name: Inspect official CUATM workbook schema
-        run: node scripts/process/inspect-cuatm-workbook.mjs
-
       - name: Reconcile MD against CUATM
         run: npm run reconcile:cuatm
 
