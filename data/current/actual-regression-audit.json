@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T20:37:35.625Z",
+  "mode": "ACTUAL",
+  "status": "PASS",
+  "expected_entity_count": 5827,
+  "entity_count": 5827,
+  "entity_count_by_jurisdiction": {
+    "RO": 3232,
+    "MD": 2595
+  },
+  "reviewed_topology_normalization_entity_ids": [
+    "osm-r12463200"
+  ],
+  "policy": "Entity and master-feature counts are fail-closed against the reviewed ACTUAL baseline RO=3232, MD=2595, total=5827. The MD baseline includes the five explicitly imported Chișinău sector representations. Exact master-coordinate fidelity and unintended geometry drift are enforced separately by the ACTUAL release gate; osm-r12463200 is the sole reviewed topology normalization currently under validation.",
+  "blocking_issue_count": 0,
+  "blocking_issues": []
+}

@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T20:33:09.088Z",
+  "mode": "ACTUAL",
+  "scope": [
+    "RO",
+    "MD"
+  ],
+  "status": "PASS",
+  "policy": {
+    "blocking": "Only structural geometry corruption blocks release: missing/empty/non-polygon geometry, invalid EPSG:4326 coordinates, malformed rings, invalid polygon topology, duplicate master identity/geometry, or missing master geometry.",
+    "report_only": "Parent-child bounding-box containment anomalies are observations because administrative exceptions and disputed/de-facto representations require semantic review. No geometry is modified or repaired."
+  },
+  "sources": {
+    "RO": "public/geo/current/ro-administrative.geojson",
+    "MD": "public/geo/current/md-administrative.geojson"
+  },
+  "stats": {
+    "RO": {
+      "feature_count": 3232,
+      "coordinate_count": 1743851,
+      "ring_count": 3292
+    },
+    "MD": {
+      "feature_count": 2595,
+      "coordinate_count": 761799,
+      "ring_count": 3274
+    }
+  },
+  "blocking_issue_count": 0,
+  "observation_count": 15,
+  "blocking_issues": [],
+  "observations": [
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r1748490",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r1813306",
+      "child_bbox": [
+        28.7451209,
+        46.9203488,
+        28.9720397,
+        47.0796263
+      ],
+      "parent_bbox": [
+        28.8386145,
+        46.9203488,
+        28.9720397,
+        47.0112768
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967259",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19113736",
+      "child_bbox": [
+        28.9446507,
+        46.3127504,
+        29.0035545,
+        46.3546566
+      ],
+      "parent_bbox": [
+        28.9164604,
+        46.2594504,
+        29.0035545,
+        46.354654
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967626",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r12207955",
+      "child_bbox": [
+        27.8375389,
+        47.7286947,
+        27.9835402,
+        47.8006525
+      ],
+      "parent_bbox": [
+        27.8375297,
+        47.728628,
+        27.973984,
+        47.8006525
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18966913",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19100177",
+      "child_bbox": [
+        28.4335236,
+        47.1827946,
+        28.4820795,
+        47.1990029
+      ],
+      "parent_bbox": [
+        28.4094829,
+        47.1828264,
+        28.4841153,
+        47.2195217
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967052",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19115707",
+      "child_bbox": [
+        28.1745989,
+        45.877467,
+        28.2423196,
+        45.9334782
+      ],
+      "parent_bbox": [
+        28.1745585,
+        45.8774944,
+        28.3002146,
+        45.9495698
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967249",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19114022",
+      "child_bbox": [
+        28.1817136,
+        46.2691474,
+        28.2237575,
+        46.2848008
+      ],
+      "parent_bbox": [
+        28.1816608,
+        46.2684246,
+        28.2236843,
+        46.2847167
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967274",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r10624608",
+      "child_bbox": [
+        27.9810977,
+        47.3559442,
+        28.0220629,
+        47.382697
+      ],
+      "parent_bbox": [
+        27.9602466,
+        47.3561189,
+        28.0220543,
+        47.3825994
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967755",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19115707",
+      "child_bbox": [
+        28.2342313,
+        45.9302442,
+        28.2488394,
+        45.9495784
+      ],
+      "parent_bbox": [
+        28.1745585,
+        45.8774944,
+        28.3002146,
+        45.9495698
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967196",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19055801",
+      "child_bbox": [
+        27.5671999,
+        48.2266125,
+        27.6360239,
+        48.2576984
+      ],
+      "parent_bbox": [
+        27.5672387,
+        48.2265896,
+        27.6362033,
+        48.2576792
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967786",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19068255",
+      "child_bbox": [
+        27.7829924,
+        48.010094,
+        27.8482947,
+        48.0496974
+      ],
+      "parent_bbox": [
+        27.7829145,
+        48.0103415,
+        27.8482563,
+        48.0496659
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18966972",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r10628594",
+      "child_bbox": [
+        27.7079218,
+        47.6109069,
+        27.7305621,
+        47.6257385
+      ],
+      "parent_bbox": [
+        27.6736466,
+        47.5381641,
+        27.7680935,
+        47.6255847
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967825",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19072238",
+      "child_bbox": [
+        28.369995,
+        47.8567374,
+        28.4000555,
+        47.8770482
+      ],
+      "parent_bbox": [
+        28.3693208,
+        47.8567408,
+        28.4011076,
+        47.8835954
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18968068",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r12496849",
+      "child_bbox": [
+        29.2729059,
+        46.8212197,
+        29.2856264,
+        46.8414285
+      ],
+      "parent_bbox": [
+        29.1652894,
+        46.82125,
+        29.2939818,
+        46.918817
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967148",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r19038433",
+      "child_bbox": [
+        27.4471054,
+        48.3967174,
+        27.5006937,
+        48.4225575
+      ],
+      "parent_bbox": [
+        27.4471128,
+        48.3968318,
+        27.5006937,
+        48.4305976
+      ]
+    },
+    {
+      "jurisdiction": "MD",
+      "entity_id": "osm-r18967694",
+      "issue": "child_bbox_exceeds_parent_bbox",
+      "parent_id": "osm-r10624608",
+      "child_bbox": [
+        27.9602175,
+        47.3673551,
+        27.9863379,
+        47.3818255
+      ],
+      "parent_bbox": [
+        27.9602466,
+        47.3561189,
+        28.0220543,
+        47.3825994
+      ]
+    }
+  ]
+}

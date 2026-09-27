@@ -1,13 +1,123 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T11:28:04.117Z",
+  "generated_at": "2026-09-27T20:37:40.668Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-e0db2fb869fcf3d3",
+  "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "ab4eb91fadec72a323bdc1d8657451f71ba15a7b3926b7cf5a0d4223f90207e0",
+  "manifest_sha256": "0c9ed50433e66d952dfb244e0c4bec7ccf69bab2dc620139b715eee1bcb18ac2",
   "status": "PASS",
-  "policy": "The public ACTUAL RO+MD release is publishable only when both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.",
+  "policy": "The public ACTUAL RO+MD release is publishable only when master topology has no blocking structural corruption, both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.",
   "checks": [
+    {
+      "name": "master_topology_audit_passes",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "blocking_issue_count": 0,
+        "observation_count": 15,
+        "source": "data/current/actual-topology-audit.json",
+        "mutation": false
+      }
+    },
+    {
+      "name": "manifest_quality_gates_pass",
+      "ok": true,
+      "detail": {
+        "topology": "PASS",
+        "regression": "PASS",
+        "structural_completeness": "PASS",
+        "structural_blocking_issue_count": 0,
+        "official_identity": "PASS",
+        "official_identity_blocking_issue_count": 0
+      }
+    },
+    {
+      "name": "settlement_policy_is_explicit_and_fail_closed",
+      "ok": true,
+      "detail": {
+        "schema_version": 1,
+        "mode": "ACTUAL",
+        "scope": "settlements_and_component_localities",
+        "common_requirements": {
+          "exhaustive_polygon_coverage_required": false,
+          "missing_official_settlement_polygon_is_blocking": false,
+          "geometry_source": "OpenStreetMap",
+          "allowed_geometry_types": [
+            "Polygon",
+            "MultiPolygon"
+          ],
+          "current_status_required": true,
+          "geometry_coordinate_mutation_allowed": false,
+          "official_registry_remains_identity_authority": true,
+          "unreviewed_identity_inference_allowed": false
+        }
+      }
+    },
+    {
+      "name": "manifest_records_current_settlement_policy",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "path": "data/sources/actual-settlement-policy.json",
+          "schema_version": 1,
+          "policy_version": "2026-09-27",
+          "scope": "settlements_and_component_localities",
+          "sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843"
+        },
+        "actual": {
+          "schema_version": 1,
+          "policy_version": "2026-09-27",
+          "scope": "settlements_and_component_localities",
+          "sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843"
+        }
+      }
+    },
+    {
+      "name": "md_semantic_bridge_passes",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "summary": {
+          "status_5_count": 13,
+          "status_3_count": 54,
+          "status_8_count": 910,
+          "classified_count": 977,
+          "level_2_municipality_count": 2,
+          "level_1_municipality_count": 11,
+          "town_count": 54,
+          "commune_count": 412,
+          "independent_village_count": 498,
+          "issue_count": 0
+        }
+      }
+    },
+    {
+      "name": "manifest_records_current_md_semantic_bridge",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "path": "data/current/md-cuatm-semantic-bridge.json",
+          "status": "PASS",
+          "summary": {
+            "status_5_count": 13,
+            "status_3_count": 54,
+            "status_8_count": 910,
+            "classified_count": 977,
+            "level_2_municipality_count": 2,
+            "level_1_municipality_count": 11,
+            "town_count": 54,
+            "commune_count": 412,
+            "independent_village_count": 498,
+            "issue_count": 0
+          },
+          "sha256": "b587bd9a00563ba34123030ef0a1748b4218b1c9427302492b0043034a044f42"
+        },
+        "actual": {
+          "status": "PASS",
+          "sha256": "b587bd9a00563ba34123030ef0a1748b4218b1c9427302492b0043034a044f42"
+        }
+      }
+    },
     {
       "name": "manifest_mode_is_actual",
       "ok": true,
@@ -52,41 +162,41 @@
       "name": "release_fingerprint_matches_current_components",
       "ok": true,
       "detail": {
-        "expected": "e0db2fb869fcf3d3d70bd475939c6e6b02838865208a2f21b76bc99a086d205e",
-        "actual": "e0db2fb869fcf3d3d70bd475939c6e6b02838865208a2f21b76bc99a086d205e"
+        "expected": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+        "actual": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc"
       }
     },
     {
       "name": "snapshot_id_matches_release_fingerprint",
       "ok": true,
       "detail": {
-        "expected": "actual-e0db2fb869fcf3d3",
-        "actual": "actual-e0db2fb869fcf3d3"
+        "expected": "actual-5383ff3db7cf3f67",
+        "actual": "actual-5383ff3db7cf3f67"
       }
     },
     {
       "name": "manifest_generated_at_matches_snapshot_watermark",
       "ok": true,
       "detail": {
-        "expected": "2026-09-27T11:27:57.523Z",
-        "actual": "2026-09-27T11:27:57.523Z"
+        "expected": "2026-09-27T20:37:28.323Z",
+        "actual": "2026-09-27T20:37:28.323Z"
       }
     },
     {
       "name": "catalog_declared_entity_count_is_consistent",
       "ok": true,
       "detail": {
-        "declared": 5822,
-        "actual": 5822
+        "declared": 5827,
+        "actual": 5827
       }
     },
     {
       "name": "manifest_catalog_entity_count_is_current",
       "ok": true,
       "detail": {
-        "manifest": 5822,
-        "catalog_declared": 5822,
-        "actual": 5822
+        "manifest": 5827,
+        "catalog_declared": 5827,
+        "actual": 5827
       }
     },
     {
@@ -102,11 +212,11 @@
       "detail": {
         "manifest": {
           "RO": 3232,
-          "MD": 2590
+          "MD": 2595
         },
         "actual": {
           "RO": 3232,
-          "MD": 2590
+          "MD": 2595
         }
       }
     },
@@ -139,7 +249,7 @@
       "ok": true,
       "detail": {
         "RO": 3232,
-        "MD": 2590
+        "MD": 2595
       }
     },
     {
@@ -148,11 +258,11 @@
       "detail": {
         "manifest": {
           "RO": 3232,
-          "MD": 2590
+          "MD": 2595
         },
         "actual": {
           "RO": 3232,
-          "MD": 2590
+          "MD": 2595
         }
       }
     },
@@ -161,8 +271,8 @@
       "ok": true,
       "detail": {
         "contract": "actual-public-entity-v1",
-        "public_count": 5822,
-        "catalog_count": 5822,
+        "public_count": 5827,
+        "catalog_count": 5827,
         "missing": [],
         "unexpected": []
       }
@@ -187,11 +297,11 @@
       "detail": {
         "public": {
           "RO": 3232,
-          "MD": 2590
+          "MD": 2595
         },
         "actual": {
           "RO": 3232,
-          "MD": 2590
+          "MD": 2595
         }
       }
     },
@@ -208,8 +318,8 @@
       "detail": {
         "issues": [],
         "missing": [],
-        "geometry_count": 5822,
-        "entity_count": 5822
+        "geometry_count": 5827,
+        "entity_count": 5827
       }
     },
     {
@@ -217,7 +327,7 @@
       "ok": true,
       "detail": {
         "issues": [],
-        "checked_geometry_count": 5822
+        "checked_geometry_count": 5827
       }
     },
     {
@@ -226,11 +336,11 @@
       "detail": {
         "public": {
           "RO": 3232,
-          "MD": 2590
+          "MD": 2595
         },
         "master": {
           "RO": 3232,
-          "MD": 2590
+          "MD": 2595
         }
       }
     },
@@ -242,26 +352,25 @@
           "path": "public/data/actual-entities.json",
           "contract": "actual-public-entity-v1",
           "schema_version": 1,
-          "generated_at": "2026-09-27T11:25:31.146Z",
-          "entity_count": 5822,
+          "generated_at": "2026-09-27T20:33:04.478Z",
+          "entity_count": 5827,
           "entity_count_by_jurisdiction": {
             "RO": 3232,
-            "MD": 2590
+            "MD": 2595
           },
           "legal_identity_status_counts": {
-            "reconciled": 5644,
-            "reviewed_representation_without_legal_identity": 1,
+            "reconciled": 5692,
             "outside_current_legal_registry": 123,
             "unresolved": 1,
-            "not_bound_to_official_registry": 53
+            "not_bound_to_official_registry": 11
           },
-          "sha256": "64611373f7e304b871aafdd0868c05f08bd50baa479eca70aea67cc9fbc520de",
+          "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
           "geometry_tiers": {
             "RO": {
               "overview": {
                 "path": "public/geo/actual/ro-overview.geojson",
                 "feature_count": 42,
-                "sha256": "7416d1d8cfd318d13b2b250447b06b6c58ddc7ff65840455b713aa4acbe692f9"
+                "sha256": "27e0873cf07c1eaa19e2447c09f32f951d9b93b0746a501acce1de57a9e8eedd"
               },
               "local": {
                 "path": "public/geo/actual/ro-local.geojson",
@@ -278,25 +387,25 @@
               "overview": {
                 "path": "public/geo/actual/md-overview.geojson",
                 "feature_count": 37,
-                "sha256": "54cb59d144a72806bb7ef19cddb50b74ae24f3547bfeadcfd3e59d36971317f0"
+                "sha256": "3aa8866f5da806eb7eb99d94fbba562e7ff598119a8ff32d2fc51da50e31ca72"
               },
               "local": {
                 "path": "public/geo/actual/md-local.geojson",
-                "feature_count": 982,
-                "sha256": "d96dfe72cafadf14258483c0cb97c6c079c327a7ef6f757a014c78cfb7929c1e"
+                "feature_count": 987,
+                "sha256": "c07dcd7750eeda984e5cc98733a46694f3e5ecbcc90ef6d5d1355871c8865ce0"
               },
               "detail": {
                 "path": "public/geo/actual/md-detail.geojson",
                 "feature_count": 1571,
-                "sha256": "4453f10cbd1c2b5d0f95adfb8ba9c380e1e0a82ed69af6fcd37a877b8af7ad31"
+                "sha256": "98c1e99771c36bb89a7af13ef3a7a05d8c65a04fcf4ced807d071668f69370e0"
               }
             }
           }
         },
         "actual": {
           "contract": "actual-public-entity-v1",
-          "entity_count": 5822,
-          "sha256": "64611373f7e304b871aafdd0868c05f08bd50baa479eca70aea67cc9fbc520de"
+          "entity_count": 5827,
+          "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776"
         }
       }
     },
@@ -305,12 +414,12 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "RO": "2026-09-27T11:27:57.523Z",
-          "MD": "2026-09-27T11:26:58.906Z"
+          "RO": "2026-09-27T20:37:28.323Z",
+          "MD": "2026-09-27T20:37:27.458Z"
         },
         "actual": {
-          "RO": "2026-09-27T11:27:57.523Z",
-          "MD": "2026-09-27T11:26:58.906Z"
+          "RO": "2026-09-27T20:37:28.323Z",
+          "MD": "2026-09-27T20:37:27.458Z"
         }
       }
     },
@@ -345,13 +454,13 @@
           "authority": "Biroul Național de Statistică al Republicii Moldova",
           "path": "data/sources/cuatm-current.json",
           "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
-          "fetched_at": "2026-09-27T11:26:58.553Z",
+          "fetched_at": "2026-09-27T20:37:24.316Z",
           "record_count": 1721,
-          "sha256": "9fd4a17d96c7c1d8ebe46e617d83229c91b8020f7b737f6a69389ed51f7234d0"
+          "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575"
         },
         "actual": {
           "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
-          "fetched_at": "2026-09-27T11:26:58.553Z",
+          "fetched_at": "2026-09-27T20:37:24.316Z",
           "record_count": 1721
         }
       }

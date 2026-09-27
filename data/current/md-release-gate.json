@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T11:26:58.906Z",
+  "generated_at": "2026-09-27T20:37:27.458Z",
   "jurisdiction": "MD",
   "status": "PASS",
   "policy": "Release gate permits only explicitly documented exception classes and the sole unresolved identity relation 12104636. New exception classes or identities fail the gate.",
@@ -20,11 +20,14 @@
       }
     },
     {
-      "name": "chitcani_semantic_classification",
+      "name": "chitcani_reviewed_positive_identity",
       "ok": true,
       "detail": {
-        "review_status": "resolved_semantic_classification",
-        "classification_action": "chitcani_de_facto_administrative_representation"
+        "review_status": "resolved_positive_identity",
+        "classification_action": "chitcani_de_facto_administrative_representation",
+        "reconciliation_action": "reviewed_override_to_cuatm_identity_only",
+        "official_legal_id": "7612",
+        "geometry_equivalence_asserted": false
       }
     },
     {
