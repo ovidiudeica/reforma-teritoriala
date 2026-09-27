@@ -6,11 +6,11 @@
     "MD"
   ],
   "policy": "Fail closed on any loss, invention, contradiction or propagation drift of positive SIRUTA/CUATM identity and bridged MD semantic subtype across catalog/reconciliation, public index and public geometry. Geometry coordinates are not modified.",
-  "entity_count": 5829,
-  "expected_positive_official_identity_count": 5692,
+  "entity_count": 5830,
+  "expected_positive_official_identity_count": 5693,
   "legal_identity_status_counts": {
     "not_bound_to_official_registry": 13,
-    "reconciled": 5692,
+    "reconciled": 5693,
     "unresolved": 1,
     "outside_current_legal_registry": 123
   },
@@ -87450,6 +87450,21 @@
       "public_official_id": null,
       "public_semantic_type": null,
       "legal_identity_status": "not_bound_to_official_registry",
+      "master_geometry": true,
+      "public_entity": true,
+      "public_geometry": true
+    },
+    {
+      "entity_id": "siruta-u64096",
+      "jurisdiction": "RO",
+      "name": "BREȚCU",
+      "expected_official_registry": "SIRUTA",
+      "expected_official_id": "64096",
+      "expected_semantic_type": null,
+      "public_official_registry": "SIRUTA",
+      "public_official_id": "64096",
+      "public_semantic_type": "commune",
+      "legal_identity_status": "reconciled",
       "master_geometry": true,
       "public_entity": true,
       "public_geometry": true
