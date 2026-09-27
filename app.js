@@ -18,6 +18,30 @@ const snapshots={
  }
 };
 
+const actualRelease={
+ manifest:'data/current/actual-release-manifest.json',
+ gate:'data/current/actual-release-gate.json'
+};
+const actualReleasePromise=(async()=>{
+ const status=document.getElementById('actual-release-status');
+ try{
+  const [manifestResponse,gateResponse]=await Promise.all([
+   fetch(actualRelease.manifest,{cache:'no-cache'}),
+   fetch(actualRelease.gate,{cache:'no-cache'})
+  ]);
+  if(!manifestResponse.ok||!gateResponse.ok) throw new Error('Release ACTUAL indisponibil');
+  const [manifest,gate]=await Promise.all([manifestResponse.json(),gateResponse.json()]);
+  if(gate.status!=='PASS') throw new Error('Release ACTUAL nu a trecut gate-ul combinat');
+  if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id) throw new Error('Manifestul ACTUAL nu corespunde gate-ului combinat');
+  if(status) status.textContent='ACTUAL: '+manifest.snapshot_id+' · release validat';
+  return {manifest,gate};
+ }catch(e){
+  if(status) status.textContent='ACTUAL: release indisponibil sau nevalidat';
+  console.error('Nu s-a putut valida release-ul ACTUAL',e);
+  throw e;
+ }
+})();
+
 function popup(feature){
  const p=feature.properties||{}, t=p.tags||p;
  const name=t['name:ro']||t.name||'Fără denumire';
@@ -28,7 +52,8 @@ async function load(key){
  const group=groups[key], source=snapshots[key], status=document.getElementById(key+'-source-status');
  group.clearLayers();
  try{
-  const [data,gate]=await Promise.all([
+  const [release,data,gate]=await Promise.all([
+   actualReleasePromise,
    fetch(source.data,{cache:'no-cache'}),
    fetch(source.gate,{cache:'no-cache'})
   ]);
@@ -37,7 +62,7 @@ async function load(key){
   if(gateData.status!=='PASS') throw new Error('Snapshot '+source.label+' nu a trecut release gate');
   const geo=await data.json();
   const stamp=gateData.generated_at?new Date(gateData.generated_at).toLocaleString('ro-RO'):'—';
-  if(status) status.textContent=source.label+': snapshot local validat · '+stamp;
+  if(status) status.textContent=source.label+': '+release.manifest.snapshot_id+' · jurisdicție validată · '+stamp;
   L.geoJSON(geo,{style,onEachFeature:(f,l)=>{
    l.bindPopup(popup(f));
    l.on({mouseover:e=>e.target.setStyle(hover),mouseout:e=>e.target.setStyle(style)});
