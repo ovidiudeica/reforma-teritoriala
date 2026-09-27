@@ -239,6 +239,7 @@ const report={
  checks,
  failures
 };
-await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify(report,null,2));
+const readOnly=process.env.ACTUAL_RELEASE_GATE_READ_ONLY==='1';
+if(!readOnly)await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({...report,read_only:readOnly},null,2));
 if(failures.length)process.exit(1);
