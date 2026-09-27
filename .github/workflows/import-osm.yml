@@ -13,7 +13,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: osm-administrative-import
+  group: administrative-data-writers
   cancel-in-progress: false
 jobs:
   import:
