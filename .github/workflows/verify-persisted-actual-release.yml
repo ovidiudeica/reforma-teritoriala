@@ -1,0 +1,76 @@
+name: Verify persisted ACTUAL release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-persisted-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Require a clean checkout
+        run: |
+          test -z "$(git status --porcelain --untracked-files=all)"
+
+      - name: Verify persisted release marker
+        run: |
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {readFile} from 'node:fs/promises';
+
+          const markerPath='data/current/actual-release-persisted.json';
+          const manifestPath='data/current/actual-release-manifest.json';
+          const [markerText,manifestBytes]=await Promise.all([
+            readFile(markerPath,'utf8'),
+            readFile(manifestPath)
+          ]);
+          const marker=JSON.parse(markerText);
+          const manifest=JSON.parse(manifestBytes.toString('utf8'));
+          const manifestSha=createHash('sha256').update(manifestBytes).digest('hex');
+
+          const failures=[];
+          if(marker.schema_version!==1)failures.push({issue:'marker_schema_version',actual:marker.schema_version});
+          if(marker.validated_release_gate_status!=='PASS')failures.push({issue:'persisted_gate_not_pass',actual:marker.validated_release_gate_status});
+          if(marker.snapshot_id!==manifest.snapshot_id)failures.push({issue:'snapshot_id_mismatch',marker:marker.snapshot_id,manifest:manifest.snapshot_id});
+          if(marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256)failures.push({issue:'release_fingerprint_mismatch',marker:marker.release_fingerprint_sha256,manifest:manifest.release_fingerprint_sha256});
+          if(marker.manifest_sha256!==manifestSha)failures.push({issue:'manifest_sha256_mismatch',marker:marker.manifest_sha256,actual:manifestSha});
+
+          const report={
+            status:failures.length?'FAIL':'PASS',
+            snapshot_id:manifest.snapshot_id??null,
+            release_fingerprint_sha256:manifest.release_fingerprint_sha256??null,
+            manifest_sha256:manifestSha,
+            failures
+          };
+          console.log(JSON.stringify(report,null,2));
+          if(failures.length)process.exit(1);
+          NODE
+
+      - name: Verify exact persisted snapshot bytes
+        env:
+          ACTUAL_RELEASE_GATE_READ_ONLY: "1"
+        run: node scripts/process/audit-actual-release-gate.mjs
+
+      - name: Prove verification is read-only
+        run: |
+          if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
+            echo "Read-only verification changed the working tree:"
+            git status --short --untracked-files=all
+            git diff -- .
+            exit 1
+          fi
