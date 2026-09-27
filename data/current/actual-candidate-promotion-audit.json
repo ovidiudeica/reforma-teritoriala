@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T22:03:21.302Z",
+  "mode": "ACTUAL_CANDIDATE_PROMOTION",
+  "status": "PASS",
+  "base_ref": "origin/main",
+  "base_release": {
+    "snapshot_id": "actual-5383ff3db7cf3f67",
+    "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+    "manifest_sha256": "0c9ed50433e66d952dfb244e0c4bec7ccf69bab2dc620139b715eee1bcb18ac2"
+  },
+  "candidate": {
+    "snapshot_id": "actual-538d3d0a45bf35cf",
+    "release_fingerprint_sha256": "538d3d0a45bf35cf9c2ce45c5f393ca79f6273a5ff2422a28cc521af3eafb21f",
+    "manifest_sha256": "c56d4f820a54dd59f1d19c76d07bd94626a3799a13abf95b8c0c5392c03b5c04",
+    "release_gate_status": "PASS"
+  },
+  "review_required": false,
+  "substantive_change_count": 0,
+  "confirmation": "PROMOTE actual-538d3d0a45bf35cf",
+  "failures": [],
+  "policy": "Promotion is permitted only for the explicitly acknowledged candidate snapshot, against the unchanged persisted base release, with exact candidate manifest/diff bytes and a passing release gate."
+}
