@@ -6,6 +6,7 @@ on:
       - 'public/geo/current/**'
       - 'data/current/entities.json'
       - 'scripts/process/audit-actual-topology.mjs'
+      - 'scripts/process/audit-actual-release-gate.mjs'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/actual-topology-audit.yml'
@@ -24,6 +25,7 @@ jobs:
           node-version: 20
       - run: npm install --no-audit --no-fund
       - run: npm run audit:actual-topology
+      - run: npm run audit:actual-release-gate
       - name: Upload topology report
         if: always()
         uses: actions/upload-artifact@v4
