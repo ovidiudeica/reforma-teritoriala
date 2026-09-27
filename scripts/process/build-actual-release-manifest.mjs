@@ -21,7 +21,8 @@ const PATHS={
  md_official:'data/sources/cuatm-current.json',
  md_individual_review:'data/sources/md-cuatm-individual-review.json',
  topology_audit:'data/current/actual-topology-audit.json',
- regression_audit:'data/current/actual-regression-audit.json'
+ regression_audit:'data/current/actual-regression-audit.json',
+ structural_completeness_audit:'data/current/actual-structural-completeness-audit.json'
 };
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const buffers=Object.fromEntries(await Promise.all(Object.entries(PATHS).map(async([key,path])=>[key,await readFile(path)])));
@@ -37,6 +38,7 @@ const siruta=json('ro_official');
 const cuatm=json('md_official');
 const topologyAudit=json('topology_audit');
 const regressionAudit=json('regression_audit');
+const structuralCompletenessAudit=json('structural_completeness_audit');
 
 const jurisdictions=['RO','MD'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -116,7 +118,8 @@ const manifest={
  },
  quality_gates:{
   topology:{path:PATHS.topology_audit,status:topologyAudit.status??null,blocking_issue_count:topologyAudit.blocking_issue_count??null,sha256:components.topology_audit.sha256},
-  regression:{path:PATHS.regression_audit,status:regressionAudit.status??null,blocking_issue_count:regressionAudit.blocking_issue_count??null,sha256:components.regression_audit.sha256}
+  regression:{path:PATHS.regression_audit,status:regressionAudit.status??null,blocking_issue_count:regressionAudit.blocking_issue_count??null,sha256:components.regression_audit.sha256},
+  structural_completeness:{path:PATHS.structural_completeness_audit,status:structuralCompletenessAudit.status??null,blocking_gap_count:structuralCompletenessAudit.blocking_gap_count??null,sha256:components.structural_completeness_audit.sha256}
  },
  jurisdiction_gates:{
   RO:{path:PATHS.ro_gate,status:roGate.status??null,generated_at:roGate.generated_at??null,sha256:components.ro_gate.sha256},
