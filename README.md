@@ -48,3 +48,10 @@ Fiecare obiect teritorial va păstra, pe cât posibil:
 Pentru blocul actual, una dintre sursele principale va fi OpenStreetMap, inclusiv geometriile administrative exportate prin OSM-Boundaries.
 
 Datele istorice vor fi documentate separat și nu vor fi deduse automat din snapshot-uri OSM.
+
+## Release ACTUAL
+
+Snapshot-ul public ACTUAL RO+MD este identificat prin `data/current/actual-release-manifest.json`. Manifestul fixează prin SHA-256 catalogul curent, modelul administrativ, GeoJSON-urile publice, gate-urile RO/MD și snapshot-urile oficiale SIRUTA/CUATM și generează un `snapshot_id` derivat din conținut.
+
+`data/current/actual-release-gate.json` validează fail-closed că ambele gate-uri jurisdicționale sunt `PASS`, că manifestul corespunde exact fișierelor curente și că numărătorile, versiunile surselor și fingerprint-ul nu au derivat. Aplicația publică afișează modul ACTUAL numai când acest gate combinat este `PASS`.
+
