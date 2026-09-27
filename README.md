@@ -55,3 +55,15 @@ Snapshot-ul public ACTUAL RO+MD este identificat prin `data/current/actual-relea
 
 `data/current/actual-release-gate.json` validează fail-closed că ambele gate-uri jurisdicționale sunt `PASS`, că manifestul corespunde exact fișierelor curente și că numărătorile, versiunile surselor și fingerprint-ul nu au derivat. Aplicația publică afișează modul ACTUAL numai când acest gate combinat este `PASS`.
 
+## Contract public ACTUAL
+
+Aplicația nu consumă direct GeoJSON-urile master de zeci de MB. `scripts/process/build-actual-public-data.mjs` generează:
+
+- `public/data/actual-entities.json` — indexul public de entități, conform `actual-public-entity-v1`;
+- `public/geo/actual/{ro,md}-overview.geojson` — limite regionale;
+- `public/geo/actual/{ro,md}-local.geojson` — UAT-uri locale;
+- `public/geo/actual/{ro,md}-detail.geojson` — sectoare, localități și reprezentări de detaliu.
+
+Contractul separă explicit `legal` de `representation`. O identitate SIRUTA/CUATM este publicată numai când reconcilierea oficială este pozitivă; lipsa unei identități este păstrată ca `null`, nu dedusă din tagurile OSM. GeoJSON-urile publice sunt simplificate exclusiv pentru afișare și păstrează legătura prin `entity_id` către catalogul master.
+
+Straturile web și indexul public sunt incluse în fingerprint-ul `actual-release-manifest.json`; gate-ul ACTUAL verifică fail-closed cardinalitatea 1:1 între catalog, contract și geometriile publice.
