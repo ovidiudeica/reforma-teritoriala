@@ -70,6 +70,9 @@ jobs:
           ACTUAL_RELEASE_GATE_READ_ONLY: "1"
         run: node scripts/process/audit-actual-release-gate.mjs
 
+      - name: Regression-test NO_CHANGE and synthetic CHANGE lifecycle
+        run: npm run test:actual-candidate-lifecycle
+
       - name: Prove verification is read-only
         run: |
           if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
