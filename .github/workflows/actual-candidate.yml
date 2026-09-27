@@ -13,6 +13,11 @@ on:
         required: false
         type: boolean
         default: false
+      refresh_md_cuatm:
+        description: 'Refresh official MD CUATM source before reconciliation'
+        required: false
+        type: boolean
+        default: false
       source_trigger:
         description: 'Audit label for the source that requested this candidate build'
         required: false
@@ -25,6 +30,10 @@ on:
         type: string
         default: ''
       refresh_ro_siruta:
+        required: false
+        type: boolean
+        default: false
+      refresh_md_cuatm:
         required: false
         type: boolean
         default: false
@@ -93,11 +102,21 @@ jobs:
         timeout-minutes: 5
         run: npm run import:ro-siruta
 
+      - name: Refresh official MD CUATM source inside candidate workspace
+        if: inputs.refresh_md_cuatm == true
+        timeout-minutes: 5
+        env:
+          CUATM_REQUEST_TIMEOUT_MS: '60000'
+          CUATM_RETRIES: '2'
+          CUATM_RETRY_BACKOFF_MS: '3000'
+        run: npm run import:md-cuatm
+
       - name: Record candidate source trigger
         run: |
           echo "### Candidate source trigger" >> "$GITHUB_STEP_SUMMARY"
           echo "- Trigger: ${{ inputs.source_trigger }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Regenerate OSM ACTUAL master
         timeout-minutes: 20
