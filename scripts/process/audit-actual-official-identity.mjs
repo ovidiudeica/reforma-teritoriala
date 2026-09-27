@@ -28,6 +28,11 @@ for(const e of entities){
  let expected=null;
  if(e.jurisdiction==='RO'&&e.legal?.registry==='SIRUTA'&&e.legal?.id)expected={registry:'SIRUTA',id:String(e.legal.id)};
  if(e.jurisdiction==='MD'){const r=mdRecon.get(e.id);if(r?.legal_id){const s=mdSemantic.get(String(r.legal_id));expected={registry:'CUATM',id:String(r.legal_id),type:s?.semantic_type||null};}}
+ if(e.jurisdiction==='MD'&&e.legal?.registry==='CUATM'){
+  if(!expected||String(e.legal.id)!==expected.id)issue(e,'catalog_md_legal_identity_mismatch',{expected,actual:e.legal});
+  if(expected?.type&&e.legal.type!==expected.type)issue(e,'catalog_md_semantic_type_mismatch',{expected_type:expected.type,actual_type:e.legal.type??null});
+  if(e.id==='osm-r6879649'&&e.legal.geometry_equivalence_asserted!==false)issue(e,'chitcani_catalog_geometry_equivalence_not_false',{actual:e.legal.geometry_equivalence_asserted??null});
+ }
  if(!m)issue(e,'master_geometry_missing');
  if(!p)issue(e,'public_entity_missing');
  if(!t)issue(e,'public_tier_geometry_missing');
