@@ -190,6 +190,10 @@ function assignParents(entities,featuresById,warnings=[]){
 function finalizeAfterParents(entities){
  const byId=new Map(entities.map(e=>[e.id,e]));
  for(const e of entities){
+  if(e.jurisdiction==='MD'&&e.osm.admin_level===9&&e.type==='chisinau_sector'){
+   const parent=byId.get(e.parent_id);
+   if(parent?.osm?.relation_id===1691801){e.classification={version:CLASSIFIER_VERSION,confidence:'high',reason:'Chișinău sector validated by explicit CUATM code and municipality parent'};e.review_required=false;}
+  }
   if(e.jurisdiction!=='RO'||e.osm.admin_level!==9)continue;
   const n=norm(e.name), parent=byId.get(e.parent_id);
   const parentName=norm(parent?.name);
