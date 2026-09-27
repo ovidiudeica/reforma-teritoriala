@@ -48,6 +48,7 @@ const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!
 
 check('master_topology_audit_passes',topologyRun.status===0&&topology?.status==='PASS',{status:topology?.status??null,blocking_issue_count:topology?.blocking_issue_count??null,observation_count:topology?.observation_count??null,process_status:topologyRun.status,error:topologyRun.error?String(topologyRun.error):null});
 
+check('manifest_quality_gates_pass',manifest.quality_gates?.topology?.status==='PASS'&&manifest.quality_gates?.regression?.status==='PASS',{topology:manifest.quality_gates?.topology?.status??null,regression:manifest.quality_gates?.regression?.status??null});
 check('manifest_mode_is_actual',manifest.mode==='ACTUAL',{mode:manifest.mode});
 check('manifest_jurisdictions_are_exactly_ro_md',
  Array.isArray(manifest.jurisdictions)&&manifest.jurisdictions.length===2&&manifest.jurisdictions[0]==='RO'&&manifest.jurisdictions[1]==='MD',
