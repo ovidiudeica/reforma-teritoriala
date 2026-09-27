@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T11:00:39.498Z",
+  "generated_at": "2026-09-27T11:10:49.332Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-8abd98dc764b77f1",
+  "snapshot_id": "actual-6075aed923de66ec",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "902ec270f9387fedb4fff21f4513dea24d7aec59707783823bed2c615d98555b",
+  "manifest_sha256": "99935a0bd19a9348ef45a33b9626fc35684a1bf9d6458de7208f34358437663a",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity. Any drift fails closed.",
   "checks": [
@@ -52,24 +52,24 @@
       "name": "release_fingerprint_matches_current_components",
       "ok": true,
       "detail": {
-        "expected": "8abd98dc764b77f19001e57ca2323477c5f3dcd12ce05dd08a5445c20d918a9f",
-        "actual": "8abd98dc764b77f19001e57ca2323477c5f3dcd12ce05dd08a5445c20d918a9f"
+        "expected": "6075aed923de66ec79747395ab0148aac5220d467dd755fc0af132549cadb8df",
+        "actual": "6075aed923de66ec79747395ab0148aac5220d467dd755fc0af132549cadb8df"
       }
     },
     {
       "name": "snapshot_id_matches_release_fingerprint",
       "ok": true,
       "detail": {
-        "expected": "actual-8abd98dc764b77f1",
-        "actual": "actual-8abd98dc764b77f1"
+        "expected": "actual-6075aed923de66ec",
+        "actual": "actual-6075aed923de66ec"
       }
     },
     {
       "name": "manifest_generated_at_matches_snapshot_watermark",
       "ok": true,
       "detail": {
-        "expected": "2026-09-27T11:00:36.517Z",
-        "actual": "2026-09-27T11:00:36.517Z"
+        "expected": "2026-09-27T11:10:44.436Z",
+        "actual": "2026-09-27T11:10:44.436Z"
       }
     },
     {
@@ -196,6 +196,13 @@
       }
     },
     {
+      "name": "md_reviewed_public_identity_status_is_stable",
+      "ok": true,
+      "detail": {
+        "issues": []
+      }
+    },
+    {
       "name": "tiered_public_geometry_matches_public_contract",
       "ok": true,
       "detail": {
@@ -227,7 +234,7 @@
           "path": "public/data/actual-entities.json",
           "contract": "actual-public-entity-v1",
           "schema_version": 1,
-          "generated_at": "2026-09-27T10:58:26.122Z",
+          "generated_at": "2026-09-27T11:09:46.146Z",
           "entity_count": 5822,
           "entity_count_by_jurisdiction": {
             "RO": 3232,
@@ -235,11 +242,12 @@
           },
           "legal_identity_status_counts": {
             "reconciled": 5644,
-            "unresolved": 2,
+            "reviewed_representation_without_legal_identity": 1,
             "outside_current_legal_registry": 123,
+            "unresolved": 1,
             "not_bound_to_official_registry": 53
           },
-          "sha256": "12c508920e0963397a72164fbbd9fe04882b96cb531fa2ba24664078668829a8",
+          "sha256": "d04f6f7786dbc65840053ddff6b4c24d6cc84f64f4c06f293ccd10090bc1de95",
           "geometry_tiers": {
             "RO": {
               "overview": {
@@ -267,7 +275,7 @@
               "local": {
                 "path": "public/geo/actual/md-local.geojson",
                 "feature_count": 982,
-                "sha256": "e80e5b7d33437aa18f61a0d0b752365f4855d91a47ecd55e6872d3e65d89d662"
+                "sha256": "f5ecd5ee5b9049dd4982e593ac50fec17dd899bdf9493d2bc45434372aef5ae3"
               },
               "detail": {
                 "path": "public/geo/actual/md-detail.geojson",
@@ -280,7 +288,7 @@
         "actual": {
           "contract": "actual-public-entity-v1",
           "entity_count": 5822,
-          "sha256": "12c508920e0963397a72164fbbd9fe04882b96cb531fa2ba24664078668829a8"
+          "sha256": "d04f6f7786dbc65840053ddff6b4c24d6cc84f64f4c06f293ccd10090bc1de95"
         }
       }
     },
@@ -289,12 +297,12 @@
       "ok": true,
       "detail": {
         "manifest": {
-          "RO": "2026-09-27T11:00:36.517Z",
-          "MD": "2026-09-27T10:59:15.174Z"
+          "RO": "2026-09-27T11:10:44.436Z",
+          "MD": "2026-09-27T11:10:43.589Z"
         },
         "actual": {
-          "RO": "2026-09-27T11:00:36.517Z",
-          "MD": "2026-09-27T10:59:15.174Z"
+          "RO": "2026-09-27T11:10:44.436Z",
+          "MD": "2026-09-27T11:10:43.589Z"
         }
       }
     },
@@ -329,13 +337,13 @@
           "authority": "Biroul Național de Statistică al Republicii Moldova",
           "path": "data/sources/cuatm-current.json",
           "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
-          "fetched_at": "2026-09-27T10:59:14.833Z",
+          "fetched_at": "2026-09-27T11:10:43.157Z",
           "record_count": 1721,
-          "sha256": "f1e042f153963e58a3bd959815c2610180de284a80987466576225648b4848f2"
+          "sha256": "6ac9967c99e7ebd52ae5b40358e64471afbabe4fd681fb9c477e6200575b627e"
         },
         "actual": {
           "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
-          "fetched_at": "2026-09-27T10:59:14.833Z",
+          "fetched_at": "2026-09-27T11:10:43.157Z",
           "record_count": 1721
         }
       }
