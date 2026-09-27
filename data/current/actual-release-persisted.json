@@ -1,27 +1,23 @@
 {
   "schema_version": 1,
-  "snapshot_id": "actual-149e27f4142b02e2",
-  "release_fingerprint_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
-  "manifest_sha256": "4475d67a6a438994545a5b92d0ef3909dc57566e5c6b4f86f91bfe6d372148e8",
-  "source_bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
+  "snapshot_id": "actual-e452ef83154649de",
+  "release_fingerprint_sha256": "e452ef83154649de9b0867e8a1a47dec98f979159c19876e9a66ced1a3f11301",
+  "manifest_sha256": "712fc4dab374aa3804a335275b7b658c6b92829145b2a8fddb1b444406199d5b",
+  "source_bundle_fingerprint_sha256": "132ef52f146b58b5ec744587892b68be42478508caf33494f2509ebb6e0dab1b",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
   "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
   "build_environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
-    "base_snapshot_id": "actual-2041d1665e7dc536",
-    "base_commit_sha": "b4f8645dfef9065d89d19c51495b11ee827d8bc7",
-    "diff_report_sha256": "df7c435410859ee341179c74d8f9399acf6670e1637c917492eef679000bcdf8",
+    "base_snapshot_id": "actual-149e27f4142b02e2",
+    "base_commit_sha": "cbf4eeaed6937064b57baced1f3935162a573b28",
+    "diff_report_sha256": "fc292d7336d42dfb59cab2498dab2054cd916ec047089e3f8520fdfc0f68dad4",
     "review_required": true,
-    "substantive_change_count": 2,
-    "candidate_identity_sha256": "6c54e0e4e9d7d8b350cbee4060826e515306b6d3bd6c875a30e3286036b3a3e0",
-    "candidate_commit_sha": "59981351f1ba22e07efc9689d811cc89e5788298",
+    "substantive_change_count": 21,
+    "candidate_identity_sha256": "9c2bd9409142e4e64844a2ac002f1a8a99a84d62932a22bbcccf3c2ca6898216",
+    "candidate_commit_sha": "2939e710d7d811ef98e9c24b1641205c81a59ff3",
     "promotion_audit_path": "data/current/actual-candidate-promotion-audit.json"
   },
-  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.",
-  "provenance_hardening": {
-    "previous_manifest_sha256": "8b41f5ab04566873b224084100513e1cc3c08cce22ecb0b79b18cd300b28515f",
-    "reason": "Bind writable HOME fix for the unprivileged OSM source-refresh control phase without changing ACTUAL semantic identity."
-  }
+  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes."
 }
