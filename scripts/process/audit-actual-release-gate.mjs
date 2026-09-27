@@ -20,6 +20,7 @@ const roGate=json('ro_gate');
 const mdGate=json('md_gate');
 const siruta=json('ro_official');
 const cuatm=json('md_official');
+const mdIndividual=json('md_individual_review');
 const jurisdictions=['RO','MD'];
 const tierKeys=['ro_overview','ro_local','ro_detail','md_overview','md_local','md_detail'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -104,6 +105,17 @@ check('public_contract_separates_legal_and_representation',
 check('public_contract_jurisdiction_counts_match_catalog',
  jurisdictions.every(j=>publicIndex.entity_count_by_jurisdiction?.[j]===entityCounts[j]),
  {public:publicIndex.entity_count_by_jurisdiction,actual:entityCounts});
+
+const reviewedStatusIssues=(mdIndividual.cases||[]).flatMap(review=>{
+ const entity=publicById.get(review.osm_id);
+ const expected=review.review_status==='resolved_semantic_classification'
+  ?'reviewed_representation_without_legal_identity'
+  :review.review_status==='unresolved_identity'?'unresolved':null;
+ return entity&&expected&&entity.validation?.legal_identity_status===expected
+  ?[]
+  :[{osm_id:review.osm_id,review_status:review.review_status,expected,actual:entity?.validation?.legal_identity_status??null}];
+});
+check('md_reviewed_public_identity_status_is_stable',reviewedStatusIssues.length===0,{issues:reviewedStatusIssues});
 
 const tierDocs=Object.fromEntries(tierKeys.map(key=>[key,json(key)]));
 const tierIssues=[];
