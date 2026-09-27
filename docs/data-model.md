@@ -34,4 +34,4 @@ Modelul master și modelul de afișare sunt separate. Pentru ACTUAL, fiecare ent
 
 `display_type` este un câmp de prezentare și nu trebuie confundat cu `legal.type`. În special pentru Republica Moldova, acolo unde registrul CUATM nu este decodat într-un tip juridic explicit, `legal.type` rămâne `null` chiar dacă reprezentarea OSM are o clasificare utilă pentru hartă.
 
-GeoJSON-urile din `public/geo/actual/` sunt derivate simplificate pentru web. Geometriile master rămân în `public/geo/current/` și continuă să fie sursa auditabilă a snapshot-ului.
+GeoJSON-urile din `public/geo/actual/` sunt împărțite pe niveluri pentru încărcare progresivă, dar păstrează coordonatele geometriei master fără simplificare. Geometriile master rămân în `public/geo/current/`, iar release gate-ul verifică fidelitatea geometrică feature-cu-feature.

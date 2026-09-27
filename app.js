@@ -288,7 +288,7 @@ function renderDetails(entity){
   legalHtml+
   '<section class="details-section"><h3>Reprezentare cartografică</h3><dl class="kv">'+
   detailRow('Sursă','OpenStreetMap')+detailRow('Relație OSM',entity.representation.osm_relation_id)+detailRow('admin_level',entity.representation.admin_level)+
-  detailRow('Tip OSM/inferat',typeLabel(entity.representation.inferred_type))+detailRow('Geometrie','simplificată pentru web')+
+  detailRow('Tip OSM/inferat',typeLabel(entity.representation.inferred_type))+detailRow('Geometrie','coordonate master, fără simplificare')+
   detailRow('Încredere',entity.validation.representation_confidence)+
   '</dl><div class="details-actions"><a class="action-button" href="'+escapeHtml(entity.representation.source_url)+'" target="_blank" rel="noopener">Deschide în OSM</a><button type="button" class="action-button" id="zoom-selected">Zoom la entitate</button></div></section>';
  const parentButton=body.querySelector('[data-parent]');
