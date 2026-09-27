@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "ACTUAL",
-  "policy_version": "2026-09-27",
+  "policy_version": "2026-10-02-v1.1",
   "scope": "settlements_and_component_localities",
   "principle": "ACTUAL is exhaustive for administrative UAT identities where the official registry and subtype model are exhaustive. Settlements/component localities are an official identity inventory but not an exhaustive polygon-boundary layer: SIRUTA/CUATM do not supply an exhaustive authoritative polygon set, and OSM settlement boundaries are incomplete and heterogeneous. Missing settlement polygons therefore do not block ACTUAL. Any settlement representation that is included must itself satisfy a fail-closed identity-or-review path and preserve OSM geometry without asserting legal geometry equivalence.",
   "common_requirements": {
@@ -21,7 +21,7 @@
     "RO": {
       "declared_type": "component_locality",
       "official_registry": "SIRUTA",
-      "official_inventory_selector": "SIRUTA records whose level is not 2",
+      "official_inventory_selector": "SIRUTA records whose level is 3",
       "inclusion_catalog_types": [
         "component_locality",
         "component_village_boundary_representation",
@@ -42,7 +42,8 @@
           "review_required": false,
           "legal_geometry_equivalence_asserted": false
         }
-      }
+      },
+      "coverage_accounting": "unique_official_legal_identity"
     },
     "MD": {
       "declared_type": "locality",
@@ -84,7 +85,14 @@
           "interpretation": "A lower-level OSM settlement polygon may represent the inhabited-place footprint/settlement representation of an already reconciled administrative UAT identity. It remains a representation, is not counted as a distinct official component-locality identity, and does not assert that the OSM polygon is authoritative legal UAT geometry."
         }
       },
-      "identity_geometry_separation": "Catalog type component_locality describes the OSM representation role, while CUATM legal status/type describes legal identity. A status 3/5/8 identity on a level-9 component_locality representation is not reclassified as an official status 6/9 component locality and is already counted under its UAT completeness type."
+      "identity_geometry_separation": "Catalog type component_locality describes the OSM representation role, while CUATM legal status/type describes legal identity. A status 3/5/8 identity on a level-9 component_locality representation is not reclassified as an official status 6/9 component locality and is already counted under its UAT completeness type.",
+      "coverage_accounting": "unique_official_legal_identity"
     }
+  },
+  "coverage_contract_version": 2,
+  "geometry_role_contract": {
+    "path": "schemas/actual-geometry-role-contract.json",
+    "contract": "actual-geometry-role-v1",
+    "schema_version": 1
   }
 }

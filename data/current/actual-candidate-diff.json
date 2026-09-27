@@ -2,28 +2,28 @@
   "schema_version": 3,
   "mode": "ACTUAL_CANDIDATE_DIFF",
   "status": "CHANGE",
-  "base_ref": "1390b27c0a248559416cdc36af5e7270f7c3ce73",
+  "base_ref": "67be59e9c9ca7e13b703c01e1373f3efa7a7ed6c",
   "base_release": {
     "snapshot_id": "actual-5383ff3db7cf3f67",
     "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-    "manifest_sha256": "728e28f16184e3f8af343d687db044ab42ae715f506ebc803237abf8c36eae11",
+    "manifest_sha256": "6e0d586c17f5770ecfab6f3784644de188dcc96af0bd4245adee465f551d7b2e",
     "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
     "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
     "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-    "build_environment_fingerprint_sha256": "c9803455b84c872ec67d8b4fb4dce59f4f03befd0f093c541f76aab132029366"
+    "build_environment_fingerprint_sha256": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272"
   },
   "candidate": {
-    "snapshot_id": "actual-5383ff3db7cf3f67",
-    "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-    "manifest_sha256": "763313196b7bdd0b7bb7f6ef182bbdf77161f6d6cc0e6e347234910e664d3c31",
+    "snapshot_id": "actual-926d9b00b221d650",
+    "release_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+    "manifest_sha256": "23d017818449cd9e967263e5a8021cb535ede83de4766230902e081d978e95c1",
     "release_gate_status": "PASS",
-    "content_fingerprint_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+    "content_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
     "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
     "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
     "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-    "build_environment_fingerprint_sha256": "c9803455b84c872ec67d8b4fb4dce59f4f03befd0f093c541f76aab132029366",
+    "build_environment_fingerprint_sha256": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272",
     "semantic_manifest_binding": "explicit_manifest_fingerprint",
     "exact_base_manifest_bytes_reused": false
   },
@@ -36,16 +36,14 @@
     "classification_changed_count": 0,
     "geometry_change_count": 0,
     "semantic_registry_changed_count": 0,
-    "component_hash_changed_count": 1,
-    "delivery_component_changed_count": 1,
-    "delivery_component_changed_keys": [
-      "public_chunks"
-    ],
+    "component_hash_changed_count": 3,
+    "delivery_component_changed_count": 0,
+    "delivery_component_changed_keys": [],
     "entity_content_changed_count": 0,
-    "semantic_scope_only_change_count": 0,
-    "semantic_content_changed": false,
+    "semantic_scope_only_change_count": 1,
+    "semantic_content_changed": true,
     "base_content_fingerprint_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
-    "candidate_content_fingerprint_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+    "candidate_content_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
     "substantive_change_count": 1,
     "review_required": true
   },
@@ -102,10 +100,22 @@
   },
   "component_hash_changes": [
     {
-      "key": "public_chunks",
-      "path": "public/data/actual-geometry-chunks.json",
+      "key": "geometry_role_contract",
+      "path": "schemas/actual-geometry-role-contract.json",
       "before_sha256": null,
-      "after_sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784"
+      "after_sha256": "9a73dbecbdb94fc0a9a6615fd9b51695cb7f5590c5dcbc24b32549670d1bd6bd"
+    },
+    {
+      "key": "settlement_policy",
+      "path": "data/sources/actual-settlement-policy.json",
+      "before_sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843",
+      "after_sha256": "d3ec38c4b08d0f7160173d4198bba9d3ca544cbce5b317c035991cd147f8847e"
+    },
+    {
+      "key": "structural_completeness_audit",
+      "path": "data/current/actual-structural-completeness-audit.json",
+      "before_sha256": "d215636430cc8b76b97e7a77a73c90287f7006c4cc23d1dce23752481703a557",
+      "after_sha256": "8532a7e1397856987bedc9594ad4ab43d43e691cc8baced4707ec2270189ab95"
     }
   ],
   "failures": [],
