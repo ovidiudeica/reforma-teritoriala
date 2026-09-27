@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
-const [inventory,catalog,pub,siruta,cuatm,mdRecon,roOfficialOnly,roOtherLevel]=await Promise.all([
+const [inventory,catalog,pub,siruta,cuatm,mdRecon,mdSemantic,roOfficialOnly,roOtherLevel]=await Promise.all([
  read('data/current/administrative-inventory.json'),read('data/current/entities.json'),read('public/data/actual-entities.json'),
- read('data/sources/ro-siruta-current.json'),read('data/sources/cuatm-current.json'),read('data/current/md-cuatm-reconciliation.json'),
+ read('data/sources/ro-siruta-current.json'),read('data/sources/cuatm-current.json'),read('data/current/md-cuatm-reconciliation.json'),read('data/current/md-cuatm-semantic-bridge.json'),
  read('data/sources/ro-official-only-reviewed-resolutions.json'),read('data/sources/ro-other-level-reviewed-resolutions.json')
 ]);
+if(mdSemantic.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
 const OUTPUT='data/current/actual-structural-completeness-audit.json';
 const publicEntities=pub.entities||[], catalogEntities=catalog.entities||[];
 const publicLegal=new Map();
@@ -29,24 +30,32 @@ add('RO','state',1,null,[],'OBSERVATIONAL',{reason:'State boundary is intentiona
 add('RO','component_locality',sir.filter(r=>Number(r.level)!==2).length,null,[],'NOT_DETERMINED',{official_registry:'SIRUTA',reason:'Inventory declares component localities, but ACTUAL geometry policy does not currently require exhaustive polygon boundaries for settlements.'});
 
 const md=cuatm.records||[];
-const statusMap={district:['2'],level_2_municipality:['5'],special_territorial_unit:['2'],level_1_municipality:['3'],town:['3'],commune:['8'],independent_village:['8'],chisinau_sector:['4']};
 const isChisinauSector=r=>r.status_code==='4'&&r.parent_code==='0100';
-const classifiers={
- chisinau_sector:isChisinauSector,
- district:r=>r.status_code==='2'&&!/gagauz/i.test(r.name||''),
- special_territorial_unit:r=>r.status_code==='2'&&/gagauz/i.test(r.name||''),
- level_2_municipality:r=>r.status_code==='5',
- level_1_municipality:r=>r.status_code==='3'&&r.parent_code!=null,
- town:r=>r.status_code==='3'&&r.parent_code!=null,
- commune:r=>r.status_code==='8',
- independent_village:r=>r.status_code==='8'
+const semanticByType=new Map();
+for(const x of mdSemantic.classifications||[]){
+ if(!semanticByType.has(x.semantic_type))semanticByType.set(x.semantic_type,[]);
+ semanticByType.get(x.semantic_type).push(x);
+}
+const officialByType={
+ district:md.filter(r=>r.status_code==='2'&&!/gagauz/i.test(r.name||'')),
+ level_2_municipality:md.filter(r=>r.status_code==='5'),
+ special_territorial_unit:md.filter(r=>r.status_code==='2'&&/gagauz/i.test(r.name||''),),
+ level_1_municipality:semanticByType.get('level_1_municipality')||[],
+ town:semanticByType.get('town')||[],
+ commune:semanticByType.get('commune')||[],
+ independent_village:semanticByType.get('independent_village')||[],
+ chisinau_sector:md.filter(isChisinauSector)
 };
 for(const type of ['district','level_2_municipality','special_territorial_unit','level_1_municipality','town','commune','independent_village','chisinau_sector']){
- let official=md.filter(classifiers[type]);
- // CUATM status alone cannot distinguish town vs level-I municipality, nor commune vs independent village.
- if(['level_1_municipality','town','commune','independent_village'].includes(type)){add('MD',type,official.length,null,[],'NOT_DETERMINED',{official_registry:'CUATM',reason:'CUATM status_code alone does not uniquely distinguish this declared semantic subtype; subtype classifier/bridge is required before exact per-type completeness can be asserted.'});continue;}
- const missing=official.filter(r=>!publicLegal.has('CUATM:'+String(r.code))).map(r=>({id:String(r.code),name:r.name,parent_id:r.parent_code??null,parent_name:r.parent_name??null,status_code:r.status_code}));
- add('MD',type,official.length,official.length-missing.length,missing,missing.length?'FAIL':'PASS',{official_registry:'CUATM',exhaustive:true});
+ const official=officialByType[type]||[];
+ const missing=official.filter(r=>{
+  const id=String(r.code??r.legal_id);
+  return !publicLegal.has('CUATM:'+id);
+ }).map(r=>({id:String(r.code??r.legal_id),name:r.name??r.legal_name??null,parent_id:r.parent_code??r.parent_id??null,parent_name:r.parent_name??null,status_code:r.status_code??null,semantic_type:r.semantic_type??type}));
+ add('MD',type,official.length,official.length-missing.length,missing,missing.length?'FAIL':'PASS',{
+  official_registry:'CUATM',exhaustive:true,
+  semantic_bridge:['level_1_municipality','town','commune','independent_village'].includes(type)?'data/current/md-cuatm-semantic-bridge.json':null
+ });
 }
 add('MD','state',1,null,[],'OBSERVATIONAL',{reason:'State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/6/8/9; country geometry is used as import containment context, not a catalog entity.'});
 add('MD','locality',md.filter(r=>['6','9'].includes(String(r.status_code))).length,null,[],'NOT_DETERMINED',{official_registry:'CUATM',reason:'Inventory declares component localities, but ACTUAL geometry policy does not currently require exhaustive polygon boundaries for settlements.'});
