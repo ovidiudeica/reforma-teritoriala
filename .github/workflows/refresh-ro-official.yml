@@ -21,8 +21,8 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: ro-official-siruta-refresh
-  cancel-in-progress: true
+  group: administrative-data-writers
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-24.04
