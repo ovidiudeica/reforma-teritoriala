@@ -5,13 +5,13 @@
   "generated_at": "2026-09-27T20:37:28.323Z",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
   "content_fingerprint_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
-  "component_byte_fingerprint_sha256": "6150b5b6dfe7d42cfc66e7332b08ed8617d306fee49df48626fd1d460deaace0",
+  "component_byte_fingerprint_sha256": "370725df565633895ec8c4d2a6c1f5dc135ef5d7345bc7093d4004c376482af2",
   "content_identity": {
     "algorithm": "actual-semantic-v1",
     "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
     "release_identity_basis": "base_release_compatibility_reuse",
     "reused_base_release": true,
-    "base_ref": "b9b29faf3d6d842c95bfb644504e95695e559b09",
+    "base_ref": "4510cb84de7bad7f5a68ae7b07b818e3803273f2",
     "base_snapshot_id": "actual-5383ff3db7cf3f67",
     "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
     "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
@@ -136,6 +136,13 @@
       "not_bound_to_official_registry": 11
     },
     "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
+    "geometry_chunks": {
+      "path": "public/data/actual-geometry-chunks.json",
+      "contract": "actual-public-geometry-chunks-v1",
+      "schema_version": 1,
+      "chunk_count": 115,
+      "sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784"
+    },
     "geometry_tiers": {
       "RO": {
         "overview": {
@@ -281,6 +288,11 @@
       "path": "public/data/actual-entities.json",
       "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
       "bytes": 11938124
+    },
+    "public_chunks": {
+      "path": "public/data/actual-geometry-chunks.json",
+      "sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784",
+      "bytes": 35786
     },
     "ro_overview": {
       "path": "public/geo/actual/ro-overview.geojson",

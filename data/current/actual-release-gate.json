@@ -4,7 +4,7 @@
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "728e28f16184e3f8af343d687db044ab42ae715f506ebc803237abf8c36eae11",
+  "manifest_sha256": "749441dbc1e6d9cbb4ce373baa16eb2ca334b80cc994ed5b426a0bf26543ff82",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -358,8 +358,8 @@
       "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "6150b5b6dfe7d42cfc66e7332b08ed8617d306fee49df48626fd1d460deaace0",
-        "actual": "6150b5b6dfe7d42cfc66e7332b08ed8617d306fee49df48626fd1d460deaace0"
+        "expected": "370725df565633895ec8c4d2a6c1f5dc135ef5d7345bc7093d4004c376482af2",
+        "actual": "370725df565633895ec8c4d2a6c1f5dc135ef5d7345bc7093d4004c376482af2"
       }
     },
     {
@@ -371,7 +371,7 @@
           "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
           "release_identity_basis": "base_release_compatibility_reuse",
           "reused_base_release": true,
-          "base_ref": "b9b29faf3d6d842c95bfb644504e95695e559b09",
+          "base_ref": "4510cb84de7bad7f5a68ae7b07b818e3803273f2",
           "base_snapshot_id": "actual-5383ff3db7cf3f67",
           "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
           "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
@@ -389,7 +389,7 @@
           "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
           "release_identity_basis": "base_release_compatibility_reuse",
           "reused_base_release": true,
-          "base_ref": "b9b29faf3d6d842c95bfb644504e95695e559b09",
+          "base_ref": "4510cb84de7bad7f5a68ae7b07b818e3803273f2",
           "base_snapshot_id": "actual-5383ff3db7cf3f67",
           "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
           "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
@@ -605,6 +605,13 @@
             "not_bound_to_official_registry": 11
           },
           "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776",
+          "geometry_chunks": {
+            "path": "public/data/actual-geometry-chunks.json",
+            "contract": "actual-public-geometry-chunks-v1",
+            "schema_version": 1,
+            "chunk_count": 115,
+            "sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784"
+          },
           "geometry_tiers": {
             "RO": {
               "overview": {
@@ -646,6 +653,36 @@
           "contract": "actual-public-entity-v1",
           "entity_count": 5827,
           "sha256": "3156dc45675901d611b201ddaaf39a5151afc304453f21f8581b3742ecd46776"
+        }
+      }
+    },
+    {
+      "name": "public_geometry_chunks_are_complete_and_byte_bound",
+      "ok": true,
+      "detail": {
+        "chunk_count": 115,
+        "issues": [],
+        "missing": [],
+        "unexpected": []
+      }
+    },
+    {
+      "name": "manifest_binds_public_geometry_chunk_index",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "path": "public/data/actual-geometry-chunks.json",
+          "contract": "actual-public-geometry-chunks-v1",
+          "schema_version": 1,
+          "chunk_count": 115,
+          "sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784"
+        },
+        "actual": {
+          "path": "public/data/actual-geometry-chunks.json",
+          "contract": "actual-public-geometry-chunks-v1",
+          "schema_version": 1,
+          "chunk_count": 115,
+          "sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784"
         }
       }
     },

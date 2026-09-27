@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-09-27T11:26:58.581Z",
+  "generated_at": "2026-09-27T20:37:24.316Z",
   "jurisdiction": "MD",
   "official_source": "BNS CUATM",
   "official_source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
   "official_snapshot_records": 1721,
   "official_parent_links": 1684,
-  "entity_count": 2590,
-  "matched_count": 2465,
-  "unmatched_count": 2,
+  "entity_count": 2595,
+  "matched_count": 2471,
+  "unmatched_count": 1,
   "non_cuatm_count": 123,
   "non_cuatm_by_class": {
     "non_cuatm_allotment_boundary": 123
   },
   "matched_by_method": {
-    "explicit_cuatm_key": 2267,
-    "exact_normalized_name_and_official_parent": 183,
+    "explicit_cuatm_key": 2271,
+    "exact_normalized_name_and_official_parent": 184,
     "osm_self_parent_same_legal_entity": 11,
-    "reviewed_override": 4
+    "reviewed_override": 5
   },
   "unmatched_by_reason": {
-    "name_absent_from_official_snapshot": 2
+    "name_absent_from_official_snapshot": 1
   },
   "policy": "Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.",
   "matches": [
@@ -536,6 +536,76 @@
       "status_code": null,
       "legal_parent_id": null,
       "legal_parent_name": null,
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r1813306",
+      "name": "sectorul Botanica",
+      "cuatm_key": "0110",
+      "legal_id": "0110",
+      "legal_name": "Sectorul Botanica",
+      "status_code": "4",
+      "legal_parent_id": "0100",
+      "legal_parent_name": "Chișinău",
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r1813297",
+      "name": "sectorul Buiucani",
+      "cuatm_key": "0120",
+      "legal_id": "0120",
+      "legal_name": "Sectorul Buiucani",
+      "status_code": "4",
+      "legal_parent_id": "0100",
+      "legal_parent_name": "Chișinău",
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r58512",
+      "name": "sectorul Centru",
+      "cuatm_key": null,
+      "legal_id": "0130",
+      "legal_name": "Sectorul Centru",
+      "status_code": "4",
+      "legal_parent_id": "0100",
+      "legal_parent_name": "Chișinău",
+      "legal_source": "BNS CUATM",
+      "match_method": "exact_normalized_name_and_official_parent",
+      "confidence": "medium",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r1813315",
+      "name": "sectorul Ciocana",
+      "cuatm_key": "0140",
+      "legal_id": "0140",
+      "legal_name": "Sectorul Ciocana",
+      "status_code": "4",
+      "legal_parent_id": "0100",
+      "legal_parent_name": "Chișinău",
+      "legal_source": "BNS CUATM",
+      "match_method": "explicit_cuatm_key",
+      "confidence": "high",
+      "unmatched_reason": null
+    },
+    {
+      "id": "osm-r1813316",
+      "name": "sectorul Rîșcani",
+      "cuatm_key": "0150",
+      "legal_id": "0150",
+      "legal_name": "Sectorul Rîșcani",
+      "status_code": "4",
+      "legal_parent_id": "0100",
+      "legal_parent_name": "Chișinău",
       "legal_source": "BNS CUATM",
       "match_method": "explicit_cuatm_key",
       "confidence": "high",
@@ -11442,16 +11512,21 @@
     {
       "id": "osm-r6879649",
       "name": "Sovetul sătesc Chițcani",
-      "cuatm_key": null,
-      "legal_id": null,
-      "legal_name": null,
-      "status_code": null,
+      "cuatm_key": "7612",
+      "legal_id": "7612",
+      "legal_name": "Chițcani",
+      "status_code": "8",
+      "legal_parent_id": "2700",
+      "legal_parent_name": "Căușeni",
       "legal_source": "BNS CUATM",
-      "match_method": null,
-      "confidence": null,
-      "unmatched_reason": "name_absent_from_official_snapshot",
-      "name_candidate_count": 0,
-      "parent_official_code": "2700"
+      "match_method": "reviewed_override",
+      "confidence": "high",
+      "unmatched_reason": null,
+      "reviewed_override": {
+        "source_url": "https://statistica.gov.md/index.php/ro/rezultatele-finale-ale-recensamantului-populatiei-si-locuintelor-2024-distributi-10121_61877.html",
+        "source_label": "BNS 2024 census Chițcani commune identity + current CUATM legal identity",
+        "reason": "Reviewed positive identity: OSM relation 6879649 is the stable «Sovetul sătesc Chițcani» administrative representation, while current CUATM identifies comuna Chițcani as legal ID 7612 under Căușeni (2700). This override binds legal identity only; it does not assert that the OSM boundary is authoritative CUATM/legal geometry."
+      }
     },
     {
       "id": "osm-r8289727",

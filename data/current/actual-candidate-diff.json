@@ -1,0 +1,113 @@
+{
+  "schema_version": 3,
+  "mode": "ACTUAL_CANDIDATE_DIFF",
+  "status": "CHANGE",
+  "base_ref": "4510cb84de7bad7f5a68ae7b07b818e3803273f2",
+  "base_release": {
+    "snapshot_id": "actual-5383ff3db7cf3f67",
+    "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+    "manifest_sha256": "728e28f16184e3f8af343d687db044ab42ae715f506ebc803237abf8c36eae11",
+    "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
+    "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+    "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
+    "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
+    "build_environment_fingerprint_sha256": "c9803455b84c872ec67d8b4fb4dce59f4f03befd0f093c541f76aab132029366"
+  },
+  "candidate": {
+    "snapshot_id": "actual-5383ff3db7cf3f67",
+    "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+    "manifest_sha256": "749441dbc1e6d9cbb4ce373baa16eb2ca334b80cc994ed5b426a0bf26543ff82",
+    "release_gate_status": "PASS",
+    "content_fingerprint_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+    "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
+    "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+    "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
+    "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
+    "build_environment_fingerprint_sha256": "c9803455b84c872ec67d8b4fb4dce59f4f03befd0f093c541f76aab132029366",
+    "semantic_manifest_binding": "explicit_manifest_fingerprint",
+    "exact_base_manifest_bytes_reused": false
+  },
+  "summary": {
+    "entity_count_before": 5827,
+    "entity_count_after": 5827,
+    "entity_added_count": 0,
+    "entity_removed_count": 0,
+    "legal_identity_changed_count": 0,
+    "classification_changed_count": 0,
+    "geometry_change_count": 0,
+    "semantic_registry_changed_count": 0,
+    "component_hash_changed_count": 1,
+    "delivery_component_changed_count": 1,
+    "delivery_component_changed_keys": [
+      "public_chunks"
+    ],
+    "entity_content_changed_count": 0,
+    "semantic_scope_only_change_count": 0,
+    "semantic_content_changed": false,
+    "base_content_fingerprint_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+    "candidate_content_fingerprint_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+    "substantive_change_count": 1,
+    "review_required": true
+  },
+  "entities": {
+    "added_ids": [],
+    "removed_ids": [],
+    "content_changed_ids": [],
+    "legal_identity_changed_ids": [],
+    "classification_changed_ids": [],
+    "legal_change_samples": [],
+    "classification_change_samples": []
+  },
+  "geometry": {
+    "RO": {
+      "before_feature_count": 3232,
+      "after_feature_count": 3232,
+      "added_count": 0,
+      "removed_count": 0,
+      "changed_count": 0,
+      "added_ids": [],
+      "removed_ids": [],
+      "changed_ids": []
+    },
+    "MD": {
+      "before_feature_count": 2595,
+      "after_feature_count": 2595,
+      "added_count": 0,
+      "removed_count": 0,
+      "changed_count": 0,
+      "added_ids": [],
+      "removed_ids": [],
+      "changed_ids": []
+    }
+  },
+  "official_registries": {
+    "RO": {
+      "semantic_changed": false,
+      "before_semantic_sha256": "c9891f7b4c9c9045e8a05bc86e68affa5589823804ce8ee81a68de7d9ab8ee83",
+      "after_semantic_sha256": "c9891f7b4c9c9045e8a05bc86e68affa5589823804ce8ee81a68de7d9ab8ee83",
+      "before_record_count": 16978,
+      "after_record_count": 16978,
+      "before_manifest_sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f",
+      "after_manifest_sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f"
+    },
+    "MD": {
+      "semantic_changed": false,
+      "before_semantic_sha256": "0f6052b3b9d2680c8e793c69fb7d26f1c18e450615b8ece96f2bd9c40353f011",
+      "after_semantic_sha256": "0f6052b3b9d2680c8e793c69fb7d26f1c18e450615b8ece96f2bd9c40353f011",
+      "before_record_count": 1721,
+      "after_record_count": 1721,
+      "before_manifest_sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575",
+      "after_manifest_sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575"
+    }
+  },
+  "component_hash_changes": [
+    {
+      "key": "public_chunks",
+      "path": "public/data/actual-geometry-chunks.json",
+      "before_sha256": null,
+      "after_sha256": "ae1c55e7db7465ac57a35a4067395629d171fb93683c15872ecf93360e2e6784"
+    }
+  ],
+  "failures": [],
+  "policy": "Candidate disposition is derived from canonical administrative content plus explicitly enumerated public-delivery components while exact source and execution-environment provenance are bound independently. A delivery-only CHANGE may retain the semantic snapshot ID and release fingerprint, but still requires explicit review and promotion. Exact base-manifest reuse remains compatibility-only. NO_CHANGE is terminal. Any provenance drift remains release-gated."
+}
