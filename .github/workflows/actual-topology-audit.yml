@@ -11,6 +11,8 @@ on:
       - 'scripts/process/audit-actual-official-identity.mjs'
       - 'scripts/process/apply-ro-official-reconciliation.mjs'
       - 'scripts/process/audit-ro-county-siruta-bridge.mjs'
+      - 'scripts/process/audit-md-cuatm-semantic-bridge.mjs'
+      - 'data/sources/md-cuatm-semantic-policy.json'
       - 'scripts/process/build-actual-public-data.mjs'
       - 'scripts/process/audit-osm-relation-12463200.mjs'
       - 'scripts/import/import-osm.mjs'
@@ -50,6 +52,8 @@ jobs:
         run: npm run apply:ro-official-reconciliation
       - name: Reconcile MD against official CUATM
         run: npm run reconcile:cuatm
+      - name: Audit MD CUATM semantic subtype bridge
+        run: npm run audit:md-cuatm-semantic-bridge
       - name: Regenerate public ACTUAL contract
         run: npm run build:actual-public-data
       - name: Audit Chișinău sector identity propagation
@@ -69,6 +73,7 @@ jobs:
             data/current/osm-12463200-audit.json
             data/current/ro-county-siruta-bridge.json
             data/current/ro-official-application.json
+            data/current/md-cuatm-semantic-bridge.json
             data/current/actual-structural-completeness-audit.json
             data/current/actual-official-identity-audit.json
           if-no-files-found: error
