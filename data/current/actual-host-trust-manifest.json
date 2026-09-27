@@ -2,12 +2,28 @@
   "schema_version": 1,
   "mode": "ACTUAL_HOST_TRUST",
   "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
-  "policy": "Fail-closed host trust contract for deterministic ACTUAL execution. GitHub runner image, kernel, Docker Engine, containerd, runc, cgroup/storage stack and an x86_64 CPU compatibility floor are pinned. CPU vendor/model are observed evidence only; Node computation is forced through the JIT-less single-CPU execution profile so hardware model drift cannot silently select different V8 JIT code paths.",
+  "policy": "Fail-closed host trust contract for deterministic ACTUAL execution. A finite allowlist binds exact GitHub runner-image/containerd rollout pairs while kernel, Docker Engine, runc, cgroup/storage stack and an x86_64 CPU compatibility floor remain pinned. CPU vendor/model are observed evidence only; Node computation is forced through the JIT-less single-CPU execution profile so hardware model drift cannot silently select different V8 JIT code paths.",
   "contract": {
+    "accepted_host_profiles": [
+      {
+        "runner_image_version": "20260920.314.1",
+        "containerd": {
+          "version": "v2.3.5",
+          "git_commit": "1294c24a7da8e5a793ed378161673abe94118892"
+        }
+      },
+      {
+        "runner_image_version": "20260927.320.1",
+        "containerd": {
+          "version": "v2.3.6",
+          "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+        }
+      }
+    ],
     "runner": {
       "label": "ubuntu-24.04",
       "image_os": "ubuntu24",
-      "image_version": "20260920.314.1",
+      "image_version": "20260927.320.1",
       "os": "Linux",
       "arch": "X64"
     },
@@ -28,8 +44,8 @@
           "git_commit": "6430e49"
         },
         "containerd": {
-          "version": "v2.3.5",
-          "git_commit": "1294c24a7da8e5a793ed378161673abe94118892"
+          "version": "v2.3.6",
+          "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
         },
         "runc": {
           "version": "1.5.1",
@@ -96,5 +112,5 @@
       }
     }
   },
-  "host_trust_fingerprint_sha256": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5"
+  "host_trust_fingerprint_sha256": "1efb02e7ce931a3e9aa21f37af39ef3d0bbad3dc1016209bce8a1957c496d169"
 }
