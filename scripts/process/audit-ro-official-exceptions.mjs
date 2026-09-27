@@ -10,6 +10,7 @@ const reviewed=JSON.parse(await readFile('data/sources/ro-siruta-reviewed-overri
 const parentAssignmentReviewed=JSON.parse(await readFile('data/sources/ro-parent-assignment-reviewed-resolutions.json','utf8'));
 const officialOnlyReviewed=JSON.parse(await readFile('data/sources/ro-official-only-reviewed-resolutions.json','utf8'));
 const otherLevelReviewed=JSON.parse(await readFile('data/sources/ro-other-level-reviewed-resolutions.json','utf8'));
+const semanticTypeReviewed=JSON.parse(await readFile('data/sources/ro-semantic-type-reviewed-resolutions.json','utf8'));
 
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[„”"'’]/g,' ')
@@ -108,7 +109,8 @@ const targetIds=[...new Set([
  ...(reviewed.mappings||[]).map(x=>Number(x.osm_relation_id)),
  ...(parentAssignmentReviewed.items||[]).map(x=>Number(x.osm_relation_id)),
  ...(officialOnlyReviewed.items||[]).map(x=>Number(x.covering_osm_relation_id)),
- ...(otherLevelReviewed.items||[]).flatMap(x=>[Number(x.osm_relation_id),...(x.osm_sector_relations||[]).map(y=>Number(y.relation_id))])
+ ...(otherLevelReviewed.items||[]).flatMap(x=>[Number(x.osm_relation_id),...(x.osm_sector_relations||[]).map(y=>Number(y.relation_id))]),
+ ...(semanticTypeReviewed.items||[]).map(x=>Number(x.osm_relation_id))
 ].filter(Boolean))];
 const histories=[],historyErrors=[];
 for(const id of targetIds){
@@ -174,7 +176,8 @@ const allCandidateCodes=[
  ...provisionalUnmatched.flatMap(x=>x.candidateIds),
  ...duplicateCandidateIds,
  ...(reviewed.mappings||[]).map(x=>String(x.legal_id)),
- ...(officialOnlyReviewed.items||[]).flatMap(x=>[String(x.legal_id),String(x.covering_osm_relation_legal_id||'')])
+ ...(officialOnlyReviewed.items||[]).flatMap(x=>[String(x.legal_id),String(x.covering_osm_relation_legal_id||'')]),
+ ...(semanticTypeReviewed.items||[]).map(x=>String(x.legal_id))
 ];
 let officialLocalityFeatures=[],officialLocalityGeometryError=null;
 try{officialLocalityFeatures=await fetchOfficialLocalityGeometries(allCandidateCodes);}
@@ -500,6 +503,68 @@ const otherLevelResolutionValidation=(otherLevelReviewed.items||[]).map(x=>{
  };
 });
 
+const semanticTypeResolutionValidation=(semanticTypeReviewed.items||[]).map(x=>{
+ const relationId=Number(x.osm_relation_id),legalId=String(x.legal_id);
+ const reviewedResolution=(reconciliation.reviewed_semantic_type_resolutions||[]).find(y=>Number(y.osm_relation_id)===relationId&&String(y.legal_id)===legalId)||null;
+ const entity=entityByRelation.get(relationId)||null;
+ const parent=entity?.parent_id?entityById.get(entity.parent_id)||null:null;
+ const feature=featureByRelation.get(relationId)||null;
+ const tags=tagsOf(feature);
+ const uat=uatByCode.get(legalId)||null;
+ const history=historyById.get(relationId)||null;
+ const containment=containmentEvidence(relationId,[legalId])[0]||null;
+ const expectedComponentIds=[...(x.official_component_locality_ids||[])].map(String).sort();
+ const actualComponentIds=[...(containment?.inside_localities||[])].map(y=>String(y.siruta)).filter(Boolean).sort();
+ const componentIdsMatch=expectedComponentIds.length>0&&expectedComponentIds.length===actualComponentIds.length&&expectedComponentIds.every((id,i)=>id===actualComponentIds[i]);
+ const currentTagsMatch=Object.entries(x.expected_osm_tags||{}).every(([k,v])=>String(tags?.[k]??'')===String(v));
+ const historyTagsStable=Boolean(history&&(history.versions||[]).length&&history.versions.every(v=>Object.entries(x.expected_osm_tags||{}).every(([k,val])=>String(v.tags?.[k]??'')===String(val))));
+ const stable=Boolean(
+  reviewedResolution
+  && reviewedResolution.classification===x.classification
+  && reviewedResolution.match_method==='exact_normalized_name_and_county'
+  && reviewedResolution.parent_matches===true
+  && reviewedResolution.osm_claimed_legal_type===x.osm_claimed_legal_type
+  && entity
+  && Number(entity.osm?.admin_level)===8
+  && norm(entity.name)===norm(x.osm_name)
+  && Number(parent?.osm?.relation_id)===Number(x.expected_parent_osm_relation_id)
+  && uat
+  && norm(uat.name)===norm(x.legal_name)
+  && uat.legal_type===x.legal_type
+  && norm(uat.county_name)===norm(x.legal_parent_name)
+  && containment
+  && containment.official_locality_count===expectedComponentIds.length
+  && containment.inside_count===expectedComponentIds.length
+  && componentIdsMatch
+  && currentTagsMatch
+  && historyTagsStable
+ );
+ return {
+  osm_relation_id:relationId,
+  osm_name:entity?.name||x.osm_name,
+  legal_id:legalId,
+  legal_name:uat?.name||x.legal_name,
+  legal_type:uat?.legal_type||x.legal_type,
+  legal_parent_name:uat?.county_name||x.legal_parent_name,
+  classification:x.classification,
+  osm_claimed_legal_type:reviewedResolution?.osm_claimed_legal_type||null,
+  expected_parent_osm_relation_id:Number(x.expected_parent_osm_relation_id),
+  actual_parent_osm_relation_id:parent?.osm?.relation_id??null,
+  current_osm_tags:tags,
+  expected_osm_tags:x.expected_osm_tags||{},
+  current_tags_match:currentTagsMatch,
+  official_locality_containment:containment,
+  expected_component_locality_ids:expectedComponentIds,
+  actual_component_locality_ids:actualComponentIds,
+  component_locality_ids_match:componentIdsMatch,
+  osm_history:history,
+  semantic_tags_stable_across_history:historyTagsStable,
+  geometry_modified:false,
+  legal_geometry_claimed:false,
+  stable
+ };
+});
+
 const typeMismatches=(reconciliation.type_mismatches||[]).map(x=>({
  ...x,
  current_osm_tags:tagsOf(featureByRelation.get(x.osm_relation_id)),
@@ -522,6 +587,8 @@ const unstableOfficialOnlyResolutions=officialOnlyResolutionValidation.filter(x=
 check('reviewed_official_only_resolutions_stable',unstableOfficialOnlyResolutions.length===0,{failed:unstableOfficialOnlyResolutions});
 const unstableOtherLevelResolutions=otherLevelResolutionValidation.filter(x=>!x.stable);
 check('reviewed_other_level_resolutions_stable',unstableOtherLevelResolutions.length===0,{failed:unstableOtherLevelResolutions});
+const unstableSemanticTypeResolutions=semanticTypeResolutionValidation.filter(x=>!x.stable);
+check('reviewed_semantic_type_resolutions_stable',unstableSemanticTypeResolutions.length===0,{failed:unstableSemanticTypeResolutions});
 const missingReviewedRelations=reviewedOverrideValidation.filter(x=>!x.relation_present).map(x=>x.osm_relation_id);
 const missingReviewedUats=reviewedOverrideValidation.filter(x=>!x.official_uat_present).map(x=>({osm_relation_id:x.osm_relation_id,legal_id:x.legal_id}));
 check('reviewed_override_relations_present',missingReviewedRelations.length===0,{missing:missingReviewedRelations});
@@ -533,8 +600,8 @@ if(!officialLocalityGeometryError){
 
 const report={
  schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',
- scope:'Targeted audit of unresolved/duplicate/type-conflict cases, reviewed missing-distinct-boundary cases, and reviewed exceptional cross-level OSM representations from official SIRUTA reconciliation.',
- policy:'Exact SIRUTA hierarchy, official locality containment and OSM provenance are recorded; no fuzzy candidate is auto-assigned. An OSM relation that overcovers multiple legal UAT locality sets is retained only as representation evidence and is never promoted to legal geometry for the missing UAT. Jurisdiction-specific exceptional OSM admin levels are accepted only through reviewed structural resolutions with stable legal identity, hierarchy, nested subdivisions and OSM history.',
+ scope:'Targeted audit of unresolved/duplicate/type-conflict cases, reviewed missing-distinct-boundary cases, reviewed exceptional cross-level OSM representations, and reviewed OSM semantic type metadata conflicts from official SIRUTA reconciliation.',
+ policy:'Exact SIRUTA hierarchy, official locality containment and OSM provenance are recorded; no fuzzy candidate is auto-assigned. An OSM relation that overcovers multiple legal UAT locality sets is retained only as representation evidence and is never promoted to legal geometry for the missing UAT. Jurisdiction-specific exceptional OSM admin levels and OSM semantic type metadata conflicts are accepted only through reviewed resolutions with stable legal identity, hierarchy, geometry containment and OSM history.',
  status:failures.length?'FAIL':'PASS',checks,
  summary:{
   target_relation_count:targetIds.length,
@@ -548,12 +615,13 @@ const report={
   reviewed_parent_assignment_resolution_count:parentAssignmentResolutions.length,
   reviewed_official_only_resolution_count:officialOnlyResolutionValidation.length,
    reviewed_other_level_resolution_count:otherLevelResolutionValidation.length,
+   reviewed_semantic_type_resolution_count:semanticTypeResolutionValidation.length,
   reviewed_override_count:reviewedOverrideValidation.length,
   reviewed_override_containment_failure_count:reviewedOverrideValidation.filter(x=>x.identity_containment_ok===false).length,
   history_error_count:historyErrors.length,
   diagnostic_warning_count:warnings.length
  },
- unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,cross_county_parent_conflicts:crossCountyParentAudits,reviewed_parent_assignment_resolutions:parentAssignmentResolutions,reviewed_official_only_resolutions:officialOnlyResolutionValidation,reviewed_other_level_resolutions:otherLevelResolutionValidation,reviewed_overrides:reviewedOverrideValidation,warnings,failures
+ unmatched,duplicate_groups:duplicateGroups,type_mismatches:typeMismatches,cross_county_parent_conflicts:crossCountyParentAudits,reviewed_parent_assignment_resolutions:parentAssignmentResolutions,reviewed_official_only_resolutions:officialOnlyResolutionValidation,reviewed_other_level_resolutions:otherLevelResolutionValidation,reviewed_semantic_type_resolutions:semanticTypeResolutionValidation,reviewed_overrides:reviewedOverrideValidation,warnings,failures
 };
 const historyOut={schema_version:1,generated_at:report.generated_at,source:'OpenStreetMap API 0.6 relation history',relation_count:targetIds.length,history_count:histories.length,error_count:historyErrors.length,errors:historyErrors,relations:histories};
 await mkdir('data/current',{recursive:true});await mkdir('data/sources',{recursive:true});

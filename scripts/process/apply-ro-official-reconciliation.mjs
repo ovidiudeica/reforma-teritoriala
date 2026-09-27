@@ -131,6 +131,7 @@ const report={
   official_only_count:reconciliation.summary?.official_only_count??null,
   reviewed_official_only_resolution_count:reconciliation.summary?.reviewed_official_only_resolution_count??null,
   reviewed_other_level_resolution_count:reconciliation.summary?.reviewed_other_level_resolution_count??null,
+  reviewed_semantic_type_resolution_count:reconciliation.summary?.reviewed_semantic_type_resolution_count??null,
   represented_at_other_osm_level_count:reconciliation.summary?.represented_at_other_osm_level_count??null
  },
  type_changes:typeChanges,

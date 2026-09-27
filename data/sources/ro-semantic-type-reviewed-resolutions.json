@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "RO",
+  "reviewed_at": "2026-09-27",
+  "policy": "Reviewed OSM semantic type metadata conflicts where SIRUTA legal identity/type is unambiguous, the OSM relation represents the correct UAT geometry, and only OSM legal-type-like tags are stale or incorrect. OSM geometry/provenance is preserved; SIRUTA remains authoritative for legal type.",
+  "items": [
+    {
+      "osm_relation_id": 14743725,
+      "osm_name": "Cehal",
+      "legal_id": "137363",
+      "legal_name": "CEHAL",
+      "legal_type": "commune",
+      "legal_parent_name": "JUDEȚUL SATU MARE",
+      "expected_parent_osm_relation_id": 72482,
+      "osm_claimed_legal_type": "town",
+      "expected_osm_tags": {
+        "name:prefix": "Orașul",
+        "place": "town",
+        "place:ro": "oraș"
+      },
+      "official_component_locality_ids": ["137372","137381","137390"],
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "review_conclusion": "The OSM boundary identity and county placement match SIRUTA 137363 CEHAL, but its legal-type-like tags consistently describe a town. SIRUTA classifies CEHAL as a commune. Treat the OSM type metadata as stale/incorrect representation metadata and retain the official commune type."
+    },
+    {
+      "osm_relation_id": 10697874,
+      "osm_name": "Fetești",
+      "legal_id": "92701",
+      "legal_name": "FETEȘTI",
+      "legal_type": "municipality",
+      "legal_parent_name": "JUDEȚUL IALOMIȚA",
+      "expected_parent_osm_relation_id": 2355517,
+      "osm_claimed_legal_type": "town",
+      "expected_osm_tags": {
+        "name:prefix": "Orașul",
+        "place": "town",
+        "place:ro": "oraș"
+      },
+      "official_component_locality_ids": ["92710","92729","92738","92747"],
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "review_conclusion": "The OSM boundary identity and county placement match SIRUTA 92701 FETEȘTI, but its legal-type-like tags describe a town. SIRUTA classifies FETEȘTI as a municipality. Retain the official municipality type and preserve the OSM tags only as provenance until corrected upstream."
+    },
+    {
+      "osm_relation_id": 14778262,
+      "osm_name": "Salcea",
+      "legal_id": "146370",
+      "legal_name": "SALCEA",
+      "legal_type": "town",
+      "legal_parent_name": "JUDEȚUL SUCEAVA",
+      "expected_parent_osm_relation_id": 2077868,
+      "osm_claimed_legal_type": "commune",
+      "expected_osm_tags": {
+        "name:prefix": "Comuna",
+        "place": "municipality",
+        "place:ro": "comună"
+      },
+      "official_component_locality_ids": ["146389","146398","146405","146414","146423"],
+      "classification": "osm_semantic_metadata_conflicts_with_official_legal_type",
+      "review_conclusion": "The OSM boundary identity and county placement match SIRUTA 146370 SALCEA, but its legal-type-like tags describe a commune. SIRUTA classifies SALCEA as a town. Retain the official town type and preserve the OSM tags only as provenance until corrected upstream."
+    }
+  ]
+}
