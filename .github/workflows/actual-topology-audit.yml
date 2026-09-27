@@ -7,6 +7,7 @@ on:
       - 'data/current/entities.json'
       - 'scripts/process/audit-actual-topology.mjs'
       - 'scripts/process/audit-actual-release-gate.mjs'
+      - 'scripts/process/audit-osm-relation-12463200.mjs'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/actual-topology-audit.yml'
@@ -24,11 +25,12 @@ jobs:
         with:
           node-version: 20
       - run: npm install --no-audit --no-fund
+      - run: npm run audit:osm-12463200
       - run: npm run audit:actual-release-gate
       - name: Upload topology report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: actual-topology-audit
-          path: data/current/actual-topology-audit.json
+          path: |\n            data/current/actual-topology-audit.json\n            data/current/osm-12463200-audit.json
           if-no-files-found: error
