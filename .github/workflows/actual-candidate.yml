@@ -169,8 +169,8 @@ jobs:
           STATUS="$(node -p "require('./data/current/actual-release-candidate.json').status")"
           echo "status=$STATUS" >> "$GITHUB_OUTPUT"
           echo "### ACTUAL candidate disposition" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Status: `$STATUS`" >> "$GITHUB_STEP_SUMMARY"
-          node -e "const d=require('./data/current/actual-candidate-diff.json'); console.log('- Base snapshot: `'+d.base_release.snapshot_id+'`\n- Candidate snapshot: `'+d.candidate.snapshot_id+'`\n- Semantic content changed: `'+d.summary.semantic_content_changed+'`\n- Substantive changes: `'+d.summary.substantive_change_count+'`')" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Status: $STATUS" >> "$GITHUB_STEP_SUMMARY"
+          node -e "const d=require('./data/current/actual-candidate-diff.json'); console.log('- Base snapshot: '+d.base_release.snapshot_id+'\n- Candidate snapshot: '+d.candidate.snapshot_id+'\n- Semantic content changed: '+d.summary.semantic_content_changed+'\n- Substantive changes: '+d.summary.substantive_change_count)" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Preserve base persisted marker
         run: git checkout "${{ steps.base.outputs.base_release_commit }}" -- data/current/actual-release-persisted.json
