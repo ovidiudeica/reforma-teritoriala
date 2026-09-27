@@ -35,6 +35,14 @@ jobs:
         run: npm run import:osm
       - name: Verify regenerated topology
         run: npm run audit:actual-topology
+      - name: Reconcile RO against official SIRUTA
+        run: npm run audit:ro-official-reconciliation
+      - name: Audit RO reconciliation exceptions
+        run: npm run audit:ro-official-exceptions
+      - name: Apply RO official identity
+        run: npm run apply:ro-official-reconciliation
+      - name: Reconcile MD against official CUATM
+        run: npm run reconcile:cuatm
       - name: Regenerate public ACTUAL contract
         run: npm run build:actual-public-data
       - name: Audit structural completeness
