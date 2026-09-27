@@ -27,7 +27,8 @@
     "audit:actual-topology": "node scripts/process/audit-actual-topology.mjs",
     "audit:actual-regression": "node scripts/process/audit-actual-regression.mjs",
     "audit:actual-structural-completeness": "node scripts/process/audit-actual-structural-completeness.mjs",
-    "audit:osm-12463200": "node scripts/process/audit-osm-relation-12463200.mjs"
+    "audit:osm-12463200": "node scripts/process/audit-osm-relation-12463200.mjs",
+    "audit:actual-statistical-levels": "node scripts/process/audit-actual-statistical-levels.mjs"
   },
   "dependencies": {
     "@turf/turf": "^7.2.0",
