@@ -214,6 +214,7 @@ function renderTier(jurisdiction,tier){
  if(!group||!data)return;
  group.clearLayers();
  L.geoJSON(data,{
+  smoothFactor:0,
   filter:feature=>{
    const entity=entityById.get(feature.properties?.entity_id);
    return Boolean(entity&&isVisible(entity));
