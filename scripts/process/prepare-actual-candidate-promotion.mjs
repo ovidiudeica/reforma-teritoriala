@@ -24,13 +24,14 @@ const currentManifestBytes=gitBuffer('data/current/actual-release-manifest.json'
 const currentManifest=JSON.parse(currentManifestBytes.toString('utf8'));
 const failures=[];
 const check=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
-check(candidateMarker.schema_version===1&&candidateMarker.mode==='ACTUAL_CANDIDATE'&&candidateMarker.status==='PASS','candidate_marker_invalid');
+check(candidateMarker.schema_version===1&&candidateMarker.mode==='ACTUAL_CANDIDATE'&&candidateMarker.status==='CHANGE','candidate_marker_not_promotable',{status:candidateMarker.status??null});
+check(candidateMarker.review_required===true&&Number(candidateMarker.substantive_change_count)>0,'candidate_has_no_substantive_change',{review_required:candidateMarker.review_required??null,substantive_change_count:candidateMarker.substantive_change_count??null});
 check(candidateMarker.candidate?.snapshot_id===EXPECTED,'unexpected_candidate_snapshot',{expected:EXPECTED,actual:candidateMarker.candidate?.snapshot_id});
 check(manifest.snapshot_id===EXPECTED,'manifest_snapshot_mismatch',{expected:EXPECTED,actual:manifest.snapshot_id});
 check(gate.status==='PASS'&&gate.snapshot_id===EXPECTED,'candidate_gate_invalid',{status:gate.status,snapshot_id:gate.snapshot_id});
 check(candidateMarker.candidate?.manifest_sha256===sha256(manifestBytes),'candidate_manifest_hash_drift');
 check(candidateMarker.diff_report_sha256===sha256(diffBytes),'candidate_diff_hash_drift');
-check(diff.status==='PASS'&&diff.candidate?.snapshot_id===EXPECTED,'candidate_diff_invalid',{status:diff.status,snapshot_id:diff.candidate?.snapshot_id});
+check(diff.status==='CHANGE'&&diff.candidate?.snapshot_id===EXPECTED&&diff.summary?.semantic_content_changed===true,'candidate_diff_invalid',{status:diff.status,snapshot_id:diff.candidate?.snapshot_id,semantic_content_changed:diff.summary?.semantic_content_changed??null});
 check(currentPersisted.snapshot_id===candidateMarker.base_release?.snapshot_id,'base_snapshot_moved',{candidate_base:candidateMarker.base_release?.snapshot_id,current:currentPersisted.snapshot_id});
 check(currentPersisted.release_fingerprint_sha256===candidateMarker.base_release?.release_fingerprint_sha256,'base_fingerprint_moved');
 check(currentPersisted.manifest_sha256===candidateMarker.base_release?.manifest_sha256,'base_manifest_marker_moved');
@@ -48,7 +49,7 @@ const audit={
  substantive_change_count:candidateMarker.substantive_change_count,
  confirmation:CONFIRM,
  failures,
- policy:'Promotion is permitted only for the explicitly acknowledged candidate snapshot, against the unchanged persisted base release, with exact candidate manifest/diff bytes and a passing release gate.'
+ policy:'Only CHANGE candidates are promotable. NO_CHANGE candidates are terminal and must never create a promotion PR. CHANGE promotion still requires exact candidate bytes, passing gate and an unchanged persisted base.'
 };
 await writeFile('data/current/actual-candidate-promotion-audit.json',JSON.stringify(audit,null,2)+'\n');
 if(failures.length){console.error(JSON.stringify(audit,null,2));process.exit(1);}
