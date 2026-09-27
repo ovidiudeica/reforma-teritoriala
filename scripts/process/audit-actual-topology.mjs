@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
-import {booleanValid,booleanWithin,feature as turfFeature} from '@turf/turf';
+import {booleanWithin} from '@turf/turf';
+import GeoJSONReader from 'jsts/org/locationtech/jts/io/GeoJSONReader.js';
+import IsValidOp from 'jsts/org/locationtech/jts/operation/valid/IsValidOp.js';
+
+const jtsReader=new GeoJSONReader();
 
 const SOURCES={RO:'public/geo/current/ro-administrative.geojson',MD:'public/geo/current/md-administrative.geojson'};
 const CATALOG='data/current/entities.json';
@@ -52,9 +56,13 @@ for(const [jurisdiction,path] of Object.entries(SOURCES)){
   if(!['Polygon','MultiPolygon'].includes(g.type)){add(blockers,jurisdiction,id,'unexpected_geometry_type',{geometry_type:g.type});continue;}
   if(!Array.isArray(g.coordinates)||g.coordinates.length===0){add(blockers,jurisdiction,id,'empty_geometry');continue;}
   const counts=inspectCoordinates(g,jurisdiction,id); coordinateCount+=counts.coordinateCount; ringCount+=counts.ringCount;
-  let valid=false;
-  try{valid=booleanValid(turfFeature(g));}catch(error){add(blockers,jurisdiction,id,'geometry_validation_exception',{message:String(error?.message||error)});continue;}
-  if(!valid)add(blockers,jurisdiction,id,'invalid_polygon_topology');
+  try{
+   const validity=new IsValidOp(jtsReader.read(g));
+   if(!validity.isValid()){
+    const error=validity.getValidationError();
+    add(blockers,jurisdiction,id,'invalid_polygon_topology',{reason:error?.getMessage?.()??null,coordinate:error?.getCoordinate?.()?.toString?.()??null});
+   }
+  }catch(error){add(blockers,jurisdiction,id,'geometry_validation_exception',{message:String(error?.message||error)});continue;}
   const hash=sha256(JSON.stringify(g));
   const previous=exactGeometryOwners.get(hash);
   if(previous)add(blockers,jurisdiction,id,'exact_duplicate_geometry',{same_as:previous});
