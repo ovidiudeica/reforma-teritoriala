@@ -77,6 +77,9 @@ jobs:
       - name: Build deterministic ACTUAL OCI runtime manifest
         run: npm run build:actual-runtime-image-manifest
 
+      - name: Trust mounted GitHub workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Gate pinned ACTUAL OCI runtime
         run: npm run audit:actual-runtime-image
 
