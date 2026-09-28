@@ -40,6 +40,9 @@ jobs:
           ref: ${{ inputs.candidate_branch }}
           fetch-depth: 0
 
+      - name: Trust mounted GitHub workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Gate pinned ACTUAL OCI runtime
         run: npm run audit:actual-runtime-image
 
