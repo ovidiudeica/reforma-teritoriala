@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_SOURCE_BUNDLE",
+  "source_watermark": "2026-09-27T20:37:24.316Z",
+  "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
+  "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
+  "policy": "Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, and the official MD CUATM snapshot. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.",
+  "sources": {
+    "osm": {
+      "manifest_path": "data/sources/osm-current.json",
+      "manifest_sha256": "8f2ec1b9eec9e8f4e9670419f8d01bd734e0078cfd2e3e865db61b6cfece5da0",
+      "snapshot_at": "2026-09-27T20:33:04.478Z",
+      "countries": {
+        "RO": {
+          "snapshot_path": "data/sources/osm-snapshots/ro-d8e84166a90eddd297b5e59b25086a9ad3751dada6d15782781210b8f18fd363.json.gz",
+          "compressed_sha256": "fdc63d6fec3b7ad5b712652da3a1e53dd58fd832d95604fcde19162dc6638aaf",
+          "semantic_sha256": "d8e84166a90eddd297b5e59b25086a9ad3751dada6d15782781210b8f18fd363",
+          "query_sha256": "954368fd8c39d94b5692b2b88aeba8fb33117bc7f3395b4c3a0ead6847cc4ece",
+          "element_count": 783495,
+          "relation_count": 3234,
+          "snapshot_at": "2026-09-27T20:33:04.478Z"
+        },
+        "MD": {
+          "snapshot_path": "data/sources/osm-snapshots/md-057890e4d6b1bd6d76e98576622f2c727958dad82f902ec5c39d87bcc1b223fe.json.gz",
+          "compressed_sha256": "e55945a99b0b26e1ee09bbf26cd3c64bfe957acf6147936900f253f981f009dc",
+          "semantic_sha256": "057890e4d6b1bd6d76e98576622f2c727958dad82f902ec5c39d87bcc1b223fe",
+          "query_sha256": "f182a7a54069bcfe72a924ba178f9821f55f6e61368a4f25d42bf8e0241d52d0",
+          "element_count": 560394,
+          "relation_count": 2596,
+          "snapshot_at": "2026-09-27T20:33:04.478Z"
+        }
+      }
+    },
+    "siruta": {
+      "path": "data/sources/ro-siruta-current.json",
+      "sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f",
+      "registry": "SIRUTA",
+      "reference_year": 2026,
+      "source_content_sha256": "f443e49af2f9c9dce8ea515ae53090a18fb476547466b6cd804051424eaf72c6",
+      "semantic_sha256": "6f2b1af0dd8b53546eaf146444427b6451b3396ee5efd408b1b80ebed9a6ad8f",
+      "fetched_at": "2026-09-26T11:58:48.000Z",
+      "record_count": 16978
+    },
+    "cuatm": {
+      "path": "data/sources/cuatm-current.json",
+      "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575",
+      "registry": "CUATM",
+      "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+      "fetched_at": "2026-09-27T20:37:24.316Z",
+      "record_count": 1721
+    }
+  }
+}
