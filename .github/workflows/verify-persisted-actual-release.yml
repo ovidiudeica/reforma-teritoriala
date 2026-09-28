@@ -12,20 +12,27 @@ on:
 
 permissions:
   contents: read
+  packages: read
 
 jobs:
   verify-persisted-release:
     runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Check out main
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 1
 
-      - name: Set up Node.js
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
-        with:
-          node-version: '24.21.0'
+      - name: Trust mounted GitHub workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Gate pinned ACTUAL OCI runtime
+        run: npm run audit:actual-runtime-image
 
       - name: Audit vendored npm dependency bundle
         run: npm run audit:actual-npm-dependency-bundle

@@ -2,6 +2,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
 import {NPM_BUNDLE_ARCHIVE,NPM_BUNDLE_MANIFEST,validateNpmDependencyBundle} from './actual-npm-dependency-bundle.mjs';
+import {EXPECTED_RUNTIME_IMAGE,RUNTIME_IMAGE_PATH,validateRuntimeImageManifest} from './actual-runtime-image.mjs';
 
 export const BUILD_ENVIRONMENT_PATH='data/current/actual-build-environment-manifest.json';
 export const BUILD_ENVIRONMENT_GATE_PATH='data/current/actual-build-environment-gate.json';
@@ -19,7 +20,6 @@ export const EXPECTED_BUILD_ENVIRONMENT={
  },
  actions:{
   'actions/checkout':'fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09',
-  'actions/setup-node':'a0853c24544627f65ddf259abe73b1d18a591444',
   'actions/upload-artifact':'ea165f8d65b6e75b540449e92b4886f43607fa02'
  }
 };
@@ -36,7 +36,10 @@ export const BUILD_SUPPORT_FILES=[
  'scripts/process/audit-actual-build-environment-gate.mjs',
  'scripts/process/audit-actual-npm-dependency-bundle.mjs',
  'scripts/process/install-actual-npm-offline.mjs',
- 'scripts/process/audit-node-toolchain.mjs'
+ 'scripts/process/audit-node-toolchain.mjs',
+ 'scripts/lib/actual-runtime-image.mjs',
+ 'scripts/process/build-actual-runtime-image-manifest.mjs',
+ 'scripts/process/audit-actual-runtime-image.mjs'
 ];
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
@@ -57,7 +60,8 @@ const parseWorkflow=content=>{
  const runsOn=[...content.matchAll(/^\s*runs-on:\s*([^\s#]+).*$/gm)].map(m=>m[1]);
  const uses=[...content.matchAll(/^\s*uses:\s*([^\s#]+).*$/gm)].map(m=>m[1]);
  const nodeVersions=[...content.matchAll(/^\s*node-version:\s*['"]?([^'"\s#]+).*$/gm)].map(m=>m[1]);
- return {runs_on:runsOn,uses,node_versions:nodeVersions};
+ const containerImages=[...content.matchAll(/^\s*image:\s*([^\s#]+).*$/gm)].map(m=>m[1]);
+ return {runs_on:runsOn,uses,node_versions:nodeVersions,container_images:containerImages};
 };
 
 export function buildEnvironmentFingerprint(manifest){
@@ -73,15 +77,17 @@ export function buildEnvironmentFingerprint(manifest){
 }
 
 export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
- const [packageBytes,lockBytes,npmBundleManifestBytes,npmBundleArchiveBytes]=await Promise.all([
+ const [packageBytes,lockBytes,npmBundleManifestBytes,npmBundleArchiveBytes,runtimeManifestBytes]=await Promise.all([
   readFileFn('package.json'),
   readFileFn('package-lock.json'),
   readFileFn(NPM_BUNDLE_MANIFEST),
-  readFileFn(NPM_BUNDLE_ARCHIVE)
+  readFileFn(NPM_BUNDLE_ARCHIVE),
+  readFileFn(RUNTIME_IMAGE_PATH)
  ]);
  const packageJson=JSON.parse(packageBytes.toString('utf8'));
  const lock=JSON.parse(lockBytes.toString('utf8'));
  const npmBundleManifest=JSON.parse(npmBundleManifestBytes.toString('utf8'));
+ const runtimeManifest=JSON.parse(runtimeManifestBytes.toString('utf8'));
  const supportFiles=Object.fromEntries(await Promise.all(BUILD_SUPPORT_FILES.map(async path=>{
   const bytes=await readFileFn(path);
   return [path,sha256(bytes)];
@@ -97,6 +103,7 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
    sha256:sha256(bytes),
    runs_on:parsed.runs_on,
    node_versions:parsed.node_versions,
+   container_images:parsed.container_images,
    actions:parsed.uses.filter(value=>value.startsWith('actions/')).sort()
   };
   for(const value of workflows[id].actions){
@@ -106,6 +113,16 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
  }
  return {
   runner:{...EXPECTED_BUILD_ENVIRONMENT.runner},
+  runtime_image:{
+   manifest_path:RUNTIME_IMAGE_PATH,
+   manifest_sha256:sha256(runtimeManifestBytes),
+   runtime_fingerprint_sha256:runtimeManifest.runtime_fingerprint_sha256??null,
+   ref:runtimeManifest.runtime?.ref??null,
+   digest:runtimeManifest.runtime?.digest??null,
+   platform:runtimeManifest.runtime?.platform??null,
+   base_ref:runtimeManifest.runtime?.base_ref??null,
+   base_digest:runtimeManifest.runtime?.base_digest??null
+  },
   toolchain:{
    node:packageJson.engines?.node??null,
    npm:packageJson.engines?.npm??null,
@@ -132,7 +149,7 @@ export function buildBuildEnvironmentManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_BUILD_ENVIRONMENT',
   environment_fingerprint_algorithm:BUILD_ENVIRONMENT_ALGORITHM,
-  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, Node/npm, package files, the vendored offline npm dependency bundle, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.',
+  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.',
   environment:inspected
  };
  const fingerprint=buildEnvironmentFingerprint(draft);
@@ -152,10 +169,12 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
   checks.push({name,ok:Boolean(ok),detail});
   if(!ok)failures.push({name,detail});
  };
- let current=null,error=null,npmBundleValidation=null;
+ let current=null,error=null,npmBundleValidation=null,runtimeValidation=null;
  try{
   current=await inspectCurrentBuildEnvironment({readFileFn});
   npmBundleValidation=await validateNpmDependencyBundle({readFileFn});
+  const runtimeBytes=await readFileFn(RUNTIME_IMAGE_PATH);
+  runtimeValidation=await validateRuntimeImageManifest(JSON.parse(runtimeBytes.toString('utf8')),{readFileFn});
  }
  catch(err){error=err;}
 
@@ -174,9 +193,21 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
    Object.values(current.workflows).every(item=>item.runs_on.length===1&&item.runs_on[0]===EXPECTED_BUILD_ENVIRONMENT.runner.label),
    {expected:EXPECTED_BUILD_ENVIRONMENT.runner.label,actual:Object.fromEntries(Object.entries(current.workflows).map(([id,item])=>[id,item.runs_on]))});
 
-  check('node_version_is_exact_in_workflows',
-   Object.values(current.workflows).every(item=>item.node_versions.length===1&&item.node_versions[0]===EXPECTED_BUILD_ENVIRONMENT.toolchain.node),
-   {expected:EXPECTED_BUILD_ENVIRONMENT.toolchain.node,actual:Object.fromEntries(Object.entries(current.workflows).map(([id,item])=>[id,item.node_versions]))});
+  check('runtime_container_is_exact',
+   Object.values(current.workflows).every(item=>item.container_images.length===1&&item.container_images[0]===EXPECTED_RUNTIME_IMAGE.ref)
+   && current.runtime_image.ref===EXPECTED_RUNTIME_IMAGE.ref
+   && current.runtime_image.digest===EXPECTED_RUNTIME_IMAGE.digest,
+   {expected:EXPECTED_RUNTIME_IMAGE.ref,actual:Object.fromEntries(Object.entries(current.workflows).map(([id,item])=>[id,item.container_images])),manifest:current.runtime_image});
+
+  check('dynamic_node_setup_is_absent',
+   Object.values(current.workflows).every(item=>item.node_versions.length===0)
+   && !Object.prototype.hasOwnProperty.call(current.actions,'actions/setup-node'),
+   {node_versions:Object.fromEntries(Object.entries(current.workflows).map(([id,item])=>[id,item.node_versions])),actions:current.actions});
+
+  check('runtime_image_manifest_valid',
+   runtimeValidation?.status==='PASS'
+   && current.runtime_image.runtime_fingerprint_sha256===runtimeValidation?.fingerprint?.sha256,
+   {status:runtimeValidation?.status??null,fingerprint:runtimeValidation?.fingerprint?.sha256??null,failures:runtimeValidation?.failures??[]});
 
   check('github_actions_are_exact_commit_shas',
    JSON.stringify(canonicalizeBuildEnvironment(current.actions))===JSON.stringify(canonicalizeBuildEnvironment(EXPECTED_BUILD_ENVIRONMENT.actions))
@@ -209,14 +240,16 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
    node:process.version.replace(/^v/,''),
    npm:actualNpm,
    runner_os:process.env.RUNNER_OS??null,
-   image_os:process.env.ImageOS??null,
-   image_version:process.env.ImageVersion??null
+   host_image_os:process.env.ImageOS??null,
+   host_image_version:process.env.ImageVersion??null
   };
   check('runtime_node_exact',actual.node===EXPECTED_BUILD_ENVIRONMENT.toolchain.node,{expected:EXPECTED_BUILD_ENVIRONMENT.toolchain.node,actual:actual.node});
   check('runtime_npm_exact',actual.npm===EXPECTED_BUILD_ENVIRONMENT.toolchain.npm,{expected:EXPECTED_BUILD_ENVIRONMENT.toolchain.npm,actual:actual.npm});
   check('runtime_runner_os_linux',actual.runner_os==='Linux',{expected:'Linux',actual:actual.runner_os});
-  check('runtime_image_os_exact',actual.image_os===EXPECTED_BUILD_ENVIRONMENT.runner.image_os,{expected:EXPECTED_BUILD_ENVIRONMENT.runner.image_os,actual:actual.image_os});
-  check('runtime_image_version_exact',actual.image_version===EXPECTED_BUILD_ENVIRONMENT.runner.image_version,{expected:EXPECTED_BUILD_ENVIRONMENT.runner.image_version,actual:actual.image_version});
+  check('host_runner_identity_is_static_provenance',
+   actual.host_image_os===null&&actual.host_image_version===null
+   || actual.host_image_os===EXPECTED_BUILD_ENVIRONMENT.runner.image_os&&actual.host_image_version===EXPECTED_BUILD_ENVIRONMENT.runner.image_version,
+   {policy:'GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match the pinned provenance.',expected:{image_os:EXPECTED_BUILD_ENVIRONMENT.runner.image_os,image_version:EXPECTED_BUILD_ENVIRONMENT.runner.image_version},actual:{image_os:actual.host_image_os,image_version:actual.host_image_version}});
  }
 
  return {status:failures.length?'FAIL':'PASS',checks,failures,current,fingerprint};

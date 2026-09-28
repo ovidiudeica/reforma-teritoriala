@@ -48,6 +48,7 @@ test('all Node workflows pin the exact runtime and never use npm install',async(
 test('dependency-consuming ACTUAL workflows install only from the vendored offline bundle',async()=>{
  for(const name of ['actual-candidate.yml','actual-topology-audit.yml']){
   const content=await readFile(join('.github/workflows',name),'utf8');
+  assert.match(content,/npm run audit:actual-runtime-image/);
   assert.match(content,/npm run audit:node-toolchain/);
   assert.match(content,/npm run audit:actual-npm-dependency-bundle/);
   assert.match(content,/npm run install:actual-offline-deps/);

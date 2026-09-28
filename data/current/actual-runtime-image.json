@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_OCI_RUNTIME",
+  "runtime_fingerprint_algorithm": "actual-oci-runtime-v1",
+  "policy": "Exact ACTUAL OCI runtime identity. The upstream Node base, final GHCR image digest, Dockerfile bytes and builder workflow bytes are pinned; the builder must produce the same digest twice from identical inputs.",
+  "runtime": {
+    "image": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime",
+    "digest": "sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
+    "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
+    "platform": "linux/amd64",
+    "base_image": "node:24.21.0-bookworm",
+    "base_digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
+    "base_ref": "node:24.21.0-bookworm@sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
+    "node": "24.21.0",
+    "npm": "11.19.0"
+  },
+  "source": {
+    "dockerfile": {
+      "path": "container/actual-runtime/Dockerfile",
+      "sha256": "0bcf3f5ba5488af7b7cf6f6b6cea7b43121ea9d79c814c54676f6bf446442ed7"
+    },
+    "builder_workflow": {
+      "path": ".github/workflows/build-actual-runtime-image.yml",
+      "sha256": "08b23ef78cbaba17ed5d883d7bb7588d73c60edc27759a38663991e43e0a0fd1"
+    }
+  },
+  "reproducibility": {
+    "source_date_epoch": 0,
+    "provenance": false,
+    "sbom": false,
+    "double_build_digest_equality": true
+  },
+  "runtime_fingerprint_sha256": "33c65232de75b24b2b11a8cc6f8ece6f1eb16a3acdf0ff1088b929a31f24ca76"
+}

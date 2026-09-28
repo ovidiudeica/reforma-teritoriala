@@ -11,6 +11,7 @@ console.log(JSON.stringify({
  build_environment_path:BUILD_ENVIRONMENT_PATH,
  environment_fingerprint_sha256:manifest.environment_fingerprint_sha256,
  runner:manifest.environment.runner,
+ runtime_image:manifest.environment.runtime_image,
  toolchain:{
   node:manifest.environment.toolchain.node,
   npm:manifest.environment.toolchain.npm,

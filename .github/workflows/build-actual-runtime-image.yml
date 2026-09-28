@@ -1,0 +1,111 @@
+name: Build ACTUAL OCI runtime
+
+on:
+  push:
+    branches:
+      - 'actual/pin-oci-runtime'
+    paths:
+      - 'container/actual-runtime/**'
+      - '.github/workflows/build-actual-runtime-image.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: actual-runtime-image
+  cancel-in-progress: false
+
+jobs:
+  build-runtime:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out runtime source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 1
+
+      - name: Resolve exact upstream Node image digest
+        id: base
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_TAG="node:24.21.0-bookworm"
+          PINNED_BASE_DIGEST="sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4"
+          docker buildx imagetools inspect "$BASE_TAG" --raw > /tmp/node-manifest.json
+          BASE_DIGEST="sha256:$(sha256sum /tmp/node-manifest.json | awk '{print $1}')"
+          test "$BASE_DIGEST" = "$PINNED_BASE_DIGEST"
+          DOCKERFILE_SHA256="$(sha256sum container/actual-runtime/Dockerfile | awk '{print $1}')"
+          BUILDER_SHA256="$(sha256sum .github/workflows/build-actual-runtime-image.yml | awk '{print $1}')"
+          echo "base_tag=$BASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "base_digest=$BASE_DIGEST" >> "$GITHUB_OUTPUT"
+          echo "dockerfile_sha256=$DOCKERFILE_SHA256" >> "$GITHUB_OUTPUT"
+          echo "builder_sha256=$BUILDER_SHA256" >> "$GITHUB_OUTPUT"
+          echo "### ACTUAL runtime upstream" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Base: $BASE_TAG@$BASE_DIGEST" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Log in to GHCR
+        shell: bash
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Build and publish exact runtime
+        id: publish
+        shell: bash
+        env:
+          IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime
+          BASE_TAG: ${{ steps.base.outputs.base_tag }}
+          BASE_DIGEST: ${{ steps.base.outputs.base_digest }}
+        run: |
+          set -euo pipefail
+          TAG_A="candidate-${GITHUB_SHA}-a"
+          TAG_B="candidate-${GITHUB_SHA}-b"
+          DOCKERFILE_SHA256="${{ steps.base.outputs.dockerfile_sha256 }}"
+          export SOURCE_DATE_EPOCH=0
+          for TAG in "$TAG_A" "$TAG_B"; do
+            docker buildx build \
+              --platform linux/amd64 \
+              --no-cache \
+              --provenance=false \
+              --sbom=false \
+              --build-arg "SOURCE_DATE_EPOCH=0" \
+              --build-arg "BASE_IMAGE=$BASE_TAG@$BASE_DIGEST" \
+              --build-arg "ACTUAL_RUNTIME_BASE_DIGEST=$BASE_DIGEST" \
+              --build-arg "ACTUAL_RUNTIME_DOCKERFILE_SHA256=$DOCKERFILE_SHA256" \
+              --tag "$IMAGE:$TAG" \
+              --output "type=image,push=true,rewrite-timestamp=true" \
+              -f container/actual-runtime/Dockerfile .
+          done
+          DIGEST_A="$(docker buildx imagetools inspect "$IMAGE:$TAG_A" | awk '/^Digest:/ {print $2; exit}')"
+          DIGEST_B="$(docker buildx imagetools inspect "$IMAGE:$TAG_B" | awk '/^Digest:/ {print $2; exit}')"
+          test -n "$DIGEST_A"
+          test "$DIGEST_A" = "$DIGEST_B"
+          RUNTIME_DIGEST="$DIGEST_A"
+          echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG_A" >> "$GITHUB_OUTPUT"
+          echo "digest=$RUNTIME_DIGEST" >> "$GITHUB_OUTPUT"
+          echo "dockerfile_sha256=$DOCKERFILE_SHA256" >> "$GITHUB_OUTPUT"
+          echo "### ACTUAL OCI runtime" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Image: $IMAGE@$RUNTIME_DIGEST" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Base digest: $BASE_DIGEST" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Dockerfile SHA-256: $DOCKERFILE_SHA256" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Builder workflow SHA-256: ${{ steps.base.outputs.builder_sha256 }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Reproducible double-build digest: $RUNTIME_DIGEST" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify published runtime
+        shell: bash
+        env:
+          IMAGE: ${{ steps.publish.outputs.image }}
+          DIGEST: ${{ steps.publish.outputs.digest }}
+        run: |
+          set -euo pipefail
+          docker pull "$IMAGE@$DIGEST"
+          docker run --rm "$IMAGE@$DIGEST" bash -lc '
+            test "$(node --version)" = "v24.21.0"
+            test "$(npm --version)" = "11.19.0"
+            git --version
+          '
