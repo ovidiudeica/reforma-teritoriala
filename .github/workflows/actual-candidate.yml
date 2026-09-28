@@ -73,6 +73,9 @@ jobs:
         with:
           node-version: '24.21.0'
 
+      - name: Audit vendored npm dependency bundle
+        run: npm run audit:actual-npm-dependency-bundle
+
       - name: Build deterministic ACTUAL execution environment
         run: npm run build:actual-build-environment
 
@@ -114,7 +117,8 @@ jobs:
           console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha,build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256},null,2));
           NODE
 
-      - run: npm ci --no-audit --no-fund
+      - name: Install dependencies from vendored offline bundle
+        run: npm run install:actual-offline-deps
 
       - name: Refresh official RO SIRUTA source inside candidate workspace
         if: inputs.refresh_ro_siruta == true
@@ -300,6 +304,7 @@ jobs:
             data/current/actual-source-bundle-gate.json
             data/current/actual-build-environment-manifest.json
             data/current/actual-build-environment-gate.json
+            vendor/npm/manifest.json
             data/current/actual-release-manifest.json
             data/current/actual-release-gate.json
             data/current/actual-topology-audit.json
