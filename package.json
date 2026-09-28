@@ -36,7 +36,7 @@
     "apply:md-reviewed-reconciliation": "node scripts/process/apply-md-reviewed-reconciliation.mjs",
     "build:actual-candidate-diff": "node scripts/process/build-actual-candidate-diff.mjs",
     "prepare:actual-candidate-promotion": "node scripts/process/prepare-actual-candidate-promotion.mjs",
-    "test:actual-candidate-lifecycle": "node --test scripts/test/actual-candidate-lifecycle.test.mjs scripts/test/actual-byte-reproducibility.test.mjs scripts/test/actual-source-bundle.test.mjs scripts/test/actual-build-environment.test.mjs scripts/test/toolchain-reproducibility.test.mjs scripts/test/ro-siruta-refresh-routing.test.mjs scripts/test/md-cuatm-refresh-routing.test.mjs scripts/test/osm-refresh-routing.test.mjs scripts/test/workflow-write-boundaries.test.mjs",
+    "test:actual-candidate-lifecycle": "node --test scripts/test/actual-candidate-lifecycle.test.mjs scripts/test/actual-byte-reproducibility.test.mjs scripts/test/actual-source-bundle.test.mjs scripts/test/actual-build-environment.test.mjs scripts/test/npm-offline-dependency-bundle.test.mjs scripts/test/toolchain-reproducibility.test.mjs scripts/test/ro-siruta-refresh-routing.test.mjs scripts/test/md-cuatm-refresh-routing.test.mjs scripts/test/osm-refresh-routing.test.mjs scripts/test/workflow-write-boundaries.test.mjs",
     "import:md-cuatm": "node scripts/import/import-md-cuatm.mjs",
     "build:osm-actual": "node scripts/process/build-osm-actual.mjs",
     "stabilize:actual-bytes": "node scripts/process/stabilize-actual-release-bytes.mjs",
@@ -45,7 +45,10 @@
     "audit:node-toolchain": "node scripts/process/audit-node-toolchain.mjs",
     "test:toolchain-reproducibility": "node --test scripts/test/toolchain-reproducibility.test.mjs",
     "build:actual-build-environment": "node scripts/process/build-actual-build-environment-manifest.mjs",
-    "audit:actual-build-environment": "node scripts/process/audit-actual-build-environment-gate.mjs"
+    "audit:actual-build-environment": "node scripts/process/audit-actual-build-environment-gate.mjs",
+    "build:actual-npm-dependency-bundle": "node scripts/process/build-actual-npm-dependency-bundle.mjs",
+    "audit:actual-npm-dependency-bundle": "node scripts/process/audit-actual-npm-dependency-bundle.mjs",
+    "install:actual-offline-deps": "node scripts/process/install-actual-npm-offline.mjs"
   },
   "dependencies": {
     "@turf/turf": "7.4.0",
