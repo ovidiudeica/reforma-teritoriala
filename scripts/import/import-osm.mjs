@@ -21,8 +21,8 @@ const RETRIES_PER_ENDPOINT=positiveInt(process.env.OVERPASS_RETRIES_PER_ENDPOINT
 const REQUEST_TIMEOUT_MS=positiveInt(process.env.OVERPASS_REQUEST_TIMEOUT_MS,90000);
 const RETRY_BACKOFF_MS=positiveInt(process.env.OVERPASS_RETRY_BACKOFF_MS,5000);
 const countries={
- RO:{name:'România',iso:'RO',levels:[4,8,9],requiredRelations:[],minElements:10000},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316],minElements:10000}
+ RO:{name:'România',iso:'RO',levels:[4,8,9],requiredLevels:[4,8,9],requiredRelations:[],minElements:10000},
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredLevels:[4,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316],minElements:10000}
 };
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const sha256=value=>createHash('sha256').update(value).digest('hex');
@@ -58,8 +58,8 @@ function validateRaw(raw,code,cfg){
  const relations=raw.elements.filter(x=>x.type==='relation');
  const country=relations.find(x=>x.tags?.['ISO3166-1']===cfg.iso&&x.tags?.boundary==='administrative');
  if(!country)throw new Error(`OSM ${code} snapshot is missing the country administrative relation`);
- for(const level of cfg.levels){
-  if(!relations.some(x=>String(x.tags?.admin_level||'')===String(level)))throw new Error(`OSM ${code} snapshot has no administrative relation at level ${level}`);
+ for(const level of cfg.requiredLevels){
+  if(!relations.some(x=>String(x.tags?.admin_level||'')===String(level)))throw new Error(`OSM ${code} snapshot has no required administrative relation at level ${level}`);
  }
  for(const id of cfg.requiredRelations){
   if(!relations.some(x=>Number(x.id)===id))throw new Error(`OSM ${code} snapshot is missing required relation ${id}`);
@@ -149,6 +149,7 @@ async function main(){
    name:cfg.name,
    iso:cfg.iso,
    levels:cfg.levels,
+   required_levels:cfg.requiredLevels,
    required_relations:cfg.requiredRelations,
    runtime_path:`${RUNTIME_DIR}/${code.toLowerCase()}-overpass.json.gz`,
    semantic_sha256:fresh[code].semanticSha,
