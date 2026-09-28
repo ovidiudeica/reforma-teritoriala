@@ -41,8 +41,7 @@ const validation=validateCandidatePromotion({
 });
 const failures=validation.failures;
 const audit={
- schema_version:1,
- generated_at:new Date().toISOString(),
+ schema_version:2,
  mode:'ACTUAL_CANDIDATE_PROMOTION',
  status:validation.status,
  base_ref:BASE_REF,
@@ -72,10 +71,10 @@ const persisted={
   diff_report_sha256:candidateMarker.diff_report_sha256,
   review_required:candidateMarker.review_required,
   substantive_change_count:candidateMarker.substantive_change_count,
+  candidate_identity_sha256:candidateMarker.candidate_identity_sha256,
   promotion_audit_path:'data/current/actual-candidate-promotion-audit.json'
  },
- source_candidate:candidateMarker.source,
- policy:'Persisted ACTUAL release marker written only by explicit candidate promotion after exact candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification.'
+ policy:'Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.'
 };
 await writeFile('data/current/actual-release-persisted.json',JSON.stringify(persisted,null,2)+'\n');
 console.log(JSON.stringify({status:'PASS',base_snapshot_id:candidateMarker.base_release.snapshot_id,promoted_snapshot_id:manifest.snapshot_id,review_required:candidateMarker.review_required,substantive_change_count:candidateMarker.substantive_change_count},null,2));

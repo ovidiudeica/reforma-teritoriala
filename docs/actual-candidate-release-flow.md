@@ -49,6 +49,12 @@ When a regenerated candidate has the same canonical content as the persisted rel
 
 Only a `CHANGE` candidate receives a new semantic release identity and may proceed to explicit promotion.
 
+### Deterministic candidate metadata
+
+Committed candidate bytes are execution-independent. `actual-candidate-diff.json` and `actual-release-candidate.json` contain no wall-clock generation time, GitHub run id, run attempt or triggering SHA. Their candidate identity is derived only from the immutable base release, exact candidate release provenance and exact diff bytes.
+
+Volatile workflow evidence is written separately to `actual-candidate-execution-receipt.json` under `runner.temp` and uploaded only as a review artifact; it is never staged into a candidate or persisted release tree. Candidate and promotion Git commits use the deterministic release-manifest `generated_at` value as both author and committer date. Therefore two independent `CHANGE` builds from the same parent and exact inputs must produce the same candidate tree and the same Git commit object SHA.
+
 
 ## Romania SIRUTA source refresh
 

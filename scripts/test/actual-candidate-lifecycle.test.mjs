@@ -6,7 +6,7 @@ import {mkdtemp,mkdir,readFile,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {actualSemanticFingerprint} from '../lib/actual-semantic-fingerprint.mjs';
-import {classifyCandidateDisposition,validateCandidatePromotion,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
+import {candidateIdentityFingerprint,classifyCandidateDisposition,validateCandidatePromotion,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
 
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const readJson=async path=>JSON.parse(await readFile(path,'utf8'));
@@ -192,13 +192,19 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
  };
  const manifestBytes=Buffer.from(JSON.stringify(manifest,null,2)+'\n');
  const diffBytes=Buffer.from(JSON.stringify(diff,null,2)+'\n');
+ const markerCandidate={snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes),source_bundle_fingerprint_sha256:sourceBundleFingerprint,review_evidence_bundle_fingerprint_sha256:reviewEvidenceFingerprint,network_denial_sha256:networkDenialSha,host_trust_fingerprint_sha256:hostTrustFingerprint,build_environment_fingerprint_sha256:buildEnvironmentFingerprint};
+ const markerDiffSha256=sha256(diffBytes);
+ const markerIdentity=candidateIdentityFingerprint({baseRef:'synthetic-base',baseRelease:diff.base_release,candidate:markerCandidate,diffReportSha256:markerDiffSha256});
  const marker={
-  schema_version:1,
+  schema_version:2,
   mode:'ACTUAL_CANDIDATE',
   status:'CHANGE',
+  base_ref:'synthetic-base',
   base_release:diff.base_release,
-  candidate:{snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes),source_bundle_fingerprint_sha256:sourceBundleFingerprint,review_evidence_bundle_fingerprint_sha256:reviewEvidenceFingerprint,network_denial_sha256:networkDenialSha,host_trust_fingerprint_sha256:hostTrustFingerprint,build_environment_fingerprint_sha256:buildEnvironmentFingerprint},
-  diff_report_sha256:sha256(diffBytes),
+  candidate:markerCandidate,
+  diff_report_sha256:markerDiffSha256,
+  candidate_identity_algorithm:markerIdentity.algorithm,
+  candidate_identity_sha256:markerIdentity.sha256,
   review_required:true,
   substantive_change_count:disposition.substantive_change_count
  };
@@ -244,30 +250,43 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
  assert.equal(rejectedNoChange.status,'FAIL');
  assert.ok(rejectedNoChange.failures.some(x=>x.issue==='candidate_marker_not_promotable'));
 
- const temp=await mkdtemp(join(tmpdir(),'actual-synthetic-change-'));
- const git=(...args)=>execFileSync('git',args,{cwd:temp,stdio:'pipe'}).toString().trim();
- git('init','-b','main');
- git('config','user.name','ACTUAL regression test');
- git('config','user.email','actual-regression@example.invalid');
- await writeFile(join(temp,'release.json'),JSON.stringify({snapshot_id:persisted.snapshot_id})+'\n');
- git('add','release.json');
- git('commit','-m','synthetic persisted base');
- git('checkout','-b','actual/synthetic-change');
- await mkdir(join(temp,'candidate'),{recursive:true});
- await writeFile(join(temp,'candidate','manifest.json'),manifestBytes);
- await writeFile(join(temp,'candidate','diff.json'),diffBytes);
- await writeFile(join(temp,'candidate','marker.json'),JSON.stringify(marker,null,2)+'\n');
- git('add','candidate');
- git('commit','-m','synthetic ACTUAL CHANGE candidate');
- assert.equal(git('branch','--show-current'),'actual/synthetic-change');
- assert.equal(git('rev-list','--count','main..HEAD'),'1');
+ const buildSyntheticRepo=async()=>{
+  const temp=await mkdtemp(join(tmpdir(),'actual-synthetic-change-'));
+  const deterministicDate=manifest.generated_at;
+  const git=(...args)=>execFileSync('git',args,{cwd:temp,stdio:'pipe',env:{...process.env,GIT_AUTHOR_DATE:deterministicDate,GIT_COMMITTER_DATE:deterministicDate}}).toString().trim();
+  git('init','-b','main');
+  git('config','user.name','ACTUAL regression test');
+  git('config','user.email','actual-regression@example.invalid');
+  await writeFile(join(temp,'release.json'),JSON.stringify({snapshot_id:persisted.snapshot_id})+'\n');
+  git('add','release.json');
+  git('commit','-m','synthetic persisted base');
+  git('checkout','-b','actual/synthetic-change');
+  await mkdir(join(temp,'candidate'),{recursive:true});
+  await writeFile(join(temp,'candidate','manifest.json'),manifestBytes);
+  await writeFile(join(temp,'candidate','diff.json'),diffBytes);
+  await writeFile(join(temp,'candidate','marker.json'),JSON.stringify(marker,null,2)+'\n');
+  git('add','candidate');
+  git('commit','-m','synthetic ACTUAL CHANGE candidate');
+  assert.equal(git('branch','--show-current'),'actual/synthetic-change');
+  assert.equal(git('rev-list','--count','main..HEAD'),'1');
+  return {tree:git('rev-parse','HEAD^{tree}'),commit:git('rev-parse','HEAD')};
+ };
+ const firstSynthetic=await buildSyntheticRepo();
+ const secondSynthetic=await buildSyntheticRepo();
+ assert.equal(firstSynthetic.tree,secondSynthetic.tree,'synthetic CHANGE tree must be byte-identical across independent builds');
+ assert.equal(firstSynthetic.commit,secondSynthetic.commit,'synthetic CHANGE commit object must be identical across independent builds');
  t.diagnostic(JSON.stringify({
   status:'PASS',
   mode:'SYNTHETIC_CHANGE_LIFECYCLE',
   base_snapshot_id:persisted.snapshot_id,
   candidate_snapshot_id:candidateSnapshot,
+  candidate_identity_sha256:marker.candidate_identity_sha256,
   base_content_fingerprint_sha256:baseFp.sha256,
   candidate_content_fingerprint_sha256:changedFp.sha256,
+  tree_sha:firstSynthetic.tree,
+  commit_sha:firstSynthetic.commit,
+  repeated_build_tree_sha:secondSynthetic.tree,
+  repeated_build_commit_sha:secondSynthetic.commit,
   branch:'actual/synthetic-change',
   remote_push:false,
   exact_snapshot_promotion:'PASS',
@@ -314,4 +333,25 @@ test('candidate semantic manifest binding supports only explicit v3 binding or e
   exactBaseManifestBytesReused:true
  });
  assert.equal(changedSemantic.status,'FAIL');
+});
+
+
+test('candidate tree excludes volatile execution metadata and Git commits use deterministic release time',async()=>{
+ const [builder,receipt,candidateWorkflow,promotion,promotionWorkflow]=await Promise.all([
+  readFile('scripts/process/build-actual-candidate-diff.mjs','utf8'),
+  readFile('scripts/process/write-actual-candidate-execution-receipt.mjs','utf8'),
+  readFile('.github/workflows/actual-candidate.yml','utf8'),
+  readFile('scripts/process/prepare-actual-candidate-promotion.mjs','utf8'),
+  readFile('.github/workflows/actual-promote-candidate.yml','utf8')
+ ]);
+ assert.doesNotMatch(builder,/new Date\(\)\.toISOString\(\)/);
+ assert.doesNotMatch(builder,/GITHUB_RUN_ID|GITHUB_RUN_ATTEMPT|GITHUB_SHA/);
+ assert.match(receipt,/new Date\(\)\.toISOString\(\)/);
+ assert.match(receipt,/GITHUB_RUN_ID/);
+ assert.match(candidateWorkflow,/runner\.temp.*actual-candidate-execution-receipt\.json/);
+ assert.doesNotMatch(candidateWorkflow,/--env GITHUB_RUN_ID|--env GITHUB_RUN_ATTEMPT|--env GITHUB_SHA/);
+ assert.match(candidateWorkflow,/GIT_AUTHOR_DATE="\$COMMIT_DATE" GIT_COMMITTER_DATE="\$COMMIT_DATE" git commit/);
+ assert.doesNotMatch(promotion,/new Date\(\)\.toISOString\(\)/);
+ assert.doesNotMatch(promotion,/source_candidate/);
+ assert.match(promotionWorkflow,/GIT_AUTHOR_DATE="\$COMMIT_DATE" GIT_COMMITTER_DATE="\$COMMIT_DATE" git commit/);
 });
