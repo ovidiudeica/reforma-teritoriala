@@ -62,8 +62,8 @@ test('candidate captures compressed raw OSM bytes for review without committing 
 test('deterministic OSM builder retains all non-network classifier dependencies after extraction',async()=>{
  const builder=await readFile(builderPath,'utf8');
  assert.match(builder,/const CLASSIFIER_VERSION='2\.3'/);
- assert.match(builder,/const countries=\\{/);
- assert.match(builder,/ro-level9-exception-evidence\\.json/);
+ assert.match(builder,/const countries=\{/);
+ assert.match(builder,/ro-level9-exception-evidence\.json/);
  assert.match(builder,/const roSemanticByRelation=/);
  assert.match(builder,/const RO_SEMANTIC_CLASSES=/);
 });
