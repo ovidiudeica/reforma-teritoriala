@@ -11,9 +11,12 @@ const topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));
 
 const OUTPUT='data/current/actual-release-gate.json';
 const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
+const NETWORK_DENIAL='data/current/actual-network-denial-audit.json';
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const manifestBuf=await readFile(MANIFEST);
 const settlementPolicyBuf=await readFile(SETTLEMENT_POLICY);
+const networkDenialBuf=await readFile(NETWORK_DENIAL);
+const networkDenial=JSON.parse(networkDenialBuf.toString('utf8'));
 const manifest=JSON.parse(manifestBuf.toString('utf8'));
 const settlementPolicy=JSON.parse(settlementPolicyBuf.toString('utf8'));
 const sourceBundleBuf=await readFile(SOURCE_BUNDLE_PATH);
@@ -132,6 +135,23 @@ check('manifest_binds_current_review_evidence_bundle',
  && manifest.review_evidence_bundle?.bundle_fingerprint_sha256===reviewEvidenceBundle.bundle_fingerprint_sha256
  && manifest.review_evidence_bundle?.sha256===reviewEvidenceSha256(reviewEvidenceBundleBuf),
  {manifest:manifest.review_evidence_bundle??null,actual:{path:REVIEW_EVIDENCE_BUNDLE_PATH,schema_version:reviewEvidenceBundle.schema_version,mode:reviewEvidenceBundle.mode,evidence_watermark:reviewEvidenceBundle.evidence_watermark,bundle_fingerprint_algorithm:reviewEvidenceBundle.bundle_fingerprint_algorithm,bundle_fingerprint_sha256:reviewEvidenceBundle.bundle_fingerprint_sha256,sha256:reviewEvidenceSha256(reviewEvidenceBundleBuf)}});
+check('network_denial_proof_passes',
+ networkDenial.schema_version===1
+ && networkDenial.mode==='ACTUAL_NETWORK_DENIAL'
+ && networkDenial.status==='PASS'
+ && networkDenial.enforcement==='docker --network none'
+ && networkDenial.docker_socket_mounted===false
+ && Object.values(networkDenial.checks||{}).every(Boolean),
+ {status:networkDenial.status??null,enforcement:networkDenial.enforcement??null,docker_socket_mounted:networkDenial.docker_socket_mounted??null,checks:networkDenial.checks??null});
+check('manifest_binds_network_denial_proof',
+ manifest.network_denial?.path===NETWORK_DENIAL
+ && manifest.network_denial?.schema_version===networkDenial.schema_version
+ && manifest.network_denial?.mode===networkDenial.mode
+ && manifest.network_denial?.status==='PASS'
+ && manifest.network_denial?.enforcement===networkDenial.enforcement
+ && manifest.network_denial?.docker_socket_mounted===false
+ && manifest.network_denial?.sha256===sha256(networkDenialBuf),
+ {manifest:manifest.network_denial??null,actual:{path:NETWORK_DENIAL,sha256:sha256(networkDenialBuf),status:networkDenial.status??null,enforcement:networkDenial.enforcement??null}});
 check('build_environment_manifest_matches_repository',
  buildEnvironmentValidation.status==='PASS',
  {status:buildEnvironmentValidation.status,failures:buildEnvironmentValidation.failures});
@@ -336,7 +356,7 @@ const report={
  manifest_path:MANIFEST,
  manifest_sha256:sha256(manifestBuf),
  status:failures.length?'FAIL':'PASS',
- policy:'The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, environment or release drift fails closed.',
+ policy:'The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.',
  checks,
  failures
 };
