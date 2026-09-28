@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,rename,writeFile} from 'node:fs/promises';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 
 const MANIFEST='data/sources/osm-current.json';
 const SNAPSHOT_DIR='data/sources/osm-snapshots';
