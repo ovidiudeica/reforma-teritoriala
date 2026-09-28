@@ -5,6 +5,7 @@ import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual
 import {SOURCE_BUNDLE_GATE_PATH,SOURCE_BUNDLE_PATH,sha256 as sourceSha256,validateSourceBundleManifest} from '../lib/actual-source-bundle.mjs';
 import {BUILD_ENVIRONMENT_PATH,sha256 as environmentSha256,validateBuildEnvironmentManifest} from '../lib/actual-build-environment.mjs';
 import {REVIEW_EVIDENCE_BUNDLE_PATH,REVIEW_EVIDENCE_GATE_PATH,sha256 as reviewEvidenceSha256,validateReviewEvidenceBundle} from '../lib/actual-review-evidence-bundle.mjs';
+import {HOST_TRUST_PATH,sha256 as hostTrustSha256,validateHostTrustManifest} from '../lib/actual-host-trust.mjs';
 const MANIFEST='data/current/actual-release-manifest.json';
 const TOPOLOGY_AUDIT='data/current/actual-topology-audit.json';
 const topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));
@@ -27,6 +28,9 @@ const reviewEvidenceBundleBuf=await readFile(REVIEW_EVIDENCE_BUNDLE_PATH);
 const reviewEvidenceBundle=JSON.parse(reviewEvidenceBundleBuf.toString('utf8'));
 const reviewEvidenceGate=JSON.parse(await readFile(REVIEW_EVIDENCE_GATE_PATH,'utf8'));
 const reviewEvidenceValidation=await validateReviewEvidenceBundle(reviewEvidenceBundle);
+const hostTrustBuf=await readFile(HOST_TRUST_PATH);
+const hostTrust=JSON.parse(hostTrustBuf.toString('utf8'));
+const hostTrustValidation=validateHostTrustManifest(hostTrust);
 const buildEnvironmentBuf=await readFile(BUILD_ENVIRONMENT_PATH);
 const buildEnvironment=JSON.parse(buildEnvironmentBuf.toString('utf8'));
 const buildEnvironmentValidation=await validateBuildEnvironmentManifest(buildEnvironment);
@@ -135,6 +139,25 @@ check('manifest_binds_current_review_evidence_bundle',
  && manifest.review_evidence_bundle?.bundle_fingerprint_sha256===reviewEvidenceBundle.bundle_fingerprint_sha256
  && manifest.review_evidence_bundle?.sha256===reviewEvidenceSha256(reviewEvidenceBundleBuf),
  {manifest:manifest.review_evidence_bundle??null,actual:{path:REVIEW_EVIDENCE_BUNDLE_PATH,schema_version:reviewEvidenceBundle.schema_version,mode:reviewEvidenceBundle.mode,evidence_watermark:reviewEvidenceBundle.evidence_watermark,bundle_fingerprint_algorithm:reviewEvidenceBundle.bundle_fingerprint_algorithm,bundle_fingerprint_sha256:reviewEvidenceBundle.bundle_fingerprint_sha256,sha256:reviewEvidenceSha256(reviewEvidenceBundleBuf)}});
+check('host_trust_contract_passes',
+ hostTrustValidation.status==='PASS',
+ {status:hostTrustValidation.status,failures:hostTrustValidation.failures,fingerprint:hostTrust.host_trust_fingerprint_sha256??null});
+check('manifest_binds_host_trust_contract',
+ manifest.schema_version>=8
+ && manifest.host_trust?.path===HOST_TRUST_PATH
+ && manifest.host_trust?.schema_version===hostTrust.schema_version
+ && manifest.host_trust?.mode===hostTrust.mode
+ && manifest.host_trust?.host_trust_fingerprint_algorithm===hostTrust.host_trust_fingerprint_algorithm
+ && manifest.host_trust?.host_trust_fingerprint_sha256===hostTrust.host_trust_fingerprint_sha256
+ && manifest.host_trust?.runner_image_version===hostTrust.contract?.runner?.image_version
+ && manifest.host_trust?.kernel_release===hostTrust.contract?.kernel?.release
+ && manifest.host_trust?.docker_server_version===hostTrust.contract?.docker?.server_version
+ && manifest.host_trust?.containerd_version===hostTrust.contract?.docker?.components?.containerd?.version
+ && manifest.host_trust?.runc_version===hostTrust.contract?.docker?.components?.runc?.version
+ && JSON.stringify(manifest.host_trust?.cpu_execution_profile??null)===JSON.stringify(hostTrust.contract?.cpu_contract?.execution_profile??null)
+ && manifest.host_trust?.sha256===hostTrustSha256(hostTrustBuf),
+ {manifest:manifest.host_trust??null,actual:{path:HOST_TRUST_PATH,fingerprint:hostTrust.host_trust_fingerprint_sha256??null,sha256:hostTrustSha256(hostTrustBuf),runner_image_version:hostTrust.contract?.runner?.image_version??null,kernel_release:hostTrust.contract?.kernel?.release??null,docker_server_version:hostTrust.contract?.docker?.server_version??null,containerd_version:hostTrust.contract?.docker?.components?.containerd?.version??null,runc_version:hostTrust.contract?.docker?.components?.runc?.version??null,cpu_execution_profile:hostTrust.contract?.cpu_contract?.execution_profile??null}});
+
 check('network_denial_proof_passes',
  networkDenial.schema_version===1
  && networkDenial.mode==='ACTUAL_NETWORK_DENIAL'
