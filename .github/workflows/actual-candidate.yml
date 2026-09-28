@@ -100,14 +100,17 @@ jobs:
             --network none \
             --cap-drop ALL \
             --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
             --workdir /workspace \
             --env ACTUAL_NETWORK_MODE=docker-network-none \
             --env GITHUB_ACTIONS=true \
             --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
             "$ACTUAL_RUNTIME_IMAGE" \
             bash -lc '
               set -euo pipefail
+              mkdir -p "$HOME"
               git config --global --add safe.directory /workspace
               npm run prove:actual-network-denial
               npm run build:actual-runtime-image-manifest
@@ -154,6 +157,7 @@ jobs:
             --network bridge \
             --cap-drop ALL \
             --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
             --workdir /workspace \
             --env REFRESH_RO_SIRUTA \
@@ -168,6 +172,7 @@ jobs:
             "$ACTUAL_RUNTIME_IMAGE" \
             bash -lc '
               set -euo pipefail
+              mkdir -p "$HOME"
               git config --global --add safe.directory /workspace
               npm run install:actual-offline-deps
               if [ "$REFRESH_RO_SIRUTA" = "true" ]; then npm run import:ro-siruta; fi
@@ -183,12 +188,14 @@ jobs:
             --network none \
             --cap-drop ALL \
             --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
             --workdir /workspace \
             --env ACTUAL_BASE_REF="$BASE_RELEASE_COMMIT" \
             --env ACTUAL_NETWORK_MODE=docker-network-none \
             --env GITHUB_ACTIONS=true \
             --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
             --env GITHUB_RUN_ID \
             --env GITHUB_RUN_ATTEMPT \
             --env GITHUB_SHA \
