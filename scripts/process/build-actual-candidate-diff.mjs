@@ -50,6 +50,7 @@ requireCheck(baselineMarker.validated_release_gate_status==='PASS','baseline_mar
 requireCheck(baselineMarker.snapshot_id===baselineManifest.snapshot_id,'baseline_snapshot_mismatch',{marker:baselineMarker.snapshot_id,manifest:baselineManifest.snapshot_id});
 requireCheck(baselineMarker.release_fingerprint_sha256===baselineManifest.release_fingerprint_sha256,'baseline_fingerprint_mismatch');
 requireCheck(baselineMarker.source_bundle_fingerprint_sha256===baselineManifest.source_bundle?.bundle_fingerprint_sha256,'baseline_source_bundle_fingerprint_mismatch',{marker:baselineMarker.source_bundle_fingerprint_sha256??null,manifest:baselineManifest.source_bundle?.bundle_fingerprint_sha256??null});
+requireCheck(baselineMarker.review_evidence_bundle_fingerprint_sha256===baselineManifest.review_evidence_bundle?.bundle_fingerprint_sha256,'baseline_review_evidence_bundle_fingerprint_mismatch',{marker:baselineMarker.review_evidence_bundle_fingerprint_sha256??null,manifest:baselineManifest.review_evidence_bundle?.bundle_fingerprint_sha256??null});
 requireCheck(baselineMarker.build_environment_fingerprint_sha256===baselineManifest.build_environment?.environment_fingerprint_sha256,'baseline_build_environment_fingerprint_mismatch',{marker:baselineMarker.build_environment_fingerprint_sha256??null,manifest:baselineManifest.build_environment?.environment_fingerprint_sha256??null});
 requireCheck(baselineMarker.manifest_sha256===baselineManifestSha,'baseline_manifest_hash_mismatch',{marker:baselineMarker.manifest_sha256,actual:baselineManifestSha});
 requireCheck(gate.status==='PASS','candidate_release_gate_not_pass',{status:gate.status});
@@ -181,6 +182,7 @@ const report={
   release_fingerprint_sha256:baselineMarker.release_fingerprint_sha256,
   manifest_sha256:baselineMarker.manifest_sha256,
   source_bundle_fingerprint_sha256:baselineMarker.source_bundle_fingerprint_sha256,
+  review_evidence_bundle_fingerprint_sha256:baselineMarker.review_evidence_bundle_fingerprint_sha256,
   build_environment_fingerprint_sha256:baselineMarker.build_environment_fingerprint_sha256
  },
  candidate:{
@@ -190,6 +192,7 @@ const report={
   release_gate_status:gate.status,
   content_fingerprint_sha256:candidateSemantic.sha256,
   source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
+  review_evidence_bundle_fingerprint_sha256:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null,
   build_environment_fingerprint_sha256:manifest.build_environment?.environment_fingerprint_sha256??null,
   semantic_manifest_binding:semanticManifestBinding.binding,
   exact_base_manifest_bytes_reused:exactBaseManifestBytesReused
