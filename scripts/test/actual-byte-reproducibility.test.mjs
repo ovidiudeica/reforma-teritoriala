@@ -90,3 +90,60 @@ test('stabilizer scope matches the release manifest component set',async()=>{
     assert.match(manifestBuilder,new RegExp('\\b'+key+':'));
   }
 });
+
+
+test('Wikipedia/Wikidata drift is ignored only when explicitly enabled for administrative artifacts',()=>{
+  const base={id:'osm-r1',osm:{wikipedia:'ro:raionul Ștefan Vodă',wikidata:'Q1'},type:'district'};
+  const current={id:'osm-r1',osm:{wikipedia:'ro:Raionul Ștefan Vodă',wikidata:'Q2'},type:'district'};
+  assert.equal(semanticArtifactEqual(base,current),false);
+  assert.equal(semanticArtifactEqual(base,current,{ignoreNonAdministrativeMetadata:true}),true);
+});
+
+test('administrative comparator never hides legal, classification or geometry changes',()=>{
+  assert.equal(
+    semanticArtifactEqual(
+      {id:'osm-r1',type:'district',osm:{wikipedia:'ro:x'}},
+      {id:'osm-r1',type:'town_uat',osm:{wikipedia:'ro:X'}},
+      {ignoreNonAdministrativeMetadata:true}
+    ),
+    false
+  );
+  assert.equal(
+    semanticArtifactEqual(
+      {type:'Feature',properties:{catalog_id:'osm-r1',wikipedia:'ro:x'},geometry:{type:'Point',coordinates:[1,2]}},
+      {type:'Feature',properties:{catalog_id:'osm-r1',wikipedia:'ro:X'},geometry:{type:'Point',coordinates:[1,3]}},
+      {ignoreNonAdministrativeMetadata:true}
+    ),
+    false
+  );
+  assert.equal(
+    semanticArtifactEqual(
+      {type:'Feature',properties:{catalog_id:'osm-r1',wikipedia:'ro:x',legal_id:'1'},geometry:{type:'Point',coordinates:[1,2]}},
+      {type:'Feature',properties:{catalog_id:'osm-r1',wikipedia:'ro:X',legal_id:'2'},geometry:{type:'Point',coordinates:[1,2]}},
+      {ignoreNonAdministrativeMetadata:true}
+    ),
+    false
+  );
+});
+
+test('byte restoration can explicitly reuse base bytes for non-admin metadata-only drift',()=>{
+  const base=Buffer.from('{"id":"osm-r1","osm":{"wikipedia":"ro:raionul Ștefan Vodă"},"type":"district"}\n');
+  const current=Buffer.from('{"id":"osm-r1","osm":{"wikipedia":"ro:Raionul Ștefan Vodă"},"type":"district"}\n');
+  const strict=stabilizeJsonBytes({baseBytes:base,currentBytes:current,stableTimestamp:'2026-01-01T00:00:00.000Z'});
+  assert.equal(strict.semantic_equal_to_base,false);
+  const admin=stabilizeJsonBytes({
+    baseBytes:base,
+    currentBytes:current,
+    stableTimestamp:'2026-01-01T00:00:00.000Z',
+    ignoreNonAdministrativeMetadata:true
+  });
+  assert.equal(admin.action,'RESTORE_BASE_BYTES');
+  assert.deepEqual(admin.bytes,base);
+});
+
+test('non-admin metadata tolerance is scoped only to catalog and master GeoJSON components',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const stabilizer=await readFile('scripts/process/stabilize-actual-release-bytes.mjs','utf8');
+  assert.match(stabilizer,/NON_ADMIN_METADATA_COMPONENTS=new Set\(\['catalog','ro_geojson','md_geojson'\]\)/);
+  assert.match(stabilizer,/ignoreNonAdministrativeMetadata=NON_ADMIN_METADATA_COMPONENTS\.has\(key\)/);
+});
