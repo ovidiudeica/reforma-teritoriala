@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
+import {NPM_BUNDLE_ARCHIVE,NPM_BUNDLE_MANIFEST,validateNpmDependencyBundle} from './actual-npm-dependency-bundle.mjs';
 
 export const BUILD_ENVIRONMENT_PATH='data/current/actual-build-environment-manifest.json';
 export const BUILD_ENVIRONMENT_GATE_PATH='data/current/actual-build-environment-gate.json';
@@ -63,12 +64,15 @@ export function buildEnvironmentFingerprint(manifest){
 }
 
 export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
- const [packageBytes,lockBytes]=await Promise.all([
+ const [packageBytes,lockBytes,npmBundleManifestBytes,npmBundleArchiveBytes]=await Promise.all([
   readFileFn('package.json'),
-  readFileFn('package-lock.json')
+  readFileFn('package-lock.json'),
+  readFileFn(NPM_BUNDLE_MANIFEST),
+  readFileFn(NPM_BUNDLE_ARCHIVE)
  ]);
  const packageJson=JSON.parse(packageBytes.toString('utf8'));
  const lock=JSON.parse(lockBytes.toString('utf8'));
+ const npmBundleManifest=JSON.parse(npmBundleManifestBytes.toString('utf8'));
  const workflows={};
  const actionUses=new Map();
  for(const [id,path] of Object.entries(BUILD_WORKFLOWS)){
@@ -94,7 +98,15 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
    npm:packageJson.engines?.npm??null,
    package_manager:packageJson.packageManager??null,
    package_json:{path:'package.json',sha256:sha256(packageBytes)},
-   package_lock:{path:'package-lock.json',sha256:sha256(lockBytes),lockfile_version:lock.lockfileVersion??null}
+   package_lock:{path:'package-lock.json',sha256:sha256(lockBytes),lockfile_version:lock.lockfileVersion??null},
+   dependency_bundle:{
+    manifest_path:NPM_BUNDLE_MANIFEST,
+    manifest_sha256:sha256(npmBundleManifestBytes),
+    archive_path:NPM_BUNDLE_ARCHIVE,
+    archive_sha256:sha256(npmBundleArchiveBytes),
+    bundle_fingerprint_sha256:npmBundleManifest.bundle_fingerprint_sha256??null,
+    package_entry_count:npmBundleManifest.package_entry_count??null
+   }
   },
   actions:Object.fromEntries([...actionUses.entries()].sort(([a],[b])=>a.localeCompare(b))),
   workflows
@@ -106,7 +118,7 @@ export function buildBuildEnvironmentManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_BUILD_ENVIRONMENT',
   environment_fingerprint_algorithm:BUILD_ENVIRONMENT_ALGORITHM,
-  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner family and image version, Node/npm, package files, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.',
+  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, Node/npm, package files, the vendored offline npm dependency bundle, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.',
   environment:inspected
  };
  const fingerprint=buildEnvironmentFingerprint(draft);
@@ -126,8 +138,11 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
   checks.push({name,ok:Boolean(ok),detail});
   if(!ok)failures.push({name,detail});
  };
- let current=null,error=null;
- try{current=await inspectCurrentBuildEnvironment({readFileFn});}
+ let current=null,error=null,npmBundleValidation=null;
+ try{
+  current=await inspectCurrentBuildEnvironment({readFileFn});
+  npmBundleValidation=await validateNpmDependencyBundle({readFileFn});
+ }
  catch(err){error=err;}
 
  check('manifest_schema_and_mode',
@@ -160,6 +175,12 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
    && current.toolchain.package_manager===EXPECTED_BUILD_ENVIRONMENT.toolchain.package_manager
    && current.toolchain.package_lock.lockfile_version===3,
    {expected:EXPECTED_BUILD_ENVIRONMENT.toolchain,actual:current.toolchain});
+  check('npm_dependency_bundle_valid',
+   npmBundleValidation?.status==='PASS'
+   && current.toolchain.dependency_bundle.bundle_fingerprint_sha256===npmBundleValidation?.manifest?.bundle_fingerprint_sha256
+   && current.toolchain.dependency_bundle.archive_sha256===npmBundleValidation?.archive_sha256
+   && current.toolchain.dependency_bundle.manifest_sha256===npmBundleValidation?.manifest_sha256,
+   {status:npmBundleValidation?.status??null,fingerprint:npmBundleValidation?.manifest?.bundle_fingerprint_sha256??null,failures:npmBundleValidation?.failures??[]});
  }
 
  const fingerprint=buildEnvironmentFingerprint(manifest);
