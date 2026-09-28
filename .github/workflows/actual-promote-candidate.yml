@@ -81,7 +81,7 @@ jobs:
           const manifestBytes=await readFile('data/current/actual-release-manifest.json');
           const manifest=JSON.parse(manifestBytes);
           const sha=createHash('sha256').update(manifestBytes).digest('hex');
-          if(marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256||marker.network_denial_sha256!==manifest.network_denial?.sha256||marker.validated_release_gate_status!=='PASS'){
+          if(marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256||marker.network_denial_sha256!==manifest.network_denial?.sha256||marker.host_trust_fingerprint_sha256!==manifest.host_trust?.host_trust_fingerprint_sha256||marker.validated_release_gate_status!=='PASS'){
             throw new Error('Promotion marker does not bind the exact candidate snapshot.');
           }
           console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha},null,2));
