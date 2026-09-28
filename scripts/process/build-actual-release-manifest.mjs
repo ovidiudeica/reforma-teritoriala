@@ -8,6 +8,7 @@ import {BUILD_ENVIRONMENT_PATH,buildEnvironmentFingerprint as computeBuildEnviro
 import {REVIEW_EVIDENCE_BUNDLE_PATH,reviewEvidenceFingerprint as computeReviewEvidenceFingerprint} from '../lib/actual-review-evidence-bundle.mjs';
 
 const OUTPUT='data/current/actual-release-manifest.json';
+const NETWORK_DENIAL='data/current/actual-network-denial-audit.json';
 const PATHS={
  catalog:'data/current/entities.json',
  inventory:'data/current/administrative-inventory.json',
@@ -46,6 +47,10 @@ const reviewEvidenceBundleHash=sha256(reviewEvidenceBundleBytes);
 const computedReviewEvidenceFingerprint=computeReviewEvidenceFingerprint(reviewEvidenceBundle);
 if(reviewEvidenceBundle.schema_version!==1||reviewEvidenceBundle.mode!=='ACTUAL_REVIEW_EVIDENCE_BUNDLE')throw new Error('Invalid ACTUAL review evidence bundle schema/mode');
 if(reviewEvidenceBundle.bundle_fingerprint_algorithm!==computedReviewEvidenceFingerprint.algorithm||reviewEvidenceBundle.bundle_fingerprint_sha256!==computedReviewEvidenceFingerprint.sha256)throw new Error('ACTUAL review evidence bundle fingerprint mismatch');
+const networkDenialBytes=await readFile(NETWORK_DENIAL);
+const networkDenial=JSON.parse(networkDenialBytes.toString('utf8'));
+if(networkDenial.schema_version!==1||networkDenial.mode!=='ACTUAL_NETWORK_DENIAL'||networkDenial.status!=='PASS')throw new Error('Invalid ACTUAL network-denial proof');
+const networkDenialHash=sha256(networkDenialBytes);
 const buildEnvironmentBytes=await readFile(BUILD_ENVIRONMENT_PATH);
 const buildEnvironment=JSON.parse(buildEnvironmentBytes.toString('utf8'));
 const buildEnvironmentHash=sha256(buildEnvironmentBytes);
@@ -162,7 +167,7 @@ const manifest={
  content_fingerprint_sha256:semanticFingerprint.sha256,
  component_byte_fingerprint_sha256:byteFingerprint.sha256,
  content_identity:contentIdentity,
- policy:'Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle and build-environment bindings remain mandatory integrity constraints.',
+ policy:'Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance, kernel-enforced network-denial proof and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle, network-denial and build-environment bindings remain mandatory integrity constraints.',
  jurisdictions,
  source_bundle:{
   path:SOURCE_BUNDLE_PATH,
@@ -181,6 +186,15 @@ const manifest={
   bundle_fingerprint_algorithm:reviewEvidenceBundle.bundle_fingerprint_algorithm,
   bundle_fingerprint_sha256:reviewEvidenceBundle.bundle_fingerprint_sha256,
   sha256:reviewEvidenceBundleHash
+ },
+ network_denial:{
+  path:NETWORK_DENIAL,
+  schema_version:networkDenial.schema_version,
+  mode:networkDenial.mode,
+  status:networkDenial.status,
+  enforcement:networkDenial.enforcement??null,
+  docker_socket_mounted:networkDenial.docker_socket_mounted??null,
+  sha256:networkDenialHash
  },
  build_environment:{
   path:BUILD_ENVIRONMENT_PATH,
@@ -285,11 +299,15 @@ const baseReviewEvidenceMatches=Boolean(baseManifest)
  && baseManifest.review_evidence_bundle?.path===REVIEW_EVIDENCE_BUNDLE_PATH
  && baseManifest.review_evidence_bundle?.sha256===reviewEvidenceBundleHash
  && baseManifest.review_evidence_bundle?.bundle_fingerprint_sha256===reviewEvidenceBundle.bundle_fingerprint_sha256;
+const baseNetworkDenialMatches=Boolean(baseManifest)
+ && baseManifest.network_denial?.path===NETWORK_DENIAL
+ && baseManifest.network_denial?.sha256===networkDenialHash
+ && baseManifest.network_denial?.status==='PASS';
 const baseBuildEnvironmentMatches=Boolean(baseManifest)
  && baseManifest.build_environment?.path===BUILD_ENVIRONMENT_PATH
  && baseManifest.build_environment?.sha256===buildEnvironmentHash
  && baseManifest.build_environment?.environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256;
-const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseSourceBundleMatches&&baseReviewEvidenceMatches&&baseBuildEnvironmentMatches&&baseManifestBytes;
+const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseSourceBundleMatches&&baseReviewEvidenceMatches&&baseNetworkDenialMatches&&baseBuildEnvironmentMatches&&baseManifestBytes;
 
 await mkdir('data/current',{recursive:true});
 if(reuseExactBaseManifest){
