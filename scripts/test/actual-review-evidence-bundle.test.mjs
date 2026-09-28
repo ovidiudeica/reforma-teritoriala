@@ -17,7 +17,10 @@ test('review evidence bundle is deterministic and validates current frozen evide
 });
 
 test('ACTUAL candidate consumes frozen review evidence and never runs live evidence refresh audits',async()=>{
- const workflow=await readFile('.github/workflows/actual-candidate.yml','utf8');
+ const [workflow,runner]=await Promise.all([
+  readFile('.github/workflows/actual-candidate.yml','utf8'),
+  readFile('scripts/process/run-actual-deterministic-candidate.sh','utf8')
+ ]);
  for(const forbidden of [
   'npm run audit:ro-official-exceptions',
   'npm run audit:ro-level9-exceptions',
@@ -25,7 +28,10 @@ test('ACTUAL candidate consumes frozen review evidence and never runs live evide
   'npm run audit:balti-way-history',
   'npm run audit:balti-semantics',
   'npm run audit:md-individual-cases'
- ])assert.equal(workflow.includes(forbidden),false,forbidden+' must not run in deterministic candidate lifecycle');
- assert.match(workflow,/npm run build:actual-review-evidence-bundle/);
- assert.match(workflow,/npm run audit:actual-review-evidence-bundle/);
+ ]){
+  assert.equal(workflow.includes(forbidden),false,forbidden+' must not run in candidate control flow');
+  assert.equal(runner.includes(forbidden),false,forbidden+' must not run in deterministic candidate lifecycle');
+ }
+ assert.match(runner,/npm run build:actual-review-evidence-bundle/);
+ assert.match(runner,/npm run audit:actual-review-evidence-bundle/);
 });
