@@ -30,6 +30,10 @@ const env={
  npm_config_audit:'false',
  npm_config_fund:'false',
  npm_config_ignore_scripts:'true',
+ npm_config_proxy:denied,
+ npm_config_https_proxy:denied,
+ npm_config_fetch_retries:'0',
+ npm_config_fetch_timeout:'1000',
  HTTP_PROXY:denied,HTTPS_PROXY:denied,ALL_PROXY:denied,NO_PROXY:''
 };
 const args=['ci','--offline','--ignore-scripts','--no-audit','--no-fund'];
@@ -49,6 +53,6 @@ console.log(JSON.stringify({
  mode:'ACTUAL_NPM_OFFLINE_INSTALL',
  package_entry_count:validation.manifest.package_entry_count,
  bundle_fingerprint_sha256:validation.manifest.bundle_fingerprint_sha256,
- network_denial:{npm_offline:true,registry:denied,http_proxy:denied,https_proxy:denied,all_proxy:denied,lifecycle_scripts:false},
+ network_denial:{npm_offline:true,registry:denied,npm_proxy:denied,npm_https_proxy:denied,http_proxy:denied,https_proxy:denied,all_proxy:denied,fetch_retries:0,lifecycle_scripts:false},
  install_command:'npm ci --offline --ignore-scripts --no-audit --no-fund'
 },null,2));
