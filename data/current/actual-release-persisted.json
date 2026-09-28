@@ -2,15 +2,15 @@
   "schema_version": 1,
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "manifest_sha256": "5287a7b1b9c339c26313fdc588072f6eea10bb18c25c41081b87800fa4b0f796",
+  "manifest_sha256": "bdcf941d1d147efdba3e34d047d491ee964d43cefa108454e8c7b2fb9e6f05a6",
   "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
-  "build_environment_fingerprint_sha256": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
+  "build_environment_fingerprint_sha256": "55c73ac404b37bf5e4502a82812385b1441ccdb3431fcb57ccfba432c0d34af3",
   "validated_release_gate_status": "PASS",
   "provenance_migration": {
-    "previous_manifest_sha256": "a4864098f2741595679a7185e24fc5d4250ffe02f539468f938d5388c3f0fb18",
-    "reason": "kernel-network-denial"
+    "previous_manifest_sha256": "5287a7b1b9c339c26313fdc588072f6eea10bb18c25c41081b87800fa4b0f796",
+    "reason": "shell-independent-hermetic-preflight"
   },
   "policy": "Marker for exact ACTUAL snapshot bytes, exact source provenance, frozen review evidence, kernel-enforced network denial and exact execution-environment provenance. It is not part of the semantic release fingerprint."
 }
