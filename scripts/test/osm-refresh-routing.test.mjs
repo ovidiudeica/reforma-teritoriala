@@ -80,7 +80,8 @@ test('OSM importer is the only networked OSM source step and writes durable cont
  assert.doesNotMatch(builder,/\bfetch\s*\(/);
  assert.doesNotMatch(builder,/OVERPASS_/);
  assert.doesNotMatch(builder,/https:\/\/overpass/);
- assert.doesNotMatch(builder,/new Date\s*\(/);
+ assert.doesNotMatch(builder,/new Date\s*\(\s*\)/);
+ assert.doesNotMatch(builder,/Date\.now\s*\(/);
  assert.doesNotMatch(builder,/osm-runtime/);
 });
 
