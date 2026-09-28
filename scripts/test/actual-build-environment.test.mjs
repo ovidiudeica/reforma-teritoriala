@@ -28,7 +28,9 @@ test('build-environment fingerprint reacts to workflow, action, lockfile and ven
   value=>{value.environment.toolchain.package_lock.sha256='2'.repeat(64);},
   value=>{value.environment.toolchain.dependency_bundle.archive_sha256='3'.repeat(64);},
   value=>{value.environment.toolchain.dependency_bundle.bundle_fingerprint_sha256='4'.repeat(64);},
-  value=>{value.environment.support_files['scripts/process/install-actual-npm-offline.mjs']='5'.repeat(64);}
+  value=>{value.environment.runtime_image.digest='5'.repeat(64);},
+  value=>{value.environment.runtime_image.runtime_fingerprint_sha256='6'.repeat(64);},
+  value=>{value.environment.support_files['scripts/process/install-actual-npm-offline.mjs']='7'.repeat(64);}
  ]){
   const changed=structuredClone(manifest);
   mutate(changed);
@@ -50,11 +52,13 @@ test('release manifest cryptographically binds the current build environment',as
 
 test('candidate builds and gates execution environment before dependency installation',async()=>{
  const workflow=await readFile('.github/workflows/actual-candidate.yml','utf8');
+ const runtimeBuild=workflow.indexOf('npm run build:actual-runtime-image-manifest');
+ const runtimeGate=workflow.indexOf('npm run audit:actual-runtime-image');
+ const bundleGate=workflow.indexOf('npm run audit:actual-npm-dependency-bundle');
  const build=workflow.indexOf('npm run build:actual-build-environment');
  const gate=workflow.indexOf('npm run audit:actual-build-environment');
- const bundleGate=workflow.indexOf('npm run audit:actual-npm-dependency-bundle');
  const offlineInstall=workflow.indexOf('npm run install:actual-offline-deps');
- assert.ok(bundleGate>=0&&build>bundleGate&&gate>build&&offlineInstall>gate);
+ assert.ok(runtimeBuild>=0&&runtimeGate>runtimeBuild&&bundleGate>runtimeGate&&build>bundleGate&&gate>build&&offlineInstall>gate);
  assert.match(workflow,/data\/current\/actual-build-environment-manifest\.json/);
  assert.match(workflow,/data\/current\/actual-build-environment-gate\.json/);
 });
