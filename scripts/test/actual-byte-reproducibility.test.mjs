@@ -57,3 +57,36 @@ test('only artifact-runtime metadata is ignored; external historical timestamps 
   assert.equal(semanticArtifactEqual(a,b),false);
   assert.deepEqual(stripArtifactVolatile(a),{history:{created_at:'2020-01-01T00:00:00Z'}});
 });
+
+
+test('candidate stabilizes release components before manifest construction',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const [workflow,pkg]=await Promise.all([
+    readFile('.github/workflows/actual-candidate.yml','utf8'),
+    readFile('package.json','utf8').then(JSON.parse)
+  ]);
+  const stabilizeIndex=workflow.indexOf('npm run stabilize:actual-bytes');
+  const manifestIndex=workflow.indexOf('npm run build:actual-release-manifest');
+  const diffIndex=workflow.indexOf('npm run build:actual-candidate-diff');
+  assert.ok(stabilizeIndex>=0&&manifestIndex>stabilizeIndex&&diffIndex>manifestIndex);
+  assert.equal(pkg.scripts['stabilize:actual-bytes'],'node scripts/process/stabilize-actual-release-bytes.mjs');
+  assert.match(workflow,/ACTUAL_BASE_REF: \$\{\{ steps\.base\.outputs\.base_release_commit \}\}/);
+});
+
+test('stabilizer scope matches the release manifest component set',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const [stabilizer,manifestBuilder]=await Promise.all([
+    readFile('scripts/process/stabilize-actual-release-bytes.mjs','utf8'),
+    readFile('scripts/process/build-actual-release-manifest.mjs','utf8')
+  ]);
+  for(const key of [
+    'catalog','inventory','ro_geojson','md_geojson','public_index',
+    'ro_overview','ro_local','ro_detail','md_overview','md_local','md_detail',
+    'ro_gate','md_gate','ro_official','md_official','md_individual_review',
+    'md_semantic_bridge','topology_audit','regression_audit',
+    'structural_completeness_audit','official_identity_audit','settlement_policy'
+  ]){
+    assert.match(stabilizer,new RegExp('\\b'+key+':'));
+    assert.match(manifestBuilder,new RegExp('\\b'+key+':'));
+  }
+});
