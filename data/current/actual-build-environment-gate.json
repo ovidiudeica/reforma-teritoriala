@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "639f1cfd8ad9ce1ccd005226894e7a891ad8698ec8a098ee8075651ee14626e2",
-  "environment_fingerprint_sha256": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed",
+  "build_environment_sha256": "43825378904ca3384816ceff09fbb4ff4871f1f8723218b0326e7b2536ace96a",
+  "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner family/image, the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest. GitHub Actions runs also verify the observed hosted image version.",
   "checks": [
@@ -21,7 +21,7 @@
       "detail": {
         "workflow_count": 4,
         "action_count": 2,
-        "support_file_count": 10
+        "support_file_count": 13
       }
     },
     {
@@ -130,7 +130,7 @@
           "package_manager": "npm@11.19.0",
           "package_json": {
             "path": "package.json",
-            "sha256": "1944843a04f2fb15ee93d48a6dd25eec454625f292dda1197d365df96cdd5d91"
+            "sha256": "002815ddea515613ca119bda189ad36cc0e3bcdfa5b9469ffc085c9b36d71147"
           },
           "package_lock": {
             "path": "package-lock.json",
@@ -162,8 +162,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed",
-        "actual": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed"
+        "expected": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
+        "actual": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311"
       }
     },
     {

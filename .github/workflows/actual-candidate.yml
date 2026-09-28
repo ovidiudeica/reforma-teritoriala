@@ -120,11 +120,12 @@ jobs:
           const manifestBytes=await readFile('data/current/actual-release-manifest.json');
           const manifest=JSON.parse(manifestBytes);
           const buildEnvironment=JSON.parse(await readFile('data/current/actual-build-environment-manifest.json','utf8'));
+          const reviewEvidence=JSON.parse(await readFile('data/current/actual-review-evidence-bundle.json','utf8'));
           const sha=createHash('sha256').update(manifestBytes).digest('hex');
-          if(marker.validated_release_gate_status!=='PASS'||marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.build_environment_fingerprint_sha256!==manifest.build_environment?.environment_fingerprint_sha256||manifest.build_environment?.environment_fingerprint_sha256!==buildEnvironment.environment_fingerprint_sha256){
+          if(marker.validated_release_gate_status!=='PASS'||marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.build_environment_fingerprint_sha256!==manifest.build_environment?.environment_fingerprint_sha256||manifest.build_environment?.environment_fingerprint_sha256!==buildEnvironment.environment_fingerprint_sha256||marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256||manifest.review_evidence_bundle?.bundle_fingerprint_sha256!==reviewEvidence.bundle_fingerprint_sha256){
             throw new Error('Persisted base release is not internally consistent.');
           }
-          console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha,build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256},null,2));
+          console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha,build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256,review_evidence_bundle_fingerprint_sha256:reviewEvidence.bundle_fingerprint_sha256},null,2));
           NODE
 
       - name: Install dependencies from vendored offline bundle
@@ -167,6 +168,12 @@ jobs:
       - name: Gate exact ACTUAL source bundle
         run: npm run audit:actual-source-bundle
 
+      - name: Build frozen ACTUAL review evidence bundle
+        run: npm run build:actual-review-evidence-bundle
+
+      - name: Gate frozen ACTUAL review evidence bundle
+        run: npm run audit:actual-review-evidence-bundle
+
       - name: Build deterministic OSM ACTUAL master from local snapshot
         run: npm run build:osm-actual
 
@@ -176,9 +183,6 @@ jobs:
       - name: Reconcile RO against official SIRUTA
         run: npm run audit:ro-official-reconciliation
 
-      - name: Audit RO official reconciliation exceptions
-        run: npm run audit:ro-official-exceptions
-
       - name: Audit RO county SIRUTA bridge
         run: npm run audit:ro-county-siruta-bridge
 
@@ -187,12 +191,6 @@ jobs:
 
       - name: Audit administrative catalog
         run: npm run audit:admin
-
-      - name: Audit remaining RO level 9 exceptions
-        run: npm run audit:ro-level9-exceptions
-
-      - name: Audit selected OSM relation histories
-        run: npm run audit:osm-history
 
       - name: Audit CUATM consistency
         run: node scripts/process/audit-cuatm-consistency.mjs
@@ -206,17 +204,8 @@ jobs:
       - name: Localize Bălți component-locality differences
         run: npm run audit:balti-components
 
-      - name: Audit Bălți member way histories
-        run: npm run audit:balti-way-history
-
-      - name: Audit Bălți changeset semantics
-        run: npm run audit:balti-semantics
-
       - name: Analyze special municipality representations
         run: npm run audit:md-special-municipalities
-
-      - name: Deep-audit MD individual cases
-        run: npm run audit:md-individual-cases
 
       - name: Reconcile MD against CUATM
         run: npm run reconcile:cuatm
@@ -312,6 +301,8 @@ jobs:
             data/current/actual-candidate-diff.json
             data/current/actual-source-bundle-manifest.json
             data/current/actual-source-bundle-gate.json
+            data/current/actual-review-evidence-bundle.json
+            data/current/actual-review-evidence-bundle-gate.json
             data/current/actual-build-environment-manifest.json
             data/current/actual-build-environment-gate.json
             data/current/actual-runtime-image.json

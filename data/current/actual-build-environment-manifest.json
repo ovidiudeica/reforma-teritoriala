@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed",
+  "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.",
   "environment": {
     "runner": {
@@ -26,7 +26,7 @@
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "1944843a04f2fb15ee93d48a6dd25eec454625f292dda1197d365df96cdd5d91"
+        "sha256": "002815ddea515613ca119bda189ad36cc0e3bcdfa5b9469ffc085c9b36d71147"
       },
       "package_lock": {
         "path": "package-lock.json",
@@ -47,7 +47,7 @@
       "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "455abee7a92f3bbea5b7c749f95bb6fc6f59cc6e8a776d081b8527cce3b0d121",
+      "scripts/lib/actual-build-environment.mjs": "4dba805bcd7a450cfda27d4e69ad842f1ccc6b164bd040645b50d2bc6f38c1c9",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "58f12a179ba3ed0a4f2cf7dd13d3fa38b88cf68d62c02dfa51ff866c442c23d8",
       "scripts/process/audit-actual-build-environment-gate.mjs": "0de99fab870606f5e1489919ac2093181666a729b3b228a281fab70c402ff1dc",
@@ -56,12 +56,15 @@
       "scripts/process/audit-node-toolchain.mjs": "c63882d7b4681f2f3de4d85244a8ca9d4c727d6a5bf713e9a7c7c19b43e1a861",
       "scripts/lib/actual-runtime-image.mjs": "9bebd57d6e55beec30d1724c64886f04c0cf45857f8a5eeada77736b3c32c60f",
       "scripts/process/build-actual-runtime-image-manifest.mjs": "48c7708071c0600b647304ae3178f22aa76bd7c5be3b5a5ce96bf5da47d17ec6",
-      "scripts/process/audit-actual-runtime-image.mjs": "7b49ff88bd07bf03fe31f21a078e565ad08ea016a397ed624e5484aa5221bd8e"
+      "scripts/process/audit-actual-runtime-image.mjs": "7b49ff88bd07bf03fe31f21a078e565ad08ea016a397ed624e5484aa5221bd8e",
+      "scripts/lib/actual-review-evidence-bundle.mjs": "30cbba94bf216003e9e07ac8df591b8e2b7ba95e68a4ac5ebb7cfb73fee33123",
+      "scripts/process/build-actual-review-evidence-bundle.mjs": "791145050de31c8e613f432a85db11cd15723d3573a32622871f48dcb6d0fac6",
+      "scripts/process/audit-actual-review-evidence-bundle-gate.mjs": "925e30d7b8e950a6f269d02008020f5cca383812b0f51ad6c2a11e68e6b1cfac"
     },
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "0f9cae6b6e2c97ee21305a6994b4e1a12e1e3ff6d64252464dca7615af3780a7",
+        "sha256": "38c5cd546614c2b2eea2f2c4a0d41b3d7081203ba611cdc7901f3104631fe691",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -91,7 +94,7 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "46e7a4fcfa4943f06925257af6120b679a78ca28eafdf3f0bb319635c51e87be",
+        "sha256": "df4ecda473f2f356c6dbaebef66349ea6e3f5f921833944a162036f346327862",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -105,7 +108,7 @@
       },
       "verify": {
         "path": ".github/workflows/verify-persisted-actual-release.yml",
-        "sha256": "150200cac56a465016a2429a800f143300c41197e495e245f8f5736d5f0d3630",
+        "sha256": "ff171004590d2339e2205b26192b89ff350274eff86ea7e68b36f45abf88b27f",
         "runs_on": [
           "ubuntu-24.04"
         ],

@@ -39,7 +39,10 @@ export const BUILD_SUPPORT_FILES=[
  'scripts/process/audit-node-toolchain.mjs',
  'scripts/lib/actual-runtime-image.mjs',
  'scripts/process/build-actual-runtime-image-manifest.mjs',
- 'scripts/process/audit-actual-runtime-image.mjs'
+ 'scripts/process/audit-actual-runtime-image.mjs',
+ 'scripts/lib/actual-review-evidence-bundle.mjs',
+ 'scripts/process/build-actual-review-evidence-bundle.mjs',
+ 'scripts/process/audit-actual-review-evidence-bundle-gate.mjs'
 ];
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 

@@ -6,10 +6,11 @@ import {join} from 'node:path';
 const workflowsDir='.github/workflows';
 const allowedPushWorkflows=new Set([
  'actual-candidate.yml',
- 'actual-promote-candidate.yml'
+ 'actual-promote-candidate.yml',
+ 'refresh-actual-review-evidence.yml'
 ]);
 
-test('only candidate and promotion workflows may execute git push',async()=>{
+test('only isolated ACTUAL lifecycle workflows may execute git push',async()=>{
  const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
  const offenders=[];
  for(const name of files){

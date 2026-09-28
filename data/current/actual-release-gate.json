@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T20:37:40.668Z",
+  "generated_at": "2026-09-28T21:34:05.589Z",
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "eb0016d1f5b74de01f9cd45f31071b8a03180e4f41a313d535bfb6561c91dc6e",
+  "manifest_sha256": "a4864098f2741595679a7185e24fc5d4250ffe02f539468f938d5388c3f0fb18",
   "status": "PASS",
-  "policy": "The public ACTUAL RO+MD release is publishable only when exact source provenance and exact GitHub Actions execution-environment provenance are bound by the release manifest and all structural, jurisdictional and byte-integrity gates pass.",
+  "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, environment or release drift fails closed.",
   "checks": [
     {
       "name": "master_topology_audit_passes",
@@ -154,6 +154,41 @@
       }
     },
     {
+      "name": "review_evidence_bundle_gate_passes",
+      "ok": true,
+      "detail": {
+        "validation_status": "PASS",
+        "gate_status": "PASS",
+        "gate_bundle_sha256": "d9f6cb45d861c48936d7ac6ca49ded1be13c81ea6d52e9bf876d76dbf1b57f69",
+        "actual_bundle_sha256": "d9f6cb45d861c48936d7ac6ca49ded1be13c81ea6d52e9bf876d76dbf1b57f69",
+        "fingerprint": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79"
+      }
+    },
+    {
+      "name": "manifest_binds_current_review_evidence_bundle",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "path": "data/current/actual-review-evidence-bundle.json",
+          "schema_version": 1,
+          "mode": "ACTUAL_REVIEW_EVIDENCE_BUNDLE",
+          "evidence_watermark": "2026-09-27T11:27:53.834Z",
+          "bundle_fingerprint_algorithm": "actual-review-evidence-bundle-v1",
+          "bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+          "sha256": "d9f6cb45d861c48936d7ac6ca49ded1be13c81ea6d52e9bf876d76dbf1b57f69"
+        },
+        "actual": {
+          "path": "data/current/actual-review-evidence-bundle.json",
+          "schema_version": 1,
+          "mode": "ACTUAL_REVIEW_EVIDENCE_BUNDLE",
+          "evidence_watermark": "2026-09-27T11:27:53.834Z",
+          "bundle_fingerprint_algorithm": "actual-review-evidence-bundle-v1",
+          "bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+          "sha256": "d9f6cb45d861c48936d7ac6ca49ded1be13c81ea6d52e9bf876d76dbf1b57f69"
+        }
+      }
+    },
+    {
       "name": "build_environment_manifest_matches_repository",
       "ok": true,
       "detail": {
@@ -172,8 +207,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed",
-          "sha256": "639f1cfd8ad9ce1ccd005226894e7a891ad8698ec8a098ee8075651ee14626e2"
+          "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
+          "sha256": "43825378904ca3384816ceff09fbb4ff4871f1f8723218b0326e7b2536ace96a"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -182,8 +217,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed",
-          "sha256": "639f1cfd8ad9ce1ccd005226894e7a891ad8698ec8a098ee8075651ee14626e2"
+          "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
+          "sha256": "43825378904ca3384816ceff09fbb4ff4871f1f8723218b0326e7b2536ace96a"
         }
       }
     },
@@ -228,19 +263,63 @@
       }
     },
     {
-      "name": "release_fingerprint_matches_current_components",
+      "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-        "actual": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc"
+        "expected": "6150b5b6dfe7d42cfc66e7332b08ed8617d306fee49df48626fd1d460deaace0",
+        "actual": "6150b5b6dfe7d42cfc66e7332b08ed8617d306fee49df48626fd1d460deaace0"
       }
     },
     {
-      "name": "snapshot_id_matches_release_fingerprint",
+      "name": "manifest_semantic_content_fingerprint_matches_current_snapshot",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "algorithm": "actual-semantic-v1",
+          "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+          "release_identity_basis": "base_release_compatibility_reuse",
+          "reused_base_release": true,
+          "base_ref": "origin/main",
+          "base_snapshot_id": "actual-5383ff3db7cf3f67",
+          "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+          "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
+        },
+        "expected": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+        "actual": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
+      }
+    },
+    {
+      "name": "release_identity_basis_is_valid",
+      "ok": true,
+      "detail": {
+        "content_identity": {
+          "algorithm": "actual-semantic-v1",
+          "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+          "release_identity_basis": "base_release_compatibility_reuse",
+          "reused_base_release": true,
+          "base_ref": "origin/main",
+          "base_snapshot_id": "actual-5383ff3db7cf3f67",
+          "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+          "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
+        }
+      }
+    },
+    {
+      "name": "release_fingerprint_matches_semantic_identity",
+      "ok": true,
+      "detail": {
+        "expected": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+        "actual": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+        "reused_base_release": true
+      }
+    },
+    {
+      "name": "snapshot_id_matches_stable_release_identity",
       "ok": true,
       "detail": {
         "expected": "actual-5383ff3db7cf3f67",
-        "actual": "actual-5383ff3db7cf3f67"
+        "actual": "actual-5383ff3db7cf3f67",
+        "reused_base_release": true
       }
     },
     {
@@ -498,7 +577,7 @@
       "detail": {
         "manifest": {
           "registry": "SIRUTA",
-          "authority": "Institutul Na╚øional de Statistic─â",
+          "authority": "Institutul Național de Statistică",
           "path": "data/sources/ro-siruta-current.json",
           "reference_year": 2026,
           "fetched_at": "2026-09-26T11:58:48.000Z",
@@ -520,7 +599,7 @@
       "detail": {
         "manifest": {
           "registry": "CUATM",
-          "authority": "Biroul Na╚øional de Statistic─â al Republicii Moldova",
+          "authority": "Biroul Național de Statistică al Republicii Moldova",
           "path": "data/sources/cuatm-current.json",
           "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
           "fetched_at": "2026-09-27T20:37:24.316Z",

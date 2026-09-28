@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_REVIEW_EVIDENCE_BUNDLE_GATE",
+  "generated_at": "2026-09-27T11:27:53.834Z",
+  "review_evidence_bundle_path": "data/current/actual-review-evidence-bundle.json",
+  "review_evidence_bundle_sha256": "d9f6cb45d861c48936d7ac6ca49ded1be13c81ea6d52e9bf876d76dbf1b57f69",
+  "bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+  "status": "PASS",
+  "policy": "Fail closed unless every committed review-evidence byte matches the exact content-addressed bundle and the canonical bundle fingerprint recomputes exactly. Candidate builds are forbidden from refreshing this evidence.",
+  "checks": [
+    {
+      "name": "bundle_schema_and_mode",
+      "ok": true,
+      "detail": {
+        "schema_version": 1,
+        "mode": "ACTUAL_REVIEW_EVIDENCE_BUNDLE"
+      }
+    },
+    {
+      "name": "bundle_evidence_watermark_matches_current_bytes",
+      "ok": true,
+      "detail": {
+        "expected": "2026-09-27T11:27:53.834Z",
+        "actual": "2026-09-27T11:27:53.834Z"
+      }
+    },
+    {
+      "name": "bundle_evidence_matches_current_bytes",
+      "ok": true,
+      "detail": {
+        "evidence_count": 8
+      }
+    },
+    {
+      "name": "bundle_fingerprint_recomputes",
+      "ok": true,
+      "detail": {
+        "algorithm": "actual-review-evidence-bundle-v1",
+        "expected": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+        "actual": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79"
+      }
+    }
+  ],
+  "failures": []
+}

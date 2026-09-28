@@ -4,6 +4,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual-semantic-fingerprint.mjs';
 import {SOURCE_BUNDLE_GATE_PATH,SOURCE_BUNDLE_PATH,sha256 as sourceSha256,validateSourceBundleManifest} from '../lib/actual-source-bundle.mjs';
 import {BUILD_ENVIRONMENT_PATH,sha256 as environmentSha256,validateBuildEnvironmentManifest} from '../lib/actual-build-environment.mjs';
+import {REVIEW_EVIDENCE_BUNDLE_PATH,REVIEW_EVIDENCE_GATE_PATH,sha256 as reviewEvidenceSha256,validateReviewEvidenceBundle} from '../lib/actual-review-evidence-bundle.mjs';
 const MANIFEST='data/current/actual-release-manifest.json';
 const TOPOLOGY_AUDIT='data/current/actual-topology-audit.json';
 const topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));
@@ -19,6 +20,10 @@ const sourceBundleBuf=await readFile(SOURCE_BUNDLE_PATH);
 const sourceBundle=JSON.parse(sourceBundleBuf.toString('utf8'));
 const sourceBundleGate=JSON.parse(await readFile(SOURCE_BUNDLE_GATE_PATH,'utf8'));
 const sourceBundleValidation=await validateSourceBundleManifest(sourceBundle);
+const reviewEvidenceBundleBuf=await readFile(REVIEW_EVIDENCE_BUNDLE_PATH);
+const reviewEvidenceBundle=JSON.parse(reviewEvidenceBundleBuf.toString('utf8'));
+const reviewEvidenceGate=JSON.parse(await readFile(REVIEW_EVIDENCE_GATE_PATH,'utf8'));
+const reviewEvidenceValidation=await validateReviewEvidenceBundle(reviewEvidenceBundle);
 const buildEnvironmentBuf=await readFile(BUILD_ENVIRONMENT_PATH);
 const buildEnvironment=JSON.parse(buildEnvironmentBuf.toString('utf8'));
 const buildEnvironmentValidation=await validateBuildEnvironmentManifest(buildEnvironment);
@@ -111,6 +116,22 @@ check('manifest_binds_current_source_bundle',
  && manifest.source_bundle?.bundle_fingerprint_sha256===sourceBundle.bundle_fingerprint_sha256
  && manifest.source_bundle?.sha256===sourceSha256(sourceBundleBuf),
  {manifest:manifest.source_bundle??null,actual:{path:SOURCE_BUNDLE_PATH,schema_version:sourceBundle.schema_version,mode:sourceBundle.mode,source_watermark:sourceBundle.source_watermark,bundle_fingerprint_algorithm:sourceBundle.bundle_fingerprint_algorithm,bundle_fingerprint_sha256:sourceBundle.bundle_fingerprint_sha256,sha256:sourceSha256(sourceBundleBuf)}});
+check('review_evidence_bundle_gate_passes',
+ reviewEvidenceValidation.status==='PASS'
+ && reviewEvidenceGate.status==='PASS'
+ && reviewEvidenceGate.review_evidence_bundle_sha256===reviewEvidenceSha256(reviewEvidenceBundleBuf)
+ && reviewEvidenceGate.bundle_fingerprint_sha256===reviewEvidenceBundle.bundle_fingerprint_sha256,
+ {validation_status:reviewEvidenceValidation.status,gate_status:reviewEvidenceGate.status,gate_bundle_sha256:reviewEvidenceGate.review_evidence_bundle_sha256??null,actual_bundle_sha256:reviewEvidenceSha256(reviewEvidenceBundleBuf),fingerprint:reviewEvidenceBundle.bundle_fingerprint_sha256??null});
+check('manifest_binds_current_review_evidence_bundle',
+ manifest.schema_version>=6
+ && manifest.review_evidence_bundle?.path===REVIEW_EVIDENCE_BUNDLE_PATH
+ && manifest.review_evidence_bundle?.schema_version===reviewEvidenceBundle.schema_version
+ && manifest.review_evidence_bundle?.mode===reviewEvidenceBundle.mode
+ && manifest.review_evidence_bundle?.evidence_watermark===reviewEvidenceBundle.evidence_watermark
+ && manifest.review_evidence_bundle?.bundle_fingerprint_algorithm===reviewEvidenceBundle.bundle_fingerprint_algorithm
+ && manifest.review_evidence_bundle?.bundle_fingerprint_sha256===reviewEvidenceBundle.bundle_fingerprint_sha256
+ && manifest.review_evidence_bundle?.sha256===reviewEvidenceSha256(reviewEvidenceBundleBuf),
+ {manifest:manifest.review_evidence_bundle??null,actual:{path:REVIEW_EVIDENCE_BUNDLE_PATH,schema_version:reviewEvidenceBundle.schema_version,mode:reviewEvidenceBundle.mode,evidence_watermark:reviewEvidenceBundle.evidence_watermark,bundle_fingerprint_algorithm:reviewEvidenceBundle.bundle_fingerprint_algorithm,bundle_fingerprint_sha256:reviewEvidenceBundle.bundle_fingerprint_sha256,sha256:reviewEvidenceSha256(reviewEvidenceBundleBuf)}});
 check('build_environment_manifest_matches_repository',
  buildEnvironmentValidation.status==='PASS',
  {status:buildEnvironmentValidation.status,failures:buildEnvironmentValidation.failures});
@@ -315,7 +336,7 @@ const report={
  manifest_path:MANIFEST,
  manifest_sha256:sha256(manifestBuf),
  status:failures.length?'FAIL':'PASS',
- policy:'The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, environment or release drift fails closed.',
+ policy:'The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, environment or release drift fails closed.',
  checks,
  failures
 };

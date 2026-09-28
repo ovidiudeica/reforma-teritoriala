@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_REVIEW_EVIDENCE_BUNDLE",
+  "evidence_watermark": "2026-09-27T11:27:53.834Z",
+  "bundle_fingerprint_algorithm": "actual-review-evidence-bundle-v1",
+  "bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+  "policy": "Frozen review evidence for deterministic ACTUAL candidate builds. OSM relation/way/changeset history and INS-derived reconciliation evidence are refreshed only by the dedicated review-evidence workflow. Candidate builds consume these committed bytes without network access.",
+  "evidence": {
+    "ro_official_exception_audit": {
+      "path": "data/current/ro-official-exception-audit.json",
+      "sha256": "bc9db4cfdcbc0daedbdcbf6595b83951e23a235eb2cc6cc6b2fd34e99b16da7f",
+      "bytes": 398351,
+      "schema_version": 1,
+      "generated_at": "2026-09-27T11:27:53.834Z"
+    },
+    "ro_level9_exception_audit": {
+      "path": "data/current/ro-level9-exception-audit.json",
+      "sha256": "b8dde4fbf00e843b1a163c88845c8423f54467064f024f70c9030890495d35b7",
+      "bytes": 15422,
+      "schema_version": 1,
+      "generated_at": "2026-09-27T11:25:52.551Z"
+    },
+    "ro_osm_official_exception_history": {
+      "path": "data/sources/ro-osm-official-exception-history.json",
+      "sha256": "f753995a4664251b07d35c6659f80b30457a7622e1b04c8216ad9119fe7951fb",
+      "bytes": 403617,
+      "schema_version": 1,
+      "generated_at": "2026-09-27T11:27:53.834Z"
+    },
+    "ro_osm_level9_exception_history": {
+      "path": "data/sources/ro-osm-level9-exception-history.json",
+      "sha256": "d1af6837791fb681bc2be172b9ec15584aa6034fd07f611115f02d41bd934c01",
+      "bytes": 7761,
+      "schema_version": 1,
+      "generated_at": "2026-09-27T11:25:52.551Z"
+    },
+    "md_osm_multiple_representation_history": {
+      "path": "data/sources/md-osm-multiple-representation-history.json",
+      "sha256": "5f8c114754ff349539a28a3d591b420a3b8bf28789e4af32c30d1007b75a9a50",
+      "bytes": 368060,
+      "schema_version": 1,
+      "generated_at": "2026-09-27T11:26:00.567Z"
+    },
+    "md_balti_city_boundary_way_history": {
+      "path": "data/sources/md-balti-city-boundary-way-history.json",
+      "sha256": "2c6b6b7117f2995917a76c079fe25069534b2d210aaede23cdc3b631bbfeb73e",
+      "bytes": 27747,
+      "schema_version": 1,
+      "generated_at": "2026-09-27T11:26:13.473Z"
+    },
+    "md_balti_city_boundary_changeset_semantics": {
+      "path": "data/sources/md-balti-city-boundary-changeset-semantics.json",
+      "sha256": "2394a3eab68a14b40f143a105bed6f183ee83c61b9d45b7c76d8947ae62a1da7",
+      "bytes": 64571,
+      "schema_version": 1,
+      "generated_at": "2026-09-27T11:26:29.951Z"
+    },
+    "md_cuatm_individual_deep_audit": {
+      "path": "data/current/md-cuatm-individual-deep-audit.json",
+      "sha256": "e48246a76e9ed48326819fb10316cb355c020bbf6d341c519654cb1731318c71",
+      "bytes": 85659,
+      "schema_version": 2,
+      "generated_at": "2026-09-27T11:26:54.539Z"
+    }
+  }
+}
