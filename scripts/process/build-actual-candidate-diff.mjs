@@ -49,6 +49,7 @@ requireCheck(baselineMarker.schema_version===1,'baseline_marker_schema',{actual:
 requireCheck(baselineMarker.validated_release_gate_status==='PASS','baseline_marker_not_pass',{actual:baselineMarker.validated_release_gate_status});
 requireCheck(baselineMarker.snapshot_id===baselineManifest.snapshot_id,'baseline_snapshot_mismatch',{marker:baselineMarker.snapshot_id,manifest:baselineManifest.snapshot_id});
 requireCheck(baselineMarker.release_fingerprint_sha256===baselineManifest.release_fingerprint_sha256,'baseline_fingerprint_mismatch');
+requireCheck(baselineMarker.source_bundle_fingerprint_sha256===baselineManifest.source_bundle?.bundle_fingerprint_sha256,'baseline_source_bundle_fingerprint_mismatch',{marker:baselineMarker.source_bundle_fingerprint_sha256??null,manifest:baselineManifest.source_bundle?.bundle_fingerprint_sha256??null});
 requireCheck(baselineMarker.manifest_sha256===baselineManifestSha,'baseline_manifest_hash_mismatch',{marker:baselineMarker.manifest_sha256,actual:baselineManifestSha});
 requireCheck(gate.status==='PASS','candidate_release_gate_not_pass',{status:gate.status});
 requireCheck(gate.snapshot_id===manifest.snapshot_id,'candidate_gate_snapshot_mismatch',{gate:gate.snapshot_id,manifest:manifest.snapshot_id});
@@ -177,7 +178,8 @@ const report={
  base_release:{
   snapshot_id:baselineMarker.snapshot_id,
   release_fingerprint_sha256:baselineMarker.release_fingerprint_sha256,
-  manifest_sha256:baselineMarker.manifest_sha256
+  manifest_sha256:baselineMarker.manifest_sha256,
+  source_bundle_fingerprint_sha256:baselineMarker.source_bundle_fingerprint_sha256
  },
  candidate:{
   snapshot_id:manifest.snapshot_id,
@@ -185,6 +187,7 @@ const report={
   manifest_sha256:sha256(manifestBytes),
   release_gate_status:gate.status,
   content_fingerprint_sha256:candidateSemantic.sha256,
+  source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
   semantic_manifest_binding:semanticManifestBinding.binding,
   exact_base_manifest_bytes_reused:exactBaseManifestBytesReused
  },
