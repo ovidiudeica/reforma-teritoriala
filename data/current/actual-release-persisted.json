@@ -2,10 +2,11 @@
   "schema_version": 1,
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "manifest_sha256": "0c9ed50433e66d952dfb244e0c4bec7ccf69bab2dc620139b715eee1bcb18ac2",
+  "manifest_sha256": "2c1afca1d5156191485ff7452132d2703f6afe8f1f4bf18f01e4e658d551b8e9",
   "validated_release_gate_status": "PASS",
   "validated_from_run_id": "36347929394",
   "validated_from_run_attempt": "2",
   "source_head_sha": "ca40295a2288e0fd5f4923e7a32ee62eace9b8ae",
-  "policy": "Marker for the exact ACTUAL snapshot bytes committed only after the final release gate passes. It is not part of the release fingerprint."
+  "policy": "Marker for the exact ACTUAL snapshot bytes and exact source-bundle provenance committed only after the final release gate passes. It is not part of the semantic release fingerprint.",
+  "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f"
 }
