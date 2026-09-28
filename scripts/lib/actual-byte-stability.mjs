@@ -7,6 +7,11 @@ export const ARTIFACT_VOLATILE_KEYS=new Set([
   'imported_at'
 ]);
 
+export const NON_ADMIN_METADATA_KEYS=new Set([
+  'wikipedia',
+  'wikidata'
+]);
+
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
 export function stripArtifactVolatile(value){
@@ -22,27 +27,30 @@ export function stripArtifactVolatile(value){
   return value;
 }
 
-function semanticEqualValue(a,b){
+function semanticEqualValue(a,b,ignoredKeys){
   if(Object.is(a,b))return true;
   if(Array.isArray(a)||Array.isArray(b)){
     if(!Array.isArray(a)||!Array.isArray(b)||a.length!==b.length)return false;
-    for(let i=0;i<a.length;i++)if(!semanticEqualValue(a[i],b[i]))return false;
+    for(let i=0;i<a.length;i++)if(!semanticEqualValue(a[i],b[i],ignoredKeys))return false;
     return true;
   }
   if(a&&b&&typeof a==='object'&&typeof b==='object'){
-    const ak=Object.keys(a).filter(key=>!ARTIFACT_VOLATILE_KEYS.has(key)).sort();
-    const bk=Object.keys(b).filter(key=>!ARTIFACT_VOLATILE_KEYS.has(key)).sort();
+    const ak=Object.keys(a).filter(key=>!ignoredKeys.has(key)).sort();
+    const bk=Object.keys(b).filter(key=>!ignoredKeys.has(key)).sort();
     if(ak.length!==bk.length)return false;
     for(let i=0;i<ak.length;i++){
-      if(ak[i]!==bk[i]||!semanticEqualValue(a[ak[i]],b[bk[i]]))return false;
+      if(ak[i]!==bk[i]||!semanticEqualValue(a[ak[i]],b[bk[i]],ignoredKeys))return false;
     }
     return true;
   }
   return false;
 }
 
-export function semanticArtifactEqual(a,b){
-  return semanticEqualValue(a,b);
+export function semanticArtifactEqual(a,b,{ignoreNonAdministrativeMetadata=false}={}){
+  const ignoredKeys=ignoreNonAdministrativeMetadata
+    ?new Set([...ARTIFACT_VOLATILE_KEYS,...NON_ADMIN_METADATA_KEYS])
+    :ARTIFACT_VOLATILE_KEYS;
+  return semanticEqualValue(a,b,ignoredKeys);
 }
 
 function replaceArtifactVolatileInPlace(value,timestamp){
@@ -67,7 +75,7 @@ function formatJsonLike(bytes,value){
   return Buffer.from(serialized+(trailingNewline?'\n':''));
 }
 
-export function stabilizeJsonBytes({baseBytes,currentBytes,stableTimestamp}){
+export function stabilizeJsonBytes({baseBytes,currentBytes,stableTimestamp,ignoreNonAdministrativeMetadata=false}){
   const baseBuffer=Buffer.from(baseBytes);
   const currentBuffer=Buffer.from(currentBytes);
   if(baseBuffer.equals(currentBuffer)){
@@ -80,7 +88,7 @@ export function stabilizeJsonBytes({baseBytes,currentBytes,stableTimestamp}){
 
   const base=JSON.parse(baseBuffer.toString('utf8'));
   const current=JSON.parse(currentBuffer.toString('utf8'));
-  if(semanticArtifactEqual(base,current)){
+  if(semanticArtifactEqual(base,current,{ignoreNonAdministrativeMetadata})){
     return {
       action:'RESTORE_BASE_BYTES',
       bytes:baseBuffer,

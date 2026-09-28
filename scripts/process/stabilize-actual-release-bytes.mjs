@@ -52,6 +52,8 @@ const stableTimestamp=maxIsoTimestamp([
   cuatm.fetched_at
 ]);
 
+const NON_ADMIN_METADATA_COMPONENTS=new Set(['catalog','ro_geojson','md_geojson']);
+
 const results=[];
 for(const [key,path] of Object.entries(PATHS)){
   const currentBytes=await readFile(path);
@@ -63,10 +65,11 @@ for(const [key,path] of Object.entries(PATHS)){
   }
   const beforeSha=sha256(currentBytes);
   const baseSha=sha256(baseBytes);
-  const stabilized=stabilizeJsonBytes({baseBytes,currentBytes,stableTimestamp});
+  const ignoreNonAdministrativeMetadata=NON_ADMIN_METADATA_COMPONENTS.has(key);
+  const stabilized=stabilizeJsonBytes({baseBytes,currentBytes,stableTimestamp,ignoreNonAdministrativeMetadata});
   const afterSha=sha256(stabilized.bytes);
   if(!currentBytes.equals(stabilized.bytes))await writeFile(path,stabilized.bytes);
-  const replay=stabilizeJsonBytes({baseBytes,currentBytes:stabilized.bytes,stableTimestamp});
+  const replay=stabilizeJsonBytes({baseBytes,currentBytes:stabilized.bytes,stableTimestamp,ignoreNonAdministrativeMetadata});
   const replaySha=sha256(replay.bytes);
   if(replaySha!==afterSha)throw new Error(`Byte stabilization is not idempotent for ${path}`);
   results.push({
@@ -74,6 +77,7 @@ for(const [key,path] of Object.entries(PATHS)){
     path,
     action:stabilized.action,
     semantic_equal_to_base:stabilized.semantic_equal_to_base,
+    non_administrative_metadata_ignored:ignoreNonAdministrativeMetadata,
     base_sha256:baseSha,
     before_sha256:beforeSha,
     after_sha256:afterSha,
@@ -94,7 +98,7 @@ const report={
   restored_or_already_base_count:results.length-nonBase.length,
   substantive_or_source_changed_component_count:nonBase.length,
   components:results,
-  policy:'Release-component bytes are restored exactly when current JSON differs from the persisted base only by artifact-runtime metadata or object-key ordering. Any non-volatile difference remains visible and is serialized deterministically using a source-derived timestamp. Stabilization is required to be idempotent.'
+  policy:'Release-component bytes are restored exactly when current JSON differs from the persisted base only by controlled artifact-runtime metadata or object-key ordering. For catalog and master GeoJSON only, Wikipedia/Wikidata fields are additionally treated as non-administrative metadata, matching the established ACTUAL semantic fingerprint policy. All other property and geometry changes remain substantive. Stabilization is required to be idempotent.'
 };
 
 await mkdir('data/current',{recursive:true});
