@@ -1,0 +1,92 @@
+name: Build ACTUAL OCI runtime
+
+on:
+  push:
+    branches:
+      - 'actual/pin-oci-runtime'
+    paths:
+      - 'container/actual-runtime/**'
+      - '.github/workflows/build-actual-runtime-image.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: actual-runtime-image
+  cancel-in-progress: false
+
+jobs:
+  build-runtime:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out runtime source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 1
+
+      - name: Resolve exact upstream Node image digest
+        id: base
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_TAG="node:24.21.0-bookworm"
+          docker buildx imagetools inspect "$BASE_TAG" --raw > /tmp/node-manifest.json
+          BASE_DIGEST="sha256:$(sha256sum /tmp/node-manifest.json | awk '{print $1}')"
+          echo "base_tag=$BASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "base_digest=$BASE_DIGEST" >> "$GITHUB_OUTPUT"
+          echo "### ACTUAL runtime upstream" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Base: `$BASE_TAG@$BASE_DIGEST`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Log in to GHCR
+        shell: bash
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Build and publish exact runtime
+        id: publish
+        shell: bash
+        env:
+          IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime
+          BASE_TAG: ${{ steps.base.outputs.base_tag }}
+          BASE_DIGEST: ${{ steps.base.outputs.base_digest }}
+        run: |
+          set -euo pipefail
+          TAG="candidate-${GITHUB_SHA}"
+          export SOURCE_DATE_EPOCH=0
+          docker buildx build \
+            --platform linux/amd64 \
+            --provenance=false \
+            --sbom=false \
+            --build-arg "BASE_IMAGE=$BASE_TAG@$BASE_DIGEST" \
+            --build-arg "ACTUAL_RUNTIME_BASE_DIGEST=$BASE_DIGEST" \
+            --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            --tag "$IMAGE:$TAG" \
+            --push \
+            -f container/actual-runtime/Dockerfile .
+          RUNTIME_DIGEST="$(docker buildx imagetools inspect "$IMAGE:$TAG" | awk '/^Digest:/ {print $2; exit}')"
+          test -n "$RUNTIME_DIGEST"
+          echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "digest=$RUNTIME_DIGEST" >> "$GITHUB_OUTPUT"
+          echo "### ACTUAL OCI runtime" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Image: `$IMAGE@$RUNTIME_DIGEST`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Base digest: `$BASE_DIGEST`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify published runtime
+        shell: bash
+        env:
+          IMAGE: ${{ steps.publish.outputs.image }}
+          DIGEST: ${{ steps.publish.outputs.digest }}
+        run: |
+          set -euo pipefail
+          docker pull "$IMAGE@$DIGEST"
+          docker run --rm "$IMAGE@$DIGEST" bash -lc '
+            test "$(node --version)" = "v24.21.0"
+            test "$(npm --version)" = "11.19.0"
+            git --version
+          '
