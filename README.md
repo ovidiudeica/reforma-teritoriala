@@ -67,3 +67,10 @@ Aplicația nu consumă direct GeoJSON-urile master de zeci de MB. `scripts/proce
 Contractul separă explicit `legal` de `representation`. O identitate SIRUTA/CUATM este publicată numai când reconcilierea oficială este pozitivă; lipsa unei identități este păstrată ca `null`, nu dedusă din tagurile OSM. GeoJSON-urile publice sunt împărțite pe niveluri pentru încărcare progresivă, fără simplificarea coordonatelor, și păstrează legătura prin `entity_id` către catalogul master.
 
 Straturile web și indexul public sunt incluse în fingerprint-ul `actual-release-manifest.json`; gate-ul ACTUAL verifică fail-closed cardinalitatea 1:1 între catalog, contract și geometriile publice.
+
+
+## Source bundle ACTUAL
+
+Fiecare release ACTUAL este legat criptografic de un source bundle determinist în `data/current/actual-source-bundle-manifest.json`. Bundle-ul fixează bytes exacți pentru manifestul OSM, snapshot-urile raw OSM RO și MD, snapshot-ul oficial SIRUTA și snapshot-ul oficial CUATM. `bundle_fingerprint_sha256` este calculat canonic din identitățile criptografice ale surselor, independent de ceasul runtime.
+
+`audit:actual-source-bundle` validează fail-closed că toate hash-urile declarate corespund fișierelor curente și că snapshot-urile OSM comprimate se decomprimă la SHA-256 semantic declarat. `actual-release-manifest.json` fixează atât SHA-256 al manifestului source-bundle, cât și fingerprint-ul bundle-ului; markerul persisted repetă fingerprint-ul pentru a împiedica mutarea bazei de proveniență între candidate și promotion.
