@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "aa2f6165313dc33ecbcb1e31a376a2d081d9d16c02459855bd1c0b568fa34de2",
+  "environment_fingerprint_sha256": "f924aac3c222a036e10046fa09234cda9ffedd8238212d8a1e60a908410a5be8",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family and image version, Node/npm, package files, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.",
   "environment": {
     "runner": {
@@ -32,7 +32,7 @@
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "1c4df583a4b3e8c5f1266fb79aaa3a162a8f491bc1bb75212eea2aa659157163",
+        "sha256": "9a57e3aa00620db18c17e96be8cc8c5edb70c4b0eb4d54688059769038463956",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -76,7 +76,7 @@
       },
       "verify": {
         "path": ".github/workflows/verify-persisted-actual-release.yml",
-        "sha256": "35aac4ae31b19d18714fa64f5b3288963a1012bcb20dad1be2a5f3660825c2f3",
+        "sha256": "8319ea4abc1bc9829a07f399e48835637c46548a3bb19250ea606aa251a77e74",
         "runs_on": [
           "ubuntu-24.04"
         ],
