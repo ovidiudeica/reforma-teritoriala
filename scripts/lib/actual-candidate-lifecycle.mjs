@@ -71,6 +71,7 @@ export function validateCandidatePromotion({
  check(candidateMarker?.review_required===true&&Number(candidateMarker?.substantive_change_count)>0,'candidate_has_no_substantive_change',{review_required:candidateMarker?.review_required??null,substantive_change_count:candidateMarker?.substantive_change_count??null});
  check(candidateMarker?.candidate?.snapshot_id===expectedSnapshot,'unexpected_candidate_snapshot',{expected:expectedSnapshot,actual:candidateMarker?.candidate?.snapshot_id??null});
  check(candidateMarker?.candidate?.source_bundle_fingerprint_sha256===manifest?.source_bundle?.bundle_fingerprint_sha256,'candidate_source_bundle_mismatch',{marker:candidateMarker?.candidate?.source_bundle_fingerprint_sha256??null,manifest:manifest?.source_bundle?.bundle_fingerprint_sha256??null});
+ check(candidateMarker?.candidate?.build_environment_fingerprint_sha256===manifest?.build_environment?.environment_fingerprint_sha256,'candidate_build_environment_mismatch',{marker:candidateMarker?.candidate?.build_environment_fingerprint_sha256??null,manifest:manifest?.build_environment?.environment_fingerprint_sha256??null});
  check(manifest?.snapshot_id===expectedSnapshot,'manifest_snapshot_mismatch',{expected:expectedSnapshot,actual:manifest?.snapshot_id??null});
  check(gate?.status==='PASS'&&gate?.snapshot_id===expectedSnapshot,'candidate_gate_invalid',{status:gate?.status??null,snapshot_id:gate?.snapshot_id??null});
  check(candidateManifestSha256===actualCandidateManifestSha256,'candidate_manifest_hash_drift',{expected:candidateManifestSha256??null,actual:actualCandidateManifestSha256??null});
@@ -80,6 +81,7 @@ export function validateCandidatePromotion({
  check(currentPersisted?.release_fingerprint_sha256===candidateMarker?.base_release?.release_fingerprint_sha256,'base_fingerprint_moved');
  check(currentPersisted?.manifest_sha256===candidateMarker?.base_release?.manifest_sha256,'base_manifest_marker_moved');
  check(currentPersisted?.source_bundle_fingerprint_sha256===candidateMarker?.base_release?.source_bundle_fingerprint_sha256,'base_source_bundle_moved',{candidate_base:candidateMarker?.base_release?.source_bundle_fingerprint_sha256??null,current:currentPersisted?.source_bundle_fingerprint_sha256??null});
+ check(currentPersisted?.build_environment_fingerprint_sha256===candidateMarker?.base_release?.build_environment_fingerprint_sha256,'base_build_environment_moved',{candidate_base:candidateMarker?.base_release?.build_environment_fingerprint_sha256??null,current:currentPersisted?.build_environment_fingerprint_sha256??null});
  check(currentPersisted?.snapshot_id===currentManifest?.snapshot_id,'current_main_marker_manifest_snapshot_mismatch');
  check(currentPersisted?.manifest_sha256===currentManifestSha256,'current_main_manifest_hash_mismatch',{marker:currentPersisted?.manifest_sha256??null,actual:currentManifestSha256??null});
  return {status:failures.length?'FAIL':'PASS',failures};
