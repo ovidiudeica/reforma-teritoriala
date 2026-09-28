@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 
 const refreshPath='.github/workflows/refresh-ro-official.yml';
 const candidatePath='.github/workflows/actual-candidate.yml';
+const deterministicRunnerPath='scripts/process/run-actual-deterministic-candidate.sh';
 
 test('RO SIRUTA refresh is routed exclusively through ACTUAL candidate lifecycle',async()=>{
  const [refresh,candidate]=await Promise.all([
@@ -24,13 +25,17 @@ test('RO SIRUTA refresh is routed exclusively through ACTUAL candidate lifecycle
 
  assert.match(candidate,/workflow_call:/);
  assert.match(candidate,/refresh_ro_siruta:/);
- assert.match(candidate,/if:\s*inputs\.refresh_ro_siruta == true/);
+ assert.match(candidate,/if:[^\n]*inputs\.refresh_ro_siruta == true/);
  assert.match(candidate,/npm run import:ro-siruta/);
+ assert.match(candidate,/--network bridge/);
+ assert.match(candidate,/--network none/);
  const refreshIndex=candidate.indexOf('npm run import:ro-siruta');
- const osmRefreshIndex=candidate.indexOf('npm run import:osm');
- const osmBuildIndex=candidate.indexOf('npm run build:osm-actual');
- const reconcileIndex=candidate.indexOf('npm run audit:ro-official-reconciliation');
- assert.ok(refreshIndex>=0&&osmRefreshIndex>refreshIndex&&osmBuildIndex>osmRefreshIndex&&reconcileIndex>osmBuildIndex,'SIRUTA refresh must precede the optional OSM refresh slot, deterministic OSM build and RO reconciliation');
+ const deterministicIndex=candidate.indexOf('scripts/process/run-actual-deterministic-candidate.sh');
+ assert.ok(refreshIndex>=0&&deterministicIndex>refreshIndex,'SIRUTA refresh must precede the network-denied deterministic phase');
+ const runner=await readFile(deterministicRunnerPath,'utf8');
+ const osmBuildIndex=runner.indexOf('npm run build:osm-actual');
+ const reconcileIndex=runner.indexOf('npm run audit:ro-official-reconciliation');
+ assert.ok(osmBuildIndex>=0&&reconcileIndex>osmBuildIndex,'RO reconciliation must consume the deterministic OSM build');
 });
 
 test('reviewed București exceptional-level identity belongs to raw OSM reconciliation stage',async()=>{
