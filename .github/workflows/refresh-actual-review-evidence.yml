@@ -1,0 +1,149 @@
+name: Refresh ACTUAL review evidence
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  packages: read
+
+concurrency:
+  group: actual-review-evidence-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check out persisted ACTUAL release
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Trust mounted GitHub workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Capture immutable persisted base
+        id: base
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Gate pinned ACTUAL OCI runtime
+        run: npm run audit:actual-runtime-image
+
+      - name: Audit vendored npm dependency bundle
+        run: npm run audit:actual-npm-dependency-bundle
+
+      - name: Audit pinned Node/npm toolchain
+        run: npm run audit:node-toolchain
+
+      - name: Install dependencies from vendored offline bundle
+        run: npm run install:actual-offline-deps
+
+      - name: Refresh RO official exception evidence from OSM and INS
+        run: npm run audit:ro-official-exceptions
+
+      - name: Refresh RO level-9 history evidence from OSM
+        run: npm run audit:ro-level9-exceptions
+
+      - name: Refresh selected MD OSM relation histories
+        run: npm run audit:osm-history
+
+      - name: Refresh Bălți relation and way histories
+        run: npm run audit:balti-way-history
+
+      - name: Refresh Bălți changeset semantics
+        run: npm run audit:balti-semantics
+
+      - name: Refresh MD individual-case histories
+        run: npm run audit:md-individual-cases
+
+      - name: Build frozen ACTUAL review evidence bundle
+        run: npm run build:actual-review-evidence-bundle
+
+      - name: Gate frozen ACTUAL review evidence bundle
+        run: npm run audit:actual-review-evidence-bundle
+
+      - name: Re-evaluate deterministic MD evidence consumers
+        run: npm run audit:md-special-municipalities
+
+      - name: Re-evaluate jurisdiction gates
+        run: |
+          npm run audit:md-release-gate
+          npm run audit:ro-release-gate
+
+      - name: Rebind release provenance without changing semantic identity
+        env:
+          ACTUAL_BASE_REF: ${{ steps.base.outputs.sha }}
+        run: |
+          npm run build:actual-source-bundle
+          npm run audit:actual-source-bundle
+          npm run build:actual-release-manifest
+          npm run audit:actual-release-gate
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {readFile,writeFile} from 'node:fs/promises';
+          const marker=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+          const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+          const manifest=JSON.parse(manifestBytes);
+          const manifestSha=createHash('sha256').update(manifestBytes).digest('hex');
+          if(marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256){
+            throw new Error('Review-evidence refresh attempted to change ACTUAL semantic identity.');
+          }
+          const next={
+            schema_version:1,
+            snapshot_id:manifest.snapshot_id,
+            release_fingerprint_sha256:manifest.release_fingerprint_sha256,
+            manifest_sha256:manifestSha,
+            source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
+            review_evidence_bundle_fingerprint_sha256:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null,
+            build_environment_fingerprint_sha256:manifest.build_environment?.environment_fingerprint_sha256??null,
+            validated_release_gate_status:'PASS',
+            provenance_refresh:{
+              previous_manifest_sha256:marker.manifest_sha256??null,
+              workflow_run_id:process.env.GITHUB_RUN_ID??null,
+              source_head_sha:process.env.GITHUB_SHA??null
+            },
+            policy:'Persisted ACTUAL marker rebound after an explicit review-evidence refresh. Semantic snapshot identity is preserved; exact source, frozen review-evidence and execution-environment provenance are replaced only after the full release gate passes.'
+          };
+          await writeFile('data/current/actual-release-persisted.json',JSON.stringify(next,null,2)+'\n');
+          NODE
+
+      - name: Create review-evidence refresh branch
+        env:
+          BRANCH: actual/review-evidence-${{ github.run_id }}
+        run: |
+          if git diff --quiet -- data/current data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json data/sources/md-balti-city-boundary-changeset-semantics.json; then
+            echo "No review-evidence change."
+            exit 0
+          fi
+          git checkout -b "$BRANCH"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/current/ \
+            data/sources/ro-osm-official-exception-history.json \
+            data/sources/ro-osm-level9-exception-history.json \
+            data/sources/md-osm-multiple-representation-history.json \
+            data/sources/md-balti-city-boundary-way-history.json \
+            data/sources/md-balti-city-boundary-changeset-semantics.json
+          git commit -m "Refresh frozen ACTUAL review evidence"
+          git push origin "HEAD:$BRANCH"
+
+      - name: Open review-evidence pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: actual/review-evidence-${{ github.run_id }}
+        run: |
+          if ! git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            echo "No refresh branch was created."
+            exit 0
+          fi
+          gh pr create --base main --head "$BRANCH" \
+            --title "Refresh frozen ACTUAL review evidence" \
+            --body "Refreshes network-derived OSM/INS review evidence in an isolated workflow, rebuilds the content-addressed evidence bundle, re-evaluates dependent gates, and rebinds exact ACTUAL provenance without changing semantic snapshot identity."
