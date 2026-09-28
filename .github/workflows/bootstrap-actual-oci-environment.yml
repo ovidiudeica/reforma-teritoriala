@@ -91,14 +91,14 @@ jobs:
 
       - name: Commit deterministic OCI environment binding
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/actual-runtime-image.json \
+          git -C "$GITHUB_WORKSPACE" config user.name "github-actions[bot]"
+          git -C "$GITHUB_WORKSPACE" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C "$GITHUB_WORKSPACE" add data/current/actual-runtime-image.json \
                   data/current/actual-build-environment-manifest.json \
                   data/current/actual-build-environment-gate.json \
                   data/current/actual-release-manifest.json \
                   data/current/actual-release-persisted.json \
                   data/current/actual-release-gate.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Bind ACTUAL release to pinned OCI runtime"
-          git push origin HEAD:actual/pin-oci-runtime
+          git -C "$GITHUB_WORKSPACE" diff --cached --quiet && exit 0
+          git -C "$GITHUB_WORKSPACE" commit -m "Bind ACTUAL release to pinned OCI runtime"
+          git -C "$GITHUB_WORKSPACE" push origin HEAD:actual/pin-oci-runtime
