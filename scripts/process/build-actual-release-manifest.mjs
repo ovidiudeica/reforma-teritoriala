@@ -77,6 +77,9 @@ const semanticFingerprint=actualSemanticFingerprint(semanticDocuments);
 const BASE_REF=process.env.ACTUAL_BASE_REF||null;
 let releaseFingerprint=semanticFingerprint.sha256;
 let snapshotId='actual-'+releaseFingerprint.slice(0,16);
+let baseManifestBytes=null;
+let baseManifest=null;
+let baseSemanticMatches=false;
 let contentIdentity={
  algorithm:semanticFingerprint.algorithm,
  sha256:semanticFingerprint.sha256,
@@ -87,6 +90,8 @@ if(BASE_REF){
  const gitBuffer=path=>execFileSync('git',['show',BASE_REF+':'+path],{maxBuffer:256*1024*1024});
  const gitJson=path=>JSON.parse(gitBuffer(path).toString('utf8'));
  const baseMarker=gitJson('data/current/actual-release-persisted.json');
+ baseManifestBytes=gitBuffer(OUTPUT);
+ baseManifest=JSON.parse(baseManifestBytes.toString('utf8'));
  const baseDocuments={
   catalog:gitJson(PATHS.catalog),
   inventory:gitJson(PATHS.inventory),
@@ -99,6 +104,7 @@ if(BASE_REF){
  };
  const baseSemantic=actualSemanticFingerprint(baseDocuments);
  if(baseSemantic.sha256===semanticFingerprint.sha256){
+  baseSemanticMatches=true;
   releaseFingerprint=baseMarker.release_fingerprint_sha256;
   snapshotId=baseMarker.snapshot_id;
   contentIdentity={
@@ -218,17 +224,39 @@ const manifest={
  components
 };
 
+const baseComponentBytesMatch=Boolean(baseManifest)&&Object.keys(PATHS).every(key=>
+ baseManifest.components?.[key]?.sha256===components[key].sha256
+ && Number(baseManifest.components?.[key]?.bytes)===Number(components[key].bytes)
+);
+const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseManifestBytes;
+
 await mkdir('data/current',{recursive:true});
-await writeFile(OUTPUT,JSON.stringify(manifest,null,2)+'\n');
-console.log(JSON.stringify({
- snapshot_id:manifest.snapshot_id,
- generated_at:manifest.generated_at,
- release_fingerprint_sha256:manifest.release_fingerprint_sha256,
- content_fingerprint_sha256:manifest.content_fingerprint_sha256,
- component_byte_fingerprint_sha256:manifest.component_byte_fingerprint_sha256,
- release_identity_basis:manifest.content_identity?.release_identity_basis??null,
- entity_count:manifest.catalog.entity_count,
- public_contract:manifest.public_contract.contract,
- feature_count:{RO:manifest.geometry.RO.feature_count,MD:manifest.geometry.MD.feature_count},
- gates:{RO:manifest.jurisdiction_gates.RO.status,MD:manifest.jurisdiction_gates.MD.status}
-},null,2));
+if(reuseExactBaseManifest){
+ await writeFile(OUTPUT,baseManifestBytes);
+ console.log(JSON.stringify({
+  snapshot_id:baseManifest.snapshot_id,
+  generated_at:baseManifest.generated_at,
+  release_fingerprint_sha256:baseManifest.release_fingerprint_sha256,
+  release_identity_basis:'exact_base_manifest_byte_reuse',
+  exact_base_manifest_bytes_reused:true,
+  component_hash_changed_count:0,
+  entity_count:baseManifest.catalog?.entity_count??null,
+  feature_count:{RO:baseManifest.geometry?.RO?.feature_count??null,MD:baseManifest.geometry?.MD?.feature_count??null},
+  gates:{RO:baseManifest.jurisdiction_gates?.RO?.status??null,MD:baseManifest.jurisdiction_gates?.MD?.status??null}
+ },null,2));
+}else{
+ await writeFile(OUTPUT,JSON.stringify(manifest,null,2)+'\n');
+ console.log(JSON.stringify({
+  snapshot_id:manifest.snapshot_id,
+  generated_at:manifest.generated_at,
+  release_fingerprint_sha256:manifest.release_fingerprint_sha256,
+  content_fingerprint_sha256:manifest.content_fingerprint_sha256,
+  component_byte_fingerprint_sha256:manifest.component_byte_fingerprint_sha256,
+  release_identity_basis:manifest.content_identity?.release_identity_basis??null,
+  exact_base_manifest_bytes_reused:false,
+  entity_count:manifest.catalog.entity_count,
+  public_contract:manifest.public_contract.contract,
+  feature_count:{RO:manifest.geometry.RO.feature_count,MD:manifest.geometry.MD.feature_count},
+  gates:{RO:manifest.jurisdiction_gates.RO.status,MD:manifest.jurisdiction_gates.MD.status}
+ },null,2));
+}
