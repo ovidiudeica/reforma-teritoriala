@@ -8,6 +8,8 @@ test('candidate deterministic phase is kernel-network-isolated',async()=>{
  assert.match(workflow,/docker run[\s\S]*?--network none[\s\S]*?--cap-drop ALL[\s\S]*?no-new-privileges/);
  assert.match(workflow,/ACTUAL_NETWORK_MODE=docker-network-none/);
  assert.match(workflow,/scripts\/process\/run-actual-deterministic-candidate\.sh/);
+ assert.match(workflow,/node scripts\/process\/verify-actual-persisted-base\.mjs/);
+ assert.doesNotMatch(workflow,/node --input-type=module <<|<<"NODE"/);
  assert.doesNotMatch(workflow,/\/var\/run\/docker\.sock/);
 });
 
