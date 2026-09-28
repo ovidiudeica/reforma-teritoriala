@@ -7,8 +7,8 @@ export const RUNTIME_DOCKERFILE_PATH='container/actual-runtime/Dockerfile';
 export const RUNTIME_BUILDER_WORKFLOW_PATH='.github/workflows/build-actual-runtime-image.yml';
 export const EXPECTED_RUNTIME_IMAGE={
  image:'ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime',
- digest:'sha256:4ec5b4815933c228339461826dad7c89be83996468dc7da7e591ea99173b305d',
- ref:'ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:4ec5b4815933c228339461826dad7c89be83996468dc7da7e591ea99173b305d',
+ digest:'sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40',
+ ref:'ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40',
  platform:'linux/amd64',
  base_image:'node:24.21.0-bookworm',
  base_digest:'sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4',
