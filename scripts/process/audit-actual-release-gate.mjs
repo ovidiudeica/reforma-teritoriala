@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual-semantic-fingerprint.mjs';
 import {SOURCE_BUNDLE_GATE_PATH,SOURCE_BUNDLE_PATH,sha256 as sourceSha256,validateSourceBundleManifest} from '../lib/actual-source-bundle.mjs';
+import {BUILD_ENVIRONMENT_PATH,sha256 as environmentSha256,validateBuildEnvironmentManifest} from '../lib/actual-build-environment.mjs';
 const MANIFEST='data/current/actual-release-manifest.json';
 const TOPOLOGY_AUDIT='data/current/actual-topology-audit.json';
 const topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));
@@ -18,6 +19,9 @@ const sourceBundleBuf=await readFile(SOURCE_BUNDLE_PATH);
 const sourceBundle=JSON.parse(sourceBundleBuf.toString('utf8'));
 const sourceBundleGate=JSON.parse(await readFile(SOURCE_BUNDLE_GATE_PATH,'utf8'));
 const sourceBundleValidation=await validateSourceBundleManifest(sourceBundle);
+const buildEnvironmentBuf=await readFile(BUILD_ENVIRONMENT_PATH);
+const buildEnvironment=JSON.parse(buildEnvironmentBuf.toString('utf8'));
+const buildEnvironmentValidation=await validateBuildEnvironmentManifest(buildEnvironment);
 const paths=Object.fromEntries(Object.entries(manifest.components||{}).map(([key,value])=>[key,value?.path]).filter(([,path])=>path));
 const buffers={};
 for(const [key,path] of Object.entries(paths))buffers[key]=await readFile(path);
@@ -107,6 +111,19 @@ check('manifest_binds_current_source_bundle',
  && manifest.source_bundle?.bundle_fingerprint_sha256===sourceBundle.bundle_fingerprint_sha256
  && manifest.source_bundle?.sha256===sourceSha256(sourceBundleBuf),
  {manifest:manifest.source_bundle??null,actual:{path:SOURCE_BUNDLE_PATH,schema_version:sourceBundle.schema_version,mode:sourceBundle.mode,source_watermark:sourceBundle.source_watermark,bundle_fingerprint_algorithm:sourceBundle.bundle_fingerprint_algorithm,bundle_fingerprint_sha256:sourceBundle.bundle_fingerprint_sha256,sha256:sourceSha256(sourceBundleBuf)}});
+check('build_environment_manifest_matches_repository',
+ buildEnvironmentValidation.status==='PASS',
+ {status:buildEnvironmentValidation.status,failures:buildEnvironmentValidation.failures});
+check('manifest_binds_current_build_environment',
+ manifest.build_environment?.path===BUILD_ENVIRONMENT_PATH
+ && manifest.build_environment?.schema_version===buildEnvironment.schema_version
+ && manifest.build_environment?.mode===buildEnvironment.mode
+ && manifest.build_environment?.runner_label===buildEnvironment.environment?.runner?.label
+ && manifest.build_environment?.runner_image_version===buildEnvironment.environment?.runner?.image_version
+ && manifest.build_environment?.environment_fingerprint_algorithm===buildEnvironment.environment_fingerprint_algorithm
+ && manifest.build_environment?.environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256
+ && manifest.build_environment?.sha256===environmentSha256(buildEnvironmentBuf),
+ {manifest:manifest.build_environment??null,actual:{path:BUILD_ENVIRONMENT_PATH,schema_version:buildEnvironment.schema_version,mode:buildEnvironment.mode,runner_label:buildEnvironment.environment?.runner?.label??null,runner_image_version:buildEnvironment.environment?.runner?.image_version??null,environment_fingerprint_algorithm:buildEnvironment.environment_fingerprint_algorithm,environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256,sha256:environmentSha256(buildEnvironmentBuf)}});
 check('manifest_mode_is_actual',manifest.mode==='ACTUAL',{mode:manifest.mode});
 check('manifest_jurisdictions_are_exactly_ro_md',
  Array.isArray(manifest.jurisdictions)&&manifest.jurisdictions.length===2&&manifest.jurisdictions[0]==='RO'&&manifest.jurisdictions[1]==='MD',
@@ -298,7 +315,7 @@ const report={
  manifest_path:MANIFEST,
  manifest_sha256:sha256(manifestBuf),
  status:failures.length?'FAIL':'PASS',
- policy:'The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle passes its gate and is cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source or release drift fails closed.',
+ policy:'The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, environment or release drift fails closed.',
  checks,
  failures
 };

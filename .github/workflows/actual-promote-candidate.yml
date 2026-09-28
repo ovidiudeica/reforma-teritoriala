@@ -29,15 +29,20 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out candidate
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           ref: ${{ inputs.candidate_branch }}
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: '24.21.0'
+
+      - name: Audit pinned ACTUAL execution environment
+        env:
+          ACTUAL_BUILD_ENVIRONMENT_GATE_READ_ONLY: '1'
+        run: npm run audit:actual-build-environment
 
       - name: Audit pinned Node/npm toolchain
         run: npm run audit:node-toolchain

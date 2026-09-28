@@ -4,7 +4,7 @@
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "generated_at": "2026-09-27T20:37:28.323Z",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "policy": "Immutable content fingerprint for the current public RO+MD administrative snapshot, with an independent exact source-provenance binding. The manifest binds validated master/public bytes and the deterministic OSM/SIRUTA/CUATM source bundle.",
+  "policy": "Immutable semantic ACTUAL identity with independent exact bindings for release bytes, source provenance and GitHub Actions execution-environment provenance.",
   "jurisdictions": [
     "RO",
     "MD"
@@ -17,6 +17,16 @@
     "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
     "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
     "sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6"
+  },
+  "build_environment": {
+    "path": "data/current/actual-build-environment-manifest.json",
+    "schema_version": 1,
+    "mode": "ACTUAL_BUILD_ENVIRONMENT",
+    "runner_label": "ubuntu-24.04",
+    "runner_image_version": "20260920.314.1",
+    "environment_fingerprint_algorithm": "actual-build-environment-v1",
+    "environment_fingerprint_sha256": "249f8a156c22d9544aa65d4d08d5884363b58a0d27d012ba150f47df86e6d4c9",
+    "sha256": "53370cea7aa88409a4f3c92d76e7bb4ed94ad610b961f2f6ffb9cfd18cdf0076"
   },
   "catalog": {
     "path": "data/current/entities.json",
@@ -176,7 +186,7 @@
   "official_sources": {
     "RO": {
       "registry": "SIRUTA",
-      "authority": "Institutul Național de Statistică",
+      "authority": "Institutul Na╚øional de Statistic─â",
       "path": "data/sources/ro-siruta-current.json",
       "reference_year": 2026,
       "fetched_at": "2026-09-26T11:58:48.000Z",
@@ -187,7 +197,7 @@
     },
     "MD": {
       "registry": "CUATM",
-      "authority": "Biroul Național de Statistică al Republicii Moldova",
+      "authority": "Biroul Na╚øional de Statistic─â al Republicii Moldova",
       "path": "data/sources/cuatm-current.json",
       "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
       "fetched_at": "2026-09-27T20:37:24.316Z",
