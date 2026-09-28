@@ -218,6 +218,11 @@ jobs:
       - name: Audit ACTUAL count regression
         run: npm run audit:actual-regression
 
+      - name: Stabilize deterministic ACTUAL release bytes
+        env:
+          ACTUAL_BASE_REF: ${{ steps.base.outputs.base_release_commit }}
+        run: npm run stabilize:actual-bytes
+
       - name: Build candidate release manifest
         env:
           ACTUAL_BASE_REF: ${{ steps.base.outputs.base_release_commit }}
@@ -281,6 +286,7 @@ jobs:
             data/current/actual-structural-completeness-audit.json
             data/current/actual-official-identity-audit.json
             data/current/actual-regression-audit.json
+            data/current/actual-byte-reproducibility-audit.json
             data/current/ro-release-gate.json
             data/current/md-release-gate.json
             data/sources/osm-current.json
