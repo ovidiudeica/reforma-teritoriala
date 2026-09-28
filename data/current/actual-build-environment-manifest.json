@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "f924aac3c222a036e10046fa09234cda9ffedd8238212d8a1e60a908410a5be8",
+  "environment_fingerprint_sha256": "249f8a156c22d9544aa65d4d08d5884363b58a0d27d012ba150f47df86e6d4c9",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family and image version, Node/npm, package files, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.",
   "environment": {
     "runner": {
@@ -16,11 +16,11 @@
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "19cfdcea08dcd1e60dd051bcaec9b7c936939221ab0f9e0c3a03259a752c8002"
+        "sha256": "9ef9164b64d437c4c10e99f113714005a2798d19cd52e46b160fc9f6fc17a75a"
       },
       "package_lock": {
         "path": "package-lock.json",
-        "sha256": "1aba6543e3987e940b495aa831ba1f50759426773bae3dab6e77b07d2c4da852",
+        "sha256": "752642db96fd5ffb17a01466e7e81d74c25add0466fa2f5327e2a65dd6fdbff6",
         "lockfile_version": 3
       }
     },
@@ -32,7 +32,7 @@
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "9a57e3aa00620db18c17e96be8cc8c5edb70c4b0eb4d54688059769038463956",
+        "sha256": "d8b2e8f6b6b12ff4ba02ef507fa5fe46b4e0cf3cde4c7fed5e0e1a5afbc9af8c",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -47,7 +47,7 @@
       },
       "topology": {
         "path": ".github/workflows/actual-topology-audit.yml",
-        "sha256": "f9bce036beeb4c9bba432953f1fc8ab244a23ada167d07368aab625728b185f5",
+        "sha256": "8c43c4a1c6dec6928c2b42838c934090c47b15b1a0a7fe7ab5eb864e78d02984",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -62,7 +62,7 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "cdb99d37832818d608518c4f47466835c309b49366b6935248b9b171746503a2",
+        "sha256": "5aa83aa20634241b2df091ad69a7dc2a7aec4be3f60219e8901eb4a6e88d7828",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -76,7 +76,7 @@
       },
       "verify": {
         "path": ".github/workflows/verify-persisted-actual-release.yml",
-        "sha256": "8319ea4abc1bc9829a07f399e48835637c46548a3bb19250ea606aa251a77e74",
+        "sha256": "21015af8fa8d15697785c603f68e662f379e30c3a42d88e66f111a79d7b69a27",
         "runs_on": [
           "ubuntu-24.04"
         ],
