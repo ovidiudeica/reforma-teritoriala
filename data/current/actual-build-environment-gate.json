@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
+  "build_environment_path": "data/current/actual-build-environment-manifest.json",
+  "build_environment_sha256": "2af393d9637dddad84f3318cdcbba3482b72450ff94aa1d8ebfac3d8962ca60b",
+  "environment_fingerprint_sha256": "aa2f6165313dc33ecbcb1e31a376a2d081d9d16c02459855bd1c0b568fa34de2",
+  "status": "PASS",
+  "policy": "Fail closed unless repository workflow bytes, runner family/image, Node/npm, package files and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest. GitHub Actions runs also verify the observed hosted image version.",
+  "checks": [
+    {
+      "name": "manifest_schema_and_mode",
+      "ok": true,
+      "detail": {
+        "schema_version": 1,
+        "mode": "ACTUAL_BUILD_ENVIRONMENT"
+      }
+    },
+    {
+      "name": "manifest_matches_repository_environment",
+      "ok": true,
+      "detail": {
+        "workflow_count": 4,
+        "action_count": 3
+      }
+    },
+    {
+      "name": "runner_label_is_exact",
+      "ok": true,
+      "detail": {
+        "expected": "ubuntu-24.04",
+        "actual": {
+          "candidate": [
+            "ubuntu-24.04"
+          ],
+          "topology": [
+            "ubuntu-24.04"
+          ],
+          "promotion": [
+            "ubuntu-24.04"
+          ],
+          "verify": [
+            "ubuntu-24.04"
+          ]
+        }
+      }
+    },
+    {
+      "name": "node_version_is_exact_in_workflows",
+      "ok": true,
+      "detail": {
+        "expected": "24.21.0",
+        "actual": {
+          "candidate": [
+            "24.21.0"
+          ],
+          "topology": [
+            "24.21.0"
+          ],
+          "promotion": [
+            "24.21.0"
+          ],
+          "verify": [
+            "24.21.0"
+          ]
+        }
+      }
+    },
+    {
+      "name": "github_actions_are_exact_commit_shas",
+      "ok": true,
+      "detail": {
+        "expected": {
+          "actions/checkout": "fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/setup-node": "a0853c24544627f65ddf259abe73b1d18a591444",
+          "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+        },
+        "actual": {
+          "actions/checkout": "fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/setup-node": "a0853c24544627f65ddf259abe73b1d18a591444",
+          "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+        }
+      }
+    },
+    {
+      "name": "package_toolchain_matches_expected",
+      "ok": true,
+      "detail": {
+        "expected": {
+          "node": "24.21.0",
+          "npm": "11.19.0",
+          "package_manager": "npm@11.19.0"
+        },
+        "actual": {
+          "node": "24.21.0",
+          "npm": "11.19.0",
+          "package_manager": "npm@11.19.0",
+          "package_json": {
+            "path": "package.json",
+            "sha256": "19cfdcea08dcd1e60dd051bcaec9b7c936939221ab0f9e0c3a03259a752c8002"
+          },
+          "package_lock": {
+            "path": "package-lock.json",
+            "sha256": "1aba6543e3987e940b495aa831ba1f50759426773bae3dab6e77b07d2c4da852",
+            "lockfile_version": 3
+          }
+        }
+      }
+    },
+    {
+      "name": "environment_fingerprint_recomputes",
+      "ok": true,
+      "detail": {
+        "algorithm": "actual-build-environment-v1",
+        "expected": "aa2f6165313dc33ecbcb1e31a376a2d081d9d16c02459855bd1c0b568fa34de2",
+        "actual": "aa2f6165313dc33ecbcb1e31a376a2d081d9d16c02459855bd1c0b568fa34de2"
+      }
+    }
+  ],
+  "failures": []
+}
