@@ -38,15 +38,18 @@ jobs:
             --network none \
             --cap-drop ALL \
             --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
             --workdir /workspace \
             --env ACTUAL_BASE_REF=origin/main \
             --env ACTUAL_NETWORK_MODE=docker-network-none \
             --env GITHUB_ACTIONS=true \
             --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
             "$ACTUAL_RUNTIME_IMAGE" \
             bash -lc '
               set -euo pipefail
+              mkdir -p "$HOME"
               git config --global --add safe.directory /workspace
               npm run prove:actual-network-denial
               npm run build:actual-runtime-image-manifest
@@ -101,14 +104,17 @@ jobs:
             --network none \
             --cap-drop ALL \
             --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
             --workdir /workspace \
             --env ACTUAL_NETWORK_MODE=docker-network-none \
             --env GITHUB_ACTIONS=true \
             --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
             "$ACTUAL_RUNTIME_IMAGE" \
             bash -lc '
               set -euo pipefail
+              mkdir -p "$HOME"
               git config --global --add safe.directory /workspace
               npm run test:actual-candidate-lifecycle
               npm run audit:actual-release-gate
