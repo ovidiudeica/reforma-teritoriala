@@ -4,6 +4,7 @@ import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual-semantic-fingerprint.mjs';
 import {SOURCE_BUNDLE_PATH,sourceBundleFingerprint as computeSourceBundleFingerprint} from '../lib/actual-source-bundle.mjs';
+import {BUILD_ENVIRONMENT_PATH,buildEnvironmentFingerprint as computeBuildEnvironmentFingerprint} from '../lib/actual-build-environment.mjs';
 
 const OUTPUT='data/current/actual-release-manifest.json';
 const PATHS={
@@ -38,6 +39,12 @@ const sourceBundleHash=sha256(sourceBundleBytes);
 const computedSourceBundleFingerprint=computeSourceBundleFingerprint(sourceBundle);
 if(sourceBundle.schema_version!==1||sourceBundle.mode!=='ACTUAL_SOURCE_BUNDLE')throw new Error('Invalid ACTUAL source bundle schema/mode');
 if(sourceBundle.bundle_fingerprint_algorithm!==computedSourceBundleFingerprint.algorithm||sourceBundle.bundle_fingerprint_sha256!==computedSourceBundleFingerprint.sha256)throw new Error('ACTUAL source bundle fingerprint mismatch');
+const buildEnvironmentBytes=await readFile(BUILD_ENVIRONMENT_PATH);
+const buildEnvironment=JSON.parse(buildEnvironmentBytes.toString('utf8'));
+const buildEnvironmentHash=sha256(buildEnvironmentBytes);
+const computedBuildEnvironmentFingerprint=computeBuildEnvironmentFingerprint(buildEnvironment);
+if(buildEnvironment.schema_version!==1||buildEnvironment.mode!=='ACTUAL_BUILD_ENVIRONMENT')throw new Error('Invalid ACTUAL build environment schema/mode');
+if(buildEnvironment.environment_fingerprint_algorithm!==computedBuildEnvironmentFingerprint.algorithm||buildEnvironment.environment_fingerprint_sha256!==computedBuildEnvironmentFingerprint.sha256)throw new Error('ACTUAL build environment fingerprint mismatch');
 const json=key=>JSON.parse(buffers[key].toString('utf8'));
 const catalog=json('catalog');
 const inventory=json('inventory');
@@ -140,7 +147,7 @@ const tier=(jurisdiction,name)=>{
 };
 
 const manifest={
- schema_version:4,
+ schema_version:5,
  mode:'ACTUAL',
  snapshot_id:snapshotId,
  generated_at:generatedAt,
@@ -148,7 +155,7 @@ const manifest={
  content_fingerprint_sha256:semanticFingerprint.sha256,
  component_byte_fingerprint_sha256:byteFingerprint.sha256,
  content_identity:contentIdentity,
- policy:'Stable administrative-content identity separated from exact-byte integrity and exact source provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values and the ACTUAL source-bundle binding remain mandatory integrity constraints.',
+ policy:'Stable administrative-content identity separated from exact-byte integrity, exact source provenance and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle and build-environment bindings remain mandatory integrity constraints.',
  jurisdictions,
  source_bundle:{
   path:SOURCE_BUNDLE_PATH,
@@ -158,6 +165,16 @@ const manifest={
   bundle_fingerprint_algorithm:sourceBundle.bundle_fingerprint_algorithm,
   bundle_fingerprint_sha256:sourceBundle.bundle_fingerprint_sha256,
   sha256:sourceBundleHash
+ },
+ build_environment:{
+  path:BUILD_ENVIRONMENT_PATH,
+  schema_version:buildEnvironment.schema_version,
+  mode:buildEnvironment.mode,
+  runner_label:buildEnvironment.environment?.runner?.label??null,
+  runner_image_version:buildEnvironment.environment?.runner?.image_version??null,
+  environment_fingerprint_algorithm:buildEnvironment.environment_fingerprint_algorithm,
+  environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256,
+  sha256:buildEnvironmentHash
  },
  catalog:{
   path:PATHS.catalog,
@@ -248,7 +265,11 @@ const baseSourceBundleMatches=Boolean(baseManifest)
  && baseManifest.source_bundle?.path===SOURCE_BUNDLE_PATH
  && baseManifest.source_bundle?.sha256===sourceBundleHash
  && baseManifest.source_bundle?.bundle_fingerprint_sha256===sourceBundle.bundle_fingerprint_sha256;
-const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseSourceBundleMatches&&baseManifestBytes;
+const baseBuildEnvironmentMatches=Boolean(baseManifest)
+ && baseManifest.build_environment?.path===BUILD_ENVIRONMENT_PATH
+ && baseManifest.build_environment?.sha256===buildEnvironmentHash
+ && baseManifest.build_environment?.environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256;
+const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseSourceBundleMatches&&baseBuildEnvironmentMatches&&baseManifestBytes;
 
 await mkdir('data/current',{recursive:true});
 if(reuseExactBaseManifest){
@@ -273,6 +294,7 @@ if(reuseExactBaseManifest){
   content_fingerprint_sha256:manifest.content_fingerprint_sha256,
   component_byte_fingerprint_sha256:manifest.component_byte_fingerprint_sha256,
   source_bundle_fingerprint_sha256:manifest.source_bundle.bundle_fingerprint_sha256,
+  build_environment_fingerprint_sha256:manifest.build_environment.environment_fingerprint_sha256,
   release_identity_basis:manifest.content_identity?.release_identity_basis??null,
   exact_base_manifest_bytes_reused:false,
   entity_count:manifest.catalog.entity_count,
