@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual-semantic-fingerprint.mjs';
+import {SOURCE_BUNDLE_PATH,sourceBundleFingerprint as computeSourceBundleFingerprint} from '../lib/actual-source-bundle.mjs';
 
 const OUTPUT='data/current/actual-release-manifest.json';
 const PATHS={
@@ -31,6 +32,12 @@ const PATHS={
 };
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const buffers=Object.fromEntries(await Promise.all(Object.entries(PATHS).map(async([key,path])=>[key,await readFile(path)])));
+const sourceBundleBytes=await readFile(SOURCE_BUNDLE_PATH);
+const sourceBundle=JSON.parse(sourceBundleBytes.toString('utf8'));
+const sourceBundleHash=sha256(sourceBundleBytes);
+const computedSourceBundleFingerprint=computeSourceBundleFingerprint(sourceBundle);
+if(sourceBundle.schema_version!==1||sourceBundle.mode!=='ACTUAL_SOURCE_BUNDLE')throw new Error('Invalid ACTUAL source bundle schema/mode');
+if(sourceBundle.bundle_fingerprint_algorithm!==computedSourceBundleFingerprint.algorithm||sourceBundle.bundle_fingerprint_sha256!==computedSourceBundleFingerprint.sha256)throw new Error('ACTUAL source bundle fingerprint mismatch');
 const json=key=>JSON.parse(buffers[key].toString('utf8'));
 const catalog=json('catalog');
 const inventory=json('inventory');
@@ -133,7 +140,7 @@ const tier=(jurisdiction,name)=>{
 };
 
 const manifest={
- schema_version:3,
+ schema_version:4,
  mode:'ACTUAL',
  snapshot_id:snapshotId,
  generated_at:generatedAt,
@@ -141,8 +148,17 @@ const manifest={
  content_fingerprint_sha256:semanticFingerprint.sha256,
  component_byte_fingerprint_sha256:byteFingerprint.sha256,
  content_identity:contentIdentity,
- policy:'Stable administrative-content identity separated from exact-byte integrity. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values remain mandatory integrity bindings.',
+ policy:'Stable administrative-content identity separated from exact-byte integrity and exact source provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values and the ACTUAL source-bundle binding remain mandatory integrity constraints.',
  jurisdictions,
+ source_bundle:{
+  path:SOURCE_BUNDLE_PATH,
+  schema_version:sourceBundle.schema_version,
+  mode:sourceBundle.mode,
+  source_watermark:sourceBundle.source_watermark??null,
+  bundle_fingerprint_algorithm:sourceBundle.bundle_fingerprint_algorithm,
+  bundle_fingerprint_sha256:sourceBundle.bundle_fingerprint_sha256,
+  sha256:sourceBundleHash
+ },
  catalog:{
   path:PATHS.catalog,
   schema_version:catalog.schema_version??null,
@@ -228,7 +244,11 @@ const baseComponentBytesMatch=Boolean(baseManifest)&&Object.keys(PATHS).every(ke
  baseManifest.components?.[key]?.sha256===components[key].sha256
  && Number(baseManifest.components?.[key]?.bytes)===Number(components[key].bytes)
 );
-const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseManifestBytes;
+const baseSourceBundleMatches=Boolean(baseManifest)
+ && baseManifest.source_bundle?.path===SOURCE_BUNDLE_PATH
+ && baseManifest.source_bundle?.sha256===sourceBundleHash
+ && baseManifest.source_bundle?.bundle_fingerprint_sha256===sourceBundle.bundle_fingerprint_sha256;
+const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseSourceBundleMatches&&baseManifestBytes;
 
 await mkdir('data/current',{recursive:true});
 if(reuseExactBaseManifest){
@@ -252,6 +272,7 @@ if(reuseExactBaseManifest){
   release_fingerprint_sha256:manifest.release_fingerprint_sha256,
   content_fingerprint_sha256:manifest.content_fingerprint_sha256,
   component_byte_fingerprint_sha256:manifest.component_byte_fingerprint_sha256,
+  source_bundle_fingerprint_sha256:manifest.source_bundle.bundle_fingerprint_sha256,
   release_identity_basis:manifest.content_identity?.release_identity_basis??null,
   exact_base_manifest_bytes_reused:false,
   entity_count:manifest.catalog.entity_count,
