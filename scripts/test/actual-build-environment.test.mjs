@@ -19,6 +19,11 @@ test('committed ACTUAL build environment matches repository bytes and exact pins
  assert.deepEqual(manifest.environment.actions,EXPECTED_BUILD_ENVIRONMENT.actions);
  assert.equal(manifest.environment.network_policy?.deterministic_network,'none');
  assert.equal(manifest.environment.network_policy?.docker_socket_mounted,false);
+ assert.equal(manifest.environment.host_trust?.kernel_release,'6.17.0-1022-azure');
+ assert.equal(manifest.environment.host_trust?.docker_server_version,'28.0.4');
+ assert.equal(manifest.environment.host_trust?.containerd_version,'v2.3.5');
+ assert.equal(manifest.environment.host_trust?.runc_version,'1.5.1');
+ assert.equal(manifest.environment.host_trust?.cpu_execution_profile?.node_options,'--jitless');
 });
 
 test('build-environment fingerprint reacts to workflow, action, lockfile and vendored dependency identities',async()=>{
@@ -33,6 +38,8 @@ test('build-environment fingerprint reacts to workflow, action, lockfile and ven
   value=>{value.environment.runtime_image.digest='5'.repeat(64);},
   value=>{value.environment.runtime_image.runtime_fingerprint_sha256='6'.repeat(64);},
   value=>{value.environment.network_policy.deterministic_network='bridge';},
+  value=>{value.environment.host_trust.host_trust_fingerprint_sha256='8'.repeat(64);},
+  value=>{value.environment.host_trust.cpu_execution_profile.node_options='';},
   value=>{value.environment.support_files['scripts/process/install-actual-npm-offline.mjs']='7'.repeat(64);}
  ]){
   const changed=structuredClone(manifest);
