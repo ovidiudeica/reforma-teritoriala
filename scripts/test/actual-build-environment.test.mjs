@@ -17,6 +17,8 @@ test('committed ACTUAL build environment matches repository bytes and exact pins
  assert.equal(validation.status,'PASS',JSON.stringify(validation.failures));
  assert.deepEqual(manifest.environment.runner,EXPECTED_BUILD_ENVIRONMENT.runner);
  assert.deepEqual(manifest.environment.actions,EXPECTED_BUILD_ENVIRONMENT.actions);
+ assert.equal(manifest.environment.network_policy?.deterministic_network,'none');
+ assert.equal(manifest.environment.network_policy?.docker_socket_mounted,false);
 });
 
 test('build-environment fingerprint reacts to workflow, action, lockfile and vendored dependency identities',async()=>{
@@ -30,6 +32,7 @@ test('build-environment fingerprint reacts to workflow, action, lockfile and ven
   value=>{value.environment.toolchain.dependency_bundle.bundle_fingerprint_sha256='4'.repeat(64);},
   value=>{value.environment.runtime_image.digest='5'.repeat(64);},
   value=>{value.environment.runtime_image.runtime_fingerprint_sha256='6'.repeat(64);},
+  value=>{value.environment.network_policy.deterministic_network='bridge';},
   value=>{value.environment.support_files['scripts/process/install-actual-npm-offline.mjs']='7'.repeat(64);}
  ]){
   const changed=structuredClone(manifest);
