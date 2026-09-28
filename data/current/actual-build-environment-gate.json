@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "2af393d9637dddad84f3318cdcbba3482b72450ff94aa1d8ebfac3d8962ca60b",
-  "environment_fingerprint_sha256": "aa2f6165313dc33ecbcb1e31a376a2d081d9d16c02459855bd1c0b568fa34de2",
+  "build_environment_sha256": "cfcf93cc470ef1150c17c0ce9045cfa0f18dfe91e4f7a349383ffec894a80596",
+  "environment_fingerprint_sha256": "f924aac3c222a036e10046fa09234cda9ffedd8238212d8a1e60a908410a5be8",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner family/image, Node/npm, package files and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest. GitHub Actions runs also verify the observed hosted image version.",
   "checks": [
@@ -111,8 +111,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "aa2f6165313dc33ecbcb1e31a376a2d081d9d16c02459855bd1c0b568fa34de2",
-        "actual": "aa2f6165313dc33ecbcb1e31a376a2d081d9d16c02459855bd1c0b568fa34de2"
+        "expected": "f924aac3c222a036e10046fa09234cda9ffedd8238212d8a1e60a908410a5be8",
+        "actual": "f924aac3c222a036e10046fa09234cda9ffedd8238212d8a1e60a908410a5be8"
       }
     }
   ],
