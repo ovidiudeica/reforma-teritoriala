@@ -12,7 +12,7 @@ const report={
  build_environment_sha256:sha256(bytes),
  environment_fingerprint_sha256:manifest.environment_fingerprint_sha256??null,
  status:validation.status,
- policy:'Fail closed unless repository workflow bytes, runner family/image, Node/npm, package files and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest. GitHub Actions runs also verify the observed hosted image version.',
+ policy:'Fail closed unless repository workflow bytes, runner family/image, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest. GitHub Actions runs also verify the observed hosted image version.',
  checks:validation.checks,
  failures:validation.failures
 };

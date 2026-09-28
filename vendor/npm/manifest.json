@@ -1,0 +1,1560 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_NPM_DEPENDENCY_BUNDLE",
+  "algorithm": "actual-npm-dependency-bundle-v1",
+  "package_lock_sha256": "752642db96fd5ffb17a01466e7e81d74c25add0466fa2f5327e2a65dd6fdbff6",
+  "package_entry_count": 193,
+  "unique_tarball_count": 193,
+  "bundle_fingerprint_sha256": "8798eb37107586f3b33235330f441fffd18dc2e62a36d1b0bd72c22bff1b99a2",
+  "archive": {
+    "path": "vendor/npm/npm-dependency-bundle.tar",
+    "sha256": "eb5f7eb0614909dc51052ded4614d5d5d478257e57729d06769cf5940854defb",
+    "bytes": 10595328
+  },
+  "packages": [
+    {
+      "lock_path": "node_modules/@mapbox/geojson-rewind",
+      "version": "0.5.2",
+      "resolved": "https://registry.npmjs.org/@mapbox/geojson-rewind/-/geojson-rewind-0.5.2.tgz",
+      "integrity": "sha512-tJaT+RbYGJYStt7wI3cq4Nl4SXxG8W7JDG5DMJu97V25RnbNg3QtQtf+KD+VLjNpWKYsRvXDNmNrBgEETr1ifA==",
+      "tarball_sha256": "a02d7e7e1bb2a3842a73f9421176afdc1b83f7ab9b7bb3bfe8ff844faf7133f8",
+      "bytes": 2217
+    },
+    {
+      "lock_path": "node_modules/@turf/along",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/along/-/along-7.4.0.tgz",
+      "integrity": "sha512-uWh26sph1bJm3eO1toaoq9fbPRNxtbQlW/u0m04n7m6uFyGrUu4qE+8DTDQeF+cHGWbMQft4zshHZy0rz4Nyog==",
+      "tarball_sha256": "989e148b6340d2b7eb16479d851756778e732257d8f78d2599d89c76283a448a",
+      "bytes": 4470
+    },
+    {
+      "lock_path": "node_modules/@turf/angle",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/angle/-/angle-7.4.0.tgz",
+      "integrity": "sha512-QcylOejONtVUQVG25/GznC2URvYLta6HCDLPB12wT/AEsG3pEKvUh5RGJDcFwk8WKfKPRp9C24kzsbp1Nwp9XQ==",
+      "tarball_sha256": "d3359d2f4668946e2bf68aee8e6d12e467235222a16fbf3d455959288fcb576f",
+      "bytes": 4390
+    },
+    {
+      "lock_path": "node_modules/@turf/area",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/area/-/area-7.4.0.tgz",
+      "integrity": "sha512-B7q5f6QwKIxxbl4/L59lAYA+FF7h2hv6st96PuKue0TGCYGSxAG/lV8LHSPUSOuOrLywN4jytJcKK3vOFBs7Nw==",
+      "tarball_sha256": "e2ca2671bfb5a8e4c7cc96b3c7596c72a46a3c5f19cc62a336f8d5a065e1f622",
+      "bytes": 5226
+    },
+    {
+      "lock_path": "node_modules/@turf/bbox",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/bbox/-/bbox-7.4.0.tgz",
+      "integrity": "sha512-yOX9lALc2GmjYUIE99+nRj7eZA7eDtx7Ixu/hrgIo+YqHvL1reaPVTC9rQWMHMm0pH0/WHjzk8uOpAHjptrudQ==",
+      "tarball_sha256": "f36e300c507a26a590f188b4ab70f3586cea64c15b5a6230a5b19947dd0149f3",
+      "bytes": 3741
+    },
+    {
+      "lock_path": "node_modules/@turf/bbox-clip",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/bbox-clip/-/bbox-clip-7.4.0.tgz",
+      "integrity": "sha512-Vxi8XznT/vhLHfqE9C1IMw0wi73+6EP3Bn51Vm0v9AWLUEv1zKPqR9/a4cj+s7f3diPE1g238rS48+BB5nYKSQ==",
+      "tarball_sha256": "66979d51218e8f73cf955fab070c2561daacc754a32e2da1378ec00ce68df4df",
+      "bytes": 7832
+    },
+    {
+      "lock_path": "node_modules/@turf/bbox-polygon",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/bbox-polygon/-/bbox-polygon-7.4.0.tgz",
+      "integrity": "sha512-hF0ylAOhzwk9i7m/PCmTtg+TP5AnFb9B+bMXgEPIYd/C3BOVet1YaA8nF6ViN5bNF0GSkWFYivvclSgWbtZyqg==",
+      "tarball_sha256": "909b648f3b6daf2b2de59d68fd60fac754bead0ae3fcbf2eb033be5ce4e82b1b",
+      "bytes": 3919
+    },
+    {
+      "lock_path": "node_modules/@turf/bearing",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/bearing/-/bearing-7.4.0.tgz",
+      "integrity": "sha512-utMyjTU5U3QfHWLRIKUAvJerCMmC6NLI7X6cmL6PA5+KYdzul/ymxL6CQrwJugrf9zt4Hnzvipwz0j5H1Yo87w==",
+      "tarball_sha256": "e0f1a1468df8b7d8d271971758ea4b56e877c77d9173f71b98280a6bb9f51b68",
+      "bytes": 4392
+    },
+    {
+      "lock_path": "node_modules/@turf/bezier-spline",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/bezier-spline/-/bezier-spline-7.4.0.tgz",
+      "integrity": "sha512-ctzTB46Mo5umz658IFh2C9zB8fs/FtqDOjcozAcUm7TUs6h4hdrXsCMRLb4a9NIX7ekPB84xQ6ZrISXwI+6/yQ==",
+      "tarball_sha256": "0f77cac6c007a641cf404f852526db59bd7639e85d07574132b3fd6125d34077",
+      "bytes": 8605
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-clockwise",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-clockwise/-/boolean-clockwise-7.4.0.tgz",
+      "integrity": "sha512-3wO+W9P63JZMK1Ud5ER0kKXpiZaeXkOR5Omq5USKlPcopwZ6TP/mJjt8lUYYWsB2WGDXuUhlYmSVec43z3wwow==",
+      "tarball_sha256": "19042a85488c6bc00e68fc015b4f7e0e7892109f994f139f5fcff1c55fd22050",
+      "bytes": 3593
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-concave",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-concave/-/boolean-concave-7.4.0.tgz",
+      "integrity": "sha512-uSu01JxLsivXIyT8R7fN7ujyjyP0A8qTLaC/YlA2FSKDjpW1876KbWua203R9JxqZ4hgNUPCE7dhk9uTRXuZIg==",
+      "tarball_sha256": "dd173fd89abe2453c92e25d6af44ff07c7224cdb0a8c458c72fa19421e8ba757",
+      "bytes": 3713
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-contains",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-contains/-/boolean-contains-7.4.0.tgz",
+      "integrity": "sha512-vR8sfdKhSlDy6Jd6UAI2Bt27ZAU287G8lhLieIGfxKCpoUa2V8v3y0I9FH+ZpFen07I33aysHIZ4dMH92hBO3Q==",
+      "tarball_sha256": "f81cfc82f9b20f6f82d0aefd5c2faf451a0779ca9eb9d671dc9608e35af1988c",
+      "bytes": 14861
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-crosses",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-crosses/-/boolean-crosses-7.4.0.tgz",
+      "integrity": "sha512-athvZ8yB04BcuT53plyRJnn4jMmbiwlGk/pdxj28JZtsKipi+Ti6xmWDklFnrXpGfeaSHpPvKVt7XRduTB/qVA==",
+      "tarball_sha256": "8b647b0c800bc8244606978b80df506923c9a3772d0830794a240970966e7bc8",
+      "bytes": 7377
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-disjoint",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-disjoint/-/boolean-disjoint-7.4.0.tgz",
+      "integrity": "sha512-B6nXGFHa1+m181BZ5MOKa1l7/otws/NonUpOd0CKWTuBUzrlc6e60z/kRp5ceRYmE2LFOH5ZZxItnrsWgKc2VA==",
+      "tarball_sha256": "15fdfabef090a22b29208feb7a3d8724e3a870b8a143b165175b9f10a98b6712",
+      "bytes": 7067
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-equal",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-equal/-/boolean-equal-7.4.0.tgz",
+      "integrity": "sha512-OZWSaWvG7tZn90/7sBclZxpLyjrbxh8oNfOqrmdJigTY/XzAyjCE+jaweVTY8NGRkytC53kkDO0Q2DPZptpUcw==",
+      "tarball_sha256": "fd840182eed98ce1554a1d3370d3755ee6427fda4eabab213011a48a83b17cef",
+      "bytes": 4212
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-intersects",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-intersects/-/boolean-intersects-7.4.0.tgz",
+      "integrity": "sha512-tV30WLBgLh89uGYpWsKjU29eMhdyhSh2Sc1IKmv1W0YFHKwp6oDm2eRajMzMgdtN8cl6Jyb8oFCmw4LbMMuWAQ==",
+      "tarball_sha256": "320fa87d956a156653374cc22b9ccd5b83a275f87c00dbe8e223ee4ffa0f683e",
+      "bytes": 3670
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-overlap",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-overlap/-/boolean-overlap-7.4.0.tgz",
+      "integrity": "sha512-WcwQC042FnqDbZJCTm67NoQqV3bWz3C5M89b39MJtEPDWbO6kWwgMBt3Rm9w6gwrYljPE43vVB4pLiaSdNgKSQ==",
+      "tarball_sha256": "5a21c352e607453098207b1892954d974e4d6e9c86d451cd14658bf911ffea3d",
+      "bytes": 5231
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-parallel",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-parallel/-/boolean-parallel-7.4.0.tgz",
+      "integrity": "sha512-EUjTkvbd1zumtXwP3vEQPsjdlny9UjDkWRzNrZjBpc0MVY9g0clSslMBgHbcJAtOz4lP3+6fqOgwOkjA6XJBLQ==",
+      "tarball_sha256": "65a8ee07f129d02ec8cca3059780b2550a20ef344f39b85c308d88dc6e547f87",
+      "bytes": 4629
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-point-in-polygon",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-point-in-polygon/-/boolean-point-in-polygon-7.4.0.tgz",
+      "integrity": "sha512-GQrHc6WSDHhf32GB/b9AGyOeC05AQ3nGN7ooWTrlCYefKn7X9/2wG9BNexF47AuyDq5jPdOvITVR26BLFWV+mA==",
+      "tarball_sha256": "d6894ea3949945cc9926ca274b71ae7a0467992fab39859b689e83a1cae518f3",
+      "bytes": 5072
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-point-on-line",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-point-on-line/-/boolean-point-on-line-7.4.0.tgz",
+      "integrity": "sha512-5i5UBeZf/LuzgavkIj8L8L5/8SYWItWzQQcE9ymFZr60lV5lM8eFvQDfzAz2R3WQFCrxXExPqNvAVZOKGUyvoA==",
+      "tarball_sha256": "3f4eee4d3d235a6a410c5446652cc74d93a434a4b1b8637cdfaf22a13bb39ec2",
+      "bytes": 5863
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-touches",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-touches/-/boolean-touches-7.4.0.tgz",
+      "integrity": "sha512-ociH8gYuQ/jpTIFDAr3krbh5lMWjfbJXG1diGdmV03smutui/LhnMF8AvqQ46/nzo1IgD0640gbdzkQn91090g==",
+      "tarball_sha256": "e6b8335ae00ed06e2b1bf0954801d1027ba1dc109eddf060528b207d3c3050dd",
+      "bytes": 10501
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-valid",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-valid/-/boolean-valid-7.4.0.tgz",
+      "integrity": "sha512-Gop9r5YA3Asz80bPDCs3PjO4YPY5fyE55wlQDqLBSr6ZxbOaJXIoKrMgaBb1RBcM+9BFYnBlnpekMG3C8Gscrg==",
+      "tarball_sha256": "0f8546e3614b99e3caa04b10c56e78643206d3d566adba87be23447c3367399e",
+      "bytes": 6394
+    },
+    {
+      "lock_path": "node_modules/@turf/boolean-within",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/boolean-within/-/boolean-within-7.4.0.tgz",
+      "integrity": "sha512-wld+Og3HZlSe+QcovDY4JKLDkEqOx6gW52jkvAWIvbr4fDB/HUV95zX6SY78reJwm6hNwmnuX3nSriWooLU4HA==",
+      "tarball_sha256": "e4d88ad4dbebf0159bfb3d644e63da28f316c425defa3a02bc59822929b03662",
+      "bytes": 3403
+    },
+    {
+      "lock_path": "node_modules/@turf/buffer",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/buffer/-/buffer-7.4.0.tgz",
+      "integrity": "sha512-ewYjC7NmmP+BZ8JcjX1TglzYH1FCMWAh5L08j0iAP4lbn3/AutVjjbwIXedZZy5He1OfgmXf+rIBcNXdeEYceg==",
+      "tarball_sha256": "21ca0489eddc2f3e48d49ef61e3f0adde3e8a915904a8d0267e5a9f1a1830b41",
+      "bytes": 7820
+    },
+    {
+      "lock_path": "node_modules/@turf/center",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/center/-/center-7.4.0.tgz",
+      "integrity": "sha512-JVuTaIdnQtmTV8eQfVxqza1okKiaFzgVeIA6Xoy/u6aBMxg2+oBpS6GcHZkEqR8OapPWValB1AYYqimUSiyOXw==",
+      "tarball_sha256": "0ea6d8a805e62aa5a0428b16761d747c430669e95e5d15bdce9f9c1f5da81411",
+      "bytes": 3851
+    },
+    {
+      "lock_path": "node_modules/@turf/center-mean",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/center-mean/-/center-mean-7.4.0.tgz",
+      "integrity": "sha512-M4PG7NPiy5OoxueLkgw/OIe3driLic37xSsfs6KSjg7u/ZNBysymThy9a6lYUlygS/Z1xhqSfjOsOcxHtxKTzA==",
+      "tarball_sha256": "5f791f112e3cc431d724140fb79324677d842cc27db5e205c32e0e5604699027",
+      "bytes": 4606
+    },
+    {
+      "lock_path": "node_modules/@turf/center-median",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/center-median/-/center-median-7.4.0.tgz",
+      "integrity": "sha512-R2ap2S789WRFzbk54gv3hSN0vnT+djRL0nqultWmvhYBJE2FsN5Z0libZNetP+VyOV/mg5AF8CFLbkmnmqJg3Q==",
+      "tarball_sha256": "7aed7084dd40cee2e892d92fc322a95f58c3f9f0caef568c57e59b7fe58e4a7d",
+      "bytes": 7852
+    },
+    {
+      "lock_path": "node_modules/@turf/center-of-mass",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/center-of-mass/-/center-of-mass-7.4.0.tgz",
+      "integrity": "sha512-wpa22gBJvwYmvh+I3idMds1mtSEYXqLFTu9s9U7TZTy2HrglIIe+6iz0zSm4is58W7TNXQQlfeCmyvURU2+kdQ==",
+      "tarball_sha256": "e3f4a000c13945130886f4821346828a750e161f461c9742efc8587de8105a93",
+      "bytes": 5555
+    },
+    {
+      "lock_path": "node_modules/@turf/centroid",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/centroid/-/centroid-7.4.0.tgz",
+      "integrity": "sha512-WglCFe+TnMqeYa/LcbUp37NgIF0zHTNYmlxwUm40fyyzyLsYeDq4dgFWLTYpvRNqb5oIMV6xsBjSf+vCPtVJ6w==",
+      "tarball_sha256": "150e296e80d1fc932d2712d8173f5535bf8311ef12202f9caba45534780b40b6",
+      "bytes": 3700
+    },
+    {
+      "lock_path": "node_modules/@turf/circle",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/circle/-/circle-7.4.0.tgz",
+      "integrity": "sha512-H7dXQP7WRpIE/UwZFFGYoSewsali5rjk9yzHPNZ03Bc9F11PWA3H+lwznEWmi/wLMMx91uMU+NkyGtJUeQr9cg==",
+      "tarball_sha256": "607bc9365e85ab5d116473e07991d562ab85b616397529f978e2dcc6e270a58b",
+      "bytes": 4324
+    },
+    {
+      "lock_path": "node_modules/@turf/clean-coords",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/clean-coords/-/clean-coords-7.4.0.tgz",
+      "integrity": "sha512-xl3lVPey/FyVc3Z+drAWtVuVtvt737RHKGUMGyuskmKYW0JUeFDgqSR0OnrDfxXWb58Im/65BgPd1B+TUA9WfA==",
+      "tarball_sha256": "7234dad87898e43005111856001c6c4c0bc8ec4ac5318ff14b0b73daf41f6ea4",
+      "bytes": 7093
+    },
+    {
+      "lock_path": "node_modules/@turf/clone",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/clone/-/clone-7.4.0.tgz",
+      "integrity": "sha512-IfYnuil7XYJauy3crzIYEr26QkmBiTgFdGfYwUUe3S6dawX+lyb3vhuaYyssEPcCJq83g0G7hwxZy7141Mmzjg==",
+      "tarball_sha256": "c3163585f2968f04114f69f92ab364b8279693fb78e5df80f595e63641a49c3a",
+      "bytes": 5579
+    },
+    {
+      "lock_path": "node_modules/@turf/clusters",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/clusters/-/clusters-7.4.0.tgz",
+      "integrity": "sha512-ZY8ZXONy88EnsHCTdaAILkZjkR3gd8xYx4Sc8TpRFuRTDzI2abzU6ET9zezMd+U8QWs7//QJctcfapzCpXBXQg==",
+      "tarball_sha256": "f6fac3e5d2b678018a0598ddfb08a1f6bb7cc4a1a0419ba432510c7e45c4183b",
+      "bytes": 9501
+    },
+    {
+      "lock_path": "node_modules/@turf/clusters-dbscan",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/clusters-dbscan/-/clusters-dbscan-7.4.0.tgz",
+      "integrity": "sha512-6uKPUvL7VNx3MueOqgGTx/pnGe5p5rgy/tA/6HOgRFLlDu0oYUTUdNg2JE0ylYOc0HW5hxCcmsRR0lz6fxw1KA==",
+      "tarball_sha256": "6c2672257332adf672fd0c0f148eec990f1c9c1e29322207528739ab92e409cc",
+      "bytes": 8412
+    },
+    {
+      "lock_path": "node_modules/@turf/clusters-kmeans",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/clusters-kmeans/-/clusters-kmeans-7.4.0.tgz",
+      "integrity": "sha512-fGSapN0nNzQ8NdKSsVgwPUQ5vkwlVK4M/zGN91jY29VcKb6ua8CotH7DNGKutCByr0c7WBefhUGeYVeZEgd9tQ==",
+      "tarball_sha256": "e8fc69e8e80b4ba23841d7ab533082beb0e4a8977c981b1c46cb320028cc264f",
+      "bytes": 5119
+    },
+    {
+      "lock_path": "node_modules/@turf/collect",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/collect/-/collect-7.4.0.tgz",
+      "integrity": "sha512-vQ0NH9SCUacKtQGValYxF8Q1mv4g4vLdWSwuVjIDbsH7NTgGUCFQwKXeHuGqh3U9r2PCQ+3ZbsMK61ok8U75fg==",
+      "tarball_sha256": "48c19c5e66885accb98afd7bef86cfe0feee1b5b1812a9ca17f2e9892967abf7",
+      "bytes": 4926
+    },
+    {
+      "lock_path": "node_modules/@turf/combine",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/combine/-/combine-7.4.0.tgz",
+      "integrity": "sha512-G3tEctgA3Kqz9T3PjF3lQdMUodQxOOLLBy8s5Y//8qyx7IRJqOazxdCaZRo2lq7C8eEdoUud6PIAXLz0gHue4w==",
+      "tarball_sha256": "c1c9163ee1b4654c6c536bb155f9819d5789802596c24a3692e63311c31a86f1",
+      "bytes": 4820
+    },
+    {
+      "lock_path": "node_modules/@turf/concave",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/concave/-/concave-7.4.0.tgz",
+      "integrity": "sha512-EzCHDEbGRVbo9vR/HJriC8U7mpxgTYgyluBDNzcaT7kX53eH7/eS1U7rp/Q36e5RXMmlAWBknqtVseGMvKE5tw==",
+      "tarball_sha256": "921be3d0dcb1ab6932e728514dd5d17d1e030e54d19a9b89291f851e317082ac",
+      "bytes": 10215
+    },
+    {
+      "lock_path": "node_modules/@turf/convex",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/convex/-/convex-7.4.0.tgz",
+      "integrity": "sha512-MKKAKBMZAQJLicdJSck0rPkwvf/Yz4IFl672iNq9ZoofQxgAqQSEGtBGy4Zgnr5edDoIexzLRAoqm6woyx4Lzw==",
+      "tarball_sha256": "999293c186c68b1fdca1cda457d9ea5c307166ed9fe1b9bf75e76a94af5e288a",
+      "bytes": 4475
+    },
+    {
+      "lock_path": "node_modules/@turf/destination",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/destination/-/destination-7.4.0.tgz",
+      "integrity": "sha512-+jFpOUtzCiN8l9ZOvr66rxi/UxizphXaBDldaw9NfxlX/HcMn3ZDzC8IiCHiNXAilVh4WpCH0qqmH9ykOgdBKA==",
+      "tarball_sha256": "952ab44fa0cb0a32f4b61fbcf5c2a2cd02849dc64f4282ce3d44de3da8ac8813",
+      "bytes": 4777
+    },
+    {
+      "lock_path": "node_modules/@turf/difference",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/difference/-/difference-7.4.0.tgz",
+      "integrity": "sha512-4zV7Xi3CwUdyNsDzrPty08PiUeYYVBdbCnNVlSf8sk5Z7SL7seA42RabRG8ByTzcrbLATeDU4oTEthVhOGPlyw==",
+      "tarball_sha256": "f7f483fa3bf6d984f93f24405ad19ed25b6cc1e2490852211d8587854ca07a36",
+      "bytes": 4232
+    },
+    {
+      "lock_path": "node_modules/@turf/directional-mean",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/directional-mean/-/directional-mean-7.4.0.tgz",
+      "integrity": "sha512-TEgKLz71yLVAvjP9ozRAtB1gk7ziSq+a7LGePkMWLMxLtoJxb7eapAqcDk/QqRUBUJ4Dw/41qtRRwkVX0hQE/A==",
+      "tarball_sha256": "75e92c2523cbea41756f2fc54b98bac308da53c212374f82dcf18c93b3b1f68c",
+      "bytes": 9328
+    },
+    {
+      "lock_path": "node_modules/@turf/dissolve",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/dissolve/-/dissolve-7.4.0.tgz",
+      "integrity": "sha512-UHx+XiReD+qHXN0dKOyOxlB+NF0L1PkUHlERCPZcYNqd4JWl2uqOjMEBYxlVeBj6SO3yQPTM9kvWXPE3HqLanQ==",
+      "tarball_sha256": "bcd94d0a84d1ef99ddea3387a287dc8059be42efddf362c7eb1af7a960884b40",
+      "bytes": 5376
+    },
+    {
+      "lock_path": "node_modules/@turf/distance",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/distance/-/distance-7.4.0.tgz",
+      "integrity": "sha512-ODkopQDG1m/U6Mx7OMmShncaCvneomwX3lZY1CDA7x40bhDdTTRYP/n/6LicZVyIO4/oK+aXkov4NOtWYthA2g==",
+      "tarball_sha256": "dafce2c661509153d5cb603a29e2d8387674ba05b889e2d2264f78d640d67b43",
+      "bytes": 4081
+    },
+    {
+      "lock_path": "node_modules/@turf/distance-weight",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/distance-weight/-/distance-weight-7.4.0.tgz",
+      "integrity": "sha512-HUS57zzrSJAUUUlpEZYAsjK+BuCisgRf5/9pW5uW9TfegSbysA0T0C800GYqZcSPIpv22zVF5LE/hFnnu8WjHA==",
+      "tarball_sha256": "ef367c824c808a4d055432b55bb2fb81feb4e082e43f304db3372a6c12798572",
+      "bytes": 5847
+    },
+    {
+      "lock_path": "node_modules/@turf/ellipse",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/ellipse/-/ellipse-7.4.0.tgz",
+      "integrity": "sha512-m5s/fwYUbNN1MW/nW33sZ/jD58lMU1kGP6muU4inGAP7OxKbS15yz+Qg2aXsfyKcb0z19AFjhnCLQGWHU0sl1w==",
+      "tarball_sha256": "8826d19d638655202ac3cca0075b00a855b75bfbfdf1a56212579340edc5a121",
+      "bytes": 6722
+    },
+    {
+      "lock_path": "node_modules/@turf/envelope",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/envelope/-/envelope-7.4.0.tgz",
+      "integrity": "sha512-BNpwP70dFElOrYAVxLvjd9kMnxdowJB0ojsTs2OTvaC8Hp+qfrVTzTK5ZZ6Dzix/UpgdRlC5cDrEmbXTdvDpjA==",
+      "tarball_sha256": "632cba33814712e2e4ac6b99b5c2114a23850c87b2b35e01f1e9f437980a43a3",
+      "bytes": 3188
+    },
+    {
+      "lock_path": "node_modules/@turf/explode",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/explode/-/explode-7.4.0.tgz",
+      "integrity": "sha512-kTWoryCTAiBwFvyJYNQWLJCaFx4bSRpyCjJWmuLoBEQRh9Fi4JLDEug+6JZxygMxCMWGXBH8/R3ICl+soLPFAg==",
+      "tarball_sha256": "1b183a7984772e68392121c7abde28c19a05a3b85a397b8c3a2a2cd38809a259",
+      "bytes": 3738
+    },
+    {
+      "lock_path": "node_modules/@turf/flatten",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/flatten/-/flatten-7.4.0.tgz",
+      "integrity": "sha512-yrXpvXtmPlXIIoRuonQ7z+Uj47Sw9KYlH9oh9NBb3QRfz53LN+OTNndkGeXPaI00BDXxO/aZ7wEGmzuoCaDn1w==",
+      "tarball_sha256": "931db23b641b4d0bc01580890dd57de38da952421a9d92d61adf93e086e549ae",
+      "bytes": 3719
+    },
+    {
+      "lock_path": "node_modules/@turf/flip",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/flip/-/flip-7.4.0.tgz",
+      "integrity": "sha512-SlLwkHlY0MzFXmn/3pFNT7JILsEZer+KzLIxVxebiu6nd3aQaIOqGvxLHVFRbIXYd48UrORg1L40sWsw8z1Egg==",
+      "tarball_sha256": "21d9e0fdc393a7605b7c017d23038ba5393f2107fc1beb738e1b6eacc8689cd6",
+      "bytes": 4005
+    },
+    {
+      "lock_path": "node_modules/@turf/geojson-rbush",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/geojson-rbush/-/geojson-rbush-7.4.0.tgz",
+      "integrity": "sha512-o+debVj+6KQ2p0VebH+FgcTig2jUuG6mWMgLYvb34c7cOHoEuY6ICvKRKtHn/XcHa6eyoSk0TvnLEJAfFTQDMg==",
+      "tarball_sha256": "572b918ed2d02f91eb1d9c578cb646aba0985aba8a9ca2ebacbb64de165096f8",
+      "bytes": 8344
+    },
+    {
+      "lock_path": "node_modules/@turf/great-circle",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/great-circle/-/great-circle-7.4.0.tgz",
+      "integrity": "sha512-dV8qrH9rpvtUsqrXgUKWojCCJTdgAKgX6eyE+zm9GUtzq0pYUxG2JXVIxWBT65ucQPigBSbS5hxx6lAOpoD/Ew==",
+      "tarball_sha256": "e32ca326648e480a85499e036f0f158cc62be33432c0e2fc4a3fc4dd21690cc1",
+      "bytes": 4786
+    },
+    {
+      "lock_path": "node_modules/@turf/helpers",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/helpers/-/helpers-7.4.0.tgz",
+      "integrity": "sha512-7PAwLZqOdRzTI5g9bHvUwlloAXPDH/mlajtryk0tw4ZwGMtmXsAyF4QundsAMfy4u48Fyd3AUqMXY0SMxqJGWg==",
+      "tarball_sha256": "919bc92a8bebd049c13a226355208720a40f7717f78719ca02ab33089afcc388",
+      "bytes": 23146
+    },
+    {
+      "lock_path": "node_modules/@turf/hex-grid",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/hex-grid/-/hex-grid-7.4.0.tgz",
+      "integrity": "sha512-IQ35KzK2N9KZ7W0xVeZlDVcXURE2h+GD0CHru/LlWW7hkjVLNYvWjm+ZlMA141As038+4XremSGNzHAZxp3xsQ==",
+      "tarball_sha256": "a10d7ac2e0170b38c45f18f41fee9c46ffd84a5557a8336c489cfae8be5025bc",
+      "bytes": 7961
+    },
+    {
+      "lock_path": "node_modules/@turf/interpolate",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/interpolate/-/interpolate-7.4.0.tgz",
+      "integrity": "sha512-QRY0i2CW5ZhEhvDa1HDCO5gjun25HSjo4X7/Q2gC8BkjwpL12Ogo883BGAlt5Qq0JZq5uVFU9Ae7W7yVjfIPfw==",
+      "tarball_sha256": "17a384e9505ec7516abb8b5b98f674dc45ecc19584fbd65d4c02a12b6d4e959c",
+      "bytes": 7179
+    },
+    {
+      "lock_path": "node_modules/@turf/intersect",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/intersect/-/intersect-7.4.0.tgz",
+      "integrity": "sha512-n/wbZfDPoM1JKwrql8mHBoS9cdRWUC7/VE9IBZOttVPv8Guo0B6+Mzc2Z2e1PdIkSP/1R2yH6lxPpWMuuBfVEA==",
+      "tarball_sha256": "f6145e5b511439e6214304bcaeb9145004f6cf23b06fecacba5a0a28f4d05fc3",
+      "bytes": 4603
+    },
+    {
+      "lock_path": "node_modules/@turf/invariant",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/invariant/-/invariant-7.4.0.tgz",
+      "integrity": "sha512-OAsc3qdNx+tRqzWmMNFMnVlWWACIqnYqIejZKvb2oKkKPYJJrURPXZ6OdrGD58ljJMolLoqwIZGSx3VndaEjxg==",
+      "tarball_sha256": "768efcd6ddbf1a1c3bf0319974356dd707f1edd3aa975f52d158efb28dd1e035",
+      "bytes": 7919
+    },
+    {
+      "lock_path": "node_modules/@turf/isobands",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/isobands/-/isobands-7.4.0.tgz",
+      "integrity": "sha512-ClOkFMwcgQmRCespoQavY4AA+gH5qkbcQgrGsKn12VrgbresgA2hBM9bVMNDaEmDauN7RdDBoNcNhkakhD/ZOQ==",
+      "tarball_sha256": "a379d87c480beacedfbb748ff528dcef7d5a87c8d1831825ed8861a6ae81af5f",
+      "bytes": 22104
+    },
+    {
+      "lock_path": "node_modules/@turf/isolines",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/isolines/-/isolines-7.4.0.tgz",
+      "integrity": "sha512-Pu0i03/GqAcYT4yJ9fj3NWa4Z/c4Viv3Duhzua05XLJ9c70wWJmb+eniLg2l+qiuVKi4ob0Xl2AKkgkKYiezgg==",
+      "tarball_sha256": "c877795490ac7bf473f391e6f99c1669b3a9b29a1802ca55bd045df80f5fa84f",
+      "bytes": 13510
+    },
+    {
+      "lock_path": "node_modules/@turf/jsts",
+      "version": "2.7.2",
+      "resolved": "https://registry.npmjs.org/@turf/jsts/-/jsts-2.7.2.tgz",
+      "integrity": "sha512-zAezGlwWHPyU0zxwcX2wQY3RkRpwuoBmhhNE9HY9kWhFDkCxZ3aWK5URKwa/SWKJbj9aztO+8vtdiBA28KVJFg==",
+      "tarball_sha256": "113f4777719c7726a7a69faff46361c532a22355ffd248c10da901072817aeeb",
+      "bytes": 249834
+    },
+    {
+      "lock_path": "node_modules/@turf/jsts/node_modules/jsts",
+      "version": "2.7.1",
+      "resolved": "https://registry.npmjs.org/jsts/-/jsts-2.7.1.tgz",
+      "integrity": "sha512-x2wSZHEBK20CY+Wy+BPE7MrFQHW6sIsdaGUMEqmGAio+3gFzQaBYPwLRonUfQf9Ak8pBieqj9tUofX1+WtAEIg==",
+      "tarball_sha256": "d4156395f36fe9bd79d414f6d528cf89af5d068c55658e189db1856baa4bb090",
+      "bytes": 2453581
+    },
+    {
+      "lock_path": "node_modules/@turf/kinks",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/kinks/-/kinks-7.4.0.tgz",
+      "integrity": "sha512-M2deZpJq45WASRru5MmGwDJkVIj+JL/rcS6LLZBQyhSna47pxOQIVDC/tIx6xyFezxXw3lhX9VsoRst3irDdAQ==",
+      "tarball_sha256": "877a5a12d031099e00afb7936268a8445047f49a67ae170e1863c72e267cc468",
+      "bytes": 6336
+    },
+    {
+      "lock_path": "node_modules/@turf/length",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/length/-/length-7.4.0.tgz",
+      "integrity": "sha512-vQsJLuL7uy8m6HAMuJJKoiOHYY1de1Hd6mY/fM90qfu2RyIrkoF8J4bRUb72XZNCVnvob/eHpUMdhZeoUhSyfQ==",
+      "tarball_sha256": "9b390cdbd352747bce602358e4a9705d7fbb4fdc31b3576151554119f932808e",
+      "bytes": 3826
+    },
+    {
+      "lock_path": "node_modules/@turf/line-arc",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-arc/-/line-arc-7.4.0.tgz",
+      "integrity": "sha512-fkqfm3S1nRIBoKoK3LfpjDVGswyOw1cRb0W1qV6Na02ccrCJfJ7P9C4SkKZz2iakZioFCot4emraWno3B9YsYg==",
+      "tarball_sha256": "f8c6ef1b4ae8ccb2e503ad496409cf79a7f6c7d03f63c91f0bd34743e220513b",
+      "bytes": 5215
+    },
+    {
+      "lock_path": "node_modules/@turf/line-chunk",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-chunk/-/line-chunk-7.4.0.tgz",
+      "integrity": "sha512-vGytKbvTc+PtRimeEJez8nGoIxuu5uQiqSrK7DD7JB4ULLnBtABAMEr0EaEQQ2fyvE1zkTsbWSQPoFlQ3M52cQ==",
+      "tarball_sha256": "a93e7ffbdc9701a1818068fcd73f78449b29f511272f82907ff2b9b37ab8b09b",
+      "bytes": 5559
+    },
+    {
+      "lock_path": "node_modules/@turf/line-intersect",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-intersect/-/line-intersect-7.4.0.tgz",
+      "integrity": "sha512-5qNmEJ/0tQEaUUKSt2zIZGIS6eYGn3T7Z32yN6+Py0ANs8ln3dQNWaDyOEMms/qVY7BFvSaO+8iBmD8vlHdNcA==",
+      "tarball_sha256": "8f3f6239b0a220bf7a31cf32101e575d69ac8affcbd44b660be5c81978202edd",
+      "bytes": 11513
+    },
+    {
+      "lock_path": "node_modules/@turf/line-offset",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-offset/-/line-offset-7.4.0.tgz",
+      "integrity": "sha512-vAF3tNvHfo6efcrDwhjSL7UgAt2QjPyCKhIWO0g5xvuGMw9v3DZDErla3fVNT/b+DG01UmNmYQWvMzlUWcTLoQ==",
+      "tarball_sha256": "fadd693f21c324af5d6c13071b7edce87c77bb32b36c40c7ee890779458932d2",
+      "bytes": 7991
+    },
+    {
+      "lock_path": "node_modules/@turf/line-overlap",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-overlap/-/line-overlap-7.4.0.tgz",
+      "integrity": "sha512-40ZFjTk103uXFF5MfkhqzhowvBNozMcm18yR24Z38BbLC+4BLUNUslNDqyXStGZPXQ1X0MH3LeE2TbIpw9wKRA==",
+      "tarball_sha256": "a01f9978e218be50ab3742e86a4cc419fe337a760f90ba0b95242816e70b7509",
+      "bytes": 7659
+    },
+    {
+      "lock_path": "node_modules/@turf/line-segment",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-segment/-/line-segment-7.4.0.tgz",
+      "integrity": "sha512-v4Gnxpj6XqWbl4d/aVZHYwvSFzaTGGBW4eQQ9Ozqcgt+bvignOMdtVogFDHSWKDj9Gr2tbS2jYp57c8OTa+Olw==",
+      "tarball_sha256": "e5f716d9673811c55166be014e4ad27c64861aac85bba430bfb0b53223b4516b",
+      "bytes": 4986
+    },
+    {
+      "lock_path": "node_modules/@turf/line-slice",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-slice/-/line-slice-7.4.0.tgz",
+      "integrity": "sha512-urpVBcce/Z2Gprhv6cRniiaOr0L2UVjBqzEpp3esrW20iu25aDXor43d2KAqAP3Yhlv+vNMFlAJAGPcX/nTSzA==",
+      "tarball_sha256": "ade2395a7a2e64c2203219c2ea7d70897bc99af21f8f0681059f31ad57325a76",
+      "bytes": 4925
+    },
+    {
+      "lock_path": "node_modules/@turf/line-slice-along",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-slice-along/-/line-slice-along-7.4.0.tgz",
+      "integrity": "sha512-N3rBS/E/N2v2udmglBU1XTfWIQlxkSDuzGCjbGnWUMX2ClVgJvptQXI1zQ29aIeOTbcqKNiSbEyqBg8e+fugPw==",
+      "tarball_sha256": "fe49ecf1a198b3da85bbf8ec1a5d528564473390bfafac988a5b8c3098044c2e",
+      "bytes": 5414
+    },
+    {
+      "lock_path": "node_modules/@turf/line-split",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-split/-/line-split-7.4.0.tgz",
+      "integrity": "sha512-bAij7u19sFVdYoAp3bQnu/cVzlORxM/W3FM+WeFN/VvGkZ6YiAtcPq/lLP4WwK3WxthTcavED3wbd32iXGpzZw==",
+      "tarball_sha256": "272843ee9ecc470b427ba4f8aba7679c182bad4824555a5320cc3ac3cd8c19e8",
+      "bytes": 8587
+    },
+    {
+      "lock_path": "node_modules/@turf/line-to-polygon",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/line-to-polygon/-/line-to-polygon-7.4.0.tgz",
+      "integrity": "sha512-wUsYNTP+tN+2J0+tzakKVHdo6Y1Pe8Ne1rJUuCxZRumwOFyML6/aIQvQaXdbAjN0gmfuoZTCv78RDSZBtsAPAQ==",
+      "tarball_sha256": "64fe9b40cb4da59c62215c8b498dbb1bbe9a72df0d7d3886c1907efb7d3520a4",
+      "bytes": 6523
+    },
+    {
+      "lock_path": "node_modules/@turf/mask",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/mask/-/mask-7.4.0.tgz",
+      "integrity": "sha512-NVED/D8XcTHJTi080l9ezH3f+BzFbnBdVa0s5G9Q+sZQcrabSS5BOL1kdvQhu1LS49QhAGYNBtcfKB9e0hvwJg==",
+      "tarball_sha256": "4ea2d92490df4b32470dd3814deba42c1261ccd8a4fd4098d22c08715156171a",
+      "bytes": 5822
+    },
+    {
+      "lock_path": "node_modules/@turf/meta",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/meta/-/meta-7.4.0.tgz",
+      "integrity": "sha512-3cLUvlEyDuSnMSzrjhaLAEiYR8xhbfWyTVQlrlEw40xL81d4KF4PqUWbjTXKpXZStdYbet2GCurl79KMypNw6g==",
+      "tarball_sha256": "705a0d50c7df4484f1cf1780bd6f96b3256ade572064c65fec8099b04f29af38",
+      "bytes": 36272
+    },
+    {
+      "lock_path": "node_modules/@turf/midpoint",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/midpoint/-/midpoint-7.4.0.tgz",
+      "integrity": "sha512-+poTGThn9F2tveuUDjg1z5TE3QG8zp/IHVqpzkFwFLWX3xpeys0mev9H3LqlbzRU7waawZJ/lsqYlHg3mIWHJw==",
+      "tarball_sha256": "f775ae31315dbaf507dd7d76e0277478d51975dc61790c3831d132b02201a137",
+      "bytes": 3427
+    },
+    {
+      "lock_path": "node_modules/@turf/moran-index",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/moran-index/-/moran-index-7.4.0.tgz",
+      "integrity": "sha512-lZqEUOhpmV2Fngjv6O16Pl3zbDlRUudEeuv/iinkT5adesOAKqngIrg4wYOT0kkNaSdaqNqbKyJGZ8mAlP4Lig==",
+      "tarball_sha256": "fe036b62bf0c8f07a8d6ec72a9ab7fcd41114e9f167309d24de400023a939502",
+      "bytes": 6476
+    },
+    {
+      "lock_path": "node_modules/@turf/nearest-neighbor-analysis",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/nearest-neighbor-analysis/-/nearest-neighbor-analysis-7.4.0.tgz",
+      "integrity": "sha512-WBZbuH+f7/ezEdBGMToT2yYzONdYqhE79yxHTvoJMk1+o0eakg4DY+/owM5FWYgB3GnJCp260//Uz1D/q6wFlg==",
+      "tarball_sha256": "3f743dc70ff1f46b1a67c99f4c8468c30a56d86851cc42c4088d1802e20e7250",
+      "bytes": 7546
+    },
+    {
+      "lock_path": "node_modules/@turf/nearest-point",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/nearest-point/-/nearest-point-7.4.0.tgz",
+      "integrity": "sha512-rH+M5H/rWiOXStiHkV3Cs5OS+Tg/531Tonr7tm2pUjVy1RRLmDqSzKn+iFs3S6ybvjSK2pJa1BbTXjYlc8Pv3Q==",
+      "tarball_sha256": "b4bb6dc7862b9f113a8cb7fb1158d713ca64ccfddc57035b924ac82529dd0a84",
+      "bytes": 5231
+    },
+    {
+      "lock_path": "node_modules/@turf/nearest-point-on-line",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/nearest-point-on-line/-/nearest-point-on-line-7.4.0.tgz",
+      "integrity": "sha512-eKTKf/qODIsPankYMZrNfI3LjLaVtQvYV/1hcj9kH/Zr3GfLUszevjhTRDZtMgTFrv8+awW3+MyhmN+PJGuLdQ==",
+      "tarball_sha256": "d3d86be212e20041c13d6be0bbbb384744b3838c964b3abd73d4f3ec54a3d417",
+      "bytes": 11938
+    },
+    {
+      "lock_path": "node_modules/@turf/nearest-point-to-line",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/nearest-point-to-line/-/nearest-point-to-line-7.4.0.tgz",
+      "integrity": "sha512-PQjS+7/OIjib5HGHtrtDuIH0B6ifT8b4b8ADmcvKcKEMaOk5wjc+Z40oPc0n5OwRoddvbd2K2yV59+fh1cXxeA==",
+      "tarball_sha256": "2d510e2eb042d6766c404b771d47440eeb9c334e6d7017b289447dadc23c4e40",
+      "bytes": 6142
+    },
+    {
+      "lock_path": "node_modules/@turf/planepoint",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/planepoint/-/planepoint-7.4.0.tgz",
+      "integrity": "sha512-4TQxrbFpbEjIEv9C+5MO5BbnL/Ay2wrJlLxaiIbJ61LaFFuMx6ZCWu1rBYMDo72Ik5+oK4Pik1J5e8rKW3YGRg==",
+      "tarball_sha256": "f55f82fa864ca4bfb55f2dc604ef604356733d6ad54cb404b35d2d8ea3c940d3",
+      "bytes": 4592
+    },
+    {
+      "lock_path": "node_modules/@turf/point-grid",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/point-grid/-/point-grid-7.4.0.tgz",
+      "integrity": "sha512-Lx7M6JkLHT8A3hPc+811rALohOJ9mJBjAh+NQz9Mj/QdFmnhzGa8aia4F4agy3uSyJP/7EFXUXlPRK4Yc6/4tw==",
+      "tarball_sha256": "8ba9a1c6b8cbe42def9416dd358462db0a1386ea26c3cf133cf26a15c05f25f2",
+      "bytes": 5369
+    },
+    {
+      "lock_path": "node_modules/@turf/point-on-feature",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/point-on-feature/-/point-on-feature-7.4.0.tgz",
+      "integrity": "sha512-H7YamrW510QJLnhWIT9oecm1siwhwvb4SZrZSqu6hUOS+pFxumJjUYogE+B6kL+Ymtui2+h6cOtOHJnrNrKaEA==",
+      "tarball_sha256": "7866e157df145741e5370dd8ff07904ca71a8b574b806991ad4693e4fccbfb1b",
+      "bytes": 6218
+    },
+    {
+      "lock_path": "node_modules/@turf/point-to-line-distance",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/point-to-line-distance/-/point-to-line-distance-7.4.0.tgz",
+      "integrity": "sha512-2Egagkj3BK6SrcUxMBJ40PHhW/numknLsJQhlv4kl3d3t83HChhUtH2mXnhqcdi97V3jXSRV1SZIhZKc8TrwOg==",
+      "tarball_sha256": "7d9869ea19492546b29301ddfc5d1988381bfcaaebb57391c77bdebaf928a452",
+      "bytes": 6351
+    },
+    {
+      "lock_path": "node_modules/@turf/point-to-polygon-distance",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/point-to-polygon-distance/-/point-to-polygon-distance-7.4.0.tgz",
+      "integrity": "sha512-37h+HzsMgXMu9MJhfQJk11aJ8ZSK4Db/kccvrIyRFv+SX7bCjFON6P4FC4+4PVACajK9VJ52h+KRufaCZqlxdA==",
+      "tarball_sha256": "0a2887549d4287b0924cc9795d3b438a591a814defc29053244b02eacd0b7f61",
+      "bytes": 5584
+    },
+    {
+      "lock_path": "node_modules/@turf/points-within-polygon",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/points-within-polygon/-/points-within-polygon-7.4.0.tgz",
+      "integrity": "sha512-8TtUvUeM7USPD11rEPPR/C+aADov1G8wxmgP8ExE2KUDCg4X6cnYTxpWgOHe3uijpv4QRHGhiz12xNmB4ysyyA==",
+      "tarball_sha256": "60b4748c4948a89cf0488d380d13f641abbf3736bce9e49eb48943af979739cb",
+      "bytes": 4887
+    },
+    {
+      "lock_path": "node_modules/@turf/polygon-smooth",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/polygon-smooth/-/polygon-smooth-7.4.0.tgz",
+      "integrity": "sha512-UxcEo+OrHbl4+YWuhiIT2lLXvA6rohNdbRBqnZY/X9uQ41JYhh5gMYwlQxbsLTgdYA2pE6wJO52PDHvpqsPu4g==",
+      "tarball_sha256": "779a538947a86d9d99dd396a37cc49019d616e3f7539f38fb7359996ac28c286",
+      "bytes": 6174
+    },
+    {
+      "lock_path": "node_modules/@turf/polygon-tangents",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/polygon-tangents/-/polygon-tangents-7.4.0.tgz",
+      "integrity": "sha512-QXKxDhRIDeW/+FQ8Eh6gQMPJFpyf6iXal6tdbL7+5jw9Zpm8DTFVvcPzERBZ3gey6P3CSqP/GD1zZT8gQ+mZng==",
+      "tarball_sha256": "4f5b695c04c55c5995f4ec646b41eb6f28c00dbb8780dec9e0a1c8e751e14bf2",
+      "bytes": 6443
+    },
+    {
+      "lock_path": "node_modules/@turf/polygon-to-line",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/polygon-to-line/-/polygon-to-line-7.4.0.tgz",
+      "integrity": "sha512-LCHZ9bojUj99et83ZLGpSR/PFx48c0tcjtfuI1nn66a6Q+EGy7GO4NsHv4rWZsC8Lljy5ldbJ3dd8+WGnAk7dw==",
+      "tarball_sha256": "11f480d3b4b51929fb3e2b7db7d941d659c4dfc15fab379bbdfc2dfca96da710",
+      "bytes": 4965
+    },
+    {
+      "lock_path": "node_modules/@turf/polygonize",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/polygonize/-/polygonize-7.4.0.tgz",
+      "integrity": "sha512-SwEazUYz4KFXllNNXGUt2rP6XpPBfNEOnx+1uP0rcioIsNocFfgwfCUcgHXYM+GZhG0JTD7jQB9RXeNGb6hNIg==",
+      "tarball_sha256": "10aa2bc4acb8873f4197d602f74551e8cd7d36357a09751da4b7a3c71baa8549",
+      "bytes": 23960
+    },
+    {
+      "lock_path": "node_modules/@turf/projection",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/projection/-/projection-7.4.0.tgz",
+      "integrity": "sha512-ZS932qM+18V1UBvNlrNXUCD7mh9CzQqZzw/ElVtb0kAk6N00FYQ9bo26Cca08UZKXh3rZqG/e4eCK74JNGS4Zg==",
+      "tarball_sha256": "5000b1da60a95739f56f92be88fac075a5bcf71a7d637d951f868ec86769e4e6",
+      "bytes": 5761
+    },
+    {
+      "lock_path": "node_modules/@turf/quadrat-analysis",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/quadrat-analysis/-/quadrat-analysis-7.4.0.tgz",
+      "integrity": "sha512-p+Af0+LpwnsVQuGSL1BWuLxgMjd6dYaSs+PxwJ2Y05nSXlsIFpWy+/T55r0Sfun7SoypclKURRCmDy3Q/RVdJw==",
+      "tarball_sha256": "65bd8fe721e5449f7fda1745edd3b951e2daabf72bf33b18961dd84a56da332a",
+      "bytes": 8447
+    },
+    {
+      "lock_path": "node_modules/@turf/random",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/random/-/random-7.4.0.tgz",
+      "integrity": "sha512-ttoPPPQppLYww3ZSeOSlbZlaH4Ki4Mxrdu7wMuDWNrINEhrkr/PuqWyIDISTpILsSARqT0Zzfjwdp0ptkUyakw==",
+      "tarball_sha256": "6a03a5fa4e26dbbf35f96a76431222d725c0dd171d3657b9ea12981344ac1f73",
+      "bytes": 8696
+    },
+    {
+      "lock_path": "node_modules/@turf/rectangle-grid",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/rectangle-grid/-/rectangle-grid-7.4.0.tgz",
+      "integrity": "sha512-JeRq5pgmn543DmZU6x4nSX+KVNRGEz3iJQIgbKgSMnzZeiJxfMStINvASz7mz6yky2EwUHvQOBRRlhgCqWViuQ==",
+      "tarball_sha256": "4c01ece5fb63c8fc50aa3b2d40beb962cb397d611a290ccb2b59aa4ae9831946",
+      "bytes": 5539
+    },
+    {
+      "lock_path": "node_modules/@turf/rewind",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/rewind/-/rewind-7.4.0.tgz",
+      "integrity": "sha512-Q2qOcLzymxXyIAYXM9BZQT09L63EhzgneCBMka0dPf9jVShxMeA3oF1kY20ChWkZvTGOAbM7YU9hghphbCxo2w==",
+      "tarball_sha256": "ea6e579cc0e8bc4e035f558b4f85e59e92e8ab10bbbec45c9df43f415be3ec4a",
+      "bytes": 6247
+    },
+    {
+      "lock_path": "node_modules/@turf/rhumb-bearing",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/rhumb-bearing/-/rhumb-bearing-7.4.0.tgz",
+      "integrity": "sha512-y5omgg5SqHwz46fZlra2/70z5eOKXSp/ZzRNIDYKJVYF5oNT2YbG9Z6lj4Az51bjqJQESXUoR6wRmFnpliIp0w==",
+      "tarball_sha256": "fa317e5013c4d344e7c7e20c624b514fe3c6208e2c3ee6c45301a353e7a357b0",
+      "bytes": 4867
+    },
+    {
+      "lock_path": "node_modules/@turf/rhumb-destination",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/rhumb-destination/-/rhumb-destination-7.4.0.tgz",
+      "integrity": "sha512-3x4dNLheJJIK/6daH9U7dDkFRSq3wqvDIdqgSxsqgFHoNEI6xDACKGrx47JFWVbg/zh9osG5JSv96e70Y4P5XA==",
+      "tarball_sha256": "0291ab82e0c79236c183aee50ea38b5e0e6c560a703596295d732ca6e8d3bb37",
+      "bytes": 6021
+    },
+    {
+      "lock_path": "node_modules/@turf/rhumb-distance",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/rhumb-distance/-/rhumb-distance-7.4.0.tgz",
+      "integrity": "sha512-29pFCftS/yxEzrYWB777I23Mob+yw9WAECJNw+uabbJi6fwFphJfqWApMXY2ZnudVSJFCGJbByVAHVDTvOGG+w==",
+      "tarball_sha256": "78d23b9a98d2e14e8edcab4f9b54eccb82cf778a51c82aeda6717f9f7ec0983a",
+      "bytes": 5463
+    },
+    {
+      "lock_path": "node_modules/@turf/sample",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/sample/-/sample-7.4.0.tgz",
+      "integrity": "sha512-RfU8+bp5RzxxDq5ldKk8qR+E/ADboOhlcVjFu2p99SVivlnbkMBNXlFRAwdmaDeyqI6bTuwymc7DsCxE0ZA1Uw==",
+      "tarball_sha256": "faf68f86745fb6e804925857da8804265641e94a42d557143ed58a1eec709779",
+      "bytes": 4077
+    },
+    {
+      "lock_path": "node_modules/@turf/sector",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/sector/-/sector-7.4.0.tgz",
+      "integrity": "sha512-BGTbeT/LHW+6H43by4EQfAQaql94rOg5sxIN1T9/PeQR13KV6CnCVzxEmMzPVEZvy7VDfssv9eMerY0WGkjfYg==",
+      "tarball_sha256": "157342f86f9cd60a9f8d86da637d394d2599ff2a3af8e839e43ddd3684c0c852",
+      "bytes": 5140
+    },
+    {
+      "lock_path": "node_modules/@turf/shortest-path",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/shortest-path/-/shortest-path-7.4.0.tgz",
+      "integrity": "sha512-Bq/4/yN+CFWo0TcxXKO/VW7/BB5EgrHj9lwP4Kbk00i43flF0EpnlABWoO/MDUVFBPAkBCyWUgcCUW5MZbid6w==",
+      "tarball_sha256": "473088e897fabb7bee3300ba1f56d3e2edbd8dd7e90430c17b43b61ce8b69e24",
+      "bytes": 18297
+    },
+    {
+      "lock_path": "node_modules/@turf/simplify",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/simplify/-/simplify-7.4.0.tgz",
+      "integrity": "sha512-HTolHFuXLReKHJoh3iz92+WpF5EsuCmmZR7fNv3hWnA4hZfkuEzbGB/WZqRdQpvDs99IUS8QIc6BAp6FHzQbBQ==",
+      "tarball_sha256": "c97461c29f955cb7e86f099a267fbdf742e4de160d594ab1aec2a5e5726e40e1",
+      "bytes": 9583
+    },
+    {
+      "lock_path": "node_modules/@turf/square",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/square/-/square-7.4.0.tgz",
+      "integrity": "sha512-XjL7taeIZdh3iIS1vertswqa+dgQEgBlByfInjTj3uDDjrpHYG13Yxg6EHuOW/y1SeTWp2fTAKLRQFexC+kwGw==",
+      "tarball_sha256": "84d827b8c54aa4a34e059dfec57ff9e566d72dbea58ddc794b385f4c1ff69167",
+      "bytes": 3514
+    },
+    {
+      "lock_path": "node_modules/@turf/square-grid",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/square-grid/-/square-grid-7.4.0.tgz",
+      "integrity": "sha512-jq4pxYs+FQ8Y1m3RhpTBYvSLzSwj75hurT53T1jXboEYIyeFGtGdlOy2o3yx/2cxUK+AP1KtKrQGX5v7sdpzVg==",
+      "tarball_sha256": "23979220828e834a65e51bcff794e5be1dd73fcf3f66e11c14588f9b23cdd5d2",
+      "bytes": 3992
+    },
+    {
+      "lock_path": "node_modules/@turf/standard-deviational-ellipse",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/standard-deviational-ellipse/-/standard-deviational-ellipse-7.4.0.tgz",
+      "integrity": "sha512-02Erb1A1BARE0MKxLMxsSL3BVHZWZrW/edZISvqZUF1eBOc7FMpIy6Pu55COkFkN3YYOQHysrc4COAZdYEjcwg==",
+      "tarball_sha256": "e8fa785653ea05a1b7a80f4f8ff750be46b1816fc5a86599969c2d7843daf0de",
+      "bytes": 8064
+    },
+    {
+      "lock_path": "node_modules/@turf/tag",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/tag/-/tag-7.4.0.tgz",
+      "integrity": "sha512-IBd4Lz01FWyTnyxmzcyK3DypMkd7vMzptZIQFlkC/LDeMnPMnmT1oJD7wMdZCJIV1YGVC5abpXoNwY3xnj/eTw==",
+      "tarball_sha256": "6b9363eb17d194a8cbb5e418031d7de2351e1e64736b7ae13f9b8d61de33fbb5",
+      "bytes": 4263
+    },
+    {
+      "lock_path": "node_modules/@turf/tesselate",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/tesselate/-/tesselate-7.4.0.tgz",
+      "integrity": "sha512-73Jj0+9GPUYoegut9J1ex9kVYe+WAIV+tBm6EXXtaZzmobIp8fPsAvspyTzXMQvPtlUsf/St+L0W4KFwWe2KrQ==",
+      "tarball_sha256": "ce2d82fa0099fca92f5a05f5d1307425de8d532a17e078d2ff10a06680daa45b",
+      "bytes": 5410
+    },
+    {
+      "lock_path": "node_modules/@turf/tin",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/tin/-/tin-7.4.0.tgz",
+      "integrity": "sha512-54uBeNKIP8GufZCdeMUMy33e0blR4w0JoE6sYO8I6ZPshNRbVbI24ck+kREVMjzNyeuhL+l7DUrNEn/pcDgBRg==",
+      "tarball_sha256": "582922c6e1a776ce76c07c73f558dbf99003191a9f7869e38520f01b87f3ea98",
+      "bytes": 8839
+    },
+    {
+      "lock_path": "node_modules/@turf/transform-rotate",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/transform-rotate/-/transform-rotate-7.4.0.tgz",
+      "integrity": "sha512-JsXtvydU23rJdOlS5u9Fpdi6mPtbRCo8/6y3QSjkg37EubFTd357M+lX8+lQ+LHjs8hXxvp9LKBZwTujlqsDcw==",
+      "tarball_sha256": "198e71ae8c98b4e20b49bc4b8e67215192dc8922e42767c13106cf8eb2a5b926",
+      "bytes": 5124
+    },
+    {
+      "lock_path": "node_modules/@turf/transform-scale",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/transform-scale/-/transform-scale-7.4.0.tgz",
+      "integrity": "sha512-lPsvppxBfK+5z9fC1R3F/7y4113cwZ7hLG9dR97EUYaUhphQveVShrFK18S8+AXxs0J4PnDm3HptTfuJyD7bMQ==",
+      "tarball_sha256": "67b175b6b5328b5e90853a99fcf7af609ac923ec46a7146a0298e75705fa3d5f",
+      "bytes": 7708
+    },
+    {
+      "lock_path": "node_modules/@turf/transform-translate",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/transform-translate/-/transform-translate-7.4.0.tgz",
+      "integrity": "sha512-tMHS7lovcHRpKtM0A9w1Y337ZM279YALzPmEvbLA/1Piy6Ik2osecxGB90T+HaobYkWVWhiQ70XP48f49qFc8g==",
+      "tarball_sha256": "d80029d5e791d2f4187d39e491bb07915d95c1c69b0e44ae2b7bf7dcc913d186",
+      "bytes": 5593
+    },
+    {
+      "lock_path": "node_modules/@turf/triangle-grid",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/triangle-grid/-/triangle-grid-7.4.0.tgz",
+      "integrity": "sha512-3aPtajJH67JkuEe+9WAEecRHBs9Q6lK0KrJIhs8QDx4VJ4nGjRazomz+UuxbhBRtn37lQ/cIxWn0nH9JYFembw==",
+      "tarball_sha256": "18c9b8f7f81fa78f32be6c394497484ff1769dbf4237d3840863820613e45ee6",
+      "bytes": 5842
+    },
+    {
+      "lock_path": "node_modules/@turf/truncate",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/truncate/-/truncate-7.4.0.tgz",
+      "integrity": "sha512-eTXO62l1mD++mKlhUqLNHGcgCQvhxXJGB/EUL1KSzpVIeMYtgcmItAneWdHW+gEpmHfjeDjBuvtbZWA23r7Eig==",
+      "tarball_sha256": "6201a47b1af18a5d978bc12d3a63e62301df2e7b4c184dac1b65edf6e7d89ed6",
+      "bytes": 5064
+    },
+    {
+      "lock_path": "node_modules/@turf/turf",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/turf/-/turf-7.4.0.tgz",
+      "integrity": "sha512-enR/94yESzZb4t7lj/DSqk6oMdsSfPhMnXHn+f4umpdtZuMmFSbB/mPWxMFoyWCD0z+luwPwtJ7kdtHO5nGi9w==",
+      "tarball_sha256": "99631bea5f693189fa7429820eedb400dd4dbe55be2efe21f81fd50136153239",
+      "bytes": 154178
+    },
+    {
+      "lock_path": "node_modules/@turf/union",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/union/-/union-7.4.0.tgz",
+      "integrity": "sha512-SYVtsCW9IznTyKlcGWxssRrf90p/hdpch1UeIcZc31pkSVdmeLOyuzPx0ef3UPmaF//fgXAphMph6JWA/FpKbA==",
+      "tarball_sha256": "0ccf7d88c938633a8e750ffae1f4d1b02060686e92d247404a25b930766245ea",
+      "bytes": 4623
+    },
+    {
+      "lock_path": "node_modules/@turf/unkink-polygon",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/unkink-polygon/-/unkink-polygon-7.4.0.tgz",
+      "integrity": "sha512-GAQdiRmfR3Q64LoOqorr2Ec9eKoaVssSE1Rq34ZVTGmf2H49vjOPTXfTBp9ZVva4apVUkNLPPv3r4VaUHmABog==",
+      "tarball_sha256": "d080d279b6ff7c6145b816348bd9a9ae0b5ef61650e1b886f54e89ebb026ee6e",
+      "bytes": 30807
+    },
+    {
+      "lock_path": "node_modules/@turf/voronoi",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/@turf/voronoi/-/voronoi-7.4.0.tgz",
+      "integrity": "sha512-Uw/gyd0vuRonM/zCzgKqsb4Pt8gLl3oMPPscGVtmtyH0vsdlaZuaimJFC9Xdo9sWkLxn8eokhFnkJ3MZSl2UTA==",
+      "tarball_sha256": "78450f9ad935d124496ebe4d0fb3a016c3bb2815ff5119037a9c9d5c5312a74d",
+      "bytes": 5012
+    },
+    {
+      "lock_path": "node_modules/@types/d3-voronoi",
+      "version": "1.1.12",
+      "resolved": "https://registry.npmjs.org/@types/d3-voronoi/-/d3-voronoi-1.1.12.tgz",
+      "integrity": "sha512-DauBl25PKZZ0WVJr42a6CNvI6efsdzofl9sajqZr2Gf5Gu733WkDdUGiPkUHXiUvYGzNNlFQde2wdZdfQPG+yw==",
+      "tarball_sha256": "a51385b30d215a60b4ba341c4be36ab33aba01a5e5682f5cba086eb6b16951b0",
+      "bytes": 3844
+    },
+    {
+      "lock_path": "node_modules/@types/earcut",
+      "version": "2.1.4",
+      "resolved": "https://registry.npmjs.org/@types/earcut/-/earcut-2.1.4.tgz",
+      "integrity": "sha512-qp3m9PPz4gULB9MhjGID7wpo3gJ4bTGXm7ltNDsmOvsPduTeHp8wSW9YckBj3mljeOh4F0m2z/0JKAALRKbmLQ==",
+      "tarball_sha256": "1d324b10729c529e0066129a6037319682e888ce104c5649bb005b072a977b52",
+      "bytes": 2407
+    },
+    {
+      "lock_path": "node_modules/@types/geojson",
+      "version": "7946.0.16",
+      "resolved": "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.16.tgz",
+      "integrity": "sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==",
+      "tarball_sha256": "5275058028351e9656972a31295f81b61637c641df6cc13766f48a5fdab1b39e",
+      "bytes": 3385
+    },
+    {
+      "lock_path": "node_modules/@types/kdbush",
+      "version": "3.0.5",
+      "resolved": "https://registry.npmjs.org/@types/kdbush/-/kdbush-3.0.5.tgz",
+      "integrity": "sha512-tdJz7jaWFu4nR+8b2B+CdPZ6811ighYylWsu2hpsivapzW058yP0KdfZuNY89IiRe5jbKvBGXN3LQdN2KPXVdQ==",
+      "tarball_sha256": "b8651d9b6b042c8f9e613e8740745fd64bd8564b063e80ba6a434de3c532dca9",
+      "bytes": 1777
+    },
+    {
+      "lock_path": "node_modules/@xmldom/xmldom",
+      "version": "0.8.3",
+      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.8.3.tgz",
+      "integrity": "sha512-Lv2vySXypg4nfa51LY1nU8yDAGo/5YwF+EY/rUZgIbfvwVARcd67ttCM8SMsTeJy51YhHYavEq+FS6R0hW9PFQ==",
+      "tarball_sha256": "7df57a67ec3933b7246d25360e47f9b58e0d616a0c9ea31dfe3643487b6f1716",
+      "bytes": 37633
+    },
+    {
+      "lock_path": "node_modules/adler-32",
+      "version": "1.3.1",
+      "resolved": "https://registry.npmjs.org/adler-32/-/adler-32-1.3.1.tgz",
+      "integrity": "sha512-ynZ4w/nUUv5rrsR8UUGoe1VC9hZj6V5hU9Qw1HlMDJGEJw5S7TfTErWTjMys6M7vr0YWcPqs3qAr4ss0nDfP+A==",
+      "tarball_sha256": "71a7992e6cf169c1764bd2037c664cdbd9d44618ce60d538d6b4a6804433fcf4",
+      "bytes": 7763
+    },
+    {
+      "lock_path": "node_modules/arc",
+      "version": "0.2.0",
+      "resolved": "https://registry.npmjs.org/arc/-/arc-0.2.0.tgz",
+      "integrity": "sha512-8NFOo126uYKQJyXNSLY/jSklgfLQL+XWAcPXGo876JwEQ8nSOPXWNI3TV2jLZMN8QEw8uksJ1ZwS4npjBca8MA==",
+      "tarball_sha256": "2129a45ef69a19dfea914fa5a65892e5d4e05d9cbe1866d82b80ef0d4ccd907a",
+      "bytes": 17422
+    },
+    {
+      "lock_path": "node_modules/bignumber.js",
+      "version": "9.3.1",
+      "resolved": "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.3.1.tgz",
+      "integrity": "sha512-Ko0uX15oIUS7wJ3Rb30Fs6SkVbLmPBAKdlm7q9+ak9bbIeFf0MwuBsQV6z7+X768/cHsfg+WlysDWJcmthjsjQ==",
+      "tarball_sha256": "f5a943ea290e66f64cb9adaaed2ff1b7c4ee02a4cca9d709d9c9c6c222512e82",
+      "bytes": 79843
+    },
+    {
+      "lock_path": "node_modules/buffer-from",
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz",
+      "integrity": "sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==",
+      "tarball_sha256": "9c2b03d59eca8f463a1927e07273ddaa87785fe3f61626c42b005540e962e343",
+      "bytes": 2313
+    },
+    {
+      "lock_path": "node_modules/cfb",
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/cfb/-/cfb-1.2.2.tgz",
+      "integrity": "sha512-KfdUZsSOw19/ObEWasvBP/Ac4reZvAGauZhs6S/gqNhXhI7cKwvlH7ulj+dOEYnca4bm4SGo8C1bTAQvnTjgQA==",
+      "tarball_sha256": "1dc1e4ae89d7b400bac9bbaa1963af701842e38afa756c272cb441ab6266d512",
+      "bytes": 109812
+    },
+    {
+      "lock_path": "node_modules/codepage",
+      "version": "1.15.0",
+      "resolved": "https://registry.npmjs.org/codepage/-/codepage-1.15.0.tgz",
+      "integrity": "sha512-3g6NUTPd/YtuuGrhMnOMRjFc+LJw/bnMp3+0r/Wcz3IXUuCosKRJvMphm5+Q+bvTVGcJJuRvVLuYba+WojaFaA==",
+      "tarball_sha256": "619fa745a7548bdc77d39e9b6a282ae53960b396664e97a25c262c1d405365a9",
+      "bytes": 1892338
+    },
+    {
+      "lock_path": "node_modules/commander",
+      "version": "2.20.3",
+      "resolved": "https://registry.npmjs.org/commander/-/commander-2.20.3.tgz",
+      "integrity": "sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==",
+      "tarball_sha256": "3c02903de017a98d4dc3fe2bed4900beb0d04cf7b679dca0915fd8c759652b55",
+      "bytes": 18702
+    },
+    {
+      "lock_path": "node_modules/concat-stream",
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/concat-stream/-/concat-stream-2.0.0.tgz",
+      "integrity": "sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==",
+      "tarball_sha256": "cc54997a7ce0221915ac863f5a684c0013563861b2eca63781ae1a8cc01e150c",
+      "bytes": 3791
+    },
+    {
+      "lock_path": "node_modules/concaveman",
+      "version": "1.2.1",
+      "resolved": "https://registry.npmjs.org/concaveman/-/concaveman-1.2.1.tgz",
+      "integrity": "sha512-PwZYKaM/ckQSa8peP5JpVr7IMJ4Nn/MHIaWUjP4be+KoZ7Botgs8seAZGpmaOM+UZXawcdYRao/px9ycrCihHw==",
+      "tarball_sha256": "8d3b6215d06209ab2dac13484f2397e8f788eeac93fd4fdea1aa7ece6ce8ccc6",
+      "bytes": 5591
+    },
+    {
+      "lock_path": "node_modules/core-util-is",
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.3.tgz",
+      "integrity": "sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==",
+      "tarball_sha256": "4430fdc71f2cf3b5e297113b9a692da2d6cff96cf84da00f0ecef5e5a6e74d0c",
+      "bytes": 1897
+    },
+    {
+      "lock_path": "node_modules/crc-32",
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/crc-32/-/crc-32-1.2.2.tgz",
+      "integrity": "sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==",
+      "tarball_sha256": "997be573c3d33817c9e01aba3f4f71ad2ad425f375e846e39f0d0e8b3b24c657",
+      "bytes": 10107
+    },
+    {
+      "lock_path": "node_modules/d3-array",
+      "version": "2.12.1",
+      "resolved": "https://registry.npmjs.org/d3-array/-/d3-array-2.12.1.tgz",
+      "integrity": "sha512-B0ErZK/66mHtEsR1TkPEEkwdy+WDesimkM5gpZr5Dsg54BiTA5RXtYW5qTLIAcekaS9xfZrzBLF/OAkB3Qn1YQ==",
+      "tarball_sha256": "3795da9bd345fc440b82be032400c538298e021b559ca48342fe9647e44bb86b",
+      "bytes": 31975
+    },
+    {
+      "lock_path": "node_modules/d3-geo",
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/d3-geo/-/d3-geo-2.0.2.tgz",
+      "integrity": "sha512-8pM1WGMLGFuhq9S+FpPURxic+gKzjluCD/CHTuUF3mXMeiCo0i6R0tO1s4+GArRFde96SLcW/kOFRjoAosPsFA==",
+      "tarball_sha256": "91439e3fe4e9c91679fe6c11eb18f05e178e92d21d18fffa3d49fb230a5a4c1e",
+      "bytes": 73514
+    },
+    {
+      "lock_path": "node_modules/d3-voronoi",
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/d3-voronoi/-/d3-voronoi-1.1.2.tgz",
+      "integrity": "sha512-RhGS1u2vavcO7ay7ZNAPo4xeDh/VYeGof3x5ZLJBQgYhLegxr3s5IykvWmJ94FTU6mcbtp4sloqZ54mP6R4Utw==",
+      "tarball_sha256": "9aa8f3a1c793fca3bc3b9cb70d54d122f605c0d4a451fa1c0542c8403d15bf5a",
+      "bytes": 184614
+    },
+    {
+      "lock_path": "node_modules/domelementtype",
+      "version": "1.3.1",
+      "resolved": "https://registry.npmjs.org/domelementtype/-/domelementtype-1.3.1.tgz",
+      "integrity": "sha512-BSKB+TSpMpFI/HOxCNr1O8aMOTZ8hT3pM3GQ0w/mWRmkhEDSFJkkyzz4XQsBV44BChwGkrDfMyjVD0eA2aFV3w==",
+      "tarball_sha256": "e1948e96dd5463551002a030bb24b012091db0998f554891ae477d181bd238a0",
+      "bytes": 1287
+    },
+    {
+      "lock_path": "node_modules/domhandler",
+      "version": "2.2.1",
+      "resolved": "https://registry.npmjs.org/domhandler/-/domhandler-2.2.1.tgz",
+      "integrity": "sha512-MFFBQFGkyTuNe3vL9WEw9JdlCwIoBYpOGESLeZAvc/jClYNsOl6P1KzevJbWg76GovdEycfR7/2/Ra7NnqtMKw==",
+      "tarball_sha256": "33d8e5e9df737312ff0496617e6828dc8d7f8389cf2442f923c383aa0e79f45c",
+      "bytes": 6749
+    },
+    {
+      "lock_path": "node_modules/domutils",
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/domutils/-/domutils-1.3.0.tgz",
+      "integrity": "sha512-1UdPmldjSGewOuWE40YYFZB1Q4im4LZoCMXGYeTeLz3R9hvxrDYJPRcPHXR4yBbubQebgGNCY2hwpJxmAiUMzQ==",
+      "tarball_sha256": "0d7ec25fa09cf1be0d9e54228693596d51fabed858a973a2985f6e78b04e8a3b",
+      "bytes": 5182
+    },
+    {
+      "lock_path": "node_modules/earcut",
+      "version": "2.2.4",
+      "resolved": "https://registry.npmjs.org/earcut/-/earcut-2.2.4.tgz",
+      "integrity": "sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==",
+      "tarball_sha256": "6db1957d339d2db7187c55b14cbb0e3fe2bc78f0458cfb947f7e62113cb8d6cb",
+      "bytes": 29513
+    },
+    {
+      "lock_path": "node_modules/fast-deep-equal",
+      "version": "3.1.3",
+      "resolved": "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz",
+      "integrity": "sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==",
+      "tarball_sha256": "b019a0980f27638dc3f85836b0e478f188e00d7a6e5852c0819fa86f56e47b8f",
+      "bytes": 3656
+    },
+    {
+      "lock_path": "node_modules/fastpriorityqueue",
+      "version": "0.7.5",
+      "resolved": "https://registry.npmjs.org/fastpriorityqueue/-/fastpriorityqueue-0.7.5.tgz",
+      "integrity": "sha512-3Pa0n9gwy8yIbEsT3m2j/E9DXgWvvjfiZjjqcJ+AdNKTAlVMIuFYrYG5Y3RHEM8O6cwv9hOpOWY/NaMfywoQVA==",
+      "tarball_sha256": "21ec278f1b4aec976abc86c88f4a9254258c1b32f044825368b6cde21167c164",
+      "bytes": 9827
+    },
+    {
+      "lock_path": "node_modules/frac",
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/frac/-/frac-1.1.2.tgz",
+      "integrity": "sha512-w/XBfkibaTl3YDqASwfDUqkna4Z2p9cFSr1aHDt0WoMTECnRfBOv2WArlZILlqgWlmdIlALXGpM2AOhEk5W3IA==",
+      "tarball_sha256": "80660b89475a9141ec6ea7320addab3aa9ee84e5be31fcf5f6c1b5ce278ba1ca",
+      "bytes": 4627
+    },
+    {
+      "lock_path": "node_modules/geojson-equality-ts",
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/geojson-equality-ts/-/geojson-equality-ts-1.0.2.tgz",
+      "integrity": "sha512-h3Ryq+0mCSN/7yLs0eDgrZhvc9af23o/QuC4aTiuuzP/MRCtd6mf5rLsLRY44jX0RPUfM8c4GqERQmlUxPGPoQ==",
+      "tarball_sha256": "41af285172c50fa34e17d02a408a1b27a4fd9981bad1b2e753e34986a41867d5",
+      "bytes": 7135
+    },
+    {
+      "lock_path": "node_modules/geojson-numeric",
+      "version": "0.2.1",
+      "resolved": "https://registry.npmjs.org/geojson-numeric/-/geojson-numeric-0.2.1.tgz",
+      "integrity": "sha512-rvItMp3W7pe16o2EQTnRw54v6WHdiE4bYjUsdr3FZskFb6oPC7gjLe4zginP+Wd1B/HLl2acTukfn16Lmwn7lg==",
+      "tarball_sha256": "22cda41fc6ff6e7ad10bd798c5d879cc6a3a3f5c9ef2f6e372f8657b5467a1ac",
+      "bytes": 2668
+    },
+    {
+      "lock_path": "node_modules/geojson-polygon-self-intersections",
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/geojson-polygon-self-intersections/-/geojson-polygon-self-intersections-1.2.2.tgz",
+      "integrity": "sha512-6XRNF4CsRHYmR9z5YuIk5f/aOototnDf0dgMqYGcS7y1l57ttt6MAIAxl3rXyas6lq1HEbTuLMh4PgvO+OV42w==",
+      "tarball_sha256": "091f684732723cb40aec2622a6edca70816d0008ba9052e6b376fdb4110614a8",
+      "bytes": 4507
+    },
+    {
+      "lock_path": "node_modules/geojson-polygon-self-intersections/node_modules/quickselect",
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/quickselect/-/quickselect-1.1.1.tgz",
+      "integrity": "sha512-qN0Gqdw4c4KGPsBOQafj6yj/PA6c/L63f6CaZ/DCF/xF4Esu3jVmKLUDYxghFx8Kb/O7y9tI7x2RjTSXwdK1iQ==",
+      "tarball_sha256": "e32c33afb73c41e6ca36766f77908ea3fb62e68256cbb4b463415b1f08df08d1",
+      "bytes": 2243
+    },
+    {
+      "lock_path": "node_modules/geojson-polygon-self-intersections/node_modules/rbush",
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/rbush/-/rbush-2.0.2.tgz",
+      "integrity": "sha512-XBOuALcTm+O/H8G90b6pzu6nX6v2zCKiFG4BJho8a+bY6AER6t8uQUZdi5bomQc0AprCWhEGa7ncAbbRap0bRA==",
+      "tarball_sha256": "3d1b63866dfb9a8be1d337bfb15fe81041cf4180a55341008e4ab775808cd1bc",
+      "bytes": 13276
+    },
+    {
+      "lock_path": "node_modules/get-stream",
+      "version": "6.0.1",
+      "resolved": "https://registry.npmjs.org/get-stream/-/get-stream-6.0.1.tgz",
+      "integrity": "sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==",
+      "tarball_sha256": "932b374872f6626198963d6fba7f93164bd6b4f12aad4ebcd16b49717be51622",
+      "bytes": 4273
+    },
+    {
+      "lock_path": "node_modules/htmlparser2",
+      "version": "3.5.1",
+      "resolved": "https://registry.npmjs.org/htmlparser2/-/htmlparser2-3.5.1.tgz",
+      "integrity": "sha512-9ouaQ6sjVJZS4NhPC65zNm2JCJotiH6BVm6iFvI90hRcsIEISMrgjqMUrPpU9G1VS4vTspH4dyaqSRf6JLQPbg==",
+      "tarball_sha256": "d97b889f85ee6f5b0034428408264e4ef474f9cf6b2f9ab79d053034eae501ca",
+      "bytes": 36368
+    },
+    {
+      "lock_path": "node_modules/htmlparser2/node_modules/readable-stream",
+      "version": "1.1.14",
+      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.1.14.tgz",
+      "integrity": "sha512-+MeVjFf4L44XUkhM1eYbD8fyEsxcV81pqMSR5gblfcLCHfZvbrqy4/qYHE+/R5HoBUT11WV5O08Cr1n3YXkWVQ==",
+      "tarball_sha256": "2c993fcc5a24fc1605a1dd81f52b921774990316d31dbc61a95f24d0d7d59de4",
+      "bytes": 20630
+    },
+    {
+      "lock_path": "node_modules/htmlparser2/node_modules/string_decoder",
+      "version": "0.10.31",
+      "resolved": "https://registry.npmjs.org/string_decoder/-/string_decoder-0.10.31.tgz",
+      "integrity": "sha512-ev2QzSzWPYmy9GuqfIVildA4OdcGLeFZQrq5ys6RtiuF+RQQiZWr8TZNyAcuVXyQRYfEO+MsoB/1BuQVhOJuoQ==",
+      "tarball_sha256": "3e6e6ffeafe6157eb2278a909afc0b845234b13446dca8a9518c2b79b9c22086",
+      "bytes": 3608
+    },
+    {
+      "lock_path": "node_modules/ieee754",
+      "version": "1.2.1",
+      "resolved": "https://registry.npmjs.org/ieee754/-/ieee754-1.2.1.tgz",
+      "integrity": "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==",
+      "tarball_sha256": "8ef14b9b397e339db89db97881fb714f49319d8f0eb1275901f45567b28f9dac",
+      "bytes": 2886
+    },
+    {
+      "lock_path": "node_modules/inherits",
+      "version": "2.0.4",
+      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz",
+      "integrity": "sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==",
+      "tarball_sha256": "d94dbc6c1bb3c5ac0fb12a73ade187108fc60de273a1b754f55044eb5e24afaf",
+      "bytes": 2030
+    },
+    {
+      "lock_path": "node_modules/internmap",
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/internmap/-/internmap-1.0.1.tgz",
+      "integrity": "sha512-lDB5YccMydFBtasVtxnZ3MRBHuaoE8GKsppq+EchKL2U4nK/DmEpPHNH8MZe5HkMtpSiTSOZwfN0tzYjO/lJEw==",
+      "tarball_sha256": "284029c70c1dd2df59dac1eaa5adb5e8cf8585a01011b86341ba61505eaa4324",
+      "bytes": 3578
+    },
+    {
+      "lock_path": "node_modules/isarray",
+      "version": "0.0.1",
+      "resolved": "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz",
+      "integrity": "sha512-D2S+3GLxWH+uhrNEcoh/fnmYeP8E8/zHl644d/jdA0g2uyXvy3sb0qxotE+ne0LtccHknQzWwZEzhak7oJ0COQ==",
+      "tarball_sha256": "3e8444020696800aed92a09d4c52602adc76140a39b6c8e94fe7c89cf70a9f0a",
+      "bytes": 2742
+    },
+    {
+      "lock_path": "node_modules/jsonparse",
+      "version": "0.0.5",
+      "resolved": "https://registry.npmjs.org/jsonparse/-/jsonparse-0.0.5.tgz",
+      "integrity": "sha512-fw7Q/8gFR8iSekUi9I+HqWIap6mywuoe7hQIg3buTVjuZgALKj4HAmm0X6f+TaL4c9NJbvyFQdaI2ppr5p6dnQ==",
+      "tarball_sha256": "42e457b04c37d490ebf200c91f0fed39022a11341cb21a88fb46b0610f4bbf4c",
+      "bytes": 7319
+    },
+    {
+      "lock_path": "node_modules/JSONStream",
+      "version": "0.8.0",
+      "resolved": "https://registry.npmjs.org/JSONStream/-/JSONStream-0.8.0.tgz",
+      "integrity": "sha512-PiV28BpoUorz9kKFwRbD7+wg0t/k0ITHKn0DgCU44YZ/GaGAZRPt9q5PzoifC85gE55SEPIdMu0Labfxevj8cw==",
+      "tarball_sha256": "7c731a42c477089fe1fa76824dc78b81a9e61f4ead32c8e4b9033cb69cac42d8",
+      "bytes": 136025
+    },
+    {
+      "lock_path": "node_modules/jsts",
+      "version": "2.12.1",
+      "resolved": "https://registry.npmjs.org/jsts/-/jsts-2.12.1.tgz",
+      "integrity": "sha512-aaiCZeGfeU5o9TbrYF1KF0VvhGGLtG3w7vNynmaTjC8XRmS2v15lq+2Bxa8lMtprsFFJiIpAayJZguLruiHd0w==",
+      "tarball_sha256": "fcc6848a74b52a07225cf4dbc987a0dcb9db18fe3a76507a98b3030de60c8710",
+      "bytes": 796163
+    },
+    {
+      "lock_path": "node_modules/minimist",
+      "version": "1.2.8",
+      "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz",
+      "integrity": "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==",
+      "tarball_sha256": "350a76c115b393c19d24654834261e5dc9f0e8cc5e08f3937fa80140f3e4ce83",
+      "bytes": 15520
+    },
+    {
+      "lock_path": "node_modules/optimist",
+      "version": "0.3.7",
+      "resolved": "https://registry.npmjs.org/optimist/-/optimist-0.3.7.tgz",
+      "integrity": "sha512-TCx0dXQzVtSCg2OgY/bO9hjM9cV4XYx09TVK+s3+FhkjT6LovsLe+pPMzpWf+6yXK/hUizs2gUoTw3jHM0VaTQ==",
+      "tarball_sha256": "ba534aa013072a9650a18da311de8025d73b58b71dcea7c7ade4d8e8f274dd33",
+      "bytes": 12549
+    },
+    {
+      "lock_path": "node_modules/osm-polygon-features",
+      "version": "0.9.2",
+      "resolved": "https://registry.npmjs.org/osm-polygon-features/-/osm-polygon-features-0.9.2.tgz",
+      "integrity": "sha512-5zNEFCq+G6X2TDkqbKYLF1+GtWVCCLA8zX+FVhSogsiTRsGquyaGRy5cYNW4BE3ci0MKOLvNTkFNsjsCNtgz0A==",
+      "tarball_sha256": "aaa23b026a76acd0f31ce95eb4e7bcbb45ba5338b80ce5eb3432949c6c565e37",
+      "bytes": 4201
+    },
+    {
+      "lock_path": "node_modules/osmtogeojson",
+      "version": "3.0.0-beta.5",
+      "resolved": "https://registry.npmjs.org/osmtogeojson/-/osmtogeojson-3.0.0-beta.5.tgz",
+      "integrity": "sha512-izvaUWnunrYvMB4LB0ZN15O1+g90c628yHS4SeSR3daVSBF9vdTHL7iVHfg0wEr1uEYjQ+lMJHCiYFusL5yKVg==",
+      "tarball_sha256": "e572a61055798f5ae8006b2dc766297d11bc41f7636b2a4e55938aff6facc857",
+      "bytes": 74834
+    },
+    {
+      "lock_path": "node_modules/pbf",
+      "version": "3.3.0",
+      "resolved": "https://registry.npmjs.org/pbf/-/pbf-3.3.0.tgz",
+      "integrity": "sha512-XDF38WCH3z5OV/OVa8GKUNtLAyneuzbCisx7QUCF8Q6Nutx0WnJrQe5O+kOtBlLfRNUws98Y58Lblp+NJG5T4Q==",
+      "tarball_sha256": "d77164e7d8d3bbcf3054b0ced2dd7ae9fb808a6469c44404b83a27bf275f2c10",
+      "bytes": 27589
+    },
+    {
+      "lock_path": "node_modules/point-in-polygon",
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/point-in-polygon/-/point-in-polygon-1.1.0.tgz",
+      "integrity": "sha512-3ojrFwjnnw8Q9242TzgXuTD+eKiutbzyslcq1ydfu82Db2y+Ogbmyrkpv0Hgj31qwT3lbS9+QAAO/pIQM35XRw==",
+      "tarball_sha256": "6af1390dd9c10a6a0e50b2cdf924c35539e180a9819f3cf0bdde5ede86427b86",
+      "bytes": 2792
+    },
+    {
+      "lock_path": "node_modules/point-in-polygon-hao",
+      "version": "1.2.4",
+      "resolved": "https://registry.npmjs.org/point-in-polygon-hao/-/point-in-polygon-hao-1.2.4.tgz",
+      "integrity": "sha512-x2pcvXeqhRHlNRdhLs/tgFapAbSSe86wa/eqmj1G6pWftbEs5aVRJhRGM6FYSUERKu0PjekJzMq0gsI2XyiclQ==",
+      "tarball_sha256": "b8116ea7459bf8e57e8962f21a8ce12d1a53b2f0dbc22bfe46fb0e031f853638",
+      "bytes": 6646
+    },
+    {
+      "lock_path": "node_modules/point-in-polygon-hao/node_modules/robust-predicates",
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/robust-predicates/-/robust-predicates-3.0.3.tgz",
+      "integrity": "sha512-NS3levdsRIUOmiJ8FZWCP7LG3QpJyrs/TE0Zpf1yvZu8cAJJ6QMW92H1c7kWpdIHo8RvmLxN/o2JXTKHp74lUA==",
+      "tarball_sha256": "54952e6a8c9e69e404f9be09bfb92a68482cf77702283399a44a689d67ba661c",
+      "bytes": 40820
+    },
+    {
+      "lock_path": "node_modules/polyclip-ts",
+      "version": "0.16.8",
+      "resolved": "https://registry.npmjs.org/polyclip-ts/-/polyclip-ts-0.16.8.tgz",
+      "integrity": "sha512-JPtKbDRuPEuAjuTdhR62Gph7Is2BS1Szx69CFOO3g71lpJDFo78k4tFyi+qFOMVPePEzdSKkpGU3NBXPHHjvKQ==",
+      "tarball_sha256": "9f7df4cb51c02c75648b31a30922c048cd42f1d475619f1d8b742eccad680e02",
+      "bytes": 115162
+    },
+    {
+      "lock_path": "node_modules/protocol-buffers-schema",
+      "version": "3.6.1",
+      "resolved": "https://registry.npmjs.org/protocol-buffers-schema/-/protocol-buffers-schema-3.6.1.tgz",
+      "integrity": "sha512-VG2K63Igkiv9p76tk1lilczEK1cT+kCjKtkdhw1dQZV3k3IXJbd3o6Ho8b9zJZaHSnT2hKe4I+ObmX9w6m5SmQ==",
+      "tarball_sha256": "907f8fd7d60cc2a96875b128e161b0013bdef8c2523012d3041a0f72f20de852",
+      "bytes": 13572
+    },
+    {
+      "lock_path": "node_modules/quickselect",
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/quickselect/-/quickselect-2.0.0.tgz",
+      "integrity": "sha512-RKJ22hX8mHe3Y6wH/N3wCM6BWtjaxIyyUIkpHOvfFnxdI4yD4tBXEBKSbriGujF6jnSVkJrffuo6vxACiSSxIw==",
+      "tarball_sha256": "88a39df0c801595c65e5d87591c42ca612680b8478b6a634549cfe6c240e35e2",
+      "bytes": 2247
+    },
+    {
+      "lock_path": "node_modules/rbush",
+      "version": "3.0.1",
+      "resolved": "https://registry.npmjs.org/rbush/-/rbush-3.0.1.tgz",
+      "integrity": "sha512-XRaVO0YecOpEuIvbhbpTrZgoiI6xBlz6hnlr6EHhd+0x9ase6EmeN+hdwwUaJvLcsFFQ8iWVF1GAK1yB0BWi0w==",
+      "tarball_sha256": "6c4d95fc91fb408172f3597a8f9bb19ef5237aeacf3c11bc36e14fbc2c5f83e1",
+      "bytes": 12661
+    },
+    {
+      "lock_path": "node_modules/readable-stream",
+      "version": "3.6.2",
+      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.2.tgz",
+      "integrity": "sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==",
+      "tarball_sha256": "edd866c05e318aa9c091763eebdd4207409b7a7648be19c5317a96047305ab5d",
+      "bytes": 33238
+    },
+    {
+      "lock_path": "node_modules/resolve-protobuf-schema",
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/resolve-protobuf-schema/-/resolve-protobuf-schema-2.1.0.tgz",
+      "integrity": "sha512-kI5ffTiZWmJaS/huM8wZfEMer1eRd7oJQhDuxeCLe3t7N7mX3z94CN0xPxBQxFYQTSNz9T0i+v6inKqSdK8xrQ==",
+      "tarball_sha256": "3e80010114da31a6f2a09345c62b7b9d67640d816df0f5099cecdeb9342517c5",
+      "bytes": 2269
+    },
+    {
+      "lock_path": "node_modules/robust-predicates",
+      "version": "2.0.4",
+      "resolved": "https://registry.npmjs.org/robust-predicates/-/robust-predicates-2.0.4.tgz",
+      "integrity": "sha512-l4NwboJM74Ilm4VKfbAtFeGq7aEjWL+5kVFcmgFA2MrdnQWx9iE/tUGvxY5HyMI7o/WpSIUFLbC5fbeaHgSCYg==",
+      "tarball_sha256": "d8d5c1c5ed13e66c69b60c260666fdff8b4800905a5566c2f4c22fc340c91912",
+      "bytes": 47652
+    },
+    {
+      "lock_path": "node_modules/safe-buffer",
+      "version": "5.2.1",
+      "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz",
+      "integrity": "sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==",
+      "tarball_sha256": "5d181804516c4a693a384272a7bd0e42d17e0d4b301ccfbe408669ccafdcb3e8",
+      "bytes": 9972
+    },
+    {
+      "lock_path": "node_modules/skmeans",
+      "version": "0.9.7",
+      "resolved": "https://registry.npmjs.org/skmeans/-/skmeans-0.9.7.tgz",
+      "integrity": "sha512-hNj1/oZ7ygsfmPZ7ZfN5MUBRoGg1gtpnImuJBgLO0ljQ67DtJuiQaiYdS4lUA6s0KCwnPhGivtC/WRwIZLkHyg==",
+      "tarball_sha256": "29bb809610165ac477b7505eb72f4dc4ce77df2444b72203eb40c2274b395d34",
+      "bytes": 31151
+    },
+    {
+      "lock_path": "node_modules/splaytree-ts",
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/splaytree-ts/-/splaytree-ts-1.0.2.tgz",
+      "integrity": "sha512-0kGecIZNIReCSiznK3uheYB8sbstLjCZLiwcQwbmLhgHJj2gz6OnSPkVzJQCMnmEz1BQ4gPK59ylhBoEWOhGNA==",
+      "tarball_sha256": "39d0441e17ad14dec5159a215bfbc820c8fe7273fc1310cfa310b367700586c0",
+      "bytes": 27772
+    },
+    {
+      "lock_path": "node_modules/ssf",
+      "version": "0.11.2",
+      "resolved": "https://registry.npmjs.org/ssf/-/ssf-0.11.2.tgz",
+      "integrity": "sha512-+idbmIXoYET47hH+d7dfm2epdOMUDjqcB4648sTZ+t2JwoyBFL/insLfB/racrDmsKB3diwsDA696pZMieAC5g==",
+      "tarball_sha256": "ab5cc4472a2eb956098b549223cee3a003f9ea26256d2d6b2aae962839e49ba6",
+      "bytes": 27805
+    },
+    {
+      "lock_path": "node_modules/string_decoder",
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz",
+      "integrity": "sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==",
+      "tarball_sha256": "7d036900940345e423538371ae45b23bfaf4b454bc398c6ba604063b0597b3ad",
+      "bytes": 4622
+    },
+    {
+      "lock_path": "node_modules/through",
+      "version": "2.2.7",
+      "resolved": "https://registry.npmjs.org/through/-/through-2.2.7.tgz",
+      "integrity": "sha512-JIR0m0ybkmTcR8URann+HbwKmodP+OE8UCbsifQDYMLD5J3em1Cdn3MYPpbEd5elGDwmP98T+WbqP/tvzA5Mjg==",
+      "tarball_sha256": "140c5dd626089dd3684666f286dfa284f67fe463e232b52c38d946177a1f6c79",
+      "bytes": 3806
+    },
+    {
+      "lock_path": "node_modules/tiny-inflate",
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/tiny-inflate/-/tiny-inflate-1.0.3.tgz",
+      "integrity": "sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==",
+      "tarball_sha256": "73932b339424e5ffaeaf043e6481229cab407ee277b2a01fa23938dfad6a8f4e",
+      "bytes": 15562
+    },
+    {
+      "lock_path": "node_modules/tiny-osmpbf",
+      "version": "0.1.0",
+      "resolved": "https://registry.npmjs.org/tiny-osmpbf/-/tiny-osmpbf-0.1.0.tgz",
+      "integrity": "sha512-Sl0xuDdM0+bnrYPhTAWnQ5eui8+2cpYCnsBxq0EFR1/IgmfB7+FiC23I8aa7tdP4AjaWvBUMK34kfXdY6C1LCQ==",
+      "tarball_sha256": "0dcdc0b2e78b21c63c3de210ad8d42af27ffc39719e112a060d0d6eba5184277",
+      "bytes": 53508
+    },
+    {
+      "lock_path": "node_modules/tinyqueue",
+      "version": "2.0.3",
+      "resolved": "https://registry.npmjs.org/tinyqueue/-/tinyqueue-2.0.3.tgz",
+      "integrity": "sha512-ppJZNDuKGgxzkHihX8v9v9G5f+18gzaTfrukGrq6ueg0lmH4nqVnA2IPG0AEH3jKEk2GRJCUhDoqpoiw3PHLBA==",
+      "tarball_sha256": "c8a2f31e55556eed08cc9dd64def856ecb9adee44db4685b5f54074bb6f2ac63",
+      "bytes": 3307
+    },
+    {
+      "lock_path": "node_modules/topojson-client",
+      "version": "3.1.0",
+      "resolved": "https://registry.npmjs.org/topojson-client/-/topojson-client-3.1.0.tgz",
+      "integrity": "sha512-605uxS6bcYxGXw9qi62XyrV6Q3xwbndjachmNxu8HWTtVPxZfEJN9fd/SZS1Q54Sn2y0TMyMxFj/cJINqGHrKw==",
+      "tarball_sha256": "889fadb422f6236d0f8337a236ce6499f258b75e44b81733b13bd971067322bf",
+      "bytes": 15911
+    },
+    {
+      "lock_path": "node_modules/topojson-server",
+      "version": "3.0.1",
+      "resolved": "https://registry.npmjs.org/topojson-server/-/topojson-server-3.0.1.tgz",
+      "integrity": "sha512-/VS9j/ffKr2XAOjlZ9CgyyeLmgJ9dMwq6Y0YEON8O7p/tGGk+dCWnrE03zEdu7i4L7YsFZLEPZPzCvcB7lEEXw==",
+      "tarball_sha256": "d52d79830c814028fd40b4a528d46a87c0cfb6a5d2d01d740159819a8e57b28b",
+      "bytes": 16645
+    },
+    {
+      "lock_path": "node_modules/tslib",
+      "version": "2.8.1",
+      "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz",
+      "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==",
+      "tarball_sha256": "66f635d5eeabae44807534976913a102cf615b9a045368359c9f79ae6ee2119e",
+      "bytes": 18477
+    },
+    {
+      "lock_path": "node_modules/typedarray",
+      "version": "0.0.6",
+      "resolved": "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz",
+      "integrity": "sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==",
+      "tarball_sha256": "3f324b75a9581c4c85cec25e8cd30831ccaa3c87770cee2ff4b9167055004108",
+      "bytes": 7481
+    },
+    {
+      "lock_path": "node_modules/util-deprecate",
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz",
+      "integrity": "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==",
+      "tarball_sha256": "79a1de983c1b393180c47456d6b73caab278a00ea6e37d5c6675f2dcdec2a3e5",
+      "bytes": 2246
+    },
+    {
+      "lock_path": "node_modules/wmf",
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/wmf/-/wmf-1.0.2.tgz",
+      "integrity": "sha512-/p9K7bEh0Dj6WbXg4JG0xvLQmIadrner1bi45VMJTfnbVHsc7yIajZyoSoK60/dtVBs12Fm6WkUI5/3WAVsNMw==",
+      "tarball_sha256": "f8966904a55f60c86deb49051b074b477d865669b493be6e5343b5833f34c3b4",
+      "bytes": 71391
+    },
+    {
+      "lock_path": "node_modules/word",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/word/-/word-0.3.0.tgz",
+      "integrity": "sha512-OELeY0Q61OXpdUfTp+oweA/vtLVg5VDOXh+3he3PNzLGG/y0oylSOC1xRVj0+l4vQ3tj/bB1HVHv1ocXkQceFA==",
+      "tarball_sha256": "289a730062b9de3a25be3dd4e3674376bb1faaa362d365b8aee90d4e20f2c0fb",
+      "bytes": 5495
+    },
+    {
+      "lock_path": "node_modules/wordwrap",
+      "version": "0.0.3",
+      "resolved": "https://registry.npmjs.org/wordwrap/-/wordwrap-0.0.3.tgz",
+      "integrity": "sha512-1tMA907+V4QmxV7dbRvb4/8MaRALK6q9Abid3ndMYnbyo8piisCmeONVqVSXqQA3KaP4SLt5b7ud6E2sqP8TFw==",
+      "tarball_sha256": "419fcd999c644377c678ea8315aacf9bda442cd75bdfa50aee3918dd917ae274",
+      "bytes": 14532
+    },
+    {
+      "lock_path": "node_modules/xlsx",
+      "version": "0.18.5",
+      "resolved": "https://registry.npmjs.org/xlsx/-/xlsx-0.18.5.tgz",
+      "integrity": "sha512-dmg3LCjBPHZnQp5/F/+nnTa+miPJxUXB6vtk42YjBBKayDNagxGEeIdWApkYPOf3Z3pm3k62Knjzp7lMeTEtFQ==",
+      "tarball_sha256": "5b23e25faa2472e50679e5f6ee52fced3ae4c4b1e46e8dfebb221c59747461ee",
+      "bytes": 2441660
+    }
+  ]
+}
