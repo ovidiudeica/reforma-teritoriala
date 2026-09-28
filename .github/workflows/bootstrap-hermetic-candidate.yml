@@ -1,0 +1,134 @@
+name: Bootstrap hermetic ACTUAL candidate
+
+on:
+  push:
+    branches:
+      - actual/hermetic-candidate
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  bootstrap:
+    if: ${{ !contains(github.event.head_commit.message, '[bootstrap-hermetic]') }}
+    runs-on: ubuntu-24.04
+    env:
+      ACTUAL_RUNTIME_IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
+    steps:
+      - name: Check out implementation branch
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: actual/hermetic-candidate
+          fetch-depth: 0
+
+      - name: Fetch main
+        run: git fetch origin main
+
+      - name: Pull exact runtime
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker pull "$ACTUAL_RUNTIME_IMAGE"
+
+      - name: Rebuild provenance and prove kernel network denial
+        run: |
+          docker run --rm \
+            --network none \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_BASE_REF=origin/main \
+            --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              git config --global --add safe.directory /workspace
+              npm run prove:actual-network-denial
+              npm run build:actual-runtime-image-manifest
+              npm run audit:actual-runtime-image
+              npm run audit:actual-npm-dependency-bundle
+              npm run build:actual-build-environment
+              npm run audit:actual-build-environment
+              npm run audit:node-toolchain
+              npm run install:actual-offline-deps
+              npm run build:actual-source-bundle
+              npm run audit:actual-source-bundle
+              npm run build:actual-review-evidence-bundle
+              npm run audit:actual-review-evidence-bundle
+              npm run build:actual-release-manifest
+              npm run audit:actual-release-gate
+            '
+
+      - name: Rewrite persisted provenance marker
+        run: |
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          marker_path=Path('data/current/actual-release-persisted.json')
+          manifest_path=Path('data/current/actual-release-manifest.json')
+          old=json.loads(marker_path.read_text())
+          manifest_bytes=manifest_path.read_bytes()
+          manifest=json.loads(manifest_bytes)
+          if old['snapshot_id']!=manifest['snapshot_id'] or old['release_fingerprint_sha256']!=manifest['release_fingerprint_sha256']:
+              raise SystemExit('Hermetic migration attempted to change semantic ACTUAL identity')
+          next_marker={
+              'schema_version':1,
+              'snapshot_id':manifest['snapshot_id'],
+              'release_fingerprint_sha256':manifest['release_fingerprint_sha256'],
+              'manifest_sha256':hashlib.sha256(manifest_bytes).hexdigest(),
+              'source_bundle_fingerprint_sha256':manifest['source_bundle']['bundle_fingerprint_sha256'],
+              'review_evidence_bundle_fingerprint_sha256':manifest['review_evidence_bundle']['bundle_fingerprint_sha256'],
+              'network_denial_sha256':manifest['network_denial']['sha256'],
+              'build_environment_fingerprint_sha256':manifest['build_environment']['environment_fingerprint_sha256'],
+              'validated_release_gate_status':'PASS',
+              'provenance_migration':{
+                  'previous_manifest_sha256':old.get('manifest_sha256'),
+                  'reason':'kernel-network-denial'
+              },
+              'policy':'Marker for exact ACTUAL snapshot bytes, exact source provenance, frozen review evidence, kernel-enforced network denial and exact execution-environment provenance. It is not part of the semantic release fingerprint.'
+          }
+          marker_path.write_text(json.dumps(next_marker,indent=2,ensure_ascii=False)+'\n')
+          PY
+
+      - name: Run lifecycle regression suite in the same network-denied namespace
+        run: |
+          docker run --rm \
+            --network none \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              git config --global --add safe.directory /workspace
+              npm run test:actual-candidate-lifecycle
+              npm run audit:actual-release-gate
+            '
+
+      - name: Commit provenance migration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/current/actual-network-denial-audit.json \
+            data/current/actual-runtime-image.json \
+            data/current/actual-source-bundle-manifest.json \
+            data/current/actual-source-bundle-gate.json \
+            data/current/actual-review-evidence-bundle.json \
+            data/current/actual-review-evidence-bundle-gate.json \
+            data/current/actual-build-environment-manifest.json \
+            data/current/actual-build-environment-gate.json \
+            data/current/actual-release-manifest.json \
+            data/current/actual-release-gate.json \
+            data/current/actual-release-persisted.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Bind kernel network denial [bootstrap-hermetic]"
+          git push origin HEAD:actual/hermetic-candidate
