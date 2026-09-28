@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "0ade3c8600f7a706b844149830766274f6379c1a919fc7699770aacb35329036",
+  "environment_fingerprint_sha256": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.",
   "environment": {
     "runner": {
@@ -61,7 +61,7 @@
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "1ece490b07e9c3326da9d9ab985fa07c1c9c78f254cd116a4963549644fbc315",
+        "sha256": "0f9cae6b6e2c97ee21305a6994b4e1a12e1e3ff6d64252464dca7615af3780a7",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -76,7 +76,7 @@
       },
       "topology": {
         "path": ".github/workflows/actual-topology-audit.yml",
-        "sha256": "a99c308a22afcbbef7205832028248d6a0692144f416b948c50c67b15864ce91",
+        "sha256": "d2fad7d216f46d033986664cebaa052774edf44c8dafc3f71d4c534fd2205454",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -91,7 +91,7 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "07dabaa632993d7229e402c70a8ea8144bcd258321bab4c4780913ea88535bd5",
+        "sha256": "46e7a4fcfa4943f06925257af6120b679a78ca28eafdf3f0bb319635c51e87be",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -105,7 +105,7 @@
       },
       "verify": {
         "path": ".github/workflows/verify-persisted-actual-release.yml",
-        "sha256": "49572bc40719cd92e3dc4e8565668ba0660198d7272629c8237f3476a390e483",
+        "sha256": "150200cac56a465016a2429a800f143300c41197e495e245f8f5736d5f0d3630",
         "runs_on": [
           "ubuntu-24.04"
         ],
