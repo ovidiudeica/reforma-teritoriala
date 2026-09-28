@@ -4,9 +4,9 @@
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "2c1afca1d5156191485ff7452132d2703f6afe8f1f4bf18f01e4e658d551b8e9",
+  "manifest_sha256": "26864a848c90169d9b00f95e9c8bbafec4a9bfa99a971fad3e521a4febaddb74",
   "status": "PASS",
-  "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle passes its gate and is cryptographically bound by the release manifest, master topology and jurisdiction gates pass, and exact master/public bytes remain valid. Any source or release drift fails closed.",
+  "policy": "The public ACTUAL RO+MD release is publishable only when exact source provenance and exact GitHub Actions execution-environment provenance are bound by the release manifest and all structural, jurisdictional and byte-integrity gates pass.",
   "checks": [
     {
       "name": "master_topology_audit_passes",
@@ -150,6 +150,40 @@
           "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
           "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
           "sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6"
+        }
+      }
+    },
+    {
+      "name": "build_environment_manifest_matches_repository",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "failures": []
+      }
+    },
+    {
+      "name": "manifest_binds_current_build_environment",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "path": "data/current/actual-build-environment-manifest.json",
+          "schema_version": 1,
+          "mode": "ACTUAL_BUILD_ENVIRONMENT",
+          "runner_label": "ubuntu-24.04",
+          "runner_image_version": "20260920.314.1",
+          "environment_fingerprint_algorithm": "actual-build-environment-v1",
+          "environment_fingerprint_sha256": "f924aac3c222a036e10046fa09234cda9ffedd8238212d8a1e60a908410a5be8",
+          "sha256": "cfcf93cc470ef1150c17c0ce9045cfa0f18dfe91e4f7a349383ffec894a80596"
+        },
+        "actual": {
+          "path": "data/current/actual-build-environment-manifest.json",
+          "schema_version": 1,
+          "mode": "ACTUAL_BUILD_ENVIRONMENT",
+          "runner_label": "ubuntu-24.04",
+          "runner_image_version": "20260920.314.1",
+          "environment_fingerprint_algorithm": "actual-build-environment-v1",
+          "environment_fingerprint_sha256": "f924aac3c222a036e10046fa09234cda9ffedd8238212d8a1e60a908410a5be8",
+          "sha256": "cfcf93cc470ef1150c17c0ce9045cfa0f18dfe91e4f7a349383ffec894a80596"
         }
       }
     },
@@ -464,7 +498,7 @@
       "detail": {
         "manifest": {
           "registry": "SIRUTA",
-          "authority": "Institutul Național de Statistică",
+          "authority": "Institutul Na╚øional de Statistic─â",
           "path": "data/sources/ro-siruta-current.json",
           "reference_year": 2026,
           "fetched_at": "2026-09-26T11:58:48.000Z",
@@ -486,7 +520,7 @@
       "detail": {
         "manifest": {
           "registry": "CUATM",
-          "authority": "Biroul Național de Statistică al Republicii Moldova",
+          "authority": "Biroul Na╚øional de Statistic─â al Republicii Moldova",
           "path": "data/sources/cuatm-current.json",
           "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
           "fetched_at": "2026-09-27T20:37:24.316Z",
