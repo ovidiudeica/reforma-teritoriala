@@ -157,12 +157,14 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
  });
  assert.equal(disposition.status,'CHANGE');
 
+ const sourceBundleFingerprint='c'.repeat(64);
  const manifest={
-  schema_version:3,
+  schema_version:4,
   mode:'ACTUAL',
   snapshot_id:candidateSnapshot,
   release_fingerprint_sha256:changedFp.sha256,
-  content_fingerprint_sha256:changedFp.sha256
+  content_fingerprint_sha256:changedFp.sha256,
+  source_bundle:{bundle_fingerprint_sha256:sourceBundleFingerprint}
  };
  const gate={status:'PASS',snapshot_id:candidateSnapshot};
  const diff={
@@ -170,9 +172,10 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   base_release:{
    snapshot_id:persisted.snapshot_id,
    release_fingerprint_sha256:persisted.release_fingerprint_sha256,
-   manifest_sha256:persisted.manifest_sha256
+   manifest_sha256:persisted.manifest_sha256,
+   source_bundle_fingerprint_sha256:persisted.source_bundle_fingerprint_sha256
   },
-  candidate:{snapshot_id:candidateSnapshot},
+  candidate:{snapshot_id:candidateSnapshot,source_bundle_fingerprint_sha256:sourceBundleFingerprint},
   summary:{semantic_content_changed:true,substantive_change_count:disposition.substantive_change_count,review_required:true}
  };
  const manifestBytes=Buffer.from(JSON.stringify(manifest,null,2)+'\n');
@@ -182,7 +185,7 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   mode:'ACTUAL_CANDIDATE',
   status:'CHANGE',
   base_release:diff.base_release,
-  candidate:{snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes)},
+  candidate:{snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes),source_bundle_fingerprint_sha256:sourceBundleFingerprint},
   diff_report_sha256:sha256(diffBytes),
   review_required:true,
   substantive_change_count:disposition.substantive_change_count
