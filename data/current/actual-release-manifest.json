@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 7,
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "generated_at": "2026-09-27T20:37:28.323Z",
@@ -16,7 +16,7 @@
     "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
     "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
   },
-  "policy": "Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle and build-environment bindings remain mandatory integrity constraints.",
+  "policy": "Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance, kernel-enforced network-denial proof and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle, network-denial and build-environment bindings remain mandatory integrity constraints.",
   "jurisdictions": [
     "RO",
     "MD"
@@ -39,6 +39,15 @@
     "bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "sha256": "d9f6cb45d861c48936d7ac6ca49ded1be13c81ea6d52e9bf876d76dbf1b57f69"
   },
+  "network_denial": {
+    "path": "data/current/actual-network-denial-audit.json",
+    "schema_version": 1,
+    "mode": "ACTUAL_NETWORK_DENIAL",
+    "status": "PASS",
+    "enforcement": "docker --network none",
+    "docker_socket_mounted": false,
+    "sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa"
+  },
   "build_environment": {
     "path": "data/current/actual-build-environment-manifest.json",
     "schema_version": 1,
@@ -46,8 +55,8 @@
     "runner_label": "ubuntu-24.04",
     "runner_image_version": "20260920.314.1",
     "environment_fingerprint_algorithm": "actual-build-environment-v1",
-    "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
-    "sha256": "43825378904ca3384816ceff09fbb4ff4871f1f8723218b0326e7b2536ace96a"
+    "environment_fingerprint_sha256": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
+    "sha256": "dcdbf88a4f424dd4c6602b79a10ec75a014c22b6d68311be42e57246fd4f924f"
   },
   "catalog": {
     "path": "data/current/entities.json",

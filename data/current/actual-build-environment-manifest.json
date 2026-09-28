@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
-  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.",
+  "environment_fingerprint_sha256": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
+  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation for the deterministic candidate phase, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment or network-policy drift fails closed.",
   "environment": {
     "runner": {
       "label": "ubuntu-24.04",
@@ -26,7 +26,7 @@
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "002815ddea515613ca119bda189ad36cc0e3bcdfa5b9469ffc085c9b36d71147"
+        "sha256": "a17c49e4501e7398839a642f9b3020a5f47d3d23f484b7687f5eea440e3e70a9"
       },
       "package_lock": {
         "path": "package-lock.json",
@@ -46,8 +46,17 @@
       "actions/checkout": "fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
       "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
     },
+    "network_policy": {
+      "enforcement": "docker-network-namespace",
+      "deterministic_network": "none",
+      "privilege_drop": "ALL",
+      "no_new_privileges": true,
+      "docker_socket_mounted": false,
+      "proof_script": "scripts/process/prove-actual-network-denial.mjs",
+      "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
+    },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "4dba805bcd7a450cfda27d4e69ad842f1ccc6b164bd040645b50d2bc6f38c1c9",
+      "scripts/lib/actual-build-environment.mjs": "1dff902d99730aa82a4ba609f97d564b3b25296703cd161b7c7e614f4b98077a",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "58f12a179ba3ed0a4f2cf7dd13d3fa38b88cf68d62c02dfa51ff866c442c23d8",
       "scripts/process/audit-actual-build-environment-gate.mjs": "0de99fab870606f5e1489919ac2093181666a729b3b228a281fab70c402ff1dc",
@@ -59,23 +68,31 @@
       "scripts/process/audit-actual-runtime-image.mjs": "7b49ff88bd07bf03fe31f21a078e565ad08ea016a397ed624e5484aa5221bd8e",
       "scripts/lib/actual-review-evidence-bundle.mjs": "30cbba94bf216003e9e07ac8df591b8e2b7ba95e68a4ac5ebb7cfb73fee33123",
       "scripts/process/build-actual-review-evidence-bundle.mjs": "791145050de31c8e613f432a85db11cd15723d3573a32622871f48dcb6d0fac6",
-      "scripts/process/audit-actual-review-evidence-bundle-gate.mjs": "925e30d7b8e950a6f269d02008020f5cca383812b0f51ad6c2a11e68e6b1cfac"
+      "scripts/process/audit-actual-review-evidence-bundle-gate.mjs": "925e30d7b8e950a6f269d02008020f5cca383812b0f51ad6c2a11e68e6b1cfac",
+      "scripts/process/prove-actual-network-denial.mjs": "60e1845aa5a0caf0f9cd065c737f6d0718018fef088d93093e0b1a8977ae74ff",
+      "scripts/process/run-actual-deterministic-candidate.sh": "20d9b26931b77f09041cc947db1a95b1877a8abcf8181e151a7151701695f93b"
     },
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "38c5cd546614c2b2eea2f2c4a0d41b3d7081203ba611cdc7901f3104631fe691",
+        "sha256": "cfba7a522bb5f7b01467e79b5298726383017c6a924c367863a21986543b1064",
         "runs_on": [
           "ubuntu-24.04"
         ],
         "node_versions": [],
-        "container_images": [
-          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
-        ],
+        "container_images": [],
         "actions": [
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
           "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
-        ]
+        ],
+        "runtime_env_refs": [
+          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+        ],
+        "docker_network_none_count": 3,
+        "docker_network_bridge_count": 1,
+        "docker_socket_mounted": false,
+        "cap_drop_all_count": 3,
+        "no_new_privileges_count": 3
       },
       "topology": {
         "path": ".github/workflows/actual-topology-audit.yml",
@@ -90,11 +107,17 @@
         "actions": [
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
           "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
-        ]
+        ],
+        "runtime_env_refs": [],
+        "docker_network_none_count": 0,
+        "docker_network_bridge_count": 0,
+        "docker_socket_mounted": false,
+        "cap_drop_all_count": 0,
+        "no_new_privileges_count": 0
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "df4ecda473f2f356c6dbaebef66349ea6e3f5f921833944a162036f346327862",
+        "sha256": "afc819ea54df316c4bf3fdf2d6366e344a9e67ed4bfa57c553bffeada5fa26c4",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -104,11 +127,17 @@
         ],
         "actions": [
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
-        ]
+        ],
+        "runtime_env_refs": [],
+        "docker_network_none_count": 0,
+        "docker_network_bridge_count": 0,
+        "docker_socket_mounted": false,
+        "cap_drop_all_count": 0,
+        "no_new_privileges_count": 0
       },
       "verify": {
         "path": ".github/workflows/verify-persisted-actual-release.yml",
-        "sha256": "ff171004590d2339e2205b26192b89ff350274eff86ea7e68b36f45abf88b27f",
+        "sha256": "c64e326f14dfd8dd1d6f43942bcbe6e2751f7147819cda943ae9e754eea5f06a",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -118,7 +147,13 @@
         ],
         "actions": [
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
-        ]
+        ],
+        "runtime_env_refs": [],
+        "docker_network_none_count": 0,
+        "docker_network_bridge_count": 0,
+        "docker_socket_mounted": false,
+        "cap_drop_all_count": 0,
+        "no_new_privileges_count": 0
       }
     }
   }

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_NETWORK_DENIAL",
+  "status": "PASS",
+  "enforcement": "docker --network none",
+  "privilege_policy": "--cap-drop ALL + no-new-privileges",
+  "docker_socket_mounted": false,
+  "checks": {
+    "explicit_network_mode": true,
+    "sysfs_only_loopback": true,
+    "node_only_loopback": true,
+    "no_non_loopback_routes": true,
+    "external_ipv4_tcp_denied": true,
+    "external_ipv6_tcp_denied": true
+  },
+  "policy": "The deterministic ACTUAL phase must execute in a Docker network namespace with only loopback, no non-loopback route and no successful external IPv4 or IPv6 TCP connection. The proof is process-agnostic: every child process shares the same network namespace."
+}
