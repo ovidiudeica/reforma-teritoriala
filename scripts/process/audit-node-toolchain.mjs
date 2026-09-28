@@ -18,7 +18,8 @@ check('lockfile_v3',lock.lockfileVersion===3,{actual:lock.lockfileVersion??null}
 
 const packageDeps=packageJson.dependencies??{};
 const lockRootDeps=lock.packages?.['']?.dependencies??{};
-check('lockfile_root_dependencies_match_package_json',JSON.stringify(lockRootDeps)===JSON.stringify(packageDeps),{package_json:packageDeps,lockfile:lockRootDeps});
+const sorted=value=>Object.fromEntries(Object.entries(value).sort(([a],[b])=>a.localeCompare(b)));
+check('lockfile_root_dependencies_match_package_json',JSON.stringify(sorted(lockRootDeps))===JSON.stringify(sorted(packageDeps)),{package_json:packageDeps,lockfile:lockRootDeps});
 
 const nonExact=Object.entries(packageDeps).filter(([,spec])=>!/^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$/.test(spec));
 check('direct_dependencies_are_exact',nonExact.length===0,{non_exact:nonExact});
