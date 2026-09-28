@@ -1,0 +1,102 @@
+name: Bootstrap ACTUAL review evidence binding
+
+on:
+  push:
+    branches:
+      - actual/freeze-review-evidence
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  bootstrap:
+    if: ${{ !contains(github.event.head_commit.message, '[bootstrap-review-evidence]') }}
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check out implementation branch
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: actual/freeze-review-evidence
+          fetch-depth: 0
+
+      - name: Trust mounted GitHub workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Fetch immutable main base
+        run: git fetch origin main
+
+      - name: Install dependencies from vendored offline bundle
+        run: npm run install:actual-offline-deps
+
+      - name: Rebuild deterministic provenance manifests
+        run: |
+          npm run build:actual-runtime-image-manifest
+          npm run build:actual-source-bundle
+          npm run audit:actual-source-bundle
+          npm run build:actual-review-evidence-bundle
+          npm run audit:actual-review-evidence-bundle
+          npm run build:actual-build-environment
+          npm run audit:actual-build-environment
+          npm run audit:actual-runtime-image
+          npm run audit:node-toolchain
+
+      - name: Rebind ACTUAL release manifest
+        env:
+          ACTUAL_BASE_REF: origin/main
+        run: |
+          npm run build:actual-release-manifest
+          npm run audit:actual-release-gate
+
+      - name: Rewrite persisted provenance marker
+        run: |
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {readFile,writeFile} from 'node:fs/promises';
+          const oldMarker=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+          const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+          const manifest=JSON.parse(manifestBytes);
+          const manifestSha=createHash('sha256').update(manifestBytes).digest('hex');
+          if(oldMarker.snapshot_id!==manifest.snapshot_id||oldMarker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256){
+            throw new Error('Bootstrap attempted to change ACTUAL semantic identity.');
+          }
+          const next={
+            schema_version:1,
+            snapshot_id:manifest.snapshot_id,
+            release_fingerprint_sha256:manifest.release_fingerprint_sha256,
+            manifest_sha256:manifestSha,
+            source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
+            review_evidence_bundle_fingerprint_sha256:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null,
+            build_environment_fingerprint_sha256:manifest.build_environment?.environment_fingerprint_sha256??null,
+            validated_release_gate_status:'PASS',
+            provenance_migration:{
+              previous_manifest_sha256:oldMarker.manifest_sha256??null,
+              reason:'freeze-review-evidence'
+            },
+            policy:'Marker for the exact ACTUAL snapshot bytes, exact source-bundle provenance, frozen review-evidence provenance and exact execution-environment provenance. It is not part of the semantic release fingerprint.'
+          };
+          await writeFile('data/current/actual-release-persisted.json',JSON.stringify(next,null,2)+'\n');
+          NODE
+
+      - name: Commit provenance migration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/current/actual-runtime-image.json \
+            data/current/actual-source-bundle-manifest.json \
+            data/current/actual-source-bundle-gate.json \
+            data/current/actual-review-evidence-bundle.json \
+            data/current/actual-review-evidence-bundle-gate.json \
+            data/current/actual-build-environment-manifest.json \
+            data/current/actual-build-environment-gate.json \
+            data/current/actual-release-manifest.json \
+            data/current/actual-release-gate.json \
+            data/current/actual-release-persisted.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Bind frozen ACTUAL review evidence [bootstrap-review-evidence]"
+          git push origin HEAD:actual/freeze-review-evidence
