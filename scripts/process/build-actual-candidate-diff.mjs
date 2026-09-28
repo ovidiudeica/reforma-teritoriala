@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFile,writeFile} from 'node:fs/promises';
 import {actualSemanticFingerprint,semanticCatalogEntities} from '../lib/actual-semantic-fingerprint.mjs';
-import {classifyCandidateDisposition} from '../lib/actual-candidate-lifecycle.mjs';
+import {classifyCandidateDisposition,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
 
 const BASE_REF=process.env.ACTUAL_BASE_REF;
 if(!BASE_REF)throw new Error('ACTUAL_BASE_REF is required and must identify the persisted release commit/ref.');
@@ -42,6 +42,7 @@ const baselineInventory=gitJson(INVENTORY);
 const baselineReview=gitJson(REVIEW);
 const baselineSettlementPolicy=gitJson(SETTLEMENT_POLICY);
 const baselineManifestSha=sha256(baselineManifestBytes);
+const exactBaseManifestBytesReused=manifestBytes.equals(baselineManifestBytes);
 const failures=[];
 const requireCheck=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
 requireCheck(baselineMarker.schema_version===1,'baseline_marker_schema',{actual:baselineMarker.schema_version});
@@ -72,7 +73,23 @@ const candidateSemantic=actualSemanticFingerprint({
  mdIndividualReview:candidateReview,
  settlementPolicy:candidateSettlementPolicy
 });
-requireCheck(manifest.content_fingerprint_sha256===candidateSemantic.sha256,'candidate_semantic_fingerprint_mismatch',{manifest:manifest.content_fingerprint_sha256??null,actual:candidateSemantic.sha256});
+const semanticManifestBinding=validateCandidateSemanticManifestBinding({
+ manifestContentFingerprint:manifest.content_fingerprint_sha256,
+ candidateContentFingerprint:candidateSemantic.sha256,
+ baselineContentFingerprint:baselineSemantic.sha256,
+ exactBaseManifestBytesReused
+});
+requireCheck(
+ semanticManifestBinding.status==='PASS',
+ 'candidate_semantic_fingerprint_mismatch',
+ {
+  manifest:manifest.content_fingerprint_sha256??null,
+  actual:candidateSemantic.sha256,
+  baseline:baselineSemantic.sha256,
+  exact_base_manifest_bytes_reused:exactBaseManifestBytesReused,
+  binding:semanticManifestBinding.binding
+ }
+);
 
 
 const entityList=doc=>Array.isArray(doc.entities)?doc.entities:[];
@@ -167,7 +184,9 @@ const report={
   release_fingerprint_sha256:manifest.release_fingerprint_sha256,
   manifest_sha256:sha256(manifestBytes),
   release_gate_status:gate.status,
-  content_fingerprint_sha256:candidateSemantic.sha256
+  content_fingerprint_sha256:candidateSemantic.sha256,
+  semantic_manifest_binding:semanticManifestBinding.binding,
+  exact_base_manifest_bytes_reused:exactBaseManifestBytesReused
  },
  summary:{
   entity_count_before:beforeEntities.length,
@@ -192,7 +211,7 @@ const report={
  official_registries:registries,
  component_hash_changes:componentChanges,
  failures,
- policy:'Candidate disposition is derived from canonical administrative content. NO_CHANGE retains the base release identity and is terminal; CHANGE requires explicit review and promotion. Exact component-byte drift is reported separately and remains release-gated.'
+ policy:'Candidate disposition is derived from canonical administrative content. A new manifest must bind the computed semantic fingerprint explicitly; an exact byte-for-byte reuse of the persisted base manifest may use the computed baseline semantic fingerprint as the compatibility binding. NO_CHANGE retains the base release identity and is terminal; CHANGE requires explicit review and promotion. Exact component-byte drift is reported separately and remains release-gated.'
 };
 await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
 const diffBytes=await readFile(OUTPUT);
