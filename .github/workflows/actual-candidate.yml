@@ -137,6 +137,12 @@ jobs:
           OVERPASS_RETRY_BACKOFF_MS: '5000'
         run: npm run import:osm
 
+      - name: Build deterministic ACTUAL source bundle
+        run: npm run build:actual-source-bundle
+
+      - name: Gate exact ACTUAL source bundle
+        run: npm run audit:actual-source-bundle
+
       - name: Build deterministic OSM ACTUAL master from local snapshot
         run: npm run build:osm-actual
 
@@ -280,6 +286,8 @@ jobs:
           path: |
             data/current/actual-release-candidate.json
             data/current/actual-candidate-diff.json
+            data/current/actual-source-bundle-manifest.json
+            data/current/actual-source-bundle-gate.json
             data/current/actual-release-manifest.json
             data/current/actual-release-gate.json
             data/current/actual-topology-audit.json
