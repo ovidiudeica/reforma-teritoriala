@@ -28,9 +28,9 @@ A successful promotion run does **not** push the candidate directly to `main`. I
 
 ## Direct refreshes
 
-`Import OSM administrative data` is intentionally deprecated. It cannot replace the persisted release. The supported release path is:
+Direct source refreshes cannot replace the persisted release. The OSM, SIRUTA and CUATM refresh workflows are source triggers only and all route through the same candidate lifecycle:
 
-`candidate build -> review diff -> explicit promotion -> protected PR -> main`.
+`source refresh -> candidate build -> review diff -> explicit promotion -> protected PR -> main`.
 
 
 ## Stable release identity and NO_CHANGE
@@ -90,3 +90,20 @@ The candidate ordering is:
 `optional official-source refreshes -> regenerate raw OSM catalog -> RO reconciliation -> MD CUATM reconciliation -> jurisdiction gates -> ACTUAL semantic diff`.
 
 An unchanged CUATM registry terminates as `NO_CHANGE`. A real official-registry change becomes a `CHANGE` candidate and can reach `main` only through explicit promotion and the protected PR path.
+
+
+## OpenStreetMap source refresh
+
+OSM network access is separated from ACTUAL construction.
+
+`scripts/import/import-osm.mjs` is the only networked OSM source step. It queries bounded/fail-closed Overpass endpoints, validates the returned element population and required country/administrative relations, canonicalizes the raw element set, computes a semantic SHA256 per jurisdiction, writes compressed raw payloads under `data/sources/osm-runtime/`, and updates the small tracked provenance manifest `data/sources/osm-current.json` only when canonical OSM source content changes.
+
+`scripts/process/build-osm-actual.mjs` is deterministic and network-free. It validates the manifest/hash and reads only the materialized compressed source payloads before converting them to GeoJSON, assigning geometric parents, applying the existing OSM semantic classification rules and producing the raw ACTUAL catalog/master geometry. It contains no `fetch`, Overpass endpoint or runtime-clock dependency; the materialized source timestamp is propagated into generated provenance fields.
+
+The manual `Refresh OSM administrative source snapshot` workflow is a source trigger only. It calls the reusable ACTUAL candidate workflow with `source_trigger='osm-refresh'`; it cannot build, reconcile, commit or publish a release directly.
+
+The candidate ordering is:
+
+`optional SIRUTA/CUATM refreshes -> OSM raw source refresh -> deterministic OSM build -> RO/MD reconciliation -> jurisdiction gates -> ACTUAL semantic diff`.
+
+Compressed raw Overpass payloads are included in the candidate review artifact so the exact network input can be inspected/replayed without permanently bloating Git history. Only the compact OSM source provenance manifest is eligible for candidate commits. An unchanged canonical OSM source is reported as `UNCHANGED`; a changed source still becomes a release `CHANGE` only if the downstream ACTUAL semantic diff is substantive.

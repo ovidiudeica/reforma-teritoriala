@@ -10,6 +10,8 @@ on:
       - 'scripts/process/audit-actual-topology.mjs'
       - 'scripts/process/audit-actual-release-gate.mjs'
       - 'scripts/import/import-osm.mjs'
+      - 'scripts/process/build-osm-actual.mjs'
+      - 'data/sources/osm-current.json'
       - 'scripts/test/**'
       - 'package.json'
       - 'package-lock.json'
@@ -47,8 +49,10 @@ jobs:
           ACTUAL_RELEASE_GATE_READ_ONLY: '1'
         run: npm run audit:actual-release-gate
 
-      - name: Check OSM importer syntax
-        run: node --check scripts/import/import-osm.mjs
+      - name: Check separated OSM source/build syntax
+        run: |
+          node --check scripts/import/import-osm.mjs
+          node --check scripts/process/build-osm-actual.mjs
 
       - name: Audit committed ACTUAL topology
         run: npm run audit:actual-topology

@@ -27,9 +27,10 @@ test('MD CUATM refresh is routed exclusively through ACTUAL candidate lifecycle'
  assert.match(candidate,/if:\s*inputs\.refresh_md_cuatm == true/);
  assert.match(candidate,/npm run import:md-cuatm/);
  const refreshIndex=candidate.indexOf('npm run import:md-cuatm');
- const osmIndex=candidate.indexOf('npm run import:osm');
+ const osmRefreshIndex=candidate.indexOf('npm run import:osm');
+ const osmBuildIndex=candidate.indexOf('npm run build:osm-actual');
  const reconcileIndex=candidate.indexOf('npm run reconcile:cuatm');
- assert.ok(refreshIndex>=0&&osmIndex>refreshIndex&&reconcileIndex>osmIndex,'CUATM refresh must precede OSM regeneration and deterministic MD reconciliation');
+ assert.ok(refreshIndex>=0&&osmRefreshIndex>refreshIndex&&osmBuildIndex>osmRefreshIndex&&reconcileIndex>osmBuildIndex,'CUATM refresh must precede OSM source refresh, deterministic OSM build and deterministic MD reconciliation');
 });
 
 test('MD CUATM reconciliation is deterministic on the materialized snapshot',async()=>{
