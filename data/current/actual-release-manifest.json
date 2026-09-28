@@ -1,10 +1,22 @@
 {
-  "schema_version": 2,
+  "schema_version": 6,
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "generated_at": "2026-09-27T20:37:28.323Z",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "policy": "Immutable semantic ACTUAL identity with independent exact bindings for release bytes, source provenance and GitHub Actions execution-environment provenance.",
+  "content_fingerprint_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+  "component_byte_fingerprint_sha256": "6150b5b6dfe7d42cfc66e7332b08ed8617d306fee49df48626fd1d460deaace0",
+  "content_identity": {
+    "algorithm": "actual-semantic-v1",
+    "sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d",
+    "release_identity_basis": "base_release_compatibility_reuse",
+    "reused_base_release": true,
+    "base_ref": "origin/main",
+    "base_snapshot_id": "actual-5383ff3db7cf3f67",
+    "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
+    "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
+  },
+  "policy": "Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle and build-environment bindings remain mandatory integrity constraints.",
   "jurisdictions": [
     "RO",
     "MD"
@@ -18,6 +30,15 @@
     "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
     "sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6"
   },
+  "review_evidence_bundle": {
+    "path": "data/current/actual-review-evidence-bundle.json",
+    "schema_version": 1,
+    "mode": "ACTUAL_REVIEW_EVIDENCE_BUNDLE",
+    "evidence_watermark": "2026-09-27T11:27:53.834Z",
+    "bundle_fingerprint_algorithm": "actual-review-evidence-bundle-v1",
+    "bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+    "sha256": "d9f6cb45d861c48936d7ac6ca49ded1be13c81ea6d52e9bf876d76dbf1b57f69"
+  },
   "build_environment": {
     "path": "data/current/actual-build-environment-manifest.json",
     "schema_version": 1,
@@ -25,8 +46,8 @@
     "runner_label": "ubuntu-24.04",
     "runner_image_version": "20260920.314.1",
     "environment_fingerprint_algorithm": "actual-build-environment-v1",
-    "environment_fingerprint_sha256": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed",
-    "sha256": "639f1cfd8ad9ce1ccd005226894e7a891ad8698ec8a098ee8075651ee14626e2"
+    "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
+    "sha256": "43825378904ca3384816ceff09fbb4ff4871f1f8723218b0326e7b2536ace96a"
   },
   "catalog": {
     "path": "data/current/entities.json",
@@ -186,7 +207,7 @@
   "official_sources": {
     "RO": {
       "registry": "SIRUTA",
-      "authority": "Institutul Na╚øional de Statistic─â",
+      "authority": "Institutul Național de Statistică",
       "path": "data/sources/ro-siruta-current.json",
       "reference_year": 2026,
       "fetched_at": "2026-09-26T11:58:48.000Z",
@@ -197,7 +218,7 @@
     },
     "MD": {
       "registry": "CUATM",
-      "authority": "Biroul Na╚øional de Statistic─â al Republicii Moldova",
+      "authority": "Biroul Național de Statistică al Republicii Moldova",
       "path": "data/sources/cuatm-current.json",
       "source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
       "fetched_at": "2026-09-27T20:37:24.316Z",

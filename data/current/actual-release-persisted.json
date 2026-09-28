@@ -2,12 +2,14 @@
   "schema_version": 1,
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "manifest_sha256": "eb0016d1f5b74de01f9cd45f31071b8a03180e4f41a313d535bfb6561c91dc6e",
-  "validated_release_gate_status": "PASS",
-  "validated_from_run_id": "36347929394",
-  "validated_from_run_attempt": "2",
-  "source_head_sha": "ca40295a2288e0fd5f4923e7a32ee62eace9b8ae",
-  "policy": "Marker for the exact ACTUAL snapshot bytes, exact source-bundle provenance and exact execution-environment provenance. It is not part of the semantic release fingerprint.",
+  "manifest_sha256": "a4864098f2741595679a7185e24fc5d4250ffe02f539468f938d5388c3f0fb18",
   "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
-  "build_environment_fingerprint_sha256": "0e432a1ddaa96585dabbd6e3ad084ba1ce07c0be634cd38700747427890de3ed"
+  "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
+  "build_environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
+  "validated_release_gate_status": "PASS",
+  "provenance_migration": {
+    "previous_manifest_sha256": "eb0016d1f5b74de01f9cd45f31071b8a03180e4f41a313d535bfb6561c91dc6e",
+    "reason": "freeze-review-evidence"
+  },
+  "policy": "Marker for the exact ACTUAL snapshot bytes, exact source-bundle provenance, frozen review-evidence provenance and exact execution-environment provenance. It is not part of the semantic release fingerprint."
 }
