@@ -24,3 +24,11 @@ test('network denial proof is part of the candidate review artifact',async()=>{
  const workflow=await readFile('.github/workflows/actual-candidate.yml','utf8');
  assert.match(workflow,/data\/current\/actual-network-denial-audit\.json/);
 });
+
+test('persisted-base verification inside network-none uses a dedicated script, not a nested heredoc',async()=>{
+ const workflow=await readFile('.github/workflows/actual-candidate.yml','utf8');
+ const verifier=await readFile('scripts/process/verify-actual-persisted-base.mjs','utf8');
+ assert.match(workflow,/node scripts\/process\/verify-actual-persisted-base\.mjs/);
+ assert.doesNotMatch(workflow,/node --input-type=module <<["']?NODE/);
+ assert.match(verifier,/network_denial_marker_matches_manifest/);
+});

@@ -44,6 +44,7 @@ export const BUILD_SUPPORT_FILES=[
  'scripts/process/build-actual-review-evidence-bundle.mjs',
  'scripts/process/audit-actual-review-evidence-bundle-gate.mjs',
  'scripts/process/prove-actual-network-denial.mjs',
+ 'scripts/process/verify-actual-persisted-base.mjs',
  'scripts/process/run-actual-deterministic-candidate.sh'
 ];
 export const sha256=value=>createHash('sha256').update(value).digest('hex');

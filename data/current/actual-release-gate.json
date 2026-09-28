@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-28T22:13:01.964Z",
+  "generated_at": "2026-09-28T22:21:52.973Z",
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "5287a7b1b9c339c26313fdc588072f6eea10bb18c25c41081b87800fa4b0f796",
+  "manifest_sha256": "d92b443aaacb3b1964de29cf102f3f764d41534db29cf1a9b94227b4b12d6214",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -245,8 +245,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
-          "sha256": "dcdbf88a4f424dd4c6602b79a10ec75a014c22b6d68311be42e57246fd4f924f"
+          "environment_fingerprint_sha256": "720146df8ff83d172bcac58107417e5a61ea0dd00505e3495dd5c2564bac4baf",
+          "sha256": "a5690dda76ff6392dd337f7202120ee5113c1e1386432aaa00079452be51a3b8"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -255,8 +255,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
-          "sha256": "dcdbf88a4f424dd4c6602b79a10ec75a014c22b6d68311be42e57246fd4f924f"
+          "environment_fingerprint_sha256": "720146df8ff83d172bcac58107417e5a61ea0dd00505e3495dd5c2564bac4baf",
+          "sha256": "a5690dda76ff6392dd337f7202120ee5113c1e1386432aaa00079452be51a3b8"
         }
       }
     },
