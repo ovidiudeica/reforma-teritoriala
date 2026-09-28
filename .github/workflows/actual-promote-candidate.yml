@@ -94,7 +94,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/current/actual-release-persisted.json data/current/actual-candidate-promotion-audit.json
-          git commit -m "Prepare ACTUAL promotion ${{ inputs.expected_candidate_snapshot }}"
+          COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion ${{ inputs.expected_candidate_snapshot }}"
           git push origin "HEAD:$CANDIDATE_BRANCH"
 
       - name: Open promotion pull request
