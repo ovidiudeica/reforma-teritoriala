@@ -8,6 +8,7 @@ const wrapperPath='.github/workflows/import-osm.yml';
 const candidatePath='.github/workflows/actual-candidate.yml';
 const importerPath='scripts/import/import-osm.mjs';
 const builderPath='scripts/process/build-osm-actual.mjs';
+const deterministicRunnerPath='scripts/process/run-actual-deterministic-candidate.sh';
 const manifestPath='data/sources/osm-current.json';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 
@@ -27,14 +28,18 @@ test('OSM source refresh is explicit and routed exclusively through ACTUAL candi
 
  assert.match(candidate,/refresh_osm:/);
  assert.match(candidate,/description: 'Refresh raw OSM source through Overpass before deterministic build'/);
- assert.match(candidate,/if:\s*inputs\.refresh_osm == true/);
+ assert.match(candidate,/if:[^\n]*inputs\.refresh_osm == true/);
  assert.match(candidate,/echo "- Refresh OSM raw source: \$\{\{ inputs\.refresh_osm \}\}"/);
+ assert.match(candidate,/--network bridge/);
+ assert.match(candidate,/--network none/);
  const refreshIndex=candidate.indexOf('npm run import:osm');
- const buildIndex=candidate.indexOf('npm run build:osm-actual');
- const roIndex=candidate.indexOf('npm run audit:ro-official-reconciliation');
- const mdIndex=candidate.indexOf('npm run reconcile:cuatm');
- assert.ok(refreshIndex>=0&&buildIndex>refreshIndex,'optional OSM source refresh must precede deterministic OSM build');
- assert.ok(roIndex>buildIndex&&mdIndex>buildIndex,'all jurisdiction reconciliation must consume the deterministic OSM build');
+ const deterministicIndex=candidate.indexOf('scripts/process/run-actual-deterministic-candidate.sh');
+ assert.ok(refreshIndex>=0&&deterministicIndex>refreshIndex,'optional OSM source refresh must precede the network-denied deterministic phase');
+ const runner=await readFile(deterministicRunnerPath,'utf8');
+ const buildIndex=runner.indexOf('npm run build:osm-actual');
+ const roIndex=runner.indexOf('npm run audit:ro-official-reconciliation');
+ const mdIndex=runner.indexOf('npm run reconcile:cuatm');
+ assert.ok(buildIndex>=0&&roIndex>buildIndex&&mdIndex>buildIndex,'all jurisdiction reconciliation must consume the deterministic OSM build');
 });
 
 test('candidate defaults to offline OSM rebuild and only the OSM wrapper enables network refresh',async()=>{
@@ -107,10 +112,12 @@ test('committed OSM manifest points to exact durable content-addressed bytes',as
 
 test('candidate commits durable OSM snapshots but network review artifacts never become a separate runtime source',async()=>{
  const candidate=await readFile(candidatePath,'utf8');
- const commitLine=candidate.split('\n').find(line=>line.includes('git add data/current/'))||'';
- assert.match(commitLine,/data\/sources\/osm-current\.json/);
- assert.match(commitLine,/data\/sources\/osm-snapshots\//);
- assert.doesNotMatch(commitLine,/osm-runtime/);
+ const commitStart=candidate.indexOf('git add data/current/');
+ const commitEnd=candidate.indexOf('git diff --cached',commitStart);
+ const commitBlock=commitStart>=0?candidate.slice(commitStart,commitEnd):'';
+ assert.match(commitBlock,/data\/sources\/osm-current\.json/);
+ assert.match(commitBlock,/data\/sources\/osm-snapshots\//);
+ assert.doesNotMatch(commitBlock,/osm-runtime/);
  assert.match(candidate,/data\/sources\/osm-snapshots\/\*\.json\.gz/);
  assert.doesNotMatch(candidate,/data\/sources\/osm-runtime\/\*\.json\.gz/);
 });
