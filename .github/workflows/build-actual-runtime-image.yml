@@ -69,13 +69,15 @@ jobs:
           for TAG in "$TAG_A" "$TAG_B"; do
             docker buildx build \
               --platform linux/amd64 \
+              --no-cache \
               --provenance=false \
               --sbom=false \
+              --build-arg "SOURCE_DATE_EPOCH=0" \
               --build-arg "BASE_IMAGE=$BASE_TAG@$BASE_DIGEST" \
               --build-arg "ACTUAL_RUNTIME_BASE_DIGEST=$BASE_DIGEST" \
               --build-arg "ACTUAL_RUNTIME_DOCKERFILE_SHA256=$DOCKERFILE_SHA256" \
               --tag "$IMAGE:$TAG" \
-              --push \
+              --output "type=image,push=true,rewrite-timestamp=true" \
               -f container/actual-runtime/Dockerfile .
           done
           DIGEST_A="$(docker buildx imagetools inspect "$IMAGE:$TAG_A" | awk '/^Digest:/ {print $2; exit}')"
