@@ -58,19 +58,23 @@ jobs:
           const markerPath='data/current/actual-release-persisted.json';
           const manifestPath='data/current/actual-release-manifest.json';
           const sourceBundlePath='data/current/actual-source-bundle-manifest.json';
+          const reviewEvidencePath='data/current/actual-review-evidence-bundle.json';
           const buildEnvironmentPath='data/current/actual-build-environment-manifest.json';
-          const [markerText,manifestBytes,sourceBundleBytes,buildEnvironmentBytes]=await Promise.all([
+          const [markerText,manifestBytes,sourceBundleBytes,reviewEvidenceBytes,buildEnvironmentBytes]=await Promise.all([
             readFile(markerPath,'utf8'),
             readFile(manifestPath),
             readFile(sourceBundlePath),
+            readFile(reviewEvidencePath),
             readFile(buildEnvironmentPath)
           ]);
           const marker=JSON.parse(markerText);
           const manifest=JSON.parse(manifestBytes.toString('utf8'));
           const sourceBundle=JSON.parse(sourceBundleBytes.toString('utf8'));
+          const reviewEvidence=JSON.parse(reviewEvidenceBytes.toString('utf8'));
           const buildEnvironment=JSON.parse(buildEnvironmentBytes.toString('utf8'));
           const manifestSha=createHash('sha256').update(manifestBytes).digest('hex');
           const sourceBundleSha=createHash('sha256').update(sourceBundleBytes).digest('hex');
+          const reviewEvidenceSha=createHash('sha256').update(reviewEvidenceBytes).digest('hex');
           const buildEnvironmentSha=createHash('sha256').update(buildEnvironmentBytes).digest('hex');
 
           const failures=[];
@@ -82,6 +86,9 @@ jobs:
           if(marker.source_bundle_fingerprint_sha256!==manifest.source_bundle?.bundle_fingerprint_sha256)failures.push({issue:'source_bundle_fingerprint_mismatch',marker:marker.source_bundle_fingerprint_sha256,manifest:manifest.source_bundle?.bundle_fingerprint_sha256??null});
           if(manifest.source_bundle?.sha256!==sourceBundleSha)failures.push({issue:'source_bundle_sha256_mismatch',manifest:manifest.source_bundle?.sha256??null,actual:sourceBundleSha});
           if(manifest.source_bundle?.bundle_fingerprint_sha256!==sourceBundle.bundle_fingerprint_sha256)failures.push({issue:'source_bundle_manifest_binding_mismatch'});
+          if(marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256)failures.push({issue:'review_evidence_bundle_fingerprint_mismatch',marker:marker.review_evidence_bundle_fingerprint_sha256,manifest:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null});
+          if(manifest.review_evidence_bundle?.sha256!==reviewEvidenceSha)failures.push({issue:'review_evidence_bundle_sha256_mismatch',manifest:manifest.review_evidence_bundle?.sha256??null,actual:reviewEvidenceSha});
+          if(manifest.review_evidence_bundle?.bundle_fingerprint_sha256!==reviewEvidence.bundle_fingerprint_sha256)failures.push({issue:'review_evidence_bundle_manifest_binding_mismatch'});
           if(marker.build_environment_fingerprint_sha256!==manifest.build_environment?.environment_fingerprint_sha256)failures.push({issue:'build_environment_fingerprint_mismatch',marker:marker.build_environment_fingerprint_sha256,manifest:manifest.build_environment?.environment_fingerprint_sha256??null});
           if(manifest.build_environment?.sha256!==buildEnvironmentSha)failures.push({issue:'build_environment_sha256_mismatch',manifest:manifest.build_environment?.sha256??null,actual:buildEnvironmentSha});
           if(manifest.build_environment?.environment_fingerprint_sha256!==buildEnvironment.environment_fingerprint_sha256)failures.push({issue:'build_environment_manifest_binding_mismatch'});
@@ -92,6 +99,7 @@ jobs:
             release_fingerprint_sha256:manifest.release_fingerprint_sha256??null,
             manifest_sha256:manifestSha,
             source_bundle_fingerprint_sha256:sourceBundle.bundle_fingerprint_sha256??null,
+            review_evidence_bundle_fingerprint_sha256:reviewEvidence.bundle_fingerprint_sha256??null,
             build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256??null,
             failures
           };
