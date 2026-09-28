@@ -12,6 +12,7 @@ on:
       - 'scripts/import/import-osm.mjs'
       - 'scripts/process/build-osm-actual.mjs'
       - 'data/sources/osm-current.json'
+      - 'data/sources/osm-snapshots/**'
       - 'scripts/test/**'
       - 'package.json'
       - 'package-lock.json'

@@ -18,6 +18,11 @@ on:
         required: false
         type: boolean
         default: false
+      refresh_osm:
+        description: 'Refresh raw OSM source through Overpass before deterministic build'
+        required: false
+        type: boolean
+        default: false
       source_trigger:
         description: 'Audit label for the source that requested this candidate build'
         required: false
@@ -34,6 +39,10 @@ on:
         type: boolean
         default: false
       refresh_md_cuatm:
+        required: false
+        type: boolean
+        default: false
+      refresh_osm:
         required: false
         type: boolean
         default: false
@@ -117,9 +126,10 @@ jobs:
           echo "- Trigger: ${{ inputs.source_trigger }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Refresh OSM raw source: true" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh OSM raw source: ${{ inputs.refresh_osm }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Refresh raw OSM source inside candidate workspace
+        if: inputs.refresh_osm == true
         timeout-minutes: 20
         env:
           OVERPASS_REQUEST_TIMEOUT_MS: '90000'
@@ -241,7 +251,7 @@ jobs:
           git checkout -b "$CANDIDATE_BRANCH"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/ public/data/actual-entities.json public/geo/current/ public/geo/actual/             data/sources/ro-siruta-current.json data/sources/cuatm-current.json data/sources/osm-current.json             data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json             data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json             data/sources/md-balti-city-boundary-changeset-semantics.json
+          git add data/current/ public/data/actual-entities.json public/geo/current/ public/geo/actual/             data/sources/ro-siruta-current.json data/sources/cuatm-current.json data/sources/osm-current.json data/sources/osm-snapshots/             data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json             data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json             data/sources/md-balti-city-boundary-changeset-semantics.json
           git diff --cached --quiet && { echo "Candidate generation produced no committed changes."; exit 1; }
           SNAPSHOT_ID="$(node -p "require('./data/current/actual-release-candidate.json').candidate.snapshot_id")"
           git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
@@ -274,5 +284,5 @@ jobs:
             data/current/ro-release-gate.json
             data/current/md-release-gate.json
             data/sources/osm-current.json
-            data/sources/osm-runtime/*.json.gz
+            data/sources/osm-snapshots/*.json.gz
           if-no-files-found: error

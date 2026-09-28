@@ -14,6 +14,7 @@ test('MD CUATM refresh is routed exclusively through ACTUAL candidate lifecycle'
  ]);
  assert.match(refresh,/uses:\s*\.\/\.github\/workflows\/actual-candidate\.yml/);
  assert.match(refresh,/refresh_md_cuatm:\s*true/);
+ assert.match(refresh,/refresh_osm:\s*false/);
  assert.match(refresh,/source_trigger:\s*'md-cuatm-refresh'/);
  assert.doesNotMatch(refresh,/\bgit\s+push\b/);
  assert.doesNotMatch(refresh,/\bgit\s+commit\b/);
@@ -30,7 +31,7 @@ test('MD CUATM refresh is routed exclusively through ACTUAL candidate lifecycle'
  const osmRefreshIndex=candidate.indexOf('npm run import:osm');
  const osmBuildIndex=candidate.indexOf('npm run build:osm-actual');
  const reconcileIndex=candidate.indexOf('npm run reconcile:cuatm');
- assert.ok(refreshIndex>=0&&osmRefreshIndex>refreshIndex&&osmBuildIndex>osmRefreshIndex&&reconcileIndex>osmBuildIndex,'CUATM refresh must precede OSM source refresh, deterministic OSM build and deterministic MD reconciliation');
+ assert.ok(refreshIndex>=0&&osmRefreshIndex>refreshIndex&&osmBuildIndex>osmRefreshIndex&&reconcileIndex>osmBuildIndex,'CUATM refresh must precede the optional OSM refresh slot, deterministic OSM build and deterministic MD reconciliation');
 });
 
 test('MD CUATM reconciliation is deterministic on the materialized snapshot',async()=>{

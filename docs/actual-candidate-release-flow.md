@@ -4,7 +4,7 @@ The persisted ACTUAL RO+MD release on `main` is immutable between explicit promo
 
 ## Build a candidate
 
-Run **Build ACTUAL candidate snapshot** manually. The workflow starts from the current persisted release on `main`, validates it read-only, regenerates the complete ACTUAL pipeline, runs all jurisdiction and global release gates, and writes the result to a new isolated branch.
+Run **Build ACTUAL candidate snapshot** manually. The workflow starts from the current persisted release on `main`, validates it read-only, rebuilds ACTUAL from the committed source snapshots by default, runs all jurisdiction and global release gates, and writes a substantive result to a new isolated branch. Network source refreshes are explicit inputs rather than implicit build prerequisites.
 
 Each candidate contains:
 
@@ -56,7 +56,7 @@ The scheduled/manual `Refresh official Romania SIRUTA snapshot` workflow is a so
 
 The candidate order is intentional:
 
-`refresh SIRUTA -> regenerate raw OSM catalog -> RO reconciliation -> county bridge/application -> release gates -> semantic diff`.
+`optional SIRUTA refresh -> deterministic OSM build from the committed raw snapshot -> RO reconciliation -> county bridge/application -> release gates -> semantic diff`. The SIRUTA wrapper sets `refresh_osm=false`, so an official-registry refresh does not depend on Overpass.
 
 This ordering prevents a stage-mismatch regression observed in Actions run `36356055091`. The persisted catalog already represents OSM relation `377733` (București) after the RO county bridge as legal SIRUTA county/code `40` and catalog type `county`. The reviewed SIRUTA UAT `179132` resolution correctly describes the earlier raw OSM reconciliation stage, where relation `377733` is `capital_municipality` at admin_level 4. Running the raw reconciliation audit against the already post-bridge persisted catalog therefore produced a false structural failure. The reviewed resolution is not changed; the workflow stage is corrected.
 
@@ -87,23 +87,27 @@ The scheduled/manual `Refresh official Moldova CUATM snapshot` workflow is a sou
 
 The candidate ordering is:
 
-`optional official-source refreshes -> regenerate raw OSM catalog -> RO reconciliation -> MD CUATM reconciliation -> jurisdiction gates -> ACTUAL semantic diff`.
+`optional official-source refreshes -> deterministic OSM build from the committed raw snapshot -> RO reconciliation -> MD CUATM reconciliation -> jurisdiction gates -> ACTUAL semantic diff`. The CUATM wrapper sets `refresh_osm=false`.
 
 An unchanged CUATM registry terminates as `NO_CHANGE`. A real official-registry change becomes a `CHANGE` candidate and can reach `main` only through explicit promotion and the protected PR path.
 
 
 ## OpenStreetMap source refresh
 
-OSM network access is separated from ACTUAL construction.
+OSM network access is separated from ACTUAL construction, and normal candidate builds are network-free with respect to OSM.
 
-`scripts/import/import-osm.mjs` is the only networked OSM source step. It queries bounded/fail-closed Overpass endpoints, validates the returned element population and required country/administrative relations, canonicalizes the raw element set, computes a semantic SHA256 per jurisdiction, writes compressed raw payloads under `data/sources/osm-runtime/`, and updates the small tracked provenance manifest `data/sources/osm-current.json` only when canonical OSM source content changes.
+`scripts/import/import-osm.mjs` is the only networked OSM source step. It queries bounded/fail-closed Overpass endpoints, validates the returned element population and required country/administrative relations, canonicalizes the raw element set and computes a semantic SHA256 per jurisdiction. Raw bytes are stored durably under `data/sources/osm-snapshots/` using a content-addressed filename derived from that semantic SHA256. The manifest also records the SHA256 of the exact gzip blob. If a refresh returns the same canonical OSM content, the already committed gzip bytes are preserved exactly instead of being regenerated.
 
-`scripts/process/build-osm-actual.mjs` is deterministic and network-free. It validates the manifest/hash and reads only the materialized compressed source payloads before converting them to GeoJSON, assigning geometric parents, applying the existing OSM semantic classification rules and producing the raw ACTUAL catalog/master geometry. It contains no `fetch`, Overpass endpoint or runtime-clock dependency; the materialized source timestamp is propagated into generated provenance fields.
+`data/sources/osm-current.json` is schema v2 and points to the exact content-addressed RO and MD snapshots. Both the compressed blob hash and the decompressed semantic hash are verified before build.
 
-The manual `Refresh OSM administrative source snapshot` workflow is a source trigger only. It calls the reusable ACTUAL candidate workflow with `source_trigger='osm-refresh'`; it cannot build, reconcile, commit or publish a release directly.
+`scripts/process/build-osm-actual.mjs` is deterministic and network-free. It reads only the committed content-addressed snapshots, validates both hash layers, converts them to GeoJSON, assigns geometric parents, applies the reviewed OSM semantic classification rules and produces the raw ACTUAL catalog/master geometry. It contains no `fetch`, Overpass endpoint or runtime-clock dependency.
+
+The reusable candidate workflow has an explicit `refresh_osm` boolean input with default `false`. Therefore a normal manual candidate, a SIRUTA refresh and a CUATM refresh all rebuild ACTUAL from the exact committed OSM bytes without contacting Overpass.
+
+The manual `Refresh OSM administrative source snapshot` wrapper is the only workflow that sets `refresh_osm=true`. It routes the network refresh through the same candidate lifecycle; it cannot publish a persisted release directly.
 
 The candidate ordering is:
 
-`optional SIRUTA/CUATM refreshes -> OSM raw source refresh -> deterministic OSM build -> RO/MD reconciliation -> jurisdiction gates -> ACTUAL semantic diff`.
+`optional SIRUTA/CUATM refreshes -> optional OSM network refresh -> deterministic OSM build from durable snapshot -> RO/MD reconciliation -> jurisdiction gates -> ACTUAL semantic diff`.
 
-Compressed raw Overpass payloads are included in the candidate review artifact so the exact network input can be inspected/replayed without permanently bloating Git history. Only the compact OSM source provenance manifest is eligible for candidate commits. An unchanged canonical OSM source is reported as `UNCHANGED`; a changed source still becomes a release `CHANGE` only if the downstream ACTUAL semantic diff is substantive.
+If an OSM refresh is semantically unchanged, the manifest and gzip bytes remain stable and the candidate should terminate as `NO_CHANGE`. A substantive downstream change becomes a normal `CHANGE` candidate and can reach `main` only through explicit promotion and the protected PR path.

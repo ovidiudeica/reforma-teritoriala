@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,rename,writeFile} from 'node:fs/promises';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 
 const MANIFEST='data/sources/osm-current.json';
-const RUNTIME_DIR='data/sources/osm-runtime';
+const SNAPSHOT_DIR='data/sources/osm-snapshots';
 const QUERY_VERSION=1;
+const MANIFEST_SCHEMA_VERSION=2;
 const DEFAULT_ENDPOINTS=[
  'https://overpass-api.de/api/interpreter',
  'https://overpass.kumi.systems/api/interpreter',
@@ -26,6 +27,7 @@ const countries={
 };
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const sha256=value=>createHash('sha256').update(value).digest('hex');
+const snapshotPath=(code,semanticSha)=>`${SNAPSHOT_DIR}/${code.toLowerCase()}-${semanticSha}.json.gz`;
 const canonicalize=value=>{
  if(Array.isArray(value))return value.map(canonicalize);
  if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(k=>[k,canonicalize(value[k])]));
@@ -66,14 +68,17 @@ function validateRaw(raw,code,cfg){
  }
  return {element_count:raw.elements.length,relation_count:relations.length};
 }
+function validateManifestEntry(code,entry){
+ if(!/^[a-f0-9]{64}$/.test(String(entry?.semantic_sha256||'')))throw new Error(`invalid ${code} semantic_sha256`);
+ if(!/^[a-f0-9]{64}$/.test(String(entry?.compressed_sha256||'')))throw new Error(`invalid ${code} compressed_sha256`);
+ const expected=snapshotPath(code,entry.semantic_sha256);
+ if(entry.snapshot_path!==expected)throw new Error(`invalid ${code} snapshot_path`);
+}
 async function readPreviousManifest(){
  try{
   const parsed=JSON.parse(await readFile(MANIFEST,'utf8'));
-  if(parsed.schema_version!==1||parsed.query_version!==QUERY_VERSION||!parsed.countries?.RO||!parsed.countries?.MD)throw new Error('invalid schema');
-  for(const code of Object.keys(countries)){
-   const entry=parsed.countries[code];
-   if(!/^[a-f0-9]{64}$/.test(String(entry.semantic_sha256||'')))throw new Error(`invalid ${code} semantic_sha256`);
-  }
+  if(parsed.schema_version!==MANIFEST_SCHEMA_VERSION||parsed.query_version!==QUERY_VERSION||!parsed.countries?.RO||!parsed.countries?.MD)throw new Error('invalid schema');
+  for(const code of Object.keys(countries))validateManifestEntry(code,parsed.countries[code]);
   return parsed;
  }catch(error){
   if(error?.code==='ENOENT')return null;
@@ -104,9 +109,11 @@ async function fetchCountry(code,cfg){
     const counts=validateRaw(raw,code,cfg);
     const canonical=canonicalRaw(raw);
     const semanticSha=sha256(canonical);
+    const compressed=gzipSync(Buffer.from(canonical),{level:9,mtime:0});
+    const compressedSha=sha256(compressed);
     attempts.push({endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:counts.element_count});
     console.log(`Overpass ${code}: accepted ${counts.element_count} elements from ${endpoint} on attempt ${attempt}/${RETRIES_PER_ENDPOINT}`);
-    return {canonical,semanticSha,counts,endpoint,querySha256:sha256(query),attempts};
+    return {canonical,compressed,semanticSha,compressedSha,counts,endpoint,querySha256:sha256(query),attempts};
    }catch(error){
     const timedOut=controller.signal.aborted;
     const message=timedOut?`request timeout after ${REQUEST_TIMEOUT_MS}ms`:String(error?.message||error);
@@ -126,33 +133,49 @@ async function writeAtomic(path,bytes){
  await writeFile(tmp,bytes);
  await rename(tmp,path);
 }
+async function materializeContentAddressedSnapshot(code,result){
+ const path=snapshotPath(code,result.semanticSha);
+ try{
+  const existing=await readFile(path);
+  const canonical=gunzipSync(existing);
+  if(sha256(canonical)!==result.semanticSha)throw new Error(`OSM ${code} content-addressed snapshot collision at ${path}`);
+  result.compressed=existing;
+  result.compressedSha=sha256(existing);
+  return path;
+ }catch(error){
+  if(error?.code!=='ENOENT')throw error;
+ }
+ await writeAtomic(path,result.compressed);
+ return path;
+}
 async function main(){
  const previous=await readPreviousManifest();
- await mkdir(RUNTIME_DIR,{recursive:true});
+ await mkdir(SNAPSHOT_DIR,{recursive:true});
  const fetchedAt=new Date().toISOString();
  const fresh={};
  for(const [code,cfg] of Object.entries(countries))fresh[code]=await fetchCountry(code,cfg);
- for(const [code,result] of Object.entries(fresh)){
-  const path=`${RUNTIME_DIR}/${code.toLowerCase()}-overpass.json.gz`;
-  await writeAtomic(path,gzipSync(Buffer.from(result.canonical),{level:9,mtime:0}));
- }
- const unchanged=Boolean(previous)&&Object.keys(countries).every(code=>previous.countries?.[code]?.semantic_sha256===fresh[code].semanticSha);
+ for(const [code,result] of Object.entries(fresh))result.snapshotPath=await materializeContentAddressedSnapshot(code,result);
+
+ const unchanged=Boolean(previous)&&Object.keys(countries).every(code=>
+  previous.countries?.[code]?.semantic_sha256===fresh[code].semanticSha
+ );
  const status=unchanged?'UNCHANGED':'UPDATED';
  const manifest=unchanged?previous:{
-  schema_version:1,
+  schema_version:MANIFEST_SCHEMA_VERSION,
   source:'OpenStreetMap',
   transport:'Overpass API',
   query_version:QUERY_VERSION,
   fetched_at:fetchedAt,
-  runtime_directory:RUNTIME_DIR,
+  snapshot_directory:SNAPSHOT_DIR,
   countries:Object.fromEntries(Object.entries(countries).map(([code,cfg])=>[code,{
    name:cfg.name,
    iso:cfg.iso,
    levels:cfg.levels,
    required_levels:cfg.requiredLevels,
    required_relations:cfg.requiredRelations,
-   runtime_path:`${RUNTIME_DIR}/${code.toLowerCase()}-overpass.json.gz`,
+   snapshot_path:fresh[code].snapshotPath,
    semantic_sha256:fresh[code].semanticSha,
+   compressed_sha256:fresh[code].compressedSha,
    query_sha256:fresh[code].querySha256,
    element_count:fresh[code].counts.element_count,
    relation_count:fresh[code].counts.relation_count,
@@ -169,6 +192,8 @@ async function main(){
    element_count:fresh[code].counts.element_count,
    relation_count:fresh[code].counts.relation_count,
    semantic_sha256:fresh[code].semanticSha,
+   compressed_sha256:fresh[code].compressedSha,
+   snapshot_path:fresh[code].snapshotPath,
    endpoint:fresh[code].endpoint
   }]))
  },null,2));

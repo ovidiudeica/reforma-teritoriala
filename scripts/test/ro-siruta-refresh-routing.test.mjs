@@ -12,6 +12,7 @@ test('RO SIRUTA refresh is routed exclusively through ACTUAL candidate lifecycle
  ]);
  assert.match(refresh,/uses:\s*\.\/\.github\/workflows\/actual-candidate\.yml/);
  assert.match(refresh,/refresh_ro_siruta:\s*true/);
+ assert.match(refresh,/refresh_osm:\s*false/);
  assert.match(refresh,/source_trigger:\s*'ro-siruta-refresh'/);
  assert.doesNotMatch(refresh,/\bgit\s+push\b/);
  assert.doesNotMatch(refresh,/\bgit\s+commit\b/);
@@ -29,7 +30,7 @@ test('RO SIRUTA refresh is routed exclusively through ACTUAL candidate lifecycle
  const osmRefreshIndex=candidate.indexOf('npm run import:osm');
  const osmBuildIndex=candidate.indexOf('npm run build:osm-actual');
  const reconcileIndex=candidate.indexOf('npm run audit:ro-official-reconciliation');
- assert.ok(refreshIndex>=0&&osmRefreshIndex>refreshIndex&&osmBuildIndex>osmRefreshIndex&&reconcileIndex>osmBuildIndex,'SIRUTA refresh must precede OSM source refresh, deterministic OSM build and RO reconciliation');
+ assert.ok(refreshIndex>=0&&osmRefreshIndex>refreshIndex&&osmBuildIndex>osmRefreshIndex&&reconcileIndex>osmBuildIndex,'SIRUTA refresh must precede the optional OSM refresh slot, deterministic OSM build and RO reconciliation');
 });
 
 test('reviewed București exceptional-level identity belongs to raw OSM reconciliation stage',async()=>{

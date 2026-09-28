@@ -6,6 +6,7 @@ import osmtogeojson from 'osmtogeojson';
 import { area, intersect, featureCollection, pointOnFeature, booleanPointInPolygon } from '@turf/turf';
 
 const OSM_MANIFEST='data/sources/osm-current.json';
+const OSM_SNAPSHOT_DIR='data/sources/osm-snapshots';
 const CLASSIFIER_VERSION='2.3';
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9]},
@@ -20,14 +21,18 @@ const RO_SEMANTIC_CLASSES=new Set([
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 async function loadOsmSourceManifest(){
  const manifest=JSON.parse(await readFile(OSM_MANIFEST,'utf8'));
- if(manifest.schema_version!==1||!manifest.countries?.RO||!manifest.countries?.MD)throw new Error('Invalid materialized OSM source manifest');
+ if(manifest.schema_version!==2||!manifest.countries?.RO||!manifest.countries?.MD)throw new Error('Invalid materialized OSM source manifest');
  return manifest;
 }
 async function readRawSnapshot(code,entry){
- const expected=`data/sources/osm-runtime/${code.toLowerCase()}-overpass.json.gz`;
- if(entry.runtime_path!==expected)throw new Error(`Unexpected OSM runtime path for ${code}: ${entry.runtime_path}`);
- const canonical=gunzipSync(await readFile(expected));
- if(sha256(canonical)!==entry.semantic_sha256)throw new Error(`OSM ${code} materialized snapshot hash mismatch`);
+ if(!/^[a-f0-9]{64}$/.test(String(entry.semantic_sha256||'')))throw new Error(`OSM ${code} manifest has invalid semantic hash`);
+ if(!/^[a-f0-9]{64}$/.test(String(entry.compressed_sha256||'')))throw new Error(`OSM ${code} manifest has invalid compressed hash`);
+ const expected=`${OSM_SNAPSHOT_DIR}/${code.toLowerCase()}-${entry.semantic_sha256}.json.gz`;
+ if(entry.snapshot_path!==expected)throw new Error(`Unexpected OSM content-addressed snapshot path for ${code}: ${entry.snapshot_path}`);
+ const compressed=await readFile(expected);
+ if(sha256(compressed)!==entry.compressed_sha256)throw new Error(`OSM ${code} compressed snapshot hash mismatch`);
+ const canonical=gunzipSync(compressed);
+ if(sha256(canonical)!==entry.semantic_sha256)throw new Error(`OSM ${code} materialized snapshot semantic hash mismatch`);
  const raw=JSON.parse(canonical.toString('utf8'));
  if(!Array.isArray(raw.elements)||raw.elements.length!==entry.element_count)throw new Error(`OSM ${code} materialized snapshot element count mismatch`);
  const country=raw.elements.find(x=>x.type==='relation'&&x.tags?.['ISO3166-1']===entry.iso&&x.tags?.boundary==='administrative');
@@ -234,7 +239,9 @@ async function main(){
    query_version:osmSource.query_version,
    fetched_at:osmSource.fetched_at,
    countries:Object.fromEntries(Object.entries(osmSource.countries).map(([code,x])=>[code,{
+    snapshot_path:x.snapshot_path,
     semantic_sha256:x.semantic_sha256,
+    compressed_sha256:x.compressed_sha256,
     query_sha256:x.query_sha256,
     element_count:x.element_count,
     relation_count:x.relation_count,
