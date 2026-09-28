@@ -2,6 +2,24 @@ import {createHash} from 'node:crypto';
 
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
+const canonicalizeCandidateIdentity=value=>{
+ if(Array.isArray(value))return value.map(canonicalizeCandidateIdentity);
+ if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonicalizeCandidateIdentity(value[key])]));
+ return value;
+};
+
+export const CANDIDATE_IDENTITY_ALGORITHM='actual-candidate-v1';
+export function candidateIdentityFingerprint({baseRef,baseRelease,candidate,diffReportSha256}){
+ const payload=canonicalizeCandidateIdentity({
+  algorithm:CANDIDATE_IDENTITY_ALGORITHM,
+  base_ref:baseRef,
+  base_release:baseRelease,
+  candidate,
+  diff_report_sha256:diffReportSha256
+ });
+ return {algorithm:CANDIDATE_IDENTITY_ALGORITHM,sha256:sha256(Buffer.from(JSON.stringify(payload),'utf8')),payload};
+}
+
 export function classifyCandidateDisposition({
  baseContentFingerprint,
  candidateContentFingerprint,
@@ -67,7 +85,9 @@ export function validateCandidatePromotion({
  const check=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
  check(Boolean(expectedSnapshot),'missing_expected_candidate_snapshot');
  check(confirmation==='PROMOTE '+expectedSnapshot,'invalid_promotion_confirmation',{expected:'PROMOTE '+expectedSnapshot,actual:confirmation});
- check(candidateMarker?.schema_version===1&&candidateMarker?.mode==='ACTUAL_CANDIDATE'&&candidateMarker?.status==='CHANGE','candidate_marker_not_promotable',{status:candidateMarker?.status??null});
+ check(candidateMarker?.schema_version===2&&candidateMarker?.mode==='ACTUAL_CANDIDATE'&&candidateMarker?.status==='CHANGE','candidate_marker_not_promotable',{schema_version:candidateMarker?.schema_version??null,status:candidateMarker?.status??null});
+ const candidateIdentity=candidateIdentityFingerprint({baseRef:candidateMarker?.base_ref??null,baseRelease:candidateMarker?.base_release??null,candidate:candidateMarker?.candidate??null,diffReportSha256:candidateMarker?.diff_report_sha256??null});
+ check(candidateMarker?.candidate_identity_algorithm===candidateIdentity.algorithm&&candidateMarker?.candidate_identity_sha256===candidateIdentity.sha256,'candidate_identity_mismatch',{algorithm:candidateMarker?.candidate_identity_algorithm??null,expected:candidateIdentity.sha256,actual:candidateMarker?.candidate_identity_sha256??null});
  check(candidateMarker?.review_required===true&&Number(candidateMarker?.substantive_change_count)>0,'candidate_has_no_substantive_change',{review_required:candidateMarker?.review_required??null,substantive_change_count:candidateMarker?.substantive_change_count??null});
  check(candidateMarker?.candidate?.snapshot_id===expectedSnapshot,'unexpected_candidate_snapshot',{expected:expectedSnapshot,actual:candidateMarker?.candidate?.snapshot_id??null});
  check(candidateMarker?.candidate?.source_bundle_fingerprint_sha256===manifest?.source_bundle?.bundle_fingerprint_sha256,'candidate_source_bundle_mismatch',{marker:candidateMarker?.candidate?.source_bundle_fingerprint_sha256??null,manifest:manifest?.source_bundle?.bundle_fingerprint_sha256??null});
