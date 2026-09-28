@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_HOST_TRUST",
+  "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
+  "policy": "Fail-closed host trust contract for deterministic ACTUAL execution. GitHub runner image, kernel, Docker Engine, containerd, runc, cgroup/storage stack and an x86_64 CPU compatibility floor are pinned. CPU vendor/model are observed evidence only; Node computation is forced through the JIT-less single-CPU execution profile so hardware model drift cannot silently select different V8 JIT code paths.",
+  "contract": {
+    "runner": {
+      "label": "ubuntu-24.04",
+      "image_os": "ubuntu24",
+      "image_version": "20260920.314.1",
+      "os": "Linux",
+      "arch": "X64"
+    },
+    "kernel": {
+      "release": "6.17.0-1022-azure",
+      "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+      "machine": "x86_64"
+    },
+    "docker": {
+      "client_version": "28.0.4",
+      "server_version": "28.0.4",
+      "api_version": "1.48",
+      "min_api_version": "1.24",
+      "git_commit": "6430e49",
+      "components": {
+        "Engine": {
+          "version": "28.0.4",
+          "git_commit": "6430e49"
+        },
+        "containerd": {
+          "version": "v2.3.5",
+          "git_commit": "1294c24a7da8e5a793ed378161673abe94118892"
+        },
+        "runc": {
+          "version": "1.5.1",
+          "git_commit": "v1.5.1-0-g8f2685a4"
+        },
+        "docker-init": {
+          "version": "0.19.0",
+          "git_commit": "de40ad0"
+        }
+      }
+    },
+    "engine": {
+      "storage_driver": "overlay2",
+      "cgroup_driver": "systemd",
+      "cgroup_version": "2",
+      "operating_system": "Ubuntu 24.04.5 LTS",
+      "os_type": "linux",
+      "architecture": "x86_64",
+      "kernel_version": "6.17.0-1022-azure"
+    },
+    "cpu_contract": {
+      "architecture": "x86_64",
+      "op_modes": "32-bit, 64-bit",
+      "hypervisor": "Microsoft",
+      "virtualization": "full",
+      "accepted_vendors": [
+        "AuthenticAMD",
+        "GenuineIntel"
+      ],
+      "required_flags": [
+        "aes",
+        "avx",
+        "avx2",
+        "bmi1",
+        "bmi2",
+        "cx16",
+        "f16c",
+        "fma",
+        "fpu",
+        "fxsr",
+        "lahf_lm",
+        "lm",
+        "mmx",
+        "movbe",
+        "pclmulqdq",
+        "popcnt",
+        "rdseed",
+        "rdtscp",
+        "sse",
+        "sse2",
+        "sse4_1",
+        "sse4_2",
+        "ssse3",
+        "xsave",
+        "xsaveopt"
+      ],
+      "execution_profile": {
+        "platform": "linux/amd64",
+        "cpuset_cpus": "0",
+        "node_options": "--jitless",
+        "uv_threadpool_size": "1",
+        "timezone": "UTC",
+        "locale": "C.UTF-8"
+      }
+    }
+  },
+  "host_trust_fingerprint_sha256": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5"
+}

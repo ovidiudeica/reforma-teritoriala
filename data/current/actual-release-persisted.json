@@ -2,15 +2,16 @@
   "schema_version": 1,
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "manifest_sha256": "d92b443aaacb3b1964de29cf102f3f764d41534db29cf1a9b94227b4b12d6214",
+  "manifest_sha256": "5c63f7a19831b6aaf7f098e1ceb5f65cc1c47783ed26dc057cdb7f0069d4bcfa",
   "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
-  "build_environment_fingerprint_sha256": "720146df8ff83d172bcac58107417e5a61ea0dd00505e3495dd5c2564bac4baf",
+  "host_trust_fingerprint_sha256": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5",
+  "build_environment_fingerprint_sha256": "3869854a75e604c323d6751204a65d606f1e29476086408b77346d55609513ff",
   "validated_release_gate_status": "PASS",
   "provenance_migration": {
-    "previous_manifest_sha256": "5287a7b1b9c339c26313fdc588072f6eea10bb18c25c41081b87800fa4b0f796",
-    "reason": "hermetic-base-verifier-fix"
+    "previous_manifest_sha256": "d92b443aaacb3b1964de29cf102f3f764d41534db29cf1a9b94227b4b12d6214",
+    "reason": "host-trust-boundary"
   },
-  "policy": "Marker for exact ACTUAL snapshot bytes, exact source provenance, frozen review evidence, kernel-enforced network denial and exact execution-environment provenance. It is not part of the semantic release fingerprint."
+  "policy": "Marker for exact ACTUAL snapshot bytes, exact source provenance, frozen review evidence, kernel network denial, explicit host-trust contract and exact execution-environment provenance. It is not part of semantic release identity."
 }

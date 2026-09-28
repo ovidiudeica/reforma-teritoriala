@@ -3,6 +3,17 @@ set -euo pipefail
 
 : "${ACTUAL_BASE_REF:?ACTUAL_BASE_REF is required}"
 : "${ACTUAL_NETWORK_MODE:?ACTUAL_NETWORK_MODE is required}"
+: "${NODE_OPTIONS:?NODE_OPTIONS is required}"
+: "${UV_THREADPOOL_SIZE:?UV_THREADPOOL_SIZE is required}"
+: "${TZ:?TZ is required}"
+: "${LANG:?LANG is required}"
+: "${LC_ALL:?LC_ALL is required}"
+
+test "$NODE_OPTIONS" = "--jitless"
+test "$UV_THREADPOOL_SIZE" = "1"
+test "$TZ" = "UTC"
+test "$LANG" = "C.UTF-8"
+test "$LC_ALL" = "C.UTF-8"
 
 mkdir -p "${HOME:-/tmp/actual-home}"
 git config --global --add safe.directory /workspace

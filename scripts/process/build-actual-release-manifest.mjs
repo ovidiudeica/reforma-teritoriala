@@ -6,6 +6,7 @@ import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual
 import {SOURCE_BUNDLE_PATH,sourceBundleFingerprint as computeSourceBundleFingerprint} from '../lib/actual-source-bundle.mjs';
 import {BUILD_ENVIRONMENT_PATH,buildEnvironmentFingerprint as computeBuildEnvironmentFingerprint} from '../lib/actual-build-environment.mjs';
 import {REVIEW_EVIDENCE_BUNDLE_PATH,reviewEvidenceFingerprint as computeReviewEvidenceFingerprint} from '../lib/actual-review-evidence-bundle.mjs';
+import {HOST_TRUST_PATH,hostTrustFingerprint as computeHostTrustFingerprint,validateHostTrustManifest} from '../lib/actual-host-trust.mjs';
 
 const OUTPUT='data/current/actual-release-manifest.json';
 const NETWORK_DENIAL='data/current/actual-network-denial-audit.json';
@@ -47,6 +48,13 @@ const reviewEvidenceBundleHash=sha256(reviewEvidenceBundleBytes);
 const computedReviewEvidenceFingerprint=computeReviewEvidenceFingerprint(reviewEvidenceBundle);
 if(reviewEvidenceBundle.schema_version!==1||reviewEvidenceBundle.mode!=='ACTUAL_REVIEW_EVIDENCE_BUNDLE')throw new Error('Invalid ACTUAL review evidence bundle schema/mode');
 if(reviewEvidenceBundle.bundle_fingerprint_algorithm!==computedReviewEvidenceFingerprint.algorithm||reviewEvidenceBundle.bundle_fingerprint_sha256!==computedReviewEvidenceFingerprint.sha256)throw new Error('ACTUAL review evidence bundle fingerprint mismatch');
+const hostTrustBytes=await readFile(HOST_TRUST_PATH);
+const hostTrust=JSON.parse(hostTrustBytes.toString('utf8'));
+const hostTrustHash=sha256(hostTrustBytes);
+const hostTrustValidation=validateHostTrustManifest(hostTrust);
+const computedHostTrustFingerprint=computeHostTrustFingerprint(hostTrust);
+if(hostTrustValidation.status!=='PASS')throw new Error('Invalid ACTUAL host-trust contract: '+JSON.stringify(hostTrustValidation.failures));
+if(hostTrust.host_trust_fingerprint_algorithm!==computedHostTrustFingerprint.algorithm||hostTrust.host_trust_fingerprint_sha256!==computedHostTrustFingerprint.sha256)throw new Error('ACTUAL host-trust fingerprint mismatch');
 const networkDenialBytes=await readFile(NETWORK_DENIAL);
 const networkDenial=JSON.parse(networkDenialBytes.toString('utf8'));
 if(networkDenial.schema_version!==1||networkDenial.mode!=='ACTUAL_NETWORK_DENIAL'||networkDenial.status!=='PASS')throw new Error('Invalid ACTUAL network-denial proof');
@@ -159,7 +167,7 @@ const tier=(jurisdiction,name)=>{
 };
 
 const manifest={
- schema_version:7,
+ schema_version:8,
  mode:'ACTUAL',
  snapshot_id:snapshotId,
  generated_at:generatedAt,
@@ -167,7 +175,7 @@ const manifest={
  content_fingerprint_sha256:semanticFingerprint.sha256,
  component_byte_fingerprint_sha256:byteFingerprint.sha256,
  content_identity:contentIdentity,
- policy:'Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance, kernel-enforced network-denial proof and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle, network-denial and build-environment bindings remain mandatory integrity constraints.',
+ policy:'Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance, explicit host-trust provenance, kernel-enforced network-denial proof and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle, host-trust, network-denial and build-environment bindings remain mandatory integrity constraints.',
  jurisdictions,
  source_bundle:{
   path:SOURCE_BUNDLE_PATH,
@@ -186,6 +194,20 @@ const manifest={
   bundle_fingerprint_algorithm:reviewEvidenceBundle.bundle_fingerprint_algorithm,
   bundle_fingerprint_sha256:reviewEvidenceBundle.bundle_fingerprint_sha256,
   sha256:reviewEvidenceBundleHash
+ },
+ host_trust:{
+  path:HOST_TRUST_PATH,
+  schema_version:hostTrust.schema_version,
+  mode:hostTrust.mode,
+  host_trust_fingerprint_algorithm:hostTrust.host_trust_fingerprint_algorithm,
+  host_trust_fingerprint_sha256:hostTrust.host_trust_fingerprint_sha256,
+  runner_image_version:hostTrust.contract?.runner?.image_version??null,
+  kernel_release:hostTrust.contract?.kernel?.release??null,
+  docker_server_version:hostTrust.contract?.docker?.server_version??null,
+  containerd_version:hostTrust.contract?.docker?.components?.containerd?.version??null,
+  runc_version:hostTrust.contract?.docker?.components?.runc?.version??null,
+  cpu_execution_profile:hostTrust.contract?.cpu_contract?.execution_profile??null,
+  sha256:hostTrustHash
  },
  network_denial:{
   path:NETWORK_DENIAL,
@@ -299,6 +321,10 @@ const baseReviewEvidenceMatches=Boolean(baseManifest)
  && baseManifest.review_evidence_bundle?.path===REVIEW_EVIDENCE_BUNDLE_PATH
  && baseManifest.review_evidence_bundle?.sha256===reviewEvidenceBundleHash
  && baseManifest.review_evidence_bundle?.bundle_fingerprint_sha256===reviewEvidenceBundle.bundle_fingerprint_sha256;
+const baseHostTrustMatches=Boolean(baseManifest)
+ && baseManifest.host_trust?.path===HOST_TRUST_PATH
+ && baseManifest.host_trust?.sha256===hostTrustHash
+ && baseManifest.host_trust?.host_trust_fingerprint_sha256===hostTrust.host_trust_fingerprint_sha256;
 const baseNetworkDenialMatches=Boolean(baseManifest)
  && baseManifest.network_denial?.path===NETWORK_DENIAL
  && baseManifest.network_denial?.sha256===networkDenialHash
@@ -307,7 +333,7 @@ const baseBuildEnvironmentMatches=Boolean(baseManifest)
  && baseManifest.build_environment?.path===BUILD_ENVIRONMENT_PATH
  && baseManifest.build_environment?.sha256===buildEnvironmentHash
  && baseManifest.build_environment?.environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256;
-const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseSourceBundleMatches&&baseReviewEvidenceMatches&&baseNetworkDenialMatches&&baseBuildEnvironmentMatches&&baseManifestBytes;
+const reuseExactBaseManifest=baseSemanticMatches&&baseComponentBytesMatch&&baseSourceBundleMatches&&baseReviewEvidenceMatches&&baseHostTrustMatches&&baseNetworkDenialMatches&&baseBuildEnvironmentMatches&&baseManifestBytes;
 
 await mkdir('data/current',{recursive:true});
 if(reuseExactBaseManifest){
@@ -333,6 +359,7 @@ if(reuseExactBaseManifest){
   component_byte_fingerprint_sha256:manifest.component_byte_fingerprint_sha256,
   source_bundle_fingerprint_sha256:manifest.source_bundle.bundle_fingerprint_sha256,
   review_evidence_bundle_fingerprint_sha256:manifest.review_evidence_bundle.bundle_fingerprint_sha256,
+  host_trust_fingerprint_sha256:manifest.host_trust.host_trust_fingerprint_sha256,
   build_environment_fingerprint_sha256:manifest.build_environment.environment_fingerprint_sha256,
   release_identity_basis:manifest.content_identity?.release_identity_basis??null,
   exact_base_manifest_bytes_reused:false,

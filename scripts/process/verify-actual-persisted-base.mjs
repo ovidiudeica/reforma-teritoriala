@@ -7,6 +7,7 @@ const manifestBytes=await readFile('data/current/actual-release-manifest.json');
 const manifest=JSON.parse(manifestBytes);
 const buildEnvironment=JSON.parse(await readFile('data/current/actual-build-environment-manifest.json','utf8'));
 const reviewEvidence=JSON.parse(await readFile('data/current/actual-review-evidence-bundle.json','utf8'));
+const hostTrust=JSON.parse(await readFile('data/current/actual-host-trust-manifest.json','utf8'));
 const sha=createHash('sha256').update(manifestBytes).digest('hex');
 
 const failures=[];
@@ -20,6 +21,8 @@ check('build_environment_manifest_matches_current',manifest.build_environment?.e
 check('review_evidence_marker_matches_manifest',marker.review_evidence_bundle_fingerprint_sha256===manifest.review_evidence_bundle?.bundle_fingerprint_sha256);
 check('review_evidence_manifest_matches_current',manifest.review_evidence_bundle?.bundle_fingerprint_sha256===reviewEvidence.bundle_fingerprint_sha256);
 check('network_denial_marker_matches_manifest',marker.network_denial_sha256===manifest.network_denial?.sha256,{marker:marker.network_denial_sha256??null,manifest:manifest.network_denial?.sha256??null});
+check('host_trust_marker_matches_manifest',marker.host_trust_fingerprint_sha256===manifest.host_trust?.host_trust_fingerprint_sha256,{marker:marker.host_trust_fingerprint_sha256??null,manifest:manifest.host_trust?.host_trust_fingerprint_sha256??null});
+check('host_trust_manifest_matches_current',manifest.host_trust?.host_trust_fingerprint_sha256===hostTrust.host_trust_fingerprint_sha256,{manifest:manifest.host_trust?.host_trust_fingerprint_sha256??null,current:hostTrust.host_trust_fingerprint_sha256??null});
 
 const report={
  status:failures.length?'FAIL':'PASS',
@@ -28,6 +31,7 @@ const report={
  build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256??null,
  review_evidence_bundle_fingerprint_sha256:reviewEvidence.bundle_fingerprint_sha256??null,
  network_denial_sha256:manifest.network_denial?.sha256??null,
+ host_trust_fingerprint_sha256:hostTrust.host_trust_fingerprint_sha256??null,
  failures
 };
 console.log(JSON.stringify(report,null,2));

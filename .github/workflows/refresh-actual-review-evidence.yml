@@ -103,6 +103,8 @@ jobs:
             manifest_sha256:manifestSha,
             source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
             review_evidence_bundle_fingerprint_sha256:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null,
+            network_denial_sha256:manifest.network_denial?.sha256??null,
+            host_trust_fingerprint_sha256:manifest.host_trust?.host_trust_fingerprint_sha256??null,
             build_environment_fingerprint_sha256:manifest.build_environment?.environment_fingerprint_sha256??null,
             validated_release_gate_status:'PASS',
             provenance_refresh:{
@@ -110,7 +112,7 @@ jobs:
               workflow_run_id:process.env.GITHUB_RUN_ID??null,
               source_head_sha:process.env.GITHUB_SHA??null
             },
-            policy:'Persisted ACTUAL marker rebound after an explicit review-evidence refresh. Semantic snapshot identity is preserved; exact source, frozen review-evidence and execution-environment provenance are replaced only after the full release gate passes.'
+            policy:'Persisted ACTUAL marker rebound after an explicit review-evidence refresh. Semantic snapshot identity is preserved; exact source, frozen review-evidence, network-denial, host-trust and execution-environment provenance are replaced only after the full release gate passes.'
           };
           await writeFile('data/current/actual-release-persisted.json',JSON.stringify(next,null,2)+'\n');
           NODE

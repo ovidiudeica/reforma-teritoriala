@@ -84,6 +84,11 @@ jobs:
           echo "base_release_commit=$BASE_RELEASE_COMMIT" >> "$GITHUB_OUTPUT"
           echo "candidate_branch=$CANDIDATE_BRANCH" >> "$GITHUB_OUTPUT"
 
+      - name: Gate ACTUAL host trust boundary
+        env:
+          ACTUAL_HOST_TRUST_AUDIT_PATH: ${{ runner.temp }}/actual-host-trust-audit.json
+        run: node scripts/process/audit-actual-host-trust.mjs
+
       - name: Authenticate and pull exact ACTUAL runtime
         env:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -97,13 +102,20 @@ jobs:
           BASE_RELEASE_COMMIT: ${{ steps.base.outputs.base_release_commit }}
         run: |
           docker run --rm \
+            --platform linux/amd64 \
             --network none \
+            --cpuset-cpus 0 \
             --cap-drop ALL \
             --security-opt no-new-privileges=true \
             --user "$(id -u):$(id -g)" \
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
             --workdir /workspace \
             --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env NODE_OPTIONS=--jitless \
+            --env UV_THREADPOOL_SIZE=1 \
+            --env TZ=UTC \
+            --env LANG=C.UTF-8 \
+            --env LC_ALL=C.UTF-8 \
             --env GITHUB_ACTIONS=true \
             --env RUNNER_OS=Linux \
             --env HOME=/tmp/actual-home \
@@ -131,6 +143,7 @@ jobs:
           echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh OSM raw source: ${{ inputs.refresh_osm }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Deterministic network: docker --network none" >> "$GITHUB_STEP_SUMMARY"
+          echo "- CPU execution profile: linux/amd64, cpuset=0, Node --jitless, UV_THREADPOOL_SIZE=1" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Refresh explicitly requested sources in network-enabled control phase
         if: inputs.refresh_ro_siruta == true || inputs.refresh_md_cuatm == true || inputs.refresh_osm == true
@@ -172,7 +185,9 @@ jobs:
           BASE_RELEASE_COMMIT: ${{ steps.base.outputs.base_release_commit }}
         run: |
           docker run --rm \
+            --platform linux/amd64 \
             --network none \
+            --cpuset-cpus 0 \
             --cap-drop ALL \
             --security-opt no-new-privileges=true \
             --user "$(id -u):$(id -g)" \
@@ -180,6 +195,11 @@ jobs:
             --workdir /workspace \
             --env ACTUAL_BASE_REF="$BASE_RELEASE_COMMIT" \
             --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env NODE_OPTIONS=--jitless \
+            --env UV_THREADPOOL_SIZE=1 \
+            --env TZ=UTC \
+            --env LANG=C.UTF-8 \
+            --env LC_ALL=C.UTF-8 \
             --env GITHUB_ACTIONS=true \
             --env RUNNER_OS=Linux \
             --env HOME=/tmp/actual-home \
@@ -255,6 +275,7 @@ jobs:
           path: |
             data/current/actual-release-candidate.json
             data/current/actual-candidate-diff.json
+            ${{ runner.temp }}/actual-host-trust-audit.json
             data/current/actual-network-denial-audit.json
             data/current/actual-source-bundle-manifest.json
             data/current/actual-source-bundle-gate.json
