@@ -9,14 +9,6 @@ export const ARTIFACT_VOLATILE_KEYS=new Set([
 
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
-export function canonicalize(value){
-  if(Array.isArray(value))return value.map(canonicalize);
-  if(value&&typeof value==='object'){
-    return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonicalize(value[key])]));
-  }
-  return value;
-}
-
 export function stripArtifactVolatile(value){
   if(Array.isArray(value))return value.map(stripArtifactVolatile);
   if(value&&typeof value==='object'){
@@ -30,45 +22,76 @@ export function stripArtifactVolatile(value){
   return value;
 }
 
-export function semanticArtifactEqual(a,b){
-  return JSON.stringify(stripArtifactVolatile(a))===JSON.stringify(stripArtifactVolatile(b));
+function semanticEqualValue(a,b){
+  if(Object.is(a,b))return true;
+  if(Array.isArray(a)||Array.isArray(b)){
+    if(!Array.isArray(a)||!Array.isArray(b)||a.length!==b.length)return false;
+    for(let i=0;i<a.length;i++)if(!semanticEqualValue(a[i],b[i]))return false;
+    return true;
+  }
+  if(a&&b&&typeof a==='object'&&typeof b==='object'){
+    const ak=Object.keys(a).filter(key=>!ARTIFACT_VOLATILE_KEYS.has(key)).sort();
+    const bk=Object.keys(b).filter(key=>!ARTIFACT_VOLATILE_KEYS.has(key)).sort();
+    if(ak.length!==bk.length)return false;
+    for(let i=0;i<ak.length;i++){
+      if(ak[i]!==bk[i]||!semanticEqualValue(a[ak[i]],b[bk[i]]))return false;
+    }
+    return true;
+  }
+  return false;
 }
 
-export function replaceArtifactVolatile(value,timestamp){
-  if(Array.isArray(value))return value.map(item=>replaceArtifactVolatile(item,timestamp));
+export function semanticArtifactEqual(a,b){
+  return semanticEqualValue(a,b);
+}
+
+function replaceArtifactVolatileInPlace(value,timestamp){
+  if(Array.isArray(value)){
+    for(const item of value)replaceArtifactVolatileInPlace(item,timestamp);
+    return value;
+  }
   if(value&&typeof value==='object'){
-    return Object.fromEntries(Object.entries(value).map(([key,item])=>[
-      key,
-      ARTIFACT_VOLATILE_KEYS.has(key)&&typeof item==='string'
-        ?timestamp
-        :replaceArtifactVolatile(item,timestamp)
-    ]));
+    for(const [key,item] of Object.entries(value)){
+      if(ARTIFACT_VOLATILE_KEYS.has(key)&&typeof item==='string')value[key]=timestamp;
+      else replaceArtifactVolatileInPlace(item,timestamp);
+    }
   }
   return value;
 }
 
-export function formatJsonLike(bytes,value){
+function formatJsonLike(bytes,value){
   const text=Buffer.isBuffer(bytes)?bytes.toString('utf8'):String(bytes);
   const pretty=text.startsWith('{\n')||text.startsWith('[\n');
   const trailingNewline=text.endsWith('\n');
-  const serialized=JSON.stringify(canonicalize(value),null,pretty?2:0);
+  const serialized=JSON.stringify(value,null,pretty?2:0);
   return Buffer.from(serialized+(trailingNewline?'\n':''));
 }
 
 export function stabilizeJsonBytes({baseBytes,currentBytes,stableTimestamp}){
-  const base=JSON.parse(Buffer.from(baseBytes).toString('utf8'));
-  const current=JSON.parse(Buffer.from(currentBytes).toString('utf8'));
-  if(semanticArtifactEqual(base,current)){
+  const baseBuffer=Buffer.from(baseBytes);
+  const currentBuffer=Buffer.from(currentBytes);
+  if(baseBuffer.equals(currentBuffer)){
     return {
-      action:'RESTORE_BASE_BYTES',
-      bytes:Buffer.from(baseBytes),
+      action:'ALREADY_BASE_BYTES',
+      bytes:baseBuffer,
       semantic_equal_to_base:true
     };
   }
-  const deterministic=replaceArtifactVolatile(current,stableTimestamp);
+
+  const base=JSON.parse(baseBuffer.toString('utf8'));
+  const current=JSON.parse(currentBuffer.toString('utf8'));
+  if(semanticArtifactEqual(base,current)){
+    return {
+      action:'RESTORE_BASE_BYTES',
+      bytes:baseBuffer,
+      semantic_equal_to_base:true
+    };
+  }
+
+  replaceArtifactVolatileInPlace(current,stableTimestamp);
   return {
     action:'CANONICALIZE_CHANGED_CONTENT',
-    bytes:formatJsonLike(currentBytes,deterministic),
+    bytes:formatJsonLike(currentBuffer,current),
     semantic_equal_to_base:false
   };
 }
