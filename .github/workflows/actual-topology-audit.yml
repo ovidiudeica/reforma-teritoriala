@@ -37,6 +37,9 @@ jobs:
         with:
           node-version: '24.21.0'
 
+      - name: Audit vendored npm dependency bundle
+        run: npm run audit:actual-npm-dependency-bundle
+
       - name: Audit pinned ACTUAL execution environment
         env:
           ACTUAL_BUILD_ENVIRONMENT_GATE_READ_ONLY: '1'
@@ -45,8 +48,8 @@ jobs:
       - name: Audit pinned Node/npm toolchain
         run: npm run audit:node-toolchain
 
-      - name: Install locked dependencies
-        run: npm ci --no-audit --no-fund
+      - name: Install dependencies from vendored offline bundle
+        run: npm run install:actual-offline-deps
 
       - name: Require persisted ACTUAL release
         run: |
