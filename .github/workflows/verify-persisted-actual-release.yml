@@ -87,6 +87,7 @@ jobs:
           if(manifest.source_bundle?.sha256!==sourceBundleSha)failures.push({issue:'source_bundle_sha256_mismatch',manifest:manifest.source_bundle?.sha256??null,actual:sourceBundleSha});
           if(manifest.source_bundle?.bundle_fingerprint_sha256!==sourceBundle.bundle_fingerprint_sha256)failures.push({issue:'source_bundle_manifest_binding_mismatch'});
           if(marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256)failures.push({issue:'review_evidence_bundle_fingerprint_mismatch',marker:marker.review_evidence_bundle_fingerprint_sha256,manifest:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null});
+          if(marker.network_denial_sha256!==manifest.network_denial?.sha256)failures.push({issue:'network_denial_sha256_mismatch',marker:marker.network_denial_sha256,manifest:manifest.network_denial?.sha256??null});
           if(manifest.review_evidence_bundle?.sha256!==reviewEvidenceSha)failures.push({issue:'review_evidence_bundle_sha256_mismatch',manifest:manifest.review_evidence_bundle?.sha256??null,actual:reviewEvidenceSha});
           if(manifest.review_evidence_bundle?.bundle_fingerprint_sha256!==reviewEvidence.bundle_fingerprint_sha256)failures.push({issue:'review_evidence_bundle_manifest_binding_mismatch'});
           if(marker.build_environment_fingerprint_sha256!==manifest.build_environment?.environment_fingerprint_sha256)failures.push({issue:'build_environment_fingerprint_mismatch',marker:marker.build_environment_fingerprint_sha256,manifest:manifest.build_environment?.environment_fingerprint_sha256??null});
@@ -100,6 +101,7 @@ jobs:
             manifest_sha256:manifestSha,
             source_bundle_fingerprint_sha256:sourceBundle.bundle_fingerprint_sha256??null,
             review_evidence_bundle_fingerprint_sha256:reviewEvidence.bundle_fingerprint_sha256??null,
+            network_denial_sha256:manifest.network_denial?.sha256??null,
             build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256??null,
             failures
           };
