@@ -13,4 +13,3 @@ LABEL org.opencontainers.image.title="Reforma ACTUAL runtime" \
       io.reforma.actual.base-digest="${ACTUAL_RUNTIME_BASE_DIGEST}" \
       io.reforma.actual.dockerfile-sha256="${ACTUAL_RUNTIME_DOCKERFILE_SHA256}"
 
-WORKDIR /workspace
