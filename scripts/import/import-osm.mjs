@@ -28,6 +28,10 @@ const countries={
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const snapshotPath=(code,semanticSha)=>`${SNAPSHOT_DIR}/${code.toLowerCase()}-${semanticSha}.json.gz`;
+const maxIsoTimestamp=values=>{
+ const dates=values.filter(Boolean).map(x=>new Date(x)).filter(x=>Number.isFinite(x.getTime()));
+ return (dates.length?new Date(Math.max(...dates.map(x=>x.getTime()))):new Date(0)).toISOString();
+};
 const canonicalize=value=>{
  if(Array.isArray(value))return value.map(canonicalize);
  if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(k=>[k,canonicalize(value[k])]));
@@ -71,6 +75,7 @@ function validateRaw(raw,code,cfg){
 function validateManifestEntry(code,entry){
  if(!/^[a-f0-9]{64}$/.test(String(entry?.semantic_sha256||'')))throw new Error(`invalid ${code} semantic_sha256`);
  if(!/^[a-f0-9]{64}$/.test(String(entry?.compressed_sha256||'')))throw new Error(`invalid ${code} compressed_sha256`);
+ if(!Number.isFinite(new Date(entry?.snapshot_at).getTime()))throw new Error(`invalid ${code} snapshot_at`);
  const expected=snapshotPath(code,entry.semantic_sha256);
  if(entry.snapshot_path!==expected)throw new Error(`invalid ${code} snapshot_path`);
 }
@@ -154,7 +159,13 @@ async function main(){
  const fetchedAt=new Date().toISOString();
  const fresh={};
  for(const [code,cfg] of Object.entries(countries))fresh[code]=await fetchCountry(code,cfg);
- for(const [code,result] of Object.entries(fresh))result.snapshotPath=await materializeContentAddressedSnapshot(code,result);
+ for(const [code,result] of Object.entries(fresh)){
+  result.snapshotPath=await materializeContentAddressedSnapshot(code,result);
+  const previousEntry=previous?.countries?.[code];
+  result.snapshotAt=previousEntry?.semantic_sha256===result.semanticSha
+   ? previousEntry.snapshot_at
+   : fetchedAt;
+ }
 
  const unchanged=Boolean(previous)&&Object.keys(countries).every(code=>
   previous.countries?.[code]?.semantic_sha256===fresh[code].semanticSha
@@ -166,6 +177,7 @@ async function main(){
   transport:'Overpass API',
   query_version:QUERY_VERSION,
   fetched_at:fetchedAt,
+  snapshot_at:maxIsoTimestamp(Object.values(fresh).map(x=>x.snapshotAt)),
   snapshot_directory:SNAPSHOT_DIR,
   countries:Object.fromEntries(Object.entries(countries).map(([code,cfg])=>[code,{
    name:cfg.name,
@@ -174,6 +186,7 @@ async function main(){
    required_levels:cfg.requiredLevels,
    required_relations:cfg.requiredRelations,
    snapshot_path:fresh[code].snapshotPath,
+   snapshot_at:fresh[code].snapshotAt,
    semantic_sha256:fresh[code].semanticSha,
    compressed_sha256:fresh[code].compressedSha,
    query_sha256:fresh[code].querySha256,
@@ -194,6 +207,7 @@ async function main(){
    semantic_sha256:fresh[code].semanticSha,
    compressed_sha256:fresh[code].compressedSha,
    snapshot_path:fresh[code].snapshotPath,
+   snapshot_at:fresh[code].snapshotAt,
    endpoint:fresh[code].endpoint
   }]))
  },null,2));
