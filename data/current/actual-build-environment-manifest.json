@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_BUILD_ENVIRONMENT",
+  "environment_fingerprint_algorithm": "actual-build-environment-v1",
+  "environment_fingerprint_sha256": "aa2f6165313dc33ecbcb1e31a376a2d081d9d16c02459855bd1c0b568fa34de2",
+  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family and image version, Node/npm, package files, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.",
+  "environment": {
+    "runner": {
+      "label": "ubuntu-24.04",
+      "image_os": "ubuntu24",
+      "image_version": "20260920.314.1"
+    },
+    "toolchain": {
+      "node": "24.21.0",
+      "npm": "11.19.0",
+      "package_manager": "npm@11.19.0",
+      "package_json": {
+        "path": "package.json",
+        "sha256": "19cfdcea08dcd1e60dd051bcaec9b7c936939221ab0f9e0c3a03259a752c8002"
+      },
+      "package_lock": {
+        "path": "package-lock.json",
+        "sha256": "1aba6543e3987e940b495aa831ba1f50759426773bae3dab6e77b07d2c4da852",
+        "lockfile_version": 3
+      }
+    },
+    "actions": {
+      "actions/checkout": "fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "actions/setup-node": "a0853c24544627f65ddf259abe73b1d18a591444",
+      "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+    },
+    "workflows": {
+      "candidate": {
+        "path": ".github/workflows/actual-candidate.yml",
+        "sha256": "1c4df583a4b3e8c5f1266fb79aaa3a162a8f491bc1bb75212eea2aa659157163",
+        "runs_on": [
+          "ubuntu-24.04"
+        ],
+        "node_versions": [
+          "24.21.0"
+        ],
+        "actions": [
+          "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+        ]
+      },
+      "topology": {
+        "path": ".github/workflows/actual-topology-audit.yml",
+        "sha256": "f9bce036beeb4c9bba432953f1fc8ab244a23ada167d07368aab625728b185f5",
+        "runs_on": [
+          "ubuntu-24.04"
+        ],
+        "node_versions": [
+          "24.21.0"
+        ],
+        "actions": [
+          "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+        ]
+      },
+      "promotion": {
+        "path": ".github/workflows/actual-promote-candidate.yml",
+        "sha256": "cdb99d37832818d608518c4f47466835c309b49366b6935248b9b171746503a2",
+        "runs_on": [
+          "ubuntu-24.04"
+        ],
+        "node_versions": [
+          "24.21.0"
+        ],
+        "actions": [
+          "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444"
+        ]
+      },
+      "verify": {
+        "path": ".github/workflows/verify-persisted-actual-release.yml",
+        "sha256": "35aac4ae31b19d18714fa64f5b3288963a1012bcb20dad1be2a5f3660825c2f3",
+        "runs_on": [
+          "ubuntu-24.04"
+        ],
+        "node_versions": [
+          "24.21.0"
+        ],
+        "actions": [
+          "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444"
+        ]
+      }
+    }
+  }
+}
