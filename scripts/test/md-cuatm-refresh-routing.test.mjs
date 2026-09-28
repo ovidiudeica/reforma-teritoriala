@@ -6,6 +6,7 @@ const refreshPath='.github/workflows/refresh-md-official.yml';
 const candidatePath='.github/workflows/actual-candidate.yml';
 const reconcilePath='scripts/process/reconcile-cuatm.mjs';
 const importerPath='scripts/import/import-md-cuatm.mjs';
+const deterministicRunnerPath='scripts/process/run-actual-deterministic-candidate.sh';
 
 test('MD CUATM refresh is routed exclusively through ACTUAL candidate lifecycle',async()=>{
  const [refresh,candidate]=await Promise.all([
@@ -25,13 +26,17 @@ test('MD CUATM refresh is routed exclusively through ACTUAL candidate lifecycle'
 
  assert.match(candidate,/workflow_call:/);
  assert.match(candidate,/refresh_md_cuatm:/);
- assert.match(candidate,/if:\s*inputs\.refresh_md_cuatm == true/);
+ assert.match(candidate,/if:[^\n]*inputs\.refresh_md_cuatm == true/);
  assert.match(candidate,/npm run import:md-cuatm/);
+ assert.match(candidate,/--network bridge/);
+ assert.match(candidate,/--network none/);
  const refreshIndex=candidate.indexOf('npm run import:md-cuatm');
- const osmRefreshIndex=candidate.indexOf('npm run import:osm');
- const osmBuildIndex=candidate.indexOf('npm run build:osm-actual');
- const reconcileIndex=candidate.indexOf('npm run reconcile:cuatm');
- assert.ok(refreshIndex>=0&&osmRefreshIndex>refreshIndex&&osmBuildIndex>osmRefreshIndex&&reconcileIndex>osmBuildIndex,'CUATM refresh must precede the optional OSM refresh slot, deterministic OSM build and deterministic MD reconciliation');
+ const deterministicIndex=candidate.indexOf('scripts/process/run-actual-deterministic-candidate.sh');
+ assert.ok(refreshIndex>=0&&deterministicIndex>refreshIndex,'CUATM refresh must precede the network-denied deterministic phase');
+ const runner=await readFile(deterministicRunnerPath,'utf8');
+ const osmBuildIndex=runner.indexOf('npm run build:osm-actual');
+ const reconcileIndex=runner.indexOf('npm run reconcile:cuatm');
+ assert.ok(osmBuildIndex>=0&&reconcileIndex>osmBuildIndex,'deterministic MD reconciliation must consume the deterministic OSM build');
 });
 
 test('MD CUATM reconciliation is deterministic on the materialized snapshot',async()=>{
