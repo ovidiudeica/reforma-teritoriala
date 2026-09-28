@@ -27,7 +27,8 @@ test('build-environment fingerprint reacts to workflow, action, lockfile and ven
   value=>{value.environment.workflows.candidate.sha256='1'.repeat(64);},
   value=>{value.environment.toolchain.package_lock.sha256='2'.repeat(64);},
   value=>{value.environment.toolchain.dependency_bundle.archive_sha256='3'.repeat(64);},
-  value=>{value.environment.toolchain.dependency_bundle.bundle_fingerprint_sha256='4'.repeat(64);}
+  value=>{value.environment.toolchain.dependency_bundle.bundle_fingerprint_sha256='4'.repeat(64);},
+  value=>{value.environment.support_files['scripts/process/install-actual-npm-offline.mjs']='5'.repeat(64);}
  ]){
   const changed=structuredClone(manifest);
   mutate(changed);
