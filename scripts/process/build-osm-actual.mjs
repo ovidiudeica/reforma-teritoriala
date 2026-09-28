@@ -22,6 +22,8 @@ const sha256=value=>createHash('sha256').update(value).digest('hex');
 async function loadOsmSourceManifest(){
  const manifest=JSON.parse(await readFile(OSM_MANIFEST,'utf8'));
  if(manifest.schema_version!==2||!manifest.countries?.RO||!manifest.countries?.MD)throw new Error('Invalid materialized OSM source manifest');
+ if(!Number.isFinite(new Date(manifest.snapshot_at).getTime()))throw new Error('Invalid materialized OSM source snapshot_at');
+ for(const [code,entry] of Object.entries(manifest.countries))if(!Number.isFinite(new Date(entry?.snapshot_at).getTime()))throw new Error(`Invalid OSM ${code} snapshot_at`);
  return manifest;
 }
 async function readRawSnapshot(code,entry){
@@ -229,7 +231,7 @@ async function main(){
  await mkdir('data/current',{recursive:true}); await mkdir('public/geo/current',{recursive:true});
  const osmSource=await loadOsmSourceManifest();
  const all=[], report={
-  generated_at:osmSource.fetched_at,
+  generated_at:osmSource.snapshot_at,
   classifier_version:CLASSIFIER_VERSION,
   countries:{},
   warnings:[],
@@ -237,11 +239,13 @@ async function main(){
    manifest:OSM_MANIFEST,
    schema_version:osmSource.schema_version,
    query_version:osmSource.query_version,
+   snapshot_at:osmSource.snapshot_at,
    fetched_at:osmSource.fetched_at,
    countries:Object.fromEntries(Object.entries(osmSource.countries).map(([code,x])=>[code,{
     snapshot_path:x.snapshot_path,
     semantic_sha256:x.semantic_sha256,
     compressed_sha256:x.compressed_sha256,
+    snapshot_at:x.snapshot_at,
     query_sha256:x.query_sha256,
     element_count:x.element_count,
     relation_count:x.relation_count,
@@ -264,7 +268,7 @@ async function main(){
   });
   const excluded=allPolygons.filter(f=>f!==countryFeature&&!polygons.includes(f)).map(f=>relationId(f));
   if(excluded.length) report.warnings.push({type:'outside_country_boundary_excluded',jurisdiction:code,relation_ids:excluded});
-  const entities=polygons.map(f=>entity(code,f,osmSource.fetched_at));
+  const entities=polygons.map(f=>entity(code,f,osmSource.snapshot_at));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));
   assignParents(entities,byId,report.warnings); finalizeAfterParents(entities); all.push(...entities);
   const entityById=new Map(entities.map(e=>[e.id,e]));
@@ -275,7 +279,7 @@ async function main(){
    confidence:confidence?Object.fromEntries(Object.entries(confidence).map(([k,v])=>[k,v.length])):{}};
  }
  all.sort((a,b)=>a.jurisdiction.localeCompare(b.jurisdiction)||(a.osm.admin_level??99)-(b.osm.admin_level??99)||(a.name||'').localeCompare(b.name||'','ro'));
- await writeFile('data/current/entities.json',JSON.stringify({schema_version:2,generated_at:osmSource.fetched_at,classifier_version:CLASSIFIER_VERSION,source:'OpenStreetMap via Overpass API',license:'ODbL',entity_count:all.length,entities:all},null,2)+'\n');
+ await writeFile('data/current/entities.json',JSON.stringify({schema_version:2,generated_at:osmSource.snapshot_at,classifier_version:CLASSIFIER_VERSION,source:'OpenStreetMap via Overpass API',license:'ODbL',entity_count:all.length,entities:all},null,2)+'\n');
  await writeFile('data/current/import-report.json',JSON.stringify(report,null,2)+'\n');
  console.log('Catalog:',all.length,'entities; classifier v'+CLASSIFIER_VERSION);
 }
