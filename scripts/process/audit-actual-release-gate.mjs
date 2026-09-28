@@ -2,6 +2,7 @@
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual-semantic-fingerprint.mjs';
+import {SOURCE_BUNDLE_GATE_PATH,SOURCE_BUNDLE_PATH,sha256 as sourceSha256,validateSourceBundleManifest} from '../lib/actual-source-bundle.mjs';
 const MANIFEST='data/current/actual-release-manifest.json';
 const TOPOLOGY_AUDIT='data/current/actual-topology-audit.json';
 const topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));
@@ -13,6 +14,10 @@ const manifestBuf=await readFile(MANIFEST);
 const settlementPolicyBuf=await readFile(SETTLEMENT_POLICY);
 const manifest=JSON.parse(manifestBuf.toString('utf8'));
 const settlementPolicy=JSON.parse(settlementPolicyBuf.toString('utf8'));
+const sourceBundleBuf=await readFile(SOURCE_BUNDLE_PATH);
+const sourceBundle=JSON.parse(sourceBundleBuf.toString('utf8'));
+const sourceBundleGate=JSON.parse(await readFile(SOURCE_BUNDLE_GATE_PATH,'utf8'));
+const sourceBundleValidation=await validateSourceBundleManifest(sourceBundle);
 const paths=Object.fromEntries(Object.entries(manifest.components||{}).map(([key,value])=>[key,value?.path]).filter(([,path])=>path));
 const buffers={};
 for(const [key,path] of Object.entries(paths))buffers[key]=await readFile(path);
@@ -87,6 +92,21 @@ check('manifest_records_current_settlement_policy',
  {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,scope:settlementPolicy.scope??null,sha256:sha256(settlementPolicyBuf)}});
 check('md_semantic_bridge_passes',mdSemantic.status==='PASS',{status:mdSemantic.status??null,summary:mdSemantic.summary??null});
 check('manifest_records_current_md_semantic_bridge',manifest.semantic_bridges?.MD?.status==='PASS'&&manifest.semantic_bridges?.MD?.sha256===currentHashes.md_semantic_bridge,{manifest:manifest.semantic_bridges?.MD??null,actual:{status:mdSemantic.status??null,sha256:currentHashes.md_semantic_bridge??null}});
+check('source_bundle_gate_passes',
+ sourceBundleValidation.status==='PASS'
+ && sourceBundleGate.status==='PASS'
+ && sourceBundleGate.source_bundle_sha256===sourceSha256(sourceBundleBuf)
+ && sourceBundleGate.bundle_fingerprint_sha256===sourceBundle.bundle_fingerprint_sha256,
+ {validation_status:sourceBundleValidation.status,gate_status:sourceBundleGate.status,gate_bundle_sha256:sourceBundleGate.source_bundle_sha256??null,actual_bundle_sha256:sourceSha256(sourceBundleBuf),fingerprint:sourceBundle.bundle_fingerprint_sha256??null});
+check('manifest_binds_current_source_bundle',
+ manifest.source_bundle?.path===SOURCE_BUNDLE_PATH
+ && manifest.source_bundle?.schema_version===sourceBundle.schema_version
+ && manifest.source_bundle?.mode===sourceBundle.mode
+ && manifest.source_bundle?.source_watermark===sourceBundle.source_watermark
+ && manifest.source_bundle?.bundle_fingerprint_algorithm===sourceBundle.bundle_fingerprint_algorithm
+ && manifest.source_bundle?.bundle_fingerprint_sha256===sourceBundle.bundle_fingerprint_sha256
+ && manifest.source_bundle?.sha256===sourceSha256(sourceBundleBuf),
+ {manifest:manifest.source_bundle??null,actual:{path:SOURCE_BUNDLE_PATH,schema_version:sourceBundle.schema_version,mode:sourceBundle.mode,source_watermark:sourceBundle.source_watermark,bundle_fingerprint_algorithm:sourceBundle.bundle_fingerprint_algorithm,bundle_fingerprint_sha256:sourceBundle.bundle_fingerprint_sha256,sha256:sourceSha256(sourceBundleBuf)}});
 check('manifest_mode_is_actual',manifest.mode==='ACTUAL',{mode:manifest.mode});
 check('manifest_jurisdictions_are_exactly_ro_md',
  Array.isArray(manifest.jurisdictions)&&manifest.jurisdictions.length===2&&manifest.jurisdictions[0]==='RO'&&manifest.jurisdictions[1]==='MD',
@@ -278,7 +298,7 @@ const report={
  manifest_path:MANIFEST,
  manifest_sha256:sha256(manifestBuf),
  status:failures.length?'FAIL':'PASS',
- policy:'The public ACTUAL RO+MD release is publishable only when master topology has no blocking structural corruption, both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.',
+ policy:'The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle passes its gate and is cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source or release drift fails closed.',
  checks,
  failures
 };
