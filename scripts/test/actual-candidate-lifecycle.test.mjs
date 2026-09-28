@@ -158,13 +158,15 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
  assert.equal(disposition.status,'CHANGE');
 
  const sourceBundleFingerprint='c'.repeat(64);
+ const buildEnvironmentFingerprint='d'.repeat(64);
  const manifest={
-  schema_version:4,
+  schema_version:5,
   mode:'ACTUAL',
   snapshot_id:candidateSnapshot,
   release_fingerprint_sha256:changedFp.sha256,
   content_fingerprint_sha256:changedFp.sha256,
-  source_bundle:{bundle_fingerprint_sha256:sourceBundleFingerprint}
+  source_bundle:{bundle_fingerprint_sha256:sourceBundleFingerprint},
+  build_environment:{environment_fingerprint_sha256:buildEnvironmentFingerprint}
  };
  const gate={status:'PASS',snapshot_id:candidateSnapshot};
  const diff={
@@ -173,9 +175,10 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
    snapshot_id:persisted.snapshot_id,
    release_fingerprint_sha256:persisted.release_fingerprint_sha256,
    manifest_sha256:persisted.manifest_sha256,
-   source_bundle_fingerprint_sha256:persisted.source_bundle_fingerprint_sha256
+   source_bundle_fingerprint_sha256:persisted.source_bundle_fingerprint_sha256,
+   build_environment_fingerprint_sha256:persisted.build_environment_fingerprint_sha256
   },
-  candidate:{snapshot_id:candidateSnapshot,source_bundle_fingerprint_sha256:sourceBundleFingerprint},
+  candidate:{snapshot_id:candidateSnapshot,source_bundle_fingerprint_sha256:sourceBundleFingerprint,build_environment_fingerprint_sha256:buildEnvironmentFingerprint},
   summary:{semantic_content_changed:true,substantive_change_count:disposition.substantive_change_count,review_required:true}
  };
  const manifestBytes=Buffer.from(JSON.stringify(manifest,null,2)+'\n');
@@ -185,7 +188,7 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   mode:'ACTUAL_CANDIDATE',
   status:'CHANGE',
   base_release:diff.base_release,
-  candidate:{snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes),source_bundle_fingerprint_sha256:sourceBundleFingerprint},
+  candidate:{snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes),source_bundle_fingerprint_sha256:sourceBundleFingerprint,build_environment_fingerprint_sha256:buildEnvironmentFingerprint},
   diff_report_sha256:sha256(diffBytes),
   review_required:true,
   substantive_change_count:disposition.substantive_change_count
