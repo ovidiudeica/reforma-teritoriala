@@ -16,6 +16,13 @@ on:
       - 'scripts/test/**'
       - 'package.json'
       - 'package-lock.json'
+      - 'vendor/npm/**'
+      - 'scripts/lib/actual-npm-dependency-bundle.mjs'
+      - 'scripts/lib/actual-build-environment.mjs'
+      - 'scripts/process/audit-actual-npm-dependency-bundle.mjs'
+      - 'scripts/process/install-actual-npm-offline.mjs'
+      - 'data/current/actual-build-environment-manifest.json'
+      - 'data/current/actual-build-environment-gate.json'
       - '.github/workflows/actual-topology-audit.yml'
   workflow_dispatch:
 
