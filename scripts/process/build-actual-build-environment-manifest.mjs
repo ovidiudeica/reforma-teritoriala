@@ -14,7 +14,9 @@ console.log(JSON.stringify({
  toolchain:{
   node:manifest.environment.toolchain.node,
   npm:manifest.environment.toolchain.npm,
-  package_lock_sha256:manifest.environment.toolchain.package_lock.sha256
+  package_lock_sha256:manifest.environment.toolchain.package_lock.sha256,
+  npm_dependency_bundle_fingerprint_sha256:manifest.environment.toolchain.dependency_bundle.bundle_fingerprint_sha256,
+  npm_dependency_bundle_archive_sha256:manifest.environment.toolchain.dependency_bundle.archive_sha256
  },
  actions:manifest.environment.actions
 },null,2));
