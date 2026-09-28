@@ -2,10 +2,10 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "53370cea7aa88409a4f3c92d76e7bb4ed94ad610b961f2f6ffb9cfd18cdf0076",
-  "environment_fingerprint_sha256": "249f8a156c22d9544aa65d4d08d5884363b58a0d27d012ba150f47df86e6d4c9",
+  "build_environment_sha256": "6ad3835a2c0922f3a8a6cc7169e95f7aab1a5d93adedf2036f7073ec25d111b1",
+  "environment_fingerprint_sha256": "29a46be3e603d9d38d9bb7630205fadbf6ea4cde36ed7c086ec9d78aa0170c39",
   "status": "PASS",
-  "policy": "Fail closed unless repository workflow bytes, runner family/image, Node/npm, package files and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest. GitHub Actions runs also verify the observed hosted image version.",
+  "policy": "Fail closed unless repository workflow bytes, runner family/image, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest. GitHub Actions runs also verify the observed hosted image version.",
   "checks": [
     {
       "name": "manifest_schema_and_mode",
@@ -96,14 +96,31 @@
           "package_manager": "npm@11.19.0",
           "package_json": {
             "path": "package.json",
-            "sha256": "9ef9164b64d437c4c10e99f113714005a2798d19cd52e46b160fc9f6fc17a75a"
+            "sha256": "84a53eefb37883a2d310366baf363877ae73a837623e66ae0e7030512dcdc544"
           },
           "package_lock": {
             "path": "package-lock.json",
             "sha256": "752642db96fd5ffb17a01466e7e81d74c25add0466fa2f5327e2a65dd6fdbff6",
             "lockfile_version": 3
+          },
+          "dependency_bundle": {
+            "manifest_path": "vendor/npm/manifest.json",
+            "manifest_sha256": "088d3f1b0b51063ff06850882cb3ff5e60e3028adfedc78f25c926bf90afdcea",
+            "archive_path": "vendor/npm/npm-dependency-bundle.tar",
+            "archive_sha256": "eb5f7eb0614909dc51052ded4614d5d5d478257e57729d06769cf5940854defb",
+            "bundle_fingerprint_sha256": "8798eb37107586f3b33235330f441fffd18dc2e62a36d1b0bd72c22bff1b99a2",
+            "package_entry_count": 193
           }
         }
+      }
+    },
+    {
+      "name": "npm_dependency_bundle_valid",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "fingerprint": "8798eb37107586f3b33235330f441fffd18dc2e62a36d1b0bd72c22bff1b99a2",
+        "failures": []
       }
     },
     {
@@ -111,8 +128,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "249f8a156c22d9544aa65d4d08d5884363b58a0d27d012ba150f47df86e6d4c9",
-        "actual": "249f8a156c22d9544aa65d4d08d5884363b58a0d27d012ba150f47df86e6d4c9"
+        "expected": "29a46be3e603d9d38d9bb7630205fadbf6ea4cde36ed7c086ec9d78aa0170c39",
+        "actual": "29a46be3e603d9d38d9bb7630205fadbf6ea4cde36ed7c086ec9d78aa0170c39"
       }
     }
   ],
