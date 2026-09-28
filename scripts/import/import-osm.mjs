@@ -137,8 +137,10 @@ async function materializeContentAddressedSnapshot(code,result){
  const path=snapshotPath(code,result.semanticSha);
  try{
   const existing=await readFile(path);
-  const existingSha=sha256(existing);
-  if(existingSha!==result.compressedSha)throw new Error(`OSM ${code} content-addressed snapshot collision at ${path}`);
+  const canonical=gunzipSync(existing);
+  if(sha256(canonical)!==result.semanticSha)throw new Error(`OSM ${code} content-addressed snapshot collision at ${path}`);
+  result.compressed=existing;
+  result.compressedSha=sha256(existing);
   return path;
  }catch(error){
   if(error?.code!=='ENOENT')throw error;
@@ -155,8 +157,7 @@ async function main(){
  for(const [code,result] of Object.entries(fresh))result.snapshotPath=await materializeContentAddressedSnapshot(code,result);
 
  const unchanged=Boolean(previous)&&Object.keys(countries).every(code=>
-  previous.countries?.[code]?.semantic_sha256===fresh[code].semanticSha&&
-  previous.countries?.[code]?.compressed_sha256===fresh[code].compressedSha
+  previous.countries?.[code]?.semantic_sha256===fresh[code].semanticSha
  );
  const status=unchanged?'UNCHANGED':'UPDATED';
  const manifest=unchanged?previous:{
