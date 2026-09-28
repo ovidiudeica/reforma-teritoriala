@@ -6,7 +6,7 @@ import {mkdtemp,mkdir,readFile,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {actualSemanticFingerprint} from '../lib/actual-semantic-fingerprint.mjs';
-import {classifyCandidateDisposition,validateCandidatePromotion} from '../lib/actual-candidate-lifecycle.mjs';
+import {classifyCandidateDisposition,validateCandidatePromotion,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
 
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const readJson=async path=>JSON.parse(await readFile(path,'utf8'));
@@ -259,4 +259,44 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   wrong_snapshot_promotion:'REJECTED',
   no_change_promotion:'REJECTED'
  }));
+});
+
+
+test('candidate semantic manifest binding supports only explicit v3 binding or exact legacy base-byte reuse',()=>{
+ const semantic='a'.repeat(64);
+ const changed='b'.repeat(64);
+
+ const explicit=validateCandidateSemanticManifestBinding({
+  manifestContentFingerprint:semantic,
+  candidateContentFingerprint:semantic,
+  baselineContentFingerprint:semantic,
+  exactBaseManifestBytesReused:false
+ });
+ assert.equal(explicit.status,'PASS');
+ assert.equal(explicit.binding,'explicit_manifest_fingerprint');
+
+ const exactLegacy=validateCandidateSemanticManifestBinding({
+  manifestContentFingerprint:undefined,
+  candidateContentFingerprint:semantic,
+  baselineContentFingerprint:semantic,
+  exactBaseManifestBytesReused:true
+ });
+ assert.equal(exactLegacy.status,'PASS');
+ assert.equal(exactLegacy.binding,'exact_base_manifest_byte_reuse');
+
+ const nonExactLegacy=validateCandidateSemanticManifestBinding({
+  manifestContentFingerprint:undefined,
+  candidateContentFingerprint:semantic,
+  baselineContentFingerprint:semantic,
+  exactBaseManifestBytesReused:false
+ });
+ assert.equal(nonExactLegacy.status,'FAIL');
+
+ const changedSemantic=validateCandidateSemanticManifestBinding({
+  manifestContentFingerprint:undefined,
+  candidateContentFingerprint:changed,
+  baselineContentFingerprint:semantic,
+  exactBaseManifestBytesReused:true
+ });
+ assert.equal(changedSemantic.status,'FAIL');
 });
