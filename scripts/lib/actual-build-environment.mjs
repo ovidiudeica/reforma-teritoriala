@@ -3,6 +3,7 @@ import {execFileSync} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
 import {NPM_BUNDLE_ARCHIVE,NPM_BUNDLE_MANIFEST,validateNpmDependencyBundle} from './actual-npm-dependency-bundle.mjs';
 import {EXPECTED_RUNTIME_IMAGE,RUNTIME_IMAGE_PATH,validateRuntimeImageManifest} from './actual-runtime-image.mjs';
+import {HOST_TRUST_PATH,validateHostTrustManifest} from './actual-host-trust.mjs';
 
 export const BUILD_ENVIRONMENT_PATH='data/current/actual-build-environment-manifest.json';
 export const BUILD_ENVIRONMENT_GATE_PATH='data/current/actual-build-environment-gate.json';
@@ -40,6 +41,9 @@ export const BUILD_SUPPORT_FILES=[
  'scripts/lib/actual-runtime-image.mjs',
  'scripts/process/build-actual-runtime-image-manifest.mjs',
  'scripts/process/audit-actual-runtime-image.mjs',
+ 'scripts/lib/actual-host-trust.mjs',
+ 'scripts/process/build-actual-host-trust-manifest.mjs',
+ 'scripts/process/audit-actual-host-trust.mjs',
  'scripts/lib/actual-review-evidence-bundle.mjs',
  'scripts/process/build-actual-review-evidence-bundle.mjs',
  'scripts/process/audit-actual-review-evidence-bundle-gate.mjs',
@@ -73,7 +77,12 @@ const parseWorkflow=content=>{
  const dockerSocketMounted=/\/var\/run\/docker\.sock/.test(content);
  const capDropAllCount=(content.match(/--cap-drop\s+ALL/g)||[]).length;
  const noNewPrivilegesCount=(content.match(/no-new-privileges/g)||[]).length;
- return {runs_on:runsOn,uses,node_versions:nodeVersions,container_images:containerImages,runtime_env_refs:runtimeEnvRefs,docker_network_none_count:dockerNetworkNoneCount,docker_network_bridge_count:dockerNetworkBridgeCount,docker_socket_mounted:dockerSocketMounted,cap_drop_all_count:capDropAllCount,no_new_privileges_count:noNewPrivilegesCount};
+ const cpusetCpuZeroCount=(content.match(/--cpuset-cpus\s+0/g)||[]).length;
+ const nodeJitlessCount=(content.match(/--env NODE_OPTIONS=--jitless/g)||[]).length;
+ const uvThreadpoolOneCount=(content.match(/--env UV_THREADPOOL_SIZE=1/g)||[]).length;
+ const timezoneUtcCount=(content.match(/--env TZ=UTC/g)||[]).length;
+ const localeCutf8Count=(content.match(/--env (?:LANG|LC_ALL)=C\.UTF-8/g)||[]).length;
+ return {runs_on:runsOn,uses,node_versions:nodeVersions,container_images:containerImages,runtime_env_refs:runtimeEnvRefs,docker_network_none_count:dockerNetworkNoneCount,docker_network_bridge_count:dockerNetworkBridgeCount,docker_socket_mounted:dockerSocketMounted,cap_drop_all_count:capDropAllCount,no_new_privileges_count:noNewPrivilegesCount,cpuset_cpu_zero_count:cpusetCpuZeroCount,node_jitless_count:nodeJitlessCount,uv_threadpool_one_count:uvThreadpoolOneCount,timezone_utc_count:timezoneUtcCount,locale_c_utf8_count:localeCutf8Count};
 };
 
 export function buildEnvironmentFingerprint(manifest){
@@ -89,17 +98,19 @@ export function buildEnvironmentFingerprint(manifest){
 }
 
 export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
- const [packageBytes,lockBytes,npmBundleManifestBytes,npmBundleArchiveBytes,runtimeManifestBytes]=await Promise.all([
+ const [packageBytes,lockBytes,npmBundleManifestBytes,npmBundleArchiveBytes,runtimeManifestBytes,hostTrustBytes]=await Promise.all([
   readFileFn('package.json'),
   readFileFn('package-lock.json'),
   readFileFn(NPM_BUNDLE_MANIFEST),
   readFileFn(NPM_BUNDLE_ARCHIVE),
-  readFileFn(RUNTIME_IMAGE_PATH)
+  readFileFn(RUNTIME_IMAGE_PATH),
+  readFileFn(HOST_TRUST_PATH)
  ]);
  const packageJson=JSON.parse(packageBytes.toString('utf8'));
  const lock=JSON.parse(lockBytes.toString('utf8'));
  const npmBundleManifest=JSON.parse(npmBundleManifestBytes.toString('utf8'));
  const runtimeManifest=JSON.parse(runtimeManifestBytes.toString('utf8'));
+ const hostTrustManifest=JSON.parse(hostTrustBytes.toString('utf8'));
  const supportFiles=Object.fromEntries(await Promise.all(BUILD_SUPPORT_FILES.map(async path=>{
   const bytes=await readFileFn(path);
   return [path,sha256(bytes)];
@@ -122,7 +133,12 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
    docker_network_bridge_count:parsed.docker_network_bridge_count,
    docker_socket_mounted:parsed.docker_socket_mounted,
    cap_drop_all_count:parsed.cap_drop_all_count,
-   no_new_privileges_count:parsed.no_new_privileges_count
+   no_new_privileges_count:parsed.no_new_privileges_count,
+   cpuset_cpu_zero_count:parsed.cpuset_cpu_zero_count,
+   node_jitless_count:parsed.node_jitless_count,
+   uv_threadpool_one_count:parsed.uv_threadpool_one_count,
+   timezone_utc_count:parsed.timezone_utc_count,
+   locale_c_utf8_count:parsed.locale_c_utf8_count
   };
   for(const value of workflows[id].actions){
    const at=value.lastIndexOf('@');
@@ -140,6 +156,18 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
    platform:runtimeManifest.runtime?.platform??null,
    base_ref:runtimeManifest.runtime?.base_ref??null,
    base_digest:runtimeManifest.runtime?.base_digest??null
+  },
+  host_trust:{
+   manifest_path:HOST_TRUST_PATH,
+   manifest_sha256:sha256(hostTrustBytes),
+   host_trust_fingerprint_algorithm:hostTrustManifest.host_trust_fingerprint_algorithm??null,
+   host_trust_fingerprint_sha256:hostTrustManifest.host_trust_fingerprint_sha256??null,
+   runner_image_version:hostTrustManifest.contract?.runner?.image_version??null,
+   kernel_release:hostTrustManifest.contract?.kernel?.release??null,
+   docker_server_version:hostTrustManifest.contract?.docker?.server_version??null,
+   containerd_version:hostTrustManifest.contract?.docker?.components?.containerd?.version??null,
+   runc_version:hostTrustManifest.contract?.docker?.components?.runc?.version??null,
+   cpu_execution_profile:hostTrustManifest.contract?.cpu_contract?.execution_profile??null
   },
   toolchain:{
    node:packageJson.engines?.node??null,
@@ -176,7 +204,7 @@ export function buildBuildEnvironmentManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_BUILD_ENVIRONMENT',
   environment_fingerprint_algorithm:BUILD_ENVIRONMENT_ALGORITHM,
-  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation for the deterministic candidate phase, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment or network-policy drift fails closed.',
+  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract (kernel, Docker/containerd/runc, cgroup/storage stack and CPU compatibility floor), the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, host-stack, CPU-profile or network-policy drift fails closed.',
   environment:inspected
  };
  const fingerprint=buildEnvironmentFingerprint(draft);
@@ -196,12 +224,14 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
   checks.push({name,ok:Boolean(ok),detail});
   if(!ok)failures.push({name,detail});
  };
- let current=null,error=null,npmBundleValidation=null,runtimeValidation=null;
+ let current=null,error=null,npmBundleValidation=null,runtimeValidation=null,hostTrustValidation=null;
  try{
   current=await inspectCurrentBuildEnvironment({readFileFn});
   npmBundleValidation=await validateNpmDependencyBundle({readFileFn});
   const runtimeBytes=await readFileFn(RUNTIME_IMAGE_PATH);
   runtimeValidation=await validateRuntimeImageManifest(JSON.parse(runtimeBytes.toString('utf8')),{readFileFn});
+  const hostTrustBytes=await readFileFn(HOST_TRUST_PATH);
+  hostTrustValidation=validateHostTrustManifest(JSON.parse(hostTrustBytes.toString('utf8')));
  }
  catch(err){error=err;}
 
@@ -242,6 +272,25 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
    && current.network_policy?.no_new_privileges===true
    && current.network_policy?.docker_socket_mounted===false,
    {candidate:{docker_network_none_count:candidateWorkflow.docker_network_none_count,docker_network_bridge_count:candidateWorkflow.docker_network_bridge_count,cap_drop_all_count:candidateWorkflow.cap_drop_all_count,no_new_privileges_count:candidateWorkflow.no_new_privileges_count,docker_socket_mounted:candidateWorkflow.docker_socket_mounted},policy:current.network_policy});
+
+  check('host_trust_contract_is_exact',
+   hostTrustValidation?.status==='PASS'
+   && current.host_trust?.host_trust_fingerprint_sha256===hostTrustValidation?.fingerprint?.sha256,
+   {status:hostTrustValidation?.status??null,fingerprint:hostTrustValidation?.fingerprint?.sha256??null,failures:hostTrustValidation?.failures??[],current:current.host_trust});
+
+  check('deterministic_cpu_profile_is_exact',
+   candidateWorkflow.cpuset_cpu_zero_count>=2
+   && candidateWorkflow.node_jitless_count>=2
+   && candidateWorkflow.uv_threadpool_one_count>=2
+   && candidateWorkflow.timezone_utc_count>=2
+   && candidateWorkflow.locale_c_utf8_count>=4
+   && current.host_trust?.cpu_execution_profile?.platform==='linux/amd64'
+   && current.host_trust?.cpu_execution_profile?.cpuset_cpus==='0'
+   && current.host_trust?.cpu_execution_profile?.node_options==='--jitless'
+   && current.host_trust?.cpu_execution_profile?.uv_threadpool_size==='1'
+   && current.host_trust?.cpu_execution_profile?.timezone==='UTC'
+   && current.host_trust?.cpu_execution_profile?.locale==='C.UTF-8',
+   {candidate:{cpuset_cpu_zero_count:candidateWorkflow.cpuset_cpu_zero_count,node_jitless_count:candidateWorkflow.node_jitless_count,uv_threadpool_one_count:candidateWorkflow.uv_threadpool_one_count,timezone_utc_count:candidateWorkflow.timezone_utc_count,locale_c_utf8_count:candidateWorkflow.locale_c_utf8_count},profile:current.host_trust?.cpu_execution_profile??null});
 
   check('dynamic_node_setup_is_absent',
    Object.values(current.workflows).every(item=>item.node_versions.length===0)
