@@ -37,11 +37,13 @@ jobs:
           BASE_DIGEST="sha256:$(sha256sum /tmp/node-manifest.json | awk '{print $1}')"
           test "$BASE_DIGEST" = "$PINNED_BASE_DIGEST"
           DOCKERFILE_SHA256="$(sha256sum container/actual-runtime/Dockerfile | awk '{print $1}')"
+          BUILDER_SHA256="$(sha256sum .github/workflows/build-actual-runtime-image.yml | awk '{print $1}')"
           echo "base_tag=$BASE_TAG" >> "$GITHUB_OUTPUT"
           echo "base_digest=$BASE_DIGEST" >> "$GITHUB_OUTPUT"
           echo "dockerfile_sha256=$DOCKERFILE_SHA256" >> "$GITHUB_OUTPUT"
+          echo "builder_sha256=$BUILDER_SHA256" >> "$GITHUB_OUTPUT"
           echo "### ACTUAL runtime upstream" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Base: `$BASE_TAG@$BASE_DIGEST`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Base: $BASE_TAG@$BASE_DIGEST" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Log in to GHCR
         shell: bash
@@ -86,10 +88,11 @@ jobs:
           echo "digest=$RUNTIME_DIGEST" >> "$GITHUB_OUTPUT"
           echo "dockerfile_sha256=$DOCKERFILE_SHA256" >> "$GITHUB_OUTPUT"
           echo "### ACTUAL OCI runtime" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Image: `$IMAGE@$RUNTIME_DIGEST`" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Base digest: `$BASE_DIGEST`" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Dockerfile SHA-256: `$DOCKERFILE_SHA256`" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Reproducible double-build digest: `$RUNTIME_DIGEST`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Image: $IMAGE@$RUNTIME_DIGEST" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Base digest: $BASE_DIGEST" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Dockerfile SHA-256: $DOCKERFILE_SHA256" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Builder workflow SHA-256: ${{ steps.base.outputs.builder_sha256 }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Reproducible double-build digest: $RUNTIME_DIGEST" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Verify published runtime
         shell: bash
