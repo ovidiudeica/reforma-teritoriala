@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "3869854a75e604c323d6751204a65d606f1e29476086408b77346d55609513ff",
+  "environment_fingerprint_sha256": "67bd868212d100460de999a6ef5fd38da73f91a35e2fb038978e5f793978066a",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract (kernel, Docker/containerd/runc, cgroup/storage stack and CPU compatibility floor), the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -75,7 +75,7 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "5cc8952c3c14681d0206c87a2c22d774e4908bb1f3246362c0fd605fd68ff3c8",
+      "scripts/lib/actual-build-environment.mjs": "e540f7baca3166962483aa7967f7a81fe094ca270fd12f7dc71dfcc3132f54af",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
       "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
@@ -93,12 +93,16 @@
       "scripts/process/audit-actual-review-evidence-bundle-gate.mjs": "925e30d7b8e950a6f269d02008020f5cca383812b0f51ad6c2a11e68e6b1cfac",
       "scripts/process/prove-actual-network-denial.mjs": "60e1845aa5a0caf0f9cd065c737f6d0718018fef088d93093e0b1a8977ae74ff",
       "scripts/process/verify-actual-persisted-base.mjs": "8cc25b64647178b09569fc782ae000914c39dcf7d51137b05efd6348bd45a85c",
-      "scripts/process/run-actual-deterministic-candidate.sh": "e43c6ce4caec185440d34770aaac6f640fed3075ba9fcde3538dbff8c534965f"
+      "scripts/process/run-actual-deterministic-candidate.sh": "e43c6ce4caec185440d34770aaac6f640fed3075ba9fcde3538dbff8c534965f",
+      "scripts/lib/actual-candidate-lifecycle.mjs": "4e3ba2c858e432f9b5198c82948dc6f12e7862d4fde7ea526fcdf1e0af7f0192",
+      "scripts/process/build-actual-candidate-diff.mjs": "dc3b694f14b0cab426a2d5065502cd5002f5215f32d2c4366fe72b22b38aa7de",
+      "scripts/process/prepare-actual-candidate-promotion.mjs": "0fa31fc664c6628faff21937c574c0e9d45d2ddb73ee145b6c340020dc54d899",
+      "scripts/process/write-actual-candidate-execution-receipt.mjs": "22dc706e3f713fc7870b11dd574eefee2054186008826abfc391a6833c8364bd"
     },
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "9d378393317b7b6807eafe67a4dbaaaa6621a020ac8ea9cadb6269e36bf4d25a",
+        "sha256": "82b41b4dd7a62a732e2693b15e5c147a3a59bc2a1bb957cede1b13a9b7cc1e40",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -150,7 +154,7 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "2110461f12a65066440986d3ccbd1dab6004ca31db3faec1213fc67b42d4f489",
+        "sha256": "28bee37b91dc9fdd4bb56f775a56cd7ba429cee4ebd5073c5b4532ab1b48bf74",
         "runs_on": [
           "ubuntu-24.04"
         ],
