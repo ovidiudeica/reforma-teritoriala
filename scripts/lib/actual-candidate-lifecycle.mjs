@@ -29,6 +29,25 @@ export function classifyCandidateDisposition({
  };
 }
 
+
+export function validateCandidateSemanticManifestBinding({
+ manifestContentFingerprint,
+ candidateContentFingerprint,
+ baselineContentFingerprint,
+ exactBaseManifestBytesReused=false
+}){
+ const explicitBinding=typeof manifestContentFingerprint==='string'
+  && manifestContentFingerprint===candidateContentFingerprint;
+ const exactLegacyReuse=exactBaseManifestBytesReused===true
+  && baselineContentFingerprint===candidateContentFingerprint;
+ return {
+  status:explicitBinding||exactLegacyReuse?'PASS':'FAIL',
+  binding:explicitBinding?'explicit_manifest_fingerprint':exactLegacyReuse?'exact_base_manifest_byte_reuse':null,
+  explicit_binding:explicitBinding,
+  exact_base_manifest_byte_reuse:exactLegacyReuse
+ };
+}
+
 export function validateCandidatePromotion({
  candidateMarker,
  diff,
