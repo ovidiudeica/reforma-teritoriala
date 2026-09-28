@@ -4,6 +4,7 @@ set -euo pipefail
 : "${ACTUAL_BASE_REF:?ACTUAL_BASE_REF is required}"
 : "${ACTUAL_NETWORK_MODE:?ACTUAL_NETWORK_MODE is required}"
 
+mkdir -p "${HOME:-/tmp/actual-home}"
 git config --global --add safe.directory /workspace
 
 npm run prove:actual-network-denial
