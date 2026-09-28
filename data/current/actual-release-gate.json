@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-28T21:34:05.589Z",
+  "generated_at": "2026-09-28T22:13:01.964Z",
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "a4864098f2741595679a7185e24fc5d4250ffe02f539468f938d5388c3f0fb18",
+  "manifest_sha256": "5287a7b1b9c339c26313fdc588072f6eea10bb18c25c41081b87800fa4b0f796",
   "status": "PASS",
-  "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, environment or release drift fails closed.",
+  "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
     {
       "name": "master_topology_audit_passes",
@@ -189,6 +189,44 @@
       }
     },
     {
+      "name": "network_denial_proof_passes",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "enforcement": "docker --network none",
+        "docker_socket_mounted": false,
+        "checks": {
+          "explicit_network_mode": true,
+          "sysfs_only_loopback": true,
+          "node_only_loopback": true,
+          "no_non_loopback_routes": true,
+          "external_ipv4_tcp_denied": true,
+          "external_ipv6_tcp_denied": true
+        }
+      }
+    },
+    {
+      "name": "manifest_binds_network_denial_proof",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "path": "data/current/actual-network-denial-audit.json",
+          "schema_version": 1,
+          "mode": "ACTUAL_NETWORK_DENIAL",
+          "status": "PASS",
+          "enforcement": "docker --network none",
+          "docker_socket_mounted": false,
+          "sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa"
+        },
+        "actual": {
+          "path": "data/current/actual-network-denial-audit.json",
+          "sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
+          "status": "PASS",
+          "enforcement": "docker --network none"
+        }
+      }
+    },
+    {
       "name": "build_environment_manifest_matches_repository",
       "ok": true,
       "detail": {
@@ -207,8 +245,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
-          "sha256": "43825378904ca3384816ceff09fbb4ff4871f1f8723218b0326e7b2536ace96a"
+          "environment_fingerprint_sha256": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
+          "sha256": "dcdbf88a4f424dd4c6602b79a10ec75a014c22b6d68311be42e57246fd4f924f"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -217,8 +255,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
-          "sha256": "43825378904ca3384816ceff09fbb4ff4871f1f8723218b0326e7b2536ace96a"
+          "environment_fingerprint_sha256": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
+          "sha256": "dcdbf88a4f424dd4c6602b79a10ec75a014c22b6d68311be42e57246fd4f924f"
         }
       }
     },

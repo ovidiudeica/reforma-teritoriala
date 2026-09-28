@@ -49,14 +49,18 @@ test('release manifest cryptographically binds the current source bundle',async(
 });
 
 test('candidate lifecycle builds and gates source bundle after refreshes and before deterministic OSM build',async()=>{
- const workflow=await readFile('.github/workflows/actual-candidate.yml','utf8');
+ const [workflow,runner]=await Promise.all([
+  readFile('.github/workflows/actual-candidate.yml','utf8'),
+  readFile('scripts/process/run-actual-deterministic-candidate.sh','utf8')
+ ]);
  const lastRefresh=Math.max(workflow.indexOf('npm run import:ro-siruta'),workflow.indexOf('npm run import:md-cuatm'),workflow.indexOf('npm run import:osm'));
- const buildBundle=workflow.indexOf('npm run build:actual-source-bundle');
- const gateBundle=workflow.indexOf('npm run audit:actual-source-bundle');
- const osmBuild=workflow.indexOf('npm run build:osm-actual');
- const releaseManifest=workflow.indexOf('npm run build:actual-release-manifest');
- assert.ok(lastRefresh>=0&&buildBundle>lastRefresh);
- assert.ok(gateBundle>buildBundle&&osmBuild>gateBundle);
+ const deterministicPhase=workflow.indexOf('scripts/process/run-actual-deterministic-candidate.sh');
+ assert.ok(lastRefresh>=0&&deterministicPhase>lastRefresh);
+ const buildBundle=runner.indexOf('npm run build:actual-source-bundle');
+ const gateBundle=runner.indexOf('npm run audit:actual-source-bundle');
+ const osmBuild=runner.indexOf('npm run build:osm-actual');
+ const releaseManifest=runner.indexOf('npm run build:actual-release-manifest');
+ assert.ok(buildBundle>=0&&gateBundle>buildBundle&&osmBuild>gateBundle);
  assert.ok(releaseManifest>osmBuild);
  assert.match(workflow,/data\/current\/actual-source-bundle-manifest\.json/);
  assert.match(workflow,/data\/current\/actual-source-bundle-gate\.json/);

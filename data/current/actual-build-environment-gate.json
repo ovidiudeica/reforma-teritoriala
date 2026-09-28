@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "43825378904ca3384816ceff09fbb4ff4871f1f8723218b0326e7b2536ace96a",
-  "environment_fingerprint_sha256": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
+  "build_environment_sha256": "dcdbf88a4f424dd4c6602b79a10ec75a014c22b6d68311be42e57246fd4f924f",
+  "environment_fingerprint_sha256": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner family/image, the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest. GitHub Actions runs also verify the observed hosted image version.",
   "checks": [
@@ -21,7 +21,7 @@
       "detail": {
         "workflow_count": 4,
         "action_count": 2,
-        "support_file_count": 13
+        "support_file_count": 15
       }
     },
     {
@@ -51,18 +51,30 @@
       "detail": {
         "expected": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
         "actual": {
-          "candidate": [
-            "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
-          ],
-          "topology": [
-            "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
-          ],
-          "promotion": [
-            "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
-          ],
-          "verify": [
-            "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
-          ]
+          "candidate": {
+            "container_images": [],
+            "runtime_env_refs": [
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+            ]
+          },
+          "topology": {
+            "container_images": [
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+            ],
+            "runtime_env_refs": []
+          },
+          "promotion": {
+            "container_images": [
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+            ],
+            "runtime_env_refs": []
+          },
+          "verify": {
+            "container_images": [
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+            ],
+            "runtime_env_refs": []
+          }
         },
         "manifest": {
           "manifest_path": "data/current/actual-runtime-image.json",
@@ -73,6 +85,28 @@
           "platform": "linux/amd64",
           "base_ref": "node:24.21.0-bookworm@sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
           "base_digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4"
+        }
+      }
+    },
+    {
+      "name": "deterministic_network_isolation_is_exact",
+      "ok": true,
+      "detail": {
+        "candidate": {
+          "docker_network_none_count": 3,
+          "docker_network_bridge_count": 1,
+          "cap_drop_all_count": 3,
+          "no_new_privileges_count": 3,
+          "docker_socket_mounted": false
+        },
+        "policy": {
+          "enforcement": "docker-network-namespace",
+          "deterministic_network": "none",
+          "privilege_drop": "ALL",
+          "no_new_privileges": true,
+          "docker_socket_mounted": false,
+          "proof_script": "scripts/process/prove-actual-network-denial.mjs",
+          "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
         }
       }
     },
@@ -130,7 +164,7 @@
           "package_manager": "npm@11.19.0",
           "package_json": {
             "path": "package.json",
-            "sha256": "002815ddea515613ca119bda189ad36cc0e3bcdfa5b9469ffc085c9b36d71147"
+            "sha256": "a17c49e4501e7398839a642f9b3020a5f47d3d23f484b7687f5eea440e3e70a9"
           },
           "package_lock": {
             "path": "package-lock.json",
@@ -162,8 +196,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311",
-        "actual": "7de39c7912ee19dd64883ee513b44a7a075aaa1ed09c58e0fa229726e10bf311"
+        "expected": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d",
+        "actual": "67fc6fe5b6d1c149816d7b91d74ed2e102faeb85cb4ce06c903e99822e87a52d"
       }
     },
     {

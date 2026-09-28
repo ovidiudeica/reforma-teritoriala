@@ -42,7 +42,9 @@ export const BUILD_SUPPORT_FILES=[
  'scripts/process/audit-actual-runtime-image.mjs',
  'scripts/lib/actual-review-evidence-bundle.mjs',
  'scripts/process/build-actual-review-evidence-bundle.mjs',
- 'scripts/process/audit-actual-review-evidence-bundle-gate.mjs'
+ 'scripts/process/audit-actual-review-evidence-bundle-gate.mjs',
+ 'scripts/process/prove-actual-network-denial.mjs',
+ 'scripts/process/run-actual-deterministic-candidate.sh'
 ];
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
@@ -64,7 +66,13 @@ const parseWorkflow=content=>{
  const uses=[...content.matchAll(/^\s*uses:\s*([^\s#]+).*$/gm)].map(m=>m[1]);
  const nodeVersions=[...content.matchAll(/^\s*node-version:\s*['"]?([^'"\s#]+).*$/gm)].map(m=>m[1]);
  const containerImages=[...content.matchAll(/^\s*image:\s*([^\s#]+).*$/gm)].map(m=>m[1]);
- return {runs_on:runsOn,uses,node_versions:nodeVersions,container_images:containerImages};
+ const runtimeEnvRefs=[...content.matchAll(/^\s*ACTUAL_RUNTIME_IMAGE:\s*([^\s#]+).*$/gm)].map(m=>m[1]);
+ const dockerNetworkNoneCount=(content.match(/--network\s+none/g)||[]).length;
+ const dockerNetworkBridgeCount=(content.match(/--network\s+bridge/g)||[]).length;
+ const dockerSocketMounted=/\/var\/run\/docker\.sock/.test(content);
+ const capDropAllCount=(content.match(/--cap-drop\s+ALL/g)||[]).length;
+ const noNewPrivilegesCount=(content.match(/no-new-privileges/g)||[]).length;
+ return {runs_on:runsOn,uses,node_versions:nodeVersions,container_images:containerImages,runtime_env_refs:runtimeEnvRefs,docker_network_none_count:dockerNetworkNoneCount,docker_network_bridge_count:dockerNetworkBridgeCount,docker_socket_mounted:dockerSocketMounted,cap_drop_all_count:capDropAllCount,no_new_privileges_count:noNewPrivilegesCount};
 };
 
 export function buildEnvironmentFingerprint(manifest){
@@ -107,7 +115,13 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
    runs_on:parsed.runs_on,
    node_versions:parsed.node_versions,
    container_images:parsed.container_images,
-   actions:parsed.uses.filter(value=>value.startsWith('actions/')).sort()
+   actions:parsed.uses.filter(value=>value.startsWith('actions/')).sort(),
+   runtime_env_refs:parsed.runtime_env_refs,
+   docker_network_none_count:parsed.docker_network_none_count,
+   docker_network_bridge_count:parsed.docker_network_bridge_count,
+   docker_socket_mounted:parsed.docker_socket_mounted,
+   cap_drop_all_count:parsed.cap_drop_all_count,
+   no_new_privileges_count:parsed.no_new_privileges_count
   };
   for(const value of workflows[id].actions){
    const at=value.lastIndexOf('@');
@@ -142,6 +156,15 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
    }
   },
   actions:Object.fromEntries([...actionUses.entries()].sort(([a],[b])=>a.localeCompare(b))),
+  network_policy:{
+   enforcement:'docker-network-namespace',
+   deterministic_network:'none',
+   privilege_drop:'ALL',
+   no_new_privileges:true,
+   docker_socket_mounted:false,
+   proof_script:'scripts/process/prove-actual-network-denial.mjs',
+   deterministic_runner:'scripts/process/run-actual-deterministic-candidate.sh'
+  },
   support_files:supportFiles,
   workflows
  };
@@ -152,7 +175,7 @@ export function buildBuildEnvironmentManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_BUILD_ENVIRONMENT',
   environment_fingerprint_algorithm:BUILD_ENVIRONMENT_ALGORITHM,
-  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.',
+  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation for the deterministic candidate phase, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment or network-policy drift fails closed.',
   environment:inspected
  };
  const fingerprint=buildEnvironmentFingerprint(draft);
@@ -196,11 +219,28 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
    Object.values(current.workflows).every(item=>item.runs_on.length===1&&item.runs_on[0]===EXPECTED_BUILD_ENVIRONMENT.runner.label),
    {expected:EXPECTED_BUILD_ENVIRONMENT.runner.label,actual:Object.fromEntries(Object.entries(current.workflows).map(([id,item])=>[id,item.runs_on]))});
 
+  const candidateWorkflow=current.workflows.candidate;
+  const otherWorkflows=Object.entries(current.workflows).filter(([id])=>id!=='candidate').map(([,item])=>item);
   check('runtime_container_is_exact',
-   Object.values(current.workflows).every(item=>item.container_images.length===1&&item.container_images[0]===EXPECTED_RUNTIME_IMAGE.ref)
+   candidateWorkflow.container_images.length===0
+   && candidateWorkflow.runtime_env_refs.length===1
+   && candidateWorkflow.runtime_env_refs[0]===EXPECTED_RUNTIME_IMAGE.ref
+   && otherWorkflows.every(item=>item.container_images.length===1&&item.container_images[0]===EXPECTED_RUNTIME_IMAGE.ref)
    && current.runtime_image.ref===EXPECTED_RUNTIME_IMAGE.ref
    && current.runtime_image.digest===EXPECTED_RUNTIME_IMAGE.digest,
-   {expected:EXPECTED_RUNTIME_IMAGE.ref,actual:Object.fromEntries(Object.entries(current.workflows).map(([id,item])=>[id,item.container_images])),manifest:current.runtime_image});
+   {expected:EXPECTED_RUNTIME_IMAGE.ref,actual:Object.fromEntries(Object.entries(current.workflows).map(([id,item])=>[id,{container_images:item.container_images,runtime_env_refs:item.runtime_env_refs}])),manifest:current.runtime_image});
+
+  check('deterministic_network_isolation_is_exact',
+   candidateWorkflow.docker_network_none_count>=2
+   && candidateWorkflow.cap_drop_all_count>=2
+   && candidateWorkflow.no_new_privileges_count>=2
+   && candidateWorkflow.docker_socket_mounted===false
+   && current.network_policy?.enforcement==='docker-network-namespace'
+   && current.network_policy?.deterministic_network==='none'
+   && current.network_policy?.privilege_drop==='ALL'
+   && current.network_policy?.no_new_privileges===true
+   && current.network_policy?.docker_socket_mounted===false,
+   {candidate:{docker_network_none_count:candidateWorkflow.docker_network_none_count,docker_network_bridge_count:candidateWorkflow.docker_network_bridge_count,cap_drop_all_count:candidateWorkflow.cap_drop_all_count,no_new_privileges_count:candidateWorkflow.no_new_privileges_count,docker_socket_mounted:candidateWorkflow.docker_socket_mounted},policy:current.network_policy});
 
   check('dynamic_node_setup_is_absent',
    Object.values(current.workflows).every(item=>item.node_versions.length===0)
