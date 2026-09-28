@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "source": "OpenStreetMap",
+  "transport": "Overpass API",
+  "query_version": 1,
+  "fetched_at": "2026-09-28T00:08:09.095Z",
+  "runtime_directory": "data/sources/osm-runtime",
+  "countries": {
+    "RO": {
+      "name": "România",
+      "iso": "RO",
+      "levels": [
+        4,
+        8,
+        9
+      ],
+      "required_levels": [
+        4,
+        8,
+        9
+      ],
+      "required_relations": [],
+      "runtime_path": "data/sources/osm-runtime/ro-overpass.json.gz",
+      "semantic_sha256": "d8e84166a90eddd297b5e59b25086a9ad3751dada6d15782781210b8f18fd363",
+      "query_sha256": "954368fd8c39d94b5692b2b88aeba8fb33117bc7f3395b4c3a0ead6847cc4ece",
+      "element_count": 783495,
+      "relation_count": 3234,
+      "endpoint": "https://overpass-api.de/api/interpreter"
+    },
+    "MD": {
+      "name": "Republica Moldova",
+      "iso": "MD",
+      "levels": [
+        4,
+        6,
+        8,
+        9
+      ],
+      "required_levels": [
+        4,
+        8,
+        9
+      ],
+      "required_relations": [
+        1813306,
+        1813297,
+        58512,
+        1813315,
+        1813316
+      ],
+      "runtime_path": "data/sources/osm-runtime/md-overpass.json.gz",
+      "semantic_sha256": "057890e4d6b1bd6d76e98576622f2c727958dad82f902ec5c39d87bcc1b223fe",
+      "query_sha256": "f182a7a54069bcfe72a924ba178f9821f55f6e61368a4f25d42bf8e0241d52d0",
+      "element_count": 560394,
+      "relation_count": 2596,
+      "endpoint": "https://overpass-api.de/api/interpreter"
+    }
+  }
+}
