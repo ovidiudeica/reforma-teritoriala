@@ -153,7 +153,13 @@ export function validateObservedHost(manifest,observed){
  const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
  const expected=manifest?.contract??{};
  const exact=(name,actual,wanted)=>check(name,JSON.stringify(canonicalizeHostTrust(actual))===JSON.stringify(canonicalizeHostTrust(wanted)),{expected:wanted,actual});
- exact('runner_exact',observed?.runner,expected.runner);
+ const expectedObservedRunner={
+  image_os:expected.runner?.image_os??null,
+  image_version:expected.runner?.image_version??null,
+  arch:expected.runner?.arch??null,
+  os:expected.runner?.os??null
+ };
+ exact('runner_observable_identity_exact',observed?.runner,expectedObservedRunner);
  exact('kernel_exact',observed?.kernel,expected.kernel);
  exact('docker_exact',observed?.docker,expected.docker);
  exact('engine_exact',observed?.engine,expected.engine);
