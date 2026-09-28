@@ -12,6 +12,7 @@ console.log(JSON.stringify({
  environment_fingerprint_sha256:manifest.environment_fingerprint_sha256,
  runner:manifest.environment.runner,
  runtime_image:manifest.environment.runtime_image,
+ host_trust:manifest.environment.host_trust,
  toolchain:{
   node:manifest.environment.toolchain.node,
   npm:manifest.environment.toolchain.npm,
