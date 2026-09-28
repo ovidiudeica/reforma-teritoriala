@@ -111,3 +111,19 @@ The candidate ordering is:
 `optional SIRUTA/CUATM refreshes -> optional OSM network refresh -> deterministic OSM build from durable snapshot -> RO/MD reconciliation -> jurisdiction gates -> ACTUAL semantic diff`.
 
 If an OSM refresh is semantically unchanged, the manifest and gzip bytes remain stable and the candidate should terminate as `NO_CHANGE`. A substantive downstream change becomes a normal `CHANGE` candidate and can reach `main` only through explicit promotion and the protected PR path.
+
+
+## Byte-for-byte reproducibility
+
+Release-component bytes are stabilized before candidate manifest construction.
+
+The OSM source manifest carries a stable `snapshot_at` clock bound to the content-addressed semantic snapshot. An unchanged Overpass refresh preserves that timestamp; a genuinely new OSM semantic snapshot receives a new source timestamp. Deterministic OSM construction uses `snapshot_at`, never the latest network fetch time, for catalog provenance.
+
+After all reconciliation, gates, public-contract generation and release audits complete, `stabilize:actual-bytes` compares every release-manifest component with the exact persisted base bytes from `ACTUAL_BASE_REF`.
+
+- If the JSON content is identical except for controlled artifact-runtime metadata (`generated_at`, `source_generated_at`, `applied_at`, `imported_at`) or object-key order, the exact persisted bytes are restored.
+- Any non-volatile content difference is preserved and serialized deterministically with a timestamp derived only from the materialized source snapshots.
+- Stabilization is required to be idempotent for every component.
+- When every component matches the persisted base after stabilization and semantic content is unchanged, the exact base release-manifest bytes are reused as well.
+
+The byte-reproducibility audit is written to `data/current/actual-byte-reproducibility-audit.json` and included in the candidate review artifact. For a true no-change offline rebuild, the required target is `component_hash_changed_count = 0`.
