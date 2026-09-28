@@ -61,6 +61,7 @@ const persisted={
  snapshot_id:manifest.snapshot_id,
  release_fingerprint_sha256:manifest.release_fingerprint_sha256,
  manifest_sha256:actualCandidateManifestSha256,
+ source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
  validated_release_gate_status:'PASS',
  promoted_from_candidate:{
   base_snapshot_id:candidateMarker.base_release.snapshot_id,
@@ -70,7 +71,7 @@ const persisted={
   promotion_audit_path:'data/current/actual-candidate-promotion-audit.json'
  },
  source_candidate:candidateMarker.source,
- policy:'Persisted ACTUAL release marker written only by explicit candidate promotion after exact candidate validation and unchanged-base verification.'
+ policy:'Persisted ACTUAL release marker written only by explicit candidate promotion after exact candidate validation, exact source-bundle binding and unchanged-base verification.'
 };
 await writeFile('data/current/actual-release-persisted.json',JSON.stringify(persisted,null,2)+'\n');
 console.log(JSON.stringify({status:'PASS',base_snapshot_id:candidateMarker.base_release.snapshot_id,promoted_snapshot_id:manifest.snapshot_id,review_required:candidateMarker.review_required,substantive_change_count:candidateMarker.substantive_change_count},null,2));
