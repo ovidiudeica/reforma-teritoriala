@@ -36,7 +36,7 @@
     "apply:md-reviewed-reconciliation": "node scripts/process/apply-md-reviewed-reconciliation.mjs",
     "build:actual-candidate-diff": "node scripts/process/build-actual-candidate-diff.mjs",
     "prepare:actual-candidate-promotion": "node scripts/process/prepare-actual-candidate-promotion.mjs",
-    "test:actual-candidate-lifecycle": "node --test scripts/test/actual-candidate-lifecycle.test.mjs scripts/test/actual-byte-reproducibility.test.mjs scripts/test/actual-source-bundle.test.mjs scripts/test/actual-review-evidence-bundle.test.mjs scripts/test/actual-build-environment.test.mjs scripts/test/actual-runtime-image.test.mjs scripts/test/npm-offline-dependency-bundle.test.mjs scripts/test/toolchain-reproducibility.test.mjs scripts/test/ro-siruta-refresh-routing.test.mjs scripts/test/md-cuatm-refresh-routing.test.mjs scripts/test/osm-refresh-routing.test.mjs scripts/test/workflow-write-boundaries.test.mjs",
+    "test:actual-candidate-lifecycle": "node --test scripts/test/actual-candidate-lifecycle.test.mjs scripts/test/actual-byte-reproducibility.test.mjs scripts/test/actual-source-bundle.test.mjs scripts/test/actual-review-evidence-bundle.test.mjs scripts/test/actual-build-environment.test.mjs scripts/test/actual-network-denial.test.mjs scripts/test/actual-runtime-image.test.mjs scripts/test/npm-offline-dependency-bundle.test.mjs scripts/test/toolchain-reproducibility.test.mjs scripts/test/ro-siruta-refresh-routing.test.mjs scripts/test/md-cuatm-refresh-routing.test.mjs scripts/test/osm-refresh-routing.test.mjs scripts/test/workflow-write-boundaries.test.mjs",
     "import:md-cuatm": "node scripts/import/import-md-cuatm.mjs",
     "build:osm-actual": "node scripts/process/build-osm-actual.mjs",
     "stabilize:actual-bytes": "node scripts/process/stabilize-actual-release-bytes.mjs",
@@ -52,7 +52,9 @@
     "build:actual-runtime-image-manifest": "node scripts/process/build-actual-runtime-image-manifest.mjs",
     "audit:actual-runtime-image": "node scripts/process/audit-actual-runtime-image.mjs",
     "build:actual-review-evidence-bundle": "node scripts/process/build-actual-review-evidence-bundle.mjs",
-    "audit:actual-review-evidence-bundle": "node scripts/process/audit-actual-review-evidence-bundle-gate.mjs"
+    "audit:actual-review-evidence-bundle": "node scripts/process/audit-actual-review-evidence-bundle-gate.mjs",
+    "prove:actual-network-denial": "node scripts/process/prove-actual-network-denial.mjs",
+    "run:actual-deterministic-candidate": "bash scripts/process/run-actual-deterministic-candidate.sh"
   },
   "dependencies": {
     "@turf/turf": "7.4.0",
