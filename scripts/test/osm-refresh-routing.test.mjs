@@ -64,6 +64,8 @@ test('OSM importer is the only networked OSM source step and writes durable cont
  assert.match(importer,/data\/sources\/osm-snapshots/);
  assert.match(importer,/snapshotPath/);
  assert.match(importer,/compressed_sha256/);
+ assert.match(importer,/snapshot_at/);
+ assert.match(importer,/previousEntry\?\.semantic_sha256===result\.semanticSha/);
  assert.match(importer,/status=unchanged\?'UNCHANGED':'UPDATED'/);
  assert.match(importer,/semantic_sha256/);
  assert.doesNotMatch(importer,/data\/sources\/osm-runtime/);
@@ -72,12 +74,14 @@ test('OSM importer is the only networked OSM source step and writes durable cont
  assert.match(builder,/data\/sources\/osm-snapshots/);
  assert.match(builder,/snapshot_path/);
  assert.match(builder,/compressed_sha256/);
+ assert.match(builder,/osmSource\.snapshot_at/);
  assert.match(builder,/readRawSnapshot/);
  assert.match(builder,/gunzipSync/);
  assert.doesNotMatch(builder,/\bfetch\s*\(/);
  assert.doesNotMatch(builder,/OVERPASS_/);
  assert.doesNotMatch(builder,/https:\/\/overpass/);
- assert.doesNotMatch(builder,/new Date\s*\(/);
+ assert.doesNotMatch(builder,/new Date\s*\(\s*\)/);
+ assert.doesNotMatch(builder,/Date\.now\s*\(/);
  assert.doesNotMatch(builder,/osm-runtime/);
 });
 
@@ -85,9 +89,11 @@ test('committed OSM manifest points to exact durable content-addressed bytes',as
  const manifest=JSON.parse(await readFile(manifestPath,'utf8'));
  assert.equal(manifest.schema_version,2);
  assert.equal(manifest.snapshot_directory,'data/sources/osm-snapshots');
+ assert.ok(Number.isFinite(new Date(manifest.snapshot_at).getTime()));
  for(const code of ['RO','MD']){
   const entry=manifest.countries?.[code];
   assert.ok(entry,code+' manifest entry is required');
+  assert.ok(Number.isFinite(new Date(entry.snapshot_at).getTime()),code+' snapshot_at must be stable');
   const expected=`data/sources/osm-snapshots/${code.toLowerCase()}-${entry.semantic_sha256}.json.gz`;
   assert.equal(entry.snapshot_path,expected);
   const compressed=await readFile(entry.snapshot_path);
