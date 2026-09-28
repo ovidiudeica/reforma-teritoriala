@@ -63,15 +63,21 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out persisted release
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           ref: main
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: '24.21.0'
+
+      - name: Build deterministic ACTUAL execution environment
+        run: npm run build:actual-build-environment
+
+      - name: Gate pinned ACTUAL execution environment
+        run: npm run audit:actual-build-environment
 
       - name: Audit pinned Node/npm toolchain
         run: npm run audit:node-toolchain
@@ -283,7 +289,7 @@ jobs:
           echo "NO_CHANGE: release identity retained; no candidate branch or promotion PR will be created." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload candidate review bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: actual-candidate-${{ github.run_id }}
           path: |
@@ -291,6 +297,8 @@ jobs:
             data/current/actual-candidate-diff.json
             data/current/actual-source-bundle-manifest.json
             data/current/actual-source-bundle-gate.json
+            data/current/actual-build-environment-manifest.json
+            data/current/actual-build-environment-gate.json
             data/current/actual-release-manifest.json
             data/current/actual-release-gate.json
             data/current/actual-topology-audit.json
