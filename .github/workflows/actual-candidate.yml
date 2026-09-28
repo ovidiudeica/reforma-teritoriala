@@ -120,20 +120,7 @@ jobs:
               npm run audit:actual-build-environment
               npm run audit:node-toolchain
               ACTUAL_RELEASE_GATE_READ_ONLY=1 npm run audit:actual-release-gate
-              node --input-type=module <<"NODE"
-              import {createHash} from "node:crypto";
-              import {readFile} from "node:fs/promises";
-              const marker=JSON.parse(await readFile("data/current/actual-release-persisted.json","utf8"));
-              const manifestBytes=await readFile("data/current/actual-release-manifest.json");
-              const manifest=JSON.parse(manifestBytes);
-              const buildEnvironment=JSON.parse(await readFile("data/current/actual-build-environment-manifest.json","utf8"));
-              const reviewEvidence=JSON.parse(await readFile("data/current/actual-review-evidence-bundle.json","utf8"));
-              const sha=createHash("sha256").update(manifestBytes).digest("hex");
-              if(marker.validated_release_gate_status!=="PASS"||marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.build_environment_fingerprint_sha256!==manifest.build_environment?.environment_fingerprint_sha256||manifest.build_environment?.environment_fingerprint_sha256!==buildEnvironment.environment_fingerprint_sha256||marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256||manifest.review_evidence_bundle?.bundle_fingerprint_sha256!==reviewEvidence.bundle_fingerprint_sha256||marker.network_denial_sha256!==manifest.network_denial?.sha256){
-                throw new Error("Persisted base release is not internally consistent.");
-              }
-              console.log(JSON.stringify({status:"PASS",snapshot_id:marker.snapshot_id,manifest_sha256:sha,build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256,review_evidence_bundle_fingerprint_sha256:reviewEvidence.bundle_fingerprint_sha256,network_denial_sha256:manifest.network_denial?.sha256??null},null,2));
-              NODE
+              node scripts/process/verify-actual-persisted-base.mjs
             '
 
       - name: Record candidate source trigger
