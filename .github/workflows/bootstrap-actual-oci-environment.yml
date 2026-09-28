@@ -89,16 +89,49 @@ jobs:
           NODE
           ACTUAL_RELEASE_GATE_READ_ONLY=1 npm run audit:actual-release-gate
 
-      - name: Commit deterministic OCI environment binding
+      - name: Persist deterministic OCI environment binding
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_BRANCH: actual/pin-oci-runtime
         run: |
-          git -C "$GITHUB_WORKSPACE" config user.name "github-actions[bot]"
-          git -C "$GITHUB_WORKSPACE" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git -C "$GITHUB_WORKSPACE" add data/current/actual-runtime-image.json \
-                  data/current/actual-build-environment-manifest.json \
-                  data/current/actual-build-environment-gate.json \
-                  data/current/actual-release-manifest.json \
-                  data/current/actual-release-persisted.json \
-                  data/current/actual-release-gate.json
-          git -C "$GITHUB_WORKSPACE" diff --cached --quiet && exit 0
-          git -C "$GITHUB_WORKSPACE" commit -m "Bind ACTUAL release to pinned OCI runtime"
-          git -C "$GITHUB_WORKSPACE" push origin HEAD:actual/pin-oci-runtime
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';
+          const repo=process.env.GITHUB_REPOSITORY;
+          const token=process.env.GH_TOKEN;
+          const branch=process.env.TARGET_BRANCH;
+          const paths=[
+            'data/current/actual-runtime-image.json',
+            'data/current/actual-build-environment-manifest.json',
+            'data/current/actual-build-environment-gate.json',
+            'data/current/actual-release-manifest.json',
+            'data/current/actual-release-persisted.json',
+            'data/current/actual-release-gate.json'
+          ];
+          const headers={
+            Accept:'application/vnd.github+json',
+            Authorization:`Bearer ${token}`,
+            'X-GitHub-Api-Version':'2022-11-28',
+            'Content-Type':'application/json'
+          };
+          for(const path of paths){
+            const getUrl=new URL(`https://api.github.com/repos/${repo}/contents/${path}`);
+            getUrl.searchParams.set('ref',branch);
+            const current=await fetch(getUrl,{headers});
+            if(!current.ok)throw new Error(`GET ${path}: ${current.status} ${await current.text()}`);
+            const currentJson=await current.json();
+            const bytes=await readFile(path);
+            const put=await fetch(`https://api.github.com/repos/${repo}/contents/${path}`,{
+              method:'PUT',
+              headers,
+              body:JSON.stringify({
+                message:'Bind ACTUAL release to pinned OCI runtime',
+                content:bytes.toString('base64'),
+                sha:currentJson.sha,
+                branch
+              })
+            });
+            if(!put.ok)throw new Error(`PUT ${path}: ${put.status} ${await put.text()}`);
+            const result=await put.json();
+            console.log(JSON.stringify({path,commit:result.commit?.sha??null,content_sha:result.content?.sha??null}));
+          }
+          NODE
