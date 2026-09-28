@@ -240,14 +240,16 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
    node:process.version.replace(/^v/,''),
    npm:actualNpm,
    runner_os:process.env.RUNNER_OS??null,
-   image_os:process.env.ImageOS??null,
-   image_version:process.env.ImageVersion??null
+   host_image_os:process.env.ImageOS??null,
+   host_image_version:process.env.ImageVersion??null
   };
   check('runtime_node_exact',actual.node===EXPECTED_BUILD_ENVIRONMENT.toolchain.node,{expected:EXPECTED_BUILD_ENVIRONMENT.toolchain.node,actual:actual.node});
   check('runtime_npm_exact',actual.npm===EXPECTED_BUILD_ENVIRONMENT.toolchain.npm,{expected:EXPECTED_BUILD_ENVIRONMENT.toolchain.npm,actual:actual.npm});
   check('runtime_runner_os_linux',actual.runner_os==='Linux',{expected:'Linux',actual:actual.runner_os});
-  check('runtime_image_os_exact',actual.image_os===EXPECTED_BUILD_ENVIRONMENT.runner.image_os,{expected:EXPECTED_BUILD_ENVIRONMENT.runner.image_os,actual:actual.image_os});
-  check('runtime_image_version_exact',actual.image_version===EXPECTED_BUILD_ENVIRONMENT.runner.image_version,{expected:EXPECTED_BUILD_ENVIRONMENT.runner.image_version,actual:actual.image_version});
+  check('host_runner_identity_is_static_provenance',
+   actual.host_image_os===null&&actual.host_image_version===null
+   || actual.host_image_os===EXPECTED_BUILD_ENVIRONMENT.runner.image_os&&actual.host_image_version===EXPECTED_BUILD_ENVIRONMENT.runner.image_version,
+   {policy:'GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match the pinned provenance.',expected:{image_os:EXPECTED_BUILD_ENVIRONMENT.runner.image_os,image_version:EXPECTED_BUILD_ENVIRONMENT.runner.image_version},actual:{image_os:actual.host_image_os,image_version:actual.host_image_version}});
  }
 
  return {status:failures.length?'FAIL':'PASS',checks,failures,current,fingerprint};
