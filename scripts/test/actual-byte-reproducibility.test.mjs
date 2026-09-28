@@ -61,16 +61,18 @@ test('only artifact-runtime metadata is ignored; external historical timestamps 
 
 test('candidate stabilizes release components before manifest construction',async()=>{
   const {readFile}=await import('node:fs/promises');
-  const [workflow,pkg]=await Promise.all([
+  const [workflow,runner,pkg]=await Promise.all([
     readFile('.github/workflows/actual-candidate.yml','utf8'),
+    readFile('scripts/process/run-actual-deterministic-candidate.sh','utf8'),
     readFile('package.json','utf8').then(JSON.parse)
   ]);
-  const stabilizeIndex=workflow.indexOf('npm run stabilize:actual-bytes');
-  const manifestIndex=workflow.indexOf('npm run build:actual-release-manifest');
-  const diffIndex=workflow.indexOf('npm run build:actual-candidate-diff');
+  const stabilizeIndex=runner.indexOf('npm run stabilize:actual-bytes');
+  const manifestIndex=runner.indexOf('npm run build:actual-release-manifest');
+  const diffIndex=runner.indexOf('npm run build:actual-candidate-diff');
   assert.ok(stabilizeIndex>=0&&manifestIndex>stabilizeIndex&&diffIndex>manifestIndex);
   assert.equal(pkg.scripts['stabilize:actual-bytes'],'node scripts/process/stabilize-actual-release-bytes.mjs');
-  assert.match(workflow,/ACTUAL_BASE_REF: \$\{\{ steps\.base\.outputs\.base_release_commit \}\}/);
+  assert.match(workflow,/--env ACTUAL_BASE_REF="\$BASE_RELEASE_COMMIT"/);
+  assert.match(workflow,/--network none/);
 });
 
 test('stabilizer scope matches the release manifest component set',async()=>{
