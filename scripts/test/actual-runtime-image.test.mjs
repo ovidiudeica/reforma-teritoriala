@@ -11,9 +11,14 @@ test('committed ACTUAL OCI runtime exactly matches pinned definition',async()=>{
 });
 
 test('all ACTUAL jobs consume the exact OCI digest and do not setup Node dynamically',async()=>{
- for(const name of ['actual-candidate.yml','actual-topology-audit.yml','actual-promote-candidate.yml','verify-persisted-actual-release.yml']){
-  const content=await readFile('.github/workflows/'+name,'utf8');
-  assert.match(content,new RegExp('image:\\s*'+EXPECTED_RUNTIME_IMAGE.ref.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
-  assert.doesNotMatch(content,/actions\/setup-node@/);
+ const escaped=EXPECTED_RUNTIME_IMAGE.ref.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const candidate=await readFile('.github/workflows/actual-candidate.yml','utf8');
+ assert.match(candidate,new RegExp('ACTUAL_RUNTIME_IMAGE:\\s*'+escaped));
+ assert.match(candidate,/docker run[\s\S]*?--network none/);
+ assert.doesNotMatch(candidate,/actions\/setup-node@/);
+ for(const name of ['actual-topology-audit.yml','actual-promote-candidate.yml','verify-persisted-actual-release.yml']){
+  const workflow=await readFile('.github/workflows/'+name,'utf8');
+  assert.match(workflow,new RegExp('image:\\s*'+escaped));
+  assert.doesNotMatch(workflow,/actions\/setup-node@/);
  }
 });
