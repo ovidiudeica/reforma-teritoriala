@@ -45,7 +45,7 @@ test('OSM importer is the only networked OSM source step',async()=>{
  assert.match(builder,/data\/sources\/osm-current\.json/);
  assert.match(builder,/readRawSnapshot/);
  assert.match(builder,/gunzipSync/);
- assert.match(builder,/const CLASSIFIER_VERSION='2\\.3'/);
+ assert.match(builder,/const CLASSIFIER_VERSION='2\.3';/);
  assert.match(builder,/const countries=/);
  assert.match(builder,/ro-level9-exception-evidence\\.json/);
  assert.match(builder,/RO_SEMANTIC_CLASSES/);
