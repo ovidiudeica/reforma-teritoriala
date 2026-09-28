@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFile,writeFile} from 'node:fs/promises';
 import {actualSemanticFingerprint,semanticCatalogEntities} from '../lib/actual-semantic-fingerprint.mjs';
-import {classifyCandidateDisposition,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
+import {candidateIdentityFingerprint,classifyCandidateDisposition,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
 
 const BASE_REF=process.env.ACTUAL_BASE_REF;
 if(!BASE_REF)throw new Error('ACTUAL_BASE_REF is required and must identify the persisted release commit/ref.');
@@ -174,8 +174,7 @@ const lifecycle=classifyCandidateDisposition({
 failures.push(...lifecycle.failures);
 const disposition=failures.length?'FAIL':lifecycle.status;
 const report={
- schema_version:2,
- generated_at:new Date().toISOString(),
+ schema_version:3,
  mode:'ACTUAL_CANDIDATE_DIFF',
  status:disposition,
  base_ref:BASE_REF,
@@ -230,21 +229,23 @@ const report={
 };
 await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
 const diffBytes=await readFile(OUTPUT);
+const diffReportSha256=sha256(diffBytes);
+const candidateIdentity=candidateIdentityFingerprint({baseRef:BASE_REF,baseRelease:report.base_release,candidate:report.candidate,diffReportSha256});
 const marker={
- schema_version:1,
+ schema_version:2,
  mode:'ACTUAL_CANDIDATE',
  status:report.status,
- generated_at:report.generated_at,
  base_ref:BASE_REF,
  base_release:report.base_release,
  candidate:report.candidate,
  diff_report_path:OUTPUT,
- diff_report_sha256:sha256(diffBytes),
+ diff_report_sha256:diffReportSha256,
+ candidate_identity_algorithm:candidateIdentity.algorithm,
+ candidate_identity_sha256:candidateIdentity.sha256,
  review_required:report.summary.review_required,
  substantive_change_count:lifecycle.substantive_change_count,
- source:{workflow_run_id:process.env.GITHUB_RUN_ID??null,workflow_run_attempt:process.env.GITHUB_RUN_ATTEMPT??null,source_sha:process.env.GITHUB_SHA??null},
- policy:'NO_CHANGE candidates retain the persisted snapshot identity and cannot be promoted. CHANGE candidates may be promoted only while their persisted base remains unchanged and exact candidate bytes still pass the release gate.'
+ policy:'Candidate tree identity is deterministic from the immutable base, exact candidate release provenance and exact diff bytes. Runtime timestamps and GitHub run metadata are execution-receipt data only and must never enter a committed candidate tree.'
 };
 await writeFile(MARKER,JSON.stringify(marker,null,2)+'\n');
-console.log(JSON.stringify({status:report.status,base_snapshot_id:report.base_release.snapshot_id,candidate_snapshot_id:report.candidate.snapshot_id,summary:report.summary,diff_report_sha256:marker.diff_report_sha256},null,2));
+console.log(JSON.stringify({status:report.status,base_snapshot_id:report.base_release.snapshot_id,candidate_snapshot_id:report.candidate.snapshot_id,candidate_identity_sha256:marker.candidate_identity_sha256,summary:report.summary,diff_report_sha256:marker.diff_report_sha256},null,2));
 if(failures.length)process.exit(1);
