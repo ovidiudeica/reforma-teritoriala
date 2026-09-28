@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "249f8a156c22d9544aa65d4d08d5884363b58a0d27d012ba150f47df86e6d4c9",
-  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family and image version, Node/npm, package files, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.",
+  "environment_fingerprint_sha256": "29a46be3e603d9d38d9bb7630205fadbf6ea4cde36ed7c086ec9d78aa0170c39",
+  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, Node/npm, package files, the vendored offline npm dependency bundle, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment drift fails closed.",
   "environment": {
     "runner": {
       "label": "ubuntu-24.04",
@@ -16,12 +16,20 @@
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "9ef9164b64d437c4c10e99f113714005a2798d19cd52e46b160fc9f6fc17a75a"
+        "sha256": "84a53eefb37883a2d310366baf363877ae73a837623e66ae0e7030512dcdc544"
       },
       "package_lock": {
         "path": "package-lock.json",
         "sha256": "752642db96fd5ffb17a01466e7e81d74c25add0466fa2f5327e2a65dd6fdbff6",
         "lockfile_version": 3
+      },
+      "dependency_bundle": {
+        "manifest_path": "vendor/npm/manifest.json",
+        "manifest_sha256": "088d3f1b0b51063ff06850882cb3ff5e60e3028adfedc78f25c926bf90afdcea",
+        "archive_path": "vendor/npm/npm-dependency-bundle.tar",
+        "archive_sha256": "eb5f7eb0614909dc51052ded4614d5d5d478257e57729d06769cf5940854defb",
+        "bundle_fingerprint_sha256": "8798eb37107586f3b33235330f441fffd18dc2e62a36d1b0bd72c22bff1b99a2",
+        "package_entry_count": 193
       }
     },
     "actions": {
@@ -32,7 +40,7 @@
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "d8b2e8f6b6b12ff4ba02ef507fa5fe46b4e0cf3cde4c7fed5e0e1a5afbc9af8c",
+        "sha256": "c77d674b52ac92f1f2f42760c19e5f9d62f9fd736bca0dacc9a58fcec13746dc",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -47,7 +55,7 @@
       },
       "topology": {
         "path": ".github/workflows/actual-topology-audit.yml",
-        "sha256": "8c43c4a1c6dec6928c2b42838c934090c47b15b1a0a7fe7ab5eb864e78d02984",
+        "sha256": "f3d04a24c58267c279f02951cb5313143ac6cb79a078c1c2e26652f4e48a18c2",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -62,7 +70,7 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "5aa83aa20634241b2df091ad69a7dc2a7aec4be3f60219e8901eb4a6e88d7828",
+        "sha256": "468eda4183eec724cd9f1200ae8ee81f0f66df73126af9d763f3a33cfdbcbcd4",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -76,7 +84,7 @@
       },
       "verify": {
         "path": ".github/workflows/verify-persisted-actual-release.yml",
-        "sha256": "21015af8fa8d15697785c603f68e662f379e30c3a42d88e66f111a79d7b69a27",
+        "sha256": "111c765d81963896e288cd00730e355d0dc2c6185869557592fff9b172f0e5f4",
         "runs_on": [
           "ubuntu-24.04"
         ],
