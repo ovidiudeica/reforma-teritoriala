@@ -106,11 +106,12 @@ jobs:
           const marker=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
           const manifestBytes=await readFile('data/current/actual-release-manifest.json');
           const manifest=JSON.parse(manifestBytes);
+          const buildEnvironment=JSON.parse(await readFile('data/current/actual-build-environment-manifest.json','utf8'));
           const sha=createHash('sha256').update(manifestBytes).digest('hex');
-          if(marker.validated_release_gate_status!=='PASS'||marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha){
+          if(marker.validated_release_gate_status!=='PASS'||marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.build_environment_fingerprint_sha256!==manifest.build_environment?.environment_fingerprint_sha256||manifest.build_environment?.environment_fingerprint_sha256!==buildEnvironment.environment_fingerprint_sha256){
             throw new Error('Persisted base release is not internally consistent.');
           }
-          console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha},null,2));
+          console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha,build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256},null,2));
           NODE
 
       - run: npm ci --no-audit --no-fund
