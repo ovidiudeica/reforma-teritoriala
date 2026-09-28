@@ -6,6 +6,17 @@ import osmtogeojson from 'osmtogeojson';
 import { area, intersect, featureCollection, pointOnFeature, booleanPointInPolygon } from '@turf/turf';
 
 const OSM_MANIFEST='data/sources/osm-current.json';
+const CLASSIFIER_VERSION='2.3';
+const countries={
+ RO:{name:'România',iso:'RO',levels:[4,8,9]},
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316]}
+};
+const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
+const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
+const RO_SEMANTIC_CLASSES=new Set([
+ 'component_village_boundary_representation',
+ 'municipality_component_locality_boundary_representation'
+]);
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 async function loadOsmSourceManifest(){
  const manifest=JSON.parse(await readFile(OSM_MANIFEST,'utf8'));
