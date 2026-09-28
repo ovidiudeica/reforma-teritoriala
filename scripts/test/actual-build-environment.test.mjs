@@ -19,13 +19,15 @@ test('committed ACTUAL build environment matches repository bytes and exact pins
  assert.deepEqual(manifest.environment.actions,EXPECTED_BUILD_ENVIRONMENT.actions);
 });
 
-test('build-environment fingerprint reacts to workflow, action and lockfile identities',async()=>{
+test('build-environment fingerprint reacts to workflow, action, lockfile and vendored dependency identities',async()=>{
  const manifest=await readJson(BUILD_ENVIRONMENT_PATH);
  const before=buildEnvironmentFingerprint(manifest).sha256;
  for(const mutate of [
   value=>{value.environment.actions['actions/checkout']='0'.repeat(40);},
   value=>{value.environment.workflows.candidate.sha256='1'.repeat(64);},
-  value=>{value.environment.toolchain.package_lock.sha256='2'.repeat(64);}
+  value=>{value.environment.toolchain.package_lock.sha256='2'.repeat(64);},
+  value=>{value.environment.toolchain.dependency_bundle.archive_sha256='3'.repeat(64);},
+  value=>{value.environment.toolchain.dependency_bundle.bundle_fingerprint_sha256='4'.repeat(64);}
  ]){
   const changed=structuredClone(manifest);
   mutate(changed);
@@ -49,8 +51,9 @@ test('candidate builds and gates execution environment before dependency install
  const workflow=await readFile('.github/workflows/actual-candidate.yml','utf8');
  const build=workflow.indexOf('npm run build:actual-build-environment');
  const gate=workflow.indexOf('npm run audit:actual-build-environment');
- const ci=workflow.indexOf('npm ci --no-audit --no-fund');
- assert.ok(build>=0&&gate>build&&ci>gate);
+ const bundleGate=workflow.indexOf('npm run audit:actual-npm-dependency-bundle');
+ const offlineInstall=workflow.indexOf('npm run install:actual-offline-deps');
+ assert.ok(bundleGate>=0&&build>bundleGate&&gate>build&&offlineInstall>gate);
  assert.match(workflow,/data\/current\/actual-build-environment-manifest\.json/);
  assert.match(workflow,/data\/current\/actual-build-environment-gate\.json/);
 });
