@@ -29,6 +29,15 @@ export const BUILD_WORKFLOWS={
  promotion:'.github/workflows/actual-promote-candidate.yml',
  verify:'.github/workflows/verify-persisted-actual-release.yml'
 };
+export const BUILD_SUPPORT_FILES=[
+ 'scripts/lib/actual-build-environment.mjs',
+ 'scripts/lib/actual-npm-dependency-bundle.mjs',
+ 'scripts/process/build-actual-build-environment-manifest.mjs',
+ 'scripts/process/audit-actual-build-environment-gate.mjs',
+ 'scripts/process/audit-actual-npm-dependency-bundle.mjs',
+ 'scripts/process/install-actual-npm-offline.mjs',
+ 'scripts/process/audit-node-toolchain.mjs'
+];
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
 export function canonicalizeBuildEnvironment(value){
@@ -73,6 +82,10 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
  const packageJson=JSON.parse(packageBytes.toString('utf8'));
  const lock=JSON.parse(lockBytes.toString('utf8'));
  const npmBundleManifest=JSON.parse(npmBundleManifestBytes.toString('utf8'));
+ const supportFiles=Object.fromEntries(await Promise.all(BUILD_SUPPORT_FILES.map(async path=>{
+  const bytes=await readFileFn(path);
+  return [path,sha256(bytes)];
+ })));
  const workflows={};
  const actionUses=new Map();
  for(const [id,path] of Object.entries(BUILD_WORKFLOWS)){
@@ -109,6 +122,7 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
    }
   },
   actions:Object.fromEntries([...actionUses.entries()].sort(([a],[b])=>a.localeCompare(b))),
+  support_files:supportFiles,
   workflows
  };
 }
@@ -154,7 +168,7 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
  }else{
   check('manifest_matches_repository_environment',
    JSON.stringify(canonicalizeBuildEnvironment(manifest?.environment??null))===JSON.stringify(canonicalizeBuildEnvironment(current)),
-   {workflow_count:Object.keys(current.workflows).length,action_count:Object.keys(current.actions).length});
+   {workflow_count:Object.keys(current.workflows).length,action_count:Object.keys(current.actions).length,support_file_count:Object.keys(current.support_files).length});
 
   check('runner_label_is_exact',
    Object.values(current.workflows).every(item=>item.runs_on.length===1&&item.runs_on[0]===EXPECTED_BUILD_ENVIRONMENT.runner.label),
