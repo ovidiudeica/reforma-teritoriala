@@ -4,9 +4,9 @@
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "0c9ed50433e66d952dfb244e0c4bec7ccf69bab2dc620139b715eee1bcb18ac2",
+  "manifest_sha256": "2c1afca1d5156191485ff7452132d2703f6afe8f1f4bf18f01e4e658d551b8e9",
   "status": "PASS",
-  "policy": "The public ACTUAL RO+MD release is publishable only when master topology has no blocking structural corruption, both jurisdiction gates pass, the manifest fingerprints exact master and public bytes, the public entity contract matches the catalog identity set one-to-one, and every tiered web geometry maps to exactly one current contract entity while preserving master coordinates without simplification. Any drift fails closed.",
+  "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle passes its gate and is cryptographically bound by the release manifest, master topology and jurisdiction gates pass, and exact master/public bytes remain valid. Any source or release drift fails closed.",
   "checks": [
     {
       "name": "master_topology_audit_passes",
@@ -115,6 +115,41 @@
         "actual": {
           "status": "PASS",
           "sha256": "b587bd9a00563ba34123030ef0a1748b4218b1c9427302492b0043034a044f42"
+        }
+      }
+    },
+    {
+      "name": "source_bundle_gate_passes",
+      "ok": true,
+      "detail": {
+        "validation_status": "PASS",
+        "gate_status": "PASS",
+        "gate_bundle_sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6",
+        "actual_bundle_sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6",
+        "fingerprint": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f"
+      }
+    },
+    {
+      "name": "manifest_binds_current_source_bundle",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "path": "data/current/actual-source-bundle-manifest.json",
+          "schema_version": 1,
+          "mode": "ACTUAL_SOURCE_BUNDLE",
+          "source_watermark": "2026-09-27T20:37:24.316Z",
+          "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
+          "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
+          "sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6"
+        },
+        "actual": {
+          "path": "data/current/actual-source-bundle-manifest.json",
+          "schema_version": 1,
+          "mode": "ACTUAL_SOURCE_BUNDLE",
+          "source_watermark": "2026-09-27T20:37:24.316Z",
+          "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
+          "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
+          "sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6"
         }
       }
     },
