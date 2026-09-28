@@ -62,38 +62,14 @@ concurrency:
 jobs:
   build-candidate:
     runs-on: ubuntu-24.04
-    container:
-      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    env:
+      ACTUAL_RUNTIME_IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
     steps:
       - name: Check out persisted release
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           ref: main
           fetch-depth: 0
-
-      - name: Build deterministic ACTUAL OCI runtime manifest
-        run: npm run build:actual-runtime-image-manifest
-
-      - name: Trust mounted GitHub workspace
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-      - name: Gate pinned ACTUAL OCI runtime
-        run: npm run audit:actual-runtime-image
-
-      - name: Audit vendored npm dependency bundle
-        run: npm run audit:actual-npm-dependency-bundle
-
-      - name: Build deterministic ACTUAL execution environment
-        run: npm run build:actual-build-environment
-
-      - name: Gate pinned ACTUAL execution environment
-        run: npm run audit:actual-build-environment
-
-      - name: Audit pinned Node/npm toolchain
-        run: npm run audit:node-toolchain
 
       - name: Capture immutable candidate base
         id: base
@@ -108,42 +84,54 @@ jobs:
           echo "base_release_commit=$BASE_RELEASE_COMMIT" >> "$GITHUB_OUTPUT"
           echo "candidate_branch=$CANDIDATE_BRANCH" >> "$GITHUB_OUTPUT"
 
-      - name: Verify persisted base release before generation
+      - name: Authenticate and pull exact ACTUAL runtime
         env:
-          ACTUAL_RELEASE_GATE_READ_ONLY: '1'
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          node scripts/process/audit-actual-release-gate.mjs
-          node --input-type=module <<'NODE'
-          import {createHash} from 'node:crypto';
-          import {readFile} from 'node:fs/promises';
-          const marker=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
-          const manifestBytes=await readFile('data/current/actual-release-manifest.json');
-          const manifest=JSON.parse(manifestBytes);
-          const buildEnvironment=JSON.parse(await readFile('data/current/actual-build-environment-manifest.json','utf8'));
-          const reviewEvidence=JSON.parse(await readFile('data/current/actual-review-evidence-bundle.json','utf8'));
-          const sha=createHash('sha256').update(manifestBytes).digest('hex');
-          if(marker.validated_release_gate_status!=='PASS'||marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.build_environment_fingerprint_sha256!==manifest.build_environment?.environment_fingerprint_sha256||manifest.build_environment?.environment_fingerprint_sha256!==buildEnvironment.environment_fingerprint_sha256||marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256||manifest.review_evidence_bundle?.bundle_fingerprint_sha256!==reviewEvidence.bundle_fingerprint_sha256){
-            throw new Error('Persisted base release is not internally consistent.');
-          }
-          console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha,build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256,review_evidence_bundle_fingerprint_sha256:reviewEvidence.bundle_fingerprint_sha256},null,2));
-          NODE
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker pull "$ACTUAL_RUNTIME_IMAGE"
+          docker image inspect "$ACTUAL_RUNTIME_IMAGE" >/dev/null
 
-      - name: Install dependencies from vendored offline bundle
-        run: npm run install:actual-offline-deps
-
-      - name: Refresh official RO SIRUTA source inside candidate workspace
-        if: inputs.refresh_ro_siruta == true
-        timeout-minutes: 5
-        run: npm run import:ro-siruta
-
-      - name: Refresh official MD CUATM source inside candidate workspace
-        if: inputs.refresh_md_cuatm == true
-        timeout-minutes: 5
+      - name: Prove persisted base in a network-denied namespace
         env:
-          CUATM_REQUEST_TIMEOUT_MS: '60000'
-          CUATM_RETRIES: '2'
-          CUATM_RETRY_BACKOFF_MS: '3000'
-        run: npm run import:md-cuatm
+          BASE_RELEASE_COMMIT: ${{ steps.base.outputs.base_release_commit }}
+        run: |
+          docker run --rm \
+            --network none \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              git config --global --add safe.directory /workspace
+              npm run prove:actual-network-denial
+              npm run build:actual-runtime-image-manifest
+              npm run audit:actual-runtime-image
+              npm run audit:actual-npm-dependency-bundle
+              npm run build:actual-build-environment
+              npm run audit:actual-build-environment
+              npm run audit:node-toolchain
+              ACTUAL_RELEASE_GATE_READ_ONLY=1 npm run audit:actual-release-gate
+              node --input-type=module <<"NODE"
+              import {createHash} from "node:crypto";
+              import {readFile} from "node:fs/promises";
+              const marker=JSON.parse(await readFile("data/current/actual-release-persisted.json","utf8"));
+              const manifestBytes=await readFile("data/current/actual-release-manifest.json");
+              const manifest=JSON.parse(manifestBytes);
+              const buildEnvironment=JSON.parse(await readFile("data/current/actual-build-environment-manifest.json","utf8"));
+              const reviewEvidence=JSON.parse(await readFile("data/current/actual-review-evidence-bundle.json","utf8"));
+              const sha=createHash("sha256").update(manifestBytes).digest("hex");
+              if(marker.validated_release_gate_status!=="PASS"||marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.build_environment_fingerprint_sha256!==manifest.build_environment?.environment_fingerprint_sha256||manifest.build_environment?.environment_fingerprint_sha256!==buildEnvironment.environment_fingerprint_sha256||marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256||manifest.review_evidence_bundle?.bundle_fingerprint_sha256!==reviewEvidence.bundle_fingerprint_sha256){
+                throw new Error("Persisted base release is not internally consistent.");
+              }
+              console.log(JSON.stringify({status:"PASS",snapshot_id:marker.snapshot_id,manifest_sha256:sha,build_environment_fingerprint_sha256:buildEnvironment.environment_fingerprint_sha256,review_evidence_bundle_fingerprint_sha256:reviewEvidence.bundle_fingerprint_sha256},null,2));
+              NODE
+            '
 
       - name: Record candidate source trigger
         run: |
@@ -152,117 +140,81 @@ jobs:
           echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh OSM raw source: ${{ inputs.refresh_osm }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Deterministic network: docker --network none" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Refresh raw OSM source inside candidate workspace
-        if: inputs.refresh_osm == true
-        timeout-minutes: 20
+      - name: Refresh explicitly requested sources in network-enabled control phase
+        if: inputs.refresh_ro_siruta == true || inputs.refresh_md_cuatm == true || inputs.refresh_osm == true
+        timeout-minutes: 25
         env:
-          OVERPASS_REQUEST_TIMEOUT_MS: '90000'
-          OVERPASS_RETRIES_PER_ENDPOINT: '2'
-          OVERPASS_RETRY_BACKOFF_MS: '5000'
-        run: npm run import:osm
+          REFRESH_RO_SIRUTA: ${{ inputs.refresh_ro_siruta }}
+          REFRESH_MD_CUATM: ${{ inputs.refresh_md_cuatm }}
+          REFRESH_OSM: ${{ inputs.refresh_osm }}
+        run: |
+          docker run --rm \
+            --network bridge \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env REFRESH_RO_SIRUTA \
+            --env REFRESH_MD_CUATM \
+            --env REFRESH_OSM \
+            --env CUATM_REQUEST_TIMEOUT_MS=60000 \
+            --env CUATM_RETRIES=2 \
+            --env CUATM_RETRY_BACKOFF_MS=3000 \
+            --env OVERPASS_REQUEST_TIMEOUT_MS=90000 \
+            --env OVERPASS_RETRIES_PER_ENDPOINT=2 \
+            --env OVERPASS_RETRY_BACKOFF_MS=5000 \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              git config --global --add safe.directory /workspace
+              npm run install:actual-offline-deps
+              if [ "$REFRESH_RO_SIRUTA" = "true" ]; then npm run import:ro-siruta; fi
+              if [ "$REFRESH_MD_CUATM" = "true" ]; then npm run import:md-cuatm; fi
+              if [ "$REFRESH_OSM" = "true" ]; then npm run import:osm; fi
+            '
 
-      - name: Build deterministic ACTUAL source bundle
-        run: npm run build:actual-source-bundle
-
-      - name: Gate exact ACTUAL source bundle
-        run: npm run audit:actual-source-bundle
-
-      - name: Build frozen ACTUAL review evidence bundle
-        run: npm run build:actual-review-evidence-bundle
-
-      - name: Gate frozen ACTUAL review evidence bundle
-        run: npm run audit:actual-review-evidence-bundle
-
-      - name: Build deterministic OSM ACTUAL master from local snapshot
-        run: npm run build:osm-actual
-
-      - name: Audit ACTUAL master topology
-        run: npm run audit:actual-topology
-
-      - name: Reconcile RO against official SIRUTA
-        run: npm run audit:ro-official-reconciliation
-
-      - name: Audit RO county SIRUTA bridge
-        run: npm run audit:ro-county-siruta-bridge
-
-      - name: Apply RO official identity
-        run: npm run apply:ro-official-reconciliation
-
-      - name: Audit administrative catalog
-        run: npm run audit:admin
-
-      - name: Audit CUATM consistency
-        run: node scripts/process/audit-cuatm-consistency.mjs
-
-      - name: Audit CUATM same-identity chain patterns
-        run: npm run audit:cuatm-chains
-
-      - name: Compare Bălți candidate geometries
-        run: npm run audit:balti-geometry
-
-      - name: Localize Bălți component-locality differences
-        run: npm run audit:balti-components
-
-      - name: Analyze special municipality representations
-        run: npm run audit:md-special-municipalities
-
-      - name: Reconcile MD against CUATM
-        run: npm run reconcile:cuatm
-
-      - name: Audit MD semantic subtype bridge
-        run: npm run audit:md-cuatm-semantic-bridge
-
-      - name: Apply reviewed MD official identity
-        run: npm run apply:md-reviewed-reconciliation
-
-      - name: MD release gate
-        run: npm run audit:md-release-gate
-
-      - name: RO release gate
-        run: npm run audit:ro-release-gate
-
-      - name: Build public ACTUAL contract
-        run: npm run build:actual-public-data
-
-      - name: Audit Chișinău sector propagation
-        run: npm run audit:md-chisinau-sectors
-
-      - name: Audit structural completeness
-        run: npm run audit:actual-structural-completeness
-
-      - name: Audit official identity propagation
-        run: npm run audit:actual-official-identity
-
-      - name: Audit ACTUAL count regression
-        run: npm run audit:actual-regression
-
-      - name: Stabilize deterministic ACTUAL release bytes
+      - name: Run entire deterministic ACTUAL phase with kernel egress disabled
         env:
-          ACTUAL_BASE_REF: ${{ steps.base.outputs.base_release_commit }}
-        run: npm run stabilize:actual-bytes
-
-      - name: Build candidate release manifest
-        env:
-          ACTUAL_BASE_REF: ${{ steps.base.outputs.base_release_commit }}
-        run: npm run build:actual-release-manifest
-
-      - name: Validate exact candidate snapshot
-        run: npm run audit:actual-release-gate
-
-      - name: Diff candidate against persisted release
-        env:
-          ACTUAL_BASE_REF: ${{ steps.base.outputs.base_release_commit }}
-        run: npm run build:actual-candidate-diff
+          BASE_RELEASE_COMMIT: ${{ steps.base.outputs.base_release_commit }}
+        run: |
+          docker run --rm \
+            --network none \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_BASE_REF="$BASE_RELEASE_COMMIT" \
+            --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            --env GITHUB_RUN_ID \
+            --env GITHUB_RUN_ATTEMPT \
+            --env GITHUB_SHA \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash scripts/process/run-actual-deterministic-candidate.sh
 
       - name: Read candidate disposition
         id: disposition
         run: |
-          STATUS="$(node -p "require('./data/current/actual-release-candidate.json').status")"
+          STATUS="$(python3 - <<'PY'
+          import json
+          print(json.load(open('data/current/actual-release-candidate.json'))['status'])
+          PY
+          )"
           echo "status=$STATUS" >> "$GITHUB_OUTPUT"
           echo "### ACTUAL candidate disposition" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Status: $STATUS" >> "$GITHUB_STEP_SUMMARY"
-          node -e "const d=require('./data/current/actual-candidate-diff.json'); console.log('- Base snapshot: '+d.base_release.snapshot_id+'\n- Candidate snapshot: '+d.candidate.snapshot_id+'\n- Semantic content changed: '+d.summary.semantic_content_changed+'\n- Substantive changes: '+d.summary.substantive_change_count)" >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          d=json.load(open('data/current/actual-candidate-diff.json'))
+          print(f"- Status: {d['status']}")
+          print(f"- Base snapshot: {d['base_release']['snapshot_id']}")
+          print(f"- Candidate snapshot: {d['candidate']['snapshot_id']}")
+          print(f"- Semantic content changed: {d['summary']['semantic_content_changed']}")
+          print(f"- Component hashes changed: {d['summary']['component_hash_changed_count']}")
+          print(f"- Substantive changes: {d['summary']['substantive_change_count']}")
+          PY
 
       - name: Preserve base persisted marker
         run: git checkout "${{ steps.base.outputs.base_release_commit }}" -- data/current/actual-release-persisted.json
@@ -275,9 +227,17 @@ jobs:
           git checkout -b "$CANDIDATE_BRANCH"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/ public/data/actual-entities.json public/geo/current/ public/geo/actual/             data/sources/ro-siruta-current.json data/sources/cuatm-current.json data/sources/osm-current.json data/sources/osm-snapshots/             data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json             data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json             data/sources/md-balti-city-boundary-changeset-semantics.json
+          git add data/current/ public/data/actual-entities.json public/geo/current/ public/geo/actual/ \
+            data/sources/ro-siruta-current.json data/sources/cuatm-current.json data/sources/osm-current.json data/sources/osm-snapshots/ \
+            data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json \
+            data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json \
+            data/sources/md-balti-city-boundary-changeset-semantics.json
           git diff --cached --quiet && { echo "Candidate generation produced no committed changes."; exit 1; }
-          SNAPSHOT_ID="$(node -p "require('./data/current/actual-release-candidate.json').candidate.snapshot_id")"
+          SNAPSHOT_ID="$(python3 - <<'PY'
+          import json
+          print(json.load(open('data/current/actual-release-candidate.json'))['candidate']['snapshot_id'])
+          PY
+          )"
           git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
           git push origin "HEAD:$CANDIDATE_BRANCH"
           echo "### Promotable ACTUAL candidate" >> "$GITHUB_STEP_SUMMARY"
@@ -287,9 +247,11 @@ jobs:
       - name: Confirm no-change candidate is terminal
         if: steps.disposition.outputs.status == 'NO_CHANGE'
         run: |
-          BASE="$(node -p "require('./data/current/actual-release-candidate.json').base_release.snapshot_id")"
-          CANDIDATE="$(node -p "require('./data/current/actual-release-candidate.json').candidate.snapshot_id")"
-          test "$BASE" = "$CANDIDATE"
+          python3 - <<'PY'
+          import json
+          marker=json.load(open('data/current/actual-release-candidate.json'))
+          assert marker['base_release']['snapshot_id']==marker['candidate']['snapshot_id']
+          PY
           echo "NO_CHANGE: release identity retained; no candidate branch or promotion PR will be created." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload candidate review bundle
@@ -299,6 +261,7 @@ jobs:
           path: |
             data/current/actual-release-candidate.json
             data/current/actual-candidate-diff.json
+            data/current/actual-network-denial-audit.json
             data/current/actual-source-bundle-manifest.json
             data/current/actual-source-bundle-gate.json
             data/current/actual-review-evidence-bundle.json
