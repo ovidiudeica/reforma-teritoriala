@@ -104,6 +104,7 @@ jobs:
 
       - name: Verify hotfix and lifecycle under network denial
         run: |
+          rm .github/workflows/bootstrap-hermetic-preflight-hotfix.yml
           docker run --rm \
             --network none \
             --cap-drop ALL \
