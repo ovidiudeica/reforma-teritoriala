@@ -159,15 +159,17 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
 
  const sourceBundleFingerprint='c'.repeat(64);
  const reviewEvidenceFingerprint='e'.repeat(64);
+ const networkDenialSha='f'.repeat(64);
  const buildEnvironmentFingerprint='d'.repeat(64);
  const manifest={
-  schema_version:6,
+  schema_version:7,
   mode:'ACTUAL',
   snapshot_id:candidateSnapshot,
   release_fingerprint_sha256:changedFp.sha256,
   content_fingerprint_sha256:changedFp.sha256,
   source_bundle:{bundle_fingerprint_sha256:sourceBundleFingerprint},
   review_evidence_bundle:{bundle_fingerprint_sha256:reviewEvidenceFingerprint},
+  network_denial:{sha256:networkDenialSha},
   build_environment:{environment_fingerprint_sha256:buildEnvironmentFingerprint}
  };
  const gate={status:'PASS',snapshot_id:candidateSnapshot};
@@ -179,9 +181,10 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
    manifest_sha256:persisted.manifest_sha256,
    source_bundle_fingerprint_sha256:persisted.source_bundle_fingerprint_sha256,
    review_evidence_bundle_fingerprint_sha256:persisted.review_evidence_bundle_fingerprint_sha256,
+   network_denial_sha256:persisted.network_denial_sha256,
    build_environment_fingerprint_sha256:persisted.build_environment_fingerprint_sha256
   },
-  candidate:{snapshot_id:candidateSnapshot,source_bundle_fingerprint_sha256:sourceBundleFingerprint,review_evidence_bundle_fingerprint_sha256:reviewEvidenceFingerprint,build_environment_fingerprint_sha256:buildEnvironmentFingerprint},
+  candidate:{snapshot_id:candidateSnapshot,source_bundle_fingerprint_sha256:sourceBundleFingerprint,review_evidence_bundle_fingerprint_sha256:reviewEvidenceFingerprint,network_denial_sha256:networkDenialSha,build_environment_fingerprint_sha256:buildEnvironmentFingerprint},
   summary:{semantic_content_changed:true,substantive_change_count:disposition.substantive_change_count,review_required:true}
  };
  const manifestBytes=Buffer.from(JSON.stringify(manifest,null,2)+'\n');
@@ -191,7 +194,7 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   mode:'ACTUAL_CANDIDATE',
   status:'CHANGE',
   base_release:diff.base_release,
-  candidate:{snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes),source_bundle_fingerprint_sha256:sourceBundleFingerprint,review_evidence_bundle_fingerprint_sha256:reviewEvidenceFingerprint,build_environment_fingerprint_sha256:buildEnvironmentFingerprint},
+  candidate:{snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes),source_bundle_fingerprint_sha256:sourceBundleFingerprint,review_evidence_bundle_fingerprint_sha256:reviewEvidenceFingerprint,network_denial_sha256:networkDenialSha,build_environment_fingerprint_sha256:buildEnvironmentFingerprint},
   diff_report_sha256:sha256(diffBytes),
   review_required:true,
   substantive_change_count:disposition.substantive_change_count
