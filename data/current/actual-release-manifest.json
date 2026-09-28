@@ -4,11 +4,20 @@
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "generated_at": "2026-09-27T20:37:28.323Z",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "policy": "Immutable content fingerprint for the current public RO+MD administrative snapshot. The manifest binds validated master catalog/GeoJSON, official registries, jurisdiction gates, the public entity contract and tiered web geometries to exact bytes.",
+  "policy": "Immutable content fingerprint for the current public RO+MD administrative snapshot, with an independent exact source-provenance binding. The manifest binds validated master/public bytes and the deterministic OSM/SIRUTA/CUATM source bundle.",
   "jurisdictions": [
     "RO",
     "MD"
   ],
+  "source_bundle": {
+    "path": "data/current/actual-source-bundle-manifest.json",
+    "schema_version": 1,
+    "mode": "ACTUAL_SOURCE_BUNDLE",
+    "source_watermark": "2026-09-27T20:37:24.316Z",
+    "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
+    "bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
+    "sha256": "0ce4d17c2453d3f8cb45f855177cea97cbf19988d065190ff445fbc0a733d2c6"
+  },
   "catalog": {
     "path": "data/current/entities.json",
     "schema_version": 2,
