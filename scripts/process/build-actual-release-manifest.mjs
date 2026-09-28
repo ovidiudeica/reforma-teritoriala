@@ -159,7 +159,7 @@ const tier=(jurisdiction,name)=>{
 };
 
 const manifest={
- schema_version:6,
+ schema_version:7,
  mode:'ACTUAL',
  snapshot_id:snapshotId,
  generated_at:generatedAt,
