@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-28T22:21:52.973Z",
+  "generated_at": "2026-09-28T23:03:53.237Z",
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "d92b443aaacb3b1964de29cf102f3f764d41534db29cf1a9b94227b4b12d6214",
+  "manifest_sha256": "5c63f7a19831b6aaf7f098e1ceb5f65cc1c47783ed26dc057cdb7f0069d4bcfa",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -189,6 +189,60 @@
       }
     },
     {
+      "name": "host_trust_contract_passes",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "failures": [],
+        "fingerprint": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5"
+      }
+    },
+    {
+      "name": "manifest_binds_host_trust_contract",
+      "ok": true,
+      "detail": {
+        "manifest": {
+          "path": "data/current/actual-host-trust-manifest.json",
+          "schema_version": 1,
+          "mode": "ACTUAL_HOST_TRUST",
+          "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
+          "host_trust_fingerprint_sha256": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5",
+          "runner_image_version": "20260920.314.1",
+          "kernel_release": "6.17.0-1022-azure",
+          "docker_server_version": "28.0.4",
+          "containerd_version": "v2.3.5",
+          "runc_version": "1.5.1",
+          "cpu_execution_profile": {
+            "platform": "linux/amd64",
+            "cpuset_cpus": "0",
+            "node_options": "--jitless",
+            "uv_threadpool_size": "1",
+            "timezone": "UTC",
+            "locale": "C.UTF-8"
+          },
+          "sha256": "eba080cbddcc5c9d219cc368b653d3d1c7aef7ff884eecf3a9304257fe81177a"
+        },
+        "actual": {
+          "path": "data/current/actual-host-trust-manifest.json",
+          "fingerprint": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5",
+          "sha256": "eba080cbddcc5c9d219cc368b653d3d1c7aef7ff884eecf3a9304257fe81177a",
+          "runner_image_version": "20260920.314.1",
+          "kernel_release": "6.17.0-1022-azure",
+          "docker_server_version": "28.0.4",
+          "containerd_version": "v2.3.5",
+          "runc_version": "1.5.1",
+          "cpu_execution_profile": {
+            "platform": "linux/amd64",
+            "cpuset_cpus": "0",
+            "node_options": "--jitless",
+            "uv_threadpool_size": "1",
+            "timezone": "UTC",
+            "locale": "C.UTF-8"
+          }
+        }
+      }
+    },
+    {
       "name": "network_denial_proof_passes",
       "ok": true,
       "detail": {
@@ -245,8 +299,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "720146df8ff83d172bcac58107417e5a61ea0dd00505e3495dd5c2564bac4baf",
-          "sha256": "a5690dda76ff6392dd337f7202120ee5113c1e1386432aaa00079452be51a3b8"
+          "environment_fingerprint_sha256": "3869854a75e604c323d6751204a65d606f1e29476086408b77346d55609513ff",
+          "sha256": "4ae42e10b5fae71b305f8d5dddb7c53fbc6af74dc2d7664dc5c5f2ccd6fd7950"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -255,8 +309,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "720146df8ff83d172bcac58107417e5a61ea0dd00505e3495dd5c2564bac4baf",
-          "sha256": "a5690dda76ff6392dd337f7202120ee5113c1e1386432aaa00079452be51a3b8"
+          "environment_fingerprint_sha256": "3869854a75e604c323d6751204a65d606f1e29476086408b77346d55609513ff",
+          "sha256": "4ae42e10b5fae71b305f8d5dddb7c53fbc6af74dc2d7664dc5c5f2ccd6fd7950"
         }
       }
     },

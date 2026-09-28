@@ -1,5 +1,5 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "generated_at": "2026-09-27T20:37:28.323Z",
@@ -16,7 +16,7 @@
     "base_release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
     "base_content_sha256": "f9ce50fca00ecb069e35179ad0a335b302732dddf1eb9c1318bed9b5c5628f5d"
   },
-  "policy": "Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance, kernel-enforced network-denial proof and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle, network-denial and build-environment bindings remain mandatory integrity constraints.",
+  "policy": "Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance, explicit host-trust provenance, kernel-enforced network-denial proof and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle, host-trust, network-denial and build-environment bindings remain mandatory integrity constraints.",
   "jurisdictions": [
     "RO",
     "MD"
@@ -39,6 +39,27 @@
     "bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "sha256": "d9f6cb45d861c48936d7ac6ca49ded1be13c81ea6d52e9bf876d76dbf1b57f69"
   },
+  "host_trust": {
+    "path": "data/current/actual-host-trust-manifest.json",
+    "schema_version": 1,
+    "mode": "ACTUAL_HOST_TRUST",
+    "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
+    "host_trust_fingerprint_sha256": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5",
+    "runner_image_version": "20260920.314.1",
+    "kernel_release": "6.17.0-1022-azure",
+    "docker_server_version": "28.0.4",
+    "containerd_version": "v2.3.5",
+    "runc_version": "1.5.1",
+    "cpu_execution_profile": {
+      "platform": "linux/amd64",
+      "cpuset_cpus": "0",
+      "node_options": "--jitless",
+      "uv_threadpool_size": "1",
+      "timezone": "UTC",
+      "locale": "C.UTF-8"
+    },
+    "sha256": "eba080cbddcc5c9d219cc368b653d3d1c7aef7ff884eecf3a9304257fe81177a"
+  },
   "network_denial": {
     "path": "data/current/actual-network-denial-audit.json",
     "schema_version": 1,
@@ -55,8 +76,8 @@
     "runner_label": "ubuntu-24.04",
     "runner_image_version": "20260920.314.1",
     "environment_fingerprint_algorithm": "actual-build-environment-v1",
-    "environment_fingerprint_sha256": "720146df8ff83d172bcac58107417e5a61ea0dd00505e3495dd5c2564bac4baf",
-    "sha256": "a5690dda76ff6392dd337f7202120ee5113c1e1386432aaa00079452be51a3b8"
+    "environment_fingerprint_sha256": "3869854a75e604c323d6751204a65d606f1e29476086408b77346d55609513ff",
+    "sha256": "4ae42e10b5fae71b305f8d5dddb7c53fbc6af74dc2d7664dc5c5f2ccd6fd7950"
   },
   "catalog": {
     "path": "data/current/entities.json",

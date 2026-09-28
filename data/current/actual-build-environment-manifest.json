@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "720146df8ff83d172bcac58107417e5a61ea0dd00505e3495dd5c2564bac4baf",
-  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner family/image, the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation for the deterministic candidate phase, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment or network-policy drift fails closed.",
+  "environment_fingerprint_sha256": "3869854a75e604c323d6751204a65d606f1e29476086408b77346d55609513ff",
+  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract (kernel, Docker/containerd/runc, cgroup/storage stack and CPU compatibility floor), the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
       "label": "ubuntu-24.04",
@@ -20,13 +20,32 @@
       "base_ref": "node:24.21.0-bookworm@sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
       "base_digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4"
     },
+    "host_trust": {
+      "manifest_path": "data/current/actual-host-trust-manifest.json",
+      "manifest_sha256": "eba080cbddcc5c9d219cc368b653d3d1c7aef7ff884eecf3a9304257fe81177a",
+      "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
+      "host_trust_fingerprint_sha256": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5",
+      "runner_image_version": "20260920.314.1",
+      "kernel_release": "6.17.0-1022-azure",
+      "docker_server_version": "28.0.4",
+      "containerd_version": "v2.3.5",
+      "runc_version": "1.5.1",
+      "cpu_execution_profile": {
+        "platform": "linux/amd64",
+        "cpuset_cpus": "0",
+        "node_options": "--jitless",
+        "uv_threadpool_size": "1",
+        "timezone": "UTC",
+        "locale": "C.UTF-8"
+      }
+    },
     "toolchain": {
       "node": "24.21.0",
       "npm": "11.19.0",
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "a17c49e4501e7398839a642f9b3020a5f47d3d23f484b7687f5eea440e3e70a9"
+        "sha256": "471a588889c0bd38b66b4a75f46903988d0355687a82b4dd7e82de5ce4fed6b9"
       },
       "package_lock": {
         "path": "package-lock.json",
@@ -56,27 +75,30 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "890701f7ba7c15278660468dd7bccabf88276e272d8df52ca39350dcc1aa8639",
+      "scripts/lib/actual-build-environment.mjs": "5cc8952c3c14681d0206c87a2c22d774e4908bb1f3246362c0fd605fd68ff3c8",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
-      "scripts/process/build-actual-build-environment-manifest.mjs": "58f12a179ba3ed0a4f2cf7dd13d3fa38b88cf68d62c02dfa51ff866c442c23d8",
-      "scripts/process/audit-actual-build-environment-gate.mjs": "0de99fab870606f5e1489919ac2093181666a729b3b228a281fab70c402ff1dc",
+      "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
+      "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
       "scripts/process/audit-actual-npm-dependency-bundle.mjs": "521e0d7b18ea7e33fd88cb8ae0dfe74e16e46f8a5f0991c30ac1dbf7f3f7682a",
       "scripts/process/install-actual-npm-offline.mjs": "83f8fcb94b0cba5076edc6e0b9b05d6abf6420ded8e1a6b640fe42488d8f1f9e",
       "scripts/process/audit-node-toolchain.mjs": "c63882d7b4681f2f3de4d85244a8ca9d4c727d6a5bf713e9a7c7c19b43e1a861",
       "scripts/lib/actual-runtime-image.mjs": "9bebd57d6e55beec30d1724c64886f04c0cf45857f8a5eeada77736b3c32c60f",
       "scripts/process/build-actual-runtime-image-manifest.mjs": "48c7708071c0600b647304ae3178f22aa76bd7c5be3b5a5ce96bf5da47d17ec6",
       "scripts/process/audit-actual-runtime-image.mjs": "7b49ff88bd07bf03fe31f21a078e565ad08ea016a397ed624e5484aa5221bd8e",
+      "scripts/lib/actual-host-trust.mjs": "fb51153f009a985e3fa9563093bf0f161a9500971f21acf8015ec1e82a1be800",
+      "scripts/process/build-actual-host-trust-manifest.mjs": "1fc82422329b8040d22df3c48994d78d4c8831d6559cf7b0a752f62399747405",
+      "scripts/process/audit-actual-host-trust.mjs": "93fa81438ae47b29553d7a73d55e0f7c501e54ec5d3e1ee93e1b3736c1cf5a5e",
       "scripts/lib/actual-review-evidence-bundle.mjs": "30cbba94bf216003e9e07ac8df591b8e2b7ba95e68a4ac5ebb7cfb73fee33123",
       "scripts/process/build-actual-review-evidence-bundle.mjs": "791145050de31c8e613f432a85db11cd15723d3573a32622871f48dcb6d0fac6",
       "scripts/process/audit-actual-review-evidence-bundle-gate.mjs": "925e30d7b8e950a6f269d02008020f5cca383812b0f51ad6c2a11e68e6b1cfac",
       "scripts/process/prove-actual-network-denial.mjs": "60e1845aa5a0caf0f9cd065c737f6d0718018fef088d93093e0b1a8977ae74ff",
-      "scripts/process/verify-actual-persisted-base.mjs": "5bdb2046bd3bf1dcdda210e9924cb1d70d3eb66a58be50467191a80447b90793",
-      "scripts/process/run-actual-deterministic-candidate.sh": "20d9b26931b77f09041cc947db1a95b1877a8abcf8181e151a7151701695f93b"
+      "scripts/process/verify-actual-persisted-base.mjs": "8cc25b64647178b09569fc782ae000914c39dcf7d51137b05efd6348bd45a85c",
+      "scripts/process/run-actual-deterministic-candidate.sh": "e43c6ce4caec185440d34770aaac6f640fed3075ba9fcde3538dbff8c534965f"
     },
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "f75de21b244c5d1ca38dfa8622eeefdf8d3e00888a642ceb0b3b79e36c3e3c84",
+        "sha256": "9d378393317b7b6807eafe67a4dbaaaa6621a020ac8ea9cadb6269e36bf4d25a",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -93,7 +115,12 @@
         "docker_network_bridge_count": 1,
         "docker_socket_mounted": false,
         "cap_drop_all_count": 3,
-        "no_new_privileges_count": 3
+        "no_new_privileges_count": 3,
+        "cpuset_cpu_zero_count": 2,
+        "node_jitless_count": 2,
+        "uv_threadpool_one_count": 2,
+        "timezone_utc_count": 2,
+        "locale_c_utf8_count": 4
       },
       "topology": {
         "path": ".github/workflows/actual-topology-audit.yml",
@@ -114,11 +141,16 @@
         "docker_network_bridge_count": 0,
         "docker_socket_mounted": false,
         "cap_drop_all_count": 0,
-        "no_new_privileges_count": 0
+        "no_new_privileges_count": 0,
+        "cpuset_cpu_zero_count": 0,
+        "node_jitless_count": 0,
+        "uv_threadpool_one_count": 0,
+        "timezone_utc_count": 0,
+        "locale_c_utf8_count": 0
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "afc819ea54df316c4bf3fdf2d6366e344a9e67ed4bfa57c553bffeada5fa26c4",
+        "sha256": "2110461f12a65066440986d3ccbd1dab6004ca31db3faec1213fc67b42d4f489",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -134,11 +166,16 @@
         "docker_network_bridge_count": 0,
         "docker_socket_mounted": false,
         "cap_drop_all_count": 0,
-        "no_new_privileges_count": 0
+        "no_new_privileges_count": 0,
+        "cpuset_cpu_zero_count": 0,
+        "node_jitless_count": 0,
+        "uv_threadpool_one_count": 0,
+        "timezone_utc_count": 0,
+        "locale_c_utf8_count": 0
       },
       "verify": {
         "path": ".github/workflows/verify-persisted-actual-release.yml",
-        "sha256": "c64e326f14dfd8dd1d6f43942bcbe6e2751f7147819cda943ae9e754eea5f06a",
+        "sha256": "585c7cb864abe9474cd084f98a7d4b3dc906515d55ddac42828761a145871b29",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -154,7 +191,12 @@
         "docker_network_bridge_count": 0,
         "docker_socket_mounted": false,
         "cap_drop_all_count": 0,
-        "no_new_privileges_count": 0
+        "no_new_privileges_count": 0,
+        "cpuset_cpu_zero_count": 0,
+        "node_jitless_count": 0,
+        "uv_threadpool_one_count": 0,
+        "timezone_utc_count": 0,
+        "locale_c_utf8_count": 0
       }
     }
   }
