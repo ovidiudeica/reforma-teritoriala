@@ -27,15 +27,20 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out requested revision
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 1
 
       - name: Set up Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: '24.21.0'
+
+      - name: Audit pinned ACTUAL execution environment
+        env:
+          ACTUAL_BUILD_ENVIRONMENT_GATE_READ_ONLY: '1'
+        run: npm run audit:actual-build-environment
 
       - name: Audit pinned Node/npm toolchain
         run: npm run audit:node-toolchain
@@ -62,7 +67,7 @@ jobs:
         run: npm run audit:actual-topology
 
       - name: Upload topology report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: actual-topology-audit
           path: data/current/actual-topology-audit.json
