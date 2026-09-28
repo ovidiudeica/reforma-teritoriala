@@ -50,6 +50,7 @@ requireCheck(baselineMarker.validated_release_gate_status==='PASS','baseline_mar
 requireCheck(baselineMarker.snapshot_id===baselineManifest.snapshot_id,'baseline_snapshot_mismatch',{marker:baselineMarker.snapshot_id,manifest:baselineManifest.snapshot_id});
 requireCheck(baselineMarker.release_fingerprint_sha256===baselineManifest.release_fingerprint_sha256,'baseline_fingerprint_mismatch');
 requireCheck(baselineMarker.source_bundle_fingerprint_sha256===baselineManifest.source_bundle?.bundle_fingerprint_sha256,'baseline_source_bundle_fingerprint_mismatch',{marker:baselineMarker.source_bundle_fingerprint_sha256??null,manifest:baselineManifest.source_bundle?.bundle_fingerprint_sha256??null});
+requireCheck(baselineMarker.build_environment_fingerprint_sha256===baselineManifest.build_environment?.environment_fingerprint_sha256,'baseline_build_environment_fingerprint_mismatch',{marker:baselineMarker.build_environment_fingerprint_sha256??null,manifest:baselineManifest.build_environment?.environment_fingerprint_sha256??null});
 requireCheck(baselineMarker.manifest_sha256===baselineManifestSha,'baseline_manifest_hash_mismatch',{marker:baselineMarker.manifest_sha256,actual:baselineManifestSha});
 requireCheck(gate.status==='PASS','candidate_release_gate_not_pass',{status:gate.status});
 requireCheck(gate.snapshot_id===manifest.snapshot_id,'candidate_gate_snapshot_mismatch',{gate:gate.snapshot_id,manifest:manifest.snapshot_id});
@@ -179,7 +180,8 @@ const report={
   snapshot_id:baselineMarker.snapshot_id,
   release_fingerprint_sha256:baselineMarker.release_fingerprint_sha256,
   manifest_sha256:baselineMarker.manifest_sha256,
-  source_bundle_fingerprint_sha256:baselineMarker.source_bundle_fingerprint_sha256
+  source_bundle_fingerprint_sha256:baselineMarker.source_bundle_fingerprint_sha256,
+  build_environment_fingerprint_sha256:baselineMarker.build_environment_fingerprint_sha256
  },
  candidate:{
   snapshot_id:manifest.snapshot_id,
@@ -188,6 +190,7 @@ const report={
   release_gate_status:gate.status,
   content_fingerprint_sha256:candidateSemantic.sha256,
   source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
+  build_environment_fingerprint_sha256:manifest.build_environment?.environment_fingerprint_sha256??null,
   semantic_manifest_binding:semanticManifestBinding.binding,
   exact_base_manifest_bytes_reused:exactBaseManifestBytesReused
  },
@@ -214,7 +217,7 @@ const report={
  official_registries:registries,
  component_hash_changes:componentChanges,
  failures,
- policy:'Candidate disposition is derived from canonical administrative content. A new manifest must bind the computed semantic fingerprint explicitly; an exact byte-for-byte reuse of the persisted base manifest may use the computed baseline semantic fingerprint as the compatibility binding. NO_CHANGE retains the base release identity and is terminal; CHANGE requires explicit review and promotion. Exact component-byte drift is reported separately and remains release-gated.'
+ policy:'Candidate disposition is derived from canonical administrative content while exact source and execution-environment provenance are bound independently. A new manifest must bind the computed semantic fingerprint explicitly; exact base-manifest reuse remains compatibility-only. NO_CHANGE retains the base release identity and is terminal; CHANGE requires explicit review and promotion. Any provenance drift remains release-gated.'
 };
 await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
 const diffBytes=await readFile(OUTPUT);
