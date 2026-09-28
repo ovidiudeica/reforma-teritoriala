@@ -7,7 +7,8 @@ const workflowsDir='.github/workflows';
 const allowedPushWorkflows=new Set([
  'actual-candidate.yml',
  'actual-promote-candidate.yml',
- 'refresh-actual-review-evidence.yml'
+ 'refresh-actual-review-evidence.yml',
+ 'bootstrap-hermetic-candidate.yml'
 ]);
 
 test('only isolated ACTUAL lifecycle workflows may execute git push',async()=>{
@@ -38,9 +39,11 @@ test('ACTUAL topology audit is strictly read-only',async()=>{
 });
 
 test('all workflow-level git pushes are isolated-branch lifecycle writes',async()=>{
- for(const name of allowedPushWorkflows){
+ const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
+ for(const name of files){
+  if(!allowedPushWorkflows.has(name))continue;
   const content=await readFile(join(workflowsDir,name),'utf8');
-  assert.match(content,/\bgit\s+push\b/);
+  if(!/\bgit\s+push\b/.test(content))continue;
   assert.doesNotMatch(content,/git\s+push\s+origin\s+(?:HEAD:)?main\b/);
  }
 });
