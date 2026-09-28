@@ -49,7 +49,11 @@ export const BUILD_SUPPORT_FILES=[
  'scripts/process/audit-actual-review-evidence-bundle-gate.mjs',
  'scripts/process/prove-actual-network-denial.mjs',
  'scripts/process/verify-actual-persisted-base.mjs',
- 'scripts/process/run-actual-deterministic-candidate.sh'
+ 'scripts/process/run-actual-deterministic-candidate.sh',
+ 'scripts/lib/actual-candidate-lifecycle.mjs',
+ 'scripts/process/build-actual-candidate-diff.mjs',
+ 'scripts/process/prepare-actual-candidate-promotion.mjs',
+ 'scripts/process/write-actual-candidate-execution-receipt.mjs'
 ];
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
