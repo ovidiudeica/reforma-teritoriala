@@ -203,11 +203,14 @@ jobs:
             --env GITHUB_ACTIONS=true \
             --env RUNNER_OS=Linux \
             --env HOME=/tmp/actual-home \
-            --env GITHUB_RUN_ID \
-            --env GITHUB_RUN_ATTEMPT \
-            --env GITHUB_SHA \
             "$ACTUAL_RUNTIME_IMAGE" \
             bash scripts/process/run-actual-deterministic-candidate.sh
+
+      - name: Write artifact-only candidate execution receipt
+        env:
+          ACTUAL_CANDIDATE_EXECUTION_RECEIPT_PATH: ${{ runner.temp }}/actual-candidate-execution-receipt.json
+          ACTUAL_SOURCE_TRIGGER: ${{ inputs.source_trigger }}
+        run: node scripts/process/write-actual-candidate-execution-receipt.mjs
 
       - name: Read candidate disposition
         id: disposition
@@ -252,7 +255,12 @@ jobs:
           print(json.load(open('data/current/actual-release-candidate.json'))['candidate']['snapshot_id'])
           PY
           )"
-          git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
+          COMMIT_DATE="$(python3 - <<'PY'
+          import json
+          print(json.load(open('data/current/actual-release-manifest.json'))['generated_at'])
+          PY
+          )"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
           git push origin "HEAD:$CANDIDATE_BRANCH"
           echo "### Promotable ACTUAL candidate" >> "$GITHUB_STEP_SUMMARY"
           echo "- Branch: $CANDIDATE_BRANCH" >> "$GITHUB_STEP_SUMMARY"
@@ -275,6 +283,7 @@ jobs:
           path: |
             data/current/actual-release-candidate.json
             data/current/actual-candidate-diff.json
+            ${{ runner.temp }}/actual-candidate-execution-receipt.json
             ${{ runner.temp }}/actual-host-trust-audit.json
             data/current/actual-network-denial-audit.json
             data/current/actual-source-bundle-manifest.json
