@@ -56,7 +56,9 @@
     "prove:actual-network-denial": "node scripts/process/prove-actual-network-denial.mjs",
     "run:actual-deterministic-candidate": "bash scripts/process/run-actual-deterministic-candidate.sh",
     "build:actual-host-trust": "node scripts/process/build-actual-host-trust-manifest.mjs",
-    "audit:actual-host-trust": "node scripts/process/audit-actual-host-trust.mjs"
+    "audit:actual-host-trust": "node scripts/process/audit-actual-host-trust.mjs",
+    "build:actual-oci-builder": "node scripts/process/build-actual-oci-builder-manifest.mjs",
+    "audit:actual-oci-builder": "node scripts/process/audit-actual-oci-builder.mjs"
   },
   "dependencies": {
     "@turf/turf": "7.4.0",
