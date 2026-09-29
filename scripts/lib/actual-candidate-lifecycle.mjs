@@ -79,13 +79,18 @@ export function validateCandidatePromotion({
  actualCandidateDiffSha256,
  currentPersisted,
  currentManifest,
- currentManifestSha256
+ currentManifestSha256,
+ currentBaseCommitSha
 }){
  const failures=[];
  const check=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
  check(Boolean(expectedSnapshot),'missing_expected_candidate_snapshot');
  check(confirmation==='PROMOTE '+expectedSnapshot,'invalid_promotion_confirmation',{expected:'PROMOTE '+expectedSnapshot,actual:confirmation});
  check(candidateMarker?.schema_version===2&&candidateMarker?.mode==='ACTUAL_CANDIDATE'&&candidateMarker?.status==='CHANGE','candidate_marker_not_promotable',{schema_version:candidateMarker?.schema_version??null,status:candidateMarker?.status??null});
+ check(/^[0-9a-f]{40}$/.test(currentBaseCommitSha??''),'current_base_commit_not_exact_sha',{actual:currentBaseCommitSha??null});
+ check(/^[0-9a-f]{40}$/.test(candidateMarker?.base_ref??''),'candidate_base_commit_not_exact_sha',{actual:candidateMarker?.base_ref??null});
+ check(candidateMarker?.base_ref===currentBaseCommitSha,'base_commit_moved',{candidate_base:candidateMarker?.base_ref??null,current_main:currentBaseCommitSha??null});
+ check(diff?.base_ref===candidateMarker?.base_ref,'candidate_diff_base_commit_mismatch',{marker:candidateMarker?.base_ref??null,diff:diff?.base_ref??null});
  const candidateIdentity=candidateIdentityFingerprint({baseRef:candidateMarker?.base_ref??null,baseRelease:candidateMarker?.base_release??null,candidate:candidateMarker?.candidate??null,diffReportSha256:candidateMarker?.diff_report_sha256??null});
  check(candidateMarker?.candidate_identity_algorithm===candidateIdentity.algorithm&&candidateMarker?.candidate_identity_sha256===candidateIdentity.sha256,'candidate_identity_mismatch',{algorithm:candidateMarker?.candidate_identity_algorithm??null,expected:candidateIdentity.sha256,actual:candidateMarker?.candidate_identity_sha256??null});
  check(candidateMarker?.review_required===true&&Number(candidateMarker?.substantive_change_count)>0,'candidate_has_no_substantive_change',{review_required:candidateMarker?.review_required??null,substantive_change_count:candidateMarker?.substantive_change_count??null});
