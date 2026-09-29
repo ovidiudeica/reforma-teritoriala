@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "d2f18a0f785e7c800e7502ff416d8688b58367dac991ebe20695d126e81e8f61",
-  "environment_fingerprint_sha256": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
+  "build_environment_sha256": "5aafba2e50a32c1e3d133899acbec868e0426e65472106e08efdab0bc227c07e",
+  "environment_fingerprint_sha256": "982cff97455405abd8f0401e695a924f83850e273ae1a24a5bb9fdec4e74078e",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
   "checks": [
@@ -21,7 +21,7 @@
       "detail": {
         "workflow_count": 4,
         "action_count": 2,
-        "support_file_count": 26
+        "support_file_count": 32
       }
     },
     {
@@ -115,17 +115,17 @@
       "ok": true,
       "detail": {
         "status": "PASS",
-        "fingerprint": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5",
+        "fingerprint": "1efb02e7ce931a3e9aa21f37af39ef3d0bbad3dc1016209bce8a1957c496d169",
         "failures": [],
         "current": {
           "manifest_path": "data/current/actual-host-trust-manifest.json",
-          "manifest_sha256": "eba080cbddcc5c9d219cc368b653d3d1c7aef7ff884eecf3a9304257fe81177a",
+          "manifest_sha256": "c9bfd2a19623989b8c6600fd25c940234163faf6a1a86cf03ef9d8f7dc88de47",
           "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
-          "host_trust_fingerprint_sha256": "343a715a6382ec47f8021f5ae49829fde75104feb072a96e55f7d9fa04fa84e5",
-          "runner_image_version": "20260920.314.1",
+          "host_trust_fingerprint_sha256": "1efb02e7ce931a3e9aa21f37af39ef3d0bbad3dc1016209bce8a1957c496d169",
+          "runner_image_version": "20260927.320.1",
           "kernel_release": "6.17.0-1022-azure",
           "docker_server_version": "28.0.4",
-          "containerd_version": "v2.3.5",
+          "containerd_version": "v2.3.6",
           "runc_version": "1.5.1",
           "cpu_execution_profile": {
             "platform": "linux/amd64",
@@ -266,8 +266,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
-        "actual": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05"
+        "expected": "982cff97455405abd8f0401e695a924f83850e273ae1a24a5bb9fdec4e74078e",
+        "actual": "982cff97455405abd8f0401e695a924f83850e273ae1a24a5bb9fdec4e74078e"
       }
     },
     {
@@ -301,7 +301,7 @@
         "policy": "GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match the pinned provenance.",
         "expected": {
           "image_os": "ubuntu24",
-          "image_version": "20260920.314.1"
+          "image_version": "20260927.320.1"
         },
         "actual": {
           "image_os": null,
