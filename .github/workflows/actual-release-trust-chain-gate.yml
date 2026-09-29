@@ -1,0 +1,158 @@
+name: Gate ACTUAL release trust chain
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  actual-release-trust-chain:
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    env:
+      TEST_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+    steps:
+      - name: Check out exact tested commit
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ env.TEST_SHA }}
+          fetch-depth: 0
+
+      - name: Trust mounted GitHub workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Audit static workflow write boundaries
+        run: node --test scripts/test/workflow-write-boundaries.test.mjs
+
+      - name: Enforce ACTUAL release PR trust chain
+        if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import {execFileSync} from 'node:child_process';
+          import {readFile} from 'node:fs/promises';
+
+          const base=process.env.PR_BASE_SHA;
+          const head=process.env.TEST_SHA;
+          const branch=process.env.PR_HEAD_REF;
+          const git=(...args)=>execFileSync('git',args,{encoding:'utf8'}).trim();
+          const readJson=async path=>JSON.parse(await readFile(path,'utf8'));
+          const changed=git('diff','--name-only',base,head).split('\n').filter(Boolean);
+          const fail=(message,detail={})=>{
+            console.error(JSON.stringify({status:'FAIL',message,detail},null,2));
+            process.exit(1);
+          };
+          const candidateAllowed=path=>
+            path.startsWith('data/current/')
+            || path==='public/data/actual-entities.json'
+            || path.startsWith('public/geo/current/')
+            || path.startsWith('public/geo/actual/')
+            || path==='data/sources/ro-siruta-current.json'
+            || path==='data/sources/cuatm-current.json'
+            || path==='data/sources/osm-current.json'
+            || path.startsWith('data/sources/osm-snapshots/')
+            || path==='data/sources/ro-osm-official-exception-history.json'
+            || path==='data/sources/ro-osm-level9-exception-history.json'
+            || path==='data/sources/md-osm-multiple-representation-history.json'
+            || path==='data/sources/md-balti-city-boundary-way-history.json'
+            || path==='data/sources/md-balti-city-boundary-changeset-semantics.json';
+          const provenanceOnly=new Set([
+            'data/current/actual-build-environment-manifest.json',
+            'data/current/actual-build-environment-gate.json',
+            'data/current/actual-release-manifest.json',
+            'data/current/actual-release-gate.json',
+            'data/current/actual-release-persisted.json'
+          ]);
+          const reviewEvidenceSource=new Set([
+            'data/sources/ro-osm-official-exception-history.json',
+            'data/sources/ro-osm-level9-exception-history.json',
+            'data/sources/md-osm-multiple-representation-history.json',
+            'data/sources/md-balti-city-boundary-way-history.json',
+            'data/sources/md-balti-city-boundary-changeset-semantics.json'
+          ]);
+          const releaseSensitive=changed.filter(candidateAllowed);
+
+          if(/^actual\/candidate-[a-z0-9][a-z0-9._-]{0,95}$/.test(branch)){
+            const marker=await readJson('data/current/actual-release-persisted.json');
+            const audit=await readJson('data/current/actual-candidate-promotion-audit.json');
+            const manifest=await readJson('data/current/actual-release-manifest.json');
+            const candidate=git('rev-parse',head+'^');
+            const candidateParent=git('rev-parse',candidate+'^');
+            const candidateTree=git('rev-parse',candidate+'^{tree}');
+            const count=Number(git('rev-list','--count',base+'..'+head));
+            const merges=git('rev-list','--merges',base+'..'+head);
+            if(count!==2||merges)fail('Promotion PR must be exactly candidate commit + promotion commit',{count,merges});
+            if(candidateParent!==base)fail('Candidate commit parent does not equal PR base',{candidateParent,base});
+            if(marker?.promoted_from_candidate?.base_commit_sha!==base)fail('Persisted marker base commit does not equal PR base',{marker:marker?.promoted_from_candidate?.base_commit_sha,base});
+            if(marker?.promoted_from_candidate?.candidate_commit_sha!==candidate)fail('Persisted marker candidate commit mismatch',{marker:marker?.promoted_from_candidate?.candidate_commit_sha,candidate});
+            if(marker?.promoted_from_candidate?.candidate_tree_sha!==candidateTree)fail('Persisted marker candidate tree mismatch',{marker:marker?.promoted_from_candidate?.candidate_tree_sha,candidateTree});
+            if(audit?.status!=='PASS'||audit?.candidate_commit_sha!==candidate||audit?.candidate_tree_sha!==candidateTree)fail('Promotion audit is not bound to exact candidate commit/tree',{audit});
+            if(marker?.snapshot_id!==manifest?.snapshot_id||marker?.validated_release_gate_status!=='PASS')fail('Promoted marker is not bound to a passing exact manifest');
+            const promotionPaths=git('diff-tree','--no-commit-id','--name-only','-r',head).split('\n').filter(Boolean).sort();
+            const expectedPromotion=[
+              'data/current/actual-candidate-promotion-audit.json',
+              'data/current/actual-release-persisted.json'
+            ];
+            if(JSON.stringify(promotionPaths)!==JSON.stringify(expectedPromotion))fail('Promotion commit crossed two-file boundary',{promotionPaths});
+            const candidatePaths=git('diff','--name-only',base,candidate).split('\n').filter(Boolean);
+            const badCandidate=candidatePaths.filter(path=>!candidateAllowed(path));
+            if(badCandidate.length)fail('Candidate commit crossed ACTUAL write boundary',{badCandidate});
+            const snapshot=manifest.snapshot_id;
+            if(git('show','-s','--format=%s',candidate)!=='Build ACTUAL candidate '+snapshot)fail('Candidate commit subject mismatch');
+            if(git('show','-s','--format=%s',head)!=='Prepare ACTUAL promotion '+snapshot)fail('Promotion commit subject mismatch');
+            const expectedEpoch=String(Math.floor(Date.parse(manifest.generated_at)/1000));
+            for(const commit of [candidate,head]){
+              if(git('show','-s','--format=%at',commit)!==expectedEpoch||git('show','-s','--format=%ct',commit)!==expectedEpoch){
+                fail('Candidate/promotion commit timestamp is not deterministic',{commit,expectedEpoch});
+              }
+            }
+            console.log(JSON.stringify({status:'PASS',mode:'ACTUAL_PROMOTION_TRUST_CHAIN',base,candidate,candidateTree,head,snapshot},null,2));
+            process.exit(0);
+          }
+
+          if(/^actual\/review-evidence-[0-9]+$/.test(branch)){
+            const count=Number(git('rev-list','--count',base+'..'+head));
+            if(count!==1||git('rev-parse',head+'^')!==base)fail('Review-evidence PR must be exactly one commit over PR base',{count});
+            const bad=changed.filter(path=>!(path.startsWith('data/current/')||reviewEvidenceSource.has(path)));
+            if(bad.length)fail('Review-evidence PR crossed its write boundary',{bad});
+            const baseMarker=JSON.parse(git('show',base+':data/current/actual-release-persisted.json'));
+            const headMarker=await readJson('data/current/actual-release-persisted.json');
+            if(baseMarker.snapshot_id!==headMarker.snapshot_id||baseMarker.release_fingerprint_sha256!==headMarker.release_fingerprint_sha256){
+              fail('Review-evidence refresh changed semantic release identity');
+            }
+            console.log(JSON.stringify({status:'PASS',mode:'ACTUAL_REVIEW_EVIDENCE_TRUST_CHAIN',base,head},null,2));
+            process.exit(0);
+          }
+
+          if(releaseSensitive.length){
+            const bad=releaseSensitive.filter(path=>!provenanceOnly.has(path));
+            if(bad.length)fail('ACTUAL release bytes may only enter main through candidate promotion or review-evidence flow',{branch,bad});
+            const baseMarker=JSON.parse(git('show',base+':data/current/actual-release-persisted.json'));
+            const headMarker=await readJson('data/current/actual-release-persisted.json');
+            const baseManifest=JSON.parse(git('show',base+':data/current/actual-release-manifest.json'));
+            const headManifest=await readJson('data/current/actual-release-manifest.json');
+            if(baseMarker.snapshot_id!==headMarker.snapshot_id
+              || baseMarker.release_fingerprint_sha256!==headMarker.release_fingerprint_sha256
+              || baseManifest.content_fingerprint_sha256!==headManifest.content_fingerprint_sha256){
+              fail('Provenance-only infrastructure PR changed semantic ACTUAL identity');
+            }
+            console.log(JSON.stringify({status:'PASS',mode:'ACTUAL_PROVENANCE_ONLY_REBIND',base,head,changed:releaseSensitive},null,2));
+            process.exit(0);
+          }
+
+          console.log(JSON.stringify({status:'PASS',mode:'ACTUAL_NON_RELEASE_PR',base,head,branch},null,2));
+          NODE
