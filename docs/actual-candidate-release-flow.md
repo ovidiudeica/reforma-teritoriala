@@ -74,12 +74,17 @@ If the official SIRUTA fetch is unavailable and the importer preserves the last 
 
 The ACTUAL topology audit is verification-only. It has `contents: read`, validates the exact persisted release in read-only gate mode, audits the committed master topology, uploads the generated audit report, restores that report and fails if any tracked repository file changed.
 
-Only two workflows may contain a direct `git push`:
+Only three workflows may contain a direct `git push`:
 
-- `actual-candidate.yml` — pushes a validated `CHANGE` candidate to its isolated candidate branch.
+- `actual-candidate.yml` — creates a validated `CHANGE` candidate in its isolated candidate branch.
 - `actual-promote-candidate.yml` — updates that isolated candidate branch with the explicit promotion marker before opening the protected PR.
+- `refresh-actual-review-evidence.yml` — creates an isolated `actual/review-evidence-*` branch for non-semantic evidence/provenance refreshes.
 
-No topology, source-refresh or auxiliary audit workflow may commit or push release data.
+All three checkouts set `persist-credentials: false`. The repository-write token is exposed only to the exact push step, through a one-command Git HTTP authorization header. Candidate and review-evidence branch creation use an absent-ref `--force-with-lease`; promotion uses a lease pinned to the exact approved candidate commit. No workflow may push directly to `main`.
+
+The GHCR publisher is the only `packages: write` workflow. It has `contents: read`, accepts only its dedicated runtime-pin branch/manual trigger contract, and its checkout also disables credential persistence before repository code executes.
+
+No topology or direct source-refresh wrapper may commit or push release data.
 
 Changes to provenance-bound candidate/promotion infrastructure use the isolated `actual/provenance-*` path. That path may update only the build-environment manifest/gate, release manifest/gate and persisted marker on the ACTUAL publication surface. The trust-chain gate requires unchanged snapshot, release and semantic fingerprints, a direct binding to the previous persisted manifest, the exact regenerated build-environment hash/fingerprint, and a passing release gate. It cannot carry semantic ACTUAL data changes.
 
