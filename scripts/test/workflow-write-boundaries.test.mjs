@@ -83,6 +83,23 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
  }
 });
 
+
+test('candidate and promotion writes are pinned to isolated branch plus exact candidate commit',async()=>{
+ const [candidate,promotion]=await Promise.all([
+  readFile(join(workflowsDir,'actual-candidate.yml'),'utf8'),
+  readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8')
+ ]);
+ assert.match(candidate,/\^actual\/candidate-\[A-Za-z0-9\]/);
+ assert.match(candidate,/HEAD:refs\/heads\/\$CANDIDATE_BRANCH/);
+ assert.match(candidate,/Candidate commit SHA:/);
+ assert.match(promotion,/expected_candidate_commit:/);
+ assert.match(promotion,/ref: \$\{\{ inputs\.expected_candidate_commit \}\}/);
+ assert.match(promotion,/REMOTE_CANDIDATE_COMMIT=/);
+ assert.match(promotion,/ACTUAL_CANDIDATE_COMMIT_SHA: \$\{\{ inputs\.expected_candidate_commit \}\}/);
+ assert.match(promotion,/--force-with-lease="refs\/heads\/\$CANDIDATE_BRANCH:\$EXPECTED_CANDIDATE_COMMIT"/);
+ assert.match(promotion,/HEAD:refs\/heads\/\$CANDIDATE_BRANCH/);
+});
+
 test('promotion trust-chain gate separates candidate and promotion commit write boundaries',async()=>{
  const content=await readFile(join(workflowsDir,'actual-release-trust-chain-gate.yml'),'utf8');
  assert.match(content,/candidateCommit=execFileSync\('git',\['rev-parse',head\+'\^'\]/);
@@ -91,6 +108,8 @@ test('promotion trust-chain gate separates candidate and promotion commit write 
  assert.match(content,/actual-release-persisted\.json/);
  assert.match(content,/actual-candidate-promotion-audit\.json/);
  assert.match(content,/count===2/);
+ assert.match(content,/promotion_audit_candidate_commit_mismatch/);
+ assert.match(content,/persisted_candidate_commit_mismatch/);
 });
 
 test('review-evidence refresh stages an exact artifact allowlist',async()=>{
