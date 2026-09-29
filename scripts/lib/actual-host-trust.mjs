@@ -6,10 +6,20 @@ export const HOST_TRUST_PATH='data/current/actual-host-trust-manifest.json';
 export const HOST_TRUST_ALGORITHM='actual-host-trust-v1';
 
 export const EXPECTED_HOST_TRUST={
+ accepted_host_profiles:[
+  {
+   runner_image_version:'20260920.314.1',
+   containerd:{version:'v2.3.5',git_commit:'1294c24a7da8e5a793ed378161673abe94118892'}
+  },
+  {
+   runner_image_version:'20260927.320.1',
+   containerd:{version:'v2.3.6',git_commit:'ee2735368117d2eb259779949d5e75cdafec9761'}
+  }
+ ],
  runner:{
   label:'ubuntu-24.04',
   image_os:'ubuntu24',
-  image_version:'20260920.314.1',
+  image_version:'20260927.320.1',
   os:'Linux',
   arch:'X64'
  },
@@ -26,7 +36,7 @@ export const EXPECTED_HOST_TRUST={
   git_commit:'6430e49',
   components:{
    Engine:{version:'28.0.4',git_commit:'6430e49'},
-   containerd:{version:'v2.3.5',git_commit:'1294c24a7da8e5a793ed378161673abe94118892'},
+   containerd:{version:'v2.3.6',git_commit:'ee2735368117d2eb259779949d5e75cdafec9761'},
    runc:{version:'1.5.1',git_commit:'v1.5.1-0-g8f2685a4'},
    'docker-init':{version:'0.19.0',git_commit:'de40ad0'}
   }
@@ -87,7 +97,7 @@ export function buildHostTrustManifest(){
   schema_version:1,
   mode:'ACTUAL_HOST_TRUST',
   host_trust_fingerprint_algorithm:HOST_TRUST_ALGORITHM,
-  policy:'Fail-closed host trust contract for deterministic ACTUAL execution. GitHub runner image, kernel, Docker Engine, containerd, runc, cgroup/storage stack and an x86_64 CPU compatibility floor are pinned. CPU vendor/model are observed evidence only; Node computation is forced through the JIT-less single-CPU execution profile so hardware model drift cannot silently select different V8 JIT code paths.',
+  policy:'Fail-closed host trust contract for deterministic ACTUAL execution. A finite allowlist binds exact GitHub runner-image/containerd rollout pairs while kernel, Docker Engine, runc, cgroup/storage stack and an x86_64 CPU compatibility floor remain pinned. CPU vendor/model are observed evidence only; Node computation is forced through the JIT-less single-CPU execution profile so hardware model drift cannot silently select different V8 JIT code paths.',
   contract:EXPECTED_HOST_TRUST
  };
  const fingerprint=hostTrustFingerprint(draft);
@@ -155,13 +165,31 @@ export function validateObservedHost(manifest,observed){
  const exact=(name,actual,wanted)=>check(name,JSON.stringify(canonicalizeHostTrust(actual))===JSON.stringify(canonicalizeHostTrust(wanted)),{expected:wanted,actual});
  const expectedObservedRunner={
   image_os:expected.runner?.image_os??null,
-  image_version:expected.runner?.image_version??null,
   arch:expected.runner?.arch??null,
   os:expected.runner?.os??null
  };
- exact('runner_observable_identity_exact',observed?.runner,expectedObservedRunner);
+ const observedRunner={
+  image_os:observed?.runner?.image_os??null,
+  arch:observed?.runner?.arch??null,
+  os:observed?.runner?.os??null
+ };
+ exact('runner_observable_identity_exact',observedRunner,expectedObservedRunner);
  exact('kernel_exact',observed?.kernel,expected.kernel);
- exact('docker_exact',observed?.docker,expected.docker);
+ const observedContainerd=observed?.docker?.components?.containerd??null;
+ const allowedHostProfile=(expected.accepted_host_profiles||[]).find(profile=>
+  profile.runner_image_version===observed?.runner?.image_version
+  && JSON.stringify(canonicalizeHostTrust(profile.containerd))===JSON.stringify(canonicalizeHostTrust(observedContainerd))
+ );
+ check('host_profile_is_exactly_allowlisted',Boolean(allowedHostProfile),{
+  accepted:expected.accepted_host_profiles??[],
+  actual:{runner_image_version:observed?.runner?.image_version??null,containerd:observedContainerd}
+ });
+ const withoutContainerd=value=>{
+  const cloned=structuredClone(value??{});
+  if(cloned.components)delete cloned.components.containerd;
+  return cloned;
+ };
+ exact('docker_common_stack_exact',withoutContainerd(observed?.docker),withoutContainerd(expected.docker));
  exact('engine_exact',observed?.engine,expected.engine);
  const cpu=observed?.cpu??{};
  const contract=expected.cpu_contract??{};
