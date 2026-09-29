@@ -1,0 +1,157 @@
+#!/usr/bin/env node
+import {createHash} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+
+const base=process.env.BASE_SHA;
+const head=process.env.HEAD_SHA;
+const headRef=process.env.HEAD_REF;
+const exactSha=/^[0-9a-f]{40}$/;
+if(!exactSha.test(base??'')||!exactSha.test(head??''))throw new Error('BASE_SHA and HEAD_SHA must be exact lowercase 40-hex commits.');
+const git=(...args)=>execFileSync('git',args,{encoding:'utf8'}).trim();
+if(git('rev-parse',base+'^{commit}')!==base)throw new Error('BASE_SHA did not resolve exactly.');
+if(git('rev-parse',head+'^{commit}')!==head)throw new Error('HEAD_SHA did not resolve exactly.');
+
+const changed=git('diff','--name-only',base,head).split('\n').filter(Boolean);
+console.log(changed.join('\n'));
+const publicationSurface=path=>
+ path.startsWith('data/current/')
+ || path==='public/data/actual-entities.json'
+ || path.startsWith('public/geo/current/')
+ || path.startsWith('public/geo/actual/')
+ || path==='data/sources/ro-siruta-current.json'
+ || path==='data/sources/cuatm-current.json'
+ || path==='data/sources/osm-current.json'
+ || path.startsWith('data/sources/osm-snapshots/')
+ || path==='data/sources/ro-osm-official-exception-history.json'
+ || path==='data/sources/ro-osm-level9-exception-history.json'
+ || path==='data/sources/md-osm-multiple-representation-history.json'
+ || path==='data/sources/md-balti-city-boundary-way-history.json'
+ || path==='data/sources/md-balti-city-boundary-changeset-semantics.json';
+
+if(!changed.some(publicationSurface)){
+ console.log(JSON.stringify({status:'PASS',mode:'no_actual_publication_surface_change',base,head},null,2));
+ process.exit(0);
+}
+
+const failures=[];
+const check=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
+const sha=x=>createHash('sha256').update(x).digest('hex');
+
+if(/^actual\/candidate-/.test(headRef??'')){
+ const candidateCommit=git('rev-parse',head+'^');
+ const candidateParent=git('rev-parse',candidateCommit+'^');
+ const candidateChanged=git('diff','--name-only',base,candidateCommit).split('\n').filter(Boolean);
+ const promotionChanged=git('diff','--name-only',candidateCommit,head).split('\n').filter(Boolean);
+ const candidateAllowed=path=>publicationSurface(path);
+ const candidateForbidden=candidateChanged.filter(path=>
+  !candidateAllowed(path)
+  || path==='data/current/actual-release-persisted.json'
+  || path==='data/current/actual-candidate-promotion-audit.json'
+ );
+ const expectedPromotionWrites=[
+  'data/current/actual-candidate-promotion-audit.json',
+  'data/current/actual-release-persisted.json'
+ ];
+ const candidate=JSON.parse(await readFile('data/current/actual-release-candidate.json','utf8'));
+ const promotion=JSON.parse(await readFile('data/current/actual-candidate-promotion-audit.json','utf8'));
+ const persisted=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+ const diffBytes=await readFile('data/current/actual-candidate-diff.json');
+ const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+ const manifest=JSON.parse(manifestBytes);
+
+ const count=Number(git('rev-list','--count',base+'..'+head));
+ check(count===2,'promotion_pr_not_exactly_two_commits',{count});
+ check(candidateParent===base,'promotion_candidate_not_direct_child_of_base',{expected:base,actual:candidateParent});
+ check(candidateForbidden.length===0,'candidate_commit_write_boundary_violation',{paths:candidateForbidden});
+ check(JSON.stringify([...promotionChanged].sort())===JSON.stringify(expectedPromotionWrites),'promotion_commit_write_boundary_violation',{expected:expectedPromotionWrites,actual:[...promotionChanged].sort()});
+ check(candidate.schema_version===2&&candidate.mode==='ACTUAL_CANDIDATE'&&candidate.status==='CHANGE','candidate_marker_not_change');
+ check(candidate.base_ref===base,'candidate_base_sha_mismatch',{candidate:candidate.base_ref,base});
+ check(promotion.status==='PASS'&&promotion.mode==='ACTUAL_CANDIDATE_PROMOTION','promotion_audit_not_pass');
+ check(promotion.base_ref===base,'promotion_audit_base_sha_mismatch',{promotion:promotion.base_ref,base});
+ check(promotion.candidate_commit_sha===candidateCommit,'promotion_audit_candidate_commit_mismatch',{promotion:promotion.candidate_commit_sha,candidateCommit});
+ check(persisted.snapshot_id===manifest.snapshot_id,'persisted_snapshot_manifest_mismatch');
+ check(persisted.manifest_sha256===sha(manifestBytes),'persisted_manifest_hash_mismatch');
+ check(persisted.promoted_from_candidate?.base_commit_sha===base,'persisted_promotion_base_mismatch');
+ check(persisted.promoted_from_candidate?.candidate_identity_sha256===candidate.candidate_identity_sha256,'persisted_candidate_identity_mismatch');
+ check(persisted.promoted_from_candidate?.candidate_commit_sha===candidateCommit,'persisted_candidate_commit_mismatch',{persisted:persisted.promoted_from_candidate?.candidate_commit_sha,candidateCommit});
+ check(persisted.promoted_from_candidate?.diff_report_sha256===sha(diffBytes),'persisted_diff_hash_mismatch');
+ check(persisted.validated_release_gate_status==='PASS','persisted_gate_not_pass');
+
+ console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'candidate_promotion',base,head,candidate_commit:candidateCommit,failures},null,2));
+}else if(/^actual\/provenance-/.test(headRef??'')){
+ const allowedPublication=new Set([
+  'data/current/actual-build-environment-manifest.json',
+  'data/current/actual-build-environment-gate.json',
+  'data/current/actual-release-manifest.json',
+  'data/current/actual-release-gate.json',
+  'data/current/actual-release-persisted.json'
+ ]);
+ const publicationChanged=changed.filter(publicationSurface);
+ const forbiddenPublication=publicationChanged.filter(path=>!allowedPublication.has(path));
+ const basePersisted=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-persisted.json'],{encoding:'utf8'}));
+ const headPersisted=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+ const baseManifest=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json'],{encoding:'utf8'}));
+ const headManifestBytes=await readFile('data/current/actual-release-manifest.json');
+ const headManifest=JSON.parse(headManifestBytes);
+ const buildEnvironmentBytes=await readFile('data/current/actual-build-environment-manifest.json');
+ const buildEnvironment=JSON.parse(buildEnvironmentBytes);
+ const releaseGate=JSON.parse(await readFile('data/current/actual-release-gate.json','utf8'));
+
+ check(forbiddenPublication.length===0,'provenance_migration_changed_forbidden_publication_paths',{paths:forbiddenPublication});
+ check(headManifest.snapshot_id===baseManifest.snapshot_id,'provenance_migration_changed_snapshot_identity');
+ check(headManifest.release_fingerprint_sha256===baseManifest.release_fingerprint_sha256,'provenance_migration_changed_release_fingerprint');
+ check(headManifest.content_fingerprint_sha256===baseManifest.content_fingerprint_sha256,'provenance_migration_changed_content_fingerprint');
+ check(headPersisted.snapshot_id===basePersisted.snapshot_id,'provenance_migration_persisted_snapshot_changed');
+ check(headPersisted.release_fingerprint_sha256===basePersisted.release_fingerprint_sha256,'provenance_migration_persisted_fingerprint_changed');
+ check(headPersisted.provenance_hardening?.previous_manifest_sha256===basePersisted.manifest_sha256,'provenance_migration_previous_manifest_binding_missing',{expected:basePersisted.manifest_sha256,actual:headPersisted.provenance_hardening?.previous_manifest_sha256??null});
+ check(headPersisted.manifest_sha256===sha(headManifestBytes),'provenance_migration_manifest_hash_mismatch');
+ check(headPersisted.build_environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256,'provenance_migration_build_environment_fingerprint_mismatch');
+ check(headManifest.build_environment?.environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256,'provenance_migration_manifest_build_environment_mismatch');
+ check(headManifest.build_environment?.sha256===sha(buildEnvironmentBytes),'provenance_migration_build_environment_hash_mismatch');
+ check(releaseGate.status==='PASS','provenance_migration_release_gate_not_pass');
+ check(releaseGate.manifest_sha256===sha(headManifestBytes),'provenance_migration_release_gate_manifest_mismatch');
+ check(headPersisted.validated_release_gate_status==='PASS','provenance_migration_persisted_gate_not_pass');
+ console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'provenance_migration',base,head,publication_changed:publicationChanged,failures},null,2));
+}else if(/^actual\/review-evidence-/.test(headRef??'')){
+ const allowed=new Set([
+  'data/current/ro-official-exception-audit.json',
+  'data/current/ro-level9-exception-audit.json',
+  'data/current/md-cuatm-individual-deep-audit.json',
+  'data/current/actual-review-evidence-bundle.json',
+  'data/current/actual-review-evidence-bundle-gate.json',
+  'data/current/md-special-municipality-analysis.json',
+  'data/current/md-release-gate.json',
+  'data/current/ro-release-gate.json',
+  'data/current/actual-source-bundle-manifest.json',
+  'data/current/actual-source-bundle-gate.json',
+  'data/current/actual-release-manifest.json',
+  'data/current/actual-release-gate.json',
+  'data/current/actual-release-persisted.json',
+  'data/sources/ro-osm-official-exception-history.json',
+  'data/sources/ro-osm-level9-exception-history.json',
+  'data/sources/md-osm-multiple-representation-history.json',
+  'data/sources/md-balti-city-boundary-way-history.json',
+  'data/sources/md-balti-city-boundary-changeset-semantics.json'
+ ]);
+ const forbidden=changed.filter(path=>!allowed.has(path));
+ const basePersisted=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-persisted.json'],{encoding:'utf8'}));
+ const headPersisted=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+ const baseManifest=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json'],{encoding:'utf8'}));
+ const headManifest=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
+ const count=Number(git('rev-list','--count',base+'..'+head));
+ check(count===1,'review_evidence_pr_not_single_commit',{count});
+ check(forbidden.length===0,'review_evidence_pr_changed_forbidden_paths',{paths:forbidden});
+ check(headManifest.snapshot_id===baseManifest.snapshot_id,'review_evidence_changed_snapshot_identity');
+ check(headManifest.release_fingerprint_sha256===baseManifest.release_fingerprint_sha256,'review_evidence_changed_release_fingerprint');
+ check(headPersisted.snapshot_id===basePersisted.snapshot_id,'review_evidence_persisted_snapshot_changed');
+ check(headPersisted.release_fingerprint_sha256===basePersisted.release_fingerprint_sha256,'review_evidence_persisted_fingerprint_changed');
+ check(headPersisted.provenance_refresh?.previous_manifest_sha256===basePersisted.manifest_sha256,'review_evidence_previous_manifest_binding_missing');
+ check(headPersisted.validated_release_gate_status==='PASS','review_evidence_gate_not_pass');
+ console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'review_evidence_refresh',base,head,failures},null,2));
+}else{
+ failures.push({issue:'unauthorized_actual_publication_branch',head_ref:headRef??null});
+ console.log(JSON.stringify({status:'FAIL',mode:'unauthorized_publication',base,head,head_ref:headRef??null,failures},null,2));
+}
+
+if(failures.length)process.exit(1);

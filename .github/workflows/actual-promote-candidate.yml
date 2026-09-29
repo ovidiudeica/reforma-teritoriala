@@ -11,6 +11,10 @@ on:
         description: 'Exact candidate snapshot id, e.g. actual-0123456789abcdef'
         required: true
         type: string
+      expected_candidate_commit:
+        description: 'Exact 40-hex candidate commit SHA produced by Build ACTUAL candidate snapshot'
+        required: true
+        type: string
       confirmation:
         description: 'Type PROMOTE <snapshot_id>'
         required: true
@@ -34,11 +38,39 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Check out candidate
+      - name: Validate exact candidate request
+        env:
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+          EXPECTED_CANDIDATE_COMMIT: ${{ inputs.expected_candidate_commit }}
+        run: |
+          set -euo pipefail
+          if ! printf '%s' "$CANDIDATE_BRANCH" | grep -Eq '^actual/candidate-[A-Za-z0-9][A-Za-z0-9._-]{0,80}$'; then
+            echo "Candidate branch must stay inside the isolated actual/candidate-* namespace: $CANDIDATE_BRANCH"
+            exit 1
+          fi
+          if ! printf '%s' "$EXPECTED_CANDIDATE_COMMIT" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "Expected candidate commit must be an exact lowercase 40-hex SHA: $EXPECTED_CANDIDATE_COMMIT"
+            exit 1
+          fi
+
+      - name: Check out exact candidate commit
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          ref: ${{ inputs.candidate_branch }}
+          ref: ${{ inputs.expected_candidate_commit }}
           fetch-depth: 0
+
+      - name: Bind branch to exact candidate commit
+        env:
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+          EXPECTED_CANDIDATE_COMMIT: ${{ inputs.expected_candidate_commit }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CANDIDATE_COMMIT"
+          REMOTE_CANDIDATE_COMMIT="$(git ls-remote --heads origin "refs/heads/$CANDIDATE_BRANCH" | awk '{print $1}')"
+          if [ "$REMOTE_CANDIDATE_COMMIT" != "$EXPECTED_CANDIDATE_COMMIT" ]; then
+            echo "Candidate branch moved or does not match approved commit: branch=$CANDIDATE_BRANCH expected=$EXPECTED_CANDIDATE_COMMIT actual=$REMOTE_CANDIDATE_COMMIT"
+            exit 1
+          fi
 
       - name: Trust mounted GitHub workspace
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -86,6 +118,7 @@ jobs:
         env:
           ACTUAL_BASE_REF: ${{ steps.current_main.outputs.current_main_sha }}
           EXPECTED_CANDIDATE_SNAPSHOT: ${{ inputs.expected_candidate_snapshot }}
+          ACTUAL_CANDIDATE_COMMIT_SHA: ${{ inputs.expected_candidate_commit }}
           CONFIRM_PROMOTION: ${{ inputs.confirmation }}
         run: npm run prepare:actual-candidate-promotion
 
@@ -107,19 +140,24 @@ jobs:
       - name: Commit promotion marker on candidate branch
         env:
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+          EXPECTED_CANDIDATE_COMMIT: ${{ inputs.expected_candidate_commit }}
         run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CANDIDATE_COMMIT"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/current/actual-release-persisted.json data/current/actual-candidate-promotion-audit.json
+          git diff --cached --quiet && { echo "Promotion marker produced no committed changes."; exit 1; }
           COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
           GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion ${{ inputs.expected_candidate_snapshot }}"
-          git push origin "HEAD:$CANDIDATE_BRANCH"
+          git push --force-with-lease="refs/heads/$CANDIDATE_BRANCH:$EXPECTED_CANDIDATE_COMMIT" origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
 
       - name: Open promotion pull request
         env:
           GH_TOKEN: ${{ github.token }}
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
           SNAPSHOT_ID: ${{ inputs.expected_candidate_snapshot }}
+          CANDIDATE_COMMIT_SHA: ${{ inputs.expected_candidate_commit }}
         run: |
           EXISTING="$(gh pr list --base main --head "$CANDIDATE_BRANCH" --state open --json url --jq '.[0].url // empty')"
           if [ -n "$EXISTING" ]; then
@@ -131,7 +169,7 @@ jobs:
           BASE_SNAPSHOT="$(node -p "require('./data/current/actual-release-candidate.json').base_release.snapshot_id")"
           REVIEW_REQUIRED="$(node -p "require('./data/current/actual-release-candidate.json').review_required")"
           CHANGE_COUNT="$(node -p "require('./data/current/actual-release-candidate.json').substantive_change_count")"
-          BODY="Explicit ACTUAL candidate promotion. Candidate: $SNAPSHOT_ID. Base persisted release: $BASE_SNAPSHOT. Substantive diff count: $CHANGE_COUNT. Candidate review_required: $REVIEW_REQUIRED. The candidate release gate passed before this PR was created. The required verify-persisted-release check must pass on the promotion PR before merge."
+          BODY="Explicit ACTUAL candidate promotion. Candidate: $SNAPSHOT_ID. Candidate commit: $CANDIDATE_COMMIT_SHA. Base persisted release: $BASE_SNAPSHOT. Substantive diff count: $CHANGE_COUNT. Candidate review_required: $REVIEW_REQUIRED. The candidate release gate passed before this PR was created. The required verify-persisted-release, actual-change-reproducibility and actual-release-trust-chain checks must pass before merge."
           URL="$(gh pr create --base main --head "$CANDIDATE_BRANCH" --title "Promote ACTUAL candidate $SNAPSHOT_ID" --body "$BODY")"
           echo "### Promotion PR" >> "$GITHUB_STEP_SUMMARY"
           echo "$URL" >> "$GITHUB_STEP_SUMMARY"

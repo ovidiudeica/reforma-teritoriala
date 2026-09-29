@@ -80,7 +80,9 @@ export function validateCandidatePromotion({
  currentPersisted,
  currentManifest,
  currentManifestSha256,
- currentBaseCommitSha
+ currentBaseCommitSha,
+ expectedCandidateCommitSha,
+ actualCandidateCommitSha
 }){
  const failures=[];
  const check=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
@@ -88,6 +90,8 @@ export function validateCandidatePromotion({
  check(confirmation==='PROMOTE '+expectedSnapshot,'invalid_promotion_confirmation',{expected:'PROMOTE '+expectedSnapshot,actual:confirmation});
  check(candidateMarker?.schema_version===2&&candidateMarker?.mode==='ACTUAL_CANDIDATE'&&candidateMarker?.status==='CHANGE','candidate_marker_not_promotable',{schema_version:candidateMarker?.schema_version??null,status:candidateMarker?.status??null});
  check(/^[0-9a-f]{40}$/.test(currentBaseCommitSha??''),'current_base_commit_not_exact_sha',{actual:currentBaseCommitSha??null});
+ check(/^[0-9a-f]{40}$/.test(expectedCandidateCommitSha??''),'expected_candidate_commit_not_exact_sha',{actual:expectedCandidateCommitSha??null});
+ check(expectedCandidateCommitSha===actualCandidateCommitSha,'candidate_commit_sha_mismatch',{expected:expectedCandidateCommitSha??null,actual:actualCandidateCommitSha??null});
  check(/^[0-9a-f]{40}$/.test(candidateMarker?.base_ref??''),'candidate_base_commit_not_exact_sha',{actual:candidateMarker?.base_ref??null});
  check(candidateMarker?.base_ref===currentBaseCommitSha,'base_commit_moved',{candidate_base:candidateMarker?.base_ref??null,current_main:currentBaseCommitSha??null});
  check(diff?.base_ref===candidateMarker?.base_ref,'candidate_diff_base_commit_mismatch',{marker:candidateMarker?.base_ref??null,diff:diff?.base_ref??null});

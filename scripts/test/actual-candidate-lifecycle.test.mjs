@@ -147,6 +147,7 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
 
  const candidateSnapshot='actual-'+changedFp.sha256.slice(0,16);
  const baseCommitSha='a'.repeat(40);
+ const candidateCommitSha='c'.repeat(40);
  const disposition=classifyCandidateDisposition({
   baseContentFingerprint:baseFp.sha256,
   candidateContentFingerprint:changedFp.sha256,
@@ -226,9 +227,25 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   currentPersisted:persisted,
   currentManifest,
   currentManifestSha256:sha256(currentManifestBytes),
-  currentBaseCommitSha:baseCommitSha
+  currentBaseCommitSha:baseCommitSha,
+  expectedCandidateCommitSha:candidateCommitSha,
+  actualCandidateCommitSha:candidateCommitSha
  });
  assert.equal(validation.status,'PASS',JSON.stringify(validation.failures));
+
+ const movedCandidateCommit=validateCandidatePromotion({
+  candidateMarker:marker,diff,manifest,gate,
+  expectedSnapshot:candidateSnapshot,
+  confirmation:'PROMOTE '+candidateSnapshot,
+  candidateManifestSha256:marker.candidate.manifest_sha256,
+  actualCandidateManifestSha256:sha256(manifestBytes),
+  candidateDiffSha256:marker.diff_report_sha256,
+  actualCandidateDiffSha256:sha256(diffBytes),
+  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),currentBaseCommitSha:baseCommitSha,
+  expectedCandidateCommitSha:candidateCommitSha,actualCandidateCommitSha:'d'.repeat(40)
+ });
+ assert.equal(movedCandidateCommit.status,'FAIL');
+ assert.ok(movedCandidateCommit.failures.some(x=>x.issue==='candidate_commit_sha_mismatch'));
 
  const wrongSnapshot=validateCandidatePromotion({
   candidateMarker:marker,diff,manifest,gate,
@@ -238,7 +255,9 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   actualCandidateManifestSha256:sha256(manifestBytes),
   candidateDiffSha256:marker.diff_report_sha256,
   actualCandidateDiffSha256:sha256(diffBytes),
-  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),currentBaseCommitSha:baseCommitSha
+  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),currentBaseCommitSha:baseCommitSha,
+  expectedCandidateCommitSha:candidateCommitSha,
+  actualCandidateCommitSha:candidateCommitSha
  });
  assert.equal(wrongSnapshot.status,'FAIL');
  assert.ok(wrongSnapshot.failures.some(x=>x.issue==='unexpected_candidate_snapshot'));
@@ -252,7 +271,9 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   candidateDiffSha256:marker.diff_report_sha256,
   actualCandidateDiffSha256:sha256(diffBytes),
   currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),
-  currentBaseCommitSha:'b'.repeat(40)
+  currentBaseCommitSha:'b'.repeat(40),
+  expectedCandidateCommitSha:candidateCommitSha,
+  actualCandidateCommitSha:candidateCommitSha
  });
  assert.equal(movedBase.status,'FAIL');
  assert.ok(movedBase.failures.some(x=>x.issue==='base_commit_moved'));
@@ -263,7 +284,9 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   manifest,gate,expectedSnapshot:candidateSnapshot,confirmation:'PROMOTE '+candidateSnapshot,
   candidateManifestSha256:marker.candidate.manifest_sha256,actualCandidateManifestSha256:sha256(manifestBytes),
   candidateDiffSha256:marker.diff_report_sha256,actualCandidateDiffSha256:sha256(diffBytes),
-  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),currentBaseCommitSha:baseCommitSha
+  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),currentBaseCommitSha:baseCommitSha,
+  expectedCandidateCommitSha:candidateCommitSha,
+  actualCandidateCommitSha:candidateCommitSha
  });
  assert.equal(rejectedNoChange.status,'FAIL');
  assert.ok(rejectedNoChange.failures.some(x=>x.issue==='candidate_marker_not_promotable'));

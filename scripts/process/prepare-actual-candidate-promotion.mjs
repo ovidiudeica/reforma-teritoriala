@@ -9,6 +9,10 @@ if(!BASE_REF||!/^[0-9a-f]{40}$/.test(BASE_REF))throw new Error('ACTUAL_BASE_REF 
 const resolvedBaseCommit=execFileSync('git',['rev-parse',BASE_REF+'^{commit}'],{encoding:'utf8'}).trim();
 if(resolvedBaseCommit!==BASE_REF)throw new Error('ACTUAL_BASE_REF did not resolve byte-for-byte to the requested current main commit SHA.');
 const EXPECTED=process.env.EXPECTED_CANDIDATE_SNAPSHOT;
+const CANDIDATE_COMMIT_SHA=process.env.ACTUAL_CANDIDATE_COMMIT_SHA;
+if(!CANDIDATE_COMMIT_SHA||!/^[0-9a-f]{40}$/.test(CANDIDATE_COMMIT_SHA))throw new Error('ACTUAL_CANDIDATE_COMMIT_SHA must be the exact lowercase 40-hex candidate commit SHA.');
+const resolvedCandidateCommit=execFileSync('git',['rev-parse','HEAD^{commit}'],{encoding:'utf8'}).trim();
+if(resolvedCandidateCommit!==CANDIDATE_COMMIT_SHA)throw new Error('Current checkout does not match ACTUAL_CANDIDATE_COMMIT_SHA.');
 const CONFIRM=process.env.CONFIRM_PROMOTION;
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const gitBuffer=path=>execFileSync('git',['show',BASE_REF+':'+path],{maxBuffer:256*1024*1024});
@@ -41,7 +45,9 @@ const validation=validateCandidatePromotion({
  currentPersisted,
  currentManifest,
  currentManifestSha256,
- currentBaseCommitSha:BASE_REF
+ currentBaseCommitSha:BASE_REF,
+ expectedCandidateCommitSha:CANDIDATE_COMMIT_SHA,
+ actualCandidateCommitSha:resolvedCandidateCommit
 });
 const failures=validation.failures;
 const audit={
@@ -49,6 +55,7 @@ const audit={
  mode:'ACTUAL_CANDIDATE_PROMOTION',
  status:validation.status,
  base_ref:BASE_REF,
+ candidate_commit_sha:CANDIDATE_COMMIT_SHA,
  base_release:candidateMarker.base_release,
  candidate:candidateMarker.candidate,
  review_required:candidateMarker.review_required,
@@ -77,6 +84,7 @@ const persisted={
   review_required:candidateMarker.review_required,
   substantive_change_count:candidateMarker.substantive_change_count,
   candidate_identity_sha256:candidateMarker.candidate_identity_sha256,
+  candidate_commit_sha:CANDIDATE_COMMIT_SHA,
   promotion_audit_path:'data/current/actual-candidate-promotion-audit.json'
  },
  policy:'Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.'

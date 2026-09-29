@@ -83,14 +83,54 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
  }
 });
 
+
+test('candidate and promotion writes are pinned to isolated branch plus exact candidate commit',async()=>{
+ const [candidate,promotion]=await Promise.all([
+  readFile(join(workflowsDir,'actual-candidate.yml'),'utf8'),
+  readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8')
+ ]);
+ assert.match(candidate,/\^actual\/candidate-\[A-Za-z0-9\]/);
+ assert.match(candidate,/HEAD:refs\/heads\/\$CANDIDATE_BRANCH/);
+ assert.match(candidate,/Candidate commit SHA:/);
+ assert.match(promotion,/expected_candidate_commit:/);
+ assert.match(promotion,/ref: \$\{\{ inputs\.expected_candidate_commit \}\}/);
+ assert.match(promotion,/REMOTE_CANDIDATE_COMMIT=/);
+ assert.match(promotion,/ACTUAL_CANDIDATE_COMMIT_SHA: \$\{\{ inputs\.expected_candidate_commit \}\}/);
+ assert.match(promotion,/--force-with-lease="refs\/heads\/\$CANDIDATE_BRANCH:\$EXPECTED_CANDIDATE_COMMIT"/);
+ assert.match(promotion,/HEAD:refs\/heads\/\$CANDIDATE_BRANCH/);
+});
+
 test('promotion trust-chain gate separates candidate and promotion commit write boundaries',async()=>{
- const content=await readFile(join(workflowsDir,'actual-release-trust-chain-gate.yml'),'utf8');
- assert.match(content,/candidateCommit=execFileSync\('git',\['rev-parse',head\+'\^'\]/);
- assert.match(content,/candidate_commit_write_boundary_violation/);
- assert.match(content,/promotion_commit_write_boundary_violation/);
- assert.match(content,/actual-release-persisted\.json/);
- assert.match(content,/actual-candidate-promotion-audit\.json/);
- assert.match(content,/count===2/);
+ const [workflow,audit]=await Promise.all([
+  readFile(join(workflowsDir,'actual-release-trust-chain-gate.yml'),'utf8'),
+  readFile('scripts/process/audit-actual-publication-path.mjs','utf8')
+ ]);
+ assert.match(workflow,/node scripts\/process\/audit-actual-publication-path\.mjs/);
+ assert.match(audit,/candidateCommit=git\('rev-parse',head\+'\^'\)/);
+ assert.match(audit,/candidate_commit_write_boundary_violation/);
+ assert.match(audit,/promotion_commit_write_boundary_violation/);
+ assert.match(audit,/actual-release-persisted\.json/);
+ assert.match(audit,/actual-candidate-promotion-audit\.json/);
+ assert.match(audit,/count===2/);
+ assert.match(audit,/promotion_audit_candidate_commit_mismatch/);
+ assert.match(audit,/persisted_candidate_commit_mismatch/);
+});
+
+test('trust-chain gate permits only exact provenance migration publication files',async()=>{
+ const audit=await readFile('scripts/process/audit-actual-publication-path.mjs','utf8');
+ assert.match(audit,/actual\\\/provenance-/);
+ for(const path of [
+  'data/current/actual-build-environment-manifest.json',
+  'data/current/actual-build-environment-gate.json',
+  'data/current/actual-release-manifest.json',
+  'data/current/actual-release-gate.json',
+  'data/current/actual-release-persisted.json'
+ ])assert.ok(audit.includes(path),path+' missing from provenance allowlist');
+ assert.match(audit,/provenance_migration_changed_forbidden_publication_paths/);
+ assert.match(audit,/provenance_migration_changed_snapshot_identity/);
+ assert.match(audit,/provenance_migration_changed_release_fingerprint/);
+ assert.match(audit,/provenance_migration_previous_manifest_binding_missing/);
+ assert.match(audit,/provenance_migration_release_gate_not_pass/);
 });
 
 test('review-evidence refresh stages an exact artifact allowlist',async()=>{
