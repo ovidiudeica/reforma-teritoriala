@@ -79,6 +79,7 @@ export async function inspectRuntimeImageDefinition({readFileFn=readFile}={}){
    dockerfile_base_digest:baseMatch[2],
    builder_pins_base_digest:builder.includes(EXPECTED_RUNTIME_IMAGE.base_digest),
    builder_double_build_gate:builder.includes('test "$DIGEST_A" = "$DIGEST_B"'),
+   builder_pins_runtime_digest:builder.includes('PINNED_RUNTIME_DIGEST="sha256:'+EXPECTED_RUNTIME_IMAGE.digest.slice(7)+'"')&&builder.includes('test "$RUNTIME_DIGEST" = "$PINNED_RUNTIME_DIGEST"'),
    builder_disables_provenance:builder.includes('--provenance=false'),
    builder_disables_sbom:builder.includes('--sbom=false'),
    builder_sets_source_date_epoch:builder.includes('SOURCE_DATE_EPOCH=0'),
