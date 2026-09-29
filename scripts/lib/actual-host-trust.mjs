@@ -9,7 +9,7 @@ export const EXPECTED_HOST_TRUST={
  runner:{
   label:'ubuntu-24.04',
   image_os:'ubuntu24',
-  image_version:'20260920.314.1',
+  image_version:'20260927.320.1',
   os:'Linux',
   arch:'X64'
  },
@@ -26,7 +26,7 @@ export const EXPECTED_HOST_TRUST={
   git_commit:'6430e49',
   components:{
    Engine:{version:'28.0.4',git_commit:'6430e49'},
-   containerd:{version:'v2.3.5',git_commit:'1294c24a7da8e5a793ed378161673abe94118892'},
+   containerd:{version:'v2.3.6',git_commit:'ee2735368117d2eb259779949d5e75cdafec9761'},
    runc:{version:'1.5.1',git_commit:'v1.5.1-0-g8f2685a4'},
    'docker-init':{version:'0.19.0',git_commit:'de40ad0'}
   }
