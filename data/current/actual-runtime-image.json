@@ -5,8 +5,8 @@
   "policy": "Exact ACTUAL OCI runtime identity and builder provenance. The upstream Node base, final GHCR image digest, Dockerfile bytes, builder workflow bytes, Buildx binary/commit and digest-pinned BuildKit image are bound; the exact builder must produce the same runtime digest twice from identical inputs.",
   "runtime": {
     "image": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime",
-    "digest": "sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
-    "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
+    "digest": "sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
+    "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
     "platform": "linux/amd64",
     "base_image": "node:24.21.0-bookworm",
     "base_digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
@@ -21,7 +21,7 @@
     },
     "builder_workflow": {
       "path": ".github/workflows/build-actual-runtime-image.yml",
-      "sha256": "6bd67096d9f5cff90cedd068f3cefd38845e2372a25aa45b41fe0bcaa0bce8e0"
+      "sha256": "9d9629e8975be358f5a87ff291627e3dac3f95c80672b9b35ef25532f61b4504"
     }
   },
   "reproducibility": {
@@ -32,9 +32,9 @@
   },
   "builder_provenance": {
     "manifest_path": "data/current/actual-oci-builder.json",
-    "manifest_sha256": "42c2eb8adf2f991b772fdca365e4ec3856ae6e3676fc76e8afa137e09d72d41a",
+    "manifest_sha256": "41ea37ab695eda3d4aa52289c1198797be2d1c6b0b04408fd087b4b4f08ccb21",
     "builder_fingerprint_algorithm": "actual-oci-builder-v1",
-    "builder_fingerprint_sha256": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
+    "builder_fingerprint_sha256": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d",
     "buildx": {
       "version": "v0.37.1",
       "commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
@@ -55,5 +55,5 @@
       "platform": "linux/amd64"
     }
   },
-  "runtime_fingerprint_sha256": "6ee3e7cec8d1b0ac45efea1bb3f6cc84549f924103c5c1282d4aeaaaa3061594"
+  "runtime_fingerprint_sha256": "519a36113bce7512965d77921c7ec6493afd4c6f57e336aee5b84c4777fe1a42"
 }

@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-29T00:36:33.742Z",
+  "generated_at": "2026-09-29T00:40:59.419Z",
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "0395d12275f677b3a6247a31f037839ea969a828b73217d399fcbe89a59a47ef",
+  "manifest_sha256": "c603313de0035cea5f4dbc15d1630fda66f85c26773f2229b6ff119aa2581e1a",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -299,8 +299,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "9d24001031713841af58804707d96b49b5585d983e50dbca2a512bcf3f653812",
-          "sha256": "25c15653c1f251c023cdcbe9813ddb200cd5fafcb339297b3823fcf70ad7ae42"
+          "environment_fingerprint_sha256": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
+          "sha256": "d2f18a0f785e7c800e7502ff416d8688b58367dac991ebe20695d126e81e8f61"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -309,8 +309,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260920.314.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "9d24001031713841af58804707d96b49b5585d983e50dbca2a512bcf3f653812",
-          "sha256": "25c15653c1f251c023cdcbe9813ddb200cd5fafcb339297b3823fcf70ad7ae42"
+          "environment_fingerprint_sha256": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
+          "sha256": "d2f18a0f785e7c800e7502ff416d8688b58367dac991ebe20695d126e81e8f61"
         }
       }
     },

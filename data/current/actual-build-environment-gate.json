@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "25c15653c1f251c023cdcbe9813ddb200cd5fafcb339297b3823fcf70ad7ae42",
-  "environment_fingerprint_sha256": "9d24001031713841af58804707d96b49b5585d983e50dbca2a512bcf3f653812",
+  "build_environment_sha256": "d2f18a0f785e7c800e7502ff416d8688b58367dac991ebe20695d126e81e8f61",
+  "environment_fingerprint_sha256": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
   "checks": [
@@ -49,39 +49,39 @@
       "name": "runtime_container_is_exact",
       "ok": true,
       "detail": {
-        "expected": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
+        "expected": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
         "actual": {
           "candidate": {
             "container_images": [],
             "runtime_env_refs": [
-              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
             ]
           },
           "topology": {
             "container_images": [
-              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
             ],
             "runtime_env_refs": []
           },
           "promotion": {
             "container_images": [
-              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
             ],
             "runtime_env_refs": []
           },
           "verify": {
             "container_images": [
-              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
             ],
             "runtime_env_refs": []
           }
         },
         "manifest": {
           "manifest_path": "data/current/actual-runtime-image.json",
-          "manifest_sha256": "da0496d93305249b27970f956dc77fb2d27f7c26b4c78f08054b08c8386914a5",
-          "runtime_fingerprint_sha256": "6ee3e7cec8d1b0ac45efea1bb3f6cc84549f924103c5c1282d4aeaaaa3061594",
-          "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
-          "digest": "sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
+          "manifest_sha256": "346c3269d5b80c8ad58a615f34048d7338168efce9b636a4664d90b9953de613",
+          "runtime_fingerprint_sha256": "519a36113bce7512965d77921c7ec6493afd4c6f57e336aee5b84c4777fe1a42",
+          "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
+          "digest": "sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
           "platform": "linux/amd64",
           "base_ref": "node:24.21.0-bookworm@sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
           "base_digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4"
@@ -180,7 +180,7 @@
       "ok": true,
       "detail": {
         "status": "PASS",
-        "fingerprint": "6ee3e7cec8d1b0ac45efea1bb3f6cc84549f924103c5c1282d4aeaaaa3061594",
+        "fingerprint": "519a36113bce7512965d77921c7ec6493afd4c6f57e336aee5b84c4777fe1a42",
         "failures": []
       }
     },
@@ -189,13 +189,13 @@
       "ok": true,
       "detail": {
         "status": "PASS",
-        "fingerprint": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
+        "fingerprint": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d",
         "failures": [],
         "current": {
           "manifest_path": "data/current/actual-oci-builder.json",
-          "manifest_sha256": "42c2eb8adf2f991b772fdca365e4ec3856ae6e3676fc76e8afa137e09d72d41a",
+          "manifest_sha256": "41ea37ab695eda3d4aa52289c1198797be2d1c6b0b04408fd087b4b4f08ccb21",
           "builder_fingerprint_algorithm": "actual-oci-builder-v1",
-          "builder_fingerprint_sha256": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
+          "builder_fingerprint_sha256": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d",
           "buildx_version": "v0.37.1",
           "buildx_commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
           "buildx_binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b",
@@ -266,8 +266,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "9d24001031713841af58804707d96b49b5585d983e50dbca2a512bcf3f653812",
-        "actual": "9d24001031713841af58804707d96b49b5585d983e50dbca2a512bcf3f653812"
+        "expected": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
+        "actual": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05"
       }
     },
     {

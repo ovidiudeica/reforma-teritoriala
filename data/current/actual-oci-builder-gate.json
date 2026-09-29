@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_OCI_BUILDER_GATE",
   "builder_manifest_path": "data/current/actual-oci-builder.json",
-  "builder_manifest_sha256": "42c2eb8adf2f991b772fdca365e4ec3856ae6e3676fc76e8afa137e09d72d41a",
-  "builder_fingerprint_sha256": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
+  "builder_manifest_sha256": "41ea37ab695eda3d4aa52289c1198797be2d1c6b0b04408fd087b4b4f08ccb21",
+  "builder_fingerprint_sha256": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d",
   "runtime_check": false,
   "status": "PASS",
   "policy": "Fail closed unless Buildx binary bytes/version/commit, BuildKit digest/image identity, docker-container driver contract and builder workflow bytes exactly match committed OCI-builder provenance. Runtime image builds require the live runtime check before building.",
@@ -81,13 +81,13 @@
         "expected": {
           "builder_workflow": {
             "path": ".github/workflows/build-actual-runtime-image.yml",
-            "sha256": "6bd67096d9f5cff90cedd068f3cefd38845e2372a25aa45b41fe0bcaa0bce8e0"
+            "sha256": "9d9629e8975be358f5a87ff291627e3dac3f95c80672b9b35ef25532f61b4504"
           }
         },
         "actual": {
           "builder_workflow": {
             "path": ".github/workflows/build-actual-runtime-image.yml",
-            "sha256": "6bd67096d9f5cff90cedd068f3cefd38845e2372a25aa45b41fe0bcaa0bce8e0"
+            "sha256": "9d9629e8975be358f5a87ff291627e3dac3f95c80672b9b35ef25532f61b4504"
           }
         }
       }
@@ -115,8 +115,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-oci-builder-v1",
-        "expected": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
-        "actual": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89"
+        "expected": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d",
+        "actual": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d"
       }
     }
   ],
