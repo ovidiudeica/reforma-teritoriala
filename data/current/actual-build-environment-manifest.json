@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "982cff97455405abd8f0401e695a924f83850e273ae1a24a5bb9fdec4e74078e",
+  "environment_fingerprint_sha256": "f2c13802dcf1802affb03e2fa9f5e4ff5bafc91d34008ff5d8142a351b5bcd0b",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -91,7 +91,7 @@
       ".github/workflows/refresh-ro-official.yml": "5e363f8e4fdeed2d41f15e630024f60f838a4d32ab6d92bb419dece6de2a6c2a",
       ".github/workflows/refresh-md-official.yml": "15d7de4b7e09810061b864ed8e71dafffa3c978bd095d7eee23c4222deb7c968",
       ".github/workflows/refresh-actual-review-evidence.yml": "d78b7f170aefcec27ae2afe3811e6608956824ff10568366e9fec62939348ac7",
-      ".github/workflows/actual-release-trust-chain-gate.yml": "5c2d5884e765588aa20c77cdcdb2480853c93a43ed3b37013cf92368da473838",
+      ".github/workflows/actual-release-trust-chain-gate.yml": "6fa9f195d76074151a480563112fcc9e5bde15a347c88926cb945af57ed234fa",
       "scripts/test/workflow-write-boundaries.test.mjs": "af7b1ba0b2bd92c9d7843c76a7f953980ea693ccf94ec2debf20c5ddf97d1ecd",
       "scripts/lib/actual-build-environment.mjs": "6c9245be5b4872f817f39778ce3e07e782b2c7250a0e46f68c6c9d41c69a99cb",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
