@@ -80,7 +80,13 @@ export function validateCandidatePromotion({
  currentPersisted,
  currentManifest,
  currentManifestSha256,
- currentBaseCommitSha
+ currentBaseCommitSha,
+ candidateCommitSha,
+ candidateTreeSha,
+ actualCandidateCommitSha,
+ actualCandidateTreeSha,
+ actualCandidateParentSha,
+ actualCandidateCommitCount
 }){
  const failures=[];
  const check=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
@@ -90,6 +96,12 @@ export function validateCandidatePromotion({
  check(/^[0-9a-f]{40}$/.test(currentBaseCommitSha??''),'current_base_commit_not_exact_sha',{actual:currentBaseCommitSha??null});
  check(/^[0-9a-f]{40}$/.test(candidateMarker?.base_ref??''),'candidate_base_commit_not_exact_sha',{actual:candidateMarker?.base_ref??null});
  check(candidateMarker?.base_ref===currentBaseCommitSha,'base_commit_moved',{candidate_base:candidateMarker?.base_ref??null,current_main:currentBaseCommitSha??null});
+ check(/^[0-9a-f]{40}$/.test(candidateCommitSha??''),'candidate_commit_not_exact_sha',{actual:candidateCommitSha??null});
+ check(/^[0-9a-f]{40}$/.test(candidateTreeSha??''),'candidate_tree_not_exact_sha',{actual:candidateTreeSha??null});
+ check(candidateCommitSha===actualCandidateCommitSha,'candidate_commit_head_mismatch',{expected:candidateCommitSha??null,actual:actualCandidateCommitSha??null});
+ check(candidateTreeSha===actualCandidateTreeSha,'candidate_tree_head_mismatch',{expected:candidateTreeSha??null,actual:actualCandidateTreeSha??null});
+ check(actualCandidateParentSha===currentBaseCommitSha,'candidate_parent_base_mismatch',{candidate_parent:actualCandidateParentSha??null,current_main:currentBaseCommitSha??null});
+ check(actualCandidateCommitCount===1,'candidate_commit_count_invalid',{actual:actualCandidateCommitCount??null});
  check(diff?.base_ref===candidateMarker?.base_ref,'candidate_diff_base_commit_mismatch',{marker:candidateMarker?.base_ref??null,diff:diff?.base_ref??null});
  const candidateIdentity=candidateIdentityFingerprint({baseRef:candidateMarker?.base_ref??null,baseRelease:candidateMarker?.base_release??null,candidate:candidateMarker?.candidate??null,diffReportSha256:candidateMarker?.diff_report_sha256??null});
  check(candidateMarker?.candidate_identity_algorithm===candidateIdentity.algorithm&&candidateMarker?.candidate_identity_sha256===candidateIdentity.sha256,'candidate_identity_mismatch',{algorithm:candidateMarker?.candidate_identity_algorithm??null,expected:candidateIdentity.sha256,actual:candidateMarker?.candidate_identity_sha256??null});
