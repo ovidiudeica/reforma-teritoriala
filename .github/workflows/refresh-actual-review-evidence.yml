@@ -121,19 +121,43 @@ jobs:
         env:
           BRANCH: actual/review-evidence-${{ github.run_id }}
         run: |
-          if git diff --quiet -- data/current data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json data/sources/md-balti-city-boundary-changeset-semantics.json; then
+          set -euo pipefail
+          ALLOWED=(
+            data/current/ro-official-exception-audit.json
+            data/current/ro-level9-exception-audit.json
+            data/current/md-cuatm-individual-deep-audit.json
+            data/current/actual-review-evidence-bundle.json
+            data/current/actual-review-evidence-bundle-gate.json
+            data/current/md-special-municipality-analysis.json
+            data/current/md-release-gate.json
+            data/current/ro-release-gate.json
+            data/current/actual-source-bundle-manifest.json
+            data/current/actual-source-bundle-gate.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-gate.json
+            data/current/actual-release-persisted.json
+            data/sources/ro-osm-official-exception-history.json
+            data/sources/ro-osm-level9-exception-history.json
+            data/sources/md-osm-multiple-representation-history.json
+            data/sources/md-balti-city-boundary-way-history.json
+            data/sources/md-balti-city-boundary-changeset-semantics.json
+          )
+          git status --porcelain --untracked-files=all | sed -E 's/^.. //' | sort -u > "$RUNNER_TEMP/review-evidence-changed.txt"
+          if [ ! -s "$RUNNER_TEMP/review-evidence-changed.txt" ]; then
             echo "No review-evidence change."
             exit 0
+          fi
+          printf '%s\n' "${ALLOWED[@]}" | sort -u > "$RUNNER_TEMP/review-evidence-allowed.txt"
+          if comm -23 "$RUNNER_TEMP/review-evidence-changed.txt" "$RUNNER_TEMP/review-evidence-allowed.txt" | grep -q .; then
+            echo "Review-evidence refresh wrote outside its exact boundary:"
+            comm -23 "$RUNNER_TEMP/review-evidence-changed.txt" "$RUNNER_TEMP/review-evidence-allowed.txt"
+            exit 1
           fi
           git checkout -b "$BRANCH"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/current/ \
-            data/sources/ro-osm-official-exception-history.json \
-            data/sources/ro-osm-level9-exception-history.json \
-            data/sources/md-osm-multiple-representation-history.json \
-            data/sources/md-balti-city-boundary-way-history.json \
-            data/sources/md-balti-city-boundary-changeset-semantics.json
+          git add -- "${ALLOWED[@]}"
+          git diff --cached --quiet && { echo "No approved review-evidence bytes changed."; exit 1; }
           git commit -m "Refresh frozen ACTUAL review evidence"
           git push origin "HEAD:$BRANCH"
 
