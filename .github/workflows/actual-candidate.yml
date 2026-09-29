@@ -74,19 +74,19 @@ jobs:
       ACTUAL_RUNTIME_IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
     steps:
       - name: Validate immutable candidate base request
-        id: requested-base
+        id: requested_base
         env:
           REQUESTED_BASE_SHA: ${{ inputs.base_release_commit || github.sha }}
         run: |
           if ! printf '%s' "$REQUESTED_BASE_SHA" | grep -Eq '^[0-9a-f]{40}        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          ref: ${{ steps.requested-base.outputs.base_release_commit }}
+          ref: ${{ steps.requested_base.outputs.base_release_commit }}
           fetch-depth: 0
 
       - name: Bind immutable candidate base
         id: base
         env:
-          REQUESTED_BASE_SHA: ${{ steps.requested-base.outputs.base_release_commit }}
+          REQUESTED_BASE_SHA: ${{ steps.requested_base.outputs.base_release_commit }}
         run: |
           BASE_RELEASE_COMMIT="$(git rev-parse HEAD)"
           if [ "$BASE_RELEASE_COMMIT" != "$REQUESTED_BASE_SHA" ]; then
