@@ -1,0 +1,93 @@
+name: Temporary refresh ACTUAL host provenance
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  packages: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  rebind:
+    if: github.head_ref == 'actual/harden-write-boundaries-promotion'
+    runs-on: ubuntu-24.04
+    env:
+      PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      ACTUAL_RUNTIME_IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
+    steps:
+      - name: Check out exact PR head
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Refresh and audit exact host-trust contract
+        env:
+          ACTUAL_HOST_TRUST_AUDIT_PATH: ${{ runner.temp }}/actual-host-trust-audit.json
+        run: |
+          set -euo pipefail
+          npm run build:actual-host-trust
+          npm run audit:actual-host-trust
+
+      - name: Authenticate and pull exact ACTUAL runtime
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker pull "$ACTUAL_RUNTIME_IMAGE"
+
+      - name: Rebind build and release provenance in pinned runtime
+        run: |
+          set -euo pipefail
+          docker run --rm             --platform linux/amd64             --network none             --cpuset-cpus 0             --cap-drop ALL             --security-opt no-new-privileges=true             --user "$(id -u):$(id -g)"             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace"             --workdir /workspace             --env ACTUAL_BASE_REF="$PR_BASE_SHA"             --env NODE_OPTIONS=--jitless             --env UV_THREADPOOL_SIZE=1             --env TZ=UTC             --env LANG=C.UTF-8             --env LC_ALL=C.UTF-8             --env GITHUB_ACTIONS=true             --env RUNNER_OS=Linux             --env HOME=/tmp/actual-home             "$ACTUAL_RUNTIME_IMAGE"             bash -lc '
+              set -euo pipefail
+              mkdir -p "$HOME"
+              git config --global --add safe.directory /workspace
+              npm run build:actual-build-environment
+              npm run audit:actual-build-environment
+              npm run build:actual-release-manifest
+              npm run audit:actual-release-gate
+              node --input-type=module <<"NODE"
+              import {createHash} from "node:crypto";
+              import {readFile,writeFile} from "node:fs/promises";
+              const marker=JSON.parse(await readFile("data/current/actual-release-persisted.json","utf8"));
+              const manifestBytes=await readFile("data/current/actual-release-manifest.json");
+              const manifest=JSON.parse(manifestBytes);
+              if(marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256){
+                throw new Error("Host provenance rebind attempted to change semantic ACTUAL identity.");
+              }
+              const next={
+                ...marker,
+                manifest_sha256:createHash("sha256").update(manifestBytes).digest("hex"),
+                source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
+                review_evidence_bundle_fingerprint_sha256:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null,
+                network_denial_sha256:manifest.network_denial?.sha256??null,
+                host_trust_fingerprint_sha256:manifest.host_trust?.host_trust_fingerprint_sha256??null,
+                build_environment_fingerprint_sha256:manifest.build_environment?.environment_fingerprint_sha256??null,
+                validated_release_gate_status:"PASS"
+              };
+              await writeFile("data/current/actual-release-persisted.json",JSON.stringify(next,null,2)+"\n");
+              NODE
+            '
+
+      - name: Commit only host/build/release provenance files
+        run: |
+          set -euo pipefail
+          git add data/current/actual-host-trust-manifest.json             data/current/actual-build-environment-manifest.json             data/current/actual-build-environment-gate.json             data/current/actual-release-manifest.json             data/current/actual-release-gate.json             data/current/actual-release-persisted.json
+          if git diff --cached --quiet; then
+            echo "Host provenance already rebound."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Refresh ACTUAL host provenance"
+          git push origin "HEAD:refs/heads/$PR_HEAD_REF"
