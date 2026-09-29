@@ -4,7 +4,7 @@ The persisted ACTUAL RO+MD release on `main` is immutable between explicit promo
 
 ## Build a candidate
 
-Run **Build ACTUAL candidate snapshot** manually. The workflow starts from the current persisted release on `main`, validates it read-only, rebuilds ACTUAL from the committed source snapshots by default, runs all jurisdiction and global release gates, and writes a substantive result to a new isolated branch. Network source refreshes are explicit inputs rather than implicit build prerequisites.
+Run **Build ACTUAL candidate snapshot** manually. At trigger time the workflow binds an exact 40-hex base commit SHA (the dispatch `github.sha` unless an explicit exact SHA is supplied), validates that value before checkout, and checks out that commit directly. Reusable SIRUTA/CUATM/OSM refresh wrappers pass their trigger-time `github.sha` explicitly. The workflow validates the persisted release read-only at that immutable commit, rebuilds ACTUAL from its committed source snapshots by default, runs all jurisdiction and global release gates, and writes a substantive result to a new isolated branch. Network source refreshes are explicit inputs rather than implicit build prerequisites.
 
 Each candidate contains:
 
@@ -22,7 +22,7 @@ Run **Promote ACTUAL candidate** with:
 2. the exact candidate snapshot id;
 3. confirmation text `PROMOTE <snapshot_id>`.
 
-Promotion fails closed if the persisted release on `main` moved since candidate generation, if any candidate manifest/diff bytes drifted, or if the candidate release gate is not PASS.
+Promotion fetches `main` once, resolves it to an exact commit SHA, and fails closed unless that SHA is byte-for-byte equal to the candidate marker's immutable base SHA. All promotion reads then use that exact SHA rather than the symbolic `origin/main` ref. Promotion also fails if any candidate manifest/diff bytes drifted or if the candidate release gate is not PASS.
 
 A successful promotion run does **not** push the candidate directly to `main`. It writes the new persisted-release marker on the candidate branch and opens a promotion PR. The required `verify-persisted-release` branch-protection check must pass before that PR can merge.
 
