@@ -4,7 +4,10 @@ import {execFileSync} from 'node:child_process';
 import {readFile,writeFile} from 'node:fs/promises';
 import {validateCandidatePromotion} from '../lib/actual-candidate-lifecycle.mjs';
 
-const BASE_REF=process.env.ACTUAL_BASE_REF||'origin/main';
+const BASE_REF=process.env.ACTUAL_BASE_REF;
+if(!BASE_REF||!/^[0-9a-f]{40}$/.test(BASE_REF))throw new Error('ACTUAL_BASE_REF must be the exact lowercase 40-hex current main commit SHA.');
+const resolvedBaseCommit=execFileSync('git',['rev-parse',BASE_REF+'^{commit}'],{encoding:'utf8'}).trim();
+if(resolvedBaseCommit!==BASE_REF)throw new Error('ACTUAL_BASE_REF did not resolve byte-for-byte to the requested current main commit SHA.');
 const EXPECTED=process.env.EXPECTED_CANDIDATE_SNAPSHOT;
 const CONFIRM=process.env.CONFIRM_PROMOTION;
 const sha256=value=>createHash('sha256').update(value).digest('hex');
@@ -37,7 +40,8 @@ const validation=validateCandidatePromotion({
  actualCandidateDiffSha256,
  currentPersisted,
  currentManifest,
- currentManifestSha256
+ currentManifestSha256,
+ currentBaseCommitSha:BASE_REF
 });
 const failures=validation.failures;
 const audit={
@@ -68,6 +72,7 @@ const persisted={
  validated_release_gate_status:'PASS',
  promoted_from_candidate:{
   base_snapshot_id:candidateMarker.base_release.snapshot_id,
+  base_commit_sha:candidateMarker.base_ref,
   diff_report_sha256:candidateMarker.diff_report_sha256,
   review_required:candidateMarker.review_required,
   substantive_change_count:candidateMarker.substantive_change_count,
