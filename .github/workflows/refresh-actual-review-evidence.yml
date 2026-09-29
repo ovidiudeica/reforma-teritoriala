@@ -26,6 +26,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Trust mounted GitHub workspace
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -120,6 +121,7 @@ jobs:
       - name: Create review-evidence refresh branch
         env:
           BRANCH: actual/review-evidence-${{ github.run_id }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           ALLOWED=(
@@ -159,7 +161,10 @@ jobs:
           git add -- "${ALLOWED[@]}"
           git diff --cached --quiet && { echo "No approved review-evidence bytes changed."; exit 1; }
           git commit -m "Refresh frozen ACTUAL review evidence"
-          git push origin "HEAD:$BRANCH"
+          AUTH_HEADER="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH_HEADER" push \
+            --force-with-lease="refs/heads/$BRANCH:" \
+            origin "HEAD:refs/heads/$BRANCH"
 
       - name: Open review-evidence pull request
         env:
