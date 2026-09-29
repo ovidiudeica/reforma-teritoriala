@@ -1,0 +1,48 @@
+name: Probe ACTUAL OCI builder toolchain
+
+on:
+  push:
+    branches:
+      - actual/pin-buildx-buildkit
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 1
+
+      - name: Install pinned Buildx candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          BUILDX_VERSION=v0.37.1
+          BUILDX_SHA256=9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b
+          PLUGIN="$HOME/.docker/cli-plugins/docker-buildx"
+          mkdir -p "$(dirname "$PLUGIN")"
+          curl --fail --location --retry 3             "https://github.com/docker/buildx/releases/download/$BUILDX_VERSION/buildx-$BUILDX_VERSION.linux-amd64"             --output "$PLUGIN"
+          printf '%s  %s\n' "$BUILDX_SHA256" "$PLUGIN" | sha256sum --check
+          chmod +x "$PLUGIN"
+          docker buildx version
+          sha256sum "$PLUGIN"
+
+      - name: Resolve and bootstrap pinned BuildKit candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          BUILDKIT_TAG=moby/buildkit:v0.33.0
+          docker buildx imagetools inspect "$BUILDKIT_TAG" --raw > /tmp/buildkit-index.json
+          BUILDKIT_INDEX_DIGEST="sha256:$(sha256sum /tmp/buildkit-index.json | awk '{print $1}')"
+          echo "BUILDKIT_INDEX_DIGEST=$BUILDKIT_INDEX_DIGEST"
+          docker buildx create             --name actual-runtime-probe             --driver docker-container             --driver-opt "image=$BUILDKIT_TAG@$BUILDKIT_INDEX_DIGEST"             --use
+          docker buildx inspect actual-runtime-probe --bootstrap
+          BUILDER_CONTAINER="$(docker ps --filter 'name=buildx_buildkit_actual-runtime-probe' --format '{{.Names}}' | head -n1)"
+          test -n "$BUILDER_CONTAINER"
+          docker inspect "$BUILDER_CONTAINER" --format 'BUILDER_CONFIG_IMAGE={{.Config.Image}}'
+          docker inspect "$BUILDER_CONTAINER" --format 'BUILDER_IMAGE_ID={{.Image}}'
+          docker image inspect "$BUILDKIT_TAG@$BUILDKIT_INDEX_DIGEST" --format 'BUILDKIT_REPO_DIGESTS={{json .RepoDigests}}'
