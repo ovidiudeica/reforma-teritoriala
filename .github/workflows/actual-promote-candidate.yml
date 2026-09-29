@@ -58,11 +58,13 @@ jobs:
         with:
           ref: ${{ inputs.expected_candidate_commit }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Bind branch to exact candidate commit
         env:
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
           EXPECTED_CANDIDATE_COMMIT: ${{ inputs.expected_candidate_commit }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_CANDIDATE_COMMIT"
@@ -205,7 +207,10 @@ jobs:
           git diff --cached --quiet && { echo "Promotion marker produced no committed changes."; exit 1; }
           COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
           GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion ${{ inputs.expected_candidate_snapshot }}"
-          git push --force-with-lease="refs/heads/$CANDIDATE_BRANCH:$EXPECTED_CANDIDATE_COMMIT" origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
+          AUTH_HEADER="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH_HEADER" push \
+            --force-with-lease="refs/heads/$CANDIDATE_BRANCH:$EXPECTED_CANDIDATE_COMMIT" \
+            origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
 
       - name: Open promotion pull request
         env:
