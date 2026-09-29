@@ -73,6 +73,25 @@ jobs:
     env:
       ACTUAL_RUNTIME_IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
     steps:
+      - name: Validate candidate write-boundary inputs
+        id: inputs
+        env:
+          REQUESTED_CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+          SOURCE_TRIGGER: ${{ inputs.source_trigger }}
+        run: |
+          set -euo pipefail
+          CANDIDATE_BRANCH="$REQUESTED_CANDIDATE_BRANCH"
+          if [ -z "$CANDIDATE_BRANCH" ]; then CANDIDATE_BRANCH="actual/candidate-${GITHUB_RUN_ID}"; fi
+          if ! printf '%s' "$CANDIDATE_BRANCH" | grep -Eq '^actual/candidate-[a-z0-9][a-z0-9._-]{0,95}$'; then
+            echo "Candidate branch must match ^actual/candidate-[a-z0-9][a-z0-9._-]{0,95}$"
+            exit 1
+          fi
+          if ! printf '%s' "$SOURCE_TRIGGER" | grep -Eq '^[a-z0-9][a-z0-9._-]{0,63}$'; then
+            echo "Invalid candidate source_trigger label."
+            exit 1
+          fi
+          echo "candidate_branch=$CANDIDATE_BRANCH" >> "$GITHUB_OUTPUT"
+
       - name: Validate immutable candidate base request
         id: requested_base
         env:
@@ -100,8 +119,7 @@ jobs:
             echo "Exact candidate base mismatch: requested=$REQUESTED_BASE_SHA checked_out=$BASE_RELEASE_COMMIT"
             exit 1
           fi
-          CANDIDATE_BRANCH="${{ inputs.candidate_branch }}"
-          if [ -z "$CANDIDATE_BRANCH" ]; then CANDIDATE_BRANCH="actual/candidate-${GITHUB_RUN_ID}"; fi
+          CANDIDATE_BRANCH="${{ steps.inputs.outputs.candidate_branch }}"
           if git ls-remote --exit-code --heads origin "$CANDIDATE_BRANCH" >/dev/null 2>&1; then
             echo "Candidate branch already exists: $CANDIDATE_BRANCH"
             exit 1
@@ -161,13 +179,18 @@ jobs:
             '
 
       - name: Record candidate source trigger
+        env:
+          SOURCE_TRIGGER: ${{ inputs.source_trigger }}
+          REFRESH_RO_SIRUTA: ${{ inputs.refresh_ro_siruta }}
+          REFRESH_MD_CUATM: ${{ inputs.refresh_md_cuatm }}
+          REFRESH_OSM: ${{ inputs.refresh_osm }}
         run: |
           echo "### Candidate source trigger" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Trigger: ${{ inputs.source_trigger }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Trigger: $SOURCE_TRIGGER" >> "$GITHUB_STEP_SUMMARY"
           echo "- Immutable base commit: ${{ steps.base.outputs.base_release_commit }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Refresh OSM raw source: ${{ inputs.refresh_osm }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh RO SIRUTA: $REFRESH_RO_SIRUTA" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh MD CUATM: $REFRESH_MD_CUATM" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh OSM raw source: $REFRESH_OSM" >> "$GITHUB_STEP_SUMMARY"
           echo "- Deterministic network: docker --network none" >> "$GITHUB_STEP_SUMMARY"
           echo "- CPU execution profile: linux/amd64, cpuset=0, Node --jitless, UV_THREADPOOL_SIZE=1" >> "$GITHUB_STEP_SUMMARY"
 
@@ -287,7 +310,15 @@ jobs:
           PY
           )"
           GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
-          git push origin "HEAD:$CANDIDATE_BRANCH"
+          test "$(git rev-parse HEAD^)" = "${{ steps.base.outputs.base_release_commit }}"
+          test "$(git rev-list --count "${{ steps.base.outputs.base_release_commit }}..HEAD")" = "1"
+          BAD_PATHS="$(git diff --name-only "${{ steps.base.outputs.base_release_commit }}..HEAD" | grep -Ev '^(data/current/|public/data/actual-entities\.json$|public/geo/current/|public/geo/actual/|data/sources/ro-siruta-current\.json$|data/sources/cuatm-current\.json$|data/sources/osm-current\.json$|data/sources/osm-snapshots/|data/sources/ro-osm-official-exception-history\.json$|data/sources/ro-osm-level9-exception-history\.json$|data/sources/md-osm-multiple-representation-history\.json$|data/sources/md-balti-city-boundary-way-history\.json$|data/sources/md-balti-city-boundary-changeset-semantics\.json$)' || true)"
+          if [ -n "$BAD_PATHS" ]; then
+            echo "Candidate commit crossed the ACTUAL write boundary:"
+            printf '%s\n' "$BAD_PATHS"
+            exit 1
+          fi
+          git push origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
           echo "### Promotable ACTUAL candidate" >> "$GITHUB_STEP_SUMMARY"
           echo "- Branch: $CANDIDATE_BRANCH" >> "$GITHUB_STEP_SUMMARY"
           echo "- Snapshot: $SNAPSHOT_ID" >> "$GITHUB_STEP_SUMMARY"
