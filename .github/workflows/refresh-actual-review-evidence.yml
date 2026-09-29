@@ -109,8 +109,7 @@ jobs:
             validated_release_gate_status:'PASS',
             provenance_refresh:{
               previous_manifest_sha256:marker.manifest_sha256??null,
-              workflow_run_id:process.env.GITHUB_RUN_ID??null,
-              source_head_sha:process.env.GITHUB_SHA??null
+              base_commit_sha:process.env.ACTUAL_BASE_REF??null
             },
             policy:'Persisted ACTUAL marker rebound after an explicit review-evidence refresh. Semantic snapshot identity is preserved; exact source, frozen review-evidence, network-denial, host-trust and execution-environment provenance are replaced only after the full release gate passes.'
           };
@@ -134,8 +133,16 @@ jobs:
             data/sources/md-osm-multiple-representation-history.json \
             data/sources/md-balti-city-boundary-way-history.json \
             data/sources/md-balti-city-boundary-changeset-semantics.json
-          git commit -m "Refresh frozen ACTUAL review evidence"
-          git push origin "HEAD:$BRANCH"
+          COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Refresh frozen ACTUAL review evidence"
+          test "$(git rev-parse HEAD^)" = "${{ steps.base.outputs.sha }}"
+          BAD_PATHS="$(git diff --name-only "${{ steps.base.outputs.sha }}..HEAD" | grep -Ev '^(data/current/|data/sources/ro-osm-official-exception-history\.json$|data/sources/ro-osm-level9-exception-history\.json$|data/sources/md-osm-multiple-representation-history\.json$|data/sources/md-balti-city-boundary-way-history\.json$|data/sources/md-balti-city-boundary-changeset-semantics\.json$)' || true)"
+          if [ -n "$BAD_PATHS" ]; then
+            echo "Review-evidence refresh crossed its write boundary:"
+            printf '%s\n' "$BAD_PATHS"
+            exit 1
+          fi
+          git push origin "HEAD:refs/heads/$BRANCH"
 
       - name: Open review-evidence pull request
         env:
