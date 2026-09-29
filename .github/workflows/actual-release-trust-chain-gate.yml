@@ -108,6 +108,9 @@ jobs:
 
           const candidateWorkflow=await readFile(join(dir,'actual-candidate.yml'),'utf8');
           const reviewWorkflow=await readFile(join(dir,'refresh-actual-review-evidence.yml'),'utf8');
+          if(!candidateWorkflow.includes('docker logout ghcr.io')){
+            failures.push({issue:'candidate_ghcr_write_token_not_discarded_before_later_repository_execution',workflow:'actual-candidate.yml'});
+          }
           for(const [workflow,text,lease] of [
             ['actual-candidate.yml',candidateWorkflow,'--force-with-lease="refs/heads/$CANDIDATE_BRANCH:"'],
             ['refresh-actual-review-evidence.yml',reviewWorkflow,'--force-with-lease="refs/heads/$BRANCH:"']
