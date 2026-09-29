@@ -106,7 +106,7 @@ test('review-evidence refresh stages an exact artifact allowlist',async()=>{
 test('candidate branch creation is confined to the isolated namespace',async()=>{
  const content=await readFile(join(workflowsDir,'actual-candidate.yml'),'utf8');
  assert.match(content,/Candidate branch must stay inside the isolated actual\/candidate-\* namespace/);
- assert.match(content,/\^actual\/candidate-\[A-Za-z0-9\._-\]\+\$/);
+ assert.match(content,/\^actual\/candidate-\[A-Za-z0-9\]\[A-Za-z0-9\._-\]\{0,80\}\$/);
 });
 
 test('promotion preflights untrusted candidate data before executing candidate code',async()=>{
