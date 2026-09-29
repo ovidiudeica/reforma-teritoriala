@@ -385,7 +385,7 @@ test('candidate base is an exact trigger-time SHA through build wrappers and pro
   readFile('.github/workflows/import-osm.yml','utf8')
  ]);
  assert.match(candidateWorkflow,/REQUESTED_BASE_SHA: \$\{\{ inputs\.base_release_commit \|\| github\.sha \}\}/);
- assert.match(candidateWorkflow,/ref: \$\{\{ steps\.requested-base\.outputs\.base_release_commit \}\}/);
+ assert.match(candidateWorkflow,/ref: \$\{\{ steps\.requested_base\.outputs\.base_release_commit \}\}/);
  assert.doesNotMatch(candidateWorkflow,/ref:\s*main\b/);
  assert.match(candidateWorkflow,/BASE_RELEASE_COMMIT="\$\(git rev-parse HEAD\)"/);
  assert.match(candidateWorkflow,/\[ "\$BASE_RELEASE_COMMIT" != "\$REQUESTED_BASE_SHA" \]/);
@@ -394,6 +394,6 @@ test('candidate base is an exact trigger-time SHA through build wrappers and pro
  assert.match(promotionWorkflow,/CURRENT_MAIN_SHA="\$\(git rev-parse refs\/remotes\/origin\/main\)"/);
  assert.match(promotionWorkflow,/CANDIDATE_BASE_SHA="\$\(node -p/);
  assert.match(promotionWorkflow,/\[ "\$CURRENT_MAIN_SHA" != "\$CANDIDATE_BASE_SHA" \]/);
- assert.match(promotionWorkflow,/ACTUAL_BASE_REF: \$\{\{ steps\.current-main\.outputs\.current_main_sha \}\}/);
+ assert.match(promotionWorkflow,/ACTUAL_BASE_REF: \$\{\{ steps\.current_main\.outputs\.current_main_sha \}\}/);
  for(const wrapper of [roWrapper,mdWrapper,osmWrapper])assert.match(wrapper,/base_release_commit: \$\{\{ github\.sha \}\}/);
 });
