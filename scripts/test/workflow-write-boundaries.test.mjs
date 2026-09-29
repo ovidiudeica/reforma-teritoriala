@@ -98,6 +98,7 @@ test('repository and package write jobs never persist checkout credentials',asyn
  const candidate=await readFile(join(workflowsDir,'actual-candidate.yml'),'utf8');
  const promotion=await readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8');
  const review=await readFile(join(workflowsDir,'refresh-actual-review-evidence.yml'),'utf8');
+ assert.match(candidate,/docker logout ghcr\.io/,'candidate must discard the contents:write GHCR credential before later repository execution');
  assert.match(candidate,/--force-with-lease="refs\/heads\/\$CANDIDATE_BRANCH:"/);
  assert.match(promotion,/--force-with-lease="refs\/heads\/\$CANDIDATE_BRANCH:\$EXPECTED_CANDIDATE_COMMIT"/);
  assert.match(review,/--force-with-lease="refs\/heads\/\$BRANCH:"/);
