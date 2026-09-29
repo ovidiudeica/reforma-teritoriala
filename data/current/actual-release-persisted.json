@@ -2,12 +2,12 @@
   "schema_version": 1,
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "manifest_sha256": "b4e0aa32bf0b5e9977aa9c794f378d1efbfbf43a005a89d45feb3f5c6ce083d4",
+  "manifest_sha256": "6d6cd711ba52a7401876ce3e270d98f002153d3603fe08ac86bacd12501e06f1",
   "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
   "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-  "build_environment_fingerprint_sha256": "79a9eaf9943ab03f6d766558307434d12b8c3f2e72bbd35a85c4a0fd868d740f",
+  "build_environment_fingerprint_sha256": "11141958d982e7ee7b4d422b31c59a14f6f8ecb2797401bb17af1249ac97568f",
   "validated_release_gate_status": "PASS",
   "provenance_migration": {
     "previous_manifest_sha256": "a48d2fd59c98219ac2c100d301552e2e0831cb7f62c28ecc3b8d1ddb5ec0c3d2",
@@ -15,7 +15,7 @@
   },
   "policy": "Marker for exact ACTUAL snapshot bytes and pinned OCI-builder provenance. Canonical runtime digest is produced and gated by byte-pinned Buildx plus digest-pinned BuildKit.",
   "provenance_hardening": {
-    "previous_manifest_sha256": "119a274f20d9e48d93835ed3880a65eb3d89c895293db4c8d4e9d2b2032551db",
-    "reason": "promotion-preexecution-and-enumerated-host-profile-binding"
+    "previous_manifest_sha256": "b4e0aa32bf0b5e9977aa9c794f378d1efbfbf43a005a89d45feb3f5c6ce083d4",
+    "reason": "all-write-boundary-credential-isolation-and-lease-hardening"
   }
 }
