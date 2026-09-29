@@ -3,6 +3,7 @@ import {execFileSync} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
 import {NPM_BUNDLE_ARCHIVE,NPM_BUNDLE_MANIFEST,validateNpmDependencyBundle} from './actual-npm-dependency-bundle.mjs';
 import {EXPECTED_RUNTIME_IMAGE,RUNTIME_IMAGE_PATH,validateRuntimeImageManifest} from './actual-runtime-image.mjs';
+import {OCI_BUILDER_PATH,validateOciBuilderManifest} from './actual-oci-builder.mjs';
 import {HOST_TRUST_PATH,validateHostTrustManifest} from './actual-host-trust.mjs';
 
 export const BUILD_ENVIRONMENT_PATH='data/current/actual-build-environment-manifest.json';
@@ -41,6 +42,9 @@ export const BUILD_SUPPORT_FILES=[
  'scripts/lib/actual-runtime-image.mjs',
  'scripts/process/build-actual-runtime-image-manifest.mjs',
  'scripts/process/audit-actual-runtime-image.mjs',
+ 'scripts/lib/actual-oci-builder.mjs',
+ 'scripts/process/build-actual-oci-builder-manifest.mjs',
+ 'scripts/process/audit-actual-oci-builder.mjs',
  'scripts/lib/actual-host-trust.mjs',
  'scripts/process/build-actual-host-trust-manifest.mjs',
  'scripts/process/audit-actual-host-trust.mjs',
@@ -102,18 +106,20 @@ export function buildEnvironmentFingerprint(manifest){
 }
 
 export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
- const [packageBytes,lockBytes,npmBundleManifestBytes,npmBundleArchiveBytes,runtimeManifestBytes,hostTrustBytes]=await Promise.all([
+ const [packageBytes,lockBytes,npmBundleManifestBytes,npmBundleArchiveBytes,runtimeManifestBytes,ociBuilderBytes,hostTrustBytes]=await Promise.all([
   readFileFn('package.json'),
   readFileFn('package-lock.json'),
   readFileFn(NPM_BUNDLE_MANIFEST),
   readFileFn(NPM_BUNDLE_ARCHIVE),
   readFileFn(RUNTIME_IMAGE_PATH),
+  readFileFn(OCI_BUILDER_PATH),
   readFileFn(HOST_TRUST_PATH)
  ]);
  const packageJson=JSON.parse(packageBytes.toString('utf8'));
  const lock=JSON.parse(lockBytes.toString('utf8'));
  const npmBundleManifest=JSON.parse(npmBundleManifestBytes.toString('utf8'));
  const runtimeManifest=JSON.parse(runtimeManifestBytes.toString('utf8'));
+ const ociBuilderManifest=JSON.parse(ociBuilderBytes.toString('utf8'));
  const hostTrustManifest=JSON.parse(hostTrustBytes.toString('utf8'));
  const supportFiles=Object.fromEntries(await Promise.all(BUILD_SUPPORT_FILES.map(async path=>{
   const bytes=await readFileFn(path);
@@ -160,6 +166,18 @@ export async function inspectCurrentBuildEnvironment({readFileFn=readFile}={}){
    platform:runtimeManifest.runtime?.platform??null,
    base_ref:runtimeManifest.runtime?.base_ref??null,
    base_digest:runtimeManifest.runtime?.base_digest??null
+  },
+  oci_builder:{
+   manifest_path:OCI_BUILDER_PATH,
+   manifest_sha256:sha256(ociBuilderBytes),
+   builder_fingerprint_algorithm:ociBuilderManifest.builder_fingerprint_algorithm??null,
+   builder_fingerprint_sha256:ociBuilderManifest.builder_fingerprint_sha256??null,
+   buildx_version:ociBuilderManifest.toolchain?.buildx?.version??null,
+   buildx_commit:ociBuilderManifest.toolchain?.buildx?.commit??null,
+   buildx_binary_sha256:ociBuilderManifest.toolchain?.buildx?.binary_sha256??null,
+   buildkit_version:ociBuilderManifest.toolchain?.buildkit?.version??null,
+   buildkit_ref:ociBuilderManifest.toolchain?.buildkit?.ref??null,
+   driver:ociBuilderManifest.builder?.driver??null
   },
   host_trust:{
    manifest_path:HOST_TRUST_PATH,
@@ -208,7 +226,7 @@ export function buildBuildEnvironmentManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_BUILD_ENVIRONMENT',
   environment_fingerprint_algorithm:BUILD_ENVIRONMENT_ALGORITHM,
-  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract (kernel, Docker/containerd/runc, cgroup/storage stack and CPU compatibility floor), the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, host-stack, CPU-profile or network-policy drift fails closed.',
+  policy:'Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.',
   environment:inspected
  };
  const fingerprint=buildEnvironmentFingerprint(draft);
@@ -228,12 +246,14 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
   checks.push({name,ok:Boolean(ok),detail});
   if(!ok)failures.push({name,detail});
  };
- let current=null,error=null,npmBundleValidation=null,runtimeValidation=null,hostTrustValidation=null;
+ let current=null,error=null,npmBundleValidation=null,runtimeValidation=null,ociBuilderValidation=null,hostTrustValidation=null;
  try{
   current=await inspectCurrentBuildEnvironment({readFileFn});
   npmBundleValidation=await validateNpmDependencyBundle({readFileFn});
   const runtimeBytes=await readFileFn(RUNTIME_IMAGE_PATH);
   runtimeValidation=await validateRuntimeImageManifest(JSON.parse(runtimeBytes.toString('utf8')),{readFileFn});
+  const ociBuilderBytes=await readFileFn(OCI_BUILDER_PATH);
+  ociBuilderValidation=await validateOciBuilderManifest(JSON.parse(ociBuilderBytes.toString('utf8')),{readFileFn});
   const hostTrustBytes=await readFileFn(HOST_TRUST_PATH);
   hostTrustValidation=validateHostTrustManifest(JSON.parse(hostTrustBytes.toString('utf8')));
  }
@@ -305,6 +325,11 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
    runtimeValidation?.status==='PASS'
    && current.runtime_image.runtime_fingerprint_sha256===runtimeValidation?.fingerprint?.sha256,
    {status:runtimeValidation?.status??null,fingerprint:runtimeValidation?.fingerprint?.sha256??null,failures:runtimeValidation?.failures??[]});
+
+  check('oci_builder_manifest_valid',
+   ociBuilderValidation?.status==='PASS'
+   && current.oci_builder?.builder_fingerprint_sha256===ociBuilderValidation?.fingerprint?.sha256,
+   {status:ociBuilderValidation?.status??null,fingerprint:ociBuilderValidation?.fingerprint?.sha256??null,failures:ociBuilderValidation?.failures??[],current:current.oci_builder});
 
   check('github_actions_are_exact_commit_shas',
    JSON.stringify(canonicalizeBuildEnvironment(current.actions))===JSON.stringify(canonicalizeBuildEnvironment(EXPECTED_BUILD_ENVIRONMENT.actions))
