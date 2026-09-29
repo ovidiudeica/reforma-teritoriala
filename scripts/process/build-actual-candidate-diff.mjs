@@ -6,7 +6,10 @@ import {actualSemanticFingerprint,semanticCatalogEntities} from '../lib/actual-s
 import {candidateIdentityFingerprint,classifyCandidateDisposition,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
 
 const BASE_REF=process.env.ACTUAL_BASE_REF;
-if(!BASE_REF)throw new Error('ACTUAL_BASE_REF is required and must identify the persisted release commit/ref.');
+if(!BASE_REF)throw new Error('ACTUAL_BASE_REF is required and must be the exact persisted-release commit SHA.');
+if(!/^[0-9a-f]{40}$/.test(BASE_REF))throw new Error('ACTUAL_BASE_REF must be an exact lowercase 40-hex commit SHA.');
+const resolvedBaseCommit=execFileSync('git',['rev-parse',BASE_REF+'^{commit}'],{encoding:'utf8'}).trim();
+if(resolvedBaseCommit!==BASE_REF)throw new Error('ACTUAL_BASE_REF did not resolve byte-for-byte to the requested commit SHA.');
 const MANIFEST='data/current/actual-release-manifest.json';
 const GATE='data/current/actual-release-gate.json';
 const PERSISTED='data/current/actual-release-persisted.json';
