@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
+  "environment_fingerprint_sha256": "21057b738deaadaafdd6a4c06a26f8d881a5278fd0bbcebb715a0e3badd1ed91",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -169,7 +169,7 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "883b6a0e24c47f6290f68955eb8fdf040d7f981c0e9fd364dadc5ae9ac1f9b2f",
+        "sha256": "df6dbf126a9022cc990cb2997154635d1296b580c9f735354b887f9ec43f6b31",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -178,6 +178,7 @@
           "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
         ],
         "actions": [
+          "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
         ],
         "runtime_env_refs": [],
