@@ -47,41 +47,61 @@ jobs:
       - name: Rebind build and release provenance in pinned runtime
         run: |
           set -euo pipefail
-          docker run --rm             --platform linux/amd64             --network none             --cpuset-cpus 0             --cap-drop ALL             --security-opt no-new-privileges=true             --user "$(id -u):$(id -g)"             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace"             --workdir /workspace             --env ACTUAL_BASE_REF="$PR_BASE_SHA"             --env NODE_OPTIONS=--jitless             --env UV_THREADPOOL_SIZE=1             --env TZ=UTC             --env LANG=C.UTF-8             --env LC_ALL=C.UTF-8             --env GITHUB_ACTIONS=true             --env RUNNER_OS=Linux             --env HOME=/tmp/actual-home             "$ACTUAL_RUNTIME_IMAGE"             bash -lc '
-              set -euo pipefail
-              mkdir -p "$HOME"
-              git config --global --add safe.directory /workspace
-              npm run build:actual-build-environment
-              npm run audit:actual-build-environment
-              npm run build:actual-release-manifest
-              npm run audit:actual-release-gate
-              node --input-type=module <<"NODE"
-              import {createHash} from "node:crypto";
-              import {readFile,writeFile} from "node:fs/promises";
-              const marker=JSON.parse(await readFile("data/current/actual-release-persisted.json","utf8"));
-              const manifestBytes=await readFile("data/current/actual-release-manifest.json");
-              const manifest=JSON.parse(manifestBytes);
-              if(marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256){
-                throw new Error("Host provenance rebind attempted to change semantic ACTUAL identity.");
-              }
-              const next={
-                ...marker,
-                manifest_sha256:createHash("sha256").update(manifestBytes).digest("hex"),
-                source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
-                review_evidence_bundle_fingerprint_sha256:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null,
-                network_denial_sha256:manifest.network_denial?.sha256??null,
-                host_trust_fingerprint_sha256:manifest.host_trust?.host_trust_fingerprint_sha256??null,
-                build_environment_fingerprint_sha256:manifest.build_environment?.environment_fingerprint_sha256??null,
-                validated_release_gate_status:"PASS"
-              };
-              await writeFile("data/current/actual-release-persisted.json",JSON.stringify(next,null,2)+"\n");
-              NODE
-            '
+          docker run --rm \
+            --platform linux/amd64 \
+            --network none \
+            --cpuset-cpus 0 \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_BASE_REF="$PR_BASE_SHA" \
+            --env NODE_OPTIONS=--jitless \
+            --env UV_THREADPOOL_SIZE=1 \
+            --env TZ=UTC \
+            --env LANG=C.UTF-8 \
+            --env LC_ALL=C.UTF-8 \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc 'set -euo pipefail; mkdir -p "$HOME"; git config --global --add safe.directory /workspace; npm run build:actual-build-environment; npm run audit:actual-build-environment; npm run build:actual-release-manifest; npm run audit:actual-release-gate'
+
+      - name: Rebind persisted marker to exact regenerated manifest
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {readFile,writeFile} from 'node:fs/promises';
+          const marker=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+          const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+          const manifest=JSON.parse(manifestBytes);
+          if(marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256){
+            throw new Error('Host provenance rebind attempted to change semantic ACTUAL identity.');
+          }
+          const next={
+            ...marker,
+            manifest_sha256:createHash('sha256').update(manifestBytes).digest('hex'),
+            source_bundle_fingerprint_sha256:manifest.source_bundle?.bundle_fingerprint_sha256??null,
+            review_evidence_bundle_fingerprint_sha256:manifest.review_evidence_bundle?.bundle_fingerprint_sha256??null,
+            network_denial_sha256:manifest.network_denial?.sha256??null,
+            host_trust_fingerprint_sha256:manifest.host_trust?.host_trust_fingerprint_sha256??null,
+            build_environment_fingerprint_sha256:manifest.build_environment?.environment_fingerprint_sha256??null,
+            validated_release_gate_status:'PASS'
+          };
+          await writeFile('data/current/actual-release-persisted.json',JSON.stringify(next,null,2)+'\n');
+          NODE
 
       - name: Commit only host/build/release provenance files
         run: |
           set -euo pipefail
-          git add data/current/actual-host-trust-manifest.json             data/current/actual-build-environment-manifest.json             data/current/actual-build-environment-gate.json             data/current/actual-release-manifest.json             data/current/actual-release-gate.json             data/current/actual-release-persisted.json
+          git add data/current/actual-host-trust-manifest.json \
+            data/current/actual-build-environment-manifest.json \
+            data/current/actual-build-environment-gate.json \
+            data/current/actual-release-manifest.json \
+            data/current/actual-release-gate.json \
+            data/current/actual-release-persisted.json
           if git diff --cached --quiet; then
             echo "Host provenance already rebound."
             exit 0
