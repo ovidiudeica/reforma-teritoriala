@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_OCI_BUILDER",
+  "builder_fingerprint_algorithm": "actual-oci-builder-v1",
+  "policy": "Exact OCI builder provenance for ACTUAL runtime images. Buildx binary bytes and release commit are pinned; BuildKit runs only from a digest-pinned docker-container image; the builder driver, name and target platform are fixed; runtime verification must pass before any runtime image build.",
+  "toolchain": {
+    "buildx": {
+      "version": "v0.37.1",
+      "commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+      "platform": "linux-amd64",
+      "binary_url": "https://github.com/docker/buildx/releases/download/v0.37.1/buildx-v0.37.1.linux-amd64",
+      "binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b"
+    },
+    "buildkit": {
+      "version": "v0.33.0",
+      "image": "moby/buildkit:v0.33.0",
+      "digest": "sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+      "ref": "moby/buildkit:v0.33.0@sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+      "image_id": "sha256:41f915d3a122bca46b3da83160cd805697b0faa1bf30b0c0de851eb78f992c70"
+    }
+  },
+  "builder": {
+    "name": "actual-runtime-builder",
+    "driver": "docker-container",
+    "platform": "linux/amd64"
+  },
+  "source": {
+    "builder_workflow": {
+      "path": ".github/workflows/build-actual-runtime-image.yml",
+      "sha256": "6bd67096d9f5cff90cedd068f3cefd38845e2372a25aa45b41fe0bcaa0bce8e0"
+    }
+  },
+  "builder_fingerprint_sha256": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89"
+}

@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "de56fadc8752f7d67c56af6fa9ede02c902b2749ab38cc4fe2270b347a8a9485",
-  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract (kernel, Docker/containerd/runc, cgroup/storage stack and CPU compatibility floor), the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, host-stack, CPU-profile or network-policy drift fails closed.",
+  "environment_fingerprint_sha256": "9d24001031713841af58804707d96b49b5585d983e50dbca2a512bcf3f653812",
+  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
       "label": "ubuntu-24.04",
@@ -12,13 +12,25 @@
     },
     "runtime_image": {
       "manifest_path": "data/current/actual-runtime-image.json",
-      "manifest_sha256": "adcd57c754e693d64efaec74d992094a61b4479a11b005b603d9e0c1629752fa",
-      "runtime_fingerprint_sha256": "33c65232de75b24b2b11a8cc6f8ece6f1eb16a3acdf0ff1088b929a31f24ca76",
+      "manifest_sha256": "da0496d93305249b27970f956dc77fb2d27f7c26b4c78f08054b08c8386914a5",
+      "runtime_fingerprint_sha256": "6ee3e7cec8d1b0ac45efea1bb3f6cc84549f924103c5c1282d4aeaaaa3061594",
       "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
       "digest": "sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
       "platform": "linux/amd64",
       "base_ref": "node:24.21.0-bookworm@sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
       "base_digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4"
+    },
+    "oci_builder": {
+      "manifest_path": "data/current/actual-oci-builder.json",
+      "manifest_sha256": "42c2eb8adf2f991b772fdca365e4ec3856ae6e3676fc76e8afa137e09d72d41a",
+      "builder_fingerprint_algorithm": "actual-oci-builder-v1",
+      "builder_fingerprint_sha256": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
+      "buildx_version": "v0.37.1",
+      "buildx_commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+      "buildx_binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b",
+      "buildkit_version": "v0.33.0",
+      "buildkit_ref": "moby/buildkit:v0.33.0@sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+      "driver": "docker-container"
     },
     "host_trust": {
       "manifest_path": "data/current/actual-host-trust-manifest.json",
@@ -45,7 +57,7 @@
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "471a588889c0bd38b66b4a75f46903988d0355687a82b4dd7e82de5ce4fed6b9"
+        "sha256": "3add77c49b6fe643958d6a84d27bf68541fb4787047a0ce7c445569d57a7dbbc"
       },
       "package_lock": {
         "path": "package-lock.json",
@@ -75,16 +87,19 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "e540f7baca3166962483aa7967f7a81fe094ca270fd12f7dc71dfcc3132f54af",
+      "scripts/lib/actual-build-environment.mjs": "99232a54ca3ba094ade591657e32ea5cad2fb5a584e1b59b9aecaff316fdf614",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
       "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
       "scripts/process/audit-actual-npm-dependency-bundle.mjs": "521e0d7b18ea7e33fd88cb8ae0dfe74e16e46f8a5f0991c30ac1dbf7f3f7682a",
       "scripts/process/install-actual-npm-offline.mjs": "83f8fcb94b0cba5076edc6e0b9b05d6abf6420ded8e1a6b640fe42488d8f1f9e",
       "scripts/process/audit-node-toolchain.mjs": "c63882d7b4681f2f3de4d85244a8ca9d4c727d6a5bf713e9a7c7c19b43e1a861",
-      "scripts/lib/actual-runtime-image.mjs": "9bebd57d6e55beec30d1724c64886f04c0cf45857f8a5eeada77736b3c32c60f",
-      "scripts/process/build-actual-runtime-image-manifest.mjs": "48c7708071c0600b647304ae3178f22aa76bd7c5be3b5a5ce96bf5da47d17ec6",
-      "scripts/process/audit-actual-runtime-image.mjs": "7b49ff88bd07bf03fe31f21a078e565ad08ea016a397ed624e5484aa5221bd8e",
+      "scripts/lib/actual-runtime-image.mjs": "4933354f26ab58d48e5e541426f03cb5a415829977450730168e679fc0ab38a6",
+      "scripts/process/build-actual-runtime-image-manifest.mjs": "ec7cc4aa3326cd63f03a804cb77da3396a4614de92592df5dfcbbd32659ad421",
+      "scripts/process/audit-actual-runtime-image.mjs": "753c92f8f6a4054ce37c5d636bdc6d6170678ce2e74fc0f0a570b3555b106291",
+      "scripts/lib/actual-oci-builder.mjs": "54770d758d55b4ccbfebdf75e76883b436bdf123b42a30826c90f15fbc77454c",
+      "scripts/process/build-actual-oci-builder-manifest.mjs": "70ec6a6edbd613d461e8a3dc06f4fcc465657b392253de1b1c987bd249a0aac6",
+      "scripts/process/audit-actual-oci-builder.mjs": "a55c222ff3f2d4cf0da6b2e3adc3e5c04ae0786435288d8f916341ac3cf7fa97",
       "scripts/lib/actual-host-trust.mjs": "fb51153f009a985e3fa9563093bf0f161a9500971f21acf8015ec1e82a1be800",
       "scripts/process/build-actual-host-trust-manifest.mjs": "1fc82422329b8040d22df3c48994d78d4c8831d6559cf7b0a752f62399747405",
       "scripts/process/audit-actual-host-trust.mjs": "93fa81438ae47b29553d7a73d55e0f7c501e54ec5d3e1ee93e1b3736c1cf5a5e",

@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_OCI_BUILDER_GATE",
+  "builder_manifest_path": "data/current/actual-oci-builder.json",
+  "builder_manifest_sha256": "42c2eb8adf2f991b772fdca365e4ec3856ae6e3676fc76e8afa137e09d72d41a",
+  "builder_fingerprint_sha256": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
+  "runtime_check": false,
+  "status": "PASS",
+  "policy": "Fail closed unless Buildx binary bytes/version/commit, BuildKit digest/image identity, docker-container driver contract and builder workflow bytes exactly match committed OCI-builder provenance. Runtime image builds require the live runtime check before building.",
+  "checks": [
+    {
+      "scope": "static",
+      "name": "builder_schema_and_mode",
+      "ok": true,
+      "detail": {
+        "schema_version": 1,
+        "mode": "ACTUAL_OCI_BUILDER"
+      }
+    },
+    {
+      "scope": "static",
+      "name": "builder_toolchain_exact",
+      "ok": true,
+      "detail": {
+        "expected": {
+          "buildx": {
+            "version": "v0.37.1",
+            "commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+            "platform": "linux-amd64",
+            "binary_url": "https://github.com/docker/buildx/releases/download/v0.37.1/buildx-v0.37.1.linux-amd64",
+            "binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b"
+          },
+          "buildkit": {
+            "version": "v0.33.0",
+            "image": "moby/buildkit:v0.33.0",
+            "digest": "sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+            "ref": "moby/buildkit:v0.33.0@sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+            "image_id": "sha256:41f915d3a122bca46b3da83160cd805697b0faa1bf30b0c0de851eb78f992c70"
+          }
+        },
+        "actual": {
+          "buildx": {
+            "version": "v0.37.1",
+            "commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+            "platform": "linux-amd64",
+            "binary_url": "https://github.com/docker/buildx/releases/download/v0.37.1/buildx-v0.37.1.linux-amd64",
+            "binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b"
+          },
+          "buildkit": {
+            "version": "v0.33.0",
+            "image": "moby/buildkit:v0.33.0",
+            "digest": "sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+            "ref": "moby/buildkit:v0.33.0@sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+            "image_id": "sha256:41f915d3a122bca46b3da83160cd805697b0faa1bf30b0c0de851eb78f992c70"
+          }
+        }
+      }
+    },
+    {
+      "scope": "static",
+      "name": "builder_contract_exact",
+      "ok": true,
+      "detail": {
+        "expected": {
+          "name": "actual-runtime-builder",
+          "driver": "docker-container",
+          "platform": "linux/amd64"
+        },
+        "actual": {
+          "name": "actual-runtime-builder",
+          "driver": "docker-container",
+          "platform": "linux/amd64"
+        }
+      }
+    },
+    {
+      "scope": "static",
+      "name": "builder_source_bytes_exact",
+      "ok": true,
+      "detail": {
+        "expected": {
+          "builder_workflow": {
+            "path": ".github/workflows/build-actual-runtime-image.yml",
+            "sha256": "6bd67096d9f5cff90cedd068f3cefd38845e2372a25aa45b41fe0bcaa0bce8e0"
+          }
+        },
+        "actual": {
+          "builder_workflow": {
+            "path": ".github/workflows/build-actual-runtime-image.yml",
+            "sha256": "6bd67096d9f5cff90cedd068f3cefd38845e2372a25aa45b41fe0bcaa0bce8e0"
+          }
+        }
+      }
+    },
+    {
+      "scope": "static",
+      "name": "builder_workflow_contract",
+      "ok": true,
+      "detail": {
+        "buildx_version_pinned": true,
+        "buildx_commit_pinned": true,
+        "buildx_binary_url_pinned": true,
+        "buildx_binary_sha256_pinned": true,
+        "buildkit_ref_pinned": true,
+        "docker_container_driver": true,
+        "named_builder": true,
+        "runtime_gate_enabled": true,
+        "explicit_builder_for_build": true,
+        "double_build_gate": true
+      }
+    },
+    {
+      "scope": "static",
+      "name": "builder_fingerprint_recomputes",
+      "ok": true,
+      "detail": {
+        "algorithm": "actual-oci-builder-v1",
+        "expected": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
+        "actual": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89"
+      }
+    }
+  ],
+  "failures": []
+}

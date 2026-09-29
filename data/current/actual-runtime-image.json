@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "mode": "ACTUAL_OCI_RUNTIME",
-  "runtime_fingerprint_algorithm": "actual-oci-runtime-v1",
-  "policy": "Exact ACTUAL OCI runtime identity. The upstream Node base, final GHCR image digest, Dockerfile bytes and builder workflow bytes are pinned; the builder must produce the same digest twice from identical inputs.",
+  "runtime_fingerprint_algorithm": "actual-oci-runtime-v2",
+  "policy": "Exact ACTUAL OCI runtime identity and builder provenance. The upstream Node base, final GHCR image digest, Dockerfile bytes, builder workflow bytes, Buildx binary/commit and digest-pinned BuildKit image are bound; the exact builder must produce the same runtime digest twice from identical inputs.",
   "runtime": {
     "image": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime",
     "digest": "sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
@@ -21,7 +21,7 @@
     },
     "builder_workflow": {
       "path": ".github/workflows/build-actual-runtime-image.yml",
-      "sha256": "08b23ef78cbaba17ed5d883d7bb7588d73c60edc27759a38663991e43e0a0fd1"
+      "sha256": "6bd67096d9f5cff90cedd068f3cefd38845e2372a25aa45b41fe0bcaa0bce8e0"
     }
   },
   "reproducibility": {
@@ -30,5 +30,30 @@
     "sbom": false,
     "double_build_digest_equality": true
   },
-  "runtime_fingerprint_sha256": "33c65232de75b24b2b11a8cc6f8ece6f1eb16a3acdf0ff1088b929a31f24ca76"
+  "builder_provenance": {
+    "manifest_path": "data/current/actual-oci-builder.json",
+    "manifest_sha256": "42c2eb8adf2f991b772fdca365e4ec3856ae6e3676fc76e8afa137e09d72d41a",
+    "builder_fingerprint_algorithm": "actual-oci-builder-v1",
+    "builder_fingerprint_sha256": "a0c0199dc3c1ce828903831f826b00d8d64f5cea52d0fd8e9d2febd5a7d05e89",
+    "buildx": {
+      "version": "v0.37.1",
+      "commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+      "platform": "linux-amd64",
+      "binary_url": "https://github.com/docker/buildx/releases/download/v0.37.1/buildx-v0.37.1.linux-amd64",
+      "binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b"
+    },
+    "buildkit": {
+      "version": "v0.33.0",
+      "image": "moby/buildkit:v0.33.0",
+      "digest": "sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+      "ref": "moby/buildkit:v0.33.0@sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+      "image_id": "sha256:41f915d3a122bca46b3da83160cd805697b0faa1bf30b0c0de851eb78f992c70"
+    },
+    "builder": {
+      "name": "actual-runtime-builder",
+      "driver": "docker-container",
+      "platform": "linux/amd64"
+    }
+  },
+  "runtime_fingerprint_sha256": "6ee3e7cec8d1b0ac45efea1bb3f6cc84549f924103c5c1282d4aeaaaa3061594"
 }
