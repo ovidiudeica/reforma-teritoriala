@@ -1,0 +1,193 @@
+name: Gate ACTUAL release trust chain
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actual-release-trust-chain:
+    name: actual-release-trust-chain
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out tested commit
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
+      - name: Audit workflow write boundaries
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import {readdir,readFile} from 'node:fs/promises';
+          import {join} from 'node:path';
+
+          const dir='.github/workflows';
+          const files=(await readdir(dir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
+          const allowedContentsWrite=new Set([
+            'actual-candidate.yml',
+            'actual-promote-candidate.yml',
+            'import-osm.yml',
+            'refresh-actual-review-evidence.yml',
+            'refresh-md-official.yml',
+            'refresh-ro-official.yml'
+          ]);
+          const allowedPush=new Set([
+            'actual-candidate.yml',
+            'actual-promote-candidate.yml',
+            'refresh-actual-review-evidence.yml'
+          ]);
+          const allowedPrCreate=new Set([
+            'actual-promote-candidate.yml',
+            'refresh-actual-review-evidence.yml'
+          ]);
+
+          const failures=[];
+          for(const name of files){
+            const text=await readFile(join(dir,name),'utf8');
+            const contentsWrite=/^\s*contents:\s*write\s*$/m.test(text);
+            const gitPush=/\bgit\s+push\b/.test(text);
+            const prCreate=/\bgh\s+pr\s+create\b/.test(text);
+            const pushesMain=/\bgit\s+push\s+origin\s+(?:(?:HEAD:)?main|refs\/heads\/main)\b/.test(text);
+
+            if(contentsWrite&&!allowedContentsWrite.has(name))failures.push({issue:'unexpected_contents_write',workflow:name});
+            if(!contentsWrite&&allowedContentsWrite.has(name))failures.push({issue:'expected_contents_write_missing',workflow:name});
+            if(gitPush&&!allowedPush.has(name))failures.push({issue:'unexpected_git_push',workflow:name});
+            if(prCreate&&!allowedPrCreate.has(name))failures.push({issue:'unexpected_pr_create',workflow:name});
+            if(pushesMain)failures.push({issue:'direct_push_to_main',workflow:name});
+          }
+
+          for(const wrapper of ['import-osm.yml','refresh-md-official.yml','refresh-ro-official.yml']){
+            const text=await readFile(join(dir,wrapper),'utf8');
+            if(!/uses:\s*\.\/\.github\/workflows\/actual-candidate\.yml/.test(text)){
+              failures.push({issue:'source_refresh_does_not_route_through_candidate',workflow:wrapper});
+            }
+            if(/\brun:\s*[|>]?/.test(text)){
+              failures.push({issue:'source_refresh_wrapper_contains_direct_run_step',workflow:wrapper});
+            }
+          }
+
+          const report={status:failures.length?'FAIL':'PASS',workflow_count:files.length,failures};
+          console.log(JSON.stringify(report,null,2));
+          if(failures.length)process.exit(1);
+          NODE
+
+      - name: Validate PR publication path
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse "$BASE_SHA^{commit}")" = "$BASE_SHA"
+          test "$(git rev-parse "$HEAD_SHA^{commit}")" = "$HEAD_SHA"
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > "$RUNNER_TEMP/changed.txt"
+          cat "$RUNNER_TEMP/changed.txt"
+
+          if ! grep -Eq '^(data/current/|public/data/actual-entities\.json$|public/geo/(current|actual)/|data/sources/(ro-siruta-current\.json|cuatm-current\.json|osm-current\.json|osm-snapshots/|ro-osm-official-exception-history\.json|ro-osm-level9-exception-history\.json|md-osm-multiple-representation-history\.json|md-balti-city-boundary-way-history\.json|md-balti-city-boundary-changeset-semantics\.json))' "$RUNNER_TEMP/changed.txt"; then
+            echo "No ACTUAL release publication surface changed."
+            exit 0
+          fi
+
+          case "$HEAD_REF" in
+            actual/candidate-*)
+              node --input-type=module <<'NODE'
+              import {createHash} from 'node:crypto';
+              import {readFile} from 'node:fs/promises';
+              import {execFileSync} from 'node:child_process';
+
+              const base=process.env.BASE_SHA;
+              const head=process.env.HEAD_SHA;
+              const changed=execFileSync('git',['diff','--name-only',base,head],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+              const forbidden=changed.filter(path=>
+                path.startsWith('.github/')||
+                path.startsWith('scripts/')||
+                path.startsWith('container/')||
+                path==='package.json'||
+                path==='package-lock.json'||
+                path.startsWith('vendor/')
+              );
+              const candidate=JSON.parse(await readFile('data/current/actual-release-candidate.json','utf8'));
+              const promotion=JSON.parse(await readFile('data/current/actual-candidate-promotion-audit.json','utf8'));
+              const persisted=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+              const diffBytes=await readFile('data/current/actual-candidate-diff.json');
+              const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+              const manifest=JSON.parse(manifestBytes);
+              const sha=x=>createHash('sha256').update(x).digest('hex');
+              const failures=[];
+              const check=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
+
+              const count=Number(execFileSync('git',['rev-list','--count',base+'..'+head],{encoding:'utf8'}).trim());
+              const parent=execFileSync('git',['rev-parse',head+'^^'],{encoding:'utf8'}).trim();
+              check(count===2,'promotion_pr_not_exactly_two_commits',{count});
+              check(parent===base,'promotion_candidate_not_direct_child_of_base',{expected:base,actual:parent});
+              check(forbidden.length===0,'promotion_pr_contains_non_release_code_changes',{paths:forbidden});
+              check(candidate.schema_version===2&&candidate.mode==='ACTUAL_CANDIDATE'&&candidate.status==='CHANGE','candidate_marker_not_change');
+              check(candidate.base_ref===base,'candidate_base_sha_mismatch',{candidate:candidate.base_ref,base});
+              check(promotion.status==='PASS'&&promotion.mode==='ACTUAL_CANDIDATE_PROMOTION','promotion_audit_not_pass');
+              check(promotion.base_ref===base,'promotion_audit_base_sha_mismatch',{promotion:promotion.base_ref,base});
+              check(persisted.snapshot_id===manifest.snapshot_id,'persisted_snapshot_manifest_mismatch');
+              check(persisted.manifest_sha256===sha(manifestBytes),'persisted_manifest_hash_mismatch');
+              check(persisted.promoted_from_candidate?.base_commit_sha===base,'persisted_promotion_base_mismatch');
+              check(persisted.promoted_from_candidate?.candidate_identity_sha256===candidate.candidate_identity_sha256,'persisted_candidate_identity_mismatch');
+              check(persisted.promoted_from_candidate?.diff_report_sha256===sha(diffBytes),'persisted_diff_hash_mismatch');
+              check(persisted.validated_release_gate_status==='PASS','persisted_gate_not_pass');
+
+              console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'candidate_promotion',base,head,failures},null,2));
+              if(failures.length)process.exit(1);
+              NODE
+              ;;
+            actual/review-evidence-*)
+              node --input-type=module <<'NODE'
+              import {readFile} from 'node:fs/promises';
+              import {execFileSync} from 'node:child_process';
+
+              const base=process.env.BASE_SHA;
+              const head=process.env.HEAD_SHA;
+              const changed=execFileSync('git',['diff','--name-only',base,head],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+              const allowedHistory=new Set([
+                'data/sources/ro-osm-official-exception-history.json',
+                'data/sources/ro-osm-level9-exception-history.json',
+                'data/sources/md-osm-multiple-representation-history.json',
+                'data/sources/md-balti-city-boundary-way-history.json',
+                'data/sources/md-balti-city-boundary-changeset-semantics.json'
+              ]);
+              const forbidden=changed.filter(path=>!path.startsWith('data/current/')&&!allowedHistory.has(path));
+              const basePersisted=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-persisted.json'],{encoding:'utf8'}));
+              const headPersisted=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+              const baseManifest=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json'],{encoding:'utf8'}));
+              const headManifest=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
+              const failures=[];
+              const check=(ok,issue,detail={})=>{if(!ok)failures.push({issue,...detail});};
+
+              const count=Number(execFileSync('git',['rev-list','--count',base+'..'+head],{encoding:'utf8'}).trim());
+              check(count===1,'review_evidence_pr_not_single_commit',{count});
+              check(forbidden.length===0,'review_evidence_pr_changed_forbidden_paths',{paths:forbidden});
+              check(headManifest.snapshot_id===baseManifest.snapshot_id,'review_evidence_changed_snapshot_identity');
+              check(headManifest.release_fingerprint_sha256===baseManifest.release_fingerprint_sha256,'review_evidence_changed_release_fingerprint');
+              check(headPersisted.snapshot_id===basePersisted.snapshot_id,'review_evidence_persisted_snapshot_changed');
+              check(headPersisted.release_fingerprint_sha256===basePersisted.release_fingerprint_sha256,'review_evidence_persisted_fingerprint_changed');
+              check(headPersisted.provenance_refresh?.previous_manifest_sha256===basePersisted.manifest_sha256,'review_evidence_previous_manifest_binding_missing');
+              check(headPersisted.validated_release_gate_status==='PASS','review_evidence_gate_not_pass');
+
+              console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'review_evidence_refresh',base,head,failures},null,2));
+              if(failures.length)process.exit(1);
+              NODE
+              ;;
+            *)
+              echo "ACTUAL publication surface may only be changed by actual/candidate-* or actual/review-evidence-* branches."
+              exit 1
+              ;;
+          esac
+
+      - name: Confirm gate is read-only
+        run: |
+          test -z "$(git status --porcelain --untracked-files=all)"
