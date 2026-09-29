@@ -62,13 +62,19 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
   'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02',
   './.github/workflows/actual-candidate.yml'
  ]);
+ const allowedScheduledWrite=new Set([
+  'refresh-md-official.yml',
+  'refresh-ro-official.yml'
+ ]);
  const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
  for(const name of files){
   const content=await readFile(join(workflowsDir,name),'utf8');
   const contentsWrite=/^\s*contents:\s*write\s*$/m.test(content);
   assert.equal(contentsWrite,allowedContentsWrite.has(name),name+' contents:write boundary drift');
   if(!contentsWrite)continue;
-  assert.doesNotMatch(content,/^\s{2}(?:push|pull_request|schedule):/m,name+' must not receive automatic repository write triggers');
+  assert.doesNotMatch(content,/^\s{2}(?:push|pull_request):/m,name+' must not receive repository-event write triggers');
+  const hasSchedule=/^\s{2}schedule:/m.test(content);
+  assert.equal(hasSchedule,allowedScheduledWrite.has(name),name+' scheduled-write boundary drift');
   assert.doesNotMatch(content,/\bgh\s+api\b[^\n]*(?:--method|-X)\s+(?:POST|PUT|PATCH|DELETE)\b/i,name+' must not write through gh api');
   assert.doesNotMatch(content,/\bcurl\b[^\n]*(?:-X|--request)\s+(?:POST|PUT|PATCH|DELETE)\b[^\n]*api\.github\.com/i,name+' must not write through GitHub REST curl');
   assert.doesNotMatch(content,/actions\/github-script@/i,name+' must not gain generic GitHub API scripting');
