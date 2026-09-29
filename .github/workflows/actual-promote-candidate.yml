@@ -34,13 +34,186 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Check out candidate
+      - name: Validate candidate branch namespace before checkout
+        env:
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+        run: |
+          set -euo pipefail
+          if ! printf '%s' "$CANDIDATE_BRANCH" | grep -Eq '^actual/candidate-[A-Za-z0-9._-]+
+      - name: Gate pinned ACTUAL OCI runtime
+        run: npm run audit:actual-runtime-image
+
+      - name: Audit vendored npm dependency bundle
+        run: npm run audit:actual-npm-dependency-bundle
+
+      - name: Audit pinned ACTUAL execution environment
+        env:
+          ACTUAL_BUILD_ENVIRONMENT_GATE_READ_ONLY: '1'
+        run: npm run audit:actual-build-environment
+
+      - name: Audit pinned Node/npm toolchain
+        run: npm run audit:node-toolchain
+
+      - name: Capture exact current main commit
+        id: current_main
+        run: |
+          git fetch origin main
+          CURRENT_MAIN_SHA="$(git rev-parse refs/remotes/origin/main)"
+          if ! printf '%s' "$CURRENT_MAIN_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "Current main did not resolve to an exact commit SHA: $CURRENT_MAIN_SHA"
+            exit 1
+          fi
+          CANDIDATE_BASE_SHA="$(node -p "require('./data/current/actual-release-candidate.json').base_ref")"
+          if ! printf '%s' "$CANDIDATE_BASE_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "Candidate marker does not bind an exact base commit SHA: $CANDIDATE_BASE_SHA"
+            exit 1
+          fi
+          if [ "$CURRENT_MAIN_SHA" != "$CANDIDATE_BASE_SHA" ]; then
+            echo "Persisted base moved: candidate=$CANDIDATE_BASE_SHA current_main=$CURRENT_MAIN_SHA"
+            exit 1
+          fi
+          echo "current_main_sha=$CURRENT_MAIN_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Validate candidate bytes
+        env:
+          ACTUAL_RELEASE_GATE_READ_ONLY: '1'
+        run: node scripts/process/audit-actual-release-gate.mjs
+
+      - name: Prepare explicit promotion marker
+        env:
+          ACTUAL_BASE_REF: ${{ steps.current_main.outputs.current_main_sha }}
+          EXPECTED_CANDIDATE_SNAPSHOT: ${{ inputs.expected_candidate_snapshot }}
+          CONFIRM_PROMOTION: ${{ inputs.confirmation }}
+        run: npm run prepare:actual-candidate-promotion
+
+      - name: Verify promoted marker matches exact candidate
+        run: |
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {readFile} from 'node:fs/promises';
+          const marker=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+          const manifestBytes=await readFile('data/current/actual-release-manifest.json');
+          const manifest=JSON.parse(manifestBytes);
+          const sha=createHash('sha256').update(manifestBytes).digest('hex');
+          if(marker.snapshot_id!==manifest.snapshot_id||marker.release_fingerprint_sha256!==manifest.release_fingerprint_sha256||marker.manifest_sha256!==sha||marker.review_evidence_bundle_fingerprint_sha256!==manifest.review_evidence_bundle?.bundle_fingerprint_sha256||marker.network_denial_sha256!==manifest.network_denial?.sha256||marker.host_trust_fingerprint_sha256!==manifest.host_trust?.host_trust_fingerprint_sha256||marker.validated_release_gate_status!=='PASS'){
+            throw new Error('Promotion marker does not bind the exact candidate snapshot.');
+          }
+          console.log(JSON.stringify({status:'PASS',snapshot_id:marker.snapshot_id,manifest_sha256:sha},null,2));
+          NODE
+
+      - name: Commit promotion marker on candidate branch
+        env:
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/current/actual-release-persisted.json data/current/actual-candidate-promotion-audit.json
+          COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion ${{ inputs.expected_candidate_snapshot }}"
+          git push origin "HEAD:$CANDIDATE_BRANCH"
+
+      - name: Open promotion pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+          SNAPSHOT_ID: ${{ inputs.expected_candidate_snapshot }}
+        run: |
+          EXISTING="$(gh pr list --base main --head "$CANDIDATE_BRANCH" --state open --json url --jq '.[0].url // empty')"
+          if [ -n "$EXISTING" ]; then
+            echo "Promotion PR already exists: $EXISTING"
+            echo "### Promotion PR" >> "$GITHUB_STEP_SUMMARY"
+            echo "$EXISTING" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          BASE_SNAPSHOT="$(node -p "require('./data/current/actual-release-candidate.json').base_release.snapshot_id")"
+          REVIEW_REQUIRED="$(node -p "require('./data/current/actual-release-candidate.json').review_required")"
+          CHANGE_COUNT="$(node -p "require('./data/current/actual-release-candidate.json').substantive_change_count")"
+          BODY="Explicit ACTUAL candidate promotion. Candidate: $SNAPSHOT_ID. Base persisted release: $BASE_SNAPSHOT. Substantive diff count: $CHANGE_COUNT. Candidate review_required: $REVIEW_REQUIRED. The candidate release gate passed before this PR was created. The required verify-persisted-release check must pass on the promotion PR before merge."
+          URL="$(gh pr create --base main --head "$CANDIDATE_BRANCH" --title "Promote ACTUAL candidate $SNAPSHOT_ID" --body "$BODY")"
+          echo "### Promotion PR" >> "$GITHUB_STEP_SUMMARY"
+          echo "$URL" >> "$GITHUB_STEP_SUMMARY"
+; then
+            echo "Promotion accepts only isolated actual/candidate-* branches: $CANDIDATE_BRANCH"
+            exit 1
+          fi
+
+      - name: Check out trusted main for candidate preflight
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          ref: ${{ inputs.candidate_branch }}
+          ref: main
           fetch-depth: 0
 
       - name: Trust mounted GitHub workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Preflight candidate ref without executing candidate code
+        id: candidate_preflight
+        env:
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "refs/heads/$CANDIDATE_BRANCH:refs/remotes/origin/__actual_candidate_preflight"
+          CURRENT_MAIN_SHA="$(git rev-parse HEAD)"
+          CANDIDATE_SHA="$(git rev-parse refs/remotes/origin/__actual_candidate_preflight)"
+          CANDIDATE_PARENT_SHA="$(git rev-parse "$CANDIDATE_SHA^")"
+          test "$CANDIDATE_PARENT_SHA" = "$CURRENT_MAIN_SHA" || {
+            echo "Candidate is not an exact direct child of current main: candidate_parent=$CANDIDATE_PARENT_SHA main=$CURRENT_MAIN_SHA"
+            exit 1
+          }
+          test "$(git rev-list --count "$CURRENT_MAIN_SHA..$CANDIDATE_SHA")" = "1" || {
+            echo "Candidate ref must contain exactly one commit beyond current main."
+            exit 1
+          }
+
+          git diff --name-only "$CURRENT_MAIN_SHA" "$CANDIDATE_SHA" > "$RUNNER_TEMP/candidate-preflight-paths.txt"
+          python3 - "$RUNNER_TEMP/candidate-preflight-paths.txt" <<'PY'
+          import sys
+          paths=[line.strip() for line in open(sys.argv[1],encoding='utf8') if line.strip()]
+          def allowed(path):
+              return (
+                  path.startswith('data/current/')
+                  or path == 'public/data/actual-entities.json'
+                  or path.startswith('public/geo/current/')
+                  or path.startswith('public/geo/actual/')
+                  or path == 'data/sources/ro-siruta-current.json'
+                  or path == 'data/sources/cuatm-current.json'
+                  or path == 'data/sources/osm-current.json'
+                  or path.startswith('data/sources/osm-snapshots/')
+                  or path == 'data/sources/ro-osm-official-exception-history.json'
+                  or path == 'data/sources/ro-osm-level9-exception-history.json'
+                  or path == 'data/sources/md-osm-multiple-representation-history.json'
+                  or path == 'data/sources/md-balti-city-boundary-way-history.json'
+                  or path == 'data/sources/md-balti-city-boundary-changeset-semantics.json'
+              )
+          forbidden=[p for p in paths if not allowed(p) or p in {
+              'data/current/actual-release-persisted.json',
+              'data/current/actual-candidate-promotion-audit.json'
+          }]
+          if forbidden:
+              raise SystemExit('Candidate preflight write-boundary violation: '+', '.join(forbidden))
+          PY
+
+          git show "$CANDIDATE_SHA:data/current/actual-release-candidate.json" > "$RUNNER_TEMP/candidate-preflight-marker.json"
+          python3 - "$RUNNER_TEMP/candidate-preflight-marker.json" "$CURRENT_MAIN_SHA" <<'PY'
+          import json,sys
+          marker=json.load(open(sys.argv[1],encoding='utf8'))
+          base=sys.argv[2]
+          if marker.get('schema_version') != 2 or marker.get('mode') != 'ACTUAL_CANDIDATE' or marker.get('status') != 'CHANGE':
+              raise SystemExit('Candidate preflight marker is not a genuine CHANGE candidate.')
+          if marker.get('base_ref') != base:
+              raise SystemExit(f"Candidate preflight base mismatch: marker={marker.get('base_ref')} main={base}")
+          PY
+
+          echo "candidate_sha=$CANDIDATE_SHA" >> "$GITHUB_OUTPUT"
+          echo "current_main_sha=$CURRENT_MAIN_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Check out exact preflighted candidate commit
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ steps.candidate_preflight.outputs.candidate_sha }}
+          fetch-depth: 0
+
+      - name: Trust exact candidate workspace
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Gate pinned ACTUAL OCI runtime
