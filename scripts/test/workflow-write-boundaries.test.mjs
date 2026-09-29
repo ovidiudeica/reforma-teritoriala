@@ -116,6 +116,23 @@ test('promotion trust-chain gate separates candidate and promotion commit write 
  assert.match(audit,/persisted_candidate_commit_mismatch/);
 });
 
+test('trust-chain gate permits only exact provenance migration publication files',async()=>{
+ const audit=await readFile('scripts/process/audit-actual-publication-path.mjs','utf8');
+ assert.match(audit,/actual\\\/provenance-/);
+ for(const path of [
+  'data/current/actual-build-environment-manifest.json',
+  'data/current/actual-build-environment-gate.json',
+  'data/current/actual-release-manifest.json',
+  'data/current/actual-release-gate.json',
+  'data/current/actual-release-persisted.json'
+ ])assert.ok(audit.includes(path),path+' missing from provenance allowlist');
+ assert.match(audit,/provenance_migration_changed_forbidden_publication_paths/);
+ assert.match(audit,/provenance_migration_changed_snapshot_identity/);
+ assert.match(audit,/provenance_migration_changed_release_fingerprint/);
+ assert.match(audit,/provenance_migration_previous_manifest_binding_missing/);
+ assert.match(audit,/provenance_migration_release_gate_not_pass/);
+});
+
 test('review-evidence refresh stages an exact artifact allowlist',async()=>{
  const content=await readFile(join(workflowsDir,'refresh-actual-review-evidence.yml'),'utf8');
  assert.match(content,/ALLOWED=\(/);
