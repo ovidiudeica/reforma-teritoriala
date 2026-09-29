@@ -58,7 +58,7 @@ jobs:
         run: npm run audit:node-toolchain
 
       - name: Capture exact current main commit
-        id: current-main
+        id: current_main
         run: |
           git fetch origin main
           CURRENT_MAIN_SHA="$(git rev-parse refs/remotes/origin/main)"
@@ -70,7 +70,7 @@ jobs:
 
       - name: Prepare explicit promotion marker
         env:
-          ACTUAL_BASE_REF: ${{ steps.current-main.outputs.current_main_sha }}
+          ACTUAL_BASE_REF: ${{ steps.current_main.outputs.current_main_sha }}
           EXPECTED_CANDIDATE_SNAPSHOT: ${{ inputs.expected_candidate_snapshot }}
           CONFIRM_PROMOTION: ${{ inputs.confirmation }}
         run: npm run prepare:actual-candidate-promotion
