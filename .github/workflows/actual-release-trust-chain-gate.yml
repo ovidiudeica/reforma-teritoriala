@@ -55,12 +55,23 @@ jobs:
           const allowedPackagesWrite=new Set([
             'build-actual-runtime-image.yml'
           ]);
+          const allowedWritePermissions=new Map([
+            ['actual-candidate.yml',['contents']],
+            ['actual-promote-candidate.yml',['contents','pull-requests']],
+            ['build-actual-runtime-image.yml',['packages']],
+            ['import-osm.yml',['contents']],
+            ['refresh-actual-review-evidence.yml',['contents','pull-requests']],
+            ['refresh-md-official.yml',['contents']],
+            ['refresh-ro-official.yml',['contents']]
+          ]);
 
           const failures=[];
           for(const name of files){
             const text=await readFile(join(dir,name),'utf8');
             const contentsWrite=/^\s*contents:\s*write\s*$/m.test(text);
             const packagesWrite=/^\s*packages:\s*write\s*$/m.test(text);
+            const writePermissions=[...text.matchAll(/^\s+([a-z][a-z-]*):\s*write\s*$/gm)].map(match=>match[1]).sort();
+            const expectedWritePermissions=[...(allowedWritePermissions.get(name)??[])].sort();
             const gitPush=/\bgit\s+push\b/.test(text);
             const prCreate=/\bgh\s+pr\s+create\b/.test(text);
             const pushesMain=/\bgit\s+push\s+origin\s+(?:(?:HEAD:)?main|refs\/heads\/main)\b/.test(text);
@@ -81,6 +92,7 @@ jobs:
             const scopedRepositoryToken=/GITHUB_TOKEN:\s*\$\{\{ github\.token \}\}/.test(text);
             const oneShotGitAuth=/http\.https:\/\/github\.com\/\.extraheader=AUTHORIZATION: basic \$AUTH_HEADER/.test(text);
 
+            if(JSON.stringify(writePermissions)!==JSON.stringify(expectedWritePermissions))failures.push({issue:'workflow_write_permission_matrix_drift',workflow:name,expected:expectedWritePermissions,actual:writePermissions});
             if(contentsWrite&&!allowedContentsWrite.has(name))failures.push({issue:'unexpected_contents_write',workflow:name});
             if(!contentsWrite&&allowedContentsWrite.has(name))failures.push({issue:'expected_contents_write_missing',workflow:name});
             if(packagesWrite&&!allowedPackagesWrite.has(name))failures.push({issue:'unexpected_packages_write',workflow:name});
