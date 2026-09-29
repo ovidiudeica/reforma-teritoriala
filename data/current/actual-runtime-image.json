@@ -21,7 +21,7 @@
     },
     "builder_workflow": {
       "path": ".github/workflows/build-actual-runtime-image.yml",
-      "sha256": "9d9629e8975be358f5a87ff291627e3dac3f95c80672b9b35ef25532f61b4504"
+      "sha256": "405d54ae5ff0a401453284c9954465d6f0a37384777bfad7a024f76b21012a87"
     }
   },
   "reproducibility": {
@@ -32,9 +32,9 @@
   },
   "builder_provenance": {
     "manifest_path": "data/current/actual-oci-builder.json",
-    "manifest_sha256": "41ea37ab695eda3d4aa52289c1198797be2d1c6b0b04408fd087b4b4f08ccb21",
+    "manifest_sha256": "97dddc0baac41e966850054add89cdacc04817bcfebcbb52b9689d161fb2c12f",
     "builder_fingerprint_algorithm": "actual-oci-builder-v1",
-    "builder_fingerprint_sha256": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d",
+    "builder_fingerprint_sha256": "51fd904d569aed1d18e925c30b814037e7f0c75719429552b6b8b1c02624f48a",
     "buildx": {
       "version": "v0.37.1",
       "commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
@@ -55,5 +55,5 @@
       "platform": "linux/amd64"
     }
   },
-  "runtime_fingerprint_sha256": "519a36113bce7512965d77921c7ec6493afd4c6f57e336aee5b84c4777fe1a42"
+  "runtime_fingerprint_sha256": "c403316ae786d543f664cae9964d058f7c3e1af1b0e53afa04d151b68ef461f4"
 }
