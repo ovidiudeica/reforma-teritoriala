@@ -14,6 +14,7 @@ jobs:
   refresh-through-candidate:
     uses: ./.github/workflows/actual-candidate.yml
     with:
+      base_release_commit: ${{ github.sha }}
       candidate_branch: ''
       refresh_ro_siruta: false
       refresh_md_cuatm: false
