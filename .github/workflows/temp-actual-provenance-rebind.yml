@@ -9,6 +9,10 @@ permissions:
   contents: read
   packages: read
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   rebind:
     if: github.head_ref == 'actual/harden-write-boundaries-promotion-v2'
