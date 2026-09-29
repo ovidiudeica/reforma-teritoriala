@@ -48,6 +48,10 @@ jobs:
             'actual-promote-candidate.yml',
             'refresh-actual-review-evidence.yml'
           ]);
+          const allowedScheduledWrite=new Set([
+            'refresh-md-official.yml',
+            'refresh-ro-official.yml'
+          ]);
 
           const failures=[];
           for(const name of files){
@@ -56,7 +60,8 @@ jobs:
             const gitPush=/\bgit\s+push\b/.test(text);
             const prCreate=/\bgh\s+pr\s+create\b/.test(text);
             const pushesMain=/\bgit\s+push\s+origin\s+(?:(?:HEAD:)?main|refs\/heads\/main)\b/.test(text);
-            const automaticWriteTrigger=/^\s{2}(?:push|pull_request|schedule):/m.test(text);
+            const repositoryWriteTrigger=/^\s{2}(?:push|pull_request):/m.test(text);
+            const scheduledWriteTrigger=/^\s{2}schedule:/m.test(text);
             const apiWrite=/\bgh\s+api\b[^\n]*(?:--method|-X)\s+(?:POST|PUT|PATCH|DELETE)\b/i.test(text)
               || /\bcurl\b[^\n]*(?:-X|--request)\s+(?:POST|PUT|PATCH|DELETE)\b[^\n]*api\.github\.com/i.test(text)
               || /actions\/github-script@/i.test(text);
@@ -73,7 +78,9 @@ jobs:
             if(gitPush&&!allowedPush.has(name))failures.push({issue:'unexpected_git_push',workflow:name});
             if(prCreate&&!allowedPrCreate.has(name))failures.push({issue:'unexpected_pr_create',workflow:name});
             if(pushesMain)failures.push({issue:'direct_push_to_main',workflow:name});
-            if(contentsWrite&&automaticWriteTrigger)failures.push({issue:'write_workflow_has_automatic_repository_trigger',workflow:name});
+            if(contentsWrite&&repositoryWriteTrigger)failures.push({issue:'write_workflow_has_repository_event_trigger',workflow:name});
+            if(contentsWrite&&scheduledWriteTrigger&&!allowedScheduledWrite.has(name))failures.push({issue:'unexpected_scheduled_write_workflow',workflow:name});
+            if(contentsWrite&&!scheduledWriteTrigger&&allowedScheduledWrite.has(name))failures.push({issue:'expected_schedule_missing',workflow:name});
             if(contentsWrite&&apiWrite)failures.push({issue:'write_workflow_has_unreviewed_api_write_surface',workflow:name});
             if(unapprovedUses.length)failures.push({issue:'write_workflow_uses_unapproved_action',workflow:name,uses:unapprovedUses});
           }
