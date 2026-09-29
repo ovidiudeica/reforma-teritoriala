@@ -9,7 +9,7 @@ export const EXPECTED_HOST_TRUST={
  runner:{
   label:'ubuntu-24.04',
   image_os:'ubuntu24',
-  image_version:'20260920.314.1',
+  image_version:'20260927.320.1',
   os:'Linux',
   arch:'X64'
  },
@@ -26,7 +26,7 @@ export const EXPECTED_HOST_TRUST={
   git_commit:'6430e49',
   components:{
    Engine:{version:'28.0.4',git_commit:'6430e49'},
-   containerd:{version:'v2.3.5',git_commit:'1294c24a7da8e5a793ed378161673abe94118892'},
+   containerd:{version:'v2.3.6',git_commit:'ee2735368117d2eb259779949d5e75cdafec9761'},
    runc:{version:'1.5.1',git_commit:'v1.5.1-0-g8f2685a4'},
    'docker-init':{version:'0.19.0',git_commit:'de40ad0'}
   }
@@ -40,6 +40,38 @@ export const EXPECTED_HOST_TRUST={
   architecture:'x86_64',
   kernel_version:'6.17.0-1022-azure'
  },
+ accepted_runtime_profiles:[
+  {
+   id:'github-ubuntu24-20260920.314.1',
+   runner:{image_os:'ubuntu24',image_version:'20260920.314.1',arch:'X64',os:'Linux'},
+   kernel:{release:'6.17.0-1022-azure',version:'#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026',machine:'x86_64'},
+   docker:{
+    client_version:'28.0.4',server_version:'28.0.4',api_version:'1.48',min_api_version:'1.24',git_commit:'6430e49',
+    components:{
+     Engine:{version:'28.0.4',git_commit:'6430e49'},
+     containerd:{version:'v2.3.5',git_commit:'1294c24a7da8e5a793ed378161673abe94118892'},
+     runc:{version:'1.5.1',git_commit:'v1.5.1-0-g8f2685a4'},
+     'docker-init':{version:'0.19.0',git_commit:'de40ad0'}
+    }
+   },
+   engine:{storage_driver:'overlay2',cgroup_driver:'systemd',cgroup_version:'2',operating_system:'Ubuntu 24.04.5 LTS',os_type:'linux',architecture:'x86_64',kernel_version:'6.17.0-1022-azure'}
+  },
+  {
+   id:'github-ubuntu24-20260927.320.1',
+   runner:{image_os:'ubuntu24',image_version:'20260927.320.1',arch:'X64',os:'Linux'},
+   kernel:{release:'6.17.0-1022-azure',version:'#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026',machine:'x86_64'},
+   docker:{
+    client_version:'28.0.4',server_version:'28.0.4',api_version:'1.48',min_api_version:'1.24',git_commit:'6430e49',
+    components:{
+     Engine:{version:'28.0.4',git_commit:'6430e49'},
+     containerd:{version:'v2.3.6',git_commit:'ee2735368117d2eb259779949d5e75cdafec9761'},
+     runc:{version:'1.5.1',git_commit:'v1.5.1-0-g8f2685a4'},
+     'docker-init':{version:'0.19.0',git_commit:'de40ad0'}
+    }
+   },
+   engine:{storage_driver:'overlay2',cgroup_driver:'systemd',cgroup_version:'2',operating_system:'Ubuntu 24.04.5 LTS',os_type:'linux',architecture:'x86_64',kernel_version:'6.17.0-1022-azure'}
+  }
+ ],
  cpu_contract:{
   architecture:'x86_64',
   op_modes:'32-bit, 64-bit',
@@ -153,16 +185,24 @@ export function validateObservedHost(manifest,observed){
  const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
  const expected=manifest?.contract??{};
  const exact=(name,actual,wanted)=>check(name,JSON.stringify(canonicalizeHostTrust(actual))===JSON.stringify(canonicalizeHostTrust(wanted)),{expected:wanted,actual});
- const expectedObservedRunner={
-  image_os:expected.runner?.image_os??null,
-  image_version:expected.runner?.image_version??null,
-  arch:expected.runner?.arch??null,
-  os:expected.runner?.os??null
+ const observedProfile={
+  runner:observed?.runner??null,
+  kernel:observed?.kernel??null,
+  docker:observed?.docker??null,
+  engine:observed?.engine??null
  };
- exact('runner_observable_identity_exact',observed?.runner,expectedObservedRunner);
- exact('kernel_exact',observed?.kernel,expected.kernel);
- exact('docker_exact',observed?.docker,expected.docker);
- exact('engine_exact',observed?.engine,expected.engine);
+ const acceptedProfiles=expected.accepted_runtime_profiles??[];
+ const matchingProfiles=acceptedProfiles.filter(profile=>
+  JSON.stringify(canonicalizeHostTrust({
+   runner:profile.runner,
+   kernel:profile.kernel,
+   docker:profile.docker,
+   engine:profile.engine
+  }))===JSON.stringify(canonicalizeHostTrust(observedProfile))
+ );
+ check('runtime_host_profile_is_explicitly_approved',
+  matchingProfiles.length===1,
+  {accepted_profile_ids:acceptedProfiles.map(x=>x.id),matched_profile_ids:matchingProfiles.map(x=>x.id),observed:observedProfile});
  const cpu=observed?.cpu??{};
  const contract=expected.cpu_contract??{};
  check('cpu_architecture_exact',cpu.architecture===contract.architecture,{expected:contract.architecture,actual:cpu.architecture??null});
