@@ -120,6 +120,7 @@ test('trust-chain gate permits only exact provenance migration publication files
  const audit=await readFile('scripts/process/audit-actual-publication-path.mjs','utf8');
  assert.match(audit,/actual\\\/provenance-/);
  for(const path of [
+  'data/current/actual-host-trust-manifest.json',
   'data/current/actual-build-environment-manifest.json',
   'data/current/actual-build-environment-gate.json',
   'data/current/actual-release-manifest.json',
@@ -140,4 +141,19 @@ test('review-evidence refresh stages an exact artifact allowlist',async()=>{
  assert.match(content,/comm -23/);
  assert.match(content,/git add -- "\$\{ALLOWED\[@\]\}"/);
  assert.doesNotMatch(content,/git add data\/current\//);
+});
+
+
+test('promotion validates candidate parent and write surface before repository code executes',async()=>{
+ const promotion=await readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8');
+ const preflight=promotion.indexOf('Preflight candidate commit before repository code execution');
+ const firstRepoCode=promotion.indexOf('npm run ');
+ assert.ok(preflight>=0);
+ assert.ok(firstRepoCode>preflight);
+ assert.match(promotion,/CANDIDATE_PARENT_SHA/);
+ assert.match(promotion,/rev-list --count/);
+ assert.match(promotion,/candidate-preexecution-paths\.txt/);
+ assert.match(promotion,/Candidate pre-execution write-boundary violation/);
+ assert.match(promotion,/Candidate pre-execution marker is not a genuine CHANGE candidate/);
+ assert.match(promotion,/marker\.get\('base_ref'\) != base/);
 });

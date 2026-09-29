@@ -81,6 +81,7 @@ if(/^actual\/candidate-/.test(headRef??'')){
  console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'candidate_promotion',base,head,candidate_commit:candidateCommit,failures},null,2));
 }else if(/^actual\/provenance-/.test(headRef??'')){
  const allowedPublication=new Set([
+  'data/current/actual-host-trust-manifest.json',
   'data/current/actual-build-environment-manifest.json',
   'data/current/actual-build-environment-gate.json',
   'data/current/actual-release-manifest.json',
@@ -94,6 +95,8 @@ if(/^actual\/candidate-/.test(headRef??'')){
  const baseManifest=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json'],{encoding:'utf8'}));
  const headManifestBytes=await readFile('data/current/actual-release-manifest.json');
  const headManifest=JSON.parse(headManifestBytes);
+ const hostTrustBytes=await readFile('data/current/actual-host-trust-manifest.json');
+ const hostTrust=JSON.parse(hostTrustBytes);
  const buildEnvironmentBytes=await readFile('data/current/actual-build-environment-manifest.json');
  const buildEnvironment=JSON.parse(buildEnvironmentBytes);
  const releaseGate=JSON.parse(await readFile('data/current/actual-release-gate.json','utf8'));
@@ -106,6 +109,9 @@ if(/^actual\/candidate-/.test(headRef??'')){
  check(headPersisted.release_fingerprint_sha256===basePersisted.release_fingerprint_sha256,'provenance_migration_persisted_fingerprint_changed');
  check(headPersisted.provenance_hardening?.previous_manifest_sha256===basePersisted.manifest_sha256,'provenance_migration_previous_manifest_binding_missing',{expected:basePersisted.manifest_sha256,actual:headPersisted.provenance_hardening?.previous_manifest_sha256??null});
  check(headPersisted.manifest_sha256===sha(headManifestBytes),'provenance_migration_manifest_hash_mismatch');
+ check(headPersisted.host_trust_fingerprint_sha256===hostTrust.host_trust_fingerprint_sha256,'provenance_migration_host_trust_fingerprint_mismatch');
+ check(headManifest.host_trust?.host_trust_fingerprint_sha256===hostTrust.host_trust_fingerprint_sha256,'provenance_migration_manifest_host_trust_fingerprint_mismatch');
+ check(headManifest.host_trust?.sha256===sha(hostTrustBytes),'provenance_migration_host_trust_hash_mismatch');
  check(headPersisted.build_environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256,'provenance_migration_build_environment_fingerprint_mismatch');
  check(headManifest.build_environment?.environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256,'provenance_migration_manifest_build_environment_mismatch');
  check(headManifest.build_environment?.sha256===sha(buildEnvironmentBytes),'provenance_migration_build_environment_hash_mismatch');
