@@ -81,6 +81,9 @@ Only two workflows may contain a direct `git push`:
 
 No topology, source-refresh or auxiliary audit workflow may commit or push release data.
 
+Changes to provenance-bound candidate/promotion infrastructure use the isolated `actual/provenance-*` path. That path may update only the build-environment manifest/gate, release manifest/gate and persisted marker on the ACTUAL publication surface. The trust-chain gate requires unchanged snapshot, release and semantic fingerprints, a direct binding to the previous persisted manifest, the exact regenerated build-environment hash/fingerprint, and a passing release gate. It cannot carry semantic ACTUAL data changes.
+
+
 
 ## Moldova CUATM source refresh
 
