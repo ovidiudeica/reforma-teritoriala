@@ -13,7 +13,7 @@ export const EXPECTED_BUILD_ENVIRONMENT={
  runner:{
   label:'ubuntu-24.04',
   image_os:'ubuntu24',
-  image_version:'20260920.314.1'
+  image_version:'20260927.320.1'
  },
  toolchain:{
   node:'24.21.0',
@@ -32,6 +32,12 @@ export const BUILD_WORKFLOWS={
  verify:'.github/workflows/verify-persisted-actual-release.yml'
 };
 export const BUILD_SUPPORT_FILES=[
+ '.github/workflows/import-osm.yml',
+ '.github/workflows/refresh-ro-official.yml',
+ '.github/workflows/refresh-md-official.yml',
+ '.github/workflows/refresh-actual-review-evidence.yml',
+ '.github/workflows/actual-release-trust-chain-gate.yml',
+ 'scripts/test/workflow-write-boundaries.test.mjs',
  'scripts/lib/actual-build-environment.mjs',
  'scripts/lib/actual-npm-dependency-bundle.mjs',
  'scripts/process/build-actual-build-environment-manifest.mjs',
