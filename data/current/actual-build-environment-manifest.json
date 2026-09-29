@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "11141958d982e7ee7b4d422b31c59a14f6f8ecb2797401bb17af1249ac97568f",
+  "environment_fingerprint_sha256": "895ce009bcce3becfe6197ba84b5558e40891182fbd5960c4c82da857595cba5",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -117,7 +117,7 @@
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "7a5e74eb2c2f9db13b4c442adde8fc10db0d31becda41d7874dbea4ab614be1e",
+        "sha256": "b079c47a64d8643a83c8f703b1ff24f6835e76c058cd7bafb4e5c05468857dfc",
         "runs_on": [
           "ubuntu-24.04"
         ],
