@@ -173,10 +173,12 @@ jobs:
               check(candidate.base_ref===base,'candidate_base_sha_mismatch',{candidate:candidate.base_ref,base});
               check(promotion.status==='PASS'&&promotion.mode==='ACTUAL_CANDIDATE_PROMOTION','promotion_audit_not_pass');
               check(promotion.base_ref===base,'promotion_audit_base_sha_mismatch',{promotion:promotion.base_ref,base});
+              check(promotion.candidate_commit_sha===candidateCommit,'promotion_audit_candidate_commit_mismatch',{promotion:promotion.candidate_commit_sha,candidateCommit});
               check(persisted.snapshot_id===manifest.snapshot_id,'persisted_snapshot_manifest_mismatch');
               check(persisted.manifest_sha256===sha(manifestBytes),'persisted_manifest_hash_mismatch');
               check(persisted.promoted_from_candidate?.base_commit_sha===base,'persisted_promotion_base_mismatch');
               check(persisted.promoted_from_candidate?.candidate_identity_sha256===candidate.candidate_identity_sha256,'persisted_candidate_identity_mismatch');
+              check(persisted.promoted_from_candidate?.candidate_commit_sha===candidateCommit,'persisted_candidate_commit_mismatch',{persisted:persisted.promoted_from_candidate?.candidate_commit_sha,candidateCommit});
               check(persisted.promoted_from_candidate?.diff_report_sha256===sha(diffBytes),'persisted_diff_hash_mismatch');
               check(persisted.validated_release_gate_status==='PASS','persisted_gate_not_pass');
 
