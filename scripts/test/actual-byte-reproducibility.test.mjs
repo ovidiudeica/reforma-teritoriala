@@ -149,3 +149,25 @@ test('non-admin metadata tolerance is scoped only to catalog and master GeoJSON 
   assert.match(stabilizer,/NON_ADMIN_METADATA_COMPONENTS=new Set\(\['catalog','ro_geojson','md_geojson'\]\)/);
   assert.match(stabilizer,/ignoreNonAdministrativeMetadata=NON_ADMIN_METADATA_COMPONENTS\.has\(key\)/);
 });
+
+
+test('candidate stabilizer covers auxiliary data/current JSON and excludes raw volatile pre-stabilization hashes',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const stabilizer=await readFile('scripts/process/stabilize-actual-release-bytes.mjs','utf8');
+  assert.match(stabilizer,/readdir\('data\/current'/);
+  assert.match(stabilizer,/currentJsonPaths/);
+  assert.match(stabilizer,/POST_STABILIZATION_OUTPUTS/);
+  assert.match(stabilizer,/actual-release-manifest\.json/);
+  assert.match(stabilizer,/actual-release-gate\.json/);
+  assert.match(stabilizer,/actual-candidate-diff\.json/);
+  assert.match(stabilizer,/actual-release-candidate\.json/);
+  assert.doesNotMatch(stabilizer,/before_sha256:/);
+  assert.match(stabilizer,/schema_version:2/);
+});
+
+test('post-stabilization release gate uses deterministic manifest timestamp',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const gate=await readFile('scripts/process/audit-actual-release-gate.mjs','utf8');
+  assert.match(gate,/generated_at:manifest\.generated_at/);
+  assert.doesNotMatch(gate,/generated_at:new Date\(\)\.toISOString\(\)/);
+});
