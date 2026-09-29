@@ -102,7 +102,243 @@ jobs:
           fi
           CANDIDATE_BRANCH="${{ inputs.candidate_branch }}"
           if [ -z "$CANDIDATE_BRANCH" ]; then CANDIDATE_BRANCH="actual/candidate-${GITHUB_RUN_ID}"; fi
-          if git ls-remote --exit-code --heads origin "$CANDIDATE_BRANCH" >/dev/null 2>&1; then
+          if ! printf '%s' "$CANDIDATE_BRANCH" | grep -Eq '^actual/candidate-[A-Za-z0-9][A-Za-z0-9._-]{0,80}
+            echo "Candidate branch already exists: $CANDIDATE_BRANCH"
+            exit 1
+          fi
+          echo "base_release_commit=$BASE_RELEASE_COMMIT" >> "$GITHUB_OUTPUT"
+          echo "candidate_branch=$CANDIDATE_BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Gate ACTUAL host trust boundary
+        env:
+          ACTUAL_HOST_TRUST_AUDIT_PATH: ${{ runner.temp }}/actual-host-trust-audit.json
+        run: node scripts/process/audit-actual-host-trust.mjs
+
+      - name: Authenticate and pull exact ACTUAL runtime
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker pull "$ACTUAL_RUNTIME_IMAGE"
+          docker image inspect "$ACTUAL_RUNTIME_IMAGE" >/dev/null
+
+      - name: Prove persisted base in a network-denied namespace
+        env:
+          BASE_RELEASE_COMMIT: ${{ steps.base.outputs.base_release_commit }}
+        run: |
+          docker run --rm \
+            --platform linux/amd64 \
+            --network none \
+            --cpuset-cpus 0 \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env NODE_OPTIONS=--jitless \
+            --env UV_THREADPOOL_SIZE=1 \
+            --env TZ=UTC \
+            --env LANG=C.UTF-8 \
+            --env LC_ALL=C.UTF-8 \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              mkdir -p "$HOME"
+              git config --global --add safe.directory /workspace
+              npm run prove:actual-network-denial
+              npm run build:actual-runtime-image-manifest
+              npm run audit:actual-runtime-image
+              npm run audit:actual-npm-dependency-bundle
+              npm run build:actual-build-environment
+              npm run audit:actual-build-environment
+              npm run audit:node-toolchain
+              ACTUAL_RELEASE_GATE_READ_ONLY=1 npm run audit:actual-release-gate
+              node scripts/process/verify-actual-persisted-base.mjs
+            '
+
+      - name: Record candidate source trigger
+        run: |
+          echo "### Candidate source trigger" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Trigger: ${{ inputs.source_trigger }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Immutable base commit: ${{ steps.base.outputs.base_release_commit }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Refresh OSM raw source: ${{ inputs.refresh_osm }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Deterministic network: docker --network none" >> "$GITHUB_STEP_SUMMARY"
+          echo "- CPU execution profile: linux/amd64, cpuset=0, Node --jitless, UV_THREADPOOL_SIZE=1" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Refresh explicitly requested sources in network-enabled control phase
+        if: inputs.refresh_ro_siruta == true || inputs.refresh_md_cuatm == true || inputs.refresh_osm == true
+        timeout-minutes: 25
+        env:
+          REFRESH_RO_SIRUTA: ${{ inputs.refresh_ro_siruta }}
+          REFRESH_MD_CUATM: ${{ inputs.refresh_md_cuatm }}
+          REFRESH_OSM: ${{ inputs.refresh_osm }}
+        run: |
+          docker run --rm \
+            --network bridge \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env REFRESH_RO_SIRUTA \
+            --env REFRESH_MD_CUATM \
+            --env REFRESH_OSM \
+            --env CUATM_REQUEST_TIMEOUT_MS=60000 \
+            --env CUATM_RETRIES=2 \
+            --env CUATM_RETRY_BACKOFF_MS=3000 \
+            --env OVERPASS_REQUEST_TIMEOUT_MS=90000 \
+            --env OVERPASS_RETRIES_PER_ENDPOINT=2 \
+            --env OVERPASS_RETRY_BACKOFF_MS=5000 \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              mkdir -p "$HOME"
+              git config --global --add safe.directory /workspace
+              npm run install:actual-offline-deps
+              if [ "$REFRESH_RO_SIRUTA" = "true" ]; then npm run import:ro-siruta; fi
+              if [ "$REFRESH_MD_CUATM" = "true" ]; then npm run import:md-cuatm; fi
+              if [ "$REFRESH_OSM" = "true" ]; then npm run import:osm; fi
+            '
+
+      - name: Run entire deterministic ACTUAL phase with kernel egress disabled
+        env:
+          BASE_RELEASE_COMMIT: ${{ steps.base.outputs.base_release_commit }}
+        run: |
+          docker run --rm \
+            --platform linux/amd64 \
+            --network none \
+            --cpuset-cpus 0 \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_BASE_REF="$BASE_RELEASE_COMMIT" \
+            --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env NODE_OPTIONS=--jitless \
+            --env UV_THREADPOOL_SIZE=1 \
+            --env TZ=UTC \
+            --env LANG=C.UTF-8 \
+            --env LC_ALL=C.UTF-8 \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash scripts/process/run-actual-deterministic-candidate.sh
+
+      - name: Write artifact-only candidate execution receipt
+        env:
+          ACTUAL_CANDIDATE_EXECUTION_RECEIPT_PATH: ${{ runner.temp }}/actual-candidate-execution-receipt.json
+          ACTUAL_SOURCE_TRIGGER: ${{ inputs.source_trigger }}
+        run: node scripts/process/write-actual-candidate-execution-receipt.mjs
+
+      - name: Read candidate disposition
+        id: disposition
+        run: |
+          STATUS="$(python3 - <<'PY'
+          import json
+          print(json.load(open('data/current/actual-release-candidate.json'))['status'])
+          PY
+          )"
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+          echo "### ACTUAL candidate disposition" >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          d=json.load(open('data/current/actual-candidate-diff.json'))
+          print(f"- Status: {d['status']}")
+          print(f"- Base snapshot: {d['base_release']['snapshot_id']}")
+          print(f"- Candidate snapshot: {d['candidate']['snapshot_id']}")
+          print(f"- Semantic content changed: {d['summary']['semantic_content_changed']}")
+          print(f"- Component hashes changed: {d['summary']['component_hash_changed_count']}")
+          print(f"- Substantive changes: {d['summary']['substantive_change_count']}")
+          PY
+
+      - name: Preserve base persisted marker
+        run: git checkout "${{ steps.base.outputs.base_release_commit }}" -- data/current/actual-release-persisted.json
+
+      - name: Commit changed candidate snapshot to isolated branch
+        if: steps.disposition.outputs.status == 'CHANGE'
+        env:
+          CANDIDATE_BRANCH: ${{ steps.base.outputs.candidate_branch }}
+        run: |
+          git checkout -b "$CANDIDATE_BRANCH"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/current/ public/data/actual-entities.json public/geo/current/ public/geo/actual/ \
+            data/sources/ro-siruta-current.json data/sources/cuatm-current.json data/sources/osm-current.json data/sources/osm-snapshots/ \
+            data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json \
+            data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json \
+            data/sources/md-balti-city-boundary-changeset-semantics.json
+          git diff --cached --quiet && { echo "Candidate generation produced no committed changes."; exit 1; }
+          SNAPSHOT_ID="$(python3 - <<'PY'
+          import json
+          print(json.load(open('data/current/actual-release-candidate.json'))['candidate']['snapshot_id'])
+          PY
+          )"
+          COMMIT_DATE="$(python3 - <<'PY'
+          import json
+          print(json.load(open('data/current/actual-release-manifest.json'))['generated_at'])
+          PY
+          )"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
+          git push origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
+          CANDIDATE_COMMIT_SHA="$(git rev-parse HEAD)"
+          echo "### Promotable ACTUAL candidate" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Branch: $CANDIDATE_BRANCH" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Snapshot: $SNAPSHOT_ID" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Candidate commit SHA: $CANDIDATE_COMMIT_SHA" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Confirm no-change candidate is terminal
+        if: steps.disposition.outputs.status == 'NO_CHANGE'
+        run: |
+          python3 - <<'PY'
+          import json
+          marker=json.load(open('data/current/actual-release-candidate.json'))
+          assert marker['base_release']['snapshot_id']==marker['candidate']['snapshot_id']
+          PY
+          echo "NO_CHANGE: release identity retained; no candidate branch or promotion PR will be created." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload candidate review bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: actual-candidate-${{ github.run_id }}
+          path: |
+            data/current/actual-release-candidate.json
+            data/current/actual-candidate-diff.json
+            ${{ runner.temp }}/actual-candidate-execution-receipt.json
+            ${{ runner.temp }}/actual-host-trust-audit.json
+            data/current/actual-network-denial-audit.json
+            data/current/actual-source-bundle-manifest.json
+            data/current/actual-source-bundle-gate.json
+            data/current/actual-review-evidence-bundle.json
+            data/current/actual-review-evidence-bundle-gate.json
+            data/current/actual-build-environment-manifest.json
+            data/current/actual-build-environment-gate.json
+            data/current/actual-runtime-image.json
+            vendor/npm/manifest.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-gate.json
+            data/current/actual-topology-audit.json
+            data/current/actual-structural-completeness-audit.json
+            data/current/actual-official-identity-audit.json
+            data/current/actual-regression-audit.json
+            data/current/actual-byte-reproducibility-audit.json
+            data/current/ro-release-gate.json
+            data/current/md-release-gate.json
+            data/sources/osm-current.json
+            data/sources/osm-snapshots/*.json.gz
+          if-no-files-found: error
+; then
+            echo "Candidate branch must stay inside the isolated actual/candidate-* namespace: $CANDIDATE_BRANCH"
+            exit 1
+          fi
+          if git ls-remote --exit-code --heads origin "refs/heads/$CANDIDATE_BRANCH" >/dev/null 2>&1; then
             echo "Candidate branch already exists: $CANDIDATE_BRANCH"
             exit 1
           fi
