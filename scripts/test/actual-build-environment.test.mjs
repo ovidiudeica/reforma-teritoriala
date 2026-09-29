@@ -21,7 +21,7 @@ test('committed ACTUAL build environment matches repository bytes and exact pins
  assert.equal(manifest.environment.network_policy?.docker_socket_mounted,false);
  assert.equal(manifest.environment.host_trust?.kernel_release,'6.17.0-1022-azure');
  assert.equal(manifest.environment.host_trust?.docker_server_version,'28.0.4');
- assert.equal(manifest.environment.host_trust?.containerd_version,'v2.3.5');
+ assert.equal(manifest.environment.host_trust?.containerd_version,'v2.3.6');
  assert.equal(manifest.environment.host_trust?.runc_version,'1.5.1');
  assert.equal(manifest.environment.host_trust?.cpu_execution_profile?.node_options,'--jitless');
 });
