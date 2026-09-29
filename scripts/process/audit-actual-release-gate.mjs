@@ -373,7 +373,7 @@ check('manifest_md_official_source_is_current',
 
 const report={
  schema_version:2,
- generated_at:new Date().toISOString(),
+ generated_at:manifest.generated_at,
  mode:'ACTUAL',
  snapshot_id:manifest.snapshot_id??null,
  manifest_path:MANIFEST,
