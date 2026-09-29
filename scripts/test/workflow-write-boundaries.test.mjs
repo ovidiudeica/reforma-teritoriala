@@ -101,15 +101,19 @@ test('candidate and promotion writes are pinned to isolated branch plus exact ca
 });
 
 test('promotion trust-chain gate separates candidate and promotion commit write boundaries',async()=>{
- const content=await readFile(join(workflowsDir,'actual-release-trust-chain-gate.yml'),'utf8');
- assert.match(content,/candidateCommit=execFileSync\('git',\['rev-parse',head\+'\^'\]/);
- assert.match(content,/candidate_commit_write_boundary_violation/);
- assert.match(content,/promotion_commit_write_boundary_violation/);
- assert.match(content,/actual-release-persisted\.json/);
- assert.match(content,/actual-candidate-promotion-audit\.json/);
- assert.match(content,/count===2/);
- assert.match(content,/promotion_audit_candidate_commit_mismatch/);
- assert.match(content,/persisted_candidate_commit_mismatch/);
+ const [workflow,audit]=await Promise.all([
+  readFile(join(workflowsDir,'actual-release-trust-chain-gate.yml'),'utf8'),
+  readFile('scripts/process/audit-actual-publication-path.mjs','utf8')
+ ]);
+ assert.match(workflow,/node scripts\/process\/audit-actual-publication-path\.mjs/);
+ assert.match(audit,/candidateCommit=git\('rev-parse',head\+'\^'\)/);
+ assert.match(audit,/candidate_commit_write_boundary_violation/);
+ assert.match(audit,/promotion_commit_write_boundary_violation/);
+ assert.match(audit,/actual-release-persisted\.json/);
+ assert.match(audit,/actual-candidate-promotion-audit\.json/);
+ assert.match(audit,/count===2/);
+ assert.match(audit,/promotion_audit_candidate_commit_mismatch/);
+ assert.match(audit,/persisted_candidate_commit_mismatch/);
 });
 
 test('review-evidence refresh stages an exact artifact allowlist',async()=>{
