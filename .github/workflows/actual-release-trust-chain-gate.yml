@@ -95,6 +95,16 @@ jobs:
             }
           }
 
+          const promotionWorkflow=await readFile(join(dir,'actual-promote-candidate.yml'),'utf8');
+          const preexecutionStep=promotionWorkflow.indexOf('Preflight candidate commit before repository code execution');
+          const firstRepoCode=promotionWorkflow.indexOf('npm run ');
+          if(preexecutionStep<0||firstRepoCode<0||preexecutionStep>firstRepoCode){
+            failures.push({issue:'promotion_preexecution_preflight_missing_or_late',workflow:'actual-promote-candidate.yml'});
+          }
+          for(const needle of ['CANDIDATE_PARENT_SHA','candidate-preexecution-paths.txt','Candidate pre-execution write-boundary violation','genuine CHANGE candidate']){
+            if(!promotionWorkflow.includes(needle))failures.push({issue:'promotion_preexecution_contract_missing',workflow:'actual-promote-candidate.yml',needle});
+          }
+
           const report={status:failures.length?'FAIL':'PASS',workflow_count:files.length,failures};
           console.log(JSON.stringify(report,null,2));
           if(failures.length)process.exit(1);
