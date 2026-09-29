@@ -56,12 +56,26 @@ jobs:
             const gitPush=/\bgit\s+push\b/.test(text);
             const prCreate=/\bgh\s+pr\s+create\b/.test(text);
             const pushesMain=/\bgit\s+push\s+origin\s+(?:(?:HEAD:)?main|refs\/heads\/main)\b/.test(text);
+            const automaticWriteTrigger=/^\s{2}(?:push|pull_request|schedule):/m.test(text);
+            const apiWrite=/\bgh\s+api\b[^\n]*(?:--method|-X)\s+(?:POST|PUT|PATCH|DELETE)\b/i.test(text)
+              || /\bcurl\b[^\n]*(?:-X|--request)\s+(?:POST|PUT|PATCH|DELETE)\b[^\n]*api\.github\.com/i.test(text)
+              || /actions\/github-script@/i.test(text);
+            const uses=[...text.matchAll(/^\s*uses:\s*([^\s#]+).*$/gm)].map(match=>match[1]);
+            const allowedUses=new Set([
+              'actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09',
+              'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02',
+              './.github/workflows/actual-candidate.yml'
+            ]);
+            const unapprovedUses=contentsWrite?uses.filter(value=>!allowedUses.has(value)):[];
 
             if(contentsWrite&&!allowedContentsWrite.has(name))failures.push({issue:'unexpected_contents_write',workflow:name});
             if(!contentsWrite&&allowedContentsWrite.has(name))failures.push({issue:'expected_contents_write_missing',workflow:name});
             if(gitPush&&!allowedPush.has(name))failures.push({issue:'unexpected_git_push',workflow:name});
             if(prCreate&&!allowedPrCreate.has(name))failures.push({issue:'unexpected_pr_create',workflow:name});
             if(pushesMain)failures.push({issue:'direct_push_to_main',workflow:name});
+            if(contentsWrite&&automaticWriteTrigger)failures.push({issue:'write_workflow_has_automatic_repository_trigger',workflow:name});
+            if(contentsWrite&&apiWrite)failures.push({issue:'write_workflow_has_unreviewed_api_write_surface',workflow:name});
+            if(unapprovedUses.length)failures.push({issue:'write_workflow_uses_unapproved_action',workflow:name,uses:unapprovedUses});
           }
 
           for(const wrapper of ['import-osm.yml','refresh-md-official.yml','refresh-ro-official.yml']){
