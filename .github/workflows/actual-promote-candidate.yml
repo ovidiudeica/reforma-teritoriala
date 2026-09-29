@@ -34,6 +34,26 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - name: Validate promotion write-boundary inputs
+        env:
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+          EXPECTED_CANDIDATE_SNAPSHOT: ${{ inputs.expected_candidate_snapshot }}
+          CONFIRM_PROMOTION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          if ! printf '%s' "$CANDIDATE_BRANCH" | grep -Eq '^actual/candidate-[a-z0-9][a-z0-9._-]{0,95}$'; then
+            echo "Promotion branch must be an ACTUAL candidate branch."
+            exit 1
+          fi
+          if ! printf '%s' "$EXPECTED_CANDIDATE_SNAPSHOT" | grep -Eq '^actual-[0-9a-f]{16}$'; then
+            echo "Candidate snapshot must match actual-<16 lowercase hex>."
+            exit 1
+          fi
+          if [ "$CONFIRM_PROMOTION" != "PROMOTE $EXPECTED_CANDIDATE_SNAPSHOT" ]; then
+            echo "Promotion confirmation does not match the exact snapshot."
+            exit 1
+          fi
+
       - name: Check out candidate
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -57,9 +77,19 @@ jobs:
       - name: Audit pinned Node/npm toolchain
         run: npm run audit:node-toolchain
 
-      - name: Capture exact current main commit
+      - name: Capture exact candidate and current main commits
         id: current_main
+        env:
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
         run: |
+          set -euo pipefail
+          git fetch --no-tags origin "refs/heads/$CANDIDATE_BRANCH:refs/remotes/origin/$CANDIDATE_BRANCH"
+          CANDIDATE_COMMIT_SHA="$(git rev-parse HEAD)"
+          REMOTE_CANDIDATE_SHA="$(git rev-parse "refs/remotes/origin/$CANDIDATE_BRANCH")"
+          if [ "$CANDIDATE_COMMIT_SHA" != "$REMOTE_CANDIDATE_SHA" ]; then
+            echo "Checked-out candidate does not match the exact remote branch head."
+            exit 1
+          fi
           git fetch origin main
           CURRENT_MAIN_SHA="$(git rev-parse refs/remotes/origin/main)"
           if ! printf '%s' "$CURRENT_MAIN_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
@@ -75,7 +105,24 @@ jobs:
             echo "Persisted base moved: candidate=$CANDIDATE_BASE_SHA current_main=$CURRENT_MAIN_SHA"
             exit 1
           fi
+          if [ "$(git rev-parse "$CANDIDATE_COMMIT_SHA^")" != "$CURRENT_MAIN_SHA" ]; then
+            echo "Candidate commit is not a direct child of the exact persisted base."
+            exit 1
+          fi
+          if [ "$(git rev-list --count "$CURRENT_MAIN_SHA..$CANDIDATE_COMMIT_SHA")" != "1" ]; then
+            echo "Candidate branch must contain exactly one candidate commit over the persisted base."
+            exit 1
+          fi
+          BAD_PATHS="$(git diff --name-only "$CURRENT_MAIN_SHA..$CANDIDATE_COMMIT_SHA" | grep -Ev '^(data/current/|public/data/actual-entities\.json$|public/geo/current/|public/geo/actual/|data/sources/ro-siruta-current\.json$|data/sources/cuatm-current\.json$|data/sources/osm-current\.json$|data/sources/osm-snapshots/|data/sources/ro-osm-official-exception-history\.json$|data/sources/ro-osm-level9-exception-history\.json$|data/sources/md-osm-multiple-representation-history\.json$|data/sources/md-balti-city-boundary-way-history\.json$|data/sources/md-balti-city-boundary-changeset-semantics\.json$)' || true)"
+          if [ -n "$BAD_PATHS" ]; then
+            echo "Candidate branch contains files outside the ACTUAL write boundary:"
+            printf '%s\n' "$BAD_PATHS"
+            exit 1
+          fi
+          CANDIDATE_TREE_SHA="$(git rev-parse "$CANDIDATE_COMMIT_SHA^{tree}")"
           echo "current_main_sha=$CURRENT_MAIN_SHA" >> "$GITHUB_OUTPUT"
+          echo "candidate_commit_sha=$CANDIDATE_COMMIT_SHA" >> "$GITHUB_OUTPUT"
+          echo "candidate_tree_sha=$CANDIDATE_TREE_SHA" >> "$GITHUB_OUTPUT"
 
       - name: Validate candidate bytes
         env:
@@ -85,6 +132,8 @@ jobs:
       - name: Prepare explicit promotion marker
         env:
           ACTUAL_BASE_REF: ${{ steps.current_main.outputs.current_main_sha }}
+          ACTUAL_CANDIDATE_COMMIT_SHA: ${{ steps.current_main.outputs.candidate_commit_sha }}
+          ACTUAL_CANDIDATE_TREE_SHA: ${{ steps.current_main.outputs.candidate_tree_sha }}
           EXPECTED_CANDIDATE_SNAPSHOT: ${{ inputs.expected_candidate_snapshot }}
           CONFIRM_PROMOTION: ${{ inputs.confirmation }}
         run: npm run prepare:actual-candidate-promotion
@@ -107,13 +156,24 @@ jobs:
       - name: Commit promotion marker on candidate branch
         env:
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
+          EXPECTED_CANDIDATE_SNAPSHOT: ${{ inputs.expected_candidate_snapshot }}
+          CANDIDATE_COMMIT_SHA: ${{ steps.current_main.outputs.candidate_commit_sha }}
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/current/actual-release-persisted.json data/current/actual-candidate-promotion-audit.json
           COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
-          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion ${{ inputs.expected_candidate_snapshot }}"
-          git push origin "HEAD:$CANDIDATE_BRANCH"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion $EXPECTED_CANDIDATE_SNAPSHOT"
+          test "$(git rev-parse HEAD^)" = "$CANDIDATE_COMMIT_SHA"
+          PROMOTION_PATHS="$(git diff-tree --no-commit-id --name-only -r HEAD | sort)"
+          EXPECTED_PATHS="$(printf '%s\n' data/current/actual-candidate-promotion-audit.json data/current/actual-release-persisted.json | sort)"
+          if [ "$PROMOTION_PATHS" != "$EXPECTED_PATHS" ]; then
+            echo "Promotion commit crossed its two-file write boundary:"
+            printf '%s\n' "$PROMOTION_PATHS"
+            exit 1
+          fi
+          git push origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
 
       - name: Open promotion pull request
         env:
@@ -123,7 +183,9 @@ jobs:
         run: |
           EXISTING="$(gh pr list --base main --head "$CANDIDATE_BRANCH" --state open --json url --jq '.[0].url // empty')"
           if [ -n "$EXISTING" ]; then
-            echo "Promotion PR already exists: $EXISTING"
+            EXISTING_HEAD="$(gh pr view "$EXISTING" --json headRefOid --jq '.headRefOid')"
+            test "$EXISTING_HEAD" = "$(git rev-parse HEAD)"
+            echo "Promotion PR already exists at the exact promotion commit: $EXISTING"
             echo "### Promotion PR" >> "$GITHUB_STEP_SUMMARY"
             echo "$EXISTING" >> "$GITHUB_STEP_SUMMARY"
             exit 0
