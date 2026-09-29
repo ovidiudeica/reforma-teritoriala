@@ -101,3 +101,29 @@ test('review-evidence refresh stages an exact artifact allowlist',async()=>{
  assert.match(content,/git add -- "\$\{ALLOWED\[@\]\}"/);
  assert.doesNotMatch(content,/git add data\/current\//);
 });
+
+
+test('candidate branch creation is confined to the isolated namespace',async()=>{
+ const content=await readFile(join(workflowsDir,'actual-candidate.yml'),'utf8');
+ assert.match(content,/Candidate branch must stay inside the isolated actual\/candidate-\* namespace/);
+ assert.match(content,/\^actual\/candidate-\[A-Za-z0-9\._-\]\+\$/);
+});
+
+test('promotion preflights untrusted candidate data before executing candidate code',async()=>{
+ const content=await readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8');
+ const namespaceStep=content.indexOf('Validate candidate branch namespace before checkout');
+ const trustedCheckout=content.indexOf('Check out trusted main for candidate preflight');
+ const preflightStep=content.indexOf('Preflight candidate ref without executing candidate code');
+ const candidateCheckout=content.indexOf('Check out exact preflighted candidate commit');
+ assert.ok(namespaceStep>=0);
+ assert.ok(trustedCheckout>namespaceStep);
+ assert.ok(preflightStep>trustedCheckout);
+ assert.ok(candidateCheckout>preflightStep);
+ assert.match(content,/CANDIDATE_PARENT_SHA/);
+ assert.match(content,/rev-list --count/);
+ assert.match(content,/candidate-preflight-paths\.txt/);
+ assert.match(content,/Candidate preflight write-boundary violation/);
+ assert.match(content,/candidate-preflight-marker\.json/);
+ assert.match(content,/genuine CHANGE candidate/);
+ assert.doesNotMatch(content,/ref:\s*\$\{\{ inputs\.candidate_branch \}\}/);
+});
