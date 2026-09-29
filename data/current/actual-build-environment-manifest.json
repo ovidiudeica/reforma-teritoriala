@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "2610cc28efa286a22bb8217a12df4d584fd51b750545dd14fc49b963bef7926a",
+  "environment_fingerprint_sha256": "30308a27b68b90540d98fed238e96d2876b99c2f7933e792cc9ea4048744b521",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -117,7 +117,7 @@
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "f15072b298d93cf0283cb237dcc9956123bad890a6791949db23aa1d7446a1d2",
+        "sha256": "cdb4a9d721d500c92277941dc396cd2eff7696e39263624f0a24196118c9f2bd",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -125,22 +125,21 @@
         "container_images": [],
         "actions": [
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
-          "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
           "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
         ],
         "runtime_env_refs": [
           "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
         ],
-        "docker_network_none_count": 6,
-        "docker_network_bridge_count": 2,
+        "docker_network_none_count": 3,
+        "docker_network_bridge_count": 1,
         "docker_socket_mounted": false,
-        "cap_drop_all_count": 6,
-        "no_new_privileges_count": 6,
-        "cpuset_cpu_zero_count": 4,
-        "node_jitless_count": 4,
-        "uv_threadpool_one_count": 4,
-        "timezone_utc_count": 4,
-        "locale_c_utf8_count": 8
+        "cap_drop_all_count": 3,
+        "no_new_privileges_count": 3,
+        "cpuset_cpu_zero_count": 2,
+        "node_jitless_count": 2,
+        "uv_threadpool_one_count": 2,
+        "timezone_utc_count": 2,
+        "locale_c_utf8_count": 4
       },
       "topology": {
         "path": ".github/workflows/actual-topology-audit.yml",
@@ -170,7 +169,7 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "2d162ec6dea492792e972f57aca5375d8f191c8861d68140259268a4d67023d6",
+        "sha256": "370120a4e2c0ca0709e1ca79233d3e9afe2f8daefa2a4ab92c0d6bee3cbf9800",
         "runs_on": [
           "ubuntu-24.04"
         ],
