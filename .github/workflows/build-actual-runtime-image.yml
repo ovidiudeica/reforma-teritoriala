@@ -26,6 +26,35 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Install exact Buildx binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          BUILDX_VERSION=v0.37.1
+          BUILDX_COMMIT=0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a
+          BUILDX_URL=https://github.com/docker/buildx/releases/download/v0.37.1/buildx-v0.37.1.linux-amd64
+          BUILDX_SHA256=9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b
+          PLUGIN="$HOME/.docker/cli-plugins/docker-buildx"
+          mkdir -p "$(dirname "$PLUGIN")"
+          curl --fail --location --retry 3 "$BUILDX_URL" --output "$PLUGIN"
+          printf '%s  %s\n' "$BUILDX_SHA256" "$PLUGIN" | sha256sum --check
+          chmod +x "$PLUGIN"
+          test "$(docker buildx version)" = "github.com/docker/buildx $BUILDX_VERSION $BUILDX_COMMIT"
+
+      - name: Bootstrap exact BuildKit builder and gate provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          BUILDER_NAME=actual-runtime-builder
+          BUILDKIT_REF=moby/buildkit:v0.33.0@sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3
+          docker buildx create \
+            --name "$BUILDER_NAME" \
+            --driver docker-container \
+            --driver-opt "image=$BUILDKIT_REF" \
+            --use
+          docker buildx inspect "$BUILDER_NAME" --bootstrap
+          ACTUAL_OCI_BUILDER_GATE_READ_ONLY=1 ACTUAL_OCI_BUILDER_RUNTIME_CHECK=1 node scripts/process/audit-actual-oci-builder.mjs
+
       - name: Resolve exact upstream Node image digest
         id: base
         shell: bash
@@ -58,6 +87,7 @@ jobs:
         shell: bash
         env:
           IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime
+          BUILDER_NAME: actual-runtime-builder
           BASE_TAG: ${{ steps.base.outputs.base_tag }}
           BASE_DIGEST: ${{ steps.base.outputs.base_digest }}
         run: |
@@ -67,7 +97,7 @@ jobs:
           DOCKERFILE_SHA256="${{ steps.base.outputs.dockerfile_sha256 }}"
           export SOURCE_DATE_EPOCH=0
           for TAG in "$TAG_A" "$TAG_B"; do
-            docker buildx build \
+            docker buildx --builder "$BUILDER_NAME" build \
               --platform linux/amd64 \
               --no-cache \
               --provenance=false \
@@ -84,7 +114,9 @@ jobs:
           DIGEST_B="$(docker buildx imagetools inspect "$IMAGE:$TAG_B" | awk '/^Digest:/ {print $2; exit}')"
           test -n "$DIGEST_A"
           test "$DIGEST_A" = "$DIGEST_B"
+          PINNED_RUNTIME_DIGEST="sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
           RUNTIME_DIGEST="$DIGEST_A"
+          test "$RUNTIME_DIGEST" = "$PINNED_RUNTIME_DIGEST"
           echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG_A" >> "$GITHUB_OUTPUT"
           echo "digest=$RUNTIME_DIGEST" >> "$GITHUB_OUTPUT"
@@ -94,6 +126,8 @@ jobs:
           echo "- Base digest: $BASE_DIGEST" >> "$GITHUB_STEP_SUMMARY"
           echo "- Dockerfile SHA-256: $DOCKERFILE_SHA256" >> "$GITHUB_STEP_SUMMARY"
           echo "- Builder workflow SHA-256: ${{ steps.base.outputs.builder_sha256 }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Buildx: v0.37.1 / 0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a" >> "$GITHUB_STEP_SUMMARY"
+          echo "- BuildKit: v0.33.0 / sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3" >> "$GITHUB_STEP_SUMMARY"
           echo "- Reproducible double-build digest: $RUNTIME_DIGEST" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Verify published runtime

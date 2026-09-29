@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "de56fadc8752f7d67c56af6fa9ede02c902b2749ab38cc4fe2270b347a8a9485",
-  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract (kernel, Docker/containerd/runc, cgroup/storage stack and CPU compatibility floor), the digest-pinned ACTUAL OCI runtime, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, host-stack, CPU-profile or network-policy drift fails closed.",
+  "environment_fingerprint_sha256": "7236c3310fb55951fd960ff536f1cee94059a1f4fad01019b322ea0b099c2a05",
+  "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
       "label": "ubuntu-24.04",
@@ -12,13 +12,25 @@
     },
     "runtime_image": {
       "manifest_path": "data/current/actual-runtime-image.json",
-      "manifest_sha256": "adcd57c754e693d64efaec74d992094a61b4479a11b005b603d9e0c1629752fa",
-      "runtime_fingerprint_sha256": "33c65232de75b24b2b11a8cc6f8ece6f1eb16a3acdf0ff1088b929a31f24ca76",
-      "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
-      "digest": "sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40",
+      "manifest_sha256": "346c3269d5b80c8ad58a615f34048d7338168efce9b636a4664d90b9953de613",
+      "runtime_fingerprint_sha256": "519a36113bce7512965d77921c7ec6493afd4c6f57e336aee5b84c4777fe1a42",
+      "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
+      "digest": "sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
       "platform": "linux/amd64",
       "base_ref": "node:24.21.0-bookworm@sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
       "base_digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4"
+    },
+    "oci_builder": {
+      "manifest_path": "data/current/actual-oci-builder.json",
+      "manifest_sha256": "41ea37ab695eda3d4aa52289c1198797be2d1c6b0b04408fd087b4b4f08ccb21",
+      "builder_fingerprint_algorithm": "actual-oci-builder-v1",
+      "builder_fingerprint_sha256": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d",
+      "buildx_version": "v0.37.1",
+      "buildx_commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+      "buildx_binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b",
+      "buildkit_version": "v0.33.0",
+      "buildkit_ref": "moby/buildkit:v0.33.0@sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+      "driver": "docker-container"
     },
     "host_trust": {
       "manifest_path": "data/current/actual-host-trust-manifest.json",
@@ -45,7 +57,7 @@
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "471a588889c0bd38b66b4a75f46903988d0355687a82b4dd7e82de5ce4fed6b9"
+        "sha256": "3add77c49b6fe643958d6a84d27bf68541fb4787047a0ce7c445569d57a7dbbc"
       },
       "package_lock": {
         "path": "package-lock.json",
@@ -75,16 +87,19 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "e540f7baca3166962483aa7967f7a81fe094ca270fd12f7dc71dfcc3132f54af",
+      "scripts/lib/actual-build-environment.mjs": "99232a54ca3ba094ade591657e32ea5cad2fb5a584e1b59b9aecaff316fdf614",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
       "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
       "scripts/process/audit-actual-npm-dependency-bundle.mjs": "521e0d7b18ea7e33fd88cb8ae0dfe74e16e46f8a5f0991c30ac1dbf7f3f7682a",
       "scripts/process/install-actual-npm-offline.mjs": "83f8fcb94b0cba5076edc6e0b9b05d6abf6420ded8e1a6b640fe42488d8f1f9e",
       "scripts/process/audit-node-toolchain.mjs": "c63882d7b4681f2f3de4d85244a8ca9d4c727d6a5bf713e9a7c7c19b43e1a861",
-      "scripts/lib/actual-runtime-image.mjs": "9bebd57d6e55beec30d1724c64886f04c0cf45857f8a5eeada77736b3c32c60f",
-      "scripts/process/build-actual-runtime-image-manifest.mjs": "48c7708071c0600b647304ae3178f22aa76bd7c5be3b5a5ce96bf5da47d17ec6",
-      "scripts/process/audit-actual-runtime-image.mjs": "7b49ff88bd07bf03fe31f21a078e565ad08ea016a397ed624e5484aa5221bd8e",
+      "scripts/lib/actual-runtime-image.mjs": "be4a9ee64e87651b439d26d72740cd0efe68950ef0445b5ca1d90ad031266acb",
+      "scripts/process/build-actual-runtime-image-manifest.mjs": "ec7cc4aa3326cd63f03a804cb77da3396a4614de92592df5dfcbbd32659ad421",
+      "scripts/process/audit-actual-runtime-image.mjs": "753c92f8f6a4054ce37c5d636bdc6d6170678ce2e74fc0f0a570b3555b106291",
+      "scripts/lib/actual-oci-builder.mjs": "54770d758d55b4ccbfebdf75e76883b436bdf123b42a30826c90f15fbc77454c",
+      "scripts/process/build-actual-oci-builder-manifest.mjs": "70ec6a6edbd613d461e8a3dc06f4fcc465657b392253de1b1c987bd249a0aac6",
+      "scripts/process/audit-actual-oci-builder.mjs": "a55c222ff3f2d4cf0da6b2e3adc3e5c04ae0786435288d8f916341ac3cf7fa97",
       "scripts/lib/actual-host-trust.mjs": "fb51153f009a985e3fa9563093bf0f161a9500971f21acf8015ec1e82a1be800",
       "scripts/process/build-actual-host-trust-manifest.mjs": "1fc82422329b8040d22df3c48994d78d4c8831d6559cf7b0a752f62399747405",
       "scripts/process/audit-actual-host-trust.mjs": "93fa81438ae47b29553d7a73d55e0f7c501e54ec5d3e1ee93e1b3736c1cf5a5e",
@@ -102,7 +117,7 @@
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "a5314072106da712500acf7951848731117496f6c7681ea97e44f35089536165",
+        "sha256": "671ef7d9930fa5d42f797d33de860db8a75f25503a71b391f47d53ed49e41421",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -113,7 +128,7 @@
           "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
         ],
         "runtime_env_refs": [
-          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
         ],
         "docker_network_none_count": 3,
         "docker_network_bridge_count": 1,
@@ -128,13 +143,13 @@
       },
       "topology": {
         "path": ".github/workflows/actual-topology-audit.yml",
-        "sha256": "d2fad7d216f46d033986664cebaa052774edf44c8dafc3f71d4c534fd2205454",
+        "sha256": "9636d1d3c9e8d343e8213a2abbfbcef102026c694693729f6abba2f0119df1b1",
         "runs_on": [
           "ubuntu-24.04"
         ],
         "node_versions": [],
         "container_images": [
-          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
         ],
         "actions": [
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
@@ -154,13 +169,13 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "257c4a82d4a54ff3513128178b50a7623f41e1462a04a5a470b961b740bc37db",
+        "sha256": "883b6a0e24c47f6290f68955eb8fdf040d7f981c0e9fd364dadc5ae9ac1f9b2f",
         "runs_on": [
           "ubuntu-24.04"
         ],
         "node_versions": [],
         "container_images": [
-          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
         ],
         "actions": [
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
@@ -179,13 +194,13 @@
       },
       "verify": {
         "path": ".github/workflows/verify-persisted-actual-release.yml",
-        "sha256": "585c7cb864abe9474cd084f98a7d4b3dc906515d55ddac42828761a145871b29",
+        "sha256": "9325d5aa1274e09f3d760e08a4feeea55ae084313446746120510375f891ff19",
         "runs_on": [
           "ubuntu-24.04"
         ],
         "node_versions": [],
         "container_images": [
-          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40"
+          "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
         ],
         "actions": [
           "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"

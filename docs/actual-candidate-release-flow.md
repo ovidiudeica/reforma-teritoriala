@@ -119,6 +119,14 @@ The candidate ordering is:
 If an OSM refresh is semantically unchanged, the manifest and gzip bytes remain stable and the candidate should terminate as `NO_CHANGE`. A substantive downstream change becomes a normal `CHANGE` candidate and can reach `main` only through explicit promotion and the protected PR path.
 
 
+## Pinned OCI builder provenance
+
+The ACTUAL runtime image is built only through an explicit, fail-closed OCI builder contract. The workflow installs the exact Buildx v0.37.1 Linux/amd64 binary and verifies its SHA-256 and release commit before use. It then creates a named `docker-container` builder from BuildKit v0.33.0 pinned by registry digest and verifies the live BuildKit version, container image reference, image ID and repository digest before any runtime build starts.
+
+`data/current/actual-oci-builder.json` is the committed builder provenance manifest; `data/current/actual-oci-builder-gate.json` is its static gate. The runtime-build workflow performs the same gate with `runtime_check=true` against the live Buildx/BuildKit processes. `actual-runtime-image.json` schema v2 cryptographically binds the builder manifest SHA/fingerprint, and the ACTUAL build-environment manifest binds both the runtime and builder provenance.
+
+Runtime construction is a no-cache double build with `SOURCE_DATE_EPOCH=0`, provenance and SBOM generation disabled, and timestamp rewriting enabled. Both builds must have identical digests and that digest must equal the committed canonical runtime digest. A Buildx/BuildKit change therefore cannot silently alter the ACTUAL runtime.
+
 ## Byte-for-byte reproducibility
 
 Release-component bytes are stabilized before candidate manifest construction.

@@ -13,7 +13,7 @@ const report={
  runtime_fingerprint_sha256:manifest.runtime_fingerprint_sha256??null,
  runtime_ref:manifest.runtime?.ref??null,
  status:validation.status,
- policy:'Fail closed unless the exact GHCR runtime digest, exact upstream base digest, Dockerfile bytes and reproducible builder contract match the committed ACTUAL OCI runtime manifest.',
+ policy:'Fail closed unless the exact GHCR runtime digest, exact upstream base digest, Dockerfile bytes, exact Buildx/BuildKit provenance and reproducible double-build contract match the committed ACTUAL OCI runtime manifest.',
  checks:validation.checks,
  failures:validation.failures
 };

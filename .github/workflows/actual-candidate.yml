@@ -71,7 +71,7 @@ jobs:
   build-candidate:
     runs-on: ubuntu-24.04
     env:
-      ACTUAL_RUNTIME_IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
+      ACTUAL_RUNTIME_IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
     steps:
       - name: Validate immutable candidate base request
         id: requested_base
