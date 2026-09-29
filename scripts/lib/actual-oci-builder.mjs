@@ -61,7 +61,7 @@ export async function inspectOciBuilderDefinition({readFileFn=readFile}={}){
   buildkit_ref_pinned:workflow.includes('BUILDKIT_REF='+e.buildkit.ref),
   docker_container_driver:workflow.includes('--driver docker-container'),
   named_builder:workflow.includes('BUILDER_NAME='+e.builder.name),
-  runtime_gate_enabled:workflow.includes('ACTUAL_OCI_BUILDER_RUNTIME_CHECK=1 npm run audit:actual-oci-builder'),
+  runtime_gate_enabled:workflow.includes('ACTUAL_OCI_BUILDER_RUNTIME_CHECK=1 node scripts/process/audit-actual-oci-builder.mjs'),
   explicit_builder_for_build:workflow.includes('docker buildx --builder "$BUILDER_NAME" build'),
   double_build_gate:workflow.includes('test "$DIGEST_A" = "$DIGEST_B"')
  };
