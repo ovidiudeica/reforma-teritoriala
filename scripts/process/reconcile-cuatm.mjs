@@ -283,7 +283,7 @@ await writeFile('data/current/md-cuatm-edge-case-audit.json',JSON.stringify({
  resolved_reviewed_overrides:{count:resolvedReviewedOverrides.length,by_category:resolvedReviewedOverrideCounts,items:resolvedReviewedOverrides},
  unresolved_review_cases:{count:unresolvedReviewCases.length,by_category:unresolvedReviewCounts,items:unresolvedReviewCases},
  items:edgeAudit
-},null,2)+'\\n');
+},null,2)+'\n');
 const mismatchMatrix=new Map();
 for(const d of noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch')){
  const parentMatch=d.osm_parent_id?matchById.get(d.osm_parent_id):null;
@@ -298,8 +298,8 @@ for(const d of noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_ma
  }
 }
 const mismatchRows=[...mismatchMatrix.values()].sort((a,b)=>b.count-a.count);
-await writeFile('data/current/md-cuatm-parent-mismatch-matrix.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',mismatch_entity_count:noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch').length,matrix_candidate_pair_count:mismatchRows.reduce((n,x)=>n+x.count,0),matrix:mismatchRows},null,2)+'\\n');
-await writeFile('data/current/md-cuatm-pair-diagnostics.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',entity_count:noKeyDiagnostics.length,by_category:diagnosticCounts,policy:'Diagnostic only. No legal fields are assigned from this file.',items:noKeyDiagnostics},null,2)+'\\n');
+await writeFile('data/current/md-cuatm-parent-mismatch-matrix.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',mismatch_entity_count:noKeyDiagnostics.filter(x=>x.diagnostic_category==='child_name_match_parent_mismatch').length,matrix_candidate_pair_count:mismatchRows.reduce((n,x)=>n+x.count,0),matrix:mismatchRows},null,2)+'\n');
+await writeFile('data/current/md-cuatm-pair-diagnostics.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',entity_count:noKeyDiagnostics.length,by_category:diagnosticCounts,policy:'Diagnostic only. No legal fields are assigned from this file.',items:noKeyDiagnostics},null,2)+'\n');
 const reasons=legalUnmatched.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const methods=matched.reduce((a,x)=>(a[x.match_method]=(a[x.match_method]||0)+1,a),{});
 const out={generated_at:new Date().toISOString(),jurisdiction:'MD',official_source:'BNS CUATM',official_source_url:official.source_url,official_snapshot_records:official.record_count,official_parent_links:official.records.filter(r=>r.parent_code).length,entity_count:matches.length,matched_count:matched.length,unmatched_count:legalUnmatched.length,non_cuatm_count:nonCuatmAllotments.length,non_cuatm_by_class:{non_cuatm_allotment_boundary:nonCuatmAllotments.length},matched_by_method:methods,unmatched_by_reason:reasons,policy:'Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.',matches};
