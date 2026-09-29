@@ -146,6 +146,7 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
  assert.notEqual(changedFp.sha256,baseFp.sha256);
 
  const candidateSnapshot='actual-'+changedFp.sha256.slice(0,16);
+ const baseCommitSha='a'.repeat(40);
  const disposition=classifyCandidateDisposition({
   baseContentFingerprint:baseFp.sha256,
   candidateContentFingerprint:changedFp.sha256,
@@ -166,6 +167,7 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   schema_version:8,
   mode:'ACTUAL',
   snapshot_id:candidateSnapshot,
+  generated_at:'2026-09-27T20:37:28.323Z',
   release_fingerprint_sha256:changedFp.sha256,
   content_fingerprint_sha256:changedFp.sha256,
   source_bundle:{bundle_fingerprint_sha256:sourceBundleFingerprint},
@@ -177,6 +179,7 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
  const gate={status:'PASS',snapshot_id:candidateSnapshot};
  const diff={
   status:'CHANGE',
+  base_ref:baseCommitSha,
   base_release:{
    snapshot_id:persisted.snapshot_id,
    release_fingerprint_sha256:persisted.release_fingerprint_sha256,
@@ -194,12 +197,12 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
  const diffBytes=Buffer.from(JSON.stringify(diff,null,2)+'\n');
  const markerCandidate={snapshot_id:candidateSnapshot,manifest_sha256:sha256(manifestBytes),source_bundle_fingerprint_sha256:sourceBundleFingerprint,review_evidence_bundle_fingerprint_sha256:reviewEvidenceFingerprint,network_denial_sha256:networkDenialSha,host_trust_fingerprint_sha256:hostTrustFingerprint,build_environment_fingerprint_sha256:buildEnvironmentFingerprint};
  const markerDiffSha256=sha256(diffBytes);
- const markerIdentity=candidateIdentityFingerprint({baseRef:'synthetic-base',baseRelease:diff.base_release,candidate:markerCandidate,diffReportSha256:markerDiffSha256});
+ const markerIdentity=candidateIdentityFingerprint({baseRef:baseCommitSha,baseRelease:diff.base_release,candidate:markerCandidate,diffReportSha256:markerDiffSha256});
  const marker={
   schema_version:2,
   mode:'ACTUAL_CANDIDATE',
   status:'CHANGE',
-  base_ref:'synthetic-base',
+  base_ref:baseCommitSha,
   base_release:diff.base_release,
   candidate:markerCandidate,
   diff_report_sha256:markerDiffSha256,
@@ -222,7 +225,8 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   actualCandidateDiffSha256:sha256(diffBytes),
   currentPersisted:persisted,
   currentManifest,
-  currentManifestSha256:sha256(currentManifestBytes)
+  currentManifestSha256:sha256(currentManifestBytes),
+  currentBaseCommitSha:baseCommitSha
  });
  assert.equal(validation.status,'PASS',JSON.stringify(validation.failures));
 
@@ -234,10 +238,24 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   actualCandidateManifestSha256:sha256(manifestBytes),
   candidateDiffSha256:marker.diff_report_sha256,
   actualCandidateDiffSha256:sha256(diffBytes),
-  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes)
+  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),currentBaseCommitSha:baseCommitSha
  });
  assert.equal(wrongSnapshot.status,'FAIL');
  assert.ok(wrongSnapshot.failures.some(x=>x.issue==='unexpected_candidate_snapshot'));
+
+ const movedBase=validateCandidatePromotion({
+  candidateMarker:marker,diff,manifest,gate,
+  expectedSnapshot:candidateSnapshot,
+  confirmation:'PROMOTE '+candidateSnapshot,
+  candidateManifestSha256:marker.candidate.manifest_sha256,
+  actualCandidateManifestSha256:sha256(manifestBytes),
+  candidateDiffSha256:marker.diff_report_sha256,
+  actualCandidateDiffSha256:sha256(diffBytes),
+  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),
+  currentBaseCommitSha:'b'.repeat(40)
+ });
+ assert.equal(movedBase.status,'FAIL');
+ assert.ok(movedBase.failures.some(x=>x.issue==='base_commit_moved'));
 
  const noChangeMarker={...marker,status:'NO_CHANGE',review_required:false,substantive_change_count:0};
  const rejectedNoChange=validateCandidatePromotion({
@@ -245,7 +263,7 @@ test('synthetic CHANGE lifecycle creates an isolated branch and exact-snapshot p
   manifest,gate,expectedSnapshot:candidateSnapshot,confirmation:'PROMOTE '+candidateSnapshot,
   candidateManifestSha256:marker.candidate.manifest_sha256,actualCandidateManifestSha256:sha256(manifestBytes),
   candidateDiffSha256:marker.diff_report_sha256,actualCandidateDiffSha256:sha256(diffBytes),
-  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes)
+  currentPersisted:persisted,currentManifest,currentManifestSha256:sha256(currentManifestBytes),currentBaseCommitSha:baseCommitSha
  });
  assert.equal(rejectedNoChange.status,'FAIL');
  assert.ok(rejectedNoChange.failures.some(x=>x.issue==='candidate_marker_not_promotable'));
@@ -354,4 +372,28 @@ test('candidate tree excludes volatile execution metadata and Git commits use de
  assert.doesNotMatch(promotion,/new Date\(\)\.toISOString\(\)/);
  assert.doesNotMatch(promotion,/source_candidate/);
  assert.match(promotionWorkflow,/GIT_AUTHOR_DATE="\$COMMIT_DATE" GIT_COMMITTER_DATE="\$COMMIT_DATE" git commit/);
+});
+
+test('candidate base is an exact trigger-time SHA through build wrappers and promotion',async()=>{
+ const [candidateWorkflow,promotionWorkflow,promotionScript,diffBuilder,roWrapper,mdWrapper,osmWrapper]=await Promise.all([
+  readFile('.github/workflows/actual-candidate.yml','utf8'),
+  readFile('.github/workflows/actual-promote-candidate.yml','utf8'),
+  readFile('scripts/process/prepare-actual-candidate-promotion.mjs','utf8'),
+  readFile('scripts/process/build-actual-candidate-diff.mjs','utf8'),
+  readFile('.github/workflows/refresh-ro-official.yml','utf8'),
+  readFile('.github/workflows/refresh-md-official.yml','utf8'),
+  readFile('.github/workflows/import-osm.yml','utf8')
+ ]);
+ assert.match(candidateWorkflow,/REQUESTED_BASE_SHA: \$\{\{ inputs\.base_release_commit \|\| github\.sha \}\}/);
+ assert.match(candidateWorkflow,/ref: \$\{\{ steps\.requested_base\.outputs\.base_release_commit \}\}/);
+ assert.doesNotMatch(candidateWorkflow,/ref:\s*main\b/);
+ assert.match(candidateWorkflow,/BASE_RELEASE_COMMIT="\$\(git rev-parse HEAD\)"/);
+ assert.match(candidateWorkflow,/\[ "\$BASE_RELEASE_COMMIT" != "\$REQUESTED_BASE_SHA" \]/);
+ assert.match(diffBuilder,/ACTUAL_BASE_REF must be an exact lowercase 40-hex commit SHA/);
+ assert.doesNotMatch(promotionScript,/\|\|'origin\/main'/);
+ assert.match(promotionWorkflow,/CURRENT_MAIN_SHA="\$\(git rev-parse refs\/remotes\/origin\/main\)"/);
+ assert.match(promotionWorkflow,/CANDIDATE_BASE_SHA="\$\(node -p/);
+ assert.match(promotionWorkflow,/\[ "\$CURRENT_MAIN_SHA" != "\$CANDIDATE_BASE_SHA" \]/);
+ assert.match(promotionWorkflow,/ACTUAL_BASE_REF: \$\{\{ steps\.current_main\.outputs\.current_main_sha \}\}/);
+ for(const wrapper of [roWrapper,mdWrapper,osmWrapper])assert.match(wrapper,/base_release_commit: \$\{\{ github\.sha \}\}/);
 });

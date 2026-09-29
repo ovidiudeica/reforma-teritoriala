@@ -57,8 +57,25 @@ jobs:
       - name: Audit pinned Node/npm toolchain
         run: npm run audit:node-toolchain
 
-      - name: Fetch current main
-        run: git fetch origin main
+      - name: Capture exact current main commit
+        id: current_main
+        run: |
+          git fetch origin main
+          CURRENT_MAIN_SHA="$(git rev-parse refs/remotes/origin/main)"
+          if ! printf '%s' "$CURRENT_MAIN_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "Current main did not resolve to an exact commit SHA: $CURRENT_MAIN_SHA"
+            exit 1
+          fi
+          CANDIDATE_BASE_SHA="$(node -p "require('./data/current/actual-release-candidate.json').base_ref")"
+          if ! printf '%s' "$CANDIDATE_BASE_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "Candidate marker does not bind an exact base commit SHA: $CANDIDATE_BASE_SHA"
+            exit 1
+          fi
+          if [ "$CURRENT_MAIN_SHA" != "$CANDIDATE_BASE_SHA" ]; then
+            echo "Persisted base moved: candidate=$CANDIDATE_BASE_SHA current_main=$CURRENT_MAIN_SHA"
+            exit 1
+          fi
+          echo "current_main_sha=$CURRENT_MAIN_SHA" >> "$GITHUB_OUTPUT"
 
       - name: Validate candidate bytes
         env:
@@ -67,7 +84,7 @@ jobs:
 
       - name: Prepare explicit promotion marker
         env:
-          ACTUAL_BASE_REF: origin/main
+          ACTUAL_BASE_REF: ${{ steps.current_main.outputs.current_main_sha }}
           EXPECTED_CANDIDATE_SNAPSHOT: ${{ inputs.expected_candidate_snapshot }}
           CONFIRM_PROMOTION: ${{ inputs.confirmation }}
         run: npm run prepare:actual-candidate-promotion

@@ -3,6 +3,11 @@ name: Build ACTUAL candidate snapshot
 on:
   workflow_dispatch:
     inputs:
+      base_release_commit:
+        description: 'Exact 40-hex persisted-base commit SHA (leave empty to bind github.sha at dispatch time)'
+        required: false
+        type: string
+        default: ''
       candidate_branch:
         description: 'New branch for this candidate (leave empty for actual/candidate-<run_id>)'
         required: false
@@ -30,6 +35,9 @@ on:
         default: 'manual'
   workflow_call:
     inputs:
+      base_release_commit:
+        required: true
+        type: string
       candidate_branch:
         required: false
         type: string
@@ -65,16 +73,33 @@ jobs:
     env:
       ACTUAL_RUNTIME_IMAGE: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:f42f3147dade3cdc7cc0765a70e4549a882015e81194ae242e709fc7aa0a0f40
     steps:
-      - name: Check out persisted release
+      - name: Validate immutable candidate base request
+        id: requested_base
+        env:
+          REQUESTED_BASE_SHA: ${{ inputs.base_release_commit || github.sha }}
+        run: |
+          if ! printf '%s' "$REQUESTED_BASE_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "Candidate base must be an exact lowercase 40-hex commit SHA: $REQUESTED_BASE_SHA"
+            exit 1
+          fi
+          echo "base_release_commit=$REQUESTED_BASE_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Check out exact persisted release commit
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          ref: main
+          ref: ${{ steps.requested_base.outputs.base_release_commit }}
           fetch-depth: 0
 
-      - name: Capture immutable candidate base
+      - name: Bind immutable candidate base
         id: base
+        env:
+          REQUESTED_BASE_SHA: ${{ steps.requested_base.outputs.base_release_commit }}
         run: |
           BASE_RELEASE_COMMIT="$(git rev-parse HEAD)"
+          if [ "$BASE_RELEASE_COMMIT" != "$REQUESTED_BASE_SHA" ]; then
+            echo "Exact candidate base mismatch: requested=$REQUESTED_BASE_SHA checked_out=$BASE_RELEASE_COMMIT"
+            exit 1
+          fi
           CANDIDATE_BRANCH="${{ inputs.candidate_branch }}"
           if [ -z "$CANDIDATE_BRANCH" ]; then CANDIDATE_BRANCH="actual/candidate-${GITHUB_RUN_ID}"; fi
           if git ls-remote --exit-code --heads origin "$CANDIDATE_BRANCH" >/dev/null 2>&1; then
@@ -139,6 +164,7 @@ jobs:
         run: |
           echo "### Candidate source trigger" >> "$GITHUB_STEP_SUMMARY"
           echo "- Trigger: ${{ inputs.source_trigger }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Immutable base commit: ${{ steps.base.outputs.base_release_commit }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh OSM raw source: ${{ inputs.refresh_osm }}" >> "$GITHUB_STEP_SUMMARY"
