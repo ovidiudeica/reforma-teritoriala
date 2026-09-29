@@ -18,13 +18,14 @@ The diff reports entity additions/removals, legal-identity changes, classificati
 
 Run **Promote ACTUAL candidate** with:
 
-1. the exact candidate branch;
+1. the exact candidate branch in the isolated `actual/candidate-*` namespace;
 2. the exact candidate snapshot id;
-3. confirmation text `PROMOTE <snapshot_id>`.
+3. the exact 40-hex candidate commit SHA emitted by the candidate workflow;
+4. confirmation text `PROMOTE <snapshot_id>`.
 
-Promotion fetches `main` once, resolves it to an exact commit SHA, and fails closed unless that SHA is byte-for-byte equal to the candidate marker's immutable base SHA. All promotion reads then use that exact SHA rather than the symbolic `origin/main` ref. Promotion also fails if any candidate manifest/diff bytes drifted or if the candidate release gate is not PASS.
+Promotion checks out the candidate commit SHA directly, verifies that the named remote candidate branch still resolves to exactly that SHA, then fetches `main` once and resolves it to an exact commit SHA. It fails closed unless the current `main` SHA equals the candidate marker's immutable base SHA. Immediately before promotion write-back, the workflow again requires HEAD to be the approved candidate commit and pushes the promotion commit with an exact `--force-with-lease` expectation on that candidate SHA. A moved branch therefore cannot be promoted by TOCTOU. Promotion also fails if any candidate manifest/diff bytes drifted or if the candidate release gate is not PASS.
 
-A successful promotion run does **not** push the candidate directly to `main`. It writes the new persisted-release marker on the candidate branch and opens a promotion PR. The required `verify-persisted-release` branch-protection check must pass before that PR can merge.
+A successful promotion run does **not** push the candidate directly to `main`. It writes the new persisted-release marker and promotion audit on the candidate branch; both record the exact promoted candidate commit SHA. The promotion PR trust-chain gate independently reconstructs the two-commit chain and verifies that the audit and persisted marker point to exactly the candidate commit immediately below the promotion commit. The required `verify-persisted-release`, `actual-change-reproducibility` and `actual-release-trust-chain` checks must pass before merge.
 
 ## Direct refreshes
 
