@@ -13,7 +13,7 @@ export const EXPECTED_BUILD_ENVIRONMENT={
  runner:{
   label:'ubuntu-24.04',
   image_os:'ubuntu24',
-  image_version:'20260920.314.1'
+  image_version:'20260927.320.1'
  },
  toolchain:{
   node:'24.21.0',
