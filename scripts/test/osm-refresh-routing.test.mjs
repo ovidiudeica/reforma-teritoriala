@@ -29,7 +29,7 @@ test('OSM source refresh is explicit and routed exclusively through ACTUAL candi
  assert.match(candidate,/refresh_osm:/);
  assert.match(candidate,/description: 'Refresh raw OSM source through Overpass before deterministic build'/);
  assert.match(candidate,/if:[^\n]*inputs\.refresh_osm == true/);
- assert.match(candidate,/echo "- Refresh OSM raw source: \$\{\{ inputs\.refresh_osm \}\}"/);
+ assert.match(candidate,/echo "- Refresh OSM raw source: \\$REFRESH_OSM"/);
  assert.match(candidate,/--network bridge/);
  assert.match(candidate,/--network none/);
  const refreshIndex=candidate.indexOf('npm run import:osm');
