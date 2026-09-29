@@ -15,6 +15,10 @@ test('committed ACTUAL host trust manifest exactly matches pinned contract',asyn
  assert.equal(validation.status,'PASS',JSON.stringify(validation.failures));
  assert.deepEqual(committed,expected);
  assert.deepEqual(EXPECTED_HOST_TRUST.cpu_contract.accepted_vendors,['AuthenticAMD','GenuineIntel']);
+ assert.deepEqual(EXPECTED_HOST_TRUST.accepted_host_profiles,[
+  {runner_image_version:'20260920.314.1',containerd:{version:'v2.3.5',git_commit:'1294c24a7da8e5a793ed378161673abe94118892'}},
+  {runner_image_version:'20260927.320.1',containerd:{version:'v2.3.6',git_commit:'ee2735368117d2eb259779949d5e75cdafec9761'}}
+ ]);
  assert.equal(EXPECTED_HOST_TRUST.cpu_contract.execution_profile.node_options,'--jitless');
  assert.equal(EXPECTED_HOST_TRUST.cpu_contract.execution_profile.cpuset_cpus,'0');
 });
