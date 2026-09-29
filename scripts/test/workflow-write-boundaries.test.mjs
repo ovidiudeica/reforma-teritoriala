@@ -83,6 +83,24 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
 });
 
 
+test('workflow write permissions match the exact audited matrix',async()=>{
+ const expected=new Map([
+  ['actual-candidate.yml',['contents']],
+  ['actual-promote-candidate.yml',['contents','pull-requests']],
+  ['build-actual-runtime-image.yml',['packages']],
+  ['import-osm.yml',['contents']],
+  ['refresh-actual-review-evidence.yml',['contents','pull-requests']],
+  ['refresh-md-official.yml',['contents']],
+  ['refresh-ro-official.yml',['contents']]
+ ]);
+ const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
+ for(const name of files){
+  const content=await readFile(join(workflowsDir,name),'utf8');
+  const actual=[...content.matchAll(/^\s+([a-z][a-z-]*):\s*write\s*$/gm)].map(match=>match[1]).sort();
+  assert.deepEqual(actual,[...(expected.get(name)??[])].sort(),name+' write permission matrix drift');
+ }
+});
+
 test('repository and package write jobs never persist checkout credentials',async()=>{
  const repositoryPushWorkflows=[
   'actual-candidate.yml',
