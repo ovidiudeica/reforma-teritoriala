@@ -147,6 +147,9 @@ test('trust-chain gate permits only exact provenance migration publication files
  assert.match(audit,/actual\\\/provenance-/);
  for(const path of [
   'data/current/actual-host-trust-manifest.json',
+  'data/current/actual-oci-builder.json',
+  'data/current/actual-oci-builder-gate.json',
+  'data/current/actual-runtime-image.json',
   'data/current/actual-build-environment-manifest.json',
   'data/current/actual-build-environment-gate.json',
   'data/current/actual-release-manifest.json',
@@ -157,6 +160,10 @@ test('trust-chain gate permits only exact provenance migration publication files
  assert.match(audit,/provenance_migration_changed_snapshot_identity/);
  assert.match(audit,/provenance_migration_changed_release_fingerprint/);
  assert.match(audit,/provenance_migration_previous_manifest_binding_missing/);
+ assert.match(audit,/provenance_migration_oci_toolchain_changed/);
+ assert.match(audit,/provenance_migration_runtime_identity_changed/);
+ assert.match(audit,/provenance_migration_oci_builder_gate_manifest_mismatch/);
+ assert.match(audit,/provenance_migration_build_environment_runtime_hash_mismatch/);
  assert.match(audit,/provenance_migration_release_gate_not_pass/);
 });
 
