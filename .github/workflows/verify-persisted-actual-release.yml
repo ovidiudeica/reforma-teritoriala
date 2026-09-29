@@ -1,4 +1,4 @@
-# Post-release read-only guard for the persisted ACTUAL snapshot.
+# Post-release read-only guard for the persisted ACTUAL snapshot plus permanent CHANGE reproducibility gate.
 name: Verify persisted ACTUAL release
 
 on:
@@ -15,7 +15,8 @@ permissions:
   packages: read
 
 jobs:
-  verify-persisted-release:
+  verify-persisted-snapshot:
+    name: verify-persisted-snapshot
     runs-on: ubuntu-24.04
     container:
       image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
@@ -23,7 +24,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Check out main
+      - name: Check out tested commit
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 1
@@ -133,3 +134,328 @@ jobs:
             git diff -- .
             exit 1
           fi
+
+  detect-repro-scope:
+    name: detect-change-repro-scope
+    runs-on: ubuntu-24.04
+    outputs:
+      relevant: ${{ steps.scope.outputs.relevant }}
+      base_sha: ${{ steps.scope.outputs.base_sha }}
+      head_sha: ${{ steps.scope.outputs.head_sha }}
+    steps:
+      - name: Check out tested commit
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
+      - name: Resolve immutable proof refs and relevance
+        id: scope
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            BASE_SHA="$PR_BASE_SHA"
+            HEAD_SHA="$PR_HEAD_SHA"
+          else
+            BASE_SHA="$GITHUB_SHA"
+            HEAD_SHA="$GITHUB_SHA"
+          fi
+          test -n "$BASE_SHA"
+          test -n "$HEAD_SHA"
+          git rev-parse "$BASE_SHA^{commit}" >/dev/null
+          git rev-parse "$HEAD_SHA^{commit}" >/dev/null
+          echo "base_sha=$BASE_SHA" >> "$GITHUB_OUTPUT"
+          echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+
+          if [ "$GITHUB_EVENT_NAME" != "pull_request" ]; then
+            echo "relevant=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > "$RUNNER_TEMP/actual-repro-changed-paths.txt"
+          cat "$RUNNER_TEMP/actual-repro-changed-paths.txt"
+          if grep -Eq '^(\.github/workflows/(actual-candidate|actual-promote-candidate|build-actual-runtime-image|verify-persisted-actual-release)\.yml|container/actual-runtime/|scripts/(process|lib|test)/|package(-lock)?\.json$|vendor/npm/|data/current/(actual-runtime-image|actual-build-environment-manifest|actual-build-environment-gate|actual-host-trust-manifest|actual-network-denial-audit|actual-oci-builder|actual-oci-builder-gate)\.json$)' "$RUNNER_TEMP/actual-repro-changed-paths.txt"; then
+            echo "relevant=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "relevant=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  actual-change-repro-build:
+    name: actual-change-repro-${{ matrix.proof }}
+    needs: detect-repro-scope
+    if: needs.detect-repro-scope.outputs.relevant == 'true'
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        proof: [A, B]
+    env:
+      BASE_RELEASE_COMMIT: ${{ needs.detect-repro-scope.outputs.base_sha }}
+      TEST_COMMIT: ${{ needs.detect-repro-scope.outputs.head_sha }}
+    steps:
+      - name: Check out exact tested commit
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ env.TEST_COMMIT }}
+          fetch-depth: 0
+
+      - name: Verify immutable refs
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$TEST_COMMIT"
+          test "$(git rev-parse "$BASE_RELEASE_COMMIT^{commit}")" = "$BASE_RELEASE_COMMIT"
+
+      - name: Resolve pinned ACTUAL runtime
+        run: |
+          set -euo pipefail
+          ACTUAL_RUNTIME_IMAGE="$(node -p "JSON.parse(require('fs').readFileSync('data/current/actual-runtime-image.json','utf8')).runtime.ref")"
+          test -n "$ACTUAL_RUNTIME_IMAGE"
+          echo "ACTUAL_RUNTIME_IMAGE=$ACTUAL_RUNTIME_IMAGE" >> "$GITHUB_ENV"
+
+      - name: Gate ACTUAL host trust boundary
+        env:
+          ACTUAL_HOST_TRUST_AUDIT_PATH: ${{ runner.temp }}/actual-host-trust-audit.json
+        run: node scripts/process/audit-actual-host-trust.mjs
+
+      - name: Authenticate and pull exact ACTUAL runtime
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker pull "$ACTUAL_RUNTIME_IMAGE"
+          docker image inspect "$ACTUAL_RUNTIME_IMAGE" >/dev/null
+
+      - name: Prove persisted base in network-denied namespace
+        run: |
+          set -euo pipefail
+          docker run --rm \
+            --platform linux/amd64 \
+            --network none \
+            --cpuset-cpus 0 \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env NODE_OPTIONS=--jitless \
+            --env UV_THREADPOOL_SIZE=1 \
+            --env TZ=UTC \
+            --env LANG=C.UTF-8 \
+            --env LC_ALL=C.UTF-8 \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              mkdir -p "$HOME"
+              git config --global --add safe.directory /workspace
+              npm run prove:actual-network-denial
+              npm run build:actual-runtime-image-manifest
+              npm run audit:actual-runtime-image
+              npm run audit:actual-npm-dependency-bundle
+              npm run build:actual-build-environment
+              npm run audit:actual-build-environment
+              npm run audit:node-toolchain
+              ACTUAL_RELEASE_GATE_READ_ONLY=1 npm run audit:actual-release-gate
+              node scripts/process/verify-actual-persisted-base.mjs
+            '
+
+      - name: Inject deterministic CUATM CHANGE fixture
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import {readFile,writeFile} from 'node:fs/promises';
+          const path='data/sources/cuatm-current.json';
+          const doc=JSON.parse(await readFile(path,'utf8'));
+          if(!Array.isArray(doc.records)||doc.records.length<1)throw new Error('CUATM fixture has no records');
+          doc.records[0].reproducibility_probe='actual-change-e2e-v1';
+          await writeFile(path,JSON.stringify(doc,null,2)+'\n');
+          NODE
+
+      - name: Run full deterministic ACTUAL candidate phase with network denied
+        run: |
+          set -euo pipefail
+          docker run --rm \
+            --platform linux/amd64 \
+            --network none \
+            --cpuset-cpus 0 \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env ACTUAL_BASE_REF="$BASE_RELEASE_COMMIT" \
+            --env ACTUAL_NETWORK_MODE=docker-network-none \
+            --env NODE_OPTIONS=--jitless \
+            --env UV_THREADPOOL_SIZE=1 \
+            --env TZ=UTC \
+            --env LANG=C.UTF-8 \
+            --env LC_ALL=C.UTF-8 \
+            --env GITHUB_ACTIONS=true \
+            --env RUNNER_OS=Linux \
+            --env HOME=/tmp/actual-home \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash scripts/process/run-actual-deterministic-candidate.sh
+
+      - name: Assert genuine CHANGE disposition
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';
+          const marker=JSON.parse(await readFile('data/current/actual-release-candidate.json','utf8'));
+          const diff=JSON.parse(await readFile('data/current/actual-candidate-diff.json','utf8'));
+          if(marker.status!=='CHANGE'||diff.status!=='CHANGE')throw new Error('Expected genuine CHANGE candidate');
+          if(diff.summary?.semantic_content_changed!==true)throw new Error('Expected semantic content change');
+          if(Number(diff.summary?.substantive_change_count||0)<1)throw new Error('Expected substantive change');
+          if(diff.official_registries?.MD?.semantic_changed!==true)throw new Error('Expected MD registry semantic change');
+          console.log(JSON.stringify({
+            status:marker.status,
+            snapshot_id:marker.candidate?.snapshot_id,
+            candidate_identity_sha256:marker.candidate_identity_sha256,
+            diff_report_sha256:marker.diff_report_sha256,
+            summary:diff.summary
+          },null,2));
+          NODE
+
+      - name: Create deterministic candidate commit locally
+        run: |
+          set -euo pipefail
+          git checkout "$BASE_RELEASE_COMMIT" -- data/current/actual-release-persisted.json
+          git checkout -b "actual/repro-local-${{ matrix.proof }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/current/ public/data/actual-entities.json public/geo/current/ public/geo/actual/ \
+            data/sources/ro-siruta-current.json data/sources/cuatm-current.json data/sources/osm-current.json data/sources/osm-snapshots/ \
+            data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json \
+            data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json \
+            data/sources/md-balti-city-boundary-changeset-semantics.json
+          git diff --cached --quiet && { echo "Expected candidate changes but index is clean"; exit 1; }
+          SNAPSHOT_ID="$(node -p "JSON.parse(require('fs').readFileSync('data/current/actual-release-candidate.json','utf8')).candidate.snapshot_id")"
+          COMMIT_DATE="$(node -p "JSON.parse(require('fs').readFileSync('data/current/actual-release-manifest.json','utf8')).generated_at")"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Build ACTUAL candidate $SNAPSHOT_ID"
+          TREE_SHA="$(git rev-parse 'HEAD^{tree}')"
+          COMMIT_SHA="$(git rev-parse HEAD)"
+          mkdir -p "$RUNNER_TEMP/change-repro-proof"
+          git archive --format=tar --output="$RUNNER_TEMP/change-repro-proof/candidate-tree.tar" "$COMMIT_SHA"
+          git ls-tree -r --full-tree "$COMMIT_SHA" > "$RUNNER_TEMP/change-repro-proof/candidate-ls-tree.txt"
+          ARCHIVE_SHA256="$(sha256sum "$RUNNER_TEMP/change-repro-proof/candidate-tree.tar" | awk '{print $1}')"
+          LS_TREE_SHA256="$(sha256sum "$RUNNER_TEMP/change-repro-proof/candidate-ls-tree.txt" | awk '{print $1}')"
+          MANIFEST_SHA256="$(sha256sum data/current/actual-release-manifest.json | awk '{print $1}')"
+          DIFF_SHA256="$(sha256sum data/current/actual-candidate-diff.json | awk '{print $1}')"
+          MARKER_SHA256="$(sha256sum data/current/actual-release-candidate.json | awk '{print $1}')"
+          cat > "$RUNNER_TEMP/change-repro-proof/proof.json" <<EOF
+          {
+            "schema_version": 1,
+            "mode": "ACTUAL_CHANGE_REPRODUCIBILITY_PROOF",
+            "base_commit_sha": "$BASE_RELEASE_COMMIT",
+            "tested_commit_sha": "$TEST_COMMIT",
+            "snapshot_id": "$SNAPSHOT_ID",
+            "tree_sha": "$TREE_SHA",
+            "commit_sha": "$COMMIT_SHA",
+            "candidate_tree_tar_sha256": "$ARCHIVE_SHA256",
+            "ls_tree_sha256": "$LS_TREE_SHA256",
+            "release_manifest_sha256": "$MANIFEST_SHA256",
+            "candidate_diff_sha256": "$DIFF_SHA256",
+            "candidate_marker_sha256": "$MARKER_SHA256"
+          }
+          EOF
+          cat "$RUNNER_TEMP/change-repro-proof/proof.json"
+
+      - name: Upload reproducibility proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: actual-change-repro-${{ github.run_id }}-${{ matrix.proof }}
+          path: ${{ runner.temp }}/change-repro-proof/
+          if-no-files-found: error
+
+  actual-change-repro-compare:
+    name: actual-change-repro-compare
+    needs:
+      - detect-repro-scope
+      - actual-change-repro-build
+    if: needs.detect-repro-scope.outputs.relevant == 'true' && needs.actual-change-repro-build.result == 'success'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download proof A
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: actual-change-repro-${{ github.run_id }}-A
+          path: ${{ runner.temp }}/proof-a
+
+      - name: Download proof B
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: actual-change-repro-${{ github.run_id }}-B
+          path: ${{ runner.temp }}/proof-b
+
+      - name: Compare candidate bytes, tree SHA and commit SHA
+        run: |
+          set -euo pipefail
+          cmp "$RUNNER_TEMP/proof-a/candidate-tree.tar" "$RUNNER_TEMP/proof-b/candidate-tree.tar"
+          cmp "$RUNNER_TEMP/proof-a/candidate-ls-tree.txt" "$RUNNER_TEMP/proof-b/candidate-ls-tree.txt"
+          PROOF_A="$RUNNER_TEMP/proof-a/proof.json" PROOF_B="$RUNNER_TEMP/proof-b/proof.json" node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';
+          const a=JSON.parse(await readFile(process.env.PROOF_A,'utf8'));
+          const b=JSON.parse(await readFile(process.env.PROOF_B,'utf8'));
+          const fields=[
+            'base_commit_sha',
+            'tested_commit_sha',
+            'snapshot_id',
+            'tree_sha',
+            'commit_sha',
+            'candidate_tree_tar_sha256',
+            'ls_tree_sha256',
+            'release_manifest_sha256',
+            'candidate_diff_sha256',
+            'candidate_marker_sha256'
+          ];
+          const mismatches=fields.filter(field=>a[field]!==b[field]).map(field=>({field,a:a[field]??null,b:b[field]??null}));
+          const report={
+            status:mismatches.length?'FAIL':'PASS',
+            base_commit_sha:a.base_commit_sha,
+            tested_commit_sha:a.tested_commit_sha,
+            snapshot_id:a.snapshot_id,
+            tree_sha:a.tree_sha,
+            commit_sha:a.commit_sha,
+            candidate_tree_tar_sha256:a.candidate_tree_tar_sha256,
+            ls_tree_sha256:a.ls_tree_sha256,
+            release_manifest_sha256:a.release_manifest_sha256,
+            candidate_diff_sha256:a.candidate_diff_sha256,
+            candidate_marker_sha256:a.candidate_marker_sha256,
+            mismatches
+          };
+          console.log(JSON.stringify(report,null,2));
+          if(mismatches.length)process.exit(1);
+          NODE
+
+  verify-persisted-release:
+    name: verify-persisted-release
+    needs:
+      - verify-persisted-snapshot
+      - detect-repro-scope
+      - actual-change-repro-build
+      - actual-change-repro-compare
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Enforce persisted release and reproducibility gates
+        env:
+          SNAPSHOT_RESULT: ${{ needs.verify-persisted-snapshot.result }}
+          SCOPE_RESULT: ${{ needs.detect-repro-scope.result }}
+          REPRO_RELEVANT: ${{ needs.detect-repro-scope.outputs.relevant }}
+          REPRO_BUILD_RESULT: ${{ needs.actual-change-repro-build.result }}
+          REPRO_COMPARE_RESULT: ${{ needs.actual-change-repro-compare.result }}
+        run: |
+          set -euo pipefail
+          test "$SNAPSHOT_RESULT" = "success"
+          test "$SCOPE_RESULT" = "success"
+          if [ "$REPRO_RELEVANT" = "true" ]; then
+            test "$REPRO_BUILD_RESULT" = "success"
+            test "$REPRO_COMPARE_RESULT" = "success"
+          fi
+          echo "verify-persisted-release: PASS"
