@@ -120,6 +120,7 @@ test('trust-chain gate permits only exact provenance migration publication files
  const audit=await readFile('scripts/process/audit-actual-publication-path.mjs','utf8');
  assert.match(audit,/actual\\\/provenance-/);
  for(const path of [
+  'data/current/actual-host-trust-manifest.json',
   'data/current/actual-build-environment-manifest.json',
   'data/current/actual-build-environment-gate.json',
   'data/current/actual-release-manifest.json',
