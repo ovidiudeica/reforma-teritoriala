@@ -7,8 +7,7 @@ const workflowsDir='.github/workflows';
 const allowedPushWorkflows=new Set([
  'actual-candidate.yml',
  'actual-promote-candidate.yml',
- 'refresh-actual-review-evidence.yml',
- 'bootstrap-hermetic-candidate.yml'
+ 'refresh-actual-review-evidence.yml'
 ]);
 
 test('only isolated ACTUAL lifecycle workflows may execute git push',async()=>{
@@ -83,6 +82,33 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
  }
 });
 
+
+test('repository and package write jobs never persist checkout credentials',async()=>{
+ const repositoryPushWorkflows=[
+  'actual-candidate.yml',
+  'actual-promote-candidate.yml',
+  'refresh-actual-review-evidence.yml'
+ ];
+ for(const name of repositoryPushWorkflows){
+  const content=await readFile(join(workflowsDir,name),'utf8');
+  assert.match(content,/persist-credentials:\s*false/,name+' must not persist checkout credentials');
+  assert.match(content,/GITHUB_TOKEN:\s*\$\{\{ github\.token \}\}/,name+' must scope the repository token to the exact write step');
+  assert.match(content,/http\.https:\/\/github\.com\/\.extraheader=AUTHORIZATION: basic \$AUTH_HEADER/,name+' must authenticate only the exact git push command');
+ }
+ const candidate=await readFile(join(workflowsDir,'actual-candidate.yml'),'utf8');
+ const promotion=await readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8');
+ const review=await readFile(join(workflowsDir,'refresh-actual-review-evidence.yml'),'utf8');
+ assert.match(candidate,/--force-with-lease="refs\/heads\/\$CANDIDATE_BRANCH:"/);
+ assert.match(promotion,/--force-with-lease="refs\/heads\/\$CANDIDATE_BRANCH:\$EXPECTED_CANDIDATE_COMMIT"/);
+ assert.match(review,/--force-with-lease="refs\/heads\/\$BRANCH:"/);
+
+ const runtime=await readFile(join(workflowsDir,'build-actual-runtime-image.yml'),'utf8');
+ assert.match(runtime,/permissions:\s*\n\s*contents:\s*read\s*\n\s*packages:\s*write/);
+ assert.match(runtime,/persist-credentials:\s*false/,'GHCR publisher must not persist a packages:write token through checkout');
+ assert.doesNotMatch(runtime,/\bcontents:\s*write\b/);
+ assert.doesNotMatch(runtime,/\bgit\s+push\b/);
+ assert.match(runtime,/branches:\s*\n\s*- 'actual\/pin-oci-runtime'/);
+});
 
 test('candidate and promotion writes are pinned to isolated branch plus exact candidate commit',async()=>{
  const [candidate,promotion]=await Promise.all([
