@@ -10,6 +10,14 @@ const resolvedBaseCommit=execFileSync('git',['rev-parse',BASE_REF+'^{commit}'],{
 if(resolvedBaseCommit!==BASE_REF)throw new Error('ACTUAL_BASE_REF did not resolve byte-for-byte to the requested current main commit SHA.');
 const EXPECTED=process.env.EXPECTED_CANDIDATE_SNAPSHOT;
 const CONFIRM=process.env.CONFIRM_PROMOTION;
+const CANDIDATE_COMMIT_SHA=process.env.ACTUAL_CANDIDATE_COMMIT_SHA;
+const CANDIDATE_TREE_SHA=process.env.ACTUAL_CANDIDATE_TREE_SHA;
+if(!CANDIDATE_COMMIT_SHA||!/^[0-9a-f]{40}$/.test(CANDIDATE_COMMIT_SHA))throw new Error('ACTUAL_CANDIDATE_COMMIT_SHA must be an exact lowercase 40-hex commit SHA.');
+if(!CANDIDATE_TREE_SHA||!/^[0-9a-f]{40}$/.test(CANDIDATE_TREE_SHA))throw new Error('ACTUAL_CANDIDATE_TREE_SHA must be an exact lowercase 40-hex tree SHA.');
+const actualCandidateCommitSha=execFileSync('git',['rev-parse','HEAD^{commit}'],{encoding:'utf8'}).trim();
+const actualCandidateTreeSha=execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim();
+const actualCandidateParentSha=execFileSync('git',['rev-parse','HEAD^'],{encoding:'utf8'}).trim();
+const actualCandidateCommitCount=Number(execFileSync('git',['rev-list','--count',BASE_REF+'..HEAD'],{encoding:'utf8'}).trim());
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const gitBuffer=path=>execFileSync('git',['show',BASE_REF+':'+path],{maxBuffer:256*1024*1024});
 const gitJson=path=>JSON.parse(gitBuffer(path).toString('utf8'));
@@ -41,7 +49,13 @@ const validation=validateCandidatePromotion({
  currentPersisted,
  currentManifest,
  currentManifestSha256,
- currentBaseCommitSha:BASE_REF
+ currentBaseCommitSha:BASE_REF,
+ candidateCommitSha:CANDIDATE_COMMIT_SHA,
+ candidateTreeSha:CANDIDATE_TREE_SHA,
+ actualCandidateCommitSha,
+ actualCandidateTreeSha,
+ actualCandidateParentSha,
+ actualCandidateCommitCount
 });
 const failures=validation.failures;
 const audit={
@@ -53,6 +67,8 @@ const audit={
  candidate:candidateMarker.candidate,
  review_required:candidateMarker.review_required,
  substantive_change_count:candidateMarker.substantive_change_count,
+ candidate_commit_sha:CANDIDATE_COMMIT_SHA,
+ candidate_tree_sha:CANDIDATE_TREE_SHA,
  confirmation:CONFIRM,
  failures,
  policy:'Only CHANGE candidates are promotable. NO_CHANGE candidates are terminal and must never create a promotion PR. CHANGE promotion still requires exact candidate bytes, passing gate and an unchanged persisted base.'
@@ -77,6 +93,8 @@ const persisted={
   review_required:candidateMarker.review_required,
   substantive_change_count:candidateMarker.substantive_change_count,
   candidate_identity_sha256:candidateMarker.candidate_identity_sha256,
+  candidate_commit_sha:CANDIDATE_COMMIT_SHA,
+  candidate_tree_sha:CANDIDATE_TREE_SHA,
   promotion_audit_path:'data/current/actual-candidate-promotion-audit.json'
  },
  policy:'Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.'
