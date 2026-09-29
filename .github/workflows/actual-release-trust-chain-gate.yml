@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  pull_request:
+  pull_request_target:
     branches:
       - main
   workflow_dispatch:
@@ -17,9 +17,10 @@ jobs:
     name: actual-release-trust-chain
     runs-on: ubuntu-24.04
     steps:
-      - name: Check out tested commit
+      - name: Check out exact tested commit
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
       - name: Audit workflow write boundaries
@@ -80,7 +81,7 @@ jobs:
           NODE
 
       - name: Validate PR publication path
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request_target'
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
