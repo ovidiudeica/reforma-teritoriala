@@ -79,6 +79,40 @@ if(/^actual\/candidate-/.test(headRef??'')){
  check(persisted.validated_release_gate_status==='PASS','persisted_gate_not_pass');
 
  console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'candidate_promotion',base,head,candidate_commit:candidateCommit,failures},null,2));
+}else if(/^actual\/provenance-/.test(headRef??'')){
+ const allowedPublication=new Set([
+  'data/current/actual-build-environment-manifest.json',
+  'data/current/actual-build-environment-gate.json',
+  'data/current/actual-release-manifest.json',
+  'data/current/actual-release-gate.json',
+  'data/current/actual-release-persisted.json'
+ ]);
+ const publicationChanged=changed.filter(publicationSurface);
+ const forbiddenPublication=publicationChanged.filter(path=>!allowedPublication.has(path));
+ const basePersisted=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-persisted.json'],{encoding:'utf8'}));
+ const headPersisted=JSON.parse(await readFile('data/current/actual-release-persisted.json','utf8'));
+ const baseManifest=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json'],{encoding:'utf8'}));
+ const headManifestBytes=await readFile('data/current/actual-release-manifest.json');
+ const headManifest=JSON.parse(headManifestBytes);
+ const buildEnvironmentBytes=await readFile('data/current/actual-build-environment-manifest.json');
+ const buildEnvironment=JSON.parse(buildEnvironmentBytes);
+ const releaseGate=JSON.parse(await readFile('data/current/actual-release-gate.json','utf8'));
+
+ check(forbiddenPublication.length===0,'provenance_migration_changed_forbidden_publication_paths',{paths:forbiddenPublication});
+ check(headManifest.snapshot_id===baseManifest.snapshot_id,'provenance_migration_changed_snapshot_identity');
+ check(headManifest.release_fingerprint_sha256===baseManifest.release_fingerprint_sha256,'provenance_migration_changed_release_fingerprint');
+ check(headManifest.content_fingerprint_sha256===baseManifest.content_fingerprint_sha256,'provenance_migration_changed_content_fingerprint');
+ check(headPersisted.snapshot_id===basePersisted.snapshot_id,'provenance_migration_persisted_snapshot_changed');
+ check(headPersisted.release_fingerprint_sha256===basePersisted.release_fingerprint_sha256,'provenance_migration_persisted_fingerprint_changed');
+ check(headPersisted.provenance_hardening?.previous_manifest_sha256===basePersisted.manifest_sha256,'provenance_migration_previous_manifest_binding_missing',{expected:basePersisted.manifest_sha256,actual:headPersisted.provenance_hardening?.previous_manifest_sha256??null});
+ check(headPersisted.manifest_sha256===sha(headManifestBytes),'provenance_migration_manifest_hash_mismatch');
+ check(headPersisted.build_environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256,'provenance_migration_build_environment_fingerprint_mismatch');
+ check(headManifest.build_environment?.environment_fingerprint_sha256===buildEnvironment.environment_fingerprint_sha256,'provenance_migration_manifest_build_environment_mismatch');
+ check(headManifest.build_environment?.sha256===sha(buildEnvironmentBytes),'provenance_migration_build_environment_hash_mismatch');
+ check(releaseGate.status==='PASS','provenance_migration_release_gate_not_pass');
+ check(releaseGate.manifest_sha256===sha(headManifestBytes),'provenance_migration_release_gate_manifest_mismatch');
+ check(headPersisted.validated_release_gate_status==='PASS','provenance_migration_persisted_gate_not_pass');
+ console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'provenance_migration',base,head,publication_changed:publicationChanged,failures},null,2));
 }else if(/^actual\/review-evidence-/.test(headRef??'')){
  const allowed=new Set([
   'data/current/ro-official-exception-audit.json',
