@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {
   maxIsoTimestamp,
@@ -53,9 +53,26 @@ const stableTimestamp=maxIsoTimestamp([
 ]);
 
 const NON_ADMIN_METADATA_COMPONENTS=new Set(['catalog','ro_geojson','md_geojson']);
+const POST_STABILIZATION_OUTPUTS=new Set([
+  OUTPUT,
+  'data/current/actual-release-manifest.json',
+  'data/current/actual-release-gate.json',
+  'data/current/actual-candidate-diff.json',
+  'data/current/actual-release-candidate.json'
+]);
+const explicitPaths=new Set(Object.values(PATHS));
+const currentJsonPaths=(await readdir('data/current',{withFileTypes:true}))
+  .filter(entry=>entry.isFile()&&entry.name.endsWith('.json'))
+  .map(entry=>'data/current/'+entry.name)
+  .filter(path=>!explicitPaths.has(path)&&!POST_STABILIZATION_OUTPUTS.has(path))
+  .sort();
+const stabilizationEntries=[
+  ...Object.entries(PATHS),
+  ...currentJsonPaths.map(path=>['aux:'+path.slice('data/current/'.length,-'.json'.length),path])
+];
 
 const results=[];
-for(const [key,path] of Object.entries(PATHS)){
+for(const [key,path] of stabilizationEntries){
   const currentBytes=await readFile(path);
   let baseBytes;
   try{
@@ -79,7 +96,6 @@ for(const [key,path] of Object.entries(PATHS)){
     semantic_equal_to_base:stabilized.semantic_equal_to_base,
     non_administrative_metadata_ignored:ignoreNonAdministrativeMetadata,
     base_sha256:baseSha,
-    before_sha256:beforeSha,
     after_sha256:afterSha,
     changed_before_stabilization:beforeSha!==baseSha,
     matches_base_after_stabilization:afterSha===baseSha,
@@ -89,16 +105,18 @@ for(const [key,path] of Object.entries(PATHS)){
 
 const nonBase=results.filter(x=>!x.matches_base_after_stabilization);
 const report={
-  schema_version:1,
+  schema_version:2,
   mode:'ACTUAL_BYTE_REPRODUCIBILITY',
   base_ref:BASE_REF,
   stable_source_timestamp:stableTimestamp,
   status:'PASS',
-  component_count:results.length,
+  stabilized_file_count:results.length,
+  release_component_count:Object.keys(PATHS).length,
+  auxiliary_data_current_json_count:currentJsonPaths.length,
   restored_or_already_base_count:results.length-nonBase.length,
-  substantive_or_source_changed_component_count:nonBase.length,
+  substantive_or_source_changed_file_count:nonBase.length,
   components:results,
-  policy:'Release-component bytes are restored exactly when current JSON differs from the persisted base only by controlled artifact-runtime metadata or object-key ordering. For catalog and master GeoJSON only, Wikipedia/Wikidata fields are additionally treated as non-administrative metadata, matching the established ACTUAL semantic fingerprint policy. All other property and geometry changes remain substantive. Stabilization is required to be idempotent.'
+  policy:'Before candidate manifest construction, every explicit release component plus every base-tracked JSON artifact under data/current that can be swept into the candidate tree is restored to exact base bytes when it differs only by controlled artifact-runtime metadata or object-key ordering. Substantive changes are canonicalized with the stable source timestamp. Raw pre-stabilization hashes are deliberately excluded because they encode runtime-clock noise. For catalog and master GeoJSON only, Wikipedia/Wikidata fields are additionally treated as non-administrative metadata. Stabilization is idempotent and fails closed if a candidate-staged base JSON cannot be read from the immutable base.'
 };
 
 await mkdir('data/current',{recursive:true});
@@ -106,9 +124,11 @@ await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({
   status:report.status,
   stable_source_timestamp:stableTimestamp,
-  component_count:report.component_count,
+  stabilized_file_count:report.stabilized_file_count,
+  release_component_count:report.release_component_count,
+  auxiliary_data_current_json_count:report.auxiliary_data_current_json_count,
   restored_or_already_base_count:report.restored_or_already_base_count,
-  substantive_or_source_changed_component_count:report.substantive_or_source_changed_component_count,
+  substantive_or_source_changed_file_count:report.substantive_or_source_changed_file_count,
   changed_before_stabilization:results.filter(x=>x.changed_before_stabilization).map(x=>x.key),
   non_base_after_stabilization:nonBase.map(x=>x.key)
 },null,2));
