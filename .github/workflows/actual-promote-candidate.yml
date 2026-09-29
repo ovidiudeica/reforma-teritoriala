@@ -110,11 +110,16 @@ jobs:
         env:
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
         run: |
+          set -euo pipefail
+          CANDIDATE_SHA="$(git rev-parse HEAD)"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/current/actual-release-persisted.json data/current/actual-candidate-promotion-audit.json
+          test "$(git diff --cached --name-only | sort)" = "$(printf '%s\n' data/current/actual-candidate-promotion-audit.json data/current/actual-release-persisted.json | sort)"
           COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
           GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion ${{ inputs.expected_candidate_snapshot }}"
+          test "$(git rev-parse HEAD^)" = "$CANDIDATE_SHA"
+          test "$(git diff --name-only "$CANDIDATE_SHA" HEAD | sort)" = "$(printf '%s\n' data/current/actual-candidate-promotion-audit.json data/current/actual-release-persisted.json | sort)"
           git push origin "HEAD:$CANDIDATE_BRANCH"
 
       - name: Open promotion pull request
