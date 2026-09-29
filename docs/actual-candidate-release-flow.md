@@ -141,3 +141,12 @@ After all reconciliation, gates, public-contract generation and release audits c
 - When every component matches the persisted base after stabilization and semantic content is unchanged, the exact base release-manifest bytes are reused as well.
 
 The byte-reproducibility audit is written to `data/current/actual-byte-reproducibility-audit.json` and included in the candidate review artifact. For a true no-change offline rebuild, the required target is `component_hash_changed_count = 0`.
+
+### Permanent CHANGE reproducibility gate
+
+The protected `verify-persisted-release` status also contains a fail-closed real `CHANGE` reproducibility gate for candidate-lifecycle changes. Two independent Ubuntu runners check out the same tested commit, bind the deterministic build to the exact persisted `main` base SHA, inject the same controlled CUATM semantic change, and execute the full deterministic candidate phase inside the pinned ACTUAL runtime with `--network none`.
+
+Each runner creates the candidate commit locally with the deterministic release-manifest timestamp and uploads a proof containing the candidate tree tarball, `git ls-tree`, tree SHA, commit SHA, release-manifest SHA-256, candidate-diff SHA-256 and candidate-marker SHA-256. A separate comparison job requires the tarballs and tree listings to be byte-identical and every proof field to match. Any mismatch, missing proof, failed build or skipped comparison when the change is in reproducibility-sensitive scope makes the required `verify-persisted-release` status fail.
+
+The expensive A/B proof is required on `main` and on pull requests that modify candidate workflows, runtime/toolchain contracts, deterministic process/library/test code, npm dependency inputs or vendored npm bytes. Pull requests outside that scope retain the persisted-release verification but skip the A/B build pair.
+
