@@ -95,6 +95,27 @@ jobs:
             }
           }
 
+          const candidateWorkflow=await readFile(join(dir,'actual-candidate.yml'),'utf8');
+          if(!/\^actual\/candidate-\[A-Za-z0-9\._-\]\+\$/.test(candidateWorkflow)){
+            failures.push({issue:'candidate_branch_namespace_not_fail_closed',workflow:'actual-candidate.yml'});
+          }
+
+          const promotionWorkflow=await readFile(join(dir,'actual-promote-candidate.yml'),'utf8');
+          const namespaceStep=promotionWorkflow.indexOf('Validate candidate branch namespace before checkout');
+          const trustedCheckout=promotionWorkflow.indexOf('Check out trusted main for candidate preflight');
+          const preflightStep=promotionWorkflow.indexOf('Preflight candidate ref without executing candidate code');
+          const candidateCheckout=promotionWorkflow.indexOf('Check out exact preflighted candidate commit');
+          if(namespaceStep<0||trustedCheckout<0||preflightStep<0||candidateCheckout<0
+             || !(namespaceStep<trustedCheckout&&trustedCheckout<preflightStep&&preflightStep<candidateCheckout)){
+            failures.push({issue:'promotion_precheckout_order_not_fail_closed',workflow:'actual-promote-candidate.yml'});
+          }
+          if(!/CANDIDATE_PARENT_SHA/.test(promotionWorkflow)
+             || !/candidate-preflight-paths\.txt/.test(promotionWorkflow)
+             || !/actual-release-candidate\.json/.test(promotionWorkflow)
+             || !/status'\) != 'CHANGE'/.test(promotionWorkflow)){
+            failures.push({issue:'promotion_candidate_preflight_contract_missing',workflow:'actual-promote-candidate.yml'});
+          }
+
           const report={status:failures.length?'FAIL':'PASS',workflow_count:files.length,failures};
           console.log(JSON.stringify(report,null,2));
           if(failures.length)process.exit(1);
