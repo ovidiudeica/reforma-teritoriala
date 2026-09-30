@@ -34,6 +34,6 @@ const report={
  policy,
  sources
 };
-await writeFile(process.env.ACTUAL_FRESHNESS_REPORT||'actual-source-freshness.json',JSON.stringify(report,null,2)+'\n');
+await writeFile('actual-source-freshness.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));
 if(report.status!=='PASS')process.exitCode=1;
