@@ -82,6 +82,9 @@ if(/^actual\/candidate-/.test(headRef??'')){
 }else if(/^actual\/provenance-/.test(headRef??'')){
  const allowedPublication=new Set([
   'data/current/actual-host-trust-manifest.json',
+  'data/current/actual-oci-builder.json',
+  'data/current/actual-oci-builder-gate.json',
+  'data/current/actual-runtime-image.json',
   'data/current/actual-build-environment-manifest.json',
   'data/current/actual-build-environment-gate.json',
   'data/current/actual-release-manifest.json',
@@ -97,6 +100,13 @@ if(/^actual\/candidate-/.test(headRef??'')){
  const headManifest=JSON.parse(headManifestBytes);
  const hostTrustBytes=await readFile('data/current/actual-host-trust-manifest.json');
  const hostTrust=JSON.parse(hostTrustBytes);
+ const baseOciBuilder=JSON.parse(execFileSync('git',['show',base+':data/current/actual-oci-builder.json'],{encoding:'utf8'}));
+ const ociBuilderBytes=await readFile('data/current/actual-oci-builder.json');
+ const ociBuilder=JSON.parse(ociBuilderBytes);
+ const ociBuilderGate=JSON.parse(await readFile('data/current/actual-oci-builder-gate.json','utf8'));
+ const baseRuntime=JSON.parse(execFileSync('git',['show',base+':data/current/actual-runtime-image.json'],{encoding:'utf8'}));
+ const runtimeBytes=await readFile('data/current/actual-runtime-image.json');
+ const runtime=JSON.parse(runtimeBytes);
  const buildEnvironmentBytes=await readFile('data/current/actual-build-environment-manifest.json');
  const buildEnvironment=JSON.parse(buildEnvironmentBytes);
  const releaseGate=JSON.parse(await readFile('data/current/actual-release-gate.json','utf8'));
@@ -109,6 +119,20 @@ if(/^actual\/candidate-/.test(headRef??'')){
  check(headPersisted.release_fingerprint_sha256===basePersisted.release_fingerprint_sha256,'provenance_migration_persisted_fingerprint_changed');
  check(headPersisted.provenance_hardening?.previous_manifest_sha256===basePersisted.manifest_sha256,'provenance_migration_previous_manifest_binding_missing',{expected:basePersisted.manifest_sha256,actual:headPersisted.provenance_hardening?.previous_manifest_sha256??null});
  check(headPersisted.manifest_sha256===sha(headManifestBytes),'provenance_migration_manifest_hash_mismatch');
+ check(JSON.stringify(ociBuilder.toolchain)===JSON.stringify(baseOciBuilder.toolchain),'provenance_migration_oci_toolchain_changed');
+ check(JSON.stringify(ociBuilder.builder)===JSON.stringify(baseOciBuilder.builder),'provenance_migration_oci_builder_contract_changed');
+ check(runtime.runtime?.digest===baseRuntime.runtime?.digest&&JSON.stringify(runtime.runtime)===JSON.stringify(baseRuntime.runtime),'provenance_migration_runtime_identity_changed',{expected:baseRuntime.runtime,actual:runtime.runtime});
+ check(runtime.source?.dockerfile?.sha256===baseRuntime.source?.dockerfile?.sha256,'provenance_migration_runtime_dockerfile_changed');
+ check(runtime.source?.builder_workflow?.sha256===ociBuilder.source?.builder_workflow?.sha256,'provenance_migration_runtime_builder_workflow_mismatch');
+ check(runtime.builder_provenance?.manifest_sha256===sha(ociBuilderBytes),'provenance_migration_runtime_builder_manifest_hash_mismatch');
+ check(runtime.builder_provenance?.builder_fingerprint_sha256===ociBuilder.builder_fingerprint_sha256,'provenance_migration_runtime_builder_fingerprint_mismatch');
+ check(ociBuilderGate.status==='PASS','provenance_migration_oci_builder_gate_not_pass');
+ check(ociBuilderGate.builder_manifest_sha256===sha(ociBuilderBytes),'provenance_migration_oci_builder_gate_manifest_mismatch');
+ check(ociBuilderGate.builder_fingerprint_sha256===ociBuilder.builder_fingerprint_sha256,'provenance_migration_oci_builder_gate_fingerprint_mismatch');
+ check(buildEnvironment.environment?.runtime_image?.manifest_sha256===sha(runtimeBytes),'provenance_migration_build_environment_runtime_hash_mismatch');
+ check(buildEnvironment.environment?.runtime_image?.runtime_fingerprint_sha256===runtime.runtime_fingerprint_sha256,'provenance_migration_build_environment_runtime_fingerprint_mismatch');
+ check(buildEnvironment.environment?.oci_builder?.manifest_sha256===sha(ociBuilderBytes),'provenance_migration_build_environment_oci_hash_mismatch');
+ check(buildEnvironment.environment?.oci_builder?.builder_fingerprint_sha256===ociBuilder.builder_fingerprint_sha256,'provenance_migration_build_environment_oci_fingerprint_mismatch');
  check(headPersisted.host_trust_fingerprint_sha256===hostTrust.host_trust_fingerprint_sha256,'provenance_migration_host_trust_fingerprint_mismatch');
  check(headManifest.host_trust?.host_trust_fingerprint_sha256===hostTrust.host_trust_fingerprint_sha256,'provenance_migration_manifest_host_trust_fingerprint_mismatch');
  check(headManifest.host_trust?.sha256===sha(hostTrustBytes),'provenance_migration_host_trust_hash_mismatch');
