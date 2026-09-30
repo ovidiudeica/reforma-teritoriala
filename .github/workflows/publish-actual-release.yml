@@ -1,0 +1,90 @@
+name: Publish immutable ACTUAL release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag, e.g. actual-v1.1.0"
+        required: true
+        type: string
+      expected_main_sha:
+        description: "Exact main commit SHA to release"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ inputs.tag }}
+      EXPECTED_SHA: ${{ inputs.expected_main_sha }}
+    steps:
+      - name: Validate release inputs and main binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$TAG" =~ ^actual-v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          main_sha="$(gh api repos/${GITHUB_REPOSITORY}/git/ref/heads/main --jq .object.sha)"
+          test "$main_sha" = "$EXPECTED_SHA"
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/$TAG" >/dev/null 2>&1; then
+            echo "Tag already exists: $TAG" >&2
+            exit 1
+          fi
+          checks="$(gh api -H 'Accept: application/vnd.github+json' "repos/${GITHUB_REPOSITORY}/commits/$EXPECTED_SHA/check-runs?per_page=100")"
+          for required in verify-persisted-release actual-change-reproducibility actual-release-trust-chain; do
+            conclusion="$(jq -r --arg n "$required" '[.check_runs[]|select(.name==$n)]|last|.conclusion // empty' <<<"$checks")"
+            test "$conclusion" = success || { echo "$required is not successful" >&2; exit 1; }
+          done
+
+      - name: Check out exact release commit
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ inputs.expected_main_sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify persisted ACTUAL release identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(jq -r .status data/current/actual-release-gate.json)" = PASS
+          echo "snapshot=$(jq -r .snapshot_id data/current/actual-release-manifest.json)" >> "$GITHUB_ENV"
+          echo "fingerprint=$(jq -r .release_fingerprint_sha256 data/current/actual-release-manifest.json)" >> "$GITHUB_ENV"
+
+      - name: Build release evidence assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-assets
+          npm sbom --package-lock-only --sbom-format cyclonedx > release-assets/actual-sbom.cdx.json
+          cp data/current/actual-release-manifest.json release-assets/
+          cp data/current/actual-source-bundle-manifest.json release-assets/
+          cp data/current/actual-review-evidence-bundle.json release-assets/
+          cp docs/actual-v1-known-limitations.md release-assets/
+          (
+            cd release-assets
+            sha256sum actual-release-manifest.json actual-source-bundle-manifest.json actual-review-evidence-bundle.json actual-sbom.cdx.json actual-v1-known-limitations.md > actual-release-checksums.sha256
+          )
+          cat > release-assets/RELEASE-NOTES.md <<EOF
+          ACTUAL release $TAG
+
+          - Commit: `$EXPECTED_SHA`
+          - Snapshot: `$snapshot`
+          - Release fingerprint: `$fingerprint`
+          - Contract: `actual-public-entity-v1`
+
+          Required admission checks were successful on the exact released commit. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.
+          EOF
+
+      - name: Create draft and upload evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$EXPECTED_SHA" --title "ACTUAL ${TAG#actual-}" --notes-file release-assets/RELEASE-NOTES.md --draft
+          gh release upload "$TAG" --repo "$GITHUB_REPOSITORY"             release-assets/actual-release-manifest.json             release-assets/actual-source-bundle-manifest.json             release-assets/actual-review-evidence-bundle.json             release-assets/actual-sbom.cdx.json             release-assets/actual-v1-known-limitations.md             release-assets/actual-release-checksums.sha256
+          gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --draft=false
