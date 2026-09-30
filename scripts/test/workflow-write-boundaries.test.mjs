@@ -54,7 +54,8 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
   'import-osm.yml',
   'refresh-actual-review-evidence.yml',
   'refresh-md-official.yml',
-  'refresh-ro-official.yml'
+  'refresh-ro-official.yml',
+  'publish-actual-release.yml'
  ]);
  const allowedUses=new Set([
   'actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09',
@@ -91,7 +92,8 @@ test('workflow write permissions match the exact audited matrix',async()=>{
   ['import-osm.yml',['contents']],
   ['refresh-actual-review-evidence.yml',['contents','pull-requests']],
   ['refresh-md-official.yml',['contents']],
-  ['refresh-ro-official.yml',['contents']]
+  ['refresh-ro-official.yml',['contents']],
+  ['publish-actual-release.yml',['contents']]
  ]);
  const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
  for(const name of files){
@@ -312,6 +314,21 @@ test('required status contexts have unique workflow owners',async()=>{
   }
   assert.deepEqual(occurrences,[owner],context+' required status owner drift');
  }
+});
+
+test('release publisher is manual, exact-SHA bound and cannot write repository branches',async()=>{
+ const workflow=await readFile(join(workflowsDir,'publish-actual-release.yml'),'utf8');
+ assert.match(workflow,/workflow_dispatch:/);
+ assert.match(workflow,/expected_main_sha:/);
+ assert.match(workflow,/main_sha=.*git\/ref\/heads\/main/);
+ for(const context of ['verify-persisted-release','actual-change-reproducibility','actual-release-trust-chain'])assert.ok(workflow.includes(context));
+ assert.match(workflow,/gh release create/);
+ assert.match(workflow,/--draft/);
+ assert.match(workflow,/actual-sbom\.cdx\.json/);
+ assert.match(workflow,/actual-release-checksums\.sha256/);
+ assert.match(workflow,/gh release edit "\$TAG".*--draft=false/);
+ assert.doesNotMatch(workflow,/\bgit(?:\s+-c\s+"[^"]*")?\s+push\b/);
+ assert.doesNotMatch(workflow,/refs\/heads\//);
 });
 
 
