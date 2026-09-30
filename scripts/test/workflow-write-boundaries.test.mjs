@@ -157,3 +157,22 @@ test('promotion validates candidate parent and write surface before repository c
  assert.match(promotion,/Candidate pre-execution marker is not a genuine CHANGE candidate/);
  assert.match(promotion,/marker\.get\('base_ref'\) != base/);
 });
+
+
+test('required status contexts have unique workflow owners',async()=>{
+ const owners=new Map([
+  ['verify-persisted-release','verify-persisted-actual-release.yml'],
+  ['actual-change-reproducibility','actual-change-reproducibility-gate.yml'],
+  ['actual-release-trust-chain','actual-release-trust-chain-gate.yml']
+ ]);
+ const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
+ const texts=new Map(await Promise.all(files.map(async name=>[name,await readFile(join(workflowsDir,name),'utf8')])));
+ for(const [context,owner] of owners){
+  const occurrences=[];
+  for(const [name,content] of texts){
+   const count=content.split('\n').filter(line=>line.trim()===`name: ${context}`).length;
+   for(let i=0;i<count;i++)occurrences.push(name);
+  }
+  assert.deepEqual(occurrences,[owner],context+' required status owner drift');
+ }
+});
