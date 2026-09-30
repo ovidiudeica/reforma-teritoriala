@@ -1,7 +1,7 @@
 # ACTUAL write-boundary audit — 2026-09-30
 
 Baseline: `15a382b85d1a5baf03b4c414eb81bb023ac1267d` (#140).
-Follow-up: #141 (`actual/provenance-write-credential-hardening`).
+Final hardening: #142 (unique required status owners) and #143 (`06a919556291bd6fddd4327b44d595b667a19b60`). #141 was closed as superseded by #143.
 
 ## Exact current workflow inventory
 
@@ -49,7 +49,14 @@ This also removes the assumption that the pinned Node container includes gh.
 - Rebind provenance without changing snapshot `actual-5383ff3db7cf3f67` or
   release fingerprint `5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc`.
 
-## Adversarial findings still requiring an independent trust root
+
+## ACTUAL v1 disposition
+
+For ACTUAL v1, the repository owner/admin is the accepted GitHub administrative trust root. The findings below remain an explicit threat-model boundary, not an unresolved defect in the v1 release: repository-controlled checks cannot independently defend against an administrator who can replace both workflow code and repository admission settings.
+
+The operational branch-protection contract and the future independent-trust-root path are recorded in `docs/actual-v1-trust-boundary.md`. This audit therefore does not claim protection against a hostile repository administrator.
+
+## Adversarial findings outside the accepted v1 trust boundary
 
 **The repository is not an unconditional fail-closed authorization boundary.**
 Green checks establish behavior of the checked-in pipeline, not that a hostile

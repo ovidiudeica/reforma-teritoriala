@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Reforma Teritorială</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -42,7 +42,7 @@
 
   <div class="status">
     <b>Release și proveniență</b>
-    <p>Identitatea juridică și reprezentarea geometrică sunt afișate separat. SIRUTA/CUATM furnizează identitatea oficială când există o reconciliere pozitivă; geometria publică este o derivată simplificată a snapshot-ului OSM validat.</p>
+    <p>Identitatea juridică și reprezentarea geometrică sunt afișate separat. SIRUTA/CUATM furnizează identitatea oficială când există o reconciliere pozitivă; geometria publică păstrează coordonatele master ale snapshot-ului OSM validat, fără simplificare.</p>
     <p id="actual-release-status">ACTUAL: verificare release…</p>
     <p id="ro-source-status">RO: verificare snapshot…</p>
     <p id="md-source-status">MD: verificare snapshot…</p>
@@ -62,7 +62,7 @@
 </aside>
 </main>
 <footer><span>Date cartografice: © OpenStreetMap contributors · identitate oficială: INS SIRUTA / BNS CUATM</span><span id="modeLabel">Mod: ACTUAL</span></footer>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="app.js"></script>
 </body>
 </html>

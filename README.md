@@ -1,76 +1,70 @@
 # Reforma Teritorială
 
-Atlas teritorial actual și istoric pentru România și Republica Moldova.
+Atlas teritorial pentru România și Republica Moldova.
 
-## Structura conceptuală
+## Stadiu
 
-Proiectul este organizat în două blocuri principale:
+**ACTUAL v1** este modulul implementat și release-uit tehnic. `ISTORIC` și `PROPUNERI` rămân faze separate de roadmap; interfața nu le prezintă ca date publicate.
 
-- **ACTUAL** — unități administrativ-teritoriale și alte delimitări teritoriale existente în prezent.
-- **ISTORIC** — unități, regiuni și delimitări care au existat în trecut, legate de o perioadă de valabilitate.
+## Arhitectură
 
-Separat, proiectul va putea conține **PROPUNERI** de reorganizare teritorială. Acestea nu trebuie confundate cu datele actuale sau istorice.
+- **ACTUAL** — unități administrativ-teritoriale și alte reprezentări teritoriale curente.
+- **ISTORIC** — corpus separat pentru unități și delimitări istorice, neimplementat în v1.
+- **PROPUNERI** — corpus separat pentru scenarii de reorganizare, neimplementat în v1.
 
-## Structura inițială a repository-ului
+Geometriile ACTUAL folosesc WGS84 / EPSG:4326. OpenStreetMap este sursa geometrică principală; SIRUTA (INS, România) și CUATM (BNS, Republica Moldova) sunt folosite pentru identitate legală/oficială și reconciliere.
+
+## Structura repository-ului
 
 ```text
-data/
-  current/       date teritoriale actuale
-  historical/    date teritoriale istorice
-  proposals/     scenarii și propuneri
-  sources/       evidența surselor și metadatelor
-
-scripts/
-  import/        import din surse externe, inclusiv OSM-Boundaries
-  process/       validare, normalizare și optimizare GIS
-
-src/             codul aplicației web
-public/geo/      date GIS optimizate pentru website
+index.html / app.js / style.css   aplicația web statică
+data/current/                     release-ul și auditurile ACTUAL
+data/sources/                     snapshot-uri, politici și dovezi de sursă
+data/historical/                  rezervat pentru ISTORIC
+data/proposals/                   rezervat pentru PROPUNERI
+public/geo/current/               geometriile master ACTUAL
+public/geo/actual/                tier-urile publice ACTUAL
+public/data/                      contractul public de entități
+scripts/import/                   refresh/import din surse externe
+scripts/process/                  build, reconciliere și gate-uri deterministe
+scripts/test/                     regression și security tests
 ```
 
-## Principii de date
+## Surse ACTUAL
 
-Fiecare obiect teritorial va păstra, pe cât posibil:
+Geometria OSM este preluată prin Overpass API în faza de refresh și este apoi fixată în snapshot-uri content-addressed. Build-ul determinist al candidate-ului rulează offline din source bundle; nu depinde de OSM-Boundaries și nu face fetch de rețea în faza deterministă.
 
-- identificator intern stabil;
-- denumire și denumiri alternative;
-- tip și categorie;
-- statut temporal: `current`, `historical` sau `proposed`;
-- `valid_from` și `valid_to`;
-- sursa și data sursei;
-- sursa geometriei;
-- identificatorul OSM, unde există;
-- nivelul administrativ OSM, unde este relevant;
-- geometria în WGS84 / EPSG:4326.
-
-## Surse cartografice
-
-Pentru blocul actual, una dintre sursele principale va fi OpenStreetMap, inclusiv geometriile administrative exportate prin OSM-Boundaries.
-
-Datele istorice vor fi documentate separat și nu vor fi deduse automat din snapshot-uri OSM.
+Snapshot-urile oficiale SIRUTA și CUATM sunt refresh-uri separate de reconcilierea deterministă și sunt incluse criptografic în source bundle.
 
 ## Release ACTUAL
 
-Snapshot-ul public ACTUAL RO+MD este identificat prin `data/current/actual-release-manifest.json`. Manifestul fixează prin SHA-256 catalogul curent, modelul administrativ, GeoJSON-urile publice, gate-urile RO/MD și snapshot-urile oficiale SIRUTA/CUATM și generează un `snapshot_id` derivat din conținut.
+Snapshot-ul public ACTUAL RO+MD este descris de `data/current/actual-release-manifest.json`. Release-ul curent este `actual-5383ff3db7cf3f67`, cu fingerprint semantic `5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc`.
 
-`data/current/actual-release-gate.json` validează fail-closed că ambele gate-uri jurisdicționale sunt `PASS`, că manifestul corespunde exact fișierelor curente și că numărătorile, versiunile surselor și fingerprint-ul nu au derivat. Aplicația publică afișează modul ACTUAL numai când acest gate combinat este `PASS`.
+`data/current/actual-release-gate.json` validează fail-closed gate-urile RO/MD, integritatea manifestului, source bundle-ul, review-evidence bundle-ul, mediul de build, network denial și contractul public.
 
 ## Contract public ACTUAL
 
-Aplicația nu consumă direct GeoJSON-urile master de zeci de MB. `scripts/process/build-actual-public-data.mjs` generează:
+`scripts/process/build-actual-public-data.mjs` generează:
 
-- `public/data/actual-entities.json` — indexul public de entități, conform `actual-public-entity-v1`;
+- `public/data/actual-entities.json` — contract `actual-public-entity-v1`;
 - `public/geo/actual/{ro,md}-overview.geojson` — limite regionale;
 - `public/geo/actual/{ro,md}-local.geojson` — UAT-uri locale;
 - `public/geo/actual/{ro,md}-detail.geojson` — sectoare, localități și reprezentări de detaliu.
 
-Contractul separă explicit `legal` de `representation`. O identitate SIRUTA/CUATM este publicată numai când reconcilierea oficială este pozitivă; lipsa unei identități este păstrată ca `null`, nu dedusă din tagurile OSM. GeoJSON-urile publice sunt împărțite pe niveluri pentru încărcare progresivă, fără simplificarea coordonatelor, și păstrează legătura prin `entity_id` către catalogul master.
+Contractul separă `legal` de `representation`. O identitate SIRUTA/CUATM este publicată numai după reconciliere pozitivă. Lipsa identității rămâne `null`; nu se deduce din geometrie sau din taguri OSM.
 
-Straturile web și indexul public sunt incluse în fingerprint-ul `actual-release-manifest.json`; gate-ul ACTUAL verifică fail-closed cardinalitatea 1:1 între catalog, contract și geometriile publice.
+GeoJSON-urile publice păstrează coordonatele geometriei master **fără simplificare**. Tier-urile există doar pentru încărcare progresivă, iar legătura cu catalogul master este păstrată prin `entity_id`.
 
+## Source bundle și reproducibilitate
 
-## Source bundle ACTUAL
+`data/current/actual-source-bundle-manifest.json` fixează bytes exacți pentru snapshot-urile OSM RO/MD și sursele oficiale SIRUTA/CUATM. Candidate lifecycle include build offline, network-denial proof, toolchain/runtime pinning și dovadă de reproducibilitate CHANGE byte-for-byte.
 
-Fiecare release ACTUAL este legat criptografic de un source bundle determinist în `data/current/actual-source-bundle-manifest.json`. Bundle-ul fixează bytes exacți pentru manifestul OSM, snapshot-urile raw OSM RO și MD, snapshot-ul oficial SIRUTA și snapshot-ul oficial CUATM. `bundle_fingerprint_sha256` este calculat canonic din identitățile criptografice ale surselor, independent de ceasul runtime.
+## Limitări și trust boundary v1
 
-`audit:actual-source-bundle` validează fail-closed că toate hash-urile declarate corespund fișierelor curente și că snapshot-urile OSM comprimate se decomprimă la SHA-256 semantic declarat. `actual-release-manifest.json` fixează atât SHA-256 al manifestului source-bundle, cât și fingerprint-ul bundle-ului; markerul persisted repetă fingerprint-ul pentru a împiedica mutarea bazei de proveniență între candidate și promotion.
+- limitările revizuite ale snapshot-ului sunt în `docs/actual-v1-known-limitations.md`;
+- trust boundary-ul acceptat pentru repository-ul personal GitHub este în `docs/actual-v1-trust-boundary.md`;
+- auditul write boundaries este în `docs/actual-write-boundary-audit.md`.
+
+## Licențiere
+
+Codul și documentația originală sunt sub MIT (`LICENSE`). Datele externe și fișierele compozite au obligații de sursă separate; vezi `DATA-LICENSING.md`.
