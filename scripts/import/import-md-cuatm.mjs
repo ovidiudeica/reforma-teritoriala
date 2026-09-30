@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
-import * as XLSX from 'xlsx';
+import * as XLSX from '@stackline/xlsx';
 
 const URL=process.env.CUATM_URL||'https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx';
 const SNAPSHOT='data/sources/cuatm-current.json';
