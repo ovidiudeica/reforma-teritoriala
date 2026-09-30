@@ -244,3 +244,6 @@ test('candidate preflight rejects merge parents and non-regular tree objects',as
  assert.match(bind,/git fetch origin main/);
  assert.match(bind,/test "\$BASE_RELEASE_COMMIT" = "\$\(git rev-parse refs\/remotes\/origin\/main\)"/);
 });
+
+
+import './actual-preexecution-objects.test.mjs';
