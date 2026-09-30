@@ -72,7 +72,7 @@ jobs:
             const packagesWrite=/^\s*packages:\s*write\s*$/m.test(text);
             const writePermissions=[...text.matchAll(/^\s+([a-z][a-z-]*):\s*write\s*$/gm)].map(match=>match[1]).sort();
             const expectedWritePermissions=[...(allowedWritePermissions.get(name)??[])].sort();
-            const gitPush=/\bgit\s+push\b/.test(text);
+            const gitPush=/\bgit(?:\s+-c\s+"[^"]*")?\s+push\b/.test(text);
             const prCreate=/\bgh\s+pr\s+create\b/.test(text);
             const pushesMain=/\bgit\s+push\s+origin\s+(?:(?:HEAD:)?main|refs\/heads\/main)\b/.test(text);
             const repositoryWriteTrigger=/^\s{2}(?:push|pull_request):/m.test(text);

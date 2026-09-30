@@ -47,3 +47,20 @@ test('deterministic runner fails closed unless the CPU execution profile is exac
  assert.match(script,/test "\$LANG" = "C\.UTF-8"/);
  assert.match(script,/test "\$LC_ALL" = "C\.UTF-8"/);
 });
+
+test('both complete approved hosts pass; unknown and mixed profiles fail closed',async()=>{
+ const {validateObservedHost}=await import('../lib/actual-host-trust.mjs');
+ const manifest=buildHostTrustManifest();
+ const contract=EXPECTED_HOST_TRUST.cpu_contract;
+ const cpu={architecture:contract.architecture,op_modes:contract.op_modes,hypervisor:contract.hypervisor,virtualization:contract.virtualization,vendor:'GenuineIntel',flags:contract.required_flags};
+ const observed=EXPECTED_HOST_TRUST.accepted_runtime_profiles.map(({id,...host})=>({...structuredClone(host),cpu}));
+ for(const host of observed)assert.equal(validateObservedHost(manifest,host).status,'PASS');
+ const unknown=structuredClone(observed[1]);unknown.runner.image_version='20990101.1.1';
+ assert.equal(validateObservedHost(manifest,unknown).status,'FAIL');
+ const mixed=structuredClone(observed[0]);mixed.docker=observed[1].docker;
+ assert.equal(validateObservedHost(manifest,mixed).status,'FAIL');
+ for(const section of ['runner','kernel','docker','engine']){
+  const changed=structuredClone(observed[1]);changed[section].unexpected='unapproved';
+  assert.equal(validateObservedHost(manifest,changed).status,'FAIL',section);
+ }
+});

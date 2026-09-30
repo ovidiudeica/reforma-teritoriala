@@ -95,13 +95,15 @@ jobs:
         id: base
         env:
           REQUESTED_BASE_SHA: ${{ steps.requested_base.outputs.base_release_commit }}
+          CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
         run: |
           BASE_RELEASE_COMMIT="$(git rev-parse HEAD)"
           if [ "$BASE_RELEASE_COMMIT" != "$REQUESTED_BASE_SHA" ]; then
             echo "Exact candidate base mismatch: requested=$REQUESTED_BASE_SHA checked_out=$BASE_RELEASE_COMMIT"
             exit 1
           fi
-          CANDIDATE_BRANCH="${{ inputs.candidate_branch }}"
+          git fetch origin main
+          test "$BASE_RELEASE_COMMIT" = "$(git rev-parse refs/remotes/origin/main)"
           if [ -z "$CANDIDATE_BRANCH" ]; then CANDIDATE_BRANCH="actual/candidate-${GITHUB_RUN_ID}"; fi
           if ! printf '%s' "$CANDIDATE_BRANCH" | grep -Eq '^actual/candidate-[A-Za-z0-9][A-Za-z0-9._-]{0,80}$'; then
             echo "Candidate branch must stay inside the isolated actual/candidate-* namespace: $CANDIDATE_BRANCH"
@@ -167,9 +169,11 @@ jobs:
             '
 
       - name: Record candidate source trigger
+        env:
+          SOURCE_TRIGGER: ${{ inputs.source_trigger }}
         run: |
           echo "### Candidate source trigger" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Trigger: ${{ inputs.source_trigger }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Trigger: $SOURCE_TRIGGER" >> "$GITHUB_STEP_SUMMARY"
           echo "- Immutable base commit: ${{ steps.base.outputs.base_release_commit }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"

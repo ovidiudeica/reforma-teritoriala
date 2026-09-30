@@ -40,10 +40,14 @@ jobs:
     steps:
       - name: Validate exact candidate request
         env:
+          EXPECTED_SNAPSHOT: ${{ inputs.expected_candidate_snapshot }}
+          CONFIRMATION: ${{ inputs.confirmation }}
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
           EXPECTED_CANDIDATE_COMMIT: ${{ inputs.expected_candidate_commit }}
         run: |
           set -euo pipefail
+          printf '%s' "$EXPECTED_SNAPSHOT" | grep -Eq '^actual-[0-9a-f]{16}$'
+          test "$CONFIRMATION" = "PROMOTE $EXPECTED_SNAPSHOT"
           if ! printf '%s' "$CANDIDATE_BRANCH" | grep -Eq '^actual/candidate-[A-Za-z0-9][A-Za-z0-9._-]{0,80}$'; then
             echo "Candidate branch must stay inside the isolated actual/candidate-* namespace: $CANDIDATE_BRANCH"
             exit 1
@@ -64,9 +68,9 @@ jobs:
         env:
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
           EXPECTED_CANDIDATE_COMMIT: ${{ inputs.expected_candidate_commit }}
-          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           test "$(git rev-parse HEAD)" = "$EXPECTED_CANDIDATE_COMMIT"
           REMOTE_CANDIDATE_COMMIT="$(git ls-remote --heads origin "refs/heads/$CANDIDATE_BRANCH" | awk '{print $1}')"
           if [ "$REMOTE_CANDIDATE_COMMIT" != "$EXPECTED_CANDIDATE_COMMIT" ]; then
@@ -81,7 +85,7 @@ jobs:
           set -euo pipefail
           git fetch origin main
           CURRENT_MAIN_SHA="$(git rev-parse refs/remotes/origin/main)"
-          CANDIDATE_PARENT_SHA="$(git rev-parse "$EXPECTED_CANDIDATE_COMMIT^")"
+          CANDIDATE_PARENT_SHA="$(git show -s --format=%P "$EXPECTED_CANDIDATE_COMMIT")"
           if [ "$CANDIDATE_PARENT_SHA" != "$CURRENT_MAIN_SHA" ]; then
             echo "Candidate must be exactly one direct child of current main: candidate_parent=$CANDIDATE_PARENT_SHA main=$CURRENT_MAIN_SHA"
             exit 1
@@ -91,10 +95,16 @@ jobs:
             exit 1
           fi
 
-          git diff --name-only "$CURRENT_MAIN_SHA" "$EXPECTED_CANDIDATE_COMMIT" > "$RUNNER_TEMP/candidate-preexecution-paths.txt"
+          git diff --no-renames --name-only -z "$CURRENT_MAIN_SHA" "$EXPECTED_CANDIDATE_COMMIT" > "$RUNNER_TEMP/candidate-preexecution-paths.txt"
           python3 - "$RUNNER_TEMP/candidate-preexecution-paths.txt" <<'PY'
-          import sys
-          paths=[line.strip() for line in open(sys.argv[1],encoding='utf8') if line.strip()]
+          import os,subprocess,sys
+          paths=[p for p in open(sys.argv[1],'rb').read().decode('utf8').split('\0') if p]
+          # Inspect tree objects, never follow a candidate-controlled symlink.
+          tree=subprocess.check_output(['git','ls-tree','-rz',os.environ['EXPECTED_CANDIDATE_COMMIT']]).split(b'\0')
+          modes={entry.split(b'\t',1)[1].decode('utf8'):entry.split(b' ',1)[0] for entry in tree if entry}
+          unsafe=[p for p in paths if p in modes and modes[p] != b'100644']
+          if unsafe:
+              raise SystemExit('Candidate contains non-regular publication objects: '+repr(unsafe))
           def allowed(path):
               return (
                   path.startswith('data/current/')
@@ -196,6 +206,8 @@ jobs:
 
       - name: Commit promotion marker on candidate branch
         env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SNAPSHOT_ID: ${{ inputs.expected_candidate_snapshot }}
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
           EXPECTED_CANDIDATE_COMMIT: ${{ inputs.expected_candidate_commit }}
         run: |
@@ -206,7 +218,7 @@ jobs:
           git add data/current/actual-release-persisted.json data/current/actual-candidate-promotion-audit.json
           git diff --cached --quiet && { echo "Promotion marker produced no committed changes."; exit 1; }
           COMMIT_DATE="$(node -p "require('./data/current/actual-release-manifest.json').generated_at")"
-          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion ${{ inputs.expected_candidate_snapshot }}"
+          GIT_AUTHOR_DATE="$COMMIT_DATE" GIT_COMMITTER_DATE="$COMMIT_DATE" git commit -m "Prepare ACTUAL promotion $SNAPSHOT_ID"
           AUTH_HEADER="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH_HEADER" push \
             --force-with-lease="refs/heads/$CANDIDATE_BRANCH:$EXPECTED_CANDIDATE_COMMIT" \
