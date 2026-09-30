@@ -88,17 +88,21 @@ const selectedStyle={color:'#b54a38',weight:3,opacity:1,fillOpacity:.12};
 const actualReleasePromise=(async()=>{
  const status=document.getElementById('actual-release-status');
  try{
-  const [manifestResponse,gateResponse]=await Promise.all([
+  const [manifestResponse,gateResponse,buildInfoResponse]=await Promise.all([
    fetch('data/current/actual-release-manifest.json',{cache:'no-cache'}),
-   fetch('data/current/actual-release-gate.json',{cache:'no-cache'})
+   fetch('data/current/actual-release-gate.json',{cache:'no-cache'}),
+   fetch('public/data/app-build-info.json',{cache:'no-cache'})
   ]);
   if(!manifestResponse.ok||!gateResponse.ok)throw new Error('Release ACTUAL indisponibil');
-  const [manifest,gate]=await Promise.all([manifestResponse.json(),gateResponse.json()]);
+  const [manifest,gate,buildInfo]=await Promise.all([
+   manifestResponse.json(),gateResponse.json(),buildInfoResponse.ok?buildInfoResponse.json():Promise.resolve(null)
+  ]);
   if(gate.status!=='PASS')throw new Error('Release ACTUAL nu a trecut gate-ul combinat');
   if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Manifestul ACTUAL nu corespunde gate-ului');
   if(manifest.public_contract?.contract!=='actual-public-entity-v1')throw new Error('Contractul public ACTUAL lipsește din manifest');
-  if(status)status.textContent='ACTUAL: '+manifest.snapshot_id+' · release validat';
-  releaseData={manifest,gate};
+  if(buildInfo?.actual_snapshot_id&&buildInfo.actual_snapshot_id!==manifest.snapshot_id)throw new Error('Build metadata nu corespunde snapshot-ului ACTUAL');
+  if(status)status.textContent='ACTUAL: '+manifest.snapshot_id+' · '+(buildInfo?.actual_release_tag||'release validat')+(buildInfo?.app_version?' · '+buildInfo.app_version:'');
+  releaseData={manifest,gate,buildInfo};
   return releaseData;
  }catch(e){
   if(status)status.textContent='ACTUAL: release indisponibil sau nevalidat';
