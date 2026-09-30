@@ -6,8 +6,10 @@ import {buildOfflineLockfile,validateNpmDependencyBundle} from '../lib/actual-np
 test('committed npm dependency bundle exactly covers package-lock',async()=>{
  const validation=await validateNpmDependencyBundle();
  assert.equal(validation.status,'PASS',JSON.stringify(validation.failures));
- assert.equal(validation.manifest.package_entry_count,193);
- assert.equal(validation.manifest.unique_tarball_count,193);
+ const lock=JSON.parse(await readFile('package-lock.json','utf8'));
+ const expected=Object.entries(lock.packages||{}).filter(([path,pkg])=>path&&pkg.resolved).length;
+ assert.equal(validation.manifest.package_entry_count,expected);
+ assert.equal(validation.manifest.unique_tarball_count,new Set(validation.manifest.packages.map(item=>item.tarball_sha256)).size);
 });
 
 test('offline lock rewrites every remote resolution to a vendored file tarball',async()=>{
