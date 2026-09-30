@@ -1,0 +1,30 @@
+name: Monitor ACTUAL source freshness
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  freshness:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out main
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Audit source freshness
+        run: node scripts/process/audit-actual-source-freshness.mjs
+      - name: Upload freshness report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: actual-source-freshness
+          path: actual-source-freshness.json
+          if-no-files-found: error
+          retention-days: 14
