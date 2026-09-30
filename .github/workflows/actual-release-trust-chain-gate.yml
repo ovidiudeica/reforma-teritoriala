@@ -52,12 +52,27 @@ jobs:
             'refresh-md-official.yml',
             'refresh-ro-official.yml'
           ]);
+          const allowedPackagesWrite=new Set([
+            'build-actual-runtime-image.yml'
+          ]);
+          const allowedWritePermissions=new Map([
+            ['actual-candidate.yml',['contents']],
+            ['actual-promote-candidate.yml',['contents','pull-requests']],
+            ['build-actual-runtime-image.yml',['packages']],
+            ['import-osm.yml',['contents']],
+            ['refresh-actual-review-evidence.yml',['contents','pull-requests']],
+            ['refresh-md-official.yml',['contents']],
+            ['refresh-ro-official.yml',['contents']]
+          ]);
 
           const failures=[];
           for(const name of files){
             const text=await readFile(join(dir,name),'utf8');
             const contentsWrite=/^\s*contents:\s*write\s*$/m.test(text);
-            const gitPush=/\bgit\s+push\b/.test(text);
+            const packagesWrite=/^\s*packages:\s*write\s*$/m.test(text);
+            const writePermissions=[...text.matchAll(/^\s+([a-z][a-z-]*):\s*write\s*$/gm)].map(match=>match[1]).sort();
+            const expectedWritePermissions=[...(allowedWritePermissions.get(name)??[])].sort();
+            const gitPush=/\bgit(?:\s+-c\s+"[^"]*")?\s+push\b/.test(text);
             const prCreate=/\bgh\s+pr\s+create\b/.test(text);
             const pushesMain=/\bgit\s+push\s+origin\s+(?:(?:HEAD:)?main|refs\/heads\/main)\b/.test(text);
             const repositoryWriteTrigger=/^\s{2}(?:push|pull_request):/m.test(text);
@@ -72,9 +87,19 @@ jobs:
               './.github/workflows/actual-candidate.yml'
             ]);
             const unapprovedUses=contentsWrite?uses.filter(value=>!allowedUses.has(value)):[];
+            const usesCheckout=uses.some(value=>value.startsWith('actions/checkout@'));
+            const checkoutCredentialPersistenceDisabled=/persist-credentials:\s*false/.test(text);
+            const scopedRepositoryToken=/GITHUB_TOKEN:\s*\$\{\{ github\.token \}\}/.test(text);
+            const oneShotGitAuth=/http\.https:\/\/github\.com\/\.extraheader=AUTHORIZATION: basic \$AUTH_HEADER/.test(text);
 
+            if(JSON.stringify(writePermissions)!==JSON.stringify(expectedWritePermissions))failures.push({issue:'workflow_write_permission_matrix_drift',workflow:name,expected:expectedWritePermissions,actual:writePermissions});
             if(contentsWrite&&!allowedContentsWrite.has(name))failures.push({issue:'unexpected_contents_write',workflow:name});
             if(!contentsWrite&&allowedContentsWrite.has(name))failures.push({issue:'expected_contents_write_missing',workflow:name});
+            if(packagesWrite&&!allowedPackagesWrite.has(name))failures.push({issue:'unexpected_packages_write',workflow:name});
+            if(!packagesWrite&&allowedPackagesWrite.has(name))failures.push({issue:'expected_packages_write_missing',workflow:name});
+            if((gitPush||packagesWrite)&&usesCheckout&&!checkoutCredentialPersistenceDisabled)failures.push({issue:'write_workflow_persists_checkout_credentials',workflow:name});
+            if(gitPush&&!scopedRepositoryToken)failures.push({issue:'git_push_missing_step_scoped_token',workflow:name});
+            if(gitPush&&!oneShotGitAuth)failures.push({issue:'git_push_missing_one_shot_auth',workflow:name});
             if(gitPush&&!allowedPush.has(name))failures.push({issue:'unexpected_git_push',workflow:name});
             if(prCreate&&!allowedPrCreate.has(name))failures.push({issue:'unexpected_pr_create',workflow:name});
             if(pushesMain)failures.push({issue:'direct_push_to_main',workflow:name});
@@ -82,7 +107,27 @@ jobs:
             if(contentsWrite&&scheduledWriteTrigger&&!allowedScheduledWrite.has(name))failures.push({issue:'unexpected_scheduled_write_workflow',workflow:name});
             if(contentsWrite&&!scheduledWriteTrigger&&allowedScheduledWrite.has(name))failures.push({issue:'expected_schedule_missing',workflow:name});
             if(contentsWrite&&apiWrite)failures.push({issue:'write_workflow_has_unreviewed_api_write_surface',workflow:name});
+            if(packagesWrite&&contentsWrite)failures.push({issue:'package_publisher_must_not_have_contents_write',workflow:name});
+            if(packagesWrite&&scheduledWriteTrigger)failures.push({issue:'package_publisher_must_not_be_scheduled',workflow:name});
+            if(packagesWrite&&prCreate)failures.push({issue:'package_publisher_must_not_create_pr',workflow:name});
             if(unapprovedUses.length)failures.push({issue:'write_workflow_uses_unapproved_action',workflow:name,uses:unapprovedUses});
+          }
+
+          const runtimePublisher=await readFile(join(dir,'build-actual-runtime-image.yml'),'utf8');
+          for(const needle of ["- 'actual/pin-oci-runtime'","persist-credentials: false",'packages: write','contents: read']){
+            if(!runtimePublisher.includes(needle))failures.push({issue:'runtime_package_write_contract_missing',workflow:'build-actual-runtime-image.yml',needle});
+          }
+
+          const candidateWorkflow=await readFile(join(dir,'actual-candidate.yml'),'utf8');
+          const reviewWorkflow=await readFile(join(dir,'refresh-actual-review-evidence.yml'),'utf8');
+          if(!candidateWorkflow.includes('docker logout ghcr.io')){
+            failures.push({issue:'candidate_ghcr_write_token_not_discarded_before_later_repository_execution',workflow:'actual-candidate.yml'});
+          }
+          for(const [workflow,text,lease] of [
+            ['actual-candidate.yml',candidateWorkflow,'--force-with-lease="refs/heads/$CANDIDATE_BRANCH:"'],
+            ['refresh-actual-review-evidence.yml',reviewWorkflow,'--force-with-lease="refs/heads/$BRANCH:"']
+          ]){
+            if(!text.includes(lease))failures.push({issue:'isolated_branch_creation_missing_absent-ref_lease',workflow,lease});
           }
 
           for(const wrapper of ['import-osm.yml','refresh-md-official.yml','refresh-ro-official.yml']){
@@ -94,6 +139,7 @@ jobs:
               failures.push({issue:'source_refresh_wrapper_contains_direct_run_step',workflow:wrapper});
             }
           }
+
 
           const jobCheckContexts=text=>{
             const lines=text.split('\n');
@@ -135,6 +181,9 @@ jobs:
           }
 
           const promotionWorkflow=await readFile(join(dir,'actual-promote-candidate.yml'),'utf8');
+          if(!promotionWorkflow.includes('--force-with-lease="refs/heads/$CANDIDATE_BRANCH:$EXPECTED_CANDIDATE_COMMIT"')){
+            failures.push({issue:'promotion_missing_exact_candidate_lease',workflow:'actual-promote-candidate.yml'});
+          }
           const preexecutionStep=promotionWorkflow.indexOf('Preflight candidate commit before repository code execution');
           const firstRepoCode=promotionWorkflow.indexOf('npm run ');
           if(preexecutionStep<0||firstRepoCode<0||preexecutionStep>firstRepoCode){

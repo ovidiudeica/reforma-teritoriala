@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "79a9eaf9943ab03f6d766558307434d12b8c3f2e72bbd35a85c4a0fd868d740f",
+  "environment_fingerprint_sha256": "a6862fc282d6f9a4b509eca5a67dbafe9e20851656fc3805a5b1594c13cf2117",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -12,8 +12,8 @@
     },
     "runtime_image": {
       "manifest_path": "data/current/actual-runtime-image.json",
-      "manifest_sha256": "346c3269d5b80c8ad58a615f34048d7338168efce9b636a4664d90b9953de613",
-      "runtime_fingerprint_sha256": "519a36113bce7512965d77921c7ec6493afd4c6f57e336aee5b84c4777fe1a42",
+      "manifest_sha256": "465a286c1e386cb938eccf3ae293a992a2ec9c92d2c9ef977931b30ad7bc83a2",
+      "runtime_fingerprint_sha256": "c403316ae786d543f664cae9964d058f7c3e1af1b0e53afa04d151b68ef461f4",
       "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
       "digest": "sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
       "platform": "linux/amd64",
@@ -22,9 +22,9 @@
     },
     "oci_builder": {
       "manifest_path": "data/current/actual-oci-builder.json",
-      "manifest_sha256": "41ea37ab695eda3d4aa52289c1198797be2d1c6b0b04408fd087b4b4f08ccb21",
+      "manifest_sha256": "97dddc0baac41e966850054add89cdacc04817bcfebcbb52b9689d161fb2c12f",
       "builder_fingerprint_algorithm": "actual-oci-builder-v1",
-      "builder_fingerprint_sha256": "efeb0bb3fbc670e0ad307f0ec65c5e63e251420e20745668d37742ab06f49d8d",
+      "builder_fingerprint_sha256": "51fd904d569aed1d18e925c30b814037e7f0c75719429552b6b8b1c02624f48a",
       "buildx_version": "v0.37.1",
       "buildx_commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
       "buildx_binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b",
@@ -87,7 +87,7 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "6b9696c7e5f05ce5da00df682136d340a37f0cafe36a94f1c558d5d5266cf038",
+      "scripts/lib/actual-build-environment.mjs": "d31a57e7cbf0112ec09bbf0c976e947f278309fe738f97335d46894a960e8ec9",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
       "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
@@ -117,7 +117,7 @@
     "workflows": {
       "candidate": {
         "path": ".github/workflows/actual-candidate.yml",
-        "sha256": "cdb4a9d721d500c92277941dc396cd2eff7696e39263624f0a24196118c9f2bd",
+        "sha256": "1cb4a529f814268ee3cb1fa468cd586a3cd6908da604f8dca25d3cf865602bed",
         "runs_on": [
           "ubuntu-24.04"
         ],
@@ -169,8 +169,9 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "2338e5ed1292d707669e66379a0cf41670755d027818c536effae986d3f23e49",
+        "sha256": "14449611fe9f20c01a44ed651a75acef29dad986da76096d995b817e6f7c2d57",
         "runs_on": [
+          "ubuntu-24.04",
           "ubuntu-24.04"
         ],
         "node_versions": [],
