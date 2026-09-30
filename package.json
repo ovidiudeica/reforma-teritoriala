@@ -58,17 +58,21 @@
     "build:actual-host-trust": "node scripts/process/build-actual-host-trust-manifest.mjs",
     "audit:actual-host-trust": "node scripts/process/audit-actual-host-trust.mjs",
     "build:actual-oci-builder": "node scripts/process/build-actual-oci-builder-manifest.mjs",
-    "audit:actual-oci-builder": "node scripts/process/audit-actual-oci-builder.mjs"
+    "audit:actual-oci-builder": "node scripts/process/audit-actual-oci-builder.mjs",
+    "audit:dependency-security": "npm audit --omit=dev --audit-level=moderate"
   },
   "dependencies": {
     "@turf/turf": "7.4.0",
     "osmtogeojson": "3.0.0-beta.5",
-    "xlsx": "0.18.5",
-    "jsts": "2.12.1"
+    "jsts": "2.12.1",
+    "@stackline/xlsx": "1.0.9"
   },
   "packageManager": "npm@11.19.0",
   "engines": {
     "node": "24.21.0",
     "npm": "11.19.0"
+  },
+  "overrides": {
+    "@xmldom/xmldom": "0.9.12"
   }
 }
