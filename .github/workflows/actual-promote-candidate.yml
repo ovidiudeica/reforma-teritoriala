@@ -29,6 +29,10 @@ concurrency:
   group: actual-candidate-promotion
   cancel-in-progress: false
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   prepare-promotion:
     runs-on: ubuntu-24.04

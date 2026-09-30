@@ -12,6 +12,10 @@ concurrency:
   group: actual-review-evidence-refresh
   cancel-in-progress: false
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   refresh:
     runs-on: ubuntu-24.04

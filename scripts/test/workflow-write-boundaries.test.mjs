@@ -247,3 +247,14 @@ test('candidate preflight rejects merge parents and non-regular tree objects',as
 
 
 import './actual-preexecution-objects.test.mjs';
+
+test('container writers select bash and callers preserve runtime pull permission',async()=>{
+ for(const name of ['actual-promote-candidate.yml','refresh-actual-review-evidence.yml']){
+  const text=await readFile(join(workflowsDir,name),'utf8');
+  assert.match(text,/defaults:\s+run:\s+shell: bash/);
+ }
+ for(const name of ['import-osm.yml','refresh-ro-official.yml','refresh-md-official.yml']){
+  const text=await readFile(join(workflowsDir,name),'utf8');
+  assert.match(text,/packages: read/);
+ }
+});
