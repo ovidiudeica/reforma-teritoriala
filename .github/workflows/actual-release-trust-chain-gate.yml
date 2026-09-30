@@ -95,6 +95,23 @@ jobs:
             }
           }
 
+          const requiredStatusOwners=new Map([
+            ['verify-persisted-release','verify-persisted-actual-release.yml'],
+            ['actual-change-reproducibility','actual-change-reproducibility-gate.yml'],
+            ['actual-release-trust-chain','actual-release-trust-chain-gate.yml']
+          ]);
+          const workflowText=new Map(await Promise.all(files.map(async name=>[name,await readFile(join(dir,name),'utf8')])));
+          for(const [context,owner] of requiredStatusOwners){
+            const occurrences=[];
+            for(const [name,text] of workflowText){
+              const count=text.split('\n').filter(line=>line.trim()===`name: ${context}`).length;
+              for(let i=0;i<count;i++)occurrences.push(name);
+            }
+            if(occurrences.length!==1||occurrences[0]!==owner){
+              failures.push({issue:'required_status_context_owner_drift',context,expected_owner:owner,occurrences});
+            }
+          }
+
           const promotionWorkflow=await readFile(join(dir,'actual-promote-candidate.yml'),'utf8');
           const preexecutionStep=promotionWorkflow.indexOf('Preflight candidate commit before repository code execution');
           const firstRepoCode=promotionWorkflow.indexOf('npm run ');
