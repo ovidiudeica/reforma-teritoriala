@@ -16,6 +16,7 @@ const PATHS={
  ro_geojson:'public/geo/current/ro-administrative.geojson',
  md_geojson:'public/geo/current/md-administrative.geojson',
  public_index:'public/data/actual-entities.json',
+ public_chunks:'public/data/actual-geometry-chunks.json',
  ro_overview:'public/geo/actual/ro-overview.geojson',
  ro_local:'public/geo/actual/ro-local.geojson',
  ro_detail:'public/geo/actual/ro-detail.geojson',
@@ -71,6 +72,7 @@ const inventory=json('inventory');
 const roGeo=json('ro_geojson');
 const mdGeo=json('md_geojson');
 const publicIndex=json('public_index');
+const publicChunks=json('public_chunks');
 const roGate=json('ro_gate');
 const mdGate=json('md_gate');
 const siruta=json('ro_official');
@@ -266,6 +268,13 @@ const manifest={
   entity_count_by_jurisdiction:publicIndex.entity_count_by_jurisdiction??null,
   legal_identity_status_counts:publicIndex.legal_identity_status_counts??null,
   sha256:components.public_index.sha256,
+  geometry_chunks:{
+   path:PATHS.public_chunks,
+   contract:publicChunks.contract??null,
+   schema_version:publicChunks.schema_version??null,
+   chunk_count:publicChunks.chunk_count??null,
+   sha256:components.public_chunks.sha256
+  },
   geometry_tiers:{
    RO:{overview:tier('RO','overview'),local:tier('RO','local'),detail:tier('RO','detail')},
    MD:{overview:tier('MD','overview'),local:tier('MD','local'),detail:tier('MD','detail')}

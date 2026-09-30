@@ -37,7 +37,8 @@ jobs:
             'import-osm.yml',
             'refresh-actual-review-evidence.yml',
             'refresh-md-official.yml',
-            'refresh-ro-official.yml'
+            'refresh-ro-official.yml',
+            'publish-actual-release.yml'
           ]);
           const allowedPush=new Set([
             'actual-candidate.yml',
@@ -62,7 +63,8 @@ jobs:
             ['import-osm.yml',['contents']],
             ['refresh-actual-review-evidence.yml',['contents','pull-requests']],
             ['refresh-md-official.yml',['contents']],
-            ['refresh-ro-official.yml',['contents']]
+            ['refresh-ro-official.yml',['contents']],
+            ['publish-actual-release.yml',['contents']]
           ]);
 
           const failures=[];

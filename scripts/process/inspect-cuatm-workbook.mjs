@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import * as XLSX from 'xlsx';
+import * as XLSX from '@stackline/xlsx';
 const URL=process.env.CUATM_URL||'https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx';
 const r=await fetch(URL,{headers:{'user-agent':'reforma-teritoriala-cuatm-schema/1.0'}});
 if(!r.ok)throw new Error('HTTP '+r.status);

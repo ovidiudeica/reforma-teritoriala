@@ -36,7 +36,7 @@
     "apply:md-reviewed-reconciliation": "node scripts/process/apply-md-reviewed-reconciliation.mjs",
     "build:actual-candidate-diff": "node scripts/process/build-actual-candidate-diff.mjs",
     "prepare:actual-candidate-promotion": "node scripts/process/prepare-actual-candidate-promotion.mjs",
-    "test:actual-candidate-lifecycle": "node --test scripts/test/actual-candidate-lifecycle.test.mjs scripts/test/actual-byte-reproducibility.test.mjs scripts/test/actual-source-bundle.test.mjs scripts/test/actual-review-evidence-bundle.test.mjs scripts/test/actual-build-environment.test.mjs scripts/test/actual-network-denial.test.mjs scripts/test/actual-host-trust.test.mjs scripts/test/actual-runtime-image.test.mjs scripts/test/actual-oci-builder.test.mjs scripts/test/npm-offline-dependency-bundle.test.mjs scripts/test/toolchain-reproducibility.test.mjs scripts/test/ro-siruta-refresh-routing.test.mjs scripts/test/md-cuatm-refresh-routing.test.mjs scripts/test/osm-refresh-routing.test.mjs scripts/test/workflow-write-boundaries.test.mjs",
+    "test:actual-candidate-lifecycle": "node --test scripts/test/actual-candidate-lifecycle.test.mjs scripts/test/actual-byte-reproducibility.test.mjs scripts/test/actual-source-bundle.test.mjs scripts/test/actual-review-evidence-bundle.test.mjs scripts/test/actual-build-environment.test.mjs scripts/test/actual-network-denial.test.mjs scripts/test/actual-host-trust.test.mjs scripts/test/actual-runtime-image.test.mjs scripts/test/actual-oci-builder.test.mjs scripts/test/npm-offline-dependency-bundle.test.mjs scripts/test/toolchain-reproducibility.test.mjs scripts/test/ro-siruta-refresh-routing.test.mjs scripts/test/md-cuatm-refresh-routing.test.mjs scripts/test/osm-refresh-routing.test.mjs scripts/test/workflow-write-boundaries.test.mjs scripts/test/dependency-security.test.mjs",
     "import:md-cuatm": "node scripts/import/import-md-cuatm.mjs",
     "build:osm-actual": "node scripts/process/build-osm-actual.mjs",
     "stabilize:actual-bytes": "node scripts/process/stabilize-actual-release-bytes.mjs",
@@ -58,17 +58,22 @@
     "build:actual-host-trust": "node scripts/process/build-actual-host-trust-manifest.mjs",
     "audit:actual-host-trust": "node scripts/process/audit-actual-host-trust.mjs",
     "build:actual-oci-builder": "node scripts/process/build-actual-oci-builder-manifest.mjs",
-    "audit:actual-oci-builder": "node scripts/process/audit-actual-oci-builder.mjs"
+    "audit:actual-oci-builder": "node scripts/process/audit-actual-oci-builder.mjs",
+    "audit:dependency-security": "npm audit --omit=dev --audit-level=moderate",
+    "audit:actual-source-freshness": "node scripts/process/audit-actual-source-freshness.mjs"
   },
   "dependencies": {
     "@turf/turf": "7.4.0",
     "osmtogeojson": "3.0.0-beta.5",
-    "xlsx": "0.18.5",
-    "jsts": "2.12.1"
+    "jsts": "2.12.1",
+    "@stackline/xlsx": "1.0.9"
   },
   "packageManager": "npm@11.19.0",
   "engines": {
     "node": "24.21.0",
     "npm": "11.19.0"
+  },
+  "overrides": {
+    "@xmldom/xmldom": "0.9.12"
   }
 }
