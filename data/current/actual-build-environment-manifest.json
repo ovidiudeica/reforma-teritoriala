@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "a6862fc282d6f9a4b509eca5a67dbafe9e20851656fc3805a5b1594c13cf2117",
+  "environment_fingerprint_sha256": "afc9355ef59493202c80e0efb761333b6ad2bf6b795a67eb33bded3de870dd7f",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -57,20 +57,20 @@
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "3add77c49b6fe643958d6a84d27bf68541fb4787047a0ce7c445569d57a7dbbc"
+        "sha256": "7e97c0e534e3128f6fb56b82ebd30c03961d2e5407976b1dd6d9cd7d0956ff22"
       },
       "package_lock": {
         "path": "package-lock.json",
-        "sha256": "752642db96fd5ffb17a01466e7e81d74c25add0466fa2f5327e2a65dd6fdbff6",
+        "sha256": "e32fc58a9f1e5fcd0c308d76a60adc39fdc3597d135ec4a2bcad06db1314b977",
         "lockfile_version": 3
       },
       "dependency_bundle": {
         "manifest_path": "vendor/npm/manifest.json",
-        "manifest_sha256": "088d3f1b0b51063ff06850882cb3ff5e60e3028adfedc78f25c926bf90afdcea",
+        "manifest_sha256": "ae9a7222300062606bbfecdeedb60bd039ea5d182ac7d66ebf1d7917bfdfee4f",
         "archive_path": "vendor/npm/npm-dependency-bundle.tar",
-        "archive_sha256": "eb5f7eb0614909dc51052ded4614d5d5d478257e57729d06769cf5940854defb",
-        "bundle_fingerprint_sha256": "8798eb37107586f3b33235330f441fffd18dc2e62a36d1b0bd72c22bff1b99a2",
-        "package_entry_count": 193
+        "archive_sha256": "ea1a5686041b17ac677bfd2eabdaae4a0ab6e354e0c117361f24f988a0c847dc",
+        "bundle_fingerprint_sha256": "c38977022b4c7cedcbf7bab4ac501038417a60f6612bfb82cddd44092a53ac81",
+        "package_entry_count": 185
       }
     },
     "actions": {
