@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,rm,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
 
 const CATALOG='data/current/entities.json';
@@ -12,6 +12,8 @@ const RO_COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const MD_SEMANTIC_BRIDGE='data/current/md-cuatm-semantic-bridge.json';
 const OUT_INDEX='public/data/actual-entities.json';
 const OUT_DIR='public/geo/actual';
+const OUT_CHUNK_INDEX='public/data/actual-geometry-chunks.json';
+const OUT_CHUNK_DIR=OUT_DIR+'/chunks';
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
 const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge]=await Promise.all([
@@ -233,6 +235,36 @@ for(const [id,source] of featureById){
  });
 }
 
+
+const overviewRootIdFor=item=>{
+ let cursor=item,depth=0;
+ while(cursor&&cursor.map?.tier!=='overview'&&depth++<32){
+  cursor=publicById.get(cursor.hierarchy?.parent_catalog_id)||null;
+ }
+ return cursor?.map?.tier==='overview'?cursor.id:null;
+};
+const safeChunkName=value=>String(value).replace(/[^A-Za-z0-9._-]+/g,'_');
+const chunkFeatures=new Map();
+for(const [key,features] of Object.entries(tierFeatures)){
+ const [jurisdiction,tier]=key.split('_');
+ if(tier==='overview')continue;
+ for(const feature of features){
+  const item=publicById.get(feature.properties.entity_id);
+  const rootId=overviewRootIdFor(item);
+  if(!rootId)throw new Error('Missing overview root for public geometry '+feature.properties.entity_id);
+  const chunkKey=jurisdiction+'_'+tier+'_'+rootId;
+  if(!chunkFeatures.has(chunkKey))chunkFeatures.set(chunkKey,{jurisdiction,tier,root_entity_id:rootId,features:[]});
+  chunkFeatures.get(chunkKey).features.push(feature);
+ }
+}
+const geometryChunks=[...chunkFeatures.values()].map(chunk=>({
+ jurisdiction:chunk.jurisdiction,
+ tier:chunk.tier,
+ root_entity_id:chunk.root_entity_id,
+ path:OUT_CHUNK_DIR+'/'+chunk.jurisdiction.toLowerCase()+'/'+chunk.tier+'/'+safeChunkName(chunk.root_entity_id)+'.geojson',
+ feature_count:chunk.features.length
+})).sort((a,b)=>a.jurisdiction.localeCompare(b.jurisdiction)||a.tier.localeCompare(b.tier)||a.root_entity_id.localeCompare(b.root_entity_id));
+
 const countsByJurisdiction=Object.fromEntries(['RO','MD'].map(j=>[j,publicEntities.filter(x=>x.jurisdiction===j).length]));
 const countsByTier=Object.fromEntries(Object.entries(tierFeatures).map(([key,features])=>[key,features.length]));
 const legalStatusCounts=publicEntities.reduce((a,x)=>(a[x.validation.legal_identity_status]=(a[x.validation.legal_identity_status]||0)+1,a),{});
@@ -286,10 +318,45 @@ for(const jurisdiction of ['RO','MD']){
   await writeFile(OUT_DIR+'/'+jurisdiction.toLowerCase()+'-'+tier+'.geojson',JSON.stringify(out));
  }
 }
+
+await rm(OUT_CHUNK_DIR,{recursive:true,force:true});
+for(const chunk of geometryChunks){
+ const source=chunkFeatures.get(chunk.jurisdiction+'_'+chunk.tier+'_'+chunk.root_entity_id);
+ const out={
+  type:'FeatureCollection',
+  metadata:{
+   schema_version:1,
+   contract:'actual-public-geometry-chunk-v1',
+   mode:'ACTUAL',
+   jurisdiction:chunk.jurisdiction,
+   tier:chunk.tier,
+   root_entity_id:chunk.root_entity_id,
+   feature_count:source.features.length,
+   geometry_source:'OpenStreetMap',
+   geometry_precision:'master_coordinate_fidelity'
+  },
+  features:source.features
+ };
+ const slash=chunk.path.lastIndexOf('/');
+ await mkdir(chunk.path.slice(0,slash),{recursive:true});
+ await writeFile(chunk.path,JSON.stringify(out));
+}
+const chunkIndex={
+ schema_version:1,
+ contract:'actual-public-geometry-chunks-v1',
+ mode:'ACTUAL',
+ generated_at:index.generated_at,
+ policy:'Viewport chunks partition existing public geometries by overview ancestor without coordinate simplification or mutation.',
+ chunk_count:geometryChunks.length,
+ chunks:geometryChunks
+};
+await writeFile(OUT_CHUNK_INDEX,JSON.stringify(chunkIndex,null,2)+'\n');
+
 console.log(JSON.stringify({
  contract:index.contract,
  entity_count:index.entity_count,
  entity_count_by_jurisdiction:index.entity_count_by_jurisdiction,
  feature_count_by_tier:index.feature_count_by_tier,
- legal_identity_status_counts:index.legal_identity_status_counts
+ legal_identity_status_counts:index.legal_identity_status_counts,
+ geometry_chunk_count:geometryChunks.length
 },null,2));
