@@ -6,6 +6,9 @@ const roots={RO:L.layerGroup().addTo(map),MD:L.layerGroup().addTo(map)};
 const tiers=['overview','local','detail'];
 const tierGroups=Object.fromEntries(['RO','MD'].flatMap(j=>tiers.map(t=>[j+'_'+t,L.layerGroup()])));
 const tierData=new Map();
+const chunkData=new Map();
+const chunkGroups=new Map();
+let chunkIndex=null;
 const entityById=new Map();
 const activeFilterGroups=new Set(['regional','municipality','town','commune','sector','locality','other']);
 let selectedEntityId=null;
@@ -118,6 +121,17 @@ async function loadIndex(){
  return index;
 }
 
+async function loadChunkIndex(){
+ const path=releaseData?.manifest?.public_contract?.geometry_chunks?.path;
+ if(!path)return null;
+ const response=await fetch(path,{cache:'no-cache'});
+ if(!response.ok)throw new Error('Indexul chunk-urilor geometrice ACTUAL este indisponibil');
+ const data=await response.json();
+ if(data.contract!=='actual-public-geometry-chunks-v1'||data.chunk_count!==(data.chunks||[]).length)throw new Error('Index chunk-uri ACTUAL invalid');
+ chunkIndex=data;
+ return data;
+}
+
 function updateJurisdictionStatus(){
  if(!releaseData||!indexData)return;
  for(const j of ['RO','MD']){
@@ -207,10 +221,7 @@ async function ensureTier(jurisdiction,tier){
  return data;
 }
 
-function renderTier(jurisdiction,tier){
- const key=jurisdiction+'_'+tier;
- const group=tierGroups[key];
- const data=tierData.get(key);
+function renderCollection(group,data){
  if(!group||!data)return;
  group.clearLayers();
  L.geoJSON(data,{
@@ -230,12 +241,46 @@ function renderTier(jurisdiction,tier){
   }
  }).addTo(group);
 }
-
+function renderTier(jurisdiction,tier){
+ const key=jurisdiction+'_'+tier;
+ renderCollection(tierGroups[key],tierData.get(key));
+}
+function renderChunk(key){
+ renderCollection(chunkGroups.get(key),chunkData.get(key));
+}
 function rerenderLoadedTiers(){
  for(const key of tierData.keys()){
   const [jurisdiction,tier]=key.split('_');
   renderTier(jurisdiction,tier);
  }
+ for(const key of chunkData.keys())renderChunk(key);
+}
+function overviewRootIdFor(entity){
+ let cursor=entity,depth=0;
+ while(cursor&&cursor.map?.tier!=='overview'&&depth++<32)cursor=entityById.get(cursor.hierarchy?.parent_catalog_id)||null;
+ return cursor?.map?.tier==='overview'?cursor.id:null;
+}
+function chunkKey(entry){return entry.jurisdiction+'_'+entry.tier+'_'+entry.root_entity_id;}
+function chunkEntries(jurisdiction,tier){
+ return (chunkIndex?.chunks||[]).filter(entry=>entry.jurisdiction===jurisdiction&&entry.tier===tier);
+}
+function bboxIntersectsViewport(bbox){
+ if(!Array.isArray(bbox)||bbox.length!==4)return false;
+ return map.getBounds().intersects(L.latLngBounds([[bbox[1],bbox[0]],[bbox[3],bbox[2]]]));
+}
+async function ensureChunk(entry){
+ const key=chunkKey(entry);
+ if(chunkData.has(key))return chunkData.get(key);
+ const response=await fetch(entry.path,{cache:'no-cache'});
+ if(!response.ok)throw new Error('Nu se poate încărca '+entry.path);
+ const data=await response.json();
+ if(data.metadata?.jurisdiction!==entry.jurisdiction||data.metadata?.tier!==entry.tier||data.metadata?.root_entity_id!==entry.root_entity_id)throw new Error('Chunk public inconsistent: '+key);
+ if(Number(data.metadata?.feature_count)!==Number(entry.feature_count))throw new Error('Chunk public cu cardinalitate inconsistentă: '+key);
+ const group=L.layerGroup();
+ chunkGroups.set(key,group);
+ chunkData.set(key,data);
+ renderChunk(key);
+ return data;
 }
 
 function tierWanted(tier,zoom){
@@ -247,13 +292,37 @@ async function syncTiers(){
  if(!releaseData||!indexData)return;
  const zoom=map.getZoom();
  for(const jurisdiction of ['RO','MD']){
-  for(const tier of tiers){
-   const group=tierGroups[jurisdiction+'_'+tier];
-   if(tierWanted(tier,zoom)){
-    await ensureTier(jurisdiction,tier);
-    if(!roots[jurisdiction].hasLayer(group))roots[jurisdiction].addLayer(group);
-   }else if(roots[jurisdiction].hasLayer(group)){
-    roots[jurisdiction].removeLayer(group);
+  const enabled=document.getElementById('layer-'+jurisdiction.toLowerCase())?.checked!==false;
+  const overviewGroup=tierGroups[jurisdiction+'_overview'];
+  if(enabled){
+   await ensureTier(jurisdiction,'overview');
+   if(!roots[jurisdiction].hasLayer(overviewGroup))roots[jurisdiction].addLayer(overviewGroup);
+  }
+  for(const tier of ['local','detail']){
+   const legacyGroup=tierGroups[jurisdiction+'_'+tier];
+   if(chunkIndex){
+    if(roots[jurisdiction].hasLayer(legacyGroup))roots[jurisdiction].removeLayer(legacyGroup);
+    const wanted=new Set();
+    if(enabled&&tierWanted(tier,zoom)){
+     for(const entry of chunkEntries(jurisdiction,tier)){
+      const root=entityById.get(entry.root_entity_id);
+      if(!root||!bboxIntersectsViewport(root.map?.bbox))continue;
+      const key=chunkKey(entry);
+      wanted.add(key);
+      await ensureChunk(entry);
+      const group=chunkGroups.get(key);
+      if(group&&!roots[jurisdiction].hasLayer(group))roots[jurisdiction].addLayer(group);
+     }
+    }
+    for(const [key,group] of chunkGroups){
+     if(!key.startsWith(jurisdiction+'_'+tier+'_'))continue;
+     if(!wanted.has(key)&&roots[jurisdiction].hasLayer(group))roots[jurisdiction].removeLayer(group);
+    }
+   }else{
+    if(enabled&&tierWanted(tier,zoom)){
+     await ensureTier(jurisdiction,tier);
+     if(!roots[jurisdiction].hasLayer(legacyGroup))roots[jurisdiction].addLayer(legacyGroup);
+    }else if(roots[jurisdiction].hasLayer(legacyGroup))roots[jurisdiction].removeLayer(legacyGroup);
    }
   }
  }
@@ -309,10 +378,18 @@ async function selectEntity(id,zoom=false,clickedLayer=null){
  selectedEntityId=id;
  renderDetails(entity);
  if(zoom)zoomToEntity(entity);
- await ensureTier(entity.jurisdiction,entity.map.tier);
+ const checkbox=document.getElementById('layer-'+entity.jurisdiction.toLowerCase());
+ if(checkbox&&!checkbox.checked){checkbox.checked=true;roots[entity.jurisdiction].addTo(map);}
+ if(entity.map.tier==='overview'||!chunkIndex)await ensureTier(entity.jurisdiction,entity.map.tier);
+ else{
+  const rootId=overviewRootIdFor(entity);
+  const entry=chunkEntries(entity.jurisdiction,entity.map.tier).find(item=>item.root_entity_id===rootId);
+  if(!entry)throw new Error('Lipsește chunk-ul pentru '+entity.id);
+  await ensureChunk(entry);
+ }
  await syncTiers();
  if(clickedLayer){clickedLayer.setStyle(selectedStyle);selectedLayer=clickedLayer;return;}
- for(const group of Object.values(tierGroups)){
+ for(const group of [...Object.values(tierGroups),...chunkGroups.values()]){
   group.eachLayer(container=>{
    const inspect=layer=>{
     if(layer.feature?.properties?.entity_id===id){layer.setStyle(selectedStyle);selectedLayer=layer;}
@@ -323,13 +400,14 @@ async function selectEntity(id,zoom=false,clickedLayer=null){
 }
 
 document.getElementById('details-close').addEventListener('click',clearSelection);
-document.getElementById('layer-ro').addEventListener('change',event=>event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO));
-document.getElementById('layer-md').addEventListener('change',event=>event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD));
-map.on('zoomend',()=>syncTiers().catch(console.error));
+document.getElementById('layer-ro').addEventListener('change',event=>{event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);});
+document.getElementById('layer-md').addEventListener('change',event=>{event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);});
+map.on('zoomend moveend',()=>syncTiers().catch(console.error));
 
 (async()=>{
  try{
   await loadIndex();
+  await loadChunkIndex();
   await Promise.all([ensureTier('RO','overview'),ensureTier('MD','overview')]);
   await syncTiers();
  }catch(e){
