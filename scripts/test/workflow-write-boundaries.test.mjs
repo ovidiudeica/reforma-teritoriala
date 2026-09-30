@@ -314,3 +314,5 @@ test('required status contexts have unique workflow owners',async()=>{
  }
 });
 
+
+import './frontend-smoke.test.mjs';
