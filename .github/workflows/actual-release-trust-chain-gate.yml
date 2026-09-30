@@ -95,6 +95,27 @@ jobs:
             }
           }
 
+          const jobCheckContexts=text=>{
+            const lines=text.split('\n');
+            const jobs=[];
+            let inJobs=false,current=null;
+            const finish=()=>{if(current){jobs.push(current);current=null;}};
+            for(const line of lines){
+              if(!inJobs){
+                if(/^jobs:\s*$/.test(line))inJobs=true;
+                continue;
+              }
+              if(/^\S/.test(line)){finish();break;}
+              const job=line.match(/^  ([A-Za-z_][A-Za-z0-9_-]*):\s*$/);
+              if(job){finish();current={id:job[1],name:null};continue;}
+              if(current){
+                const explicit=line.match(/^    name:\s*(.*?)\s*$/);
+                if(explicit&&current.name===null)current.name=explicit[1].replace(/^['"]|['"]$/g,'');
+              }
+            }
+            finish();
+            return jobs.map(job=>job.name||job.id);
+          };
           const requiredStatusOwners=new Map([
             ['verify-persisted-release','verify-persisted-actual-release.yml'],
             ['actual-change-reproducibility','actual-change-reproducibility-gate.yml'],
@@ -104,8 +125,9 @@ jobs:
           for(const [context,owner] of requiredStatusOwners){
             const occurrences=[];
             for(const [name,text] of workflowText){
-              const count=text.split('\n').filter(line=>line.trim()===`name: ${context}`).length;
-              for(let i=0;i<count;i++)occurrences.push(name);
+              for(const checkContext of jobCheckContexts(text)){
+                if(checkContext===context)occurrences.push(name);
+              }
             }
             if(occurrences.length!==1||occurrences[0]!==owner){
               failures.push({issue:'required_status_context_owner_drift',context,expected_owner:owner,occurrences});
