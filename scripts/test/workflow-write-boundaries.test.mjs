@@ -248,6 +248,21 @@ test('candidate preflight rejects merge parents and non-regular tree objects',as
 
 import './actual-preexecution-objects.test.mjs';
 
+test('PR credentials belong to a separate runner job with no repository checkout',async()=>{
+ for(const [name,job] of [['actual-promote-candidate.yml','open-promotion-pr'],['refresh-actual-review-evidence.yml','open-review-pr']]){
+  const workflow=await readFile(join(workflowsDir,name),'utf8');
+  const [preparation,opener]=workflow.split('  '+job+':');
+  assert.ok(opener);
+  assert.doesNotMatch(preparation,/pull-requests: write/);
+  assert.doesNotMatch(opener,/uses:|npm run |node scripts\//);
+  assert.match(opener,/contents: read/);
+  assert.match(opener,/pull-requests: write/);
+  assert.match(opener,/runs-on: ubuntu-24\.04/);
+  assert.match(opener,/gh api/);
+  assert.match(opener,/gh pr create/);
+ }
+});
+
 test('container writers select bash and callers preserve runtime pull permission',async()=>{
  for(const name of ['actual-promote-candidate.yml','refresh-actual-review-evidence.yml']){
   const text=await readFile(join(workflowsDir,name),'utf8');

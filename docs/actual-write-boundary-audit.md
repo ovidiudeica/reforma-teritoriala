@@ -21,6 +21,12 @@ GitHub REST mutation, `github-script`, generic force push or direct main push.
 The runtime publisher's curl downloads the pinned Buildx binary; it is not
 a GitHub API write. Pages deployment is managed by GitHub outside these files.
 
+Promotion and evidence refresh open PRs in separate Ubuntu jobs without a
+checkout. Those jobs receive only contents:read and pull-requests:write, check
+the exact remote branch commit through a read-only `gh api` call, then use
+`gh pr create`. The preceding container jobs have no pull-request permission.
+This also removes the assumption that the pinned Node container includes gh.
+
 ## Changes validated by this follow-up
 
 - Disable checkout credential persistence in the three repository writers and
@@ -36,6 +42,8 @@ a GitHub API write. Pages deployment is managed by GitHub outside these files.
   code: candidate publication objects must be regular non-executable blobs.
 - Keep exact candidate-SHA promotion lease and absent-ref creation leases.
 - Recognize authenticated `git -c ... push` in the static write inventory.
+- Use Bash explicitly in container writers and retain packages:read in all
+  three callers of the reusable candidate workflow.
 - Dynamically test both exact host profiles, unknown profiles, mixed profiles
   and unexpected profile fields. The CPU and network-denial contracts remain.
 - Rebind provenance without changing snapshot `actual-5383ff3db7cf3f67` or

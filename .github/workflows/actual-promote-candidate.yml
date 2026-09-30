@@ -21,8 +21,7 @@ on:
         type: string
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
   packages: read
 
 concurrency:
@@ -35,6 +34,11 @@ defaults:
 
 jobs:
   prepare-promotion:
+    permissions:
+      contents: write
+      packages: read
+    outputs:
+      promotion_commit: ${{ steps.promotion_write.outputs.commit_sha }}
     runs-on: ubuntu-24.04
     container:
       image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
@@ -209,6 +213,7 @@ jobs:
           NODE
 
       - name: Commit promotion marker on candidate branch
+        id: promotion_write
         env:
           GITHUB_TOKEN: ${{ github.token }}
           SNAPSHOT_ID: ${{ inputs.expected_candidate_snapshot }}
@@ -227,25 +232,30 @@ jobs:
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH_HEADER" push \
             --force-with-lease="refs/heads/$CANDIDATE_BRANCH:$EXPECTED_CANDIDATE_COMMIT" \
             origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
+          echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Open promotion pull request
+  open-promotion-pr:
+    needs: prepare-promotion
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Open promotion pull request without candidate code
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
           SNAPSHOT_ID: ${{ inputs.expected_candidate_snapshot }}
           CANDIDATE_COMMIT_SHA: ${{ inputs.expected_candidate_commit }}
+          PROMOTION_COMMIT_SHA: ${{ needs.prepare-promotion.outputs.promotion_commit }}
         run: |
+          set -euo pipefail
+          test "$(gh api "repos/$GH_REPO/commits/$CANDIDATE_BRANCH" --jq .sha)" = "$PROMOTION_COMMIT_SHA"
           EXISTING="$(gh pr list --base main --head "$CANDIDATE_BRANCH" --state open --json url --jq '.[0].url // empty')"
           if [ -n "$EXISTING" ]; then
-            echo "Promotion PR already exists: $EXISTING"
-            echo "### Promotion PR" >> "$GITHUB_STEP_SUMMARY"
             echo "$EXISTING" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
-          BASE_SNAPSHOT="$(node -p "require('./data/current/actual-release-candidate.json').base_release.snapshot_id")"
-          REVIEW_REQUIRED="$(node -p "require('./data/current/actual-release-candidate.json').review_required")"
-          CHANGE_COUNT="$(node -p "require('./data/current/actual-release-candidate.json').substantive_change_count")"
-          BODY="Explicit ACTUAL candidate promotion. Candidate: $SNAPSHOT_ID. Candidate commit: $CANDIDATE_COMMIT_SHA. Base persisted release: $BASE_SNAPSHOT. Substantive diff count: $CHANGE_COUNT. Candidate review_required: $REVIEW_REQUIRED. The candidate release gate passed before this PR was created. The required verify-persisted-release, actual-change-reproducibility and actual-release-trust-chain checks must pass before merge."
-          URL="$(gh pr create --base main --head "$CANDIDATE_BRANCH" --title "Promote ACTUAL candidate $SNAPSHOT_ID" --body "$BODY")"
-          echo "### Promotion PR" >> "$GITHUB_STEP_SUMMARY"
-          echo "$URL" >> "$GITHUB_STEP_SUMMARY"
+          BODY="Explicit ACTUAL candidate promotion. Candidate: $SNAPSHOT_ID. Approved candidate commit: $CANDIDATE_COMMIT_SHA. Promotion commit: $PROMOTION_COMMIT_SHA. Candidate validation passed before the promotion write. All three required ACTUAL checks must pass before merge."
+          gh pr create --base main --head "$CANDIDATE_BRANCH" --title "Promote ACTUAL candidate $SNAPSHOT_ID" --body "$BODY" >> "$GITHUB_STEP_SUMMARY"

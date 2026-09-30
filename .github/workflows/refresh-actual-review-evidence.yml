@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
   packages: read
 
 concurrency:
@@ -18,6 +17,12 @@ defaults:
 
 jobs:
   refresh:
+    permissions:
+      contents: write
+      packages: read
+    outputs:
+      created: ${{ steps.review_write.outputs.created }}
+      commit_sha: ${{ steps.review_write.outputs.commit_sha }}
     runs-on: ubuntu-24.04
     container:
       image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
@@ -123,6 +128,7 @@ jobs:
           NODE
 
       - name: Create review-evidence refresh branch
+        id: review_write
         env:
           BRANCH: actual/review-evidence-${{ github.run_id }}
           GITHUB_TOKEN: ${{ github.token }}
@@ -169,16 +175,24 @@ jobs:
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH_HEADER" push \
             --force-with-lease="refs/heads/$BRANCH:" \
             origin "HEAD:refs/heads/$BRANCH"
+          echo "created=true" >> "$GITHUB_OUTPUT"
+          echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Open review-evidence pull request
+  open-review-pr:
+    needs: refresh
+    if: needs.refresh.outputs.created == 'true'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Open review-evidence pull request without repository code
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
           BRANCH: actual/review-evidence-${{ github.run_id }}
+          EXPECTED_COMMIT: ${{ needs.refresh.outputs.commit_sha }}
         run: |
-          if ! git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
-            echo "No refresh branch was created."
-            exit 0
-          fi
-          gh pr create --base main --head "$BRANCH" \
-            --title "Refresh frozen ACTUAL review evidence" \
-            --body "Refreshes network-derived OSM/INS review evidence in an isolated workflow, rebuilds the content-addressed evidence bundle, re-evaluates dependent gates, and rebinds exact ACTUAL provenance without changing semantic snapshot identity."
+          set -euo pipefail
+          test "$(gh api "repos/$GH_REPO/commits/$BRANCH" --jq .sha)" = "$EXPECTED_COMMIT"
+          gh pr create --base main --head "$BRANCH" --title "Refresh frozen ACTUAL review evidence" --body "Refresh frozen review evidence and rebind ACTUAL provenance without changing semantic snapshot identity. All required checks must pass before merge." >> "$GITHUB_STEP_SUMMARY"
