@@ -157,3 +157,44 @@ test('promotion validates candidate parent and write surface before repository c
  assert.match(promotion,/Candidate pre-execution marker is not a genuine CHANGE candidate/);
  assert.match(promotion,/marker\.get\('base_ref'\) != base/);
 });
+
+
+test('required status contexts have unique workflow owners',async()=>{
+ const jobCheckContexts=content=>{
+  const lines=content.split('\n');
+  const jobs=[];
+  let inJobs=false,current=null;
+  const finish=()=>{if(current){jobs.push(current);current=null;}};
+  for(const line of lines){
+   if(!inJobs){
+    if(/^jobs:\s*$/.test(line))inJobs=true;
+    continue;
+   }
+   if(/^\S/.test(line)){finish();break;}
+   const job=line.match(/^  ([A-Za-z_][A-Za-z0-9_-]*):\s*$/);
+   if(job){finish();current={id:job[1],name:null};continue;}
+   if(current){
+    const explicit=line.match(/^    name:\s*(.*?)\s*$/);
+    if(explicit&&current.name===null)current.name=explicit[1].replace(/^['"]|['"]$/g,'');
+   }
+  }
+  finish();
+  return jobs.map(job=>job.name||job.id);
+ };
+ const owners=new Map([
+  ['verify-persisted-release','verify-persisted-actual-release.yml'],
+  ['actual-change-reproducibility','actual-change-reproducibility-gate.yml'],
+  ['actual-release-trust-chain','actual-release-trust-chain-gate.yml']
+ ]);
+ const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
+ const texts=new Map(await Promise.all(files.map(async name=>[name,await readFile(join(workflowsDir,name),'utf8')])));
+ for(const [context,owner] of owners){
+  const occurrences=[];
+  for(const [name,content] of texts){
+   for(const checkContext of jobCheckContexts(content)){
+    if(checkContext===context)occurrences.push(name);
+   }
+  }
+  assert.deepEqual(occurrences,[owner],context+' required status owner drift');
+ }
+});
