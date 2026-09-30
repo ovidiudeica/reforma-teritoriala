@@ -33,16 +33,17 @@ export function classifyCandidateDisposition({
  const semanticContentChanged=baseContentFingerprint!==candidateContentFingerprint;
  const semanticScopeOnlyChangeCount=semanticContentChanged&&detailedChangeCount===0?1:0;
  const substantiveChangeCount=detailedChangeCount+semanticScopeOnlyChangeCount;
+ const hasSubstantiveChange=semanticContentChanged||substantiveChangeCount>0;
  if(!semanticContentChanged){
   if(candidateSnapshotId!==baseSnapshotId)failures.push({issue:'no_change_snapshot_identity_churn',base:baseSnapshotId,candidate:candidateSnapshotId});
   if(candidateReleaseFingerprint!==baseReleaseFingerprint)failures.push({issue:'no_change_release_fingerprint_churn',base:baseReleaseFingerprint,candidate:candidateReleaseFingerprint});
  }
  return {
-  status:failures.length?'FAIL':semanticContentChanged?'CHANGE':'NO_CHANGE',
+  status:failures.length?'FAIL':hasSubstantiveChange?'CHANGE':'NO_CHANGE',
   semantic_content_changed:semanticContentChanged,
   semantic_scope_only_change_count:semanticScopeOnlyChangeCount,
   substantive_change_count:substantiveChangeCount,
-  review_required:semanticContentChanged,
+  review_required:hasSubstantiveChange,
   failures
  };
 }
@@ -108,7 +109,7 @@ export function validateCandidatePromotion({
  check(gate?.status==='PASS'&&gate?.snapshot_id===expectedSnapshot,'candidate_gate_invalid',{status:gate?.status??null,snapshot_id:gate?.snapshot_id??null});
  check(candidateManifestSha256===actualCandidateManifestSha256,'candidate_manifest_hash_drift',{expected:candidateManifestSha256??null,actual:actualCandidateManifestSha256??null});
  check(candidateDiffSha256===actualCandidateDiffSha256,'candidate_diff_hash_drift',{expected:candidateDiffSha256??null,actual:actualCandidateDiffSha256??null});
- check(diff?.status==='CHANGE'&&diff?.candidate?.snapshot_id===expectedSnapshot&&diff?.summary?.semantic_content_changed===true,'candidate_diff_invalid',{status:diff?.status??null,snapshot_id:diff?.candidate?.snapshot_id??null,semantic_content_changed:diff?.summary?.semantic_content_changed??null});
+ check(diff?.status==='CHANGE'&&diff?.candidate?.snapshot_id===expectedSnapshot&&diff?.summary?.review_required===true&&Number(diff?.summary?.substantive_change_count)>0,'candidate_diff_invalid',{status:diff?.status??null,snapshot_id:diff?.candidate?.snapshot_id??null,semantic_content_changed:diff?.summary?.semantic_content_changed??null,review_required:diff?.summary?.review_required??null,substantive_change_count:diff?.summary?.substantive_change_count??null});
  check(currentPersisted?.snapshot_id===candidateMarker?.base_release?.snapshot_id,'base_snapshot_moved',{candidate_base:candidateMarker?.base_release?.snapshot_id??null,current:currentPersisted?.snapshot_id??null});
  check(currentPersisted?.release_fingerprint_sha256===candidateMarker?.base_release?.release_fingerprint_sha256,'base_fingerprint_moved');
  check(currentPersisted?.manifest_sha256===candidateMarker?.base_release?.manifest_sha256,'base_manifest_marker_moved');
