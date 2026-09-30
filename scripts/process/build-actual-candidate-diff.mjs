@@ -164,7 +164,9 @@ for(const key of [...new Set([...Object.keys(baselineManifest.components||{}),..
 const beforeSemanticEntities=new Map(semanticCatalogEntities(baselineCatalog).map(x=>[x.id,hashValue(x)]));
 const afterSemanticEntities=new Map(semanticCatalogEntities(candidateCatalog).map(x=>[x.id,hashValue(x)]));
 const entityContentChanged=[...afterSemanticEntities.keys()].filter(id=>beforeSemanticEntities.has(id)&&beforeSemanticEntities.get(id)!==afterSemanticEntities.get(id)).sort();
-const detailedChangeCount=added.length+removed.length+entityContentChanged.length+geometryChangedTotal+semanticRegistryChanges;
+const deliveryComponentKeys=new Set(['public_chunks']);
+const deliveryComponentChanges=componentChanges.filter(change=>deliveryComponentKeys.has(change.key));
+const detailedChangeCount=added.length+removed.length+entityContentChanged.length+geometryChangedTotal+semanticRegistryChanges+deliveryComponentChanges.length;
 const lifecycle=classifyCandidateDisposition({
  baseContentFingerprint:baselineSemantic.sha256,
  candidateContentFingerprint:candidateSemantic.sha256,
@@ -215,6 +217,8 @@ const report={
   geometry_change_count:geometryChangedTotal,
   semantic_registry_changed_count:semanticRegistryChanges,
   component_hash_changed_count:componentChanges.length,
+  delivery_component_changed_count:deliveryComponentChanges.length,
+  delivery_component_changed_keys:deliveryComponentChanges.map(change=>change.key),
   entity_content_changed_count:entityContentChanged.length,
   semantic_scope_only_change_count:lifecycle.semantic_scope_only_change_count,
   semantic_content_changed:lifecycle.semantic_content_changed,
@@ -228,7 +232,7 @@ const report={
  official_registries:registries,
  component_hash_changes:componentChanges,
  failures,
- policy:'Candidate disposition is derived from canonical administrative content while exact source and execution-environment provenance are bound independently. A new manifest must bind the computed semantic fingerprint explicitly; exact base-manifest reuse remains compatibility-only. NO_CHANGE retains the base release identity and is terminal; CHANGE requires explicit review and promotion. Any provenance drift remains release-gated.'
+ policy:'Candidate disposition is derived from canonical administrative content plus explicitly enumerated public-delivery components while exact source and execution-environment provenance are bound independently. A delivery-only CHANGE may retain the semantic snapshot ID and release fingerprint, but still requires explicit review and promotion. Exact base-manifest reuse remains compatibility-only. NO_CHANGE is terminal. Any provenance drift remains release-gated.'
 };
 await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
 const diffBytes=await readFile(OUTPUT);
