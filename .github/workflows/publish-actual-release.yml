@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  packages: read
 
 jobs:
   release:
@@ -56,20 +57,42 @@ jobs:
           echo "snapshot=$(jq -r .snapshot_id data/current/actual-release-manifest.json)" >> "$GITHUB_ENV"
           echo "fingerprint=$(jq -r .release_fingerprint_sha256 data/current/actual-release-manifest.json)" >> "$GITHUB_ENV"
 
-      - name: Build release evidence assets
+      - name: Build release evidence assets in pinned ACTUAL runtime
         shell: bash
         run: |
           set -euo pipefail
+          runtime_ref="$(jq -r '.runtime.ref' data/current/actual-runtime-image.json)"
+          expected_node="$(jq -r '.runtime.node' data/current/actual-runtime-image.json)"
+          expected_npm="$(jq -r '.runtime.npm' data/current/actual-runtime-image.json)"
+          [[ "$runtime_ref" =~ ^ghcr\.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:[0-9a-f]{64}$ ]]
+          [[ "$expected_node" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$expected_npm" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+
+          printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker pull "$runtime_ref"
           mkdir -p release-assets
-          npm sbom --package-lock-only --sbom-format cyclonedx > release-assets/actual-sbom.cdx.json
-          cp data/current/actual-release-manifest.json release-assets/
-          cp data/current/actual-source-bundle-manifest.json release-assets/
-          cp data/current/actual-review-evidence-bundle.json release-assets/
-          cp docs/actual-v1-known-limitations.md release-assets/
-          (
-            cd release-assets
-            sha256sum actual-release-manifest.json actual-source-bundle-manifest.json actual-review-evidence-bundle.json actual-sbom.cdx.json actual-v1-known-limitations.md > actual-release-checksums.sha256
-          )
+          docker run --rm --network none \
+            -e EXPECTED_NODE="$expected_node" \
+            -e EXPECTED_NPM="$expected_npm" \
+            -v "$PWD:/workspace" \
+            -w /workspace \
+            "$runtime_ref" \
+            bash -lc '
+              set -euo pipefail
+              test "$(node --version)" = "v$EXPECTED_NODE"
+              test "$(npm --version)" = "$EXPECTED_NPM"
+              npm sbom --package-lock-only --sbom-format cyclonedx > release-assets/actual-sbom.cdx.json
+              cp data/current/actual-release-manifest.json release-assets/
+              cp data/current/actual-source-bundle-manifest.json release-assets/
+              cp data/current/actual-review-evidence-bundle.json release-assets/
+              cp docs/actual-v1-known-limitations.md release-assets/
+              (
+                cd release-assets
+                sha256sum actual-release-manifest.json actual-source-bundle-manifest.json actual-review-evidence-bundle.json actual-sbom.cdx.json actual-v1-known-limitations.md > actual-release-checksums.sha256
+              )
+            '
+          docker logout ghcr.io
+
           cat > release-assets/RELEASE-NOTES.md <<EOF
           ACTUAL release $TAG
 
@@ -78,7 +101,7 @@ jobs:
           - Release fingerprint: `$fingerprint`
           - Contract: `actual-public-entity-v1`
 
-          Required admission checks were successful on the exact released commit. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.
+          Required admission checks were successful on the exact released commit. Evidence was assembled with the digest-pinned ACTUAL runtime, exact Node/npm versions, and network disabled during SBOM generation. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.
           EOF
 
       - name: Create draft and upload evidence
