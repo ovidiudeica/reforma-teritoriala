@@ -19,6 +19,8 @@ Acesta este threat model-ul acceptat pentru ACTUAL v1. Un trust root independent
 - enforcement pentru administratori, dacă politica repository-ului îl permite;
 - fără bypass neauditat al admission path-ului ACTUAL.
 
-## Limită de verificare
+## Verificare administrativă curentă
 
-Conectorul GitHub folosit pentru auditul din 2026-09-30 poate confirma starea codului, PR-urilor și check-urilor, dar nu expune endpoint-ul de branch protection/rulesets. Din acest motiv, valorile concrete din GitHub Settings trebuie verificate în interfața administrativă înainte de tag-ul final; documentația repository-ului nu este folosită drept substitut pentru acea setare.
+La auditul post-v1 din 2026-10-01, configurația GitHub a fost verificată direct prin API-ul administrativ al repository-ului. `main` este protejat prin pull request, required status checks sunt `strict` și sunt exact `verify-persisted-release`, `actual-change-reproducibility` și `actual-release-trust-chain`; enforcement pentru administratori este activ, iar force-push și branch deletion sunt dezactivate.
+
+Tag-urile `actual-v*` sunt protejate de un repository ruleset activ care interzice update și deletion fără bypass. Immutable Releases este activ pentru release-urile noi. Aceste setări sunt parte din contractul operațional și trebuie reverificate după orice schimbare administrativă relevantă.

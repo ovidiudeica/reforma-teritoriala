@@ -119,7 +119,7 @@ OSM network access is separated from ACTUAL construction, and normal candidate b
 
 The reusable candidate workflow has an explicit `refresh_osm` boolean input with default `false`. Therefore a normal manual candidate, a SIRUTA refresh and a CUATM refresh all rebuild ACTUAL from the exact committed OSM bytes without contacting Overpass.
 
-The manual `Refresh OSM administrative source snapshot` wrapper is the only workflow that sets `refresh_osm=true`. It routes the network refresh through the same candidate lifecycle; it cannot publish a persisted release directly.
+The scheduled/manual `Refresh OSM administrative source snapshot` wrapper is the only workflow that sets `refresh_osm=true`. It runs weekly at `29 4 * * 0` and also supports manual dispatch. Every run routes the network refresh through the same candidate lifecycle; it cannot publish a persisted release directly.
 
 The candidate ordering is:
 

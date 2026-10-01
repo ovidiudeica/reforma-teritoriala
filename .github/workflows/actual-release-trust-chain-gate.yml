@@ -50,6 +50,7 @@ jobs:
             'refresh-actual-review-evidence.yml'
           ]);
           const allowedScheduledWrite=new Set([
+            'import-osm.yml',
             'refresh-md-official.yml',
             'refresh-ro-official.yml'
           ]);

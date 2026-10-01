@@ -1,4 +1,4 @@
-# ACTUAL write-boundary audit — 2026-09-30
+# ACTUAL write-boundary audit — 2026-10-01
 
 Baseline: `15a382b85d1a5baf03b4c414eb81bb023ac1267d` (#140).
 Final hardening: #142 (unique required status owners) and #143 (`06a919556291bd6fddd4327b44d595b667a19b60`). #141 was closed as superseded by #143.
@@ -10,16 +10,18 @@ Final hardening: #142 (unique required status owners) and #143 (`06a919556291bd6
 | actual-candidate.yml | contents | dispatch / reusable workflow | new `actual/candidate-*`, absent-ref lease |
 | actual-promote-candidate.yml | contents, pull-requests | dispatch | exact candidate branch/SHA lease; promotion PR to main |
 | refresh-actual-review-evidence.yml | contents, pull-requests | dispatch | new `actual/review-evidence-*`, absent-ref lease; PR to main |
-| import-osm.yml | contents | dispatch | delegates exclusively to actual-candidate.yml |
-| refresh-md-official.yml | contents | dispatch / schedule | delegates exclusively to actual-candidate.yml |
-| refresh-ro-official.yml | contents | dispatch / schedule | delegates exclusively to actual-candidate.yml |
+| import-osm.yml | contents | dispatch / weekly schedule | delegates exclusively to actual-candidate.yml |
+| refresh-md-official.yml | contents | dispatch / monthly schedule | delegates exclusively to actual-candidate.yml |
+| refresh-ro-official.yml | contents | dispatch / monthly schedule | delegates exclusively to actual-candidate.yml |
+| publish-actual-release.yml | contents | dispatch | GitHub Release/tag/assets only; no branch push |
 | build-actual-runtime-image.yml | packages | dispatch / push on actual/pin-oci-runtime | GHCR; no repository write |
+| verify-persisted-actual-release.yml | none (read-only) | push / PR / dispatch | verification only |
+| actual-change-reproducibility-gate.yml | none (read-only) | push / PR / dispatch | proof artifacts/check only |
+| actual-release-trust-chain-gate.yml | none (read-only) | push / PR / dispatch | verification only |
+| actual-topology-audit.yml | none (read-only) | PR / dispatch | topology artifact only |
+| actual-source-freshness.yml | none (read-only) | dispatch / daily schedule | freshness artifact only |
 
-The other four workflows are read-only: persisted verification, CHANGE
-reproducibility, release trust chain and topology audit. No workflow uses a
-GitHub REST mutation, `github-script`, generic force push or direct main push.
-The runtime publisher's curl downloads the pinned Buildx binary; it is not
-a GitHub API write. Pages deployment is managed by GitHub outside these files.
+No workflow may push directly to `main`. Source-refresh wrappers delegate to the reusable candidate workflow; the scheduled OSM refresh therefore has the same candidate/review/promotion boundary as manual OSM refresh. The release publisher may create only GitHub release/tag/assets after binding the exact protected-main SHA and required checks. Its SBOM/evidence generation runs in the digest-pinned ACTUAL runtime with network disabled. Pages deployment is managed by GitHub outside these files.
 
 Promotion and evidence refresh open PRs in separate Ubuntu jobs without a
 checkout. Those jobs receive only contents:read and pull-requests:write, check

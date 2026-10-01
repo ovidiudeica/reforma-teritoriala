@@ -63,6 +63,7 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
   './.github/workflows/actual-candidate.yml'
  ]);
  const allowedScheduledWrite=new Set([
+  'import-osm.yml',
   'refresh-md-official.yml',
   'refresh-ro-official.yml'
  ]);
@@ -316,12 +317,18 @@ test('required status contexts have unique workflow owners',async()=>{
  }
 });
 
-test('release publisher is manual, exact-SHA bound and cannot write repository branches',async()=>{
+test('release publisher is manual, exact-SHA bound and builds evidence in the pinned ACTUAL runtime',async()=>{
  const workflow=await readFile(join(workflowsDir,'publish-actual-release.yml'),'utf8');
  assert.match(workflow,/workflow_dispatch:/);
  assert.match(workflow,/expected_main_sha:/);
  assert.match(workflow,/main_sha=.*git\/ref\/heads\/main/);
  for(const context of ['verify-persisted-release','actual-change-reproducibility','actual-release-trust-chain'])assert.ok(workflow.includes(context));
+ assert.match(workflow,/packages:\s*read/);
+ assert.match(workflow,/actual-runtime-image\.json/);
+ assert.match(workflow,/docker run --rm --network none/);
+ assert.match(workflow,/test "\$\(node --version\)" = "v\$EXPECTED_NODE"/);
+ assert.match(workflow,/test "\$\(npm --version\)" = "\$EXPECTED_NPM"/);
+ assert.match(workflow,/npm sbom --package-lock-only --sbom-format cyclonedx/);
  assert.match(workflow,/gh release create/);
  assert.match(workflow,/--draft/);
  assert.match(workflow,/actual-sbom\.cdx\.json/);
