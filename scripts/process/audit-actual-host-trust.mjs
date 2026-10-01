@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import {dirname} from 'node:path';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {
  HOST_TRUST_PATH,
@@ -32,8 +31,8 @@ const report={
  failures:runtimeValidation.failures,
  observed
 };
-const output=process.env.ACTUAL_HOST_TRUST_AUDIT_PATH||'/tmp/actual-host-trust-audit.json';
-await mkdir(dirname(output),{recursive:true});
+const output='/tmp/actual-host-trust-audit.json';
+await mkdir('/tmp',{recursive:true});
 await writeFile(output,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));
 if(report.status!=='PASS')process.exit(1);
