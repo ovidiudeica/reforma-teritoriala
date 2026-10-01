@@ -108,8 +108,7 @@ export async function validateOciBuilderManifest(manifest,{readFileFn=readFile}=
 
 const exec=(cmd,args)=>execFileSync(cmd,args,{encoding:'utf8',maxBuffer:64*1024*1024}).trim();
 
-export async function validateOciBuilderRuntime({readFileFn=readFile}={}){
- const pluginPath=join(homedir(),'.docker/cli-plugins/docker-buildx');
+export async function validateOciBuilderRuntime({pluginPath=process.env.ACTUAL_BUILDX_PLUGIN_PATH||join(homedir(),'.docker/cli-plugins/docker-buildx'),readFileFn=readFile}={}){
  const checks=[],failures=[];
  const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
  const e=EXPECTED_OCI_BUILDER;
