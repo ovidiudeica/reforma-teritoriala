@@ -20,6 +20,7 @@ test('OSM source refresh is explicit and routed exclusively through ACTUAL candi
  assert.match(wrapper,/uses:\s*\.\/\.github\/workflows\/actual-candidate\.yml/);
  assert.match(wrapper,/refresh_osm:\s*true/);
  assert.match(wrapper,/source_trigger:\s*'osm-refresh'/);
+ assert.match(wrapper,/schedule:\s*\n\s*- cron: '29 4 \* \* 0'/);
  assert.doesNotMatch(wrapper,/\bgit\s+push\b/);
  assert.doesNotMatch(wrapper,/\bgit\s+commit\b/);
  assert.doesNotMatch(wrapper,/npm run import:osm/);
