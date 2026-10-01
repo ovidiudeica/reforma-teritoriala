@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
-import {dirname} from 'node:path';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 
-const output=process.env.ACTUAL_CANDIDATE_EXECUTION_RECEIPT_PATH;
-if(!output)throw new Error('ACTUAL_CANDIDATE_EXECUTION_RECEIPT_PATH is required.');
+const output='/tmp/actual-candidate-execution-receipt.json';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const markerBytes=await readFile('data/current/actual-release-candidate.json');
 const diffBytes=await readFile('data/current/actual-candidate-diff.json');
@@ -25,6 +23,6 @@ const receipt={
  },
  policy:'Volatile execution metadata is artifact-only evidence. This receipt must never be staged into an ACTUAL candidate or persisted release tree.'
 };
-await mkdir(dirname(output),{recursive:true});
+await mkdir('/tmp',{recursive:true});
 await writeFile(output,JSON.stringify(receipt,null,2)+'\n');
 console.log(JSON.stringify(receipt,null,2));
