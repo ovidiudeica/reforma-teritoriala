@@ -328,6 +328,9 @@ test('release publisher is manual, exact-SHA bound and builds evidence in the pi
  assert.match(workflow,/docker run --rm --network none/);
  assert.match(workflow,/test "\$\(node --version\)" = "v\$EXPECTED_NODE"/);
  assert.match(workflow,/test "\$\(npm --version\)" = "\$EXPECTED_NPM"/);
+ assert.match(workflow,/-e RELEASE_TAG="\$TAG"/);
+ assert.match(workflow,/release_version="\$\{RELEASE_TAG#actual-v\}"/);
+ assert.match(workflow,/json\.packages\[""\]\.version=version/);
  assert.match(workflow,/npm sbom --package-lock-only --sbom-format cyclonedx/);
  assert.match(workflow,/gh release create/);
  assert.match(workflow,/--draft/);
