@@ -161,6 +161,7 @@ test('candidate stabilizer covers auxiliary data/current JSON and excludes raw v
   assert.match(stabilizer,/actual-release-gate\.json/);
   assert.match(stabilizer,/actual-candidate-diff\.json/);
   assert.match(stabilizer,/actual-release-candidate\.json/);
+  assert.match(stabilizer,/actual-candidate-promotion-audit\.json/);
   assert.doesNotMatch(stabilizer,/before_sha256:/);
   assert.match(stabilizer,/schema_version:2/);
 });
