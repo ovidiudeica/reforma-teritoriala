@@ -17,6 +17,7 @@ console.log(changed.join('\n'));
 const publicationSurface=path=>
  path.startsWith('data/current/')
  || path==='public/data/actual-entities.json'
+ || path==='public/data/actual-geometry-chunks.json'
  || path.startsWith('public/geo/current/')
  || path.startsWith('public/geo/actual/')
  || path==='data/sources/ro-siruta-current.json'

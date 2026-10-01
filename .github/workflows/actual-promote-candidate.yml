@@ -117,6 +117,7 @@ jobs:
               return (
                   path.startswith('data/current/')
                   or path == 'public/data/actual-entities.json'
+                  or path == 'public/data/actual-geometry-chunks.json'
                   or path.startswith('public/geo/current/')
                   or path.startswith('public/geo/actual/')
                   or path == 'data/sources/ro-siruta-current.json'

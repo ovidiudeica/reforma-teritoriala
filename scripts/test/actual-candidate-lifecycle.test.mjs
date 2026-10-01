@@ -118,6 +118,20 @@ test('candidate disposition is stable for NO_CHANGE and promotable for CHANGE',a
  assert.equal(noChange.review_required,false);
  assert.equal(noChange.substantive_change_count,0);
 
+ const deliveryOnly=classifyCandidateDisposition({
+  baseContentFingerprint:base.sha256,
+  candidateContentFingerprint:base.sha256,
+  baseSnapshotId:persisted.snapshot_id,
+  baseReleaseFingerprint:persisted.release_fingerprint_sha256,
+  candidateSnapshotId:persisted.snapshot_id,
+  candidateReleaseFingerprint:persisted.release_fingerprint_sha256,
+  detailedChangeCount:1
+ });
+ assert.equal(deliveryOnly.status,'CHANGE');
+ assert.equal(deliveryOnly.semantic_content_changed,false);
+ assert.equal(deliveryOnly.review_required,true);
+ assert.equal(deliveryOnly.substantive_change_count,1);
+
  const changed=actualSemanticFingerprint(changeEntityClassification(docs));
  const candidateSnapshot='actual-'+changed.sha256.slice(0,16);
  const disposition=classifyCandidateDisposition({

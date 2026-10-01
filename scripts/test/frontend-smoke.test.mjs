@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {access,readFile} from 'node:fs/promises';
 
 test('ACTUAL v1 frontend binds only validated unsimplified release assets',async()=>{
@@ -40,6 +41,11 @@ test('ACTUAL v1 frontend binds only validated unsimplified release assets',async
   const chunkIndex=JSON.parse(await readFile(chunkDescriptor.path,'utf8'));
   assert.equal(chunkIndex.contract,'actual-public-geometry-chunks-v1');
   assert.equal(chunkIndex.chunk_count,chunkIndex.chunks.length);
-  for(const chunk of chunkIndex.chunks)await access(chunk.path);
+  for(const chunk of chunkIndex.chunks){
+   await access(chunk.path);
+   const bytes=await readFile(chunk.path);
+   assert.equal(bytes.length,chunk.bytes);
+   assert.equal(createHash('sha256').update(bytes).digest('hex'),chunk.sha256);
+  }
  }
 });

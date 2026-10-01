@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {createHash} from 'node:crypto';
 import {mkdir,readFile,rm,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
 
@@ -14,6 +15,7 @@ const OUT_INDEX='public/data/actual-entities.json';
 const OUT_DIR='public/geo/actual';
 const OUT_CHUNK_INDEX='public/data/actual-geometry-chunks.json';
 const OUT_CHUNK_DIR=OUT_DIR+'/chunks';
+const sha256=value=>createHash('sha256').update(value).digest('hex');
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
 const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge]=await Promise.all([
@@ -339,7 +341,10 @@ for(const chunk of geometryChunks){
  };
  const slash=chunk.path.lastIndexOf('/');
  await mkdir(chunk.path.slice(0,slash),{recursive:true});
- await writeFile(chunk.path,JSON.stringify(out));
+ const bytes=Buffer.from(JSON.stringify(out));
+ await writeFile(chunk.path,bytes);
+ chunk.sha256=sha256(bytes);
+ chunk.bytes=bytes.length;
 }
 const chunkIndex={
  schema_version:1,

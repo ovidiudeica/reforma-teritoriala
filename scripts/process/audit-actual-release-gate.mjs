@@ -43,6 +43,7 @@ const inventory=json('inventory');
 const roGeo=json('ro_geojson');
 const mdGeo=json('md_geojson');
 const publicIndex=json('public_index');
+const publicChunks=buffers.public_chunks?json('public_chunks'):null;
 const roGate=json('ro_gate');
 const mdGate=json('md_gate');
 const siruta=json('ro_official');
@@ -351,6 +352,47 @@ check('manifest_public_contract_is_current',
  && manifest.public_contract?.entity_count===publicIndex.entity_count
  && manifest.public_contract?.sha256===currentHashes.public_index,
  {manifest:manifest.public_contract,actual:{contract:publicIndex.contract,entity_count:publicIndex.entity_count,sha256:currentHashes.public_index}});
+
+if(publicChunks){
+ const chunkIssues=[];
+ const chunkFeatureIds=new Set();
+ for(const chunk of publicChunks.chunks||[]){
+  let bytes;
+  try{bytes=await readFile(chunk.path);}catch(error){chunkIssues.push({path:chunk.path,issue:'missing_chunk',error:String(error?.message||error)});continue;}
+  if(sha256(bytes)!==chunk.sha256)chunkIssues.push({path:chunk.path,issue:'sha256_mismatch',expected:chunk.sha256,actual:sha256(bytes)});
+  if(bytes.byteLength!==chunk.bytes)chunkIssues.push({path:chunk.path,issue:'byte_count_mismatch',expected:chunk.bytes,actual:bytes.byteLength});
+  let doc;
+  try{doc=JSON.parse(bytes.toString('utf8'));}catch{chunkIssues.push({path:chunk.path,issue:'invalid_json'});continue;}
+  if(doc.metadata?.contract!=='actual-public-geometry-chunk-v1'||doc.metadata?.jurisdiction!==chunk.jurisdiction||doc.metadata?.tier!==chunk.tier||doc.metadata?.root_entity_id!==chunk.root_entity_id||Number(doc.metadata?.feature_count)!==Number(chunk.feature_count)){
+   chunkIssues.push({path:chunk.path,issue:'metadata_mismatch'});
+  }
+  for(const feature of doc.features||[]){
+   const id=feature.properties?.entity_id;
+   const entity=publicById.get(id);
+   if(!entity){chunkIssues.push({path:chunk.path,entity_id:id,issue:'unknown_entity'});continue;}
+   if(entity.jurisdiction!==chunk.jurisdiction||entity.map?.tier!==chunk.tier)chunkIssues.push({path:chunk.path,entity_id:id,issue:'entity_scope_mismatch'});
+   const master=masterGeometryById.get(id);
+   if(!master||JSON.stringify(feature.geometry)!==JSON.stringify(master))chunkIssues.push({path:chunk.path,entity_id:id,issue:'coordinate_drift'});
+   if(chunkFeatureIds.has(id))chunkIssues.push({path:chunk.path,entity_id:id,issue:'duplicate_chunk_entity'});
+   chunkFeatureIds.add(id);
+  }
+ }
+ const expectedChunkIds=new Set(publicEntities.filter(entity=>entity.map?.tier!=='overview').map(entity=>entity.id));
+ const missingChunkIds=[...expectedChunkIds].filter(id=>!chunkFeatureIds.has(id));
+ const unexpectedChunkIds=[...chunkFeatureIds].filter(id=>!expectedChunkIds.has(id));
+ check('public_geometry_chunks_are_complete_and_byte_bound',
+  publicChunks.contract==='actual-public-geometry-chunks-v1'
+  && publicChunks.chunk_count===(publicChunks.chunks||[]).length
+  && chunkIssues.length===0&&missingChunkIds.length===0&&unexpectedChunkIds.length===0,
+  {chunk_count:publicChunks.chunk_count,issues:chunkIssues.slice(0,25),missing:missingChunkIds.slice(0,25),unexpected:unexpectedChunkIds.slice(0,25)});
+ check('manifest_binds_public_geometry_chunk_index',
+  manifest.public_contract?.geometry_chunks?.path===paths.public_chunks
+  && manifest.public_contract?.geometry_chunks?.contract===publicChunks.contract
+  && manifest.public_contract?.geometry_chunks?.schema_version===publicChunks.schema_version
+  && manifest.public_contract?.geometry_chunks?.chunk_count===publicChunks.chunk_count
+  && manifest.public_contract?.geometry_chunks?.sha256===currentHashes.public_chunks,
+  {manifest:manifest.public_contract?.geometry_chunks??null,actual:{path:paths.public_chunks,contract:publicChunks.contract,schema_version:publicChunks.schema_version,chunk_count:publicChunks.chunk_count,sha256:currentHashes.public_chunks}});
+}
 
 check('manifest_jurisdiction_gate_timestamps_are_current',
  manifest.jurisdiction_gates?.RO?.generated_at===roGate.generated_at&&manifest.jurisdiction_gates?.MD?.generated_at===mdGate.generated_at,
