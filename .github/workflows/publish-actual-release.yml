@@ -89,23 +89,23 @@ jobs:
               mkdir -p "$sbom_root"
               cp package.json package-lock.json "$sbom_root/"
               SBOM_ROOT="$sbom_root" RELEASE_VERSION="$release_version" node --input-type=module <<'"'"'NODE'"'"'
-import {readFile,writeFile} from "node:fs/promises";
-import {join} from "node:path";
-const root=process.env.SBOM_ROOT;
-const version=process.env.RELEASE_VERSION;
-for (const name of ["package.json","package-lock.json"]) {
-  const path=join(root,name);
-  const json=JSON.parse(await readFile(path,"utf8"));
-  if (name==="package.json") json.version=version;
-  else {
-    json.version=version;
-    json.packages ??= {};
-    json.packages[""] ??= {};
-    json.packages[""].version=version;
-  }
-  await writeFile(path,JSON.stringify(json,null,2)+"\n");
-}
-NODE
+          import {readFile,writeFile} from "node:fs/promises";
+          import {join} from "node:path";
+          const root=process.env.SBOM_ROOT;
+          const version=process.env.RELEASE_VERSION;
+          for (const name of ["package.json","package-lock.json"]) {
+            const path=join(root,name);
+            const json=JSON.parse(await readFile(path,"utf8"));
+            if (name==="package.json") json.version=version;
+            else {
+              json.version=version;
+              json.packages ??= {};
+              json.packages[""] ??= {};
+              json.packages[""].version=version;
+            }
+            await writeFile(path,JSON.stringify(json,null,2)+"\n");
+          }
+          NODE
               (
                 cd "$sbom_root"
                 npm sbom --package-lock-only --sbom-format cyclonedx
