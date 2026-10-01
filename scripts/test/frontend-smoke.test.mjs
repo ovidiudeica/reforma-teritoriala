@@ -20,6 +20,7 @@ test('ACTUAL v1 frontend binds only validated unsimplified release assets',async
  assert.equal(buildInfo.actual_snapshot_id,manifest.snapshot_id);
  assert.match(buildInfo.actual_release_tag,/^actual-v\d+\.\d+\.\d+$/);
  assert.match(buildInfo.app_version,/^web-v\d+(?:\.\d+)*$/);
+ assert.match(buildInfo.app_commit,/^[0-9a-f]{40}$/);
  assert.match(html,/leaflet@1\.9\.4\/dist\/leaflet\.css" integrity="sha256-p4NxAoJBhIIN\+hmNHrzRCf9tD\/miZyoHS5obTRR9BMY=" crossorigin=""/);
  assert.match(html,/leaflet@1\.9\.4\/dist\/leaflet\.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2\/Z9VM\+kNiyxNV1lvTlZBo=" crossorigin=""/);
  assert.doesNotMatch(html,/derivată simplificată/i);
