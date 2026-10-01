@@ -3,15 +3,14 @@ import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import * as XLSX from '@stackline/xlsx';
 
-const URL=process.env.CUATM_URL||'https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx';
+const URL='https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx';
 const SNAPSHOT='data/sources/cuatm-current.json';
-const positiveInt=(value,fallback)=>{
- const n=Number(value);
- return Number.isInteger(n)&&n>0?n:fallback;
-};
-const REQUEST_TIMEOUT_MS=positiveInt(process.env.CUATM_REQUEST_TIMEOUT_MS,60000);
-const RETRIES=positiveInt(process.env.CUATM_RETRIES,2);
-const RETRY_BACKOFF_MS=positiveInt(process.env.CUATM_RETRY_BACKOFF_MS,3000);
+const CUATM_REQUEST_TIMEOUT_MS=60000;
+const CUATM_RETRIES=2;
+const CUATM_RETRY_BACKOFF_MS=3000;
+const REQUEST_TIMEOUT_MS=CUATM_REQUEST_TIMEOUT_MS;
+const RETRIES=CUATM_RETRIES;
+const RETRY_BACKOFF_MS=CUATM_RETRY_BACKOFF_MS;
 const REQUIRED=['CodUnic','ParentCodUnic','CodStatistic','ParentCodStatistic','Statut','DenumireRO','DenumireRU'];
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[„”"'’]/g,'').replace(/\b(municipiul|municipiu|orasul|oras|comuna|satul|sat|raionul|raion|sectorul|sector)\b/g,' ').replace(/[^a-z0-9ăâîșț]+/gi,' ').trim().replace(/\s+/g,' ');
 const digits=v=>String(v??'').replace(/\.0$/,'').replace(/\s/g,'').trim();
