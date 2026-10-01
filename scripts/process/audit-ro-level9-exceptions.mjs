@@ -28,9 +28,10 @@ async function fetchText(url){
  }
  throw last;
 }
+const decodeXmlAttribute=value=>value.replace(/&(quot|amp|lt|gt);/g,(_,entity)=>({quot:'"',amp:'&',lt:'<',gt:'>'}[entity]));
 function attrs(s){
  return Object.fromEntries([...s.matchAll(/([\w:-]+)="([^"]*)"/g)].map(m=>[
-  m[1],m[2].replaceAll('&quot;','"').replaceAll('&amp;','&').replaceAll('&lt;','<').replaceAll('&gt;','>')
+  m[1],decodeXmlAttribute(m[2])
  ]));
 }
 function parseVersions(xml,id){
