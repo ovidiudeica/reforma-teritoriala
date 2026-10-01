@@ -94,6 +94,8 @@ jobs:
           echo "ACTUAL_RUNTIME_IMAGE=$ACTUAL_RUNTIME_IMAGE" >> "$GITHUB_ENV"
 
       - name: Gate ACTUAL host trust boundary
+        env:
+          ACTUAL_HOST_TRUST_AUDIT_PATH: ${{ runner.temp }}/actual-host-trust-audit.json
         run: node scripts/process/audit-actual-host-trust.mjs
 
       - name: Authenticate and pull exact ACTUAL runtime
