@@ -12,15 +12,13 @@ const DEFAULT_ENDPOINTS=[
  'https://overpass.kumi.systems/api/interpreter',
  'https://overpass.private.coffee/api/interpreter'
 ];
-const positiveInt=(value,fallback)=>{
- const n=Number(value);
- return Number.isInteger(n)&&n>0?n:fallback;
-};
-const ENDPOINTS=(process.env.OVERPASS_ENDPOINTS||'').split(',').map(x=>x.trim()).filter(Boolean);
-if(!ENDPOINTS.length)ENDPOINTS.push(...DEFAULT_ENDPOINTS);
-const RETRIES_PER_ENDPOINT=positiveInt(process.env.OVERPASS_RETRIES_PER_ENDPOINT,2);
-const REQUEST_TIMEOUT_MS=positiveInt(process.env.OVERPASS_REQUEST_TIMEOUT_MS,90000);
-const RETRY_BACKOFF_MS=positiveInt(process.env.OVERPASS_RETRY_BACKOFF_MS,5000);
+const ENDPOINTS=[...DEFAULT_ENDPOINTS];
+const OVERPASS_RETRIES_PER_ENDPOINT=2;
+const OVERPASS_REQUEST_TIMEOUT_MS=90000;
+const OVERPASS_RETRY_BACKOFF_MS=5000;
+const RETRIES_PER_ENDPOINT=OVERPASS_RETRIES_PER_ENDPOINT;
+const REQUEST_TIMEOUT_MS=OVERPASS_REQUEST_TIMEOUT_MS;
+const RETRY_BACKOFF_MS=OVERPASS_RETRY_BACKOFF_MS;
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9],requiredLevels:[4,8,9],requiredRelations:[],minElements:10000},
  MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredLevels:[4,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316],minElements:10000}
