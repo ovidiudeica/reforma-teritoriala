@@ -121,16 +121,16 @@ jobs:
             '
           docker logout ghcr.io
 
-          cat > release-assets/RELEASE-NOTES.md <<EOF
-          ACTUAL release $TAG
-
-          - Commit: `$EXPECTED_SHA`
-          - Snapshot: `$snapshot`
-          - Release fingerprint: `$fingerprint`
-          - Contract: `actual-public-entity-v1`
-
-          Required admission checks were successful on the exact released commit. Evidence was assembled with the digest-pinned ACTUAL runtime, exact Node/npm versions, and network disabled during SBOM generation. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.
-          EOF
+          # BEGIN RELEASE NOTES
+          {
+            printf 'ACTUAL release %s\n\n' "$TAG"
+            printf -- '- Commit: `%s`\n' "$EXPECTED_SHA"
+            printf -- '- Snapshot: `%s`\n' "$snapshot"
+            printf -- '- Release fingerprint: `%s`\n' "$fingerprint"
+            printf -- '- Contract: `%s`\n\n' 'actual-public-entity-v1'
+            printf '%s\n' 'Required admission checks were successful on the exact released commit. Evidence was assembled with the digest-pinned ACTUAL runtime, exact Node/npm versions, and network disabled during SBOM generation. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.'
+          } > release-assets/RELEASE-NOTES.md
+          # END RELEASE NOTES
 
       - name: Create draft and upload evidence
         shell: bash
