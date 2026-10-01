@@ -331,6 +331,8 @@ test('release publisher is manual, exact-SHA bound and builds evidence in the pi
  assert.match(workflow,/-e RELEASE_TAG="\$TAG"/);
  assert.match(workflow,/release_version="\$\{RELEASE_TAG#actual-v\}"/);
  assert.match(workflow,/json\.packages\[""\]\.version=version/);
+ assert.doesNotMatch(workflow,/^import \{readFile,writeFile\}/m,'release workflow heredoc must remain inside the YAML run scalar');
+ assert.match(workflow,/^\s{10}import \{readFile,writeFile\}/m);
  assert.match(workflow,/npm sbom --package-lock-only --sbom-format cyclonedx/);
  assert.match(workflow,/gh release create/);
  assert.match(workflow,/--draft/);
