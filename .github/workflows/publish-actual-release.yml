@@ -74,6 +74,7 @@ jobs:
           docker run --rm --network none \
             -e EXPECTED_NODE="$expected_node" \
             -e EXPECTED_NPM="$expected_npm" \
+            -e RELEASE_TAG="$TAG" \
             -v "$PWD:/workspace" \
             -w /workspace \
             "$runtime_ref" \
@@ -81,7 +82,34 @@ jobs:
               set -euo pipefail
               test "$(node --version)" = "v$EXPECTED_NODE"
               test "$(npm --version)" = "$EXPECTED_NPM"
-              npm sbom --package-lock-only --sbom-format cyclonedx > release-assets/actual-sbom.cdx.json
+              release_version="${RELEASE_TAG#actual-v}"
+              [[ "$release_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+              sbom_root=/tmp/actual-sbom-input
+              rm -rf "$sbom_root"
+              mkdir -p "$sbom_root"
+              cp package.json package-lock.json "$sbom_root/"
+              SBOM_ROOT="$sbom_root" RELEASE_VERSION="$release_version" node --input-type=module <<'"'"'NODE'"'"'
+import {readFile,writeFile} from "node:fs/promises";
+import {join} from "node:path";
+const root=process.env.SBOM_ROOT;
+const version=process.env.RELEASE_VERSION;
+for (const name of ["package.json","package-lock.json"]) {
+  const path=join(root,name);
+  const json=JSON.parse(await readFile(path,"utf8"));
+  if (name==="package.json") json.version=version;
+  else {
+    json.version=version;
+    json.packages ??= {};
+    json.packages[""] ??= {};
+    json.packages[""].version=version;
+  }
+  await writeFile(path,JSON.stringify(json,null,2)+"\n");
+}
+NODE
+              (
+                cd "$sbom_root"
+                npm sbom --package-lock-only --sbom-format cyclonedx
+              ) > release-assets/actual-sbom.cdx.json
               cp data/current/actual-release-manifest.json release-assets/
               cp data/current/actual-source-bundle-manifest.json release-assets/
               cp data/current/actual-review-evidence-bundle.json release-assets/
