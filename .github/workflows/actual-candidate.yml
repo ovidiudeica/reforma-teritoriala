@@ -117,8 +117,6 @@ jobs:
           echo "candidate_branch=$CANDIDATE_BRANCH" >> "$GITHUB_OUTPUT"
 
       - name: Gate ACTUAL host trust boundary
-        env:
-          ACTUAL_HOST_TRUST_AUDIT_PATH: ${{ runner.temp }}/actual-host-trust-audit.json
         run: node scripts/process/audit-actual-host-trust.mjs
 
       - name: Authenticate and pull exact ACTUAL runtime
@@ -244,7 +242,6 @@ jobs:
 
       - name: Write artifact-only candidate execution receipt
         env:
-          ACTUAL_CANDIDATE_EXECUTION_RECEIPT_PATH: ${{ runner.temp }}/actual-candidate-execution-receipt.json
           ACTUAL_SOURCE_TRIGGER: ${{ inputs.source_trigger }}
         run: node scripts/process/write-actual-candidate-execution-receipt.mjs
 
@@ -325,8 +322,8 @@ jobs:
           path: |
             data/current/actual-release-candidate.json
             data/current/actual-candidate-diff.json
-            ${{ runner.temp }}/actual-candidate-execution-receipt.json
-            ${{ runner.temp }}/actual-host-trust-audit.json
+            /tmp/actual-candidate-execution-receipt.json
+            /tmp/actual-host-trust-audit.json
             data/current/actual-network-denial-audit.json
             data/current/actual-source-bundle-manifest.json
             data/current/actual-source-bundle-gate.json
