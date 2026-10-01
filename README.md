@@ -68,10 +68,10 @@ GeoJSON-urile publice păstrează coordonatele geometriei master **fără simpli
 
 ## Mentenanță și securitate post-v1
 
-- sursele OSM/SIRUTA/CUATM sunt monitorizate zilnic pentru freshness; pragurile operaționale sunt 14 zile pentru OSM și 45 de zile pentru registrele oficiale;
+- sursele OSM/SIRUTA/CUATM sunt monitorizate zilnic pentru freshness; OSM este refresh-uit săptămânal prin candidate lifecycle, iar SIRUTA/CUATM lunar; pragurile operaționale sunt 14 zile pentru OSM și 45 de zile pentru registrele oficiale;
 - dependency chain-ul este lockfile-pinned, vendorizat pentru instalare offline și supravegheat prin Dependabot/CodeQL;
 - release-urile ACTUAL noi sunt publicate prin workflow-ul manual `Publish immutable ACTUAL release`, legat de exact SHA-ul `main` și de cele trei required checks;
-- release publisher-ul atașează manifestul, source bundle, review evidence, SBOM CycloneDX și checksums înainte de publicare;
+- release publisher-ul construiește evidence-ul și SBOM-ul CycloneDX în runtime-ul ACTUAL digest-pinned, cu Node/npm verificate și rețeaua dezactivată în timpul generării, apoi atașează manifestul, source bundle, review evidence și checksums înainte de publicare;
 - geometriile publice rămân nesimplificate; pentru web, tier-urile local/detail pot fi încărcate prin chunk-uri de viewport pe ancestor regional, fără mutarea sau reducerea coordonatelor;
 - versiunea aplicației web și release-ul de date ACTUAL sunt identități separate în `public/data/app-build-info.json`.
 
