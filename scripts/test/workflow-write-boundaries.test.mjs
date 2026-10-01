@@ -338,7 +338,7 @@ test('release publisher is manual, exact-SHA bound and builds evidence in the pi
  assert.match(workflow,/--draft/);
  assert.match(workflow,/actual-sbom\.cdx\.json/);
  assert.match(workflow,/actual-release-checksums\.sha256/);
- assert.match(workflow,/printf '%s\\\\n'/,'release notes must use printf, not an expandable heredoc');
+ assert.match(workflow,/printf '%s\\n'/,'release notes must use printf, not an expandable heredoc');
  assert.ok(workflow.includes('"- Commit: \\`$EXPECTED_SHA\\`" \\'));
  assert.ok(workflow.includes('"- Snapshot: \\`$snapshot\\`" \\'));
  assert.ok(workflow.includes('"- Release fingerprint: \\`$fingerprint\\`" \\'));
