@@ -1,7 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readdir,readFile} from 'node:fs/promises';
+import {mkdir,mkdtemp,readdir,readFile,rm} from 'node:fs/promises';
+import {execFile} from 'node:child_process';
+import {tmpdir} from 'node:os';
 import {join} from 'node:path';
+import {promisify} from 'node:util';
+
+const execFileAsync=promisify(execFile);
 
 const workflowsDir='.github/workflows';
 const allowedPushWorkflows=new Set([
@@ -341,6 +346,41 @@ test('release publisher is manual, exact-SHA bound and builds evidence in the pi
  assert.match(workflow,/gh release edit "\$TAG".*--draft=false/);
  assert.doesNotMatch(workflow,/\bgit(?:\s+-c\s+"[^"]*")?\s+push\b/);
  assert.doesNotMatch(workflow,/refs\/heads\//);
+});
+
+test('release notes render literal bound release identity without shell command substitution',async()=>{
+ const workflow=await readFile(join(workflowsDir,'publish-actual-release.yml'),'utf8');
+ assert.doesNotMatch(workflow,/cat > release-assets\/RELEASE-NOTES\.md <<EOF/);
+ const start='          # BEGIN RELEASE NOTES';
+ const end='          # END RELEASE NOTES';
+ const from=workflow.indexOf(start);
+ const to=workflow.indexOf(end,from);
+ assert.ok(from>=0&&to>from,'release notes markers must exist in publisher workflow');
+ const block=workflow.slice(from+start.length,to).split('\n').map(line=>line.replace(/^ {10}/,'')).join('\n').trim();
+ const dir=await mkdtemp(join(tmpdir(),'actual-release-notes-'));
+ try{
+  await mkdir(join(dir,'release-assets'));
+  const expectedSha='0123456789abcdef0123456789abcdef01234567';
+  const expectedSnapshot='actual-test-snapshot';
+  const expectedFingerprint='a'.repeat(64);
+  await execFileAsync('bash',['-lc',block],{
+   cwd:dir,
+   env:{...process.env,TAG:'actual-v9.9.9',EXPECTED_SHA:expectedSha,snapshot:expectedSnapshot,fingerprint:expectedFingerprint}
+  });
+  const notes=await readFile(join(dir,'release-assets','RELEASE-NOTES.md'),'utf8');
+  assert.equal(notes,
+`ACTUAL release actual-v9.9.9
+
+- Commit: \`${expectedSha}\`
+- Snapshot: \`${expectedSnapshot}\`
+- Release fingerprint: \`${expectedFingerprint}\`
+- Contract: \`actual-public-entity-v1\`
+
+Required admission checks were successful on the exact released commit. Evidence was assembled with the digest-pinned ACTUAL runtime, exact Node/npm versions, and network disabled during SBOM generation. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.
+`);
+ } finally {
+  await rm(dir,{recursive:true,force:true});
+ }
 });
 
 
