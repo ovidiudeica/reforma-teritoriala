@@ -338,6 +338,12 @@ test('release publisher is manual, exact-SHA bound and builds evidence in the pi
  assert.match(workflow,/--draft/);
  assert.match(workflow,/actual-sbom\.cdx\.json/);
  assert.match(workflow,/actual-release-checksums\.sha256/);
+ assert.ok(workflow.includes("printf '%s\\n' \\\"), 'release notes must use printf, not an expandable heredoc');
+ assert.ok(workflow.includes('"- Commit: \\`$EXPECTED_SHA\\`" \\'));
+ assert.ok(workflow.includes('"- Snapshot: \\`$snapshot\\`" \\'));
+ assert.ok(workflow.includes('"- Release fingerprint: \\`$fingerprint\\`" \\'));
+ assert.ok(workflow.includes('"- Contract: \\`actual-public-entity-v1\\`" \\'));
+ assert.doesNotMatch(workflow,/RELEASE-NOTES\.md\s*<<\s*EOF/,'release notes must not use an expandable heredoc');
  assert.match(workflow,/gh release edit "\$TAG".*--draft=false/);
  assert.doesNotMatch(workflow,/\bgit(?:\s+-c\s+"[^"]*")?\s+push\b/);
  assert.doesNotMatch(workflow,/refs\/heads\//);
