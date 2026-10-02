@@ -6,7 +6,7 @@ import {SOURCE_BUNDLE_PATH,SOURCE_BUNDLE_GATE_PATH,sha256,sourceBundleFingerprin
 const readJson=async path=>JSON.parse(await readFile(path,'utf8'));
 const clone=value=>structuredClone(value);
 
-test('committed ACTUAL source bundle validates exact OSM, SIRUTA and CUATM inputs',async()=>{
+test('committed ACTUAL source bundle validates exact active source inputs',async()=>{
  const bundle=await readJson(SOURCE_BUNDLE_PATH);
  const gate=await readJson(SOURCE_BUNDLE_GATE_PATH);
  const bytes=await readFile(SOURCE_BUNDLE_PATH);
@@ -15,7 +15,14 @@ test('committed ACTUAL source bundle validates exact OSM, SIRUTA and CUATM input
  assert.equal(gate.status,'PASS');
  assert.equal(gate.source_bundle_sha256,sha256(bytes));
  assert.equal(gate.bundle_fingerprint_sha256,bundle.bundle_fingerprint_sha256);
- assert.deepEqual(Object.keys(bundle.sources).sort(),['cuatm','osm','siruta']);
+ const policy=await readJson('data/sources/actual-settlement-policy.json');
+ const bretcuActive=(policy?.jurisdictions?.RO?.official_geometry_exceptions||[]).some(x=>String(x?.legal_id)==='64096');
+ assert.deepEqual(Object.keys(bundle.sources).sort(),bretcuActive?['cuatm','osm','ro_bretcu_ancpi','siruta']:['cuatm','osm','siruta']);
+ if(bretcuActive){
+  assert.equal(bundle.sources.ro_bretcu_ancpi?.legal_id,'64096');
+  assert.equal(bundle.sources.ro_bretcu_ancpi?.authority?.includes('ANCPI'),true);
+  assert.match(bundle.sources.ro_bretcu_ancpi?.geometry_sha256||'',/^[0-9a-f]{64}$/);
+ }
  assert.deepEqual(Object.keys(bundle.sources.osm.countries).sort(),['MD','RO']);
 });
 
