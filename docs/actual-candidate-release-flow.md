@@ -34,6 +34,14 @@ Direct source refreshes cannot replace the persisted release. The OSM, SIRUTA an
 `source refresh -> candidate build -> review diff -> explicit promotion -> protected PR -> main`.
 
 
+## Semantic geometry-policy migration
+
+ACTUAL v1.1 geometry-policy changes use the same candidate lifecycle as source changes. The candidate workflow exposes an explicit `migrate_geometry_policy_v1_1` boolean input. When enabled, the deterministic migration runs inside the digest-pinned ACTUAL runtime with network disabled before the full deterministic candidate phase.
+
+Only `data/sources/actual-settlement-policy.json` is added to the candidate publication write surface. The geometry-role contract remains repository-controlled infrastructure. The migrated policy binds `schemas/actual-geometry-role-contract.json`, switches RO component-locality inventory to SIRUTA level 3, and requires unique official legal-identity accounting for RO and MD.
+
+Legacy policy bytes continue to use `actual-semantic-v1`. The explicit v1.1 geometry-role binding upgrades candidate content identity to `actual-semantic-v2`; therefore the migration is always a genuine semantic `CHANGE` and cannot be admitted as `NO_CHANGE`.
+
 ## Stable release identity and NO_CHANGE
 
 Release identity is based on canonical administrative content, not regeneration timestamps or informational OSM metadata. Exact SHA256 hashes of every manifest component remain mandatory integrity checks, but they do not by themselves create a new release identity.
