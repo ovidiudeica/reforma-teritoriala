@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ovidiudeica.github.io/reforma-teritoriala/schemas/actual-public-entity-v2.schema.json",
+  "title": "Reforma Teritorială — ACTUAL public entity contract v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "contract",
+    "mode",
+    "entity_count",
+    "entities"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "contract": {
+      "const": "actual-public-entity-v2"
+    },
+    "mode": {
+      "const": "ACTUAL"
+    },
+    "generated_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "entity_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entity"
+      }
+    }
+  },
+  "$defs": {
+    "entity": {
+      "type": "object",
+      "required": [
+        "id",
+        "status",
+        "jurisdiction",
+        "display_name",
+        "display_type",
+        "legal",
+        "hierarchy",
+        "representation",
+        "validation",
+        "map"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(?:osm-r[0-9]+|ro-siruta-[0-9]+)$"
+        },
+        "status": {
+          "const": "current"
+        },
+        "jurisdiction": {
+          "enum": [
+            "RO",
+            "MD"
+          ]
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "display_type": {
+          "type": "string"
+        },
+        "legal": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "registry",
+                "id",
+                "name",
+                "type",
+                "parent_id",
+                "parent_name",
+                "source"
+              ],
+              "properties": {
+                "registry": {
+                  "enum": [
+                    "SIRUTA",
+                    "CUATM"
+                  ]
+                },
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "status_code": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "parent_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "parent_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "source": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "hierarchy": {
+          "type": "object"
+        },
+        "representation": {
+          "type": "object",
+          "required": [
+            "source",
+            "source_url",
+            "osm_relation_id",
+            "admin_level",
+            "geometry_source",
+            "geometry_role",
+            "public_geometry_precision"
+          ],
+          "properties": {
+            "source": {
+              "enum": [
+                "OpenStreetMap",
+                "ANCPI"
+              ]
+            },
+            "osm_relation_id": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "admin_level": {
+              "type": [
+                "integer",
+                "string",
+                "null"
+              ]
+            },
+            "geometry_source": {
+              "type": "string"
+            },
+            "geometry_role": {
+              "const": "current_representation"
+            },
+            "public_geometry_precision": {
+              "const": "master_coordinate_fidelity"
+            },
+            "source_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_feature_id": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "geometry_authority": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "required": [
+            "legal_identity_status",
+            "review_required"
+          ]
+        },
+        "map": {
+          "type": "object",
+          "required": [
+            "tier",
+            "bbox",
+            "center"
+          ],
+          "properties": {
+            "tier": {
+              "enum": [
+                "overview",
+                "local",
+                "detail"
+              ]
+            },
+            "bbox": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number"
+              }
+            },
+            "center": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
