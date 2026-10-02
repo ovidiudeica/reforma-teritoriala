@@ -2,12 +2,12 @@
   "schema_version": 1,
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "manifest_sha256": "763313196b7bdd0b7bb7f6ef182bbdf77161f6d6cc0e6e347234910e664d3c31",
+  "manifest_sha256": "7b01990aa317f98f953beeeb823f752319ffbd5f2db70ffe2c269ef96897af6b",
   "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
   "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-  "build_environment_fingerprint_sha256": "c9803455b84c872ec67d8b4fb4dce59f4f03befd0f093c541f76aab132029366",
+  "build_environment_fingerprint_sha256": "8aaacd0cb58bede802e1f8764cab67a1a3424494d00bc3df85cd5c5311af97e5",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
     "base_snapshot_id": "actual-5383ff3db7cf3f67",
@@ -19,5 +19,9 @@
     "candidate_commit_sha": "3a1b5e0c00eb1cf0c2da4b8f6651e89553b80cee",
     "promotion_audit_path": "data/current/actual-candidate-promotion-audit.json"
   },
-  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes."
+  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.",
+  "provenance_hardening": {
+    "previous_manifest_sha256": "763313196b7bdd0b7bb7f6ef182bbdf77161f6d6cc0e6e347234910e664d3c31",
+    "reason": "p0-geometry-policy-candidate-migration"
+  }
 }
