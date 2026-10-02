@@ -20,6 +20,7 @@ const publicationSurface=path=>
  || path==='public/data/actual-geometry-chunks.json'
  || path.startsWith('public/geo/current/')
  || path.startsWith('public/geo/actual/')
+ || path==='data/sources/actual-settlement-policy.json'
  || path==='data/sources/ro-siruta-current.json'
  || path==='data/sources/cuatm-current.json'
  || path==='data/sources/osm-current.json'
