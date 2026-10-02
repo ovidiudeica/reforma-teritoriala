@@ -100,8 +100,10 @@ const actualReleasePromise=(async()=>{
   if(gate.status!=='PASS')throw new Error('Release ACTUAL nu a trecut gate-ul combinat');
   if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Manifestul ACTUAL nu corespunde gate-ului');
   if(manifest.public_contract?.contract!=='actual-public-entity-v1')throw new Error('Contractul public ACTUAL lipsește din manifest');
-  if(buildInfo?.actual_snapshot_id&&buildInfo.actual_snapshot_id!==manifest.snapshot_id)throw new Error('Build metadata nu corespunde snapshot-ului ACTUAL');
-  if(status)status.textContent='ACTUAL: '+manifest.snapshot_id+' · '+(buildInfo?.actual_release_tag||'release validat')+(buildInfo?.app_version?' · '+buildInfo.app_version:'');
+  const publishedRelease=buildInfo?.actual_release_tag
+   ?'publicat: '+buildInfo.actual_release_tag+(buildInfo.actual_snapshot_id?' · '+buildInfo.actual_snapshot_id:'')
+   :'fără release publicat';
+  if(status)status.textContent='ACTUAL curent: '+manifest.snapshot_id+' · '+publishedRelease+(buildInfo?.app_version?' · '+buildInfo.app_version:'');
   releaseData={manifest,gate,buildInfo};
   return releaseData;
  }catch(e){

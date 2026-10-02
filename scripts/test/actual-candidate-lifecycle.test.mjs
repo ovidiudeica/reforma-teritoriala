@@ -472,11 +472,19 @@ test('geometry-role contract keeps administrative, statistical and locality sema
 
 
 test('geometry policy migration upgrades semantic identity only after explicit opt-in',async()=>{
- const legacy=await loadDocuments();
+ const current=await loadDocuments();
+ const legacy=clone(current);
+ legacy.settlementPolicy.policy_version='2026-09-27';
+ delete legacy.settlementPolicy.coverage_contract_version;
+ delete legacy.settlementPolicy.geometry_role_contract;
+ legacy.settlementPolicy.jurisdictions.RO.official_inventory_selector='SIRUTA records whose level is not 2';
+ delete legacy.settlementPolicy.jurisdictions.RO.coverage_accounting;
+ delete legacy.settlementPolicy.jurisdictions.MD.coverage_accounting;
  const legacyFingerprint=actualSemanticFingerprint(legacy);
  assert.equal(legacyFingerprint.algorithm,'actual-semantic-v1');
 
  const migrated=clone(legacy);
+ migrated.settlementPolicy.policy_version='2026-10-02-v1.1';
  migrated.settlementPolicy.coverage_contract_version=2;
  migrated.settlementPolicy.geometry_role_contract={
   path:'schemas/actual-geometry-role-contract.json',
