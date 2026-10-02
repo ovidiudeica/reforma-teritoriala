@@ -11,6 +11,7 @@ const MD_NON_CUATM='data/current/md-cuatm-non-cuatm-allotments.json';
 const MD_INDIVIDUAL='data/sources/md-cuatm-individual-review.json';
 const RO_COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const MD_SEMANTIC_BRIDGE='data/current/md-cuatm-semantic-bridge.json';
+const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const OUT_INDEX='public/data/actual-entities.json';
 const OUT_DIR='public/geo/actual';
 const OUT_CHUNK_INDEX='public/data/actual-geometry-chunks.json';
@@ -18,9 +19,10 @@ const OUT_CHUNK_DIR=OUT_DIR+'/chunks';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
-const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge]=await Promise.all([
- read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE),read(MD_SEMANTIC_BRIDGE)
+const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge,settlementPolicy]=await Promise.all([
+ read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE),read(MD_SEMANTIC_BRIDGE),read(SETTLEMENT_POLICY)
 ]);
+const publicContractV2=settlementPolicy?.public_contract==='actual-public-entity-v2';
 if(roCountyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
 if(mdSemanticBridge.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
 
@@ -164,7 +166,7 @@ for(const e of entities){
  const bounds=turf.bbox(f);
  const center=turf.centroid(f).geometry.coordinates;
  const parent=entityById.get(e.parent_id)||null;
- const level=e.osm?.admin_level??null;
+ const level=e.osm?.admin_level??e.geometry?.admin_level??null;
  const tier=tierFor(level);
  const validation=validationFor(e,legal);
  const item={
@@ -185,13 +187,15 @@ for(const e of entities){
    legal_parent_name:legal?.parent_name||null
   },
   representation:{
-   source:'OpenStreetMap',
-   source_url:e.source_url||('https://www.openstreetmap.org/relation/'+e.osm?.relation_id),
+   source:e.source||'OpenStreetMap',
+   source_url:e.source_url||((e.osm?.relation_id!=null)?'https://www.openstreetmap.org/relation/'+e.osm.relation_id:null),
    osm_relation_id:e.osm?.relation_id??null,
+   source_feature_id:e.geometry?.source_feature_id??null,
    admin_level:level,
    place:e.osm?.place||null,
    inferred_type:e.classification?.osm_inferred_type||publicType||null,
-   geometry_source:'OpenStreetMap administrative relation',
+   geometry_source:e.source==='ANCPI'?'ANCPI administrative unit feature':'OpenStreetMap administrative relation',
+   geometry_authority:e.geometry?.authority||null,
    geometry_role:'current_representation',
    canonical_geometry_role:e.geometry?.role||null,
    geometry_scope:e.geometry?.scope||null,
@@ -233,7 +237,8 @@ for(const [id,source] of featureById){
    parent_catalog_id:item.hierarchy.parent_catalog_id,
    osm_relation_id:item.representation.osm_relation_id,
    legal_identity_status:item.validation.legal_identity_status,
-   geometry_source:'OpenStreetMap',
+   geometry_source:item.representation.source,
+   geometry_authority:item.representation.geometry_authority,
    canonical_geometry_role:item.representation.canonical_geometry_role,
    geometry_scope:item.representation.geometry_scope,
    geometry_precision:'master_coordinate_fidelity'
@@ -276,11 +281,11 @@ const countsByJurisdiction=Object.fromEntries(['RO','MD'].map(j=>[j,publicEntiti
 const countsByTier=Object.fromEntries(Object.entries(tierFeatures).map(([key,features])=>[key,features.length]));
 const legalStatusCounts=publicEntities.reduce((a,x)=>(a[x.validation.legal_identity_status]=(a[x.validation.legal_identity_status]||0)+1,a),{});
 const index={
- schema_version:1,
- contract:'actual-public-entity-v1',
+ schema_version:publicContractV2?2:1,
+ contract:publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1',
  mode:'ACTUAL',
  generated_at:catalog.generated_at??null,
- policy:'Public contract separates official legal identity from OSM representation. Null legal fields are preserved when no positive official identity is bound; OSM metadata never creates legal identity. Public web geometries preserve the exact master feature coordinates and are partitioned only for progressive loading.',
+ policy:'Public contract separates official legal identity from geometry representation. OpenStreetMap remains the primary ACTUAL geometry source; explicitly reviewed official geometry exceptions may use another named authority such as ANCPI. Null legal fields are preserved when no positive official identity is bound. Public web geometries preserve exact master coordinates and are partitioned only for progressive loading.',
  entity_count:publicEntities.length,
  entity_count_by_jurisdiction:countsByJurisdiction,
  feature_count_by_tier:countsByTier,
@@ -317,7 +322,7 @@ for(const jurisdiction of ['RO','MD']){
     jurisdiction,
     tier,
     feature_count:tierFeatures[key].length,
-    geometry_source:'OpenStreetMap',
+    geometry_source:publicContractV2?'mixed_authoritative_sources':'OpenStreetMap',
     geometry_precision:'master_coordinate_fidelity'
    },
    features:tierFeatures[key]
@@ -339,7 +344,7 @@ for(const chunk of geometryChunks){
    tier:chunk.tier,
    root_entity_id:chunk.root_entity_id,
    feature_count:source.features.length,
-   geometry_source:'OpenStreetMap',
+   geometry_source:publicContractV2?'mixed_authoritative_sources':'OpenStreetMap',
    geometry_precision:'master_coordinate_fidelity'
   },
   features:source.features
