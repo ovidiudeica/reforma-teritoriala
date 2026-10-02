@@ -55,6 +55,7 @@ const reviewedRoOtherLevel=new Set((roOtherLevel.items||[]).map(x=>String(x.lega
 const reviewedRoCoverage=new Set([...reviewedRoOfficialOnly,...reviewedRoOtherLevel]);
 
 const rows=[],blocking=[];
+const STATE_RELATION_IDS={RO:90689,MD:58974};
 const add=(jurisdiction,type,official,covered,missing,mode,detail={})=>{
  const row={
   jurisdiction,type,
@@ -72,6 +73,35 @@ const add=(jurisdiction,type,official,covered,missing,mode,detail={})=>{
   policy_violation_count:Number(detail.policy_violation_count||0),
   missing_official_identities:missing,
   policy_violations:detail.policy_violations||[]
+ });
+};
+
+const auditStateContext=jurisdiction=>{
+ const expectedRelationId=STATE_RELATION_IDS[jurisdiction];
+ const states=catalogEntities.filter(e=>e.jurisdiction===jurisdiction&&e.type==='state');
+ const state=states[0]||null;
+ const p=state?publicById.get(state.id):null;
+ const issues=[];
+ if(states.length!==1)issues.push({issue:'state_context_cardinality',expected:1,actual:states.length});
+ if(state){
+  if(state.category!=='context')issues.push({issue:'state_context_category',actual:state.category??null});
+  if(Number(state.osm?.admin_level)!==2)issues.push({issue:'state_context_admin_level',actual:state.osm?.admin_level??null});
+  if(Number(state.osm?.relation_id)!==expectedRelationId)issues.push({issue:'state_context_relation_id',expected:expectedRelationId,actual:state.osm?.relation_id??null});
+  if(state.parent_id!==null)issues.push({issue:'state_context_parent_must_be_null',actual:state.parent_id??null});
+  if(state.review_required!==false)issues.push({issue:'state_context_review_required',actual:state.review_required??null});
+  if(state.geometry?.role!=='administrative_boundary'||state.geometry?.scope!=='state_context'||state.geometry?.legal_geometry_equivalence_asserted!==false)issues.push({issue:'state_context_geometry_contract',actual:state.geometry??null});
+  if(!masterById.has(state.id))issues.push({issue:'state_context_master_geometry_missing'});
+ }
+ if(!p)issues.push({issue:'state_context_public_entity_missing'});
+ else{
+  if(p.legal!==null)issues.push({issue:'state_context_must_not_invent_registry_identity',actual:p.legal});
+  if(p.validation?.legal_identity_status!=='not_bound_to_official_registry')issues.push({issue:'state_context_identity_status',actual:p.validation?.legal_identity_status??null});
+  if(p.representation?.geometry_role!=='current_representation')issues.push({issue:'state_context_legacy_geometry_role',actual:p.representation?.geometry_role??null});
+  if(p.representation?.canonical_geometry_role!=='administrative_boundary')issues.push({issue:'state_context_canonical_geometry_role',actual:p.representation?.canonical_geometry_role??null});
+  if(p.representation?.geometry_scope!=='state_context')issues.push({issue:'state_context_geometry_scope',actual:p.representation?.geometry_scope??null});
+ }
+ add(jurisdiction,'state',1,issues.length?0:1,issues.length?[{id:state?.id??null,name:state?.name??null,issues}]:[],issues.length?'FAIL':'PASS',{
+  official_registry:null,exhaustive:true,context_only:true,expected_osm_relation_id:expectedRelationId,geometry_role:'administrative_boundary',geometry_scope:'state_context',policy_violation_count:issues.length,policy_violations:issues
  });
 };
 
@@ -158,9 +188,7 @@ const missingRoCounties=roCounties
 add('RO','county',roCounties.length,roCounties.length-missingRoCounties.length,missingRoCounties,missingRoCounties.length?'FAIL':'PASS',{
  official_registry:'SIRUTA',exhaustive:true,identity_bridge:'data/current/ro-county-siruta-bridge.json'
 });
-add('RO','state',1,null,[],'OBSERVATIONAL',{
- reason:'State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/8/9; country geometry is used as import containment context, not a catalog entity.'
-});
+auditStateContext('RO');
 
 const allowedGeometryTypes=new Set(settlementPolicy.common_requirements.allowed_geometry_types||[]);
 const validateCommonSettlementRepresentation=(e,p)=>{
@@ -275,9 +303,7 @@ for(const type of ['district','level_2_municipality','special_territorial_unit',
    ?'data/current/md-cuatm-semantic-bridge.json':null
  });
 }
-add('MD','state',1,null,[],'OBSERVATIONAL',{
- reason:'State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/6/8/9; country geometry is used as import containment context, not a catalog entity.'
-});
+auditStateContext('MD');
 
 const mdSettlementPolicy=settlementPolicy.jurisdictions.MD;
 const mdSettlementStatusCodes=new Set((mdSettlementPolicy.official_status_codes||[]).map(String));
