@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_id": "actual-5383ff3db7cf3f67",
-  "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-  "manifest_sha256": "6e0d586c17f5770ecfab6f3784644de188dcc96af0bd4245adee465f551d7b2e",
+  "snapshot_id": "actual-926d9b00b221d650",
+  "release_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+  "manifest_sha256": "23d017818449cd9e967263e5a8021cb535ede83de4766230902e081d978e95c1",
   "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
@@ -11,17 +11,13 @@
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
     "base_snapshot_id": "actual-5383ff3db7cf3f67",
-    "base_commit_sha": "1390b27c0a248559416cdc36af5e7270f7c3ce73",
-    "diff_report_sha256": "b6ec58ddeba4551ebaa446d3b903b744eaaff65123533c6aab0910cf0dbff970",
+    "base_commit_sha": "39bf98fff0c5e56e91f8a09baddb8b4909b752ee",
+    "diff_report_sha256": "7e7e0c6efa303b4a9a5c9e8d98de1bdc2adc6e2856aae3e9b8da78974e5a4ca2",
     "review_required": true,
     "substantive_change_count": 1,
-    "candidate_identity_sha256": "2086f1ed4b927faa8fa2e7be6abc9e10d49c9d3d00c128c062b7e1a5eba84831",
-    "candidate_commit_sha": "3a1b5e0c00eb1cf0c2da4b8f6651e89553b80cee",
+    "candidate_identity_sha256": "de7c41bd17e59759603c83bc1b2a2b9f31c26fb78e77e1ce75c2f018a3031919",
+    "candidate_commit_sha": "72f5e94f7f8fec71842430b36020d002e2b38f93",
     "promotion_audit_path": "data/current/actual-candidate-promotion-audit.json"
   },
-  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.",
-  "provenance_hardening": {
-    "previous_manifest_sha256": "763313196b7bdd0b7bb7f6ef182bbdf77161f6d6cc0e6e347234910e664d3c31",
-    "reason": "p0-geometry-policy-candidate-migration"
-  }
+  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes."
 }
