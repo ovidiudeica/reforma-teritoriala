@@ -99,11 +99,18 @@
       "jurisdiction": "RO",
       "type": "state",
       "official_count": 1,
-      "covered_official_identity_count": null,
+      "covered_official_identity_count": 1,
       "missing_official_identity_count": 0,
-      "coverage_status": "OBSERVATIONAL",
+      "coverage_status": "PASS",
       "missing_official_identities": [],
-      "reason": "State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/8/9; country geometry is used as import containment context, not a catalog entity."
+      "official_registry": null,
+      "exhaustive": true,
+      "context_only": true,
+      "expected_osm_relation_id": 90689,
+      "geometry_role": "administrative_boundary",
+      "geometry_scope": "state_context",
+      "policy_violation_count": 0,
+      "policy_violations": []
     },
     {
       "jurisdiction": "RO",
@@ -228,11 +235,18 @@
       "jurisdiction": "MD",
       "type": "state",
       "official_count": 1,
-      "covered_official_identity_count": null,
+      "covered_official_identity_count": 1,
       "missing_official_identity_count": 0,
-      "coverage_status": "OBSERVATIONAL",
+      "coverage_status": "PASS",
       "missing_official_identities": [],
-      "reason": "State boundary is intentionally outside the ACTUAL administrative-unit catalog imported at levels 4/6/8/9; country geometry is used as import containment context, not a catalog entity."
+      "official_registry": null,
+      "exhaustive": true,
+      "context_only": true,
+      "expected_osm_relation_id": 58974,
+      "geometry_role": "administrative_boundary",
+      "geometry_scope": "state_context",
+      "policy_violation_count": 0,
+      "policy_violations": []
     },
     {
       "jurisdiction": "MD",

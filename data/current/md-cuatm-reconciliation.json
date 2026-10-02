@@ -5,9 +5,9 @@
   "official_source_url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
   "official_snapshot_records": 1721,
   "official_parent_links": 1684,
-  "entity_count": 2595,
+  "entity_count": 2596,
   "matched_count": 2471,
-  "unmatched_count": 1,
+  "unmatched_count": 2,
   "non_cuatm_count": 123,
   "non_cuatm_by_class": {
     "non_cuatm_allotment_boundary": 123
@@ -19,10 +19,24 @@
     "reviewed_override": 5
   },
   "unmatched_by_reason": {
-    "name_absent_from_official_snapshot": 1
+    "name_absent_from_official_snapshot": 2
   },
   "policy": "Automatic legal assignment: unique exact CUATM key (high); exact normalized name plus a uniquely matching verified official parent (medium); or an OSM child whose exact normalized name and official legal ID equal its already CUATM-verified OSM parent, treated explicitly as the same legal entity (medium). Fuzzy and name-only matches never auto-assign.",
   "matches": [
+    {
+      "id": "osm-r58974",
+      "name": "Moldova",
+      "cuatm_key": null,
+      "legal_id": null,
+      "legal_name": null,
+      "status_code": null,
+      "legal_source": "BNS CUATM",
+      "match_method": null,
+      "confidence": null,
+      "unmatched_reason": "name_absent_from_official_snapshot",
+      "name_candidate_count": 0,
+      "parent_official_code": null
+    },
     {
       "id": "osm-r1699032",
       "name": "Găgăuzia",

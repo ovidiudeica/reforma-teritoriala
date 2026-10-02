@@ -2,12 +2,12 @@
   "schema_version": 2,
   "mode": "ACTUAL_CANDIDATE_PROMOTION",
   "status": "PASS",
-  "base_ref": "39bf98fff0c5e56e91f8a09baddb8b4909b752ee",
-  "candidate_commit_sha": "72f5e94f7f8fec71842430b36020d002e2b38f93",
+  "base_ref": "26e6a88691255464b55b1af6095f104b395ebad7",
+  "candidate_commit_sha": "cb1d8ec557a821d7b1a6bc4bc5ec6d15df098853",
   "base_release": {
-    "snapshot_id": "actual-5383ff3db7cf3f67",
-    "release_fingerprint_sha256": "5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc",
-    "manifest_sha256": "6e0d586c17f5770ecfab6f3784644de188dcc96af0bd4245adee465f551d7b2e",
+    "snapshot_id": "actual-926d9b00b221d650",
+    "release_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+    "manifest_sha256": "23d017818449cd9e967263e5a8021cb535ede83de4766230902e081d978e95c1",
     "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
     "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
@@ -15,11 +15,11 @@
     "build_environment_fingerprint_sha256": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272"
   },
   "candidate": {
-    "snapshot_id": "actual-926d9b00b221d650",
-    "release_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
-    "manifest_sha256": "23d017818449cd9e967263e5a8021cb535ede83de4766230902e081d978e95c1",
+    "snapshot_id": "actual-5f174ce51b754eed",
+    "release_fingerprint_sha256": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
+    "manifest_sha256": "d9d6970d1f71d4388499a518a027732fc4629aed572e9bf3d7c71afb2edab4b9",
     "release_gate_status": "PASS",
-    "content_fingerprint_sha256": "926d9b00b221d650d2dc06c787a9c4cae7dd326865eedd3eccf45e7899eded0b",
+    "content_fingerprint_sha256": "5f174ce51b754eedc9181a25f40d388576dd5c3514535767ca0e501459ab4067",
     "source_bundle_fingerprint_sha256": "b96449ac4dd8d7a6b099d457ba4203a96983699ea954efc0b58b168808c0db3f",
     "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
     "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
@@ -29,8 +29,8 @@
     "exact_base_manifest_bytes_reused": false
   },
   "review_required": true,
-  "substantive_change_count": 1,
-  "confirmation": "PROMOTE actual-926d9b00b221d650",
+  "substantive_change_count": 5,
+  "confirmation": "PROMOTE actual-5f174ce51b754eed",
   "failures": [],
   "policy": "Only CHANGE candidates are promotable. NO_CHANGE candidates are terminal and must never create a promotion PR. CHANGE promotion still requires exact candidate bytes, passing gate and an unchanged persisted base."
 }
