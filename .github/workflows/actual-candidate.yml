@@ -28,6 +28,11 @@ on:
         required: false
         type: boolean
         default: false
+      migrate_geometry_policy_v1_1:
+        description: 'Apply the deterministic ACTUAL v1.1 geometry coverage policy migration'
+        required: false
+        type: boolean
+        default: false
       source_trigger:
         description: 'Audit label for the source that requested this candidate build'
         required: false
@@ -51,6 +56,10 @@ on:
         type: boolean
         default: false
       refresh_osm:
+        required: false
+        type: boolean
+        default: false
+      migrate_geometry_policy_v1_1:
         required: false
         type: boolean
         default: false
@@ -178,6 +187,7 @@ jobs:
           echo "- Refresh RO SIRUTA: ${{ inputs.refresh_ro_siruta }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh MD CUATM: ${{ inputs.refresh_md_cuatm }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refresh OSM raw source: ${{ inputs.refresh_osm }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Geometry policy migration v1.1: ${{ inputs.migrate_geometry_policy_v1_1 }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Deterministic network: docker --network none" >> "$GITHUB_STEP_SUMMARY"
           echo "- CPU execution profile: linux/amd64, cpuset=0, Node --jitless, UV_THREADPOOL_SIZE=1" >> "$GITHUB_STEP_SUMMARY"
 
@@ -214,6 +224,31 @@ jobs:
               if [ "$REFRESH_RO_SIRUTA" = "true" ]; then npm run import:ro-siruta; fi
               if [ "$REFRESH_MD_CUATM" = "true" ]; then npm run import:md-cuatm; fi
               if [ "$REFRESH_OSM" = "true" ]; then npm run import:osm; fi
+            '
+
+      - name: Apply explicitly requested ACTUAL v1.1 geometry policy migration
+        if: inputs.migrate_geometry_policy_v1_1 == true
+        run: |
+          docker run --rm \
+            --platform linux/amd64 \
+            --network none \
+            --cpuset-cpus 0 \
+            --cap-drop ALL \
+            --security-opt no-new-privileges=true \
+            --user "$(id -u):$(id -g)" \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace" \
+            --workdir /workspace \
+            --env NODE_OPTIONS=--jitless \
+            --env UV_THREADPOOL_SIZE=1 \
+            --env TZ=UTC \
+            --env LANG=C.UTF-8 \
+            --env LC_ALL=C.UTF-8 \
+            --env HOME=/tmp/actual-home \
+            "$ACTUAL_RUNTIME_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              mkdir -p "$HOME"
+              node scripts/process/apply-actual-geometry-policy-v1-1.mjs
             '
 
       - name: Run entire deterministic ACTUAL phase with kernel egress disabled
@@ -282,6 +317,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/current/ public/data/actual-entities.json public/data/actual-geometry-chunks.json public/geo/current/ public/geo/actual/ \
+            data/sources/actual-settlement-policy.json \
             data/sources/ro-siruta-current.json data/sources/cuatm-current.json data/sources/osm-current.json data/sources/osm-snapshots/ \
             data/sources/ro-osm-official-exception-history.json data/sources/ro-osm-level9-exception-history.json \
             data/sources/md-osm-multiple-representation-history.json data/sources/md-balti-city-boundary-way-history.json \
@@ -343,6 +379,8 @@ jobs:
             data/current/actual-official-identity-audit.json
             data/current/actual-regression-audit.json
             data/current/actual-byte-reproducibility-audit.json
+            data/sources/actual-settlement-policy.json
+            schemas/actual-geometry-role-contract.json
             data/current/ro-release-gate.json
             data/current/md-release-gate.json
             data/sources/osm-current.json

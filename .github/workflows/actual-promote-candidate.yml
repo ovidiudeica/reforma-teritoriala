@@ -19,6 +19,20 @@ on:
         description: 'Type PROMOTE <snapshot_id>'
         required: true
         type: string
+  workflow_call:
+    inputs:
+      candidate_branch:
+        required: true
+        type: string
+      expected_candidate_snapshot:
+        required: true
+        type: string
+      expected_candidate_commit:
+        required: true
+        type: string
+      confirmation:
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -120,6 +134,7 @@ jobs:
                   or path == 'public/data/actual-geometry-chunks.json'
                   or path.startswith('public/geo/current/')
                   or path.startswith('public/geo/actual/')
+                  or path == 'data/sources/actual-settlement-policy.json'
                   or path == 'data/sources/ro-siruta-current.json'
                   or path == 'data/sources/cuatm-current.json'
                   or path == 'data/sources/osm-current.json'

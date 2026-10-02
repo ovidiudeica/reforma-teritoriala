@@ -46,12 +46,25 @@ function semanticRegistry(registry){
  };
 }
 
+const geometryRoleBindingIsActive=(settlementPolicy,geometryRoleContract)=>{
+ const binding=settlementPolicy?.geometry_role_contract;
+ return Boolean(
+  binding
+  && binding.path==='schemas/actual-geometry-role-contract.json'
+  && binding.contract==='actual-geometry-role-v1'
+  && Number(binding.schema_version)===1
+  && geometryRoleContract?.contract===binding.contract
+  && Number(geometryRoleContract?.schema_version)===Number(binding.schema_version)
+ );
+};
+
 export function actualSemanticPayload(documents){
  const {
-  catalog,inventory,roGeo,mdGeo,roOfficial,mdOfficial,mdIndividualReview,settlementPolicy
+  catalog,inventory,roGeo,mdGeo,roOfficial,mdOfficial,mdIndividualReview,settlementPolicy,geometryRoleContract
  }=documents;
+ const geometryRoleBound=geometryRoleBindingIsActive(settlementPolicy,geometryRoleContract);
  return canonicalize({
-  algorithm:'actual-semantic-v1',
+  algorithm:geometryRoleBound?'actual-semantic-v2':'actual-semantic-v1',
   jurisdictions:['RO','MD'],
   catalog:{
    schema_version:catalog?.schema_version??null,
@@ -69,7 +82,8 @@ export function actualSemanticPayload(documents){
    MD:semanticRegistry(mdOfficial)
   },
   reviewed_identity:canonicalize(mdIndividualReview,{dropNonAdministrativeMetadata:true}),
-  settlement_policy:canonicalize(settlementPolicy,{dropNonAdministrativeMetadata:true})
+  settlement_policy:canonicalize(settlementPolicy,{dropNonAdministrativeMetadata:true}),
+  ...(geometryRoleBound?{geometry_role_contract:canonicalize(geometryRoleContract,{dropNonAdministrativeMetadata:true})}:{})
  });
 }
 
@@ -77,7 +91,7 @@ export function actualSemanticFingerprint(documents){
  const payload=actualSemanticPayload(documents);
  const serialized=JSON.stringify(payload);
  return {
-  algorithm:'actual-semantic-v1',
+  algorithm:payload.algorithm,
   sha256:sha256(Buffer.from(serialized,'utf8')),
   payload
  };

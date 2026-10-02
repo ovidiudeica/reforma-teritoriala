@@ -18,6 +18,7 @@ const CATALOG='data/current/entities.json';
 const INVENTORY='data/current/administrative-inventory.json';
 const REVIEW='data/sources/md-cuatm-individual-review.json';
 const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
+const GEOMETRY_ROLE_CONTRACT='schemas/actual-geometry-role-contract.json';
 const GEO={RO:'public/geo/current/ro-administrative.geojson',MD:'public/geo/current/md-administrative.geojson'};
 const OFFICIAL={RO:'data/sources/ro-siruta-current.json',MD:'data/sources/cuatm-current.json'};
 const OUTPUT='data/current/actual-candidate-diff.json';
@@ -35,7 +36,7 @@ const stripVolatile=value=>{
  return value;
 };
 const manifestBytes=await readFile(MANIFEST);
-const [manifest,gate,candidatePublic,candidateCatalog,candidateInventory,candidateReview,candidateSettlementPolicy]=await Promise.all([readJson(MANIFEST),readJson(GATE),readJson(PUBLIC),readJson(CATALOG),readJson(INVENTORY),readJson(REVIEW),readJson(SETTLEMENT_POLICY)]);
+const [manifest,gate,candidatePublic,candidateCatalog,candidateInventory,candidateReview,candidateSettlementPolicy,candidateGeometryRoleContract]=await Promise.all([readJson(MANIFEST),readJson(GATE),readJson(PUBLIC),readJson(CATALOG),readJson(INVENTORY),readJson(REVIEW),readJson(SETTLEMENT_POLICY),readJson(GEOMETRY_ROLE_CONTRACT)]);
 const baselineMarker=gitJson(PERSISTED);
 const baselineManifestBytes=gitBuffer(MANIFEST);
 const baselineManifest=JSON.parse(baselineManifestBytes.toString('utf8'));
@@ -44,6 +45,7 @@ const baselineCatalog=gitJson(CATALOG);
 const baselineInventory=gitJson(INVENTORY);
 const baselineReview=gitJson(REVIEW);
 const baselineSettlementPolicy=gitJson(SETTLEMENT_POLICY);
+const baselineGeometryRoleContract=gitJson(GEOMETRY_ROLE_CONTRACT);
 const baselineManifestSha=sha256(baselineManifestBytes);
 const exactBaseManifestBytesReused=manifestBytes.equals(baselineManifestBytes);
 const failures=[];
@@ -69,7 +71,8 @@ const baselineSemantic=actualSemanticFingerprint({
  roOfficial:gitJson(OFFICIAL.RO),
  mdOfficial:gitJson(OFFICIAL.MD),
  mdIndividualReview:baselineReview,
- settlementPolicy:baselineSettlementPolicy
+ settlementPolicy:baselineSettlementPolicy,
+ geometryRoleContract:baselineGeometryRoleContract
 });
 const candidateSemantic=actualSemanticFingerprint({
  catalog:candidateCatalog,
@@ -79,7 +82,8 @@ const candidateSemantic=actualSemanticFingerprint({
  roOfficial:await readJson(OFFICIAL.RO),
  mdOfficial:await readJson(OFFICIAL.MD),
  mdIndividualReview:candidateReview,
- settlementPolicy:candidateSettlementPolicy
+ settlementPolicy:candidateSettlementPolicy,
+ geometryRoleContract:candidateGeometryRoleContract
 });
 const semanticManifestBinding=validateCandidateSemanticManifestBinding({
  manifestContentFingerprint:manifest.content_fingerprint_sha256,

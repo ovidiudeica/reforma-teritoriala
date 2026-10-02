@@ -4,7 +4,7 @@
   "mode": "ACTUAL",
   "snapshot_id": "actual-5383ff3db7cf3f67",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "763313196b7bdd0b7bb7f6ef182bbdf77161f6d6cc0e6e347234910e664d3c31",
+  "manifest_sha256": "6e0d586c17f5770ecfab6f3784644de188dcc96af0bd4245adee465f551d7b2e",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -50,7 +50,9 @@
           "geometry_coordinate_mutation_allowed": false,
           "official_registry_remains_identity_authority": true,
           "unreviewed_identity_inference_allowed": false
-        }
+        },
+        "coverage_contract_version": 1,
+        "geometry_role_contract": null
       }
     },
     {
@@ -62,13 +64,32 @@
           "schema_version": 1,
           "policy_version": "2026-09-27",
           "scope": "settlements_and_component_localities",
-          "sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843"
+          "sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843",
+          "coverage_contract_version": 1,
+          "geometry_role_contract": null
         },
         "actual": {
           "schema_version": 1,
           "policy_version": "2026-09-27",
           "scope": "settlements_and_component_localities",
-          "sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843"
+          "sha256": "822f77b88fe494260badc3135b3775cdddc7bfb64852d174fa371740ff2e9843",
+          "coverage_contract_version": 1,
+          "geometry_role_contract": null
+        }
+      }
+    },
+    {
+      "name": "geometry_role_contract_binding_is_current",
+      "ok": true,
+      "detail": {
+        "enabled": false,
+        "manifest": null,
+        "actual": {
+          "path": "schemas/actual-geometry-role-contract.json",
+          "schema_version": 1,
+          "contract": "actual-geometry-role-v1",
+          "mode": "ACTUAL",
+          "sha256": "9a73dbecbdb94fc0a9a6615fd9b51695cb7f5590c5dcbc24b32549670d1bd6bd"
         }
       }
     },
@@ -299,8 +320,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260927.320.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "c9803455b84c872ec67d8b4fb4dce59f4f03befd0f093c541f76aab132029366",
-          "sha256": "aea064fec297380ddf1b9509f90e4d8dbfdd44d197279f880c0050a8b1ebebaa"
+          "environment_fingerprint_sha256": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272",
+          "sha256": "2abdb47f3487ccd7a722fb54160a623507d0f38eea92933059a18a5062d5a2eb"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -309,8 +330,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260927.320.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "c9803455b84c872ec67d8b4fb4dce59f4f03befd0f093c541f76aab132029366",
-          "sha256": "aea064fec297380ddf1b9509f90e4d8dbfdd44d197279f880c0050a8b1ebebaa"
+          "environment_fingerprint_sha256": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272",
+          "sha256": "2abdb47f3487ccd7a722fb54160a623507d0f38eea92933059a18a5062d5a2eb"
         }
       }
     },

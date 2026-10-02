@@ -10,6 +10,7 @@ import {HOST_TRUST_PATH,hostTrustFingerprint as computeHostTrustFingerprint,vali
 
 const OUTPUT='data/current/actual-release-manifest.json';
 const NETWORK_DENIAL='data/current/actual-network-denial-audit.json';
+const GEOMETRY_ROLE_CONTRACT='schemas/actual-geometry-role-contract.json';
 const PATHS={
  catalog:'data/current/entities.json',
  inventory:'data/current/administrative-inventory.json',
@@ -84,6 +85,13 @@ const officialIdentityAudit=json('official_identity_audit');
 const mdSemanticBridge=json('md_semantic_bridge');
 const settlementPolicy=json('settlement_policy');
 const mdIndividualReview=json('md_individual_review');
+const geometryRoleContractBytes=await readFile(GEOMETRY_ROLE_CONTRACT);
+const geometryRoleContract=JSON.parse(geometryRoleContractBytes.toString('utf8'));
+const geometryRoleBindingActive=Boolean(
+ settlementPolicy?.geometry_role_contract?.path===GEOMETRY_ROLE_CONTRACT
+ && settlementPolicy?.geometry_role_contract?.contract===geometryRoleContract?.contract
+ && Number(settlementPolicy?.geometry_role_contract?.schema_version)===Number(geometryRoleContract?.schema_version)
+);
 
 const jurisdictions=['RO','MD'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -97,6 +105,13 @@ const components=Object.fromEntries(Object.entries(PATHS).map(([key,path])=>[key
  sha256:sha256(buffers[key]),
  bytes:buffers[key].byteLength
 }]));
+if(geometryRoleBindingActive){
+ components.geometry_role_contract={
+  path:GEOMETRY_ROLE_CONTRACT,
+  sha256:sha256(geometryRoleContractBytes),
+  bytes:geometryRoleContractBytes.byteLength
+ };
+}
 const componentHashes=Object.fromEntries(Object.entries(components).map(([key,value])=>[key,value.sha256]));
 const byteFingerprint=byteFingerprintFromHashes(componentHashes);
 const semanticDocuments={
@@ -107,7 +122,8 @@ const semanticDocuments={
  roOfficial:siruta,
  mdOfficial:cuatm,
  mdIndividualReview,
- settlementPolicy
+ settlementPolicy,
+ geometryRoleContract
 };
 const semanticFingerprint=actualSemanticFingerprint(semanticDocuments);
 const BASE_REF=process.env.ACTUAL_BASE_REF||null;
@@ -119,7 +135,7 @@ let baseSemanticMatches=false;
 let contentIdentity={
  algorithm:semanticFingerprint.algorithm,
  sha256:semanticFingerprint.sha256,
- release_identity_basis:'semantic_content_v1',
+ release_identity_basis:semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1',
  reused_base_release:false
 };
 if(BASE_REF){
@@ -136,7 +152,8 @@ if(BASE_REF){
   roOfficial:gitJson(PATHS.ro_official),
   mdOfficial:gitJson(PATHS.md_official),
   mdIndividualReview:gitJson(PATHS.md_individual_review),
-  settlementPolicy:gitJson(PATHS.settlement_policy)
+  settlementPolicy:gitJson(PATHS.settlement_policy),
+  geometryRoleContract:gitJson(GEOMETRY_ROLE_CONTRACT)
  };
  const baseSemantic=actualSemanticFingerprint(baseDocuments);
  if(baseSemantic.sha256===semanticFingerprint.sha256){
@@ -169,7 +186,7 @@ const tier=(jurisdiction,name)=>{
 };
 
 const manifest={
- schema_version:8,
+ schema_version:geometryRoleBindingActive?9:8,
  mode:'ACTUAL',
  snapshot_id:snapshotId,
  generated_at:generatedAt,
@@ -252,9 +269,20 @@ const manifest={
   path:PATHS.settlement_policy,
   schema_version:settlementPolicy.schema_version??null,
   policy_version:settlementPolicy.policy_version??null,
+  coverage_contract_version:settlementPolicy.coverage_contract_version??1,
   scope:settlementPolicy.scope??null,
+  geometry_role_contract:settlementPolicy.geometry_role_contract??null,
   sha256:components.settlement_policy.sha256
  },
+ ...(geometryRoleBindingActive?{
+  geometry_role_contract:{
+   path:GEOMETRY_ROLE_CONTRACT,
+   schema_version:geometryRoleContract.schema_version??null,
+   contract:geometryRoleContract.contract??null,
+   mode:geometryRoleContract.mode??null,
+   sha256:components.geometry_role_contract.sha256
+  }
+ }:{ }),
  geometry:{
   RO:{path:PATHS.ro_geojson,feature_count:featureCounts.RO,sha256:components.ro_geojson.sha256},
   MD:{path:PATHS.md_geojson,feature_count:featureCounts.MD,sha256:components.md_geojson.sha256}
@@ -318,10 +346,15 @@ const manifest={
  components
 };
 
-const baseComponentBytesMatch=Boolean(baseManifest)&&Object.keys(PATHS).every(key=>
- baseManifest.components?.[key]?.sha256===components[key].sha256
- && Number(baseManifest.components?.[key]?.bytes)===Number(components[key].bytes)
-);
+const baseComponentBytesMatch=Boolean(baseManifest)
+ && Object.keys(components).every(key=>
+  baseManifest.components?.[key]?.sha256===components[key].sha256
+  && Number(baseManifest.components?.[key]?.bytes)===Number(components[key].bytes)
+ )
+ && Object.keys(baseManifest.components||{}).every(key=>
+  components[key]?.sha256===baseManifest.components[key]?.sha256
+  && Number(components[key]?.bytes)===Number(baseManifest.components[key]?.bytes)
+ );
 const baseSourceBundleMatches=Boolean(baseManifest)
  && baseManifest.source_bundle?.path===SOURCE_BUNDLE_PATH
  && baseManifest.source_bundle?.sha256===sourceBundleHash
