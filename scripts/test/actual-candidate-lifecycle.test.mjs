@@ -477,6 +477,9 @@ test('geometry policy migration upgrades semantic identity only after explicit o
  legacy.settlementPolicy.policy_version='2026-09-27';
  delete legacy.settlementPolicy.coverage_contract_version;
  delete legacy.settlementPolicy.geometry_role_contract;
+ delete legacy.settlementPolicy.official_geometry_contract_version;
+ delete legacy.settlementPolicy.public_contract;
+ delete legacy.settlementPolicy.jurisdictions.RO.official_geometry_exceptions;
  legacy.settlementPolicy.jurisdictions.RO.official_inventory_selector='SIRUTA records whose level is not 2';
  delete legacy.settlementPolicy.jurisdictions.RO.coverage_accounting;
  delete legacy.settlementPolicy.jurisdictions.MD.coverage_accounting;
@@ -533,6 +536,52 @@ test('P1.1 state boundaries are explicit context geometries without changing UAT
  assert.match(structural,/STATE_RELATION_IDS=\{RO:90689,MD:58974\}/);
  assert.match(structural,/auditStateContext\('RO'\)/);
  assert.match(structural,/auditStateContext\('MD'\)/);
- assert.match(regression,/EXPECTED=\{RO:3233,MD:2596\}/);
- assert.match(regression,/EXPECTED_TOTAL=5829/);
+ assert.match(regression,/bretcuActive\?3234:3233/);
+ assert.match(regression,/bretcuActive\?5830:5829/);
+});
+
+
+test('P1.2 Brețcu migration is explicit, single-source and public-contract-v2 gated',async()=>{
+ const [migration,sourceBundle,application,publicBuilder,releaseGate,roGate,regression,schema]=await Promise.all([
+  readFile('scripts/process/apply-actual-geometry-policy-v1-1.mjs','utf8'),
+  readFile('scripts/lib/actual-source-bundle.mjs','utf8'),
+  readFile('scripts/process/apply-ro-official-reconciliation.mjs','utf8'),
+  readFile('scripts/process/build-actual-public-data.mjs','utf8'),
+  readFile('scripts/process/audit-actual-release-gate.mjs','utf8'),
+  readFile('scripts/process/audit-ro-release-gate.mjs','utf8'),
+  readFile('scripts/process/audit-actual-regression.mjs','utf8'),
+  readFile('schemas/actual-public-entity-v2.schema.json','utf8')
+ ]);
+ assert.match(migration,/legal_id:'64096'/);
+ assert.match(migration,/source_path:'data\/sources\/ro-bretcu-ancpi-current\.json'/);
+ assert.match(migration,/public_contract='actual-public-entity-v2'/);
+ assert.match(sourceBundle,/ro_bretcu_ancpi/);
+ assert.match(application,/ro-siruta-64096/);
+ assert.match(application,/source:'ANCPI'/);
+ assert.match(application,/Number\(countyEntity\.osm\?\.relation_id\)!==2248621/);
+ assert.match(publicBuilder,/actual-public-entity-v2/);
+ assert.match(releaseGate,/unexpected_non_osm_representation/);
+ assert.match(roGate,/bretcu_official_geometry_exception_is_exactly_bound/);
+ assert.match(regression,/bretcu_official_geometry_contract_drift/);
+ const v2=JSON.parse(schema);
+ assert.equal(v2.properties.contract.const,'actual-public-entity-v2');
+ assert.match(v2.$defs.entity.properties.id.pattern,/ro-siruta/);
+ assert.deepEqual(v2.$defs.entity.properties.representation.properties.source.enum,['OpenStreetMap','ANCPI']);
+});
+
+test('P1.2 ANCPI source artifact is exact current Brețcu SIRUTA 64096 polygon',async()=>{
+ const source=await readJson('data/sources/ro-bretcu-ancpi-current.json');
+ assert.equal(source.schema_version,1);
+ assert.equal(source.mode,'ACTUAL_RO_OFFICIAL_GEOMETRY_EXCEPTION');
+ assert.equal(source.jurisdiction,'RO');
+ assert.equal(source.legal_registry,'SIRUTA');
+ assert.equal(source.legal_id,'64096');
+ assert.equal(source.license,'CC-BY-4.0');
+ assert.equal(source.arcgis_item_id,'466b7199c19f4904831e14bc7f407af9');
+ assert.equal(source.arcgis_layer_id,1);
+ assert.equal(source.source_feature_id,1269);
+ assert.equal(String(source.feature?.properties?.nationalCode),'64096');
+ assert.equal(source.feature?.properties?.nationalLevel,'3rdOrder');
+ assert.ok(['Polygon','MultiPolygon'].includes(source.feature?.geometry?.type));
+ assert.ok(Array.isArray(source.feature?.geometry?.coordinates)&&source.feature.geometry.coordinates.length>0);
 });
