@@ -96,6 +96,31 @@ policyCheck(
  && geometryRoleContract?.compatibility?.actual_public_entity_v1?.canonical_role_for_existing_master_geometry==='administrative_boundary',
  'geometry_role_contract_v1_compatibility'
 );
+
+const geometryCoverageV2=Number(settlementPolicy?.coverage_contract_version||0)===2;
+if(geometryCoverageV2){
+ policyCheck(
+  settlementPolicy?.geometry_role_contract?.path===GEOMETRY_ROLE_CONTRACT_PATH
+  && settlementPolicy?.geometry_role_contract?.contract===geometryRoleContract?.contract
+  && Number(settlementPolicy?.geometry_role_contract?.schema_version)===Number(geometryRoleContract?.schema_version),
+  'settlement_policy_geometry_role_binding'
+ );
+ policyCheck(
+  settlementPolicy?.jurisdictions?.RO?.official_inventory_selector==='SIRUTA records whose level is 3',
+  'settlement_policy_ro_selector_v2',
+  {actual:settlementPolicy?.jurisdictions?.RO?.official_inventory_selector??null}
+ );
+ policyCheck(
+  settlementPolicy?.jurisdictions?.RO?.coverage_accounting==='unique_official_legal_identity',
+  'settlement_policy_ro_coverage_accounting_v2',
+  {actual:settlementPolicy?.jurisdictions?.RO?.coverage_accounting??null}
+ );
+ policyCheck(
+  settlementPolicy?.jurisdictions?.MD?.coverage_accounting==='unique_official_legal_identity',
+  'settlement_policy_md_coverage_accounting_v2',
+  {actual:settlementPolicy?.jurisdictions?.MD?.coverage_accounting??null}
+ );
+}
 for(const [j,type] of [['RO','component_locality'],['MD','locality']]){
  const p=settlementPolicy?.jurisdictions?.[j];
  policyCheck(Boolean(p),'settlement_policy_jurisdiction_missing',{jurisdiction:j});
@@ -377,6 +402,8 @@ const report={
   path:SETTLEMENT_POLICY_PATH,
   schema_version:settlementPolicy.schema_version,
   policy_version:settlementPolicy.policy_version,
+  coverage_contract_version:settlementPolicy.coverage_contract_version??1,
+  geometry_role_contract:settlementPolicy.geometry_role_contract??null,
   policy_issue_count:policyIssues.length
  },
  declared_type_count:declared.length,
