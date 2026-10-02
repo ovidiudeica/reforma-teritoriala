@@ -42,12 +42,14 @@ for(const country of countries){
 
   const comboRows=Object.entries(combinations).map(([k,count])=>({...JSON.parse(k),count})).sort((a,b)=>b.count-a.count);
   const countryEntities=entities.filter(e=>e.jurisdiction===country);
-  const minLevel=Math.min(...countryEntities.map(e=>e.osm?.admin_level??99));
-  const pv={checked:countryEntities.length,root_parent:0,unexpected_root:0,entity_parent:0,null_parent:0,missing_parent:0,parent_wrong_jurisdiction:0,parent_level_not_lower:0,geometry_missing:0,point_outside_parent:0,issues:[]};
-  for(const e of countryEntities.filter(e=>e.review_required)) review.items.push(reviewItem(e,'classification_review'));
+  const contextEntities=countryEntities.filter(e=>e.category==='context');
+  const hierarchyEntities=countryEntities.filter(e=>e.category!=='context');
+  const minLevel=Math.min(...hierarchyEntities.map(e=>e.osm?.admin_level??99));
+  const pv={checked:hierarchyEntities.length,context_excluded:contextEntities.length,root_parent:0,unexpected_root:0,entity_parent:0,null_parent:0,missing_parent:0,parent_wrong_jurisdiction:0,parent_level_not_lower:0,geometry_missing:0,point_outside_parent:0,issues:[]};
+  for(const e of hierarchyEntities.filter(e=>e.review_required)) review.items.push(reviewItem(e,'classification_review'));
 
 
-  for(const e of countryEntities){
+  for(const e of hierarchyEntities){
     if(e.parent_id==null){pv.null_parent++;pv.issues.push({id:e.id,name:e.name,issue:'null_parent'});continue;}
     if(e.parent_id===country){pv.root_parent++;if((e.osm?.admin_level??99)>minLevel){pv.unexpected_root++;pv.issues.push({id:e.id,name:e.name,admin_level:e.osm?.admin_level,issue:'unexpected_root'});review.items.push(reviewItem(e,'unexpected_root',{minimum_admin_level:minLevel}));}continue;}
     pv.entity_parent++;

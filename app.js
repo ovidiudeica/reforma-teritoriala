@@ -26,6 +26,7 @@ const filterLabels={
  other:'Alte reprezentări'
 };
 const typeLabels={
+ state:'stat (context teritorial)',
  county:'județ',
  district:'raion',
  capital_municipality:'municipiu-capitală',

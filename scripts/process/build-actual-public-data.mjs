@@ -128,7 +128,8 @@ function validationFor(e,legal){
  const nonCuatm=e.jurisdiction==='MD'?mdNonCuatmById.get(e.id):null;
  const individualReview=e.jurisdiction==='MD'?mdIndividualById.get(e.id):null;
  let legalIdentityStatus;
- if(legal)legalIdentityStatus='reconciled';
+ if(e.category==='context')legalIdentityStatus='not_bound_to_official_registry';
+ else if(legal)legalIdentityStatus='reconciled';
  else if(nonCuatm)legalIdentityStatus='outside_current_legal_registry';
  else if(individualReview?.review_status==='resolved_semantic_classification')legalIdentityStatus='reviewed_representation_without_legal_identity';
  else if(individualReview?.review_status==='unresolved_identity')legalIdentityStatus='unresolved';
@@ -192,6 +193,8 @@ for(const e of entities){
    inferred_type:e.classification?.osm_inferred_type||publicType||null,
    geometry_source:'OpenStreetMap administrative relation',
    geometry_role:'current_representation',
+   canonical_geometry_role:e.geometry?.role||null,
+   geometry_scope:e.geometry?.scope||null,
    public_geometry_precision:'master_coordinate_fidelity',
    master_geometry_path:source.jurisdiction==='RO'?RO_GEO:MD_GEO
   },
@@ -231,6 +234,8 @@ for(const [id,source] of featureById){
    osm_relation_id:item.representation.osm_relation_id,
    legal_identity_status:item.validation.legal_identity_status,
    geometry_source:'OpenStreetMap',
+   canonical_geometry_role:item.representation.canonical_geometry_role,
+   geometry_scope:item.representation.geometry_scope,
    geometry_precision:'master_coordinate_fidelity'
   },
   geometry:source.feature.geometry
