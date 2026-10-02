@@ -304,15 +304,35 @@ const publicIds=new Set(publicEntities.map(x=>x.id));
 const catalogIds=new Set(entities.map(x=>x.id));
 const missingPublic=[...catalogIds].filter(id=>!publicIds.has(id));
 const unexpectedPublic=[...publicIds].filter(id=>!catalogIds.has(id));
+const publicContractV2=settlementPolicy?.public_contract==='actual-public-entity-v2';
+const expectedPublicContract=publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1';
+const expectedPublicSchema=publicContractV2?2:1;
 check('public_contract_identity_set_matches_catalog',
- publicIndex.contract==='actual-public-entity-v1'&&publicEntities.length===entities.length&&missingPublic.length===0&&unexpectedPublic.length===0,
- {contract:publicIndex.contract,public_count:publicEntities.length,catalog_count:entities.length,missing:missingPublic.slice(0,25),unexpected:unexpectedPublic.slice(0,25)});
+ publicIndex.contract===expectedPublicContract&&Number(publicIndex.schema_version)===expectedPublicSchema&&publicEntities.length===entities.length&&missingPublic.length===0&&unexpectedPublic.length===0,
+ {expected_contract:expectedPublicContract,contract:publicIndex.contract,expected_schema_version:expectedPublicSchema,schema_version:publicIndex.schema_version,public_count:publicEntities.length,catalog_count:entities.length,missing:missingPublic.slice(0,25),unexpected:unexpectedPublic.slice(0,25)});
 check('public_contract_contains_current_entities_only',
  publicEntities.every(x=>x.status==='current'),
  {non_current:publicEntities.filter(x=>x.status!=='current').slice(0,25).map(x=>({id:x.id,status:x.status}))});
+const representationIssues=publicEntities.flatMap(x=>{
+ if(!Object.prototype.hasOwnProperty.call(x,'legal')||x.representation?.geometry_role!=='current_representation')return [{id:x.id,issue:'representation_contract'}];
+ if(x.id==='ro-siruta-64096'){
+  const ok=publicContractV2
+   && x.representation?.source==='ANCPI'
+   && x.representation?.osm_relation_id==null
+   && Number(x.representation?.source_feature_id)===1269
+   && x.representation?.geometry_authority==='ANCPI'
+   && x.representation?.canonical_geometry_role==='administrative_boundary'
+   && x.representation?.geometry_scope==='uat'
+   && x.legal?.registry==='SIRUTA'
+   && String(x.legal?.id)==='64096';
+  return ok?[]:[{id:x.id,issue:'bretcu_official_geometry_binding',representation:x.representation,legal:x.legal}];
+ }
+ if(x.representation?.source!=='OpenStreetMap'||!/^osm-r\d+$/.test(String(x.id)))return [{id:x.id,issue:'unexpected_non_osm_representation',source:x.representation?.source??null}];
+ return [];
+});
 check('public_contract_separates_legal_and_representation',
- publicEntities.every(x=>Object.prototype.hasOwnProperty.call(x,'legal')&&x.representation?.source==='OpenStreetMap'&&x.representation?.geometry_role==='current_representation'),
- {invalid:publicEntities.filter(x=>!Object.prototype.hasOwnProperty.call(x,'legal')||x.representation?.source!=='OpenStreetMap'||x.representation?.geometry_role!=='current_representation').slice(0,25).map(x=>x.id)});
+ representationIssues.length===0,
+ {invalid:representationIssues.slice(0,25)});
 check('public_contract_jurisdiction_counts_match_catalog',
  jurisdictions.every(j=>publicIndex.entity_count_by_jurisdiction?.[j]===entityCounts[j]),
  {public:publicIndex.entity_count_by_jurisdiction,actual:entityCounts});
