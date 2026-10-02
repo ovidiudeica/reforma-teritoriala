@@ -285,7 +285,9 @@ const index={
  contract:publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1',
  mode:'ACTUAL',
  generated_at:catalog.generated_at??null,
- policy:'Public contract separates official legal identity from geometry representation. OpenStreetMap remains the primary ACTUAL geometry source; explicitly reviewed official geometry exceptions may use another named authority such as ANCPI. Null legal fields are preserved when no positive official identity is bound. Public web geometries preserve exact master coordinates and are partitioned only for progressive loading.',
+ policy:publicContractV2
+  ?'Public contract separates official legal identity from geometry representation. OpenStreetMap remains the primary ACTUAL geometry source; explicitly reviewed official geometry exceptions may use another named authority such as ANCPI. Null legal fields are preserved when no positive official identity is bound. Public web geometries preserve exact master coordinates and are partitioned only for progressive loading.'
+  :'Public contract separates official legal identity from OSM representation. Null legal fields are preserved when no positive official identity is bound; OSM metadata never creates legal identity. Public web geometries preserve the exact master feature coordinates and are partitioned only for progressive loading.',
  entity_count:publicEntities.length,
  entity_count_by_jurisdiction:countsByJurisdiction,
  feature_count_by_tier:countsByTier,
