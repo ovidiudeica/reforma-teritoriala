@@ -529,6 +529,7 @@ test('P1.1 state boundaries are explicit context geometries without changing UAT
  assert.match(builder,/role:'administrative_boundary',scope:'state_context'/);
  assert.match(publicBuilder,/canonical_geometry_role:e\.geometry\?\.role\|\|null/);
  assert.match(publicBuilder,/geometry_scope:e\.geometry\?\.scope\|\|null/);
+ assert.match(publicBuilder,/if\(e\.category==='context'\)legalIdentityStatus='not_bound_to_official_registry'/);
  assert.match(structural,/STATE_RELATION_IDS=\{RO:90689,MD:58974\}/);
  assert.match(structural,/auditStateContext\('RO'\)/);
  assert.match(structural,/auditStateContext\('MD'\)/);
