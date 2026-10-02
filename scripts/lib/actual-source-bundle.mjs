@@ -147,7 +147,9 @@ export function buildSourceBundleManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_SOURCE_BUNDLE',
   source_watermark:inspected.source_watermark,
-  policy:'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, and any explicitly activated official geometry exception such as the ANCPI Brețcu boundary. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.',
+  policy:inspected.sources?.ro_bretcu_ancpi
+   ?'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, and the explicitly activated ANCPI Brețcu official geometry exception. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.'
+   :'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, and the official MD CUATM snapshot. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.',
   sources:inspected.sources
  };
  const fingerprint=sourceBundleFingerprint(draft);
