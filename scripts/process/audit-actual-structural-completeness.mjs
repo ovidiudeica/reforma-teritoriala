@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {roOfficialComponentLocalities,uniqueLegalIdentityIds} from '../lib/actual-completeness.mjs';
 
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
 const SETTLEMENT_POLICY_PATH='data/sources/actual-settlement-policy.json';
 const RO_LEVEL9_EVIDENCE_PATH='data/sources/ro-level9-exception-evidence.json';
+const GEOMETRY_ROLE_CONTRACT_PATH='schemas/actual-geometry-role-contract.json';
 const [
  inventory,catalog,pub,siruta,cuatm,mdRecon,mdSemantic,roOfficialOnly,roOtherLevel,
- settlementPolicy,roGeo,mdGeo,roLevel9Evidence
+ settlementPolicy,roGeo,mdGeo,roLevel9Evidence,geometryRoleContract
 ]=await Promise.all([
  read('data/current/administrative-inventory.json'),
  read('data/current/entities.json'),
@@ -20,7 +22,8 @@ const [
  read(SETTLEMENT_POLICY_PATH),
  read('public/geo/current/ro-administrative.geojson'),
  read('public/geo/current/md-administrative.geojson'),
- read(RO_LEVEL9_EVIDENCE_PATH)
+ read(RO_LEVEL9_EVIDENCE_PATH),
+ read(GEOMETRY_ROLE_CONTRACT_PATH)
 ]);
 
 if(mdSemantic.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
@@ -82,6 +85,17 @@ policyCheck(settlementPolicy?.common_requirements?.missing_official_settlement_p
 policyCheck(settlementPolicy?.common_requirements?.geometry_source==='OpenStreetMap','settlement_policy_geometry_source');
 policyCheck(settlementPolicy?.common_requirements?.geometry_coordinate_mutation_allowed===false,'settlement_policy_coordinate_mutation_rule');
 policyCheck(settlementPolicy?.common_requirements?.unreviewed_identity_inference_allowed===false,'settlement_policy_unreviewed_inference_rule');
+policyCheck(geometryRoleContract?.schema_version===1,'geometry_role_contract_schema_version',{actual:geometryRoleContract?.schema_version??null});
+policyCheck(geometryRoleContract?.contract==='actual-geometry-role-v1','geometry_role_contract_id',{actual:geometryRoleContract?.contract??null});
+policyCheck(geometryRoleContract?.mode==='ACTUAL','geometry_role_contract_mode',{actual:geometryRoleContract?.mode??null});
+for(const role of ['administrative_boundary','statistical_boundary','locality_footprint']){
+ policyCheck(Boolean(geometryRoleContract?.roles?.[role]),'geometry_role_contract_missing_role',{role});
+}
+policyCheck(
+ geometryRoleContract?.compatibility?.actual_public_entity_v1?.legacy_geometry_role==='current_representation'
+ && geometryRoleContract?.compatibility?.actual_public_entity_v1?.canonical_role_for_existing_master_geometry==='administrative_boundary',
+ 'geometry_role_contract_v1_compatibility'
+);
 for(const [j,type] of [['RO','component_locality'],['MD','locality']]){
  const p=settlementPolicy?.jurisdictions?.[j];
  policyCheck(Boolean(p),'settlement_policy_jurisdiction_missing',{jurisdiction:j});
@@ -142,7 +156,7 @@ const validateCommonSettlementRepresentation=(e,p)=>{
 };
 
 const roSettlementPolicy=settlementPolicy.jurisdictions.RO;
-const roOfficialSettlements=sir.filter(r=>Number(r.level)!==2);
+const roOfficialSettlements=roOfficialComponentLocalities(sir);
 const roOfficialSettlementIds=new Set(roOfficialSettlements.map(r=>String(r.siruta)));
 const roSettlementTypes=new Set(roSettlementPolicy.inclusion_catalog_types||[]);
 const roReviewedTypes=new Set(roSettlementPolicy.accepted_paths?.reviewed_representation?.catalog_types||[]);
@@ -248,7 +262,8 @@ const mdOfficialById=new Map(md.map(r=>[String(r.code),r]));
 const mdSettlementTypes=new Set(mdSettlementPolicy.inclusion_catalog_types||[]);
 const mdIncluded=catalogEntities.filter(e=>e.jurisdiction==='MD'&&mdSettlementTypes.has(e.type));
 const mdSettlementViolations=[];
-let mdOfficialLocalityIdentityPathCount=0,mdReconciledUatRepresentationPathCount=0;
+const mdOfficialLocalityIdentityIds=new Set(),mdReconciledUatSettlementIdentityIds=new Set();
+let mdOfficialLocalityRepresentationPathCount=0,mdReconciledUatRepresentationPathCount=0;
 for(const e of mdIncluded){
  const p=publicById.get(e.id);
  const issues=validateCommonSettlementRepresentation(e,p);
@@ -287,8 +302,13 @@ for(const e of mdIncluded){
   && p?.validation?.legal_identity_status===uatPathPolicy.legal_identity_status
   && Number(e.osm?.admin_level)===9
  );
- if(officialLocalityPath)mdOfficialLocalityIdentityPathCount++;
- else if(reconciledUatRepresentationPath)mdReconciledUatRepresentationPathCount++;
+ if(officialLocalityPath){
+  mdOfficialLocalityRepresentationPathCount++;
+  for(const id of uniqueLegalIdentityIds([legalId]))mdOfficialLocalityIdentityIds.add(id);
+ }else if(reconciledUatRepresentationPath){
+  mdReconciledUatRepresentationPathCount++;
+  for(const id of uniqueLegalIdentityIds([legalId]))mdReconciledUatSettlementIdentityIds.add(id);
+ }
  else issues.push({
   issue:'settlement_has_no_valid_identity_or_uat_representation_path',
   legal:p?.legal??null,
@@ -297,7 +317,16 @@ for(const e of mdIncluded){
  });
  if(issues.length)mdSettlementViolations.push({entity_id:e.id,name:e.name,osm_relation_id:e.osm?.relation_id??null,catalog_type:e.type,issues});
 }
-add('MD','locality',mdOfficialSettlements.length,null,[],mdSettlementViolations.length?'FAIL':'PASS',{
+const missingMdOfficialLocalities=mdOfficialSettlements
+ .filter(r=>!mdOfficialLocalityIdentityIds.has(String(r.code)))
+ .map(r=>({
+  id:String(r.code),
+  name:r.name??null,
+  parent_id:r.parent_code??null,
+  parent_name:r.parent_name??null,
+  status_code:r.status_code??null
+ }));
+add('MD','locality',mdOfficialSettlements.length,mdOfficialLocalityIdentityIds.size,missingMdOfficialLocalities,mdSettlementViolations.length?'FAIL':'PASS',{
  official_registry:'CUATM',
  exhaustive:false,
  completeness_basis:'policy_conformance_not_exhaustive_polygon_coverage',
@@ -308,7 +337,9 @@ add('MD','locality',mdOfficialSettlements.length,null,[],mdSettlementViolations.
  missing_official_settlement_polygon_is_blocking:false,
  included_representation_count:mdIncluded.length,
  policy_conformant_representation_count:mdIncluded.length-mdSettlementViolations.length,
- official_locality_identity_path_count:mdOfficialLocalityIdentityPathCount,
+ official_locality_identity_path_count:mdOfficialLocalityIdentityIds.size,
+ official_locality_representation_path_count:mdOfficialLocalityRepresentationPathCount,
+ reconciled_uat_settlement_identity_path_count:mdReconciledUatSettlementIdentityIds.size,
  reconciled_uat_settlement_representation_path_count:mdReconciledUatRepresentationPathCount,
  reviewed_representation_path_count:0,
  policy_violation_count:mdSettlementViolations.length,
