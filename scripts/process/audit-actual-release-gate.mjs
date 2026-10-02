@@ -115,33 +115,47 @@ check('settlement_policy_is_explicit_and_fail_closed',
     && Number(settlementPolicy.geometry_role_contract?.schema_version)===Number(geometryRoleContract?.schema_version)
    )),
  {schema_version:settlementPolicy.schema_version??null,mode:settlementPolicy.mode??null,scope:settlementPolicy.scope??null,coverage_contract_version:settlementPolicy.coverage_contract_version??1,geometry_role_contract:settlementPolicy.geometry_role_contract??null,common_requirements:settlementPolicy.common_requirements??null});
-check('manifest_records_current_settlement_policy',
+const officialGeometryEnabled=Number(settlementPolicy?.official_geometry_contract_version||0)===1;
+const settlementPolicyManifestMatches=
  manifest.settlement_policy?.schema_version===settlementPolicy.schema_version
  && manifest.settlement_policy?.policy_version===settlementPolicy.policy_version
  && manifest.settlement_policy?.coverage_contract_version===(settlementPolicy.coverage_contract_version??1)
  && manifest.settlement_policy?.scope===settlementPolicy.scope
  && JSON.stringify(manifest.settlement_policy?.geometry_role_contract??null)===JSON.stringify(settlementPolicy.geometry_role_contract??null)
- && (manifest.settlement_policy?.official_geometry_contract_version??null)===(settlementPolicy.official_geometry_contract_version??null)
- && (manifest.settlement_policy?.public_contract??'actual-public-entity-v1')===(settlementPolicy.public_contract??'actual-public-entity-v1')
- && JSON.stringify(manifest.settlement_policy?.official_geometry_exceptions??[])===JSON.stringify(settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[])
- && manifest.settlement_policy?.sha256===sha256(settlementPolicyBuf),
- {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,coverage_contract_version:settlementPolicy.coverage_contract_version??1,official_geometry_contract_version:settlementPolicy.official_geometry_contract_version??null,public_contract:settlementPolicy.public_contract??'actual-public-entity-v1',scope:settlementPolicy.scope??null,geometry_role_contract:settlementPolicy.geometry_role_contract??null,official_geometry_exceptions:settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[],sha256:sha256(settlementPolicyBuf)}});
+ && manifest.settlement_policy?.sha256===sha256(settlementPolicyBuf)
+ && (!officialGeometryEnabled||(
+  manifest.settlement_policy?.official_geometry_contract_version===1
+  && manifest.settlement_policy?.public_contract===settlementPolicy.public_contract
+  && JSON.stringify(manifest.settlement_policy?.official_geometry_exceptions??[])===JSON.stringify(settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[])
+ ));
+const settlementPolicyActualDetail={
+ schema_version:settlementPolicy.schema_version??null,
+ policy_version:settlementPolicy.policy_version??null,
+ coverage_contract_version:settlementPolicy.coverage_contract_version??1,
+ scope:settlementPolicy.scope??null,
+ geometry_role_contract:settlementPolicy.geometry_role_contract??null,
+ sha256:sha256(settlementPolicyBuf)
+};
+if(officialGeometryEnabled)Object.assign(settlementPolicyActualDetail,{
+ official_geometry_contract_version:settlementPolicy.official_geometry_contract_version,
+ public_contract:settlementPolicy.public_contract,
+ official_geometry_exceptions:settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[]
+});
+check('manifest_records_current_settlement_policy',
+ settlementPolicyManifestMatches,
+ {manifest:manifest.settlement_policy??null,actual:settlementPolicyActualDetail});
 
-const officialGeometryEnabled=Number(settlementPolicy?.official_geometry_contract_version||0)===1;
-check('official_geometry_policy_is_fail_closed',
- !officialGeometryEnabled
- ||(
-  settlementPolicy.public_contract==='actual-public-entity-v2'
-  && Array.isArray(settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions)
-  && settlementPolicy.jurisdictions.RO.official_geometry_exceptions.length===1
-  && String(settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.legal_id)==='64096'
-  && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.source_path==='data/sources/ro-bretcu-ancpi-current.json'
-  && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.authority==='ANCPI'
-  && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.public_entity_id==='ro-siruta-64096'
-  && sourceBundle.sources?.ro_bretcu_ancpi?.legal_id==='64096'
-  && sourceBundle.sources?.ro_bretcu_ancpi?.authority?.includes('ANCPI')===true
- ),
- {enabled:officialGeometryEnabled,public_contract:settlementPolicy.public_contract??null,exceptions:settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[],source:sourceBundle.sources?.ro_bretcu_ancpi??null});
+if(officialGeometryEnabled)check('official_geometry_policy_is_fail_closed',
+ settlementPolicy.public_contract==='actual-public-entity-v2'
+ && Array.isArray(settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions)
+ && settlementPolicy.jurisdictions.RO.official_geometry_exceptions.length===1
+ && String(settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.legal_id)==='64096'
+ && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.source_path==='data/sources/ro-bretcu-ancpi-current.json'
+ && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.authority==='ANCPI'
+ && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.public_entity_id==='ro-siruta-64096'
+ && sourceBundle.sources?.ro_bretcu_ancpi?.legal_id==='64096'
+ && sourceBundle.sources?.ro_bretcu_ancpi?.authority?.includes('ANCPI')===true,
+ {enabled:true,public_contract:settlementPolicy.public_contract,exceptions:settlementPolicy.jurisdictions.RO.official_geometry_exceptions,source:sourceBundle.sources?.ro_bretcu_ancpi??null});
 
 check('geometry_role_contract_binding_is_current',
  !geometryCoverageV2
@@ -328,7 +342,9 @@ const expectedPublicContract=publicContractV2?'actual-public-entity-v2':'actual-
 const expectedPublicSchema=publicContractV2?2:1;
 check('public_contract_identity_set_matches_catalog',
  publicIndex.contract===expectedPublicContract&&Number(publicIndex.schema_version)===expectedPublicSchema&&publicEntities.length===entities.length&&missingPublic.length===0&&unexpectedPublic.length===0,
- {expected_contract:expectedPublicContract,contract:publicIndex.contract,expected_schema_version:expectedPublicSchema,schema_version:publicIndex.schema_version,public_count:publicEntities.length,catalog_count:entities.length,missing:missingPublic.slice(0,25),unexpected:unexpectedPublic.slice(0,25)});
+ publicContractV2
+  ?{expected_contract:expectedPublicContract,contract:publicIndex.contract,expected_schema_version:expectedPublicSchema,schema_version:publicIndex.schema_version,public_count:publicEntities.length,catalog_count:entities.length,missing:missingPublic.slice(0,25),unexpected:unexpectedPublic.slice(0,25)}
+  :{contract:publicIndex.contract,public_count:publicEntities.length,catalog_count:entities.length,missing:missingPublic.slice(0,25),unexpected:unexpectedPublic.slice(0,25)});
 check('public_contract_contains_current_entities_only',
  publicEntities.every(x=>x.status==='current'),
  {non_current:publicEntities.filter(x=>x.status!=='current').slice(0,25).map(x=>({id:x.id,status:x.status}))});
