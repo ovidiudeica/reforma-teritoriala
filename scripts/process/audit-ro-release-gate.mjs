@@ -13,6 +13,8 @@ const officialAllowed=await read('data/sources/ro-official-reconciliation-except
 const officialOnlyReviewed=await read('data/sources/ro-official-only-reviewed-resolutions.json');
 const otherLevelReviewed=await read('data/sources/ro-other-level-reviewed-resolutions.json');
 const semanticTypeReviewed=await read('data/sources/ro-semantic-type-reviewed-resolutions.json');
+const settlementPolicy=await read('data/sources/actual-settlement-policy.json');
+const bretcuAncpi=await read('data/sources/ro-bretcu-ancpi-current.json');
 const failures=[],checks=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail})};
 const ro=(review.items||[]).filter(x=>x.jurisdiction==='RO');
@@ -123,6 +125,36 @@ const bad=(geo.features||[]).filter(f=>!f.geometry||!['Polygon','MultiPolygon'].
 check('all_ro_features_have_polygonal_geometry',bad.length===0,{count:bad.length});
 const ungheni=(geo.features||[]).filter(f=>Number(f.properties?.osm_relation_id)===18967922||f.properties?.catalog_id==='osm-r18967922');
 check('known_cross_jurisdiction_ungheni_removed',ungheni.length===0,{present:ungheni.length});
+const bretcuBindings=settlementPolicy?.jurisdictions?.RO?.official_geometry_exceptions||[];
+if(bretcuBindings.length){
+ const bretcuEntity=(catalog.entities||[]).find(e=>e.id==='ro-siruta-64096');
+ const bretcuFeature=(geo.features||[]).find(f=>f.properties?.catalog_id==='ro-siruta-64096');
+ const sourceFeature=bretcuAncpi?.feature;
+ check('bretcu_official_geometry_exception_is_exactly_bound',
+  bretcuBindings.length===1
+  && String(bretcuBindings[0]?.legal_id)==='64096'
+  && bretcuEntity?.source==='ANCPI'
+  && bretcuEntity?.legal?.registry==='SIRUTA'
+  && String(bretcuEntity?.legal?.id)==='64096'
+  && bretcuEntity?.type==='commune'
+  && bretcuEntity?.parent_id==='osm-r2248621'
+  && bretcuEntity?.geometry?.role==='administrative_boundary'
+  && bretcuEntity?.geometry?.scope==='uat'
+  && Number(bretcuEntity?.geometry?.source_feature_id)===1269
+  && bretcuFeature?.properties?.geometry_authority==='ANCPI'
+  && bretcuFeature?.properties?.osm_relation_id==null
+  && String(bretcuFeature?.properties?.legal_id)==='64096'
+  && JSON.stringify(bretcuFeature?.geometry)===JSON.stringify(sourceFeature?.geometry),
+  {binding:bretcuBindings[0]??null,entity:bretcuEntity?{id:bretcuEntity.id,parent_id:bretcuEntity.parent_id,source:bretcuEntity.source,legal:bretcuEntity.legal,geometry:bretcuEntity.geometry}:null,feature_present:Boolean(bretcuFeature),source_feature_id:bretcuAncpi?.source_feature_id??null});
+ check('bretcu_covering_osm_relation_is_not_reused_as_geometry',
+  Number(bretcuEntity?.osm?.relation_id??0)!==14735731
+  && Number(bretcuFeature?.properties?.osm_relation_id??0)!==14735731,
+  {forbidden_osm_relation_id:14735731,entity_osm_relation_id:bretcuEntity?.osm?.relation_id??null,feature_osm_relation_id:bretcuFeature?.properties?.osm_relation_id??null});
+}else{
+ check('bretcu_official_geometry_exception_not_partially_applied',
+  !(catalog.entities||[]).some(e=>e.id==='ro-siruta-64096')&&!(geo.features||[]).some(f=>f.properties?.catalog_id==='ro-siruta-64096'),
+  {});
+}
 const report={schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',status:failures.length?'FAIL':'PASS',policy:'RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, zero unresolved cross-level UAT representations, zero unresolved OSM-vs-SIRUTA semantic type conflicts, and complete official application. Reviewed missing-boundary, exceptional-level, and semantic-type metadata resolutions must pass dedicated structural, geometry, history and provenance checks; no OSM geometry is promoted to legal geometry. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.',checks,failures};
 await writeFile('data/current/ro-release-gate.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));if(failures.length)process.exit(1);
