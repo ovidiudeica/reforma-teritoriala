@@ -8,7 +8,9 @@ export const SOURCE_BUNDLE_ALGORITHM='actual-source-bundle-v1';
 export const SOURCE_PATHS={
  osm:'data/sources/osm-current.json',
  siruta:'data/sources/ro-siruta-current.json',
- cuatm:'data/sources/cuatm-current.json'
+ cuatm:'data/sources/cuatm-current.json',
+ ro_bretcu_ancpi:'data/sources/ro-bretcu-ancpi-current.json',
+ settlement_policy:'data/sources/actual-settlement-policy.json'
 };
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
@@ -38,14 +40,29 @@ const iso=value=>{
 };
 
 export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
- const [osmBytes,sirutaBytes,cuatmBytes]=await Promise.all([
+ const [osmBytes,sirutaBytes,cuatmBytes,settlementPolicyBytes]=await Promise.all([
   readFileFn(SOURCE_PATHS.osm),
   readFileFn(SOURCE_PATHS.siruta),
-  readFileFn(SOURCE_PATHS.cuatm)
+  readFileFn(SOURCE_PATHS.cuatm),
+  readFileFn(SOURCE_PATHS.settlement_policy)
  ]);
  const osm=JSON.parse(osmBytes.toString('utf8'));
  const siruta=JSON.parse(sirutaBytes.toString('utf8'));
  const cuatm=JSON.parse(cuatmBytes.toString('utf8'));
+ const settlementPolicy=JSON.parse(settlementPolicyBytes.toString('utf8'));
+ const bretcuBinding=(settlementPolicy?.jurisdictions?.RO?.official_geometry_exceptions||[])
+  .find(x=>String(x?.legal_id)==='64096');
+ let bretcuAncpi=null,bretcuAncpiBytes=null;
+ if(bretcuBinding){
+  if(bretcuBinding.source_path!==SOURCE_PATHS.ro_bretcu_ancpi)throw new Error('Unexpected Brețcu official geometry source path');
+  bretcuAncpiBytes=await readFileFn(SOURCE_PATHS.ro_bretcu_ancpi);
+  bretcuAncpi=JSON.parse(bretcuAncpiBytes.toString('utf8'));
+  const feature=bretcuAncpi?.feature;
+  if(bretcuAncpi?.schema_version!==1||bretcuAncpi?.mode!=='ACTUAL_RO_OFFICIAL_GEOMETRY_EXCEPTION')throw new Error('Invalid Brețcu ANCPI source envelope');
+  if(bretcuAncpi?.jurisdiction!=='RO'||String(bretcuAncpi?.legal_id)!=='64096'||bretcuAncpi?.authority?.includes('ANCPI')!==true)throw new Error('Brețcu ANCPI source identity mismatch');
+  if(String(feature?.properties?.nationalCode)!=='64096'||feature?.properties?.nationalLevel!=='3rdOrder')throw new Error('Brețcu ANCPI feature identity mismatch');
+  if(!['Polygon','MultiPolygon'].includes(feature?.geometry?.type)||!Array.isArray(feature?.geometry?.coordinates)||!feature.geometry.coordinates.length)throw new Error('Brețcu ANCPI source has invalid polygon geometry');
+ }
  const countries={};
  for(const code of ['RO','MD']){
   const entry=osm.countries?.[code];
@@ -72,7 +89,8 @@ export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
   osm.snapshot_at,
   ...Object.values(countries).map(x=>x.snapshot_at),
   siruta.fetched_at,
-  cuatm.fetched_at
+  cuatm.fetched_at,
+  bretcuAncpi?.dataset_metadata_modified
  ].map(iso).filter(Boolean);
  const sourceWatermark=(timestamps.length?new Date(Math.max(...timestamps.map(x=>new Date(x).getTime()))):new Date(0)).toISOString();
  return {
@@ -101,7 +119,25 @@ export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
     source_url:cuatm.source_url??null,
     fetched_at:cuatm.fetched_at??null,
     record_count:cuatm.record_count??(Array.isArray(cuatm.records)?cuatm.records.length:null)
-   }
+   },
+   ...(bretcuAncpi?{
+    ro_bretcu_ancpi:{
+     path:SOURCE_PATHS.ro_bretcu_ancpi,
+     sha256:sha256(bretcuAncpiBytes),
+     authority:bretcuAncpi.authority,
+     license:bretcuAncpi.license,
+     dataset:bretcuAncpi.dataset,
+     dataset_metadata_modified:bretcuAncpi.dataset_metadata_modified,
+     arcgis_item_id:bretcuAncpi.arcgis_item_id,
+     arcgis_layer_id:bretcuAncpi.arcgis_layer_id,
+     source_feature_id:bretcuAncpi.source_feature_id,
+     legal_registry:bretcuAncpi.legal_registry,
+     legal_id:bretcuAncpi.legal_id,
+     geometry_role:bretcuAncpi.geometry_role,
+     geometry_scope:bretcuAncpi.geometry_scope,
+     geometry_sha256:sha256(Buffer.from(JSON.stringify(bretcuAncpi.feature.geometry),'utf8'))
+    }
+   }:{})
   }
  };
 }
@@ -111,7 +147,7 @@ export function buildSourceBundleManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_SOURCE_BUNDLE',
   source_watermark:inspected.source_watermark,
-  policy:'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, and the official MD CUATM snapshot. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.',
+  policy:'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, and any explicitly activated official geometry exception such as the ANCPI Brețcu boundary. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.',
   sources:inspected.sources
  };
  const fingerprint=sourceBundleFingerprint(draft);
