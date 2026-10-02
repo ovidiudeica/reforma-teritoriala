@@ -513,3 +513,25 @@ test('candidate lifecycle is the only write path for ACTUAL v1.1 geometry policy
  assert.match(promotion,/path == 'data\/sources\/actual-settlement-policy\.json'/);
  assert.match(publication,/path==='data\/sources\/actual-settlement-policy\.json'/);
 });
+
+
+test('P1.1 state boundaries are explicit context geometries without changing UAT parentage',async()=>{
+ const [builder,publicBuilder,structural,regression]=await Promise.all([
+  readFile('scripts/process/build-osm-actual.mjs','utf8'),
+  readFile('scripts/process/build-actual-public-data.mjs','utf8'),
+  readFile('scripts/process/audit-actual-structural-completeness.mjs','utf8'),
+  readFile('scripts/process/audit-actual-regression.mjs','utf8')
+ ]);
+ assert.match(builder,/stateRelationId:90689/);
+ assert.match(builder,/stateRelationId:58974/);
+ assert.match(builder,/category:c\.type==='state'\?'context':'administrative'/);
+ assert.match(builder,/p\.type!=='state'/);
+ assert.match(builder,/role:'administrative_boundary',scope:'state_context'/);
+ assert.match(publicBuilder,/canonical_geometry_role:e\.geometry\?\.role\|\|null/);
+ assert.match(publicBuilder,/geometry_scope:e\.geometry\?\.scope\|\|null/);
+ assert.match(structural,/STATE_RELATION_IDS=\{RO:90689,MD:58974\}/);
+ assert.match(structural,/auditStateContext\('RO'\)/);
+ assert.match(structural,/auditStateContext\('MD'\)/);
+ assert.match(regression,/EXPECTED=\{RO:3233,MD:2596\}/);
+ assert.match(regression,/EXPECTED_TOTAL=5829/);
+});
