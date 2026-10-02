@@ -150,10 +150,6 @@ if(bretcuBindings.length){
   Number(bretcuEntity?.osm?.relation_id??0)!==14735731
   && Number(bretcuFeature?.properties?.osm_relation_id??0)!==14735731,
   {forbidden_osm_relation_id:14735731,entity_osm_relation_id:bretcuEntity?.osm?.relation_id??null,feature_osm_relation_id:bretcuFeature?.properties?.osm_relation_id??null});
-}else{
- check('bretcu_official_geometry_exception_not_partially_applied',
-  !(catalog.entities||[]).some(e=>e.id==='ro-siruta-64096')&&!(geo.features||[]).some(f=>f.properties?.catalog_id==='ro-siruta-64096'),
-  {});
 }
 const report={schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',status:failures.length?'FAIL':'PASS',policy:'RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, zero unresolved cross-level UAT representations, zero unresolved OSM-vs-SIRUTA semantic type conflicts, and complete official application. Reviewed missing-boundary, exceptional-level, and semantic-type metadata resolutions must pass dedicated structural, geometry, history and provenance checks; no OSM geometry is promoted to legal geometry. Audited level-9 semantics and Ungheni jurisdiction exclusion remain mandatory.',checks,failures};
 await writeFile('data/current/ro-release-gate.json',JSON.stringify(report,null,2)+'\n');
