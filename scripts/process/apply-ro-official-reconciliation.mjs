@@ -286,7 +286,7 @@ catalog.official_reconciliation={
   county_bridge:COUNTY_BRIDGE,
   applied_count:applied.length,
   county_applied_count:countyApplied.length,
-  official_geometry_exception_applied_count:officialGeometryApplied.length
+  ...(officialGeometryApplied.length?{official_geometry_exception_applied_count:officialGeometryApplied.length}:{})
  }
 };
 
@@ -327,7 +327,7 @@ const report={
   legal_parent_conflict_count:parentConflicts.length,
   osm_semantic_type_conflict_count:semanticConflicts.length,
   official_only_count:reconciliation.summary?.official_only_count??null,
-  official_geometry_exception_applied_count:officialGeometryApplied.length,
+  ...(officialGeometryApplied.length?{official_geometry_exception_applied_count:officialGeometryApplied.length}:{}),
   reviewed_official_only_resolution_count:reconciliation.summary?.reviewed_official_only_resolution_count??null,
   reviewed_other_level_resolution_count:reconciliation.summary?.reviewed_other_level_resolution_count??null,
   reviewed_semantic_type_resolution_count:reconciliation.summary?.reviewed_semantic_type_resolution_count??null,
@@ -336,7 +336,7 @@ const report={
  type_changes:typeChanges,
  legal_parent_conflicts:parentConflicts,
  osm_semantic_type_conflicts:semanticConflicts,
- official_geometry_exceptions:officialGeometryApplied,
+ ...(officialGeometryApplied.length?{official_geometry_exceptions:officialGeometryApplied}:{}),
  failures
 };
 
