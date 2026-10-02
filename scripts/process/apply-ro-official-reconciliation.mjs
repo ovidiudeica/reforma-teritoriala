@@ -7,6 +7,8 @@ const RECON='data/current/ro-official-reconciliation.json';
 const SNAPSHOT='data/sources/ro-siruta-current.json';
 const COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const OUTPUT='data/current/ro-official-application.json';
+const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
+const BRETCU_ANCPI='data/sources/ro-bretcu-ancpi-current.json';
 
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
 const catalog=await read(CATALOG);
@@ -14,6 +16,7 @@ const geo=await read(GEO);
 const reconciliation=await read(RECON);
 const official=await read(SNAPSHOT);
 const countyBridge=await read(COUNTY_BRIDGE);
+const settlementPolicy=await read(SETTLEMENT_POLICY);
 
 if(reconciliation.status!=='PASS')throw new Error('RO official reconciliation is not PASS');
 if(countyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
@@ -152,6 +155,126 @@ for(const e of roCounties){
  countyApplied.push({entity_id:e.id,osm_relation_id:relationId,legal_id:code,legal_type:'county',match_method:legal.match_method});
 }
 
+
+const officialGeometryApplied=[];
+const officialGeometryBindings=settlementPolicy?.jurisdictions?.RO?.official_geometry_exceptions||[];
+if(officialGeometryBindings.length){
+ if(officialGeometryBindings.length!==1||String(officialGeometryBindings[0]?.legal_id)!=='64096'){
+  throw new Error('ACTUAL P1.2 permits exactly the reviewed Brețcu SIRUTA 64096 official geometry exception');
+ }
+ const binding=officialGeometryBindings[0];
+ if(binding.source_path!==BRETCU_ANCPI||binding.authority!=='ANCPI'||binding.geometry_role!=='administrative_boundary'||binding.geometry_scope!=='uat'||binding.public_entity_id!=='ro-siruta-64096'){
+  throw new Error('Unexpected Brețcu official geometry policy binding: '+JSON.stringify(binding));
+ }
+ if(entities.some(e=>e.id===binding.public_entity_id))throw new Error('Brețcu official geometry entity ID already exists');
+ if(featureByCatalogId.has(binding.public_entity_id))throw new Error('Brețcu official geometry feature ID already exists');
+ const source=await read(BRETCU_ANCPI);
+ const sourceFeature=source?.feature;
+ if(source?.schema_version!==1||source?.mode!=='ACTUAL_RO_OFFICIAL_GEOMETRY_EXCEPTION'||source?.jurisdiction!=='RO'||String(source?.legal_id)!=='64096'||source?.authority?.includes('ANCPI')!==true){
+  throw new Error('Invalid Brețcu ANCPI source envelope');
+ }
+ if(source?.license!=='CC-BY-4.0'||source?.arcgis_item_id!=='466b7199c19f4904831e14bc7f407af9'||Number(source?.arcgis_layer_id)!==1){
+  throw new Error('Unexpected Brețcu ANCPI source provenance');
+ }
+ if(String(sourceFeature?.properties?.nationalCode)!=='64096'||sourceFeature?.properties?.nationalLevel!=='3rdOrder'||!['Polygon','MultiPolygon'].includes(sourceFeature?.geometry?.type)){
+  throw new Error('Brețcu ANCPI feature identity/geometry mismatch');
+ }
+ const officialRecord=(official.records||[]).find(x=>String(x.siruta)==='64096');
+ if(!officialRecord||Number(officialRecord.level)!==2||officialRecord.legal_type!=='commune'||String(officialRecord.county_code)!=='14'){
+  throw new Error('SIRUTA 64096 Brețcu baseline is missing or changed');
+ }
+ const countyEntity=roCounties.find(e=>String(e.legal?.id)==='14');
+ if(!countyEntity||Number(countyEntity.osm?.relation_id)!==2248621){
+  throw new Error('Brețcu expected Covasna parent is missing or changed');
+ }
+ const legal={
+  registry:'SIRUTA',
+  reference_year:Number(official.reference_year)||2026,
+  id:'64096',
+  name:officialRecord.name||'BREȚCU',
+  type:'commune',
+  parent_id:'14',
+  parent_name:officialRecord.county_name||'JUDEȚUL COVASNA',
+  match_method:'official_geometry_exception_ancpi_national_code',
+  match_confidence:'high',
+  source:SNAPSHOT,
+  reconciliation:RECON,
+  parent_matches_osm_geometry_parent:null
+ };
+ const entity={
+  id:binding.public_entity_id,
+  name:'Brețcu',
+  official_name:officialRecord.name||'BREȚCU',
+  jurisdiction:'RO',
+  category:'administrative',
+  type:'commune',
+  status:'current',
+  parent_id:countyEntity.id,
+  osm:null,
+  classification:{
+   version:'official-geometry-1.0',
+   confidence:'high',
+   reason:'Current SIRUTA UAT identity 64096 paired with the explicitly reviewed current ANCPI administrative-unit polygon; no OSM relation is assigned.',
+   evidence:BRETCU_ANCPI,
+   official_registry:'SIRUTA',
+   official_legal_id:'64096'
+  },
+  geometry:{
+   role:'administrative_boundary',
+   scope:'uat',
+   admin_level:8,
+   authority:'ANCPI',
+   source_path:BRETCU_ANCPI,
+   source_feature_id:Number(source.source_feature_id),
+   legal_geometry_equivalence_asserted:false
+  },
+  source:'ANCPI',
+  source_url:'https://open-data-ancpi.hub.arcgis.com/datasets/466b7199c19f4904831e14bc7f407af9_1',
+  imported_at:source.dataset_metadata_modified,
+  legal,
+  review_required:false
+ };
+ const feature={
+  type:'Feature',
+  properties:{
+   catalog_id:entity.id,
+   parent_id:entity.parent_id,
+   jurisdiction:'RO',
+   entity_type:'commune',
+   classification_confidence:'high',
+   geometry_role:'administrative_boundary',
+   geometry_scope:'uat',
+   geometry_source:'ANCPI administrative unit feature',
+   geometry_authority:'ANCPI',
+   source_feature_id:Number(source.source_feature_id),
+   osm_relation_id:null,
+   admin_level:8,
+   legal_registry:'SIRUTA',
+   legal_id:'64096',
+   legal_name:legal.name,
+   legal_type:'commune',
+   legal_parent_id:'14',
+   legal_parent_name:legal.parent_name,
+   legal_match_method:legal.match_method,
+   legal_parent_matches_osm_geometry_parent:null
+  },
+  geometry:structuredClone(sourceFeature.geometry)
+ };
+ entities.push(entity);
+ geo.features.push(feature);
+ featureByCatalogId.set(entity.id,feature);
+ catalog.entity_count=entities.length;
+ officialGeometryApplied.push({
+  entity_id:entity.id,
+  legal_id:'64096',
+  legal_type:'commune',
+  parent_entity_id:entity.parent_id,
+  source:BRETCU_ANCPI,
+  authority:'ANCPI',
+  source_feature_id:Number(source.source_feature_id)
+ });
+}
+
 catalog.official_reconciliation={
  ...(catalog.official_reconciliation||{}),
  RO:{
@@ -162,7 +285,8 @@ catalog.official_reconciliation={
   reconciliation:RECON,
   county_bridge:COUNTY_BRIDGE,
   applied_count:applied.length,
-  county_applied_count:countyApplied.length
+  county_applied_count:countyApplied.length,
+  official_geometry_exception_applied_count:officialGeometryApplied.length
  }
 };
 
@@ -203,6 +327,7 @@ const report={
   legal_parent_conflict_count:parentConflicts.length,
   osm_semantic_type_conflict_count:semanticConflicts.length,
   official_only_count:reconciliation.summary?.official_only_count??null,
+  official_geometry_exception_applied_count:officialGeometryApplied.length,
   reviewed_official_only_resolution_count:reconciliation.summary?.reviewed_official_only_resolution_count??null,
   reviewed_other_level_resolution_count:reconciliation.summary?.reviewed_other_level_resolution_count??null,
   reviewed_semantic_type_resolution_count:reconciliation.summary?.reviewed_semantic_type_resolution_count??null,
@@ -211,6 +336,7 @@ const report={
  type_changes:typeChanges,
  legal_parent_conflicts:parentConflicts,
  osm_semantic_type_conflicts:semanticConflicts,
+ official_geometry_exceptions:officialGeometryApplied,
  failures
 };
 
