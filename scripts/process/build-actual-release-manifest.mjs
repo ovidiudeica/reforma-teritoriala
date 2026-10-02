@@ -270,8 +270,11 @@ const manifest={
   schema_version:settlementPolicy.schema_version??null,
   policy_version:settlementPolicy.policy_version??null,
   coverage_contract_version:settlementPolicy.coverage_contract_version??1,
+  official_geometry_contract_version:settlementPolicy.official_geometry_contract_version??null,
+  public_contract:settlementPolicy.public_contract??'actual-public-entity-v1',
   scope:settlementPolicy.scope??null,
   geometry_role_contract:settlementPolicy.geometry_role_contract??null,
+  official_geometry_exceptions:settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[],
   sha256:components.settlement_policy.sha256
  },
  ...(geometryRoleBindingActive?{
