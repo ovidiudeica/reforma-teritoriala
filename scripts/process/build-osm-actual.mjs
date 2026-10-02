@@ -9,8 +9,8 @@ const OSM_MANIFEST='data/sources/osm-current.json';
 const OSM_SNAPSHOT_DIR='data/sources/osm-snapshots';
 const CLASSIFIER_VERSION='2.3';
 const countries={
- RO:{name:'România',iso:'RO',levels:[4,8,9]},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316]}
+ RO:{name:'România',iso:'RO',levels:[4,8,9],stateRelationId:90689},
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],stateRelationId:58974,requiredRelations:[1813306,1813297,58512,1813315,1813316]}
 };
 const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
 const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
@@ -44,6 +44,7 @@ async function readRawSnapshot(code,entry){
 function norm(v){return (v||'').trim().toLowerCase();}
 function classify(country,t={}){
  const l=Number(t.admin_level), p=norm(t.place), n=norm(t['name:ro']||t.name), official=norm(t.official_name);
+ if(l===2)return {type:'state',confidence:'high',reason:'Country boundary imported as ACTUAL state context; it does not change UAT parentage or assert a SIRUTA/CUATM legal identity.'};
  if(country==='RO'){
   if(l===4)return {type:n.includes('bucurești')||p==='city'?'capital_municipality':'county',confidence:'high'};
   if(l===9){
@@ -107,13 +108,15 @@ function normalizeOfficialPointTouch(country,raw,geo,report){
 }
 function entity(country,feature,importedAt){
  const t=feature.properties?.tags||feature.properties||{}, rid=relationId(feature), c=classify(country,t);
- return {id:`osm-r${rid}`,name:t['name:ro']||t.name||null,official_name:t.official_name||null,jurisdiction:country,category:'administrative',type:c.type,status:'current',parent_id:null,
+ return {id:`osm-r${rid}`,name:t['name:ro']||t.name||null,official_name:t.official_name||null,jurisdiction:country,category:c.type==='state'?'context':'administrative',type:c.type,status:'current',parent_id:null,
   osm:{element_type:'relation',relation_id:rid,admin_level:t.admin_level?Number(t.admin_level):null,boundary:t.boundary||null,relation_type:t.type||null,place:t.place||null,designation:t.designation||null,name_prefix:t['name:prefix']||null,full_name:t.full_name||null,cuatm_code:t['ref:cuatm']||t['ref:cuatm:cod']||null,cuatm_unique_id:t['ref:cuatm:codunic']||null,wikidata:t.wikidata||null,wikipedia:t.wikipedia||null},
   classification:{version:CLASSIFIER_VERSION,confidence:c.confidence,reason:c.reason||null},
+  ...(c.type==='state'?{geometry:{role:'administrative_boundary',scope:'state_context',legal_geometry_equivalence_asserted:false}}:{}),
   source:'OpenStreetMap',source_url:`https://www.openstreetmap.org/relation/${rid}`,imported_at:importedAt,review_required:c.confidence==='low'};
 }
 function assignParents(entities,featuresById,warnings=[]){
  for(const child of entities){
+  if(child.type==='state'){child.parent_id=null;continue;}
   const cf=featuresById.get(child.id); if(!cf)continue;
   let pt,childArea;
   try{
@@ -125,7 +128,7 @@ function assignParents(entities,featuresById,warnings=[]){
    continue;
   }
   const cl=child.osm.admin_level??99;
-  const candidates=entities.filter(p=>p.jurisdiction===child.jurisdiction&&(p.osm.admin_level??99)<cl);
+  const candidates=entities.filter(p=>p.jurisdiction===child.jurisdiction&&p.type!=='state'&&(p.osm.admin_level??99)<cl);
   const levels=[...new Set(candidates.map(p=>p.osm.admin_level??0))].sort((a,b)=>b-a);
   let selected=null;
   for(const level of levels){
@@ -261,21 +264,23 @@ async function main(){
   const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
   if(!countryFeature) throw new Error(`Missing country boundary geometry for ${code}`);
-  const polygons=allPolygons.filter(f=>{
+  if(relationId(countryFeature)!==cfg.stateRelationId)throw new Error(`Unexpected ${code} country boundary relation: expected ${cfg.stateRelationId}, got ${relationId(countryFeature)}`);
+  const contained=allPolygons.filter(f=>{
    if(f===countryFeature)return false;
    try{return booleanPointInPolygon(pointOnFeature(f),countryFeature);}
    catch(e){report.warnings.push({type:'country_membership_geometry_error',jurisdiction:code,relation_id:relationId(f),message:e.message});return false;}
   });
-  const excluded=allPolygons.filter(f=>f!==countryFeature&&!polygons.includes(f)).map(f=>relationId(f));
+  const polygons=[countryFeature,...contained];
+  const excluded=allPolygons.filter(f=>f!==countryFeature&&!contained.includes(f)).map(f=>relationId(f));
   if(excluded.length) report.warnings.push({type:'outside_country_boundary_excluded',jurisdiction:code,relation_ids:excluded});
   const entities=polygons.map(f=>entity(code,f,osmSource.snapshot_at));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));
   assignParents(entities,byId,report.warnings); finalizeAfterParents(entities); all.push(...entities);
   const entityById=new Map(entities.map(e=>[e.id,e]));
-  const fc={type:'FeatureCollection',features:polygons.map(f=>{const id=`osm-r${relationId(f)}`;const e=entityById.get(id);return {...f,properties:{...f.properties,catalog_id:id,parent_id:e?.parent_id||null,jurisdiction:code,entity_type:e?.type||'unclassified',classification_confidence:e?.classification?.confidence||'low'}};})};
+  const fc={type:'FeatureCollection',features:polygons.map(f=>{const id=`osm-r${relationId(f)}`;const e=entityById.get(id);return {...f,properties:{...f.properties,catalog_id:id,parent_id:e?.parent_id||null,jurisdiction:code,entity_type:e?.type||'unclassified',classification_confidence:e?.classification?.confidence||'low',geometry_role:e?.geometry?.role||null,geometry_scope:e?.geometry?.scope||null}};})};
   await writeFile(`public/geo/current/${code.toLowerCase()}-administrative.geojson`,JSON.stringify(fc));
   const confidence=Object.groupBy?Object.groupBy(entities,e=>e.classification.confidence):null;
-  report.countries[code]={name:cfg.name,count:entities.length,review_required:entities.filter(x=>x.review_required).length,geojson_features:fc.features.length,
+  report.countries[code]={name:cfg.name,count:entities.length,review_required:entities.filter(x=>x.review_required).length,geojson_features:fc.features.length,state_relation_id:cfg.stateRelationId,
    confidence:confidence?Object.fromEntries(Object.entries(confidence).map(([k,v])=>[k,v.length])):{}};
  }
  all.sort((a,b)=>a.jurisdiction.localeCompare(b.jurisdiction)||(a.osm.admin_level??99)-(b.osm.admin_level??99)||(a.name||'').localeCompare(b.name||'','ro'));
