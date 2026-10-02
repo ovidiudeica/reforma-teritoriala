@@ -12,14 +12,18 @@ const topology=JSON.parse(await readFile(TOPOLOGY_AUDIT,'utf8'));
 
 const OUTPUT='data/current/actual-release-gate.json';
 const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
+const GEOMETRY_ROLE_CONTRACT='schemas/actual-geometry-role-contract.json';
 const NETWORK_DENIAL='data/current/actual-network-denial-audit.json';
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const manifestBuf=await readFile(MANIFEST);
 const settlementPolicyBuf=await readFile(SETTLEMENT_POLICY);
+const geometryRoleContractBuf=await readFile(GEOMETRY_ROLE_CONTRACT);
 const networkDenialBuf=await readFile(NETWORK_DENIAL);
 const networkDenial=JSON.parse(networkDenialBuf.toString('utf8'));
 const manifest=JSON.parse(manifestBuf.toString('utf8'));
 const settlementPolicy=JSON.parse(settlementPolicyBuf.toString('utf8'));
+const geometryRoleContract=JSON.parse(geometryRoleContractBuf.toString('utf8'));
+const geometryCoverageV2=Number(settlementPolicy?.coverage_contract_version||1)===2;
 const sourceBundleBuf=await readFile(SOURCE_BUNDLE_PATH);
 const sourceBundle=JSON.parse(sourceBundleBuf.toString('utf8'));
 const sourceBundleGate=JSON.parse(await readFile(SOURCE_BUNDLE_GATE_PATH,'utf8'));
@@ -74,7 +78,8 @@ const semanticFingerprint=actualSemanticFingerprint({
  roOfficial:siruta,
  mdOfficial:cuatm,
  mdIndividualReview:mdIndividual,
- settlementPolicy
+ settlementPolicy,
+ geometryRoleContract
 });
 const failures=[],checks=[];
 const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
@@ -99,14 +104,39 @@ check('settlement_policy_is_explicit_and_fail_closed',
  && settlementPolicy.common_requirements?.exhaustive_polygon_coverage_required===false
  && settlementPolicy.common_requirements?.missing_official_settlement_polygon_is_blocking===false
  && settlementPolicy.common_requirements?.geometry_coordinate_mutation_allowed===false
- && settlementPolicy.common_requirements?.unreviewed_identity_inference_allowed===false,
- {schema_version:settlementPolicy.schema_version??null,mode:settlementPolicy.mode??null,scope:settlementPolicy.scope??null,common_requirements:settlementPolicy.common_requirements??null});
+ && settlementPolicy.common_requirements?.unreviewed_identity_inference_allowed===false
+ && (!geometryCoverageV2
+   ||(
+    settlementPolicy.jurisdictions?.RO?.official_inventory_selector==='SIRUTA records whose level is 3'
+    && settlementPolicy.jurisdictions?.RO?.coverage_accounting==='unique_official_legal_identity'
+    && settlementPolicy.jurisdictions?.MD?.coverage_accounting==='unique_official_legal_identity'
+    && settlementPolicy.geometry_role_contract?.path===GEOMETRY_ROLE_CONTRACT
+    && settlementPolicy.geometry_role_contract?.contract===geometryRoleContract?.contract
+    && Number(settlementPolicy.geometry_role_contract?.schema_version)===Number(geometryRoleContract?.schema_version)
+   )),
+ {schema_version:settlementPolicy.schema_version??null,mode:settlementPolicy.mode??null,scope:settlementPolicy.scope??null,coverage_contract_version:settlementPolicy.coverage_contract_version??1,geometry_role_contract:settlementPolicy.geometry_role_contract??null,common_requirements:settlementPolicy.common_requirements??null});
 check('manifest_records_current_settlement_policy',
  manifest.settlement_policy?.schema_version===settlementPolicy.schema_version
  && manifest.settlement_policy?.policy_version===settlementPolicy.policy_version
+ && manifest.settlement_policy?.coverage_contract_version===(settlementPolicy.coverage_contract_version??1)
  && manifest.settlement_policy?.scope===settlementPolicy.scope
+ && JSON.stringify(manifest.settlement_policy?.geometry_role_contract??null)===JSON.stringify(settlementPolicy.geometry_role_contract??null)
  && manifest.settlement_policy?.sha256===sha256(settlementPolicyBuf),
- {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,scope:settlementPolicy.scope??null,sha256:sha256(settlementPolicyBuf)}});
+ {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,coverage_contract_version:settlementPolicy.coverage_contract_version??1,scope:settlementPolicy.scope??null,geometry_role_contract:settlementPolicy.geometry_role_contract??null,sha256:sha256(settlementPolicyBuf)}});
+
+check('geometry_role_contract_binding_is_current',
+ !geometryCoverageV2
+ ||(
+  manifest.schema_version>=9
+  && manifest.geometry_role_contract?.path===GEOMETRY_ROLE_CONTRACT
+  && manifest.geometry_role_contract?.schema_version===geometryRoleContract.schema_version
+  && manifest.geometry_role_contract?.contract===geometryRoleContract.contract
+  && manifest.geometry_role_contract?.mode===geometryRoleContract.mode
+  && manifest.geometry_role_contract?.sha256===sha256(geometryRoleContractBuf)
+  && manifest.components?.geometry_role_contract?.path===GEOMETRY_ROLE_CONTRACT
+  && manifest.components?.geometry_role_contract?.sha256===sha256(geometryRoleContractBuf)
+ ),
+ {enabled:geometryCoverageV2,manifest:manifest.geometry_role_contract??null,actual:{path:GEOMETRY_ROLE_CONTRACT,schema_version:geometryRoleContract.schema_version,contract:geometryRoleContract.contract,mode:geometryRoleContract.mode,sha256:sha256(geometryRoleContractBuf)}});
 check('md_semantic_bridge_passes',mdSemantic.status==='PASS',{status:mdSemantic.status??null,summary:mdSemantic.summary??null});
 check('manifest_records_current_md_semantic_bridge',manifest.semantic_bridges?.MD?.status==='PASS'&&manifest.semantic_bridges?.MD?.sha256===currentHashes.md_semantic_bridge,{manifest:manifest.semantic_bridges?.MD??null,actual:{status:mdSemantic.status??null,sha256:currentHashes.md_semantic_bridge??null}});
 check('source_bundle_gate_passes',
@@ -222,7 +252,7 @@ if((manifest.schema_version??0)>=3){
    ?manifest.content_identity?.release_identity_basis==='base_release_compatibility_reuse'
      && manifest.content_identity?.base_content_sha256===semanticFingerprint.sha256
      && typeof manifest.content_identity?.base_snapshot_id==='string'
-   :manifest.content_identity?.release_identity_basis==='semantic_content_v1',
+   :manifest.content_identity?.release_identity_basis===(semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1'),
   {content_identity:manifest.content_identity??null});
  check('release_fingerprint_matches_semantic_identity',
   manifest.release_fingerprint_sha256===expectedReleaseFingerprint,
