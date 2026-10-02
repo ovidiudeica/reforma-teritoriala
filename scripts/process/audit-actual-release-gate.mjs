@@ -121,8 +121,27 @@ check('manifest_records_current_settlement_policy',
  && manifest.settlement_policy?.coverage_contract_version===(settlementPolicy.coverage_contract_version??1)
  && manifest.settlement_policy?.scope===settlementPolicy.scope
  && JSON.stringify(manifest.settlement_policy?.geometry_role_contract??null)===JSON.stringify(settlementPolicy.geometry_role_contract??null)
+ && (manifest.settlement_policy?.official_geometry_contract_version??null)===(settlementPolicy.official_geometry_contract_version??null)
+ && (manifest.settlement_policy?.public_contract??'actual-public-entity-v1')===(settlementPolicy.public_contract??'actual-public-entity-v1')
+ && JSON.stringify(manifest.settlement_policy?.official_geometry_exceptions??[])===JSON.stringify(settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[])
  && manifest.settlement_policy?.sha256===sha256(settlementPolicyBuf),
- {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,coverage_contract_version:settlementPolicy.coverage_contract_version??1,scope:settlementPolicy.scope??null,geometry_role_contract:settlementPolicy.geometry_role_contract??null,sha256:sha256(settlementPolicyBuf)}});
+ {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,coverage_contract_version:settlementPolicy.coverage_contract_version??1,official_geometry_contract_version:settlementPolicy.official_geometry_contract_version??null,public_contract:settlementPolicy.public_contract??'actual-public-entity-v1',scope:settlementPolicy.scope??null,geometry_role_contract:settlementPolicy.geometry_role_contract??null,official_geometry_exceptions:settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[],sha256:sha256(settlementPolicyBuf)}});
+
+const officialGeometryEnabled=Number(settlementPolicy?.official_geometry_contract_version||0)===1;
+check('official_geometry_policy_is_fail_closed',
+ !officialGeometryEnabled
+ ||(
+  settlementPolicy.public_contract==='actual-public-entity-v2'
+  && Array.isArray(settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions)
+  && settlementPolicy.jurisdictions.RO.official_geometry_exceptions.length===1
+  && String(settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.legal_id)==='64096'
+  && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.source_path==='data/sources/ro-bretcu-ancpi-current.json'
+  && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.authority==='ANCPI'
+  && settlementPolicy.jurisdictions.RO.official_geometry_exceptions[0]?.public_entity_id==='ro-siruta-64096'
+  && sourceBundle.sources?.ro_bretcu_ancpi?.legal_id==='64096'
+  && sourceBundle.sources?.ro_bretcu_ancpi?.authority?.includes('ANCPI')===true
+ ),
+ {enabled:officialGeometryEnabled,public_contract:settlementPolicy.public_contract??null,exceptions:settlementPolicy.jurisdictions?.RO?.official_geometry_exceptions??[],source:sourceBundle.sources?.ro_bretcu_ancpi??null});
 
 check('geometry_role_contract_binding_is_current',
  !geometryCoverageV2
