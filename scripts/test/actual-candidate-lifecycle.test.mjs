@@ -22,7 +22,8 @@ async function loadDocuments(){
   roOfficial:await readJson('data/sources/ro-siruta-current.json'),
   mdOfficial:await readJson('data/sources/cuatm-current.json'),
   mdIndividualReview:await readJson('data/sources/md-cuatm-individual-review.json'),
-  settlementPolicy:await readJson('data/sources/actual-settlement-policy.json')
+  settlementPolicy:await readJson('data/sources/actual-settlement-policy.json'),
+  geometryRoleContract:await readJson('schemas/actual-geometry-role-contract.json')
  };
 }
 
@@ -467,4 +468,40 @@ test('geometry-role contract keeps administrative, statistical and locality sema
  assert.ok(contract.roles.locality_footprint.allowed_subtypes.includes('intravilan'));
  assert.equal(contract.compatibility.actual_public_entity_v1.legacy_geometry_role,'current_representation');
  assert.equal(contract.compatibility.actual_public_entity_v1.canonical_role_for_existing_master_geometry,'administrative_boundary');
+});
+
+
+test('geometry policy migration upgrades semantic identity only after explicit opt-in',async()=>{
+ const legacy=await loadDocuments();
+ const legacyFingerprint=actualSemanticFingerprint(legacy);
+ assert.equal(legacyFingerprint.algorithm,'actual-semantic-v1');
+
+ const migrated=clone(legacy);
+ migrated.settlementPolicy.coverage_contract_version=2;
+ migrated.settlementPolicy.geometry_role_contract={
+  path:'schemas/actual-geometry-role-contract.json',
+  contract:'actual-geometry-role-v1',
+  schema_version:1
+ };
+ migrated.settlementPolicy.jurisdictions.RO.official_inventory_selector='SIRUTA records whose level is 3';
+ migrated.settlementPolicy.jurisdictions.RO.coverage_accounting='unique_official_legal_identity';
+ migrated.settlementPolicy.jurisdictions.MD.coverage_accounting='unique_official_legal_identity';
+ const migratedFingerprint=actualSemanticFingerprint(migrated);
+ assert.equal(migratedFingerprint.algorithm,'actual-semantic-v2');
+ assert.notEqual(migratedFingerprint.sha256,legacyFingerprint.sha256);
+ assert.equal(migratedFingerprint.payload.geometry_role_contract.contract,'actual-geometry-role-v1');
+});
+
+test('candidate lifecycle is the only write path for ACTUAL v1.1 geometry policy migration',async()=>{
+ const [candidate,promotion,publication]=await Promise.all([
+  readFile('.github/workflows/actual-candidate.yml','utf8'),
+  readFile('.github/workflows/actual-promote-candidate.yml','utf8'),
+  readFile('scripts/process/audit-actual-publication-path.mjs','utf8')
+ ]);
+ assert.match(candidate,/migrate_geometry_policy_v1_1:/);
+ assert.match(candidate,/apply-actual-geometry-policy-v1-1\.mjs/);
+ assert.match(candidate,/data\/sources\/actual-settlement-policy\.json/);
+ assert.match(candidate,/--network none/);
+ assert.match(promotion,/path == 'data\/sources\/actual-settlement-policy\.json'/);
+ assert.match(publication,/path==='data\/sources\/actual-settlement-policy\.json'/);
 });
