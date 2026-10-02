@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "contract": "actual-geometry-role-v1",
+  "mode": "ACTUAL",
+  "principle": "Geometry role is independent from legal identity. A polygon may represent an administrative boundary, a statistical boundary, or a locality footprint without asserting that the geometry is legally authoritative.",
+  "roles": {
+    "administrative_boundary": {
+      "description": "Boundary representation of a current administrative or territorial unit.",
+      "legal_geometry_equivalence_implied": false,
+      "hierarchy": "administrative"
+    },
+    "statistical_boundary": {
+      "description": "Boundary of a statistical unit such as NUTS or the Moldovan statistical nomenclature.",
+      "legal_geometry_equivalence_implied": false,
+      "hierarchy": "statistical",
+      "must_not_be_inferred_from_administrative_hierarchy_alone": true
+    },
+    "locality_footprint": {
+      "description": "Polygon representing an inhabited locality footprint, settlement boundary or intravilan/built-up extent.",
+      "legal_geometry_equivalence_implied": false,
+      "hierarchy": "settlement",
+      "allowed_subtypes": [
+        "settlement_boundary",
+        "intravilan",
+        "built_up_footprint"
+      ]
+    }
+  },
+  "rules": {
+    "canonical_role_required_for_v1_1_geometry": true,
+    "legal_identity_and_geometry_role_must_be_separate": true,
+    "cross_role_coordinate_reuse_allowed_when_provenance_is_identical": true,
+    "coordinate_duplication_not_required_for_multiple_roles": true,
+    "source_and_provenance_required": true
+  },
+  "compatibility": {
+    "actual_public_entity_v1": {
+      "legacy_geometry_role": "current_representation",
+      "canonical_role_for_existing_master_geometry": "administrative_boundary",
+      "note": "ACTUAL v1.0.1 bytes remain immutable. The canonical role is applied by the v1.1 migration rather than rewriting the historical release."
+    }
+  }
+}
