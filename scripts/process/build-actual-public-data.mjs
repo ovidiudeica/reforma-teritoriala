@@ -128,7 +128,8 @@ function validationFor(e,legal){
  const nonCuatm=e.jurisdiction==='MD'?mdNonCuatmById.get(e.id):null;
  const individualReview=e.jurisdiction==='MD'?mdIndividualById.get(e.id):null;
  let legalIdentityStatus;
- if(legal)legalIdentityStatus='reconciled';
+ if(e.category==='context')legalIdentityStatus='not_bound_to_official_registry';
+ else if(legal)legalIdentityStatus='reconciled';
  else if(nonCuatm)legalIdentityStatus='outside_current_legal_registry';
  else if(individualReview?.review_status==='resolved_semantic_classification')legalIdentityStatus='reviewed_representation_without_legal_identity';
  else if(individualReview?.review_status==='unresolved_identity')legalIdentityStatus='unresolved';
