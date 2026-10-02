@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {access,readFile} from 'node:fs/promises';
 
-test('ACTUAL v1 frontend binds only validated unsimplified release assets',async()=>{
+test('ACTUAL frontend validates current snapshot while tracking published release independently',async()=>{
  const [html,app,manifestText,gateText,buildInfoText]=await Promise.all([
   readFile('index.html','utf8'),
   readFile('app.js','utf8'),
@@ -17,10 +17,15 @@ test('ACTUAL v1 frontend binds only validated unsimplified release assets',async
  assert.equal(gate.status,'PASS');
  assert.equal(gate.snapshot_id,manifest.snapshot_id);
  assert.equal(manifest.public_contract?.contract,'actual-public-entity-v1');
- assert.equal(buildInfo.actual_snapshot_id,manifest.snapshot_id);
+ assert.match(buildInfo.actual_snapshot_id,/^actual-[0-9a-f]{16}$/);
+ assert.match(buildInfo.release_fingerprint_sha256,/^[0-9a-f]{64}$/);
+ if(buildInfo.actual_snapshot_id===manifest.snapshot_id)assert.equal(buildInfo.release_fingerprint_sha256,manifest.release_fingerprint_sha256);
  assert.match(buildInfo.actual_release_tag,/^actual-v\d+\.\d+\.\d+$/);
  assert.match(buildInfo.app_version,/^web-v\d+(?:\.\d+)*$/);
  assert.match(buildInfo.app_commit,/^[0-9a-f]{40}$/);
+ assert.doesNotMatch(app,/Build metadata nu corespunde snapshot-ului ACTUAL/);
+ assert.match(app,/ACTUAL curent:/);
+ assert.match(app,/publicat:/);
  assert.match(html,/leaflet@1\.9\.4\/dist\/leaflet\.css" integrity="sha256-p4NxAoJBhIIN\+hmNHrzRCf9tD\/miZyoHS5obTRR9BMY=" crossorigin=""/);
  assert.match(html,/leaflet@1\.9\.4\/dist\/leaflet\.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2\/Z9VM\+kNiyxNV1lvTlZBo=" crossorigin=""/);
  assert.doesNotMatch(html,/derivată simplificată/i);
