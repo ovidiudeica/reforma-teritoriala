@@ -1,36 +1,38 @@
 {
   "generated_at": "2026-09-27T20:37:24.316Z",
   "source_generated_at": "2026-09-27T20:37:24.316Z",
-  "entity_count": 5829,
+  "entity_count": 5830,
   "countries": {
     "RO": {
-      "feature_count": 3233,
+      "feature_count": 3234,
       "review_required": 0,
       "distributions": {
         "admin_level": {
           "2": 1,
           "4": 42,
           "8": 3179,
-          "9": 11
+          "9": 11,
+          "∅": 1
         },
         "place": {
-          "∅": 13,
+          "∅": 14,
           "county": 41,
           "city": 101,
           "municipality": 2861,
           "town": 217
         },
         "designation": {
-          "∅": 3233
+          "∅": 3234
         },
         "osm_type": {
-          "boundary": 3233
+          "boundary": 3233,
+          "∅": 1
         },
         "entity_type": {
           "state": 1,
           "county": 42,
           "municipality": 102,
-          "commune": 2861,
+          "commune": 2862,
           "sector": 6,
           "town": 216,
           "municipality_component_locality_boundary_representation": 2,
@@ -148,6 +150,14 @@
           "designation": "∅",
           "osm_type": "boundary",
           "entity_type": "town",
+          "count": 1
+        },
+        {
+          "admin_level": "∅",
+          "place": "∅",
+          "designation": "∅",
+          "osm_type": "∅",
+          "entity_type": "commune",
           "count": 1
         }
       ]
@@ -346,11 +356,11 @@
   },
   "parent_validation": {
     "RO": {
-      "checked": 3232,
+      "checked": 3233,
       "context_excluded": 1,
       "root_parent": 42,
       "unexpected_root": 0,
-      "entity_parent": 3190,
+      "entity_parent": 3191,
       "null_parent": 0,
       "missing_parent": 0,
       "parent_wrong_jurisdiction": 0,

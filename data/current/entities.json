@@ -4,7 +4,7 @@
   "classifier_version": "2.3",
   "source": "OpenStreetMap via Overpass API",
   "license": "ODbL",
-  "entity_count": 5829,
+  "entity_count": 5830,
   "entities": [
     {
       "id": "osm-r58974",
@@ -256203,6 +256203,56 @@
       "source_url": "https://www.openstreetmap.org/relation/11366846",
       "imported_at": "2026-09-27T20:37:24.316Z",
       "review_required": false
+    },
+    {
+      "id": "siruta-u64096",
+      "name": "BREȚCU",
+      "official_name": "BREȚCU",
+      "jurisdiction": "RO",
+      "category": "administrative",
+      "type": "commune",
+      "status": "current",
+      "parent_id": "osm-r2248621",
+      "representation": {
+        "source": "ANCPI RELUAT",
+        "admin_level": 8,
+        "source_object_id": 1227,
+        "inspire_id_local_id": "1.145.64096",
+        "inspire_id_version_id": "20250324141249",
+        "national_code": "64096"
+      },
+      "geometry": {
+        "role": "administrative_boundary",
+        "scope": "uat_fallback",
+        "legal_geometry_equivalence_asserted": false
+      },
+      "classification": {
+        "version": "2.3",
+        "confidence": "high",
+        "reason": "Current UAT geometry supplied by ANCPI/RELUAT as a reviewed fallback because OSM has no distinct Brețcu boundary relation.",
+        "evidence": "data/sources/ro-ancpi-uat-fallbacks.json",
+        "official_registry": "SIRUTA",
+        "official_legal_id": "64096"
+      },
+      "legal": {
+        "registry": "SIRUTA",
+        "reference_year": 2026,
+        "id": "64096",
+        "name": "BREȚCU",
+        "type": "commune",
+        "parent_id": "145",
+        "parent_name": "JUDEȚUL COVASNA",
+        "match_method": "exact_siruta_national_code_ancpi_fallback",
+        "match_confidence": "high",
+        "source": "data/sources/ro-siruta-current.json",
+        "geometry_source": "data/sources/ro-ancpi-uat-fallbacks.json",
+        "parent_matches_osm_geometry_parent": true,
+        "geometry_equivalence_asserted": false
+      },
+      "source": "ANCPI RELUAT",
+      "source_url": "https://services-eu1.arcgis.com/tt6hwS9xmcvnRjQC/arcgis/rest/services/AU_Unități_administrative/FeatureServer",
+      "imported_at": "2026-09-27T20:37:24.316Z",
+      "review_required": false
     }
   ],
   "official_reconciliation": {
@@ -256213,8 +256263,10 @@
       "source": "data/sources/ro-siruta-current.json",
       "reconciliation": "data/current/ro-official-reconciliation.json",
       "county_bridge": "data/current/ro-county-siruta-bridge.json",
+      "ancpi_uat_fallbacks": "data/sources/ro-ancpi-uat-fallbacks.json",
       "applied_count": 3179,
-      "county_applied_count": 42
+      "county_applied_count": 42,
+      "ancpi_fallback_applied_count": 1
     }
   }
 }
