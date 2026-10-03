@@ -533,6 +533,45 @@ test('P1.1 state boundaries are explicit context geometries without changing UAT
  assert.match(structural,/STATE_RELATION_IDS=\{RO:90689,MD:58974\}/);
  assert.match(structural,/auditStateContext\('RO'\)/);
  assert.match(structural,/auditStateContext\('MD'\)/);
- assert.match(regression,/EXPECTED=\{RO:3233,MD:2596\}/);
- assert.match(regression,/EXPECTED_TOTAL=5829/);
+ assert.match(regression,/bretcuFallbackEnabled=Boolean/);
+ assert.match(regression,/EXPECTED=\{RO:bretcuFallbackEnabled\?3234:3233,MD:2596\}/);
+ assert.match(regression,/EXPECTED_TOTAL=EXPECTED\.RO\+EXPECTED\.MD/);
+});
+
+
+test('Brețcu ANCPI fallback source is exact and dormant until policy migration',async()=>{
+ const [fallback,policy,schema,migration,sourceBundle]=await Promise.all([
+  readJson('data/sources/ro-ancpi-uat-fallbacks.json'),
+  readJson('data/sources/actual-settlement-policy.json'),
+  readJson('schemas/actual-public-entity.schema.json'),
+  readFile('scripts/process/apply-actual-geometry-policy-v1-1.mjs','utf8'),
+  readFile('scripts/lib/actual-source-bundle.mjs','utf8')
+ ]);
+ assert.equal(fallback.schema_version,1);
+ assert.equal(fallback.mode,'ACTUAL_RO_ANCPI_UAT_FALLBACKS');
+ assert.equal(fallback.source?.arcgis_item_id,'466b7199c19f4904831e14bc7f407af9');
+ assert.equal(fallback.features?.length,1);
+ const bretcu=fallback.features[0];
+ assert.equal(String(bretcu.legal_id),'64096');
+ assert.equal(Number(bretcu.source_object_id),1227);
+ assert.equal(bretcu.inspire_id_local_id,'1.145.64096');
+ assert.equal(bretcu.geometry_role,'administrative_boundary');
+ assert.equal(bretcu.geometry_scope,'uat_fallback');
+ assert.ok(['Polygon','MultiPolygon'].includes(bretcu.geometry?.type));
+ assert.equal(policy.administrative_geometry_fallbacks?.RO,undefined,'support branch must not activate fallback outside candidate migration');
+ assert.equal(schema.$defs.entity.properties.id.pattern,'^(?:osm-r[0-9]+|siruta-u[0-9]+)$');
+ assert.deepEqual(schema.$defs.entity.properties.representation.properties.source.enum,['OpenStreetMap','ANCPI RELUAT']);
+ assert.match(migration,/policy_version='2026-10-03-v1\.2'/);
+ assert.match(migration,/administrative_geometry_fallbacks/);
+ assert.match(migration,/legal_ids:\['64096'\]/);
+ assert.match(sourceBundle,/ancpiBinding=policy\?\.administrative_geometry_fallbacks\?\.RO/);
+});
+
+test('Brețcu fallback application never fabricates an OSM relation',async()=>{
+ const apply=await readFile('scripts/process/apply-ro-official-reconciliation.mjs','utf8');
+ assert.match(apply,/id='siruta-u'\+legalId/);
+ assert.match(apply,/source:'ANCPI RELUAT'/);
+ assert.match(apply,/geometry_equivalence_asserted:false/);
+ assert.match(apply,/parentId='osm-r'\+String\(resolution\.expected_parent_osm_relation_id\)/);
+ assert.doesNotMatch(apply,/osm:\s*\{[^}]*64096/s);
 });

@@ -5,10 +5,12 @@ import {gunzipSync} from 'node:zlib';
 export const SOURCE_BUNDLE_PATH='data/current/actual-source-bundle-manifest.json';
 export const SOURCE_BUNDLE_GATE_PATH='data/current/actual-source-bundle-gate.json';
 export const SOURCE_BUNDLE_ALGORITHM='actual-source-bundle-v1';
+export const SETTLEMENT_POLICY_PATH='data/sources/actual-settlement-policy.json';
 export const SOURCE_PATHS={
  osm:'data/sources/osm-current.json',
  siruta:'data/sources/ro-siruta-current.json',
- cuatm:'data/sources/cuatm-current.json'
+ cuatm:'data/sources/cuatm-current.json',
+ ancpi_ro_uat_fallbacks:'data/sources/ro-ancpi-uat-fallbacks.json'
 };
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
@@ -38,14 +40,36 @@ const iso=value=>{
 };
 
 export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
- const [osmBytes,sirutaBytes,cuatmBytes]=await Promise.all([
+ const [osmBytes,sirutaBytes,cuatmBytes,policyBytes]=await Promise.all([
   readFileFn(SOURCE_PATHS.osm),
   readFileFn(SOURCE_PATHS.siruta),
-  readFileFn(SOURCE_PATHS.cuatm)
+  readFileFn(SOURCE_PATHS.cuatm),
+  readFileFn(SETTLEMENT_POLICY_PATH)
  ]);
  const osm=JSON.parse(osmBytes.toString('utf8'));
  const siruta=JSON.parse(sirutaBytes.toString('utf8'));
  const cuatm=JSON.parse(cuatmBytes.toString('utf8'));
+ const policy=JSON.parse(policyBytes.toString('utf8'));
+ const ancpiBinding=policy?.administrative_geometry_fallbacks?.RO??null;
+ let ancpiBytes=null,ancpi=null,ancpiFeatures=[],ancpiLegalIds=new Set();
+ if(ancpiBinding){
+  if(ancpiBinding.path!==SOURCE_PATHS.ancpi_ro_uat_fallbacks||ancpiBinding.mode!=='ACTUAL_RO_ANCPI_UAT_FALLBACKS')throw new Error('Invalid ANCPI RO UAT fallback policy binding');
+  ancpiBytes=await readFileFn(SOURCE_PATHS.ancpi_ro_uat_fallbacks);
+  ancpi=JSON.parse(ancpiBytes.toString('utf8'));
+  if(ancpi?.schema_version!==1||ancpi?.mode!=='ACTUAL_RO_ANCPI_UAT_FALLBACKS')throw new Error('Invalid ANCPI RO UAT fallback snapshot schema/mode');
+  ancpiFeatures=Array.isArray(ancpi.features)?ancpi.features:[];
+  for(const feature of ancpiFeatures){
+   const legalId=String(feature?.legal_id||'');
+   if(!legalId||ancpiLegalIds.has(legalId))throw new Error('Invalid or duplicate ANCPI fallback legal ID '+legalId);
+   ancpiLegalIds.add(legalId);
+   if(feature?.legal_registry!=='SIRUTA')throw new Error('ANCPI fallback must bind SIRUTA identity '+legalId);
+   if(!['Polygon','MultiPolygon'].includes(feature?.geometry?.type)||!Array.isArray(feature?.geometry?.coordinates)||feature.geometry.coordinates.length===0)throw new Error('Invalid ANCPI fallback geometry '+legalId);
+   if(feature?.geometry_role!=='administrative_boundary'||feature?.geometry_scope!=='uat_fallback')throw new Error('Invalid ANCPI fallback geometry contract '+legalId);
+  }
+  const expectedLegalIds=(ancpiBinding.legal_ids||[]).map(String).sort();
+  const actualLegalIds=[...ancpiLegalIds].sort();
+  if(JSON.stringify(expectedLegalIds)!==JSON.stringify(actualLegalIds))throw new Error('ANCPI fallback legal ID set does not match policy binding');
+ }
  const countries={};
  for(const code of ['RO','MD']){
   const entry=osm.countries?.[code];
@@ -72,7 +96,8 @@ export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
   osm.snapshot_at,
   ...Object.values(countries).map(x=>x.snapshot_at),
   siruta.fetched_at,
-  cuatm.fetched_at
+  cuatm.fetched_at,
+  ancpi?.source?.item_modified_at
  ].map(iso).filter(Boolean);
  const sourceWatermark=(timestamps.length?new Date(Math.max(...timestamps.map(x=>new Date(x).getTime()))):new Date(0)).toISOString();
  return {
@@ -101,7 +126,19 @@ export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
     source_url:cuatm.source_url??null,
     fetched_at:cuatm.fetched_at??null,
     record_count:cuatm.record_count??(Array.isArray(cuatm.records)?cuatm.records.length:null)
-   }
+   },
+   ...(ancpiBinding?{ancpi_ro_uat_fallbacks:{
+    path:SOURCE_PATHS.ancpi_ro_uat_fallbacks,
+    sha256:sha256(ancpiBytes),
+    authority:ancpi.source?.authority??null,
+    dataset:ancpi.source?.dataset??null,
+    arcgis_item_id:ancpi.source?.arcgis_item_id??null,
+    layer_id:ancpi.source?.layer_id??null,
+    item_modified_at:ancpi.source?.item_modified_at??null,
+    raw_response_sha256:ancpi.source?.raw_response_sha256??null,
+    feature_count:ancpiFeatures.length,
+    legal_ids:[...ancpiLegalIds].sort()
+   }}:{})
   }
  };
 }
@@ -111,7 +148,7 @@ export function buildSourceBundleManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_SOURCE_BUNDLE',
   source_watermark:inspected.source_watermark,
-  policy:'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, and the official MD CUATM snapshot. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.',
+  policy:'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, and materialized ANCPI/RELUAT RO UAT fallback geometries. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.',
   sources:inspected.sources
  };
  const fingerprint=sourceBundleFingerprint(draft);

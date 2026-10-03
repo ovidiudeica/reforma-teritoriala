@@ -164,8 +164,13 @@ for(const e of entities){
  const bounds=turf.bbox(f);
  const center=turf.centroid(f).geometry.coordinates;
  const parent=entityById.get(e.parent_id)||null;
- const level=e.osm?.admin_level??null;
+ const level=e.osm?.admin_level??e.representation?.admin_level??null;
  const tier=tierFor(level);
+ const representationSource=e.representation?.source||e.source||'OpenStreetMap';
+ const representationSourceUrl=e.source_url||(
+  e.osm?.relation_id!=null?'https://www.openstreetmap.org/relation/'+e.osm.relation_id:null
+ );
+ const geometrySource=representationSource==='ANCPI RELUAT'?'ANCPI/RELUAT administrative unit':'OpenStreetMap administrative relation';
  const validation=validationFor(e,legal);
  const item={
   id:e.id,
@@ -185,13 +190,15 @@ for(const e of entities){
    legal_parent_name:legal?.parent_name||null
   },
   representation:{
-   source:'OpenStreetMap',
-   source_url:e.source_url||('https://www.openstreetmap.org/relation/'+e.osm?.relation_id),
+   source:representationSource,
+   source_url:representationSourceUrl,
    osm_relation_id:e.osm?.relation_id??null,
+   source_feature_id:e.representation?.source_object_id??null,
+   source_inspire_id:e.representation?.inspire_id_local_id??null,
    admin_level:level,
    place:e.osm?.place||null,
    inferred_type:e.classification?.osm_inferred_type||publicType||null,
-   geometry_source:'OpenStreetMap administrative relation',
+   geometry_source:geometrySource,
    geometry_role:'current_representation',
    canonical_geometry_role:e.geometry?.role||null,
    geometry_scope:e.geometry?.scope||null,
@@ -233,7 +240,7 @@ for(const [id,source] of featureById){
    parent_catalog_id:item.hierarchy.parent_catalog_id,
    osm_relation_id:item.representation.osm_relation_id,
    legal_identity_status:item.validation.legal_identity_status,
-   geometry_source:'OpenStreetMap',
+   geometry_source:item.representation.source,
    canonical_geometry_role:item.representation.canonical_geometry_role,
    geometry_scope:item.representation.geometry_scope,
    geometry_precision:'master_coordinate_fidelity'
@@ -280,7 +287,7 @@ const index={
  contract:'actual-public-entity-v1',
  mode:'ACTUAL',
  generated_at:catalog.generated_at??null,
- policy:'Public contract separates official legal identity from OSM representation. Null legal fields are preserved when no positive official identity is bound; OSM metadata never creates legal identity. Public web geometries preserve the exact master feature coordinates and are partitioned only for progressive loading.',
+ policy:'Public contract separates official legal identity from geometry representation provenance. OSM is the primary ACTUAL geometry source; explicitly reviewed ANCPI/RELUAT UAT fallback geometry is permitted only where no distinct OSM boundary exists. Geometry provenance never creates legal identity. Public web geometries preserve exact master coordinates and are partitioned only for progressive loading.',
  entity_count:publicEntities.length,
  entity_count_by_jurisdiction:countsByJurisdiction,
  feature_count_by_tier:countsByTier,
@@ -305,6 +312,10 @@ for(const [key,features] of Object.entries(tierFeatures)){
 await mkdir('public/data',{recursive:true});
 await mkdir(OUT_DIR,{recursive:true});
 await writeFile(OUT_INDEX,JSON.stringify(index,null,2)+'\n');
+const geometrySourceSummary=features=>{
+ const values=[...new Set(features.map(f=>f.properties?.geometry_source).filter(Boolean))].sort();
+ return values.length===1?values[0]:(values.length?'mixed':null);
+};
 for(const jurisdiction of ['RO','MD']){
  for(const tier of ['overview','local','detail']){
   const key=jurisdiction+'_'+tier;
@@ -317,7 +328,7 @@ for(const jurisdiction of ['RO','MD']){
     jurisdiction,
     tier,
     feature_count:tierFeatures[key].length,
-    geometry_source:'OpenStreetMap',
+    geometry_source:geometrySourceSummary(tierFeatures[key]),
     geometry_precision:'master_coordinate_fidelity'
    },
    features:tierFeatures[key]

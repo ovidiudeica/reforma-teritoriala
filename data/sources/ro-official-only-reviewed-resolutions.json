@@ -2,7 +2,7 @@
   "schema_version": 1,
   "jurisdiction": "RO",
   "reviewed_at": "2026-09-27",
-  "policy": "Reviewed official UATs that lack a distinct current OSM administrative-boundary representation. These classifications preserve official legal identity while explicitly prohibiting promotion of another OSM relation to legal geometry.",
+  "policy": "Reviewed official UATs that lack a distinct current OSM administrative-boundary representation. These classifications preserve official legal identity and prohibit promotion of another OSM relation to legal geometry. An explicitly reviewed ANCPI/RELUAT UAT polygon may be used as fallback geometry only when its exact source feature, SIRUTA code and provenance are bound.",
   "items": [
     {
       "legal_id": "64096",
@@ -31,7 +31,19 @@
         "county_spatial_plan_2026": "https://ro.cjcv.ro/fileman/Uploads/PATJ/2026/04/01_scrisa/PATJ_Covasna_Partea_II_anexa4.pdf",
         "osm_snapshot": "public/geo/current/ro-administrative.geojson"
       },
-      "review_conclusion": "SIRUTA 64096 is a current legal UAT, but the imported OSM administrative snapshot contains no distinct Brețcu/Bereck boundary relation. Relation 14735731 is tagged Ojdula and spatially overcovers the official locality representations of both Brețcu and Ojdula. Retain Brețcu as an official legal identity without assigning relation 14735731, or any derived geometry, as its legal boundary."
+      "review_conclusion": "SIRUTA 64096 is a current legal UAT and OSM still has no distinct Brețcu/Bereck boundary relation; relation 14735731 remains Ojdula and must not be promoted. The current ANCPI/RELUAT UAT feature with nationalCode 64096 is accepted as an explicit fallback administrative-boundary representation, with SIRUTA retaining legal identity authority and no claim that OSM supplies this geometry.",
+      "fallback_geometry": {
+        "source": "data/sources/ro-ancpi-uat-fallbacks.json",
+        "authority": "Agenția Națională de Cadastru și Publicitate Imobiliară",
+        "dataset": "AU Unități administrative (RELUAT)",
+        "arcgis_item_id": "466b7199c19f4904831e14bc7f407af9",
+        "source_object_id": 1227,
+        "inspire_id_local_id": "1.145.64096",
+        "national_code": "64096",
+        "geometry_role": "administrative_boundary",
+        "geometry_scope": "uat_fallback",
+        "legal_geometry_equivalence_asserted": false
+      }
     }
   ]
 }
