@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
@@ -16,6 +17,9 @@ const otherLevelReviewed=await read('data/sources/ro-other-level-reviewed-resolu
 const semanticTypeReviewed=await read('data/sources/ro-semantic-type-reviewed-resolutions.json');
 const settlementPolicy=await read('data/sources/actual-settlement-policy.json');
 const ancpiFallbacks=await read('data/sources/ro-ancpi-uat-fallbacks.json');
+const ojdulaReviewBytes=await readFile('data/sources/ro-ancpi-ojdula-reviewed.json');
+const ojdulaReview=JSON.parse(ojdulaReviewBytes.toString('utf8'));
+const sha256=value=>createHash('sha256').update(value).digest('hex');
 const failures=[],checks=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail})};
 const ro=(review.items||[]).filter(x=>x.jurisdiction==='RO');
@@ -158,13 +162,14 @@ if(fallbackBinding){
  check('bretcu_ancpi_fallback_master_geometry_is_exactly_once',
   master.length===1&&['Polygon','MultiPolygon'].includes(master[0]?.geometry?.type),
   {feature_count:master.length});
- if(fallbackIds.includes('64602')){
+ const ojdulaOverride=(fallbackBinding.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
+ if(ojdulaOverride){
   const ojdula=(catalog.entities||[]).filter(e=>e.id==='osm-r14735731');
-  const ojdulaSource=(ancpiFallbacks.features||[]).filter(x=>String(x.legal_id)==='64602');
   const ojdulaMaster=(geo.features||[]).filter(x=>x.properties?.catalog_id==='osm-r14735731');
   const oe=ojdula[0]||null;
-  const os=ojdulaSource[0]||null;
+  const os=ojdulaReview.feature||null;
   const om=ojdulaMaster[0]||null;
+  check('ojdula_review_evidence_sha256_is_exact',ojdulaOverride.evidence==='data/sources/ro-ancpi-ojdula-reviewed.json'&&ojdulaOverride.evidence_sha256===sha256(ojdulaReviewBytes),{expected:ojdulaOverride.evidence_sha256,actual:sha256(ojdulaReviewBytes)});
   check('ojdula_ancpi_geometry_override_contract_is_exact',
    ojdula.length===1&&ojdulaSource.length===1&&ojdulaMaster.length===1
    &&String(oe?.legal?.id||'')==='64602'
