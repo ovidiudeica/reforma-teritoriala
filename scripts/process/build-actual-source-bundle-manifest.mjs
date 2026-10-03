@@ -13,5 +13,6 @@ console.log(JSON.stringify({
  bundle_fingerprint_sha256:manifest.bundle_fingerprint_sha256,
  osm:{RO:manifest.sources.osm.countries.RO.semantic_sha256,MD:manifest.sources.osm.countries.MD.semantic_sha256},
  siruta:manifest.sources.siruta.sha256,
- cuatm:manifest.sources.cuatm.sha256
+ cuatm:manifest.sources.cuatm.sha256,
+ ancpi_ro_uat_fallbacks:manifest.sources.ancpi_ro_uat_fallbacks?.sha256??null
 },null,2));
