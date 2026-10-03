@@ -550,25 +550,20 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  assert.equal(fallback.schema_version,1);
  assert.equal(fallback.mode,'ACTUAL_RO_ANCPI_UAT_FALLBACKS');
  assert.equal(fallback.source?.arcgis_item_id,'466b7199c19f4904831e14bc7f407af9');
- assert.equal(fallback.features?.length,2);
- const bretcu=fallback.features.find(x=>String(x.legal_id)==='64096');
- const ojdula=fallback.features.find(x=>String(x.legal_id)==='64602');
+ assert.equal(fallback.features?.length,1);
+ const bretcu=fallback.features[0];
  assert.equal(String(bretcu.legal_id),'64096');
  assert.equal(Number(bretcu.source_object_id),1227);
  assert.equal(bretcu.inspire_id_local_id,'1.145.64096');
  assert.equal(bretcu.geometry_role,'administrative_boundary');
  assert.equal(bretcu.geometry_scope,'uat_fallback');
- assert.equal(Number(ojdula.source_object_id),1167);
- assert.equal(ojdula.inspire_id_local_id,'1.145.64602');
- assert.equal(ojdula.geometry_role,'administrative_boundary');
- assert.equal(ojdula.geometry_scope,'uat_fallback');
  assert.ok(['Polygon','MultiPolygon'].includes(bretcu.geometry?.type));
  const fallbackBinding=policy.administrative_geometry_fallbacks?.RO;
  if(fallbackBinding){
   assert.equal(policy.public_contract,'actual-public-entity-v2');
   assert.equal(fallbackBinding.path,'data/sources/ro-ancpi-uat-fallbacks.json');
   assert.equal(fallbackBinding.mode,'ACTUAL_RO_ANCPI_UAT_FALLBACKS');
-  assert.deepEqual(fallbackBinding.legal_ids,['64096','64602']);
+  assert.deepEqual(fallbackBinding.legal_ids,['64096']);
   assert.equal(fallbackBinding.geometry_role,'administrative_boundary');
   assert.equal(fallbackBinding.geometry_scope,'uat_fallback');
  }else{
@@ -579,6 +574,8 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  assert.match(migration,/policy_version='2026-10-03-v1\.3'/);
  assert.match(migration,/administrative_geometry_fallbacks/);
  assert.match(migration,/legal_ids:\['64096','64602'\]/);
+ assert.match(migration,/ro-ancpi-ojdula-64602\.json/);
+ assert.match(migration,/source_patch\.raw_response_sha256/);
  assert.match(sourceBundle,/ancpiBinding=policy\?\.administrative_geometry_fallbacks\?\.RO/);
 });
 
