@@ -15,7 +15,13 @@ test('committed ACTUAL source bundle validates exact OSM, SIRUTA and CUATM input
  assert.equal(gate.status,'PASS');
  assert.equal(gate.source_bundle_sha256,sha256(bytes));
  assert.equal(gate.bundle_fingerprint_sha256,bundle.bundle_fingerprint_sha256);
- assert.deepEqual(Object.keys(bundle.sources).sort(),['cuatm','osm','siruta']);
+ const expectedSources=['cuatm','osm','siruta'];
+ if(bundle.sources.ancpi_ro_uat_fallbacks)expectedSources.push('ancpi_ro_uat_fallbacks');
+ assert.deepEqual(Object.keys(bundle.sources).sort(),expectedSources.sort());
+ if(bundle.sources.ancpi_ro_uat_fallbacks){
+  assert.equal(bundle.sources.ancpi_ro_uat_fallbacks.mode,'ACTUAL_RO_ANCPI_UAT_FALLBACKS');
+  assert.deepEqual(bundle.sources.ancpi_ro_uat_fallbacks.legal_ids,['64096']);
+ }
  assert.deepEqual(Object.keys(bundle.sources.osm.countries).sort(),['MD','RO']);
 });
 

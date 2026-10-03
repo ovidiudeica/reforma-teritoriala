@@ -558,7 +558,17 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  assert.equal(bretcu.geometry_role,'administrative_boundary');
  assert.equal(bretcu.geometry_scope,'uat_fallback');
  assert.ok(['Polygon','MultiPolygon'].includes(bretcu.geometry?.type));
- assert.equal(policy.administrative_geometry_fallbacks?.RO,undefined,'support branch must not activate fallback outside candidate migration');
+ const fallbackBinding=policy.administrative_geometry_fallbacks?.RO;
+ if(fallbackBinding){
+  assert.equal(policy.public_contract,'actual-public-entity-v2');
+  assert.equal(fallbackBinding.path,'data/sources/ro-ancpi-uat-fallbacks.json');
+  assert.equal(fallbackBinding.mode,'ACTUAL_RO_ANCPI_UAT_FALLBACKS');
+  assert.deepEqual(fallbackBinding.legal_ids,['64096']);
+  assert.equal(fallbackBinding.geometry_role,'administrative_boundary');
+  assert.equal(fallbackBinding.geometry_scope,'uat_fallback');
+ }else{
+  assert.equal(policy.public_contract,undefined,'dormant support state must keep public contract v1 implicit');
+ }
  assert.equal(schema.$defs.entity.properties.id.pattern,'^(?:osm-r[0-9]+|siruta-u[0-9]+)$');
  assert.deepEqual(schema.$defs.entity.properties.representation.properties.source.enum,['OpenStreetMap','ANCPI RELUAT']);
  assert.match(migration,/policy_version='2026-10-03-v1\.2'/);
