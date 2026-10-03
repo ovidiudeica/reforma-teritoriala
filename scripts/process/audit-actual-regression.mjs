@@ -4,7 +4,9 @@ const OUTPUT='data/current/actual-regression-audit.json';
 const EXPECTED_STATE_RELATION={RO:90689,MD:58974};
 const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const settlementPolicy=JSON.parse(await readFile('data/sources/actual-settlement-policy.json','utf8'));
-const bretcuFallbackEnabled=Boolean(settlementPolicy?.administrative_geometry_fallbacks?.RO);
+const fallbackIds=(settlementPolicy?.administrative_geometry_fallbacks?.RO?.legal_ids||[]).map(String);
+const bretcuFallbackEnabled=fallbackIds.includes('64096');
+const ojdulaOverrideEnabled=fallbackIds.includes('64602');
 const EXPECTED={RO:bretcuFallbackEnabled?3234:3233,MD:2596};
 const EXPECTED_TOTAL=EXPECTED.RO+EXPECTED.MD;
 const blockers=[];
@@ -27,6 +29,21 @@ if(bretcuFallbackEnabled&&bretcuEntity&&(
  ||bretcuEntity.geometry?.scope!=='uat_fallback'
  ||bretcuEntity.geometry?.legal_geometry_equivalence_asserted!==false
 ))blockers.push({issue:'bretcu_fallback_contract_drift',actual:bretcuEntity});
+if(ojdulaOverrideEnabled){
+ const ojdula=(catalog.entities||[]).filter(e=>e.id==='osm-r14735731');
+ const oe=ojdula[0];
+ if(
+  ojdula.length!==1
+  ||String(oe?.legal?.id||'')!=='64602'
+  ||oe?.representation?.source!=='ANCPI RELUAT'
+  ||Number(oe?.representation?.reviewed_osm_relation_id)!==14735731
+  ||oe?.representation?.osm_relation_geometry_accepted!==false
+  ||oe?.geometry?.role!=='administrative_boundary'
+  ||oe?.geometry?.scope!=='uat_fallback'
+ ){
+  blockers.push({issue:'ojdula_geometry_override_contract_drift',actual:oe||null});
+ }
+}
 for(const j of ['RO','MD']){
  const states=(catalog.entities||[]).filter(e=>e.jurisdiction===j&&e.type==='state');
  if(states.length!==1)blockers.push({issue:'state_context_count_drift',jurisdiction:j,expected:1,actual:states.length});
@@ -40,5 +57,5 @@ for(const j of ['RO','MD']){
   ||state.geometry?.scope!=='state_context'
  ))blockers.push({issue:'state_context_contract_drift',jurisdiction:j,expected_relation_id:EXPECTED_STATE_RELATION[j],actual:state});
 }
-const report={schema_version:1,generated_at:new Date().toISOString(),mode:'ACTUAL',status:blockers.length?'FAIL':'PASS',bretcu_fallback_enabled:bretcuFallbackEnabled,expected_entity_count:EXPECTED_TOTAL,entity_count:total,entity_count_by_jurisdiction:counts,reviewed_topology_normalization_entity_ids:['osm-r12463200'],policy:'Entity and master-feature counts are fail-closed against the reviewed ACTUAL baseline. Before P1.2 activation the baseline is RO=3233, MD=2596, total=5829; after explicit Brețcu fallback activation it is RO=3234, MD=2596, total=5830 with exactly one siruta-u64096 ANCPI/RELUAT fallback. Exactly one state-context boundary per jurisdiction remains required. Exact master-coordinate fidelity and unintended geometry drift are enforced separately by the ACTUAL release gate.',blocking_issue_count:blockers.length,blocking_issues:blockers};
+const report={schema_version:1,generated_at:new Date().toISOString(),mode:'ACTUAL',status:blockers.length?'FAIL':'PASS',bretcu_fallback_enabled:bretcuFallbackEnabled,ojdula_geometry_override_enabled:ojdulaOverrideEnabled,expected_entity_count:EXPECTED_TOTAL,entity_count:total,entity_count_by_jurisdiction:counts,reviewed_topology_normalization_entity_ids:['osm-r12463200'],policy:'Entity and master-feature counts are fail-closed against the reviewed ACTUAL baseline. Before P1.2 activation the baseline is RO=3233, MD=2596, total=5829; after explicit Brețcu fallback activation it is RO=3234, MD=2596, total=5830 with exactly one siruta-u64096 ANCPI/RELUAT fallback. Exactly one state-context boundary per jurisdiction remains required. Exact master-coordinate fidelity and unintended geometry drift are enforced separately by the ACTUAL release gate.',blocking_issue_count:blockers.length,blocking_issues:blockers};
 await mkdir('data/current',{recursive:true});await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(blockers.length)process.exit(1);
