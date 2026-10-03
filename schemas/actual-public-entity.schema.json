@@ -55,7 +55,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^osm-r[0-9]+$"
+          "pattern": "^(?:osm-r[0-9]+|siruta-u[0-9]+)$"
         },
         "status": {
           "const": "current"
@@ -150,7 +150,10 @@
           ],
           "properties": {
             "source": {
-              "const": "OpenStreetMap"
+              "enum": [
+                "OpenStreetMap",
+                "ANCPI RELUAT"
+              ]
             },
             "osm_relation_id": {
               "type": [
@@ -173,6 +176,19 @@
             },
             "public_geometry_precision": {
               "const": "master_coordinate_fidelity"
+            },
+            "source_feature_id": {
+              "type": [
+                "integer",
+                "string",
+                "null"
+              ]
+            },
+            "source_inspire_id": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
