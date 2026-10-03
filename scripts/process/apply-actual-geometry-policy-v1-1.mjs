@@ -18,12 +18,13 @@ if(ancpiFallback.schema_version!==1||ancpiFallback.mode!=='ACTUAL_RO_ANCPI_UAT_F
  throw new Error('Unexpected ANCPI/RELUAT UAT fallback source contract.');
 }
 const fallbackFeatures=Array.isArray(ancpiFallback.features)?ancpiFallback.features:[];
-if(fallbackFeatures.length!==1||String(fallbackFeatures[0]?.legal_id)!=='64096'){
- throw new Error('P1.2 expects exactly the reviewed Brețcu SIRUTA 64096 fallback.');
+const fallbackIds=fallbackFeatures.map(x=>String(x?.legal_id||'')).sort();
+if(JSON.stringify(fallbackIds)!==JSON.stringify(['64096','64602'])){
+ throw new Error('Reviewed RO ANCPI fallback set must be exactly Brețcu 64096 and Ojdula 64602.');
 }
 
 const migrated=structuredClone(policy);
-migrated.policy_version='2026-10-03-v1.2';
+migrated.policy_version='2026-10-03-v1.3';
 migrated.coverage_contract_version=2;
 migrated.geometry_role_contract={
  path:CONTRACT,
@@ -43,7 +44,7 @@ migrated.administrative_geometry_fallbacks={
   arcgis_item_id:ancpiFallback.source?.arcgis_item_id??null,
   geometry_role:'administrative_boundary',
   geometry_scope:'uat_fallback',
-  legal_ids:['64096'],
+  legal_ids:['64096','64602'],
   legal_identity_authority:'SIRUTA',
   legal_geometry_equivalence_asserted:false
  }
