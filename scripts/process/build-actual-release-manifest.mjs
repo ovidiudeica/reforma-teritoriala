@@ -272,6 +272,8 @@ const manifest={
   coverage_contract_version:settlementPolicy.coverage_contract_version??1,
   scope:settlementPolicy.scope??null,
   geometry_role_contract:settlementPolicy.geometry_role_contract??null,
+  public_contract:settlementPolicy.public_contract??'actual-public-entity-v1',
+  administrative_geometry_fallbacks:settlementPolicy.administrative_geometry_fallbacks??null,
   sha256:components.settlement_policy.sha256
  },
  ...(geometryRoleBindingActive?{
