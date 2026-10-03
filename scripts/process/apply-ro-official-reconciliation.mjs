@@ -6,6 +6,8 @@ const GEO='public/geo/current/ro-administrative.geojson';
 const RECON='data/current/ro-official-reconciliation.json';
 const SNAPSHOT='data/sources/ro-siruta-current.json';
 const COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
+const ANCPI_FALLBACKS='data/sources/ro-ancpi-uat-fallbacks.json';
+const OFFICIAL_ONLY_RESOLUTIONS='data/sources/ro-official-only-reviewed-resolutions.json';
 const OUTPUT='data/current/ro-official-application.json';
 
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
@@ -14,11 +16,15 @@ const geo=await read(GEO);
 const reconciliation=await read(RECON);
 const official=await read(SNAPSHOT);
 const countyBridge=await read(COUNTY_BRIDGE);
+const ancpiFallbacks=await read(ANCPI_FALLBACKS);
+const officialOnlyResolutions=await read(OFFICIAL_ONLY_RESOLUTIONS);
 
 if(reconciliation.status!=='PASS')throw new Error('RO official reconciliation is not PASS');
 if(countyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
 if(reconciliation.summary?.unmatched_osm_count!==0)throw new Error('Cannot apply SIRUTA with unmatched RO level-8 entities');
 if(reconciliation.summary?.duplicate_legal_mapping_count!==0)throw new Error('Cannot apply SIRUTA with duplicate legal mappings');
+if(ancpiFallbacks.schema_version!==1||ancpiFallbacks.mode!=='ACTUAL_RO_ANCPI_UAT_FALLBACKS')throw new Error('Invalid ANCPI fallback source');
+if(ancpiFallbacks.source?.authority!=='Agenția Națională de Cadastru și Publicitate Imobiliară'||ancpiFallbacks.source?.arcgis_item_id!=='466b7199c19f4904831e14bc7f407af9')throw new Error('Unexpected ANCPI fallback provenance');
 
 const entities=catalog.entities||[];
 const roLevel8=entities.filter(e=>e.jurisdiction==='RO'&&Number(e.osm?.admin_level)===8);
@@ -42,7 +48,7 @@ if(matches.length!==roLevel8.length){
 
 const byRelation=new Map(roLevel8.map(e=>[Number(e.osm?.relation_id),e]));
 const featureByCatalogId=new Map((geo.features||[]).map(f=>[f.properties?.catalog_id,f]));
-const applied=[],countyApplied=[],typeChanges=[],parentConflicts=[],missing=[];
+const applied=[],countyApplied=[],fallbackApplied=[],typeChanges=[],parentConflicts=[],missing=[];
 
 for(const m of matches){
  const relationId=Number(m.osm_relation_id);
@@ -152,6 +158,101 @@ for(const e of roCounties){
  countyApplied.push({entity_id:e.id,osm_relation_id:relationId,legal_id:code,legal_type:'county',match_method:legal.match_method});
 }
 
+const officialBySiruta=new Map((official.records||[]).map(r=>[String(r.siruta),r]));
+const resolutionByLegalId=new Map((officialOnlyResolutions.items||[]).map(r=>[String(r.legal_id),r]));
+for(const fallback of ancpiFallbacks.features||[]){
+ const legalId=String(fallback.legal_id||'');
+ const id='siruta-u'+legalId;
+ if(!legalId||entities.some(e=>e.id===id)||entities.some(e=>String(e.legal?.id||'')===legalId))throw new Error('Duplicate/invalid ANCPI fallback identity '+legalId);
+ const officialRow=officialBySiruta.get(legalId);
+ const resolution=resolutionByLegalId.get(legalId);
+ if(!officialRow||Number(officialRow.level)!==2)throw new Error('ANCPI fallback legal ID is not a current SIRUTA UAT '+legalId);
+ if(!resolution||resolution.classification!=='official_uat_without_distinct_osm_boundary_representation')throw new Error('ANCPI fallback lacks reviewed OSM-gap resolution '+legalId);
+ if(String(fallback.national_code)!==legalId||fallback.geometry_role!=='administrative_boundary'||fallback.geometry_scope!=='uat_fallback')throw new Error('ANCPI fallback metadata mismatch '+legalId);
+ if(!['Polygon','MultiPolygon'].includes(fallback.geometry?.type)||!Array.isArray(fallback.geometry?.coordinates)||!fallback.geometry.coordinates.length)throw new Error('ANCPI fallback geometry invalid '+legalId);
+ const parentId='osm-r'+String(resolution.expected_parent_osm_relation_id);
+ const parent=entities.find(e=>e.id===parentId);
+ if(!parent||parent.jurisdiction!=='RO'||parent.type!=='county')throw new Error('ANCPI fallback parent is not the reviewed county '+legalId);
+ const legal={
+  registry:'SIRUTA',
+  reference_year:Number(official.reference_year)||2026,
+  id:legalId,
+  name:officialRow.name||fallback.name||null,
+  type:officialRow.legal_type||fallback.legal_type||null,
+  parent_id:officialRow.parent_siruta==null?null:String(officialRow.parent_siruta),
+  parent_name:officialRow.county_name||officialRow.parent_name||resolution.legal_parent_name||null,
+  match_method:'exact_siruta_national_code_ancpi_fallback',
+  match_confidence:'high',
+  source:SNAPSHOT,
+  geometry_source:ANCPI_FALLBACKS,
+  parent_matches_osm_geometry_parent:true,
+  geometry_equivalence_asserted:false
+ };
+ if(legal.type!=='commune'||String(resolution.legal_type)!==legal.type)throw new Error('ANCPI fallback legal type mismatch '+legalId);
+ const entity={
+  id,
+  name:legal.name,
+  official_name:legal.name,
+  jurisdiction:'RO',
+  category:'administrative',
+  type:legal.type,
+  status:'current',
+  parent_id:parentId,
+  representation:{
+   source:'ANCPI RELUAT',
+   admin_level:8,
+   source_object_id:fallback.source_object_id,
+   inspire_id_local_id:fallback.inspire_id_local_id,
+   inspire_id_version_id:fallback.inspire_id_version_id,
+   national_code:fallback.national_code
+  },
+  geometry:{role:'administrative_boundary',scope:'uat_fallback',legal_geometry_equivalence_asserted:false},
+  classification:{
+   version:catalog.classifier_version??null,
+   confidence:'high',
+   reason:'Current UAT geometry supplied by ANCPI/RELUAT as a reviewed fallback because OSM has no distinct Brețcu boundary relation.',
+   evidence:ANCPI_FALLBACKS,
+   official_registry:'SIRUTA',
+   official_legal_id:legalId
+  },
+  legal,
+  source:'ANCPI RELUAT',
+  source_url:ancpiFallbacks.source?.source_url||null,
+  imported_at:ancpiFallbacks.source?.item_modified_at||null,
+  review_required:false
+ };
+ const feature={
+  type:'Feature',
+  properties:{
+   catalog_id:id,
+   parent_id:parentId,
+   jurisdiction:'RO',
+   entity_type:legal.type,
+   classification_confidence:'high',
+   geometry_role:'administrative_boundary',
+   geometry_scope:'uat_fallback',
+   legal_registry:'SIRUTA',
+   legal_id:legalId,
+   legal_name:legal.name,
+   legal_type:legal.type,
+   legal_parent_id:legal.parent_id,
+   legal_parent_name:legal.parent_name,
+   legal_match_method:legal.match_method,
+   legal_parent_matches_osm_geometry_parent:true,
+   source:'ANCPI RELUAT',
+   source_object_id:fallback.source_object_id,
+   inspire_id_local_id:fallback.inspire_id_local_id,
+   national_code:fallback.national_code
+  },
+  geometry:fallback.geometry
+ };
+ entities.push(entity);
+ geo.features.push(feature);
+ featureByCatalogId.set(id,feature);
+ fallbackApplied.push({entity_id:id,legal_id:legalId,legal_type:legal.type,parent_id:parentId,source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id});
+}
+catalog.entity_count=entities.length;
+
 catalog.official_reconciliation={
  ...(catalog.official_reconciliation||{}),
  RO:{
@@ -161,8 +262,10 @@ catalog.official_reconciliation={
   source:SNAPSHOT,
   reconciliation:RECON,
   county_bridge:COUNTY_BRIDGE,
+  ancpi_uat_fallbacks:ANCPI_FALLBACKS,
   applied_count:applied.length,
-  county_applied_count:countyApplied.length
+  county_applied_count:countyApplied.length,
+  ancpi_fallback_applied_count:fallbackApplied.length
  }
 };
 
@@ -185,20 +288,22 @@ check('all_ro_counties_have_siruta_county_identity',roCounties.every(e=>e.legal?
 check('all_ro_county_geojson_features_have_siruta_identity',roCounties.every(e=>{
  const p=featureByCatalogId.get(e.id)?.properties;return p?.legal_registry==='SIRUTA'&&p?.legal_type==='county'&&String(p?.legal_id||'')===String(e.legal?.id||'');
 }),{});
+check('ancpi_bretcu_fallback_applied_exactly_once',fallbackApplied.length===1&&fallbackApplied[0]?.entity_id==='siruta-u64096'&&fallbackApplied[0]?.legal_id==='64096',{fallback_applied:fallbackApplied});
 
 const report={
  schema_version:1,
  generated_at:new Date().toISOString(),
  jurisdiction:'RO',
  status:failures.length?'FAIL':'PASS',
- policy:'SIRUTA is authoritative for RO level-8 legal identity/type and for the exhaustive 42-county legal identity bridge. OSM remains the geometry/provenance representation. Geometry coordinates and OSM geometric parent_id are never rewritten from legal hierarchy; legal parent is stored separately.',
- source:{official_snapshot:SNAPSHOT,reconciliation:RECON},
+ policy:'SIRUTA is authoritative for RO legal identity/type and the exhaustive county/UAT inventory. OSM remains the primary geometry source. A reviewed UAT with no distinct OSM boundary may use an exact materialized ANCPI/RELUAT administrative polygon as a fallback, with provenance kept separate from legal identity and without fabricating OSM metadata.',
+ source:{official_snapshot:SNAPSHOT,reconciliation:RECON,ancpi_uat_fallbacks:ANCPI_FALLBACKS},
  checks,
  summary:{
   ro_level8_count:roLevel8.length,
   applied_count:applied.length,
   ro_county_count:roCounties.length,
   county_applied_count:countyApplied.length,
+  ancpi_fallback_applied_count:fallbackApplied.length,
   type_changed_count:typeChanges.length,
   legal_parent_conflict_count:parentConflicts.length,
   osm_semantic_type_conflict_count:semanticConflicts.length,
@@ -208,6 +313,7 @@ const report={
   reviewed_semantic_type_resolution_count:reconciliation.summary?.reviewed_semantic_type_resolution_count??null,
   represented_at_other_osm_level_count:reconciliation.summary?.represented_at_other_osm_level_count??null
  },
+ ancpi_fallbacks:fallbackApplied,
  type_changes:typeChanges,
  legal_parent_conflicts:parentConflicts,
  osm_semantic_type_conflicts:semanticConflicts,
