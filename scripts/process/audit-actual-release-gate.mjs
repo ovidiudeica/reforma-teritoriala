@@ -115,16 +115,30 @@ check('settlement_policy_is_explicit_and_fail_closed',
     && Number(settlementPolicy.geometry_role_contract?.schema_version)===Number(geometryRoleContract?.schema_version)
    )),
  {schema_version:settlementPolicy.schema_version??null,mode:settlementPolicy.mode??null,scope:settlementPolicy.scope??null,coverage_contract_version:settlementPolicy.coverage_contract_version??1,geometry_role_contract:settlementPolicy.geometry_role_contract??null,common_requirements:settlementPolicy.common_requirements??null});
-check('manifest_records_current_settlement_policy',
+const settlementPolicyManifestMatches=
  manifest.settlement_policy?.schema_version===settlementPolicy.schema_version
  && manifest.settlement_policy?.policy_version===settlementPolicy.policy_version
  && manifest.settlement_policy?.coverage_contract_version===(settlementPolicy.coverage_contract_version??1)
  && manifest.settlement_policy?.scope===settlementPolicy.scope
  && JSON.stringify(manifest.settlement_policy?.geometry_role_contract??null)===JSON.stringify(settlementPolicy.geometry_role_contract??null)
- && manifest.settlement_policy?.public_contract===(settlementPolicy.public_contract??'actual-public-entity-v1')
- && JSON.stringify(manifest.settlement_policy?.administrative_geometry_fallbacks??null)===JSON.stringify(settlementPolicy.administrative_geometry_fallbacks??null)
- && manifest.settlement_policy?.sha256===sha256(settlementPolicyBuf),
- {manifest:manifest.settlement_policy??null,actual:{schema_version:settlementPolicy.schema_version??null,policy_version:settlementPolicy.policy_version??null,coverage_contract_version:settlementPolicy.coverage_contract_version??1,scope:settlementPolicy.scope??null,geometry_role_contract:settlementPolicy.geometry_role_contract??null,public_contract:settlementPolicy.public_contract??'actual-public-entity-v1',administrative_geometry_fallbacks:settlementPolicy.administrative_geometry_fallbacks??null,sha256:sha256(settlementPolicyBuf)}});
+ && (!Object.prototype.hasOwnProperty.call(settlementPolicy,'public_contract')
+   ||manifest.settlement_policy?.public_contract===settlementPolicy.public_contract)
+ && (!Object.prototype.hasOwnProperty.call(settlementPolicy,'administrative_geometry_fallbacks')
+   ||JSON.stringify(manifest.settlement_policy?.administrative_geometry_fallbacks??null)===JSON.stringify(settlementPolicy.administrative_geometry_fallbacks))
+ && manifest.settlement_policy?.sha256===sha256(settlementPolicyBuf);
+const settlementPolicyActualDetail={
+ schema_version:settlementPolicy.schema_version??null,
+ policy_version:settlementPolicy.policy_version??null,
+ coverage_contract_version:settlementPolicy.coverage_contract_version??1,
+ scope:settlementPolicy.scope??null,
+ geometry_role_contract:settlementPolicy.geometry_role_contract??null,
+ sha256:sha256(settlementPolicyBuf)
+};
+if(Object.prototype.hasOwnProperty.call(settlementPolicy,'public_contract'))settlementPolicyActualDetail.public_contract=settlementPolicy.public_contract;
+if(Object.prototype.hasOwnProperty.call(settlementPolicy,'administrative_geometry_fallbacks'))settlementPolicyActualDetail.administrative_geometry_fallbacks=settlementPolicy.administrative_geometry_fallbacks;
+check('manifest_records_current_settlement_policy',
+ settlementPolicyManifestMatches,
+ {manifest:manifest.settlement_policy??null,actual:settlementPolicyActualDetail});
 
 check('geometry_role_contract_binding_is_current',
  !geometryCoverageV2
