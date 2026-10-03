@@ -129,6 +129,7 @@ export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
    },
    ...(ancpiBinding?{ancpi_ro_uat_fallbacks:{
     path:SOURCE_PATHS.ancpi_ro_uat_fallbacks,
+    mode:ancpi.mode,
     sha256:sha256(ancpiBytes),
     authority:ancpi.source?.authority??null,
     dataset:ancpi.source?.dataset??null,
