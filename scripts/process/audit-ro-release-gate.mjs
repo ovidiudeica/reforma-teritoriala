@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
+import * as turf from '@turf/turf';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
 const review=await read('data/current/admin-review.json');
 const allowed=await read('data/sources/ro-release-gate-exceptions.json');
@@ -15,6 +17,9 @@ const otherLevelReviewed=await read('data/sources/ro-other-level-reviewed-resolu
 const semanticTypeReviewed=await read('data/sources/ro-semantic-type-reviewed-resolutions.json');
 const settlementPolicy=await read('data/sources/actual-settlement-policy.json');
 const ancpiFallbacks=await read('data/sources/ro-ancpi-uat-fallbacks.json');
+const ojdulaReviewBytes=await readFile('data/sources/ro-ancpi-ojdula-reviewed.json');
+const ojdulaReview=JSON.parse(ojdulaReviewBytes.toString('utf8'));
+const sha256=value=>createHash('sha256').update(value).digest('hex');
 const failures=[],checks=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail})};
 const ro=(review.items||[]).filter(x=>x.jurisdiction==='RO');
@@ -123,6 +128,9 @@ check('ro_reviewed_semantic_type_geometry_history_audit_pass',unstableReviewedSe
 
 const fallbackBinding=settlementPolicy?.administrative_geometry_fallbacks?.RO??null;
 if(fallbackBinding){
+ const fallbackIds=(fallbackBinding.legal_ids||[]).map(String).sort();
+ const sourceIds=(ancpiFallbacks.features||[]).map(x=>String(x.legal_id)).sort();
+ check('ancpi_fallback_policy_source_identity_set_is_exact',JSON.stringify(fallbackIds)===JSON.stringify(sourceIds),{policy:fallbackIds,source:sourceIds});
  const bretcu=(catalog.entities||[]).filter(e=>e.id==='siruta-u64096');
  const source=(ancpiFallbacks.features||[]).filter(x=>String(x.legal_id)==='64096');
  const master=(geo.features||[]).filter(x=>x.properties?.catalog_id==='siruta-u64096');
@@ -130,7 +138,7 @@ if(fallbackBinding){
  check('bretcu_ancpi_fallback_policy_binding_is_exact',
   fallbackBinding.path==='data/sources/ro-ancpi-uat-fallbacks.json'
   && fallbackBinding.mode==='ACTUAL_RO_ANCPI_UAT_FALLBACKS'
-  && JSON.stringify((fallbackBinding.legal_ids||[]).map(String).sort())===JSON.stringify(['64096']),
+  && fallbackIds.includes('64096'),
   {binding:fallbackBinding});
  check('bretcu_ancpi_fallback_source_is_exact',
   source.length===1
@@ -154,6 +162,38 @@ if(fallbackBinding){
  check('bretcu_ancpi_fallback_master_geometry_is_exactly_once',
   master.length===1&&['Polygon','MultiPolygon'].includes(master[0]?.geometry?.type),
   {feature_count:master.length});
+ const ojdulaOverride=(fallbackBinding.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
+ if(ojdulaOverride){
+  const ojdula=(catalog.entities||[]).filter(e=>e.id==='osm-r14735731');
+  const ojdulaMaster=(geo.features||[]).filter(x=>x.properties?.catalog_id==='osm-r14735731');
+  const oe=ojdula[0]||null;
+  const os=ojdulaReview.feature||null;
+  const om=ojdulaMaster[0]||null;
+  check('ojdula_review_evidence_sha256_is_exact',ojdulaOverride.evidence==='data/sources/ro-ancpi-ojdula-reviewed.json'&&ojdulaOverride.evidence_sha256===sha256(ojdulaReviewBytes),{expected:ojdulaOverride.evidence_sha256,actual:sha256(ojdulaReviewBytes)});
+  check('ojdula_ancpi_geometry_override_contract_is_exact',
+   ojdula.length===1&&ojdulaSource.length===1&&ojdulaMaster.length===1
+   &&String(oe?.legal?.id||'')==='64602'
+   &&oe?.representation?.source==='ANCPI RELUAT'
+   &&Number(oe?.representation?.reviewed_osm_relation_id)===14735731
+   &&oe?.representation?.osm_relation_geometry_accepted===false
+   &&oe?.geometry?.role==='administrative_boundary'
+   &&oe?.geometry?.scope==='uat_fallback'
+   &&Number(os?.source_object_id)===1167
+   &&os?.inspire_id_local_id==='1.145.64602',
+   {entity:oe,source_object_id:os?.source_object_id??null});
+  check('ojdula_master_matches_ancpi_exactly',
+   JSON.stringify(om?.geometry??null)===JSON.stringify(os?.geometry??null),
+   {});
+  const bm=(geo.features||[]).find(x=>x.properties?.catalog_id==='siruta-u64096');
+  let overlapKm2=null;
+  try{
+   const inter=turf.intersect(turf.featureCollection([om,bm]));
+   overlapKm2=inter?turf.area(inter)/1e6:0;
+  }catch{}
+  check('ojdula_bretcu_current_uat_geometries_do_not_overlap',
+   overlapKm2!==null&&overlapKm2<0.000001,
+   {overlap_km2:overlapKm2});
+ }
 }
 
 const bad=(geo.features||[]).filter(f=>!f.geometry||!['Polygon','MultiPolygon'].includes(f.geometry.type)||!Array.isArray(f.geometry.coordinates)||!f.geometry.coordinates.length);

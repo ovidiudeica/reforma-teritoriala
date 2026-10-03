@@ -533,7 +533,7 @@ test('P1.1 state boundaries are explicit context geometries without changing UAT
  assert.match(structural,/STATE_RELATION_IDS=\{RO:90689,MD:58974\}/);
  assert.match(structural,/auditStateContext\('RO'\)/);
  assert.match(structural,/auditStateContext\('MD'\)/);
- assert.match(regression,/bretcuFallbackEnabled=Boolean/);
+ assert.match(regression,/bretcuFallbackEnabled=fallbackIds\.includes\('64096'\)/);
  assert.match(regression,/EXPECTED=\{RO:bretcuFallbackEnabled\?3234:3233,MD:2596\}/);
  assert.match(regression,/EXPECTED_TOTAL=EXPECTED\.RO\+EXPECTED\.MD/);
 });
@@ -571,10 +571,16 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  }
  assert.equal(schema.$defs.entity.properties.id.pattern,'^(?:osm-r[0-9]+|siruta-u[0-9]+)$');
  assert.deepEqual(schema.$defs.entity.properties.representation.properties.source.enum,['OpenStreetMap','ANCPI RELUAT']);
- assert.match(migration,/policy_version='2026-10-03-v1\.2'/);
+ assert.match(migration,/policy_version='2026-10-03-v1\.3'/);
  assert.match(migration,/administrative_geometry_fallbacks/);
  assert.match(migration,/legal_ids:\['64096'\]/);
  assert.match(sourceBundle,/ancpiBinding=policy\?\.administrative_geometry_fallbacks\?\.RO/);
+ const ojdula=await readJson('data/sources/ro-ancpi-ojdula-reviewed.json');
+ assert.equal(ojdula.mode,'ACTUAL_RO_ANCPI_REVIEWED_GEOMETRY_OVERRIDE');
+ assert.equal(String(ojdula.feature?.legal_id),'64602');
+ assert.equal(Number(ojdula.feature?.source_object_id),1167);
+ assert.equal(ojdula.feature?.inspire_id_local_id,'1.145.64602');
+ assert.equal(Number(ojdula.feature?.replacement_osm_relation_id),14735731);
 });
 
 test('Brețcu fallback application never fabricates an OSM relation',async()=>{

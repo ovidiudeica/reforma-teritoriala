@@ -8,6 +8,7 @@ const SNAPSHOT='data/sources/ro-siruta-current.json';
 const COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const ANCPI_FALLBACKS='data/sources/ro-ancpi-uat-fallbacks.json';
 const OFFICIAL_ONLY_RESOLUTIONS='data/sources/ro-official-only-reviewed-resolutions.json';
+const OJDULA_REVIEW='data/sources/ro-ancpi-ojdula-reviewed.json';
 const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const OUTPUT='data/current/ro-official-application.json';
 
@@ -19,6 +20,7 @@ const official=await read(SNAPSHOT);
 const countyBridge=await read(COUNTY_BRIDGE);
 const ancpiFallbacks=await read(ANCPI_FALLBACKS);
 const officialOnlyResolutions=await read(OFFICIAL_ONLY_RESOLUTIONS);
+const ojdulaReview=await read(OJDULA_REVIEW);
 const settlementPolicy=await read(SETTLEMENT_POLICY);
 const ancpiFallbackBinding=settlementPolicy?.administrative_geometry_fallbacks?.RO??null;
 
@@ -197,66 +199,69 @@ for(const fallback of ancpiFallbackBinding?(ancpiFallbacks.features||[]):[]){
  };
  if(legal.type!=='commune'||String(resolution.legal_type)!==legal.type)throw new Error('ANCPI fallback legal type mismatch '+legalId);
  const entity={
-  id,
-  name:legal.name,
-  official_name:legal.name,
-  jurisdiction:'RO',
-  category:'administrative',
-  type:legal.type,
-  status:'current',
-  parent_id:parentId,
-  representation:{
-   source:'ANCPI RELUAT',
-   admin_level:8,
-   source_object_id:fallback.source_object_id,
-   inspire_id_local_id:fallback.inspire_id_local_id,
-   inspire_id_version_id:fallback.inspire_id_version_id,
-   national_code:fallback.national_code
-  },
+  id,name:legal.name,official_name:legal.name,jurisdiction:'RO',category:'administrative',type:legal.type,status:'current',parent_id:parentId,
+  representation:{source:'ANCPI RELUAT',admin_level:8,source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id,inspire_id_version_id:fallback.inspire_id_version_id,national_code:fallback.national_code},
   geometry:{role:'administrative_boundary',scope:'uat_fallback',legal_geometry_equivalence_asserted:false},
-  classification:{
-   version:catalog.classifier_version??null,
-   confidence:'high',
-   reason:'Current UAT geometry supplied by ANCPI/RELUAT as a reviewed fallback because OSM has no distinct Brețcu boundary relation.',
-   evidence:ANCPI_FALLBACKS,
-   official_registry:'SIRUTA',
-   official_legal_id:legalId
-  },
-  legal,
-  source:'ANCPI RELUAT',
-  source_url:ancpiFallbacks.source?.source_url||null,
-  imported_at:ancpiFallbacks.source?.item_modified_at||null,
-  review_required:false
+  classification:{version:catalog.classifier_version??null,confidence:'high',reason:'Current UAT geometry supplied by ANCPI/RELUAT as a reviewed fallback because OSM has no distinct Brețcu boundary relation.',evidence:ANCPI_FALLBACKS,official_registry:'SIRUTA',official_legal_id:legalId},
+  legal,source:'ANCPI RELUAT',source_url:ancpiFallbacks.source?.source_url||null,imported_at:ancpiFallbacks.source?.item_modified_at||null,review_required:false
  };
  const feature={
   type:'Feature',
-  properties:{
-   catalog_id:id,
-   parent_id:parentId,
-   jurisdiction:'RO',
-   entity_type:legal.type,
-   classification_confidence:'high',
-   geometry_role:'administrative_boundary',
-   geometry_scope:'uat_fallback',
-   legal_registry:'SIRUTA',
-   legal_id:legalId,
-   legal_name:legal.name,
-   legal_type:legal.type,
-   legal_parent_id:legal.parent_id,
-   legal_parent_name:legal.parent_name,
-   legal_match_method:legal.match_method,
-   legal_parent_matches_osm_geometry_parent:true,
-   source:'ANCPI RELUAT',
-   source_object_id:fallback.source_object_id,
-   inspire_id_local_id:fallback.inspire_id_local_id,
-   national_code:fallback.national_code
-  },
+  properties:{catalog_id:id,parent_id:parentId,jurisdiction:'RO',entity_type:legal.type,classification_confidence:'high',geometry_role:'administrative_boundary',geometry_scope:'uat_fallback',legal_registry:'SIRUTA',legal_id:legalId,legal_name:legal.name,legal_type:legal.type,legal_parent_id:legal.parent_id,legal_parent_name:legal.parent_name,legal_match_method:legal.match_method,legal_parent_matches_osm_geometry_parent:true,source:'ANCPI RELUAT',source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id,national_code:fallback.national_code},
   geometry:fallback.geometry
  };
  entities.push(entity);
  geo.features.push(feature);
  featureByCatalogId.set(id,feature);
- fallbackApplied.push({entity_id:id,legal_id:legalId,legal_type:legal.type,parent_id:parentId,source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id});
+ fallbackApplied.push({mode:'add_missing_uat',entity_id:id,legal_id:legalId,legal_type:legal.type,parent_id:parentId,source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id});
+}
+
+for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
+ const legalId=String(override.legal_id||'');
+ if(legalId!=='64602'||override.entity_id!=='osm-r14735731'||Number(override.osm_relation_id)!==14735731||override.evidence!==OJDULA_REVIEW){
+  throw new Error('Unexpected reviewed geometry override '+legalId);
+ }
+ const source=ojdulaReview.feature;
+ if(String(source?.legal_id)!==legalId||Number(source?.replacement_osm_relation_id)!==14735731)throw new Error('Reviewed Ojdula source identity mismatch');
+ const existing=entities.find(e=>e.id===override.entity_id);
+ if(!existing||String(existing.legal?.id||'')!==legalId||Number(existing.osm?.relation_id)!==14735731)throw new Error('Reviewed Ojdula entity binding mismatch');
+ const feature=featureByCatalogId.get(existing.id);
+ if(!feature)throw new Error('Missing Ojdula master feature');
+ if(!['Polygon','MultiPolygon'].includes(source.geometry?.type)||!Array.isArray(source.geometry?.coordinates)||!source.geometry.coordinates.length)throw new Error('Reviewed Ojdula geometry invalid');
+ existing.representation={
+  source:'ANCPI RELUAT',
+  admin_level:8,
+  source_object_id:source.source_object_id,
+  inspire_id_local_id:source.inspire_id_local_id,
+  inspire_id_version_id:source.inspire_id_version_id,
+  national_code:source.national_code,
+  reviewed_osm_relation_id:14735731,
+  osm_relation_geometry_accepted:false
+ };
+ existing.geometry={role:'administrative_boundary',scope:'uat_fallback',legal_geometry_equivalence_asserted:false};
+ existing.source='ANCPI RELUAT';
+ existing.source_url=ojdulaReview.source?.source_url||null;
+ existing.classification={
+  ...(existing.classification||{}),
+  confidence:'high',
+  reason:'Reviewed geometry override: OSM relation 14735731 merges Ojdula with the distinct Brețcu UAT; current Ojdula geometry is the exact ANCPI/RELUAT SIRUTA 64602 polygon.',
+  evidence:OJDULA_REVIEW,
+  official_registry:'SIRUTA',
+  official_legal_id:legalId
+ };
+ feature.geometry=source.geometry;
+ feature.properties={
+  ...(feature.properties||{}),
+  geometry_role:'administrative_boundary',
+  geometry_scope:'uat_fallback',
+  source:'ANCPI RELUAT',
+  source_object_id:source.source_object_id,
+  inspire_id_local_id:source.inspire_id_local_id,
+  national_code:source.national_code,
+  reviewed_osm_relation_id:14735731,
+  osm_relation_geometry_accepted:false
+ };
+ fallbackApplied.push({mode:'replace_osm_geometry',entity_id:existing.id,legal_id:legalId,legal_type:existing.type,parent_id:existing.parent_id,source_object_id:source.source_object_id,inspire_id_local_id:source.inspire_id_local_id,replaced_osm_relation_id:14735731});
 }
 catalog.entity_count=entities.length;
 
@@ -295,10 +300,15 @@ check('all_ro_counties_have_siruta_county_identity',roCounties.every(e=>e.legal?
 check('all_ro_county_geojson_features_have_siruta_identity',roCounties.every(e=>{
  const p=featureByCatalogId.get(e.id)?.properties;return p?.legal_registry==='SIRUTA'&&p?.legal_type==='county'&&String(p?.legal_id||'')===String(e.legal?.id||'');
 }),{});
-check('ancpi_bretcu_fallback_activation_is_exact',
+check('ancpi_reviewed_fallback_activation_is_exact',
  !ancpiFallbackBinding
- ||(fallbackApplied.length===1&&fallbackApplied[0]?.entity_id==='siruta-u64096'&&fallbackApplied[0]?.legal_id==='64096'),
- {enabled:Boolean(ancpiFallbackBinding),fallback_applied:fallbackApplied});
+ ||(
+  fallbackApplied.some(x=>x.entity_id==='siruta-u64096'&&x.legal_id==='64096'&&x.mode==='add_missing_uat')
+  &&(!(ancpiFallbackBinding.reviewed_geometry_overrides||[]).length
+    ||fallbackApplied.some(x=>x.entity_id==='osm-r14735731'&&x.legal_id==='64602'&&x.mode==='replace_osm_geometry'&&Number(x.replaced_osm_relation_id)===14735731))
+  &&fallbackApplied.length===(ancpiFallbackBinding.legal_ids||[]).length+(ancpiFallbackBinding.reviewed_geometry_overrides||[]).length
+ ),
+ {enabled:Boolean(ancpiFallbackBinding),authorized_ids:(ancpiFallbackBinding?.legal_ids||[]).map(String).sort(),reviewed_geometry_overrides:ancpiFallbackBinding?.reviewed_geometry_overrides||[],fallback_applied:fallbackApplied});
 
 const report={
  schema_version:1,
