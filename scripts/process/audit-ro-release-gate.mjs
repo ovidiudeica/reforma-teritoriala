@@ -124,42 +124,49 @@ check('ro_reviewed_semantic_type_geometry_history_audit_pass',unstableReviewedSe
 const fallbackBinding=settlementPolicy?.administrative_geometry_fallbacks?.RO??null;
 if(fallbackBinding){
  const bretcu=(catalog.entities||[]).filter(e=>e.id==='siruta-u64096');
- const source=(ancpiFallbacks.features||[]).filter(x=>String(x.legal_id)==='64096');
- const master=(geo.features||[]).filter(x=>x.properties?.catalog_id==='siruta-u64096');
- const entity=bretcu[0]||null;
- check('bretcu_ancpi_fallback_policy_binding_is_exact',
+ const ojdula=(catalog.entities||[]).filter(e=>e.id==='osm-r14735731');
+ const sources=new Map((ancpiFallbacks.features||[]).map(x=>[String(x.legal_id),x]));
+ const bretcuMaster=(geo.features||[]).filter(x=>x.properties?.catalog_id==='siruta-u64096');
+ const ojdulaMaster=(geo.features||[]).filter(x=>x.properties?.catalog_id==='osm-r14735731');
+ const b=bretcu[0]||null,o=ojdula[0]||null,bs=sources.get('64096'),os=sources.get('64602');
+ check('reviewed_ancpi_fallback_policy_binding_is_exact',
   fallbackBinding.path==='data/sources/ro-ancpi-uat-fallbacks.json'
   && fallbackBinding.mode==='ACTUAL_RO_ANCPI_UAT_FALLBACKS'
-  && JSON.stringify((fallbackBinding.legal_ids||[]).map(String).sort())===JSON.stringify(['64096']),
+  && JSON.stringify((fallbackBinding.legal_ids||[]).map(String).sort())===JSON.stringify(['64096','64602']),
   {binding:fallbackBinding});
- check('bretcu_ancpi_fallback_source_is_exact',
-  source.length===1
-  && Number(source[0]?.source_object_id)===1227
-  && source[0]?.inspire_id_local_id==='1.145.64096'
-  && source[0]?.geometry_role==='administrative_boundary'
-  && source[0]?.geometry_scope==='uat_fallback',
-  {source_count:source.length,source:source[0]??null});
+ check('reviewed_ancpi_fallback_sources_are_exact',
+  sources.size===2
+  && Number(bs?.source_object_id)===1227 && bs?.inspire_id_local_id==='1.145.64096'
+  && Number(os?.source_object_id)===1167 && os?.inspire_id_local_id==='1.145.64602'
+  && [bs,os].every(x=>x?.geometry_role==='administrative_boundary'&&x?.geometry_scope==='uat_fallback'),
+  {source_count:sources.size,legal_ids:[...sources.keys()].sort()});
  check('bretcu_ancpi_fallback_catalog_contract_is_exact',
-  bretcu.length===1
-  && entity?.legal?.registry==='SIRUTA'
-  && String(entity?.legal?.id||'')==='64096'
-  && entity?.type==='commune'
-  && entity?.parent_id==='osm-r2248621'
-  && entity?.representation?.source==='ANCPI RELUAT'
-  && entity?.geometry?.role==='administrative_boundary'
-  && entity?.geometry?.scope==='uat_fallback'
-  && entity?.geometry?.legal_geometry_equivalence_asserted===false
-  && entity?.review_required===false,
-  {entity_count:bretcu.length,entity});
- check('bretcu_ancpi_fallback_master_geometry_is_exactly_once',
-  master.length===1&&['Polygon','MultiPolygon'].includes(master[0]?.geometry?.type),
-  {feature_count:master.length});
+  bretcu.length===1 && b?.legal?.registry==='SIRUTA' && String(b?.legal?.id||'')==='64096'
+  && b?.type==='commune' && b?.parent_id==='osm-r2248621'
+  && b?.representation?.source==='ANCPI RELUAT'
+  && b?.geometry?.role==='administrative_boundary' && b?.geometry?.scope==='uat_fallback'
+  && b?.geometry?.legal_geometry_equivalence_asserted===false && b?.review_required===false,
+  {entity_count:bretcu.length,entity:b});
+ check('ojdula_ancpi_geometry_override_catalog_contract_is_exact',
+  ojdula.length===1 && o?.legal?.registry==='SIRUTA' && String(o?.legal?.id||'')==='64602'
+  && Number(o?.osm?.relation_id)===14735731 && o?.representation?.source==='ANCPI RELUAT'
+  && o?.geometry?.role==='administrative_boundary' && o?.geometry?.scope==='uat_fallback'
+  && o?.geometry?.legal_geometry_equivalence_asserted===false,
+  {entity_count:ojdula.length,entity:o});
+ check('reviewed_ancpi_master_geometries_are_exactly_once',
+  bretcuMaster.length===1 && ojdulaMaster.length===1
+  && ['Polygon','MultiPolygon'].includes(bretcuMaster[0]?.geometry?.type)
+  && ['Polygon','MultiPolygon'].includes(ojdulaMaster[0]?.geometry?.type)
+  && JSON.stringify(bretcuMaster[0]?.geometry)===JSON.stringify(bs?.geometry)
+  && JSON.stringify(ojdulaMaster[0]?.geometry)===JSON.stringify(os?.geometry),
+  {bretcu_feature_count:bretcuMaster.length,ojdula_feature_count:ojdulaMaster.length});
 }
+
 
 const bad=(geo.features||[]).filter(f=>!f.geometry||!['Polygon','MultiPolygon'].includes(f.geometry.type)||!Array.isArray(f.geometry.coordinates)||!f.geometry.coordinates.length);
 check('all_ro_features_have_polygonal_geometry',bad.length===0,{count:bad.length});
 const ungheni=(geo.features||[]).filter(f=>Number(f.properties?.osm_relation_id)===18967922||f.properties?.catalog_id==='osm-r18967922');
 check('known_cross_jurisdiction_ungheni_removed',ungheni.length===0,{present:ungheni.length});
-const report={schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',status:failures.length?'FAIL':'PASS',policy:'RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, zero unresolved cross-level UAT representations, zero unresolved OSM-vs-SIRUTA semantic type conflicts, and complete official application. OSM remains the primary geometry source. Any activated ANCPI/RELUAT UAT fallback must be explicitly policy-bound, source-bound and identity-bound, with no fabricated OSM relation. Reviewed missing-boundary, exceptional-level and semantic-type resolutions remain fail-closed.',checks,failures};
+const report={schema_version:1,generated_at:new Date().toISOString(),jurisdiction:'RO',status:failures.length?'FAIL':'PASS',policy:'RO release requires zero unresolved/duplicate SIRUTA matches, zero unresolved official-only UATs, zero unresolved cross-level UAT representations, zero unresolved OSM-vs-SIRUTA semantic type conflicts, and complete official application. OSM remains the primary geometry source. Any activated ANCPI/RELUAT UAT fallback or reviewed geometry override must be explicitly policy-bound, source-bound and identity-bound; stable OSM identity may be retained while the conflicting geometry representation is replaced. Reviewed missing-boundary, exceptional-level and semantic-type resolutions remain fail-closed.',checks,failures};
 await writeFile('data/current/ro-release-gate.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));if(failures.length)process.exit(1);
