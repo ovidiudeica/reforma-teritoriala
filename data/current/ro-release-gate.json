@@ -83,7 +83,7 @@
           "applied_count": 3179,
           "ro_county_count": 42,
           "county_applied_count": 42,
-          "ancpi_fallback_applied_count": 1,
+          "ancpi_fallback_applied_count": 2,
           "type_changed_count": 5,
           "legal_parent_conflict_count": 0,
           "osm_semantic_type_conflict_count": 0,
@@ -188,6 +188,18 @@
       }
     },
     {
+      "name": "ancpi_fallback_policy_source_identity_set_is_exact",
+      "ok": true,
+      "detail": {
+        "policy": [
+          "64096"
+        ],
+        "source": [
+          "64096"
+        ]
+      }
+    },
+    {
       "name": "bretcu_ancpi_fallback_policy_binding_is_exact",
       "ok": true,
       "detail": {
@@ -202,7 +214,20 @@
             "64096"
           ],
           "legal_identity_authority": "SIRUTA",
-          "legal_geometry_equivalence_asserted": false
+          "legal_geometry_equivalence_asserted": false,
+          "reviewed_geometry_overrides": [
+            {
+              "legal_id": "64602",
+              "entity_id": "osm-r14735731",
+              "osm_relation_id": 14735731,
+              "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
+              "evidence_sha256": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084",
+              "source": "ANCPI RELUAT",
+              "source_object_id": 1167,
+              "inspire_id_local_id": "1.145.64602",
+              "disposition": "replace_osm_geometry_keep_stable_entity_id"
+            }
+          ]
         }
       }
     },
@@ -9270,6 +9295,100 @@
       "ok": true,
       "detail": {
         "feature_count": 1
+      }
+    },
+    {
+      "name": "ojdula_review_evidence_sha256_is_exact",
+      "ok": true,
+      "detail": {
+        "expected": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084",
+        "actual": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084"
+      }
+    },
+    {
+      "name": "ojdula_ancpi_geometry_override_contract_is_exact",
+      "ok": true,
+      "detail": {
+        "entity": {
+          "id": "osm-r14735731",
+          "name": "Ojdula",
+          "official_name": null,
+          "jurisdiction": "RO",
+          "category": "administrative",
+          "type": "commune",
+          "status": "current",
+          "parent_id": "osm-r2248621",
+          "osm": {
+            "element_type": "relation",
+            "relation_id": 14735731,
+            "admin_level": 8,
+            "boundary": "administrative",
+            "relation_type": "boundary",
+            "place": "municipality",
+            "designation": null,
+            "name_prefix": "Comuna",
+            "full_name": null,
+            "cuatm_code": null,
+            "cuatm_unique_id": null,
+            "wikidata": "Q5059285",
+            "wikipedia": null
+          },
+          "classification": {
+            "version": "2.3",
+            "confidence": "high",
+            "reason": "Reviewed geometry override: OSM relation 14735731 merges Ojdula with the distinct Brețcu UAT; current Ojdula geometry is the exact ANCPI/RELUAT SIRUTA 64602 polygon.",
+            "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
+            "osm_inferred_type": "commune",
+            "official_registry": "SIRUTA",
+            "official_legal_id": "64602"
+          },
+          "source": "ANCPI RELUAT",
+          "source_url": "https://services-eu1.arcgis.com/tt6hwS9xmcvnRjQC/arcgis/rest/services/AU_Unități_administrative/FeatureServer",
+          "imported_at": "2026-09-27T20:37:24.316Z",
+          "review_required": false,
+          "legal": {
+            "registry": "SIRUTA",
+            "reference_year": 2026,
+            "id": "64602",
+            "name": "OJDULA",
+            "type": "commune",
+            "parent_id": "145",
+            "parent_name": "JUDEȚUL COVASNA",
+            "match_method": "exact_normalized_name_and_county",
+            "match_confidence": "medium",
+            "source": "data/sources/ro-siruta-current.json",
+            "reconciliation": "data/current/ro-official-reconciliation.json",
+            "parent_matches_osm_geometry_parent": true
+          },
+          "representation": {
+            "source": "ANCPI RELUAT",
+            "admin_level": 8,
+            "source_object_id": 1167,
+            "inspire_id_local_id": "1.145.64602",
+            "inspire_id_version_id": "20250324141248",
+            "national_code": "64602",
+            "reviewed_osm_relation_id": 14735731,
+            "osm_relation_geometry_accepted": false
+          },
+          "geometry": {
+            "role": "administrative_boundary",
+            "scope": "uat_fallback",
+            "legal_geometry_equivalence_asserted": false
+          }
+        },
+        "source_object_id": 1167
+      }
+    },
+    {
+      "name": "ojdula_master_matches_ancpi_exactly",
+      "ok": true,
+      "detail": {}
+    },
+    {
+      "name": "ojdula_bretcu_current_uat_geometries_do_not_overlap",
+      "ok": true,
+      "detail": {
+        "overlap_km2": 0
       }
     },
     {
