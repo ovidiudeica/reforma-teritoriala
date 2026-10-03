@@ -345,8 +345,9 @@ const representationIssues=publicEntities.flatMap(x=>{
  if(x.id==='osm-r14735731'&&ojdulaOverrideEnabled){
   const ok=publicContractV2
    && x.representation?.source==='ANCPI RELUAT'
-   && Number(x.representation?.reviewed_osm_relation_id)===14735731
-   && x.representation?.osm_relation_geometry_accepted===false
+   && Number(x.representation?.osm_relation_id)===14735731
+   && Number(x.representation?.source_feature_id)===1167
+   && x.representation?.source_inspire_id==='1.145.64602'
    && x.representation?.canonical_geometry_role==='administrative_boundary'
    && x.representation?.geometry_scope==='uat_fallback'
    && x.legal?.registry==='SIRUTA'
