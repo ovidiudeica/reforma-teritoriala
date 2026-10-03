@@ -272,7 +272,7 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
 
   check('runner_label_is_exact',
    Object.entries(current.workflows).every(([id,item])=>
-    item.runs_on.length===(id==='promotion'?2:1)
+    item.runs_on.length===1
     && item.runs_on.every(label=>label===EXPECTED_BUILD_ENVIRONMENT.runner.label)),
    {expected:EXPECTED_BUILD_ENVIRONMENT.runner.label,actual:Object.fromEntries(Object.entries(current.workflows).map(([id,item])=>[id,item.runs_on]))});
 
