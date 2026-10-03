@@ -33,6 +33,7 @@ migrated.geometry_role_contract={
 migrated.jurisdictions.RO.official_inventory_selector='SIRUTA records whose level is 3';
 migrated.jurisdictions.RO.coverage_accounting='unique_official_legal_identity';
 migrated.jurisdictions.MD.coverage_accounting='unique_official_legal_identity';
+migrated.public_contract='actual-public-entity-v2';
 migrated.administrative_geometry_fallbacks={
  ...(migrated.administrative_geometry_fallbacks||{}),
  RO:{
@@ -58,5 +59,6 @@ console.log(JSON.stringify({
  ro_selector:migrated.jurisdictions.RO.official_inventory_selector,
  ro_coverage_accounting:migrated.jurisdictions.RO.coverage_accounting,
  md_coverage_accounting:migrated.jurisdictions.MD.coverage_accounting,
+ public_contract:migrated.public_contract,
  administrative_geometry_fallbacks:migrated.administrative_geometry_fallbacks
 },null,2));
