@@ -9,6 +9,16 @@ const EXPECTED={RO:bretcuFallbackEnabled?3234:3233,MD:2596};
 const EXPECTED_TOTAL=EXPECTED.RO+EXPECTED.MD;
 const blockers=[];
 const counts=Object.fromEntries(['RO','MD'].map(j=>[j,(catalog.entities||[]).filter(e=>e.jurisdiction===j).length]));
+const ojdula=(catalog.entities||[]).filter(e=>e.id==='osm-r14735731');
+const ojdulaEntity=ojdula[0];
+if(bretcuFallbackEnabled&&(
+ ojdula.length!==1
+ ||String(ojdulaEntity?.legal?.id||'')!=='64602'
+ ||ojdulaEntity?.representation?.source!=='ANCPI RELUAT'
+ ||ojdulaEntity?.geometry?.role!=='administrative_boundary'
+ ||ojdulaEntity?.geometry?.scope!=='uat_fallback'
+ ||ojdulaEntity?.geometry?.legal_geometry_equivalence_asserted!==false
+))blockers.push({issue:'ojdula_geometry_override_contract_drift',actual:ojdulaEntity});
 for(const j of ['RO','MD'])if(counts[j]!==EXPECTED[j])blockers.push({issue:'entity_count_drift',jurisdiction:j,expected:EXPECTED[j],actual:counts[j]});
 for(const [j,path] of Object.entries({RO:'public/geo/current/ro-administrative.geojson',MD:'public/geo/current/md-administrative.geojson'})){const doc=JSON.parse(await readFile(path,'utf8'));if((doc.features||[]).length!==EXPECTED[j])blockers.push({issue:'master_feature_count_drift',jurisdiction:j,expected:EXPECTED[j],actual:(doc.features||[]).length});}
 const total=counts.RO+counts.MD;if(total!==EXPECTED_TOTAL)blockers.push({issue:'total_entity_count_drift',expected:EXPECTED_TOTAL,actual:total});
