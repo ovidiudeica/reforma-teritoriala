@@ -341,6 +341,17 @@ const representationIssues=publicEntities.flatMap(x=>{
    && String(x.legal?.id)==='64096';
   return ok?[]:[{id:x.id,issue:'bretcu_official_geometry_binding',representation:x.representation,legal:x.legal}];
  }
+ if(x.id==='osm-r14735731'){
+  const ok=publicContractV2
+   && x.representation?.source==='ANCPI RELUAT'
+   && Number(x.representation?.reviewed_osm_relation_id)===14735731
+   && x.representation?.osm_relation_geometry_accepted===false
+   && x.representation?.canonical_geometry_role==='administrative_boundary'
+   && x.representation?.geometry_scope==='uat_fallback'
+   && x.legal?.registry==='SIRUTA'
+   && String(x.legal?.id)==='64602';
+  return ok?[]:[{id:x.id,issue:'ojdula_reviewed_geometry_binding',representation:x.representation,legal:x.legal}];
+ }
  if(x.representation?.source!=='OpenStreetMap'||!/^osm-r\d+$/.test(String(x.id)))return [{id:x.id,issue:'unexpected_non_osm_representation',source:x.representation?.source??null}];
  return [];
 });
