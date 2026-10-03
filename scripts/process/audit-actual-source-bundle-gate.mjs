@@ -13,7 +13,7 @@ const report={
  source_bundle_sha256:sha256(bundleBytes),
  bundle_fingerprint_sha256:bundle.bundle_fingerprint_sha256??null,
  status:validation.status,
- policy:'Fail closed unless the source-bundle manifest exactly matches current OSM, SIRUTA and CUATM source bytes, both durable OSM raw snapshots match their compressed and semantic SHA-256 values, and the canonical bundle fingerprint recomputes exactly.',
+ policy:'Fail closed unless the source-bundle manifest exactly matches all currently activated ACTUAL sources: OSM, SIRUTA, CUATM and any explicitly policy-bound ANCPI/RELUAT fallback bytes. Both durable OSM raw snapshots and every activated fallback source must remain cryptographically exact.',
  checks:validation.checks,
  failures:validation.failures
 };
