@@ -169,17 +169,51 @@ const resolutionByLegalId=new Map((officialOnlyResolutions.items||[]).map(r=>[St
 for(const fallback of ancpiFallbackBinding?(ancpiFallbacks.features||[]):[]){
  const legalId=String(fallback.legal_id||'');
  if(!(ancpiFallbackBinding.legal_ids||[]).map(String).includes(legalId))throw new Error('ANCPI fallback legal ID is not policy-authorized '+legalId);
- const id='siruta-u'+legalId;
- if(!legalId||entities.some(e=>e.id===id)||entities.some(e=>String(e.legal?.id||'')===legalId))throw new Error('Duplicate/invalid ANCPI fallback identity '+legalId);
  const officialRow=officialBySiruta.get(legalId);
  const resolution=resolutionByLegalId.get(legalId);
  if(!officialRow||Number(officialRow.level)!==2)throw new Error('ANCPI fallback legal ID is not a current SIRUTA UAT '+legalId);
- if(!resolution||resolution.classification!=='official_uat_without_distinct_osm_boundary_representation')throw new Error('ANCPI fallback lacks reviewed OSM-gap resolution '+legalId);
+ if(!resolution||!['official_uat_without_distinct_osm_boundary_representation','osm_boundary_conflicts_with_official_ancpi_uat_geometry'].includes(resolution.classification))throw new Error('ANCPI fallback lacks reviewed geometry resolution '+legalId);
  if(String(fallback.national_code)!==legalId||fallback.geometry_role!=='administrative_boundary'||fallback.geometry_scope!=='uat_fallback')throw new Error('ANCPI fallback metadata mismatch '+legalId);
  if(!['Polygon','MultiPolygon'].includes(fallback.geometry?.type)||!Array.isArray(fallback.geometry?.coordinates)||!fallback.geometry.coordinates.length)throw new Error('ANCPI fallback geometry invalid '+legalId);
  const parentId='osm-r'+String(resolution.expected_parent_osm_relation_id);
  const parent=entities.find(e=>e.id===parentId);
  if(!parent||parent.jurisdiction!=='RO'||parent.type!=='county')throw new Error('ANCPI fallback parent is not the reviewed county '+legalId);
+
+ if(resolution.classification==='osm_boundary_conflicts_with_official_ancpi_uat_geometry'){
+  const entity=entities.find(e=>String(e.legal?.id||'')===legalId);
+  if(!entity)throw new Error('Reviewed ANCPI geometry override lacks existing reconciled entity '+legalId);
+  if(Number(entity.osm?.relation_id)!==Number(resolution.osm_relation_id))throw new Error('Reviewed ANCPI geometry override OSM relation mismatch '+legalId);
+  const feature=featureByCatalogId.get(entity.id);
+  if(!feature)throw new Error('Reviewed ANCPI geometry override lacks master feature '+legalId);
+  entity.representation={
+   ...(entity.representation||{}),
+   source:'ANCPI RELUAT',
+   admin_level:8,
+   source_object_id:fallback.source_object_id,
+   inspire_id_local_id:fallback.inspire_id_local_id,
+   inspire_id_version_id:fallback.inspire_id_version_id,
+   national_code:fallback.national_code
+  };
+  entity.geometry={role:'administrative_boundary',scope:'uat_fallback',legal_geometry_equivalence_asserted:false};
+  entity.classification={
+   ...(entity.classification||{}),
+   confidence:'high',
+   reason:'Reviewed OSM UAT boundary materially conflicts with the official ANCPI/RELUAT UAT polygon; legal SIRUTA identity and stable catalog ID are preserved while only the geometry representation is replaced.',
+   evidence:ANCPI_FALLBACKS,
+   official_registry:'SIRUTA',
+   official_legal_id:legalId
+  };
+  entity.source='ANCPI RELUAT';
+  entity.source_url=ancpiFallbacks.source?.source_url||null;
+  entity.imported_at=ancpiFallbacks.source?.item_modified_at||null;
+  feature.geometry=fallback.geometry;
+  feature.properties={...(feature.properties||{}),geometry_role:'administrative_boundary',geometry_scope:'uat_fallback',source:'ANCPI RELUAT',source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id,national_code:fallback.national_code};
+  fallbackApplied.push({action:'replace_existing_geometry',entity_id:entity.id,legal_id:legalId,legal_type:entity.legal?.type||fallback.legal_type,parent_id:entity.parent_id,source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id});
+  continue;
+ }
+
+ const id='siruta-u'+legalId;
+ if(!legalId||entities.some(e=>e.id===id)||entities.some(e=>String(e.legal?.id||'')===legalId))throw new Error('Duplicate/invalid ANCPI fallback identity '+legalId);
  const legal={
   registry:'SIRUTA',
   reference_year:Number(official.reference_year)||2026,
@@ -197,66 +231,15 @@ for(const fallback of ancpiFallbackBinding?(ancpiFallbacks.features||[]):[]){
  };
  if(legal.type!=='commune'||String(resolution.legal_type)!==legal.type)throw new Error('ANCPI fallback legal type mismatch '+legalId);
  const entity={
-  id,
-  name:legal.name,
-  official_name:legal.name,
-  jurisdiction:'RO',
-  category:'administrative',
-  type:legal.type,
-  status:'current',
-  parent_id:parentId,
-  representation:{
-   source:'ANCPI RELUAT',
-   admin_level:8,
-   source_object_id:fallback.source_object_id,
-   inspire_id_local_id:fallback.inspire_id_local_id,
-   inspire_id_version_id:fallback.inspire_id_version_id,
-   national_code:fallback.national_code
-  },
+  id,name:legal.name,official_name:legal.name,jurisdiction:'RO',category:'administrative',type:legal.type,status:'current',parent_id:parentId,
+  representation:{source:'ANCPI RELUAT',admin_level:8,source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id,inspire_id_version_id:fallback.inspire_id_version_id,national_code:fallback.national_code},
   geometry:{role:'administrative_boundary',scope:'uat_fallback',legal_geometry_equivalence_asserted:false},
-  classification:{
-   version:catalog.classifier_version??null,
-   confidence:'high',
-   reason:'Current UAT geometry supplied by ANCPI/RELUAT as a reviewed fallback because OSM has no distinct Brețcu boundary relation.',
-   evidence:ANCPI_FALLBACKS,
-   official_registry:'SIRUTA',
-   official_legal_id:legalId
-  },
-  legal,
-  source:'ANCPI RELUAT',
-  source_url:ancpiFallbacks.source?.source_url||null,
-  imported_at:ancpiFallbacks.source?.item_modified_at||null,
-  review_required:false
+  classification:{version:catalog.classifier_version??null,confidence:'high',reason:'Current UAT geometry supplied by ANCPI/RELUAT as a reviewed fallback because OSM has no distinct boundary relation.',evidence:ANCPI_FALLBACKS,official_registry:'SIRUTA',official_legal_id:legalId},
+  legal,source:'ANCPI RELUAT',source_url:ancpiFallbacks.source?.source_url||null,imported_at:ancpiFallbacks.source?.item_modified_at||null,review_required:false
  };
- const feature={
-  type:'Feature',
-  properties:{
-   catalog_id:id,
-   parent_id:parentId,
-   jurisdiction:'RO',
-   entity_type:legal.type,
-   classification_confidence:'high',
-   geometry_role:'administrative_boundary',
-   geometry_scope:'uat_fallback',
-   legal_registry:'SIRUTA',
-   legal_id:legalId,
-   legal_name:legal.name,
-   legal_type:legal.type,
-   legal_parent_id:legal.parent_id,
-   legal_parent_name:legal.parent_name,
-   legal_match_method:legal.match_method,
-   legal_parent_matches_osm_geometry_parent:true,
-   source:'ANCPI RELUAT',
-   source_object_id:fallback.source_object_id,
-   inspire_id_local_id:fallback.inspire_id_local_id,
-   national_code:fallback.national_code
-  },
-  geometry:fallback.geometry
- };
- entities.push(entity);
- geo.features.push(feature);
- featureByCatalogId.set(id,feature);
- fallbackApplied.push({entity_id:id,legal_id:legalId,legal_type:legal.type,parent_id:parentId,source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id});
+ const feature={type:'Feature',properties:{catalog_id:id,parent_id:parentId,jurisdiction:'RO',entity_type:legal.type,classification_confidence:'high',geometry_role:'administrative_boundary',geometry_scope:'uat_fallback',legal_registry:'SIRUTA',legal_id:legalId,legal_name:legal.name,legal_type:legal.type,legal_parent_id:legal.parent_id,legal_parent_name:legal.parent_name,legal_match_method:legal.match_method,legal_parent_matches_osm_geometry_parent:true,source:'ANCPI RELUAT',source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id,national_code:fallback.national_code},geometry:fallback.geometry};
+ entities.push(entity); geo.features.push(feature); featureByCatalogId.set(id,feature);
+ fallbackApplied.push({action:'add_missing_uat',entity_id:id,legal_id:legalId,legal_type:legal.type,parent_id:parentId,source_object_id:fallback.source_object_id,inspire_id_local_id:fallback.inspire_id_local_id});
 }
 catalog.entity_count=entities.length;
 
@@ -295,9 +278,11 @@ check('all_ro_counties_have_siruta_county_identity',roCounties.every(e=>e.legal?
 check('all_ro_county_geojson_features_have_siruta_identity',roCounties.every(e=>{
  const p=featureByCatalogId.get(e.id)?.properties;return p?.legal_registry==='SIRUTA'&&p?.legal_type==='county'&&String(p?.legal_id||'')===String(e.legal?.id||'');
 }),{});
-check('ancpi_bretcu_fallback_activation_is_exact',
+check('ancpi_reviewed_uat_geometry_fallbacks_are_exact',
  !ancpiFallbackBinding
- ||(fallbackApplied.length===1&&fallbackApplied[0]?.entity_id==='siruta-u64096'&&fallbackApplied[0]?.legal_id==='64096'),
+ ||(fallbackApplied.length===2
+   &&fallbackApplied.some(x=>x.action==='add_missing_uat'&&x.entity_id==='siruta-u64096'&&x.legal_id==='64096')
+   &&fallbackApplied.some(x=>x.action==='replace_existing_geometry'&&x.entity_id==='osm-r14735731'&&x.legal_id==='64602')),
  {enabled:Boolean(ancpiFallbackBinding),fallback_applied:fallbackApplied});
 
 const report={
@@ -305,7 +290,7 @@ const report={
  generated_at:new Date().toISOString(),
  jurisdiction:'RO',
  status:failures.length?'FAIL':'PASS',
- policy:'SIRUTA is authoritative for RO legal identity/type and the exhaustive county/UAT inventory. OSM remains the primary geometry source. A reviewed UAT with no distinct OSM boundary may use an exact materialized ANCPI/RELUAT administrative polygon as a fallback, with provenance kept separate from legal identity and without fabricating OSM metadata.',
+ policy:'SIRUTA is authoritative for RO legal identity/type and the exhaustive county/UAT inventory. OSM remains the primary geometry source. A reviewed UAT may use an exact materialized ANCPI/RELUAT polygon when OSM lacks a distinct boundary or when the OSM polygon materially conflicts with the reviewed official UAT geometry; provenance remains separate from legal identity.',
  source:{official_snapshot:SNAPSHOT,reconciliation:RECON,ancpi_uat_fallbacks:ANCPI_FALLBACKS},
  checks,
  summary:{
