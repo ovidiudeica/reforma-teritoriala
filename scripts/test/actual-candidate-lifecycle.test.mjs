@@ -533,8 +533,9 @@ test('P1.1 state boundaries are explicit context geometries without changing UAT
  assert.match(structural,/STATE_RELATION_IDS=\{RO:90689,MD:58974\}/);
  assert.match(structural,/auditStateContext\('RO'\)/);
  assert.match(structural,/auditStateContext\('MD'\)/);
- assert.match(regression,/EXPECTED=\{RO:3233,MD:2596\}/);
- assert.match(regression,/EXPECTED_TOTAL=5829/);
+ assert.match(regression,/bretcuFallbackEnabled=Boolean/);
+ assert.match(regression,/EXPECTED=\{RO:bretcuFallbackEnabled\?3234:3233,MD:2596\}/);
+ assert.match(regression,/EXPECTED_TOTAL=EXPECTED\.RO\+EXPECTED\.MD/);
 });
 
 
