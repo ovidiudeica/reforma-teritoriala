@@ -6,7 +6,7 @@ const catalog=JSON.parse(await readFile('data/current/entities.json','utf8'));
 const settlementPolicy=JSON.parse(await readFile('data/sources/actual-settlement-policy.json','utf8'));
 const fallbackIds=(settlementPolicy?.administrative_geometry_fallbacks?.RO?.legal_ids||[]).map(String);
 const bretcuFallbackEnabled=fallbackIds.includes('64096');
-const ojdulaOverrideEnabled=fallbackIds.includes('64602');
+const ojdulaOverrideEnabled=(settlementPolicy?.administrative_geometry_fallbacks?.RO?.reviewed_geometry_overrides||[]).some(x=>String(x.legal_id)==='64602');
 const EXPECTED={RO:bretcuFallbackEnabled?3234:3233,MD:2596};
 const EXPECTED_TOTAL=EXPECTED.RO+EXPECTED.MD;
 const blockers=[];
