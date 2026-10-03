@@ -2,7 +2,7 @@
   "schema_version": 1,
   "jurisdiction": "RO",
   "reviewed_at": "2026-09-27",
-  "policy": "Reviewed official UATs that lack a distinct current OSM administrative-boundary representation. These classifications preserve official legal identity and prohibit promotion of another OSM relation to legal geometry. An explicitly reviewed ANCPI/RELUAT UAT polygon may be used as fallback geometry only when its exact source feature, SIRUTA code and provenance are bound.",
+  "policy": "Reviewed RO UAT geometry exceptions. SIRUTA remains legal identity authority; OSM remains the default geometry source. Where OSM lacks a distinct UAT boundary or a reviewed OSM boundary materially conflicts with the official ANCPI/RELUAT UAT polygon, the exact ANCPI feature may be used as an explicit fallback representation without asserting legal-geometry equivalence.",
   "items": [
     {
       "legal_id": "64096",
@@ -31,7 +31,7 @@
         "county_spatial_plan_2026": "https://ro.cjcv.ro/fileman/Uploads/PATJ/2026/04/01_scrisa/PATJ_Covasna_Partea_II_anexa4.pdf",
         "osm_snapshot": "public/geo/current/ro-administrative.geojson"
       },
-      "review_conclusion": "SIRUTA 64096 is a current legal UAT and OSM still has no distinct Brețcu/Bereck boundary relation; relation 14735731 remains Ojdula and must not be promoted. The current ANCPI/RELUAT UAT feature with nationalCode 64096 is accepted as an explicit fallback administrative-boundary representation, with SIRUTA retaining legal identity authority and no claim that OSM supplies this geometry.",
+      "review_conclusion": "SIRUTA 64096 is a current legal UAT and OSM has no distinct Brețcu/Bereck boundary relation. Relation 14735731 is Ojdula (SIRUTA 64602), but its OSM polygon materially overlaps the reviewed ANCPI Brețcu polygon and must not be used to represent Brețcu. ANCPI/RELUAT nationalCode 64096 is retained as the explicit Brețcu fallback.",
       "fallback_geometry": {
         "source": "data/sources/ro-ancpi-uat-fallbacks.json",
         "authority": "Agenția Națională de Cadastru și Publicitate Imobiliară",
@@ -40,6 +40,34 @@
         "source_object_id": 1227,
         "inspire_id_local_id": "1.145.64096",
         "national_code": "64096",
+        "geometry_role": "administrative_boundary",
+        "geometry_scope": "uat_fallback",
+        "legal_geometry_equivalence_asserted": false
+      }
+    },
+    {
+      "legal_id": "64602",
+      "legal_name": "OJDULA",
+      "legal_type": "commune",
+      "legal_parent_name": "JUDEȚUL COVASNA",
+      "classification": "osm_boundary_conflicts_with_official_ancpi_uat_geometry",
+      "osm_relation_id": 14735731,
+      "expected_parent_osm_relation_id": 2248621,
+      "conflicting_legal_id": "64096",
+      "evidence": {
+        "official_registry": "data/sources/ro-siruta-current.json",
+        "osm_snapshot": "public/geo/current/ro-administrative.geojson",
+        "ancpi_uat_geometry": "data/sources/ro-ancpi-uat-fallbacks.json"
+      },
+      "review_conclusion": "OSM relation 14735731 is correctly reconciled to Ojdula/SIRUTA 64602, but its polygon materially overlaps the reviewed ANCPI/RELUAT Brețcu UAT polygon. Preserve the stable OSM catalog identity and legal binding, but replace only its administrative geometry representation with ANCPI/RELUAT nationalCode 64602.",
+      "fallback_geometry": {
+        "source": "data/sources/ro-ancpi-uat-fallbacks.json",
+        "authority": "Agenția Națională de Cadastru și Publicitate Imobiliară",
+        "dataset": "AU Unități administrative (RELUAT)",
+        "arcgis_item_id": "466b7199c19f4904831e14bc7f407af9",
+        "source_object_id": 1167,
+        "inspire_id_local_id": "1.145.64602",
+        "national_code": "64602",
         "geometry_role": "administrative_boundary",
         "geometry_scope": "uat_fallback",
         "legal_geometry_equivalence_asserted": false
