@@ -42,10 +42,10 @@ jobs:
           ]);
           const allowedPush=new Set([
             'actual-candidate.yml',
+            'actual-promote-candidate.yml',
             'refresh-actual-review-evidence.yml'
           ]);
           const allowedPrCreate=new Set([
-            'actual-promote-candidate.yml',
             'refresh-actual-review-evidence.yml'
           ]);
           const allowedScheduledWrite=new Set([
