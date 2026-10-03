@@ -8,6 +8,7 @@ const SNAPSHOT='data/sources/ro-siruta-current.json';
 const COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const ANCPI_FALLBACKS='data/sources/ro-ancpi-uat-fallbacks.json';
 const OFFICIAL_ONLY_RESOLUTIONS='data/sources/ro-official-only-reviewed-resolutions.json';
+const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const OUTPUT='data/current/ro-official-application.json';
 
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
@@ -18,13 +19,18 @@ const official=await read(SNAPSHOT);
 const countyBridge=await read(COUNTY_BRIDGE);
 const ancpiFallbacks=await read(ANCPI_FALLBACKS);
 const officialOnlyResolutions=await read(OFFICIAL_ONLY_RESOLUTIONS);
+const settlementPolicy=await read(SETTLEMENT_POLICY);
+const ancpiFallbackBinding=settlementPolicy?.administrative_geometry_fallbacks?.RO??null;
 
 if(reconciliation.status!=='PASS')throw new Error('RO official reconciliation is not PASS');
 if(countyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
 if(reconciliation.summary?.unmatched_osm_count!==0)throw new Error('Cannot apply SIRUTA with unmatched RO level-8 entities');
 if(reconciliation.summary?.duplicate_legal_mapping_count!==0)throw new Error('Cannot apply SIRUTA with duplicate legal mappings');
-if(ancpiFallbacks.schema_version!==1||ancpiFallbacks.mode!=='ACTUAL_RO_ANCPI_UAT_FALLBACKS')throw new Error('Invalid ANCPI fallback source');
-if(ancpiFallbacks.source?.authority!=='Agenția Națională de Cadastru și Publicitate Imobiliară'||ancpiFallbacks.source?.arcgis_item_id!=='466b7199c19f4904831e14bc7f407af9')throw new Error('Unexpected ANCPI fallback provenance');
+if(ancpiFallbackBinding){
+ if(ancpiFallbackBinding.path!==ANCPI_FALLBACKS||ancpiFallbackBinding.mode!=='ACTUAL_RO_ANCPI_UAT_FALLBACKS')throw new Error('Invalid ANCPI fallback policy binding');
+ if(ancpiFallbacks.schema_version!==1||ancpiFallbacks.mode!=='ACTUAL_RO_ANCPI_UAT_FALLBACKS')throw new Error('Invalid ANCPI fallback source');
+ if(ancpiFallbacks.source?.authority!=='Agenția Națională de Cadastru și Publicitate Imobiliară'||ancpiFallbacks.source?.arcgis_item_id!=='466b7199c19f4904831e14bc7f407af9')throw new Error('Unexpected ANCPI fallback provenance');
+}
 
 const entities=catalog.entities||[];
 const roLevel8=entities.filter(e=>e.jurisdiction==='RO'&&Number(e.osm?.admin_level)===8);
@@ -160,8 +166,9 @@ for(const e of roCounties){
 
 const officialBySiruta=new Map((official.records||[]).map(r=>[String(r.siruta),r]));
 const resolutionByLegalId=new Map((officialOnlyResolutions.items||[]).map(r=>[String(r.legal_id),r]));
-for(const fallback of ancpiFallbacks.features||[]){
+for(const fallback of ancpiFallbackBinding?(ancpiFallbacks.features||[]):[]){
  const legalId=String(fallback.legal_id||'');
+ if(!(ancpiFallbackBinding.legal_ids||[]).map(String).includes(legalId))throw new Error('ANCPI fallback legal ID is not policy-authorized '+legalId);
  const id='siruta-u'+legalId;
  if(!legalId||entities.some(e=>e.id===id)||entities.some(e=>String(e.legal?.id||'')===legalId))throw new Error('Duplicate/invalid ANCPI fallback identity '+legalId);
  const officialRow=officialBySiruta.get(legalId);
@@ -288,7 +295,10 @@ check('all_ro_counties_have_siruta_county_identity',roCounties.every(e=>e.legal?
 check('all_ro_county_geojson_features_have_siruta_identity',roCounties.every(e=>{
  const p=featureByCatalogId.get(e.id)?.properties;return p?.legal_registry==='SIRUTA'&&p?.legal_type==='county'&&String(p?.legal_id||'')===String(e.legal?.id||'');
 }),{});
-check('ancpi_bretcu_fallback_applied_exactly_once',fallbackApplied.length===1&&fallbackApplied[0]?.entity_id==='siruta-u64096'&&fallbackApplied[0]?.legal_id==='64096',{fallback_applied:fallbackApplied});
+check('ancpi_bretcu_fallback_activation_is_exact',
+ !ancpiFallbackBinding
+ ||(fallbackApplied.length===1&&fallbackApplied[0]?.entity_id==='siruta-u64096'&&fallbackApplied[0]?.legal_id==='64096'),
+ {enabled:Boolean(ancpiFallbackBinding),fallback_applied:fallbackApplied});
 
 const report={
  schema_version:1,
