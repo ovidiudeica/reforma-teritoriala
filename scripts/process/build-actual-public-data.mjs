@@ -11,6 +11,7 @@ const MD_NON_CUATM='data/current/md-cuatm-non-cuatm-allotments.json';
 const MD_INDIVIDUAL='data/sources/md-cuatm-individual-review.json';
 const RO_COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const MD_SEMANTIC_BRIDGE='data/current/md-cuatm-semantic-bridge.json';
+const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const OUT_INDEX='public/data/actual-entities.json';
 const OUT_DIR='public/geo/actual';
 const OUT_CHUNK_INDEX='public/data/actual-geometry-chunks.json';
@@ -18,9 +19,10 @@ const OUT_CHUNK_DIR=OUT_DIR+'/chunks';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
-const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge]=await Promise.all([
- read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE),read(MD_SEMANTIC_BRIDGE)
+const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge,settlementPolicy]=await Promise.all([
+ read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE),read(MD_SEMANTIC_BRIDGE),read(SETTLEMENT_POLICY)
 ]);
+const publicContractV2=settlementPolicy?.public_contract==='actual-public-entity-v2';
 if(roCountyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
 if(mdSemanticBridge.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
 
@@ -283,11 +285,13 @@ const countsByJurisdiction=Object.fromEntries(['RO','MD'].map(j=>[j,publicEntiti
 const countsByTier=Object.fromEntries(Object.entries(tierFeatures).map(([key,features])=>[key,features.length]));
 const legalStatusCounts=publicEntities.reduce((a,x)=>(a[x.validation.legal_identity_status]=(a[x.validation.legal_identity_status]||0)+1,a),{});
 const index={
- schema_version:1,
- contract:'actual-public-entity-v1',
+ schema_version:publicContractV2?2:1,
+ contract:publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1',
  mode:'ACTUAL',
  generated_at:catalog.generated_at??null,
- policy:'Public contract separates official legal identity from geometry representation provenance. OSM is the primary ACTUAL geometry source; explicitly reviewed ANCPI/RELUAT UAT fallback geometry is permitted only where no distinct OSM boundary exists. Geometry provenance never creates legal identity. Public web geometries preserve exact master coordinates and are partitioned only for progressive loading.',
+ policy:publicContractV2
+  ?'Public contract separates official legal identity from geometry representation provenance. OpenStreetMap remains the primary ACTUAL geometry source; exactly reviewed ANCPI/RELUAT UAT fallback geometry is permitted only where no distinct OSM boundary exists. Geometry provenance never creates legal identity. Public web geometries preserve exact master coordinates and are partitioned only for progressive loading.'
+  :'Public contract separates official legal identity from geometry representation provenance. OSM is the primary ACTUAL geometry source; geometry provenance never creates legal identity. Public web geometries preserve exact master coordinates and are partitioned only for progressive loading.',
  entity_count:publicEntities.length,
  entity_count_by_jurisdiction:countsByJurisdiction,
  feature_count_by_tier:countsByTier,

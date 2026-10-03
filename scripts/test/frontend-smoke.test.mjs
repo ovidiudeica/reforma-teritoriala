@@ -16,7 +16,7 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
  const buildInfo=JSON.parse(buildInfoText);
  assert.equal(gate.status,'PASS');
  assert.equal(gate.snapshot_id,manifest.snapshot_id);
- assert.equal(manifest.public_contract?.contract,'actual-public-entity-v1');
+ assert.ok(['actual-public-entity-v1','actual-public-entity-v2'].includes(manifest.public_contract?.contract));
  assert.match(buildInfo.actual_snapshot_id,/^actual-[0-9a-f]{16}$/);
  assert.match(buildInfo.release_fingerprint_sha256,/^[0-9a-f]{64}$/);
  if(buildInfo.actual_snapshot_id===manifest.snapshot_id)assert.equal(buildInfo.release_fingerprint_sha256,manifest.release_fingerprint_sha256);

@@ -100,7 +100,7 @@ const actualReleasePromise=(async()=>{
   ]);
   if(gate.status!=='PASS')throw new Error('Release ACTUAL nu a trecut gate-ul combinat');
   if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Manifestul ACTUAL nu corespunde gate-ului');
-  if(manifest.public_contract?.contract!=='actual-public-entity-v1')throw new Error('Contractul public ACTUAL lipsește din manifest');
+  if(!['actual-public-entity-v1','actual-public-entity-v2'].includes(manifest.public_contract?.contract))throw new Error('Contractul public ACTUAL lipsește din manifest');
   const publishedRelease=buildInfo?.actual_release_tag
    ?'publicat: '+buildInfo.actual_release_tag+(buildInfo.actual_snapshot_id?' · '+buildInfo.actual_snapshot_id:'')
    :'fără release publicat';
