@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "ACTUAL",
-  "policy_version": "2026-10-03-v1.3",
+  "policy_version": "2026-10-03-v1.2",
   "scope": "settlements_and_component_localities",
   "principle": "ACTUAL is exhaustive for administrative UAT identities where the official registry and subtype model are exhaustive. Settlements/component localities are an official identity inventory but not an exhaustive polygon-boundary layer: SIRUTA/CUATM do not supply an exhaustive authoritative polygon set, and OSM settlement boundaries are incomplete and heterogeneous. Missing settlement polygons therefore do not block ACTUAL. Any settlement representation that is included must itself satisfy a fail-closed identity-or-review path and preserve OSM geometry without asserting legal geometry equivalence.",
   "common_requirements": {
@@ -105,8 +105,7 @@
       "geometry_role": "administrative_boundary",
       "geometry_scope": "uat_fallback",
       "legal_ids": [
-        "64096",
-        "64602"
+        "64096"
       ],
       "legal_identity_authority": "SIRUTA",
       "legal_geometry_equivalence_asserted": false
