@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272",
+  "environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -87,7 +87,7 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "d31a57e7cbf0112ec09bbf0c976e947f278309fe738f97335d46894a960e8ec9",
+      "scripts/lib/actual-build-environment.mjs": "99594d34c47dfa61dbf423d1e8e717d894f3c80abd7e3b4ba2d9414ebacbc77e",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
       "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
@@ -169,9 +169,8 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "0646e27024785c8dbac0535419b9be9f9c3c61d47c9432e327cb9cd19815f852",
+        "sha256": "2887afcbe4a5f6b9e15553caafec56247cb09be9d00677e99ea856f2fcb35a55",
         "runs_on": [
-          "ubuntu-24.04",
           "ubuntu-24.04"
         ],
         "node_versions": [],

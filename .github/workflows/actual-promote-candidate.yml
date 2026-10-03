@@ -250,28 +250,23 @@ jobs:
             origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
           echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-  open-promotion-pr:
-    needs: prepare-promotion
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - name: Open promotion pull request without candidate code
+
+      - name: Emit protected PR handoff
         env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
           CANDIDATE_BRANCH: ${{ inputs.candidate_branch }}
           SNAPSHOT_ID: ${{ inputs.expected_candidate_snapshot }}
           CANDIDATE_COMMIT_SHA: ${{ inputs.expected_candidate_commit }}
-          PROMOTION_COMMIT_SHA: ${{ needs.prepare-promotion.outputs.promotion_commit }}
+          PROMOTION_COMMIT_SHA: ${{ steps.promotion_write.outputs.commit_sha }}
         run: |
           set -euo pipefail
-          test "$(gh api "repos/$GH_REPO/commits/$CANDIDATE_BRANCH" --jq .sha)" = "$PROMOTION_COMMIT_SHA"
-          EXISTING="$(gh pr list --base main --head "$CANDIDATE_BRANCH" --state open --json url --jq '.[0].url // empty')"
-          if [ -n "$EXISTING" ]; then
-            echo "$EXISTING" >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-          BODY="Explicit ACTUAL candidate promotion. Candidate: $SNAPSHOT_ID. Approved candidate commit: $CANDIDATE_COMMIT_SHA. Promotion commit: $PROMOTION_COMMIT_SHA. Candidate validation passed before the promotion write. All three required ACTUAL checks must pass before merge."
-          gh pr create --base main --head "$CANDIDATE_BRANCH" --title "Promote ACTUAL candidate $SNAPSHOT_ID" --body "$BODY" >> "$GITHUB_STEP_SUMMARY"
+          test -n "$PROMOTION_COMMIT_SHA"
+          {
+            echo "## Promotion branch prepared"
+            echo
+            echo "- Candidate: `$SNAPSHOT_ID`"
+            echo "- Candidate branch: `$CANDIDATE_BRANCH`"
+            echo "- Approved candidate commit: `$CANDIDATE_COMMIT_SHA`"
+            echo "- Promotion commit: `$PROMOTION_COMMIT_SHA`"
+            echo
+            echo "Repository policy forbids GitHub Actions from creating pull requests. Open the protected PR from this exact candidate branch using an authenticated user or approved external connector; do not move the branch before PR creation."
+          } >> "$GITHUB_STEP_SUMMARY"

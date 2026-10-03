@@ -93,7 +93,7 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
 test('workflow write permissions match the exact audited matrix',async()=>{
  const expected=new Map([
   ['actual-candidate.yml',['contents']],
-  ['actual-promote-candidate.yml',['contents','pull-requests']],
+  ['actual-promote-candidate.yml',['contents']],
   ['build-actual-runtime-image.yml',['packages']],
   ['import-osm.yml',['contents']],
   ['refresh-actual-review-evidence.yml',['contents','pull-requests']],
@@ -107,6 +107,14 @@ test('workflow write permissions match the exact audited matrix',async()=>{
   const actual=[...content.matchAll(/^\s+([a-z][a-z-]*):\s*write\s*$/gm)].map(match=>match[1]).sort();
   assert.deepEqual(actual,[...(expected.get(name)??[])].sort(),name+' write permission matrix drift');
  }
+});
+
+test('ACTUAL promotion respects repository PR-creation policy',async()=>{
+ const content=await readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8');
+ assert.doesNotMatch(content,/^\s*pull-requests:\s*write\s*$/m);
+ assert.doesNotMatch(content,/\bgh\s+pr\s+create\b/);
+ assert.match(content,/Emit protected PR handoff/);
+ assert.match(content,/Repository policy forbids GitHub Actions from creating pull requests/);
 });
 
 test('repository and package write jobs never persist checkout credentials',async()=>{
@@ -256,19 +264,25 @@ test('candidate preflight rejects merge parents and non-regular tree objects',as
 
 import './actual-preexecution-objects.test.mjs';
 
-test('PR credentials belong to a separate runner job with no repository checkout',async()=>{
- for(const [name,job] of [['actual-promote-candidate.yml','open-promotion-pr'],['refresh-actual-review-evidence.yml','open-review-pr']]){
-  const workflow=await readFile(join(workflowsDir,name),'utf8');
-  const [preparation,opener]=workflow.split('  '+job+':');
-  assert.ok(opener);
-  assert.doesNotMatch(preparation,/pull-requests: write/);
-  assert.doesNotMatch(opener,/uses:|npm run |node scripts\//);
-  assert.match(opener,/contents: read/);
-  assert.match(opener,/pull-requests: write/);
-  assert.match(opener,/runs-on: ubuntu-24\.04/);
-  assert.match(opener,/gh api/);
-  assert.match(opener,/gh pr create/);
- }
+test('promotion handoff carries no PR credentials while review-evidence PR credentials stay isolated',async()=>{
+ const promotion=await readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8');
+ assert.doesNotMatch(promotion,/^  open-promotion-pr:/m);
+ assert.doesNotMatch(promotion,/pull-requests: write/);
+ assert.doesNotMatch(promotion,/\bgh\s+pr\s+create\b/);
+ assert.match(promotion,/Emit protected PR handoff/);
+ assert.match(promotion,/PROMOTION_COMMIT_SHA:\s*\$\{\{ steps\.promotion_write\.outputs\.commit_sha \}\}/);
+ assert.match(promotion,/test -n "\$PROMOTION_COMMIT_SHA"/);
+
+ const review=await readFile(join(workflowsDir,'refresh-actual-review-evidence.yml'),'utf8');
+ const [preparation,opener]=review.split('  open-review-pr:');
+ assert.ok(opener);
+ assert.doesNotMatch(preparation,/pull-requests: write/);
+ assert.doesNotMatch(opener,/uses:|npm run |node scripts\//);
+ assert.match(opener,/contents: read/);
+ assert.match(opener,/pull-requests: write/);
+ assert.match(opener,/runs-on: ubuntu-24\.04/);
+ assert.match(opener,/gh api/);
+ assert.match(opener,/gh pr create/);
 });
 
 test('container writers select bash and callers preserve runtime pull permission',async()=>{

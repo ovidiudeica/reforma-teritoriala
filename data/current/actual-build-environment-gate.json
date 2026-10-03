@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "2abdb47f3487ccd7a722fb54160a623507d0f38eea92933059a18a5062d5a2eb",
-  "environment_fingerprint_sha256": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272",
+  "build_environment_sha256": "4b420468ec8483ba1e2d65e96e190445e22f9356af4186b3f241885687a567ea",
+  "environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
   "checks": [
@@ -37,7 +37,6 @@
             "ubuntu-24.04"
           ],
           "promotion": [
-            "ubuntu-24.04",
             "ubuntu-24.04"
           ],
           "verify": [
@@ -267,47 +266,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272",
-        "actual": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272"
-      }
-    },
-    {
-      "name": "runtime_node_exact",
-      "ok": true,
-      "detail": {
-        "expected": "24.21.0",
-        "actual": "24.21.0"
-      }
-    },
-    {
-      "name": "runtime_npm_exact",
-      "ok": true,
-      "detail": {
-        "expected": "11.19.0",
-        "actual": "11.19.0"
-      }
-    },
-    {
-      "name": "runtime_runner_os_linux",
-      "ok": true,
-      "detail": {
-        "expected": "Linux",
-        "actual": "Linux"
-      }
-    },
-    {
-      "name": "host_runner_identity_is_static_provenance",
-      "ok": true,
-      "detail": {
-        "policy": "GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match the pinned provenance.",
-        "expected": {
-          "image_os": "ubuntu24",
-          "image_version": "20260927.320.1"
-        },
-        "actual": {
-          "image_os": null,
-          "image_version": null
-        }
+        "expected": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
+        "actual": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa"
       }
     }
   ],

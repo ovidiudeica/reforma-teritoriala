@@ -46,7 +46,6 @@ jobs:
             'refresh-actual-review-evidence.yml'
           ]);
           const allowedPrCreate=new Set([
-            'actual-promote-candidate.yml',
             'refresh-actual-review-evidence.yml'
           ]);
           const allowedScheduledWrite=new Set([
@@ -59,7 +58,7 @@ jobs:
           ]);
           const allowedWritePermissions=new Map([
             ['actual-candidate.yml',['contents']],
-            ['actual-promote-candidate.yml',['contents','pull-requests']],
+            ['actual-promote-candidate.yml',['contents']],
             ['build-actual-runtime-image.yml',['packages']],
             ['import-osm.yml',['contents']],
             ['refresh-actual-review-evidence.yml',['contents','pull-requests']],

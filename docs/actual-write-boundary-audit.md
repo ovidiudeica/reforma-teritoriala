@@ -8,7 +8,7 @@ Final hardening: #142 (unique required status owners) and #143 (`06a919556291bd6
 | Workflow | Write permission | Trigger | Write destination |
 | --- | --- | --- | --- |
 | actual-candidate.yml | contents | dispatch / reusable workflow | new `actual/candidate-*`, absent-ref lease |
-| actual-promote-candidate.yml | contents, pull-requests | dispatch | exact candidate branch/SHA lease; promotion PR to main |
+| actual-promote-candidate.yml | contents | dispatch | exact candidate branch/SHA lease; emits exact protected-PR handoff, while PR creation remains outside GitHub Actions |
 | refresh-actual-review-evidence.yml | contents, pull-requests | dispatch | new `actual/review-evidence-*`, absent-ref lease; PR to main |
 | import-osm.yml | contents | dispatch / weekly schedule | delegates exclusively to actual-candidate.yml |
 | refresh-md-official.yml | contents | dispatch / monthly schedule | delegates exclusively to actual-candidate.yml |

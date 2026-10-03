@@ -2,12 +2,12 @@
   "schema_version": 1,
   "snapshot_id": "actual-83ef4c0ce09e5e42",
   "release_fingerprint_sha256": "83ef4c0ce09e5e42cd4c5e9b6d80b8979b6be789882d913324622a995dcadcae",
-  "manifest_sha256": "fa438acf293faed70898d7b8cfe4c2a5b8a2a5c6df17c9fd0024c5560d8407a0",
+  "manifest_sha256": "89e9afe4f7c0b4ee6efdcf9e81c76f8719daa92278f107898baf17f6d054880f",
   "source_bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
   "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-  "build_environment_fingerprint_sha256": "a095cad16a454b36e62a15c089ddc1552f999c058dd7ed27ac294945f3a7b272",
+  "build_environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
     "base_snapshot_id": "actual-990c892d9d27fa46",
@@ -19,5 +19,9 @@
     "candidate_commit_sha": "d799704194638d824589aefdb0dc5a0bfa95b08b",
     "promotion_audit_path": "data/current/actual-candidate-promotion-audit.json"
   },
-  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes."
+  "policy": "Persisted ACTUAL marker rebound after promotion workflow policy compatibility hardening. Semantic snapshot identity is unchanged; the build-environment and release provenance are rebound only after exact regenerated gates pass.",
+  "provenance_hardening": {
+    "previous_manifest_sha256": "fa438acf293faed70898d7b8cfe4c2a5b8a2a5c6df17c9fd0024c5560d8407a0",
+    "reason": "promotion-pr-handoff-policy-compatibility"
+  }
 }
