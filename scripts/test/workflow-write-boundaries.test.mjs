@@ -93,7 +93,7 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
 test('workflow write permissions match the exact audited matrix',async()=>{
  const expected=new Map([
   ['actual-candidate.yml',['contents']],
-  ['actual-promote-candidate.yml',['contents','pull-requests']],
+  ['actual-promote-candidate.yml',['contents']],
   ['build-actual-runtime-image.yml',['packages']],
   ['import-osm.yml',['contents']],
   ['refresh-actual-review-evidence.yml',['contents','pull-requests']],
@@ -107,6 +107,14 @@ test('workflow write permissions match the exact audited matrix',async()=>{
   const actual=[...content.matchAll(/^\s+([a-z][a-z-]*):\s*write\s*$/gm)].map(match=>match[1]).sort();
   assert.deepEqual(actual,[...(expected.get(name)??[])].sort(),name+' write permission matrix drift');
  }
+});
+
+test('ACTUAL promotion respects repository PR-creation policy',async()=>{
+ const content=await readFile(join(workflowsDir,'actual-promote-candidate.yml'),'utf8');
+ assert.doesNotMatch(content,/^\s*pull-requests:\s*write\s*$/m);
+ assert.doesNotMatch(content,/\bgh\s+pr\s+create\b/);
+ assert.match(content,/Emit protected PR handoff/);
+ assert.match(content,/Repository policy forbids GitHub Actions from creating pull requests/);
 });
 
 test('repository and package write jobs never persist checkout credentials',async()=>{
