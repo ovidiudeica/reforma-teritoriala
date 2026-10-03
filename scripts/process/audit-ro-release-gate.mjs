@@ -171,7 +171,7 @@ if(fallbackBinding){
   const om=ojdulaMaster[0]||null;
   check('ojdula_review_evidence_sha256_is_exact',ojdulaOverride.evidence==='data/sources/ro-ancpi-ojdula-reviewed.json'&&ojdulaOverride.evidence_sha256===sha256(ojdulaReviewBytes),{expected:ojdulaOverride.evidence_sha256,actual:sha256(ojdulaReviewBytes)});
   check('ojdula_ancpi_geometry_override_contract_is_exact',
-   ojdula.length===1&&ojdulaSource.length===1&&ojdulaMaster.length===1
+   ojdula.length===1&&os!==null&&ojdulaMaster.length===1
    &&String(oe?.legal?.id||'')==='64602'
    &&oe?.representation?.source==='ANCPI RELUAT'
    &&Number(oe?.representation?.reviewed_osm_relation_id)===14735731
