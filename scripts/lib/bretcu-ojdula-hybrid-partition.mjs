@@ -107,16 +107,12 @@ function commonEdgeKeys(aGeometry,bGeometry){
 }
 
 const intersectionArea=(a,b)=>{
- try{
-  const x=turf.intersect(turf.featureCollection([turf.feature(a),turf.feature(b)]));
-  return x?turf.area(x):0;
- }catch{return 0;}
+ const x=turf.intersect(turf.featureCollection([turf.feature(a),turf.feature(b)]));
+ return x?turf.area(x):0;
 };
 const differenceArea=(a,b)=>{
- try{
-  const x=turf.difference(turf.featureCollection([turf.feature(a),turf.feature(b)]));
-  return x?turf.area(x):0;
- }catch{return 0;}
+ const x=turf.difference(turf.featureCollection([turf.feature(a),turf.feature(b)]));
+ return x?turf.area(x):0;
 };
 
 export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaGeometry,ancpiBretcuGeometry}){
