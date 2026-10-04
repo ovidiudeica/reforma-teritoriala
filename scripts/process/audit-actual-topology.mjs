@@ -100,7 +100,19 @@ for(const e of entities){
     outside_centroid:outside?centroid(outside).geometry.coordinates:null
    };
   }catch(error){containment={containment_difference_error:String(error?.message||error)};}
-  add(observations,e.jurisdiction,e.id,'child_bbox_exceeds_parent_bbox',{parent_id:parentId,child_bbox:childBox,parent_bbox:parentBox,...containment});
+  const parentEntity=entityById.get(parentId)||null;
+  add(observations,e.jurisdiction,e.id,'child_bbox_exceeds_parent_bbox',{
+   parent_id:parentId,
+   child_name:e.name??null,
+   child_type:e.type??null,
+   child_admin_level:e.osm?.admin_level??null,
+   child_legal_id:e.legal?.id??e.legal_id??null,
+   parent_name:parentEntity?.name??null,
+   parent_type:parentEntity?.type??null,
+   parent_admin_level:parentEntity?.osm?.admin_level??null,
+   parent_legal_id:parentEntity?.legal?.id??parentEntity?.legal_id??null,
+   child_bbox:childBox,parent_bbox:parentBox,...containment
+  });
  }
 }
 
