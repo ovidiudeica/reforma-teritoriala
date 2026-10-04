@@ -278,6 +278,13 @@ export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaG
    ancpi_clipped_end_m:clippedShared.clipped_end_m,
    connector_start_m:startSnap.distance_km*1000,
    connector_end_m:endSnap.distance_km*1000,
+   ancpi_terminal_start_original_coordinate:shared.coordinates[0],
+   ancpi_terminal_start_final_coordinate:startSnap.coordinate,
+   ancpi_terminal_start_mode:clippedShared.start_hit?'ancpi_terminal_clip_to_osm_shell':(startSnap.distance_km>0?'non_ancpi_terminal_closure_to_osm_shell':'exact_osm_shell_contact'),
+   ancpi_terminal_end_original_coordinate:shared.coordinates.at(-1),
+   ancpi_terminal_end_final_coordinate:endSnap.coordinate,
+   ancpi_terminal_end_mode:clippedShared.end_hit?'ancpi_terminal_clip_to_osm_shell':(endSnap.distance_km>0?'non_ancpi_terminal_closure_to_osm_shell':'exact_osm_shell_contact'),
+   non_ancpi_terminal_closure_count:Number(startSnap.distance_km>0)+Number(endSnap.distance_km>0),
    partition_polygons_valid:partitionPolygonsValid,
    bretcu_overlap_with_ancpi_m2:intersectionArea(bretcu.geometry,ancpiB.geometry),
    ojdula_overlap_with_ancpi_m2:intersectionArea(ojdula.geometry,ancpiO.geometry)
