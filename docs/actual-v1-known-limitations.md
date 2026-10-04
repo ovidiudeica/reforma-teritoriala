@@ -18,11 +18,10 @@ Chițcani, OSM relation `6879649`, nu face parte din această limitare: identita
 
 ## Observații topologice MD
 
-`data/current/actual-topology-audit.json` este `PASS`, cu 0 probleme blocante și 15 observații `child_bbox_exceeds_parent_bbox`. Toate cele 15 sunt acceptate pentru v1 ca observații semantice/nonblocking; auditul nu repară și nu mută coordonate.
+`data/current/actual-topology-audit.json` este `PASS`, cu 0 probleme blocante și 14 observații `child_bbox_exceeds_parent_bbox`. Cazul `osm-r1748490` (Chișinău) a fost eliminat din această listă prin corectarea ierarhiei cartografice la părintele canonic `osm-r1691801`, fără modificarea geometriei. Cele 14 observații rămase sunt semantice/nonblocking; auditul nu repară și nu mută coordonate.
 
 | Entitate | Părinte |
 | --- | --- |
-| `osm-r1748490` | `osm-r1813306` |
 | `osm-r18967259` | `osm-r19113736` |
 | `osm-r18967626` | `osm-r12207955` |
 | `osm-r18966913` | `osm-r19100177` |
@@ -42,4 +41,4 @@ Acest tip de observație indică doar că bounding box-ul copilului nu este comp
 
 ## Regula de interpretare v1
 
-ACTUAL v1 publică aceste limitări ca stare cunoscută a release-ului. Nu se ghicește identitatea lui `12104636` și nu se modifică geometria pentru a elimina artificial cele 15 observații. O corecție ulterioară necesită dovezi noi și un nou candidate/release ACTUAL.
+ACTUAL v1 publică aceste limitări ca stare cunoscută a release-ului. Nu se ghicește identitatea lui `12104636` și nu se modifică geometria pentru a elimina artificial cele 14 observații rămase. O corecție ulterioară necesită dovezi noi și un nou candidate/release ACTUAL.
