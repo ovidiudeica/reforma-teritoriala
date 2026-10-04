@@ -2,6 +2,7 @@
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
+import {buildBretcuOjdulaHybridPartition} from '../lib/bretcu-ojdula-hybrid-partition.mjs';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
 const review=await read('data/current/admin-review.json');
 const allowed=await read('data/sources/ro-release-gate-exceptions.json');
@@ -19,6 +20,8 @@ const settlementPolicy=await read('data/sources/actual-settlement-policy.json');
 const ancpiFallbacks=await read('data/sources/ro-ancpi-uat-fallbacks.json');
 const ojdulaReviewBytes=await readFile('data/sources/ro-ancpi-ojdula-reviewed.json');
 const ojdulaReview=JSON.parse(ojdulaReviewBytes.toString('utf8'));
+const ojdulaShellBytes=await readFile('data/sources/ro-osm-ojdula-14735731-reviewed-shell.json');
+const ojdulaShell=JSON.parse(ojdulaShellBytes.toString('utf8'));
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const failures=[],checks=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail})};
@@ -201,6 +204,23 @@ if(fallbackBinding){
    ),
    {entity:oe,source_object_id:os?.source_object_id??null,hybrid_partition_enabled:hybridPartitionEnabled});
   if(hybridPartitionEnabled){
+   check('ojdula_reviewed_osm_shell_binding_is_exact',
+    ojdulaOverride.outer_shell_evidence==='data/sources/ro-osm-ojdula-14735731-reviewed-shell.json'
+    &&ojdulaOverride.outer_shell_evidence_sha256===sha256(ojdulaShellBytes)
+    &&ojdulaOverride.outer_shell_source_commit_sha===ojdulaShell.source_commit_sha
+    &&ojdulaOverride.outer_shell_source_snapshot_id===ojdulaShell.source_snapshot_id
+    &&ojdulaShell.mode==='ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL'
+    &&Number(ojdulaShell.relation_id)===14735731,
+    {override:ojdulaOverride,shell:{mode:ojdulaShell.mode,relation_id:ojdulaShell.relation_id,source_commit_sha:ojdulaShell.source_commit_sha,source_snapshot_id:ojdulaShell.source_snapshot_id}});
+   const expectedPartition=buildBretcuOjdulaHybridPartition({
+    osmOjdulaGeometry:ojdulaShell.geometry,
+    ancpiOjdulaGeometry:os.geometry,
+    ancpiBretcuGeometry:source[0]?.geometry
+   });
+   check('bretcu_ojdula_master_geometries_match_reviewed_hybrid_partition_exactly',
+    JSON.stringify(om?.geometry??null)===JSON.stringify(expectedPartition.ojdula_geometry)
+    &&JSON.stringify(master[0]?.geometry??null)===JSON.stringify(expectedPartition.bretcu_geometry),
+    {});
    const audit=hybridApplication?.partition?.audit||null;
    check('bretcu_ojdula_hybrid_partition_audit_is_exact',
     Boolean(hybridApplication)
