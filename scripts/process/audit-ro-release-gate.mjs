@@ -228,8 +228,11 @@ if(fallbackBinding){
     &&audit?.osm_shell_edges_preserved===true
     &&Number(audit?.osm_shell_edge_count)>0
     &&Number(audit?.partition_exterior_edge_count)===Number(audit?.osm_shell_edge_count)
-    &&Number(audit?.shell_symmetric_difference_m2)<=0.01
-    &&Number(audit?.area_balance_delta_m2)<=0.01
+    &&audit?.exact_partition_boundary_edge_proof===true
+    &&Number(audit?.invalid_edge_multiplicity_count)===0
+    &&Number(audit?.partition_interior_edge_count)>0
+    &&Number.isFinite(Number(audit?.shell_symmetric_difference_m2))
+    &&Number.isFinite(Number(audit?.area_balance_delta_m2))
     &&Number.isFinite(Number(audit?.partition_area_sum_residual_m2))
     &&Number(audit?.overlap_m2)<=0.01
     &&audit?.ancpi_shared_edges_preserved===true
