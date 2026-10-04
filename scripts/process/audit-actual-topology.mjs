@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import GeoJSONReader from 'jsts/org/locationtech/jts/io/GeoJSONReader.js';
 import IsValidOp from 'jsts/org/locationtech/jts/operation/valid/IsValidOp.js';
+import {area,bbox,booleanWithin,centroid,difference,featureCollection} from '@turf/turf';
 
 const jtsReader=new GeoJSONReader();
 
@@ -82,8 +83,25 @@ for(const e of entities){
  const parent=featureById.get(parentId);
  if(!parent){add(observations,e.jurisdiction,e.id,'parent_geometry_not_available',{parent_id:parentId});continue;}
  const childBox=bboxById.get(e.id),parentBox=bboxById.get(parentId);
- if(childBox&&parentBox&&(childBox[0]<parentBox[0]||childBox[1]<parentBox[1]||childBox[2]>parentBox[2]||childBox[3]>parentBox[3]))
-  add(observations,e.jurisdiction,e.id,'child_bbox_exceeds_parent_bbox',{parent_id:parentId,child_bbox:childBox,parent_bbox:parentBox});
+ if(childBox&&parentBox&&(childBox[0]<parentBox[0]||childBox[1]<parentBox[1]||childBox[2]>parentBox[2]||childBox[3]>parentBox[3])){
+  let containment={};
+  try{
+   const outside=difference(featureCollection([child,parent]));
+   const childAreaM2=area(child);
+   const outsideAreaM2=outside?area(outside):0;
+   containment={
+    child_area_m2:childAreaM2,
+    outside_parent_area_m2:outsideAreaM2,
+    outside_parent_fraction:childAreaM2?outsideAreaM2/childAreaM2:null,
+    outside_parent_percent:childAreaM2?100*outsideAreaM2/childAreaM2:null,
+    child_within_parent:booleanWithin(child,parent),
+    outside_geometry_type:outside?.geometry?.type??null,
+    outside_bbox:outside?bbox(outside):null,
+    outside_centroid:outside?centroid(outside).geometry.coordinates:null
+   };
+  }catch(error){containment={containment_difference_error:String(error?.message||error)};}
+  add(observations,e.jurisdiction,e.id,'child_bbox_exceeds_parent_bbox',{parent_id:parentId,child_bbox:childBox,parent_bbox:parentBox,...containment});
+ }
 }
 
 const missingMaster=entities.filter(e=>['RO','MD'].includes(e.jurisdiction)&&!featureById.has(e.id)).map(e=>e.id);
