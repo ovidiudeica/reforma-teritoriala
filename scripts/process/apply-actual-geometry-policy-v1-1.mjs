@@ -6,6 +6,7 @@ const POLICY='data/sources/actual-settlement-policy.json';
 const CONTRACT='schemas/actual-geometry-role-contract.json';
 const ANCPI_FALLBACK='data/sources/ro-ancpi-uat-fallbacks.json';
 const OJDULA_REVIEW='data/sources/ro-ancpi-ojdula-reviewed.json';
+const OJDULA_OSM_SHELL='data/sources/ro-osm-ojdula-14735731-reviewed-shell.json';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 
 const policy=JSON.parse(await readFile(POLICY,'utf8'));
@@ -14,6 +15,8 @@ const ancpiBytes=await readFile(ANCPI_FALLBACK);
 const ancpiFallback=JSON.parse(ancpiBytes.toString('utf8'));
 const ojdulaBytes=await readFile(OJDULA_REVIEW);
 const ojdulaReview=JSON.parse(ojdulaBytes.toString('utf8'));
+const ojdulaShellBytes=await readFile(OJDULA_OSM_SHELL);
+const ojdulaShell=JSON.parse(ojdulaShellBytes.toString('utf8'));
 
 if(policy.schema_version!==1||policy.mode!=='ACTUAL'||policy.scope!=='settlements_and_component_localities')throw new Error('Unexpected ACTUAL settlement policy baseline.');
 if(contract.schema_version!==1||contract.contract!=='actual-geometry-role-v1'||contract.mode!=='ACTUAL')throw new Error('Unexpected ACTUAL geometry-role contract.');
@@ -29,6 +32,14 @@ if(
  ||ojdulaReview.feature?.geometry_scope!=='uat_fallback'
  ||!['Polygon','MultiPolygon'].includes(ojdulaReview.feature?.geometry?.type)
 )throw new Error('Unexpected reviewed Ojdula geometry override.');
+if(
+ ojdulaShell.schema_version!==1
+ ||ojdulaShell.mode!=='ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL'
+ ||Number(ojdulaShell.relation_id)!==14735731
+ ||ojdulaShell.source_commit_sha!=='f21e4954063a884df9922efa5ac31229c5b51d43'
+ ||ojdulaShell.source_snapshot_id!=='actual-990c892d9d27fa46'
+ ||ojdulaShell.geometry?.type!=='Polygon'
+)throw new Error('Unexpected reviewed Ojdula OSM outer-shell fixture.');
 
 const migrated=structuredClone(policy);
 migrated.policy_version='2026-10-04-v1.4';
@@ -56,6 +67,10 @@ migrated.administrative_geometry_fallbacks={
    osm_relation_id:14735731,
    evidence:OJDULA_REVIEW,
    evidence_sha256:sha256(ojdulaBytes),
+   outer_shell_evidence:OJDULA_OSM_SHELL,
+   outer_shell_evidence_sha256:sha256(ojdulaShellBytes),
+   outer_shell_source_commit_sha:ojdulaShell.source_commit_sha,
+   outer_shell_source_snapshot_id:ojdulaShell.source_snapshot_id,
    source:'OSM shell + ANCPI shared boundary',
    source_object_id:1167,
    inspire_id_local_id:'1.145.64602',
