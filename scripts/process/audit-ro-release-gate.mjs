@@ -225,7 +225,10 @@ if(fallbackBinding){
    check('bretcu_ojdula_hybrid_partition_audit_is_exact',
     Boolean(hybridApplication)
     &&audit?.method==='osm_shell_ancpi_shared_boundary_polygonization_v1'
-    &&Number(audit?.shell_symmetric_difference_m2)<=0.01
+    &&audit?.osm_shell_edges_preserved===true
+    &&Number(audit?.osm_shell_edge_count)>0
+    &&Number(audit?.partition_exterior_edge_count)===Number(audit?.osm_shell_edge_count)
+    &&Number(audit?.area_balance_delta_m2)<=0.01
     &&Number(audit?.overlap_m2)<=0.01
     &&audit?.ancpi_shared_edges_preserved===true
     &&Number(audit?.ancpi_shared_edge_count)>0,
