@@ -28,7 +28,8 @@ if(bretcuFallbackEnabled&&bretcuEntity&&(
  ||bretcuEntity.representation?.source!=='ANCPI RELUAT'
  ||Number(bretcuEntity.representation?.admin_level)!==8
  ||bretcuEntity.geometry?.role!=='administrative_boundary'
- ||bretcuEntity.geometry?.scope!=='uat_fallback'
+ ||bretcuEntity.geometry?.scope!==(hybridPartitionEnabled?'uat_hybrid_partition':'uat_fallback')
+ ||(hybridPartitionEnabled&&bretcuEntity.representation?.partition_mode!=='osm_shell_ancpi_shared_boundary_partition')
  ||bretcuEntity.geometry?.legal_geometry_equivalence_asserted!==false
 ))blockers.push({issue:'bretcu_fallback_contract_drift',actual:bretcuEntity});
 if(ojdulaOverrideEnabled){
