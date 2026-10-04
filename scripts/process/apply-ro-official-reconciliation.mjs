@@ -10,6 +10,7 @@ const COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const ANCPI_FALLBACKS='data/sources/ro-ancpi-uat-fallbacks.json';
 const OFFICIAL_ONLY_RESOLUTIONS='data/sources/ro-official-only-reviewed-resolutions.json';
 const OJDULA_REVIEW='data/sources/ro-ancpi-ojdula-reviewed.json';
+const OJDULA_OSM_SHELL='data/sources/ro-osm-ojdula-14735731-reviewed-shell.json';
 const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const OUTPUT='data/current/ro-official-application.json';
 
@@ -22,6 +23,7 @@ const countyBridge=await read(COUNTY_BRIDGE);
 const ancpiFallbacks=await read(ANCPI_FALLBACKS);
 const officialOnlyResolutions=await read(OFFICIAL_ONLY_RESOLUTIONS);
 const ojdulaReview=await read(OJDULA_REVIEW);
+const ojdulaOsmShell=await read(OJDULA_OSM_SHELL);
 const settlementPolicy=await read(SETTLEMENT_POLICY);
 const ancpiFallbackBinding=settlementPolicy?.administrative_geometry_fallbacks?.RO??null;
 
@@ -244,7 +246,15 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
  const bretcuFeature=featureByCatalogId.get('siruta-u64096');
  const bretcuSource=(ancpiFallbacks.features||[]).find(x=>String(x.legal_id)==='64096');
  if(!bretcuEntity||!bretcuFeature||!bretcuSource)throw new Error('Missing Brețcu–Ojdula partition inputs');
- const osmOjdulaGeometry=structuredClone(ojdulaFeature.geometry);
+ if(
+  ojdulaOsmShell.schema_version!==1
+  ||ojdulaOsmShell.mode!=='ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL'
+  ||Number(ojdulaOsmShell.relation_id)!==14735731
+  ||ojdulaOsmShell.source_commit_sha!=='f21e4954063a884df9922efa5ac31229c5b51d43'
+  ||ojdulaOsmShell.source_snapshot_id!=='actual-990c892d9d27fa46'
+  ||ojdulaOsmShell.geometry?.type!=='Polygon'
+ )throw new Error('Reviewed Ojdula OSM outer-shell fixture mismatch');
+ const osmOjdulaGeometry=structuredClone(ojdulaOsmShell.geometry);
  const partition=buildBretcuOjdulaHybridPartition({
   osmOjdulaGeometry,
   ancpiOjdulaGeometry:source.geometry,
@@ -257,6 +267,9 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
  const partitionMeta={
   mode:'osm_shell_ancpi_shared_boundary_partition',
   osm_shell_relation_id:14735731,
+  osm_shell_evidence:OJDULA_OSM_SHELL,
+  osm_shell_source_commit_sha:ojdulaOsmShell.source_commit_sha,
+  osm_shell_source_snapshot_id:ojdulaOsmShell.source_snapshot_id,
   ancpi_ojdula_source_object_id:source.source_object_id,
   ancpi_bretcu_source_object_id:bretcuSource.source_object_id,
   audit:partition.audit
@@ -269,7 +282,8 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   osm_relation_geometry_accepted_as_outer_shell:true,
   internal_boundary_source:'ANCPI RELUAT',
   internal_boundary_source_object_id:source.source_object_id,
-  partition_mode:partitionMeta.mode
+  partition_mode:partitionMeta.mode,
+  outer_shell_evidence:OJDULA_OSM_SHELL
  };
  existing.geometry={role:'administrative_boundary',scope:'uat_hybrid_partition',legal_geometry_equivalence_asserted:false};
  existing.source='OpenStreetMap';
@@ -292,7 +306,8 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   osm_relation_geometry_accepted_as_outer_shell:true,
   internal_boundary_source:'ANCPI RELUAT',
   internal_boundary_source_object_id:source.source_object_id,
-  partition_mode:partitionMeta.mode
+  partition_mode:partitionMeta.mode,
+  outer_shell_evidence:OJDULA_OSM_SHELL
  };
 
  bretcuEntity.representation={
@@ -303,7 +318,8 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   outer_shell_source:'OpenStreetMap',
   internal_boundary_source:'ANCPI RELUAT',
   internal_boundary_source_object_id:bretcuSource.source_object_id,
-  partition_mode:partitionMeta.mode
+  partition_mode:partitionMeta.mode,
+  outer_shell_evidence:OJDULA_OSM_SHELL
  };
  bretcuEntity.geometry={role:'administrative_boundary',scope:'uat_hybrid_partition',legal_geometry_equivalence_asserted:false};
  bretcuEntity.classification={
