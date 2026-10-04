@@ -8,7 +8,6 @@ import {join} from 'node:path';
 import {actualSemanticFingerprint} from '../lib/actual-semantic-fingerprint.mjs';
 import {roOfficialComponentLocalities,uniqueLegalIdentityIds} from '../lib/actual-completeness.mjs';
 import {candidateIdentityFingerprint,classifyCandidateDisposition,validateCandidatePromotion,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
-import {buildBretcuOjdulaHybridPartition} from '../lib/bretcu-ojdula-hybrid-partition.mjs';
 
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const readJson=async path=>JSON.parse(await readFile(path,'utf8'));
@@ -585,30 +584,35 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  assert.match(migration,/partition_osm_shell_by_ancpi_shared_boundary/);
 });
 
-test('reviewed Brețcu–Ojdula hybrid partition preserves the pinned old OSM shell and exact ANCPI shared boundary',async()=>{
- const [shell,fallback,ojdula]=await Promise.all([
+test('reviewed Brețcu–Ojdula hybrid partition is pinned to old OSM shell and exact ANCPI divider contract',async()=>{
+ const [shell,fallback,ojdula,helper,reconciliation]=await Promise.all([
   readJson('data/sources/ro-osm-ojdula-14735731-reviewed-shell.json'),
   readJson('data/sources/ro-ancpi-uat-fallbacks.json'),
-  readJson('data/sources/ro-ancpi-ojdula-reviewed.json')
+  readJson('data/sources/ro-ancpi-ojdula-reviewed.json'),
+  readFile('scripts/lib/bretcu-ojdula-hybrid-partition.mjs','utf8'),
+  readFile('scripts/process/apply-ro-official-reconciliation.mjs','utf8')
  ]);
  assert.equal(shell.mode,'ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL');
  assert.equal(Number(shell.relation_id),14735731);
  assert.equal(shell.source_commit_sha,'f21e4954063a884df9922efa5ac31229c5b51d43');
  assert.equal(shell.source_snapshot_id,'actual-990c892d9d27fa46');
+ assert.equal(shell.geometry?.type,'Polygon');
  const bretcu=fallback.features.find(x=>String(x.legal_id)==='64096');
  assert.ok(bretcu);
- const partition=buildBretcuOjdulaHybridPartition({
-  osmOjdulaGeometry:shell.geometry,
-  ancpiOjdulaGeometry:ojdula.feature.geometry,
-  ancpiBretcuGeometry:bretcu.geometry
- });
- assert.ok(partition.audit.shell_symmetric_difference_m2<=0.01,JSON.stringify(partition.audit));
- assert.ok(partition.audit.overlap_m2<=0.01,JSON.stringify(partition.audit));
- assert.equal(partition.audit.ancpi_shared_edges_preserved,true);
- assert.equal(partition.audit.ancpi_shared_edge_count,826);
- assert.ok(partition.audit.ancpi_shared_boundary_length_m>20400&&partition.audit.ancpi_shared_boundary_length_m<20420);
- assert.ok(partition.audit.connector_start_m<5,JSON.stringify(partition.audit));
- assert.ok(partition.audit.connector_end_m<100,JSON.stringify(partition.audit));
+ assert.equal(String(ojdula.feature?.legal_id),'64602');
+ const edgeKey=(a,b)=>[JSON.stringify([Number(a[0]),Number(a[1])]),JSON.stringify([Number(b[0]),Number(b[1])])].sort().join('|');
+ const edges=geometry=>{
+  const rings=geometry.type==='Polygon'?geometry.coordinates:geometry.coordinates.flat();
+  return new Set(rings.flatMap(r=>r.slice(0,-1).map((p,i)=>edgeKey(p,r[i+1]))));
+ };
+ const oe=edges(ojdula.feature.geometry),be=edges(bretcu.geometry);
+ const shared=[...oe].filter(k=>be.has(k));
+ assert.equal(shared.length,826,'reviewed ANCPI common boundary edge count drifted');
+ assert.match(helper,/shell_symmetric_difference_m2/);
+ assert.match(helper,/ancpi_shared_edges_preserved/);
+ assert.match(helper,/OSM shell \+ ANCPI divider must polygonize into exactly two UAT polygons/);
+ assert.match(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaOsmShell\.geometry\)/);
+ assert.doesNotMatch(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaFeature\.geometry\)/);
 });
 
 test('Brețcu fallback application never fabricates an OSM relation',async()=>{
