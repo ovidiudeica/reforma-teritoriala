@@ -260,7 +260,7 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   ancpiOjdulaGeometry:source.geometry,
   ancpiBretcuGeometry:bretcuSource.geometry
  });
- if(partition.audit.shell_symmetric_difference_m2>0.01)throw new Error('Hybrid Brețcu–Ojdula union does not preserve the OSM shell');
+ if(partition.audit.shell_symmetric_difference_m2>0.01)throw new Error(`Hybrid Brețcu–Ojdula union does not preserve the OSM shell: symmetric_difference_m2=${partition.audit.shell_symmetric_difference_m2}, overlap_m2=${partition.audit.overlap_m2}, connector_start_m=${partition.audit.connector_start_m}, connector_end_m=${partition.audit.connector_end_m}`);
  if(partition.audit.overlap_m2>0.01)throw new Error('Hybrid Brețcu–Ojdula partition overlaps');
  if(partition.audit.ancpi_shared_edges_preserved!==true)throw new Error('Hybrid Brețcu–Ojdula partition does not preserve ANCPI shared boundary');
 
