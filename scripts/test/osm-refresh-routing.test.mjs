@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
+import {applyMdReviewedParentHierarchyOverrides} from '../lib/md-parent-hierarchy-overrides.mjs';
 
 const wrapperPath='.github/workflows/import-osm.yml';
 const candidatePath='.github/workflows/actual-candidate.yml';
@@ -130,4 +131,45 @@ test('deterministic OSM builder retains all non-network classifier dependencies 
  assert.match(builder,/ro-level9-exception-evidence\.json/);
  assert.match(builder,/const roSemanticByRelation=/);
  assert.match(builder,/const RO_SEMANTIC_CLASSES=/);
+});
+
+
+test('reviewed Chișinău city parent override replaces a sector parent without touching geometry state',()=>{
+ const entities=[
+  {id:'osm-r1691801',jurisdiction:'MD',parent_id:'MD',osm:{relation_id:1691801,admin_level:4,place:'municipality',cuatm_unique_id:'0100'}},
+  {id:'osm-r1813306',jurisdiction:'MD',parent_id:'osm-r1691801',osm:{relation_id:1813306,admin_level:7,place:'borough',cuatm_unique_id:'0110'}},
+  {id:'osm-r1748490',jurisdiction:'MD',parent_id:'osm-r1813306',osm:{relation_id:1748490,admin_level:8,place:'city',cuatm_unique_id:'0100'}}
+ ];
+ const before=structuredClone(entities);
+ const warnings=[];
+ applyMdReviewedParentHierarchyOverrides(entities,warnings);
+ assert.equal(entities[2].parent_id,'osm-r1691801');
+ assert.deepEqual(entities[0].osm,before[0].osm);
+ assert.deepEqual(entities[1].osm,before[1].osm);
+ assert.deepEqual(entities[2].osm,before[2].osm);
+ assert.equal(warnings.length,1);
+ assert.equal(warnings[0].geometry_mutation,false);
+ assert.equal(warnings[0].previous_parent_id,'osm-r1813306');
+ assert.equal(warnings[0].canonical_parent_id,'osm-r1691801');
+});
+
+test('reviewed Chișinău city parent override fails closed on an unexpected parent or CUATM drift',()=>{
+ const base=[
+  {id:'osm-r1691801',jurisdiction:'MD',parent_id:'MD',osm:{relation_id:1691801,admin_level:4,place:'municipality',cuatm_unique_id:'0100'}},
+  {id:'osm-r1813306',jurisdiction:'MD',parent_id:'osm-r1691801',osm:{relation_id:1813306,admin_level:7,place:'borough',cuatm_unique_id:'0110'}},
+  {id:'osm-r1748490',jurisdiction:'MD',parent_id:'osm-r999999',osm:{relation_id:1748490,admin_level:8,place:'city',cuatm_unique_id:'0100'}}
+ ];
+ assert.throws(()=>applyMdReviewedParentHierarchyOverrides(structuredClone(base)),/unexpected geometric parent/);
+ const drift=structuredClone(base);
+ drift[2].parent_id='osm-r1813306';
+ drift[2].osm.cuatm_unique_id='9999';
+ assert.throws(()=>applyMdReviewedParentHierarchyOverrides(drift),/child contract drift/);
+});
+
+test('deterministic OSM builder applies reviewed MD hierarchy override after geometric parent selection and before final classification',async()=>{
+ const builder=await readFile(builderPath,'utf8');
+ const assign=builder.indexOf('assignParents(entities,byId,report.warnings)');
+ const override=builder.indexOf('applyMdReviewedParentHierarchyOverrides(entities,report.warnings)');
+ const finalize=builder.indexOf('finalizeAfterParents(entities)');
+ assert.ok(assign>=0&&override>assign&&finalize>override);
 });
