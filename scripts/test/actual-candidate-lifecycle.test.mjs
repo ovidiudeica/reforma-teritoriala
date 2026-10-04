@@ -571,7 +571,7 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  }
  assert.equal(schema.$defs.entity.properties.id.pattern,'^(?:osm-r[0-9]+|siruta-u[0-9]+)$');
  assert.deepEqual(schema.$defs.entity.properties.representation.properties.source.enum,['OpenStreetMap','ANCPI RELUAT']);
- assert.match(migration,/policy_version='2026-10-03-v1\.3'/);
+ assert.match(migration,/policy_version='2026-10-04-v1\.4'/);
  assert.match(migration,/administrative_geometry_fallbacks/);
  assert.match(migration,/legal_ids:\['64096'\]/);
  assert.match(sourceBundle,/ancpiBinding=policy\?\.administrative_geometry_fallbacks\?\.RO/);
