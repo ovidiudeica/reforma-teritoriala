@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import osmtogeojson from 'osmtogeojson';
 import { area, intersect, featureCollection, pointOnFeature, booleanPointInPolygon } from '@turf/turf';
+import {applyMdReviewedParentHierarchyOverrides} from '../lib/md-parent-hierarchy-overrides.mjs';
 
 const OSM_MANIFEST='data/sources/osm-current.json';
 const OSM_SNAPSHOT_DIR='data/sources/osm-snapshots';
@@ -275,7 +276,9 @@ async function main(){
   if(excluded.length) report.warnings.push({type:'outside_country_boundary_excluded',jurisdiction:code,relation_ids:excluded});
   const entities=polygons.map(f=>entity(code,f,osmSource.snapshot_at));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));
-  assignParents(entities,byId,report.warnings); finalizeAfterParents(entities); all.push(...entities);
+  assignParents(entities,byId,report.warnings);
+  if(code==='MD')applyMdReviewedParentHierarchyOverrides(entities,report.warnings);
+  finalizeAfterParents(entities); all.push(...entities);
   const entityById=new Map(entities.map(e=>[e.id,e]));
   const fc={type:'FeatureCollection',features:polygons.map(f=>{const id=`osm-r${relationId(f)}`;const e=entityById.get(id);return {...f,properties:{...f.properties,catalog_id:id,parent_id:e?.parent_id||null,jurisdiction:code,entity_type:e?.type||'unclassified',classification_confidence:e?.classification?.confidence||'low',geometry_role:e?.geometry?.role||null,geometry_scope:e?.geometry?.scope||null}};})};
   await writeFile(`public/geo/current/${code.toLowerCase()}-administrative.geojson`,JSON.stringify(fc));
