@@ -8,6 +8,7 @@ import {join} from 'node:path';
 import {actualSemanticFingerprint} from '../lib/actual-semantic-fingerprint.mjs';
 import {roOfficialComponentLocalities,uniqueLegalIdentityIds} from '../lib/actual-completeness.mjs';
 import {candidateIdentityFingerprint,classifyCandidateDisposition,validateCandidatePromotion,validateCandidateSemanticManifestBinding} from '../lib/actual-candidate-lifecycle.mjs';
+import {buildBretcuOjdulaHybridPartition} from '../lib/bretcu-ojdula-hybrid-partition.mjs';
 
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const readJson=async path=>JSON.parse(await readFile(path,'utf8'));
@@ -582,6 +583,20 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  assert.equal(ojdula.feature?.inspire_id_local_id,'1.145.64602');
  assert.equal(Number(ojdula.feature?.replacement_osm_relation_id),14735731);
  assert.match(migration,/partition_osm_shell_by_ancpi_shared_boundary/);
+});
+
+test('hybrid Brețcu–Ojdula partition preserves the OSM shell and ANCPI divider',()=>{
+ const osm={type:'Polygon',coordinates:[[[0,0],[10,0],[10,10],[0,10],[0,0]]]};
+ const ancpiOjdula={type:'Polygon',coordinates:[[[0.1,0.1],[4,0.2],[4,9.8],[0.1,9.9],[0.1,0.1]]]};
+ const ancpiBretcu={type:'Polygon',coordinates:[[[4,0.2],[9.9,0.1],[9.9,9.9],[4,9.8],[4,0.2]]]};
+ const result=buildBretcuOjdulaHybridPartition({osmOjdulaGeometry:osm,ancpiOjdulaGeometry:ancpiOjdula,ancpiBretcuGeometry:ancpiBretcu});
+ assert.equal(result.audit.method,'osm_shell_ancpi_shared_boundary_polygonization_v1');
+ assert.ok(result.audit.shell_symmetric_difference_m2<=0.01,result.audit.shell_symmetric_difference_m2);
+ assert.ok(result.audit.overlap_m2<=0.01,result.audit.overlap_m2);
+ assert.equal(result.audit.ancpi_shared_edges_preserved,true);
+ assert.equal(result.audit.ancpi_shared_edge_count,1);
+ assert.ok(result.audit.connector_start_m>0);
+ assert.ok(result.audit.connector_end_m>0);
 });
 
 test('Brețcu fallback application never fabricates an OSM relation',async()=>{
