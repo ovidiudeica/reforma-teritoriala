@@ -155,7 +155,8 @@ if(fallbackBinding){
   && entity?.parent_id==='osm-r2248621'
   && entity?.representation?.source==='ANCPI RELUAT'
   && entity?.geometry?.role==='administrative_boundary'
-  && entity?.geometry?.scope==='uat_fallback'
+  && entity?.geometry?.scope===(hybridPartitionEnabled?'uat_hybrid_partition':'uat_fallback')
+  &&(!hybridPartitionEnabled||entity?.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition')
   && entity?.geometry?.legal_geometry_equivalence_asserted===false
   && entity?.review_required===false,
   {entity_count:bretcu.length,entity});
@@ -163,6 +164,7 @@ if(fallbackBinding){
   master.length===1&&['Polygon','MultiPolygon'].includes(master[0]?.geometry?.type),
   {feature_count:master.length});
  const ojdulaOverride=(fallbackBinding.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
+ const hybridPartitionEnabled=ojdulaOverride?.disposition==='partition_osm_shell_by_ancpi_shared_boundary';
  if(ojdulaOverride){
   const ojdula=(catalog.entities||[]).filter(e=>e.id==='osm-r14735731');
   const ojdulaMaster=(geo.features||[]).filter(x=>x.properties?.catalog_id==='osm-r14735731');
