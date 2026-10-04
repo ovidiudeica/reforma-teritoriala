@@ -2,12 +2,12 @@
   "schema_version": 1,
   "snapshot_id": "actual-149e27f4142b02e2",
   "release_fingerprint_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
-  "manifest_sha256": "8b41f5ab04566873b224084100513e1cc3c08cce22ecb0b79b18cd300b28515f",
+  "manifest_sha256": "4475d67a6a438994545a5b92d0ef3909dc57566e5c6b4f86f91bfe6d372148e8",
   "source_bundle_fingerprint_sha256": "72b78c0d56c0bb0b728c1b2533286e43a00dcf3f4d6ba9b014f13594f350e0da",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
   "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-  "build_environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
+  "build_environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
     "base_snapshot_id": "actual-2041d1665e7dc536",
@@ -19,5 +19,9 @@
     "candidate_commit_sha": "59981351f1ba22e07efc9689d811cc89e5788298",
     "promotion_audit_path": "data/current/actual-candidate-promotion-audit.json"
   },
-  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes."
+  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.",
+  "provenance_hardening": {
+    "previous_manifest_sha256": "8b41f5ab04566873b224084100513e1cc3c08cce22ecb0b79b18cd300b28515f",
+    "reason": "Bind writable HOME fix for the unprivileged OSM source-refresh control phase without changing ACTUAL semantic identity."
+  }
 }

@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "4b420468ec8483ba1e2d65e96e190445e22f9356af4186b3f241885687a567ea",
-  "environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
+  "build_environment_sha256": "8332be32a4bcb61e6af8070876e4e23905193a2abd75af08adb0f0a71d132dcc",
+  "environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
   "checks": [
@@ -266,8 +266,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
-        "actual": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa"
+        "expected": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
+        "actual": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c"
       }
     },
     {

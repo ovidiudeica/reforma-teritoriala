@@ -215,6 +215,7 @@ jobs:
             --env OVERPASS_REQUEST_TIMEOUT_MS=90000 \
             --env OVERPASS_RETRIES_PER_ENDPOINT=2 \
             --env OVERPASS_RETRY_BACKOFF_MS=5000 \
+            --env HOME=/tmp/actual-home \
             "$ACTUAL_RUNTIME_IMAGE" \
             bash -lc '
               set -euo pipefail

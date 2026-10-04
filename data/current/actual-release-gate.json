@@ -4,7 +4,7 @@
   "mode": "ACTUAL",
   "snapshot_id": "actual-149e27f4142b02e2",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "8b41f5ab04566873b224084100513e1cc3c08cce22ecb0b79b18cd300b28515f",
+  "manifest_sha256": "4475d67a6a438994545a5b92d0ef3909dc57566e5c6b4f86f91bfe6d372148e8",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -414,8 +414,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260927.320.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
-          "sha256": "4b420468ec8483ba1e2d65e96e190445e22f9356af4186b3f241885687a567ea"
+          "environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
+          "sha256": "8332be32a4bcb61e6af8070876e4e23905193a2abd75af08adb0f0a71d132dcc"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -424,8 +424,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20260927.320.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
-          "sha256": "4b420468ec8483ba1e2d65e96e190445e22f9356af4186b3f241885687a567ea"
+          "environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
+          "sha256": "8332be32a4bcb61e6af8070876e4e23905193a2abd75af08adb0f0a71d132dcc"
         }
       }
     },
@@ -484,8 +484,12 @@
         "manifest": {
           "algorithm": "actual-semantic-v2",
           "sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
-          "release_identity_basis": "semantic_content_v2",
-          "reused_base_release": false
+          "release_identity_basis": "base_release_compatibility_reuse",
+          "reused_base_release": true,
+          "base_ref": "305826485adb88ee0d0ef3163c35e2b5845adf85",
+          "base_snapshot_id": "actual-149e27f4142b02e2",
+          "base_release_fingerprint_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
+          "base_content_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b"
         },
         "expected": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
         "actual": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b"
@@ -498,8 +502,12 @@
         "content_identity": {
           "algorithm": "actual-semantic-v2",
           "sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
-          "release_identity_basis": "semantic_content_v2",
-          "reused_base_release": false
+          "release_identity_basis": "base_release_compatibility_reuse",
+          "reused_base_release": true,
+          "base_ref": "305826485adb88ee0d0ef3163c35e2b5845adf85",
+          "base_snapshot_id": "actual-149e27f4142b02e2",
+          "base_release_fingerprint_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
+          "base_content_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b"
         }
       }
     },
@@ -509,7 +517,7 @@
       "detail": {
         "expected": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
         "actual": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
-        "reused_base_release": false
+        "reused_base_release": true
       }
     },
     {
@@ -518,7 +526,7 @@
       "detail": {
         "expected": "actual-149e27f4142b02e2",
         "actual": "actual-149e27f4142b02e2",
-        "reused_base_release": false
+        "reused_base_release": true
       }
     },
     {

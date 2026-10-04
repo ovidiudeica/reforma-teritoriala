@@ -173,3 +173,18 @@ test('deterministic OSM builder applies reviewed MD hierarchy override after geo
  const finalize=builder.indexOf('finalizeAfterParents(entities)',override);
  assert.ok(assign>=0&&override>assign&&finalize>override);
 });
+
+test('network-enabled source refresh uses a writable explicit HOME inside the unprivileged runtime',async()=>{
+ const candidate=await readFile(candidatePath,'utf8');
+ const start=candidate.indexOf('Refresh explicitly requested sources in network-enabled control phase');
+ const end=candidate.indexOf('Apply explicitly requested ACTUAL v1.1 geometry policy migration',start);
+ assert.ok(start>=0&&end>start,'source-refresh control phase must exist');
+ const block=candidate.slice(start,end);
+ assert.match(block,/--user "\$\(id -u\):\$\(id -g\)"/);
+ assert.match(block,/--env HOME=\/tmp\/actual-home/);
+ assert.match(block,/mkdir -p "\$HOME"/);
+ assert.match(block,/git config --global --add safe\.directory \/workspace/);
+ assert.match(block,/--network bridge/);
+ assert.doesNotMatch(block,/--privileged/);
+ assert.doesNotMatch(block,/--user 0(?=\s|\\)/);
+});

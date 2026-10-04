@@ -9,8 +9,12 @@
   "content_identity": {
     "algorithm": "actual-semantic-v2",
     "sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
-    "release_identity_basis": "semantic_content_v2",
-    "reused_base_release": false
+    "release_identity_basis": "base_release_compatibility_reuse",
+    "reused_base_release": true,
+    "base_ref": "305826485adb88ee0d0ef3163c35e2b5845adf85",
+    "base_snapshot_id": "actual-149e27f4142b02e2",
+    "base_release_fingerprint_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b",
+    "base_content_sha256": "149e27f4142b02e23014a54013bad5f18307d24d657eb062b579a2a13d71472b"
   },
   "policy": "Stable administrative-content identity separated from exact-byte integrity, exact source provenance, frozen review-evidence provenance, explicit host-trust provenance, kernel-enforced network-denial proof and exact execution-environment provenance. Snapshot identity is derived from canonical semantic ACTUAL content; exact component SHA256 values plus source-bundle, review-evidence-bundle, host-trust, network-denial and build-environment bindings remain mandatory integrity constraints.",
   "jurisdictions": [
@@ -72,8 +76,8 @@
     "runner_label": "ubuntu-24.04",
     "runner_image_version": "20260927.320.1",
     "environment_fingerprint_algorithm": "actual-build-environment-v1",
-    "environment_fingerprint_sha256": "3b6e28451e168080df1b92acaffc866cb565cbd7f3e8b8511a99aacabe6a01fa",
-    "sha256": "4b420468ec8483ba1e2d65e96e190445e22f9356af4186b3f241885687a567ea"
+    "environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
+    "sha256": "8332be32a4bcb61e6af8070876e4e23905193a2abd75af08adb0f0a71d132dcc"
   },
   "catalog": {
     "path": "data/current/entities.json",
