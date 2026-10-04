@@ -185,7 +185,8 @@ export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaG
  const expectedShellEdges=ringEdgeSet(expectedShellRing);
  const partitionExteriorEdges=exteriorEdgeSet([bretcu.geometry,ojdula.geometry]);
  const osmShellEdgesPreserved=sameSet(expectedShellEdges,partitionExteriorEdges);
- const areaBalanceDeltaM2=Math.abs((turf.area(bretcu)+turf.area(ojdula))-turf.area(old));
+ const partitionAreaSumResidualM2=Math.abs((turf.area(bretcu)+turf.area(ojdula))-turf.area(old));
+ const areaBalanceDeltaM2=Math.abs(turf.area(union)-turf.area(old));
  const hybridShared=commonEdgeKeys(bretcu.geometry,ojdula.geometry);
  const missingAncpiEdges=[...shared.edgeKeys].filter(k=>!hybridShared.has(k));
  if(missingAncpiEdges.length)throw new Error('Hybrid partition does not preserve every ANCPI Brețcu–Ojdula shared edge');
@@ -202,6 +203,7 @@ export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaG
    osm_shell_edge_count:expectedShellEdges.size,
    partition_exterior_edge_count:partitionExteriorEdges.size,
    area_balance_delta_m2:areaBalanceDeltaM2,
+   partition_area_sum_residual_m2:partitionAreaSumResidualM2,
    overlap_m2:overlapM2,
    ancpi_shared_edge_count:shared.edgeCount,
    ancpi_shared_edges_preserved:missingAncpiEdges.length===0,
