@@ -222,7 +222,7 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
  if(legalId!=='64602'||override.entity_id!=='osm-r14735731'||Number(override.osm_relation_id)!==14735731||override.evidence!==OJDULA_REVIEW){
   throw new Error('Unexpected reviewed geometry override '+legalId);
  }
- if(override.disposition!=='partition_osm_shell_by_ancpi_shared_boundary')throw new Error('Unexpected Brețcu–Ojdula partition disposition');
+ if(!['replace_osm_geometry_keep_stable_entity_id','partition_osm_shell_by_ancpi_shared_boundary'].includes(override.disposition))throw new Error('Unexpected Brețcu–Ojdula partition disposition');
  const source=ojdulaReview.feature;
  if(String(source?.legal_id)!==legalId||Number(source?.replacement_osm_relation_id)!==14735731)throw new Error('Reviewed Ojdula source identity mismatch');
  const existing=entities.find(e=>e.id===override.entity_id);
