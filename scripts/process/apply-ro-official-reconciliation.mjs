@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import {buildBretcuOjdulaHybridPartition} from '../lib/bretcu-ojdula-hybrid-partition.mjs';
 
@@ -11,6 +12,7 @@ const ANCPI_FALLBACKS='data/sources/ro-ancpi-uat-fallbacks.json';
 const OFFICIAL_ONLY_RESOLUTIONS='data/sources/ro-official-only-reviewed-resolutions.json';
 const OJDULA_REVIEW='data/sources/ro-ancpi-ojdula-reviewed.json';
 const OJDULA_OSM_SHELL='data/sources/ro-osm-ojdula-14735731-reviewed-shell.json';
+const TERMINAL_CLOSURE_REVIEW='data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json';
 const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const OUTPUT='data/current/ro-official-application.json';
 
@@ -24,8 +26,26 @@ const ancpiFallbacks=await read(ANCPI_FALLBACKS);
 const officialOnlyResolutions=await read(OFFICIAL_ONLY_RESOLUTIONS);
 const ojdulaReview=await read(OJDULA_REVIEW);
 const ojdulaOsmShell=await read(OJDULA_OSM_SHELL);
+const terminalClosureBytes=await readFile(TERMINAL_CLOSURE_REVIEW);
+const terminalClosureReview=JSON.parse(terminalClosureBytes.toString('utf8'));
 const settlementPolicy=await read(SETTLEMENT_POLICY);
 const ancpiFallbackBinding=settlementPolicy?.administrative_geometry_fallbacks?.RO??null;
+const sha256=value=>createHash('sha256').update(value).digest('hex');
+const exactCoord=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const exactEdgeKey=(a,b)=>[JSON.stringify(a),JSON.stringify(b)].sort().join('|');
+const geometryRings=geometry=>geometry?.type==='Polygon'?geometry.coordinates:(geometry?.type==='MultiPolygon'?geometry.coordinates.flat():[]);
+const exactEdgeUserIds=(featureCollection,segment)=>{
+ const target=exactEdgeKey(segment.a,segment.b),users=[];
+ for(const feature of featureCollection.features||[]){
+  let found=false;
+  for(const ring of geometryRings(feature.geometry)){
+   for(let i=0;i<ring.length-1;i++)if(exactEdgeKey(ring[i],ring[i+1])===target){found=true;break;}
+   if(found)break;
+  }
+  if(found&&feature.properties?.catalog_id)users.push(String(feature.properties.catalog_id));
+ }
+ return users.sort();
+};
 
 if(reconciliation.status!=='PASS')throw new Error('RO official reconciliation is not PASS');
 if(countyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
@@ -225,6 +245,18 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   throw new Error('Unexpected reviewed geometry override '+legalId);
  }
  if(!['replace_osm_geometry_keep_stable_entity_id','partition_osm_shell_by_ancpi_shared_boundary'].includes(override.disposition))throw new Error('Unexpected Brețcu–Ojdula partition disposition');
+ const terminalClosureBound=Boolean(override.terminal_closure_evidence);
+ if(terminalClosureBound){
+  if(override.terminal_closure_evidence!==TERMINAL_CLOSURE_REVIEW||override.terminal_closure_evidence_sha256!==sha256(terminalClosureBytes))throw new Error('Reviewed Brețcu–Ojdula terminal-closure evidence hash/path mismatch');
+  if(
+   terminalClosureReview.schema_version!==1
+   ||terminalClosureReview.mode!=='ACTUAL_RO_BRETCU_OJDULA_TERMINAL_CLOSURE_REVIEW'
+   ||terminalClosureReview.conclusion!=='retain_legacy_osm_shell_with_reviewed_terminal_adaptations'
+   ||terminalClosureReview.decision?.preserve_legacy_osm_exterior!==true
+   ||terminalClosureReview.decision?.allow_non_ancpi_terminal_closure!==true
+   ||Number(terminalClosureReview.decision?.non_ancpi_terminal_closure_count)!==1
+  )throw new Error('Unexpected Brețcu–Ojdula terminal-closure review contract');
+ }
  const source=ojdulaReview.feature;
  if(String(source?.legal_id)!==legalId||Number(source?.replacement_osm_relation_id)!==14735731)throw new Error('Reviewed Ojdula source identity mismatch');
  const existing=entities.find(e=>e.id===override.entity_id);
@@ -255,6 +287,15 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   ||ojdulaOsmShell.geometry?.type!=='Polygon'
  )throw new Error('Reviewed Ojdula OSM outer-shell fixture mismatch');
  const osmOjdulaGeometry=structuredClone(ojdulaOsmShell.geometry);
+ if(terminalClosureBound){
+  for(const key of ['west','east']){
+   const reviewed=terminalClosureReview.terminals?.[key];
+   if(!reviewed?.shell_segment)throw new Error('Missing reviewed terminal shell segment '+key);
+   const expectedUsers=(reviewed.shell_segment.exact_osm_users||[]).map(x=>String(x.entity_id)).sort();
+   const actualUsers=exactEdgeUserIds(geo,reviewed.shell_segment);
+   if(JSON.stringify(actualUsers)!==JSON.stringify(expectedUsers))throw new Error('Reviewed terminal shell-neighbor set drifted '+key+': expected='+JSON.stringify(expectedUsers)+' actual='+JSON.stringify(actualUsers));
+  }
+ }
  const partition=buildBretcuOjdulaHybridPartition({
   osmOjdulaGeometry,
   ancpiOjdulaGeometry:source.geometry,
@@ -265,6 +306,20 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
  if(partition.audit.partition_polygons_valid!==true)throw new Error('Hybrid Brețcu–Ojdula polygons are not topologically valid');
  if(!Number.isFinite(Number(partition.audit.overlap_m2)))throw new Error('Hybrid Brețcu–Ojdula overlap diagnostic is not finite');
  if(partition.audit.ancpi_shared_path_preserved_with_terminal_clipping!==true)throw new Error('Hybrid Brețcu–Ojdula partition does not preserve the ANCPI shared path after terminal shell clipping');
+ if(terminalClosureBound){
+  const west=terminalClosureReview.terminals.west,east=terminalClosureReview.terminals.east,audit=partition.audit;
+  if(
+   audit.ancpi_terminal_start_mode!==west.role
+   ||audit.ancpi_terminal_end_mode!==east.role
+   ||!exactCoord(audit.ancpi_terminal_start_original_coordinate,west.ancpi_endpoint)
+   ||!exactCoord(audit.ancpi_terminal_start_final_coordinate,west.shell_contact)
+   ||!exactCoord(audit.ancpi_terminal_end_original_coordinate,east.ancpi_endpoint)
+   ||!exactCoord(audit.ancpi_terminal_end_final_coordinate,east.shell_contact)
+   ||Number(audit.non_ancpi_terminal_closure_count)!==1
+   ||Number(audit.ancpi_clipped_start_m)!==Number(west.adjustment_m)
+   ||Number(audit.connector_end_m)!==Number(east.adjustment_m)
+  )throw new Error('Brețcu–Ojdula terminal adaptations drifted from reviewed evidence');
+ }
 
  const partitionMeta={
   mode:'osm_shell_ancpi_shared_boundary_partition',
@@ -274,6 +329,7 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   osm_shell_source_snapshot_id:ojdulaOsmShell.source_snapshot_id,
   ancpi_ojdula_source_object_id:source.source_object_id,
   ancpi_bretcu_source_object_id:bretcuSource.source_object_id,
+  ...(terminalClosureBound?{terminal_closure_evidence:TERMINAL_CLOSURE_REVIEW,terminal_closure_evidence_sha256:sha256(terminalClosureBytes)}:{}),
   audit:partition.audit
  };
 
@@ -285,7 +341,8 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   internal_boundary_source:'ANCPI RELUAT',
   internal_boundary_source_object_id:source.source_object_id,
   partition_mode:partitionMeta.mode,
-  outer_shell_evidence:OJDULA_OSM_SHELL
+  outer_shell_evidence:OJDULA_OSM_SHELL,
+  ...(terminalClosureBound?{internal_boundary_terminal_policy:'ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations',terminal_closure_evidence:TERMINAL_CLOSURE_REVIEW}:{})
  };
  existing.geometry={role:'administrative_boundary',scope:'uat_hybrid_partition',legal_geometry_equivalence_asserted:false};
  existing.source='OpenStreetMap';
@@ -293,7 +350,9 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
  existing.classification={
   ...(existing.classification||{}),
   confidence:'high',
-  reason:'Reviewed hybrid partition: preserve the legacy OSM Ojdula outer shell for neighbor continuity and split Brețcu/Ojdula only along their exact ANCPI shared UAT boundary.',
+  reason:terminalClosureBound
+   ?'Reviewed hybrid partition: preserve the legacy OSM Ojdula exterior for neighbor continuity; retain the ANCPI Brețcu–Ojdula shared path except for the reviewed terminal clip and one 82.596 m non-ANCPI closure to the preserved OSM Tulnici/Vrancea shell.'
+   :'Reviewed hybrid partition: preserve the legacy OSM Ojdula outer shell for neighbor continuity and split Brețcu/Ojdula only along their exact ANCPI shared UAT boundary.',
   evidence:OJDULA_REVIEW,
   official_registry:'SIRUTA',
   official_legal_id:legalId
@@ -309,7 +368,8 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   internal_boundary_source:'ANCPI RELUAT',
   internal_boundary_source_object_id:source.source_object_id,
   partition_mode:partitionMeta.mode,
-  outer_shell_evidence:OJDULA_OSM_SHELL
+  outer_shell_evidence:OJDULA_OSM_SHELL,
+  ...(terminalClosureBound?{internal_boundary_terminal_policy:'ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations',terminal_closure_evidence:TERMINAL_CLOSURE_REVIEW}:{})
  };
 
  bretcuEntity.representation={
@@ -321,12 +381,15 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   internal_boundary_source:'ANCPI RELUAT',
   internal_boundary_source_object_id:bretcuSource.source_object_id,
   partition_mode:partitionMeta.mode,
-  outer_shell_evidence:OJDULA_OSM_SHELL
+  outer_shell_evidence:OJDULA_OSM_SHELL,
+  ...(terminalClosureBound?{internal_boundary_terminal_policy:'ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations',terminal_closure_evidence:TERMINAL_CLOSURE_REVIEW}:{})
  };
  bretcuEntity.geometry={role:'administrative_boundary',scope:'uat_hybrid_partition',legal_geometry_equivalence_asserted:false};
  bretcuEntity.classification={
   ...(bretcuEntity.classification||{}),
-  reason:'Reviewed hybrid partition: Brețcu uses the legacy OSM Ojdula outer shell where it borders neighboring UATs and the exact ANCPI Brețcu–Ojdula shared boundary internally.'
+  reason:terminalClosureBound
+   ?'Reviewed hybrid partition: Brețcu uses the preserved legacy OSM exterior against neighboring UATs; the ANCPI Brețcu–Ojdula shared path is retained except for the reviewed terminal clip and one 82.596 m non-ANCPI closure to the Tulnici/Vrancea shell.'
+   :'Reviewed hybrid partition: Brețcu uses the legacy OSM Ojdula outer shell where it borders neighboring UATs and the exact ANCPI Brețcu–Ojdula shared boundary internally.'
  };
  bretcuFeature.geometry=partition.bretcu_geometry;
  bretcuFeature.properties={
@@ -336,7 +399,8 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   outer_shell_source:'OpenStreetMap',
   internal_boundary_source:'ANCPI RELUAT',
   partition_mode:partitionMeta.mode,
-  outer_shell_evidence:OJDULA_OSM_SHELL
+  outer_shell_evidence:OJDULA_OSM_SHELL,
+  ...(terminalClosureBound?{internal_boundary_terminal_policy:'ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations',terminal_closure_evidence:TERMINAL_CLOSURE_REVIEW}:{})
  };
 
  fallbackApplied.push({

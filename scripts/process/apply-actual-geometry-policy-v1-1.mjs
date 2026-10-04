@@ -7,6 +7,7 @@ const CONTRACT='schemas/actual-geometry-role-contract.json';
 const ANCPI_FALLBACK='data/sources/ro-ancpi-uat-fallbacks.json';
 const OJDULA_REVIEW='data/sources/ro-ancpi-ojdula-reviewed.json';
 const OJDULA_OSM_SHELL='data/sources/ro-osm-ojdula-14735731-reviewed-shell.json';
+const TERMINAL_CLOSURE_REVIEW='data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 
 const policy=JSON.parse(await readFile(POLICY,'utf8'));
@@ -17,6 +18,8 @@ const ojdulaBytes=await readFile(OJDULA_REVIEW);
 const ojdulaReview=JSON.parse(ojdulaBytes.toString('utf8'));
 const ojdulaShellBytes=await readFile(OJDULA_OSM_SHELL);
 const ojdulaShell=JSON.parse(ojdulaShellBytes.toString('utf8'));
+const terminalClosureBytes=await readFile(TERMINAL_CLOSURE_REVIEW);
+const terminalClosureReview=JSON.parse(terminalClosureBytes.toString('utf8'));
 
 if(policy.schema_version!==1||policy.mode!=='ACTUAL'||policy.scope!=='settlements_and_component_localities')throw new Error('Unexpected ACTUAL settlement policy baseline.');
 if(contract.schema_version!==1||contract.contract!=='actual-geometry-role-v1'||contract.mode!=='ACTUAL')throw new Error('Unexpected ACTUAL geometry-role contract.');
@@ -40,9 +43,17 @@ if(
  ||ojdulaShell.source_snapshot_id!=='actual-990c892d9d27fa46'
  ||ojdulaShell.geometry?.type!=='Polygon'
 )throw new Error('Unexpected reviewed Ojdula OSM outer-shell fixture.');
+if(
+ terminalClosureReview.schema_version!==1
+ ||terminalClosureReview.mode!=='ACTUAL_RO_BRETCU_OJDULA_TERMINAL_CLOSURE_REVIEW'
+ ||terminalClosureReview.conclusion!=='retain_legacy_osm_shell_with_reviewed_terminal_adaptations'
+ ||terminalClosureReview.decision?.preserve_legacy_osm_exterior!==true
+ ||terminalClosureReview.decision?.allow_non_ancpi_terminal_closure!==true
+ ||Number(terminalClosureReview.decision?.non_ancpi_terminal_closure_count)!==1
+)throw new Error('Unexpected reviewed Brețcu–Ojdula terminal-closure evidence.');
 
 const migrated=structuredClone(policy);
-migrated.policy_version='2026-10-04-v1.4';
+migrated.policy_version='2026-10-04-v1.5';
 migrated.coverage_contract_version=2;
 migrated.geometry_role_contract={path:CONTRACT,contract:contract.contract,schema_version:contract.schema_version};
 migrated.jurisdictions.RO.official_inventory_selector='SIRUTA records whose level is 3';
@@ -71,7 +82,10 @@ migrated.administrative_geometry_fallbacks={
    outer_shell_evidence_sha256:sha256(ojdulaShellBytes),
    outer_shell_source_commit_sha:ojdulaShell.source_commit_sha,
    outer_shell_source_snapshot_id:ojdulaShell.source_snapshot_id,
-   source:'OSM shell + ANCPI shared boundary',
+   source:'OSM shell + ANCPI shared boundary + reviewed terminal adaptations',
+   terminal_closure_evidence:TERMINAL_CLOSURE_REVIEW,
+   terminal_closure_evidence_sha256:sha256(terminalClosureBytes),
+   terminal_closure_policy:'ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations',
    source_object_id:1167,
    inspire_id_local_id:'1.145.64602',
    paired_legal_id:'64096',

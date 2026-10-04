@@ -17,12 +17,16 @@ const officialOnlyReviewed=await read('data/sources/ro-official-only-reviewed-re
 const otherLevelReviewed=await read('data/sources/ro-other-level-reviewed-resolutions.json');
 const semanticTypeReviewed=await read('data/sources/ro-semantic-type-reviewed-resolutions.json');
 const settlementPolicy=await read('data/sources/actual-settlement-policy.json');
-const ancpiFallbacks=await read('data/sources/ro-ancpi-uat-fallbacks.json');
+const ancpiFallbackBytes=await readFile('data/sources/ro-ancpi-uat-fallbacks.json');
+const ancpiFallbacks=JSON.parse(ancpiFallbackBytes.toString('utf8'));
 const ojdulaReviewBytes=await readFile('data/sources/ro-ancpi-ojdula-reviewed.json');
 const ojdulaReview=JSON.parse(ojdulaReviewBytes.toString('utf8'));
 const ojdulaShellBytes=await readFile('data/sources/ro-osm-ojdula-14735731-reviewed-shell.json');
 const ojdulaShell=JSON.parse(ojdulaShellBytes.toString('utf8'));
+const terminalClosureReviewBytes=await readFile('data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json');
+const terminalClosureReview=JSON.parse(terminalClosureReviewBytes.toString('utf8'));
 const sha256=value=>createHash('sha256').update(value).digest('hex');
+const exactCoord=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const failures=[],checks=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail})};
 const ro=(review.items||[]).filter(x=>x.jurisdiction==='RO');
@@ -136,6 +140,7 @@ if(fallbackBinding){
  check('ancpi_fallback_policy_source_identity_set_is_exact',JSON.stringify(fallbackIds)===JSON.stringify(sourceIds),{policy:fallbackIds,source:sourceIds});
  const ojdulaOverride=(fallbackBinding.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
  const hybridPartitionEnabled=ojdulaOverride?.disposition==='partition_osm_shell_by_ancpi_shared_boundary';
+ const terminalClosureBound=Boolean(ojdulaOverride?.terminal_closure_evidence);
  const bretcu=(catalog.entities||[]).filter(e=>e.id==='siruta-u64096');
  const source=(ancpiFallbacks.features||[]).filter(x=>String(x.legal_id)==='64096');
  const master=(geo.features||[]).filter(x=>x.properties?.catalog_id==='siruta-u64096');
@@ -162,6 +167,7 @@ if(fallbackBinding){
   && entity?.geometry?.role==='administrative_boundary'
   && entity?.geometry?.scope===(hybridPartitionEnabled?'uat_hybrid_partition':'uat_fallback')
   &&(!hybridPartitionEnabled||entity?.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition')
+  &&(!terminalClosureBound||(entity?.representation?.internal_boundary_terminal_policy==='ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations'&&entity?.representation?.terminal_closure_evidence==='data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json'))
   && entity?.geometry?.legal_geometry_equivalence_asserted===false
   && entity?.review_required===false,
   {entity_count:bretcu.length,entity});
@@ -186,6 +192,7 @@ if(fallbackBinding){
     &&oe?.representation?.osm_relation_geometry_accepted_as_outer_shell===true
     &&oe?.representation?.internal_boundary_source==='ANCPI RELUAT'
     &&oe?.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition'
+    &&(!terminalClosureBound||(oe?.representation?.internal_boundary_terminal_policy==='ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations'&&oe?.representation?.terminal_closure_evidence==='data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json'))
     &&oe?.geometry?.role==='administrative_boundary'
     &&oe?.geometry?.scope==='uat_hybrid_partition'
     &&Number(os?.source_object_id)===1167
@@ -212,6 +219,21 @@ if(fallbackBinding){
     &&ojdulaShell.mode==='ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL'
     &&Number(ojdulaShell.relation_id)===14735731,
     {override:ojdulaOverride,shell:{mode:ojdulaShell.mode,relation_id:ojdulaShell.relation_id,source_commit_sha:ojdulaShell.source_commit_sha,source_snapshot_id:ojdulaShell.source_snapshot_id}});
+   if(terminalClosureBound){
+    check('bretcu_ojdula_terminal_closure_evidence_is_exact',
+     ojdulaOverride.terminal_closure_evidence==='data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json'
+     &&ojdulaOverride.terminal_closure_evidence_sha256===sha256(terminalClosureReviewBytes)
+     &&terminalClosureReview.schema_version===1
+     &&terminalClosureReview.mode==='ACTUAL_RO_BRETCU_OJDULA_TERMINAL_CLOSURE_REVIEW'
+     &&terminalClosureReview.conclusion==='retain_legacy_osm_shell_with_reviewed_terminal_adaptations'
+     &&terminalClosureReview.sources?.osm_shell?.sha256===sha256(ojdulaShellBytes)
+     &&terminalClosureReview.sources?.ancpi_ojdula?.sha256===sha256(ojdulaReviewBytes)
+     &&terminalClosureReview.sources?.ancpi_bretcu?.sha256===sha256(ancpiFallbackBytes)
+     &&terminalClosureReview.decision?.preserve_legacy_osm_exterior===true
+     &&terminalClosureReview.decision?.allow_non_ancpi_terminal_closure===true
+     &&Number(terminalClosureReview.decision?.non_ancpi_terminal_closure_count)===1,
+     {evidence:terminalClosureReview});
+   }
    const expectedPartition=buildBretcuOjdulaHybridPartition({
     osmOjdulaGeometry:ojdulaShell.geometry,
     ancpiOjdulaGeometry:os.geometry,
@@ -244,7 +266,20 @@ if(fallbackBinding){
     &&Number(audit?.ancpi_clipped_start_m)<2
     &&Number(audit?.ancpi_clipped_end_m)===0
     &&Number(audit?.connector_start_m)===0
-    &&Number.isFinite(Number(audit?.connector_end_m)),
+    &&Number.isFinite(Number(audit?.connector_end_m))
+    &&(!terminalClosureBound||(
+      audit?.ancpi_terminal_start_mode===terminalClosureReview.terminals?.west?.role
+      &&audit?.ancpi_terminal_end_mode===terminalClosureReview.terminals?.east?.role
+      &&exactCoord(audit?.ancpi_terminal_start_original_coordinate,terminalClosureReview.terminals?.west?.ancpi_endpoint)
+      &&exactCoord(audit?.ancpi_terminal_start_final_coordinate,terminalClosureReview.terminals?.west?.shell_contact)
+      &&exactCoord(audit?.ancpi_terminal_end_original_coordinate,terminalClosureReview.terminals?.east?.ancpi_endpoint)
+      &&exactCoord(audit?.ancpi_terminal_end_final_coordinate,terminalClosureReview.terminals?.east?.shell_contact)
+      &&Number(audit?.non_ancpi_terminal_closure_count)===1
+      &&Number(audit?.ancpi_clipped_start_m)===Number(terminalClosureReview.terminals?.west?.adjustment_m)
+      &&Number(audit?.connector_end_m)===Number(terminalClosureReview.terminals?.east?.adjustment_m)
+      &&hybridApplication?.partition?.terminal_closure_evidence==='data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json'
+      &&hybridApplication?.partition?.terminal_closure_evidence_sha256===sha256(terminalClosureReviewBytes)
+    )),
     {application:hybridApplication??null});
   }else{
    check('ojdula_master_matches_ancpi_exactly',
