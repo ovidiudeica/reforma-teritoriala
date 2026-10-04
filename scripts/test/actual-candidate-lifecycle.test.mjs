@@ -609,6 +609,9 @@ test('reviewed Brețcu–Ojdula hybrid partition is pinned to old OSM shell and 
  const shared=[...oe].filter(k=>be.has(k));
  assert.equal(shared.length,826,'reviewed ANCPI common boundary edge count drifted');
  assert.match(helper,/shell_symmetric_difference_m2/);
+ assert.match(helper,/osm_shell_edges_preserved/);
+ assert.match(helper,/area_balance_delta_m2/);
+ assert.match(helper,/exteriorEdgeSet/);
  assert.match(helper,/ancpi_shared_edges_preserved/);
  assert.match(helper,/circularArc/);
  assert.match(helper,/Projected ANCPI divider endpoints are not distinct vertices on the OSM shell/);
