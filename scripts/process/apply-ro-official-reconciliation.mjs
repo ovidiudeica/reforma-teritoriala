@@ -333,7 +333,8 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   osm_shell_relation_id:14735731,
   outer_shell_source:'OpenStreetMap',
   internal_boundary_source:'ANCPI RELUAT',
-  partition_mode:partitionMeta.mode
+  partition_mode:partitionMeta.mode,
+  outer_shell_evidence:OJDULA_OSM_SHELL
  };
 
  fallbackApplied.push({
