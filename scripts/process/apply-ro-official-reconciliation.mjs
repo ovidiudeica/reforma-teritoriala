@@ -262,8 +262,9 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
  });
  if(partition.audit.osm_shell_edges_preserved!==true)throw new Error('Hybrid Brețcu–Ojdula exterior does not preserve the reviewed OSM shell edges');
  if(partition.audit.exact_partition_boundary_edge_proof!==true)throw new Error('Hybrid Brețcu–Ojdula exact boundary-edge proof failed');
+ if(partition.audit.partition_polygons_valid!==true)throw new Error('Hybrid Brețcu–Ojdula polygons are not topologically valid');
  if(!Number.isFinite(Number(partition.audit.overlap_m2)))throw new Error('Hybrid Brețcu–Ojdula overlap diagnostic is not finite');
- if(partition.audit.ancpi_shared_edges_preserved!==true)throw new Error('Hybrid Brețcu–Ojdula partition does not preserve ANCPI shared boundary');
+ if(partition.audit.ancpi_shared_path_preserved_with_terminal_clipping!==true)throw new Error('Hybrid Brețcu–Ojdula partition does not preserve the ANCPI shared path after terminal shell clipping');
 
  const partitionMeta={
   mode:'osm_shell_ancpi_shared_boundary_partition',
