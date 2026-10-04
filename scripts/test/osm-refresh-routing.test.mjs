@@ -169,7 +169,7 @@ test('reviewed Chișinău city parent override fails closed on an unexpected par
 test('deterministic OSM builder applies reviewed MD hierarchy override after geometric parent selection and before final classification',async()=>{
  const builder=await readFile(builderPath,'utf8');
  const assign=builder.indexOf('assignParents(entities,byId,report.warnings)');
- const override=builder.indexOf('applyMdReviewedParentHierarchyOverrides(entities,report.warnings)');
- const finalize=builder.indexOf('finalizeAfterParents(entities)');
+ const override=builder.indexOf('applyMdReviewedParentHierarchyOverrides(entities,report.warnings)',assign);
+ const finalize=builder.indexOf('finalizeAfterParents(entities)',override);
  assert.ok(assign>=0&&override>assign&&finalize>override);
 });
