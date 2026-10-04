@@ -31,7 +31,7 @@ if(
 )throw new Error('Unexpected reviewed Ojdula geometry override.');
 
 const migrated=structuredClone(policy);
-migrated.policy_version='2026-10-03-v1.3';
+migrated.policy_version='2026-10-04-v1.4';
 migrated.coverage_contract_version=2;
 migrated.geometry_role_contract={path:CONTRACT,contract:contract.contract,schema_version:contract.schema_version};
 migrated.jurisdictions.RO.official_inventory_selector='SIRUTA records whose level is 3';
@@ -56,10 +56,12 @@ migrated.administrative_geometry_fallbacks={
    osm_relation_id:14735731,
    evidence:OJDULA_REVIEW,
    evidence_sha256:sha256(ojdulaBytes),
-   source:'ANCPI RELUAT',
+   source:'OSM shell + ANCPI shared boundary',
    source_object_id:1167,
    inspire_id_local_id:'1.145.64602',
-   disposition:'replace_osm_geometry_keep_stable_entity_id'
+   paired_legal_id:'64096',
+   paired_entity_id:'siruta-u64096',
+   disposition:'partition_osm_shell_by_ancpi_shared_boundary'
   }]
  }
 };
