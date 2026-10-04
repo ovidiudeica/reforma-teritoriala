@@ -367,15 +367,28 @@ check('all_ro_counties_have_siruta_county_identity',roCounties.every(e=>e.legal?
 check('all_ro_county_geojson_features_have_siruta_identity',roCounties.every(e=>{
  const p=featureByCatalogId.get(e.id)?.properties;return p?.legal_registry==='SIRUTA'&&p?.legal_type==='county'&&String(p?.legal_id||'')===String(e.legal?.id||'');
 }),{});
+const reviewedOverrides=ancpiFallbackBinding?.reviewed_geometry_overrides||[];
+const reviewedOverrideActivationExact=reviewedOverrides.every(override=>{
+ const expectedMode=override.disposition==='partition_osm_shell_by_ancpi_shared_boundary'
+  ?'partition_osm_shell_by_ancpi_shared_boundary'
+  :override.disposition==='replace_osm_geometry_keep_stable_entity_id'
+   ?'replace_osm_geometry'
+   :null;
+ return Boolean(expectedMode)&&fallbackApplied.some(x=>
+  x.entity_id===override.entity_id
+  &&String(x.legal_id)===String(override.legal_id)
+  &&x.mode===expectedMode
+  &&Number(x.replaced_osm_relation_id)===Number(override.osm_relation_id)
+ );
+});
 check('ancpi_reviewed_fallback_activation_is_exact',
  !ancpiFallbackBinding
  ||(
   fallbackApplied.some(x=>x.entity_id==='siruta-u64096'&&x.legal_id==='64096'&&x.mode==='add_missing_uat')
-  &&(!(ancpiFallbackBinding.reviewed_geometry_overrides||[]).length
-    ||fallbackApplied.some(x=>x.entity_id==='osm-r14735731'&&x.legal_id==='64602'&&x.mode==='partition_osm_shell_by_ancpi_shared_boundary'&&Number(x.replaced_osm_relation_id)===14735731))
-  &&fallbackApplied.length===(ancpiFallbackBinding.legal_ids||[]).length+(ancpiFallbackBinding.reviewed_geometry_overrides||[]).length
+  &&reviewedOverrideActivationExact
+  &&fallbackApplied.length===(ancpiFallbackBinding.legal_ids||[]).length+reviewedOverrides.length
  ),
- {enabled:Boolean(ancpiFallbackBinding),authorized_ids:(ancpiFallbackBinding?.legal_ids||[]).map(String).sort(),reviewed_geometry_overrides:ancpiFallbackBinding?.reviewed_geometry_overrides||[],fallback_applied:fallbackApplied});
+ {enabled:Boolean(ancpiFallbackBinding),authorized_ids:(ancpiFallbackBinding?.legal_ids||[]).map(String).sort(),reviewed_geometry_overrides:reviewedOverrides,fallback_applied:fallbackApplied});
 
 const report={
  schema_version:1,
