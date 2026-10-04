@@ -585,12 +585,13 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
 });
 
 test('reviewed Brețcu–Ojdula hybrid partition is pinned to old OSM shell and exact ANCPI divider contract',async()=>{
- const [shell,fallback,ojdula,helper,reconciliation]=await Promise.all([
+ const [shell,fallback,ojdula,helper,reconciliation,roGate]=await Promise.all([
   readJson('data/sources/ro-osm-ojdula-14735731-reviewed-shell.json'),
   readJson('data/sources/ro-ancpi-uat-fallbacks.json'),
   readJson('data/sources/ro-ancpi-ojdula-reviewed.json'),
   readFile('scripts/lib/bretcu-ojdula-hybrid-partition.mjs','utf8'),
-  readFile('scripts/process/apply-ro-official-reconciliation.mjs','utf8')
+  readFile('scripts/process/apply-ro-official-reconciliation.mjs','utf8'),
+  readFile('scripts/process/audit-ro-release-gate.mjs','utf8')
  ]);
  assert.equal(shell.mode,'ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL');
  assert.equal(Number(shell.relation_id),14735731);
@@ -625,6 +626,9 @@ test('reviewed Brețcu–Ojdula hybrid partition is pinned to old OSM shell and 
  assert.match(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaOsmShell\.geometry\)/);
  assert.match(reconciliation,/exact_partition_boundary_edge_proof/);
  assert.doesNotMatch(reconciliation,/area_balance_delta_m2>0\.01/);
+ assert.doesNotMatch(reconciliation,/overlap_m2>0\.01/);
+ assert.match(roGate,/exact_partition_boundary_edge_proof/);
+ assert.doesNotMatch(roGate,/Number\(audit\?\.overlap_m2\)<=0\.01/);
  assert.doesNotMatch(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaFeature\.geometry\)/);
 });
 
