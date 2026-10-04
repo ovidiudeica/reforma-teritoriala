@@ -581,6 +581,7 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  assert.equal(Number(ojdula.feature?.source_object_id),1167);
  assert.equal(ojdula.feature?.inspire_id_local_id,'1.145.64602');
  assert.equal(Number(ojdula.feature?.replacement_osm_relation_id),14735731);
+ assert.match(migration,/partition_osm_shell_by_ancpi_shared_boundary/);
 });
 
 test('Brețcu fallback application never fabricates an OSM relation',async()=>{
