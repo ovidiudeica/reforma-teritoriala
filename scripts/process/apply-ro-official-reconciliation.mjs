@@ -228,10 +228,22 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
  const existing=entities.find(e=>e.id===override.entity_id);
  if(!existing||String(existing.legal?.id||'')!==legalId||Number(existing.osm?.relation_id)!==14735731)throw new Error('Reviewed Ojdula entity binding mismatch');
  const ojdulaFeature=featureByCatalogId.get(existing.id);
+ if(!ojdulaFeature)throw new Error('Missing Ojdula master feature');
+ if(override.disposition==='replace_osm_geometry_keep_stable_entity_id'){
+  existing.representation={source:'ANCPI RELUAT',admin_level:8,source_object_id:source.source_object_id,inspire_id_local_id:source.inspire_id_local_id,inspire_id_version_id:source.inspire_id_version_id,national_code:source.national_code,reviewed_osm_relation_id:14735731,osm_relation_geometry_accepted:false};
+  existing.geometry={role:'administrative_boundary',scope:'uat_fallback',legal_geometry_equivalence_asserted:false};
+  existing.source='ANCPI RELUAT';
+  existing.source_url=ojdulaReview.source?.source_url||null;
+  existing.classification={...(existing.classification||{}),confidence:'high',reason:'Reviewed geometry override: OSM relation 14735731 merges Ojdula with the distinct Brețcu UAT; current Ojdula geometry is the exact ANCPI/RELUAT SIRUTA 64602 polygon.',evidence:OJDULA_REVIEW,official_registry:'SIRUTA',official_legal_id:legalId};
+  ojdulaFeature.geometry=source.geometry;
+  ojdulaFeature.properties={...(ojdulaFeature.properties||{}),geometry_role:'administrative_boundary',geometry_scope:'uat_fallback',source:'ANCPI RELUAT',source_object_id:source.source_object_id,inspire_id_local_id:source.inspire_id_local_id,national_code:source.national_code,reviewed_osm_relation_id:14735731,osm_relation_geometry_accepted:false};
+  fallbackApplied.push({mode:'replace_osm_geometry',entity_id:existing.id,legal_id:legalId,legal_type:existing.type,parent_id:existing.parent_id,source_object_id:source.source_object_id,inspire_id_local_id:source.inspire_id_local_id,replaced_osm_relation_id:14735731});
+  continue;
+ }
  const bretcuEntity=entities.find(e=>e.id==='siruta-u64096');
  const bretcuFeature=featureByCatalogId.get('siruta-u64096');
  const bretcuSource=(ancpiFallbacks.features||[]).find(x=>String(x.legal_id)==='64096');
- if(!ojdulaFeature||!bretcuEntity||!bretcuFeature||!bretcuSource)throw new Error('Missing Brețcu–Ojdula partition inputs');
+ if(!bretcuEntity||!bretcuFeature||!bretcuSource)throw new Error('Missing Brețcu–Ojdula partition inputs');
  const osmOjdulaGeometry=structuredClone(ojdulaFeature.geometry);
  const partition=buildBretcuOjdulaHybridPartition({
   osmOjdulaGeometry,
