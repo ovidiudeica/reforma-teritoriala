@@ -610,7 +610,9 @@ test('reviewed Brețcu–Ojdula hybrid partition is pinned to old OSM shell and 
  assert.equal(shared.length,826,'reviewed ANCPI common boundary edge count drifted');
  assert.match(helper,/shell_symmetric_difference_m2/);
  assert.match(helper,/ancpi_shared_edges_preserved/);
- assert.match(helper,/OSM shell \+ ANCPI divider must polygonize into exactly two UAT polygons/);
+ assert.match(helper,/circularArc/);
+ assert.match(helper,/Projected ANCPI divider endpoints are not distinct vertices on the OSM shell/);
+ assert.doesNotMatch(helper,/turf\.polygonize/);
  assert.match(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaOsmShell\.geometry\)/);
  assert.doesNotMatch(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaFeature\.geometry\)/);
 });

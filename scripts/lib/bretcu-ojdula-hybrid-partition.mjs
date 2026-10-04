@@ -124,14 +124,33 @@ export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaG
  const startSnap=nearestShellSnap(lines,shared.coordinates[0]);
  const endSnap=nearestShellSnap(lines,shared.coordinates.at(-1));
  const splitShell=insertSnaps(lines,[startSnap,endSnap]);
- const dividerCoords=[startSnap.coordinate,...shared.coordinates,endSnap.coordinate].filter((c,i,a)=>i===0||!sameCoord(c,a[i-1]));
- const divider=turf.lineString(dividerCoords);
- const polygonized=turf.polygonize(turf.featureCollection([...splitShell,divider]));
- const candidates=(polygonized.features||[]).filter(p=>{
-  if(turf.area(p)<1)return false;
-  try{return turf.booleanPointInPolygon(turf.pointOnFeature(p),old);}catch{return false;}
- }).sort((a,b)=>turf.area(b)-turf.area(a));
- if(candidates.length!==2)throw new Error('OSM shell + ANCPI divider must polygonize into exactly two UAT polygons; got '+candidates.length);
+ if(splitShell.length!==1)throw new Error('Reviewed OSM shell must contain exactly one exterior ring');
+ const shellCoords=splitShell[0].geometry.coordinates.slice(0,-1);
+ const startIndex=shellCoords.findIndex(c=>sameCoord(c,startSnap.coordinate));
+ const endIndex=shellCoords.findIndex(c=>sameCoord(c,endSnap.coordinate));
+ if(startIndex<0||endIndex<0||startIndex===endIndex)throw new Error('Projected ANCPI divider endpoints are not distinct vertices on the OSM shell');
+ const circularArc=(coords,from,to)=>{
+  const out=[coords[from]];
+  let i=from,guard=0;
+  while(i!==to){
+   i=(i+1)%coords.length;
+   out.push(coords[i]);
+   if(++guard>coords.length)throw new Error('OSM shell arc traversal did not terminate');
+  }
+  return out;
+ };
+ const closeRing=ring=>{
+  const out=ring.filter((coord,index,array)=>index===0||!sameCoord(coord,array[index-1]));
+  if(!sameCoord(out[0],out.at(-1)))out.push(out[0]);
+  return out;
+ };
+ const dividerCoords=[startSnap.coordinate,...shared.coordinates,endSnap.coordinate].filter((coord,index,array)=>index===0||!sameCoord(coord,array[index-1]));
+ const forwardArc=circularArc(shellCoords,startIndex,endIndex);
+ const reverseArc=circularArc(shellCoords,endIndex,startIndex);
+ const forwardRing=closeRing([...forwardArc,...dividerCoords.toReversed().slice(1)]);
+ const reverseRing=closeRing([...reverseArc,...dividerCoords.slice(1)]);
+ const candidates=[turf.polygon([forwardRing]),turf.polygon([reverseRing])];
+ if(candidates.some(p=>turf.area(p)<1))throw new Error('OSM shell + ANCPI divider produced a degenerate partition polygon');
  const scores=candidates.map(p=>intersectionArea(p.geometry,ancpiB.geometry));
  const bIndex=scores[0]>=scores[1]?0:1;
  const bretcu=candidates[bIndex],ojdula=candidates[1-bIndex];
