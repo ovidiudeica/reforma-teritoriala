@@ -131,6 +131,8 @@ if(fallbackBinding){
  const fallbackIds=(fallbackBinding.legal_ids||[]).map(String).sort();
  const sourceIds=(ancpiFallbacks.features||[]).map(x=>String(x.legal_id)).sort();
  check('ancpi_fallback_policy_source_identity_set_is_exact',JSON.stringify(fallbackIds)===JSON.stringify(sourceIds),{policy:fallbackIds,source:sourceIds});
+ const ojdulaOverride=(fallbackBinding.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
+ const hybridPartitionEnabled=ojdulaOverride?.disposition==='partition_osm_shell_by_ancpi_shared_boundary';
  const bretcu=(catalog.entities||[]).filter(e=>e.id==='siruta-u64096');
  const source=(ancpiFallbacks.features||[]).filter(x=>String(x.legal_id)==='64096');
  const master=(geo.features||[]).filter(x=>x.properties?.catalog_id==='siruta-u64096');
@@ -163,8 +165,6 @@ if(fallbackBinding){
  check('bretcu_ancpi_fallback_master_geometry_is_exactly_once',
   master.length===1&&['Polygon','MultiPolygon'].includes(master[0]?.geometry?.type),
   {feature_count:master.length});
- const ojdulaOverride=(fallbackBinding.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
- const hybridPartitionEnabled=ojdulaOverride?.disposition==='partition_osm_shell_by_ancpi_shared_boundary';
  if(ojdulaOverride){
   const ojdula=(catalog.entities||[]).filter(e=>e.id==='osm-r14735731');
   const ojdulaMaster=(geo.features||[]).filter(x=>x.properties?.catalog_id==='osm-r14735731');
