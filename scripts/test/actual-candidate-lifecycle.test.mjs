@@ -613,12 +613,18 @@ test('reviewed Brețcu–Ojdula hybrid partition is pinned to old OSM shell and 
  assert.match(helper,/area_balance_delta_m2/);
  assert.match(helper,/partition_area_sum_residual_m2/);
  assert.match(helper,/turf\.area\(union\)-turf\.area\(old\)/);
+ assert.match(helper,/exact_partition_boundary_edge_proof/);
+ assert.match(helper,/invalid_edge_multiplicity_count/);
+ assert.match(helper,/partition_interior_edge_count/);
+ assert.match(helper,/edgeMultiplicity/);
  assert.match(helper,/exteriorEdgeSet/);
  assert.match(helper,/ancpi_shared_edges_preserved/);
  assert.match(helper,/circularArc/);
  assert.match(helper,/Projected ANCPI divider endpoints are not distinct vertices on the OSM shell/);
  assert.doesNotMatch(helper,/turf\.polygonize/);
  assert.match(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaOsmShell\.geometry\)/);
+ assert.match(reconciliation,/exact_partition_boundary_edge_proof/);
+ assert.doesNotMatch(reconciliation,/area_balance_delta_m2>0\.01/);
  assert.doesNotMatch(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaFeature\.geometry\)/);
 });
 

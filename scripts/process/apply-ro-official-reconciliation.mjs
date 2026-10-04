@@ -261,7 +261,7 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
   ancpiBretcuGeometry:bretcuSource.geometry
  });
  if(partition.audit.osm_shell_edges_preserved!==true)throw new Error('Hybrid Brețcu–Ojdula exterior does not preserve the reviewed OSM shell edges');
- if(partition.audit.area_balance_delta_m2>0.01)throw new Error(`Hybrid Brețcu–Ojdula area balance drift: ${partition.audit.area_balance_delta_m2} m2`);
+ if(partition.audit.exact_partition_boundary_edge_proof!==true)throw new Error('Hybrid Brețcu–Ojdula exact boundary-edge proof failed');
  if(partition.audit.overlap_m2>0.01)throw new Error('Hybrid Brețcu–Ojdula partition overlaps');
  if(partition.audit.ancpi_shared_edges_preserved!==true)throw new Error('Hybrid Brețcu–Ojdula partition does not preserve ANCPI shared boundary');
 

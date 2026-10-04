@@ -112,7 +112,7 @@ function ringEdgeSet(ring){
  return out;
 }
 
-function exteriorEdgeSet(geometries){
+function edgeMultiplicity(geometries){
  const counts=new Map();
  for(const geometry of geometries){
   for(const ring of geometryRings(geometry)){
@@ -122,7 +122,11 @@ function exteriorEdgeSet(geometries){
    }
   }
  }
- return new Set([...counts].filter(([,count])=>count===1).map(([key])=>key));
+ return counts;
+}
+
+function exteriorEdgeSet(geometries){
+ return new Set([...edgeMultiplicity(geometries)].filter(([,count])=>count===1).map(([key])=>key));
 }
 
 function sameSet(a,b){
@@ -183,13 +187,18 @@ export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaG
  const shellSymDiffM2=differenceArea(old.geometry,union.geometry)+differenceArea(union.geometry,old.geometry);
  const expectedShellRing=[...splitShell[0].geometry.coordinates];
  const expectedShellEdges=ringEdgeSet(expectedShellRing);
- const partitionExteriorEdges=exteriorEdgeSet([bretcu.geometry,ojdula.geometry]);
+ const partitionEdgeCounts=edgeMultiplicity([bretcu.geometry,ojdula.geometry]);
+ const partitionExteriorEdges=new Set([...partitionEdgeCounts].filter(([,count])=>count===1).map(([key])=>key));
+ const partitionInteriorEdges=new Set([...partitionEdgeCounts].filter(([,count])=>count===2).map(([key])=>key));
+ const invalidMultiplicity=[...partitionEdgeCounts].filter(([,count])=>count!==1&&count!==2);
  const osmShellEdgesPreserved=sameSet(expectedShellEdges,partitionExteriorEdges);
  const partitionAreaSumResidualM2=Math.abs((turf.area(bretcu)+turf.area(ojdula))-turf.area(old));
  const areaBalanceDeltaM2=Math.abs(turf.area(union)-turf.area(old));
  const hybridShared=commonEdgeKeys(bretcu.geometry,ojdula.geometry);
+ const partitionBoundaryEdgeProof=invalidMultiplicity.length===0&&sameSet(partitionInteriorEdges,hybridShared)&&osmShellEdgesPreserved;
  const missingAncpiEdges=[...shared.edgeKeys].filter(k=>!hybridShared.has(k));
  if(missingAncpiEdges.length)throw new Error('Hybrid partition does not preserve every ANCPI Brețcu–Ojdula shared edge');
+ if(!partitionBoundaryEdgeProof)throw new Error('Hybrid partition boundary-edge multiplicity proof failed');
  if(!osmShellEdgesPreserved)throw new Error('Hybrid partition exterior edges differ from the reviewed OSM shell');
  return {
   bretcu_geometry:bretcu.geometry,
@@ -202,6 +211,9 @@ export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaG
    osm_shell_edges_preserved:osmShellEdgesPreserved,
    osm_shell_edge_count:expectedShellEdges.size,
    partition_exterior_edge_count:partitionExteriorEdges.size,
+   partition_interior_edge_count:partitionInteriorEdges.size,
+   exact_partition_boundary_edge_proof:partitionBoundaryEdgeProof,
+   invalid_edge_multiplicity_count:invalidMultiplicity.length,
    area_balance_delta_m2:areaBalanceDeltaM2,
    partition_area_sum_residual_m2:partitionAreaSumResidualM2,
    overlap_m2:overlapM2,
