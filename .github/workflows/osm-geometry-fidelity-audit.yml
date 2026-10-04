@@ -1,0 +1,43 @@
+name: Diagnostic OSM geometry fidelity audit
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/process/audit-osm-map-geometry-fidelity.mjs'
+      - '.github/workflows/osm-geometry-fidelity-audit.yml'
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    container:
+      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check out diagnostic revision
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 1
+
+      - name: Trust mounted workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Install pinned dependencies from vendored offline bundle
+        run: npm run install:actual-offline-deps
+
+      - name: Audit persisted and live OSM boundary fidelity
+        run: node scripts/process/audit-osm-map-geometry-fidelity.mjs
+
+      - name: Upload diagnostic report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: osm-geometry-fidelity-audit
+          path: /tmp/osm-geometry-fidelity.json
+          if-no-files-found: warn
