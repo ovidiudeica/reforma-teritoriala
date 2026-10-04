@@ -2,9 +2,9 @@
   "schema_version": 2,
   "generated_at": "2026-09-27T20:37:27.458Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-b7e7d80db0d2d313",
+  "snapshot_id": "actual-2041d1665e7dc536",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "164396cde2904c37a9020e491c7a896a2dac9d026c704dd677b2783ab23f6441",
+  "manifest_sha256": "74b9014c35a0c0223bdd813afaede929c70c4b0b5cc1a1d4c1eb287eaea0505f",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -66,7 +66,7 @@
         "manifest": {
           "path": "data/sources/actual-settlement-policy.json",
           "schema_version": 1,
-          "policy_version": "2026-10-04-v1.4",
+          "policy_version": "2026-10-04-v1.5",
           "coverage_contract_version": 2,
           "scope": "settlements_and_component_localities",
           "geometry_role_contract": {
@@ -99,7 +99,10 @@
                   "outer_shell_evidence_sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
                   "outer_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
                   "outer_shell_source_snapshot_id": "actual-990c892d9d27fa46",
-                  "source": "OSM shell + ANCPI shared boundary",
+                  "source": "OSM shell + ANCPI shared boundary + reviewed terminal adaptations",
+                  "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+                  "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
+                  "terminal_closure_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
                   "source_object_id": 1167,
                   "inspire_id_local_id": "1.145.64602",
                   "paired_legal_id": "64096",
@@ -109,11 +112,11 @@
               ]
             }
           },
-          "sha256": "2ef7bb1a3374d6084ad30c20a146f148235400a0cd9b51e968cbaadd6480973a"
+          "sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5"
         },
         "actual": {
           "schema_version": 1,
-          "policy_version": "2026-10-04-v1.4",
+          "policy_version": "2026-10-04-v1.5",
           "coverage_contract_version": 2,
           "scope": "settlements_and_component_localities",
           "geometry_role_contract": {
@@ -121,7 +124,7 @@
             "contract": "actual-geometry-role-v1",
             "schema_version": 1
           },
-          "sha256": "2ef7bb1a3374d6084ad30c20a146f148235400a0cd9b51e968cbaadd6480973a",
+          "sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5",
           "public_contract": "actual-public-entity-v2",
           "administrative_geometry_fallbacks": {
             "RO": {
@@ -147,7 +150,10 @@
                   "outer_shell_evidence_sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
                   "outer_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
                   "outer_shell_source_snapshot_id": "actual-990c892d9d27fa46",
-                  "source": "OSM shell + ANCPI shared boundary",
+                  "source": "OSM shell + ANCPI shared boundary + reviewed terminal adaptations",
+                  "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+                  "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
+                  "terminal_closure_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
                   "source_object_id": 1167,
                   "inspire_id_local_id": "1.145.64602",
                   "paired_legal_id": "64096",
@@ -467,8 +473,8 @@
       "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "40b4b13017e1e470940542f04093aed0330d73b8a99fc5a1f327da9568a42f10",
-        "actual": "40b4b13017e1e470940542f04093aed0330d73b8a99fc5a1f327da9568a42f10"
+        "expected": "d613a216e2ef0a37d92bb0a8b2d579c81d33a9e79dc07dd3decb73874068bdf7",
+        "actual": "d613a216e2ef0a37d92bb0a8b2d579c81d33a9e79dc07dd3decb73874068bdf7"
       }
     },
     {
@@ -477,12 +483,12 @@
       "detail": {
         "manifest": {
           "algorithm": "actual-semantic-v2",
-          "sha256": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
+          "sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
           "release_identity_basis": "semantic_content_v2",
           "reused_base_release": false
         },
-        "expected": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
-        "actual": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964"
+        "expected": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
+        "actual": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f"
       }
     },
     {
@@ -491,7 +497,7 @@
       "detail": {
         "content_identity": {
           "algorithm": "actual-semantic-v2",
-          "sha256": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
+          "sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
           "release_identity_basis": "semantic_content_v2",
           "reused_base_release": false
         }
@@ -501,8 +507,8 @@
       "name": "release_fingerprint_matches_semantic_identity",
       "ok": true,
       "detail": {
-        "expected": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
-        "actual": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
+        "expected": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
+        "actual": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
         "reused_base_release": false
       }
     },
@@ -510,8 +516,8 @@
       "name": "snapshot_id_matches_stable_release_identity",
       "ok": true,
       "detail": {
-        "expected": "actual-b7e7d80db0d2d313",
-        "actual": "actual-b7e7d80db0d2d313",
+        "expected": "actual-2041d1665e7dc536",
+        "actual": "actual-2041d1665e7dc536",
         "reused_base_release": false
       }
     },

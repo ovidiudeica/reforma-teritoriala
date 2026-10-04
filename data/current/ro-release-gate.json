@@ -226,7 +226,10 @@
               "outer_shell_evidence_sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
               "outer_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
               "outer_shell_source_snapshot_id": "actual-990c892d9d27fa46",
-              "source": "OSM shell + ANCPI shared boundary",
+              "source": "OSM shell + ANCPI shared boundary + reviewed terminal adaptations",
+              "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+              "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
+              "terminal_closure_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
               "source_object_id": 1167,
               "inspire_id_local_id": "1.145.64602",
               "paired_legal_id": "64096",
@@ -9265,7 +9268,9 @@
             "internal_boundary_source": "ANCPI RELUAT",
             "internal_boundary_source_object_id": 1227,
             "partition_mode": "osm_shell_ancpi_shared_boundary_partition",
-            "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json"
+            "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json",
+            "internal_boundary_terminal_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
+            "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json"
           },
           "geometry": {
             "role": "administrative_boundary",
@@ -9275,7 +9280,7 @@
           "classification": {
             "version": "2.3",
             "confidence": "high",
-            "reason": "Reviewed hybrid partition: Brețcu uses the legacy OSM Ojdula outer shell where it borders neighboring UATs and the exact ANCPI Brețcu–Ojdula shared boundary internally.",
+            "reason": "Reviewed hybrid partition: Brețcu uses the preserved legacy OSM exterior against neighboring UATs; the ANCPI Brețcu–Ojdula shared path is retained except for the reviewed terminal clip and one 82.596 m non-ANCPI closure to the Tulnici/Vrancea shell.",
             "evidence": "data/sources/ro-ancpi-uat-fallbacks.json",
             "official_registry": "SIRUTA",
             "official_legal_id": "64096"
@@ -9348,7 +9353,7 @@
           "classification": {
             "version": "2.3",
             "confidence": "high",
-            "reason": "Reviewed hybrid partition: preserve the legacy OSM Ojdula outer shell for neighbor continuity and split Brețcu/Ojdula only along their exact ANCPI shared UAT boundary.",
+            "reason": "Reviewed hybrid partition: preserve the legacy OSM Ojdula exterior for neighbor continuity; retain the ANCPI Brețcu–Ojdula shared path except for the reviewed terminal clip and one 82.596 m non-ANCPI closure to the preserved OSM Tulnici/Vrancea shell.",
             "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
             "osm_inferred_type": "commune",
             "official_registry": "SIRUTA",
@@ -9380,7 +9385,9 @@
             "internal_boundary_source": "ANCPI RELUAT",
             "internal_boundary_source_object_id": 1167,
             "partition_mode": "osm_shell_ancpi_shared_boundary_partition",
-            "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json"
+            "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json",
+            "internal_boundary_terminal_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
+            "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json"
           },
           "geometry": {
             "role": "administrative_boundary",
@@ -9406,7 +9413,10 @@
           "outer_shell_evidence_sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
           "outer_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
           "outer_shell_source_snapshot_id": "actual-990c892d9d27fa46",
-          "source": "OSM shell + ANCPI shared boundary",
+          "source": "OSM shell + ANCPI shared boundary + reviewed terminal adaptations",
+          "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+          "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
+          "terminal_closure_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
           "source_object_id": 1167,
           "inspire_id_local_id": "1.145.64602",
           "paired_legal_id": "64096",
@@ -9418,6 +9428,135 @@
           "relation_id": 14735731,
           "source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
           "source_snapshot_id": "actual-990c892d9d27fa46"
+        }
+      }
+    },
+    {
+      "name": "bretcu_ojdula_terminal_closure_evidence_is_exact",
+      "ok": true,
+      "detail": {
+        "evidence": {
+          "schema_version": 1,
+          "mode": "ACTUAL_RO_BRETCU_OJDULA_TERMINAL_CLOSURE_REVIEW",
+          "generated_at": "2026-09-27T20:37:24.316Z",
+          "issue_number": 195,
+          "conclusion": "retain_legacy_osm_shell_with_reviewed_terminal_adaptations",
+          "policy": "Preserve the reviewed legacy OSM Ojdula exterior shell because its terminal shell edges are shared exactly with neighboring current OSM administrative geometries. Preserve the ANCPI Brețcu–Ojdula shared path exactly except for the two source-incompatibility terminal adaptations documented here: a short clip where ANCPI crosses into the OSM shell and a single non-ANCPI closure segment where the ANCPI divider ends inside the shell.",
+          "sources": {
+            "osm_shell": {
+              "path": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json",
+              "sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
+              "relation_id": 14735731,
+              "source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
+              "source_snapshot_id": "actual-990c892d9d27fa46"
+            },
+            "ancpi_bretcu": {
+              "path": "data/sources/ro-ancpi-uat-fallbacks.json",
+              "sha256": "2b4123f41424f6beac888b6dce0a1c19b9ec416618028f482dcc382bb2e272b4",
+              "legal_id": "64096",
+              "source_object_id": 1227
+            },
+            "ancpi_ojdula": {
+              "path": "data/sources/ro-ancpi-ojdula-reviewed.json",
+              "sha256": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084",
+              "legal_id": "64602",
+              "source_object_id": 1167
+            }
+          },
+          "terminals": {
+            "west": {
+              "role": "ancpi_terminal_clip_to_osm_shell",
+              "ancpi_endpoint": [
+                26.2494278855332,
+                46.0209763990113
+              ],
+              "shell_contact": [
+                26.24944651925884,
+                46.02097300906347
+              ],
+              "adjustment_m": 1.4873303462107208,
+              "shell_segment": {
+                "a": [
+                  26.2494562,
+                  46.0209773
+                ],
+                "b": [
+                  26.2491938,
+                  46.020861
+                ],
+                "exact_osm_users": [
+                  {
+                    "entity_id": "osm-r10715892",
+                    "osm_relation_id": 10715892,
+                    "legal_id": "63740",
+                    "name": "Târgu Secuiesc"
+                  },
+                  {
+                    "entity_id": "osm-r14735731",
+                    "osm_relation_id": 14735731,
+                    "legal_id": "64602",
+                    "name": "Ojdula"
+                  }
+                ]
+              }
+            },
+            "east": {
+              "role": "non_ancpi_terminal_closure_to_osm_shell",
+              "ancpi_endpoint": [
+                26.434568703767,
+                46.0065843376564
+              ],
+              "shell_contact": [
+                26.43554442709978,
+                46.0062802747671
+              ],
+              "adjustment_m": 82.59576607343764,
+              "shell_segment": {
+                "a": [
+                  26.4351634,
+                  46.0056904
+                ],
+                "b": [
+                  26.4362313,
+                  46.0073436
+                ],
+                "exact_osm_users": [
+                  {
+                    "entity_id": "osm-r2248621",
+                    "osm_relation_id": 2248621,
+                    "legal_id": "14",
+                    "name": "Covasna"
+                  },
+                  {
+                    "entity_id": "osm-r2260187",
+                    "osm_relation_id": 2260187,
+                    "legal_id": "39",
+                    "name": "Vrancea"
+                  },
+                  {
+                    "entity_id": "osm-r14735397",
+                    "osm_relation_id": 14735397,
+                    "legal_id": "178117",
+                    "name": "Tulnici"
+                  },
+                  {
+                    "entity_id": "osm-r14735731",
+                    "osm_relation_id": 14735731,
+                    "legal_id": "64602",
+                    "name": "Ojdula"
+                  }
+                ]
+              }
+            }
+          },
+          "decision": {
+            "preserve_legacy_osm_exterior": true,
+            "exact_ancpi_shared_path_except_terminal_adaptations": true,
+            "allow_non_ancpi_terminal_closure": true,
+            "non_ancpi_terminal_closure_count": 1,
+            "no_other_exterior_mutation": true,
+            "legal_geometry_equivalence_asserted": false
+          }
         }
       }
     },
@@ -9445,6 +9584,8 @@
             "osm_shell_source_snapshot_id": "actual-990c892d9d27fa46",
             "ancpi_ojdula_source_object_id": 1167,
             "ancpi_bretcu_source_object_id": 1227,
+            "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+            "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
             "audit": {
               "method": "osm_shell_ancpi_shared_boundary_terminal_clip_v2",
               "osm_shell_area_m2": 224992782.20558172,
@@ -9468,6 +9609,25 @@
               "ancpi_clipped_end_m": 0,
               "connector_start_m": 0,
               "connector_end_m": 82.59576607343764,
+              "ancpi_terminal_start_original_coordinate": [
+                26.2494278855332,
+                46.0209763990113
+              ],
+              "ancpi_terminal_start_final_coordinate": [
+                26.24944651925884,
+                46.02097300906347
+              ],
+              "ancpi_terminal_start_mode": "ancpi_terminal_clip_to_osm_shell",
+              "ancpi_terminal_end_original_coordinate": [
+                26.434568703767,
+                46.0065843376564
+              ],
+              "ancpi_terminal_end_final_coordinate": [
+                26.43554442709978,
+                46.0062802747671
+              ],
+              "ancpi_terminal_end_mode": "non_ancpi_terminal_closure_to_osm_shell",
+              "non_ancpi_terminal_closure_count": 1,
               "partition_polygons_valid": true,
               "bretcu_overlap_with_ancpi_m2": 112473055.22575855,
               "ojdula_overlap_with_ancpi_m2": 112261625.88606882

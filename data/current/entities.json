@@ -190852,7 +190852,7 @@
       "classification": {
         "version": "2.3",
         "confidence": "high",
-        "reason": "Reviewed hybrid partition: preserve the legacy OSM Ojdula outer shell for neighbor continuity and split Brețcu/Ojdula only along their exact ANCPI shared UAT boundary.",
+        "reason": "Reviewed hybrid partition: preserve the legacy OSM Ojdula exterior for neighbor continuity; retain the ANCPI Brețcu–Ojdula shared path except for the reviewed terminal clip and one 82.596 m non-ANCPI closure to the preserved OSM Tulnici/Vrancea shell.",
         "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
         "osm_inferred_type": "commune",
         "official_registry": "SIRUTA",
@@ -190884,7 +190884,9 @@
         "internal_boundary_source": "ANCPI RELUAT",
         "internal_boundary_source_object_id": 1167,
         "partition_mode": "osm_shell_ancpi_shared_boundary_partition",
-        "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json"
+        "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json",
+        "internal_boundary_terminal_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
+        "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json"
       },
       "geometry": {
         "role": "administrative_boundary",
@@ -256240,7 +256242,9 @@
         "internal_boundary_source": "ANCPI RELUAT",
         "internal_boundary_source_object_id": 1227,
         "partition_mode": "osm_shell_ancpi_shared_boundary_partition",
-        "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json"
+        "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json",
+        "internal_boundary_terminal_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
+        "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json"
       },
       "geometry": {
         "role": "administrative_boundary",
@@ -256250,7 +256254,7 @@
       "classification": {
         "version": "2.3",
         "confidence": "high",
-        "reason": "Reviewed hybrid partition: Brețcu uses the legacy OSM Ojdula outer shell where it borders neighboring UATs and the exact ANCPI Brețcu–Ojdula shared boundary internally.",
+        "reason": "Reviewed hybrid partition: Brețcu uses the preserved legacy OSM exterior against neighboring UATs; the ANCPI Brețcu–Ojdula shared path is retained except for the reviewed terminal clip and one 82.596 m non-ANCPI closure to the Tulnici/Vrancea shell.",
         "evidence": "data/sources/ro-ancpi-uat-fallbacks.json",
         "official_registry": "SIRUTA",
         "official_legal_id": "64096"

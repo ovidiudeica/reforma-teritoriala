@@ -1,14 +1,14 @@
 {
   "schema_version": 9,
   "mode": "ACTUAL",
-  "snapshot_id": "actual-b7e7d80db0d2d313",
+  "snapshot_id": "actual-2041d1665e7dc536",
   "generated_at": "2026-09-27T20:37:27.458Z",
-  "release_fingerprint_sha256": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
-  "content_fingerprint_sha256": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
-  "component_byte_fingerprint_sha256": "40b4b13017e1e470940542f04093aed0330d73b8a99fc5a1f327da9568a42f10",
+  "release_fingerprint_sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
+  "content_fingerprint_sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
+  "component_byte_fingerprint_sha256": "d613a216e2ef0a37d92bb0a8b2d579c81d33a9e79dc07dd3decb73874068bdf7",
   "content_identity": {
     "algorithm": "actual-semantic-v2",
-    "sha256": "b7e7d80db0d2d313c7e6f0a838d9dd678ec7764bd5a68756be9c3c8883ba8964",
+    "sha256": "2041d1665e7dc5365ac25defdf0d50ea4b64eb56427886e172c7e64929eb084f",
     "release_identity_basis": "semantic_content_v2",
     "reused_base_release": false
   },
@@ -88,7 +88,7 @@
       "RO": 3234,
       "MD": 2596
     },
-    "sha256": "a86d542284db6337a7fea077445e70c87cbf8963df578280fc259ee2d1b8845f"
+    "sha256": "7c21946db5faa7cd7534f5fc3a4851671afdb455271045698d7cb77046dad3e8"
   },
   "administrative_model": {
     "path": "data/current/administrative-inventory.json",
@@ -99,7 +99,7 @@
   "settlement_policy": {
     "path": "data/sources/actual-settlement-policy.json",
     "schema_version": 1,
-    "policy_version": "2026-10-04-v1.4",
+    "policy_version": "2026-10-04-v1.5",
     "coverage_contract_version": 2,
     "scope": "settlements_and_component_localities",
     "geometry_role_contract": {
@@ -132,7 +132,10 @@
             "outer_shell_evidence_sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
             "outer_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
             "outer_shell_source_snapshot_id": "actual-990c892d9d27fa46",
-            "source": "OSM shell + ANCPI shared boundary",
+            "source": "OSM shell + ANCPI shared boundary + reviewed terminal adaptations",
+            "terminal_closure_evidence": "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json",
+            "terminal_closure_evidence_sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
+            "terminal_closure_policy": "ancpi_shared_path_with_reviewed_osm_shell_terminal_adaptations",
             "source_object_id": 1167,
             "inspire_id_local_id": "1.145.64602",
             "paired_legal_id": "64096",
@@ -142,7 +145,7 @@
         ]
       }
     },
-    "sha256": "2ef7bb1a3374d6084ad30c20a146f148235400a0cd9b51e968cbaadd6480973a"
+    "sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5"
   },
   "geometry_role_contract": {
     "path": "schemas/actual-geometry-role-contract.json",
@@ -155,7 +158,7 @@
     "RO": {
       "path": "public/geo/current/ro-administrative.geojson",
       "feature_count": 3234,
-      "sha256": "63e957431df91b8cf4efb2f45b7579fc06a292a72fea451204f49d6673b75717"
+      "sha256": "30794b2a6e2d0b4793945d56ca3aa54d5f43388ccd1dd7c13bd089b38c89635f"
     },
     "MD": {
       "path": "public/geo/current/md-administrative.geojson",
@@ -262,7 +265,7 @@
       "blocking_gap_count": 0,
       "blocking_policy_violation_count": 0,
       "blocking_issue_count": 0,
-      "sha256": "7535c7ac2bca7d7d7bff5b4f50a2603e659395d19c454d79f19750ee911eec9c"
+      "sha256": "7a9705bb60b337bec5fe9e9ffb609a021cff1810899fbf9416a0da25624974e5"
     },
     "official_identity": {
       "path": "data/current/actual-official-identity-audit.json",
@@ -276,7 +279,7 @@
       "path": "data/current/ro-release-gate.json",
       "status": "PASS",
       "generated_at": "2026-09-27T20:37:24.316Z",
-      "sha256": "61fb2f6c0dac42c4aac21f5e697466ffa684ecf78700ea2d70493aad27468d96"
+      "sha256": "a51cf0425eecc01dce70aa3ca71bb905f515bc6de2fa1b3f23193eee84bfb028"
     },
     "MD": {
       "path": "data/current/md-release-gate.json",
@@ -310,8 +313,8 @@
   "components": {
     "catalog": {
       "path": "data/current/entities.json",
-      "sha256": "a86d542284db6337a7fea077445e70c87cbf8963df578280fc259ee2d1b8845f",
-      "bytes": 8761278
+      "sha256": "7c21946db5faa7cd7534f5fc3a4851671afdb455271045698d7cb77046dad3e8",
+      "bytes": 8761869
     },
     "inventory": {
       "path": "data/current/administrative-inventory.json",
@@ -320,8 +323,8 @@
     },
     "ro_geojson": {
       "path": "public/geo/current/ro-administrative.geojson",
-      "sha256": "63e957431df91b8cf4efb2f45b7579fc06a292a72fea451204f49d6673b75717",
-      "bytes": 46393242
+      "sha256": "30794b2a6e2d0b4793945d56ca3aa54d5f43388ccd1dd7c13bd089b38c89635f",
+      "bytes": 46393626
     },
     "md_geojson": {
       "path": "public/geo/current/md-administrative.geojson",
@@ -370,8 +373,8 @@
     },
     "ro_gate": {
       "path": "data/current/ro-release-gate.json",
-      "sha256": "61fb2f6c0dac42c4aac21f5e697466ffa684ecf78700ea2d70493aad27468d96",
-      "bytes": 259721
+      "sha256": "a51cf0425eecc01dce70aa3ca71bb905f515bc6de2fa1b3f23193eee84bfb028",
+      "bytes": 267015
     },
     "md_gate": {
       "path": "data/current/md-release-gate.json",
@@ -410,7 +413,7 @@
     },
     "structural_completeness_audit": {
       "path": "data/current/actual-structural-completeness-audit.json",
-      "sha256": "7535c7ac2bca7d7d7bff5b4f50a2603e659395d19c454d79f19750ee911eec9c",
+      "sha256": "7a9705bb60b337bec5fe9e9ffb609a021cff1810899fbf9416a0da25624974e5",
       "bytes": 27681
     },
     "official_identity_audit": {
@@ -420,8 +423,8 @@
     },
     "settlement_policy": {
       "path": "data/sources/actual-settlement-policy.json",
-      "sha256": "2ef7bb1a3374d6084ad30c20a146f148235400a0cd9b51e968cbaadd6480973a",
-      "bytes": 5992
+      "sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5",
+      "bytes": 6344
     },
     "geometry_role_contract": {
       "path": "schemas/actual-geometry-role-contract.json",
