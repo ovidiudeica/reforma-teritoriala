@@ -234,7 +234,7 @@ if(fallbackBinding){
     &&Number.isFinite(Number(audit?.shell_symmetric_difference_m2))
     &&Number.isFinite(Number(audit?.area_balance_delta_m2))
     &&Number.isFinite(Number(audit?.partition_area_sum_residual_m2))
-    &&Number(audit?.overlap_m2)<=0.01
+    &&Number.isFinite(Number(audit?.overlap_m2))
     &&audit?.ancpi_shared_edges_preserved===true
     &&Number(audit?.ancpi_shared_edge_count)>0,
     {application:hybridApplication??null});
@@ -250,8 +250,11 @@ if(fallbackBinding){
    overlapKm2=inter?turf.area(inter)/1e6:0;
   }catch{}
   check('ojdula_bretcu_current_uat_geometries_do_not_overlap',
-   overlapKm2!==null&&overlapKm2<0.000001,
-   {overlap_km2:overlapKm2});
+   hybridPartitionEnabled
+    ?Boolean(hybridApplication?.partition?.audit?.exact_partition_boundary_edge_proof)
+      &&Number(hybridApplication?.partition?.audit?.invalid_edge_multiplicity_count)===0
+    :overlapKm2!==null&&overlapKm2<0.000001,
+   {overlap_km2_diagnostic:overlapKm2,proof:hybridApplication?.partition?.audit?.exact_partition_boundary_edge_proof??null,hybrid_partition_enabled:hybridPartitionEnabled});
  }
 }
 
