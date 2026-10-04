@@ -172,7 +172,7 @@ for(const e of entities){
  const representationSourceUrl=e.source_url||(
   e.osm?.relation_id!=null?'https://www.openstreetmap.org/relation/'+e.osm.relation_id:null
  );
- const geometrySource=representationSource==='ANCPI RELUAT'?'ANCPI/RELUAT administrative unit':'OpenStreetMap administrative relation';
+ const geometrySource=e.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition'?'OpenStreetMap outer shell partitioned by the exact ANCPI/RELUAT shared UAT boundary':(representationSource==='ANCPI RELUAT'?'ANCPI/RELUAT administrative unit':'OpenStreetMap administrative relation');
  const validation=validationFor(e,legal);
  const item={
   id:e.id,
@@ -197,6 +197,10 @@ for(const e of entities){
    osm_relation_id:e.osm?.relation_id??null,
    source_feature_id:e.representation?.source_object_id??null,
    source_inspire_id:e.representation?.inspire_id_local_id??null,
+   partition_mode:e.representation?.partition_mode||null,
+   outer_shell_source:e.representation?.outer_shell_source||null,
+   internal_boundary_source:e.representation?.internal_boundary_source||null,
+   osm_shell_relation_id:e.representation?.osm_shell_relation_id??null,
    admin_level:level,
    place:e.osm?.place||null,
    inferred_type:e.classification?.osm_inferred_type||publicType||null,
