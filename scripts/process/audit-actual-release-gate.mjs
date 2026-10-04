@@ -329,7 +329,9 @@ check('public_contract_identity_set_matches_catalog',
 check('public_contract_contains_current_entities_only',
  publicEntities.every(x=>x.status==='current'),
  {non_current:publicEntities.filter(x=>x.status!=='current').slice(0,25).map(x=>({id:x.id,status:x.status}))});
-const ojdulaOverrideEnabled=(settlementPolicy?.administrative_geometry_fallbacks?.RO?.reviewed_geometry_overrides||[]).some(x=>String(x.legal_id)==='64602');
+const ojdulaOverride=(settlementPolicy?.administrative_geometry_fallbacks?.RO?.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
+const ojdulaOverrideEnabled=Boolean(ojdulaOverride);
+const hybridPartitionEnabled=ojdulaOverride?.disposition==='partition_osm_shell_by_ancpi_shared_boundary';
 const representationIssues=publicEntities.flatMap(x=>{
  if(!Object.prototype.hasOwnProperty.call(x,'legal')||x.representation?.geometry_role!=='current_representation')return [{id:x.id,issue:'representation_contract'}];
  if(x.id==='siruta-u64096'){
@@ -337,21 +339,36 @@ const representationIssues=publicEntities.flatMap(x=>{
    && x.representation?.source==='ANCPI RELUAT'
    && x.representation?.osm_relation_id==null
    && x.representation?.canonical_geometry_role==='administrative_boundary'
-   && x.representation?.geometry_scope==='uat_fallback'
+   && x.representation?.geometry_scope===(hybridPartitionEnabled?'uat_hybrid_partition':'uat_fallback')
+   &&(!hybridPartitionEnabled||x.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition')
    && x.legal?.registry==='SIRUTA'
    && String(x.legal?.id)==='64096';
   return ok?[]:[{id:x.id,issue:'bretcu_official_geometry_binding',representation:x.representation,legal:x.legal}];
  }
  if(x.id==='osm-r14735731'&&ojdulaOverrideEnabled){
-  const ok=publicContractV2
-   && x.representation?.source==='ANCPI RELUAT'
-   && Number(x.representation?.osm_relation_id)===14735731
-   && Number(x.representation?.source_feature_id)===1167
-   && x.representation?.source_inspire_id==='1.145.64602'
-   && x.representation?.canonical_geometry_role==='administrative_boundary'
-   && x.representation?.geometry_scope==='uat_fallback'
-   && x.legal?.registry==='SIRUTA'
-   && String(x.legal?.id)==='64602';
+  const ok=hybridPartitionEnabled
+   ?(
+    publicContractV2
+    &&x.representation?.source==='OpenStreetMap'
+    &&Number(x.representation?.osm_relation_id)===14735731
+    &&x.representation?.canonical_geometry_role==='administrative_boundary'
+    &&x.representation?.geometry_scope==='uat_hybrid_partition'
+    &&x.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition'
+    &&x.representation?.internal_boundary_source==='ANCPI RELUAT'
+    &&x.legal?.registry==='SIRUTA'
+    &&String(x.legal?.id)==='64602'
+   )
+   :(
+    publicContractV2
+    &&x.representation?.source==='ANCPI RELUAT'
+    &&Number(x.representation?.osm_relation_id)===14735731
+    &&Number(x.representation?.source_feature_id)===1167
+    &&x.representation?.source_inspire_id==='1.145.64602'
+    &&x.representation?.canonical_geometry_role==='administrative_boundary'
+    &&x.representation?.geometry_scope==='uat_fallback'
+    &&x.legal?.registry==='SIRUTA'
+    &&String(x.legal?.id)==='64602'
+   );
   return ok?[]:[{id:x.id,issue:'ojdula_reviewed_geometry_binding',representation:x.representation,legal:x.legal}];
  }
  if(x.representation?.source!=='OpenStreetMap'||!/^osm-r\d+$/.test(String(x.id)))return [{id:x.id,issue:'unexpected_non_osm_representation',source:x.representation?.source??null}];

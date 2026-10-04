@@ -571,7 +571,7 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  }
  assert.equal(schema.$defs.entity.properties.id.pattern,'^(?:osm-r[0-9]+|siruta-u[0-9]+)$');
  assert.deepEqual(schema.$defs.entity.properties.representation.properties.source.enum,['OpenStreetMap','ANCPI RELUAT']);
- assert.match(migration,/policy_version='2026-10-03-v1\.3'/);
+ assert.match(migration,/policy_version='2026-10-04-v1\.4'/);
  assert.match(migration,/administrative_geometry_fallbacks/);
  assert.match(migration,/legal_ids:\['64096'\]/);
  assert.match(sourceBundle,/ancpiBinding=policy\?\.administrative_geometry_fallbacks\?\.RO/);
@@ -581,6 +581,38 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  assert.equal(Number(ojdula.feature?.source_object_id),1167);
  assert.equal(ojdula.feature?.inspire_id_local_id,'1.145.64602');
  assert.equal(Number(ojdula.feature?.replacement_osm_relation_id),14735731);
+ assert.match(migration,/partition_osm_shell_by_ancpi_shared_boundary/);
+});
+
+test('reviewed Brețcu–Ojdula hybrid partition is pinned to old OSM shell and exact ANCPI divider contract',async()=>{
+ const [shell,fallback,ojdula,helper,reconciliation]=await Promise.all([
+  readJson('data/sources/ro-osm-ojdula-14735731-reviewed-shell.json'),
+  readJson('data/sources/ro-ancpi-uat-fallbacks.json'),
+  readJson('data/sources/ro-ancpi-ojdula-reviewed.json'),
+  readFile('scripts/lib/bretcu-ojdula-hybrid-partition.mjs','utf8'),
+  readFile('scripts/process/apply-ro-official-reconciliation.mjs','utf8')
+ ]);
+ assert.equal(shell.mode,'ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL');
+ assert.equal(Number(shell.relation_id),14735731);
+ assert.equal(shell.source_commit_sha,'f21e4954063a884df9922efa5ac31229c5b51d43');
+ assert.equal(shell.source_snapshot_id,'actual-990c892d9d27fa46');
+ assert.equal(shell.geometry?.type,'Polygon');
+ const bretcu=fallback.features.find(x=>String(x.legal_id)==='64096');
+ assert.ok(bretcu);
+ assert.equal(String(ojdula.feature?.legal_id),'64602');
+ const edgeKey=(a,b)=>[JSON.stringify([Number(a[0]),Number(a[1])]),JSON.stringify([Number(b[0]),Number(b[1])])].sort().join('|');
+ const edges=geometry=>{
+  const rings=geometry.type==='Polygon'?geometry.coordinates:geometry.coordinates.flat();
+  return new Set(rings.flatMap(r=>r.slice(0,-1).map((p,i)=>edgeKey(p,r[i+1]))));
+ };
+ const oe=edges(ojdula.feature.geometry),be=edges(bretcu.geometry);
+ const shared=[...oe].filter(k=>be.has(k));
+ assert.equal(shared.length,826,'reviewed ANCPI common boundary edge count drifted');
+ assert.match(helper,/shell_symmetric_difference_m2/);
+ assert.match(helper,/ancpi_shared_edges_preserved/);
+ assert.match(helper,/OSM shell \+ ANCPI divider must polygonize into exactly two UAT polygons/);
+ assert.match(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaOsmShell\.geometry\)/);
+ assert.doesNotMatch(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaFeature\.geometry\)/);
 });
 
 test('Brețcu fallback application never fabricates an OSM relation',async()=>{

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import {readFile,writeFile} from 'node:fs/promises';
+import {buildBretcuOjdulaHybridPartition} from '../lib/bretcu-ojdula-hybrid-partition.mjs';
 
 const CATALOG='data/current/entities.json';
 const GEO='public/geo/current/ro-administrative.geojson';
@@ -9,6 +10,7 @@ const COUNTY_BRIDGE='data/current/ro-county-siruta-bridge.json';
 const ANCPI_FALLBACKS='data/sources/ro-ancpi-uat-fallbacks.json';
 const OFFICIAL_ONLY_RESOLUTIONS='data/sources/ro-official-only-reviewed-resolutions.json';
 const OJDULA_REVIEW='data/sources/ro-ancpi-ojdula-reviewed.json';
+const OJDULA_OSM_SHELL='data/sources/ro-osm-ojdula-14735731-reviewed-shell.json';
 const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const OUTPUT='data/current/ro-official-application.json';
 
@@ -21,6 +23,7 @@ const countyBridge=await read(COUNTY_BRIDGE);
 const ancpiFallbacks=await read(ANCPI_FALLBACKS);
 const officialOnlyResolutions=await read(OFFICIAL_ONLY_RESOLUTIONS);
 const ojdulaReview=await read(OJDULA_REVIEW);
+const ojdulaOsmShell=await read(OJDULA_OSM_SHELL);
 const settlementPolicy=await read(SETTLEMENT_POLICY);
 const ancpiFallbackBinding=settlementPolicy?.administrative_geometry_fallbacks?.RO??null;
 
@@ -221,47 +224,128 @@ for(const override of ancpiFallbackBinding?.reviewed_geometry_overrides||[]){
  if(legalId!=='64602'||override.entity_id!=='osm-r14735731'||Number(override.osm_relation_id)!==14735731||override.evidence!==OJDULA_REVIEW){
   throw new Error('Unexpected reviewed geometry override '+legalId);
  }
+ if(!['replace_osm_geometry_keep_stable_entity_id','partition_osm_shell_by_ancpi_shared_boundary'].includes(override.disposition))throw new Error('Unexpected Brețcu–Ojdula partition disposition');
  const source=ojdulaReview.feature;
  if(String(source?.legal_id)!==legalId||Number(source?.replacement_osm_relation_id)!==14735731)throw new Error('Reviewed Ojdula source identity mismatch');
  const existing=entities.find(e=>e.id===override.entity_id);
  if(!existing||String(existing.legal?.id||'')!==legalId||Number(existing.osm?.relation_id)!==14735731)throw new Error('Reviewed Ojdula entity binding mismatch');
- const feature=featureByCatalogId.get(existing.id);
- if(!feature)throw new Error('Missing Ojdula master feature');
- if(!['Polygon','MultiPolygon'].includes(source.geometry?.type)||!Array.isArray(source.geometry?.coordinates)||!source.geometry.coordinates.length)throw new Error('Reviewed Ojdula geometry invalid');
- existing.representation={
-  source:'ANCPI RELUAT',
-  admin_level:8,
-  source_object_id:source.source_object_id,
-  inspire_id_local_id:source.inspire_id_local_id,
-  inspire_id_version_id:source.inspire_id_version_id,
-  national_code:source.national_code,
-  reviewed_osm_relation_id:14735731,
-  osm_relation_geometry_accepted:false
+ const ojdulaFeature=featureByCatalogId.get(existing.id);
+ if(!ojdulaFeature)throw new Error('Missing Ojdula master feature');
+ if(override.disposition==='replace_osm_geometry_keep_stable_entity_id'){
+  existing.representation={source:'ANCPI RELUAT',admin_level:8,source_object_id:source.source_object_id,inspire_id_local_id:source.inspire_id_local_id,inspire_id_version_id:source.inspire_id_version_id,national_code:source.national_code,reviewed_osm_relation_id:14735731,osm_relation_geometry_accepted:false};
+  existing.geometry={role:'administrative_boundary',scope:'uat_fallback',legal_geometry_equivalence_asserted:false};
+  existing.source='ANCPI RELUAT';
+  existing.source_url=ojdulaReview.source?.source_url||null;
+  existing.classification={...(existing.classification||{}),confidence:'high',reason:'Reviewed geometry override: OSM relation 14735731 merges Ojdula with the distinct Brețcu UAT; current Ojdula geometry is the exact ANCPI/RELUAT SIRUTA 64602 polygon.',evidence:OJDULA_REVIEW,official_registry:'SIRUTA',official_legal_id:legalId};
+  ojdulaFeature.geometry=source.geometry;
+  ojdulaFeature.properties={...(ojdulaFeature.properties||{}),geometry_role:'administrative_boundary',geometry_scope:'uat_fallback',source:'ANCPI RELUAT',source_object_id:source.source_object_id,inspire_id_local_id:source.inspire_id_local_id,national_code:source.national_code,reviewed_osm_relation_id:14735731,osm_relation_geometry_accepted:false};
+  fallbackApplied.push({mode:'replace_osm_geometry',entity_id:existing.id,legal_id:legalId,legal_type:existing.type,parent_id:existing.parent_id,source_object_id:source.source_object_id,inspire_id_local_id:source.inspire_id_local_id,replaced_osm_relation_id:14735731});
+  continue;
+ }
+ const bretcuEntity=entities.find(e=>e.id==='siruta-u64096');
+ const bretcuFeature=featureByCatalogId.get('siruta-u64096');
+ const bretcuSource=(ancpiFallbacks.features||[]).find(x=>String(x.legal_id)==='64096');
+ if(!bretcuEntity||!bretcuFeature||!bretcuSource)throw new Error('Missing Brețcu–Ojdula partition inputs');
+ if(
+  ojdulaOsmShell.schema_version!==1
+  ||ojdulaOsmShell.mode!=='ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL'
+  ||Number(ojdulaOsmShell.relation_id)!==14735731
+  ||ojdulaOsmShell.source_commit_sha!=='f21e4954063a884df9922efa5ac31229c5b51d43'
+  ||ojdulaOsmShell.source_snapshot_id!=='actual-990c892d9d27fa46'
+  ||ojdulaOsmShell.geometry?.type!=='Polygon'
+ )throw new Error('Reviewed Ojdula OSM outer-shell fixture mismatch');
+ const osmOjdulaGeometry=structuredClone(ojdulaOsmShell.geometry);
+ const partition=buildBretcuOjdulaHybridPartition({
+  osmOjdulaGeometry,
+  ancpiOjdulaGeometry:source.geometry,
+  ancpiBretcuGeometry:bretcuSource.geometry
+ });
+ if(partition.audit.shell_symmetric_difference_m2>0.01)throw new Error('Hybrid Brețcu–Ojdula union does not preserve the OSM shell');
+ if(partition.audit.overlap_m2>0.01)throw new Error('Hybrid Brețcu–Ojdula partition overlaps');
+ if(partition.audit.ancpi_shared_edges_preserved!==true)throw new Error('Hybrid Brețcu–Ojdula partition does not preserve ANCPI shared boundary');
+
+ const partitionMeta={
+  mode:'osm_shell_ancpi_shared_boundary_partition',
+  osm_shell_relation_id:14735731,
+  osm_shell_evidence:OJDULA_OSM_SHELL,
+  osm_shell_source_commit_sha:ojdulaOsmShell.source_commit_sha,
+  osm_shell_source_snapshot_id:ojdulaOsmShell.source_snapshot_id,
+  ancpi_ojdula_source_object_id:source.source_object_id,
+  ancpi_bretcu_source_object_id:bretcuSource.source_object_id,
+  audit:partition.audit
  };
- existing.geometry={role:'administrative_boundary',scope:'uat_fallback',legal_geometry_equivalence_asserted:false};
- existing.source='ANCPI RELUAT';
- existing.source_url=ojdulaReview.source?.source_url||null;
+
+ existing.representation={
+  source:'OpenStreetMap',
+  admin_level:8,
+  reviewed_osm_relation_id:14735731,
+  osm_relation_geometry_accepted_as_outer_shell:true,
+  internal_boundary_source:'ANCPI RELUAT',
+  internal_boundary_source_object_id:source.source_object_id,
+  partition_mode:partitionMeta.mode,
+  outer_shell_evidence:OJDULA_OSM_SHELL
+ };
+ existing.geometry={role:'administrative_boundary',scope:'uat_hybrid_partition',legal_geometry_equivalence_asserted:false};
+ existing.source='OpenStreetMap';
+ existing.source_url='https://www.openstreetmap.org/relation/14735731';
  existing.classification={
   ...(existing.classification||{}),
   confidence:'high',
-  reason:'Reviewed geometry override: OSM relation 14735731 merges Ojdula with the distinct Brețcu UAT; current Ojdula geometry is the exact ANCPI/RELUAT SIRUTA 64602 polygon.',
+  reason:'Reviewed hybrid partition: preserve the legacy OSM Ojdula outer shell for neighbor continuity and split Brețcu/Ojdula only along their exact ANCPI shared UAT boundary.',
   evidence:OJDULA_REVIEW,
   official_registry:'SIRUTA',
   official_legal_id:legalId
  };
- feature.geometry=source.geometry;
- feature.properties={
-  ...(feature.properties||{}),
+ ojdulaFeature.geometry=partition.ojdula_geometry;
+ ojdulaFeature.properties={
+  ...(ojdulaFeature.properties||{}),
   geometry_role:'administrative_boundary',
-  geometry_scope:'uat_fallback',
-  source:'ANCPI RELUAT',
-  source_object_id:source.source_object_id,
-  inspire_id_local_id:source.inspire_id_local_id,
-  national_code:source.national_code,
+  geometry_scope:'uat_hybrid_partition',
+  source:'OpenStreetMap',
   reviewed_osm_relation_id:14735731,
-  osm_relation_geometry_accepted:false
+  osm_relation_geometry_accepted_as_outer_shell:true,
+  internal_boundary_source:'ANCPI RELUAT',
+  internal_boundary_source_object_id:source.source_object_id,
+  partition_mode:partitionMeta.mode,
+  outer_shell_evidence:OJDULA_OSM_SHELL
  };
- fallbackApplied.push({mode:'replace_osm_geometry',entity_id:existing.id,legal_id:legalId,legal_type:existing.type,parent_id:existing.parent_id,source_object_id:source.source_object_id,inspire_id_local_id:source.inspire_id_local_id,replaced_osm_relation_id:14735731});
+
+ bretcuEntity.representation={
+  ...(bretcuEntity.representation||{}),
+  source:'ANCPI RELUAT',
+  admin_level:8,
+  osm_shell_relation_id:14735731,
+  outer_shell_source:'OpenStreetMap',
+  internal_boundary_source:'ANCPI RELUAT',
+  internal_boundary_source_object_id:bretcuSource.source_object_id,
+  partition_mode:partitionMeta.mode,
+  outer_shell_evidence:OJDULA_OSM_SHELL
+ };
+ bretcuEntity.geometry={role:'administrative_boundary',scope:'uat_hybrid_partition',legal_geometry_equivalence_asserted:false};
+ bretcuEntity.classification={
+  ...(bretcuEntity.classification||{}),
+  reason:'Reviewed hybrid partition: Brețcu uses the legacy OSM Ojdula outer shell where it borders neighboring UATs and the exact ANCPI Brețcu–Ojdula shared boundary internally.'
+ };
+ bretcuFeature.geometry=partition.bretcu_geometry;
+ bretcuFeature.properties={
+  ...(bretcuFeature.properties||{}),
+  geometry_scope:'uat_hybrid_partition',
+  osm_shell_relation_id:14735731,
+  outer_shell_source:'OpenStreetMap',
+  internal_boundary_source:'ANCPI RELUAT',
+  partition_mode:partitionMeta.mode,
+  outer_shell_evidence:OJDULA_OSM_SHELL
+ };
+
+ fallbackApplied.push({
+  mode:'partition_osm_shell_by_ancpi_shared_boundary',
+  entity_id:existing.id,
+  paired_entity_id:bretcuEntity.id,
+  legal_id:legalId,
+  paired_legal_id:'64096',
+  replaced_osm_relation_id:14735731,
+  partition:partitionMeta
+ });
 }
 catalog.entity_count=entities.length;
 
@@ -300,22 +384,35 @@ check('all_ro_counties_have_siruta_county_identity',roCounties.every(e=>e.legal?
 check('all_ro_county_geojson_features_have_siruta_identity',roCounties.every(e=>{
  const p=featureByCatalogId.get(e.id)?.properties;return p?.legal_registry==='SIRUTA'&&p?.legal_type==='county'&&String(p?.legal_id||'')===String(e.legal?.id||'');
 }),{});
+const reviewedOverrides=ancpiFallbackBinding?.reviewed_geometry_overrides||[];
+const reviewedOverrideActivationExact=reviewedOverrides.every(override=>{
+ const expectedMode=override.disposition==='partition_osm_shell_by_ancpi_shared_boundary'
+  ?'partition_osm_shell_by_ancpi_shared_boundary'
+  :override.disposition==='replace_osm_geometry_keep_stable_entity_id'
+   ?'replace_osm_geometry'
+   :null;
+ return Boolean(expectedMode)&&fallbackApplied.some(x=>
+  x.entity_id===override.entity_id
+  &&String(x.legal_id)===String(override.legal_id)
+  &&x.mode===expectedMode
+  &&Number(x.replaced_osm_relation_id)===Number(override.osm_relation_id)
+ );
+});
 check('ancpi_reviewed_fallback_activation_is_exact',
  !ancpiFallbackBinding
  ||(
   fallbackApplied.some(x=>x.entity_id==='siruta-u64096'&&x.legal_id==='64096'&&x.mode==='add_missing_uat')
-  &&(!(ancpiFallbackBinding.reviewed_geometry_overrides||[]).length
-    ||fallbackApplied.some(x=>x.entity_id==='osm-r14735731'&&x.legal_id==='64602'&&x.mode==='replace_osm_geometry'&&Number(x.replaced_osm_relation_id)===14735731))
-  &&fallbackApplied.length===(ancpiFallbackBinding.legal_ids||[]).length+(ancpiFallbackBinding.reviewed_geometry_overrides||[]).length
+  &&reviewedOverrideActivationExact
+  &&fallbackApplied.length===(ancpiFallbackBinding.legal_ids||[]).length+reviewedOverrides.length
  ),
- {enabled:Boolean(ancpiFallbackBinding),authorized_ids:(ancpiFallbackBinding?.legal_ids||[]).map(String).sort(),reviewed_geometry_overrides:ancpiFallbackBinding?.reviewed_geometry_overrides||[],fallback_applied:fallbackApplied});
+ {enabled:Boolean(ancpiFallbackBinding),authorized_ids:(ancpiFallbackBinding?.legal_ids||[]).map(String).sort(),reviewed_geometry_overrides:reviewedOverrides,fallback_applied:fallbackApplied});
 
 const report={
  schema_version:1,
  generated_at:new Date().toISOString(),
  jurisdiction:'RO',
  status:failures.length?'FAIL':'PASS',
- policy:'SIRUTA is authoritative for RO legal identity/type and the exhaustive county/UAT inventory. OSM remains the primary geometry source. A reviewed UAT with no distinct OSM boundary may use an exact materialized ANCPI/RELUAT administrative polygon as a fallback, with provenance kept separate from legal identity and without fabricating OSM metadata.',
+ policy:'SIRUTA is authoritative for RO legal identity/type and the exhaustive county/UAT inventory. OSM remains the primary geometry source. A reviewed UAT with no distinct OSM boundary may use an ANCPI/RELUAT fallback. For the reviewed Brețcu–Ojdula conflict, the legacy OSM Ojdula shell is preserved for neighbor continuity and partitioned only by the exact ANCPI shared UAT boundary; provenance remains separate from legal identity.',
  source:{official_snapshot:SNAPSHOT,reconciliation:RECON,ancpi_uat_fallbacks:ANCPI_FALLBACKS},
  checks,
  summary:{

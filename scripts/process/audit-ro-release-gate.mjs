@@ -2,6 +2,7 @@
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
+import {buildBretcuOjdulaHybridPartition} from '../lib/bretcu-ojdula-hybrid-partition.mjs';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
 const review=await read('data/current/admin-review.json');
 const allowed=await read('data/sources/ro-release-gate-exceptions.json');
@@ -19,6 +20,8 @@ const settlementPolicy=await read('data/sources/actual-settlement-policy.json');
 const ancpiFallbacks=await read('data/sources/ro-ancpi-uat-fallbacks.json');
 const ojdulaReviewBytes=await readFile('data/sources/ro-ancpi-ojdula-reviewed.json');
 const ojdulaReview=JSON.parse(ojdulaReviewBytes.toString('utf8'));
+const ojdulaShellBytes=await readFile('data/sources/ro-osm-ojdula-14735731-reviewed-shell.json');
+const ojdulaShell=JSON.parse(ojdulaShellBytes.toString('utf8'));
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const failures=[],checks=[];
 const check=(name,ok,detail)=>{checks.push({name,ok,detail});if(!ok)failures.push({name,detail})};
@@ -131,6 +134,8 @@ if(fallbackBinding){
  const fallbackIds=(fallbackBinding.legal_ids||[]).map(String).sort();
  const sourceIds=(ancpiFallbacks.features||[]).map(x=>String(x.legal_id)).sort();
  check('ancpi_fallback_policy_source_identity_set_is_exact',JSON.stringify(fallbackIds)===JSON.stringify(sourceIds),{policy:fallbackIds,source:sourceIds});
+ const ojdulaOverride=(fallbackBinding.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
+ const hybridPartitionEnabled=ojdulaOverride?.disposition==='partition_osm_shell_by_ancpi_shared_boundary';
  const bretcu=(catalog.entities||[]).filter(e=>e.id==='siruta-u64096');
  const source=(ancpiFallbacks.features||[]).filter(x=>String(x.legal_id)==='64096');
  const master=(geo.features||[]).filter(x=>x.properties?.catalog_id==='siruta-u64096');
@@ -155,14 +160,14 @@ if(fallbackBinding){
   && entity?.parent_id==='osm-r2248621'
   && entity?.representation?.source==='ANCPI RELUAT'
   && entity?.geometry?.role==='administrative_boundary'
-  && entity?.geometry?.scope==='uat_fallback'
+  && entity?.geometry?.scope===(hybridPartitionEnabled?'uat_hybrid_partition':'uat_fallback')
+  &&(!hybridPartitionEnabled||entity?.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition')
   && entity?.geometry?.legal_geometry_equivalence_asserted===false
   && entity?.review_required===false,
   {entity_count:bretcu.length,entity});
  check('bretcu_ancpi_fallback_master_geometry_is_exactly_once',
   master.length===1&&['Polygon','MultiPolygon'].includes(master[0]?.geometry?.type),
   {feature_count:master.length});
- const ojdulaOverride=(fallbackBinding.reviewed_geometry_overrides||[]).find(x=>String(x.legal_id)==='64602');
  if(ojdulaOverride){
   const ojdula=(catalog.entities||[]).filter(e=>e.id==='osm-r14735731');
   const ojdulaMaster=(geo.features||[]).filter(x=>x.properties?.catalog_id==='osm-r14735731');
@@ -170,20 +175,66 @@ if(fallbackBinding){
   const os=ojdulaReview.feature||null;
   const om=ojdulaMaster[0]||null;
   check('ojdula_review_evidence_sha256_is_exact',ojdulaOverride.evidence==='data/sources/ro-ancpi-ojdula-reviewed.json'&&ojdulaOverride.evidence_sha256===sha256(ojdulaReviewBytes),{expected:ojdulaOverride.evidence_sha256,actual:sha256(ojdulaReviewBytes)});
-  check('ojdula_ancpi_geometry_override_contract_is_exact',
-   ojdula.length===1&&os!==null&&ojdulaMaster.length===1
-   &&String(oe?.legal?.id||'')==='64602'
-   &&oe?.representation?.source==='ANCPI RELUAT'
-   &&Number(oe?.representation?.reviewed_osm_relation_id)===14735731
-   &&oe?.representation?.osm_relation_geometry_accepted===false
-   &&oe?.geometry?.role==='administrative_boundary'
-   &&oe?.geometry?.scope==='uat_fallback'
-   &&Number(os?.source_object_id)===1167
-   &&os?.inspire_id_local_id==='1.145.64602',
-   {entity:oe,source_object_id:os?.source_object_id??null});
-  check('ojdula_master_matches_ancpi_exactly',
-   JSON.stringify(om?.geometry??null)===JSON.stringify(os?.geometry??null),
-   {});
+  const hybridApplication=(officialApplication.ancpi_fallbacks||[]).find(x=>x.mode==='partition_osm_shell_by_ancpi_shared_boundary'&&x.entity_id==='osm-r14735731');
+  check('ojdula_geometry_override_contract_is_exact',
+   hybridPartitionEnabled
+   ?(
+    ojdula.length===1&&os!==null&&ojdulaMaster.length===1
+    &&String(oe?.legal?.id||'')==='64602'
+    &&oe?.representation?.source==='OpenStreetMap'
+    &&Number(oe?.representation?.reviewed_osm_relation_id)===14735731
+    &&oe?.representation?.osm_relation_geometry_accepted_as_outer_shell===true
+    &&oe?.representation?.internal_boundary_source==='ANCPI RELUAT'
+    &&oe?.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition'
+    &&oe?.geometry?.role==='administrative_boundary'
+    &&oe?.geometry?.scope==='uat_hybrid_partition'
+    &&Number(os?.source_object_id)===1167
+    &&os?.inspire_id_local_id==='1.145.64602'
+   )
+   :(
+    ojdula.length===1&&os!==null&&ojdulaMaster.length===1
+    &&String(oe?.legal?.id||'')==='64602'
+    &&oe?.representation?.source==='ANCPI RELUAT'
+    &&Number(oe?.representation?.reviewed_osm_relation_id)===14735731
+    &&oe?.representation?.osm_relation_geometry_accepted===false
+    &&oe?.geometry?.role==='administrative_boundary'
+    &&oe?.geometry?.scope==='uat_fallback'
+    &&Number(os?.source_object_id)===1167
+    &&os?.inspire_id_local_id==='1.145.64602'
+   ),
+   {entity:oe,source_object_id:os?.source_object_id??null,hybrid_partition_enabled:hybridPartitionEnabled});
+  if(hybridPartitionEnabled){
+   check('ojdula_reviewed_osm_shell_binding_is_exact',
+    ojdulaOverride.outer_shell_evidence==='data/sources/ro-osm-ojdula-14735731-reviewed-shell.json'
+    &&ojdulaOverride.outer_shell_evidence_sha256===sha256(ojdulaShellBytes)
+    &&ojdulaOverride.outer_shell_source_commit_sha===ojdulaShell.source_commit_sha
+    &&ojdulaOverride.outer_shell_source_snapshot_id===ojdulaShell.source_snapshot_id
+    &&ojdulaShell.mode==='ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL'
+    &&Number(ojdulaShell.relation_id)===14735731,
+    {override:ojdulaOverride,shell:{mode:ojdulaShell.mode,relation_id:ojdulaShell.relation_id,source_commit_sha:ojdulaShell.source_commit_sha,source_snapshot_id:ojdulaShell.source_snapshot_id}});
+   const expectedPartition=buildBretcuOjdulaHybridPartition({
+    osmOjdulaGeometry:ojdulaShell.geometry,
+    ancpiOjdulaGeometry:os.geometry,
+    ancpiBretcuGeometry:source[0]?.geometry
+   });
+   check('bretcu_ojdula_master_geometries_match_reviewed_hybrid_partition_exactly',
+    JSON.stringify(om?.geometry??null)===JSON.stringify(expectedPartition.ojdula_geometry)
+    &&JSON.stringify(master[0]?.geometry??null)===JSON.stringify(expectedPartition.bretcu_geometry),
+    {});
+   const audit=hybridApplication?.partition?.audit||null;
+   check('bretcu_ojdula_hybrid_partition_audit_is_exact',
+    Boolean(hybridApplication)
+    &&audit?.method==='osm_shell_ancpi_shared_boundary_polygonization_v1'
+    &&Number(audit?.shell_symmetric_difference_m2)<=0.01
+    &&Number(audit?.overlap_m2)<=0.01
+    &&audit?.ancpi_shared_edges_preserved===true
+    &&Number(audit?.ancpi_shared_edge_count)>0,
+    {application:hybridApplication??null});
+  }else{
+   check('ojdula_master_matches_ancpi_exactly',
+    JSON.stringify(om?.geometry??null)===JSON.stringify(os?.geometry??null),
+    {});
+  }
   const bm=(geo.features||[]).find(x=>x.properties?.catalog_id==='siruta-u64096');
   let overlapKm2=null;
   try{
