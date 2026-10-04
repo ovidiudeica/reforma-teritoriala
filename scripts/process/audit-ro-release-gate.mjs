@@ -172,20 +172,49 @@ if(fallbackBinding){
   const os=ojdulaReview.feature||null;
   const om=ojdulaMaster[0]||null;
   check('ojdula_review_evidence_sha256_is_exact',ojdulaOverride.evidence==='data/sources/ro-ancpi-ojdula-reviewed.json'&&ojdulaOverride.evidence_sha256===sha256(ojdulaReviewBytes),{expected:ojdulaOverride.evidence_sha256,actual:sha256(ojdulaReviewBytes)});
-  check('ojdula_ancpi_geometry_override_contract_is_exact',
-   ojdula.length===1&&os!==null&&ojdulaMaster.length===1
-   &&String(oe?.legal?.id||'')==='64602'
-   &&oe?.representation?.source==='ANCPI RELUAT'
-   &&Number(oe?.representation?.reviewed_osm_relation_id)===14735731
-   &&oe?.representation?.osm_relation_geometry_accepted===false
-   &&oe?.geometry?.role==='administrative_boundary'
-   &&oe?.geometry?.scope==='uat_fallback'
-   &&Number(os?.source_object_id)===1167
-   &&os?.inspire_id_local_id==='1.145.64602',
-   {entity:oe,source_object_id:os?.source_object_id??null});
-  check('ojdula_master_matches_ancpi_exactly',
-   JSON.stringify(om?.geometry??null)===JSON.stringify(os?.geometry??null),
-   {});
+  const hybridApplication=(officialApplication.ancpi_fallbacks||[]).find(x=>x.mode==='partition_osm_shell_by_ancpi_shared_boundary'&&x.entity_id==='osm-r14735731');
+  check('ojdula_geometry_override_contract_is_exact',
+   hybridPartitionEnabled
+   ?(
+    ojdula.length===1&&os!==null&&ojdulaMaster.length===1
+    &&String(oe?.legal?.id||'')==='64602'
+    &&oe?.representation?.source==='OpenStreetMap'
+    &&Number(oe?.representation?.reviewed_osm_relation_id)===14735731
+    &&oe?.representation?.osm_relation_geometry_accepted_as_outer_shell===true
+    &&oe?.representation?.internal_boundary_source==='ANCPI RELUAT'
+    &&oe?.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition'
+    &&oe?.geometry?.role==='administrative_boundary'
+    &&oe?.geometry?.scope==='uat_hybrid_partition'
+    &&Number(os?.source_object_id)===1167
+    &&os?.inspire_id_local_id==='1.145.64602'
+   )
+   :(
+    ojdula.length===1&&os!==null&&ojdulaMaster.length===1
+    &&String(oe?.legal?.id||'')==='64602'
+    &&oe?.representation?.source==='ANCPI RELUAT'
+    &&Number(oe?.representation?.reviewed_osm_relation_id)===14735731
+    &&oe?.representation?.osm_relation_geometry_accepted===false
+    &&oe?.geometry?.role==='administrative_boundary'
+    &&oe?.geometry?.scope==='uat_fallback'
+    &&Number(os?.source_object_id)===1167
+    &&os?.inspire_id_local_id==='1.145.64602'
+   ),
+   {entity:oe,source_object_id:os?.source_object_id??null,hybrid_partition_enabled:hybridPartitionEnabled});
+  if(hybridPartitionEnabled){
+   const audit=hybridApplication?.partition?.audit||null;
+   check('bretcu_ojdula_hybrid_partition_audit_is_exact',
+    Boolean(hybridApplication)
+    &&audit?.method==='osm_shell_ancpi_shared_boundary_polygonization_v1'
+    &&Number(audit?.shell_symmetric_difference_m2)<=0.01
+    &&Number(audit?.overlap_m2)<=0.01
+    &&audit?.ancpi_shared_edges_preserved===true
+    &&Number(audit?.ancpi_shared_edge_count)>0,
+    {application:hybridApplication??null});
+  }else{
+   check('ojdula_master_matches_ancpi_exactly',
+    JSON.stringify(om?.geometry??null)===JSON.stringify(os?.geometry??null),
+    {});
+  }
   const bm=(geo.features||[]).find(x=>x.properties?.catalog_id==='siruta-u64096');
   let overlapKm2=null;
   try{
