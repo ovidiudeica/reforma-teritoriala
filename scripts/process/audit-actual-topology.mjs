@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {gunzipSync} from 'node:zlib';
+import osmtogeojson from 'osmtogeojson';
 import GeoJSONReader from 'jsts/org/locationtech/jts/io/GeoJSONReader.js';
 import IsValidOp from 'jsts/org/locationtech/jts/operation/valid/IsValidOp.js';
 
@@ -12,6 +14,69 @@ const OUTPUT='data/current/actual-topology-audit.json';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const same=(a,b)=>Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>v===b[i]);
 const blockers=[],observations=[],stats={};
+const osmMapFidelity={schema_version:1,criterion:'Exact undirected boundary-segment equality against the materialized OSM relation geometry. Ring order/orientation and Polygon/MultiPolygon grouping may differ; coordinates or boundary segments may not.',jurisdictions:{},mismatches:[]};
+
+const coordKey=c=>JSON.stringify([Number(c[0]),Number(c[1])]);
+const edgeKey=(a,b)=>[coordKey(a),coordKey(b)].sort().join('|');
+function geometryBoundaryEdges(geometry){
+ const edges=new Set();
+ const rings=[];
+ if(geometry?.type==='Polygon')for(const ring of geometry.coordinates||[])rings.push(ring);
+ else if(geometry?.type==='MultiPolygon')for(const poly of geometry.coordinates||[])for(const ring of poly||[])rings.push(ring);
+ for(const ring of rings)for(let i=1;i<ring.length;i++)edges.add(edgeKey(ring[i-1],ring[i]));
+ return edges;
+}
+function osmRelationId(feature){
+ const id=String(feature?.id||'');
+ const m=id.match(/relation\/(\d+)/);
+ return m?Number(m[1]):null;
+}
+async function auditOsmBoundaryFidelity(){
+ const manifest=JSON.parse(await readFile('data/sources/osm-current.json','utf8'));
+ for(const [jurisdiction,path] of Object.entries(SOURCES)){
+  const entry=manifest.countries?.[jurisdiction];
+  if(!entry?.snapshot_path)throw new Error('Missing OSM snapshot for '+jurisdiction);
+  const raw=JSON.parse(gunzipSync(await readFile(entry.snapshot_path)).toString('utf8'));
+  const osmGeo=osmtogeojson(raw,{flatProperties:false});
+  const expectedByRelation=new Map((osmGeo.features||[]).map(f=>[osmRelationId(f),f]).filter(([rid,f])=>rid&&['Polygon','MultiPolygon'].includes(f.geometry?.type)));
+  const master=JSON.parse(await readFile(path,'utf8'));
+  let osmIdCount=0,exactCount=0,nonOsmIdCount=0,missingRelationCount=0;
+  for(const feature of master.features||[]){
+   const id=String(feature.properties?.catalog_id||'');
+   const m=id.match(/^osm-r(\d+)$/);
+   if(!m){nonOsmIdCount++;continue;}
+   osmIdCount++;
+   const rid=Number(m[1]),expected=expectedByRelation.get(rid);
+   if(!expected){
+    missingRelationCount++;
+    osmMapFidelity.mismatches.push({jurisdiction,entity_id:id,relation_id:rid,issue:'relation_missing_from_materialized_osm_snapshot'});
+    continue;
+   }
+   const actualEdges=geometryBoundaryEdges(feature.geometry),expectedEdges=geometryBoundaryEdges(expected.geometry);
+   const missing=[...expectedEdges].filter(x=>!actualEdges.has(x));
+   const extra=[...actualEdges].filter(x=>!expectedEdges.has(x));
+   if(!missing.length&&!extra.length){exactCount++;continue;}
+   osmMapFidelity.mismatches.push({
+    jurisdiction,entity_id:id,relation_id:rid,issue:'boundary_segments_differ_from_osm',
+    expected_edge_count:expectedEdges.size,actual_edge_count:actualEdges.size,
+    missing_osm_edge_count:missing.length,extra_actual_edge_count:extra.length,
+    missing_osm_edge_samples:missing.slice(0,3),extra_actual_edge_samples:extra.slice(0,3)
+   });
+  }
+  osmMapFidelity.jurisdictions[jurisdiction]={
+   master_feature_count:(master.features||[]).length,
+   osm_id_feature_count:osmIdCount,
+   exact_osm_boundary_count:exactCount,
+   non_osm_id_feature_count:nonOsmIdCount,
+   missing_relation_count:missingRelationCount,
+   mismatch_count:osmMapFidelity.mismatches.filter(x=>x.jurisdiction===jurisdiction).length,
+   source_snapshot_at:entry.snapshot_at??manifest.snapshot_at??null,
+   source_semantic_sha256:entry.semantic_sha256??null
+  };
+ }
+ osmMapFidelity.status=osmMapFidelity.mismatches.length?'REVIEW':'PASS';
+}
+
 const add=(list,jurisdiction,id,issue,detail={})=>list.push({jurisdiction,entity_id:id??null,issue,...detail});
 
 function inspectCoordinates(geometry,jurisdiction,id){
@@ -89,6 +154,8 @@ for(const e of entities){
 const missingMaster=entities.filter(e=>['RO','MD'].includes(e.jurisdiction)&&!featureById.has(e.id)).map(e=>e.id);
 for(const id of missingMaster)add(blockers,entityById.get(id)?.jurisdiction??null,id,'catalog_entity_missing_master_geometry');
 
+await auditOsmBoundaryFidelity();
+
 const report={
  schema_version:1,
  generated_at:new Date().toISOString(),
@@ -104,7 +171,8 @@ const report={
  blocking_issue_count:blockers.length,
  observation_count:observations.length,
  blocking_issues:blockers,
- observations
+ observations,
+ osm_map_fidelity_diagnostic:osmMapFidelity
 };
 await mkdir('data/current',{recursive:true});
 await writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
