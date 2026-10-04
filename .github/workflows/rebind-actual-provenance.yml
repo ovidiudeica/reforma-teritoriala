@@ -32,6 +32,7 @@ jobs:
         run: npm run install:actual-offline-deps
 
       - name: Rebind build and release provenance
+        shell: bash
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
@@ -65,6 +66,7 @@ jobs:
           NODE
 
       - name: Commit provenance rebind
+        shell: bash
         env:
           HEAD_BRANCH: ${{ github.head_ref }}
         run: |
