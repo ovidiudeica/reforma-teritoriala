@@ -611,6 +611,8 @@ test('reviewed Brețcu–Ojdula hybrid partition is pinned to old OSM shell and 
  assert.match(helper,/shell_symmetric_difference_m2/);
  assert.match(helper,/osm_shell_edges_preserved/);
  assert.match(helper,/area_balance_delta_m2/);
+ assert.match(helper,/partition_area_sum_residual_m2/);
+ assert.match(helper,/turf\.area\(union\)-turf\.area\(old\)/);
  assert.match(helper,/exteriorEdgeSet/);
  assert.match(helper,/ancpi_shared_edges_preserved/);
  assert.match(helper,/circularArc/);
