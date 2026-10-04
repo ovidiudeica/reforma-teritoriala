@@ -190852,14 +190852,14 @@
       "classification": {
         "version": "2.3",
         "confidence": "high",
-        "reason": "Reviewed geometry override: OSM relation 14735731 merges Ojdula with the distinct Brețcu UAT; current Ojdula geometry is the exact ANCPI/RELUAT SIRUTA 64602 polygon.",
+        "reason": "Reviewed hybrid partition: preserve the legacy OSM Ojdula outer shell for neighbor continuity and split Brețcu/Ojdula only along their exact ANCPI shared UAT boundary.",
         "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
         "osm_inferred_type": "commune",
         "official_registry": "SIRUTA",
         "official_legal_id": "64602"
       },
-      "source": "ANCPI RELUAT",
-      "source_url": "https://services-eu1.arcgis.com/tt6hwS9xmcvnRjQC/arcgis/rest/services/AU_Unități_administrative/FeatureServer",
+      "source": "OpenStreetMap",
+      "source_url": "https://www.openstreetmap.org/relation/14735731",
       "imported_at": "2026-09-27T20:37:24.316Z",
       "review_required": false,
       "legal": {
@@ -190877,18 +190877,18 @@
         "parent_matches_osm_geometry_parent": true
       },
       "representation": {
-        "source": "ANCPI RELUAT",
+        "source": "OpenStreetMap",
         "admin_level": 8,
-        "source_object_id": 1167,
-        "inspire_id_local_id": "1.145.64602",
-        "inspire_id_version_id": "20250324141248",
-        "national_code": "64602",
         "reviewed_osm_relation_id": 14735731,
-        "osm_relation_geometry_accepted": false
+        "osm_relation_geometry_accepted_as_outer_shell": true,
+        "internal_boundary_source": "ANCPI RELUAT",
+        "internal_boundary_source_object_id": 1167,
+        "partition_mode": "osm_shell_ancpi_shared_boundary_partition",
+        "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json"
       },
       "geometry": {
         "role": "administrative_boundary",
-        "scope": "uat_fallback",
+        "scope": "uat_hybrid_partition",
         "legal_geometry_equivalence_asserted": false
       }
     },
@@ -256234,17 +256234,23 @@
         "source_object_id": 1227,
         "inspire_id_local_id": "1.145.64096",
         "inspire_id_version_id": "20250324141249",
-        "national_code": "64096"
+        "national_code": "64096",
+        "osm_shell_relation_id": 14735731,
+        "outer_shell_source": "OpenStreetMap",
+        "internal_boundary_source": "ANCPI RELUAT",
+        "internal_boundary_source_object_id": 1227,
+        "partition_mode": "osm_shell_ancpi_shared_boundary_partition",
+        "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json"
       },
       "geometry": {
         "role": "administrative_boundary",
-        "scope": "uat_fallback",
+        "scope": "uat_hybrid_partition",
         "legal_geometry_equivalence_asserted": false
       },
       "classification": {
         "version": "2.3",
         "confidence": "high",
-        "reason": "Current UAT geometry supplied by ANCPI/RELUAT as a reviewed fallback because OSM has no distinct Brețcu boundary relation.",
+        "reason": "Reviewed hybrid partition: Brețcu uses the legacy OSM Ojdula outer shell where it borders neighboring UATs and the exact ANCPI Brețcu–Ojdula shared boundary internally.",
         "evidence": "data/sources/ro-ancpi-uat-fallbacks.json",
         "official_registry": "SIRUTA",
         "official_legal_id": "64096"

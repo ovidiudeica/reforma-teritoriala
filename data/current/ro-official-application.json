@@ -3,7 +3,7 @@
   "generated_at": "2026-09-27T20:37:24.316Z",
   "jurisdiction": "RO",
   "status": "PASS",
-  "policy": "SIRUTA is authoritative for RO legal identity/type and the exhaustive county/UAT inventory. OSM remains the primary geometry source. A reviewed UAT with no distinct OSM boundary may use an exact materialized ANCPI/RELUAT administrative polygon as a fallback, with provenance kept separate from legal identity and without fabricating OSM metadata.",
+  "policy": "SIRUTA is authoritative for RO legal identity/type and the exhaustive county/UAT inventory. OSM remains the primary geometry source. A reviewed UAT with no distinct OSM boundary may use an ANCPI/RELUAT fallback. For the reviewed Brețcu–Ojdula conflict, the legacy OSM Ojdula shell is preserved for neighbor continuity and partitioned only by the exact ANCPI shared UAT boundary; provenance remains separate from legal identity.",
   "source": {
     "official_snapshot": "data/sources/ro-siruta-current.json",
     "reconciliation": "data/current/ro-official-reconciliation.json",
@@ -61,10 +61,16 @@
             "osm_relation_id": 14735731,
             "evidence": "data/sources/ro-ancpi-ojdula-reviewed.json",
             "evidence_sha256": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084",
-            "source": "ANCPI RELUAT",
+            "outer_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json",
+            "outer_shell_evidence_sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
+            "outer_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
+            "outer_shell_source_snapshot_id": "actual-990c892d9d27fa46",
+            "source": "OSM shell + ANCPI shared boundary",
             "source_object_id": 1167,
             "inspire_id_local_id": "1.145.64602",
-            "disposition": "replace_osm_geometry_keep_stable_entity_id"
+            "paired_legal_id": "64096",
+            "paired_entity_id": "siruta-u64096",
+            "disposition": "partition_osm_shell_by_ancpi_shared_boundary"
           }
         ],
         "fallback_applied": [
@@ -78,14 +84,48 @@
             "inspire_id_local_id": "1.145.64096"
           },
           {
-            "mode": "replace_osm_geometry",
+            "mode": "partition_osm_shell_by_ancpi_shared_boundary",
             "entity_id": "osm-r14735731",
+            "paired_entity_id": "siruta-u64096",
             "legal_id": "64602",
-            "legal_type": "commune",
-            "parent_id": "osm-r2248621",
-            "source_object_id": 1167,
-            "inspire_id_local_id": "1.145.64602",
-            "replaced_osm_relation_id": 14735731
+            "paired_legal_id": "64096",
+            "replaced_osm_relation_id": 14735731,
+            "partition": {
+              "mode": "osm_shell_ancpi_shared_boundary_partition",
+              "osm_shell_relation_id": 14735731,
+              "osm_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json",
+              "osm_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
+              "osm_shell_source_snapshot_id": "actual-990c892d9d27fa46",
+              "ancpi_ojdula_source_object_id": 1167,
+              "ancpi_bretcu_source_object_id": 1227,
+              "audit": {
+                "method": "osm_shell_ancpi_shared_boundary_terminal_clip_v2",
+                "osm_shell_area_m2": 224992782.20558172,
+                "hybrid_union_area_m2": 224992782.12233806,
+                "shell_symmetric_difference_m2": 0.08324821299985331,
+                "osm_shell_edges_preserved": true,
+                "osm_shell_edge_count": 652,
+                "partition_exterior_edge_count": 652,
+                "partition_interior_edge_count": 827,
+                "exact_partition_boundary_edge_proof": true,
+                "invalid_edge_multiplicity_count": 0,
+                "area_balance_delta_m2": 0.08324366807937622,
+                "partition_area_sum_residual_m2": 0.0831342339515686,
+                "overlap_m2": 0,
+                "ancpi_shared_edge_count": 826,
+                "ancpi_full_edges_preserved_count": 825,
+                "ancpi_terminal_clipped_edge_count": 1,
+                "ancpi_shared_path_preserved_with_terminal_clipping": true,
+                "ancpi_shared_boundary_length_m": 20410.02337485126,
+                "ancpi_clipped_start_m": 1.4873303462107208,
+                "ancpi_clipped_end_m": 0,
+                "connector_start_m": 0,
+                "connector_end_m": 82.59576607343764,
+                "partition_polygons_valid": true,
+                "bretcu_overlap_with_ancpi_m2": 112473055.22575855,
+                "ojdula_overlap_with_ancpi_m2": 112261625.88606882
+              }
+            }
           }
         ]
       }
@@ -117,14 +157,48 @@
       "inspire_id_local_id": "1.145.64096"
     },
     {
-      "mode": "replace_osm_geometry",
+      "mode": "partition_osm_shell_by_ancpi_shared_boundary",
       "entity_id": "osm-r14735731",
+      "paired_entity_id": "siruta-u64096",
       "legal_id": "64602",
-      "legal_type": "commune",
-      "parent_id": "osm-r2248621",
-      "source_object_id": 1167,
-      "inspire_id_local_id": "1.145.64602",
-      "replaced_osm_relation_id": 14735731
+      "paired_legal_id": "64096",
+      "replaced_osm_relation_id": 14735731,
+      "partition": {
+        "mode": "osm_shell_ancpi_shared_boundary_partition",
+        "osm_shell_relation_id": 14735731,
+        "osm_shell_evidence": "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json",
+        "osm_shell_source_commit_sha": "f21e4954063a884df9922efa5ac31229c5b51d43",
+        "osm_shell_source_snapshot_id": "actual-990c892d9d27fa46",
+        "ancpi_ojdula_source_object_id": 1167,
+        "ancpi_bretcu_source_object_id": 1227,
+        "audit": {
+          "method": "osm_shell_ancpi_shared_boundary_terminal_clip_v2",
+          "osm_shell_area_m2": 224992782.20558172,
+          "hybrid_union_area_m2": 224992782.12233806,
+          "shell_symmetric_difference_m2": 0.08324821299985331,
+          "osm_shell_edges_preserved": true,
+          "osm_shell_edge_count": 652,
+          "partition_exterior_edge_count": 652,
+          "partition_interior_edge_count": 827,
+          "exact_partition_boundary_edge_proof": true,
+          "invalid_edge_multiplicity_count": 0,
+          "area_balance_delta_m2": 0.08324366807937622,
+          "partition_area_sum_residual_m2": 0.0831342339515686,
+          "overlap_m2": 0,
+          "ancpi_shared_edge_count": 826,
+          "ancpi_full_edges_preserved_count": 825,
+          "ancpi_terminal_clipped_edge_count": 1,
+          "ancpi_shared_path_preserved_with_terminal_clipping": true,
+          "ancpi_shared_boundary_length_m": 20410.02337485126,
+          "ancpi_clipped_start_m": 1.4873303462107208,
+          "ancpi_clipped_end_m": 0,
+          "connector_start_m": 0,
+          "connector_end_m": 82.59576607343764,
+          "partition_polygons_valid": true,
+          "bretcu_overlap_with_ancpi_m2": 112473055.22575855,
+          "ojdula_overlap_with_ancpi_m2": 112261625.88606882
+        }
+      }
     }
   ],
   "type_changes": [
