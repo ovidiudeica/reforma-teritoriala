@@ -106,6 +106,29 @@ function commonEdgeKeys(aGeometry,bGeometry){
  return out;
 }
 
+function ringEdgeSet(ring){
+ const out=new Set();
+ for(let i=0;i<ring.length-1;i++)out.add(edgeKey(ring[i],ring[i+1]));
+ return out;
+}
+
+function exteriorEdgeSet(geometries){
+ const counts=new Map();
+ for(const geometry of geometries){
+  for(const ring of geometryRings(geometry)){
+   for(let i=0;i<ring.length-1;i++){
+    const key=edgeKey(ring[i],ring[i+1]);
+    counts.set(key,(counts.get(key)||0)+1);
+   }
+  }
+ }
+ return new Set([...counts].filter(([,count])=>count===1).map(([key])=>key));
+}
+
+function sameSet(a,b){
+ return a.size===b.size&&[...a].every(x=>b.has(x));
+}
+
 const intersectionArea=(a,b)=>{
  const x=turf.intersect(turf.featureCollection([turf.feature(a),turf.feature(b)]));
  return x?turf.area(x):0;
@@ -158,9 +181,15 @@ export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaG
  if(!union)throw new Error('Hybrid partition union failed');
  const overlapM2=intersectionArea(bretcu.geometry,ojdula.geometry);
  const shellSymDiffM2=differenceArea(old.geometry,union.geometry)+differenceArea(union.geometry,old.geometry);
+ const expectedShellRing=[...splitShell[0].geometry.coordinates];
+ const expectedShellEdges=ringEdgeSet(expectedShellRing);
+ const partitionExteriorEdges=exteriorEdgeSet([bretcu.geometry,ojdula.geometry]);
+ const osmShellEdgesPreserved=sameSet(expectedShellEdges,partitionExteriorEdges);
+ const areaBalanceDeltaM2=Math.abs((turf.area(bretcu)+turf.area(ojdula))-turf.area(old));
  const hybridShared=commonEdgeKeys(bretcu.geometry,ojdula.geometry);
  const missingAncpiEdges=[...shared.edgeKeys].filter(k=>!hybridShared.has(k));
  if(missingAncpiEdges.length)throw new Error('Hybrid partition does not preserve every ANCPI Brețcu–Ojdula shared edge');
+ if(!osmShellEdgesPreserved)throw new Error('Hybrid partition exterior edges differ from the reviewed OSM shell');
  return {
   bretcu_geometry:bretcu.geometry,
   ojdula_geometry:ojdula.geometry,
@@ -169,6 +198,10 @@ export function buildBretcuOjdulaHybridPartition({osmOjdulaGeometry,ancpiOjdulaG
    osm_shell_area_m2:turf.area(old),
    hybrid_union_area_m2:turf.area(union),
    shell_symmetric_difference_m2:shellSymDiffM2,
+   osm_shell_edges_preserved:osmShellEdgesPreserved,
+   osm_shell_edge_count:expectedShellEdges.size,
+   partition_exterior_edge_count:partitionExteriorEdges.size,
+   area_balance_delta_m2:areaBalanceDeltaM2,
    overlap_m2:overlapM2,
    ancpi_shared_edge_count:shared.edgeCount,
    ancpi_shared_edges_preserved:missingAncpiEdges.length===0,
