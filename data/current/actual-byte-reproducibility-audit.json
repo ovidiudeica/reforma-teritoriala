@@ -1,14 +1,14 @@
 {
   "schema_version": 2,
   "mode": "ACTUAL_BYTE_REPRODUCIBILITY",
-  "base_ref": "cc76d4192b6446dd22385d84e95d0c43e250aa7b",
+  "base_ref": "b4f8645dfef9065d89d19c51495b11ee827d8bc7",
   "stable_source_timestamp": "2026-09-27T20:37:24.316Z",
   "status": "PASS",
   "stabilized_file_count": 58,
   "release_component_count": 22,
   "auxiliary_data_current_json_count": 36,
-  "restored_or_already_base_count": 52,
-  "substantive_or_source_changed_file_count": 6,
+  "restored_or_already_base_count": 49,
+  "substantive_or_source_changed_file_count": 9,
   "components": [
     {
       "key": "catalog",
@@ -16,8 +16,8 @@
       "action": "CANONICALIZE_CHANGED_CONTENT",
       "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": true,
-      "base_sha256": "a86d542284db6337a7fea077445e70c87cbf8963df578280fc259ee2d1b8845f",
-      "after_sha256": "7c21946db5faa7cd7534f5fc3a4851671afdb455271045698d7cb77046dad3e8",
+      "base_sha256": "7c21946db5faa7cd7534f5fc3a4851671afdb455271045698d7cb77046dad3e8",
+      "after_sha256": "af6e09317d75fea663e6be425bf0a5c252fc756b6bb1c8055e564af913148504",
       "changed_before_stabilization": true,
       "matches_base_after_stabilization": false,
       "idempotent": true
@@ -37,37 +37,37 @@
     {
       "key": "ro_geojson",
       "path": "public/geo/current/ro-administrative.geojson",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
-      "non_administrative_metadata_ignored": true,
-      "base_sha256": "63e957431df91b8cf4efb2f45b7579fc06a292a72fea451204f49d6673b75717",
-      "after_sha256": "30794b2a6e2d0b4793945d56ca3aa54d5f43388ccd1dd7c13bd089b38c89635f",
-      "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
-      "idempotent": true
-    },
-    {
-      "key": "md_geojson",
-      "path": "public/geo/current/md-administrative.geojson",
       "action": "ALREADY_BASE_BYTES",
       "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": true,
-      "base_sha256": "56bda127997f4dec3f930b7963f61abfed1116ff9647b906c07141dd3be45670",
-      "after_sha256": "56bda127997f4dec3f930b7963f61abfed1116ff9647b906c07141dd3be45670",
+      "base_sha256": "30794b2a6e2d0b4793945d56ca3aa54d5f43388ccd1dd7c13bd089b38c89635f",
+      "after_sha256": "30794b2a6e2d0b4793945d56ca3aa54d5f43388ccd1dd7c13bd089b38c89635f",
       "changed_before_stabilization": false,
       "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
+      "key": "md_geojson",
+      "path": "public/geo/current/md-administrative.geojson",
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
+      "non_administrative_metadata_ignored": true,
+      "base_sha256": "56bda127997f4dec3f930b7963f61abfed1116ff9647b906c07141dd3be45670",
+      "after_sha256": "d10d1d6da37f88104cd87861e8da5fd4bf6fcd3c8b3640c7b2ff619be7fb96c3",
+      "changed_before_stabilization": true,
+      "matches_base_after_stabilization": false,
+      "idempotent": true
+    },
+    {
       "key": "public_index",
       "path": "public/data/actual-entities.json",
-      "action": "RESTORE_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "cc77722d0065788c9cb6dac06a835e5625f95519f09e7065d0a7bb49b4b1c4ca",
-      "after_sha256": "cc77722d0065788c9cb6dac06a835e5625f95519f09e7065d0a7bb49b4b1c4ca",
+      "after_sha256": "620a8e55bfb1ac2f2872c5291f1303a5e574dbc3cf26c8c548f2323134bdba32",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
@@ -121,13 +121,13 @@
     {
       "key": "md_local",
       "path": "public/geo/actual/md-local.geojson",
-      "action": "ALREADY_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "5848510a20112f48e94cea8e2577b179571b18d817075bd1a61ac64527bd1953",
-      "after_sha256": "5848510a20112f48e94cea8e2577b179571b18d817075bd1a61ac64527bd1953",
-      "changed_before_stabilization": false,
-      "matches_base_after_stabilization": true,
+      "after_sha256": "604b7bd1031f91c5442444cd60a24c573549cecf81e19397f8277b58aafd420a",
+      "changed_before_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
@@ -145,13 +145,13 @@
     {
       "key": "ro_gate",
       "path": "data/current/ro-release-gate.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "61fb2f6c0dac42c4aac21f5e697466ffa684ecf78700ea2d70493aad27468d96",
+      "base_sha256": "a51cf0425eecc01dce70aa3ca71bb905f515bc6de2fa1b3f23193eee84bfb028",
       "after_sha256": "a51cf0425eecc01dce70aa3ca71bb905f515bc6de2fa1b3f23193eee84bfb028",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -217,13 +217,13 @@
     {
       "key": "topology_audit",
       "path": "data/current/actual-topology-audit.json",
-      "action": "RESTORE_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "99d22a121c44f9ab7b7a7452869ce4dd3671eb44d8f80a9c8885f62aeef82e71",
-      "after_sha256": "99d22a121c44f9ab7b7a7452869ce4dd3671eb44d8f80a9c8885f62aeef82e71",
+      "after_sha256": "67a4cc831d89c3691d12f6c66cbb7bc7b58f3f1b3d333e14c7d7e6e3dc3540bb",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
@@ -241,13 +241,13 @@
     {
       "key": "structural_completeness_audit",
       "path": "data/current/actual-structural-completeness-audit.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "7535c7ac2bca7d7d7bff5b4f50a2603e659395d19c454d79f19750ee911eec9c",
+      "base_sha256": "7a9705bb60b337bec5fe9e9ffb609a021cff1810899fbf9416a0da25624974e5",
       "after_sha256": "7a9705bb60b337bec5fe9e9ffb609a021cff1810899fbf9416a0da25624974e5",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -265,13 +265,13 @@
     {
       "key": "settlement_policy",
       "path": "data/sources/actual-settlement-policy.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "ALREADY_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "2ef7bb1a3374d6084ad30c20a146f148235400a0cd9b51e968cbaadd6480973a",
+      "base_sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5",
       "after_sha256": "02d205ee6c382af1c5b7ba8e5d338e7931474c6dfa1b94a2e3fb42c483cd20d5",
-      "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "changed_before_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {
@@ -352,8 +352,8 @@
       "action": "ALREADY_BASE_BYTES",
       "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "f9674eaa0e1f390b2908b11bca3afd4397e9e96e262badb82e3445ac5dd20ab7",
-      "after_sha256": "f9674eaa0e1f390b2908b11bca3afd4397e9e96e262badb82e3445ac5dd20ab7",
+      "base_sha256": "11ba0de45f6393d93b5b746b19a00233d38daf2051d0347e2c8c2f771cbc1a36",
+      "after_sha256": "11ba0de45f6393d93b5b746b19a00233d38daf2051d0347e2c8c2f771cbc1a36",
       "changed_before_stabilization": false,
       "matches_base_after_stabilization": true,
       "idempotent": true
@@ -445,13 +445,13 @@
     {
       "key": "aux:import-report",
       "path": "data/current/import-report.json",
-      "action": "RESTORE_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "a3612feb3bca0e53339a850de99f7163b6c24f862505656add4ff018b8961e5a",
-      "after_sha256": "a3612feb3bca0e53339a850de99f7163b6c24f862505656add4ff018b8961e5a",
+      "after_sha256": "5db497381f0a6f70b144216d61713ed7dbc9d9026b7b30e1b41a82b1304c90cd",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
@@ -481,13 +481,13 @@
     {
       "key": "aux:md-cuatm-chain-pattern-audit",
       "path": "data/current/md-cuatm-chain-pattern-audit.json",
-      "action": "RESTORE_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "a03cd83fd4f58291f85817b7ef60a15b2fbd5dc7f6fb4ec9e4e08003bc9688cd",
-      "after_sha256": "a03cd83fd4f58291f85817b7ef60a15b2fbd5dc7f6fb4ec9e4e08003bc9688cd",
+      "after_sha256": "0b6933d9d0b48ee50a06098531435d6fa25011347290f8e08d8835eeedb0a93b",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
@@ -505,13 +505,13 @@
     {
       "key": "aux:md-cuatm-consistency-audit",
       "path": "data/current/md-cuatm-consistency-audit.json",
-      "action": "RESTORE_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "5b7c8a088d871978fedd57337b48ff2ffc9c244a611ccc4970a8f982e9db98b8",
-      "after_sha256": "5b7c8a088d871978fedd57337b48ff2ffc9c244a611ccc4970a8f982e9db98b8",
+      "after_sha256": "0453796fb8ca4a5d4cc154992c9bac278fdd54aa54149bec8d9d78d872274f91",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
@@ -625,13 +625,13 @@
     {
       "key": "aux:md-special-municipality-analysis",
       "path": "data/current/md-special-municipality-analysis.json",
-      "action": "RESTORE_BASE_BYTES",
-      "semantic_equal_to_base": true,
+      "action": "CANONICALIZE_CHANGED_CONTENT",
+      "semantic_equal_to_base": false,
       "non_administrative_metadata_ignored": false,
       "base_sha256": "770e816853cc33193f945414c2530cd09fe4b3e2985cf79922c03ffce5b10712",
-      "after_sha256": "770e816853cc33193f945414c2530cd09fe4b3e2985cf79922c03ffce5b10712",
+      "after_sha256": "f46d8bdb8b7d136cec73844f397fecdb5e102d0315f8290e444f9f83f0da5b1b",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": true,
+      "matches_base_after_stabilization": false,
       "idempotent": true
     },
     {
@@ -673,13 +673,13 @@
     {
       "key": "aux:ro-official-application",
       "path": "data/current/ro-official-application.json",
-      "action": "CANONICALIZE_CHANGED_CONTENT",
-      "semantic_equal_to_base": false,
+      "action": "RESTORE_BASE_BYTES",
+      "semantic_equal_to_base": true,
       "non_administrative_metadata_ignored": false,
-      "base_sha256": "135af4b4efbda5eb967b8baa7114c248fee8acda3ebd1bf967f35f3cfc59c3f4",
+      "base_sha256": "2f8224a17a07d78ea8db7aa5a3328f5ac8592783ed963f50625b258697c6f9b9",
       "after_sha256": "2f8224a17a07d78ea8db7aa5a3328f5ac8592783ed963f50625b258697c6f9b9",
       "changed_before_stabilization": true,
-      "matches_base_after_stabilization": false,
+      "matches_base_after_stabilization": true,
       "idempotent": true
     },
     {

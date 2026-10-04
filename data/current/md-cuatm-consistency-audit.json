@@ -8,19 +8,17 @@
     "duplicate_legal_id_count": 847,
     "entities_in_duplicate_groups": 1699,
     "by_class": {
-      "mixed_parallel_and_chain_representations": 1,
       "uat_and_component_locality_with_parallel_uat_boundary": 1,
       "component_locality_with_parallel_uat_boundaries_same_changeset": 2,
       "parallel_boundaries_same_identity_same_changeset": 1,
       "later_duplicate_same_identity": 1,
-      "same_identity_parent_child_chain": 841
+      "same_identity_parent_child_chain": 842
     }
   },
   "legal_identity_parent_summary": {
-    "consistent_root": 40,
+    "consistent_root": 41,
     "consistent_identity_parent": 2392,
-    "identity_parent_mismatch": 38,
-    "official_root_has_distinct_legal_parent": 1
+    "identity_parent_mismatch": 38
   },
   "unique_legal_identity_issue_summary": {
     "count": 20,
@@ -39,32 +37,6 @@
     }
   },
   "duplicate_legal_ids": [
-    {
-      "legal_id": "0100",
-      "legal_name": "Chișinău",
-      "count": 2,
-      "duplicate_class": "mixed_parallel_and_chain_representations",
-      "same_identity_edges": [],
-      "parallel_sets": [],
-      "items": [
-        {
-          "id": "osm-r1691801",
-          "name": "Municipiul Chișinău",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "0100",
-          "osm_parent_id": "MD"
-        },
-        {
-          "id": "osm-r1748490",
-          "name": "Chișinău",
-          "match_method": "explicit_cuatm_key",
-          "confidence": "high",
-          "cuatm_key": "0100",
-          "osm_parent_id": "osm-r1813306"
-        }
-      ]
-    },
     {
       "legal_id": "1050",
       "legal_name": "Țînțăreni",
@@ -292,6 +264,37 @@
       ],
       "structural_duplicate_class": "parallel_same_parent",
       "review_basis": "OSM relation history audit"
+    },
+    {
+      "legal_id": "0100",
+      "legal_name": "Chișinău",
+      "count": 2,
+      "duplicate_class": "same_identity_parent_child_chain",
+      "same_identity_edges": [
+        {
+          "child": "osm-r1748490",
+          "parent": "osm-r1691801"
+        }
+      ],
+      "parallel_sets": [],
+      "items": [
+        {
+          "id": "osm-r1691801",
+          "name": "Municipiul Chișinău",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "0100",
+          "osm_parent_id": "MD"
+        },
+        {
+          "id": "osm-r1748490",
+          "name": "Chișinău",
+          "match_method": "explicit_cuatm_key",
+          "confidence": "high",
+          "cuatm_key": "0100",
+          "osm_parent_id": "osm-r1691801"
+        }
+      ]
     },
     {
       "legal_id": "0111",
