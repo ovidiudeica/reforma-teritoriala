@@ -203,7 +203,32 @@ test('OSM refresh overlays explicitly required MD relations from authoritative O
  const refreshIndex=importer.indexOf('refreshRequiredRelationsFromOsmApi(raw,code,cfg)');
  const canonicalIndex=importer.indexOf('const canonical=canonicalRaw(raw)',refreshIndex);
  assert.ok(refreshIndex>=0&&canonicalIndex>refreshIndex,'authoritative relation/full overlay must happen before canonical snapshot hashing');
- assert.match(importer,/for\(const element of accepted\.elements\)byKey\.set\(/);
+ assert.match(importer,/fetchRelationFullFromOsmApi\(relationId,code\)/);
  assert.match(importer,/Authoritative OSM relation refresh failed closed/);
  assert.match(importer,/accept:'application\/json'/);
+});
+
+test('OSM refresh recovers previous in-scope relations omitted by Overpass area indexing',async()=>{
+ const importer=await readFile(importerPath,'utf8');
+ assert.match(importer,/recoverPreviousScopeRelations\(raw,previousRaw,code,cfg\)/);
+ assert.match(importer,/allowMissing:true/);
+ assert.match(importer,/relationMatchesScope\(relation,cfg\)/);
+ assert.match(importer,/continuity_recovered_relation_ids/);
+ assert.match(importer,/continuity_retired_relation_ids/);
+ assert.match(importer,/recovered previous in-scope relation/);
+ const continuityIndex=importer.indexOf('recoverPreviousScopeRelations(raw,previousRaw,code,cfg)');
+ const validateIndex=importer.indexOf('validateRaw(raw,code,cfg)',continuityIndex);
+ assert.ok(continuityIndex>=0&&validateIndex>continuityIndex,'continuity recovery must precede validation so false-negative area-index omissions cannot silently shrink ACTUAL');
+});
+
+test('OSM refresh falls back from monolithic Overpass to explicit relation chunks without changing source scope',async()=>{
+ const importer=await readFile(importerPath,'utf8');
+ assert.match(importer,/const OVERPASS_CHUNK_SIZE=300/);
+ assert.match(importer,/inventoryQueryFor/);
+ assert.match(importer,/explicitRelationsQuery/);
+ assert.match(importer,/fetchCountryChunked/);
+ assert.match(importer,/All monolithic Overpass endpoints failed/);
+ assert.match(importer,/fetchMode:'chunked_explicit_relations'/);
+ assert.match(importer,/querySha256:sha256\(queryFor\(cfg\)\)/);
+ assert.doesNotMatch(importer,/Promise\.all\([^)]*fetchOverpassJson/);
 });
