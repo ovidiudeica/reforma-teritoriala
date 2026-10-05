@@ -1,0 +1,15 @@
+name: Diagnostic MD live inventory diff
+on:
+  pull_request:
+    paths:
+      - 'scripts/process/diagnostic-md-live-inventory-diff.mjs'
+      - '.github/workflows/diagnostic-md-live-inventory-diff.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - run: node scripts/process/diagnostic-md-live-inventory-diff.mjs
