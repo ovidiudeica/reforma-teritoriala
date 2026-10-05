@@ -19,6 +19,7 @@ const OSM_API_RETRIES=2;
 const OVERPASS_RETRIES_PER_ENDPOINT=2;
 const OVERPASS_REQUEST_TIMEOUT_MS=90000;
 const OVERPASS_RETRY_BACKOFF_MS=5000;
+const OVERPASS_CHUNK_SIZE=300;
 const RETRIES_PER_ENDPOINT=OVERPASS_RETRIES_PER_ENDPOINT;
 const REQUEST_TIMEOUT_MS=OVERPASS_REQUEST_TIMEOUT_MS;
 const RETRY_BACKOFF_MS=OVERPASS_RETRY_BACKOFF_MS;
@@ -39,11 +40,14 @@ const canonicalize=value=>{
  return value;
 };
 const typeOrder={node:0,way:1,relation:2};
-const queryFor=({iso,levels,requiredRelations=[]})=>{
+const queryScopeFor=({iso,levels,requiredRelations=[]})=>{
  const filters=levels.map(l=>`relation(area.country)["boundary"="administrative"]["admin_level"="${l}"];`).join('\n');
  const required=requiredRelations.map(id=>`relation(${id});`).join('\n');
- return `[out:json][timeout:300];relation["ISO3166-1"="${iso}"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;${filters}${required ? `\n${required}` : ''});out body;>;out skel qt;`;
+ return `relation["ISO3166-1"="${iso}"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;${filters}${required ? `\n${required}` : ''});`;
 };
+const queryFor=cfg=>`[out:json][timeout:300];${queryScopeFor(cfg)}out body;>;out skel qt;`;
+const inventoryQueryFor=cfg=>`[out:json][timeout:300];${queryScopeFor(cfg)}out body;`;
+const explicitRelationsQuery=ids=>`[out:json][timeout:300];relation(id:${ids.join(',')});out body;>;out skel qt;`;
 function canonicalRaw(raw){
  const elements=[...raw.elements].sort((a,b)=>{
   const typeDelta=(typeOrder[a.type]??9)-(typeOrder[b.type]??9);
@@ -91,42 +95,162 @@ async function readPreviousManifest(){
   throw new Error(`Existing OSM source manifest is invalid: ${error.message}`);
  }
 }
+
+async function readPreviousRaw(previous,code){
+ const entry=previous?.countries?.[code];
+ if(!entry)return null;
+ const compressed=await readFile(entry.snapshot_path);
+ if(sha256(compressed)!==entry.compressed_sha256)throw new Error(`Previous OSM ${code} compressed snapshot hash mismatch`);
+ const canonical=gunzipSync(compressed);
+ if(sha256(canonical)!==entry.semantic_sha256)throw new Error(`Previous OSM ${code} semantic snapshot hash mismatch`);
+ const raw=JSON.parse(canonical.toString('utf8'));
+ validateRaw(raw,code,countries[code]);
+ return raw;
+}
+const relationMatchesScope=(relation,cfg)=>Boolean(
+ relation?.type==='relation'
+ && relation.tags?.boundary==='administrative'
+ && (
+  relation.tags?.['ISO3166-1']===cfg.iso
+  || cfg.levels.includes(Number(relation.tags?.admin_level))
+  || cfg.requiredRelations.includes(Number(relation.id))
+ )
+);
+async function fetchRelationFullFromOsmApi(relationId,code,{allowMissing=false}={}){
+ const attempts=[];
+ let lastError=null;
+ for(let attempt=1;attempt<=OSM_API_RETRIES;attempt++){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),OSM_API_REQUEST_TIMEOUT_MS);
+  const startedAt=new Date().toISOString(),started=Date.now();
+  const url=`${OSM_API_BASE}/relation/${relationId}/full.json`;
+  try{
+   const response=await fetch(url,{headers:{accept:'application/json','user-agent':'reforma-teritoriala-osm-source/1.0'},signal:controller.signal});
+   const body=await response.text();
+   if(allowMissing&&(response.status===404||response.status===410)){
+    attempts.push({relation_id:relationId,url,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'not_found',http_status:response.status});
+    return {status:'not_found',raw:null,attempts};
+   }
+   if(!response.ok)throw new Error(`HTTP ${response.status}: ${body.slice(0,240).replace(/\s+/g,' ')}`);
+   const parsed=JSON.parse(body);
+   if(!Array.isArray(parsed?.elements)||!parsed.elements.some(x=>x.type==='relation'&&Number(x.id)===relationId))throw new Error('authoritative relation/full response is incomplete');
+   attempts.push({relation_id:relationId,url,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:parsed.elements.length});
+   console.log(`OSM API ${code}: authoritative relation ${relationId} accepted on attempt ${attempt}/${OSM_API_RETRIES}`);
+   return {status:'success',raw:parsed,attempts};
+  }catch(error){
+   const timedOut=controller.signal.aborted;
+   const message=timedOut?`request timeout after ${OSM_API_REQUEST_TIMEOUT_MS}ms`:String(error?.message||error);
+   lastError=new Error(`OSM API ${code} relation ${relationId} attempt ${attempt}/${OSM_API_RETRIES}: ${message}`);
+   attempts.push({relation_id:relationId,url,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'failure',timeout:timedOut,error:message});
+   console.warn(lastError.message);
+   if(attempt<OSM_API_RETRIES)await sleep(RETRY_BACKOFF_MS*attempt);
+  }finally{clearTimeout(timer);}
+ }
+ throw new Error(`Authoritative OSM relation refresh failed closed for ${code} relation ${relationId}: ${lastError?.message||'unknown error'}`);
+}
+async function recoverPreviousScopeRelations(raw,previousRaw,code,cfg){
+ if(!previousRaw)return {raw,attempts:[],recovered_relation_ids:[],retired_relation_ids:[]};
+ const byKey=new Map(raw.elements.map(x=>[`${x.type}/${x.id}`,x]));
+ const currentRelationIds=new Set(raw.elements.filter(x=>x.type==='relation').map(x=>Number(x.id)));
+ const previousRelations=previousRaw.elements.filter(x=>relationMatchesScope(x,cfg));
+ const missingIds=previousRelations.map(x=>Number(x.id)).filter(id=>!currentRelationIds.has(id));
+ const attempts=[],recovered_relation_ids=[],retired_relation_ids=[];
+ for(const relationId of missingIds){
+  const fetched=await fetchRelationFullFromOsmApi(relationId,code,{allowMissing:true});
+  attempts.push(...fetched.attempts);
+  if(fetched.status==='not_found'){retired_relation_ids.push(relationId);continue;}
+  const relation=fetched.raw.elements.find(x=>x.type==='relation'&&Number(x.id)===relationId);
+  if(!relationMatchesScope(relation,cfg)){retired_relation_ids.push(relationId);continue;}
+  for(const element of fetched.raw.elements)byKey.set(`${element.type}/${element.id}`,element);
+  recovered_relation_ids.push(relationId);
+  console.warn(`OSM ${code}: recovered previous in-scope relation ${relationId} omitted by Overpass area index`);
+ }
+ return {raw:{...raw,elements:[...byKey.values()]},attempts,recovered_relation_ids,retired_relation_ids};
+}
+async function fetchOverpassJson(query,code,purpose){
+ const attempts=[];
+ let lastError=null;
+ for(const endpoint of ENDPOINTS){
+  for(let attempt=1;attempt<=RETRIES_PER_ENDPOINT;attempt++){
+   const controller=new AbortController();
+   const startedAt=new Date().toISOString(),started=Date.now();
+   const timer=setTimeout(()=>controller.abort(),REQUEST_TIMEOUT_MS);
+   try{
+    const response=await fetch(endpoint,{
+     method:'POST',
+     headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-osm-source/1.0'},
+     body:new URLSearchParams({data:query}),
+     signal:controller.signal
+    });
+    const body=await response.text();
+    if(!response.ok)throw new Error(`${endpoint} HTTP ${response.status}: ${body.slice(0,240).replace(/\s+/g,' ')}`);
+    const raw=JSON.parse(body);
+    if(!Array.isArray(raw?.elements))throw new Error('Overpass response has no elements array');
+    attempts.push({purpose,endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:raw.elements.length});
+    return {raw,endpoint,attempts};
+   }catch(error){
+    const timedOut=controller.signal.aborted;
+    const message=timedOut?`request timeout after ${REQUEST_TIMEOUT_MS}ms`:String(error?.message||error);
+    lastError=new Error(`Overpass ${code} ${purpose} failed at ${endpoint} attempt ${attempt}/${RETRIES_PER_ENDPOINT}: ${message}`);
+    attempts.push({purpose,endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'failure',timeout:timedOut,error:message});
+    console.warn(lastError.message);
+    if(attempt<RETRIES_PER_ENDPOINT)await sleep(RETRY_BACKOFF_MS*attempt);
+   }finally{clearTimeout(timer);}
+  }
+ }
+ throw Object.assign(new Error(`All Overpass endpoints failed closed for ${code} ${purpose}: ${JSON.stringify(attempts)}`,{cause:lastError}),{attempts});
+}
+async function fetchCountryChunked(code,cfg,previousRaw,bulkAttempts=[]){
+ console.warn(`OSM ${code}: falling back to chunked explicit-relation Overpass fetch`);
+ const inventory=await fetchOverpassJson(inventoryQueryFor(cfg),code,'inventory');
+ const continuity=await recoverPreviousScopeRelations(inventory.raw,previousRaw,code,cfg);
+ const relationIds=[...new Set(continuity.raw.elements.filter(x=>x.type==='relation'&&relationMatchesScope(x,cfg)).map(x=>Number(x.id)))].sort((a,b)=>a-b);
+ if(!relationIds.length)throw new Error(`OSM ${code} chunked fallback produced no relation inventory`);
+ const byKey=new Map();
+ const chunkAttempts=[];
+ for(let i=0;i<relationIds.length;i+=OVERPASS_CHUNK_SIZE){
+  const ids=relationIds.slice(i,i+OVERPASS_CHUNK_SIZE);
+  const part=await fetchOverpassJson(explicitRelationsQuery(ids),code,`relations-${i/OVERPASS_CHUNK_SIZE+1}`);
+  chunkAttempts.push(...part.attempts);
+  for(const element of part.raw.elements)byKey.set(`${element.type}/${element.id}`,element);
+ }
+ for(const relationId of continuity.recovered_relation_ids){
+  if(byKey.has(`relation/${relationId}`))continue;
+  const fetched=await fetchRelationFullFromOsmApi(relationId,code);
+  continuity.attempts.push(...fetched.attempts);
+  for(const element of fetched.raw.elements)byKey.set(`${element.type}/${element.id}`,element);
+ }
+ let raw={version:0.6,elements:[...byKey.values()]};
+ const finalContinuity=await recoverPreviousScopeRelations(raw,previousRaw,code,cfg);
+ raw=finalContinuity.raw;
+ const authoritative=await refreshRequiredRelationsFromOsmApi(raw,code,cfg);
+ raw=authoritative.raw;
+ const counts=validateRaw(raw,code,cfg);
+ const canonical=canonicalRaw(raw);
+ const compressed=gzipSync(Buffer.from(canonical),{level:9,mtime:0});
+ return {
+  canonical,compressed,semanticSha:sha256(canonical),compressedSha:sha256(compressed),counts,
+  endpoint:inventory.endpoint,querySha256:sha256(queryFor(cfg)),
+  attempts:[...bulkAttempts,...inventory.attempts,...chunkAttempts],
+  authoritativeRelationAttempts:authoritative.attempts,
+  continuityRelationAttempts:[...continuity.attempts,...finalContinuity.attempts],
+  continuityRecoveredRelationIds:[...new Set([...continuity.recovered_relation_ids,...finalContinuity.recovered_relation_ids])].sort((a,b)=>a-b),
+  continuityRetiredRelationIds:[...new Set([...continuity.retired_relation_ids,...finalContinuity.retired_relation_ids])].sort((a,b)=>a-b),
+  fetchMode:'chunked_explicit_relations'
+ };
+}
 async function refreshRequiredRelationsFromOsmApi(raw,code,cfg){
  if(!cfg.requiredRelations?.length)return {raw,attempts:[]};
  const byKey=new Map(raw.elements.map(x=>[`${x.type}/${x.id}`,x]));
  const attempts=[];
  for(const relationId of cfg.requiredRelations){
-  let accepted=null,lastError=null;
-  for(let attempt=1;attempt<=OSM_API_RETRIES;attempt++){
-   const controller=new AbortController();
-   const timer=setTimeout(()=>controller.abort(),OSM_API_REQUEST_TIMEOUT_MS);
-   const startedAt=new Date().toISOString(),started=Date.now();
-   const url=`${OSM_API_BASE}/relation/${relationId}/full.json`;
-   try{
-    const response=await fetch(url,{headers:{accept:'application/json','user-agent':'reforma-teritoriala-osm-source/1.0'},signal:controller.signal});
-    const body=await response.text();
-    if(!response.ok)throw new Error(`HTTP ${response.status}: ${body.slice(0,240).replace(/\s+/g,' ')}`);
-    const parsed=JSON.parse(body);
-    if(!Array.isArray(parsed?.elements)||!parsed.elements.some(x=>x.type==='relation'&&Number(x.id)===relationId))throw new Error('authoritative relation/full response is incomplete');
-    accepted=parsed;
-    attempts.push({relation_id:relationId,url,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:parsed.elements.length});
-    console.log(`OSM API ${code}: authoritative relation ${relationId} accepted on attempt ${attempt}/${OSM_API_RETRIES}`);
-    break;
-   }catch(error){
-    const timedOut=controller.signal.aborted;
-    const message=timedOut?`request timeout after ${OSM_API_REQUEST_TIMEOUT_MS}ms`:String(error?.message||error);
-    lastError=new Error(`OSM API ${code} relation ${relationId} attempt ${attempt}/${OSM_API_RETRIES}: ${message}`);
-    attempts.push({relation_id:relationId,url,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'failure',timeout:timedOut,error:message});
-    console.warn(lastError.message);
-    if(attempt<OSM_API_RETRIES)await sleep(RETRY_BACKOFF_MS*attempt);
-   }finally{clearTimeout(timer);}
-  }
-  if(!accepted)throw new Error(`Authoritative OSM relation refresh failed closed for ${code} relation ${relationId}: ${lastError?.message||'unknown error'}`);
-  for(const element of accepted.elements)byKey.set(`${element.type}/${element.id}`,element);
+  const fetched=await fetchRelationFullFromOsmApi(relationId,code);
+  attempts.push(...fetched.attempts);
+  for(const element of fetched.raw.elements)byKey.set(`${element.type}/${element.id}`,element);
  }
  return {raw:{...raw,elements:[...byKey.values()]},attempts};
 }
-async function fetchCountry(code,cfg){
+async function fetchCountry(code,cfg,previousRaw){
  const query=queryFor(cfg);
  const attempts=[];
  let lastError;
@@ -147,6 +271,8 @@ async function fetchCountry(code,cfg){
     if(!response.ok)throw new Error(`${endpoint} HTTP ${response.status}: ${body.slice(0,240).replace(/\s+/g,' ')}`);
     let raw;
     try{raw=JSON.parse(body);}catch(error){throw new Error(`${endpoint} returned invalid JSON: ${error.message}`);}
+    const continuity=await recoverPreviousScopeRelations(raw,previousRaw,code,cfg);
+    raw=continuity.raw;
     validateRaw(raw,code,cfg);
     const authoritative=await refreshRequiredRelationsFromOsmApi(raw,code,cfg);
     raw=authoritative.raw;
@@ -155,14 +281,21 @@ async function fetchCountry(code,cfg){
     const semanticSha=sha256(canonical);
     const compressed=gzipSync(Buffer.from(canonical),{level:9,mtime:0});
     const compressedSha=sha256(compressed);
-    attempts.push({endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:counts.element_count});
+    attempts.push({purpose:'bulk',endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:counts.element_count});
     console.log(`Overpass ${code}: accepted ${counts.element_count} elements from ${endpoint} on attempt ${attempt}/${RETRIES_PER_ENDPOINT}`);
-    return {canonical,compressed,semanticSha,compressedSha,counts,endpoint,querySha256:sha256(query),attempts,authoritativeRelationAttempts:authoritative.attempts};
+    return {
+     canonical,compressed,semanticSha,compressedSha,counts,endpoint,querySha256:sha256(query),attempts,
+     authoritativeRelationAttempts:authoritative.attempts,
+     continuityRelationAttempts:continuity.attempts,
+     continuityRecoveredRelationIds:continuity.recovered_relation_ids,
+     continuityRetiredRelationIds:continuity.retired_relation_ids,
+     fetchMode:'bulk'
+    };
    }catch(error){
     const timedOut=controller.signal.aborted;
     const message=timedOut?`request timeout after ${REQUEST_TIMEOUT_MS}ms`:String(error?.message||error);
     lastError=new Error(`Overpass ${code} failed at ${endpoint} attempt ${attempt}/${RETRIES_PER_ENDPOINT}: ${message}`);
-    attempts.push({endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'failure',timeout:timedOut,error:message});
+    attempts.push({purpose:'bulk',endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'failure',timeout:timedOut,error:message});
     console.warn(lastError.message);
     if(attempt<RETRIES_PER_ENDPOINT)await sleep(RETRY_BACKOFF_MS*attempt);
    }finally{
@@ -170,7 +303,9 @@ async function fetchCountry(code,cfg){
    }
   }
  }
- throw new Error(`All Overpass endpoints failed closed for ${code}: ${JSON.stringify(attempts)}`,{cause:lastError});
+ console.warn(`All monolithic Overpass endpoints failed for ${code}; using chunked fallback`);
+ try{return await fetchCountryChunked(code,cfg,previousRaw,attempts);}
+ catch(error){throw new Error(`OSM ${code} bulk and chunked refresh failed closed: ${error.message}`,{cause:lastError});}
 }
 async function writeAtomic(path,bytes){
  const tmp=`${path}.tmp-${process.pid}`;
@@ -196,8 +331,10 @@ async function main(){
  const previous=await readPreviousManifest();
  await mkdir(SNAPSHOT_DIR,{recursive:true});
  const fetchedAt=new Date().toISOString();
+ const previousRawByCode={};
+ for(const code of Object.keys(countries))previousRawByCode[code]=await readPreviousRaw(previous,code);
  const fresh={};
- for(const [code,cfg] of Object.entries(countries))fresh[code]=await fetchCountry(code,cfg);
+ for(const [code,cfg] of Object.entries(countries))fresh[code]=await fetchCountry(code,cfg,previousRawByCode[code]);
  for(const [code,result] of Object.entries(fresh)){
   result.snapshotPath=await materializeContentAddressedSnapshot(code,result);
   const previousEntry=previous?.countries?.[code];
@@ -232,9 +369,14 @@ async function main(){
    element_count:fresh[code].counts.element_count,
    relation_count:fresh[code].counts.relation_count,
    endpoint:fresh[code].endpoint,
+   fetch_mode:fresh[code].fetchMode,
    authoritative_relation_source:cfg.requiredRelations.length?OSM_API_BASE:null,
    authoritative_relation_ids:cfg.requiredRelations,
-   authoritative_relation_attempts:fresh[code].authoritativeRelationAttempts
+   authoritative_relation_attempts:fresh[code].authoritativeRelationAttempts,
+   continuity_authoritative_source:OSM_API_BASE,
+   continuity_recovered_relation_ids:fresh[code].continuityRecoveredRelationIds,
+   continuity_retired_relation_ids:fresh[code].continuityRetiredRelationIds,
+   continuity_relation_attempts:fresh[code].continuityRelationAttempts
   }]))
  };
  if(!unchanged)await writeAtomic(MANIFEST,Buffer.from(JSON.stringify(manifest,null,2)+'\n'));
