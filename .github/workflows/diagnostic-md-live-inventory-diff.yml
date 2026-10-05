@@ -6,41 +6,10 @@ on:
       - '.github/workflows/diagnostic-md-live-inventory-diff.yml'
 permissions:
   contents: read
-  packages: read
 jobs:
   audit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
-    container:
-      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-      - name: Trust workspace
-        run: |
-          mkdir -p /tmp/actual-home
-          HOME=/tmp/actual-home git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Install pinned dependencies
-        run: npm run install:actual-offline-deps
-      - name: Capture current OSM inventory
-        run: |
-          cp data/current/entities.json /tmp/entities-before.json
-      - name: Refresh OSM source exactly as candidate lifecycle
-        env:
-          HOME: /tmp/actual-home
-        run: npm run import:osm
-      - name: Rebuild raw OSM ACTUAL inventory
-        run: npm run build:osm-actual
-      - name: Compare raw inventory before and after live refresh
-        run: |
-          node - <<'NODE'
-          const fs=require('fs');
-          const before=JSON.parse(fs.readFileSync('/tmp/entities-before.json','utf8')).entities.filter(e=>e.id.startsWith('osm-r'));
-          const after=JSON.parse(fs.readFileSync('data/current/entities.json','utf8')).entities.filter(e=>e.id.startsWith('osm-r'));
-          const bm=new Map(before.map(e=>[e.id,e])), am=new Map(after.map(e=>[e.id,e]));
-          const removed=[...bm.keys()].filter(id=>!am.has(id)).map(id=>{const e=bm.get(id);return {id,name:e.name,admin_level:e.osm?.admin_level,type:e.type,parent_id:e.parent_id};});
-          const added=[...am.keys()].filter(id=>!bm.has(id)).map(id=>{const e=am.get(id);return {id,name:e.name,admin_level:e.osm?.admin_level,type:e.type,parent_id:e.parent_id};});
-          console.log(JSON.stringify({before_osm_count:before.length,after_osm_count:after.length,removed,added},null,2));
-          NODE
+      - run: node scripts/process/diagnostic-md-live-inventory-diff.mjs
