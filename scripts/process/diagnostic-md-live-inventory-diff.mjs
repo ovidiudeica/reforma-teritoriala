@@ -2,23 +2,46 @@
 import {readFile} from 'node:fs/promises';
 
 const current=JSON.parse(await readFile('public/geo/current/md-administrative.geojson','utf8'));
-const currentIds=new Map(current.features.map(f=>[
- Number(String(f.properties?.catalog_id||'').replace(/^osm-r/,'')),
- {id:f.properties?.catalog_id,name:f.properties?.tags?.['name:ro']||f.properties?.tags?.name||f.properties?.name||null,admin_level:Number(f.properties?.tags?.admin_level||f.properties?.admin_level||0)}
-]).filter(([id])=>Number.isFinite(id)));
-
-const q='[out:json][timeout:300];relation["ISO3166-1"="MD"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;relation(area.country)["boundary"="administrative"]["admin_level"="4"];relation(area.country)["boundary"="administrative"]["admin_level"="6"];relation(area.country)["boundary"="administrative"]["admin_level"="8"];relation(area.country)["boundary"="administrative"]["admin_level"="9"];relation(1813306);relation(1813297);relation(58512);relation(1813315);relation(1813316););out body;';
-const endpoints=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://overpass.private.coffee/api/interpreter'];
-let json=null,endpoint=null;
-for(const e of endpoints){
- try{
-  const r=await fetch(e,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded','user-agent':'reforma-teritoriala-md-live-inventory-audit/1.0'},body:new URLSearchParams({data:q}),signal:AbortSignal.timeout(180000)});
-  if(!r.ok)throw new Error('HTTP '+r.status);
-  json=await r.json();endpoint=e;break;
- }catch(err){console.error('endpoint failed',e,String(err?.message||err));}
+const currentRows=current.features.map(f=>{
+ const tags=f.properties?.tags||f.properties||{};
+ return {
+  relation_id:Number(String(f.properties?.catalog_id||'').replace(/^osm-r/,'')),
+  id:f.properties?.catalog_id,
+  name:tags['name:ro']||tags.name||null,
+  admin_level:Number(tags.admin_level||0)
+ };
+}).filter(x=>Number.isFinite(x.relation_id));
+const currentById=new Map(currentRows.map(x=>[x.relation_id,x]));
+const required=new Set([1813306,1813297,58512,1813315,1813316]);
+const live=new Map();
+const batchSize=75;
+const decode=s=>s.replaceAll('&quot;','"').replaceAll('&apos;',"'").replaceAll('&lt;','<').replaceAll('&gt;','>').replaceAll('&amp;','&');
+for(let i=0;i<currentRows.length;i+=batchSize){
+ const ids=currentRows.slice(i,i+batchSize).map(x=>x.relation_id).join(',');
+ const url='https://api.openstreetmap.org/api/0.6/relations?relations='+ids;
+ let body=null,lastErr=null;
+ for(let attempt=1;attempt<=3;attempt++){
+  try{
+   const r=await fetch(url,{headers:{'user-agent':'reforma-teritoriala-md-authoritative-inventory-audit/1.0'},signal:AbortSignal.timeout(60000)});
+   if(!r.ok)throw new Error('HTTP '+r.status);
+   body=await r.text();break;
+  }catch(e){lastErr=e;await new Promise(r=>setTimeout(r,1500*attempt));}
+ }
+ if(body==null)throw new Error('batch failed: '+String(lastErr?.message||lastErr));
+ for(const m of body.matchAll(/<relation\s+([^>]*\bid="(\d+)"[^>]*)>([\s\S]*?)<\/relation>/g)){
+  const id=Number(m[2]),inner=m[3],tags={};
+  for(const t of inner.matchAll(/<tag k="([^"]*)" v="([^"]*)"\s*\/>/g))tags[decode(t[1])]=decode(t[2]);
+  live.set(id,{id,tags});
+ }
+ console.log('authoritative batch',Math.floor(i/batchSize)+1,'/',Math.ceil(currentRows.length/batchSize),'returned',live.size);
 }
-if(!json)throw new Error('all endpoints failed');
-const live=new Map(json.elements.filter(x=>x.type==='relation').map(x=>[Number(x.id),x]));
-const missing=[...currentIds.entries()].filter(([id])=>!live.has(id)).map(([id,meta])=>({relation_id:id,...meta}));
-const added=[...live.entries()].filter(([id])=>!currentIds.has(id)).map(([id,x])=>({relation_id:id,name:x.tags?.['name:ro']||x.tags?.name||null,admin_level:Number(x.tags?.admin_level||0),boundary:x.tags?.boundary||null}));
-console.log(JSON.stringify({endpoint,current_count:currentIds.size,live_relation_count:live.size,missing,added},null,2));
+const missing=[],retagged=[];
+for(const [id,row] of currentById){
+ const r=live.get(id);
+ if(!r){missing.push(row);continue;}
+ const admin=Number(r.tags.admin_level||0);
+ if(!required.has(id)&&(r.tags.boundary!=='administrative'||![4,6,8,9].includes(admin))){
+  retagged.push({...row,current_boundary:r.tags.boundary||null,current_admin_level:admin||null,current_name:r.tags['name:ro']||r.tags.name||null});
+ }
+}
+console.log(JSON.stringify({checked:currentRows.length,returned:live.size,missing,retagged},null,2));
