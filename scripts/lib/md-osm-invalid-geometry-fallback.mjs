@@ -1,7 +1,6 @@
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
-import osmtogeojson from 'osmtogeojson';
 
 export const MD_MALCOCI_INVALID_OSM_FALLBACK=Object.freeze({
  relation_id:18968071,
@@ -101,7 +100,7 @@ export function assertMalcociGeojsonIsExactlyOpenAtReviewedEndpoints(feature){
  return {first,last};
 }
 
-export async function applyReviewedMalcociLastValidOsmGeometry({country,raw,geo,report,readFileFn=readFile}){
+export async function applyReviewedMalcociLastValidOsmGeometry({country,raw,geo,report,readFileFn=readFile,convertRawToGeoJson}){
  if(country!=='MD')return false;
  const cfg=MD_MALCOCI_INVALID_OSM_FALLBACK;
  inspectMalcociInvalidOsmContract(raw);
@@ -114,7 +113,8 @@ export async function applyReviewedMalcociLastValidOsmGeometry({country,raw,geo,
  const canonical=gunzipSync(compressed);
  if(sha256(canonical)!==cfg.fallback_snapshot.semantic_sha256)throw new Error('Reviewed Malcoci fallback semantic snapshot hash mismatch');
  const fallbackRaw=JSON.parse(canonical.toString('utf8'));
- const fallbackGeo=osmtogeojson(fallbackRaw,{flatProperties:false});
+ if(typeof convertRawToGeoJson!=='function')throw new Error('Reviewed Malcoci fallback requires an explicit OSM-to-GeoJSON converter');
+ const fallbackGeo=convertRawToGeoJson(fallbackRaw,{flatProperties:false});
  const fallbackFeature=(fallbackGeo.features||[]).find(x=>relationId(x)===cfg.relation_id);
  if(!fallbackFeature||!['Polygon','MultiPolygon'].includes(fallbackFeature.geometry?.type))throw new Error('Reviewed Malcoci fallback polygon missing');
  const fallbackRings=fallbackFeature.geometry.type==='Polygon'?fallbackFeature.geometry.coordinates:fallbackFeature.geometry.coordinates.flat();
