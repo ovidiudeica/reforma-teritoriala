@@ -12,7 +12,7 @@ const OSM_SNAPSHOT_DIR='data/sources/osm-snapshots';
 const CLASSIFIER_VERSION='2.3';
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9],stateRelationId:90689},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],stateRelationId:58974,requiredRelations:[1813306,1813297,58512,1813315,1813316]}
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],stateRelationId:58974,requiredRelations:[1813306,1813297,58512,1813315,1813316,18968071]}
 };
 const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
 const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
