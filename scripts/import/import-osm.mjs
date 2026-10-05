@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {resolveOsmSourceScopeConflicts} from '../lib/osm-source-scope-conflicts.mjs';
 import {fetchAdaptiveRelations,retryAfterMs} from '../lib/osm-adaptive-transport.mjs';
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,rename,writeFile} from 'node:fs/promises';
@@ -346,6 +347,12 @@ async function main(){
  for(const code of Object.keys(countries))previousRawByCode[code]=await readPreviousRaw(previous,code);
  const fresh={};
  for(const [code,cfg] of Object.entries(countries))fresh[code]=await fetchCountry(code,cfg,previousRawByCode[code]);
+ const scope=await resolveOsmSourceScopeConflicts({
+  inventories:Object.fromEntries(Object.entries(fresh).map(([code,result])=>[code,{relation_ids:result.selectedRelationIds,raw:JSON.parse(result.canonical)}])),
+  fetchAuthoritativeRelation:id=>fetchRelationFullFromOsmApi(id,'scope-collision'),
+  matchesScope:(relation,code)=>relationMatchesScope(relation,countries[code])
+ });
+ for(const [code,result] of Object.entries(fresh))result.selectedRelationIds=scope.relation_ids[code];
  for(const [code,result] of Object.entries(fresh)){
   result.snapshotPath=await materializeContentAddressedSnapshot(code,result);
   const previousEntry=previous?.countries?.[code];
@@ -383,6 +390,8 @@ async function main(){
    relation_count:fresh[code].counts.relation_count,
    selected_relation_count:fresh[code].selectedRelationIds.length,
    selected_relation_ids:fresh[code].selectedRelationIds,
+   source_scope_collision_resolutions:scope.resolutions.filter(r=>r.selected_jurisdiction===code||r.excluded_jurisdictions.includes(code)),
+   source_scope_collision_authoritative_attempts:scope.attempts,
    endpoint:fresh[code].endpoint,
    fetch_mode:fresh[code].fetchMode,
    authoritative_relation_source:cfg.requiredRelations.length?OSM_API_BASE:null,
@@ -400,6 +409,7 @@ async function main(){
   manifest:MANIFEST,
   fetched_at:manifest.fetched_at,
   previous_fetched_at:previous?.fetched_at??null,
+  source_scope_collision_resolutions:scope.resolutions,
   countries:Object.fromEntries(Object.keys(countries).map(code=>[code,{
    element_count:fresh[code].counts.element_count,
    relation_count:fresh[code].counts.relation_count,
