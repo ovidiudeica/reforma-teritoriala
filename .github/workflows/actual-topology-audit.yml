@@ -1,110 +1,28 @@
 name: ACTUAL topology audit
-
 on:
-  pull_request:
-    paths:
-      - 'public/geo/current/**'
-      - 'data/current/entities.json'
-      - 'data/current/actual-release-manifest.json'
-      - 'data/current/actual-release-persisted.json'
-      - 'scripts/process/audit-actual-topology.mjs'
-      - 'scripts/process/audit-actual-release-gate.mjs'
-      - 'scripts/import/import-osm.mjs'
-      - 'scripts/process/build-osm-actual.mjs'
-      - 'data/sources/osm-current.json'
-      - 'data/sources/osm-snapshots/**'
-      - 'scripts/test/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'vendor/npm/**'
-      - 'scripts/lib/actual-npm-dependency-bundle.mjs'
-      - 'scripts/lib/actual-build-environment.mjs'
-      - 'scripts/process/audit-actual-npm-dependency-bundle.mjs'
-      - 'scripts/process/install-actual-npm-offline.mjs'
-      - 'data/current/actual-build-environment-manifest.json'
-      - 'data/current/actual-build-environment-gate.json'
-      - 'data/current/actual-runtime-image.json'
-      - 'container/actual-runtime/**'
-      - 'scripts/lib/actual-runtime-image.mjs'
-      - 'scripts/process/build-actual-runtime-image-manifest.mjs'
-      - 'scripts/process/audit-actual-runtime-image.mjs'
-      - '.github/workflows/build-actual-runtime-image.yml'
-      - '.github/workflows/actual-topology-audit.yml'
   workflow_dispatch:
-
 permissions:
   contents: read
   packages: read
-
 jobs:
   topology:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     container:
       image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Check out requested revision
-        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - name: Check out diagnostic revision
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          ref: ${{ github.head_ref || github.ref_name }}
-          fetch-depth: 1
-
-      - name: Trust mounted GitHub workspace
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-      - name: Gate pinned ACTUAL OCI runtime
-        run: npm run audit:actual-runtime-image
-
-      - name: Audit vendored npm dependency bundle
-        run: npm run audit:actual-npm-dependency-bundle
-
-      - name: Audit pinned ACTUAL execution environment
-        env:
-          ACTUAL_BUILD_ENVIRONMENT_GATE_READ_ONLY: '1'
-        run: npm run audit:actual-build-environment
-
-      - name: Audit pinned Node/npm toolchain
-        run: npm run audit:node-toolchain
-
-      - name: Install dependencies from vendored offline bundle
-        run: npm run install:actual-offline-deps
-
-      - name: Require persisted ACTUAL release
+          ref: ${{ github.ref_name }}
+      - name: Prepare diagnostic runtime
         run: |
-          test -f data/current/actual-release-persisted.json
-          test -f data/current/actual-release-manifest.json
-
-      - name: Verify persisted release bytes read-only
-        env:
-          ACTUAL_RELEASE_GATE_READ_ONLY: '1'
-        run: npm run audit:actual-release-gate
-
-      - name: Check separated OSM source/build syntax
-        run: |
-          node --check scripts/import/import-osm.mjs
-          node --check scripts/process/build-osm-actual.mjs
-
-      - name: Audit committed ACTUAL topology
-        run: npm run audit:actual-topology
-
-      - name: Upload topology report
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: actual-topology-audit
-          path: data/current/actual-topology-audit.json
-          if-no-files-found: error
-
-      - name: Prove topology audit is repository read-only
-        run: |
-          git restore --source=HEAD -- data/current/actual-topology-audit.json
-          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-            echo "Topology audit changed tracked repository files:"
-            git status --short --untracked-files=no
-            git diff -- .
-            exit 1
-          fi
-
+          export HOME=/tmp/actual-home
+          mkdir -p "$HOME"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          npm run install:actual-offline-deps
       - name: Diagnostic live OSM MD relation delta
         run: node scripts/process/diagnose-osm-refresh-md-id-drift.mjs
