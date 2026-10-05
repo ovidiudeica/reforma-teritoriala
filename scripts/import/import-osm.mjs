@@ -24,7 +24,7 @@ const REQUEST_TIMEOUT_MS=OVERPASS_REQUEST_TIMEOUT_MS;
 const RETRY_BACKOFF_MS=OVERPASS_RETRY_BACKOFF_MS;
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9],requiredLevels:[4,8,9],requiredRelations:[],minElements:10000},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredLevels:[4,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316],minElements:10000}
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],requiredLevels:[4,8,9],requiredRelations:[1813306,1813297,58512,1813315,1813316,18968071],minElements:10000}
 };
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const sha256=value=>createHash('sha256').update(value).digest('hex');
