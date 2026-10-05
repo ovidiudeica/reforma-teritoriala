@@ -231,6 +231,7 @@ async function fetchCountryChunked(code,cfg,previousRaw,bulkAttempts=[]){
  return {
   canonical,compressed,semanticSha:sha256(canonical),compressedSha:sha256(compressed),counts,
   endpoint:inventory.endpoint,querySha256:sha256(queryFor(cfg)),
+  selectedRelationIds:[...new Set(raw.elements.filter(x=>relationMatchesScope(x,cfg)).map(x=>Number(x.id)))].sort((a,b)=>a-b),
   attempts:[...bulkAttempts,...inventory.attempts,...chunkAttempts],
   authoritativeRelationAttempts:authoritative.attempts,
   continuityRelationAttempts:[...continuity.attempts,...finalContinuity.attempts],
@@ -285,6 +286,7 @@ async function fetchCountry(code,cfg,previousRaw){
     console.log(`Overpass ${code}: accepted ${counts.element_count} elements from ${endpoint} on attempt ${attempt}/${RETRIES_PER_ENDPOINT}`);
     return {
      canonical,compressed,semanticSha,compressedSha,counts,endpoint,querySha256:sha256(query),attempts,
+     selectedRelationIds:[...new Set(raw.elements.filter(x=>relationMatchesScope(x,cfg)).map(x=>Number(x.id)))].sort((a,b)=>a-b),
      authoritativeRelationAttempts:authoritative.attempts,
      continuityRelationAttempts:continuity.attempts,
      continuityRecoveredRelationIds:continuity.recovered_relation_ids,
@@ -368,6 +370,8 @@ async function main(){
    query_sha256:fresh[code].querySha256,
    element_count:fresh[code].counts.element_count,
    relation_count:fresh[code].counts.relation_count,
+   selected_relation_count:fresh[code].selectedRelationIds.length,
+   selected_relation_ids:fresh[code].selectedRelationIds,
    endpoint:fresh[code].endpoint,
    fetch_mode:fresh[code].fetchMode,
    authoritative_relation_source:cfg.requiredRelations.length?OSM_API_BASE:null,
@@ -388,6 +392,7 @@ async function main(){
   countries:Object.fromEntries(Object.keys(countries).map(code=>[code,{
    element_count:fresh[code].counts.element_count,
    relation_count:fresh[code].counts.relation_count,
+   selected_relation_count:fresh[code].selectedRelationIds.length,
    semantic_sha256:fresh[code].semanticSha,
    compressed_sha256:fresh[code].compressedSha,
    snapshot_path:fresh[code].snapshotPath,
