@@ -64,10 +64,10 @@
     }
   },
   "p1_invariants": {
-    "expected_entity_count": 5830,
+    "expected_entity_count": 5707,
     "expected_entity_count_by_jurisdiction": {
       "RO": 3234,
-      "MD": 2596
+      "MD": 2473
     },
     "expected_public_contract": "actual-public-entity-v2",
     "expected_snapshot_id": "actual-6a7eac47d66d6701",
@@ -99,18 +99,19 @@
     "P2_3_PUBLIC": {
       "status": "active",
       "public_contract": "actual-public-entity-v3",
-      "public_entity_count": 5848,
+      "public_entity_count": 5725,
       "administrative_entity_count": 5830,
       "statistical_only_entity_count": 18,
       "statistical_role_entity_count": 63,
       "entity_count_by_jurisdiction": {
         "RO": 3246,
-        "MD": 2602
+        "MD": 2479
       },
       "hierarchy_contract": "actual-consolidated-hierarchy-v1",
       "administrative_geometry_mutation_allowed": false
     }
   },
   "activation_requested": false,
-  "target_public_contract": "actual-public-entity-v3"
+  "target_public_contract": "actual-public-entity-v3",
+  "scope_change": "RT-VA1 reviewed exclusion of 123 non-CUATM allotment relations; 63 statistical roles unchanged."
 }

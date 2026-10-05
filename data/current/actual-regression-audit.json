@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T20:37:24.316Z",
+  "generated_at": "2026-10-05T23:50:05.218Z",
   "mode": "ACTUAL",
   "status": "PASS",
   "bretcu_fallback_enabled": true,
   "ojdula_geometry_override_enabled": true,
   "hybrid_partition_enabled": true,
-  "expected_entity_count": 5830,
-  "entity_count": 5830,
+  "expected_entity_count": 5707,
+  "entity_count": 5707,
   "entity_count_by_jurisdiction": {
     "RO": 3234,
-    "MD": 2596
+    "MD": 2473
   },
   "reviewed_topology_normalization_entity_ids": [
     "osm-r12463200"
   ],
-  "policy": "Entity and master-feature counts are fail-closed against the reviewed ACTUAL baseline. Before P1.2 activation the baseline is RO=3233, MD=2596, total=5829; after explicit Brețcu fallback activation it is RO=3234, MD=2596, total=5830 with exactly one siruta-u64096 ANCPI/RELUAT fallback. Exactly one state-context boundary per jurisdiction remains required. Exact master-coordinate fidelity and unintended geometry drift are enforced separately by the ACTUAL release gate.",
+  "policy": "RT-VA1 reviewed MD canonical reduction by exactly 123 non-CUATM allotment geometries: after Brețcu fallback, RO=3234, MD=2473, total=5707; all original OSM records remain archived. State context, legal UAT identities, retained master coordinates and 63 statistical roles are protected.",
   "blocking_issue_count": 0,
   "blocking_issues": []
 }
