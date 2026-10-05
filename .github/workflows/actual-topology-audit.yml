@@ -105,3 +105,6 @@ jobs:
             git diff -- .
             exit 1
           fi
+
+      - name: Diagnostic live OSM MD relation delta
+        run: node scripts/process/diagnose-osm-refresh-md-id-drift.mjs
