@@ -27,7 +27,7 @@ export const MD_MALCOCI_INVALID_OSM_FALLBACK=Object.freeze({
   compressed_sha256:'e55945a99b0b26e1ee09bbf26cd3c64bfe957acf6147936900f253f981f009dc',
   snapshot_at:'2026-09-27T20:33:04.478Z'
  }),
- policy:'Retain the last cryptographically bound valid OSM polygon for relation 18968071 only while the authoritative live OSM relation matches the exact reviewed open-ring defect. Never fabricate the missing closure segment. Any upstream relation/way/node drift fails closed and requires re-review.'
+ policy:'Historical polygon is audit evidence only. Active live defects must use the separately reviewed current OSM boundary derivation; stale geometry is rejected.'
 });
 
 const sha256=value=>createHash('sha256').update(value).digest('hex');
@@ -137,31 +137,5 @@ export async function applyReviewedMalcociLastValidOsmGeometry({country,raw,geo,
    if(!a||!b||!fallbackSegments.has(segmentKey(a,b)))throw new Error('Reviewed Malcoci fallback differs from OSM shared boundary way 123810097; re-review required');
   }
  }
- liveFeature.geometry=structuredClone(fallbackFeature.geometry);
- liveFeature.properties={
-  ...(liveFeature.properties||{}),
-  topology_normalization:'reviewed_last_valid_osm_geometry_fallback',
-  topology_evidence:'issue #204; authoritative OSM relation 18968071 is currently open',
-  geometry_source_snapshot_at:cfg.fallback_snapshot.snapshot_at,
-  geometry_source_snapshot_semantic_sha256:cfg.fallback_snapshot.semantic_sha256,
-  live_osm_relation_version:cfg.expected_relation_version,
-  live_osm_relation_changeset:cfg.expected_relation_changeset,
-  live_osm_open_ring_preserved_as_source_defect:true,
-  fabricated_closure:false
- };
- report?.warnings?.push({
-  type:'reviewed_last_valid_osm_geometry_fallback',
-  jurisdiction:'MD',
-  relation_id:cfg.relation_id,
-  legal_id:cfg.legal_id,
-  live_relation_version:cfg.expected_relation_version,
-  live_relation_changeset:cfg.expected_relation_changeset,
-  odd_endpoints:cfg.expected_odd_endpoints,
-  fallback_snapshot_path:cfg.fallback_snapshot.path,
-  fallback_snapshot_semantic_sha256:cfg.fallback_snapshot.semantic_sha256,
-  geometry_source_snapshot_stale:true,
-  fabricated_closure:false,
-  policy:cfg.policy
- });
- return true;
+ throw new Error('Historical geometry fallback is prohibited for active live Malcoci defect; use reviewed current OSM boundary derivation');
 }

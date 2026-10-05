@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {applyReviewedMalcociLastValidOsmGeometry} from '../lib/md-osm-invalid-geometry-fallback.mjs';
+import {applyReviewedMalcociCurrentOsmGeometry} from '../lib/md-current-osm-boundary-derivation.mjs';
 import {createHash} from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
@@ -12,7 +12,7 @@ const OSM_SNAPSHOT_DIR='data/sources/osm-snapshots';
 const CLASSIFIER_VERSION='2.3';
 const countries={
  RO:{name:'România',iso:'RO',levels:[4,8,9],stateRelationId:90689},
- MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],stateRelationId:58974,requiredRelations:[1813306,1813297,58512,1813315,1813316,18968071]}
+ MD:{name:'Republica Moldova',iso:'MD',levels:[4,6,8,9],stateRelationId:58974,requiredRelations:[1813306,1813297,58512,1813315,1813316,18968071,1691800,1691801,18822134]}
 };
 const roSemanticEvidence=JSON.parse(await readFile('data/sources/ro-level9-exception-evidence.json','utf8'));
 const roSemanticByRelation=new Map((roSemanticEvidence.items||[]).map(x=>[Number(x.osm_relation_id),x]));
@@ -264,7 +264,7 @@ async function main(){
   if(!sourceEntry)throw new Error(`Missing materialized OSM source manifest entry for ${code}`);
   const raw=await readRawSnapshot(code,sourceEntry), geo=osmtogeojson(raw,{flatProperties:false});
   normalizeOfficialPointTouch(code,raw,geo,report);
-  await applyReviewedMalcociLastValidOsmGeometry({country:code,raw,geo,report,convertRawToGeoJson:osmtogeojson});
+  await applyReviewedMalcociCurrentOsmGeometry({country:code,raw,geo,report,convertRawToGeoJson:osmtogeojson});
   const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
   if(!countryFeature) throw new Error(`Missing country boundary geometry for ${code}`);

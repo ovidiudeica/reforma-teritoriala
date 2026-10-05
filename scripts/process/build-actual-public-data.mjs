@@ -2,6 +2,11 @@
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,rm,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
+import {auditActualOsmFidelity} from '../lib/actual-osm-fidelity.mjs';
+
+const osmFidelity=await auditActualOsmFidelity();
+if(osmFidelity.status!=='PASS')throw new Error('Exact OSM-to-ACTUAL fidelity failed closed: '+JSON.stringify(osmFidelity));
+console.log(JSON.stringify({gate:'exact_osm_fidelity',...osmFidelity}));
 
 const CATALOG='data/current/entities.json';
 const RO_GEO='public/geo/current/ro-administrative.geojson';
@@ -172,7 +177,8 @@ for(const e of entities){
  const representationSourceUrl=e.source_url||(
   e.osm?.relation_id!=null?'https://www.openstreetmap.org/relation/'+e.osm.relation_id:null
  );
- const geometrySource=e.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition'?'OpenStreetMap outer shell partitioned by the exact ANCPI/RELUAT shared UAT boundary':(representationSource==='ANCPI RELUAT'?'ANCPI/RELUAT administrative unit':'OpenStreetMap administrative relation');
+ const currentOsmDerivation=f.properties?.geometry_derivation==='reviewed_current_osm_boundary_network'?Object.fromEntries(['geometry_derivation','source_relation_id','connector_way_id','evidence_relation_ids','reviewed_contract_sha256','live_relation_version','connector_version','coordinate_edit','source_relation_membership_edit','historical_geometry_fallback','snapping','clipping','simplification'].map(key=>[key,f.properties[key]])):null;
+ const geometrySource=currentOsmDerivation?'Reviewed current OpenStreetMap administrative boundary network':e.representation?.partition_mode==='osm_shell_ancpi_shared_boundary_partition'?'OpenStreetMap outer shell partitioned by the exact ANCPI/RELUAT shared UAT boundary':(representationSource==='ANCPI RELUAT'?'ANCPI/RELUAT administrative unit':'OpenStreetMap administrative relation');
  const validation=validationFor(e,legal);
  const item={
   id:e.id,
@@ -192,6 +198,7 @@ for(const e of entities){
    legal_parent_name:legal?.parent_name||null
   },
   representation:{
+   ...(currentOsmDerivation||{}),
    source:representationSource,
    source_url:representationSourceUrl,
    osm_relation_id:e.osm?.relation_id??null,
@@ -246,10 +253,11 @@ for(const [id,source] of featureById){
    parent_catalog_id:item.hierarchy.parent_catalog_id,
    osm_relation_id:item.representation.osm_relation_id,
    legal_identity_status:item.validation.legal_identity_status,
-   geometry_source:item.representation.source,
+   geometry_source:item.representation.geometry_derivation==='reviewed_current_osm_boundary_network'?item.representation.geometry_source:item.representation.source,
    canonical_geometry_role:item.representation.canonical_geometry_role,
    geometry_scope:item.representation.geometry_scope,
-   geometry_precision:'master_coordinate_fidelity'
+   geometry_precision:'master_coordinate_fidelity',
+   ...(item.representation.geometry_derivation==='reviewed_current_osm_boundary_network'?Object.fromEntries(['geometry_derivation','source_relation_id','connector_way_id','evidence_relation_ids','reviewed_contract_sha256','live_relation_version','connector_version','coordinate_edit','source_relation_membership_edit','historical_geometry_fallback','snapping','clipping','simplification'].map(key=>[key,item.representation[key]])):{})
   },
   geometry:source.feature.geometry
  });

@@ -56,23 +56,13 @@ test('Malcoci invalid-live-boundary exception is exact, OSM-derived and self-exp
  assert.throws(()=>assertMalcociGeojsonIsExactlyOpenAtReviewedEndpoints(repaired),/now closed; remove stale fallback/);
 
  const report={warnings:[]};
- const applied=await applyReviewedMalcociLastValidOsmGeometry({
+ await assert.rejects(applyReviewedMalcociLastValidOsmGeometry({
   country:'MD',raw,geo:open,report,
   convertRawToGeoJson:()=>({type:'FeatureCollection',features:[{
    type:'Feature',id:'relation/18968071',properties:{},
    geometry:{type:'Polygon',coordinates:[[[28.6176407,47.0341981],[28.63,47.03],[28.64,47.02],[28.617828,47.0343526],[28.6176407,47.0341981]]]}
   }]})
- });
- assert.equal(applied,true);
- const geometry=open.features[0].geometry;
- const rings=geometry.type==='Polygon'?geometry.coordinates:geometry.coordinates.flat();
- assert.ok(rings.length>0);
- for(const ring of rings)assert.deepEqual(ring[0],ring.at(-1));
- assert.equal(open.features[0].properties.fabricated_closure,false);
- assert.equal(open.features[0].properties.geometry_source_snapshot_semantic_sha256,malcociCfg.fallback_snapshot.semantic_sha256);
- assert.equal(report.warnings.length,1);
- assert.equal(report.warnings[0].geometry_source_snapshot_stale,true);
- assert.equal(report.warnings[0].fabricated_closure,false);
+ }),/Historical geometry fallback is prohibited/);
 });
 
 test('exact defect cannot activate stale geometry with different live boundary segments',async()=>{

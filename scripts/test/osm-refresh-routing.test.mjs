@@ -1,3 +1,4 @@
+import './malcoci-current-derivation.test.mjs';
 import './osm-adaptive-transport.test.mjs';
 import './malcoci-contract.test.mjs';
 import test from 'node:test';
@@ -84,7 +85,7 @@ test('OSM importer is the only networked OSM source step and writes durable cont
  assert.match(importer,/authoritative_relation_ids/);
  assert.match(importer,/authoritative_relation_attempts/);
  assert.match(importer,/Authoritative OSM relation refresh failed closed/);
- assert.match(importer,/requiredRelations:\[1813306,1813297,58512,1813315,1813316,18968071\]/);
+ assert.match(importer,/requiredRelations:\[1813306,1813297,58512,1813315,1813316,18968071,1691800,1691801,18822134\]/);
  assert.doesNotMatch(importer,/data\/sources\/osm-runtime/);
 
  assert.match(builder,/data\/sources\/osm-current\.json/);
