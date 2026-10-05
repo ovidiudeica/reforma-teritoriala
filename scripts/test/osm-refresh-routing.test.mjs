@@ -270,7 +270,13 @@ test('Malcoci invalid-live-boundary exception is exact, OSM-derived and self-exp
  assert.throws(()=>assertMalcociGeojsonIsExactlyOpenAtReviewedEndpoints(repaired),/now closed; remove stale fallback/);
 
  const report={warnings:[]};
- const applied=await applyReviewedMalcociLastValidOsmGeometry({country:'MD',raw,geo:open,report});
+ const applied=await applyReviewedMalcociLastValidOsmGeometry({
+  country:'MD',raw,geo:open,report,
+  convertRawToGeoJson:()=>({type:'FeatureCollection',features:[{
+   type:'Feature',id:'relation/18968071',properties:{},
+   geometry:{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]}
+  }]})
+ });
  assert.equal(applied,true);
  const geometry=open.features[0].geometry;
  const rings=geometry.type==='Polygon'?geometry.coordinates:geometry.coordinates.flat();
