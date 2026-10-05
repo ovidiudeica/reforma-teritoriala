@@ -253,6 +253,7 @@ async function main(){
     query_sha256:x.query_sha256,
     element_count:x.element_count,
     relation_count:x.relation_count,
+    selected_relation_count:x.selected_relation_count??null,
     endpoint:x.endpoint
    }]))
   }
@@ -266,14 +267,26 @@ async function main(){
   const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
   if(!countryFeature) throw new Error(`Missing country boundary geometry for ${code}`);
   if(relationId(countryFeature)!==cfg.stateRelationId)throw new Error(`Unexpected ${code} country boundary relation: expected ${cfg.stateRelationId}, got ${relationId(countryFeature)}`);
-  const contained=allPolygons.filter(f=>{
-   if(f===countryFeature)return false;
-   try{return booleanPointInPolygon(pointOnFeature(f),countryFeature);}
-   catch(e){report.warnings.push({type:'country_membership_geometry_error',jurisdiction:code,relation_id:relationId(f),message:e.message});return false;}
-  });
-  const polygons=[countryFeature,...contained];
-  const excluded=allPolygons.filter(f=>f!==countryFeature&&!contained.includes(f)).map(f=>relationId(f));
-  if(excluded.length) report.warnings.push({type:'outside_country_boundary_excluded',jurisdiction:code,relation_ids:excluded});
+  let polygons;
+  if(Array.isArray(sourceEntry.selected_relation_ids)){
+   const selectedIds=new Set(sourceEntry.selected_relation_ids.map(Number));
+   if(Number(sourceEntry.selected_relation_count)!==selectedIds.size)throw new Error(`OSM ${code} selected relation count mismatch`);
+   if(!selectedIds.has(cfg.stateRelationId))throw new Error(`OSM ${code} source scope is missing state relation ${cfg.stateRelationId}`);
+   const polygonByRelation=new Map(allPolygons.map(f=>[relationId(f),f]));
+   const missingSelected=[...selectedIds].filter(id=>!polygonByRelation.has(id));
+   if(missingSelected.length)throw new Error(`OSM ${code} selected relations did not materialize as polygons: ${missingSelected.join(',')}`);
+   polygons=[...selectedIds].map(id=>polygonByRelation.get(id));
+   report.warnings.push({type:'source_scope_membership_applied',jurisdiction:code,selected_relation_count:selectedIds.size,policy:'OSM source selection determines jurisdiction membership; polygon containment is not used to discard selected relations.'});
+  }else{
+   const contained=allPolygons.filter(f=>{
+    if(f===countryFeature)return false;
+    try{return booleanPointInPolygon(pointOnFeature(f),countryFeature);}
+    catch(e){report.warnings.push({type:'country_membership_geometry_error',jurisdiction:code,relation_id:relationId(f),message:e.message});return false;}
+   });
+   polygons=[countryFeature,...contained];
+   const excluded=allPolygons.filter(f=>f!==countryFeature&&!contained.includes(f)).map(f=>relationId(f));
+   if(excluded.length) report.warnings.push({type:'outside_country_boundary_excluded',jurisdiction:code,relation_ids:excluded});
+  }
   const entities=polygons.map(f=>entity(code,f,osmSource.snapshot_at));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));
   assignParents(entities,byId,report.warnings);
