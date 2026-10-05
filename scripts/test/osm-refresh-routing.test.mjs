@@ -1,3 +1,5 @@
+import './osm-adaptive-transport.test.mjs';
+import './malcoci-contract.test.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -51,7 +53,7 @@ test('candidate defaults to offline OSM rebuild and only the OSM wrapper enables
   readFile('.github/workflows/refresh-ro-official.yml','utf8'),
   readFile('.github/workflows/refresh-md-official.yml','utf8')
  ]);
- const refreshInputBlocks=[...candidate.matchAll(/refresh_osm:\s*\n\s+(?:description:.*\n\s+)?required:\s*false\s*\n\s+type:\s*boolean\s*\n\s+default:\s*false/g)];
+ const refreshInputBlocks=[...candidate.matchAll(/refresh_osm:\s*\n\s+(?:description:.*\r?\n\s+)?required:\s*false\s*\n\s+type:\s*boolean\s*\n\s+default:\s*false/g)];
  assert.equal(refreshInputBlocks.length,2,'workflow_dispatch and workflow_call must both default refresh_osm=false');
  assert.match(osmWrapper,/refresh_osm:\s*true/);
  assert.match(roWrapper,/refresh_osm:\s*false/);
@@ -82,7 +84,7 @@ test('OSM importer is the only networked OSM source step and writes durable cont
  assert.match(importer,/authoritative_relation_ids/);
  assert.match(importer,/authoritative_relation_attempts/);
  assert.match(importer,/Authoritative OSM relation refresh failed closed/);
- assert.match(importer,/requiredRelations:\[1813306,1813297,58512,1813315,1813316\]/);
+ assert.match(importer,/requiredRelations:\[1813306,1813297,58512,1813315,1813316,18968071\]/);
  assert.doesNotMatch(importer,/data\/sources\/osm-runtime/);
 
  assert.match(builder,/data\/sources\/osm-current\.json/);
@@ -130,6 +132,23 @@ test('candidate commits durable OSM snapshots but network review artifacts never
  assert.doesNotMatch(commitBlock,/osm-runtime/);
  assert.match(candidate,/data\/sources\/osm-snapshots\/\*\.json\.gz/);
  assert.doesNotMatch(candidate,/data\/sources\/osm-runtime\/\*\.json\.gz/);
+});
+
+test('refreshed OSM source scope, not geometric containment, controls jurisdiction membership',async()=>{
+ const [importer,builder]=await Promise.all([
+  readFile(importerPath,'utf8'),
+  readFile(builderPath,'utf8')
+ ]);
+ assert.match(importer,/selected_relation_count/);
+ assert.match(importer,/selected_relation_ids/);
+ assert.match(importer,/selectedRelationIds:\[\.\.\.new Set\(raw\.elements\.filter\(x=>relationMatchesScope\(x,cfg\)\)/);
+ assert.match(builder,/Array\.isArray\(sourceEntry\.selected_relation_ids\)/);
+ assert.match(builder,/source_scope_membership_applied/);
+ assert.match(builder,/OSM source selection determines jurisdiction membership/);
+ const sourceScopeIndex=builder.indexOf("if(Array.isArray(sourceEntry.selected_relation_ids))");
+ const legacyContainmentIndex=builder.indexOf("booleanPointInPolygon(pointOnFeature(f),countryFeature)",sourceScopeIndex);
+ assert.ok(sourceScopeIndex>=0&&legacyContainmentIndex>sourceScopeIndex,'geometric country containment must remain compatibility-only for old manifests');
+ assert.match(builder,/selected relations did not materialize as polygons/);
 });
 
 test('deterministic OSM builder retains all non-network classifier dependencies after extraction',async()=>{
@@ -203,7 +222,32 @@ test('OSM refresh overlays explicitly required MD relations from authoritative O
  const refreshIndex=importer.indexOf('refreshRequiredRelationsFromOsmApi(raw,code,cfg)');
  const canonicalIndex=importer.indexOf('const canonical=canonicalRaw(raw)',refreshIndex);
  assert.ok(refreshIndex>=0&&canonicalIndex>refreshIndex,'authoritative relation/full overlay must happen before canonical snapshot hashing');
- assert.match(importer,/for\(const element of accepted\.elements\)byKey\.set\(/);
+ assert.match(importer,/fetchRelationFullFromOsmApi\(relationId,code\)/);
  assert.match(importer,/Authoritative OSM relation refresh failed closed/);
  assert.match(importer,/accept:'application\/json'/);
+});
+
+test('OSM refresh recovers previous in-scope relations omitted by Overpass area indexing',async()=>{
+ const importer=await readFile(importerPath,'utf8');
+ assert.match(importer,/recoverPreviousScopeRelations\(raw,previousRaw,code,cfg\)/);
+ assert.match(importer,/allowMissing:true/);
+ assert.match(importer,/relationMatchesScope\(relation,cfg\)/);
+ assert.match(importer,/continuity_recovered_relation_ids/);
+ assert.match(importer,/continuity_retired_relation_ids/);
+ assert.match(importer,/recovered previous in-scope relation/);
+ const continuityIndex=importer.indexOf('recoverPreviousScopeRelations(raw,previousRaw,code,cfg)');
+ const validateIndex=importer.indexOf('validateRaw(raw,code,cfg)',continuityIndex);
+ assert.ok(continuityIndex>=0&&validateIndex>continuityIndex,'continuity recovery must precede validation so false-negative area-index omissions cannot silently shrink ACTUAL');
+});
+
+test('OSM refresh falls back from monolithic Overpass to explicit relation chunks without changing source scope',async()=>{
+ const importer=await readFile(importerPath,'utf8');
+ assert.match(importer,/const OVERPASS_CHUNK_SIZE=300/);
+ assert.match(importer,/inventoryQueryFor/);
+ assert.match(importer,/explicitRelationsQuery/);
+ assert.match(importer,/fetchCountryChunked/);
+ assert.match(importer,/All monolithic Overpass endpoints failed/);
+ assert.match(importer,/fetchMode:'chunked_explicit_relations'/);
+ assert.match(importer,/querySha256:sha256\(queryFor\(cfg\)\)/);
+ assert.doesNotMatch(importer,/Promise\.all\([^)]*fetchOverpassJson/);
 });
