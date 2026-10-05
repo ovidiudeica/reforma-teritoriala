@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import {applyMdReviewedParentHierarchyOverrides} from '../lib/md-parent-hierarchy-overrides.mjs';
+import {normalizeReviewedMdOsmBoundaryGaps} from '../lib/md-osm-boundary-normalizations.mjs';
 
 const wrapperPath='.github/workflows/import-osm.yml';
 const candidatePath='.github/workflows/actual-candidate.yml';
@@ -206,4 +207,52 @@ test('OSM refresh overlays explicitly required MD relations from authoritative O
  assert.match(importer,/for\(const element of accepted\.elements\)byKey\.set\(/);
  assert.match(importer,/Authoritative OSM relation refresh failed closed/);
  assert.match(importer,/accept:'application\/json'/);
+});
+
+
+function malcociGapFixture(){
+ const connector={type:'way',id:123810097,nodes:[353223870,999,1379403420]};
+ const childWays=[
+  {type:'way',id:1,nodes:[353223870,10]},
+  {type:'way',id:2,nodes:[10,20]},
+  {type:'way',id:3,nodes:[20,1379403420]}
+ ];
+ const child={type:'relation',id:18968071,tags:{admin_level:'9',boundary:'administrative',name:'Malcoci','ref:cuatm:codunic':'5520'},members:childWays.map(w=>({type:'way',ref:w.id,role:'outer'}))};
+ const evidence=[
+  {type:'relation',id:1691800,tags:{admin_level:'4',boundary:'administrative',name:'Raionul Ialoveni'},members:[{type:'way',ref:123810097,role:'outer'}]},
+  {type:'relation',id:1691801,tags:{admin_level:'4',boundary:'administrative',name:'Municipiul Chișinău'},members:[{type:'way',ref:123810097,role:'outer'}]},
+  {type:'relation',id:18822134,tags:{admin_level:'8',boundary:'administrative',name:'Malcoci'},members:[{type:'way',ref:123810097,role:'outer'}]}
+ ];
+ return {version:0.6,elements:[connector,...childWays,child,...evidence]};
+}
+
+test('reviewed Malcoci OSM normalization reuses the exact shared administrative way without coordinate edits',()=>{
+ const raw=malcociGapFixture();
+ const warnings=[];
+ normalizeReviewedMdOsmBoundaryGaps(raw,warnings);
+ const child=raw.elements.find(x=>x.type==='relation'&&x.id===18968071);
+ assert.ok(child.members.some(m=>m.type==='way'&&m.ref===123810097&&m.role==='outer'));
+ assert.equal(warnings.length,1);
+ assert.equal(warnings[0].coordinate_edit,false);
+ assert.equal(warnings[0].source_membership_edit,false);
+ assert.equal(warnings[0].build_geometry_member_completion,true);
+ assert.deepEqual(warnings[0].gap_endpoint_node_ids,[353223870,1379403420]);
+});
+
+test('reviewed Malcoci OSM normalization is a no-op after OSM repairs the relation itself',()=>{
+ const raw=malcociGapFixture();
+ const child=raw.elements.find(x=>x.type==='relation'&&x.id===18968071);
+ child.members.push({type:'way',ref:123810097,role:'outer'});
+ const before=structuredClone(raw);
+ const warnings=[];
+ normalizeReviewedMdOsmBoundaryGaps(raw,warnings);
+ assert.deepEqual(raw,before);
+ assert.deepEqual(warnings,[]);
+});
+
+test('reviewed Malcoci OSM normalization fails closed if the missing connector loses administrative evidence',()=>{
+ const raw=malcociGapFixture();
+ const parent=raw.elements.find(x=>x.type==='relation'&&x.id===18822134);
+ parent.members=[];
+ assert.throws(()=>normalizeReviewedMdOsmBoundaryGaps(raw,[]),/connector administrative evidence drift/);
 });
