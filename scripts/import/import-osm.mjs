@@ -13,6 +13,9 @@ const DEFAULT_ENDPOINTS=[
  'https://overpass.private.coffee/api/interpreter'
 ];
 const ENDPOINTS=[...DEFAULT_ENDPOINTS];
+const OSM_API_BASE='https://api.openstreetmap.org/api/0.6';
+const OSM_API_REQUEST_TIMEOUT_MS=30000;
+const OSM_API_RETRIES=2;
 const OVERPASS_RETRIES_PER_ENDPOINT=2;
 const OVERPASS_REQUEST_TIMEOUT_MS=90000;
 const OVERPASS_RETRY_BACKOFF_MS=5000;
@@ -88,6 +91,41 @@ async function readPreviousManifest(){
   throw new Error(`Existing OSM source manifest is invalid: ${error.message}`);
  }
 }
+async function refreshRequiredRelationsFromOsmApi(raw,code,cfg){
+ if(!cfg.requiredRelations?.length)return {raw,attempts:[]};
+ const byKey=new Map(raw.elements.map(x=>[`${x.type}/${x.id}`,x]));
+ const attempts=[];
+ for(const relationId of cfg.requiredRelations){
+  let accepted=null,lastError=null;
+  for(let attempt=1;attempt<=OSM_API_RETRIES;attempt++){
+   const controller=new AbortController();
+   const timer=setTimeout(()=>controller.abort(),OSM_API_REQUEST_TIMEOUT_MS);
+   const startedAt=new Date().toISOString(),started=Date.now();
+   const url=`${OSM_API_BASE}/relation/${relationId}/full.json`;
+   try{
+    const response=await fetch(url,{headers:{accept:'application/json','user-agent':'reforma-teritoriala-osm-source/1.0'},signal:controller.signal});
+    const body=await response.text();
+    if(!response.ok)throw new Error(`HTTP ${response.status}: ${body.slice(0,240).replace(/\s+/g,' ')}`);
+    const parsed=JSON.parse(body);
+    if(!Array.isArray(parsed?.elements)||!parsed.elements.some(x=>x.type==='relation'&&Number(x.id)===relationId))throw new Error('authoritative relation/full response is incomplete');
+    accepted=parsed;
+    attempts.push({relation_id:relationId,url,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:parsed.elements.length});
+    console.log(`OSM API ${code}: authoritative relation ${relationId} accepted on attempt ${attempt}/${OSM_API_RETRIES}`);
+    break;
+   }catch(error){
+    const timedOut=controller.signal.aborted;
+    const message=timedOut?`request timeout after ${OSM_API_REQUEST_TIMEOUT_MS}ms`:String(error?.message||error);
+    lastError=new Error(`OSM API ${code} relation ${relationId} attempt ${attempt}/${OSM_API_RETRIES}: ${message}`);
+    attempts.push({relation_id:relationId,url,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'failure',timeout:timedOut,error:message});
+    console.warn(lastError.message);
+    if(attempt<OSM_API_RETRIES)await sleep(RETRY_BACKOFF_MS*attempt);
+   }finally{clearTimeout(timer);}
+  }
+  if(!accepted)throw new Error(`Authoritative OSM relation refresh failed closed for ${code} relation ${relationId}: ${lastError?.message||'unknown error'}`);
+  for(const element of accepted.elements)byKey.set(`${element.type}/${element.id}`,element);
+ }
+ return {raw:{...raw,elements:[...byKey.values()]},attempts};
+}
 async function fetchCountry(code,cfg){
  const query=queryFor(cfg);
  const attempts=[];
@@ -109,6 +147,9 @@ async function fetchCountry(code,cfg){
     if(!response.ok)throw new Error(`${endpoint} HTTP ${response.status}: ${body.slice(0,240).replace(/\s+/g,' ')}`);
     let raw;
     try{raw=JSON.parse(body);}catch(error){throw new Error(`${endpoint} returned invalid JSON: ${error.message}`);}
+    validateRaw(raw,code,cfg);
+    const authoritative=await refreshRequiredRelationsFromOsmApi(raw,code,cfg);
+    raw=authoritative.raw;
     const counts=validateRaw(raw,code,cfg);
     const canonical=canonicalRaw(raw);
     const semanticSha=sha256(canonical);
@@ -116,7 +157,7 @@ async function fetchCountry(code,cfg){
     const compressedSha=sha256(compressed);
     attempts.push({endpoint,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:counts.element_count});
     console.log(`Overpass ${code}: accepted ${counts.element_count} elements from ${endpoint} on attempt ${attempt}/${RETRIES_PER_ENDPOINT}`);
-    return {canonical,compressed,semanticSha,compressedSha,counts,endpoint,querySha256:sha256(query),attempts};
+    return {canonical,compressed,semanticSha,compressedSha,counts,endpoint,querySha256:sha256(query),attempts,authoritativeRelationAttempts:authoritative.attempts};
    }catch(error){
     const timedOut=controller.signal.aborted;
     const message=timedOut?`request timeout after ${REQUEST_TIMEOUT_MS}ms`:String(error?.message||error);
@@ -190,7 +231,10 @@ async function main(){
    query_sha256:fresh[code].querySha256,
    element_count:fresh[code].counts.element_count,
    relation_count:fresh[code].counts.relation_count,
-   endpoint:fresh[code].endpoint
+   endpoint:fresh[code].endpoint,
+   authoritative_relation_source:cfg.requiredRelations.length?OSM_API_BASE:null,
+   authoritative_relation_ids:cfg.requiredRelations,
+   authoritative_relation_attempts:fresh[code].authoritativeRelationAttempts
   }]))
  };
  if(!unchanged)await writeAtomic(MANIFEST,Buffer.from(JSON.stringify(manifest,null,2)+'\n'));

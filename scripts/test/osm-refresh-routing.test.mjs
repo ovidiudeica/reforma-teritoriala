@@ -75,6 +75,14 @@ test('OSM importer is the only networked OSM source step and writes durable cont
  assert.match(importer,/previousEntry\?\.semantic_sha256===result\.semanticSha/);
  assert.match(importer,/status=unchanged\?'UNCHANGED':'UPDATED'/);
  assert.match(importer,/semantic_sha256/);
+ assert.match(importer,/OSM_API_BASE='https:\/\/api\.openstreetmap\.org\/api\/0\.6'/);
+ assert.match(importer,/refreshRequiredRelationsFromOsmApi/);
+ assert.match(importer,/relation\/\$\{relationId\}\/full\.json/);
+ assert.match(importer,/authoritative_relation_source/);
+ assert.match(importer,/authoritative_relation_ids/);
+ assert.match(importer,/authoritative_relation_attempts/);
+ assert.match(importer,/Authoritative OSM relation refresh failed closed/);
+ assert.match(importer,/requiredRelations:\[1813306,1813297,58512,1813315,1813316\]/);
  assert.doesNotMatch(importer,/data\/sources\/osm-runtime/);
 
  assert.match(builder,/data\/sources\/osm-current\.json/);
@@ -187,4 +195,15 @@ test('network-enabled source refresh uses a writable explicit HOME inside the un
  assert.match(block,/--network bridge/);
  assert.doesNotMatch(block,/--privileged/);
  assert.doesNotMatch(block,/--user 0(?=\s|\\)/);
+});
+
+
+test('OSM refresh overlays explicitly required MD relations from authoritative OSM API before canonical hashing',async()=>{
+ const importer=await readFile(importerPath,'utf8');
+ const refreshIndex=importer.indexOf('refreshRequiredRelationsFromOsmApi(raw,code,cfg)');
+ const canonicalIndex=importer.indexOf('const canonical=canonicalRaw(raw)',refreshIndex);
+ assert.ok(refreshIndex>=0&&canonicalIndex>refreshIndex,'authoritative relation/full overlay must happen before canonical snapshot hashing');
+ assert.match(importer,/for\(const element of accepted\.elements\)byKey\.set\(/);
+ assert.match(importer,/Authoritative OSM relation refresh failed closed/);
+ assert.match(importer,/accept:'application\/json'/);
 });
