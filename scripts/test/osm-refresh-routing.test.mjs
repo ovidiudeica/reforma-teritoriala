@@ -1,3 +1,4 @@
+import './osm-source-scope-conflicts.test.mjs';
 import './malcoci-current-derivation.test.mjs';
 import './osm-adaptive-transport.test.mjs';
 import './malcoci-contract.test.mjs';
