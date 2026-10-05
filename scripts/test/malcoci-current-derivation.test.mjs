@@ -1,6 +1,13 @@
-import {auditCountryOsmFidelity} from '../lib/actual-osm-fidelity.mjs';
-import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {gunzipSync} from 'node:zlib';import osmtogeojson from 'osmtogeojson';
-import {applyReviewedMalcociCurrentOsmGeometry as apply,deriveReviewedMalcociCurrentOsmGeometry as derive,geometrySegments,segmentDifference,MALCOCI_CURRENT_OSM_CONTRACT as contract} from '../lib/md-current-osm-boundary-derivation.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {gunzipSync} from 'node:zlib';
+import {createRequire} from 'node:module';import {execFileSync} from 'node:child_process';
+// Persisted-release regressions run before production dependency installation.
+// Provision only the cryptographically verified offline bundle, with scripts and network disabled.
+const require=createRequire(import.meta.url);
+try{require.resolve('osmtogeojson');require.resolve('jsts/org/locationtech/jts/io/GeoJSONReader.js');}
+catch(error){if(error.code!=='MODULE_NOT_FOUND')throw error;execFileSync(process.execPath,['scripts/process/install-actual-npm-offline.mjs'],{stdio:'pipe'});}
+const {default:osmtogeojson}=await import('osmtogeojson');
+const {applyReviewedMalcociCurrentOsmGeometry:apply,deriveReviewedMalcociCurrentOsmGeometry:derive,geometrySegments,segmentDifference}=await import('../lib/md-current-osm-boundary-derivation.mjs');
+const {auditCountryOsmFidelity}=await import('../lib/actual-osm-fidelity.mjs');
 import {MD_MALCOCI_INVALID_OSM_FALLBACK as old,applyReviewedMalcociLastValidOsmGeometry as historicalApply} from '../lib/md-osm-invalid-geometry-fallback.mjs';
 const fixture=JSON.parse(await readFile(new URL('./fixtures/malcoci-reviewed-current-osm.json',import.meta.url),'utf8'));
 const copy=()=>structuredClone(fixture),sourceGeo=raw=>osmtogeojson(raw,{flatProperties:false});
