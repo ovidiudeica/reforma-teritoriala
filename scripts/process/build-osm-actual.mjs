@@ -263,7 +263,7 @@ async function main(){
   if(!sourceEntry)throw new Error(`Missing materialized OSM source manifest entry for ${code}`);
   const raw=await readRawSnapshot(code,sourceEntry), geo=osmtogeojson(raw,{flatProperties:false});
   normalizeOfficialPointTouch(code,raw,geo,report);
-  await applyReviewedMalcociLastValidOsmGeometry({country:code,raw,geo,report});
+  await applyReviewedMalcociLastValidOsmGeometry({country:code,raw,geo,report,convertRawToGeoJson:osmtogeojson});
   const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
   if(!countryFeature) throw new Error(`Missing country boundary geometry for ${code}`);
