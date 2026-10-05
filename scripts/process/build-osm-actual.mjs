@@ -5,6 +5,7 @@ import {gunzipSync} from 'node:zlib';
 import osmtogeojson from 'osmtogeojson';
 import { area, intersect, featureCollection, pointOnFeature, booleanPointInPolygon } from '@turf/turf';
 import {applyMdReviewedParentHierarchyOverrides} from '../lib/md-parent-hierarchy-overrides.mjs';
+import {applyReviewedMalcociLastValidOsmGeometry} from '../lib/md-osm-invalid-geometry-fallback.mjs';
 
 const OSM_MANIFEST='data/sources/osm-current.json';
 const OSM_SNAPSHOT_DIR='data/sources/osm-snapshots';
@@ -262,6 +263,7 @@ async function main(){
   if(!sourceEntry)throw new Error(`Missing materialized OSM source manifest entry for ${code}`);
   const raw=await readRawSnapshot(code,sourceEntry), geo=osmtogeojson(raw,{flatProperties:false});
   normalizeOfficialPointTouch(code,raw,geo,report);
+  await applyReviewedMalcociLastValidOsmGeometry({country:code,raw,geo,report});
   const allPolygons=geo.features.filter(f=>relationId(f)&&['Polygon','MultiPolygon'].includes(f.geometry?.type));
   const countryFeature=allPolygons.find(f=>(f.properties?.tags||f.properties||{})['ISO3166-1']===cfg.iso);
   if(!countryFeature) throw new Error(`Missing country boundary geometry for ${code}`);
