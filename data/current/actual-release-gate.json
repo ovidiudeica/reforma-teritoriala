@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T20:37:27.458Z",
+  "generated_at": "2026-10-05T23:50:05.218Z",
   "mode": "ACTUAL",
-  "snapshot_id": "actual-a9e5a4ddcb5277ef",
+  "snapshot_id": "actual-903b934850711dc7",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "b193080d81d49a0d6cf77a173fb55fd2cea6274f1ba6d4cd08c4a352e60890e7",
+  "manifest_sha256": "3a30eb92c8762d8436dff65f06c2094be9ec681a8deb8e9183557422009e53c8",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -14,7 +14,7 @@
       "detail": {
         "status": "PASS",
         "blocking_issue_count": 0,
-        "observation_count": 14,
+        "observation_count": 13,
         "source": "data/current/actual-topology-audit.json",
         "mutation": false
       }
@@ -473,8 +473,8 @@
       "name": "manifest_component_byte_fingerprint_matches_current_snapshot",
       "ok": true,
       "detail": {
-        "expected": "596a7fa13222f9e5126a49ab6b7e4c402d1e6c133750ced132f664a5ad98234c",
-        "actual": "596a7fa13222f9e5126a49ab6b7e4c402d1e6c133750ced132f664a5ad98234c"
+        "expected": "90403c19ebbb35b27a1af4d6ef7128a224e2a991d365d4cb4cf9bb209d6a7a8f",
+        "actual": "90403c19ebbb35b27a1af4d6ef7128a224e2a991d365d4cb4cf9bb209d6a7a8f"
       }
     },
     {
@@ -483,12 +483,12 @@
       "detail": {
         "manifest": {
           "algorithm": "actual-semantic-v3",
-          "sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+          "sha256": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e",
           "release_identity_basis": "semantic_content_v3",
           "reused_base_release": false
         },
-        "expected": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
-        "actual": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446"
+        "expected": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e",
+        "actual": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e"
       }
     },
     {
@@ -497,7 +497,7 @@
       "detail": {
         "content_identity": {
           "algorithm": "actual-semantic-v3",
-          "sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+          "sha256": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e",
           "release_identity_basis": "semantic_content_v3",
           "reused_base_release": false
         }
@@ -507,8 +507,8 @@
       "name": "release_fingerprint_matches_semantic_identity",
       "ok": true,
       "detail": {
-        "expected": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
-        "actual": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+        "expected": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e",
+        "actual": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e",
         "reused_base_release": false
       }
     },
@@ -516,8 +516,8 @@
       "name": "snapshot_id_matches_stable_release_identity",
       "ok": true,
       "detail": {
-        "expected": "actual-a9e5a4ddcb5277ef",
-        "actual": "actual-a9e5a4ddcb5277ef",
+        "expected": "actual-903b934850711dc7",
+        "actual": "actual-903b934850711dc7",
         "reused_base_release": false
       }
     },
@@ -525,25 +525,25 @@
       "name": "manifest_generated_at_matches_snapshot_watermark",
       "ok": true,
       "detail": {
-        "expected": "2026-09-27T20:37:27.458Z",
-        "actual": "2026-09-27T20:37:27.458Z"
+        "expected": "2026-10-05T23:50:05.218Z",
+        "actual": "2026-10-05T23:50:05.218Z"
       }
     },
     {
       "name": "catalog_declared_entity_count_is_consistent",
       "ok": true,
       "detail": {
-        "declared": 5830,
-        "actual": 5830
+        "declared": 5707,
+        "actual": 5707
       }
     },
     {
       "name": "manifest_catalog_entity_count_is_current",
       "ok": true,
       "detail": {
-        "manifest": 5830,
-        "catalog_declared": 5830,
-        "actual": 5830
+        "manifest": 5707,
+        "catalog_declared": 5707,
+        "actual": 5707
       }
     },
     {
@@ -559,11 +559,11 @@
       "detail": {
         "manifest": {
           "RO": 3234,
-          "MD": 2596
+          "MD": 2473
         },
         "actual": {
           "RO": 3234,
-          "MD": 2596
+          "MD": 2473
         }
       }
     },
@@ -596,7 +596,7 @@
       "ok": true,
       "detail": {
         "RO": 3234,
-        "MD": 2596
+        "MD": 2473
       }
     },
     {
@@ -605,11 +605,11 @@
       "detail": {
         "manifest": {
           "RO": 3234,
-          "MD": 2596
+          "MD": 2473
         },
         "actual": {
           "RO": 3234,
-          "MD": 2596
+          "MD": 2473
         }
       }
     },
@@ -621,8 +621,8 @@
         "contract": "actual-public-entity-v3",
         "expected_schema_version": 3,
         "schema_version": 3,
-        "public_count": 5848,
-        "administrative_catalog_count": 5830,
+        "public_count": 5725,
+        "administrative_catalog_count": 5707,
         "statistical_only_count": 18,
         "missing": [],
         "unexpected": []
@@ -648,15 +648,15 @@
       "detail": {
         "public": {
           "RO": 3246,
-          "MD": 2602
+          "MD": 2479
         },
         "expected": {
           "RO": 3246,
-          "MD": 2602
+          "MD": 2479
         },
         "administrative": {
           "RO": 3234,
-          "MD": 2596
+          "MD": 2473
         }
       }
     },
@@ -673,9 +673,9 @@
       "detail": {
         "issues": [],
         "missing": [],
-        "administrative_geometry_count": 5830,
-        "administrative_entity_count": 5830,
-        "public_entity_count": 5848
+        "administrative_geometry_count": 5707,
+        "administrative_entity_count": 5707,
+        "public_entity_count": 5725
       }
     },
     {
@@ -683,7 +683,7 @@
       "ok": true,
       "detail": {
         "issues": [],
-        "checked_geometry_count": 5830
+        "checked_geometry_count": 5707
       }
     },
     {
@@ -692,11 +692,11 @@
       "detail": {
         "public": {
           "RO": 3234,
-          "MD": 2596
+          "MD": 2473
         },
         "master": {
           "RO": 3234,
-          "MD": 2596
+          "MD": 2473
         }
       }
     },
@@ -709,25 +709,24 @@
           "contract": "actual-public-entity-v3",
           "schema_version": 3,
           "generated_at": "2026-10-05T23:50:05.218Z",
-          "entity_count": 5848,
+          "entity_count": 5725,
           "entity_count_by_jurisdiction": {
             "RO": 3246,
-            "MD": 2602
+            "MD": 2479
           },
           "legal_identity_status_counts": {
             "reconciled": 5693,
-            "outside_current_legal_registry": 123,
             "unresolved": 1,
             "statistical_identity": 18,
             "not_bound_to_official_registry": 13
           },
-          "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
+          "sha256": "6cd9561bddb08ef80b673c083b7dc20e1979e4b4a5215651faff230768035741",
           "geometry_chunks": {
             "path": "public/data/actual-geometry-chunks.json",
             "contract": "actual-public-geometry-chunks-v1",
             "schema_version": 1,
             "chunk_count": 115,
-            "sha256": "f09bdc0fff9e63185020ede4b83d1d359b2e03f2d35834e91170b507dd12136d"
+            "sha256": "63d7e018b5e4c793eebdf2e8fdc93231f9cac8d5ef4bc8c412d345eba149254b"
           },
           "geometry_tiers": {
             "RO": {
@@ -760,20 +759,20 @@
               },
               "detail": {
                 "path": "public/geo/actual/md-detail.geojson",
-                "feature_count": 1571,
-                "sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe"
+                "feature_count": 1448,
+                "sha256": "d7d4a52ea50f1f908e063252d165d6a4e6f7a81f4c3f5299f2ac99d7b3dd7384"
               }
             }
           },
           "hierarchy": {
             "path": "public/data/actual-consolidated-tree.json",
             "contract": "actual-consolidated-hierarchy-v1",
-            "node_count": 5848,
+            "node_count": 5725,
             "root_ids": [
               "osm-r90689",
               "osm-r58974"
             ],
-            "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+            "sha256": "b2424b552f5b0a5af196021f16c0c41fbba2ecd380e9b85c736c1648528febf1"
           },
           "statistical_geometry": {
             "RO": {
@@ -792,8 +791,8 @@
         },
         "actual": {
           "contract": "actual-public-entity-v3",
-          "entity_count": 5848,
-          "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700"
+          "entity_count": 5725,
+          "sha256": "6cd9561bddb08ef80b673c083b7dc20e1979e4b4a5215651faff230768035741"
         }
       }
     },
@@ -801,7 +800,7 @@
       "name": "statistical_public_contract_counts_are_exact",
       "ok": true,
       "detail": {
-        "administrative": 5830,
+        "administrative": 5707,
         "statistical_only": 18,
         "reused": 45,
         "total_roles": 63
@@ -816,7 +815,7 @@
             "path": "data/sources/actual-statistical-policy.json",
             "phase": "P2_ACTIVATED",
             "activated": true,
-            "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662"
+            "sha256": "591e8937019ec87492f964414d94fffdf4c3ae2b2fef3a1e49423ab50fe806fb"
           },
           "contract": {
             "path": "schemas/actual-statistical-hierarchy-contract.json",
@@ -849,12 +848,12 @@
           "hierarchy": {
             "path": "public/data/actual-consolidated-tree.json",
             "contract": "actual-consolidated-hierarchy-v1",
-            "node_count": 5848,
+            "node_count": 5725,
             "root_ids": [
               "osm-r90689",
               "osm-r58974"
             ],
-            "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+            "sha256": "b2424b552f5b0a5af196021f16c0c41fbba2ecd380e9b85c736c1648528febf1"
           },
           "geometry": {
             "RO": {
@@ -879,7 +878,7 @@
       "detail": {
         "tree": {
           "contract": "actual-consolidated-hierarchy-v1",
-          "node_count": 5848,
+          "node_count": 5725,
           "roots": [
             "osm-r90689",
             "osm-r58974"
@@ -888,12 +887,12 @@
         "manifest": {
           "path": "public/data/actual-consolidated-tree.json",
           "contract": "actual-consolidated-hierarchy-v1",
-          "node_count": 5848,
+          "node_count": 5725,
           "root_ids": [
             "osm-r90689",
             "osm-r58974"
           ],
-          "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+          "sha256": "b2424b552f5b0a5af196021f16c0c41fbba2ecd380e9b85c736c1648528febf1"
         }
       }
     },
@@ -1031,14 +1030,14 @@
           "contract": "actual-public-geometry-chunks-v1",
           "schema_version": 1,
           "chunk_count": 115,
-          "sha256": "f09bdc0fff9e63185020ede4b83d1d359b2e03f2d35834e91170b507dd12136d"
+          "sha256": "63d7e018b5e4c793eebdf2e8fdc93231f9cac8d5ef4bc8c412d345eba149254b"
         },
         "actual": {
           "path": "public/data/actual-geometry-chunks.json",
           "contract": "actual-public-geometry-chunks-v1",
           "schema_version": 1,
           "chunk_count": 115,
-          "sha256": "f09bdc0fff9e63185020ede4b83d1d359b2e03f2d35834e91170b507dd12136d"
+          "sha256": "63d7e018b5e4c793eebdf2e8fdc93231f9cac8d5ef4bc8c412d345eba149254b"
         }
       }
     },
