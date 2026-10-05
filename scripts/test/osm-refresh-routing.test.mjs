@@ -132,6 +132,23 @@ test('candidate commits durable OSM snapshots but network review artifacts never
  assert.doesNotMatch(candidate,/data\/sources\/osm-runtime\/\*\.json\.gz/);
 });
 
+test('refreshed OSM source scope, not geometric containment, controls jurisdiction membership',async()=>{
+ const [importer,builder]=await Promise.all([
+  readFile(importerPath,'utf8'),
+  readFile(builderPath,'utf8')
+ ]);
+ assert.match(importer,/selected_relation_count/);
+ assert.match(importer,/selected_relation_ids/);
+ assert.match(importer,/selectedRelationIds:\[\.\.\.new Set\(raw\.elements\.filter\(x=>relationMatchesScope\(x,cfg\)\)/);
+ assert.match(builder,/Array\.isArray\(sourceEntry\.selected_relation_ids\)/);
+ assert.match(builder,/source_scope_membership_applied/);
+ assert.match(builder,/OSM source selection determines jurisdiction membership/);
+ const sourceScopeIndex=builder.indexOf("if(Array.isArray(sourceEntry.selected_relation_ids))");
+ const legacyContainmentIndex=builder.indexOf("booleanPointInPolygon(pointOnFeature(f),countryFeature)",sourceScopeIndex);
+ assert.ok(sourceScopeIndex>=0&&legacyContainmentIndex>sourceScopeIndex,'geometric country containment must remain compatibility-only for old manifests');
+ assert.match(builder,/selected relations did not materialize as polygons/);
+});
+
 test('deterministic OSM builder retains all non-network classifier dependencies after extraction',async()=>{
  const builder=await readFile(builderPath,'utf8');
  assert.match(builder,/const CLASSIFIER_VERSION='2\.3'/);
