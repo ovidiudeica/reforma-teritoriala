@@ -1,0 +1,28 @@
+name: Diagnostic OSM polygon drop
+on:
+  pull_request:
+    paths:
+      - 'scripts/process/diagnose-osm-refresh-polygon-drop.mjs'
+      - '.github/workflows/diagnose-osm-polygon-drop.yml'
+permissions:
+  contents: read
+  packages: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    container:
+      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: Prepare runtime
+        run: |
+          export HOME=/tmp/actual-home
+          mkdir -p "$HOME"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          npm run install:actual-offline-deps
+      - name: Identify polygon dropped by live OSM
+        run: node scripts/process/diagnose-osm-refresh-polygon-drop.mjs
