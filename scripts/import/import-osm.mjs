@@ -356,6 +356,8 @@ async function main(){
 
  const unchanged=Boolean(previous)&&Object.keys(countries).every(code=>
   previous.countries?.[code]?.semantic_sha256===fresh[code].semanticSha
+  && JSON.stringify(previous.countries?.[code]?.selected_relation_ids)===JSON.stringify(fresh[code].selectedRelationIds)
+  && previous.countries?.[code]?.selected_relation_count===fresh[code].selectedRelationIds.length
  );
  const status=unchanged?'UNCHANGED':'UPDATED';
  const manifest=unchanged?previous:{

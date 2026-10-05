@@ -246,6 +246,7 @@ test('OSM refresh falls back from monolithic Overpass to explicit relation chunk
  assert.match(importer,/inventoryQueryFor/);
  assert.match(importer,/explicitRelationsQuery/);
  assert.match(importer,/fetchCountryChunked/);
+ assert.match(importer,/const part=await fetchAdaptiveRelations\(ids,/);
  assert.match(importer,/All monolithic Overpass endpoints failed/);
  assert.match(importer,/fetchMode:'chunked_explicit_relations'/);
  assert.match(importer,/querySha256:sha256\(queryFor\(cfg\)\)/);
