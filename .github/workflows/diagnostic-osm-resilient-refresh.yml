@@ -1,0 +1,46 @@
+name: Diagnostic resilient OSM refresh E2E
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/diagnostic-osm-resilient-refresh.yml'
+permissions:
+  contents: read
+  packages: read
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    container:
+      image: ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: Trust workspace
+        run: |
+          mkdir -p /tmp/actual-home
+          HOME=/tmp/actual-home git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Install pinned dependencies
+        run: npm run install:actual-offline-deps
+      - name: Refresh live OSM
+        env:
+          HOME: /tmp/actual-home
+        run: npm run import:osm
+      - name: Build raw ACTUAL OSM
+        run: npm run build:osm-actual
+      - name: Verify refreshed inventory and provenance
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const manifest=JSON.parse(fs.readFileSync('data/sources/osm-current.json','utf8'));
+          const catalog=JSON.parse(fs.readFileSync('data/current/entities.json','utf8'));
+          const counts={RO:catalog.entities.filter(e=>e.jurisdiction==='RO').length,MD:catalog.entities.filter(e=>e.jurisdiction==='MD').length};
+          console.log(JSON.stringify({
+            counts,
+            RO:{fetch_mode:manifest.countries.RO.fetch_mode,recovered:manifest.countries.RO.continuity_recovered_relation_ids,retired:manifest.countries.RO.continuity_retired_relation_ids},
+            MD:{fetch_mode:manifest.countries.MD.fetch_mode,recovered:manifest.countries.MD.continuity_recovered_relation_ids,retired:manifest.countries.MD.continuity_retired_relation_ids},
+            snapshot_at:manifest.snapshot_at
+          },null,2));
+          if(counts.RO!==3233||counts.MD!==2596)process.exit(1);
+          NODE
