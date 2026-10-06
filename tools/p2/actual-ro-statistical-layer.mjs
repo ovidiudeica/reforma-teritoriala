@@ -2,7 +2,7 @@ import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 
-export const RO_LAYER_PATH='data/current/actual-statistical-ro.json';
+export const RO_LAYER_PATH='data/p2/actual-statistical-ro.json';
 export const RO_NUTS_PATH='data/sources/ro-nuts-2024.json';
 export const RO_OSM_MANIFEST_PATH='data/sources/ro-statistical-osm-current.json';
 export const SIRUTA_PATH='data/sources/ro-siruta-current.json';
