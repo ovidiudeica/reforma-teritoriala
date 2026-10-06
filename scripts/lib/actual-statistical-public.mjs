@@ -288,42 +288,50 @@ export async function activateStatisticalPublic({readFileFn=readFile,writeFileFn
 export async function validateActivatedStatisticalPublic({readFileFn=readFile}={}){
  const policy=await readJson(STATISTICAL_POLICY_PATH,readFileFn);
  if(policy?.activated!==true)return {status:'SKIP',phase:policy?.phase??null,checks:[],failures:[]};
- const expected=await buildActivatedStatisticalPublic({readFileFn:async path=>{
-  if(path===PUBLIC_INDEX_PATH){
-   const persisted=await readJson(PUBLIC_INDEX_PATH,readFileFn);
-   if(persisted.contract==='actual-public-entity-v3'){
-    const clone=structuredClone(persisted);
-    clone.schema_version=2;clone.contract='actual-public-entity-v2';
-    clone.policy='synthetic-base';
-    clone.entity_count=clone.administrative_entity_count;
-    clone.entity_count_by_jurisdiction={RO:3234,MD:2596};
-    clone.entities=clone.entities.filter(e=>!String(e.id).startsWith('stat-')).map(e=>{
-     const x=structuredClone(e);
-     delete x.roles;delete x.statistical;
-     if(x.hierarchy){delete x.hierarchy.administrative_parent_id;delete x.hierarchy.statistical_parent_id;delete x.hierarchy.statistical_parent_name;delete x.hierarchy.consolidated_parent_id;delete x.hierarchy.consolidated_parent_name;}
-     return x;
-    });
-    delete clone.administrative_entity_count;delete clone.statistical_only_entity_count;delete clone.statistical_role_entity_count;delete clone.hierarchy;delete clone.statistical_geometry;
-    return Buffer.from(JSON.stringify(clone));
-   }
-  }
-  return readFileFn(path);
- }});
- const [index,tree,roGeo,mdGeo]=await Promise.all([readJson(PUBLIC_INDEX_PATH,readFileFn),readJson(TREE_PATH,readFileFn),readJson(RO_STAT_GEO_PATH,readFileFn),readJson(MD_STAT_GEO_PATH,readFileFn)]);
+ const [index,tree,roGeo,mdGeo,roLayer,mdLayer]=await Promise.all([
+  readJson(PUBLIC_INDEX_PATH,readFileFn),readJson(TREE_PATH,readFileFn),
+  readJson(RO_STAT_GEO_PATH,readFileFn),readJson(MD_STAT_GEO_PATH,readFileFn),
+  readJson(RO_LAYER_PATH,readFileFn),readJson(MD_LAYER_PATH,readFileFn)
+ ]);
+ const [roSnapshot,mdSnapshot]=await Promise.all([snapshotGeometryMap(roLayer,readFileFn),snapshotGeometryMap(mdLayer,readFileFn)]);
  const checks=[],failures=[];const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
+ const entities=index.entities||[];
+ const byId=new Map(entities.map(e=>[e.id,e]));
+ const statOnly=entities.filter(e=>String(e.id).startsWith('stat-'));
+ const reused=entities.filter(e=>!String(e.id).startsWith('stat-')&&e.roles?.includes('statistical'));
  check('public_contract_v3',index.contract===PUBLIC_CONTRACT&&index.schema_version===3,{contract:index.contract,schema_version:index.schema_version});
  check('public_counts_exact',index.entity_count===5848&&index.administrative_entity_count===5830&&index.statistical_only_entity_count===18&&index.statistical_role_entity_count===63&&index.entity_count_by_jurisdiction?.RO===3246&&index.entity_count_by_jurisdiction?.MD===2602,{entity_count:index.entity_count,counts:index.entity_count_by_jurisdiction});
- const statOnly=(index.entities||[]).filter(e=>String(e.id).startsWith('stat-'));
+ check('public_ids_unique',entities.length===5848&&new Set(entities.map(e=>e.id)).size===5848,{count:entities.length,unique:new Set(entities.map(e=>e.id)).size});
  check('statistical_only_ids_exact',statOnly.length===18&&new Set(statOnly.map(e=>e.id)).size===18,{ids:statOnly.map(e=>e.id)});
- check('reused_statistical_entities_exact',(index.entities||[]).filter(e=>!String(e.id).startsWith('stat-')&&e.roles?.includes('statistical')).length===45,{});
- check('no_md121_identity',!(index.entities||[]).some(e=>e.statistical?.code==='MD121'),{});
+ check('reused_statistical_entities_exact',reused.length===45,{count:reused.length});
+ check('roles_are_explicit',entities.every(e=>Array.isArray(e.roles)&&e.roles.length>=1),{missing:entities.filter(e=>!Array.isArray(e.roles)||!e.roles.length).slice(0,20).map(e=>e.id)});
+ check('no_md121_identity',!entities.some(e=>e.statistical?.code==='MD121'),{});
+ check('md120_identity_is_official',byId.get('stat-MD120')?.statistical?.code==='MD120'&&byId.get('stat-MD120')?.representation?.osm_statistical_ref==='MD121'&&byId.get('stat-MD120')?.representation?.osm_ref_is_identity_authority===false,{entity:byId.get('stat-MD120')??null});
  check('statistical_geometry_cardinality',roGeo.features?.length===12&&mdGeo.features?.length===6,{RO:roGeo.features?.length,MD:mdGeo.features?.length});
- const statGeoIds=new Set([...(roGeo.features||[]),...(mdGeo.features||[])].map(f=>f.properties?.entity_id));
- check('no_reused_geometry_duplication',statGeoIds.size===18&&[...(index.entities||[])].filter(e=>!String(e.id).startsWith('stat-')&&e.roles?.includes('statistical')).every(e=>!statGeoIds.has(e.id)),{});
+ const statGeo=[...(roGeo.features||[]),...(mdGeo.features||[])];
+ const statGeoIds=new Set(statGeo.map(f=>f.properties?.entity_id));
+ check('statistical_geometry_ids_exact',statGeoIds.size===18&&statOnly.every(e=>statGeoIds.has(e.id)),{geometry_ids:[...statGeoIds]});
+ check('no_reused_geometry_duplication',reused.every(e=>!statGeoIds.has(e.id)),{duplicated:reused.filter(e=>statGeoIds.has(e.id)).map(e=>e.id)});
+ const expectedGeom=new Map([...roSnapshot.geometries,...mdSnapshot.geometries]);
+ const geometryDrift=statGeo.flatMap(feature=>{
+  const id=feature.properties?.entity_id;
+  const expected=expectedGeom.get(id);
+  return expected&&JSON.stringify(feature.geometry)===JSON.stringify(expected)?[]:[{id,issue:expected?'coordinate_drift':'missing_source_geometry'}];
+ });
+ check('statistical_geometry_exact_osm_fidelity',geometryDrift.length===0,{issues:geometryDrift});
  check('tree_contract_exact',tree.contract===TREE_CONTRACT&&tree.node_count===5848&&tree.root_ids?.length===2&&tree.nodes?.length===5848,{node_count:tree.node_count,roots:tree.root_ids});
  const treeIds=new Set((tree.nodes||[]).map(n=>n.id));
- check('tree_covers_public_contract_once',treeIds.size===5848&&(index.entities||[]).every(e=>treeIds.has(e.id)),{tree_unique:treeIds.size});
- check('tree_statistical_before_administrative',(tree.nodes||[]).filter(n=>n.roles?.includes('statistical')&&n.statistical_level&&n.parent_id).every(n=>{const p=(tree.nodes||[]).find(x=>x.id===n.parent_id);return n.statistical_level===1||p?.roles?.includes('statistical')||p?.display_type==='state';}),{});
- check('persisted_outputs_match_deterministic_build',expected.status==='PASS'&&expected.index.entity_count===index.entity_count&&expected.tree.node_count===tree.node_count,{expected_status:expected.status});
- return {schema_version:1,mode:'ACTUAL_STATISTICAL_PUBLIC_P2_3_GATE',phase:'P2.3_PUBLIC',status:failures.length?'FAIL':'PASS',checks,failures,summary:{entity_count:index.entity_count,statistical_only_entities:statOnly.length,reused_statistical_entities:45,tree_node_count:tree.node_count,statistical_geometry_features:18}};
+ check('tree_covers_public_contract_once',treeIds.size===5848&&entities.every(e=>treeIds.has(e.id)),{tree_unique:treeIds.size});
+ const nodeById=new Map((tree.nodes||[]).map(n=>[n.id,n]));
+ check('tree_ro_chain_exact',['stat-RO1','stat-RO2','stat-RO3','stat-RO4'].every(id=>nodeById.get(id)?.parent_id===rootIds.RO),{});
+ check('tree_md_level2_chain_exact',['stat-MD11','stat-MD12'].every(id=>nodeById.get(id)?.parent_id===rootIds.MD),{});
+ check('tree_reused_md_roles_coalesced',nodeById.get('osm-r1699032')?.statistical_code==='MD114'&&nodeById.get('osm-r1691801')?.statistical_code==='MD115',{gagauzia:nodeById.get('osm-r1699032'),chisinau:nodeById.get('osm-r1691801')});
+ check('tree_has_no_self_parent',(tree.nodes||[]).every(n=>!n.parent_id||n.parent_id!==n.id),{});
+ const layerRoleIds=new Set([
+  ...(roLayer.existing_entity_memberships||[]).map(x=>x.entity_id),
+  ...(mdLayer.existing_entity_statistical_roles||[]).map(x=>x.entity_id)
+ ]);
+ check('reused_role_bindings_exact',layerRoleIds.size===45&&reused.every(e=>layerRoleIds.has(e.id)),{expected:layerRoleIds.size,actual:reused.length});
+ return {schema_version:1,mode:'ACTUAL_STATISTICAL_PUBLIC_P2_3_GATE',phase:'P2.3_PUBLIC',status:failures.length?'FAIL':'PASS',checks,failures,summary:{entity_count:index.entity_count,statistical_only_entities:statOnly.length,reused_statistical_entities:reused.length,tree_node_count:tree.node_count,statistical_geometry_features:statGeo.length}};
 }
+
