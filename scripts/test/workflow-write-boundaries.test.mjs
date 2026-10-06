@@ -379,7 +379,7 @@ test('release notes render literal bound release identity without shell command 
   const expectedFingerprint='a'.repeat(64);
   await execFileAsync('bash',['-lc',block],{
    cwd:dir,
-   env:{...process.env,TAG:'actual-v9.9.9',EXPECTED_SHA:expectedSha,snapshot:expectedSnapshot,fingerprint:expectedFingerprint}
+   env:{...process.env,TAG:'actual-v9.9.9',EXPECTED_SHA:expectedSha,snapshot:expectedSnapshot,fingerprint:expectedFingerprint,contract:'actual-public-entity-v2'}
   });
   const notes=await readFile(join(dir,'release-assets','RELEASE-NOTES.md'),'utf8');
   assert.equal(notes,
@@ -388,7 +388,7 @@ test('release notes render literal bound release identity without shell command 
 - Commit: \`${expectedSha}\`
 - Snapshot: \`${expectedSnapshot}\`
 - Release fingerprint: \`${expectedFingerprint}\`
-- Contract: \`actual-public-entity-v1\`
+- Contract: \`actual-public-entity-v2\`
 
 Required admission checks were successful on the exact released commit. Evidence was assembled with the digest-pinned ACTUAL runtime, exact Node/npm versions, and network disabled during SBOM generation. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.
 `);
