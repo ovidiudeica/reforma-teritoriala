@@ -16,7 +16,7 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
  const buildInfo=JSON.parse(buildInfoText);
  assert.equal(gate.status,'PASS');
  assert.equal(gate.snapshot_id,manifest.snapshot_id);
- assert.ok(['actual-public-entity-v1','actual-public-entity-v2'].includes(manifest.public_contract?.contract));
+ assert.ok(['actual-public-entity-v1','actual-public-entity-v2','actual-public-entity-v3'].includes(manifest.public_contract?.contract));
  assert.match(buildInfo.actual_snapshot_id,/^actual-[0-9a-f]{16}$/);
  assert.match(buildInfo.release_fingerprint_sha256,/^[0-9a-f]{64}$/);
  if(buildInfo.actual_snapshot_id===manifest.snapshot_id)assert.equal(buildInfo.release_fingerprint_sha256,manifest.release_fingerprint_sha256);
@@ -54,4 +54,17 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
    assert.equal(createHash('sha256').update(bytes).digest('hex'),chunk.sha256);
   }
  }
+});
+
+test('ACTUAL v3 public contract exposes a consolidated statistical hierarchy when active',async()=>{
+ const manifest=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
+ if(manifest.public_contract?.contract!=='actual-public-entity-v3')return;
+ const index=JSON.parse(await readFile(manifest.public_contract.path,'utf8'));
+ const tree=JSON.parse(await readFile(manifest.public_contract.hierarchy.path,'utf8'));
+ assert.equal(index.entity_count,5848);
+ assert.equal(index.statistical_only_entity_count,18);
+ assert.equal(index.statistical_role_entity_count,63);
+ assert.equal(tree.contract,'actual-consolidated-hierarchy-v1');
+ assert.equal(tree.node_count,5848);
+ assert.deepEqual(tree.root_ids,['osm-r90689','osm-r58974']);
 });
