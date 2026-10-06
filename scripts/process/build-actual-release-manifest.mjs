@@ -11,6 +11,11 @@ import {HOST_TRUST_PATH,hostTrustFingerprint as computeHostTrustFingerprint,vali
 const OUTPUT='data/current/actual-release-manifest.json';
 const NETWORK_DENIAL='data/current/actual-network-denial-audit.json';
 const GEOMETRY_ROLE_CONTRACT='schemas/actual-geometry-role-contract.json';
+const STATISTICAL_POLICY='data/sources/actual-statistical-policy.json';
+const STATISTICAL_CONTRACT='schemas/actual-statistical-hierarchy-contract.json';
+const STATISTICAL_SOURCE_BUNDLE='data/sources/actual-statistical-source-bundle.json';
+const statisticalPolicyProbe=JSON.parse(await readFile(STATISTICAL_POLICY,'utf8'));
+const statisticalActivated=statisticalPolicyProbe?.activated===true;
 const PATHS={
  catalog:'data/current/entities.json',
  inventory:'data/current/administrative-inventory.json',
@@ -36,6 +41,16 @@ const PATHS={
  official_identity_audit:'data/current/actual-official-identity-audit.json',
  settlement_policy:'data/sources/actual-settlement-policy.json'
 };
+if(statisticalActivated)Object.assign(PATHS,{
+ statistical_policy:STATISTICAL_POLICY,
+ statistical_contract:STATISTICAL_CONTRACT,
+ statistical_source_bundle:STATISTICAL_SOURCE_BUNDLE,
+ ro_statistical_layer:'data/p2/actual-statistical-ro.json',
+ md_statistical_layer:'data/p2/actual-statistical-md.json',
+ consolidated_tree:'public/data/actual-consolidated-tree.json',
+ ro_statistical_geometry:'public/geo/actual/ro-statistical.geojson',
+ md_statistical_geometry:'public/geo/actual/md-statistical.geojson'
+});
 const sha256=buf=>createHash('sha256').update(buf).digest('hex');
 const buffers=Object.fromEntries(await Promise.all(Object.entries(PATHS).map(async([key,path])=>[key,await readFile(path)])));
 const sourceBundleBytes=await readFile(SOURCE_BUNDLE_PATH);
@@ -85,6 +100,14 @@ const officialIdentityAudit=json('official_identity_audit');
 const mdSemanticBridge=json('md_semantic_bridge');
 const settlementPolicy=json('settlement_policy');
 const mdIndividualReview=json('md_individual_review');
+const statisticalPolicy=statisticalActivated?json('statistical_policy'):statisticalPolicyProbe;
+const statisticalContract=statisticalActivated?json('statistical_contract'):null;
+const statisticalSourceBundle=statisticalActivated?json('statistical_source_bundle'):null;
+const roStatisticalLayer=statisticalActivated?json('ro_statistical_layer'):null;
+const mdStatisticalLayer=statisticalActivated?json('md_statistical_layer'):null;
+const consolidatedTree=statisticalActivated?json('consolidated_tree'):null;
+const roStatisticalGeometry=statisticalActivated?json('ro_statistical_geometry'):null;
+const mdStatisticalGeometry=statisticalActivated?json('md_statistical_geometry'):null;
 const geometryRoleContractBytes=await readFile(GEOMETRY_ROLE_CONTRACT);
 const geometryRoleContract=JSON.parse(geometryRoleContractBytes.toString('utf8'));
 const geometryRoleBindingActive=Boolean(
@@ -186,7 +209,7 @@ const tier=(jurisdiction,name)=>{
 };
 
 const manifest={
- schema_version:geometryRoleBindingActive?9:8,
+ schema_version:statisticalActivated?10:(geometryRoleBindingActive?9:8),
  mode:'ACTUAL',
  snapshot_id:snapshotId,
  generated_at:generatedAt,
@@ -289,6 +312,45 @@ const manifest={
   RO:{path:PATHS.ro_geojson,feature_count:featureCounts.RO,sha256:components.ro_geojson.sha256},
   MD:{path:PATHS.md_geojson,feature_count:featureCounts.MD,sha256:components.md_geojson.sha256}
  },
+ ...(statisticalActivated?{
+  statistical_model:{
+   policy:{
+    path:STATISTICAL_POLICY,
+    phase:statisticalPolicy.phase??null,
+    activated:statisticalPolicy.activated===true,
+    sha256:components.statistical_policy.sha256
+   },
+   contract:{
+    path:STATISTICAL_CONTRACT,
+    contract:statisticalContract.contract??null,
+    schema_version:statisticalContract.schema_version??null,
+    phase:statisticalContract.phase??null,
+    sha256:components.statistical_contract.sha256
+   },
+   source_bundle:{
+    path:STATISTICAL_SOURCE_BUNDLE,
+    mode:statisticalSourceBundle.mode??null,
+    bundle_fingerprint_algorithm:statisticalSourceBundle.bundle_fingerprint_algorithm??null,
+    bundle_fingerprint_sha256:statisticalSourceBundle.bundle_fingerprint_sha256??null,
+    sha256:components.statistical_source_bundle.sha256
+   },
+   layers:{
+    RO:{path:PATHS.ro_statistical_layer,contract:roStatisticalLayer.contract??null,fingerprint_sha256:roStatisticalLayer.layer_fingerprint_sha256??null,sha256:components.ro_statistical_layer.sha256},
+    MD:{path:PATHS.md_statistical_layer,contract:mdStatisticalLayer.contract??null,fingerprint_sha256:mdStatisticalLayer.layer_fingerprint_sha256??null,sha256:components.md_statistical_layer.sha256}
+   },
+   hierarchy:{
+    path:PATHS.consolidated_tree,
+    contract:consolidatedTree.contract??null,
+    node_count:consolidatedTree.node_count??null,
+    root_ids:consolidatedTree.root_ids??null,
+    sha256:components.consolidated_tree.sha256
+   },
+   geometry:{
+    RO:{path:PATHS.ro_statistical_geometry,contract:roStatisticalGeometry.metadata?.contract??null,feature_count:roStatisticalGeometry.features?.length??0,sha256:components.ro_statistical_geometry.sha256},
+    MD:{path:PATHS.md_statistical_geometry,contract:mdStatisticalGeometry.metadata?.contract??null,feature_count:mdStatisticalGeometry.features?.length??0,sha256:components.md_statistical_geometry.sha256}
+   }
+  }
+ }:{ }),
  public_contract:{
   path:PATHS.public_index,
   contract:publicIndex.contract??null,
