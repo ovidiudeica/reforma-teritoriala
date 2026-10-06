@@ -29,6 +29,7 @@ npm run install:actual-offline-deps
 
 npm run build:actual-source-bundle
 npm run audit:actual-source-bundle
+npm run audit:actual-statistical-contract
 npm run build:actual-review-evidence-bundle
 npm run audit:actual-review-evidence-bundle
 
