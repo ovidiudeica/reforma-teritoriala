@@ -1,0 +1,1532 @@
+{
+  "schema_version": 1,
+  "contract": "actual-statistical-ro-v1",
+  "phase": "P2.1_RO",
+  "mode": "ACTUAL_STATISTICAL_OVERLAY",
+  "jurisdiction": "RO",
+  "generated_at": "2026-10-06T20:20:10.723Z",
+  "policy": "Adds 4 NUTS1 and 8 NUTS2 statistical-only entities and binds NUTS3 membership to the existing 42 county/Bucharest entities. Administrative identity, parentage and master geometry are not rewritten. NUTS3 geometry is reused by reference only.",
+  "counts": {
+    "statistical_only_entities": 12,
+    "reused_existing_nuts3_entities": 42,
+    "total_statistical_roles": 54
+  },
+  "sources": {
+    "official_nuts": {
+      "path": "data/sources/ro-nuts-2024.json",
+      "sha256": "c2ddd30974beb9a9b4bc540823ec9052f89d73e01c05a1a3cc8f828554d49962",
+      "version": "2024"
+    },
+    "osm_statistical": {
+      "path": "data/sources/ro-statistical-osm-current.json",
+      "sha256": "c35312742603fe66ade29d70029e29875071f8e58aa1f33cbdcd0b74ec1ee00c",
+      "snapshot_path": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+      "semantic_sha256": "c7541b1c04a93498cd32be17ade8fd140f631a8b8f3c951adecce1b93af3ad58",
+      "compressed_sha256": "3e698405f53157ad1363188fd1b1edcd3ee9d16641f3c40b5f35129639a8252d"
+    },
+    "siruta_bridge": {
+      "path": "data/sources/ro-siruta-current.json",
+      "sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f",
+      "reference_year": 2026
+    },
+    "p1_catalog": {
+      "path": "data/current/entities.json",
+      "sha256": "af6e09317d75fea663e6be425bf0a5c252fc756b6bb1c8055e564af913148504",
+      "snapshot_id": "actual-6a7eac47d66d6701"
+    }
+  },
+  "statistical_entities": [
+    {
+      "id": "stat-RO1",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_1",
+      "name": "Macroregiunea Unu",
+      "official_name": "Macroregiunea Unu",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO1",
+        "level": 1,
+        "parent_code": null,
+        "parent_entity_id": "osm-r90689",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 7958145,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_1",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO11",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_2",
+      "name": "Nord-Vest",
+      "official_name": "Nord-Vest",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO11",
+        "level": 2,
+        "parent_code": "RO1",
+        "parent_entity_id": "stat-RO1",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 1427499,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_2",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO12",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_2",
+      "name": "Centru",
+      "official_name": "Centru",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO12",
+        "level": 2,
+        "parent_code": "RO1",
+        "parent_entity_id": "stat-RO1",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 1427500,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_2",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO2",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_1",
+      "name": "Macroregiunea Doi",
+      "official_name": "Macroregiunea Doi",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO2",
+        "level": 1,
+        "parent_code": null,
+        "parent_entity_id": "osm-r90689",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 7957817,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_1",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": "osm_statistical_geometry_differs_from_administrative_union"
+      }
+    },
+    {
+      "id": "stat-RO21",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_2",
+      "name": "Nord-Est",
+      "official_name": "Nord-Est",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO21",
+        "level": 2,
+        "parent_code": "RO2",
+        "parent_entity_id": "stat-RO2",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 7957893,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_2",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO22",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_2",
+      "name": "Sud-Est",
+      "official_name": "Sud-Est",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO22",
+        "level": 2,
+        "parent_code": "RO2",
+        "parent_entity_id": "stat-RO2",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 7957892,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_2",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": "osm_statistical_geometry_differs_from_administrative_union"
+      }
+    },
+    {
+      "id": "stat-RO3",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_1",
+      "name": "Macroregiunea Trei",
+      "official_name": "Macroregiunea Trei",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO3",
+        "level": 1,
+        "parent_code": null,
+        "parent_entity_id": "osm-r90689",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 7958146,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_1",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO31",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_2",
+      "name": "Sud-Muntenia",
+      "official_name": "Sud-Muntenia",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO31",
+        "level": 2,
+        "parent_code": "RO3",
+        "parent_entity_id": "stat-RO3",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 1426803,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_2",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO32",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_2",
+      "name": "Bucureşti-Ilfov",
+      "official_name": "Bucureşti-Ilfov",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO32",
+        "level": 2,
+        "parent_code": "RO3",
+        "parent_entity_id": "stat-RO3",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 7958143,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_2",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO4",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_1",
+      "name": "Macroregiunea Patru",
+      "official_name": "Macroregiunea Patru",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO4",
+        "level": 1,
+        "parent_code": null,
+        "parent_entity_id": "osm-r90689",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 7958144,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_1",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO41",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_2",
+      "name": "Sud-Vest Oltenia",
+      "official_name": "Sud-Vest Oltenia",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO41",
+        "level": 2,
+        "parent_code": "RO4",
+        "parent_entity_id": "stat-RO4",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 1426984,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_2",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    },
+    {
+      "id": "stat-RO42",
+      "status": "current",
+      "jurisdiction": "RO",
+      "category": "statistical",
+      "type": "nuts_level_2",
+      "name": "Vest",
+      "official_name": "Vest",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO42",
+        "level": 2,
+        "parent_code": "RO4",
+        "parent_entity_id": "stat-RO4",
+        "identity_authority": "Eurostat / GISCO",
+        "source": "data/sources/ro-nuts-2024.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 1426985,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_level_2",
+        "source_manifest": "data/sources/ro-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz",
+        "coordinates_embedded": false,
+        "geometry_review_class": null
+      }
+    }
+  ],
+  "existing_entity_memberships": [
+    {
+      "entity_id": "osm-r91731",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO111",
+        "level": 3,
+        "parent_code": "RO11",
+        "parent_entity_id": "stat-RO11",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r91731",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r55466",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO112",
+        "level": 3,
+        "parent_code": "RO11",
+        "parent_entity_id": "stat-RO11",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r55466",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r91733",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO113",
+        "level": 3,
+        "parent_code": "RO11",
+        "parent_entity_id": "stat-RO11",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r91733",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r72481",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO114",
+        "level": 3,
+        "parent_code": "RO11",
+        "parent_entity_id": "stat-RO11",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r72481",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r72482",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO115",
+        "level": 3,
+        "parent_code": "RO11",
+        "parent_entity_id": "stat-RO11",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r72482",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r91685",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO116",
+        "level": 3,
+        "parent_code": "RO11",
+        "parent_entity_id": "stat-RO11",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r91685",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r194271",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO121",
+        "level": 3,
+        "parent_code": "RO12",
+        "parent_entity_id": "stat-RO12",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r194271",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248612",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO122",
+        "level": 3,
+        "parent_code": "RO12",
+        "parent_entity_id": "stat-RO12",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248612",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248621",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO123",
+        "level": 3,
+        "parent_code": "RO12",
+        "parent_entity_id": "stat-RO12",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248621",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248660",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO124",
+        "level": 3,
+        "parent_code": "RO12",
+        "parent_entity_id": "stat-RO12",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248660",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248573",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO125",
+        "level": 3,
+        "parent_code": "RO12",
+        "parent_entity_id": "stat-RO12",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248573",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248586",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO126",
+        "level": 3,
+        "parent_code": "RO12",
+        "parent_entity_id": "stat-RO12",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248586",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248681",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO211",
+        "level": 3,
+        "parent_code": "RO21",
+        "parent_entity_id": "stat-RO21",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248681",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2256729",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO212",
+        "level": 3,
+        "parent_code": "RO21",
+        "parent_entity_id": "stat-RO21",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2256729",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2256747",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO213",
+        "level": 3,
+        "parent_code": "RO21",
+        "parent_entity_id": "stat-RO21",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2256747",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248675",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO214",
+        "level": 3,
+        "parent_code": "RO21",
+        "parent_entity_id": "stat-RO21",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248675",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2077868",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO215",
+        "level": 3,
+        "parent_code": "RO21",
+        "parent_entity_id": "stat-RO21",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2077868",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2256753",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO216",
+        "level": 3,
+        "parent_code": "RO21",
+        "parent_entity_id": "stat-RO21",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2256753",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2355512",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO221",
+        "level": 3,
+        "parent_code": "RO22",
+        "parent_entity_id": "stat-RO22",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2355512",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2355511",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO222",
+        "level": 3,
+        "parent_code": "RO22",
+        "parent_entity_id": "stat-RO22",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2355511",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2367022",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO223",
+        "level": 3,
+        "parent_code": "RO22",
+        "parent_entity_id": "stat-RO22",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2367022",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2260192",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO224",
+        "level": 3,
+        "parent_code": "RO22",
+        "parent_entity_id": "stat-RO22",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2260192",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2367044",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO225",
+        "level": 3,
+        "parent_code": "RO22",
+        "parent_entity_id": "stat-RO22",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2367044",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2260187",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO226",
+        "level": 3,
+        "parent_code": "RO22",
+        "parent_entity_id": "stat-RO22",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2260187",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2261315",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO311",
+        "level": 3,
+        "parent_code": "RO31",
+        "parent_entity_id": "stat-RO31",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2261315",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2367015",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO312",
+        "level": 3,
+        "parent_code": "RO31",
+        "parent_entity_id": "stat-RO31",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2367015",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2355471",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO313",
+        "level": 3,
+        "parent_code": "RO31",
+        "parent_entity_id": "stat-RO31",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2355471",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2366987",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO314",
+        "level": 3,
+        "parent_code": "RO31",
+        "parent_entity_id": "stat-RO31",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2366987",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2355517",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO315",
+        "level": 3,
+        "parent_code": "RO31",
+        "parent_entity_id": "stat-RO31",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2355517",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2355507",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO316",
+        "level": 3,
+        "parent_code": "RO31",
+        "parent_entity_id": "stat-RO31",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2355507",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2366986",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO317",
+        "level": 3,
+        "parent_code": "RO31",
+        "parent_entity_id": "stat-RO31",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2366986",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r377733",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO321",
+        "level": 3,
+        "parent_code": "RO32",
+        "parent_entity_id": "stat-RO32",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r377733",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2366996",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO322",
+        "level": 3,
+        "parent_code": "RO32",
+        "parent_entity_id": "stat-RO32",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2366996",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2366970",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO411",
+        "level": 3,
+        "parent_code": "RO41",
+        "parent_entity_id": "stat-RO41",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2366970",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2261275",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO412",
+        "level": 3,
+        "parent_code": "RO41",
+        "parent_entity_id": "stat-RO41",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2261275",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2366962",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO413",
+        "level": 3,
+        "parent_code": "RO41",
+        "parent_entity_id": "stat-RO41",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2366962",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2366978",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO414",
+        "level": 3,
+        "parent_code": "RO41",
+        "parent_entity_id": "stat-RO41",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2366978",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2261289",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO415",
+        "level": 3,
+        "parent_code": "RO41",
+        "parent_entity_id": "stat-RO41",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2261289",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248721",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO421",
+        "level": 3,
+        "parent_code": "RO42",
+        "parent_entity_id": "stat-RO42",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248721",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2366873",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO422",
+        "level": 3,
+        "parent_code": "RO42",
+        "parent_entity_id": "stat-RO42",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2366873",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2248737",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO423",
+        "level": 3,
+        "parent_code": "RO42",
+        "parent_entity_id": "stat-RO42",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2248737",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r2366863",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS",
+        "version": "2024",
+        "code": "RO424",
+        "level": 3,
+        "parent_code": "RO42",
+        "parent_entity_id": "stat-RO42",
+        "identity_authority": "Eurostat / GISCO",
+        "membership_source": "data/sources/ro-nuts-2024.json",
+        "bridge_source": "data/sources/ro-siruta-current.json"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r2366863",
+        "master_geometry_path": "public/geo/current/ro-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    }
+  ],
+  "layer_fingerprint_algorithm": "actual-statistical-ro-v1",
+  "layer_fingerprint_sha256": "8550a45ed0525735a185f1223349c9d7ada66b23fe79fad4e795d40871a6c08f"
+}
