@@ -38,7 +38,7 @@ Snapshot-urile oficiale SIRUTA și CUATM sunt refresh-uri separate de reconcilie
 
 ## Release ACTUAL
 
-Snapshot-ul public ACTUAL RO+MD este descris de `data/current/actual-release-manifest.json`. Release-ul curent este `actual-5383ff3db7cf3f67`, cu fingerprint semantic `5383ff3db7cf3f677006ad3e70c706dccc8c208eea84b1689bb645d056e471dc`.
+Snapshot-ul public ACTUAL RO+MD este descris de `data/current/actual-release-manifest.json`. Release-ul immutable curent este `actual-v1.1.0`, snapshot `actual-6a7eac47d66d6701`, cu fingerprint semantic `6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09`.
 
 `data/current/actual-release-gate.json` validează fail-closed gate-urile RO/MD, integritatea manifestului, source bundle-ul, review-evidence bundle-ul, mediul de build, network denial și contractul public.
 
@@ -46,7 +46,7 @@ Snapshot-ul public ACTUAL RO+MD este descris de `data/current/actual-release-man
 
 `scripts/process/build-actual-public-data.mjs` generează:
 
-- `public/data/actual-entities.json` — contract `actual-public-entity-v1`;
+- `public/data/actual-entities.json` — contract `actual-public-entity-v2`;
 - `public/geo/actual/{ro,md}-overview.geojson` — limite regionale;
 - `public/geo/actual/{ro,md}-local.geojson` — UAT-uri locale;
 - `public/geo/actual/{ro,md}-detail.geojson` — sectoare, localități și reprezentări de detaliu.
