@@ -390,7 +390,7 @@ test('release notes render literal bound release identity without shell command 
 - Commit: \`${expectedSha}\`
 - Snapshot: \`${expectedSnapshot}\`
 - Release fingerprint: \`${expectedFingerprint}\`
-- Contract: \`actual-public-entity-v1\`
+- Contract: \`actual-public-entity-v2\`
 
 Required admission checks were successful on the exact released commit. Evidence was assembled with the digest-pinned ACTUAL runtime, exact Node/npm versions, and network disabled during SBOM generation. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.
 `);
