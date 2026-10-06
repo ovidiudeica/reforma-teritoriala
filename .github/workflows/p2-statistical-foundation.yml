@@ -1,0 +1,37 @@
+name: Gate P2.0 statistical foundation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  p2-statistical-foundation:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 1
+
+      - name: Gate P2.0 statistical contract and official sources
+        run: node tools/p2/audit-actual-statistical-contract.mjs
+
+      - name: Regression-test P2.0 foundation
+        run: node --test tools/p2/actual-statistical-contract.test.mjs
+
+      - name: Prove P2.0 verification is read-only
+        run: |
+          if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
+            echo "P2.0 verification changed the working tree:"
+            git status --short --untracked-files=all
+            git diff -- .
+            exit 1
+          fi
