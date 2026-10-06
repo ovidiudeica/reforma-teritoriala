@@ -269,6 +269,45 @@
         "expected": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd",
         "actual": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd"
       }
+    },
+    {
+      "name": "runtime_node_exact",
+      "ok": true,
+      "detail": {
+        "expected": "24.21.0",
+        "actual": "24.21.0"
+      }
+    },
+    {
+      "name": "runtime_npm_exact",
+      "ok": true,
+      "detail": {
+        "expected": "11.19.0",
+        "actual": "11.19.0"
+      }
+    },
+    {
+      "name": "runtime_runner_os_linux",
+      "ok": true,
+      "detail": {
+        "expected": "Linux",
+        "actual": "Linux"
+      }
+    },
+    {
+      "name": "host_runner_identity_is_static_provenance",
+      "ok": true,
+      "detail": {
+        "policy": "GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match the pinned provenance.",
+        "expected": {
+          "image_os": "ubuntu24",
+          "image_version": "20261004.327.1"
+        },
+        "actual": {
+          "image_os": null,
+          "image_version": null
+        }
+      }
     }
   ],
   "failures": []
