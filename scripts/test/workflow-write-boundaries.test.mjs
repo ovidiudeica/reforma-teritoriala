@@ -344,6 +344,8 @@ test('release publisher is manual, exact-SHA bound and builds evidence in the pi
  for(const context of ['verify-persisted-release','actual-change-reproducibility','actual-release-trust-chain'])assert.ok(workflow.includes(context));
  assert.match(workflow,/packages:\s*read/);
  assert.match(workflow,/actual-runtime-image\.json/);
+ assert.match(workflow,/\.public_contract\.contract/);
+ assert.match(workflow,/contract=\$contract/);
  assert.match(workflow,/docker run --rm --network none/);
  assert.match(workflow,/test "\$\(node --version\)" = "v\$EXPECTED_NODE"/);
  assert.match(workflow,/test "\$\(npm --version\)" = "\$EXPECTED_NPM"/);
@@ -379,7 +381,7 @@ test('release notes render literal bound release identity without shell command 
   const expectedFingerprint='a'.repeat(64);
   await execFileAsync('bash',['-lc',block],{
    cwd:dir,
-   env:{...process.env,TAG:'actual-v9.9.9',EXPECTED_SHA:expectedSha,snapshot:expectedSnapshot,fingerprint:expectedFingerprint}
+   env:{...process.env,TAG:'actual-v9.9.9',EXPECTED_SHA:expectedSha,snapshot:expectedSnapshot,fingerprint:expectedFingerprint,contract:'actual-public-entity-v2'}
   });
   const notes=await readFile(join(dir,'release-assets','RELEASE-NOTES.md'),'utf8');
   assert.equal(notes,
@@ -388,7 +390,7 @@ test('release notes render literal bound release identity without shell command 
 - Commit: \`${expectedSha}\`
 - Snapshot: \`${expectedSnapshot}\`
 - Release fingerprint: \`${expectedFingerprint}\`
-- Contract: \`actual-public-entity-v1\`
+- Contract: \`actual-public-entity-v2\`
 
 Required admission checks were successful on the exact released commit. Evidence was assembled with the digest-pinned ACTUAL runtime, exact Node/npm versions, and network disabled during SBOM generation. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.
 `);
