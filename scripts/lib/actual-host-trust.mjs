@@ -9,7 +9,7 @@ export const EXPECTED_HOST_TRUST={
  runner:{
   label:'ubuntu-24.04',
   image_os:'ubuntu24',
-  image_version:'20260927.320.1',
+  image_version:'20261004.327.1',
   os:'Linux',
   arch:'X64'
  },
@@ -59,6 +59,21 @@ export const EXPECTED_HOST_TRUST={
   {
    id:'github-ubuntu24-20260927.320.1',
    runner:{image_os:'ubuntu24',image_version:'20260927.320.1',arch:'X64',os:'Linux'},
+   kernel:{release:'6.17.0-1022-azure',version:'#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026',machine:'x86_64'},
+   docker:{
+    client_version:'28.0.4',server_version:'28.0.4',api_version:'1.48',min_api_version:'1.24',git_commit:'6430e49',
+    components:{
+     Engine:{version:'28.0.4',git_commit:'6430e49'},
+     containerd:{version:'v2.3.6',git_commit:'ee2735368117d2eb259779949d5e75cdafec9761'},
+     runc:{version:'1.5.1',git_commit:'v1.5.1-0-g8f2685a4'},
+     'docker-init':{version:'0.19.0',git_commit:'de40ad0'}
+    }
+   },
+   engine:{storage_driver:'overlay2',cgroup_driver:'systemd',cgroup_version:'2',operating_system:'Ubuntu 24.04.5 LTS',os_type:'linux',architecture:'x86_64',kernel_version:'6.17.0-1022-azure'}
+  },
+  {
+   id:'github-ubuntu24-20261004.327.1',
+   runner:{image_os:'ubuntu24',image_version:'20261004.327.1',arch:'X64',os:'Linux'},
    kernel:{release:'6.17.0-1022-azure',version:'#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026',machine:'x86_64'},
    docker:{
     client_version:'28.0.4',server_version:'28.0.4',api_version:'1.48',min_api_version:'1.24',git_commit:'6430e49',
