@@ -569,7 +569,107 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  }else{
   assert.equal(policy.public_contract,undefined,'dormant support state must keep public contract v1 implicit');
  }
- assert.equal(schema.$defs.entity.properties.id.pattern,'^(?:osm-r[0-9]+|siruta-u[0-9]+)$');
+ assert.equal(schema.properties.schema_version.const,2);
+ assert.equal(schema.properties.contract.const,'actual-public-entity-v2');
+ assert.ok(schema.$defs.entity.properties.representation.required.includes('canonical_geometry_role'));
+ assert.ok(schema.$defs.entity.properties.representation.required.includes('geometry_scope'));
+ assert.equal(schema.$defs.entity.properties.id.pattern,'^(?:osm-r[0-9]+|siruta-u[0-9]+)
+ assert.deepEqual(schema.$defs.entity.properties.representation.properties.source.enum,['OpenStreetMap','ANCPI RELUAT']);
+ assert.match(migration,/policy_version='2026-10-04-v1\.5'/);
+ assert.match(migration,/administrative_geometry_fallbacks/);
+ assert.match(migration,/legal_ids:\['64096'\]/);
+ assert.match(sourceBundle,/ancpiBinding=policy\?\.administrative_geometry_fallbacks\?\.RO/);
+ const ojdula=await readJson('data/sources/ro-ancpi-ojdula-reviewed.json');
+ assert.equal(ojdula.mode,'ACTUAL_RO_ANCPI_REVIEWED_GEOMETRY_OVERRIDE');
+ assert.equal(String(ojdula.feature?.legal_id),'64602');
+ assert.equal(Number(ojdula.feature?.source_object_id),1167);
+ assert.equal(ojdula.feature?.inspire_id_local_id,'1.145.64602');
+ assert.equal(Number(ojdula.feature?.replacement_osm_relation_id),14735731);
+ assert.match(migration,/partition_osm_shell_by_ancpi_shared_boundary/);
+});
+
+test('reviewed Brețcu–Ojdula hybrid partition preserves OSM exterior and fail-closes reviewed terminal adaptations',async()=>{
+ const [shell,fallback,ojdula,terminalReview,helper,reconciliation,roGate]=await Promise.all([
+  readJson('data/sources/ro-osm-ojdula-14735731-reviewed-shell.json'),
+  readJson('data/sources/ro-ancpi-uat-fallbacks.json'),
+  readJson('data/sources/ro-ancpi-ojdula-reviewed.json'),
+  readJson('data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json'),
+  readFile('scripts/lib/bretcu-ojdula-hybrid-partition.mjs','utf8'),
+  readFile('scripts/process/apply-ro-official-reconciliation.mjs','utf8'),
+  readFile('scripts/process/audit-ro-release-gate.mjs','utf8')
+ ]);
+ assert.equal(shell.mode,'ACTUAL_RO_REVIEWED_OSM_OUTER_SHELL');
+ assert.equal(Number(shell.relation_id),14735731);
+ assert.equal(shell.source_commit_sha,'f21e4954063a884df9922efa5ac31229c5b51d43');
+ assert.equal(shell.source_snapshot_id,'actual-990c892d9d27fa46');
+ assert.equal(shell.geometry?.type,'Polygon');
+ const bretcu=fallback.features.find(x=>String(x.legal_id)==='64096');
+ assert.ok(bretcu);
+ assert.equal(String(ojdula.feature?.legal_id),'64602');
+ const edgeKey=(a,b)=>[JSON.stringify([Number(a[0]),Number(a[1])]),JSON.stringify([Number(b[0]),Number(b[1])])].sort().join('|');
+ const edges=geometry=>{
+  const rings=geometry.type==='Polygon'?geometry.coordinates:geometry.coordinates.flat();
+  return new Set(rings.flatMap(r=>r.slice(0,-1).map((p,i)=>edgeKey(p,r[i+1]))));
+ };
+ const oe=edges(ojdula.feature.geometry),be=edges(bretcu.geometry);
+ const shared=[...oe].filter(k=>be.has(k));
+ assert.equal(shared.length,826,'reviewed ANCPI common boundary edge count drifted');
+ assert.equal(terminalReview.mode,'ACTUAL_RO_BRETCU_OJDULA_TERMINAL_CLOSURE_REVIEW');
+ assert.equal(terminalReview.conclusion,'retain_legacy_osm_shell_with_reviewed_terminal_adaptations');
+ assert.equal(terminalReview.terminals?.west?.role,'ancpi_terminal_clip_to_osm_shell');
+ assert.equal(terminalReview.terminals?.east?.role,'non_ancpi_terminal_closure_to_osm_shell');
+ assert.equal(Number(terminalReview.terminals?.east?.adjustment_m),82.59576607343764);
+ assert.deepEqual((terminalReview.terminals?.east?.shell_segment?.exact_osm_users||[]).map(x=>x.entity_id),['osm-r2248621','osm-r2260187','osm-r14735397','osm-r14735731']);
+ assert.match(helper,/shell_symmetric_difference_m2/);
+ assert.match(helper,/osm_shell_edges_preserved/);
+ assert.match(helper,/area_balance_delta_m2/);
+ assert.match(helper,/partition_area_sum_residual_m2/);
+ assert.match(helper,/turf\.area\(union\)-turf\.area\(old\)/);
+ assert.match(helper,/exact_partition_boundary_edge_proof/);
+ assert.match(helper,/invalid_edge_multiplicity_count/);
+ assert.match(helper,/partition_interior_edge_count/);
+ assert.match(helper,/edgeMultiplicity/);
+ assert.match(helper,/exteriorEdgeSet/);
+ assert.match(helper,/ancpi_shared_path_preserved_with_terminal_clipping/);
+ assert.match(helper,/ancpi_terminal_clipped_edge_count/);
+ assert.match(helper,/ancpi_full_edges_preserved_count/);
+ assert.match(helper,/ancpi_terminal_start_original_coordinate/);
+ assert.match(helper,/ancpi_terminal_end_final_coordinate/);
+ assert.match(helper,/non_ancpi_terminal_closure_count/);
+ assert.match(helper,/properSegmentIntersection/);
+ assert.match(helper,/clipAncpiSharedPathAtTerminalShellCrossings/);
+ assert.match(helper,/turf\.booleanValid/);
+ assert.match(helper,/circularArc/);
+ assert.match(helper,/Projected ANCPI divider endpoints are not distinct vertices on the OSM shell/);
+ assert.doesNotMatch(helper,/turf\.polygonize/);
+ assert.match(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaOsmShell\.geometry\)/);
+ assert.match(reconciliation,/exact_partition_boundary_edge_proof/);
+ assert.match(reconciliation,/partition_polygons_valid/);
+ assert.match(reconciliation,/ancpi_shared_path_preserved_with_terminal_clipping/);
+ assert.match(reconciliation,/terminal_closure_evidence_sha256/);
+ assert.match(reconciliation,/Reviewed terminal shell-neighbor set drifted/);
+ assert.doesNotMatch(reconciliation,/area_balance_delta_m2>0\.01/);
+ assert.doesNotMatch(reconciliation,/overlap_m2>0\.01/);
+ assert.match(roGate,/exact_partition_boundary_edge_proof/);
+ assert.match(roGate,/osm_shell_ancpi_shared_boundary_terminal_clip_v2/);
+ assert.match(roGate,/ancpi_full_edges_preserved_count\)===825/);
+ assert.match(roGate,/ancpi_terminal_clipped_edge_count\)===1/);
+ assert.match(roGate,/bretcu_ojdula_terminal_closure_evidence_is_exact/);
+ assert.match(roGate,/non_ancpi_terminal_closure_count/);
+ assert.match(roGate,/partition_polygons_valid===true/);
+ assert.doesNotMatch(roGate,/Number\(audit\?\.overlap_m2\)<=0\.01/);
+ assert.doesNotMatch(reconciliation,/osmOjdulaGeometry=structuredClone\(ojdulaFeature\.geometry\)/);
+});
+
+test('Brețcu fallback application never fabricates an OSM relation',async()=>{
+ const apply=await readFile('scripts/process/apply-ro-official-reconciliation.mjs','utf8');
+ assert.match(apply,/id='siruta-u'\+legalId/);
+ assert.match(apply,/source:'ANCPI RELUAT'/);
+ assert.match(apply,/geometry_equivalence_asserted:false/);
+ assert.match(apply,/parentId='osm-r'\+String\(resolution\.expected_parent_osm_relation_id\)/);
+ assert.doesNotMatch(apply,/osm:\s*\{[^}]*64096/s);
+});
+);
  assert.deepEqual(schema.$defs.entity.properties.representation.properties.source.enum,['OpenStreetMap','ANCPI RELUAT']);
  assert.match(migration,/policy_version='2026-10-04-v1\.5'/);
  assert.match(migration,/administrative_geometry_fallbacks/);
