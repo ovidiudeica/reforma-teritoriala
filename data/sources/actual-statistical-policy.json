@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_STATISTICAL_POLICY",
+  "phase": "P2_PREPARED",
+  "activated": false,
+  "contract": {
+    "path": "schemas/actual-statistical-hierarchy-contract.json",
+    "id": "actual-statistical-hierarchy-v1",
+    "schema_version": 1
+  },
+  "source_bundle": {
+    "path": "data/sources/actual-statistical-source-bundle.json",
+    "mode": "ACTUAL_STATISTICAL_SOURCE_BUNDLE",
+    "algorithm": "actual-statistical-source-bundle-v1"
+  },
+  "jurisdictions": {
+    "RO": {
+      "classification": "NUTS",
+      "version": "2024",
+      "expected_level_counts": {"1": 4, "2": 8, "3": 42},
+      "new_statistical_only_entity_count": 12,
+      "reused_existing_entity_count": 42,
+      "level_3_reuse_rule": "Each NUTS 3 code must bind one existing county/Bucharest entity through official SIRUTA NUTS membership; no geometry duplication.",
+      "known_geometry_review": {
+        "codes": ["RO22", "RO2"],
+        "classification": "osm_statistical_geometry_differs_from_administrative_union",
+        "policy": "Do not snap, clip or normalize administrative geometry. Statistical identity remains Eurostat-bound and statistical OSM geometry must be reviewed independently."
+      }
+    },
+    "MD": {
+      "classification": "NUTS_MOLDOVA",
+      "version": "2017",
+      "expected_level_counts": {"1": 1, "2": 2, "3": 6},
+      "new_statistical_only_entity_count": 6,
+      "reused_existing_entity_count": 3,
+      "reused_codes": ["MD1", "MD114", "MD115"],
+      "special_rules": {
+        "MD120": {
+          "official_code": "MD120",
+          "component_statistical_codes": ["9800000", "0501000"],
+          "osm_conflicting_ref": "MD121",
+          "identity_authority": "BNS Moldova",
+          "policy": "Never infer statistical identity from the conflicting OSM ref; OSM may supply reviewed geometry only."
+        }
+      }
+    }
+  },
+  "p1_invariants": {
+    "expected_entity_count": 5830,
+    "expected_entity_count_by_jurisdiction": {"RO": 3234, "MD": 2596},
+    "expected_public_contract": "actual-public-entity-v2",
+    "expected_snapshot_id": "actual-6a7eac47d66d6701",
+    "expected_release_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
+    "statistical_entity_activation_allowed": false,
+    "administrative_parent_mutation_allowed": false,
+    "administrative_geometry_mutation_allowed": false
+  }
+}

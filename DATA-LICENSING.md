@@ -14,6 +14,16 @@ Snapshot-urile oficiale SIRUTA (România) și CUATM (Republica Moldova) sunt pă
 
 Orice reutilizare separată a snapshot-urilor SIRUTA/CUATM trebuie făcută în conformitate cu termenii furnizorului oficial și cu legislația aplicabilă. Proveniența exactă și hash-urile snapshot-urilor folosite de ACTUAL v1 sunt în manifestul de source bundle și în manifestul release-ului.
 
+## Surse statistice P2
+
+P2.0 fixează separat snapshot-uri normalizate pentru clasificările statistice, fără a le activa încă în release-ul public ACTUAL v1.1.0.
+
+Pentru România, `data/sources/ro-nuts-2024.json` conține numai identificatori, denumiri și ierarhia NUTS 2024 extrase din distribuția oficială Eurostat/GISCO. Geometriile GISCO nu sunt importate în P2.0. Reutilizarea datelor Eurostat/GISCO rămâne supusă condițiilor publicate de Comisia Europeană/Eurostat; repository-ul nu le relicențiază sub MIT.
+
+Pentru Republica Moldova, `data/sources/md-nuts-2017.json` fixează nomenclatorul BNS aprobat prin HG nr. 570/2017 și componența statistică oficială. Repository-ul nu afirmă că acest nomenclator este relicențiat sub MIT.
+
+Bytes-ii snapshot-urilor normalizate sunt legați criptografic în `data/sources/actual-statistical-source-bundle.json`. Acest bundle este separat de source bundle-ul release-ului ACTUAL până la activarea explicită P2.
+
 ## Date compozite ACTUAL
 
 Fișierele generate care combină geometrie OSM cu identificatori sau metadate oficiale pot incorpora drepturi și obligații provenite din mai multe surse. Licența MIT a codului nu trebuie interpretată ca o licență unică pentru întregul conținut al acestor fișiere.
