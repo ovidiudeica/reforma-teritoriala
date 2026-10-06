@@ -56,6 +56,8 @@ jobs:
           test "$(jq -r .status data/current/actual-release-gate.json)" = PASS
           echo "snapshot=$(jq -r .snapshot_id data/current/actual-release-manifest.json)" >> "$GITHUB_ENV"
           echo "fingerprint=$(jq -r .release_fingerprint_sha256 data/current/actual-release-manifest.json)" >> "$GITHUB_ENV"
+          contract="$(jq -er '.public_contract.contract | select(type=="string" and startswith("actual-public-entity-v"))' data/current/actual-release-manifest.json)"
+          echo "contract=$contract" >> "$GITHUB_ENV"
 
       - name: Build release evidence assets in pinned ACTUAL runtime
         shell: bash
@@ -127,7 +129,7 @@ jobs:
             printf -- '- Commit: `%s`\n' "$EXPECTED_SHA"
             printf -- '- Snapshot: `%s`\n' "$snapshot"
             printf -- '- Release fingerprint: `%s`\n' "$fingerprint"
-            printf -- '- Contract: `%s`\n\n' 'actual-public-entity-v1'
+            printf -- '- Contract: `%s`\n\n' "$contract"
             printf '%s\n' 'Required admission checks were successful on the exact released commit. Evidence was assembled with the digest-pinned ACTUAL runtime, exact Node/npm versions, and network disabled during SBOM generation. Attached assets include the release manifest, source-bundle manifest, review-evidence bundle, CycloneDX SBOM, known limitations, and SHA-256 checksums.'
           } > release-assets/RELEASE-NOTES.md
           # END RELEASE NOTES
