@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "contract": "actual-statistical-hierarchy-v1",
+  "mode": "ACTUAL",
+  "phase": "P2_PREPARED",
+  "principle": "Administrative identity, statistical classification and geometry representation are independent dimensions. P2 adds typed statistical hierarchy membership without rewriting administrative parentage or administrative geometry.",
+  "hierarchies": {
+    "administrative": {
+      "kind": "administrative",
+      "existing_parent_field": "hierarchy.parent_catalog_id",
+      "identity_authorities": ["SIRUTA", "CUATM"],
+      "immutable_during_p2_activation": true
+    },
+    "statistical": {
+      "kind": "statistical",
+      "levels": [1, 2, 3],
+      "identity_authorities": {
+        "RO": "Eurostat NUTS 2024",
+        "MD": "Biroul Național de Statistică al Republicii Moldova, HG 570/2017"
+      },
+      "membership_fields": ["classification", "code", "level", "parent_code", "source"],
+      "must_not_replace_administrative_parentage": true
+    }
+  },
+  "entity_reuse": {
+    "principle": "A territorial entity may participate in both administrative and statistical hierarchies when official territorial extent is the same.",
+    "duplicate_entity_for_same_territorial_unit": false,
+    "duplicate_geometry_for_same_extent": false,
+    "geometry_reuse_requires_reviewed_extent_equivalence": true
+  },
+  "statistical_only_entity_ids": {
+    "pattern": "^stat-(?:RO|MD)[A-Z0-9]+$",
+    "examples": ["stat-RO1", "stat-RO11", "stat-MD11", "stat-MD120"]
+  },
+  "geometry": {
+    "canonical_role": "statistical_boundary",
+    "coordinate_system": "EPSG:4326",
+    "reuse_existing_master_geometry_when_equivalent": true,
+    "snapping_allowed_for_reuse": false,
+    "clipping_allowed_for_reuse": false,
+    "simplification_allowed_for_reuse": false,
+    "statistical_geometry_may_differ_from_administrative_union": true,
+    "identity_must_remain_bound_to_official_statistical_source": true
+  },
+  "web_consolidation": {
+    "single_descending_tree": true,
+    "order": [
+      "country",
+      "statistical_level_1",
+      "statistical_level_2",
+      "statistical_level_3",
+      "administrative_descendants"
+    ],
+    "coalesce_same_territorial_entity": true
+  },
+  "activation": {
+    "P2.0": "contract_and_source_binding_only",
+    "P2.1": "Romania_statistical_entities_and_memberships",
+    "P2.2": "Moldova_statistical_entities_and_memberships",
+    "P2.3": "public_contract_and_consolidated_tree"
+  }
+}
