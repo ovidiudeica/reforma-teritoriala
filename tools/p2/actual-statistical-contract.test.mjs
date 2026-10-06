@@ -93,3 +93,9 @@ test('P2.0 gate stays outside pinned deterministic runner until activation',asyn
  assert.doesNotMatch(runner,/audit:actual-statistical-contract/);
  assert.equal(pkg.scripts?.['audit:actual-statistical-contract'],undefined);
 });
+
+test('required persisted-release verification enforces P2.0 foundation',async()=>{
+ const workflow=await readFile('.github/workflows/verify-persisted-actual-release.yml','utf8');
+ assert.match(workflow,/node tools\/p2\/audit-actual-statistical-contract\.mjs/);
+ assert.match(workflow,/node --test tools\/p2\/actual-statistical-contract\.test\.mjs/);
+});
