@@ -64,9 +64,11 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
  const manifest=json('data/current/actual-release-manifest.json');
  const persisted=json('data/current/actual-release-persisted.json');
  const geometryRole=json('schemas/actual-geometry-role-contract.json');
+ const activated=policy?.activated===true;
+ const expectedPhase=activated?'P2_ACTIVATED':'P2_PREPARED';
 
  check('contract_identity',
-  contract?.schema_version===1&&contract?.contract==='actual-statistical-hierarchy-v1'&&contract?.mode==='ACTUAL'&&contract?.phase==='P2_PREPARED',
+  contract?.schema_version===1&&contract?.contract==='actual-statistical-hierarchy-v1'&&contract?.mode==='ACTUAL'&&contract?.phase===expectedPhase,
   {schema_version:contract?.schema_version??null,contract:contract?.contract??null,mode:contract?.mode??null,phase:contract?.phase??null});
  check('contract_preserves_typed_hierarchies',
   contract?.hierarchies?.administrative?.immutable_during_p2_activation===true
@@ -79,9 +81,12 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
   &&geometryRole?.rules?.legal_identity_and_geometry_role_must_be_separate===true,
   {role:geometryRole?.roles?.statistical_boundary??null});
 
- check('policy_is_prepared_not_activated',
-  policy?.schema_version===1&&policy?.mode==='ACTUAL_STATISTICAL_POLICY'&&policy?.phase==='P2_PREPARED'&&policy?.activated===false,
-  {phase:policy?.phase??null,activated:policy?.activated??null});
+ check('policy_activation_state_is_coherent',
+  policy?.schema_version===1
+  &&policy?.mode==='ACTUAL_STATISTICAL_POLICY'
+  &&policy?.phase===expectedPhase
+  &&policy?.activated===activated,
+  {expected_phase:expectedPhase,phase:policy?.phase??null,activated:policy?.activated??null});
  check('policy_contract_binding',
   policy?.contract?.path===STATISTICAL_CONTRACT_PATH
   &&policy?.contract?.id===contract?.contract
@@ -198,19 +203,34 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
   catalogEntities.length===expected.expected_entity_count
   &&JSON.stringify(catalogCounts)===JSON.stringify(expected.expected_entity_count_by_jurisdiction),
   {expected:expected.expected_entity_count_by_jurisdiction,actual:catalogCounts,total:catalogEntities.length});
- check('p1_public_contract_unchanged',
-  publicIndex?.contract===expected.expected_public_contract&&publicIndex?.entity_count===expected.expected_entity_count,
-  {contract:publicIndex?.contract??null,entity_count:publicIndex?.entity_count??null});
- check('p2_entities_not_activated',
-  !catalogEntities.some(x=>String(x.id||'').startsWith('stat-'))
-  &&!(publicIndex?.entities||[]).some(x=>String(x.id||'').startsWith('stat-')),
+ const publicEntities=Array.isArray(publicIndex?.entities)?publicIndex.entities:[];
+ const statOnly=publicEntities.filter(x=>String(x.id||'').startsWith('stat-'));
+ const statRole=publicEntities.filter(x=>Array.isArray(x.roles)&&x.roles.includes('statistical'));
+ check('public_activation_state_is_coherent',
+  activated
+   ? publicIndex?.contract==='actual-public-entity-v3'
+     &&Number(publicIndex?.schema_version)===3
+     &&publicIndex?.entity_count===5848
+     &&statOnly.length===18
+     &&statRole.length===63
+   : publicIndex?.contract===expected.expected_public_contract
+     &&publicIndex?.entity_count===expected.expected_entity_count
+     &&statOnly.length===0,
+  {activated,contract:publicIndex?.contract??null,schema_version:publicIndex?.schema_version??null,entity_count:publicIndex?.entity_count??null,statistical_only:statOnly.length,statistical_roles:statRole.length});
+ check('administrative_catalog_never_contains_statistical_only_entities',
+  !catalogEntities.some(x=>String(x.id||'').startsWith('stat-')),
   {});
- check('p1_release_identity_unchanged',
-  manifest?.snapshot_id===expected.expected_snapshot_id
-  &&manifest?.release_fingerprint_sha256===expected.expected_release_fingerprint_sha256
-  &&persisted?.snapshot_id===expected.expected_snapshot_id
-  &&persisted?.release_fingerprint_sha256===expected.expected_release_fingerprint_sha256,
-  {manifest_snapshot:manifest?.snapshot_id??null,persisted_snapshot:persisted?.snapshot_id??null});
+ check('release_identity_state_is_coherent',
+  activated
+   ? manifest?.public_contract?.contract==='actual-public-entity-v3'
+     &&manifest?.snapshot_id===persisted?.snapshot_id
+     &&manifest?.release_fingerprint_sha256===persisted?.release_fingerprint_sha256
+     &&manifest?.snapshot_id!==expected.expected_snapshot_id
+   : manifest?.snapshot_id===expected.expected_snapshot_id
+     &&manifest?.release_fingerprint_sha256===expected.expected_release_fingerprint_sha256
+     &&persisted?.snapshot_id===expected.expected_snapshot_id
+     &&persisted?.release_fingerprint_sha256===expected.expected_release_fingerprint_sha256,
+  {activated,manifest_snapshot:manifest?.snapshot_id??null,persisted_snapshot:persisted?.snapshot_id??null,manifest_fingerprint:manifest?.release_fingerprint_sha256??null,persisted_fingerprint:persisted?.release_fingerprint_sha256??null});
  check('p1_catalog_bytes_unchanged',
   manifest?.components?.catalog?.sha256===sha256(bytes['data/current/entities.json']),
   {manifest:manifest?.components?.catalog?.sha256??null,actual:sha256(bytes['data/current/entities.json'])});
@@ -224,7 +244,7 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
  return {
   schema_version:1,
   mode:'ACTUAL_STATISTICAL_P2_0_GATE',
-  phase:'P2_PREPARED',
+  phase:expectedPhase,
   status:failures.length?'FAIL':'PASS',
   source_bundle_fingerprint_sha256:bundleFp.sha256,
   checks,
@@ -233,7 +253,7 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
    RO:{unit_count:roUnits.length,level_counts:countLevels(roUnits),reused_nuts3_entity_count:publicRoCounties.length},
    MD:{unit_count:mdUnits.length,level_counts:countLevels(mdUnits),component_assignment_count:mdComponents.length},
    p1_entity_count:catalogEntities.length,
-   p2_entities_activated:false
+   p2_entities_activated:activated
   }
  };
 }
