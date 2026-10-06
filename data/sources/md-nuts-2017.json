@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_STATISTICAL_SOURCE",
+  "jurisdiction": "MD",
+  "classification": "NUTS_MOLDOVA",
+  "classification_version": "2017",
+  "effective_from": "2018-01-01",
+  "authority": "Biroul Național de Statistică al Republicii Moldova",
+  "legal_basis": "Hotărârea Guvernului Republicii Moldova nr. 570/2017",
+  "source": {
+    "url": "https://statistica.gov.md/files/files/Clasificatoare/NUTS.zip",
+    "archive_sha256": "e1a751f90908793c9a3d82077ac3d309b0a366835cf6fd6090e70cd6ad3c30ba",
+    "archive_bytes": 8528564,
+    "workbook_path": "NUTS.xlsx",
+    "workbook_sha256": "c20ca3360f8f26a2baeed92c354a0fe927860a746d214ba2843f9f9aaaad20c4",
+    "workbook_bytes": 22525,
+    "format": "XLSX",
+    "dataset": "Nomenclatorul unităților teritoriale de statistică al Republicii Moldova"
+  },
+  "unit_count": 9,
+  "level_counts": {
+    "1": 1,
+    "2": 2,
+    "3": 6
+  },
+  "component_assignment_count": 37,
+  "units": [
+    {
+      "code": "MD1",
+      "level": 1,
+      "name": "Republica Moldova",
+      "parent_code": null,
+      "component_statistical_codes": []
+    },
+    {
+      "code": "MD11",
+      "level": 2,
+      "name": "Partea de Vest (partea dreapta a Nistrului)",
+      "parent_code": "MD1",
+      "component_statistical_codes": []
+    },
+    {
+      "code": "MD12",
+      "level": 2,
+      "name": "Partea de Est (partea stîngă a Nistrului)",
+      "parent_code": "MD1",
+      "component_statistical_codes": []
+    },
+    {
+      "code": "MD111",
+      "level": 3,
+      "name": "Regiunea Nord",
+      "parent_code": "MD11",
+      "component_statistical_codes": [
+        "0301000",
+        "1400000",
+        "3400000",
+        "3600000",
+        "4100000",
+        "4300000",
+        "4500000",
+        "4800000",
+        "6200000",
+        "7100000",
+        "7400000",
+        "7800000"
+      ]
+    },
+    {
+      "code": "MD112",
+      "level": 3,
+      "name": "Regiunea Centru",
+      "parent_code": "MD11",
+      "component_statistical_codes": [
+        "1000000",
+        "2500000",
+        "3100000",
+        "3800000",
+        "5300000",
+        "5500000",
+        "6000000",
+        "6400000",
+        "6700000",
+        "8000000",
+        "8300000",
+        "8900000",
+        "9200000"
+      ]
+    },
+    {
+      "code": "MD113",
+      "level": 3,
+      "name": "Regiunea Sud",
+      "parent_code": "MD11",
+      "component_statistical_codes": [
+        "1200000",
+        "1700000",
+        "2100000",
+        "2700000",
+        "2900000",
+        "5700000",
+        "8500000",
+        "8700000"
+      ]
+    },
+    {
+      "code": "MD114",
+      "level": 3,
+      "name": "Unitatea Teritorială Autonomă Găgăuzia",
+      "parent_code": "MD11",
+      "component_statistical_codes": [
+        "9600000"
+      ]
+    },
+    {
+      "code": "MD115",
+      "level": 3,
+      "name": "Municipiul Chișinău",
+      "parent_code": "MD11",
+      "component_statistical_codes": [
+        "0101000"
+      ]
+    },
+    {
+      "code": "MD120",
+      "level": 3,
+      "name": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "parent_code": "MD12",
+      "component_statistical_codes": [
+        "9800000",
+        "0501000"
+      ]
+    }
+  ]
+}
