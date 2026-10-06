@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_STATISTICAL_SOURCE_BUNDLE",
+  "phase": "P2_PREPARED",
+  "bundle_fingerprint_algorithm": "actual-statistical-source-bundle-v1",
+  "bundle_fingerprint_sha256": "5be2a110805f38fafd76ea1b2c3672a71770672faceca8814ed2ad22549b2f3f",
+  "policy": "P2.0 cryptographically binds normalized official statistical source snapshots without activating statistical entities in ACTUAL v1.1.0.",
+  "sources": {
+    "MD": {
+      "path": "data/sources/md-nuts-2017.json",
+      "sha256": "894b804f981ef3a9d02e5e1564bae39951ae06e7e12f99c7597051ea89e67a5b"
+    },
+    "RO": {
+      "path": "data/sources/ro-nuts-2024.json",
+      "sha256": "c2ddd30974beb9a9b4bc540823ec9052f89d73e01c05a1a3cc8f828554d49962"
+    }
+  }
+}
