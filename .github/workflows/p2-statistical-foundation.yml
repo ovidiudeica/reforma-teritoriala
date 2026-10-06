@@ -33,6 +33,12 @@ jobs:
       - name: Regression-test P2.1 Romania statistical layer
         run: node --test tools/p2/actual-ro-statistical-layer.test.mjs
 
+      - name: Gate P2.2 Moldova statistical layer
+        run: node tools/p2/audit-actual-md-statistical-layer.mjs
+
+      - name: Regression-test P2.2 Moldova statistical layer
+        run: node --test tools/p2/actual-md-statistical-layer.test.mjs
+
       - name: Prove P2 verification is read-only
         run: |
           if [ -n "$(git status --porcelain --untracked-files=all)" ]; then

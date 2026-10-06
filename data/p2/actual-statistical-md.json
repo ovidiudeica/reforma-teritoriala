@@ -1,0 +1,742 @@
+{
+  "schema_version": 1,
+  "contract": "actual-statistical-md-v1",
+  "phase": "P2.2_MD",
+  "mode": "ACTUAL_STATISTICAL_OVERLAY",
+  "jurisdiction": "MD",
+  "generated_at": "2026-10-06T20:49:15.529Z",
+  "policy": "Adds 2 level-2 and 4 level-3 statistical-only entities, reuses the existing Moldova/Gagauzia/Chisinau entities for MD1/MD114/MD115, and binds all 37 official CUATM components. Administrative identity, parentage and master geometry are not rewritten. MD120 identity is BNS-authoritative even where OSM geometry is tagged MD121.",
+  "counts": {
+    "statistical_only_entities": 6,
+    "reused_existing_statistical_entities": 3,
+    "total_statistical_roles": 9,
+    "component_bindings": 37
+  },
+  "sources": {
+    "official_nomenclature": {
+      "path": "data/sources/md-nuts-2017.json",
+      "sha256": "894b804f981ef3a9d02e5e1564bae39951ae06e7e12f99c7597051ea89e67a5b",
+      "version": "2017"
+    },
+    "osm_statistical": {
+      "path": "data/sources/md-statistical-osm-current.json",
+      "sha256": "31c81cfa8a30577b4047e40cbefadbee0f999ea6ffdcd6f9232c5e297cd7d510",
+      "snapshot_path": "data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz",
+      "semantic_sha256": "436314643dcd9c301cc9ab4399d3313c162efc09eaa1f21bf1594d3f8357aebd",
+      "compressed_sha256": "b335f30154adddbf559cb48bece5a2271836af626c81b4dfb556753dd4e54dc4"
+    },
+    "cuatm_bridge": {
+      "path": "data/sources/cuatm-current.json",
+      "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575",
+      "fetched_at": "2026-09-27T20:37:24.316Z"
+    },
+    "p1_catalog": {
+      "path": "data/current/entities.json",
+      "sha256": "af6e09317d75fea663e6be425bf0a5c252fc756b6bb1c8055e564af913148504",
+      "snapshot_id": "actual-6a7eac47d66d6701"
+    }
+  },
+  "statistical_entities": [
+    {
+      "id": "stat-MD11",
+      "status": "current",
+      "jurisdiction": "MD",
+      "category": "statistical",
+      "type": "nuts_moldova_level_2",
+      "name": "Partea de Vest (partea dreapta a Nistrului)",
+      "official_name": "Partea de Vest (partea dreapta a Nistrului)",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD11",
+        "level": 2,
+        "parent_code": "MD1",
+        "parent_entity_id": "osm-r58974",
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 18994563,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_moldova_level_2",
+        "source_manifest": "data/sources/md-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz",
+        "coordinates_embedded": false,
+        "osm_statistical_ref": "MD11",
+        "osm_ref_is_identity_authority": false,
+        "identity_ref_conflict": null
+      }
+    },
+    {
+      "id": "stat-MD12",
+      "status": "current",
+      "jurisdiction": "MD",
+      "category": "statistical",
+      "type": "nuts_moldova_level_2",
+      "name": "Partea de Est (partea stîngă a Nistrului)",
+      "official_name": "Partea de Est (partea stîngă a Nistrului)",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD12",
+        "level": 2,
+        "parent_code": "MD1",
+        "parent_entity_id": "osm-r58974",
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 18988801,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_moldova_level_2",
+        "source_manifest": "data/sources/md-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz",
+        "coordinates_embedded": false,
+        "osm_statistical_ref": "MD12",
+        "osm_ref_is_identity_authority": false,
+        "identity_ref_conflict": null
+      }
+    },
+    {
+      "id": "stat-MD111",
+      "status": "current",
+      "jurisdiction": "MD",
+      "category": "statistical",
+      "type": "nuts_moldova_level_3",
+      "name": "Regiunea Nord",
+      "official_name": "Regiunea Nord",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD111",
+        "level": 3,
+        "parent_code": "MD11",
+        "parent_entity_id": "stat-MD11",
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 10052719,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_moldova_level_3",
+        "source_manifest": "data/sources/md-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz",
+        "coordinates_embedded": false,
+        "osm_statistical_ref": "MD111",
+        "osm_ref_is_identity_authority": false,
+        "identity_ref_conflict": null
+      }
+    },
+    {
+      "id": "stat-MD112",
+      "status": "current",
+      "jurisdiction": "MD",
+      "category": "statistical",
+      "type": "nuts_moldova_level_3",
+      "name": "Regiunea Centru",
+      "official_name": "Regiunea Centru",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD112",
+        "level": 3,
+        "parent_code": "MD11",
+        "parent_entity_id": "stat-MD11",
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 11092080,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_moldova_level_3",
+        "source_manifest": "data/sources/md-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz",
+        "coordinates_embedded": false,
+        "osm_statistical_ref": "MD112",
+        "osm_ref_is_identity_authority": false,
+        "identity_ref_conflict": null
+      }
+    },
+    {
+      "id": "stat-MD113",
+      "status": "current",
+      "jurisdiction": "MD",
+      "category": "statistical",
+      "type": "nuts_moldova_level_3",
+      "name": "Regiunea Sud",
+      "official_name": "Regiunea Sud",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD113",
+        "level": 3,
+        "parent_code": "MD11",
+        "parent_entity_id": "stat-MD11",
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 11091865,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_moldova_level_3",
+        "source_manifest": "data/sources/md-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz",
+        "coordinates_embedded": false,
+        "osm_statistical_ref": "MD113",
+        "osm_ref_is_identity_authority": false,
+        "identity_ref_conflict": null
+      }
+    },
+    {
+      "id": "stat-MD120",
+      "status": "current",
+      "jurisdiction": "MD",
+      "category": "statistical",
+      "type": "nuts_moldova_level_3",
+      "name": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "official_name": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "roles": [
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD120",
+        "level": 3,
+        "parent_code": "MD12",
+        "parent_entity_id": "stat-MD12",
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json"
+      },
+      "representation": {
+        "source": "OpenStreetMap",
+        "osm_relation_id": 18976350,
+        "boundary": "statistical",
+        "geometry_role": "statistical_boundary",
+        "geometry_scope": "nuts_moldova_level_3",
+        "source_manifest": "data/sources/md-statistical-osm-current.json",
+        "source_snapshot": "data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz",
+        "coordinates_embedded": false,
+        "osm_statistical_ref": "MD121",
+        "osm_ref_is_identity_authority": false,
+        "identity_ref_conflict": "official_MD120_osm_MD121"
+      }
+    }
+  ],
+  "existing_entity_statistical_roles": [
+    {
+      "entity_id": "osm-r58974",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD1",
+        "level": 1,
+        "parent_code": null,
+        "parent_entity_id": null,
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json",
+        "component_statistical_code": null
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r58974",
+        "master_geometry_path": "public/geo/current/md-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r1699032",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD114",
+        "level": 3,
+        "parent_code": "MD11",
+        "parent_entity_id": "stat-MD11",
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json",
+        "component_statistical_code": "9600000"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r1699032",
+        "master_geometry_path": "public/geo/current/md-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    },
+    {
+      "entity_id": "osm-r1691801",
+      "roles": [
+        "administrative",
+        "statistical"
+      ],
+      "statistical": {
+        "classification": "NUTS_MOLDOVA",
+        "version": "2017",
+        "code": "MD115",
+        "level": 3,
+        "parent_code": "MD11",
+        "parent_entity_id": "stat-MD11",
+        "identity_authority": "Biroul Național de Statistică al Republicii Moldova",
+        "source": "data/sources/md-nuts-2017.json",
+        "component_statistical_code": "0101000"
+      },
+      "geometry_reuse": {
+        "source_entity_id": "osm-r1691801",
+        "master_geometry_path": "public/geo/current/md-administrative.geojson",
+        "duplicate_geometry": false,
+        "geometry_modified": false,
+        "reuse_existing_master_geometry": true,
+        "additional_geometry_role": "statistical_boundary"
+      }
+    }
+  ],
+  "administrative_component_bindings": [
+    {
+      "entity_id": "osm-r1691801",
+      "legal_registry": "CUATM",
+      "legal_id": "0100",
+      "component_statistical_code": "0101000",
+      "statistical_parent_code": "MD115",
+      "statistical_parent_entity_id": "osm-r1691801",
+      "tree_edge_created": false,
+      "coalesced_same_territorial_entity": true,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r58983",
+      "legal_registry": "CUATM",
+      "legal_id": "0300",
+      "component_statistical_code": "0301000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r9581354",
+      "legal_registry": "CUATM",
+      "legal_id": "0500",
+      "component_statistical_code": "0501000",
+      "statistical_parent_code": "MD120",
+      "statistical_parent_entity_id": "stat-MD120",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1692078",
+      "legal_registry": "CUATM",
+      "legal_id": "1000",
+      "component_statistical_code": "1000000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1104136",
+      "legal_registry": "CUATM",
+      "legal_id": "1200",
+      "component_statistical_code": "1200000",
+      "statistical_parent_code": "MD113",
+      "statistical_parent_entity_id": "stat-MD113",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r59002",
+      "legal_registry": "CUATM",
+      "legal_id": "1400",
+      "component_statistical_code": "1400000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1699034",
+      "legal_registry": "CUATM",
+      "legal_id": "1700",
+      "component_statistical_code": "1700000",
+      "statistical_parent_code": "MD113",
+      "statistical_parent_entity_id": "stat-MD113",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1699022",
+      "legal_registry": "CUATM",
+      "legal_id": "2100",
+      "component_statistical_code": "2100000",
+      "statistical_parent_code": "MD113",
+      "statistical_parent_entity_id": "stat-MD113",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r58988",
+      "legal_registry": "CUATM",
+      "legal_id": "2500",
+      "component_statistical_code": "2500000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r65343",
+      "legal_registry": "CUATM",
+      "legal_id": "2700",
+      "component_statistical_code": "2700000",
+      "statistical_parent_code": "MD113",
+      "statistical_parent_entity_id": "stat-MD113",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1211126",
+      "legal_registry": "CUATM",
+      "legal_id": "2900",
+      "component_statistical_code": "2900000",
+      "statistical_parent_code": "MD113",
+      "statistical_parent_entity_id": "stat-MD113",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1692126",
+      "legal_registry": "CUATM",
+      "legal_id": "3100",
+      "component_statistical_code": "3100000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r59007",
+      "legal_registry": "CUATM",
+      "legal_id": "3400",
+      "component_statistical_code": "3400000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1693907",
+      "legal_registry": "CUATM",
+      "legal_id": "3600",
+      "component_statistical_code": "3600000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1692123",
+      "legal_registry": "CUATM",
+      "legal_id": "3800",
+      "component_statistical_code": "3800000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r59000",
+      "legal_registry": "CUATM",
+      "legal_id": "4100",
+      "component_statistical_code": "4100000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r58984",
+      "legal_registry": "CUATM",
+      "legal_id": "4300",
+      "component_statistical_code": "4300000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1693560",
+      "legal_registry": "CUATM",
+      "legal_id": "4500",
+      "component_statistical_code": "4500000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1693874",
+      "legal_registry": "CUATM",
+      "legal_id": "4800",
+      "component_statistical_code": "4800000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r58991",
+      "legal_registry": "CUATM",
+      "legal_id": "5300",
+      "component_statistical_code": "5300000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1691800",
+      "legal_registry": "CUATM",
+      "legal_id": "5500",
+      "component_statistical_code": "5500000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1699023",
+      "legal_registry": "CUATM",
+      "legal_id": "5700",
+      "component_statistical_code": "5700000",
+      "statistical_parent_code": "MD113",
+      "statistical_parent_entity_id": "stat-MD113",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r58990",
+      "legal_registry": "CUATM",
+      "legal_id": "6000",
+      "component_statistical_code": "6000000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r59005",
+      "legal_registry": "CUATM",
+      "legal_id": "6200",
+      "component_statistical_code": "6200000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1692172",
+      "legal_registry": "CUATM",
+      "legal_id": "6400",
+      "component_statistical_code": "6400000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1435790",
+      "legal_registry": "CUATM",
+      "legal_id": "6700",
+      "component_statistical_code": "6700000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1693908",
+      "legal_registry": "CUATM",
+      "legal_id": "7100",
+      "component_statistical_code": "7100000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r58996",
+      "legal_registry": "CUATM",
+      "legal_id": "7400",
+      "component_statistical_code": "7400000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1693523",
+      "legal_registry": "CUATM",
+      "legal_id": "7800",
+      "component_statistical_code": "7800000",
+      "statistical_parent_code": "MD111",
+      "statistical_parent_entity_id": "stat-MD111",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r85827",
+      "legal_registry": "CUATM",
+      "legal_id": "8000",
+      "component_statistical_code": "8000000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1693561",
+      "legal_registry": "CUATM",
+      "legal_id": "8300",
+      "component_statistical_code": "8300000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r65344",
+      "legal_registry": "CUATM",
+      "legal_id": "8500",
+      "component_statistical_code": "8500000",
+      "statistical_parent_code": "MD113",
+      "statistical_parent_entity_id": "stat-MD113",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1699033",
+      "legal_registry": "CUATM",
+      "legal_id": "8700",
+      "component_statistical_code": "8700000",
+      "statistical_parent_code": "MD113",
+      "statistical_parent_entity_id": "stat-MD113",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r58993",
+      "legal_registry": "CUATM",
+      "legal_id": "8900",
+      "component_statistical_code": "8900000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r58985",
+      "legal_registry": "CUATM",
+      "legal_id": "9200",
+      "component_statistical_code": "9200000",
+      "statistical_parent_code": "MD112",
+      "statistical_parent_entity_id": "stat-MD112",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r1699032",
+      "legal_registry": "CUATM",
+      "legal_id": "9600",
+      "component_statistical_code": "9600000",
+      "statistical_parent_code": "MD114",
+      "statistical_parent_entity_id": "osm-r1699032",
+      "tree_edge_created": false,
+      "coalesced_same_territorial_entity": true,
+      "source": "data/sources/md-nuts-2017.json"
+    },
+    {
+      "entity_id": "osm-r2607033",
+      "legal_registry": "CUATM",
+      "legal_id": "9800",
+      "component_statistical_code": "9800000",
+      "statistical_parent_code": "MD120",
+      "statistical_parent_entity_id": "stat-MD120",
+      "tree_edge_created": true,
+      "coalesced_same_territorial_entity": false,
+      "source": "data/sources/md-nuts-2017.json"
+    }
+  ],
+  "layer_fingerprint_algorithm": "actual-statistical-md-v1",
+  "layer_fingerprint_sha256": "ed29c79d23ed940e2db5cce074b7cb09745b0c90181b168fc8a6b435d74252a8"
+}
