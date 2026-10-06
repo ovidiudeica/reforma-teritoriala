@@ -2,13 +2,13 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "0f38a88673ec6d359d81ce0f4ac488e2c01648d730ce1bce0cd94c69ff13717c",
+  "environment_fingerprint_sha256": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
       "label": "ubuntu-24.04",
       "image_os": "ubuntu24",
-      "image_version": "20260927.320.1"
+      "image_version": "20261004.327.1"
     },
     "runtime_image": {
       "manifest_path": "data/current/actual-runtime-image.json",
@@ -34,10 +34,10 @@
     },
     "host_trust": {
       "manifest_path": "data/current/actual-host-trust-manifest.json",
-      "manifest_sha256": "5496f247c67f1e176c840d08230febb89cafd46b7e176bfd003f4ec400202702",
+      "manifest_sha256": "aeee28147d8b42e8f85c1372af8624276736faf7348cd7d9c09bf1eb5dcc056d",
       "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
-      "host_trust_fingerprint_sha256": "b9ad378d58d543c13fd02ffe1ac72aa69cc13104fe04ddfb31a7c83fd9cb6f08",
-      "runner_image_version": "20260927.320.1",
+      "host_trust_fingerprint_sha256": "734d94265dd1a862a03fe400408ec3d83ce2d065909a0aa7077a9bf15c158ae8",
+      "runner_image_version": "20261004.327.1",
       "kernel_release": "6.17.0-1022-azure",
       "docker_server_version": "28.0.4",
       "containerd_version": "v2.3.6",
@@ -87,7 +87,7 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "99594d34c47dfa61dbf423d1e8e717d894f3c80abd7e3b4ba2d9414ebacbc77e",
+      "scripts/lib/actual-build-environment.mjs": "95600cf4b3cddc9a330c2a6dc553c39b26383f4e12dea4f227bd1e58641fbe70",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
       "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
@@ -100,7 +100,7 @@
       "scripts/lib/actual-oci-builder.mjs": "54770d758d55b4ccbfebdf75e76883b436bdf123b42a30826c90f15fbc77454c",
       "scripts/process/build-actual-oci-builder-manifest.mjs": "70ec6a6edbd613d461e8a3dc06f4fcc465657b392253de1b1c987bd249a0aac6",
       "scripts/process/audit-actual-oci-builder.mjs": "a55c222ff3f2d4cf0da6b2e3adc3e5c04ae0786435288d8f916341ac3cf7fa97",
-      "scripts/lib/actual-host-trust.mjs": "7c85ef5779f012f5d2af2fc2eb52ba6ac4d33a55f8bdcfa33d1ab6e9ea271af3",
+      "scripts/lib/actual-host-trust.mjs": "4f6a97be56765f791255c8a3aa0bca50c2246f264eae7562bcb7a92184a7d381",
       "scripts/process/build-actual-host-trust-manifest.mjs": "1fc82422329b8040d22df3c48994d78d4c8831d6559cf7b0a752f62399747405",
       "scripts/process/audit-actual-host-trust.mjs": "93fa81438ae47b29553d7a73d55e0f7c501e54ec5d3e1ee93e1b3736c1cf5a5e",
       "scripts/lib/actual-review-evidence-bundle.mjs": "30cbba94bf216003e9e07ac8df591b8e2b7ba95e68a4ac5ebb7cfb73fee33123",
