@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_STATISTICAL_SOURCE",
+  "jurisdiction": "RO",
+  "classification": "NUTS",
+  "classification_version": "2024",
+  "effective_from": "2024-01-01",
+  "authority": "Eurostat / GISCO",
+  "source": {
+    "url": "https://gisco-services.ec.europa.eu/distribution/v2/nuts/csv/NUTS_AT_2024.csv",
+    "content_sha256": "2dab51394b7dc50eb18eb2ec37c5a69993a1b955af8d203d19e899581c4d9ee1",
+    "content_bytes": 92282,
+    "format": "CSV",
+    "dataset": "NUTS 2024"
+  },
+  "unit_count": 54,
+  "level_counts": {
+    "1": 4,
+    "2": 8,
+    "3": 42
+  },
+  "units": [
+    {
+      "code": "RO1",
+      "level": 1,
+      "name": "Macroregiunea Unu",
+      "name_latin": "Macroregiunea Unu",
+      "parent_code": null
+    },
+    {
+      "code": "RO11",
+      "level": 2,
+      "name": "Nord-Vest",
+      "name_latin": "Nord-Vest",
+      "parent_code": "RO1"
+    },
+    {
+      "code": "RO111",
+      "level": 3,
+      "name": "Bihor",
+      "name_latin": "Bihor",
+      "parent_code": "RO11"
+    },
+    {
+      "code": "RO112",
+      "level": 3,
+      "name": "Bistriţa-Năsăud",
+      "name_latin": "Bistriţa-Năsăud",
+      "parent_code": "RO11"
+    },
+    {
+      "code": "RO113",
+      "level": 3,
+      "name": "Cluj",
+      "name_latin": "Cluj",
+      "parent_code": "RO11"
+    },
+    {
+      "code": "RO114",
+      "level": 3,
+      "name": "Maramureş",
+      "name_latin": "Maramureş",
+      "parent_code": "RO11"
+    },
+    {
+      "code": "RO115",
+      "level": 3,
+      "name": "Satu Mare",
+      "name_latin": "Satu Mare",
+      "parent_code": "RO11"
+    },
+    {
+      "code": "RO116",
+      "level": 3,
+      "name": "Sălaj",
+      "name_latin": "Sălaj",
+      "parent_code": "RO11"
+    },
+    {
+      "code": "RO12",
+      "level": 2,
+      "name": "Centru",
+      "name_latin": "Centru",
+      "parent_code": "RO1"
+    },
+    {
+      "code": "RO121",
+      "level": 3,
+      "name": "Alba",
+      "name_latin": "Alba",
+      "parent_code": "RO12"
+    },
+    {
+      "code": "RO122",
+      "level": 3,
+      "name": "Braşov",
+      "name_latin": "Braşov",
+      "parent_code": "RO12"
+    },
+    {
+      "code": "RO123",
+      "level": 3,
+      "name": "Covasna",
+      "name_latin": "Covasna",
+      "parent_code": "RO12"
+    },
+    {
+      "code": "RO124",
+      "level": 3,
+      "name": "Harghita",
+      "name_latin": "Harghita",
+      "parent_code": "RO12"
+    },
+    {
+      "code": "RO125",
+      "level": 3,
+      "name": "Mureş",
+      "name_latin": "Mureş",
+      "parent_code": "RO12"
+    },
+    {
+      "code": "RO126",
+      "level": 3,
+      "name": "Sibiu",
+      "name_latin": "Sibiu",
+      "parent_code": "RO12"
+    },
+    {
+      "code": "RO2",
+      "level": 1,
+      "name": "Macroregiunea Doi",
+      "name_latin": "Macroregiunea Doi",
+      "parent_code": null
+    },
+    {
+      "code": "RO21",
+      "level": 2,
+      "name": "Nord-Est",
+      "name_latin": "Nord-Est",
+      "parent_code": "RO2"
+    },
+    {
+      "code": "RO211",
+      "level": 3,
+      "name": "Bacău",
+      "name_latin": "Bacău",
+      "parent_code": "RO21"
+    },
+    {
+      "code": "RO212",
+      "level": 3,
+      "name": "Botoşani",
+      "name_latin": "Botoşani",
+      "parent_code": "RO21"
+    },
+    {
+      "code": "RO213",
+      "level": 3,
+      "name": "Iaşi",
+      "name_latin": "Iaşi",
+      "parent_code": "RO21"
+    },
+    {
+      "code": "RO214",
+      "level": 3,
+      "name": "Neamţ",
+      "name_latin": "Neamţ",
+      "parent_code": "RO21"
+    },
+    {
+      "code": "RO215",
+      "level": 3,
+      "name": "Suceava",
+      "name_latin": "Suceava",
+      "parent_code": "RO21"
+    },
+    {
+      "code": "RO216",
+      "level": 3,
+      "name": "Vaslui",
+      "name_latin": "Vaslui",
+      "parent_code": "RO21"
+    },
+    {
+      "code": "RO22",
+      "level": 2,
+      "name": "Sud-Est",
+      "name_latin": "Sud-Est",
+      "parent_code": "RO2"
+    },
+    {
+      "code": "RO221",
+      "level": 3,
+      "name": "Brăila",
+      "name_latin": "Brăila",
+      "parent_code": "RO22"
+    },
+    {
+      "code": "RO222",
+      "level": 3,
+      "name": "Buzău",
+      "name_latin": "Buzău",
+      "parent_code": "RO22"
+    },
+    {
+      "code": "RO223",
+      "level": 3,
+      "name": "Constanţa",
+      "name_latin": "Constanţa",
+      "parent_code": "RO22"
+    },
+    {
+      "code": "RO224",
+      "level": 3,
+      "name": "Galaţi",
+      "name_latin": "Galaţi",
+      "parent_code": "RO22"
+    },
+    {
+      "code": "RO225",
+      "level": 3,
+      "name": "Tulcea",
+      "name_latin": "Tulcea",
+      "parent_code": "RO22"
+    },
+    {
+      "code": "RO226",
+      "level": 3,
+      "name": "Vrancea",
+      "name_latin": "Vrancea",
+      "parent_code": "RO22"
+    },
+    {
+      "code": "RO3",
+      "level": 1,
+      "name": "Macroregiunea Trei",
+      "name_latin": "Macroregiunea Trei",
+      "parent_code": null
+    },
+    {
+      "code": "RO31",
+      "level": 2,
+      "name": "Sud-Muntenia",
+      "name_latin": "Sud-Muntenia",
+      "parent_code": "RO3"
+    },
+    {
+      "code": "RO311",
+      "level": 3,
+      "name": "Argeş",
+      "name_latin": "Argeş",
+      "parent_code": "RO31"
+    },
+    {
+      "code": "RO312",
+      "level": 3,
+      "name": "Călăraşi",
+      "name_latin": "Călăraşi",
+      "parent_code": "RO31"
+    },
+    {
+      "code": "RO313",
+      "level": 3,
+      "name": "Dâmboviţa",
+      "name_latin": "Dâmboviţa",
+      "parent_code": "RO31"
+    },
+    {
+      "code": "RO314",
+      "level": 3,
+      "name": "Giurgiu",
+      "name_latin": "Giurgiu",
+      "parent_code": "RO31"
+    },
+    {
+      "code": "RO315",
+      "level": 3,
+      "name": "Ialomiţa",
+      "name_latin": "Ialomiţa",
+      "parent_code": "RO31"
+    },
+    {
+      "code": "RO316",
+      "level": 3,
+      "name": "Prahova",
+      "name_latin": "Prahova",
+      "parent_code": "RO31"
+    },
+    {
+      "code": "RO317",
+      "level": 3,
+      "name": "Teleorman",
+      "name_latin": "Teleorman",
+      "parent_code": "RO31"
+    },
+    {
+      "code": "RO32",
+      "level": 2,
+      "name": "Bucureşti-Ilfov",
+      "name_latin": "Bucureşti-Ilfov",
+      "parent_code": "RO3"
+    },
+    {
+      "code": "RO321",
+      "level": 3,
+      "name": "Bucureşti",
+      "name_latin": "Bucureşti",
+      "parent_code": "RO32"
+    },
+    {
+      "code": "RO322",
+      "level": 3,
+      "name": "Ilfov",
+      "name_latin": "Ilfov",
+      "parent_code": "RO32"
+    },
+    {
+      "code": "RO4",
+      "level": 1,
+      "name": "Macroregiunea Patru",
+      "name_latin": "Macroregiunea Patru",
+      "parent_code": null
+    },
+    {
+      "code": "RO41",
+      "level": 2,
+      "name": "Sud-Vest Oltenia",
+      "name_latin": "Sud-Vest Oltenia",
+      "parent_code": "RO4"
+    },
+    {
+      "code": "RO411",
+      "level": 3,
+      "name": "Dolj",
+      "name_latin": "Dolj",
+      "parent_code": "RO41"
+    },
+    {
+      "code": "RO412",
+      "level": 3,
+      "name": "Gorj",
+      "name_latin": "Gorj",
+      "parent_code": "RO41"
+    },
+    {
+      "code": "RO413",
+      "level": 3,
+      "name": "Mehedinţi",
+      "name_latin": "Mehedinţi",
+      "parent_code": "RO41"
+    },
+    {
+      "code": "RO414",
+      "level": 3,
+      "name": "Olt",
+      "name_latin": "Olt",
+      "parent_code": "RO41"
+    },
+    {
+      "code": "RO415",
+      "level": 3,
+      "name": "Vâlcea",
+      "name_latin": "Vâlcea",
+      "parent_code": "RO41"
+    },
+    {
+      "code": "RO42",
+      "level": 2,
+      "name": "Vest",
+      "name_latin": "Vest",
+      "parent_code": "RO4"
+    },
+    {
+      "code": "RO421",
+      "level": 3,
+      "name": "Arad",
+      "name_latin": "Arad",
+      "parent_code": "RO42"
+    },
+    {
+      "code": "RO422",
+      "level": 3,
+      "name": "Caraş-Severin",
+      "name_latin": "Caraş-Severin",
+      "parent_code": "RO42"
+    },
+    {
+      "code": "RO423",
+      "level": 3,
+      "name": "Hunedoara",
+      "name_latin": "Hunedoara",
+      "parent_code": "RO42"
+    },
+    {
+      "code": "RO424",
+      "level": 3,
+      "name": "Timiş",
+      "name_latin": "Timiş",
+      "parent_code": "RO42"
+    }
+  ]
+}
