@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {mkdir,readFile,rm,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
 import {auditActualOsmFidelity} from '../lib/actual-osm-fidelity.mjs';
+import {activateStatisticalPublic} from '../lib/actual-statistical-public.mjs';
 
 const osmFidelity=await auditActualOsmFidelity();
 if(osmFidelity.status!=='PASS')throw new Error('Exact OSM-to-ACTUAL fidelity failed closed: '+JSON.stringify(osmFidelity));
@@ -397,3 +398,6 @@ console.log(JSON.stringify({
  legal_identity_status_counts:index.legal_identity_status_counts,
  geometry_chunk_count:geometryChunks.length
 },null,2));
+
+const statisticalActivation=await activateStatisticalPublic();
+if(statisticalActivation.status==='PASS')console.log(JSON.stringify({gate:'p2_3_public_activation',...statisticalActivation}));
