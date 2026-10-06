@@ -93,3 +93,11 @@ test('P2.0 gate stays outside pinned deterministic runner until activation',asyn
  assert.doesNotMatch(runner,/audit:actual-statistical-contract/);
  assert.equal(pkg.scripts?.['audit:actual-statistical-contract'],undefined);
 });
+
+
+test('dedicated P2 workflow enforces the statistical foundation gate',async()=>{
+ const workflow=await readFile('.github/workflows/p2-statistical-foundation.yml','utf8');
+ assert.match(workflow,/node tools\/p2\/audit-actual-statistical-contract\.mjs/);
+ assert.match(workflow,/node --test tools\/p2\/actual-statistical-contract\.test\.mjs/);
+ assert.match(workflow,/git status --porcelain/);
+});
