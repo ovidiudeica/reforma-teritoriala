@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T20:37:24.316Z",
+  "generated_at": "2026-10-05T23:50:05.218Z",
   "classifier_version": "2.3",
   "countries": {
     "RO": {
@@ -21,19 +21,18 @@
       "geojson_features": 2596,
       "state_relation_id": 58974,
       "confidence": {
-        "high": 85,
         "low": 267,
+        "high": 85,
         "medium": 2244
       }
     }
   },
   "warnings": [
     {
-      "type": "outside_country_boundary_excluded",
+      "type": "source_scope_membership_applied",
       "jurisdiction": "RO",
-      "relation_ids": [
-        18967922
-      ]
+      "selected_relation_count": 3233,
+      "policy": "OSM source selection determines jurisdiction membership; polygon containment is not used to discard selected relations."
     },
     {
       "type": "parent_assignment_overlap_resolution",
@@ -199,6 +198,40 @@
       "coordinate_edit": false
     },
     {
+      "type": "reviewed_current_osm_boundary_network",
+      "jurisdiction": "MD",
+      "relation_id": 18968071,
+      "geometry_derivation": "reviewed_current_osm_boundary_network",
+      "source_relation_id": 18968071,
+      "connector_way_id": 123810097,
+      "evidence_relation_ids": [
+        1691800,
+        1691801,
+        18822134
+      ],
+      "reviewed_contract_sha256": "ccd0471ee5dcc888919c52799ee5a6d14c192d624884b6af18401257c3cba903",
+      "live_relation_version": 8,
+      "connector_version": 5,
+      "coordinate_edit": false,
+      "source_relation_membership_edit": false,
+      "historical_geometry_fallback": false,
+      "snapping": false,
+      "clipping": false,
+      "simplification": false,
+      "live_segment_count": 498,
+      "connector_segment_count": 2,
+      "union_segment_count": 500,
+      "derived_segment_count": 500,
+      "missing": 0,
+      "extra": 0
+    },
+    {
+      "type": "source_scope_membership_applied",
+      "jurisdiction": "MD",
+      "selected_relation_count": 2596,
+      "policy": "OSM source selection determines jurisdiction membership; polygon containment is not used to discard selected relations."
+    },
+    {
       "type": "parent_assignment_overlap_resolution",
       "child_id": "osm-r1643003",
       "child_relation_id": 1643003,
@@ -230,8 +263,8 @@
       "overlap_candidates": [
         {
           "relation_id": 1691801,
-          "coverage": 0.9999999999941169,
-          "overlap_area_m2": 1913941.8351747836
+          "coverage": 0.9999999999937318,
+          "overlap_area_m2": 1916955.0237798905
         }
       ],
       "selected_relation_id": 1691801
@@ -357,27 +390,29 @@
     "manifest": "data/sources/osm-current.json",
     "schema_version": 2,
     "query_version": 1,
-    "snapshot_at": "2026-09-27T20:33:04.478Z",
-    "fetched_at": "2026-09-28T00:08:09.095Z",
+    "snapshot_at": "2026-10-05T23:50:05.218Z",
+    "fetched_at": "2026-10-05T23:50:05.218Z",
     "countries": {
       "RO": {
-        "snapshot_path": "data/sources/osm-snapshots/ro-d8e84166a90eddd297b5e59b25086a9ad3751dada6d15782781210b8f18fd363.json.gz",
-        "semantic_sha256": "d8e84166a90eddd297b5e59b25086a9ad3751dada6d15782781210b8f18fd363",
-        "compressed_sha256": "fdc63d6fec3b7ad5b712652da3a1e53dd58fd832d95604fcde19162dc6638aaf",
-        "snapshot_at": "2026-09-27T20:33:04.478Z",
+        "snapshot_path": "data/sources/osm-snapshots/ro-4a09c6cd6e41f4df814505a9813dde265e93b991752b44cb88545c4ed6a16d86.json.gz",
+        "semantic_sha256": "4a09c6cd6e41f4df814505a9813dde265e93b991752b44cb88545c4ed6a16d86",
+        "compressed_sha256": "f3ef2ffd15c286d443e6181a6a60bee2008233574550854764ca49e6a3ef5832",
+        "snapshot_at": "2026-10-05T23:50:05.218Z",
         "query_sha256": "954368fd8c39d94b5692b2b88aeba8fb33117bc7f3395b4c3a0ead6847cc4ece",
-        "element_count": 783495,
+        "element_count": 783504,
         "relation_count": 3234,
+        "selected_relation_count": 3233,
         "endpoint": "https://overpass-api.de/api/interpreter"
       },
       "MD": {
-        "snapshot_path": "data/sources/osm-snapshots/md-057890e4d6b1bd6d76e98576622f2c727958dad82f902ec5c39d87bcc1b223fe.json.gz",
-        "semantic_sha256": "057890e4d6b1bd6d76e98576622f2c727958dad82f902ec5c39d87bcc1b223fe",
-        "compressed_sha256": "e55945a99b0b26e1ee09bbf26cd3c64bfe957acf6147936900f253f981f009dc",
-        "snapshot_at": "2026-09-27T20:33:04.478Z",
-        "query_sha256": "f182a7a54069bcfe72a924ba178f9821f55f6e61368a4f25d42bf8e0241d52d0",
-        "element_count": 560394,
+        "snapshot_path": "data/sources/osm-snapshots/md-cd7e0ebb5dc9f691e4c160609c164915f7ebea4bcb4c4adbe0307e33f76bf417.json.gz",
+        "semantic_sha256": "cd7e0ebb5dc9f691e4c160609c164915f7ebea4bcb4c4adbe0307e33f76bf417",
+        "compressed_sha256": "d4fb245c714038d4e9bbb5273074c6ee1ad23555441289244c1d97c0afdf72b0",
+        "snapshot_at": "2026-10-05T23:50:05.218Z",
+        "query_sha256": "2849578bf48062e41a2b23a18250cd1c339cacd188193b54db872be085665885",
+        "element_count": 560474,
         "relation_count": 2596,
+        "selected_relation_count": 2596,
         "endpoint": "https://overpass-api.de/api/interpreter"
       }
     }
