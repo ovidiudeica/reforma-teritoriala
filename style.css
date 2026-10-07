@@ -16,3 +16,10 @@
 .hierarchy-breadcrumb ol{display:flex;flex-wrap:wrap;gap:5px;list-style:none;padding:0;margin:0}
 .hierarchy-breadcrumb li+li:before{content:'→';margin-right:5px;color:#65716b}
 .hierarchy-breadcrumb [aria-current]{font-weight:700}
+.atlas-filter-group{border:1px solid #e1e5e2;border-radius:5px;margin:5px 0;padding:5px}
+.filter-parent{font-weight:600}
+.atlas-filter-subtypes{padding-left:10px;font-size:12px}
+.atlas-filter-subtypes>summary{cursor:pointer;padding:4px 0;color:#596e63}
+.filter-jurisdiction{font-weight:600;margin:9px 0 3px;color:#65716b;font-size:11px}
+.atlas-filter-subtypes .filter-row{font-size:12px}
+.atlas-filter-subtypes>summary:focus-visible,.filter-row input:focus-visible{outline:2px solid #365b4a;outline-offset:2px}
