@@ -62,3 +62,15 @@ test('activated statistical model changes release identity to actual-semantic-v3
  assert.equal(active.algorithm,'actual-semantic-v3');
  assert.notEqual(active.sha256,base.sha256);
 });
+
+
+test('P2.3 activator is explicit, fail-closed and preserves administrative geometry policy',async()=>{
+ const script=await readFile('scripts/process/apply-actual-statistical-activation.mjs','utf8');
+ assert.match(script,/public_contract='actual-public-entity-v3'/);
+ assert.match(script,/phase='P2_ACTIVATED'/);
+ assert.match(script,/expected_public_entity_count:5848/);
+ assert.match(script,/expected_administrative_entity_count:5830/);
+ assert.match(script,/statistical_entity_activation_allowed:true/);
+ assert.match(script,/administrative_geometry_mutation_allowed:false/);
+ assert.doesNotMatch(script,/public\/geo\/current/);
+});
