@@ -4,7 +4,7 @@
   "mode": "ACTUAL",
   "snapshot_id": "actual-6a7eac47d66d6701",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "5583f7b13e22df6cbfc3ab557bda94fa30c9d22b4b48a9121063bce3f8c52b2b",
+  "manifest_sha256": "19a637e6f49985a0a51f23939242c56ebc04bc027f68535c8bf4a14f90e54977",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -414,8 +414,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20261004.327.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd",
-          "sha256": "c4bbb7c51e9930c89424caf934d3249ceb7eccd6969b8de44cec59e36d2d3062"
+          "environment_fingerprint_sha256": "6036641ad738a264f0347f859b66e01f2fc56bf2d9ba790f6e017e66b625cae6",
+          "sha256": "d93ac11a7befd5db91334d43e18e60745050cb62a7a53717e76c8055218a06f3"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -424,8 +424,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20261004.327.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd",
-          "sha256": "c4bbb7c51e9930c89424caf934d3249ceb7eccd6969b8de44cec59e36d2d3062"
+          "environment_fingerprint_sha256": "6036641ad738a264f0347f859b66e01f2fc56bf2d9ba790f6e017e66b625cae6",
+          "sha256": "d93ac11a7befd5db91334d43e18e60745050cb62a7a53717e76c8055218a06f3"
         }
       }
     },
@@ -622,7 +622,8 @@
         "expected_schema_version": 2,
         "schema_version": 2,
         "public_count": 5830,
-        "catalog_count": 5830,
+        "administrative_catalog_count": 5830,
+        "statistical_only_count": 0,
         "missing": [],
         "unexpected": []
       }
@@ -649,7 +650,11 @@
           "RO": 3234,
           "MD": 2596
         },
-        "actual": {
+        "expected": {
+          "RO": 3234,
+          "MD": 2596
+        },
+        "administrative": {
           "RO": 3234,
           "MD": 2596
         }
@@ -668,8 +673,9 @@
       "detail": {
         "issues": [],
         "missing": [],
-        "geometry_count": 5830,
-        "entity_count": 5830
+        "administrative_geometry_count": 5830,
+        "administrative_entity_count": 5830,
+        "public_entity_count": 5830
       }
     },
     {
