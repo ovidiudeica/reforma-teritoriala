@@ -2,6 +2,7 @@
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,rm,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
+import {activateStatisticalPublicContract} from '../lib/actual-statistical-public.mjs';
 import {auditActualOsmFidelity} from '../lib/actual-osm-fidelity.mjs';
 
 const osmFidelity=await auditActualOsmFidelity();
@@ -389,11 +390,15 @@ const chunkIndex={
 };
 await writeFile(OUT_CHUNK_INDEX,JSON.stringify(chunkIndex,null,2)+'\n');
 
+const statisticalActivation=await activateStatisticalPublicContract();
+const finalIndex=statisticalActivation.status==='PASS'?JSON.parse(await readFile(OUT_INDEX,'utf8')):index;
+
 console.log(JSON.stringify({
- contract:index.contract,
- entity_count:index.entity_count,
- entity_count_by_jurisdiction:index.entity_count_by_jurisdiction,
+ contract:finalIndex.contract,
+ entity_count:finalIndex.entity_count,
+ entity_count_by_jurisdiction:finalIndex.entity_count_by_jurisdiction,
  feature_count_by_tier:index.feature_count_by_tier,
  legal_identity_status_counts:index.legal_identity_status_counts,
- geometry_chunk_count:geometryChunks.length
+ geometry_chunk_count:geometryChunks.length,
+ statistical_activation:statisticalActivation
 },null,2));
