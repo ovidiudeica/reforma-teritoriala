@@ -146,7 +146,14 @@ const semanticDocuments={
  mdOfficial:cuatm,
  mdIndividualReview,
  settlementPolicy,
- geometryRoleContract
+ geometryRoleContract,
+ ...(statisticalActivated?{
+  statisticalPolicy,
+  statisticalContract,
+  statisticalSourceBundle,
+  roStatisticalLayer,
+  mdStatisticalLayer
+ }:{})
 };
 const semanticFingerprint=actualSemanticFingerprint(semanticDocuments);
 const BASE_REF=process.env.ACTUAL_BASE_REF||null;
@@ -167,6 +174,13 @@ if(BASE_REF){
  const baseMarker=gitJson('data/current/actual-release-persisted.json');
  baseManifestBytes=gitBuffer(OUTPUT);
  baseManifest=JSON.parse(baseManifestBytes.toString('utf8'));
+ const baseSettlementPolicy=gitJson(PATHS.settlement_policy);
+ const baseStatisticalPolicy=gitJson(STATISTICAL_POLICY);
+ const baseStatisticalActivated=Boolean(
+  baseSettlementPolicy?.public_contract==='actual-public-entity-v3'
+  &&baseStatisticalPolicy?.activated===true
+  &&baseStatisticalPolicy?.phase==='P2_ACTIVATED'
+ );
  const baseDocuments={
   catalog:gitJson(PATHS.catalog),
   inventory:gitJson(PATHS.inventory),
@@ -175,8 +189,15 @@ if(BASE_REF){
   roOfficial:gitJson(PATHS.ro_official),
   mdOfficial:gitJson(PATHS.md_official),
   mdIndividualReview:gitJson(PATHS.md_individual_review),
-  settlementPolicy:gitJson(PATHS.settlement_policy),
-  geometryRoleContract:gitJson(GEOMETRY_ROLE_CONTRACT)
+  settlementPolicy:baseSettlementPolicy,
+  geometryRoleContract:gitJson(GEOMETRY_ROLE_CONTRACT),
+  ...(baseStatisticalActivated?{
+   statisticalPolicy:baseStatisticalPolicy,
+   statisticalContract:gitJson(STATISTICAL_CONTRACT),
+   statisticalSourceBundle:gitJson(STATISTICAL_SOURCE_BUNDLE),
+   roStatisticalLayer:gitJson('data/p2/actual-statistical-ro.json'),
+   mdStatisticalLayer:gitJson('data/p2/actual-statistical-md.json')
+  }:{})
  };
  const baseSemantic=actualSemanticFingerprint(baseDocuments);
  if(baseSemantic.sha256===semanticFingerprint.sha256){
@@ -370,7 +391,20 @@ const manifest={
   geometry_tiers:{
    RO:{overview:tier('RO','overview'),local:tier('RO','local'),detail:tier('RO','detail')},
    MD:{overview:tier('MD','overview'),local:tier('MD','local'),detail:tier('MD','detail')}
-  }
+  },
+  ...(statisticalActivated?{
+   hierarchy:{
+    path:PATHS.consolidated_tree,
+    contract:consolidatedTree.contract??null,
+    node_count:consolidatedTree.node_count??null,
+    root_ids:consolidatedTree.root_ids??null,
+    sha256:components.consolidated_tree.sha256
+   },
+   statistical_geometry:{
+    RO:{path:PATHS.ro_statistical_geometry,contract:roStatisticalGeometry.metadata?.contract??null,feature_count:roStatisticalGeometry.features?.length??0,sha256:components.ro_statistical_geometry.sha256},
+    MD:{path:PATHS.md_statistical_geometry,contract:mdStatisticalGeometry.metadata?.contract??null,feature_count:mdStatisticalGeometry.features?.length??0,sha256:components.md_statistical_geometry.sha256}
+   }
+  }:{})
  },
  semantic_bridges:{
   MD:{path:PATHS.md_semantic_bridge,status:mdSemanticBridge.status??null,summary:mdSemanticBridge.summary??null,sha256:components.md_semantic_bridge.sha256}
