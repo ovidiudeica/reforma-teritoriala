@@ -335,13 +335,22 @@ const publicEntities=Array.isArray(publicIndex.entities)?publicIndex.entities:[]
 const publicIds=new Set(publicEntities.map(x=>x.id));
 const catalogIds=new Set(entities.map(x=>x.id));
 const missingPublic=[...catalogIds].filter(id=>!publicIds.has(id));
-const unexpectedPublic=[...publicIds].filter(id=>!catalogIds.has(id));
+const statisticalOnlyPublic=publicEntities.filter(x=>x.category==='statistical'&&String(x.id||'').startsWith('stat-'));
+const statisticalOnlyIds=new Set(statisticalOnlyPublic.map(x=>x.id));
+const unexpectedPublic=[...publicIds].filter(id=>!catalogIds.has(id)&&!statisticalOnlyIds.has(id));
 const publicContractV2=settlementPolicy?.public_contract==='actual-public-entity-v2';
-const expectedPublicContract=publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1';
-const expectedPublicSchema=publicContractV2?2:1;
-check('public_contract_identity_set_matches_catalog',
- publicIndex.contract===expectedPublicContract&&Number(publicIndex.schema_version)===expectedPublicSchema&&publicEntities.length===entities.length&&missingPublic.length===0&&unexpectedPublic.length===0,
- {expected_contract:expectedPublicContract,contract:publicIndex.contract,expected_schema_version:expectedPublicSchema,schema_version:publicIndex.schema_version,public_count:publicEntities.length,catalog_count:entities.length,missing:missingPublic.slice(0,25),unexpected:unexpectedPublic.slice(0,25)});
+const publicContractV3=settlementPolicy?.public_contract==='actual-public-entity-v3'&&statisticalActive;
+const expectedPublicContract=publicContractV3?'actual-public-entity-v3':publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1';
+const expectedPublicSchema=publicContractV3?3:publicContractV2?2:1;
+const expectedPublicCount=entities.length+(publicContractV3?18:0);
+check('public_contract_identity_set_matches_catalog_plus_statistical_overlay',
+ publicIndex.contract===expectedPublicContract
+ &&Number(publicIndex.schema_version)===expectedPublicSchema
+ &&publicEntities.length===expectedPublicCount
+ &&missingPublic.length===0
+ &&unexpectedPublic.length===0
+ &&(!publicContractV3||statisticalOnlyPublic.length===18),
+ {expected_contract:expectedPublicContract,contract:publicIndex.contract,expected_schema_version:expectedPublicSchema,schema_version:publicIndex.schema_version,public_count:publicEntities.length,expected_public_count:expectedPublicCount,catalog_count:entities.length,statistical_only_count:statisticalOnlyPublic.length,missing:missingPublic.slice(0,25),unexpected:unexpectedPublic.slice(0,25)});
 check('public_contract_contains_current_entities_only',
  publicEntities.every(x=>x.status==='current'),
  {non_current:publicEntities.filter(x=>x.status!=='current').slice(0,25).map(x=>({id:x.id,status:x.status}))});
@@ -349,6 +358,15 @@ const ojdulaOverride=(settlementPolicy?.administrative_geometry_fallbacks?.RO?.r
 const ojdulaOverrideEnabled=Boolean(ojdulaOverride);
 const hybridPartitionEnabled=ojdulaOverride?.disposition==='partition_osm_shell_by_ancpi_shared_boundary';
 const representationIssues=publicEntities.flatMap(x=>{
+ if(x.category==='statistical'){
+  const ok=x.legal===null
+   &&x.representation?.source==='OpenStreetMap'
+   &&x.representation?.geometry_role==='statistical_representation'
+   &&x.representation?.canonical_geometry_role==='statistical_boundary'
+   &&x.statistical?.code
+   &&Number.isInteger(Number(x.statistical?.level));
+  return ok?[]:[{id:x.id,issue:'statistical_representation_contract',representation:x.representation,statistical:x.statistical,legal:x.legal}];
+ }
  if(!Object.prototype.hasOwnProperty.call(x,'legal')||x.representation?.geometry_role!=='current_representation')return [{id:x.id,issue:'representation_contract'}];
  if(x.id==='siruta-u64096'){
   const ok=publicContractV2
@@ -393,9 +411,10 @@ const representationIssues=publicEntities.flatMap(x=>{
 check('public_contract_separates_legal_and_representation',
  representationIssues.length===0,
  {invalid:representationIssues.slice(0,25)});
-check('public_contract_jurisdiction_counts_match_catalog',
- jurisdictions.every(j=>publicIndex.entity_count_by_jurisdiction?.[j]===entityCounts[j]),
- {public:publicIndex.entity_count_by_jurisdiction,actual:entityCounts});
+const expectedPublicJurisdictionCounts=Object.fromEntries(jurisdictions.map(j=>[j,entityCounts[j]+(publicContractV3?(j==='RO'?12:6):0)]));
+check('public_contract_jurisdiction_counts_match_expected',
+ jurisdictions.every(j=>publicIndex.entity_count_by_jurisdiction?.[j]===expectedPublicJurisdictionCounts[j]),
+ {public:publicIndex.entity_count_by_jurisdiction,expected:expectedPublicJurisdictionCounts,administrative:entityCounts});
 
 const reviewedPublicById=new Map(publicEntities.map(x=>[x.id,x]));
 const reviewedStatusIssues=(mdIndividual.cases||[]).flatMap(review=>{
@@ -434,10 +453,14 @@ for(const key of tierKeys){
   if(entity&&entity.jurisdiction!==jurisdiction)tierIssues.push({key,entity_id:p.entity_id,issue:'jurisdiction_mismatch'});
   if(entity&&entity.map?.tier!==tier)tierIssues.push({key,entity_id:p.entity_id,issue:'tier_mismatch',expected:entity.map?.tier});
   if('tags' in p)tierIssues.push({key,entity_id:p.entity_id,issue:'raw_tags_leaked'});
-  if(p.geometry_precision!=='master_coordinate_fidelity')fidelityIssues.push({key,entity_id:p.entity_id,issue:'precision_marker_mismatch',actual:p.geometry_precision??null});
   const masterGeometry=masterGeometryById.get(p.entity_id);
-  if(!masterGeometry)fidelityIssues.push({key,entity_id:p.entity_id,issue:'master_geometry_missing'});
-  else if(JSON.stringify(f.geometry)!==JSON.stringify(masterGeometry))fidelityIssues.push({key,entity_id:p.entity_id,issue:'coordinate_drift'});
+  if(entity?.category==='statistical'){
+   if(p.geometry_role!=='statistical_boundary'||p.geometry_precision!=='source_snapshot_coordinate_fidelity')fidelityIssues.push({key,entity_id:p.entity_id,issue:'statistical_geometry_contract',geometry_role:p.geometry_role??null,geometry_precision:p.geometry_precision??null});
+  }else{
+   if(p.geometry_precision!=='master_coordinate_fidelity')fidelityIssues.push({key,entity_id:p.entity_id,issue:'precision_marker_mismatch',actual:p.geometry_precision??null});
+   if(!masterGeometry)fidelityIssues.push({key,entity_id:p.entity_id,issue:'master_geometry_missing'});
+   else if(JSON.stringify(f.geometry)!==JSON.stringify(masterGeometry))fidelityIssues.push({key,entity_id:p.entity_id,issue:'coordinate_drift'});
+  }
   if(seenGeometryIds.has(p.entity_id))tierIssues.push({key,entity_id:p.entity_id,issue:'duplicate_public_geometry'});
   seenGeometryIds.add(p.entity_id);
  }
@@ -454,14 +477,35 @@ const publicTierCounts={
  RO:['ro_overview','ro_local','ro_detail'].reduce((n,key)=>n+(tierDocs[key].features||[]).length,0),
  MD:['md_overview','md_local','md_detail'].reduce((n,key)=>n+(tierDocs[key].features||[]).length,0)
 };
-check('tiered_public_geometry_cardinality_matches_master',
- publicTierCounts.RO===featureCounts.RO&&publicTierCounts.MD===featureCounts.MD,
- {public:publicTierCounts,master:featureCounts});
+const expectedTierCounts={RO:featureCounts.RO+(publicContractV3?12:0),MD:featureCounts.MD+(publicContractV3?6:0)};
+check('tiered_public_geometry_cardinality_matches_master_plus_statistical_overlay',
+ publicTierCounts.RO===expectedTierCounts.RO&&publicTierCounts.MD===expectedTierCounts.MD,
+ {public:publicTierCounts,master:featureCounts,expected:expectedTierCounts});
 check('manifest_public_contract_is_current',
  manifest.public_contract?.contract===publicIndex.contract
  && manifest.public_contract?.entity_count===publicIndex.entity_count
  && manifest.public_contract?.sha256===currentHashes.public_index,
  {manifest:manifest.public_contract,actual:{contract:publicIndex.contract,entity_count:publicIndex.entity_count,sha256:currentHashes.public_index}});
+
+if(statisticalActive){
+ const statisticalValidation=await validateStatisticalPublicActivation();
+ check('statistical_public_activation_gate_passes',statisticalValidation.status==='PASS',{failures:statisticalValidation.failures});
+ check('manifest_statistical_model_is_bound',
+  manifest.schema_version>=10
+  &&manifest.statistical_model?.activated===true
+  &&manifest.statistical_model?.public_entity_count===5848
+  &&manifest.statistical_model?.administrative_entity_count===5830
+  &&manifest.statistical_model?.statistical_only_entity_count===18
+  &&manifest.statistical_model?.hierarchy_contract==='actual-public-hierarchy-v1'
+  &&manifest.statistical_model?.hierarchy_node_count===5848,
+  {statistical_model:manifest.statistical_model??null});
+ check('public_consolidated_hierarchy_is_complete',
+  publicIndex.hierarchy_tree?.contract==='actual-public-hierarchy-v1'
+  &&publicIndex.hierarchy_tree?.root_count===2
+  &&publicIndex.hierarchy_tree?.node_count===5848
+  &&(publicIndex.hierarchy_tree?.nodes||[]).length===5848,
+  {hierarchy:publicIndex.hierarchy_tree?{contract:publicIndex.hierarchy_tree.contract,root_count:publicIndex.hierarchy_tree.root_count,node_count:publicIndex.hierarchy_tree.node_count}:null});
+}
 
 if(publicChunks){
  const chunkIssues=[];
