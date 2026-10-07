@@ -58,7 +58,8 @@ const statusLabels={
  outside_current_legal_registry:'reprezentare în afara registrului legal curent',
  reviewed_representation_without_legal_identity:'reprezentare de-facto auditată, fără geometrie juridică atribuită',
  unresolved:'identitate oficială nerezolvată',
- not_bound_to_official_registry:'fără legătură cu registrul oficial în contract'
+ not_bound_to_official_registry:'fără legătură cu registrul oficial în contract',
+ statistical_identity:'identitate statistică oficială'
 };
 
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
