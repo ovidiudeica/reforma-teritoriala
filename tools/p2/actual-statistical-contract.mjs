@@ -7,6 +7,7 @@ export const STATISTICAL_SOURCE_BUNDLE_PATH='data/sources/actual-statistical-sou
 export const RO_STATISTICAL_SOURCE_PATH='data/sources/ro-nuts-2024.json';
 export const MD_STATISTICAL_SOURCE_PATH='data/sources/md-nuts-2017.json';
 export const STATISTICAL_SOURCE_BUNDLE_ALGORITHM='actual-statistical-source-bundle-v1';
+export const STATISTICAL_ACTIVATION_PATH='data/current/actual-statistical-activation.json';
 
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
@@ -51,6 +52,8 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
  ];
  const bytes={};
  for(const path of paths)bytes[path]=await readFileFn(path);
+ let activationMarker=null;
+ try{activationMarker=JSON.parse((await readFileFn(STATISTICAL_ACTIVATION_PATH)).toString('utf8'));}catch{activationMarker=null;}
  const json=path=>JSON.parse(bytes[path].toString('utf8'));
  const contract=json(STATISTICAL_CONTRACT_PATH);
  const policy=json(STATISTICAL_POLICY_PATH);
@@ -79,9 +82,13 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
   &&geometryRole?.rules?.legal_identity_and_geometry_role_must_be_separate===true,
   {role:geometryRole?.roles?.statistical_boundary??null});
 
- check('policy_is_prepared_not_activated',
-  policy?.schema_version===1&&policy?.mode==='ACTUAL_STATISTICAL_POLICY'&&policy?.phase==='P2_PREPARED'&&policy?.activated===false,
-  {phase:policy?.phase??null,activated:policy?.activated??null});
+ check('policy_activation_control_is_explicit',
+  policy?.schema_version===1
+  &&policy?.mode==='ACTUAL_STATISTICAL_POLICY'
+  &&['P2_PREPARED','P2_3_READY'].includes(policy?.phase)
+  &&policy?.activated===false
+  &&(policy?.phase!=='P2_3_READY'||(policy?.activation_requested===true&&policy?.activation_authority===STATISTICAL_ACTIVATION_PATH&&policy?.target_public_contract==='actual-public-entity-v3')),
+  {phase:policy?.phase??null,activated:policy?.activated??null,activation_requested:policy?.activation_requested??null,activation_authority:policy?.activation_authority??null,target_public_contract:policy?.target_public_contract??null});
  check('policy_contract_binding',
   policy?.contract?.path===STATISTICAL_CONTRACT_PATH
   &&policy?.contract?.id===contract?.contract
@@ -198,19 +205,29 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
   catalogEntities.length===expected.expected_entity_count
   &&JSON.stringify(catalogCounts)===JSON.stringify(expected.expected_entity_count_by_jurisdiction),
   {expected:expected.expected_entity_count_by_jurisdiction,actual:catalogCounts,total:catalogEntities.length});
- check('p1_public_contract_unchanged',
-  publicIndex?.contract===expected.expected_public_contract&&publicIndex?.entity_count===expected.expected_entity_count,
-  {contract:publicIndex?.contract??null,entity_count:publicIndex?.entity_count??null});
- check('p2_entities_not_activated',
-  !catalogEntities.some(x=>String(x.id||'').startsWith('stat-'))
-  &&!(publicIndex?.entities||[]).some(x=>String(x.id||'').startsWith('stat-')),
+ const statisticalPublicEntities=(publicIndex?.entities||[]).filter(x=>String(x.id||'').startsWith('stat-'));
+ const releaseActivated=Boolean(
+  activationMarker?.schema_version===1
+  &&activationMarker?.mode==='ACTUAL_STATISTICAL_ACTIVATION'
+  &&activationMarker?.activated===true
+  &&publicIndex?.contract==='actual-public-entity-v3'
+ );
+ check('public_activation_state_is_valid',
+  releaseActivated
+   ?(publicIndex?.entity_count===5848&&statisticalPublicEntities.length===18&&publicIndex?.hierarchy_tree?.node_count===5848)
+   :(publicIndex?.contract===expected.expected_public_contract&&publicIndex?.entity_count===expected.expected_entity_count&&statisticalPublicEntities.length===0),
+  {release_activated:releaseActivated,contract:publicIndex?.contract??null,entity_count:publicIndex?.entity_count??null,statistical_only_count:statisticalPublicEntities.length});
+ check('administrative_catalog_has_no_statistical_duplicates',
+  !catalogEntities.some(x=>String(x.id||'').startsWith('stat-')),
   {});
- check('p1_release_identity_unchanged',
-  manifest?.snapshot_id===expected.expected_snapshot_id
-  &&manifest?.release_fingerprint_sha256===expected.expected_release_fingerprint_sha256
-  &&persisted?.snapshot_id===expected.expected_snapshot_id
-  &&persisted?.release_fingerprint_sha256===expected.expected_release_fingerprint_sha256,
-  {manifest_snapshot:manifest?.snapshot_id??null,persisted_snapshot:persisted?.snapshot_id??null});
+ check('release_identity_state_is_consistent',
+  releaseActivated
+   ?(manifest?.snapshot_id===persisted?.snapshot_id&&manifest?.release_fingerprint_sha256===persisted?.release_fingerprint_sha256)
+   :(manifest?.snapshot_id===expected.expected_snapshot_id
+     &&manifest?.release_fingerprint_sha256===expected.expected_release_fingerprint_sha256
+     &&persisted?.snapshot_id===expected.expected_snapshot_id
+     &&persisted?.release_fingerprint_sha256===expected.expected_release_fingerprint_sha256),
+  {release_activated:releaseActivated,manifest_snapshot:manifest?.snapshot_id??null,persisted_snapshot:persisted?.snapshot_id??null});
  check('p1_catalog_bytes_unchanged',
   manifest?.components?.catalog?.sha256===sha256(bytes['data/current/entities.json']),
   {manifest:manifest?.components?.catalog?.sha256??null,actual:sha256(bytes['data/current/entities.json'])});
@@ -233,7 +250,7 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
    RO:{unit_count:roUnits.length,level_counts:countLevels(roUnits),reused_nuts3_entity_count:publicRoCounties.length},
    MD:{unit_count:mdUnits.length,level_counts:countLevels(mdUnits),component_assignment_count:mdComponents.length},
    p1_entity_count:catalogEntities.length,
-   p2_entities_activated:false
+   p2_entities_activated:releaseActivated
   }
  };
 }
