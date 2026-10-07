@@ -2,12 +2,12 @@
   "schema_version": 1,
   "snapshot_id": "actual-6a7eac47d66d6701",
   "release_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-  "manifest_sha256": "5583f7b13e22df6cbfc3ab557bda94fa30c9d22b4b48a9121063bce3f8c52b2b",
+  "manifest_sha256": "dfb239194856b0df55bcb108c729e1c0f3560ddb21360e73fa21924d038ac88e",
   "source_bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
   "host_trust_fingerprint_sha256": "734d94265dd1a862a03fe400408ec3d83ce2d065909a0aa7077a9bf15c158ae8",
-  "build_environment_fingerprint_sha256": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd",
+  "build_environment_fingerprint_sha256": "e1d39da687c1259ac644c6671210debeeaaad010210747fc69aca4dd16ea3be2",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
     "base_snapshot_id": "actual-149e27f4142b02e2",
@@ -19,10 +19,10 @@
     "candidate_commit_sha": "4230cab6d21d5f8d24350a3b1c556f5b862e4a4e",
     "promotion_audit_path": "data/current/actual-candidate-promotion-audit.json"
   },
-  "policy": "Persisted ACTUAL marker rebound by a controlled provenance-only host-trust refresh. Semantic snapshot identity, source/review evidence, administrative content and geometry remain unchanged; exact host-trust and build-environment provenance are replaced only after the full release gate passes.",
+  "policy": "Persisted ACTUAL marker rebound by a controlled provenance-only workflow refresh. Semantic snapshot identity, source/review evidence, administrative/statistical content and geometry remain unchanged; candidate workflow gains an explicit P2.3 activation flag before the semantic activation itself.",
   "provenance_hardening": {
-    "previous_manifest_sha256": "fa14f2ad386913a806a414e632b87f7567b253370b44203561be9153828b82ba",
-    "reason": "github-runner-image-20261004.327.1-controlled-refresh",
+    "previous_manifest_sha256": "5583f7b13e22df6cbfc3ab557bda94fa30c9d22b4b48a9121063bce3f8c52b2b",
+    "reason": "p2-3-candidate-activation-wiring-controlled-refresh",
     "runner_image_version": "20261004.327.1"
   }
 }
