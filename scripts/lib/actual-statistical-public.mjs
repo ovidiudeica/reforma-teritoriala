@@ -1,8 +1,18 @@
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {readFile,writeFile} from 'node:fs/promises';
-import osmtogeojson from 'osmtogeojson';
-import {bbox,centroid} from '@turf/turf';
+import {createRequire} from 'node:module';
+
+const require=createRequire(import.meta.url);
+let geoDeps=null;
+function loadGeoDeps(){
+ if(!geoDeps){
+  const osmModule=require('osmtogeojson');
+  const turf=require('@turf/turf');
+  geoDeps={osmtogeojson:osmModule?.default??osmModule,bbox:turf.bbox,centroid:turf.centroid};
+ }
+ return geoDeps;
+}
 
 export const STATISTICAL_POLICY_PATH='data/sources/actual-statistical-policy.json';
 export const STATISTICAL_CONTRACT_PATH='schemas/actual-statistical-hierarchy-contract.json';
@@ -25,6 +35,7 @@ const json=async(path,readFileFn=readFile)=>JSON.parse((await readFileFn(path)).
 const unique=values=>[...new Set(values.filter(Boolean))];
 
 function relationFeature(snapshot,relationId){
+ const {osmtogeojson}=loadGeoDeps();
  const converted=osmtogeojson(snapshot,{flatProperties:false});
  const wanted='relation/'+String(relationId);
  const feature=(converted.features||[]).find(f=>String(f.id)===wanted||String(f.properties?.id??'')===wanted);
@@ -33,6 +44,7 @@ function relationFeature(snapshot,relationId){
 }
 
 function mapMeta(feature){
+ const {bbox,centroid}=loadGeoDeps();
  return {tier:'overview',bbox:bbox(feature),center:centroid(feature).geometry.coordinates};
 }
 
