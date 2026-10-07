@@ -6,6 +6,7 @@ import {bbox,centroid} from '@turf/turf';
 
 export const STATISTICAL_POLICY_PATH='data/sources/actual-statistical-policy.json';
 export const STATISTICAL_CONTRACT_PATH='schemas/actual-statistical-hierarchy-contract.json';
+export const SETTLEMENT_POLICY_PATH='data/sources/actual-settlement-policy.json';
 export const STATISTICAL_SOURCE_BUNDLE_PATH='data/sources/actual-statistical-source-bundle.json';
 export const RO_LAYER_PATH='data/p2/actual-statistical-ro.json';
 export const MD_LAYER_PATH='data/p2/actual-statistical-md.json';
@@ -186,8 +187,9 @@ function statisticalFeature(entity,feature){
 }
 
 export async function activateStatisticalPublicContract({readFileFn=readFile,writeFileFn=writeFile}={}){
- const [policy,baseIndex,roLayer,mdLayer,roOsm,mdOsm,roOverview,mdOverview,contract,bundle]=await Promise.all([
+ const [policy,settlementPolicy,baseIndex,roLayer,mdLayer,roOsm,mdOsm,roOverview,mdOverview,contract,bundle]=await Promise.all([
   json(STATISTICAL_POLICY_PATH,readFileFn),
+  json(SETTLEMENT_POLICY_PATH,readFileFn),
   json(PUBLIC_INDEX_PATH,readFileFn),
   json(RO_LAYER_PATH,readFileFn),
   json(MD_LAYER_PATH,readFileFn),
@@ -199,6 +201,7 @@ export async function activateStatisticalPublicContract({readFileFn=readFile,wri
   json(STATISTICAL_SOURCE_BUNDLE_PATH,readFileFn)
  ]);
  if(policy?.activation_requested!==true)return {status:'SKIP',reason:'statistical_activation_not_requested'};
+ if(settlementPolicy?.public_contract!==PUBLIC_CONTRACT)return {status:'SKIP',reason:'public_contract_v3_not_selected'};
  if(baseIndex.contract!=='actual-public-entity-v2'||Number(baseIndex.schema_version)!==2||baseIndex.entity_count!==5830)throw new Error('P2.3 activation requires exact v2 administrative public baseline');
  const [roGz,mdGz]=await Promise.all([readFileFn(roOsm.snapshot_path),readFileFn(mdOsm.snapshot_path)]);
  if(sha256(roGz)!==roOsm.compressed_sha256||sha256(mdGz)!==mdOsm.compressed_sha256)throw new Error('Statistical OSM compressed snapshot binding mismatch');
