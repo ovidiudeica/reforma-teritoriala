@@ -2,23 +2,36 @@
   "schema_version": 1,
   "contract": "actual-statistical-hierarchy-v1",
   "mode": "ACTUAL",
-  "phase": "P2_PREPARED",
+  "phase": "P2_ACTIVATED",
   "principle": "Administrative identity, statistical classification and geometry representation are independent dimensions. P2 adds typed statistical hierarchy membership without rewriting administrative parentage or administrative geometry.",
   "hierarchies": {
     "administrative": {
       "kind": "administrative",
       "existing_parent_field": "hierarchy.parent_catalog_id",
-      "identity_authorities": ["SIRUTA", "CUATM"],
+      "identity_authorities": [
+        "SIRUTA",
+        "CUATM"
+      ],
       "immutable_during_p2_activation": true
     },
     "statistical": {
       "kind": "statistical",
-      "levels": [1, 2, 3],
+      "levels": [
+        1,
+        2,
+        3
+      ],
       "identity_authorities": {
         "RO": "Eurostat NUTS 2024",
         "MD": "Biroul Național de Statistică al Republicii Moldova, HG 570/2017"
       },
-      "membership_fields": ["classification", "code", "level", "parent_code", "source"],
+      "membership_fields": [
+        "classification",
+        "code",
+        "level",
+        "parent_code",
+        "source"
+      ],
       "must_not_replace_administrative_parentage": true
     }
   },
@@ -30,7 +43,12 @@
   },
   "statistical_only_entity_ids": {
     "pattern": "^stat-(?:RO|MD)[A-Z0-9]+$",
-    "examples": ["stat-RO1", "stat-RO11", "stat-MD11", "stat-MD120"]
+    "examples": [
+      "stat-RO1",
+      "stat-RO11",
+      "stat-MD11",
+      "stat-MD120"
+    ]
   },
   "geometry": {
     "canonical_role": "statistical_boundary",
