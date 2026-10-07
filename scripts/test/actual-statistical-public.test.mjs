@@ -88,3 +88,19 @@ test('official identity audit keeps a narrow v3 statistical-only exception',asyn
  assert.match(script,/forbidden_md121_statistical_identity/);
  assert.match(script,/unexpected_public_entity/);
 });
+
+
+test('P2.3 release manifest and candidate identity bind the activated statistical model',async()=>{
+ const [manifestBuilder,candidateDiff]=await Promise.all([
+  readFile('scripts/process/build-actual-release-manifest.mjs','utf8'),
+  readFile('scripts/process/build-actual-candidate-diff.mjs','utf8')
+ ]);
+ assert.match(manifestBuilder,/statisticalPolicy,\s*statisticalContract,\s*statisticalSourceBundle,\s*roStatisticalLayer,\s*mdStatisticalLayer/);
+ assert.match(manifestBuilder,/public_contract:\{[\s\S]*hierarchy:\{/);
+ assert.match(manifestBuilder,/statistical_geometry:\{/);
+ assert.match(manifestBuilder,/baseStatisticalActivated/);
+ assert.match(candidateDiff,/baselineStatisticalActivated/);
+ assert.match(candidateDiff,/candidateStatisticalActivated/);
+ assert.match(candidateDiff,/\.\.\.baselineStatisticalDocuments/);
+ assert.match(candidateDiff,/\.\.\.candidateStatisticalDocuments/);
+});
