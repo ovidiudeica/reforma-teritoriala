@@ -70,6 +70,11 @@ const legacyFingerprintPayload={
 };
 const legacyFingerprint=sha256(Buffer.from(JSON.stringify(legacyFingerprintPayload),'utf8'));
 const byteFingerprint=byteFingerprintFromHashes(Object.fromEntries(Object.keys(manifest.components||{}).map(key=>[key,currentHashes[key]??null])));
+const statisticalPolicyForSemantic=buffers.statistical_policy?json('statistical_policy'):null;
+const statisticalContractForSemantic=buffers.statistical_contract?json('statistical_contract'):null;
+const statisticalSourceBundleForSemantic=buffers.statistical_source_bundle?json('statistical_source_bundle'):null;
+const roStatisticalLayerForSemantic=buffers.ro_statistical_layer?json('ro_statistical_layer'):null;
+const mdStatisticalLayerForSemantic=buffers.md_statistical_layer?json('md_statistical_layer'):null;
 const semanticFingerprint=actualSemanticFingerprint({
  catalog,
  inventory,
@@ -79,7 +84,12 @@ const semanticFingerprint=actualSemanticFingerprint({
  mdOfficial:cuatm,
  mdIndividualReview:mdIndividual,
  settlementPolicy,
- geometryRoleContract
+ geometryRoleContract,
+ statisticalPolicy:statisticalPolicyForSemantic,
+ statisticalContract:statisticalContractForSemantic,
+ statisticalSourceBundle:statisticalSourceBundleForSemantic,
+ roStatisticalLayer:roStatisticalLayerForSemantic,
+ mdStatisticalLayer:mdStatisticalLayerForSemantic
 });
 const failures=[],checks=[];
 const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
@@ -268,7 +278,7 @@ if((manifest.schema_version??0)>=3){
    ?manifest.content_identity?.release_identity_basis==='base_release_compatibility_reuse'
      && manifest.content_identity?.base_content_sha256===semanticFingerprint.sha256
      && typeof manifest.content_identity?.base_snapshot_id==='string'
-   :manifest.content_identity?.release_identity_basis===(semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1'),
+   :manifest.content_identity?.release_identity_basis===(semanticFingerprint.algorithm==='actual-semantic-v3'?'semantic_content_v3':semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1'),
   {content_identity:manifest.content_identity??null});
  check('release_fingerprint_matches_semantic_identity',
   manifest.release_fingerprint_sha256===expectedReleaseFingerprint,
