@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "c4bbb7c51e9930c89424caf934d3249ceb7eccd6969b8de44cec59e36d2d3062",
-  "environment_fingerprint_sha256": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd",
+  "build_environment_sha256": "43b378fe7d87cb16caa8a6bd44af56a205e818d1d222b6d1990a5466bdd4d091",
+  "environment_fingerprint_sha256": "e1d39da687c1259ac644c6671210debeeaaad010210747fc69aca4dd16ea3be2",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
   "checks": [
@@ -93,10 +93,10 @@
       "ok": true,
       "detail": {
         "candidate": {
-          "docker_network_none_count": 4,
+          "docker_network_none_count": 5,
           "docker_network_bridge_count": 1,
-          "cap_drop_all_count": 4,
-          "no_new_privileges_count": 4,
+          "cap_drop_all_count": 5,
+          "no_new_privileges_count": 5,
           "docker_socket_mounted": false
         },
         "policy": {
@@ -143,11 +143,11 @@
       "ok": true,
       "detail": {
         "candidate": {
-          "cpuset_cpu_zero_count": 3,
-          "node_jitless_count": 3,
-          "uv_threadpool_one_count": 3,
-          "timezone_utc_count": 3,
-          "locale_c_utf8_count": 6
+          "cpuset_cpu_zero_count": 4,
+          "node_jitless_count": 4,
+          "uv_threadpool_one_count": 4,
+          "timezone_utc_count": 4,
+          "locale_c_utf8_count": 8
         },
         "profile": {
           "platform": "linux/amd64",
@@ -266,47 +266,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd",
-        "actual": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd"
-      }
-    },
-    {
-      "name": "runtime_node_exact",
-      "ok": true,
-      "detail": {
-        "expected": "24.21.0",
-        "actual": "24.21.0"
-      }
-    },
-    {
-      "name": "runtime_npm_exact",
-      "ok": true,
-      "detail": {
-        "expected": "11.19.0",
-        "actual": "11.19.0"
-      }
-    },
-    {
-      "name": "runtime_runner_os_linux",
-      "ok": true,
-      "detail": {
-        "expected": "Linux",
-        "actual": "Linux"
-      }
-    },
-    {
-      "name": "host_runner_identity_is_static_provenance",
-      "ok": true,
-      "detail": {
-        "policy": "GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match the pinned provenance.",
-        "expected": {
-          "image_os": "ubuntu24",
-          "image_version": "20261004.327.1"
-        },
-        "actual": {
-          "image_os": null,
-          "image_version": null
-        }
+        "expected": "e1d39da687c1259ac644c6671210debeeaaad010210747fc69aca4dd16ea3be2",
+        "actual": "e1d39da687c1259ac644c6671210debeeaaad010210747fc69aca4dd16ea3be2"
       }
     }
   ],
