@@ -63,6 +63,22 @@ requireCheck(baselineMarker.manifest_sha256===baselineManifestSha,'baseline_mani
 requireCheck(gate.status==='PASS','candidate_release_gate_not_pass',{status:gate.status});
 requireCheck(gate.snapshot_id===manifest.snapshot_id,'candidate_gate_snapshot_mismatch',{gate:gate.snapshot_id,manifest:manifest.snapshot_id});
 requireCheck(manifest.mode==='ACTUAL','candidate_manifest_mode',{actual:manifest.mode});
+const candidateStatisticalSemantic=manifest.statistical_model?.activated===true?{
+ statisticalActivation:await readJson(manifest.components.statistical_activation.path),
+ statisticalPolicy:await readJson(manifest.components.statistical_policy.path),
+ statisticalContract:await readJson(manifest.components.statistical_contract.path),
+ statisticalSourceBundle:await readJson(manifest.components.statistical_source_bundle.path),
+ roStatisticalLayer:await readJson(manifest.components.statistical_ro_layer.path),
+ mdStatisticalLayer:await readJson(manifest.components.statistical_md_layer.path)
+}:{};
+const baselineStatisticalSemantic=baselineManifest.statistical_model?.activated===true?{
+ statisticalActivation:gitJson(baselineManifest.components.statistical_activation.path),
+ statisticalPolicy:gitJson(baselineManifest.components.statistical_policy.path),
+ statisticalContract:gitJson(baselineManifest.components.statistical_contract.path),
+ statisticalSourceBundle:gitJson(baselineManifest.components.statistical_source_bundle.path),
+ roStatisticalLayer:gitJson(baselineManifest.components.statistical_ro_layer.path),
+ mdStatisticalLayer:gitJson(baselineManifest.components.statistical_md_layer.path)
+}:{};
 const baselineSemantic=actualSemanticFingerprint({
  catalog:baselineCatalog,
  inventory:baselineInventory,
@@ -72,7 +88,8 @@ const baselineSemantic=actualSemanticFingerprint({
  mdOfficial:gitJson(OFFICIAL.MD),
  mdIndividualReview:baselineReview,
  settlementPolicy:baselineSettlementPolicy,
- geometryRoleContract:baselineGeometryRoleContract
+ geometryRoleContract:baselineGeometryRoleContract,
+ ...baselineStatisticalSemantic
 });
 const candidateSemantic=actualSemanticFingerprint({
  catalog:candidateCatalog,
@@ -83,7 +100,8 @@ const candidateSemantic=actualSemanticFingerprint({
  mdOfficial:await readJson(OFFICIAL.MD),
  mdIndividualReview:candidateReview,
  settlementPolicy:candidateSettlementPolicy,
- geometryRoleContract:candidateGeometryRoleContract
+ geometryRoleContract:candidateGeometryRoleContract,
+ ...candidateStatisticalSemantic
 });
 const semanticManifestBinding=validateCandidateSemanticManifestBinding({
  manifestContentFingerprint:manifest.content_fingerprint_sha256,
