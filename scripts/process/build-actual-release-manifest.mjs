@@ -21,7 +21,8 @@ const STAT_PATHS={
  ro_osm:'data/sources/ro-statistical-osm-current.json',
  md_osm:'data/sources/md-statistical-osm-current.json',
  ro_osm_snapshot:'data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz',
- md_osm_snapshot:'data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz'
+ md_osm_snapshot:'data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz',
+ public_schema:'schemas/actual-public-entity-v3.schema.json'
 };
 const PATHS={
  catalog:'data/current/entities.json',
@@ -362,7 +363,8 @@ const manifest={
   legal_identity_status_counts:publicIndex.legal_identity_status_counts??null,
   sha256:components.public_index.sha256,
   ...(statisticalActivationActive?{
-   schema_path:'schemas/actual-public-entity-v3.schema.json',
+   schema_path:STAT_PATHS.public_schema,
+   schema_sha256:components.statistical_public_schema.sha256,
    hierarchy:{contract:publicIndex.hierarchy_tree?.contract??null,root_count:publicIndex.hierarchy_tree?.root_count??null,node_count:publicIndex.hierarchy_tree?.node_count??null}
   }:{ }),
   geometry_chunks:{
