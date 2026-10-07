@@ -95,6 +95,7 @@ if(/^actual\/candidate-/.test(headRef??'')){
   'scripts/process/audit-actual-publication-path.mjs',
   'scripts/process/audit-actual-release-gate.mjs',
   'scripts/process/audit-actual-statistical-public.mjs',
+  'scripts/process/apply-actual-statistical-activation.mjs',
   'scripts/process/build-actual-public-data.mjs',
   'scripts/process/build-actual-release-manifest.mjs',
   'scripts/test/actual-candidate-lifecycle.test.mjs',
