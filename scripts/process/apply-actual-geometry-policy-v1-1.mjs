@@ -59,7 +59,7 @@ migrated.geometry_role_contract={path:CONTRACT,contract:contract.contract,schema
 migrated.jurisdictions.RO.official_inventory_selector='SIRUTA records whose level is 3';
 migrated.jurisdictions.RO.coverage_accounting='unique_official_legal_identity';
 migrated.jurisdictions.MD.coverage_accounting='unique_official_legal_identity';
-migrated.public_contract='actual-public-entity-v2';
+migrated.public_contract='actual-public-entity-v3';
 migrated.administrative_geometry_fallbacks={
  ...(migrated.administrative_geometry_fallbacks||{}),
  RO:{
