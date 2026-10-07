@@ -16,7 +16,7 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
  const buildInfo=JSON.parse(buildInfoText);
  assert.equal(gate.status,'PASS');
  assert.equal(gate.snapshot_id,manifest.snapshot_id);
- assert.ok(['actual-public-entity-v1','actual-public-entity-v2'].includes(manifest.public_contract?.contract));
+ assert.ok(['actual-public-entity-v1','actual-public-entity-v2','actual-public-entity-v3'].includes(manifest.public_contract?.contract));
  assert.match(buildInfo.actual_snapshot_id,/^actual-[0-9a-f]{16}$/);
  assert.match(buildInfo.release_fingerprint_sha256,/^[0-9a-f]{64}$/);
  if(buildInfo.actual_snapshot_id===manifest.snapshot_id)assert.equal(buildInfo.release_fingerprint_sha256,manifest.release_fingerprint_sha256);
@@ -36,6 +36,22 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
  assert.match(app,/loadChunkIndex/);
  assert.match(app,/bboxIntersectsViewport/);
  assert.match(app,/zoomend moveend/);
+ assert.match(app,/renderHierarchyTree/);
+ assert.match(html,/id="hierarchy-tree"/);
+ if(manifest.public_contract?.contract==='actual-public-entity-v3'){
+  const publicIndex=JSON.parse(await readFile(manifest.public_contract.path,'utf8'));
+  assert.equal(publicIndex.schema_version,3);
+  assert.equal(publicIndex.entity_count,5848);
+  assert.equal(publicIndex.administrative_entity_count,5830);
+  assert.equal(publicIndex.statistical_only_entity_count,18);
+  assert.equal(publicIndex.entity_count_by_jurisdiction.RO,3246);
+  assert.equal(publicIndex.entity_count_by_jurisdiction.MD,2602);
+  assert.equal(publicIndex.hierarchy_tree?.contract,'actual-public-hierarchy-v1');
+  assert.equal(publicIndex.hierarchy_tree?.root_count,2);
+  assert.equal(publicIndex.hierarchy_tree?.node_count,5848);
+  assert.equal(publicIndex.entities.filter(x=>x.category==='statistical').length,18);
+  assert.equal(publicIndex.entities.some(x=>x.statistical?.code==='MD121'),false);
+ }
  const tiers=manifest.public_contract?.geometry_tiers??{};
  const paths=[];
  for(const jurisdiction of ['RO','MD'])for(const tier of ['overview','local','detail'])paths.push(tiers[jurisdiction]?.[tier]?.path);
