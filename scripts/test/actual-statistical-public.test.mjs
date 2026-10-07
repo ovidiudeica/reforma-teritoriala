@@ -74,3 +74,17 @@ test('P2.3 activator is explicit, fail-closed and preserves administrative geome
  assert.match(script,/administrative_geometry_mutation_allowed:false/);
  assert.doesNotMatch(script,/public\/geo\/current/);
 });
+
+
+test('official identity audit keeps a narrow v3 statistical-only exception',async()=>{
+ const script=await readFile('scripts/process/audit-actual-official-identity.mjs','utf8');
+ assert.match(script,/pub\.contract==='actual-public-entity-v3'/);
+ assert.match(script,/\^stat-\(\?:RO\|MD\)\[A-Z0-9\]\+\$/);
+ assert.match(script,/category==='statistical'/);
+ assert.match(script,/roles\.includes\('statistical'\)/);
+ assert.match(script,/legal==null/);
+ assert.match(script,/legal_identity_status==='statistical_identity'/);
+ assert.match(script,/statistical_only_public_entity_count_mismatch/);
+ assert.match(script,/forbidden_md121_statistical_identity/);
+ assert.match(script,/unexpected_public_entity/);
+});

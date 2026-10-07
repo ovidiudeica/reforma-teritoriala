@@ -14,6 +14,17 @@ const read=async p=>JSON.parse(await readFile(p,'utf8'));
 const [catalog,ro,md,recon,semantic,pub,...tiers]=await Promise.all([read(P.catalog),read(P.ro),read(P.md),read(P.recon),read(P.semantic),read(P.public),...P.tiers.map(read)]);
 if(semantic.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
 const entities=catalog.entities||[], publicEntities=pub.entities||[];
+const administrativeIds=new Set(entities.map(e=>e.id));
+const statisticalOnlyPublic=publicEntities.filter(e=>!administrativeIds.has(e.id));
+const isAllowedStatisticalOnlyPublic=e=>
+ pub.contract==='actual-public-entity-v3'
+ && /^stat-(?:RO|MD)[A-Z0-9]+$/.test(String(e?.id||''))
+ && e?.category==='statistical'
+ && Array.isArray(e?.roles)&&e.roles.includes('statistical')
+ && e?.legal==null
+ && e?.validation?.legal_identity_status==='statistical_identity'
+ && typeof e?.statistical?.code==='string'
+ && [1,2,3].includes(Number(e?.statistical?.level));
 const master=new Map([...ro.features,...md.features].map(f=>[f.properties?.catalog_id,f]));
 const publicById=new Map(publicEntities.map(e=>[e.id,e]));
 const tier=new Map();
@@ -48,12 +59,16 @@ for(const e of entities){
  rows.push({entity_id:e.id,jurisdiction:e.jurisdiction,name:e.name,expected_official_registry:expected?.registry??null,expected_official_id:expected?.id??null,expected_semantic_type:expected?.type??null,public_official_registry:p?.legal?.registry??null,public_official_id:p?.legal?.id??null,public_semantic_type:p?.legal?.type??null,legal_identity_status:p?.validation?.legal_identity_status??null,master_geometry:Boolean(m),public_entity:Boolean(p),public_geometry:Boolean(t)});
 }
 for(const id of duplicateTier)issue(null,'duplicate_entity_across_public_geometry_tiers',{entity_id:id});
-for(const p of publicEntities)if(!entities.some(e=>e.id===p.id))issue(null,'unexpected_public_entity',{entity_id:p.id});
+for(const p of statisticalOnlyPublic)if(!isAllowedStatisticalOnlyPublic(p))issue(null,'unexpected_public_entity',{entity_id:p.id});
+if(pub.contract==='actual-public-entity-v3'){
+ if(statisticalOnlyPublic.length!==18)issue(null,'statistical_only_public_entity_count_mismatch',{expected:18,actual:statisticalOnlyPublic.length});
+ if(statisticalOnlyPublic.some(p=>p.statistical?.code==='MD121'))issue(null,'forbidden_md121_statistical_identity',{entity_id:statisticalOnlyPublic.find(p=>p.statistical?.code==='MD121')?.id??null});
+}else if(statisticalOnlyPublic.length)for(const p of statisticalOnlyPublic)issue(null,'unexpected_public_entity',{entity_id:p.id});
 for(const [id] of tier)if(!entities.some(e=>e.id===id))issue(null,'unexpected_public_geometry',{entity_id:id});
 const byIssue=issues.reduce((a,x)=>(a[x.issue]=(a[x.issue]||0)+1,a),{});
 const byStatus=rows.reduce((a,x)=>(a[x.legal_identity_status||'MISSING']=(a[x.legal_identity_status||'MISSING']||0)+1,a),{});
 const expectedPositive=rows.filter(x=>x.expected_official_id).length;
-const report={schema_version:1,mode:'ACTUAL',scope:['RO','MD'],policy:'Fail closed on any loss, invention, contradiction or propagation drift of positive SIRUTA/CUATM identity and bridged MD semantic subtype across catalog/reconciliation, public index and public geometry. Geometry coordinates are not modified.',entity_count:entities.length,expected_positive_official_identity_count:expectedPositive,legal_identity_status_counts:byStatus,status:issues.length?'FAIL':'PASS',blocking_issue_count:issues.length,blocking_issue_summary:byIssue,blocking_issues:issues,entities:rows};
+const report={schema_version:1,mode:'ACTUAL',scope:['RO','MD'],policy:'Fail closed on any loss, invention, contradiction or propagation drift of positive SIRUTA/CUATM identity and bridged MD semantic subtype across the 5,830 administrative catalog entities. Under public contract v3, exactly 18 typed statistical-only public entities are allowed outside the administrative catalog and remain governed by the separate statistical identity contract/gates. Geometry coordinates are not modified.',entity_count:entities.length,statistical_only_public_entity_count:statisticalOnlyPublic.length,expected_positive_official_identity_count:expectedPositive,legal_identity_status_counts:byStatus,status:issues.length?'FAIL':'PASS',blocking_issue_count:issues.length,blocking_issue_summary:byIssue,blocking_issues:issues,entities:rows};
 await writeFile('data/current/actual-official-identity-audit.json',JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({status:report.status,entity_count:report.entity_count,expected_positive_official_identity_count:expectedPositive,legal_identity_status_counts:byStatus,blocking_issue_count:issues.length,blocking_issue_summary:byIssue,blocking_issues:issues.slice(0,50)},null,2));
+console.log(JSON.stringify({status:report.status,entity_count:report.entity_count,statistical_only_public_entity_count:report.statistical_only_public_entity_count,expected_positive_official_identity_count:expectedPositive,legal_identity_status_counts:byStatus,blocking_issue_count:issues.length,blocking_issue_summary:byIssue,blocking_issues:issues.slice(0,50)},null,2));
 if(issues.length)process.exitCode=1;
