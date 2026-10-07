@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_id": "actual-6a7eac47d66d6701",
-  "release_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-  "manifest_sha256": "313e3c645d9773394dd7f59a6c4ed591f25ed711896485b7cfbf795573dde0c6",
+  "snapshot_id": "actual-a9e5a4ddcb5277ef",
+  "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+  "manifest_sha256": "242099b55683c56358cd36e318008f3def61c76b1a7a23c226c8513f8f20cb7b",
   "source_bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
@@ -10,19 +10,14 @@
   "build_environment_fingerprint_sha256": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
-    "base_snapshot_id": "actual-149e27f4142b02e2",
-    "base_commit_sha": "5f634518a4961c7085a18f82702a14355715cc07",
-    "diff_report_sha256": "3014a25fb0b5040bcdc833763990f2ed6fe238237e097679581db1e0ff16dbb7",
+    "base_snapshot_id": "actual-6a7eac47d66d6701",
+    "base_commit_sha": "e24ed3cc53eb395f8a0f2782c91893ae881b4802",
+    "diff_report_sha256": "fa21c71122c27c85f1764630508fbb1e056d4a2e456eba1fd6342deddac5ee9d",
     "review_required": true,
-    "substantive_change_count": 28,
-    "candidate_identity_sha256": "9c64ea165e354c308865ce2e5c53955289485f25a6aaaf993e26c0a2aa4315b6",
-    "candidate_commit_sha": "4230cab6d21d5f8d24350a3b1c556f5b862e4a4e",
+    "substantive_change_count": 18,
+    "candidate_identity_sha256": "8fa879d7c80860817994b7ce107f91e2009a9cfa0138cc6954d650ce81db5165",
+    "candidate_commit_sha": "c3db54edd30aa78147611e33ef9f99d4a880108d",
     "promotion_audit_path": "data/current/actual-candidate-promotion-audit.json"
   },
-  "policy": "Persisted ACTUAL marker rebound by a controlled provenance-only P2.3 release-manifest/candidate-lifecycle refresh. Semantic snapshot identity, source/review evidence, administrative/statistical content and all geometries remain unchanged.",
-  "provenance_hardening": {
-    "previous_manifest_sha256": "19a637e6f49985a0a51f23939242c56ebc04bc027f68535c8bf4a14f90e54977",
-    "reason": "p2-3-release-manifest-semantic-binding-controlled-refresh",
-    "runner_image_version": "20261004.327.1"
-  }
+  "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes."
 }
