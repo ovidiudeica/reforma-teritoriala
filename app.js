@@ -17,8 +17,6 @@ const activeStatisticalLevels=new Set([1,2,3,'unclassified']);
 let separateStatisticalGeometry=true;
 const statisticalGroups={RO:L.layerGroup(),MD:L.layerGroup()};
 let selectedEntityId=null;
- rerenderLoadedTiers();
- updateSelectionVisibility();
 let selectedLayer=null;
 let indexData=null;
 let releaseData=null;
