@@ -109,7 +109,7 @@ export async function buildRoStatisticalLayer({readFileFn=readFile}={}){
    official_nuts:{path:RO_NUTS_PATH,sha256:sha256(nutsBytes),version:nuts.classification_version},
    osm_statistical:{path:RO_OSM_MANIFEST_PATH,sha256:sha256(osmManifestBytes),snapshot_path:osm.snapshot_path,semantic_sha256:osm.semantic_sha256,compressed_sha256:osm.compressed_sha256},
    siruta_bridge:{path:SIRUTA_PATH,sha256:sha256(sirutaBytes),reference_year:siruta.reference_year},
-   p1_catalog:{path:CATALOG_PATH,sha256:sha256(catalogBytes),snapshot_id:release.snapshot_id}
+   p1_catalog:{path:CATALOG_PATH,sha256:sha256(catalogBytes),snapshot_id:JSON.parse(await readFileFn('data/sources/actual-statistical-policy.json')).p1_invariants.expected_snapshot_id}
   },
   statistical_entities:statisticalEntities,
   existing_entity_memberships:memberships

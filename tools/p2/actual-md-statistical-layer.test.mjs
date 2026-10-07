@@ -43,3 +43,16 @@ test('P2 workflow enforces Moldova statistical layer',async()=>{
  assert.match(workflow,/audit-actual-md-statistical-layer\.mjs/);
  assert.match(workflow,/actual-md-statistical-layer\.test\.mjs/);
 });
+
+test('P2 MD overlay retains immutable P1 provenance after public release activation',async()=>{
+ const baseline=await buildMdStatisticalLayer();
+ const activated=await buildMdStatisticalLayer({readFileFn:async(path,...args)=>{
+  const bytes=await readFile(path,...args);
+  if(path!=='data/current/actual-release-manifest.json')return bytes;
+  const release=JSON.parse(bytes);
+  release.snapshot_id='actual-a9e5a4ddcb5277ef';
+  return Buffer.from(JSON.stringify(release));
+ }});
+ assert.deepEqual(activated,baseline);
+ assert.equal(activated.sources.p1_catalog.snapshot_id,'actual-6a7eac47d66d6701');
+});
