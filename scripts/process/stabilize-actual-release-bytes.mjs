@@ -59,7 +59,8 @@ const POST_STABILIZATION_OUTPUTS=new Set([
   'data/current/actual-release-gate.json',
   'data/current/actual-candidate-diff.json',
   'data/current/actual-release-candidate.json',
-  'data/current/actual-candidate-promotion-audit.json'
+  'data/current/actual-candidate-promotion-audit.json',
+  'data/current/actual-statistical-activation.json'
 ]);
 const explicitPaths=new Set(Object.values(PATHS));
 const currentJsonPaths=(await readdir('data/current',{withFileTypes:true}))
