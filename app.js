@@ -1,5 +1,6 @@
+import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
-import {geometryClass,geometryVisible,geometryLabels,administrativeClasses,statisticalLevel} from './geometry-taxonomy.mjs';
+import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
 
 const map=L.map('map',{zoomControl:true}).setView([46.8,26.6],6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
@@ -14,6 +15,10 @@ const chunkGroups=new Map();
 let chunkIndex=null;
 const entityById=new Map();
 const activeFilterGroups=new Set(Object.keys(geometryLabels));
+const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a second class state.
+const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
+let geometryFilterIndex=null;
+let atlasFilters=null;
 const activeStatisticalLevels=new Set([1,2,3,'unclassified']);
 let separateStatisticalGeometry=true;
 const statisticalGroups={RO:L.layerGroup(),MD:L.layerGroup()};
@@ -73,7 +78,7 @@ const norm=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,
 const typeLabel=type=>typeLabels[type]||String(type||'unitate administrativă').replaceAll('_',' ');
 function filterGroup(entity){return geometryClass(entity);}
 function isVisible(entity){
- return geometryVisible(entity,{geometryClasses:activeFilterGroups,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry});
+ return geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry});
 }
 function styleFor(feature){
  const group=filterGroup(entityById.get(feature.properties?.entity_id));
@@ -127,6 +132,8 @@ async function loadIndex(){
  if(index.contract!==release.manifest.public_contract.contract||index.entity_count!==release.manifest.public_contract.entity_count)throw new Error('Indexul public nu corespunde manifestului');
  indexData=index;
  for(const entity of index.entities||[])entityById.set(entity.id,entity);
+ geometryFilterIndex=createGeometryFilterIndex(index.entities||[]);
+ for(const subtype of geometryFilterIndex.subtypeMembers.keys())activeGeometrySubtypes.add(subtype);
  renderFilters();
  wireSearch();
  updateJurisdictionStatus();
@@ -156,61 +163,14 @@ function updateJurisdictionStatus(){
 }
 
 function renderFilters(){
- const container=document.getElementById('filter-list');
- const entities=[...entityById.values()];
- container.innerHTML='';
- const addSection=(title,keys,kind,labels,count,note)=>{
-  const section=document.createElement('section');
-  section.className='filter-section';
-  const heading=document.createElement('h3');heading.textContent=title;section.appendChild(heading);
-  const controls=document.createElement('div');controls.className='filter-actions';
-  for(const [label,enabled] of [['Toate',true],['Niciuna',false]]){
-   const button=document.createElement('button');button.type='button';button.textContent=label;
-   button.addEventListener('click',()=>{
-    for(const input of section.querySelectorAll('input[data-filter]')){
-     input.checked=enabled;applyFilter(input);
-    }
-    refreshGeometryVisibility();
-   });controls.appendChild(button);
-  }
-  section.appendChild(controls);
-  for(const key of keys){
-   const checked=kind==='geometry'?activeFilterGroups.has(key):activeStatisticalLevels.has(key);
-   const row=document.createElement('label');row.className='filter-row';
-   row.innerHTML='<input type="checkbox" data-kind="'+kind+'" data-filter="'+key+'"'+(checked?' checked':'')+'><span>'+escapeHtml(labels[key])+' <small>('+count(key).toLocaleString('ro-RO')+')</small></span>';
-   section.appendChild(row);
-  }
-  if(note){const p=document.createElement('p');p.className='hint';p.textContent=note;section.appendChild(p);}
-  container.appendChild(section);return section;
- };
- const geometryCount=key=>entities.filter(entity=>geometryClass(entity)===key).length;
- addSection('Tipuri administrative',administrativeClasses,'geometry',filterLabels,geometryCount);
- const levels=[1,2,3];
- if(entities.some(entity=>statisticalLevel(entity)==='unclassified'))levels.push('unclassified');
- const stats=addSection('Niveluri statistice',levels,'statistical',{1:'Nivel statistic 1',2:'Nivel statistic 2',3:'Nivel statistic 3',unclassified:'Rol statistic neclasificat'},key=>entities.filter(entity=>statisticalLevel(entity)===key).length,
-  '63 roluri statistice: 45 reutilizează geometria administrativă. Nivelurile controlează rolul statistic, inclusiv geometria reutilizată; filtrele administrative se aplică în continuare.');
- const row=document.createElement('label');row.className='filter-row';
- row.innerHTML='<input type="checkbox" data-separate-statistical'+(separateStatisticalGeometry?' checked':'')+'><span>Limite statistice separate <small>('+geometryCount('statistical_only')+')</small></span>';
- stats.appendChild(row);
- const note=document.createElement('p');note.className='hint';note.textContent='Cele 18 limite separate nu dublează cele 45 geometrii reutilizate.';stats.appendChild(note);
- const other=['context','auxiliary'];
- if(geometryCount('unclassified'))other.push('unclassified');
- addSection('Alte reprezentări',other,'geometry',filterLabels,geometryCount);
- container.onchange=event=>{
-  const input=event.target.closest('input');
-  if(!input)return;
-  if(input.hasAttribute('data-separate-statistical'))setSeparateStatisticalGeometry(input.checked);
-  else if(input.dataset.filter)applyFilter(input);
-  refreshGeometryVisibility();
- };
+ const state={geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,
+  get separateStatisticalGeometry(){return separateStatisticalGeometry;}};
+ atlasFilters=createAtlasFilters({container:document.getElementById('filter-list'),document,index:geometryFilterIndex,state,
+  onSeparate:setSeparateStatisticalGeometry,onChange:refreshGeometryVisibility});
 }
 function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boolean(value);}
-function applyFilter(input){
- const set=input.dataset.kind==='geometry'?activeFilterGroups:activeStatisticalLevels;
- const key=input.dataset.kind==='geometry'?input.dataset.filter:input.dataset.filter==='unclassified'?'unclassified':Number(input.dataset.filter);
- if(input.checked)set.add(key);else set.delete(key);
-}
 function refreshGeometryVisibility(){
+ atlasFilters?.sync();
  rerenderLoadedTiers();
  updateSelectionVisibility();
 }
@@ -582,4 +542,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {frontendReady,entityById,activeFilterGroups,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
+export {frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
