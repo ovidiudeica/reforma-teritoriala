@@ -500,6 +500,10 @@ if(statisticalActive){
   &&manifest.statistical_model?.hierarchy_contract==='actual-public-hierarchy-v1'
   &&manifest.statistical_model?.hierarchy_node_count===5848,
   {statistical_model:manifest.statistical_model??null});
+ check('public_v3_schema_is_bound',
+  manifest.public_contract?.schema_path==='schemas/actual-public-entity-v3.schema.json'
+  &&manifest.public_contract?.schema_sha256===currentHashes.statistical_public_schema,
+  {schema_path:manifest.public_contract?.schema_path??null,manifest_sha256:manifest.public_contract?.schema_sha256??null,actual_sha256:currentHashes.statistical_public_schema??null});
  check('public_consolidated_hierarchy_is_complete',
   publicIndex.hierarchy_tree?.contract==='actual-public-hierarchy-v1'
   &&publicIndex.hierarchy_tree?.root_count===2
