@@ -342,6 +342,7 @@ const publicContractV2=settlementPolicy?.public_contract==='actual-public-entity
 const publicContractV3=settlementPolicy?.public_contract==='actual-public-entity-v3'&&statisticalActive;
 const expectedPublicContract=publicContractV3?'actual-public-entity-v3':publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1';
 const expectedPublicSchema=publicContractV3?3:publicContractV2?2:1;
+const publicContractSupportsGeometryV2=publicContractV2||publicContractV3;
 const expectedPublicCount=entities.length+(publicContractV3?18:0);
 check('public_contract_identity_set_matches_catalog_plus_statistical_overlay',
  publicIndex.contract===expectedPublicContract
@@ -369,7 +370,7 @@ const representationIssues=publicEntities.flatMap(x=>{
  }
  if(!Object.prototype.hasOwnProperty.call(x,'legal')||x.representation?.geometry_role!=='current_representation')return [{id:x.id,issue:'representation_contract'}];
  if(x.id==='siruta-u64096'){
-  const ok=publicContractV2
+  const ok=publicContractSupportsGeometryV2
    && x.representation?.source==='ANCPI RELUAT'
    && x.representation?.osm_relation_id==null
    && x.representation?.canonical_geometry_role==='administrative_boundary'
@@ -382,7 +383,7 @@ const representationIssues=publicEntities.flatMap(x=>{
  if(x.id==='osm-r14735731'&&ojdulaOverrideEnabled){
   const ok=hybridPartitionEnabled
    ?(
-    publicContractV2
+    publicContractSupportsGeometryV2
     &&x.representation?.source==='OpenStreetMap'
     &&Number(x.representation?.osm_relation_id)===14735731
     &&x.representation?.canonical_geometry_role==='administrative_boundary'
@@ -393,7 +394,7 @@ const representationIssues=publicEntities.flatMap(x=>{
     &&String(x.legal?.id)==='64602'
    )
    :(
-    publicContractV2
+    publicContractSupportsGeometryV2
     &&x.representation?.source==='ANCPI RELUAT'
     &&Number(x.representation?.osm_relation_id)===14735731
     &&Number(x.representation?.source_feature_id)===1167
