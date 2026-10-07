@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "mode": "ACTUAL_STATISTICAL_POLICY",
-  "phase": "P2_ACTIVATED",
-  "activated": true,
+  "phase": "P2_PREPARED",
+  "activated": false,
   "contract": {
     "path": "schemas/actual-statistical-hierarchy-contract.json",
     "id": "actual-statistical-hierarchy-v1",
@@ -72,21 +72,21 @@
     "expected_public_contract": "actual-public-entity-v2",
     "expected_snapshot_id": "actual-6a7eac47d66d6701",
     "expected_release_fingerprint_sha256": "6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09",
-    "statistical_entity_activation_allowed": true,
+    "statistical_entity_activation_allowed": false,
     "administrative_parent_mutation_allowed": false,
     "administrative_geometry_mutation_allowed": false
   },
   "progress": {
     "P2_1_RO": {
-      "status": "activated",
+      "status": "staged",
       "layer_path": "data/p2/actual-statistical-ro.json",
       "statistical_only_entity_count": 12,
       "reused_existing_nuts3_entity_count": 42,
       "osm_geometry_manifest": "data/sources/ro-statistical-osm-current.json",
-      "public_contract_activated": true
+      "public_contract_activated": false
     },
     "P2_2_MD": {
-      "status": "activated",
+      "status": "staged",
       "layer_path": "data/p2/actual-statistical-md.json",
       "statistical_only_entity_count": 6,
       "reused_existing_statistical_entity_count": 3,
@@ -94,16 +94,7 @@
       "osm_geometry_manifest": "data/sources/md-statistical-osm-current.json",
       "md120_official_code": "MD120",
       "osm_conflicting_ref": "MD121",
-      "public_contract_activated": true
-    },
-    "P2_3_PUBLIC": {
-      "status": "activation_pending_generated_outputs",
-      "public_contract": "actual-public-entity-v3",
-      "expected_public_entity_count": 5848,
-      "expected_statistical_only_entity_count": 18,
-      "expected_statistical_role_entity_count": 63,
-      "expected_tree_contract": "actual-consolidated-hierarchy-v1",
-      "expected_tree_node_count": 5848
+      "public_contract_activated": false
     }
   }
 }
