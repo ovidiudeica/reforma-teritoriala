@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {mkdir,readFile,rm,writeFile} from 'node:fs/promises';
 import * as turf from '@turf/turf';
 import {auditActualOsmFidelity} from '../lib/actual-osm-fidelity.mjs';
+import {activateStatisticalPublic} from '../lib/actual-statistical-public.mjs';
 
 const osmFidelity=await auditActualOsmFidelity();
 if(osmFidelity.status!=='PASS')throw new Error('Exact OSM-to-ACTUAL fidelity failed closed: '+JSON.stringify(osmFidelity));
@@ -27,7 +28,7 @@ const read=async path=>JSON.parse(await readFile(path,'utf8'));
 const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge,settlementPolicy]=await Promise.all([
  read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE),read(MD_SEMANTIC_BRIDGE),read(SETTLEMENT_POLICY)
 ]);
-const publicContractV2=settlementPolicy?.public_contract==='actual-public-entity-v2';
+const publicContractV2=['actual-public-entity-v2','actual-public-entity-v3'].includes(settlementPolicy?.public_contract);
 if(roCountyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
 if(mdSemanticBridge.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
 
@@ -397,3 +398,6 @@ console.log(JSON.stringify({
  legal_identity_status_counts:index.legal_identity_status_counts,
  geometry_chunk_count:geometryChunks.length
 },null,2));
+
+const statisticalActivation=await activateStatisticalPublic();
+if(statisticalActivation.status==='PASS')console.log(JSON.stringify({gate:'p2_3_public_activation',...statisticalActivation}));

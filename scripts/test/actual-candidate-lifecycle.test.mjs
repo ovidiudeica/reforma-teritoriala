@@ -560,7 +560,7 @@ test('Brețcu ANCPI fallback source is exact and dormant until policy migration'
  assert.ok(['Polygon','MultiPolygon'].includes(bretcu.geometry?.type));
  const fallbackBinding=policy.administrative_geometry_fallbacks?.RO;
  if(fallbackBinding){
-  assert.equal(policy.public_contract,'actual-public-entity-v2');
+  assert.ok(['actual-public-entity-v2','actual-public-entity-v3'].includes(policy.public_contract));
   assert.equal(fallbackBinding.path,'data/sources/ro-ancpi-uat-fallbacks.json');
   assert.equal(fallbackBinding.mode,'ACTUAL_RO_ANCPI_UAT_FALLBACKS');
   assert.deepEqual(fallbackBinding.legal_ids,['64096']);

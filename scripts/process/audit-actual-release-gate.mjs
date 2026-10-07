@@ -70,6 +70,11 @@ const legacyFingerprintPayload={
 };
 const legacyFingerprint=sha256(Buffer.from(JSON.stringify(legacyFingerprintPayload),'utf8'));
 const byteFingerprint=byteFingerprintFromHashes(Object.fromEntries(Object.keys(manifest.components||{}).map(key=>[key,currentHashes[key]??null])));
+const statisticalPolicyForSemantic=buffers.statistical_policy?json('statistical_policy'):null;
+const statisticalContractForSemantic=buffers.statistical_contract?json('statistical_contract'):null;
+const statisticalSourceBundleForSemantic=buffers.statistical_source_bundle?json('statistical_source_bundle'):null;
+const roStatisticalLayerForSemantic=buffers.ro_statistical_layer?json('ro_statistical_layer'):null;
+const mdStatisticalLayerForSemantic=buffers.md_statistical_layer?json('md_statistical_layer'):null;
 const semanticFingerprint=actualSemanticFingerprint({
  catalog,
  inventory,
@@ -79,7 +84,12 @@ const semanticFingerprint=actualSemanticFingerprint({
  mdOfficial:cuatm,
  mdIndividualReview:mdIndividual,
  settlementPolicy,
- geometryRoleContract
+ geometryRoleContract,
+ statisticalPolicy:statisticalPolicyForSemantic,
+ statisticalContract:statisticalContractForSemantic,
+ statisticalSourceBundle:statisticalSourceBundleForSemantic,
+ roStatisticalLayer:roStatisticalLayerForSemantic,
+ mdStatisticalLayer:mdStatisticalLayerForSemantic
 });
 const failures=[],checks=[];
 const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
@@ -268,7 +278,7 @@ if((manifest.schema_version??0)>=3){
    ?manifest.content_identity?.release_identity_basis==='base_release_compatibility_reuse'
      && manifest.content_identity?.base_content_sha256===semanticFingerprint.sha256
      && typeof manifest.content_identity?.base_snapshot_id==='string'
-   :manifest.content_identity?.release_identity_basis===(semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1'),
+   :manifest.content_identity?.release_identity_basis===(semanticFingerprint.algorithm==='actual-semantic-v3'?'semantic_content_v3':semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1'),
   {content_identity:manifest.content_identity??null});
  check('release_fingerprint_matches_semantic_identity',
   manifest.release_fingerprint_sha256===expectedReleaseFingerprint,
@@ -321,11 +331,23 @@ const catalogIds=new Set(entities.map(x=>x.id));
 const missingPublic=[...catalogIds].filter(id=>!publicIds.has(id));
 const unexpectedPublic=[...publicIds].filter(id=>!catalogIds.has(id));
 const publicContractV2=settlementPolicy?.public_contract==='actual-public-entity-v2';
-const expectedPublicContract=publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1';
-const expectedPublicSchema=publicContractV2?2:1;
+const publicContractV3=settlementPolicy?.public_contract==='actual-public-entity-v3';
+const publicContractModern=publicContractV2||publicContractV3;
+const expectedPublicContract=publicContractV3?'actual-public-entity-v3':(publicContractV2?'actual-public-entity-v2':'actual-public-entity-v1');
+const expectedPublicSchema=publicContractV3?3:(publicContractV2?2:1);
+const roStatLayer=publicContractV3?json('ro_statistical_layer'):null;
+const mdStatLayer=publicContractV3?json('md_statistical_layer'):null;
+const expectedStatisticalOnlyIds=new Set(publicContractV3?[
+ ...(roStatLayer?.statistical_entities||[]).map(x=>x.id),
+ ...(mdStatLayer?.statistical_entities||[]).map(x=>x.id)
+]:[]);
+const expectedPublicIds=new Set([...catalogIds,...expectedStatisticalOnlyIds]);
+const missingExpectedPublic=[...expectedPublicIds].filter(id=>!publicIds.has(id));
+const unexpectedExpectedPublic=[...publicIds].filter(id=>!expectedPublicIds.has(id));
+const expectedPublicCount=entities.length+expectedStatisticalOnlyIds.size;
 check('public_contract_identity_set_matches_catalog',
- publicIndex.contract===expectedPublicContract&&Number(publicIndex.schema_version)===expectedPublicSchema&&publicEntities.length===entities.length&&missingPublic.length===0&&unexpectedPublic.length===0,
- {expected_contract:expectedPublicContract,contract:publicIndex.contract,expected_schema_version:expectedPublicSchema,schema_version:publicIndex.schema_version,public_count:publicEntities.length,catalog_count:entities.length,missing:missingPublic.slice(0,25),unexpected:unexpectedPublic.slice(0,25)});
+ publicIndex.contract===expectedPublicContract&&Number(publicIndex.schema_version)===expectedPublicSchema&&publicEntities.length===expectedPublicCount&&missingExpectedPublic.length===0&&unexpectedExpectedPublic.length===0,
+ {expected_contract:expectedPublicContract,contract:publicIndex.contract,expected_schema_version:expectedPublicSchema,schema_version:publicIndex.schema_version,public_count:publicEntities.length,administrative_catalog_count:entities.length,statistical_only_count:expectedStatisticalOnlyIds.size,missing:missingExpectedPublic.slice(0,25),unexpected:unexpectedExpectedPublic.slice(0,25)});
 check('public_contract_contains_current_entities_only',
  publicEntities.every(x=>x.status==='current'),
  {non_current:publicEntities.filter(x=>x.status!=='current').slice(0,25).map(x=>({id:x.id,status:x.status}))});
@@ -335,8 +357,8 @@ const hybridPartitionEnabled=ojdulaOverride?.disposition==='partition_osm_shell_
 const representationIssues=publicEntities.flatMap(x=>{
  if(!Object.prototype.hasOwnProperty.call(x,'legal')||x.representation?.geometry_role!=='current_representation')return [{id:x.id,issue:'representation_contract'}];
  if(x.id==='siruta-u64096'){
-  const ok=publicContractV2
-   && x.representation?.source==='ANCPI RELUAT'
+  const ok=publicContractModern
+    && x.representation?.source==='ANCPI RELUAT'
    && x.representation?.osm_relation_id==null
    && x.representation?.canonical_geometry_role==='administrative_boundary'
    && x.representation?.geometry_scope===(hybridPartitionEnabled?'uat_hybrid_partition':'uat_fallback')
@@ -348,7 +370,7 @@ const representationIssues=publicEntities.flatMap(x=>{
  if(x.id==='osm-r14735731'&&ojdulaOverrideEnabled){
   const ok=hybridPartitionEnabled
    ?(
-    publicContractV2
+    publicContractModern
     &&x.representation?.source==='OpenStreetMap'
     &&Number(x.representation?.osm_relation_id)===14735731
     &&x.representation?.canonical_geometry_role==='administrative_boundary'
@@ -359,7 +381,7 @@ const representationIssues=publicEntities.flatMap(x=>{
     &&String(x.legal?.id)==='64602'
    )
    :(
-    publicContractV2
+    publicContractModern
     &&x.representation?.source==='ANCPI RELUAT'
     &&Number(x.representation?.osm_relation_id)===14735731
     &&Number(x.representation?.source_feature_id)===1167
@@ -371,15 +393,28 @@ const representationIssues=publicEntities.flatMap(x=>{
    );
   return ok?[]:[{id:x.id,issue:'ojdula_reviewed_geometry_binding',representation:x.representation,legal:x.legal}];
  }
+ if(publicContractV3&&/^stat-(?:RO|MD)/.test(String(x.id))){
+  const ok=x.category==='statistical'
+   &&x.legal===null
+   &&Array.isArray(x.roles)&&x.roles.includes('statistical')
+   &&x.statistical?.identity_authority
+   &&x.representation?.source==='OpenStreetMap'
+   &&x.representation?.canonical_geometry_role==='statistical_boundary'
+   &&x.representation?.geometry_role==='current_representation';
+  return ok?[]:[{id:x.id,issue:'statistical_representation_contract',representation:x.representation,statistical:x.statistical,roles:x.roles}];
+ }
  if(x.representation?.source!=='OpenStreetMap'||!/^osm-r\d+$/.test(String(x.id)))return [{id:x.id,issue:'unexpected_non_osm_representation',source:x.representation?.source??null}];
  return [];
 });
 check('public_contract_separates_legal_and_representation',
  representationIssues.length===0,
  {invalid:representationIssues.slice(0,25)});
+const expectedPublicCounts=publicContractV3
+ ?{RO:entityCounts.RO+(roStatLayer?.statistical_entities||[]).length,MD:entityCounts.MD+(mdStatLayer?.statistical_entities||[]).length}
+ :entityCounts;
 check('public_contract_jurisdiction_counts_match_catalog',
- jurisdictions.every(j=>publicIndex.entity_count_by_jurisdiction?.[j]===entityCounts[j]),
- {public:publicIndex.entity_count_by_jurisdiction,actual:entityCounts});
+ jurisdictions.every(j=>publicIndex.entity_count_by_jurisdiction?.[j]===expectedPublicCounts[j]),
+ {public:publicIndex.entity_count_by_jurisdiction,expected:expectedPublicCounts,administrative:entityCounts});
 
 const reviewedPublicById=new Map(publicEntities.map(x=>[x.id,x]));
 const reviewedStatusIssues=(mdIndividual.cases||[]).flatMap(review=>{
@@ -426,10 +461,10 @@ for(const key of tierKeys){
   seenGeometryIds.add(p.entity_id);
  }
 }
-const missingGeometry=[...publicIds].filter(id=>!seenGeometryIds.has(id));
+const missingGeometry=[...catalogIds].filter(id=>!seenGeometryIds.has(id));
 check('tiered_public_geometry_matches_public_contract',
- tierIssues.length===0&&missingGeometry.length===0&&seenGeometryIds.size===publicEntities.length,
- {issues:tierIssues.slice(0,25),missing:missingGeometry.slice(0,25),geometry_count:seenGeometryIds.size,entity_count:publicEntities.length});
+ tierIssues.length===0&&missingGeometry.length===0&&seenGeometryIds.size===entities.length,
+ {issues:tierIssues.slice(0,25),missing:missingGeometry.slice(0,25),administrative_geometry_count:seenGeometryIds.size,administrative_entity_count:entities.length,public_entity_count:publicEntities.length});
 check('tiered_public_geometry_preserves_master_coordinates',
  fidelityIssues.length===0,
  {issues:fidelityIssues.slice(0,25),checked_geometry_count:seenGeometryIds.size});
@@ -446,6 +481,61 @@ check('manifest_public_contract_is_current',
  && manifest.public_contract?.entity_count===publicIndex.entity_count
  && manifest.public_contract?.sha256===currentHashes.public_index,
  {manifest:manifest.public_contract,actual:{contract:publicIndex.contract,entity_count:publicIndex.entity_count,sha256:currentHashes.public_index}});
+
+if(publicContractV3){
+ const statPolicy=json('statistical_policy');
+ const statContract=json('statistical_contract');
+ const statBundle=json('statistical_source_bundle');
+ const tree=json('consolidated_tree');
+ const roStatGeo=json('ro_statistical_geometry');
+ const mdStatGeo=json('md_statistical_geometry');
+ const statOnly=publicEntities.filter(x=>String(x.id).startsWith('stat-'));
+ const reusedStat=publicEntities.filter(x=>!String(x.id).startsWith('stat-')&&x.roles?.includes('statistical'));
+ check('statistical_public_contract_counts_are_exact',
+  publicIndex.administrative_entity_count===5830
+  &&publicIndex.statistical_only_entity_count===18
+  &&publicIndex.statistical_role_entity_count===63
+  &&statOnly.length===18&&reusedStat.length===45,
+  {administrative:publicIndex.administrative_entity_count,statistical_only:statOnly.length,reused:reusedStat.length,total_roles:publicIndex.statistical_role_entity_count});
+ check('statistical_model_is_activated_and_bound',
+  manifest.schema_version>=10
+  &&statPolicy.activated===true&&statPolicy.phase==='P2_ACTIVATED'
+  &&manifest.statistical_model?.policy?.sha256===currentHashes.statistical_policy
+  &&manifest.statistical_model?.contract?.contract===statContract.contract
+  &&manifest.statistical_model?.contract?.sha256===currentHashes.statistical_contract
+  &&manifest.statistical_model?.source_bundle?.bundle_fingerprint_sha256===statBundle.bundle_fingerprint_sha256
+  &&manifest.statistical_model?.source_bundle?.sha256===currentHashes.statistical_source_bundle
+  &&manifest.statistical_model?.layers?.RO?.sha256===currentHashes.ro_statistical_layer
+  &&manifest.statistical_model?.layers?.MD?.sha256===currentHashes.md_statistical_layer,
+  {model:manifest.statistical_model??null});
+ check('consolidated_tree_is_exact_and_bound',
+  tree.contract==='actual-consolidated-hierarchy-v1'
+  &&tree.node_count===5848&&(tree.nodes||[]).length===5848
+  &&new Set((tree.nodes||[]).map(n=>n.id)).size===5848
+  &&manifest.public_contract?.hierarchy?.path===paths.consolidated_tree
+  &&manifest.public_contract?.hierarchy?.contract===tree.contract
+  &&manifest.public_contract?.hierarchy?.node_count===tree.node_count
+  &&manifest.public_contract?.hierarchy?.sha256===currentHashes.consolidated_tree,
+  {tree:{contract:tree.contract,node_count:tree.node_count,roots:tree.root_ids},manifest:manifest.public_contract?.hierarchy??null});
+ const roStatIds=new Set((roStatGeo.features||[]).map(f=>f.properties?.entity_id));
+ const mdStatIds=new Set((mdStatGeo.features||[]).map(f=>f.properties?.entity_id));
+ check('statistical_geometry_is_exactly_partitioned_and_bound',
+  roStatGeo.metadata?.contract==='actual-public-statistical-geometry-v1'
+  &&mdStatGeo.metadata?.contract==='actual-public-statistical-geometry-v1'
+  &&roStatIds.size===12&&mdStatIds.size===6
+  &&statOnly.filter(x=>x.jurisdiction==='RO').every(x=>roStatIds.has(x.id))
+  &&statOnly.filter(x=>x.jurisdiction==='MD').every(x=>mdStatIds.has(x.id))
+  &&reusedStat.every(x=>!roStatIds.has(x.id)&&!mdStatIds.has(x.id))
+  &&manifest.public_contract?.statistical_geometry?.RO?.sha256===currentHashes.ro_statistical_geometry
+  &&manifest.public_contract?.statistical_geometry?.MD?.sha256===currentHashes.md_statistical_geometry,
+  {RO:roStatIds.size,MD:mdStatIds.size,manifest:manifest.public_contract?.statistical_geometry??null});
+ check('md121_never_becomes_public_statistical_identity',
+  !publicEntities.some(x=>x.statistical?.code==='MD121')
+  &&publicEntities.find(x=>x.id==='stat-MD120')?.statistical?.code==='MD120'
+  &&publicEntities.find(x=>x.id==='stat-MD120')?.representation?.osm_statistical_ref==='MD121'
+  &&publicEntities.find(x=>x.id==='stat-MD120')?.representation?.osm_ref_is_identity_authority===false,
+  {md120:publicEntities.find(x=>x.id==='stat-MD120')??null});
+}
 
 if(publicChunks){
  const chunkIssues=[];

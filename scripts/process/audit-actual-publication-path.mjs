@@ -18,9 +18,12 @@ const publicationSurface=path=>
  path.startsWith('data/current/')
  || path==='public/data/actual-entities.json'
  || path==='public/data/actual-geometry-chunks.json'
+ || path==='public/data/actual-consolidated-tree.json'
  || path.startsWith('public/geo/current/')
  || path.startsWith('public/geo/actual/')
  || path==='data/sources/actual-settlement-policy.json'
+ || path==='data/sources/actual-statistical-policy.json'
+ || path==='schemas/actual-statistical-hierarchy-contract.json'
  || path==='data/sources/ro-siruta-current.json'
  || path==='data/sources/cuatm-current.json'
  || path==='data/sources/osm-current.json'
@@ -81,6 +84,40 @@ if(/^actual\/candidate-/.test(headRef??'')){
  check(persisted.validated_release_gate_status==='PASS','persisted_gate_not_pass');
 
  console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'candidate_promotion',base,head,candidate_commit:candidateCommit,failures},null,2));
+}else if(headRef==='p2/public-statistical-contract'){
+ const allowedPrep=new Set([
+  '.github/workflows/p2-statistical-foundation.yml',
+  'app.js','index.html','style.css',
+  'schemas/actual-public-entity-v3.schema.json',
+  'schemas/actual-statistical-hierarchy-contract.json',
+  'scripts/lib/actual-semantic-fingerprint.mjs',
+  'scripts/lib/actual-statistical-public.mjs',
+  'scripts/process/audit-actual-publication-path.mjs',
+  'scripts/process/audit-actual-release-gate.mjs',
+  'scripts/process/audit-actual-statistical-public.mjs',
+  'scripts/process/apply-actual-statistical-activation.mjs',
+  'scripts/process/build-actual-public-data.mjs',
+  'scripts/process/build-actual-release-manifest.mjs',
+  'scripts/test/actual-candidate-lifecycle.test.mjs',
+  'scripts/test/actual-statistical-public.test.mjs',
+  'scripts/test/frontend-smoke.test.mjs',
+  'tools/p2/actual-md-statistical-layer.mjs',
+  'tools/p2/actual-ro-statistical-layer.mjs',
+  'tools/p2/actual-statistical-contract.mjs',
+  'tools/p2/actual-statistical-contract.test.mjs'
+ ]);
+ const forbidden=changed.filter(path=>!allowedPrep.has(path));
+ const basePolicy=JSON.parse(execFileSync('git',['show',base+':data/sources/actual-statistical-policy.json'],{encoding:'utf8',maxBuffer:256*1024*1024}));
+ const headPolicy=JSON.parse(await readFile('data/sources/actual-statistical-policy.json','utf8'));
+ const baseManifest=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json'],{encoding:'utf8',maxBuffer:256*1024*1024}));
+ const headManifest=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
+ const basePublic=JSON.parse(execFileSync('git',['show',base+':public/data/actual-entities.json'],{encoding:'utf8',maxBuffer:256*1024*1024}));
+ const headPublic=JSON.parse(await readFile('public/data/actual-entities.json','utf8'));
+ check(forbidden.length===0,'p2_public_prep_changed_forbidden_paths',{paths:forbidden});
+ check(basePolicy.activated===false&&headPolicy.activated===false,'p2_public_prep_must_not_activate_policy');
+ check(baseManifest.snapshot_id===headManifest.snapshot_id&&baseManifest.release_fingerprint_sha256===headManifest.release_fingerprint_sha256,'p2_public_prep_changed_release_identity');
+ check(basePublic.contract===headPublic.contract&&basePublic.entity_count===headPublic.entity_count,'p2_public_prep_changed_public_contract');
+ console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',mode:'p2_public_statistical_contract_prep',base,head,failures},null,2));
 }else if(/^actual\/provenance-/.test(headRef??'')){
  const allowedPublication=new Set([
   'data/current/actual-host-trust-manifest.json',

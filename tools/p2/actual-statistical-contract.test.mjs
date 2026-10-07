@@ -22,7 +22,8 @@ test('P2.0 statistical contract and official source bindings pass fail-closed ga
  assert.deepEqual(report.summary.MD.level_counts,{'1':1,'2':2,'3':6});
  assert.equal(report.summary.MD.component_assignment_count,37);
  assert.equal(report.summary.p1_entity_count,5830);
- assert.equal(report.summary.p2_entities_activated,false);
+ const policy=await readJson(STATISTICAL_POLICY_PATH);
+ assert.equal(report.summary.p2_entities_activated,policy.activated===true);
 });
 
 test('P2.0 source bundle fingerprint binds exact normalized RO and MD source bytes',async()=>{
@@ -41,7 +42,8 @@ test('P2.0 source bundle fingerprint binds exact normalized RO and MD source byt
 test('P2.0 contract defines typed hierarchy reuse without administrative-parent overwrite',async()=>{
  const contract=await readJson(STATISTICAL_CONTRACT_PATH);
  assert.equal(contract.contract,'actual-statistical-hierarchy-v1');
- assert.equal(contract.phase,'P2_PREPARED');
+ const policy=await readJson(STATISTICAL_POLICY_PATH);
+ assert.equal(contract.phase,policy.activated?'P2_ACTIVATED':'P2_PREPARED');
  assert.equal(contract.hierarchies.administrative.immutable_during_p2_activation,true);
  assert.equal(contract.hierarchies.statistical.must_not_replace_administrative_parentage,true);
  assert.equal(contract.entity_reuse.duplicate_entity_for_same_territorial_unit,false);
@@ -59,7 +61,7 @@ test('P2.0 gate fails if statistical activation is enabled before P2.1',async()=
   readFileFn:async path=>path===STATISTICAL_POLICY_PATH?buffer(policy):readFile(path)
  });
  assert.equal(report.status,'FAIL');
- assert.ok(report.failures.some(x=>x.name==='policy_is_prepared_not_activated'));
+ assert.ok(report.failures.some(x=>x.name==='policy_activation_state_is_coherent'));
 });
 
 test('P2.0 gate fails on MD121 substitution for official MD120',async()=>{
@@ -75,14 +77,23 @@ test('P2.0 gate fails on MD121 substitution for official MD120',async()=>{
  assert.ok(report.failures.some(x=>x.name==='md_codes_exact_and_no_md121'));
 });
 
-test('P2.0 remains staged outside the active ACTUAL v1.1 source bundle',async()=>{
+test('P2 statistical activation state is explicit and source bundle remains separately bound',async()=>{
  const active=await readJson('data/current/actual-source-bundle-manifest.json');
  assert.ok(!active.sources.RO);
  assert.ok(!active.sources.MD);
  assert.equal(active.sources.ro_nuts_2024,undefined);
  assert.equal(active.sources.md_nuts_2017,undefined);
  const policy=await readJson(STATISTICAL_POLICY_PATH);
- assert.equal(policy.activated,false);
+ const publicIndex=await readJson('public/data/actual-entities.json');
+ if(policy.activated){
+  assert.equal(policy.phase,'P2_ACTIVATED');
+  assert.equal(publicIndex.contract,'actual-public-entity-v3');
+  assert.equal(publicIndex.entity_count,5848);
+ }else{
+  assert.equal(policy.phase,'P2_PREPARED');
+  assert.equal(publicIndex.contract,'actual-public-entity-v2');
+  assert.equal(publicIndex.entity_count,5830);
+ }
 });
 
 test('P2.0 gate stays outside pinned deterministic runner until activation',async()=>{

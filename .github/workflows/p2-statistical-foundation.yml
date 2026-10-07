@@ -39,6 +39,14 @@ jobs:
       - name: Regression-test P2.2 Moldova statistical layer
         run: node --test tools/p2/actual-md-statistical-layer.test.mjs
 
+      - name: Regression-test P2.3 public activation tooling
+        run: node --test scripts/test/actual-statistical-public.test.mjs
+
+      - name: Gate P2.3 public statistical contract when activated
+        run: |
+          node scripts/process/install-actual-npm-offline.mjs
+          node scripts/process/audit-actual-statistical-public.mjs
+
       - name: Prove P2 verification is read-only
         run: |
           if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
