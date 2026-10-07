@@ -1,3 +1,4 @@
+import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
 import {geometryClass,geometryVisible,geometryLabels,administrativeClasses,statisticalLevel} from './geometry-taxonomy.mjs';
 
 const map=L.map('map',{zoomControl:true}).setView([46.8,26.6],6);
@@ -22,6 +23,7 @@ let indexData=null;
 let releaseData=null;
 let hierarchyTree=null;
 const hierarchyNodeById=new Map();
+let atlasTree=null;
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
 
@@ -216,10 +218,7 @@ function updateSelectionVisibility(){
  const entity=entityById.get(selectedEntityId);
  const status=document.getElementById('selection-visibility');
  if(status&&entity)status.textContent=isVisible(entity)?'':'Geometria este ascunsă de filtre. Selecția și detaliile rămân disponibile.';
- for(const button of document.querySelectorAll('.tree-select[data-entity-id]')){
-  button.classList.toggle('selected',button.dataset.entityId===selectedEntityId);
-  button.setAttribute('aria-pressed',String(button.dataset.entityId===selectedEntityId));
- }
+
 }
 
 function searchEntities(query){
@@ -253,7 +252,7 @@ function wireSearch(){
    button.addEventListener('click',async()=>{
     input.value=entity.display_name;
     results.innerHTML='';
-    await selectEntity(entity.id,true);
+    await selectEntity(entity.id,{zoom:true,source:'search'});
    });
    results.appendChild(button);
   }
@@ -286,43 +285,36 @@ async function loadHierarchyTree(){
 function renderHierarchyTree(){
  const container=document.getElementById('hierarchy-tree');
  if(!container||!hierarchyTree)return;
- container.innerHTML='';
- const makeNode=id=>{
-  const node=hierarchyNodeById.get(id);
-  if(!node)return document.createTextNode('');
-  const wrapper=document.createElement(node.child_ids?.length?'details':'div');
-  wrapper.className='tree-node';
-  if(node.depth===0&&wrapper.tagName==='DETAILS')wrapper.open=true;
-  const row=document.createElement(node.child_ids?.length?'summary':'div');
-  row.className='tree-row';
-  const button=document.createElement('button');
-  button.type='button';
-  button.className='tree-select';
-  button.textContent=node.display_name;
-  button.dataset.entityId=node.id;
-  button.classList.toggle('selected',node.id===selectedEntityId);
-  button.setAttribute('aria-pressed',String(node.id===selectedEntityId));
-  button.title=(node.statistical_code?node.statistical_code+' · ':'')+typeLabel(node.display_type);
-  button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();selectEntity(node.id,true).catch(console.error);});
-  row.appendChild(button);
+ atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,
+  onSelect:(id,options)=>selectEntity(id,options).catch(console.error)});
+ if(selectedEntityId){
+  atlasTree.select(selectedEntityId);
+  renderDetails(entityById.get(selectedEntityId));
+  updateSelectionVisibility();
+ }
+}
+function selectedPath(id){
+ if(!hierarchyTree)return [];
+ return ancestorPath(hierarchyNodeById,hierarchyTree.root_ids,id);
+}
+function renderBreadcrumb(entity){
+ const nav=document.createElement('nav');
+ nav.className='hierarchy-breadcrumb';nav.setAttribute('aria-label','Ierarhie teritorială');
+ const list=document.createElement('ol');
+ for(const id of selectedPath(entity.id)){
+  const node=hierarchyNodeById.get(id),item=document.createElement('li'),button=document.createElement('button');
+  button.type='button';button.className='parent-button';button.textContent=node.display_name;
+  button.dataset.entityId=id;
+  if(id===entity.id)button.setAttribute('aria-current','location');
   if(node.statistical_code){
-   const code=document.createElement('span');code.className='tree-code';code.textContent=node.statistical_code;row.appendChild(code);
+   const code=document.createElement('span');code.className='tree-code';code.textContent=node.statistical_code;button.appendChild(code);
   }
-  wrapper.appendChild(row);
-  if(node.child_ids?.length){
-   let rendered=false;
-   wrapper.addEventListener('toggle',()=>{
-    if(!wrapper.open||rendered)return;
-    rendered=true;
-    const children=document.createElement('div');children.className='tree-children';
-    for(const child of node.child_ids)children.appendChild(makeNode(child));
-    wrapper.appendChild(children);
-   });
-   if(wrapper.open)wrapper.dispatchEvent(new Event('toggle'));
-  }
-  return wrapper;
- };
- for(const root of hierarchyTree.root_ids||[])container.appendChild(makeNode(root));
+  button.addEventListener('click',()=>selectEntity(id,{zoom:true,source:'breadcrumb'}).catch(console.error));
+  item.appendChild(button);list.appendChild(item);
+ }
+ nav.appendChild(list);
+ const body=document.getElementById('details-body');
+ if(body.prepend)body.prepend(nav);else body.appendChild(nav);
 }
 
 async function ensureStatisticalGeometry(jurisdiction){
@@ -375,7 +367,7 @@ function renderCollection(group,data){
    const entity=entityById.get(id);
    if(!entity)return;
    layer.bindTooltip(entity.display_name,{sticky:true,className:'entity-tooltip'});
-   layer.on('click',()=>selectEntity(id,false,layer));
+   layer.on('click',()=>selectEntity(id,{source:'map'},layer).catch(console.error));
    if(id===selectedEntityId){layer.setStyle(selectedStyle);selectedLayer=layer;}
   }
  }).addTo(group);
@@ -474,7 +466,9 @@ async function syncTiers(){
 
 function clearSelection(){
  selectedEntityId=null;
+ atlasTree?.clear();
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
+ rerenderLoadedTiers();
 
  document.getElementById('details-title').textContent='Nicio selecție';
  document.getElementById('details-body').innerHTML='<p class="muted">Selectează o limită de pe hartă sau caută o entitate după nume ori identificator.</p>';
@@ -488,9 +482,6 @@ function renderDetails(entity){
  const body=document.getElementById('details-body');
  title.textContent=entity.display_name;
  const legal=entity.legal;
- const parentId=entity.hierarchy?.consolidated_parent_id??entity.hierarchy?.parent_catalog_id??null;
- const parent=parentId&&entityById.get(parentId);
- const parentValue=parent?'<button type="button" class="parent-button" data-parent="'+escapeHtml(parent.id)+'">'+escapeHtml(parent.display_name)+'</button>':escapeHtml(entity.hierarchy?.parent_name||'—');
  const statisticalHtml=entity.statistical
   ?'<section class="details-section"><h3>Identitate statistică</h3><dl class="kv">'+
     detailRow('Clasificare',entity.statistical.classification)+detailRow('Versiune',entity.statistical.version)+detailRow('Cod',entity.statistical.code)+
@@ -507,15 +498,14 @@ function renderDetails(entity){
  body.innerHTML=
   '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
   detailRow('Jurisdicție',entity.jurisdiction)+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
-  '<dt>Părinte în arbore</dt><dd>'+parentValue+'</dd></dl></section>'+
+  '</dl></section>'+
   '<p id="selection-visibility" class="hint"></p>'+legalHtml+statisticalHtml+
   '<section class="details-section"><h3>Reprezentare cartografică</h3><dl class="kv">'+
   detailRow('Sursă',entity.representation.source)+detailRow('Relație OSM',entity.representation.osm_relation_id)+detailRow('admin_level',entity.representation.admin_level)+
   detailRow('Tip reprezentare',typeLabel(entity.representation.inferred_type))+detailRow('Geometrie','coordonate master, fără simplificare')+
   detailRow('Încredere',entity.validation.representation_confidence)+
   '</dl><div class="details-actions"><a class="action-button" href="'+escapeHtml(entity.representation.source_url)+'" target="_blank" rel="noopener">Deschide în OSM</a><button type="button" class="action-button" id="zoom-selected">Zoom la entitate</button></div></section>';
- const parentButton=body.querySelector('[data-parent]');
- if(parentButton)parentButton.addEventListener('click',()=>selectEntity(parentButton.dataset.parent,true));
+ renderBreadcrumb(entity);
  const zoomButton=body.querySelector('#zoom-selected');
  if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
 }
@@ -524,11 +514,20 @@ function zoomToEntity(entity){
  const b=entity.map?.bbox;
  if(Array.isArray(b)&&b.length===4)map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[30,30],maxZoom:12});
 }
-async function selectEntity(id,zoom=false,clickedLayer=null){
+async function selectEntity(id,options=false,clickedLayer=null){
+ const {zoom=false}=typeof options==='boolean'?{zoom:options}:options;
  const entity=entityById.get(id);
  if(!entity)return;
+ // Validate and materialize the consolidated path before updating selection.
+ try{atlasTree?.select(id);}catch(error){
+  console.error('Atlas selection failed for '+id,error);
+  const status=document.getElementById('hierarchy-error');
+  if(status)status.textContent='Ierarhie indisponibilă pentru '+id;
+  throw error;
+ }
+ const status=document.getElementById('hierarchy-error');
+ if(status)status.textContent='';
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
-
  selectedEntityId=id;
  renderDetails(entity);
  updateSelectionVisibility();
@@ -583,4 +582,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {frontendReady,entityById,activeFilterGroups,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,renderCollection,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
+export {frontendReady,entityById,activeFilterGroups,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
