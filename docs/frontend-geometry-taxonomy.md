@@ -29,7 +29,7 @@ Administrative/other checkboxes control representation classes. Statistical leve
 Selection never changes a geometry filter. A hidden selection keeps details and tree selection, with an explicit notice. Re-enabling its filters restores its highlight. Late statistical fetches apply current visibility, not request-time visibility. Existing jurisdiction selection behavior remains.
 
 ## Validation
-The PR runs the two requested existing tests and frontend-geometry-taxonomy.test.mjs, covering exact population counts, adversarial legal/display types, sectors, auxiliary/context, statistical levels, no reused duplicates, MD120/MD121 identity, bound component hashes, actual Leaflet rendering/selection through a VM harness, and late fetch visibility.
+The PR runs the two requested existing tests and frontend-geometry-taxonomy.test.mjs, covering exact population counts, adversarial legal/display types, sectors, auxiliary/context, statistical levels, no reused duplicates, MD120/MD121 identity, bound component hashes, actual Leaflet rendering/selection through a module import with DOM/Leaflet mocks, and late fetch visibility.
 
 Local execution unavailable: Windows sandbox helper fails at process setup. CI is the executable verification authority for this change.
 

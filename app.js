@@ -197,11 +197,12 @@ function renderFilters(){
  container.onchange=event=>{
   const input=event.target.closest('input');
   if(!input)return;
-  if(input.hasAttribute('data-separate-statistical'))separateStatisticalGeometry=input.checked;
+  if(input.hasAttribute('data-separate-statistical'))setSeparateStatisticalGeometry(input.checked);
   else if(input.dataset.filter)applyFilter(input);
   refreshGeometryVisibility();
  };
 }
+function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boolean(value);}
 function applyFilter(input){
  const set=input.dataset.kind==='geometry'?activeFilterGroups:activeStatisticalLevels;
  const key=input.dataset.kind==='geometry'?input.dataset.filter:input.dataset.filter==='unclassified'?'unclassified':Number(input.dataset.filter);
@@ -568,7 +569,7 @@ document.getElementById('layer-ro').addEventListener('change',event=>{event.targ
 document.getElementById('layer-md').addEventListener('change',event=>{event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);});
 map.on('zoomend moveend',()=>syncTiers().catch(console.error));
 
-(async()=>{
+const frontendReady=(async()=>{
  try{
   await loadIndex();
   await loadHierarchyTree();
@@ -581,3 +582,5 @@ map.on('zoomend moveend',()=>syncTiers().catch(console.error));
   document.getElementById('filter-list').innerHTML='<p class="muted">Datele ACTUAL nu au putut fi validate.</p>';
  }
 })();
+
+export {frontendReady,entityById,activeFilterGroups,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,renderCollection,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};

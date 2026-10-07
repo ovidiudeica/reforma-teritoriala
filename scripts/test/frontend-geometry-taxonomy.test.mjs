@@ -2,7 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import vm from 'node:vm';
 import {geometryClass,geometryVisible,geometryLabels,statisticalLevel,administrativeClasses} from '../../geometry-taxonomy.mjs';
 
 const index=JSON.parse(await readFile('public/data/actual-entities.json','utf8'));
@@ -94,17 +93,19 @@ test('release identity and every bound ACTUAL component retain exact bytes',asyn
 });
 
 test('actual frontend rendering and selection respect filters, including async statistical loads',async()=>{
- let app=await readFile('app.js','utf8');
- app=app.replace(/^import .*?;\n/,'');
- const start=app.indexOf('const actualReleasePromise='),end=app.indexOf('async function loadIndex()',start);
- app=app.slice(0,start)+'const actualReleasePromise=Promise.resolve();\n'+app.slice(end);
- app=app.slice(0,app.indexOf("document.getElementById('details-close')"));
- const element=()=>({textContent:'',innerHTML:'',checked:true,querySelector:()=>null});
+ const only=entities.find(e=>e.category==='statistical');
+ const reused=entities.find(e=>e.category!=='statistical'&&e.roles.includes('statistical'));
+ const element=()=>({
+  textContent:'',innerHTML:'',checked:true,children:[],dataset:{},
+  classList:{toggle(){}},setAttribute(){},appendChild(child){this.children.push(child);},
+  addEventListener(){},querySelector:()=>null,querySelectorAll:()=>[]
+ });
  const elements=new Map();
- const doc={getElementById:id=>{if(!elements.has(id))elements.set(id,element());return elements.get(id);},querySelectorAll:()=>[]};
+ const doc={getElementById:id=>{if(!elements.has(id))elements.set(id,element());return elements.get(id);},querySelectorAll:()=>[],createElement:element};
  const layerGroup=()=>({layers:[],clearLayers(){this.layers=[];},addLayer(layer){this.layers.push(layer);},hasLayer(layer){return this.layers.includes(layer);},removeLayer(layer){this.layers=this.layers.filter(x=>x!==layer);},addTo(){return this;},eachLayer(fn){this.layers.forEach(fn);}});
  const L={
-  map:()=>({setView(){return this;},fitBounds(){},getZoom:()=>6}),tileLayer:()=>({addTo(){}}),control:{scale:()=>({addTo(){}})},layerGroup,
+  map:()=>({setView(){return this;},fitBounds(){},getZoom:()=>6,on(){}}),
+  tileLayer:()=>({addTo(){}}),control:{scale:()=>({addTo(){}})},layerGroup,
   geoJSON:(data,config)=>{
    const group=layerGroup();
    for(const feature of data.features.filter(config.filter)){
@@ -114,43 +115,51 @@ test('actual frontend rendering and selection respect filters, including async s
    group.addTo=target=>{target.addLayer(group);return group;};return group;
   }
  };
- const context=vm.createContext({L,document:doc,console,geometryClass,geometryVisible,geometryLabels,statisticalLevel,administrativeClasses});
- vm.runInContext(app,context);
- context.entities=entities;
- vm.runInContext('for(const entity of entities)entityById.set(entity.id,entity);',context);
- const only=entities.find(e=>e.category==='statistical'),reused=entities.find(e=>e.category!=='statistical'&&e.roles.includes('statistical'));
- context.only=only;context.reused=reused;
- vm.runInContext(`statisticalGeometryLoaded.add(only.jurisdiction);
- statisticalFeatureById.set(only.id,{type:'Feature',properties:{entity_id:only.id},geometry:null});
- renderStatisticalGeometry(only.jurisdiction);`,context);
- const count=()=>vm.runInContext('statisticalGroups[only.jurisdiction].layers[0].layers.length',context);
- assert.equal(count(),1);
- vm.runInContext('activeStatisticalLevels.delete(statisticalLevel(only));refreshGeometryVisibility();',context);
- assert.equal(count(),0);
- await vm.runInContext('selectEntity(only.id)',context);
- assert.equal(count(),0);
- assert.equal(vm.runInContext('selectedEntityId',context),only.id);
- assert.match(elements.get('selection-visibility').textContent,/ascunsă/);
- vm.runInContext('activeStatisticalLevels.add(statisticalLevel(only));refreshGeometryVisibility();',context);
- assert.equal(count(),1);
- vm.runInContext('separateStatisticalGeometry=false;refreshGeometryVisibility();',context);
- assert.equal(count(),0);
- vm.runInContext('separateStatisticalGeometry=true;refreshGeometryVisibility();',context);
- assert.equal(count(),1);
- context.data={features:[{properties:{entity_id:reused.id}}]};
- vm.runInContext('const testGroup=L.layerGroup();renderCollection(testGroup,data);',context);
- assert.equal(vm.runInContext('testGroup.layers[0].layers.length',context),1);
- vm.runInContext('activeFilterGroups.delete(geometryClass(reused));renderCollection(testGroup,data);',context);
- assert.equal(vm.runInContext('testGroup.layers[0].layers.length',context),0);
- await vm.runInContext('selectEntity(reused.id)',context);
- assert.equal(vm.runInContext('testGroup.layers[0].layers.length',context),0);
- // A late fetch must apply current switches, never stale selection-time visibility.
- context.payload={metadata:{contract:'actual-public-statistical-geometry-v1',jurisdiction:only.jurisdiction},features:[{properties:{entity_id:only.id}}]};
- let resolve;
- context.fetch=()=>new Promise(done=>{resolve=done;});
- vm.runInContext('statisticalGeometryLoaded.delete(only.jurisdiction);releaseData={manifest:{public_contract:{statistical_geometry:{[only.jurisdiction]:{path:"fixture"}}}}};',context);
- const pending=vm.runInContext('ensureStatisticalGeometry(only.jurisdiction)',context);
- vm.runInContext('separateStatisticalGeometry=false;',context);
- resolve({ok:true,json:async()=>context.payload});await pending;
- assert.equal(count(),0);
+ const statPayload=jurisdiction=>({metadata:{contract:'actual-public-statistical-geometry-v1',jurisdiction},features:jurisdiction===only.jurisdiction?[{properties:{entity_id:only.id}}]:[]});
+ const fixtures={
+  'data/current/actual-release-manifest.json':{
+   snapshot_id:'fixture',public_contract:{
+    contract:index.contract,path:'index',entity_count:5848,
+    geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),
+    statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}
+   }
+  },
+  'data/current/actual-release-gate.json':{status:'PASS',snapshot_id:'fixture'},
+  'public/data/app-build-info.json':null,index
+ };
+ const respond=path=>{
+  const [jurisdiction,tier]=path.split('/');
+  const payload=path in fixtures?fixtures[path]:tier==='stat'?statPayload(jurisdiction):{metadata:{jurisdiction,tier},features:[]};
+  return {ok:true,json:async()=>payload};
+ };
+ const previous={L:globalThis.L,document:globalThis.document,fetch:globalThis.fetch};
+ try{
+  Object.assign(globalThis,{L,document:doc,fetch:async path=>respond(path)});
+  const frontend=await import('../../app.js');
+  await frontend.frontendReady;
+  const count=()=>frontend.statisticalGroups[only.jurisdiction].layers[0].layers.length;
+  assert.equal(count(),1);
+  frontend.activeStatisticalLevels.delete(statisticalLevel(only));frontend.refreshGeometryVisibility();
+  assert.equal(count(),0);
+  await frontend.selectEntity(only.id);
+  assert.equal(count(),0);assert.equal(frontend.selectedEntityId,only.id);
+  assert.match(elements.get('selection-visibility').textContent,/ascunsă/);
+  frontend.activeStatisticalLevels.add(statisticalLevel(only));frontend.refreshGeometryVisibility();
+  assert.equal(count(),1);
+  frontend.setSeparateStatisticalGeometry(false);frontend.refreshGeometryVisibility();assert.equal(count(),0);
+  frontend.setSeparateStatisticalGeometry(true);frontend.refreshGeometryVisibility();assert.equal(count(),1);
+  const group=layerGroup(),data={features:[{properties:{entity_id:reused.id}}]};
+  frontend.renderCollection(group,data);assert.equal(group.layers[0].layers.length,1);
+  frontend.activeFilterGroups.delete(geometryClass(reused));
+  frontend.renderCollection(group,data);assert.equal(group.layers[0].layers.length,0);
+  await frontend.selectEntity(reused.id);assert.equal(group.layers[0].layers.length,0);
+  // A late fetch must apply current switches, never request-time visibility.
+  frontend.statisticalGeometryLoaded.delete(only.jurisdiction);
+  let resolve;
+  globalThis.fetch=()=>new Promise(done=>{resolve=done;});
+  const pending=frontend.ensureStatisticalGeometry(only.jurisdiction);
+  frontend.setSeparateStatisticalGeometry(false);
+  resolve(respond(only.jurisdiction+'/stat'));await pending;
+  assert.equal(count(),0);
+ }finally{Object.assign(globalThis,previous);}
 });
