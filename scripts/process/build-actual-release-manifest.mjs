@@ -179,6 +179,14 @@ if(BASE_REF){
  const baseMarker=gitJson('data/current/actual-release-persisted.json');
  baseManifestBytes=gitBuffer(OUTPUT);
  baseManifest=JSON.parse(baseManifestBytes.toString('utf8'));
+ const baseStatisticalDocuments=baseManifest?.statistical_model?.activated===true?{
+  statisticalActivation:gitJson(baseManifest.components.statistical_activation.path),
+  statisticalPolicy:gitJson(baseManifest.components.statistical_policy.path),
+  statisticalContract:gitJson(baseManifest.components.statistical_contract.path),
+  statisticalSourceBundle:gitJson(baseManifest.components.statistical_source_bundle.path),
+  roStatisticalLayer:gitJson(baseManifest.components.statistical_ro_layer.path),
+  mdStatisticalLayer:gitJson(baseManifest.components.statistical_md_layer.path)
+ }:{};
  const baseDocuments={
   catalog:gitJson(PATHS.catalog),
   inventory:gitJson(PATHS.inventory),
@@ -188,7 +196,8 @@ if(BASE_REF){
   mdOfficial:gitJson(PATHS.md_official),
   mdIndividualReview:gitJson(PATHS.md_individual_review),
   settlementPolicy:gitJson(PATHS.settlement_policy),
-  geometryRoleContract:gitJson(GEOMETRY_ROLE_CONTRACT)
+  geometryRoleContract:gitJson(GEOMETRY_ROLE_CONTRACT),
+  ...baseStatisticalDocuments
  };
  const baseSemantic=actualSemanticFingerprint(baseDocuments);
  if(baseSemantic.sha256===semanticFingerprint.sha256){
