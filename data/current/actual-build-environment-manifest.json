@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "6036641ad738a264f0347f859b66e01f2fc56bf2d9ba790f6e017e66b625cae6",
+  "environment_fingerprint_sha256": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -110,7 +110,7 @@
       "scripts/process/verify-actual-persisted-base.mjs": "8cc25b64647178b09569fc782ae000914c39dcf7d51137b05efd6348bd45a85c",
       "scripts/process/run-actual-deterministic-candidate.sh": "e43c6ce4caec185440d34770aaac6f640fed3075ba9fcde3538dbff8c534965f",
       "scripts/lib/actual-candidate-lifecycle.mjs": "26a7a552a2db52208dbf960f6b0f4e90066d1e85052211f36fe79792c7802807",
-      "scripts/process/build-actual-candidate-diff.mjs": "3f1d711591f041746d30d70e7380de7fdfb82b1e8d34b8e2bf1dcf8aeb1ecd48",
+      "scripts/process/build-actual-candidate-diff.mjs": "605ea90d02c40192530fffad39c08c41eb3ebb76094e4b0ea8885213d1e5e997",
       "scripts/process/prepare-actual-candidate-promotion.mjs": "23f017e0d2b40f5db609984ad66280a324bdddaa3c2123533a4f90be34cd460a",
       "scripts/process/write-actual-candidate-execution-receipt.mjs": "22dc706e3f713fc7870b11dd574eefee2054186008826abfc391a6833c8364bd"
     },
