@@ -325,6 +325,9 @@ export async function validateStatisticalPublicActivation({readFileFn=readFile}=
   json(RO_LAYER_PATH,readFileFn),json(MD_LAYER_PATH,readFileFn),json(RO_OSM_MANIFEST_PATH,readFileFn),json(MD_OSM_MANIFEST_PATH,readFileFn),
   json(RO_OVERVIEW_PATH,readFileFn),json(MD_OVERVIEW_PATH,readFileFn)
  ]);
+ const [roGz,mdGz]=await Promise.all([readFileFn(roOsm.snapshot_path),readFileFn(mdOsm.snapshot_path)]);
+ const roRaw=gunzipSync(roGz),mdRaw=gunzipSync(mdGz);
+ const roSnapshot=JSON.parse(roRaw.toString('utf8')),mdSnapshot=JSON.parse(mdRaw.toString('utf8'));
  check('activation_requested',policy.activation_requested===true,{activation_requested:policy.activation_requested??null});
  check('marker_active',marker.activated===true&&marker.phase==='P2.3_PUBLIC',{marker});
  check('public_contract_v3',index.contract===PUBLIC_CONTRACT&&Number(index.schema_version)===3,{contract:index.contract,schema_version:index.schema_version});
@@ -340,6 +343,16 @@ export async function validateStatisticalPublicActivation({readFileFn=readFile}=
  check('consolidated_tree_complete',tree?.contract===HIERARCHY_CONTRACT&&tree?.root_count===2&&tree?.node_count===5848&&(tree.nodes||[]).length===5848,{root_count:tree?.root_count,node_count:tree?.node_count});
  const statOverviewCount=(roOverview.features||[]).filter(f=>f.properties?.geometry_role==='statistical_boundary').length+(mdOverview.features||[]).filter(f=>f.properties?.geometry_role==='statistical_boundary').length;
  check('statistical_only_geometries_exact',statOverviewCount===18,{count:statOverviewCount});
+ const actualStatGeometry=new Map([...(roOverview.features||[]),...(mdOverview.features||[])].filter(f=>f.properties?.geometry_role==='statistical_boundary').map(f=>[f.properties.entity_id,f.geometry]));
+ const geometryIssues=[];
+ for(const [layer,snapshot] of [[roLayer,roSnapshot],[mdLayer,mdSnapshot]]){
+  for(const spec of layer.statistical_entities||[]){
+   const expected=relationFeature(snapshot,spec.representation.osm_relation_id).geometry;
+   const actual=actualStatGeometry.get(spec.id);
+   if(!actual||JSON.stringify(actual)!==JSON.stringify(expected))geometryIssues.push({id:spec.id,relation_id:spec.representation.osm_relation_id,issue:actual?'coordinate_drift':'missing_geometry'});
+  }
+ }
+ check('statistical_geometry_exactly_matches_bound_osm_snapshots',geometryIssues.length===0,{issues:geometryIssues});
  check('administrative_geometry_reuse_not_duplicated',roLayer.existing_entity_memberships.every(x=>x.geometry_reuse?.duplicate_geometry===false&&x.geometry_reuse?.geometry_modified===false)&&mdLayer.existing_entity_statistical_roles.every(x=>x.geometry_reuse?.duplicate_geometry===false&&x.geometry_reuse?.geometry_modified===false),{});
  check('marker_source_bindings',marker.ro_layer_fingerprint_sha256===roLayer.layer_fingerprint_sha256&&marker.md_layer_fingerprint_sha256===mdLayer.layer_fingerprint_sha256&&marker.ro_statistical_osm_semantic_sha256===roOsm.semantic_sha256&&marker.md_statistical_osm_semantic_sha256===mdOsm.semantic_sha256,{});
  return {schema_version:1,mode:'ACTUAL_STATISTICAL_PUBLIC_P2_3_GATE',phase:'P2.3_PUBLIC',status:failures.length?'FAIL':'PASS',checks,failures,summary:{public_entity_count:index.entity_count,statistical_only_entity_count:18,hierarchy_node_count:tree?.node_count??null}};
