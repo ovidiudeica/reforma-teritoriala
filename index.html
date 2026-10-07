@@ -20,8 +20,9 @@
 
   <section>
     <h3>Căutare</h3>
-    <input id="entity-search" class="search" type="search" placeholder="Nume, SIRUTA/CUATM sau OSM…" autocomplete="off">
-    <div id="search-results" class="search-results" aria-live="polite"></div>
+    <input id="entity-search" class="search" type="search" aria-label="Caută entități teritoriale" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Nume, SIRUTA/CUATM, cod statistic sau OSM…" autocomplete="off">
+    <div id="search-results" class="search-results" role="listbox" aria-label="Rezultate căutare" hidden></div>
+    <p id="search-status" class="hint" role="status" aria-live="polite"></p>
   </section>
 
   <section>
