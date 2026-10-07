@@ -258,14 +258,21 @@ export async function activateStatisticalPublicContract({readFileFn=readFile,wri
  const entityCountByJurisdiction=Object.fromEntries(['RO','MD'].map(j=>[j,entities.filter(e=>e.jurisdiction===j).length]));
  const legalIdentityStatusCounts={};
  for(const e of entities){const s=e.validation?.legal_identity_status||'unknown';legalIdentityStatusCounts[s]=(legalIdentityStatusCounts[s]||0)+1;}
+ const featureCountByTier={
+  ...(baseIndex.feature_count_by_tier||{}),
+  RO_overview:Number(baseIndex.feature_count_by_tier?.RO_overview||0)+newFeatures.RO.length,
+  MD_overview:Number(baseIndex.feature_count_by_tier?.MD_overview||0)+newFeatures.MD.length
+ };
  const finalIndex={
   ...baseIndex,
   schema_version:PUBLIC_SCHEMA_VERSION,
   contract:PUBLIC_CONTRACT,
+  policy:'Public ACTUAL v3 consolidates official statistical and administrative navigation while preserving typed administrative parentage and immutable administrative master geometry. Statistical-only geometry is bound to reviewed OSM statistical snapshots.',
   entity_count:entities.length,
   administrative_entity_count:5830,
   statistical_only_entity_count:18,
   entity_count_by_jurisdiction:entityCountByJurisdiction,
+  feature_count_by_tier:featureCountByTier,
   statistical_model:{
    contract:contract.contract,
    contract_path:STATISTICAL_CONTRACT_PATH,
