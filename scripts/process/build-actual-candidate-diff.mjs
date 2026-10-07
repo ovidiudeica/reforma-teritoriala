@@ -19,6 +19,11 @@ const INVENTORY='data/current/administrative-inventory.json';
 const REVIEW='data/sources/md-cuatm-individual-review.json';
 const SETTLEMENT_POLICY='data/sources/actual-settlement-policy.json';
 const GEOMETRY_ROLE_CONTRACT='schemas/actual-geometry-role-contract.json';
+const STATISTICAL_POLICY='data/sources/actual-statistical-policy.json';
+const STATISTICAL_CONTRACT='schemas/actual-statistical-hierarchy-contract.json';
+const STATISTICAL_SOURCE_BUNDLE='data/sources/actual-statistical-source-bundle.json';
+const RO_STATISTICAL_LAYER='data/p2/actual-statistical-ro.json';
+const MD_STATISTICAL_LAYER='data/p2/actual-statistical-md.json';
 const GEO={RO:'public/geo/current/ro-administrative.geojson',MD:'public/geo/current/md-administrative.geojson'};
 const OFFICIAL={RO:'data/sources/ro-siruta-current.json',MD:'data/sources/cuatm-current.json'};
 const OUTPUT='data/current/actual-candidate-diff.json';
@@ -46,6 +51,32 @@ const baselineInventory=gitJson(INVENTORY);
 const baselineReview=gitJson(REVIEW);
 const baselineSettlementPolicy=gitJson(SETTLEMENT_POLICY);
 const baselineGeometryRoleContract=gitJson(GEOMETRY_ROLE_CONTRACT);
+const baselineStatisticalPolicy=gitJson(STATISTICAL_POLICY);
+const candidateStatisticalPolicy=await readJson(STATISTICAL_POLICY);
+const baselineStatisticalActivated=Boolean(
+ baselineSettlementPolicy?.public_contract==='actual-public-entity-v3'
+ &&baselineStatisticalPolicy?.activated===true
+ &&baselineStatisticalPolicy?.phase==='P2_ACTIVATED'
+);
+const candidateStatisticalActivated=Boolean(
+ candidateSettlementPolicy?.public_contract==='actual-public-entity-v3'
+ &&candidateStatisticalPolicy?.activated===true
+ &&candidateStatisticalPolicy?.phase==='P2_ACTIVATED'
+);
+const baselineStatisticalDocuments=baselineStatisticalActivated?{
+ statisticalPolicy:baselineStatisticalPolicy,
+ statisticalContract:gitJson(STATISTICAL_CONTRACT),
+ statisticalSourceBundle:gitJson(STATISTICAL_SOURCE_BUNDLE),
+ roStatisticalLayer:gitJson(RO_STATISTICAL_LAYER),
+ mdStatisticalLayer:gitJson(MD_STATISTICAL_LAYER)
+}:{};
+const candidateStatisticalDocuments=candidateStatisticalActivated?{
+ statisticalPolicy:candidateStatisticalPolicy,
+ statisticalContract:await readJson(STATISTICAL_CONTRACT),
+ statisticalSourceBundle:await readJson(STATISTICAL_SOURCE_BUNDLE),
+ roStatisticalLayer:await readJson(RO_STATISTICAL_LAYER),
+ mdStatisticalLayer:await readJson(MD_STATISTICAL_LAYER)
+}:{};
 const baselineManifestSha=sha256(baselineManifestBytes);
 const exactBaseManifestBytesReused=manifestBytes.equals(baselineManifestBytes);
 const failures=[];
@@ -72,7 +103,8 @@ const baselineSemantic=actualSemanticFingerprint({
  mdOfficial:gitJson(OFFICIAL.MD),
  mdIndividualReview:baselineReview,
  settlementPolicy:baselineSettlementPolicy,
- geometryRoleContract:baselineGeometryRoleContract
+ geometryRoleContract:baselineGeometryRoleContract,
+ ...baselineStatisticalDocuments
 });
 const candidateSemantic=actualSemanticFingerprint({
  catalog:candidateCatalog,
@@ -83,7 +115,8 @@ const candidateSemantic=actualSemanticFingerprint({
  mdOfficial:await readJson(OFFICIAL.MD),
  mdIndividualReview:candidateReview,
  settlementPolicy:candidateSettlementPolicy,
- geometryRoleContract:candidateGeometryRoleContract
+ geometryRoleContract:candidateGeometryRoleContract,
+ ...candidateStatisticalDocuments
 });
 const semanticManifestBinding=validateCandidateSemanticManifestBinding({
  manifestContentFingerprint:manifest.content_fingerprint_sha256,
