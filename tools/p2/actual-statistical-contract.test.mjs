@@ -52,14 +52,15 @@ test('P2.0 contract defines typed hierarchy reuse without administrative-parent 
  ]);
 });
 
-test('P2.0 gate fails if statistical activation is enabled before P2.1',async()=>{
+test('P2 activation control fails closed on an unbound activation request',async()=>{
  const policy=await readJson(STATISTICAL_POLICY_PATH);
- policy.activated=true;
+ policy.activation_requested=true;
+ policy.activation_authority='wrong-path.json';
  const report=await validateActualStatisticalContract({
   readFileFn:async path=>path===STATISTICAL_POLICY_PATH?buffer(policy):readFile(path)
  });
  assert.equal(report.status,'FAIL');
- assert.ok(report.failures.some(x=>x.name==='policy_is_prepared_not_activated'));
+ assert.ok(report.failures.some(x=>x.name==='policy_activation_control_is_explicit'));
 });
 
 test('P2.0 gate fails on MD121 substitution for official MD120',async()=>{
@@ -83,6 +84,8 @@ test('P2.0 remains staged outside the active ACTUAL v1.1 source bundle',async()=
  assert.equal(active.sources.md_nuts_2017,undefined);
  const policy=await readJson(STATISTICAL_POLICY_PATH);
  assert.equal(policy.activated,false);
+ assert.equal(policy.activation_requested,true);
+ assert.equal(policy.target_public_contract,'actual-public-entity-v3');
 });
 
 test('P2.0 gate stays outside pinned deterministic runner until activation',async()=>{
