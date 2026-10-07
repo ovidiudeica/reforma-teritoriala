@@ -158,7 +158,7 @@ let baseSemanticMatches=false;
 let contentIdentity={
  algorithm:semanticFingerprint.algorithm,
  sha256:semanticFingerprint.sha256,
- release_identity_basis:semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1',
+ release_identity_basis:semanticFingerprint.algorithm==='actual-semantic-v3'?'semantic_content_v3':semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1',
  reused_base_release:false
 };
 if(BASE_REF){
