@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "b1def4f7748d5ef8e8867bb9293a59d0082c5d92006b4969c82bbba0d883d1fd",
+  "environment_fingerprint_sha256": "c4684720cd397204ef80585154524317296f409d3008cbc670ac4f57d30d6adb",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -87,7 +87,7 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "95600cf4b3cddc9a330c2a6dc553c39b26383f4e12dea4f227bd1e58641fbe70",
+      "scripts/lib/actual-build-environment.mjs": "6461c23d8da50e430c5bb34f4b292fabc71b1b646058ffc75403dd31c18b59e2",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
       "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
@@ -110,6 +110,8 @@
       "scripts/process/verify-actual-persisted-base.mjs": "8cc25b64647178b09569fc782ae000914c39dcf7d51137b05efd6348bd45a85c",
       "scripts/process/run-actual-deterministic-candidate.sh": "e43c6ce4caec185440d34770aaac6f640fed3075ba9fcde3538dbff8c534965f",
       "scripts/lib/actual-candidate-lifecycle.mjs": "26a7a552a2db52208dbf960f6b0f4e90066d1e85052211f36fe79792c7802807",
+      "scripts/lib/actual-semantic-fingerprint.mjs": "204d558b4db4c4dd9d9b72575adddd23d9528c635f73efb2f9118f43cfef6040",
+      "scripts/lib/actual-statistical-public.mjs": "e69478edc0a302b2f624c8feca29eda576425cd7cc4d5927f41f925ccce72213",
       "scripts/process/build-actual-candidate-diff.mjs": "3f1d711591f041746d30d70e7380de7fdfb82b1e8d34b8e2bf1dcf8aeb1ecd48",
       "scripts/process/prepare-actual-candidate-promotion.mjs": "23f017e0d2b40f5db609984ad66280a324bdddaa3c2123533a4f90be34cd460a",
       "scripts/process/write-actual-candidate-execution-receipt.mjs": "22dc706e3f713fc7870b11dd574eefee2054186008826abfc391a6833c8364bd"
