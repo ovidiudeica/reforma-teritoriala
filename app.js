@@ -10,13 +10,14 @@ const chunkData=new Map();
 const chunkGroups=new Map();
 let chunkIndex=null;
 const entityById=new Map();
-const activeFilterGroups=new Set(['regional','municipality','town','commune','sector','locality','other']);
+const activeFilterGroups=new Set(['statistical','regional','municipality','town','commune','sector','locality','other']);
 let selectedEntityId=null;
 let selectedLayer=null;
 let indexData=null;
 let releaseData=null;
 
 const filterLabels={
+ statistical:'Unități statistice',
  regional:'Județe, raioane și unități regionale',
  municipality:'Municipii',
  town:'Orașe',
@@ -26,6 +27,9 @@ const filterLabels={
  other:'Alte reprezentări'
 };
 const typeLabels={
+ statistical_level_1:'nivel statistic 1',
+ statistical_level_2:'nivel statistic 2',
+ statistical_level_3:'nivel statistic 3',
  state:'stat (context teritorial)',
  county:'județ',
  district:'raion',
@@ -61,6 +65,7 @@ const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','
 const norm=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const typeLabel=type=>typeLabels[type]||String(type||'unitate administrativă').replaceAll('_',' ');
 function filterGroup(entity){
+ if(entity.category==='statistical')return 'statistical';
  const t=entity.display_type;
  if(['county','district','capital_municipality','level_2_municipality','special_territorial_unit','level_2_or_special_unit'].includes(t))return 'regional';
  if(['municipality','level_1_municipality','municipality_or_city_uat'].includes(t))return 'municipality';
@@ -77,6 +82,7 @@ function styleFor(feature){
  const p=feature.properties||{};
  const tier=p.tier;
  const group=filterGroup(entityById.get(p.entity_id)||{display_type:p.display_type});
+ if(group==='statistical')return {color:'#3f4f80',weight:2,opacity:.9,fillColor:'#7c86aa',fillOpacity:.045,dashArray:'6 4'};
  if(tier==='overview')return {color:'#203f59',weight:1.8,opacity:.85,fillColor:'#5d7b8c',fillOpacity:.035};
  if(group==='municipality')return {color:'#365e55',weight:1.25,opacity:.82,fillColor:'#6d9184',fillOpacity:.055};
  if(group==='town')return {color:'#5e6550',weight:1.05,opacity:.8,fillColor:'#90967a',fillOpacity:.05};
@@ -100,7 +106,7 @@ const actualReleasePromise=(async()=>{
   ]);
   if(gate.status!=='PASS')throw new Error('Release ACTUAL nu a trecut gate-ul combinat');
   if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Manifestul ACTUAL nu corespunde gate-ului');
-  if(!['actual-public-entity-v1','actual-public-entity-v2'].includes(manifest.public_contract?.contract))throw new Error('Contractul public ACTUAL lipsește din manifest');
+  if(!['actual-public-entity-v1','actual-public-entity-v2','actual-public-entity-v3'].includes(manifest.public_contract?.contract))throw new Error('Contractul public ACTUAL lipsește din manifest');
   const publishedRelease=buildInfo?.actual_release_tag
    ?'publicat: '+buildInfo.actual_release_tag+(buildInfo.actual_snapshot_id?' · '+buildInfo.actual_snapshot_id:'')
    :'fără release publicat';
@@ -148,6 +154,47 @@ function updateJurisdictionStatus(){
   const stamp=gate?.generated_at?new Date(gate.generated_at).toLocaleString('ro-RO'):'—';
   if(el)el.textContent=j+': '+count.toLocaleString('ro-RO')+' entități · gate '+gate?.status+' · '+stamp;
  }
+}
+
+function renderHierarchyTree(){
+ const container=document.getElementById('hierarchy-tree');
+ if(!container)return;
+ const tree=indexData?.hierarchy_tree;
+ if(!tree?.nodes?.length){
+  container.innerHTML='<span class="muted">Arborele consolidat va fi disponibil după activarea contractului public statistic.</span>';
+  return;
+ }
+ const nodes=new Map(tree.nodes.map(node=>[node.id,node]));
+ const makeNode=(id,depth=0)=>{
+  const node=nodes.get(id);if(!node)return document.createTextNode('');
+  const children=node.children||[];
+  if(children.length){
+   const details=document.createElement('details');
+   details.className='tree-node';
+   if(depth===0)details.open=true;
+   const summary=document.createElement('summary');
+   summary.innerHTML='<span>'+escapeHtml(node.display_name)+'</span><small>'+escapeHtml(node.statistical_code||typeLabel(node.display_type))+'</small>';
+   summary.addEventListener('dblclick',event=>{event.preventDefault();selectEntity(node.id,true);});
+   details.appendChild(summary);
+   let populated=false;
+   details.addEventListener('toggle',()=>{
+    if(!details.open||populated)return;
+    populated=true;
+    const list=document.createElement('div');list.className='tree-children';
+    for(const child of children)list.appendChild(makeNode(child,depth+1));
+    details.appendChild(list);
+   });
+   summary.title='Dublu-click pentru selectare pe hartă';
+   return details;
+  }
+  const button=document.createElement('button');
+  button.type='button';button.className='tree-leaf';
+  button.innerHTML='<span>'+escapeHtml(node.display_name)+'</span><small>'+escapeHtml(node.statistical_code||typeLabel(node.display_type))+'</small>';
+  button.addEventListener('click',()=>selectEntity(node.id,true));
+  return button;
+ };
+ container.innerHTML='';
+ for(const root of tree.roots||[])container.appendChild(makeNode(root,0));
 }
 
 function renderFilters(){
@@ -264,7 +311,7 @@ function rerenderLoadedTiers(){
 }
 function overviewRootIdFor(entity){
  let cursor=entity,depth=0;
- while(cursor&&cursor.map?.tier!=='overview'&&depth++<32)cursor=entityById.get(cursor.hierarchy?.parent_catalog_id)||null;
+ while(cursor&&cursor.map?.tier!=='overview'&&depth++<32)cursor=entityById.get(cursor.hierarchy?.administrative_parent_id||cursor.hierarchy?.parent_catalog_id)||null;
  return cursor?.map?.tier==='overview'?cursor.id:null;
 }
 function chunkKey(entry){return entry.jurisdiction+'_'+entry.tier+'_'+entry.root_entity_id;}
