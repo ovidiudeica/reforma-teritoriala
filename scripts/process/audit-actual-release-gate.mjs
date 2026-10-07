@@ -2,6 +2,7 @@
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import {actualSemanticFingerprint,byteFingerprintFromHashes} from '../lib/actual-semantic-fingerprint.mjs';
+import {validateStatisticalPublicActivation} from '../lib/actual-statistical-public.mjs';
 import {SOURCE_BUNDLE_GATE_PATH,SOURCE_BUNDLE_PATH,sha256 as sourceSha256,validateSourceBundleManifest} from '../lib/actual-source-bundle.mjs';
 import {BUILD_ENVIRONMENT_PATH,sha256 as environmentSha256,validateBuildEnvironmentManifest} from '../lib/actual-build-environment.mjs';
 import {REVIEW_EVIDENCE_BUNDLE_PATH,REVIEW_EVIDENCE_GATE_PATH,sha256 as reviewEvidenceSha256,validateReviewEvidenceBundle} from '../lib/actual-review-evidence-bundle.mjs';
@@ -54,6 +55,13 @@ const siruta=json('ro_official');
 const cuatm=json('md_official');
 const mdIndividual=json('md_individual_review');
 const mdSemantic=json('md_semantic_bridge');
+const statisticalActive=manifest.statistical_model?.activated===true;
+const statisticalActivation=statisticalActive?json('statistical_activation'):null;
+const statisticalPolicy=statisticalActive?json('statistical_policy'):null;
+const statisticalContract=statisticalActive?json('statistical_contract'):null;
+const statisticalSourceBundle=statisticalActive?json('statistical_source_bundle'):null;
+const roStatisticalLayer=statisticalActive?json('statistical_ro_layer'):null;
+const mdStatisticalLayer=statisticalActive?json('statistical_md_layer'):null;
 const jurisdictions=['RO','MD'];
 const tierKeys=['ro_overview','ro_local','ro_detail','md_overview','md_local','md_detail'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -79,7 +87,15 @@ const semanticFingerprint=actualSemanticFingerprint({
  mdOfficial:cuatm,
  mdIndividualReview:mdIndividual,
  settlementPolicy,
- geometryRoleContract
+ geometryRoleContract,
+ ...(statisticalActive?{
+  statisticalActivation,
+  statisticalPolicy,
+  statisticalContract,
+  statisticalSourceBundle,
+  roStatisticalLayer,
+  mdStatisticalLayer
+ }:{})
 });
 const failures=[],checks=[];
 const check=(name,ok,detail={})=>{checks.push({name,ok:Boolean(ok),detail});if(!ok)failures.push({name,detail});};
