@@ -82,6 +82,19 @@ test('lazy depth 4/5 materialization opens ancestors synchronously and selection
  assert.ok(open.every(e=>e.open));
 });
 
+test('closed native disclosure keeps selection outside its hidden content and summary independent',async()=>{
+ const {controller}=harness();
+ const root=controller.getNode(tree.root_ids[0]);
+ root.wrapper.open=false;
+ assert.equal(root.wrapper.tagName,'DETAILS');
+ assert.equal(root.button.parentElement.tagName,'DIV');
+ assert.equal(root.wrapper.parentElement,root.button.parentElement);
+ assert.equal(root.wrapper.children[0].tagName,'SUMMARY');
+ assert.equal(root.wrapper.children[0].querySelectorAll('button').length,0);
+ await root.wrapper.children[0].click();
+ assert.equal(controller.selectedId,null);
+});
+
 test('scroll touches only the tree, is skipped for visible rows, and repeated selection does not jitter',()=>{
  const container=new Element(),button=new Element();container.rect={top:10,bottom:110,height:100};
  button.rect={top:40,bottom:70,height:30};revealInTree(container,button);assert.equal(container.scrollTop,0);

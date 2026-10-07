@@ -3,10 +3,10 @@
 .filter-section{border-top:1px solid #e0e4e1;padding-top:8px}.filter-section h3{margin:8px 0}.filter-actions{display:flex;gap:8px;margin-bottom:6px}.filter-actions button{border:0;background:transparent;color:#365b4a;padding:2px 0;font-size:11px;cursor:pointer;text-decoration:underline}.filter-row span{flex:1}.filter-row small{white-space:nowrap;color:#69736e;font-variant-numeric:tabular-nums}.tree-select.selected{background:#edf1ed;font-weight:700;border-radius:3px}
 /* Atlas: native keyboard disclosure and a separate entity selection button. */
 .tree-node{position:relative;min-height:30px}
-.tree-branch>.tree-toggle{display:block;width:20px;height:30px;cursor:pointer;list-style:none}
+.tree-disclosure>.tree-toggle{display:block;width:20px;height:30px;cursor:pointer;list-style:none}
 .tree-toggle::-webkit-details-marker{display:none}
-.tree-branch>.tree-toggle:before{content:'▸';display:block;padding:7px 2px;color:#65716b}
-.tree-branch[open]>.tree-toggle:before{content:'▾'}
+.tree-disclosure>.tree-toggle:before{content:'▸';display:block;padding:7px 2px;color:#65716b}
+.tree-disclosure[open]>.tree-toggle:before{content:'▾'}
 .tree-branch>.tree-select{position:absolute;top:0;left:20px;width:calc(100% - 20px);min-height:30px}
 .tree-leaf>.tree-select{display:block;margin-left:20px;width:calc(100% - 20px);min-height:30px}
 .tree-select{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

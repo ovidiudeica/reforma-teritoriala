@@ -49,8 +49,10 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,ty
   const node=nodeById.get(id);
   if(!node)throw new Error('Atlas hierarchy: missing node '+id);
   const branch=hasChildren(nodeById,id);
-  const wrapper=document.createElement(branch?'details':'div');
-  wrapper.className='tree-node'+(branch?' tree-branch':' tree-leaf');
+  const outer=document.createElement('div');
+  outer.className='tree-node'+(branch?' tree-branch':' tree-leaf');
+  const wrapper=branch?document.createElement('details'):outer;
+  if(branch){wrapper.className='tree-disclosure';outer.appendChild(wrapper);}
   if(branch){
    const summary=document.createElement('summary');
    summary.className='tree-toggle';
@@ -67,7 +69,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,ty
    const code=document.createElement('span');code.className='tree-code';code.textContent=node.statistical_code;
    button.appendChild(code);
   }
-  wrapper.appendChild(button);
+  outer.appendChild(button);
   let children=null;
   const ensureChildren=()=>{
    if(!branch||children)return;
@@ -80,7 +82,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,ty
    wrapper.addEventListener('toggle',()=>{if(wrapper.open)ensureChildren();});
    if(rootIds.includes(id)){wrapper.open=true;ensureChildren();}
   }
-  return wrapper;
+  return outer;
  }
  container.innerHTML='';
  for(const root of rootIds)container.appendChild(makeNode(root));
