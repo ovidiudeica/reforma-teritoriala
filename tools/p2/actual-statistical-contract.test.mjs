@@ -54,9 +54,9 @@ test('P2.0 contract defines typed hierarchy reuse without administrative-parent 
  ]);
 });
 
-test('P2.0 gate fails if statistical activation is enabled before P2.1',async()=>{
+test('P2 activation gate fails on an incoherent policy phase',async()=>{
  const policy=await readJson(STATISTICAL_POLICY_PATH);
- policy.activated=true;
+ policy.phase=policy.activated?'P2_PREPARED':'P2_ACTIVATED';
  const report=await validateActualStatisticalContract({
   readFileFn:async path=>path===STATISTICAL_POLICY_PATH?buffer(policy):readFile(path)
  });
