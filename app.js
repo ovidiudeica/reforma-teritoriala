@@ -1,3 +1,4 @@
+import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
 import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
@@ -29,41 +30,12 @@ let releaseData=null;
 let hierarchyTree=null;
 const hierarchyNodeById=new Map();
 let atlasTree=null;
+let atlasSearch=null;
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
 
 
 const filterLabels=geometryLabels;
-const typeLabels={
- statistical_level_1:'nivel statistic 1',
- statistical_level_2:'nivel statistic 2',
- statistical_level_3:'nivel statistic 3',
- state:'stat (context teritorial)',
- county:'județ',
- district:'raion',
- capital_municipality:'municipiu-capitală',
- municipality:'municipiu',
- town:'oraș',
- commune:'comună',
- independent_village:'sat independent',
- chisinau_sector:'sector al municipiului Chișinău',
- local_uat:'UAT locală',
- sector:'sector',
- level_2_municipality:'municipiu de nivelul II',
- special_territorial_unit:'unitate teritorială specială',
- level_2_or_special_unit:'unitate administrativă de nivel superior',
- level_1_municipality:'municipiu de nivelul I',
- town_uat:'oraș',
- level_1_uat:'UAT de nivelul I',
- commune_or_independent_village_uat:'comună / sat independent',
- municipality_or_city_uat:'municipiu / oraș',
- component_locality:'localitate componentă',
- subdivision_or_component_area:'subdiviziune / localitate',
- intermediate_administrative_unit:'unitate administrativă intermediară',
- component_village_boundary_representation:'reprezentare de sat component',
- municipality_component_locality_boundary_representation:'reprezentare de localitate componentă',
- non_administrative_or_auxiliary_area:'zonă auxiliară'
-};
 const statusLabels={
  statistical_identity:'identitate statistică oficială',
  reconciled:'identitate oficială reconciliată',
@@ -74,8 +46,6 @@ const statusLabels={
 };
 
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-const norm=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-const typeLabel=type=>typeLabels[type]||String(type||'unitate administrativă').replaceAll('_',' ');
 function filterGroup(entity){return geometryClass(entity);}
 function isVisible(entity){
  return geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry});
@@ -181,47 +151,8 @@ function updateSelectionVisibility(){
 
 }
 
-function searchEntities(query){
- const q=norm(query);
- if(!q)return [];
- return [...entityById.values()].map(entity=>{
-  const fields=[
-   entity.display_name,...(entity.searchable_names||[]),
-   entity.legal?.id,entity.legal?.name,
-   entity.representation?.osm_relation_id,
-   entity.hierarchy?.legal_parent_name
-  ].map(norm).filter(Boolean);
-  const exact=fields.some(v=>v===q);
-  const starts=fields.some(v=>v.startsWith(q));
-  const contains=fields.some(v=>v.includes(q));
-  return {entity,score:exact?0:starts?1:contains?2:99};
- }).filter(x=>x.score<99).sort((a,b)=>a.score-b.score||a.entity.display_name.localeCompare(b.entity.display_name,'ro')).slice(0,20).map(x=>x.entity);
-}
-
 function wireSearch(){
- const input=document.getElementById('entity-search');
- const results=document.getElementById('search-results');
- const render=()=>{
-  const matches=searchEntities(input.value);
-  results.innerHTML='';
-  for(const entity of matches){
-   const button=document.createElement('button');
-   button.type='button';
-   button.className='search-result';
-   button.innerHTML='<b>'+escapeHtml(entity.display_name)+'</b><small>'+escapeHtml(entity.jurisdiction)+' · '+escapeHtml(typeLabel(entity.display_type))+(entity.legal?.id?' · '+escapeHtml(entity.legal.registry)+' '+escapeHtml(entity.legal.id):'')+'</small>';
-   button.addEventListener('click',async()=>{
-    input.value=entity.display_name;
-    results.innerHTML='';
-    await selectEntity(entity.id,{zoom:true,source:'search'});
-   });
-   results.appendChild(button);
-  }
-  if(input.value.trim()&&!matches.length)results.innerHTML='<p class="muted">Nicio entitate găsită.</p>';
- };
- input.addEventListener('input',render);
- input.addEventListener('keydown',event=>{
-  if(event.key==='Escape'){input.value='';results.innerHTML='';}
- });
+ atlasSearch=createAtlasSearch({input:document.getElementById('entity-search'),container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:selectEntity});
 }
 
 async function loadHierarchyTree(){
@@ -239,6 +170,7 @@ async function loadHierarchyTree(){
  hierarchyNodeById.clear();
  for(const node of tree.nodes||[])hierarchyNodeById.set(node.id,node);
  renderHierarchyTree();
+ atlasSearch?.updateIndex(createSearchIndex([...entityById.values()],hierarchyNodeById));
  return tree;
 }
 
@@ -542,4 +474,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
+export {atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
