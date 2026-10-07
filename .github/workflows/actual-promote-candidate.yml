@@ -132,9 +132,12 @@ jobs:
                   path.startswith('data/current/')
                   or path == 'public/data/actual-entities.json'
                   or path == 'public/data/actual-geometry-chunks.json'
+                  or path == 'public/data/actual-consolidated-tree.json'
                   or path.startswith('public/geo/current/')
                   or path.startswith('public/geo/actual/')
                   or path == 'data/sources/actual-settlement-policy.json'
+                  or path == 'data/sources/actual-statistical-policy.json'
+                  or path == 'schemas/actual-statistical-hierarchy-contract.json'
                   or path == 'data/sources/ro-siruta-current.json'
                   or path == 'data/sources/cuatm-current.json'
                   or path == 'data/sources/osm-current.json'
