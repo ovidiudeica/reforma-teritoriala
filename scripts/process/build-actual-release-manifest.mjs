@@ -11,6 +11,18 @@ import {HOST_TRUST_PATH,hostTrustFingerprint as computeHostTrustFingerprint,vali
 const OUTPUT='data/current/actual-release-manifest.json';
 const NETWORK_DENIAL='data/current/actual-network-denial-audit.json';
 const GEOMETRY_ROLE_CONTRACT='schemas/actual-geometry-role-contract.json';
+const STAT_PATHS={
+ activation:'data/current/actual-statistical-activation.json',
+ policy:'data/sources/actual-statistical-policy.json',
+ contract:'schemas/actual-statistical-hierarchy-contract.json',
+ source_bundle:'data/sources/actual-statistical-source-bundle.json',
+ ro_layer:'data/p2/actual-statistical-ro.json',
+ md_layer:'data/p2/actual-statistical-md.json',
+ ro_osm:'data/sources/ro-statistical-osm-current.json',
+ md_osm:'data/sources/md-statistical-osm-current.json',
+ ro_osm_snapshot:'data/sources/osm-statistical-snapshots/ro-nuts-2024.json.gz',
+ md_osm_snapshot:'data/sources/osm-statistical-snapshots/md-nuts-2017.json.gz'
+};
 const PATHS={
  catalog:'data/current/entities.json',
  inventory:'data/current/administrative-inventory.json',
@@ -92,6 +104,15 @@ const geometryRoleBindingActive=Boolean(
  && settlementPolicy?.geometry_role_contract?.contract===geometryRoleContract?.contract
  && Number(settlementPolicy?.geometry_role_contract?.schema_version)===Number(geometryRoleContract?.schema_version)
 );
+const statisticalActivationActive=settlementPolicy?.public_contract==='actual-public-entity-v3';
+const statisticalBuffers={};
+const statisticalDocs={};
+if(statisticalActivationActive){
+ for(const [key,path] of Object.entries(STAT_PATHS))statisticalBuffers[key]=await readFile(path);
+ for(const key of ['activation','policy','contract','source_bundle','ro_layer','md_layer','ro_osm','md_osm'])statisticalDocs[key]=JSON.parse(statisticalBuffers[key].toString('utf8'));
+ if(statisticalDocs.activation?.activated!==true||statisticalDocs.activation?.mode!=='ACTUAL_STATISTICAL_ACTIVATION')throw new Error('ACTUAL statistical activation marker is not active');
+ if(publicIndex.contract!=='actual-public-entity-v3'||Number(publicIndex.schema_version)!==3)throw new Error('Statistical activation requires public contract v3');
+}
 
 const jurisdictions=['RO','MD'];
 const entities=Array.isArray(catalog.entities)?catalog.entities:[];
@@ -112,6 +133,12 @@ if(geometryRoleBindingActive){
   bytes:geometryRoleContractBytes.byteLength
  };
 }
+if(statisticalActivationActive){
+ for(const [key,path] of Object.entries(STAT_PATHS)){
+  const buf=statisticalBuffers[key];
+  components['statistical_'+key]={path,sha256:sha256(buf),bytes:buf.byteLength};
+ }
+}
 const componentHashes=Object.fromEntries(Object.entries(components).map(([key,value])=>[key,value.sha256]));
 const byteFingerprint=byteFingerprintFromHashes(componentHashes);
 const semanticDocuments={
@@ -123,7 +150,15 @@ const semanticDocuments={
  mdOfficial:cuatm,
  mdIndividualReview,
  settlementPolicy,
- geometryRoleContract
+ geometryRoleContract,
+ ...(statisticalActivationActive?{
+  statisticalActivation:statisticalDocs.activation,
+  statisticalPolicy:statisticalDocs.policy,
+  statisticalContract:statisticalDocs.contract,
+  statisticalSourceBundle:statisticalDocs.source_bundle,
+  roStatisticalLayer:statisticalDocs.ro_layer,
+  mdStatisticalLayer:statisticalDocs.md_layer
+ }:{})
 };
 const semanticFingerprint=actualSemanticFingerprint(semanticDocuments);
 const BASE_REF=process.env.ACTUAL_BASE_REF||null;
@@ -135,7 +170,7 @@ let baseSemanticMatches=false;
 let contentIdentity={
  algorithm:semanticFingerprint.algorithm,
  sha256:semanticFingerprint.sha256,
- release_identity_basis:semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1',
+ release_identity_basis:semanticFingerprint.algorithm==='actual-semantic-v3'?'semantic_content_v3':semanticFingerprint.algorithm==='actual-semantic-v2'?'semantic_content_v2':'semantic_content_v1',
  reused_base_release:false
 };
 if(BASE_REF){
@@ -172,7 +207,8 @@ if(BASE_REF){
  }
 }
 const validTimes=[
- catalog.generated_at,roGate.generated_at,mdGate.generated_at,siruta.fetched_at,cuatm.fetched_at
+ catalog.generated_at,roGate.generated_at,mdGate.generated_at,siruta.fetched_at,cuatm.fetched_at,
+ ...(statisticalActivationActive?[statisticalDocs.ro_layer?.generated_at,statisticalDocs.md_layer?.generated_at]:[])
 ].filter(Boolean).map(x=>new Date(x)).filter(x=>Number.isFinite(x.getTime()));
 const generatedAt=(validTimes.length?new Date(Math.max(...validTimes.map(x=>x.getTime()))):new Date(0)).toISOString();
 const tier=(jurisdiction,name)=>{
@@ -186,7 +222,7 @@ const tier=(jurisdiction,name)=>{
 };
 
 const manifest={
- schema_version:geometryRoleBindingActive?9:8,
+ schema_version:statisticalActivationActive?10:geometryRoleBindingActive?9:8,
  mode:'ACTUAL',
  snapshot_id:snapshotId,
  generated_at:generatedAt,
@@ -265,6 +301,24 @@ const manifest={
   as_of:inventory.as_of??null,
   sha256:components.inventory.sha256
  },
+ ...(statisticalActivationActive?{
+  statistical_model:{
+   activated:true,
+   activation:{path:STAT_PATHS.activation,sha256:components.statistical_activation.sha256,fingerprint:statisticalDocs.activation.activation_fingerprint_sha256},
+   policy:{path:STAT_PATHS.policy,sha256:components.statistical_policy.sha256},
+   contract:{path:STAT_PATHS.contract,sha256:components.statistical_contract.sha256,contract:statisticalDocs.contract.contract},
+   source_bundle:{path:STAT_PATHS.source_bundle,sha256:components.statistical_source_bundle.sha256,bundle_fingerprint_sha256:statisticalDocs.source_bundle.bundle_fingerprint_sha256},
+   layers:{
+    RO:{path:STAT_PATHS.ro_layer,sha256:components.statistical_ro_layer.sha256,fingerprint:statisticalDocs.ro_layer.layer_fingerprint_sha256},
+    MD:{path:STAT_PATHS.md_layer,sha256:components.statistical_md_layer.sha256,fingerprint:statisticalDocs.md_layer.layer_fingerprint_sha256}
+   },
+   public_entity_count:publicIndex.entity_count,
+   administrative_entity_count:publicIndex.administrative_entity_count,
+   statistical_only_entity_count:publicIndex.statistical_only_entity_count,
+   hierarchy_contract:publicIndex.hierarchy_tree?.contract??null,
+   hierarchy_node_count:publicIndex.hierarchy_tree?.node_count??null
+  }
+ }:{ }),
  settlement_policy:{
   path:PATHS.settlement_policy,
   schema_version:settlementPolicy.schema_version??null,
@@ -298,6 +352,10 @@ const manifest={
   entity_count_by_jurisdiction:publicIndex.entity_count_by_jurisdiction??null,
   legal_identity_status_counts:publicIndex.legal_identity_status_counts??null,
   sha256:components.public_index.sha256,
+  ...(statisticalActivationActive?{
+   schema_path:'schemas/actual-public-entity-v3.schema.json',
+   hierarchy:{contract:publicIndex.hierarchy_tree?.contract??null,root_count:publicIndex.hierarchy_tree?.root_count??null,node_count:publicIndex.hierarchy_tree?.node_count??null}
+  }:{ }),
   geometry_chunks:{
    path:PATHS.public_chunks,
    contract:publicChunks.contract??null,
