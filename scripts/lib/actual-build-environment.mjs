@@ -55,6 +55,8 @@ export const BUILD_SUPPORT_FILES=[
  'scripts/process/verify-actual-persisted-base.mjs',
  'scripts/process/run-actual-deterministic-candidate.sh',
  'scripts/lib/actual-candidate-lifecycle.mjs',
+ 'scripts/lib/actual-semantic-fingerprint.mjs',
+ 'scripts/lib/actual-statistical-public.mjs',
  'scripts/process/build-actual-candidate-diff.mjs',
  'scripts/process/prepare-actual-candidate-promotion.mjs',
  'scripts/process/write-actual-candidate-execution-receipt.mjs'
