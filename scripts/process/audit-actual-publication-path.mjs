@@ -105,11 +105,11 @@ if(/^actual\/candidate-/.test(headRef??'')){
   'tools/p2/actual-statistical-contract.test.mjs'
  ]);
  const forbidden=changed.filter(path=>!allowedPrep.has(path));
- const basePolicy=JSON.parse(execFileSync('git',['show',base+':data/sources/actual-statistical-policy.json'],{encoding:'utf8'}));
+ const basePolicy=JSON.parse(execFileSync('git',['show',base+':data/sources/actual-statistical-policy.json'],{encoding:'utf8',maxBuffer:256*1024*1024}));
  const headPolicy=JSON.parse(await readFile('data/sources/actual-statistical-policy.json','utf8'));
- const baseManifest=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json'],{encoding:'utf8'}));
+ const baseManifest=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json'],{encoding:'utf8',maxBuffer:256*1024*1024}));
  const headManifest=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
- const basePublic=JSON.parse(execFileSync('git',['show',base+':public/data/actual-entities.json'],{encoding:'utf8'}));
+ const basePublic=JSON.parse(execFileSync('git',['show',base+':public/data/actual-entities.json'],{encoding:'utf8',maxBuffer:256*1024*1024}));
  const headPublic=JSON.parse(await readFile('public/data/actual-entities.json','utf8'));
  check(forbidden.length===0,'p2_public_prep_changed_forbidden_paths',{paths:forbidden});
  check(basePolicy.activated===false&&headPolicy.activated===false,'p2_public_prep_must_not_activate_policy');
