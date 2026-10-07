@@ -123,18 +123,27 @@ test('real frontend controller synchronizes map/search/tree/breadcrumb/details a
   }result.addTo=target=>{target.addLayer(result);return result;};return result;}
  };
  const manifest={snapshot_id:'fixture',public_contract:{contract:index.contract,path:'index',entity_count:5848,hierarchy:{path:'tree'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
+ let resolveHierarchy,notifyHierarchy;
+ const hierarchyRequested=new Promise(resolve=>{notifyHierarchy=resolve;});
+ const hierarchyPayload=new Promise(resolve=>{resolveHierarchy=resolve;});
  const fetch=async path=>({ok:true,json:async()=>{
   if(path==='data/current/actual-release-manifest.json')return manifest;
   if(path==='data/current/actual-release-gate.json')return {status:'PASS',snapshot_id:'fixture'};
   if(path==='public/data/app-build-info.json')return null;
-  if(path==='index')return index;if(path==='tree')return tree;
+  if(path==='index')return index;if(path==='tree'){notifyHierarchy();return hierarchyPayload;}
   const [jurisdiction,tier]=path.split('/');
   const found=index.entities.filter(e=>e.jurisdiction===jurisdiction&&(tier==='stat'?e.category==='statistical':e.category!=='statistical'&&e.map.tier===tier));
   return {metadata:tier==='stat'?{contract:'actual-public-statistical-geometry-v1',jurisdiction}:{jurisdiction,tier},features:found.map(e=>({properties:{entity_id:e.id}}))};
  }});
  const previous={document:globalThis.document,L:globalThis.L,fetch:globalThis.fetch};
  try{
-  Object.assign(globalThis,{document,L,fetch});const app=await import('../../app.js?atlas-tests');await app.frontendReady;
+  Object.assign(globalThis,{document,L,fetch});const app=await import('../../app.js?atlas-tests');
+  await hierarchyRequested;
+  // Search is already wired while the lazy hierarchy request is still pending.
+  app.activeFilterGroups.delete(geometryClass(entities.get(deep.id)));
+  await app.selectEntity(deep.id,{source:'search'});
+  assert.equal(app.selectedEntityId,deep.id);
+  resolveHierarchy(tree);await app.frontendReady;
   const container=document.getElementById('hierarchy-tree'),body=document.getElementById('details-body');
   const assertSelection=id=>{
    assert.equal(app.selectedEntityId,id);assert.equal(document.getElementById('details-title').textContent,entities.get(id).display_name);
@@ -143,6 +152,7 @@ test('real frontend controller synchronizes map/search/tree/breadcrumb/details a
    assert.deepEqual(nav.querySelectorAll('button').map(b=>b.dataset.entityId),ancestorPath(nodes,tree.root_ids,id));
    for(const button of nav.querySelectorAll('button'))assert.ok(button.textContent.startsWith(nodes.get(button.dataset.entityId).display_name));
   };
+  assertSelection(deep.id); // Loading the hierarchy must rebuild the early breadcrumb.
   const entity=entities.get(deep.id),cls=geometryClass(entity);
   app.activeFilterGroups.delete(cls);await app.selectEntity(deep.id,{zoom:true,source:'map'});assertSelection(deep.id);
   assert.equal(app.activeFilterGroups.has(cls),false);assert.equal(fitBounds.length,0);

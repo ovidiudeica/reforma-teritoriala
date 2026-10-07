@@ -287,7 +287,11 @@ function renderHierarchyTree(){
  if(!container||!hierarchyTree)return;
  atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,
   onSelect:(id,options)=>selectEntity(id,options).catch(console.error)});
- if(selectedEntityId)atlasTree.select(selectedEntityId);
+ if(selectedEntityId){
+  atlasTree.select(selectedEntityId);
+  renderDetails(entityById.get(selectedEntityId));
+  updateSelectionVisibility();
+ }
 }
 function selectedPath(id){
  if(!hierarchyTree)return [];
