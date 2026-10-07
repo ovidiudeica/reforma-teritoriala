@@ -397,26 +397,50 @@ function renderDetails(entity){
  const body=document.getElementById('details-body');
  title.textContent=entity.display_name;
  const legal=entity.legal;
- const parent=entity.hierarchy?.parent_catalog_id&&entityById.get(entity.hierarchy.parent_catalog_id);
- const parentValue=parent?'<button type="button" class="parent-button" data-parent="'+escapeHtml(parent.id)+'">'+escapeHtml(parent.display_name)+'</button>':escapeHtml(entity.hierarchy?.parent_name||'—');
+ const adminParentId=entity.hierarchy?.administrative_parent_id||entity.hierarchy?.parent_catalog_id||null;
+ const statParentId=entity.hierarchy?.statistical_parent_id||entity.statistical_membership?.parent_entity_id||null;
+ const navParentId=entity.hierarchy?.navigation_parent_id||adminParentId;
+ const adminParent=adminParentId&&entityById.get(adminParentId);
+ const statParent=statParentId&&entityById.get(statParentId);
+ const navParent=navParentId&&entityById.get(navParentId);
+ const parentButton=(parent,label)=>parent
+  ?'<button type="button" class="parent-button" data-parent="'+escapeHtml(parent.id)+'">'+escapeHtml(parent.display_name)+'</button>'
+  :escapeHtml(label||'—');
  const legalHtml=legal
-  ?'<section class="details-section"><h3>Identitate oficială</h3><dl class="kv">'+
+  ?'<section class="details-section"><h3>Identitate administrativă oficială</h3><dl class="kv">'+
     detailRow('Registru',legal.registry)+detailRow('ID',legal.id)+detailRow('Denumire',legal.name)+detailRow('Tip juridic',legal.type?typeLabel(legal.type):null)+
     detailRow('Părinte legal',legal.parent_name)+detailRow('Metodă',legal.match_method)+detailRow('Încredere',legal.confidence)+
     '</dl></section>'
-  :'<section class="details-section"><h3>Identitate oficială</h3><p class="muted">Nu este atașată o identitate juridică pozitivă acestei reprezentări în contractul public ACTUAL.</p></section>';
+  :entity.category==='statistical'
+   ?''
+   :'<section class="details-section"><h3>Identitate administrativă oficială</h3><p class="muted">Nu este atașată o identitate juridică pozitivă acestei reprezentări în contractul public ACTUAL.</p></section>';
+ const statistical=entity.statistical||entity.statistical_membership;
+ const statisticalHtml=statistical
+  ?'<section class="details-section"><h3>Clasificare statistică</h3><dl class="kv">'+
+    detailRow('Clasificare',statistical.classification)+detailRow('Versiune',statistical.version)+
+    detailRow('Cod',statistical.code||statistical.component_statistical_code)+detailRow('Nivel',statistical.level)+
+    '<dt>Părinte statistic</dt><dd>'+parentButton(statParent,statistical.parent_code)+'</dd>'+
+    detailRow('Autoritate',statistical.identity_authority||null)+
+    '</dl></section>'
+  :'';
+ const geometryLabel=entity.representation.geometry_role==='statistical_representation'
+  ?'coordonate din snapshot-ul OSM statistic validat, fără simplificare'
+  :'coordonate master, fără simplificare';
  body.innerHTML=
   '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
   detailRow('Jurisdicție',entity.jurisdiction)+detailRow('Tip afișat',typeLabel(entity.display_type))+
-  '<dt>Părinte hartă</dt><dd>'+parentValue+'</dd></dl></section>'+
+  '<dt>Părinte în arbore</dt><dd>'+parentButton(navParent,entity.hierarchy?.parent_name)+'</dd>'+
+  '<dt>Părinte administrativ</dt><dd>'+parentButton(adminParent,entity.hierarchy?.parent_name)+'</dd></dl></section>'+
+  statisticalHtml+
   legalHtml+
   '<section class="details-section"><h3>Reprezentare cartografică</h3><dl class="kv">'+
-  detailRow('Sursă','OpenStreetMap')+detailRow('Relație OSM',entity.representation.osm_relation_id)+detailRow('admin_level',entity.representation.admin_level)+
-  detailRow('Tip OSM/inferat',typeLabel(entity.representation.inferred_type))+detailRow('Geometrie','coordonate master, fără simplificare')+
+  detailRow('Sursă',entity.representation.source)+detailRow('Relație OSM',entity.representation.osm_relation_id)+detailRow('admin_level',entity.representation.admin_level)+
+  detailRow('Tip OSM/inferat',typeLabel(entity.representation.inferred_type))+detailRow('Geometrie',geometryLabel)+
   detailRow('Încredere',entity.validation.representation_confidence)+
-  '</dl><div class="details-actions"><a class="action-button" href="'+escapeHtml(entity.representation.source_url)+'" target="_blank" rel="noopener">Deschide în OSM</a><button type="button" class="action-button" id="zoom-selected">Zoom la entitate</button></div></section>';
- const parentButton=body.querySelector('[data-parent]');
- if(parentButton)parentButton.addEventListener('click',()=>selectEntity(parentButton.dataset.parent,true));
+  '</dl><div class="details-actions">'+
+  (entity.representation.source_url?'<a class="action-button" href="'+escapeHtml(entity.representation.source_url)+'" target="_blank" rel="noopener">Deschide în OSM</a>':'')+
+  '<button type="button" class="action-button" id="zoom-selected">Zoom la entitate</button></div></section>';
+ for(const parentLink of body.querySelectorAll('[data-parent]'))parentLink.addEventListener('click',()=>selectEntity(parentLink.dataset.parent,true));
  const zoomButton=body.querySelector('#zoom-selected');
  if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
 }
