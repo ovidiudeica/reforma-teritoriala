@@ -90,6 +90,7 @@ if(/^actual\/candidate-/.test(headRef??'')){
   'app.js','index.html','style.css',
   'schemas/actual-public-entity-v3.schema.json',
   'schemas/actual-statistical-hierarchy-contract.json',
+  'scripts/lib/actual-semantic-fingerprint.mjs',
   'scripts/lib/actual-statistical-public.mjs',
   'scripts/process/audit-actual-publication-path.mjs',
   'scripts/process/audit-actual-release-gate.mjs',
