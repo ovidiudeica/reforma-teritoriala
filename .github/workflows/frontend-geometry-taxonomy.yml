@@ -1,0 +1,23 @@
+name: Frontend geometry taxonomy
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  frontend-geometry-taxonomy:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - name: Install frozen dependencies
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check geometry-taxonomy.mjs
+      - name: Run frontend and P2 public regressions
+        run: node --test scripts/test/frontend-smoke.test.mjs scripts/test/actual-statistical-public.test.mjs scripts/test/frontend-geometry-taxonomy.test.mjs
+      - name: Verify tests leave tracked data unchanged
+        run: git diff --exit-code

@@ -1,3 +1,5 @@
+import {geometryClass,geometryVisible,geometryLabels,administrativeClasses,statisticalLevel} from './geometry-taxonomy.mjs';
+
 const map=L.map('map',{zoomControl:true}).setView([46.8,26.6],6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
 L.control.scale({imperial:false}).addTo(map);
@@ -10,8 +12,13 @@ const chunkData=new Map();
 const chunkGroups=new Map();
 let chunkIndex=null;
 const entityById=new Map();
-const activeFilterGroups=new Set(['statistical','regional','municipality','town','commune','sector','locality','other']);
+const activeFilterGroups=new Set(Object.keys(geometryLabels));
+const activeStatisticalLevels=new Set([1,2,3,'unclassified']);
+let separateStatisticalGeometry=true;
+const statisticalGroups={RO:L.layerGroup(),MD:L.layerGroup()};
 let selectedEntityId=null;
+ rerenderLoadedTiers();
+ updateSelectionVisibility();
 let selectedLayer=null;
 let indexData=null;
 let releaseData=null;
@@ -19,18 +26,9 @@ let hierarchyTree=null;
 const hierarchyNodeById=new Map();
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
-let selectedStatLayer=null;
 
-const filterLabels={
- statistical:'Unități statistice',
- regional:'Județe, raioane și unități regionale',
- municipality:'Municipii',
- town:'Orașe',
- commune:'Comune / UAT rurale',
- sector:'Sectoare',
- locality:'Localități / subdiviziuni',
- other:'Alte reprezentări'
-};
+
+const filterLabels=geometryLabels;
 const typeLabels={
  statistical_level_1:'nivel statistic 1',
  statistical_level_2:'nivel statistic 2',
@@ -42,6 +40,9 @@ const typeLabels={
  municipality:'municipiu',
  town:'oraș',
  commune:'comună',
+ independent_village:'sat independent',
+ chisinau_sector:'sector al municipiului Chișinău',
+ local_uat:'UAT locală',
  sector:'sector',
  level_2_municipality:'municipiu de nivelul II',
  special_territorial_unit:'unitate teritorială specială',
@@ -70,30 +71,23 @@ const statusLabels={
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const norm=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const typeLabel=type=>typeLabels[type]||String(type||'unitate administrativă').replaceAll('_',' ');
-function filterGroup(entity){
- if(entity.category==='statistical')return 'statistical';
- const t=entity.display_type;
- if(['county','district','capital_municipality','level_2_municipality','special_territorial_unit','level_2_or_special_unit'].includes(t))return 'regional';
- if(['municipality','level_1_municipality','municipality_or_city_uat'].includes(t))return 'municipality';
- if(['town','town_uat'].includes(t))return 'town';
- if(['commune','level_1_uat','commune_or_independent_village_uat'].includes(t))return 'commune';
- if(t==='sector')return 'sector';
- if(['component_locality','subdivision_or_component_area','component_village_boundary_representation','municipality_component_locality_boundary_representation'].includes(t))return 'locality';
- return 'other';
-}
+function filterGroup(entity){return geometryClass(entity);}
 function isVisible(entity){
- return activeFilterGroups.has(filterGroup(entity));
+ return geometryVisible(entity,{geometryClasses:activeFilterGroups,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry});
 }
 function styleFor(feature){
- const p=feature.properties||{};
- const tier=p.tier;
- const group=filterGroup(entityById.get(p.entity_id)||{display_type:p.display_type});
- if(tier==='overview')return {color:'#203f59',weight:1.8,opacity:.85,fillColor:'#5d7b8c',fillOpacity:.035};
- if(group==='municipality')return {color:'#365e55',weight:1.25,opacity:.82,fillColor:'#6d9184',fillOpacity:.055};
- if(group==='town')return {color:'#5e6550',weight:1.05,opacity:.8,fillColor:'#90967a',fillOpacity:.05};
- if(group==='commune')return {color:'#6d735f',weight:.9,opacity:.72,fillColor:'#a2a58f',fillOpacity:.035};
- if(group==='sector'||group==='locality')return {color:'#806b50',weight:.8,opacity:.72,fillColor:'#b59b77',fillOpacity:.03};
- return {color:'#65716b',weight:.8,opacity:.7,fillColor:'#909b95',fillOpacity:.025};
+ const group=filterGroup(entityById.get(feature.properties?.entity_id));
+ const styles={
+  regional:{color:'#203f59',weight:1.8,fillColor:'#5d7b8c'},
+  local_uat:{color:'#365e55',weight:1.1,fillColor:'#6d9184'},
+  sector:{color:'#806b50',weight:.9,fillColor:'#b59b77'},
+  component_locality:{color:'#806b50',weight:.8,fillColor:'#b59b77'},
+  context:{color:'#203f59',weight:2,fillColor:'#5d7b8c'},
+  auxiliary:{color:'#65716b',weight:.8,fillColor:'#909b95'},
+  statistical_only:{color:'#66538c',weight:1.7,fillColor:'#a294bd',dashArray:'5 4'},
+  unclassified:{color:'#c12b72',weight:2,fillColor:'#c12b72'}
+ };
+ return {...styles[group],opacity:.8,fillOpacity:.035};
 }
 const selectedStyle={color:'#b54a38',weight:3,opacity:1,fillOpacity:.12};
 
@@ -163,20 +157,70 @@ function updateJurisdictionStatus(){
 
 function renderFilters(){
  const container=document.getElementById('filter-list');
+ const entities=[...entityById.values()];
  container.innerHTML='';
- for(const key of Object.keys(filterLabels)){
-  const count=[...entityById.values()].filter(e=>filterGroup(e)===key).length;
-  const row=document.createElement('label');
-  row.className='filter-row';
-  row.innerHTML='<input type="checkbox" data-filter="'+escapeHtml(key)+'" checked><span>'+escapeHtml(filterLabels[key])+' <small>('+count.toLocaleString('ro-RO')+')</small></span>';
-  container.appendChild(row);
- }
- container.addEventListener('change',event=>{
-  const input=event.target.closest('input[data-filter]');
+ const addSection=(title,keys,kind,labels,count,note)=>{
+  const section=document.createElement('section');
+  section.className='filter-section';
+  const heading=document.createElement('h3');heading.textContent=title;section.appendChild(heading);
+  const controls=document.createElement('div');controls.className='filter-actions';
+  for(const [label,enabled] of [['Toate',true],['Niciuna',false]]){
+   const button=document.createElement('button');button.type='button';button.textContent=label;
+   button.addEventListener('click',()=>{
+    for(const input of section.querySelectorAll('input[data-filter]')){
+     input.checked=enabled;applyFilter(input);
+    }
+    refreshGeometryVisibility();
+   });controls.appendChild(button);
+  }
+  section.appendChild(controls);
+  for(const key of keys){
+   const checked=kind==='geometry'?activeFilterGroups.has(key):activeStatisticalLevels.has(key);
+   const row=document.createElement('label');row.className='filter-row';
+   row.innerHTML='<input type="checkbox" data-kind="'+kind+'" data-filter="'+key+'"'+(checked?' checked':'')+'><span>'+escapeHtml(labels[key])+' <small>('+count(key).toLocaleString('ro-RO')+')</small></span>';
+   section.appendChild(row);
+  }
+  if(note){const p=document.createElement('p');p.className='hint';p.textContent=note;section.appendChild(p);}
+  container.appendChild(section);return section;
+ };
+ const geometryCount=key=>entities.filter(entity=>geometryClass(entity)===key).length;
+ addSection('Tipuri administrative',administrativeClasses,'geometry',filterLabels,geometryCount);
+ const levels=[1,2,3];
+ if(entities.some(entity=>statisticalLevel(entity)==='unclassified'))levels.push('unclassified');
+ const stats=addSection('Niveluri statistice',levels,'statistical',{1:'Nivel statistic 1',2:'Nivel statistic 2',3:'Nivel statistic 3',unclassified:'Rol statistic neclasificat'},key=>entities.filter(entity=>statisticalLevel(entity)===key).length,
+  '63 roluri statistice: 45 reutilizează geometria administrativă. Nivelurile controlează rolul statistic, inclusiv geometria reutilizată; filtrele administrative se aplică în continuare.');
+ const row=document.createElement('label');row.className='filter-row';
+ row.innerHTML='<input type="checkbox" data-separate-statistical'+(separateStatisticalGeometry?' checked':'')+'><span>Limite statistice separate <small>('+geometryCount('statistical_only')+')</small></span>';
+ stats.appendChild(row);
+ const note=document.createElement('p');note.className='hint';note.textContent='Cele 18 limite separate nu dublează cele 45 geometrii reutilizate.';stats.appendChild(note);
+ const other=['context','auxiliary'];
+ if(geometryCount('unclassified'))other.push('unclassified');
+ addSection('Alte reprezentări',other,'geometry',filterLabels,geometryCount);
+ container.onchange=event=>{
+  const input=event.target.closest('input');
   if(!input)return;
-  if(input.checked)activeFilterGroups.add(input.dataset.filter);else activeFilterGroups.delete(input.dataset.filter);
-  rerenderLoadedTiers();
- });
+  if(input.hasAttribute('data-separate-statistical'))separateStatisticalGeometry=input.checked;
+  else if(input.dataset.filter)applyFilter(input);
+  refreshGeometryVisibility();
+ };
+}
+function applyFilter(input){
+ const set=input.dataset.kind==='geometry'?activeFilterGroups:activeStatisticalLevels;
+ const key=input.dataset.kind==='geometry'?input.dataset.filter:input.dataset.filter==='unclassified'?'unclassified':Number(input.dataset.filter);
+ if(input.checked)set.add(key);else set.delete(key);
+}
+function refreshGeometryVisibility(){
+ rerenderLoadedTiers();
+ updateSelectionVisibility();
+}
+function updateSelectionVisibility(){
+ const entity=entityById.get(selectedEntityId);
+ const status=document.getElementById('selection-visibility');
+ if(status&&entity)status.textContent=isVisible(entity)?'':'Geometria este ascunsă de filtre. Selecția și detaliile rămân disponibile.';
+ for(const button of document.querySelectorAll('.tree-select[data-entity-id]')){
+  button.classList.toggle('selected',button.dataset.entityId===selectedEntityId);
+  button.setAttribute('aria-pressed',String(button.dataset.entityId===selectedEntityId));
+ }
 }
 
 function searchEntities(query){
@@ -256,6 +300,9 @@ function renderHierarchyTree(){
   button.type='button';
   button.className='tree-select';
   button.textContent=node.display_name;
+  button.dataset.entityId=node.id;
+  button.classList.toggle('selected',node.id===selectedEntityId);
+  button.setAttribute('aria-pressed',String(node.id===selectedEntityId));
   button.title=(node.statistical_code?node.statistical_code+' · ':'')+typeLabel(node.display_type);
   button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();selectEntity(node.id,true).catch(console.error);});
   row.appendChild(button);
@@ -287,8 +334,14 @@ async function ensureStatisticalGeometry(jurisdiction){
  if(!response.ok)throw new Error('Nu se poate încărca '+descriptor.path);
  const data=await response.json();
  if(data.metadata?.contract!=='actual-public-statistical-geometry-v1'||data.metadata?.jurisdiction!==jurisdiction)throw new Error('Geometrie statistică publică invalidă '+jurisdiction);
- for(const feature of data.features||[])statisticalFeatureById.set(feature.properties?.entity_id,feature);
+ for(const feature of data.features||[]){
+  const id=feature.properties?.entity_id;
+  if(geometryClass(entityById.get(id))!=='statistical_only')throw new Error('Geometrie statistică duplicată sau nevalidă: '+id);
+  statisticalFeatureById.set(id,feature);
+ }
  statisticalGeometryLoaded.add(jurisdiction);
+ renderStatisticalGeometry(jurisdiction);
+ if(!roots[jurisdiction].hasLayer(statisticalGroups[jurisdiction]))roots[jurisdiction].addLayer(statisticalGroups[jurisdiction]);
 }
 
 function tierPath(jurisdiction,tier){
@@ -335,7 +388,12 @@ function renderTier(jurisdiction,tier){
 function renderChunk(key){
  renderCollection(chunkGroups.get(key),chunkData.get(key));
 }
+function renderStatisticalGeometry(jurisdiction){
+ renderCollection(statisticalGroups[jurisdiction],{type:'FeatureCollection',features:[...statisticalFeatureById.values()].filter(feature=>entityById.get(feature.properties?.entity_id)?.jurisdiction===jurisdiction)});
+}
 function rerenderLoadedTiers(){
+ selectedLayer=null;
+ for(const jurisdiction of statisticalGeometryLoaded)renderStatisticalGeometry(jurisdiction);
  for(const key of tierData.keys()){
   const [jurisdiction,tier]=key.split('_');
   renderTier(jurisdiction,tier);
@@ -418,10 +476,7 @@ async function syncTiers(){
 function clearSelection(){
  selectedEntityId=null;
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
- if(selectedStatLayer){
-  for(const root of Object.values(roots))if(root.hasLayer(selectedStatLayer))root.removeLayer(selectedStatLayer);
-  selectedStatLayer=null;
- }
+
  document.getElementById('details-title').textContent='Nicio selecție';
  document.getElementById('details-body').innerHTML='<p class="muted">Selectează o limită de pe hartă sau caută o entitate după nume ori identificator.</p>';
 }
@@ -441,7 +496,7 @@ function renderDetails(entity){
   ?'<section class="details-section"><h3>Identitate statistică</h3><dl class="kv">'+
     detailRow('Clasificare',entity.statistical.classification)+detailRow('Versiune',entity.statistical.version)+detailRow('Cod',entity.statistical.code)+
     detailRow('Nivel',entity.statistical.level)+detailRow('Părinte statistic',entity.hierarchy?.statistical_parent_name)+
-    detailRow('Autoritate',entity.statistical.identity_authority)+
+    detailRow('Autoritate',entity.statistical.identity_authority)+detailRow('Geometrie',entity.category==='statistical'?'limită statistică separată':'geometrie administrativă reutilizată')+
     '</dl></section>'
   :'';
  const legalHtml=legal
@@ -452,12 +507,12 @@ function renderDetails(entity){
   :'<section class="details-section"><h3>Identitate oficială</h3><p class="muted">Nu este atașată o identitate juridică pozitivă acestei reprezentări în contractul public ACTUAL.</p></section>';
  body.innerHTML=
   '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
-  detailRow('Jurisdicție',entity.jurisdiction)+detailRow('Tip afișat',typeLabel(entity.display_type))+
+  detailRow('Jurisdicție',entity.jurisdiction)+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
   '<dt>Părinte în arbore</dt><dd>'+parentValue+'</dd></dl></section>'+
-  legalHtml+statisticalHtml+
+  '<p id="selection-visibility" class="hint"></p>'+legalHtml+statisticalHtml+
   '<section class="details-section"><h3>Reprezentare cartografică</h3><dl class="kv">'+
   detailRow('Sursă',entity.representation.source)+detailRow('Relație OSM',entity.representation.osm_relation_id)+detailRow('admin_level',entity.representation.admin_level)+
-  detailRow('Tip OSM/inferat',typeLabel(entity.representation.inferred_type))+detailRow('Geometrie','coordonate master, fără simplificare')+
+  detailRow('Tip reprezentare',typeLabel(entity.representation.inferred_type))+detailRow('Geometrie','coordonate master, fără simplificare')+
   detailRow('Încredere',entity.validation.representation_confidence)+
   '</dl><div class="details-actions"><a class="action-button" href="'+escapeHtml(entity.representation.source_url)+'" target="_blank" rel="noopener">Deschide în OSM</a><button type="button" class="action-button" id="zoom-selected">Zoom la entitate</button></div></section>';
  const parentButton=body.querySelector('[data-parent]');
@@ -474,12 +529,12 @@ async function selectEntity(id,zoom=false,clickedLayer=null){
  const entity=entityById.get(id);
  if(!entity)return;
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
- if(selectedStatLayer){
-  for(const root of Object.values(roots))if(root.hasLayer(selectedStatLayer))root.removeLayer(selectedStatLayer);
-  selectedStatLayer=null;
- }
+
  selectedEntityId=id;
  renderDetails(entity);
+ updateSelectionVisibility();
+ rerenderLoadedTiers();
+ if(!isVisible(entity))return;
  if(zoom)zoomToEntity(entity);
  const checkbox=document.getElementById('layer-'+entity.jurisdiction.toLowerCase());
  if(checkbox&&!checkbox.checked){checkbox.checked=true;roots[entity.jurisdiction].addTo(map);}
@@ -487,9 +542,8 @@ async function selectEntity(id,zoom=false,clickedLayer=null){
   await ensureStatisticalGeometry(entity.jurisdiction);
   const feature=statisticalFeatureById.get(entity.id);
   if(!feature)throw new Error('Lipsește geometria statistică pentru '+entity.id);
-  selectedStatLayer=L.geoJSON({type:'FeatureCollection',features:[feature]},{smoothFactor:0,style:selectedStyle,onEachFeature:(f,layer)=>layer.bindTooltip(entity.display_name,{sticky:true,className:'entity-tooltip'})});
-  roots[entity.jurisdiction].addLayer(selectedStatLayer);
-  if(zoom)zoomToEntity(entity);
+  if(selectedEntityId!==id||!isVisible(entity))return;
+  renderStatisticalGeometry(entity.jurisdiction);
   return;
  }
  if(entity.map.tier==='overview'||!chunkIndex)await ensureTier(entity.jurisdiction,entity.map.tier);
@@ -500,8 +554,8 @@ async function selectEntity(id,zoom=false,clickedLayer=null){
   await ensureChunk(entry);
  }
  await syncTiers();
- if(clickedLayer){clickedLayer.setStyle(selectedStyle);selectedLayer=clickedLayer;return;}
- for(const group of [...Object.values(tierGroups),...chunkGroups.values()]){
+ if(selectedEntityId!==id||!isVisible(entity))return;
+ for(const group of [...Object.values(tierGroups),...chunkGroups.values(),...Object.values(statisticalGroups)]){
   group.eachLayer(container=>{
    const inspect=layer=>{
     if(layer.feature?.properties?.entity_id===id){layer.setStyle(selectedStyle);selectedLayer=layer;}
@@ -521,6 +575,7 @@ map.on('zoomend moveend',()=>syncTiers().catch(console.error));
   await loadIndex();
   await loadHierarchyTree();
   await loadChunkIndex();
+  await Promise.all(['RO','MD'].map(ensureStatisticalGeometry));
   await Promise.all([ensureTier('RO','overview'),ensureTier('MD','overview')]);
   await syncTiers();
  }catch(e){
