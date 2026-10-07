@@ -28,7 +28,7 @@ const read=async path=>JSON.parse(await readFile(path,'utf8'));
 const [catalog,roGeo,mdGeo,mdRecon,mdNonCuatm,mdIndividual,roCountyBridge,mdSemanticBridge,settlementPolicy]=await Promise.all([
  read(CATALOG),read(RO_GEO),read(MD_GEO),read(MD_RECON),read(MD_NON_CUATM),read(MD_INDIVIDUAL),read(RO_COUNTY_BRIDGE),read(MD_SEMANTIC_BRIDGE),read(SETTLEMENT_POLICY)
 ]);
-const publicContractV2=settlementPolicy?.public_contract==='actual-public-entity-v2';
+const publicContractV2=['actual-public-entity-v2','actual-public-entity-v3'].includes(settlementPolicy?.public_contract);
 if(roCountyBridge.status!=='PASS')throw new Error('RO county SIRUTA bridge is not PASS');
 if(mdSemanticBridge.status!=='PASS')throw new Error('MD CUATM semantic bridge is not PASS');
 
