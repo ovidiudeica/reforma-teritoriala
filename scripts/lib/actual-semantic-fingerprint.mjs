@@ -60,11 +60,17 @@ const geometryRoleBindingIsActive=(settlementPolicy,geometryRoleContract)=>{
 
 export function actualSemanticPayload(documents){
  const {
-  catalog,inventory,roGeo,mdGeo,roOfficial,mdOfficial,mdIndividualReview,settlementPolicy,geometryRoleContract
+  catalog,inventory,roGeo,mdGeo,roOfficial,mdOfficial,mdIndividualReview,settlementPolicy,geometryRoleContract,
+  statisticalActivation,statisticalPolicy,statisticalContract,statisticalSourceBundle,roStatisticalLayer,mdStatisticalLayer
  }=documents;
  const geometryRoleBound=geometryRoleBindingIsActive(settlementPolicy,geometryRoleContract);
+ const statisticalBound=Boolean(
+  statisticalActivation?.mode==='ACTUAL_STATISTICAL_ACTIVATION'
+  && statisticalActivation?.activated===true
+  && settlementPolicy?.public_contract==='actual-public-entity-v3'
+ );
  return canonicalize({
-  algorithm:geometryRoleBound?'actual-semantic-v2':'actual-semantic-v1',
+  algorithm:statisticalBound?'actual-semantic-v3':geometryRoleBound?'actual-semantic-v2':'actual-semantic-v1',
   jurisdictions:['RO','MD'],
   catalog:{
    schema_version:catalog?.schema_version??null,
@@ -83,7 +89,17 @@ export function actualSemanticPayload(documents){
   },
   reviewed_identity:canonicalize(mdIndividualReview,{dropNonAdministrativeMetadata:true}),
   settlement_policy:canonicalize(settlementPolicy,{dropNonAdministrativeMetadata:true}),
-  ...(geometryRoleBound?{geometry_role_contract:canonicalize(geometryRoleContract,{dropNonAdministrativeMetadata:true})}:{})
+  ...(geometryRoleBound?{geometry_role_contract:canonicalize(geometryRoleContract,{dropNonAdministrativeMetadata:true})}:{}),
+  ...(statisticalBound?{
+   statistical_activation:canonicalize(statisticalActivation,{dropNonAdministrativeMetadata:true}),
+   statistical_policy:canonicalize(statisticalPolicy,{dropNonAdministrativeMetadata:true}),
+   statistical_contract:canonicalize(statisticalContract,{dropNonAdministrativeMetadata:true}),
+   statistical_source_bundle:canonicalize(statisticalSourceBundle,{dropNonAdministrativeMetadata:true}),
+   statistical_layers:{
+    RO:canonicalize(roStatisticalLayer,{dropNonAdministrativeMetadata:true}),
+    MD:canonicalize(mdStatisticalLayer,{dropNonAdministrativeMetadata:true})
+   }
+  }:{})
  });
 }
 
