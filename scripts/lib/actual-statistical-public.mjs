@@ -1,51 +1,83 @@
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {readFile,writeFile} from 'node:fs/promises';
-import {createRequire} from 'node:module';
-
-const require=createRequire(import.meta.url);
-let geoDeps=null;
-function loadGeoDeps(){
- if(!geoDeps){
-  const osmModule=require('osmtogeojson');
-  const turf=require('@turf/turf');
-  geoDeps={osmtogeojson:osmModule?.default??osmModule,bbox:turf.bbox,centroid:turf.centroid};
+function joinWayRings(ways,label){
+ const pending=ways.map(nodes=>[...nodes]);
+ const rings=[];
+ while(pending.length){
+  let ring=pending.shift();
+  if(ring.length<2)throw new Error('Invalid '+label+' way');
+  let guard=0;
+  while(ring[0]!==ring[ring.length-1]){
+   if(guard++>ways.length*4)throw new Error('Cannot close '+label+' ring');
+   const startNode=ring[0],endNode=ring[ring.length-1];
+   let found=-1,mode=null;
+   for(let i=0;i<pending.length;i++){
+    const seq=pending[i],a=seq[0],b=seq[seq.length-1];
+    if(a===endNode){found=i;mode='append';break;}
+    if(b===endNode){found=i;mode='append-reverse';break;}
+    if(b===startNode){found=i;mode='prepend';break;}
+    if(a===startNode){found=i;mode='prepend-reverse';break;}
+   }
+   if(found<0)throw new Error('Open '+label+' boundary at node '+endNode);
+   let seq=pending.splice(found,1)[0];
+   if(mode==='append-reverse'||mode==='prepend-reverse')seq=seq.reverse();
+   if(mode==='append'||mode==='append-reverse')ring=[...ring,...seq.slice(1)];
+   else ring=[...seq.slice(0,-1),...ring];
+  }
+  rings.push(ring);
  }
- return geoDeps;
+ return rings;
 }
 
-export const STATISTICAL_POLICY_PATH='data/sources/actual-statistical-policy.json';
-export const STATISTICAL_CONTRACT_PATH='schemas/actual-statistical-hierarchy-contract.json';
-export const SETTLEMENT_POLICY_PATH='data/sources/actual-settlement-policy.json';
-export const STATISTICAL_SOURCE_BUNDLE_PATH='data/sources/actual-statistical-source-bundle.json';
-export const RO_LAYER_PATH='data/p2/actual-statistical-ro.json';
-export const MD_LAYER_PATH='data/p2/actual-statistical-md.json';
-export const RO_OSM_MANIFEST_PATH='data/sources/ro-statistical-osm-current.json';
-export const MD_OSM_MANIFEST_PATH='data/sources/md-statistical-osm-current.json';
-export const PUBLIC_INDEX_PATH='public/data/actual-entities.json';
-export const RO_OVERVIEW_PATH='public/geo/actual/ro-overview.geojson';
-export const MD_OVERVIEW_PATH='public/geo/actual/md-overview.geojson';
-export const ACTIVATION_MARKER_PATH='data/current/actual-statistical-activation.json';
-export const PUBLIC_CONTRACT='actual-public-entity-v3';
-export const PUBLIC_SCHEMA_VERSION=3;
-export const HIERARCHY_CONTRACT='actual-public-hierarchy-v1';
-
-export const sha256=value=>createHash('sha256').update(value).digest('hex');
-const json=async(path,readFileFn=readFile)=>JSON.parse((await readFileFn(path)).toString('utf8'));
-const unique=values=>[...new Set(values.filter(Boolean))];
+function pointInRing(point,ring){
+ let inside=false;
+ const [x,y]=point;
+ for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+  const [xi,yi]=ring[i],[xj,yj]=ring[j];
+  const crosses=((yi>y)!==(yj>y))&&(x<((xj-xi)*(y-yi))/((yj-yi)||Number.EPSILON)+xi);
+  if(crosses)inside=!inside;
+ }
+ return inside;
+}
 
 function relationFeature(snapshot,relationId){
- const {osmtogeojson}=loadGeoDeps();
- const converted=osmtogeojson(snapshot,{flatProperties:false});
- const wanted='relation/'+String(relationId);
- const feature=(converted.features||[]).find(f=>String(f.id)===wanted||String(f.properties?.id??'')===wanted);
- if(!feature||!['Polygon','MultiPolygon'].includes(feature.geometry?.type))throw new Error('Missing polygonal statistical OSM relation '+relationId);
- return {type:'Feature',properties:{},geometry:feature.geometry};
+ const nodes=new Map((snapshot.elements||[]).filter(x=>x.type==='node').map(x=>[x.id,[Number(x.lon),Number(x.lat)]]));
+ const ways=new Map((snapshot.elements||[]).filter(x=>x.type==='way').map(x=>[x.id,x.nodes||[]]));
+ const relation=(snapshot.elements||[]).find(x=>x.type==='relation'&&Number(x.id)===Number(relationId));
+ if(!relation)throw new Error('Missing statistical OSM relation '+relationId);
+ const memberWays=role=>(relation.members||[])
+  .filter(m=>m.type==='way'&&(role==='outer'?(m.role==='outer'||m.role===''):m.role===role))
+  .map(m=>{const seq=ways.get(m.ref);if(!seq)throw new Error('Missing way '+m.ref+' for relation '+relationId);return seq;});
+ const outerNodeRings=joinWayRings(memberWays('outer'),'outer relation '+relationId);
+ const innerMembers=memberWays('inner');
+ const innerNodeRings=innerMembers.length?joinWayRings(innerMembers,'inner relation '+relationId):[];
+ const coordinates=nodeRing=>nodeRing.map(id=>{const point=nodes.get(id);if(!point)throw new Error('Missing node '+id+' for relation '+relationId);return point;});
+ const outers=outerNodeRings.map(coordinates),inners=innerNodeRings.map(coordinates);
+ const polygons=outers.map(outer=>[outer]);
+ for(const inner of inners){
+  const point=inner[0];
+  const index=outers.findIndex(outer=>pointInRing(point,outer));
+  if(index<0)throw new Error('Unassigned inner ring for relation '+relationId);
+  polygons[index].push(inner);
+ }
+ const geometry=polygons.length===1?{type:'Polygon',coordinates:polygons[0]}:{type:'MultiPolygon',coordinates:polygons};
+ return {type:'Feature',properties:{},geometry};
+}
+
+function geometryPoints(value,out=[]){
+ if(!Array.isArray(value))return out;
+ if(value.length>=2&&typeof value[0]==='number'&&typeof value[1]==='number'){out.push(value);return out;}
+ for(const child of value)geometryPoints(child,out);
+ return out;
 }
 
 function mapMeta(feature){
- const {bbox,centroid}=loadGeoDeps();
- return {tier:'overview',bbox:bbox(feature),center:centroid(feature).geometry.coordinates};
+ const points=geometryPoints(feature.geometry.coordinates);
+ if(!points.length)throw new Error('Geometry has no coordinates');
+ let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+ for(const [x,y] of points){minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y);}
+ return {tier:'overview',bbox:[minX,minY,maxX,maxY],center:[(minX+maxX)/2,(minY+maxY)/2]};
 }
 
 function statPublicEntity(spec,feature){
