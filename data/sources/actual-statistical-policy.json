@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "ACTUAL_STATISTICAL_POLICY",
-  "phase": "P2_PREPARED",
+  "phase": "P2_3_READY",
   "activated": false,
   "contract": {
     "path": "schemas/actual-statistical-hierarchy-contract.json",
@@ -95,6 +95,22 @@
       "md120_official_code": "MD120",
       "osm_conflicting_ref": "MD121",
       "public_contract_activated": false
+    },
+    "P2_3_PUBLIC": {
+      "status": "ready_for_candidate_activation",
+      "target_public_contract": "actual-public-entity-v3",
+      "target_public_entity_count": 5848,
+      "target_entity_count_by_jurisdiction": {
+        "RO": 3246,
+        "MD": 2602
+      },
+      "hierarchy_contract": "actual-public-hierarchy-v1",
+      "activation_marker": "data/current/actual-statistical-activation.json",
+      "administrative_catalog_entity_count": 5830,
+      "administrative_geometry_mutation_allowed": false
     }
-  }
+  },
+  "activation_requested": true,
+  "activation_authority": "data/current/actual-statistical-activation.json",
+  "target_public_contract": "actual-public-entity-v3"
 }
