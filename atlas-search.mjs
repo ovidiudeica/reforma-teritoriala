@@ -1,3 +1,4 @@
+import {formatEntityName} from './atlas-name-format.mjs';
 export const normalizeSearch=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const jurisdictionOrder=j=>j==='RO'?0:j==='MD'?1:2;
 const collator=new Intl.Collator('ro');
@@ -37,14 +38,14 @@ function parents(entity,nodeById,entityById){
  const result=[],seen=new Set([entity.id]);let cursor=entity.id;
  while(cursor){const id=nodeById.get(cursor)?.parent_id??entityById.get(cursor)?.hierarchy?.consolidated_parent_id;
   if(!id||seen.has(id))break;seen.add(id);const parent=nodeById.get(id)||entityById.get(id);if(!parent)break;
-  result.push(parent.display_name);cursor=id;
+  result.push(formatEntityName(parent.display_name));cursor=id;
  }return result;
 }
 export function searchResultDescriptor(entity,nodeById=new Map(),entityById=new Map()){
  const ancestry=parents(entity,nodeById,entityById);
  const parent=ancestry[0]||entity.hierarchy?.consolidated_parent_name||entity.hierarchy?.legal_parent_name||entity.legal?.parent_name||(entity.roles?.includes('statistical')?entity.hierarchy?.statistical_parent_name:null);
  const identifier=entity.legal?.id?String(entity.legal.registry||'ID')+' '+entity.legal.id:entity.statistical?.code||(entity.representation?.osm_relation_id!=null?'OSM r'+entity.representation.osm_relation_id:entity.id);
- return {name:entity.display_name,type:typeLabel(entity.display_type||entity.representation?.inferred_type),parent:parent||'',ancestry,identifier};
+ return {name:formatEntityName(entity.display_name),type:typeLabel(entity.display_type||entity.representation?.inferred_type),parent:formatEntityName(parent||''),ancestry,identifier};
 }
 export function createSearchIndex(entities,nodeById=new Map()){
  const byId=new Map(entities.map(e=>[e.id,e]));
@@ -91,7 +92,7 @@ export function createAtlasSearch({input,container,status,document,index,onSelec
  }
  function close(){open=false;activeId=null;if(status)status.textContent='';sync();}
  function activate(id,scroll=false){if(!options.has(id))return;activeId=id;sync();if(scroll)revealSearchOption(container,options.get(id));}
- async function select(id){const record=results.find(r=>r.entity.id===id);if(!record)return;query=record.entity.display_name;input.value=query;close();input.focus?.();await onSelect(id,{zoom:true,source:'search'});}
+ async function select(id){const record=results.find(r=>r.entity.id===id);if(!record)return;query=record.descriptor.name;input.value=query;close();input.focus?.();await onSelect(id,{zoom:true,source:'search'});}
  function render(){
   container.innerHTML='';options=new Map();const groups=groupSearchResults(results);results=groups.flatMap(g=>g.results);
   for(const group of groups){let target=container;
