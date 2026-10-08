@@ -33,7 +33,7 @@ try{
   const state=await evalState();
   assert.equal(state.title,formatted);
   assert.ok(state.breadcrumb.includes(formatted));
-  const treeLabel=await page.evaluate(`document.querySelector('.tree-select[data-entity-id="'+${JSON.stringify(target.id).slice(1,-1)}+'"]').textContent`);
+  const treeLabel=await page.evaluate(`document.querySelector('.tree-select[data-entity-id="${target.id}"]').textContent`);
   assert.ok(treeLabel.startsWith(formatted));
   await page.query(target.id);
   const searchLabel=await page.evaluate("document.querySelector('[role=option] b').textContent");
