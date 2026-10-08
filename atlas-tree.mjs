@@ -52,6 +52,23 @@ export function ambiguousSiblingIds(nodeById){
  return ambiguous;
 }
 
+// Deterministic descendant counts, computed once without expanding the DOM.
+export function countDescendants(nodeById,rootIds){
+ const counts=new Map(),seen=new Set(),pending=rootIds.map(id=>[id,false]);
+ while(pending.length){
+  const [id,finished]=pending.pop(),node=nodeById.get(id);
+  if(!node)throw new Error('Atlas hierarchy: missing node '+id);
+  if(finished){
+   counts.set(id,(node.child_ids||[]).reduce((sum,child)=>sum+1+(counts.get(child)||0),0));
+   continue;
+  }
+  if(seen.has(id))continue;
+  seen.add(id);pending.push([id,true]);
+  for(const child of node.child_ids||[])pending.push([child,false]);
+ }
+ return counts;
+}
+
 // Scroll only the tree container. Native scrollIntoView also scrolls outer panels.
 export function revealInTree(container,button){
  if(!container.getBoundingClientRect||!button.getBoundingClientRect)return;
@@ -61,8 +78,8 @@ export function revealInTree(container,button){
  container.scrollTop+=row.top-top-(container.clientHeight-row.height)/2;
 }
 
-export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},typeLabel=String}){
- const rendered=new Map(),openIds=new Set(),ambiguous=ambiguousSiblingIds(nodeById);
+export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},typeLabel=String,isGeometryVisible=()=>true}){
+ const rendered=new Map(),openIds=new Set(),ambiguous=ambiguousSiblingIds(nodeById),counts=countDescendants(nodeById,rootIds);
  function setOpen(id,value){const entry=rendered.get(id);if(!entry)return;entry.wrapper.open=value;if(value)openIds.add(id);else openIds.delete(id);}
  let selected=null;
  function mark(id,value){
@@ -104,6 +121,14 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
    const identifier=document.createElement('span');identifier.className='tree-identity';
    identifier.textContent=' · '+id;secondary.appendChild(identifier);
   }
+  const descendants=counts.get(id)||0;
+  if(descendants){
+   const number=document.createElement('span');number.className='tree-count';
+   number.textContent=' · '+descendants.toLocaleString('ro-RO')+' subordonate';
+   secondary.appendChild(number);
+  }
+  const visibility=document.createElement('span');visibility.className='tree-visibility';
+  visibility.textContent=' · geometrie ascunsă';visibility.hidden=true;secondary.appendChild(visibility);
   button.appendChild(secondary);
   const description=[name,role,node.statistical_code,duplicate?'ID '+id:null,parentName?'în '+parentName:null].filter(Boolean).join(' · ');
   button.title=description;
@@ -119,7 +144,16 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
    for(const child of node.child_ids)children.appendChild(makeNode(child));
    wrapper.appendChild(children);
   };
-  rendered.set(id,{wrapper,button,ensureChildren});
+  const entry={wrapper,button,outer,ensureChildren,visibilityValue:null,updateVisibility(){
+   const shown=Boolean(isGeometryVisible(id));
+   if(this.visibilityValue===shown)return false;
+   this.visibilityValue=shown;visibility.hidden=shown;
+   outer.classList.toggle('tree-geometry-hidden',!shown);
+   button.setAttribute('aria-label',description+(shown?'':' · geometrie ascunsă de filtre'));
+   return true;
+  }};
+  rendered.set(id,entry);
+  entry.updateVisibility();
   if(branch){
    wrapper.addEventListener('toggle',()=>{if(wrapper.open)ensureChildren();const changed=openIds.has(id)!==wrapper.open;if(wrapper.open)openIds.add(id);else openIds.delete(id);if(changed)onDisclosureChange();});
    if(rootIds.includes(id)){setOpen(id,true);ensureChildren();}
@@ -143,6 +177,31 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   revealSelected(){if(selected)revealInTree(container,rendered.get(selected).button);},
   clear(){mark(selected,false);selected=null;},
   getOpenIds:()=>[...openIds].sort(),
+  refreshVisibility(){
+   let changed=0;
+   // Lazy rendering: never traverse all 5,848 data records for a filter change.
+   for(const entry of rendered.values())if(entry.updateVisibility())changed++;
+   return changed;
+  },
+  getRenderedCount:()=>rendered.size,
+  openToDepth(value,{nodeBudget=550}={}){
+   const depth=Number(value);
+   if(!Number.isInteger(depth)||depth<0||depth>3)throw new RangeError('Atlas hierarchy: invalid expansion depth '+value);
+   const requested=new Set(),visible=new Set(rootIds),queue=[...rootIds];
+   for(let i=0;i<queue.length;i++){
+    const id=queue[i],node=nodeById.get(id);
+    if(!node)throw new Error('Atlas hierarchy: missing node '+id);
+    if(node.depth>=depth||!node.child_ids?.length)continue;
+    requested.add(id);
+    for(const child of node.child_ids){
+     if(visible.has(child))continue;
+     visible.add(child);queue.push(child);
+    }
+   }
+   if(visible.size>nodeBudget)return {applied:false,renderedNodes:visible.size};
+   this.setOpenIds([...requested]);
+   return {applied:true,renderedNodes:visible.size,openBranches:requested.size};
+  },
   setOpenIds(ids){
    for(const [id,entry] of rendered)if(entry.wrapper.tagName==='DETAILS')setOpen(id,false);
    for(const id of new Set(ids)){

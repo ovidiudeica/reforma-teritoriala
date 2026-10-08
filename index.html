@@ -36,6 +36,20 @@
 
   <section>
     <h3>Ierarhie consolidată</h3>
+    <div class="hierarchy-tools" role="group" aria-label="Navigare în ierarhie">
+      <button id="tree-collapse-all" type="button">Restrânge tot</button>
+      <button id="tree-show-roots" type="button">Arată țările</button>
+    </div>
+    <div class="hierarchy-level-tools">
+      <label for="tree-expand-depth">Deschide până la nivelul</label>
+      <select id="tree-expand-depth" aria-label="Nivel de extindere a ierarhiei">
+        <option value="1">1 — sub state</option>
+        <option value="2">2 — regional</option>
+        <option value="3">3 — statistic</option>
+      </select>
+      <button id="tree-expand-apply" type="button">Extinde</button>
+    </div>
+    <p id="tree-navigation-status" class="hint" role="status" aria-live="polite"></p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
     <div id="hierarchy-tree" class="hierarchy-tree"><p class="muted">Se încarcă arborele teritorial…</p></div>
   </section>

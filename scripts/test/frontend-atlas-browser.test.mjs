@@ -17,6 +17,28 @@ function within(r,v,label){assert.ok(r.w>0&&r.h>0,label+' dimensions');assert.ok
 async function scenario(name,fn){await test(name,{timeout:180000},async()=>{await fn();evidence.scenarios.push(name);});}
 try{
  for(const [w,h] of [[1440,900],[1280,800],[900,768],[360,800],[390,844],[430,932],[390,600]])await scenario('initial layout '+w+'x'+h,async()=>{await page.viewport(w,h);if(!evidence.viewports.length)await page.navigate(base);const v=await bounds(page);evidence.viewports.push({w,h,bounds:v});assert.equal(v.scrollWidth,w,'horizontal overflow');within(v.map,v,'map');within(v.attribution,v,'attribution');if(w<=720){assert.equal(v.controls,null);assert.equal(v.details,null);assert.equal(v.trigger,true);assert.ok(v.map.h>=h*.8);}else{within(v.controls,v,'controls');within(v.details,v,'details');assert.equal(v.trigger,false);assert.ok(v.map.x>=v.controls.right-1);if(w>1050)assert.ok(v.details.x>=v.map.right-1);}await shot('initial-'+w+'x'+h);});
+ await scenario('P3.2 responsive full-name tree controls, depth and URL state',async()=>{
+  await page.viewport(1440,900);
+  const height=await page.evaluate("getComputedStyle(document.querySelector('#hierarchy-tree')).maxHeight");
+  assert.ok(parseFloat(height)>300,'tree should have adaptive viewport: '+height);
+  assert.equal(await page.evaluate("getComputedStyle(document.querySelector('.tree-name')).whiteSpace"),'normal');
+  const selected=await page.evaluate('qaApp.selectedEntityId');
+  await page.click('#tree-collapse-all');
+  assert.equal(await page.evaluate("document.querySelectorAll('#hierarchy-tree details[open]').length"),0);
+  assert.equal(await page.evaluate("new URL(location.href).searchParams.get('t')"),'');
+  assert.equal(await page.evaluate('qaApp.selectedEntityId'),selected);
+  await page.click('#tree-show-roots');
+  assert.equal(await page.evaluate("document.querySelectorAll('#hierarchy-tree details[open]').length"),2);
+  assert.ok((await page.evaluate("new URL(location.href).searchParams.getAll('t')")).length<=2);
+  await page.evaluate("document.getElementById('tree-expand-depth').value='2'");
+  await page.click('#tree-expand-apply');
+  assert.match(await page.evaluate("document.querySelector('#tree-navigation-status').textContent"),/deschisă/);
+  assert.ok(await page.evaluate("document.querySelectorAll('#hierarchy-tree details[open]').length>2"));
+  assert.ok(await page.evaluate("document.querySelectorAll('#hierarchy-tree .tree-select').length<550"));
+  const layout=await page.evaluate("(()=>{const root=document.querySelector('.tree-branch'),button=root.querySelector(':scope > .tree-select'),child=root.querySelector(':scope > details > .tree-children');const b=button.getBoundingClientRect(),c=child.getBoundingClientRect();return {buttonBottom:b.bottom,childrenTop:c.top};})()");
+  assert.ok(layout.childrenTop>=layout.buttonBottom-1,'wrapped rows overlap descendants: '+JSON.stringify(layout));
+  await shot('desktop-hierarchy-p32');
+ });
  await scenario('desktop keyboard search normalization, identifiers, grouping and no result',async()=>{
   await page.viewport(1440,900);const mdLegal=entities.find(e=>e.jurisdiction==='MD'&&e.legal?.id&&e.representation.inferred_type==='district');
   for(const [query,id] of [['Iasi',roCity.id],['Victoria',null],['Balti',null],['Bălți',null],[roCity.legal.id,roCity.id],[mdLegal.legal.id,mdLegal.id],[roCity.id.replace('osm-r',''),roCity.id],['MD120',md120.id]]){await page.query(query);const ids=await page.evaluate("[...document.querySelectorAll('[role=option]')].map(e=>e.dataset.entityId)");assert.ok(ids.length>0,query);assert.equal(new Set(ids).size,ids.length);if(id)assert.ok(ids.includes(id),query+' missing real ID');await page.key('ArrowDown');assert.equal(await page.evaluate("document.activeElement.id"),'entity-search');assert.equal(await page.evaluate("document.querySelectorAll('[role=option][aria-selected=true]').length"),1);await page.key('ArrowDown');await page.key('ArrowUp');const active=await page.evaluate("document.querySelector('#entity-search').getAttribute('aria-activedescendant')");assert.ok(await page.evaluate(`!!document.getElementById(${JSON.stringify(active)})`));}
@@ -39,6 +61,24 @@ try{
   const searchLabel=await page.evaluate("document.querySelector('[role=option] b').textContent");
   assert.equal(searchLabel,formatted);
   await page.key('Escape');
+ });
+ await scenario('P3.2 filter and jurisdiction marks only loaded hierarchy nodes as hidden',async()=>{
+  await page.selectQuery(roCity.id);
+  const selector='.tree-select[data-entity-id="'+roCity.id+'"]';
+  const before=await page.evaluate(`(()=>{const b=document.querySelector(${JSON.stringify(selector)});return {hidden:b.parentElement.classList.contains('tree-geometry-hidden'),role:b.querySelector('.tree-role').textContent};})()`);
+  assert.equal(before.hidden,false);
+  await openSubtype('ro.municipalities');
+  await page.click(subtypeInput('ro.municipalities'));
+  assert.equal(await page.evaluate(`document.querySelector(${JSON.stringify(selector)}).parentElement.classList.contains('tree-geometry-hidden')`),true);
+  assert.match(await page.evaluate(`document.querySelector(${JSON.stringify(selector)}).getAttribute('aria-label')`),/geometrie ascunsă de filtre/);
+  assert.equal(await page.evaluate('qaApp.selectedEntityId'),roCity.id);
+  await page.click(subtypeInput('ro.municipalities'));
+  assert.equal(await page.evaluate(`document.querySelector(${JSON.stringify(selector)}).parentElement.classList.contains('tree-geometry-hidden')`),false);
+  await page.click('#layer-ro');
+  assert.equal(await page.evaluate(`document.querySelector(${JSON.stringify(selector)}).parentElement.classList.contains('tree-geometry-hidden')`),true);
+  await page.click('#layer-ro');
+  assert.equal(await page.evaluate(`document.querySelector(${JSON.stringify(selector)}).parentElement.classList.contains('tree-geometry-hidden')`),false);
+  assert.equal(await page.evaluate(`document.querySelector(${JSON.stringify(selector)}).querySelector('.tree-role').textContent`),before.role);
  });
  await scenario('parent and Toate/Niciuna native checkboxes keep statistical controls independent',async()=>{const parent='input[data-kind=geometry-class][data-filter=regional]';const stat=await page.evaluate("[...qaApp.activeStatisticalLevels]");await page.click(parent);assert.equal(await page.evaluate("document.querySelector('input[data-filter=regional]').checked"),false);await page.click(parent);assert.equal(await page.evaluate("document.querySelector('input[data-filter=regional]').checked"),true);await page.click('button[aria-label="Niciuna — Tipuri administrative"]');assert.equal(await page.evaluate("qaApp.activeGeometryClasses.has('local_uat')"),false);await page.click('button[aria-label="Toate — Tipuri administrative"]');assert.deepEqual(await page.evaluate("[...qaApp.activeStatisticalLevels]"),stat);});
  await scenario('real tree disclosure lazy depth five and selected scroll',async()=>{for(const jurisdiction of ['RO','MD']){const leaf=nodes.find(n=>n.jurisdiction===jurisdiction&&n.depth===5&&entities.find(e=>e.id===n.id)?.legal?.id)||nodes.find(n=>n.jurisdiction===jurisdiction&&n.depth===5);const by=new Map(nodes.map(n=>[n.id,n])),chain=[];let n=leaf;while(n){chain.unshift(n.id);n=by.get(n.parent_id);}await page.click('#details-close');for(const id of chain.slice(0,-1)){const selector='.tree-select[data-entity-id="'+id+'"]';await page.evaluate(`(()=>{const row=document.querySelector(${JSON.stringify(selector)}).parentElement;const disclosure=row.querySelector(':scope > details');if(!disclosure.open)disclosure.querySelector('summary').click();})()`);await delay(60);}await page.click('.tree-select[data-entity-id="'+leaf.id+'"]');await waitFor(()=>page.evaluate(`qaApp.selectedEntityId===${JSON.stringify(leaf.id)}`),'tree selection');assert.equal((await evalState()).selected,1);assert.equal(await page.evaluate(`document.querySelectorAll('.tree-select[data-entity-id="${leaf.id}"]').length`),1);assert.ok(await page.evaluate(`(()=>{const t=document.querySelector('#hierarchy-tree').getBoundingClientRect(),r=document.querySelector('.tree-select[data-entity-id="${leaf.id}"]').getBoundingClientRect();return r.top>=t.top-1&&r.bottom<=t.bottom+1;})()`));}});
