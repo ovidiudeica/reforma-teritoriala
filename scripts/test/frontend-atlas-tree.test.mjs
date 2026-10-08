@@ -33,7 +33,7 @@ const documentFactory=()=>{
  const elements=new Map();
  return {elements,getElementById(id){if(!elements.has(id))elements.set(id,new Element());return elements.get(id);},createElement:tag=>new Element(tag),querySelectorAll:()=>[]};
 };
-function harness(){const document=documentFactory(),container=new Element();return {document,container,controller:createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,onSelect(){}})};}
+function harness(){const document=documentFactory(),container=new Element();return {document,container,controller:createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,typeLabel,onSelect(){}})};}
 
 test('all 5848 consolidated paths are rooted, reciprocal, unique and match public parents',()=>{
  assert.equal(nodes.size,5848);assert.equal(entities.size,5848);
@@ -71,11 +71,11 @@ test('P3.1 real 63 statistical roles show classification, coalescence and separa
 });
 
 test('P3.1 identical sibling names show stable IDs, parents and types without changing identity',()=>{
- const root={id:'root',parent_id:null,child_ids:['a','b','c','p'],display_name:'ROMÂNIA',display_type:'state',roles:['context']};
+ const root={id:'root',parent_id:null,child_ids:['osm-r101','osm-r102','osm-r103','p'],display_name:'ROMÂNIA',display_type:'state',roles:['context']};
  const a={id:'osm-r101',parent_id:'root',child_ids:[],display_name:'ALBEȘTI',display_type:'commune',roles:['administrative']};
  const b={id:'osm-r102',parent_id:'root',child_ids:[],display_name:'ALBEȘTI',display_type:'town',roles:['administrative']};
  const c={id:'osm-r103',parent_id:'root',child_ids:[],display_name:'BRĂILA',display_type:'county',roles:['administrative']};
- const p={id:'p',parent_id:'root',child_ids:['d'],display_name:'ALT PĂRINTE',display_type:'county',roles:['administrative']};
+ const p={id:'p',parent_id:'root',child_ids:['osm-r104'],display_name:'ALT PĂRINTE',display_type:'county',roles:['administrative']};
  const d={id:'osm-r104',parent_id:'p',child_ids:[],display_name:'ALBEȘTI',display_type:'commune',roles:['administrative']};
  const fixtures=new Map([root,a,b,c,p,d].map(n=>[n.id,n]));
  assert.deepEqual([...ambiguousSiblingIds(fixtures)].sort(),['osm-r101','osm-r102']);
