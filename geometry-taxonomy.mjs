@@ -69,10 +69,13 @@ export function statisticalLevel(entity){
 }
 export function geometryVisible(entity,{geometryClasses,geometrySubtypes,statisticalLevels,separateStatisticalGeometry}){
  const group=geometryClass(entity),level=statisticalLevel(entity),sub=geometrySubtype(entity);
- // Statistical level controls apply only to the 18 separate statistical boundaries.
- // Coalesced administrative/statistical entities remain governed by their geometry filters.
- if(group==='statistical_only')return separateStatisticalGeometry&&statisticalLevels.has(level);
- return geometryClasses.has(group)&&(!geometrySubtypes||geometrySubtypes.has(sub));
+ const statisticalVisible=level!==null&&statisticalLevels.has(level);
+ // Statistical levels are a complete logical layer over all 63 statistical entities.
+ // The 45 coalesced entities reuse their existing administrative polygon; visibility is OR,
+ // so no geometry is duplicated and either role can keep the shared polygon visible.
+ if(group==='statistical_only')return separateStatisticalGeometry&&statisticalVisible;
+ const administrativeVisible=geometryClasses.has(group)&&(!geometrySubtypes||geometrySubtypes.has(sub));
+ return administrativeVisible||statisticalVisible;
 }
 
 // Computed once from the public entities; UI clicks never recount the population.
