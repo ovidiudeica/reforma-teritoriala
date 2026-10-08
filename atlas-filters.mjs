@@ -46,6 +46,8 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
  const statKeys=[1,2,3,...(index.statisticalCounts.has('unclassified')?['unclassified']:[])];
  const {el:stats,buttons:statActions}=section('Niveluri statistice',enabled=>{for(const level of statKeys){if(enabled)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
  const intro=document.createElement('p');intro.className='hint statistical-filter-note';intro.textContent='Nivelurile controlează numai limitele statistice separate. Rolurile statistice care reutilizează geometrii administrative rămân vizibile conform filtrelor administrative.';stats.appendChild(intro);
+ const separateRow=row('Afișează limite statistice separate',index.statisticalOnly,'separate-statistical','separate');separate=separateRow.input;
+ separate.addEventListener('change',()=>{onSeparate(separate.checked);sync();onChange();});stats.appendChild(separateRow.item);
  for(const level of statKeys){
   const meta=index.statisticalLevelStats.get(level)||{roles:index.statisticalCounts.get(level)||0,separate:0,reused:0,jurisdictions:{RO:{roles:0,separate:0},MD:{roles:0,separate:0}}};
   const label=level==='unclassified'?'Rol statistic neclasificat':'Nivel statistic '+level;
@@ -58,8 +60,6 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   breakdown.textContent='RO: '+ro.roles.toLocaleString('ro-RO')+' roluri / '+ro.separate.toLocaleString('ro-RO')+' limite · MD: '+md.roles.toLocaleString('ro-RO')+' roluri / '+md.separate.toLocaleString('ro-RO')+' limite';
   stats.appendChild(breakdown);
  }
- const separateRow=row('Afișează limite statistice separate',index.statisticalOnly,'separate-statistical','separate');separate=separateRow.input;
- separate.addEventListener('change',()=>{onSeparate(separate.checked);sync();onChange();});stats.appendChild(separateRow.item);
  const note=document.createElement('p');note.className='hint';note.textContent=index.statisticalRoles+' roluri statistice în total: '+index.reusedStatistical+' reutilizează geometria administrativă și nu sunt ascunse de nivelurile statistice; '+index.statisticalOnly+' au limite separate controlate aici.';stats.appendChild(note);
  function sync(){
   for(const g of index.groups){const input=parents.get(g.id);Object.assign(input,geometryParentState(g,state));}
