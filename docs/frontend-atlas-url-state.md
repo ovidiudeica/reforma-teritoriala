@@ -11,7 +11,7 @@ Modulul `atlas-url-state.mjs` conține parse, validare, normalizare, serializare
 | lat, lon, z | tuple viewport | 46.8, 26.6, 6 |
 | j | jurisdicții active CSV: RO, MD; j= înseamnă niciuna | ambele ON |
 | f (repetabil) | ID de subtip dezactivat | toate subtipurile ON |
-| s | nivelurile active ale limitelor statistice separate CSV: 1,2,3,unclassified; s= înseamnă niciunul | toate ON |
+| s | nivelurile statistice active pentru toate entitățile cu rol statistic CSV: 1,2,3,unclassified; s= înseamnă niciunul | toate ON |
 | b | 0 dezactivează limitele statistice separate | ON |
 | t (repetabil) | ID al unui disclosure node deschis; t= înseamnă niciunul | cele două roots deschise |
 
@@ -21,9 +21,9 @@ Nu se serializază query-ul/active option/listbox search, details state separat,
 
 ## Defaults și normalizare
 
-Pagina fără query păstrează default-ul anterior: RO+MD, toate subtipurile, toate nivelurile limitelor statistice separate și masterul limitelor separate ON; fără selecție; viewport 46.8/26.6/6; două roots deschise. Default serializează șir gol, nu o listă mare cu toate opțiunile. v=1 singur este eliminat prin canonicalizare.
+Pagina fără query păstrează default-ul anterior: RO+MD, toate subtipurile, toate nivelurile statistice și masterul limitelor separate ON; fără selecție; viewport 46.8/26.6/6; două roots deschise. Default serializează șir gol, nu o listă mare cu toate opțiunile. v=1 singur este eliminat prin canonicalizare.
 
-Clasele și subtipurile provin din geometry-taxonomy.mjs și geometry filter index, nu dintr-o taxonomie URL paralelă. f reprezintă abaterile față de default. Normalizarea folosește geometryParentState și setGeometryGroup din modulul comun: parent OFF dezactivează copiii relevanți; zero copii activi elimină class gate; mixed/all determină checkbox state corect. Starea internă a subtipurilor este independentă de j, s și b. Parametrul `s` nu controlează vizibilitatea geometriilor administrative coalesced cu rol statistic; acestea rămân sub `f`/clasele geometrice. `s` filtrează numai entitățile `statistical_only`, iar `b=0` le dezactivează global. UI-ul este sincronizat prin controller-ul Atlas filters existent.
+Clasele și subtipurile provin din geometry-taxonomy.mjs și geometry filter index, nu dintr-o taxonomie URL paralelă. f reprezintă abaterile față de default. Normalizarea folosește geometryParentState și setGeometryGroup din modulul comun: parent OFF dezactivează copiii relevanți; zero copii activi elimină class gate; mixed/all determină checkbox state corect. Starea internă a subtipurilor este independentă de j, s și b. Parametrul `s` activează rolul statistic pentru toate cele 63 de entități statistice. Pentru cele 45 coalesced, aceeași geometrie administrativă este vizibilă dacă este activă prin `f`/clasa geometrică SAU prin `s`, fără duplicare. Pentru cele 18 `statistical_only`, vizibilitatea cere atât nivelul din `s`, cât și `b!=0`; `b=0` ascunde numai limitele statistice separate. UI-ul este sincronizat prin controller-ul Atlas filters existent.
 
 Viewport: lat în [-90,90], lon în [-180,180], z întreg în [0,19], toate finite și tuple completă. Precizie lat/lon: 5 zecimale. La capture, Leaflet wrapLatLng normalizează longitudinea unui pan dincolo de limita lumii înainte de validare/serializare, păstrând viewport-ul echivalent în [-180,180]. O tuple invalidă/incompletă este ignorată integral și se folosește viewport-ul default; dacă există o selecție semantică fără tuple validă, se poate face zoom normal la entitate.
 
@@ -77,7 +77,7 @@ Parametrii nu sunt inserați în HTML; sunt folosiți pentru lookup IDs, numbers
 - Default: `/reforma-teritoriala/`.
 - Selecție semantică: `?v=1&e=stat-MD120`.
 - Viewport exact cu geometria unui oraș ascunsă: `?v=1&e=osm-r9846233&lat=46.8&lon=26.6&z=6&f=ro.towns`.
-- Numai MD, raioane OFF, limite statistice separate de nivel 3 OFF și toate limitele separate global OFF: `?v=1&j=MD&f=md.districts&s=1%2C2%2Cunclassified&b=0`. Nivelul 3 OFF nu ascunde Chișinău/MD115 sau Găgăuzia/MD114, deoarece acestea reutilizează geometria administrativă.
+- Numai MD, raioane OFF, nivel statistic 3 OFF și toate limitele separate global OFF: `?v=1&j=MD&f=md.districts&s=1%2C2%2Cunclassified&b=0`. În această stare, Chișinău/MD115 și Găgăuzia/MD114 rămân vizibile numai dacă filtrele lor administrative sunt active; cu filtrul administrativ și nivelul 3 ambele OFF, geometria coalesced este ascunsă. `b=0` afectează numai limitele statistice separate.
 - Două disclosure nodes explicite: `?v=1&t=osm-r58974&t=stat-MD12`.
 
 Butonul compact „Copiază link” folosește live canonical state și navigator.clipboard.writeText, cu feedback de succes/eșec. Dacă API-ul lipsește/eșuează, mesajul recomandă copierea URL-ului din bara de adrese. Este un button nativ keyboard-accessible, fără dependențe externe.
