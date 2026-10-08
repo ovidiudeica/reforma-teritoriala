@@ -95,3 +95,5 @@ header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}
 
 /* Browser QA: keep the drawer close action reachable after focus/scroll. */
 @media(max-width:720px){.controls{scroll-padding-top:64px}.drawer-close{position:sticky;top:0;z-index:1}}
+
+.statistical-filter-note{margin:4px 0 8px}.statistical-level-breakdown{margin:-2px 0 8px 24px}.filter-actions button:disabled{opacity:.5;cursor:not-allowed;text-decoration:none}.filter-row input:disabled~span,.filter-row input:disabled~small{opacity:.6}
