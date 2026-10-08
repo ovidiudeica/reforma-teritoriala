@@ -60,13 +60,13 @@ export function createAtlasUrlState({browser,config,capture,apply,onError=consol
   try{const url=stateUrl();if(url.href===browser.location.href)return false;browser.history[mode==='push'?'pushState':'replaceState'](null,'',url.href);return true;}catch(error){onError('Atlas URL history unavailable',error);return false;}
  }
  function restore(){
-  const requested=browser.location.href;revision++;
-  queue=queue.then(async()=>{
-   restoring++;
+  const requested=browser.location.href;revision++;restoring++;
+  const run=async()=>{
    try{await apply(parseUrlState(new URL(requested).search,config));}finally{restoring--;}
    if(browser.location.href===requested)commit('replace');
-  }).catch(error=>onError('Atlas URL restore failed',error));return queue;
+  };
+  queue=queue.then(run,run).catch(error=>onError('Atlas URL restore failed',error));return queue;
  }
  browser.addEventListener('popstate',restore);
- return {restore,commit,shareUrl:()=>stateUrl().href,whenIdle:()=>queue,get isRestoring(){return Boolean(restoring);},async action(mode,fn){const started=revision;mutating++;try{return await fn();}finally{mutating--;if(!mutating)commit(started===revision?mode:'replace');}}};
+ return {restore,commit,shareUrl:()=>stateUrl().href,whenIdle:()=>queue,get isRestoring(){return Boolean(restoring);},async action(mode,fn){const started=revision;mutating++;let result;try{result=fn();}finally{mutating--;if(!mutating)commit(started===revision?mode:'replace');}return await result;}};
 }

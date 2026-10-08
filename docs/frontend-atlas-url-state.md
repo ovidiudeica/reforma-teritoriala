@@ -54,7 +54,7 @@ Manual collapse al unui strămoș selectat este reflectat în URL. La restore ac
 - replaceState: viewport la zoomend/moveend, disclosure manual, initial hydration și canonicalizare.
 - URL identic: niciun write/entry nou.
 
-Controller-ul guard-ează restore și tranzacțiile de selecție. Un fitBounds și evenimentele map produse de selecție nu pot înlocui prematur entry-ul precedent înainte de push. popstate aplică URL-ul într-o coadă de restore, fără push; canonicalizarea este replace. O selecție asincronă depășită de popstate nu poate adăuga ulterior un entry accidental. Nu există popstate → restore → push feedback loop.
+Controller-ul blochează scrierile în timpul restore-ului și al fazei sincrone de selecție. Un fitBounds și evenimentele map produse de selecție nu pot înlocui prematur entry-ul precedent înainte de push. popstate aplică URL-ul într-o coadă de restore, fără push; canonicalizarea este replace. Selecția creează entry-ul după schimbarea sincronă a ID-ului/tree/details/viewport-ului, înainte de a aștepta geometria. Două selecții rapide păstrează A și B în history chiar dacă fetch-urile se termină în ordine inversă. Finalizarea fetch-ului nu scrie un nou entry; o selecție asincronă depășită de popstate nu poate adăuga ulterior un entry accidental. Guard-ul popstate începe imediat la notificare, inclusiv înainte de microtask-ul de restore. Nu există popstate → restore → push feedback loop.
 
 Map events continuă syncTiers; în timpul restore sincronizarea este orchestrată explicit pentru a evita încărcări concurente inutile. Erorile History API sunt capturate/logate și nu blochează geometria. Serialize citește state-ul existent, fără rebuild/fetch al indexului search, ierarhiei sau filter index.
 
