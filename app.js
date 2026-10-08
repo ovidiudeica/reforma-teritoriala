@@ -1,9 +1,10 @@
+import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
 import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
 
-const map=L.map('map',{zoomControl:true}).setView([46.8,26.6],6);
+const map=L.map('map',{zoomControl:true,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
 L.control.scale({imperial:false}).addTo(map);
 
@@ -31,6 +32,7 @@ let hierarchyTree=null;
 const hierarchyNodeById=new Map();
 let atlasTree=null;
 let atlasSearch=null;
+let atlasUrl=null;
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
 
@@ -136,7 +138,7 @@ function renderFilters(){
  const state={geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,
   get separateStatisticalGeometry(){return separateStatisticalGeometry;}};
  atlasFilters=createAtlasFilters({container:document.getElementById('filter-list'),document,index:geometryFilterIndex,state,
-  onSeparate:setSeparateStatisticalGeometry,onChange:refreshGeometryVisibility});
+  onSeparate:setSeparateStatisticalGeometry,onChange:()=>{refreshGeometryVisibility();atlasUrl?.commit('push');}});
 }
 function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boolean(value);}
 function refreshGeometryVisibility(){
@@ -147,7 +149,7 @@ function refreshGeometryVisibility(){
 function updateSelectionVisibility(){
  const entity=entityById.get(selectedEntityId);
  const status=document.getElementById('selection-visibility');
- if(status&&entity)status.textContent=isVisible(entity)?'':'Geometria este ascunsă de filtre. Selecția și detaliile rămân disponibile.';
+ if(status&&entity)status.textContent=isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false?'':'Geometria este ascunsă de filtre. Selecția și detaliile rămân disponibile.';
 
 }
 
@@ -177,7 +179,7 @@ async function loadHierarchyTree(){
 function renderHierarchyTree(){
  const container=document.getElementById('hierarchy-tree');
  if(!container||!hierarchyTree)return;
- atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,
+ atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,onDisclosureChange:()=>atlasUrl?.commit('replace'),
   onSelect:(id,options)=>selectEntity(id,options).catch(console.error)});
  if(selectedEntityId){
   atlasTree.select(selectedEntityId);
@@ -364,6 +366,7 @@ function clearSelection(){
 
  document.getElementById('details-title').textContent='Nicio selecție';
  document.getElementById('details-body').innerHTML='<p class="muted">Selectează o limită de pe hartă sau caută o entitate după nume ori identificator.</p>';
+ atlasUrl?.commit('push');
 }
 
 function detailRow(label,value){
@@ -402,12 +405,15 @@ function renderDetails(entity){
  if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
 }
 
-function zoomToEntity(entity){
+function zoomToEntity(entity,options={}){
  const b=entity.map?.bbox;
- if(Array.isArray(b)&&b.length===4)map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[30,30],maxZoom:12});
+ if(Array.isArray(b)&&b.length===4)map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[30,30],maxZoom:12,...options});
 }
 async function selectEntity(id,options=false,clickedLayer=null){
- const {zoom=false}=typeof options==='boolean'?{zoom:options}:options;
+ return atlasUrl?atlasUrl.action('push',()=>applySelection(id,options,clickedLayer)):applySelection(id,options,clickedLayer);
+}
+async function applySelection(id,options=false,clickedLayer=null){
+ const {zoom=false,source}=typeof options==='boolean'?{zoom:options}:options;
  const entity=entityById.get(id);
  if(!entity)return;
  // Validate and materialize the consolidated path before updating selection.
@@ -425,9 +431,10 @@ async function selectEntity(id,options=false,clickedLayer=null){
  updateSelectionVisibility();
  rerenderLoadedTiers();
  if(!isVisible(entity))return;
- if(zoom)zoomToEntity(entity);
+ if(zoom)zoomToEntity(entity,source==='url'?{animate:false}:{});
  const checkbox=document.getElementById('layer-'+entity.jurisdiction.toLowerCase());
- if(checkbox&&!checkbox.checked){checkbox.checked=true;roots[entity.jurisdiction].addTo(map);}
+ if(source!=='url'&&checkbox&&!checkbox.checked){checkbox.checked=true;roots[entity.jurisdiction].addTo(map);}
+ updateSelectionVisibility();
  if(entity.category==='statistical'){
   await ensureStatisticalGeometry(entity.jurisdiction);
   const feature=statisticalFeatureById.get(entity.id);
@@ -455,16 +462,41 @@ async function selectEntity(id,options=false,clickedLayer=null){
  }
 }
 
+function captureUrlState(){
+ const center=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
+ return {entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds()};
+}
+async function applyUrlState(state){
+ const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
+ replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);
+ for(const j of ['RO','MD']){const enabled=state.jurisdictions.includes(j);document.getElementById('layer-'+j.toLowerCase()).checked=enabled;if(enabled)roots[j].addTo(map);else map.removeLayer(roots[j]);}
+ atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
+ map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
+ if(state.entityId)await selectEntity(state.entityId,{source:'url',zoom:!state.viewportExplicit});else clearSelection();
+ await syncTiers();updateSelectionVisibility();
+}
+async function initializeUrlState(){
+ const browser=globalThis.window;
+ if(!browser?.location||!browser?.history||!browser.addEventListener)return;
+ const config=createUrlConfig({entityById,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,filterIndex:geometryFilterIndex});
+ atlasUrl=createAtlasUrlState({browser,config,capture:captureUrlState,apply:applyUrlState});await atlasUrl.restore();
+}
+document.getElementById('copy-link').addEventListener('click',async()=>{
+ const status=document.getElementById('share-status');
+ try{if(!atlasUrl||!globalThis.navigator?.clipboard?.writeText)throw new Error('Clipboard unavailable');await globalThis.navigator.clipboard.writeText(atlasUrl.shareUrl());status.textContent='Link copiat.';}catch{status.textContent='Copiere indisponibilă. Copiază URL-ul din bara de adrese.';}
+});
+
 document.getElementById('details-close').addEventListener('click',clearSelection);
-document.getElementById('layer-ro').addEventListener('change',event=>{event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);});
-document.getElementById('layer-md').addEventListener('change',event=>{event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);});
-map.on('zoomend moveend',()=>syncTiers().catch(console.error));
+document.getElementById('layer-ro').addEventListener('change',event=>{event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);updateSelectionVisibility();atlasUrl?.commit('push');});
+document.getElementById('layer-md').addEventListener('change',event=>{event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);updateSelectionVisibility();atlasUrl?.commit('push');});
+map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');});
 
 const frontendReady=(async()=>{
  try{
   await loadIndex();
   await loadHierarchyTree();
   await loadChunkIndex();
+  await initializeUrlState();
   await Promise.all(['RO','MD'].map(ensureStatisticalGeometry));
   await Promise.all([ensureTier('RO','overview'),ensureTier('MD','overview')]);
   await syncTiers();
@@ -474,4 +506,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
+export {atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
