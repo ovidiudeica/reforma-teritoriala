@@ -56,6 +56,17 @@ test('statistical roles remain 63 at levels 5/10/48 with only 18 separate geomet
  assert.equal(features.length,18);assert.equal(ids.size,18);
  for(const entity of only)assert.ok(ids.has(entity.id));
  for(const entity of reused)assert.ok(!ids.has(entity.id));
+
+ const administrativeFeatures=(await Promise.all(Object.values(manifest.public_contract.geometry_tiers).flatMap(byTier=>Object.values(byTier)).map(async descriptor=>{
+  const bytes=await readFile(descriptor.path);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),descriptor.sha256);
+  return JSON.parse(bytes).features;
+ }))).flat();
+ const administrativeCounts=new Map();
+ for(const feature of administrativeFeatures){const id=feature.properties.entity_id;administrativeCounts.set(id,(administrativeCounts.get(id)||0)+1);}
+ for(const entity of reused)assert.equal(administrativeCounts.get(entity.id),1,'missing/duplicated reused statistical geometry '+entity.id);
+ for(const entity of only)assert.equal(administrativeCounts.get(entity.id)||0,0,'statistical-only geometry leaked into administrative tiers '+entity.id);
+
  const md120=entities.find(e=>e.id==='stat-MD120');
  assert.equal(md120.statistical.code,'MD120');
  assert.equal(md120.representation.osm_statistical_ref,'MD121');
@@ -63,25 +74,32 @@ test('statistical roles remain 63 at levels 5/10/48 with only 18 separate geomet
  assert.ok(!roles.some(e=>e.statistical.code==='MD121'));
 });
 
-test('statistical levels govern only separate statistical boundaries, never coalesced administrative geometry',()=>{
- for(const entity of entities){
-  const state=options();assert.equal(geometryVisible(entity,state),true);
-  if(entity.category!=='statistical'){
-   state.geometryClasses.delete(geometryClass(entity));
-   assert.equal(geometryVisible(entity,state),false);
-  }
-  const stats=options();stats.separateStatisticalGeometry=false;
-  assert.equal(geometryVisible(entity,stats),entity.category!=='statistical');
-  if(entity.roles.includes('statistical')){
-   const role=options();role.statisticalLevels.delete(statisticalLevel(entity));
-   assert.equal(geometryVisible(entity,role),entity.category!=='statistical',entity.id);
-  }
- }
- const level3=entities.filter(e=>e.roles.includes('statistical')&&statisticalLevel(e)===3);
- assert.equal(level3.filter(e=>e.category==='statistical').length,4);
- assert.equal(level3.filter(e=>e.category!=='statistical').length,44);
- const state=options();state.statisticalLevels.delete(3);
- assert.equal(level3.filter(e=>geometryVisible(e,state)).length,44);
+test('statistical levels expose all 63 statistical entities through reused or separate geometry',()=>{
+ const roles=entities.filter(e=>e.roles.includes('statistical'));
+ const statisticalOnly=roles.filter(e=>e.category==='statistical');
+ const reused=roles.filter(e=>e.category!=='statistical');
+ const statisticalView=options();statisticalView.geometryClasses.clear();
+ assert.equal(roles.filter(e=>geometryVisible(e,statisticalView)).length,63);
+ assert.deepEqual([1,2,3].map(level=>roles.filter(e=>statisticalLevel(e)===level&&geometryVisible(e,statisticalView)).length),[5,10,48]);
+ assert.equal(statisticalOnly.filter(e=>geometryVisible(e,statisticalView)).length,18);
+ assert.equal(reused.filter(e=>geometryVisible(e,statisticalView)).length,45);
+
+ const county=reused.find(e=>e.jurisdiction==='RO'&&statisticalLevel(e)===3);
+ const dual=options();dual.geometryClasses.delete(geometryClass(county));
+ assert.equal(geometryVisible(county,dual),true,'statistical level keeps coalesced county visible');
+ dual.statisticalLevels.delete(3);
+ assert.equal(geometryVisible(county,dual),false,'both roles off hide shared geometry');
+ dual.geometryClasses.add(geometryClass(county));
+ assert.equal(geometryVisible(county,dual),true,'administrative role can independently keep shared geometry visible');
+
+ const level3=options();level3.geometryClasses.clear();level3.statisticalLevels.delete(3);
+ assert.equal(roles.filter(e=>statisticalLevel(e)===3&&geometryVisible(e,level3)).length,0);
+ assert.equal(roles.filter(e=>[1,2].includes(statisticalLevel(e))&&geometryVisible(e,level3)).length,15);
+
+ const noSeparate=options();noSeparate.geometryClasses.clear();noSeparate.separateStatisticalGeometry=false;
+ assert.equal(statisticalOnly.filter(e=>geometryVisible(e,noSeparate)).length,0);
+ assert.equal(reused.filter(e=>geometryVisible(e,noSeparate)).length,45,'master separate switch must not hide reused statistical geometry');
+
  const unknown={representation:{inferred_type:'new'}};
  assert.equal(geometryVisible(unknown,options()),true);
 });
@@ -156,8 +174,13 @@ test('actual frontend rendering and selection respect filters, including async s
   const group=layerGroup(),data={features:[{properties:{entity_id:reused.id}}]};
   frontend.renderCollection(group,data);assert.equal(group.layers[0].layers.length,1);
   frontend.activeFilterGroups.delete(geometryClass(reused));
+  frontend.renderCollection(group,data);assert.equal(group.layers[0].layers.length,1);
+  await frontend.selectEntity(reused.id);assert.equal(group.layers[0].layers.length,1);
+  frontend.activeStatisticalLevels.delete(statisticalLevel(reused));frontend.refreshGeometryVisibility();
   frontend.renderCollection(group,data);assert.equal(group.layers[0].layers.length,0);
-  await frontend.selectEntity(reused.id);assert.equal(group.layers[0].layers.length,0);
+  assert.match(elements.get('selection-visibility').textContent,/ascunsă/);
+  frontend.activeStatisticalLevels.add(statisticalLevel(reused));frontend.refreshGeometryVisibility();
+  frontend.renderCollection(group,data);assert.equal(group.layers[0].layers.length,1);
   // A late fetch must apply current switches, never request-time visibility.
   frontend.statisticalGeometryLoaded.delete(only.jurisdiction);
   let resolve;
