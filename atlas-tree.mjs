@@ -53,7 +53,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   const outer=document.createElement('div');
   outer.className='tree-node'+(branch?' tree-branch':' tree-leaf');
   const wrapper=branch?document.createElement('details'):outer;
-  if(branch){wrapper.className='tree-disclosure';outer.appendChild(wrapper);}
+  if(branch)wrapper.className='tree-disclosure';
   if(branch){
    const summary=document.createElement('summary');
    summary.className='tree-toggle';
@@ -71,6 +71,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
    button.appendChild(code);
   }
   outer.appendChild(button);
+  if(branch)outer.appendChild(wrapper);
   let children=null;
   const ensureChildren=()=>{
    if(!branch||children)return;
@@ -99,6 +100,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
    revealInTree(container,rendered.get(id).button);
    return path;
   },
+  revealSelected(){if(selected)revealInTree(container,rendered.get(selected).button);},
   clear(){mark(selected,false);selected=null;},
   getOpenIds:()=>[...openIds].sort(),
   setOpenIds(ids){

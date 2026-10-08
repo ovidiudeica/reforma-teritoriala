@@ -5,7 +5,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
  let separate;
  const row=(label,count,kind,id)=>{
   const item=document.createElement('label');item.className='filter-row';
-  const input=document.createElement('input');input.type='checkbox';input.dataset.kind=kind;input.dataset.filter=String(id);
+  const input=document.createElement('input');input.type='checkbox';input.dataset.kind=kind;input.dataset.filter=String(id);input.setAttribute('aria-label',label);
   const text=document.createElement('span');text.textContent=label;
   const number=document.createElement('small');number.textContent='('+count.toLocaleString('ro-RO')+')';
   item.appendChild(input);item.appendChild(text);item.appendChild(number);
@@ -16,7 +16,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   const heading=document.createElement('h3');heading.textContent=title;el.appendChild(heading);
   const controls=document.createElement('div');controls.className='filter-actions';
   for(const [label,enabled] of [['Toate',true],['Niciuna',false]]){
-   const button=document.createElement('button');button.type='button';button.textContent=label;
+   const button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-label',label+' — '+title);
    button.addEventListener('click',()=>{action(enabled);sync();onChange();});controls.appendChild(button);
   }
   el.appendChild(controls);container.appendChild(el);return el;
@@ -26,16 +26,16 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   const groups=index.groups.filter(g=>g.section===key);
   const el=section(title,enabled=>{for(const g of groups)setGeometryGroup(g,state,enabled);});
   for(const g of groups){
-   const wrapper=document.createElement('div');wrapper.className='atlas-filter-group';
+   const wrapper=document.createElement('div');wrapper.className='atlas-filter-group';wrapper.setAttribute('role','group');wrapper.setAttribute('aria-label',g.label);
    const parent=row(g.label,g.count,'geometry-class',g.id);parent.item.className+=' filter-parent';
    parents.set(g.id,parent.input);wrapper.appendChild(parent.item);
    parent.input.addEventListener('change',()=>{setGeometryGroup(g,state,parent.input.checked);sync();onChange();});
    const disclosure=document.createElement('details');disclosure.className='atlas-filter-subtypes';
-   const summary=document.createElement('summary');summary.textContent='Subtipuri pe jurisdicții';disclosure.appendChild(summary);
+   const summary=document.createElement('summary');summary.textContent='Subtipuri pe jurisdicții';summary.setAttribute('aria-label','Subtipuri — '+g.label);disclosure.appendChild(summary);
    for(const j of g.jurisdictions){
-    const heading=document.createElement('p');heading.className='filter-jurisdiction';heading.textContent=j.label+' ('+j.count.toLocaleString('ro-RO')+')';disclosure.appendChild(heading);
+    const heading=document.createElement('h4');heading.className='filter-jurisdiction';heading.textContent=j.label+' ('+j.count.toLocaleString('ro-RO')+')';disclosure.appendChild(heading);
     for(const sub of j.subtypes){
-     const child=row(sub.label,sub.count,'geometry-subtype',sub.id);children.set(sub.id,{input:child.input,group:g});
+     const child=row(sub.label,sub.count,'geometry-subtype',sub.id);child.input.setAttribute('aria-label',sub.label+' — '+j.label+' — '+g.label);children.set(sub.id,{input:child.input,group:g});
      child.input.addEventListener('change',()=>{setGeometrySubtype(g,state,sub.id,child.input.checked);sync();onChange();});
      disclosure.appendChild(child.item);
     }
