@@ -89,3 +89,9 @@ header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}
 
 .search::placeholder{color:var(--atlas-secondary);opacity:1}
 .kv dt{color:var(--atlas-secondary)}
+
+/* Browser QA: inline anchor padding must participate in provenance layout. */
+.status .action-button{display:inline-flex;align-items:center;margin-top:8px}
+
+/* Browser QA: keep the drawer close action reachable after focus/scroll. */
+@media(max-width:720px){.controls{scroll-padding-top:64px}.drawer-close{position:sticky;top:0;z-index:1}}
