@@ -1,3 +1,4 @@
+import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,entityProvenanceHtml,labelMapControls,wireAtlasSkipLinks} from './atlas-presentation.mjs';
 import {createAtlasMobileUi} from './atlas-mobile-ui.mjs';
 import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
@@ -8,6 +9,7 @@ import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,creat
 const map=L.map('map',{zoomControl:true,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
 L.control.scale({imperial:false}).addTo(map);
+labelMapControls(document);
 
 const roots={RO:L.layerGroup().addTo(map),MD:L.layerGroup().addTo(map)};
 const tiers=['overview','local','detail'];
@@ -35,7 +37,8 @@ let atlasTree=null;
 let atlasSearch=null;
 let atlasUrl=null;
 const mobileMedia=globalThis.window?.matchMedia?.('(max-width: 720px)')||{matches:false};
-const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)});
+const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open),onOpen:()=>atlasTree?.revealSelected()});
+wireAtlasSkipLinks({document,mobile:atlasMobile});
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
 
@@ -55,21 +58,7 @@ function filterGroup(entity){return geometryClass(entity);}
 function isVisible(entity){
  return geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry});
 }
-function styleFor(feature){
- const group=filterGroup(entityById.get(feature.properties?.entity_id));
- const styles={
-  regional:{color:'#203f59',weight:1.8,fillColor:'#5d7b8c'},
-  local_uat:{color:'#365e55',weight:1.1,fillColor:'#6d9184'},
-  sector:{color:'#806b50',weight:.9,fillColor:'#b59b77'},
-  component_locality:{color:'#806b50',weight:.8,fillColor:'#b59b77'},
-  context:{color:'#203f59',weight:2,fillColor:'#5d7b8c'},
-  auxiliary:{color:'#65716b',weight:.8,fillColor:'#909b95'},
-  statistical_only:{color:'#66538c',weight:1.7,fillColor:'#a294bd',dashArray:'5 4'},
-  unclassified:{color:'#c12b72',weight:2,fillColor:'#c12b72'}
- };
- return {...styles[group],opacity:.8,fillOpacity:.035};
-}
-const selectedStyle={color:'#b54a38',weight:3,opacity:1,fillOpacity:.12};
+function styleFor(feature){return entityGeometryStyle(entityById.get(feature.properties?.entity_id));}
 
 const actualReleasePromise=(async()=>{
  const status=document.getElementById('actual-release-status');
@@ -77,23 +66,21 @@ const actualReleasePromise=(async()=>{
   const [manifestResponse,gateResponse,buildInfoResponse]=await Promise.all([
    fetch('data/current/actual-release-manifest.json',{cache:'no-cache'}),
    fetch('data/current/actual-release-gate.json',{cache:'no-cache'}),
-   fetch('public/data/app-build-info.json',{cache:'no-cache'})
+   fetch('public/data/app-build-info.json',{cache:'no-cache'}).catch(()=>({ok:false}))
   ]);
   if(!manifestResponse.ok||!gateResponse.ok)throw new Error('Release ACTUAL indisponibil');
   const [manifest,gate,buildInfo]=await Promise.all([
-   manifestResponse.json(),gateResponse.json(),buildInfoResponse.ok?buildInfoResponse.json():Promise.resolve(null)
+   manifestResponse.json(),gateResponse.json(),buildInfoResponse.ok?buildInfoResponse.json().catch(()=>null):Promise.resolve(null)
   ]);
   if(gate.status!=='PASS')throw new Error('Release ACTUAL nu a trecut gate-ul combinat');
   if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Manifestul ACTUAL nu corespunde gate-ului');
   if(!['actual-public-entity-v1','actual-public-entity-v2','actual-public-entity-v3'].includes(manifest.public_contract?.contract))throw new Error('Contractul public ACTUAL lipsește din manifest');
-  const publishedRelease=buildInfo?.actual_release_tag
-   ?'publicat: '+buildInfo.actual_release_tag+(buildInfo.actual_snapshot_id?' · '+buildInfo.actual_snapshot_id:'')
-   :'fără release publicat';
-  if(status)status.textContent='ACTUAL curent: '+manifest.snapshot_id+' · '+publishedRelease+(buildInfo?.app_version?' · '+buildInfo.app_version:'');
   releaseData={manifest,gate,buildInfo};
+  const provenance=renderGlobalProvenance({container:document.getElementById('global-provenance'),document,...releaseData});
+  if(status){status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.textContent='ACTUAL curent: '+manifest.snapshot_id+' · gate '+gate.status+' · publicat: '+(provenance.publication?.tag||'neconfirmat pentru acest snapshot');}
   return releaseData;
  }catch(e){
-  if(status)status.textContent='ACTUAL: release indisponibil sau nevalidat';
+  if(status){status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');status.textContent='ACTUAL: release indisponibil sau nevalidat. Datele nu au fost activate.';}
   console.error('Nu s-a putut valida release-ul ACTUAL',e);
   throw e;
  }
@@ -110,6 +97,8 @@ async function loadIndex(){
  geometryFilterIndex=createGeometryFilterIndex(index.entities||[]);
  for(const subtype of geometryFilterIndex.subtypeMembers.keys())activeGeometrySubtypes.add(subtype);
  renderFilters();
+ renderLegend({container:document.getElementById('atlas-legend'),document,entities:index.entities});
+ renderGlobalProvenance({container:document.getElementById('global-provenance'),document,...releaseData,index});
  wireSearch();
  updateJurisdictionStatus();
  return index;
@@ -365,6 +354,8 @@ function clearSelection(){
  selectedEntityId=null;
  atlasMobile.selection(null);
  document.getElementById('details-summary').textContent='';
+ document.getElementById('selection-visibility').textContent='';
+ document.getElementById('geometry-status').textContent='';
  atlasTree?.clear();
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
  rerenderLoadedTiers();
@@ -382,30 +373,10 @@ function renderDetails(entity){
  const body=document.getElementById('details-body');
  title.textContent=entity.display_name;
  document.getElementById('details-summary').textContent=typeLabel(entity.representation.inferred_type);
- const legal=entity.legal;
- const statisticalHtml=entity.statistical
-  ?'<section class="details-section"><h3>Identitate statistică</h3><dl class="kv">'+
-    detailRow('Clasificare',entity.statistical.classification)+detailRow('Versiune',entity.statistical.version)+detailRow('Cod',entity.statistical.code)+
-    detailRow('Nivel',entity.statistical.level)+detailRow('Părinte statistic',entity.hierarchy?.statistical_parent_name)+
-    detailRow('Autoritate',entity.statistical.identity_authority)+detailRow('Geometrie',entity.category==='statistical'?'limită statistică separată':'geometrie administrativă reutilizată')+
-    '</dl></section>'
-  :'';
- const legalHtml=legal
-  ?'<section class="details-section"><h3>Identitate oficială</h3><dl class="kv">'+
-    detailRow('Registru',legal.registry)+detailRow('ID',legal.id)+detailRow('Denumire',legal.name)+detailRow('Tip juridic',legal.type?typeLabel(legal.type):null)+
-    detailRow('Părinte legal',legal.parent_name)+detailRow('Metodă',legal.match_method)+detailRow('Încredere',legal.confidence)+
-    '</dl></section>'
-  :'<section class="details-section"><h3>Identitate oficială</h3><p class="muted">Nu este atașată o identitate juridică pozitivă acestei reprezentări în contractul public ACTUAL.</p></section>';
  body.innerHTML=
   '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
   detailRow('Jurisdicție',entity.jurisdiction)+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
-  '</dl></section>'+
-  '<p id="selection-visibility" class="hint"></p>'+legalHtml+statisticalHtml+
-  '<section class="details-section"><h3>Reprezentare cartografică</h3><dl class="kv">'+
-  detailRow('Sursă',entity.representation.source)+detailRow('Relație OSM',entity.representation.osm_relation_id)+detailRow('admin_level',entity.representation.admin_level)+
-  detailRow('Tip reprezentare',typeLabel(entity.representation.inferred_type))+detailRow('Geometrie','coordonate master, fără simplificare')+
-  detailRow('Încredere',entity.validation.representation_confidence)+
-  '</dl><div class="details-actions"><a class="action-button" href="'+escapeHtml(entity.representation.source_url)+'" target="_blank" rel="noopener">Deschide în OSM</a><button type="button" class="action-button" id="zoom-selected">Zoom la entitate</button></div></section>';
+  '</dl></section>'+entityProvenanceHtml(entity,{typeLabel,statusLabel:value=>statusLabels[value]||value});
  renderBreadcrumb(entity);
  const zoomButton=body.querySelector('#zoom-selected');
  if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
@@ -416,7 +387,8 @@ function zoomToEntity(entity,options={}){
  if(Array.isArray(b)&&b.length===4)map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[30,30],maxZoom:12,...options});
 }
 async function selectEntity(id,options=false,clickedLayer=null){
- return atlasUrl?atlasUrl.action('push',()=>applySelection(id,options,clickedLayer)):applySelection(id,options,clickedLayer);
+ try{return await (atlasUrl?atlasUrl.action('push',()=>applySelection(id,options,clickedLayer)):applySelection(id,options,clickedLayer));}
+ catch(error){if(selectedEntityId===id)document.getElementById('geometry-status').textContent='Geometria nu a putut fi încărcată pentru '+id+'. Identitatea și selecția rămân disponibile.';throw error;}
 }
 async function applySelection(id,options=false,clickedLayer=null){
  const {zoom=false,source}=typeof options==='boolean'?{zoom:options}:options;
@@ -433,8 +405,9 @@ async function applySelection(id,options=false,clickedLayer=null){
  if(status)status.textContent='';
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
  selectedEntityId=id;
- renderDetails(entity);
+ document.getElementById('geometry-status').textContent='';
  atlasMobile.selection(id,{source});
+ renderDetails(entity);
  updateSelectionVisibility();
  rerenderLoadedTiers();
  if(!isVisible(entity))return;
@@ -500,18 +473,21 @@ document.getElementById('layer-md').addEventListener('change',event=>{event.targ
 map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');});
 
 const frontendReady=(async()=>{
+ let phase='index';
  try{
   await loadIndex();
-  await loadHierarchyTree();
-  await loadChunkIndex();
+  phase='hierarchy';await loadHierarchyTree();
+  phase='geometry';await loadChunkIndex();
   await initializeUrlState();
   await Promise.all(['RO','MD'].map(ensureStatisticalGeometry));
   await Promise.all([ensureTier('RO','overview'),ensureTier('MD','overview')]);
   await syncTiers();
  }catch(e){
   console.error('Inițializarea modulului ACTUAL a eșuat',e);
-  document.getElementById('filter-list').innerHTML='<p class="muted">Datele ACTUAL nu au putut fi validate.</p>';
+  if(phase==='hierarchy')document.getElementById('hierarchy-error').textContent='Ierarhia consolidată este indisponibilă. Indexul de căutare rămâne încărcat.';
+  else if(phase==='geometry')document.getElementById('geometry-load-status').textContent='Geometria este indisponibilă. Identitățile și arborele rămân încărcate.';
+  else document.getElementById('filter-list').innerHTML='<p role="alert" class="muted">Indexul ACTUAL nu a putut fi validat. Verifică statusul release-ului.</p>';
  }
 })();
 
-export {atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
+export {styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
