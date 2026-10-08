@@ -2,7 +2,7 @@ import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {ancestorPath,parentId,hasChildren,createAtlasTree,revealInTree,treeRoleLabel,ambiguousSiblingIds} from '../../atlas-tree.mjs';
+import {ancestorPath,parentId,hasChildren,createAtlasTree,revealInTree,treeRoleLabel,ambiguousSiblingIds,countDescendants} from '../../atlas-tree.mjs';
 import {typeLabel} from '../../atlas-search.mjs';
 import {geometryClass} from '../../geometry-taxonomy.mjs';
 const tree=JSON.parse(await readFile('public/data/actual-consolidated-tree.json','utf8'));
@@ -106,6 +106,69 @@ test('known RO/MD hierarchy examples include coalesced MD114/MD115 and official 
   assert.equal(ancestorPath(nodes,tree.root_ids,node.id)[0],'osm-r58974');
  }
  assert.deepEqual(ancestorPath(nodes,tree.root_ids,'stat-MD120'),['osm-r58974','stat-MD12','stat-MD120']);
+});
+
+test('P3.2 counts descendants once from the complete 5848-node contract without DOM expansion',()=>{
+ const counts=countDescendants(nodes,tree.root_ids);
+ assert.equal(counts.size,5848);
+ for(const root of tree.root_ids){
+  const members=tree.nodes.filter(n=>n.jurisdiction===nodes.get(root).jurisdiction).length;
+  assert.equal(counts.get(root),members-1);
+ }
+ for(const node of nodes.values()){
+  if(!node.child_ids.length)assert.equal(counts.get(node.id),0);
+  else assert.equal(counts.get(node.id),node.child_ids.reduce((sum,id)=>sum+1+counts.get(id),0));
+ }
+ const {controller}=harness();
+ assert.ok(controller.getRenderedCount()<100,'only roots and immediate children are initially rendered');
+ const root=controller.getNode(tree.root_ids[0]);
+ assert.match(root.button.textContent,/subordonate/);
+ assert.match(root.button.textContent,new RegExp(counts.get(tree.root_ids[0]).toLocaleString('ro-RO')));
+});
+
+test('P3.2 bounded levels, root reset and collapse retain selection, URL-ready open IDs',()=>{
+ const {controller,container}=harness();
+ const level=controller.openToDepth(3);
+ assert.equal(level.applied,true);
+ assert.ok(level.renderedNodes<=550);
+ assert.ok(controller.getRenderedCount()<=550);
+ assert.ok(controller.getOpenIds().length>tree.root_ids.length);
+ assert.deepEqual([...new Set(container.querySelectorAll('.tree-select').map(e=>e.dataset.entityId))].length,container.querySelectorAll('.tree-select').length);
+ const before=controller.getOpenIds(),rendered=controller.getRenderedCount();
+ assert.deepEqual(controller.openToDepth(3,{nodeBudget:1}),{applied:false,renderedNodes:level.renderedNodes});
+ assert.deepEqual(controller.getOpenIds(),before,'failed bounded expansion changes no disclosure state');
+ assert.equal(controller.getRenderedCount(),rendered,'no additional DOM allocated when blocked');
+ controller.select(deep.id);
+ controller.setOpenIds(tree.root_ids);
+ assert.deepEqual(controller.getOpenIds(),[...tree.root_ids].sort());
+ assert.equal(controller.selectedId,deep.id,'selected identity survives root reset');
+ controller.setOpenIds([]);
+ assert.deepEqual(controller.getOpenIds(),[]);
+ assert.equal(controller.selectedId,deep.id);
+ assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,1);
+ assert.throws(()=>controller.openToDepth(4),/invalid expansion depth/);
+});
+
+test('P3.2 hidden geometry markers update only materialized nodes and preserve semantic labels',()=>{
+ let visible=true;const document=documentFactory(),container=new Element();
+ const controller=createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,typeLabel,isGeometryVisible:()=>visible,onSelect(){}});
+ const initial=controller.getRenderedCount();
+ assert.ok(initial<100);
+ visible=false;
+ assert.equal(controller.refreshVisibility(),initial);
+ const entry=controller.getNode(tree.root_ids[0]);
+ assert.equal(entry.outer.classList.contains('tree-geometry-hidden'),true);
+ assert.ok(entry.button.getAttribute('aria-label').includes('geometrie ascunsă de filtre'));
+ assert.equal(entry.button.children.find(c=>c.className==='tree-role').children.some(c=>c.className==='tree-visibility'&&!c.hidden),true);
+ assert.equal(controller.refreshVisibility(),0,'unchanged filter state causes no DOM mutation');
+ controller.select(deep.id);const expanded=controller.getRenderedCount();
+ assert.ok(expanded>initial&&expanded<5848);
+ assert.ok(controller.getNode(deep.id).button.getAttribute('aria-label').includes('geometrie ascunsă de filtre'));
+ visible=true;
+ assert.equal(controller.refreshVisibility(),expanded);
+ assert.equal(entry.outer.classList.contains('tree-geometry-hidden'),false);
+ assert.ok(!entry.button.getAttribute('aria-label').includes('geometrie ascunsă de filtre'));
+ assert.equal(controller.selectedId,deep.id);
 });
 
 test('malformed paths fail with entity IDs, without looping or replacing selection',()=>{
