@@ -45,7 +45,7 @@ test('real SIRUTA, CUATM, OSM numeric/r/entity IDs and statistical codes are sea
 });
 test('actual Victoria and Bălți peers have distinct semantic descriptors and shared legal IDs are disambiguated',()=>{
  for(const name of ['Victoria','Bălți']){const peers=index.filter(r=>normalizeSearch(r.entity.display_name)===normalizeSearch(name));assert.ok(peers.length>=3);assert.equal(new Set(peers.map(r=>r.descriptor.secondary)).size,peers.length);for(const r of peers)assert.ok(r.descriptor.parent);}
- const town=index.find(r=>r.entity.id==='osm-r9846233');assert.match(town.descriptor.secondary,/RO · oraș · JUDEȚUL BRAȘOV · SIRUTA 40465/);
+ const town=index.find(r=>r.entity.id==='osm-r9846233');assert.match(town.descriptor.secondary,/RO · oraș · Județul Brașov · SIRUTA 40465/);
  const fake={...town.entity,hierarchy:{...town.entity.hierarchy,legal_parent_name:'Wrong legal parent'},representation:{...town.entity.representation,admin_level:99}};assert.equal(createSearchIndex([fake,...data.entities.filter(e=>e.id!==fake.id)],nodes).find(r=>r.entity.id===fake.id).descriptor.parent,town.descriptor.parent);
 });
 test('global twenty after ranking, RO/MD groups stable and entity IDs deduplicated',()=>{
