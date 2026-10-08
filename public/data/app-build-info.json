@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "app_version": "web-v1.2",
-  "app_commit": "54e6673141ec21fb3a68cca41ce1e747256eef21",
+  "app_version": "web-v1.2.1",
+  "app_commit": "dd7a3dcb1e50095b56861edb3466a911f7d9cfe4",
   "actual_release_tag": "actual-v1.2.0",
   "actual_snapshot_id": "actual-a9e5a4ddcb5277ef",
   "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
-  "policy": "Application version is tracked independently from the immutable ACTUAL data release. app_commit identifies the final functional web-v1.2 baseline after browser and visual QA; release-closure commits may update only metadata, documentation and regression evidence without changing the web-v1.2 application surface or ACTUAL semantic bytes."
+  "policy": "Application version is tracked independently from the immutable ACTUAL data release. app_commit identifies the functional web-v1.2.1 patch baseline that fixes statistical-level filter semantics; release-closure commits may update only metadata, documentation and regression evidence without changing ACTUAL semantic bytes."
 }
