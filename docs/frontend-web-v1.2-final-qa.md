@@ -31,6 +31,21 @@ Desktop 1440×900 și 1280×800; intermediate 900×768; mobile 360×800, 390×84
 
 Corecțiile de fixture QA (matching Iași, key Enter CDP, target bring-to-front/close și viewport rounding) nu sunt contabilizate drept defecte ale aplicației. Nu există redesign/feature nou, refactor semantic, query cache-busting random sau artefacte binare în Git. Cleanup: profile/browser/server temporare închise, fără debug hooks în app și fără modificări ale datelor.
 
+## Verdict QA verificat înainte de merge
+
+Node: **163/163 PASS**. Browser: **26/26 PASS**, local și CI; **189 cazuri distincte**, failures 0. CI a folosit Chrome 154.0.8037.97 pe Linux; local Chrome 154.0.8037.98 pe Windows. Screenshots CI au fost de asemenea inspectate (desktop selected, mobile expanded și drawer provenance).
+
+| Zonă | Verdict |
+|---|---|
+| Desktop 1440/1280, intermediate 900 | PASS |
+| Mobile 360/390/430 și short 390×600 | PASS |
+| Search/tree/map/filter/details synchronization | PASS |
+| URL share, filter/pan și Back/Back/Forward | PASS |
+| Keyboard/focus/ARIA smoke | PASS |
+| Console/network și protected hashes | PASS |
+
+[PR #247](https://github.com/ovidiudeica/reforma-teritoriala/pull/247) păstrează checks și evidence CI. Declararea finală web-v1.2 COMPLET rămâne condiționată de toate gate-urile, rerularea pe main, QA Pages și comparația byte-level a deployment-ului; aceste dovezi sunt incluse în raportul final de închidere.
+
 ## Evidence și validare
 
 Screenshot-uri: desktop default/selected/filters/search/legend-provenance, toate initial viewports, mobile drawer/peek/expanded/hidden/focus/provenance și short viewport. Inspecția vizuală se combină cu bounds/focus/overflow assertions; nu se folosește screenshot diff fragil. Local evidence este în `outputs/browser-qa` și după merge în directoarele postmerge/Pages indicate de raportul final; CI în artifact `atlas-browser-evidence`, retenție 14 zile. JSON include versiunea browserului, scenariile, screenshots, request/response/console și delayed chunk proof. Imaginile nu sunt commise.
