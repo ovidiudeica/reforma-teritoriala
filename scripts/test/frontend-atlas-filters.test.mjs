@@ -1,3 +1,4 @@
+import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -182,7 +183,7 @@ test('real frontend filters integrate late chunks/tiers, jurisdictions, hidden s
    const nav=body.querySelector('nav'),selected=treeDOM.querySelectorAll('[aria-pressed="true"]')[0];
    const treeCount=treeDOM.querySelectorAll('.tree-select').length,opened=treeDOM.querySelectorAll('details').filter(d=>d.open);
    await input('ro.towns').click();assert.equal(app.selectedEntityId,town.id);assert.equal(body.querySelector('nav'),nav);
-   assert.equal(document.getElementById('details-title').textContent,town.display_name);assert.equal(selected.getAttribute('aria-pressed'),'true');assert.equal(treeDOM.querySelectorAll('.tree-select').length,treeCount);assert.ok(opened.every(d=>d.open));
+   assert.equal(document.getElementById('details-title').textContent,formatEntityName(town.display_name));assert.equal(selected.getAttribute('aria-pressed'),'true');assert.equal(treeDOM.querySelectorAll('.tree-select').length,treeCount);assert.ok(opened.every(d=>d.open));
    assert.ok(!visible().some(l=>l.feature.properties.entity_id===town.id));assert.match(document.getElementById('selection-visibility').textContent,/ascunsă/);
    const fetches=requests.length;await input('ro.towns').click();assert.equal(requests.length,fetches);
    assert.ok(visible().some(l=>l.feature.properties.entity_id===town.id&&l.style?.color==='#b54a38'));assert.equal(body.querySelector('nav'),nav);
