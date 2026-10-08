@@ -10,7 +10,7 @@ Escape este ascultat în capture pentru a verifica starea search înainte de han
 
 ## Bottom sheet
 
-Stări closed (fără selection), peek (cu selection) și expanded. Peek afișează display_name și tipul reprezentării folosind typeLabel existent; înălțime max 26% din suprafața hărții. Expanded: 70%, scroll intern, același details-body complet: breadcrumb, legal/statistical/cartographic, actions și mesaj hidden geometry. „Extinde” / „Restrânge” folosesc aria-expanded și aria-controls. Close delegă exact la clearSelection, eliminând și URL entity prin controller-ul semantic existent.
+Stări closed (fără selection), peek (cu selection) și expanded. Peek afișează display_name și tipul reprezentării folosind typeLabel existent; înălțime naturală, max 30dvh și minimum 88px + safe-area pentru rândul de tip și touch controls pe ecrane scunde. Expanded: 70%, scroll intern, același details-body complet: breadcrumb, legal/statistical/cartographic, actions și mesaj hidden geometry. „Extinde” / „Restrânge” folosesc aria-expanded și aria-controls. Close delegă exact la clearSelection, eliminând și URL entity prin controller-ul semantic existent.
 
 Orice selecție validă map/search/tree/breadcrumb/URL notifică shell-ul sincron, înainte de fetch geometry. Sheet revine la peek, inclusiv pentru geometrie ascunsă/statistical-only. Map framing folosește comportamentul existent; niciun padding/fitBounds suplimentar datorat sheet-ului. Sheet nu folosește backdrop; harta rămâne interactivă în zona liberă.
 
