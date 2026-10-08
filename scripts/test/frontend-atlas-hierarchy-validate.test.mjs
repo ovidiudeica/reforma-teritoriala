@@ -46,7 +46,7 @@ test('P3.3 invalid metadata, missing index or duplicate nodes are rejected befor
 });
 
 test('P3.3 node identity and official semantic contract are byte-preserving',()=>{
- const victim=tree.nodes.find(n=>n.parent_id!==null&&n.statistical_code);
+ const victim=tree.nodes.find(n=>n.parent_id!==null&&n.statistical_code&&n.roles.length>1);
  assert.ok(victim);
  corrupt(d=>{byNode(d,victim.id).display_name+=' TEST';},/display_name.*entity index/);
  corrupt(d=>{byNode(d,victim.id).display_type='invented';},/display_type.*entity index/);
