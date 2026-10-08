@@ -7,6 +7,8 @@ import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
 import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
 
 const map=L.map('map',{zoomControl:true,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
+const statisticalPane=map.createPane?.('statistical-boundaries');
+if(statisticalPane?.style)statisticalPane.style.zIndex='450';
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
 L.control.scale({imperial:false}).addTo(map);
 labelMapControls(document);
@@ -250,10 +252,11 @@ async function ensureTier(jurisdiction,tier){
  });
 }
 
-function renderCollection(group,data){
+function renderCollection(group,data,options={}){
  if(!group||!data)return;
  group.clearLayers();
  L.geoJSON(data,{
+  ...options,
   smoothFactor:0,
   filter:feature=>{
    const entity=entityById.get(feature.properties?.entity_id);
@@ -278,7 +281,7 @@ function renderChunk(key){
  renderCollection(chunkGroups.get(key),chunkData.get(key));
 }
 function renderStatisticalGeometry(jurisdiction){
- renderCollection(statisticalGroups[jurisdiction],{type:'FeatureCollection',features:[...statisticalFeatureById.values()].filter(feature=>entityById.get(feature.properties?.entity_id)?.jurisdiction===jurisdiction)});
+ renderCollection(statisticalGroups[jurisdiction],{type:'FeatureCollection',features:[...statisticalFeatureById.values()].filter(feature=>entityById.get(feature.properties?.entity_id)?.jurisdiction===jurisdiction)},{pane:'statistical-boundaries'});
 }
 function rerenderLoadedTiers(){
  selectedLayer=null;
