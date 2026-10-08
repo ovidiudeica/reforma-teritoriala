@@ -7,24 +7,24 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   const item=document.createElement('label');item.className='filter-row';
   const input=document.createElement('input');input.type='checkbox';input.dataset.kind=kind;input.dataset.filter=String(id);input.setAttribute('aria-label',label);
   const text=document.createElement('span');text.textContent=label;
-  const number=document.createElement('small');number.textContent='('+count.toLocaleString('ro-RO')+')';
+  const number=document.createElement('small');number.textContent=typeof count==='number'?'('+count.toLocaleString('ro-RO')+')':String(count);
   item.appendChild(input);item.appendChild(text);item.appendChild(number);
   return {item,input};
  };
- const section=(title,action)=>{
+ const section=(title,action,labels=[['Toate',true],['Niciuna',false]])=>{
   const el=document.createElement('section');el.className='filter-section';
   const heading=document.createElement('h3');heading.textContent=title;el.appendChild(heading);
-  const controls=document.createElement('div');controls.className='filter-actions';
-  for(const [label,enabled] of [['Toate',true],['Niciuna',false]]){
+  const controls=document.createElement('div');controls.className='filter-actions',buttons=[];
+  for(const [label,enabled] of labels){
    const button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-label',label+' — '+title);
-   button.addEventListener('click',()=>{action(enabled);sync();onChange();});controls.appendChild(button);
+   button.addEventListener('click',()=>{action(enabled);sync();onChange();});controls.appendChild(button);buttons.push(button);
   }
-  el.appendChild(controls);container.appendChild(el);return el;
+  el.appendChild(controls);container.appendChild(el);return {el,buttons};
  };
  container.innerHTML='';
  for(const [key,title] of [['administrative','Tipuri administrative'],['other','Alte reprezentări']]){
   const groups=index.groups.filter(g=>g.section===key);
-  const el=section(title,enabled=>{for(const g of groups)setGeometryGroup(g,state,enabled);});
+  const {el}=section(title,enabled=>{for(const g of groups)setGeometryGroup(g,state,enabled);});
   for(const g of groups){
    const wrapper=document.createElement('div');wrapper.className='atlas-filter-group';wrapper.setAttribute('role','group');wrapper.setAttribute('aria-label',g.label);
    const parent=row(g.label,g.count,'geometry-class',g.id);parent.item.className+=' filter-parent';
@@ -44,19 +44,28 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   }
  }
  const statKeys=[1,2,3,...(index.statisticalCounts.has('unclassified')?['unclassified']:[])];
- const stats=section('Niveluri statistice',enabled=>{for(const level of statKeys){if(enabled)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);}});
+ const {el:stats,buttons:statActions}=section('Niveluri statistice',enabled=>{for(const level of statKeys){if(enabled)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
+ const intro=document.createElement('p');intro.className='hint statistical-filter-note';intro.textContent='Nivelurile controlează numai limitele statistice separate. Rolurile statistice care reutilizează geometrii administrative rămân vizibile conform filtrelor administrative.';stats.appendChild(intro);
  for(const level of statKeys){
-  const item=row(level==='unclassified'?'Rol statistic neclasificat':'Nivel statistic '+level,index.statisticalCounts.get(level)||0,'statistical',level);
+  const meta=index.statisticalLevelStats.get(level)||{roles:index.statisticalCounts.get(level)||0,separate:0,reused:0,jurisdictions:{RO:{roles:0,separate:0},MD:{roles:0,separate:0}}};
+  const label=level==='unclassified'?'Rol statistic neclasificat':'Nivel statistic '+level;
+  const count=meta.roles.toLocaleString('ro-RO')+' roluri · '+meta.separate.toLocaleString('ro-RO')+' limite';
+  const item=row(label,count,'statistical',level);
   levels.set(level,item.input);
   item.input.addEventListener('change',()=>{if(item.input.checked)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);sync();onChange();});stats.appendChild(item.item);
+  const breakdown=document.createElement('p');breakdown.className='hint statistical-level-breakdown';
+  const ro=meta.jurisdictions.RO||{roles:0,separate:0},md=meta.jurisdictions.MD||{roles:0,separate:0};
+  breakdown.textContent='RO: '+ro.roles.toLocaleString('ro-RO')+' roluri / '+ro.separate.toLocaleString('ro-RO')+' limite · MD: '+md.roles.toLocaleString('ro-RO')+' roluri / '+md.separate.toLocaleString('ro-RO')+' limite';
+  stats.appendChild(breakdown);
  }
- const separateRow=row('Limite statistice separate',index.statisticalOnly,'separate-statistical','separate');separate=separateRow.input;
+ const separateRow=row('Afișează limite statistice separate',index.statisticalOnly,'separate-statistical','separate');separate=separateRow.input;
  separate.addEventListener('change',()=>{onSeparate(separate.checked);sync();onChange();});stats.appendChild(separateRow.item);
- const note=document.createElement('p');note.className='hint';note.textContent=index.statisticalRoles+' roluri statistice: '+index.reusedStatistical+' reutilizează geometria administrativă, '+index.statisticalOnly+' au limite separate. Filtrele geometrice și nivelurile statistice se intersectează fără dublarea entităților.';stats.appendChild(note);
+ const note=document.createElement('p');note.className='hint';note.textContent=index.statisticalRoles+' roluri statistice în total: '+index.reusedStatistical+' reutilizează geometria administrativă și nu sunt ascunse de nivelurile statistice; '+index.statisticalOnly+' au limite separate controlate aici.';stats.appendChild(note);
  function sync(){
   for(const g of index.groups){const input=parents.get(g.id);Object.assign(input,geometryParentState(g,state));}
   for(const [id,{input,group}] of children)input.checked=state.geometryClasses.has(group.id)&&state.geometrySubtypes.has(id);
-  for(const [level,input] of levels)input.checked=state.statisticalLevels.has(level);
+  for(const [level,input] of levels){input.checked=state.statisticalLevels.has(level);input.disabled=!state.separateStatisticalGeometry;}
+  for(const button of statActions)button.disabled=!state.separateStatisticalGeometry;
   separate.checked=state.separateStatisticalGeometry;
  }
  sync();
