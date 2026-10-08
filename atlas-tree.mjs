@@ -35,8 +35,9 @@ export function revealInTree(container,button){
  container.scrollTop+=row.top-top-(container.clientHeight-row.height)/2;
 }
 
-export function createAtlasTree({container,nodeById,rootIds,document,onSelect,typeLabel=String}){
- const rendered=new Map();
+export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},typeLabel=String}){
+ const rendered=new Map(),openIds=new Set();
+ function setOpen(id,value){const entry=rendered.get(id);if(!entry)return;entry.wrapper.open=value;if(value)openIds.add(id);else openIds.delete(id);}
  let selected=null;
  function mark(id,value){
   const button=rendered.get(id)?.button;
@@ -79,8 +80,8 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,ty
   };
   rendered.set(id,{wrapper,button,ensureChildren});
   if(branch){
-   wrapper.addEventListener('toggle',()=>{if(wrapper.open)ensureChildren();});
-   if(rootIds.includes(id)){wrapper.open=true;ensureChildren();}
+   wrapper.addEventListener('toggle',()=>{if(wrapper.open)ensureChildren();const changed=openIds.has(id)!==wrapper.open;if(wrapper.open)openIds.add(id);else openIds.delete(id);if(changed)onDisclosureChange();});
+   if(rootIds.includes(id)){setOpen(id,true);ensureChildren();}
   }
   return outer;
  }
@@ -92,13 +93,23 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,ty
    const path=ancestorPath(nodeById,rootIds,id);
    for(const ancestor of path.slice(0,-1)){
     const entry=rendered.get(ancestor);
-    entry.ensureChildren();entry.wrapper.open=true;
+    entry.ensureChildren();setOpen(ancestor,true);
    }
    if(selected!==id){mark(selected,false);selected=id;mark(id,true);}
    revealInTree(container,rendered.get(id).button);
    return path;
   },
   clear(){mark(selected,false);selected=null;},
+  getOpenIds:()=>[...openIds].sort(),
+  setOpenIds(ids){
+   for(const [id,entry] of rendered)if(entry.wrapper.tagName==='DETAILS')setOpen(id,false);
+   for(const id of new Set(ids)){
+    if(!nodeById.get(id)?.child_ids?.length)continue;
+    const path=ancestorPath(nodeById,rootIds,id);
+    for(const ancestor of path.slice(0,-1))rendered.get(ancestor).ensureChildren();
+    rendered.get(id).ensureChildren();setOpen(id,true);
+   }
+  },
   getNode:id=>rendered.get(id),
   get selectedId(){return selected;}
  };
