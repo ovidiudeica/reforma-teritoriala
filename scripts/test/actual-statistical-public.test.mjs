@@ -18,9 +18,10 @@ test('P2.3 public contract schema permits statistical-only IDs and typed hierarc
 });
 
 test('P2.3 frontend accepts v3 and exposes consolidated hierarchy surface',async()=>{
- const [app,html]=await Promise.all([readFile('app.js','utf8'),readFile('index.html','utf8')]);
+ const [app,html,validator]=await Promise.all([readFile('app.js','utf8'),readFile('index.html','utf8'),readFile('atlas-hierarchy-validate.mjs','utf8')]);
  assert.match(app,/actual-public-entity-v3/);
- assert.match(app,/actual-consolidated-hierarchy-v1/);
+ assert.match(app,/validateConsolidatedHierarchy\(tree,entityById/);
+ assert.match(validator,/actual-consolidated-hierarchy-v1/);
  assert.match(app,/loadHierarchyTree/);
  assert.match(html,/id="hierarchy-tree"/);
 });
