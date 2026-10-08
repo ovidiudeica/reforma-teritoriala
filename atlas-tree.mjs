@@ -27,6 +27,31 @@ export function ancestorPath(nodeById,rootIds,id){
  return path;
 }
 
+// Pure semantic labels: hierarchy roles describe identity, not geometry visibility.
+export function treeRoleLabel(node,typeLabel=String){
+ const administrative=node.display_type==='state'?'stat':typeLabel(node.display_type);
+ if(!node.roles?.includes('statistical'))return administrative;
+ const level=Number(node.statistical_level);
+ const statistical=Number.isInteger(level)&&level>=1&&level<=3
+  ?(node.jurisdiction==='RO'?'NUTS '+level:'nivel statistic '+level)
+  :'rol statistic';
+ return node.roles.some(role=>role!=='statistical')
+  ?administrative+' · '+statistical
+  :statistical+' · limită statistică separată';
+}
+
+// Only peers under the same parent need an additional visible identifier.
+export function ambiguousSiblingIds(nodeById){
+ const seen=new Map(),ambiguous=new Set();
+ for(const node of nodeById.values()){
+  const key=(node.parent_id??'ROOT')+'\\0'+formatEntityName(node.display_name).toLocaleLowerCase('ro-RO');
+  const previous=seen.get(key);
+  if(previous){ambiguous.add(previous);ambiguous.add(node.id);}
+  else seen.set(key,node.id);
+ }
+ return ambiguous;
+}
+
 // Scroll only the tree container. Native scrollIntoView also scrolls outer panels.
 export function revealInTree(container,button){
  if(!container.getBoundingClientRect||!button.getBoundingClientRect)return;
@@ -37,7 +62,7 @@ export function revealInTree(container,button){
 }
 
 export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},typeLabel=String}){
- const rendered=new Map(),openIds=new Set();
+ const rendered=new Map(),openIds=new Set(),ambiguous=ambiguousSiblingIds(nodeById);
  function setOpen(id,value){const entry=rendered.get(id);if(!entry)return;entry.wrapper.open=value;if(value)openIds.add(id);else openIds.delete(id);}
  let selected=null;
  function mark(id,value){
@@ -52,7 +77,10 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   if(!node)throw new Error('Atlas hierarchy: missing node '+id);
   const branch=hasChildren(nodeById,id);
   const outer=document.createElement('div');
-  outer.className='tree-node'+(branch?' tree-branch':' tree-leaf');
+  const statistical=node.roles?.includes('statistical');
+  const coalesced=statistical&&node.roles.some(role=>role!=='statistical');
+  outer.className='tree-node'+(branch?' tree-branch':' tree-leaf')+
+   (coalesced?' tree-coalesced':statistical?' tree-statistical-only':' tree-administrative');
   const wrapper=branch?document.createElement('details'):outer;
   if(branch)wrapper.className='tree-disclosure';
   if(branch){
@@ -63,14 +91,25 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   }
   const button=document.createElement('button');
   button.type='button';button.className='tree-select';button.dataset.entityId=id;
-  button.textContent=formatEntityName(node.display_name);
-  button.title=(node.statistical_code?node.statistical_code+' · ':'')+typeLabel(node.display_type);
-  button.setAttribute('aria-pressed','false');
-  button.addEventListener('click',()=>onSelect(id,{zoom:true,source:'tree'}));
+  const name=formatEntityName(node.display_name),role=treeRoleLabel(node,typeLabel);
+  const parentName=node.parent_id?formatEntityName(nodeById.get(node.parent_id)?.display_name):'';
+  const duplicate=ambiguous.has(id);
+  const label=document.createElement('span');label.className='tree-name';label.textContent=name;button.appendChild(label);
+  const secondary=document.createElement('span');secondary.className='tree-role';secondary.textContent=role;
   if(node.statistical_code){
    const code=document.createElement('span');code.className='tree-code';code.textContent=node.statistical_code;
-   button.appendChild(code);
+   secondary.appendChild(code);
   }
+  if(duplicate){
+   const identifier=document.createElement('span');identifier.className='tree-identity';
+   identifier.textContent=' · '+id;secondary.appendChild(identifier);
+  }
+  button.appendChild(secondary);
+  const description=[name,role,node.statistical_code,duplicate?'ID '+id:null,parentName?'în '+parentName:null].filter(Boolean).join(' · ');
+  button.title=description;
+  button.setAttribute('aria-label',description);
+  button.setAttribute('aria-pressed','false');
+  button.addEventListener('click',()=>onSelect(id,{zoom:true,source:'tree'}));
   outer.appendChild(button);
   if(branch)outer.appendChild(wrapper);
   let children=null;
