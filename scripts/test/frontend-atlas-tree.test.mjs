@@ -1,3 +1,4 @@
+import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -146,11 +147,11 @@ test('real frontend controller synchronizes map/search/tree/breadcrumb/details a
   resolveHierarchy(tree);await app.frontendReady;
   const container=document.getElementById('hierarchy-tree'),body=document.getElementById('details-body');
   const assertSelection=id=>{
-   assert.equal(app.selectedEntityId,id);assert.equal(document.getElementById('details-title').textContent,entities.get(id).display_name);
+   assert.equal(app.selectedEntityId,id);assert.equal(document.getElementById('details-title').textContent,formatEntityName(entities.get(id).display_name));
    const selected=container.querySelectorAll('[aria-pressed="true"]');assert.equal(selected.length,1);assert.equal(selected[0].dataset.entityId,id);
    const nav=body.querySelector('nav');assert.equal(nav.getAttribute('aria-label'),'Ierarhie teritorială');
    assert.deepEqual(nav.querySelectorAll('button').map(b=>b.dataset.entityId),ancestorPath(nodes,tree.root_ids,id));
-   for(const button of nav.querySelectorAll('button'))assert.ok(button.textContent.startsWith(nodes.get(button.dataset.entityId).display_name));
+   for(const button of nav.querySelectorAll('button'))assert.ok(button.textContent.startsWith(formatEntityName(nodes.get(button.dataset.entityId).display_name)));
   };
   assertSelection(deep.id); // Loading the hierarchy must rebuild the early breadcrumb.
   const entity=entities.get(deep.id),cls=geometryClass(entity);
