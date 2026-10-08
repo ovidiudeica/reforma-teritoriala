@@ -22,7 +22,7 @@ Generatorul datelor păstrează ordonarea oficială a copiilor și consolidează
 
 `selectEntity(id, options)` este controllerul unic pentru hartă, căutare, arbore, detalii și breadcrumb. Arborele este materializat lazy și deschide sincron toți strămoșii selecției, independent de evenimentele asincrone `toggle`. Selectarea unei geometrii ascunse păstrează filtrele, identitatea, detaliile și calea breadcrumb. Dezvăluirea selecției schimbă exclusiv `scrollTop` al containerului ierarhiei, nu pagina sau panourile exterioare.
 
-Persistența ramurilor deschise în URL/History aparține `atlas-url-state.mjs`. Extinderile de la P3.2 respectă același contract `openIds` și fac push în History fără modificarea entității selectate. Validarea structurală completă la încărcare și hardening-ul suplimentar al contractului aparțin **P3.3**.
+Persistența ramurilor deschise în URL/History aparține `atlas-url-state.mjs`. Extinderile de la P3.2 respectă același contract `openIds` și fac push în History fără modificarea entității selectate. Validarea structurală completă la încărcare este implementată separat în **P3.3**, înainte de activarea DOM, a indexului de căutare ierarhic și a sincronizării URL.
 
 ## P3.2 — navigare și ergonomie
 
@@ -33,6 +33,16 @@ Persistența ramurilor deschise în URL/History aparține `atlas-url-state.mjs`.
 - Starea „geometrie ascunsă” este afișată lângă rol și în eticheta accesibilă, inclusiv pentru jurisdicțiile dezactivate. Ea folosește strict `geometryVisible()` și checkboxurile de jurisdicție existente. Nu schimbă niciun filtru, rol, cod sau selecție.
 - La interacțiuni cu filtrele se actualizează **numai nodurile deja materializate** în controllerul lazy; actualizările DOM sunt ignorate dacă starea vizibilității nu s-a schimbat. Copiii materializați mai târziu primesc direct starea curentă.
 - Structura de date a ierarhiei, geometriile și release-ul nu sunt schimbate. P3.2 adaugă numai prezentare, navigare, teste și documentație.
+
+## P3.3 — validare fail-closed la runtime
+
+`atlas-hierarchy-validate.mjs` validează **întregul** fișier `actual-consolidated-hierarchy-v1` în raport cu indexul public ACTUAL deja validat contra manifestului release. Este obligatoriu `schema_version:1`, `mode:ACTUAL`, rădăcinile RO+MD exacte și concordanța numărului de noduri cu manifestul și indexul.
+
+Fiecare nod este verificat pentru ID unic și prezent în index, jurisdicție, denumire, tip, roluri, cod/nivel statistic și părinte consolidat. Validarea verifică și câmpurile derivate: numărătorile pe jurisdicții, copii unici, legături reciproce, adâncime, rădăcini, lipsa ciclurilor/orfanilor și acoperire completă din rădăcini. `max_depth` trebuie să corespundă adâncimii calculate.
+
+**Fail closed:** un fișier sintactic valid, dar structural/semantic corupt, produce eroare înainte de orice modificare a controllerului arborelui. App-ul afișează mesajul de eroare al secțiunii; indexul de identități rămâne separat, iar un arbore parțial nu este activat. Validatorul nu repară și nu normalizează datele oficiale.
+
+`scripts/test/frontend-atlas-hierarchy-validate.test.mjs` exercită corpusul real de 5.848 de entități și mutații controlate (duplicate, cicluri, orfani, părinți, jurisdicții, statistici, nume, metadate). Testul Chrome folosește interceptarea răspunsului tree pentru a demonstra respingerea la runtime, fără modificarea vreunui fișier din repository. Workflow-ul `frontend-geometry-taxonomy.yml` include testul de contract și verificarea sintaxei.
 
 ## Verificări
 
