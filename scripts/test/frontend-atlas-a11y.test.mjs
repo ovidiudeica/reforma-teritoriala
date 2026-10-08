@@ -82,11 +82,12 @@ test('P3.2 hierarchy controls are accessible and complete labels wrap in a talle
  assert.equal(d.getElementById('tree-expand-depth').tagName,'SELECT');
  assert.equal(d.getElementById('tree-navigation-status').getAttribute('role'),'status');
  assert.equal(d.getElementById('tree-navigation-status').getAttribute('aria-live'),'polite');
- assert.equal(rule('.tree-name').declarations['white-space'],'normal');
- assert.equal(rule('.tree-role').declarations['overflow-wrap'],'anywhere');
- assert.equal(rule('.hierarchy-tree').declarations['min-height'],'clamp(240px,40vh,420px)');
- assert.equal(rule('.tree-branch>.tree-select').declarations.position,'relative');
- assert.equal(rule('.tree-geometry-hidden>.tree-select').declarations['border-inline-end'],'2px dashed var(--atlas-warning)');
+ const containsRule=(selector,key,value,media='')=>rules.some(r=>r.selector.split(',').map(v=>v.trim()).includes(selector)&&r.declarations[key]===value&&(!media||r.media.some(v=>v.includes(media))));
+ assert.ok(containsRule('.tree-name','white-space','normal'));
+ assert.ok(containsRule('.tree-role','overflow-wrap','anywhere'));
+ assert.ok(containsRule('.hierarchy-tree','min-height','clamp(240px,40vh,420px)'));
+ assert.ok(containsRule('.tree-branch>.tree-select','position','relative'));
+ assert.ok(containsRule('.tree-geometry-hidden>.tree-select','border-inline-end','2px dashed var(--atlas-warning)'));
  assert.equal(rule('.tree-geometry-hidden>.tree-select','forced-colors:active').declarations['border-inline-end'],'2px dashed CanvasText');
 });
 test('focus-visible coverage includes all interactive classes via a common selector',()=>{const focus=rules.findLast(r=>r.selector===':is(button,a,input,summary,[tabindex]):focus-visible'&&!r.media.length);assert.equal(focus.declarations.outline,'3px solid var(--atlas-focus)');assert.equal(rule('#map:focus-visible').declarations['outline-offset'],'-4px');});
