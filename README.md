@@ -4,7 +4,7 @@ Atlas teritorial pentru România și Republica Moldova.
 
 ## Stadiu
 
-**ACTUAL v1.2** și interfața **web-v1.2** sunt baseline-urile publice curente. `ISTORIC` și `PROPUNERI` rămân faze separate de roadmap; interfața nu le prezintă ca date publicate.
+**ACTUAL v1.2** și interfața **web-v1.2.1** sunt baseline-urile publice curente. `ISTORIC` și `PROPUNERI` rămân faze separate de roadmap; interfața nu le prezintă ca date publicate.
 
 ## Arhitectură
 
@@ -59,9 +59,9 @@ GeoJSON-urile publice păstrează coordonatele geometriei master **fără simpli
 
 ## Release web
 
-`web-v1.2` este baseline-ul funcțional închis după pașii v1.2.1–v1.2.7. SHA-ul funcțional de referință este `54e6673141ec21fb3a68cca41ce1e747256eef21`; `public/data/app-build-info.json` leagă această versiune a aplicației de release-ul de date `actual-v1.2.0` fără a confunda identitatea aplicației cu identitatea snapshot-ului ACTUAL.
+`web-v1.2.0` a închis baseline-ul Atlas după pașii v1.2.1–v1.2.7. Patch-ul curent `web-v1.2.1` repară exclusiv semantica secțiunii „Niveluri statistice”: nivelurile controlează numai cele 18 limite statistice separate și nu mai pot ascunde cele 45 geometrii administrative reutilizate. SHA-ul funcțional al patch-ului este `dd7a3dcb1e50095b56861edb3466a911f7d9cfe4`; `public/data/app-build-info.json` îl leagă de release-ul de date `actual-v1.2.0` fără a confunda identitatea aplicației cu identitatea snapshot-ului ACTUAL.
 
-Închiderea release-ului web este evidence/metadata-only: nu modifică entități, ierarhii, geometrii, registre, surse sau fingerprint-ul ACTUAL. Detaliile sunt în `docs/frontend-web-v1.2-release.md`.
+Patch-ul web nu modifică entități, ierarhii, geometrii, registre, surse sau fingerprint-ul ACTUAL. Baseline-ul inițial este documentat în `docs/frontend-web-v1.2-release.md`, iar patch-ul în `docs/frontend-web-v1.2.1-statistical-levels-bugfix.md`.
 
 ## Source bundle și reproducibilitate
 
