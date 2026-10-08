@@ -126,10 +126,13 @@ test('actual frontend rendering and selection respect filters, including async s
  const elements=new Map();
  const doc={getElementById:id=>{if(!elements.has(id))elements.set(id,element());return elements.get(id);},querySelectorAll:()=>[],createElement:element};
  const layerGroup=()=>({layers:[],clearLayers(){this.layers=[];},addLayer(layer){this.layers.push(layer);},hasLayer(layer){return this.layers.includes(layer);},removeLayer(layer){this.layers=this.layers.filter(x=>x!==layer);},addTo(){return this;},eachLayer(fn){this.layers.forEach(fn);}});
+ const pane={style:{}};
+ const geoJsonOptions=[];
  const L={
-  map:()=>({setView(){return this;},fitBounds(){},getZoom:()=>6,on(){}}),
+  map:()=>({setView(){return this;},fitBounds(){},getZoom:()=>6,on(){},createPane:name=>name==='statistical-boundaries'?pane:null}),
   tileLayer:()=>({addTo(){}}),control:{scale:()=>({addTo(){}})},layerGroup,
   geoJSON:(data,config)=>{
+   geoJsonOptions.push(config);
    const group=layerGroup();
    for(const feature of data.features.filter(config.filter)){
     const layer={feature,bindTooltip(){return this;},on(){},setStyle(style){this.style=style;}};
@@ -162,6 +165,8 @@ test('actual frontend rendering and selection respect filters, including async s
   await frontend.frontendReady;
   const count=()=>frontend.statisticalGroups[only.jurisdiction].layers[0].layers.length;
   assert.equal(count(),1);
+  assert.equal(pane.style.zIndex,'450');
+  assert.ok(geoJsonOptions.some(options=>options.pane==='statistical-boundaries'));
   frontend.activeStatisticalLevels.delete(statisticalLevel(only));frontend.refreshGeometryVisibility();
   assert.equal(count(),0);
   await frontend.selectEntity(only.id);
