@@ -1,3 +1,4 @@
+import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -135,7 +136,7 @@ test('real frontend URL hydration/history integrates selection, filters, viewpor
  try{
   Object.assign(globalThis,{document,L,fetch,window:browser});Object.defineProperty(globalThis,'navigator',{configurable:true,value:{clipboard:{writeText:async value=>copied.push(value)}}});
   const app=await import('../../app.js?atlas-url-tests');await app.frontendReady;assert.ok(app.atlasUrl);const body=document.getElementById('details-body'),treeDOM=document.getElementById('hierarchy-tree'),input=document.getElementById('entity-search'),filtersDOM=document.getElementById('filter-list');
-  const selected=id=>{assert.equal(app.selectedEntityId,id);assert.equal(document.getElementById('details-title').textContent,entities.get(id).display_name);const selected=treeDOM.querySelectorAll('[aria-pressed="true"]');assert.equal(selected.length,1);assert.equal(selected[0].dataset.entityId,id);assert.equal(body.querySelector('nav').querySelectorAll('button').at(-1).dataset.entityId,id);assert.equal(new URLSearchParams(browser.location.search).get('e'),id);};
+  const selected=id=>{assert.equal(app.selectedEntityId,id);assert.equal(document.getElementById('details-title').textContent,formatEntityName(entities.get(id).display_name));const selected=treeDOM.querySelectorAll('[aria-pressed="true"]');assert.equal(selected.length,1);assert.equal(selected[0].dataset.entityId,id);assert.equal(body.querySelector('nav').querySelectorAll('button').at(-1).dataset.entityId,id);assert.equal(new URLSearchParams(browser.location.search).get('e'),id);};
   const subtype=id=>filtersDOM.descendants().find(e=>e.dataset.kind==='geometry-subtype'&&e.dataset.filter===id);
   await t.test('complex pre-ready URL restores filters, details/breadcrumb/tree and exact viewport without fitBounds',()=>{
    selected(town.id);assert.equal(fits.length,0);assert.deepEqual(viewport,initial.viewport);assert.equal(document.getElementById('layer-ro').checked,false);assert.equal(document.getElementById('layer-md').checked,true);assert.equal(subtype('ro.towns').checked,false);assert.equal(subtype('md.districts').checked,false);assert.equal(filtersDOM.descendants().find(e=>e.dataset.kind==='statistical'&&e.dataset.filter==='3').checked,false);assert.equal(filtersDOM.descendants().find(e=>e.dataset.kind==='separate-statistical').checked,false);

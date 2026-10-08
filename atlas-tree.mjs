@@ -1,3 +1,4 @@
+import {formatEntityName} from './atlas-name-format.mjs';
 // Navigation uses only actual-consolidated-hierarchy-v1 relationships.
 export function parentId(nodeById,id){
  const node=nodeById.get(id);
@@ -57,12 +58,12 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   if(branch){
    const summary=document.createElement('summary');
    summary.className='tree-toggle';
-   summary.setAttribute('aria-label','Extinde sau restrânge '+node.display_name);
+   summary.setAttribute('aria-label','Extinde sau restrânge '+formatEntityName(node.display_name));
    wrapper.appendChild(summary);
   }
   const button=document.createElement('button');
   button.type='button';button.className='tree-select';button.dataset.entityId=id;
-  button.textContent=node.display_name;
+  button.textContent=formatEntityName(node.display_name);
   button.title=(node.statistical_code?node.statistical_code+' · ':'')+typeLabel(node.display_type);
   button.setAttribute('aria-pressed','false');
   button.addEventListener('click',()=>onSelect(id,{zoom:true,source:'tree'}));

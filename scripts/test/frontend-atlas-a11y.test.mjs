@@ -1,3 +1,4 @@
+import {formatEntityName} from '../../atlas-name-format.mjs';
 import {geometryStyleConfig,geometryStyle,entityGeometryStyle,selectedStyle,legendEntries,renderLegend,globalProvenance,renderGlobalProvenance,entityProvenance,entityProvenanceHtml,safeSourceUrl,publishedActualRelease,labelMapControls} from '../../atlas-presentation.mjs';
 import {typeLabel} from '../../atlas-search.mjs';
 import {createAtlasFilters} from '../../atlas-filters.mjs';
@@ -93,7 +94,7 @@ test('real keyboard accessibility integrates provenance, legend, search/tree/fil
  try{
   Object.assign(globalThis,{document,L,fetch,window:browser});Object.defineProperty(globalThis,'navigator',{configurable:true,value:{clipboard:{writeText:async value=>copied.push(value)}}});
   const app=await import('../../app.js?atlas-a11y-tests');await app.frontendReady;assert.ok(app.atlasUrl);const body=document.getElementById('details-body'),treeDOM=document.getElementById('hierarchy-tree'),input=document.getElementById('entity-search'),filtersDOM=document.getElementById('filter-list');
-  const selected=id=>{assert.equal(app.selectedEntityId,id);assert.equal(document.getElementById('details-title').textContent,entities.get(id).display_name);const selected=treeDOM.querySelectorAll('[aria-pressed="true"]');assert.equal(selected.length,1);assert.equal(selected[0].dataset.entityId,id);assert.equal(body.querySelector('nav').querySelectorAll('button').at(-1).dataset.entityId,id);assert.equal(new URLSearchParams(browser.location.search).get('e'),id);};
+  const selected=id=>{assert.equal(app.selectedEntityId,id);assert.equal(document.getElementById('details-title').textContent,formatEntityName(entities.get(id).display_name));const selected=treeDOM.querySelectorAll('[aria-pressed="true"]');assert.equal(selected.length,1);assert.equal(selected[0].dataset.entityId,id);assert.equal(body.querySelector('nav').querySelectorAll('button').at(-1).dataset.entityId,id);assert.equal(new URLSearchParams(browser.location.search).get('e'),id);};
   const subtype=id=>filtersDOM.descendants().find(e=>e.dataset.kind==='geometry-subtype'&&e.dataset.filter===id);
 
   const el=id=>document.getElementById(id),ui=app.atlasMobile;

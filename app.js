@@ -4,6 +4,7 @@ import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-s
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
+import {formatEntityName} from './atlas-name-format.mjs';
 import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
 
 const map=L.map('map',{zoomControl:true,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
@@ -199,7 +200,7 @@ function renderBreadcrumb(entity){
  const list=document.createElement('ol');
  for(const id of selectedPath(entity.id)){
   const node=hierarchyNodeById.get(id),item=document.createElement('li'),button=document.createElement('button');
-  button.type='button';button.className='parent-button';button.textContent=node.display_name;
+  button.type='button';button.className='parent-button';button.textContent=formatEntityName(node.display_name);
   button.dataset.entityId=id;
   if(id===entity.id)button.setAttribute('aria-current','location');
   if(node.statistical_code){
@@ -267,7 +268,7 @@ function renderCollection(group,data,options={}){
    const id=feature.properties?.entity_id;
    const entity=entityById.get(id);
    if(!entity)return;
-   layer.bindTooltip(entity.display_name,{sticky:true,className:'entity-tooltip'});
+   layer.bindTooltip(formatEntityName(entity.display_name),{sticky:true,className:'entity-tooltip'});
    layer.on('click',()=>selectEntity(id,{source:'map'},layer).catch(console.error));
    if(id===selectedEntityId){layer.setStyle(selectedStyle);selectedLayer=layer;}
   }
@@ -392,7 +393,7 @@ function detailRow(label,value){
 function renderDetails(entity){
  const title=document.getElementById('details-title');
  const body=document.getElementById('details-body');
- title.textContent=entity.display_name;
+ title.textContent=formatEntityName(entity.display_name);
  document.getElementById('details-summary').textContent=typeLabel(entity.representation.inferred_type);
  body.innerHTML=
   '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+

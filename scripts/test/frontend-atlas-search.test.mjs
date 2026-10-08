@@ -1,3 +1,4 @@
+import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -44,7 +45,7 @@ test('real SIRUTA, CUATM, OSM numeric/r/entity IDs and statistical codes are sea
 });
 test('actual Victoria and Bălți peers have distinct semantic descriptors and shared legal IDs are disambiguated',()=>{
  for(const name of ['Victoria','Bălți']){const peers=index.filter(r=>normalizeSearch(r.entity.display_name)===normalizeSearch(name));assert.ok(peers.length>=3);assert.equal(new Set(peers.map(r=>r.descriptor.secondary)).size,peers.length);for(const r of peers)assert.ok(r.descriptor.parent);}
- const town=index.find(r=>r.entity.id==='osm-r9846233');assert.match(town.descriptor.secondary,/RO · oraș · JUDEȚUL BRAȘOV · SIRUTA 40465/);
+ const town=index.find(r=>r.entity.id==='osm-r9846233');assert.match(town.descriptor.secondary,/RO · oraș · Județul Brașov · SIRUTA 40465/);
  const fake={...town.entity,hierarchy:{...town.entity.hierarchy,legal_parent_name:'Wrong legal parent'},representation:{...town.entity.representation,admin_level:99}};assert.equal(createSearchIndex([fake,...data.entities.filter(e=>e.id!==fake.id)],nodes).find(r=>r.entity.id===fake.id).descriptor.parent,town.descriptor.parent);
 });
 test('global twenty after ranking, RO/MD groups stable and entity IDs deduplicated',()=>{
@@ -63,7 +64,7 @@ test('ArrowDown starts first and clamps at last; ArrowUp starts last and clamps 
 });
 test('Enter selects the active entity through central callback then closes and preserves input focus',async()=>{
  const h=harness();await query(h,'Victoria');await key(h,'ArrowDown');await key(h,'ArrowDown');const selected=h.controller.state.results[1].entity;
- await key(h,'Enter');assert.deepEqual(h.selections,[{id:selected.id,options:{zoom:true,source:'search'}}]);assert.equal(h.input.value,selected.display_name);assert.equal(h.controller.state.open,false);assert.equal(h.controller.state.activeId,null);assert.equal(h.document.activeElement,h.input);
+ await key(h,'Enter');assert.deepEqual(h.selections,[{id:selected.id,options:{zoom:true,source:'search'}}]);assert.equal(h.input.value,formatEntityName(selected.display_name));assert.equal(h.controller.state.open,false);assert.equal(h.controller.state.activeId,null);assert.equal(h.document.activeElement,h.input);
 });
 test('Enter without active result and IME composition never selects arbitrarily',async()=>{
  const h=harness();await query(h,'Victoria');await key(h,'Enter');assert.equal(h.selections.length,0);await key(h,'ArrowDown',{isComposing:true});assert.equal(h.controller.state.activeId,null);
@@ -114,7 +115,7 @@ test('real keyboard search retains map/tree/details/breadcrumb synchronization a
   Object.assign(globalThis,{document,L,fetch});const app=await import('../../app.js?atlas-search-tests');await app.frontendReady;
   const input=document.getElementById('entity-search'),container=document.getElementById('search-results'),body=document.getElementById('details-body'),treeDOM=document.getElementById('hierarchy-tree');input.focus();
   const select=async(entity,q=entity.id)=>{input.value=q;await input.dispatch('input');assert.equal(app.atlasSearch.state.results[0].entity.id,entity.id);await input.dispatch('keydown',{key:'ArrowDown'});await input.dispatch('keydown',{key:'Enter'});};
-  const synchronized=entity=>{assert.equal(app.selectedEntityId,entity.id);assert.equal(document.getElementById('details-title').textContent,entity.display_name);assert.equal(treeDOM.querySelectorAll('[aria-pressed="true"]').length,1);assert.equal(treeDOM.querySelectorAll('[aria-pressed="true"]')[0].dataset.entityId,entity.id);assert.equal(body.querySelector('nav').querySelectorAll('button').at(-1).dataset.entityId,entity.id);assert.equal(input.getAttribute('aria-expanded'),'false');};
+  const synchronized=entity=>{assert.equal(app.selectedEntityId,entity.id);assert.equal(document.getElementById('details-title').textContent,formatEntityName(entity.display_name));assert.equal(treeDOM.querySelectorAll('[aria-pressed="true"]').length,1);assert.equal(treeDOM.querySelectorAll('[aria-pressed="true"]')[0].dataset.entityId,entity.id);assert.equal(body.querySelector('nav').querySelectorAll('button').at(-1).dataset.entityId,entity.id);assert.equal(input.getAttribute('aria-expanded'),'false');};
   const subtypeInput=id=>document.getElementById('filter-list').descendants().find(e=>e.dataset.kind==='geometry-subtype'&&e.dataset.filter===id);
   const town=byId.get('osm-r9846233');
   await t.test('visible keyboard selection prepares zoom/highlight and central navigation',async()=>{await select(town);synchronized(town);assert.ok(fitBounds.length>0);assert.ok(visible().some(l=>l.feature.properties.entity_id===town.id&&l.style?.color==='#b54a38'));});

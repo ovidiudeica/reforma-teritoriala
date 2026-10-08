@@ -4,7 +4,7 @@
 
 ## Index și ranking
 
-Indexul precomputează numele și identificatorii normalizați, descriptorii și contextul părinților. Este construit la încărcarea public entities, apoi actualizat când arborele consolidat devine disponibil; nu reconstruiește ierarhia per query. Identitatea rezultatului este entity.id; duplicatele acelui ID sunt eliminate. Numele originale sunt afișate nemodificate.
+Indexul precomputează numele și identificatorii normalizați, descriptorii și contextul părinților. Este construit la încărcarea public entities, apoi actualizat când arborele consolidat devine disponibil; nu reconstruiește ierarhia per query. Identitatea rezultatului este entity.id; duplicatele acelui ID sunt eliminate. Numele oficiale rămân nemodificate în date; etichetele afișate sunt formate unitar prin `formatEntityName` (vezi `frontend-entity-name-casing.md`).
 
 Normalizare: NFD, eliminarea diacriticelor, lowercase și trim. `Iasi`, `IAȘI` și ` Iași ` sunt echivalente. Codurile cu zero inițial rămân șiruri de caractere.
 
@@ -24,7 +24,7 @@ Numele/query-ul nu sunt interpolate în HTML: opțiunile folosesc createElement/
 
 - ArrowDown fără active → primul; următoarele avansează și se opresc la ultimul.
 - ArrowUp fără active → ultimul; următoarele urcă și se opresc la primul. Fără wrap.
-- Enter selectează numai un active result, prin selectEntity(id, {zoom:true, source:'search'}). Închide lista, resetează active state și pune display_name în input.
+- Enter selectează numai un active result, prin selectEntity(id, {zoom:true, source:'search'}). Închide lista, resetează active state și pune versiunea de prezentare a display_name în input.
 - Enter fără active nu selectează implicit primul rezultat.
 - Escape închide lista și active state, păstrând query-ul și entitatea deja selectată. Înlocuiește vechiul clear-input pentru a permite reluarea căutării fără re-tastare și fără pierderea contextului. Săgețile redeschid query-ul păstrat.
 - Hover/pointermove schimbă doar active result; click selectează. Săgețile continuă de la active result-ul mouse-ului.
