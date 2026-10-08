@@ -44,28 +44,27 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   }
  }
  const statKeys=[1,2,3,...(index.statisticalCounts.has('unclassified')?['unclassified']:[])];
- const {el:stats,buttons:statActions}=section('Niveluri statistice',enabled=>{for(const level of statKeys){if(enabled)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
- const intro=document.createElement('p');intro.className='hint statistical-filter-note';intro.textContent='Nivelurile controlează numai limitele statistice separate. Rolurile statistice care reutilizează geometrii administrative rămân vizibile conform filtrelor administrative.';stats.appendChild(intro);
+ const {el:stats}=section('Niveluri statistice',enabled=>{for(const level of statKeys){if(enabled)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
+ const intro=document.createElement('p');intro.className='hint statistical-filter-note';intro.textContent='Nivelurile controlează toate cele '+index.statisticalRoles+' entități cu rol statistic. Cele '+index.reusedStatistical+' entități coalesced reutilizează geometria administrativă existentă, fără duplicare; cele '+index.statisticalOnly+' limite separate sunt controlate și de comutatorul de mai jos.';stats.appendChild(intro);
  const separateRow=row('Afișează limite statistice separate',index.statisticalOnly,'separate-statistical','separate');separate=separateRow.input;
  separate.addEventListener('change',()=>{onSeparate(separate.checked);sync();onChange();});stats.appendChild(separateRow.item);
  for(const level of statKeys){
   const meta=index.statisticalLevelStats.get(level)||{roles:index.statisticalCounts.get(level)||0,separate:0,reused:0,jurisdictions:{RO:{roles:0,separate:0},MD:{roles:0,separate:0}}};
   const label=level==='unclassified'?'Rol statistic neclasificat':'Nivel statistic '+level;
-  const count=meta.roles.toLocaleString('ro-RO')+' roluri · '+meta.separate.toLocaleString('ro-RO')+' limite';
+  const count=meta.roles.toLocaleString('ro-RO')+' entități · '+meta.reused.toLocaleString('ro-RO')+' reutilizate · '+meta.separate.toLocaleString('ro-RO')+' separate';
   const item=row(label,count,'statistical',level);
   levels.set(level,item.input);
   item.input.addEventListener('change',()=>{if(item.input.checked)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);sync();onChange();});stats.appendChild(item.item);
   const breakdown=document.createElement('p');breakdown.className='hint statistical-level-breakdown';
   const ro=meta.jurisdictions.RO||{roles:0,separate:0},md=meta.jurisdictions.MD||{roles:0,separate:0};
-  breakdown.textContent='RO: '+ro.roles.toLocaleString('ro-RO')+' roluri / '+ro.separate.toLocaleString('ro-RO')+' limite · MD: '+md.roles.toLocaleString('ro-RO')+' roluri / '+md.separate.toLocaleString('ro-RO')+' limite';
+  breakdown.textContent='RO: '+ro.roles.toLocaleString('ro-RO')+' total / '+ro.reused.toLocaleString('ro-RO')+' reutilizate / '+ro.separate.toLocaleString('ro-RO')+' separate · MD: '+md.roles.toLocaleString('ro-RO')+' total / '+md.reused.toLocaleString('ro-RO')+' reutilizate / '+md.separate.toLocaleString('ro-RO')+' separate';
   stats.appendChild(breakdown);
  }
- const note=document.createElement('p');note.className='hint';note.textContent=index.statisticalRoles+' roluri statistice în total: '+index.reusedStatistical+' reutilizează geometria administrativă și nu sunt ascunse de nivelurile statistice; '+index.statisticalOnly+' au limite separate controlate aici.';stats.appendChild(note);
+ const note=document.createElement('p');note.className='hint';note.textContent='Pentru entitățile coalesced, geometria este vizibilă dacă o activează filtrul administrativ sau nivelul statistic. Pentru ascundere completă trebuie dezactivate ambele roluri. Comutatorul pentru limite separate nu dezactivează nivelurile reutilizate.';stats.appendChild(note);
  function sync(){
   for(const g of index.groups){const input=parents.get(g.id);Object.assign(input,geometryParentState(g,state));}
   for(const [id,{input,group}] of children)input.checked=state.geometryClasses.has(group.id)&&state.geometrySubtypes.has(id);
-  for(const [level,input] of levels){input.checked=state.statisticalLevels.has(level);input.disabled=!state.separateStatisticalGeometry;}
-  for(const button of statActions)button.disabled=!state.separateStatisticalGeometry;
+  for(const [level,input] of levels)input.checked=state.statisticalLevels.has(level);
   separate.checked=state.separateStatisticalGeometry;
  }
  sync();
