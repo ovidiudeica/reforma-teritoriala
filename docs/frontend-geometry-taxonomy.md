@@ -4,9 +4,9 @@
 
 `geometry-taxonomy.mjs` este unica sursă de adevăr. Configurația declarativă `geometryFilterTree` produce clasificatorul de clasă, clasificatorul de subtip, etichetele și ordinea UI. `atlas-filters.mjs` construiește numai controalele DOM; `app.js` folosește un singur `geometryVisible()` pentru tiers, chunks, limite statistice, highlight și încărcări întârziate.
 
-Clasa descrie nivelul geometric mare. Subtipul descrie reprezentarea în jurisdicția respectivă. Identitatea juridică și display_type nu clasifică geometria. Rolul statistic este un facet independent care se intersectează cu vizibilitatea geometrică; 45 entități admin/statistical păstrează o singură geometrie și un singur subtip.
+Clasa descrie nivelul geometric mare. Subtipul descrie reprezentarea în jurisdicția respectivă. Identitatea juridică și display_type nu clasifică geometria. Rolul statistic este un facet independent; cele 45 entități admin/statistical păstrează o singură geometrie administrativă și un singur subtip, iar vizibilitatea acelei geometrii este controlată exclusiv de filtrele geometrice/administrative.
 
-Subtipurile provin exclusiv din `representation.inferred_type` și jurisdicție. Categoria statistical desemnează cele 18 limite separate: clasa statistical_only, subtip null exceptat explicit, control prin nivel statistic și toggle separat. Nu se folosește admin_level izolat sau legal.type.
+Subtipurile provin exclusiv din `representation.inferred_type` și jurisdicție. Categoria statistical desemnează cele 18 limite separate: clasa statistical_only, subtip null exceptat explicit, control prin nivel statistic și toggle separat. Nivelurile statistice nu ascund niciodată geometriile administrative reutilizate. Nu se folosește admin_level izolat sau legal.type.
 
 ## Auditul populației
 
@@ -93,11 +93,11 @@ Zero în tabel înseamnă mapping explicit cunoscut, fără categorie goală în
 
 ## State și interacțiuni
 
-`activeGeometryClasses` este același Set ca aliasul compatibil `activeFilterGroups`, nu o copie. `activeGeometrySubtypes` păstrează subtipurile active. geometryVisible intersectează class gate, subtype gate, nivelul statistic și toggle-ul limitelor separate. Jurisdicțiile sunt controlate separat prin layer groups; off/on nu modifică niciun Set de subtipuri. API-ul vechi fără geometrySubtypes rămâne compatibil.
+`activeGeometryClasses` este același Set ca aliasul compatibil `activeFilterGroups`, nu o copie. `activeGeometrySubtypes` păstrează subtipurile active. `geometryVisible()` aplică class/subtype gates entităților cu geometrie administrativă și aplică nivelul statistic + toggle-ul global numai clasei `statistical_only`. Astfel un județ/NUTS3, Chișinău/MD115, Găgăuzia/MD114 sau statul MD1 nu poate dispărea doar pentru că nivelul statistic corespunzător este OFF. Jurisdicțiile sunt controlate separat prin layer groups; off/on nu modifică niciun Set de subtipuri.
 
 Părinte checked = toate subtipurile active; unchecked = niciunul; indeterminate = subset activ. Click pe checked dezactivează clasa și toate subtipurile; click pe unchecked/mixed activează toate. Un copil activează class gate; dezactivarea ultimului copil dezactivează class gate. Sincronizarea actualizează proprietățile input-urilor, fără reconstruirea DOM-ului sau pierderea expansion state. Checkbox-ul părinte este în afara conținutului ascuns de details; summary controlează separat disclosure-ul.
 
-Toate/Niciuna operează numai pe secțiunea proprie. Tipurile administrative și alte reprezentări nu schimbă nivelurile/toggle-ul statistic. Nivelurile statistice nu schimbă clasele/subtipurile administrative. Count-urile și membership sets sunt calculate o singură dată la încărcarea indexului; fiecare click sincronizează numai lista mică de controale și rerandează colecțiile geometrice deja în cache. Nu reconstruiește arborele și nu refetch-uiește date pentru filtre.
+`Toate nivelurile` / `Niciun nivel` operează numai pe nivelurile limitelor statistice separate; toggle-ul master `Afișează limite statistice separate` rămâne distinct. Când masterul este OFF, checkbox-urile de nivel și acțiunile lor sunt disabled, dar starea nivelurilor este păstrată pentru reactivare. Tipurile administrative și alte reprezentări nu schimbă nivelurile/toggle-ul statistic, iar nivelurile statistice nu schimbă clasele/subtipurile administrative și nu le pot ascunde geometriile. UI afișează pentru fiecare nivel atât numărul total de roluri, cât și numărul de limite separate efectiv controlate, plus breakdown RO/MD. Count-urile și membership sets sunt calculate o singură dată la încărcarea indexului; fiecare click sincronizează numai lista mică de controale și rerandează colecțiile geometrice deja în cache. Nu reconstruiește arborele și nu refetch-uiește date pentru filtre.
 
 Selecția și navigarea web-v1.2.1 sunt păstrate. Un subtip off ascunde geometria selectată și păstrează ID-ul, detaliile, breadcrumb-ul, nodul și ramurile deschise. Re-enable restaurează highlight-ul prin același render-time predicate. Un chunk/tier primit după modificarea filtrelor folosește state-ul curent, nu state-ul request-ului.
 
@@ -108,3 +108,8 @@ Un inferred_type necunoscut produce class unclassified și subtype `unclassified
 Suite: frontend-smoke, actual-statistical-public, frontend-geometry-taxonomy, frontend-atlas-tree și frontend-atlas-filters; același workflow frontend le execută și verifică git diff --exit-code. Noua suită acoperă clasificarea tuturor entităților, mapping adversarial legal/display/admin_level, count-uri, checkbox nativ mixed, state/expansion persistence, încărcare lazy și fluxul real selectare ↔ filtre ↔ arbore/detalii.
 
 ACTUAL/P2, geometriile, registrele, sursele, public entities, hierarchy JSON, snapshot/fingerprint și release/tag actual-v1.2.0 rămân neschimbate. Browser/visual QA complet rămâne pentru web-v1.2.7; nu sunt introduse dependențe noi sau pașii web-v1.2.3–web-v1.2.7.
+
+
+## Bugfix web-v1.2.1 — Niveluri statistice
+
+Patch-ul elimină conflictul în care un nivel statistic OFF ascundea și geometria administrativă a entităților coalesced. Distribuția rămâne 63 roluri: nivel 1 = 5 roluri (4 limite separate + 1 geometrie reutilizată), nivel 2 = 10 (10 separate), nivel 3 = 48 (4 separate + 44 reutilizate). Nivel 3 OFF ascunde numai cele 4 limite statistice separate MD; cele 42 județe/București și cele două entități MD coalesced de nivel 3 rămân guvernate exclusiv de filtrele administrative.
