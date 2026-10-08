@@ -58,13 +58,15 @@ test('unknown types stay explicit; legal/display/admin_level cannot override the
   const e={jurisdiction:j.id,representation:{inferred_type:type}};assert.equal(geometryClass(e),g.id);assert.equal(geometrySubtype(e),sub.id);
  }
 });
-test('45 coalesced roles retain one administrative subtype and ignore statistical level visibility gates',()=>{
+test('45 coalesced roles retain one polygon and are visible through either administrative or statistical role',()=>{
  const reused=index.entities.filter(e=>e.category!=='statistical'&&e.roles.includes('statistical'));assert.equal(reused.length,45);
  for(const e of reused){
   assert.ok(filters.subtypeMembers.get(geometrySubtype(e)).has(e.id));
   assert.equal([...filters.subtypeMembers.values()].filter(ids=>ids.has(e.id)).length,1);
   const state=options();assert.equal(geometryVisible(e,state),true);
-  state.statisticalLevels.delete(statisticalLevel(e));assert.equal(geometryVisible(e,state),true);
+  state.geometryClasses.delete(geometryClass(e));assert.equal(geometryVisible(e,state),true,'statistical role keeps shared polygon visible');
+  state.statisticalLevels.delete(statisticalLevel(e));assert.equal(geometryVisible(e,state),false,'both roles off hide shared polygon');
+  state.geometryClasses.add(geometryClass(e));assert.equal(geometryVisible(e,state),true,'administrative role independently restores shared polygon');
   assert.ok(state.geometrySubtypes.has(geometrySubtype(e)));
  }
  assert.equal(filters.statisticalOnly,18);assert.equal(filters.statisticalRoles,63);
@@ -195,17 +197,18 @@ test('real frontend filters integrate late chunks/tiers, jurisdictions, hidden s
     await input(subtype).click();assert.ok(visible().some(l=>l.feature.properties.entity_id===target.id));
    }
   });
-  await t.test('administrative subtype and statistical controls remain independent for reused geometry',async()=>{
+  await t.test('administrative and statistical filters provide OR visibility for reused geometry',async()=>{
    const reused=index.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='county'&&e.roles.includes('statistical'));
    await app.selectEntity(reused.id);const statState=[...app.activeStatisticalLevels],separate=container.descendants().find(e=>e.dataset.kind==='separate-statistical');const separateState=separate.checked;
-   await input('ro.counties').click();assert.deepEqual([...app.activeStatisticalLevels],statState);assert.equal(separate.checked,separateState);assert.ok(!visible().some(l=>l.feature.properties.entity_id===reused.id));
-   await input('ro.counties').click();assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id&&l.style?.color==='#b54a38'));
-   const subtypes=[...app.activeGeometrySubtypes],classes=[...app.activeGeometryClasses],separateLevel3=index.entities.find(e=>e.category==='statistical'&&e.statistical?.level===3);const level3=container.descendants().find(e=>e.dataset.kind==='statistical'&&e.dataset.filter==='3');
+   await input('ro.counties').click();assert.deepEqual([...app.activeStatisticalLevels],statState);assert.equal(separate.checked,separateState);assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id&&l.style?.color==='#b54a38'));
+   const separateLevel3=index.entities.find(e=>e.category==='statistical'&&e.statistical?.level===3),level3=container.descendants().find(e=>e.dataset.kind==='statistical'&&e.dataset.filter==='3');
    assert.ok(visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));
-   await level3.click();assert.deepEqual([...app.activeGeometrySubtypes],subtypes);assert.deepEqual([...app.activeGeometryClasses],classes);assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id&&l.style?.color==='#b54a38'));assert.ok(!visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));
+   await level3.click();assert.ok(!visible().some(l=>l.feature.properties.entity_id===reused.id));assert.ok(!visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));assert.match(document.getElementById('selection-visibility').textContent,/ascunsă/);
+   await input('ro.counties').click();assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id&&l.style?.color==='#b54a38'));assert.ok(!visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));
    await level3.click();assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id));assert.ok(visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));
+   const subtypes=[...app.activeGeometrySubtypes];
    for(const j of ['RO','MD'])for(const layer of walk(app.statisticalGroups[j]))assert.equal(index.entities.find(e=>e.id===layer.feature.properties.entity_id).category,'statistical');
-   await separate.click();assert.deepEqual([...app.activeGeometrySubtypes],subtypes);assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id));
+   await separate.click();assert.deepEqual([...app.activeGeometrySubtypes],subtypes);assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id));assert.ok(!visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));assert.ok(!level3.disabled);
    const opened=treeDOM.querySelectorAll('details').filter(d=>d.open);app.clearSelection();assert.equal(body.querySelector('nav'),null);assert.equal(treeDOM.querySelectorAll('[aria-pressed="true"]').length,0);assert.ok(opened.every(d=>d.open));
   });
  }finally{Object.assign(globalThis,previous);}
