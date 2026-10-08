@@ -23,8 +23,8 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
  assert.match(buildInfo.actual_release_tag,/^actual-v\d+\.\d+\.\d+$/);
  assert.match(buildInfo.app_version,/^web-v\d+(?:\.\d+)*$/);
  assert.match(buildInfo.app_commit,/^[0-9a-f]{40}$/);
- assert.equal(buildInfo.app_version,'web-v1.2');
- assert.equal(buildInfo.app_commit,'54e6673141ec21fb3a68cca41ce1e747256eef21');
+ assert.equal(buildInfo.app_version,'web-v1.2.1');
+ assert.equal(buildInfo.app_commit,'dd7a3dcb1e50095b56861edb3466a911f7d9cfe4');
  assert.equal(buildInfo.actual_release_tag,'actual-v1.2.0');
  assert.equal(buildInfo.actual_snapshot_id,'actual-a9e5a4ddcb5277ef');
  assert.equal(buildInfo.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
