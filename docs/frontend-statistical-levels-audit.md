@@ -53,3 +53,12 @@ Schema URL rămâne `v=1`.
 - pentru entitățile coalesced, vizibilitatea finală este reuniunea celor două roluri.
 
 Count-urile UI arată pentru fiecare nivel totalul de entități, geometriile reutilizate și limitele separate, inclusiv breakdown RO/MD.
+
+
+## Z-order cartografic
+
+Auditul post-PR #251 a identificat un al doilea defect, strict de prezentare: cele 18 limite statistice separate erau încărcate corect, dar foloseau pane-ul Leaflet implicit. Deoarece tier-urile administrative sunt materializate ulterior, liniile statistice puteau fi acoperite vizual de poligoanele administrative, deși existau deja în DOM și treceau testele de cardinalitate.
+
+Corecția folosește pane-ul dedicat `statistical-boundaries` cu z-index 450, deasupra `overlayPane` administrativ implicit. Numai geometriile `statistical_only` folosesc acest pane; cele 45 entități coalesced continuă să reutilizeze exact aceeași geometrie administrativă și nu sunt duplicate.
+
+Regresia verifică atât binding-ul pane-ului în testele Node, cât și în Chrome real că o limită statistică separată selectată este efectiv desenată în pane-ul statistic deasupra overlay-ului administrativ.
