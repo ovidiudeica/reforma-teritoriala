@@ -17,6 +17,14 @@ const tierGroups=Object.fromEntries(['RO','MD'].flatMap(j=>tiers.map(t=>[j+'_'+t
 const tierData=new Map();
 const chunkData=new Map();
 const chunkGroups=new Map();
+const geometryRequests=new Map();
+let geometrySyncRevision=0;
+// Selection and viewport sync share in-flight requests; failed loads remain retryable.
+function geometryRequest(key,load){
+ if(geometryRequests.has(key))return geometryRequests.get(key);
+ const pending=load().finally(()=>geometryRequests.delete(key));
+ geometryRequests.set(key,pending);return pending;
+}
 let chunkIndex=null;
 const entityById=new Map();
 const activeFilterGroups=new Set(Object.keys(geometryLabels));
@@ -205,6 +213,7 @@ function renderBreadcrumb(entity){
 
 async function ensureStatisticalGeometry(jurisdiction){
  if(statisticalGeometryLoaded.has(jurisdiction))return;
+ return geometryRequest('statistical:'+jurisdiction,async()=>{
  const descriptor=releaseData?.manifest?.public_contract?.statistical_geometry?.[jurisdiction];
  if(!descriptor?.path)throw new Error('Lipsește geometria statistică publică pentru '+jurisdiction);
  const response=await fetch(descriptor.path,{cache:'no-cache'});
@@ -219,6 +228,7 @@ async function ensureStatisticalGeometry(jurisdiction){
  statisticalGeometryLoaded.add(jurisdiction);
  renderStatisticalGeometry(jurisdiction);
  if(!roots[jurisdiction].hasLayer(statisticalGroups[jurisdiction]))roots[jurisdiction].addLayer(statisticalGroups[jurisdiction]);
+ });
 }
 
 function tierPath(jurisdiction,tier){
@@ -227,6 +237,7 @@ function tierPath(jurisdiction,tier){
 async function ensureTier(jurisdiction,tier){
  const key=jurisdiction+'_'+tier;
  if(tierData.has(key))return tierData.get(key);
+ return geometryRequest('tier:'+key,async()=>{
  const path=tierPath(jurisdiction,tier);
  if(!path)throw new Error('Lipsește path-ul pentru '+key);
  const response=await fetch(path,{cache:'no-cache'});
@@ -236,6 +247,7 @@ async function ensureTier(jurisdiction,tier){
  tierData.set(key,data);
  renderTier(jurisdiction,tier);
  return data;
+ });
 }
 
 function renderCollection(group,data){
@@ -293,6 +305,7 @@ function bboxIntersectsViewport(bbox){
 async function ensureChunk(entry){
  const key=chunkKey(entry);
  if(chunkData.has(key))return chunkData.get(key);
+ return geometryRequest('chunk:'+key,async()=>{
  const response=await fetch(entry.path,{cache:'no-cache'});
  if(!response.ok)throw new Error('Nu se poate încărca '+entry.path);
  const data=await response.json();
@@ -303,6 +316,7 @@ async function ensureChunk(entry){
  chunkData.set(key,data);
  renderChunk(key);
  return data;
+ });
 }
 
 function tierWanted(tier,zoom){
@@ -311,6 +325,7 @@ function tierWanted(tier,zoom){
  return zoom>=10;
 }
 async function syncTiers(){
+ const revision=++geometrySyncRevision;
  if(!releaseData||!indexData)return;
  const zoom=map.getZoom();
  for(const jurisdiction of ['RO','MD']){
@@ -318,6 +333,7 @@ async function syncTiers(){
   const overviewGroup=tierGroups[jurisdiction+'_overview'];
   if(enabled){
    await ensureTier(jurisdiction,'overview');
+   if(revision!==geometrySyncRevision)return;
    if(!roots[jurisdiction].hasLayer(overviewGroup))roots[jurisdiction].addLayer(overviewGroup);
   }
   for(const tier of ['local','detail']){
@@ -332,6 +348,7 @@ async function syncTiers(){
       const key=chunkKey(entry);
       wanted.add(key);
       await ensureChunk(entry);
+      if(revision!==geometrySyncRevision)return;
       const group=chunkGroups.get(key);
       if(group&&!roots[jurisdiction].hasLayer(group))roots[jurisdiction].addLayer(group);
      }
@@ -343,6 +360,7 @@ async function syncTiers(){
    }else{
     if(enabled&&tierWanted(tier,zoom)){
      await ensureTier(jurisdiction,tier);
+     if(revision!==geometrySyncRevision)return;
      if(!roots[jurisdiction].hasLayer(legacyGroup))roots[jurisdiction].addLayer(legacyGroup);
     }else if(roots[jurisdiction].hasLayer(legacyGroup))roots[jurisdiction].removeLayer(legacyGroup);
    }

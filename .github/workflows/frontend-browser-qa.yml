@@ -1,0 +1,37 @@
+name: Frontend browser QA
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  frontend-browser-qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      BROWSER_EXECUTABLE: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Record preinstalled browser and check syntax
+        run: |
+          google-chrome --version
+          node --check scripts/test/helpers/atlas-browser.mjs
+          node --check scripts/test/frontend-atlas-browser.test.mjs
+      - name: Run actual HTTP and Chromium UI regressions
+        env:
+          ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
+        run: node --test scripts/test/frontend-atlas-browser.test.mjs
+      - name: Verify tracked data untouched
+        run: git diff --exit-code
+      - name: Upload screenshots and console/network evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: atlas-browser-evidence
+          path: ${{ runner.temp }}/atlas-browser-evidence
+          retention-days: 14
