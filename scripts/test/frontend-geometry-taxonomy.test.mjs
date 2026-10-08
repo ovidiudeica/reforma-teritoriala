@@ -56,6 +56,17 @@ test('statistical roles remain 63 at levels 5/10/48 with only 18 separate geomet
  assert.equal(features.length,18);assert.equal(ids.size,18);
  for(const entity of only)assert.ok(ids.has(entity.id));
  for(const entity of reused)assert.ok(!ids.has(entity.id));
+
+ const administrativeFeatures=(await Promise.all(Object.values(manifest.public_contract.geometry_tiers).flatMap(byTier=>Object.values(byTier)).map(async descriptor=>{
+  const bytes=await readFile(descriptor.path);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),descriptor.sha256);
+  return JSON.parse(bytes).features;
+ }))).flat();
+ const administrativeCounts=new Map();
+ for(const feature of administrativeFeatures){const id=feature.properties.entity_id;administrativeCounts.set(id,(administrativeCounts.get(id)||0)+1);}
+ for(const entity of reused)assert.equal(administrativeCounts.get(entity.id),1,'missing/duplicated reused statistical geometry '+entity.id);
+ for(const entity of only)assert.equal(administrativeCounts.get(entity.id)||0,0,'statistical-only geometry leaked into administrative tiers '+entity.id);
+
  const md120=entities.find(e=>e.id==='stat-MD120');
  assert.equal(md120.statistical.code,'MD120');
  assert.equal(md120.representation.osm_statistical_ref,'MD121');
