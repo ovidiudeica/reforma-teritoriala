@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ro">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Reforma Teritorială</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="style.css">
@@ -15,7 +15,10 @@
   </nav>
 </header>
 <main>
-<aside class="controls">
+<button id="mobile-navigation" class="mobile-control mobile-navigation" type="button" aria-expanded="false" aria-controls="atlas-controls" hidden>☰ Navigare</button>
+<button id="drawer-backdrop" class="drawer-backdrop" type="button" aria-label="Închide navigarea" tabindex="-1" hidden></button>
+<aside id="atlas-controls" class="controls" aria-label="Navigare și filtre">
+  <button id="drawer-close" class="mobile-control drawer-close" type="button" hidden>Închide navigarea</button>
   <h2>Teritoriu actual</h2>
   <button id="copy-link" class="action-button" type="button">Copiază link</button>
   <p id="share-status" class="hint" role="status"></p>
@@ -62,8 +65,10 @@
 <aside id="details-panel" class="details" aria-live="polite">
   <div class="details-head">
     <div><span class="eyebrow">Entitate selectată</span><h2 id="details-title">Nicio selecție</h2></div>
-    <button id="details-close" class="icon-button" type="button" title="Închide detaliile">×</button>
+    <button id="sheet-expand" class="mobile-control" type="button" aria-expanded="false" aria-controls="details-body" hidden>Extinde</button>
+    <button id="details-close" class="icon-button" type="button" title="Închide detaliile" aria-label="Șterge selecția">×</button>
   </div>
+  <p id="details-summary" class="details-summary"></p>
   <div id="details-body" class="details-body">
     <p class="muted">Selectează o limită de pe hartă sau caută o entitate după nume ori identificator.</p>
   </div>
