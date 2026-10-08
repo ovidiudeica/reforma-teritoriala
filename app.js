@@ -147,6 +147,7 @@ function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boole
 function refreshGeometryVisibility(){
  atlasFilters?.sync();
  rerenderLoadedTiers();
+ atlasTree?.refreshVisibility();
  updateSelectionVisibility();
 }
 function updateSelectionVisibility(){
@@ -182,8 +183,27 @@ async function loadHierarchyTree(){
 function renderHierarchyTree(){
  const container=document.getElementById('hierarchy-tree');
  if(!container||!hierarchyTree)return;
- atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,onDisclosureChange:()=>atlasUrl?.commit('replace'),
+ const isTreeGeometryVisible=id=>{
+  const entity=entityById.get(id);
+  return Boolean(entity&&isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false);
+ };
+ atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,isGeometryVisible:isTreeGeometryVisible,onDisclosureChange:()=>atlasUrl?.commit('replace'),
   onSelect:(id,options)=>selectEntity(id,options).catch(console.error)});
+ const message=document.getElementById('tree-navigation-status');
+ const applyNavigation=(operation,success)=>{
+  const result=operation();
+  message.textContent=success(result);
+  if(result?.applied!==false)atlasUrl?.commit('push');
+ };
+ document.getElementById('tree-collapse-all').addEventListener('click',()=>applyNavigation(
+  ()=>atlasTree.setOpenIds([]),()=> 'Toate ramurile au fost restrânse. Selecția este păstrată.'));
+ document.getElementById('tree-show-roots').addEventListener('click',()=>applyNavigation(
+  ()=>atlasTree.setOpenIds(hierarchyTree.root_ids),()=> 'Cele două țări sunt deschise; ramurile subordonate sunt restrânse.'));
+ document.getElementById('tree-expand-apply').addEventListener('click',()=>applyNavigation(
+  ()=>atlasTree.openToDepth(document.getElementById('tree-expand-depth').value),
+  result=>result.applied
+   ?'Ierarhia este deschisă până la nivelul ales ('+result.renderedNodes+' noduri).'
+   :'Acest nivel ar încărca '+result.renderedNodes+' noduri; limitează extinderea și selectează entitatea prin căutare.'));
  if(selectedEntityId){
   atlasTree.select(selectedEntityId);
   renderDetails(entityById.get(selectedEntityId));
@@ -490,8 +510,8 @@ document.getElementById('copy-link').addEventListener('click',async()=>{
 });
 
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
-document.getElementById('layer-ro').addEventListener('change',event=>{event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);updateSelectionVisibility();atlasUrl?.commit('push');});
-document.getElementById('layer-md').addEventListener('change',event=>{event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);updateSelectionVisibility();atlasUrl?.commit('push');});
+document.getElementById('layer-ro').addEventListener('change',event=>{event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
+document.getElementById('layer-md').addEventListener('change',event=>{event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
 map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');});
 
 const frontendReady=(async()=>{
