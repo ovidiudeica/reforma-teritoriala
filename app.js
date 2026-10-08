@@ -4,6 +4,7 @@ import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-s
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
+import {validateConsolidatedHierarchy} from './atlas-hierarchy-validate.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
 import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
 
@@ -171,10 +172,11 @@ async function loadHierarchyTree(){
  const response=await fetch(descriptor.path,{cache:'no-cache'});
  if(!response.ok)throw new Error('Arborele consolidat ACTUAL este indisponibil');
  const tree=await response.json();
- if(tree.contract!=='actual-consolidated-hierarchy-v1'||tree.node_count!==(tree.nodes||[]).length)throw new Error('Arbore consolidat ACTUAL invalid');
- hierarchyTree=tree;
+ // Fail closed before changing any controller or exposing partially validated nodes.
+ const validated=validateConsolidatedHierarchy(tree,entityById,{expectedCount:releaseData.manifest.public_contract.entity_count});
  hierarchyNodeById.clear();
- for(const node of tree.nodes||[])hierarchyNodeById.set(node.id,node);
+ for(const [id,node] of validated)hierarchyNodeById.set(id,node);
+ hierarchyTree=tree;
  renderHierarchyTree();
  atlasSearch?.updateIndex(createSearchIndex([...entityById.values()],hierarchyNodeById));
  return tree;
