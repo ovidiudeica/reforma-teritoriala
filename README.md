@@ -4,7 +4,7 @@ Atlas teritorial pentru România și Republica Moldova.
 
 ## Stadiu
 
-**ACTUAL v1** este modulul implementat și release-uit tehnic. `ISTORIC` și `PROPUNERI` rămân faze separate de roadmap; interfața nu le prezintă ca date publicate.
+**ACTUAL v1.2** și interfața **web-v1.2** sunt baseline-urile publice curente. `ISTORIC` și `PROPUNERI` rămân faze separate de roadmap; interfața nu le prezintă ca date publicate.
 
 ## Arhitectură
 
@@ -38,7 +38,7 @@ Snapshot-urile oficiale SIRUTA și CUATM sunt refresh-uri separate de reconcilie
 
 ## Release ACTUAL
 
-Snapshot-ul public ACTUAL RO+MD este descris de `data/current/actual-release-manifest.json`. Release-ul immutable curent este `actual-v1.1.0`, snapshot `actual-6a7eac47d66d6701`, cu fingerprint semantic `6a7eac47d66d6701a7466ecaa216bd67178a1f78ec57d305f9ec3aa3c6808f09`.
+Snapshot-ul public ACTUAL RO+MD este descris de `data/current/actual-release-manifest.json`. Release-ul immutable curent este `actual-v1.2.0`, snapshot `actual-a9e5a4ddcb5277ef`, cu fingerprint semantic `a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446`.
 
 `data/current/actual-release-gate.json` validează fail-closed gate-urile RO/MD, integritatea manifestului, source bundle-ul, review-evidence bundle-ul, mediul de build, network denial și contractul public.
 
@@ -46,14 +46,22 @@ Snapshot-ul public ACTUAL RO+MD este descris de `data/current/actual-release-man
 
 `scripts/process/build-actual-public-data.mjs` generează:
 
-- `public/data/actual-entities.json` — contract `actual-public-entity-v2`;
+- `public/data/actual-entities.json` — contract `actual-public-entity-v3`, inclusiv rolurile statistice activate;
+- ierarhia consolidată `actual-consolidated-hierarchy-v1` — 5848 noduri RO+MD;
 - `public/geo/actual/{ro,md}-overview.geojson` — limite regionale;
 - `public/geo/actual/{ro,md}-local.geojson` — UAT-uri locale;
-- `public/geo/actual/{ro,md}-detail.geojson` — sectoare, localități și reprezentări de detaliu.
+- `public/geo/actual/{ro,md}-detail.geojson` — sectoare, localități și reprezentări de detaliu;
+- geometriile statistice separate — numai pentru cele 18 entități statistical-only; celelalte roluri statistice reutilizează geometria administrativă.
 
 Contractul separă `legal` de `representation`. O identitate SIRUTA/CUATM este publicată numai după reconciliere pozitivă. Lipsa identității rămâne `null`; nu se deduce din geometrie sau din taguri OSM.
 
 GeoJSON-urile publice păstrează coordonatele geometriei master **fără simplificare**. Tier-urile există doar pentru încărcare progresivă, iar legătura cu catalogul master este păstrată prin `entity_id`.
+
+## Release web
+
+`web-v1.2` este baseline-ul funcțional închis după pașii v1.2.1–v1.2.7. SHA-ul funcțional de referință este `54e6673141ec21fb3a68cca41ce1e747256eef21`; `public/data/app-build-info.json` leagă această versiune a aplicației de release-ul de date `actual-v1.2.0` fără a confunda identitatea aplicației cu identitatea snapshot-ului ACTUAL.
+
+Închiderea release-ului web este evidence/metadata-only: nu modifică entități, ierarhii, geometrii, registre, surse sau fingerprint-ul ACTUAL. Detaliile sunt în `docs/frontend-web-v1.2-release.md`.
 
 ## Source bundle și reproducibilitate
 
