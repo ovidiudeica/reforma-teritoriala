@@ -14,7 +14,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
  const section=(title,action,labels=[['Toate',true],['Niciuna',false]])=>{
   const el=document.createElement('section');el.className='filter-section';
   const heading=document.createElement('h3');heading.textContent=title;el.appendChild(heading);
-  const controls=document.createElement('div');controls.className='filter-actions',buttons=[];
+  const controls=document.createElement('div'),buttons=[];controls.className='filter-actions';
   for(const [label,enabled] of labels){
    const button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-label',label+' — '+title);
    button.addEventListener('click',()=>{action(enabled);sync();onChange();});controls.appendChild(button);buttons.push(button);
