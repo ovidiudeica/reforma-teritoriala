@@ -58,17 +58,22 @@ test('unknown types stay explicit; legal/display/admin_level cannot override the
   const e={jurisdiction:j.id,representation:{inferred_type:type}};assert.equal(geometryClass(e),g.id);assert.equal(geometrySubtype(e),sub.id);
  }
 });
-test('45 coalesced roles retain one administrative subtype and intersect statistical levels',()=>{
+test('45 coalesced roles retain one administrative subtype and ignore statistical level visibility gates',()=>{
  const reused=index.entities.filter(e=>e.category!=='statistical'&&e.roles.includes('statistical'));assert.equal(reused.length,45);
  for(const e of reused){
   assert.ok(filters.subtypeMembers.get(geometrySubtype(e)).has(e.id));
   assert.equal([...filters.subtypeMembers.values()].filter(ids=>ids.has(e.id)).length,1);
   const state=options();assert.equal(geometryVisible(e,state),true);
-  state.statisticalLevels.delete(statisticalLevel(e));assert.equal(geometryVisible(e,state),false);
+  state.statisticalLevels.delete(statisticalLevel(e));assert.equal(geometryVisible(e,state),true);
   assert.ok(state.geometrySubtypes.has(geometrySubtype(e)));
  }
  assert.equal(filters.statisticalOnly,18);assert.equal(filters.statisticalRoles,63);
  assert.deepEqual([...filters.statisticalCounts].sort(),[[1,5],[2,10],[3,48]]);
+ const l1=filters.statisticalLevelStats.get(1),l2=filters.statisticalLevelStats.get(2),l3=filters.statisticalLevelStats.get(3);
+ assert.deepEqual([l1.roles,l2.roles,l3.roles],[5,10,48]);
+ assert.deepEqual([l1.separate,l2.separate,l3.separate],[4,10,4]);
+ assert.deepEqual([l1.reused,l2.reused,l3.reused],[1,0,44]);
+ assert.deepEqual([l3.jurisdictions.RO.roles,l3.jurisdictions.RO.separate,l3.jurisdictions.MD.roles,l3.jurisdictions.MD.separate],[42,0,6,4]);
 });
 test('current public/hierarchy contract and official MD120/OSM-only MD121 stay intact',()=>{
  assert.equal(index.contract,'actual-public-entity-v3');assert.equal(index.entity_count,5848);assert.equal(tree.node_count,5848);
@@ -117,8 +122,12 @@ test('filter DOM persists expansion; population counts, semantic ordering and in
  assert.deepEqual(container.children,before);assert.equal(disclosures[0].open,true);assert.deepEqual([...state.statisticalLevels],stats);assert.equal(state.separateStatisticalGeometry,true);
  assert.equal(controller.parents.get('regional').checked,false);
  await admin.querySelectorAll('button').find(b=>b.textContent==='Toate').click();assert.equal(controller.parents.get('regional').checked,true);
- const subtypes=[...state.geometrySubtypes],classes=[...state.geometryClasses];
- await section(container,'Niveluri statistice').querySelectorAll('button').find(b=>b.textContent==='Niciuna').click();assert.deepEqual([...state.geometrySubtypes],subtypes);assert.deepEqual([...state.geometryClasses],classes);
+ const subtypes=[...state.geometrySubtypes],classes=[...state.geometryClasses],statSection=section(container,'Niveluri statistice');
+ await statSection.querySelectorAll('button').find(b=>b.textContent==='Niciun nivel').click();assert.deepEqual([...state.statisticalLevels],[]);assert.deepEqual([...state.geometrySubtypes],subtypes);assert.deepEqual([...state.geometryClasses],classes);assert.equal(state.separateStatisticalGeometry,true);
+ assert.ok(statSection.textContent.includes('Nivel statistic 1'));assert.ok(statSection.textContent.includes('5 roluri · 4 limite'));assert.ok(statSection.textContent.includes('Nivel statistic 3'));assert.ok(statSection.textContent.includes('48 roluri · 4 limite'));assert.ok(statSection.textContent.includes('RO: 42 roluri / 0 limite · MD: 6 roluri / 4 limite'));
+ assert.ok(statSection.textContent.includes('controlează numai limitele statistice separate'));
+ await controller.separate.click();assert.equal(state.separateStatisticalGeometry,false);assert.ok([...controller.levels.values()].every(input=>input.disabled));assert.ok(statSection.querySelectorAll('button').every(button=>button.disabled));
+ await controller.separate.click();assert.equal(state.separateStatisticalGeometry,true);assert.ok([...controller.levels.values()].every(input=>!input.disabled));assert.ok(statSection.querySelectorAll('button').every(button=>!button.disabled));
  assert.ok(container.textContent.includes('Județe / Municipiul București(42)'));assert.ok(container.textContent.includes('România (42)'));
  assert.deepEqual(filters.groups.find(g=>g.id==='local_uat').jurisdictions[0].subtypes.map(s=>s.id),['ro.municipalities','ro.towns','ro.communes','ro.local_unspecified']);
  for(const g of filters.groups)for(const j of g.jurisdictions)for(const sub of j.subtypes)assert.ok(sub.count>0);
@@ -189,9 +198,10 @@ test('real frontend filters integrate late chunks/tiers, jurisdictions, hidden s
    await app.selectEntity(reused.id);const statState=[...app.activeStatisticalLevels],separate=container.descendants().find(e=>e.dataset.kind==='separate-statistical');const separateState=separate.checked;
    await input('ro.counties').click();assert.deepEqual([...app.activeStatisticalLevels],statState);assert.equal(separate.checked,separateState);assert.ok(!visible().some(l=>l.feature.properties.entity_id===reused.id));
    await input('ro.counties').click();assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id&&l.style?.color==='#b54a38'));
-   const subtypes=[...app.activeGeometrySubtypes],classes=[...app.activeGeometryClasses];const level3=container.descendants().find(e=>e.dataset.kind==='statistical'&&e.dataset.filter==='3');
-   await level3.click();assert.deepEqual([...app.activeGeometrySubtypes],subtypes);assert.deepEqual([...app.activeGeometryClasses],classes);assert.ok(!visible().some(l=>l.feature.properties.entity_id===reused.id));
-   await level3.click();assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id));
+   const subtypes=[...app.activeGeometrySubtypes],classes=[...app.activeGeometryClasses],separateLevel3=index.entities.find(e=>e.category==='statistical'&&e.statistical?.level===3);const level3=container.descendants().find(e=>e.dataset.kind==='statistical'&&e.dataset.filter==='3');
+   assert.ok(visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));
+   await level3.click();assert.deepEqual([...app.activeGeometrySubtypes],subtypes);assert.deepEqual([...app.activeGeometryClasses],classes);assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id&&l.style?.color==='#b54a38'));assert.ok(!visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));
+   await level3.click();assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id));assert.ok(visible().some(l=>l.feature.properties.entity_id===separateLevel3.id));
    for(const j of ['RO','MD'])for(const layer of walk(app.statisticalGroups[j]))assert.equal(index.entities.find(e=>e.id===layer.feature.properties.entity_id).category,'statistical');
    await separate.click();assert.deepEqual([...app.activeGeometrySubtypes],subtypes);assert.ok(visible().some(l=>l.feature.properties.entity_id===reused.id));
    const opened=treeDOM.querySelectorAll('details').filter(d=>d.open);app.clearSelection();assert.equal(body.querySelector('nav'),null);assert.equal(treeDOM.querySelectorAll('[aria-pressed="true"]').length,0);assert.ok(opened.every(d=>d.open));

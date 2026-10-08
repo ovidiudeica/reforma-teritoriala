@@ -63,7 +63,7 @@ test('statistical roles remain 63 at levels 5/10/48 with only 18 separate geomet
  assert.ok(!roles.some(e=>e.statistical.code==='MD121'));
 });
 
-test('visibility intersects geometry and statistical role switches without duplicating reuse',()=>{
+test('statistical levels govern only separate statistical boundaries, never coalesced administrative geometry',()=>{
  for(const entity of entities){
   const state=options();assert.equal(geometryVisible(entity,state),true);
   if(entity.category!=='statistical'){
@@ -74,9 +74,14 @@ test('visibility intersects geometry and statistical role switches without dupli
   assert.equal(geometryVisible(entity,stats),entity.category!=='statistical');
   if(entity.roles.includes('statistical')){
    const role=options();role.statisticalLevels.delete(statisticalLevel(entity));
-   assert.equal(geometryVisible(entity,role),false);
+   assert.equal(geometryVisible(entity,role),entity.category!=='statistical',entity.id);
   }
  }
+ const level3=entities.filter(e=>e.roles.includes('statistical')&&statisticalLevel(e)===3);
+ assert.equal(level3.filter(e=>e.category==='statistical').length,4);
+ assert.equal(level3.filter(e=>e.category!=='statistical').length,44);
+ const state=options();state.statisticalLevels.delete(3);
+ assert.equal(level3.filter(e=>geometryVisible(e,state)).length,44);
  const unknown={representation:{inferred_type:'new'}};
  assert.equal(geometryVisible(unknown,options()),true);
 });

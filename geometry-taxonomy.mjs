@@ -69,20 +69,27 @@ export function statisticalLevel(entity){
 }
 export function geometryVisible(entity,{geometryClasses,geometrySubtypes,statisticalLevels,separateStatisticalGeometry}){
  const group=geometryClass(entity),level=statisticalLevel(entity),sub=geometrySubtype(entity);
- if(group==='statistical_only'&&!separateStatisticalGeometry)return false;
- if(group!=='statistical_only'&&(!geometryClasses.has(group)||(geometrySubtypes&&!geometrySubtypes.has(sub))))return false;
- return level===null||statisticalLevels.has(level);
+ // Statistical level controls apply only to the 18 separate statistical boundaries.
+ // Coalesced administrative/statistical entities remain governed by their geometry filters.
+ if(group==='statistical_only')return separateStatisticalGeometry&&statisticalLevels.has(level);
+ return geometryClasses.has(group)&&(!geometrySubtypes||geometrySubtypes.has(sub));
 }
 
 // Computed once from the public entities; UI clicks never recount the population.
 export function createGeometryFilterIndex(entities){
- const classCounts=new Map(),subtypeMembers=new Map(),statisticalCounts=new Map();
+ const classCounts=new Map(),subtypeMembers=new Map(),statisticalCounts=new Map(),statisticalLevelStats=new Map();
  let statisticalOnly=0,statisticalRoles=0;
  const byClassJurisdiction=new Map();
+ const emptyJurisdictionStats=()=>({roles:0,separate:0,reused:0});
  for(const entity of entities){
   const cls=geometryClass(entity),sub=geometrySubtype(entity),level=statisticalLevel(entity);
   classCounts.set(cls,(classCounts.get(cls)||0)+1);
-  if(level!==null){statisticalRoles++;statisticalCounts.set(level,(statisticalCounts.get(level)||0)+1);}
+  if(level!==null){
+   statisticalRoles++;statisticalCounts.set(level,(statisticalCounts.get(level)||0)+1);
+   if(!statisticalLevelStats.has(level))statisticalLevelStats.set(level,{roles:0,separate:0,reused:0,jurisdictions:{RO:emptyJurisdictionStats(),MD:emptyJurisdictionStats()}});
+   const stats=statisticalLevelStats.get(level),kind=cls==='statistical_only'?'separate':'reused',jurisdiction=stats.jurisdictions[entity.jurisdiction]||emptyJurisdictionStats();
+   stats.roles++;stats[kind]++;jurisdiction.roles++;jurisdiction[kind]++;stats.jurisdictions[entity.jurisdiction]=jurisdiction;
+  }
   if(sub===null){statisticalOnly++;continue;}
   if(!subtypeMembers.has(sub))subtypeMembers.set(sub,new Set());
   subtypeMembers.get(sub).add(entity.id);
@@ -103,7 +110,7 @@ export function createGeometryFilterIndex(entities){
   }
   groups.push({...config,count,jurisdictions});
  }
- return {groups,classCounts,subtypeMembers,statisticalCounts,statisticalOnly,statisticalRoles,reusedStatistical:statisticalRoles-statisticalOnly};
+ return {groups,classCounts,subtypeMembers,statisticalCounts,statisticalLevelStats,statisticalOnly,statisticalRoles,reusedStatistical:statisticalRoles-statisticalOnly};
 }
 export function geometryParentState(group,state){
  const subtypes=group.jurisdictions.flatMap(j=>j.subtypes);
