@@ -2,7 +2,8 @@ import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {ancestorPath,parentId,hasChildren,createAtlasTree,revealInTree} from '../../atlas-tree.mjs';
+import {ancestorPath,parentId,hasChildren,createAtlasTree,revealInTree,treeRoleLabel,ambiguousSiblingIds} from '../../atlas-tree.mjs';
+import {typeLabel} from '../../atlas-search.mjs';
 import {geometryClass} from '../../geometry-taxonomy.mjs';
 const tree=JSON.parse(await readFile('public/data/actual-consolidated-tree.json','utf8'));
 const index=JSON.parse(await readFile('public/data/actual-entities.json','utf8'));
@@ -43,6 +44,56 @@ test('all 5848 consolidated paths are rooted, reciprocal, unique and match publi
   assert.equal(parentId(nodes,node.id),entities.get(node.id).hierarchy.consolidated_parent_id);
   assert.equal(hasChildren(nodes,node.id),node.child_ids.length>0);
  }
+});
+
+test('P3.1 real 63 statistical roles show classification, coalescence and separate boundaries',()=>{
+ const {controller}=harness(),statistical=tree.nodes.filter(n=>n.roles?.includes('statistical'));
+ const coalesced=statistical.filter(n=>n.roles.some(r=>r!=='statistical'));
+ const separate=statistical.filter(n=>n.roles.length===1);
+ assert.equal(statistical.length,63);assert.equal(coalesced.length,45);assert.equal(separate.length,18);
+ for(const node of statistical){
+  const text=treeRoleLabel(node,typeLabel);
+  const level=Number(node.statistical_level);
+  if(Number.isInteger(level)&&level>=1&&level<=3)
+   assert.ok(text.includes(node.jurisdiction==='RO'?'NUTS '+level:'nivel statistic '+level),node.id+': '+text);
+  if(separate.includes(node))assert.match(text,/limită statistică separată/);
+  else{assert.ok(!text.includes('limită statistică separată'));assert.ok(text.includes(' · '));}
+  controller.select(node.id);
+  const entry=controller.getNode(node.id),role=entry.button.children.find(c=>c.className==='tree-role');
+  assert.ok(role,node.id);assert.ok(role.textContent.startsWith(text),node.id);
+  assert.equal(entry.button.children[0].textContent,formatEntityName(node.display_name));
+  assert.ok(entry.button.getAttribute('aria-label').includes(text));
+  assert.equal(entry.button.dataset.entityId,node.id);
+  assert.ok(entry.button.title.includes(node.statistical_code||text));
+  assert.ok(entry.button.parentElement.classList.contains(separate.includes(node)?'tree-statistical-only':'tree-coalesced'));
+ }
+ assert.equal(new Set(statistical.map(n=>n.id)).size,63);
+});
+
+test('P3.1 identical sibling names show stable IDs, parents and types without changing identity',()=>{
+ const root={id:'root',parent_id:null,child_ids:['a','b','c','p'],display_name:'ROMÂNIA',display_type:'state',roles:['context']};
+ const a={id:'osm-r101',parent_id:'root',child_ids:[],display_name:'ALBEȘTI',display_type:'commune',roles:['administrative']};
+ const b={id:'osm-r102',parent_id:'root',child_ids:[],display_name:'ALBEȘTI',display_type:'town',roles:['administrative']};
+ const c={id:'osm-r103',parent_id:'root',child_ids:[],display_name:'BRĂILA',display_type:'county',roles:['administrative']};
+ const p={id:'p',parent_id:'root',child_ids:['d'],display_name:'ALT PĂRINTE',display_type:'county',roles:['administrative']};
+ const d={id:'osm-r104',parent_id:'p',child_ids:[],display_name:'ALBEȘTI',display_type:'commune',roles:['administrative']};
+ const fixtures=new Map([root,a,b,c,p,d].map(n=>[n.id,n]));
+ assert.deepEqual([...ambiguousSiblingIds(fixtures)].sort(),['osm-r101','osm-r102']);
+ const document=documentFactory(),container=new Element();
+ const controller=createAtlasTree({document,container,nodeById:fixtures,rootIds:['root'],typeLabel,onSelect(){}});
+ for(const id of ['osm-r101','osm-r102']){
+  const button=controller.getNode(id).button;
+  assert.ok(button.textContent.startsWith('Albești'));assert.ok(button.textContent.includes(id));
+  assert.ok(button.getAttribute('aria-label').includes('în România'));
+  assert.ok(button.getAttribute('aria-label').includes('ID '+id));
+  assert.ok(button.textContent.includes(id==='osm-r101'?'comună':'oraș'));
+ }
+ controller.select('osm-r104');
+ const other=controller.getNode('osm-r104').button;
+ assert.ok(!other.textContent.includes('osm-r104'),'identical names from distinct parent branches are not sibling collisions');
+ assert.ok(other.getAttribute('aria-label').includes('în Alt Părinte'));
+ assert.equal(fixtures.get('osm-r101').display_name,'ALBEȘTI');
+ assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,1);
 });
 
 test('known RO/MD hierarchy examples include coalesced MD114/MD115 and official MD120',()=>{
