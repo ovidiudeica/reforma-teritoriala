@@ -21,7 +21,8 @@ jobs:
           node --check atlas-filters.mjs
           node --check atlas-search.mjs
           node --check atlas-url-state.mjs
+          node --check atlas-mobile-ui.mjs
       - name: Run frontend and P2 public regressions
-        run: node --test scripts/test/frontend-smoke.test.mjs scripts/test/actual-statistical-public.test.mjs scripts/test/frontend-geometry-taxonomy.test.mjs scripts/test/frontend-atlas-tree.test.mjs scripts/test/frontend-atlas-filters.test.mjs scripts/test/frontend-atlas-search.test.mjs scripts/test/frontend-atlas-url-state.test.mjs
+        run: node --test scripts/test/frontend-smoke.test.mjs scripts/test/actual-statistical-public.test.mjs scripts/test/frontend-geometry-taxonomy.test.mjs scripts/test/frontend-atlas-tree.test.mjs scripts/test/frontend-atlas-filters.test.mjs scripts/test/frontend-atlas-search.test.mjs scripts/test/frontend-atlas-url-state.test.mjs scripts/test/frontend-atlas-mobile.test.mjs
       - name: Verify tests leave tracked data unchanged
         run: git diff --exit-code

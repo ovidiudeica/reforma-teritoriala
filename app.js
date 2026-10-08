@@ -1,3 +1,4 @@
+import {createAtlasMobileUi} from './atlas-mobile-ui.mjs';
 import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
@@ -33,6 +34,8 @@ const hierarchyNodeById=new Map();
 let atlasTree=null;
 let atlasSearch=null;
 let atlasUrl=null;
+const mobileMedia=globalThis.window?.matchMedia?.('(max-width: 720px)')||{matches:false};
+const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)});
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
 
@@ -360,6 +363,8 @@ async function syncTiers(){
 
 function clearSelection(){
  selectedEntityId=null;
+ atlasMobile.selection(null);
+ document.getElementById('details-summary').textContent='';
  atlasTree?.clear();
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
  rerenderLoadedTiers();
@@ -376,6 +381,7 @@ function renderDetails(entity){
  const title=document.getElementById('details-title');
  const body=document.getElementById('details-body');
  title.textContent=entity.display_name;
+ document.getElementById('details-summary').textContent=typeLabel(entity.representation.inferred_type);
  const legal=entity.legal;
  const statisticalHtml=entity.statistical
   ?'<section class="details-section"><h3>Identitate statistică</h3><dl class="kv">'+
@@ -428,6 +434,7 @@ async function applySelection(id,options=false,clickedLayer=null){
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
  selectedEntityId=id;
  renderDetails(entity);
+ atlasMobile.selection(id,{source});
  updateSelectionVisibility();
  rerenderLoadedTiers();
  if(!isVisible(entity))return;
@@ -487,7 +494,7 @@ document.getElementById('copy-link').addEventListener('click',async()=>{
  try{if(!atlasUrl||!globalThis.navigator?.clipboard?.writeText)throw new Error('Clipboard unavailable');await globalThis.navigator.clipboard.writeText(atlasUrl.shareUrl());status.textContent='Link copiat.';}catch{status.textContent='Copiere indisponibilă. Copiază URL-ul din bara de adrese.';}
 });
 
-document.getElementById('details-close').addEventListener('click',clearSelection);
+document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
 document.getElementById('layer-ro').addEventListener('change',event=>{event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);updateSelectionVisibility();atlasUrl?.commit('push');});
 document.getElementById('layer-md').addEventListener('change',event=>{event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);updateSelectionVisibility();atlasUrl?.commit('push');});
 map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');});
@@ -507,4 +514,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
+export {atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
