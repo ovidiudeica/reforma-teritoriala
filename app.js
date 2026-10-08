@@ -463,7 +463,8 @@ async function applySelection(id,options=false,clickedLayer=null){
 }
 
 function captureUrlState(){
- const center=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
+ const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
+ const center=map.wrapLatLng?.(current)||current;
  return {entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds()};
 }
 async function applyUrlState(state){

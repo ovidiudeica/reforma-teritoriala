@@ -25,7 +25,7 @@ Pagina fără query păstrează default-ul anterior: RO+MD, toate subtipurile, t
 
 Clasele și subtipurile provin din geometry-taxonomy.mjs și geometry filter index, nu dintr-o taxonomie URL paralelă. f reprezintă abaterile față de default. Normalizarea folosește geometryParentState și setGeometryGroup din modulul comun: parent OFF dezactivează copiii relevanți; zero copii activi elimină class gate; mixed/all determină checkbox state corect. Starea internă a subtipurilor este independentă de j, s și b. UI-ul este sincronizat prin controller-ul Atlas filters existent.
 
-Viewport: lat în [-90,90], lon în [-180,180], z întreg în [0,19], toate finite și tuple completă. Precizie lat/lon: 5 zecimale. O tuple invalidă/incompletă este ignorată integral și se folosește viewport-ul default; dacă există o selecție semantică fără tuple validă, se poate face zoom normal la entitate.
+Viewport: lat în [-90,90], lon în [-180,180], z întreg în [0,19], toate finite și tuple completă. Precizie lat/lon: 5 zecimale. La capture, Leaflet wrapLatLng normalizează longitudinea unui pan dincolo de limita lumii înainte de validare/serializare, păstrând viewport-ul echivalent în [-180,180]. O tuple invalidă/incompletă este ignorată integral și se folosește viewport-ul default; dacă există o selecție semantică fără tuple validă, se poate face zoom normal la entitate.
 
 Un viewport explicit valid are prioritate față de fitBounds, inclusiv când coordonatele coincid cu default-ul. Pentru o selecție capturată din UI se păstrează tuple explicită și în acest caz: omiterea ei ar transforma link-ul exact într-un link semantic care face auto-zoom. Fără selecție se omit coordonatele default inutile.
 
