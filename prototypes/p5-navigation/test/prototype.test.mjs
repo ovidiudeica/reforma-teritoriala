@@ -32,6 +32,7 @@ test('P5.0 default shows RO and MD only, no child checks and no selected card',(
  assert.match(script,/n:'UTAG'/);
  assert.match(html,/id="tab-tree"[^>]*>Entități<\/button>/);
  assert.doesNotMatch(html,/id="collapse"|id="expand"|id="reset"/);
+ assert.doesNotMatch(script,/\$\('(collapse|expand|reset)'\)/);
  assert.match(html,/id="detail" class="detail"[^>]*hidden/);
  assert.match(css,/\.detail\[hidden\]\{display:none\}/);
  assert.match(html,/id="map-basemap"/);
