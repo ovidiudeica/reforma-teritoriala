@@ -17,16 +17,22 @@ const roLocal=entities.find(e=>e.jurisdiction==='RO'&&e.map.tier==='local');
 const mdDetail=entities.find(e=>e.jurisdiction==='MD'&&e.map.tier==='detail');
 assert.ok([ro,md,separate,roLocal,mdDetail].every(Boolean),'missing RO/MD test identity');
 
-const evidence={contract:'p4.2-chrome-matrix-v1',browser:null,commit:null,matrix:null,
+const evidence={contract:'p4.3-chrome-hardening-v1',browser:null,commit:process.env.GITHUB_SHA||null,matrix:null,
  viewports:[],selections:[],filters:[],lazy:null,zOrder:null,console:null,scenarios:[]};
 const browser=await launchBrowser(root),page=await browser.page();
 evidence.browser=browser.version.Browser;
 const snapshot=()=>page.evaluate("({id:qaApp.selectedEntityId,pressed:document.querySelectorAll('.tree-select[aria-pressed=true]').length,breadcrumb:!!document.querySelector('.hierarchy-breadcrumb'),url:new URL(location.href).searchParams.get('e'),hidden:document.querySelector('#selection-visibility').textContent,highlight:[...document.querySelectorAll('.leaflet-map-pane path')].filter(p=>p.getAttribute('stroke')==='#b54a38').length,zoom:qaApp.captureUrlState().viewport.z})");
+async function selectedGeometry(id,target=page){
+ return target.evaluate('(()=>{const id='+JSON.stringify(id)+';const summary={matching:0,attached:0,highlighted:0};const walk=layer=>{if(layer.feature?.properties?.entity_id===id){summary.matching++;if(layer._path?.isConnected){summary.attached++;if(layer._path.getAttribute("stroke")==="#b54a38")summary.highlighted++;}}if(typeof layer.eachLayer==="function")layer.eachLayer(walk);};for(const group of [...Object.values(qaApp.tierGroups),...qaApp.chunkGroups.values(),...Object.values(qaApp.statisticalGroups)]){if(group)walk(group);}return summary;})()');
+}
+
 async function select(id,label){
  await page.evaluate('qaApp.selectEntity('+JSON.stringify(id)+',{zoom:true,source:"P4.2"})');
  await waitFor(async()=>{const s=await snapshot();return s.id===id&&s.pressed===1&&s.url===id&&s.highlight>0&&s.breadcrumb;},'visible selected SVG '+label,30000);
+ const geometry=await waitFor(async()=>{const g=await selectedGeometry(id);return g.highlighted>0?g:null;},'selected feature ID attached and styled '+label,25000);
  const s=await snapshot();assert.ok(s.highlight>0&&s.breadcrumb&&s.zoom<=12);
- evidence.selections.push({label,id,zoom:s.zoom,highlight:s.highlight,pass:true});
+ assert.ok(geometry.matching>0&&geometry.attached>0&&geometry.highlighted>0,'selection mapped to wrong feature: '+id);
+ evidence.selections.push({label,id,zoom:s.zoom,highlight:s.highlight,matchingPaths:geometry.matching,attachedPaths:geometry.attached,selectedPaths:geometry.highlighted,pass:true});
  return s;
 }
 async function shotViewport(width,height){
@@ -136,7 +142,9 @@ try{
      await waitFor(()=>p.evaluate("qaApp.chunkGroups.size>0&&[...document.querySelectorAll('.leaflet-map-pane path')].some(x=>x.getAttribute('stroke')==='#b54a38')"),'lazy chunk selected '+e.id,30000);
      const state=await p.evaluate('({zoom:qaApp.captureUrlState().viewport.z,chunks:qaApp.chunkGroups.size,id:qaApp.selectedEntityId})');
      assert.equal(state.id,e.id);assert.ok(state.zoom>=(e.map.tier==='detail'?10:7),e.id+' zoom threshold');
-     found.push({id:e.id,jurisdiction:e.jurisdiction,tier:e.map.tier,...state});
+     const geometry=await waitFor(async()=>{const g=await selectedGeometry(e.id,p);return g.highlighted>0?g:null;},'lazy chunk SVG maps selected identity '+e.id,25000);
+     assert.ok(geometry.attached>0&&geometry.highlighted>0,'lazy geometry feature not rendered for '+e.id);
+     found.push({id:e.id,jurisdiction:e.jurisdiction,tier:e.map.tier,...state,featureSvg:geometry});
     }
     const requests=()=>p.requests.filter(r=>r.url.includes('/public/geo/actual/')&&r.url.endsWith('.geojson')).map(r=>r.url);
     const before=requests();
@@ -146,7 +154,12 @@ try{
     const chunkUrls=before.filter(s=>s.includes('/chunks/'));
     assert.ok(chunkUrls.length>=2,'lazy chunks not fetched');
     assert.equal(new Set(chunkUrls).size,chunkUrls.length,'duplicate lazy HTTP requests');
-    evidence.lazy={start,found,chunkFetches:chunkUrls.length,duplicates:0,refetches:0};
+    const errors=p.console.filter(e=>e.type==='error'||e.level==='error');
+    const failures=p.failures.filter(e=>!e.canceled&&!/tile\\.openstreetmap\\.org/.test(e.url||''));
+    assert.equal(p.errors.length,0,'lazy page uncaught JavaScript exception');
+    assert.deepEqual(errors,[],'lazy page console errors');
+    assert.deepEqual(failures,[],'lazy page application fetch errors');
+    evidence.lazy={start,found,chunkFetches:chunkUrls.length,duplicates:0,refetches:0,exceptions:0,consoleErrors:0,networkFailures:0};
    }finally{await p.close();}
   });
   await check(t,'no JavaScript exceptions, console errors or app fetch errors',async()=>{
