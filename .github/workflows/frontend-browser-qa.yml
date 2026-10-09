@@ -50,6 +50,8 @@ jobs:
       - name: P5.4.1b UX keyboard, responsive, reset and hidden geometry in Chrome
         run: node --test scripts/test/frontend-p541b-ux-browser.test.mjs
       - name: P6.2 mobile/tablet dock, sheet snap states, keyboard and swipe in Chrome
+        env:
+          ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
         run: node --test scripts/audit/p62-mobile-tablet-browser.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
