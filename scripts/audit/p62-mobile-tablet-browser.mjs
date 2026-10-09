@@ -1,11 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
 import {launchBrowser,waitFor} from '../test/helpers/atlas-browser.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const browser=await launchBrowser(root),page=await browser.page();
 const snapshots=[];
+const output=process.env.ATLAS_QA_OUTPUT||path.join(tmpdir(),'atlas-browser-evidence');
 const geometryState="({ids:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,filters:[...qaApp.activeGeometryClasses].sort(),subtypes:[...qaApp.activeGeometrySubtypes].sort(),raster:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),url:location.search})";
 try{
  await test('P6.2 real Chrome mobile/tablet ergonomics, swipe/keyboard and geometry invariants',{timeout:180000},async t=>{
@@ -14,6 +17,7 @@ try{
   await t.test('phone uses visible three-action dock, unobscured map and touch targets',async()=>{
    const state=await page.evaluate("(()=>{const dock=document.querySelector('#atlas-mobile-toolbar'),map=document.querySelector('#map'),controls=['mobile-navigation','mobile-search','mobile-filters'];return {visible:!dock.hidden,buttons:controls.map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect();return {id,hidden:e.hidden,height:r.height,width:r.width}}),map:map.getBoundingClientRect().width,overflow:document.documentElement.scrollWidth>innerWidth,selected:qaApp.selectedEntityId,ids:[...qaApp.visibleEntityIds].sort()}})()");
    assert.equal(state.visible,true);assert.ok(state.buttons.every(b=>!b.hidden&&b.height>=44&&b.width>=44));assert.equal(state.map,390);assert.equal(state.overflow,false);assert.equal(state.selected,null);assert.deepEqual(state.ids,['osm-r58974','osm-r90689'].sort());
+   await page.screenshot(path.join(output,'p62-phone-dock.png'));
   });
   await t.test('mobile search shortcut opens drawer and focuses search; Escape returns dock',async()=>{
    await page.click('#mobile-search');
@@ -50,10 +54,12 @@ try{
    assert.equal(await page.evaluate("document.querySelector('#details-body').hidden"),false);
    const halfHeight=await page.evaluate("document.querySelector('#details-panel').getBoundingClientRect().height");
    assert.ok(halfHeight>peekHeight,'middle sheet height '+halfHeight+' > '+peekHeight);
+   await page.screenshot(path.join(output,'p62-phone-half-sheet.png'));
    await page.click('#sheet-expand');
    assert.equal(await page.evaluate("qaApp.atlasMobile.state.sheet"),'expanded');
    const fullHeight=await page.evaluate("document.querySelector('#details-panel').getBoundingClientRect().height");
    assert.ok(fullHeight>halfHeight,'full sheet height '+fullHeight+' > '+halfHeight);
+   await page.screenshot(path.join(output,'p62-phone-full-sheet.png'));
    await page.click('#sheet-expand');
    assert.equal(await page.evaluate("qaApp.atlasMobile.state.sheet"),'peek');
    assert.deepEqual(await page.evaluate(geometryState),before);
@@ -81,6 +87,7 @@ try{
     await page.viewport(w,h);
     const state=await page.evaluate("({mobile:qaApp.atlasMobile.state.mobile,toolbar:document.querySelector('#atlas-mobile-toolbar').hidden,overflow:document.documentElement.scrollWidth>innerWidth,map:document.querySelector('#map').getBoundingClientRect().width,sheet:qaApp.atlasMobile.state.sheet,details:document.querySelector('#details-panel').getBoundingClientRect().height})");
     snapshots.push({viewport:w+'x'+h,...state});
+    if((w===844&&h===390)||(w===768&&h===1024))await page.screenshot(path.join(output,'p62-'+w+'x'+h+'.png'));
     assert.equal(state.mobile,w<900);assert.equal(state.toolbar,w>=900);
     assert.equal(state.overflow,false,'horizontal overflow '+w+'x'+h);assert.ok(state.map>0);
     if(w<900)assert.ok(state.details>0);
