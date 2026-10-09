@@ -48,6 +48,7 @@ try{
   });
   await t.test('keyboard resizing and tab navigation remain accessible',async()=>{
    await page.click('#p5-resize-handle');
+   await page.evaluate("document.querySelector('#p5-resize-handle').focus()");
    const initial=Number(await page.evaluate("document.querySelector('#p5-resize-handle').getAttribute('aria-valuenow')"));
    await page.key('ArrowRight');
    const changed=Number(await page.evaluate("document.querySelector('#p5-resize-handle').getAttribute('aria-valuenow')"));
