@@ -111,7 +111,7 @@ try{
   });
   await check(t,'app JS console and fetch remain healthy',async()=>{
    assert.equal(page.errors.length,0,'uncaught JavaScript exceptions');
-   const bad=page.console.filter(c=>c.type==='error'&&!/tile.openstreetmap.org/i.test(c.text||''));
+   const bad=page.console.filter(c=>c.type==='error'&&!/tile\.openstreetmap\.org/i.test(c.text||''));
    assert.deepEqual(bad,[],'app console errors');
    const failed=page.failures.filter(f=>!f.canceled&&!/tile\.openstreetmap\.org/i.test(f.url||''));
    assert.deepEqual(failed,[],'app fetch failures');
