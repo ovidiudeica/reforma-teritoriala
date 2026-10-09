@@ -155,7 +155,7 @@ try{
     assert.ok(chunkUrls.length>=2,'lazy chunks not fetched');
     assert.equal(new Set(chunkUrls).size,chunkUrls.length,'duplicate lazy HTTP requests');
     const errors=p.console.filter(e=>e.type==='error'||e.level==='error');
-    const failures=p.failures.filter(e=>!e.canceled&&!/tile\\.openstreetmap\\.org/.test(e.url||''));
+    const failures=p.failures.filter(e=>!e.canceled&&!/tile\.openstreetmap\.org/.test(e.url||''));
     assert.equal(p.errors.length,0,'lazy page uncaught JavaScript exception');
     assert.deepEqual(errors,[],'lazy page console errors');
     assert.deepEqual(failures,[],'lazy page application fetch errors');
