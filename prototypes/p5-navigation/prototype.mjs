@@ -55,7 +55,7 @@ function setSidebarWidth(value){
 }
 handle.addEventListener('pointerdown',event=>{
  if(matchMedia('(max-width:720px)').matches)return;
- resizing=true;handle.setPointerCapture(event.pointerId);event.preventDefault();
+ resizing=true;handle.focus();handle.setPointerCapture(event.pointerId);event.preventDefault();
 });
 handle.addEventListener('pointermove',event=>{if(resizing)setSidebarWidth(event.clientX);});
 handle.addEventListener('pointerup',()=>{resizing=false;});
