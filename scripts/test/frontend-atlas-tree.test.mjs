@@ -1,4 +1,5 @@
 import {formatEntityName} from '../../atlas-name-format.mjs';
+import {compactTreeName} from '../../atlas-tree-labels.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -46,54 +47,30 @@ test('all 5848 consolidated paths are rooted, reciprocal, unique and match publi
  }
 });
 
-test('P3.1 real 63 statistical roles show classification, coalescence and separate boundaries',()=>{
- const {controller}=harness(),statistical=tree.nodes.filter(n=>n.roles?.includes('statistical'));
- const coalesced=statistical.filter(n=>n.roles.some(r=>r!=='statistical'));
- const separate=statistical.filter(n=>n.roles.length===1);
- assert.equal(statistical.length,63);assert.equal(coalesced.length,45);assert.equal(separate.length,18);
- for(const node of statistical){
-  const text=treeRoleLabel(node,typeLabel);
-  const level=Number(node.statistical_level);
-  if(Number.isInteger(level)&&level>=1&&level<=3)
-   assert.ok(text.includes(node.jurisdiction==='RO'?'NUTS '+level:'nivel statistic '+level),node.id+': '+text);
-  if(separate.includes(node))assert.match(text,/limită statistică separată/);
-  else{assert.ok(!text.includes('limită statistică separată'));assert.ok(text.includes(' · '));}
-  controller.select(node.id);
-  const entry=controller.getNode(node.id),role=entry.button.children.find(c=>c.className==='tree-role');
-  assert.ok(role,node.id);assert.ok(role.textContent.startsWith(text),node.id);
-  assert.equal(entry.button.children[0].textContent,formatEntityName(node.display_name));
-  assert.ok(entry.button.getAttribute('aria-label').includes(text));
-  assert.equal(entry.button.dataset.entityId,node.id);
-  assert.ok(entry.button.title.includes(node.statistical_code||text));
-  assert.ok(entry.button.parentElement.classList.contains(separate.includes(node)?'tree-statistical-only':'tree-coalesced'));
+test('P5.2.1 all 63 statistical identities survive with no metadata in menu',()=>{
+ const {controller}=harness(),stats=tree.nodes.filter(n=>n.roles?.includes('statistical'));
+ assert.equal(stats.length,63);assert.equal(stats.filter(n=>n.roles.length===1).length,18);
+ assert.equal(stats.filter(n=>n.roles.some(r=>r!=='statistical')).length,45);
+ for(const node of stats){assert.ok(treeRoleLabel(node,typeLabel));controller.select(node.id);const entry=controller.getNode(node.id);
+  assert.equal(entry.button.textContent,compactTreeName(node));assert.equal(entry.button.dataset.entityId,node.id);
+  assert.equal(entry.checkbox.dataset.entityId,node.id);assert.equal(entry.button.title,formatEntityName(node.display_name));
+  assert.ok(!entry.button.textContent.includes(node.statistical_code||'invalid-code'));
+  assert.ok(entry.outer.classList.contains(node.roles.length===1?'tree-statistical-only':'tree-coalesced'));
  }
- assert.equal(new Set(statistical.map(n=>n.id)).size,63);
 });
 
-test('P3.1 identical sibling names show stable IDs, parents and types without changing identity',()=>{
- const root={id:'root',parent_id:null,child_ids:['osm-r101','osm-r102','osm-r103','p'],display_name:'ROMÂNIA',display_type:'state',roles:['context']};
- const a={id:'osm-r101',parent_id:'root',child_ids:[],display_name:'ALBEȘTI',display_type:'commune',roles:['administrative']};
- const b={id:'osm-r102',parent_id:'root',child_ids:[],display_name:'ALBEȘTI',display_type:'town',roles:['administrative']};
- const c={id:'osm-r103',parent_id:'root',child_ids:[],display_name:'BRĂILA',display_type:'county',roles:['administrative']};
- const p={id:'p',parent_id:'root',child_ids:['osm-r104'],display_name:'ALT PĂRINTE',display_type:'county',roles:['administrative']};
- const d={id:'osm-r104',parent_id:'p',child_ids:[],display_name:'ALBEȘTI',display_type:'commune',roles:['administrative']};
- const fixtures=new Map([root,a,b,c,p,d].map(n=>[n.id,n]));
- assert.deepEqual([...ambiguousSiblingIds(fixtures)].sort(),['osm-r101','osm-r102']);
- const document=documentFactory(),container=new Element();
- const controller=createAtlasTree({document,container,nodeById:fixtures,rootIds:['root'],typeLabel,onSelect(){}});
- for(const id of ['osm-r101','osm-r102']){
-  const button=controller.getNode(id).button;
-  assert.ok(button.textContent.startsWith('Albești'));assert.ok(button.textContent.includes(id));
-  assert.ok(button.getAttribute('aria-label').includes('în România'));
-  assert.ok(button.getAttribute('aria-label').includes('ID '+id));
-  assert.ok(button.textContent.includes(id==='osm-r101'?'comună':'oraș'));
+test('duplicate sibling names preserve distinct per-ID controls and official identity',()=>{
+ const root={id:'root',parent_id:null,child_ids:['a','b'],display_name:'ROMÂNIA',display_type:'state'};
+ const a={id:'a',parent_id:'root',child_ids:[],display_name:'ALBEȘTI'};
+ const b={id:'b',parent_id:'root',child_ids:[],display_name:'ALBEȘTI'};
+ const fixture=new Map([root,a,b].map(n=>[n.id,n]));
+ assert.deepEqual([...ambiguousSiblingIds(fixture)].sort(),['a','b']);
+ const document=documentFactory(),container=new Element(),ctrl=createAtlasTree({document,container,nodeById:fixture,rootIds:['root'],onSelect(){}});
+ for(const id of ['a','b']){const e=ctrl.getNode(id);
+  assert.equal(e.button.textContent,'Albești');assert.equal(e.button.dataset.entityId,id);
+  assert.equal(e.checkbox.dataset.entityId,id);assert.equal(e.button.getAttribute('aria-label'),'Selectează Albești');
  }
- controller.select('osm-r104');
- const other=controller.getNode('osm-r104').button;
- assert.ok(!other.textContent.includes('osm-r104'),'identical names from distinct parent branches are not sibling collisions');
- assert.ok(other.getAttribute('aria-label').includes('în Alt Părinte'));
- assert.equal(fixtures.get('osm-r101').display_name,'ALBEȘTI');
- assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,1);
+ ctrl.select('b');assert.equal(ctrl.selectedId,'b');assert.equal(fixture.get('a').display_name,'ALBEȘTI');
 });
 
 test('known RO/MD hierarchy examples include coalesced MD114/MD115 and official MD120',()=>{
@@ -122,8 +99,7 @@ test('P3.2 counts descendants once from the complete 5848-node contract without 
  const {controller}=harness();
  assert.ok(controller.getRenderedCount()<100,'only roots and immediate children are initially rendered');
  const root=controller.getNode(tree.root_ids[0]);
- assert.match(root.button.textContent,/subordonate/);
- assert.match(root.button.textContent,new RegExp(counts.get(tree.root_ids[0]).toLocaleString('ro-RO')));
+ assert.equal(root.button.textContent,compactTreeName(nodes.get(tree.root_ids[0])));
 });
 
 test('P3.2 bounded levels, root reset and collapse retain selection, URL-ready open IDs',()=>{
@@ -149,26 +125,18 @@ test('P3.2 bounded levels, root reset and collapse retain selection, URL-ready o
  assert.throws(()=>controller.openToDepth(4),/invalid expansion depth/);
 });
 
-test('P3.2 hidden geometry markers update only materialized nodes and preserve semantic labels',()=>{
+test('checkbox intent survives global geometry filters and lazy rendering',()=>{
  let visible=true;const document=documentFactory(),container=new Element();
- const controller=createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,typeLabel,isGeometryVisible:()=>visible,onSelect(){}});
- const initial=controller.getRenderedCount();
- assert.ok(initial<100);
- visible=false;
- assert.equal(controller.refreshVisibility(),initial);
- const entry=controller.getNode(tree.root_ids[0]);
- assert.equal(entry.outer.classList.contains('tree-geometry-hidden'),true);
- assert.ok(entry.button.getAttribute('aria-label').includes('geometrie ascunsă de filtre'));
- assert.equal(entry.button.children.find(c=>c.className==='tree-role').children.some(c=>c.className==='tree-visibility'&&!c.hidden),true);
- assert.equal(controller.refreshVisibility(),0,'unchanged filter state causes no DOM mutation');
- controller.select(deep.id);const expanded=controller.getRenderedCount();
- assert.ok(expanded>initial&&expanded<5848);
- assert.ok(controller.getNode(deep.id).button.getAttribute('aria-label').includes('geometrie ascunsă de filtre'));
- visible=true;
- assert.equal(controller.refreshVisibility(),expanded);
- assert.equal(entry.outer.classList.contains('tree-geometry-hidden'),false);
- assert.ok(!entry.button.getAttribute('aria-label').includes('geometrie ascunsă de filtre'));
- assert.equal(controller.selectedId,deep.id);
+ const ctrl=createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,isEntityChecked:()=>true,isGeometryVisible:()=>visible,onSelect(){}});
+ const initial=ctrl.getRenderedCount();assert.ok(initial<100);
+ visible=false;assert.equal(ctrl.refreshVisibility(),initial);
+ const root=ctrl.getNode(tree.root_ids[0]);
+ assert.equal(root.checkbox.checked,true);assert.match(root.checkbox.title,/ascunsă de filtre/);
+ assert.equal(root.outer.classList.contains('tree-geometry-hidden'),true);assert.equal(ctrl.refreshVisibility(),0);
+ ctrl.select(deep.id);const n=ctrl.getRenderedCount();assert.ok(n>initial&&n<5848);
+ visible=true;assert.equal(ctrl.refreshVisibility(),n);
+ assert.equal(root.checkbox.checked,true);assert.equal(root.outer.classList.contains('tree-geometry-hidden'),false);
+ assert.equal(ctrl.selectedId,deep.id);
 });
 
 test('malformed paths fail with entity IDs, without looping or replacing selection',()=>{
@@ -277,7 +245,9 @@ test('real frontend controller synchronizes map/search/tree/breadcrumb/details a
   await input.dispatch('input');const result=document.getElementById('search-results').children[0];assert.ok(result);await result.click();assertSelection(deep.id);
   assert.equal(app.activeFilterGroups.has(cls),false);
   app.activeFilterGroups.add(cls);
-  // Select the actual tree button; central selection must prepare zoom and highlight.
+   const cb=container.descendants().find(e=>e.className==='tree-visibility-toggle'&&e.dataset.entityId===deep.id);
+   assert.ok(cb);cb.checked=true;await cb.dispatch('change');assert.equal(app.visibleEntityIds.has(deep.id),true);
+   // Select the actual tree button; central selection must prepare zoom and highlight.
   await container.querySelectorAll('.tree-select').find(b=>b.dataset.entityId===deep.id).click();
   // Click handler returns its promise through onSelect.
   assertSelection(deep.id);assert.ok(fitBounds.length>0);
