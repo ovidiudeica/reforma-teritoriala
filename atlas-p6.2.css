@@ -34,6 +34,14 @@
  #atlas-main .atlas-basemap-toggle{
   left:auto;right:12px;top:10px;bottom:auto;max-width:min(160px,calc(100vw - 80px));
  }
+ /* Keep OSM credits and scale legible: neither may sit behind the bottom dock. */
+ #atlas-main .leaflet-bottom.leaflet-right{bottom:auto;top:66px}
+ #atlas-main .leaflet-bottom.leaflet-left{bottom:auto;top:103px}
+ #atlas-main .leaflet-bottom.leaflet-right .leaflet-control-attribution{
+  margin:0 10px 0 0;max-width:calc(100vw - 70px);
+  font-size:9px;line-height:1.4;background:rgba(255,255,255,.92);
+ }
+ #atlas-main .leaflet-bottom.leaflet-left .leaflet-control-scale{margin:0 0 0 10px}
  #filters-panel{
   top:min(255px,38dvh);bottom:calc(12px + env(safe-area-inset-bottom));
   left:8px;right:8px;min-height:0;
