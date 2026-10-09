@@ -39,10 +39,10 @@ try{
    assert.equal(await page.evaluate('document.querySelector('+JSON.stringify(cb)+').checked'),true);
   });
   await t.test('jurisdiction controls hide but never erase explicit checkbox',async()=>{
-   await page.click('#layer-ro');
+   if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');await page.click('#layer-ro');
    assert.equal(await page.evaluate('document.querySelector('+JSON.stringify(cb)+').checked'),true);
    assert.match(await page.evaluate('document.querySelector("#selection-visibility").textContent'),/ascuns/i);
-   await page.click('#layer-ro');assert.equal(await page.evaluate('document.querySelector('+JSON.stringify(cb)+').checked'),true);
+   if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');await page.click('#layer-ro');assert.equal(await page.evaluate('document.querySelector('+JSON.stringify(cb)+').checked'),true);
   });
   await t.test('all seven viewports retain map, tree and prevent horizontal overflow',async()=>{
    for(const [w,h] of [[1440,900],[1280,800],[900,768],[360,800],[390,844],[430,932],[390,600]]){

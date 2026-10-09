@@ -106,6 +106,7 @@ try{
   await check(t,'filter OR, jurisdictions and separate statistical z-order in SVG',async()=>{
    await page.viewport(1440,900);
    await select(ro.id,'RO coalesced before filters');
+   if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');
    await page.click('button[aria-label="Niciuna — Tipuri administrative"]');
    await waitFor(async()=>(await snapshot()).highlight>0,'statistical OR retains shared polygon');
    evidence.filters.push('admin OFF / statistical ON -> coalesced visible');
@@ -116,11 +117,12 @@ try{
    await waitFor(async()=>(await snapshot()).highlight>0,'statistical role restored');
    await page.click('button[aria-label="Toate — Tipuri administrative"]');
    await select(ro.id,'RO jurisdiction gate');
-   await page.click('#layer-ro');
+   if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');await page.click('#layer-ro');
    await waitFor(async()=>{const s=await snapshot();return s.highlight===0&&/ascuns/i.test(s.hidden);},'RO jurisdiction hidden');
-   await page.click('#layer-ro');await waitFor(async()=>(await snapshot()).highlight>0,'RO jurisdiction restored');
+   if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');await page.click('#layer-ro');await waitFor(async()=>(await snapshot()).highlight>0,'RO jurisdiction restored');
    evidence.filters.push('jurisdiction OFF/ON -> hidden/restored SVG');
    await select(separate.id,'MD statistical-only');
+   if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');
    const pane=await page.evaluate("(()=>{const s=document.querySelector('.leaflet-statistical-boundaries-pane'),a=document.querySelector('.leaflet-overlay-pane');return {stat:Number(getComputedStyle(s).zIndex),admin:Number(getComputedStyle(a).zIndex),paths:s.querySelectorAll('path').length,selected:s.querySelectorAll('path[stroke=\"#b54a38\"]').length};})()");
    assert.ok(pane.stat>pane.admin&&pane.paths>=1&&pane.paths<=18&&pane.selected>0,JSON.stringify(pane));
    evidence.zOrder=pane;

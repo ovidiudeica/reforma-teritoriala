@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="atlas-explorer-shell.css">
+<link rel="stylesheet" href="atlas-p5.3.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -26,30 +27,40 @@
   <h2>Entități</h2>
   <button id="copy-link" class="action-button" type="button">Copiază link</button>
   <p id="share-status" class="hint" role="status" aria-live="polite"></p>
+  <button id="filters-toggle" class="action-button atlas-filters-trigger" type="button" aria-expanded="false" aria-controls="filters-panel">Filtre <span id="filters-count" aria-live="polite"></span></button>
 
-  <section>
+  <section id="search-panel">
     <h3>Căutare</h3>
     <input id="entity-search" class="search" type="search" aria-label="Caută entități teritoriale" aria-describedby="search-help" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Nume, SIRUTA/CUATM, cod statistic sau OSM…" autocomplete="off">
-    <div id="search-results" class="search-results" role="listbox" aria-label="Rezultate căutare" hidden></div>
     <p id="search-help" class="sr-only">Săgețile sus/jos navighează rezultatele, Enter selectează, Escape închide lista. Căutarea include și geometrii ascunse.</p>
+  </section>
+  <div class="atlas-navigation-tabs" role="tablist" aria-label="Navigare entități și rezultate">
+    <button id="tab-entities" class="atlas-navigation-tab" type="button" role="tab" aria-selected="true" aria-controls="entities-panel">Entități</button>
+    <button id="tab-results" class="atlas-navigation-tab" type="button" role="tab" aria-selected="false" aria-controls="results-panel" tabindex="-1">Rezultate</button>
+  </div>
+  <section id="results-panel" role="tabpanel" aria-labelledby="tab-results" hidden>
+    <div id="search-results" class="search-results" role="listbox" aria-label="Rezultate căutare" hidden></div>
     <p id="search-status" class="hint" role="status" aria-live="polite"></p>
   </section>
-
-  <section>
+  <section id="entities-panel" role="tabpanel" aria-labelledby="tab-entities">
     <h3>Arbore</h3>
     <p class="hint">Bifează geometria unei entități pentru a o afișa. Extinderea și selectarea nu modifică bifele.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
     <div id="hierarchy-tree" class="hierarchy-tree"><p class="muted">Se încarcă arborele teritorial…</p></div>
   </section>
 
-  <section>
+  <section id="filters-panel" class="atlas-filters-panel" aria-label="Filtre geometrice" hidden inert>
+    <div class="atlas-filters-heading"><h2>Filtre</h2><button id="filters-close" class="action-button" type="button">Închide filtrele</button></div>
+    <p class="hint">Filtrele limitează geometriile deja bifate în arbore; nu modifică bifele entităților.</p>
+    <section>
     <h3>Jurisdicții</h3>
     <label><input id="layer-ro" type="checkbox" checked> România</label>
-    <label><input id="layer-md" type="checkbox" checked> Republica Moldova</label>
+    <label><input id="layer-md" type="checkbox" checked> Moldova</label>
   </section>
 
-  <section>
+    <section>
     <div id="filter-list" class="filter-list"><span class="muted">Se încarcă…</span></div>
+    </section>
   </section>
 
   <section>
@@ -72,6 +83,7 @@
 
 <p id="map-help" class="sr-only">Hartă navigabilă cu săgeți și tastele plus/minus. Pentru selecția entităților fără mouse folosește căutarea sau arborele din navigare.</p>
 <div id="map" role="region" aria-label="Hartă teritorială România și Republica Moldova" aria-describedby="map-help" tabindex="0"></div>
+<button id="basemap-toggle" class="atlas-basemap-toggle" type="button" aria-pressed="true" aria-label="Fundal OpenStreetMap activ. Dezactivează fundalul">Fundal OSM: activ</button>
 
 <aside id="details-panel" class="details" hidden aria-labelledby="details-title">
   <div class="details-head">

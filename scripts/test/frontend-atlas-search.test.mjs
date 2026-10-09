@@ -54,7 +54,7 @@ test('global twenty after ranking, RO/MD groups stable and entity IDs deduplicat
  assert.equal(searchEntities(reused.statistical.code,createSearchIndex([...data.entities,reused],nodes)).filter(r=>r.entity.id===reused.id).length,1);
 });
 test('RO/MD DOM headings are groups, not options; keyboard follows visual order across groups',async()=>{
- const h=harness();await query(h,'Victoria');assert.deepEqual(h.container.children.map(g=>g.getAttribute('aria-label')),['România','Republica Moldova']);assert.equal(options(h).length,h.controller.state.results.length);
+ const h=harness();await query(h,'Victoria');assert.deepEqual(h.container.children.map(g=>g.getAttribute('aria-label')),['România','Moldova']);assert.equal(options(h).length,h.controller.state.results.length);
  for(let i=0;i<options(h).length;i++){await key(h,'ArrowDown');assert.equal(h.controller.state.activeId,options(h)[i].dataset.entityId);}assert.equal(h.selections.length,0);
 });
 test('ArrowDown starts first and clamps at last; ArrowUp starts last and clamps at first',async()=>{
