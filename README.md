@@ -63,6 +63,10 @@ GeoJSON-urile publice păstrează coordonatele geometriei master **fără simpli
 
 Închiderea release-ului web este evidence/metadata-only: nu modifică entități, ierarhii, geometrii, registre, surse sau fingerprint-ul ACTUAL. Detaliile sunt în `docs/frontend-web-v1.2-release.md`.
 
+## Faza P4 — verificarea cartografiei RO+MD
+
+Auditul per-ID P4.0, regresia geometrică P4.1 și verificările Chrome/CDP P4.2 au fost integrate fără schimbarea corpusurilor ACTUAL/P2. Hardening-ul P4.3 păstrează 5.848 identități, matricea de 170 stări, verificările SHA ale celor 115 chunk-uri și testarea vizuală în șapte viewporturi. Criteriile și dovezile de închidere sunt în [docs/p4-phase-release-closure.md](docs/p4-phase-release-closure.md).
+
 ## Source bundle și reproducibilitate
 
 `data/current/actual-source-bundle-manifest.json` fixează bytes exacți pentru snapshot-urile OSM RO/MD și sursele oficiale SIRUTA/CUATM. Candidate lifecycle include build offline, network-denial proof, toolchain/runtime pinning și dovadă de reproducibilitate CHANGE byte-for-byte.
