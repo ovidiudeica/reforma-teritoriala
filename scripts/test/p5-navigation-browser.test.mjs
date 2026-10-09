@@ -14,7 +14,7 @@ try{
    await page.viewport(1440,900);
    await page.send('Page.navigate',{url:browser.server.url+'/prototypes/p5-navigation/'});
    await waitFor(()=>page.evaluate("document.documentElement.dataset.p5Ready==='true'"),'P5 prototype ready',90000);
-   const report=await page.evaluate("({count:p5Navigation.ready&&qaApp?.entityById?.size,roots:document.querySelectorAll('#hierarchy-tree > .tree-node').length,tree:document.querySelector('#p5-panel-tree').hidden,filters:document.querySelector('#p5-panel-filters').hidden,pins:document.querySelectorAll('.tree-pin').length,map:!!p5Navigation.map,overflow:document.documentElement.scrollWidth>innerWidth})");
+   const report=await page.evaluate("({count:p5Navigation.ready,roots:document.querySelectorAll('#hierarchy-tree > .tree-node').length,tree:document.querySelector('#p5-panel-tree').hidden,filters:document.querySelector('#p5-panel-filters').hidden,pins:document.querySelectorAll('.tree-pin').length,map:!!p5Navigation.map,overflow:document.documentElement.scrollWidth>innerWidth})");
    // qaApp isn't declared by the prototype; count comes from the production module on the next call.
    assert.ok(report.map);assert.equal(report.roots,2);assert.equal(report.tree,false);assert.equal(report.filters,true);
    assert.ok(report.pins>=2);assert.equal(report.overflow,false);
