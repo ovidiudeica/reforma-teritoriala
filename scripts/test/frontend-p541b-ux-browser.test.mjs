@@ -71,6 +71,9 @@ try{
    await page.viewport(390,844);
    const header=await page.evaluate("({bottom:document.querySelector('header').getBoundingClientRect().bottom,modes:[...document.querySelectorAll('header .mode')].map(e=>{const r=e.getBoundingClientRect();return {bottom:r.bottom,right:r.right}})})");
    assert.ok(header.modes.every(r=>r.bottom<=header.bottom+1&&r.right<=390),'mode overlap '+JSON.stringify(header));
+   await page.click('#mobile-navigation');await page.click('#filters-toggle');
+   assert.ok(await page.evaluate("document.querySelector('#filters-panel .filter-actions button').getBoundingClientRect().height>=44"),'mobile filter touch target');
+   await page.click('#filters-close');await page.click('#drawer-close');
    const id=await page.evaluate("[...qaApp.entityById.values()].find(x=>x.map?.bbox&&!qaApp.visibleEntityIds.has(x.id)).id");
    await page.evaluate("qaApp.selectEntity("+JSON.stringify(id)+",{source:'map',zoom:false})");
    await waitFor(()=>page.evaluate("qaApp.atlasMobile.state.sheet==='peek'"),'selected sheet peek');
