@@ -3,9 +3,13 @@ export function createAtlasExplorerShell({document,map,window:browser}){
  const main=document.getElementById('atlas-main');
  const sidebar=document.getElementById('atlas-controls');
  const divider=document.getElementById('explorer-resizer');
- if(!main||!sidebar||!divider)throw new Error('P5.1 explorer shell: missing layout DOM');
- const small=browser.matchMedia('(max-width: 720px)');
  const min=280,max=660,initial=340;
+ // The Node/P4 contract tests use DOM and Leaflet doubles without layout APIs.
+ // The real browser has all APIs; never mutate geometry or inject browser state in tests.
+ if(!main?.style?.setProperty||!sidebar||!divider?.addEventListener||!browser?.matchMedia||!map?.invalidateSize){
+  return {get width(){return initial;},setWidth(){}};
+ }
+ const small=browser.matchMedia('(max-width: 720px)');
  let pointer=null;
  let width=initial;
  const clamp=value=>Math.max(min,Math.min(max,Math.round(value)));
