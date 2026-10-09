@@ -1,0 +1,35 @@
+
+
+/* P5.3 — discoverable filters, tabbed navigator, independent raster basemap. */
+#atlas-controls{z-index:1500}
+.atlas-filters-trigger{margin:3px 0 11px;min-height:42px;font-weight:700}
+#filters-count{font-weight:400;font-size:11px;white-space:nowrap}
+.atlas-navigation-tabs{display:flex;gap:4px;border-bottom:1px solid #d9e4dd;margin:9px 0 12px}
+.atlas-navigation-tab{flex:1;min-height:44px;border:0;border-bottom:3px solid transparent;background:transparent;color:#485f51;font:inherit;font-size:13px;cursor:pointer}
+.atlas-navigation-tab[aria-selected="true"]{color:#18462f;border-bottom-color:#236647;font-weight:700}
+.atlas-navigation-tab:focus-visible,#filters-toggle:focus-visible,#filters-close:focus-visible,.atlas-basemap-toggle:focus-visible{outline:3px solid #2d614d;outline-offset:2px}
+#results-panel[hidden],#entities-panel[hidden],#filters-panel[hidden]{display:none!important}
+#results-panel{min-height:160px}
+#results-panel .search-results{max-height:min(55vh,540px)}
+#filters-panel{
+ position:fixed;z-index:1250;top:84px;right:14px;bottom:48px;
+ width:min(390px,calc(100vw - 28px));overflow:auto;overscroll-behavior:contain;
+ background:#fff;color:#17202a;border:1px solid #cbd9cf;border-radius:12px;
+ padding:18px;box-shadow:0 12px 36px #18382a48
+}
+.atlas-filters-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.atlas-filters-heading h2{margin:0}
+#filters-panel .filter-section{margin-top:14px}
+#filters-panel .filter-actions button{min-height:36px;padding:7px}
+.atlas-basemap-toggle{
+ position:absolute;z-index:1050;bottom:17px;left:calc(var(--explorer-width) + 24px);
+ border:1px solid #abc1b1;border-radius:7px;background:#fff;color:#173d2a;
+ padding:9px 12px;min-height:44px;font-size:12px;font-weight:700;cursor:pointer;
+ box-shadow:0 2px 9px #0002
+}
+.atlas-basemap-toggle[aria-pressed="false"]{background:#ecf1ed}
+@media(max-width:720px){
+ #filters-panel{z-index:1450;top:265px;bottom:35px;left:8px;right:8px;width:auto;max-width:none;padding:14px}
+ .atlas-basemap-toggle{left:14px;bottom:65px}
+}
+@media(forced-colors:active){.atlas-navigation-tab[aria-selected="true"],.atlas-basemap-toggle{border-color:Highlight}}

@@ -26,6 +26,10 @@ jobs:
           node --check atlas-explorer-shell.mjs
           node --check scripts/test/frontend-explorer-shell-browser.test.mjs
           node --check scripts/test/frontend-entity-tree-browser.test.mjs
+          node --check scripts/test/frontend-navigation-p53-browser.test.mjs
+          node --check app.js
+          node --check atlas-url-state.mjs
+          node --check atlas-search.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
@@ -38,6 +42,8 @@ jobs:
         run: node --test scripts/test/frontend-explorer-shell-browser.test.mjs
       - name: P5.2.1 compact per-ID tree and URL state in Chrome
         run: node --test scripts/test/frontend-entity-tree-browser.test.mjs
+      - name: P5.3 filters/search navigation and independent OSM basemap in Chrome
+        run: node --test scripts/test/frontend-navigation-p53-browser.test.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots

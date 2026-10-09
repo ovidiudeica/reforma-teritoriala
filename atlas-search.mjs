@@ -1,4 +1,5 @@
 import {formatEntityName} from './atlas-name-format.mjs';
+import {compactTreeName} from './atlas-tree-labels.mjs';
 export const normalizeSearch=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const jurisdictionOrder=j=>j==='RO'?0:j==='MD'?1:2;
 const collator=new Intl.Collator('ro');
@@ -51,7 +52,7 @@ export function createSearchIndex(entities,nodeById=new Map()){
  const byId=new Map(entities.map(e=>[e.id,e]));
  const records=[...byId.values()].map(entity=>{
   const descriptor=searchResultDescriptor(entity,nodeById,byId),relation=entity.representation?.osm_relation_id;
-  const fields=[[0,[entity.display_name]],[1,[entity.official_name,entity.legal?.name]],[2,[entity.legal?.id,entity.statistical?.code,entity.id,relation,relation==null?null:'r'+relation]],[3,entity.searchable_names||[]],[4,[descriptor.parent,...descriptor.ancestry,entity.hierarchy?.legal_parent_name,entity.hierarchy?.parent_name]]].map(([priority,values])=>({priority,values:[...new Set(values.map(normalizeSearch).filter(Boolean))]}));
+  const fields=[[0,[entity.display_name]],[1,[compactTreeName(nodeById.get(entity.id)||entity),entity.official_name,entity.legal?.name]],[2,[entity.legal?.id,entity.statistical?.code,entity.id,relation,relation==null?null:'r'+relation]],[3,entity.searchable_names||[]],[4,[descriptor.parent,...descriptor.ancestry,entity.hierarchy?.legal_parent_name,entity.hierarchy?.parent_name]]].map(([priority,values])=>({priority,values:[...new Set(values.map(normalizeSearch).filter(Boolean))]}));
   return {entity,descriptor,fields};
  });
  const peers=new Map();
@@ -74,7 +75,7 @@ export function searchEntities(query,index,limit=20){
  return index.map(record=>({record,score:rankSearchResult(record,query)})).filter(r=>Number.isFinite(r.score)).sort((a,b)=>a.score-b.score||jurisdictionOrder(a.record.entity.jurisdiction)-jurisdictionOrder(b.record.entity.jurisdiction)||collator.compare(a.record.entity.display_name,b.record.entity.display_name)||(a.record.entity.id<b.record.entity.id?-1:a.record.entity.id>b.record.entity.id?1:0)).slice(0,limit).map(r=>r.record);
 }
 export function groupSearchResults(results){
- return [...new Set(results.map(r=>r.entity.jurisdiction))].sort((a,b)=>jurisdictionOrder(a)-jurisdictionOrder(b)||a.localeCompare(b)).map(j=>({jurisdiction:j,label:j==='RO'?'România':j==='MD'?'Republica Moldova':j,results:results.filter(r=>r.entity.jurisdiction===j)}));
+ return [...new Set(results.map(r=>r.entity.jurisdiction))].sort((a,b)=>jurisdictionOrder(a)-jurisdictionOrder(b)||a.localeCompare(b)).map(j=>({jurisdiction:j,label:j==='RO'?'România':j==='MD'?'Moldova':j,results:results.filter(r=>r.entity.jurisdiction===j)}));
 }
 // Individual Unicode code points: injective IDs, no raw HTML.
 export const searchOptionId=id=>'atlas-search-option-'+Array.from(String(id),c=>c.codePointAt(0).toString(16)).join('-');

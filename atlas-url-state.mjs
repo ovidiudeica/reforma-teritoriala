@@ -22,7 +22,7 @@ export function normalizeUrlState(raw,config){
   if(!parent.checked&&!parent.indeterminate)classes.delete(group.id);
  }
  const viewport=validViewport(raw.viewport,config);
- return {entityId:config.entityIds.has(raw.entityId)?raw.entityId:null,viewport:viewport||{...defaultViewport},viewportExplicit:Boolean(viewport&&raw.viewportExplicit!==false),jurisdictions:sorted(raw.jurisdictions??['RO','MD']).filter(j=>['RO','MD'].includes(j)),geometryClasses:sorted(classes),geometrySubtypes:sorted(subtypes),statisticalLevels:config.levels.filter(level=>new Set(raw.statisticalLevels??config.levels).has(level)),separateStatisticalGeometry:raw.separateStatisticalGeometry!==false,visibleEntityIds:sorted(raw.visibleEntityIds??config.rootIds).filter(id=>config.entityIds.has(id)),openIds:sorted(raw.openIds??config.rootIds).filter(id=>Boolean(config.nodeById.get(id)?.child_ids?.length))};
+ return {entityId:config.entityIds.has(raw.entityId)?raw.entityId:null,viewport:viewport||{...defaultViewport},viewportExplicit:Boolean(viewport&&raw.viewportExplicit!==false),jurisdictions:sorted(raw.jurisdictions??['RO','MD']).filter(j=>['RO','MD'].includes(j)),geometryClasses:sorted(classes),geometrySubtypes:sorted(subtypes),statisticalLevels:config.levels.filter(level=>new Set(raw.statisticalLevels??config.levels).has(level)),separateStatisticalGeometry:raw.separateStatisticalGeometry!==false,osmBasemapVisible:raw.osmBasemapVisible!==false,visibleEntityIds:sorted(raw.visibleEntityIds??config.rootIds).filter(id=>config.entityIds.has(id)),openIds:sorted(raw.openIds??config.rootIds).filter(id=>Boolean(config.nodeById.get(id)?.child_ids?.length))};
 }
 export const defaultUrlState=config=>normalizeUrlState({viewport:defaultViewport,viewportExplicit:false},config);
 function fixedList(params,key,allowed){
@@ -38,7 +38,7 @@ export function parseUrlState(search,config){
  const disabled=new Set(params.getAll('f'));
  const visibleEntityIds=new Set(config.rootIds);
  for(const id of new Set(params.getAll('x')))if(config.entityIds.has(id)){if(visibleEntityIds.has(id))visibleEntityIds.delete(id);else visibleEntityIds.add(id);}
- return normalizeUrlState({visibleEntityIds,entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:fixedList(params,'j',['RO','MD']),geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',openIds:params.has('t')?params.getAll('t'):config.rootIds},config);
+ return normalizeUrlState({visibleEntityIds,entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:fixedList(params,'j',['RO','MD']),geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):config.rootIds},config);
 }
 export function serializeUrlState(raw,config){
  const state=normalizeUrlState(raw,config),defaults=defaultUrlState(config),params=new URLSearchParams();
@@ -49,6 +49,7 @@ export function serializeUrlState(raw,config){
  for(const id of config.subtypes.filter(id=>!state.geometrySubtypes.includes(id)))params.append('f',id);
  if(!equal(state.statisticalLevels,defaults.statisticalLevels))params.set('s',state.statisticalLevels.join(','));
  if(!state.separateStatisticalGeometry)params.set('b','0');
+ if(!state.osmBasemapVisible)params.set('m','0');
  if(!equal(state.openIds,defaults.openIds)){if(!state.openIds.length)params.append('t','');else for(const id of state.openIds)params.append('t',id);}
  const toggles=sorted([...new Set([...state.visibleEntityIds,...defaults.visibleEntityIds])].filter(id=>state.visibleEntityIds.includes(id)!==defaults.visibleEntityIds.includes(id)));
  for(const id of toggles)params.append('x',id);

@@ -211,3 +211,16 @@ test('P5.2 checkbox state defaults to roots, XOR URL restores and history round-
  await h.browser.go(-1);assert.deepEqual(h.state.visibleEntityIds,defaults.visibleEntityIds);
  await h.browser.go(1);assert.deepEqual(h.state.visibleEntityIds,a.visibleEntityIds);
 });
+
+test('P5.3 raster OSM preference is independent and preserves legacy URLs',()=>{
+ const original=defaultUrlState(config);
+ assert.equal(original.osmBasemapVisible,true);
+ const noTiles=normalizeUrlState({...original,osmBasemapVisible:false},config);
+ const encoded=serializeUrlState(noTiles,config);
+ assert.equal(new URLSearchParams(encoded).get('m'),'0');
+ assert.equal(parseUrlState('?'+encoded,config).osmBasemapVisible,false);
+ assert.deepEqual(parseUrlState('?'+encoded,config).visibleEntityIds,original.visibleEntityIds);
+ assert.equal(parseUrlState('?v=1',config).osmBasemapVisible,true);
+ assert.equal(canonicalizeUrlState('?v=1&m=1',config),'');
+ assert.equal(canonicalizeUrlState('?v=1&m=0',config),'v=1&m=0');
+});

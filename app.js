@@ -10,9 +10,16 @@ import {formatEntityName} from './atlas-name-format.mjs';
 import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
 
 const map=L.map('map',{zoomControl:true,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
+let osmBasemapVisible=true;
 const statisticalPane=map.createPane?.('statistical-boundaries');
 if(statisticalPane?.style)statisticalPane.style.zIndex='450';
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+const osmTiles=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+function setOsmBasemapVisible(value){
+ const visible=Boolean(value);
+ if(visible!==osmBasemapVisible){if(visible)osmTiles.addTo(map);else map.removeLayer(osmTiles);osmBasemapVisible=visible;}
+ const button=document.getElementById('basemap-toggle');
+ if(button){button.setAttribute('aria-pressed',String(visible));button.textContent=visible?'Fundal OSM: activ':'Fundal OSM: dezactivat';button.setAttribute('aria-label',visible?'Fundal OpenStreetMap activ. Dezactivează fundalul':'Fundal OpenStreetMap dezactivat. Activează fundalul');}
+}
 L.control.scale({imperial:false}).addTo(map);
 labelMapControls(document);
 const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window});
@@ -38,6 +45,34 @@ const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a se
 const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
 let geometryFilterIndex=null;
 let atlasFilters=null;
+let filtersPanelOpen=false;
+let navigationTab='entities';
+function setNavigationTab(tab){
+ navigationTab=tab==='results'?'results':'entities';
+ for(const key of ['entities','results']){
+  const selected=key===navigationTab;
+  const button=document.getElementById('tab-'+key),panel=document.getElementById(key+'-panel');
+  if(button){button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;}
+  if(panel)panel.hidden=!selected;
+ }
+}
+function setFiltersPanelOpen(value,{restoreFocus=false}={}){
+ filtersPanelOpen=Boolean(value);
+ const panel=document.getElementById('filters-panel'),trigger=document.getElementById('filters-toggle');
+ if(!panel||!trigger)return;
+ panel.hidden=!filtersPanelOpen;panel.inert=!filtersPanelOpen;
+ trigger.setAttribute('aria-expanded',String(filtersPanelOpen));
+ if(filtersPanelOpen)document.getElementById('filters-close')?.focus?.();
+ else if(restoreFocus)trigger.focus?.();
+}
+function updateFilterCount(){
+ const count=document.getElementById('filters-count');if(!count)return;
+ const inactive=[...geometryFilterIndex?.subtypeMembers?.keys?.()||[]].filter(id=>!activeGeometrySubtypes.has(id)).length+
+  [1,2,3,'unclassified'].filter(level=>!activeStatisticalLevels.has(level)).length+
+  ['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase())?.checked===false).length+
+  Number(!separateStatisticalGeometry);
+ count.textContent=inactive?'('+inactive+' inactive)':'';
+}
 const activeStatisticalLevels=new Set([1,2,3,'unclassified']);
 let separateStatisticalGeometry=true;
 const statisticalGroups={RO:L.layerGroup(),MD:L.layerGroup()};
@@ -52,7 +87,7 @@ let atlasTree=null;
 let atlasSearch=null;
 let atlasUrl=null;
 const mobileMedia=globalThis.window?.matchMedia?.('(max-width: 720px)')||{matches:false};
-const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open),onOpen:()=>atlasTree?.revealSelected()});
+const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)||filtersPanelOpen,onOpen:()=>atlasTree?.revealSelected(),onCloseDrawer:()=>setFiltersPanelOpen(false)});
 wireAtlasSkipLinks({document,mobile:atlasMobile});
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
@@ -150,6 +185,7 @@ function renderFilters(){
 function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boolean(value);}
 function refreshGeometryVisibility(){
  atlasFilters?.sync();
+ updateFilterCount();
  rerenderLoadedTiers();
  atlasTree?.refreshVisibility();
  updateSelectionVisibility();
@@ -162,7 +198,11 @@ function updateSelectionVisibility(){
 }
 
 function wireSearch(){
- atlasSearch=createAtlasSearch({input:document.getElementById('entity-search'),container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:selectEntity});
+  const input=document.getElementById('entity-search');
+  atlasSearch=createAtlasSearch({input,container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:async(id,options)=>{setFiltersPanelOpen(false);setNavigationTab('entities');await selectEntity(id,options);}});
+  input.addEventListener('focus',()=>{if(filtersPanelOpen)setFiltersPanelOpen(false);});
+  input.addEventListener('input',()=>{if(input.value.trim())setNavigationTab('results');else setNavigationTab('entities');});
+  input.addEventListener('keydown',event=>{if(event.key==='Escape')setNavigationTab('entities');});
 }
 
 async function loadHierarchyTree(){
@@ -482,11 +522,11 @@ async function applySelection(id,options=false,clickedLayer=null){
 function captureUrlState(){
  const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
  const center=map.wrapLatLng?.(current)||current;
- return {entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
+ return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
 }
 async function applyUrlState(state){
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
- replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);
+ replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
  for(const j of ['RO','MD']){const enabled=state.jurisdictions.includes(j);document.getElementById('layer-'+j.toLowerCase()).checked=enabled;if(enabled)roots[j].addTo(map);else map.removeLayer(roots[j]);}
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
  map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
@@ -505,8 +545,15 @@ document.getElementById('copy-link').addEventListener('click',async()=>{
 });
 
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
-document.getElementById('layer-ro').addEventListener('change',event=>{event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
-document.getElementById('layer-md').addEventListener('change',event=>{event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
+document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
+document.getElementById('filters-toggle')?.addEventListener('click',()=>setFiltersPanelOpen(!filtersPanelOpen));
+document.getElementById('filters-close')?.addEventListener('click',()=>setFiltersPanelOpen(false,{restoreFocus:true}));
+for(const key of ['entities','results'])document.getElementById('tab-'+key)?.addEventListener('click',()=>setNavigationTab(key));
+document.getElementById('tab-entities')?.addEventListener('keydown',event=>{if(event.key==='ArrowRight'){event.preventDefault();setNavigationTab('results');document.getElementById('tab-results').focus();}});
+document.getElementById('tab-results')?.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();setNavigationTab('entities');document.getElementById('tab-entities').focus();}});
+document.addEventListener?.('keydown',event=>{if(event.key==='Escape'&&filtersPanelOpen){event.preventDefault();setFiltersPanelOpen(false,{restoreFocus:true});}},true);
+document.getElementById('layer-ro').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
+document.getElementById('layer-md').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
 map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');});
 
 const frontendReady=(async()=>{
@@ -516,6 +563,7 @@ const frontendReady=(async()=>{
   phase='hierarchy';await loadHierarchyTree();
   phase='geometry';await loadChunkIndex();
   await initializeUrlState();
+  updateFilterCount();
   await Promise.all(['RO','MD'].map(ensureStatisticalGeometry));
   await Promise.all([ensureTier('RO','overview'),ensureTier('MD','overview')]);
   await syncTiers();
