@@ -29,14 +29,18 @@ async function select(id,label){
  evidence.selections.push({label,id,zoom:s.zoom,highlight:s.highlight,pass:true});
  return s;
 }
-async function shotViewport(width){
+async function shotViewport(width,height){
  await mkdir(output,{recursive:true});
  switch(width){
   case 1440: await page.screenshot(path.join(output,'p42-1440.png')); break;
   case 1280: await page.screenshot(path.join(output,'p42-1280.png')); break;
   case 900: await page.screenshot(path.join(output,'p42-900.png')); break;
   case 360: await page.screenshot(path.join(output,'p42-360.png')); break;
-  case 390: await page.screenshot(path.join(output,'p42-390.png')); break;
+  case 390:
+   if(height===844)await page.screenshot(path.join(output,'p42-390-844.png'));
+   else if(height===600)await page.screenshot(path.join(output,'p42-390-600.png'));
+   else throw Error('Unexpected 390px screenshot height');
+   break;
   case 430: await page.screenshot(path.join(output,'p42-430.png')); break;
   default: throw Error('Unexpected P4.2 screenshot viewport');
  }
@@ -89,7 +93,7 @@ try{
     assert.ok(v.tree&&v.map&&v.vectors>0);assert.equal(v.mobile,w<=720);
     await select(ro.id,'RO '+w+'x'+h);await select(md.id,'MD '+w+'x'+h);
     evidence.viewports.push({width:w,height:h,ro:ro.id,md:md.id,vectors:v.vectors});
-    await shotViewport(w);
+    await shotViewport(w,h);
    }
   });
   await check(t,'filter OR, jurisdictions and separate statistical z-order in SVG',async()=>{
