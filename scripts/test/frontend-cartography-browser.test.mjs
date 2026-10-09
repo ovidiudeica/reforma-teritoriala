@@ -8,7 +8,7 @@ import {tmpdir} from 'node:os';
 import {launchBrowser,waitFor,delay} from './helpers/atlas-browser.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const output=process.env.ATLAS_QA_OUTPUT||path.join(tmpdir(),'atlas-browser-evidence');
+const output=path.join(tmpdir(),'atlas-browser-evidence');
 const entities=JSON.parse(readFileSync(path.join(root,'public/data/actual-entities.json'),'utf8')).entities;
 const ro=entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='county'&&e.roles.includes('statistical'));
 const md=entities.find(e=>e.jurisdiction==='MD'&&e.statistical?.code==='MD115');
@@ -29,7 +29,18 @@ async function select(id,label){
  evidence.selections.push({label,id,zoom:s.zoom,highlight:s.highlight,pass:true});
  return s;
 }
-async function shot(name){await mkdir(output,{recursive:true});await page.screenshot(path.join(output,'p42-'+name+'.png'));}
+async function shotViewport(width){
+ await mkdir(output,{recursive:true});
+ switch(width){
+  case 1440: await page.screenshot(path.join(output,'p42-1440.png')); break;
+  case 1280: await page.screenshot(path.join(output,'p42-1280.png')); break;
+  case 900: await page.screenshot(path.join(output,'p42-900.png')); break;
+  case 360: await page.screenshot(path.join(output,'p42-360.png')); break;
+  case 390: await page.screenshot(path.join(output,'p42-390.png')); break;
+  case 430: await page.screenshot(path.join(output,'p42-430.png')); break;
+  default: throw Error('Unexpected P4.2 screenshot viewport');
+ }
+}
 async function check(t,name,fn){await t.test(name,{timeout:180000},async()=>{try{await fn();evidence.scenarios.push({name,result:'PASS'});}catch(error){evidence.scenarios.push({name,result:'FAIL',error:String(error)});throw error;}});}
 async function computeMatrix(){
  const app=qaApp,{geometryClass,geometrySubtype,geometryVisible,statisticalLevel}=await import('./geometry-taxonomy.mjs');
@@ -78,7 +89,7 @@ try{
     assert.ok(v.tree&&v.map&&v.vectors>0);assert.equal(v.mobile,w<=720);
     await select(ro.id,'RO '+w+'x'+h);await select(md.id,'MD '+w+'x'+h);
     evidence.viewports.push({width:w,height:h,ro:ro.id,md:md.id,vectors:v.vectors});
-    await shot('ro-md-'+w+'x'+h);
+    await shotViewport(w);
    }
   });
   await check(t,'filter OR, jurisdictions and separate statistical z-order in SVG',async()=>{
@@ -107,7 +118,7 @@ try{
    await page.click('input[data-kind=separate-statistical]');
    await waitFor(async()=>(await snapshot()).highlight>0,'separate ON restores MD120');
    evidence.filters.push('separate OFF/ON -> statistical-only hidden/restored');
-   await shot('statistical-pane');
+   await page.screenshot(path.join(output,'p42-statistical-pane.png'));
   });
   await check(t,'lazy RO local and MD detail chunks, no filter refetch or duplicate chunks',async()=>{
    const p=await browser.page();
@@ -136,7 +147,7 @@ try{
   });
   await check(t,'no JavaScript exceptions, console errors or app fetch errors',async()=>{
    const errors=page.console.filter(x=>x.type==='error'||x.level==='error');
-   const failures=page.failures.filter(x=>!x.canceled&&!/tile.openstreetmap.org/.test(x.url||''));
+   const failures=page.failures.filter(x=>!x.canceled&&!/tile\.openstreetmap\.org/.test(x.url||''));
    evidence.console={exceptions:page.errors.length,errors:errors.length,failures:failures.length};
    assert.equal(page.errors.length,0);assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
   });
