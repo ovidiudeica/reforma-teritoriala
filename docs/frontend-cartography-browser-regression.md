@@ -21,7 +21,7 @@ node --test scripts/test/frontend-cartography-browser.test.mjs
 
 Workflow-ul `.github/workflows/frontend-browser-qa.yml` folosește `ubuntu-24.04`, Node `24.21.0`, Chrome preinstalat (`BROWSER_EXECUTABLE=/usr/bin/google-chrome`), checkout și `actions/setup-node` pin-uite la commit SHA. Noul pas rulează separat de suita existentă, după verificarea sintaxei și înainte de `git diff --exit-code`. Nu rulează testele browser în paralel; fiecare browser are profil temporar izolat.
 
-Artefactul existent `atlas-browser-evidence` include în continuare capturile vechi, iar P4.2 adaugă **`p42-cartography-matrix.json`** și capturi `p42-*.png`; este publicat chiar și când testele eșuează (`if: always()`). Raportul conține identitățile selectate, matricea și rezumatele viewporturilor, filtrelor, cache-ului, ordinii pane-urilor și erorilor.
+Suita precedentă păstrează artefactul `atlas-browser-evidence`. P4.2 scrie fișierele exclusiv în directorul temporar fix `os.tmpdir()/atlas-browser-evidence`, iar workflow-ul setează `TMPDIR=/tmp` și publică separat artefactul **`atlas-cartography-p42-evidence`**, cu `p42-cartography-matrix.json` și câte o captură `p42-*.png` pentru fiecare dintre cele șapte viewporturi plus pane-ul statistic. Ambele încărcări de artefacte rulează și la eșec (`if: always()`). Nicio cale de scriere nu este construită din date ale aplicației sau dintr-o variabilă de mediu arbitrară. Raportul conține identitățile selectate, matricea și rezumatele viewporturilor, filtrelor, cache-ului, ordinii pane-urilor și erorilor.
 
 ## Limitări deliberate
 
