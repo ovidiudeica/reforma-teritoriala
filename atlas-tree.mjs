@@ -1,4 +1,5 @@
 import {formatEntityName} from './atlas-name-format.mjs';
+import {compactTreeName} from './atlas-tree-labels.mjs';
 // Navigation uses only actual-consolidated-hierarchy-v1 relationships.
 export function parentId(nodeById,id){
  const node=nodeById.get(id);
@@ -78,7 +79,7 @@ export function revealInTree(container,button){
  container.scrollTop+=row.top-top-(container.clientHeight-row.height)/2;
 }
 
-export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},typeLabel=String,isGeometryVisible=()=>true}){
+export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},typeLabel=String,isGeometryVisible=()=>true,isEntityChecked=isGeometryVisible,onVisibilityChange=()=>{}}){
  const rendered=new Map(),openIds=new Set(),ambiguous=ambiguousSiblingIds(nodeById),counts=countDescendants(nodeById,rootIds);
  function setOpen(id,value){const entry=rendered.get(id);if(!entry)return;entry.wrapper.open=value;if(value)openIds.add(id);else openIds.delete(id);}
  let selected=null;
@@ -94,6 +95,8 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   if(!node)throw new Error('Atlas hierarchy: missing node '+id);
   const branch=hasChildren(nodeById,id);
   const outer=document.createElement('div');
+  const name=compactTreeName(node);
+  outer.dataset.entityId=id;
   const statistical=node.roles?.includes('statistical');
   const coalesced=statistical&&node.roles.some(role=>role!=='statistical');
   outer.className='tree-node'+(branch?' tree-branch':' tree-leaf')+
@@ -103,39 +106,23 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   if(branch){
    const summary=document.createElement('summary');
    summary.className='tree-toggle';
-   summary.setAttribute('aria-label','Extinde sau restrânge '+formatEntityName(node.display_name));
+   summary.setAttribute('aria-label','Extinde sau restrânge '+name);
    wrapper.appendChild(summary);
   }
+  const checkbox=document.createElement('input');
+  checkbox.type='checkbox';checkbox.className='tree-visibility-toggle';checkbox.dataset.entityId=id;
+  checkbox.checked=Boolean(isEntityChecked(id));
+  checkbox.setAttribute('aria-label','Afișează geometria pentru '+name);
+  checkbox.title='Afișează sau ascunde geometria: '+name;
+  checkbox.addEventListener('change',()=>onVisibilityChange(id,checkbox.checked));
   const button=document.createElement('button');
   button.type='button';button.className='tree-select';button.dataset.entityId=id;
-  const name=formatEntityName(node.display_name),role=treeRoleLabel(node,typeLabel);
-  const parentName=node.parent_id?formatEntityName(nodeById.get(node.parent_id)?.display_name):'';
-  const duplicate=ambiguous.has(id);
   const label=document.createElement('span');label.className='tree-name';label.textContent=name;button.appendChild(label);
-  const secondary=document.createElement('span');secondary.className='tree-role';secondary.textContent=role;
-  if(node.statistical_code){
-   const code=document.createElement('span');code.className='tree-code';code.textContent=node.statistical_code;
-   secondary.appendChild(code);
-  }
-  if(duplicate){
-   const identifier=document.createElement('span');identifier.className='tree-identity';
-   identifier.textContent=' · '+id;secondary.appendChild(identifier);
-  }
-  const descendants=counts.get(id)||0;
-  if(descendants){
-   const number=document.createElement('span');number.className='tree-count';
-   number.textContent=' · '+descendants.toLocaleString('ro-RO')+' subordonate';
-   secondary.appendChild(number);
-  }
-  const visibility=document.createElement('span');visibility.className='tree-visibility';
-  visibility.textContent=' · geometrie ascunsă';visibility.hidden=true;secondary.appendChild(visibility);
-  button.appendChild(secondary);
-  const description=[name,role,node.statistical_code,duplicate?'ID '+id:null,parentName?'în '+parentName:null].filter(Boolean).join(' · ');
-  button.title=description;
-  button.setAttribute('aria-label',description);
+  button.title=formatEntityName(node.display_name);
+  button.setAttribute('aria-label','Selectează '+name);
   button.setAttribute('aria-pressed','false');
   button.addEventListener('click',()=>onSelect(id,{zoom:true,source:'tree'}));
-  outer.appendChild(button);
+  outer.appendChild(checkbox);outer.appendChild(button);
   if(branch)outer.appendChild(wrapper);
   let children=null;
   const ensureChildren=()=>{
@@ -144,12 +131,12 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
    for(const child of node.child_ids)children.appendChild(makeNode(child));
    wrapper.appendChild(children);
   };
-  const entry={wrapper,button,outer,ensureChildren,visibilityValue:null,updateVisibility(){
-   const shown=Boolean(isGeometryVisible(id));
-   if(this.visibilityValue===shown)return false;
-   this.visibilityValue=shown;visibility.hidden=shown;
+  const entry={wrapper,button,checkbox,outer,ensureChildren,visibilityValue:null,updateVisibility(){
+   const checked=Boolean(isEntityChecked(id)),shown=Boolean(isGeometryVisible(id));
+   if(this.visibilityValue===shown&&checkbox.checked===checked)return false;
+   this.visibilityValue=shown;checkbox.checked=checked;
    outer.classList.toggle('tree-geometry-hidden',!shown);
-   button.setAttribute('aria-label',description+(shown?'':' · geometrie ascunsă de filtre'));
+   checkbox.title=checked&&!shown?'Geometrie bifată, dar ascunsă de filtre: '+name:'Afișează sau ascunde geometria: '+name;
    return true;
   }};
   rendered.set(id,entry);

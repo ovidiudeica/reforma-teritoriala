@@ -161,3 +161,14 @@ header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}
 @media(forced-colors:active){
  .tree-geometry-hidden>.tree-select{border-inline-end:2px dashed CanvasText}
 }
+
+/* P5.2.1: three independent, touch-accessible actions per hierarchy row. */
+.tree-node{position:relative;min-height:44px}
+.tree-visibility-toggle{position:absolute;left:47px;top:22px;z-index:2;width:20px;height:20px;margin:0;accent-color:#365b4a;cursor:pointer}
+.tree-branch>.tree-select{left:78px;width:calc(100% - 78px)}
+.tree-leaf>.tree-select{margin-left:78px;width:calc(100% - 78px)}
+.tree-node .tree-name{font-size:12px;white-space:nowrap;text-overflow:ellipsis}
+.tree-node .tree-select{min-height:44px}
+.tree-node .tree-visibility-toggle:focus-visible{outline:2px solid var(--atlas-focus,#365b4a);outline-offset:3px}
+.tree-geometry-hidden>.tree-select{border-inline-end:0}
+@media(max-width:720px){.tree-visibility-toggle{top:22px}.tree-branch>.tree-select{left:78px;width:calc(100% - 78px)}.tree-leaf>.tree-select{margin-left:78px;width:calc(100% - 78px)}}

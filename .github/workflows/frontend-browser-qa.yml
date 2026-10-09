@@ -25,6 +25,7 @@ jobs:
           node --check scripts/test/frontend-cartography-browser.test.mjs
           node --check atlas-explorer-shell.mjs
           node --check scripts/test/frontend-explorer-shell-browser.test.mjs
+          node --check scripts/test/frontend-entity-tree-browser.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
@@ -35,6 +36,8 @@ jobs:
         run: node --test scripts/test/frontend-cartography-browser.test.mjs
       - name: P5.1 two-pane shell, resize and contextual selection in Chrome
         run: node --test scripts/test/frontend-explorer-shell-browser.test.mjs
+      - name: P5.2.1 compact per-ID tree and URL state in Chrome
+        run: node --test scripts/test/frontend-entity-tree-browser.test.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots

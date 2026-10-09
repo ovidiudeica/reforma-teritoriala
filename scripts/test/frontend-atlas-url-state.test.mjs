@@ -144,19 +144,19 @@ test('real frontend URL hydration/history integrates selection, filters, viewpor
    for(const id of initial.openIds)assert.ok(app.captureUrlState().openIds.includes(id));for(const id of ancestorPath(nodes,tree.root_ids,town.id).slice(0,-1))assert.ok(app.captureUrlState().openIds.includes(id));assert.ok(treeDOM.querySelectorAll('.tree-select').length<5848);assert.equal(app.atlasUrl.isRestoring,false);
   });
   await t.test('entity-only URL zooms normally; explicit viewport including default prevents fitBounds override',async()=>{
-   let count=fits.length;await browser.visit('v=1&e='+commune.id);selected(commune.id);assert.equal(fits.length,count+1);assert.equal(fits.at(-1).options.animate,false);assert.ok(new URLSearchParams(browser.location.search).has('lat'));
-   count=fits.length;await browser.visit('v=1&e='+commune.id+'&lat=44.8&lon=24.3&z=8');selected(commune.id);assert.deepEqual(viewport,{lat:44.8,lon:24.3,z:8});assert.equal(fits.length,count);
-   await browser.visit('v=1&e='+commune.id+'&lat=46.8&lon=26.6&z=6');assert.deepEqual(viewport,defaultViewport);assert.equal(fits.length,count);assert.ok(new URLSearchParams(browser.location.search).has('lat'));
+   let count=fits.length;await browser.visit('v=1&e='+commune.id+'&x='+commune.id);selected(commune.id);assert.equal(fits.length,count+1);assert.equal(fits.at(-1).options.animate,false);assert.ok(new URLSearchParams(browser.location.search).has('lat'));
+   count=fits.length;await browser.visit('v=1&e='+commune.id+'&x='+commune.id+'&lat=44.8&lon=24.3&z=8');selected(commune.id);assert.deepEqual(viewport,{lat:44.8,lon:24.3,z:8});assert.equal(fits.length,count);
+   await browser.visit('v=1&e='+commune.id+'&x='+commune.id+'&lat=46.8&lon=26.6&z=6');assert.deepEqual(viewport,defaultViewport);assert.equal(fits.length,count);assert.ok(new URLSearchParams(browser.location.search).has('lat'));
   });
   await t.test('visible entity restore preserves jurisdiction OFF and subtype state',async()=>{
    await browser.visit('v=1&e='+commune.id+'&j=MD&f=ro.towns&lat=46&lon=25&z=10');selected(commune.id);assert.equal(document.getElementById('layer-ro').checked,false);assert.ok(!app.activeGeometrySubtypes.has('ro.towns'));assert.ok(!visible().some(l=>l.feature.properties.entity_id===commune.id));assert.match(document.getElementById('selection-visibility').textContent,/ascunsă/);
-   input.value=commune.id;await input.dispatch('input');await input.dispatch('keydown',{key:'ArrowDown'});await input.dispatch('keydown',{key:'Enter'});assert.equal(document.getElementById('layer-ro').checked,true);assert.equal(document.getElementById('selection-visibility').textContent,'');assert.ok(!app.activeGeometrySubtypes.has('ro.towns'));
+   input.value=commune.id;await input.dispatch('input');await input.dispatch('keydown',{key:'ArrowDown'});await input.dispatch('keydown',{key:'Enter'});assert.equal(document.getElementById('layer-ro').checked,false);assert.match(document.getElementById('selection-visibility').textContent,/ascunsă/);assert.ok(!app.activeGeometrySubtypes.has('ro.towns'));
   });
   await t.test('hidden MD120 remains selected in URL with official identity and independent filters',async()=>{
    await browser.visit('v=1&e=stat-MD120&s=1,2,unclassified');selected('stat-MD120');assert.equal(app.activeStatisticalLevels.has(3),false);assert.ok(app.activeGeometrySubtypes.has('ro.towns'));assert.ok(!visible().some(l=>l.feature.properties.entity_id==='stat-MD120'));assert.match(document.getElementById('selection-visibility').textContent,/ascunsă/);
   });
   await t.test('coalesced county is one selection and one reused geometry',async()=>{
-   const county=data.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='county'&&e.statistical?.level===3);await browser.visit('v=1&e='+county.id);selected(county.id);assert.equal(visible().filter(l=>l.feature.properties.entity_id===county.id).length,1);assert.ok(visible().some(l=>l.feature.properties.entity_id===county.id&&l.style?.color==='#b54a38'));
+   const county=data.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='county'&&e.statistical?.level===3);await browser.visit('v=1&e='+county.id+'&x='+county.id);selected(county.id);assert.equal(visible().filter(l=>l.feature.properties.entity_id===county.id).length,1);assert.ok(visible().some(l=>l.feature.properties.entity_id===county.id&&l.style?.color==='#b54a38'));
   });
   await t.test('manual disclosures replace URL; deferred programmatic toggles do not write; selection path wins on restore',async()=>{
    await browser.visit('v=1&e='+town.id+'&lat=46&lon=26&z=10');const parent=nodes.get(town.id).parent_id;
@@ -175,7 +175,9 @@ test('real frontend URL hydration/history integrates selection, filters, viewpor
    const search=app.atlasSearch;input.focus();input.value=commune.id;await input.dispatch('input');await input.dispatch('keydown',{key:'ArrowDown'});let count=browser.pushes;await input.dispatch('keydown',{key:'Enter'});selected(commune.id);assert.equal(browser.pushes,count+1);assert.equal(search.state.open,false);
    count=browser.pushes;await subtype('ro.towns').click();assert.equal(browser.pushes,count+1);assert.equal(app.activeGeometrySubtypes.has('ro.towns'),false);assert.equal(app.atlasSearch,search);assert.equal(new URLSearchParams(browser.location.search).getAll('f').includes('ro.towns'),true);
    const county=entities.get(town.hierarchy.consolidated_parent_id);count=browser.pushes;await treeDOM.querySelectorAll('.tree-select').find(b=>b.dataset.entityId===county.id).click();selected(county.id);assert.equal(browser.pushes,count+1);
-   const sector=visible().find(l=>entities.get(l.feature.properties.entity_id).jurisdiction==='RO'&&entities.get(l.feature.properties.entity_id).representation.inferred_type==='sector');assert.ok(sector);count=browser.pushes;await sector.handlers.click();selected(sector.feature.properties.entity_id);assert.equal(browser.pushes,count+1);
+   const sectorId=data.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='sector').id;
+    app.visibleEntityIds.add(sectorId);app.refreshGeometryVisibility();app.atlasUrl.commit('push');map.setView([44.5,26],12);await app.syncTiers();
+    const sector=visible().find(l=>l.feature.properties.entity_id===sectorId);assert.ok(sector);count=browser.pushes;await sector.handlers.click();selected(sector.feature.properties.entity_id);assert.equal(browser.pushes,count+1);
    count=browser.pushes;const j=document.getElementById('layer-md');j.checked=false;await j.dispatch('change');assert.equal(browser.pushes,count+1);assert.equal(new URLSearchParams(browser.location.search).get('j'),'RO');
   });
   await t.test('real Back/Forward restores entity/filter/tree/viewport without new push and leaves search ephemeral',async()=>{
@@ -196,4 +198,16 @@ test('real frontend URL hydration/history integrates selection, filters, viewpor
   });
   assert.equal(browser.location.pathname,'/atlas/index.html');assert.equal(data.entities.length,5848);assert.equal(tree.nodes.length,5848);assert.ok(requests.every(path=>!path.includes('Victoria')));
  }finally{Object.assign(globalThis,previous);if(navigatorDescriptor)Object.defineProperty(globalThis,'navigator',navigatorDescriptor);else delete globalThis.navigator;}
+});
+
+test('P5.2 checkbox state defaults to roots, XOR URL restores and history round-trips',async()=>{
+ const defaults=defaultUrlState(config);assert.deepEqual(defaults.visibleEntityIds,[...tree.root_ids].sort());
+ const id=data.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='county').id,root=tree.root_ids[0];
+ const a=normalizeUrlState({...defaults,visibleEntityIds:[...tree.root_ids.filter(x=>x!==root),id]},config),url=serializeUrlState(a,config);
+ assert.deepEqual(parseUrlState(url,config).visibleEntityIds,a.visibleEntityIds);
+ assert.deepEqual(new URLSearchParams(url).getAll('x'),[root,id].sort());
+ assert.equal(canonicalizeUrlState('v=1&x=unknown&x='+root+'&x='+root,config),'v=1&x='+root);
+ const h=historyHarness();await h.controller.restore();h.state=a;h.controller.commit('push');
+ await h.browser.go(-1);assert.deepEqual(h.state.visibleEntityIds,defaults.visibleEntityIds);
+ await h.browser.go(1);assert.deepEqual(h.state.visibleEntityIds,a.visibleEntityIds);
 });
