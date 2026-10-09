@@ -10,7 +10,8 @@ export function createAtlasInfoPanel({document,onOpen=()=>{},getReturnFocus=()=>
   dialog.showModal();
   closeButton.focus();
  }
- function close(){if(dialog.open)dialog.close();}
+ function restoreFocus(){getReturnFocus()?.focus?.();}
+ function close(){if(!dialog.open)return;dialog.close();restoreFocus();}
  trigger.addEventListener('click',open);
  closeButton.addEventListener('click',close);
  dialog.addEventListener('click',event=>{
@@ -18,6 +19,7 @@ export function createAtlasInfoPanel({document,onOpen=()=>{},getReturnFocus=()=>
   const bounds=dialog.getBoundingClientRect();
   if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)close();
  });
- dialog.addEventListener('close',()=>getReturnFocus()?.focus?.());
+ dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
+ dialog.addEventListener('close',restoreFocus);
  return {open,close,get isOpen(){return dialog.open;}};
 }
