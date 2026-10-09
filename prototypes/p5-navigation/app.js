@@ -9,6 +9,8 @@ const items=[
 {id:'ro-uat',p:'ro-cluj',n:'Cluj-Napoca',type:'local',j:'RO',stat:0,code:'SIRUTA · demo',map:'ro'},
 {id:'ro-stat',p:'ro',n:'Limită statistică ilustrativă',type:'other',j:'RO',stat:1,separate:true,code:'DEMO-RO',map:'ro'},
 {id:'md',p:null,n:'Moldova',type:'state',j:'MD',stat:0,code:'MD',map:'md'},
+{id:'md-uatsn',p:'md',n:'UATSN',type:'regional',j:'MD',stat:0,code:'DEMO-UATSN',map:'md'},
+{id:'md-utag',p:'md',n:'UTAG',type:'regional',j:'MD',stat:0,code:'DEMO-UTAG',map:'md'},
 {id:'md-n1',p:'md',n:'Nivel statistic 1 · demonstrativ',type:'regional',j:'MD',stat:1,code:'MD1 · demo',map:'md'},
 {id:'md-n2',p:'md-n1',n:'Nivel statistic 2 · demonstrativ',type:'regional',j:'MD',stat:2,code:'MD11 · demo',map:'md'},
 {id:'md-chisinau',p:'md-n2',n:'Chișinău',type:'regional',j:'MD',stat:3,code:'CUATM · demo',map:'md'},
