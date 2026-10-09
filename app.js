@@ -90,7 +90,7 @@ let atlasTree=null;
 let atlasSearch=null;
 let atlasUrl=null;
 const mobileMedia=globalThis.window?.matchMedia?.('(max-width: 899px)')||{matches:false};
-const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)||filtersPanelOpen,onOpen:()=>atlasTree?.revealSelected(),onCloseDrawer:()=>setFiltersPanelOpen(false)});
+const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)||filtersPanelOpen,onOpen:()=>atlasTree?.revealSelected(),onCloseDrawer:()=>setFiltersPanelOpen(false),onOpenFilters:()=>setFiltersPanelOpen(true)});
 wireAtlasSkipLinks({document,mobile:atlasMobile});
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
