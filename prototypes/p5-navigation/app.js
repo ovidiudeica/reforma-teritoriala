@@ -41,7 +41,7 @@ function toggleFilters(open){state.filters=open;$('filters').classList.toggle('o
 $('query').addEventListener('input',e=>{state.query=e.target.value;state.tab=state.query?'results':'tree';render();});
 $('search-clear').onclick=()=>{$('query').value='';state.query='';state.tab='tree';render();$('query').focus();};
 $('tab-tree').onclick=()=>{state.tab='tree';render();};$('tab-results').onclick=()=>{state.tab='results';render();};
-$('reset').onclick=()=>{state.open=new Set(['ro','md']);state.selected.clear();state.focused=null;state.visibleIds=new Set(DEFAULT_VISIBLE_IDS);$('query').value='';state.query='';state.tab='tree';render();};
+
 $('clear-selection').onclick=()=>{state.selected.clear();state.focused=null;render();};$('detail-close').onclick=$('clear-selection').onclick;
 $('filters-open').onclick=()=>toggleFilters(!state.filters);$('filters-close').onclick=()=>toggleFilters(false);
 $('filters-reset').onclick=()=>{for(const n of document.querySelectorAll('.filter-body input'))n.checked=true;state.visibleIds=new Set(DEFAULT_VISIBLE_IDS);render();};for(const n of document.querySelectorAll('.filter-body input'))n.addEventListener('change',render);
