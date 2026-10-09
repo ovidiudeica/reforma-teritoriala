@@ -14,7 +14,7 @@ try{
   await waitFor(()=>page.evaluate("document.querySelectorAll('#hierarchy-tree .tree-select').length>0"),'atlas tree ready');
   await t.test('no selected card and desktop two-pane grid',async()=>{
    const data=await page.evaluate("({title:document.querySelector('#atlas-controls>h2').textContent.trim(),treeHeading:document.querySelector('#hierarchy-tree').closest('section').querySelector('h3').textContent.trim(),hidden:document.querySelector('#details-panel').hidden,visible:getComputedStyle(document.querySelector('#details-panel')).display,side:document.querySelector('#atlas-controls').getBoundingClientRect().width,resizer:document.querySelector('#explorer-resizer').getBoundingClientRect().width,map:document.querySelector('#map').getBoundingClientRect().width})");
-   assert.equal(data.title,'Entități');assert.equal(data.treeHeading,'Arbore');
+   assert.equal(data.title,'Explorează');assert.equal(data.treeHeading,'Arbore');
    assert.equal(data.hidden,true);assert.equal(data.visible,'none');assert.ok(data.side>=280&&data.side<=660);
    assert.ok(data.resizer>=7&&data.map>0);
   });
