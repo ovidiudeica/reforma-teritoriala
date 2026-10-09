@@ -9,7 +9,7 @@ const snapshots=[];
 const geometryState="({ids:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,filters:[...qaApp.activeGeometryClasses].sort(),subtypes:[...qaApp.activeGeometrySubtypes].sort(),raster:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),url:location.search})";
 try{
  await test('P6.2 real Chrome mobile/tablet ergonomics, swipe/keyboard and geometry invariants',{timeout:180000},async t=>{
-  await page.viewport(390,844);await page.navigate(browser.server.url+'/');
+  await page.viewport(1440,900);await page.navigate(browser.server.url+'/');await page.viewport(390,844);
   await waitFor(()=>page.evaluate('qaApp.entityById.size===5848'),'public ACTUAL catalog');
   await t.test('phone uses visible three-action dock, unobscured map and touch targets',async()=>{
    const state=await page.evaluate("(()=>{const dock=document.querySelector('#atlas-mobile-toolbar'),map=document.querySelector('#map'),controls=['mobile-navigation','mobile-search','mobile-filters'];return {visible:!dock.hidden,buttons:controls.map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect();return {id,hidden:e.hidden,height:r.height,width:r.width}}),map:map.getBoundingClientRect().width,overflow:document.documentElement.scrollWidth>innerWidth,selected:qaApp.selectedEntityId,ids:[...qaApp.visibleEntityIds].sort()}})()");
