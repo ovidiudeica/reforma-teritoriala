@@ -47,6 +47,7 @@ let indexData=null;
 let releaseData=null;
 let hierarchyTree=null;
 const hierarchyNodeById=new Map();
+const visibleEntityIds=new Set(); // Explicit checkbox state; independent of taxonomy filters.
 let atlasTree=null;
 let atlasSearch=null;
 let atlasUrl=null;
@@ -70,7 +71,7 @@ const statusLabels={
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function filterGroup(entity){return geometryClass(entity);}
 function isVisible(entity){
- return geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry});
+ return Boolean(entity&&visibleEntityIds.has(entity.id)&&geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry}));
 }
 function styleFor(feature){return entityGeometryStyle(entityById.get(feature.properties?.entity_id));}
 
@@ -156,7 +157,7 @@ function refreshGeometryVisibility(){
 function updateSelectionVisibility(){
  const entity=entityById.get(selectedEntityId);
  const status=document.getElementById('selection-visibility');
- if(status&&entity)status.textContent=isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false?'':'Geometria este ascunsă de filtre. Selecția și detaliile rămân disponibile.';
+ if(status&&entity)status.textContent=isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false?'':'Geometria este ascunsă. Bifează entitatea în arbore pentru afișare, dacă filtrele permit. Selecția și detaliile rămân disponibile.';
 
 }
 
@@ -179,7 +180,9 @@ async function loadHierarchyTree(){
  hierarchyNodeById.clear();
  for(const [id,node] of validated)hierarchyNodeById.set(id,node);
  hierarchyTree=tree;
- renderHierarchyTree();
+  visibleEntityIds.clear();
+  for(const id of tree.root_ids)visibleEntityIds.add(id);
+  renderHierarchyTree();
  atlasSearch?.updateIndex(createSearchIndex([...entityById.values()],hierarchyNodeById));
  return tree;
 }
@@ -191,27 +194,16 @@ function renderHierarchyTree(){
   const entity=entityById.get(id);
   return Boolean(entity&&isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false);
  };
- atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,isGeometryVisible:isTreeGeometryVisible,onDisclosureChange:()=>atlasUrl?.commit('replace'),
+ atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,
+  isGeometryVisible:isTreeGeometryVisible,isEntityChecked:id=>visibleEntityIds.has(id),
+  onVisibilityChange:(id,checked)=>{
+   if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);
+   refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
+  },
+  onDisclosureChange:()=>atlasUrl?.commit('replace'),
   onSelect:(id,options)=>selectEntity(id,options).catch(console.error)});
- const message=document.getElementById('tree-navigation-status');
- const applyNavigation=(operation,success)=>{
-  const result=operation();
-  message.textContent=success(result);
-  if(result?.applied!==false)atlasUrl?.commit('push');
- };
- document.getElementById('tree-collapse-all').addEventListener('click',()=>applyNavigation(
-  ()=>atlasTree.setOpenIds([]),()=> 'Toate ramurile au fost restrânse. Selecția este păstrată.'));
- document.getElementById('tree-show-roots').addEventListener('click',()=>applyNavigation(
-  ()=>atlasTree.setOpenIds(hierarchyTree.root_ids),()=> 'Cele două țări sunt deschise; ramurile subordonate sunt restrânse.'));
- document.getElementById('tree-expand-apply').addEventListener('click',()=>applyNavigation(
-  ()=>atlasTree.openToDepth(document.getElementById('tree-expand-depth').value),
-  result=>result.applied
-   ?'Ierarhia este deschisă până la nivelul ales ('+result.renderedNodes+' noduri).'
-   :'Acest nivel ar încărca '+result.renderedNodes+' noduri; limitează extinderea și selectează entitatea prin căutare.'));
  if(selectedEntityId){
-  atlasTree.select(selectedEntityId);
-  renderDetails(entityById.get(selectedEntityId));
-  updateSelectionVisibility();
+  atlasTree.select(selectedEntityId);renderDetails(entityById.get(selectedEntityId));updateSelectionVisibility();
  }
 }
 function selectedPath(id){
@@ -458,8 +450,7 @@ async function applySelection(id,options=false,clickedLayer=null){
  rerenderLoadedTiers();
  if(!isVisible(entity))return;
  if(zoom)zoomToEntity(entity,source==='url'?{animate:false}:{});
- const checkbox=document.getElementById('layer-'+entity.jurisdiction.toLowerCase());
- if(source!=='url'&&checkbox&&!checkbox.checked){checkbox.checked=true;roots[entity.jurisdiction].addTo(map);}
+
  updateSelectionVisibility();
  if(entity.category==='statistical'){
   await ensureStatisticalGeometry(entity.jurisdiction);
@@ -491,11 +482,11 @@ async function applySelection(id,options=false,clickedLayer=null){
 function captureUrlState(){
  const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
  const center=map.wrapLatLng?.(current)||current;
- return {entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds()};
+ return {entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
 }
 async function applyUrlState(state){
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
- replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);
+ replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);
  for(const j of ['RO','MD']){const enabled=state.jurisdictions.includes(j);document.getElementById('layer-'+j.toLowerCase()).checked=enabled;if(enabled)roots[j].addTo(map);else map.removeLayer(roots[j]);}
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
  map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
@@ -536,4 +527,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
+export {styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry};
