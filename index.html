@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="atlas-explorer-shell.css">
 <link rel="stylesheet" href="atlas-p5.3.css">
+<link rel="stylesheet" href="atlas-p6.1.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -25,13 +26,16 @@
 <button id="drawer-backdrop" class="drawer-backdrop" type="button" aria-label="Închide navigarea" tabindex="-1" hidden></button>
 <aside id="atlas-controls" class="controls" aria-label="Entități, căutare și filtre">
   <button id="drawer-close" class="mobile-control drawer-close" type="button" hidden>Închide navigarea</button>
-  <h2>Entități</h2>
-  <button id="copy-link" class="action-button" type="button">Copiază link</button>
+  <h2>Explorează</h2>
+  <div class="atlas-primary-actions" role="group" aria-label="Acțiuni de navigare">
+    <button id="copy-link" class="action-button" type="button">Copiază link</button>
+    <button id="filters-toggle" class="action-button atlas-filters-trigger" type="button" aria-expanded="false" aria-controls="filters-panel">Filtre <span id="filters-count" aria-live="polite"></span></button>
+    <button id="info-toggle" class="action-button" type="button" aria-haspopup="dialog" aria-controls="atlas-info-dialog">Informații</button>
+  </div>
   <p id="share-status" class="hint" role="status" aria-live="polite"></p>
-  <button id="filters-toggle" class="action-button atlas-filters-trigger" type="button" aria-expanded="false" aria-controls="filters-panel">Filtre <span id="filters-count" aria-live="polite"></span></button>
 
   <section id="search-panel">
-    <h3>Căutare</h3>
+    <h3 class="sr-only">Căutare</h3>
     <input id="entity-search" class="search" type="search" aria-label="Caută entități teritoriale" aria-describedby="search-help" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Nume, SIRUTA/CUATM, cod statistic sau OSM…" autocomplete="off">
     <p id="search-help" class="sr-only">Săgețile sus/jos navighează rezultatele, Enter selectează, Escape închide lista. Căutarea include și geometrii ascunse.</p>
   </section>
@@ -44,8 +48,8 @@
     <p id="search-status" class="hint" role="status" aria-live="polite"></p>
   </section>
   <section id="entities-panel" role="tabpanel" aria-labelledby="tab-entities">
-    <h3>Arbore</h3>
-    <p class="hint">Bifează geometria unei entități pentru a o afișa. Extinderea și selectarea nu modifică bifele.</p>
+    <h3 class="sr-only">Arbore</h3>
+    <p class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
     <div id="hierarchy-tree" class="hierarchy-tree"><p class="muted">Se încarcă arborele teritorial…</p></div>
   </section>
@@ -65,6 +69,14 @@
     </section>
   </section>
 
+  <p id="geometry-load-status" class="hint" role="alert"></p>
+</aside>
+<dialog id="atlas-info-dialog" aria-labelledby="atlas-info-title">
+  <div class="atlas-info-heading">
+    <h2 id="atlas-info-title">Informații despre hartă</h2>
+    <button id="info-close" class="action-button" type="button">Închide</button>
+  </div>
+  <div class="atlas-info-body">
   <section>
     <h3>Nivel de detaliu</h3>
     <p class="hint">Limitele regionale sunt încărcate imediat. UAT-urile locale apar de la zoom 7, iar sectoarele și reprezentările de detaliu de la zoom 10.</p>
@@ -78,9 +90,9 @@
     <p id="actual-release-status" role="status" aria-live="polite">ACTUAL: verificare release…</p>
     <p id="ro-source-status">RO: verificare snapshot…</p>
     <p id="md-source-status">MD: verificare snapshot…</p>
-    <p id="geometry-load-status" role="alert"></p>
   </section>
-</aside>
+  </div>
+</dialog>
 <div id="explorer-resizer" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Redimensionează panoul Entități" aria-controls="atlas-controls" aria-valuemin="280" aria-valuemax="660" aria-valuenow="340"></div>
 
 <p id="map-help" class="sr-only">Hartă navigabilă cu săgeți și tastele plus/minus. Pentru selecția entităților fără mouse folosește căutarea sau arborele din navigare.</p>

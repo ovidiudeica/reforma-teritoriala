@@ -1,6 +1,7 @@
 import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,entityProvenanceHtml,labelMapControls,wireAtlasSkipLinks} from './atlas-presentation.mjs';
 import {createAtlasMobileUi} from './atlas-mobile-ui.mjs';
 import {createAtlasExplorerShell} from './atlas-explorer-shell.mjs';
+import {createAtlasInfoPanel} from './atlas-info-panel.mjs';
 import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
@@ -573,6 +574,14 @@ document.getElementById('copy-link').addEventListener('click',async()=>{
  try{if(!atlasUrl||!globalThis.navigator?.clipboard?.writeText)throw new Error('Clipboard unavailable');await globalThis.navigator.clipboard.writeText(atlasUrl.shareUrl());status.textContent='Link copiat.';}catch{status.textContent='Copiere indisponibilă. Copiază URL-ul din bara de adrese.';}
 });
 
+createAtlasInfoPanel({
+ document,
+ onOpen:()=>{
+  setFiltersPanelOpen(false);
+  if(atlasMobile.state.mobile&&atlasMobile.state.drawer)atlasMobile.closeDrawer(false);
+ },
+ getReturnFocus:()=>document.getElementById(atlasMobile.state.mobile?'mobile-navigation':'info-toggle')
+});
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
 document.getElementById('filters-toggle')?.addEventListener('click',()=>setFiltersPanelOpen(!filtersPanelOpen));
