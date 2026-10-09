@@ -163,7 +163,9 @@ test('actual frontend rendering and selection respect filters, including async s
   Object.assign(globalThis,{L,document:doc,fetch:async path=>respond(path)});
   const frontend=await import('../../app.js');
   await frontend.frontendReady;
-  const count=()=>frontend.statisticalGroups[only.jurisdiction].layers[0].layers.length;
+   for(const id of [only.id,reused.id])frontend.visibleEntityIds.add(id);
+   frontend.refreshGeometryVisibility();
+   const count=()=>frontend.statisticalGroups[only.jurisdiction].layers[0].layers.length;
   assert.equal(count(),1);
   assert.equal(pane.style.zIndex,'450');
   assert.ok(geoJsonOptions.some(options=>options.pane==='statistical-boundaries'));

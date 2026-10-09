@@ -167,7 +167,9 @@ test('real frontend filters integrate late chunks/tiers, jurisdictions, hidden s
  try{
   Object.assign(globalThis,{document,L,fetch});const app=await import('../../app.js?atlas-filters-tests');await app.frontendReady;
   assert.equal(app.activeGeometryClasses,app.activeFilterGroups);
-  const container=document.getElementById('filter-list'),treeDOM=document.getElementById('hierarchy-tree'),body=document.getElementById('details-body');
+  for(const id of [town.id,index.entities.find(e=>e.jurisdiction==='MD'&&e.representation.inferred_type==='level_2_municipality').id,index.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='county'&&e.roles.includes('statistical')).id,index.entities.find(e=>e.category==='statistical'&&e.statistical?.level===3).id])app.visibleEntityIds.add(id);
+   app.refreshGeometryVisibility();await app.syncTiers();
+   const container=document.getElementById('filter-list'),treeDOM=document.getElementById('hierarchy-tree'),body=document.getElementById('details-body');
   const input=id=>container.descendants().find(e=>e.tagName==='INPUT'&&e.dataset.kind==='geometry-subtype'&&e.dataset.filter===id);
   const key=entry.jurisdiction+'_'+entry.tier+'_'+entry.root_entity_id;
   await t.test('late chunk and tier rendering evaluates current subtype state and reuses cache',async()=>{
