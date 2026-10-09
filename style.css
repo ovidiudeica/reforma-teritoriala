@@ -35,7 +35,7 @@
 .mobile-control:focus-visible,.icon-button:focus-visible{outline:2px solid #365b4a;outline-offset:2px}
 .mobile-control[hidden],.drawer-backdrop[hidden]{display:none}
 .details-summary{display:none}
-@media(max-width:720px){
+@media(max-width:899px){
  body{height:100dvh;grid-template-rows:calc(60px + env(safe-area-inset-top)) minmax(0,1fr) 24px}
  header{padding:calc(8px + env(safe-area-inset-top)) 12px 8px;align-items:center}header strong{font-size:13px}header span{font-size:10px;max-width:185px;margin-top:2px}header nav{flex-direction:column;gap:3px}.mode{padding:3px 7px;font-size:10px}
  main{display:block;overflow:hidden}#map{position:absolute;inset:0}
@@ -69,7 +69,7 @@ header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}
 .atlas-legend li{display:flex;align-items:center;gap:8px;font-size:12px}.atlas-legend small{display:block;color:var(--atlas-secondary);font-size:11px;line-height:1.4}
 .legend-swatch{width:56px;height:20px;flex-shrink:0;background:#fff;border:1px solid #cbd2ce;border-radius:3px}
 #selection-visibility:empty,#geometry-status:empty,#geometry-load-status:empty{display:none}
-@media(max-width:720px){
+@media(max-width:899px){
  header h1{font-size:13px}
  .tree-node{min-height:44px}.tree-disclosure>.tree-toggle{width:44px;height:44px}.tree-disclosure>.tree-toggle:before{padding:14px}
  .tree-branch>.tree-select{left:44px;width:calc(100% - 44px);min-height:44px;padding:10px 6px}
@@ -94,7 +94,7 @@ header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}
 .status .action-button{display:inline-flex;align-items:center;margin-top:8px}
 
 /* Browser QA: keep the drawer close action reachable after focus/scroll. */
-@media(max-width:720px){.controls{scroll-padding-top:64px}.drawer-close{position:sticky;top:0;z-index:1}}
+@media(max-width:899px){.controls{scroll-padding-top:64px}.drawer-close{position:sticky;top:0;z-index:1}}
 
 .statistical-filter-note{margin:4px 0 8px}.statistical-level-breakdown{margin:-2px 0 8px 24px}.filter-actions button:disabled{opacity:.5;cursor:not-allowed;text-decoration:none}.filter-row input:disabled~span,.filter-row input:disabled~small{opacity:.6}
 
@@ -108,7 +108,7 @@ header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}
 .tree-coalesced>.tree-select{box-shadow:inset 2px 0 #66538c}
 .tree-statistical-only>.tree-select{box-shadow:inset 2px 0 #a294bd}
 .tree-identity{font-variant-numeric:tabular-nums}
-@media(max-width:720px){
+@media(max-width:899px){
  .tree-node{min-height:52px}
  .tree-disclosure>.tree-toggle{width:44px;height:52px}
  .tree-branch>.tree-select,.tree-leaf>.tree-select{min-height:52px;padding-top:9px;padding-bottom:9px}
@@ -149,7 +149,7 @@ header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}
 .tree-count{font-variant-numeric:tabular-nums}
 .tree-visibility:not([hidden]){color:var(--atlas-warning);font-weight:600}
 .tree-geometry-hidden>.tree-select{border-inline-end:2px dashed var(--atlas-warning)}
-@media(max-width:720px){
+@media(max-width:899px){
  .hierarchy-tree{min-height:clamp(220px,38vh,360px);max-height:min(65vh,620px)}
  .hierarchy-tools button,.hierarchy-level-tools button,.hierarchy-level-tools select{min-height:44px}
  .tree-branch>.tree-select,.tree-leaf>.tree-select{
@@ -171,4 +171,4 @@ header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}
 .tree-node .tree-select{min-height:44px}
 .tree-node .tree-visibility-toggle:focus-visible{outline:2px solid var(--atlas-focus,#365b4a);outline-offset:3px}
 .tree-geometry-hidden>.tree-select{border-inline-end:0}
-@media(max-width:720px){.tree-visibility-toggle{top:22px}.tree-branch>.tree-select{left:78px;width:calc(100% - 78px)}.tree-leaf>.tree-select{margin-left:78px;width:calc(100% - 78px)}}
+@media(max-width:899px){.tree-visibility-toggle{top:22px}.tree-branch>.tree-select{left:78px;width:calc(100% - 78px)}.tree-leaf>.tree-select{margin-left:78px;width:calc(100% - 78px)}}

@@ -67,11 +67,13 @@ function setFiltersPanelOpen(value,{restoreFocus=false}={}){
 }
 function updateFilterCount(){
  const count=document.getElementById('filters-count');if(!count)return;
- const inactive=[...geometryFilterIndex?.subtypeMembers?.keys?.()||[]].filter(id=>!activeGeometrySubtypes.has(id)).length+
+ const inactive=(geometryFilterIndex?.groups||[]).filter(group=>!activeGeometryClasses.has(group.id)).length+
+  [...geometryFilterIndex?.subtypeMembers?.keys?.()||[]].filter(id=>!activeGeometrySubtypes.has(id)).length+
   [1,2,3,'unclassified'].filter(level=>!activeStatisticalLevels.has(level)).length+
   ['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase())?.checked===false).length+
   Number(!separateStatisticalGeometry);
- count.textContent=inactive?'('+inactive+' inactive)':'';
+ count.textContent=inactive?'('+inactive+' '+(inactive===1?'dezactivat':'dezactivate')+')':'';
+ const reset=document.getElementById('filters-reset');if(reset)reset.disabled=inactive===0;
 }
 const activeStatisticalLevels=new Set([1,2,3,'unclassified']);
 let separateStatisticalGeometry=true;
@@ -86,7 +88,7 @@ const visibleEntityIds=new Set(); // Explicit checkbox state; independent of tax
 let atlasTree=null;
 let atlasSearch=null;
 let atlasUrl=null;
-const mobileMedia=globalThis.window?.matchMedia?.('(max-width: 720px)')||{matches:false};
+const mobileMedia=globalThis.window?.matchMedia?.('(max-width: 899px)')||{matches:false};
 const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)||filtersPanelOpen,onOpen:()=>atlasTree?.revealSelected(),onCloseDrawer:()=>setFiltersPanelOpen(false)});
 wireAtlasSkipLinks({document,mobile:atlasMobile});
 const statisticalFeatureById=new Map();
@@ -183,6 +185,19 @@ function renderFilters(){
   onSeparate:setSeparateStatisticalGeometry,onChange:()=>{refreshGeometryVisibility();atlasUrl?.commit('push');}});
 }
 function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boolean(value);}
+function resetGlobalFilters(){
+ activeGeometryClasses.clear();for(const id of Object.keys(geometryLabels))activeGeometryClasses.add(id);
+ activeGeometrySubtypes.clear();for(const id of Object.keys(geometrySubtypeLabels))activeGeometrySubtypes.add(id);
+ for(const id of geometryFilterIndex?.subtypeMembers?.keys?.()||[])activeGeometrySubtypes.add(id);
+ activeStatisticalLevels.clear();for(const level of [1,2,3,'unclassified'])activeStatisticalLevels.add(level);
+ setSeparateStatisticalGeometry(true);
+ for(const jurisdiction of ['RO','MD']){
+  const input=document.getElementById('layer-'+jurisdiction.toLowerCase());
+  if(input)input.checked=true;
+  roots[jurisdiction].addTo(map);
+ }
+ refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
+}
 function refreshGeometryVisibility(){
  atlasFilters?.sync();
  updateFilterCount();
@@ -193,8 +208,21 @@ function refreshGeometryVisibility(){
 function updateSelectionVisibility(){
  const entity=entityById.get(selectedEntityId);
  const status=document.getElementById('selection-visibility');
- if(status&&entity)status.textContent=isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false?'':'Geometria este ascunsă. Bifează entitatea în arbore pentru afișare, dacă filtrele permit. Selecția și detaliile rămân disponibile.';
-
+ const action=document.getElementById('selection-visibility-action');
+ if(!status)return;
+ if(action)action.hidden=true;
+ if(!entity){status.textContent='';return;}
+ if(!entity.map?.bbox){status.textContent='Geometria acestei entități nu este disponibilă în snapshot.';return;}
+ const checked=visibleEntityIds.has(entity.id);
+ const jurisdictionAllowed=document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false;
+ if(isVisible(entity)&&jurisdictionAllowed){status.textContent='';return;}
+ if(!checked){
+  status.textContent='Geometria este ascunsă. Activează explicit această entitate pentru afișare; filtrele rămân independente.';
+  if(action){action.hidden=false;action.textContent='Afișează geometria';action.dataset.action='show';}
+ }else{
+  status.textContent='Geometria este ascunsă de filtre. Selecția și detaliile rămân disponibile.';
+  if(action){action.hidden=false;action.textContent='Deschide filtrele';action.dataset.action='filters';}
+ }
 }
 
 function wireSearch(){
@@ -433,6 +461,7 @@ function clearSelection(){
  atlasMobile.selection(null);
  document.getElementById('details-summary').textContent='';
  document.getElementById('selection-visibility').textContent='';
+ const visibilityAction=document.getElementById('selection-visibility-action');if(visibilityAction)visibilityAction.hidden=true;
  document.getElementById('geometry-status').textContent='';
  atlasTree?.clear();
  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
@@ -548,6 +577,17 @@ document.getElementById('details-close').addEventListener('click',()=>atlasMobil
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
 document.getElementById('filters-toggle')?.addEventListener('click',()=>setFiltersPanelOpen(!filtersPanelOpen));
 document.getElementById('filters-close')?.addEventListener('click',()=>setFiltersPanelOpen(false,{restoreFocus:true}));
+document.getElementById('filters-reset')?.addEventListener('click',resetGlobalFilters);
+document.getElementById('selection-visibility-action')?.addEventListener('click',()=>{
+ const entity=entityById.get(selectedEntityId);if(!entity)return;
+ const action=document.getElementById('selection-visibility-action');
+ if(action?.dataset.action==='show'){
+  visibleEntityIds.add(entity.id);refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
+ }else if(action?.dataset.action==='filters'){
+  if(atlasMobile.state.mobile&&!atlasMobile.state.drawer)atlasMobile.openDrawer();
+  setFiltersPanelOpen(true);
+ }
+});
 for(const key of ['entities','results'])document.getElementById('tab-'+key)?.addEventListener('click',()=>setNavigationTab(key));
 document.getElementById('tab-entities')?.addEventListener('keydown',event=>{if(event.key==='ArrowRight'){event.preventDefault();setNavigationTab('results');document.getElementById('tab-results').focus();}});
 document.getElementById('tab-results')?.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();setNavigationTab('entities');document.getElementById('tab-entities').focus();}});

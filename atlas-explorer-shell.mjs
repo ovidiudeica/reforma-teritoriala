@@ -9,9 +9,18 @@ export function createAtlasExplorerShell({document,map,window:browser}){
  if(!main?.style?.setProperty||!sidebar||!divider?.addEventListener||!browser?.matchMedia||!map?.invalidateSize){
   return {get width(){return initial;},setWidth(){}};
  }
- const small=browser.matchMedia('(max-width: 720px)');
+ const small=browser.matchMedia('(max-width: 899px)');
+ const storageKey='reforma-teritoriala.explorer-width.v1';
  let pointer=null;
  let width=initial;
+ try{
+  const saved=browser.localStorage?.getItem(storageKey);
+  if(saved!==null&&saved!==undefined&&/^\d{3}$/.test(saved)){
+   const parsed=Number(saved);
+   if(parsed>=min&&parsed<=max)width=parsed;
+  }
+ }catch{ /* Privacy mode or unavailable storage: session width still works. */ }
+ function persist(){try{browser.localStorage?.setItem(storageKey,String(width));}catch{ /* Storage is optional. */ }}
  const clamp=value=>Math.max(min,Math.min(max,Math.round(value)));
  function apply(value){
   width=clamp(value);
@@ -20,7 +29,7 @@ export function createAtlasExplorerShell({document,map,window:browser}){
   map.invalidateSize({animate:false,pan:false});
  }
  function onMove(event){if(pointer!==event.pointerId)return;apply(event.clientX-main.getBoundingClientRect().left);}
- function finish(event){if(pointer!==event.pointerId)return;pointer=null;divider.releasePointerCapture?.(event.pointerId);}
+ function finish(event){if(pointer!==event.pointerId)return;pointer=null;divider.releasePointerCapture?.(event.pointerId);persist();}
  divider.addEventListener('pointerdown',event=>{
   if(small.matches||event.button!==0)return;
   pointer=event.pointerId;
@@ -37,9 +46,9 @@ export function createAtlasExplorerShell({document,map,window:browser}){
   const next={ArrowLeft:width-step,ArrowRight:width+step,Home:min,End:max}[event.key];
   if(next===undefined)return;
   event.preventDefault();
-  apply(next);
+  apply(next);persist();
  });
  small.addEventListener?.('change',()=>map.invalidateSize({animate:false,pan:false}));
- apply(initial);
- return {get width(){return width;},setWidth:apply};
+ apply(width);
+ return {get width(){return width;},setWidth(value){apply(value);persist();}};
 }

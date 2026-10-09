@@ -43,10 +43,10 @@ try{
   await t.test('7 breakpoints preserve map area and no horizontal overflow',async()=>{
    for(const [width,height] of viewports){
     await page.viewport(width,height);
-    const state=await page.evaluate("({screen:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,map:document.querySelector('#map').getBoundingClientRect().width,resizer:getComputedStyle(document.querySelector('#explorer-resizer')).display,mobile:matchMedia('(max-width: 720px)').matches})");
+    const state=await page.evaluate("({screen:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,map:document.querySelector('#map').getBoundingClientRect().width,resizer:getComputedStyle(document.querySelector('#explorer-resizer')).display,mobile:matchMedia('(max-width: 899px)').matches})");
     assert.equal(state.screen,width);assert.equal(state.overflow,false,'horizontal overflow at '+width);
     assert.ok(state.map>0,'map hidden at '+width);
-    if(width<=720)assert.equal(state.resizer,'none');else assert.notEqual(state.resizer,'none');
+    if(width<900)assert.equal(state.resizer,'none');else assert.notEqual(state.resizer,'none');
    }
   });
   await t.test('mobile drawer and Escape still work',async()=>{
