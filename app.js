@@ -1,5 +1,6 @@
 import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,entityProvenanceHtml,labelMapControls,wireAtlasSkipLinks} from './atlas-presentation.mjs';
 import {createAtlasMobileUi} from './atlas-mobile-ui.mjs';
+import {createAtlasExplorerShell} from './atlas-explorer-shell.mjs';
 import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
@@ -14,6 +15,7 @@ if(statisticalPane?.style)statisticalPane.style.zIndex='450';
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
 L.control.scale({imperial:false}).addTo(map);
 labelMapControls(document);
+const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window});
 
 const roots={RO:L.layerGroup().addTo(map),MD:L.layerGroup().addTo(map)};
 const tiers=['overview','local','detail'];
