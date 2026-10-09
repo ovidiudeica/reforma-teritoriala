@@ -46,6 +46,31 @@ try{
    await page.click('#p5-clear-pins');
    assert.equal(await page.evaluate('p5Navigation.selectedBoundaryIds.size'),0);
   });
+  await t.test('keyboard resizing and tab navigation remain accessible',async()=>{
+   await page.click('#p5-resize-handle');
+   const initial=Number(await page.evaluate("document.querySelector('#p5-resize-handle').getAttribute('aria-valuenow')"));
+   await page.key('ArrowRight');
+   const changed=Number(await page.evaluate("document.querySelector('#p5-resize-handle').getAttribute('aria-valuenow')"));
+   assert.equal(changed,initial+24);
+   const panelWidth=await page.evaluate("Math.round(document.querySelector('#atlas-controls').getBoundingClientRect().width)");
+   assert.equal(panelWidth,changed);
+   await page.key('ArrowLeft');
+   await page.click('#p5-tab-tree');
+   await page.key('ArrowRight');
+   assert.equal(await page.evaluate("document.querySelector('#p5-panel-filters').hidden"),false);
+   await page.key('ArrowLeft');
+   assert.equal(await page.evaluate("document.querySelector('#p5-panel-tree').hidden"),false);
+  });
+  await t.test('layout stays within seven desktop/tablet/mobile viewports',async()=>{
+   for(const [width,height] of [[1440,900],[1280,800],[900,768],[720,900],[430,932],[390,844],[360,800]]){
+    await page.viewport(width,height);
+    const v=await page.evaluate("({scroll:document.documentElement.scrollWidth,width:innerWidth,map:document.querySelector('#map').getBoundingClientRect().width})");
+    assert.ok(v.scroll<=width,'horizontal overflow at '+width);
+    assert.ok(v.map>250,'map unavailable at '+width);
+    await page.screenshot(path.join(screenshotDir,'p50-'+width+'x'+height+'.png'));
+   }
+   await page.viewport(1440,900);
+  });
   await t.test('mobile drawer, filters, tree and full-screen map',async()=>{
    await page.viewport(390,844);
    const state=await page.evaluate("({mobile:matchMedia('(max-width:720px)').matches,hidden:document.querySelector('#atlas-controls').hidden,map:document.querySelector('#map').getBoundingClientRect().width,overflow:document.documentElement.scrollWidth>innerWidth})");
