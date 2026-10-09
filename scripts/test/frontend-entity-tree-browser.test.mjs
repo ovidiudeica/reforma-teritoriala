@@ -54,7 +54,7 @@ try{
   await t.test('zero JS/console/app-network errors',async()=>{
    assert.deepEqual(page.errors,[]);
    assert.deepEqual(page.console.filter(x=>x.type==='error'||x.level==='error'),[]);
-   assert.deepEqual(page.responses.filter(x=>x.status>=400&&!x.url.includes('tile.openstreetmap.org')),[]);
+   assert.deepEqual(page.responses.filter(x=>x.status>=400&&!['tile.openstreetmap.org','a.tile.openstreetmap.org','b.tile.openstreetmap.org','c.tile.openstreetmap.org'].includes(new URL(x.url).hostname)),[]);
   });
  });
 }finally{await browser.close();}
