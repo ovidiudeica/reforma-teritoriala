@@ -16,7 +16,8 @@
   <div><h1>REFORMA TERITORIALĂ</h1><span>Atlas teritorial România · Republica Moldova</span></div>
   <nav aria-label="Moduri Atlas">
     <button class="mode active" data-mode="actual" aria-pressed="true">ACTUAL</button>
-    <button class="mode" data-mode="istoric" aria-pressed="false" disabled title="Modul ISTORIC va fi activat după publicarea primului corpus istoric">ISTORIC · în pregătire</button>
+    <button class="mode" data-mode="istoric" aria-pressed="false" disabled title="Modul ISTORIC va fi activat după publicarea primului corpus istoric" aria-label="ISTORIC — în pregătire">ISTORIC</button>
+    <button class="mode" data-mode="propuneri" aria-pressed="false" disabled title="Modul PROPUNERI va fi activat după publicarea primului corpus de propuneri" aria-label="PROPUNERI — în pregătire">PROPUNERI</button>
   </nav>
 </header>
 <main id="atlas-main" aria-label="Atlas teritorial">
@@ -51,6 +52,7 @@
 
   <section id="filters-panel" class="atlas-filters-panel" aria-label="Filtre geometrice" hidden inert>
     <div class="atlas-filters-heading"><h2>Filtre</h2><button id="filters-close" class="action-button" type="button">Închide filtrele</button></div>
+    <button id="filters-reset" class="action-button" type="button" disabled>Resetează filtrele</button>
     <p class="hint">Filtrele limitează geometriile deja bifate în arbore; nu modifică bifele entităților.</p>
     <section>
     <h3>Jurisdicții</h3>
@@ -93,6 +95,7 @@
   </div>
   <p id="details-summary" class="details-summary"></p>
   <p id="selection-visibility" class="hint" role="status" aria-live="polite"></p>
+  <button id="selection-visibility-action" class="action-button" type="button" hidden></button>
   <p id="geometry-status" class="hint" role="status" aria-live="polite"></p>
   <div id="details-body" class="details-body">
     <p class="muted">Selectează o limită de pe hartă sau caută o entitate după nume ori identificator.</p>

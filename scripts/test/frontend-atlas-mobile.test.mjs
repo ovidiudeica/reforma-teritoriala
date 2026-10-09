@@ -62,7 +62,7 @@ test('breadcrumb and map selections show peek without opening controls',()=>{for
 test('popstate clear cannot leave focus on a hidden sheet header control',()=>{const h=unit();h.ui.selection('one');h.el('sheet-expand').focus();h.ui.selection(null);assert.equal(h.document.activeElement,h.el('mobile-navigation'));assert.equal(h.ui.state.sheet,'closed');});
 test('desktop expanded content focus moves to visible expand on mobile transition',()=>{const h=unit(false);h.ui.selection('one');h.el('details-body').focus();h.media.change(true);assert.equal(h.document.activeElement,h.el('sheet-expand'));assert.equal(h.ui.state.sheet,'peek');});
 test('real mobile frontend integrates search/tree/filters/history without semantic UI state',async t=>{
- const initial=defaultUrlState(config),browser=new Browser(),document=shell(doc()),media=new Media(true),groups=[],mounted=new Set(),requests=[],fits=[],events=new Map();let viewport={...defaultViewport};browser.matchMedia=query=>{assert.equal(query,'(max-width: 720px)');return media;};
+ const initial=defaultUrlState(config),browser=new Browser(),document=shell(doc()),media=new Media(true),groups=[],mounted=new Set(),requests=[],fits=[],events=new Map();let viewport={...defaultViewport};browser.matchMedia=query=>{assert.equal(query,'(max-width: 899px)');return media;};
 
  const group=()=>{const g={layers:[],clearLayers(){this.layers=[];},addLayer(l){this.layers.push(l);},hasLayer(l){return this.layers.includes(l);},removeLayer(l){this.layers=this.layers.filter(x=>x!==l);},addTo(target){target.addLayer?.(this);return this;},eachLayer(fn){this.layers.forEach(fn);}};groups.push(g);return g;};
  const emit=name=>{for(const fn of events.get(name)||[])fn();};

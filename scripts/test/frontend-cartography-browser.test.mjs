@@ -95,9 +95,9 @@ try{
   await check(t,'14 real polygon selections and zoom across 7 viewports RO/MD',async()=>{
    for(const [w,h] of [[1440,900],[1280,800],[900,768],[360,800],[390,844],[430,932],[390,600]]){
     await page.viewport(w,h);
-    const v=await page.evaluate("({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,tree:!!document.querySelector('#hierarchy-tree'),map:!!document.querySelector('.leaflet-map-pane'),vectors:document.querySelectorAll('.leaflet-interactive').length,mobile:matchMedia('(max-width: 720px)').matches})");
+    const v=await page.evaluate("({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,tree:!!document.querySelector('#hierarchy-tree'),map:!!document.querySelector('.leaflet-map-pane'),vectors:document.querySelectorAll('.leaflet-interactive').length,mobile:matchMedia('(max-width: 899px)').matches})");
     assert.equal(v.width,w);assert.equal(v.overflow,false,'horizontal overflow');
-    assert.ok(v.tree&&v.map&&v.vectors>0);assert.equal(v.mobile,w<=720);
+    assert.ok(v.tree&&v.map&&v.vectors>0);assert.equal(v.mobile,w<900);
     await select(ro.id,'RO '+w+'x'+h);await select(md.id,'MD '+w+'x'+h);
     evidence.viewports.push({width:w,height:h,ro:ro.id,md:md.id,vectors:v.vectors});
     await shotViewport(w,h);
