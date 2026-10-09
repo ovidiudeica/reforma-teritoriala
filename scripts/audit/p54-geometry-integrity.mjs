@@ -8,22 +8,23 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const git=process.env.GIT_EXECUTABLE||'git';
+// Use the fixed Git executable and constant argv; do not accept command overrides.
 const base=new URL('https://ovidiudeica.github.io/reforma-teritoriala/');
-const lines=execFileSync(git,['ls-files','-s','--','public/geo/actual/'],{cwd:root,encoding:'utf8'}).trim().split(/\r?\n/);
+const lines=execFileSync('git',['ls-files','-s','--','public/geo/actual/'],{cwd:root,encoding:'utf8'}).trim().split(/\r?\n/);
 const tracked=lines.map(line=>{
  const match=line.match(/^100644 ([0-9a-f]{40}) 0\t(.+)$/);
  if(!match)throw Error('Unexpected git-stage record');
  return {sha:match[1],file:match[2]};
 }).filter(item=>item.file.endsWith('.geojson'));
-const evidence={testedCommit:execFileSync(git,['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),publicUrl:base.href,files:[],failures:[]};
+const evidence={testedCommit:execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),publicUrl:base.href,files:[],failures:[]};
 let next=0;
 async function checkAsset(entry){
  let message='';
  for(let attempt=0;attempt<3;attempt++){
   try{
    const uri=new URL(entry.file,base);
-   assert.equal(uri.hostname,'ovidiudeica.github.io');
+   assert.equal(uri.origin,base.origin);
+   assert.ok(uri.pathname.startsWith('/reforma-teritoriala/public/geo/actual/'),'Unexpected public asset path');
    const response=await fetch(uri,{signal:AbortSignal.timeout(90000)});
    if(!response.ok)throw Error('HTTP '+response.status);
    const data=Buffer.from(await response.arrayBuffer());
@@ -44,7 +45,7 @@ await test('P5.4 public ACTUAL geometry: 123/123 live Git-blob byte identity',{t
  evidence.files.sort((a,b)=>a.path.localeCompare(b.path));
  evidence.totalBytes=evidence.files.reduce((sum,item)=>sum+item.bytes,0);
  evidence.passed=evidence.files.filter(item=>item.pass).length;
- const destination=process.env.P54_EVIDENCE_PATH||path.join(tmpdir(),'p54-public-geometry-integrity.json');
+ const destination=path.join(tmpdir(),'p54-public-geometry-integrity.json');
  writeFileSync(destination,JSON.stringify(evidence,null,2));
  console.log('P5.4 ACTUAL public:',evidence.passed+'/'+tracked.length,'bytes',evidence.totalBytes,'evidence:',destination);
  assert.deepEqual(evidence.failures,[],'Live ACTUAL byte mismatch or unavailable asset');
