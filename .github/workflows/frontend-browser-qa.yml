@@ -9,7 +9,7 @@ permissions:
 jobs:
   frontend-browser-qa:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     env:
       BROWSER_EXECUTABLE: /usr/bin/google-chrome
     steps:
@@ -22,12 +22,24 @@ jobs:
           google-chrome --version
           node --check scripts/test/helpers/atlas-browser.mjs
           node --check scripts/test/frontend-atlas-browser.test.mjs
+          node --check scripts/test/frontend-cartography-browser.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
         run: node --test scripts/test/frontend-atlas-browser.test.mjs
+      - name: P4.2 browser CDP cartographic matrix (RO MD, 7 viewports, 170 states)
+        env:
+          TMPDIR: /tmp
+        run: node --test scripts/test/frontend-cartography-browser.test.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
+      - name: Upload P4.2 CDP matrix and viewport screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: atlas-cartography-p42-evidence
+          path: /tmp/atlas-browser-evidence/p42-*
+          retention-days: 14
       - name: Upload screenshots and console/network evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
