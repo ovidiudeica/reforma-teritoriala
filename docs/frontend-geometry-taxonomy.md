@@ -1,10 +1,10 @@
-# Filtre Atlas — web-v1.2.2
+# Filtre Atlas — contract curent (P4.1)
 
 ## Modelul comun
 
 `geometry-taxonomy.mjs` este unica sursă de adevăr. Configurația declarativă `geometryFilterTree` produce clasificatorul de clasă, clasificatorul de subtip, etichetele și ordinea UI. `atlas-filters.mjs` construiește numai controalele DOM; `app.js` folosește un singur `geometryVisible()` pentru tiers, chunks, limite statistice, highlight și încărcări întârziate.
 
-Clasa descrie nivelul geometric mare. Subtipul descrie reprezentarea în jurisdicția respectivă. Identitatea juridică și display_type nu clasifică geometria. Rolul statistic este un facet independent; cele 45 entități admin/statistical păstrează o singură geometrie administrativă și un singur subtip, iar vizibilitatea acelei geometrii este controlată exclusiv de filtrele geometrice/administrative.
+Clasa descrie nivelul geometric mare. Subtipul descrie reprezentarea în jurisdicția respectivă. Identitatea juridică și display_type nu clasifică geometria. Rolul statistic este un facet independent; cele 45 de entități admin/statistical păstrează o singură geometrie administrativă și un singur subtip. Vizibilitatea poligonului reutilizat este reuniunea logică (OR) dintre filtrul geometric/administrativ și nivelul statistic activ; nu se clonează geometria.
 
 Subtipurile provin exclusiv din `representation.inferred_type` și jurisdicție. Categoria statistical desemnează cele 18 limite separate: clasa statistical_only, subtip null exceptat explicit, control prin nivel statistic și toggle separat. Nivelurile statistice nu ascund niciodată geometriile administrative reutilizate. Nu se folosește admin_level izolat sau legal.type.
 
@@ -93,7 +93,7 @@ Zero în tabel înseamnă mapping explicit cunoscut, fără categorie goală în
 
 ## State și interacțiuni
 
-`activeGeometryClasses` este același Set ca aliasul compatibil `activeFilterGroups`, nu o copie. `activeGeometrySubtypes` păstrează subtipurile active. `geometryVisible()` aplică class/subtype gates entităților cu geometrie administrativă și aplică nivelul statistic + toggle-ul global numai clasei `statistical_only`. Astfel un județ/NUTS3, Chișinău/MD115, Găgăuzia/MD114 sau statul MD1 nu poate dispărea doar pentru că nivelul statistic corespunzător este OFF. Jurisdicțiile sunt controlate separat prin layer groups; off/on nu modifică niciun Set de subtipuri.
+`activeGeometryClasses` este același Set ca aliasul compatibil `activeFilterGroups`, nu o copie. `activeGeometrySubtypes` păstrează subtipurile active. `geometryVisible()` aplică două căi independente: pentru o entitate administrativă/statistică reutilizată, `(clasă activă AND subtip activ) OR nivel statistic activ`; pentru `statistical_only`, `nivel statistic activ AND Afișează limite statistice separate`. Un județ/NUTS 3, Chișinău/MD115, Găgăuzia/MD114 ori statul MD1 rămâne vizibil când este activă oricare dintre căi și este ascuns numai dacă ambele sunt inactive. Jurisdicțiile sunt controlate separat prin layer groups; off/on nu modifică niciun Set de subtipuri.
 
 Părinte checked = toate subtipurile active; unchecked = niciunul; indeterminate = subset activ. Click pe checked dezactivează clasa și toate subtipurile; click pe unchecked/mixed activează toate. Un copil activează class gate; dezactivarea ultimului copil dezactivează class gate. Sincronizarea actualizează proprietățile input-urilor, fără reconstruirea DOM-ului sau pierderea expansion state. Checkbox-ul părinte este în afara conținutului ascuns de details; summary controlează separat disclosure-ul.
 
@@ -112,4 +112,16 @@ ACTUAL/P2, geometriile, registrele, sursele, public entities, hierarchy JSON, sn
 
 ## Bugfix web-v1.2.1 — Niveluri statistice
 
-Patch-ul elimină conflictul în care un nivel statistic OFF ascundea și geometria administrativă a entităților coalesced. Distribuția rămâne 63 roluri: nivel 1 = 5 roluri (4 limite separate + 1 geometrie reutilizată), nivel 2 = 10 (10 separate), nivel 3 = 48 (4 separate + 44 reutilizate). Nivel 3 OFF ascunde numai cele 4 limite statistice separate MD; cele 42 județe/București și cele două entități MD coalesced de nivel 3 rămân guvernate exclusiv de filtrele administrative.
+Patch-ul elimină conflictul în care un nivel statistic OFF ascundea și geometria administrativă a entităților coalesced. Distribuția rămâne 63 roluri: nivel 1 = 5 roluri (4 limite separate + 1 geometrie reutilizată), nivel 2 = 10 (10 separate), nivel 3 = 48 (4 separate + 44 reutilizate). Nivelul 3 OFF ascunde cele 4 limite statistice separate de nivel 3; cele 44 de geometrii reutilizate de nivel 3 (42 RO și 2 MD) rămân vizibile doar dacă filtrul lor administrativ este activ. Cu nivelul 3 ON, aceleași 44 de geometrii devin vizibile și când tipurile administrative sunt dezactivate; se desenează un singur poligon pentru fiecare identitate.
+
+
+## P4.1 — regresie exhaustivă pentru identitate, geometrie și vizibilitate
+
+`scripts/test/frontend-geometry-matrix.test.mjs` fixează contractual acoperirea celor **5.848** de identități, fără a modifica ACTUAL/P2. Testul rulează în `.github/workflows/frontend-geometry-taxonomy.yml` la fiecare PR către `main` și la fiecare push pe `main`, ca pas separat și vizibil în logs. Se păstrează status check-ul existent `frontend-geometry-taxonomy` și verificarea `git diff --exit-code`.
+
+- **170 de stări deterministe**: 4 subseturi de jurisdicții × 2 stări ale claselor administrative × 8 măști pentru nivelurile statistice 1–3 × 2 valori ale comutatorului pentru limite separate = 128; plus 21 de subtipuri active × 2 jurisdicții = 42. Sunt **994.160 de evaluări** (5.848 × 170).
+- Predicatul `geometryVisible()` este comparat cu un **oracle boolean separat**, care verifică reuniunea OR pentru rolurile reutilizate, condiția AND a nivelului și toggle-ului pentru cele 18 geometrii statistice separate, gate-ul de subtip și gate-ul de jurisdicție. Testul eșuează la orice identitate fără stare vizibilă, schimbare neașteptată de cardinalitate ori abatere per ID/stare.
+- Contractul public este verificat la nivelul **8/8 layere** (RO și MD: overview, local, detail, statistical) și **115/115 chunk-uri**: SHA-256, dimensiuni pentru chunk-uri, număr de features, apartenența fiecărui ID, tier și jurisdicție, lipsa duplicatelor și identitatea coordonatelor între chunk și tier. Fiecare dintre cele 5.848 de entități trebuie să aibă **exact o** geometrie în layerele publice complete; cele 5.749 din local/detail trebuie să apară o singură dată în chunk-uri, iar 99 să fie acoperite de overview/statistical.
+- Acesta este un **gate determinist de integritate și vizibilitate logică**, nu o aserțiune de randare pixel-cu-pixel pentru toate cele 994.160 de combinații. Testele reale Chrome/CDP, filtrele, z-order, selecția, zoomul și cele șapte viewporturi rămân protejate separat de workflow-ul `frontend-browser-qa`.
+
+Excepțiile și politicile de acoperire neexhaustivă pentru localitățile oficiale rămân neschimbate. Nici geometria OSM/ANCPI, nici release-ul ACTUAL/P2, fingerprintul, registrele sau manifestele persistate nu sunt modificate de P4.1.
