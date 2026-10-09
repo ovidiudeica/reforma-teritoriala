@@ -18,7 +18,7 @@ const items=[
 const byId=new Map(items.map(x=>[x.id,x])),children=new Map(items.map(x=>[x.id,items.filter(y=>y.p===x.id)])),roots=items.filter(x=>!x.p);
 const $=id=>document.getElementById(id);
 const state={open:new Set(['ro','md','ro-n1','ro-nv']),selected:new Set(),focused:null,overrides:new Map(),query:'',tab:'tree',zoom:1,layer:true,filters:false};
-const checked=(selector,value)=>{const el=document.querySelector(selector+'="'+value+'"]');return Boolean(el&&el.checked)};
+const checked=(selector,value)=>{const el=document.querySelector(selector.slice(0,-1)+'="'+value+'"]');return Boolean(el&&el.checked)};
 function visible(item){if(state.overrides.has(item.id))return state.overrides.get(item.id);const jurisdiction=checked('input[data-jurisdiction]',item.j),admin=checked('input[data-class]',item.type),stat=Boolean(item.stat)&&checked('input[data-level]',String(item.stat));return jurisdiction&&(item.separate?stat&&$('separate').checked:admin||stat);}
 function descendants(id){let count=0;for(const n of children.get(id)||[]){count++;count+=descendants(n.id);}return count;}
 function ancestorIds(item){const a=[];for(let p=item.p;p;p=byId.get(p)?.p)a.push(p);return a;}
