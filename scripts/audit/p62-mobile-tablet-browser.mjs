@@ -13,10 +13,16 @@ const geometryState="({ids:[...qaApp.visibleEntityIds].sort(),selected:qaApp.sel
 try{
  await test('P6.2 real Chrome mobile/tablet ergonomics, swipe/keyboard and geometry invariants',{timeout:180000},async t=>{
   await page.viewport(1440,900);await page.navigate(browser.server.url+'/');await page.viewport(390,844);
+  // Fresh mobile navigation must load the real initial map viewport, not inherit desktop resize.
+  await page.navigate(browser.server.url+'/');
   await waitFor(()=>page.evaluate('qaApp.entityById.size===5848'),'public ACTUAL catalog');
   await t.test('phone uses visible three-action dock, unobscured map and touch targets',async()=>{
    const state=await page.evaluate("(()=>{const dock=document.querySelector('#atlas-mobile-toolbar'),map=document.querySelector('#map'),controls=['mobile-navigation','mobile-search','mobile-filters'];return {visible:!dock.hidden,buttons:controls.map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect();return {id,hidden:e.hidden,height:r.height,width:r.width}}),map:map.getBoundingClientRect().width,overflow:document.documentElement.scrollWidth>innerWidth,selected:qaApp.selectedEntityId,ids:[...qaApp.visibleEntityIds].sort()}})()");
    assert.equal(state.visible,true);assert.ok(state.buttons.every(b=>!b.hidden&&b.height>=44&&b.width>=44));assert.equal(state.map,390);assert.equal(state.overflow,false);assert.equal(state.selected,null);assert.deepEqual(state.ids,['osm-r58974','osm-r90689'].sort());
+   const viewport=await page.evaluate('qaApp.captureUrlState().viewport');
+   assert.ok(Math.abs(viewport.lon-26.6)<2&&Math.abs(viewport.lat-46.8)<2,'fresh mobile map centers RO+MD '+JSON.stringify(viewport));
+   const credits=await page.evaluate("(()=>{const dock=document.querySelector('#atlas-mobile-toolbar').getBoundingClientRect(),attrib=document.querySelector('.leaflet-control-attribution').getBoundingClientRect(),scale=document.querySelector('.leaflet-control-scale').getBoundingClientRect();return {dockTop:dock.top,attribBottom:attrib.bottom,scaleBottom:scale.bottom}})()");
+   assert.ok(credits.attribBottom<credits.dockTop&&credits.scaleBottom<credits.dockTop,'OSM attribution/scale are not covered by navigation');
    await page.screenshot(path.join(output,'p62-phone-dock.png'));
   });
   await t.test('mobile search shortcut opens drawer and focuses search; Escape returns dock',async()=>{
