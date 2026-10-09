@@ -5,7 +5,7 @@ export function createAtlasMobileUi({document,media,onClear,isSearchOpen=()=>fal
  const toolbar=byId('atlas-mobile-toolbar'),quickSearch=byId('mobile-search'),quickFilters=byId('mobile-filters');
  const details=byId('details-panel'),body=byId('details-body'),expand=byId('sheet-expand'),half=byId('sheet-half'),handle=byId('sheet-drag'),search=byId('entity-search');
  const steps=['peek','half','expanded'],labels=['Minimizat','Jumătate','Extins'];
- let mobile=Boolean(media.matches),drawer=false,selected=null,sheet='closed',drag=null;
+ let mobile=Boolean(media.matches),drawer=false,selected=null,sheet='closed',drag=null,returnFocus=trigger;
  function sync(){
   toolbar.hidden=!mobile||drawer;
   trigger.hidden=!mobile;close.hidden=!mobile;backdrop.hidden=!mobile||!drawer;
@@ -31,8 +31,8 @@ export function createAtlasMobileUi({document,media,onClear,isSearchOpen=()=>fal
   handle.setAttribute('aria-valuenow',String(index));
   handle.setAttribute('aria-valuetext',labels[index]);
  }
- function closeDrawer(focus=true){if(!mobile)return;drawer=false;onCloseDrawer();sync();if(focus)trigger.focus();}
- function openDrawer(){if(!mobile)return;drawer=true;sync();search.focus();onOpen();}
+ function closeDrawer(focus=true){if(!mobile)return;drawer=false;onCloseDrawer();sync();if(focus)(returnFocus.hidden?trigger:returnFocus).focus();}
+ function openDrawer(source=trigger){if(!mobile)return;returnFocus=source;drawer=true;sync();search.focus();onOpen();}
  function setSheet(next){
   if(!mobile||!selected||!steps.includes(next))return;
   if((next==='peek')&&body.contains?.(document.activeElement))expand.focus();
@@ -79,9 +79,9 @@ export function createAtlasMobileUi({document,media,onClear,isSearchOpen=()=>fal
   else if(event.key==='Home'){event.preventDefault();setSheet('peek');}
   else if(event.key==='End'){event.preventDefault();setSheet('expanded');}
  }
- trigger.addEventListener('click',openDrawer);
- quickSearch.addEventListener('click',openDrawer);
- quickFilters.addEventListener('click',()=>{openDrawer();onOpenFilters();});
+ trigger.addEventListener('click',()=>openDrawer(trigger));
+ quickSearch.addEventListener('click',()=>openDrawer(quickSearch));
+ quickFilters.addEventListener('click',()=>{openDrawer(quickFilters);onOpenFilters();});
  close.addEventListener('click',()=>closeDrawer());backdrop.addEventListener('click',()=>closeDrawer());
  expand.addEventListener('click',toggleSheet);half.addEventListener('click',toggleHalf);
  handle.addEventListener('pointerdown',onPointerDown);handle.addEventListener('pointerup',onPointerUp);
