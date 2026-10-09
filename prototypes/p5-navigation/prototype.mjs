@@ -45,6 +45,28 @@ function openNavigation(name){
 byId('p5-show-tree').addEventListener('click',()=>openNavigation('tree'));
 byId('p5-show-filters').addEventListener('click',()=>openNavigation('filters'));
 
+const handle=byId('p5-resize-handle');
+let resizing=false;
+function setSidebarWidth(value){
+ const width=Math.max(300,Math.min(Math.min(650,innerWidth-260),Math.round(value)));
+ document.body.style.setProperty('--p5-sidebar-width',width+'px');
+ handle.setAttribute('aria-valuenow',String(width));
+ demo.map?.invalidateSize({pan:false});
+}
+handle.addEventListener('pointerdown',event=>{
+ if(matchMedia('(max-width:720px)').matches)return;
+ resizing=true;handle.setPointerCapture(event.pointerId);event.preventDefault();
+});
+handle.addEventListener('pointermove',event=>{if(resizing)setSidebarWidth(event.clientX);});
+handle.addEventListener('pointerup',()=>{resizing=false;});
+handle.addEventListener('pointercancel',()=>{resizing=false;});
+handle.addEventListener('keydown',event=>{
+ if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+ event.preventDefault();
+ const current=Number(handle.getAttribute('aria-valuenow'))||408;
+ setSidebarWidth(event.key==='Home'?300:event.key==='End'?650:current+(event.key==='ArrowRight'?24:-24));
+});
+
 function updateSelectionIndicator(){
  const n=selectedBoundaryIds.size;
  byId('p5-selection-count').textContent=n+' '+(n===1?'limită adăugată':'limite adăugate');
