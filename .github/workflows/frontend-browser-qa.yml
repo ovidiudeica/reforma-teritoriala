@@ -9,7 +9,7 @@ permissions:
 jobs:
   frontend-browser-qa:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
       BROWSER_EXECUTABLE: /usr/bin/google-chrome
     steps:
@@ -23,6 +23,8 @@ jobs:
           node --check scripts/test/helpers/atlas-browser.mjs
           node --check scripts/test/frontend-atlas-browser.test.mjs
           node --check scripts/test/frontend-cartography-browser.test.mjs
+          node --check atlas-explorer-shell.mjs
+          node --check scripts/test/frontend-explorer-shell-browser.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
@@ -31,6 +33,8 @@ jobs:
         env:
           TMPDIR: /tmp
         run: node --test scripts/test/frontend-cartography-browser.test.mjs
+      - name: P5.1 two-pane shell, resize and contextual selection in Chrome
+        run: node --test scripts/test/frontend-explorer-shell-browser.test.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots

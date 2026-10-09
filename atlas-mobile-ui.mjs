@@ -6,7 +6,7 @@ export function createAtlasMobileUi({document,media,onClear,isSearchOpen=()=>fal
   trigger.hidden=!mobile;close.hidden=!mobile;backdrop.hidden=!mobile||!drawer;expand.hidden=!mobile||!selected;
   controls.dataset.mobile=String(mobile);controls.classList.toggle('mobile-drawer-open',mobile&&drawer);controls.inert=mobile&&!drawer;controls.hidden=mobile&&!drawer;controls.setAttribute('aria-hidden',String(mobile&&!drawer));
   trigger.setAttribute('aria-expanded',String(mobile&&drawer));trigger.setAttribute('aria-controls',controls.id);
-  details.dataset.mobile=String(mobile);details.classList.toggle('mobile-sheet-open',mobile&&sheet!=='closed');details.classList.toggle('mobile-sheet-expanded',mobile&&sheet==='expanded');details.inert=mobile&&sheet==='closed';details.hidden=mobile&&sheet==='closed';details.setAttribute('aria-hidden',String(mobile&&sheet==='closed'));
+  details.dataset.mobile=String(mobile);details.classList.toggle('mobile-sheet-open',mobile&&sheet!=='closed');details.classList.toggle('mobile-sheet-expanded',mobile&&sheet==='expanded');details.inert=!selected||(mobile&&sheet==='closed');details.hidden=!selected||(mobile&&sheet==='closed');details.setAttribute('aria-hidden',String(!selected||(mobile&&sheet==='closed')));
   body.hidden=mobile&&sheet!=='expanded';expand.setAttribute('aria-expanded',String(mobile&&sheet==='expanded'));expand.setAttribute('aria-controls',body.id);expand.textContent=sheet==='expanded'?'Restrânge':'Extinde';
  }
  function closeDrawer(focus=true){if(!mobile)return;drawer=false;if(focus)trigger.focus();sync();}

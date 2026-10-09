@@ -6,6 +6,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="atlas-explorer-shell.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -20,9 +21,9 @@
 <main id="atlas-main" aria-label="Atlas teritorial">
 <button id="mobile-navigation" class="mobile-control mobile-navigation" type="button" aria-expanded="false" aria-controls="atlas-controls" hidden>☰ Navigare</button>
 <button id="drawer-backdrop" class="drawer-backdrop" type="button" aria-label="Închide navigarea" tabindex="-1" hidden></button>
-<aside id="atlas-controls" class="controls" aria-label="Navigare și filtre">
+<aside id="atlas-controls" class="controls" aria-label="Entități, căutare și filtre">
   <button id="drawer-close" class="mobile-control drawer-close" type="button" hidden>Închide navigarea</button>
-  <h2>Teritoriu actual</h2>
+  <h2>Entități</h2>
   <button id="copy-link" class="action-button" type="button">Copiază link</button>
   <p id="share-status" class="hint" role="status" aria-live="polite"></p>
 
@@ -35,7 +36,7 @@
   </section>
 
   <section>
-    <h3>Ierarhie consolidată</h3>
+    <h3>Arbore</h3>
     <div class="hierarchy-tools" role="group" aria-label="Navigare în ierarhie">
       <button id="tree-collapse-all" type="button">Restrânge tot</button>
       <button id="tree-show-roots" type="button">Arată țările</button>
@@ -80,11 +81,12 @@
     <p id="geometry-load-status" role="alert"></p>
   </section>
 </aside>
+<div id="explorer-resizer" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Redimensionează panoul Entități" aria-controls="atlas-controls" aria-valuemin="280" aria-valuemax="660" aria-valuenow="340"></div>
 
 <p id="map-help" class="sr-only">Hartă navigabilă cu săgeți și tastele plus/minus. Pentru selecția entităților fără mouse folosește căutarea sau arborele din navigare.</p>
 <div id="map" role="region" aria-label="Hartă teritorială România și Republica Moldova" aria-describedby="map-help" tabindex="0"></div>
 
-<aside id="details-panel" class="details" aria-labelledby="details-title">
+<aside id="details-panel" class="details" hidden aria-labelledby="details-title">
   <div class="details-head">
     <div><span class="eyebrow">Entitate selectată</span><h2 id="details-title" aria-live="polite" aria-atomic="true">Nicio selecție</h2></div>
     <button id="sheet-expand" class="mobile-control" type="button" aria-expanded="false" aria-controls="details-body" hidden>Extinde</button>
