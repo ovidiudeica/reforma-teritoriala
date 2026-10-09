@@ -21,7 +21,7 @@ try{
    assert.equal(await page.evaluate('document.activeElement.id'),'entity-search');
    await page.key('Escape');
    assert.equal(await page.evaluate('qaApp.atlasMobile.state.drawer'),false);
-   assert.equal(await page.evaluate('document.activeElement.id'),'mobile-navigation');
+   assert.equal(await page.evaluate('document.activeElement.id'),'mobile-search');
   });
   await t.test('mobile filters shortcut opens existing filter panel and retains independent geometry checks',async()=>{
    const before=await page.evaluate(geometryState);
@@ -32,6 +32,7 @@ try{
    assert.equal(await page.evaluate("document.querySelector('#filters-panel').hidden"),true);
    await page.key('Escape');
    assert.equal(await page.evaluate('qaApp.atlasMobile.state.drawer'),false);
+   assert.equal(await page.evaluate('document.activeElement.id'),'mobile-filters');
    assert.deepEqual(await page.evaluate(geometryState),before);
   });
   await t.test('selected sheet starts minimized and supports middle and full heights without URL changes',async()=>{
@@ -40,6 +41,9 @@ try{
    await waitFor(()=>page.evaluate("qaApp.atlasMobile.state.sheet==='peek'"),'peek sheet');
    const before=await page.evaluate(geometryState);
    const peekHeight=await page.evaluate("document.querySelector('#details-panel').getBoundingClientRect().height");
+   const frame=await page.evaluate("(()=>{const dock=document.querySelector('#atlas-mobile-toolbar').getBoundingClientRect(),sheet=document.querySelector('#details-panel').getBoundingClientRect(),handle=document.querySelector('#sheet-drag').getBoundingClientRect();return {dockTop:dock.top,sheetBottom:sheet.bottom,handleHeight:handle.height}})()");
+   assert.ok(frame.handleHeight>=44,'touch-safe drag handle');
+   assert.ok(frame.sheetBottom<=frame.dockTop-2,'card must not cover mobile actions');
    assert.equal(await page.evaluate("document.querySelector('#details-body').hidden"),true);
    await page.click('#sheet-half');
    assert.equal(await page.evaluate("qaApp.atlasMobile.state.sheet"),'half');
