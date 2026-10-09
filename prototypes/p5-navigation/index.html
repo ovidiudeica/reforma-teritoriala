@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>P5.0 · Explorator teritorial — prototip</title>
+<meta name="description" content="Prototip izolat de navigare RO+MD; nu înlocuiește aplicația publicată.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="./prototype.css">
+</head>
+<body>
+<a class="skip" href="#map">Sari la hartă</a><a class="skip" href="#tree">Sari la ierarhie</a>
+<div class="shell" id="shell">
+<header class="topbar">
+  <button type="button" class="icon mobile-only" id="nav-open" aria-label="Deschide navigarea" aria-controls="sidebar" aria-expanded="false">☰</button>
+  <div class="brand-mark" aria-hidden="true">⌘</div>
+  <div class="brand"><strong>REFORMA TERITORIALĂ</strong><span>Explorator RO + MD</span></div>
+  <div class="modes" role="group" aria-label="Corpus teritorial">
+    <button class="mode chosen" aria-pressed="true">ACTUAL</button>
+    <button class="mode" disabled title="Corpusul ISTORIC nu este încă publicat">ISTORIC</button>
+    <button class="mode" disabled title="Corpusul PROPUNERI nu este încă publicat">PROPUNERI</button>
+  </div>
+  <div class="phase"><span class="live-dot"></span> PROTOTIP P5.0</div>
+</header>
+<button class="backdrop" id="backdrop" aria-label="Închide navigarea" type="button" hidden></button>
+<div class="workspace" id="workspace">
+  <aside id="sidebar" class="sidebar" aria-label="Navigare teritorială">
+    <div class="side-top">
+      <div class="side-label"><span>EXPLORARE TERITORIALĂ</span><button id="nav-close" class="icon mobile-only" aria-label="Închide navigarea" type="button">×</button></div>
+      <div class="source-line"><span><b>ACTUAL</b> · România + Republica Moldova</span><span id="release-tag">Snapshot validat</span></div>
+      <div class="search-wrap"><label class="visually-hidden" for="search">Caută după denumire sau cod</label><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Caută nume, SIRUTA, CUATM, NUTS, OSM…" aria-controls="search-results" aria-expanded="false" autocomplete="off"><kbd>/</kbd></div>
+      <div id="search-results" class="search-results" role="listbox" aria-label="Rezultatele căutării" hidden></div>
+      <div class="nav-tabs" role="tablist" aria-label="Navigarea atlasului">
+        <button type="button" role="tab" id="tab-tree" aria-selected="true" aria-controls="panel-tree" class="tab active">☷ <span>Ierarhie</span></button>
+        <button type="button" role="tab" id="tab-filters" aria-selected="false" aria-controls="panel-filters" class="tab">☷ <span>Filtre</span> <span id="filter-badge" class="filter-badge" hidden>0</span></button>
+      </div>
+    </div>
+    <section id="panel-tree" role="tabpanel" aria-labelledby="tab-tree" class="panel panel-tree">
+      <div class="panel-actions"><span id="tree-count">Se încarcă ierarhia…</span><div><button type="button" id="collapse-all" class="subtle" title="Restrânge la state">Restrânge</button><button type="button" id="expand-roots" class="subtle" title="Extinde primele niveluri">Extinde</button></div></div>
+      <div class="tree-scroll"><div id="tree" role="tree" aria-label="Ierarhie consolidată RO+MD"><p class="loading">Se încarcă datele reale…</p></div></div>
+      <p class="tree-note">▸ Extinde · □ Afișează limita · Nume = selectează și apropie</p>
+    </section>
+    <section id="panel-filters" role="tabpanel" aria-labelledby="tab-filters" class="panel panel-filters" hidden>
+      <div class="panel-actions"><strong>Vizibilitatea pe hartă</strong><button type="button" id="reset-filters" class="subtle">Resetează</button></div>
+      <div id="filter-content" class="filter-scroll"><p class="loading">Se încarcă filtrele…</p></div>
+      <p class="tree-note">O geometrie cu rol administrativ și statistic rămâne vizibilă dacă oricare dintre cele două roluri este activ.</p>
+    </section>
+    <div class="selection-footer">
+      <div><small>SELECȚIE CURENTĂ</small><strong id="selection-count" aria-live="polite">0 entități</strong></div>
+      <button type="button" id="selection-clear" class="clear" disabled>Șterge</button>
+    </div>
+    <div class="side-status"><span id="status" role="status" aria-live="polite">Inițializare…</span><a href="../../index.html" title="Aplicația publică existentă">Atlas actual ↗</a></div>
+  </aside>
+  <div id="splitter" class="splitter" role="separator" aria-orientation="vertical" aria-label="Redimensionează panoul de navigare" tabindex="0" aria-valuemin="300" aria-valuemax="600" aria-valuenow="410" title="Trage pentru redimensionare; săgeți stânga/dreapta pentru ajustare"></div>
+  <main class="map-wrap">
+    <div id="map" tabindex="0" aria-label="Hartă teritorială RO+MD" role="region"></div>
+    <div class="map-toolbar" role="group" aria-label="Acțiuni hartă">
+      <button type="button" id="map-reset" class="map-control" title="Vezi România și Republica Moldova" aria-label="Resetează încadrarea hărții">⌖</button>
+      <button type="button" id="copy-link" class="map-control" title="Copiază legătura cu entitatea selectată" aria-label="Copiază linkul selecției">↗</button>
+    </div>
+    <div class="map-credit">© OpenStreetMap contributors · geometrie ACTUAL nemodificată</div>
+    <section class="details-card" id="details" aria-labelledby="details-title" hidden>
+      <div class="details-heading"><div><span class="eyebrow" id="details-type">UNITATE TERITORIALĂ</span><h2 id="details-title"></h2></div><button type="button" id="details-close" class="icon" aria-label="Închide detaliile">×</button></div>
+      <div id="details-crumb" class="crumb"></div><div id="details-tags" class="tags"></div>
+      <p id="details-notice" class="notice"></p>
+      <div class="detail-bottom"><button type="button" id="zoom-selected" class="primary">⌖ Încadrează limita</button><span id="details-id"></span></div>
+    </section>
+    <button class="map-mobile-button mobile-only" type="button" id="mobile-filter-open">☷ Filtre</button>
+  </main>
+</div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script type="module" src="./prototype.js"></script>
+</body>
+</html>
