@@ -176,7 +176,7 @@ test('real frontend URL hydration/history integrates selection, filters, viewpor
    count=browser.pushes;await subtype('ro.towns').click();assert.equal(browser.pushes,count+1);assert.equal(app.activeGeometrySubtypes.has('ro.towns'),false);assert.equal(app.atlasSearch,search);assert.equal(new URLSearchParams(browser.location.search).getAll('f').includes('ro.towns'),true);
    const county=entities.get(town.hierarchy.consolidated_parent_id);count=browser.pushes;await treeDOM.querySelectorAll('.tree-select').find(b=>b.dataset.entityId===county.id).click();selected(county.id);assert.equal(browser.pushes,count+1);
    const sectorId=data.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='sector').id;
-    app.visibleEntityIds.add(sectorId);app.refreshGeometryVisibility();await app.syncTiers();
+    app.visibleEntityIds.add(sectorId);app.refreshGeometryVisibility();app.atlasUrl.commit('push');map.setView([44.5,26],12);await app.syncTiers();
     const sector=visible().find(l=>l.feature.properties.entity_id===sectorId);assert.ok(sector);count=browser.pushes;await sector.handlers.click();selected(sector.feature.properties.entity_id);assert.equal(browser.pushes,count+1);
    count=browser.pushes;const j=document.getElementById('layer-md');j.checked=false;await j.dispatch('change');assert.equal(browser.pushes,count+1);assert.equal(new URLSearchParams(browser.location.search).get('j'),'RO');
   });
