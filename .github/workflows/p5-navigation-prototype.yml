@@ -1,0 +1,51 @@
+name: P5 navigation prototype
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'prototypes/p5-navigation/**'
+      - 'scripts/p5-preview.mjs'
+      - 'scripts/test/p5-navigation-browser.test.mjs'
+      - 'docs/p5-ux-audit.md'
+      - 'docs/p5-navigation-spec.md'
+      - '.github/workflows/p5-navigation-prototype.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'prototypes/p5-navigation/**'
+      - 'scripts/p5-preview.mjs'
+      - 'scripts/test/p5-navigation-browser.test.mjs'
+      - 'docs/p5-ux-audit.md'
+      - 'docs/p5-navigation-spec.md'
+      - '.github/workflows/p5-navigation-prototype.yml'
+permissions:
+  contents: read
+jobs:
+  p5-navigation-prototype:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      BROWSER_EXECUTABLE: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Record browser and syntax-check prototype
+        run: |
+          google-chrome --version
+          node --check scripts/p5-preview.mjs
+          node --check prototypes/p5-navigation/prototype.mjs
+          node --check scripts/test/p5-navigation-browser.test.mjs
+      - name: P5.0 actual RO+MD browser smoke
+        run: node --test scripts/test/p5-navigation-browser.test.mjs
+      - name: Assert working tree unchanged
+        run: git diff --exit-code
+      - name: Upload P5.0 preview screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p5-navigation-prototype-evidence
+          path: /tmp/atlas-p5-prototype-evidence/*.png
+          if-no-files-found: warn
+          retention-days: 14
