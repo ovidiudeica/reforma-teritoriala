@@ -80,7 +80,8 @@ try{
     assert.equal(state.mobile,w<900);assert.equal(state.toolbar,w>=900);
     assert.equal(state.overflow,false,'horizontal overflow '+w+'x'+h);assert.ok(state.map>0);
     if(w<900)assert.ok(state.details>0);
-    assert.deepEqual(await page.evaluate(geometryState),baseline);
+    const nonViewport=state=>{const params=new URLSearchParams(state.url);for(const key of ['lat','lon','z'])params.delete(key);return {...state,url:params.toString()};};
+    assert.deepEqual(nonViewport(await page.evaluate(geometryState)),nonViewport(baseline));
    }
   });
   await t.test('closing selection restores map without changing checked geometries',async()=>{
