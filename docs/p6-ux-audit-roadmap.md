@@ -49,6 +49,7 @@ Profilare cold/warm în Chrome cu rețea lentă și hardware mobil; streaming/ca
 - **P6.4 — CLOSED/PASS**, PR #278, merge `325e95966bc618ceaaca37d4d65133b7e14da66a`. Browser QA, gates și audit post-merge documentate.
 - **P6.4.1 — CLOSED/PASS**, PR #279, merge `4177b09c195e792677ef0f757168ba7ca21b834e`. `fitBounds` RO+MD pe 8 viewporturi; Chrome live 31/31, frontend 24/24 și geometrii 123/123 byte-identice.
 - **P6.4.2 — CLOSED/PASS**, PR #280, merge `bfef878859fffa54937ce2b398475b0fbac6f349`. Patru iconuri în Leaflet, Chrome live 8/8, frontend 25/25, geometrii 123/123, 8/8 workflow-uri post-merge, A/B `mismatches: []`.
+- **P6.4.3 — hotfix suprapuneri UI:** PR #282, merge `1affdd135b773b2c7b4fc533ee1cc0373e07f25d`. Scala mutată în dreapta pe mobil; butonul de restrângere a exploratorului mutat lângă, nu peste, bara Leaflet pe desktop. Regresia Chrome verifică nesuprapunerea și toate cele patru ținte de click; auditul post-merge intră în criteriul P6.5.
 - **P6.5 — release closure evidence-only:** [documentul de acceptare](p6.5-phase-release-closure.md); PR separat pentru închiderea fazei P6. Verdictul final depinde de required checks și auditul post-merge pe SHA exact.
 
 Acceptarea pe dispozitive fizice Android/iOS și cu tehnologii asistive rămâne distinctă de verificarea tehnică Chrome/CDP.
