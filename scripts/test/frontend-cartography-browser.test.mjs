@@ -138,7 +138,7 @@ try{
    try{
     await p.viewport(1440,900);await p.navigate(browser.server.url);
     const start=await p.evaluate('({zoom:qaApp.captureUrlState().viewport.z,chunks:qaApp.chunkGroups.size})');
-    assert.ok(start.zoom<7);assert.equal(start.chunks,0,'chunks loaded before threshold');
+    assert.ok(start.zoom>=0&&start.zoom<=7,'extent-based RO+MD initial zoom within overview budget');assert.equal(start.chunks,0,'unchecked local and detail chunks loaded during initial country overview');
     const found=[];
     for(const e of [roLocal,mdDetail]){
      await p.evaluate('(()=>{qaApp.visibleEntityIds.add('+JSON.stringify(e.id)+');qaApp.refreshGeometryVisibility();})()');
