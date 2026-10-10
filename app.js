@@ -4,6 +4,7 @@ import {createAtlasExplorerShell} from './atlas-explorer-shell.mjs';
 import {createAtlasInfoPanel} from './atlas-info-panel.mjs';
 import {createAtlasAdvancedNavigation} from './atlas-advanced-navigation.mjs';
 import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
+import {fitRoMd,attachRoMdZoomControl} from './atlas-ro-md-fit.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
@@ -24,6 +25,7 @@ function setOsmBasemapVisible(value){
 }
 L.control.scale({imperial:false}).addTo(map);
 labelMapControls(document);
+attachRoMdZoomControl(document,L);
 const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window});
 
 const roots={RO:L.layerGroup().addTo(map),MD:L.layerGroup().addTo(map)};
@@ -581,7 +583,8 @@ async function applyUrlState(state){
  replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
  for(const j of ['RO','MD']){const enabled=state.jurisdictions.includes(j);document.getElementById('layer-'+j.toLowerCase()).checked=enabled;if(enabled)roots[j].addTo(map);else map.removeLayer(roots[j]);}
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
- map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
+ if(!state.viewportExplicit&&!state.entityId)fitRoMd(map,entityById);
+  else map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
  if(state.entityId)await selectEntity(state.entityId,{source:'url',zoom:!state.viewportExplicit});else clearSelection();
  await syncTiers();updateSelectionVisibility();
 }
@@ -605,7 +608,7 @@ createAtlasInfoPanel({
  getReturnFocus:()=>document.getElementById(atlasMobile.state.mobile?'mobile-navigation':'info-toggle')
 });
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
-document.getElementById('map-home')?.addEventListener('click',()=>{map.setView([defaultViewport.lat,defaultViewport.lon],defaultViewport.z,{animate:false});atlasUrl?.commit('push');});
+document.getElementById('map-home')?.addEventListener('click',()=>{fitRoMd(map,entityById);atlasUrl?.commit('push');});
 document.getElementById('explorer-collapse')?.addEventListener('click',()=>atlasExplorerShell.toggleCollapsed?.());
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
 document.getElementById('filters-toggle')?.addEventListener('click',()=>setFiltersPanelOpen(!filtersPanelOpen));
