@@ -94,7 +94,7 @@ test('empty query clears options/active/open ARIA; zero-results is separate and 
 });
 test('blur and Tab close simply; safe text rendering and late hierarchy index preserve current query',async()=>{
  const h=harness();await query(h,'Victoria');await key(h,'ArrowDown');await key(h,'Tab');assert.equal(h.controller.state.open,false);await query(h,'Bălți');await h.input.dispatch('blur');assert.equal(h.controller.state.open,false);assert.equal(h.input.value,'Bălți');
- const unsafe=createSearchIndex([{id:'<unsafe>',display_name:'<img src=x>',jurisdiction:'RO',display_type:'town'}]);h.controller.updateIndex(unsafe);await query(h,'<img');assert.equal(options(h)[0].children[0].textContent,'<img src=x>');assert.equal(options(h)[0].children[0].children.length,0);
+ const unsafe=createSearchIndex([{id:'<unsafe>',display_name:'<img src=x>',jurisdiction:'RO',display_type:'town'}]);h.controller.updateIndex(unsafe);await query(h,'<img');assert.equal(options(h)[0].children[0].textContent,'<img src=x>');assert.ok(options(h)[0].children[0].children.some(child=>child.tagName==='MARK'));assert.ok(options(h)[0].children[0].children.every(child=>['SPAN','MARK'].includes(child.tagName)));
  h.controller.updateIndex(index);await query(h,'Victoria');h.controller.updateIndex(createSearchIndex(data.entities,nodes));assert.equal(h.controller.state.query,'Victoria');assert.ok(options(h).length>0);
 });
 test('ACTUAL/P2 identities and counts remain intact',()=>{

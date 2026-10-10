@@ -3,6 +3,7 @@ export function createAtlasExplorerShell({document,map,window:browser}){
  const main=document.getElementById('atlas-main');
  const sidebar=document.getElementById('atlas-controls');
  const divider=document.getElementById('explorer-resizer');
+ const collapse=document.getElementById('explorer-collapse');
  const min=280,max=660,initial=340;
  // The Node/P4 contract tests use DOM and Leaflet doubles without layout APIs.
  // The real browser has all APIs; never mutate geometry or inject browser state in tests.
@@ -48,7 +49,19 @@ export function createAtlasExplorerShell({document,map,window:browser}){
   event.preventDefault();
   apply(next);persist();
  });
- small.addEventListener?.('change',()=>map.invalidateSize({animate:false,pan:false}));
- apply(width);
- return {get width(){return width;},setWidth(value){apply(value);persist();}};
+ let collapsed=false;
+ function setCollapsed(next){
+  collapsed=Boolean(next);const active=collapsed&&!small.matches;
+  main.classList.toggle('atlas-explorer-collapsed',active);
+  sidebar.inert=active;
+  if(active)sidebar.setAttribute('aria-hidden','true');
+  else if(!small.matches)sidebar.setAttribute('aria-hidden','false');
+  collapse?.setAttribute('aria-pressed',String(active));
+  collapse?.setAttribute('aria-label',active?'Afișează panoul de explorare':'Ascunde panoul de explorare');
+  collapse?.setAttribute('title',active?'Afișează panoul de explorare':'Ascunde panoul de explorare');
+  map.invalidateSize({animate:false,pan:false});
+ }
+ small.addEventListener?.('change',()=>{if(small.matches)collapsed=false;setCollapsed(collapsed);map.invalidateSize({animate:false,pan:false});});
+ apply(width);setCollapsed(false);
+ return {get width(){return width;},setWidth(value){apply(value);persist();},get collapsed(){return collapsed;},setCollapsed,toggleCollapsed(){setCollapsed(!collapsed);}};
 }

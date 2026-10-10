@@ -43,4 +43,4 @@ Profilare cold/warm în Chrome cu rețea lentă și hardware mobil; streaming/ca
 
 ## Status
 
-P6.1: **închis/PASS**, PR #275 integrat pe `main` `4f09593c19567269728004bfad727e581670a2af`, Pages, CodeQL, 25/25 Chrome, 18/18 frontend bytes și 123/123 geometrii, A/B PASS. P6.2: implementare izolată pe `web/p6.2-mobile-tablet-ux`; detaliile și acceptarea în `docs/p6.2-mobile-tablet-ux.md`. P6.3–P6.4 rămân neimplementate, cu PR-uri independente.
+P6.1: **închis/PASS**, PR #275. P6.2: **închis/PASS**, PR #276 integrat pe `main` `5ede06b75645577d25a1d860e3850f82e833264e`, Pages, CodeQL, 28/28 Chrome, 19/19 frontend bytes, 123/123 geometrii și A/B PASS. P6.3: implementat separat pe `web/p6.3-advanced-navigation`, PR #277 pentru validare; criterii și excluderi în `docs/p6.3-advanced-navigation.md`. P6.4 rămâne neînceput.
