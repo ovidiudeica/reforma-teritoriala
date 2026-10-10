@@ -35,6 +35,7 @@ jobs:
           node --check scripts/audit/p64-final-performance-accessibility.mjs
           node --check atlas-ro-md-fit.mjs
           node --check scripts/audit/p641-ro-md-fit-browser.mjs
+          node --check scripts/audit/p642-osm-basemap-zoom-browser.mjs
           node --check app.js
           node --check atlas-url-state.mjs
           node --check atlas-search.mjs
@@ -64,6 +65,8 @@ jobs:
         run: node --test scripts/audit/p64-final-performance-accessibility.mjs
       - name: P6.4.1 RO+MD fit bounds, portrait-landscape and integrated zoom icon in Chrome
         run: node --test scripts/audit/p641-ro-md-fit-browser.mjs
+      - name: P6.4.2 OSM icon below Leaflet zoom/home, responsive on-off and history
+        run: node --test scripts/audit/p642-osm-basemap-zoom-browser.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots

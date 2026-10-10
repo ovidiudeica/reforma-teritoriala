@@ -21,7 +21,7 @@ function setOsmBasemapVisible(value){
  const visible=Boolean(value);
  if(visible!==osmBasemapVisible){if(visible)osmTiles.addTo(map);else map.removeLayer(osmTiles);osmBasemapVisible=visible;}
  const button=document.getElementById('basemap-toggle');
- if(button){button.setAttribute('aria-pressed',String(visible));button.textContent=visible?'Fundal OSM: activ':'Fundal OSM: dezactivat';button.setAttribute('aria-label',visible?'Fundal OpenStreetMap activ. Dezactivează fundalul':'Fundal OpenStreetMap dezactivat. Activează fundalul');}
+ if(button){button.setAttribute('aria-pressed',String(visible));button.setAttribute('aria-label',visible?'Fundal OpenStreetMap activ. Dezactivează fundalul':'Fundal OpenStreetMap dezactivat. Activează fundalul');button.setAttribute('title',visible?'Dezactivează fundalul OpenStreetMap':'Activează fundalul OpenStreetMap');}
 }
 L.control.scale({imperial:false}).addTo(map);
 labelMapControls(document);

@@ -12,7 +12,7 @@ const fits=(state,label)=>{
  assert.ok(state.nw.y>=24 && state.se.y<=state.height-24,label+' vertical roots '+JSON.stringify(state));
  assert.ok(state.icon.parent&&state.icon.svg,label+' icon integrated into zoom bar');
  assert.ok(state.icon.width>=44&&state.icon.height>=44,label+' accessible icon target');
- assert.deepEqual(state.icon.children,['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home'],label+' zoom order');
+ assert.deepEqual(state.icon.children,['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home','basemap-toggle'],label+' zoom order');
  assert.deepEqual(state.checked,['osm-r58974','osm-r90689'].sort());
 };
 try{
