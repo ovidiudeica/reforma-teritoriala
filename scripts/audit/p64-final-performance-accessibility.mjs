@@ -53,6 +53,7 @@ try{
   });
   await t.test('accessible labels, contrast, focus and ARIA for advanced desktop/modal navigation',async()=>{
    await page.viewport(1440,900);
+   await page.evaluate("document.getElementById('map').focus()");
    const ax=await page.send('Accessibility.getFullAXTree');
    const names=new Set(ax.nodes.filter(n=>!n.ignored).map(n=>n.name?.value).filter(Boolean));
    for(const label of ['Hartă teritorial România și Republica Moldova','Navigare entități și rezultate','Entități','Rezultate']){
@@ -70,8 +71,9 @@ try{
   await t.test('contrast and reduced-motion preferences leave visible keyboard focus',async()=>{
    await page.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'},{name:'forced-colors',value:'active'}]});
    await page.click('#advanced-visible');
-   const appearance=await page.evaluate("(()=>{const btn=document.getElementById('advanced-close');btn.focus();const css=getComputedStyle(btn);return {focused:document.activeElement===btn,outline:css.outlineStyle,outlineWidth:css.outlineWidth,forced:matchMedia('(forced-colors: active)').matches,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches}})()");
-   assert.ok(appearance.focused&&appearance.forced&&appearance.reduced);
+   await page.key('Tab');
+   const appearance=await page.evaluate("(()=>{const btn=document.activeElement;const css=getComputedStyle(btn);return {focused:!!btn.closest('#atlas-advanced-dialog'),outline:css.outlineStyle,outlineWidth:css.outlineWidth,visible:btn.matches(':focus-visible'),forced:matchMedia('(forced-colors: active)').matches,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches}})()");
+   assert.ok(appearance.focused&&appearance.visible&&appearance.forced&&appearance.reduced,JSON.stringify(appearance));
    assert.notEqual(appearance.outline,'none');
    await page.key('Escape');
    await page.send('Emulation.setEmulatedMedia',{features:[]});
