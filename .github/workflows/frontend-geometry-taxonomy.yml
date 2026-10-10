@@ -15,6 +15,8 @@ jobs:
         run: node scripts/process/install-actual-npm-offline.mjs
       - name: Check JavaScript syntax
         run: |
+          node --check atlas-layout.mjs
+          node --check atlas-preview.mjs
           node --check app.js
           node --check geometry-taxonomy.mjs
           node --check atlas-tree.mjs
@@ -27,7 +29,7 @@ jobs:
           node --check atlas-name-format.mjs
           node --check scripts/test/frontend-geometry-matrix.test.mjs
       - name: Run frontend and P2 public regressions
-        run: node --test scripts/test/frontend-smoke.test.mjs scripts/test/actual-statistical-public.test.mjs scripts/test/frontend-geometry-taxonomy.test.mjs scripts/test/frontend-atlas-tree.test.mjs scripts/test/frontend-atlas-hierarchy-validate.test.mjs scripts/test/frontend-atlas-filters.test.mjs scripts/test/frontend-atlas-search.test.mjs scripts/test/frontend-atlas-name-format.test.mjs scripts/test/frontend-atlas-url-state.test.mjs scripts/test/frontend-atlas-mobile.test.mjs scripts/test/frontend-atlas-a11y.test.mjs
+        run: node --test scripts/test/frontend-atlas-preview.test.mjs scripts/test/frontend-smoke.test.mjs scripts/test/actual-statistical-public.test.mjs scripts/test/frontend-geometry-taxonomy.test.mjs scripts/test/frontend-atlas-tree.test.mjs scripts/test/frontend-atlas-hierarchy-validate.test.mjs scripts/test/frontend-atlas-filters.test.mjs scripts/test/frontend-atlas-search.test.mjs scripts/test/frontend-atlas-name-format.test.mjs scripts/test/frontend-atlas-url-state.test.mjs scripts/test/frontend-atlas-mobile.test.mjs scripts/test/frontend-atlas-a11y.test.mjs
       - name: P4.1 exhaustive geometry and visibility matrix (5848 x 170)
         run: node --test scripts/test/frontend-geometry-matrix.test.mjs
       - name: Verify tests leave tracked data unchanged

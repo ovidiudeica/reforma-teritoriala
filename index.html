@@ -16,10 +16,14 @@
 <link rel="stylesheet" href="atlas-p6.4.css">
 <link rel="stylesheet" href="atlas-p6.4.1.css">
 <link rel="stylesheet" href="atlas-p6.4.2.css">
+<link rel="stylesheet" href="atlas-layout.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
 <a id="skip-navigation" class="skip-link" href="#atlas-controls">Sari la navigare</a>
+<div id="atlas-stage" class="atlas-stage">
+<div id="atlas-viewport" class="atlas-viewport">
+<div class="atlas-frame">
 <header>
   <div><h1>REFORMA TERITORIALĂ</h1><span>Atlas teritorial România · Republica Moldova</span></div>
   <nav aria-label="Moduri Atlas">
@@ -147,6 +151,16 @@
 </aside>
 </main>
 <footer><span>Date cartografice: © OpenStreetMap contributors · identitate oficială: INS SIRUTA / BNS CUATM</span><span id="modeLabel">Mod: ACTUAL</span></footer>
+</div></div></div>
+<nav id="atlas-preview-toolbar" class="atlas-preview-toolbar" aria-label="Previzualizare responsive">
+ <button type="button" data-preview-mode="desktop" aria-pressed="false" aria-label="Previzualizare Desktop" title="Previzualizare Desktop"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M9 17v4m6-4v4M6 21h12"/></g></svg></button>
+ <button type="button" data-preview-mode="tablet" aria-pressed="false" aria-label="Previzualizare Tabletă" title="Previzualizare Tabletă"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><rect x="4" y="2" width="16" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 19h4" stroke="currentColor" stroke-width="1.8"/></svg></button>
+ <button type="button" data-preview-mode="phone" aria-pressed="false" aria-label="Previzualizare Telefon" title="Previzualizare Telefon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><rect x="6" y="2" width="12" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 5h4m-3 14h2" stroke="currentColor" stroke-width="1.8"/></svg></button>
+ <button type="button" id="preview-rotate" disabled aria-label="Rotește previzualizarea" title="Rotire previzualizare"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M4 8a9 9 0 0 1 15-3m0-3v4h-4m5 10a9 9 0 0 1-15 3m0 3v-4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+ <button type="button" data-preview-mode="auto" aria-pressed="true" title="Revino la dimensiunea ecranului">Automat</button>
+ <button type="button" id="preview-pan" aria-pressed="false" hidden>Deplasează cadrul</button>
+ <span id="preview-status" class="sr-only" role="status" aria-live="polite">Responsive automat</span>
+</nav>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script type="module" src="app.js"></script>
 </body>
