@@ -82,7 +82,7 @@ export function groupSearchResults(results){
 export function appendHighlightedSearchText(document,target,value,query){
  const text=String(value??''),needle=normalizeSearch(query);
  if(!needle){target.textContent=text;return;}
- const letters=[...text],folded=letters.map(ch=>normalizeSearch(ch));
+ const letters=[...text],folded=letters.map(ch=>ch.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase());
  const positions=[];let normalized='';
  for(let i=0;i<folded.length;i++)for(const unit of folded[i]){normalized+=unit;positions.push(i);}
  const start=normalized.indexOf(needle);
