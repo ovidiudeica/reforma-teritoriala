@@ -4,6 +4,7 @@ import {createAtlasExplorerShell} from './atlas-explorer-shell.mjs';
 import {createAtlasInfoPanel} from './atlas-info-panel.mjs';
 import {createAtlasAdvancedNavigation} from './atlas-advanced-navigation.mjs';
 import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
+import {fitRoMd,attachRoMdZoomControl} from './atlas-ro-md-fit.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
@@ -24,6 +25,7 @@ function setOsmBasemapVisible(value){
 }
 L.control.scale({imperial:false}).addTo(map);
 labelMapControls(document);
+attachRoMdZoomControl(document,L);
 const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window});
 
 const roots={RO:L.layerGroup().addTo(map),MD:L.layerGroup().addTo(map)};
@@ -403,6 +405,16 @@ function overviewRootIdFor(entity){
  while(cursor&&cursor.map?.tier!=='overview'&&depth++<32)cursor=entityById.get(cursor.hierarchy?.parent_catalog_id)||null;
  return cursor?.map?.tier==='overview'?cursor.id:null;
 }
+function checkedChunkRoots(jurisdiction,tier){
+ const roots=new Set();
+ for(const id of visibleEntityIds){
+  const entity=entityById.get(id);
+  if(entity?.jurisdiction!==jurisdiction||entity.map?.tier!==tier)continue; // Filters hide rendering, never unload a checked entity's chunk.
+  const root=overviewRootIdFor(entity);
+  if(root)roots.add(root);
+ }
+ return roots;
+}
 function chunkKey(entry){return entry.jurisdiction+'_'+entry.tier+'_'+entry.root_entity_id;}
 function chunkEntries(jurisdiction,tier){
  return (chunkIndex?.chunks||[]).filter(entry=>entry.jurisdiction===jurisdiction&&entry.tier===tier);
@@ -451,7 +463,9 @@ async function syncTiers(){
     if(roots[jurisdiction].hasLayer(legacyGroup))roots[jurisdiction].removeLayer(legacyGroup);
     const wanted=new Set();
     if(enabled&&tierWanted(tier,zoom)){
+     const checkedRoots=checkedChunkRoots(jurisdiction,tier);
      for(const entry of chunkEntries(jurisdiction,tier)){
+      if(!checkedRoots.has(entry.root_entity_id))continue;
       const root=entityById.get(entry.root_entity_id);
       if(!root||!bboxIntersectsViewport(root.map?.bbox))continue;
       const key=chunkKey(entry);
@@ -581,7 +595,8 @@ async function applyUrlState(state){
  replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
  for(const j of ['RO','MD']){const enabled=state.jurisdictions.includes(j);document.getElementById('layer-'+j.toLowerCase()).checked=enabled;if(enabled)roots[j].addTo(map);else map.removeLayer(roots[j]);}
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
- map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
+ if(!state.viewportExplicit&&!state.entityId&&typeof map.getSize==='function')fitRoMd(map,entityById);
+  else map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
  if(state.entityId)await selectEntity(state.entityId,{source:'url',zoom:!state.viewportExplicit});else clearSelection();
  await syncTiers();updateSelectionVisibility();
 }
@@ -605,7 +620,7 @@ createAtlasInfoPanel({
  getReturnFocus:()=>document.getElementById(atlasMobile.state.mobile?'mobile-navigation':'info-toggle')
 });
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
-document.getElementById('map-home')?.addEventListener('click',()=>{map.setView([defaultViewport.lat,defaultViewport.lon],defaultViewport.z,{animate:false});atlasUrl?.commit('push');});
+document.getElementById('map-home')?.addEventListener('click',()=>{if(atlasUrl)void atlasUrl.action('push',()=>fitRoMd(map,entityById));else fitRoMd(map,entityById);});
 document.getElementById('explorer-collapse')?.addEventListener('click',()=>atlasExplorerShell.toggleCollapsed?.());
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
 document.getElementById('filters-toggle')?.addEventListener('click',()=>setFiltersPanelOpen(!filtersPanelOpen));
@@ -648,4 +663,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
+export {map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};

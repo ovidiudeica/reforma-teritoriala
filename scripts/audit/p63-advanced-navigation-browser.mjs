@@ -66,8 +66,8 @@ try{
   await t.test('map home centers RO/MD without mutating selection, checkboxes or raster',async()=>{
    const before=await page.evaluate(idsState);
    await page.click('#map-home');
-   const result=await page.evaluate("({viewport:qaApp.captureUrlState().viewport,selected:qaApp.selectedEntityId})");
-   assert.ok(Math.abs(result.viewport.lat-46.8)<0.1&&Math.abs(result.viewport.lon-26.6)<0.1);
+   const result=await page.evaluate("(()=>{const map=qaApp.map,bboxes=['osm-r58974','osm-r90689'].map(id=>qaApp.entityById.get(id).map.bbox),west=Math.min(...bboxes.map(b=>b[0])),east=Math.max(...bboxes.map(b=>b[2])),south=Math.min(...bboxes.map(b=>b[1])),north=Math.max(...bboxes.map(b=>b[3])),nw=map.latLngToContainerPoint([north,west]),se=map.latLngToContainerPoint([south,east]),size=map.getSize();return {nw:[nw.x,nw.y],se:[se.x,se.y],size:[size.x,size.y],selected:qaApp.selectedEntityId}})()");
+   assert.ok(result.nw[0]>=10&&result.nw[1]>=24&&result.se[0]<=result.size[0]-10&&result.se[1]<=result.size[1]-24,'RO+MD root geometry bbox fully visible '+JSON.stringify(result));
    assert.deepEqual(await page.evaluate(idsState),before);
   });
   await t.test('desktop sidebar collapse and restore retain map, controls and active state',async()=>{
