@@ -67,6 +67,14 @@ GeoJSON-urile publice păstrează coordonatele geometriei master **fără simpli
 
 Auditul per-ID P4.0, regresia geometrică P4.1 și verificările Chrome/CDP P4.2 au fost integrate fără schimbarea corpusurilor ACTUAL/P2. Hardening-ul P4.3 păstrează 5.848 identități, matricea de 170 stări, verificările SHA ale celor 115 chunk-uri și testarea vizuală în șapte viewporturi. Criteriile și dovezile de închidere sunt în [docs/p4-phase-release-closure.md](docs/p4-phase-release-closure.md).
 
+## Faza P6 — UX refinement
+
+Etapele P6.1–P6.4 și hotfixurile P6.4.1/P6.4.2 sunt integrate în `main` prin PR #275–#280. Interfața păstrează numai România și Moldova bifate inițial; panoul exploratorului oferă căutare, filtre și informații la cerere, navigare avansată și card responsive. Bara Leaflet include, în ordine, **zoom + / zoom − / încadrare RO+MD / comutator raster OSM**, cu iconuri accesibile. Fundalul raster rămâne independent de poligoanele ACTUAL.
+
+Pe commitul final P6.4.2 `bfef878859fffa54937ce2b398475b0fbac6f349`, auditul Chrome live a trecut **8/8** scenarii P6.4.2 în opt dimensiuni de ecran; **25/25** resurse frontend și **123/123** geometrii GeoJSON erau byte-identice cu Git; **8/8** workflow-uri post-merge au reușit, inclusiv reproducibilitatea A/B. Aceste rezultate nu echivalează cu testarea pe toate dispozitivele fizice sau certificare WCAG.
+
+Dovezile, istoricul PR-urilor și criteriile închiderii de fază se regăsesc în [docs/p6.5-phase-release-closure.md](docs/p6.5-phase-release-closure.md). P6.5 se închide numai după validarea și integrarea controlată a PR-ului exclusiv documentar.
+
 ## Source bundle și reproducibilitate
 
 `data/current/actual-source-bundle-manifest.json` fixează bytes exacți pentru snapshot-urile OSM RO/MD și sursele oficiale SIRUTA/CUATM. Candidate lifecycle include build offline, network-denial proof, toolchain/runtime pinning și dovadă de reproducibilitate CHANGE byte-for-byte.
