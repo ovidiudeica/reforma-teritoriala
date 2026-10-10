@@ -10,8 +10,9 @@ export function createAtlasMobileUi({document,media,panels,onClear}){
   details.classList.toggle('mobile-sheet-open',mobile&&sheet!=='closed');
   details.classList.toggle('mobile-sheet-half',mobile&&sheet==='half');
   details.classList.toggle('mobile-sheet-expanded',mobile&&sheet==='expanded');
-  details.inert=!selected||(mobile&&sheet==='closed');details.hidden=details.inert;
-  details.setAttribute('aria-hidden',String(details.hidden));
+  const unavailable=!selected||(mobile&&sheet==='closed');
+  details.hidden=unavailable;details.inert=unavailable||panels.state.drawer;
+  details.setAttribute('aria-hidden',String(details.inert));
   body.hidden=mobile&&(sheet==='closed'||sheet==='peek');
   expand.setAttribute('aria-expanded',String(mobile&&sheet!=='peek'&&sheet!=='closed'));expand.setAttribute('aria-controls',body.id);
   expand.textContent=sheet==='expanded'?'Restrânge':'Extinde';half.setAttribute('aria-pressed',String(mobile&&sheet==='half'));half.textContent=sheet==='half'?'Minimizează':'Jumătate';
@@ -53,6 +54,6 @@ export function createAtlasMobileUi({document,media,panels,onClear}){
  }
  expand.addEventListener('click',toggleSheet);half.addEventListener('click',toggleHalf);
  handle.addEventListener('pointerdown',onPointerDown);handle.addEventListener('pointerup',onPointerUp);handle.addEventListener('pointercancel',()=>{drag=null;});handle.addEventListener('keydown',handleKey);
- media.addEventListener?.('change',breakpoint);sync();
+ panels.onChange(sync);media.addEventListener?.('change',breakpoint);sync();
  return {openDrawer,closeDrawer,toggleSheet,toggleHalf,setSheet,selection,clear,get state(){return {mobile,drawer:panels.state.drawer,sheet,selected};}};
 }

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {Page} from './helpers/atlas-browser.mjs';
+import {Page,browserExecutable} from './helpers/atlas-browser.mjs';
 
 test('panel keys reject selector/code payloads before any CDP command',async()=>{
  const page=Object.create(Page.prototype);
@@ -40,4 +40,21 @@ test('real Chrome treats hostile JavaScript text as data',async()=>{
   await assert.rejects(page.click(payload),/SyntaxError|valid selector/);
   assert.equal(await page.evaluate('globalThis.injected===undefined'),true);
  }finally{await browser.close();}
+});
+
+test('browser configuration cannot select an arbitrary executable or shell payload',()=>{
+ const previous=process.env.BROWSER_EXECUTABLE;
+ try{
+  delete process.env.BROWSER_EXECUTABLE;
+  const installed=browserExecutable();
+  process.env.BROWSER_EXECUTABLE=installed;assert.equal(browserExecutable(),installed);
+  if(process.platform==='win32'){
+   process.env.BROWSER_EXECUTABLE=installed.replaceAll('/','\\').toUpperCase();
+   assert.equal(browserExecutable(),installed);
+  }
+  for(const payload of [process.execPath,'/tmp/untrusted-chrome','chrome; echo injected','cmd.exe','/usr/bin/google-chrome --flag','"/usr/bin/google-chrome"']){
+   process.env.BROWSER_EXECUTABLE=payload;
+   assert.throws(()=>browserExecutable(),/Unsupported browser executable/);
+  }
+ }finally{if(previous===undefined)delete process.env.BROWSER_EXECUTABLE;else process.env.BROWSER_EXECUTABLE=previous;}
 });

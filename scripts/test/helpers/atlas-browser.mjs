@@ -8,8 +8,17 @@ import path from 'node:path';
 export const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 export async function waitFor(check,label,timeout=60000){const until=Date.now()+timeout;let last;while(Date.now()<until){try{last=await check();if(last)return last;}catch(error){last=error.message;}await delay(100);}throw Error('Timeout: '+label+'; last='+JSON.stringify(last));}
 export function browserExecutable(){
- const candidates=[process.env.BROWSER_EXECUTABLE,...(process.platform==='win32'?['C:/Program Files/Google/Chrome/Application/chrome.exe','C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe']:['/usr/bin/google-chrome','/usr/bin/chromium','/usr/bin/chromium-browser'])].filter(Boolean);
- const found=candidates.find(existsSync);if(!found)throw Error('No installed Chromium browser; set BROWSER_EXECUTABLE. No automatic downloads.');return found;
+ // Environment configuration selects a trusted literal; it never becomes the executable.
+ const candidates=process.platform==='win32'
+  ? ['C:/Program Files/Google/Chrome/Application/chrome.exe','C:/Program Files (x86)/Google/Chrome/Application/chrome.exe','C:/Program Files/Microsoft/Edge/Application/msedge.exe','C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe']
+  : ['/usr/bin/google-chrome','/usr/bin/chromium','/usr/bin/chromium-browser'];
+ const configured=process.env.BROWSER_EXECUTABLE;
+ const normalize=value=>process.platform==='win32'?path.normalize(value).toLowerCase():path.normalize(value);
+ const selected=configured?candidates.find(candidate=>normalize(candidate)===normalize(configured)):null;
+ if(configured&&!selected)throw Error('Unsupported browser executable: use an installed browser from the reviewed allowlist.');
+ const found=candidates.find(candidate=>(!configured||candidate===selected)&&existsSync(candidate));
+ if(!found)throw Error('No installed Chromium browser at an allowed location. No automatic downloads.');
+ return found;
 }
 export async function staticServer(root){
  const mime={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.geojson':'application/geo+json','.png':'image/png','.svg':'image/svg+xml'};
