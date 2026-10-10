@@ -608,7 +608,7 @@ createAtlasInfoPanel({
  getReturnFocus:()=>document.getElementById(atlasMobile.state.mobile?'mobile-navigation':'info-toggle')
 });
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
-document.getElementById('map-home')?.addEventListener('click',()=>{fitRoMd(map,entityById);atlasUrl?.commit('push');});
+document.getElementById('map-home')?.addEventListener('click',()=>{if(atlasUrl)void atlasUrl.action('push',()=>fitRoMd(map,entityById));else fitRoMd(map,entityById);});
 document.getElementById('explorer-collapse')?.addEventListener('click',()=>atlasExplorerShell.toggleCollapsed?.());
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
 document.getElementById('filters-toggle')?.addEventListener('click',()=>setFiltersPanelOpen(!filtersPanelOpen));
