@@ -53,6 +53,7 @@ try{
   });
   await t.test('accessible labels, contrast, focus and ARIA for advanced desktop/modal navigation',async()=>{
    await page.viewport(1440,900);
+   await page.navigate(browser.server.url+'/');
    await page.evaluate("document.getElementById('map').focus()");
    const ax=await page.send('Accessibility.getFullAXTree');
    const names=new Set(ax.nodes.filter(n=>!n.ignored).map(n=>n.name?.value).filter(Boolean));
