@@ -69,9 +69,9 @@ Auditul per-ID P4.0, regresia geometrică P4.1 și verificările Chrome/CDP P4.2
 
 ## Faza P6 — UX refinement
 
-Etapele P6.1–P6.4 și hotfixurile P6.4.1/P6.4.2 sunt integrate în `main` prin PR #275–#280. Interfața păstrează numai România și Moldova bifate inițial; panoul exploratorului oferă căutare, filtre și informații la cerere, navigare avansată și card responsive. Bara Leaflet include, în ordine, **zoom + / zoom − / încadrare RO+MD / comutator raster OSM**, cu iconuri accesibile. Fundalul raster rămâne independent de poligoanele ACTUAL.
+Etapele P6.1–P6.4 și hotfixurile P6.4.1–P6.4.3 sunt integrate în `main` prin PR #275–#280 și #282. Interfața păstrează numai România și Moldova bifate inițial; panoul exploratorului oferă căutare, filtre și informații la cerere, navigare avansată și card responsive. Bara Leaflet include, în ordine, **zoom + / zoom − / încadrare RO+MD / comutator raster OSM**, cu iconuri accesibile. Fundalul raster rămâne independent de poligoanele ACTUAL.
 
-Pe commitul final P6.4.2 `bfef878859fffa54937ce2b398475b0fbac6f349`, auditul Chrome live a trecut **8/8** scenarii P6.4.2 în opt dimensiuni de ecran; **25/25** resurse frontend și **123/123** geometrii GeoJSON erau byte-identice cu Git; **8/8** workflow-uri post-merge au reușit, inclusiv reproducibilitatea A/B. Aceste rezultate nu echivalează cu testarea pe toate dispozitivele fizice sau certificare WCAG.
+Pe commitul final P6.4.2 `bfef878859fffa54937ce2b398475b0fbac6f349`, auditul Chrome live a trecut **8/8** scenarii P6.4.2 în opt dimensiuni de ecran; **25/25** resurse frontend și **123/123** geometrii GeoJSON erau byte-identice cu Git; **8/8** workflow-uri post-merge au reușit, inclusiv reproducibilitatea A/B. Aceste rezultate nu echivalează cu testarea pe toate dispozitivele fizice sau certificare WCAG. Hotfixul **P6.4.3** (PR #282, `1affdd135b773b2c7b4fc533ee1cc0373e07f25d`) elimină suprapunerea scalei pe mobil și a butonului de colapsare a exploratorului peste zoom pe desktop; testul CDP verifică explicit țintele tuturor celor patru controale.
 
 Dovezile, istoricul PR-urilor și criteriile închiderii de fază se regăsesc în [docs/p6.5-phase-release-closure.md](docs/p6.5-phase-release-closure.md). P6.5 se închide numai după validarea și integrarea controlată a PR-ului exclusiv documentar.
 
