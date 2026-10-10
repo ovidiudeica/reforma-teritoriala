@@ -41,9 +41,14 @@ Căutare grupată și evidențierea potrivirilor, panou cu geometrii vizibile, i
 
 Profilare cold/warm în Chrome cu rețea lentă și hardware mobil; streaming/cache/render fără alterarea coordonatelor geometrice; verificări accesibilitate prin tastatură și testare manuală pe dispozitive fizice. Comparație byte-for-byte a corpusurilor și release assets, checks CodeQL/ACTUAL/P2/browser și A/B post-merge pentru fiecare PR integrat.
 
-## Status
+## Status — actualizat la 2026-10-10
 
-- P6.1: **închis/PASS**, PR #275.
-- P6.2: **închis/PASS**, PR #276.
-- P6.3: **închis/PASS**, PR #277 integrat în `main` la `8be982c325028562eeeba6c6f760a5feea864b9b`, toate workflow-urile post-merge SUCCESS, Chrome live 29/29, frontend 21/21 byte-identic și geometrii 123/123 byte-identice.
-- P6.4: **implementare și validare în curs** pe `web/p6.4-final-performance-accessibility-acceptance`, PR #278 draft. Auditul local Chrome P6.4 este 8/8 PASS. Datele măsurate, schimbările de accesibilitate, limitele metodologice și criteriile finale sunt în `docs/p6.4-final-acceptance.md`. Nu se declară închis până la gate-urile obligatorii, integrarea controlată, Pages live și verificarea fizică distinctă unde este disponibilă.
+- **P6.1 — CLOSED/PASS**, PR #275, merge `4f09593c19567269728004bfad727e581670a2af`.
+- **P6.2 — CLOSED/PASS**, PR #276, merge `5ede06b75645577d25a1d860e3850f82e833264e`.
+- **P6.3 — CLOSED/PASS**, PR #277, merge `8be982c325028562eeeba6c6f760a5feea864b9b`.
+- **P6.4 — CLOSED/PASS**, PR #278, merge `325e95966bc618ceaaca37d4d65133b7e14da66a`. Browser QA, gates și audit post-merge documentate.
+- **P6.4.1 — CLOSED/PASS**, PR #279, merge `4177b09c195e792677ef0f757168ba7ca21b834e`. `fitBounds` RO+MD pe 8 viewporturi; Chrome live 31/31, frontend 24/24 și geometrii 123/123 byte-identice.
+- **P6.4.2 — CLOSED/PASS**, PR #280, merge `bfef878859fffa54937ce2b398475b0fbac6f349`. Patru iconuri în Leaflet, Chrome live 8/8, frontend 25/25, geometrii 123/123, 8/8 workflow-uri post-merge, A/B `mismatches: []`.
+- **P6.5 — release closure evidence-only:** [documentul de acceptare](p6.5-phase-release-closure.md); PR separat pentru închiderea fazei P6. Verdictul final depinde de required checks și auditul post-merge pe SHA exact.
+
+Acceptarea pe dispozitive fizice Android/iOS și cu tehnologii asistive rămâne distinctă de verificarea tehnică Chrome/CDP.
