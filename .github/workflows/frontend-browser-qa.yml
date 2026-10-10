@@ -59,8 +59,6 @@ jobs:
       - name: P6.3 explicit layers, recent history, comparison, search highlights and panel collapse in Chrome
         run: node --test scripts/audit/p63-advanced-navigation-browser.mjs
       - name: P6.4 final responsive accessibility, cold/warm profile and acceptance gate
-        env:
-          ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
         run: node --test scripts/audit/p64-final-performance-accessibility.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
@@ -76,5 +74,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: atlas-browser-evidence
-          path: ${{ runner.temp }}/atlas-browser-evidence
+          path: | 
+            ${{ runner.temp }}/atlas-browser-evidence
+            /tmp/atlas-browser-evidence/p64-*
           retention-days: 14
