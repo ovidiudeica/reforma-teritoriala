@@ -25,11 +25,6 @@
 @media(max-width:899px) and (orientation:landscape) and (max-height:540px){
  #atlas-main #details-panel{left:65px}
 }
-/* Desktop navigation must paint above Leaflet vector SVG after zoom/pan.
-   Mobile drawer retains its existing 1400/backdrop stacking contract. */
-@media(min-width:900px){
- #atlas-main #atlas-controls{position:relative;z-index:1500}
-}
 @media(forced-colors:active){
  #atlas-main .leaflet-control-zoom > #map-home{color:ButtonText;background:ButtonFace;border-top:1px solid ButtonText}
  #atlas-main .leaflet-control-zoom > #map-home:focus-visible{outline:3px solid Highlight}
