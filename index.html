@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="atlas-explorer-shell.css">
 <link rel="stylesheet" href="atlas-p5.3.css">
 <link rel="stylesheet" href="atlas-p6.1.css">
+<link rel="stylesheet" href="atlas-p6.2.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -22,7 +23,11 @@
   </nav>
 </header>
 <main id="atlas-main" aria-label="Atlas teritorial">
-<button id="mobile-navigation" class="mobile-control mobile-navigation" type="button" aria-expanded="false" aria-controls="atlas-controls" hidden>☰ Navigare</button>
+<nav id="atlas-mobile-toolbar" class="atlas-mobile-toolbar" aria-label="Acțiuni rapide de navigare" hidden>
+  <button id="mobile-navigation" class="mobile-control mobile-navigation" type="button" aria-expanded="false" aria-controls="atlas-controls" hidden>☰ Entități</button>
+  <button id="mobile-search" class="mobile-control" type="button" aria-controls="atlas-controls" hidden>Căutare</button>
+  <button id="mobile-filters" class="mobile-control" type="button" aria-controls="filters-panel" hidden>Filtre</button>
+</nav>
 <button id="drawer-backdrop" class="drawer-backdrop" type="button" aria-label="Închide navigarea" tabindex="-1" hidden></button>
 <aside id="atlas-controls" class="controls" aria-label="Entități, căutare și filtre">
   <button id="drawer-close" class="mobile-control drawer-close" type="button" hidden>Închide navigarea</button>
@@ -100,8 +105,10 @@
 <button id="basemap-toggle" class="atlas-basemap-toggle" type="button" aria-pressed="true" aria-label="Fundal OpenStreetMap activ. Dezactivează fundalul">Fundal OSM: activ</button>
 
 <aside id="details-panel" class="details" hidden aria-labelledby="details-title">
+  <div id="sheet-drag" class="atlas-sheet-drag" role="slider" tabindex="0" aria-label="Înălțimea cardului de detalii" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Minimizat" hidden><span aria-hidden="true"></span></div>
   <div class="details-head">
     <div><span class="eyebrow">Entitate selectată</span><h2 id="details-title" aria-live="polite" aria-atomic="true">Nicio selecție</h2></div>
+    <button id="sheet-half" class="mobile-control" type="button" aria-pressed="false" aria-controls="details-body" hidden>Jumătate</button>
     <button id="sheet-expand" class="mobile-control" type="button" aria-expanded="false" aria-controls="details-body" hidden>Extinde</button>
     <button id="details-close" class="icon-button" type="button" title="Închide detaliile" aria-label="Șterge selecția">×</button>
   </div>
