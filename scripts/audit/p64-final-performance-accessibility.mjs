@@ -57,9 +57,9 @@ try{
    await page.evaluate("document.getElementById('map').focus()");
    const ax=await page.send('Accessibility.getFullAXTree');
    const names=new Set(ax.nodes.filter(n=>!n.ignored).map(n=>n.name?.value).filter(Boolean));
-   for(const label of ['Hartă teritorial România și Republica Moldova','Navigare entități și rezultate','Entități','Rezultate']){
-    assert.ok(names.has(label),'missing accessibility node '+label);
-   }
+   for(const label of ['Entități','Rezultate'])assert.ok(names.has(label),'missing accessibility node '+label);
+   const landmarks=await page.evaluate("(()=>{const map=document.getElementById('map'),tabs=document.querySelector('.atlas-navigation-tabs');return {mapRole:map.getAttribute('role'),mapName:map.getAttribute('aria-label'),mapHelp:map.getAttribute('aria-describedby'),mapFocus:map.tabIndex,tabRole:tabs.getAttribute('role'),tabName:tabs.getAttribute('aria-label')}})()");
+   assert.deepEqual(landmarks,{mapRole:'region',mapName:'Hartă teritorial România și Republica Moldova',mapHelp:'map-help',mapFocus:0,tabRole:'tablist',tabName:'Navigare entități și rezultate'});
    const focus=await page.evaluate("(()=>{let e=document.querySelector('#advanced-visible');e.focus();return document.activeElement===e&&e.getAttribute('aria-haspopup')==='dialog'})()");
    assert.equal(focus,true);
    await page.click('#advanced-visible');
