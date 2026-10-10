@@ -7,7 +7,7 @@ import path from 'node:path';
 import {launchBrowser,waitFor} from '../test/helpers/atlas-browser.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const output=process.env.ATLAS_QA_OUTPUT||path.join(tmpdir(),'atlas-browser-evidence');
+const output=path.join(tmpdir(),'atlas-browser-evidence');
 const browser=await launchBrowser(root),page=await browser.page();
 const evidence={baseline:'P6.3',browser:browser.version?.Browser||'Chromium',profiles:[],checks:[]};
 const provenance=()=>page.evaluate("({entities:qaApp.entityById.size,checked:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,basemap:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),classes:[...qaApp.activeGeometryClasses].sort(),subtypes:[...qaApp.activeGeometrySubtypes].sort()})");
