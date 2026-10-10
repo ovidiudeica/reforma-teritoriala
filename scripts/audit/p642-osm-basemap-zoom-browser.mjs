@@ -8,10 +8,17 @@ const browser=await launchBrowser(root),page=await browser.page();
 const state=()=>page.evaluate(`(()=>{
  const map=qaApp.map,zoom=document.querySelector('.leaflet-control-zoom'),button=document.querySelector('#basemap-toggle');
  const r=button.getBoundingClientRect(),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+ const scale=document.querySelector('.leaflet-control-scale')?.getBoundingClientRect();
+ const zoomRect=zoom.getBoundingClientRect();
+ const scaleOverlapsZoom=!!scale&&scale.left<zoomRect.right&&scale.right>zoomRect.left&&scale.top<zoomRect.bottom&&scale.bottom>zoomRect.top;
+ const controlsClear=[...zoom.children].every(control=>{
+  const box=control.getBoundingClientRect(),at=document.elementFromPoint(box.left+box.width/2,box.top+box.height/2);
+  return at===control||control.contains(at);
+ });
  const raster=Object.values(map._layers).filter(l=>typeof l._url==='string'&&l._url.includes('tile.openstreetmap.org')).length;
  const visible=[...qaApp.visibleEntityIds].sort(),selected=qaApp.selectedEntityId;
  return {order:[...zoom.children].map(e=>e.id||e.className),parent:button.parentElement===zoom,
-  width:r.width,height:r.height,hit:hit===button||button.contains(hit),svg:!!button.querySelector('svg'),
+  width:r.width,height:r.height,hit:hit===button||button.contains(hit),controlsClear,scaleOverlapsZoom,svg:!!button.querySelector('svg'),
   svgHidden:button.querySelector('svg')?.getAttribute('aria-hidden'),slash:getComputedStyle(button.querySelector('.atlas-osm-off-mark')).display,
   pressed:button.getAttribute('aria-pressed'),label:button.getAttribute('aria-label'),title:button.title,
   raster,visible,selected,zoom:map.getZoom(),center:[map.getCenter().lat,map.getCenter().lng],
@@ -19,7 +26,7 @@ const state=()=>page.evaluate(`(()=>{
 })()`);
 const ready=()=>waitFor(()=>page.evaluate('qaApp.entityById.size===5848 && !!document.querySelector(".leaflet-control-zoom #basemap-toggle")'),'P642 app');
 const order=['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home','basemap-toggle'];
-const assertControl=(s,where)=>{assert.deepEqual(s.order,order,where);assert.ok(s.parent&&s.svg&&s.svgHidden==='true',where+' SVG+parent');assert.ok(s.width>=44&&s.height>=44,where+' touch area');assert.ok(s.hit,where+' not obscured');assert.equal(s.scroll,false,where+' overflow');};
+const assertControl=(s,where)=>{assert.deepEqual(s.order,order,where);assert.ok(s.parent&&s.svg&&s.svgHidden==='true',where+' SVG+parent');assert.ok(s.width>=44&&s.height>=44,where+' touch area');assert.ok(s.hit&&s.controlsClear,where+' control covered');assert.equal(s.scaleOverlapsZoom,false,where+' Leaflet scale intersects zoom/home/OSM group');assert.equal(s.scroll,false,where+' overflow');};
 try{
  await test('P6.4.2 OSM icon integrated below zoom/home and raster independent',{timeout:240000},async t=>{
   await page.viewport(1440,900);await page.navigate(browser.server.url+'/');await ready();
