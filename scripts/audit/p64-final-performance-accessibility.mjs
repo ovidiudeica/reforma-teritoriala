@@ -45,7 +45,7 @@ try{
    for(const [w,h] of [[1024,768],[900,768],[899,768],[768,1024],[844,390],[390,844],[360,640]]){
     const p=await profile('responsive-'+w+'x'+h,w,h);
     assert.ok(p.mapWidth>=w*.3);
-    if(w<900){const ux=await page.evaluate("(()=>{const dock=document.getElementById('atlas-mobile-toolbar'),buttons=['mobile-navigation','mobile-search','mobile-filters'];return {dockVisible:!dock.hidden,targets:buttons.map(id=>{const el=document.getElementById(id),r=el.getBoundingClientRect();return {width:r.width,height:r.height,name:el.textContent.trim()}})}})()");
+    if(w<900){const ux=await page.evaluate("(()=>{const dock=document.getElementById('atlas-navigation-rail'),buttons=['mobile-navigation','mobile-search','filters-toggle'];return {dockVisible:!dock.hidden,targets:buttons.map(id=>{const el=document.getElementById(id),r=el.getBoundingClientRect();return {width:r.width,height:r.height,name:el.textContent.trim()}})}})()");
      assert.equal(ux.dockVisible,true);assert.ok(ux.targets.every(x=>x.width>=44&&x.height>=44&&x.name));
     }
    }
@@ -57,23 +57,23 @@ try{
    await page.evaluate("document.getElementById('map').focus()");
    const ax=await page.send('Accessibility.getFullAXTree');
    const names=new Set(ax.nodes.filter(n=>!n.ignored).map(n=>n.name?.value).filter(Boolean));
-   for(const label of ['Hartă teritorială România și Republica Moldova','Entități','Rezultate'])assert.ok(names.has(label),'missing accessibility node '+label);
-   const landmarks=await page.evaluate("(()=>{const map=document.getElementById('map'),tabs=document.querySelector('.atlas-navigation-tabs');return {mapRole:map.getAttribute('role'),mapName:map.getAttribute('aria-label'),mapHelp:map.getAttribute('aria-describedby'),mapFocus:map.tabIndex,tabRole:tabs.getAttribute('role'),tabName:tabs.getAttribute('aria-label')}})()");
-   assert.deepEqual(landmarks,{mapRole:'region',mapName:'Hartă teritorială România și Republica Moldova',mapHelp:'map-help',mapFocus:0,tabRole:'tablist',tabName:'Navigare entități și rezultate'});
-   const focus=await page.evaluate("(()=>{let e=document.querySelector('#advanced-visible');e.focus();return document.activeElement===e&&e.getAttribute('aria-haspopup')==='dialog'})()");
+   for(const label of ['Hartă teritorială România și Republica Moldova','Entități','Căutare'])assert.ok(names.has(label),'missing accessibility node '+label);
+   const landmarks=await page.evaluate("(()=>{const map=document.getElementById('map'),tabs=document.querySelector('#atlas-navigation-rail');return {mapRole:map.getAttribute('role'),mapName:map.getAttribute('aria-label'),mapHelp:map.getAttribute('aria-describedby'),mapFocus:map.tabIndex,navTag:tabs.tagName,navName:tabs.getAttribute('aria-label')}})()");
+   assert.deepEqual(landmarks,{mapRole:'region',mapName:'Hartă teritorială România și Republica Moldova',mapHelp:'map-help',mapFocus:0,navTag:'NAV',navName:'Navigare atlas'});
+   const focus=await page.evaluate("(()=>{let e=document.querySelector('#advanced-visible');e.focus();return document.activeElement===e&&e.getAttribute('aria-controls')==='atlas-controls'})()");
    assert.equal(focus,true);
-   await page.click('#advanced-visible');
-   const modal=await page.evaluate("(()=>{let d=document.getElementById('atlas-advanced-dialog'),t=document.getElementById('advanced-tab-visible');return {open:d.open,focus:document.activeElement.id,role:t.getAttribute('role'),selected:t.getAttribute('aria-selected'),labelled:document.getElementById('atlas-advanced-content').getAttribute('aria-labelledby')}})()");
-   assert.deepEqual([modal.open,modal.focus,modal.role,modal.selected],[true,'advanced-close','tab','true']);
-   assert.equal(modal.labelled,'advanced-tab-visible');
+   await page.openPanel('visible');
+   const modal=await page.evaluate("(()=>{let d=document.getElementById('atlas-advanced-dialog'),t=document.getElementById('advanced-visible');return {open:!d.hidden,focus:document.activeElement.id,role:t.tagName,selected:t.getAttribute('aria-pressed'),labelled:document.getElementById('atlas-advanced-content').getAttribute('aria-labelledby')}})()");
+   assert.deepEqual([modal.open,modal.focus,modal.role,modal.selected],[true,'drawer-close','BUTTON','true']);
+   assert.equal(modal.labelled,'atlas-panel-title');
    await page.key('Escape');
    assert.equal(await page.evaluate('document.activeElement.id'),'advanced-visible');
   });
   await t.test('contrast and reduced-motion preferences leave visible keyboard focus',async()=>{
    await page.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'},{name:'forced-colors',value:'active'}]});
-   await page.click('#advanced-visible');
+   await page.openPanel('visible');
    await page.key('Tab');
-   const appearance=await page.evaluate("(()=>{const btn=document.activeElement;const css=getComputedStyle(btn);return {focused:!!btn.closest('#atlas-advanced-dialog'),outline:css.outlineStyle,outlineWidth:css.outlineWidth,visible:btn.matches(':focus-visible'),forced:matchMedia('(forced-colors: active)').matches,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches}})()");
+   const appearance=await page.evaluate("(()=>{const btn=document.activeElement;const css=getComputedStyle(btn);return {focused:!!btn.closest('#atlas-controls'),outline:css.outlineStyle,outlineWidth:css.outlineWidth,visible:btn.matches(':focus-visible'),forced:matchMedia('(forced-colors: active)').matches,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches}})()");
    assert.ok(appearance.focused&&appearance.visible&&appearance.forced&&appearance.reduced,JSON.stringify(appearance));
    assert.notEqual(appearance.outline,'none');
    await page.key('Escape');
@@ -81,13 +81,13 @@ try{
   });
   await t.test('keyboard layer hide/undo and independent background toggle conserve identity and URL state',async()=>{
    const before=await provenance();
-   await page.click('#advanced-visible');
+   await page.openPanel('visible');
    await page.click('#atlas-advanced-content .atlas-advanced-row-actions button:first-child');
    assert.equal(await page.evaluate('document.activeElement.id'),'advanced-undo-hide','focus moves to Undo when its originating row disappears');
    assert.equal((await provenance()).checked.length,1);
    await page.click('#atlas-advanced-content > button');
    assert.deepEqual(await provenance(),before);
-   await page.click('#advanced-close');
+   await page.click('#drawer-close');
    await page.click('#basemap-toggle');
    const changed=await provenance();assert.equal(changed.basemap,'false');assert.deepEqual(changed.checked,before.checked);
    await page.click('#basemap-toggle');assert.deepEqual(await provenance(),before);

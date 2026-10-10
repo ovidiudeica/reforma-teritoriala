@@ -7,14 +7,12 @@ const own=(doc,tag,cls='',label='')=>{const el=doc.createElement(tag);if(cls)el.
 const formattedNames=new Map();
  const title=e=>{if(!formattedNames.has(e.id))formattedNames.set(e.id,formatEntityName(e.display_name));return formattedNames.get(e.id);};
 export function createAtlasAdvancedNavigation({
- document,entities,getChecked,onCheck,onSelect,onZoomPair,onFocusReturn,onOpen=()=>{},storage,
+ document,panels,entities,getChecked,onCheck,onSelect,onZoomPair,storage,
 }){
- const dialog=document.getElementById('atlas-advanced-dialog'),content=document.getElementById('atlas-advanced-content');
- const closeButton=document.getElementById('advanced-close');
+ const content=document.getElementById('atlas-advanced-content');
  const buttons={visible:document.getElementById('advanced-visible'),recent:document.getElementById('advanced-recent'),compare:document.getElementById('advanced-compare')};
- const tabs={visible:document.getElementById('advanced-tab-visible'),recent:document.getElementById('advanced-tab-recent'),compare:document.getElementById('advanced-tab-compare')};
  const byId=new Map(entities.map(e=>[e.id,e]));
- let current='visible',recent=[],pair=[],offset=limit,returnTo=buttons.visible,lastHidden=null;
+ let current='visible',recent=[],pair=[],offset=limit,lastHidden=null;
  const safeStorage=()=>{try{return storage?.getItem?.(historyKey);}catch{return null;}};
  try{const saved=JSON.parse(safeStorage()||'[]');if(Array.isArray(saved))recent=[...new Set(saved)].filter(id=>typeof id==='string'&&byId.has(id)).slice(0,12);}catch{ /* private mode: session only */ }
  function persist(){try{storage?.setItem?.(historyKey,JSON.stringify(recent));}catch{ /* optional */ }}
@@ -22,7 +20,12 @@ export function createAtlasAdvancedNavigation({
  function groupLabel(entity){return entity.jurisdiction==='RO'?'România':'Moldova';}
  const append=(target,tag,cls,value)=>{const node=own(document,tag,cls,value);target.appendChild(node);return node;};
  const action=(target,text,handler,cls='action-button')=>{const b=append(target,'button',cls,text);b.type='button';b.addEventListener('click',handler);return b;};
- function updateCounters(){buttons.visible.textContent='Straturi ('+getChecked().size+')';buttons.recent.textContent='Recente'+(recent.length?' ('+recent.length+')':'');buttons.compare.textContent='Compară'+(pair.length?' ('+pair.length+'/2)':'');}
+ function updateCounters(){
+ for(const [key,label]of Object.entries({visible:'Straturi ('+getChecked().size+')',recent:'Recente'+(recent.length?' ('+recent.length+')':''),compare:'Compară'+(pair.length?' ('+pair.length+'/2)':'')})){
+  const button=buttons[key],span=button.querySelector?.('.rail-label');if(span)span.textContent=label;else button.textContent=label;
+  button.setAttribute('aria-label',label);button.setAttribute('title',label);
+ }
+}
  function select(id){close();Promise.resolve(onSelect(id)).catch(error=>console.error('Navigare avansată: selectare',error));}
  function checkedAction(target,id){const checked=getChecked().has(id);action(target,checked?'Ascunde':'Afișează',()=>{
   const next=!getChecked().has(id);lastHidden=next?null:id;
@@ -33,7 +36,7 @@ export function createAtlasAdvancedNavigation({
   if(paired)pair=pair.filter(x=>x!==id);
   else if(pair.length<2)pair.push(id);
   else pair=[pair[1],id];
-  current='compare';render();
+  panels.open('compare',{focus:false});
  },'action-button atlas-advanced-compact');}
  function entityRow(target,id,kind){const entity=byId.get(id);if(!entity)return;
   const row=append(target,'li','atlas-advanced-row');
@@ -69,21 +72,14 @@ export function createAtlasAdvancedNavigation({
   if(pair.length===2){action(content,'Centrează pe ambele',()=>onZoomPair(pair.map(id=>byId.get(id))),'action-button').disabled=pair.some(id=>!Array.isArray(byId.get(id)?.map?.bbox));}
   if(pair.length)action(content,'Golește comparația',()=>{pair=[];render();});
  }
- function render(){updateCounters();for(const [key,tab] of Object.entries(tabs)){const active=key===current;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}content.setAttribute('aria-labelledby',tabs[current].id);content.replaceChildren?.();if(current==='visible')renderVisible();else if(current==='recent')renderRecent();else renderCompare();}
- function open(which='visible',origin=buttons[which]){onOpen();current=which;returnTo=origin||buttons.visible;offset=limit;render();if(!dialog.open)dialog.showModal();closeButton.focus();}
- function close(){if(dialog.open)dialog.close();}
- function restoreFocus(){const el=onFocusReturn?.(returnTo)||returnTo;el?.focus?.();}
- for(const [key,button] of Object.entries(buttons))button.addEventListener('click',()=>open(key,button));
- for(const [key,tab] of Object.entries(tabs)){tab.addEventListener('click',()=>{current=key;render();tab.focus();});tab.addEventListener('keydown',event=>{
-  if(event.key!=='ArrowRight'&&event.key!=='ArrowLeft')return;event.preventDefault();const keys=Object.keys(tabs);current=keys[(keys.indexOf(key)+(event.key==='ArrowRight'?1:keys.length-1))%keys.length];render();tabs[current].focus();
- });}
- closeButton.addEventListener('click',close);
- dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
- dialog.addEventListener('close',restoreFocus);
- dialog.addEventListener('click',event=>{if(event.target!==dialog)return;const b=dialog.getBoundingClientRect();if(event.clientX<b.left||event.clientX>b.right||event.clientY<b.top||event.clientY>b.bottom)close();});
- function record(id){if(!byId.has(id))return;recent=[id,...recent.filter(value=>value!==id)].slice(0,12);persist();updateCounters();if(dialog.open)render();}
+ function render(){updateCounters();content.setAttribute('aria-labelledby','atlas-panel-title');content.replaceChildren?.();if(current==='visible')renderVisible();else if(current==='recent')renderRecent();else renderCompare();}
+ function isOpen(){return ['visible','recent','compare'].includes(panels.state.active);}
+ function open(which='visible',origin=buttons[which]){panels.open(which,{source:origin});}
+ function close(){if(isOpen())panels.close();}
+ panels.onChange(({active})=>{if(['visible','recent','compare'].includes(active)){current=active;offset=limit;render();}});
+ function record(id){if(!byId.has(id))return;recent=[id,...recent.filter(value=>value!==id)].slice(0,12);persist();updateCounters();if(isOpen())render();}
  function addCompare(id){if(!byId.has(id))return;if(!pair.includes(id))pair=pair.length<2?[...pair,id]:[pair[1],id];open('compare',buttons.compare);}
- function refresh(){updateCounters();if(dialog.open)render();}
+ function refresh(){updateCounters();if(isOpen())render();}
  updateCounters();
- return {open,close,record,refresh,addCompare,get state(){return {recent:[...recent],pair:[...pair],current,open:dialog.open};}};
+ return {open,close,record,refresh,addCompare,get state(){return {recent:[...recent],pair:[...pair],current,open:isOpen()};}};
 }

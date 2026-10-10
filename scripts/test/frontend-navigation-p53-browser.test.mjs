@@ -12,7 +12,7 @@ try{
   await page.navigate(browser.server.url);
   await waitFor(()=>page.evaluate("qaApp.entityById.size===5848&&document.querySelectorAll('.tree-select').length>0"),'ACTUAL ready');
   await t.test('initial P5.2 geometry and P5.3 controls remain independent',async()=>{
-   const s=await page.evaluate("({roots:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,filters:document.querySelector('#filters-panel').hidden,tab:document.querySelector('#tab-entities').getAttribute('aria-selected'),basemap:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),tiles:document.querySelectorAll('.leaflet-tile-pane img').length})");
+   const s=await page.evaluate("({roots:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,filters:document.querySelector('#filters-panel').hidden,tab:document.querySelector('#mobile-navigation').getAttribute('aria-pressed'),basemap:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),tiles:document.querySelectorAll('.leaflet-tile-pane img').length})");
    assert.deepEqual(s.roots,['osm-r58974','osm-r90689'].sort());assert.equal(s.selected,null);assert.equal(s.filters,true);assert.equal(s.tab,'true');assert.equal(s.basemap,'true');
   });
   await t.test('basemap toggles independently and History restores without checkbox changes',async()=>{
@@ -37,19 +37,19 @@ try{
    assert.equal(await page.evaluate("document.querySelector('#layer-md').checked"),false);
    assert.deepEqual(await page.evaluate("[...qaApp.visibleEntityIds].sort()"),['osm-r58974','osm-r90689'].sort());
    await page.click('#layer-md');
-   await page.click('#filters-close');
+   await page.click('#drawer-close');
    assert.equal(await page.evaluate("document.querySelector('#filters-panel').hidden"),true);
    assert.equal(await page.evaluate("document.activeElement.id"),'filters-toggle');
   });
   await t.test('search results tab and official selection preserve geometry and no duplicate IDs',async()=>{
    await page.query('Cluj');
-   assert.equal(await page.evaluate("document.querySelector('#tab-results').getAttribute('aria-selected')"),'true');
+   assert.equal(await page.evaluate("document.querySelector('#mobile-search').getAttribute('aria-pressed')"),'true');
    assert.equal(await page.evaluate("document.querySelector('#results-panel').hidden"),false);
    const ids=await page.evaluate("[...document.querySelectorAll('#search-results [role=option]')].map(e=>e.dataset.entityId)");
    assert.ok(ids.length>0);assert.equal(new Set(ids).size,ids.length);
    await page.key('ArrowDown');await page.key('Enter');
    await waitFor(()=>page.evaluate("qaApp.selectedEntityId!==null"),'search select');
-   assert.equal(await page.evaluate("document.querySelector('#tab-entities').getAttribute('aria-selected')"),'true');
+   assert.equal(await page.evaluate("document.querySelector('#mobile-navigation').getAttribute('aria-pressed')"),'true');
    assert.equal(await page.evaluate("document.querySelector('#results-panel').hidden"),true);
   });
   await t.test('seven viewports preserve map and controls; no runtime errors',async()=>{
@@ -69,9 +69,8 @@ try{
    assert.equal(await page.evaluate("qaApp.atlasMobile.state.drawer"),true);
    await page.key('Escape');
    assert.equal(await page.evaluate("document.querySelector('#filters-panel').hidden"),true);
-   assert.equal(await page.evaluate("qaApp.atlasMobile.state.drawer"),true);
-   await page.click('#drawer-close');
    assert.equal(await page.evaluate("qaApp.atlasMobile.state.drawer"),false);
+   assert.equal(await page.evaluate('document.activeElement.id'),'filters-toggle');
   });
  });
 }finally{await browser.close();}

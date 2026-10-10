@@ -35,12 +35,12 @@ try{
   await t.test('search tab and filters retain exact entities',async()=>{
    await page.click('#filters-toggle');
    assert.equal(await page.evaluate("document.querySelector('#filters-panel').hidden"),false);
-   await page.click('#filters-close');
+   await page.click('#drawer-close');
    await page.query('Cluj');
-   assert.equal(await page.evaluate("document.querySelector('#tab-results').getAttribute('aria-selected')"),'true');
+   assert.equal(await page.evaluate("document.querySelector('#mobile-search').getAttribute('aria-pressed')"),'true');
    await page.selectQuery('osm-r91733');
    assert.equal(await page.evaluate("qaApp.selectedEntityId"),'osm-r91733');
-   assert.equal(await page.evaluate("document.querySelector('#tab-entities').getAttribute('aria-selected')"),'true');
+   assert.equal(await page.evaluate("document.querySelector('#mobile-navigation').getAttribute('aria-pressed')"),'true');
    assert.equal(await page.evaluate("document.querySelector('.tree-visibility-toggle[data-entity-id=\"osm-r91733\"]').checked"),false);
   });
   await t.test('seven real deployed viewports, UI and console errors',async()=>{

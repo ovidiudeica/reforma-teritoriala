@@ -27,7 +27,7 @@ test('layout changes notify map preservation before responsive consumers and exp
  viewport.clientWidth=390;viewport.clientHeight=844;resize();
  assert.deepEqual(events,['map','responsive-true']);assert.equal(layout.media.matches,true);
  const copy=layout.size;copy.width=0;assert.equal(layout.size.width,390);
- assert.equal(props.get('--atlas-modal-width'),'390px');layout.setSize(null);
+ assert.deepEqual(layout.size,{width:390,height:844});layout.setSize(null);
  assert.equal(viewport.style.width,'');assert.equal(viewport.style.height,'');assert.equal(stage.scrollLeft,0);assert.equal(stage.scrollTop,0);
  layout.destroy();assert.equal(disconnected,true);
 });

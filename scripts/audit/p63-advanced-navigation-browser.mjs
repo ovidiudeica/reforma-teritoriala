@@ -12,23 +12,23 @@ try{
   await waitFor(()=>page.evaluate('qaApp.entityById.size===5848 && qaApp.atlasAdvanced?.state'),'P6.3 controller');
   await t.test('checked layers lists only explicit ROOT defaults and close returns focus',async()=>{
    const before=await page.evaluate(idsState);
-   await page.click('#advanced-visible');
-   const state=await page.evaluate("({open:document.querySelector('#atlas-advanced-dialog').open,focus:document.activeElement.id,rows:[...document.querySelectorAll('#atlas-advanced-content .atlas-advanced-row')].map(el=>el.textContent)})");
-   assert.equal(state.open,true);assert.equal(state.focus,'advanced-close');assert.equal(state.rows.length,2);
+   await page.openPanel('visible');
+   const state=await page.evaluate("({open:!document.querySelector('#atlas-advanced-dialog').hidden,focus:document.activeElement.id,rows:[...document.querySelectorAll('#atlas-advanced-content .atlas-advanced-row')].map(el=>el.textContent)})");
+   assert.equal(state.open,true);assert.equal(state.focus,'drawer-close');assert.equal(state.rows.length,2);
    await page.key('Escape');
-   assert.equal(await page.evaluate("document.querySelector('#atlas-advanced-dialog').open"),false);
+   assert.equal(await page.evaluate("!document.querySelector('#atlas-advanced-dialog').hidden"),false);
    assert.equal(await page.evaluate('document.activeElement.id'),'advanced-visible');
    assert.deepEqual(await page.evaluate(idsState),before);
   });
   await t.test('visible layers checkbox acts only on one exact ID and does not change taxonomy',async()=>{
    const original=await page.evaluate(idsState);
-   await page.click('#advanced-visible');
+   await page.openPanel('visible');
    await page.click('#atlas-advanced-content .atlas-advanced-row-actions button:first-child');
    const changed=await page.evaluate(idsState);
    assert.equal(changed.ids.length,1);assert.deepEqual(changed.classes,original.classes);assert.deepEqual(changed.subtypes,original.subtypes);assert.equal(changed.raster,original.raster);
    await page.click('#atlas-advanced-content > button');
    assert.deepEqual(await page.evaluate(idsState),original);
-   await page.click('#advanced-close');
+   await page.click('#drawer-close');
   });
   await t.test('search highlights normalized query safely and retains jurisdiction grouping',async()=>{
    await page.evaluate("(()=>{let el=document.getElementById('entity-search');el.value='bucur';el.dispatchEvent(new Event('input',{bubbles:true}));})()");
@@ -41,11 +41,11 @@ try{
    const before=await page.evaluate(idsState);
    await page.evaluate('qaApp.selectEntity('+JSON.stringify(id)+",{source:'map',zoom:false})");
    await waitFor(()=>page.evaluate("qaApp.atlasAdvanced.state.recent.length>0"),'recent history');
-   await page.click('#advanced-recent');
+   await page.openPanel('recent');
    const recent=await page.evaluate("({recent:qaApp.atlasAdvanced.state.recent,items:document.querySelectorAll('#atlas-advanced-content .atlas-advanced-row').length})");
    assert.equal(recent.recent[0],id);assert.ok(recent.items>0);
    assert.deepEqual(await page.evaluate(idsState),before);
-   await page.click('#advanced-close');
+   await page.click('#drawer-close');
   });
   await t.test('comparison requires explicit additions; pair metadata and map fit never checks geometry',async()=>{
    const first=await page.evaluate('qaApp.selectedEntityId');
@@ -53,7 +53,7 @@ try{
    const before=await page.evaluate(idsState);
    await page.click('#compare-selected');
    assert.equal(await page.evaluate("qaApp.atlasAdvanced.state.pair.length"),1);
-   await page.click('#advanced-close');
+   await page.click('#drawer-close');
    await page.evaluate('qaApp.selectEntity('+JSON.stringify(second)+",{source:'map',zoom:false})");
    await page.click('#compare-selected');
    const pair=await page.evaluate("({ids:qaApp.atlasAdvanced.state.pair,cards:document.querySelectorAll('.atlas-comparison-card').length,canFit:!document.querySelector('#atlas-advanced-content > button')?.disabled})");
@@ -61,7 +61,7 @@ try{
    assert.deepEqual(await page.evaluate(idsState),before);
    await page.click('#atlas-advanced-content > button');
    assert.deepEqual(await page.evaluate(idsState),before);
-   await page.click('#advanced-close');
+   await page.click('#drawer-close');
   });
   await t.test('map home centers RO/MD without mutating selection, checkboxes or raster',async()=>{
    const before=await page.evaluate(idsState);
@@ -72,23 +72,24 @@ try{
   });
   await t.test('desktop sidebar collapse and restore retain map, controls and active state',async()=>{
    const before=await page.evaluate(idsState);
+   await page.openPanel('entities');
    const oldWidth=await page.evaluate("document.getElementById('map').getBoundingClientRect().width");
-   await page.click('#explorer-collapse');
-   const hidden=await page.evaluate("({collapsed:qaApp.atlasExplorerShell.collapsed,inert:document.querySelector('#atlas-controls').inert,pressed:document.querySelector('#explorer-collapse').getAttribute('aria-pressed'),width:document.getElementById('map').getBoundingClientRect().width})");
-   assert.ok(hidden.collapsed&&hidden.inert);assert.equal(hidden.pressed,'true');assert.ok(hidden.width>oldWidth);
-   await page.click('#explorer-collapse');
+   await page.openPanel('entities');await page.click('#mobile-navigation');
+   const hidden=await page.evaluate("({collapsed:qaApp.atlasExplorerShell.collapsed,inert:document.querySelector('#atlas-controls').inert,pressed:document.querySelector('#mobile-navigation').getAttribute('aria-pressed'),width:document.getElementById('map').getBoundingClientRect().width})");
+   assert.ok(hidden.collapsed&&hidden.inert);assert.equal(hidden.pressed,'false');assert.ok(hidden.width>oldWidth);
+   await page.click('#mobile-navigation');
    assert.equal(await page.evaluate('qaApp.atlasExplorerShell.collapsed'),false);
    assert.deepEqual(await page.evaluate(idsState),before);
   });
   await t.test('mobile dialog remains accessible with focus recovered and never opens hidden drawer',async()=>{
    await page.viewport(390,844);
    await page.click('#mobile-navigation');
-   await page.click('#advanced-visible');
-   assert.equal(await page.evaluate('qaApp.atlasMobile.state.drawer'),false);
-   assert.equal(await page.evaluate("document.querySelector('#atlas-advanced-dialog').open"),true);
+   await page.openPanel('visible');
+   assert.equal(await page.evaluate('qaApp.atlasMobile.state.drawer'),true);
+   assert.equal(await page.evaluate("!document.querySelector('#atlas-advanced-dialog').hidden"),true);
    await page.key('Escape');
-   assert.equal(await page.evaluate('document.activeElement.id'),'mobile-navigation');
-   assert.equal(await page.evaluate("document.querySelector('#atlas-advanced-dialog').open"),false);
+   assert.equal(await page.evaluate('document.activeElement.id'),'navigation-more');
+   assert.equal(await page.evaluate("!document.querySelector('#atlas-advanced-dialog').hidden"),false);
    assert.equal(await page.evaluate("document.documentElement.scrollWidth>innerWidth"),false);
   });
   await t.test('no browser errors or own-site 404s',async()=>{

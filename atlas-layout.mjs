@@ -8,8 +8,6 @@ export function createAtlasLayout({document,browser}){
  const media={get matches(){return small;},media:'(max-width: 899px)',addEventListener(type,fn){if(type==='change')changes.add(fn);},removeEventListener(type,fn){if(type==='change')changes.delete(fn);}};
  function measure(){
   const next={width:viewport.clientWidth,height:viewport.clientHeight};
-  viewport.style.setProperty('--atlas-modal-width',Math.min(next.width,browser.innerWidth)+'px');
-  viewport.style.setProperty('--atlas-modal-height',Math.min(next.height,browser.innerHeight)+'px');
   if(next.width===size.width&&next.height===size.height)return;
   const previous=size;size=next;
   for(const fn of listeners)fn(size,previous);
@@ -17,12 +15,10 @@ export function createAtlasLayout({document,browser}){
   if(matches!==small){small=matches;for(const fn of changes)fn({matches,media:media.media});}
  }
  const observer=new browser.ResizeObserver(measure);observer.observe(viewport);
- browser.addEventListener?.('resize',measure);
- viewport.style.setProperty('--atlas-modal-width',Math.min(size.width,browser.innerWidth)+'px');
- viewport.style.setProperty('--atlas-modal-height',Math.min(size.height,browser.innerHeight)+'px');
+ measure();
  return {media,get size(){return {...size};},onResize(fn){listeners.add(fn);return ()=>listeners.delete(fn);},setSize(dimensions){
   viewport.style.width=dimensions?dimensions.width+'px':'';
   viewport.style.height=dimensions?dimensions.height+'px':'';
   stage.scrollLeft=0;stage.scrollTop=0;
- },destroy(){observer.disconnect();browser.removeEventListener?.('resize',measure);listeners.clear();changes.clear();}};
+ },destroy(){observer.disconnect();listeners.clear();changes.clear();}};
 }
