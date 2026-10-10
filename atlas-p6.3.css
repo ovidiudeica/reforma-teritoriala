@@ -28,11 +28,13 @@
 #compare-selected{min-height:44px;margin:12px 0}
 .atlas-home-control,.atlas-explorer-collapse{position:absolute;z-index:1050;min-height:44px;border:1px solid #a9c1b0;border-radius:7px;background:#fff;color:#173d2a;padding:9px 11px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 9px #0002}
 .atlas-home-control{left:calc(var(--explorer-width) + 24px);top:10px}
-.atlas-explorer-collapse{left:calc(var(--explorer-width) + 24px);top:64px;width:44px}
+/* Keep the desktop explorer drawer control to the right of the four-button Leaflet zoom bar. */
+.atlas-explorer-collapse{left:calc(var(--explorer-width) + 82px);top:10px;width:44px}
 .atlas-home-control:focus-visible,.atlas-explorer-collapse:focus-visible{outline:3px solid #2d614d;outline-offset:2px}
 #atlas-main.atlas-explorer-collapsed{grid-template-columns:0px 0px minmax(0,1fr)}
 #atlas-main.atlas-explorer-collapsed #atlas-controls,#atlas-main.atlas-explorer-collapsed #explorer-resizer{visibility:hidden;pointer-events:none;overflow:hidden}
 #atlas-main.atlas-explorer-collapsed .atlas-explorer-collapse,#atlas-main.atlas-explorer-collapsed .atlas-home-control,#atlas-main.atlas-explorer-collapsed .atlas-basemap-toggle{left:14px}
+#atlas-main.atlas-explorer-collapsed .atlas-explorer-collapse{left:72px}
 #atlas-main.atlas-explorer-collapsed #details-panel{width:min(440px,calc(100% - 42px))}
 @media(max-width:899px){
  #atlas-advanced-dialog{width:calc(100vw - 16px);max-height:calc(100dvh - 32px)}
