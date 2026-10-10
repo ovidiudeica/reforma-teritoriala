@@ -1,0 +1,25 @@
+/* P6.4.2 — independent OSM raster toggle is the fourth native zoom-bar control. */
+#atlas-main .leaflet-control-zoom > #basemap-toggle{
+ position:static;left:auto;right:auto;top:auto;bottom:auto;z-index:auto;
+ box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+ width:44px;height:44px;min-width:44px;min-height:44px;max-width:none;
+ margin:0;padding:0;border:0;border-top:1px solid #c8d2cc;border-radius:0;
+ box-shadow:none;font:inherit;line-height:1;cursor:pointer;touch-action:manipulation;
+ color:#175039;background:#e7f3ea;
+}
+#atlas-main .leaflet-control-zoom > #basemap-toggle svg{display:block;width:24px;height:24px}
+#atlas-main .leaflet-control-zoom > #basemap-toggle .atlas-osm-off-mark{display:none}
+#atlas-main .leaflet-control-zoom > #basemap-toggle[aria-pressed="false"]{
+ color:#56615b;background:#edf0ed;
+}
+#atlas-main .leaflet-control-zoom > #basemap-toggle[aria-pressed="false"] .atlas-osm-off-mark{display:block}
+#atlas-main .leaflet-control-zoom > #basemap-toggle:hover{background:#dce8df}
+#atlas-main .leaflet-control-zoom > #basemap-toggle:focus-visible{
+ outline:3px solid #165c38;outline-offset:-4px;
+}
+@media(forced-colors:active){
+ #atlas-main .leaflet-control-zoom > #basemap-toggle{
+  background:ButtonFace;color:ButtonText;border-top:1px solid ButtonText;
+ }
+ #atlas-main .leaflet-control-zoom > #basemap-toggle:focus-visible{outline:3px solid Highlight}
+}
