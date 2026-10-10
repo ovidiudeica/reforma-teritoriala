@@ -26,7 +26,7 @@ try{
    await page.click('#atlas-advanced-content .atlas-advanced-row-actions button:first-child');
    const changed=await page.evaluate(idsState);
    assert.equal(changed.ids.length,1);assert.deepEqual(changed.classes,original.classes);assert.deepEqual(changed.subtypes,original.subtypes);assert.equal(changed.raster,original.raster);
-   await page.click('#atlas-advanced-content .atlas-advanced-row-actions button:first-child');
+   await page.click('#atlas-advanced-content > button');
    assert.deepEqual(await page.evaluate(idsState),original);
    await page.click('#advanced-close');
   });
