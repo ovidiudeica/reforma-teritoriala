@@ -6,7 +6,7 @@ const limit=50,historyKey='reforma-teritoriala.recent-entities.v1';
 const own=(doc,tag,cls='',label='')=>{const el=doc.createElement(tag);if(cls)el.className=cls;if(label)el.textContent=label;return el;};
 const title=e=>formatEntityName(e.display_name);
 export function createAtlasAdvancedNavigation({
- document,entities,getChecked,onCheck,onSelect,onZoomPair,onFocusReturn,storage,
+ document,entities,getChecked,onCheck,onSelect,onZoomPair,onFocusReturn,onOpen=()=>{},storage,
 }){
  const dialog=document.getElementById('atlas-advanced-dialog'),content=document.getElementById('atlas-advanced-content');
  const closeButton=document.getElementById('advanced-close');
@@ -66,7 +66,7 @@ export function createAtlasAdvancedNavigation({
   if(pair.length)action(content,'Golește comparația',()=>{pair=[];render();});
  }
  function render(){updateCounters();for(const [key,tab] of Object.entries(tabs)){const active=key===current;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}content.replaceChildren?.();if(current==='visible')renderVisible();else if(current==='recent')renderRecent();else renderCompare();}
- function open(which='visible',origin=buttons[which]){current=which;returnTo=origin||buttons.visible;offset=limit;render();if(!dialog.open)dialog.showModal();closeButton.focus();}
+ function open(which='visible',origin=buttons[which]){onOpen();current=which;returnTo=origin||buttons.visible;offset=limit;render();if(!dialog.open)dialog.showModal();closeButton.focus();}
  function close(){if(dialog.open)dialog.close();}
  function restoreFocus(){const el=onFocusReturn?.(returnTo)||returnTo;el?.focus?.();}
  for(const [key,button] of Object.entries(buttons))button.addEventListener('click',()=>open(key,button));
