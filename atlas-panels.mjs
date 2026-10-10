@@ -10,7 +10,7 @@ export const panelDefinitions=Object.freeze({
  info:{title:'Informații despre hartă',content:'atlas-info-dialog',trigger:'info-toggle'}
 });
 export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
- const el=id=>document.getElementById(id),frame=el('atlas-controls'),main=el('atlas-main'),closeButton=el('drawer-close'),backdrop=el('drawer-backdrop'),title=el('atlas-panel-title'),search=el('search-panel'),more=el('navigation-more');
+ const el=id=>document.getElementById(id),frame=el('atlas-controls'),main=el('atlas-main'),closeButton=el('drawer-close'),backdrop=el('drawer-backdrop'),title=el('atlas-panel-title'),search=el('search-panel'),more=el('navigation-more'),map=el('map');
  let lastFocused=document.activeElement;
  document.addEventListener?.('focusin',event=>{if(event.target!==document.body)lastFocused=event.target;});
  const listeners=new Set(),buttons=Object.fromEntries(Object.entries(panelDefinitions).map(([key,value])=>[key,el(value.trigger)]));
@@ -20,6 +20,7 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
  function focusReturn(){const target=visible(origin)?origin:visible(more)?more:buttons.entities;target?.focus?.();}
  function sync(){
   const opened=active!==null;
+  if(map)map.inert=mobile&&opened;
   frame.hidden=!opened;frame.inert=!opened;frame.setAttribute('aria-hidden',String(!opened));
   frame.setAttribute('aria-labelledby','atlas-panel-title');frame.setAttribute('tabindex','-1');
   frame.classList.toggle('mobile-drawer-open',mobile&&opened);frame.dataset.mobile=String(mobile);

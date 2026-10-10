@@ -47,9 +47,29 @@ try{
     await page.key('Escape');
    }
   });
+  await t.test('mobile overlay excludes covered map and selection card from native Tab traversal',async()=>{
+   const before=await semantic();
+   for(const [w,h]of [[390,844],[768,1024],[844,390]]){
+    await page.viewport(w,h);await page.openPanel('info');
+    assert.equal(await page.evaluate("document.querySelector('#map').inert"),true);
+    assert.equal(await page.evaluate("document.querySelector('#details-panel').inert"),true);
+    for(let step=0;step<30;step++){
+     await page.key('Tab');
+     assert.equal(await page.evaluate("!!document.activeElement.closest('#map,#details-panel')"),false,'covered background receives Tab at '+w+'x'+h);
+    }
+    await page.key('Escape');
+    assert.equal(await page.evaluate("document.querySelector('#map').inert"),false);
+    assert.equal(await page.evaluate("document.querySelector('#details-panel').inert"),false);
+   }
+   await page.viewport(1440,900);await page.openPanel('info');
+   assert.equal(await page.evaluate("document.querySelector('#map').inert||document.querySelector('#details-panel').inert"),false);
+   await page.key('Escape');assert.equal(await semantic(),before);
+  });
   await t.test('eight physical viewport shapes keep rail and native map controls reachable',async()=>{
    for(const [w,h]of [[360,640],[390,844],[430,932],[844,390],[768,1024],[899,768],[900,768],[1440,900]]){
     await page.viewport(w,h);await delay(150);const s=await snapshot();clear(s);assert.equal(s.state.mobile,w<900);assert.equal(s.mapWidth,s.mapDom);
+    const bounds=await page.evaluate("(()=>{const map=document.querySelector('#map').getBoundingClientRect(),host=document.querySelector('#atlas-main').getBoundingClientRect(),credits=document.querySelector('.leaflet-control-attribution').getBoundingClientRect();return {mapInside:map.left>=host.left&&map.right<=host.right&&map.top>=host.top&&map.bottom<=host.bottom,creditsInside:credits.left>=map.left&&credits.right<=Math.min(map.right,host.right),map:{left:map.left,right:map.right},host:{left:host.left,right:host.right},credits:{left:credits.left,right:credits.right}}})()");
+    assert.ok(bounds.mapInside&&bounds.creditsInside,'map or credits clipped at '+w+'x'+h+': '+JSON.stringify(bounds));
     const hits=await page.evaluate("([...document.querySelectorAll('.leaflet-control-zoom a')].map(e=>{const r=e.getBoundingClientRect(),h=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {clear:h===e||e.contains(h),width:r.width,height:r.height}}))");assert.ok(hits.every(x=>x.clear&&x.width>=44&&x.height>=44),'native map controls obscured at '+w+'x'+h);
     await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-auto-'+w+'x'+h+'.png'));
    }

@@ -37,3 +37,12 @@ test('unknown and inherited keys fail closed and state snapshots cannot mutate t
  const h=fixture();for(const key of ['missing','constructor','__proto__'])h.panels.open(key);
  assert.equal(h.panels.state.active,'entities');const state=h.panels.state;state.active='info';assert.equal(h.panels.state.active,'entities');
 });
+
+test('mobile overlay excludes the map and restores it on close or desktop transition',()=>{
+ const h=fixture();assert.equal(h.el('map').inert,false);
+ h.panels.open('info');assert.equal(h.el('map').inert,false);
+ h.breakpoint(true);assert.equal(h.el('map').inert,false);
+ h.panels.open('info');assert.equal(h.el('map').inert,true);
+ h.panels.close();assert.equal(h.el('map').inert,false);
+ h.panels.open('filters');h.breakpoint(false);assert.equal(h.el('map').inert,false);
+});

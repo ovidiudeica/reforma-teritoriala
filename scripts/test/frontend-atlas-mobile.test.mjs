@@ -94,3 +94,15 @@ test('real mobile frontend integrates search/tree/filters/history without semant
   await t.test('ACTUAL/P2 public identities and counts remain unchanged',()=>{const manifest=JSON.parse(readFileSync('data/current/actual-release-manifest.json','utf8'));assert.equal(data.entities.length,5848);assert.equal(tree.nodes.length,5848);assert.equal(data.entities.filter(e=>e.roles.includes('statistical')).length,63);assert.equal(data.entities.filter(e=>e.category==='statistical').length,18);assert.equal(manifest.snapshot_id,'actual-a9e5a4ddcb5277ef');assert.equal(manifest.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');assert.equal(entities.get('stat-MD120').statistical.code,'MD120');assert.equal(entities.get('stat-MD120').representation.osm_statistical_ref,'MD121');assert.equal(entities.get('stat-MD120').representation.osm_ref_is_identity_authority,false);});
  }finally{Object.assign(globalThis,previous);if(navigatorDescriptor)Object.defineProperty(globalThis,'navigator',navigatorDescriptor);else delete globalThis.navigator;}
 });
+
+test('selection sheet remains present but inert beneath a mobile overlay',()=>{
+ const document=doc(),media=new Media(true);shell(document);
+ const panels=createAtlasPanels({document,media}),ui=createAtlasMobileUi({document,media,panels,onClear(){}});
+ const details=document.getElementById('details-panel');
+ ui.selection('first',{source:'map'});assert.equal(details.hidden,false);assert.equal(details.inert,false);
+ panels.open('info');assert.equal(details.hidden,false);assert.equal(details.inert,true);
+ ui.selection('second',{source:'map'});assert.equal(details.hidden,false);assert.equal(details.inert,true);
+ panels.close();assert.equal(details.hidden,false);assert.equal(details.inert,false);
+ panels.open('filters');media.change(false);assert.equal(details.inert,false);
+ ui.selection(null);assert.equal(details.hidden,true);assert.equal(details.inert,true);
+});
