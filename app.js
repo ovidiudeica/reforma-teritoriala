@@ -409,7 +409,7 @@ function checkedChunkRoots(jurisdiction,tier){
  const roots=new Set();
  for(const id of visibleEntityIds){
   const entity=entityById.get(id);
-  if(entity?.jurisdiction!==jurisdiction||entity.map?.tier!==tier||!isVisible(entity))continue;
+  if(entity?.jurisdiction!==jurisdiction||entity.map?.tier!==tier)continue; // Filters hide rendering, never unload a checked entity's chunk.
   const root=overviewRootIdFor(entity);
   if(root)roots.add(root);
  }
