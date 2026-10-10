@@ -16,8 +16,9 @@ export function roMdBounds(entities){
 }
 export function fitRoMd(map,entities,{mobile=map.getSize().x<900}={}){
  const bounds=roMdBounds(entities);
- const padding=mobile
-  ?{paddingTopLeft:[18,105],paddingBottomRight:[18,110]}
+ const compact=mobile&&map.getSize().y<540;
+ const padding=compact?{paddingTopLeft:[14,68],paddingBottomRight:[14,78]}
+  :mobile?{paddingTopLeft:[18,105],paddingBottomRight:[18,110]}
   :{paddingTopLeft:[26,38],paddingBottomRight:[26,42]};
  map.fitBounds(bounds,{...padding,maxZoom:12,animate:false});
  return bounds;
