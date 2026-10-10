@@ -30,6 +30,8 @@ jobs:
           node --check scripts/test/frontend-p541b-ux-browser.test.mjs
           node --check scripts/audit/p62-mobile-tablet-browser.mjs
           node --check atlas-mobile-ui.mjs
+          node --check atlas-advanced-navigation.mjs
+          node --check scripts/audit/p63-advanced-navigation-browser.mjs
           node --check app.js
           node --check atlas-url-state.mjs
           node --check atlas-search.mjs
@@ -53,6 +55,8 @@ jobs:
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
         run: node --test scripts/audit/p62-mobile-tablet-browser.mjs
+      - name: P6.3 explicit layers, recent history, comparison, search highlights and panel collapse in Chrome
+        run: node --test scripts/audit/p63-advanced-navigation-browser.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots
