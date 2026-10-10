@@ -61,7 +61,7 @@ export function createAtlasExplorerShell({document,map,window:browser}){
   collapse?.setAttribute('title',active?'Afișează panoul de explorare':'Ascunde panoul de explorare');
   map.invalidateSize({animate:false,pan:false});
  }
- small.addEventListener?.('change',()=>{setCollapsed(collapsed);map.invalidateSize({animate:false,pan:false});});
+ small.addEventListener?.('change',()=>{if(small.matches)collapsed=false;setCollapsed(collapsed);map.invalidateSize({animate:false,pan:false});});
  apply(width);setCollapsed(false);
  return {get width(){return width;},setWidth(value){apply(value);persist();},get collapsed(){return collapsed;},setCollapsed,toggleCollapsed(){setCollapsed(!collapsed);}};
 }
