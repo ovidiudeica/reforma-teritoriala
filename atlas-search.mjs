@@ -88,9 +88,9 @@ export function appendHighlightedSearchText(document,target,value,query){
  const start=normalized.indexOf(needle);
  if(start<0){target.textContent=text;return;}
  const begin=positions[start],end=positions[start+needle.length-1]+1;
- if(begin>0)target.appendChild(document.createTextNode(letters.slice(0,begin).join('')));
+ if(begin>0){const prefix=document.createElement('span');prefix.textContent=letters.slice(0,begin).join('');target.appendChild(prefix);}
  const mark=document.createElement('mark');mark.textContent=letters.slice(begin,end).join('');target.appendChild(mark);
- if(end<letters.length)target.appendChild(document.createTextNode(letters.slice(end).join('')));
+ if(end<letters.length){const suffix=document.createElement('span');suffix.textContent=letters.slice(end).join('');target.appendChild(suffix);}
 }
 export const searchOptionId=id=>'atlas-search-option-'+Array.from(String(id),c=>c.codePointAt(0).toString(16)).join('-');
 export function revealSearchOption(container,option){
