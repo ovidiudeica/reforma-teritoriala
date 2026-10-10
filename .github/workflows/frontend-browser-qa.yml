@@ -40,6 +40,8 @@ jobs:
           node --check app.js
           node --check atlas-url-state.mjs
           node --check atlas-search.mjs
+      - name: CDP code/data separation security regressions
+        run: node --test scripts/test/atlas-browser-security.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
