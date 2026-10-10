@@ -61,6 +61,8 @@ try{
     const id=await page.evaluate("[...qaApp.entityById.values()].find(e=>e.jurisdiction==='RO'&&!qaApp.visibleEntityIds.has(e.id)&&e.map?.bbox).id");
     await page.evaluate('qaApp.selectEntity('+JSON.stringify(id)+",{source:'map',zoom:false})");
     const before=await page.evaluate("({selected:qaApp.selectedEntityId,visible:[...qaApp.visibleEntityIds].sort()})");
+    const hit=await page.evaluate("(()=>{const e=document.getElementById('map-home'),r=e.getBoundingClientRect(),target=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return {target:target?.id||target?.className||target?.tagName,center:[r.left+r.width/2,r.top+r.height/2],panel:(()=>{const d=document.getElementById('details-panel').getBoundingClientRect();return {top:d.top,bottom:d.bottom}})()}})()");
+    console.log('P641 selected icon hit test',JSON.stringify(hit));
     await page.click('#map-home');fits(await points(),'selected fit');
     const after=await page.evaluate("({selected:qaApp.selectedEntityId,visible:[...qaApp.visibleEntityIds].sort()})");
     assert.deepEqual(after,before);
