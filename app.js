@@ -2,6 +2,7 @@ import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,en
 import {createAtlasMobileUi} from './atlas-mobile-ui.mjs';
 import {createAtlasExplorerShell} from './atlas-explorer-shell.mjs';
 import {createAtlasInfoPanel} from './atlas-info-panel.mjs';
+import {createAtlasAdvancedNavigation} from './atlas-advanced-navigation.mjs';
 import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
@@ -89,6 +90,7 @@ const visibleEntityIds=new Set(); // Explicit checkbox state; independent of tax
 let atlasTree=null;
 let atlasSearch=null;
 let atlasUrl=null;
+let atlasAdvanced=null;
 const mobileMedia=globalThis.window?.matchMedia?.('(max-width: 899px)')||{matches:false};
 const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)||filtersPanelOpen,onOpen:()=>atlasTree?.revealSelected(),onCloseDrawer:()=>setFiltersPanelOpen(false),onOpenFilters:()=>setFiltersPanelOpen(true)});
 wireAtlasSkipLinks({document,mobile:atlasMobile});
@@ -205,6 +207,7 @@ function refreshGeometryVisibility(){
  rerenderLoadedTiers();
  atlasTree?.refreshVisibility();
  updateSelectionVisibility();
+ atlasAdvanced?.refresh();
 }
 function updateSelectionVisibility(){
  const entity=entityById.get(selectedEntityId);
@@ -253,6 +256,23 @@ async function loadHierarchyTree(){
   for(const id of tree.root_ids)visibleEntityIds.add(id);
   renderHierarchyTree();
  atlasSearch?.updateIndex(createSearchIndex([...entityById.values()],hierarchyNodeById));
+ atlasAdvanced=createAtlasAdvancedNavigation({
+  document,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,
+  storage:globalThis.window?.localStorage,
+  onOpen:()=>{setFiltersPanelOpen(false);if(atlasMobile.state.mobile&&atlasMobile.state.drawer)atlasMobile.closeDrawer(false);},
+  onFocusReturn:origin=>atlasMobile.state.mobile?document.getElementById('mobile-navigation'):origin,
+  onCheck:(id,checked)=>{
+   if(!entityById.has(id))return;
+   if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);
+   refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
+  },
+  onSelect:id=>selectEntity(id,{zoom:true,source:'advanced'}),
+  onZoomPair:entities=>{
+   if(entities.length!==2||entities.some(entity=>!Array.isArray(entity?.map?.bbox)))return;
+   const bounds=entities.map(entity=>entity.map.bbox);
+   map.fitBounds([[Math.min(...bounds.map(b=>b[1])),Math.min(...bounds.map(b=>b[0]))],[Math.max(...bounds.map(b=>b[3])),Math.max(...bounds.map(b=>b[2]))]],{padding:[30,30],maxZoom:12});
+  }
+ });
  return tree;
 }
 
@@ -488,6 +508,7 @@ function renderDetails(entity){
  renderBreadcrumb(entity);
  const zoomButton=body.querySelector('#zoom-selected');
  if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
+ const compare=document.createElement('button');compare.type='button';compare.id='compare-selected';compare.className='action-button';compare.textContent='Adaugă la comparație';compare.addEventListener('click',()=>atlasAdvanced?.addCompare(entity.id));body.appendChild(compare);
 }
 
 function zoomToEntity(entity,options={}){
@@ -518,6 +539,7 @@ async function applySelection(id,options=false,clickedLayer=null){
  renderDetails(entity);
  updateSelectionVisibility();
  rerenderLoadedTiers();
+ atlasAdvanced?.record(id);
  if(!isVisible(entity))return;
  if(zoom)zoomToEntity(entity,source==='url'?{animate:false}:{});
 
@@ -583,6 +605,8 @@ createAtlasInfoPanel({
  getReturnFocus:()=>document.getElementById(atlasMobile.state.mobile?'mobile-navigation':'info-toggle')
 });
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
+document.getElementById('map-home')?.addEventListener('click',()=>{map.setView([defaultViewport.lat,defaultViewport.lon],defaultViewport.z,{animate:false});atlasUrl?.commit('push');});
+document.getElementById('explorer-collapse')?.addEventListener('click',()=>atlasExplorerShell.toggleCollapsed?.());
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
 document.getElementById('filters-toggle')?.addEventListener('click',()=>setFiltersPanelOpen(!filtersPanelOpen));
 document.getElementById('filters-close')?.addEventListener('click',()=>setFiltersPanelOpen(false,{restoreFocus:true}));
