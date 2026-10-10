@@ -13,7 +13,7 @@ export function createAtlasAdvancedNavigation({
  const buttons={visible:document.getElementById('advanced-visible'),recent:document.getElementById('advanced-recent'),compare:document.getElementById('advanced-compare')};
  const tabs={visible:document.getElementById('advanced-tab-visible'),recent:document.getElementById('advanced-tab-recent'),compare:document.getElementById('advanced-tab-compare')};
  const byId=new Map(entities.map(e=>[e.id,e]));
- let current='visible',recent=[],pair=[],offset=limit,returnTo=buttons.visible;
+ let current='visible',recent=[],pair=[],offset=limit,returnTo=buttons.visible,lastHidden=null;
  const safeStorage=()=>{try{return storage?.getItem?.(historyKey);}catch{return null;}};
  try{const saved=JSON.parse(safeStorage()||'[]');if(Array.isArray(saved))recent=[...new Set(saved)].filter(id=>typeof id==='string'&&byId.has(id)).slice(0,12);}catch{ /* private mode: session only */ }
  function persist(){try{storage?.setItem?.(historyKey,JSON.stringify(recent));}catch{ /* optional */ }}
@@ -24,7 +24,8 @@ export function createAtlasAdvancedNavigation({
  function updateCounters(){buttons.visible.textContent='Straturi ('+getChecked().size+')';buttons.recent.textContent='Recente'+(recent.length?' ('+recent.length+')':'');buttons.compare.textContent='Compară'+(pair.length?' ('+pair.length+'/2)':'');}
  function select(id){close();Promise.resolve(onSelect(id)).catch(error=>console.error('Navigare avansată: selectare',error));}
  function checkedAction(target,id){const checked=getChecked().has(id);action(target,checked?'Ascunde':'Afișează',()=>{
-  onCheck(id,!getChecked().has(id));render();
+  const next=!getChecked().has(id);lastHidden=next?null:id;
+  onCheck(id,next);render();
  },'action-button atlas-advanced-compact').setAttribute('aria-label',(checked?'Ascunde':'Afișează')+' geometria '+title(byId.get(id)));}
  function compareAction(target,id){const paired=pair.includes(id);action(target,paired?'Scoate din comparație':'Adaugă la comparație',()=>{
   if(paired)pair=pair.filter(x=>x!==id);
@@ -40,6 +41,7 @@ export function createAtlasAdvancedNavigation({
   compareAction(controls,id);
  }
  function renderVisible(){const ids=checkedIds();append(content,'p','atlas-advanced-hint',ids.length+' geometrii bifate explicit. Filtrele pot ascunde temporar poligoanele; bifele rămân independente.');
+  if(lastHidden&&!getChecked().has(lastHidden))action(content,'Anulează ascunderea: '+title(byId.get(lastHidden)),()=>{onCheck(lastHidden,true);lastHidden=null;render();},'action-button atlas-advanced-compact');
   const list=append(content,'ul','atlas-advanced-list');for(const id of ids.slice(0,offset))entityRow(list,id,'visible');
   if(ids.length>offset)action(content,'Mai multe ('+(ids.length-offset)+' rămase)',()=>{offset+=limit;render();});
  }
