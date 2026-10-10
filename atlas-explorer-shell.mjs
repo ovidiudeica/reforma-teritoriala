@@ -1,9 +1,8 @@
 // P5.1: visual shell only. No entity/filter/URL/geometry mutation.
-export function createAtlasExplorerShell({document,map,window:browser,media}){
+export function createAtlasExplorerShell({document,map,window:browser,media,panels,onResize=()=>map.invalidateSize({animate:false,pan:false})}){
  const main=document.getElementById('atlas-main');
  const sidebar=document.getElementById('atlas-controls');
  const divider=document.getElementById('explorer-resizer');
- const collapse=document.getElementById('explorer-collapse');
  const min=280,max=660,initial=340;
  // The Node/P4 contract tests use DOM and Leaflet doubles without layout APIs.
  // The real browser has all APIs; never mutate geometry or inject browser state in tests.
@@ -27,15 +26,15 @@ export function createAtlasExplorerShell({document,map,window:browser,media}){
   width=clamp(value);
   main.style.setProperty('--explorer-width',width+'px');
   divider.setAttribute('aria-valuenow',String(width));
-  map.invalidateSize({animate:false,pan:false});
+  onResize();
  }
- function onMove(event){if(pointer!==event.pointerId)return;apply(event.clientX-main.getBoundingClientRect().left);}
+ function onMove(event){if(pointer!==event.pointerId)return;apply(event.clientX-main.getBoundingClientRect().left-(document.getElementById('atlas-navigation-rail')?.getBoundingClientRect?.().width||0));}
  function finish(event){if(pointer!==event.pointerId)return;pointer=null;divider.releasePointerCapture?.(event.pointerId);persist();}
  divider.addEventListener('pointerdown',event=>{
   if(small.matches||event.button!==0)return;
   pointer=event.pointerId;
   divider.setPointerCapture?.(event.pointerId);
-  apply(event.clientX-main.getBoundingClientRect().left);
+  apply(event.clientX-main.getBoundingClientRect().left-(document.getElementById('atlas-navigation-rail')?.getBoundingClientRect?.().width||0));
   event.preventDefault();
  });
  divider.addEventListener('pointermove',onMove);
@@ -49,19 +48,7 @@ export function createAtlasExplorerShell({document,map,window:browser,media}){
   event.preventDefault();
   apply(next);persist();
  });
- let collapsed=false;
- function setCollapsed(next){
-  collapsed=Boolean(next);const active=collapsed&&!small.matches;
-  main.classList.toggle('atlas-explorer-collapsed',active);
-  sidebar.inert=active;
-  if(active)sidebar.setAttribute('aria-hidden','true');
-  else if(!small.matches)sidebar.setAttribute('aria-hidden','false');
-  collapse?.setAttribute('aria-pressed',String(active));
-  collapse?.setAttribute('aria-label',active?'Afișează panoul de explorare':'Ascunde panoul de explorare');
-  collapse?.setAttribute('title',active?'Afișează panoul de explorare':'Ascunde panoul de explorare');
-  map.invalidateSize({animate:false,pan:false});
- }
- small.addEventListener?.('change',()=>{if(small.matches)collapsed=false;setCollapsed(collapsed);map.invalidateSize({animate:false,pan:false});});
- apply(width);setCollapsed(false);
- return {get width(){return width;},setWidth(value){apply(value);persist();},get collapsed(){return collapsed;},setCollapsed,toggleCollapsed(){setCollapsed(!collapsed);}};
+ function setCollapsed(next){if(next)panels.close();else panels.open('entities');}
+ apply(width);
+ return {get width(){return width;},setWidth(value){apply(value);persist();},get collapsed(){return !small.matches&&panels.state.active===null;},setCollapsed,toggleCollapsed(){panels.toggle();}};
 }

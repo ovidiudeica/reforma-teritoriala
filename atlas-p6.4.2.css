@@ -1,4 +1,3 @@
-/* P6.4.2 — independent OSM raster toggle is the fourth native zoom-bar control. */
 #atlas-main .leaflet-control-zoom > #basemap-toggle{
  position:static;left:auto;right:auto;top:auto;bottom:auto;z-index:auto;
  box-sizing:border-box;display:flex;align-items:center;justify-content:center;
@@ -18,8 +17,8 @@
  outline:3px solid #165c38;outline-offset:-4px;
 }
 @media(forced-colors:active){
- #atlas-main .leaflet-control-zoom > #basemap-toggle{
+#atlas-main .leaflet-control-zoom > #basemap-toggle{
   background:ButtonFace;color:ButtonText;border-top:1px solid ButtonText;
  }
- #atlas-main .leaflet-control-zoom > #basemap-toggle:focus-visible{outline:3px solid Highlight}
+#atlas-main .leaflet-control-zoom > #basemap-toggle:focus-visible{outline:3px solid Highlight}
 }

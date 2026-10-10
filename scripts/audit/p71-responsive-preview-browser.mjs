@@ -56,13 +56,13 @@ try{
    await page.evaluate("document.querySelector('#preview-rotate').focus()");await page.key('Enter');await ready(844,390);assert.equal((await state()).focus,'preview-rotate');
    await page.click('[data-preview-mode=auto]');assert.equal((await state()).rotateDisabled,true);
   });
-  await t.test('modal remains physically reachable in a larger preview and returns focus',async()=>{
+  await t.test('contextual information remains physically reachable in a larger preview and returns focus',async()=>{
    await page.viewport(390,844);await page.click('[data-preview-mode=desktop]');await ready(1440,900);
    await page.evaluate("document.querySelector('#info-toggle').click()");
-   await waitFor(()=>page.evaluate("document.querySelector('#atlas-info-dialog').open"),'information opened');
-   const bounds=await page.evaluate("(()=>{const r=document.querySelector('#atlas-info-dialog').getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight}})()");
-   assert.ok(bounds.left>=0&&bounds.right<=bounds.width&&bounds.top>=0&&bounds.bottom<=bounds.height,'modal must fit physical screen in desktop preview');
-   await page.key('Escape');assert.equal(await page.evaluate("document.querySelector('#atlas-info-dialog').open"),false);
+   await waitFor(()=>page.evaluate("!document.querySelector('#atlas-info-dialog').hidden"),'information opened');
+   const bounds=await page.evaluate("(()=>{const r=document.querySelector('#drawer-close').getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight}})()");
+   assert.ok(bounds.left>=0&&bounds.right<=bounds.width&&bounds.top>=0&&bounds.bottom<=bounds.height,'common close control must remain physically reachable in desktop preview');
+   await page.key('Escape');assert.equal(await page.evaluate("!document.querySelector('#atlas-info-dialog').hidden"),false);
    assert.equal((await state()).focus,'info-toggle');
    await page.click('[data-preview-mode=auto]');await ready(390,780);
   });

@@ -1,7 +1,5 @@
-/* P6.4.1 — country-fit is the third native Leaflet zoom control, not a map overlay. */
 #atlas-main .leaflet-control-zoom{display:flex;flex-direction:column;overflow:hidden;border-radius:6px}
-#atlas-main .leaflet-control-zoom > .leaflet-control-zoom-in,
-#atlas-main .leaflet-control-zoom > .leaflet-control-zoom-out{
+#atlas-main .leaflet-control-zoom > .leaflet-control-zoom-in,#atlas-main .leaflet-control-zoom > .leaflet-control-zoom-out{
  box-sizing:border-box;display:flex;align-items:center;justify-content:center;
  width:44px;height:44px;min-height:44px;line-height:1;font-size:25px;
 }
@@ -21,11 +19,7 @@
 #atlas-main .leaflet-control-zoom > #map-home:focus-visible{
  outline:3px solid #165c38;outline-offset:-4px;
 }
-/* In short landscape the selected details sheet must not cover the third zoom button. */
-@container atlas (max-width:899px) and (orientation:landscape) and (max-height:540px){
- #atlas-main #details-panel{left:65px}
-}
 @media(forced-colors:active){
- #atlas-main .leaflet-control-zoom > #map-home{color:ButtonText;background:ButtonFace;border-top:1px solid ButtonText}
- #atlas-main .leaflet-control-zoom > #map-home:focus-visible{outline:3px solid Highlight}
+#atlas-main .leaflet-control-zoom > #map-home{color:ButtonText;background:ButtonFace;border-top:1px solid ButtonText}
+#atlas-main .leaflet-control-zoom > #map-home:focus-visible{outline:3px solid Highlight}
 }

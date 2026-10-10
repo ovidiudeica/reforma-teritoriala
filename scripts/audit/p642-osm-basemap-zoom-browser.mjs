@@ -87,7 +87,7 @@ try{
    assert.equal((await state()).raster,1);
   });
   await t.test('desktop collapsed explorer keeps basemap button inside zoom bar',async()=>{
-   await page.click('#explorer-collapse');const s=await state();assertControl(s,'collapsed desktop');
+   await page.openPanel('entities');await page.click('#mobile-navigation');const s=await state();assertControl(s,'collapsed desktop');
    await page.click('#basemap-toggle');assert.equal((await state()).raster,0);
   });
   await t.test('no own-asset errors or browser application exceptions',()=>{

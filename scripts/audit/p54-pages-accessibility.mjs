@@ -12,14 +12,14 @@ try{
   await t.test('public accessibility tree exposes navigation, filters, basemap and map',async()=>{
    const ax=await page.send('Accessibility.getFullAXTree');
    const names=ax.nodes.filter(n=>!n.ignored).map(n=>n.name?.value).filter(Boolean);
-   for(const name of ['Entități','Rezultate','Hartă teritorială România și Republica Moldova']){
+   for(const name of ['Entități','Căutare','Hartă teritorială România și Republica Moldova']){
     assert.ok(names.includes(name),'AX tree missing '+name);
    }
    assert.ok(names.some(n=>String(n).startsWith('Fundal OpenStreetMap activ')),'OSM basemap accessible label');
   });
   await t.test('filters focus entry and Escape recovery',async()=>{
    await page.click('#filters-toggle');
-   assert.equal(await page.evaluate("document.activeElement.id"),'filters-close');
+   assert.equal(await page.evaluate("document.activeElement.id"),'drawer-close');
    assert.equal(await page.evaluate("document.querySelector('#filters-panel').inert"),false);
    await page.key('Escape');
    assert.equal(await page.evaluate("document.querySelector('#filters-panel').hidden"),true);
@@ -28,14 +28,15 @@ try{
   await t.test('search tab keyboard and Escape do not change geometric checkboxes',async()=>{
    const initial=await page.evaluate("[...qaApp.visibleEntityIds].sort()");
    await page.query('Cluj');
-   assert.equal(await page.evaluate("document.querySelector('#tab-results').getAttribute('aria-selected')"),'true');
+   assert.equal(await page.evaluate("document.querySelector('#mobile-search').getAttribute('aria-pressed')"),'true');
    await page.key('Escape');
-   assert.equal(await page.evaluate("document.querySelector('#tab-entities').getAttribute('aria-selected')"),'true');
-   await page.evaluate("document.querySelector('#tab-entities').focus()");
-   await page.key('ArrowRight');
-   assert.equal(await page.evaluate("document.activeElement.id"),'tab-results');
-   await page.key('ArrowLeft');
-   assert.equal(await page.evaluate("document.activeElement.id"),'tab-entities');
+   assert.equal(await page.evaluate("document.querySelector('#mobile-search').getAttribute('aria-pressed')"),'true');
+   await page.key('Escape');
+   await page.evaluate("document.querySelector('#mobile-navigation').focus()");
+   await page.key('Tab');
+   assert.equal(await page.evaluate("document.activeElement.id"),'mobile-search');
+   await page.evaluate("document.querySelector('#mobile-navigation').focus()");
+   assert.equal(await page.evaluate("document.activeElement.id"),'mobile-navigation');
    assert.deepEqual(await page.evaluate("[...qaApp.visibleEntityIds].sort()"),initial);
   });
   await t.test('mobile nested drawer Escape restores focus and map',async()=>{
@@ -43,10 +44,9 @@ try{
    await page.click('#mobile-navigation');
    await page.click('#filters-toggle');
    await page.key('Escape');
-   assert.equal(await page.evaluate("qaApp.atlasMobile.state.drawer"),true);
-   await page.key('Escape');
+   assert.equal(await page.evaluate("qaApp.atlasMobile.state.drawer"),false);
    await waitFor(()=>page.evaluate("qaApp.atlasMobile.state.drawer===false"),'drawer Escape');
-   assert.equal(await page.evaluate("document.activeElement.id"),'mobile-navigation');
+   assert.equal(await page.evaluate("document.activeElement.id"),'filters-toggle');
    assert.ok(await page.evaluate("document.querySelector('#map').getBoundingClientRect().width>300"));
   });
   await t.test('live application has no JS console failures or own 404s',async()=>{

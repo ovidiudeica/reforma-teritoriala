@@ -3,7 +3,7 @@ import {createAtlasPreview} from './atlas-preview.mjs';
 import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,entityProvenanceHtml,labelMapControls,wireAtlasSkipLinks} from './atlas-presentation.mjs';
 import {createAtlasMobileUi} from './atlas-mobile-ui.mjs';
 import {createAtlasExplorerShell} from './atlas-explorer-shell.mjs';
-import {createAtlasInfoPanel} from './atlas-info-panel.mjs';
+import {createAtlasPanels} from './atlas-panels.mjs';
 import {createAtlasAdvancedNavigation} from './atlas-advanced-navigation.mjs';
 import {createAtlasUrlState,createUrlConfig,defaultViewport} from './atlas-url-state.mjs';
 import {fitRoMd,attachRoMdZoomControl} from './atlas-ro-md-fit.mjs';
@@ -29,7 +29,7 @@ function setOsmBasemapVisible(value){
 L.control.scale({imperial:false}).addTo(map);
 labelMapControls(document);
 attachRoMdZoomControl(document,L);
-const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window,media:atlasLayout.media});
+
 
 const roots={RO:L.layerGroup().addTo(map),MD:L.layerGroup().addTo(map)};
 const tiers=['overview','local','detail'];
@@ -56,21 +56,14 @@ let filtersPanelOpen=false;
 let navigationTab='entities';
 function setNavigationTab(tab){
  navigationTab=tab==='results'?'results':'entities';
- for(const key of ['entities','results']){
-  const selected=key===navigationTab;
-  const button=document.getElementById('tab-'+key),panel=document.getElementById(key+'-panel');
-  if(button){button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;}
-  if(panel)panel.hidden=!selected;
- }
+ atlasPanels.open(navigationTab==='results'?'search':'entities',{focus:false});
 }
 function setFiltersPanelOpen(value,{restoreFocus=false}={}){
- filtersPanelOpen=Boolean(value);
- const panel=document.getElementById('filters-panel'),trigger=document.getElementById('filters-toggle');
- if(!panel||!trigger)return;
- panel.hidden=!filtersPanelOpen;panel.inert=!filtersPanelOpen;
- trigger.setAttribute('aria-expanded',String(filtersPanelOpen));
- if(filtersPanelOpen)document.getElementById('filters-close')?.focus?.();
- else if(restoreFocus)trigger.focus?.();
+ if(value)atlasPanels.open('filters');
+ else if(atlasPanels.state.active==='filters'){
+  if(atlasPanels.state.mobile)atlasPanels.close({focus:restoreFocus});
+  else atlasPanels.open('entities',{focus:restoreFocus});
+ }
 }
 function updateFilterCount(){
  const count=document.getElementById('filters-count');if(!count)return;
@@ -97,13 +90,26 @@ let atlasSearch=null;
 let atlasUrl=null;
 let atlasAdvanced=null;
 const mobileMedia=atlasLayout.media;
-const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)||filtersPanelOpen,onOpen:()=>atlasTree?.revealSelected(),onCloseDrawer:()=>setFiltersPanelOpen(false),onOpenFilters:()=>setFiltersPanelOpen(true)});
-wireAtlasSkipLinks({document,mobile:atlasMobile});
-atlasLayout.onResize(()=>{
- const center=map.getCenter(),zoom=map.getZoom();
- const resize=()=>{map.invalidateSize({animate:false,pan:false});map.setView([center.lat,center.lng],zoom,{animate:false,reset:true});};
- queueMicrotask(()=>{if(atlasUrl)void atlasUrl.action('replace',resize);else resize();});
+const atlasPanels=createAtlasPanels({document,media:mobileMedia,isSearchOpen:()=>Boolean(atlasSearch?.state.open)});
+atlasPanels.onChange(({active})=>{
+ filtersPanelOpen=active==='filters';navigationTab=active==='search'?'results':'entities';
+ if(active==='entities')atlasTree?.revealSelected();
+ resizeMapPreservingView();
 });
+const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window,media:atlasLayout.media,panels:atlasPanels,onResize:resizeMapPreservingView});
+const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,panels:atlasPanels,onClear:clearSelection});
+wireAtlasSkipLinks({document,mobile:atlasMobile});
+function resizeMapPreservingView(){
+ if(!map.invalidateSize)return;
+ const element=document.getElementById('map'),old=map.getSize?.();
+ if(old&&old.x===element.clientWidth&&old.y===element.clientHeight)return;
+ const center=map.getCenter(),zoom=map.getZoom();
+ queueMicrotask(()=>{
+  const resize=()=>{map.invalidateSize({animate:false,pan:false});map.setView([center.lat,center.lng],zoom,{animate:false,reset:true});};
+  if(atlasUrl)void atlasUrl.action('replace',resize);else resize();
+ });
+}
+atlasLayout.onResize(resizeMapPreservingView);
 const atlasPreview=createAtlasPreview({document,layout:atlasLayout,browser:globalThis.window});
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
@@ -245,7 +251,6 @@ function wireSearch(){
   atlasSearch=createAtlasSearch({input,container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:async(id,options)=>{setFiltersPanelOpen(false);setNavigationTab('entities');await selectEntity(id,options);}});
   input.addEventListener('focus',()=>{if(filtersPanelOpen)setFiltersPanelOpen(false);});
   input.addEventListener('input',()=>{if(input.value.trim())setNavigationTab('results');else setNavigationTab('entities');});
-  input.addEventListener('keydown',event=>{if(event.key==='Escape')setNavigationTab('entities');});
 }
 
 async function loadHierarchyTree(){
@@ -268,10 +273,8 @@ async function loadHierarchyTree(){
   renderHierarchyTree();
  atlasSearch?.updateIndex(createSearchIndex([...entityById.values()],hierarchyNodeById));
  atlasAdvanced=createAtlasAdvancedNavigation({
-  document,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,
+  document,panels:atlasPanels,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,
   storage:globalThis.window?.localStorage,
-  onOpen:()=>{setFiltersPanelOpen(false);if(atlasMobile.state.mobile&&atlasMobile.state.drawer)atlasMobile.closeDrawer(false);},
-  onFocusReturn:origin=>atlasMobile.state.mobile?document.getElementById('mobile-navigation'):origin,
   onCheck:(id,checked)=>{
    if(!entityById.has(id))return;
    if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);
@@ -620,20 +623,10 @@ document.getElementById('copy-link').addEventListener('click',async()=>{
  try{if(!atlasUrl||!globalThis.navigator?.clipboard?.writeText)throw new Error('Clipboard unavailable');await globalThis.navigator.clipboard.writeText(atlasUrl.shareUrl());status.textContent='Link copiat.';}catch{status.textContent='Copiere indisponibilă. Copiază URL-ul din bara de adrese.';}
 });
 
-createAtlasInfoPanel({
- document,
- onOpen:()=>{
-  setFiltersPanelOpen(false);
-  if(atlasMobile.state.mobile&&atlasMobile.state.drawer)atlasMobile.closeDrawer(false);
- },
- getReturnFocus:()=>document.getElementById(atlasMobile.state.mobile?'mobile-navigation':'info-toggle')
-});
+
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
 document.getElementById('map-home')?.addEventListener('click',()=>{if(atlasUrl)void atlasUrl.action('push',()=>fitRoMd(map,entityById));else fitRoMd(map,entityById);});
-document.getElementById('explorer-collapse')?.addEventListener('click',()=>atlasExplorerShell.toggleCollapsed?.());
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
-document.getElementById('filters-toggle')?.addEventListener('click',()=>setFiltersPanelOpen(!filtersPanelOpen));
-document.getElementById('filters-close')?.addEventListener('click',()=>setFiltersPanelOpen(false,{restoreFocus:true}));
 document.getElementById('filters-reset')?.addEventListener('click',resetGlobalFilters);
 document.getElementById('selection-visibility-action')?.addEventListener('click',()=>{
  const entity=entityById.get(selectedEntityId);if(!entity)return;
@@ -645,10 +638,6 @@ document.getElementById('selection-visibility-action')?.addEventListener('click'
   setFiltersPanelOpen(true);
  }
 });
-for(const key of ['entities','results'])document.getElementById('tab-'+key)?.addEventListener('click',()=>setNavigationTab(key));
-document.getElementById('tab-entities')?.addEventListener('keydown',event=>{if(event.key==='ArrowRight'){event.preventDefault();setNavigationTab('results');document.getElementById('tab-results').focus();}});
-document.getElementById('tab-results')?.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();setNavigationTab('entities');document.getElementById('tab-entities').focus();}});
-document.addEventListener?.('keydown',event=>{if(event.key==='Escape'&&filtersPanelOpen){event.preventDefault();setFiltersPanelOpen(false,{restoreFocus:true});}},true);
 document.getElementById('layer-ro').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
 document.getElementById('layer-md').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
 map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');});
@@ -672,4 +661,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
+export {atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};

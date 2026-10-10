@@ -57,16 +57,16 @@ try{
    await page.click('#filters-reset');
    const after=await page.evaluate("({ids:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,baseline:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),reset:document.querySelector('#filters-reset').disabled,count:document.querySelector('#filters-count').textContent,ro:document.querySelector('#layer-ro').checked,md:document.querySelector('#layer-md').checked,stat:[...qaApp.activeStatisticalLevels].sort(),subtypes:[...qaApp.activeGeometrySubtypes].length})");
    assert.deepEqual(after.ids,before.ids);assert.equal(after.selected,before.selected);assert.equal(after.baseline,'false');assert.equal(after.count,'');assert.equal(after.reset,true);assert.equal(after.ro,true);assert.equal(after.md,true);assert.deepEqual(after.stat,[1,2,3,'unclassified'].sort());assert.ok(after.subtypes>0);
-   await page.click('#filters-close');
+   await page.click('#drawer-close');
    assert.equal(await page.evaluate("document.activeElement.id"),'filters-toggle');
   });
   await t.test('selected checked geometry hidden by filters offers explicit filter action without unchecking',async()=>{
-   await page.click('#filters-toggle');await page.click('#layer-ro');await page.click('#filters-close');
+   await page.click('#filters-toggle');await page.click('#layer-ro');await page.click('#drawer-close');
    assert.equal(await page.evaluate("document.querySelector('#selection-visibility-action').dataset.action"),'filters');
    await page.click('#selection-visibility-action');
    assert.equal(await page.evaluate("document.querySelector('#filters-panel').hidden"),false);
    await page.click('#filters-reset');
-   await page.click('#filters-close');
+   await page.click('#drawer-close');
   });
   await t.test('compact disabled modes fit mobile header and hidden geometry can be activated from sheet',async()=>{
    await page.viewport(390,844);
@@ -74,7 +74,7 @@ try{
    assert.ok(header.modes.every(r=>r.bottom<=header.bottom+1&&r.right<=390),'mode overlap '+JSON.stringify(header));
    await page.click('#mobile-navigation');await page.click('#filters-toggle');
    assert.ok(await page.evaluate("document.querySelector('#filters-panel .filter-actions button').getBoundingClientRect().height>=44"),'mobile filter touch target');
-   await page.click('#filters-close');await page.click('#drawer-close');
+   await page.click('#drawer-close');
    const id=await page.evaluate("[...qaApp.entityById.values()].find(x=>x.map?.bbox&&!qaApp.visibleEntityIds.has(x.id)).id");
    await page.evaluate("qaApp.selectEntity("+JSON.stringify(id)+",{source:'map',zoom:false})");
    await waitFor(()=>page.evaluate("qaApp.atlasMobile.state.sheet==='peek'"),'selected sheet peek');
