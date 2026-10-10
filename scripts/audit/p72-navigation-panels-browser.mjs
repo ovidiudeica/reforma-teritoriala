@@ -34,6 +34,19 @@ try{
    await page.evaluate("document.querySelector('#mobile-search').focus()");await page.key('Enter');assert.equal((await snapshot()).state.active,'search');assert.equal((await snapshot()).focus,'entity-search');
    await page.key('Escape');assert.equal((await snapshot()).state.active,null);assert.equal((await snapshot()).focus,'mobile-search');
   });
+  await t.test('advanced content keeps accessible action targets on desktop and phone',async()=>{
+   await page.evaluate("qaApp.atlasAdvanced.addCompare('osm-r58974');qaApp.atlasAdvanced.addCompare('osm-r90689')");
+   for(const [w,h]of [[1440,900],[390,844]]){
+    await page.viewport(w,h);
+    for(const key of ['visible','recent','compare']){
+     await page.openPanel(key);
+     const targets=await page.evaluate("([...document.querySelectorAll('#atlas-advanced-content button')].map(e=>{const r=e.getBoundingClientRect();return {width:r.width,height:r.height,name:e.textContent.trim()}}))");
+     assert.ok(targets.length>0,'advanced content has no actions: '+key);
+     assert.ok(targets.every(t=>t.width>=44&&t.height>=44&&t.name),'advanced content action below 44px at '+w+'x'+h+': '+JSON.stringify(targets));
+    }
+    await page.key('Escape');
+   }
+  });
   await t.test('eight physical viewport shapes keep rail and native map controls reachable',async()=>{
    for(const [w,h]of [[360,640],[390,844],[430,932],[844,390],[768,1024],[899,768],[900,768],[1440,900]]){
     await page.viewport(w,h);await delay(150);const s=await snapshot();clear(s);assert.equal(s.state.mobile,w<900);assert.equal(s.mapWidth,s.mapDom);
