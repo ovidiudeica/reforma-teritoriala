@@ -43,4 +43,7 @@ Profilare cold/warm în Chrome cu rețea lentă și hardware mobil; streaming/ca
 
 ## Status
 
-P6.1: **închis/PASS**, PR #275. P6.2: **închis/PASS**, PR #276 integrat pe `main` `5ede06b75645577d25a1d860e3850f82e833264e`, Pages, CodeQL, 28/28 Chrome, 19/19 frontend bytes, 123/123 geometrii și A/B PASS. P6.3: implementat separat pe `web/p6.3-advanced-navigation`, PR #277 pentru validare; criterii și excluderi în `docs/p6.3-advanced-navigation.md`. P6.4 rămâne neînceput.
+- P6.1: **închis/PASS**, PR #275.
+- P6.2: **închis/PASS**, PR #276.
+- P6.3: **închis/PASS**, PR #277 integrat în `main` la `8be982c325028562eeeba6c6f760a5feea864b9b`, toate workflow-urile post-merge SUCCESS, Chrome live 29/29, frontend 21/21 byte-identic și geometrii 123/123 byte-identice.
+- P6.4: **implementare și validare în curs** pe `web/p6.4-final-performance-accessibility-acceptance`, PR #278 draft. Auditul local Chrome P6.4 este 8/8 PASS. Datele măsurate, schimbările de accesibilitate, limitele metodologice și criteriile finale sunt în `docs/p6.4-final-acceptance.md`. Nu se declară închis până la gate-urile obligatorii, integrarea controlată, Pages live și verificarea fizică distinctă unde este disponibilă.

@@ -4,7 +4,8 @@ import {typeLabel} from './atlas-search.mjs';
 // P6.3: presentation-only navigator. Only explicit callbacks may affect map/checked state.
 const limit=50,historyKey='reforma-teritoriala.recent-entities.v1';
 const own=(doc,tag,cls='',label='')=>{const el=doc.createElement(tag);if(cls)el.className=cls;if(label)el.textContent=label;return el;};
-const title=e=>formatEntityName(e.display_name);
+const formattedNames=new Map();
+ const title=e=>{if(!formattedNames.has(e.id))formattedNames.set(e.id,formatEntityName(e.display_name));return formattedNames.get(e.id);};
 export function createAtlasAdvancedNavigation({
  document,entities,getChecked,onCheck,onSelect,onZoomPair,onFocusReturn,onOpen=()=>{},storage,
 }){
@@ -26,6 +27,7 @@ export function createAtlasAdvancedNavigation({
  function checkedAction(target,id){const checked=getChecked().has(id);action(target,checked?'Ascunde':'Afișează',()=>{
   const next=!getChecked().has(id);lastHidden=next?null:id;
   onCheck(id,next);render();
+  if(!next)document.getElementById('advanced-undo-hide')?.focus?.();
  },'action-button atlas-advanced-compact').setAttribute('aria-label',(checked?'Ascunde':'Afișează')+' geometria '+title(byId.get(id)));}
  function compareAction(target,id){const paired=pair.includes(id);action(target,paired?'Scoate din comparație':'Adaugă la comparație',()=>{
   if(paired)pair=pair.filter(x=>x!==id);
@@ -41,7 +43,7 @@ export function createAtlasAdvancedNavigation({
   compareAction(controls,id);
  }
  function renderVisible(){const ids=checkedIds();append(content,'p','atlas-advanced-hint',ids.length+' geometrii bifate explicit. Filtrele pot ascunde temporar poligoanele; bifele rămân independente.');
-  if(lastHidden&&!getChecked().has(lastHidden))action(content,'Anulează ascunderea: '+title(byId.get(lastHidden)),()=>{onCheck(lastHidden,true);lastHidden=null;render();},'action-button atlas-advanced-compact');
+  if(lastHidden&&!getChecked().has(lastHidden)){const undo=action(content,'Anulează ascunderea: '+title(byId.get(lastHidden)),()=>{onCheck(lastHidden,true);lastHidden=null;render();},'action-button atlas-advanced-compact');undo.id='advanced-undo-hide';}
   const list=append(content,'ul','atlas-advanced-list');for(const id of ids.slice(0,offset))entityRow(list,id,'visible');
   if(ids.length>offset)action(content,'Mai multe ('+(ids.length-offset)+' rămase)',()=>{offset+=limit;render();});
  }
@@ -67,7 +69,7 @@ export function createAtlasAdvancedNavigation({
   if(pair.length===2){action(content,'Centrează pe ambele',()=>onZoomPair(pair.map(id=>byId.get(id))),'action-button').disabled=pair.some(id=>!Array.isArray(byId.get(id)?.map?.bbox));}
   if(pair.length)action(content,'Golește comparația',()=>{pair=[];render();});
  }
- function render(){updateCounters();for(const [key,tab] of Object.entries(tabs)){const active=key===current;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}content.replaceChildren?.();if(current==='visible')renderVisible();else if(current==='recent')renderRecent();else renderCompare();}
+ function render(){updateCounters();for(const [key,tab] of Object.entries(tabs)){const active=key===current;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}content.setAttribute('aria-labelledby',tabs[current].id);content.replaceChildren?.();if(current==='visible')renderVisible();else if(current==='recent')renderRecent();else renderCompare();}
  function open(which='visible',origin=buttons[which]){onOpen();current=which;returnTo=origin||buttons.visible;offset=limit;render();if(!dialog.open)dialog.showModal();closeButton.focus();}
  function close(){if(dialog.open)dialog.close();}
  function restoreFocus(){const el=onFocusReturn?.(returnTo)||returnTo;el?.focus?.();}
