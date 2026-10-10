@@ -1,3 +1,5 @@
+import {createAtlasLayout} from './atlas-layout.mjs';
+import {createAtlasPreview} from './atlas-preview.mjs';
 import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,entityProvenanceHtml,labelMapControls,wireAtlasSkipLinks} from './atlas-presentation.mjs';
 import {createAtlasMobileUi} from './atlas-mobile-ui.mjs';
 import {createAtlasExplorerShell} from './atlas-explorer-shell.mjs';
@@ -12,7 +14,8 @@ import {validateConsolidatedHierarchy} from './atlas-hierarchy-validate.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
 import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
 
-const map=L.map('map',{zoomControl:true,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
+const atlasLayout=createAtlasLayout({document,browser:globalThis.window});
+const map=L.map('map',{zoomControl:true,trackResize:false,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
 let osmBasemapVisible=true;
 const statisticalPane=map.createPane?.('statistical-boundaries');
 if(statisticalPane?.style)statisticalPane.style.zIndex='450';
@@ -26,7 +29,7 @@ function setOsmBasemapVisible(value){
 L.control.scale({imperial:false}).addTo(map);
 labelMapControls(document);
 attachRoMdZoomControl(document,L);
-const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window});
+const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window,media:atlasLayout.media});
 
 const roots={RO:L.layerGroup().addTo(map),MD:L.layerGroup().addTo(map)};
 const tiers=['overview','local','detail'];
@@ -93,9 +96,15 @@ let atlasTree=null;
 let atlasSearch=null;
 let atlasUrl=null;
 let atlasAdvanced=null;
-const mobileMedia=globalThis.window?.matchMedia?.('(max-width: 899px)')||{matches:false};
+const mobileMedia=atlasLayout.media;
 const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,onClear:clearSelection,isSearchOpen:()=>Boolean(atlasSearch?.state.open)||filtersPanelOpen,onOpen:()=>atlasTree?.revealSelected(),onCloseDrawer:()=>setFiltersPanelOpen(false),onOpenFilters:()=>setFiltersPanelOpen(true)});
 wireAtlasSkipLinks({document,mobile:atlasMobile});
+atlasLayout.onResize(()=>{
+ const center=map.getCenter(),zoom=map.getZoom();
+ const resize=()=>{map.invalidateSize({animate:false,pan:false});map.setView([center.lat,center.lng],zoom,{animate:false,reset:true});};
+ queueMicrotask(()=>{if(atlasUrl)void atlasUrl.action('replace',resize);else resize();});
+});
+const atlasPreview=createAtlasPreview({document,layout:atlasLayout,browser:globalThis.window});
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
 
@@ -663,4 +672,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
+export {atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};

@@ -1,5 +1,5 @@
 // P5.1: visual shell only. No entity/filter/URL/geometry mutation.
-export function createAtlasExplorerShell({document,map,window:browser}){
+export function createAtlasExplorerShell({document,map,window:browser,media}){
  const main=document.getElementById('atlas-main');
  const sidebar=document.getElementById('atlas-controls');
  const divider=document.getElementById('explorer-resizer');
@@ -10,7 +10,7 @@ export function createAtlasExplorerShell({document,map,window:browser}){
  if(!main?.style?.setProperty||!sidebar||!divider?.addEventListener||!browser?.matchMedia||!map?.invalidateSize){
   return {get width(){return initial;},setWidth(){}};
  }
- const small=browser.matchMedia('(max-width: 899px)');
+ const small=media||browser.matchMedia('(max-width: 899px)');
  const storageKey='reforma-teritoriala.explorer-width.v1';
  let pointer=null;
  let width=initial;

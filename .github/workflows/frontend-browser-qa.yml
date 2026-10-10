@@ -67,6 +67,8 @@ jobs:
         run: node --test scripts/audit/p641-ro-md-fit-browser.mjs
       - name: P6.4.2 OSM icon below Leaflet zoom/home, responsive on-off and history
         run: node --test scripts/audit/p642-osm-basemap-zoom-browser.mjs
+      - name: P7.1 single-instance preview, rotation and semantic invariants
+        run: node --test scripts/audit/p71-responsive-preview-browser.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots
@@ -84,4 +86,5 @@ jobs:
           path: |
             ${{ runner.temp }}/atlas-browser-evidence
             /tmp/atlas-browser-evidence/p64-*
+            /tmp/atlas-browser-evidence/p71-*
           retention-days: 14

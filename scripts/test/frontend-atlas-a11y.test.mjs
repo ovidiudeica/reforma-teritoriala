@@ -80,7 +80,7 @@ test('P5.2 independent hierarchy controls expose meaningful names without extra 
  assert.ok(d.getElementById('hierarchy-tree'));
  assert.ok(d.getElementById('atlas-controls').textContent.includes('Bifează geometria'));
  const containsRule=(selector,key,value)=>rules.some(r=>r.selector.split(',').map(v=>v.trim()).includes(selector)&&r.declarations[key]===value);
- assert.ok(containsRule('.hierarchy-tree','min-height','clamp(240px,40vh,420px)'));
+ assert.ok(containsRule('.hierarchy-tree','min-height','clamp(240px,40cqh,420px)'));
  assert.ok(containsRule('.tree-branch>.tree-select','position','relative'));
  assert.ok(containsRule('.tree-visibility-toggle','cursor','pointer'));
  assert.ok(containsRule('.tree-node .tree-name','white-space','nowrap'));
