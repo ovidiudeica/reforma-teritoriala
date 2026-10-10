@@ -37,7 +37,7 @@ try{
   });
   await t.test('recenter after panning, zooming and hiding OSM fits RO+MD without touching checked state',async()=>{
     await page.viewport(390,844);await page.navigate(browser.server.url+'/');
-    await page.evaluate("qaApp.map.setView([40,38],8,{animate:false})");
+    await page.evaluate("(()=>{qaApp.map.setView([40,38],8,{animate:false});return true;})()");
     await page.click('#basemap-toggle');
     const before=await page.evaluate("({visible:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,osm:document.querySelector('#basemap-toggle').getAttribute('aria-pressed')})");
     await page.click('#map-home');
