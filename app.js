@@ -583,7 +583,7 @@ async function applyUrlState(state){
  replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
  for(const j of ['RO','MD']){const enabled=state.jurisdictions.includes(j);document.getElementById('layer-'+j.toLowerCase()).checked=enabled;if(enabled)roots[j].addTo(map);else map.removeLayer(roots[j]);}
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
- if(!state.viewportExplicit&&!state.entityId)fitRoMd(map,entityById);
+ if(!state.viewportExplicit&&!state.entityId&&typeof map.getSize==='function')fitRoMd(map,entityById);
   else map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
  if(state.entityId)await selectEntity(state.entityId,{source:'url',zoom:!state.viewportExplicit});else clearSelection();
  await syncTiers();updateSelectionVisibility();
