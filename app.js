@@ -405,6 +405,16 @@ function overviewRootIdFor(entity){
  while(cursor&&cursor.map?.tier!=='overview'&&depth++<32)cursor=entityById.get(cursor.hierarchy?.parent_catalog_id)||null;
  return cursor?.map?.tier==='overview'?cursor.id:null;
 }
+function checkedChunkRoots(jurisdiction,tier){
+ const roots=new Set();
+ for(const id of visibleEntityIds){
+  const entity=entityById.get(id);
+  if(entity?.jurisdiction!==jurisdiction||entity.map?.tier!==tier||!isVisible(entity))continue;
+  const root=overviewRootIdFor(entity);
+  if(root)roots.add(root);
+ }
+ return roots;
+}
 function chunkKey(entry){return entry.jurisdiction+'_'+entry.tier+'_'+entry.root_entity_id;}
 function chunkEntries(jurisdiction,tier){
  return (chunkIndex?.chunks||[]).filter(entry=>entry.jurisdiction===jurisdiction&&entry.tier===tier);
@@ -453,7 +463,9 @@ async function syncTiers(){
     if(roots[jurisdiction].hasLayer(legacyGroup))roots[jurisdiction].removeLayer(legacyGroup);
     const wanted=new Set();
     if(enabled&&tierWanted(tier,zoom)){
+     const checkedRoots=checkedChunkRoots(jurisdiction,tier);
      for(const entry of chunkEntries(jurisdiction,tier)){
+      if(!checkedRoots.has(entry.root_entity_id))continue;
       const root=entityById.get(entry.root_entity_id);
       if(!root||!bboxIntersectsViewport(root.map?.bbox))continue;
       const key=chunkKey(entry);
