@@ -83,6 +83,7 @@ try{
    const before=await provenance();
    await page.click('#advanced-visible');
    await page.click('#atlas-advanced-content .atlas-advanced-row-actions button:first-child');
+   assert.equal(await page.evaluate('document.activeElement.id'),'advanced-undo-hide','focus moves to Undo when its originating row disappears');
    assert.equal((await provenance()).checked.length,1);
    await page.click('#atlas-advanced-content > button');
    assert.deepEqual(await provenance(),before);
