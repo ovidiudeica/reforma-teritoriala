@@ -21,6 +21,10 @@
 #atlas-main .leaflet-control-zoom > #map-home:focus-visible{
  outline:3px solid #165c38;outline-offset:-4px;
 }
+/* In short landscape the selected details sheet must not cover the third zoom button. */
+@media(max-width:899px) and (orientation:landscape) and (max-height:540px){
+ #atlas-main #details-panel{left:65px}
+}
 @media(forced-colors:active){
  #atlas-main .leaflet-control-zoom > #map-home{color:ButtonText;background:ButtonFace;border-top:1px solid ButtonText}
  #atlas-main .leaflet-control-zoom > #map-home:focus-visible{outline:3px solid Highlight}
