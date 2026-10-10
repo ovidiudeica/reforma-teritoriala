@@ -78,6 +78,20 @@ export function groupSearchResults(results){
  return [...new Set(results.map(r=>r.entity.jurisdiction))].sort((a,b)=>jurisdictionOrder(a)-jurisdictionOrder(b)||a.localeCompare(b)).map(j=>({jurisdiction:j,label:j==='RO'?'România':j==='MD'?'Moldova':j,results:results.filter(r=>r.entity.jurisdiction===j)}));
 }
 // Individual Unicode code points: injective IDs, no raw HTML.
+// Highlight accent-insensitive matches without HTML injection; preserve the exact visible name.
+export function appendHighlightedSearchText(document,target,value,query){
+ const text=String(value??''),needle=normalizeSearch(query);
+ if(!needle){target.textContent=text;return;}
+ const letters=[...text],folded=letters.map(ch=>normalizeSearch(ch));
+ const positions=[];let normalized='';
+ for(let i=0;i<folded.length;i++)for(const unit of folded[i]){normalized+=unit;positions.push(i);}
+ const start=normalized.indexOf(needle);
+ if(start<0){target.textContent=text;return;}
+ const begin=positions[start],end=positions[start+needle.length-1]+1;
+ if(begin>0)target.appendChild(document.createTextNode(letters.slice(0,begin).join('')));
+ const mark=document.createElement('mark');mark.textContent=letters.slice(begin,end).join('');target.appendChild(mark);
+ if(end<letters.length)target.appendChild(document.createTextNode(letters.slice(end).join('')));
+}
 export const searchOptionId=id=>'atlas-search-option-'+Array.from(String(id),c=>c.codePointAt(0).toString(16)).join('-');
 export function revealSearchOption(container,option){
  const outer=container.getBoundingClientRect(),row=option.getBoundingClientRect(),top=outer.top+(container.clientTop||0),bottom=top+container.clientHeight;
@@ -100,7 +114,7 @@ export function createAtlasSearch({input,container,status,document,index,onSelec
    if(groups.length>1){target=document.createElement('div');target.setAttribute('role','group');target.setAttribute('aria-label',group.label);const heading=document.createElement('div');heading.className='search-group-heading';heading.textContent=group.label;heading.setAttribute('aria-hidden','true');target.appendChild(heading);container.appendChild(target);}
    for(const record of group.results){
     const option=document.createElement('button');option.type='button';option.tabIndex=-1;option.className='search-result';option.id=searchOptionId(record.entity.id);option.dataset.entityId=record.entity.id;option.setAttribute('role','option');
-    const name=document.createElement('b');name.textContent=record.descriptor.name;const metadata=document.createElement('small');metadata.textContent=record.descriptor.secondary;option.appendChild(name);option.appendChild(metadata);
+    const name=document.createElement('b');appendHighlightedSearchText(document,name,record.descriptor.name,query);const metadata=document.createElement('small');metadata.textContent=record.descriptor.secondary;option.appendChild(name);option.appendChild(metadata);
     option.addEventListener('pointermove',()=>activate(record.entity.id));option.addEventListener('mousedown',event=>event.preventDefault());option.addEventListener('click',()=>select(record.entity.id).catch(onError));options.set(record.entity.id,option);target.appendChild(option);
    }
   }
