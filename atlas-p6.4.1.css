@@ -1,0 +1,27 @@
+/* P6.4.1 — country-fit is the third native Leaflet zoom control, not a map overlay. */
+#atlas-main .leaflet-control-zoom{display:flex;flex-direction:column;overflow:hidden;border-radius:6px}
+#atlas-main .leaflet-control-zoom > .leaflet-control-zoom-in,
+#atlas-main .leaflet-control-zoom > .leaflet-control-zoom-out{
+ box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+ width:44px;height:44px;min-height:44px;line-height:1;font-size:25px;
+}
+#atlas-main .leaflet-control-zoom > .leaflet-control-zoom-out{
+ border-bottom:1px solid #c8d2cc;
+}
+#atlas-main .leaflet-control-zoom > #map-home{
+ position:static;left:auto;top:auto;right:auto;bottom:auto;
+ box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+ width:44px;height:44px;min-width:44px;min-height:44px;max-width:none;
+ padding:0;margin:0;border:0;border-radius:0;box-shadow:none;
+ color:#173d2a;background:#fff;cursor:pointer;touch-action:manipulation;
+ font-size:inherit;line-height:1;
+}
+#atlas-main .leaflet-control-zoom > #map-home svg{width:23px;height:23px;display:block}
+#atlas-main .leaflet-control-zoom > #map-home:hover{background:#f1f6f1}
+#atlas-main .leaflet-control-zoom > #map-home:focus-visible{
+ outline:3px solid #165c38;outline-offset:-4px;
+}
+@media(forced-colors:active){
+ #atlas-main .leaflet-control-zoom > #map-home{color:ButtonText;background:ButtonFace;border-top:1px solid ButtonText}
+ #atlas-main .leaflet-control-zoom > #map-home:focus-visible{outline:3px solid Highlight}
+}
