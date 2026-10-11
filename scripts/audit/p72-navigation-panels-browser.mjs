@@ -3,11 +3,26 @@ import {launchBrowser,waitFor,delay} from '../test/helpers/atlas-browser.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url)),browser=await launchBrowser(root),page=await browser.page();
 const semantic=()=>page.evaluate("JSON.stringify(qaApp.captureUrlState(),(k,v)=>v instanceof Set?[...v].sort():['lat','lon'].includes(k)?Number(v.toFixed(5)):v)");
 const snapshot=()=>page.evaluate(`(()=>{
- const frame=document.querySelector('#atlas-controls'),r=frame.getBoundingClientRect();
+ const frame=document.querySelector('#atlas-controls'),r=frame.getBoundingClientRect(),title=document.querySelector('#details-title'),card=document.querySelector('#details-panel');
  const buttons=[...document.querySelectorAll('#atlas-navigation-rail button')].map(e=>{const b=e.getBoundingClientRect();if(!b.width||!b.height)return null;const hit=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);return {id:e.id,width:b.width,height:b.height,left:b.left,right:b.right,top:b.top,bottom:b.bottom,clear:hit===e||e.contains(hit),name:e.getAttribute('aria-label')}}).filter(Boolean);
- return {state:qaApp.atlasPanels.state,focus:document.activeElement.id,hidden:frame.hidden,inert:frame.inert,bounds:{left:r.left,right:r.right,top:r.top,bottom:r.bottom},panes:[...frame.querySelectorAll(':scope>section')].filter(e=>e.id!=='search-panel').map(e=>({id:e.id,hidden:e.hidden,inert:e.inert})),buttons,width:innerWidth,height:innerHeight,overflow:document.documentElement.scrollWidth>innerWidth,mapWidth:qaApp.map.getSize().x,mapDom:document.querySelector('#map').clientWidth};
+ return {fullTitle:card.hidden||title.scrollWidth<=title.clientWidth,state:qaApp.atlasPanels.state,focus:document.activeElement.id,hidden:frame.hidden,inert:frame.inert,bounds:{left:r.left,right:r.right,top:r.top,bottom:r.bottom},panes:[...frame.querySelectorAll(':scope>section')].filter(e=>e.id!=='search-panel').map(e=>({id:e.id,hidden:e.hidden,inert:e.inert})),buttons,width:innerWidth,height:innerHeight,overflow:document.documentElement.scrollWidth>innerWidth,mapWidth:qaApp.map.getSize().x,mapDom:document.querySelector('#map').clientWidth};
 })()`);
-const clear=s=>{assert.equal(s.overflow,false);assert.ok(s.buttons.every(b=>b.width>=44&&b.height>=44&&b.left>=0&&b.right<=s.width&&b.top>=0&&b.bottom<=s.height&&b.clear&&b.name),'rail targets must be named, touch-sized and unobscured');};
+const placement=function(){
+ const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
+ const overlap=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+ const map=rect(document.querySelector('#map'));
+ const obstacles=['atlas-navigation-rail','details-panel','atlas-preview-toolbar'].map(id=>document.getElementById(id)).filter(e=>e&&!e.hidden).map(e=>({id:e.id,...rect(e)}));
+ const controls=[...document.querySelectorAll('.leaflet-control')].map(e=>({name:e.className,...rect(e)}));
+ const issues=[];
+ for(const c of controls){
+  if(!c.width||!c.height)continue;
+  if(c.left<map.left||c.right>map.right||c.top<map.top||c.bottom>map.bottom)issues.push({control:c.name,outsideMap:true,map,rect:c});
+  for(const o of obstacles)if(o.width&&o.height&&overlap(c,o))issues.push({control:c.name,obstacle:o.id,controlRect:c,obstacleRect:o});
+ }
+ for(let i=0;i<controls.length;i++)for(let j=i+1;j<controls.length;j++)if(controls[i].width&&controls[j].width&&overlap(controls[i],controls[j]))issues.push({betweenControls:[controls[i].name,controls[j].name]});
+ return {map,controls,obstacles,issues};
+};
+const clear=s=>{assert.equal(s.overflow,false);assert.equal(s.fullTitle,true,'selected title truncated');assert.ok(s.buttons.every(b=>b.width>=44&&b.height>=44&&b.left>=0&&b.right<=s.width&&b.top>=0&&b.bottom<=s.height&&b.clear&&b.name),'rail targets must be named, touch-sized and unobscured');};
 try{
  await test('P7.2 shared contextual navigation lifecycle',{timeout:300000},async t=>{
   await page.viewport(1440,900);await page.navigate(browser.server.url+'/');
@@ -81,16 +96,81 @@ try{
      await page.evaluate("qaApp.atlasMobile.setSheet("+JSON.stringify(snap)+")");await delay(100);
      const clear=await page.evaluate("([...document.querySelectorAll('.leaflet-control-zoom>a,.leaflet-control-zoom>button')].every(e=>{const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return hit===e||e.contains(hit)}))");
      assert.equal(clear,true,'native controls covered by '+snap+' sheet at '+w+'x'+h);
+     const p=await page.call(placement);assert.deepEqual(p.issues,[],'whole control rectangles overlap at '+snap+' '+w+'x'+h+': '+JSON.stringify(p.issues));
     }
    }
    await page.evaluate("qaApp.atlasMobile.setSheet('peek')");
   });
   await t.test('phone More exposes extra routes and returns focus to a visible control',async()=>{
-   await page.viewport(1440,900);await page.evaluate("document.querySelector('#info-toggle').focus()");await page.viewport(390,844);assert.equal((await snapshot()).focus,'navigation-more');await page.click('#navigation-more');let s=await snapshot();clear(s);assert.equal(s.state.menu,true);assert.equal(s.buttons.length,9);
+   await page.viewport(1440,900);await page.evaluate("document.querySelector('#info-toggle').focus()");await page.viewport(390,844);await waitFor(async()=>(await snapshot()).focus==='navigation-more','responsive focus restoration');await page.click('#navigation-more');let s=await snapshot();clear(s);assert.equal(s.state.menu,true);assert.equal(s.buttons.length,9);
    await page.openPanel('info');s=await snapshot();assert.equal(s.state.active,'info');assert.equal(s.state.menu,false);assert.equal(s.focus,'drawer-close');assert.ok(s.bounds.left>=0&&s.bounds.right<=390&&s.bounds.bottom<780);
    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-phone-info.png'));
    await page.key('Escape');s=await snapshot();assert.equal(s.state.active,null);assert.equal(s.focus,'navigation-more');clear(s);
+   await page.openPanel('info');await page.click('#navigation-more');
+   assert.equal((await snapshot()).state.active,null);assert.equal((await snapshot()).state.menu,true);
+   assert.equal(await page.evaluate("document.querySelector('#map').inert&&document.querySelector('#details-panel').inert"),true);
+   for(let step=0;step<30;step++){await page.key('Tab');assert.equal(await page.evaluate("!!document.activeElement.closest('#map,#details-panel')"),false,'More exposes covered background');}
+   await page.key('Escape');assert.equal((await snapshot()).focus,'navigation-more');
+   assert.equal(await page.evaluate("document.querySelector('#map').inert||document.querySelector('#details-panel').inert"),false);
    await page.click('#mobile-navigation');assert.equal((await snapshot()).state.active,'entities');await page.click('#drawer-close');assert.equal((await snapshot()).focus,'mobile-navigation');
+  });
+  await t.test('selection card exposes whole named touch targets and a usable expanded body in compact views',async()=>{
+   const id=await page.evaluate("[...qaApp.entityById.values()].find(e=>e.jurisdiction==='RO'&&e.map?.bbox&&!qaApp.visibleEntityIds.has(e.id)).id");
+   await page.call(function(id){qaApp.selectEntity(id,{source:'map',zoom:false});},id);
+   await waitFor(()=>page.call(function(id){return qaApp.selectedEntityId===id&&!document.querySelector('#details-panel').hidden;},id),'selection card ready');
+   for(const [width,height]of [[360,640],[390,844],[600,390],[640,360],[844,390],[768,1024]]){
+    await page.viewport(width,height);await page.evaluate('qaApp.atlasPanels.close({focus:false})');
+    let peekHeight;
+    for(const snap of ['peek','half','expanded']){
+     await page.call(function(snap){qaApp.atlasMobile.setSheet(snap);},snap);await delay(100);
+     const state=await page.call(function(){
+      const card=document.querySelector('#details-panel').getBoundingClientRect(),body=document.querySelector('#details-body');
+      const targets=[...document.querySelectorAll('#details-panel .details-head button,#sheet-drag')].filter(e=>!e.hidden).map(e=>{const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {id:e.id,name:e.getAttribute('aria-label')||e.textContent.trim(),width:r.width,height:r.height,inside:r.left>=card.left&&r.right<=card.right&&r.top>=card.top&&r.bottom<=card.bottom,clear:hit===e||e.contains(hit)};});
+      const title=document.querySelector('#details-title');return {fullTitle:title.scrollWidth<=title.clientWidth,targets,cardHeight:card.height,bodyHidden:body.hidden,bodyHeight:document.querySelector('#details-content').clientHeight};
+     });
+     const p=await page.call(placement);assert.deepEqual(p.issues,[],'control overlap at '+width+'x'+height+' '+snap);
+     if(snap==='peek')peekHeight=state.cardHeight;else if(height>540)assert.ok(state.cardHeight>peekHeight,'expanded state must grow beyond peek at '+width+'x'+height);
+     assert.equal(state.fullTitle,true,'selected title truncated at '+width+'x'+height);assert.equal(state.targets.length,4);assert.ok(state.targets.every(t=>t.name&&t.width>=44&&t.height>=44&&t.inside&&t.clear),'card target clipped at '+width+'x'+height+' '+snap+': '+JSON.stringify(state));
+     if(snap!=='peek')assert.ok(state.bodyHeight>=44&&!state.bodyHidden,'expanded body cannot expose one complete control at '+width+'x'+height+' '+snap+': '+JSON.stringify(state));
+     await page.evaluate("document.querySelector('#selection-visibility-action').focus()");
+     const action=await page.call(function(){const e=document.querySelector('#selection-visibility-action'),r=e.getBoundingClientRect(),c=document.querySelector('#details-content').getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {focused:document.activeElement===e,inside:r.top>=c.top&&r.bottom<=c.bottom&&r.left>=c.left&&r.right<=c.right,clear:hit===e||e.contains(hit),width:r.width,height:r.height};});
+     assert.ok(action.focused&&action.inside&&action.clear&&action.width>=44&&action.height>=44,'focused action clipped after snap/rotation '+width+'x'+height+' '+snap+': '+JSON.stringify(action));
+    }
+   }
+   await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-card-tablet-expanded.png'));
+  });
+  await t.test('long desktop selection cards reserve complete map commands with explorer open and closed',async()=>{
+   for(const [width,height]of [[900,768],[1024,768],[1440,900]])for(const opened of [true,false]){
+    await page.viewport(width,height);
+    if(opened)await page.openPanel('entities');else await page.evaluate('qaApp.atlasPanels.close({focus:false})');
+    const p=await page.call(placement);assert.deepEqual(p.issues,[],'desktop card/control overlap '+width+'x'+height+' explorer='+opened+': '+JSON.stringify(p.issues));
+    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-desktop-card-'+width+'-'+opened+'.png'));
+   }
+  });
+  await t.test('scale labels remain readable at every zoom without covering attribution',async()=>{
+   await page.viewport(360,640);await page.evaluate('qaApp.atlasPanels.close({focus:false})');
+   const view=await page.call(function(){return {center:qaApp.map.getCenter(),zoom:qaApp.map.getZoom()};});
+   try{
+    for(let zoom=0;zoom<=19;zoom++){
+     await page.call(function(zoom){qaApp.map.setZoom(zoom,{animate:false});},zoom);await delay(100);
+     const scale=await page.call(function(){const e=document.querySelector('.leaflet-control-scale-line');return {label:e.textContent,width:e.clientWidth,scroll:e.scrollWidth};});
+     assert.ok(scale.label&&scale.width>0&&scale.scroll<=scale.width,'scale label overflow at zoom '+zoom+': '+JSON.stringify(scale));
+     assert.deepEqual((await page.call(placement)).issues,[],'scale collision at zoom '+zoom);
+    }
+    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-readable-scale-360.png'));
+   }finally{await page.call(function(view){qaApp.map.setView(view.center,view.zoom,{animate:false});},view);}
+  });
+  await t.test('mobile-first bootstrap keeps Leaflet commands anchored after desktop transitions',async()=>{
+   const cold=await browser.page();
+   try{
+    await cold.send('Emulation.setDeviceMetricsOverride',{width:390,height:844,mobile:true,deviceScaleFactor:1});
+    await cold.navigate(browser.server.url+'/');assert.equal(await cold.evaluate('qaApp.atlasPanels.state.mobile'),true);
+    for(const [width,height]of [[1440,900],[1024,768],[768,1024]]){
+     await cold.viewport(width,height);await cold.evaluate('qaApp.atlasPanels.close({focus:false})');
+     const p=await cold.call(placement);assert.deepEqual(p.issues,[],'mobile-first '+width+'x'+height+': '+JSON.stringify(p.issues));
+    }
+    await cold.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-mobile-first-tablet.png'));
+   }finally{await cold.close();}
   });
   await t.test('no own-asset, console or application failures',()=>{
    assert.deepEqual(page.errors,[]);assert.deepEqual(page.console.filter(x=>x.type==='error'||x.level==='error'),[]);assert.deepEqual(page.responses.filter(x=>x.status>=400&&x.url.startsWith(browser.server.url)),[]);

@@ -20,7 +20,8 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
  function focusReturn(){const target=visible(origin)?origin:visible(more)?more:buttons.entities;target?.focus?.();}
  function sync(){
   const opened=active!==null;
-  if(map)map.inert=mobile&&opened;
+  const overlay=mobile&&(opened||menu);
+  if(map)map.inert=overlay;
   frame.hidden=!opened;frame.inert=!opened;frame.setAttribute('aria-hidden',String(!opened));
   frame.setAttribute('aria-labelledby','atlas-panel-title');frame.setAttribute('tabindex','-1');
   frame.classList.toggle('mobile-drawer-open',mobile&&opened);frame.dataset.mobile=String(mobile);
@@ -28,7 +29,7 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
   const shown=opened?el(panelDefinitions[active].content):null;
   for(const content of contents){content.hidden=content!==shown;content.inert=content!==shown;}
   title.textContent=opened?panelDefinitions[active].title:'Navigare';search.hidden=!['entities','search'].includes(active);
-  closeButton.hidden=!opened;backdrop.hidden=!mobile||!opened;
+  closeButton.hidden=!opened;backdrop.hidden=!overlay;
   for(const [key,button]of Object.entries(buttons)){button.hidden=false;button.setAttribute('aria-pressed',String(key===active));button.setAttribute('aria-expanded',String(key===active));button.setAttribute('aria-controls','atlas-controls');}
   more?.setAttribute('aria-expanded',String(menu));
  }
@@ -39,7 +40,7 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
   if(focus)(key==='search'?el('entity-search'):closeButton)?.focus?.();
  }
  function close({focus=true}={}){
-  if(active===null)return;active=null;menu=false;sync();emit();if(focus)focusReturn();
+  if(active===null&&!menu)return;active=null;menu=false;sync();emit();if(focus)focusReturn();
  }
  function breakpoint(event){
   const focused=document.activeElement===document.body&&lastFocused&&!visible(lastFocused)?lastFocused:document.activeElement,inside=frame.contains?.(focused);
@@ -51,13 +52,13 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
  }
  for(const [key,button]of Object.entries(buttons))button.addEventListener('click',()=>active===key?close():open(key));
  closeButton.addEventListener('click',()=>close());backdrop.addEventListener('click',()=>close());
- more?.addEventListener('click',()=>{menu=!menu;sync();if(menu)buttons.visible?.focus?.();});
+ more?.addEventListener('click',()=>{const next=!menu;if(next&&active!==null)close({focus:false});menu=next;origin=more;sync();emit();if(menu)buttons.visible?.focus?.();});
  document.addEventListener?.('keydown',event=>{
   if(event.key!=='Escape'||event.isComposing||event.defaultPrevented)return;
-  if(menu){event.preventDefault();menu=false;sync();more.focus();return;}
+  if(menu){event.preventDefault();menu=false;sync();emit();more.focus();return;}
   if(active===null||(['entities','search'].includes(active)&&isSearchOpen()))return;
   event.preventDefault();close();
  },true);
  media.addEventListener?.('change',breakpoint);sync();
- return {open,close,toggle(){active===null?open(previous):close();},onChange(fn){listeners.add(fn);return()=>listeners.delete(fn);},get state(){return {active,mobile,drawer:mobile&&active!==null,menu};}};
+ return {open,close,toggle(){active===null?open(previous):close();},onChange(fn){listeners.add(fn);return()=>listeners.delete(fn);},get state(){return {active,mobile,drawer:mobile&&active!==null,overlay:mobile&&(active!==null||menu),menu};}};
 }

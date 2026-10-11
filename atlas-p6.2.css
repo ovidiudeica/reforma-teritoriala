@@ -1,36 +1,19 @@
 #sheet-drag[hidden],#sheet-half[hidden]{display:none!important}
 @container atlas (max-width:899px){
-#atlas-main #details-panel{
-  min-height:0;max-height:min(34cqh,260px);height:auto;
-  padding:7px 10px 11px;border-radius:14px;box-shadow:0 8px 28px #0c241c38;
- }
-#atlas-main #details-panel.mobile-sheet-half{height:min(48cqh,calc(100% - 92px));max-height:calc(100% - 92px)}
-#atlas-main #details-panel.mobile-sheet-expanded{height:calc(100% - 92px);max-height:calc(100% - 92px)}
 #atlas-main #details-panel .details-head{gap:4px}
 #atlas-main #details-panel .details-head .mobile-control{min-height:44px;min-width:64px;padding:5px 7px;font-size:12px;white-space:nowrap}
 #atlas-main #details-panel .details-summary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#atlas-main #details-panel .details-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+#atlas-main #details-content{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+#atlas-main #details-panel .details-body{overflow:visible}
+#atlas-main #details-panel.mobile-sheet-open:not(.mobile-sheet-half):not(.mobile-sheet-expanded) #details-content{max-height:88px}
+#atlas-main #details-panel.mobile-sheet-half #details-content,#atlas-main #details-panel.mobile-sheet-expanded #details-content{min-height:44px}
 #sheet-drag:not([hidden]){
   display:flex;flex:0 0 auto;align-items:center;justify-content:center;
   align-self:stretch;height:44px;min-height:44px;touch-action:none;cursor:ns-resize;border-radius:7px;
  }
 #sheet-drag span{display:block;width:52px;height:5px;background:#789184;border-radius:999px}
 #sheet-drag:focus-visible{outline:3px solid #365b4a;outline-offset:-3px}
-#atlas-main .atlas-basemap-toggle{
-  left:auto;right:12px;top:10px;bottom:auto;max-width:min(160px,calc(100cqw - 80px));
- }
-#atlas-main .leaflet-bottom.leaflet-right{bottom:auto;top:66px}
-#atlas-main .leaflet-bottom.leaflet-left{bottom:auto;top:103px;left:auto;right:10px}
-#atlas-main .leaflet-bottom.leaflet-right .leaflet-control-attribution{
-  margin:0 10px 0 0;max-width:calc(100cqw - 70px);
-  font-size:9px;line-height:1.4;background:rgba(255,255,255,.92);
- }
-#atlas-main .leaflet-bottom.leaflet-left .leaflet-control-scale{margin:0}
-}
-@container atlas (max-width:899px) and (orientation:landscape) and (max-height:540px){
-#atlas-main #details-panel{max-height:38cqh}
-#atlas-main #details-panel.mobile-sheet-half{height:48cqh;max-height:calc(100% - 70px)}
-#atlas-main #details-panel.mobile-sheet-expanded{height:calc(100% - 70px);max-height:calc(100% - 70px)}
+
 }
 @media(prefers-reduced-motion:reduce){
 #atlas-main #details-panel{scroll-behavior:auto;transition:none}

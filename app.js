@@ -26,7 +26,7 @@ function setOsmBasemapVisible(value){
  const button=document.getElementById('basemap-toggle');
  if(button){button.setAttribute('aria-pressed',String(visible));button.setAttribute('aria-label',visible?'Fundal OpenStreetMap activ. Dezactivează fundalul':'Fundal OpenStreetMap dezactivat. Activează fundalul');button.setAttribute('title',visible?'Dezactivează fundalul OpenStreetMap':'Activează fundalul OpenStreetMap');}
 }
-L.control.scale({imperial:false}).addTo(map);
+L.control.scale({imperial:false,maxWidth:100}).addTo(map);
 labelMapControls(document);
 attachRoMdZoomControl(document,L);
 
@@ -109,7 +109,7 @@ function resizeMapPreservingView(){
   if(atlasUrl)void atlasUrl.action('replace',resize);else resize();
  });
 }
-atlasLayout.onResize(resizeMapPreservingView);
+atlasLayout.onResize(()=>{resizeMapPreservingView();atlasMobile.ensureFocusVisible();});
 const atlasPreview=createAtlasPreview({document,layout:atlasLayout,browser:globalThis.window});
 const statisticalFeatureById=new Map();
 const statisticalGeometryLoaded=new Set();
