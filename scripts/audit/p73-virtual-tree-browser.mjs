@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
-import {tmpdir} from 'node:os';
+import {auditEvidenceDirectory} from '../test/helpers/atlas-evidence.mjs';
 import {launchBrowser,delay,waitFor} from '../test/helpers/atlas-browser.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url)),browser=await launchBrowser(root),page=await browser.page();
-const output=process.env.ATLAS_QA_OUTPUT||path.join(tmpdir(),'atlas-p73');await mkdir(output,{recursive:true});
+const output=auditEvidenceDirectory();await mkdir(output,{recursive:true});
 const metrics=()=>page.call(function(){const host=document.querySelector('#hierarchy-tree'),rows=[...host.querySelectorAll('.tree-node')],h=host.getBoundingClientRect();return {visible:qaApp.atlasTree.getVisibleCount(),mounted:rows.length,dom:host.querySelectorAll('*').length,height:host.clientHeight,width:host.clientWidth,scrollWidth:host.scrollWidth,scrollTop:host.scrollTop,selected:qaApp.selectedEntityId,rows:rows.map(row=>({id:row.dataset.entityId,index:Number(row.getAttribute('aria-rowindex')),level:Number(row.getAttribute('aria-level'))})),targets:[...host.querySelectorAll('button,input')].map(e=>{const r=e.getBoundingClientRect();return {width:r.width,height:r.height,inViewport:r.top>=h.top&&r.bottom<=h.bottom,hit:r.top>=h.top&&r.bottom<=h.bottom?(e===document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)||e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2))):true};})};});
 const reports=[];
 try{

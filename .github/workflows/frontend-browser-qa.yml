@@ -25,6 +25,7 @@ jobs:
           node --check scripts/test/frontend-cartography-browser.test.mjs
           node --check atlas-tree.mjs
           node --check atlas-tree-window.mjs
+          node --check scripts/test/helpers/atlas-evidence.mjs
           node --check scripts/audit/p73-virtual-tree-browser.mjs
           node --check atlas-panels.mjs
           node --check atlas-explorer-shell.mjs
@@ -78,10 +79,8 @@ jobs:
       - name: P7.2 shared contextual panes, adaptive navigation and focus lifecycle
         run: node --test scripts/audit/p72-navigation-panels-browser.mjs
       - name: P7.3 virtual tree model and bounded Chromium hierarchy
-        env:
-          ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
         run: |
-          node --test scripts/test/frontend-atlas-tree-window.test.mjs
+          node --test scripts/test/frontend-atlas-tree-window.test.mjs scripts/test/frontend-atlas-tree-labels.test.mjs scripts/test/frontend-atlas-evidence.test.mjs
           node --test scripts/audit/p73-virtual-tree-browser.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
@@ -102,4 +101,5 @@ jobs:
             /tmp/atlas-browser-evidence/p64-*
             /tmp/atlas-browser-evidence/p71-*
             /tmp/atlas-browser-evidence/p72-*
+            /tmp/atlas-browser-evidence/p73-*
           retention-days: 14
