@@ -28,6 +28,12 @@ const layout=function(){
  const controls=[...document.querySelector('.leaflet-control-zoom').children].map(e=>{const r=rect(e),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return {...r,name:e.getAttribute('aria-label'),hit:e===hit||e.contains(hit)};});
  return {header,title,main,controls,overflow:document.documentElement.scrollWidth>innerWidth,logical:qaApp.atlasLayout.size};
 };
+const cardFocusTarget=function(id){
+ const e=document.getElementById(id),r=e.getBoundingClientRect(),card=document.querySelector('#details-panel').getBoundingClientRect(),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+ const range=document.createRange();range.selectNodeContents(e);
+ const textLines=e.classList.contains('mobile-control')?[...range.getClientRects()].map(x=>({left:x.left,right:x.right,top:x.top,bottom:x.bottom})):[];
+ return {id,width:r.width,height:r.height,whole:r.top>=card.top&&r.bottom<=card.bottom,hit:e===hit||e.contains(hit),textContained:textLines.every(x=>x.left>=r.left&&x.right<=r.right&&x.top>=r.top&&x.bottom<=r.bottom),textLines};
+};
 try{
  await test('P7.6 final acceptance supplements',{timeout:300000},async t=>{
   for(const [width,height] of [[390,844],[844,390],[1440,900]]){
@@ -99,7 +105,7 @@ try{
       await page.call(function(sheet){qaApp.atlasMobile.setSheet(sheet);},sheet);await delay(100);
       const fit=await page.call(function(){const rect=e=>e.getBoundingClientRect(),overlap=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top,card=rect(document.querySelector('#details-panel')),rail=rect(document.querySelector('#atlas-navigation-rail')),scale=rect(document.querySelector('.leaflet-control-scale')),credit=rect(document.querySelector('.leaflet-control-attribution'));return {card:{top:card.top,bottom:card.bottom,height:card.height},rail:overlap(card,rail),scale:overlap(card,scale),credit:overlap(card,credit),annotationOverlap:overlap(scale,credit)};});assert.ok(!fit.rail&&!fit.scale&&!fit.credit&&!fit.annotationOverlap,JSON.stringify({width,sheet,fit}));reports.text.push({width,height,sheet,...fit});await page.screenshot(path.join(output,'p76-text200-card-'+width+'-'+sheet+'.png'));
       const targets=await page.call(function(){return [...document.querySelectorAll('#details-panel .details-head button')].filter(e=>!e.hidden&&e.getClientRects().length).map(e=>e.id);});
-      for(const id of targets){await page.call(function(id){document.getElementById(id).focus();},id);const target=await page.call(function(id){const e=document.getElementById(id),r=e.getBoundingClientRect(),card=document.querySelector('#details-panel').getBoundingClientRect(),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return {id,width:r.width,height:r.height,whole:r.top>=card.top&&r.bottom<=card.bottom,hit:e===hit||e.contains(hit)};},id);assert.ok(target.width>=44&&target.height>=44&&target.whole&&target.hit,JSON.stringify({width,sheet,target}));reports.text.push({width,height,sheet,cardFocus:target});}
+      for(const id of targets){await page.call(function(id){document.getElementById(id).focus();},id);const target=await page.call(cardFocusTarget,id);assert.ok(target.width>=44&&target.height>=44&&target.whole&&target.hit&&target.textContained,JSON.stringify({width,sheet,target}));reports.text.push({width,height,sheet,cardFocus:target});}
      }
      await page.openPanel('entities');await page.call(function(){qaApp.atlasTree.select('osm-r90689');qaApp.atlasTree.getNode('osm-r90689').button.focus();document.querySelector('#atlas-controls').scrollTop=0;});await page.key('ArrowDown');
      const target=await page.call(function(){const e=document.activeElement,r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return {height:document.querySelector('#hierarchy-tree').clientHeight,width:r.width,hit:e===hit||e.contains(hit),focused:e.classList.contains('tree-select'),panelScroll:document.querySelector('#atlas-controls').scrollTop};});assert.ok(target.height>=44&&target.width>=44&&target.hit&&target.focused,JSON.stringify(target));reports.text.push({width,height,tree:target});await page.screenshot(path.join(output,'p76-text200-tree-'+width+'x'+height+'.png'));await page.key('Escape');
