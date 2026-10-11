@@ -93,8 +93,13 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
  function controls(entry){return [entry.toggle,entry.checkbox,entry.button];}
  function focused(){for(const [id,entry] of rendered){const col=controls(entry).indexOf(document.activeElement);if(col>=0)return {id,col};}return null;}
  function schedule(){if(destroyed||frame!==null)return;if(view.requestAnimationFrame)frame=view.requestAnimationFrame(()=>{frame=null;render();});else render();}
- function show(id){const index=layout.indexOf(id);if(index<0)return;const top=layout.offset(index),bottom=top+layout.height(index),height=container.clientHeight||300;
-  if(top<(container.scrollTop||0))container.scrollTop=top;else if(bottom>(container.scrollTop||0)+height)container.scrollTop=Math.max(0,bottom-height);render();}
+ function alignRow(id){const index=layout.indexOf(id);if(index<0)return;const top=layout.offset(index),bottom=top+layout.height(index),height=container.clientHeight||300;
+  if(top<(container.scrollTop||0)||layout.height(index)>height)container.scrollTop=top;else if(bottom>(container.scrollTop||0)+height)container.scrollTop=Math.max(0,bottom-height);}
+ function show(id){if(layout.indexOf(id)<0)return;alignRow(id);render();
+  // Explicit navigation must settle wrapped visible rows before its final scroll.
+  // This bounded read batch uses the same height model as ResizeObserver.
+  let changed=false;for(const [rowId,entry] of rendered)if(layout.measure(rowId,entry.outer.getBoundingClientRect?.().height))changed=true;
+  if(changed){layout.remeasure();render();}alignRow(id);render();}
  function focusRow(id,col){active=id;column=col;show(id);controls(rendered.get(id))[col].focus?.({preventScroll:true});}
  function rebuild(){const saved=anchor(),focus=focused();layout.reset(flattenVisibleTree(nodeById,rootIds,openIds));
   if(layout.indexOf(active)<0){let id=active;while(id&&layout.indexOf(id)<0)id=nodeById.get(id)?.parent_id;active=id||layout.rows[0]?.id;}
