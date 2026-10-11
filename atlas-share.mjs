@@ -8,7 +8,7 @@ export function sharePayload(currentUrl,entity=null){
  const title=entity?'Reforma Teritorială — '+formatEntityName(entity.display_name):'Reforma Teritorială — vederea curentă';
  return {url:url.href,title,text:entity?'Explorează entitatea în atlas.':'Explorează această vedere a atlasului.'};
 }
-export const shareEmail=payload=>'mailto:?'+new URLSearchParams({subject:payload.title,body:payload.text+'\n'+payload.url}).toString();
+export const shareEmail=payload=>'mailto:?'+new URLSearchParams({subject:String(payload.title).replace(/[\r\n]+/g,' '),body:(payload.text+'\n'+payload.url).replace(/\r\n|\r|\n/g,'\r\n')}).toString().replaceAll('+','%20');
 export function createAtlasShare({document,getCurrentUrl,getSelectedEntity,getNavigator=()=>globalThis.navigator}){
  const el=id=>document.getElementById(id),view=el('share-view'),entityChoice=el('share-entity'),copy=el('copy-link'),native=el('share-native'),email=el('share-email'),link=el('share-open'),urlField=el('share-url'),status=el('share-status'),description=el('share-description');
  let lastUrl='';

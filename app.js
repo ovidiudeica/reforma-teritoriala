@@ -629,7 +629,7 @@ atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||nu
 
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
 document.getElementById('map-home')?.addEventListener('click',()=>{if(atlasUrl)void atlasUrl.action('push',()=>fitRoMd(map,entityById));else fitRoMd(map,entityById);});
-document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');});
+document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');if(atlasPanels.state.active==='share')atlasShare?.refresh();});
 document.getElementById('filters-reset')?.addEventListener('click',resetGlobalFilters);
 document.getElementById('selection-visibility-action')?.addEventListener('click',()=>{
  const entity=entityById.get(selectedEntityId);if(!entity)return;

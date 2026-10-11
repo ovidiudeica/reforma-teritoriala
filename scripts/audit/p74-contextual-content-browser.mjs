@@ -39,11 +39,13 @@ try{
    }finally{await page.call(function(ids){qaApp.visibleEntityIds.clear();for(const id of ids)qaApp.visibleEntityIds.add(id);qaApp.atlasAdvanced.refresh();},original);await page.key('Escape');}
   });
   await t.test('view/entity/copy/email links are independent of semantic state',async()=>{
-   await page.openPanel('share');const before=await page.evaluate('JSON.stringify(qaApp.captureUrlState())');
+   await page.openPanel('share');const before=await page.evaluate('JSON.stringify(qaApp.captureUrlState())'),historyBefore=await page.evaluate('JSON.stringify({href:location.href,length:history.length})');
    await page.call(function(){globalThis.qaCopied='';Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>{globalThis.qaCopied=value;}}});document.querySelector('#share-entity').click();});
    await page.call(function(){document.querySelector('#copy-link').click();});await delay(50);const data=await page.call(function(){return {copied:qaCopied,email:document.querySelector('#share-email').href,manual:document.querySelector('#share-url').value,open:document.querySelector('#share-open').href};});
-   assert.equal(new URL(data.copied).searchParams.get('e'),'osm-r90689');assert.deepEqual([...new URL(data.copied).searchParams.keys()],['v','e']);assert.equal(data.copied,data.manual);assert.equal(data.open,data.copied);assert.ok(new URL(data.email).searchParams.get('body').includes(data.copied));assert.equal(await page.evaluate('JSON.stringify(qaApp.captureUrlState())'),before);
+   assert.equal(new URL(data.copied).searchParams.get('e'),'osm-r90689');assert.deepEqual([...new URL(data.copied).searchParams.keys()],['v','e']);assert.equal(data.copied,data.manual);assert.equal(data.open,data.copied);assert.ok(new URL(data.email).searchParams.get('body').includes(data.copied));assert.equal(await page.evaluate('JSON.stringify(qaApp.captureUrlState())'),before);assert.equal(await page.evaluate('JSON.stringify({href:location.href,length:history.length})'),historyBefore);
    await page.call(function(){document.querySelector('#share-view').click();});assert.equal(await page.evaluate('document.querySelector("#share-url").value'),await page.evaluate('qaApp.atlasUrl.shareUrl()'));
+   for(let i=0;i<2;i++){await page.click('#basemap-toggle');const live=await page.evaluate('qaApp.atlasUrl.shareUrl()');assert.equal(await page.evaluate('document.querySelector("#share-url").value'),live);assert.equal(await page.evaluate('document.querySelector("#share-open").href'),live);assert.equal(new URL(await page.evaluate('document.querySelector("#share-email").href')).searchParams.get('body').split('\r\n').at(-1),live);}
+   assert.equal(await page.evaluate('JSON.stringify(qaApp.captureUrlState())'),before);
   });
   await t.test('legend, methodology and provenance remain available on demand',async()=>{
    for(const [width,height] of [[1440,900],[390,844]]){

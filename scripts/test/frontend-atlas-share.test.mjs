@@ -15,7 +15,7 @@ test('entity link resets only its own copy and encodes identifier as data',()=>{
 test('unsafe URL schemes are rejected and email encodes text as a query value',()=>{
  for(const url of ['javascript:alert(1)','file:///tmp/a','data:text/html,test'])assert.throws(()=>sharePayload(url),TypeError);
  const payload={title:'A & B',text:'Atlas',url:'https://example.test/?e=a&z=4'};
- const email=new URL(shareEmail(payload));assert.equal(email.protocol,'mailto:');assert.equal(email.searchParams.get('subject'),payload.title);assert.equal(email.searchParams.get('body'),'Atlas\n'+payload.url);
+ const email=new URL(shareEmail(payload));assert.equal(email.protocol,'mailto:');assert.equal(email.searchParams.get('subject'),payload.title);assert.equal(email.searchParams.get('body'),'Atlas\r\n'+payload.url);assert.equal(email.href.includes('+'),false);assert.ok(email.href.includes('%0D%0A'));const special=new URL(shareEmail({...payload,title:'Atlas A + B\r\nNext'}));assert.equal(special.searchParams.get('subject'),'Atlas A + B Next');assert.ok(special.href.includes('%2B'));assert.deepEqual([...special.searchParams.keys()],['subject','body']);
 });
 function harness(){
  const elements=new Map();const document={getElementById(id){if(!elements.has(id))elements.set(id,{listeners:{},checked:id==='share-view',addEventListener(type,fn){this.listeners[type]=fn;},focus(){document.activeElement=this;},select(){this.selected=true;}});return elements.get(id);}};
