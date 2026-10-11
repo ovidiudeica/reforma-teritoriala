@@ -79,7 +79,7 @@ test('manual tree disclosure restore is lazy/exact; selected path is added after
  const document=doc(),container=document.getElementById('tree'),changes=[];const controller=createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,onSelect(){},onDisclosureChange:()=>changes.push(true)});
  const branch=tree.nodes.find(n=>n.depth===4&&n.jurisdiction==='MD'&&n.child_ids.length>0),path=ancestorPath(nodes,tree.root_ids,branch.id);
  controller.setOpenIds([branch.id,'unknown',town.id]);assert.deepEqual(controller.getOpenIds(),[branch.id]);assert.equal(controller.getNode(branch.id),undefined);for(const id of path.slice(0,-1))assert.equal(controller.isOpen(id),false);
- for(const wrapper of container.querySelectorAll('details'))await wrapper.dispatch('toggle');assert.equal(changes.length,0);
+ const restored=controller.getOpenIds();controller.setOpenIds(restored);assert.deepEqual(controller.getOpenIds(),restored);assert.equal(changes.length,0);
  controller.select(branch.child_ids[0]);for(const id of path)assert.equal(controller.isOpen(id),true);
  const actual=controller.getOpenIds();assert.ok(actual.includes(branch.id));controller.toggle(branch.id);assert.equal(changes.length,1);assert.ok(!controller.getOpenIds().includes(branch.id));
 });

@@ -158,12 +158,11 @@ test('lazy depth 4/5 materialization opens ancestors synchronously and selection
   assert.ok(controller.getNode(node.id).button);
   assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,1);
   assert.equal(controller.getNode(node.id).button.getAttribute('aria-pressed'),'true');
-  // Browser toggle events are deferred: materialization cannot depend on them.
-  for(const item of container.querySelectorAll('details'))await item.dispatch('toggle');
+  const disclosureState=controller.getOpenIds();controller.setOpenIds(disclosureState);assert.deepEqual(controller.getOpenIds(),disclosureState);
  }
- const open=container.querySelectorAll('details').filter(e=>e.open);
+ const open=controller.getOpenIds();assert.ok(open.length>0);
  controller.clear();assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,0);
- assert.ok(open.every(e=>e.open));
+ assert.deepEqual(controller.getOpenIds(),open);
 });
 
 test('disclosure, geometry and selection controls are independent',async()=>{
@@ -260,4 +259,16 @@ test('real frontend controller synchronizes map/search/tree/breadcrumb/details a
   assert.equal(document.getElementById('details-title').textContent,'Nicio selecție');assert.deepEqual(app.atlasTree.getOpenIds(),opened);
   assert.ok(!liveLayers().some(l=>l.style?.color==='#b54a38'));
  }finally{Object.assign(globalThis,previous);}
+});
+
+
+test('virtual rows release observations, scroll listener and pending animation on destroy',()=>{
+ const document=documentFactory(),container=new Element(),watched=new Set(),callbacks=new Map();let observer,sequence=0,unobserved=0,disconnected=0,cancelled=0,removed=0;
+ document.defaultView={ResizeObserver:class{constructor(callback){this.callback=callback;observer=this;}observe(element){watched.add(element);}unobserve(element){watched.delete(element);unobserved++;}disconnect(){watched.clear();disconnected++;}},requestAnimationFrame(callback){const id=++sequence;callbacks.set(id,callback);return id;},cancelAnimationFrame(id){assert.ok(callbacks.has(id));callbacks.delete(id);cancelled++;}};
+ container.removeEventListener=(name,callback)=>{assert.equal(name,'scroll');assert.ok(container.listeners.scroll.includes(callback));container.listeners.scroll=container.listeners.scroll.filter(value=>value!==callback);removed++;};
+ const controller=createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,onSelect(){}});
+ controller.setOpenIds(tree.nodes.filter(node=>node.child_ids.length).map(node=>node.id));assert.ok(watched.has(container));assert.equal(watched.size,controller.getRenderedCount()+1);
+ container.scrollTop=10000;container.listeners.scroll[0]();const [id,callback]=callbacks.entries().next().value;callbacks.delete(id);callback();assert.ok(unobserved>0);assert.equal(watched.size,controller.getRenderedCount()+1);
+ container.listeners.scroll[0]();assert.equal(callbacks.size,1);controller.destroy();assert.equal(disconnected,1);assert.equal(cancelled,1);assert.equal(removed,1);assert.equal(watched.size,0);assert.equal(callbacks.size,0);assert.equal(container.listeners.scroll.length,0);
+ observer.callback([]);assert.equal(callbacks.size,0);
 });
