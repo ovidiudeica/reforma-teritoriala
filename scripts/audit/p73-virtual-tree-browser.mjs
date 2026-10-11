@@ -20,6 +20,12 @@ try{
   await t.test('small forward and reverse scroll preserve logical accessibility order',async()=>{
    for(const top of [0,88,176,88,44,0]){await page.call(function(top){document.querySelector('#hierarchy-tree').scrollTop=top;},top);await delay(80);const result=await metrics();assert.deepEqual(result.rows.map(row=>row.index),result.rows.map(row=>row.index).sort((a,b)=>a-b));}
   });
+  await t.test('rapid phone and exact desktop transitions wait for the actual observed frame',async()=>{
+   for(let i=0;i<6;i++)for(const width of [390,900]){
+    await page.viewport(width,768);const state=await page.call(function(){const frame=document.querySelector('#atlas-viewport');return {dom:[frame.clientWidth,frame.clientHeight],effective:qaApp.atlasLayout.size,mobile:qaApp.atlasMobile.state.mobile};});
+    assert.equal(state.effective.width,state.dom[0]);assert.equal(state.effective.height,state.dom[1]);assert.equal(state.mobile,width<900);
+   }
+  });
   await t.test('long names wrap with 44px targets across eight responsive viewports',async()=>{
    const id=await page.call(function(){return [...qaApp.hierarchyNodeById.values()].filter(node=>node.depth===5).sort((a,b)=>b.display_name.length-a.display_name.length)[0].id;});
    for(const [width,height] of [[360,640],[390,844],[430,932],[844,390],[768,1024],[899,768],[900,768],[1440,900]]){
