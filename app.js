@@ -297,6 +297,7 @@ function renderHierarchyTree(){
   const entity=entityById.get(id);
   return Boolean(entity&&isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false);
  };
+ atlasTree?.destroy();
  atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,
   isGeometryVisible:isTreeGeometryVisible,isEntityChecked:id=>visibleEntityIds.has(id),
   onVisibilityChange:(id,checked)=>{
@@ -661,4 +662,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
+export {atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};

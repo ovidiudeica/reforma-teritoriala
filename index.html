@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="atlas-p6.4.1.css">
 <link rel="stylesheet" href="atlas-p6.4.2.css">
 <link rel="stylesheet" href="atlas-layout.css">
+<link rel="stylesheet" href="atlas-tree.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -53,9 +54,9 @@
   </section>
   <section id="entities-panel">
     <h3 class="sr-only">Arbore</h3>
-    <p class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
+    <p id="atlas-tree-help" class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
-    <div id="hierarchy-tree" class="hierarchy-tree"><p class="muted">Se încarcă arborele teritorial…</p></div>
+    <div id="hierarchy-tree" class="hierarchy-tree" aria-describedby="atlas-tree-help"><p class="muted">Se încarcă arborele teritorial…</p></div>
   </section>
 
   <section id="results-panel" hidden>

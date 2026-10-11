@@ -1,0 +1,34 @@
+/* One owner for virtual rows, their scroll viewport and interactive geometry. */
+#atlas-controls>#entities-panel{display:flex;flex-direction:column;overflow:hidden}
+#entities-panel .panel-hint{flex:none}
+.hierarchy-tree{position:relative;flex:1;min-height:44px;max-height:none;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;overflow-anchor:none;scrollbar-gutter:stable;border:1px solid var(--atlas-border,#e1e5e2);border-radius:6px;background:var(--atlas-surface,#fff);padding:0}
+.tree-window{position:relative;width:100%;min-width:0}
+.tree-node{position:absolute;top:0;left:0;box-sizing:border-box;width:100%;min-height:44px;display:grid;grid-template-columns:44px 44px minmax(0,1fr);align-items:stretch;font-size:12px;line-height:1.45}
+.tree-node>[role]{min-width:0;display:flex;align-items:stretch}
+.tree-toggle,.tree-visibility-toggle,.tree-select{box-sizing:border-box;min-height:44px;min-width:44px;margin:0;border:0;border-radius:4px;background:transparent;color:var(--atlas-text,#26332d);font:inherit;cursor:pointer}
+.tree-toggle{display:flex;align-items:center;justify-content:center;width:44px;font-size:20px}
+.tree-leaf .tree-toggle{cursor:default}
+.tree-visibility-toggle{appearance:none;width:44px;height:44px;flex:none;align-self:center;background:linear-gradient(var(--atlas-surface,#fff),var(--atlas-surface,#fff)) center/18px 18px no-repeat}
+.tree-visibility-toggle::before{content:'';display:block;width:18px;height:18px;box-sizing:border-box;border:2px solid var(--atlas-secondary,#65716b);border-radius:3px;margin:13px}
+.tree-visibility-toggle:checked::before{background:var(--atlas-accent,#365b4a);border-color:var(--atlas-accent,#365b4a);box-shadow:inset 0 0 0 3px var(--atlas-surface,#fff)}
+.tree-select{display:flex;align-items:center;gap:5px;width:100%;padding:7px 6px;text-align:start;white-space:normal;overflow:visible;overflow-wrap:anywhere}
+.tree-kind-icon{width:16px;height:16px;flex:none;color:var(--atlas-secondary,#65716b)}
+.tree-name{display:block;min-width:0;font-size:12px;white-space:normal;overflow-wrap:anywhere;word-break:normal}
+.tree-select:hover,.tree-toggle:hover{background:var(--atlas-hover,#eef2ef)}
+.tree-select.selected{background:var(--atlas-selected,#edf1ed);font-weight:700;box-shadow:inset 3px 0 var(--atlas-accent,#365b4a)}
+.tree-statistical-only .tree-select{border-inline-start:2px solid #a294bd}
+.tree-coalesced .tree-select{border-inline-start:2px solid #66538c}
+.tree-toggle:focus-visible,.tree-select:focus-visible,.tree-visibility-toggle:focus-visible{outline:2px solid var(--atlas-focus,#365b4a);outline-offset:-3px}
+@media(forced-colors:active){
+.tree-select.selected{border:2px solid Highlight;background:Canvas;color:CanvasText}
+.tree-visibility-toggle::before{border-color:ButtonText}
+.tree-visibility-toggle:checked::before{background:Highlight;border-color:Highlight;box-shadow:inset 0 0 0 3px Canvas}
+.tree-coalesced .tree-select,.tree-statistical-only .tree-select{border-color:CanvasText}
+}
+#entities-panel .atlas-tree-hint{flex:none;margin:6px 0 10px}
+#hierarchy-error:empty{display:none}
+@container atlas (max-height:540px) and (min-width:600px) and (max-width:899px){
+ #atlas-controls>#entities-panel{padding:4px 10px 8px}
+ #entities-panel .atlas-tree-hint{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+ #atlas-controls>#search-panel{padding-top:4px;padding-bottom:4px}
+}

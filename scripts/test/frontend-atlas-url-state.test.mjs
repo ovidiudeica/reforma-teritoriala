@@ -15,6 +15,7 @@ class Element{
  classList={toggle:(name,on)=>{if(on)this.classes.add(name);else this.classes.delete(name);},contains:name=>this.classes.has(name)};
  set textContent(v){this._text=String(v);this.children=[];}get textContent(){return this._text+this.children.map(c=>c.textContent).join('');}
  set innerHTML(v){this._html=v;this._text='';this.children=[];}get innerHTML(){return this._html;}
+ remove(){if(this.parentElement)this.parentElement.children=this.parentElement.children.filter(child=>child!==this);this.parentElement=null;}
  appendChild(c){this.children.push(c);c.parentElement=this;return c;}
  setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k]??null;}removeAttribute(k){delete this.attributes[k];}
  addEventListener(k,fn){(this.listeners[k]??=[]).push(fn);}focus(){this.document.activeElement=this;}
@@ -77,10 +78,10 @@ test('statistical level three and separate geometry remain independent of subtyp
 test('manual tree disclosure restore is lazy/exact; selected path is added afterward',async()=>{
  const document=doc(),container=document.getElementById('tree'),changes=[];const controller=createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,onSelect(){},onDisclosureChange:()=>changes.push(true)});
  const branch=tree.nodes.find(n=>n.depth===4&&n.jurisdiction==='MD'&&n.child_ids.length>0),path=ancestorPath(nodes,tree.root_ids,branch.id);
- controller.setOpenIds([branch.id,'unknown',town.id]);assert.deepEqual(controller.getOpenIds(),[branch.id]);assert.ok(controller.getNode(branch.id));for(const id of path.slice(0,-1))assert.equal(controller.getNode(id).wrapper.open,false);
+ controller.setOpenIds([branch.id,'unknown',town.id]);assert.deepEqual(controller.getOpenIds(),[branch.id]);assert.equal(controller.getNode(branch.id),undefined);for(const id of path.slice(0,-1))assert.equal(controller.isOpen(id),false);
  for(const wrapper of container.querySelectorAll('details'))await wrapper.dispatch('toggle');assert.equal(changes.length,0);
- controller.select(branch.child_ids[0]);for(const id of path)assert.equal(controller.getNode(id).wrapper.open,true);
- const actual=controller.getOpenIds();assert.ok(actual.includes(branch.id));controller.getNode(branch.id).wrapper.open=false;await controller.getNode(branch.id).wrapper.dispatch('toggle');assert.equal(changes.length,1);assert.ok(!controller.getOpenIds().includes(branch.id));
+ controller.select(branch.child_ids[0]);for(const id of path)assert.equal(controller.isOpen(id),true);
+ const actual=controller.getOpenIds();assert.ok(actual.includes(branch.id));controller.toggle(branch.id);assert.equal(changes.length,1);assert.ok(!controller.getOpenIds().includes(branch.id));
 });
 test('tree URL validation excludes unknown IDs and leaves; empty tree is explicit',()=>{
  const leaf=tree.nodes.find(n=>!n.child_ids.length);assert.deepEqual(parseUrlState('v=1&t=unknown&t='+leaf.id,config).openIds,[]);assert.equal(serializeUrlState({...defaultUrlState(config),openIds:[]},config),'v=1&t=');
@@ -160,10 +161,11 @@ test('real frontend URL hydration/history integrates selection, filters, viewpor
   });
   await t.test('manual disclosures replace URL; deferred programmatic toggles do not write; selection path wins on restore',async()=>{
    await browser.visit('v=1&e='+town.id+'&lat=46&lon=26&z=10');const parent=nodes.get(town.id).parent_id;
-   const parentButton=treeDOM.querySelectorAll('.tree-select').find(b=>b.dataset.entityId===parent),disclosure=parentButton.parentElement.children.find(e=>e.tagName==='DETAILS');assert.ok(disclosure.open);const length=browser.entries.length;
-   disclosure.open=false;await disclosure.dispatch('toggle');assert.ok(!new URLSearchParams(browser.location.search).getAll('t').includes(parent));assert.equal(browser.entries.length,length);
-   const link=browser.location.search.slice(1);await browser.visit(link);assert.ok(disclosure.open);selected(town.id);assert.ok(new URLSearchParams(browser.location.search).getAll('t').includes(parent));
-   const replaces=browser.replaces;for(const d of treeDOM.querySelectorAll('details'))await d.dispatch('toggle');assert.equal(browser.replaces,replaces);
+   assert.ok(app.atlasTree.isOpen(parent));const length=browser.entries.length;
+   app.atlasTree.toggle(parent);assert.ok(!new URLSearchParams(browser.location.search).getAll('t').includes(parent));assert.equal(browser.entries.length,length);
+   const link=browser.location.search.slice(1);await browser.visit(link);assert.ok(app.atlasTree.isOpen(parent));selected(town.id);assert.ok(new URLSearchParams(browser.location.search).getAll('t').includes(parent));
+   const replaces=browser.replaces;app.atlasTree.setOpenIds(app.atlasTree.getOpenIds());assert.equal(browser.replaces,replaces);
+
   });
   await t.test('five real map moveend events replace and retain chunk/tier loading',async()=>{
    const pushes=browser.pushes,length=browser.entries.length;for(let i=0;i<5;i++)map.setView([45+i/100,25],12);await app.syncTiers();assert.equal(browser.pushes,pushes);assert.equal(browser.entries.length,length);assert.equal(parseUrlState(browser.location.search,config).viewport.lat,45.04);assert.ok(visible().length>0);
@@ -174,7 +176,7 @@ test('real frontend URL hydration/history integrates selection, filters, viewpor
   await t.test('search keyboard, filters, tree and map selection remain centralized and push discrete history',async()=>{
    const search=app.atlasSearch;input.focus();input.value=commune.id;await input.dispatch('input');await input.dispatch('keydown',{key:'ArrowDown'});let count=browser.pushes;await input.dispatch('keydown',{key:'Enter'});selected(commune.id);assert.equal(browser.pushes,count+1);assert.equal(search.state.open,false);
    count=browser.pushes;await subtype('ro.towns').click();assert.equal(browser.pushes,count+1);assert.equal(app.activeGeometrySubtypes.has('ro.towns'),false);assert.equal(app.atlasSearch,search);assert.equal(new URLSearchParams(browser.location.search).getAll('f').includes('ro.towns'),true);
-   const county=entities.get(town.hierarchy.consolidated_parent_id);count=browser.pushes;await treeDOM.querySelectorAll('.tree-select').find(b=>b.dataset.entityId===county.id).click();selected(county.id);assert.equal(browser.pushes,count+1);
+   const county=entities.get(town.hierarchy.consolidated_parent_id);app.atlasTree.select(county.id);count=browser.pushes;await treeDOM.querySelectorAll('.tree-select').find(b=>b.dataset.entityId===county.id).click();selected(county.id);assert.equal(browser.pushes,count+1);
    const sectorId=data.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='sector').id;
     app.visibleEntityIds.add(sectorId);app.refreshGeometryVisibility();app.atlasUrl.commit('push');map.setView([44.5,26],12);await app.syncTiers();
     const sector=visible().find(l=>l.feature.properties.entity_id===sectorId);assert.ok(sector);count=browser.pushes;await sector.handlers.click();selected(sector.feature.properties.entity_id);assert.equal(browser.pushes,count+1);
