@@ -25,6 +25,11 @@ class Element{
 }
 function doc(){const elements=new Map(),document={elements,activeElement:null,getElementById(id){if(!elements.has(id)){const el=new Element('div',document);el.id=id;elements.set(id,el);}return elements.get(id);},createElement:tag=>new Element(tag,document),querySelectorAll:()=>[]};return document;}
 function harness(records=index){const document=doc(),input=document.getElementById('entity-search'),container=document.getElementById('search-results'),status=document.getElementById('search-status'),selections=[];input.focus();const controller=createAtlasSearch({document,input,container,status,index:records,onSelect:async(id,options)=>selections.push({id,options})});return {document,input,container,status,controller,selections};}
+test('explicit clear resets only query/results and restores input focus',async()=>{
+ const document=doc(),input=document.getElementById('entity-search'),clearButton=document.getElementById('search-clear'),empty=document.getElementById('search-empty'),selections=[];
+ const controller=createAtlasSearch({document,input,clearButton,empty,container:document.getElementById('search-results'),status:document.getElementById('search-status'),index,onSelect:id=>selections.push(id)});
+ assert.equal(clearButton.disabled,true);controller.setQuery('Victoria');assert.equal(clearButton.disabled,false);assert.equal(empty.hidden,true);await clearButton.click();assert.equal(controller.state.query,'');assert.equal(controller.state.open,false);assert.equal(empty.hidden,false);assert.equal(document.activeElement,input);assert.deepEqual(selections,[]);
+});
 const options=h=>h.container.querySelectorAll('[role="option"]');
 const key=(h,key,extra)=>h.input.dispatch('keydown',{key,...extra});
 async function query(h,value){h.input.value=value;await h.input.dispatch('input');}

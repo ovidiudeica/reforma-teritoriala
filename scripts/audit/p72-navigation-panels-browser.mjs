@@ -5,7 +5,7 @@ const semantic=()=>page.evaluate("JSON.stringify(qaApp.captureUrlState(),(k,v)=>
 const snapshot=()=>page.evaluate(`(()=>{
  const frame=document.querySelector('#atlas-controls'),r=frame.getBoundingClientRect(),title=document.querySelector('#details-title'),card=document.querySelector('#details-panel');
  const buttons=[...document.querySelectorAll('#atlas-navigation-rail button')].map(e=>{const b=e.getBoundingClientRect();if(!b.width||!b.height)return null;const hit=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);return {id:e.id,width:b.width,height:b.height,left:b.left,right:b.right,top:b.top,bottom:b.bottom,clear:hit===e||e.contains(hit),name:e.getAttribute('aria-label')}}).filter(Boolean);
- return {fullTitle:card.hidden||title.scrollWidth<=title.clientWidth,state:qaApp.atlasPanels.state,focus:document.activeElement.id,hidden:frame.hidden,inert:frame.inert,bounds:{left:r.left,right:r.right,top:r.top,bottom:r.bottom},panes:[...frame.querySelectorAll(':scope>section')].filter(e=>e.id!=='search-panel').map(e=>({id:e.id,hidden:e.hidden,inert:e.inert})),buttons,width:innerWidth,height:innerHeight,overflow:document.documentElement.scrollWidth>innerWidth,mapWidth:qaApp.map.getSize().x,mapDom:document.querySelector('#map').clientWidth};
+ return {fullTitle:card.hidden||title.scrollWidth<=title.clientWidth,state:qaApp.atlasPanels.state,focus:document.activeElement.id,hidden:frame.hidden,inert:frame.inert,bounds:{left:r.left,right:r.right,top:r.top,bottom:r.bottom},panes:[...frame.querySelectorAll(':scope>section,#results-panel')].filter(e=>e.id!=='search-panel').map(e=>({id:e.id,hidden:e.hidden,inert:e.inert})),buttons,width:innerWidth,height:innerHeight,overflow:document.documentElement.scrollWidth>innerWidth,mapWidth:qaApp.map.getSize().x,mapDom:document.querySelector('#map').clientWidth};
 })()`);
 const placement=function(){
  const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
@@ -36,7 +36,7 @@ try{
    for(const key of ['entities','search','filters','visible','recent','compare','share','info']){
     if((await snapshot()).state.active===key)await page.click('[data-panel='+key+']');
     await page.click('[data-panel='+key+']');await delay(150);const s=await snapshot();clear(s);assert.equal(s.state.active,key);assert.equal(s.panes.filter(p=>!p.hidden).length,1);assert.ok(s.panes.filter(p=>p.hidden).every(p=>p.inert));
-    const placement=await page.evaluate("(()=>{const c=document.querySelector('#atlas-controls').getBoundingClientRect(),p=[...document.querySelectorAll('#atlas-controls>section')].find(e=>!e.hidden&&e.id!=='search-panel'),r=p.getBoundingClientRect();return {inside:r.left>=c.left&&r.right<=c.right&&r.top>=c.top&&r.bottom<=c.bottom,position:getComputedStyle(p).position}})()");
+    const placement=await page.evaluate("(()=>{const c=document.querySelector('#atlas-controls').getBoundingClientRect(),p=[...document.querySelectorAll('#atlas-controls>section,#results-panel')].find(e=>!e.hidden&&e.id!=='search-panel'),r=p.getBoundingClientRect();return {inside:r.left>=c.left&&r.right<=c.right&&r.top>=c.top&&r.bottom<=c.bottom,position:getComputedStyle(p).position}})()");
     assert.ok(placement.inside,'content escapes shared pane: '+key);assert.equal(placement.position,'static');
 
     assert.equal(await semantic(),before);assert.equal(await page.evaluate('location.href'),url);assert.equal(await page.evaluate('qaApp.map===window.p72Map'),true);

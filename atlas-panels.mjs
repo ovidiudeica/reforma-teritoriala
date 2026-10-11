@@ -24,7 +24,7 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
   if(map)map.inert=overlay;
   frame.hidden=!opened;frame.inert=!opened;frame.setAttribute('aria-hidden',String(!opened));
   frame.setAttribute('aria-labelledby','atlas-panel-title');frame.setAttribute('tabindex','-1');
-  frame.classList.toggle('mobile-drawer-open',mobile&&opened);frame.dataset.mobile=String(mobile);
+  frame.classList.toggle('mobile-drawer-open',mobile&&opened);frame.dataset.mobile=String(mobile);frame.dataset.panel=active||'';
   main.classList.toggle('atlas-explorer-collapsed',!mobile&&!opened);main.classList.toggle('atlas-navigation-more',menu);
   const shown=opened?el(panelDefinitions[active].content):null;
   for(const content of contents){content.hidden=content!==shown;content.inert=content!==shown;}

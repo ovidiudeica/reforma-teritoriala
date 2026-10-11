@@ -1,10 +1,7 @@
 #filters-count{font-weight:400;font-size:11px;white-space:nowrap}
 #filters-toggle:focus-visible,.atlas-basemap-toggle:focus-visible{outline:3px solid #2d614d;outline-offset:2px}
 #results-panel[hidden],#entities-panel[hidden],#filters-panel[hidden]{display:none!important}
-#results-panel{min-height:160px}
-#results-panel .search-results{max-height:min(55cqh,540px)}
 #filters-panel .filter-section{margin-top:14px}
-#filters-panel .filter-actions button{min-height:36px;padding:7px}
 .atlas-basemap-toggle{
  position:absolute;z-index:1050;bottom:17px;left:calc(var(--explorer-width) + 24px);
  border:1px solid #abc1b1;border-radius:7px;background:#fff;color:#173d2a;

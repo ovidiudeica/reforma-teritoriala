@@ -97,11 +97,13 @@ export function revealSearchOption(container,option){
  const outer=container.getBoundingClientRect(),row=option.getBoundingClientRect(),top=outer.top+(container.clientTop||0),bottom=top+container.clientHeight;
  if(row.top<top)container.scrollTop+=row.top-top;else if(row.bottom>bottom)container.scrollTop+=row.bottom-bottom;
 }
-export function createAtlasSearch({input,container,status,document,index,onSelect,onError=console.error}){
+export function createAtlasSearch({input,container,status,clearButton,empty,document,index,onSelect,onError=console.error}){
  let query='',results=[],activeId=null,open=false,options=new Map();
  input.setAttribute('role','combobox');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-controls',container.id||'search-results');container.setAttribute('role','listbox');container.setAttribute('aria-label','Rezultate căutare');
  function sync(){
   input.setAttribute('aria-expanded',String(open));container.hidden=!open;
+  if(clearButton)clearButton.disabled=!input.value;
+  if(empty)empty.hidden=open;
   for(const [id,option] of options){const active=open&&id===activeId;option.setAttribute('aria-selected',String(active));option.classList.toggle('active',active);}
   if(open&&activeId)input.setAttribute('aria-activedescendant',searchOptionId(activeId));else input.removeAttribute?.('aria-activedescendant');
  }
@@ -123,6 +125,7 @@ export function createAtlasSearch({input,container,status,document,index,onSelec
  function setQuery(value){query=String(value);input.value=query;results=searchEntities(query,index);activeId=null;open=Boolean(normalizeSearch(query));render();}
  function moveActive(direction){if(!open&&normalizeSearch(query))setQuery(query);if(!results.length)return;const current=results.findIndex(r=>r.entity.id===activeId),next=current<0?(direction>0?0:results.length-1):Math.max(0,Math.min(results.length-1,current+direction));if(results[next].entity.id!==activeId)activate(results[next].entity.id,true);}
  input.addEventListener('input',()=>setQuery(input.value));
+ clearButton?.addEventListener('click',()=>{setQuery('');input.focus?.();});
  input.addEventListener('keydown',event=>{if(event.isComposing)return;if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();moveActive(event.key==='ArrowDown'?1:-1);}else if(event.key==='Enter'&&open&&activeId){event.preventDefault();return select(activeId).catch(onError);}else if(event.key==='Escape'){event.preventDefault();close();}else if(event.key==='Tab')close();});
  input.addEventListener('blur',close);sync();
  return {setQuery,moveActive,close,selectActive:()=>open&&activeId?select(activeId):Promise.resolve(),updateIndex(value){index=value;if(open)setQuery(query);},get state(){return {query,results:[...results],activeId,activeIndex:results.findIndex(r=>r.entity.id===activeId),open};}};
