@@ -39,7 +39,21 @@ export class Page{
    return r.result.value;
   }finally{await this.send('Runtime.releaseObject',{objectId});}
  }
- async viewport(width,height){await this.send('Page.bringToFront');await this.send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<900});await waitFor(()=>this.evaluate('innerWidth==='+width+' && matchMedia("(max-width: 899px)").matches==='+String(width<900)),'viewport update');await waitFor(()=>this.evaluate('!window.qaApp || qaApp.atlasMobile.state.mobile===(qaApp.atlasLayout?.size ? qaApp.atlasLayout.media.matches : '+String(width<900)+')'),'responsive drawer state',5000);await delay(200);}
+ async viewport(width,height){
+  if(!Number.isSafeInteger(width)||!Number.isSafeInteger(height)||width<1||height<1||width>16384||height>16384)throw new RangeError('Invalid viewport dimensions');
+  await this.send('Page.bringToFront');
+  await this.send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<900});
+  await waitFor(()=>this.call(function(width,height){return innerWidth===width&&innerHeight===height&&matchMedia('(max-width: 899px)').matches===(width<900);},width,height),'viewport update');
+  // Matching two cached consumers is insufficient: both can still describe the old frame.
+  await waitFor(()=>this.call(function(){
+   if(!window.qaApp)return true;
+   const layout=qaApp.atlasLayout,frame=document.getElementById('atlas-viewport'),size=layout?.size;
+   if(size&&frame)return size.width===frame.clientWidth&&size.height===frame.clientHeight&&layout.media.matches===(frame.clientWidth<900)&&qaApp.atlasMobile.state.mobile===(frame.clientWidth<900);
+   return qaApp.atlasMobile.state.mobile===matchMedia('(max-width: 899px)').matches;
+  }),'effective viewport observed',5000);
+  await delay(200);
+ }
+
  async navigate(url){await this.send('Page.navigate',{url});await waitFor(()=>this.evaluate("document.readyState==='complete' && !!document.querySelector('#filter-list input') && !!document.querySelector('.tree-select')"),'app ready',90000);await this.evaluate("import('./app.js').then(async m=>{await m.frontendReady;window.qaApp=m;return true;})");await delay(250);}
  async click(selector){const box=await this.call(function(selector){const e=document.querySelector(selector);if(!e)throw Error('Missing '+selector);e.scrollIntoView({block:'nearest',inline:'nearest'});const r=e.getBoundingClientRect();if(!r.width||!r.height)throw Error('Hidden '+selector);return {x:r.x+r.width/2,y:r.y+r.height/2};},selector);await this.send('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',clickCount:1,...box});await this.send('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',clickCount:1,...box});await delay(150);}
  async key(key){const code={ArrowDown:40,ArrowUp:38,ArrowLeft:37,ArrowRight:39,Enter:13,Escape:27,Tab:9,' ':32}[key]||0;await this.send('Input.dispatchKeyEvent',{type:'keyDown',key,code:key===' '?'Space':key,windowsVirtualKeyCode:code,nativeVirtualKeyCode:code,...(key==='Enter'?{text:'\r',unmodifiedText:'\r'}:key===' '?{text:' ',unmodifiedText:' '}:{})});await this.send('Input.dispatchKeyEvent',{type:'keyUp',key,windowsVirtualKeyCode:code,nativeVirtualKeyCode:code});await delay(100);}

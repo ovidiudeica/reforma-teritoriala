@@ -95,6 +95,7 @@ class Element{
  classList={toggle:(key,on)=>{if(on)this.classes.add(key);else this.classes.delete(key);}};
  set textContent(v){this._text=v;this.children=[];}get textContent(){return this._text+this.children.map(c=>c.textContent).join('');}
  set innerHTML(v){this._html=v;this._text='';this.children=[];}get innerHTML(){return this._html;}
+ remove(){if(this.parentElement)this.parentElement.children=this.parentElement.children.filter(child=>child!==this);this.parentElement=null;}
  appendChild(child){this.children.push(child);child.parentElement=this;return child;}
  setAttribute(k,v){this.attributes[k]=v;}getAttribute(k){return this.attributes[k]??null;}
  addEventListener(k,fn){(this.listeners[k]??=[]).push(fn);}

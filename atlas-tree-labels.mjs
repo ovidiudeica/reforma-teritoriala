@@ -3,7 +3,7 @@ import {formatEntityName} from './atlas-name-format.mjs';
 
 export function compactTreeName(node){
  const official=formatEntityName(node?.display_name??'');
- if(!official)return official;
+ if(!official||(node?.display_name===node?.id&&/^osm-r\d+$/.test(node.id)))return 'Entitate fără nume';
  const plain=official.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('ro-RO');
  if(node?.parent_id==null && node?.jurisdiction==='MD' && plain==='republica moldova')return 'Moldova';
  if(node?.jurisdiction==='MD'){

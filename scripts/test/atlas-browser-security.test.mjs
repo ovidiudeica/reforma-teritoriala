@@ -58,3 +58,9 @@ test('browser configuration cannot select an arbitrary executable or shell paylo
   }
  }finally{if(previous===undefined)delete process.env.BROWSER_EXECUTABLE;else process.env.BROWSER_EXECUTABLE=previous;}
 });
+
+test('viewport rejects code payloads and invalid dimensions before any CDP command',async()=>{
+ const page=Object.create(Page.prototype);let commands=0;page.send=async()=>{commands++;throw Error('Unexpected CDP command');};
+ for(const [width,height] of [['900;globalThis.injected=true;//',768],[NaN,768],[Infinity,768],[0,768],[-1,768],[390,{}],[390,768.5],[390,20000]])await assert.rejects(page.viewport(width,height),/Invalid viewport dimensions/);
+ assert.equal(commands,0);
+});

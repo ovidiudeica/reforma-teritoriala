@@ -20,6 +20,7 @@ class Element{
  set textContent(v){this._text=v;this.children=[];} get textContent(){return this._text+this.children.map(c=>c.textContent).join('');}
  set innerHTML(v){this._html=v;this._text='';this.children=[];} get innerHTML(){return this._html;}
  set open(value){if(this._open===value)return;this._open=value;this.togglePending=true;} get open(){return this._open;}
+ remove(){if(this.parentElement)this.parentElement.children=this.parentElement.children.filter(child=>child!==this);this.parentElement=null;}
  appendChild(child){this.children.push(child);child.parentElement=this;return child;}
  setAttribute(k,v){this.attributes[k]=v;} getAttribute(k){return this.attributes[k]??null;}
  addEventListener(k,fn){(this.listeners[k]??=[]).push(fn);}
@@ -121,7 +122,7 @@ test('P3.2 bounded levels, root reset and collapse retain selection, URL-ready o
  controller.setOpenIds([]);
  assert.deepEqual(controller.getOpenIds(),[]);
  assert.equal(controller.selectedId,deep.id);
- assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,1);
+ assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,0,'a collapsed descendant keeps its identity without a hidden DOM row');
  assert.throws(()=>controller.openToDepth(4),/invalid expansion depth/);
 });
 
@@ -133,9 +134,9 @@ test('checkbox intent survives global geometry filters and lazy rendering',()=>{
  const root=ctrl.getNode(tree.root_ids[0]);
  assert.equal(root.checkbox.checked,true);assert.match(root.checkbox.title,/ascunsă de filtre/);
  assert.equal(root.outer.classList.contains('tree-geometry-hidden'),true);assert.equal(ctrl.refreshVisibility(),0);
- ctrl.select(deep.id);const n=ctrl.getRenderedCount();assert.ok(n>initial&&n<5848);
+ ctrl.select(deep.id);const n=ctrl.getRenderedCount();assert.ok(n>0&&n<30);
  visible=true;assert.equal(ctrl.refreshVisibility(),n);
- assert.equal(root.checkbox.checked,true);assert.equal(root.outer.classList.contains('tree-geometry-hidden'),false);
+ ctrl.select(tree.root_ids[0]);const remounted=ctrl.getNode(tree.root_ids[0]);assert.equal(remounted.checkbox.checked,true);assert.equal(remounted.outer.classList.contains('tree-geometry-hidden'),false);ctrl.select(deep.id);
  assert.equal(ctrl.selectedId,deep.id);
 });
 
@@ -153,29 +154,22 @@ test('lazy depth 4/5 materialization opens ancestors synchronously and selection
  for(const node of [tree.nodes.find(n=>n.depth===4&&n.jurisdiction==='RO'),deep]){
   assert.equal(controller.getNode(node.id),undefined);
   const path=controller.select(node.id);
-  for(const id of path.slice(0,-1))assert.equal(controller.getNode(id).wrapper.open,true);
+  for(const id of path.slice(0,-1))assert.equal(controller.isOpen(id),true);
   assert.ok(controller.getNode(node.id).button);
   assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,1);
   assert.equal(controller.getNode(node.id).button.getAttribute('aria-pressed'),'true');
-  // Browser toggle events are deferred: materialization cannot depend on them.
-  for(const item of container.querySelectorAll('details'))await item.dispatch('toggle');
+  const disclosureState=controller.getOpenIds();controller.setOpenIds(disclosureState);assert.deepEqual(controller.getOpenIds(),disclosureState);
  }
- const open=container.querySelectorAll('details').filter(e=>e.open);
+ const open=controller.getOpenIds();assert.ok(open.length>0);
  controller.clear();assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,0);
- assert.ok(open.every(e=>e.open));
+ assert.deepEqual(controller.getOpenIds(),open);
 });
 
-test('closed native disclosure keeps selection outside its hidden content and summary independent',async()=>{
- const {controller}=harness();
- const root=controller.getNode(tree.root_ids[0]);
- root.wrapper.open=false;
- assert.equal(root.wrapper.tagName,'DETAILS');
- assert.equal(root.button.parentElement.tagName,'DIV');
- assert.equal(root.wrapper.parentElement,root.button.parentElement);
- assert.equal(root.wrapper.children[0].tagName,'SUMMARY');
- assert.equal(root.wrapper.children[0].querySelectorAll('button').length,0);
- await root.wrapper.children[0].click();
- assert.equal(controller.selectedId,null);
+test('disclosure, geometry and selection controls are independent',async()=>{
+ const {controller}=harness(),id=tree.root_ids[0],root=controller.getNode(id);
+ assert.equal(root.toggle.tagName,'BUTTON');assert.notEqual(root.toggle,root.button);assert.notEqual(root.checkbox,root.button);
+ await root.toggle.click();assert.equal(controller.isOpen(id),false);assert.equal(controller.selectedId,null);
+ await root.toggle.click();assert.equal(controller.isOpen(id),true);assert.equal(controller.selectedId,null);
 });
 
 test('scroll touches only the tree, is skipped for visible rows, and repeated selection does not jitter',()=>{
@@ -189,10 +183,10 @@ test('all 45 coalesced administrative/statistical entities have one representati
  const {controller,container}=harness();
  const reused=index.entities.filter(e=>e.category!=='statistical'&&e.roles.includes('statistical'));
  assert.equal(reused.length,45);
- for(const entity of reused)controller.select(entity.id);
+ for(const entity of reused){controller.select(entity.id);assert.equal(container.querySelectorAll('.tree-select').filter(b=>b.dataset.entityId===entity.id).length,1);assert.ok(controller.getRenderedCount()<30);}
  const ids=container.querySelectorAll('.tree-select').map(b=>b.dataset.entityId);
  assert.equal(new Set(ids).size,ids.length);
- for(const entity of reused)assert.equal(ids.filter(id=>id===entity.id).length,1);
+ assert.equal(controller.selectedId,reused.at(-1).id);
 });
 
 test('real frontend controller synchronizes map/search/tree/breadcrumb/details and hidden selection/clear',async()=>{
@@ -257,13 +251,24 @@ test('real frontend controller synchronizes map/search/tree/breadcrumb/details a
   const layer=layers.find(l=>l.feature.properties.entity_id===deep.id);await layer.handlers.click();assertSelection(deep.id);
   const parent=nodes.get(deep.id).parent_id;
   await body.querySelector('nav').querySelectorAll('button').find(b=>b.dataset.entityId===parent).click();assertSelection(parent);
-  const branch=container.querySelectorAll('details').find(d=>d.open);const before=app.selectedEntityId;
-  branch.open=false;await branch.dispatch('toggle');assert.equal(app.selectedEntityId,before);
+  const before=app.selectedEntityId;app.atlasTree.toggle(parent);assert.equal(app.selectedEntityId,before);
   await app.selectEntity(deep.id);assertSelection(deep.id);
-  const opened=container.querySelectorAll('details').filter(d=>d.open);
+  const opened=app.atlasTree.getOpenIds();
   await document.getElementById('details-close').click();assert.equal(app.selectedEntityId,null);
   assert.equal(container.querySelectorAll('[aria-pressed="true"]').length,0);assert.equal(body.querySelector('nav'),null);
-  assert.equal(document.getElementById('details-title').textContent,'Nicio selecție');assert.ok(opened.every(d=>d.open));
+  assert.equal(document.getElementById('details-title').textContent,'Nicio selecție');assert.deepEqual(app.atlasTree.getOpenIds(),opened);
   assert.ok(!liveLayers().some(l=>l.style?.color==='#b54a38'));
  }finally{Object.assign(globalThis,previous);}
+});
+
+
+test('virtual rows release observations, scroll listener and pending animation on destroy',()=>{
+ const document=documentFactory(),container=new Element(),watched=new Set(),callbacks=new Map();let observer,sequence=0,unobserved=0,disconnected=0,cancelled=0,removed=0;
+ document.defaultView={ResizeObserver:class{constructor(callback){this.callback=callback;observer=this;}observe(element){watched.add(element);}unobserve(element){watched.delete(element);unobserved++;}disconnect(){watched.clear();disconnected++;}},requestAnimationFrame(callback){const id=++sequence;callbacks.set(id,callback);return id;},cancelAnimationFrame(id){assert.ok(callbacks.has(id));callbacks.delete(id);cancelled++;}};
+ container.removeEventListener=(name,callback)=>{assert.equal(name,'scroll');assert.ok(container.listeners.scroll.includes(callback));container.listeners.scroll=container.listeners.scroll.filter(value=>value!==callback);removed++;};
+ const controller=createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,onSelect(){}});
+ controller.setOpenIds(tree.nodes.filter(node=>node.child_ids.length).map(node=>node.id));assert.ok(watched.has(container));assert.equal(watched.size,controller.getRenderedCount()+1);
+ container.scrollTop=10000;container.listeners.scroll[0]();const [id,callback]=callbacks.entries().next().value;callbacks.delete(id);callback();assert.ok(unobserved>0);assert.equal(watched.size,controller.getRenderedCount()+1);
+ container.listeners.scroll[0]();assert.equal(callbacks.size,1);controller.destroy();assert.equal(disconnected,1);assert.equal(cancelled,1);assert.equal(removed,1);assert.equal(watched.size,0);assert.equal(callbacks.size,0);assert.equal(container.listeners.scroll.length,0);
+ observer.callback([]);assert.equal(callbacks.size,0);
 });

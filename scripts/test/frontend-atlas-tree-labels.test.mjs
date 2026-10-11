@@ -21,3 +21,9 @@ test('P5.2 root display rule does not rename nested identity or non-MD jurisdict
  assert.equal(compactTreeName({jurisdiction:'MD',parent_id:'md',display_name:'Republica Moldova'}),'Republica Moldova');
  assert.equal(compactTreeName({jurisdiction:'RO',parent_id:null,display_name:'Republica Moldova'}),'Republica Moldova');
 });
+
+test('unnamed released entity hides its technical fallback only in menu presentation',()=>{
+ const node={id:'osm-r12104636',display_name:'osm-r12104636',jurisdiction:'MD',parent_id:'osm-r19090918'};const before=JSON.stringify(node);
+ assert.equal(compactTreeName(node),'Entitate fără nume');assert.equal(JSON.stringify(node),before);
+ assert.equal(compactTreeName({id:'osm-r1',display_name:'1 Decembrie'}),'1 Decembrie');
+});
