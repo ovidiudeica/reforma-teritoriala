@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="atlas-p6.4.2.css">
 <link rel="stylesheet" href="atlas-layout.css">
 <link rel="stylesheet" href="atlas-tree.css">
+<link rel="stylesheet" href="atlas-panel-content.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -49,8 +50,13 @@
 <div class="atlas-panel-heading"><h2 id="atlas-panel-title">Entități</h2><button id="drawer-close" class="action-button" type="button" aria-label="Închide panoul de navigare">Închide</button></div>
   <section id="search-panel">
     <h3 class="sr-only">Căutare</h3>
-    <input id="entity-search" class="search" type="search" aria-label="Caută entități teritoriale" aria-describedby="search-help" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Nume, SIRUTA/CUATM, cod statistic sau OSM…" autocomplete="off">
+    <div class="atlas-search-input-row"><input id="entity-search" class="search" type="search" aria-label="Caută entități teritoriale" aria-describedby="search-help" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Nume, SIRUTA/CUATM, cod statistic sau OSM…" autocomplete="off"><button id="search-clear" type="button" class="action-button" aria-label="Șterge căutarea" title="Șterge căutarea">×</button></div>
     <p id="search-help" class="sr-only">Săgețile sus/jos navighează rezultatele, Enter selectează, Escape închide lista. Căutarea include și geometrii ascunse.</p>
+  <section id="results-panel" hidden>
+    <p id="search-empty" class="hint">Caută un nume sau un cod. Folosește săgețile pentru rezultate și Enter pentru detalii; bifele geometriilor rămân independente.</p>
+    <div id="search-results" class="search-results" role="listbox" aria-label="Rezultate căutare" hidden></div>
+    <p id="search-status" class="hint" role="status" aria-live="polite"></p>
+  </section>
   </section>
   <section id="entities-panel">
     <h3 class="sr-only">Arbore</h3>
@@ -59,10 +65,6 @@
     <div id="hierarchy-tree" class="hierarchy-tree" aria-describedby="atlas-tree-help"><p class="muted">Se încarcă arborele teritorial…</p></div>
   </section>
 
-  <section id="results-panel" hidden>
-    <div id="search-results" class="search-results" role="listbox" aria-label="Rezultate căutare" hidden></div>
-    <p id="search-status" class="hint" role="status" aria-live="polite"></p>
-  </section>
   <section id="filters-panel" class="atlas-filters-panel" aria-label="Filtre geometrice" hidden inert>
 <button id="filters-reset" class="action-button" type="button" disabled>Resetează filtrele</button>
     <p class="hint">Filtrele limitează geometriile deja bifate în arbore; nu modifică bifele entităților.</p>
@@ -79,6 +81,10 @@
 
 <section id="atlas-info-dialog" hidden inert>
 <div class="atlas-info-body">
+  <details class="atlas-info-section"><summary>Despre atlas și metodologie</summary>
+  <p>Atlasul prezintă organizarea teritorială a României și Republicii Moldova. Lista, selecția pentru detalii și afișarea geometriilor sunt independente.</p>
+  <p>ACTUAL este corpusul publicat. Identitatea oficială și geometria OSM sunt prezentate separat; o reprezentare cartografică nu dovedește singură identitatea juridică.</p>
+  <p>ISTORIC și PROPUNERI sunt în pregătire, fără corpus funcțional publicat.</p></details>
   <section>
     <h3>Nivel de detaliu</h3>
     <p class="hint">Limitele regionale sunt încărcate imediat. UAT-urile locale apar de la zoom 7, iar sectoarele și reprezentările de detaliu de la zoom 10.</p>
@@ -96,7 +102,17 @@
   </div>
 </section><section id="atlas-advanced-dialog" hidden inert>
 <section id="atlas-advanced-content" aria-label="Conținut navigare avansată"></section>
-</section><section id="share-panel" hidden inert><p class="hint">Copiază vederea curentă, cu selecția și filtrele aplicate.</p><button id="copy-link" class="action-button" type="button">Copiază link</button><p id="share-status" class="hint" role="status" aria-live="polite"></p></section>
+</section><section id="share-panel" hidden inert>
+<fieldset class="atlas-share-target"><legend>Ce distribui?</legend>
+<label><input id="share-view" type="radio" name="share-target" checked> <span>Vederea curentă</span></label>
+<label><input id="share-entity" type="radio" name="share-target" disabled> <span>Entitatea selectată</span></label></fieldset>
+<p id="share-description" class="hint"></p>
+<div class="atlas-share-actions"><button id="copy-link" class="action-button" type="button">Copiază link</button>
+<button id="share-native" class="action-button" type="button" hidden>Distribuie prin dispozitiv</button>
+<a id="share-email" class="action-button">E-mail</a><a id="share-open" class="action-button" target="_blank" rel="noopener noreferrer">Deschide linkul</a></div>
+<label for="share-url">Link de distribuit</label><textarea id="share-url" readonly rows="4" spellcheck="false"></textarea>
+<p class="hint">Opțiunile dispozitivului apar când browserul le oferă. Poți folosi linkul în orice aplicație.</p>
+<p id="share-status" class="hint" role="status" aria-live="polite"></p></section>
 <p id="geometry-load-status" class="hint" role="alert"></p>
 </aside>
 

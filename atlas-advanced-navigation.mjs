@@ -19,7 +19,7 @@ export function createAtlasAdvancedNavigation({
  function checkedIds(){return [...getChecked()].filter(id=>byId.has(id)).sort((a,b)=>{const x=byId.get(a),y=byId.get(b);return (x.jurisdiction===y.jurisdiction?0:x.jurisdiction==='RO'?-1:1)||title(x).localeCompare(title(y),'ro')||a.localeCompare(b);});}
  function groupLabel(entity){return entity.jurisdiction==='RO'?'România':'Moldova';}
  const append=(target,tag,cls,value)=>{const node=own(document,tag,cls,value);target.appendChild(node);return node;};
- const action=(target,text,handler,cls='action-button')=>{const b=append(target,'button',cls,text);b.type='button';b.addEventListener('click',handler);return b;};
+ const action=(target,text,handler,cls='action-button',key=text)=>{const b=append(target,'button',cls,text);b.type='button';b.dataset.actionKey=(target.dataset?.entityId||target.parentElement?.dataset?.entityId||'')+'|'+key;b.addEventListener('click',handler);return b;};
  function updateCounters(){
  for(const [key,label]of Object.entries({visible:'Straturi ('+getChecked().size+')',recent:'Recente'+(recent.length?' ('+recent.length+')':''),compare:'Compară'+(pair.length?' ('+pair.length+'/2)':'')})){
   const button=buttons[key],span=button.querySelector?.('.rail-label');if(span)span.textContent=label;else button.textContent=label;
@@ -31,15 +31,15 @@ export function createAtlasAdvancedNavigation({
   const next=!getChecked().has(id);lastHidden=next?null:id;
   onCheck(id,next);render();
   if(!next)document.getElementById('advanced-undo-hide')?.focus?.();
- },'action-button atlas-advanced-compact').setAttribute('aria-label',(checked?'Ascunde':'Afișează')+' geometria '+title(byId.get(id)));}
+ },'action-button atlas-advanced-compact','geometry').setAttribute('aria-label',(checked?'Ascunde':'Afișează')+' geometria '+title(byId.get(id)));}
  function compareAction(target,id){const paired=pair.includes(id);action(target,paired?'Scoate din comparație':'Adaugă la comparație',()=>{
   if(paired)pair=pair.filter(x=>x!==id);
   else if(pair.length<2)pair.push(id);
   else pair=[pair[1],id];
-  panels.open('compare',{focus:false});
+  panels.open('compare',{source:buttons[current]});
  },'action-button atlas-advanced-compact');}
  function entityRow(target,id,kind){const entity=byId.get(id);if(!entity)return;
-  const row=append(target,'li','atlas-advanced-row');
+  const row=append(target,'li','atlas-advanced-row');row.dataset.entityId=id;
   const line=append(row,'div','atlas-advanced-row-title');action(line,title(entity),()=>select(id),'atlas-advanced-entity');
   append(row,'small','atlas-advanced-muted',groupLabel(entity)+' · '+typeLabel(entity.display_type||entity.representation?.inferred_type));
   const controls=append(row,'div','atlas-advanced-row-actions');if(kind!=='recent')checkedAction(controls,id);
@@ -48,7 +48,7 @@ export function createAtlasAdvancedNavigation({
  function renderVisible(){const ids=checkedIds();append(content,'p','atlas-advanced-hint',ids.length+' geometrii bifate explicit. Filtrele pot ascunde temporar poligoanele; bifele rămân independente.');
   if(lastHidden&&!getChecked().has(lastHidden)){const undo=action(content,'Anulează ascunderea: '+title(byId.get(lastHidden)),()=>{onCheck(lastHidden,true);lastHidden=null;render();},'action-button atlas-advanced-compact');undo.id='advanced-undo-hide';}
   const list=append(content,'ul','atlas-advanced-list');for(const id of ids.slice(0,offset))entityRow(list,id,'visible');
-  if(ids.length>offset)action(content,'Mai multe ('+(ids.length-offset)+' rămase)',()=>{offset+=limit;render();});
+  if(ids.length>offset)action(content,'Mai multe ('+(ids.length-offset)+' rămase)',()=>{offset+=limit;render();},'action-button','more');
  }
  function renderRecent(){append(content,'p','atlas-advanced-hint','Ultimele entități selectate pe acest dispozitiv. Lista nu este transmisă către server și nu modifică geometriile.');
   const list=append(content,'ul','atlas-advanced-list');for(const id of recent)entityRow(list,id,'recent');
@@ -60,7 +60,7 @@ export function createAtlasAdvancedNavigation({
   if(!pair.length)append(content,'p','atlas-advanced-muted','Nicio entitate adăugată.');
   const cols=append(content,'div','atlas-comparison-cards');
   for(const id of pair){const entity=byId.get(id);if(!entity)continue;
-   const card=append(cols,'section','atlas-comparison-card');
+   const card=append(cols,'section','atlas-comparison-card');card.dataset.entityId=id;
    append(card,'h3','',title(entity));append(card,'p','atlas-advanced-muted',groupLabel(entity)+' · '+typeLabel(entity.display_type||entity.representation?.inferred_type));
    const rows=append(card,'dl','atlas-comparison-kv');
    for(const [label,value] of [['ID oficial',entity.legal?.id],['Cod statistic',entity.statistical?.code],['Identificator OSM',entity.representation?.osm_relation_id],['Apartenență',entity.hierarchy?.legal_parent_name||entity.hierarchy?.statistical_parent_name],['Stare geometrie',getChecked().has(id)?'Bifată explicit':'Nebifată']]){
@@ -72,7 +72,11 @@ export function createAtlasAdvancedNavigation({
   if(pair.length===2){action(content,'Centrează pe ambele',()=>onZoomPair(pair.map(id=>byId.get(id))),'action-button').disabled=pair.some(id=>!Array.isArray(byId.get(id)?.map?.bbox));}
   if(pair.length)action(content,'Golește comparația',()=>{pair=[];render();});
  }
- function render(){updateCounters();content.setAttribute('aria-labelledby','atlas-panel-title');content.replaceChildren?.();if(current==='visible')renderVisible();else if(current==='recent')renderRecent();else renderCompare();}
+ function render(){
+  const focused=document.activeElement,restore=Boolean(content.contains?.(focused)),key=focused?.dataset?.actionKey;
+  updateCounters();content.setAttribute('aria-labelledby','atlas-panel-title');content.replaceChildren?.();if(current==='visible')renderVisible();else if(current==='recent')renderRecent();else renderCompare();
+  if(restore){const replacement=[...content.querySelectorAll('button')].find(button=>button.dataset.actionKey===key);(replacement||document.getElementById('drawer-close'))?.focus?.();}
+ }
  function isOpen(){return ['visible','recent','compare'].includes(panels.state.active);}
  function open(which='visible',origin=buttons[which]){panels.open(which,{source:origin});}
  function close(){if(isOpen())panels.close();}
