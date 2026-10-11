@@ -5,7 +5,7 @@
 .atlas-search-input-row .search::-webkit-search-cancel-button{display:none}
 #search-clear{padding:0;font-size:22px}
 #atlas-controls[data-panel=search]>#search-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;padding-bottom:12px}
-#search-panel #results-panel{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+#search-panel #results-panel{display:flex;flex-direction:column;flex:1;min-height:0;overflow:auto}
 #results-panel .search-results{flex:1;min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain}
 #search-status,#search-empty{flex:none}
 #search-status{margin:4px 0;line-height:16px}
@@ -25,6 +25,20 @@
 #share-url{box-sizing:border-box;display:block;width:100%;min-width:0;margin-top:6px;padding:8px;border:1px solid #c1cec6;border-radius:6px;resize:vertical;font:12px/1.5 monospace;overflow-wrap:anywhere}
 .atlas-info-section{border-bottom:1px solid #dce4dd;margin-bottom:12px}
 .atlas-info-section p{font-size:12px;line-height:1.6}
+#atlas-advanced-content button{min-width:44px;min-height:44px}
+.atlas-advanced-hint{font-size:12px;color:#415f4a;line-height:1.5;margin:0 0 11px}
+.atlas-advanced-muted{font-size:12px;color:#466054}
+.atlas-advanced-list{padding:0;margin:0 0 10px;list-style:none}
+.atlas-advanced-row{padding:10px 0;border-bottom:1px solid #e3ebe5}
+.atlas-advanced-row-title{margin:0 0 4px}
+.atlas-advanced-entity{border:0;background:none;padding:3px 0;color:#164d35;text-align:left;text-decoration:underline;font:inherit;font-weight:650;display:inline-flex;align-items:center}
+.atlas-advanced-row-actions,.atlas-comparison-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.atlas-advanced-compact{font-size:12px}
+.atlas-comparison-card{padding:12px;border:1px solid #cbd9cf;border-radius:9px;overflow-wrap:anywhere}
+.atlas-comparison-card h3{margin:0 0 8px;font-size:15px}
+.atlas-comparison-kv{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:9px;row-gap:6px;font-size:12px;margin:10px 0}
+.atlas-comparison-kv dt{color:#506759}
+.atlas-comparison-kv dd{margin:0}
 #atlas-advanced-content{container:advanced-content / inline-size}
 .atlas-comparison-cards{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:14px}
 @container advanced-content (min-width:580px){.atlas-comparison-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -37,6 +51,7 @@
  .atlas-panel-heading{min-height:44px;padding-top:0;padding-bottom:0}
 }
 @media(forced-colors:active){
+ .atlas-comparison-card{border-color:CanvasText}
  #filters-panel input[type=checkbox]::before,.atlas-share-target input::before{border-color:ButtonText;background:Canvas}
  #filters-panel input[type=checkbox]:checked::before,.atlas-share-target input:checked::before{background:Highlight;border-color:Highlight;box-shadow:inset 0 0 0 3px Canvas}
 }

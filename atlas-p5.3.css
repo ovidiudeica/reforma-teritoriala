@@ -23,6 +23,3 @@ header nav{display:grid;grid-template-columns:repeat(2,max-content);gap:2px 5px;
 header nav .mode{padding:2px 4px;min-height:18px;font-size:10px;line-height:1.1}
 header nav .mode[data-mode="propuneri"]{grid-column:1/-1;justify-self:end}
 }
-@container atlas (max-width:899px){
-#filters-panel .filter-actions button{min-height:44px;min-width:44px}
-}

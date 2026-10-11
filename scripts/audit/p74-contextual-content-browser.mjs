@@ -25,6 +25,19 @@ try{
    const columns=()=>page.evaluate('getComputedStyle(document.querySelector(".atlas-comparison-cards")).gridTemplateColumns.split(" ").length');
    assert.equal(await columns(),1);await page.call(function(){document.querySelector('#explorer-resizer').focus();});await page.key('End');await delay(100);assert.equal(await columns(),2);await page.key('Home');await delay(100);assert.equal(await columns(),1);await page.call(function(){qaApp.atlasExplorerShell.setWidth(340);});
   });
+  await t.test('geometry actions retain focus when their visible caption changes',async()=>{
+   const before=await page.evaluate('JSON.stringify({selected:qaApp.selectedEntityId,checked:[...qaApp.visibleEntityIds].sort(),filters:[...qaApp.activeGeometrySubtypes].sort()})');
+   await page.call(function(){document.querySelector('.atlas-comparison-actions button').focus();});const id=await page.evaluate('document.activeElement.closest(".atlas-comparison-card").dataset.entityId');
+   for(let i=0;i<2;i++){await page.key('Enter');assert.equal(await page.evaluate('document.activeElement.closest(".atlas-comparison-card")?.dataset.entityId'),id);assert.match(await page.evaluate('document.activeElement.getAttribute("aria-label")'),/geometria/);}
+   assert.equal(await page.evaluate('JSON.stringify({selected:qaApp.selectedEntityId,checked:[...qaApp.visibleEntityIds].sort(),filters:[...qaApp.activeGeometrySubtypes].sort()})'),before);
+  });
+  await t.test('progressive layer pagination keeps focus as its remaining count changes',async()=>{
+   const original=await page.evaluate('[...qaApp.visibleEntityIds]');
+   try{
+    await page.call(function(){qaApp.visibleEntityIds.clear();for(const id of [...qaApp.entityById.keys()].slice(0,151))qaApp.visibleEntityIds.add(id);qaApp.atlasAdvanced.open('visible');const button=[...document.querySelectorAll('#atlas-advanced-content button')].find(e=>e.textContent.startsWith('Mai multe'));button.focus();});
+    assert.equal(await page.evaluate('document.querySelectorAll(".atlas-advanced-row").length'),50);await page.key('Enter');assert.equal(await page.evaluate('document.querySelectorAll(".atlas-advanced-row").length'),100);assert.match(await page.evaluate('document.activeElement.textContent'),/Mai multe \(51 rămase\)/);assert.equal(await page.evaluate('qaApp.visibleEntityIds.size'),151);
+   }finally{await page.call(function(ids){qaApp.visibleEntityIds.clear();for(const id of ids)qaApp.visibleEntityIds.add(id);qaApp.atlasAdvanced.refresh();},original);await page.key('Escape');}
+  });
   await t.test('view/entity/copy/email links are independent of semantic state',async()=>{
    await page.openPanel('share');const before=await page.evaluate('JSON.stringify(qaApp.captureUrlState())');
    await page.call(function(){globalThis.qaCopied='';Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>{globalThis.qaCopied=value;}}});document.querySelector('#share-entity').click();});
@@ -59,6 +72,9 @@ try{
      const result=await page.call(function(panel){const host=document.querySelector('#atlas-controls'),r=host.getBoundingClientRect();const targets=[...host.querySelectorAll('button,input,summary,a[href]')].filter(e=>!e.disabled&&!e.closest('[hidden],[inert]')&&e.checkVisibility()&&e.getClientRects().length).map(e=>{const b=e.getBoundingClientRect();let top=r.top,bottom=r.bottom;for(let parent=e.parentElement;parent&&parent!==host;parent=parent.parentElement){if(/auto|scroll|hidden/.test(getComputedStyle(parent).overflowY)){const clip=parent.getBoundingClientRect();top=Math.max(top,clip.top);bottom=Math.min(bottom,clip.bottom);}}const inside=b.top>=top&&b.bottom<=bottom&&b.left>=r.left&&b.right<=r.right;return {label:e.getAttribute('aria-label')||e.textContent,width:b.width,height:b.height,inside,hit:!inside||e===document.elementFromPoint(b.x+b.width/2,b.y+b.height/2)||e.contains(document.elementFromPoint(b.x+b.width/2,b.y+b.height/2))};});return {panel,width:host.clientWidth,scrollWidth:host.scrollWidth,targets,columns:panel==='compare'?getComputedStyle(document.querySelector('.atlas-comparison-cards')).gridTemplateColumns:null};},panel);
      reports.push({viewport:[width,height],...result});assert.ok(result.scrollWidth<=result.width+1,'panel horizontal overflow');assert.ok(result.targets.every(e=>e.width>=44&&e.height>=44),JSON.stringify(result.targets.filter(e=>e.width<44||e.height<44)));assert.ok(result.targets.every(e=>e.hit),'covered controls');
      await page.screenshot(path.join(output,'p74-'+width+'x'+height+'-'+panel+'.png'));
+     if(panel==='search'){
+      const empty=await page.call(function(){document.querySelector('#search-clear').click();const host=document.querySelector('#results-panel');host.scrollTop=host.scrollHeight;const h=host.getBoundingClientRect(),r=document.querySelector('#search-empty').getBoundingClientRect();return {visible:!document.querySelector('#search-empty').hidden,reachable:r.bottom<=h.bottom+1,width:host.clientWidth,scrollWidth:host.scrollWidth};});assert.ok(empty.visible&&empty.reachable&&empty.scrollWidth<=empty.width,'empty search instructions must remain reachable');
+     }
     }
    }
   });
