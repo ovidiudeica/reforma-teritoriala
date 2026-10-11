@@ -15,7 +15,7 @@
 #atlas-controls>section{min-height:0;overflow:auto;padding:12px 14px;overscroll-behavior:contain}
 #atlas-controls>section[hidden]{display:none}
 #atlas-controls>#search-panel{flex-shrink:0;padding-bottom:4px}
-#atlas-controls>#entities-panel,#atlas-controls>#results-panel,#atlas-controls>#filters-panel,#atlas-controls>#atlas-info-dialog,#atlas-controls>#atlas-advanced-dialog,#atlas-controls>#share-panel{flex:1}
+#atlas-controls>#entities-panel,#atlas-controls>#results-panel,#atlas-controls>#filters-panel,#atlas-controls>#atlas-info-dialog,#atlas-controls>#atlas-advanced-dialog,#atlas-controls>#share-panel,#atlas-controls>#modules-panel{flex:1}
 #atlas-info-dialog .atlas-info-body{padding:0;max-height:none;overflow:visible}
 #atlas-advanced-content{max-height:none;padding:0}
 #atlas-controls>#geometry-load-status:empty{display:none}
@@ -23,13 +23,8 @@
 #explorer-resizer{grid-column:3;grid-row:1;background:#d1dcd4;z-index:1401;cursor:col-resize;touch-action:none}
 #explorer-resizer:hover,#explorer-resizer:focus-visible{background:#4f8b6c;outline:2px solid #2d614d;outline-offset:-2px}
 .drawer-backdrop{display:none}
-#details-panel{position:absolute;inset:auto 14px 14px auto;width:min(440px,calc(100% - var(--rail-width) - var(--pane-space) - var(--divider-space) - var(--command-space) - 14px));max-height:min(65cqh,580px,calc(100% - 38px));min-height:0;z-index:1100;padding:18px;background:#fff;border:1px solid #dce4dd;border-radius:12px;box-shadow:0 12px 40px #19372a35;overflow:auto}
+#details-panel{position:absolute;inset:auto var(--command-space) 14px auto;width:min(440px,calc(100% - var(--rail-width) - var(--pane-space) - var(--divider-space) - var(--command-space) - 14px));max-height:min(65cqh,580px,calc(100% - 38px));min-height:0;z-index:1100;padding:18px;background:#fff;border:1px solid #dce4dd;border-radius:12px;box-shadow:0 12px 40px #19372a35;overflow:auto}
 #details-panel[hidden]{display:none!important}
-/* Leaflet annotations reserve edges independently of selection sheets. */
-#atlas-main .leaflet-bottom.leaflet-right{bottom:auto;top:0;right:10px}
-#atlas-main .leaflet-control-attribution{margin:0;font-size:9px;line-height:1.4;background:#fffffff0}
-#atlas-main .leaflet-bottom.leaflet-left{left:var(--command-space);bottom:auto;top:0}
-#atlas-main .leaflet-control-scale{margin:0}
 @container atlas (max-width:899px){
  #atlas-main{display:block;--map-offset:56px;--sheet-bottom:78px}
  #map{position:absolute;inset:0 0 0 var(--map-offset);width:calc(100% - var(--map-offset))}

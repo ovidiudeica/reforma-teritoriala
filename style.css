@@ -4,9 +4,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:0 2
 header strong{letter-spacing:.08em;font-size:16px}
 header span{display:block;font-size:12px;color:#b9c8c1;margin-top:4px}
 nav{display:flex;gap:7px}
-.mode{border:1px solid #61736b;background:transparent;color:#dce5e1;padding:9px 15px;border-radius:5px;cursor:pointer;font-weight:700}
-.mode.active{background:#e9eee9;color:#18241f;border-color:#e9eee9}
-.mode:disabled{opacity:.45;cursor:not-allowed}
 .details{padding:20px;background:#fbfbf8;overflow:auto;z-index:500}
 .details{border-left:1px solid #d9ddd9}
 h2{font-size:18px;margin:0 0 18px}
@@ -77,8 +74,6 @@ footer{display:flex;justify-content:space-between;align-items:center;padding:0 1
 header{padding:calc(8px + env(safe-area-inset-top)) 12px 8px;align-items:center}
 header strong{font-size:13px}
 header span{font-size:10px;max-width:185px;margin-top:2px}
-header nav{flex-direction:column;gap:3px}
-.mode{padding:3px 7px;font-size:10px}
 .mobile-navigation{position:absolute;right:12px;top:12px;z-index:1100;box-shadow:0 3px 12px #0002}
 .status{display:block}
 .details{visibility:hidden;transform:translateY(110%);overflow:hidden;display:flex;flex-direction:column}
@@ -93,9 +88,6 @@ header nav{flex-direction:column;gap:3px}
 footer{font-size:9px;padding:0 8px}
 footer span:first-child{overflow:hidden;text-overflow:ellipsis}
 footer span:last-child{display:none}
-.leaflet-bottom{bottom:0}
-.leaflet-control-scale{margin-bottom:2px}
-.leaflet-control-attribution{max-width:100%;font-size:9px}
 }
 :root{--atlas-text:#17202a;--atlas-secondary:#52635a;--atlas-focus:#365b4a;--atlas-surface:#fbfbf8;--atlas-selected:#e4ede7;--atlas-warning:#633f14}
 header h1{margin:0;letter-spacing:.08em;font-size:16px;font-weight:700}

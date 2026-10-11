@@ -67,10 +67,11 @@ try{
    await page.click('#filters-reset');
    await page.click('#drawer-close');
   });
-  await t.test('compact disabled modes fit mobile header and hidden geometry can be activated from sheet',async()=>{
+  await t.test('single accessible module trigger preserves unavailable corpora and hidden geometry can be activated from sheet',async()=>{
    await page.viewport(390,844);
-   const header=await page.evaluate("({bottom:document.querySelector('header').getBoundingClientRect().bottom,modes:[...document.querySelectorAll('header .mode')].map(e=>{const r=e.getBoundingClientRect();return {bottom:r.bottom,right:r.right}})})");
-   assert.ok(header.modes.every(r=>r.bottom<=header.bottom+1&&r.right<=390),'mode overlap '+JSON.stringify(header));
+   const header=await page.call(function(){const e=document.querySelector('#modules-toggle'),r=e.getBoundingClientRect(),h=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {bottom:document.querySelector('header').getBoundingClientRect().bottom,trigger:{bottom:r.bottom,right:r.right,width:r.width,height:r.height,hit:e===h||e.contains(h)},count:document.querySelectorAll('header [data-panel=modules]').length};});
+   assert.equal(header.count,1);assert.ok(header.trigger.width>=44&&header.trigger.height>=44&&header.trigger.hit&&header.trigger.bottom<=header.bottom+1&&header.trigger.right<=390,'module trigger overlap '+JSON.stringify(header));
+   await page.openPanel('modules');assert.deepEqual(await page.call(function(){return [...document.querySelectorAll('#modules-panel [data-mode]')].map(e=>[e.dataset.mode,e.disabled,e.getAttribute('aria-pressed')]);}),[['actual',false,'true'],['istoric',true,'false'],['propuneri',true,'false']]);await page.key('Escape');assert.equal(await page.evaluate('document.activeElement.id'),'modules-toggle');
    await page.click('#mobile-navigation');await page.click('#filters-toggle');
    assert.ok(await page.evaluate("document.querySelector('#filters-panel .filter-actions button').getBoundingClientRect().height>=44"),'mobile filter touch target');
    await page.click('#drawer-close');
