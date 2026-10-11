@@ -27,6 +27,10 @@ try{
     const text=await page.call(function(id){const e=qaApp.atlasTree.getNode(id).button;return {height:e.getBoundingClientRect().height,width:e.clientWidth,scrollWidth:e.scrollWidth,whiteSpace:getComputedStyle(e).whiteSpace};},id);assert.equal(text.whiteSpace,'normal');assert.ok(text.scrollWidth<=text.width);await page.screenshot(path.join(output,'p73-'+width+'x'+height+'.png'));
    }
   });
+  await t.test('unnamed identity has a human menu fallback without changing the corpus',async()=>{
+   const state=await page.call(function(){const id='osm-r12104636';qaApp.atlasTree.select(id);const button=qaApp.atlasTree.getNode(id).button;return {text:button.textContent,title:button.title,original:qaApp.hierarchyNodeById.get(id).display_name,id:button.dataset.entityId};});
+   assert.equal(state.text,'Entitate fără nume');assert.equal(state.title,'Entitate fără nume');assert.equal(state.original,'osm-r12104636');assert.equal(state.id,'osm-r12104636');
+  });
   await t.test('keyboard navigation changes focus without changing selection or geometry intent',async()=>{
    await page.viewport(1440,900);await page.openPanel('entities');await page.call(function(){qaApp.atlasTree.select('osm-r90689');qaApp.atlasTree.getNode('osm-r90689').button.focus();});const before=await page.evaluate('JSON.stringify({selected:qaApp.selectedEntityId,checked:[...qaApp.visibleEntityIds].sort()})');
    await page.key('ArrowDown');await page.key('End');await page.key('ArrowUp');assert.equal(await page.evaluate('JSON.stringify({selected:qaApp.selectedEntityId,checked:[...qaApp.visibleEntityIds].sort()})'),before);
