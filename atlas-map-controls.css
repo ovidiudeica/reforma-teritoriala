@@ -1,7 +1,7 @@
 /* Sole owner of native Leaflet command/annotation geometry. No resize re-creation. */
 #atlas-main .leaflet-bottom.leaflet-right{right:10px;bottom:10px}
 #atlas-main .leaflet-top.leaflet-left{left:10px;top:0}
-#atlas-main .leaflet-top.leaflet-right{right:10px;top:0}
+#atlas-main .leaflet-top.leaflet-right{right:10px;top:0;max-width:calc(100% - 120px)}
 #atlas-main .leaflet-control-zoom{display:flex;flex-direction:column;overflow:hidden;border-radius:6px;margin:0}
 #atlas-main .leaflet-control-zoom>a,#atlas-main .leaflet-control-zoom>button{box-sizing:border-box;display:flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;margin:0;border:0;border-bottom:1px solid #c8d2cc;border-radius:0;background:#fff;color:#173d2a;font:inherit;line-height:1;cursor:pointer;touch-action:manipulation;box-shadow:none}
 #atlas-main .leaflet-control-zoom>a{font-size:25px}
@@ -13,11 +13,12 @@
 #atlas-main #basemap-toggle[aria-pressed=false]{background:#e5eae6;color:#3f5147}
 #basemap-toggle .atlas-osm-off-mark{display:none}
 #basemap-toggle[aria-pressed=false] .atlas-osm-off-mark{display:block}
-#atlas-main .leaflet-control-attribution{margin:0;max-width:100%;font-size:9px;line-height:1.4;background:#fffffff0}
+#atlas-main .leaflet-control-attribution{margin:0;max-width:100%;font-size:9px;line-height:1.4;background:#fffffff0;overflow-wrap:anywhere}
 #atlas-main .leaflet-control-scale{margin:0}
 @container atlas (max-width:899px){
  #atlas-main .leaflet-bottom.leaflet-right{right:auto;bottom:auto;left:10px;top:10px}
  #atlas-main .leaflet-top.leaflet-left{left:var(--command-space)}
+ #atlas-main .leaflet-top.leaflet-right{max-width:calc(100% - var(--command-space) - 110px)}
 }
 @media(forced-colors:active){
  #atlas-main .leaflet-control-zoom>button{color:ButtonText;background:ButtonFace;border-bottom:1px solid ButtonText}

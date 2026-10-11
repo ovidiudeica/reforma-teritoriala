@@ -100,7 +100,11 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   // This bounded read batch uses the same height model as ResizeObserver.
   let changed=false;for(const [rowId,entry] of rendered)if(layout.measure(rowId,entry.outer.getBoundingClientRect?.().height))changed=true;
   if(changed){layout.remeasure();render();}alignRow(id);render();}
- function focusRow(id,col){active=id;column=col;show(id);controls(rendered.get(id))[col].focus?.({preventScroll:true});}
+ function focusRow(id,col){active=id;column=col;show(id);const control=controls(rendered.get(id))[col];control.focus?.({preventScroll:true});
+  // Keyboard navigation must reveal the target through every clipping ancestor.
+  // Selection alone still scrolls only the virtual tree; enlarged text can make
+  // its host overflow the contextual panel, which the height model cannot see.
+  control.scrollIntoView?.({block:'nearest',inline:'nearest',behavior:'instant'});}
  function rebuild(){const saved=anchor(),focus=focused();layout.reset(flattenVisibleTree(nodeById,rootIds,openIds));
   if(layout.indexOf(active)<0){let id=active;while(id&&layout.indexOf(id)<0)id=nodeById.get(id)?.parent_id;active=id||layout.rows[0]?.id;}
   restoreAnchor(saved);render();if(focus&&layout.indexOf(focus.id)<0&&active)focusRow(active,focus.col);}

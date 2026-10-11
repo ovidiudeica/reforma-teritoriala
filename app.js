@@ -33,6 +33,7 @@ function setOsmBasemapVisible(value){
 L.control.scale({position:'topleft',imperial:false,maxWidth:100}).addTo(map);
 labelMapControls(document);
 attachRoMdZoomControl(document,L);
+atlasLayout.observeMapAnnotations();
 
 
 const roots={RO:L.layerGroup().addTo(map),MD:L.layerGroup().addTo(map)};
@@ -102,7 +103,7 @@ atlasPanels.onChange(({active})=>{
  if(active==='share')atlasShare?.refresh();
  resizeMapPreservingView();
 });
-const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window,media:atlasLayout.media,panels:atlasPanels,onResize:resizeMapPreservingView});
+const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window,media:atlasLayout.media,layout:atlasLayout,panels:atlasPanels,onResize:resizeMapPreservingView});
 document.querySelector?.('[data-mode=actual]')?.addEventListener('click',()=>atlasPanels.close());
 const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,panels:atlasPanels,onClear:clearSelection});
 wireAtlasSkipLinks({document,mobile:atlasMobile});
