@@ -37,3 +37,21 @@ test('existing DOM test doubles retain the physical media fallback without brows
  assert.equal(layout.media,media);assert.equal(layout.size,null);
  assert.equal(createAtlasPreview({document,layout}).state.mode,'auto');
 });
+test('intrinsic header and navigation changes resize the map and reserve measured space without a breakpoint change',()=>{
+ const props=new Map(),observed=new Set();let resize,disconnected=false;
+ const viewport={clientWidth:390,clientHeight:780},stage={};
+ const main={style:{setProperty:(k,v)=>props.set(k,v),removeProperty:k=>props.delete(k)},getBoundingClientRect:()=>({top:60,bottom:700})};
+ const map={clientWidth:390,clientHeight:640,getBoundingClientRect:()=>({})};
+ let railTop=630,annotationHeight=13;
+ const rail={getBoundingClientRect:()=>({top:railTop,bottom:692})};
+ const annotation={getBoundingClientRect:()=>({height:annotationHeight})};
+ const elements={'atlas-viewport':viewport,'atlas-stage':stage,'atlas-main':main,map,'atlas-navigation-rail':rail};
+ const browser={ResizeObserver:class{constructor(fn){resize=fn;}observe(e){observed.add(e);}disconnect(){disconnected=true;}}};
+ const layout=createAtlasLayout({document:{getElementById:id=>elements[id],querySelectorAll:()=>[annotation]},browser});
+ layout.observeMapAnnotations();assert.equal(props.get('--navigation-bottom'),'78px');assert.equal(props.get('--annotation-space'),'24px');
+ let notifications=0;layout.onResize(()=>notifications++);
+ map.clientHeight=530;railTop=602;annotationHeight=51;resize();
+ assert.equal(notifications,1);assert.deepEqual(layout.size,{width:390,height:780});assert.equal(layout.media.matches,true);
+ assert.equal(props.get('--navigation-bottom'),'106px');assert.equal(props.get('--annotation-space'),'55px');
+ assert.ok(observed.has(map)&&observed.has(rail)&&observed.has(annotation));layout.destroy();assert.equal(disconnected,true);
+});

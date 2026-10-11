@@ -1,5 +1,5 @@
 // P5.1: visual shell only. No entity/filter/URL/geometry mutation.
-export function createAtlasExplorerShell({document,map,window:browser,media,panels,onResize=()=>map.invalidateSize({animate:false,pan:false})}){
+export function createAtlasExplorerShell({document,map,window:browser,media,layout,panels,onResize=()=>map.invalidateSize({animate:false,pan:false})}){
  const main=document.getElementById('atlas-main');
  const sidebar=document.getElementById('atlas-controls');
  const divider=document.getElementById('explorer-resizer');
@@ -12,19 +12,26 @@ export function createAtlasExplorerShell({document,map,window:browser,media,pane
  const small=media||browser.matchMedia('(max-width: 899px)');
  const storageKey='reforma-teritoriala.explorer-width.v1';
  let pointer=null;
- let width=initial;
+ let width=initial,preferredWidth=initial,lastLimit=null;
  try{
   const saved=browser.localStorage?.getItem(storageKey);
   if(saved!==null&&saved!==undefined&&/^\d{3}$/.test(saved)){
    const parsed=Number(saved);
-   if(parsed>=min&&parsed<=max)width=parsed;
+   if(parsed>=min&&parsed<=max)preferredWidth=parsed;
   }
  }catch{ /* Privacy mode or unavailable storage: session width still works. */ }
- function persist(){try{browser.localStorage?.setItem(storageKey,String(width));}catch{ /* Storage is optional. */ }}
+ function persist(){try{browser.localStorage?.setItem(storageKey,String(preferredWidth));}catch{ /* Storage is optional. */ }}
  const clamp=value=>Math.max(min,Math.min(max,Math.round(value)));
  function apply(value){
-  width=clamp(value);
+  preferredWidth=clamp(value);
+  const available=main.clientWidth;
+  // Keep a usable map/card beside the pane; preserve the user's preference for wider frames.
+  const railWidth=document.getElementById('atlas-navigation-rail')?.getBoundingClientRect?.().width||56;
+  const limit=available>=900?Math.max(min,Math.min(max,available-railWidth-8-320)):max;
+  const next=Math.min(preferredWidth,limit);if(next===width&&limit===lastLimit)return;
+  width=next;lastLimit=limit;
   main.style.setProperty('--explorer-width',width+'px');
+  divider.setAttribute('aria-valuemax',String(limit));
   divider.setAttribute('aria-valuenow',String(width));
   onResize();
  }
@@ -49,6 +56,7 @@ export function createAtlasExplorerShell({document,map,window:browser,media,pane
   apply(next);persist();
  });
  function setCollapsed(next){if(next)panels.close();else panels.open('entities');}
- apply(width);
+ layout?.onResize(()=>apply(preferredWidth));
+ apply(preferredWidth);
  return {get width(){return width;},setWidth(value){apply(value);persist();},get collapsed(){return !small.matches&&panels.state.active===null;},setCollapsed,toggleCollapsed(){panels.toggle();}};
 }
