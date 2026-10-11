@@ -103,6 +103,22 @@ test('selection sheet remains present but inert beneath a mobile overlay',()=>{
  panels.open('info');assert.equal(details.hidden,false);assert.equal(details.inert,true);
  ui.selection('second',{source:'map'});assert.equal(details.hidden,false);assert.equal(details.inert,true);
  panels.close();assert.equal(details.hidden,false);assert.equal(details.inert,false);
+ document.getElementById('navigation-more').listeners.click[0]();assert.equal(details.hidden,false);assert.equal(details.inert,true);
+ panels.close();assert.equal(details.inert,false);
  panels.open('filters');media.change(false);assert.equal(details.inert,false);
  ui.selection(null);assert.equal(details.hidden,true);assert.equal(details.inert,true);
+});
+
+
+test('shared content keeps focused actions visible on reflow and excludes inert backgrounds',()=>{
+ const document=shell(doc()),media=new Media(true),panels=createAtlasPanels({document,media});
+ const ui=createAtlasMobileUi({document,media,panels,onClear(){}});
+ const content=document.getElementById('details-content'),action=document.createElement('button');
+ document.getElementById('details-panel').appendChild(content);content.appendChild(action);
+ const scrolls=[];action.scrollIntoView=options=>scrolls.push(options);
+ ui.selection('osm-r90689');action.focus();ui.ensureFocusVisible();
+ assert.deepEqual(scrolls,[{block:'nearest',inline:'nearest'}]);
+ panels.open('info');assert.equal(document.getElementById('details-panel').inert,true);const before=scrolls.length;
+ action.focus();ui.ensureFocusVisible();assert.equal(scrolls.length,before);
+ media.change(false);const desktop=scrolls.length;ui.ensureFocusVisible();assert.equal(scrolls.length,desktop);
 });

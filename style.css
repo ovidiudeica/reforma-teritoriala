@@ -44,9 +44,6 @@ label{display:block;font-size:13px;padding:6px 0}
 .action-button:hover{background:#eef2ef}
 .leaflet-tooltip.entity-tooltip{font-size:11px;padding:3px 6px}
 footer{display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#18241f;color:#aebdb6;font-size:11px;white-space:nowrap;overflow:hidden;gap:12px}
-@container atlas (max-width:1050px){
-.details{position:absolute;right:12px;top:12px;bottom:12px;width:min(340px,42cqw);box-shadow:0 8px 30px rgba(0,0,0,.16);border:1px solid #d9ddd9;border-radius:7px}
-}
 .hierarchy-tree{max-height:300px;overflow:auto;border:1px solid #e1e5e2;border-radius:6px;background:#fff;padding:5px}
 .tree-node{font-size:12px}
 .tree-node>summary{list-style:none}
@@ -103,9 +100,8 @@ header nav{flex-direction:column;gap:3px}
 .mode{padding:3px 7px;font-size:10px}
 .mobile-navigation{position:absolute;right:12px;top:12px;z-index:1100;box-shadow:0 3px 12px #0002}
 .status{display:block}
-.details{position:absolute;inset:auto 0 26px;width:auto;min-height:calc(88px + env(safe-area-inset-bottom));max-height:30cqh;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border:1px solid #d9ddd9;border-radius:12px 12px 0 0;z-index:1200;visibility:hidden;transform:translateY(110%);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 -3px 18px #0002}
+.details{visibility:hidden;transform:translateY(110%);overflow:hidden;display:flex;flex-direction:column}
 .details.mobile-sheet-open{visibility:visible;transform:none}
-.details.mobile-sheet-expanded{max-height:70%;height:70%}
 .details-head{align-items:center;flex-shrink:0;gap:6px}
 .details-head>div{flex:1;min-width:0}
 .details-head h2{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

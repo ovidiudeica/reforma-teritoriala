@@ -46,3 +46,14 @@ test('mobile overlay excludes the map and restores it on close or desktop transi
  h.panels.close();assert.equal(h.el('map').inert,false);
  h.panels.open('filters');h.breakpoint(false);assert.equal(h.el('map').inert,false);
 });
+
+test('More is one overlay with observable state and backdrop/Escape recovery',()=>{
+ const h=fixture(true),changes=[];h.panels.onChange(s=>changes.push(s));
+ h.panels.open('info');h.el('navigation-more').listeners.click();
+ assert.equal(h.panels.state.active,null);assert.equal(h.panels.state.menu,true);assert.equal(h.panels.state.overlay,true);
+ assert.equal(h.el('map').inert,true);assert.equal(h.el('drawer-backdrop').hidden,false);
+ const count=changes.length;h.escape();assert.ok(changes.length>count);
+ assert.equal(h.panels.state.overlay,false);assert.equal(h.el('map').inert,false);assert.equal(h.document.activeElement.id,'navigation-more');
+ h.el('navigation-more').listeners.click();h.el('drawer-backdrop').listeners.click();
+ assert.equal(h.panels.state.menu,false);assert.equal(h.el('map').inert,false);
+});

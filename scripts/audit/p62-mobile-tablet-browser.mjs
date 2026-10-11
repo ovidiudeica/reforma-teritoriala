@@ -16,13 +16,17 @@ try{
   // Fresh mobile navigation must load the real initial map viewport, not inherit desktop resize.
   await page.navigate(browser.server.url+'/');
   await waitFor(()=>page.evaluate('qaApp.entityById.size===5848'),'public ACTUAL catalog');
-  await t.test('phone uses visible three-action dock, unobscured map and touch targets',async()=>{
-   const state=await page.evaluate("(()=>{const dock=document.querySelector('#atlas-navigation-rail'),map=document.querySelector('#map'),controls=['mobile-navigation','mobile-search','filters-toggle'];return {visible:!dock.hidden,buttons:controls.map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect();return {id,hidden:e.hidden,height:r.height,width:r.width}}),map:map.getBoundingClientRect().width,overflow:document.documentElement.scrollWidth>innerWidth,selected:qaApp.selectedEntityId,ids:[...qaApp.visibleEntityIds].sort()}})()");
+  await t.test('phone navigation, map and Leaflet annotations have accessible disjoint bounds',async()=>{
+   const state=await page.evaluate("(()=>{const dock=document.querySelector('#atlas-navigation-rail'),map=document.querySelector('#map'),controls=['mobile-navigation','mobile-search','filters-toggle','navigation-more'];return {visible:!dock.hidden,buttons:controls.map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect();return {id,hidden:e.hidden,height:r.height,width:r.width}}),map:map.getBoundingClientRect().width,overflow:document.documentElement.scrollWidth>innerWidth,selected:qaApp.selectedEntityId,ids:[...qaApp.visibleEntityIds].sort()}})()");
    assert.equal(state.visible,true);assert.ok(state.buttons.every(b=>!b.hidden&&b.height>=44&&b.width>=44));assert.equal(state.map,390);assert.equal(state.overflow,false);assert.equal(state.selected,null);assert.deepEqual(state.ids,['osm-r58974','osm-r90689'].sort());
    const viewport=await page.evaluate('qaApp.captureUrlState().viewport');
    assert.ok(Math.abs(viewport.lon-26.6)<2&&Math.abs(viewport.lat-46.8)<2,'fresh mobile map centers RO+MD '+JSON.stringify(viewport));
-   const credits=await page.evaluate("(()=>{const dock=document.querySelector('#atlas-navigation-rail').getBoundingClientRect(),attrib=document.querySelector('.leaflet-control-attribution').getBoundingClientRect(),scale=document.querySelector('.leaflet-control-scale').getBoundingClientRect();return {dockTop:dock.top,attribBottom:attrib.bottom,scaleBottom:scale.bottom}})()");
-   assert.ok(credits.attribBottom<credits.dockTop&&credits.scaleBottom<credits.dockTop,'OSM attribution/scale are not covered by navigation');
+   const credits=await page.call(function(){
+    const map=document.querySelector('#map').getBoundingClientRect(),dock=document.querySelector('#atlas-navigation-rail').getBoundingClientRect();
+    const overlap=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+    return ['.leaflet-control-attribution','.leaflet-control-scale'].map(selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {selector,insideMap:r.left>=map.left&&r.right<=map.right&&r.top>=map.top&&r.bottom<=map.bottom,coveredByDock:overlap(r,dock)};});
+   });
+   assert.ok(credits.every(c=>c.insideMap&&!c.coveredByDock),'OSM annotations must be within the map and disjoint from navigation: '+JSON.stringify(credits));
    await page.screenshot(path.join(output,'p62-phone-dock.png'));
   });
   await t.test('mobile search shortcut opens drawer and focuses search; Escape returns dock',async()=>{

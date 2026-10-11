@@ -1,7 +1,7 @@
 // P7.2: selection sheet only. Contextual navigation belongs to atlas-panels.
 export function createAtlasMobileUi({document,media,panels,onClear}){
  const byId=id=>document.getElementById(id),trigger=byId('mobile-navigation');
- const details=byId('details-panel'),body=byId('details-body'),expand=byId('sheet-expand'),half=byId('sheet-half'),handle=byId('sheet-drag');
+ const details=byId('details-panel'),body=byId('details-body'),content=byId('details-content'),expand=byId('sheet-expand'),half=byId('sheet-half'),handle=byId('sheet-drag');
  const steps=['peek','half','expanded'],labels=['Minimizat','Jumătate','Extins'];
  let mobile=Boolean(media.matches),selected=null,sheet='closed',drag=null;
  function sync(){
@@ -11,12 +11,16 @@ export function createAtlasMobileUi({document,media,panels,onClear}){
   details.classList.toggle('mobile-sheet-half',mobile&&sheet==='half');
   details.classList.toggle('mobile-sheet-expanded',mobile&&sheet==='expanded');
   const unavailable=!selected||(mobile&&sheet==='closed');
-  details.hidden=unavailable;details.inert=unavailable||panels.state.drawer;
+  details.hidden=unavailable;details.inert=unavailable||panels.state.overlay;
   details.setAttribute('aria-hidden',String(details.inert));
   body.hidden=mobile&&(sheet==='closed'||sheet==='peek');
   expand.setAttribute('aria-expanded',String(mobile&&sheet!=='peek'&&sheet!=='closed'));expand.setAttribute('aria-controls',body.id);
   expand.textContent=sheet==='expanded'?'Restrânge':'Extinde';half.setAttribute('aria-pressed',String(mobile&&sheet==='half'));half.textContent=sheet==='half'?'Minimizează':'Jumătate';
-  const index=Math.max(0,steps.indexOf(sheet));handle.setAttribute('aria-valuenow',String(index));handle.setAttribute('aria-valuetext',labels[index]);
+  const index=Math.max(0,steps.indexOf(sheet));handle.setAttribute('aria-valuenow',String(index));handle.setAttribute('aria-valuetext',labels[index]);ensureFocusVisible();
+ }
+ function ensureFocusVisible(){
+  const active=document.activeElement;
+  if(mobile&&!details.hidden&&!details.inert&&content?.contains?.(active))active.scrollIntoView?.({block:'nearest',inline:'nearest'});
  }
  function closeDrawer(focus=true){if(mobile)panels.close({focus});}
  function openDrawer(source=trigger){if(mobile)panels.open('entities',{source});}
@@ -55,5 +59,5 @@ export function createAtlasMobileUi({document,media,panels,onClear}){
  expand.addEventListener('click',toggleSheet);half.addEventListener('click',toggleHalf);
  handle.addEventListener('pointerdown',onPointerDown);handle.addEventListener('pointerup',onPointerUp);handle.addEventListener('pointercancel',()=>{drag=null;});handle.addEventListener('keydown',handleKey);
  panels.onChange(sync);media.addEventListener?.('change',breakpoint);sync();
- return {openDrawer,closeDrawer,toggleSheet,toggleHalf,setSheet,selection,clear,get state(){return {mobile,drawer:panels.state.drawer,sheet,selected};}};
+ return {openDrawer,closeDrawer,ensureFocusVisible,toggleSheet,toggleHalf,setSheet,selection,clear,get state(){return {mobile,drawer:panels.state.drawer,sheet,selected};}};
 }
