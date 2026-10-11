@@ -7,7 +7,8 @@ export const panelDefinitions=Object.freeze({
  recent:{title:'Entități recente',content:'atlas-advanced-dialog',trigger:'advanced-recent'},
  compare:{title:'Compară entități',content:'atlas-advanced-dialog',trigger:'advanced-compare'},
  share:{title:'Partajare',content:'share-panel',trigger:'share-toggle'},
- info:{title:'Informații despre hartă',content:'atlas-info-dialog',trigger:'info-toggle'}
+ info:{title:'Informații despre hartă',content:'atlas-info-dialog',trigger:'info-toggle'},
+ modules:{title:'Module atlas',content:'modules-panel',trigger:'modules-toggle'}
 });
 export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
  const el=id=>document.getElementById(id),frame=el('atlas-controls'),main=el('atlas-main'),closeButton=el('drawer-close'),backdrop=el('drawer-backdrop'),title=el('atlas-panel-title'),search=el('search-panel'),more=el('navigation-more'),map=el('map');

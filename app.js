@@ -17,6 +17,9 @@ import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,creat
 
 const atlasLayout=createAtlasLayout({document,browser:globalThis.window});
 const map=L.map('map',{zoomControl:true,trackResize:false,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
+// Install each native Leaflet corner once; responsive CSS moves the same command group.
+map.zoomControl?.setPosition?.('bottomright');
+map.attributionControl?.setPosition?.('topright');
 let osmBasemapVisible=true;
 const statisticalPane=map.createPane?.('statistical-boundaries');
 if(statisticalPane?.style)statisticalPane.style.zIndex='450';
@@ -27,7 +30,7 @@ function setOsmBasemapVisible(value){
  const button=document.getElementById('basemap-toggle');
  if(button){button.setAttribute('aria-pressed',String(visible));button.setAttribute('aria-label',visible?'Fundal OpenStreetMap activ. Dezactivează fundalul':'Fundal OpenStreetMap dezactivat. Activează fundalul');button.setAttribute('title',visible?'Dezactivează fundalul OpenStreetMap':'Activează fundalul OpenStreetMap');}
 }
-L.control.scale({imperial:false,maxWidth:100}).addTo(map);
+L.control.scale({position:'topleft',imperial:false,maxWidth:100}).addTo(map);
 labelMapControls(document);
 attachRoMdZoomControl(document,L);
 
@@ -100,6 +103,7 @@ atlasPanels.onChange(({active})=>{
  resizeMapPreservingView();
 });
 const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThis.window,media:atlasLayout.media,panels:atlasPanels,onResize:resizeMapPreservingView});
+document.querySelector?.('[data-mode=actual]')?.addEventListener('click',()=>atlasPanels.close());
 const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,panels:atlasPanels,onClear:clearSelection});
 wireAtlasSkipLinks({document,mobile:atlasMobile});
 function resizeMapPreservingView(){

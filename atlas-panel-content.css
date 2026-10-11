@@ -55,3 +55,15 @@
  #filters-panel input[type=checkbox]::before,.atlas-share-target input::before{border-color:ButtonText;background:Canvas}
  #filters-panel input[type=checkbox]:checked::before,.atlas-share-target input:checked::before{background:Highlight;border-color:Highlight;box-shadow:inset 0 0 0 3px Canvas}
 }
+
+/* P7.5 modules use the same contextual panel and focus owner. */
+.atlas-modules-trigger{display:flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;flex-shrink:0;padding:8px;border:1px solid #61736b;border-radius:6px;background:transparent;color:#e9eee9;font:inherit;font-size:12px;cursor:pointer}
+header .atlas-modules-trigger span{margin:0;color:inherit;font-size:12px}
+.atlas-modules-trigger[aria-pressed=true]{background:#e9eee9;color:#18241f}
+.atlas-modules-trigger:focus-visible{outline:3px solid #fff;outline-offset:-3px}
+.atlas-module-entry{padding:10px 0;border-bottom:1px solid #dce4dd}
+.atlas-module-entry .mode{width:100%;justify-content:flex-start;font-weight:700}
+.atlas-module-entry .mode.active{background:#e4ede7;border-color:#365b4a;color:#173d2a}
+.atlas-module-entry .mode:disabled{background:#f4f6f4;color:#59665e;cursor:default}
+#compare-selected{min-height:44px;margin:12px 0}
+@media(forced-colors:active){.atlas-modules-trigger[aria-pressed=true],.atlas-module-entry .mode.active{border:2px solid Highlight}.atlas-modules-trigger:focus-visible{outline-color:Highlight}}
