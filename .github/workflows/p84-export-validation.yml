@@ -1,0 +1,33 @@
+name: P8.4 export print report validation
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  p84-export-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Complete Linux regression suite
+        run: node scripts/audit/p82-full-validation.mjs
+      - name: Dedicated export and nine viewport browser QA
+        run: node scripts/audit/p84-browser.mjs
+      - name: Validate immutable geometry, topology and GIS toolchain
+        run: |
+          node scripts/audit/p83-source-audit.mjs
+          node scripts/process/build-p83-gis-vendor.mjs --check
+          git diff --exit-code
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@604373da6381bf24206979c74d06a550515601b9c # v4
+        with:
+          name: p84-browser-evidence
+          path: outputs/P8.4/
