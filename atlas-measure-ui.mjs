@@ -30,5 +30,5 @@ export function createAtlasMeasure({document,panels,draw}){
  map.addEventListener('pointercancel',e=>{pointers.delete(e.pointerId);moved=true;down=null;},{capture:true});
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&armed&&!event.defaultPrevented){event.preventDefault();disarm();panels.open('measure');}},true);
  el('measure-method').textContent=geometricMethod+' Distanța este între punctele alese, nu rutieră. Datele rămân numai în memoria acestei pagini.';
- render();return {get armed(){return armed;},fromMap(latlng){if(!armed||moved)return;try{add([latlng.lng,latlng.lat]);}catch(e){error.textContent=e.message;}},clear,disarm,get state(){return {mode,armed,finished,points:points.map(p=>[...p])};}};
+ render();return {get armed(){return armed;},fromMap(latlng){if(!armed||moved)return;try{const longitude=Math.abs(latlng.lng)<=180?latlng.lng:((latlng.lng+180)%360+360)%360-180;add([longitude,latlng.lat]);}catch(e){error.textContent=e.message;el('measure-map-status').textContent=e.message;}},clear,disarm,get state(){return {mode,armed,finished,points:points.map(p=>[...p])};}};
 }
