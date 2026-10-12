@@ -6,7 +6,7 @@ export const identifyName=entity=>formatEntityName(entity.display_name)||'Entita
 export function createAtlasIdentify({document,browser,panels,identify,cancel,onDetails,onCenter,mark,canMark=()=>true,getTreeScroll=()=>0,setTreeScroll=()=>{},getSelection=()=>null}){
  const el=id=>document.getElementById(id),panel=el('identify-panel');
  // Progressive enhancement: core atlas contracts also run in minimal non-browser DOMs.
- if(!panel||typeof document.addEventListener!=='function')return null;
+ if(!panel||document.nodeType!==9||typeof document.addEventListener!=='function')return null;
  const form=el('identify-form'),lat=el('identify-lat'),lon=el('identify-lon'),status=el('identify-status'),error=el('identify-error'),list=el('identify-results'),coordinates=el('identify-coordinates'),accuracy=el('identify-accuracy'),copy=el('identify-copy'),center=el('identify-center'),actionStatus=el('identify-action-status');
  let armed=false,point=null,result=null,marker=null,revision=0,internalClose=false,treeBookmark=null;
  panels.onBeforeChange?.(({from,to})=>{if(from==='entities'&&to==='identify')treeBookmark={top:getTreeScroll(),selected:getSelection()};});

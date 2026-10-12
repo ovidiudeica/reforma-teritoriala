@@ -102,7 +102,7 @@ try{
    await page.evaluate("qaApp.atlasMobile.setSheet('peek')");
   });
   await t.test('phone More exposes extra routes and returns focus to a visible control',async()=>{
-   await page.viewport(1440,900);await page.evaluate("document.querySelector('#info-toggle').focus()");await page.viewport(390,844);await waitFor(async()=>(await snapshot()).focus==='navigation-more','responsive focus restoration');await page.click('#navigation-more');let s=await snapshot();clear(s);assert.equal(s.state.menu,true);assert.equal(s.buttons.length,9);
+   await page.viewport(1440,900);await page.evaluate("document.querySelector('#info-toggle').focus()");await page.viewport(390,844);await waitFor(async()=>(await snapshot()).focus==='navigation-more','responsive focus restoration');await page.click('#navigation-more');let s=await snapshot();clear(s);assert.equal(s.state.menu,true);assert.equal(s.buttons.length,10);assert.deepEqual(s.buttons.map(b=>b.id).sort(),['mobile-navigation','mobile-search','filters-toggle','advanced-visible','advanced-recent','advanced-compare','share-toggle','identify-toggle','info-toggle','navigation-more'].sort());
    await page.openPanel('info');s=await snapshot();assert.equal(s.state.active,'info');assert.equal(s.state.menu,false);assert.equal(s.focus,'drawer-close');assert.ok(s.bounds.left>=0&&s.bounds.right<=390&&s.bounds.bottom<780);
    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-phone-info.png'));
    await page.key('Escape');s=await snapshot();assert.equal(s.state.active,null);assert.equal(s.focus,'navigation-more');clear(s);
