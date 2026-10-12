@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="atlas-panel-content.css">
 <link rel="stylesheet" href="atlas-map-controls.css">
 <link rel="stylesheet" href="atlas-identify.css">
+<link rel="stylesheet" href="atlas-neighbors.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -29,6 +30,7 @@
 </header>
 <main id="atlas-main" aria-label="Atlas teritorial">
 <p id="identify-map-status" class="sr-only" role="status" aria-live="polite"></p>
+<button id="neighbors-map-clear" class="leaflet-control" type="button" aria-label="Șterge evidențierea vecinilor" title="Șterge evidențierea vecinilor" hidden>×</button>
 <nav id="atlas-navigation-rail" class="atlas-navigation-rail" aria-label="Navigare atlas">
 <button id="mobile-navigation" type="button" class="atlas-rail-button" data-panel="entities" aria-label="Entități" title="Entități" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5v5H4zM4 15h5v5H4zM15 9h5v5h-5zM9 6h3v11H9m3-5h3"/></g></svg><span class="rail-label">Entități</span></button>
 <button id="mobile-search" type="button" class="atlas-rail-button" data-panel="search" aria-label="Căutare" title="Căutare" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></g></svg><span class="rail-label">Căutare</span></button>
@@ -53,6 +55,13 @@
     <div id="search-results" class="search-results" role="listbox" aria-label="Rezultate căutare" hidden></div>
     <p id="search-status" class="hint" role="status" aria-live="polite"></p>
   </section>
+  </section>
+  <section id="neighbors-panel" hidden>
+    <h3 id="neighbors-title">Vecini</h3>
+    <p class="hint">Vecinătate verificată geometric. Contactele punctuale și suprapunerile sunt raportate separat.</p>
+    <p id="neighbors-status" role="status" aria-live="polite"></p>
+    <p id="neighbors-error" role="alert"></p>
+    <div id="neighbors-results" aria-label="Relații topologice" aria-busy="false"></div>
   </section>
   <section id="identify-panel" hidden>
     <p class="hint">Verificare geometrică ACTUAL, independentă de bife și filtre. Rezultatele nu reprezintă atribuirea unei identități legale.</p>

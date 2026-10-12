@@ -1,6 +1,8 @@
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
 import {createPointIdentifier} from './atlas-point-identification.mjs';
 import {createAtlasIdentify} from './atlas-identify-ui.mjs';
+import {createNeighbors} from './atlas-neighbors.mjs';
+import {createAtlasNeighbors} from './atlas-neighbors-ui.mjs';
 import {createAtlasLayout} from './atlas-layout.mjs';
 import {createAtlasPreview} from './atlas-preview.mjs';
 import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,entityProvenanceHtml,labelMapControls,wireAtlasSkipLinks} from './atlas-presentation.mjs';
@@ -36,6 +38,8 @@ function setOsmBasemapVisible(value){
 L.control.scale({position:'topleft',imperial:false,maxWidth:100}).addTo(map);
 labelMapControls(document);
 attachRoMdZoomControl(document,L);
+const neighborsClearButton=document.getElementById('neighbors-map-clear');
+if(neighborsClearButton&&document.nodeType===9){L.DomEvent.disableClickPropagation(neighborsClearButton);L.DomEvent.disableScrollPropagation?.(neighborsClearButton);}
 atlasLayout.observeMapAnnotations();
 
 
@@ -50,6 +54,8 @@ const geometryPathAllowlist=new Set();
 const geometryResources=createGeometryResources({fetch:(...args)=>fetch(...args),allowPath:path=>geometryPathAllowlist.has(path)});
 let pointIdentifier=null;
 let atlasIdentify=null;
+let neighborsEngine=null;
+let atlasNeighbors=null;
 let geometrySyncRevision=0;
 // Selection and viewport sync share in-flight requests; failed loads remain retryable.
 function geometryRequest(key,load){
@@ -122,6 +128,11 @@ atlasIdentify=createAtlasIdentify({document,browser:globalThis.window,panels:atl
  canMark:point=>{const limit=map.options?.crs?.projection?.MAX_LATITUDE;return limit===undefined||Math.abs(point[1])<=limit;},
  mark:point=>L.circleMarker([point[1],point[0]],{radius:7,className:'identify-point-marker',color:'#9b1c1c',fillColor:'#fff',fillOpacity:1,weight:3,interactive:false,pane:'markerPane'}).addTo(map)});
 map.on('click',event=>{if(atlasIdentify?.armed)atlasIdentify.fromMap(event.latlng);});
+atlasNeighbors=createAtlasNeighbors({document,panels:atlasPanels,
+ analyze:id=>{if(!neighborsEngine)throw Error('Indexul topologic ACTUAL nu este disponibil.');return neighborsEngine.analyze(id);},cancel:()=>neighborsEngine?.cancel(),
+ feature:id=>neighborsEngine.feature(id),frontier:row=>neighborsEngine.frontier(row),
+ highlight:(features,borders)=>L.geoJSON({type:'FeatureCollection',features},{interactive:false,style:{className:'neighbors-highlight',color:borders?'#941c1c':'#2457a7',weight:borders?5:3,fillColor:'#4479c2',fillOpacity:borders?0:.18}}).addTo(map),
+ onDetails:id=>selectEntity(id,{source:'neighbors',zoom:false}),getTreeScroll:()=>document.getElementById('hierarchy-tree').scrollTop,setTreeScroll:top=>{document.getElementById('hierarchy-tree').scrollTop=top;},getSelection:()=>selectedEntityId});
 
 function resizeMapPreservingView(){
  if(!map.invalidateSize)return;
@@ -578,6 +589,7 @@ function renderDetails(entity){
  const zoomButton=body.querySelector('#zoom-selected');
  if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
  const compare=document.createElement('button');compare.type='button';compare.id='compare-selected';compare.className='action-button';compare.textContent='Adaugă la comparație';compare.addEventListener('click',()=>atlasAdvanced?.addCompare(entity.id));body.appendChild(compare);
+ if(atlasNeighbors){const neighbors=document.createElement('button');neighbors.type='button';neighbors.id='neighbors-toggle';neighbors.className='action-button';neighbors.textContent='Arată vecinii';neighbors.addEventListener('click',()=>atlasNeighbors.open(entity.id,neighbors));body.appendChild(neighbors);}
 }
 
 function zoomToEntity(entity,options={}){
@@ -690,6 +702,7 @@ const frontendReady=(async()=>{
   phase='hierarchy';await loadHierarchyTree();
   phase='geometry';await loadChunkIndex();
   if(chunkIndex)pointIdentifier=createPointIdentifier({entities:[...entityById.values()],chunks:chunkIndex.chunks,contract:releaseData.manifest.public_contract,read:geometryResources.read});
+  if(chunkIndex)neighborsEngine=createNeighbors({entities:[...entityById.values()],snapshotId:releaseData.manifest.snapshot_id,catalogSha256:releaseData.manifest.public_contract.sha256,sourceHashes:Object.fromEntries([...Object.values(releaseData.manifest.public_contract.geometry_tiers||{}).flatMap(tiers=>Object.values(tiers)),...Object.values(releaseData.manifest.public_contract.statistical_geometry||{}),...chunkIndex.chunks].map(d=>[d.path,d.sha256])),readGeometry:geometryResources.read});
   await initializeUrlState();
   updateFilterCount();
   await Promise.all(['RO','MD'].map(ensureStatisticalGeometry));
@@ -703,4 +716,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {atlasIdentify,pointIdentifier,geometryResources,atlasShare,atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
+export {atlasNeighbors,neighborsEngine,atlasIdentify,pointIdentifier,geometryResources,atlasShare,atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
