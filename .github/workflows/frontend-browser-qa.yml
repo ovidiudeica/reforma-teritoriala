@@ -96,6 +96,8 @@ jobs:
         run: node --test scripts/audit/p76-final-acceptance-browser.mjs
       - name: P8.0.1 independent geometry reset and History
         run: node --test scripts/audit/p801-reset-geometries-browser.mjs
+      - name: P8.0.2 synchronized panel and Leaflet geometry reset
+        run: node --test scripts/audit/p802-map-geometry-reset-browser.mjs
       - name: P8.1 robust geometry, exhaustive corpus and independent identification
         run: |
           node --test scripts/test/frontend-point-geometry.test.mjs scripts/test/frontend-point-identification.test.mjs scripts/test/frontend-point-corpus.test.mjs
@@ -129,6 +131,7 @@ jobs:
             /tmp/atlas-browser-evidence/p75-*
             /tmp/atlas-browser-evidence/p76-*
             /tmp/atlas-browser-evidence/p801-*
+            /tmp/atlas-browser-evidence/p802-*
             /tmp/atlas-browser-evidence/p81-*
             /tmp/atlas-browser-evidence/p82-*
           retention-days: 14
