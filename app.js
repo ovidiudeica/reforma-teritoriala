@@ -1,8 +1,12 @@
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
+export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
 import {createAtlasIdentify} from './atlas-identify-ui.mjs';
 import {createNeighbors} from './atlas-neighbors.mjs';
 import {createAtlasNeighbors} from './atlas-neighbors-ui.mjs';
+import {createGeometricClient} from './atlas-geometric-client.mjs';
+import {createGeometricUi} from './atlas-geometric-ui.mjs';
+import {createAtlasMeasure} from './atlas-measure-ui.mjs';
 import {createAtlasLayout} from './atlas-layout.mjs';
 import {createAtlasPreview} from './atlas-preview.mjs';
 import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,entityProvenanceHtml,labelMapControls,wireAtlasSkipLinks} from './atlas-presentation.mjs';
@@ -51,11 +55,15 @@ const chunkData=new Map();
 const chunkGroups=new Map();
 const geometryRequests=new Map();
 const geometryPathAllowlist=new Set();
-const geometryResources=createGeometryResources({fetch:(...args)=>fetch(...args),allowPath:path=>geometryPathAllowlist.has(path)});
+const geometricSourceDescriptors=new Map();
+const geometryResources=createGeometryResources({fetch:(...args)=>fetch(...args),allowPath:path=>geometryPathAllowlist.has(path),getDescriptor:path=>document.nodeType===9?geometricSourceDescriptors.get(path):null});
 let pointIdentifier=null;
 let atlasIdentify=null;
 let neighborsEngine=null;
 let atlasNeighbors=null;
+let atlasMeasure=null;
+let geometricUi=null;
+const geometricClient=createGeometricClient({feature:id=>{if(!neighborsEngine)throw Error('Index geometric indisponibil');return neighborsEngine.feature(id);},pairRelation:(a,b)=>neighborsEngine.pairRelation(a,b)});
 let geometrySyncRevision=0;
 // Selection and viewport sync share in-flight requests; failed loads remain retryable.
 function geometryRequest(key,load){
@@ -127,12 +135,24 @@ atlasIdentify=createAtlasIdentify({document,browser:globalThis.window,panels:atl
  onCenter:point=>atlasUrl?atlasUrl.action('push',()=>map.panTo([point[1],point[0]],{animate:false})):map.panTo([point[1],point[0]],{animate:false}),
  canMark:point=>{const limit=map.options?.crs?.projection?.MAX_LATITUDE;return limit===undefined||Math.abs(point[1])<=limit;},
  mark:point=>L.circleMarker([point[1],point[0]],{radius:7,className:'identify-point-marker',color:'#9b1c1c',fillColor:'#fff',fillOpacity:1,weight:3,interactive:false,pane:'markerPane'}).addTo(map)});
-map.on('click',event=>{if(atlasIdentify?.armed)atlasIdentify.fromMap(event.latlng);});
+map.on('click',event=>{if(atlasMeasure?.armed)atlasMeasure.fromMap(event.latlng);else if(atlasIdentify?.armed)atlasIdentify.fromMap(event.latlng);});
 atlasNeighbors=createAtlasNeighbors({document,panels:atlasPanels,
  analyze:id=>{if(!neighborsEngine)throw Error('Indexul topologic ACTUAL nu este disponibil.');return neighborsEngine.analyze(id);},cancel:()=>neighborsEngine?.cancel(),
  feature:id=>neighborsEngine.feature(id),frontier:row=>neighborsEngine.frontier(row),
  highlight:(features,borders)=>L.geoJSON({type:'FeatureCollection',features},{interactive:false,style:{className:'neighbors-highlight',color:borders?'#941c1c':'#2457a7',weight:borders?5:3,fillColor:'#4479c2',fillOpacity:borders?0:.18}}).addTo(map),
  onDetails:id=>selectEntity(id,{source:'neighbors',zoom:false}),getTreeScroll:()=>document.getElementById('hierarchy-tree').scrollTop,setTreeScroll:top=>{document.getElementById('hierarchy-tree').scrollTop=top;},getSelection:()=>selectedEntityId});
+if(document.nodeType===9){
+ geometricUi=createGeometricUi({document,panels:atlasPanels,client:geometricClient,highlight:(report,mode)=>{
+  const group=L.layerGroup().addTo(map),add=(geometry,color,className,dashArray,weight=3,fillOpacity=.14)=>{if(geometry)L.geoJSON(geometry,{interactive:false,style:{color,fillColor:color,fillOpacity,className,dashArray,weight}}).addTo(group);};
+  if(mode==='both'){add(report.features[0].geometry,'#174d89','comparison-A',null,1,0);add(report.features[1].geometry,'#ab5214','comparison-B','9 5',1,0);}
+  if(mode==='both'||mode==='intersection')add(report.geometries.intersection,'#69409b','comparison-common',null,5);
+  if(mode==='both'||mode==='differences'){add(report.geometries.exclusiveA,'#174d89','comparison-exclusive-A','2 5');add(report.geometries.exclusiveB,'#ab5214','comparison-exclusive-B','14 6');}
+  return group;
+ }});
+ atlasMeasure=createAtlasMeasure({document,panels:atlasPanels,draw:(points,mode,finished)=>{const group=L.layerGroup().addTo(map),latlngs=points.map(p=>[p[1],p[0]]);if(latlngs.length>1){if(mode==='area'&&finished)L.polygon(latlngs,{interactive:false,color:'#713c9b',fillOpacity:.15,dashArray:'8 4'}).addTo(group);else L.polyline(latlngs,{interactive:false,color:'#713c9b',dashArray:'8 4'}).addTo(group);}for(const p of latlngs)L.circleMarker(p,{interactive:false,radius:4,color:'#713c9b',fillColor:'#fff',fillOpacity:1}).addTo(group);return group;}});
+ const command=document.getElementById('measure-map-command');if(command){L.DomEvent.disableClickPropagation(command);L.DomEvent.disableScrollPropagation?.(command);}
+ const comparisonLegend=document.getElementById('comparison-map-legend');if(comparisonLegend){L.DomEvent.disableClickPropagation(comparisonLegend);L.DomEvent.disableScrollPropagation?.(comparisonLegend);}
+}
 
 function resizeMapPreservingView(){
  if(!map.invalidateSize)return;
@@ -183,7 +203,7 @@ const actualReleasePromise=(async()=>{
   if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Manifestul ACTUAL nu corespunde gate-ului');
   if(!['actual-public-entity-v1','actual-public-entity-v2','actual-public-entity-v3'].includes(manifest.public_contract?.contract))throw new Error('Contractul public ACTUAL lipsește din manifest');
   releaseData={manifest,gate,buildInfo};
-  for(const descriptor of [...Object.values(manifest.public_contract.geometry_tiers||{}).flatMap(tiers=>Object.values(tiers)),...Object.values(manifest.public_contract.statistical_geometry||{})])if(typeof descriptor?.path==='string')geometryPathAllowlist.add(descriptor.path);
+  for(const descriptor of [...Object.values(manifest.public_contract.geometry_tiers||{}).flatMap(tiers=>Object.values(tiers)),...Object.values(manifest.public_contract.statistical_geometry||{})])if(typeof descriptor?.path==='string'){geometryPathAllowlist.add(descriptor.path);geometricSourceDescriptors.set(descriptor.path,{sha256:descriptor.sha256});}
   const provenance=renderGlobalProvenance({container:document.getElementById('global-provenance'),document,...releaseData});
   if(status){status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.textContent='ACTUAL curent: '+manifest.snapshot_id+' · gate '+gate.status+' · publicat: '+(provenance.publication?.tag||'neconfirmat pentru acest snapshot');}
   return releaseData;
@@ -220,7 +240,7 @@ async function loadChunkIndex(){
  const data=await response.json();
  if(data.contract!=='actual-public-geometry-chunks-v1'||data.chunk_count!==(data.chunks||[]).length)throw new Error('Index chunk-uri ACTUAL invalid');
  chunkIndex=data;
- for(const entry of data.chunks||[])if(typeof entry.path==='string')geometryPathAllowlist.add(entry.path);
+ for(const entry of data.chunks||[])if(typeof entry.path==='string'){geometryPathAllowlist.add(entry.path);geometricSourceDescriptors.set(entry.path,{sha256:entry.sha256});}
  return data;
 }
 
@@ -333,6 +353,7 @@ async function loadHierarchyTree(){
  atlasAdvanced=createAtlasAdvancedNavigation({
   document,panels:atlasPanels,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,
   storage:globalThis.window?.localStorage,
+  onGeometricCompare:(target,ids)=>geometricUi?.compare(target,ids),
   onCheck:(id,checked)=>{
    if(!entityById.has(id))return;
    if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);
@@ -445,7 +466,7 @@ function renderCollection(group,data,options={}){
    const entity=entityById.get(id);
    if(!entity)return;
    layer.bindTooltip(formatEntityName(entity.display_name),{sticky:true,className:'entity-tooltip'});
-   layer.on('click',event=>{if(atlasIdentify?.armed){atlasIdentify.fromMap(event.latlng);L.DomEvent.stopPropagation(event);return;}selectEntity(id,{source:'map'},layer).catch(console.error);});
+   layer.on('click',event=>{if(atlasMeasure?.armed){atlasMeasure.fromMap(event.latlng);L.DomEvent.stopPropagation(event);return;}if(atlasIdentify?.armed){atlasIdentify.fromMap(event.latlng);L.DomEvent.stopPropagation(event);return;}selectEntity(id,{source:'map'},layer).catch(console.error);});
    if(id===selectedEntityId){layer.setStyle(selectedStyle);selectedLayer=layer;}
   }
  }).addTo(group);
@@ -592,6 +613,7 @@ function renderDetails(entity){
  if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
  const compare=document.createElement('button');compare.type='button';compare.id='compare-selected';compare.className='action-button';compare.textContent='Adaugă la comparație';compare.addEventListener('click',()=>atlasAdvanced?.addCompare(entity.id));body.appendChild(compare);
  if(atlasNeighbors){const neighbors=document.createElement('button');neighbors.type='button';neighbors.id='neighbors-toggle';neighbors.className='action-button';neighbors.textContent='Arată vecinii';neighbors.addEventListener('click',()=>atlasNeighbors.open(entity.id,neighbors));body.appendChild(neighbors);}
+ geometricUi?.card(body,entity.id);
 }
 
 function zoomToEntity(entity,options={}){

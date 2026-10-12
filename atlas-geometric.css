@@ -1,0 +1,18 @@
+.geometric-comparison,.geometric-data{overflow-wrap:anywhere}
+.geometric-comparison .action-button,#measure-panel .action-button{min-height:44px;margin:4px 4px 4px 0;white-space:normal}
+#measure-panel input,#measure-panel select{box-sizing:border-box;min-height:44px;width:100%;max-width:100%}
+#measure-panel label{display:block;margin-block:8px}
+#measure-coordinates{white-space:pre-wrap;overflow-wrap:anywhere}
+#map.measure-picking{cursor:crosshair}
+#measure-map-command{position:absolute;z-index:1000;bottom:24px;left:12px;max-width:calc(100% - 90px);padding:6px;background:#fff;border:2px solid #173d2a;border-radius:6px;display:flex;flex-wrap:wrap;gap:6px}
+#measure-map-command[hidden]{display:none}
+#measure-map-command button{min-height:44px;margin:0}
+#comparison-map-legend{position:absolute;z-index:900;left:12px;bottom:24px;max-width:min(360px,calc(100% - 90px));padding:8px;background:#fff;border:2px solid #173d2a;border-radius:6px;display:grid;gap:4px;font-size:12px}
+#comparison-map-legend[hidden]{display:none}
+#comparison-map-legend button{min-height:44px;white-space:normal}
+#measure-map-command,#comparison-map-legend{left:calc(var(--rail-width,56px) + 12px);top:calc(var(--annotation-space,30px) + 10px);bottom:auto;max-height:calc(100% - var(--navigation-bottom,70px) - var(--annotation-space,30px) - 24px);overflow:auto}
+#atlas-main:has(#measure-map-command:not([hidden])) #details-panel,#atlas-main:has(#comparison-map-legend:not([hidden])) #details-panel{visibility:hidden;pointer-events:none}
+.comparison-A{stroke-dasharray:none}.comparison-B{stroke-dasharray:9 5}.comparison-common{stroke-width:5}.comparison-exclusive-A{stroke-dasharray:2 5}.comparison-exclusive-B{stroke-dasharray:14 6}
+@container atlas (max-width:899px){#measure-toggle{display:none;order:1}#atlas-main.atlas-navigation-more #measure-toggle{display:flex}#measure-map-command,#comparison-map-legend{left:calc(var(--command-space) + 10px);max-width:calc(100% - var(--command-space) - 24px)}}
+@media(forced-colors:active){#measure-map-command{background:Canvas;color:CanvasText;border-color:CanvasText}.comparison-A,.comparison-B,.comparison-common,.comparison-exclusive-A,.comparison-exclusive-B{stroke:CanvasText;fill:Highlight}}
+@media(forced-colors:active){#comparison-map-legend{background:Canvas;color:CanvasText;border-color:CanvasText}}
