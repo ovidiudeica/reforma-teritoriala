@@ -16,10 +16,13 @@
 #basemap-toggle[aria-pressed=false] .atlas-osm-off-mark{display:block}
 #atlas-main .leaflet-control-attribution{margin:0;max-width:100%;font-size:9px;line-height:1.4;background:#fffffff0;overflow-wrap:anywhere}
 #atlas-main .leaflet-control-scale{margin:0}
+#atlas-main #neighbors-map-clear{position:absolute;left:0;right:auto;top:auto;bottom:calc(100% + 8px);margin:0}
+#atlas-main:has(#neighbors-map-clear:not([hidden])){--command-space:120px}
 @container atlas (max-width:899px){
  #atlas-main .leaflet-bottom.leaflet-right{right:auto;bottom:auto;left:10px;top:10px}
  #atlas-main .leaflet-top.leaflet-left{left:var(--command-space)}
  #atlas-main .leaflet-top.leaflet-right{max-width:calc(100% - var(--command-space) - 110px)}
+ #atlas-main #neighbors-map-clear{top:calc(100% + 8px);bottom:auto}
 }
 @media(forced-colors:active){
  #atlas-main .leaflet-control-zoom>button{color:ButtonText;background:ButtonFace;border-bottom:1px solid ButtonText}

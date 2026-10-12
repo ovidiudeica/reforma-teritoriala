@@ -1,6 +1,5 @@
 #neighbors-panel{overflow-wrap:anywhere;min-width:0}
 #atlas-controls>#neighbors-panel{flex:1;min-height:0;overflow:auto;scroll-padding:8px}
-#atlas-main:has(#neighbors-map-clear:not([hidden])){--command-space:120px}
 #neighbors-panel ul{padding:0;list-style:none}
 #neighbors-panel li{padding:10px 0;border-bottom:1px solid var(--atlas-border,#ddd)}
 #neighbors-panel button,#neighbors-panel summary,#neighbors-map-clear{min-width:44px;min-height:44px;white-space:normal;max-width:100%}
@@ -8,7 +7,6 @@
 #neighbors-panel summary{display:flex;align-items:center;cursor:pointer}
 #neighbors-panel :focus-visible,#neighbors-map-clear:focus-visible{outline:3px solid var(--atlas-focus,#365b4a);outline-offset:-3px}
 #neighbors-map-clear[hidden]{display:none!important}
-#atlas-main #neighbors-map-clear{position:absolute;right:54px;bottom:0;left:auto;top:auto;width:44px;height:44px;padding:0;margin:0;background:#fff;color:#941c1c;font-size:26px;border:2px solid #941c1c;border-radius:6px;pointer-events:auto}
-@container atlas (max-width:899px){#atlas-main #neighbors-map-clear{left:54px;top:0;bottom:auto;right:auto}}
+#atlas-main #neighbors-map-clear{width:44px;height:44px;padding:0;background:#fff;color:#941c1c;font-size:26px;border:2px solid #941c1c;border-radius:6px;pointer-events:auto}
 .neighbors-highlight{pointer-events:none}
 @media(forced-colors:active){#neighbors-map-clear{border-color:ButtonText;background:ButtonFace;color:ButtonText}}
