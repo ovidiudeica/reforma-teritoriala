@@ -14,3 +14,5 @@
 #map.identify-picking,#map.identify-picking .leaflet-interactive{cursor:crosshair}
 @container atlas (max-width:599px){.atlas-rail-button[data-panel=identify]{display:none;order:1}#atlas-main.atlas-navigation-more .atlas-rail-button[data-panel=identify]{display:flex}}
 @media(forced-colors:active){#identify-error{color:CanvasText}#identify-results li{border-color:CanvasText}}
+
+@media(forced-colors:active){.identify-point-marker{stroke:Highlight;fill:Canvas}}

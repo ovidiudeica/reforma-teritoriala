@@ -21,6 +21,7 @@ export function createPointIdentifier({entities,chunks,contract,read,yieldTask=(
   const jobs=[...resources];let cursor=0;
   async function worker(){while(cursor<jobs.length&&token===revision){const [path,items]=jobs[cursor++];try{
    const data=await read(path);if(token!==revision)return;
+   if(data?.type!=='FeatureCollection'||!Array.isArray(data.features))throw Error('Colecție GeoJSON invalidă');
    const first=items[0],m=data.metadata;
    if(m?.jurisdiction!==first.entity.jurisdiction||(first.kind==='chunk'&&(m.tier!==first.entity.map.tier||m.root_entity_id!==first.descriptor.root_entity_id||Number(m.feature_count)!==Number(first.descriptor.feature_count)))||(first.kind==='overview'&&m.tier!=='overview')||(first.kind==='statistical'&&m.contract!=='actual-public-statistical-geometry-v1'))throw Error('Metadate geometrice inconsistente');
    let index=featureIndexes.get(data);if(!index){index=new Map();for(const f of data.features){const id=f?.properties?.entity_id;if(!byId.has(id)||index.has(id))throw Error('Identitate geometrică invalidă');index.set(id,f);}featureIndexes.set(data,index);}

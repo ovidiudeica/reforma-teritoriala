@@ -7,7 +7,7 @@ export function orientation(a,b,p){
  const x=(b[0]-a[0])*(p[1]-a[1]),y=(b[1]-a[1])*(p[0]-a[0]),det=x-y;
  const magnitude=Math.abs(x)+Math.abs(y);
  if(magnitude>=2**-1022&&Math.abs(det)>8*Number.EPSILON*magnitude)return Math.sign(det);
- const d=[...a,...b,...p].map(dyadic),e=Math.min(...d.map(x=>x.e)),v=d.map(x=>x.m<<BigInt(x.e-e));
+ const d=[a[0],a[1],b[0],b[1],p[0],p[1]].map(dyadic),e=Math.min(...d.map(x=>x.e)),v=d.map(x=>x.m<<BigInt(x.e-e));
  const exact=(v[2]-v[0])*(v[5]-v[1])-(v[3]-v[1])*(v[4]-v[0]);return exact>0n?1:exact<0n?-1:0;
 }
 const prepared=new WeakMap();

@@ -46,7 +46,8 @@ const tierData=new Map();
 const chunkData=new Map();
 const chunkGroups=new Map();
 const geometryRequests=new Map();
-const geometryResources=createGeometryResources({fetch:(...args)=>fetch(...args)});
+const geometryPathAllowlist=new Set();
+const geometryResources=createGeometryResources({fetch:(...args)=>fetch(...args),allowPath:path=>geometryPathAllowlist.has(path)});
 let pointIdentifier=null;
 let atlasIdentify=null;
 let geometrySyncRevision=0;
@@ -118,7 +119,8 @@ atlasIdentify=createAtlasIdentify({document,browser:globalThis.window,panels:atl
  getTreeScroll:()=>document.getElementById('hierarchy-tree').scrollTop,setTreeScroll:top=>{document.getElementById('hierarchy-tree').scrollTop=top;},getSelection:()=>selectedEntityId,
  cancel:()=>pointIdentifier?.cancel(),onDetails:id=>selectEntity(id,{source:'identify',zoom:false}),
  onCenter:point=>atlasUrl?atlasUrl.action('push',()=>map.panTo([point[1],point[0]],{animate:false})):map.panTo([point[1],point[0]],{animate:false}),
- mark:point=>L.circleMarker([point[1],point[0]],{radius:7,color:'#9b1c1c',fillColor:'#fff',fillOpacity:1,weight:3,interactive:false,pane:'markerPane'}).addTo(map)});
+ canMark:point=>{const limit=map.options?.crs?.projection?.MAX_LATITUDE;return limit===undefined||Math.abs(point[1])<=limit;},
+ mark:point=>L.circleMarker([point[1],point[0]],{radius:7,className:'identify-point-marker',color:'#9b1c1c',fillColor:'#fff',fillOpacity:1,weight:3,interactive:false,pane:'markerPane'}).addTo(map)});
 map.on('click',event=>{if(atlasIdentify?.armed)atlasIdentify.fromMap(event.latlng);});
 
 function resizeMapPreservingView(){
@@ -170,6 +172,7 @@ const actualReleasePromise=(async()=>{
   if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Manifestul ACTUAL nu corespunde gate-ului');
   if(!['actual-public-entity-v1','actual-public-entity-v2','actual-public-entity-v3'].includes(manifest.public_contract?.contract))throw new Error('Contractul public ACTUAL lipsește din manifest');
   releaseData={manifest,gate,buildInfo};
+  for(const descriptor of [...Object.values(manifest.public_contract.geometry_tiers||{}).flatMap(tiers=>Object.values(tiers)),...Object.values(manifest.public_contract.statistical_geometry||{})])if(typeof descriptor?.path==='string')geometryPathAllowlist.add(descriptor.path);
   const provenance=renderGlobalProvenance({container:document.getElementById('global-provenance'),document,...releaseData});
   if(status){status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.textContent='ACTUAL curent: '+manifest.snapshot_id+' · gate '+gate.status+' · publicat: '+(provenance.publication?.tag||'neconfirmat pentru acest snapshot');}
   return releaseData;
@@ -206,6 +209,7 @@ async function loadChunkIndex(){
  const data=await response.json();
  if(data.contract!=='actual-public-geometry-chunks-v1'||data.chunk_count!==(data.chunks||[]).length)throw new Error('Index chunk-uri ACTUAL invalid');
  chunkIndex=data;
+ for(const entry of data.chunks||[])if(typeof entry.path==='string')geometryPathAllowlist.add(entry.path);
  return data;
 }
 
@@ -379,6 +383,8 @@ async function ensureStatisticalGeometry(jurisdiction){
  if(statisticalGeometryLoaded.has(jurisdiction))return;
  return geometryRequest('statistical:'+jurisdiction,async()=>{
  const descriptor=releaseData?.manifest?.public_contract?.statistical_geometry?.[jurisdiction];
+ // Clearing an already rendered jurisdiction is an explicit revalidation, not a cache hit.
+ if([...statisticalFeatureById.keys()].some(id=>entityById.get(id)?.jurisdiction===jurisdiction))geometryResources.invalidate(descriptor?.path);
  if(!descriptor?.path)throw new Error('Lipsește geometria statistică publică pentru '+jurisdiction);
  const data=await geometryResources.read(descriptor.path);
  if(data.metadata?.contract!=='actual-public-statistical-geometry-v1'||data.metadata?.jurisdiction!==jurisdiction)throw new Error('Geometrie statistică publică invalidă '+jurisdiction);

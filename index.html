@@ -65,7 +65,7 @@
     </form>
     <button id="identify-location" type="button" class="action-button" aria-describedby="identify-location-help">Folosește locația mea</button>
     <p id="identify-location-help" class="hint">O singură poziție, numai după permisiunea ta. Calcul local; fără urmărire sau transmiterea coordonatelor către servicii externe.</p>
-    <p id="identify-coordinates"></p><p id="identify-accuracy" class="hint"></p>
+    <p id="identify-projection" class="hint" hidden>Punctul este în afara latitudinilor reprezentabile pe harta Web Mercator. Identificarea și copierea rămân disponibile; markerul și centrarea sunt indisponibile.</p><p id="identify-coordinates"></p><p id="identify-accuracy" class="hint"></p>
     <div class="identify-actions"><button id="identify-copy" type="button" class="action-button" disabled>Copiază coordonatele</button><button id="identify-center" type="button" class="action-button" disabled>Centrează pe punct</button></div>
     <input id="identify-copy-value" readonly hidden aria-label="Coordonate pentru copiere manuală">
     <p id="identify-action-status" role="status"></p><p id="identify-status" role="status" aria-live="polite"></p><p id="identify-error" role="alert"></p>
