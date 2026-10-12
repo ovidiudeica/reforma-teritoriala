@@ -8,13 +8,14 @@ export const panelDefinitions=Object.freeze({
  compare:{title:'Compară entități',content:'atlas-advanced-dialog',trigger:'advanced-compare'},
  share:{title:'Partajare',content:'share-panel',trigger:'share-toggle'},
  info:{title:'Informații despre hartă',content:'atlas-info-dialog',trigger:'info-toggle'},
- modules:{title:'Module atlas',content:'modules-panel',trigger:'modules-toggle'}
+ modules:{title:'Module atlas',content:'modules-panel',trigger:'modules-toggle'},
+ identify:{title:'Identifică teritoriul',content:'identify-panel',trigger:'identify-toggle'}
 });
 export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
  const el=id=>document.getElementById(id),frame=el('atlas-controls'),main=el('atlas-main'),closeButton=el('drawer-close'),backdrop=el('drawer-backdrop'),title=el('atlas-panel-title'),search=el('search-panel'),more=el('navigation-more'),map=el('map');
  let lastFocused=document.activeElement;
  document.addEventListener?.('focusin',event=>{if(event.target!==document.body)lastFocused=event.target;});
- const listeners=new Set(),buttons=Object.fromEntries(Object.entries(panelDefinitions).map(([key,value])=>[key,el(value.trigger)]));
+ const listeners=new Set(),beforeListeners=new Set(),buttons=Object.fromEntries(Object.entries(panelDefinitions).map(([key,value])=>[key,el(value.trigger)]));
  const contents=new Set(Object.values(panelDefinitions).map(value=>el(value.content)).filter(Boolean));
  let mobile=Boolean(media.matches),active=mobile?null:'entities',previous='entities',origin=buttons.entities,menu=false;
  const visible=element=>Boolean(element&&!element.hidden&&(!element.getClientRects||element.getClientRects().length));
@@ -31,17 +32,20 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
   for(const content of contents){content.hidden=content!==shown;content.inert=content!==shown;}
   title.textContent=opened?panelDefinitions[active].title:'Navigare';search.hidden=!['entities','search'].includes(active);
   closeButton.hidden=!opened;backdrop.hidden=!overlay;
-  for(const [key,button]of Object.entries(buttons)){button.hidden=false;button.setAttribute('aria-pressed',String(key===active));button.setAttribute('aria-expanded',String(key===active));button.setAttribute('aria-controls','atlas-controls');}
+  for(const [key,button]of Object.entries(buttons)){if(!button)continue;button.hidden=false;button.setAttribute('aria-pressed',String(key===active));button.setAttribute('aria-expanded',String(key===active));button.setAttribute('aria-controls','atlas-controls');}
   more?.setAttribute('aria-expanded',String(menu));
  }
  function emit(){for(const listener of listeners)listener({active,mobile});}
  function open(key='entities',{source=buttons[key],focus=true}={}){
   if(!Object.hasOwn(panelDefinitions,key))return;
+  for(const listener of beforeListeners)listener({from:active,to:key});
   active=key;previous=key;origin=source||buttons[key];menu=false;sync();emit();
   if(focus)(key==='search'?el('entity-search'):closeButton)?.focus?.();
  }
  function close({focus=true}={}){
-  if(active===null&&!menu)return;active=null;menu=false;sync();emit();if(focus)focusReturn();
+  if(active===null&&!menu)return;
+  for(const listener of beforeListeners)listener({from:active,to:null});
+  active=null;menu=false;sync();emit();if(focus)focusReturn();
  }
  function breakpoint(event){
   const focused=document.activeElement===document.body&&lastFocused&&!visible(lastFocused)?lastFocused:document.activeElement,inside=frame.contains?.(focused);
@@ -51,7 +55,7 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
   else if(!visible(focused)){origin=focused;focusReturn();}
   else if(!mobile&&focused===more)buttons.entities?.focus?.();
  }
- for(const [key,button]of Object.entries(buttons))button.addEventListener('click',()=>active===key?close():open(key));
+ for(const [key,button]of Object.entries(buttons))button?.addEventListener('click',()=>active===key?close():open(key));
  closeButton.addEventListener('click',()=>close());backdrop.addEventListener('click',()=>close());
  more?.addEventListener('click',()=>{const next=!menu;if(next&&active!==null)close({focus:false});menu=next;origin=more;sync();emit();if(menu)buttons.visible?.focus?.();});
  document.addEventListener?.('keydown',event=>{
@@ -61,5 +65,5 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
   event.preventDefault();close();
  },true);
  media.addEventListener?.('change',breakpoint);sync();
- return {open,close,toggle(){active===null?open(previous):close();},onChange(fn){listeners.add(fn);return()=>listeners.delete(fn);},get state(){return {active,mobile,drawer:mobile&&active!==null,overlay:mobile&&(active!==null||menu),menu};}};
+ return {open,close,onBeforeChange(fn){beforeListeners.add(fn);return()=>beforeListeners.delete(fn);},toggle(){active===null?open(previous):close();},onChange(fn){listeners.add(fn);return()=>listeners.delete(fn);},get state(){return {active,mobile,drawer:mobile&&active!==null,overlay:mobile&&(active!==null||menu),menu};}};
 }

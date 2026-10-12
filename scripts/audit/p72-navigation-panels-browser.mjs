@@ -26,8 +26,8 @@ const clear=s=>{assert.equal(s.overflow,false);assert.equal(s.fullTitle,true,'se
 try{
  await test('P7.2 shared contextual navigation lifecycle',{timeout:300000},async t=>{
   await page.viewport(1440,900);await page.navigate(browser.server.url+'/');
-  await t.test('eight desktop icons and one resizable principal pane',async()=>{
-   const s=await snapshot();clear(s);assert.equal(s.buttons.length,8);assert.equal(s.state.active,'entities');assert.equal(s.panes.filter(p=>!p.hidden).length,1);
+  await t.test('nine desktop icons and one resizable principal pane',async()=>{
+   const s=await snapshot();clear(s);assert.equal(s.buttons.length,9);assert.equal(s.state.active,'entities');assert.equal(s.panes.filter(p=>!p.hidden).length,1);
    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-desktop.png'));
   });
   await t.test('all eight routes preserve semantic state, one map and geometry cache',async()=>{
