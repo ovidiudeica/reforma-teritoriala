@@ -227,6 +227,7 @@ function resetGlobalFilters(){
  refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
 }
 function refreshGeometryVisibility(){
+ syncGeometryReset();
  atlasFilters?.sync();
  updateFilterCount();
  rerenderLoadedTiers();
@@ -234,6 +235,23 @@ function refreshGeometryVisibility(){
  updateSelectionVisibility();
  atlasAdvanced?.refresh();
 }
+function syncGeometryReset(){
+ const button=document.getElementById('geometries-reset');
+ if(!button)return;
+ // ARIA disabling preserves native keyboard focus after reset (disabled blurs).
+ const disabled=!hierarchyTree||(visibleEntityIds.size===hierarchyTree.root_ids.length&&hierarchyTree.root_ids.every(id=>visibleEntityIds.has(id)));
+ button.setAttribute('aria-disabled',String(disabled));
+ if(!disabled)document.getElementById('geometries-reset-status').textContent='';
+}
+document.getElementById('geometries-reset').addEventListener('click',()=>{
+ if(!hierarchyTree||document.getElementById('geometries-reset').getAttribute('aria-disabled')==='true')return;
+ visibleEntityIds.clear();
+ for(const id of hierarchyTree.root_ids)visibleEntityIds.add(id);
+ refreshGeometryVisibility();
+ syncTiers().catch(console.error);
+ atlasUrl?.commit('push');
+ document.getElementById('geometries-reset-status').textContent='Geometriile au fost resetate la România și Moldova. Selecția și filtrele sunt păstrate.';
+});
 function updateSelectionVisibility(){
  const entity=entityById.get(selectedEntityId);
  const status=document.getElementById('selection-visibility');
@@ -279,6 +297,7 @@ async function loadHierarchyTree(){
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
   renderHierarchyTree();
+  syncGeometryReset();
  atlasSearch?.updateIndex(createSearchIndex([...entityById.values()],hierarchyNodeById));
  atlasAdvanced=createAtlasAdvancedNavigation({
   document,panels:atlasPanels,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,

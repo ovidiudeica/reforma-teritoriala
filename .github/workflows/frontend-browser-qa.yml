@@ -94,6 +94,8 @@ jobs:
         run: node --test scripts/audit/p75-modules-map-controls-browser.mjs
       - name: P7.6 genuine mobile cold/warm and final accessibility supplements
         run: node --test scripts/audit/p76-final-acceptance-browser.mjs
+      - name: P8.0.1 independent geometry reset and History
+        run: node --test scripts/audit/p801-reset-geometries-browser.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots

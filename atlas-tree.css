@@ -1,6 +1,9 @@
 /* One owner for virtual rows, their scroll viewport and interactive geometry. */
 #atlas-controls>#entities-panel{display:flex;flex-direction:column;overflow:visible}
 #entities-panel .panel-hint{flex:none}
+#geometries-reset{flex:none;min-width:44px;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+#geometries-reset[aria-disabled=true]{opacity:.65;cursor:default}
+#geometries-reset:focus-visible{outline:2px solid var(--atlas-focus,#365b4a);outline-offset:-3px}
 .hierarchy-tree{position:relative;flex:1;min-height:max(46px,3em);max-height:none;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;overflow-anchor:none;scrollbar-gutter:stable;border:1px solid var(--atlas-border,#e1e5e2);border-radius:6px;background:var(--atlas-surface,#fff);padding:0}
 .tree-window{position:relative;width:100%;min-width:0}
 .tree-node{position:absolute;top:0;left:0;box-sizing:border-box;width:100%;min-height:44px;display:grid;grid-template-columns:44px 44px minmax(0,1fr);align-items:stretch;font-size:12px;line-height:1.45}
