@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="atlas-tree.css">
 <link rel="stylesheet" href="atlas-panel-content.css">
 <link rel="stylesheet" href="atlas-map-controls.css">
+<link rel="stylesheet" href="atlas-identify.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -27,6 +28,7 @@
   <button id="modules-toggle" type="button" class="atlas-modules-trigger" data-panel="modules" aria-label="Module atlas — ACTUAL activ" title="Module atlas" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7m-3.5-3.5v7"/></g></svg><span>ACTUAL</span></button>
 </header>
 <main id="atlas-main" aria-label="Atlas teritorial">
+<p id="identify-map-status" class="sr-only" role="status" aria-live="polite"></p>
 <nav id="atlas-navigation-rail" class="atlas-navigation-rail" aria-label="Navigare atlas">
 <button id="mobile-navigation" type="button" class="atlas-rail-button" data-panel="entities" aria-label="Entități" title="Entități" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5v5H4zM4 15h5v5H4zM15 9h5v5h-5zM9 6h3v11H9m3-5h3"/></g></svg><span class="rail-label">Entități</span></button>
 <button id="mobile-search" type="button" class="atlas-rail-button" data-panel="search" aria-label="Căutare" title="Căutare" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></g></svg><span class="rail-label">Căutare</span></button>
@@ -35,6 +37,7 @@
 <button id="advanced-recent" type="button" class="atlas-rail-button" data-panel="recent" aria-label="Recente" title="Recente" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a9 9 0 1 1-1 7M4 3v5h5M12 6v6l4 2"/></g></svg><span class="rail-label">Recente</span></button>
 <button id="advanced-compare" type="button" class="atlas-rail-button" data-panel="compare" aria-label="Compară" title="Compară" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="8" height="16" rx="1"/><rect x="14" y="4" width="8" height="16" rx="1"/></g></svg><span class="rail-label">Compară</span></button>
 <button id="share-toggle" type="button" class="atlas-rail-button" data-panel="share" aria-label="Partajare" title="Partajare" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><path d="m8 10 8-4m-8 8 8 4"/></g></svg><span class="rail-label">Partajare</span></button>
+<button id="identify-toggle" type="button" class="atlas-rail-button" data-panel="identify" aria-label="Identifică teritoriul" title="Identifică teritoriul" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v5m0 12v5M1 12h5m12 0h5"/></g></svg><span class="rail-label">Identifică</span></button>
 <button id="info-toggle" type="button" class="atlas-rail-button" data-panel="info" aria-label="Informații" title="Informații" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 10v7m0-10v1"/></g></svg><span class="rail-label">Informații</span></button>
 <button id="navigation-more" class="atlas-rail-button" type="button" aria-label="Mai multe instrumente" title="Mai multe instrumente" aria-expanded="false" aria-controls="atlas-navigation-rail"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><g fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></g></svg><span class="rail-label">Mai multe</span></button>
 </nav>
@@ -50,6 +53,23 @@
     <div id="search-results" class="search-results" role="listbox" aria-label="Rezultate căutare" hidden></div>
     <p id="search-status" class="hint" role="status" aria-live="polite"></p>
   </section>
+  </section>
+  <section id="identify-panel" hidden>
+    <p class="hint">Verificare geometrică ACTUAL, independentă de bife și filtre. Rezultatele nu reprezintă atribuirea unei identități legale.</p>
+    <button id="identify-pick" type="button" class="action-button">Alege un punct pe hartă</button>
+    <p class="hint">Instrumentul de click este explicit. Escape îl dezactivează; clickul obișnuit selectează în continuare poligoanele.</p>
+    <form id="identify-form" novalidate>
+      <div class="identify-fields"><label for="identify-lat">Latitudine<input id="identify-lat" type="text" inputmode="decimal" autocomplete="off" aria-describedby="identify-crs" placeholder="47.024"></label><label for="identify-lon">Longitudine<input id="identify-lon" type="text" inputmode="decimal" autocomplete="off" aria-describedby="identify-crs" placeholder="28.835"></label></div>
+      <p id="identify-crs" class="hint">WGS84 / EPSG:4326. Latitudine −90…90; longitudine −180…180. Se acceptă punct sau virgulă zecimală.</p>
+      <button type="submit" class="action-button">Identifică după coordonate</button>
+    </form>
+    <button id="identify-location" type="button" class="action-button" aria-describedby="identify-location-help">Folosește locația mea</button>
+    <p id="identify-location-help" class="hint">O singură poziție, numai după permisiunea ta. Calcul local; fără urmărire sau transmiterea coordonatelor către servicii externe.</p>
+    <p id="identify-projection" class="hint" hidden>Punctul este în afara latitudinilor reprezentabile pe harta Web Mercator. Identificarea și copierea rămân disponibile; markerul și centrarea sunt indisponibile.</p><p id="identify-coordinates"></p><p id="identify-accuracy" class="hint"></p>
+    <div class="identify-actions"><button id="identify-copy" type="button" class="action-button" disabled>Copiază coordonatele</button><button id="identify-center" type="button" class="action-button" disabled>Centrează pe punct</button></div>
+    <input id="identify-copy-value" readonly hidden aria-label="Coordonate pentru copiere manuală">
+    <p id="identify-action-status" role="status"></p><p id="identify-status" role="status" aria-live="polite"></p><p id="identify-error" role="alert"></p>
+    <div id="identify-results" aria-label="Unități identificate" aria-busy="false"></div>
   </section>
   <section id="modules-panel" hidden>
     <p class="hint">Alege corpusul atlasului. Numai ACTUAL are un corpus publicat și validat.</p>

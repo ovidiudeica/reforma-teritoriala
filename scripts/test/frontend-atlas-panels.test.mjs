@@ -24,6 +24,7 @@ test('close releases the panel and returns focus to its navigation origin',()=>{
  h.panels.open('filters');assert.equal(h.document.activeElement.id,'drawer-close');assert.equal(h.panels.state.drawer,true);
  h.panels.close();assert.equal(h.panels.state.drawer,false);assert.equal(h.document.activeElement.id,'filters-toggle');assert.equal(h.el('atlas-controls').hidden,true);
 });
+test('before-change captures the old visible content and unsubscribes cleanly',()=>{const h=fixture(),events=[];const stop=h.panels.onBeforeChange(e=>events.push({...e,oldVisible:!h.el(panelDefinitions[e.from].content).hidden}));h.panels.open('identify');assert.deepEqual(events[0],{from:'entities',to:'identify',oldVisible:true});h.panels.close();assert.deepEqual(events[1],{from:'identify',to:null,oldVisible:true});stop();h.panels.open('entities');assert.equal(events.length,2);});
 test('Escape gives search results their first dismissal before closing navigation',()=>{
  const h=fixture(true);h.panels.open('search');assert.equal(h.document.activeElement.id,'entity-search');
  h.search(true);assert.equal(h.escape().defaultPrevented,false);assert.equal(h.panels.state.active,'search');

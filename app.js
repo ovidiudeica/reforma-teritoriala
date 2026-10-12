@@ -1,3 +1,6 @@
+import {createGeometryResources} from './atlas-geometry-resources.mjs';
+import {createPointIdentifier} from './atlas-point-identification.mjs';
+import {createAtlasIdentify} from './atlas-identify-ui.mjs';
 import {createAtlasLayout} from './atlas-layout.mjs';
 import {createAtlasPreview} from './atlas-preview.mjs';
 import {entityGeometryStyle,selectedStyle,renderLegend,renderGlobalProvenance,entityProvenanceHtml,labelMapControls,wireAtlasSkipLinks} from './atlas-presentation.mjs';
@@ -43,6 +46,10 @@ const tierData=new Map();
 const chunkData=new Map();
 const chunkGroups=new Map();
 const geometryRequests=new Map();
+const geometryPathAllowlist=new Set();
+const geometryResources=createGeometryResources({fetch:(...args)=>fetch(...args),allowPath:path=>geometryPathAllowlist.has(path)});
+let pointIdentifier=null;
+let atlasIdentify=null;
 let geometrySyncRevision=0;
 // Selection and viewport sync share in-flight requests; failed loads remain retryable.
 function geometryRequest(key,load){
@@ -107,6 +114,15 @@ const atlasExplorerShell=createAtlasExplorerShell({document,map,window:globalThi
 document.querySelector?.('[data-mode=actual]')?.addEventListener('click',()=>atlasPanels.close());
 const atlasMobile=createAtlasMobileUi({document,media:mobileMedia,panels:atlasPanels,onClear:clearSelection});
 wireAtlasSkipLinks({document,mobile:atlasMobile});
+atlasIdentify=createAtlasIdentify({document,browser:globalThis.window,panels:atlasPanels,
+ identify:(lon,lat)=>{if(!pointIdentifier)throw Error('Indexul geometric ACTUAL nu este disponibil.');return pointIdentifier.identify(lon,lat);},
+ getTreeScroll:()=>document.getElementById('hierarchy-tree').scrollTop,setTreeScroll:top=>{document.getElementById('hierarchy-tree').scrollTop=top;},getSelection:()=>selectedEntityId,
+ cancel:()=>pointIdentifier?.cancel(),onDetails:id=>selectEntity(id,{source:'identify',zoom:false}),
+ onCenter:point=>atlasUrl?atlasUrl.action('push',()=>map.panTo([point[1],point[0]],{animate:false})):map.panTo([point[1],point[0]],{animate:false}),
+ canMark:point=>{const limit=map.options?.crs?.projection?.MAX_LATITUDE;return limit===undefined||Math.abs(point[1])<=limit;},
+ mark:point=>L.circleMarker([point[1],point[0]],{radius:7,className:'identify-point-marker',color:'#9b1c1c',fillColor:'#fff',fillOpacity:1,weight:3,interactive:false,pane:'markerPane'}).addTo(map)});
+map.on('click',event=>{if(atlasIdentify?.armed)atlasIdentify.fromMap(event.latlng);});
+
 function resizeMapPreservingView(){
  if(!map.invalidateSize)return;
  const element=document.getElementById('map'),old=map.getSize?.();
@@ -156,6 +172,7 @@ const actualReleasePromise=(async()=>{
   if(!manifest.snapshot_id||gate.snapshot_id!==manifest.snapshot_id)throw new Error('Manifestul ACTUAL nu corespunde gate-ului');
   if(!['actual-public-entity-v1','actual-public-entity-v2','actual-public-entity-v3'].includes(manifest.public_contract?.contract))throw new Error('Contractul public ACTUAL lipsește din manifest');
   releaseData={manifest,gate,buildInfo};
+  for(const descriptor of [...Object.values(manifest.public_contract.geometry_tiers||{}).flatMap(tiers=>Object.values(tiers)),...Object.values(manifest.public_contract.statistical_geometry||{})])if(typeof descriptor?.path==='string')geometryPathAllowlist.add(descriptor.path);
   const provenance=renderGlobalProvenance({container:document.getElementById('global-provenance'),document,...releaseData});
   if(status){status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.textContent='ACTUAL curent: '+manifest.snapshot_id+' · gate '+gate.status+' · publicat: '+(provenance.publication?.tag||'neconfirmat pentru acest snapshot');}
   return releaseData;
@@ -192,6 +209,7 @@ async function loadChunkIndex(){
  const data=await response.json();
  if(data.contract!=='actual-public-geometry-chunks-v1'||data.chunk_count!==(data.chunks||[]).length)throw new Error('Index chunk-uri ACTUAL invalid');
  chunkIndex=data;
+ for(const entry of data.chunks||[])if(typeof entry.path==='string')geometryPathAllowlist.add(entry.path);
  return data;
 }
 
@@ -365,10 +383,10 @@ async function ensureStatisticalGeometry(jurisdiction){
  if(statisticalGeometryLoaded.has(jurisdiction))return;
  return geometryRequest('statistical:'+jurisdiction,async()=>{
  const descriptor=releaseData?.manifest?.public_contract?.statistical_geometry?.[jurisdiction];
+ // Clearing an already rendered jurisdiction is an explicit revalidation, not a cache hit.
+ if([...statisticalFeatureById.keys()].some(id=>entityById.get(id)?.jurisdiction===jurisdiction))geometryResources.invalidate(descriptor?.path);
  if(!descriptor?.path)throw new Error('Lipsește geometria statistică publică pentru '+jurisdiction);
- const response=await fetch(descriptor.path,{cache:'no-cache'});
- if(!response.ok)throw new Error('Nu se poate încărca '+descriptor.path);
- const data=await response.json();
+ const data=await geometryResources.read(descriptor.path);
  if(data.metadata?.contract!=='actual-public-statistical-geometry-v1'||data.metadata?.jurisdiction!==jurisdiction)throw new Error('Geometrie statistică publică invalidă '+jurisdiction);
  for(const feature of data.features||[]){
   const id=feature.properties?.entity_id;
@@ -390,9 +408,7 @@ async function ensureTier(jurisdiction,tier){
  return geometryRequest('tier:'+key,async()=>{
  const path=tierPath(jurisdiction,tier);
  if(!path)throw new Error('Lipsește path-ul pentru '+key);
- const response=await fetch(path,{cache:'no-cache'});
- if(!response.ok)throw new Error('Nu se poate încărca '+path);
- const data=await response.json();
+ const data=await geometryResources.read(path);
  if(data.metadata?.jurisdiction!==jurisdiction||data.metadata?.tier!==tier)throw new Error('Tier public inconsistent: '+key);
  tierData.set(key,data);
  renderTier(jurisdiction,tier);
@@ -416,7 +432,7 @@ function renderCollection(group,data,options={}){
    const entity=entityById.get(id);
    if(!entity)return;
    layer.bindTooltip(formatEntityName(entity.display_name),{sticky:true,className:'entity-tooltip'});
-   layer.on('click',()=>selectEntity(id,{source:'map'},layer).catch(console.error));
+   layer.on('click',event=>{if(atlasIdentify?.armed){atlasIdentify.fromMap(event.latlng);L.DomEvent.stopPropagation(event);return;}selectEntity(id,{source:'map'},layer).catch(console.error);});
    if(id===selectedEntityId){layer.setStyle(selectedStyle);selectedLayer=layer;}
   }
  }).addTo(group);
@@ -467,9 +483,7 @@ async function ensureChunk(entry){
  const key=chunkKey(entry);
  if(chunkData.has(key))return chunkData.get(key);
  return geometryRequest('chunk:'+key,async()=>{
- const response=await fetch(entry.path,{cache:'no-cache'});
- if(!response.ok)throw new Error('Nu se poate încărca '+entry.path);
- const data=await response.json();
+ const data=await geometryResources.read(entry.path);
  if(data.metadata?.jurisdiction!==entry.jurisdiction||data.metadata?.tier!==entry.tier||data.metadata?.root_entity_id!==entry.root_entity_id)throw new Error('Chunk public inconsistent: '+key);
  if(Number(data.metadata?.feature_count)!==Number(entry.feature_count))throw new Error('Chunk public cu cardinalitate inconsistentă: '+key);
  const group=L.layerGroup();
@@ -675,6 +689,7 @@ const frontendReady=(async()=>{
   await loadIndex();
   phase='hierarchy';await loadHierarchyTree();
   phase='geometry';await loadChunkIndex();
+  if(chunkIndex)pointIdentifier=createPointIdentifier({entities:[...entityById.values()],chunks:chunkIndex.chunks,contract:releaseData.manifest.public_contract,read:geometryResources.read});
   await initializeUrlState();
   updateFilterCount();
   await Promise.all(['RO','MD'].map(ensureStatisticalGeometry));
@@ -688,4 +703,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {atlasShare,atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
+export {atlasIdentify,pointIdentifier,geometryResources,atlasShare,atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};

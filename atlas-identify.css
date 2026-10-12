@@ -1,0 +1,18 @@
+#identify-panel{overflow-wrap:anywhere}
+#identify-panel .hint{white-space:normal;overflow:visible;text-overflow:clip;display:block}
+.identify-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.identify-fields label{display:flex;flex-direction:column;gap:4px;min-width:0}
+#identify-panel input{box-sizing:border-box;min-width:0;width:100%;min-height:44px;padding:8px;font:inherit}
+.identify-actions{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+#identify-panel button{min-width:44px;min-height:44px;white-space:normal;overflow-wrap:anywhere}
+#identify-panel :is(button,input):focus-visible{outline:3px solid var(--atlas-focus,#365b4a);outline-offset:-3px}
+#identify-results ul{list-style:none;padding:0;margin:0}
+#identify-results li{border-bottom:1px solid #cbd5ce;padding:10px 0}
+#identify-results p{margin:4px 0;font-size:12px}
+#identify-error{color:#9b1c1c}
+#identify-error:empty,#identify-action-status:empty{display:none}
+#map.identify-picking,#map.identify-picking .leaflet-interactive{cursor:crosshair}
+@container atlas (max-width:599px){.atlas-rail-button[data-panel=identify]{display:none;order:1}#atlas-main.atlas-navigation-more .atlas-rail-button[data-panel=identify]{display:flex}}
+@media(forced-colors:active){#identify-error{color:CanvasText}#identify-results li{border-color:CanvasText}}
+
+@media(forced-colors:active){.identify-point-marker{stroke:Highlight;fill:Canvas}}
