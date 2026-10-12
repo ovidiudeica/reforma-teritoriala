@@ -25,7 +25,7 @@ const state=()=>page.evaluate(`(()=>{
   scroll:document.documentElement.scrollWidth>innerWidth,url:location.href,focused:document.activeElement.id};
 })()`);
 const ready=()=>waitFor(()=>page.evaluate('qaApp.entityById.size===5848 && !!document.querySelector(".leaflet-control-zoom #basemap-toggle")'),'P642 app');
-const order=['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home','basemap-toggle'];
+const order=['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home','basemap-toggle','map-geometries-reset'];
 const assertControl=(s,where)=>{assert.deepEqual(s.order,order,where);assert.ok(s.parent&&s.svg&&s.svgHidden==='true',where+' SVG+parent');assert.ok(s.width>=44&&s.height>=44,where+' touch area');assert.ok(s.hit&&s.controlsClear,where+' control covered');assert.equal(s.scaleOverlapsZoom,false,where+' Leaflet scale intersects zoom/home/OSM group');assert.equal(s.scroll,false,where+' overflow');};
 try{
  await test('P6.4.2 OSM icon integrated below zoom/home and raster independent',{timeout:240000},async t=>{

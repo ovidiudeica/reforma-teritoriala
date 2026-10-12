@@ -30,6 +30,7 @@
 </header>
 <main id="atlas-main" aria-label="Atlas teritorial">
 <p id="identify-map-status" class="sr-only" role="status" aria-live="polite"></p>
+<span id="geometries-reset-status" class="sr-only" role="status" aria-live="polite"></span>
 <button id="neighbors-map-clear" class="leaflet-control" type="button" aria-label="Șterge evidențierea vecinilor" title="Șterge evidențierea vecinilor" hidden>×</button>
 <nav id="atlas-navigation-rail" class="atlas-navigation-rail" aria-label="Navigare atlas">
 <button id="mobile-navigation" type="button" class="atlas-rail-button" data-panel="entities" aria-label="Entități" title="Entități" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5v5H4zM4 15h5v5H4zM15 9h5v5h-5zM9 6h3v11H9m3-5h3"/></g></svg><span class="rail-label">Entități</span></button>
@@ -90,7 +91,6 @@
   <section id="entities-panel">
     <h3 class="sr-only">Arbore</h3>
     <button id="geometries-reset" class="action-button" type="button" aria-disabled="true">Resetează geometriile</button>
-    <span id="geometries-reset-status" class="sr-only" role="status" aria-live="polite"></span>
     <p id="atlas-tree-help" class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
     <div id="hierarchy-tree" class="hierarchy-tree" aria-describedby="atlas-tree-help"><p class="muted">Se încarcă arborele teritorial…</p></div>
@@ -155,6 +155,7 @@
 <button id="map-home" class="atlas-home-control" type="button" aria-label="Încadrează integral România și Moldova" title="Încadrează România și Moldova fără resetarea straturilor"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="22" height="22"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6M9 12h6m-3-3v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <button id="basemap-toggle" class="atlas-basemap-toggle" type="button" aria-pressed="true" aria-label="Fundal OpenStreetMap activ. Dezactivează fundalul" title="Dezactivează fundalul OpenStreetMap"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="m3 5 6-2 6 3 6-2v15l-6 2-6-3-6 2Z M9 3v15m6-12v15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path class="atlas-osm-off-mark" d="M3 21 21 3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
 
+<button id="map-geometries-reset" type="button" aria-disabled="true" aria-label="Resetează geometriile" title="Resetează geometriile la România și Moldova"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <aside id="details-panel" class="details" hidden aria-labelledby="details-title">
   <div id="sheet-drag" class="atlas-sheet-drag" role="slider" tabindex="0" aria-label="Înălțimea cardului de detalii" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Minimizat" hidden><span aria-hidden="true"></span></div>
   <div class="details-head">
