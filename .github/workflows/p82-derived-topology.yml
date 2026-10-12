@@ -9,7 +9,7 @@ permissions:
 jobs:
   p82-derived-topology:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -18,4 +18,6 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: node --max-old-space-size=4096 scripts/process/build-p82-topology.mjs --check
       - run: node --test scripts/test/frontend-neighbors-geometry.test.mjs scripts/test/frontend-neighbors-engine.test.mjs scripts/test/frontend-neighbors-corpus.test.mjs
+      - name: Full regression suite on Linux including Git preflight and exact toolchain
+        run: node scripts/audit/p82-full-validation.mjs
       - run: git diff --exit-code
