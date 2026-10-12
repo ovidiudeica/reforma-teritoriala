@@ -10,7 +10,8 @@ export const panelDefinitions=Object.freeze({
  info:{title:'Informații despre hartă',content:'atlas-info-dialog',trigger:'info-toggle'},
  modules:{title:'Module atlas',content:'modules-panel',trigger:'modules-toggle'},
  identify:{title:'Identifică teritoriul',content:'identify-panel',trigger:'identify-toggle'},
- neighbors:{title:'Vecini',content:'neighbors-panel',trigger:'neighbors-toggle'}
+ neighbors:{title:'Vecini',content:'neighbors-panel',trigger:'neighbors-toggle'},
+ measure:{title:'Măsoară',content:'measure-panel',trigger:'measure-toggle'}
 });
 export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
  const el=id=>document.getElementById(id),frame=el('atlas-controls'),main=el('atlas-main'),closeButton=el('drawer-close'),backdrop=el('drawer-backdrop'),title=el('atlas-panel-title'),search=el('search-panel'),more=el('navigation-more'),map=el('map');

@@ -1,0 +1,23 @@
+name: P8.3 geometric measurement validation
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  p83-geometric-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: node scripts/process/install-actual-npm-offline.mjs
+      - run: node scripts/process/build-p83-gis-vendor.mjs --check
+      - run: node scripts/audit/p83-source-audit.mjs
+      - run: node --test scripts/test/frontend-geographic-measurement.test.mjs scripts/test/frontend-geometric-overlay.test.mjs scripts/test/frontend-geometric-client.test.mjs
+      - run: node --max-old-space-size=4096 scripts/audit/p83-corpus.mjs
+      - run: git diff --exit-code

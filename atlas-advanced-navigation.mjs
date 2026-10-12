@@ -7,7 +7,7 @@ const own=(doc,tag,cls='',label='')=>{const el=doc.createElement(tag);if(cls)el.
 const formattedNames=new Map();
  const title=e=>{if(!formattedNames.has(e.id))formattedNames.set(e.id,formatEntityName(e.display_name));return formattedNames.get(e.id);};
 export function createAtlasAdvancedNavigation({
- document,panels,entities,getChecked,onCheck,onSelect,onZoomPair,storage,
+ document,panels,entities,getChecked,onCheck,onSelect,onZoomPair,storage,onGeometricCompare,
 }){
  const content=document.getElementById('atlas-advanced-content');
  const buttons={visible:document.getElementById('advanced-visible'),recent:document.getElementById('advanced-recent'),compare:document.getElementById('advanced-compare')};
@@ -61,7 +61,7 @@ export function createAtlasAdvancedNavigation({
   const cols=append(content,'div','atlas-comparison-cards');
   for(const id of pair){const entity=byId.get(id);if(!entity)continue;
    const card=append(cols,'section','atlas-comparison-card');card.dataset.entityId=id;
-   append(card,'h3','',title(entity));append(card,'p','atlas-advanced-muted',groupLabel(entity)+' · '+typeLabel(entity.display_type||entity.representation?.inferred_type));
+   append(card,'h3','',(pair.indexOf(id)===0?'A · ':'B · ')+title(entity));append(card,'p','atlas-advanced-muted',groupLabel(entity)+' · '+typeLabel(entity.display_type||entity.representation?.inferred_type));
    const rows=append(card,'dl','atlas-comparison-kv');
    for(const [label,value] of [['ID oficial',entity.legal?.id],['Cod statistic',entity.statistical?.code],['Identificator OSM',entity.representation?.osm_relation_id],['Apartenență',entity.hierarchy?.legal_parent_name||entity.hierarchy?.statistical_parent_name],['Stare geometrie',getChecked().has(id)?'Bifată explicit':'Nebifată']]){
     if(value==null||value==='')continue;append(rows,'dt','',label);append(rows,'dd','',String(value));
@@ -70,6 +70,7 @@ export function createAtlasAdvancedNavigation({
    action(controls,'Elimină',()=>{pair=pair.filter(x=>x!==id);render();},'action-button atlas-advanced-compact');
   }
   if(pair.length===2){action(content,'Centrează pe ambele',()=>onZoomPair(pair.map(id=>byId.get(id))),'action-button').disabled=pair.some(id=>!Array.isArray(byId.get(id)?.map?.bbox));}
+  if(pair.length===2){action(content,'Inversează A/B',()=>{pair=[pair[1],pair[0]];render();});onGeometricCompare?.(content,[...pair]);}
   if(pair.length)action(content,'Golește comparația',()=>{pair=[];render();});
  }
  function render(){
