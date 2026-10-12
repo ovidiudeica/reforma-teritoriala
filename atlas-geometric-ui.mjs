@@ -3,7 +3,7 @@ export const geometricMethod='Geometrii OSM ACTUAL în EPSG:4326, fără ajustar
 const areaText=value=>value!==0&&Math.abs(value)<1?(value<0?'− ':'')+'sub 1 m²':Math.abs(value)<10000?number(value,1)+' m²':number(value/1e6)+' km²';
 const percentText=value=>value>0&&value<.01?'<0,01%':number(value)+'%';
 function node(document,target,tag,text='',className=''){const e=document.createElement(tag);e.textContent=text;if(className)e.className=className;target.appendChild(e);return e;}
-function button(document,target,label,run){const b=node(document,target,'button',label,'action-button');b.type='button';b.addEventListener('click',()=>void run());return b;}
+function button(document,target,label,run){const b=node(document,target,'button',label,'action-button');b.type='button';b.dataset.actionKey='p83|'+label;b.addEventListener('click',()=>void run());return b;}
 function method(document,target){const d=node(document,target,'details'),s=node(document,d,'summary','Metodă și sursă');node(document,d,'p',geometricMethod);return s;}
 function metrics(document,target,m){const dl=node(document,target,'dl','','kv');for(const [label,value]of [['Suprafață OSM',number(m.areaM2/1e6)+' km²'],['Suprafață în hectare',number(m.areaM2/1e4)+' ha'],['Perimetru geometric',number(m.perimeterMetres/1000)+' km'],...(m.components>1?[['Componente',String(m.components)]]:[])]){node(document,dl,'dt',label);node(document,dl,'dd',value);}method(document,target);}
 export function createGeometricUi({document,panels,client,highlight}){

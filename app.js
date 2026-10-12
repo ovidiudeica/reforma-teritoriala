@@ -143,10 +143,10 @@ atlasNeighbors=createAtlasNeighbors({document,panels:atlasPanels,
  onDetails:id=>selectEntity(id,{source:'neighbors',zoom:false}),getTreeScroll:()=>document.getElementById('hierarchy-tree').scrollTop,setTreeScroll:top=>{document.getElementById('hierarchy-tree').scrollTop=top;},getSelection:()=>selectedEntityId});
 if(document.nodeType===9){
  geometricUi=createGeometricUi({document,panels:atlasPanels,client:geometricClient,highlight:(report,mode)=>{
-  const group=L.layerGroup().addTo(map),add=(geometry,color,className,dashArray,weight=3)=>{if(geometry)L.geoJSON(geometry,{interactive:false,style:{color,fillColor:color,fillOpacity:.14,className,dashArray,weight}}).addTo(group);};
-  if(mode==='both'){add(report.features[0].geometry,'#174d89','comparison-A',null);add(report.features[1].geometry,'#ab5214','comparison-B','9 5');}
+  const group=L.layerGroup().addTo(map),add=(geometry,color,className,dashArray,weight=3,fillOpacity=.14)=>{if(geometry)L.geoJSON(geometry,{interactive:false,style:{color,fillColor:color,fillOpacity,className,dashArray,weight}}).addTo(group);};
+  if(mode==='both'){add(report.features[0].geometry,'#174d89','comparison-A',null,1,0);add(report.features[1].geometry,'#ab5214','comparison-B','9 5',1,0);}
   if(mode==='both'||mode==='intersection')add(report.geometries.intersection,'#69409b','comparison-common',null,5);
-  if(mode==='differences'){add(report.geometries.exclusiveA,'#174d89','comparison-exclusive-A','2 5');add(report.geometries.exclusiveB,'#ab5214','comparison-exclusive-B','14 6');}
+  if(mode==='both'||mode==='differences'){add(report.geometries.exclusiveA,'#174d89','comparison-exclusive-A','2 5');add(report.geometries.exclusiveB,'#ab5214','comparison-exclusive-B','14 6');}
   return group;
  }});
  atlasMeasure=createAtlasMeasure({document,panels:atlasPanels,draw:(points,mode,finished)=>{const group=L.layerGroup().addTo(map),latlngs=points.map(p=>[p[1],p[0]]);if(latlngs.length>1){if(mode==='area'&&finished)L.polygon(latlngs,{interactive:false,color:'#713c9b',fillOpacity:.15,dashArray:'8 4'}).addTo(group);else L.polyline(latlngs,{interactive:false,color:'#713c9b',dashArray:'8 4'}).addTo(group);}for(const p of latlngs)L.circleMarker(p,{interactive:false,radius:4,color:'#713c9b',fillColor:'#fff',fillOpacity:1}).addTo(group);return group;}});
