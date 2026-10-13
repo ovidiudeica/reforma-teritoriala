@@ -90,7 +90,7 @@ for(const endpoint of endpoints){
   overpass=data;used=endpoint;break;
  }catch(e){networkErrors.push({endpoint,message:String(e)});}
 }
-const sourceRel={...new Map((overpass?.elements||[]).filter(x=>x.type==='relation'&&ID.test(String(x.id))).map(x=>[String(x.id),x])).values()};
+const sourceRel=[...new Map((overpass?.elements||[]).filter(x=>x.type==='relation'&&ID.test(String(x.id))).map(x=>[String(x.id),x])).values()];
 const candidates=Object.values(sourceRel).map(x=>{
  const id=String(x.id),tags=x.tags||{},center=x.center,
  insideCenter=Number.isFinite(center?.lon)&&Number.isFinite(center?.lat)?pointInGeometry([center.lon,center.lat],rootRaw):'unknown';
