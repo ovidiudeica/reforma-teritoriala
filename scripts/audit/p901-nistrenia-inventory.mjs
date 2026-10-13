@@ -26,6 +26,7 @@ const parse=xml=>{
 };
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fetchRelation(id){
+ if(!/^[1-9][0-9]{0,15}$/.test(String(id)))throw Error('Invalid numeric OSM relation ID');
  let last;
  for(let attempt=0;attempt<4;attempt++){
   for(const host of ['https://api.openstreetmap.org','https://www.openstreetmap.org']){
@@ -91,8 +92,10 @@ const topo=JSON.parse(await readFile(new URL('public/data/actual-topology-index.
 const catalog=JSON.parse(await readFile(new URL('public/data/actual-entities.json',ROOT)));
 const byId=new Map(catalog.entities.map(e=>[e.id,e])),md=new Map(),geometryCache=new Map();
 const sourcePaths=Object.keys(topo.sources).sort();
+const safeGeometryPath=/^public\/geo\/actual\/(?:(?:ro|md)-(?:overview|local|detail|statistical)|chunks\/(?:ro|md)\/(?:local|detail)\/osm-r[0-9]+)\.geojson$/;
 if(sourcePaths.length!==123||byId.size!==5848)throw Error('ACTUAL corpus contract diferit de baza validată');
 for(const path of sourcePaths){
+ if(!safeGeometryPath.test(path))throw Error('Invalid geometry source path from catalog');
  const bytes=await readFile(new URL(path,ROOT));
  if(hash(bytes)!==topo.sources[path])throw Error('SHA-256 invalid la '+path);
  for(const feature of JSON.parse(bytes).features){
@@ -126,7 +129,7 @@ while(queue.length){
   inner_ways:r.members.filter(x=>x.type==='way'&&x.role==='inner').length,
   subareas:sub,existing_ACTUAL_MD:md.has('osm-r'+task.id)};
  inventory.push(row);
- if(task.depth<4)for(const child of sub)queue.push({id:child,parent:task.id,depth:task.depth+1});
+ if(task.depth<4)for(const child of sub){if(!/^[1-9][0-9]{0,15}$/.test(child))throw Error('Invalid OSM subarea ref');queue.push({id:child,parent:task.id,depth:task.depth+1});}
  try{
   const newGeo=readTopologyGeometry(relationGeometry(r,fetched.parsed.ways,fetched.parsed.nodes));
   const envelope=newGeo.getEnvelopeInternal();
