@@ -1,0 +1,29 @@
+name: P9.0.1 Nistrenia OSM reconciliation (read-only)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p901-nistrenia-inventory.mjs'
+      - '.github/workflows/p901-nistrenia-audit.yml'
+      - 'docs/p9.0.1-nistrenia-audit.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Read live OSM and reconcile with immutable ACTUAL MD
+        run: node scripts/audit/p901-nistrenia-inventory.mjs
+      - name: Upload inventory, reconciliation matrix and exceptions
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p901-osm-inventory-matrix
+          path: outputs/P9.0.1/
