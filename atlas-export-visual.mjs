@@ -29,9 +29,8 @@ export function mapSvg({map,L,title='Reforma Teritorială',snapshotId,selection=
 }
 export function printSvg(document,svg,orientation){
  if(!['portrait','landscape'].includes(orientation))throw Error('Orientare invalidă');
- const frame=document.createElement('iframe');frame.title='Hartă pregătită pentru imprimare';frame.hidden=true;document.body.appendChild(frame);
+ const previous=document.activeElement;const frame=document.createElement('iframe');frame.title='Hartă pregătită pentru imprimare';frame.hidden=true;document.body.appendChild(frame);
  const doc=frame.contentDocument,win=frame.contentWindow;if(!doc||typeof win?.print!=='function'){frame.remove();throw Error('Imprimarea nu este disponibilă; descarcă SVG');}
  doc.open();doc.write(`<!doctype html><html lang="ro"><head><meta charset="utf-8"><title>Imprimă harta</title><style>@page{size:A4 ${orientation};margin:10mm}html,body{margin:0}body{display:flex;align-items:center;justify-content:center}svg{max-width:100%;max-height:${orientation==='landscape'?185:272}mm;width:auto;height:auto;print-color-adjust:exact;-webkit-print-color-adjust:exact}</style></head><body>${svg}</body></html>`);doc.close();
- const remove=()=>frame.remove();win.addEventListener('afterprint',remove,{once:true});try{win.focus();win.print();}catch(e){remove();throw e;}setTimeout(remove,120000);
+ const remove=()=>{const restore=document.activeElement===frame||document.activeElement===document.body;frame.remove();if(restore&&previous?.isConnected)previous.focus?.({preventScroll:true});};win.addEventListener('afterprint',remove,{once:true});try{win.focus();win.print();}catch(e){remove();throw e;}setTimeout(remove,120000);
 }
-
