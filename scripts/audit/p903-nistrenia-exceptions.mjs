@@ -130,12 +130,14 @@ if(process.argv.includes('--combine')){
  const found=new Set(total.map(x=>x.osm_id));
  const errors=total.filter(x=>x.status!=='resolved');
  const relevant=total.filter(x=>x.status==='resolved'&&!['disjoint','boundary','point'].includes(x.spatial.relation));
- const rootDigests=[...new Set(chunks.map(x=>x.root.sha256))];
+ const rootDigests=[...new Set(chunks.map(x=>x.root.geometry_sha256))];
+ const rootXmlDigests=[...new Set(chunks.map(x=>x.root.sha256))];
+ const rootVersions=[...new Set(chunks.map(x=>x.root.version+'@'+x.root.timestamp))];
  const missing=ids.filter(id=>!found.has(id));
  const duplicate=total.length-found.size;
  const counts=Object.fromEntries([...new Set(total.map(x=>x.spatial?.relation||x.status))].sort().map(k=>[k,total.filter(x=>(x.spatial?.relation||x.status)===k).length]));
- const verdict=found.size===84&&total.length===84&&errors.length===0&&rootDigests.length===1?'PASS':'PARTIAL';
- const summary={schema_version:'p903-exception-audit-v1',status:verdict,scope:'full live OSM relation geometry vs live OSM Nistrenia root (not Geofabrik-time-identical)',manifest_source_run_id:manifest.source_run_id,manifest_source_artifact_id:manifest.source_artifact_id,manifest_geofabrik_sha256:manifest.geofabrik_pbf_sha256,reference_missing_count:84,evaluated:total.length,unique:found.size,duplicate,missing,unresolved:errors.length,root_digest_count:rootDigests.length,spatial_relation_counts:counts,requires_semantic_review:relevant.map(x=>x.osm_id),snapshot_alignment:'NOT_PROVEN: 2026-10-12 PBF vs separately fetched OSM API versions',source_runtime_versions:'Per-relation version, timestamp, URL and source SHA-256 recorded in records.json',no_import:true};
+ const verdict=found.size===84&&total.length===84&&errors.length===0&&rootDigests.length===1&&rootVersions.length===1?'PASS':'PARTIAL';
+ const summary={schema_version:'p903-exception-audit-v1',status:verdict,scope:'full live OSM relation geometry vs live OSM Nistrenia root (not Geofabrik-time-identical)',manifest_source_run_id:manifest.source_run_id,manifest_source_artifact_id:manifest.source_artifact_id,manifest_geofabrik_sha256:manifest.geofabrik_pbf_sha256,reference_missing_count:84,evaluated:total.length,unique:found.size,duplicate,missing,unresolved:errors.length,root_geometry_digest_count:rootDigests.length,root_xml_response_digest_count:rootXmlDigests.length,root_relation_version_count:rootVersions.length,spatial_relation_counts:counts,requires_semantic_review:relevant.map(x=>x.osm_id),snapshot_alignment:'NOT_PROVEN: 2026-10-12 PBF vs separately fetched OSM API versions',source_runtime_versions:'Per-relation version, timestamp, URL and source SHA-256 recorded in records.json',no_import:true};
  await save('records.json',total.sort((a,b)=>Number(a.osm_id)-Number(b.osm_id)));
  await save('summary.json',summary);
  await save('exceptions.json',errors);
@@ -148,7 +150,9 @@ if(process.argv.includes('--combine')){
  const target=manifest.missing_relations.filter((_,i)=>i%2===shard);
  const baseline=await fetchOSM('65335'),r=baseline.parsed.relations.get('65335');
  if(!r)throw Error('root_not_in_osm_full');
- const rootGeometry=readTopologyGeometry(geometryOf(r,baseline.parsed.ways,baseline.parsed.nodes));
+ const rootRawGeometry=geometryOf(r,baseline.parsed.ways,baseline.parsed.nodes);
+ const rootGeometry=readTopologyGeometry(rootRawGeometry);
+ const rootGeometrySha256=hash(JSON.stringify(rootRawGeometry));
  const records=[];
  for(const [i,item] of target.entries()){
   const row={osm_id:String(item.id),admin_level_manifest:item.admin_level,name_manifest:item.name||null,name_ro_manifest:item.name_ro||null,status:'unresolved',spatial:null};
@@ -164,8 +168,8 @@ if(process.argv.includes('--combine')){
   console.log('P903_CASE '+JSON.stringify({id:row.osm_id,status:row.status,relation:row.spatial?.relation||null,error:row.error||null,completed:i+1,total:target.length}));
   await wait(350);
  }
- const payload={schema_version:'p903-shard-v1',shard,as_of:new Date().toISOString(),manifest_source_artifact_id:manifest.source_artifact_id,root:{id:'65335',sha256:baseline.sha256,version:r.version,timestamp:r.timestamp,source_url:baseline.url},records};
+ const payload={schema_version:'p903-shard-v1',shard,as_of:new Date().toISOString(),manifest_source_artifact_id:manifest.source_artifact_id,root:{id:'65335',sha256:baseline.sha256,geometry_sha256:rootGeometrySha256,version:r.version,timestamp:r.timestamp,source_url:baseline.url},records};
  await save('shard-'+shard+'.json',payload);
  const incomplete=records.filter(x=>x.status!=='resolved').length;
- console.log('P903_SHARD '+JSON.stringify({shard,checked:records.length,incomplete,root_sha256:baseline.sha256}));
+ console.log('P903_SHARD '+JSON.stringify({shard,checked:records.length,incomplete,root_sha256:baseline.sha256,root_geometry_sha256:rootGeometrySha256}));
 }
