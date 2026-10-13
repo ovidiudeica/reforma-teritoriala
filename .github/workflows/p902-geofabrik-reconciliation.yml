@@ -1,0 +1,64 @@
+name: P9.0.2 Geofabrik PBF Nistrenia audit (read-only)
+on:
+  pull_request:
+    branches: [audit/p9.0.1-nistrenia-inventory]
+    paths:
+      - 'scripts/audit/p902-geofabrik-fallback.mjs'
+      - '.github/workflows/p902-geofabrik-reconciliation.yml'
+      - 'docs/p9.0.2-nistrenia-unlinked-reconciliation.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  geofabrik:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Install temporary osmium tool for audit only
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+      - name: Download one pinned Geofabrik Moldova OSM snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/P9.0.2
+          curl --fail --location --retry 3 --connect-timeout 30 --max-time 360 \
+            https://download.geofabrik.de/europe/moldova-261012.osm.pbf \
+            -o "$RUNNER_TEMP/moldova-261012.osm.pbf"
+          echo "GEOFABRIK_SHA256=$(sha256sum "$RUNNER_TEMP/moldova-261012.osm.pbf" | cut -d' ' -f1)" >> "$GITHUB_ENV"
+          echo "GEOFABRIK_SOURCE_TIME=2026-10-12 UTC (dated extract)" >> "$GITHUB_ENV"
+          osmium fileinfo --extended "$RUNNER_TEMP/moldova-261012.osm.pbf" > outputs/P9.0.2/geofabrik-fileinfo.txt
+      - name: Extract administrative relation metadata and complete polygon members
+        shell: bash
+        run: |
+          set -euo pipefail
+          osmium tags-filter --omit-referenced \
+            "$RUNNER_TEMP/moldova-261012.osm.pbf" r/boundary=administrative \
+            -o "$RUNNER_TEMP/md-administrative-relations.osm"
+          osmium tags-filter \
+            "$RUNNER_TEMP/moldova-261012.osm.pbf" r/boundary=administrative \
+            -o "$RUNNER_TEMP/md-administrative-complete.osm.pbf"
+          osmium export -e --geometry-types=polygon --attributes=type,id \
+            "$RUNNER_TEMP/md-administrative-complete.osm.pbf" \
+            -o "$RUNNER_TEMP/md-administrative-areas.geojsonseq" \
+            2>outputs/P9.0.2/osmium-export-warnings.txt
+      - name: Verify P9.0.1 baseline and evaluate PBF polygons
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/audit/p901-nistrenia-inventory.mjs
+          node scripts/audit/p902-geofabrik-fallback.mjs \
+            "$RUNNER_TEMP/md-administrative-areas.geojsonseq" \
+            "$RUNNER_TEMP/md-administrative-relations.osm"
+      - name: Upload complete source digest, inventory, proposals and anomalies
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p902-geofabrik-audit-evidence
+          path: |
+            outputs/P9.0.1/
+            outputs/P9.0.2/
