@@ -22,7 +22,7 @@ jobs:
           import fs from "node:fs";
           const s=JSON.parse(fs.readFileSync("outputs/P9.0.4.2/summary.json","utf8"));
           if(s.audit!=="PASS"||s.semantic_acceptance!=="BLOCKED"||s.p91_import_allowed!==false||
-            s.scope_count!==85||s.localities_checked!==4||s.2026_identity_parent_certified!==0||
+            s.scope_count!==85||s.localities_checked!==4||s.contemporary_identity_parent_certified!==0||
             s.no_new_polygons!==true||s.no_legal_parent_rewrites!==true)process.exit(2);
           console.log("P9042_AUDIT_PASS_FINAL_ACCEPTANCE_BLOCKED");
           '
