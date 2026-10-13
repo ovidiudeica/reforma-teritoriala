@@ -36,7 +36,7 @@ function verifyInput(){
   checkedById.set(row.actual_id,row);count[row.root_relation]=(count[row.root_relation]||0)+1;
   if(row.geometric_parent)parents[row.geometric_parent]=(parents[row.geometric_parent]||0)+1;
  }
- if(JSON.stringify(count)!==JSON.stringify(rootCounts))fail('root relation counts '+JSON.stringify(count));
+ for(const [kind,n]of Object.entries(rootCounts))if(count[kind]!==n)fail('root relation count '+kind+': '+count[kind]+' vs '+n);
  for(const [id,n]of Object.entries(parentCounts))if(parents[id]!==n)fail('parent count '+id+' ('+parents[id]+')');
  if(!checkedById.has('osm-r2607033')||!checkedById.has('stat-MD12')||!checkedById.has('stat-MD120'))fail('missing distinct official/statistical aggregate');
  for(const id of reuseIds)if(!checkedById.has('osm-r'+id))fail('missing reusable OSM geometry '+id);
