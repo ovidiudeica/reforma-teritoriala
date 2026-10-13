@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "de489b38c1823cb57fcf1a96426878fcc325de265d3285e00d247be446997a9c",
-  "environment_fingerprint_sha256": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
+  "build_environment_sha256": "69d2f83d0c2fb53f4da3e3b329b751cc4647c079d0eaf9e319dceb6990bf2f2b",
+  "environment_fingerprint_sha256": "3ff98260bb5f97562b1eaa8592598eaf39fb78d20138451d7536014dc35363de",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
   "checks": [
@@ -234,7 +234,7 @@
           "package_manager": "npm@11.19.0",
           "package_json": {
             "path": "package.json",
-            "sha256": "7e97c0e534e3128f6fb56b82ebd30c03961d2e5407976b1dd6d9cd7d0956ff22"
+            "sha256": "3bf6193bc7ffc2223b3887886f870ffb84ad86c6014f56991856cd1ebdf1d3ac"
           },
           "package_lock": {
             "path": "package-lock.json",
@@ -266,8 +266,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
-        "actual": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543"
+        "expected": "3ff98260bb5f97562b1eaa8592598eaf39fb78d20138451d7536014dc35363de",
+        "actual": "3ff98260bb5f97562b1eaa8592598eaf39fb78d20138451d7536014dc35363de"
       }
     },
     {
@@ -304,8 +304,8 @@
           "image_version": "20261004.327.1"
         },
         "actual": {
-          "image_os": null,
-          "image_version": null
+          "image_os": "ubuntu24",
+          "image_version": "20261004.327.1"
         }
       }
     }
