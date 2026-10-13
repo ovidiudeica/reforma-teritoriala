@@ -1,0 +1,102 @@
+name: P9.0.2 Geofabrik PBF Nistrenia audit (read-only)
+on:
+  pull_request:
+    branches: [audit/p9.0.1-nistrenia-inventory]
+    paths:
+      - 'scripts/audit/p902-geofabrik-fallback.mjs'
+      - '.github/workflows/p902-geofabrik-reconciliation.yml'
+      - 'docs/p9.0.2-nistrenia-unlinked-reconciliation.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  geofabrik:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Install temporary osmium tool for audit only
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+      - name: Download one pinned Geofabrik Moldova OSM snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/P9.0.2/_input
+          curl --fail --location --retry 3 --connect-timeout 30 --max-time 360 \
+            https://download.geofabrik.de/europe/moldova-261012.osm.pbf \
+            -o "$RUNNER_TEMP/moldova-261012.osm.pbf"
+          echo "GEOFABRIK_SHA256=$(sha256sum "$RUNNER_TEMP/moldova-261012.osm.pbf" | cut -d' ' -f1)" >> "$GITHUB_ENV"
+          echo "GEOFABRIK_SOURCE_TIME=2026-10-12 UTC (dated extract)" >> "$GITHUB_ENV"
+          osmium fileinfo --extended "$RUNNER_TEMP/moldova-261012.osm.pbf" > outputs/P9.0.2/geofabrik-fileinfo.txt
+      - name: Extract administrative relation metadata and complete polygon members
+        shell: bash
+        run: |
+          set -euo pipefail
+          osmium tags-filter --omit-referenced \
+            "$RUNNER_TEMP/moldova-261012.osm.pbf" r/boundary=administrative \
+            -o outputs/P9.0.2/_input/md-administrative-relations.osm
+          osmium tags-filter \
+            "$RUNNER_TEMP/moldova-261012.osm.pbf" r/boundary=administrative \
+            -o "$RUNNER_TEMP/md-administrative-complete.osm.pbf"
+          osmium export -e --geometry-types=polygon --attributes=type,id \
+            "$RUNNER_TEMP/md-administrative-complete.osm.pbf" \
+            -o outputs/P9.0.2/_input/md-administrative-areas.geojsonseq \
+            2>outputs/P9.0.2/osmium-export-warnings.txt
+      - name: Verify P9.0.1 baseline and evaluate PBF polygons
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/audit/p901-nistrenia-inventory.mjs
+          # The pinned territorial extract is deliberately PARTIAL: 84 cross-border
+          # administrative relations cannot be reconstructed in Moldova-clipped PBF.
+          # P9.0.3 independently audited these 84 live OSM relations (run 38476771169).
+          # Keep the generated semantic status PARTIAL, but make the evidence job
+          # successful only for the exact expected audited exception contract.
+          set +e
+          node scripts/audit/p902-geofabrik-fallback.mjs
+          rc=$?
+          set -e
+          if [ "$rc" -ne 2 ]; then
+            echo "Unexpected P9.0.2 audit exit code $rc; expected 2 for pinned PARTIAL source completeness." >&2
+            exit 1
+          fi
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import assert from 'node:assert/strict';
+          const s=JSON.parse(readFileSync('outputs/P9.0.2/geofabrik-summary.json','utf8'));
+          const ex=JSON.parse(readFileSync('outputs/P9.0.2/geofabrik-exceptions.json','utf8'));
+          assert.equal(s.status,'PARTIAL');
+          assert.equal(s.source_sha256,'4ebd791fb953a22961e40ef7921914251c7b7292c33ed1e90e919488f1a397b8');
+          assert.equal(s.osm_admin_relations_in_extract,2681);
+          assert.equal(s.polygon_valid,2597);
+          assert.equal(s.unassembled_relation_polygons,84);
+          assert.equal(s.uncertain_topologies,0);
+          assert.equal(s.invalid_polygon_records,0);
+          assert.equal(s.unlinked_missing_in_ACTUAL,1);
+          assert.equal(s.unique_geometric_parent,85);
+          assert.equal(s.reused_ACTUAL_MD_candidates,153);
+          assert.equal(ex.missingPolygons.length,84);
+          assert.equal(ex.invalid.length,0);
+          assert.equal(ex.exceptions.length,0);
+          assert.equal(new Set(ex.missingPolygons.map(x=>x.id)).size,84);
+          console.log('P902_EXPECTED_PARTIAL_CONTRACT_PASS: source coverage PARTIAL, 84/84 delegated to P9.0.3 independently; P9.1 remains BLOCKED');
+          NODE
+      - name: Upload complete source digest, inventory, proposals and anomalies
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p902-geofabrik-audit-evidence
+          path: |
+            outputs/P9.0.1/
+            outputs/P9.0.2/geofabrik-summary.json
+            outputs/P9.0.2/geofabrik-relations.json
+            outputs/P9.0.2/geofabrik-exceptions.json
+            outputs/P9.0.2/unlinked-candidates.json
+            outputs/P9.0.2/reuse-proposals.json
+            outputs/P9.0.2/geofabrik-unlinked.csv
+            outputs/P9.0.2/geofabrik-fileinfo.txt
+            outputs/P9.0.2/osmium-export-warnings.txt
