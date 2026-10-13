@@ -1,0 +1,34 @@
+name: P9.0.4.2 Nistrenia contemporary semantic acceptance (audit-only)
+on:
+  pull_request:
+    branches: [audit/p9.0.4.1-nistrenia-individual-membership]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contemporary-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Audit every identity and reject premature final semantic acceptance
+        run: node scripts/audit/p9042-nistrenia-contemporary.mjs
+      - name: Enforce separation of audit PASS from P9.1 import authorization
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const s=JSON.parse(fs.readFileSync("outputs/P9.0.4.2/summary.json","utf8"));
+          if(s.audit!=="PASS"||s.semantic_acceptance!=="BLOCKED"||s.p91_import_allowed!==false||
+            s.scope_count!==85||s.localities_checked!==4||s.2026_identity_parent_certified!==0||
+            s.no_new_polygons!==true||s.no_legal_parent_rewrites!==true)process.exit(2);
+          console.log("P9042_AUDIT_PASS_FINAL_ACCEPTANCE_BLOCKED");
+          '
+      - name: Preserve all claims and unresolved blockers
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p9042-contemporary-semantic-evidence
+          path: outputs/P9.0.4.2/
