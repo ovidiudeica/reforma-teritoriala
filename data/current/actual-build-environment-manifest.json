@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
+  "environment_fingerprint_sha256": "3ff98260bb5f97562b1eaa8592598eaf39fb78d20138451d7536014dc35363de",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -57,7 +57,7 @@
       "package_manager": "npm@11.19.0",
       "package_json": {
         "path": "package.json",
-        "sha256": "7e97c0e534e3128f6fb56b82ebd30c03961d2e5407976b1dd6d9cd7d0956ff22"
+        "sha256": "3bf6193bc7ffc2223b3887886f870ffb84ad86c6014f56991856cd1ebdf1d3ac"
       },
       "package_lock": {
         "path": "package-lock.json",
@@ -108,10 +108,10 @@
       "scripts/process/audit-actual-review-evidence-bundle-gate.mjs": "925e30d7b8e950a6f269d02008020f5cca383812b0f51ad6c2a11e68e6b1cfac",
       "scripts/process/prove-actual-network-denial.mjs": "60e1845aa5a0caf0f9cd065c737f6d0718018fef088d93093e0b1a8977ae74ff",
       "scripts/process/verify-actual-persisted-base.mjs": "8cc25b64647178b09569fc782ae000914c39dcf7d51137b05efd6348bd45a85c",
-      "scripts/process/run-actual-deterministic-candidate.sh": "e43c6ce4caec185440d34770aaac6f640fed3075ba9fcde3538dbff8c534965f",
+      "scripts/process/run-actual-deterministic-candidate.sh": "29af6e0c920af6f527fde96dcddbb6e5f70886c0e5e5279fa4472020a5605458",
       "scripts/lib/actual-candidate-lifecycle.mjs": "26a7a552a2db52208dbf960f6b0f4e90066d1e85052211f36fe79792c7802807",
       "scripts/process/build-actual-candidate-diff.mjs": "605ea90d02c40192530fffad39c08c41eb3ebb76094e4b0ea8885213d1e5e997",
-      "scripts/process/prepare-actual-candidate-promotion.mjs": "23f017e0d2b40f5db609984ad66280a324bdddaa3c2123533a4f90be34cd460a",
+      "scripts/process/prepare-actual-candidate-promotion.mjs": "e569dc42d01ced65f9dcb4f5f107880d0bc6408f15cfc80eb1fe876678088470",
       "scripts/process/write-actual-candidate-execution-receipt.mjs": "22dc706e3f713fc7870b11dd574eefee2054186008826abfc391a6833c8364bd"
     },
     "workflows": {
@@ -169,7 +169,7 @@
       },
       "promotion": {
         "path": ".github/workflows/actual-promote-candidate.yml",
-        "sha256": "4c3934f4da74aef387b9b1bc78ab79b826495aa5c1c208f3831c2636daadd101",
+        "sha256": "8d904dbed87ab7fc4bda6db0af5fe3833b3da33fd2db78f96204344ec47dbacc",
         "runs_on": [
           "ubuntu-24.04"
         ],
