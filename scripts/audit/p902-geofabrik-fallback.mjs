@@ -35,6 +35,8 @@ for await(const raw of reader){
  try{readTopologyGeometry(f.geometry);validGeometries++;features.push({id,geometry:f.geometry});}
  catch(e){invalid.push({id,reason:'invalid_geometry',message:String(e)});}
 }
+const exportedIds=new Set(features.map(f=>f.id));
+const missingPolygons=[...relTags.values()].filter(f=>!exportedIds.has(f.id)).map(f=>({id:f.id,name:f.name,name_ro:f.name_ro,admin_level:f.admin_level,in_ACTUAL_MD:'not_checked',already_in_p901:f.already_in_p901}));
 const rootRecord=features.find(f=>f.id==='65335');
 if(!rootRecord)throw Error('Geofabrik extract does not contain valid polygon for 65335');
 const rootGeometry=readTopologyGeometry(rootRecord.geometry),rootEnvelope=rootGeometry.getEnvelopeInternal();
@@ -72,21 +74,21 @@ const reuse=mdReuseCandidates.map(x=>{
   other_parent_candidates:parents,must_review_semantics:true,geometry_storage:'use_existing_ACTUAL_master'};
 });
 const sourceSha=process.env.GEOFABRIK_SHA256||null;
-const summary={status:exceptions.length||invalid.length?'PARTIAL':'PASS',source:'Geofabrik Moldova OSM PBF',source_sha256:sourceSha,
+const summary={status:exceptions.length||invalid.length||missingPolygons.length?'PARTIAL':'PASS',source:'Geofabrik Moldova OSM PBF',source_sha256:sourceSha,
  source_as_of:process.env.GEOFABRIK_SOURCE_TIME||null,assessed_utc:new Date().toISOString(),
  root_osm_id:65335,reference_p901_snapshot:snapshot.actual_snapshot,feature_total:totalGeoFeatures,
  polygon_valid:validGeometries,osm_admin_relations_in_extract:relTags.size,
  root_related_relations:table.length,unlinked_missing_in_ACTUAL:unlinked.length,
  reused_ACTUAL_MD_candidates:reuse.length,unique_geometric_parent:reuse.filter(x=>x.de_facto_candidate_parent).length,
- invalid_polygon_records:invalid.length,uncertain_topologies:exceptions.length,
+ invalid_polygon_records:invalid.length,unassembled_relation_polygons:missingPolygons.length,uncertain_topologies:exceptions.length,
  new_by_relationship:Object.fromEntries([...new Set(unlinked.map(x=>x.relation_to_65335))].map(k=>[k,unlinked.filter(x=>x.relation_to_65335===k).length])),
  caveats:'Geofabrik extraction may omit invalid or border-crossing geometries. Compare OSM PBF snapshot versus P9.0.1 live OSM dates; all administrative membership remains candidate; no ACTUAL change.'};
 await fs.mkdir(out,{recursive:true});
-for(const [p,data]of [['geofabrik-summary.json',summary],['geofabrik-relations.json',table],['unlinked-candidates.json',unlinked],['reuse-proposals.json',reuse],['geofabrik-exceptions.json',{invalid,exceptions}]]){
+for(const [p,data]of [['geofabrik-summary.json',summary],['geofabrik-relations.json',table],['unlinked-candidates.json',unlinked],['reuse-proposals.json',reuse],['geofabrik-exceptions.json',{invalid,exceptions,missingPolygons}]]){
  await fs.writeFile(new URL(p,out),JSON.stringify(data,null,2)+'\n');
 }
 const headings=['osm_id','name_ro','admin_level','relation_to_65335','in_ACTUAL_MD','already_in_p901','proposed_action'];
 const quote=s=>'"'+String(s??'').replaceAll('"','""')+'"';
 await fs.writeFile(new URL('geofabrik-unlinked.csv',out),[headings.join(','),...unlinked.map(x=>headings.map(k=>quote(x[k])).join(','))].join('\n')+'\n');
 console.log('P902_GEOFABRIK_SUMMARY '+JSON.stringify(summary));
-if(exceptions.length)process.exitCode=2;
+if(summary.status!=='PASS')process.exitCode=2;
