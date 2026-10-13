@@ -26,8 +26,11 @@ const next=mode==='commit'?readGitJson(resolvedHead,'public/data/actual-entities
 const policy=mode==='commit'?readGitJson(resolvedHead,'docs/p9.0.4.3-promotion-policy.json'):await readJson('docs/p9.0.4.3-promotion-policy.json');
 const ledger=mode==='commit'?readGitJson(resolvedHead,'docs/p9.0.4.1-individual-candidates.json'):await readJson('docs/p9.0.4.1-individual-candidates.json');
 if(ledger?.schema_version!=='p9041-member-claim-ledger-v1'||ledger.records?.length!==85)throw Error('Missing immutable 85-case P9.0.4.1 ledger');
-const ids=ledger.records.map(x=>x.actual_id);
-if(new Set(ids).size!==85)throw Error('85-case P9 sensitive IDs not unique');
+const roster=mode==='commit'?readGitJson(resolvedHead,'docs/p9.0.4-geometric-candidates.json'):await readJson('docs/p9.0.4-geometric-candidates.json');
+if(roster?.schema_version!=='p904-geometric-candidates-v1'||roster.candidates?.length!==153)throw Error('Missing immutable 153-case P9 geometric scope');
+const ids=roster.candidates.map(x=>x.actual_id);
+if(new Set(ids).size!==153)throw Error('153-case P9 protected IDs are not unique');
+if(ledger.records.some(x=>!ids.includes(x.actual_id)))throw Error('85 positive geometric candidates not a subset of 153 protected IDs');
 const answer=evaluateP9JurisdictionGate({policy,baseCatalog:prior,candidateCatalog:next,changedPaths,addedLines:additions,knownSensitiveIds:ids});
 console.log('ACTUAL_P9_PROMOTION_GATE '+JSON.stringify({
  ...answer,base_ref:resolvedBase,head_ref:resolvedHead||'WORKTREE',executable_policy:'Current P9.0.4.3 policy fails closed for P9 changes while leaving unrelated ACTUAL RO/MD candidates eligible to existing release gates'
