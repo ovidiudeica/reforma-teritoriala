@@ -29,6 +29,8 @@ jobs:
           node-version: '24.21.0'
       - name: Test negative P9 bypasses and positive unrelated ACTUAL refresh
         run: node --test scripts/test/actual-p9-jurisdiction-gate.test.mjs
+      - name: Regression suite — ACTUAL workflow write permissions and branch boundaries
+        run: node --test scripts/test/workflow-write-boundaries.test.mjs
       - name: Read-only baseline test of mandatory production gate on all ACTUAL published identities
         shell: bash
         run: |
