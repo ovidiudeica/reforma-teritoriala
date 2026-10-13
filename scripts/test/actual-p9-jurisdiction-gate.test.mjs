@@ -1,3 +1,4 @@
+import {readFile} from 'node:fs/promises';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {evaluateP9JurisdictionGate,parseAddedGitDiff} from '../lib/actual-p9-jurisdiction-promotion-gate.mjs';
@@ -66,4 +67,16 @@ test('candidate ID collision and dropped sensitive identity are rejected',()=>{
  assert.equal(gate(changed).status,'FAIL');
  const removed=copy(base);removed.entities=removed.entities.filter(x=>x.id!=='osm-r1216706');
  assert.ok(gate(removed).prohibited_changes.some(x=>x.issue==='sensitive_md_entity_removed'));
+});
+
+test('2025 provider-service cross-check covers all 85 and never asserts territorial control',async()=>{
+ const x=JSON.parse(await readFile('docs/p9.0.4.3-2025-service-crosscheck.json','utf8'));
+ assert.equal(x.schema_version,'p9043-contemporary-service-evidence-v1');
+ assert.equal(x.rows.length,85);
+ assert.equal(new Set(x.rows.map(r=>r.actual_id)).size,85);
+ const matched=x.rows.filter(r=>r.provider_service_area_name_match_in_same_district).length;
+ assert.equal(matched,72);
+ assert.equal(x.summary.not_in_same_provider_region,13);
+ assert.equal(x.summary.other_district_name_collisions,2);
+ assert.ok(x.rows.every(r=>r.service_area_evidence_not_administrative_parent===true&&r.de_facto_control_on_polygon_proven===false));
 });
