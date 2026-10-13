@@ -49,7 +49,7 @@ const blockers=[
 ];
 const summary={schema_version:'p9042-final-acceptance-v1',audit:'PASS',semantic_acceptance:'BLOCKED',p91_import_allowed:false,
  scope_count:85,dispositions:counts,localities_checked:4,pohrebea_master_reused:1,
- no_new_polygons:true,no_legal_parent_rewrites:true,2026_identity_parent_certified:0,
+ no_new_polygons:true,no_legal_parent_rewrites:true,contemporary_identity_parent_certified:0,
  blockers:blocks.map(x=>x.id),blocker_categories:blockers.length,
  basis:'Contemporary primary sources characterize particular local administrations; they do not authenticate 85 full administrative parent + exact OSM polygon bindings.'};
 await mkdir(out,{recursive:true});
