@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p outputs/P9.0.2
+          mkdir -p outputs/P9.0.2/_input
           curl --fail --location --retry 3 --connect-timeout 30 --max-time 360 \
             https://download.geofabrik.de/europe/moldova-261012.osm.pbf \
             -o "$RUNNER_TEMP/moldova-261012.osm.pbf"
@@ -38,13 +38,13 @@ jobs:
           set -euo pipefail
           osmium tags-filter --omit-referenced \
             "$RUNNER_TEMP/moldova-261012.osm.pbf" r/boundary=administrative \
-            -o "$RUNNER_TEMP/md-administrative-relations.osm"
+            -o outputs/P9.0.2/_input/md-administrative-relations.osm
           osmium tags-filter \
             "$RUNNER_TEMP/moldova-261012.osm.pbf" r/boundary=administrative \
             -o "$RUNNER_TEMP/md-administrative-complete.osm.pbf"
           osmium export -e --geometry-types=polygon --attributes=type,id \
             "$RUNNER_TEMP/md-administrative-complete.osm.pbf" \
-            -o "$RUNNER_TEMP/md-administrative-areas.geojsonseq" \
+            -o outputs/P9.0.2/_input/md-administrative-areas.geojsonseq \
             2>outputs/P9.0.2/osmium-export-warnings.txt
       - name: Verify P9.0.1 baseline and evaluate PBF polygons
         shell: bash
@@ -57,9 +57,7 @@ jobs:
           # Keep the generated semantic status PARTIAL, but make the evidence job
           # successful only for the exact expected audited exception contract.
           set +e
-          node scripts/audit/p902-geofabrik-fallback.mjs \
-            "$RUNNER_TEMP/md-administrative-areas.geojsonseq" \
-            "$RUNNER_TEMP/md-administrative-relations.osm"
+          node scripts/audit/p902-geofabrik-fallback.mjs
           rc=$?
           set -e
           if [ "$rc" -ne 2 ]; then
@@ -94,4 +92,11 @@ jobs:
           name: p902-geofabrik-audit-evidence
           path: |
             outputs/P9.0.1/
-            outputs/P9.0.2/
+            outputs/P9.0.2/geofabrik-summary.json
+            outputs/P9.0.2/geofabrik-relations.json
+            outputs/P9.0.2/geofabrik-exceptions.json
+            outputs/P9.0.2/unlinked-candidates.json
+            outputs/P9.0.2/reuse-proposals.json
+            outputs/P9.0.2/geofabrik-unlinked.csv
+            outputs/P9.0.2/geofabrik-fileinfo.txt
+            outputs/P9.0.2/osmium-export-warnings.txt
