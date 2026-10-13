@@ -167,9 +167,5 @@ const quote=x=>'"'+String(x??'').replaceAll('"','""')+'"';
 for(const m of matrix)csv.push([m.nistrenia_osm_id,m.actual_id,m.actual_name,m.same_osm_id,m.relation,m.DE9IM,m.error].map(quote).join(','));
 await save('matrix.csv',csv.join('\n')+'\n');
 console.log('P901_SUMMARY '+JSON.stringify(summary));
-if(process.env.GITHUB_STEP_SUMMARY)await writeFile(process.env.GITHUB_STEP_SUMMARY,
- '### P9.0.1 read-only Nistrenia OSM audit\n'+
- 'Status: **'+summary.status+'**; OSM relations: '+inventory.length+'; ACTUAL MD: '+md.size+
- '; matrix pairs: '+matrix.length+'; exceptions: '+exceptions.length+
- '\nTopological classes: '+JSON.stringify(counts)+'\n',{flag:'a'});
+// GitHub CI consumes stdout and the uploaded artifact; no environment-controlled output paths.
 if(exceptions.length)process.exitCode=2;
