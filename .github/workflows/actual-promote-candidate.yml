@@ -203,6 +203,14 @@ jobs:
           fi
           echo "current_main_sha=$CURRENT_MAIN_SHA" >> "$GITHUB_OUTPUT"
 
+      - name: Enforce P9 jurisdiction semantics before ACTUAL promotion write
+        env:
+          CURRENT_MAIN_SHA: ${{ steps.current_main.outputs.current_main_sha }}
+        run: |
+          set -euo pipefail
+          node --test scripts/test/actual-p9-jurisdiction-gate.test.mjs
+          node scripts/process/audit-actual-p9-jurisdiction-promotion.mjs --base="$CURRENT_MAIN_SHA" --head=HEAD --mode=commit
+
       - name: Validate candidate bytes
         env:
           ACTUAL_RELEASE_GATE_READ_ONLY: '1'
