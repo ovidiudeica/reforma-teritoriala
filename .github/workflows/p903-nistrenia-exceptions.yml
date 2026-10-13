@@ -1,0 +1,68 @@
+name: P9.0.3 Nistrenia OSM exception reconciliation (audit-only)
+on:
+  pull_request:
+    branches: [audit/p9.0.2-nistrenia-unlinked-reconciliation]
+    paths:
+      - 'docs/p9.0.3-*'
+      - 'scripts/audit/p903-nistrenia-exceptions.mjs'
+      - '.github/workflows/p903-nistrenia-exceptions.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  relation-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1]
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install repository-pinned ACTUAL npm dependencies offline
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Fail-closed fixture and pinned 84-ID manifest test
+        run: node scripts/audit/p903-nistrenia-exceptions.mjs --self-test
+      - name: Audit full OSM geometries, never mutate ACTUAL
+        run: node scripts/audit/p903-nistrenia-exceptions.mjs --shard=${{ matrix.shard }}
+      - name: Preserve per-ID provenance and failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p903-nistrenia-shard-${{ matrix.shard }}
+          if-no-files-found: warn
+          path: outputs/P9.0.3/shard-${{ matrix.shard }}.json
+  reconciliation-gate:
+    needs: relation-evidence
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install repository-pinned dependencies offline
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Recover both immutable shard artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/P9.0.3
+          gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --pattern 'p903-nistrenia-shard-*' --dir "$RUNNER_TEMP/p903"
+          find "$RUNNER_TEMP/p903" -type f -name 'shard-*.json' -print -exec cp '{}' outputs/P9.0.3/ \;
+      - name: Reconcile all 84 IDs and apply fail-closed completeness gate
+        run: node scripts/audit/p903-nistrenia-exceptions.mjs --combine
+      - name: Publish summary, 84 rows, and unresolved exceptions even when PARTIAL
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p903-nistrenia-complete-reconciliation
+          if-no-files-found: warn
+          path: outputs/P9.0.3/
