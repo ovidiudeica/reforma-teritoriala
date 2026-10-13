@@ -200,6 +200,19 @@ jobs:
           if(failures.length)process.exit(1);
           NODE
 
+      - name: Enforce P9 jurisdiction gate on protected release PR and main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            PROTECTED_BASE="$(git merge-base HEAD refs/remotes/origin/main)"
+          else
+            PROTECTED_BASE="$(git rev-parse HEAD^)"
+          fi
+          node --test scripts/test/actual-p9-jurisdiction-gate.test.mjs
+          node scripts/process/audit-actual-p9-jurisdiction-promotion.mjs --base="$PROTECTED_BASE" --head=HEAD --mode=commit
+
       - name: Validate PR publication path
         if: github.event_name == 'pull_request'
         env:
