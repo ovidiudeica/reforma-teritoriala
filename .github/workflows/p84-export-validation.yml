@@ -18,8 +18,8 @@ jobs:
       - run: node scripts/process/install-actual-npm-offline.mjs
       - name: Complete Linux regression suite
         run: node scripts/audit/p82-full-validation.mjs
-      - name: Dedicated export and nine viewport browser QA
-        run: node scripts/audit/p84-browser.mjs
+      - name: On-demand export performance
+        run: node scripts/audit/p84-performance.mjs
       - name: Validate immutable geometry, topology and GIS toolchain
         run: |
           node scripts/audit/p83-source-audit.mjs

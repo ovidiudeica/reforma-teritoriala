@@ -130,8 +130,8 @@ function exportSource(id){
 const atlasExport=createAtlasExport({document,getManifest:()=>releaseData?.manifest,getEntity:id=>entityById.get(id),getSource:exportSource,readFeature:async id=>{
  const source=exportSource(id);if(!source?.sha256)throw Error('Geometrie ACTUAL neverificabilă');
  const data=await geometryResources.read(source.path);const matches=data.features.filter(f=>f.properties?.entity_id===id);
- if(matches.length!==1)throw Error('Identitate geometrică absentă sau duplicată');return matches[0];
-},getCurrentUrl:()=>globalThis.location.href,getMeasurement:()=>atlasMeasure?.state,
+ if(matches.length!==1)throw Error('Identitate geometrică absentă sau duplicată');await geometricClient.metrics(id);return matches[0];
+},getCurrentUrl:()=>globalThis.location.href,getMetrics:id=>geometricClient.peekMetrics(id),getMeasurement:()=>atlasMeasure?.state,
 getVisual:()=>mapSvg({map,L,snapshotId:releaseData?.manifest.snapshot_id,selection:[selectedEntityId,...atlasAdvanced?.state.pair||[]].filter((id,i,a)=>id&&a.indexOf(id)===i).map(id=>entityById.get(id)?.display_name||id),legend:legendEntries([...entityById.values()])}),
 printVisual:(svg,orientation)=>printSvg(document,svg,orientation)});
 if(document.nodeType===9){atlasExport.measurement();atlasExport.visual();}
