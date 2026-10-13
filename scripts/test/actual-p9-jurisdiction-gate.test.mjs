@@ -80,3 +80,11 @@ test('2025 provider-service cross-check covers all 85 and never asserts territor
  assert.equal(x.summary.other_district_name_collisions,2);
  assert.ok(x.rows.every(r=>r.service_area_evidence_not_administrative_parent===true&&r.de_facto_control_on_polygon_proven===false));
 });
+
+test('P9-adjacent MD entity cannot smuggle a generic unreviewed administrative field',()=>{
+ const changed=copy(base);
+ changed.entities[0].claimed_parent_relation='1702219';
+ const a=gate(changed);
+ assert.equal(a.status,'FAIL');
+ assert.ok(a.prohibited_changes.some(x=>x.issue==='sensitive_md_new_semantic_field'));
+});
