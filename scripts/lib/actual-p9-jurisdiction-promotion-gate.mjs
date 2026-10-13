@@ -2,7 +2,6 @@
 // No network, no writes, no clock, no implicit de facto sovereignty.
 const MARKER=/(?:nistren|transnistr|transdniestr|приднестр|(?:^|[^a-z])pmr(?:[^a-z]|$)|de[_ -]?facto|osm-r65335|(?:^|\D)65335(?:\D|$))/i;
 const P9_PATH=/(?:^|\/)(?:nistren|transnistr|pmr|p9(?:\.|\/|-)|de[-_]facto)/i;
-const SAME_ID_KEYS=['jurisdiction','category','legal','hierarchy','roles','representation'];
 const restrictedPaths=[
  /^data\/current\//,
  /^data\/sources\//,
@@ -17,7 +16,8 @@ export function readEntityArray(doc){
  return Array.isArray(doc?.entities)?doc.entities:Array.isArray(doc)?doc:null;
 }
 function fingerprint(value){return JSON.stringify(value??null);}
-function protectedChanges(before,after){
+function protectedChanges(before,after,knownSensitiveIds){
+ const sensitive=new Set(knownSensitiveIds);
  const old=new Map(before.map(x=>[x.id,x]));
  const hits=[];
  for(const item of after){
@@ -33,6 +33,11 @@ function protectedChanges(before,after){
   const changeKeys=new Set([...Object.keys(preceding),...Object.keys(item)]);
   for(const key of changeKeys){
    if(fingerprint(preceding[key])===fingerprint(item[key]))continue;
+   // P9's 153 intersecting/touching ACTUAL identities may not gain *any*
+   // candidate-injected metadata field without a separately reviewed semantic contract.
+   if(sensitive.has(item.id)&&!Object.hasOwn(preceding,key)){
+    hits.push({issue:'sensitive_md_new_semantic_field',id:item.id,key});
+   }
    if(MARKER.test(key)||(!Object.hasOwn(preceding,key)&&MARKER.test(fingerprint(item[key])))){
     hits.push({issue:'new_p9_semantic_role',id:item.id,key});
    } else if(guardedEntityFields.includes(key) && MARKER.test(fingerprint(item[key])) &&
@@ -72,7 +77,7 @@ export function evaluateP9JurisdictionGate({
   const oldIds=new Set(old.map(x=>x.id)),newIds=new Set(next.map(x=>x.id));
   require(oldIds.size===old.length&&newIds.size===next.length,'duplicate_catalog_ID');
   for(const id of oldIds)if(!newIds.has(id)&&knownSensitiveIds.includes(id))reasons.push({issue:'sensitive_md_entity_removed',id});
-  reasons.push(...protectedChanges(old,next));
+  reasons.push(...protectedChanges(old,next,knownSensitiveIds));
   const oldById=new Map(old.map(x=>[x.id,x]));
   for(const id of knownSensitiveIds){
    const a=oldById.get(id),b=next.find(x=>x.id===id);
