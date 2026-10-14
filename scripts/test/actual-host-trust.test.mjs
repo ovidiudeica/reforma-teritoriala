@@ -18,7 +18,8 @@ test('committed ACTUAL host trust manifest exactly matches pinned contract',asyn
  assert.deepEqual(EXPECTED_HOST_TRUST.accepted_runtime_profiles.map(x=>x.id),[
   'github-ubuntu24-20260920.314.1',
   'github-ubuntu24-20260927.320.1',
-  'github-ubuntu24-20261004.327.1'
+  'github-ubuntu24-20261004.327.1',
+  'github-ubuntu24-20261012.334.1'
  ]);
  assert.equal(EXPECTED_HOST_TRUST.cpu_contract.execution_profile.node_options,'--jitless');
  assert.equal(EXPECTED_HOST_TRUST.cpu_contract.execution_profile.cpuset_cpus,'0');
@@ -49,7 +50,7 @@ test('deterministic runner fails closed unless the CPU execution profile is exac
  assert.match(script,/test "\$LC_ALL" = "C\.UTF-8"/);
 });
 
-test('both complete approved hosts pass; unknown and mixed profiles fail closed',async()=>{
+test('all explicitly approved hosts pass; unknown and mixed profiles fail closed',async()=>{
  const {validateObservedHost}=await import('../lib/actual-host-trust.mjs');
  const manifest=buildHostTrustManifest();
  const contract=EXPECTED_HOST_TRUST.cpu_contract;
