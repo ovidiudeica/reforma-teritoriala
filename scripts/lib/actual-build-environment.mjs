@@ -246,7 +246,7 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
   checks.push({name,ok:Boolean(ok),detail});
   if(!ok)failures.push({name,detail});
  };
- let current=null,error=null,npmBundleValidation=null,runtimeValidation=null,ociBuilderValidation=null,hostTrustValidation=null;
+ let current=null,error=null,npmBundleValidation=null,runtimeValidation=null,ociBuilderValidation=null,hostTrustValidation=null,hostTrustManifest=null;
  try{
   current=await inspectCurrentBuildEnvironment({readFileFn});
   npmBundleValidation=await validateNpmDependencyBundle({readFileFn});
@@ -255,7 +255,8 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
   const ociBuilderBytes=await readFileFn(OCI_BUILDER_PATH);
   ociBuilderValidation=await validateOciBuilderManifest(JSON.parse(ociBuilderBytes.toString('utf8')),{readFileFn});
   const hostTrustBytes=await readFileFn(HOST_TRUST_PATH);
-  hostTrustValidation=validateHostTrustManifest(JSON.parse(hostTrustBytes.toString('utf8')));
+  hostTrustManifest=JSON.parse(hostTrustBytes.toString('utf8'));
+  hostTrustValidation=validateHostTrustManifest(hostTrustManifest);
  }
  catch(err){error=err;}
 
@@ -370,10 +371,18 @@ export async function validateBuildEnvironmentManifest(manifest,{readFileFn=read
   check('runtime_node_exact',actual.node===EXPECTED_BUILD_ENVIRONMENT.toolchain.node,{expected:EXPECTED_BUILD_ENVIRONMENT.toolchain.node,actual:actual.node});
   check('runtime_npm_exact',actual.npm===EXPECTED_BUILD_ENVIRONMENT.toolchain.npm,{expected:EXPECTED_BUILD_ENVIRONMENT.toolchain.npm,actual:actual.npm});
   check('runtime_runner_os_linux',actual.runner_os==='Linux',{expected:'Linux',actual:actual.runner_os});
-  check('host_runner_identity_is_static_provenance',
+  const approvedHostImages=(hostTrustManifest?.contract?.accepted_runtime_profiles??[]).map(profile=>({
+   id:profile.id??null,
+   image_os:profile.runner?.image_os??null,
+   image_version:profile.runner?.image_version??null
+  }));
+  const matchedHostImages=approvedHostImages.filter(profile=>
+   profile.image_os===actual.host_image_os&&profile.image_version===actual.host_image_version
+  );
+  check('host_runner_identity_is_explicitly_approved_provenance',
    actual.host_image_os===null&&actual.host_image_version===null
-   || actual.host_image_os===EXPECTED_BUILD_ENVIRONMENT.runner.image_os&&actual.host_image_version===EXPECTED_BUILD_ENVIRONMENT.runner.image_version,
-   {policy:'GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match the pinned provenance.',expected:{image_os:EXPECTED_BUILD_ENVIRONMENT.runner.image_os,image_version:EXPECTED_BUILD_ENVIRONMENT.runner.image_version},actual:{image_os:actual.host_image_os,image_version:actual.host_image_version}});
+   || matchedHostImages.length===1,
+   {policy:'GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match exactly one explicitly approved host-trust runtime profile.',expected:{label:EXPECTED_BUILD_ENVIRONMENT.runner.label,accepted_runtime_profiles:approvedHostImages},matched_profile_ids:matchedHostImages.map(profile=>profile.id),actual:{image_os:actual.host_image_os,image_version:actual.host_image_version}});
  }
 
  return {status:failures.length?'FAIL':'PASS',checks,failures,current,fingerprint};
