@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "de489b38c1823cb57fcf1a96426878fcc325de265d3285e00d247be446997a9c",
-  "environment_fingerprint_sha256": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
+  "build_environment_sha256": "8be959b532e2b79124ca49ce612b3381be2b07b02da0310dc3441bdfc4a0d29e",
+  "environment_fingerprint_sha256": "113011a99aafcb2695a38f9624765de02b983e2c28aedeef5589de3ba151bb7d",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
   "checks": [
@@ -115,13 +115,13 @@
       "ok": true,
       "detail": {
         "status": "PASS",
-        "fingerprint": "734d94265dd1a862a03fe400408ec3d83ce2d065909a0aa7077a9bf15c158ae8",
+        "fingerprint": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
         "failures": [],
         "current": {
           "manifest_path": "data/current/actual-host-trust-manifest.json",
-          "manifest_sha256": "aeee28147d8b42e8f85c1372af8624276736faf7348cd7d9c09bf1eb5dcc056d",
+          "manifest_sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167",
           "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
-          "host_trust_fingerprint_sha256": "734d94265dd1a862a03fe400408ec3d83ce2d065909a0aa7077a9bf15c158ae8",
+          "host_trust_fingerprint_sha256": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
           "runner_image_version": "20261004.327.1",
           "kernel_release": "6.17.0-1022-azure",
           "docker_server_version": "28.0.4",
@@ -266,8 +266,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
-        "actual": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543"
+        "expected": "113011a99aafcb2695a38f9624765de02b983e2c28aedeef5589de3ba151bb7d",
+        "actual": "113011a99aafcb2695a38f9624765de02b983e2c28aedeef5589de3ba151bb7d"
       }
     },
     {
@@ -304,8 +304,8 @@
           "image_version": "20261004.327.1"
         },
         "actual": {
-          "image_os": null,
-          "image_version": null
+          "image_os": "ubuntu24",
+          "image_version": "20261004.327.1"
         }
       }
     }
