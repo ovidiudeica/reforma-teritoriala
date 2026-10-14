@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
   "build_environment_path": "data/current/actual-build-environment-manifest.json",
-  "build_environment_sha256": "de489b38c1823cb57fcf1a96426878fcc325de265d3285e00d247be446997a9c",
-  "environment_fingerprint_sha256": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
+  "build_environment_sha256": "24574450872c4214502d3bc3b8c0d6129be75ede86925897e2123f609455f3f8",
+  "environment_fingerprint_sha256": "5594181bd944bcd3167424ef17c8d91b64295973be641800a041d8b3943d01a7",
   "status": "PASS",
   "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
   "checks": [
@@ -115,13 +115,13 @@
       "ok": true,
       "detail": {
         "status": "PASS",
-        "fingerprint": "734d94265dd1a862a03fe400408ec3d83ce2d065909a0aa7077a9bf15c158ae8",
+        "fingerprint": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
         "failures": [],
         "current": {
           "manifest_path": "data/current/actual-host-trust-manifest.json",
-          "manifest_sha256": "aeee28147d8b42e8f85c1372af8624276736faf7348cd7d9c09bf1eb5dcc056d",
+          "manifest_sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167",
           "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
-          "host_trust_fingerprint_sha256": "734d94265dd1a862a03fe400408ec3d83ce2d065909a0aa7077a9bf15c158ae8",
+          "host_trust_fingerprint_sha256": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
           "runner_image_version": "20261004.327.1",
           "kernel_release": "6.17.0-1022-azure",
           "docker_server_version": "28.0.4",
@@ -266,8 +266,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-build-environment-v1",
-        "expected": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543",
-        "actual": "59a645c3f1d4f241feda70e1f9528e63ddb6df08c5cce051dd1ff582da943543"
+        "expected": "5594181bd944bcd3167424ef17c8d91b64295973be641800a041d8b3943d01a7",
+        "actual": "5594181bd944bcd3167424ef17c8d91b64295973be641800a041d8b3943d01a7"
       }
     },
     {
@@ -295,17 +295,41 @@
       }
     },
     {
-      "name": "host_runner_identity_is_static_provenance",
+      "name": "host_runner_identity_is_explicitly_approved_provenance",
       "ok": true,
       "detail": {
-        "policy": "GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match the pinned provenance.",
+        "policy": "GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match exactly one explicitly approved host-trust runtime profile.",
         "expected": {
-          "image_os": "ubuntu24",
-          "image_version": "20261004.327.1"
+          "label": "ubuntu-24.04",
+          "accepted_runtime_profiles": [
+            {
+              "id": "github-ubuntu24-20260920.314.1",
+              "image_os": "ubuntu24",
+              "image_version": "20260920.314.1"
+            },
+            {
+              "id": "github-ubuntu24-20260927.320.1",
+              "image_os": "ubuntu24",
+              "image_version": "20260927.320.1"
+            },
+            {
+              "id": "github-ubuntu24-20261004.327.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261004.327.1"
+            },
+            {
+              "id": "github-ubuntu24-20261012.334.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261012.334.1"
+            }
+          ]
         },
+        "matched_profile_ids": [
+          "github-ubuntu24-20261012.334.1"
+        ],
         "actual": {
-          "image_os": null,
-          "image_version": null
+          "image_os": "ubuntu24",
+          "image_version": "20261012.334.1"
         }
       }
     }

@@ -1,0 +1,74 @@
+name: P9.0.5 runner host-trust provenance rebind (read-only evidence)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/actual-host-trust.mjs'
+      - 'scripts/process/prepare-p905-runner-provenance.mjs'
+      - '.github/workflows/p905-runner-host-trust-refresh.yml'
+      - 'data/current/actual-host-trust-manifest.json'
+      - 'data/current/actual-build-environment-manifest.json'
+      - 'data/current/actual-release-manifest.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  p905-host-trust-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Rebuild explicit ACTUAL host-trust contract from reviewed profile
+        run: node scripts/process/build-actual-host-trust-manifest.mjs
+      - name: Validate captured new image profile and fail closed on unapproved containerd
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {validateObservedHost} from './scripts/lib/actual-host-trust.mjs';
+          const m=JSON.parse(fs.readFileSync('data/current/actual-host-trust-manifest.json','utf8'));
+          const p=m.contract.accepted_runtime_profiles.find(p=>p.id==='github-ubuntu24-20261012.334.1');
+          assert.ok(p);
+          const cpu=m.contract.cpu_contract;
+          const observed={...structuredClone(p),cpu:{
+           architecture:cpu.architecture,op_modes:cpu.op_modes,hypervisor:cpu.hypervisor,
+           virtualization:cpu.virtualization,vendor:'AuthenticAMD',model_name:'approved-contract-test',
+           flags:cpu.required_flags
+          }};
+          assert.equal(validateObservedHost(m,observed).status,'PASS');
+          observed.docker.components.containerd.version='v0.0.0-unapproved';
+          assert.equal(validateObservedHost(m,observed).status,'FAIL');
+          console.log('P905_HOST_PROFILE_POSITIVE_NEGATIVE PASS');
+          NODE
+      - name: Validate actual GitHub-hosted runner against explicit profiles
+        run: node scripts/process/audit-actual-host-trust.mjs
+      - name: Rebuild ACTUAL execution-environment manifest and gate
+        run: |
+          node scripts/process/build-actual-build-environment-manifest.mjs
+          node scripts/process/audit-actual-build-environment-gate.mjs
+      - name: Rebind immutable semantic ACTUAL release manifest and quality gate
+        run: |
+          node scripts/process/build-actual-release-manifest.mjs
+          node scripts/process/audit-actual-release-gate.mjs
+      - name: Produce exact previous-manifest-bound provenance-only persisted marker
+        run: |
+          node scripts/process/prepare-p905-runner-provenance.mjs
+          node scripts/process/verify-actual-persisted-base.mjs
+      - name: Publish proposal artifacts without repository write credentials
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p905-runner-provenance-proposal
+          if-no-files-found: warn
+          path: |
+            data/current/actual-host-trust-manifest.json
+            data/current/actual-build-environment-manifest.json
+            data/current/actual-build-environment-gate.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-gate.json
+            data/current/actual-release-persisted.json
