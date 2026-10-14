@@ -1,0 +1,1718 @@
+{
+  "schema_version": "p9041-member-claim-ledger-v1",
+  "as_of": "2026-10-13",
+  "scope": "85 unique geometric-parent candidates from P9.0.2, individual name and parent audit against historical de facto administrative register; no current control assertion",
+  "parent_catalog_sha256": "e31a15d21556dff37fa41a6623380f1e1f3fbb689638309a3f44adeb4464d973",
+  "parent_catalog_snapshot": "actual-a9e5a4ddcb5277ef",
+  "registry_edition": "2010-09-30",
+  "registry_status": "historical_not_current",
+  "current_claim_requires_version_refresh": true,
+  "counts": {
+    "conflict_geometric_vs_register": 1,
+    "historic_administrative_claim_name_match": 80,
+    "ambiguous_same_name_distinct_osm_entities": 2,
+    "unmatched_historical_register": 2
+  },
+  "records": [
+    {
+      "actual_id": "osm-r1216706",
+      "name_ro": "Cremenciug",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Кременчуг",
+        "claimed_parent_osm_id": "1702219",
+        "disposition": "conflict_geometric_vs_register",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": "Registry lists Cremenciug under Tiraspol, while 2026 OSM polygons geometrically place its ACTUAL area in Slobozia."
+    },
+    {
+      "actual_id": "osm-r12215667",
+      "name_ro": "Gîsca",
+      "geometric_parent_osm_id": "944727",
+      "geometric_parent_name": "Bender/Tighina municipal de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Гыска",
+        "claimed_parent_osm_id": "944727",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r12463378",
+      "name_ro": "Proteagailovca",
+      "geometric_parent_osm_id": "944727",
+      "geometric_parent_name": "Bender/Tighina municipal de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Протягайловка",
+        "claimed_parent_osm_id": "944727",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r12463379",
+      "name_ro": "Bender",
+      "geometric_parent_osm_id": "944727",
+      "geometric_parent_name": "Bender/Tighina municipal de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Бендеры",
+        "claimed_parent_osm_id": "944727",
+        "disposition": "ambiguous_same_name_distinct_osm_entities",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": "Two ACTUAL relations named Bender are not proven identical entities or geometry by the 2010 register."
+    },
+    {
+      "actual_id": "osm-r18941889",
+      "name_ro": "Tiraspolul Nou",
+      "geometric_parent_osm_id": "1702219",
+      "geometric_parent_name": "Tiraspol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Ново-Тираспольский",
+        "claimed_parent_osm_id": "1702219",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r18941890",
+      "name_ro": "Tiraspol",
+      "geometric_parent_osm_id": "1702219",
+      "geometric_parent_name": "Tiraspol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Тирасполь",
+        "claimed_parent_osm_id": "1702219",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19001619",
+      "name_ro": "Lunga",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Лунга",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19012105",
+      "name_ro": "Țîbuleuca",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Цыбулевка",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19013328",
+      "name_ro": "Goian",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Гоян",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19013329",
+      "name_ro": "Doibani I",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Дойбаны I",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015106",
+      "name_ro": "Cuzmin",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Кузьмин",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015107",
+      "name_ro": "Hristovaia",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Хрустовая",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015108",
+      "name_ro": "Severinovca",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Севериновка",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015109",
+      "name_ro": "Crasnîi Octeabri",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Красный Октябрь",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015110",
+      "name_ro": "Camenca",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Каменка",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015111",
+      "name_ro": "Podoima",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Подойма",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015112",
+      "name_ro": "Rotari",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Ротар",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015113",
+      "name_ro": "Valea Adîncă",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Валя-Адынке",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015114",
+      "name_ro": "Rașcov",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Рашково",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015115",
+      "name_ro": "Caterinovca",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Катериновка",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015284",
+      "name_ro": "Vadul Turcului",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Вадул-Туркул",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015285",
+      "name_ro": "Beloci",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Белочи",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015286",
+      "name_ro": "Plopi",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": null,
+        "claimed_parent_osm_id": null,
+        "disposition": "unmatched_historical_register",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": "No defensible exact name-to-settlement match in consulted historical register; do not substitute similar locality names."
+    },
+    {
+      "actual_id": "osm-r19015287",
+      "name_ro": "Sovietscoe",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Советское",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19015304",
+      "name_ro": "Stroiești",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Строенцы",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19016165",
+      "name_ro": "Andreevca",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Андреевка",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19016166",
+      "name_ro": "Ulmu",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Ульма",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19016167",
+      "name_ro": "Vărăncău",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Воронково",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r19069840",
+      "name_ro": "Delacău",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Делакеу",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r6879649",
+      "name_ro": "Chițcani",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Кицканы",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7427669",
+      "name_ro": "Vladimirovca",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Владимировка",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7427680",
+      "name_ro": "Frunză",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Фрунзе",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7431238",
+      "name_ro": "Bîcioc",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Бычок",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7431263",
+      "name_ro": "Parcani",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Парканы",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7432661",
+      "name_ro": "Crasnogorca",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Красногорка",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7432662",
+      "name_ro": "Teiu",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Тея",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7432700",
+      "name_ro": "Vinogradnoe",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Виноградное",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7468724",
+      "name_ro": "Blijnii Hutor",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Ближний Хутор",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r7468791",
+      "name_ro": "Sucleia",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Суклея",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8289594",
+      "name_ro": "Caragaș",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Карагаш",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8289727",
+      "name_ro": "Cioburciu",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Чобручи",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8289751",
+      "name_ro": "Slobozia",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Слободзея",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8290840",
+      "name_ro": "Dnestrovsc",
+      "geometric_parent_osm_id": "1702219",
+      "geometric_parent_name": "Tiraspol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Днестровск",
+        "claimed_parent_osm_id": "1702219",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8290877",
+      "name_ro": "Pervomaisc",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Первомайск",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8290934",
+      "name_ro": "Nezavertailovca",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Незавертайловка",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8291057",
+      "name_ro": "Corotna",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Коротное",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8291058",
+      "name_ro": "Hlinaia",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Глиное",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8292878",
+      "name_ro": "Tîrnauca",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Терновка",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8292891",
+      "name_ro": "Mălăiești",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Малаешты",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8292898",
+      "name_ro": "Hrușca",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Грушка",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8292909",
+      "name_ro": "Ocnița",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Окница",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8348605",
+      "name_ro": "Tașlîc",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Ташлык",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8348625",
+      "name_ro": "Butor",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Бутор",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8348646",
+      "name_ro": "Speia",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Спея",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8348909",
+      "name_ro": "Mihailovca",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Михайловка",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8348920",
+      "name_ro": "Harmațca",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Гармацкое",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8349002",
+      "name_ro": "Dubău",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Дубово",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8349059",
+      "name_ro": "Lenin",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Ленино",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8349093",
+      "name_ro": "Butuceni",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Бутучаны",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8349094",
+      "name_ro": "Jura",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Жура",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8349307",
+      "name_ro": "Mocra",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Мокра",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8349338",
+      "name_ro": "Popencu",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Попенки",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8539257",
+      "name_ro": "Maiac",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Маяк",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8539525",
+      "name_ro": "Colosova",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Колосово",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8688504",
+      "name_ro": "Broșteni",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Броштяны",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8710724",
+      "name_ro": "Slobozia-Rașcov",
+      "geometric_parent_osm_id": "1702216",
+      "geometric_parent_name": "Camenca de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Слобода-Рашково",
+        "claimed_parent_osm_id": "1702216",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r8726395",
+      "name_ro": "Șipca",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Шипка",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9288026",
+      "name_ro": "Carmanova",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Карманово",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9288110",
+      "name_ro": "Hîrtop",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Гыртоп",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9288158",
+      "name_ro": "Dzerjinscoe",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Дзержинское",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9288287",
+      "name_ro": "Dubăsari",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Дубоссары",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9288722",
+      "name_ro": "Comisarovca Nouă",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Ново-Комиссаровка",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9288756",
+      "name_ro": "Crasnîi Vinogradari",
+      "geometric_parent_osm_id": "1702215",
+      "geometric_parent_name": "Dubăsari de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Красный Виноградарь",
+        "claimed_parent_osm_id": "1702215",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9294122",
+      "name_ro": "Ghidirim",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Гидирим",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9301463",
+      "name_ro": "Hlinaia",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Глиное",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9301464",
+      "name_ro": "Grigoriopol",
+      "geometric_parent_osm_id": "1702214",
+      "geometric_parent_name": "Grigoriopol de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Григориополь",
+        "claimed_parent_osm_id": "1702214",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9581354",
+      "name_ro": "Bender",
+      "geometric_parent_osm_id": "944727",
+      "geometric_parent_name": "Bender/Tighina municipal de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Бендеры",
+        "claimed_parent_osm_id": "944727",
+        "disposition": "ambiguous_same_name_distinct_osm_entities",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": "Two ACTUAL relations named Bender are not proven identical entities or geometry by the 2010 register."
+    },
+    {
+      "actual_id": "osm-r9656324",
+      "name_ro": "Haraba",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Гараба",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9656364",
+      "name_ro": "Crasnencoe",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Красненькое",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9656413",
+      "name_ro": "Molochișul Mare",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Большой Молокиш",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9659709",
+      "name_ro": "Cobasna",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Колбасна",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9659794",
+      "name_ro": "Hîrjău",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Ержово",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9659979",
+      "name_ro": "Rîbnița",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Рыбница",
+        "claimed_parent_osm_id": "1702217",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    },
+    {
+      "actual_id": "osm-r9660049",
+      "name_ro": "Ofatinți",
+      "geometric_parent_osm_id": "1702217",
+      "geometric_parent_name": "Rîbnița de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": null,
+        "claimed_parent_osm_id": null,
+        "disposition": "unmatched_historical_register",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": "No defensible exact name-to-settlement match in consulted historical register; do not substitute similar locality names."
+    },
+    {
+      "actual_id": "osm-r9679382",
+      "name_ro": "Crasnoe",
+      "geometric_parent_osm_id": "1702218",
+      "geometric_parent_name": "Slobozia de facto",
+      "historical_de_facto_register": {
+        "reviewed": true,
+        "version": "2010-09-30 historical edition",
+        "mapped_name_ru": "Красное",
+        "claimed_parent_osm_id": "1702218",
+        "disposition": "historic_administrative_claim_name_match",
+        "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA="
+      },
+      "current_administration_evidence": "NOT_ESTABLISHED_FOR_EXACT_POLYGON_2026",
+      "de_facto_membership_2026": "NOT_CERTIFIED",
+      "legal_md_parent_unchanged": true,
+      "master_geometry_unchanged": true,
+      "allow_import": false,
+      "note": null
+    }
+  ]
+}

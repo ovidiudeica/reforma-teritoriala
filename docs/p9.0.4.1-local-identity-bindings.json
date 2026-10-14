@@ -1,0 +1,95 @@
+{
+  "schema_version": "p9041-four-locality-bindings-v1",
+  "review_as_of": "2026-10-13",
+  "cuatm_source_file": "data/sources/cuatm-current.json",
+  "cuatm_official_workbook": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+  "cuatm_record_count_expected": 1721,
+  "sources": [
+    {
+      "authority": "Moldova National Bureau of Statistics",
+      "url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+      "scope": "CUATM legal identity/codes"
+    },
+    {
+      "authority": "Moldova Public Services Agency",
+      "url": "https://www.asp.gov.md/ro/servicii/persoane-juridice/inregistrare-afacere/217",
+      "scope": "Roghi/Mahala/Pohrebea/Vasilievca commune subordination"
+    },
+    {
+      "authority": "Moldova National Office of Social Insurance",
+      "url": "https://cnas.gov.md/ro/servicii/servicii/alocatii/alocatie-lunara-de-stat-pentru-protectia-sociala-suplimentara-unor",
+      "scope": "Locality names and Moldova state service links"
+    },
+    {
+      "authority": "OpenStreetMap historical wiki",
+      "url": "https://wiki.openstreetmap.org/wiki/WikiProject_Moldova/organizarea_administrativ-teritorial%C4%83",
+      "scope": "OSM boundary inventory names only, not current OSM geometry"
+    }
+  ],
+  "records": [
+    {
+      "locality": "Roghi",
+      "cuatm_code": "3840",
+      "statistical_code": "3817001",
+      "cuatm_parent_code": "3839",
+      "official_parent": "Molovata Nouă",
+      "md_parent_actual_id": "osm-r19008287",
+      "actual_polygon_id": null,
+      "identity_status": "CUATM_LEGAL_IDENTITY_CONFIRMED__NO_ACTUAL_POLYGON",
+      "geometry_status": "MISSING_POSITIVE_OSM_RELATION_BINDING",
+      "de_facto_territorial_control": "DISPUTED_NOT_SETTLED_BY_THIS_AUDIT",
+      "proposed_action": "retain legal locality identity; do not fabricate polygon"
+    },
+    {
+      "locality": "Mahala",
+      "cuatm_code": "3817",
+      "statistical_code": "3811001",
+      "cuatm_parent_code": "3816",
+      "official_parent": "Corjova",
+      "md_parent_actual_id": "osm-r19001620",
+      "actual_polygon_id": null,
+      "identity_status": "CUATM_LEGAL_IDENTITY_CONFIRMED__NO_ACTUAL_POLYGON",
+      "geometry_status": "MISSING_POSITIVE_OSM_RELATION_BINDING",
+      "de_facto_territorial_control": "MIXED_OR_NEIGHBORHOOD_SPECIFIC",
+      "proposed_action": "retain legal locality identity; do not equate Corjova neighborhood with village polygon"
+    },
+    {
+      "locality": "Pohrebea",
+      "cuatm_code": "3819",
+      "statistical_code": "3812001",
+      "cuatm_parent_code": "3818",
+      "official_parent": "Coșnița",
+      "md_parent_actual_id": "osm-r19013515",
+      "actual_polygon_id": "osm-r18968121",
+      "identity_status": "CUATM_PLUS_ACTUAL_POLYGON_IDENTITY_CONFIRMED",
+      "geometry_status": "EXISTING_ACTUAL_MASTER_REUSE_NO_COPY",
+      "de_facto_territorial_control": "NOT_CERTIFIED_AT_POLYGON_SCALE",
+      "proposed_action": "retain existing ACTUAL geometry and parent; no new geometry; not in 153 P9.0.2 geometrically related IDs"
+    },
+    {
+      "locality": "Vasilievca",
+      "cuatm_code": "3811",
+      "statistical_code": "3810001",
+      "cuatm_parent_code": "3810",
+      "official_parent": "Cocieri",
+      "md_parent_actual_id": "osm-r19008286",
+      "actual_polygon_id": null,
+      "identity_status": "CUATM_LEGAL_IDENTITY_CONFIRMED__HOMONYM_DISAMBIGUATED",
+      "geometry_status": "MISSING_POSITIVE_OSM_RELATION_BINDING",
+      "de_facto_territorial_control": "NOT_CERTIFIED_AT_POLYGON_SCALE",
+      "explicitly_excluded_homonym": {
+        "cuatm_code": "6945",
+        "cuatm_parent_code": "6944",
+        "statistical_code": "9865001",
+        "parent": "Sovietscoe"
+      },
+      "proposed_action": "reserve 3811 uniquely for Cocieri component; reject similarly named Sovietscoe component; do not fabricate geometry"
+    }
+  ],
+  "policy": {
+    "legal_identity_is_not_polygon": true,
+    "source_claim_is_not_effective_control": true,
+    "new_geometry_count": 0,
+    "allow_p91_import": false
+  }
+}

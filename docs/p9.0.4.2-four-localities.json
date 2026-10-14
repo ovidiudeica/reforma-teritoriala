@@ -1,0 +1,74 @@
+{
+  "schema_version": "p9042-locality-conflict-resolution-v1",
+  "date_of_review": "2026-10-13",
+  "cases": [
+    {
+      "name": "Roghi",
+      "legal_cuatm": "3840",
+      "legal_parent": "Molovata Nouă",
+      "actual_polygon_id": null,
+      "legal_identity": "confirmed",
+      "polygon_identity": "no_positive_relation",
+      "contemporary_disputed_roles": "2025 de facto Rîbnița utilities-style registry includes Роги under Dubăsari; Moldova services include Gimnaziul Roghi in Dubăsari police jurisdiction",
+      "source_ids": [
+        "moldovan_ASP_localities",
+        "moldovan_public_services_2026",
+        "de_facto_Ribnita_2025"
+      ],
+      "decision": "retain_MD_legal_identity; record competing locality service/council claim without transfer; no polygon invention",
+      "current_polygon_control": "unverified"
+    },
+    {
+      "name": "Mahala",
+      "legal_cuatm": "3817",
+      "legal_parent": "Corjova",
+      "actual_polygon_id": null,
+      "legal_identity": "confirmed",
+      "polygon_identity": "no_positive_relation",
+      "contemporary_disputed_roles": "De facto 2025 service notices refer to Magala/Магала as Dubăsari urban neighborhood; MD legally village in Corjova commune. Toponym role is not polygon equality.",
+      "source_ids": [
+        "moldovan_ASP_localities",
+        "moldovan_public_services_2026"
+      ],
+      "decision": "retain_MD_Corjova_component; do not equate neighborhood name with polygon",
+      "current_polygon_control": "unverified"
+    },
+    {
+      "name": "Pohrebea",
+      "legal_cuatm": "3819",
+      "legal_parent": "Coșnița",
+      "actual_polygon_id": "osm-r18968121",
+      "legal_identity": "confirmed",
+      "polygon_identity": "existing_ACTUAL_reuse",
+      "contemporary_disputed_roles": "2025 service registry also references Новая Погребя in Dubăsari; do not identify with legal Pohrebea by similarity alone.",
+      "source_ids": [
+        "moldovan_ASP_localities"
+      ],
+      "decision": "reuse_existing_ACTUAL_master; no new polygon; reject unsupported name alias",
+      "current_polygon_control": "unverified"
+    },
+    {
+      "name": "Vasilievca",
+      "legal_cuatm": "3811",
+      "legal_parent": "Cocieri",
+      "actual_polygon_id": null,
+      "legal_identity": "confirmed",
+      "polygon_identity": "no_positive_relation",
+      "contemporary_disputed_roles": "Homonym Vasilievca code 6945 belongs under Sovietscoe, not Cocieri; no evidence makes them one polygon.",
+      "source_ids": [
+        "moldovan_ASP_localities",
+        "moldovan_CUATM"
+      ],
+      "decision": "preserve_Cocieri_3811; exclude_Sovietscoe_6945; no polygon invention",
+      "current_polygon_control": "unverified"
+    }
+  ],
+  "overlay_contract": {
+    "member_identity_type": "legal_MD_or_administrative_claim_only",
+    "create_new_geometry": false,
+    "change_legal_hierarchy": false,
+    "replace_existing_master": false,
+    "administrative_relation_is_not_spatial_contains": true,
+    "accepted_import": false
+  }
+}

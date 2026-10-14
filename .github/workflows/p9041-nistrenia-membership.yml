@@ -1,0 +1,44 @@
+name: P9.0.4.1 Nistrenia individual membership review (audit-only)
+on:
+  pull_request:
+    branches: [audit/p9.0.4-nistrenia-semantic-reconciliation]
+    paths:
+      - 'docs/p9.0.4.1-*'
+      - 'scripts/audit/p9041-nistrenia-membership.mjs'
+      - '.github/workflows/p9041-nistrenia-membership.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  membership-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify 85-case historical registration and CUATM contracts
+        run: node scripts/audit/p9041-nistrenia-membership.mjs --self-test
+      - name: Validate every identity and all 123 immutable ACTUAL geometry resources
+        run: node scripts/audit/p9041-nistrenia-membership.mjs
+      - name: Gate — no de facto membership promotion, no P9.1 import
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const s=JSON.parse(fs.readFileSync("outputs/P9.0.4.1/summary.json","utf8"));
+          if(s.review_result!=="PASS_WITH_EXPLICIT_UNRESOLVED_CASES"||
+             s.p91_import_allowed!==false||s.semantic_promotion_ready!==false||
+             s.current_de_facto_membership_certified!==0||
+             s.master_geometries_created!==0||s.legal_parent_changes!==0||
+             s.reviewed_geometric_candidates!==85||s.four_cuatm_identities_confirmed!==4||
+             s.actual_geometry_sha256_verified!==123)process.exit(2);
+          console.log("P9041_AUDIT_GATE PASS; P9.1 promotion DENIED");
+          '
+      - name: Preserve exact per-relation findings, locality bindings and blockers
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p9041-nistrenia-individual-evidence
+          if-no-files-found: warn
+          path: outputs/P9.0.4.1/

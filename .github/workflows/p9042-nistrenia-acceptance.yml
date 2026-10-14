@@ -1,0 +1,47 @@
+name: P9.0.4.2 Nistrenia contemporary evidence and final semantic acceptance (audit-only)
+on:
+  pull_request:
+    branches: [audit/p9.0.4.1-nistrenia-individual-membership]
+    paths:
+      - 'docs/p9.0.4.2-*'
+      - 'scripts/audit/p9042-nistrenia-acceptance.mjs'
+      - '.github/workflows/p9042-nistrenia-acceptance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  semantic-acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify P9.0.4.1 baseline and all existing ACTUAL masters
+        run: node scripts/audit/p9041-nistrenia-membership.mjs --self-test
+      - name: Verify all 85 contemporary reviews and four locality case contracts
+        run: node scripts/audit/p9042-nistrenia-acceptance.mjs --self-test
+      - name: Produce acceptance report and verify 123/123 ACTUAL geometry hashes
+        run: node scripts/audit/p9042-nistrenia-acceptance.mjs
+      - name: Reject premature P9.1 promotion even when semantic audit passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const a=JSON.parse(fs.readFileSync("outputs/P9.0.4.2/acceptance.json","utf8"));
+          if(a.audit_result!=="PASS"||a.final_semantic_acceptance!=="BLOCKED_INCOMPLETE"||
+            a.p91_import_allowed!==false||a.production_promotion_gate_integrated!==false||
+            a.total_candidate_ids!==85||a.actual_geometry_master_sha256_verified!==123||
+            a.fully_certified_de_facto_membership_as_of_2026!==0||
+            a.copies_created!==0||a.legal_parents_modified!==0)process.exit(2);
+          console.log("P9042_AUDIT_PASS; FINAL_SEMANTIC_ACCEPTANCE_BLOCKED; P9.1_IMPORT_DENIED");
+          '
+      - name: Upload all evidence, case review and remaining constraints
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p9042-nistrenia-semantic-acceptance-evidence
+          if-no-files-found: warn
+          path: outputs/P9.0.4.2/
