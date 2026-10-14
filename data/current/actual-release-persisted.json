@@ -2,12 +2,12 @@
   "schema_version": 1,
   "snapshot_id": "actual-a9e5a4ddcb5277ef",
   "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
-  "manifest_sha256": "9de10253d7f0543cc0f92f91bc25f6377e4951d248bcf9cbf93f0ddeb3ce8c1b",
+  "manifest_sha256": "52ae583f284bac2d00bc3b5e4b96b6c429c659b8def297197d7f3f38dc042856",
   "source_bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
   "host_trust_fingerprint_sha256": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
-  "build_environment_fingerprint_sha256": "5594181bd944bcd3167424ef17c8d91b64295973be641800a041d8b3943d01a7",
+  "build_environment_fingerprint_sha256": "de8841a7ea8a6249c5b9f036b25a839bd1246c37c0fb8c71b614151b9fa5eb19",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
     "base_snapshot_id": "actual-6a7eac47d66d6701",
@@ -21,10 +21,9 @@
   },
   "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.",
   "provenance_hardening": {
-    "previous_manifest_sha256": "242099b55683c56358cd36e318008f3def61c76b1a7a23c226c8513f8f20cb7b",
-    "change_type": "P9.0.5_runner_host_trust_explicit_refresh",
-    "host_profile_id": "github-ubuntu24-20261012.334.1",
-    "method": "provenance_only_no_semantic_change",
+    "previous_manifest_sha256": "9de10253d7f0543cc0f92f91bc25f6377e4951d248bcf9cbf93f0ddeb3ce8c1b",
+    "change_type": "P9.0.4.3_promotion_workflow_enforcement_rebind_only",
+    "method": "evidence_only_manual_review_required",
     "semantic_identity_unchanged": true
   }
 }

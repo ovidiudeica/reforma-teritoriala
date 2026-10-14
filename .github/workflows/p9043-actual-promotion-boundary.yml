@@ -1,0 +1,79 @@
+name: P9.0.4.3 ACTUAL production promotion boundary (audit-only)
+on:
+  pull_request:
+    branches: [audit/p9.0.4.2-nistrenia-current-semantic-acceptance]
+    paths:
+      - 'docs/p9.0.4.3-*'
+      - 'scripts/lib/actual-p9-jurisdiction-promotion-gate.mjs'
+      - 'scripts/process/audit-actual-p9-jurisdiction-promotion.mjs'
+      - 'scripts/process/run-actual-deterministic-candidate.sh'
+      - 'scripts/process/prepare-actual-candidate-promotion.mjs'
+      - 'scripts/test/actual-p9-jurisdiction-gate.test.mjs'
+      - '.github/workflows/actual-promote-candidate.yml'
+      - '.github/workflows/actual-release-trust-chain-gate.yml'
+      - '.github/workflows/p9043-actual-promotion-boundary.yml'
+      - 'package.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-p9-enforcement:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Test negative P9 bypasses and positive unrelated ACTUAL refresh
+        run: node --test scripts/test/actual-p9-jurisdiction-gate.test.mjs
+      - name: Regression suite — ACTUAL workflow write permissions and branch boundaries
+        run: node --test scripts/test/workflow-write-boundaries.test.mjs
+      - name: Read-only baseline test of mandatory production gate on all ACTUAL published identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/process/audit-actual-p9-jurisdiction-promotion.mjs --base=HEAD --mode=working
+      - name: Audit actual P9.0.4.2 evidence, retain import denial and verify all 123 masters
+        run: |
+          node scripts/audit/p9042-nistrenia-acceptance.mjs --self-test
+          node scripts/audit/p9042-nistrenia-acceptance.mjs
+      - name: Ensure all three promotion boundaries execute P9 gate before release writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          builder=Path('scripts/process/run-actual-deterministic-candidate.sh').read_text()
+          prepare=Path('scripts/process/prepare-actual-candidate-promotion.mjs').read_text()
+          workflow=Path('.github/workflows/actual-promote-candidate.yml').read_text()
+          trust=Path('.github/workflows/actual-release-trust-chain-gate.yml').read_text()
+          gate='audit-actual-p9-jurisdiction-promotion.mjs'
+          assert builder.count(gate)==1 and builder.index(gate)>builder.index('build:actual-candidate-diff')
+          assert prepare.count(gate)==1 and prepare.index(gate)<prepare.index("writeFile('data/current/actual-candidate-promotion-audit.json'")
+          assert workflow.count(gate)==1 and workflow.index(gate)<workflow.index('Commit promotion marker on candidate branch')
+          assert trust.count(gate)==1 and trust.index(gate)<trust.index('Validate PR publication path')
+          print('P9043_PROMOTION_BOUNDARIES PASS')
+          PY
+      - name: Emit fail-closed P9.1 decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const p=JSON.parse(fs.readFileSync("docs/p9.0.4.3-promotion-policy.json","utf8"));
+          const a=JSON.parse(fs.readFileSync("outputs/P9.0.4.2/acceptance.json","utf8"));
+          if(p.p91_import_allowed!==false||p.semantic_acceptance!=="BLOCKED_INCOMPLETE"||
+             a.final_semantic_acceptance!=="BLOCKED_INCOMPLETE"||a.total_candidate_ids!==85||
+             a.fully_certified_de_facto_membership_as_of_2026!==0)process.exit(2);
+          console.log("P9043_AUDIT_PASS; PROMOTION_GATE_ENFORCED_IN_CODE; P9.1_BLOCKED");
+          '
+      - name: Upload reproducible acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p9043-nistrenia-promotion-evidence
+          if-no-files-found: warn
+          path: outputs/P9.0.4.2/

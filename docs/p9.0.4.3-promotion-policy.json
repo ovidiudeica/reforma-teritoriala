@@ -1,0 +1,22 @@
+{
+  "schema_version": "actual-p9-jurisdiction-promotion-policy-v1",
+  "project": "Reforma admin / ACTUAL",
+  "policy_scope": "Nistrenia de facto overlay and new cross-jurisdiction administrative semantic roles",
+  "status": "BLOCKED_PENDING_CONTEMPORARY_EVIDENCE",
+  "p91_import_allowed": false,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "source_reconciliation": "docs/p9.0.4.2-nistrenia-findings.md",
+  "source_decisions": "docs/p9.0.4.2-individual-review.json",
+  "source_workflow_run_id": 38481130250,
+  "candidate_count": 85,
+  "fully_certified_contemporary_memberships": 0,
+  "require_non_geometric_parent_evidence": true,
+  "require_role_disambiguation": true,
+  "require_exact_osm_snapshot_alignment": true,
+  "require_immutable_geometry_reuse": true,
+  "require_explicit_production_gate": true,
+  "approval_mechanism": "separate reviewed policy/validator change after positive per-identity documentary evidence, provenance and P9.1 tests; policy flag cannot be flipped by a generated ACTUAL candidate",
+  "never_modify_md_legal_parent_from_de_facto": true,
+  "protected_baseline": "HEAD of current main; candidate must not change executable gate or policy file under isolated candidate write boundary",
+  "reasoning": "P9.0.4.2 audit passes, but 80/85 only have historic parent records, current full polygon control is unproven, and OSM 2026-10-12 vs live version alignment not proven."
+}

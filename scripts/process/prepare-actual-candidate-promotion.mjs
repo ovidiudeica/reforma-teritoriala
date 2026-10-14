@@ -14,6 +14,10 @@ if(!CANDIDATE_COMMIT_SHA||!/^[0-9a-f]{40}$/.test(CANDIDATE_COMMIT_SHA))throw new
 const resolvedCandidateCommit=execFileSync('git',['rev-parse','HEAD^{commit}'],{encoding:'utf8'}).trim();
 if(resolvedCandidateCommit!==CANDIDATE_COMMIT_SHA)throw new Error('Current checkout does not match ACTUAL_CANDIDATE_COMMIT_SHA.');
 const CONFIRM=process.env.CONFIRM_PROMOTION;
+// Defense in depth: direct CLI preparation must obey the same P9 gate as workflow promotion.
+// The candidate is an exact child of current main; executable scripts cannot be candidate-edited.
+execFileSync(process.execPath,['scripts/process/audit-actual-p9-jurisdiction-promotion.mjs',
+ '--base='+BASE_REF,'--head=HEAD','--mode=commit'],{stdio:'inherit',maxBuffer:256*1024*1024});
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const gitBuffer=path=>execFileSync('git',['show',BASE_REF+':'+path],{maxBuffer:256*1024*1024});
 const gitJson=path=>JSON.parse(gitBuffer(path).toString('utf8'));

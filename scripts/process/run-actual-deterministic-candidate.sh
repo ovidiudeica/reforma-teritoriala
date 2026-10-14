@@ -57,3 +57,7 @@ npm run stabilize:actual-bytes
 npm run build:actual-release-manifest
 npm run audit:actual-release-gate
 npm run build:actual-candidate-diff
+
+# Reject unapproved P9 jurisdiction semantics before any isolated candidate branch can be promoted.
+# Uses the exact persisted base and the current generated working tree; no writes/network.
+node scripts/process/audit-actual-p9-jurisdiction-promotion.mjs --base="$ACTUAL_BASE_REF" --mode=working

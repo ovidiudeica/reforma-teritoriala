@@ -1,0 +1,50 @@
+name: P9.0.4.3 provenance-only rebind preparation (evidence, no push)
+on:
+  pull_request:
+    branches: [audit/p9.0.4.2-nistrenia-current-semantic-acceptance]
+    paths:
+      - '.github/workflows/actual-promote-candidate.yml'
+      - '.github/workflows/actual-release-trust-chain-gate.yml'
+      - 'scripts/process/run-actual-deterministic-candidate.sh'
+      - 'scripts/process/prepare-actual-candidate-promotion.mjs'
+      - 'scripts/process/prepare-p9043-provenance-evidence.mjs'
+      - 'package.json'
+      - '.github/workflows/p9043-provenance-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare-provenance-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Rebuild pinned environment from current workflow/package/support bytes
+        run: node scripts/process/build-actual-build-environment-manifest.mjs
+      - name: Rebuild environment gate
+        run: node scripts/process/audit-actual-build-environment-gate.mjs
+      - name: Rebind release manifest to same semantic snapshot and unchanged masters
+        run: node scripts/process/build-actual-release-manifest.mjs
+      - name: Rebuild ACTUAL release gate against new provenance
+        run: node scripts/process/audit-actual-release-gate.mjs
+      - name: Prepare provenance-only marker with invariant proof
+        run: node scripts/process/prepare-p9043-provenance-evidence.mjs
+      - name: Verify persisted marker matches re-bound release
+        run: node scripts/process/verify-actual-persisted-base.mjs
+      - name: Upload provenance-only files for explicit isolated-branch review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p9043-provenance-only-proposal
+          if-no-files-found: warn
+          path: |
+            data/current/actual-build-environment-manifest.json
+            data/current/actual-build-environment-gate.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-gate.json
+            data/current/actual-release-persisted.json
