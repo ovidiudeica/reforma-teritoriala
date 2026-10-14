@@ -17,5 +17,5 @@ export function createGeometricClient({feature,pairRelation,Worker:WorkerClass=g
   })();});
   tail=promise.catch(()=>{});pending.set(key,{promise,abort});try{return await promise;}finally{if(pending.get(key)?.promise===promise)pending.delete(key);}
  }
- return {metrics:id=>run('metrics',[id]),compare:(a,b)=>run('compare',[a,b]),cancel,get cacheSize(){return cache.size;}};
+ return {metrics:id=>run('metrics',[id]),peekMetrics:id=>cache.get('metrics|'+id)||null,compare:(a,b)=>run('compare',[a,b]),cancel,get cacheSize(){return cache.size;}};
 }
