@@ -1,0 +1,39 @@
+name: P9.0.4 Nistrenia semantic reconciliation (audit-only)
+on:
+  pull_request:
+    branches: [audit/p9.0.3-nistrenia-osm-exceptions]
+    paths:
+      - 'docs/p9.0.4-*'
+      - 'scripts/audit/p904-nistrenia-semantic.mjs'
+      - '.github/workflows/p904-nistrenia-semantic.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  semantic-matrix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify source-frozen semantic baseline and hard safety invariants
+        run: node scripts/audit/p904-nistrenia-semantic.mjs --self-test
+      - name: Generate 153-row semantic matrix with explicit no-import gate
+        run: node scripts/audit/p904-nistrenia-semantic.mjs
+      - name: Enforce no-P9.1 promotion even when audit is PASS
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const x=JSON.parse(fs.readFileSync("outputs/P9.0.4/summary.json","utf8"));
+          if(x.audit_status!=="PASS"||x.p91_import_allowed!==false||x.semantic_promote_ready!==false||x.legal_parent_changes!==0||x.geometries_copied!==0)process.exit(2);
+          console.log("P904_READ_ONLY_GATE PASS; P9.1 import remains BLOCKED");
+          '
+      - name: Preserve all case-level proof and unresolved membership for review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p904-semantic-matrix-review
+          if-no-files-found: warn
+          path: outputs/P9.0.4/

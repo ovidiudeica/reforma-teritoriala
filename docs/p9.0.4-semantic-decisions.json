@@ -1,0 +1,469 @@
+{
+  "schema_version": "p904-semantic-decisions-v1",
+  "review_as_of": "2026-10-13",
+  "jurisdiction": {
+    "id": "nistrenia-de-facto",
+    "name_ro": "Nistrenia (Republica Moldovenească Nistreană)",
+    "legal_sovereignty": "Republica Moldova",
+    "de_facto_administrative_layer": true,
+    "recognized_sovereign_state": false,
+    "official_md_relation": "2607033",
+    "osm_de_facto_relation": "65335",
+    "separate_geometric_objects": true,
+    "prohibit_cross_layer_parent_rewrite": true
+  },
+  "de_facto_top_level_osm_ids": [
+    "944727",
+    "1702214",
+    "1702215",
+    "1702216",
+    "1702217",
+    "1702218",
+    "1702219"
+  ],
+  "immutable_reuse_subarea_osm_ids": [
+    "1216706",
+    "8289751",
+    "9301464",
+    "9659979",
+    "12215667",
+    "12463378",
+    "12463379"
+  ],
+  "sources": {
+    "md_terminology": {
+      "url": "https://www.gov.md/index.php/en/useful-information",
+      "publisher": "Government of the Republic of Moldova",
+      "evidence": "Terminology for left-bank administrative units and Bender: status must not imply sovereignty.",
+      "period": "current_site"
+    },
+    "osce_mandate": {
+      "url": "https://moldova.osce.org/mission-to-moldova/mandate",
+      "publisher": "OSCE Mission to Moldova",
+      "evidence": "Territorial integrity of Moldova and mandate for conflict settlement.",
+      "period": "current_site"
+    },
+    "osce_varnita": {
+      "url": "https://moldova.osce.org/mission-to-moldova/410564",
+      "publisher": "OSCE Mission to Moldova",
+      "evidence": "Varnița administered by Moldovan local authorities confirmed in the June 2015 elections; historical evidence, not 2026 certification.",
+      "period": "2019-01-31"
+    },
+    "gov_security_zone_2025": {
+      "url": "https://www.gov.md/ro/comunicate-de-presa-bpr/intalnirea-conducerii-de-varf-republicii-moldova-cu-reprezentanti-ai",
+      "publisher": "Government of Moldova",
+      "evidence": "Moldovan local authorities in Varnița and settlements in the security zone; infrastructure planned for Coșnița, Cocieri, Corjova, Doroțcaia, Molovata Nouă, Roghi and others.",
+      "period": "2025-01-09"
+    },
+    "gov_elections_2025": {
+      "url": "https://gov.md/index.php/ro/comunicate-de-presa-bpr/12-sectii-de-votare-vor-fi-deschise-pentru-regiunea-transnistreana-la",
+      "publisher": "Government of Moldova",
+      "evidence": "2025: left-bank localities, Bender, Chițcani, Cremenciug, Gîsca are described as temporarily outside constitutional control; polling at Varnița, Cocieri, Doroțcaia, Hagimus, Copanca.",
+      "period": "2025-08-26"
+    },
+    "gov_dubasari_2026": {
+      "url": "https://gov.md/ro/comunicate-de-presa-bpr/aprovizionarea-localitatilor-din-raionul-dubasari-cu-produse-alimentare-si",
+      "publisher": "Government of Moldova",
+      "evidence": "2026 meetings with mayors of Cocieri and Molovata Nouă; confirms active Moldovan local authorities.",
+      "period": "2026-01-21"
+    },
+    "gov_cocieri_2026": {
+      "url": "https://gov.md/ro/comunicate-de-presa-bpr/vizita-de-lucru-secretarului-de-stat-al-guvernului-pentru-reintegrare-0",
+      "publisher": "Government of Moldova",
+      "evidence": "2026 consultation with local authorities at Corjova, Cocieri and Molovata Nouă.",
+      "period": "2026-07-17"
+    },
+    "gov_dubasari_2025": {
+      "url": "https://gov.md/ro/comunicate-de-presa-bpr/vicepremierul-pentru-reintegrare-roman-rosca-dialog-cu-reprezentantii",
+      "publisher": "Government of Moldova",
+      "evidence": "Consultations about Corjova, Coșnița, Doroțcaia and Molovata Nouă services and local-government transport.",
+      "period": "2025-08-14"
+    },
+    "asp_dubasari": {
+      "url": "https://www.asp.gov.md/ro/servicii/persoane-juridice/inregistrare-afacere/217",
+      "publisher": "Public Services Agency of Moldova",
+      "evidence": "Legal units of Dubăsari: Cocieri/Vasilievca, Corjova/Mahala, Coșnița/Pohrebea, Molovata Nouă/Roghi, Doroțcaia and Pîrîta.",
+      "period": "current_site"
+    },
+    "gov_corjova_2020": {
+      "url": "https://old.gov.md/ro/content/reprezentantii-comisiei-unificate-de-control-si-biroului-politici-de-reintegrare-au?month=2027-01",
+      "publisher": "Government of Moldova",
+      "evidence": "Moldovan local council in Corjova and Mahala; restricted movement and nearby Dubăsari under de facto structures (historic 2020 evidence).",
+      "period": "2020-07-15"
+    },
+    "gov_services": {
+      "url": "https://gov.md/ro/acces-la-servicii-publice-pentru-locuitorii-din-regiunea-transnistreana",
+      "publisher": "Government of Moldova",
+      "evidence": "Moldovan public services and security jurisdiction around Cocieri, Corjova, Roghi and Varnița; service presence is not proof of control over an entire polygon.",
+      "period": "current_site"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "BENDER-LEGAL",
+      "title": "Bender/Tighina — official municipality vs de facto city",
+      "actual_id": "osm-r12463379",
+      "constitutional_control": "outside_constitutional_control_reported",
+      "de_facto_link": "osm_de_facto_parent_candidate",
+      "reason": "Bender municipality in Moldovan legal nomenclature is not the same object as the de facto urban/municipal administrative relation; do not replace legal MD hierarchy.",
+      "source_ids": [
+        "gov_elections_2025",
+        "md_terminology"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "BENDER-CITY-ALIAS",
+      "title": "Bender city locality, distinct same-name geometry",
+      "actual_id": "osm-r9581354",
+      "constitutional_control": "outside_constitutional_control_reported",
+      "de_facto_link": "osm_de_facto_parent_candidate",
+      "reason": "Same name as osm-r12463379 but different OSM identifiers; alias/geometry identity is NOT certified.",
+      "source_ids": [
+        "gov_elections_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "BENDER-PROTEAGAILOVCA",
+      "title": "Proteagailovca; municipal-vs-village scope",
+      "actual_id": "osm-r12463378",
+      "constitutional_control": "not_established_for_exact_polygon",
+      "de_facto_link": "osm_de_facto_parent_candidate",
+      "reason": "Existing OSM subarea and 7-way reuse; municipal boundary and village status require separate identity verification.",
+      "source_ids": [
+        "md_terminology",
+        "gov_services"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "BENDER-GISCA",
+      "title": "Gîsca, Căușeni de jure vs Bender geometric parent",
+      "actual_id": "osm-r12215667",
+      "constitutional_control": "outside_constitutional_control_reported",
+      "de_facto_link": "osm_de_facto_parent_candidate",
+      "reason": "Geometric candidate Bender does not amend Moldovan legal Căușeni membership.",
+      "source_ids": [
+        "gov_elections_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "SL-CREMENCIUG",
+      "title": "Cremenciug, Căușeni legal locality",
+      "actual_id": "osm-r1216706",
+      "constitutional_control": "outside_constitutional_control_reported",
+      "de_facto_link": "osm_de_facto_parent_candidate",
+      "reason": "Geometric candidate Slobozia; retain legal Căușeni classification.",
+      "source_ids": [
+        "gov_elections_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "SL-CHITCANI",
+      "title": "Chițcani, separate legal and de facto representations",
+      "actual_id": "osm-r6879649",
+      "constitutional_control": "outside_constitutional_control_reported",
+      "de_facto_link": "osm_de_facto_parent_candidate",
+      "reason": "P9.0.2 contained in Slobozia; historic ACTUAL identity role chitcani_de_facto_administrative_representation must not be overwritten.",
+      "source_ids": [
+        "gov_elections_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "SL-COPANCA",
+      "title": "Copanca, no full containment",
+      "actual_id": "osm-r1216705",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "boundary_not_parent",
+      "reason": "Boundary touching alone cannot establish de facto affiliation; government 2025 provides services in Copanca.",
+      "source_ids": [
+        "gov_security_zone_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "BENDER-VARNITA-1",
+      "title": "Varnița, MD Anenii Noi (first geometry)",
+      "actual_id": "osm-r8289510",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "OSCE attested local Moldovan administration in 2019; 2025 government local-authority meeting. Do not import as Bender subarea.",
+      "source_ids": [
+        "osce_varnita",
+        "gov_security_zone_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "BENDER-VARNITA-2",
+      "title": "Varnița, MD Anenii Noi (second geometry)",
+      "actual_id": "osm-r18967950",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Same locality name, distinct existing polygons: do not collapse or infer identity equivalence from names.",
+      "source_ids": [
+        "osce_varnita",
+        "gov_security_zone_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "BENDER-HAGIMUS",
+      "title": "Hagimus, Căușeni, boundary overlap",
+      "actual_id": "osm-r18967253",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Moldovan security-zone support and polling site, but overlapping boundary is not a parent assignment.",
+      "source_ids": [
+        "gov_security_zone_2025",
+        "gov_elections_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-LEGAL",
+      "title": "Dubăsari Moldovan rayon",
+      "actual_id": "osm-r1692123",
+      "constitutional_control": "not_established_for_exact_polygon",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Official Dubăsari rayon and de facto rayon/urban administration are distinct. Partial overlap must be preserved.",
+      "source_ids": [
+        "asp_dubasari"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-CITY",
+      "title": "Dubăsari city, geometric candidate",
+      "actual_id": "osm-r9288287",
+      "constitutional_control": "not_established_for_exact_polygon",
+      "de_facto_link": "osm_de_facto_parent_candidate",
+      "reason": "Name Dubăsari does not create an alias with Moldovan rayon or de facto raion relation 1702215; needs source-level identity review.",
+      "source_ids": [
+        "gov_corjova_2020"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-COCIERI",
+      "title": "Cocieri on left bank",
+      "actual_id": "osm-r19008286",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "The 2026 government met Cocieri mayor; polygon overlap with de facto claim is not a change of actual administration.",
+      "source_ids": [
+        "gov_dubasari_2026",
+        "gov_cocieri_2026"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-COȘNIȚA",
+      "title": "Coșnița on left bank",
+      "actual_id": "osm-r19013515",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Moldovan rayon/local services with security-zone restrictions; no automatic de facto membership.",
+      "source_ids": [
+        "gov_dubasari_2025",
+        "asp_dubasari"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-MOLOVATA-NOUA",
+      "title": "Molovata Nouă, plateau Cocieri",
+      "actual_id": "osm-r19008287",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Moldovan mayor and services confirmed 2026; Roghi must be separately reviewed.",
+      "source_ids": [
+        "gov_dubasari_2026",
+        "asp_dubasari"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-CORJOVA",
+      "title": "Corjova, commune not identical to Dubăsari city",
+      "actual_id": "osm-r19001620",
+      "constitutional_control": "mixed_or_locality_specific",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Moldovan local authorities evidenced, but 2020 movement restrictions and proximity to de facto city mean blanket polygon-control attribution is unsafe.",
+      "source_ids": [
+        "gov_corjova_2020",
+        "gov_cocieri_2026"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-DOROTCAIA-1",
+      "title": "Doroțcaia duplicate-name geometry A",
+      "actual_id": "osm-r19013513",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Moldovan local administration/service evidence; two different OSM entities with same name must not be merged.",
+      "source_ids": [
+        "asp_dubasari",
+        "gov_dubasari_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-DOROTCAIA-2",
+      "title": "Doroțcaia duplicate-name geometry B",
+      "actual_id": "osm-r18967558",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "An alternative geometric representation; identity equivalence not proven.",
+      "source_ids": [
+        "asp_dubasari",
+        "gov_dubasari_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-PIRITA",
+      "title": "Pîrîta, security zone",
+      "actual_id": "osm-r19013514",
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "boundary_not_parent",
+      "reason": "Shared boundary alone cannot confer de facto parent. Listed in Dubăsari legal-economic localities.",
+      "source_ids": [
+        "asp_dubasari"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "CAUSENI-OVERLAP",
+      "title": "Căușeni rayon intersects proposed Nistrenia root",
+      "actual_id": "osm-r65343",
+      "constitutional_control": "not_established_for_exact_polygon",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Retain official MD Căușeni polygon, including distinct localities Gîsca/Chițcani/Cremenciug; no crop.",
+      "source_ids": [
+        "gov_elections_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "ANENII-NOI-OVERLAP",
+      "title": "Anenii Noi rayon intersects root",
+      "actual_id": "osm-r1692078",
+      "constitutional_control": "not_established_for_exact_polygon",
+      "de_facto_link": "overlap_not_parent",
+      "reason": "Retain official MD geometry and Varnița parentage; no crop or remapping.",
+      "source_ids": [
+        "osce_varnita",
+        "gov_security_zone_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "SL-ROGHI-LOCALITY",
+      "title": "Roghi, legal component of Molovata Nouă",
+      "actual_id": null,
+      "constitutional_control": "mixed_or_locality_specific",
+      "de_facto_link": "unmapped_no_polygon",
+      "reason": "ASP lists Roghi within Molovata Nouă; available evidence does not certify whole-village de facto control in October 2026. Requires OSM-to-ACTUAL identity lookup.",
+      "source_ids": [
+        "asp_dubasari",
+        "gov_security_zone_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-MAHALA-LOCALITY",
+      "title": "Mahala, legal component of Corjova",
+      "actual_id": null,
+      "constitutional_control": "mixed_or_locality_specific",
+      "de_facto_link": "unmapped_no_polygon",
+      "reason": "Legal component of Corjova; no justified unique ACTUAL geometry/whole-village control finding.",
+      "source_ids": [
+        "asp_dubasari",
+        "gov_corjova_2020"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-POHREBEA-LOCALITY",
+      "title": "Pohrebea, legal component of Coșnița",
+      "actual_id": null,
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "unmapped_no_polygon",
+      "reason": "ASP confirms legal hierarchy and 2025 security-zone listing; OSM-to-ACTUAL geometry unresolved.",
+      "source_ids": [
+        "asp_dubasari",
+        "gov_security_zone_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    },
+    {
+      "case_id": "DUBASARI-VASILIEVCA-LOCALITY",
+      "title": "Vasilievca, legal component of Cocieri",
+      "actual_id": null,
+      "constitutional_control": "constitutional_local_administration_reported",
+      "de_facto_link": "unmapped_no_polygon",
+      "reason": "Legal component of Cocieri, separate from de facto geographic overlap. Identity binding still needed.",
+      "source_ids": [
+        "asp_dubasari",
+        "gov_security_zone_2025"
+      ],
+      "reviewed_for_policy": true,
+      "geometry_override": false,
+      "legal_parent_override": false
+    }
+  ]
+}
