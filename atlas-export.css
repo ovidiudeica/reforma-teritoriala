@@ -1,0 +1,11 @@
+.atlas-export-actions {margin:12px 0;overflow-wrap:anywhere}
+.atlas-export-actions summary,.atlas-export-actions button,.atlas-export-actions a,.atlas-export-actions select {min-height:44px}
+.atlas-export-actions summary {display:list-item;cursor:pointer;padding:10px 0}
+.atlas-export-actions .action-button {margin:4px;max-width:100%;white-space:normal}
+.atlas-export-actions label {display:block;margin:8px 0}
+.atlas-export-actions select,.atlas-export-actions textarea {box-sizing:border-box;width:100%;max-width:100%;font:inherit}
+.atlas-export-actions textarea {min-height:120px}
+@media(prefers-reduced-motion:reduce){.atlas-export-actions *{transition:none}}
+@media(forced-colors:active){.atlas-export-actions .action-button{border:1px solid ButtonText}}
+
+.atlas-export-actions .action-button{display:inline-flex;box-sizing:border-box;align-items:center;min-height:44px;min-width:44px}
