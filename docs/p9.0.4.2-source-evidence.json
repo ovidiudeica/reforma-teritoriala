@@ -1,0 +1,127 @@
+{
+  "schema_version": "p9042-evidence-registry-v1",
+  "reviewed_at_utc": "2026-10-13",
+  "purpose": "Separate 2010 de facto administrative register, 2025 local-government claims, current OSM representations, and 2025–26 MD legal public-service coverage; never infer current polygon control.",
+  "evidence": [
+    {
+      "id": "de_facto_territorial_register_2010",
+      "kind": "historical_administrative_register",
+      "effective_date": "2010-09-30",
+      "url": "https://www.ulpmr.ru/ul/show/68pU9vjhB4YX7CgnbESpCdzNPEXQRMMkcIiA=",
+      "organization": "De facto Transnistrian legislative database",
+      "scope": "Historic names and claimed administrative parentage",
+      "limitation": "Not current proof of control or polygon membership in 2026"
+    },
+    {
+      "id": "de_facto_CIK_2025",
+      "kind": "de_facto_institutional",
+      "effective_date": "2025-06-20",
+      "url": "https://www.cikpmr.com/dokumenty-tsik/postanovleniya/postanovleniya-tsik-za-2025-god/o-formirovanii-sostavov-territorialnykh-rajonnykh-gorodskikh-gorodov-yavlyayushchikhsya-samostoyatelnymi-administrativno-territorialnymi-edinitsami-pridnestrovskoj-moldavskoj-respubliki-izbiratelnykh-komissij.html",
+      "organization": "De facto electoral commission",
+      "scope": "Names Bender, Tiraspol and five district-level territorial commissions in 2025",
+      "limitation": "Top-level authority existence, not all individual village memberships"
+    },
+    {
+      "id": "de_facto_Tiraspol_2025",
+      "kind": "de_facto_institutional",
+      "effective_date": "2025",
+      "url": "https://mer.gospmr.org/otchet-deyatel/otchet-o-deyatelnosti-za-2025-god",
+      "organization": "De facto Ministry of Economic Development",
+      "scope": "Tiraspol municipal council explicitly includes administration of village Kremenchug",
+      "limitation": "Claimed administrative supervision not geometric coverage"
+    },
+    {
+      "id": "de_facto_Ribnita_2025",
+      "kind": "de_facto_institutional",
+      "effective_date": "2025-03-05",
+      "url": "https://mer.gospmr.org/deyatelnost/gosudarstvennaya-sluzhba-czen-i-antimonopolnoj-deyatelnosti/informacziya/gosudarstvennyj-registr-subektov-estestvennyh-monopolij/registr-subektov-estestvennyh-monopolij-po-sostoyaniyu-na-5-marta-2025-goda.html",
+      "organization": "De facto Ministry of Economic Development",
+      "scope": "Ribnita rayon list includes villages Плоть and Выхватинцы",
+      "limitation": "Service coverage/name evidence, not legal act establishing village polygon"
+    },
+    {
+      "id": "moldovan_CUATM",
+      "kind": "official_moldovan_legal",
+      "effective_date": "CUATM_25",
+      "url": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+      "organization": "National Bureau of Statistics Moldova",
+      "scope": "MD legal code 0500 Bender, 6939 Plopi, 6937 Ofatinți, 0703 Cremenciug and settlement parentage",
+      "limitation": "CUATM identity cannot prove effective de facto administration"
+    },
+    {
+      "id": "OSM_Bender_Municipality",
+      "kind": "osm_live_tags",
+      "effective_date": "2026-10-13 observed",
+      "url": "https://www.openstreetmap.org/relation/9581354",
+      "organization": "OSM contributors",
+      "scope": "admin_level 4 MD-BD CUATM 0500; OSM note distinguishes MD official boundary and PMR de facto city council 944727",
+      "limitation": "OSM tags are mutable, exact polygon comparison not provided by tag"
+    },
+    {
+      "id": "OSM_Bender_DeFacto",
+      "kind": "osm_live_tags",
+      "effective_date": "2026-10-13 observed",
+      "url": "https://www.openstreetmap.org/relation/944727",
+      "organization": "OSM contributors",
+      "scope": "admin_level 5; Bender City Council de facto boundary; distinct role from official municipality",
+      "limitation": "OSM tag is a representation, not official recognition or effective control proof"
+    },
+    {
+      "id": "OSM_Ofatinti",
+      "kind": "osm_live_tags",
+      "effective_date": "2026-10-13 observed",
+      "url": "https://www.openstreetmap.org/relation/9660049",
+      "organization": "OSM contributors",
+      "scope": "admin_level 8 Ofatinți CUATM 6937; tag name:ru Выхватинецкий сельский совет; name:ro Sovetul sătesc Ofatinți",
+      "limitation": "Name equivalence plus CUATM: no exact de facto polygon-certification"
+    },
+    {
+      "id": "moldovan_BPR_2024",
+      "kind": "official_moldovan_statement",
+      "effective_date": "2024-09-16",
+      "url": "https://www.gov.md/ro/comunicate-de-presa-bpr/cetatenii-republicii-moldova-domiciliati-regiunea-transnistreana-vor-putea",
+      "organization": "Moldova Government Bureau for Reintegration",
+      "scope": "Cremenciug/Gîsca/Chițcani temporarily outside constitutional control, within internationally recognized MD",
+      "limitation": "No evidence for every polygon segment in 2026"
+    },
+    {
+      "id": "moldovan_public_services_2026",
+      "kind": "official_moldovan_public_services",
+      "effective_date": "available in 2026",
+      "url": "https://gov.md/ro/acces-la-servicii-publice-pentru-locuitorii-din-regiunea-transnistreana",
+      "organization": "Government of Moldova",
+      "scope": "Moldovan public-service and territorial competence in Bender/Varnița/Dubăsari and school locations",
+      "limitation": "Provision of services does not define comprehensive territorial control"
+    },
+    {
+      "id": "moldovan_ASP_localities",
+      "kind": "official_moldovan_legal",
+      "effective_date": "available in 2026",
+      "url": "https://www.asp.gov.md/ro/servicii/persoane-juridice/inregistrare-afacere/217",
+      "organization": "Public Services Agency Moldova",
+      "scope": "Cocieri/Vasilievca; Corjova/Mahala; Coșnița/Pohrebea; Molovata Nouă/Roghi and other Dubăsari legal subdivisions",
+      "limitation": "Names/legal parents not individual polygons"
+    },
+    {
+      "id": "OSM_original_P901_P902_P903",
+      "kind": "repo_evidence",
+      "effective_date": "2026-10-13",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/303",
+      "organization": "Reforma territorial audit",
+      "scope": "JSTS topology of 15 de facto OSM relations and 153 intersecting/touching MD ACTUAL entities, 84 exceptions audited",
+      "limitation": "DE-9IM spatial relationship alone cannot decide parentage"
+    }
+  ],
+  "semantic_acceptance_criteria": {
+    "all_85_reviewed_individually": true,
+    "de_facto_claim_2025_must_have_traceable_source": true,
+    "legal_parentage_and_de_facto_parentage_separate": true,
+    "never_promote_from_GIS_contains_alone": true,
+    "role_collisions_must_be_disambiguated": true,
+    "temporal_provenance_and_OSM_snapshot_alignment_required": true,
+    "imported_geometry_storage_must_reuse_existing_masters": true,
+    "no_unverified_claims_of_2026_effective_control": true,
+    "PR_dependency_chain": "303→304→306→307→308→309",
+    "acceptance_full_only_if_all_conditions_proven": true
+  }
+}
