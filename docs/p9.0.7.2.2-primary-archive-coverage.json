@@ -104,7 +104,8 @@
       "all_acts_identified": false,
       "primary_pdf_sha256_complete": false,
       "all_effective_dates_verified": false,
-      "all_85_impact_verified": false
+      "all_85_impact_verified": false,
+      "official_publication_register_index_checked_partially": true
     },
     {
       "year": 2026,
@@ -118,7 +119,8 @@
   "archive_blockers": [
     "Ministry of Justice individual-act download fails TLS negotiation; official publication index readable",
     "ulpmr old vs ul-test new legislative archive no complete dated inventory",
-    "2025 absence of relevant amendment acts not demonstrated"
+    "2025 absence of relevant amendment acts not demonstrated",
+    "2024 and 2025 local-government amendment texts and official listings now known beyond seven core laws; primary SHA-256 and identity-level impacts unverified"
   ],
   "additional_official_evidence": {
     "new_law": "PMR-2023-292-ZI-VII",
@@ -1155,5 +1157,69 @@
   "certified_individual_parent_changes": 0,
   "complete_normative_chain": false,
   "semantic_acceptance": "BLOCKED_INCOMPLETE",
-  "p91_import_allowed": false
+  "p91_import_allowed": false,
+  "supplemental_local_government_act_leads": [
+    {
+      "id": "PMR-2024-97-ZD-VII",
+      "date": "2024-05-30",
+      "target": "local government law",
+      "text_url": "https://pravopmr.ru/views.aspx?id=8TBcBgEMeevb9xul%2FavRsQ%3D%3D",
+      "evidence": "PUBLIC_LEGISLATIVE_TEXT_AVAILABLE",
+      "affected_provision": "art.34 additional administrative competence",
+      "individual_jurisdiction_change_certified": false
+    },
+    {
+      "id": "PMR-2024-276-ZD-VII",
+      "date": "2024-11-22",
+      "target": "local government law",
+      "text_url": "https://pravopmr.ru/views.aspx?id=afJgzMS4HmBfzZ4d9wR0tA%3D%3D",
+      "evidence": "PUBLIC_LEGISLATIVE_TEXT_AVAILABLE",
+      "affected_provision": "art.41 add 15-2 property inventory administrative competence",
+      "individual_jurisdiction_change_certified": false
+    },
+    {
+      "id": "PMR-2024-287-ZID-VII",
+      "date": "2024-11-29",
+      "target": "local government law",
+      "text_url": "https://pravopmr.ru/views.aspx?id=3DdXuhhBUAYH6%2Bet9sDPPw%3D%3D",
+      "evidence": "PUBLIC_LEGISLATIVE_TEXT_AVAILABLE",
+      "affected_provision": "see full text for exact amendment, no identity transfer presumed",
+      "individual_jurisdiction_change_certified": false
+    },
+    {
+      "id": "PMR-2025-97-ZI-VII",
+      "date": "2025-06-09",
+      "target": "local government law",
+      "text_url": "https://pravopmr.ru/views.aspx?id=mP8sEzxEYMRQeTIpDxSm1w%3D%3D",
+      "evidence": "PUBLIC_LEGISLATIVE_TEXT_AVAILABLE",
+      "affected_provision": "art.32-4 (1)(2) local village/settlement administrator role",
+      "individual_jurisdiction_change_certified": false
+    },
+    {
+      "id": "PMR-2025-223-ZI-VII",
+      "date": "2025-11-18",
+      "target": "local government law",
+      "text_url": "https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.1",
+      "evidence": "OFFICIAL_PUBLICATION_INDEX_ONLY",
+      "affected_provision": null,
+      "individual_jurisdiction_change_certified": false
+    }
+  ],
+  "further_amendment_candidates": [
+    {
+      "id": "PMR-2024-340-ZI-VII",
+      "date": "2024-12-26",
+      "evidence": "cited in law's preamble, separate authenticated copy pending"
+    },
+    {
+      "id": "PMR-2025-187-ZI-VII",
+      "date": "2025-08-19",
+      "evidence": "cited in later legislative preamble, separate authenticated copy pending"
+    },
+    {
+      "id": "PMR-2026-6-ZD-VIII",
+      "date": "2026-01-29",
+      "evidence": "cited in 2026 legislative preamble, separate authenticated copy pending"
+    }
+  ]
 }
