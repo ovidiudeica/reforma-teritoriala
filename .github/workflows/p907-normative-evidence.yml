@@ -1,0 +1,43 @@
+name: P9.0.7 normative evidence fail-closed
+on:
+  pull_request:
+    paths:
+      - 'docs/p9.0.7*'
+      - '.github/workflows/p907-normative-evidence.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/p9.0.7*'
+      - '.github/workflows/p907-normative-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  normative-evidence-fail-closed:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify P9 validators are well formed
+        run: |
+          node --check docs/p9.0.7-validate-evidence.mjs
+          node --check docs/p9.0.7.1-validate-chain.mjs
+          node --check docs/p9.0.7.2-validate.mjs
+          node --check docs/p9.0.7.2.1-validate.mjs
+          node --check docs/p9.0.7.2.2-validate.mjs
+          node --check docs/p9.0.7.2.3-validate.mjs
+          node --check docs/p9.0.7.2.4-validate.mjs
+      - name: Execute all seven evidence and denial gates
+        run: |
+          node docs/p9.0.7-validate-evidence.mjs
+          node docs/p9.0.7.1-validate-chain.mjs
+          node docs/p9.0.7.2-validate.mjs
+          node docs/p9.0.7.2.1-validate.mjs
+          node docs/p9.0.7.2.2-validate.mjs
+          node docs/p9.0.7.2.3-validate.mjs
+          node docs/p9.0.7.2.4-validate.mjs
+      - name: No generated changes or mutation
+        run: git diff --exit-code
