@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const read=p=>JSON.parse(readFileSync(p,'utf8'));
+const x=read('docs/p9.0.7.2-exhaustiveness-gate.json');
+const base=read('docs/p9.0.7.1-normative-amendment-chain.json');
+const policy=read('docs/p9.0.4.3-promotion-policy.json');
+assert.equal(x.identity_count,85);
+assert.deepEqual(x.identity_impact.map(r=>r.actual_id).sort(),base.rows.map(r=>r.actual_id).sort());
+assert.deepEqual(x.years.map(r=>r.year),[2023,2024,2025,2026]);
+assert(x.years.every(y=>!y.official_gazette_issue_inventory_complete&&!y.official_legislative_act_register_coverage_complete&&!y.all_relevant_primary_acts_hashed&&!y.entry_into_force_reconciled&&!y.absence_of_amendments_proven));
+assert(x.identity_impact.every(r=>!r.amendments_exhaustive&&!r.certified_2026_membership&&!r.proof_of_no_changes));
+assert.equal(x.exhaustiveness_certified,false);
+assert.equal(x.act_record_completeness,'UNKNOWN_NOT_ZERO_ACTS');
+assert.equal(x.semantic_acceptance,'BLOCKED_INCOMPLETE');
+assert.equal(x.p91_import_allowed,false);
+assert.equal(policy.semantic_acceptance,'BLOCKED_INCOMPLETE');
+assert.equal(policy.p91_import_allowed,false);
+console.log('P9072_EXHAUSTIVENESS_FAIL_CLOSED_PASS: 4 years, 85 identities, no false zero-amendment proof, P9.1 DENIED');
