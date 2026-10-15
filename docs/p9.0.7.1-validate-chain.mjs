@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const read=p=>JSON.parse(readFileSync(p,'utf8'));
+const chain=read('docs/p9.0.7.1-normative-amendment-chain.json');
+const base=read('docs/p9.0.7-contemporary-evidence-ledger.json');
+const policy=read('docs/p9.0.4.3-promotion-policy.json');
+assert.equal(chain.count,85);
+assert.equal(chain.rows.length,85);
+assert.equal(new Set(chain.rows.map(r=>r.actual_id)).size,85);
+assert.deepEqual(chain.rows.map(r=>r.actual_id).sort(),base.rows.map(r=>r.actual_id).sort());
+assert.equal(chain.amendment_window.exhaustiveness_status,'NOT_PROVEN');
+assert.equal(chain.identity_impact_certified,0);
+assert(chain.rows.every(r=>r.amendments_search_complete===false&&r.impact_status==='UNKNOWN_PENDING_EXHAUSTIVE_PRIMARY_SOURCE_CHAIN'&&r.validity_asof_2026_10_15==='NOT_CERTIFIED'&&r.semantic_acceptance==='BLOCKED_INCOMPLETE'));
+assert.equal(chain.semantic_acceptance,'BLOCKED_INCOMPLETE');
+assert.equal(chain.p91_import_allowed,false);
+assert.equal(policy.semantic_acceptance,'BLOCKED_INCOMPLETE');
+assert.equal(policy.p91_import_allowed,false);
+console.log('P9071_FAIL_CLOSED_PASS: 85 IDs, 2023 source pinned, 2023-2026 exhaustive chain NOT PROVEN, P9.1 DENIED');
