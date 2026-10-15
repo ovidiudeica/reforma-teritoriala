@@ -11,7 +11,7 @@ assert(x.years.every(y=>!y.official_gazette_issue_inventory_complete&&!y.officia
 assert(x.identity_impact.every(r=>!r.amendments_exhaustive&&!r.certified_2026_membership&&!r.proof_of_no_changes));
 assert.equal(x.exhaustiveness_certified,false);
 assert.equal(x.act_record_completeness,'AT_LEAST_ONE_RELEVANT_2026_AMENDMENT_IDENTIFIED_NOT_EXHAUSTIVE');
-assert(x.act_records.some(r=>r.id==='PMR-2026-114-ZID-VIII'&&r.primary_full_text_sha256==='c9d05f579677f176007bd6987bf11031c986299e180d9e98577715f7cb1cc566'&&r.primary_document_bytes===2479046&&!r.full_text_extracted_and_legally_interpreted&&!r.certified));
+assert(x.act_records.some(r=>r.id==='PMR-2026-114-ZID-VIII'&&r.primary_full_text_sha256==='c9d05f579677f176007bd6987bf11031c986299e180d9e98577715f7cb1cc566'&&r.primary_document_bytes===2479046&&r.full_text_extracted_and_legally_interpreted===true&&r.effective_as_of_2026_10_15===false&&r.article_changes.length===9&&!r.certified));
 assert.equal(x.semantic_acceptance,'BLOCKED_INCOMPLETE');
 assert.equal(x.p91_import_allowed,false);
 assert.equal(policy.semantic_acceptance,'BLOCKED_INCOMPLETE');
