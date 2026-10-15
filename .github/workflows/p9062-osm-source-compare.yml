@@ -1,0 +1,81 @@
+name: P9.0.6.2 OSM source/geometry reconciliation (audit only)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/p9.0.6.2-*'
+      - 'scripts/audit/p9062-osm-source-diff.mjs'
+      - '.github/workflows/p9062-osm-source-compare.yml'
+permissions:
+  contents: read
+jobs:
+  audit-osm:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install repository-pinned audited Node dependencies
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Install osmium read-only binary
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+      - name: Run parser and fail-closed input tests
+        run: node scripts/audit/p9062-osm-source-diff.mjs --self-test
+      - name: Download date-pinned Geofabrik Moldova snapshots and verify immutable original
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/P9.0.6.2/input
+          for dt in 261012 261013; do
+            curl -fsSL --retry 4 --retry-delay 3 --connect-timeout 35 --max-time 600 "https://download.geofabrik.de/europe/moldova-${dt}.osm.pbf" -o "$RUNNER_TEMP/moldova-${dt}.osm.pbf"
+          done
+          echo "4ebd791fb953a22961e40ef7921914251c7b7292c33ed1e90e919488f1a397b8  $RUNNER_TEMP/moldova-261012.osm.pbf" | sha256sum --check --status
+          sha256sum "$RUNNER_TEMP"/moldova-2610{12,13}.osm.pbf > outputs/P9.0.6.2/geofabrik-sha256sums.txt
+          for dt in 261012 261013; do
+            osmium fileinfo --extended "$RUNNER_TEMP/moldova-${dt}.osm.pbf" > "outputs/P9.0.6.2/input/fileinfo-${dt}.txt"
+          done
+          node --input-type=module <<'NODE'
+          import {statSync,writeFileSync,readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const records={};
+          for(const date of ['261012','261013']){
+            const file=process.env.RUNNER_TEMP+'/moldova-'+date+'.osm.pbf';
+            records['snapshot_'+date]={filename:'moldova-'+date+'.osm.pbf',sha256:createHash('sha256').update(readFileSync(file)).digest('hex'),bytes:statSync(file).size,source_url:'https://download.geofabrik.de/europe/moldova-'+date+'.osm.pbf',fileinfo:readFileSync('outputs/P9.0.6.2/input/fileinfo-'+date+'.txt','utf8').slice(0,2500)};
+          }
+          records.live_capture_start=new Date().toISOString();
+          writeFileSync('outputs/P9.0.6.2/input/sources.json',JSON.stringify(records,null,2)+'\n');
+          NODE
+      - name: Extract exact relation members and polygon coordinates separately from both source PBF files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for dt in 261012 261013; do
+            input="$RUNNER_TEMP/moldova-${dt}.osm.pbf"
+            osmium tags-filter --omit-referenced "$input" r/boundary=administrative -o "outputs/P9.0.6.2/input/relations-${dt}.osm"
+            osmium tags-filter "$input" r/boundary=administrative -o "$RUNNER_TEMP/complete-${dt}.osm.pbf"
+            osmium export -e --geometry-types=polygon --attributes=type,id "$RUNNER_TEMP/complete-${dt}.osm.pbf" -o "outputs/P9.0.6.2/input/geometry-${dt}.geojsonseq" 2>"outputs/P9.0.6.2/osmium-${dt}-warnings.txt"
+          done
+      - name: Compare all 177 OSM relations to 2026-10-12, 2026-10-13 and live OSM metadata
+        run: node --max-old-space-size=5500 scripts/audit/p9062-osm-source-diff.mjs --reconcile
+      - name: Assert live full-geometry parser regression
+        run: node scripts/audit/p9062-full-geometry.mjs --self-test
+      - name: Compare full live ways/nodes and exact polygon edges for 177 relations
+        run: node --max-old-space-size=5500 scripts/audit/p9062-full-geometry.mjs --compare-full
+      - name: Upload complete audit evidence even if incomplete or failed
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p9062-exact-source-members-polygon-diff
+          if-no-files-found: warn
+          path: |
+            outputs/P9.0.6.2/summary.json
+            outputs/P9.0.6.2/records.json
+            outputs/P9.0.6.2/full-live-records.json
+            outputs/P9.0.6.2/full-live-summary.json
+            outputs/P9.0.6.2/errors.json
+            outputs/P9.0.6.2/input/sources.json
+            outputs/P9.0.6.2/input/fileinfo-*.txt
+            outputs/P9.0.6.2/geofabrik-sha256sums.txt
+            outputs/P9.0.6.2/osmium-*-warnings.txt

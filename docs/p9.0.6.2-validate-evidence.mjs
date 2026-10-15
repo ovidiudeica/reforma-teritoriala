@@ -1,0 +1,55 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const read=p=>JSON.parse(readFileSync(p,'utf8'));
+const scope=read('docs/p9.0.6.2-osm-audit-scope.json');
+const audit=read('docs/p9.0.6.2-verified-evidence-ledger.json');
+const policy=read('docs/p9.0.4.3-promotion-policy.json');
+const release=read('data/current/actual-release-manifest.json');
+const rows=audit.rows;
+assert.equal(audit.schema_version,'p9062-pinned-source-and-live-polygon-evidence-v1');
+assert.equal(scope.relations.length,177);
+assert.equal(rows.length,177);
+assert.equal(new Set(rows.map(r=>r.osm_id)).size,177);
+const expected=new Map(scope.relations.map(r=>[r.id,[...r.roles].sort().join('|')]));
+assert(rows.every(r=>expected.get(r.osm_id)===[...r.roles].sort().join('|')));
+assert.equal(audit.snapshot_261012.sha256,'4ebd791fb953a22961e40ef7921914251c7b7292c33ed1e90e919488f1a397b8');
+assert.equal(audit.snapshot_261012.replication_sequence,4935);
+assert.equal(audit.snapshot_261013.sha256,'757ecc71b3e5a7ab7c47c40157e15454c57919a9db66d2b79f1f8469e412d857');
+assert.equal(audit.snapshot_261013.replication_sequence,4936);
+assert(rows.every(r=>r.relation_version_261012===r.relation_version_261013&&r.relation_version_261013===r.relation_version_live));
+assert(rows.every(r=>Number.isInteger(r.ordered_member_count)&&r.ordered_member_count>=0));
+assert(rows.every(r=>/^[0-9a-f]{64}$/.test(r.ordered_members_sha256)&&/^[0-9a-f]{64}$/.test(r.tags_sha256)&&/^[0-9a-f]{64}$/.test(r.live_way_node_response_sha256)&&/^[0-9a-f]{64}$/.test(r.live_polygon_edges_sha256)));
+assert.equal(rows.filter(r=>r.snapshot_polygon_status==='EXACT_COORDINATE_REPRESENTATION').length,93);
+assert.equal(rows.filter(r=>r.live_polygon_status==='EXACT_POLYGON_EDGES_261012_TO_LIVE'&&r.live_vs_2026_10_12_exact===true).length,93);
+assert.equal(rows.filter(r=>r.snapshot_polygon_status==='NO_POLYGON_IN_EITHER_PBF'&&r.live_polygon_status==='FULL_LIVE_POLYGON_AVAILABLE_BUT_261012_EXTRACT_CLIPPED'&&r.live_vs_2026_10_12_exact===null).length,84);
+assert.equal(audit.counts.source_errors,0);
+assert.equal(audit.scope_verdict,'PARTIAL_SOURCE_EXTRACT_GEOMETRY_FOR_84');
+assert.equal(audit.p91_import_allowed,false);
+assert.equal(audit.semantic_acceptance,'BLOCKED_INCOMPLETE');
+assert.equal(policy.p91_import_allowed,false);
+assert.equal(policy.semantic_acceptance,'BLOCKED_INCOMPLETE');
+assert.equal(release.snapshot_id,'actual-a9e5a4ddcb5277ef');
+assert.equal(release.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
+const independent=read('docs/p9.0.6.2-two-run-variance.json');
+assert.equal(independent.rows.length,177);
+assert.equal(new Set(independent.rows.map(r=>r.osm_id)).size,177);
+assert.equal(independent.counts.raw_full_xml_sha_changed,174);
+assert.equal(independent.counts.raw_xml_stable,3);
+assert.equal(independent.counts.edge_hash_differences,0);
+assert.equal(independent.counts.way_count_differences,0);
+assert.equal(independent.counts.node_count_differences,0);
+assert.equal(independent.counts.relation_version_differences,0);
+assert.equal(independent.counts.ordered_members_differences,0);
+assert.equal(independent.counts.tag_differences,0);
+assert.equal(independent.schema_version,'p9062-two-independent-full-source-run-review-v2');
+const originalEdgeHashes=new Map(rows.map(r=>[r.osm_id,r.live_polygon_edges_sha256]));
+assert(independent.rows.every(r=>
+ /^[0-9a-f]{64}$/.test(r.first_polygon_edges_sha256)&&
+ /^[0-9a-f]{64}$/.test(r.second_polygon_edges_sha256)&&
+ r.first_polygon_edges_sha256===r.second_polygon_edges_sha256&&
+ r.first_polygon_edges_sha256===originalEdgeHashes.get(r.osm_id)&&
+ r.edge_hash_equal_between_runs===true&&
+ r.way_count_equal===true&&r.node_count_equal===true&&
+ r.relation_version_equal===true&&r.members_hash_equal===true&&r.tags_hash_equal===true
+));
+console.log('P9062_RECONCILIATION_EVIDENCE_PASS: 177 metadata, 93 exact live polygons, 84 border-clipped historical exceptions, P9.1 DENIED');
