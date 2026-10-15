@@ -1,0 +1,2269 @@
+{
+  "schema_version": "p90721-official-register-cross-reconciliation-v1",
+  "audit_date": "2026-10-15",
+  "reference_date": "2026-10-15",
+  "parent_stage": "P9.0.7.2",
+  "base_head_sha": "d166077d03f1ef42f6d66f5aff878be9be6f7d90",
+  "legal_scope": "de_facto_only_not_Moldovan_legal_parent",
+  "verified_primary_binary_anchors": [
+    {
+      "path": "docs/p9.0.7.1-primary/annex-1-2023-03-25.docx",
+      "sha256": "43b8270b4e04c8922af551a72dc494d7bc02628fe827a8ec28bb2802a9f94b5b"
+    },
+    {
+      "path": "docs/p9.0.7.1-primary/annex-2-compatible-names.docx",
+      "sha256": "d2675ae413d36eb3d0cd04d56de16c54b1086f05543da128fcc3016b4ded95ec"
+    }
+  ],
+  "registry_comparison": [
+    {
+      "system": "Ministry of Justice official publication records",
+      "coverage": "2023-03-24 acts 48 and 49 plus 2026-05-29 act 114",
+      "exhaustive_2023_2026": false,
+      "limitation": "Search-index records do not cover all journals or prove no acts omitted"
+    },
+    {
+      "system": "Presidential act index",
+      "coverage": "2023 law 291; 2024 laws 47 and 48; 2026 law 114",
+      "exhaustive_2023_2026": false,
+      "limitation": "Selected official records, no full date-pagination reconciliation"
+    },
+    {
+      "system": "Supreme Council baseline annexes",
+      "coverage": "2023 annex 1, historical alias annex 2",
+      "exhaustive_2023_2026": false,
+      "limitation": "Last edited date does not prove continued validity"
+    },
+    {
+      "system": "ulpmr old legislative database",
+      "coverage": "historical repository",
+      "exhaustive_2023_2026": false,
+      "limitation": "Old database intermittently fails; sunset/new-system transition"
+    },
+    {
+      "system": "ul-test new legislative database",
+      "coverage": "document cards and search accessible",
+      "exhaustive_2023_2026": false,
+      "limitation": "No full-index export and no completeness certificate"
+    }
+  ],
+  "acts": [
+    {
+      "id": "PMR-2023-48-ZI-VII",
+      "date": "2023-03-24",
+      "publication_id": "2023000445",
+      "primary_index": "https://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/4391b9419959e04ac225897c0048c9b2!OpenDocument",
+      "target_law": "155-З-III administrative-territorial organization",
+      "class": "DIRECT_FRAMEWORK_AMENDMENT",
+      "primary_text_status": "OFFICIAL_PUBLICATION_RECORD_VERIFIED_DOCUMENT_TEXT_NOT_HASHED",
+      "sha256": null,
+      "entry_into_force": "NOT_INDEPENDENTLY_VERIFIED",
+      "identity_effect": "2023_REGISTER_BASELINE_ASSOCIATED_NOT_INDEPENDENT_ARTICLE_DIFF_CERTIFIED"
+    },
+    {
+      "id": "PMR-2023-49-ZI-VII",
+      "date": "2023-03-24",
+      "publication_id": "2023000446",
+      "primary_index": "https://www.minjust.gospmr.org/web.nsf/All/publication2!OpenDocument&Start=3.11&Count=200&Expand=4.10",
+      "target_law": "Law on languages (consequential to law 48)",
+      "class": "RELATED_TOPONYM_LANGUAGE",
+      "primary_text_status": "OFFICIAL_PUBLICATION_INDEX_VERIFIED_DOCUMENT_TEXT_NOT_HASHED",
+      "sha256": null,
+      "entry_into_force": "NOT_INDEPENDENTLY_VERIFIED",
+      "identity_effect": "TOPONYM_ALIAS_IMPACT_PENDING_TEXT_ADJUDICATION"
+    },
+    {
+      "id": "PMR-2023-291-ZI-VII",
+      "date": "2023-09-29",
+      "publication_id": null,
+      "primary_index": "https://president.gospmr.org/pravovye-akty/rasporyajenie-prezidenta-pmr-15rp-o-nagrajdenii-gramotoy-prezidenta-pridnestrovskoy-moldavskoy-respubliki-gurjiya-pf-jenarya-ip.html?page=135",
+      "target_law": "Law on local government and state administration",
+      "class": "RELATED_LOCAL_GOVERNANCE_COMPETENCE",
+      "primary_text_status": "OFFICIAL_PRESIDENTIAL_INDEX_ONLY",
+      "sha256": null,
+      "entry_into_force": "NOT_INDEPENDENTLY_VERIFIED",
+      "identity_effect": "PENDING_ARTICLE_TEXT_RELEVANCE_REVIEW"
+    },
+    {
+      "id": "PMR-2024-47-ZI-VII",
+      "date": "2024-03-05",
+      "publication_id": null,
+      "primary_index": "https://president.gospmr.org/pravovye-akty/rasporyajenie-prezidenta-pmr-15rp-o-nagrajdenii-gramotoy-prezidenta-pridnestrovskoy-moldavskoy-respubliki-gurjiya-pf-jenarya-ip.html?page=113",
+      "target_law": "Law on satellite city status",
+      "class": "RELATED_ADMINISTRATIVE_ROLE",
+      "primary_text_status": "OFFICIAL_PRESIDENTIAL_INDEX_ONLY",
+      "sha256": null,
+      "entry_into_force": "NOT_INDEPENDENTLY_VERIFIED",
+      "identity_effect": "PENDING_TEXT_REVIEW_NO_SPECIFIC_ID_CERTIFIED"
+    },
+    {
+      "id": "PMR-2024-48-ZI-VII",
+      "date": "2024-03-05",
+      "publication_id": null,
+      "primary_index": "https://president.gospmr.org/pravovye-akty/rasporyajenie-prezidenta-pmr-15rp-o-nagrajdenii-gramotoy-prezidenta-pridnestrovskoy-moldavskoy-respubliki-gurjiya-pf-jenarya-ip.html?page=113",
+      "target_law": "Law on local government and state administration",
+      "class": "RELATED_LOCAL_GOVERNANCE_COMPETENCE",
+      "primary_text_status": "OFFICIAL_PRESIDENTIAL_INDEX_ONLY",
+      "sha256": null,
+      "entry_into_force": "NOT_INDEPENDENTLY_VERIFIED",
+      "identity_effect": "PENDING_TEXT_REVIEW_NO_SPECIFIC_ID_CERTIFIED"
+    },
+    {
+      "id": "PMR-2026-114-ZID-VIII",
+      "date": "2026-05-29",
+      "publication_id": "2026000856",
+      "primary_index": "https://president.gospmr.org/pravovye-akty/zakoni/?page=7",
+      "primary_document_url": "https://president.gospmr.org/file.xp?file=101071",
+      "target_law": "155-З-III administrative-territorial organization",
+      "class": "DIRECT_FRAMEWORK_AMENDMENT_PROSPECTIVE_AT_AUDIT",
+      "primary_text_status": "PRIMARY_SCANNED_PDF_SHA256_VERIFIED_OCR_NOT_VISUALLY_PROOFREAD",
+      "sha256": "c9d05f579677f176007bd6987bf11031c986299e180d9e98577715f7cb1cc566",
+      "bytes": 2479046,
+      "adoption_date": "2026-05-13",
+      "entry_into_force": "AFTER_SIX_MONTHS_FROM_OFFICIAL_PUBLICATION_ARTICLE_3",
+      "effective_asof_2026_10_15": false,
+      "identity_effect": "NO_NAMED_ASSIGNMENT_IDENTIFIED_IN_OCR_PROVISIONAL"
+    }
+  ],
+  "distinct_identifications": 6,
+  "direct_target_155_acts": [
+    "PMR-2023-48-ZI-VII",
+    "PMR-2026-114-ZID-VIII"
+  ],
+  "year2025_relevant_acts_verified": 0,
+  "year2025_absence_proven": false,
+  "law114_2026_retrospective_preamble_last_listed_direct_amendment": "PMR-2023-48-ZI-VII",
+  "law114_2026_retrospective_preamble_confidence": "OCR_ONLY_NOT_INDEPENDENT_LEGISLATIVE_REGISTER_CERTIFICATION",
+  "case_count": 85,
+  "rows": [
+    {
+      "actual_id": "osm-r1216706",
+      "name_ro": "Cremenciug",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "CLAIMED_TIRASPOL_VS_OSM_SLOBOZIA_PARENT_DISAGREEMENT_UNRESOLVED",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": "1702219",
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r12215667",
+      "name_ro": "Gîsca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "944727",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r12463378",
+      "name_ro": "Proteagailovca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "944727",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r12463379",
+      "name_ro": "Bender",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "944727",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r18941889",
+      "name_ro": "Tiraspolul Nou",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702219",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r18941890",
+      "name_ro": "Tiraspol",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702219",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19001619",
+      "name_ro": "Lunga",
+      "baseline_match_type_2023": "NO_EXACT_2023_NAME",
+      "baseline_evidence_ids": [
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "MICRODISTRICT_SUPPORTED_BY_2026_INSTITUTIONAL_EVIDENCE_BUT_POLYGON_BINDING_UNVERIFIED",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19012105",
+      "name_ro": "Țîbuleuca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19013328",
+      "name_ro": "Goian",
+      "baseline_match_type_2023": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19013329",
+      "name_ro": "Doibani I",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015106",
+      "name_ro": "Cuzmin",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015107",
+      "name_ro": "Hristovaia",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015108",
+      "name_ro": "Severinovca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015109",
+      "name_ro": "Crasnîi Octeabri",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015110",
+      "name_ro": "Camenca",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015111",
+      "name_ro": "Podoima",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015112",
+      "name_ro": "Rotari",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015113",
+      "name_ro": "Valea Adîncă",
+      "baseline_match_type_2023": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015114",
+      "name_ro": "Rașcov",
+      "baseline_match_type_2023": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015115",
+      "name_ro": "Caterinovca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015284",
+      "name_ro": "Vadul Turcului",
+      "baseline_match_type_2023": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015285",
+      "name_ro": "Beloci",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015286",
+      "name_ro": "Plopi",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015287",
+      "name_ro": "Sovietscoe",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19015304",
+      "name_ro": "Stroiești",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19016165",
+      "name_ro": "Andreevca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19016166",
+      "name_ro": "Ulmu",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19016167",
+      "name_ro": "Vărăncău",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r19069840",
+      "name_ro": "Delacău",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r6879649",
+      "name_ro": "Chițcani",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7427669",
+      "name_ro": "Vladimirovca",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7427680",
+      "name_ro": "Frunză",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7431238",
+      "name_ro": "Bîcioc",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7431263",
+      "name_ro": "Parcani",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7432661",
+      "name_ro": "Crasnogorca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7432662",
+      "name_ro": "Teiu",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7432700",
+      "name_ro": "Vinogradnoe",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7468724",
+      "name_ro": "Blijnii Hutor",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r7468791",
+      "name_ro": "Sucleia",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8289594",
+      "name_ro": "Caragaș",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8289727",
+      "name_ro": "Cioburciu",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8289751",
+      "name_ro": "Slobozia",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8290840",
+      "name_ro": "Dnestrovsc",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702219",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8290877",
+      "name_ro": "Pervomaisc",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8290934",
+      "name_ro": "Nezavertailovca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8291057",
+      "name_ro": "Corotna",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8291058",
+      "name_ro": "Hlinaia",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8292878",
+      "name_ro": "Tîrnauca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8292891",
+      "name_ro": "Mălăiești",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8292898",
+      "name_ro": "Hrușca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8292909",
+      "name_ro": "Ocnița",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8348605",
+      "name_ro": "Tașlîc",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8348625",
+      "name_ro": "Butor",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8348646",
+      "name_ro": "Speia",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8348909",
+      "name_ro": "Mihailovca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8348920",
+      "name_ro": "Harmațca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8349002",
+      "name_ro": "Dubău",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8349059",
+      "name_ro": "Lenin",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8349093",
+      "name_ro": "Butuceni",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8349094",
+      "name_ro": "Jura",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8349307",
+      "name_ro": "Mocra",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8349338",
+      "name_ro": "Popencu",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8539257",
+      "name_ro": "Maiac",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8539525",
+      "name_ro": "Colosova",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8688504",
+      "name_ro": "Broșteni",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8710724",
+      "name_ro": "Slobozia-Rașcov",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r8726395",
+      "name_ro": "Șipca",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9288026",
+      "name_ro": "Carmanova",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9288110",
+      "name_ro": "Hîrtop",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9288158",
+      "name_ro": "Dzerjinscoe",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9288287",
+      "name_ro": "Dubăsari",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9288722",
+      "name_ro": "Comisarovca Nouă",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9288756",
+      "name_ro": "Crasnîi Vinogradari",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9294122",
+      "name_ro": "Ghidirim",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9301463",
+      "name_ro": "Hlinaia",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9301464",
+      "name_ro": "Grigoriopol",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9581354",
+      "name_ro": "Bender",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "944727",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9656324",
+      "name_ro": "Haraba",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9656364",
+      "name_ro": "Crasnencoe",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9656413",
+      "name_ro": "Molochișul Mare",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9659709",
+      "name_ro": "Cobasna",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9659794",
+      "name_ro": "Hîrjău",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9659979",
+      "name_ro": "Rîbnița",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9660049",
+      "name_ro": "Ofatinți",
+      "baseline_match_type_2023": "UNIQUE_NAME_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "DATED_2023_NAME_MATCH_ONLY",
+      "parent_geometric_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    },
+    {
+      "actual_id": "osm-r9679382",
+      "name_ro": "Crasnoe",
+      "baseline_match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "baseline_evidence_ids": [
+        "PMR-2023-48-ZI-VII",
+        "P9071-ANNEX1-2023"
+      ],
+      "potential_consequential_law_ids": [
+        "PMR-2023-49-ZI-VII",
+        "PMR-2023-291-ZI-VII",
+        "PMR-2024-47-ZI-VII",
+        "PMR-2024-48-ZI-VII"
+      ],
+      "prospective_law_114": "NOT_IN_FORCE_ASOF_2026_10_15",
+      "identity_adjudication": "INDIVIDUAL_DISAMBIGUATION_REQUIRED",
+      "parent_geometric_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "verified_individual_status_change_from_laws_2023_2026": null,
+      "normative_current_status": "UNRESOLVED_MISSING_EXHAUSTIVE_PUBLICATION_AND_TEXT_VERSION_CHAIN",
+      "effective_control": "NOT_CERTIFIED_FULL_POLYGON",
+      "semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false
+    }
+  ],
+  "individual_status_changes_certified": 0,
+  "exhaustive_all_official_acts": false,
+  "contemporary_full_polygon_control_certified": 0,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false
+}
