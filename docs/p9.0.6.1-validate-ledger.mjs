@@ -19,6 +19,10 @@ assert.equal(rows.filter(r=>r.source_2023_name_match_type==='HOMONYM_MULTIPLE_EN
 assert.equal(rows.filter(r=>r.source_2023_name_match_type==='CURATED_ALIAS_POTENTIAL_MATCH').length,4);
 assert.equal(rows.filter(r=>r.official_alias_evidence?.rating==='OFFICIAL_ANNEX2_EXACT_COMPATIBLE_NAME').length,3);
 assert.equal(rows.filter(r=>r.official_alias_evidence?.rating==='ANNEX2_LISTS_VADUL_TURKULUY_NOT_EXACT_LEGACY_TOKEN_REVIEW_REQUIRED').length,1);
+assert.deepEqual(registry.homonym_breakdown,{city_admin_centre_double_mentions:5,distinct_regions_or_roles:5,rail_station_vs_village:1,total:11});
+assert.equal(rows.filter(r=>r.annex1_ambiguity_subtype==='CITY_AND_ADMINISTRATIVE_CENTRE_TWO_MENTIONS_SAME_NAME').length,5);
+assert.equal(rows.filter(r=>r.annex1_ambiguity_subtype==='DISTINCT_REGIONS_OR_SETTLEMENT_ROLES_NO_AUTO_DISAMBIGUATION').length,5);
+assert.equal(rows.filter(r=>r.annex1_ambiguity_subtype==='RAILWAY_STATION_SETTLEMENT_VERSUS_VILLAGE_TWO_ROLES').length,1);
 assert(rows.every(r=>r.decision==='P9_1_BLOCKED' && r.independent_2026_member_evidence_validated===false && r.entire_polygon_control_2026_verified===false && r.certification_2026_status.startsWith('BLOCKED_')));
 assert.equal(registry.controls.P9_1_import_allowed,false);
 assert.equal(registry.controls.semantic_acceptance,'BLOCKED_INCOMPLETE');
