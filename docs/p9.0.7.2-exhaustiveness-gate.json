@@ -107,14 +107,20 @@
       "full_text_archived": false,
       "effective_date": null,
       "article_diff_status": "PENDING_PRIMARY_TEXT",
-      "per_identity_impact": "UNKNOWN_ALL_85",
+      "per_identity_impact": "UNKNOWN_ALL_85_PENDING_OCR_AND_AUTHENTIC_TEXT",
       "certified": false,
       "primary_url": "https://president.gospmr.org/file.xp?file=101071",
       "primary_document_format": "application/pdf",
       "primary_document_bytes": 2479046,
       "primary_pdf_bytes_verified": true,
       "primary_document_access_method": "official presidential attachment fetched directly and SHA-256 calculated 2026-10-15",
-      "full_text_extracted_and_legally_interpreted": false
+      "full_text_extracted_and_legally_interpreted": false,
+      "pdf_page_count": 4,
+      "pdf_text_layer_pages": 0,
+      "pdf_extraction_method": "pdfjs-dist 6.4.299 getTextContent",
+      "pdf_extraction_status": "IMAGE_ONLY_OCR_REQUIRED",
+      "ocr_text_verified": false,
+      "article_changes_extracted": false
     }
   ],
   "act_record_completeness": "AT_LEAST_ONE_RELEVANT_2026_AMENDMENT_IDENTIFIED_NOT_EXHAUSTIVE",
