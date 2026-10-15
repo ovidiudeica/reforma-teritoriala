@@ -66,7 +66,9 @@
       "operative_class": "ART34_AND_ART37_JUDICIAL_LIQUIDATION",
       "entry_into_force_rule": "PENDING_RELATED_CIVIL_CODE_ACT",
       "exact_entry_date_established": false,
-      "membership_change_proven_for_specific_id": false
+      "membership_change_proven_for_specific_id": false,
+      "response_digest_reproducibility": "NOT_CERTIFIED_DYNAMIC_HTML_PAGE",
+      "hash_can_authorize_normative_release": false
     },
     {
       "act_id": "PMR-2024-276-ZD-VII",
@@ -84,7 +86,9 @@
       "operative_class": "ART41_15_2_PROPERTY_REGISTER",
       "entry_into_force_rule": "2025-01-01",
       "exact_entry_date_established": true,
-      "membership_change_proven_for_specific_id": false
+      "membership_change_proven_for_specific_id": false,
+      "response_digest_reproducibility": "NOT_CERTIFIED_DYNAMIC_HTML_PAGE",
+      "hash_can_authorize_normative_release": false
     },
     {
       "act_id": "PMR-2024-287-ZID-VII",
@@ -102,7 +106,9 @@
       "operative_class": "ART32_2_REGISTRATION_AND_PASSPORT_DOCUMENTS",
       "entry_into_force_rule": "2025-01-01",
       "exact_entry_date_established": true,
-      "membership_change_proven_for_specific_id": false
+      "membership_change_proven_for_specific_id": false,
+      "response_digest_reproducibility": "NOT_CERTIFIED_DYNAMIC_HTML_PAGE",
+      "hash_can_authorize_normative_release": false
     },
     {
       "act_id": "PMR-2024-340-ZI-VII",
@@ -120,7 +126,9 @@
       "operative_class": "ART29_CITIZEN_REPORTING_BY_DEPUTIES",
       "entry_into_force_rule": "PENDING_RELATED_DEPUTIES_STATUTE",
       "exact_entry_date_established": false,
-      "membership_change_proven_for_specific_id": false
+      "membership_change_proven_for_specific_id": false,
+      "response_digest_reproducibility": "NOT_CERTIFIED_DYNAMIC_HTML_PAGE",
+      "hash_can_authorize_normative_release": false
     },
     {
       "act_id": "PMR-2025-97-ZI-VII",
@@ -138,7 +146,9 @@
       "operative_class": "ART32_4_VILLAGE_ADMINISTRATION_LEADERSHIP_AND_ELECTION",
       "entry_into_force_rule": "PENDING_CONSTITUTIONAL_AMENDMENT",
       "exact_entry_date_established": false,
-      "membership_change_proven_for_specific_id": false
+      "membership_change_proven_for_specific_id": false,
+      "response_digest_reproducibility": "NOT_CERTIFIED_DYNAMIC_HTML_PAGE",
+      "hash_can_authorize_normative_release": false
     },
     {
       "act_id": "PMR-2025-187-ZI-VII",
@@ -156,7 +166,9 @@
       "operative_class": "ART10_19_32_2_LOCAL_TAX_AND_REGISTRATION_POWERS",
       "entry_into_force_rule": "2026-01-01",
       "exact_entry_date_established": true,
-      "membership_change_proven_for_specific_id": false
+      "membership_change_proven_for_specific_id": false,
+      "response_digest_reproducibility": "NOT_CERTIFIED_DYNAMIC_HTML_PAGE",
+      "hash_can_authorize_normative_release": false
     },
     {
       "act_id": "PMR-2025-223-ZI-VII",
@@ -174,7 +186,9 @@
       "operative_class": "LOCAL_GOVERNMENT_ARTICLE_CHANGE_REQUIRES_EXACT_PROVISION_PROOF",
       "entry_into_force_rule": "DAY_AFTER_PUBLICATION_WITH_RETROACTIVE_REACH_2025-07-09",
       "exact_entry_date_established": false,
-      "membership_change_proven_for_specific_id": false
+      "membership_change_proven_for_specific_id": false,
+      "response_digest_reproducibility": "NOT_CERTIFIED_DYNAMIC_HTML_PAGE",
+      "hash_can_authorize_normative_release": false
     }
   ],
   "additional_saz_source": "https://vspmr.org/legislation/laws/zakonodateljnie-akti-pridnestrovskoy-moldavskoy-respubliki-v-sfere-konstitutsionnogo-stroya-osnov-pravoporyadka-a-takje-deyateljnosti-organov-gosudarstvennoy-vlasti-i-upravleniya/zakon-pridnestrovskoy-moldavskoy-respubliki-ob-organah-mestnoy-vlasti-mestnogo-samoupravleniya-i-gosudarstvennoy-administratsii-v-pridnestrovskoy-moldavskoy-respublike.html",
@@ -223,7 +237,8 @@
     "PMR-2025-223-ZI-VII_operational_clause_and_retroactivity",
     "PMR-2026-114-ZID-VIII_cross_archive_query_mismatch",
     "PMR-2026-6-ZD-VIII_official_record_lookup",
-    "local_subordinate_acts_and_CIK_individual_revisions"
+    "local_subordinate_acts_and_CIK_individual_revisions",
+    "SIGNED_PDF_OR_CANONICAL_LEGAL_TEXT_HASH_FOR_SEVEN_NEW_HTML_EDITS"
   ],
   "scope_count": 85,
   "identity_rows": [
@@ -1931,5 +1946,14 @@
   "exhaustiveness_certified": false,
   "semantic_acceptance": "BLOCKED_INCOMPLETE",
   "p91_import_allowed": false,
-  "actual_mutation_allowed": false
+  "actual_mutation_allowed": false,
+  "html_repeatability_test": {
+    "tested_act": "PMR-2025-223-ZI-VII",
+    "first_bytes": 409987,
+    "first_sha256": "a989247b15645602ba8f77bb10dae214f9f94cbf88dececd497e2a22c74fba4d",
+    "second_bytes": 409987,
+    "second_sha256": "8e5ace659a844083362dbdd23d1642a1da65df3b367a668fbdb3bd113e24142f",
+    "identical": false,
+    "conclusion": "RAW_HTML_CONTAINS_VOLATILE_PAYLOAD_AND_CANNOT_BE_USED_AS_IMMUTABLE_LEGAL_TEXT_FINGERPRINT"
+  }
 }
