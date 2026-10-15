@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.21.0'
@@ -22,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git diff --quiet HEAD^ HEAD -- data/current public/geo/actual || {
+          git diff --quiet origin/main HEAD -- data/current public/geo/actual || {
             echo 'P9.0.6.3 must never mutate ACTUAL or public geometries' >&2
             exit 1
           }
