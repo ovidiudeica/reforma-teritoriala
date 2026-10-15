@@ -22,6 +22,10 @@ for(const [id,bytes,sha] of originals){
   assert.match(readFileSync('docs/p9.0.7.2.3-ocr/'+id+'.txt','utf8'),/NOT the authentic legislative text/);
 }
 assert.equal(primary.get('PMR-2023-291-ZI-VII').in_force,'2024-01-01');
+assert(data.primary_documents.every(p=>p.relevant_operational_provisions_visually_proofread===true));
+assert(primary.get('PMR-2023-292-ZI-VII').articles_changed.some(s=>s.includes('б)')));
+assert(primary.get('PMR-2024-47-ZI-VII').articles_changed.some(s=>s.includes('г)')));
+assert.deepEqual(primary.get('PMR-2024-48-ZI-VII').articles_changed,['Article 12: remove subparagraph 3)','Article 38: remove subparagraph 6)','Article 38: remove subparagraph 11)']);
 assert.equal(primary.get('PMR-2023-292-ZI-VII').in_force,'2024-01-01');
 assert.equal(data.additional_2023_law.id,'PMR-2023-42-ZI-VII');
 assert.equal(data.additional_2023_law.published_register_id,'2023000402');
