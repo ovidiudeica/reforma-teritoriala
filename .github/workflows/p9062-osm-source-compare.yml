@@ -59,6 +59,10 @@ jobs:
           done
       - name: Compare all 177 OSM relations to 2026-10-12, 2026-10-13 and live OSM metadata
         run: node --max-old-space-size=5500 scripts/audit/p9062-osm-source-diff.mjs --reconcile
+      - name: Assert live full-geometry parser regression
+        run: node scripts/audit/p9062-full-geometry.mjs --self-test
+      - name: Compare full live ways/nodes and exact polygon edges for 177 relations
+        run: node --max-old-space-size=5500 scripts/audit/p9062-full-geometry.mjs --compare-full
       - name: Upload complete audit evidence even if incomplete or failed
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -68,6 +72,8 @@ jobs:
           path: |
             outputs/P9.0.6.2/summary.json
             outputs/P9.0.6.2/records.json
+            outputs/P9.0.6.2/full-live-records.json
+            outputs/P9.0.6.2/full-live-summary.json
             outputs/P9.0.6.2/errors.json
             outputs/P9.0.6.2/input/sources.json
             outputs/P9.0.6.2/input/fileinfo-*.txt
