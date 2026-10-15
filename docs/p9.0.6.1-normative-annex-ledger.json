@@ -3618,5 +3618,17 @@
     "rail_station_vs_village": 1,
     "total": 11
   },
-  "method_note_geometry": "Geometric parent OSM relation is copied from P9.0.4.2 source review, never derived from the administrative register. Source parent IDs in annex hits are analyst crosswalks; no semantic promotion."
+  "method_note_geometry": "Geometric parent OSM relation is copied from P9.0.4.2 source review, never derived from the administrative register. Source parent IDs in annex hits are analyst crosswalks; no semantic promotion.",
+  "normative_to_osm_crosswalk_audit": {
+    "unique_textual_localities_including_aliases": 73,
+    "agreeing_analyst_geometric_region_crosswalks": 72,
+    "disagreement": 1,
+    "disagreement_ids": [
+      "osm-r1216706"
+    ],
+    "multiple_textual_occurrences_not_adjudicated_by_geometry": 11,
+    "without_2023_independent_settlement": 1,
+    "geometric_parent_sources": "P9.0.4.2 frozen MD OSM DE-9IM classification",
+    "caveat": "Agreement is NOT evidence of administrative authority or effective 2026 control; Cremenciug is an explicit legitimate discrepancy of distinct parent roles."
+  }
 }
