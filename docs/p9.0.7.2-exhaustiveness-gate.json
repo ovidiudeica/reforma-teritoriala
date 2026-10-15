@@ -24,6 +24,18 @@
       "repository_path": "docs/p9.0.7.1-primary/annex-2-compatible-names.docx",
       "sha256": "d2675ae413d36eb3d0cd04d56de16c54b1086f05543da128fcc3016b4ded95ec",
       "git_blob_sha1": "66174c9ca9b644264a03c44f11308816c1977dbc"
+    },
+    {
+      "id": "minjust_official_publications",
+      "url": "https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.1",
+      "verified_indication": "Official publication 2026000856 on 2026-05-29 concerns law 114-ЗИД-VIII",
+      "limitation": "Index listing does not give verified full-text bytes/effective date"
+    },
+    {
+      "id": "presidential_law_index",
+      "url": "https://president.gospmr.org/pravovye-akty/zakoni/?page=7",
+      "verified_indication": "Independent institutional listing law 114-ЗИД-VIII of 2026-05-29",
+      "limitation": "Listing not a full normative text"
     }
   ],
   "years": [
@@ -72,12 +84,34 @@
       "all_relevant_primary_acts_hashed": false,
       "entry_into_force_reconciled": false,
       "archival_gap_status": "UNRESOLVED",
-      "verified_relevant_amendments": [],
+      "verified_relevant_amendments": [
+        "PMR-2026-114-ZID-VIII"
+      ],
       "absence_of_amendments_proven": false
     }
   ],
-  "act_records": [],
-  "act_record_completeness": "UNKNOWN_NOT_ZERO_ACTS",
+  "act_records": [
+    {
+      "id": "PMR-2026-114-ZID-VIII",
+      "act_number": "114-ЗИД-VIII",
+      "adopted_or_dated": "2026-05-29",
+      "title_ru": "О внесении изменений и дополнений в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»",
+      "official_publication_id": "2026000856",
+      "official_publication_date": "2026-05-29",
+      "source_urls": [
+        "https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.1",
+        "https://president.gospmr.org/pravovye-akty/zakoni/?page=7"
+      ],
+      "independent_cross_source_identification": "CONFIRMED_BY_MINJUST_AND_PRESIDENTIAL_ACT_INDEX",
+      "primary_full_text_sha256": null,
+      "full_text_archived": false,
+      "effective_date": null,
+      "article_diff_status": "PENDING_PRIMARY_TEXT",
+      "per_identity_impact": "UNKNOWN_ALL_85",
+      "certified": false
+    }
+  ],
+  "act_record_completeness": "AT_LEAST_ONE_RELEVANT_2026_AMENDMENT_IDENTIFIED_NOT_EXHAUSTIVE",
   "identity_count": 85,
   "identity_impact": [
     {
