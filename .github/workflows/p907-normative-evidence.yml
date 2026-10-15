@@ -30,7 +30,8 @@ jobs:
           node --check docs/p9.0.7.2.2-validate.mjs
           node --check docs/p9.0.7.2.3-validate.mjs
           node --check docs/p9.0.7.2.4-validate.mjs
-      - name: Execute all seven evidence and denial gates
+          node --check docs/p9.0.7.2.5-validate.mjs
+      - name: Execute all eight evidence and denial gates
         run: |
           node docs/p9.0.7-validate-evidence.mjs
           node docs/p9.0.7.1-validate-chain.mjs
@@ -39,5 +40,6 @@ jobs:
           node docs/p9.0.7.2.2-validate.mjs
           node docs/p9.0.7.2.3-validate.mjs
           node docs/p9.0.7.2.4-validate.mjs
+          node docs/p9.0.7.2.5-validate.mjs
       - name: No generated changes or mutation
         run: git diff --exit-code
