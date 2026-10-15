@@ -45,7 +45,7 @@ for(const y of data.years){
  assert.deepEqual(y.act_type_distribution,typeRecs[y.year]);
  assert.equal(Object.values(typeRecs[y.year]).reduce((s,n)=>s+n,0),expected);
  assert(y.publications.every(r=>r.publication_id.startsWith(String(y.year))&&r.publication_date.endsWith(String(y.year))&&r.act_type&&r.source_url?.includes('/oo/Publication.nsf/')));
- assert(y.source_pages.every((p,i)=>p.monthPosition===i+1&&p.extracted_count>0&&p.source_url.includes('Start=')&&p.source_html_sha256?.length===64&&!p.error));
+ assert(y.source_pages.every((p,i)=>p.monthPosition===i+1&&p.extracted_count>0&&p.url.includes('Start=')&&p.source_html_sha256?.length===64&&!p.error));
  assert.equal(y.publication_id_series.consecutive_complete,true);
  assert.equal(y.annual_index_exactly_reconciled,true);
  assert.equal(y.issuer_entity_pending_count,expected);
