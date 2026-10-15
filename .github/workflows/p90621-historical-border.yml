@@ -1,0 +1,53 @@
+name: P9.0.6.2.1 historical OSM way/node reconstruction (audit-only)
+on:
+  pull_request:
+    branches: [main, audit/p9.0.6.2-osm-version-geometry-reconciliation]
+    paths:
+      - 'docs/p9.0.6.2.1-*'
+      - 'scripts/audit/p90621-historical-border.mjs'
+      - '.github/workflows/p90621-historical-border.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  historical-border:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install pinned audited dependencies offline
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Install osmium read-only polygon extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+      - name: Test historical timestamp parser and DE9IM geometry
+        run: node scripts/audit/p90621-historical-border.mjs --self-test
+      - name: Verify persisted 84 historical relation evidence against ACTUAL baseline
+        run: node docs/p9.0.6.2.1-validate-evidence.mjs
+      - name: Acquire and verify exact 2026-10-12 Moldova root PBF
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/P9.0.6.2.1/input
+          curl -fsSL --retry 4 --connect-timeout 40 --max-time 600 'https://download.geofabrik.de/europe/moldova-261012.osm.pbf' -o "$RUNNER_TEMP/moldova-261012.osm.pbf"
+          echo "4ebd791fb953a22961e40ef7921914251c7b7292c33ed1e90e919488f1a397b8  $RUNNER_TEMP/moldova-261012.osm.pbf" | sha256sum --check
+          osmium fileinfo -e "$RUNNER_TEMP/moldova-261012.osm.pbf" > outputs/P9.0.6.2.1/input/pinned-fileinfo.txt
+          grep -F 'osmosis_replication_timestamp=2026-10-12T20:21:35Z' outputs/P9.0.6.2.1/input/pinned-fileinfo.txt
+          osmium tags-filter "$RUNNER_TEMP/moldova-261012.osm.pbf" r/boundary=administrative -o "$RUNNER_TEMP/administrative-pinned.osm.pbf"
+          osmium export -e --geometry-types=polygon --attributes=type,id "$RUNNER_TEMP/administrative-pinned.osm.pbf" -o outputs/P9.0.6.2.1/input/pinned-root.geojsonseq 2>outputs/P9.0.6.2.1/input/osmium-warnings.txt
+      - name: Reconstruct exact historical way/node versions and recompute 84 DE9IM relations
+        run: node --max-old-space-size=5500 scripts/audit/p90621-historical-border.mjs --historical
+      - name: Preserve each historical ID including unresolved cases
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p90621-historical-way-node-topology-evidence
+          if-no-files-found: warn
+          path: |
+            outputs/P9.0.6.2.1/summary.json
+            outputs/P9.0.6.2.1/records.json
+            outputs/P9.0.6.2.1/progress.jsonl
+            outputs/P9.0.6.2.1/input/pinned-fileinfo.txt
+            outputs/P9.0.6.2.1/input/osmium-warnings.txt
