@@ -20,7 +20,8 @@ const originals=[
 for(const [id,bytes,sha] of originals){
   const a=primary.get(id);assert(a);assert.equal(a.bytes,bytes);assert.equal(a.sha256,sha);
   assert.equal(a.bytes_integrity,'VERIFIED_BY_DIRECT_DOWNLOAD_SHA256');
-  assert.equal(a.direct_named_parent_change,'NONE_IDENTIFIED_IN_THIS_ACT');
+  if(id==='PMR-2023-48-ZI-VII') assert.equal(a.direct_named_parent_change,'ANNEX_1_FULL_REPLACEMENT_DATED_2023');
+  else assert.equal(a.direct_named_parent_change,'NONE_IDENTIFIED_IN_THIS_ACT');
   assert.equal(a.future_parent_effect,'NOT_CERTIFIED');
   if(a.git_primary_path){const {createHash}=await import('node:crypto');assert.equal(createHash('sha256').update(readFileSync(a.git_primary_path)).digest('hex'),sha)}
   else assert.match(readFileSync('docs/p9.0.7.2.3-ocr/'+id+'.txt','utf8'),/NOT the authentic legislative text/);
