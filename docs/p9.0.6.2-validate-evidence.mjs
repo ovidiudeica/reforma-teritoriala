@@ -41,5 +41,15 @@ assert.equal(independent.counts.node_count_differences,0);
 assert.equal(independent.counts.relation_version_differences,0);
 assert.equal(independent.counts.ordered_members_differences,0);
 assert.equal(independent.counts.tag_differences,0);
-assert(independent.rows.every(r=>r.edge_hash_equal_between_runs===true&&r.way_count_equal===true&&r.node_count_equal===true&&r.relation_version_equal===true&&r.members_hash_equal===true&&r.tags_hash_equal===true));
+assert.equal(independent.schema_version,'p9062-two-independent-full-source-run-review-v2');
+const originalEdgeHashes=new Map(rows.map(r=>[r.osm_id,r.live_polygon_edges_sha256]));
+assert(independent.rows.every(r=>
+ /^[0-9a-f]{64}$/.test(r.first_polygon_edges_sha256)&&
+ /^[0-9a-f]{64}$/.test(r.second_polygon_edges_sha256)&&
+ r.first_polygon_edges_sha256===r.second_polygon_edges_sha256&&
+ r.first_polygon_edges_sha256===originalEdgeHashes.get(r.osm_id)&&
+ r.edge_hash_equal_between_runs===true&&
+ r.way_count_equal===true&&r.node_count_equal===true&&
+ r.relation_version_equal===true&&r.members_hash_equal===true&&r.tags_hash_equal===true
+));
 console.log('P9062_RECONCILIATION_EVIDENCE_PASS: 177 metadata, 93 exact live polygons, 84 border-clipped historical exceptions, P9.1 DENIED');
