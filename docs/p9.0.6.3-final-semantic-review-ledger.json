@@ -1,0 +1,4200 @@
+{
+  "schema_version": "p9063-final-semantic-per-identity-review-v1",
+  "audit_date": "2026-10-15",
+  "main_source_sha": "61d869f9d124a8b8a57cc1a7524847e60947c2ca",
+  "context": "De facto jurisdictional claims, not sovereignty or changes to Moldova legal CUATM",
+  "sources": {
+    "normative_2023": {
+      "annex1_url": "https://www.vspmr.org/file.xp?file=133268",
+      "annex1_sha256": "43b8270b4e04c8922af551a72dc494d7bc02628fe827a8ec28bb2802a9f94b5b",
+      "annex2_url": "https://www.vspmr.org/file.xp?file=133269",
+      "annex2_sha256": "d2675ae413d36eb3d0cd04d56de16c54b1086f05543da128fcc3016b4ded95ec"
+    },
+    "law114_2026": {
+      "signed_date": "2026-05-29",
+      "official_publication_date": "2026-05-29",
+      "act_number": "114-ЗИД-VIII",
+      "official_page": "https://president.gospmr.org/pravovye-akty/zakoni/zakon-pridnestrovskoy-moldavskoy-respubliki-o-vnesenii-izmeneniy-i-dopolneniy-v-zakon-pridnestrovskoy-moldavskoy-respubliki-ob-administrativno-territorialjnom-ustroystve-pridnestrovskoy-moldavskoy-respubliki-.html",
+      "signed_pdf_url": "https://president.gospmr.org/file.xp?file=101071",
+      "signed_pdf_sha256": "c9d05f579677f176007bd6987bf11031c986299e180d9e98577715f7cb1cc566",
+      "signed_pdf_pages": 4,
+      "content_type": "image_only_pdf_checked_visually",
+      "article_3": "Effective only after six months from official publication",
+      "operative_on_2026_10_15": false,
+      "annex1_named_settlement_list_amended_directly_by_this_act": false,
+      "law_amendment_history_preamble_last_prior": "2023-03-24, 48-ЗИ-VII",
+      "complete_compilation_of_all_annex_publications_verified": false
+    },
+    "geometry": {
+      "snapshot_sha256": "4ebd791fb953a22961e40ef7921914251c7b7292c33ed1e90e919488f1a397b8",
+      "related_prs": [
+        316,
+        317
+      ],
+      "reference_timestamp": "2026-10-12T20:21:35Z",
+      "exact_85_candidate_polygons": true,
+      "ref_boundary_84_temporal_proofs": "docs/p9.0.6.2.1-historical-evidence.json"
+    },
+    "contemporary_zone_of_security": {
+      "md_government_june2026_url": "https://gov.md/ro/comunicate-de-presa-bpr/delegatia-republicii-moldova-abordat-circumstantele-care-tensioneaza",
+      "note": "Security-zone access/post reports are evidence of operational disputes, not polygon-wide administrative boundaries"
+    },
+    "lunga": {
+      "election_2025_url": "https://dubossary.ru/wp-content/uploads/2025/10/shema-izbir-uchastkov1.pdf",
+      "role": "Dubasari urban microraion, polling station 82; not confirmed as separate 2023 village"
+    },
+    "cremenciug": {
+      "normative_claim": "Tiraspol de facto",
+      "geometric_parent": "Slobozia",
+      "legal_moldova_parent": "Căușeni; preserve official relationship"
+    }
+  },
+  "counts": {
+    "cases": 85,
+    "normative_2023_named": 84,
+    "normative_2023_no_independent_locality": 1,
+    "category_counts": {
+      "CURATED_ALIAS_POTENTIAL_MATCH": 4,
+      "HOMONYM_MULTIPLE_ENTRIES_2023": 11,
+      "NO_EXACT_2023_NAME": 1,
+      "UNIQUE_NAME_2023": 69
+    },
+    "geometry_85_verified": 85,
+    "per_id_current_2026_membership_certified": 0,
+    "per_id_entire_polygon_control_certified": 0,
+    "semantically_authorized_for_import": 0
+  },
+  "decision": {
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "p91_import_allowed": false,
+    "non_geometric_membership_evidence_incomplete": true,
+    "legal_md_parents_immutable": true,
+    "import_data_mutation_performed": false,
+    "release_snapshot_unchanged": true,
+    "gate_recommendation": "DO_NOT_PROMOTE_IN_ACTUAL"
+  },
+  "rows": [
+    {
+      "actual_id": "osm-r1216706",
+      "name_ro": "Cremenciug",
+      "name_ru_historic": "Кременчуг",
+      "legacy_review_class": "contemporary_claim_geo_parent_divergence",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 21,
+          "region": "Тирасполь",
+          "region_osm_id": "1702219",
+          "council": null,
+          "role": "село",
+          "official_name_ru": "Кременчуг"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Тирасполь",
+        "administrative_council": null,
+        "source_paragraph": 21,
+        "osm_region_crosswalk_not_authoritative": "1702219"
+      },
+      "claimed_administrative_parent_2025_individual": "1702219",
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 24,
+        "relation_timestamp": "2025-12-01T14:51:57Z",
+        "ordered_members_sha256": "bceb7472345351be0c37f74ffc3c8014341bb28f69cc5f941708a026429e20ef",
+        "polygon_sha256": "2451fe9e7c2f1891ac173db0bcc62ce8eaaa759605e95824e4033844f4b7991c",
+        "live_polygon_edges_sha256": "8110cdcb27cc9d811de80ec4e7647ee1fedcfbdb00ecd46d03fdf418309dc077"
+      },
+      "normative_role_or_identity_conflicts": [
+        "CLAIM_TIRASPOL_VS_GEOMETRIC_SLOBOZIA_DISTINCT_ROLES"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r12215667",
+      "name_ro": "Gîsca",
+      "name_ru_historic": "Гыска",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 14,
+          "region": "Бендеры",
+          "region_osm_id": "944727",
+          "council": null,
+          "role": "село",
+          "official_name_ru": "Гыска"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Бендеры",
+        "administrative_council": null,
+        "source_paragraph": 14,
+        "osm_region_crosswalk_not_authoritative": "944727"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "944727",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 15,
+        "relation_timestamp": "2026-08-24T20:25:03Z",
+        "ordered_members_sha256": "2fd70d42bc8405a0d10270eca493c7ac17e18ec59a2ae7a5a62dc044342b1cb1",
+        "polygon_sha256": "3d45a65e945c1251013359a287c4f047642a7845adf910d8f99591d3bb47de0e",
+        "live_polygon_edges_sha256": "aa8a2427a7474030e2c166de1247a32350aee5032fd51b3e21c7168b186ba6fc"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r12463378",
+      "name_ro": "Proteagailovca",
+      "name_ru_historic": "Протягайловка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 15,
+          "region": "Бендеры",
+          "region_osm_id": "944727",
+          "council": null,
+          "role": "село",
+          "official_name_ru": "Протягайловка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Бендеры",
+        "administrative_council": null,
+        "source_paragraph": 15,
+        "osm_region_crosswalk_not_authoritative": "944727"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "944727",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 15,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "4b21c06bffd171e36aa7749ff3beabd4513445387fe43466c1043acaa27b5ba0",
+        "polygon_sha256": "33953d74404a14e3b33b4428eb7ee484474e10f5629f8de023f5afd8e3a30ca0",
+        "live_polygon_edges_sha256": "75da6e2ac1148c72d2b0f7c1a4dc263efdc2d079b9c36bf16a7f9378b0aa1c98"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r12463379",
+      "name_ro": "Bender",
+      "name_ru_historic": "Бендеры",
+      "legacy_review_class": "bender_city_locality_role_resolved",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 12,
+          "region": "Бендеры",
+          "region_osm_id": "944727",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Бендеры"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Бендеры",
+        "administrative_council": null,
+        "source_paragraph": 12,
+        "osm_region_crosswalk_not_authoritative": "944727"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "944727",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 20,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "88148c8a81af5b98c772b82d213bd803ad6a9924083505c238786e2c696df299",
+        "polygon_sha256": "41f1e733e17b0c7c765239a36d68a931b609731498e959511060132ce23a92aa",
+        "live_polygon_edges_sha256": "b54738228082e3f0b5ceb3838f8054ebedae9266dfc501256b54012dd293c759"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r18941889",
+      "name_ro": "Tiraspolul Nou",
+      "name_ru_historic": "Ново-Тираспольский",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 20,
+          "region": "Тирасполь",
+          "region_osm_id": "1702219",
+          "council": null,
+          "role": "поселок",
+          "official_name_ru": "Ново-Тираспольский"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Тирасполь",
+        "administrative_council": null,
+        "source_paragraph": 20,
+        "osm_region_crosswalk_not_authoritative": "1702219"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702219",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 7,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "04fdeac3309bc471a91ce93ab03ea544524c44cac923f6ce887905a3698b8249",
+        "polygon_sha256": "d9c37343f2353662496237f944672af83c2c7dc7cb6e4fe69873226350b49557",
+        "live_polygon_edges_sha256": "a78489965ad3de80d764087b8f2a48d126434233d4065e7cbaedaf2e3ca7cc1c"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r18941890",
+      "name_ro": "Tiraspol",
+      "name_ru_historic": "Тирасполь",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 18,
+          "region": "Тирасполь",
+          "region_osm_id": "1702219",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Тирасполь"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Тирасполь",
+        "administrative_council": null,
+        "source_paragraph": 18,
+        "osm_region_crosswalk_not_authoritative": "1702219"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702219",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 12,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "375870d54b494c18d326629ee12ac85e21784a9c3a893298a2ebaa70338e9bbc",
+        "polygon_sha256": "15e05b8c1963869ea3ef3d16f4b2224ffc5d821909d13aef4cfb72b11de60e74",
+        "live_polygon_edges_sha256": "59d16cf1a7998b465afb1494d2f929bc805792f20ca516d8f07140dd0dc34a11"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19001619",
+      "name_ro": "Lunga",
+      "name_ru_historic": "Лунга",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "NO_EXACT_2023_NAME",
+      "normative_2023_register_candidates": [],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": false,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "91dc4dc0dd80b9e55a3a3c31f40c491f951ee387fcaef082b2ac1826b48c7999",
+        "polygon_sha256": "a82e024dc5bf1bb74d65ffcc4ee0396ea6728b831e908297206cebc457ad675b",
+        "live_polygon_edges_sha256": "1a83a31087d799c2fdddc144fcfa6fa60028b6146c47e3c01ccf62787b153d2b"
+      },
+      "normative_role_or_identity_conflicts": [
+        "NOT_AN_INDEPENDENT_SETTLEMENT_IN_2023_ANNEX",
+        "DUBASARI_URBAN_MICRODISTRICT_VS_2010_VILLAGE_ROLE"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19012105",
+      "name_ro": "Țîbuleuca",
+      "name_ru_historic": "Цыбулевка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 108,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": "Цыбулевский сельсовет",
+          "role": "село",
+          "official_name_ru": "Цыбулевка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Дубоссарский район",
+        "administrative_council": "Цыбулевский сельсовет",
+        "source_paragraph": 108,
+        "osm_region_crosswalk_not_authoritative": "1702215"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 10,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "4d25c587eca0e97025e9e2aefe91b999953af03b8e0ee448c8d7404d9e4f71ab",
+        "polygon_sha256": "7e5ea876ef83015dcd72d6d3c486ff7ac3d1a4eb042a2f0e82391c2de2973567",
+        "live_polygon_edges_sha256": "edee1d92283797e540e91f48b52f04cbe1e9f7c84b5ca310678a0fef849be165"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19013328",
+      "name_ro": "Goian",
+      "name_ru_historic": "Гоян",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "normative_2023_register_candidates": [
+        {
+          "line": 83,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": "Гоянский сельсовет",
+          "role": "село",
+          "official_name_ru": "Гояны"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Дубоссарский район",
+        "administrative_council": "Гоянский сельсовет",
+        "source_paragraph": 83,
+        "osm_region_crosswalk_not_authoritative": "1702215"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "33f2720d7d765e23e824b5a891eb3a5effdbe001d1b4159f669f6aa4d8a2f8aa",
+        "polygon_sha256": "fbc9ee557b88a94fec70363d9e4cb9079eb741acb08ac5949d3978a37a3387fb",
+        "live_polygon_edges_sha256": "bf92d95340db949161bae1526ce4816fe32e4f03a2fdc7c5e371e56970ef0c76"
+      },
+      "normative_role_or_identity_conflicts": [
+        "CROSS_LANGUAGE_IDENTITY_BINDING_NOT_INDEPENDENTLY_CERTIFIED"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19013329",
+      "name_ro": "Doibani I",
+      "name_ru_historic": "Дойбаны I",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 72,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": "Дойбанский сельсовет",
+          "role": "село",
+          "official_name_ru": "Дойбаны I"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Дубоссарский район",
+        "administrative_council": "Дойбанский сельсовет",
+        "source_paragraph": 72,
+        "osm_region_crosswalk_not_authoritative": "1702215"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "6915c958d09c40ffc59a1350b882bfc51a12b4cb58921fcea462b36369e8330f",
+        "polygon_sha256": "be3db4aecdae5bf7cab6fca97139330230cda56b1a01af2d827f67932c09b188",
+        "live_polygon_edges_sha256": "138f748037bf674e2e0c010eb16cef23497225bb9b57caf942e79921ec34ca7e"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015106",
+      "name_ro": "Cuzmin",
+      "name_ru_historic": "Кузьмин",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 127,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Кузьминский сельсовет",
+          "role": "село",
+          "official_name_ru": "Кузьмин"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Кузьминский сельсовет",
+        "source_paragraph": 127,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "2f29e7e7aebf87b930c9cd2dcbe28e8f5c667e760c32c0c8c34aaaa12bf66849",
+        "polygon_sha256": "4139314eb8bb677212bdc81556b0c20985f3a0b03f9f5f12cbafa214938bb335",
+        "live_polygon_edges_sha256": "e0c622a56706879d846a27dee7136bb00fdefd95a5debc05326343301e994bdc"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015107",
+      "name_ro": "Hristovaia",
+      "name_ru_historic": "Хрустовая",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 145,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Хрустовской сельсовет",
+          "role": "село",
+          "official_name_ru": "Хрустовая"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Хрустовской сельсовет",
+        "source_paragraph": 145,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "c0e8c706458d113e7c82b4a2678e2aa17360f8b3d2a6627251c824a3da2bf714",
+        "polygon_sha256": "a3dc5d31b7cbecde4888bec467e5561e0db13010ea749472b883bbe7ab87ee3c",
+        "live_polygon_edges_sha256": "c6c1bdc323ecc33db11d0d9986d145d9b3505b6150785e3dd51a053de18f30d4"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015108",
+      "name_ro": "Severinovca",
+      "name_ru_historic": "Севериновка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 141,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Севериновский сельсовет",
+          "role": "село",
+          "official_name_ru": "Севериновка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Севериновский сельсовет",
+        "source_paragraph": 141,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "325477cdfbdc6a541c77e2caf1bae631430e9feac469bdb593c95621b204def9",
+        "polygon_sha256": "383eba2e3b09a7ca2dfd756237de691dcec783efeaf313b1c6d48608776b8689",
+        "live_polygon_edges_sha256": "4261d588a9e1277833ec97633089ede2e3bf11b300454ee71f8be350615edb9f"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015109",
+      "name_ro": "Crasnîi Octeabri",
+      "name_ru_historic": "Красный Октябрь",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 124,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Краснооктябрьский сельсовет",
+          "role": "село",
+          "official_name_ru": "Красный Октябрь"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Краснооктябрьский сельсовет",
+        "source_paragraph": 124,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 10,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "8294ec05d18544729455075978d6c29193b35597fb319fcfea5ac7cc6d97aea6",
+        "polygon_sha256": "3e2f99d3362a5785dbe310ea03d4ad32373f37529017acf2ee6efd629de964d1",
+        "live_polygon_edges_sha256": "562d8010a2f452d4b30e5cc696e3e98d5e8fb6d21f2fc40750607618e2709d40"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015110",
+      "name_ro": "Camenca",
+      "name_ru_historic": "Каменка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 110,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Каменка"
+        },
+        {
+          "line": 111,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Каменка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 12,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "4037867dfaddfaacf2ab39fcee6dacd50a917dd7f13b448b8b3f6aa4252ec0e8",
+        "polygon_sha256": "8bf555f428f726d62b8fcc294a4f3b864b1e6798aa81b1d5a7bc13d54831c313",
+        "live_polygon_edges_sha256": "a6d6274f6fd4d6a907e4c2e39a760ac996c8f499997639404303e6def1bdc36d"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015111",
+      "name_ro": "Podoima",
+      "name_ru_historic": "Подойма",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 131,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Подойменский сельсовет",
+          "role": "село",
+          "official_name_ru": "Подойма"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Подойменский сельсовет",
+        "source_paragraph": 131,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "82ffe7670c04e88bca2b8c4820005578dafde4e87fc0e88681cc6ffca58b359a",
+        "polygon_sha256": "2e226b350d540b0a157d639ee55fdec7accddf288d5ec32e3dc9e8a4cb083076",
+        "live_polygon_edges_sha256": "a3a300f2dde5edcb48761d15090990f9494b32b406468889032cabd580e3cc37"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015112",
+      "name_ro": "Rotari",
+      "name_ru_historic": "Ротар",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 138,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Ротарский сельсовет",
+          "role": "село",
+          "official_name_ru": "Ротар"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Ротарский сельсовет",
+        "source_paragraph": 138,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "1c52f4b611c82f1d2350d7768b5cfaed927be7bb94a35769346f93db933d3eb6",
+        "polygon_sha256": "3ce1634a2fccd2f12718dc937f367b86b7e398bd21c6c72bb086efde0b430f30",
+        "live_polygon_edges_sha256": "d8b02492361cdc64fdae7385324eda5b33efdf14ec7f23b5ecf924b8ce387deb"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015113",
+      "name_ro": "Valea Adîncă",
+      "name_ru_historic": "Валя-Адынке",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "normative_2023_register_candidates": [
+        {
+          "line": 114,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Валя-Адынкский сельсовет",
+          "role": "село",
+          "official_name_ru": "Валя-Адынка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Валя-Адынкский сельсовет",
+        "source_paragraph": 114,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "d90dd512646864b7cb152ffc598ccc6b4557a8c7e9a63bd0e6ea0d4396f81d68",
+        "polygon_sha256": "278b1380802590c2a13e357f542951fdef00b15df59a713e8e5981564e7dfffa",
+        "live_polygon_edges_sha256": "c8dea2b9f50fce330b94654bcccecf47335c519df5aeef93241a4e8a5f697f34"
+      },
+      "normative_role_or_identity_conflicts": [
+        "CROSS_LANGUAGE_IDENTITY_BINDING_NOT_INDEPENDENTLY_CERTIFIED"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015114",
+      "name_ro": "Rașcov",
+      "name_ru_historic": "Рашково",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "normative_2023_register_candidates": [
+        {
+          "line": 134,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Рашковский сельсовет",
+          "role": "село",
+          "official_name_ru": "Рашков"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Рашковский сельсовет",
+        "source_paragraph": 134,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "b845e695a08a0a15febf4ae586d9d153abd0acf553bbbe5409bbfde8ea3aac36",
+        "polygon_sha256": "77bffbd334e17842f6b96f008b18d56168bfb4c54fc44674ff45ddb24f4690bc",
+        "live_polygon_edges_sha256": "dccf1b17b1fe969be353f27a5a3d9f522052bfe6ea70f85f1aa0e557b8326fcf"
+      },
+      "normative_role_or_identity_conflicts": [
+        "CROSS_LANGUAGE_IDENTITY_BINDING_NOT_INDEPENDENTLY_CERTIFIED"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015115",
+      "name_ro": "Caterinovca",
+      "name_ru_historic": "Катериновка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 120,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Катериновский сельсовет",
+          "role": "село",
+          "official_name_ru": "Катериновка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Катериновский сельсовет",
+        "source_paragraph": 120,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "035c0a6210698a6681cf25229b342f71f4aad5653e7a21c2283ea82ce7921186",
+        "polygon_sha256": "d134f7744c75bbea6b9a25d06f384e00770eb1e6c9f5950510a4b11aa61aec99",
+        "live_polygon_edges_sha256": "f55398a3279fbe808e2a0d43e6a04b947d68572bffca14dc8ac3cb143a66fce1"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015284",
+      "name_ro": "Vadul Turcului",
+      "name_ru_historic": "Вадул-Туркул",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "normative_2023_register_candidates": [
+        {
+          "line": 161,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Вадатурковский сельсовет",
+          "role": "село",
+          "official_name_ru": "Вадатурково"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Вадатурковский сельсовет",
+        "source_paragraph": 161,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "4010c52a450695d92fb8d17b95db3401c4ed2ce13973f6d1fad2a351a04d4740",
+        "polygon_sha256": "78899db913ad5d7a15c6cd4b3f8a213b60bc4b498c6a67e423a56acd20ab0ecb",
+        "live_polygon_edges_sha256": "542f26faa1b5e754170e886be2b482c2df4dd68df2eafd3a2bda66f5e0fc98b8"
+      },
+      "normative_role_or_identity_conflicts": [
+        "CROSS_LANGUAGE_IDENTITY_BINDING_NOT_INDEPENDENTLY_CERTIFIED"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015285",
+      "name_ro": "Beloci",
+      "name_ru_historic": "Белочи",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 153,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Белочинский сельсовет",
+          "role": "село",
+          "official_name_ru": "Белочи"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Белочинский сельсовет",
+        "source_paragraph": 153,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "27b038fee99b9fa19c223da4ade2d73345d0ec87e94c7ddec27c37fe00eabcf7",
+        "polygon_sha256": "36f9cbe0e8043461cebd85f4cf612d3f9488675be80da8af7d6baf27b20cecfe",
+        "live_polygon_edges_sha256": "8d4fc90073258f69077df7065cb0b3eeb2af75f4dd2ad7d9edab9eec2a15c7ae"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015286",
+      "name_ro": "Plopi",
+      "name_ru_historic": "Плоть",
+      "legacy_review_class": "plopi_cross_language_alias_supported",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 201,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Плотьянский сельсовет",
+          "role": "село",
+          "official_name_ru": "Плоть"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Плотьянский сельсовет",
+        "source_paragraph": 201,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 7,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "6fdc80dfbae578555569a598e40ecd298536c149ee7c5d35871ccd3b5864d25c",
+        "polygon_sha256": "197a9b33f8302787dcb06506156633b64a5a5c606b1d6e69024351b69cc96550",
+        "live_polygon_edges_sha256": "79f84b9a7ad95d843e4b2eed2d0ab456867c872bc96db2e01ec4eb645cf7634d"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015287",
+      "name_ro": "Sovietscoe",
+      "name_ru_historic": "Советское",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 209,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Советский сельсовет",
+          "role": "село",
+          "official_name_ru": "Советское"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Советский сельсовет",
+        "source_paragraph": 209,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 7,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "a3123247915f7350bced49b50baa2066c6652de17a7f84abf3d37fb37af142d3",
+        "polygon_sha256": "7847c3c7adc90606b8d6595195db43cd97294ae9209867be6b9d5444d2725b4f",
+        "live_polygon_edges_sha256": "6c6cfbf9a2b9923d184d22796d04661c4d2eb1e849257940209a3dc4183a4328"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19015304",
+      "name_ro": "Stroiești",
+      "name_ru_historic": "Строенцы",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 211,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Строенецкий сельсовет",
+          "role": "село",
+          "official_name_ru": "Строенцы"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Строенецкий сельсовет",
+        "source_paragraph": 211,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "96df7d8f95e21126883351c5710781f63b052f8becaf11fa1405f4cc9b5fee18",
+        "polygon_sha256": "eaabc365ae32ca6c2ab7f6d3756e092837d0280d8fbeb2e1b4ca173ba260f02b",
+        "live_polygon_edges_sha256": "d0f417920e80e7ab9fe7ac1957f2686c830348a89a76289465c4f8bbae818661"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19016165",
+      "name_ro": "Andreevca",
+      "name_ru_historic": "Андреевка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 149,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Андреевский сельсовет",
+          "role": "село",
+          "official_name_ru": "Андреевка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Андреевский сельсовет",
+        "source_paragraph": 149,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "0cede6f7908b80575020572fd91729c62a52f2bc12dda6922922183562bc11c0",
+        "polygon_sha256": "2b78047f17ed1151a0d19a56075cac0b78c2b8e37fb73274f9d9755d530a895b",
+        "live_polygon_edges_sha256": "e70759c8156b9df06268d0186ba6702e5bc10eabd5404b8b952407fa3c5867f3"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19016166",
+      "name_ro": "Ulmu",
+      "name_ru_historic": "Ульма",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 216,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Ульманский сельсовет",
+          "role": "село",
+          "official_name_ru": "Ульма"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Ульманский сельсовет",
+        "source_paragraph": 216,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 10,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "5894dcef05921a35d8675fe18bbdb1d2bc05b3aec6304a3507d0f4e37cd17de7",
+        "polygon_sha256": "e6b027ed378b8396933e70d92deb3e142bd2b1059fc11878d4dbc6c1a6a885f5",
+        "live_polygon_edges_sha256": "c1a8c5954dd895e55fe6c79a5172c6150d443e2d465a577e1b08b34ca438dd8b"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19016167",
+      "name_ro": "Vărăncău",
+      "name_ru_historic": "Воронково",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 164,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Воронковский сельсовет",
+          "role": "село",
+          "official_name_ru": "Воронково"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Воронковский сельсовет",
+        "source_paragraph": 164,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 7,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "3a3dd859eef6fe245a3398001aaf83c76f4141691b894c3ad530355abb4e3434",
+        "polygon_sha256": "b5f1aa16e72affc89baafe01b7b3115912a3ba26ef6185dd2a6693598443f533",
+        "live_polygon_edges_sha256": "19c61265a71dcb700228e7689bfd8cb6d0a01b91b02dcd491176ad181212dcef"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r19069840",
+      "name_ro": "Delacău",
+      "name_ru_historic": "Делакеу",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 26,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": null,
+          "role": "село",
+          "official_name_ru": "Делакеу"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": null,
+        "source_paragraph": 26,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 10,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "459a2d9d71fad3193971118d7389eb10fbc7ba34705c4c2a2943d762ec334bba",
+        "polygon_sha256": "13e62531489fa9808d00d980ac8794c9206489f6445ac1a688a6d96e2faf902f",
+        "live_polygon_edges_sha256": "38e7f5e6b6532d360c5cfd7d533c09436741cdd3500f32c2f48848dd1f61cbb6"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r6879649",
+      "name_ro": "Chițcani",
+      "name_ru_historic": "Кицканы",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 234,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Кицканский сельсовет",
+          "role": "село",
+          "official_name_ru": "Кицканы"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Кицканский сельсовет",
+        "source_paragraph": 234,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 40,
+        "relation_timestamp": "2026-09-10T19:15:09Z",
+        "ordered_members_sha256": "01612123b4fd6e62e70e2d781ff24c286aaa8200a84ff28d5c4b263bab9ec8f7",
+        "polygon_sha256": "cfc3308baaaea8f2307995f249407a6f2d948afc39b9c135ecddd010c1a7d66d",
+        "live_polygon_edges_sha256": "9d67981365fb454152665eb08e6c20b0cf48e18d0be6de3b42e506f80f4009b4"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7427669",
+      "name_ro": "Vladimirovca",
+      "name_ru_historic": "Владимировка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 203,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Попенкский сельсовет",
+          "role": "село",
+          "official_name_ru": "Владимировка"
+        },
+        {
+          "line": 226,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Владимировский сельсовет",
+          "role": "село",
+          "official_name_ru": "Владимировка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 15,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "bbd0c23b2f1a1c9e53157615220a45fec2c2477efec7491d8edd8236655dc254",
+        "polygon_sha256": "04198c40439655b369ab01da414247bdc9b676907c07eed6a9f174ad2bd14762",
+        "live_polygon_edges_sha256": "92b1e257b0fac1a9665a7970f014a56d5ce702a4ad9cd67d3f3ed59085dd1dda"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7427680",
+      "name_ro": "Frunză",
+      "name_ru_historic": "Фрунзе",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 255,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Фрунзенский сельсовет",
+          "role": "село",
+          "official_name_ru": "Фрунзе"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Фрунзенский сельсовет",
+        "source_paragraph": 255,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 12,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "10720d8059db9d7a180cb8d6d94a4d9016cf93c878a642ddfed74c21a60ae944",
+        "polygon_sha256": "6b01b063081bf52142bddeb915e19b9d5f65396e54ac39efc01abc094c14a042",
+        "live_polygon_edges_sha256": "95b6593375a796e5a20d7202798dca9bd72ad716c88c9a033db64b4d4696b334"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7431238",
+      "name_ro": "Bîcioc",
+      "name_ru_historic": "Бычок",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 34,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Бычковский сельсовет",
+          "role": "село",
+          "official_name_ru": "Бычок"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Бычковский сельсовет",
+        "source_paragraph": 34,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 11,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "f3ecfba13485004d971c397f1a98734bc7abae9767da4624bfa44be169581a62",
+        "polygon_sha256": "3812a1da2ba0847284ec207739b0f369e0d2dfed5585a667754eb8496dd4fd3b",
+        "live_polygon_edges_sha256": "52675d5fc8a127a4727a2d9c0bfde21b219a104efb62893d4abff8c804f032f8"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7431263",
+      "name_ro": "Parcani",
+      "name_ru_historic": "Парканы",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 243,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Парканский сельсовет",
+          "role": "село",
+          "official_name_ru": "Парканы"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Парканский сельсовет",
+        "source_paragraph": 243,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 20,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "423b53bfe3092bd2f297f58cd7e22f40ed93c50031c9f56eb4103f8ba96b749c",
+        "polygon_sha256": "8587ce85fb3d4fde8df537534d2eb30d4a0fa9d50ae86e8edb37ad13069688b3",
+        "live_polygon_edges_sha256": "9ae0abca91c60ccc83dfeb6042108b9539ebeced7c109c2bc1017049fd7c9458"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7432661",
+      "name_ro": "Crasnogorca",
+      "name_ru_historic": "Красногорка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 53,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Красногорский сельсовет",
+          "role": "село",
+          "official_name_ru": "Красногорка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Красногорский сельсовет",
+        "source_paragraph": 53,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "49e7f725e32bd94bbfb397014761b56a9db29361355ce83bcb9e8a61b3804b1d",
+        "polygon_sha256": "8d749672f597ac29db52536e4135332f745ce4128b5d27c084e81115ab9b57d5",
+        "live_polygon_edges_sha256": "106a4bbd700e415332b7ee0b6ce53da78573ac08a141158d7c8d16bc3fc91633"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7432662",
+      "name_ro": "Teiu",
+      "name_ru_historic": "Тея",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 62,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Тейский сельсовет",
+          "role": "село",
+          "official_name_ru": "Тея"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Тейский сельсовет",
+        "source_paragraph": 62,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "477376a4a98dc10d9be564166ae6a52953e2643ac9b22caa74aef69ffd9a23e2",
+        "polygon_sha256": "dcdf0048f3978ea760705f82e643be1020688ba7df8c01ee86176e6658f2a83c",
+        "live_polygon_edges_sha256": "61528362a2d7186beaa3129c8c918baf8464798745a766a72ca6de80b34d31e6"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7432700",
+      "name_ro": "Vinogradnoe",
+      "name_ru_historic": "Виноградное",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 37,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Винограднянский сельсовет",
+          "role": "село",
+          "official_name_ru": "Виноградное"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Винограднянский сельсовет",
+        "source_paragraph": 37,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 10,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "b6ca626b88f0039b4f995720bf85b7d46e1936c8c14188111b67184d317c1632",
+        "polygon_sha256": "9888ab082a66eef77ca70b554171bf9188350a968b8e5b66326103aae2f54bd0",
+        "live_polygon_edges_sha256": "dc658442cc0119573d916c5873218afa7d9f77fb59c5d452c1c6405513b25bd1"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7468724",
+      "name_ro": "Blijnii Hutor",
+      "name_ru_historic": "Ближний Хутор",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 224,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Ближне-Хуторской сельсовет",
+          "role": "село",
+          "official_name_ru": "Ближний Хутор"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Ближне-Хуторской сельсовет",
+        "source_paragraph": 224,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 10,
+        "relation_timestamp": "2026-10-07T13:28:14Z",
+        "ordered_members_sha256": "35882f344c80265a9c64603a54ddaa7a895a476b2c90b8f2426e57bf370ed919",
+        "polygon_sha256": "59a4f2fe4b0e2efa994705f66152c46bc2da96dcf2aab22044168a24b57404c7",
+        "live_polygon_edges_sha256": "3c5608c3def1c40f06807d1674ab8879c53f60041639ae3a5205c30d6ff90857"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r7468791",
+      "name_ro": "Sucleia",
+      "name_ru_historic": "Суклея",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 245,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Суклейский сельсовет",
+          "role": "село",
+          "official_name_ru": "Суклея"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Суклейский сельсовет",
+        "source_paragraph": 245,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 14,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "87ee93118f0b5d2c66375803668996a85ee6834f7d873c422c257544c0c9135d",
+        "polygon_sha256": "188e7ea58fe3d7bf02f56fc18e81594735792a77d6d372c15664db366afc9cc6",
+        "live_polygon_edges_sha256": "fd2b82cbf2d3396b2ab151d258487b2d370652538bbb778449bb355a436acc1b"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8289594",
+      "name_ro": "Caragaș",
+      "name_ru_historic": "Карагаш",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 232,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Карагашский сельсовет",
+          "role": "село",
+          "official_name_ru": "Карагаш"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Карагашский сельсовет",
+        "source_paragraph": 232,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 11,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "0e890a915654f2add0dcc8c6661fc17df155dba44001cf123ce70e81d3d1bda8",
+        "polygon_sha256": "3704b1ad99ecb269e12bd214425dc8a7daae77c7e0082520d61729e69d0f2d6b",
+        "live_polygon_edges_sha256": "8f8206640a8ca018a364b74deb750fe1d28a7a5a14d6a70a41a4260a84b07607"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8289727",
+      "name_ro": "Cioburciu",
+      "name_ru_historic": "Чобручи",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 257,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Чобручский сельсовет",
+          "role": "село",
+          "official_name_ru": "Чобручи"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Чобручский сельсовет",
+        "source_paragraph": 257,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 12,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "a552e61fce8fd32f699a975e61c2c10909214ce70d6e24cf94f2b602442e02a2",
+        "polygon_sha256": "dd3383f78a2b318aa08fe45ba5bd1ac6d5088201ef43c72d476fd8f1441073b8",
+        "live_polygon_edges_sha256": "8f9b23b33db5fabd3881d0ac17360d567e0cc4e876a8174ffc961fe2f39383fe"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8289751",
+      "name_ro": "Slobozia",
+      "name_ru_historic": "Слободзея",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 218,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Слободзея"
+        },
+        {
+          "line": 219,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Слободзея"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 16,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "ffb67d43dbc867e6cfb84607b9453d4f7f803a803b940253c4a2b903de5ec68a",
+        "polygon_sha256": "89cd3b86743c24393d5e3a1098eeebbc867e40d7139ef4cfd894362035145276",
+        "live_polygon_edges_sha256": "55c10cd1ee1154b7f80d67dcabf1d4b4de2a10f64fb27194e1a75dd2f59e2292"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8290840",
+      "name_ro": "Dnestrovsc",
+      "name_ru_historic": "Днестровск",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 19,
+          "region": "Тирасполь",
+          "region_osm_id": "1702219",
+          "council": null,
+          "role": "город-спутник",
+          "official_name_ru": "Днестровск"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Тирасполь",
+        "administrative_council": null,
+        "source_paragraph": 19,
+        "osm_region_crosswalk_not_authoritative": "1702219"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702219",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 15,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "276b6dd66abf4ba931102f5b23762f1cc0a99e289ca764b8d033f74b82c3e69d",
+        "polygon_sha256": "9a87a881848cd1487e7633143245f5cc4860f500b84065494603bb0f25ed65b3",
+        "live_polygon_edges_sha256": "8c2d5b80c47605e8edb3c29c9c902a987378d165400d5663e124d73fdd4ca531"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8290877",
+      "name_ro": "Pervomaisc",
+      "name_ru_historic": "Первомайск",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 188,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Ленинский сельсовет",
+          "role": "село",
+          "official_name_ru": "Первомайск"
+        },
+        {
+          "line": 221,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": null,
+          "role": "поселок",
+          "official_name_ru": "Первомайск"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 18,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "ac326bfc8e937c92c2ae4d505fda006dda8ac8afda84bec1abec80dd19833d1f",
+        "polygon_sha256": "76013002506029cbe42d4e6d02274d4d84fd1bd7bb72850868a21bf0489c5a18",
+        "live_polygon_edges_sha256": "3d84d8a108a8e48cd2fe40508c03f3c21e1c5bb144a737487bd43d910082f92a"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8290934",
+      "name_ro": "Nezavertailovca",
+      "name_ru_historic": "Незавертайловка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 241,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Незавертайловский сельсовет",
+          "role": "село",
+          "official_name_ru": "Незавертайловка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Незавертайловский сельсовет",
+        "source_paragraph": 241,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 13,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "61446afdf0a8c28205caac9cfe9a084b9ef93bd3c728824439df4675483d5415",
+        "polygon_sha256": "669d12bca76fcee18cc7167581a8ba7672ff9826838819fa283959398381a059",
+        "live_polygon_edges_sha256": "8e5f3be516467ed317f73b1487b8dd39b8b418c99d20c75707c73c2248722edb"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8291057",
+      "name_ro": "Corotna",
+      "name_ru_historic": "Коротное",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 239,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Коротнянский сельсовет",
+          "role": "село",
+          "official_name_ru": "Коротное"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Коротнянский сельсовет",
+        "source_paragraph": 239,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "f2e986d277a373c2a6d3e9caafe26a4c99e57fc172ef8d2e9d529a1fe2807ae8",
+        "polygon_sha256": "be19b11cea6f7f8328ef2e802902730ae08ac90ecb669f4e08b97ebb93c4be08",
+        "live_polygon_edges_sha256": "a7c8745297d6038b2ab66b448ce41a916bcf3eb41da82c1b7494f19f00b577a5"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8291058",
+      "name_ro": "Hlinaia",
+      "name_ru_historic": "Глиное",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 39,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Глинойский сельсовет",
+          "role": "поселок",
+          "official_name_ru": "Глиное"
+        },
+        {
+          "line": 230,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Глинойский сельсовет",
+          "role": "село",
+          "official_name_ru": "Глиное"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 12,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "79e850e276a8384919f6b29d88e15dd27b25253ebcf2e91b2ee3b203dcbd0c1e",
+        "polygon_sha256": "96f08fa8f4616fd73123cdb3cb151cf014923dee326a462b452a032e8c738657",
+        "live_polygon_edges_sha256": "c95748e4df7c9f65303b33b74542da91b7dd4939ce1614821c7ac44bac94b158"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8292878",
+      "name_ro": "Tîrnauca",
+      "name_ru_historic": "Терновка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 247,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Терновский сельсовет",
+          "role": "село",
+          "official_name_ru": "Терновка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Слободзейский район",
+        "administrative_council": "Терновский сельсовет",
+        "source_paragraph": 247,
+        "osm_region_crosswalk_not_authoritative": "1702218"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 16,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "635c17b55f8b4d1662c8b1f217400bf612b205851740678d21636d9bf4fbac49",
+        "polygon_sha256": "1ecd0c3d1ef5fbe03821e26582b07918f37dadc32cda6ee5a805b95874e7c013",
+        "live_polygon_edges_sha256": "f7e0296281206da6ec310225be2e2115f8400b9f4a8c26731ca621750e7695c5"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8292891",
+      "name_ro": "Mălăiești",
+      "name_ru_historic": "Малаешты",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 55,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Малаештский сельсовет",
+          "role": "село",
+          "official_name_ru": "Малаешты"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Малаештский сельсовет",
+        "source_paragraph": 55,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 13,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "0fc05c77afdd5d8e9d52acc3738e4f78cd658e4c002e642fbe90d6bb6bebdc5f",
+        "polygon_sha256": "e1819262593aad93ab36130eb6fabee2e94da16b653afb518763db0dee05f82f",
+        "live_polygon_edges_sha256": "85bf06b6e58e8537fa235f0ec80a0ac1b1a182eb0e861f98e4a6bcab4ff10c76"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8292898",
+      "name_ro": "Hrușca",
+      "name_ru_historic": "Грушка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 117,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Грушковский сельсовет",
+          "role": "село",
+          "official_name_ru": "Грушка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Грушковский сельсовет",
+        "source_paragraph": 117,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 14,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "d100298845f9edef85c20167f910e3bf6476c93ac9e674115ce5ef31f1f89d0b",
+        "polygon_sha256": "da149c542780435e18a9554ec41264983de28bd9316f2852dc8145fae22c3cfa",
+        "live_polygon_edges_sha256": "739f6c57b60d0b43120badae3e6d6977480408fa89664ff48a889fedc1bfa049"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8292909",
+      "name_ro": "Ocnița",
+      "name_ru_historic": "Окница",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 129,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Окницкий сельсовет",
+          "role": "село",
+          "official_name_ru": "Окница"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Окницкий сельсовет",
+        "source_paragraph": 129,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "79ef0560ad90f0971ef777dade3021013fc1913364c17e0f1af97c04ffcff223",
+        "polygon_sha256": "db18ce67582424da695f24da672fe8db873a0b1e50e93ddc9925c481a2a4764d",
+        "live_polygon_edges_sha256": "1a6275d165c1ede44f1efdba754eeafcc182fe429f72f5c8bd7fb26e80bc4b56"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8348605",
+      "name_ro": "Tașlîc",
+      "name_ru_historic": "Ташлык",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 60,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Ташлыкский сельсовет",
+          "role": "село",
+          "official_name_ru": "Ташлык"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Ташлыкский сельсовет",
+        "source_paragraph": 60,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "964ce15c99dbe5a8fd23a7520e3d09414717e068c3d9c65a28a686eb5b39b500",
+        "polygon_sha256": "a2f44def6c384cd092c29ee769f9b318c76510135ea214531bef5bdc0125b033",
+        "live_polygon_edges_sha256": "f1084caec4307332034ef55708759b554c32fc58d9427a6046806d6ab97f832f"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8348625",
+      "name_ro": "Butor",
+      "name_ru_historic": "Бутор",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 31,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Буторский сельсовет",
+          "role": "село",
+          "official_name_ru": "Бутор"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Буторский сельсовет",
+        "source_paragraph": 31,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 8,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "d4c4423d27cbe38ba3ba20b743031877d2f53dff524bf98ebc00d061841b71ea",
+        "polygon_sha256": "1ea5b44f365c52c8be426510ab82012b51e354e7b0b09ab076f816993a915b0d",
+        "live_polygon_edges_sha256": "7bda338beb4511bec0c44b097b522c4add3f098dfc21f1bc76657374a3f38606"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8348646",
+      "name_ro": "Speia",
+      "name_ru_historic": "Спея",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 58,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Спейский сельсовет",
+          "role": "село",
+          "official_name_ru": "Спея"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Спейский сельсовет",
+        "source_paragraph": 58,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "22fa3d6db7ac0a342d4963c3862fa909bd8b022c65593722b39f5de404fb88f2",
+        "polygon_sha256": "538988cbb4f0194e30d12b83dd67338505f2af2110fec3b46ff19014380c78ec",
+        "live_polygon_edges_sha256": "305cde7f9520518c5a3075c8a19e8889523bb2a99615c265baae9ce5ccdba4c6"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8348909",
+      "name_ro": "Mihailovca",
+      "name_ru_historic": "Михайловка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 194,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Михайловский сельсовет",
+          "role": "село",
+          "official_name_ru": "Михайловка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Михайловский сельсовет",
+        "source_paragraph": 194,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 11,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "ef4496087af732edb8500fd417c9a369fe8559d63abc2cfdfab054560f510b09",
+        "polygon_sha256": "9a4940f45b54458f5c06692feeec2c755ade34a6280c887c655292a080ccfaf3",
+        "live_polygon_edges_sha256": "792b1e03740eecc3d0e6c16f492b88bac1acfb732e5d5841f43e282987c2c2cc"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8348920",
+      "name_ro": "Harmațca",
+      "name_ru_historic": "Гармацкое",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 81,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": "Гармацкий сельсовет",
+          "role": "село",
+          "official_name_ru": "Гармацкое"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Дубоссарский район",
+        "administrative_council": "Гармацкий сельсовет",
+        "source_paragraph": 81,
+        "osm_region_crosswalk_not_authoritative": "1702215"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 13,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "a6125d1479ab68810ae4f012146680710c23a851c6ed582286445fd6abe19255",
+        "polygon_sha256": "61109fe7dc3693606ba5ec3649f6a478c6553b05041cbeba31ae2ee0191bd67e",
+        "live_polygon_edges_sha256": "d20f5abe75529d42b08b8d2b104ba74ece809f4228e6db578a6400a1b3fff1db"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8349002",
+      "name_ro": "Dubău",
+      "name_ru_historic": "Дубово",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 78,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": "Дубовский сельсовет",
+          "role": "село",
+          "official_name_ru": "Дубово"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Дубоссарский район",
+        "administrative_council": "Дубовский сельсовет",
+        "source_paragraph": 78,
+        "osm_region_crosswalk_not_authoritative": "1702215"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 14,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "adcc1ff012262a7c995e0e3a3e81a06ab5a948262e46f47006541921056c96f4",
+        "polygon_sha256": "734aafbbadf8c61533b0dcbd0ba9d3d70522eeb25f678f9fe881f8156870d9e2",
+        "live_polygon_edges_sha256": "d5ddc203a7a94ad7843b3669e4899263807286bb1cb1b4dcaa309c13eebde13e"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8349059",
+      "name_ro": "Lenin",
+      "name_ru_historic": "Ленино",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 187,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Ленинский сельсовет",
+          "role": "село",
+          "official_name_ru": "Ленино"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Ленинский сельсовет",
+        "source_paragraph": 187,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 15,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "a5a41beaeeb94f2da19a25b8d601c481c1f56e3f1cd394ce13204f198b0d1e60",
+        "polygon_sha256": "0a6f3bdc7984473a4b061bd994ac0bf87aaadcd798697a5955511b3f1b25b3ca",
+        "live_polygon_edges_sha256": "80a3ec8c6aba491256b56ed76fa69251e2f375263c68fcc0bc380257ea8bd771"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8349093",
+      "name_ro": "Butuceni",
+      "name_ru_historic": "Бутучаны",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 159,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Бутучанский сельсовет",
+          "role": "село",
+          "official_name_ru": "Бутучаны"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Бутучанский сельсовет",
+        "source_paragraph": 159,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 11,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "54f572e5b643e9f13e7da38f76b9179689af44346ead14c14bd3e700190cf0a7",
+        "polygon_sha256": "7c835b404b234834e10c907f887ef9fd4f2d68cc72eafd4cf60e45ee1bfa5445",
+        "live_polygon_edges_sha256": "99dfff7f301a9c828948b61f95e67daff6599f146c55533a6b15c8719cf4ad03"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8349094",
+      "name_ro": "Jura",
+      "name_ru_historic": "Жура",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 177,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Журский сельсовет",
+          "role": "село",
+          "official_name_ru": "Жура"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Журский сельсовет",
+        "source_paragraph": 177,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 11,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "469bf80612fb18f6a311bdc6b51394bd8bb4305f59166c120dfd33ed5a2c2709",
+        "polygon_sha256": "5802b6bcbbd08c93519941513333ec931d8ff06b5176ba9abebf78878c9db97f",
+        "live_polygon_edges_sha256": "74721718264e87a9b9bba2cb8bd720d1bca5330e31dd04d9d2066e65322694a0"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8349307",
+      "name_ro": "Mocra",
+      "name_ru_historic": "Мокра",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 198,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Мокрянский сельсовет",
+          "role": "село",
+          "official_name_ru": "Мокра"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Мокрянский сельсовет",
+        "source_paragraph": 198,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 11,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "163fb7a2094dfca01a8f8f6a9a5983310b1d5438b92c256365901b83b38ac2ef",
+        "polygon_sha256": "0d6f62b36936e41e35878a03c565a6f5b9dcdf05fe44d431fe7d76f19174e035",
+        "live_polygon_edges_sha256": "e1cf661e2bac890189fd228a4bd92c265de69931360b6ce6bed28e8dd20f8b5c"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8349338",
+      "name_ro": "Popencu",
+      "name_ru_historic": "Попенки",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 206,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Попенкский сельсовет",
+          "role": "село",
+          "official_name_ru": "Попенки"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Попенкский сельсовет",
+        "source_paragraph": 206,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 14,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "b9dfc33a32a208acc1f950df62d28b035f968f926976c3e973ccbca9b5d06cc3",
+        "polygon_sha256": "2a436d13d0dadcfe92fb9ac6b25ca4629405cd2c2777a29038eaa2c55250a1b7",
+        "live_polygon_edges_sha256": "4a99e62ef66cae7118f3c7c1e481d3519783571daee6da4167fe25a79557d40d"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8539257",
+      "name_ro": "Maiac",
+      "name_ru_historic": "Маяк",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 29,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": null,
+          "role": "поселок",
+          "official_name_ru": "Маяк"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": null,
+        "source_paragraph": 29,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "b7758e5e7c527f28e72fcbe23db6b2522628a85de9e5f808956b4522a62e879a",
+        "polygon_sha256": "3a68cb3cb41f081dfdca701fcb6b2439c25e791c314e60a49d10daae3d664147",
+        "live_polygon_edges_sha256": "714960f69399d2337178b91d86c2a9b8b682937c24169d637639dd0a404ab052"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8539525",
+      "name_ro": "Colosova",
+      "name_ru_historic": "Колосово",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 49,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Колосовский сельсовет",
+          "role": "поселок",
+          "official_name_ru": "Колосово"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Колосовский сельсовет",
+        "source_paragraph": 49,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 7,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "d86d96c69d16995b819ba775187f31a95e7b542503e81cd82a46203be28d9785",
+        "polygon_sha256": "9bbb62aae660b77920e918b3ecdfee187feb3d77aa20942bb57dd1ac83bdc27e",
+        "live_polygon_edges_sha256": "72ef0876526f326b0b7a857a4f5ea811fb71f74565983b21094a7cd5452fa6d8"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8688504",
+      "name_ro": "Broșteni",
+      "name_ru_historic": "Броштяны",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 157,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Броштянский сельсовет",
+          "role": "село",
+          "official_name_ru": "Броштяны"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Броштянский сельсовет",
+        "source_paragraph": 157,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 12,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "f5fd8f517be82e81b42b0e79391d41216fbccd61840ca3da2a4e27546de33730",
+        "polygon_sha256": "f3e3f3cd36e5494a26148821192eb3cb4015f95a0071cfbeb6987115c49893ce",
+        "live_polygon_edges_sha256": "2df9177c0ca3961d3b98673119f7b75f5b47e78c8283fca52178ba43c17ae477"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8710724",
+      "name_ro": "Slobozia-Rașcov",
+      "name_ru_historic": "Слобода-Рашково",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 143,
+          "region": "Каменский район",
+          "region_osm_id": "1702216",
+          "council": "Слобода-Рашковский сельсовет",
+          "role": "село",
+          "official_name_ru": "Слобода-Рашково"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Каменский район",
+        "administrative_council": "Слобода-Рашковский сельсовет",
+        "source_paragraph": 143,
+        "osm_region_crosswalk_not_authoritative": "1702216"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702216",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 10,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "8d65f1d4ef6aeb714595b15092acfbcd316e1c2df9113a952ff2da305f8bf4dd",
+        "polygon_sha256": "8cdd4264a6212ce4a1923869572c6ea66428df9d20bcaab8f6a14d91eb81275e",
+        "live_polygon_edges_sha256": "b12e181b263ca427a77d947c15d3bec4533920a8aea11da974a5d8e174b7257c"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r8726395",
+      "name_ro": "Șipca",
+      "name_ru_historic": "Шипка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 66,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Шипкинский сельсовет",
+          "role": "село",
+          "official_name_ru": "Шипка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Шипкинский сельсовет",
+        "source_paragraph": 66,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "4acf83a6814d917b0b05ceed176baf6d1cf20ef72ee3596302a682586fd53c17",
+        "polygon_sha256": "3a97cde956b88a255f43fda377d2e4d9da341a3cf50f947a9f11d2fe2ff9b6e2",
+        "live_polygon_edges_sha256": "1c0d836b223311f7406980ed8e8f39303a59287ad6a0bc33c00235ac7ed5723e"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9288026",
+      "name_ro": "Carmanova",
+      "name_ru_historic": "Карманово",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 44,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Кармановский сельсовет",
+          "role": "поселок",
+          "official_name_ru": "Карманово"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Кармановский сельсовет",
+        "source_paragraph": 44,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "2724f797bc60154b482a34d37a02489e0c6eaf2d4d52ceb469ba7665e96bab0e",
+        "polygon_sha256": "4738cb6d2cb9d3ee72a6d41c30e2379cc542c1ada9565aab251f9fba5f033679",
+        "live_polygon_edges_sha256": "aeae005ec53d180018b045fc416f0e191e1c8aa760c4f07c68a47e43e38522c8"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9288110",
+      "name_ro": "Hîrtop",
+      "name_ru_historic": "Гыртоп",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 41,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Гыртопский сельсовет",
+          "role": "село",
+          "official_name_ru": "Гыртоп"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Григориопольский район",
+        "administrative_council": "Гыртопский сельсовет",
+        "source_paragraph": 41,
+        "osm_region_crosswalk_not_authoritative": "1702214"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 12,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "34874c7f341b4ea1a7e4b5b5dc44e9c8edf511278fab7d567b08ee82992f6f04",
+        "polygon_sha256": "c9e0783dbe19607ca946f8022a4873100d731e3b6dd0d80e2280a6bbdd851fd3",
+        "live_polygon_edges_sha256": "080aada9c0b108f8c0bde54686687921ea0a7e7d4f4c4a4f4a3d0804248dea80"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9288158",
+      "name_ro": "Dzerjinscoe",
+      "name_ru_historic": "Дзержинское",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 70,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": "Дзержинский сельсовет",
+          "role": "село",
+          "official_name_ru": "Дзержинское"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Дубоссарский район",
+        "administrative_council": "Дзержинский сельсовет",
+        "source_paragraph": 70,
+        "osm_region_crosswalk_not_authoritative": "1702215"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 15,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "a11517c9d39d168e20de0da1a75e4d95157a2c357b4c0b2a470fab0bad78b4ba",
+        "polygon_sha256": "9461c059bae32c663ba3b644b33770a53001177e18a3fb290ed263bccc18039e",
+        "live_polygon_edges_sha256": "93454b95655e38d571e8597d8b0045e5f8a1f5fb2e4e0079a0dea0ea0c68d322"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9288287",
+      "name_ro": "Dubăsari",
+      "name_ru_historic": "Дубоссары",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 16,
+          "region": "Дубоссары",
+          "region_osm_id": "1702215",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Дубоссары"
+        },
+        {
+          "line": 68,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Дубоссары"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 31,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "068cf701018dfff7690c82ef147502f70b273d8f545374d654a0ad6a94eb9753",
+        "polygon_sha256": "860b1e5c7f373b990439866602fa90f50a6d937a516fca899bad3cc700286f2c",
+        "live_polygon_edges_sha256": "624f37534bd99a68f1612d8fec5ca64b157521aa5076e2861225d22b849eb8b6"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9288722",
+      "name_ro": "Comisarovca Nouă",
+      "name_ru_historic": "Ново-Комиссаровка",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 100,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": "Ново-Комиссаровский сельсовет",
+          "role": "село",
+          "official_name_ru": "Ново-Комиссаровка"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Дубоссарский район",
+        "administrative_council": "Ново-Комиссаровский сельсовет",
+        "source_paragraph": 100,
+        "osm_region_crosswalk_not_authoritative": "1702215"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 22,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "1d6d0400f87da395c7688260d240d70318611d7598472714d495b37e803812a4",
+        "polygon_sha256": "b8e3ef982abe8dd422094b95dd6a493387522e2ecaf3753796b86356773de813",
+        "live_polygon_edges_sha256": "6d3f8a0f92094a0fc8f0ab81bada3a2584608ae59712168e3db59766db1ff45e"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9288756",
+      "name_ro": "Crasnîi Vinogradari",
+      "name_ru_historic": "Красный Виноградарь",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 95,
+          "region": "Дубоссарский район",
+          "region_osm_id": "1702215",
+          "council": "Красновиноградарский сельсовет",
+          "role": "село",
+          "official_name_ru": "Красный Виноградарь"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Дубоссарский район",
+        "administrative_council": "Красновиноградарский сельсовет",
+        "source_paragraph": 95,
+        "osm_region_crosswalk_not_authoritative": "1702215"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702215",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 26,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "d91519dccbbfd0b780ae726f8275fa3b027f3821cd04471f0a9ae54eb1bcff9e",
+        "polygon_sha256": "27c2c8f54ac8bad6d22e01b97ca93cebe9c0080b8146d8938783d117777b6099",
+        "live_polygon_edges_sha256": "5194d32d7579107da32f12d2ce1f38978843d878f776ca970871bd17cf9dc874"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9294122",
+      "name_ro": "Ghidirim",
+      "name_ru_historic": "Гидирим",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 172,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Гидиримский сельсовет",
+          "role": "село",
+          "official_name_ru": "Гидирим"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Гидиримский сельсовет",
+        "source_paragraph": 172,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 13,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "7df96be830d3895f35c7f369a337053ba603bcf6442be7de240fe75e6a4d74ed",
+        "polygon_sha256": "73e0363ff7c71fe24e328c9d7c5c0a25030586f5f2e021491545e59a1f1216c3",
+        "live_polygon_edges_sha256": "996a628178fdd1f7e33fed63d3463d5c674b322450e1f0d560686bc8daeb07e3"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9301463",
+      "name_ro": "Hlinaia",
+      "name_ru_historic": "Глиное",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 39,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": "Глинойский сельсовет",
+          "role": "поселок",
+          "official_name_ru": "Глиное"
+        },
+        {
+          "line": 230,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": "Глинойский сельсовет",
+          "role": "село",
+          "official_name_ru": "Глиное"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 12,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "a432f215d4631313f959c9b82585b7cbadca62f4d3af280bdf6a4036a22662cb",
+        "polygon_sha256": "26bd21cdbb098a72bf37f309817636cada1e35fad69c367e0d2ea377d583b32d",
+        "live_polygon_edges_sha256": "fe93e0b0b25257ebd43a28fe92d5282301a35d3f991020cfa4f6d8745906f54e"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9301464",
+      "name_ro": "Grigoriopol",
+      "name_ru_historic": "Григориополь",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 24,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Григориополь"
+        },
+        {
+          "line": 25,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Григориополь"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702214",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 16,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "b774ec17e34e41a120be882319972fca6c32fbded770c724066fe591c50a823a",
+        "polygon_sha256": "46e96469d938359ccbb6f37bf8dbd1a74725eb841db13d6c316805bbf3d1b160",
+        "live_polygon_edges_sha256": "0979260f76c92b81d05bce3bd92e091902ac9dbc88e4fdcdfe39708e24cd46bb"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9581354",
+      "name_ro": "Bender",
+      "name_ru_historic": "Бендеры",
+      "legacy_review_class": "bender_official_municipality_role_resolved",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 12,
+          "region": "Бендеры",
+          "region_osm_id": "944727",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Бендеры"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Бендеры",
+        "administrative_council": null,
+        "source_paragraph": 12,
+        "osm_region_crosswalk_not_authoritative": "944727"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "944727",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 37,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "79450dd5e3fab1921167a8bef15b88c353bd013129b779e93a28b4a2b0bd2f69",
+        "polygon_sha256": "21ec46cfaa5887632e5c3c144de1888e6bc5194b04a46c6f33b667f95bf3441a",
+        "live_polygon_edges_sha256": "8a99b43ff9388de4d56c1e96ae21f9412460d000e031d78c582bab4a972cead8"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9656324",
+      "name_ro": "Haraba",
+      "name_ru_historic": "Гараба",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 170,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Гарабский сельсовет",
+          "role": "село",
+          "official_name_ru": "Гараба"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Гарабский сельсовет",
+        "source_paragraph": 170,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 13,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "0fa406b94a0d07ca9a4ae86d464bb64714b4f5a8c9676e004fcbc098111fbb10",
+        "polygon_sha256": "45669060b4c6439833a1d63a40a8af5da4f442b18a2891e9a135b4c0738a175c",
+        "live_polygon_edges_sha256": "fe793c54d41b1fc4987d2e2bb1ae082bd37dd4b97fd2a38aa4350357c0089147"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9656364",
+      "name_ro": "Crasnencoe",
+      "name_ru_historic": "Красненькое",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 185,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Красненьский сельсовет",
+          "role": "село",
+          "official_name_ru": "Красненькое"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Красненьский сельсовет",
+        "source_paragraph": 185,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 14,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "25029ac2e11171584942f17fcdeedfc8508f59d3db69ef93eefe8a5b909cfb2d",
+        "polygon_sha256": "a3e5ed9f2aad333755241f851d5b462ce59769803e8c46a76f62bca6f31521b0",
+        "live_polygon_edges_sha256": "e980c0f83bf8ddcfab0d729ce1ca39d6fc1291639b16e2f00390e6e5d8b1d2a2"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9656413",
+      "name_ro": "Molochișul Mare",
+      "name_ru_historic": "Большой Молокиш",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 155,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Большемолокишский сельсовет",
+          "role": "село",
+          "official_name_ru": "Большой Молокиш"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Большемолокишский сельсовет",
+        "source_paragraph": 155,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 13,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "4a9a907b6aa112c74e84abcff8c44007cb36e68c57cdf3aa568c3b9171e55067",
+        "polygon_sha256": "0af28078cbb1a362cd772a6c9be468cc73207b7afe3cc1534f74dd88250dc672",
+        "live_polygon_edges_sha256": "339744fa4c1051a0fa5a1859711de0ffdca79f543a7109f1a41f9a15a65633fa"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9659709",
+      "name_ro": "Cobasna",
+      "name_ru_historic": "Колбасна",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 179,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Колбаснянский сельсовет",
+          "role": "поселок",
+          "official_name_ru": "Колбасна"
+        },
+        {
+          "line": 180,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Колбаснянский сельсовет",
+          "role": "село",
+          "official_name_ru": "Колбасна"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 10,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "82372def34a2c01abacd346dc17904fd47827fd90835694160706fdfde17a9f4",
+        "polygon_sha256": "55a0047e6277e23d563aefbff5a4bbef85e3aa888dbc15fc07899d983b362ce2",
+        "live_polygon_edges_sha256": "5ba8c09fe6fed67decd4e7678a47bca0d32e728611fa0e502410d853fdba310d"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9659794",
+      "name_ro": "Hîrjău",
+      "name_ru_historic": "Ержово",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 174,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Ержовский сельсовет",
+          "role": "село",
+          "official_name_ru": "Ержово"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Ержовский сельсовет",
+        "source_paragraph": 174,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 16,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "6f7c0c1ba1984408e1c98885d3b967b83c4fd63ac892393e2a506c7a9ffa1c8c",
+        "polygon_sha256": "f85787c2daaf5e4b7f572b1027944be94722ecd3fc96a9754ad20ab1ae0671c4",
+        "live_polygon_edges_sha256": "734b2d6fe512de1df50d7b8456abf025a661c5f7ab526a73f9adac5c82fcb6a4"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9659979",
+      "name_ro": "Rîbnița",
+      "name_ru_historic": "Рыбница",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 17,
+          "region": "Рыбница",
+          "region_osm_id": "1702217",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Рыбница"
+        },
+        {
+          "line": 147,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": null,
+          "role": "город",
+          "official_name_ru": "Рыбница"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 20,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "f0338087ef86bf958bda132cc1df29d1be55531e2541440dfed625187756fb03",
+        "polygon_sha256": "45aa8912b25bdb588b4785ff02c506c49791c4b0173ff81bbfbc8e9b9762acf4",
+        "live_polygon_edges_sha256": "53ded08c659b28d684cd083ca0b496af9d197c741eee18a64a8419536092cd73"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9660049",
+      "name_ro": "Ofatinți",
+      "name_ru_historic": "Выхватинцы",
+      "legacy_review_class": "ofatinti_cross_language_alias_supported",
+      "normative_2023_name_category": "UNIQUE_NAME_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 167,
+          "region": "Рыбницкий район",
+          "region_osm_id": "1702217",
+          "council": "Выхватинецкий сельсовет",
+          "role": "село",
+          "official_name_ru": "Выхватинцы"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": {
+        "source": "2023_Annex1",
+        "normative_region": "Рыбницкий район",
+        "administrative_council": "Выхватинецкий сельсовет",
+        "source_paragraph": 167,
+        "osm_region_crosswalk_not_authoritative": "1702217"
+      },
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702217",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 11,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "a24905f9e05753198ffc546b938b0c7929e7845833063909e34836ae53f67380",
+        "polygon_sha256": "5c04f503a430c79636ad5166707978a7570cc769554418330bc1bafe38e96d42",
+        "live_polygon_edges_sha256": "158416a15fbe8473a8a4fbebac9afb8b89ea7e86b9eee6b2af1c61d6457cff80"
+      },
+      "normative_role_or_identity_conflicts": [],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    },
+    {
+      "actual_id": "osm-r9679382",
+      "name_ro": "Crasnoe",
+      "name_ru_historic": "Красное",
+      "legacy_review_class": "historic_claim_only",
+      "normative_2023_name_category": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "normative_2023_register_candidates": [
+        {
+          "line": 27,
+          "region": "Григориопольский район",
+          "region_osm_id": "1702214",
+          "council": null,
+          "role": "село",
+          "official_name_ru": "Красное"
+        },
+        {
+          "line": 220,
+          "region": "Слободзейский район",
+          "region_osm_id": "1702218",
+          "council": null,
+          "role": "поселок",
+          "official_name_ru": "Красное"
+        }
+      ],
+      "claimed_administrative_parent_2023_single_hit": null,
+      "claimed_administrative_parent_2025_individual": null,
+      "geometric_parent_osm_id": "1702218",
+      "source_2023_document_verified_by_official_annex": true,
+      "source_2023_claim_current_2026_unamended_exhaustively_proven": false,
+      "normative_law_114_2026_in_effect_on_assessment_date": false,
+      "polygon_geometry_2026_10_12_exact": true,
+      "polygon_geometry_evidence": {
+        "relation_version": 9,
+        "relation_timestamp": "2026-10-07T11:44:00Z",
+        "ordered_members_sha256": "67fbb50ae7b06d7994f845851989d37f1c123025823dc0a21b06ad29f4d75689",
+        "polygon_sha256": "db27e2a8102cc7d03cde901c00903a5828189dca7359763f16fde77640fd1ff4",
+        "live_polygon_edges_sha256": "efe15661e69da76dddaa45f71e1f2121d78a3ea92ebe03cd7626dbfee5be65cb"
+      },
+      "normative_role_or_identity_conflicts": [
+        "MULTIPLE_ADMINISTRATIVE_ROLES_OR_HOMONYMS"
+      ],
+      "full_polygon_effective_control_2026_certified": false,
+      "independent_current_administrative_membership_2026_certified": false,
+      "legal_md_parent_preservation_mandatory": true,
+      "semantic_decision": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "needed_evidence": [
+        "COMPLETE_APPLICABLE_ADMINISTRATIVE_REGISTER_AMENDMENT_CHAIN_AS_OF_2026_10_15",
+        "INDEPENDENT_PER_ID_ROLE_COUNCIL_REGION_IDENTITY_CROSSWALK",
+        "GEORREFERENCED_EFFECTIVE_CONTROL_OR_EXPLICIT_UNKNOWN_PARTIAL_SCOPE"
+      ]
+    }
+  ]
+}
