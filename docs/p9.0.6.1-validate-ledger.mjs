@@ -9,6 +9,12 @@ assert.equal(registry.source.annex2_sha256,'d2675ae413d36eb3d0cd04d56de16c54b108
 assert.equal(rows.length,85);
 assert.equal(new Set(rows.map(r=>r.actual_id)).size,85);
 assert.deepEqual([...rows.map(r=>r.actual_id)].sort(),[...baseline.rows.map(r=>r.actual_id)].sort());
+const baselineGeo=new Map(baseline.rows.map(r=>[r.actual_id,String(r.geometric_parent_osm_id)]));
+assert(rows.every(r=>typeof r.geometric_parent_osm_id==='string'&&r.geometric_parent_osm_id===baselineGeo.get(r.actual_id)));
+const singles=rows.filter(r=>r.official_2023_match_count===1);
+assert.equal(singles.length,73);
+assert.deepEqual(singles.filter(r=>String(r.source_2023_name_hits[0].region_osm_id)!==r.geometric_parent_osm_id).map(r=>r.actual_id),['osm-r1216706']);
+assert.equal(registry.normative_to_osm_crosswalk_audit.disagreement,1);
 const hist=rows.filter(r=>r.legacy_2010_review_label==='historic_claim_only');
 assert.equal(hist.length,80);
 assert.equal(hist.filter(r=>r.official_2023_match_count>0).length,79);
