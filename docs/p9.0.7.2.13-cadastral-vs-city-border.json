@@ -1,0 +1,83 @@
+{
+  "schema_version": "p907213-first-party-legal-html-evidence-v1",
+  "captured_on_utc_date": "2026-10-16",
+  "capture_method": "bounded HTTP GET from authorized desktop, gzipped losslessly then encoded base64, committed as text",
+  "document": {
+    "publication_id": "2026000508",
+    "official_ministry_card": "https://www.minjust.gospmr.org/oo/Publication.nsf/9306298df912e905c2258221004d4624/a976b7a7065d04f0c2258dcd0037c18a!OpenDocument",
+    "first_party_legal_document": "https://ul-test.gospmr.org/documents/e570c60e-fc75-4586-8db2-9440b81c1aeb/1fe9dfcc-50f5-4282-9c73-a6941571f229/html/",
+    "first_party_legal_card": "https://ul-test.gospmr.org/documents/card/e570c60e-fc75-4586-8db2-9440b81c1aeb/smart-open",
+    "issuer_named_by_legal_card": "Президент Приднестровской Молдавской Республики",
+    "act_number": "116",
+    "act_date": "2026-04-02",
+    "official_publication_date": "2026-04-02",
+    "target_actual_id": "osm-r9659979",
+    "act_type": "Указ",
+    "legal_document_archive": {
+      "path": "docs/p9.0.7.2.13-primary/rybnitsa-decree116-html.html.gz.b64",
+      "original_html_bytes": 799543,
+      "original_html_sha256": "6741f9a1c0bae30279eb600725dfb56cb11fdd3379e6925f531b3bba50c6bfaf",
+      "gzipped_bytes": 108904,
+      "gzip_sha256": "1b7a19bdb170ed898f79bab672e7f77fe96128b7c97cd8c30ab8a3f7394256ad",
+      "base64_chars": 145208,
+      "reproducibly_decodable": true,
+      "signed_official_pdf": false,
+      "embedded_annex_maps_retrieved": false
+    },
+    "legal_card_archive": {
+      "path": "docs/p9.0.7.2.13-primary/rybnitsa-decree116-card.html.gz.b64",
+      "original_html_bytes": 41863,
+      "original_html_sha256": "2f2c5437dc65806d334c921e6407eb0106c8958fa6d784d789c0af2b68c7f670",
+      "gzipped_bytes": 10114,
+      "gzip_sha256": "8d7d7415b6c605903e9a20c858668f0e1bd0d156992eb0b9a682447d44528c80",
+      "base64_chars": 13488,
+      "reproducibly_decodable": true
+    },
+    "issuer_certification_scope": "CONFIRMED_ON_FIRST_PARTY_LEGAL_CARD_FOR_DOCUMENT_116_ONLY_NOT_GLOBAL_9254_CENSUS",
+    "legal_claims": {
+      "article1": "Set Rybnitsa city boundaries according to Description, annex 1 to decree",
+      "article2": "Decree enters into force on the day following official publication",
+      "effective_date_from_official_publication": "2026-04-03",
+      "operative_at_audit_cutoff": true,
+      "description_annex1_present_in_rendered_html": true,
+      "distinguishes_urban_settlement_line_from_cadastral_zone": true,
+      "urban_settlement_line": "City settlement land perimeter separating inhabited urban land from other land categories",
+      "cadastral_zone": "Includes urban city land plus adjacent land parcels belonging to other categories",
+      "description_requires_cadastral_plan_annex_1": true,
+      "description_requires_city_line_plan_annex_2": true,
+      "exact_cartographic_attachments_obtained": false,
+      "map_download_explicitly_requires_service_tariff": true
+    },
+    "individual_2026_effective_full_polygon_control_certified": false,
+    "exact_osm_polygon_versus_enacted_limit_compared": false,
+    "geometry_semantics_resolved": false,
+    "relevant_semantic_roles": [
+      "CITY_URBAN_LINE",
+      "CITY_CADASTRAL_ZONE"
+    ],
+    "role_assignment_to_osm_relation": "UNRESOLVED_TWO_DIFFERENT_NORMATIVE_BORDERS",
+    "legal_md_parent_preserved": true,
+    "not_a_de_jure_moldovan_reclassification": true
+  },
+  "other_target": {
+    "target_actual_id": "osm-r18941890",
+    "publication_id": "2025001424",
+    "document": "Об утверждении границ города Тирасполя",
+    "original_signed_decree_retrieved": false,
+    "official_map_retrieved": false,
+    "source_linked_council_document": "https://tirgorsovet.org/resheniya-sessij/ob-ustanovlenii-granicz-zemel-rajonov-g-tiraspol",
+    "council_document_access_proven": false,
+    "council_document_scope": "INTERNAL_URBAN_DISTRICT_LAND_BOUNDARIES_NOT_OUTER_CITY_BOUNDARY",
+    "semantic_accepted": false
+  },
+  "sources_not_raw_original": [],
+  "global_issuer_certifications_previous_count": 6,
+  "global_issuer_certifications_promoted_in_this_step": 0,
+  "full_city_boundary_approvals_with_exact_maps": 0,
+  "identities_not_adjudicated": 85,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false,
+  "recovery_status": "FIRST_PARTY_SIGNED_TEXT_RENDER_ARCHIVED_BYTE_FOR_BYTE; GEOREFERENCED_ANNEXES_NOT_ACCESSIBLE_WITHOUT_AUTHORIZED_SERVICE_ACCESS",
+  "access_policy": "No attempts to evade subscription/paywall; lawful access or separate authoritative original is required"
+}
