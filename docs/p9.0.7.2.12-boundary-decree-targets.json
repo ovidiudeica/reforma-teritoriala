@@ -1,0 +1,122 @@
+{
+  "schema_version": "p907212-targeted-boundary-and-normative-law-provenance-v1",
+  "audit_cutoff": "2026-10-16",
+  "corpus": "docs/p9.0.7.2.9-annual-census.json.gz",
+  "source_archive_sha256": "8acc0d75a35f65fdac3e5fa88e04f6ef494f5f89822efa85b8467f2108f0a3ad",
+  "scan_results": "docs/p9.0.7.2.12-normative-chain-candidates.json",
+  "official_central_publications": 9254,
+  "candidate_titles_screened": 54,
+  "direct_atu_amendment_titles": 2,
+  "related_secondary_reference_titles": 1,
+  "local_administration_framework_title_hits": 20,
+  "specific_boundary_title_hits": 3,
+  "exact_city_boundary_decrees_found": 2,
+  "land_allotment_not_city_boundary_pub": "2025002341",
+  "direct_framework_acts": [
+    {
+      "publication_id": "2023000445",
+      "publication_date": "24.03.2023",
+      "act_type": "Закон",
+      "act_number_date": "№48-ЗИ-VII от 24.03.2023",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/4391b9419959e04ac225897c0048c9b2!OpenDocument",
+      "classification": "DIRECT_ATU_LAW_AMENDMENT_IN_2023",
+      "original_pdf_archived": false,
+      "exact_operational_effect_by_this_substep": "PENDING_PRIMARY_2023_LAW48",
+      "issuer_attributed_from_title_only": false
+    },
+    {
+      "publication_id": "2026000856",
+      "publication_date": "29.05.2026",
+      "act_type": "Закон",
+      "act_number_date": "№114-ЗИД-VIII от 29.05.2026",
+      "title": "О внесении изменений и дополнений в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/a9ee8870b08c811fc2258e060045b159!OpenDocument",
+      "classification": "DIRECT_ATU_LAW_AMENDMENT_BUT_NOT_IN_FORCE_AT_2026_10_16",
+      "primary_pdf": "docs/p9.0.7.2.9-primary/PMR-2026-114-ZID-VIII.pdf",
+      "primary_pdf_sha256": "630df1c3a6985539264baa1684c942796b5eb73f93164df6c302eef3d30aece2",
+      "official_publication_date": "2026-05-29",
+      "operative_clause_verified_by_prior_stage": "SIX_MONTHS_AFTER_OFFICIAL_PUBLICATION",
+      "in_force_at_cutoff": false,
+      "exact_future_effective_instant_certified": false,
+      "exclude_from_current_operative_law": true
+    }
+  ],
+  "related_atu_reference": [
+    {
+      "publication_id": "2023000446",
+      "publication_date": "24.03.2023",
+      "act_type": "Закон",
+      "act_number_date": "№49-ЗИ-VII от 24.03.2023",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «О языках в Приднестровской Молдавской Республике» в связи с принятием Закона Приднестровской Молдавской Республики «О внесении изменения в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/67674d72aae2791ac225897c004912f3!OpenDocument",
+      "classification": "AMENDS_LANGUAGE_LAW_IN_CONNECTION_WITH_2023_ATU_AMENDMENT_NOT_DIRECT_ATU_AMENDMENT",
+      "effect_on_names_and_administrative_labels_not_exhaustively_verified": true
+    }
+  ],
+  "city_boundary_acts": [
+    {
+      "publication_id": "2025001424",
+      "publication_date": "25.08.2025",
+      "act_type": "Указ",
+      "act_number_date": "№338 от 25.08.2025",
+      "title": "Об утверждении границ города Тирасполя",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/4f935f3c8d3b06d1c2258cf100491601!OpenDocument",
+      "target_city_ro": "Tiraspol",
+      "target_osm_actual_ids": [
+        "osm-r18941890"
+      ],
+      "claim_role": "CITY_BOUNDARY_APPROVAL_DOCUMENT_TITLE",
+      "ministry_official_publishing_verified": true,
+      "issuer_identity_source": "PRESIDENTIAL_DECREE_ACT_TYPE_AND_NUMBER_FROM_OFFICIAL_PUBLICATION_INDEX_NOT_PRIMARY_SIGNED_TEXT",
+      "original_binary_recovered": false,
+      "original_sha256": null,
+      "complete_annex_recovered": false,
+      "authoritative_vector_geometry_recovered": false,
+      "osm_vs_enacted_boundary_comparison": "NOT_PERFORMED",
+      "full_osm_polygon_bound_by_primary_approval": false,
+      "individual_identity_semantic_acceptance": "BLOCKED_INCOMPLETE"
+    },
+    {
+      "publication_id": "2026000508",
+      "publication_date": "02.04.2026",
+      "act_type": "Указ",
+      "act_number_date": "№116 от 02.04.2026",
+      "title": "Об установлении границ города Рыбницы",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/a976b7a7065d04f0c2258dcd0037c18a!OpenDocument",
+      "target_city_ro": "Rîbnița",
+      "target_osm_actual_ids": [
+        "osm-r9659979"
+      ],
+      "claim_role": "CITY_BOUNDARY_ESTABLISHMENT_DOCUMENT_TITLE",
+      "ministry_official_publishing_verified": true,
+      "issuer_identity_source": "PRESIDENTIAL_DECREE_ACT_TYPE_AND_NUMBER_FROM_OFFICIAL_PUBLICATION_INDEX_NOT_PRIMARY_SIGNED_TEXT",
+      "official_card_indexed_pdf_size_kib_approx": 6234,
+      "original_binary_recovered": false,
+      "original_sha256": null,
+      "complete_annex_recovered": false,
+      "authoritative_vector_geometry_recovered": false,
+      "osm_vs_enacted_boundary_comparison": "NOT_PERFORMED",
+      "full_osm_polygon_bound_by_primary_approval": false,
+      "individual_identity_semantic_acceptance": "BLOCKED_INCOMPLETE"
+    }
+  ],
+  "acceptance_requirements": [
+    "RETRIEVE_OFFICIAL_SIGNED_DECREE_AND_FULL_ANNEX_OR_ORIGINAL_AUTHORITATIVE_MAP",
+    "CERTIFY_RAW_BYTES_SHA256_AND_PROVENANCE",
+    "EXTRACT_FULL_ENACTED_GEO_BOUNDARY_OR_TEXTUALLY_DESCRIBED_BOUNDARY",
+    "MATCH_TO_EXACT_PINNED_OSM_RELATION_GEOMETRY_AND_DEFACTO_JURISDICTION",
+    "DECONFLICT_CITIES_VERSUS_RAION_OR_URBAN_AREA_OSM_RELATION_ROLE",
+    "PRESERVE_SEPARATE_MOLDOVAN_DE_JURE_LEGAL_PARENT",
+    "VERIFY_IN_FORCE_AND_ANY_FURTHER_AMENDMENTS_THROUGH_AUDIT_DATE",
+    "PER_ID_SEMANTIC_ACCEPTANCE_GATE_REVIEW"
+  ],
+  "direct_amendments_exhaustive_across_all_official_sources": false,
+  "local_framework_laws_individually_assessed": false,
+  "individual_issuer_authentication_complete": false,
+  "identity_count": 85,
+  "accepted_identities": 0,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false
+}
