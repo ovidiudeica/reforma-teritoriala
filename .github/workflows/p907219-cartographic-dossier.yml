@@ -1,0 +1,49 @@
+name: P9.0.7.2.19 cartographic acceptance dossier read only
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/p907219-cartographic-dossier.yml'
+      - 'scripts/audit/p907219-acceptance-dossier.mjs'
+      - 'docs/p9.0.7.2.19-*'
+      - 'docs/p9.0.4.3-promotion-policy.json'
+      - 'docs/p9.0.6.3-final-semantic-matrix.json'
+      - 'docs/p9.0.6.2-verified-evidence-ledger.json'
+      - 'docs/p9.0.7.2.15-*'
+      - 'public/data/p907216-osm-roles.json'
+      - 'public/data/actual-entities.json'
+      - 'data/current/actual-release-manifest.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/p907219-cartographic-dossier.yml'
+      - 'scripts/audit/p907219-acceptance-dossier.mjs'
+      - 'docs/p9.0.7.2.19-*'
+permissions:
+  contents: read
+jobs:
+  p907219-acceptance-evidence-readonly:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Fail closed on unauthorized P9.1, provenance or case-ID changes
+        run: |
+          node --check scripts/audit/p907219-acceptance-dossier.mjs
+          node scripts/audit/p907219-acceptance-dossier.mjs --self-test
+      - name: Reconcile existing proof lineage and blocked juridical status without any OSM calls
+        run: node scripts/audit/p907219-acceptance-dossier.mjs --audit
+      - name: Verify tracked ACTUAL/policy files never modified by dossier
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain --untracked-files=no)"
+      - name: Upload 85-case evidence-index and acceptance verdict
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p907219-acceptance-dossier-evidence
+          path: outputs/P9.0.7.2.19/acceptance-verdict.json
+          if-no-files-found: warn
