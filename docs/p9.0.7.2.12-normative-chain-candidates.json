@@ -15,6 +15,11 @@
     {
       "id": "ATU_FRAMEWORK_EXACT",
       "rank": "DIRECT_NORMATIVE_CHAIN_CANDIDATE",
+      "regex": "^О внесении (?:изменения|изменений(?: и дополнений)?|дополнений|дополнения) в Закон Приднестровской Молдавской Республики «Об административно[-– ]территориальном устройстве Приднестровской Молдавской Республики»"
+    },
+    {
+      "id": "ATU_FRAMEWORK_SECONDARY_REFERENCE",
+      "rank": "RELATED_CROSS_REFERENCE_NOT_DIRECT_AMENDMENT",
       "regex": "об административно[-– ]территориальном устройстве приднестровской молдавской республики"
     },
     {
@@ -46,7 +51,8 @@
   "rows_screened": 9254,
   "rows_selected": 54,
   "category_counts": {
-    "ATU_FRAMEWORK_EXACT": 3,
+    "ATU_FRAMEWORK_EXACT": 2,
+    "ATU_FRAMEWORK_SECONDARY_REFERENCE": 1,
     "LOCAL_GOV_FRAMEWORK_EXACT": 20,
     "ATU_REGISTER_EXACT": 0,
     "SETTLEMENT_BOUNDARY_EXPLICIT": 3,
@@ -154,7 +160,7 @@
       "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «О языках в Приднестровской Молдавской Республике» в связи с принятием Закона Приднестровской Молдавской Республики «О внесении изменения в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»",
       "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/67674d72aae2791ac225897c004912f3!OpenDocument",
       "categories": [
-        "ATU_FRAMEWORK_EXACT"
+        "ATU_FRAMEWORK_SECONDARY_REFERENCE"
       ],
       "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
       "issuer_verified_for_this_screen": false,
