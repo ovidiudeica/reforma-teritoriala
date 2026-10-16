@@ -1,0 +1,77 @@
+{
+  "schema_version": "p907214-2026-official-register-custodian-and-map-roles-v1",
+  "asof": "2026-10-16",
+  "source_set": [
+    {
+      "id": "GOV-PMR-2017-200-REPEALED",
+      "url": "https://government.gospmr.org/wp-content/uploads/2025/11/post.-%E2%84%96-200-ot-10.08.2017g.pdf",
+      "act": "2017-08-10 #200",
+      "section": "regulation ministry land and natural resources, art/numbered functions 22 and 23",
+      "evidence": "2025 archived official consolidated PDF documents responsibility for State Register of administrative-territorial organization and registration/accounting of existing/emerging/amalgamated administrative-territorial units and settlements",
+      "effective_on_cutoff": false,
+      "superseded_as_of": "2026-05-22",
+      "original_pdf_bytes_recovered_in_p914": false,
+      "register_current_custodian_inferred": false
+    },
+    {
+      "id": "GOV-PMR-2026-120-SUPERSEDING-MINISTRY-REGULATION",
+      "url": "https://government.gospmr.org/wp-content/uploads/2026/05/postanovlenie-%E2%84%96-120.pdf",
+      "act": "2026-05-18 #120",
+      "section": "current regulation, ministry of agriculture and natural resources",
+      "evidence": "Government regulation #120 dated 2026-05-18 replaced #200/2017 effective by 2026-05-22; exact registry custodianship clauses under 2026 revision not verified",
+      "effective_on_cutoff": true,
+      "current_ministry_register_mandate_clause_certified": false,
+      "authoritative_register_export_retrieved": false,
+      "original_pdf_bytes_recovered_in_p914": false
+    },
+    {
+      "id": "GOV-PMR-2023-98-CADASTRE-MAP-LAYERS",
+      "url": "https://government.gospmr.org/wp-content/uploads/2024/08/post.-%E2%84%96-98-ot-23.03.2023g.pdf",
+      "act": "2023-03-23 #98",
+      "section": "Cadastral regulation section 45",
+      "evidence": "Defines at least 3 different cadastral mapping products: republic map of districts/municipalities; administrative territorial unit map of cadastral zones; individual settlement-land maps",
+      "effective_on_cutoff": null,
+      "full_archive_binary_certified_in_p914": false,
+      "source_text_available_in_index": true
+    }
+  ],
+  "authoritative_requested_products": [
+    "CURRENT_2026_EXTRACT_FROM_STATE_ATU_SETTLEMENT_REGISTER_PER_ID_WITH_LEGAL_NAME_AND_UNIT_TYPE",
+    "LEGAL_IN_FORCE_ON_2026_10_16_AND_COMPLETE_AMENDMENT_PROVENANCE",
+    "OFFICIAL_APPROVED_ADMINISTRATIVE_BOUNDARY_PLAN_OR_VECTORS_WITH_CRS",
+    "OFFICIAL_SETTLEMENT_LAND_PERIMETER_IF_ROLE_SETTLEMENT",
+    "OFFICIAL_CADASTRAL_ZONE_PERIMETER_IF_ROLE_CADASTRAL_ZONE",
+    "STATE_ADMINISTRATIVE_SUPERVISION_AND_DEFACTO_CONTROL_ON_ENTIRE_POLYGON",
+    "RELATE_OFFICIAL_SOURCE_BOUNDARY_TO_PINNED_OSM_RELATION_ID_AND_ROLE",
+    "SEPARATE_AND_PRESERVE_CONSTITUTIONAL_MOLDOVAN_DE_JURE_PARENT"
+  ],
+  "case_specific_portal": {
+    "rybnitsa": {
+      "actual_id": "osm-r9659979",
+      "signed_decree": "2026000508",
+      "legal_render_archived": true,
+      "official_map_annex1_cadastral_zone_recovered": false,
+      "official_map_annex2_city_land_line_recovered": false,
+      "distinguish_city_perimeter_vs_cadastral_zone": true
+    },
+    "tiraspol": {
+      "actual_id": "osm-r18941890",
+      "signed_decree": "2025001424",
+      "original_signed_pdf_recovered": false,
+      "official_city_boundary_map_recovered": false
+    },
+    "cremenciug": {
+      "actual_id": "osm-r1216706",
+      "geometric_osm_parent": "1702218",
+      "claimed_de_facto_parent": "1702219",
+      "resolve_parent_conflict_requires_area_wide_official_act": true
+    }
+  },
+  "automatic_resolution_authorized": false,
+  "total_required_ids": 85,
+  "resolved_ids": 0,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false,
+  "provenance_note": "2026 custodian authority is not certified from surviving 2017 mandate. A legal register or maps must be obtained through authorized institutional access. Contextual government PDF/index results do not authenticate individual polygon geometry."
+}
