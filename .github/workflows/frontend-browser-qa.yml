@@ -24,6 +24,10 @@ jobs:
           node --check scripts/test/frontend-atlas-browser.test.mjs
           node --check scripts/test/frontend-cartography-browser.test.mjs
           node --check atlas-tree.mjs
+          node --check atlas-osm-roles.mjs
+          node --check scripts/process/build-p907216-osm-role-ui.mjs
+          node --check scripts/test/frontend-p907216-osm-roles.test.mjs
+          node --check scripts/test/frontend-p907216-osm-roles-browser.test.mjs
           node --check atlas-tree-window.mjs
           node --check scripts/test/helpers/atlas-evidence.mjs
           node --check scripts/audit/p73-virtual-tree-browser.mjs
@@ -107,6 +111,10 @@ jobs:
           npm ci --ignore-scripts
           node --test scripts/test/frontend-neighbors-geometry.test.mjs scripts/test/frontend-neighbors-engine.test.mjs scripts/test/frontend-neighbors-corpus.test.mjs
           node --test scripts/audit/p82-neighbors-browser.mjs
+      - name: P9.0.7.2.16 — validate 85 source-linked OSM labels reuse ACTUAL geometry, no legal promotion
+        run: node --test scripts/test/frontend-p907216-osm-roles.test.mjs
+      - name: P9.0.7.2.16 — Chrome panel, exact source selection, Bender/Hlinaia, mobile and OSM attribution
+        run: node --test scripts/test/frontend-p907216-osm-roles-browser.test.mjs
       - name: Verify tracked data untouched
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots
