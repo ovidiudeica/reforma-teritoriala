@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
-import {join,resolve} from 'node:path';
+import {join} from 'node:path';
 import {gunzipSync} from 'node:zlib';
 import {spawnSync} from 'node:child_process';
 
@@ -29,7 +29,7 @@ if(process.argv[2]==='--self-test'){
  process.exit(0);
 }
 assert.equal(process.argv[2],'--probe','Usage: --self-test or --probe');
-const out=resolve(process.env.P90721021_PROBE_OUT||'/tmp/p90721021-official-probe');
+const out='/tmp/p90721021-official-probe';
 mkdirSync(out,{recursive:true});
 const receipt={
  schema_version:'p90721021-government-primary-binary-capture-v1',
@@ -59,8 +59,8 @@ try{
    receipt.raw_original_pdf_bytes=bytes.length;
    receipt.binary_pdf_available=true;
    receipt.archived_file='2026000001-government-original.pdf';
-   writeFileSync(join(out,receipt.archived_file),bytes,{flag:'wx'});
-   const parsed=spawnSync('pdftotext',['-layout',join(out,receipt.archived_file),'-'],{encoding:'utf8',timeout:5000});
+   writeFileSync(join(out,'2026000001-government-original.pdf'),bytes,{flag:'wx'});
+   const parsed=spawnSync('pdftotext',['-layout',join(out,'2026000001-government-original.pdf'),'-'],{encoding:'utf8',timeout:5000});
    receipt.pdf_text_extract_success=parsed.status===0;
    if(parsed.status===0){
     const text=parsed.stdout.replace(/\s+/g,' ').trim();
