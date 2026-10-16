@@ -1,0 +1,95 @@
+{
+  "schema_version": "p9072102-retrieval-cross-registry-status-v1",
+  "snapshot_cutoff": "2026-10-15",
+  "execution_observed_utc": "2026-10-16T09:56:28.952Z",
+  "base_registry": "docs/p9.0.7.2.10.1-individual-issuers.json.gz",
+  "base_registry_gzip_sha256": "bedc19ec49d0d22bc737299e14d9b2f7d0761ca8743a51491e73bbcb46ae0e0c",
+  "base_record_count": 9254,
+  "inherited_official_issuer_certifications": 6,
+  "new_official_issuer_certifications": 0,
+  "issuer_pending": 9248,
+  "individual_issuer_census_certified": false,
+  "central_index_integrity_certified": true,
+  "normative_exhaustiveness_certified": false,
+  "official_card_probe": {
+    "mode": "BOUNDED_DIRECT_OFFICIAL_URL_FETCH",
+    "year": 2026,
+    "publication_ids": [
+      "2026000001",
+      "2026000002"
+    ],
+    "selected_pending_records": 2,
+    "total_url_attempts": 4,
+    "per_record_hosts": [
+      "www.minjust.gospmr.org",
+      "www.minjust.org"
+    ],
+    "timeout_ms": 2500,
+    "result": "4_NETWORK_TIMEOUT;_0_AUTHENTIC_OFFICIAL_CARDS_RECOVERED",
+    "records": [
+      {
+        "publication_id": "2026000001",
+        "lotus_unid": "218c6377c433715cc2258d7d004512fa",
+        "official_content_recovered": false,
+        "probe_status": "ALL_ATTEMPTS_TIMEOUT"
+      },
+      {
+        "publication_id": "2026000002",
+        "lotus_unid": "1ca994d7e7902fa9c2258d7d00497c86",
+        "official_content_recovered": false,
+        "probe_status": "ALL_ATTEMPTS_TIMEOUT"
+      }
+    ],
+    "scope_inference": "SAMPLE_ONLY_NOT_A_CLAIM_THAT_9248_SOURCES_ARE_INACCESSIBLE",
+    "primary_html_archived_in_git": false
+  },
+  "external_registry_probe": {
+    "url": "https://pravopmr.ru/",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "observed_raw_html_bytes": 176085,
+    "observed_raw_html_sha256": "772fc2a1ca7b7de7d4d235e30aff87053524dcbdefb641a7a4816d1952c40cbb",
+    "html_archived_locally_only": true,
+    "html_archived_in_git": false,
+    "document_level_issuer_certification_allowed": false,
+    "reason": "Third-party legal information service. It explicitly disclaims authenticity of texts, and may impose account/access controls.",
+    "site_about_url": "https://pravopmr.ru/About.aspx",
+    "site_authenticity_disclaimer_source": "https://pravopmr.ru/views.aspx?id=I5gxFinQrWadikw9d2MEmA%3D%3D",
+    "advanced_search_adopting_body_filter_observed": true,
+    "authenticated_bulk_export_obtained": false,
+    "pairwise_join_map_captured": false,
+    "access_paywall_or_access_controls_may_limit_matching": true,
+    "no_automated_bypass_attempted": true
+  },
+  "external_comparison": {
+    "matched_one_to_one_records_certified": 0,
+    "this_number_measures_newly_certified_parity_only": true,
+    "central_vs_external_missing": null,
+    "central_vs_external_duplicates": null,
+    "central_vs_external_conflicting_issuers": null,
+    "external_only_publications": null,
+    "external_unavailable_records": null,
+    "exact_comparative_denominators_certified": false,
+    "full_cross_registry_parity_certified": false
+  },
+  "other_channels": {
+    "issuer_institutional_indexes_complete": false,
+    "local_councils_and_administrations_complete": false,
+    "central_electoral_commission_corpus_complete": false,
+    "primaries_for_each_pending_issuer_recovered": false
+  },
+  "evidence_policy": {
+    "use_act_type_as_issuer": false,
+    "use_title_as_issuer": false,
+    "infer_zero_missing_from_unavailable_registry": false,
+    "promote_search_snippets_as_authentic_primary": false,
+    "promote_third_party_texts_as_authentic_primary": false,
+    "batch_probe_may_assess_access_without_authenticating_issuer": true,
+    "pending_records_must_remain_null": true
+  },
+  "identity_count": 85,
+  "identity_adjudication_allowed": false,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false
+}
