@@ -99,7 +99,7 @@ function verifyCase(r,src,evidence,tags,old){
  assert.equal(old.administrative_acceptance,'BLOCKED_INCOMPLETE');
  return {id:r.id,osm_relation_id:id,cartographic_role:r.role,osm_relation_version:r.osm_relation_version,
   pinned_source_edges_sha256:evidence.live_polygon_edges_sha256,
-  osg_geometric_parent_only:src.geometric_osm_parent_id??null,
+  osm_geometric_parent_only:src.geometric_osm_parent_id??null,
   claimed_de_facto_parent_separate:src.claimed_de_facto_parent_id_separate??null,
   juridical_de_facto_certification:'BLOCKED_INCOMPLETE',geometry_acceptance:'OSM_EDGE_FIDELITY_PROVEN_BY_PRIOR_PINNED_AUDIT'};
 }
@@ -132,6 +132,25 @@ function assertEvidence(m){
  assert.equal(m.proofs.integration.post_merge_workflows_total,12);
  assert.equal(m.proofs.integration.pages_http_200_verified,true);
  assert.equal(m.proofs.integration.public_catalog_roles,85);
+ assert.equal(m.proofs.integration.main_postmerge_workflows.length,12);
+ const knownRuns=new Map([
+  ['Verify persisted ACTUAL release',38974133624],
+  ['Frontend browser QA',38974131791],
+  ['P8.4 export print report validation',38974131755],
+  ['Gate ACTUAL release trust chain',38974131761],
+  ['P9.0.7.2.16 source-only OSM role UI gate',38974131774],
+  ['Gate P2 statistical foundation',38974131617],
+  ['Frontend geometry taxonomy',38974131799],
+  ['pages build and deployment',38974131319],
+  ['P8.3 geometric measurement validation',38974131817],
+  ['Push on main',38974131388],
+  ['Gate ACTUAL CHANGE reproducibility',38974131619],
+  ['P8.2 derived topology reproducibility',38974131821]
+ ]);
+ assert.equal(new Set(m.proofs.integration.main_postmerge_workflows.map(x=>x.name)).size,12);
+ for(const item of m.proofs.integration.main_postmerge_workflows)
+  assert.equal(item.run_id,knownRuns.get(item.name),'post-merge run evidence mismatch');
+
  for(const file of [m.proofs.p907215.document,m.proofs.p907216.document,m.proofs.p907216.catalog,
   m.proofs.p907217.document,m.proofs.p907218.document])assert.doesNotThrow(()=>readFileSync(file));
 }
@@ -179,7 +198,7 @@ for(const [a,b] of [['osm-r9581354','osm-r12463379'],['osm-r8291058','osm-r93014
  assert(candidates.has(a)&&candidates.has(b));
  assert.notEqual(a,b,'homonymous OSM roles were collapsed');
 }
-assert(rows.some(r=>r.id==='osm-r1216706'&&r.claimed_de_facto_parent_separate&&r.claimed_de_facto_parent_separate!==r.osg_geometric_parent_only));
+assert(rows.some(r=>r.id==='osm-r1216706'&&r.claimed_de_facto_parent_separate&&r.claimed_de_facto_parent_separate!==r.osm_geometric_parent_only));
 for(const id of ['osm-r19001619','osm-r9659979'])assert(candidates.has(id),'special-case missing '+id);
 if(process.argv.includes('--self-test')){
  assert.throws(()=>verifyBoundary(manifest,{...policy,p91_import_allowed:true},semantic,roles),/true !== false/);
@@ -193,8 +212,10 @@ if(process.argv.includes('--self-test')){
 if(!process.argv.includes('--audit'))throw Error('Use --self-test or --audit');
 const output={schema_version:'p907219-evidence-reconciliation-verdict-v1',
  baseline_main_sha:manifest.baseline_main_sha,audit_only:true,
- evidence_provenance_verified_offline:true,
+ tracked_lineage_consistency_verified_offline:true,
+ external_github_run_results_fetched_during_this_gate:false,
  external_github_artifacts_re_read_during_this_gate:false,
+ artifact_byte_integrity_independently_reverified:false,
  geometry_recomputed_during_this_gate:false,
  osm_network_requests_during_this_gate:0,
  cartographic_acceptance:'CLOSED_EVIDENCE_BOUND',
