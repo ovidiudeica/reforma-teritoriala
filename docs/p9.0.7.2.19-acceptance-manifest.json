@@ -1,0 +1,91 @@
+{
+  "schema_version": "p907219-cartographic-acceptance-dossier-v1",
+  "scope": "P9_85_EXISTING_OSM_DESCRIPTIVE_ROLES_ONLY",
+  "baseline_main_sha": "ef47db7be28267dad1e8288d0c44af47dd34b870",
+  "audit_date_utc": "2026-10-16",
+  "source": {
+    "osm_pbf_name": "moldova-261012.osm.pbf",
+    "osm_replication_timestamp": "2026-10-12T20:21:35Z",
+    "osm_pbf_sha256": "4ebd791fb953a22961e40ef7921914251c7b7292c33ed1e90e919488f1a397b8",
+    "actual_snapshot": "actual-a9e5a4ddcb5277ef",
+    "actual_release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "osm_attribution": "© OpenStreetMap contributors, ODbL"
+  },
+  "cartographic": {
+    "status": "CLOSED_EVIDENCE_BOUND",
+    "relation_roles": 85,
+    "geometries_equal_by_7_decimal_osm_edge_multiset": 85,
+    "source_closure_way_node_live": 85,
+    "missing_geometries": 0,
+    "geometry_differences": 0,
+    "duplicate_geometries": 0,
+    "topological_interior_overlaps": 0,
+    "geometry_files_byte_identical_claimed": false,
+    "live_capture_atomic": false,
+    "live_freshness_guaranteed_after_audit": false
+  },
+  "juridical": {
+    "status": "BLOCKED_INCOMPLETE",
+    "de_facto_full_polygon_control_certified": 0,
+    "legal_md_parent_unchanged": true,
+    "distinct_osm_roles_not_jurisdictions": true,
+    "p91_import_allowed": false,
+    "actual_mutation_allowed": false,
+    "authorization_to_promote": false
+  },
+  "proofs": {
+    "p907215": {
+      "document": "docs/p9.0.7.2.15-osm-semantic-reconciliation.json",
+      "accepted_osm_roles": 85,
+      "certified_legal_roles": 0
+    },
+    "p907216": {
+      "document": "docs/p9.0.7.2.16-findings.md",
+      "catalog": "public/data/p907216-osm-roles.json",
+      "public_roles": 85
+    },
+    "p907217": {
+      "document": "docs/p9.0.7.2.17-findings.md",
+      "workflow_run_id": 38969053338,
+      "artifact_id": 12075548658,
+      "artifact_zip_sha256": "dc253e6b065b53f55735ea7f009421ea5e8f7a6203bf9c143bad7c2cb94d4542",
+      "verified_geometry_count": 85
+    },
+    "p907218": {
+      "document": "docs/p9.0.7.2.18-findings.md",
+      "workflow_run_ids": [
+        38972358011,
+        38972594502
+      ],
+      "final_head_sha": "08f6b1921fdabd7bd5786ffb60227f54a934cede",
+      "final_artifact_id": 12077273752,
+      "final_artifact_zip_sha256": "dd4e7e388b49357762de5a230b613e4bc6bebe0f38c39a4c551c799946f6246a",
+      "verdict": "COMPLETE_85_UNCHANGED",
+      "verified_live_relations": 85
+    },
+    "integration": {
+      "pr_number": 359,
+      "squash_main_sha": "ef47db7be28267dad1e8288d0c44af47dd34b870",
+      "post_merge_workflows_success": 12,
+      "post_merge_workflows_total": 12,
+      "pages_http_200_verified": true,
+      "public_catalog_roles": 85
+    }
+  },
+  "independent_edges": [
+    "md_cuatm_legal_parent",
+    "osm_geometric_containment_parent",
+    "dated_de_facto_administrative_claim",
+    "effective_control_scope_unverified"
+  ],
+  "residual_legal_gates": [
+    "contemporary_2023_to_2026_exhaustive_normative_amendments",
+    "independent_effective_2026_control_for_full_polygon",
+    "role_name_alias_and_parent_disambiguation",
+    "separate_reviewed_p91_promotion_policy_and_release_provenance"
+  ],
+  "no_live_osm_reread_in_this_dossier": true,
+  "no_geometry_reimport_or_reconstruction_in_this_dossier": true,
+  "no_new_polygons": true,
+  "no_changes_to_actual_release": true
+}
