@@ -39,9 +39,11 @@ function chosenRows(reg){
  assert.equal(records.size,9254);
  const out=pilots.map(id=>{
   const r=records.get(id);
-  assert(r&&r.issuer_legal_name===null,'Pilot must use a pending issuer: '+id);
+  assert(r&&(r.issuer_legal_name===null||id==='2026000043'),'Pilot must be a pending issuer or explicit official positive control: '+id);
   return r;
  });
+ assert.equal(out.filter(r=>r.issuer_legal_name===null).length,4);
+ assert.equal(out.filter(r=>r.issuer_legal_name!==null).length,1);
  for(const r of out)assert.equal(docId(r.official_detail_url).length,32);
  return out;
 }
@@ -98,7 +100,7 @@ async function main(){
   assert.equal(docId(asUrl(rows[0].official_detail_url,'www.justice.idknet.com')),docId(rows[0].official_detail_url));
   assert.throws(()=>redirectUrl('https://www.minjust.org/a','https://evil.example/x'));
   assert.throws(()=>docId('https://pravopmr.ru/'));
-  console.log('P90721021_OFFICIAL_MIRROR_POLICY_PASS: 9254 source-joined, 5 pending pilot identities, allowlisted official URLs, no cross-host redirects');
+  console.log('P90721021_OFFICIAL_MIRROR_POLICY_PASS: 9254 source-joined, 4 pending pilots + 1 preverified positive control, allowlisted official URLs, no cross-host redirects');
   return;
  }
  const timeoutMs=3500;
