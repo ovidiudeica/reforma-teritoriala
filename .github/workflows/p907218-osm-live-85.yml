@@ -1,0 +1,45 @@
+name: P9.0.7.2.18 live OSM 85-way-node read-only audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p907218-osm-live-85.mjs'
+      - '.github/workflows/p907218-osm-live-85.yml'
+      - 'docs/p9.0.7.2.18-findings.md'
+      - 'docs/p9.0.6.2-verified-evidence-ledger.json'
+      - 'docs/p9.0.7.2.15-osm-tag-census.json'
+      - 'public/geo/actual/**'
+      - 'public/data/p907216-osm-roles.json'
+permissions:
+  contents: read
+jobs:
+  p907218-live-readonly:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install pinned npm dependencies from audited local cache
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Verify XML parser, ring assembly, reversible-edge canonicalization
+        run: |
+          node --check scripts/audit/p907218-osm-live-85.mjs
+          node scripts/audit/p907218-osm-live-85.mjs --self-test
+      - name: Read all 85 OSM /full relations with complete way/node closure, compare to pinned ACTUAL
+        run: node --max-old-space-size=5000 scripts/audit/p907218-osm-live-85.mjs --audit
+      - name: Verify ACTUAL and legally protected sources are not modified
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain --untracked-files=no)"
+      - name: Preserve the full 85-source XML archive and per-ID evidence even on source failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p907218-live-osm-85-readonly-evidence
+          path: |
+            outputs/P9.0.7.2.18/live-source-85.json
+            outputs/P9.0.7.2.18/summary.json
+            outputs/P9.0.7.2.18/raw-osm-full/*.osm.xml.gz
+          if-no-files-found: warn
