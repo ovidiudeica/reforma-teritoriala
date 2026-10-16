@@ -1,0 +1,31 @@
+name: P9.0.7.2.16 source-only OSM role UI gate
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  p907216-osm-ui-fail-closed:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify only source-attributed OSM roles and existing ACTUAL snapshot
+        run: |
+          node --check atlas-osm-roles.mjs
+          node --check app.js
+          node --check scripts/process/build-p907216-osm-role-ui.mjs
+          node --check docs/p9.0.7.2.16-validate.mjs
+          node --check scripts/test/frontend-p907216-osm-roles.test.mjs
+          node docs/p9.0.7.2.16-validate.mjs
+          node --test scripts/test/frontend-p907216-osm-roles.test.mjs
+          node scripts/process/build-p907216-osm-role-ui.mjs --check
+      - name: Ensure no write path into existing ACTUAL release
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain --untracked-files=all)"
