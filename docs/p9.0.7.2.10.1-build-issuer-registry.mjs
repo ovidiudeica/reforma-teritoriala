@@ -14,9 +14,10 @@ const canon=b=>JSON.stringify(b,null,2)+'\n';
 const officialPath=u=>{
   const x=new URL(u);
   assert(['www.minjust.gospmr.org','minjust.gospmr.org','minjust.org','www.minjust.org'].includes(x.hostname),'Unexpected official source host');
-  const i=x.pathname.toLowerCase().indexOf('/oo/publication.nsf/');
-  assert(i>=0,'Not an official publication detail URL');
-  return x.pathname.slice(i).toLowerCase();
+  const match=x.pathname.toLowerCase().match(/^\/oo\/publication\.nsf\/[a-f0-9]{32}\/([a-f0-9]{32})!opendocument$/);
+  assert(match,'Not an official Lotus publication detail URL');
+  // Distinct Lotus database replica IDs can refer to the same document UNID.
+  return match[1];
 };
 
 export function build() {
