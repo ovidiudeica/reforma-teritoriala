@@ -219,6 +219,84 @@
     "actual_bytes": 2479046,
     "git_blob_sha1": "0746164737e65d381bb594900f9165a3e7cef7b1",
     "primary_archived_in_git": true,
-    "compared_to_ministry_law114_qualified_equivalence_certified": false
+    "compared_to_ministry_law114_qualified_equivalence_certified": false,
+    "rendered_page_equivalence_certified": true
+  },
+  "operative_clause_verification": {
+    "PMR-2026-4-ZI-VIII": {
+      "publication_id": "2026000089",
+      "primary_render_verified": true,
+      "article": "Статья 2",
+      "rule": "DAY_AFTER_OFFICIAL_PUBLICATION",
+      "published_date": "2026-01-29",
+      "certified_effective_date": "2026-01-30",
+      "evidence_scope": "visible operative text in committed primary PDF"
+    },
+    "PMR-2026-6-ZD-VIII": {
+      "publication_id": "2026000091",
+      "primary_render_verified": true,
+      "article": "Статья 2",
+      "rule": "CONDITIONAL_ON_ENTRY_INTO_FORCE_OF_PM2026_4_ZI_VIII",
+      "trigger": "PMR-2026-4-ZI-VIII",
+      "certified_effective_date": "2026-01-30",
+      "evidence_scope": "visible operative text in committed primary PDF"
+    },
+    "PMR-2026-89-ZI-VIII": {
+      "publication_id": "2026000689",
+      "primary_render_verified": true,
+      "article": "Статья 2",
+      "rule": "DAY_AFTER_OFFICIAL_PUBLICATION",
+      "published_date": "2026-05-06",
+      "certified_effective_date": "2026-05-07",
+      "evidence_scope": "visible operative text in committed primary PDF"
+    },
+    "PMR-2026-91-ZD-VIII": {
+      "publication_id": "2026000691",
+      "primary_render_verified": true,
+      "article": "Статья 2",
+      "rule": "CONDITIONAL_ON_ENTRY_INTO_FORCE_OF_PM2026_89_ZI_VIII",
+      "trigger": "PMR-2026-89-ZI-VIII",
+      "certified_effective_date": "2026-05-07",
+      "evidence_scope": "visible operative text in committed primary PDF"
+    },
+    "PMR-2026-114-ZID-VIII": {
+      "publication_id": "2026000856",
+      "primary_render_verified": true,
+      "article": "Статья 3",
+      "rule": "SIX_MONTHS_AFTER_DAY_OF_OFFICIAL_PUBLICATION",
+      "published_date": "2026-05-29",
+      "certified_effective_date": null,
+      "exact_calendar_interpretation_certified": false,
+      "evidence_scope": "visible operative text in both committed primary PDFs; calendar computation deliberately left unadjudicated"
+    }
+  },
+  "law114_comparison": {
+    "byte_identical": false,
+    "ministry_origin": "official de facto Ministry of Justice publication file",
+    "ministry_bytes": 2481796,
+    "ministry_sha256": "630df1c3a6985539264baa1684c942796b5eb73f93164df6c302eef3d30aece2",
+    "presidential_origin": "official de facto Presidential publication file",
+    "presidential_bytes": 2479046,
+    "presidential_sha256": "c9d05f579677f176007bd6987bf11031c986299e180d9e98577715f7cb1cc566",
+    "page_count_ministry": 4,
+    "page_count_presidential": 4,
+    "comparison_method": "same PDF renderer to WebP for each page; compare rendered image bytes",
+    "rendered_page_base64_lengths": [
+      166984,
+      205220,
+      178244,
+      29084
+    ],
+    "rendered_page_bytes_identical": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "rendered_page_equivalence_certified": true,
+    "visible_normative_text_difference_detected": false,
+    "non_rendered_container_difference_exists": true,
+    "container_level_cause_identified": false,
+    "scope_caveat": "Rendered-page identity certifies no visible page-content difference; it does not make the PDF containers byte-identical and does not identify which non-rendered objects/metadata differ."
   }
 }
