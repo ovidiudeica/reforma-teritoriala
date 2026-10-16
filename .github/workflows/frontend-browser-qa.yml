@@ -24,6 +24,9 @@ jobs:
           node --check scripts/test/frontend-atlas-browser.test.mjs
           node --check scripts/test/frontend-cartography-browser.test.mjs
           node --check atlas-tree.mjs
+          node --check atlas-osm-roles.mjs
+          node --check scripts/test/frontend-p907216-osm-roles.test.mjs
+          node --check scripts/test/frontend-p907216-osm-roles-browser.test.mjs
           node --check atlas-tree-window.mjs
           node --check scripts/test/helpers/atlas-evidence.mjs
           node --check scripts/audit/p73-virtual-tree-browser.mjs
@@ -50,6 +53,10 @@ jobs:
           node --check scripts/audit/p76-final-acceptance-browser.mjs
       - name: CDP code/data separation security regressions
         run: node --test scripts/test/atlas-browser-security.test.mjs
+      - name: P9.0.7.2.16 85 source-linked ACTUAL/OSM role tests
+        run: node --test scripts/test/frontend-p907216-osm-roles.test.mjs
+      - name: P9.0.7.2.16 real Chromium existing-geometry, mobile and OSM attribution
+        run: node --test scripts/test/frontend-p907216-osm-roles-browser.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence

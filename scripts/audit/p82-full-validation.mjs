@@ -4,4 +4,13 @@ tests.push(...(await readdir('tools/p2')).filter(p=>p.endsWith('.test.mjs')).map
 tests.push(...(await readdir('scripts/audit')).filter(p=>/^p(?:6|7|8).*browser\.mjs$/.test(p)).map(p=>'scripts/audit/'+p),'scripts/audit/p64-final-performance-accessibility.mjs');
 tests.sort();await mkdir('outputs/P8.2/local',{recursive:true});const log=createWriteStream('outputs/P8.2/local/full-suite.log'),started=performance.now(),child=spawn(process.execPath,['--test','--test-concurrency=1',...tests],{windowsHide:true,stdio:['ignore','pipe','pipe']});let text='',passes=0;
 for(const stream of [child.stdout,child.stderr])stream.on('data',data=>{log.write(data);const chunk=data.toString();text+=chunk;passes+=(chunk.match(/✔/g)||[]).length;if(passes>=50){console.log('Progress: '+passes+' additional passing checks');passes=0;}});
-const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve);});await new Promise(resolve=>log.end(resolve));const report={exitCode:code,testFiles:tests,durationMs:performance.now()-started,summary:text.split('\n').filter(line=>/^[ℹ#] (tests|pass|fail|cancelled|skipped|duration_ms)/.test(line))};await writeFile('outputs/P8.2/local/full-suite.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,testFiles:tests.length}));process.exitCode=code;
+const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve);});await new Promise(resolve=>log.end(resolve));const report={exitCode:code,testFiles:tests,durationMs:performance.now()-started,summary:text.split('\n').filter(line=>/^[ℹ#] (tests|pass|fail|cancelled|skipped|duration_ms)/.test(line))};await writeFile('outputs/P8.2/local/full-suite.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,testFiles:tests.length}));
+if(code!==0){
+ const last=text.lastIndexOf('failing tests:');
+ // Preserve the complete report on disk, but also surface the failing assertions
+ // in the Actions log rather than hiding everything except the final count.
+ console.error('P82_FULL_SUITE_FAILED_DETAIL_BEGIN');
+ console.error((last>=0?text.slice(last):text.slice(-22000)).slice(0,32000));
+ console.error('P82_FULL_SUITE_FAILED_DETAIL_END');
+}
+process.exitCode=code;
