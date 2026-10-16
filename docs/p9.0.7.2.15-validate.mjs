@@ -125,7 +125,7 @@ assert.equal(data.pinned_geometry_accepted,85);
 assert.equal(data.relation_tags_accepted,85);
 assert.equal(data.legal_certification_accepted,0);
 assert.equal(data.candidate_osm_descriptive_display_allowed,true);
-assert.equal(data.actuaL_production_overlay_enabled,false);
+assert.equal(data.actual_production_overlay_enabled,false);
 assert.equal(data.display_requires_explicit_source_attribution,true);
 assert.equal(data.display_requires_legal_certification_disclaimer,true);
 assert.equal(data.no_duplicate_osm_polygons,true);
