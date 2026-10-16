@@ -9,6 +9,38 @@ const src=read('docs/p9.0.7-contemporary-evidence-ledger.json');
 const context=read('docs/p9.0.7.2.11-targeted-external-evidence.json');
 const work=read('docs/p9.0.7.2.11-85-case-worklist.json');
 const policy=read('docs/p9.0.4.3-promotion-policy.json');
+const geometry=read('docs/p9.0.7.2.11-osm-homonym-geometries.json');
+const historicalGeometry=read('docs/p9.0.6.2-verified-evidence-ledger.json');
+assert.equal(geometry.schema_version,'p907211-osm-homonym-geometries-v1');
+assert.equal(geometry.original_source,'docs/p9.0.6.2-verified-evidence-ledger.json');
+assert.equal(geometry.snapshot_cutoff,'2026-10-12T20:21:35Z');
+assert.deepEqual(geometry.identity_pairs.map(x=>x.name),['Bender','Hlinaia']);
+for(const pair of geometry.identity_pairs){
+ assert.equal(pair.rows.length,2);
+ assert.equal(pair.sha256_different,true);
+ assert.notEqual(pair.rows[0].source_polygon_2026_10_12_sha256,pair.rows[1].source_polygon_2026_10_12_sha256);
+ assert.notEqual(pair.rows[0].live_polygon_edges_sha256,pair.rows[1].live_polygon_edges_sha256);
+ for(const r of pair.rows){
+  const source=historicalGeometry.rows.find(x=>x.osm_id===r.osm_id);
+  assert(source,'Cannot establish geometric provenance for '+r.osm_id);
+  assert.equal(r.actual_id,'osm-r'+r.osm_id);
+  assert.equal(r.source_polygon_2026_10_12_sha256,source.source_polygon_261012_sha256);
+  assert.equal(r.ordered_members_sha256,source.ordered_members_sha256);
+  assert.equal(r.live_polygon_edges_sha256,source.live_polygon_edges_sha256);
+  assert.equal(r.relation_version,source.relation_version_261012);
+  assert.equal(r.exact_osm_2026_10_12_to_live,true);
+ }
+ assert.equal(pair.semantic_disambiguation_certified,false);
+ assert.equal(pair.administrative_hierarchy_adjudicated,false);
+ assert.equal(pair.full_polygon_de_facto_jurisdiction_certified,false);
+}
+assert.equal(geometry.geometry_equality_for_each_pair,false);
+assert.equal(geometry.correct_semantic_role_of_each_polygon_certified,false);
+assert.equal(geometry.no_geometry_mutation,true);
+assert.equal(geometry.semantic_acceptance,'BLOCKED_INCOMPLETE');
+assert.equal(geometry.p91_import_allowed,false);
+assert.equal(geometry.actual_mutation_allowed,false);
+
 const r=spawnSync(process.execPath,['docs/p9.0.7.2.11-build-85-case-worklist.mjs','--check'],{encoding:'utf8'});
 assert.equal(r.status,0,r.stderr||r.stdout);
 assert.match(r.stdout,/P907211_85_CASE_REPRO_PASS/);
@@ -100,4 +132,4 @@ assert.equal(work.p91_import_allowed,false);
 assert.equal(work.actual_mutation_allowed,false);
 assert.equal(policy.semantic_acceptance,'BLOCKED_INCOMPLETE');
 assert.equal(policy.p91_import_allowed,false);
-console.log('P907211_85_INDIVIDUAL_CONTEXT_FAIL_CLOSED_PASS: 85 individually pinned; 20 have additional scoped first-party context from 8 references; duplicate OSM names Bender/Hlinaia and Cremenciug parent conflict isolated; 0 full-polygon adjudications; 85 preserved; P9.1 DENIED');
+console.log('P907211_85_INDIVIDUAL_CONTEXT_FAIL_CLOSED_PASS: 85 individually pinned; 20 have additional scoped first-party context from 8 references; Bender/Hlinaia distinct OSM polygon hashes independently pinned, but semantic roles still unresolved; Cremenciug parent conflict isolated; 0 full-polygon adjudications; 85 preserved; P9.1 DENIED');
