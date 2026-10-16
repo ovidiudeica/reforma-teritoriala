@@ -4,7 +4,7 @@
   "source_ledger": "docs/p9.0.7-contemporary-evidence-ledger.json",
   "source_ledger_sha256": "a2de65d151c59cde01d50f2e5e230b36d04caa897579760a477f3c70431c78a5",
   "external_context": "docs/p9.0.7.2.11-targeted-external-evidence.json",
-  "external_context_sha256": "9cf182bc055aeaafe46bf7f39383b17a8e6e96d507d1c63dee759a1fe6997b7a",
+  "external_context_sha256": "c00d69a42f11750d39a214b3bc4161ee27c8c2ed242462a10c102ba62928394d",
   "total": 85,
   "match_type_counts": {
     "CURATED_ALIAS_POTENTIAL_MATCH": 4,
@@ -12,8 +12,8 @@
     "NO_EXACT_2023_NAME": 1,
     "UNIQUE_NAME_2023": 69
   },
-  "linked_context_cases": 20,
-  "context_sources": 8,
+  "linked_context_cases": 22,
+  "context_sources": 9,
   "context_is_not_primary_binary": true,
   "full_polygon_certified": 0,
   "normative_chain_exhaustive_certified": 0,
@@ -202,9 +202,13 @@
         {
           "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
           "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        },
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
         }
       ],
-      "contextual_source_count": 1,
+      "contextual_source_count": 2,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
@@ -283,9 +287,13 @@
         {
           "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
           "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        },
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
         }
       ],
-      "contextual_source_count": 1,
+      "contextual_source_count": 2,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
@@ -608,9 +616,13 @@
         {
           "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
           "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        },
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
         }
       ],
-      "contextual_source_count": 1,
+      "contextual_source_count": 2,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
@@ -1103,8 +1115,13 @@
       "same_name_osm_candidates": [
         "osm-r19069840"
       ],
-      "context_source_refs": [],
-      "contextual_source_count": 0,
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
+        }
+      ],
+      "contextual_source_count": 1,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
@@ -1333,8 +1350,13 @@
       "same_name_osm_candidates": [
         "osm-r7432661"
       ],
-      "context_source_refs": [],
-      "contextual_source_count": 0,
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
+        }
+      ],
+      "contextual_source_count": 1,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
@@ -2675,9 +2697,13 @@
         {
           "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
           "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        },
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
         }
       ],
-      "contextual_source_count": 1,
+      "contextual_source_count": 2,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
@@ -2880,9 +2906,13 @@
         {
           "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
           "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        },
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
         }
       ],
-      "contextual_source_count": 1,
+      "contextual_source_count": 2,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
@@ -2922,9 +2952,13 @@
         {
           "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
           "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        },
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
         }
       ],
-      "contextual_source_count": 1,
+      "contextual_source_count": 2,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
@@ -3160,9 +3194,13 @@
         {
           "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
           "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        },
+        {
+          "source_id": "GOV-PMR-2025-04-02-CADASTRE-BOUNDARY-SURVEY",
+          "claim_type": "CITY_BOUNDARY_SURVEY_PROGRESS_NOT_APPROVED_FULL_POLYGON"
         }
       ],
-      "contextual_source_count": 1,
+      "contextual_source_count": 2,
       "already_present_legacy_evidence_urls": [],
       "requirements": [
         "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
