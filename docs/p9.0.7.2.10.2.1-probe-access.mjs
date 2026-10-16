@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync, mkdirSync, writeFileSync} from 'node:fs';
-import {resolve, join} from 'node:path';
+import {join} from 'node:path';
 import {gunzipSync} from 'node:zlib';
 
 const sha256=b=>createHash('sha256').update(b).digest('hex');
@@ -47,7 +47,7 @@ function chosenRows(reg){
  for(const r of out)assert.equal(docId(r.official_detail_url).length,32);
  return out;
 }
-async function probe(url,timeoutMs,contentDir=null,id=null){
+async function probe(url,timeoutMs,contentDir=null,id=null,slot=null){
  const began=Date.now();
  let current=url;
  try {
@@ -78,7 +78,8 @@ async function probe(url,timeoutMs,contentDir=null,id=null){
     result.pilot_unid=docId(url);
    }
    if(contentDir){
-    const file=(id??'index')+'-'+new URL(current).hostname+'-'+result.sha256.slice(0,12)+'.html';
+    assert(typeof slot==='string'&&/^(?:index-[0-2]|card-[0-4]-[0-2])$/.test(slot),'Unexpected fixed output slot');
+    const file=slot+'.html';
     writeFileSync(join(contentDir,file),bin,{flag:'wx'});
     result.archived_bytes=file;
    }
@@ -104,7 +105,7 @@ async function main(){
   return;
  }
  const timeoutMs=3500;
- const output=resolve(process.env.P90721021_PROBE_OUT||'/tmp/p90721021-official-probe');
+ const output='/tmp/p90721021-official-probe';
  mkdirSync(output,{recursive:true});
  const report={
   schema_version:'p90721021-ci-official-source-access-probe-v1',
@@ -124,16 +125,19 @@ async function main(){
   semantic_acceptance:'BLOCKED_INCOMPLETE',
   p91_import_allowed:false,actual_mutation_allowed:false
  };
- for(const host of pilotHosts){
+ for(let h=0;h<pilotHosts.length;h++){
+  const host=pilotHosts[h];
   const url='https://'+host+'/web.nsf/all/publication';
-  const result=await probe(url,timeoutMs,output);
+  const result=await probe(url,timeoutMs,output,null,'index-'+h);
   report.probes.push({kind:'INDEX_REACHABILITY_ONLY',host,...result});
   console.log('P90721021_INDEX',host,result.status,result.http_status??'',result.sha256??'');
  }
- for(const row of rows){
-  for(const host of pilotHosts){
+ for(let i=0;i<rows.length;i++){
+  const row=rows[i];
+  for(let h=0;h<pilotHosts.length;h++){
+   const host=pilotHosts[h];
    const url=asUrl(row.official_detail_url,host);
-   const result=await probe(url,timeoutMs,output,row.publication_id);
+   const result=await probe(url,timeoutMs,output,row.publication_id,'card-'+i+'-'+h);
    report.probes.push({kind:'OFFICIAL_DETAIL',publication_id:row.publication_id,expected_unid:docId(row.official_detail_url),host,...result});
    console.log('P90721021_DETAIL',row.publication_id,host,result.status,result.http_status??'',result.sha256??'');
    if(result.status==='HTML_CAPTURED_UNCERTIFIED'&&result.exact_publication_id_visible===true)report.certified_official_card_access=true;
