@@ -86,6 +86,7 @@ const report={
  records:rows
 };
 return JSON.stringify(report,null,2)+'\n';
+}
 const rendered=build();
 if(process.argv.includes('--check')){
  assert.equal(readFileSync(output,'utf8'),rendered,'Matrix must match source-joined deterministic rebuild');
