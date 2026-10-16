@@ -1,0 +1,885 @@
+{
+  "schema_version": "p907212-title-based-normative-candidate-screen-v1",
+  "source_archive": "docs/p9.0.7.2.9-annual-census.json.gz",
+  "source_sha256": "8acc0d75a35f65fdac3e5fa88e04f6ef494f5f89822efa85b8467f2108f0a3ad",
+  "coverage": "ALL_9254_OFFICIAL_CENTRAL_INDEX_ROWS_THROUGH_2026_10_15",
+  "year_range": [
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "title_screen_not_exhaustive_for_act_content": true,
+  "external_and_unpublished_sources_not_screened": true,
+  "filters": [
+    {
+      "id": "ATU_FRAMEWORK_EXACT",
+      "rank": "DIRECT_NORMATIVE_CHAIN_CANDIDATE",
+      "regex": "об административно[-– ]территориальном устройстве приднестровской молдавской республики"
+    },
+    {
+      "id": "LOCAL_GOV_FRAMEWORK_EXACT",
+      "rank": "POTENTIALLY_RELEVANT_INSTITUTIONAL_FRAMEWORK",
+      "regex": "об органах местной власти, местного самоуправления и государственной администрации в приднестровской молдавской республике"
+    },
+    {
+      "id": "ATU_REGISTER_EXACT",
+      "rank": "REGISTER_CANDIDATE_NOT_EXHAUSTIVE",
+      "regex": "государственн(?:ого|ом|ый|ому) реестр(?:а|е)?[^«»]{0,110}административно[-– ]территориальн|административно[-– ]территориальн[^«»]{0,100}государственн(?:ого|ом|ый) реестр"
+    },
+    {
+      "id": "SETTLEMENT_BOUNDARY_EXPLICIT",
+      "rank": "BOUNDARY_ACT_CANDIDATE_NEEDS_PRIMARY",
+      "regex": "(?:об утверждении|об установлении|об изменении|об уточнении|о корректировке)[^\\n]{0,180}границ[^\\n]{0,120}(?:города|района|села|поселка|населенного пункта)|(?:границ(?:ах|ы)?)[^\\n]{0,100}(?:городов|районов|сел|поселков|населенных пунктов)"
+    },
+    {
+      "id": "CADASTRE_LAND_GIS",
+      "rank": "CONTEXT_ONLY_CANNOT_ESTABLISH_ADMINISTRATIVE_PARENT",
+      "regex": "государственн(?:ый|ого|ом) земельн(?:ый|ого|ом) кадастр|землеустройств|межевани[ея]|территориальн[^\\n]{0,100}планиров|геодезическ[^\\n]{0,100}картограф"
+    },
+    {
+      "id": "SPECIFIC_LOCAL_COUNCIL",
+      "rank": "LOCAL_COUNCIL_CANDIDATE_NEEDS_PRIMARY",
+      "regex": "сельсовет|сельск(?:ого|им|ий|их) совет(?:а|ы|ом)|образовании[^\\n]{0,100}сельск(?:ого|их) (?:совет|населенн)"
+    }
+  ],
+  "rows_screened": 9254,
+  "rows_selected": 54,
+  "category_counts": {
+    "ATU_FRAMEWORK_EXACT": 3,
+    "LOCAL_GOV_FRAMEWORK_EXACT": 20,
+    "ATU_REGISTER_EXACT": 0,
+    "SETTLEMENT_BOUNDARY_EXPLICIT": 3,
+    "CADASTRE_LAND_GIS": 28,
+    "SPECIFIC_LOCAL_COUNCIL": 0
+  },
+  "law114_2026": {
+    "publication_id": "2026000856",
+    "publication_date": "29.05.2026",
+    "act_number_date": "№114-ЗИД-VIII от 29.05.2026",
+    "source_original_pdf": "docs/p9.0.7.2.9-primary/PMR-2026-114-ZID-VIII.pdf",
+    "archived_original_sha256": "630df1c3a6985539264baa1684c942796b5eb73f93164df6c302eef3d30aece2",
+    "legislative_effect_clause": "SIX_MONTHS_AFTER_OFFICIAL_PUBLICATION",
+    "in_effect_on_2026_10_16": false,
+    "exact_effective_date_certified_by_this_screen": false,
+    "may_be_used_as_operative_2026_10_16_law": false
+  },
+  "exact_complete_legal_amendment_chain_certified": false,
+  "exact_2026_full_polygon_de_facto_control_certified": 0,
+  "adjudicated_85": 0,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false,
+  "candidates": [
+    {
+      "publication_id": "2023000001",
+      "publication_date": "09.01.2023",
+      "act_type": "Закон",
+      "act_number_date": "№1-ЗИД-VII от 09.01.2023",
+      "title": "О внесении изменений и дополнений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/920184dd67dd9db3c2258932004096c9!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000117",
+      "publication_date": "30.01.2023",
+      "act_type": "Закон",
+      "act_number_date": "№7-ЗД-VII от 30.01.2023",
+      "title": "О внесении дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/a2420c5bd2eb6092c2258947004e0ce1!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000240",
+      "publication_date": "16.02.2023",
+      "act_type": "Приказ",
+      "act_number_date": "№593 от 16.12.2022",
+      "title": "Об утверждении Регламента исполнения Министерством сельского хозяйства и природных ресурсов Приднестровской Молдавской Республики государственной функции по осуществлению государственного контроля за соблюдением лицензионных требований и условий, предъявляемых к осуществлению геодезической и картографической деятельности",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/eaeb3a1577242bf6c225895800485f73!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000331",
+      "publication_date": "06.03.2023",
+      "act_type": "Распоряжение",
+      "act_number_date": "№160р от 02.03.2023",
+      "title": "Об утверждении Сметы расходов на финансирование мероприятий по ведению государственного земельного кадастра, инвентаризации земель и землеустройству и на проведение работ по формированию земельных участков и составлению планов земельных участков на 2023 год",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/cfeca94c6f97496cc225896a004059b1!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000445",
+      "publication_date": "24.03.2023",
+      "act_type": "Закон",
+      "act_number_date": "№48-ЗИ-VII от 24.03.2023",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/4391b9419959e04ac225897c0048c9b2!OpenDocument",
+      "categories": [
+        "ATU_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000446",
+      "publication_date": "24.03.2023",
+      "act_type": "Закон",
+      "act_number_date": "№49-ЗИ-VII от 24.03.2023",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «О языках в Приднестровской Молдавской Республике» в связи с принятием Закона Приднестровской Молдавской Республики «О внесении изменения в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/67674d72aae2791ac225897c004912f3!OpenDocument",
+      "categories": [
+        "ATU_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000456",
+      "publication_date": "24.03.2023",
+      "act_type": "Постановление",
+      "act_number_date": "№98 от 23.03.2023",
+      "title": "Об утверждении Положения о порядке ведения государственного земельного кадастра",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/598892aeccafd9bec225897c004dd80e!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000513",
+      "publication_date": "03.04.2023",
+      "act_type": "Приказ",
+      "act_number_date": "№257 от 23.03.2023",
+      "title": "Об установлении предельного уровня тарифа на услуги геодезической и картографической деятельности, осуществляемой в целях государственной регистрации прав граждан Приднестровской Молдавской Республики, сельскохозяйственных организаций, крестьянских (фермерских) хозяйств на земельный участок как объект недвижимости и сделок с ним, на расчетный период регулирования с 1 апреля 2023 года по 31 марта 2024 года",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/2191c4bb7de28ccac22589860039a83e!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000524",
+      "publication_date": "04.04.2023",
+      "act_type": "Указ",
+      "act_number_date": "№109 от 03.04.2023",
+      "title": "Об отмене Указа Президента Приднестровской Молдавской Республики от 23 сентября 2005 года № 487 «Об утверждении Положения о порядке ведения государственного земельного кадастра»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/b4d5cf77a042ba02c22589870028d26d!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000591",
+      "publication_date": "14.04.2023",
+      "act_type": "Постановление",
+      "act_number_date": "№128 от 13.04.2023",
+      "title": "О внесении изменений в Постановление Правительства Приднестровской Молдавской Республики от 20 марта 2020 года № 69 «Об утверждении Положения о лицензировании геодезической и картографической деятельности»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/e3c162c491a3b346c22589910024cfa7!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000620",
+      "publication_date": "19.04.2023",
+      "act_type": "Закон",
+      "act_number_date": "№84-ЗИ-VII от 19.04.2023",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/291f751114bf3e0cc225899600489bb8!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000621",
+      "publication_date": "19.04.2023",
+      "act_type": "Закон",
+      "act_number_date": "№85-ЗИ-VII от 19.04.2023",
+      "title": "О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/b23bf4c359c9e5d0c225899600491394!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023000939",
+      "publication_date": "15.06.2023",
+      "act_type": "Распоряжение",
+      "act_number_date": "№519р от 14.06.2023",
+      "title": "О внесении изменения в Распоряжение Правительства Приднестровской Молдавской Республики от 2 марта 2023 года № 160р «Об утверждении Сметы расходов на финансирование мероприятий по ведению государственного земельного кадастра, инвентаризации земель и землеустройству и на проведение работ по формированию земельных участков и составлению планов земельных участков на 2023 год»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/9cc002550326a88bc22589cf004906ae!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023001134",
+      "publication_date": "14.07.2023",
+      "act_type": "Закон",
+      "act_number_date": "№216-ЗИ-VII от 13.07.2023",
+      "title": "О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/090fce76e37369dfc22589ec00525154!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023001308",
+      "publication_date": "07.08.2023",
+      "act_type": "Приказ",
+      "act_number_date": "№286 от 17.07.2023",
+      "title": "О внесении изменений и дополнения в Приказ Министерства сельского хозяйства и природных ресурсов Приднестровской Молдавской Республики от 25 декабря 2015 года № 361 «Об утверждении Положения о едином порядке формирования и присвоения кадастровых номеров земельным участкам в Приднестровской Молдавской Республике для целей ведения государственного земельного кадастра» (Регистрационный № 7368 от 3 марта 2016 года) (САЗ 16-9)",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/f2891e189f420083c2258a040028c025!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023001591",
+      "publication_date": "29.09.2023",
+      "act_type": "Закон",
+      "act_number_date": "№291-ЗИ-VII от 29.09.2023",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/6bf809dbf72a9f47c2258a3900496d54!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023002005",
+      "publication_date": "17.11.2023",
+      "act_type": "Приказ",
+      "act_number_date": "№464 от 01.11.2023",
+      "title": "О внесении изменений и дополнений в Приказ Министерства сельского хозяйства и природных ресурсов Приднестровской Молдавской Республики от 16 декабря 2022 года № 593 «Об утверждении Регламента исполнения Министерством сельского хозяйства и природных ресурсов Приднестровской Молдавской Республики государственной функции по осуществлению государственного контроля за соблюдением лицензионных требований и условий, предъявляемых к осуществлению геодезической и картографической деятельности» (Регистрационный № 11548 от 16 февраля 2023 года) (САЗ 23-7)",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/9f3237b8f7ddc650c2258a6a00482765!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2023002216",
+      "publication_date": "19.12.2023",
+      "act_type": "Распоряжение",
+      "act_number_date": "№1085р от 18.12.2023",
+      "title": "О внесении изменения в Распоряжение Правительства Приднестровской Молдавской Республики от 2 марта 2023 года № 160р «Об утверждении Сметы расходов на финансирование мероприятий по ведению государственного земельного кадастра, инвентаризации земель и землеустройству и на проведение работ по формированию земельных участков и составлению планов земельных участков на 2023 год»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/d4d371615eed7420c2258a8a004d2acf!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024000101",
+      "publication_date": "23.01.2024",
+      "act_type": "Постановление",
+      "act_number_date": "№32 от 22.01.2024",
+      "title": "Об утверждении Положения о функционировании и использовании государственной информационной системы «Государственный земельный кадастр»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/3ee4979d612bc0c3c2258aad004b6cd7!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024000427",
+      "publication_date": "05.03.2024",
+      "act_type": "Закон",
+      "act_number_date": "№48-ЗИ-VII от 05.03.2024",
+      "title": "О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/e35b8d20081f0c02c2258ad70057b002!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024000549",
+      "publication_date": "25.03.2024",
+      "act_type": "Приказ",
+      "act_number_date": "№260 от 19.03.2024",
+      "title": "Об установлении предельного уровня тарифа на услуги геодезической и картографической деятельности, осуществляемой в целях государственной регистрации прав граждан Приднестровской Молдавской Республики, сельскохозяйственных организаций, крестьянских (фермерских) хозяйств на земельный участок как объект недвижимости и сделок с ним, на расчетный период регулирования с 1 апреля 2024 года по 31 марта 2025 года",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/10e021b553c6f710c2258aeb004d87b0!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024000780",
+      "publication_date": "23.04.2024",
+      "act_type": "Приказ",
+      "act_number_date": "№130 от 11.04.2024",
+      "title": "О внесении изменений в Приказ Министерства сельского хозяйства и природных ресурсов Приднестровской Молдавской Республики от 16 декабря 2022 года № 593 «Об утверждении Регламента исполнения Министерством сельского хозяйства и природных ресурсов Приднестровской Молдавской Республики государственной функции по осуществлению государственного контроля (надзора) за соблюдением требований и условий, предъявляемых к осуществлению геодезической и картографической деятельности» (Регистрационный № 11548 от 16 февраля 2023 года) (САЗ 23-7)",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/6607e40b3cf0f518c2258b08004b8a13!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024000929",
+      "publication_date": "21.05.2024",
+      "act_type": "Постановление",
+      "act_number_date": "№238 от 20.05.2024",
+      "title": "Об утверждении Положения о картографо-геодезическом фонде государственного земельного кадастра",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/1ffe88ebbe24e6d6c2258b24004876fc!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024001014",
+      "publication_date": "30.05.2024",
+      "act_type": "Закон",
+      "act_number_date": "№97-ЗД-VII от 30.05.2024",
+      "title": "О внесении дополнений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/eb4a270e600399ebc2258b2d004c39c9!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024001488",
+      "publication_date": "23.07.2024",
+      "act_type": "Приказ",
+      "act_number_date": "№141 от 17.06.2024",
+      "title": "О внесении изменений и дополнения в Приказ Министерства юстиции Приднестровской Молдавской Республики от 28 сентября 2021 года № 302 «Об утверждении Регламента предоставления государственной услуги «Оформление и выдача (переоформление) лицензии на геодезическую и картографическую деятельность» (регистрационный № 10622 от 5 ноября 2021 года) (САЗ 21-44)",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/a6206abf61388833c2258b6300447541!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024001732",
+      "publication_date": "27.08.2024",
+      "act_type": "Распоряжение",
+      "act_number_date": "№295рп от 27.08.2024",
+      "title": "О проектах законов Приднестровской Молдавской Республики «О внесении изменения и дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике», «О внесении изменений и дополнения в Закон Приднестровской Молдавской Республики «О миграционном учете иностранных граждан и лиц без гражданства в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/b217bdff3cf33303c2258b8600462185!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024002326",
+      "publication_date": "22.11.2024",
+      "act_type": "Закон",
+      "act_number_date": "№276-ЗД-VII от 22.11.2024",
+      "title": "О внесении дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/49aeb5f30fcdb30cc2258bdd00411ca4!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024002387",
+      "publication_date": "29.11.2024",
+      "act_type": "Закон",
+      "act_number_date": "№287-ЗИД-VII от 29.11.2024",
+      "title": "О внесении изменения и дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/77eef05be17ff680c2258be400510b69!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2024002593",
+      "publication_date": "26.12.2024",
+      "act_type": "Закон",
+      "act_number_date": "№340-ЗИ-VII от 26.12.2024",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/6b297754b20213b2c2258bff00478f21!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025000279",
+      "publication_date": "26.02.2025",
+      "act_type": "Постановление",
+      "act_number_date": "№45 от 24.02.2025",
+      "title": "О внесении изменений в Постановление Правительства Приднестровской Молдавской Республики от 20 марта 2020 года № 69 «Об утверждении Положения о лицензировании геодезической и картографической деятельности»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/831849d20da12b71c2258c3d004dba09!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025000363",
+      "publication_date": "13.03.2025",
+      "act_type": "Приказ",
+      "act_number_date": "№51 от 10.03.2025",
+      "title": "О внесении изменения в Приказ Министерства юстиции Приднестровской Молдавской Республики от 28 сентября 2021 года № 302 «Об утверждении Регламента предоставления государственной услуги «Оформление и выдача (переоформление) лицензии на геодезическую и картографическую деятельность» (регистрационный № 10622 от 5 ноября 2021 года) (САЗ 21-44)",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/e639c4c7cf7542e7c2258c4c00493728!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025000468",
+      "publication_date": "28.03.2025",
+      "act_type": "Приказ",
+      "act_number_date": "№292 от 25.03.2025",
+      "title": "Об установлении предельного уровня тарифа на услуги геодезической и картографической деятельности, осуществляемой в целях государственной регистрации прав граждан Приднестровской Молдавской Республики, сельскохозяйственных организаций, крестьянских (фермерских) хозяйств на земельный участок как объект недвижимости и сделок с ним, на расчетный период регулирования с 1 апреля 2025 года по 31 марта 2026 года",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/c2e80fe50bfd577ec2258c5b003d7346!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025000896",
+      "publication_date": "09.06.2025",
+      "act_type": "Закон",
+      "act_number_date": "№97-ЗИ-VII от 09.06.2025",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/736759d8907dae9fc2258ca4004fc49d!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025001392",
+      "publication_date": "19.08.2025",
+      "act_type": "Закон",
+      "act_number_date": "№187-ЗИ-VII от 19.08.2025",
+      "title": "О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/d6b5832a8d022e7cc2258ceb004a1a3a!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025001424",
+      "publication_date": "25.08.2025",
+      "act_type": "Указ",
+      "act_number_date": "№338 от 25.08.2025",
+      "title": "Об утверждении границ города Тирасполя",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/4f935f3c8d3b06d1c2258cf100491601!OpenDocument",
+      "categories": [
+        "SETTLEMENT_BOUNDARY_EXPLICIT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025001480",
+      "publication_date": "08.09.2025",
+      "act_type": "Распоряжение",
+      "act_number_date": "№539р от 05.09.2025",
+      "title": "Об утверждении Сметы расходов на финансирование мероприятий по ведению государственного земельного кадастра, инвентаризации земель и землеустройству и на проведение работ по формированию земельных участков и составлению планов земельных участков на 2025 год",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/93d04bf4b191ed7dc2258cff00261b36!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025001515",
+      "publication_date": "10.09.2025",
+      "act_type": "Техническая ошибка",
+      "act_number_date": "№539р от 05.09.2025",
+      "title": "Об утверждении Сметы расходов на финансирование мероприятий по ведению государственного земельного кадастра, инвентаризации земель и землеустройству и на проведение работ по формированию земельных участков и составлению планов земельных участков на 2025 год",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/8edf624ab1b5fe8ec2258d01002aab47!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025001798",
+      "publication_date": "21.10.2025",
+      "act_type": "Распоряжение",
+      "act_number_date": "№378рп от 21.10.2025",
+      "title": "Об Официальном заключении Президента Приднестровской Молдавской Республики на проект закона Приднестровской Молдавской Республики «О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/0bc011ed21ab7e00c2258d2a004a7f7d!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025001866",
+      "publication_date": "28.10.2025",
+      "act_type": "Распоряжение",
+      "act_number_date": "№637р от 27.10.2025",
+      "title": "О внесении изменения в Распоряжение Правительства Приднестровской Молдавской Республики от 5 сентября 2025 года № 539р «Об утверждении Сметы расходов на финансирование мероприятий по ведению государственного земельного кадастра, инвентаризации земель и землеустройству и на проведение работ по формированию земельных участков и составлению планов земельных участков на 2025 год»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/3ad6eaf7d2e36e50c2258d31004c9972!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025002031",
+      "publication_date": "18.11.2025",
+      "act_type": "Закон",
+      "act_number_date": "№223-ЗИ-VII от 18.11.2025",
+      "title": "О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/c77cb292b4771eb9c2258d460033b4d9!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025002132",
+      "publication_date": "26.11.2025",
+      "act_type": "Приказ",
+      "act_number_date": "№304 от 21.11.2025",
+      "title": "О внесении изменений и дополнений в Приказ Министерства юстиции Приднестровской Молдавской Республики от 28 сентября 2021 года № 302 «Об утверждении Регламента предоставления государственной услуги «Оформление и выдача (переоформление) лицензии на геодезическую и картографическую деятельность» (регистрационный № 10622 от 5 ноября 2021 года) (САЗ 21-44)",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/9266f97f1831ba4bc2258d4e00589423!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025002341",
+      "publication_date": "23.12.2025",
+      "act_type": "Распоряжение",
+      "act_number_date": "№743р от 22.12.2025",
+      "title": "Об определении границ и площадей земельных участков, предназначенных для предоставления гражданам, ведущим крестьянское (фермерское) хозяйство в области животноводства, осуществляющим (осуществлявшим) деятельность на земельных участках, предоставленных в границах населенных пунктов для ведения личного подсобного хозяйства, жилищного или иного строительства",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/c514775d32e8e8cdc2258d69004a59c6!OpenDocument",
+      "categories": [
+        "SETTLEMENT_BOUNDARY_EXPLICIT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2025002471",
+      "publication_date": "31.12.2025",
+      "act_type": "Постановление",
+      "act_number_date": "№428 от 30.12.2025",
+      "title": "О внесении изменений в Постановление Правительства Приднестровской Молдавской Республики от 20 марта 2020 года № 69 «Об утверждении Положения о лицензировании геодезической и картографической деятельности»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/4525320b2fbfc7e8c2258d71003f911b!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000086",
+      "publication_date": "29.01.2026",
+      "act_type": "Закон",
+      "act_number_date": "№1-ЗИ-VIII от 29.01.2026",
+      "title": "О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/b923d4c4cb1494c6c2258d8e0030774c!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000091",
+      "publication_date": "29.01.2026",
+      "act_type": "Закон",
+      "act_number_date": "№6-ЗД-VIII от 29.01.2026",
+      "title": "О внесении дополнений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/67d4e5deddbeee18c2258d8e0032f160!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000275",
+      "publication_date": "02.03.2026",
+      "act_type": "Постановление",
+      "act_number_date": "№44 от 27.02.2026",
+      "title": "О внесении изменения и дополнения в Постановление Правительства Приднестровской Молдавской Республики от 22 января 2024 года № 32«Об утверждении Положения о функционировании и использовании государственной информационной системы «Государственный земельный кадастр»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/7e22895e4d150780c2258dae0046dc69!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000300",
+      "publication_date": "06.03.2026",
+      "act_type": "Техническая ошибка",
+      "act_number_date": "№44 от 27.02.2026",
+      "title": "О внесении изменения и дополнения в Постановление Правительства Приднестровской Молдавской Республики от 22 января 2024 года № 32 «Об утверждении Положения о функционировании и использовании государственной информационной системы «Государственный земельный кадастр»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/f71081e49a7e7f38c2258db200477864!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000438",
+      "publication_date": "25.03.2026",
+      "act_type": "Закон",
+      "act_number_date": "№53-ЗИД-VIII от 25.03.2026",
+      "title": "О внесении изменения и дополнений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/8e0b540daecdde77c2258dc5002c7299!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000474",
+      "publication_date": "28.03.2026",
+      "act_type": "Приказ",
+      "act_number_date": "№303 от 24.03.2026",
+      "title": "Об установлении предельного уровня тарифа на услуги геодезической и картографической деятельности, осуществляемой в целях государственной регистрации прав граждан Приднестровской Молдавской Республики, сельскохозяйственных организаций, крестьянских (фермерских) хозяйств на земельный участок как объект недвижимости и сделок с ним, на расчетный период регулирования с 1 апреля 2026 года по 31 марта 2027 года",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/461f4e26f9b1746ac2258dc8003429d1!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000508",
+      "publication_date": "02.04.2026",
+      "act_type": "Указ",
+      "act_number_date": "№116 от 02.04.2026",
+      "title": "Об установлении границ города Рыбницы",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/a976b7a7065d04f0c2258dcd0037c18a!OpenDocument",
+      "categories": [
+        "SETTLEMENT_BOUNDARY_EXPLICIT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000594",
+      "publication_date": "22.04.2026",
+      "act_type": "Распоряжение",
+      "act_number_date": "№195р от 21.04.2026",
+      "title": "Об утверждении Сметы расходов на финансирование мероприятий по ведению государственного земельного кадастра, инвентаризации земель и землеустройству и на проведение работ по формированию земельных участков и составлению планов земельных участков на 2026 год",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/7706c0768fb4657ec2258de100272a83!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000691",
+      "publication_date": "06.05.2026",
+      "act_type": "Закон",
+      "act_number_date": "№91-ЗД-VIII от 06.05.2026",
+      "title": "О внесении дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/08ba820c4625d6a9c2258def003bd689!OpenDocument",
+      "categories": [
+        "LOCAL_GOV_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026000856",
+      "publication_date": "29.05.2026",
+      "act_type": "Закон",
+      "act_number_date": "№114-ЗИД-VIII от 29.05.2026",
+      "title": "О внесении изменений и дополнений в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/a9ee8870b08c811fc2258e060045b159!OpenDocument",
+      "categories": [
+        "ATU_FRAMEWORK_EXACT"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    },
+    {
+      "publication_id": "2026001553",
+      "publication_date": "22.09.2026",
+      "act_type": "Приказ",
+      "act_number_date": "№349 от 31.08.2026",
+      "title": "О внесении дополнений в Приказ Министерства сельского хозяйства и природных ресурсов Приднестровской Молдавской Республики от 25 декабря 2015 года № 361 «Об утверждении Положения о едином порядке формирования и присвоения кадастровых номеров земельным участкам в Приднестровской Молдавской Республике для целей ведения государственного земельного кадастра» (регистрационный № 7368 от 3 марта 2016 года) (САЗ 16-9)",
+      "source_url": "http://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/933d959eb5e71a97c2258e7a002deff6!OpenDocument",
+      "categories": [
+        "CADASTRE_LAND_GIS"
+      ],
+      "certification_status": "INDEX_TITLE_CANDIDATE_ONLY_NOT_INDIVIDUAL_PRIMARY",
+      "issuer_verified_for_this_screen": false,
+      "normative_legal_effect_verified_for_this_screen": false,
+      "full_polygon_admin_proof": false
+    }
+  ]
+}
