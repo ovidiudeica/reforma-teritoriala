@@ -1,0 +1,97 @@
+{
+  "schema_version": "p90721021-official-access-pilot-evidence-v1",
+  "asof": "2026-10-16",
+  "scope": "READ_ONLY_SOURCE_ACCESS_RECOVERY_PILOT_NOT_SEMANTIC_CERTIFICATION",
+  "baseline": {
+    "registry": "docs/p9.0.7.2.10.1-individual-issuers.json.gz",
+    "sha256": "bedc19ec49d0d22bc737299e14d9b2f7d0761ca8743a51491e73bbcb46ae0e0c",
+    "publication_count": 9254,
+    "official_issuer_certified_count": 6,
+    "pending_issuer_count": 9248
+  },
+  "github_runner": {
+    "runner": "ubuntu-24.04",
+    "node": "24.21.0",
+    "successful_completed_evidence_job_run": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/38894085292",
+    "workflow_run_id": 38894085292,
+    "workflow_job_id": 116950282683,
+    "artifact_id": 12042574394,
+    "artifact_name": "p90721021-official-access-evidence",
+    "artifact_retention_days": 7,
+    "artifact_contains": "access-report.json and government-primary-report.json; no HTML/PDF recovered",
+    "pilot_ids": [
+      "2023000001",
+      "2024000001",
+      "2025000001",
+      "2026000001",
+      "2026000043"
+    ],
+    "pilot_record_types": {
+      "pending": 4,
+      "preverified_positive_control": 1
+    },
+    "hosts": [
+      "www.justice.idknet.com",
+      "www.minjust.gospmr.org",
+      "www.minjust.org"
+    ],
+    "per_request_timeout_ms": 3500,
+    "official_index_requests": 3,
+    "individual_official_detail_requests": 15,
+    "all_attempts_network_error_count": 18,
+    "index_http_200_count": 0,
+    "detail_html_captured_count": 0,
+    "detail_exact_id_matches": 0,
+    "issuer_certifications_new": 0,
+    "scope_limitation": "18 bounded sample probes do not prove all 9248 records unavailable"
+  },
+  "alternate_official_primary": {
+    "publication_id": "2026000001",
+    "official_ministry_index_date": "12.01.2026",
+    "official_ministry_index_kind": "Распоряжение",
+    "official_ministry_index_number": "№1р",
+    "official_ministry_index_title": "Об утверждении состава организационного комитета для проведения республиканского этапа конкурса «Наш город для всех»",
+    "government_pdf_url": "https://government.gospmr.org/wp-content/uploads/2026/01/rasp.-%E2%84%96-1r-ot-12.01.2026g.pdf",
+    "indexed_official_pdf_preview": {
+      "page_count": 2,
+      "explicit_issuer_header": "ПРАВИТЕЛЬСТВО ПРИДНЕСТРОВСКОЙ МОЛДАВСКОЙ РЕСПУБЛИКИ",
+      "document_kind": "РАСПОРЯЖЕНИЕ",
+      "signed_date": "12 января 2026 года",
+      "document_number": "№ 1р",
+      "title_matches_ministry_index": true,
+      "evidence_kind": "SEARCH_INDEXED_FIRST_PARTY_PDF_TEXT_NOT_BYTES"
+    },
+    "desktop_binary_retrieval": "TIMEOUT_9000MS",
+    "runner_binary_retrieval": {
+      "timeout_ms": 7000,
+      "status": "NETWORK_ERROR",
+      "http_status": null,
+      "binary_pdf_available": false,
+      "sha256": null,
+      "byte_count": null,
+      "primary_header_verified_from_downloaded_bytes": false
+    },
+    "raw_primary_archived_in_git": false,
+    "new_issuer_certified": false,
+    "outcome": "ALT_OFFICIAL_ORIGINAL_DISCOVERED_BUT_BINARY_RECOVERY_NOT_PROVEN",
+    "limitation": "An indexed first-party PDF text preview establishes a targeted original candidate, not byte-verified provenance or a complete issuer certificate"
+  },
+  "optional_secondary_discovery": {
+    "official_lotus_cards_visible_in_search_index": true,
+    "unid_metadata_lookup_possible": true,
+    "raw_lotus_cards_retrieved_by_runner": false,
+    "search_index_only_metadata_must_not_be_promoted": true
+  },
+  "access_path_status": "BLOCKED_NO_VERIFIABLE_RAW_OFFICIAL_DOCUMENT_RETRIEVAL",
+  "reliable_full_issuer_acquisition_demonstrated": false,
+  "all_issuer_certifications_complete": false,
+  "cross_registry_parity_complete": false,
+  "global_normative_exhaustiveness_complete": false,
+  "exact_external_missing": null,
+  "exact_external_duplicates": null,
+  "exact_external_contradictions": null,
+  "identities_not_adjudicated": 85,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false
+}
