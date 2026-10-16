@@ -63,12 +63,12 @@ try{
    const parsed=spawnSync('pdftotext',['-layout',join(out,receipt.archived_file),'-'],{encoding:'utf8',timeout:5000});
    receipt.pdf_text_extract_success=parsed.status===0;
    if(parsed.status===0){
-    const text=parsed.stdout.replace(/\\s+/g,' ').trim();
-    const title=expected.expected_title.replace(/\\s+/g,' ').trim();
+    const text=parsed.stdout.replace(/\s+/g,' ').trim();
+    const title=expected.expected_title.replace(/\s+/g,' ').trim();
     receipt.header_has_government=/ПРАВИТЕЛЬСТВО ПРИДНЕСТРОВСКОЙ МОЛДАВСКОЙ РЕСПУБЛИКИ/i.test(text);
     receipt.header_has_order=/РАСПОРЯЖЕНИЕ/i.test(text);
-    receipt.header_has_number=/№\\s*1р/i.test(text);
-    receipt.header_has_2026_date=/12\\s+января\\s+2026/i.test(text);
+    receipt.header_has_number=/№\s*1р/i.test(text);
+    receipt.header_has_2026_date=/12\s+января\s+2026/i.test(text);
     receipt.header_has_matching_title=text.includes(title);
     receipt.verified_against_explicit_primary_header=receipt.header_has_government&&receipt.header_has_order&&receipt.header_has_number&&receipt.header_has_2026_date&&receipt.header_has_matching_title;
    }
