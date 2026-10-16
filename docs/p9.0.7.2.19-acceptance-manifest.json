@@ -69,7 +69,57 @@
       "post_merge_workflows_success": 12,
       "post_merge_workflows_total": 12,
       "pages_http_200_verified": true,
-      "public_catalog_roles": 85
+      "public_catalog_roles": 85,
+      "main_postmerge_workflows": [
+        {
+          "name": "Verify persisted ACTUAL release",
+          "run_id": 38974133624
+        },
+        {
+          "name": "Frontend browser QA",
+          "run_id": 38974131791
+        },
+        {
+          "name": "P8.4 export print report validation",
+          "run_id": 38974131755
+        },
+        {
+          "name": "Gate ACTUAL release trust chain",
+          "run_id": 38974131761
+        },
+        {
+          "name": "P9.0.7.2.16 source-only OSM role UI gate",
+          "run_id": 38974131774
+        },
+        {
+          "name": "Gate P2 statistical foundation",
+          "run_id": 38974131617
+        },
+        {
+          "name": "Frontend geometry taxonomy",
+          "run_id": 38974131799
+        },
+        {
+          "name": "pages build and deployment",
+          "run_id": 38974131319
+        },
+        {
+          "name": "P8.3 geometric measurement validation",
+          "run_id": 38974131817
+        },
+        {
+          "name": "Push on main",
+          "run_id": 38974131388
+        },
+        {
+          "name": "Gate ACTUAL CHANGE reproducibility",
+          "run_id": 38974131619
+        },
+        {
+          "name": "P8.2 derived topology reproducibility",
+          "run_id": 38974131821
+        }
+      ]
     }
   },
   "independent_edges": [
