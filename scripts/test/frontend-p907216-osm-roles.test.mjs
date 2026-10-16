@@ -26,7 +26,7 @@ test('P9.0.7.2.16 85 OSM roles are bound to all existing ACTUAL geometry IDs wit
   assert.equal(row.id,e.id);
   assert.equal(row.existing_actual_entity_id,e.id);
   assert.equal(e.jurisdiction,'MD');
-  assert.equal(e.representation.place,row.osm_place);
+  assert.equal(e.representation.place??null,row.osm_place);
   assert.equal(row.legal_de_facto_certified,false);
  }
  const roleCounts={};
