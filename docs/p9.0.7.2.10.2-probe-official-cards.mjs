@@ -123,7 +123,7 @@ async function main(){
     session.external_pairwise_parity_certified=false;
   }
   const logfile=join(folder,'probe-report.json');
-  writeFileSync(logfile,JSON.stringify(session,null,2)+'\\n',{flag:'wx'});
+  writeFileSync(logfile,JSON.stringify(session,null,2)+'\n',{flag:'wx'});
   console.log('P9072102_PROBE_FINISHED: '+session.records.length+' attempted, 0 newly certified; report='+logfile);
 }
 main().catch(e=>{console.error(e);process.exitCode=1});
