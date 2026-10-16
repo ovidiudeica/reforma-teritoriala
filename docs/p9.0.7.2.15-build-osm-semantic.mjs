@@ -116,7 +116,7 @@ function build(){
   relation_tags_accepted:rows.filter(r=>r.cartographic_osm_tag_acceptance==='ACCEPTED_EXACT_RELATION_TAGS').length,
   legal_certification_accepted:0,
   candidate_osm_descriptive_display_allowed:true,
-  actuaL_production_overlay_enabled:false,
+  actual_production_overlay_enabled:false,
   display_requires_explicit_source_attribution:true,
   display_requires_legal_certification_disclaimer:true,
   cartographic_role_counts:Object.fromEntries(Object.entries(c).sort(([a],[b])=>a.localeCompare(b))),
