@@ -1,0 +1,102 @@
+{
+  "schema_version": "p90729-issuer-parity-evidence-v1",
+  "asof": "2026-10-16",
+  "scope": "EVIDENCE_ONLY_RECORD_LEVEL_ISSUER_AND_CROSS_REGISTRY_PARITY; NO_SEMANTIC_ADJUDICATION",
+  "central_chronological_registry": {
+    "committed_archive": "docs/p9.0.7.2.9-annual-census.json.gz",
+    "publication_count": 9254,
+    "year_counts": {
+      "2023": 2390,
+      "2024": 2659,
+      "2025": 2479,
+      "2026_through_2026_10_15": 1726
+    },
+    "publication_id_gaps": 0,
+    "duplicate_publication_ids": 0,
+    "chronological_index_reconciled": true
+  },
+  "attribution_contract": {
+    "act_type_is_issuer_identity": false,
+    "infer_issuer_from_act_type_allowed": false,
+    "committed_corpus_has_certified_issuer_field_count": 0,
+    "committed_corpus_pending_record_level_issuer_enrichment": 9254,
+    "full_issuer_census_certified": false,
+    "reason": "The committed chronological rows contain act type, number/date, title and official detail URL, but no independently authenticated juridical issuer field. Per-record issuer must come from an official detail card, primary document, or issuer-specific official index."
+  },
+  "directly_verified_official_detail_samples": [
+    {
+      "publication_id": "2026000935",
+      "issuer": "Министерство экономического развития Приднестровской Молдавской Республики",
+      "source_url": "https://minjust.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/357859c0e124d42cc2258e120043baae!OpenDocument",
+      "verification": "OFFICIAL_DETAIL_CARD_EXPLICIT_ISSUER"
+    },
+    {
+      "publication_id": "2026000043",
+      "issuer": "Министерство юстиции Приднестровской Молдавской Республики",
+      "source_url": "https://minjust.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/f17452914c743885c2258d860051abf9!OpenDocument",
+      "verification": "OFFICIAL_DETAIL_CARD_EXPLICIT_ISSUER"
+    },
+    {
+      "publication_id": "2025001335",
+      "issuer": "Центральная избирательная комиссия",
+      "source_url": "https://www.minjust.org/oo/Publication.nsf/9306298df912e905c2258221004d4624/bfea9fe834ce2a6ac2258ce0004bc0ec!OpenDocument",
+      "verification": "OFFICIAL_DETAIL_CARD_EXPLICIT_ISSUER"
+    },
+    {
+      "publication_id": "2025001336",
+      "issuer": "Центральная избирательная комиссия",
+      "source_url": "https://www.minjust.org/oo/Publication.nsf/9306298df912e905c2258221004d4624/e1e657fbc2e46717c2258ce0004cb57e!OpenDocument",
+      "verification": "OFFICIAL_DETAIL_CARD_EXPLICIT_ISSUER"
+    },
+    {
+      "publication_id": "2025001337",
+      "issuer": "Центральная избирательная комиссия",
+      "source_url": "https://www.minjust.org/oo/Publication.nsf/9306298df912e905c2258221004d4624/c9a8c1e4434a078dc2258ce0004fd254!OpenDocument",
+      "verification": "OFFICIAL_DETAIL_CARD_EXPLICIT_ISSUER"
+    },
+    {
+      "publication_id": "2025001047",
+      "issuer": "Центральная избирательная комиссия",
+      "source_url": "https://www.minjust.org/oo/Publication.nsf/9306298df912e905c2258221004d4624/63e06ea023748c9bc2258cb9004bbb7c!OpenDocument",
+      "verification": "OFFICIAL_DETAIL_CARD_EXPLICIT_ISSUER"
+    }
+  ],
+  "official_issuer_indexes": {
+    "old_ministry_by_sections_taxonomy_observed": true,
+    "taxonomy_distinguishes_legislature_presidency_government_registered_departmental_and_other_state_local_acts": true,
+    "exact_2023_2026_counts_by_individual_juridical_issuer_certified": false,
+    "reason": "The by-sections view is a category index, not a committed one-to-one issuer mapping for all 9,254 chronological rows."
+  },
+  "new_legislative_registry": {
+    "registry": "https://pravopmr.ru/",
+    "directly_accessible_on_2026_10_16": true,
+    "advanced_search_exposes_adopting_body_filter": true,
+    "advanced_search_exposes_document_type_filter": true,
+    "deterministic_bulk_export_for_all_9254_captured": false,
+    "pairwise_publication_mapping_complete": false,
+    "full_parity_certified": false
+  },
+  "parity_result": {
+    "central_registry_omissions": 0,
+    "central_registry_duplicates": 0,
+    "cross_registry_omissions": null,
+    "cross_registry_contradictions": null,
+    "cross_registry_duplicates": null,
+    "inaccessible_or_unexported_source_records": null,
+    "exact_cross_registry_counts_certified": false,
+    "rationale": "Without a deterministic full export or 9,254 authenticated issuer cards, null is required instead of inferring zero."
+  },
+  "uncovered_scope": [
+    "record-level juridical issuer for all 9,254 central publications",
+    "complete local council and administration publication channels",
+    "complete CIK corpus outside the central chronological proof",
+    "full pairwise parity with pravopmr.ru",
+    "all issuer-specific archives and external publication channels"
+  ],
+  "global_normative_exhaustiveness_certified": false,
+  "identity_count": 85,
+  "individual_identity_status_certified": false,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false
+}
