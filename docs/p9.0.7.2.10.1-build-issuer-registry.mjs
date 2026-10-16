@@ -78,6 +78,10 @@ export function build() {
   };
   const plain=Buffer.from(canon(registry),'utf8');
   const compressed=gzipSync(plain,{level:9,mtime:0});
+  assert.equal(compressed.subarray(0,3).toString('hex'),'1f8b08');
+  // RFC 1952 OS=255 (unknown) is our cross-platform canonical header.
+  // Node/zlib otherwise writes OS=10 on Windows and OS=3 on Linux.
+  compressed[9]=255;
   const manifest={
     schema_version:'p9072101-individual-issuer-registry-manifest-v1',
     source_census:SOURCE,
