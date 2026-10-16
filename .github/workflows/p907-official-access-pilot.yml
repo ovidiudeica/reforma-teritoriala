@@ -1,0 +1,36 @@
+name: P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)
+on:
+  pull_request:
+    paths:
+      - 'docs/p9.0.7.2.10.2.1-*'
+      - '.github/workflows/p907-official-access-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-card-access-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Validate bounded read-only source-probe implementation
+        run: |
+          node --check docs/p9.0.7.2.10.2.1-probe-access.mjs
+          node docs/p9.0.7.2.10.2.1-probe-access.mjs --self-test
+      - name: Recover a bounded four-year pilot from three official-domain aliases
+        env:
+          P90721021_PROBE_OUT: ${{ runner.temp }}/p90721021-official-probe
+        run: node docs/p9.0.7.2.10.2.1-probe-access.mjs --probe
+      - name: Upload immutable raw HTML and retrieval receipts for review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p90721021-official-access-evidence
+          path: ${{ runner.temp }}/p90721021-official-probe/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Verify no repository mutations
+        run: git diff --exit-code
