@@ -1,0 +1,70 @@
+{
+  "schema_version": "p907211-osm-homonym-geometries-v1",
+  "original_source": "docs/p9.0.6.2-verified-evidence-ledger.json",
+  "source_blob_sha1": "443f9c5fb6a901c522064edee6e334038509016f",
+  "snapshot_cutoff": "2026-10-12T20:21:35Z",
+  "identity_pairs": [
+    {
+      "name": "Bender",
+      "rows": [
+        {
+          "actual_id": "osm-r12463379",
+          "osm_id": "12463379",
+          "source_polygon_2026_10_12_sha256": "41f1e733e17b0c7c765239a36d68a931b609731498e959511060132ce23a92aa",
+          "ordered_members_sha256": "88148c8a81af5b98c772b82d213bd803ad6a9924083505c238786e2c696df299",
+          "live_polygon_edges_sha256": "b54738228082e3f0b5ceb3838f8054ebedae9266dfc501256b54012dd293c759",
+          "exact_osm_2026_10_12_to_live": true,
+          "relation_version": 20
+        },
+        {
+          "actual_id": "osm-r9581354",
+          "osm_id": "9581354",
+          "source_polygon_2026_10_12_sha256": "21ec46cfaa5887632e5c3c144de1888e6bc5194b04a46c6f33b667f95bf3441a",
+          "ordered_members_sha256": "79450dd5e3fab1921167a8bef15b88c353bd013129b779e93a28b4a2b0bd2f69",
+          "live_polygon_edges_sha256": "8a99b43ff9388de4d56c1e96ae21f9412460d000e031d78c582bab4a972cead8",
+          "exact_osm_2026_10_12_to_live": true,
+          "relation_version": 37
+        }
+      ],
+      "sha256_different": true,
+      "interpretation": "SOURCE_POLYGON_SHA256_DIFFERENT_FOR_THE_TWO_DISTINCT_OSM_RELATIONS",
+      "semantic_disambiguation_certified": false,
+      "administrative_hierarchy_adjudicated": false,
+      "full_polygon_de_facto_jurisdiction_certified": false
+    },
+    {
+      "name": "Hlinaia",
+      "rows": [
+        {
+          "actual_id": "osm-r8291058",
+          "osm_id": "8291058",
+          "source_polygon_2026_10_12_sha256": "96f08fa8f4616fd73123cdb3cb151cf014923dee326a462b452a032e8c738657",
+          "ordered_members_sha256": "79e850e276a8384919f6b29d88e15dd27b25253ebcf2e91b2ee3b203dcbd0c1e",
+          "live_polygon_edges_sha256": "c95748e4df7c9f65303b33b74542da91b7dd4939ce1614821c7ac44bac94b158",
+          "exact_osm_2026_10_12_to_live": true,
+          "relation_version": 12
+        },
+        {
+          "actual_id": "osm-r9301463",
+          "osm_id": "9301463",
+          "source_polygon_2026_10_12_sha256": "26bd21cdbb098a72bf37f309817636cada1e35fad69c367e0d2ea377d583b32d",
+          "ordered_members_sha256": "a432f215d4631313f959c9b82585b7cbadca62f4d3af280bdf6a4036a22662cb",
+          "live_polygon_edges_sha256": "fe93e0b0b25257ebd43a28fe92d5282301a35d3f991020cfa4f6d8745906f54e",
+          "exact_osm_2026_10_12_to_live": true,
+          "relation_version": 12
+        }
+      ],
+      "sha256_different": true,
+      "interpretation": "SOURCE_POLYGON_SHA256_DIFFERENT_FOR_THE_TWO_DISTINCT_OSM_RELATIONS",
+      "semantic_disambiguation_certified": false,
+      "administrative_hierarchy_adjudicated": false,
+      "full_polygon_de_facto_jurisdiction_certified": false
+    }
+  ],
+  "geometry_equality_for_each_pair": false,
+  "correct_semantic_role_of_each_polygon_certified": false,
+  "no_geometry_mutation": true,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false
+}
