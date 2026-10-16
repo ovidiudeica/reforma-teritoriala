@@ -8,7 +8,8 @@ const out='docs/p9.0.7.2.12-normative-chain-candidates.json';
 const sha256=b=>createHash('sha256').update(b).digest('hex');
 const shaExpected='8acc0d75a35f65fdac3e5fa88e04f6ef494f5f89822efa85b8467f2108f0a3ad';
 const terms=[
- {id:'ATU_FRAMEWORK_EXACT',test:/об административно[-– ]территориальном устройстве приднестровской молдавской республики/i,rank:'DIRECT_NORMATIVE_CHAIN_CANDIDATE'},
+ {id:'ATU_FRAMEWORK_EXACT',test:/^О внесении (?:изменения|изменений(?: и дополнений)?|дополнений|дополнения) в Закон Приднестровской Молдавской Республики «Об административно[-– ]территориальном устройстве Приднестровской Молдавской Республики»/i,rank:'DIRECT_NORMATIVE_CHAIN_CANDIDATE'},
+ {id:'ATU_FRAMEWORK_SECONDARY_REFERENCE',test:/об административно[-– ]территориальном устройстве приднестровской молдавской республики/i,rank:'RELATED_CROSS_REFERENCE_NOT_DIRECT_AMENDMENT'},
  {id:'LOCAL_GOV_FRAMEWORK_EXACT',test:/об органах местной власти, местного самоуправления и государственной администрации в приднестровской молдавской республике/i,rank:'POTENTIALLY_RELEVANT_INSTITUTIONAL_FRAMEWORK'},
  {id:'ATU_REGISTER_EXACT',test:/государственн(?:ого|ом|ый|ому) реестр(?:а|е)?[^«»]{0,110}административно[-– ]территориальн|административно[-– ]территориальн[^«»]{0,100}государственн(?:ого|ом|ый) реестр/i,rank:'REGISTER_CANDIDATE_NOT_EXHAUSTIVE'},
  {id:'SETTLEMENT_BOUNDARY_EXPLICIT',test:/(?:об утверждении|об установлении|об изменении|об уточнении|о корректировке)[^\n]{0,180}границ[^\n]{0,120}(?:города|района|села|поселка|населенного пункта)|(?:границ(?:ах|ы)?)[^\n]{0,100}(?:городов|районов|сел|поселков|населенных пунктов)/i,rank:'BOUNDARY_ACT_CANDIDATE_NEEDS_PRIMARY'},
@@ -25,7 +26,8 @@ function build(){
  const counts=Object.fromEntries(terms.map(t=>[t.id,0]));
  const entries=[];
  for(const row of publications){
-   const matched=terms.filter(t=>t.test.test(row.title??''));
+   let matched=terms.filter(t=>t.test.test(row.title??''));
+   if(matched.some(x=>x.id==='ATU_FRAMEWORK_EXACT'))matched=matched.filter(x=>x.id!=='ATU_FRAMEWORK_SECONDARY_REFERENCE');
    if(!matched.length)continue;
    for(const t of matched)counts[t.id]++;
    entries.push({
