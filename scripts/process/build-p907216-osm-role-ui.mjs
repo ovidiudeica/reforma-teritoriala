@@ -45,7 +45,7 @@ const rows=src.rows.map(x=>{
  assert(label,'Unrecognized OSM role: '+x.osm_role_from_tags);
  return {
   id:x.actual_id,
-  existing_actuaL_entity_id:e.id,
+  existing_actual_entity_id:e.id,
   display_name:e.display_name,
   osm_name:x.osm_name,
   osm_name_ro:x.osm_name_ro,
@@ -60,7 +60,7 @@ const rows=src.rows.map(x=>{
   context_flags:x.context_notes,
   geometry_source:'EXISTING_ACTUAL_PUBLIC_GEOJSON_ONLY',
   source_snapshot_osm:'2026-10-12T20:21:35Z',
-  osM_to_actuaL_geometry_byte_identity_claimed:false,
+  osm_to_actual_geometry_byte_identity_claimed:false,
   legal_de_facto_certified:false
  };
 });
