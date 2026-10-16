@@ -1,0 +1,3273 @@
+{
+  "schema_version": "p907211-85-case-probatory-worklist-v1",
+  "asof": "2026-10-16",
+  "source_ledger": "docs/p9.0.7-contemporary-evidence-ledger.json",
+  "source_ledger_sha256": "a2de65d151c59cde01d50f2e5e230b36d04caa897579760a477f3c70431c78a5",
+  "external_context": "docs/p9.0.7.2.11-targeted-external-evidence.json",
+  "external_context_sha256": "4577aa48600e3b8228496d2d8f9cb9050cf91a3d0a029f2914b9974262099e3d",
+  "total": 85,
+  "match_type_counts": {
+    "CURATED_ALIAS_POTENTIAL_MATCH": 4,
+    "HOMONYM_MULTIPLE_ENTRIES_2023": 11,
+    "NO_EXACT_2023_NAME": 1,
+    "UNIQUE_NAME_2023": 69
+  },
+  "linked_context_cases": 20,
+  "context_sources": 8,
+  "context_is_not_primary_binary": true,
+  "full_polygon_certified": 0,
+  "normative_chain_exhaustive_certified": 0,
+  "adjudicated_cases": 0,
+  "disputed_parent_osm_cases": [
+    "osm-r1216706"
+  ],
+  "repeated_name_groups": [
+    {
+      "name": "Bender",
+      "actual_ids": [
+        "osm-r12463379",
+        "osm-r9581354"
+      ]
+    },
+    {
+      "name": "Hlinaia",
+      "actual_ids": [
+        "osm-r8291058",
+        "osm-r9301463"
+      ]
+    }
+  ],
+  "identities_preserved": 85,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false,
+  "rows": [
+    {
+      "actual_id": "osm-r1216706",
+      "name_ro": "Cremenciug",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Тирасполь",
+          "council": null,
+          "role": "село",
+          "source_paragraph": 21
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": "1702219",
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r1216706"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2024-419-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "PRES-PMR-2026-06-18-CREMENCIUG-HOUSING",
+          "claim_type": "SERVICE_ADMINISTRATION_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "GOV-MD-2025-08-26-ELECTIONS-LEGAL-CONTEXT",
+          "claim_type": "MOLDOVAN_LEGAL_JURISDICTION_NOT_DEFACTO_CONTROL"
+        },
+        {
+          "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
+          "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        }
+      ],
+      "contextual_source_count": 4,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "EXPLICIT_DE_FACTO_PARENT_CONFLICT_RESOLUTION_WITHOUT_CHANGING_GEOMETRY"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r12215667",
+      "name_ro": "Gîsca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Бендеры",
+          "council": null,
+          "role": "село",
+          "source_paragraph": 14
+        }
+      ],
+      "geometric_parent_osm_id": "944727",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r12215667"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-MD-2025-08-26-ELECTIONS-LEGAL-CONTEXT",
+          "claim_type": "MOLDOVAN_LEGAL_JURISDICTION_NOT_DEFACTO_CONTROL"
+        },
+        {
+          "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
+          "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        }
+      ],
+      "contextual_source_count": 2,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r12463378",
+      "name_ro": "Proteagailovca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Бендеры",
+          "council": null,
+          "role": "село",
+          "source_paragraph": 15
+        }
+      ],
+      "geometric_parent_osm_id": "944727",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r12463378"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
+          "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r12463379",
+      "name_ro": "Bender",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Бендеры",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 12
+        }
+      ],
+      "geometric_parent_osm_id": "944727",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r12463379",
+        "osm-r9581354"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
+          "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "DISAMBIGUATE_DISTINCT_OSM_RELATIONS_WITH_IDENTICAL_ROMANIAN_NAME"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r18941889",
+      "name_ro": "Tiraspolul Nou",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Тирасполь",
+          "council": null,
+          "role": "поселок",
+          "source_paragraph": 20
+        }
+      ],
+      "geometric_parent_osm_id": "1702219",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r18941889"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
+          "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r18941890",
+      "name_ro": "Tiraspol",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Тирасполь",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 18
+        }
+      ],
+      "geometric_parent_osm_id": "1702219",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r18941890"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
+          "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19001619",
+      "name_ro": "Lunga",
+      "match_type_2023": "NO_EXACT_2023_NAME",
+      "historical_2023_registry_claims": [],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19001619"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [
+        "https://mer.gospmr.org/wp-content/uploads/2026/04/ga-dubossary-turistskij-pasport-2026-god.pdf",
+        "https://www.novostipmr.com/ru/news/26-06-26/27-iyunya-v-dubossarakh-proydet-vtoroy-festival-edinaya-semya",
+        "https://dubossary.ru/gosadministratsiya/"
+      ],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "CLASSIFY_MICRODISTRICT_VERSUS_SETTLEMENT_FROM_CURRENT_INSTITUTIONAL_OR_NORMATIVE_SOURCE"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19012105",
+      "name_ro": "Țîbuleuca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссарский район",
+          "council": "Цыбулевский сельсовет",
+          "role": "село",
+          "source_paragraph": 108
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19012105"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19013328",
+      "name_ro": "Goian",
+      "match_type_2023": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссарский район",
+          "council": "Гоянский сельсовет",
+          "role": "село",
+          "source_paragraph": 83
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19013328"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "OFFICIAL_COMPATIBLE_NAME_PROOF_AND_EXACT_OSM_BINDING"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19013329",
+      "name_ro": "Doibani I",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссарский район",
+          "council": "Дойбанский сельсовет",
+          "role": "село",
+          "source_paragraph": 72
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19013329"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015106",
+      "name_ro": "Cuzmin",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Кузьминский сельсовет",
+          "role": "село",
+          "source_paragraph": 127
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015106"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015107",
+      "name_ro": "Hristovaia",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Хрустовской сельсовет",
+          "role": "село",
+          "source_paragraph": 145
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015107"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015108",
+      "name_ro": "Severinovca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Севериновский сельсовет",
+          "role": "село",
+          "source_paragraph": 141
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015108"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015109",
+      "name_ro": "Crasnîi Octeabri",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Краснооктябрьский сельсовет",
+          "role": "село",
+          "source_paragraph": 124
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015109"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015110",
+      "name_ro": "Camenca",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 110
+        },
+        {
+          "region": "Каменский район",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 111
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015110"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015111",
+      "name_ro": "Podoima",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Подойменский сельсовет",
+          "role": "село",
+          "source_paragraph": 131
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015111"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015112",
+      "name_ro": "Rotari",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Ротарский сельсовет",
+          "role": "село",
+          "source_paragraph": 138
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015112"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015113",
+      "name_ro": "Valea Adîncă",
+      "match_type_2023": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Валя-Адынкский сельсовет",
+          "role": "село",
+          "source_paragraph": 114
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015113"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "OFFICIAL_COMPATIBLE_NAME_PROOF_AND_EXACT_OSM_BINDING"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015114",
+      "name_ro": "Rașcov",
+      "match_type_2023": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Рашковский сельсовет",
+          "role": "село",
+          "source_paragraph": 134
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015114"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "OFFICIAL_COMPATIBLE_NAME_PROOF_AND_EXACT_OSM_BINDING"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015115",
+      "name_ro": "Caterinovca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Катериновский сельсовет",
+          "role": "село",
+          "source_paragraph": 120
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015115"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015284",
+      "name_ro": "Vadul Turcului",
+      "match_type_2023": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Вадатурковский сельсовет",
+          "role": "село",
+          "source_paragraph": 161
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015284"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "OFFICIAL_COMPATIBLE_NAME_PROOF_AND_EXACT_OSM_BINDING"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015285",
+      "name_ro": "Beloci",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Белочинский сельсовет",
+          "role": "село",
+          "source_paragraph": 153
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015285"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015286",
+      "name_ro": "Plopi",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Плотьянский сельсовет",
+          "role": "село",
+          "source_paragraph": 201
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015286"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015287",
+      "name_ro": "Sovietscoe",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Советский сельсовет",
+          "role": "село",
+          "source_paragraph": 209
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015287"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19015304",
+      "name_ro": "Stroiești",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Строенецкий сельсовет",
+          "role": "село",
+          "source_paragraph": 211
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19015304"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19016165",
+      "name_ro": "Andreevca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Андреевский сельсовет",
+          "role": "село",
+          "source_paragraph": 149
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19016165"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19016166",
+      "name_ro": "Ulmu",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Ульманский сельсовет",
+          "role": "село",
+          "source_paragraph": 216
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19016166"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19016167",
+      "name_ro": "Vărăncău",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Воронковский сельсовет",
+          "role": "село",
+          "source_paragraph": 164
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19016167"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r19069840",
+      "name_ro": "Delacău",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": null,
+          "role": "село",
+          "source_paragraph": 26
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r19069840"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r6879649",
+      "name_ro": "Chițcani",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Кицканский сельсовет",
+          "role": "село",
+          "source_paragraph": 234
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r6879649"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7427669",
+      "name_ro": "Vladimirovca",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Попенкский сельсовет",
+          "role": "село",
+          "source_paragraph": 203
+        },
+        {
+          "region": "Слободзейский район",
+          "council": "Владимировский сельсовет",
+          "role": "село",
+          "source_paragraph": 226
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7427669"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2024-419-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "GOV-PMR-2024-273-OLDER-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 3,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7427680",
+      "name_ro": "Frunză",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Фрунзенский сельсовет",
+          "role": "село",
+          "source_paragraph": 255
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7427680"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7431238",
+      "name_ro": "Bîcioc",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Бычковский сельсовет",
+          "role": "село",
+          "source_paragraph": 34
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7431238"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7431263",
+      "name_ro": "Parcani",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Парканский сельсовет",
+          "role": "село",
+          "source_paragraph": 243
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7431263"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7432661",
+      "name_ro": "Crasnogorca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Красногорский сельсовет",
+          "role": "село",
+          "source_paragraph": 53
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7432661"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7432662",
+      "name_ro": "Teiu",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Тейский сельсовет",
+          "role": "село",
+          "source_paragraph": 62
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7432662"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7432700",
+      "name_ro": "Vinogradnoe",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Винограднянский сельсовет",
+          "role": "село",
+          "source_paragraph": 37
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7432700"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7468724",
+      "name_ro": "Blijnii Hutor",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Ближне-Хуторской сельсовет",
+          "role": "село",
+          "source_paragraph": 224
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7468724"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2024-419-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r7468791",
+      "name_ro": "Sucleia",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Суклейский сельсовет",
+          "role": "село",
+          "source_paragraph": 245
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r7468791"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8289594",
+      "name_ro": "Caragaș",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Карагашский сельсовет",
+          "role": "село",
+          "source_paragraph": 232
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8289594"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8289727",
+      "name_ro": "Cioburciu",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Чобручский сельсовет",
+          "role": "село",
+          "source_paragraph": 257
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8289727"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8289751",
+      "name_ro": "Slobozia",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 218
+        },
+        {
+          "region": "Слободзейский район",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 219
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8289751"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2024-419-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "GOV-PMR-2024-273-OLDER-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 3,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8290840",
+      "name_ro": "Dnestrovsc",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Тирасполь",
+          "council": null,
+          "role": "город-спутник",
+          "source_paragraph": 19
+        }
+      ],
+      "geometric_parent_osm_id": "1702219",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8290840"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
+          "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8290877",
+      "name_ro": "Pervomaisc",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Ленинский сельсовет",
+          "role": "село",
+          "source_paragraph": 188
+        },
+        {
+          "region": "Слободзейский район",
+          "council": null,
+          "role": "поселок",
+          "source_paragraph": 221
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8290877"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2024-419-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "GOV-PMR-2024-273-OLDER-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 3,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8290934",
+      "name_ro": "Nezavertailovca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Незавертайловский сельсовет",
+          "role": "село",
+          "source_paragraph": 241
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8290934"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8291057",
+      "name_ro": "Corotna",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Коротнянский сельсовет",
+          "role": "село",
+          "source_paragraph": 239
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8291057"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8291058",
+      "name_ro": "Hlinaia",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Глинойский сельсовет",
+          "role": "поселок",
+          "source_paragraph": 39
+        },
+        {
+          "region": "Слободзейский район",
+          "council": "Глинойский сельсовет",
+          "role": "село",
+          "source_paragraph": 230
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8291058",
+        "osm-r9301463"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2024-419-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "GOV-PMR-2024-273-OLDER-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 3,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS",
+        "DISAMBIGUATE_DISTINCT_OSM_RELATIONS_WITH_IDENTICAL_ROMANIAN_NAME"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8292878",
+      "name_ro": "Tîrnauca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Слободзейский район",
+          "council": "Терновский сельсовет",
+          "role": "село",
+          "source_paragraph": 247
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8292878"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8292891",
+      "name_ro": "Mălăiești",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Малаештский сельсовет",
+          "role": "село",
+          "source_paragraph": 55
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8292891"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8292898",
+      "name_ro": "Hrușca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Грушковский сельсовет",
+          "role": "село",
+          "source_paragraph": 117
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8292898"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8292909",
+      "name_ro": "Ocnița",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Окницкий сельсовет",
+          "role": "село",
+          "source_paragraph": 129
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8292909"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8348605",
+      "name_ro": "Tașlîc",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Ташлыкский сельсовет",
+          "role": "село",
+          "source_paragraph": 60
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8348605"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8348625",
+      "name_ro": "Butor",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Буторский сельсовет",
+          "role": "село",
+          "source_paragraph": 31
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8348625"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8348646",
+      "name_ro": "Speia",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Спейский сельсовет",
+          "role": "село",
+          "source_paragraph": 58
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8348646"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8348909",
+      "name_ro": "Mihailovca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Михайловский сельсовет",
+          "role": "село",
+          "source_paragraph": 194
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8348909"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8348920",
+      "name_ro": "Harmațca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссарский район",
+          "council": "Гармацкий сельсовет",
+          "role": "село",
+          "source_paragraph": 81
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8348920"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8349002",
+      "name_ro": "Dubău",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссарский район",
+          "council": "Дубовский сельсовет",
+          "role": "село",
+          "source_paragraph": 78
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8349002"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8349059",
+      "name_ro": "Lenin",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Ленинский сельсовет",
+          "role": "село",
+          "source_paragraph": 187
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8349059"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8349093",
+      "name_ro": "Butuceni",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Бутучанский сельсовет",
+          "role": "село",
+          "source_paragraph": 159
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8349093"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8349094",
+      "name_ro": "Jura",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Журский сельсовет",
+          "role": "село",
+          "source_paragraph": 177
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8349094"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8349307",
+      "name_ro": "Mocra",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Мокрянский сельсовет",
+          "role": "село",
+          "source_paragraph": 198
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8349307"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8349338",
+      "name_ro": "Popencu",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Попенкский сельсовет",
+          "role": "село",
+          "source_paragraph": 206
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8349338"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8539257",
+      "name_ro": "Maiac",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": null,
+          "role": "поселок",
+          "source_paragraph": 29
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8539257"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8539525",
+      "name_ro": "Colosova",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Колосовский сельсовет",
+          "role": "поселок",
+          "source_paragraph": 49
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8539525"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8688504",
+      "name_ro": "Broșteni",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Броштянский сельсовет",
+          "role": "село",
+          "source_paragraph": 157
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8688504"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8710724",
+      "name_ro": "Slobozia-Rașcov",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Каменский район",
+          "council": "Слобода-Рашковский сельсовет",
+          "role": "село",
+          "source_paragraph": 143
+        }
+      ],
+      "geometric_parent_osm_id": "1702216",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8710724"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r8726395",
+      "name_ro": "Șipca",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Шипкинский сельсовет",
+          "role": "село",
+          "source_paragraph": 66
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8726395"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9288026",
+      "name_ro": "Carmanova",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Кармановский сельсовет",
+          "role": "поселок",
+          "source_paragraph": 44
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9288026"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9288110",
+      "name_ro": "Hîrtop",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Гыртопский сельсовет",
+          "role": "село",
+          "source_paragraph": 41
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9288110"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9288158",
+      "name_ro": "Dzerjinscoe",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссарский район",
+          "council": "Дзержинский сельсовет",
+          "role": "село",
+          "source_paragraph": 70
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9288158"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9288287",
+      "name_ro": "Dubăsari",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссары",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 16
+        },
+        {
+          "region": "Дубоссарский район",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 68
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9288287"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9288722",
+      "name_ro": "Comisarovca Nouă",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссарский район",
+          "council": "Ново-Комиссаровский сельсовет",
+          "role": "село",
+          "source_paragraph": 100
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9288722"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9288756",
+      "name_ro": "Crasnîi Vinogradari",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Дубоссарский район",
+          "council": "Красновиноградарский сельсовет",
+          "role": "село",
+          "source_paragraph": 95
+        }
+      ],
+      "geometric_parent_osm_id": "1702215",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9288756"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9294122",
+      "name_ro": "Ghidirim",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Гидиримский сельсовет",
+          "role": "село",
+          "source_paragraph": 172
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9294122"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9301463",
+      "name_ro": "Hlinaia",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": "Глинойский сельсовет",
+          "role": "поселок",
+          "source_paragraph": 39
+        },
+        {
+          "region": "Слободзейский район",
+          "council": "Глинойский сельсовет",
+          "role": "село",
+          "source_paragraph": 230
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r8291058",
+        "osm-r9301463"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "PRES-PMR-2024-ADDRESS-GLINOE-GRIGORIOPOL",
+          "claim_type": "INSTITUTIONAL_LOCATION_DISAMBIGUATION_ONLY"
+        },
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 2,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS",
+        "DISAMBIGUATE_DISTINCT_OSM_RELATIONS_WITH_IDENTICAL_ROMANIAN_NAME"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9301464",
+      "name_ro": "Grigoriopol",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 24
+        },
+        {
+          "region": "Григориопольский район",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 25
+        }
+      ],
+      "geometric_parent_osm_id": "1702214",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9301464"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9581354",
+      "name_ro": "Bender",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Бендеры",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 12
+        }
+      ],
+      "geometric_parent_osm_id": "944727",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r12463379",
+        "osm-r9581354"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2013-CORPORATE-REGISTRATION-ZONES",
+          "claim_type": "CORPORATE_REGISTRATION_DISTRICT_SCOPE_ONLY"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "DISAMBIGUATE_DISTINCT_OSM_RELATIONS_WITH_IDENTICAL_ROMANIAN_NAME"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9656324",
+      "name_ro": "Haraba",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Гарабский сельсовет",
+          "role": "село",
+          "source_paragraph": 170
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9656324"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9656364",
+      "name_ro": "Crasnencoe",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Красненьский сельсовет",
+          "role": "село",
+          "source_paragraph": 185
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9656364"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9656413",
+      "name_ro": "Molochișul Mare",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Большемолокишский сельсовет",
+          "role": "село",
+          "source_paragraph": 155
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9656413"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9659709",
+      "name_ro": "Cobasna",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Колбаснянский сельсовет",
+          "role": "поселок",
+          "source_paragraph": 179
+        },
+        {
+          "region": "Рыбницкий район",
+          "council": "Колбаснянский сельсовет",
+          "role": "село",
+          "source_paragraph": 180
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9659709"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2013-KOLBASNA-LAND-ORDER",
+          "claim_type": "TWO_LOCUS_DESCRIPTORS_NO_IDENTIFICATION"
+        },
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 2,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9659794",
+      "name_ro": "Hîrjău",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Ержовский сельсовет",
+          "role": "село",
+          "source_paragraph": 174
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9659794"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9659979",
+      "name_ro": "Rîbnița",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбница",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 17
+        },
+        {
+          "region": "Рыбницкий район",
+          "council": null,
+          "role": "город",
+          "source_paragraph": 147
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9659979"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 1,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9660049",
+      "name_ro": "Ofatinți",
+      "match_type_2023": "UNIQUE_NAME_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Рыбницкий район",
+          "council": "Выхватинецкий сельсовет",
+          "role": "село",
+          "source_paragraph": 167
+        }
+      ],
+      "geometric_parent_osm_id": "1702217",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9660049"
+      ],
+      "context_source_refs": [],
+      "contextual_source_count": 0,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    },
+    {
+      "actual_id": "osm-r9679382",
+      "name_ro": "Crasnoe",
+      "match_type_2023": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "historical_2023_registry_claims": [
+        {
+          "region": "Григориопольский район",
+          "council": null,
+          "role": "село",
+          "source_paragraph": 27
+        },
+        {
+          "region": "Слободзейский район",
+          "council": null,
+          "role": "поселок",
+          "source_paragraph": 220
+        }
+      ],
+      "geometric_parent_osm_id": "1702218",
+      "claimed_de_facto_parent_osm_id": null,
+      "legal_md_parent_preserved": true,
+      "same_name_osm_candidates": [
+        "osm-r9679382"
+      ],
+      "context_source_refs": [
+        {
+          "source_id": "GOV-PMR-2024-419-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "GOV-PMR-2024-273-OLDER-ROAD-INVENTORY",
+          "claim_type": "MUNICIPAL_ROAD_INVENTORY_NOT_FULL_POLYGON_ADMINISTRATION"
+        },
+        {
+          "source_id": "PMR-2010-ADMIN-REGISTER-RETROSPECTIVE",
+          "claim_type": "HISTORICAL_TAXONOMY_AND_ROLE_DISTINCTION"
+        }
+      ],
+      "contextual_source_count": 3,
+      "already_present_legacy_evidence_urls": [],
+      "requirements": [
+        "CERTIFIED_EXHAUSTIVE_2023_2026_ADMINISTRATIVE_LAW_AMENDMENT_CHAIN",
+        "INDEPENDENT_CONTEMPORARY_DE_FACTO_CONTROL_OF_THE_EXACT_FULL_OSM_POLYGON",
+        "LEGAL_MOLDOVAN_PARENT_PRESERVED_AND_DISTINGUISHED",
+        "EVIDENCE_PROVENANCE_WITH_RETRIEVED_PRIMARY_BYTES_AND_SHA256",
+        "MANUAL_SEMANTIC_ACCEPTANCE_BEFORE_ANY_P9_1_PROMOTION",
+        "IDENTIFY_2026_LEGAL_SETTLEMENT_AND_ROLE_AMONG_HOMONYMS"
+      ],
+      "exhausted_normative_chain_certified": false,
+      "exact_2026_full_polygon_control_certified": false,
+      "full_primary_byte_provenance_certified": false,
+      "individual_semantic_acceptance": "BLOCKED_INCOMPLETE",
+      "p91_import_allowed": false,
+      "status": "CONTEXTUAL_RESEARCH_ONLY_NOT_ADJUDICATED"
+    }
+  ]
+}
