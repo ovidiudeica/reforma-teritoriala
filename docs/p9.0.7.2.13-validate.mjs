@@ -8,8 +8,11 @@ const ledger=read('docs/p9.0.7.2.13-cadastral-vs-city-border.json');
 const previous=read('docs/p9.0.7.2.12-boundary-decree-targets.json');
 const ids=read('docs/p9.0.7.2.11-85-case-worklist.json');
 const policy=read('docs/p9.0.4.3-promotion-policy.json');
-function decodeArchivedCapture(e){
- const encoded=readFileSync(e.path,'utf8').trim();
+function decodeArchivedCapture(e,kind){
+ const file=kind==='html'?'docs/p9.0.7.2.13-primary/rybnitsa-decree116-html.html.gz.b64':kind==='card'?'docs/p9.0.7.2.13-primary/rybnitsa-decree116-card.html.gz.b64':null;
+ assert(file,'Only pinned documentary captures');
+ assert.equal(e.path,file);
+ const encoded=readFileSync(file,'utf8').trim();
  assert.equal(encoded.length,e.base64_chars,'Truncated provenance base64');
  assert.match(encoded,/^[A-Za-z0-9+/]+={0,2}$/);
  const gz=Buffer.from(encoded,'base64');
@@ -30,8 +33,8 @@ assert.equal(ledger.document.target_actual_id,'osm-r9659979');
 assert.equal(ledger.document.official_publication_date,'2026-04-02');
 assert(new URL(ledger.document.first_party_legal_document).hostname==='ul-test.gospmr.org');
 assert(new URL(ledger.document.first_party_legal_card).hostname==='ul-test.gospmr.org');
-const html=decodeArchivedCapture(ledger.document.legal_document_archive);
-const card=decodeArchivedCapture(ledger.document.legal_card_archive);
+const html=decodeArchivedCapture(ledger.document.legal_document_archive,'html');
+const card=decodeArchivedCapture(ledger.document.legal_card_archive,'card');
 const hints=[
  'Об установлении границ города Рыбницы',
  'Настоящий Указ вступает в силу',
