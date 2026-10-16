@@ -58,9 +58,9 @@ assert.deepEqual(work.match_type_counts,{
  NO_EXACT_2023_NAME:1,
  UNIQUE_NAME_2023:69
 });
-assert.equal(work.linked_context_cases,20);
-assert.equal(work.context_sources,8);
-assert.equal(context.independent_claim_sources.length,8);
+assert.equal(work.linked_context_cases,22);
+assert.equal(work.context_sources,9);
+assert.equal(context.independent_claim_sources.length,9);
 assert.equal(work.context_is_not_primary_binary,true);
 assert.equal(context.primary_binary_byte_capture_count,0);
 const allowed=['government.gospmr.org','www.president.gospmr.org','president.gospmr.org','gov.md','justice.idknet.com'];
@@ -123,7 +123,7 @@ for(const row of work.rows){
   assert.equal(source.claim_type,e.claim_type);
  }
 }
-assert.equal(withRefs,20);
+assert.equal(withRefs,22);
 assert.equal(work.full_polygon_certified,0);
 assert.equal(work.normative_chain_exhaustive_certified,0);
 assert.equal(work.adjudicated_cases,0);
@@ -132,4 +132,4 @@ assert.equal(work.p91_import_allowed,false);
 assert.equal(work.actual_mutation_allowed,false);
 assert.equal(policy.semantic_acceptance,'BLOCKED_INCOMPLETE');
 assert.equal(policy.p91_import_allowed,false);
-console.log('P907211_85_INDIVIDUAL_CONTEXT_FAIL_CLOSED_PASS: 85 individually pinned; 20 have additional scoped first-party context from 8 references; Bender/Hlinaia distinct OSM polygon hashes independently pinned, but semantic roles still unresolved; Cremenciug parent conflict isolated; 0 full-polygon adjudications; 85 preserved; P9.1 DENIED');
+console.log('P907211_85_INDIVIDUAL_CONTEXT_FAIL_CLOSED_PASS: 85 individually pinned; 22 have additional scoped first-party context from 9 references; Bender/Hlinaia distinct OSM polygon hashes independently pinned, but semantic roles still unresolved; Cremenciug parent conflict isolated; 0 full-polygon adjudications; 85 preserved; P9.1 DENIED');
