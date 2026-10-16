@@ -775,7 +775,7 @@ const frontendReady=(async()=>{
  try{
   await loadIndex();
   try{await loadOsmRoleCatalog();}
-  catch(error){const status=document.getElementById('osm-roles-status');if(status){status.textContent='Catalogul descriptiv OSM nu poate fi verificat pentru acest release ACTUAL.';status.setAttribute('role','alert');}console.error('P9.0.7.2.16: catalogul OSM a rămas dezactivat',error);}
+  catch(error){const status=document.getElementById('osm-roles-status');if(status){status.textContent='Catalogul descriptiv OSM nu poate fi verificat pentru acest release ACTUAL.';status.setAttribute('role','alert');}/* Catalogul suplimentar e opțional; invalidarea sa nu este eroare ACTUAL. */}
   phase='hierarchy';await loadHierarchyTree();
   phase='geometry';await loadChunkIndex();
   if(chunkIndex)pointIdentifier=createPointIdentifier({entities:[...entityById.values()],chunks:chunkIndex.chunks,contract:releaseData.manifest.public_contract,read:geometryResources.read});
