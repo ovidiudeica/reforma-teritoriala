@@ -19,6 +19,7 @@ try{
    assert.deepEqual(state.defaultIds,['osm-r58974','osm-r90689'].sort());assert.match(state.status,/85 de relații/);
    assert.equal(await page.evaluate("document.querySelectorAll('.osm-role-evidence').length"),0);
   });
+  await page.openPanel('filters');
   await page.click('#osm-roles-panel > summary');
   await t.test('name collision Bender has two distinct source roles and IDs',async()=>{
    await page.evaluate("(()=>{let el=document.getElementById('osm-roles-search');el.value='Bender';el.dispatchEvent(new Event('input',{bubbles:true}));})()");
@@ -40,13 +41,14 @@ try{
    assert(requests.every(url=>url.startsWith('/public/geo/actual/')),'Fetched an additional P9 geometry resource');
   });
   await t.test('Hlinaia is two distinct councils; filtering never asserts a village polygon',async()=>{
+   await page.openPanel('filters');
    await page.evaluate("(()=>{let el=document.getElementById('osm-roles-search');el.value='Hlinaia';el.dispatchEvent(new Event('input',{bubbles:true}));})()");
    const matches=await page.evaluate("[...document.querySelectorAll('#osm-roles-list li')].map(e=>e.textContent)");
    assert.equal(matches.length,2);assert(matches.some(x=>x.includes('consiliu sătesc')));assert(matches.some(x=>x.includes('consiliu al așezării')));
   });
   await t.test('mobile opt-in catalog preserves accessible controls and legal caveat',async()=>{
    await page.viewport(390,844);
-   await page.openPanel('entities');
+   await page.openPanel('filters');
    const state=await page.evaluate("({overflow:document.documentElement.scrollWidth>innerWidth,hasSearch:!!document.querySelector('#osm-roles-search'),hasFilters:!!document.querySelector('#osm-roles-filter'),label:document.querySelector('#osm-roles-panel .hint')?.textContent,remaining:document.querySelectorAll('#osm-roles-list li').length})");
    assert.equal(state.overflow,false);assert(state.hasSearch&&state.hasFilters);
    assert.match(state.label,/nu este certificată/i);assert.equal(state.remaining,2);
