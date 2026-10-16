@@ -23,19 +23,15 @@ jobs:
           node --check docs/p9.0.7.2.10.2.1-probe-government-primary.mjs
           node docs/p9.0.7.2.10.2.1-probe-government-primary.mjs --self-test
       - name: Recover a bounded four-year pilot from three official-domain aliases
-        env:
-          P90721021_PROBE_OUT: ${{ runner.temp }}/p90721021-official-probe
         run: node docs/p9.0.7.2.10.2.1-probe-access.mjs --probe
       - name: Attempt binary recovery of 2026000001 government original PDF
-        env:
-          P90721021_PROBE_OUT: ${{ runner.temp }}/p90721021-official-probe
         run: node docs/p9.0.7.2.10.2.1-probe-government-primary.mjs --probe
       - name: Upload immutable raw HTML and retrieval receipts for review
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: p90721021-official-access-evidence
-          path: ${{ runner.temp }}/p90721021-official-probe/
+          path: /tmp/p90721021-official-probe/
           if-no-files-found: warn
           retention-days: 7
       - name: Verify no repository mutations
