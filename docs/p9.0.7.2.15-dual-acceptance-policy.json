@@ -1,0 +1,112 @@
+{
+  "schema_version": "p907215-dual-cartographic-legal-acceptance-policy-v1",
+  "stage": "P9.0.7.2.15",
+  "effective_for": "EVIDENCE_ONLY_OSM_DESCRIPTIVE_CANDIDATE_CATALOG",
+  "not_effective_for": [
+    "ACTUAL_PRODUCTION",
+    "P9.1_PROMOTION",
+    "MOLDOVAN_LEGAL_JURISDICTION",
+    "LEGALLY_APPROVED_BOUNDARIES"
+  ],
+  "source_registry": "docs/p9.0.7.2.15-osm-semantic-reconciliation.json",
+  "source_snapshot": "Geofabrik Moldova 2026-10-12T20:21:35Z",
+  "source_of_names_and_roles": "Tagged OSM relation; exact OSM tag values recorded per relation, never convert councils into villages solely by label",
+  "attribution": "© OpenStreetMap contributors, ODbL",
+  "trust_axes": {
+    "cartographic": {
+      "required_checks": [
+        "original_osm_relation_id_stable",
+        "osm_relation_version_equal_to_pinned_snapshot",
+        "osm_type_boundary",
+        "osm_boundary_administrative",
+        "osm_admin_level_explicit",
+        "source_polygon_checksum_pinned",
+        "geometry_members_and_edges_verified",
+        "license_and_timestamp_attributed"
+      ],
+      "completion_status": "ACCEPTED_SOURCE_VERIFIED",
+      "eligible_count": 85,
+      "acceptance_meaning": "Polygons and recorded names/roles reproduce versioned OSM relations; not an official delimitation or a current de facto municipal legal ownership claim.",
+      "can_stage_descriptive_presentation": true,
+      "can_override_master_geometry": false,
+      "can_assert_legal_jurisdiction": false
+    },
+    "legal": {
+      "required_checks": [
+        "valid_current_jurisdiction_act",
+        "distinct_Moldovan_de_jure_parent",
+        "approved_boundary_roles_and_legal_effects",
+        "correspondence_to_exact_geometry_when_claiming_legal_boundary"
+      ],
+      "completion_status": "BLOCKED_INCOMPLETE",
+      "accepted_count": 0,
+      "can_assert_enacted_de_facto_parent": false,
+      "can_override_constitutional_md_parent": false,
+      "can_assert_boundary_is_legally_approved": false,
+      "can_activate_production_or_P91": false
+    }
+  },
+  "forbidden_equivalences": [
+    "OSM boundary=administrative DOES NOT mean legally recognized de facto sovereignty",
+    "OSM place=municipality DOES NOT mean individual village or even municipality under MD law",
+    "OSM сельский совет / поселковый совет DOES NOT mean a settlement footprint",
+    "OSM geometric containment DOES NOT automatically mean administrative parent",
+    "Moldovan de jure administrative unit != de facto council jurisdiction",
+    "City intravilan != cadastral zone (Decree 116/2026 Rybnitsa)",
+    "Coincident names != coincident geometric or legal identities"
+  ],
+  "special_cases": [
+    {
+      "id": "osm-r12463379",
+      "role": "OSM_CITY_BOUNDARY_LEVEL8",
+      "not_same_as": "osm-r9581354"
+    },
+    {
+      "id": "osm-r9581354",
+      "role": "OSM_LEVEL4_MUNICIPALITY_BOUNDARY",
+      "not_same_as": "osm-r12463379"
+    },
+    {
+      "id": "osm-r8291058",
+      "role": "OSM_RURAL_COUNCIL_AREA_SLOBOZIA",
+      "not_same_as": "osm-r9301463"
+    },
+    {
+      "id": "osm-r9301463",
+      "role": "OSM_SETTLEMENT_COUNCIL_AREA_GRIGORIOPOL",
+      "not_same_as": "osm-r8291058"
+    },
+    {
+      "id": "osm-r19001619",
+      "role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED_NOT_LEGAL_SETTLEMENT"
+    },
+    {
+      "id": "osm-r1216706",
+      "role": "OSM_VILLAGE_BOUNDARY_WITH_UNRESOLVED_DE_FACTO_PARENT_CONFLICT"
+    },
+    {
+      "id": "osm-r9659979",
+      "role": "OSM_CITY_BOUNDARY_NOT_DECLARED_EQUAL_TO_CADASTRAL_ZONE"
+    }
+  ],
+  "display_contract": {
+    "source_label": "OpenStreetMap · relație și versiune verificate",
+    "supplementary_label": "Administrare de facto: sursă și statut necertificate juridic, unde există",
+    "md_legal_parent": "PRESERVE_AS_EXISTING_ACTUAL_MD",
+    "default_label_rule": "OSM name and relation ID; no guessed hierarchy or council-to-village equivalence",
+    "differentiated_states": [
+      "OSM_CARTOGRAPHIC_ACCEPTED",
+      "LEGAL_DE_FACTO_UNCERTIFIED"
+    ],
+    "require_user_visible_provenance": true,
+    "require_user_visible_admin_status_caveat": true,
+    "approved_for_eventual_distinct_layer": true,
+    "production_feature_flag_enablement_in_this_pr": false
+  },
+  "legacy_promotion_policy_path": "docs/p9.0.4.3-promotion-policy.json",
+  "legacy_policy_changes_in_this_stage": false,
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false,
+  "semantic_legal_acceptance": "BLOCKED_INCOMPLETE",
+  "controlled_future_work": "A separate reviewed PR must wire this catalog into a labeled cartographic layer without lifting existing ACTUAL/promotion gates."
+}
