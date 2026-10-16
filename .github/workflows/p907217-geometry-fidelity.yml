@@ -1,0 +1,45 @@
+name: P9.0.7.2.17 OSM-ACTUAL geometry fidelity (read only)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p907217-geometry-fidelity.mjs'
+      - '.github/workflows/p907217-geometry-fidelity.yml'
+      - 'docs/p9.0.7.2.17-findings.md'
+      - 'public/geo/actual/**'
+      - 'public/data/p907216-osm-roles.json'
+      - 'docs/p9.0.6.2-verified-evidence-ledger.json'
+      - 'docs/p9.0.7.2.15-osm-semantic-reconciliation.json'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p907217-geometry-fidelity.mjs'
+      - '.github/workflows/p907217-geometry-fidelity.yml'
+      - 'public/geo/actual/**'
+      - 'public/data/p907216-osm-roles.json'
+permissions:
+  contents: read
+jobs:
+  p907217-geometry-fidelity-readonly:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install ACTUAL deterministic Node dependencies without network
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Verify edge digest invariants and coordinate tampering detection
+        run: node scripts/audit/p907217-geometry-fidelity.mjs --self-test
+      - name: Compare 85 published ACTUAL polygons with pinned OSM source and audit topology
+        run: node scripts/audit/p907217-geometry-fidelity.mjs --audit
+      - name: Confirm tracked files are untouched
+        run: git diff --exit-code
+      - name: Upload exact per-ID evidence and pairwise topology matrix
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p907217-readonly-geometry-evidence
+          path: outputs/P9.0.7.2.17/geometry-fidelity-audit.json
+          if-no-files-found: warn
