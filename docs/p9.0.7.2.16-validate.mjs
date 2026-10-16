@@ -37,7 +37,7 @@ for(const r of ui.rows){
  assert.equal(e.id,r.existing_actual_entity_id);
  assert.equal(e.representation.osm_relation_id,r.osm_relation_id);
  assert.equal(e.representation.source,'OpenStreetMap');
- assert.equal(e.representation.place,r.osm_place);
+ assert.equal(e.representation.place??null,r.osm_place);
  assert.equal(String(e.representation.admin_level),String(r.osm_admin_level));
  assert.equal(r.legal_de_facto_certified,false);
  assert.equal(r.geometry_source,'EXISTING_ACTUAL_PUBLIC_GEOJSON_ONLY');
