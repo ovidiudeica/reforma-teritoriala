@@ -56,7 +56,7 @@ try{
   await t.test('no uncaught JavaScript, console or non-tile HTTP errors',async()=>{
    assert.deepEqual(page.errors,[]);
    assert.deepEqual(page.console.filter(x=>x.type==='error'||x.level==='error'),[]);
-   assert.deepEqual(page.responses.filter(x=>x.status>=400&&!new URL(x.url).hostname.includes('tile.openstreetmap.org')),[]);
+   assert.deepEqual(page.responses.filter(x=>x.status>=400&&!['a.tile.openstreetmap.org','b.tile.openstreetmap.org','c.tile.openstreetmap.org'].includes(new URL(x.url).hostname)),[]);
   });
  });
 }finally{await browser.close();}
