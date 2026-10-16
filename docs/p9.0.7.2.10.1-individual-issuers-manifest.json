@@ -1,0 +1,48 @@
+{
+  "schema_version": "p9072101-individual-issuer-registry-manifest-v1",
+  "source_census": "docs/p9.0.7.2.9-annual-census.json.gz",
+  "source_archive_sha256": "8acc0d75a35f65fdac3e5fa88e04f6ef494f5f89822efa85b8467f2108f0a3ad",
+  "source_issuer_evidence": "docs/p9.0.7.2.9-issuer-parity-evidence.json",
+  "source_issuer_evidence_sha256": "6d950182ec347b4964f6bd33621657e213d78c26b33d982e3f7b9182847891f3",
+  "registry_path": "docs/p9.0.7.2.10.1-individual-issuers.json.gz",
+  "registry_gzip_bytes": 186410,
+  "registry_gzip_sha256": "bedc19ec49d0d22bc737299e14d9b2f7d0761ca8743a51491e73bbcb46ae0e0c",
+  "registry_gzip_git_blob_sha1": "55d1ddb7ba276487baac51e47e907075344ad1fb",
+  "registry_plain_bytes": 3832779,
+  "registry_plain_sha256": "768f3c1988c311e7afcb7c7f96bda1e32b9abceeaf294beb5673c56b453021d2",
+  "snapshot_cutoff": "2026-10-15",
+  "year_counts": {
+    "2023": {
+      "rows": 2390,
+      "issuer_verified": 0,
+      "issuer_pending": 2390
+    },
+    "2024": {
+      "rows": 2659,
+      "issuer_verified": 0,
+      "issuer_pending": 2659
+    },
+    "2025": {
+      "rows": 2479,
+      "issuer_verified": 4,
+      "issuer_pending": 2475
+    },
+    "2026": {
+      "rows": 1726,
+      "issuer_verified": 2,
+      "issuer_pending": 1724
+    }
+  },
+  "record_count": 9254,
+  "issuer_evidence_verified_count": 6,
+  "issuer_pending_count": 9248,
+  "duplicate_publication_ids": 0,
+  "source_row_url_join_verified": true,
+  "full_record_level_issuer_attribution_certified": false,
+  "cross_registry_parity_certified": false,
+  "global_normative_exhaustiveness_certified": false,
+  "identities_not_adjudicated": 85,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false
+}
