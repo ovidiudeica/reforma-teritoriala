@@ -2,6 +2,7 @@ import {createAtlasExport} from './atlas-export-ui.mjs';
 import {mapSvg,printSvg} from './atlas-export-visual.mjs';
 import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
+import {validateOsmRolesCatalog,createOsmRolesPanel,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
 import {createAtlasIdentify} from './atlas-identify-ui.mjs';
@@ -25,7 +26,7 @@ import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
 import {validateConsolidatedHierarchy} from './atlas-hierarchy-validate.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
-import {geometryClass,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
+import {geometryClass,geometrySubtype,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
 
 const atlasLayout=createAtlasLayout({document,browser:globalThis.window});
 const map=L.map('map',{zoomControl:true,trackResize:false,minZoom:0,maxZoom:19}).setView([46.8,26.6],6);
@@ -76,6 +77,8 @@ function geometryRequest(key,load){
 }
 let chunkIndex=null;
 const entityById=new Map();
+let osmRoleById=new Map();
+let osmRolesPanel=null;
 const activeFilterGroups=new Set(Object.keys(geometryLabels));
 const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a second class state.
 const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
@@ -251,6 +254,33 @@ async function loadIndex(){
  return index;
 }
 
+async function loadOsmRoleCatalog(){
+ // Independent, opt-in OSM metadata: no extra geometries, hierarchy or legal status.
+ const response=await fetch('public/data/p907216-osm-roles.json',{cache:'no-cache'});
+ if(!response.ok)throw Error('Catalogul descriptiv OSM nu este disponibil');
+ const verified=validateOsmRolesCatalog(await response.json(),entityById,{
+  snapshotId:releaseData.manifest.snapshot_id,
+  releaseFingerprint:releaseData.manifest.release_fingerprint_sha256
+ });
+ const container=document.getElementById('osm-roles-panel');
+ if(!container)throw Error('Panoul OSM nu există');
+ osmRoleById=verified;
+ osmRolesPanel=createOsmRolesPanel({container,document,catalog:verified,
+  onShow:async id=>{
+   const entity=entityById.get(id);
+   if(!entity||!osmRoleById.has(id))throw Error('Relație OSM fără entitate ACTUAL');
+   // One existing ACTUAL geometry selected; do not create a duplicate Leaflet layer.
+   visibleEntityIds.add(id);
+   activeFilterGroups.add(geometryClass(entity));
+   activeGeometrySubtypes.add(geometrySubtype(entity));
+   const md=document.getElementById('layer-md');
+   if(md&&!md.checked){md.checked=true;roots.MD.addTo(map);}
+   refreshGeometryVisibility();
+   await selectEntity(id,{zoom:true,source:'osm-cartographic-existing'});
+   atlasUrl?.commit('push');
+  }});
+ return verified;
+}
 async function loadChunkIndex(){
  const path=releaseData?.manifest?.public_contract?.geometry_chunks?.path;
  if(!path)return null;
@@ -627,6 +657,7 @@ function renderDetails(entity){
   '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
   detailRow('Jurisdicție',entity.jurisdiction)+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
   '</dl></section>'+entityProvenanceHtml(entity,{typeLabel,statusLabel:value=>statusLabels[value]||value});
+ renderOsmRoleDetails({container:body,document,row:osmRoleById.get(entity.id)});
  renderBreadcrumb(entity);
  const zoomButton=body.querySelector('#zoom-selected');
  if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
@@ -743,6 +774,8 @@ const frontendReady=(async()=>{
  let phase='index';
  try{
   await loadIndex();
+  try{await loadOsmRoleCatalog();}
+  catch(error){const status=document.getElementById('osm-roles-status');if(status){status.textContent='Catalogul descriptiv OSM nu poate fi verificat pentru acest release ACTUAL.';status.setAttribute('role','alert');}console.error('P9.0.7.2.16: catalogul OSM a rămas dezactivat',error);}
   phase='hierarchy';await loadHierarchyTree();
   phase='geometry';await loadChunkIndex();
   if(chunkIndex)pointIdentifier=createPointIdentifier({entities:[...entityById.values()],chunks:chunkIndex.chunks,contract:releaseData.manifest.public_contract,read:geometryResources.read});
