@@ -126,14 +126,14 @@ jobs:
         run: git diff --exit-code
       - name: Upload P4.2 CDP matrix and viewport screenshots
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: atlas-cartography-p42-evidence
           path: /tmp/atlas-browser-evidence/p42-*
           retention-days: 14
       - name: Upload screenshots and console/network evidence
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: atlas-browser-evidence
           path: |
