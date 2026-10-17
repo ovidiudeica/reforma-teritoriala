@@ -42,6 +42,6 @@ test('P9.0.9.3 shorten only MD11/MD12 tree captions, never unrelated official na
   assert.equal(compactTreeName({...node,id:'stat-MD22'}),formatEntityName(official),'unrelated ID keeps full formatted name');
   assert.equal(compactTreeName({...node,jurisdiction:'RO'}),formatEntityName(official),'non-MD jurisdiction keeps full formatted name');
   assert.equal(compactTreeName({...node,display_name:expected}),expected,'already compact names stay compact');
-  assert.equal(compactTreeName({...node,display_name:'Altă denumire oficială'}),'Altă denumire oficială','identity/name drift must not be mislabeled');
+  assert.equal(compactTreeName({...node,display_name:'Altă denumire oficială'}),formatEntityName('Altă denumire oficială'),'identity/name drift must not be mislabeled');
  }
 });
