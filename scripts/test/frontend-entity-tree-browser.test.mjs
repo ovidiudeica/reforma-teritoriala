@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {launchBrowser,waitFor} from './helpers/atlas-browser.mjs';
+import {formatEntityName} from '../../atlas-name-format.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const browser=await launchBrowser(root);
@@ -52,7 +53,7 @@ try{
     await page.selectQuery(id);
     const state=await page.evaluate("((id)=>{const el=document.querySelector('.tree-select[data-entity-id=\\\"'+id+'\\\"]');const original=qaApp.hierarchyNodeById.get(id);return {caption:el?.querySelector('.tree-name')?.textContent,tooltip:el?.title,official:original?.display_name,selected:qaApp.selectedEntityId};})("+JSON.stringify(id)+")");
     assert.equal(state.caption,expected,id+' tree caption');
-    assert.equal(state.tooltip,name,id+' full official tooltip');
+    assert.equal(state.tooltip,formatEntityName(name),id+' full official tooltip (normal presentation capitalization)');
     assert.equal(state.official,name,id+' immutable hierarchy identity');
     assert.equal(state.selected,id,id+' selection still works');
    }
