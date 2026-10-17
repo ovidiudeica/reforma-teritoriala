@@ -36,3 +36,12 @@
  #atlas-main #map-geometries-reset{grid-column:1/-1;width:88px}
 }
 @media(forced-colors:active){#atlas-main .leaflet-control-zoom>button[aria-disabled=true]{color:GrayText}}
+
+/* P7.2/P7.5/P7.6: when the mobile detail sheet is visible, reserve the
+   bottom map edge for scale/attribution instead of the sheet's top edge.
+   The compact command rail continues to own the upper-left corner. */
+@container atlas (max-width:899px){
+ #atlas-main:has(#details-panel.mobile-sheet-open:not([hidden])) .leaflet-bottom.leaflet-right{
+  top:auto;left:auto;right:10px;bottom:10px;
+ }
+}
