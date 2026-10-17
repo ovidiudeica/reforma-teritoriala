@@ -65,6 +65,8 @@
  #atlas-main #details-panel .details-head>div{grid-column:1/-1}
  #atlas-main #details-panel .details-head h2{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
  #atlas-main #details-panel.mobile-sheet-half{min-height:min(125px,calc(100% - var(--sheet-bottom) - var(--annotation-space,24px)))}
+ /* The half card can be capped at 105px: anchor its drag hit area inside the border instead of stretching grid rows beyond it. */
+ #atlas-main #details-panel.mobile-sheet-half #sheet-drag{position:absolute;top:10px;bottom:10px;left:12px;height:auto;min-height:44px;grid-row:auto}
  #atlas-main #details-panel.mobile-sheet-open:not(.mobile-sheet-half):not(.mobile-sheet-expanded) .details-summary{display:none}
  .atlas-navigation-rail{inset:auto 8px 8px var(--command-space);width:auto;flex-direction:row;justify-content:center;overflow:visible;border:1px solid #c5d5c9;border-radius:10px;padding:4px}
  .atlas-rail-button{min-width:44px;min-height:44px}
