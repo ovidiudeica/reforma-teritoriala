@@ -111,7 +111,17 @@ function verifyRetention(a,s){
  assert.equal(a.post_cleanup.unresolved_sources_remain_open,true);
  assert(['PENDING_GATE','VERIFIED_CI_DUPLICATES_CLOSED'].includes(a.post_cleanup.status));
  if(a.post_cleanup.status==='PENDING_GATE')assert.equal(a.post_cleanup.closed_prs.length,0);
- else assert.deepEqual(a.post_cleanup.closed_prs,a.cleanup_only_ci_pr_numbers);
+ else {
+  assert.deepEqual(a.post_cleanup.closed_prs,a.cleanup_only_ci_pr_numbers);
+  assert.equal(a.post_cleanup.closed_without_merge,15);
+  assert.equal(a.post_cleanup.primary_evidence_prs_remain_open,22);
+  assert.equal(a.post_cleanup.open_total_after_cleanup_including_p908,26);
+  assert.equal(a.post_cleanup.open_p908_pr,361);
+  assert.deepEqual(a.post_cleanup.open_dependabot_untouched,[294,295,296]);
+  assert.equal(a.post_cleanup.archive_refs_sha_reverified,true);
+  assert.equal(a.post_cleanup.source_main_still_sha,a.source_main_sha);
+  assert.equal(a.post_cleanup.unresolved_sources_remain_open,true);
+ }
  return {primary,ci,chain,pairs};
 }
 expectedPolicy(m,policy);
