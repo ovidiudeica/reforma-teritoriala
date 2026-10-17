@@ -420,9 +420,29 @@ function updateSelectionVisibility(){
  }
 }
 
+function searchEntitiesWithNistrenia(){
+ return [...entityById.values(),...nistreniaSearchEntities(nistreniaView,entityById)];
+}
+async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
+ if(!nistreniaView?.isVirtual(id))return selectEntity(id,options);
+ const actualId=nistreniaView.toActual.get(id);
+ if(actualId){
+  await showExistingOsmRoles([actualId]);
+  atlasTree?.select(id);
+  return;
+ }
+ const ids=nistreniaView.aggregateIds(id);
+ if(!ids)throw Error('Nistrenia: unknown virtual group');
+ await showExistingOsmRoles(ids);
+ atlasTree?.select(id);
+ const name=nistreniaView.nodes.get(id)?.display_name||'Nistrenia';
+ document.getElementById('details-title').textContent=name;
+ document.getElementById('details-summary').textContent='Grupare operațională OSM (de facto)';
+ document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Jurisdicție operațională</h3><p>Nistrenia este reprezentată în atlas ca entitate de facto nerecunoscută internațional. Teritoriul aparține Republicii Moldova potrivit recunoașterii internaționale. Gruparea nu certifică o nouă apartenență juridică.</p><p>'+ids.length+' geometrii existente ACTUAL, fără poligon juridic suplimentar.</p><p><a href="https://www.openstreetmap.org/relation/65335" target="_blank" rel="noopener noreferrer">Relația OSM 65335</a></p></section>';
+}
 function wireSearch(){
   const input=document.getElementById('entity-search');
-  atlasSearch=createAtlasSearch({input,clearButton:document.getElementById('search-clear'),empty:document.getElementById('search-empty'),container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:async(id,options)=>{setFiltersPanelOpen(false);setNavigationTab('entities');await selectEntity(id,options);}});
+  atlasSearch=createAtlasSearch({input,clearButton:document.getElementById('search-clear'),empty:document.getElementById('search-empty'),container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:async(id,options)=>{setFiltersPanelOpen(false);setNavigationTab('entities');if(nistreniaView?.isVirtual(id))await selectNistreniaNode(id,options);else await selectEntity(id,options);}});
   input.addEventListener('focus',()=>{if(filtersPanelOpen)setFiltersPanelOpen(false);});
   input.addEventListener('input',()=>{if(input.value.trim())setNavigationTab('results');else setNavigationTab('entities');});
 }
@@ -442,11 +462,13 @@ async function loadHierarchyTree(){
  hierarchyNodeById.clear();
  for(const [id,node] of validated)hierarchyNodeById.set(id,node);
  hierarchyTree=tree;
+ nistreniaView=nistreniaCatalog?createNistreniaOperationalView({catalog:nistreniaCatalog,roles:osmRoleById,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
+ document.getElementById('layer-ni').disabled=!nistreniaView;
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
   renderHierarchyTree();
   syncGeometryReset();
- atlasSearch?.updateIndex(createSearchIndex([...entityById.values()],hierarchyNodeById));
+ atlasSearch?.updateIndex(createSearchIndex(searchEntitiesWithNistrenia(),nistreniaView?.nodes||hierarchyNodeById));
  atlasAdvanced=createAtlasAdvancedNavigation({
   document,panels:atlasPanels,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,
   storage:globalThis.window?.localStorage,
