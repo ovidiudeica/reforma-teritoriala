@@ -37,7 +37,7 @@ export function createNistreniaOsmNavigator({container,document,menu,roles,onSho
  const status=container.querySelector('#nistrenia-osm-status');
  if(!content||!status)error('controale Nistrenia lipsă');
  content.replaceChildren();
- add(document,content,'p','Grupare geografică descriptivă conform OpenStreetMap, nu jurisdicție juridică și nu limită proprie nouă. Sunt reutilizate exclusiv cele 85 de geometrii ACTUAL deja existente.','hint');
+ add(document,content,'p','Grupare geografică descriptivă conform OpenStreetMap, nu jurisdicție juridică. Contururile proprii Nistrenia și raioanelor sunt disponibile separat în arbore; cele 85 de geometrii ACTUAL rămân independente și nu sunt modificate.','hint');
  const rootLink=add(document,content,'a','Relația OSM 65335 — Nistrenia','nistrenia-osm-source');
  rootLink.href=menu.root_osm_url;rootLink.target='_blank';rootLink.rel='noopener noreferrer';
  const allIds=verified.flatMap(group=>group.role_ids);
@@ -71,6 +71,6 @@ export function createNistreniaOsmNavigator({container,document,menu,roles,onSho
   }
  }
  add(document,content,'p','Sursa: © OpenStreetMap contributors, ODbL · 12.10.2026. Încadrarea geometrică nu certifică părinți sau apartenențe administrative.','hint');
- status.textContent='7 grupări geografice OSM · 85/85 relații · 0 jurisdicții și geometrii noi.';
+ status.textContent='7 grupări geografice OSM · 85/85 relații ACTUAL păstrate · 8 contururi OSM independente de prezentare; 0 jurisdicții juridice noi.';
  return {groups:verified,roleIds:allIds};
 }
