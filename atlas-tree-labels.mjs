@@ -6,6 +6,9 @@ export function compactTreeName(node){
  if(!official||(node?.display_name===node?.id&&/^osm-r\d+$/.test(node.id)))return 'Entitate fără nume';
  const plain=official.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('ro-RO');
  if(node?.parent_id==null && node?.jurisdiction==='MD' && plain==='republica moldova')return 'Moldova';
+ // P9.0.9.3: MD NUTS-2 tree-only captions. Keep full official name in entity card, tooltip and canonical corpus.
+ if(node?.jurisdiction==='MD' && node?.id==='stat-MD11' && /^partea de vest\s*\(/i.test(plain))return 'Partea de Vest';
+ if(node?.jurisdiction==='MD' && node?.id==='stat-MD12' && /^partea de est\s*\(/i.test(plain))return 'Partea de Est';
  if(node?.jurisdiction==='MD'){
   if(/(?:unitatile administrativ.teritoriale din stanga nistrului|unitatile administrativ.teritoriale din stinga nistrului)/i.test(plain))return 'UATSN';
   if(/(?:unitatea teritoriala autonoma gagauzia|unitatea teritoriala autonoma gagauz|gagauzia)/i.test(plain))return 'UTAG';
