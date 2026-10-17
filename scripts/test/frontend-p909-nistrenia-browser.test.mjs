@@ -32,7 +32,7 @@ try{
   await t.test('Bender homonyms remain separately selectable with source-only card',async()=>{
    await page.click('.nistrenia-osm-subgroup[data-osm-group-id="osm-r944727"] > summary');
    await page.click('#nistrenia-osm-panel [data-osm-role-id="osm-r9581354"]');
-   await waitFor(()=>page.evaluate("qaApp.selectedEntityId==='osm-r9581354'&&document.querySelector('[data-osm-role-id="osm-r9581354"].osm-role-evidence')!==null"),'existing ACTUAL Bender card',30000);
+    await waitFor(()=>page.evaluate("qaApp.selectedEntityId==='osm-r9581354'&&document.querySelector('.osm-role-evidence')?.dataset.osmRoleId==='osm-r9581354'"),'existing ACTUAL Bender card',30000);
    const state=await page.evaluate("({selected:qaApp.selectedEntityId,card:document.querySelector('.osm-role-evidence')?.textContent,root:document.getElementById('nistrenia-osm-panel').open})");
    assert.equal(state.selected,'osm-r9581354');assert.match(state.card,/Neacordată/);
   });
