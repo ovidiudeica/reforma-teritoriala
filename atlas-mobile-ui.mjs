@@ -18,8 +18,9 @@ export function createAtlasMobileUi({document,media,panels,onClear}){
   expand.textContent=sheet==='expanded'?'Restrânge':'Extinde';half.setAttribute('aria-pressed',String(mobile&&sheet==='half'));half.textContent=sheet==='half'?'Minimizează':'Jumătate';
   const index=Math.max(0,steps.indexOf(sheet));handle.setAttribute('aria-valuenow',String(index));handle.setAttribute('aria-valuetext',labels[index]);ensureFocusVisible();
  }
- function ensureFocusVisible(target=document.activeElement){
-  if(mobile&&!details.hidden&&!details.inert&&details.contains?.(target))target.scrollIntoView?.({block:'nearest',inline:'nearest'});
+ function ensureFocusVisible(){
+  const active=document.activeElement;
+  if(mobile&&!details.hidden&&!details.inert&&content?.contains?.(active))active.scrollIntoView?.({block:'nearest',inline:'nearest'});
  }
  function closeDrawer(focus=true){if(mobile)panels.close({focus});}
  function openDrawer(source=trigger){if(mobile)panels.open('entities',{source});}
@@ -56,7 +57,6 @@ export function createAtlasMobileUi({document,media,panels,onClear}){
   else if(event.key==='End'){event.preventDefault();setSheet('expanded');}
  }
  expand.addEventListener('click',toggleSheet);half.addEventListener('click',toggleHalf);
- details.addEventListener('focusin',event=>ensureFocusVisible(event.target));
  handle.addEventListener('pointerdown',onPointerDown);handle.addEventListener('pointerup',onPointerUp);handle.addEventListener('pointercancel',()=>{drag=null;});handle.addEventListener('keydown',handleKey);
  panels.onChange(sync);media.addEventListener?.('change',breakpoint);sync();
  return {openDrawer,closeDrawer,ensureFocusVisible,toggleSheet,toggleHalf,setSheet,selection,clear,get state(){return {mobile,drawer:panels.state.drawer,sheet,selected};}};

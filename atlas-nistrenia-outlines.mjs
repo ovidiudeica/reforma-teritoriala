@@ -58,7 +58,7 @@ export function createNistreniaOutlineLayers({L,map,features,onSelect=()=>{}}){
  if(!(features instanceof Map)||features.size!==8)fail('uncertified source outlines');
  const pane=map.createPane?.('nistrenia-osm-outlines');
  if(pane?.style){pane.style.zIndex='455';pane.style.pointerEvents='auto';}
- map.attributionControl?.addAttribution?.('Contururi Nistrenia: © OpenStreetMap contributors, ODbL');
+ map.attributionControl?.addAttribution?.('&copy; OpenStreetMap contributors · ODbL');
  const layers=new Map();
  for(const [id,feature] of features){
   const layer=L.geoJSON(feature,{

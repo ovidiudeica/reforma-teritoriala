@@ -39,7 +39,7 @@ map.attributionControl?.setPosition?.('topright');
 let osmBasemapVisible=true;
 const statisticalPane=map.createPane?.('statistical-boundaries');
 if(statisticalPane?.style)statisticalPane.style.zIndex='450';
-const osmTiles=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+const osmTiles=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors · ODbL'}).addTo(map);
 function setOsmBasemapVisible(value){
  const visible=Boolean(value);
  if(visible!==osmBasemapVisible){if(visible)osmTiles.addTo(map);else map.removeLayer(osmTiles);osmBasemapVisible=visible;}
