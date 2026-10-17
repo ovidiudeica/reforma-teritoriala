@@ -368,7 +368,7 @@ function resetGlobalFilters(){
   const input=document.getElementById('layer-'+jurisdiction.toLowerCase());
   if(input)input.checked=true;
  }
- document.getElementById('layer-ni').checked=false;
+ const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=false;
  syncJurisdictionRoots();
  refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
 }
@@ -463,7 +463,7 @@ async function loadHierarchyTree(){
  for(const [id,node] of validated)hierarchyNodeById.set(id,node);
  hierarchyTree=tree;
  nistreniaView=nistreniaCatalog?createNistreniaOperationalView({catalog:nistreniaCatalog,roles:osmRoleById,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
- document.getElementById('layer-ni').disabled=!nistreniaView;
+ const niFilter=document.getElementById('layer-ni');if(niFilter)niFilter.disabled=!nistreniaView;
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
   renderHierarchyTree();
@@ -813,12 +813,12 @@ async function applySelection(id,options=false,clickedLayer=null){
 function captureUrlState(){
  const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
  const center=map.wrapLatLng?.(current)||current;
- return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
+ return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
 }
 async function applyUrlState(state){
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
  replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
- for(const j of ['RO','MD','NI'])document.getElementById('layer-'+j.toLowerCase()).checked=state.jurisdictions.includes(j)&&!(j==='NI'&&!nistreniaView);syncJurisdictionRoots();
+ for(const j of ['RO','MD','NI']){const control=document.getElementById('layer-'+j.toLowerCase());if(control)control.checked=state.jurisdictions.includes(j)&&!(j==='NI'&&!nistreniaView);}syncJurisdictionRoots();
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
  if(!state.viewportExplicit&&!state.entityId&&typeof map.getSize==='function')fitRoMd(map,entityById);
   else map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
@@ -867,7 +867,7 @@ document.getElementById('selection-visibility-action')?.addEventListener('click'
 });
 document.getElementById('layer-ro').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
 document.getElementById('layer-md').addEventListener('change',()=>{syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');});
-document.getElementById('layer-ni').addEventListener('change',()=>{syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');});
+document.getElementById('layer-ni')?.addEventListener('change',()=>{syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');});
 map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');if(atlasPanels.state.active==='share')atlasShare?.refresh();});
 
 const frontendReady=(async()=>{
