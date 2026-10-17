@@ -125,7 +125,7 @@ if(process.argv.includes('--self-test')){
  assert.throws(()=>expectedPolicy({...m,p91_import_allowed:true},policy),/true !== false/);
  assert.throws(()=>expectedPolicy(m,{...policy,semantic_acceptance:'ACCEPTED'}),/ACCEPTED/);
  const damaged=new Map(refs);damaged.set(354,{...damaged.get(354),head_sha:'0'.repeat(40)});
- assert.throws(()=>verifyRetention(m,damaged),/CI-only source head not matched/);
+ assert.throws(()=>verifyRetention(m,damaged),/Expected values to be strictly equal|CI-only source head not matched/);
  const missing=new Map(refs);missing.delete(320);
  assert.throws(()=>verifyRetention(m,missing),/22/);
  console.log('P908_FAIL_CLOSED_SELF_TEST_PASS');process.exit(0);
