@@ -38,7 +38,7 @@ export function parseUrlState(search,config){
  const disabled=new Set(params.getAll('f'));
  const visibleEntityIds=new Set(config.rootIds);
  for(const id of new Set(params.getAll('x')))if(config.entityIds.has(id)){if(visibleEntityIds.has(id))visibleEntityIds.delete(id);else visibleEntityIds.add(id);}
- return normalizeUrlState({visibleEntityIds,entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:fixedList(params,'j',['RO','MD','NI'],['RO','MD']),geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):config.rootIds},config);
+ return normalizeUrlState({visibleEntityIds,entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:params.has('j')?fixedList(params,'j',['RO','MD','NI'],['RO','MD']):['RO','MD'],geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):config.rootIds},config);
 }
 export function serializeUrlState(raw,config){
  const state=normalizeUrlState(raw,config),defaults=defaultUrlState(config),params=new URLSearchParams();
