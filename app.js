@@ -210,7 +210,7 @@ const statusLabels={
 
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function filterGroup(entity){return geometryClass(entity);}
-function jurisdictionChecked(j){return document.getElementById('layer-'+String(j||'md').toLowerCase())?.checked!==false;}
+function jurisdictionChecked(j){const input=document.getElementById('layer-'+String(j||'md').toLowerCase());return j==='NI'?Boolean(input?.checked&&!input.disabled):input?.checked!==false;}
 function operationalJurisdiction(entity){return nistreniaView?.roleIds.has(entity?.id)?'NI':entity?.jurisdiction;}
 function isVisible(entity){
  return Boolean(entity&&visibleEntityIds.has(entity.id)&&jurisdictionChecked(operationalJurisdiction(entity))&&geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry}));
