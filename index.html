@@ -106,7 +106,17 @@
   </section>
   <section id="entities-panel">
     <h3 class="sr-only">Arbore</h3>
-    <button id="geometries-reset" class="action-button" type="button" aria-disabled="true">Resetează geometriile</button>
+    <div class="atlas-entities-actions">
+      <button id="geometries-reset" class="action-button" type="button" aria-disabled="true">Resetează geometriile</button>
+      <div class="nistrenia-osm-anchor">
+        <button id="nistrenia-osm-toggle" class="action-button" type="button" aria-controls="nistrenia-osm-panel" aria-expanded="false" aria-pressed="false">Nistrenia · OSM</button>
+        <details id="nistrenia-osm-panel" class="nistrenia-osm-panel" aria-label="Nistrenia — grupare cartografică OpenStreetMap" hidden>
+      <summary>Nistrenia · OSM <span class="nistrenia-osm-count">85</span></summary>
+      <p id="nistrenia-osm-status" role="status" aria-live="polite">Se verifică cele 85 de relații OSM…</p>
+      <div id="nistrenia-osm-groups"></div>
+        </details>
+      </div>
+    </div>
 
     <p id="atlas-tree-help" class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>

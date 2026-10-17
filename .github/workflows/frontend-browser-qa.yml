@@ -27,6 +27,8 @@ jobs:
           node --check atlas-osm-roles.mjs
           node --check scripts/test/frontend-p907216-osm-roles.test.mjs
           node --check scripts/test/frontend-p907216-osm-roles-browser.test.mjs
+          node --check atlas-nistrenia-osm.mjs
+          node --check scripts/test/frontend-p909-nistrenia-browser.test.mjs
           node --check atlas-tree-window.mjs
           node --check scripts/test/helpers/atlas-evidence.mjs
           node --check scripts/audit/p73-virtual-tree-browser.mjs
@@ -57,6 +59,8 @@ jobs:
         run: node --test scripts/test/frontend-p907216-osm-roles.test.mjs
       - name: P9.0.7.2.16 real Chromium existing-geometry, mobile and OSM attribution
         run: node --test scripts/test/frontend-p907216-osm-roles-browser.test.mjs
+      - name: P9.0.9 Nistrenia OSM visible navigation — Chromium desktop/mobile
+        run: node --test scripts/test/frontend-p909-nistrenia-browser.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence

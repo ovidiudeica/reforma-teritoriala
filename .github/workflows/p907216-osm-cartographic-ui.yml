@@ -25,6 +25,12 @@ jobs:
           node docs/p9.0.7.2.16-validate.mjs
           node --test scripts/test/frontend-p907216-osm-roles.test.mjs
           node scripts/process/build-p907216-osm-role-ui.mjs --check
+          node --check atlas-nistrenia-osm.mjs
+          node --check scripts/process/build-p909-nistrenia-menu.mjs
+          node --check scripts/test/frontend-p909-nistrenia-menu.test.mjs
+          node --check scripts/test/frontend-p909-nistrenia-browser.test.mjs
+          node scripts/process/build-p909-nistrenia-menu.mjs --check
+          node --test scripts/test/frontend-p909-nistrenia-menu.test.mjs
       - name: Ensure no write path into existing ACTUAL release
         run: |
           git diff --exit-code
