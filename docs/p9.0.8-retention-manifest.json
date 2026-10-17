@@ -116,9 +116,37 @@
     "independently recount open P9 PRs and verify preserved primary refs"
   ],
   "post_cleanup": {
-    "status": "PENDING_GATE",
-    "closed_prs": [],
-    "preserved_primaries": 22,
-    "unresolved_sources_remain_open": true
+    "status": "VERIFIED_CI_DUPLICATES_CLOSED",
+    "closed_prs": [
+      326,
+      328,
+      330,
+      332,
+      334,
+      336,
+      338,
+      340,
+      342,
+      344,
+      346,
+      348,
+      350,
+      352,
+      354
+    ],
+    "closed_without_merge": 15,
+    "primary_evidence_prs_remain_open": 22,
+    "open_total_after_cleanup_including_p908": 26,
+    "open_p908_pr": 361,
+    "open_dependabot_untouched": [
+      294,
+      295,
+      296
+    ],
+    "archive_refs_sha_reverified": true,
+    "source_main_still_sha": "651921e32aac53dfbc441335860ccc245bec90c8",
+    "closure_audit_utc": "2026-10-17T05:24:01.602Z",
+    "unresolved_sources_remain_open": true,
+    "preserved_primaries": 22
   }
 }
