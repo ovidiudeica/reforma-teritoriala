@@ -17,7 +17,7 @@ export function createAtlasAdvancedNavigation({
  try{const saved=JSON.parse(safeStorage()||'[]');if(Array.isArray(saved))recent=[...new Set(saved)].filter(id=>typeof id==='string'&&byId.has(id)).slice(0,12);}catch{ /* private mode: session only */ }
  function persist(){try{storage?.setItem?.(historyKey,JSON.stringify(recent));}catch{ /* optional */ }}
  function checkedIds(){return [...getChecked()].filter(id=>byId.has(id)).sort((a,b)=>{const x=byId.get(a),y=byId.get(b);return (x.jurisdiction===y.jurisdiction?0:x.jurisdiction==='RO'?-1:1)||title(x).localeCompare(title(y),'ro')||a.localeCompare(b);});}
- function groupLabel(entity){return entity.jurisdiction==='RO'?'România':'Moldova';}
+ function groupLabel(entity){return entity.jurisdiction==='RO'?'România':entity.jurisdiction==='NI'?'Nistrenia':'Moldova';}
  const append=(target,tag,cls,value)=>{const node=own(document,tag,cls,value);target.appendChild(node);return node;};
  const action=(target,text,handler,cls='action-button',key=text)=>{const b=append(target,'button',cls,text);b.type='button';b.dataset.actionKey=(target.dataset?.entityId||target.parentElement?.dataset?.entityId||'')+'|'+key;b.addEventListener('click',handler);return b;};
  function updateCounters(){
