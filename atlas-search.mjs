@@ -75,7 +75,7 @@ export function searchEntities(query,index,limit=20){
  return index.map(record=>({record,score:rankSearchResult(record,query)})).filter(r=>Number.isFinite(r.score)).sort((a,b)=>a.score-b.score||jurisdictionOrder(a.record.entity.jurisdiction)-jurisdictionOrder(b.record.entity.jurisdiction)||collator.compare(a.record.entity.display_name,b.record.entity.display_name)||(a.record.entity.id<b.record.entity.id?-1:a.record.entity.id>b.record.entity.id?1:0)).slice(0,limit).map(r=>r.record);
 }
 export function groupSearchResults(results){
- return [...new Set(results.map(r=>r.entity.jurisdiction))].sort((a,b)=>jurisdictionOrder(a)-jurisdictionOrder(b)||a.localeCompare(b)).map(j=>({jurisdiction:j,label:j==='RO'?'România':j==='MD'?'Moldova':j,results:results.filter(r=>r.entity.jurisdiction===j)}));
+ return [...new Set(results.map(r=>r.entity.jurisdiction))].sort((a,b)=>jurisdictionOrder(a)-jurisdictionOrder(b)||a.localeCompare(b)).map(j=>({jurisdiction:j,label:j==='RO'?'România':j==='MD'?'Moldova':j==='NI'?'Nistrenia':j,results:results.filter(r=>r.entity.jurisdiction===j)}));
 }
 // Individual Unicode code points: injective IDs, no raw HTML.
 // Highlight accent-insensitive matches without HTML injection; preserve the exact visible name.
