@@ -11,17 +11,17 @@ const sha=x=>createHash('sha256').update(x).digest('hex');
 const attr=(x,k)=>(x.match(new RegExp('(?:^|\\s)'+k+'="([^"]*)"'))||[])[1];
 function parse(xml,id){
  const nodes=new Map(),ways=new Map(),rels=new Map();
- for(const m of xml.matchAll(/<node\\b([^>]*?)(?:\\/>|>)/g)){
+ for(const m of xml.matchAll(/<node\b([^>]*?)(?:\/>|>)/g)){
   const a=m[1],n=attr(a,'id'),lon=attr(a,'lon'),lat=attr(a,'lat');
   if(n&&lon!==undefined&&lat!==undefined)nodes.set(n,[Number(lon),Number(lat)]);
  }
- for(const m of xml.matchAll(/<way\\b([^>]*?)>([\\s\\S]*?)<\\/way>/g)){
-  ways.set(attr(m[1],'id'),[...m[2].matchAll(/<nd\\s+([^>]*?)\\/>/g)].map(n=>attr(n[1],'ref')));
+ for(const m of xml.matchAll(/<way\b([^>]*?)>([\s\S]*?)<\/way>/g)){
+  ways.set(attr(m[1],'id'),[...m[2].matchAll(/<nd\s+([^>]*?)\/>/g)].map(n=>attr(n[1],'ref')));
  }
- for(const m of xml.matchAll(/<relation\\b([^>]*?)>([\\s\\S]*?)<\\/relation>/g)){
+ for(const m of xml.matchAll(/<relation\b([^>]*?)>([\s\S]*?)<\/relation>/g)){
   const a=m[1],k=attr(a,'id');
-  const members=[...m[2].matchAll(/<member\\s+([^>]*?)\\/>/g)].map(n=>({type:attr(n[1],'type'),ref:attr(n[1],'ref'),role:attr(n[1],'role')||''}));
-  const tags=Object.fromEntries([...m[2].matchAll(/<tag\\s+([^>]*?)\\/>/g)].map(n=>[attr(n[1],'k'),attr(n[1],'v')]));
+  const members=[...m[2].matchAll(/<member\s+([^>]*?)\/>/g)].map(n=>({type:attr(n[1],'type'),ref:attr(n[1],'ref'),role:attr(n[1],'role')||''}));
+  const tags=Object.fromEntries([...m[2].matchAll(/<tag\s+([^>]*?)\/>/g)].map(n=>[attr(n[1],'k'),attr(n[1],'v')]));
   rels.set(k,{version:Number(attr(a,'version')),timestamp:attr(a,'timestamp'),members,tags});
  }
  const rel=rels.get(String(id));if(!rel)throw Error('relation absent '+id);
