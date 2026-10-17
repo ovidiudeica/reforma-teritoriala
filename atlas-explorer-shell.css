@@ -64,7 +64,7 @@
  #atlas-main #details-panel .details-head{display:grid;grid-template-columns:minmax(64px,1fr) minmax(64px,1fr) 44px;gap:4px}
  #atlas-main #details-panel .details-head>div{grid-column:1/-1}
  #atlas-main #details-panel .details-head h2{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
- #atlas-main #details-panel.mobile-sheet-half{min-height:min-content}
+ #atlas-main #details-panel.mobile-sheet-half{min-height:min(125px,calc(100% - var(--sheet-bottom) - var(--annotation-space,24px)))}
  #atlas-main #details-panel.mobile-sheet-open:not(.mobile-sheet-half):not(.mobile-sheet-expanded) .details-summary{display:none}
  .atlas-navigation-rail{inset:auto 8px 8px var(--command-space);width:auto;flex-direction:row;justify-content:center;overflow:visible;border:1px solid #c5d5c9;border-radius:10px;padding:4px}
  .atlas-rail-button{min-width:44px;min-height:44px}
