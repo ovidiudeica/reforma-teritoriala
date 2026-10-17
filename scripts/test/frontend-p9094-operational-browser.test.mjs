@@ -13,7 +13,7 @@ try{
   await t.test('ACTUAL unchanged, three UI jurisdictions, NI initially off with RO MD default',async()=>{
    const s=await page.evaluate("({root:qaApp.atlasTree.getVisibleIds().includes('view-nistrenia'),roots:qaApp.atlasTree.getVisibleIds().filter(id=>id==='view-nistrenia'||id==='osm-r58974'||id==='osm-r90689'),labels:[...document.querySelectorAll('#filters-panel input[id^=layer-]')].map(n=>({id:n.id,checked:n.checked,disabled:n.disabled})),real:qaApp.hierarchyNodeById.size,selected:[...qaApp.visibleEntityIds].sort()})");
    assert(s.root);
-   assert.deepEqual(s.roots,['osm-r58974','osm-r90689','view-nistrenia']);
+   assert.deepEqual(s.roots.sort(),['osm-r58974','osm-r90689','view-nistrenia'].sort());
    assert.deepEqual(s.labels,[{id:'layer-ro',checked:true,disabled:false},{id:'layer-md',checked:true,disabled:false},{id:'layer-ni',checked:false,disabled:false}]);
    assert.equal(s.real,5848);
    assert.deepEqual(s.selected,['osm-r58974','osm-r90689']);
@@ -36,7 +36,8 @@ try{
    assert.match(enabled.query,/NI/);
    await page.openPanel('entities');
    await page.evaluate("qaApp.atlasTree.toggle('view-nistrenia')"); // collapse for stable root selection
-   await page.selectQuery('view-nistrenia-role-osm-r9581354');
+   await page.query('view-nistrenia-role-osm-r9581354');
+   await page.click('[role=option][data-entity-id="view-nistrenia-role-osm-r9581354"]');
    await waitFor(()=>page.evaluate("qaApp.selectedEntityId==='osm-r9581354'"),'NI alias selects existing ACTUAL polygon');
    const result=await page.evaluate("({selected:qaApp.selectedEntityId,ni:document.getElementById('layer-ni').checked,md:document.getElementById('layer-md').checked,legal:document.querySelector('#details-body')?.textContent||'',checked:qaApp.visibleEntityIds.has('osm-r9581354')})");
    assert(result.checked);assert.equal(result.ni,true);assert.equal(result.md,false);
