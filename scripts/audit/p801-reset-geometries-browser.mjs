@@ -9,7 +9,7 @@ const root=fileURLToPath(new URL('../../',import.meta.url)),out=auditEvidenceDir
 await mkdir(out,{recursive:true});
 const browser=await launchBrowser(root),page=await browser.page();
 const preserved=function(){return {selected:qaApp.selectedEntityId,card:document.querySelector('#details-title').textContent,cardHidden:document.querySelector('#details-panel').hidden,sheet:document.querySelector('#details-panel').dataset.sheet,open:qaApp.atlasTree.getOpenIds(),scroll:document.querySelector('#hierarchy-tree').scrollTop,filters:[...qaApp.activeGeometrySubtypes].sort(),classes:[...qaApp.activeGeometryClasses].sort(),levels:[...qaApp.activeStatisticalLevels].sort(),osm:qaApp.captureUrlState().osmBasemapVisible,center:qaApp.map.getCenter(),zoom:qaApp.map.getZoom()};};
-const checks=function(){return [...document.querySelectorAll('.tree-visibility-toggle')].every(e=>e.checked===qaApp.visibleEntityIds.has(e.dataset.entityId));};
+const checks=function(){return [...document.querySelectorAll('.tree-visibility-toggle')].every(e=>{const id=e.dataset.entityId;return e.checked===(qaApp.nistreniaOutlines?.has(id)?qaApp.visibleOperationalOutlineIds.has(id):qaApp.visibleEntityIds.has(id.startsWith('view-nistrenia-role-')?id.slice('view-nistrenia-role-'.length):id));});};
 try{await test('P8.0.1 geometry reset preserves independent atlas state',{timeout:180000},async t=>{
  await page.viewport(1440,900);await page.navigate(browser.server.url+'/');await page.openPanel('entities');
  await t.test('default is disabled; ten extra identities reset in one history action',async()=>{
@@ -29,7 +29,7 @@ try{await test('P8.0.1 geometry reset preserves independent atlas state',{timeou
   assert.deepEqual(await page.call(preserved),before);assert.equal(await page.evaluate('history.length'),length+1);
   assert.equal(await page.evaluate("document.querySelector('#geometries-reset').getAttribute('aria-disabled')==='true'"),true);
   assert.equal(await page.evaluate('qaApp.map===window.p801Map&&qaApp.atlasTree===window.p801Tree'),true);
-  assert.ok(await page.call(checks));assert.match(await page.evaluate("document.querySelector('#geometries-reset-status').textContent"),/România și Moldova/);
+  assert.ok(await page.call(checks));assert.match(await page.evaluate("document.querySelector('#geometries-reset-status').textContent"),/România, Moldova și Nistrenia/);
  });
  await t.test('Back restores all prior checks; Forward resets them and updates disabled state',async()=>{
   await page.evaluate('history.back()');await delay(100);await page.evaluate('qaApp.atlasUrl.whenIdle()');
