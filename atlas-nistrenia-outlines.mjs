@@ -58,11 +58,13 @@ export function createNistreniaOutlineLayers({L,map,features,onSelect=()=>{}}){
  if(!(features instanceof Map)||features.size!==8)fail('uncertified source outlines');
  const pane=map.createPane?.('nistrenia-osm-outlines');
  if(pane?.style){pane.style.zIndex='455';pane.style.pointerEvents='auto';}
+ map.attributionControl?.addAttribution?.('Contururi Nistrenia: © OpenStreetMap contributors, ODbL');
  const layers=new Map();
  for(const [id,feature] of features){
   const layer=L.geoJSON(feature,{
-   pane:'nistrenia-osm-outlines',
-   style:{color:id===NISTR_EN_ROOT?'#8a3e9e':'#7d368d',weight:id===NISTR_EN_ROOT?3:2,opacity:0.95,fillOpacity:0.025,dashArray:id===NISTR_EN_ROOT?'7 4':'4 3'},
+   pane:'nistrenia-osm-outlines',smoothFactor:0,
+   // Stroke-only: Nistrenia is independently selectable without intercepting clicks on ACTUAL MD polygons.
+   style:{color:id===NISTR_EN_ROOT?'#8a3e9e':'#7d368d',weight:id===NISTR_EN_ROOT?3:2,opacity:0.95,fill:false,dashArray:id===NISTR_EN_ROOT?'7 4':'4 3'},
    onEachFeature:(_,shape)=>shape.on?.('click',()=>onSelect(id))
   });
   if(!layer.getBounds?.().isValid?.())fail('empty outline for '+id);
