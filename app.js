@@ -669,7 +669,7 @@ async function syncTiers(){
  if(!releaseData||!indexData)return;
  const zoom=map.getZoom();
  for(const jurisdiction of ['RO','MD']){
-  const enabled=document.getElementById('layer-'+jurisdiction.toLowerCase())?.checked!==false;
+  const enabled=jurisdictionChecked(jurisdiction)||(jurisdiction==='MD'&&jurisdictionChecked('NI'));
   const overviewGroup=tierGroups[jurisdiction+'_overview'];
   if(enabled){
    await ensureTier(jurisdiction,'overview');
@@ -737,7 +737,7 @@ function renderDetails(entity){
  document.getElementById('details-summary').textContent=typeLabel(entity.representation.inferred_type);
  body.innerHTML=
   '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
-  detailRow('Jurisdicție',entity.jurisdiction)+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
+  detailRow('Jurisdicție',entity.jurisdiction)+(nistreniaView?.roleIds.has(entity.id)?detailRow('Jurisdicție operațională (OSM)','Nistrenia · de facto, fără recunoaștere internațională'):'')+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
   '</dl></section>'+entityProvenanceHtml(entity,{typeLabel,statusLabel:value=>statusLabels[value]||value});
  renderOsmRoleDetails({container:body,document,row:osmRoleById.get(entity.id)});
  renderBreadcrumb(entity);
@@ -813,12 +813,12 @@ async function applySelection(id,options=false,clickedLayer=null){
 function captureUrlState(){
  const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
  const center=map.wrapLatLng?.(current)||current;
- return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
+ return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
 }
 async function applyUrlState(state){
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
  replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
- for(const j of ['RO','MD']){const enabled=state.jurisdictions.includes(j);document.getElementById('layer-'+j.toLowerCase()).checked=enabled;if(enabled)roots[j].addTo(map);else map.removeLayer(roots[j]);}
+ for(const j of ['RO','MD','NI'])document.getElementById('layer-'+j.toLowerCase()).checked=state.jurisdictions.includes(j)&&!(j==='NI'&&!nistreniaView);syncJurisdictionRoots();
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
  if(!state.viewportExplicit&&!state.entityId&&typeof map.getSize==='function')fitRoMd(map,entityById);
   else map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
@@ -828,7 +828,7 @@ async function applyUrlState(state){
 async function initializeUrlState(){
  const browser=globalThis.window;
  if(!browser?.location||!browser?.history||!browser.addEventListener)return;
- const config=createUrlConfig({entityById,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,filterIndex:geometryFilterIndex});
+ const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,filterIndex:geometryFilterIndex});
  atlasUrl=createAtlasUrlState({browser,config,capture:captureUrlState,apply:applyUrlState});await atlasUrl.restore();atlasShare?.refresh();
 }
 atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>entityById.get(selectedEntityId)||null});
@@ -866,7 +866,8 @@ document.getElementById('selection-visibility-action')?.addEventListener('click'
  }
 });
 document.getElementById('layer-ro').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
-document.getElementById('layer-md').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
+document.getElementById('layer-md').addEventListener('change',()=>{syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');});
+document.getElementById('layer-ni').addEventListener('change',()=>{syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');});
 map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');if(atlasPanels.state.active==='share')atlasShare?.refresh();});
 
 const frontendReady=(async()=>{
