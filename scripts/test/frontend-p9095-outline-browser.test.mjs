@@ -22,6 +22,14 @@ try{
    assert.deepEqual(state.checked,[true,true,true]);
    assert.deepEqual(state.sourceLayers,['view-nistrenia']);
   });
+  await t.test('OSM attribution is deduplicated and persists when the raster basemap is off',async()=>{
+   const count=()=>page.evaluate("(document.querySelector('.leaflet-control-attribution')?.textContent.match(/© OpenStreetMap contributors · ODbL/g)||[]).length");
+   assert.equal(await count(),1,'one shared OSM/ODbL attribution while raster and NI outlines are active');
+   await page.evaluate("document.getElementById('basemap-toggle').click()");
+   assert.equal(await count(),1,'NI outlines retain the OSM/ODbL attribution without raster');
+   await page.evaluate("document.getElementById('basemap-toggle').click()");
+   assert.equal(await count(),1,'restoring raster does not duplicate OSM/ODbL attribution');
+  });
   await t.test('root and district checkboxes operate on only their own outlines, never on children',async()=>{
    await page.openPanel('entities');
    await page.click('.tree-visibility-toggle[data-entity-id="view-nistrenia"]');
