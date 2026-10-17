@@ -76,3 +76,18 @@ test('P9.0.9.4 corrupted or duplicated geometric aliases fail closed',()=>{
  const missing=new Map(roles);missing.delete(missing.keys().next().value);
  assert.throws(()=>createNistreniaOperationalView({catalog,roles:missing,entityById:byId,officialNodes:official,officialRoots:tree.root_ids}),/Nistrenia OSM/);
 });
+
+test('P9.0.9.4 P9.1 remains BLOCKED in protected policy — UI operational state cannot promote legal identity',()=>{
+ const policy=read('docs/p9.0.4.3-promotion-policy.json');
+ assert.equal(policy.schema_version,'actual-p9-jurisdiction-promotion-policy-v1');
+ assert.equal(policy.p91_import_allowed,false);
+ assert.equal(policy.semantic_acceptance,'BLOCKED_INCOMPLETE');
+ assert.equal(policy.fully_certified_contemporary_memberships,0);
+ assert.equal(policy.never_modify_md_legal_parent_from_de_facto,true);
+ assert.equal(policy.require_explicit_production_gate,true);
+ const catalogPolicy=read('public/data/p909-nistrenia-osm-navigation.json');
+ assert.equal(catalogPolicy.root_is_legal_jurisdiction,false);
+ assert.equal(catalogPolicy.root_has_actual_geometry,false);
+ assert.equal(catalogPolicy.actual_mutation_allowed,false);
+ assert.equal(catalogPolicy.p91_import_allowed,false);
+});
