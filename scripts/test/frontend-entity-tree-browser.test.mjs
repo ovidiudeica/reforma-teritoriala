@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {launchBrowser,waitFor} from './helpers/atlas-browser.mjs';
+import {formatEntityName} from '../../atlas-name-format.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const browser=await launchBrowser(root);
@@ -43,6 +44,19 @@ try{
    assert.equal(await page.evaluate('document.querySelector('+JSON.stringify(cb)+').checked'),true);
    assert.match(await page.evaluate('document.querySelector("#selection-visibility").textContent'),/ascuns/i);
    if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');await page.click('#layer-ro');assert.equal(await page.evaluate('document.querySelector('+JSON.stringify(cb)+').checked'),true);
+  });
+  await t.test('P9.0.9.3 MD11/MD12 tree shows only short labels; full official names remain in source and tooltip',async()=>{
+   for(const [id,name,expected] of [
+    ['stat-MD11','Partea de Vest (partea dreapta a Nistrului)','Partea de Vest'],
+    ['stat-MD12','Partea de Est (partea stîngă a Nistrului)','Partea de Est']
+   ]){
+    await page.selectQuery(id);
+    const state=await page.evaluate("((id)=>{const el=document.querySelector('.tree-select[data-entity-id=\\\"'+id+'\\\"]');const original=qaApp.hierarchyNodeById.get(id);return {caption:el?.querySelector('.tree-name')?.textContent,tooltip:el?.title,official:original?.display_name,selected:qaApp.selectedEntityId};})("+JSON.stringify(id)+")");
+    assert.equal(state.caption,expected,id+' tree caption');
+    assert.equal(state.tooltip,formatEntityName(name),id+' full official tooltip (normal presentation capitalization)');
+    assert.equal(state.official,name,id+' immutable hierarchy identity');
+    assert.equal(state.selected,id,id+' selection still works');
+   }
   });
   await t.test('all seven viewports retain map, tree and prevent horizontal overflow',async()=>{
    for(const [w,h] of [[1440,900],[1280,800],[900,768],[360,800],[390,844],[430,932],[390,600]]){
