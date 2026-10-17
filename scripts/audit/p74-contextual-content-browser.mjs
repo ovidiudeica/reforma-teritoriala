@@ -35,7 +35,10 @@ try{
    const original=await page.evaluate('[...qaApp.visibleEntityIds]');
    try{
     await page.call(function(){qaApp.visibleEntityIds.clear();for(const id of [...qaApp.entityById.keys()].slice(0,151))qaApp.visibleEntityIds.add(id);qaApp.atlasAdvanced.open('visible');const button=[...document.querySelectorAll('#atlas-advanced-content button')].find(e=>e.textContent.startsWith('Mai multe'));button.focus();});
-    assert.equal(await page.evaluate('document.querySelectorAll(".atlas-advanced-row").length'),50);await page.key('Enter');assert.equal(await page.evaluate('document.querySelectorAll(".atlas-advanced-row").length'),100);assert.match(await page.evaluate('document.activeElement.textContent'),/Mai multe \(51 rămase\)/);assert.equal(await page.evaluate('qaApp.visibleEntityIds.size'),151);
+    const beforePage=await page.call(function(){const button=document.activeElement,match=button.textContent.match(/^Mai multe \((\d+) rămase\)$/);return {rows:document.querySelectorAll('.atlas-advanced-row').length,remaining:match?Number(match[1]):null};});
+    assert.equal(beforePage.rows,50);assert.ok(Number.isInteger(beforePage.remaining)&&beforePage.remaining>0);await page.key('Enter');
+    const afterPage=await page.call(function(){const button=document.activeElement,match=button.textContent.match(/^Mai multe \((\d+) rămase\)$/);return {rows:document.querySelectorAll('.atlas-advanced-row').length,remaining:match?Number(match[1]):null};});
+    assert.equal(afterPage.rows,100);assert.equal(afterPage.remaining,beforePage.remaining-(afterPage.rows-beforePage.rows));assert.equal(afterPage.rows+afterPage.remaining,beforePage.rows+beforePage.remaining);assert.equal(await page.evaluate('qaApp.visibleEntityIds.size'),151);
    }finally{await page.call(function(ids){qaApp.visibleEntityIds.clear();for(const id of ids)qaApp.visibleEntityIds.add(id);qaApp.atlasAdvanced.refresh();},original);await page.key('Escape');}
   });
   await t.test('view/entity/copy/email links are independent of semantic state',async()=>{

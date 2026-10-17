@@ -32,7 +32,7 @@ const cardFocusTarget=function(id){
  const e=document.getElementById(id),r=e.getBoundingClientRect(),card=document.querySelector('#details-panel').getBoundingClientRect(),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
  const range=document.createRange();range.selectNodeContents(e);
  const textLines=e.classList.contains('mobile-control')?[...range.getClientRects()].map(x=>({left:x.left,right:x.right,top:x.top,bottom:x.bottom})):[];
- return {id,width:r.width,height:r.height,whole:r.top>=card.top&&r.bottom<=card.bottom,hit:e===hit||e.contains(hit),textContained:textLines.every(x=>x.left>=r.left&&x.right<=r.right&&x.top>=r.top&&x.bottom<=r.bottom),textLines};
+ return {id,width:r.width,height:r.height,whole:r.top>=card.top&&r.bottom<=card.bottom,hit:e===hit||e.contains(hit),textContained:textLines.every(x=>x.left>=r.left&&x.right<=r.right&&x.top>=r.top&&x.bottom<=r.bottom),textLines,controlRect:{top:r.top,bottom:r.bottom},panelRect:{top:card.top,bottom:card.bottom,height:card.height},panelScroll:{top:document.querySelector('#details-panel').scrollTop,height:document.querySelector('#details-panel').scrollHeight,clientHeight:document.querySelector('#details-panel').clientHeight}};
 };
 try{
  await test('P7.6 final acceptance supplements',{timeout:300000},async t=>{

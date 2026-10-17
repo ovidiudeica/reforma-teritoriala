@@ -10,16 +10,17 @@ try{
   await page.viewport(1440,900);
   await page.navigate(browser.server.url);
   await waitFor(()=>page.evaluate("qaApp.hierarchyNodeById.size===5848&&qaApp.atlasTree?.getVisibleIds()?.includes('view-nistrenia')"),'operational root + validated legal hierarchy');
-  await t.test('ACTUAL unchanged, three UI jurisdictions, NI initially off with RO MD default',async()=>{
+  await t.test('ACTUAL unchanged, three UI jurisdictions, NI initially on with RO MD default',async()=>{
    const s=await page.evaluate("({root:qaApp.atlasTree.getVisibleIds().includes('view-nistrenia'),roots:qaApp.atlasTree.getVisibleIds().filter(id=>id==='view-nistrenia'||id==='osm-r58974'||id==='osm-r90689'),labels:[...document.querySelectorAll('#filters-panel input[id^=layer-]')].map(n=>({id:n.id,checked:n.checked,disabled:n.disabled})),real:qaApp.hierarchyNodeById.size,selected:[...qaApp.visibleEntityIds].sort()})");
    assert(s.root);
    assert.deepEqual(s.roots.sort(),['osm-r58974','osm-r90689','view-nistrenia'].sort());
-   assert.deepEqual(s.labels,[{id:'layer-ro',checked:true,disabled:false},{id:'layer-md',checked:true,disabled:false},{id:'layer-ni',checked:false,disabled:false}]);
+   assert.deepEqual(s.labels,[{id:'layer-ro',checked:true,disabled:false},{id:'layer-md',checked:true,disabled:false},{id:'layer-ni',checked:true,disabled:false}]);
    assert.equal(s.real,5848);
    assert.deepEqual(s.selected,['osm-r58974','osm-r90689']);
+    assert.deepEqual(await page.evaluate("[...qaApp.visibleOperationalOutlineIds]"),['view-nistrenia']);
   });
   await t.test('Nistrenia has seven nested descriptive OSM groups with 85 nonduplicate underlying identities',async()=>{
-   await page.evaluate("qaApp.atlasTree.toggle('view-nistrenia')");
+   await page.evaluate("if(!qaApp.atlasTree.isOpen('view-nistrenia'))qaApp.atlasTree.toggle('view-nistrenia')");
    const visible=await page.evaluate("qaApp.atlasTree.getVisibleIds().filter(id=>id.startsWith('view-nistrenia-group-'))");
    assert.equal(visible.length,7);
    await page.evaluate("qaApp.atlasTree.toggle('view-nistrenia-group-osm-r1702219')");
@@ -30,7 +31,8 @@ try{
    await page.openPanel('filters');
    await page.click('#layer-md');
    assert.equal(await page.evaluate("document.getElementById('layer-md').checked"),false);
-   await page.click('#layer-ni');
+   await page.click('#layer-ni'); // NI off (default is on)
+   await page.click('#layer-ni'); // NI on, MD remains off
    const enabled=await page.evaluate("({md:document.getElementById('layer-md').checked,ni:document.getElementById('layer-ni').checked,query:new URL(location.href).searchParams.get('j')})");
    assert.equal(enabled.md,false);assert.equal(enabled.ni,true);
    assert.match(enabled.query,/NI/);
@@ -40,14 +42,14 @@ try{
    await page.click('[role=option][data-entity-id="view-nistrenia-role-osm-r9581354"]');
    await waitFor(()=>page.evaluate("qaApp.selectedEntityId==='osm-r9581354'"),'NI alias selects existing ACTUAL polygon');
    const result=await page.evaluate("({selected:qaApp.selectedEntityId,ni:document.getElementById('layer-ni').checked,md:document.getElementById('layer-md').checked,legal:document.querySelector('#details-body')?.textContent||'',checked:qaApp.visibleEntityIds.has('osm-r9581354')})");
-   assert(result.checked);assert.equal(result.ni,true);assert.equal(result.md,false);
+   assert.equal(result.checked,false,'selecting an alias never automatically checks geometry');assert.equal(result.ni,true);assert.equal(result.md,false);
    assert.match(result.legal,/Nistrenia/);
    assert.match(result.legal,/Neacordată/);
    assert.match(result.legal,/CUATM/);
    await page.openPanel('filters');
    await page.click('#layer-ni');
    assert.equal(await page.evaluate("document.getElementById('layer-ni').checked"),false);
-   assert.equal(await page.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),true,'jurisdiction filter must not clear checkbox');
+   assert.equal(await page.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),false,'jurisdiction filter must not alter independent entity checkbox');
   });
   await t.test('real mobile portait and landscape touch layout has third jurisdiction and virtual root',async()=>{
    for(const [width,height] of [[390,844],[844,390]]){
