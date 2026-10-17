@@ -71,7 +71,7 @@ try{
   });
   await t.test('no extra ACTUAL geometry, runtime external OSM API or browser exceptions',async()=>{
    assert.deepEqual(page.errors,[]);assert.deepEqual(page.console.filter(x=>x.type==='error'||x.level==='error'),[]);
-   assert.equal(page.requests.filter(r=>/api.openstreetmap.org|overpass-api.de|nistrenia.*geojson/i.test(r.url)).length,0);
+   assert.equal(page.requests.filter(r=>/api\.openstreetmap\.org|overpass-api\.de|nistrenia.*geojson/i.test(r.url)).length,0);
   });
  });
 }finally{await browser.close();}

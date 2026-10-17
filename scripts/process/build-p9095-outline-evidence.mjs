@@ -104,16 +104,16 @@ function auditPackage(geo,proof){
  }
  return true;
 }
-function upload(path,content){
- // Only isolated reviewed UI overlay paths can be published; never touch public/data/actual*, data/current or public/geo/actual.
- if(!/^public\/data\/p9095-osm-outlines(?:-manifest)?\.json$/.test(path))throw Error('write outside P9.0.9.5 whitelist');
- const repo=process.env.P9095_REPO||'ovidiudeica/reforma-teritoriala';
- const branch=process.env.P9095_BRANCH||'feat/p9.0.9.5-nistrenia-outline-parity';
- if(!/^feat\/p9\.0\.9\.5-/.test(branch))throw Error('refuse write outside isolated branch');
- const payload=JSON.stringify({message:'P9.0.9.5 pin source-only OSM outline evidence '+path,content:Buffer.from(content).toString('base64'),branch});
- const file=resolve(process.env.TEMP||'.','p9095-gh-upload-'+path.split('/').at(-1)+'.json');
- writeFileSync(file,payload);
- const response=execFileSync('gh',['api','--method','PUT','repos/'+repo+'/contents/'+path,'--input',file],{encoding:'utf8',maxBuffer:1024*1024*4});
+const evidenceRepo='ovidiudeica/reforma-teritoriala';
+const evidenceBranch='feat/p9.0.9.5-nistrenia-outline-parity';
+function upload(kind,content){
+ // Fixed reviewed destinations only. No environment value or CLI value may influence repository, branch or path.
+ let path;
+ if(kind==='geometry')path='public/data/p9095-osm-outlines.json';
+ else if(kind==='manifest')path='public/data/p9095-osm-outlines-manifest.json';
+ else throw Error('write outside P9.0.9.5 whitelist');
+ const payload=JSON.stringify({message:'P9.0.9.5 pin source-only OSM outline evidence '+path,content:Buffer.from(content).toString('base64'),branch:evidenceBranch});
+ const response=execFileSync('gh',['api','--method','PUT','repos/'+evidenceRepo+'/contents/'+path,'--input','-'],{input:payload,encoding:'utf8',maxBuffer:1024*1024*4});
  return JSON.parse(response).commit.sha;
 }
 if(process.argv.includes('--self-test')){
@@ -140,11 +140,11 @@ const manifest={schema:'p9095-osm-independent-outlines-proof-v1',captured_at_utc
 auditPackage(geo,manifest);
 console.log('P9095_OUTLINES_READY',JSON.stringify({bytes:Buffer.byteLength(json),sha256:manifest.file_sha256,ids:rows.map(x=>x.osm_relation_id),versions:rows.map(x=>x.relation_version)}));
 if(process.argv.includes('--upload')){
- const c1=upload('public/data/p9095-osm-outlines.json',json);
- const c2=upload('public/data/p9095-osm-outlines-manifest.json',JSON.stringify(manifest,null,2)+'\n');
+ const c1=upload('geometry',json);
+ const c2=upload('manifest',JSON.stringify(manifest,null,2)+'\n');
  console.log('P9095_UPLOAD_SUCCESS',JSON.stringify({geometry_commit:c1,manifest_commit:c2}));
 }else{
- const folder=resolve(process.env.TEMP||'.','p9095-evidence');mkdirSync(folder,{recursive:true});
+ const folder=resolve(root,'../p9095-evidence');mkdirSync(folder,{recursive:true});
  writeFileSync(resolve(folder,'p9095-osm-outlines.json'),json);
  writeFileSync(resolve(folder,'p9095-osm-outlines-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
  console.log('P9095_LOCAL_ONLY',folder);
