@@ -22,14 +22,14 @@ export function normalizeUrlState(raw,config){
   if(!parent.checked&&!parent.indeterminate)classes.delete(group.id);
  }
  const viewport=validViewport(raw.viewport,config);
- return {entityId:config.entityIds.has(raw.entityId)?raw.entityId:null,viewport:viewport||{...defaultViewport},viewportExplicit:Boolean(viewport&&raw.viewportExplicit!==false),jurisdictions:sorted(raw.jurisdictions??['RO','MD']).filter(j=>['RO','MD'].includes(j)),geometryClasses:sorted(classes),geometrySubtypes:sorted(subtypes),statisticalLevels:config.levels.filter(level=>new Set(raw.statisticalLevels??config.levels).has(level)),separateStatisticalGeometry:raw.separateStatisticalGeometry!==false,osmBasemapVisible:raw.osmBasemapVisible!==false,visibleEntityIds:sorted(raw.visibleEntityIds??config.rootIds).filter(id=>config.entityIds.has(id)),openIds:sorted(raw.openIds??config.rootIds).filter(id=>Boolean(config.nodeById.get(id)?.child_ids?.length))};
+ return {entityId:config.entityIds.has(raw.entityId)?raw.entityId:null,viewport:viewport||{...defaultViewport},viewportExplicit:Boolean(viewport&&raw.viewportExplicit!==false),jurisdictions:sorted(raw.jurisdictions??['RO','MD']).filter(j=>['RO','MD','NI'].includes(j)),geometryClasses:sorted(classes),geometrySubtypes:sorted(subtypes),statisticalLevels:config.levels.filter(level=>new Set(raw.statisticalLevels??config.levels).has(level)),separateStatisticalGeometry:raw.separateStatisticalGeometry!==false,osmBasemapVisible:raw.osmBasemapVisible!==false,visibleEntityIds:sorted(raw.visibleEntityIds??config.rootIds).filter(id=>config.entityIds.has(id)),openIds:sorted(raw.openIds??config.rootIds).filter(id=>Boolean(config.nodeById.get(id)?.child_ids?.length))};
 }
 export const defaultUrlState=config=>normalizeUrlState({viewport:defaultViewport,viewportExplicit:false},config);
-function fixedList(params,key,allowed){
+function fixedList(params,key,allowed,fallback=allowed){
  if(!params.has(key))return allowed;
  const value=params.get(key);if(value==='')return [];
  const found=value.split(',').filter(v=>allowed.map(String).includes(v));
- return found.length?allowed.filter(v=>found.includes(String(v))):allowed;
+ return found.length?allowed.filter(v=>found.includes(String(v))):fallback;
 }
 export function parseUrlState(search,config){
  const params=new URLSearchParams(search);
@@ -38,7 +38,7 @@ export function parseUrlState(search,config){
  const disabled=new Set(params.getAll('f'));
  const visibleEntityIds=new Set(config.rootIds);
  for(const id of new Set(params.getAll('x')))if(config.entityIds.has(id)){if(visibleEntityIds.has(id))visibleEntityIds.delete(id);else visibleEntityIds.add(id);}
- return normalizeUrlState({visibleEntityIds,entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:fixedList(params,'j',['RO','MD']),geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):config.rootIds},config);
+ return normalizeUrlState({visibleEntityIds,entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:fixedList(params,'j',['RO','MD','NI'],['RO','MD']),geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):config.rootIds},config);
 }
 export function serializeUrlState(raw,config){
  const state=normalizeUrlState(raw,config),defaults=defaultUrlState(config),params=new URLSearchParams();
