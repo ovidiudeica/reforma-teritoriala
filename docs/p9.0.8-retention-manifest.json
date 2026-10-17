@@ -148,5 +148,21 @@
     "closure_audit_utc": "2026-10-17T05:24:01.602Z",
     "unresolved_sources_remain_open": true,
     "preserved_primaries": 22
+  },
+  "ci_inventory": {
+    "path": "docs/p9.0.8-ci-artifact-inventory.json",
+    "blob_sha": "19bf6e7aede5e350d2092e526374539bb81046ad",
+    "primary_head_records": 22,
+    "ci_only_duplicate_mappings": 15,
+    "direct_ci_absence_prs": [
+      321,
+      322,
+      323,
+      324
+    ],
+    "evidence_artifacts_observed": 8,
+    "p908_retention_artifacts_observed": 2,
+    "actions_artifacts_are_transient": true,
+    "artifact_links_are_not_preservation_proof": true
   }
 }
