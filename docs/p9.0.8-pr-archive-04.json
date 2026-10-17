@@ -1,0 +1,170 @@
+{
+  "schema": "p908-pr-record-snapshot-v1",
+  "source": "GitHub REST original PR head SHA + paginated changed paths, source PR descriptions",
+  "capture_time_utc": "2026-10-17T05:15:04.046Z",
+  "batch": "04",
+  "records": [
+    {
+      "number": 324,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/324",
+      "title": "P9.0.7.2.2 (audit-only): primary-act coverage, missing 2023 Law 292, and 85-case evidence gate",
+      "draft": true,
+      "state": "open",
+      "created_utc": "2026-10-15T19:05:19Z",
+      "updated_utc": "2026-10-15T19:07:20Z",
+      "head_sha": "a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "head_ref": "audit/p9.0.7.2.2-primary-acts-and-archive-coverage",
+      "base_sha": "cdf56d75eb8b548112940b2a02f2b15475976f13",
+      "body": "Stacked on PR #323 → #322 → #321 → #320. This step rechecks official sources and adds previously omitted 2023 Law 292-ЗИ-VII (publication 2023001593), cross-verifies 2023 Law 291 and 2024 Laws 47/48 publication identifiers, and records the official baseline Law 155 full-file SHA256 (194560 bytes) fetched directly. Introduces a seven-law index and a distinct 85-identity fail-closed evidence matrix, four annual coverage checks, and a Node validator. The Ministry of Justice individual primary PDF retrieval failed TLS verification; do NOT claim those documents' hashes, operative dates or individual effects. Legacy/new archive complete enumeration and 2025 absence proof remain unresolved. Validator executed successfully locally. No ACTUAL geometry or Moldova CUATM legal parent mutations. Draft pending full primary source corpus, exhaustive archive audit, and required CI.",
+      "filenames": [
+        "docs/p9.0.7.2.2-findings.md",
+        "docs/p9.0.7.2.2-primary-archive-coverage.json",
+        "docs/p9.0.7.2.2-validate.mjs"
+      ],
+      "listing_complete": true,
+      "error": null
+    },
+    {
+      "number": 323,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/323",
+      "title": "P9.0.7.2.1 (audit-only): reconcile official 2023–2026 acts with all 85 identities",
+      "draft": true,
+      "state": "open",
+      "created_utc": "2026-10-15T18:56:02Z",
+      "updated_utc": "2026-10-15T18:58:35Z",
+      "head_sha": "cdf56d75eb8b548112940b2a02f2b15475976f13",
+      "head_ref": "audit/p9.0.7.2.1-cross-register-act-reconciliation",
+      "base_sha": "d166077d03f1ef42f6d66f5aff878be9be6f7d90",
+      "body": "Stacked on #322 → #321 → #320. Cross-reconciles the official indexed 2023 laws 48 and 49, related 2023 local administration law 291, 2024 laws 47 and 48 (satellite-city role and local administration), and verified 2026 Law 114. Preserves individually the 85 preexisting ACTUAL identities and their 2023 normative matches; 2026 Law 114 is prospective at 2026-10-15. Versioned evidence levels distinguish SHA-verified primary annexes/Law 114 PDF from index-only acts with unverified PDF/effective-date/article diff. **This does NOT establish exhaustive official archival coverage or all individual statuses; source completeness remains fail closed.** Adds deterministic validator; no modification to ACTUAL/CUATM/geometries/release/policy. PR remains Draft pending all acts' primary text and completeness proof.",
+      "filenames": [
+        "docs/p9.0.7.2.1-cik-evidence.md",
+        "docs/p9.0.7.2.1-cross-register-ledger.json",
+        "docs/p9.0.7.2.1-findings.md",
+        "docs/p9.0.7.2.1-validate.mjs"
+      ],
+      "listing_complete": true,
+      "error": null
+    },
+    {
+      "number": 322,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/322",
+      "title": "P9.0.7.2 (audit-only): 2023–2026 exhaustive gazette coverage and 85-ID normative impact gate",
+      "draft": true,
+      "state": "open",
+      "created_utc": "2026-10-15T18:30:30Z",
+      "updated_utc": "2026-10-15T18:47:33Z",
+      "head_sha": "d166077d03f1ef42f6d66f5aff878be9be6f7d90",
+      "head_ref": "audit/p9.0.7.2-normative-exhaustiveness",
+      "base_sha": "47d19553a3f0447babe85917d401e00421f58214",
+      "body": "Stacked on #321 (which is stacked on #320). Year-scoped completeness gates for the official gazette and legislative register (2023-03-26 through 2026-10-15), explicit SHA-linked primary DOCX baselines, independent source and effective-date requirements, plus fail-closed 85-ID impact ledger and read-only validator. **No proof of exhaustive 2023–2026 amendment set is claimed**; zero certified additional acts is not equivalent to zero existing amendments. ACTUAL unchanged; P9.1 DENIED. Draft pending primary source coverage and required checks.",
+      "filenames": [
+        "docs/p9.0.7.2-exhaustiveness-gate.json",
+        "docs/p9.0.7.2-findings.md",
+        "docs/p9.0.7.2-validate.mjs"
+      ],
+      "listing_complete": true,
+      "error": null
+    },
+    {
+      "number": 321,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/321",
+      "title": "P9.0.7.1 (audit-only): versioned normative source chain and 85-case impact gate",
+      "draft": true,
+      "state": "open",
+      "created_utc": "2026-10-15T18:10:25Z",
+      "updated_utc": "2026-10-15T18:25:18Z",
+      "head_sha": "47d19553a3f0447babe85917d401e00421f58214",
+      "head_ref": "audit/p9.0.7.1-normative-amendment-chain",
+      "base_sha": "e9e08e7eb74b1db5320fe58a5f143bee9a0b5ed2",
+      "body": "Stacked on draft PR #320; audits primary normative baseline from 2023 and explicitly tracks the unproven completeness of the 2023–2026 amendment chain for all 85 identities. No invented amendment list, no claim of exhaustive legislative proof. Docs + read-only fail-closed validator; no ACTUAL changes. P9.1 DENIED until complete primary acts and independent individual validation.",
+      "filenames": [
+        "docs/p9.0.7.1-normative-amendment-chain.json",
+        "docs/p9.0.7.1-normative-findings.md",
+        "docs/p9.0.7.1-primary/annex-1-2023-03-25.docx",
+        "docs/p9.0.7.1-primary/annex-2-compatible-names.docx",
+        "docs/p9.0.7.1-validate-chain.mjs"
+      ],
+      "listing_complete": true,
+      "error": null
+    },
+    {
+      "number": 320,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/320",
+      "title": "P9.0.7 (audit-only): contemporary administrative evidence ledger and fail-closed gate",
+      "draft": true,
+      "state": "open",
+      "created_utc": "2026-10-15T18:07:11Z",
+      "updated_utc": "2026-10-15T18:07:11Z",
+      "head_sha": "e9e08e7eb74b1db5320fe58a5f143bee9a0b5ed2",
+      "head_ref": "audit/p9.0.7-contemporary-evidence-gate",
+      "base_sha": "eaf730e894b76aed76e5ad0b3ef9087eb6081f19",
+      "body": "P9.0.7 inventariază individual 85 de apartenențe și dovezile administrative contemporane, fără a inventa certificări. Documentează probe instituționale 2026 pentru Lunga, păstrează separarea Cremenciug, identități/omonime și aliasuri, și marchează lanțul normativ 2023–2026 ca NEEXHAUSTIV. Validator fail-closed, fără modificări în ACTUAL, fără import P9.1. **Documentary evidence closure is not yet achieved: semantic_acceptance=BLOCKED_INCOMPLETE, p91_import_allowed=false.** Draft until independent review and CI verification.",
+      "filenames": [
+        "docs/p9.0.7-contemporary-evidence-ledger.json",
+        "docs/p9.0.7-findings.md",
+        "docs/p9.0.7-validate-evidence.mjs"
+      ],
+      "listing_complete": true,
+      "error": null
+    },
+    {
+      "number": 318,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/318",
+      "title": "P9.0.6.3 (audit-only): final 85-case semantic review after exact OSM reconciliation",
+      "draft": true,
+      "state": "open",
+      "created_utc": "2026-10-15T09:25:07Z",
+      "updated_utc": "2026-10-15T09:29:28Z",
+      "head_sha": "d9126ed867e0608bb072be913042acd046a59999",
+      "head_ref": "audit/p9.0.6.3-final-semantic-acceptance-review",
+      "base_sha": "61d869f9d124a8b8a57cc1a7524847e60947c2ca",
+      "body": "Final read-only semantic reevaluation of 85 contested/de facto administrative claims, after merged P9.0.6.2 #316 and historical polygon closure #317. Adds per-ID evidence and role classification (69 unique 2023 named localities, 11 repeated/homonym roles, 4 historic aliases, 1 Lunga microraion conflict); all 85 candidate geometries now exactly aligned with pinned OSM and 84 border cases historically closed. Visually reviewed signed 4-page de facto Law 114-ЗИД-VIII dated 29 May 2026, SHA-256 c9d05f579677f176007bd6987bf11031c986299e180d9e98577715f7cb1cc566: article 3 starts effectiveness after 6 months from official publication, so not operative on 15 Oct 2026; law modifies classification procedures and does not itself enact a named Annex 1 reparenting. This law does not independently close all registry amendment chains or prove effective polygon-wide control. All 85 remain BLOCKED_INCOMPLETE; P9.1_IMPORT_DENIED, never overwrite legal MD CUATM parent. Adds reproducible fail-closed validator and audit-only CI, no geometries, data/current, production policy or candidate lifecycle changes. Draft until CI and independent review.",
+      "filenames": [
+        ".github/workflows/p9063-semantic-review.yml",
+        "docs/p9.0.6.3-final-semantic-findings.md",
+        "docs/p9.0.6.3-final-semantic-review-ledger.json",
+        "docs/p9.0.6.3-validate-semantic.mjs"
+      ],
+      "listing_complete": true,
+      "error": null
+    },
+    {
+      "number": 310,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/310",
+      "title": "P9.0.4.2 (audit-only): contemporary affiliation evidence and final semantic acceptance gate",
+      "draft": true,
+      "state": "open",
+      "created_utc": "2026-10-13T23:01:40Z",
+      "updated_utc": "2026-10-14T17:58:09Z",
+      "head_sha": "10cf4cee0b5050e042d22aa5a9ef19d103febc22",
+      "head_ref": "audit/p9.0.4.2-nistrenia-contemporary-acceptance",
+      "base_sha": "d5229b3e1a22eb3d9762843a9d78d67a3874ba62",
+      "body": "PR draft dependent de #308 → #307 → #306 → #304 → #303. Validează pe 85 ID-uri statutul surselor contemporane, cu dovada din raportul instituțional de facto 2025 pentru Cremenciug sub Tiraspol (în dezacord cu părinte geometric OSM Slobozia), separă cele două geometrii Bender și menține Plopi/Ofatinți ca identități neconfirmate. Verifică cele patru identități locale reconciliate în P9.0.4.1 și păstrează Pohrebea ca master existent. **Decizie semantică finală: BLOCKED**, în absența dovezilor contemporane pozitive pentru 85/85 și a verificării identității. `p91_import_allowed=false` obligatoriu în audit CI. Fără import, geometrii duplicate, modificări ACTUAL, candidate lifecycle sau merge în main.",
+      "filenames": [
+        ".github/workflows/p903-nistrenia-exceptions.yml",
+        ".github/workflows/p904-nistrenia-semantic.yml",
+        ".github/workflows/p9041-nistrenia-membership.yml",
+        ".github/workflows/p9042-nistrenia-contemporary.yml",
+        "docs/p9.0.3-missing-relations.json",
+        "docs/p9.0.3-nistrenia-exceptions.md",
+        "docs/p9.0.3-nistrenia-findings.md",
+        "docs/p9.0.4-geometric-candidates.json",
+        "docs/p9.0.4-nistrenia-findings.md",
+        "docs/p9.0.4-nistrenia-semantic-reconciliation.md",
+        "docs/p9.0.4-semantic-decisions.json",
+        "docs/p9.0.4.1-individual-candidates.json",
+        "docs/p9.0.4.1-local-identity-bindings.json",
+        "docs/p9.0.4.1-nistrenia-findings.md",
+        "docs/p9.0.4.1-nistrenia-membership-audit.md",
+        "docs/p9.0.4.2-contemporary-matrix.json",
+        "docs/p9.0.4.2-nistrenia-contemporary-findings.md",
+        "scripts/audit/p903-nistrenia-exceptions.mjs",
+        "scripts/audit/p904-nistrenia-semantic.mjs",
+        "scripts/audit/p9041-nistrenia-membership.mjs",
+        "scripts/audit/p9042-nistrenia-contemporary.mjs"
+      ],
+      "listing_complete": true,
+      "error": null
+    }
+  ]
+}
