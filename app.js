@@ -787,6 +787,23 @@ atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||nu
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
 document.getElementById('map-home')?.addEventListener('click',()=>{if(atlasUrl)void atlasUrl.action('push',()=>fitRoMd(map,entityById));else fitRoMd(map,entityById);});
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');if(atlasPanels.state.active==='share')atlasShare?.refresh();});
+function setNistreniaOsmMenuOpen(open){
+ const panel=document.getElementById('nistrenia-osm-panel');
+ const button=document.getElementById('nistrenia-osm-toggle');
+ const tree=document.getElementById('hierarchy-tree');
+ if(!panel||!button)return;
+ panel.hidden=!open;
+ panel.open=Boolean(open);
+ button.setAttribute('aria-expanded',String(Boolean(open)));
+ button.setAttribute('aria-pressed',String(Boolean(open)));
+ if(tree)tree.inert=Boolean(open);
+ if(open)panel.querySelector('summary')?.focus?.({preventScroll:true});
+ else button.focus?.({preventScroll:true});
+}
+document.getElementById('nistrenia-osm-toggle')?.addEventListener('click',()=>setNistreniaOsmMenuOpen(Boolean(document.getElementById('nistrenia-osm-panel')?.hidden)));
+document.getElementById('nistrenia-osm-panel')?.addEventListener('keydown',event=>{
+ if(event.key==='Escape'){event.preventDefault();setNistreniaOsmMenuOpen(false);}
+});
 document.getElementById('filters-reset')?.addEventListener('click',resetGlobalFilters);
 document.getElementById('selection-visibility-action')?.addEventListener('click',()=>{
  const entity=entityById.get(selectedEntityId);if(!entity)return;
