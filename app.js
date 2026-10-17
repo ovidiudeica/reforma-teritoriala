@@ -480,15 +480,18 @@ async function loadHierarchyTree(){
   syncGeometryReset();
  atlasSearch?.updateIndex(createSearchIndex(searchEntitiesWithNistrenia(),nistreniaView?.nodes||hierarchyNodeById));
  atlasAdvanced=createAtlasAdvancedNavigation({
-  document,panels:atlasPanels,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,
+  document,panels:atlasPanels,entities:[...entityById.values(),...(nistreniaView?[NISTR_EN_ROOT,...nistreniaView.groupIds]:[]).map(id=>{
+    const node=nistreniaView.nodes.get(id),bounds=nistreniaOutlines.bounds(id),sw=bounds.getSouthWest(),ne=bounds.getNorthEast();
+    return {...node,map:{bbox:[sw.lng,sw.lat,ne.lng,ne.lat]},representation:{inferred_type:node.display_type,osm_relation_id:nistreniaOutlineFeatures.get(id).properties.osm_relation_id}};
+   })],getChecked:()=>new Set([...visibleEntityIds,...visibleOperationalOutlineIds]),
   storage:globalThis.window?.localStorage,
-  onGeometricCompare:(target,ids)=>geometricUi?.compare(target,ids),
+  onGeometricCompare:(target,ids)=>ids.some(id=>nistreniaOutlines?.has(id))?null:geometricUi?.compare(target,ids),
   onCheck:(id,checked)=>{
-   if(!entityById.has(id))return;
-   if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);
+   if(nistreniaOutlines?.has(id)){if(checked)visibleOperationalOutlineIds.add(id);else visibleOperationalOutlineIds.delete(id);}
+   else{if(!entityById.has(id))return;if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);}
    refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
   },
-  onSelect:id=>selectEntity(id,{zoom:true,source:'advanced'}),
+  onSelect:id=>(nistreniaOutlines?.has(id)?selectNistreniaNode(id,{zoom:true,source:'advanced'}):selectEntity(id,{zoom:true,source:'advanced'})),
   onZoomPair:entities=>{
    if(entities.length!==2||entities.some(entity=>!Array.isArray(entity?.map?.bbox)))return;
    const bounds=entities.map(entity=>entity.map.bbox);
@@ -502,14 +505,12 @@ function renderHierarchyTree(){
  const container=document.getElementById('hierarchy-tree');
  if(!container||!hierarchyTree)return;
  const isTreeGeometryVisible=id=>{
-  const ids=nistreniaView?.aggregateIds(id);
-  if(ids)return jurisdictionChecked('NI')&&ids.some(actualId=>isVisible(entityById.get(actualId)));
+  if(nistreniaOutlines?.has(id))return visibleOperationalOutlineIds.has(id)&&jurisdictionChecked('NI');
   const entity=entityById.get(nistreniaView?.actualId(id)||id);
   return Boolean(entity&&isVisible(entity));
  };
  const isTreeChecked=id=>{
-  const ids=nistreniaView?.aggregateIds(id);
-  if(ids)return ids.every(actualId=>visibleEntityIds.has(actualId));
+  if(nistreniaOutlines?.has(id))return visibleOperationalOutlineIds.has(id);
   return visibleEntityIds.has(nistreniaView?.actualId(id)||id);
  };
  atlasTree?.destroy();
@@ -517,10 +518,12 @@ function renderHierarchyTree(){
   container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
   isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
-   const aggregate=nistreniaView?.aggregateIds(id);
-   const ids=aggregate||(nistreniaView?.toActual.has(id)?[nistreniaView.toActual.get(id)]:[id]);
-   if(checked&&nistreniaView?.isVirtual(id))enableNistreniaOperational();
-   for(const actualId of ids){if(checked)visibleEntityIds.add(actualId);else visibleEntityIds.delete(actualId);}
+   if(nistreniaOutlines?.has(id)){
+    if(checked)visibleOperationalOutlineIds.add(id);else visibleOperationalOutlineIds.delete(id);
+   }else{
+    const actualId=nistreniaView?.toActual.get(id)||id;
+    if(checked)visibleEntityIds.add(actualId);else visibleEntityIds.delete(actualId);
+   }
    syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
   },
   onDisclosureChange:()=>atlasUrl?.commit('replace'),
