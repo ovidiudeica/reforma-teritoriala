@@ -2,6 +2,7 @@
 @container atlas (max-width:899px){
 #atlas-main #details-panel .details-head{gap:4px}
 #atlas-main #details-panel .details-head .mobile-control{min-height:44px;min-width:64px;padding:5px 7px;font-size:12px;white-space:normal;overflow-wrap:anywhere}
+#atlas-main #details-panel.mobile-sheet-open:not(.mobile-sheet-half):not(.mobile-sheet-expanded){min-height:max(88px,min-content)}
 #atlas-main #details-panel .details-summary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #atlas-main #details-content{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain}
 #atlas-main #details-panel .details-body{overflow:visible}
