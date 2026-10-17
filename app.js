@@ -434,19 +434,17 @@ function searchEntitiesWithNistrenia(){
 async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
  if(!nistreniaView?.isVirtual(id))return selectEntity(id,options);
  const actualId=nistreniaView.toActual.get(id);
- if(actualId){
-  await showExistingOsmRoles([actualId]);
-  atlasTree?.select(id);
-  return;
- }
- const ids=nistreniaView.aggregateIds(id);
- if(!ids)throw Error('Nistrenia: unknown virtual group');
- await showExistingOsmRoles(ids);
+ if(actualId){await selectEntity(actualId,options);atlasTree?.select(id);return;}
+ if(!nistreniaOutlines?.has(id))throw Error('Nistrenia: independent OSM outline unavailable '+id);
  atlasTree?.select(id);
+ // Parent selection never checks any descendant geometry.
+ if(options.zoom!==false)map.fitBounds(nistreniaOutlines.bounds(id),{padding:[30,30],maxZoom:12});
  const name=nistreniaView.nodes.get(id)?.display_name||'Nistrenia';
+ const osmId=nistreniaOutlineFeatures.get(id).properties.osm_relation_id;
+ const source=nistreniaOutlineProof.relations.find(item=>item.id===id);
  document.getElementById('details-title').textContent=name;
- document.getElementById('details-summary').textContent='Grupare operațională OSM (de facto)';
- document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Jurisdicție operațională</h3><p>Nistrenia este reprezentată în atlas ca entitate de facto nerecunoscută internațional. Teritoriul aparține Republicii Moldova potrivit recunoașterii internaționale. Gruparea nu certifică o nouă apartenență juridică.</p><p>'+ids.length+' geometrii existente ACTUAL, fără poligon juridic suplimentar.</p><p><a href="https://www.openstreetmap.org/relation/65335" target="_blank" rel="noopener noreferrer">Relația OSM 65335</a></p></section>';
+ document.getElementById('details-summary').textContent='Contur propriu OSM · grupare operațională de facto';
+ document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Perimetru OSM descriptiv</h3><p>Conturul OSM este independent de cele 85 de geometrii ACTUAL componente. Selectarea acestui nume nu activează descendenți. Nistrenia nu este stat recunoscut; teritoriul aparține juridic Republicii Moldova. Limita OSM nu certifică o nouă delimitare juridică.</p><p>Relația OSM '+osmId+' · versiunea '+source.relation_version+' · '+escapeHtml(source.relation_timestamp)+' · © OpenStreetMap contributors, ODbL.</p><p><a href="https://www.openstreetmap.org/relation/'+osmId+'" target="_blank" rel="noopener noreferrer">Sursă OSM</a></p></section>';
 }
 function wireSearch(){
   const input=document.getElementById('entity-search');
@@ -470,7 +468,11 @@ async function loadHierarchyTree(){
  hierarchyNodeById.clear();
  for(const [id,node] of validated)hierarchyNodeById.set(id,node);
  hierarchyTree=tree;
- nistreniaView=nistreniaCatalog?createNistreniaOperationalView({catalog:nistreniaCatalog,roles:osmRoleById,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
+ nistreniaView=nistreniaCatalog&&nistreniaOutlineFeatures?createNistreniaOperationalView({catalog:nistreniaCatalog,roles:osmRoleById,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
+  if(nistreniaView){
+   nistreniaOutlines=createNistreniaOutlineLayers({L,map,features:nistreniaOutlineFeatures,onSelect:id=>selectNistreniaNode(id,{zoom:false,source:'map'}).catch(console.error)});
+   visibleOperationalOutlineIds.clear();visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
+  }
  const niFilter=document.getElementById('layer-ni');if(niFilter)niFilter.disabled=!nistreniaView;
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
