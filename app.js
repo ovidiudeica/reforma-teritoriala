@@ -274,7 +274,8 @@ async function showExistingOsmRoles(ids){
  if(md&&!md.checked){md.checked=true;roots.MD.addTo(map);}
  refreshGeometryVisibility();
  if(ids.length===1){
-  await selectEntity(ids[0],{zoom:true,source:'osm-cartographic-existing'});
+  const id=ids[0];
+  await selectEntity(id,{zoom:true,source:'osm-cartographic-existing'});
  }else{
   // The bounding rectangle only frames selected existing ACTUAL shapes. It is NOT a new Nistrenia polygon.
   const west=Math.min(...bboxes.map(b=>b[0])),south=Math.min(...bboxes.map(b=>b[1]));
