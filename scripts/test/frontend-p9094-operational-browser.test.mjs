@@ -20,7 +20,7 @@ try{
     assert.deepEqual(await page.evaluate("[...qaApp.visibleOperationalOutlineIds]"),['view-nistrenia']);
   });
   await t.test('Nistrenia has seven nested descriptive OSM groups with 85 nonduplicate underlying identities',async()=>{
-   await page.evaluate("qaApp.atlasTree.toggle('view-nistrenia')");
+   await page.evaluate("if(!qaApp.atlasTree.isOpen('view-nistrenia'))qaApp.atlasTree.toggle('view-nistrenia')");
    const visible=await page.evaluate("qaApp.atlasTree.getVisibleIds().filter(id=>id.startsWith('view-nistrenia-group-'))");
    assert.equal(visible.length,7);
    await page.evaluate("qaApp.atlasTree.toggle('view-nistrenia-group-osm-r1702219')");
