@@ -492,18 +492,30 @@ function renderHierarchyTree(){
  const container=document.getElementById('hierarchy-tree');
  if(!container||!hierarchyTree)return;
  const isTreeGeometryVisible=id=>{
-  const entity=entityById.get(id);
-  return Boolean(entity&&isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false);
+  const ids=nistreniaView?.aggregateIds(id);
+  if(ids)return jurisdictionChecked('NI')&&ids.some(actualId=>isVisible(entityById.get(actualId)));
+  const entity=entityById.get(nistreniaView?.actualId(id)||id);
+  return Boolean(entity&&isVisible(entity));
+ };
+ const isTreeChecked=id=>{
+  const ids=nistreniaView?.aggregateIds(id);
+  if(ids)return ids.every(actualId=>visibleEntityIds.has(actualId));
+  return visibleEntityIds.has(nistreniaView?.actualId(id)||id);
  };
  atlasTree?.destroy();
- atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,
-  isGeometryVisible:isTreeGeometryVisible,isEntityChecked:id=>visibleEntityIds.has(id),
+ atlasTree=createAtlasTree({
+  container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
+  isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
-   if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);
-   refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
+   const aggregate=nistreniaView?.aggregateIds(id);
+   const ids=aggregate||(nistreniaView?.toActual.has(id)?[nistreniaView.toActual.get(id)]:[id]);
+   if(checked&&nistreniaView?.isVirtual(id))enableNistreniaOperational();
+   for(const actualId of ids){if(checked)visibleEntityIds.add(actualId);else visibleEntityIds.delete(actualId);}
+   syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
   },
   onDisclosureChange:()=>atlasUrl?.commit('replace'),
-  onSelect:(id,options)=>selectEntity(id,options).catch(console.error)});
+  onSelect:(id,options)=>(nistreniaView?.isVirtual(id)?selectNistreniaNode(id,options):selectEntity(id,options)).catch(console.error)
+ });
  if(selectedEntityId){
   atlasTree.select(selectedEntityId);renderDetails(entityById.get(selectedEntityId));updateSelectionVisibility();
  }
