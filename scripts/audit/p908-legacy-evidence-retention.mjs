@@ -8,6 +8,7 @@ const m=read('docs/p9.0.8-retention-manifest.json');
 const policy=read('docs/p9.0.4.3-promotion-policy.json');
 const release=read('data/current/actual-release-manifest.json');
 const carto=read('docs/p9.0.7.2.19-acceptance-manifest.json');
+const ci=read('docs/p9.0.8-ci-artifact-inventory.json');
 const safeSHA=/^[0-9a-f]{40}$/;
 const arrays=Array.from({length:4},(_,i)=>read('docs/p9.0.8-pr-archive-0'+(i+1)+'.json'));
 const sources=arrays.flatMap(x=>x.records);
@@ -124,6 +125,58 @@ function verifyRetention(a,s){
  }
  return {primary,ci,chain,pairs};
 }
+function verifyCI(a,s,c){
+ assert.equal(a.ci_inventory.path,'docs/p9.0.8-ci-artifact-inventory.json');
+ assert.equal(a.ci_inventory.blob_sha,'19bf6e7aede5e350d2092e526374539bb81046ad');
+ assert.equal(a.ci_inventory.primary_head_records,22);
+ assert.equal(a.ci_inventory.ci_only_duplicate_mappings,15);
+ assert.deepEqual(a.ci_inventory.direct_ci_absence_prs,[321,322,323,324]);
+ assert.equal(a.ci_inventory.actions_artifacts_are_transient,true);
+ assert.equal(a.ci_inventory.artifact_links_are_not_preservation_proof,true);
+ assert.equal(c.schema,'p908-legacy-ci-artifact-inventory-v1');
+ assert.equal(c.repository,a.repository);
+ assert.equal(c.source_main_sha,a.source_main_sha);
+ assert.equal(c.primary_head_records.length,22);
+ assert.deepEqual(c.primary_head_records.map(x=>x.pr),a.retained_primary_pr_numbers);
+ let transientArtifacts=0;
+ for(const r of c.primary_head_records){
+  assert.equal(r.sha,s.get(r.pr).head_sha,'CI inventory SHA mismatch for PR '+r.pr);
+  assert(Number.isInteger(r.run_count)&&r.run_count>=0);
+  if(r.run_count===0){
+   assert.equal(r.state,'NO_DIRECT_PR_RUNS_OBSERVED');
+   assert.equal(r.evidence_runs.length,0);
+   assert.equal(r.artifacts.length,0);
+  }else{
+   assert.equal(r.state,'OBSERVED_ALL_SUCCESS');
+   for(const run of r.evidence_runs){
+    assert(Number.isInteger(run.id));
+    assert.equal(run.conclusion,'success');
+   }
+  }
+  for(const artifact of r.artifacts){
+   transientArtifacts++;
+   assert.equal(artifact.retention_class,'TRANSIENT_ACTIONS_ARTIFACT');
+   assert.equal(artifact.preservation_substrate,false);
+   assert.match(artifact.digest,/^sha256:[0-9a-f]{64}$/);
+  }
+ }
+ assert.equal(transientArtifacts,a.ci_inventory.evidence_artifacts_observed);
+ assert.equal(c.ci_only_duplicate_mapping.length,15);
+ for(const p of c.ci_only_duplicate_mapping){
+  const src=s.get(p.ci_pr);
+  const primary=s.get(p.primary_pr);
+  assert(src&&primary);
+  assert.equal(src.head_sha,primary.head_sha);
+  assert.equal(p.relationship,'EXACT_SHARED_HEAD_SHA');
+  assert.equal(p.cleanup_state,'CLOSED_UNMERGED');
+ }
+ assert.equal(c.p908_retention_artifacts.length,2);
+ for(const artifact of c.p908_retention_artifacts)assert.match(artifact.digest,/^sha256:[0-9a-f]{64}$/);
+ assert.equal(c.legal_gate.semantic_acceptance,'BLOCKED_INCOMPLETE');
+ assert.equal(c.legal_gate.p91_import_allowed,false);
+ assert.equal(c.legal_gate.actual_mutation_allowed,false);
+ return {transientArtifacts,directRunAbsence:c.primary_head_records.filter(x=>x.run_count===0).map(x=>x.pr)};
+}
 expectedPolicy(m,policy);
 assert.equal(release.snapshot_id,'actual-a9e5a4ddcb5277ef');
 assert.equal(release.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
@@ -131,6 +184,7 @@ assert.equal(carto.cartographic.relation_roles,85);
 assert.equal(carto.cartographic.status,'CLOSED_EVIDENCE_BOUND');
 const refs=verifySnapshots(m,arrays);
 const result=verifyRetention(m,refs);
+const ciResult=verifyCI(m,refs,ci);
 if(process.argv.includes('--self-test')){
  assert.throws(()=>expectedPolicy({...m,p91_import_allowed:true},policy),/true !== false/);
  assert.throws(()=>expectedPolicy(m,{...policy,semantic_acceptance:'ACCEPTED'}),/ACCEPTED/);
@@ -138,6 +192,8 @@ if(process.argv.includes('--self-test')){
  assert.throws(()=>verifyRetention(m,damaged),/Expected values to be strictly equal|CI-only source head not matched/);
  const missing=new Map(refs);missing.delete(320);
  assert.throws(()=>verifyRetention(m,missing),/22/);
+ const badCi=structuredClone(ci);badCi.primary_head_records.find(x=>x.pr===321).state='OBSERVED_ALL_SUCCESS';
+ assert.throws(()=>verifyCI(m,refs,badCi),/NO_DIRECT_PR_RUNS_OBSERVED/);
  console.log('P908_FAIL_CLOSED_SELF_TEST_PASS');process.exit(0);
 }
 if(!process.argv.includes('--audit'))throw Error('Use --self-test or --audit');
@@ -151,6 +207,7 @@ const out={schema:'p908-pr-evidence-preservation-verdict-v1',source_main:m.sourc
   stage:m.post_cleanup.status,closed_ci_only_prs:m.post_cleanup.closed_prs,
   ci_duplicate_matches:result.pairs,
   primary_retained:result.primary.map(x=>({pr:x.number,sha:x.head_sha,ref:x.head_ref,changed_files:x.filenames.length})),
+  ci_inventory:{primary_heads:ci.primary_head_records.length,direct_run_absence_prs:ciResult.directRunAbsence,transient_actions_artifacts:ciResult.transientArtifacts},
   verdict:'EVIDENCE_RETAINED_LEGAL_BLOCKED'};
 mkdirSync(resolve('outputs/P9.0.8'),{recursive:true});
 writeFileSync(resolve('outputs/P9.0.8/evidence-verdict.json'),JSON.stringify(out,null,2)+'\n');
