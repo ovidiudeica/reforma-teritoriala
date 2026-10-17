@@ -59,7 +59,7 @@
 @container atlas (max-height:540px) and (min-width:600px) and (max-width:899px){
  #atlas-main{--map-offset:0px;--sheet-bottom:var(--navigation-bottom,70px)}
  /* Reserve the left map-scale corridor in compact landscape so the peek card never masks it. */
- #atlas-main #details-panel{left:calc(var(--map-offset) + var(--command-space) + 70px);right:120px}
+ #atlas-main #details-panel{left:calc(var(--map-offset) + var(--command-space) + 105px);right:120px}
  .atlas-navigation-rail{inset:auto 8px 8px var(--command-space);width:auto;flex-direction:row;justify-content:center;overflow:visible;border:1px solid #c5d5c9;border-radius:10px;padding:4px}
  .atlas-rail-button{min-width:44px;min-height:44px}
  #atlas-main #details-panel.mobile-sheet-half .details-summary,#atlas-main #details-panel.mobile-sheet-expanded .details-summary{display:none}
