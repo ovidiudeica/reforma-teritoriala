@@ -1,0 +1,606 @@
+{
+  "schema": "p908-legacy-ci-artifact-inventory-v1",
+  "repository": "ovidiudeica/reforma-teritoriala",
+  "capture_date_utc": "2026-10-17",
+  "source_main_sha": "651921e32aac53dfbc441335860ccc245bec90c8",
+  "scope": "22 distinct primary evidence heads representing 37 legacy P9 PRs; CI-only PRs map by exact shared head SHA",
+  "connector_limitations": {
+    "workflow_runs": "pull-request-triggered runs associated with each final commit SHA, first page returned by GitHub connector",
+    "artifacts": "evidence-specific workflow artifacts explicitly queried; generic workflow artifacts are not claimed exhaustively enumerated"
+  },
+  "semantics": {
+    "observed_success": "Only means returned workflow runs on the exact final SHA completed successfully; it does not authorize merge or P9.1.",
+    "no_direct_runs": "Means the connector returned zero direct PR workflow runs for that exact stacked SHA; it is not a PASS.",
+    "actions_artifacts": "Transient GitHub Actions objects are catalogued for accessibility only. They are not treated as preserved evidence unless the underlying evidence is separately retained in Git."
+  },
+  "primary_head_records": [
+    {
+      "pr": 310,
+      "sha": "10cf4cee0b5050e042d22aa5a9ef19d103febc22",
+      "run_count": 1,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38481742002,
+          "name": "P9.0.4.2 Nistrenia contemporary semantic acceptance (audit-only)",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 11857500505,
+          "name": "p9042-contemporary-semantic-evidence",
+          "expired": false,
+          "expires_at": "2027-01-11T23:02:35Z",
+          "digest": "sha256:8544348a926b0bab9eb4e9c2237ccf95d2e26364ec0011e061c9e9ea5ae16095",
+          "retention_class": "TRANSIENT_ACTIONS_ARTIFACT",
+          "preservation_substrate": false
+        }
+      ]
+    },
+    {
+      "pr": 318,
+      "sha": "d9126ed867e0608bb072be913042acd046a59999",
+      "run_count": 10,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38712786733,
+          "name": "P9.0.6.3 final semantic review (audit only)",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 320,
+      "sha": "e9e08e7eb74b1db5320fe58a5f143bee9a0b5ed2",
+      "run_count": 9,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [],
+      "artifacts": []
+    },
+    {
+      "pr": 321,
+      "sha": "47d19553a3f0447babe85917d401e00421f58214",
+      "run_count": 0,
+      "state": "NO_DIRECT_PR_RUNS_OBSERVED",
+      "evidence_runs": [],
+      "artifacts": []
+    },
+    {
+      "pr": 322,
+      "sha": "d166077d03f1ef42f6d66f5aff878be9be6f7d90",
+      "run_count": 0,
+      "state": "NO_DIRECT_PR_RUNS_OBSERVED",
+      "evidence_runs": [],
+      "artifacts": []
+    },
+    {
+      "pr": 323,
+      "sha": "cdf56d75eb8b548112940b2a02f2b15475976f13",
+      "run_count": 0,
+      "state": "NO_DIRECT_PR_RUNS_OBSERVED",
+      "evidence_runs": [],
+      "artifacts": []
+    },
+    {
+      "pr": 324,
+      "sha": "a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "run_count": 0,
+      "state": "NO_DIRECT_PR_RUNS_OBSERVED",
+      "evidence_runs": [],
+      "artifacts": []
+    },
+    {
+      "pr": 325,
+      "sha": "f56f442db8b5df49e953ee90c7512d709b5ecaed",
+      "run_count": 9,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [],
+      "artifacts": []
+    },
+    {
+      "pr": 327,
+      "sha": "203362b549913149cc06b787409723522feb64cb",
+      "run_count": 11,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38797234410,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38797177766,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 329,
+      "sha": "254a9837676210cc8890ac9140197958243ecdc8",
+      "run_count": 11,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38810070155,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38810067507,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 331,
+      "sha": "0a4c013e5a4eaa06ae241ef4d3c1bee30b0b5bfc",
+      "run_count": 11,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38814576421,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38814429267,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 333,
+      "sha": "4166a462dc763e722a4f8d12263b975465466b2e",
+      "run_count": 11,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38816194401,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38816160921,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 335,
+      "sha": "d41d28b47b38a80d2f436b96c2476c3bae50a6d5",
+      "run_count": 11,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38819005149,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38818978863,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 337,
+      "sha": "728b1b2a9dc7d23398585a1dbb71f2bf6d0d179b",
+      "run_count": 11,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38856803594,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38856802979,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 339,
+      "sha": "3b48b0e3d8860602ee23f6900a798de3f44737c8",
+      "run_count": 11,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38881338401,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38881172934,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 341,
+      "sha": "d7a10fa4c64050780239e548d77555b0fbf4d686",
+      "run_count": 11,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38884569669,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38884384941,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "pr": 343,
+      "sha": "a2158c6c03a33c61c79eefd659adfcc8be9a6e9e",
+      "run_count": 13,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38895425121,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38895425124,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38895425128,
+          "name": "P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)",
+          "conclusion": "success"
+        },
+        {
+          "id": 38895425068,
+          "name": "P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12042574394,
+          "name": "p90721021-official-access-evidence",
+          "expired": false,
+          "expires_at": "2026-10-23T11:30:58Z",
+          "digest": "sha256:ed3cd9586f9ffd4ece7502d8dea2b3bd5cc7583cacfd9aa0043dc62bf2f0a1d0",
+          "source_run": 38894085292,
+          "retention_class": "TRANSIENT_ACTIONS_ARTIFACT",
+          "preservation_substrate": false
+        },
+        {
+          "id": 12043173570,
+          "name": "p90721021-official-access-evidence",
+          "expired": false,
+          "expires_at": "2026-10-23T11:44:23Z",
+          "digest": "sha256:1102fcf586d21e95401d48cd45160789ca2ee7a687305d747d4907a0eb11f748",
+          "source_run": 38895425128,
+          "retention_class": "TRANSIENT_ACTIONS_ARTIFACT",
+          "preservation_substrate": false
+        }
+      ],
+      "git_preserved_equivalent": "docs/p9.0.7.2.10.2.1-access-evidence.json"
+    },
+    {
+      "pr": 345,
+      "sha": "fc2824587dda93ff5a589dabc56dd735252e9a5c",
+      "run_count": 12,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38916397041,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38916394552,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38916394424,
+          "name": "P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12053495651,
+          "name": "p90721021-official-access-evidence",
+          "expired": false,
+          "expires_at": "2026-10-23T14:38:43Z",
+          "digest": "sha256:aa372a1c4f92757906fd3a54dca93351cbdef775d79c6ad98692bc94f9e117a2",
+          "source_run": 38916394424,
+          "retention_class": "TRANSIENT_ACTIONS_ARTIFACT",
+          "preservation_substrate": false
+        }
+      ],
+      "git_preserved_equivalent": "docs/p9.0.7.2.10.2.1-access-evidence.json"
+    },
+    {
+      "pr": 347,
+      "sha": "295534fe7c716f663a171e3f63a6b762b47b9c9a",
+      "run_count": 12,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38921479478,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38921359755,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38921479388,
+          "name": "P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12053879761,
+          "name": "p90721021-official-access-evidence",
+          "expired": false,
+          "expires_at": "2026-10-23T15:09:33Z",
+          "digest": "sha256:73b2f85eca48b985cdf0a85894c73203ff9711e9acda79acdd102b115f31fb44",
+          "source_run": 38921479388,
+          "retention_class": "TRANSIENT_ACTIONS_ARTIFACT",
+          "preservation_substrate": false
+        }
+      ],
+      "git_preserved_equivalent": "docs/p9.0.7.2.10.2.1-access-evidence.json"
+    },
+    {
+      "pr": 349,
+      "sha": "c4a059f458b8028d26fed2074851094d13c7e7fe",
+      "run_count": 12,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38923479897,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38923478343,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38923478373,
+          "name": "P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12055872881,
+          "name": "p90721021-official-access-evidence",
+          "expired": false,
+          "expires_at": "2026-10-23T15:24:00Z",
+          "digest": "sha256:397dc3121b1b3c15b9415b885567e521355d8308a0fb3e02b2c624dd5530fda3",
+          "source_run": 38923478373,
+          "retention_class": "TRANSIENT_ACTIONS_ARTIFACT",
+          "preservation_substrate": false
+        }
+      ],
+      "git_preserved_equivalent": "docs/p9.0.7.2.10.2.1-access-evidence.json"
+    },
+    {
+      "pr": 351,
+      "sha": "1db17f548f47e9d4751cdbdfa838ab2471d904a2",
+      "run_count": 12,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38938997400,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38938979857,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38938979638,
+          "name": "P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12061859616,
+          "name": "p90721021-official-access-evidence",
+          "expired": false,
+          "expires_at": "2026-10-23T17:21:58Z",
+          "digest": "sha256:90dfaac9735ab8d036405f3470aa39e337b1cf71dfe42c924da53948c5467d4f",
+          "source_run": 38938979638,
+          "retention_class": "TRANSIENT_ACTIONS_ARTIFACT",
+          "preservation_substrate": false
+        }
+      ],
+      "git_preserved_equivalent": "docs/p9.0.7.2.10.2.1-access-evidence.json"
+    },
+    {
+      "pr": 353,
+      "sha": "f8a219807074308d35886e8ef98cd825ae2c498e",
+      "run_count": 12,
+      "state": "OBSERVED_ALL_SUCCESS",
+      "evidence_runs": [
+        {
+          "id": 38942463512,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38942462315,
+          "name": "P9.0.7 normative evidence fail-closed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38942462574,
+          "name": "P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12064420159,
+          "name": "p90721021-official-access-evidence",
+          "expired": false,
+          "expires_at": "2026-10-23T17:51:02Z",
+          "digest": "sha256:5747bc6b4440fbd183069f59957e7c5cb92ece9f8aa6a9886dc6a2d5f0e87eae",
+          "source_run": 38942462574,
+          "retention_class": "TRANSIENT_ACTIONS_ARTIFACT",
+          "preservation_substrate": false
+        }
+      ],
+      "git_preserved_equivalent": "docs/p9.0.7.2.10.2.1-access-evidence.json"
+    }
+  ],
+  "ci_only_duplicate_mapping": [
+    {
+      "ci_pr": 326,
+      "primary_pr": 325,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 328,
+      "primary_pr": 327,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 330,
+      "primary_pr": 329,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 332,
+      "primary_pr": 331,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 334,
+      "primary_pr": 333,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 336,
+      "primary_pr": 335,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 338,
+      "primary_pr": 337,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 340,
+      "primary_pr": 339,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 342,
+      "primary_pr": 341,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 344,
+      "primary_pr": 343,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 346,
+      "primary_pr": 345,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 348,
+      "primary_pr": 347,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 350,
+      "primary_pr": 349,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 352,
+      "primary_pr": 351,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    },
+    {
+      "ci_pr": 354,
+      "primary_pr": 353,
+      "relationship": "EXACT_SHARED_HEAD_SHA",
+      "cleanup_state": "CLOSED_UNMERGED"
+    }
+  ],
+  "p908_retention_artifacts": [
+    {
+      "run_id": 39005865952,
+      "head_sha": "138d8809b8aa9c9712cfecb054b8067150c7d334",
+      "artifact_id": 12091310323,
+      "name": "p908-evidence-verdict",
+      "expired": false,
+      "expires_at": "2027-01-15T05:19:57Z",
+      "digest": "sha256:57590e76aa346f338034ab9de5ed9cf1cf4dbb165de03a65a44991ccebe81034",
+      "stage": "PRE_CLEANUP_GATE"
+    },
+    {
+      "run_id": 39006161999,
+      "head_sha": "b5ca856ee07c33c8d7ab8602ece61499858a2f1f",
+      "artifact_id": 12091147584,
+      "name": "p908-evidence-verdict",
+      "expired": false,
+      "expires_at": "2027-01-15T05:24:47Z",
+      "digest": "sha256:0ab6b43f65841ac9fd546365eaf79daea70c678f4531e259dd54524ead607777",
+      "stage": "POST_CLEANUP_GATE"
+    }
+  ],
+  "legal_gate": {
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "p91_import_allowed": false,
+    "actual_mutation_allowed": false
+  }
+}
