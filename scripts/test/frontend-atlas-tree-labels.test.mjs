@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {compactTreeName} from '../../atlas-tree-labels.mjs';
+import {formatEntityName} from '../../atlas-name-format.mjs';
 
 test('P5.2 compact display labels never change node identity or official name',()=>{
  const cases=[
@@ -38,8 +39,8 @@ test('P9.0.9.3 shorten only MD11/MD12 tree captions, never unrelated official na
   const before=structuredClone(node);
   assert.equal(compactTreeName(node),expected);
   assert.deepEqual(node,before,'must not change canonical name or identity');
-  assert.equal(compactTreeName({...node,id:'stat-MD22'}),official,'unrelated ID keeps full name');
-  assert.equal(compactTreeName({...node,jurisdiction:'RO'}),official,'non-MD jurisdiction keeps full name');
+  assert.equal(compactTreeName({...node,id:'stat-MD22'}),formatEntityName(official),'unrelated ID keeps full formatted name');
+  assert.equal(compactTreeName({...node,jurisdiction:'RO'}),formatEntityName(official),'non-MD jurisdiction keeps full formatted name');
   assert.equal(compactTreeName({...node,display_name:expected}),expected,'already compact names stay compact');
   assert.equal(compactTreeName({...node,display_name:'Altă denumire oficială'}),'Altă denumire oficială','identity/name drift must not be mislabeled');
  }
