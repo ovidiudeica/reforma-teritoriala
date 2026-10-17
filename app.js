@@ -3,6 +3,7 @@ import {mapSvg,printSvg} from './atlas-export-visual.mjs';
 import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
 import {validateOsmRolesCatalog,createOsmRolesPanel,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
+import {validateNistreniaOsmNavigation,createNistreniaOsmNavigator} from './atlas-nistrenia-osm.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
 import {createAtlasIdentify} from './atlas-identify-ui.mjs';
@@ -79,6 +80,7 @@ let chunkIndex=null;
 const entityById=new Map();
 let osmRoleById=new Map();
 let osmRolesPanel=null;
+let nistreniaOsmNavigator=null;
 const activeFilterGroups=new Set(Object.keys(geometryLabels));
 const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a second class state.
 const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
@@ -254,8 +256,36 @@ async function loadIndex(){
  return index;
 }
 
+async function showExistingOsmRoles(ids){
+ if(!Array.isArray(ids)||ids.length<1||ids.some(id=>!osmRoleById.has(id)||!entityById.has(id)))throw Error('Relație OSM fără entitate ACTUAL');
+ const bboxes=[];
+ for(const id of ids){
+  const entity=entityById.get(id);
+  if(!Array.isArray(entity.map?.bbox)||entity.map.bbox.length!==4)throw Error('Geometrie ACTUAL indisponibilă: '+id);
+  bboxes.push(entity.map.bbox);
+ }
+ for(const id of ids){
+  const entity=entityById.get(id);
+  visibleEntityIds.add(id);
+  activeFilterGroups.add(geometryClass(entity));
+  activeGeometrySubtypes.add(geometrySubtype(entity));
+ }
+ const md=document.getElementById('layer-md');
+ if(md&&!md.checked){md.checked=true;roots.MD.addTo(map);}
+ refreshGeometryVisibility();
+ if(ids.length===1){
+  await selectEntity(ids[0],{zoom:true,source:'osm-cartographic-existing'});
+ }else{
+  // The bounding rectangle only frames selected existing ACTUAL shapes. It is NOT a new Nistrenia polygon.
+  const west=Math.min(...bboxes.map(b=>b[0])),south=Math.min(...bboxes.map(b=>b[1]));
+  const east=Math.max(...bboxes.map(b=>b[2])),north=Math.max(...bboxes.map(b=>b[3]));
+  map.fitBounds([[south,west],[north,east]],{padding:[30,30],maxZoom:12});
+  await syncTiers();
+ }
+ atlasUrl?.commit('push');
+}
 async function loadOsmRoleCatalog(){
- // Independent, opt-in OSM metadata: no extra geometries, hierarchy or legal status.
+ // Independent OSM metadata; no extra geometries, legal hierarchy or sovereign state.
  const response=await fetch('public/data/p907216-osm-roles.json',{cache:'no-cache'});
  if(!response.ok)throw Error('Catalogul descriptiv OSM nu este disponibil');
  const verified=validateOsmRolesCatalog(await response.json(),entityById,{
@@ -266,20 +296,21 @@ async function loadOsmRoleCatalog(){
  if(!container)throw Error('Panoul OSM nu există');
  osmRoleById=verified;
  osmRolesPanel=createOsmRolesPanel({container,document,catalog:verified,
-  onShow:async id=>{
-   const entity=entityById.get(id);
-   if(!entity||!osmRoleById.has(id))throw Error('Relație OSM fără entitate ACTUAL');
-   // One existing ACTUAL geometry selected; do not create a duplicate Leaflet layer.
-   visibleEntityIds.add(id);
-   activeFilterGroups.add(geometryClass(entity));
-   activeGeometrySubtypes.add(geometrySubtype(entity));
-   const md=document.getElementById('layer-md');
-   if(md&&!md.checked){md.checked=true;roots.MD.addTo(map);}
-   refreshGeometryVisibility();
-   await selectEntity(id,{zoom:true,source:'osm-cartographic-existing'});
-   atlasUrl?.commit('push');
-  }});
+  onShow:id=>showExistingOsmRoles([id])});
  return verified;
+}
+async function loadNistreniaOsmNavigation(){
+ const container=document.getElementById('nistrenia-osm-panel');
+ if(!container)throw Error('Panoul Nistrenia OSM lipsește');
+ const response=await fetch('public/data/p909-nistrenia-osm-navigation.json',{cache:'no-cache'});
+ if(!response.ok)throw Error('Gruparea OSM Nistrenia indisponibilă');
+ const catalog=await response.json();
+ // This grouping reuses the already verified 85 ACTUAL/OSM IDs; no hierarchy mutation.
+ validateNistreniaOsmNavigation(catalog,osmRoleById);
+ nistreniaOsmNavigator=createNistreniaOsmNavigator({
+  container,document,menu:catalog,roles:osmRoleById,onShow:showExistingOsmRoles
+ });
+ return nistreniaOsmNavigator;
 }
 async function loadChunkIndex(){
  const path=releaseData?.manifest?.public_contract?.geometry_chunks?.path;
@@ -774,8 +805,14 @@ const frontendReady=(async()=>{
  let phase='index';
  try{
   await loadIndex();
-  try{await loadOsmRoleCatalog();}
-  catch(error){const status=document.getElementById('osm-roles-status');if(status){status.textContent='Catalogul descriptiv OSM nu poate fi verificat pentru acest release ACTUAL.';status.setAttribute('role','alert');}/* Catalogul suplimentar e opțional; invalidarea sa nu este eroare ACTUAL. */}
+  try{await loadOsmRoleCatalog();await loadNistreniaOsmNavigation();}
+  catch(error){
+   const status=document.getElementById('osm-roles-status');
+   if(status){status.textContent='Catalogul descriptiv OSM nu poate fi verificat pentru acest release ACTUAL.';status.setAttribute('role','alert');}
+   const nistreniaStatus=document.getElementById('nistrenia-osm-status');
+   if(nistreniaStatus){nistreniaStatus.textContent='Gruparea cartografică Nistrenia nu a trecut validarea. Nu sunt afișate date neverificate.';nistreniaStatus.setAttribute('role','alert');}
+   console.warn('Catalogul cartografic OSM a fost blocat',error);
+  }
   phase='hierarchy';await loadHierarchyTree();
   phase='geometry';await loadChunkIndex();
   if(chunkIndex)pointIdentifier=createPointIdentifier({entities:[...entityById.values()],chunks:chunkIndex.chunks,contract:releaseData.manifest.public_contract,read:geometryResources.read});
