@@ -4,7 +4,8 @@ import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
 import {validateOsmRolesCatalog,createOsmRolesPanel,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
 import {validateNistreniaOsmNavigation,createNistreniaOsmNavigator} from './atlas-nistrenia-osm.mjs';
-import {createNistreniaOperationalView,nistreniaSearchEntities} from './atlas-nistrenia-jurisdiction.mjs';
+import {createNistreniaOperationalView,nistreniaSearchEntities,NISTR_EN_ROOT} from './atlas-nistrenia-jurisdiction.mjs';
+import {fetchVerifiedNistreniaOutlines,createNistreniaOutlineLayers,niOutlineIds} from './atlas-nistrenia-outlines.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
 import {createAtlasIdentify} from './atlas-identify-ui.mjs';
@@ -84,6 +85,10 @@ let osmRolesPanel=null;
 let nistreniaOsmNavigator=null;
 let nistreniaCatalog=null;
 let nistreniaView=null;
+let nistreniaOutlineFeatures=null;
+let nistreniaOutlineProof=null;
+let nistreniaOutlines=null;
+const visibleOperationalOutlineIds=new Set(); // OSM-only independent outline checkboxes, never ACTUAL IDs.
 const activeFilterGroups=new Set(Object.keys(geometryLabels));
 const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a second class state.
 const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
@@ -108,7 +113,7 @@ function updateFilterCount(){
   [...geometryFilterIndex?.subtypeMembers?.keys?.()||[]].filter(id=>!activeGeometrySubtypes.has(id)).length+
   [1,2,3,'unclassified'].filter(level=>!activeStatisticalLevels.has(level)).length+
   ['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase())?.checked===false).length+
-  Number(Boolean(document.getElementById('layer-ni')?.checked))+
+  Number(Boolean(nistreniaView&&!document.getElementById('layer-ni')?.checked))+
   Number(!separateStatisticalGeometry);
  count.textContent=inactive?'('+inactive+' '+(inactive===1?'dezactivat':'dezactivate')+')':'';
  const reset=document.getElementById('filters-reset');if(reset)reset.disabled=inactive===0;
@@ -218,6 +223,7 @@ function isVisible(entity){
 function syncJurisdictionRoots(){
  if(jurisdictionChecked('RO'))roots.RO.addTo(map);else map.removeLayer(roots.RO);
  if(jurisdictionChecked('MD')||jurisdictionChecked('NI'))roots.MD.addTo(map);else map.removeLayer(roots.MD);
+ nistreniaOutlines?.sync(visibleOperationalOutlineIds,jurisdictionChecked('NI'));
 }
 function enableNistreniaOperational(){
  const input=document.getElementById('layer-ni');
@@ -368,7 +374,7 @@ function resetGlobalFilters(){
   const input=document.getElementById('layer-'+jurisdiction.toLowerCase());
   if(input)input.checked=true;
  }
- const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=false;
+ const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=Boolean(nistreniaView);
  syncJurisdictionRoots();
  refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
 }
@@ -377,12 +383,13 @@ function refreshGeometryVisibility(){
  atlasFilters?.sync();
  updateFilterCount();
  rerenderLoadedTiers();
+ nistreniaOutlines?.sync(visibleOperationalOutlineIds,jurisdictionChecked('NI'));
  atlasTree?.refreshVisibility();
  updateSelectionVisibility();
  atlasAdvanced?.refresh();
 }
 function geometryResetDisabled(){
- return !hierarchyTree||(visibleEntityIds.size===hierarchyTree.root_ids.length&&hierarchyTree.root_ids.every(id=>visibleEntityIds.has(id)));
+ return !hierarchyTree||(visibleEntityIds.size===hierarchyTree.root_ids.length&&hierarchyTree.root_ids.every(id=>visibleEntityIds.has(id))&&visibleOperationalOutlineIds.size===(nistreniaOutlines?1:0)&&(!nistreniaOutlines||visibleOperationalOutlineIds.has(NISTR_EN_ROOT)));
 }
 function syncGeometryReset(){
  // ARIA disabling preserves native keyboard focus after reset (disabled blurs).
@@ -394,10 +401,11 @@ function resetGeometries(){
  if(geometryResetDisabled())return;
  visibleEntityIds.clear();
  for(const id of hierarchyTree.root_ids)visibleEntityIds.add(id);
+ visibleOperationalOutlineIds.clear();if(nistreniaOutlines)visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
  refreshGeometryVisibility();
  syncTiers().catch(console.error);
  atlasUrl?.commit('push');
- document.getElementById('geometries-reset-status').textContent='Geometriile au fost resetate la România și Moldova. Selecția și filtrele sunt păstrate.';
+ document.getElementById('geometries-reset-status').textContent='Geometriile au fost resetate la România, Moldova și Nistrenia. Selecția și filtrele sunt păstrate.';
 }
 for(const id of ['geometries-reset','map-geometries-reset'])document.getElementById(id)?.addEventListener('click',resetGeometries);
 function updateSelectionVisibility(){
