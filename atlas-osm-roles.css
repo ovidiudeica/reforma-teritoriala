@@ -15,14 +15,22 @@
 .osm-role-evidence a{display:inline-block;margin:.4rem 0}
 @media(max-width:520px){.osm-roles-list{max-height:24vh}.osm-role-entry-text small{font-size:.74rem}}
 
-/* P9.0.9 — an explicitly non-juridical Nistrenia OSM entry in Entities. */
+/* P9.0.9 — source-only Nistrenia is a compact action, never a taller tree header. */
+#atlas-controls>#entities-panel{position:relative}
+#entities-panel .atlas-entities-actions{display:flex;flex:none;align-items:stretch;gap:6px;min-height:44px}
+#entities-panel .atlas-entities-actions #geometries-reset{flex:1 1 0;min-width:0;max-width:none}
+#entities-panel .atlas-entities-actions #nistrenia-osm-toggle{flex:0 0 auto;max-width:50%;min-width:44px;min-height:44px;white-space:normal;font-size:.77rem;padding:5px 7px}
+#entities-panel .atlas-entities-actions #nistrenia-osm-toggle[aria-pressed=true]{background:var(--atlas-selected,#e8efeb);font-weight:700}
+#entities-panel .nistrenia-osm-panel[hidden]{display:none!important}
 #entities-panel .nistrenia-osm-panel{
- flex:none;box-sizing:border-box;max-width:100%;min-width:0;margin:6px 0 4px;
- border:1px solid var(--atlas-border,#9caea5);border-radius:7px;background:var(--atlas-surface,#fff);
+ position:absolute;z-index:6;inset:calc(12px + 50px) 12px 12px;
+ box-sizing:border-box;max-width:none;min-width:0;min-height:0;margin:0;
+ border:1px solid var(--atlas-border,#9caea5);border-radius:7px;
+ background:var(--atlas-surface,#fff);box-shadow:0 4px 15px #152f2240;
+ overflow-y:auto;overscroll-behavior:contain;
 }
 .nistrenia-osm-panel>summary{box-sizing:border-box;min-height:44px;padding:8px 10px;font-weight:700;cursor:pointer;overflow-wrap:anywhere}
 .nistrenia-osm-panel .nistrenia-osm-count{font-weight:400;font-variant-numeric:tabular-nums;opacity:.8}
-.nistrenia-osm-panel[open]{max-height:min(36vh,300px);overflow-y:auto;overscroll-behavior:contain}
 #nistrenia-osm-status{font-size:.75rem;line-height:1.4;margin:4px 10px}
 #nistrenia-osm-groups{padding:2px 10px 10px;min-width:0;overflow-wrap:anywhere}
 #nistrenia-osm-groups .hint{font-size:.78rem;line-height:1.45;margin:4px 0 8px}
@@ -37,4 +45,4 @@
 .nistrenia-osm-name small{font-size:.73rem;display:block;opacity:.8}
 .nistrenia-osm-show{font-size:.79rem;min-height:44px;min-width:44px;max-width:100%;white-space:normal}
 .nistrenia-osm-panel summary:focus-visible,.nistrenia-osm-panel button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
-@media(max-height:540px){.nistrenia-osm-panel[open]{max-height:28vh}}
+@media(max-height:540px){#entities-panel .nistrenia-osm-panel{inset:calc(4px + 50px) 8px 8px}}
