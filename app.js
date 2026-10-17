@@ -4,6 +4,7 @@ import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
 import {validateOsmRolesCatalog,createOsmRolesPanel,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
 import {validateNistreniaOsmNavigation,createNistreniaOsmNavigator} from './atlas-nistrenia-osm.mjs';
+import {createNistreniaOperationalView,nistreniaSearchEntities} from './atlas-nistrenia-jurisdiction.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
 import {createAtlasIdentify} from './atlas-identify-ui.mjs';
@@ -81,6 +82,8 @@ const entityById=new Map();
 let osmRoleById=new Map();
 let osmRolesPanel=null;
 let nistreniaOsmNavigator=null;
+let nistreniaCatalog=null;
+let nistreniaView=null;
 const activeFilterGroups=new Set(Object.keys(geometryLabels));
 const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a second class state.
 const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
@@ -105,6 +108,7 @@ function updateFilterCount(){
   [...geometryFilterIndex?.subtypeMembers?.keys?.()||[]].filter(id=>!activeGeometrySubtypes.has(id)).length+
   [1,2,3,'unclassified'].filter(level=>!activeStatisticalLevels.has(level)).length+
   ['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase())?.checked===false).length+
+  Number(Boolean(document.getElementById('layer-ni')?.checked))+
   Number(!separateStatisticalGeometry);
  count.textContent=inactive?'('+inactive+' '+(inactive===1?'dezactivat':'dezactivate')+')':'';
  const reset=document.getElementById('filters-reset');if(reset)reset.disabled=inactive===0;
@@ -206,8 +210,19 @@ const statusLabels={
 
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function filterGroup(entity){return geometryClass(entity);}
+function jurisdictionChecked(j){return document.getElementById('layer-'+String(j||'md').toLowerCase())?.checked!==false;}
+function operationalJurisdiction(entity){return nistreniaView?.roleIds.has(entity?.id)?'NI':entity?.jurisdiction;}
 function isVisible(entity){
- return Boolean(entity&&visibleEntityIds.has(entity.id)&&geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry}));
+ return Boolean(entity&&visibleEntityIds.has(entity.id)&&jurisdictionChecked(operationalJurisdiction(entity))&&geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry}));
+}
+function syncJurisdictionRoots(){
+ if(jurisdictionChecked('RO'))roots.RO.addTo(map);else map.removeLayer(roots.RO);
+ if(jurisdictionChecked('MD')||jurisdictionChecked('NI'))roots.MD.addTo(map);else map.removeLayer(roots.MD);
+}
+function enableNistreniaOperational(){
+ const input=document.getElementById('layer-ni');
+ if(!input||!nistreniaView)throw Error('Nistrenia OSM: catalog operațional nevalidat');
+ input.checked=true;syncJurisdictionRoots();updateFilterCount();
 }
 function styleFor(feature){return entityGeometryStyle(entityById.get(feature.properties?.entity_id));}
 
@@ -270,8 +285,7 @@ async function showExistingOsmRoles(ids){
   activeFilterGroups.add(geometryClass(entity));
   activeGeometrySubtypes.add(geometrySubtype(entity));
  }
- const md=document.getElementById('layer-md');
- if(md&&!md.checked){md.checked=true;roots.MD.addTo(map);}
+ enableNistreniaOperational();
  refreshGeometryVisibility();
  if(ids.length===1){
   const id=ids[0];
@@ -308,6 +322,7 @@ async function loadNistreniaOsmNavigation(){
  const catalog=await response.json();
  // This grouping reuses the already verified 85 ACTUAL/OSM IDs; no hierarchy mutation.
  validateNistreniaOsmNavigation(catalog,osmRoleById);
+ nistreniaCatalog=catalog;
  nistreniaOsmNavigator=createNistreniaOsmNavigator({
   container,document,menu:catalog,roles:osmRoleById,onShow:showExistingOsmRoles
  });
@@ -352,8 +367,9 @@ function resetGlobalFilters(){
  for(const jurisdiction of ['RO','MD']){
   const input=document.getElementById('layer-'+jurisdiction.toLowerCase());
   if(input)input.checked=true;
-  roots[jurisdiction].addTo(map);
  }
+ document.getElementById('layer-ni').checked=false;
+ syncJurisdictionRoots();
  refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
 }
 function refreshGeometryVisibility(){
@@ -393,7 +409,7 @@ function updateSelectionVisibility(){
  if(!entity){status.textContent='';return;}
  if(!entity.map?.bbox){status.textContent='Geometria acestei entități nu este disponibilă în snapshot.';return;}
  const checked=visibleEntityIds.has(entity.id);
- const jurisdictionAllowed=document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false;
+ const jurisdictionAllowed=jurisdictionChecked(operationalJurisdiction(entity));
  if(isVisible(entity)&&jurisdictionAllowed){status.textContent='';return;}
  if(!checked){
   status.textContent='Geometria este ascunsă. Activează explicit această entitate pentru afișare; filtrele rămân independente.';
