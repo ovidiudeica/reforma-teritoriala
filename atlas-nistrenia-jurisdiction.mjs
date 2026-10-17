@@ -37,7 +37,7 @@ export function createNistreniaOperationalView({catalog,roles,entityById,officia
 }
 export function nistreniaSearchEntities(view,entityById){
  if(!view)return [];
- return [view.root,...view.groupIds.map(id=>view.nodes.get(id)),...view.toActual.entries().map(([alias,id])=>{
+ return [view.root,...view.groupIds.map(id=>view.nodes.get(id)),...[...view.toActual.entries()].map(([alias,id])=>{
   const original=entityById.get(id),node=view.nodes.get(alias);
   return {...original,id:alias,display_name:node.display_name,jurisdiction:'NI',roles:['operational_osm'],official_name:original.official_name,representation:{...(original.representation||{}),inferred_type:original.display_type}};
  })].map(node=>({
