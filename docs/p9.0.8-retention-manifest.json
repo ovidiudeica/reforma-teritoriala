@@ -1,0 +1,168 @@
+{
+  "schema_version": "p908-evidence-preservation-and-cleanup-v1",
+  "repository": "ovidiudeica/reforma-teritoriala",
+  "source_main_sha": "651921e32aac53dfbc441335860ccc245bec90c8",
+  "scope": "37_OPEN_DRAFT_P9_PRs_ONLY",
+  "conserved_before_cleanup": true,
+  "capture_source": "GitHub PR metadata, full paginated file path lists, original PR descriptions, HEAD SHA, base SHA and untouched evidence branches",
+  "parts": [
+    {
+      "path": "docs/p9.0.8-pr-archive-01.json",
+      "blob_sha": "ec921d342b7214c12b25857c4f015bee9a05e093",
+      "pr_count": 10
+    },
+    {
+      "path": "docs/p9.0.8-pr-archive-02.json",
+      "blob_sha": "bfe4894476b089e6cbcdbb28c4cbc7c30f570b08",
+      "pr_count": 10
+    },
+    {
+      "path": "docs/p9.0.8-pr-archive-03.json",
+      "blob_sha": "3b5210e0e6e1f84440916f25c0b121011a948e84",
+      "pr_count": 10
+    },
+    {
+      "path": "docs/p9.0.8-pr-archive-04.json",
+      "blob_sha": "f9668dd782f8efd3c36024b7b632d9231cea2de4",
+      "pr_count": 7
+    }
+  ],
+  "counts": {
+    "original_open_total": 40,
+    "p9_open_in_scope": 37,
+    "dependabot_untouched": 3,
+    "distinct_p9_snapshot_heads": 22,
+    "primary_evidence_prs": 22,
+    "primary_normative_chain_prs": 20,
+    "independent_semantic_prs": 2,
+    "ci_only_duplicates_for_cleanup": 15
+  },
+  "archived_refs": [
+    {
+      "branch": "archive/p9.0.8-20261017-normative-320-353",
+      "git_sha": "f8a219807074308d35886e8ef98cd825ae2c498e",
+      "contents": "20 primary P9 normative-chain heads and their 15 CI-only matched HEADs",
+      "genealogy_compare_verified": true
+    },
+    {
+      "branch": "archive/p9.0.8-20261017-semantic-318",
+      "git_sha": "d9126ed867e0608bb072be913042acd046a59999",
+      "contents": "independent PR #318 dossier",
+      "genealogy_compare_verified": true
+    },
+    {
+      "branch": "archive/p9.0.8-20261017-semantic-310",
+      "git_sha": "10cf4cee0b5050e042d22aa5a9ef19d103febc22",
+      "contents": "independent PR #310 dossier",
+      "genealogy_compare_verified": true
+    }
+  ],
+  "retained_primary_pr_numbers": [
+    310,
+    318,
+    320,
+    321,
+    322,
+    323,
+    324,
+    325,
+    327,
+    329,
+    331,
+    333,
+    335,
+    337,
+    339,
+    341,
+    343,
+    345,
+    347,
+    349,
+    351,
+    353
+  ],
+  "cleanup_only_ci_pr_numbers": [
+    326,
+    328,
+    330,
+    332,
+    334,
+    336,
+    338,
+    340,
+    342,
+    344,
+    346,
+    348,
+    350,
+    352,
+    354
+  ],
+  "source_branch_deletion_permitted": false,
+  "archive_ref_deletion_permitted": false,
+  "merge_of_any_legacy_p9_pr_permitted": false,
+  "import_of_legal_normative_stack_to_main_permitted": false,
+  "legal_provenance_status": "BLOCKED_INCOMPLETE",
+  "de_facto_full_polygon_certifications": 0,
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false,
+  "not_in_scope": "Dependabot PRs #294–#296; merged P9.0.7.2.15–19 evidence and public geometry; original primary legal/evidence PRs",
+  "readiness_conditions": [
+    "commit four preservation inventories and immutable SHA pointers",
+    "create three independent retained Git refs",
+    "verify every CI-only PR shares HEAD with an independently retained primary PR",
+    "pass offline fail-closed evidence gate",
+    "comment and close only CI-only duplicate PRs without merging or deleting branch",
+    "independently recount open P9 PRs and verify preserved primary refs"
+  ],
+  "post_cleanup": {
+    "status": "VERIFIED_CI_DUPLICATES_CLOSED",
+    "closed_prs": [
+      326,
+      328,
+      330,
+      332,
+      334,
+      336,
+      338,
+      340,
+      342,
+      344,
+      346,
+      348,
+      350,
+      352,
+      354
+    ],
+    "closed_without_merge": 15,
+    "primary_evidence_prs_remain_open": 22,
+    "open_total_after_cleanup_including_p908": 26,
+    "open_p908_pr": 361,
+    "open_dependabot_untouched": [
+      294,
+      295,
+      296
+    ],
+    "archive_refs_sha_reverified": true,
+    "source_main_still_sha": "651921e32aac53dfbc441335860ccc245bec90c8",
+    "closure_audit_utc": "2026-10-17T05:24:01.602Z",
+    "unresolved_sources_remain_open": true,
+    "preserved_primaries": 22
+  },
+  "ci_inventory": {
+    "path": "docs/p9.0.8-ci-artifact-inventory.json",
+    "blob_sha": "19bf6e7aede5e350d2092e526374539bb81046ad",
+    "primary_head_records": 22,
+    "ci_only_duplicate_mappings": 15,
+    "direct_ci_absence_prs": [
+      321,
+      322,
+      323,
+      324
+    ],
+    "evidence_artifacts_observed": 8,
+    "p908_retention_artifacts_observed": 2,
+    "actions_artifacts_are_transient": true,
+    "artifact_links_are_not_preservation_proof": true
+  }
+}

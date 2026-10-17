@@ -1,0 +1,24 @@
+name: P9.0.8 evidence preservation
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  preservation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24.21.0'
+      - run: node scripts/audit/p908-legacy-evidence-retention.mjs --self-test
+      - run: node scripts/audit/p908-legacy-evidence-retention.mjs --audit
+      - run: git diff --exit-code
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: p908-evidence-verdict
+          path: outputs/P9.0.8/evidence-verdict.json
+          if-no-files-found: warn
