@@ -826,11 +826,11 @@ async function applySelection(id,options=false,clickedLayer=null){
 function captureUrlState(){
  const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
  const center=map.wrapLatLng?.(current)||current;
- return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
+ return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds,visibleOperationalOutlineIds};
 }
 async function applyUrlState(state){
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
- replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
+ replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);replace(visibleOperationalOutlineIds,state.visibleOperationalOutlineIds||[]);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
  for(const j of ['RO','MD','NI']){const control=document.getElementById('layer-'+j.toLowerCase());if(control)control.checked=state.jurisdictions.includes(j)&&!(j==='NI'&&!nistreniaView);}syncJurisdictionRoots();
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
  if(!state.viewportExplicit&&!state.entityId&&typeof map.getSize==='function')fitRoMd(map,entityById);
@@ -841,7 +841,7 @@ async function applyUrlState(state){
 async function initializeUrlState(){
  const browser=globalThis.window;
  if(!browser?.location||!browser?.history||!browser.addEventListener)return;
- const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,filterIndex:geometryFilterIndex});
+ const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,treeRootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,operationalOutlineIds:nistreniaOutlines?niOutlineIds:[],filterIndex:geometryFilterIndex});
  atlasUrl=createAtlasUrlState({browser,config,capture:captureUrlState,apply:applyUrlState});await atlasUrl.restore();atlasShare?.refresh();
 }
 atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>entityById.get(selectedEntityId)||null});
@@ -887,7 +887,9 @@ const frontendReady=(async()=>{
  let phase='index';
  try{
   await loadIndex();
-  try{await loadOsmRoleCatalog();await loadNistreniaOsmNavigation();}
+  try{await loadOsmRoleCatalog();await loadNistreniaOsmNavigation();
+    const verified=await fetchVerifiedNistreniaOutlines((...args)=>fetch(...args),crypto.subtle,nistreniaCatalog);
+    nistreniaOutlineFeatures=verified.features;nistreniaOutlineProof=verified.proof;}
   catch(error){
    const status=document.getElementById('osm-roles-status');
    if(status){status.textContent='Catalogul descriptiv OSM nu poate fi verificat pentru acest release ACTUAL.';status.setAttribute('role','alert');}
@@ -912,4 +914,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {atlasExport,exportSource,atlasNeighbors,neighborsEngine,atlasIdentify,pointIdentifier,geometryResources,atlasShare,atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
+export {atlasExport,exportSource,atlasNeighbors,neighborsEngine,atlasIdentify,pointIdentifier,geometryResources,atlasShare,atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell,visibleOperationalOutlineIds,nistreniaOutlines,nistreniaOutlineFeatures};
