@@ -4,6 +4,7 @@ import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
 import {validateOsmRolesCatalog,createOsmRolesPanel,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
 import {validateNistreniaOsmNavigation,createNistreniaOsmNavigator} from './atlas-nistrenia-osm.mjs';
+import {createNistreniaOperationalView,nistreniaSearchEntities} from './atlas-nistrenia-jurisdiction.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
 import {createAtlasIdentify} from './atlas-identify-ui.mjs';
@@ -81,6 +82,8 @@ const entityById=new Map();
 let osmRoleById=new Map();
 let osmRolesPanel=null;
 let nistreniaOsmNavigator=null;
+let nistreniaCatalog=null;
+let nistreniaView=null;
 const activeFilterGroups=new Set(Object.keys(geometryLabels));
 const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a second class state.
 const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
@@ -105,6 +108,7 @@ function updateFilterCount(){
   [...geometryFilterIndex?.subtypeMembers?.keys?.()||[]].filter(id=>!activeGeometrySubtypes.has(id)).length+
   [1,2,3,'unclassified'].filter(level=>!activeStatisticalLevels.has(level)).length+
   ['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase())?.checked===false).length+
+  Number(Boolean(document.getElementById('layer-ni')?.checked))+
   Number(!separateStatisticalGeometry);
  count.textContent=inactive?'('+inactive+' '+(inactive===1?'dezactivat':'dezactivate')+')':'';
  const reset=document.getElementById('filters-reset');if(reset)reset.disabled=inactive===0;
@@ -206,8 +210,19 @@ const statusLabels={
 
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function filterGroup(entity){return geometryClass(entity);}
+function jurisdictionChecked(j){const input=document.getElementById('layer-'+String(j||'md').toLowerCase());return j==='NI'?Boolean(input?.checked&&!input.disabled):input?.checked!==false;}
+function operationalJurisdiction(entity){return nistreniaView?.roleIds.has(entity?.id)?'NI':entity?.jurisdiction;}
 function isVisible(entity){
- return Boolean(entity&&visibleEntityIds.has(entity.id)&&geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry}));
+ return Boolean(entity&&visibleEntityIds.has(entity.id)&&jurisdictionChecked(operationalJurisdiction(entity))&&geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry}));
+}
+function syncJurisdictionRoots(){
+ if(jurisdictionChecked('RO'))roots.RO.addTo(map);else map.removeLayer(roots.RO);
+ if(jurisdictionChecked('MD')||jurisdictionChecked('NI'))roots.MD.addTo(map);else map.removeLayer(roots.MD);
+}
+function enableNistreniaOperational(){
+ const input=document.getElementById('layer-ni');
+ if(!input||!nistreniaView)throw Error('Nistrenia OSM: catalog operațional nevalidat');
+ input.checked=true;syncJurisdictionRoots();updateFilterCount();
 }
 function styleFor(feature){return entityGeometryStyle(entityById.get(feature.properties?.entity_id));}
 
@@ -270,8 +285,7 @@ async function showExistingOsmRoles(ids){
   activeFilterGroups.add(geometryClass(entity));
   activeGeometrySubtypes.add(geometrySubtype(entity));
  }
- const md=document.getElementById('layer-md');
- if(md&&!md.checked){md.checked=true;roots.MD.addTo(map);}
+ enableNistreniaOperational();
  refreshGeometryVisibility();
  if(ids.length===1){
   const id=ids[0];
@@ -308,6 +322,7 @@ async function loadNistreniaOsmNavigation(){
  const catalog=await response.json();
  // This grouping reuses the already verified 85 ACTUAL/OSM IDs; no hierarchy mutation.
  validateNistreniaOsmNavigation(catalog,osmRoleById);
+ nistreniaCatalog=catalog;
  nistreniaOsmNavigator=createNistreniaOsmNavigator({
   container,document,menu:catalog,roles:osmRoleById,onShow:showExistingOsmRoles
  });
@@ -352,8 +367,9 @@ function resetGlobalFilters(){
  for(const jurisdiction of ['RO','MD']){
   const input=document.getElementById('layer-'+jurisdiction.toLowerCase());
   if(input)input.checked=true;
-  roots[jurisdiction].addTo(map);
  }
+ const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=false;
+ syncJurisdictionRoots();
  refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
 }
 function refreshGeometryVisibility(){
@@ -393,7 +409,7 @@ function updateSelectionVisibility(){
  if(!entity){status.textContent='';return;}
  if(!entity.map?.bbox){status.textContent='Geometria acestei entități nu este disponibilă în snapshot.';return;}
  const checked=visibleEntityIds.has(entity.id);
- const jurisdictionAllowed=document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false;
+ const jurisdictionAllowed=jurisdictionChecked(operationalJurisdiction(entity));
  if(isVisible(entity)&&jurisdictionAllowed){status.textContent='';return;}
  if(!checked){
   status.textContent='Geometria este ascunsă. Activează explicit această entitate pentru afișare; filtrele rămân independente.';
@@ -404,9 +420,29 @@ function updateSelectionVisibility(){
  }
 }
 
+function searchEntitiesWithNistrenia(){
+ return [...entityById.values(),...nistreniaSearchEntities(nistreniaView,entityById)];
+}
+async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
+ if(!nistreniaView?.isVirtual(id))return selectEntity(id,options);
+ const actualId=nistreniaView.toActual.get(id);
+ if(actualId){
+  await showExistingOsmRoles([actualId]);
+  atlasTree?.select(id);
+  return;
+ }
+ const ids=nistreniaView.aggregateIds(id);
+ if(!ids)throw Error('Nistrenia: unknown virtual group');
+ await showExistingOsmRoles(ids);
+ atlasTree?.select(id);
+ const name=nistreniaView.nodes.get(id)?.display_name||'Nistrenia';
+ document.getElementById('details-title').textContent=name;
+ document.getElementById('details-summary').textContent='Grupare operațională OSM (de facto)';
+ document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Jurisdicție operațională</h3><p>Nistrenia este reprezentată în atlas ca entitate de facto nerecunoscută internațional. Teritoriul aparține Republicii Moldova potrivit recunoașterii internaționale. Gruparea nu certifică o nouă apartenență juridică.</p><p>'+ids.length+' geometrii existente ACTUAL, fără poligon juridic suplimentar.</p><p><a href="https://www.openstreetmap.org/relation/65335" target="_blank" rel="noopener noreferrer">Relația OSM 65335</a></p></section>';
+}
 function wireSearch(){
   const input=document.getElementById('entity-search');
-  atlasSearch=createAtlasSearch({input,clearButton:document.getElementById('search-clear'),empty:document.getElementById('search-empty'),container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:async(id,options)=>{setFiltersPanelOpen(false);setNavigationTab('entities');await selectEntity(id,options);}});
+  atlasSearch=createAtlasSearch({input,clearButton:document.getElementById('search-clear'),empty:document.getElementById('search-empty'),container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:async(id,options)=>{setFiltersPanelOpen(false);setNavigationTab('entities');if(nistreniaView?.isVirtual(id))await selectNistreniaNode(id,options);else await selectEntity(id,options);}});
   input.addEventListener('focus',()=>{if(filtersPanelOpen)setFiltersPanelOpen(false);});
   input.addEventListener('input',()=>{if(input.value.trim())setNavigationTab('results');else setNavigationTab('entities');});
 }
@@ -426,11 +462,13 @@ async function loadHierarchyTree(){
  hierarchyNodeById.clear();
  for(const [id,node] of validated)hierarchyNodeById.set(id,node);
  hierarchyTree=tree;
+ nistreniaView=nistreniaCatalog?createNistreniaOperationalView({catalog:nistreniaCatalog,roles:osmRoleById,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
+ const niFilter=document.getElementById('layer-ni');if(niFilter)niFilter.disabled=!nistreniaView;
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
   renderHierarchyTree();
   syncGeometryReset();
- atlasSearch?.updateIndex(createSearchIndex([...entityById.values()],hierarchyNodeById));
+ atlasSearch?.updateIndex(createSearchIndex(searchEntitiesWithNistrenia(),nistreniaView?.nodes||hierarchyNodeById));
  atlasAdvanced=createAtlasAdvancedNavigation({
   document,panels:atlasPanels,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,
   storage:globalThis.window?.localStorage,
@@ -454,18 +492,30 @@ function renderHierarchyTree(){
  const container=document.getElementById('hierarchy-tree');
  if(!container||!hierarchyTree)return;
  const isTreeGeometryVisible=id=>{
-  const entity=entityById.get(id);
-  return Boolean(entity&&isVisible(entity)&&document.getElementById('layer-'+entity.jurisdiction.toLowerCase())?.checked!==false);
+  const ids=nistreniaView?.aggregateIds(id);
+  if(ids)return jurisdictionChecked('NI')&&ids.some(actualId=>isVisible(entityById.get(actualId)));
+  const entity=entityById.get(nistreniaView?.actualId(id)||id);
+  return Boolean(entity&&isVisible(entity));
+ };
+ const isTreeChecked=id=>{
+  const ids=nistreniaView?.aggregateIds(id);
+  if(ids)return ids.every(actualId=>visibleEntityIds.has(actualId));
+  return visibleEntityIds.has(nistreniaView?.actualId(id)||id);
  };
  atlasTree?.destroy();
- atlasTree=createAtlasTree({container,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,document,typeLabel,
-  isGeometryVisible:isTreeGeometryVisible,isEntityChecked:id=>visibleEntityIds.has(id),
+ atlasTree=createAtlasTree({
+  container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
+  isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
-   if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);
-   refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
+   const aggregate=nistreniaView?.aggregateIds(id);
+   const ids=aggregate||(nistreniaView?.toActual.has(id)?[nistreniaView.toActual.get(id)]:[id]);
+   if(checked&&nistreniaView?.isVirtual(id))enableNistreniaOperational();
+   for(const actualId of ids){if(checked)visibleEntityIds.add(actualId);else visibleEntityIds.delete(actualId);}
+   syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
   },
   onDisclosureChange:()=>atlasUrl?.commit('replace'),
-  onSelect:(id,options)=>selectEntity(id,options).catch(console.error)});
+  onSelect:(id,options)=>(nistreniaView?.isVirtual(id)?selectNistreniaNode(id,options):selectEntity(id,options)).catch(console.error)
+ });
  if(selectedEntityId){
   atlasTree.select(selectedEntityId);renderDetails(entityById.get(selectedEntityId));updateSelectionVisibility();
  }
@@ -619,7 +669,7 @@ async function syncTiers(){
  if(!releaseData||!indexData)return;
  const zoom=map.getZoom();
  for(const jurisdiction of ['RO','MD']){
-  const enabled=document.getElementById('layer-'+jurisdiction.toLowerCase())?.checked!==false;
+  const enabled=jurisdictionChecked(jurisdiction)||(jurisdiction==='MD'&&jurisdictionChecked('NI'));
   const overviewGroup=tierGroups[jurisdiction+'_overview'];
   if(enabled){
    await ensureTier(jurisdiction,'overview');
@@ -687,7 +737,7 @@ function renderDetails(entity){
  document.getElementById('details-summary').textContent=typeLabel(entity.representation.inferred_type);
  body.innerHTML=
   '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
-  detailRow('Jurisdicție',entity.jurisdiction)+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
+  detailRow('Jurisdicție',entity.jurisdiction)+(nistreniaView?.roleIds.has(entity.id)?detailRow('Jurisdicție operațională (OSM)','Nistrenia · de facto, fără recunoaștere internațională'):'')+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
   '</dl></section>'+entityProvenanceHtml(entity,{typeLabel,statusLabel:value=>statusLabels[value]||value});
  renderOsmRoleDetails({container:body,document,row:osmRoleById.get(entity.id)});
  renderBreadcrumb(entity);
@@ -763,12 +813,12 @@ async function applySelection(id,options=false,clickedLayer=null){
 function captureUrlState(){
  const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
  const center=map.wrapLatLng?.(current)||current;
- return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase()).checked),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
+ return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
 }
 async function applyUrlState(state){
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
  replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
- for(const j of ['RO','MD']){const enabled=state.jurisdictions.includes(j);document.getElementById('layer-'+j.toLowerCase()).checked=enabled;if(enabled)roots[j].addTo(map);else map.removeLayer(roots[j]);}
+ for(const j of ['RO','MD','NI']){const control=document.getElementById('layer-'+j.toLowerCase());if(control)control.checked=state.jurisdictions.includes(j)&&!(j==='NI'&&!nistreniaView);}syncJurisdictionRoots();
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
  if(!state.viewportExplicit&&!state.entityId&&typeof map.getSize==='function')fitRoMd(map,entityById);
   else map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
@@ -778,7 +828,7 @@ async function applyUrlState(state){
 async function initializeUrlState(){
  const browser=globalThis.window;
  if(!browser?.location||!browser?.history||!browser.addEventListener)return;
- const config=createUrlConfig({entityById,nodeById:hierarchyNodeById,rootIds:hierarchyTree.root_ids,filterIndex:geometryFilterIndex});
+ const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,filterIndex:geometryFilterIndex});
  atlasUrl=createAtlasUrlState({browser,config,capture:captureUrlState,apply:applyUrlState});await atlasUrl.restore();atlasShare?.refresh();
 }
 atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>entityById.get(selectedEntityId)||null});
@@ -816,7 +866,8 @@ document.getElementById('selection-visibility-action')?.addEventListener('click'
  }
 });
 document.getElementById('layer-ro').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.RO.addTo(map):map.removeLayer(roots.RO);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
-document.getElementById('layer-md').addEventListener('change',event=>{updateFilterCount();event.target.checked?roots.MD.addTo(map):map.removeLayer(roots.MD);syncTiers().catch(console.error);atlasTree?.refreshVisibility();updateSelectionVisibility();atlasUrl?.commit('push');});
+document.getElementById('layer-md').addEventListener('change',()=>{syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');});
+document.getElementById('layer-ni')?.addEventListener('change',()=>{syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');});
 map.on('zoomend moveend',()=>{if(!atlasUrl?.isRestoring)syncTiers().catch(console.error);atlasUrl?.commit('replace');if(atlasPanels.state.active==='share')atlasShare?.refresh();});
 
 const frontendReady=(async()=>{

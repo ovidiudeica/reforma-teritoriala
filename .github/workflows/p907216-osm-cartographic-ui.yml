@@ -26,11 +26,14 @@ jobs:
           node --test scripts/test/frontend-p907216-osm-roles.test.mjs
           node scripts/process/build-p907216-osm-role-ui.mjs --check
           node --check atlas-nistrenia-osm.mjs
+          node --check atlas-nistrenia-jurisdiction.mjs
+          node --check scripts/test/frontend-p9094-operational-jurisdiction.test.mjs
           node --check scripts/process/build-p909-nistrenia-menu.mjs
           node --check scripts/test/frontend-p909-nistrenia-menu.test.mjs
           node --check scripts/test/frontend-p909-nistrenia-browser.test.mjs
           node scripts/process/build-p909-nistrenia-menu.mjs --check
           node --test scripts/test/frontend-p909-nistrenia-menu.test.mjs
+          node --test scripts/test/frontend-p9094-operational-jurisdiction.test.mjs
       - name: Ensure no write path into existing ACTUAL release
         run: |
           git diff --exit-code

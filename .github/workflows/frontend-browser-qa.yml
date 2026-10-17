@@ -28,6 +28,8 @@ jobs:
           node --check scripts/test/frontend-p907216-osm-roles.test.mjs
           node --check scripts/test/frontend-p907216-osm-roles-browser.test.mjs
           node --check atlas-nistrenia-osm.mjs
+          node --check atlas-nistrenia-jurisdiction.mjs
+          node --check scripts/test/frontend-p9094-operational-browser.test.mjs
           node --check scripts/test/frontend-p909-nistrenia-browser.test.mjs
           node --check atlas-tree-window.mjs
           node --check scripts/test/helpers/atlas-evidence.mjs
@@ -61,6 +63,8 @@ jobs:
         run: node --test scripts/test/frontend-p907216-osm-roles-browser.test.mjs
       - name: P9.0.9 Nistrenia OSM visible navigation — Chromium desktop/mobile
         run: node --test scripts/test/frontend-p909-nistrenia-browser.test.mjs
+      - name: P9.0.9.4 Nistrenia third operational jurisdiction — Chromium desktop/mobile
+        run: node --test scripts/test/frontend-p9094-operational-browser.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
