@@ -1,0 +1,240 @@
+/*
+ * WEB-R1b — common panel, control and navigation presentation.
+ * Presentation-only. Functional ownership stays with atlas-panels / Leaflet / ACTUAL.
+ * Loaded last on purpose; never remove the existing forced-colors/focus gates.
+ */
+:root {
+ --atlas-ui-border: #c7d5ca;
+ --atlas-ui-border-strong: #698875;
+ --atlas-ui-surface: #fff;
+ --atlas-ui-soft: #f4f8f5;
+ --atlas-ui-hover: #e9f1eb;
+ --atlas-ui-ink: #203a2d;
+ --atlas-ui-accent: #215c40;
+ --atlas-ui-radius: 10px;
+ --atlas-ui-shadow: 0 1px 3px #19372a16;
+ --atlas-ui-space: 8px;
+}
+#atlas-controls {
+ font-family: var(--atlas-font-ui, system-ui, sans-serif);
+ color: var(--atlas-color-text, #17202a);
+}
+#atlas-controls .atlas-panel-heading {
+ position: sticky;
+ top: 0;
+ z-index: 3;
+ background: var(--atlas-ui-surface);
+ border-bottom: 1px solid var(--atlas-ui-border);
+ gap: 10px;
+}
+#atlas-controls .atlas-panel-heading h2 {
+ font-size: var(--atlas-type-panel-title,17px);
+ font-weight: var(--atlas-weight-heading,700);
+ color: var(--atlas-ui-ink);
+ overflow-wrap: anywhere;
+}
+#atlas-controls :is(h3,h4) {line-height: 1.45}
+#atlas-controls :is(.hint,.muted,.atlas-advanced-hint,.atlas-advanced-muted) {
+ font-size: var(--atlas-type-meta,12px);
+ line-height: var(--atlas-leading-description,1.5);
+}
+#atlas-controls :is(label,button,select,input,textarea,summary) {font-family: inherit}
+/* All action controls have an actual visual affordance, including filter bulk actions. */
+#atlas-controls :is(.action-button,.filter-actions button,.mobile-control),
+#details-panel :is(.action-button,.mobile-control) {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ gap: 6px;
+ box-sizing: border-box;
+ min-height: var(--atlas-control-target,44px);
+ min-width: var(--atlas-control-target,44px);
+ padding: 8px 11px;
+ border: 1px solid var(--atlas-ui-border);
+ border-radius: var(--atlas-control-radius-mobile,6px);
+ background: var(--atlas-ui-surface);
+ color: var(--atlas-ui-ink);
+ font-size: var(--atlas-type-button-mobile,13px);
+ font-weight: 600;
+ line-height: 1.35;
+ text-align: center;
+ text-decoration: none;
+ white-space: normal;
+ overflow-wrap: anywhere;
+ box-shadow: var(--atlas-ui-shadow);
+ cursor: pointer;
+}
+#atlas-controls :is(.action-button,.filter-actions button,.mobile-control):hover,
+#details-panel :is(.action-button,.mobile-control):hover {background:var(--atlas-ui-hover);border-color:var(--atlas-ui-border-strong)}
+#atlas-controls :is(.action-button,.filter-actions button,.mobile-control):active,
+#details-panel :is(.action-button,.mobile-control):active {background:#dcebe1}
+#atlas-controls :is(.action-button,.filter-actions button,.mobile-control):disabled,
+#details-panel :is(.action-button,.mobile-control):disabled {
+ background:#f0f2f0;color:#59685e;cursor:not-allowed;box-shadow:none;
+}
+#atlas-controls .filter-actions {gap:6px;flex-wrap:wrap}
+#atlas-controls .filter-actions button {padding:7px 12px;text-decoration:none;flex:0 1 auto}
+#atlas-controls #filters-reset {margin:4px 0 8px}
+#atlas-controls #copy-link {background:var(--atlas-ui-accent);border-color:var(--atlas-ui-accent);color:#fff}
+#atlas-controls #copy-link:hover {background:#17492f;color:#fff}
+/* X means close only. The actionable meaning remains exposed through aria-label. */
+#atlas-controls #drawer-close,
+#details-panel .atlas-close-button {
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ flex:0 0 var(--atlas-control-target,44px);
+ width:var(--atlas-control-target,44px);
+ height:var(--atlas-control-target,44px);
+ min-width:var(--atlas-control-target,44px);
+ min-height:var(--atlas-control-target,44px);
+ padding:0;
+ border:1px solid var(--atlas-ui-border);
+ border-radius:var(--atlas-control-radius-mobile,6px);
+ background:var(--atlas-ui-surface);
+ color:var(--atlas-ui-ink);
+ font-family:inherit;
+ font-size:var(--atlas-type-icon-close,24px);
+ line-height:1;
+ box-shadow:var(--atlas-ui-shadow);
+ cursor:pointer;
+}
+#atlas-controls #drawer-close:hover,#details-panel .atlas-close-button:hover {background:var(--atlas-ui-hover);border-color:var(--atlas-ui-border-strong)}
+/* Native, independently toggleable disclosures: keyboard/ARIA owned by <details>. */
+#atlas-controls .atlas-panel-disclosure,
+#details-panel .atlas-panel-disclosure,
+#atlas-controls :is(.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions) {
+ min-width:0;
+ margin:8px 0 12px;
+ border:1px solid var(--atlas-ui-border);
+ border-radius:var(--atlas-ui-radius);
+ background:var(--atlas-ui-surface);
+ box-shadow:var(--atlas-ui-shadow);
+}
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary,
+#details-panel .atlas-panel-disclosure>summary {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ box-sizing:border-box;
+ min-width:0;
+ min-height:var(--atlas-control-target,44px);
+ padding:10px 13px;
+ margin:0;
+ background:var(--atlas-ui-soft);
+ border-radius:var(--atlas-ui-radius);
+ color:var(--atlas-ui-ink);
+ font-size:var(--atlas-type-body,13px);
+ font-weight:650;
+ letter-spacing:normal;
+ text-transform:none;
+ line-height:1.4;
+ list-style:none;
+ cursor:pointer;
+}
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary::-webkit-details-marker,
+#details-panel .atlas-panel-disclosure>summary::-webkit-details-marker {display:none}
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary::after,
+#details-panel .atlas-panel-disclosure>summary::after {
+ content:"";
+ width:9px;height:9px;flex:0 0 9px;
+ border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+ transform:rotate(45deg);transition:transform .12s ease;
+ margin-right:3px;margin-top:-4px;
+}
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)[open]>summary::after,
+#details-panel .atlas-panel-disclosure[open]>summary::after {transform:rotate(225deg);margin-top:4px}
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary:hover,
+#details-panel .atlas-panel-disclosure>summary:hover {background:var(--atlas-ui-hover)}
+#atlas-controls .atlas-panel-disclosure .atlas-disclosure-body,
+#details-panel .atlas-panel-disclosure .atlas-disclosure-body {
+ padding:10px 12px 12px;
+ border-top:1px solid var(--atlas-ui-border);
+ min-width:0;
+}
+#atlas-controls .atlas-panel-disclosure .atlas-disclosure-body>:first-child {margin-top:0}
+#atlas-controls .atlas-filter-subtypes {margin:4px 0}
+#atlas-controls .atlas-filter-subtypes>summary {padding:8px 10px}
+#atlas-controls .filter-section {border:0;padding:0;margin:0 0 8px}
+#atlas-controls .filter-section>summary {min-height:44px}
+#atlas-controls .filter-section>.filter-actions,
+#atlas-controls .filter-section>.atlas-filter-group,
+#atlas-controls .filter-section>.filter-row,
+#atlas-controls .filter-section>.hint {margin-inline:10px}
+#atlas-controls .filter-section .atlas-filter-group {margin-block:7px}
+#atlas-controls :is(.atlas-info-section,.osm-roles-panel,.atlas-export-actions)>:not(summary) {margin-left:10px;margin-right:10px}
+#atlas-controls .atlas-panel-disclosure :is(label,summary) {overflow-wrap:anywhere}
+#atlas-controls .atlas-tree-tools {margin:0 0 8px}
+#atlas-controls .atlas-tree-tools>.atlas-disclosure-body {padding:8px}
+#atlas-controls #hierarchy-tree {min-height:96px}
+/* Rail: stable order in the DOM, a subtle divider between command groups. */
+#atlas-main .atlas-navigation-rail {background:var(--atlas-ui-soft);border-color:var(--atlas-ui-border);gap:5px}
+#atlas-main .atlas-rail-button {
+ border:1px solid transparent;
+ border-radius:8px;
+ color:var(--atlas-ui-ink);
+ transition:background .12s ease,border-color .12s ease;
+}
+#atlas-main .atlas-rail-button:hover {background:var(--atlas-ui-hover);border-color:var(--atlas-ui-border)}
+#atlas-main .atlas-rail-button[aria-pressed=true] {background:#dcebe1;border-color:#567c63;color:#173d2a}
+#atlas-main .atlas-rail-button[data-rail-break=true] {margin-top:10px;position:relative}
+#atlas-main .atlas-rail-button[data-rail-break=true]::before {
+ content:"";position:absolute;top:-6px;left:7px;right:7px;border-top:1px solid var(--atlas-ui-border);
+}
+#atlas-main .atlas-rail-button svg {width:23px;height:23px;flex-shrink:0}
+/* Map group: reset geometry is visibly separate from zoom/fit and raster. */
+#atlas-main .leaflet-control-zoom {border:1px solid var(--atlas-ui-border);box-shadow:0 3px 12px #19372a26}
+#atlas-main .leaflet-control-zoom>a,
+#atlas-main .leaflet-control-zoom>button {color:var(--atlas-ui-ink)}
+#atlas-main .leaflet-control-zoom>a:hover,
+#atlas-main .leaflet-control-zoom>button:hover {background:var(--atlas-ui-hover)}
+#atlas-main .leaflet-control-zoom>#map-geometries-reset {border-top:2px solid var(--atlas-ui-border-strong)}
+@container atlas (max-width:599px){
+ /* Four frequent tools and an explicit More control, all keyboard reachable. */
+ #atlas-main .atlas-navigation-rail {grid-template-columns:repeat(5,minmax(44px,1fr));gap:3px}
+ #atlas-main .atlas-rail-button {min-width:44px;min-height:52px}
+ #atlas-main :is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more) {display:flex;order:0}
+ #atlas-main .atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)) {display:none}
+ #atlas-main.atlas-navigation-more .atlas-navigation-rail {
+  grid-template-columns:repeat(5,minmax(44px,1fr));
+  max-height:min(72cqh,340px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  align-content:start;
+ }
+ #atlas-main.atlas-navigation-more .atlas-rail-button {display:flex;order:1}
+ #atlas-main.atlas-navigation-more :is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more) {order:0}
+ #atlas-main .atlas-rail-button[data-rail-break=true] {margin-top:0}
+ #atlas-main .atlas-rail-button[data-rail-break=true]::before {display:none}
+ #atlas-main .rail-label {font-size:11px;line-height:1.15}
+}
+@container atlas (min-width:600px) and (max-width:899px) and (max-height:540px){
+ /* Compact landscape: don't cram 10+ icons into one 600px bottom row. */
+ #atlas-main .atlas-navigation-rail {gap:4px}
+ #atlas-main .atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)) {display:none}
+ #atlas-main #navigation-more {display:flex}
+ #atlas-main .atlas-rail-button[data-rail-break=true] {margin-top:0}
+ #atlas-main .atlas-rail-button[data-rail-break=true]::before {display:none}
+ #atlas-main.atlas-navigation-more .atlas-navigation-rail {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(44px,1fr));
+  width:min(350px,calc(100% - var(--command-space) - 16px));
+  max-height:min(74cqh,300px);
+  overflow-y:auto;
+  align-content:start;
+ }
+ #atlas-main.atlas-navigation-more .atlas-rail-button {display:flex}
+}
+@media(prefers-reduced-motion:reduce){
+ #atlas-main .atlas-rail-button,
+ #atlas-controls .atlas-panel-disclosure>summary::after {transition:none}
+}
+@media(forced-colors:active){
+ #atlas-main .atlas-navigation-rail,#atlas-controls .atlas-panel-disclosure,
+ #atlas-controls .filter-section,#atlas-controls #drawer-close,#details-panel .atlas-close-button,
+ #atlas-controls :is(.action-button,.filter-actions button) {border-color:ButtonText}
+ #atlas-main .atlas-rail-button[aria-pressed=true] {border:2px solid Highlight;background:Canvas;color:CanvasText}
+ #atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel)>summary {background:Canvas;color:CanvasText}
+ #atlas-main .leaflet-control-zoom>#map-geometries-reset {border-top-color:ButtonText}
+}
