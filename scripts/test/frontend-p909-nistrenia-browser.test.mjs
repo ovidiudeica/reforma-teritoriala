@@ -42,7 +42,7 @@ try{
    }
   });
   await t.test('no new polygon, external OSM API request or browser errors',async()=>{
-   assert.equal(page.requests.filter(r=>/api\\.openstreetmap\\.org|overpass-api\\.de|nistrenia.*geojson/i.test(r.url)).length,0);
+   assert.equal(page.requests.filter(r=>/api\.openstreetmap\.org|overpass-api\.de|nistrenia.*geojson/i.test(r.url)).length,0);
    assert.deepEqual(page.errors,[]);
    assert.deepEqual(page.console.filter(x=>x.type==='error'||x.level==='error'),[]);
   });
