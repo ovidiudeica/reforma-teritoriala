@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="atlas-geometric.css">
 <link rel="stylesheet" href="atlas-neighbors.css">
 <link rel="stylesheet" href="atlas-export.css">
+<link rel="stylesheet" href="atlas-r1b-ui.css">
 </head>
 <body>
 <a id="skip-map" class="skip-link" href="#map">Sari la hartă</a>
@@ -42,20 +43,20 @@
 <nav id="atlas-navigation-rail" class="atlas-navigation-rail" aria-label="Navigare atlas">
 <button id="mobile-navigation" type="button" class="atlas-rail-button" data-panel="entities" aria-label="Entități" title="Entități" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5v5H4zM4 15h5v5H4zM15 9h5v5h-5zM9 6h3v11H9m3-5h3"/></g></svg><span class="rail-label">Entități</span></button>
 <button id="mobile-search" type="button" class="atlas-rail-button" data-panel="search" aria-label="Căutare" title="Căutare" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></g></svg><span class="rail-label">Căutare</span></button>
-<button id="filters-toggle" type="button" class="atlas-rail-button" data-panel="filters" aria-label="Filtre" title="Filtre" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18L14 13v7l-4-2v-5z"/></g></svg><span class="rail-label">Filtre</span><span id="filters-count" class="rail-count" aria-live="polite"></span></button>
 <button id="advanced-visible" type="button" class="atlas-rail-button" data-panel="visible" aria-label="Straturi" title="Straturi" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></g></svg><span class="rail-label">Straturi</span></button>
-<button id="advanced-recent" type="button" class="atlas-rail-button" data-panel="recent" aria-label="Recente" title="Recente" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a9 9 0 1 1-1 7M4 3v5h5M12 6v6l4 2"/></g></svg><span class="rail-label">Recente</span></button>
-<button id="advanced-compare" type="button" class="atlas-rail-button" data-panel="compare" aria-label="Compară" title="Compară" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="8" height="16" rx="1"/><rect x="14" y="4" width="8" height="16" rx="1"/></g></svg><span class="rail-label">Compară</span></button>
-<button id="share-toggle" type="button" class="atlas-rail-button" data-panel="share" aria-label="Partajare" title="Partajare" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><path d="m8 10 8-4m-8 8 8 4"/></g></svg><span class="rail-label">Partajare</span></button>
-<button id="identify-toggle" type="button" class="atlas-rail-button" data-panel="identify" aria-label="Identifică teritoriul" title="Identifică teritoriul" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v5m0 12v5M1 12h5m12 0h5"/></g></svg><span class="rail-label">Identifică</span></button>
-<button id="info-toggle" type="button" class="atlas-rail-button" data-panel="info" aria-label="Informații" title="Informații" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 10v7m0-10v1"/></g></svg><span class="rail-label">Informații</span></button>
+<button id="filters-toggle" type="button" class="atlas-rail-button" data-panel="filters" aria-label="Filtre" title="Filtre" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18L14 13v7l-4-2v-5z"/></g></svg><span class="rail-label">Filtre</span><span id="filters-count" class="rail-count" aria-live="polite"></span></button>
 <button id="navigation-more" class="atlas-rail-button" type="button" aria-label="Mai multe instrumente" title="Mai multe instrumente" aria-expanded="false" aria-controls="atlas-navigation-rail"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><g fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></g></svg><span class="rail-label">Mai multe</span></button>
+<button id="identify-toggle" data-rail-group="instrumente" data-rail-break="true" type="button" class="atlas-rail-button" data-panel="identify" aria-label="Identifică teritoriul" title="Identifică teritoriul" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v5m0 12v5M1 12h5m12 0h5"/></g></svg><span class="rail-label">Identifică</span></button>
 <button id="measure-toggle" type="button" class="atlas-rail-button" data-panel="measure" aria-label="Măsoară" title="Măsoară" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><path d="M3 18 18 3l3 3L6 21zM8 13l3 3m1-7 3 3m1-7 3 3" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="rail-label">Măsoară</span></button>
+<button id="advanced-compare" type="button" class="atlas-rail-button" data-panel="compare" aria-label="Compară" title="Compară" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="8" height="16" rx="1"/><rect x="14" y="4" width="8" height="16" rx="1"/></g></svg><span class="rail-label">Compară</span></button>
+<button id="advanced-recent" data-rail-group="secundare" data-rail-break="true" type="button" class="atlas-rail-button" data-panel="recent" aria-label="Recente" title="Recente" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a9 9 0 1 1-1 7M4 3v5h5M12 6v6l4 2"/></g></svg><span class="rail-label">Recente</span></button>
+<button id="share-toggle" type="button" class="atlas-rail-button" data-panel="share" aria-label="Partajare" title="Partajare" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><path d="m8 10 8-4m-8 8 8 4"/></g></svg><span class="rail-label">Partajare</span></button>
+<button id="info-toggle" type="button" class="atlas-rail-button" data-panel="info" aria-label="Informații" title="Informații" aria-controls="atlas-controls" aria-expanded="false" aria-pressed="false"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 10v7m0-10v1"/></g></svg><span class="rail-label">Informații</span></button>
 </nav>
 
 <button id="drawer-backdrop" class="drawer-backdrop" type="button" aria-label="Închide navigarea" tabindex="-1" hidden></button>
 <aside id="atlas-controls" class="controls" aria-labelledby="atlas-panel-title" tabindex="-1">
-<div class="atlas-panel-heading"><h2 id="atlas-panel-title">Entități</h2><button id="drawer-close" class="action-button" type="button" aria-label="Închide panoul de navigare">Închide</button></div>
+<div class="atlas-panel-heading"><h2 id="atlas-panel-title">Entități</h2><button id="drawer-close" class="atlas-close-button" type="button" aria-label="Închide panoul de navigare" title="Închide panoul"><span aria-hidden="true">×</span></button></div>
   <section id="search-panel">
     <h3 class="sr-only">Căutare</h3>
     <div class="atlas-search-input-row"><input id="entity-search" class="search" type="search" aria-label="Caută entități teritoriale" aria-describedby="search-help" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Nume, SIRUTA/CUATM, cod statistic sau OSM…" autocomplete="off"><button id="search-clear" type="button" class="action-button" aria-label="Șterge căutarea" title="Șterge căutarea">×</button></div>
@@ -127,17 +128,21 @@
   <section id="filters-panel" class="atlas-filters-panel" aria-label="Filtre geometrice" hidden inert>
 <button id="filters-reset" class="action-button" type="button" disabled>Resetează filtrele</button>
     <p class="hint">Filtrele limitează geometriile deja bifate în arbore; nu modifică bifele entităților.</p>
-    <section>
-    <h3>Jurisdicții</h3>
+    <details class="atlas-panel-disclosure" open>
+    <summary>Jurisdicții</summary>
+    <div class="atlas-disclosure-body">
     <label><input id="layer-ro" type="checkbox" checked> România</label>
     <label><input id="layer-md" type="checkbox" checked> Moldova</label>
     <label><input id="layer-ni" type="checkbox" checked disabled aria-describedby="nistrenia-jurisdiction-note"> Nistrenia</label>
     <p id="nistrenia-jurisdiction-note" class="hint">Jurisdicție operațională OSM, de facto, nerecunoscută internațional. Teritoriul aparține Republicii Moldova. Nicio limită juridică nouă.</p>
-  </section>
+    </div>
+    </details>
 
-    <section>
+    <details class="atlas-panel-disclosure" open>
+    <summary>Tipuri și niveluri statistice</summary>
+    <div class="atlas-disclosure-body">
     <div id="filter-list" class="filter-list"><span class="muted">Se încarcă…</span></div>
-    </section>
+    </div></details>
     <details id="osm-roles-panel" class="osm-roles-panel" aria-label="Catalog cartografic OSM — 85 relații">
       <summary>Roluri cartografice OSM <span class="osm-roles-count">85</span></summary>
       <p class="hint">85 de relații OpenStreetMap verificate, fără geometrii duplicate. Numele și rolurile sunt descriptive; apartenența juridică de facto nu este certificată. Selectarea folosește exclusiv geometria ACTUAL existentă.</p>
@@ -203,7 +208,7 @@
     <div><span class="eyebrow">Entitate selectată</span><h2 id="details-title" aria-live="polite" aria-atomic="true">Nicio selecție</h2></div>
     <button id="sheet-half" class="mobile-control" type="button" aria-pressed="false" aria-controls="details-body" hidden>Jumătate</button>
     <button id="sheet-expand" class="mobile-control" type="button" aria-expanded="false" aria-controls="details-body" hidden>Extinde</button>
-    <button id="details-close" class="icon-button" type="button" title="Închide detaliile" aria-label="Șterge selecția">×</button>
+    <button id="details-close" class="icon-button atlas-close-button" type="button" title="Închide detaliile" aria-label="Șterge selecția">×</button>
   </div>
   <div id="details-content">
   <p id="details-summary" class="details-summary"></p>
