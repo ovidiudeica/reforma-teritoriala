@@ -168,14 +168,16 @@ try {
     for(const [panel,id] of [['entities','geometries-reset'],['filters','filters-reset']]){
      await page.openPanel(panel);
      positions[panel]=await page.call(function([panel,id]){
-      const host=document.getElementById(panel+'-panel');
-      // Prior browser subtests may have scrolled Filters deeply. Compare
-      // equivalent panel starting positions, not persisted scroll offsets.
+      const host=document.getElementById(panel==='entities'?'search-panel':'filters-panel');
+      // Normalize prior scroll before comparing on-screen placement against the
+      // SAME contextual heading, not against differently nested sections.
       host.scrollTop=0;
       const row=host.querySelector(':scope > .atlas-panel-reset-row');
-      const button=host.querySelector('#'+id),rr=row?.getBoundingClientRect(),r=button?.getBoundingClientRect(),p=host.getBoundingClientRect();
+      const button=host.querySelector('#'+id),rr=row?.getBoundingClientRect(),r=button?.getBoundingClientRect();
+      const p=document.getElementById('atlas-controls').getBoundingClientRect();
+      const heading=document.querySelector('#atlas-controls > .atlas-panel-heading').getBoundingClientRect();
       return {atTop:row===host.querySelector('.atlas-panel-reset-row')&&row.parentElement===host,
-       x:r?.left-p.left,y:r?.top-p.top,width:r?.width,height:r?.height,
+       x:r?.left-p.left,y:r?.top-heading.bottom,width:r?.width,height:r?.height,
        rowHeight:rr?.height,fullWidth:rr?Math.abs(r.width-rr.width):99,
        obsolete:!!document.querySelector('#nistrenia-osm-toggle,#nistrenia-osm-panel,#osm-roles-panel'),
        toolbar:!!document.getElementById('map-geometries-reset')};
@@ -190,6 +192,8 @@ try {
     assert(Math.abs(positions.entities.y-positions.filters.y)<=12,JSON.stringify(positions));
    }
    await page.viewport(1440,900);
+   await page.openPanel('search');
+   assert.equal(await page.evaluate("getComputedStyle(document.getElementById('entities-reset-row')).display"),'none','entities reset must not appear in Search mode');
   });
   await t.test('no runtime errors',async()=>{
    assert.deepEqual(page.errors,[]);
