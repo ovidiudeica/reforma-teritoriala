@@ -2,8 +2,8 @@ import {createAtlasExport} from './atlas-export-ui.mjs';
 import {mapSvg,printSvg} from './atlas-export-visual.mjs';
 import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
-import {validateOsmRolesCatalog,createOsmRolesPanel,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
-import {validateNistreniaOsmNavigation,createNistreniaOsmNavigator} from './atlas-nistrenia-osm.mjs';
+import {validateOsmRolesCatalog,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
+import {validateNistreniaOsmNavigation} from './atlas-nistrenia-osm.mjs';
 import {createNistreniaOperationalView,nistreniaSearchEntities,NISTR_EN_ROOT} from './atlas-nistrenia-jurisdiction.mjs';
 import {fetchVerifiedNistreniaOutlines,createNistreniaOutlineLayers,niOutlineIds} from './atlas-nistrenia-outlines.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
@@ -81,8 +81,6 @@ function geometryRequest(key,load){
 let chunkIndex=null;
 const entityById=new Map();
 let osmRoleById=new Map();
-let osmRolesPanel=null;
-let nistreniaOsmNavigator=null;
 let nistreniaCatalog=null;
 let nistreniaView=null;
 let nistreniaOutlineFeatures=null;
@@ -277,34 +275,6 @@ async function loadIndex(){
  return index;
 }
 
-async function showExistingOsmRoles(ids){
- if(!Array.isArray(ids)||ids.length<1||ids.some(id=>!osmRoleById.has(id)||!entityById.has(id)))throw Error('Relație OSM fără entitate ACTUAL');
- const bboxes=[];
- for(const id of ids){
-  const entity=entityById.get(id);
-  if(!Array.isArray(entity.map?.bbox)||entity.map.bbox.length!==4)throw Error('Geometrie ACTUAL indisponibilă: '+id);
-  bboxes.push(entity.map.bbox);
- }
- for(const id of ids){
-  const entity=entityById.get(id);
-  visibleEntityIds.add(id);
-  activeFilterGroups.add(geometryClass(entity));
-  activeGeometrySubtypes.add(geometrySubtype(entity));
- }
- enableNistreniaOperational();
- refreshGeometryVisibility();
- if(ids.length===1){
-  const id=ids[0];
-  await selectEntity(id,{zoom:true,source:'osm-cartographic-existing'});
- }else{
-  // The bounding rectangle only frames selected existing ACTUAL shapes. It is NOT a new Nistrenia polygon.
-  const west=Math.min(...bboxes.map(b=>b[0])),south=Math.min(...bboxes.map(b=>b[1]));
-  const east=Math.max(...bboxes.map(b=>b[2])),north=Math.max(...bboxes.map(b=>b[3]));
-  map.fitBounds([[south,west],[north,east]],{padding:[30,30],maxZoom:12});
-  await syncTiers();
- }
- atlasUrl?.commit('push');
-}
 async function loadOsmRoleCatalog(){
  // Independent OSM metadata; no extra geometries, legal hierarchy or sovereign state.
  const response=await fetch('public/data/p907216-osm-roles.json',{cache:'no-cache'});
@@ -313,26 +283,17 @@ async function loadOsmRoleCatalog(){
   snapshotId:releaseData.manifest.snapshot_id,
   releaseFingerprint:releaseData.manifest.release_fingerprint_sha256
  });
- const container=document.getElementById('osm-roles-panel');
- if(!container)throw Error('Panoul OSM nu există');
  osmRoleById=verified;
- osmRolesPanel=createOsmRolesPanel({container,document,catalog:verified,
-  onShow:id=>showExistingOsmRoles([id])});
  return verified;
 }
 async function loadNistreniaOsmNavigation(){
- const container=document.getElementById('nistrenia-osm-panel');
- if(!container)throw Error('Panoul Nistrenia OSM lipsește');
  const response=await fetch('public/data/p909-nistrenia-osm-navigation.json',{cache:'no-cache'});
  if(!response.ok)throw Error('Gruparea OSM Nistrenia indisponibilă');
  const catalog=await response.json();
- // This grouping reuses the already verified 85 ACTUAL/OSM IDs; no hierarchy mutation.
+ // This validated source contract still drives the Nistrenia tree; only its duplicate presentation is removed.
  validateNistreniaOsmNavigation(catalog,osmRoleById);
  nistreniaCatalog=catalog;
- nistreniaOsmNavigator=createNistreniaOsmNavigator({
-  container,document,menu:catalog,roles:osmRoleById,onShow:showExistingOsmRoles
- });
- return nistreniaOsmNavigator;
+ return catalog;
 }
 async function loadChunkIndex(){
  const path=releaseData?.manifest?.public_contract?.geometry_chunks?.path;
@@ -867,23 +828,6 @@ atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||nu
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
 document.getElementById('map-home')?.addEventListener('click',()=>{if(atlasUrl)void atlasUrl.action('push',()=>fitRoMd(map,entityById));else fitRoMd(map,entityById);});
 document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmBasemapVisible(!osmBasemapVisible);atlasUrl?.commit('push');if(atlasPanels.state.active==='share')atlasShare?.refresh();});
-function setNistreniaOsmMenuOpen(open){
- const panel=document.getElementById('nistrenia-osm-panel');
- const button=document.getElementById('nistrenia-osm-toggle');
- const tree=document.getElementById('hierarchy-tree');
- if(!panel||!button)return;
- panel.hidden=!open;
- panel.open=Boolean(open);
- button.setAttribute('aria-expanded',String(Boolean(open)));
- button.setAttribute('aria-pressed',String(Boolean(open)));
- if(tree)tree.inert=Boolean(open);
- if(open)panel.querySelector('summary')?.focus?.({preventScroll:true});
- else button.focus?.({preventScroll:true});
-}
-document.getElementById('nistrenia-osm-toggle')?.addEventListener('click',()=>setNistreniaOsmMenuOpen(Boolean(document.getElementById('nistrenia-osm-panel')?.hidden)));
-document.getElementById('nistrenia-osm-panel')?.addEventListener('keydown',event=>{
- if(event.key==='Escape'){event.preventDefault();setNistreniaOsmMenuOpen(false);}
-});
 document.getElementById('filters-reset')?.addEventListener('click',resetGlobalFilters);
 document.getElementById('selection-visibility-action')?.addEventListener('click',()=>{
  const ownOutline=nistreniaOutlines?.has(selectedEntityId);
@@ -909,10 +853,6 @@ const frontendReady=(async()=>{
     const verified=await fetchVerifiedNistreniaOutlines((...args)=>fetch(...args),crypto.subtle,nistreniaCatalog);
     nistreniaOutlineFeatures=verified.features;nistreniaOutlineProof=verified.proof;}
   catch(error){
-   const status=document.getElementById('osm-roles-status');
-   if(status){status.textContent='Catalogul descriptiv OSM nu poate fi verificat pentru acest release ACTUAL.';status.setAttribute('role','alert');}
-   const nistreniaStatus=document.getElementById('nistrenia-osm-status');
-   if(nistreniaStatus){nistreniaStatus.textContent='Gruparea cartografică Nistrenia nu a trecut validarea. Nu sunt afișate date neverificate.';nistreniaStatus.setAttribute('role','alert');}
    console.warn('Catalogul cartografic OSM a fost blocat',error);
   }
   phase='hierarchy';await loadHierarchyTree();
