@@ -64,7 +64,7 @@ try {
       assert.ok(row.rowHeight>=44,JSON.stringify({width,height,zoom,row}));
       assert.equal(row.overflow,false,JSON.stringify({width,height,zoom,row}));
      }
-     await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-r1b2-filters-'+width+'x'+height+'-'+zoom.replace('%','pct')+'.png'));
+     await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-r1b2-filters-'+width+'x'+height+'-'+(zoom==='200%'?'200pct':'100pct')+'.png'));
     }
    } finally {
     await page.evaluate('document.body.style.zoom=""');
