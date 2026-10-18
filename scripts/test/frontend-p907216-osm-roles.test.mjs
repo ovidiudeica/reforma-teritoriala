@@ -72,9 +72,13 @@ test('catalog generated deterministically from P9 dossier and immutable released
  const ui=readFileSync('atlas-osm-roles.mjs','utf8');
  const html=readFileSync('index.html','utf8');
  assert.match(script,/loadOsmRoleCatalog/);
- assert.match(script,/visibleEntityIds.add\(id\)/);
+ assert.match(script,/validateOsmRolesCatalog/);
+ assert.match(script,/validateNistreniaOsmNavigation/);
  assert.match(script,/renderOsmRoleDetails/);
- assert.doesNotMatch(ui,/L\.geoJSON\s*\(|tileLayer\s*\(/);
- assert.match(html,/id="osm-roles-panel"/);
- assert.match(html,/id="osm-roles-list"/);
+ assert.doesNotMatch(ui,/L\\.geoJSON\\s*\\(|tileLayer\\s*\\(/);
+ assert.doesNotMatch(html,/id="osm-roles-panel"|id="osm-roles-list"|id="osm-roles-search"/);
+ assert.doesNotMatch(html,/id="nistrenia-osm-toggle"|id="nistrenia-osm-panel"/);
+ assert.match(html,/id="geometries-reset"/);
+ assert.match(html,/id="filters-reset"/);
+ assert.match(html,/id="nistrenia-catalog-error"/);
 });
