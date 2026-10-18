@@ -72,9 +72,10 @@ test('catalog generated deterministically from P9 dossier and immutable released
  const ui=readFileSync('atlas-osm-roles.mjs','utf8');
  const html=readFileSync('index.html','utf8');
  assert.match(script,/loadOsmRoleCatalog/);
- assert.match(script,/visibleEntityIds.add\(id\)/);
+ assert.match(script,/osmRoleById=verified/);
  assert.match(script,/renderOsmRoleDetails/);
  assert.doesNotMatch(ui,/L\.geoJSON\s*\(|tileLayer\s*\(/);
- assert.match(html,/id="osm-roles-panel"/);
- assert.match(html,/id="osm-roles-list"/);
+ assert.doesNotMatch(html,/id="osm-roles-panel"/);
+ assert.doesNotMatch(html,/id="osm-roles-list"/);
+ assert.match(html,/id="hierarchy-tree"/);
 });
