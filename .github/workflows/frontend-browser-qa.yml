@@ -60,6 +60,7 @@ jobs:
           node --check scripts/audit/p74-contextual-content-browser.mjs
           node --check scripts/audit/p75-modules-map-controls-browser.mjs
           node --check scripts/audit/p76-final-acceptance-browser.mjs
+          node --check scripts/audit/web-r1b-layout-browser.mjs
       - name: CDP code/data separation security regressions
         run: node --test scripts/test/atlas-browser-security.test.mjs
       - name: P9.0.7.2.16 85 source-linked ACTUAL/OSM role tests
@@ -110,6 +111,8 @@ jobs:
         run: node --test scripts/audit/p71-responsive-preview-browser.mjs
       - name: P7.2 shared contextual panes, adaptive navigation and focus lifecycle
         run: node --test scripts/audit/p72-navigation-panels-browser.mjs
+      - name: WEB-R1b native disclosures and regrouped tools — desktop/mobile Chromium
+        run: node --test scripts/audit/web-r1b-layout-browser.mjs
       - name: P7.3 virtual tree model and bounded Chromium hierarchy
         run: |
           node --test scripts/test/frontend-atlas-tree-window.test.mjs scripts/test/frontend-atlas-tree-labels.test.mjs scripts/test/frontend-atlas-evidence.test.mjs
