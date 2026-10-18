@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
-import {launchBrowser,waitFor} from '../test/helpers/atlas-browser.mjs';
+import {launchBrowser,waitFor,delay} from '../test/helpers/atlas-browser.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const browser=await launchBrowser(root),page=await browser.page();
@@ -160,6 +160,41 @@ try {
    await page.click('#filters-panel .filter-section > summary');
    assert.equal(await page.evaluate('location.href'),initial);
    assert.equal(await page.evaluate('JSON.stringify({selected:qaApp.selectedEntityId,visible:[...qaApp.visibleEntityIds].sort()})'),state);
+  });
+  await t.test('R1b.3 reset rows align identically and redundant OSM controls are absent',async()=>{
+   try{
+    for(const [width,height,zoom] of [[1440,900,'100%'],[390,844,'100%'],[844,390,'100%'],[640,360,'100%'],[1440,900,'200%']]){
+     await page.viewport(width,height);
+     await page.evaluate('document.body.style.zoom="100%"');
+     if(zoom!=='100%')await page.call(function(value){document.body.style.zoom=value;},zoom);
+     await delay(120);
+     const inspect=async(panel,id)=>{
+      await page.openPanel(panel);await delay(80);
+      const data=await page.call(function(id){
+       const button=document.getElementById(id),host=document.getElementById('atlas-controls'),heading=host.querySelector('.atlas-panel-heading');
+       const r=button.getBoundingClientRect(),h=heading.getBoundingClientRect(),hostRect=host.getBoundingClientRect();
+       const hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+       return {left:r.left-hostRect.left,top:r.top-h.bottom,width:r.width,height:r.height,
+        hit:hit===button||button.contains(hit),overflow:document.documentElement.scrollWidth>innerWidth};
+      },id);
+      await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence',
+       'web-r1b-r1b3-reset-'+panel+'-'+width+'x'+height+'-'+(zoom==='200%'?'200pct':'100pct')+'.png'));
+      return data;
+     };
+     const entities=await inspect('entities','geometries-reset');
+     const filters=await inspect('filters','filters-reset');
+     assert.ok(Math.abs(entities.left-filters.left)<=1,JSON.stringify({width,height,zoom,entities,filters}));
+     assert.ok(Math.abs(entities.top-filters.top)<=1,JSON.stringify({width,height,zoom,entities,filters}));
+     assert.ok(Math.abs(entities.width-filters.width)<=1,JSON.stringify({width,height,zoom,entities,filters}));
+     assert.ok(entities.width>=44&&entities.height>=44&&filters.width>=44&&filters.height>=44,JSON.stringify({width,height,zoom,entities,filters}));
+     assert.ok(entities.hit&&filters.hit,JSON.stringify({width,height,zoom,entities,filters}));
+     assert.equal(entities.overflow||filters.overflow,false,JSON.stringify({width,height,zoom,entities,filters}));
+     assert.deepEqual(await page.evaluate("['nistrenia-osm-toggle','nistrenia-osm-panel','osm-roles-panel','osm-roles-search','osm-roles-filter','osm-roles-list'].map(id=>Boolean(document.getElementById(id)))"),[false,false,false,false,false,false]);
+    }
+   }finally{
+    await page.evaluate('document.body.style.zoom=""');
+    await page.viewport(1440,900);
+   }
   });
   await t.test('no runtime errors',async()=>{
    assert.deepEqual(page.errors,[]);

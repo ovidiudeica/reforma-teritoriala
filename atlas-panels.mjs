@@ -14,7 +14,7 @@ export const panelDefinitions=Object.freeze({
  measure:{title:'Măsoară',content:'measure-panel',trigger:'measure-toggle'}
 });
 export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
- const el=id=>document.getElementById(id),frame=el('atlas-controls'),main=el('atlas-main'),closeButton=el('drawer-close'),backdrop=el('drawer-backdrop'),title=el('atlas-panel-title'),search=el('search-panel'),more=el('navigation-more'),map=el('map');
+ const el=id=>document.getElementById(id),frame=el('atlas-controls'),main=el('atlas-main'),closeButton=el('drawer-close'),backdrop=el('drawer-backdrop'),title=el('atlas-panel-title'),search=el('search-panel'),more=el('navigation-more'),map=el('map'),resetActions=el('atlas-panel-reset-actions'),geometryReset=el('geometries-reset'),filtersReset=el('filters-reset');
  let lastFocused=document.activeElement;
  document.addEventListener?.('focusin',event=>{if(event.target!==document.body)lastFocused=event.target;});
  const listeners=new Set(),beforeListeners=new Set(),buttons=Object.fromEntries(Object.entries(panelDefinitions).map(([key,value])=>[key,el(value.trigger)]));
@@ -33,6 +33,10 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
   const shown=opened?el(panelDefinitions[active].content):null;
   for(const content of contents){content.hidden=content!==shown;content.inert=content!==shown;}
   title.textContent=opened?panelDefinitions[active].title:'Navigare';search.hidden=!['entities','search'].includes(active);
+  const resetOwner=opened&&['entities','filters'].includes(active);
+  if(resetActions)resetActions.hidden=!resetOwner;
+  if(geometryReset)geometryReset.hidden=active!=='entities';
+  if(filtersReset)filtersReset.hidden=active!=='filters';
   closeButton.hidden=!opened;backdrop.hidden=!overlay;
   for(const [key,button]of Object.entries(buttons)){if(!button)continue;button.hidden=false;button.setAttribute('aria-pressed',String(key===active));button.setAttribute('aria-expanded',String(key===active));button.setAttribute('aria-controls','atlas-controls');}
   more?.setAttribute('aria-expanded',String(menu));

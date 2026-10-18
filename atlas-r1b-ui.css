@@ -74,7 +74,6 @@
 }
 #atlas-controls .filter-actions {gap:6px;flex-wrap:wrap}
 #atlas-controls .filter-actions button {padding:7px 12px;text-decoration:none;flex:0 1 auto}
-#atlas-controls #filters-reset {margin:4px 0 8px}
 #atlas-controls #copy-link {background:var(--atlas-ui-accent);border-color:var(--atlas-ui-accent);color:#fff}
 #atlas-controls #copy-link:hover {background:#17492f;color:#fff}
 /* X means close only. The actionable meaning remains exposed through aria-label. */
@@ -104,7 +103,7 @@
 /* Native, independently toggleable disclosures: keyboard/ARIA owned by <details>. */
 #atlas-controls .atlas-panel-disclosure,
 #details-panel .atlas-panel-disclosure,
-#atlas-controls :is(.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions) {
+#atlas-controls :is(.atlas-filter-subtypes,.atlas-info-section,.atlas-export-actions) {
  min-width:0;
  margin:8px 0 12px;
  border:1px solid var(--atlas-ui-border);
@@ -112,7 +111,7 @@
  background:var(--atlas-ui-surface);
  box-shadow:var(--atlas-ui-shadow);
 }
-#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary,
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.atlas-info-section,.atlas-export-actions)>summary,
 #details-panel .atlas-panel-disclosure>summary {
  display:flex;
  align-items:center;
@@ -134,9 +133,9 @@
  list-style:none;
  cursor:pointer;
 }
-#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary::-webkit-details-marker,
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.atlas-info-section,.atlas-export-actions)>summary::-webkit-details-marker,
 #details-panel .atlas-panel-disclosure>summary::-webkit-details-marker {display:none}
-#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary::after,
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.atlas-info-section,.atlas-export-actions)>summary::after,
 #details-panel .atlas-panel-disclosure>summary::after {
  content:"";
  width:9px;height:9px;flex:0 0 9px;
@@ -144,9 +143,9 @@
  transform:rotate(45deg);transition:transform .12s ease;
  margin-right:3px;margin-top:-4px;
 }
-#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)[open]>summary::after,
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.atlas-info-section,.atlas-export-actions)[open]>summary::after,
 #details-panel .atlas-panel-disclosure[open]>summary::after {transform:rotate(225deg);margin-top:4px}
-#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary:hover,
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.atlas-info-section,.atlas-export-actions)>summary:hover,
 #details-panel .atlas-panel-disclosure>summary:hover {background:var(--atlas-ui-hover)}
 #details-panel .atlas-panel-disclosure>summary h3 {
  margin:0;
@@ -220,7 +219,7 @@
  line-height:1.5;
  overflow-wrap:normal;
 }
-#atlas-controls :is(.atlas-info-section,.osm-roles-panel,.atlas-export-actions)>:not(summary) {margin-left:10px;margin-right:10px}
+#atlas-controls :is(.atlas-info-section,.atlas-export-actions)>:not(summary) {margin-left:10px;margin-right:10px}
 #atlas-controls .atlas-panel-disclosure :is(label,summary) {overflow-wrap:anywhere}
 #atlas-controls .atlas-release-states {
  margin:10px 0;
@@ -243,8 +242,6 @@
 @container atlas (max-width:899px){
  #details-panel .details-head h2 {white-space:normal;overflow:visible;text-overflow:clip}
 }
-#atlas-controls .atlas-tree-tools {margin:0 0 8px}
-#atlas-controls .atlas-tree-tools>.atlas-disclosure-body {padding:8px}
 #atlas-controls #hierarchy-tree {min-height:96px}
 /* Rail: stable order in the DOM, a subtle divider between command groups. */
 #atlas-main .atlas-navigation-rail {background:var(--atlas-ui-soft);border-color:var(--atlas-ui-border);gap:5px}
@@ -293,12 +290,9 @@
     at 844x390, intercepting clicks on visibly mounted rows. Its triggers
     remain available after closing the drawer using the always-visible X. */
  #atlas-main #atlas-controls:not([hidden]) {bottom:0;z-index:1451}
- /* Keep the virtual tree inside the clipped main row. R1b's open tree-tools
-    disclosure must consume no more vertical space than its 44px summary +
-    44px action row, leaving at least one complete 44px tree target. */
- #atlas-main #atlas-controls>#entities-panel {overflow:hidden;padding:2px 10px}
- #atlas-main #atlas-controls .atlas-tree-tools {margin:0}
- #atlas-main #atlas-controls .atlas-tree-tools>.atlas-disclosure-body {padding:0 4px}
+ /* Keep the virtual tree inside the clipped main row. The shared reset row
+    stays outside the virtualized tree and leaves at least one complete target. */
+ #atlas-main #atlas-controls>#entities-panel {overflow:hidden}
  /* 46px border-box => 44px scroll client area: one complete tactile row. */
  #atlas-main #atlas-controls #hierarchy-tree {min-height:46px}
  /* Compact landscape: don't cram 10+ icons into one 600px bottom row. */
@@ -326,6 +320,6 @@
  #atlas-controls .filter-section,#atlas-controls #drawer-close,#details-panel .atlas-close-button,
  #atlas-controls :is(.action-button,.filter-actions button) {border-color:ButtonText}
  #atlas-main .atlas-rail-button[aria-pressed=true] {border:2px solid Highlight;background:Canvas;color:CanvasText}
- #atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel)>summary {background:Canvas;color:CanvasText}
+ #atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes)>summary {background:Canvas;color:CanvasText}
  #atlas-main .leaflet-control-zoom>#map-geometries-reset {border-top-color:ButtonText}
 }

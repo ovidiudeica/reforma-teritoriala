@@ -9,8 +9,6 @@ export const osmRoleLabels=Object.freeze({
  OSM_VILLAGE_BOUNDARY:'Limită de sat (OSM)',
  OSM_LEVEL4_MUNICIPALITY_BOUNDARY:'Limită de municipiu, nivel 4 (OSM)'
 });
-const match= (value,search)=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('ro').includes(search);
-const norm=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('ro').trim();
 const validId=id=>typeof id==='string'&&/^osm-r[1-9]\d*$/.test(id);
 const positiveInt=value=>Number.isSafeInteger(value)&&value>0;
 const fail=message=>{throw Error('P9 OSM cartografic: '+message)};
@@ -72,43 +70,4 @@ export function renderOsmRoleDetails({container,document,row}){
  const link=add(document,section,'a','Deschide relația în OpenStreetMap');
  link.href=row.osm_url;link.target='_blank';link.rel='noopener noreferrer';
  return section;
-}
-export function createOsmRolesPanel({container,document,catalog,onShow}){
- if(!container||!document||typeof onShow!=='function')fail('panou fără dependențe');
- const rows=[...catalog.values()];
- const search=container.querySelector('#osm-roles-search');
- const filter=container.querySelector('#osm-roles-filter');
- const list=container.querySelector('#osm-roles-list');
- const status=container.querySelector('#osm-roles-status');
- if(!search||!filter||!list||!status)fail('controale OSM indisponibile');
- // Use fixed display-only role strings. Never use official legal hierarchy labels.
- for(const role of [...new Set(rows.map(row=>row.role))].sort()){
-  const option=add(document,filter,'option',osmRoleLabels[role]);option.value=role;
- }
- function refresh(){
-  const term=norm(search.value),role=filter.value;
-  const matches=rows.filter(row=>(!role||row.role===role)&&(!term||[row.display_name,row.osm_name,row.osm_name_ro,row.id,row.role_label].some(value=>match(value,term))));
-  list.replaceChildren();
-  for(const row of matches){
-   const item=add(document,list,'li',null,'osm-role-entry');
-   const details=add(document,item,'span',null,'osm-role-entry-text');
-   add(document,details,'strong',row.display_name);
-   add(document,details,'small',row.role_label+' · '+row.id);
-   const button=add(document,item,'button','Arată','action-button');
-   button.type='button';button.dataset.osmRoleId=row.id;
-   button.setAttribute('aria-label','Arată geometria existentă pentru '+row.display_name+' ('+row.id+')');
-   button.addEventListener('click',async()=>{
-    button.disabled=true;
-    status.textContent='Se selectează '+row.display_name+'…';
-    try{await onShow(row.id);status.textContent='Geometria ACTUAL existentă a fost selectată pentru '+row.display_name+'.';}
-    catch(error){status.textContent='Nu s-a putut selecta geometria '+row.id+'.';}
-    finally{button.disabled=false;}
-   });
-  }
-  status.textContent=matches.length+' din 85 de relații OSM. Geometriile sunt reutilizate din ACTUAL; statutul juridic de facto nu este certificat.';
- }
- search.addEventListener('input',refresh);
- filter.addEventListener('change',refresh);
- refresh();
- return {refresh,rows:new Map(catalog),destroy(){list.replaceChildren();filter.replaceChildren();}};
 }

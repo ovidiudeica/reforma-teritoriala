@@ -58,6 +58,10 @@
 <button id="drawer-backdrop" class="drawer-backdrop" type="button" aria-label="Închide navigarea" tabindex="-1" hidden></button>
 <aside id="atlas-controls" class="controls" aria-labelledby="atlas-panel-title" tabindex="-1">
 <div class="atlas-panel-heading"><h2 id="atlas-panel-title">Entități</h2><button id="drawer-close" class="atlas-close-button" type="button" aria-label="Închide panoul de navigare" title="Închide panoul"><span aria-hidden="true">×</span></button></div>
+<div id="atlas-panel-reset-actions" class="atlas-panel-reset-row" hidden>
+  <button id="geometries-reset" class="action-button" type="button" aria-disabled="true" hidden>Resetează geometriile</button>
+  <button id="filters-reset" class="action-button" type="button" disabled hidden>Resetează filtrele</button>
+</div>
   <section id="search-panel">
     <h3 class="sr-only">Căutare</h3>
     <div class="atlas-search-input-row"><input id="entity-search" class="search" type="search" aria-label="Caută entități teritoriale" aria-describedby="search-help" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Nume, SIRUTA/CUATM, cod statistic sau OSM…" autocomplete="off"><button id="search-clear" type="button" class="action-button" aria-label="Șterge căutarea" title="Șterge căutarea">×</button></div>
@@ -115,26 +119,12 @@
   </section>
   <section id="entities-panel">
     <h3 class="sr-only">Arbore</h3>
-    <details class="atlas-panel-disclosure atlas-tree-tools" open><summary>Opțiuni arbore</summary><div class="atlas-disclosure-body"><div class="atlas-entities-actions">
-      <button id="geometries-reset" class="action-button" type="button" aria-disabled="true">Resetează geometriile</button>
-      <div class="nistrenia-osm-anchor">
-        <button id="nistrenia-osm-toggle" class="action-button" type="button" aria-controls="nistrenia-osm-panel" aria-expanded="false" aria-pressed="false">Nistrenia · OSM</button>
-        <details id="nistrenia-osm-panel" class="nistrenia-osm-panel" aria-label="Nistrenia — grupare cartografică OpenStreetMap" hidden>
-      <summary>Nistrenia · OSM <span class="nistrenia-osm-count">85</span></summary>
-      <p id="nistrenia-osm-status" role="status" aria-live="polite">Se verifică cele 85 de relații OSM…</p>
-      <div id="nistrenia-osm-groups"></div>
-        </details>
-      </div>
-    </div>
-
-    </div></details>
     <p id="atlas-tree-help" class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
     <div id="hierarchy-tree" class="hierarchy-tree" aria-describedby="atlas-tree-help"><p class="muted">Se încarcă arborele teritorial…</p></div>
   </section>
 
   <section id="filters-panel" class="atlas-filters-panel" aria-label="Filtre geometrice" hidden inert>
-<button id="filters-reset" class="action-button" type="button" disabled>Resetează filtrele</button>
     <p class="hint">Filtrele limitează geometriile deja bifate în arbore; nu modifică bifele entităților.</p>
     <details class="atlas-panel-disclosure" open>
     <summary>Jurisdicții</summary>
@@ -151,18 +141,7 @@
     <div class="atlas-disclosure-body">
     <div id="filter-list" class="filter-list"><span class="muted">Se încarcă…</span></div>
     </div></details>
-    <details id="osm-roles-panel" class="osm-roles-panel" aria-label="Catalog cartografic OSM — 85 relații">
-      <summary>Roluri cartografice OSM <span class="osm-roles-count">85</span></summary>
-      <p class="hint">85 de relații OpenStreetMap verificate, fără geometrii duplicate. Numele și rolurile sunt descriptive; apartenența juridică de facto nu este certificată. Selectarea folosește exclusiv geometria ACTUAL existentă.</p>
-      <label for="osm-roles-search">Caută nume sau relație OSM</label>
-      <input id="osm-roles-search" type="search" autocomplete="off" placeholder="Nume, relație OSM" aria-controls="osm-roles-list">
-      <label for="osm-roles-filter">Tip de perimetru OSM</label>
-      <select id="osm-roles-filter" aria-controls="osm-roles-list"><option value="">Toate rolurile OSM</option></select>
-      <p id="osm-roles-status" class="hint" role="status" aria-live="polite">Se verifică indexul ACTUAL și sursa OSM…</p>
-      <ul id="osm-roles-list" class="osm-roles-list" aria-label="Relații OSM verificate"></ul>
-      <p class="hint">Sursă: © OpenStreetMap contributors, ODbL · 12.10.2026. Limitele juridice nu sunt certificate prin aceste etichete.</p>
-    </details>
-  </section>
+      </section>
 
 <section id="atlas-info-dialog" hidden inert>
 <div class="atlas-info-body">
