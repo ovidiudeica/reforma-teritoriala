@@ -110,6 +110,18 @@ try{
    await page.click('button[aria-label="Niciuna — Tipuri administrative"]');
    await waitFor(async()=>(await snapshot()).highlight>0,'statistical OR retains shared polygon');
    evidence.filters.push('admin OFF / statistical ON -> coalesced visible');
+   // WEB-R1b: statistical controls are inside an independently collapsed native
+   // disclosure. Open it as a user would before interacting with its checkbox.
+   const statisticalDisclosure=await page.evaluate(`(()=>{
+    const items=[...document.querySelectorAll('#filter-list > details.filter-section')];
+    const section=items.find(d=>d.querySelector(':scope > summary')?.textContent.trim()==='Niveluri statistice');
+    return section?{found:true,open:section.open,index:items.indexOf(section)}:{found:false};
+   })()`);
+   assert.equal(statisticalDisclosure.found,true,'statistical accordion exists');
+   if(!statisticalDisclosure.open){
+    await page.click('#filter-list > details.filter-section:nth-of-type('+(statisticalDisclosure.index+1)+') > summary');
+   }
+   assert.equal(await page.evaluate(`[...document.querySelectorAll('#filter-list > details.filter-section')].find(d=>d.querySelector(':scope > summary')?.textContent.trim()==='Niveluri statistice')?.open`),true);
    await page.click('input[data-kind=statistical][data-filter="3"]');
    await waitFor(async()=>{const s=await snapshot();return s.highlight===0&&/ascuns/i.test(s.hidden);},'both roles OFF hides shared polygon');
    evidence.filters.push('admin OFF / statistical OFF -> coalesced hidden');
