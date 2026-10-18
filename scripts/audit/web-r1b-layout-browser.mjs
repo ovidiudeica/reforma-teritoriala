@@ -168,7 +168,11 @@ try {
     for(const [panel,id] of [['entities','geometries-reset'],['filters','filters-reset']]){
      await page.openPanel(panel);
      positions[panel]=await page.call(function([panel,id]){
-      const host=document.getElementById(panel+'-panel'),row=host.querySelector(':scope > .atlas-panel-reset-row');
+      const host=document.getElementById(panel+'-panel');
+      // Prior browser subtests may have scrolled Filters deeply. Compare
+      // equivalent panel starting positions, not persisted scroll offsets.
+      host.scrollTop=0;
+      const row=host.querySelector(':scope > .atlas-panel-reset-row');
       const button=host.querySelector('#'+id),rr=row?.getBoundingClientRect(),r=button?.getBoundingClientRect(),p=host.getBoundingClientRect();
       return {atTop:row===host.querySelector('.atlas-panel-reset-row')&&row.parentElement===host,
        x:r?.left-p.left,y:r?.top-p.top,width:r?.width,height:r?.height,
