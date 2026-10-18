@@ -59,3 +59,17 @@ test('P9.0.9.5 URLs default to 3 outlines RO MD NI, while NI districts and 85 ch
  assert.deepEqual(parseUrlState('v=1&j=NI',config).jurisdictions,['NI']);
  assert.equal(parseUrlState('v=2&j=NI',config).visibleOperationalOutlineIds[0],'view-nistrenia');
 });
+
+test('P9.0.9.5 selected source outlines round-trip without entering ACTUAL visibility or identities',()=>{
+ const config=createUrlConfig({entityById:byId,nodeById:view.nodes,rootIds:tree.root_ids,treeRootIds:view.rootIds,operationalOutlineIds:niOutlineIds,filterIndex:createGeometryFilterIndex(index.entities)});
+ for(const id of niOutlineIds){
+  const state=parseUrlState('v=2&e='+id+'&x='+id,config);
+  assert.equal(state.entityId,id);
+  assert.deepEqual(state.visibleEntityIds.slice().sort(),tree.root_ids.slice().sort());
+  assert.deepEqual(state.visibleOperationalOutlineIds,['view-nistrenia']);
+  assert.deepEqual(parseUrlState(serializeUrlState(state,config),config),state);
+  assert.equal(config.entityIds.has(id),false);
+ }
+ assert.equal(parseUrlState('v=2&e=view-nistrenia-unverified',config).entityId,null);
+ assert.equal(byId.size,5848);assert.equal(official.size,5848);
+});

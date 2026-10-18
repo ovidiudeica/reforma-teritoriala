@@ -409,16 +409,17 @@ function resetGeometries(){
 }
 for(const id of ['geometries-reset','map-geometries-reset'])document.getElementById(id)?.addEventListener('click',resetGeometries);
 function updateSelectionVisibility(){
- const entity=entityById.get(selectedEntityId);
+ const ownOutline=nistreniaOutlines?.has(selectedEntityId);
+ const entity=ownOutline?nistreniaView.nodes.get(selectedEntityId):entityById.get(selectedEntityId);
  const status=document.getElementById('selection-visibility');
  const action=document.getElementById('selection-visibility-action');
  if(!status)return;
  if(action)action.hidden=true;
  if(!entity){status.textContent='';return;}
- if(!entity.map?.bbox){status.textContent='Geometria acestei entități nu este disponibilă în snapshot.';return;}
- const checked=visibleEntityIds.has(entity.id);
- const jurisdictionAllowed=jurisdictionChecked(operationalJurisdiction(entity));
- if(isVisible(entity)&&jurisdictionAllowed){status.textContent='';return;}
+ if(!ownOutline&&!entity.map?.bbox){status.textContent='Geometria acestei entități nu este disponibilă în snapshot.';return;}
+ const checked=(ownOutline?visibleOperationalOutlineIds:visibleEntityIds).has(entity.id);
+ const jurisdictionAllowed=jurisdictionChecked(ownOutline?'NI':operationalJurisdiction(entity));
+ if((ownOutline?checked:isVisible(entity))&&jurisdictionAllowed){status.textContent='';return;}
  if(!checked){
   status.textContent='Geometria este ascunsă. Activează explicit această entitate pentru afișare; filtrele rămân independente.';
   if(action){action.hidden=false;action.textContent='Afișează geometria';action.dataset.action='show';}
@@ -431,14 +432,7 @@ function updateSelectionVisibility(){
 function searchEntitiesWithNistrenia(){
  return [...entityById.values(),...nistreniaSearchEntities(nistreniaView,entityById)];
 }
-async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
- if(!nistreniaView?.isVirtual(id))return selectEntity(id,options);
- const actualId=nistreniaView.toActual.get(id);
- if(actualId){await selectEntity(actualId,options);atlasTree?.select(id);return;}
- if(!nistreniaOutlines?.has(id))throw Error('Nistrenia: independent OSM outline unavailable '+id);
- atlasTree?.select(id);
- // Parent selection never checks any descendant geometry.
- if(options.zoom!==false)map.fitBounds(nistreniaOutlines.bounds(id),{padding:[30,30],maxZoom:12});
+function renderNistreniaDetails(id){
  const name=nistreniaView.nodes.get(id)?.display_name||'Nistrenia';
  const osmId=nistreniaOutlineFeatures.get(id).properties.osm_relation_id;
  const source=nistreniaOutlineProof.relations.find(item=>item.id===id);
@@ -446,6 +440,26 @@ async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
  document.getElementById('details-summary').textContent='Contur propriu OSM · grupare operațională de facto';
  document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Perimetru OSM descriptiv</h3><p>Conturul OSM este independent de cele 85 de geometrii ACTUAL componente. Selectarea acestui nume nu activează descendenți. Nistrenia nu este stat recunoscut; teritoriul aparține juridic Republicii Moldova. Limita OSM nu certifică o nouă delimitare juridică.</p><p>Relația OSM '+osmId+' · versiunea '+source.relation_version+' · '+escapeHtml(source.relation_timestamp)+' · © OpenStreetMap contributors, ODbL.</p><p><a href="https://www.openstreetmap.org/relation/'+osmId+'" target="_blank" rel="noopener noreferrer">Sursă OSM</a></p></section>';
 }
+async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
+ if(!nistreniaView?.isVirtual(id))return selectEntity(id,options);
+ const actualId=nistreniaView.toActual.get(id);
+ if(actualId){await selectEntity(actualId,options);atlasTree?.select(id);return;}
+ const apply=()=>{
+  if(!nistreniaOutlines?.has(id))throw Error('Nistrenia: independent OSM outline unavailable '+id);
+  atlasTree?.select(id);
+  selectedEntityId=id;
+  if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
+  document.getElementById('geometry-status').textContent='';
+  atlasMobile.selection(id,{source:options.source});
+  renderNistreniaDetails(id);updateSelectionVisibility();rerenderLoadedTiers();
+  atlasAdvanced?.record(id);
+  if(atlasPanels.state.active==='share')atlasShare?.refresh();
+  // A parent name selects only its own UI/source identity, never its descendants.
+  if(options.zoom!==false)map.fitBounds(nistreniaOutlines.bounds(id),{padding:[30,30],maxZoom:12,...(options.source==='url'?{animate:false}:{})});
+ };
+ return atlasUrl?atlasUrl.action('push',apply):apply();
+}
+
 function wireSearch(){
   const input=document.getElementById('entity-search');
   atlasSearch=createAtlasSearch({input,clearButton:document.getElementById('search-clear'),empty:document.getElementById('search-empty'),container:document.getElementById('search-results'),status:document.getElementById('search-status'),document,index:createSearchIndex([...entityById.values()],hierarchyNodeById),onSelect:async(id,options)=>{setFiltersPanelOpen(false);setNavigationTab('entities');if(nistreniaView?.isVirtual(id))await selectNistreniaNode(id,options);else await selectEntity(id,options);}});
@@ -530,7 +544,9 @@ function renderHierarchyTree(){
   onSelect:(id,options)=>(nistreniaView?.isVirtual(id)?selectNistreniaNode(id,options):selectEntity(id,options)).catch(console.error)
  });
  if(selectedEntityId){
-  atlasTree.select(selectedEntityId);renderDetails(entityById.get(selectedEntityId));updateSelectionVisibility();
+  atlasTree.select(selectedEntityId);
+  if(nistreniaOutlines?.has(selectedEntityId))renderNistreniaDetails(selectedEntityId);else renderDetails(entityById.get(selectedEntityId));
+  updateSelectionVisibility();
  }
 }
 function selectedPath(id){
@@ -767,6 +783,7 @@ function zoomToEntity(entity,options={}){
  if(Array.isArray(b)&&b.length===4)map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[30,30],maxZoom:12,...options});
 }
 async function selectEntity(id,options=false,clickedLayer=null){
+ if(nistreniaOutlines?.has(id)&&nistreniaView?.isVirtual(id))return selectNistreniaNode(id,typeof options==='boolean'?{zoom:options}:options);
  try{return await (atlasUrl?atlasUrl.action('push',()=>applySelection(id,options,clickedLayer)):applySelection(id,options,clickedLayer));}
  catch(error){if(selectedEntityId===id)document.getElementById('geometry-status').textContent='Geometria nu a putut fi încărcată pentru '+id+'. Identitatea și selecția rămân disponibile.';throw error;}
 }
@@ -844,7 +861,7 @@ async function initializeUrlState(){
  const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,treeRootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,operationalOutlineIds:nistreniaOutlines?niOutlineIds:[],filterIndex:geometryFilterIndex});
  atlasUrl=createAtlasUrlState({browser,config,capture:captureUrlState,apply:applyUrlState});await atlasUrl.restore();atlasShare?.refresh();
 }
-atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>entityById.get(selectedEntityId)||null});
+atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>nistreniaOutlines?.has(selectedEntityId)?{...nistreniaView.nodes.get(selectedEntityId),urlVersion:2}:entityById.get(selectedEntityId)||null});
 
 
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
@@ -869,10 +886,11 @@ document.getElementById('nistrenia-osm-panel')?.addEventListener('keydown',event
 });
 document.getElementById('filters-reset')?.addEventListener('click',resetGlobalFilters);
 document.getElementById('selection-visibility-action')?.addEventListener('click',()=>{
- const entity=entityById.get(selectedEntityId);if(!entity)return;
+ const ownOutline=nistreniaOutlines?.has(selectedEntityId);
+ const entity=ownOutline?nistreniaView.nodes.get(selectedEntityId):entityById.get(selectedEntityId);if(!entity)return;
  const action=document.getElementById('selection-visibility-action');
  if(action?.dataset.action==='show'){
-  visibleEntityIds.add(entity.id);refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
+  (ownOutline?visibleOperationalOutlineIds:visibleEntityIds).add(entity.id);refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
  }else if(action?.dataset.action==='filters'){
   if(atlasMobile.state.mobile&&!atlasMobile.state.drawer)atlasMobile.openDrawer();
   setFiltersPanelOpen(true);

@@ -33,6 +33,7 @@ jobs:
           node --check scripts/process/build-p9095-outline-evidence.mjs
           node --check scripts/test/frontend-p9095-outline-parity.test.mjs
           node --check scripts/test/frontend-p9095-outline-browser.test.mjs
+          node --check scripts/test/frontend-p9095-selection-browser.test.mjs
           node --check scripts/test/frontend-p9094-operational-browser.test.mjs
           node --check scripts/test/frontend-p909-nistrenia-browser.test.mjs
           node --check atlas-tree-window.mjs
@@ -75,6 +76,8 @@ jobs:
           node --test scripts/test/frontend-p9095-outline-parity.test.mjs
       - name: P9.0.9.5 own outline/checkbox parity, URL, Straturi, desktop/mobile Chromium
         run: node --test scripts/test/frontend-p9095-outline-browser.test.mjs
+      - name: P9.0.9.5 cold parent card, URL/share and independent selection lifecycle
+        run: node --test scripts/test/frontend-p9095-selection-browser.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
@@ -157,6 +160,7 @@ jobs:
             /tmp/atlas-browser-evidence/p74-*
             /tmp/atlas-browser-evidence/p75-*
             /tmp/atlas-browser-evidence/p76-*
+            /tmp/atlas-browser-evidence/p9095-*
             /tmp/atlas-browser-evidence/p801-*
             /tmp/atlas-browser-evidence/p802-*
             /tmp/atlas-browser-evidence/p81-*
