@@ -60,6 +60,7 @@ try {
    assert.equal(await page.evaluate("qaApp.visibleOperationalOutlineIds.has('view-nistrenia')"),false);
    await page.click('#geometries-reset');
    assert.equal(await page.evaluate("qaApp.visibleOperationalOutlineIds.has('view-nistrenia')"),true);
+   await page.openPanel('filters'); // Independent next test starts in its declared context.
   });
   await t.test('desktop grouped rail, close X, filters do not mutate map or URL',async()=>{
    const d=await page.evaluate(`(()=>{
