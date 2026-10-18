@@ -203,7 +203,7 @@
   overscroll-behavior:contain;
   align-content:start;
  }
- #atlas-main.atlas-navigation-more .atlas-rail-button {display:flex;order:1}
+ #atlas-main.atlas-navigation-more .atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)) {display:flex;order:1}
  #atlas-main.atlas-navigation-more :is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more) {order:0}
  #atlas-main .atlas-rail-button[data-rail-break=true] {margin-top:0}
  #atlas-main .atlas-rail-button[data-rail-break=true]::before {display:none}
@@ -224,7 +224,7 @@
   overflow-y:auto;
   align-content:start;
  }
- #atlas-main.atlas-navigation-more .atlas-rail-button {display:flex}
+ #atlas-main.atlas-navigation-more .atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)) {display:flex}
 }
 @media(prefers-reduced-motion:reduce){
  #atlas-main .atlas-rail-button,
