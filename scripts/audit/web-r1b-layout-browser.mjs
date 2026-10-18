@@ -149,7 +149,7 @@ try {
       assert.ok(data.columns&&data.columns!=='none');
      }
      await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence',
-      'web-r1b3-'+width+'x'+height+'-'+panel+'.png'));
+      'web-r1b-r1b3-'+width+'x'+height+'-'+panel+'.png'));
     }
    }
    await page.viewport(1440,900);
