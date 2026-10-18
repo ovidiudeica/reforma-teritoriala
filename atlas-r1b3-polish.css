@@ -191,3 +191,29 @@
  #atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-group,.atlas-filter-subtypes,.atlas-comparison-card),
  #atlas-controls :is(.atlas-share-actions,.atlas-advanced-row-actions,.atlas-comparison-actions) :is(a,button) {border-color:ButtonText}
 }
+
+/* WEB-R1b.4: reset controls at exactly the same location in both panels.
+   Map toolbar reset (#map-geometries-reset) deliberately remains unchanged. */
+#atlas-controls > :is(#entities-panel,#filters-panel) > .atlas-panel-reset-row {
+ display:flex;
+ align-items:stretch;
+ width:100%;
+ min-width:0;
+ margin:0 0 10px;
+ padding:0;
+ box-sizing:border-box;
+}
+#atlas-controls > :is(#entities-panel,#filters-panel) > .atlas-panel-reset-row > :is(#geometries-reset,#filters-reset) {
+ display:inline-flex;
+ flex:1 1 auto;
+ align-items:center;
+ justify-content:center;
+ box-sizing:border-box;
+ min-width:44px;
+ min-height:44px;
+ width:100%;
+ max-width:none;
+ margin:0;
+ padding:8px 12px;
+ text-align:center;
+}
