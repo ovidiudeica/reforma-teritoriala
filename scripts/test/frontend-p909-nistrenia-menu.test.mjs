@@ -46,15 +46,19 @@ test('P9.0.9 menu fails closed on geometries, fake parent grouping, legal promot
  reject(m=>m.groups[6].role_ids.pop());
  reject(m=>m.groups[2].osm_url='https://example.invalid');
 });
-test('P9.0.9 menu is deterministically generated and mounted outside the ACTUAL legal tree',()=>{
+test('P9.0.9 source menu is deterministic and drives the operational tree without duplicate presentation UI',()=>{
  const out=execFileSync(process.execPath,['scripts/process/build-p909-nistrenia-menu.mjs','--check'],{encoding:'utf8'});
  assert.match(out,/P909_MENU_REPRO_PASS/);
  const js=readFileSync('app.js','utf8'),html=readFileSync('index.html','utf8');
- assert.match(html,/id="nistrenia-osm-panel"/);
- assert.match(html,/Nistrenia · OSM/);
+ assert.doesNotMatch(html,/id="nistrenia-osm-panel"/);
+ assert.doesNotMatch(html,/id="nistrenia-osm-toggle"/);
  assert.match(js,/loadNistreniaOsmNavigation/);
- assert.match(js,/showExistingOsmRoles/);
+ assert.match(js,/createNistreniaOperationalView/);
+ assert.doesNotMatch(js,/showExistingOsmRoles/);
  const module=readFileSync('atlas-nistrenia-osm.mjs','utf8');
+ const tree=readFileSync('atlas-nistrenia-jurisdiction.mjs','utf8');
+ assert.match(tree,/NISTR_EN_ROOT='view-nistrenia'/);
+ assert.match(tree,/roleIds\.size!==85/);
  assert.doesNotMatch(module,/L\.geoJSON\s*\(|tileLayer\s*\(|createPane\s*\(/);
  assert.doesNotMatch(module,/jurisdiction:\s*['"]PMR/);
 });
