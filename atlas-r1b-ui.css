@@ -174,6 +174,17 @@
 #atlas-controls .filter-section .atlas-filter-group {margin-block:7px}
 #atlas-controls :is(.atlas-info-section,.osm-roles-panel,.atlas-export-actions)>:not(summary) {margin-left:10px;margin-right:10px}
 #atlas-controls .atlas-panel-disclosure :is(label,summary) {overflow-wrap:anywhere}
+#atlas-controls .atlas-release-states {
+ margin:10px 0;
+ padding:8px 12px;
+ border:1px solid var(--atlas-ui-border);
+ border-radius:var(--atlas-ui-radius);
+ background:var(--atlas-ui-soft);
+ color:var(--atlas-ui-ink);
+ font-size:var(--atlas-type-meta,12px);
+ line-height:1.5;
+}
+#atlas-controls .atlas-release-states p {margin:4px 0}
 #atlas-controls .atlas-tree-tools {margin:0 0 8px}
 #atlas-controls .atlas-tree-tools>.atlas-disclosure-body {padding:8px}
 #atlas-controls #hierarchy-tree {min-height:96px}
