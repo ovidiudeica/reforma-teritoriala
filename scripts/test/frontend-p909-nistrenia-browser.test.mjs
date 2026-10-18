@@ -14,7 +14,8 @@ try{
    const state=await page.evaluate("fetch('public/data/p909-nistrenia-osm-navigation.json').then(r=>r.json()).then(c=>({counts:c.groups.map(g=>g.role_ids.length),ids:new Set(c.groups.flatMap(g=>g.role_ids)).size,roleNames:[...qaApp.atlasTree.getVisibleIds()],root:!!qaApp.atlasTree.getNode('view-nistrenia'),count:qaApp.hierarchyNodeById.size,oldMenu:!!document.getElementById('nistrenia-osm-toggle')}))");
    assert.deepEqual(state.counts,[13,23,10,16,3,16,4]);assert.equal(state.ids,85);
    assert.equal(state.count,5848);assert.equal(state.root,true);assert.equal(state.oldMenu,false);
-   for(const id of ['view-nistrenia','view-nistrenia-group-osm-r1702216','view-nistrenia-role-osm-r9581354'])assert.equal(await page.evaluate(`!!qaApp.atlasTree.getNode('${id}')`),true);
+   assert.equal(await page.evaluate("qaApp.atlasTree.getVisibleIds().includes('view-nistrenia')"),true);
+   assert.equal(await page.evaluate("qaApp.atlasTree.getVisibleIds().includes('view-nistrenia-group-osm-r1702216')"),true);
   });
   await t.test('root and district are independently selected via tree, without selecting all descendants',async()=>{
    await page.openPanel('entities');
@@ -28,6 +29,8 @@ try{
   });
   await t.test('Bender role selects the source-only card, without a second catalog UI',async()=>{
    await page.evaluate("if(!qaApp.atlasTree.isOpen('view-nistrenia-group-osm-r944727'))qaApp.atlasTree.toggle('view-nistrenia-group-osm-r944727')");
+   assert.equal(await page.evaluate("qaApp.atlasTree.getVisibleIds().includes('view-nistrenia-role-osm-r9581354')"),true);
+   await page.evaluate("qaApp.atlasTree.reveal('view-nistrenia-role-osm-r9581354')");
    await page.click('.tree-select[data-entity-id="view-nistrenia-role-osm-r9581354"]');
    await waitFor(()=>page.evaluate("qaApp.selectedEntityId==='osm-r9581354'&&document.querySelector('.osm-role-evidence')?.dataset.osmRoleId==='osm-r9581354'"),'Bender source card',30000);
    const state=await page.evaluate("({text:document.querySelector('.osm-role-evidence')?.textContent,menu:!!document.getElementById('nistrenia-osm-panel')})");
