@@ -20,8 +20,18 @@ try{
   await t.test('The seven districts remain directly beneath the Nistrenia tree node',async()=>{
    await page.openPanel('entities');
    await page.evaluate("qaApp.atlasTree.setOpenIds(['view-nistrenia'])");
-   await waitFor(()=>page.evaluate("document.querySelectorAll('#hierarchy-tree [data-entity-id^=\"view-nistrenia-group-\"]').length===7"),'all seven Nistrenia districts',10000);
-   const groups=await page.evaluate("[...document.querySelectorAll('#hierarchy-tree [data-entity-id^=\"view-nistrenia-group-\"]')].map(e=>e.textContent)");
+   // The tree is virtualized: not all 7 children are mounted in the DOM
+   // simultaneously. Assert the complete logical rows, then reveal each
+   // child and verify its label in the actual rendered tree.
+   const ids=await page.evaluate("qaApp.atlasTree.getVisibleIds().filter(id=>id.startsWith('view-nistrenia-group-'))");
+   assert.equal(ids.length,7);
+   const groups=[];
+   for(const id of ids){
+    await page.call(function(id){qaApp.atlasTree.reveal(id);},id);
+    const label=await page.call(function(id){return qaApp.atlasTree.getNode(id)?.outer?.textContent||'';},id);
+    assert(label,'virtualized district not reachable: '+id);
+    groups.push(label);
+   }
    for(const name of ['Camenca','Rîbnița','Dubăsari','Grigoriopol','Tiraspol','Slobozia','Bender'])assert(groups.some(label=>label.includes(name)),name);
   });
   await t.test('Bender keeps OSM provenance in its normal ACTUAL card',async()=>{
