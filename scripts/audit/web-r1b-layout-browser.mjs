@@ -12,6 +12,56 @@ try {
   await page.viewport(1440,900);
   await page.navigate(browser.server.url+'/');
   await page.openPanel('filters');
+  await t.test('WEB-R1b.3.1: redundant OSM catalogs absent, reset toolbar anchored identically across panels',async()=>{
+   for(const [width,height] of [[1440,900],[390,844],[844,390],[640,360]]){
+    await page.viewport(width,height);
+    const get=async panel=>{
+     await page.openPanel(panel);
+     return page.evaluate(`(()=>{
+      const toolbar=document.getElementById('atlas-reset-toolbar');
+      const heading=document.querySelector('#atlas-controls .atlas-panel-heading');
+      const buttons=['geometries-reset','filters-reset'].map(id=>{
+       const el=document.getElementById(id),rect=el.getBoundingClientRect();
+       return {id,height:rect.height,width:rect.width,visible:rect.height>0,disabled:el.disabled,aria:el.getAttribute('aria-disabled')};
+      });
+      const tr=toolbar.getBoundingClientRect(),hr=heading.getBoundingClientRect();
+      return {panel:document.querySelector('#atlas-controls').dataset.panel,
+       x:tr.left,y:tr.top,headingBottom:hr.bottom,height:tr.height,
+       overflow:document.documentElement.scrollWidth>innerWidth,
+       removed:document.querySelectorAll('#nistrenia-osm-toggle,#nistrenia-osm-panel,#osm-roles-panel,#osm-roles-list').length,
+       buttons};
+     })()`);
+    };
+    const entities=await get('entities');
+    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-r131-reset-entities-'+width+'x'+height+'.png'));
+    const filters=await get('filters');
+    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-r131-reset-filters-'+width+'x'+height+'.png'));
+    assert.equal(entities.panel,'entities');assert.equal(filters.panel,'filters');
+    assert.equal(entities.removed,0);assert.equal(filters.removed,0);
+    assert.equal(entities.overflow,false);assert.equal(filters.overflow,false);
+    assert.ok(Math.abs(entities.x-filters.x)<=1,JSON.stringify({width,height,entities,filters}));
+    assert.ok(Math.abs(entities.y-filters.y)<=1,JSON.stringify({width,height,entities,filters}));
+    assert.ok(entities.y>=entities.headingBottom-1&&filters.y>=filters.headingBottom-1);
+    assert.equal(entities.buttons.filter(b=>b.visible).length,1);
+    assert.equal(filters.buttons.filter(b=>b.visible).length,1);
+    assert.equal(entities.buttons[0].visible,true);assert.equal(filters.buttons[1].visible,true);
+    for(const b of [entities.buttons[0],filters.buttons[1]])assert.ok(b.width>=44&&b.height>=44,JSON.stringify({width,height,b}));
+   }
+   await page.viewport(1440,900);
+   await page.openPanel('filters');
+   await page.click('#layer-ro');
+   const dirty=await page.evaluate("({ro:document.getElementById('layer-ro').checked,resetDisabled:document.getElementById('filters-reset').disabled,visible:[...qaApp.visibleEntityIds].sort()})");
+   assert.equal(dirty.ro,false);assert.equal(dirty.resetDisabled,false);
+   await page.click('#filters-reset');
+   const clean=await page.evaluate("({ro:document.getElementById('layer-ro').checked,visible:[...qaApp.visibleEntityIds].sort()})");
+   assert.equal(clean.ro,true);assert.deepEqual(clean.visible,dirty.visible,'filter reset cannot change geometry checkboxes');
+   await page.openPanel('entities');
+   await page.evaluate("qaApp.atlasTree.getNode('view-nistrenia')?.checkbox.click()");
+   assert.equal(await page.evaluate("qaApp.visibleOperationalOutlineIds.has('view-nistrenia')"),false);
+   await page.click('#geometries-reset');
+   assert.equal(await page.evaluate("qaApp.visibleOperationalOutlineIds.has('view-nistrenia')"),true);
+   await page.openPanel('filters'); // Independent next test starts in its declared context.
+  });
   await t.test('desktop grouped rail, close X, filters do not mutate map or URL',async()=>{
    const d=await page.evaluate(`(()=>{
     const nav=[...document.querySelectorAll('#atlas-navigation-rail>button')].map(x=>x.id);
