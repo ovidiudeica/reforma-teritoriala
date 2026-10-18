@@ -40,6 +40,19 @@ try {
      await page.evaluate('document.body.style.zoom="100%"');
      await page.openPanel('filters');
      await page.call(function(zoom){document.body.style.zoom=zoom;},zoom);
+     // Zoom changes the effective responsive layout asynchronously. Use the
+     // actual navigation control again after the breakpoint has settled,
+     // then require measurable on-screen rows (no hidden DOM false positives).
+     await page.openPanel('filters');
+     await waitFor(()=>page.call(function(){
+      const stat=[...document.querySelectorAll('#filters-panel details.filter-section')]
+       .find(el=>el.querySelector(':scope > summary')?.textContent.trim()==='Niveluri statistice');
+      if(!stat)return false;
+      stat.open=true;
+      const row=stat.querySelector('label.filter-row-statistical');
+      return document.querySelector('#atlas-controls').dataset.panel==='filters' &&
+       row?.getBoundingClientRect().width>=80;
+     }),'zoom-adjusted statistical rows visible',10000);
      const rows=await page.call(function(){
       const stat=[...document.querySelectorAll('#filters-panel details.filter-section')]
        .find(el=>el.querySelector(':scope > summary')?.textContent.trim()==='Niveluri statistice');
