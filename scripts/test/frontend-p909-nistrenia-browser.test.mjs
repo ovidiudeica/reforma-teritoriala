@@ -44,7 +44,7 @@ try{
   await t.test('Phone: NI hierarchy and reset remain reachable, no horizontal overflow',async()=>{
    await page.viewport(390,844);await page.openPanel('entities');
    await page.evaluate("qaApp.atlasTree.setOpenIds(['view-nistrenia'])");
-   const state=await page.evaluate("({overflow:document.documentElement.scrollWidth>innerWidth,root:!!document.querySelector('#hierarchy-tree [data-entity-id=\"view-nistrenia\"]'),reset:document.querySelector('#entities-panel > .atlas-panel-reset-row > #geometries-reset')?.getBoundingClientRect().height,toolbar:document.getElementById('map-geometries-reset')!==null})");
+   const state=await page.evaluate("({overflow:document.documentElement.scrollWidth>innerWidth,root:!!document.querySelector('#hierarchy-tree [data-entity-id=\"view-nistrenia\"]'),reset:document.querySelector('#search-panel > .atlas-panel-reset-row > #geometries-reset')?.getBoundingClientRect().height,toolbar:document.getElementById('map-geometries-reset')!==null})");
    assert.equal(state.overflow,false);assert.equal(state.root,true);
    assert(state.reset>=44);assert(state.toolbar);
   });
