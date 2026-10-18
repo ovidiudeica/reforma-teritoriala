@@ -235,7 +235,7 @@
     The bottom navigation rail otherwise overlaps the 44px tree hit targets
     at 844x390, intercepting clicks on visibly mounted rows. Its triggers
     remain available after closing the drawer using the always-visible X. */
- #atlas-main #atlas-controls:not([hidden]) {z-index:1451}
+ #atlas-main #atlas-controls:not([hidden]) {bottom:0;z-index:1451}
  /* Compact landscape: don't cram 10+ icons into one 600px bottom row. */
  #atlas-main .atlas-navigation-rail {gap:4px}
  #atlas-main .atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)) {display:none}
