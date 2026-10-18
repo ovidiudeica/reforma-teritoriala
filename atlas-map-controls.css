@@ -16,6 +16,8 @@
 #basemap-toggle[aria-pressed=false] .atlas-osm-off-mark{display:block}
 #atlas-main .leaflet-control-attribution{margin:0;max-width:100%;font-size:9px;line-height:1.4;background:#fffffff0;overflow-wrap:anywhere}
 #atlas-main .leaflet-control-scale{margin:0}
+/* Keep the metric line width exact; enlarged labels may wrap within it. */
+#atlas-main .leaflet-control-scale-line{white-space:normal;overflow-wrap:anywhere}
 #atlas-main #neighbors-map-clear{position:absolute;left:0;right:auto;top:auto;bottom:calc(100% + 8px);margin:0}
 #atlas-main:has(#neighbors-map-clear:not([hidden])){--command-space:120px}
 @container atlas (max-width:899px){
@@ -36,25 +38,3 @@
  #atlas-main #map-geometries-reset{grid-column:1/-1;width:88px}
 }
 @media(forced-colors:active){#atlas-main .leaflet-control-zoom>button[aria-disabled=true]{color:GrayText}}
-
-/* Mobile sheets must never move the zoom/home/OSM command group.
-   Leaflet attribution is in .leaflet-top.leaflet-right (NOT .leaflet-bottom).
-   Dock attribution in the left reserved gutter below the controls; preserve
-   access to the full attribution with internal scrolling at 200% text zoom. */
-@container atlas (max-width:899px){
- #atlas-main:has(#details-panel.mobile-sheet-open:not([hidden])) .leaflet-top.leaflet-left .leaflet-control-scale{
-  position:absolute;top:0;left:0;margin:0;
- }
- #atlas-main:has(#details-panel.mobile-sheet-open:not([hidden])) .leaflet-top.leaflet-right{
-  left:10px;right:auto;top:auto;bottom:10px;
-  max-width:calc(var(--command-space) - 12px);
- }
- #atlas-main:has(#details-panel.mobile-sheet-open:not([hidden])) .leaflet-control-attribution{
-  max-width:100%;max-height:max(32px,calc(100cqh - 380px));overflow-y:auto;
- }
-}
-@container atlas (max-width:899px) and (max-height:449px){
- #atlas-main:has(#details-panel.mobile-sheet-open:not([hidden])) .leaflet-control-attribution{
-  max-height:max(32px,calc(100cqh - 300px));
- }
-}

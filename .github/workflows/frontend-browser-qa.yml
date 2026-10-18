@@ -119,6 +119,8 @@ jobs:
         run: node --test scripts/audit/p75-modules-map-controls-browser.mjs
       - name: P7.6 genuine mobile cold/warm and final accessibility supplements
         run: node --test scripts/audit/p76-final-acceptance-browser.mjs
+      - name: P9.0.9.5 structural sheet and complete attribution matrix
+        run: node --test scripts/audit/p9095-structural-layout-browser.mjs
       - name: P8.0.1 independent geometry reset and History
         run: node --test scripts/audit/p801-reset-geometries-browser.mjs
       - name: P8.0.2 synchronized panel and Leaflet geometry reset
