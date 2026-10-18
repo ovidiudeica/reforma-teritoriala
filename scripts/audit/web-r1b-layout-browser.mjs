@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
-import {launchBrowser,waitFor} from '../test/helpers/atlas-browser.mjs';
+import {launchBrowser,waitFor,delay} from '../test/helpers/atlas-browser.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const browser=await launchBrowser(root),page=await browser.page();
