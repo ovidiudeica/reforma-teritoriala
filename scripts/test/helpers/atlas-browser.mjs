@@ -68,6 +68,17 @@ export class Page{
  async openPanel(key){
   const selectors=new Map([['entities','#mobile-navigation'],['search','#mobile-search'],['filters','#filters-toggle'],['visible','#advanced-visible'],['recent','#advanced-recent'],['compare','#advanced-compare'],['share','#share-toggle'],['info','#info-toggle'],['modules','#modules-toggle'],['identify','#identify-toggle']]);
   if(typeof key!=='string'||!selectors.has(key))throw Error('Unknown navigation panel');
+  // Preview mode and rotation resize the container without changing the outer
+  // CDP viewport. Wait until ResizeObserver + media consumers agree before
+  // interacting, otherwise a late breakpoint event can close a panel that was
+  // just opened and turn a valid click into a 60s timeout.
+  await waitFor(()=>this.call(function(){
+   if(!window.qaApp)return true;
+   const layout=qaApp.atlasLayout,frame=document.getElementById('atlas-viewport'),size=layout?.size;
+   if(!layout||!frame||!size)return true;
+   const mobile=layout.media.matches;
+   return size.width===frame.clientWidth&&size.height===frame.clientHeight&&qaApp.atlasPanels.state.mobile===mobile&&qaApp.atlasMobile.state.mobile===mobile;
+  }),'navigation responsive state stable',5000);
   const active=()=>this.call(function(key){return qaApp.atlasPanels.state.active===key;},key);
   if(await active())return;
   const selector=selectors.get(key);
