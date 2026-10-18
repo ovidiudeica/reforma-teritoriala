@@ -60,6 +60,7 @@
 <div class="atlas-panel-heading"><h2 id="atlas-panel-title">Entități</h2><button id="drawer-close" class="atlas-close-button" type="button" aria-label="Închide panoul de navigare" title="Închide panoul"><span aria-hidden="true">×</span></button></div>
   <section id="search-panel">
     <h3 class="sr-only">Căutare</h3>
+    <div id="entities-reset-row" class="atlas-panel-reset-row"><button id="geometries-reset" class="action-button" type="button" aria-disabled="true">Resetează geometriile</button></div>
     <div class="atlas-search-input-row"><input id="entity-search" class="search" type="search" aria-label="Caută entități teritoriale" aria-describedby="search-help" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results" placeholder="Nume, SIRUTA/CUATM, cod statistic sau OSM…" autocomplete="off"><button id="search-clear" type="button" class="action-button" aria-label="Șterge căutarea" title="Șterge căutarea">×</button></div>
     <p id="search-help" class="sr-only">Săgețile sus/jos navighează rezultatele, Enter selectează, Escape închide lista. Căutarea include și geometrii ascunse.</p>
   <section id="results-panel" hidden>
@@ -115,7 +116,6 @@
   </section>
   <section id="entities-panel">
     <h3 class="sr-only">Arbore</h3>
-    <div class="atlas-panel-reset-row"><button id="geometries-reset" class="action-button" type="button" aria-disabled="true">Resetează geometriile</button></div>
     <p id="atlas-tree-help" class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
     <div id="hierarchy-tree" class="hierarchy-tree" aria-describedby="atlas-tree-help"><p class="muted">Se încarcă arborele teritorial…</p></div>
