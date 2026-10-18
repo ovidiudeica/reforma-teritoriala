@@ -194,7 +194,7 @@
 
 /* WEB-R1b.4: reset controls at exactly the same location in both panels.
    Map toolbar reset (#map-geometries-reset) deliberately remains unchanged. */
-#atlas-controls > :is(#entities-panel,#filters-panel) > .atlas-panel-reset-row {
+#atlas-controls > :is(#search-panel,#filters-panel) > .atlas-panel-reset-row {
  display:flex;
  align-items:stretch;
  width:100%;
@@ -203,7 +203,7 @@
  padding:0;
  box-sizing:border-box;
 }
-#atlas-controls > :is(#entities-panel,#filters-panel) > .atlas-panel-reset-row > :is(#geometries-reset,#filters-reset) {
+#atlas-controls > :is(#search-panel,#filters-panel) > .atlas-panel-reset-row > :is(#geometries-reset,#filters-reset) {
  display:inline-flex;
  flex:1 1 auto;
  align-items:center;
@@ -217,3 +217,4 @@
  padding:8px 12px;
  text-align:center;
 }
+\n#atlas-controls[data-panel=search] #entities-reset-row {display:none}\n
