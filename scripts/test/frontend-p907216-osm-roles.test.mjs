@@ -75,7 +75,7 @@ test('catalog generated deterministically from P9 dossier and immutable released
  assert.match(script,/validateOsmRolesCatalog/);
  assert.match(script,/validateNistreniaOsmNavigation/);
  assert.match(script,/renderOsmRoleDetails/);
- assert.doesNotMatch(ui,/L\\.geoJSON\\s*\\(|tileLayer\\s*\\(/);
+ assert.doesNotMatch(ui,/L\.geoJSON\s*\(|tileLayer\s*\(/);
  assert.doesNotMatch(html,/id="osm-roles-panel"|id="osm-roles-list"|id="osm-roles-search"/);
  assert.doesNotMatch(html,/id="nistrenia-osm-toggle"|id="nistrenia-osm-panel"/);
  assert.match(html,/id="geometries-reset"/);
