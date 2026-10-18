@@ -59,7 +59,7 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
  }
  for(const [key,button]of Object.entries(buttons))button?.addEventListener('click',()=>active===key?close():open(key));
  closeButton.addEventListener('click',()=>close());backdrop.addEventListener('click',()=>close());
- more?.addEventListener('click',()=>{const next=!menu;if(next&&active!==null)close({focus:false});menu=next;origin=more;sync();emit();if(menu)buttons.visible?.focus?.();});
+ more?.addEventListener('click',()=>{const next=!menu;if(next&&active!==null)close({focus:false});menu=next;origin=more;sync();emit();if(menu)(buttons.identify||buttons.measure||buttons.visible)?.focus?.();});
  document.addEventListener?.('keydown',event=>{
   if(event.key!=='Escape'||event.isComposing||event.defaultPrevented)return;
   if(menu){event.preventDefault();menu=false;sync();emit();more.focus();return;}

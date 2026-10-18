@@ -88,7 +88,14 @@ try{
    assert.equal(await page.evaluate('qaApp.atlasMobile.state.drawer'),true);
    assert.equal(await page.evaluate("!document.querySelector('#atlas-advanced-dialog').hidden"),true);
    await page.key('Escape');
-   assert.equal(await page.evaluate('document.activeElement.id'),'navigation-more');
+   // WEB-R1b promoted Straturi to a permanently visible primary phone control.
+   // Closing its contextual panel must return focus to that real visible origin.
+   assert.equal(await page.evaluate('document.activeElement.id'),'advanced-visible');
+   const origin=await page.evaluate(`(()=>{
+    const b=document.querySelector('#advanced-visible'),r=b.getBoundingClientRect();
+    return {visible:getComputedStyle(b).display!=='none',width:r.width,height:r.height};
+   })()`);
+   assert.ok(origin.visible&&origin.width>=44&&origin.height>=44,'Straturi focus target stays touch-accessible');
    assert.equal(await page.evaluate("!document.querySelector('#atlas-advanced-dialog').hidden"),false);
    assert.equal(await page.evaluate("document.documentElement.scrollWidth>innerWidth"),false);
   });

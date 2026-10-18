@@ -68,11 +68,40 @@ export class Page{
  async openPanel(key){
   const selectors=new Map([['entities','#mobile-navigation'],['search','#mobile-search'],['filters','#filters-toggle'],['visible','#advanced-visible'],['recent','#advanced-recent'],['compare','#advanced-compare'],['share','#share-toggle'],['info','#info-toggle'],['modules','#modules-toggle'],['identify','#identify-toggle']]);
   if(typeof key!=='string'||!selectors.has(key))throw Error('Unknown navigation panel');
+  // Preview mode and rotation resize the container without changing the outer
+  // CDP viewport. Wait until ResizeObserver + media consumers agree before
+  // interacting, otherwise a late breakpoint event can close a panel that was
+  // just opened and turn a valid click into a 60s timeout.
+  await waitFor(()=>this.call(function(){
+   if(!window.qaApp)return true;
+   const layout=qaApp.atlasLayout,frame=document.getElementById('atlas-viewport'),size=layout?.size;
+   if(!layout||!frame||!size)return true;
+   const mobile=layout.media.matches;
+   return size.width===frame.clientWidth&&size.height===frame.clientHeight&&qaApp.atlasPanels.state.mobile===mobile&&qaApp.atlasMobile.state.mobile===mobile;
+  }),'navigation responsive state stable',5000);
   const active=()=>this.call(function(key){return qaApp.atlasPanels.state.active===key;},key);
   if(await active())return;
   const selector=selectors.get(key);
-  const visible=await this.call(function(selector){return !!document.querySelector(selector)?.getClientRects().length;},selector);
-  if(!visible)await this.click('#navigation-more');
+  let visible=await this.call(function(selector){return !!document.querySelector(selector)?.getClientRects().length;},selector);
+  // In compact layouts an open drawer owns the rail interaction plane. Hidden
+  // secondary commands also require closing that drawer before opening More;
+  // otherwise the synthetic click lands on the drawer/backdrop and the target
+  // remains display:none.
+  const covered=await this.call(function(selector){
+   const target=document.querySelector(selector),r=target?.getBoundingClientRect();
+   if(!r||!r.width||!r.height)return false;
+   const hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+   return !(hit===target||target.contains(hit));
+  },selector);
+  if((!visible||covered) && await this.call(function(){return qaApp.atlasPanels.state.active!==null;})){
+   await this.click('#drawer-close');
+   await waitFor(()=>this.call(function(){return qaApp.atlasPanels.state.active===null;}),'close occluding drawer');
+   visible=await this.call(function(selector){return !!document.querySelector(selector)?.getClientRects().length;},selector);
+  }
+  if(!visible){
+   await this.click('#navigation-more');
+   await waitFor(()=>this.call(function(selector){return !!document.querySelector(selector)?.getClientRects().length;},selector),'reveal navigation panel '+key);
+  }
   await this.click(selector);await waitFor(active,'navigation panel '+key);
  }
  async query(text){await this.openPanel('search');await this.click('#entity-search');await this.evaluate("(()=>{const input=document.querySelector('#entity-search'),box=input.getBoundingClientRect(),hit=document.elementFromPoint(box.left+box.width/2,box.top+box.height/2);if(hit!==input)throw Error('Search input obscured by '+(hit?.id||hit?.className||hit?.tagName));input.focus();input.value='';return true;})()");await this.send('Input.insertText',{text});await waitFor(()=>this.evaluate("document.querySelector('#entity-search').getAttribute('aria-expanded')==='true'"),'search open');}

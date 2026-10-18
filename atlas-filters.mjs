@@ -12,8 +12,8 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   return {item,input};
  };
  const section=(title,action,labels=[['Toate',true],['Niciuna',false]])=>{
-  const el=document.createElement('section');el.className='filter-section';
-  const heading=document.createElement('h3');heading.textContent=title;el.appendChild(heading);
+  const el=document.createElement('details');el.className='filter-section atlas-panel-disclosure';el.open=title==='Tipuri administrative';
+  const heading=document.createElement('summary');heading.textContent=title;el.appendChild(heading);
   const controls=document.createElement('div'),buttons=[];controls.className='filter-actions';
   for(const [label,enabled] of labels){
    const button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-label',label+' — '+title);
