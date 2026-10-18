@@ -72,6 +72,19 @@ export class Page{
   if(await active())return;
   const selector=selectors.get(key);
   const visible=await this.call(function(selector){return !!document.querySelector(selector)?.getClientRects().length;},selector);
+  // In compact landscape the open drawer owns the bottom interaction plane.
+  // Return through its visible X before using the rail; a covered target must
+  // never be clicked through the drawer/backdrop or treated as a successful hit.
+  const covered=await this.call(function(selector){
+   const target=document.querySelector(selector),r=target?.getBoundingClientRect();
+   if(!r||!r.width||!r.height)return false;
+   const hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+   return !(hit===target||target.contains(hit));
+  },selector);
+  if(covered && await this.call(function(){return qaApp.atlasPanels.state.active!==null;})){
+   await this.click('#drawer-close');
+   await waitFor(()=>this.call(function(){return qaApp.atlasPanels.state.active===null;}),'close occluding drawer');
+  }
   if(!visible)await this.click('#navigation-more');
   await this.click(selector);await waitFor(active,'navigation panel '+key);
  }
