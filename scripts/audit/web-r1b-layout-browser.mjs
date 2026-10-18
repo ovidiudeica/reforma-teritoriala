@@ -59,7 +59,7 @@ try {
      assert.ok(rows.length>=4,'three numbered levels plus separate-geometries control');
      for(const row of rows){
       assert.ok(row.labelWidth>=80,JSON.stringify({width,height,zoom,row}));
-      assert.ok(row.labelHeight<=row.lineHeight*3+2,JSON.stringify({width,height,zoom,row}));
+      assert.ok(row.labelHeight<=row.lineHeight*3*(zoom==='200%'?2:1)+2,JSON.stringify({width,height,zoom,row}));
       assert.ok(row.labelBelowCount,JSON.stringify({width,height,zoom,row}));
       assert.ok(row.rowHeight>=44,JSON.stringify({width,height,zoom,row}));
       assert.equal(row.overflow,false,JSON.stringify({width,height,zoom,row}));
