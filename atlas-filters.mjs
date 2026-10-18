@@ -6,7 +6,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
  const row=(label,count,kind,id)=>{
   const item=document.createElement('label');item.className='filter-row';
   // Long statistical counts belong below the label, never beside a shrinking title.
-  if(kind==='statistical'||kind==='separate-statistical')item.classList.add('filter-row-statistical');
+  if(kind==='statistical'||kind==='separate-statistical')item.className+=' filter-row-statistical';
   const input=document.createElement('input');input.type='checkbox';input.dataset.kind=kind;input.dataset.filter=String(id);input.setAttribute('aria-label',label);
   const text=document.createElement('span');text.textContent=label;
   const number=document.createElement('small');number.textContent=typeof count==='number'?'('+count.toLocaleString('ro-RO')+')':String(count);
