@@ -192,8 +192,7 @@
  grid-column:1;
  grid-row:1 / span 2;
  justify-self:center;
- width:20px;
- height:20px;
+ /* Reuse the existing 44x44 checkbox hit area and its 18px visual glyph. */
  margin:0;
 }
 #atlas-controls .filter-row-statistical>span {
