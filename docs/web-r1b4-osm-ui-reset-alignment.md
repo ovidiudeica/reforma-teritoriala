@@ -2,7 +2,7 @@
 
 ## Schimbare de interfață
 
-- Entități: eliminarea comenzii „Nistrenia · OSM”, a grupării popover și a accordion-ului „Opțiuni arbore” rămas fără alte opțiuni. Butonul „Resetează geometriile” este afișat direct la începutul panoului.
+- Entități: eliminarea comenzii „Nistrenia · OSM”, a grupării popover și a accordion-ului „Opțiuni arbore” rămas fără alte opțiuni. Butonul „Resetează geometriile” este afișat ca primul control imediat sub titlul panoului, înaintea căutării; în modul Căutare este ascuns, fără a modifica funcția de căutare.
 - Filtre: eliminarea catalogului vizibil „Roluri cartografice OSM 85”. Butonul „Resetează filtrele” folosește aceeași poziție, lățime, spațiere, aliniere și înălțime minimă de 44px.
 - Butonul „Resetează geometriile” din bara Leaflet cu zoom nu este mutat, eliminat sau modificat și rămâne legat de același handler de reset.
 
