@@ -186,6 +186,16 @@
  line-height:1.5;
 }
 #atlas-controls .atlas-release-states p {margin:4px 0}
+/* Card titles must remain fully readable after the R1b control sizing changes. */
+#details-panel .details-head h2 {
+ min-width:0;
+ max-width:100%;
+ overflow-wrap:anywhere;
+ word-break:normal;
+}
+@container atlas (max-width:899px){
+ #details-panel .details-head h2 {white-space:normal;overflow:visible;text-overflow:clip}
+}
 #atlas-controls .atlas-tree-tools {margin:0 0 8px}
 #atlas-controls .atlas-tree-tools>.atlas-disclosure-body {padding:8px}
 #atlas-controls #hierarchy-tree {min-height:96px}
@@ -236,6 +246,13 @@
     at 844x390, intercepting clicks on visibly mounted rows. Its triggers
     remain available after closing the drawer using the always-visible X. */
  #atlas-main #atlas-controls:not([hidden]) {bottom:0;z-index:1451}
+ /* Keep the virtual tree inside the clipped main row. R1b's open tree-tools
+    disclosure must consume no more vertical space than its 44px summary +
+    44px action row, leaving at least one complete 44px tree target. */
+ #atlas-main #atlas-controls>#entities-panel {overflow:hidden}
+ #atlas-main #atlas-controls .atlas-tree-tools {margin:0 0 2px}
+ #atlas-main #atlas-controls .atlas-tree-tools>.atlas-disclosure-body {padding:0 4px 2px}
+ #atlas-main #atlas-controls #hierarchy-tree {min-height:44px}
  /* Compact landscape: don't cram 10+ icons into one 600px bottom row. */
  #atlas-main .atlas-navigation-rail {gap:4px}
  #atlas-main .atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)) {display:none}
