@@ -31,6 +31,46 @@ try {
    assert.equal(await page.evaluate("document.querySelector('#filters-panel .atlas-panel-disclosure').open"),true);
    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-desktop-filters.png'));
   });
+  await t.test('statistical names do not collapse into vertical letters at desktop, phone, landscape or 200% zoom',async()=>{
+   try {
+    for(const [width,height,zoom] of [[1440,900,'100%'],[390,844,'100%'],[844,390,'100%'],[1440,900,'200%']]){
+     // CSS zoom exercises text enlargement with actual layout reflow, not an
+     // artificial change to the accessibility or 44px hit-target threshold.
+     await page.viewport(width,height);
+     await page.evaluate('document.body.style.zoom="100%"');
+     await page.openPanel('filters');
+     await page.call(function(zoom){document.body.style.zoom=zoom;},zoom);
+     const rows=await page.call(function(){
+      const stat=[...document.querySelectorAll('#filters-panel details.filter-section')]
+       .find(el=>el.querySelector(':scope > summary')?.textContent.trim()==='Niveluri statistice');
+      if(!stat)throw Error('Missing statistical filters disclosure');
+      stat.open=true;
+      stat.scrollIntoView({block:'nearest'});
+      return [...stat.querySelectorAll('label.filter-row-statistical')].map(row=>{
+       const name=row.querySelector('span'),meta=row.querySelector('small'),
+        nr=name.getBoundingClientRect(),mr=meta.getBoundingClientRect(),
+        rr=row.getBoundingClientRect(),cs=getComputedStyle(name);
+       return {name:name.textContent,labelWidth:nr.width,labelHeight:nr.height,
+        lineHeight:parseFloat(cs.lineHeight),labelBelowCount:mr.top>=nr.bottom-1,
+        rowHeight:rr.height,overflow:row.scrollWidth>row.clientWidth+1,
+        inputKind:row.querySelector('input')?.dataset.kind};
+      });
+     });
+     assert.ok(rows.length>=4,'three numbered levels plus separate-geometries control');
+     for(const row of rows){
+      assert.ok(row.labelWidth>=80,JSON.stringify({width,height,zoom,row}));
+      assert.ok(row.labelHeight<=row.lineHeight*3*(zoom==='200%'?2:1)+2,JSON.stringify({width,height,zoom,row}));
+      assert.ok(row.labelBelowCount,JSON.stringify({width,height,zoom,row}));
+      assert.ok(row.rowHeight>=44,JSON.stringify({width,height,zoom,row}));
+      assert.equal(row.overflow,false,JSON.stringify({width,height,zoom,row}));
+     }
+     await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-r1b2-filters-'+width+'x'+height+'-'+(zoom==='200%'?'200pct':'100pct')+'.png'));
+    }
+   } finally {
+    await page.evaluate('document.body.style.zoom=""');
+    await page.viewport(1440,900);
+   }
+  });
   await t.test('phone five primary targets, More focus, Escape and drawer close',async()=>{
    await page.viewport(390,844);await page.evaluate('qaApp.atlasPanels.close({focus:false})');
    const p=await page.evaluate(`[...document.querySelectorAll('#atlas-navigation-rail>button')]

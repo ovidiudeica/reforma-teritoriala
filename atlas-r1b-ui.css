@@ -173,6 +173,53 @@
 #atlas-controls .filter-section>.filter-row,
 #atlas-controls .filter-section>.hint {margin-inline:10px}
 #atlas-controls .filter-section .atlas-filter-group {margin-block:7px}
+/* R1b.2 — the long statistical counts are secondary metadata, not a third
+   competing flex column. Keep the name readable at desktop, mobile and zoom. */
+#atlas-controls .filter-row-statistical {
+ display:grid;
+ grid-template-columns:var(--atlas-control-target,44px) minmax(0,1fr);
+ grid-template-rows:auto auto;
+ align-items:center;
+ column-gap:8px;
+ row-gap:2px;
+ min-width:0;
+ min-height:var(--atlas-control-target,44px);
+ box-sizing:border-box;
+ padding:5px 8px 5px 0;
+ overflow-wrap:normal;
+}
+#atlas-controls .filter-row-statistical>input {
+ grid-column:1;
+ grid-row:1 / span 2;
+ justify-self:center;
+ /* Reuse the existing 44x44 checkbox hit area and its 18px visual glyph. */
+ margin:0;
+}
+#atlas-controls .filter-row-statistical>span {
+ grid-column:2;
+ grid-row:1;
+ min-width:0;
+ overflow-wrap:normal;
+ word-break:normal;
+ line-height:1.4;
+}
+#atlas-controls .filter-row-statistical>small {
+ grid-column:2;
+ grid-row:2;
+ display:block;
+ min-width:0;
+ line-height:1.45;
+ color:var(--atlas-color-text-muted,#59685e);
+ white-space:normal;
+ overflow-wrap:break-word;
+ word-break:normal;
+}
+#atlas-controls .statistical-level-breakdown {
+ margin:2px 10px 10px;
+ padding-inline-start:calc(var(--atlas-control-target,44px) + 8px);
+ line-height:1.5;
+ overflow-wrap:normal;
+}
 #atlas-controls :is(.atlas-info-section,.osm-roles-panel,.atlas-export-actions)>:not(summary) {margin-left:10px;margin-right:10px}
 #atlas-controls .atlas-panel-disclosure :is(label,summary) {overflow-wrap:anywhere}
 #atlas-controls .atlas-release-states {
