@@ -8,7 +8,7 @@
 - Reduce discret contururile, umbrele, paddingul intern și diferențele nejustificate dintre secțiunile `details/summary`. Titlurile au o scară mai consecventă.
 - În panoul Filtre, grupele administrative/statistice rămân independente, iar comenzile colective au o dispunere elastică; corecția WEB-R1b.2 a etichetelor statistice este păstrată.
 - În panoul Măsurare, latitudinea și longitudinea folosesc două coloane la lățimi suficiente și o coloană pe telefoane; acțiunile nu sunt transformate în benzi supradimensionate.
-- În Partajare, Instrumente, Informații și cardurile de proveniență, butoanele și metadatele folosesc același ritm vizual, fără a ascunde explicațiile ori stările critice.
+- În Partajare, Instrumente și Informații, butoanele și metadatele folosesc același ritm vizual, fără a ascunde explicațiile ori stările critice. **Cardul de selecție rămâne intenționat cu CSS-ul existent:** o încercare de uniformizare a lui a produs regresia P7.2 de focus/clipping în modul mobil compact, astfel că stilurile dedicate cardului au fost retrase complet din acest lot.
 - Nu sunt introduse fonturi externe, framework-uri, panouri suplimentare sau duplicate de stare.
 
 ## Gate de acceptare
