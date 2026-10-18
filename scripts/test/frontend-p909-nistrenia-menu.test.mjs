@@ -50,10 +50,12 @@ test('P9.0.9 menu is deterministically generated and mounted outside the ACTUAL 
  const out=execFileSync(process.execPath,['scripts/process/build-p909-nistrenia-menu.mjs','--check'],{encoding:'utf8'});
  assert.match(out,/P909_MENU_REPRO_PASS/);
  const js=readFileSync('app.js','utf8'),html=readFileSync('index.html','utf8');
- assert.match(html,/id="nistrenia-osm-panel"/);
- assert.match(html,/Nistrenia · OSM/);
+ assert.doesNotMatch(html,/id="nistrenia-osm-panel"/);
+ assert.doesNotMatch(html,/id="nistrenia-osm-toggle"/);
+ assert.match(html,/id="hierarchy-tree"/);
  assert.match(js,/loadNistreniaOsmNavigation/);
- assert.match(js,/showExistingOsmRoles/);
+ assert.match(js,/validateNistreniaOsmNavigation/);
+ assert.match(js,/createNistreniaOperationalView/);
  const module=readFileSync('atlas-nistrenia-osm.mjs','utf8');
  assert.doesNotMatch(module,/L\.geoJSON\s*\(|tileLayer\s*\(|createPane\s*\(/);
  assert.doesNotMatch(module,/jurisdiction:\s*['"]PMR/);
