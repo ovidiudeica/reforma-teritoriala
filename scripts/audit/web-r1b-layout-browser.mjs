@@ -107,6 +107,47 @@ try {
    assert.equal(d.length,3);assert.ok(d.every(x=>x.tag==='DETAILS'&&x.summary));
    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-desktop-card.png'));
   });
+  await t.test('R1b.3 panel density, controls and typography preserve responsive reachability',async()=>{
+   for(const [width,height] of [[1440,900],[390,844],[844,390],[640,360]]){
+    await page.viewport(width,height);
+    for(const panel of ['filters','measure','share','info']){
+     await page.openPanel(panel);
+     const data=await page.call(function(){
+      const host=document.querySelector('#atlas-controls');
+      const heading=host.querySelector('.atlas-panel-heading');
+      const headings=Array.from(host.querySelectorAll('details.atlas-panel-disclosure > summary'))
+        .filter(e=>e.checkVisibility() && e.getBoundingClientRect().height>0)
+        .map(e=>({height:e.getBoundingClientRect().height,background:getComputedStyle(e).backgroundColor}));
+      const actions=[...host.querySelectorAll('.action-button,.filter-actions button')]
+       .filter(e=>!e.disabled&&e.checkVisibility()&&e.getBoundingClientRect().height)
+       .map(e=>({id:e.id||e.textContent.trim(),w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height}));
+      const form=host.querySelector('#measure-form');
+      return {headingHeight:heading.getBoundingClientRect().height,
+       hostWidth:host.clientWidth,scrollWidth:host.scrollWidth,
+       titleSize:getComputedStyle(heading.querySelector('h2')).fontSize,
+       headings,actions,columns:form?getComputedStyle(form).gridTemplateColumns:null};
+     });
+     assert.ok(data.headingHeight>=44,JSON.stringify({width,height,panel,data}));
+     assert.equal(data.titleSize,'16px');
+     assert.ok(data.scrollWidth<=data.hostWidth+1,JSON.stringify({width,height,panel,data}));
+     assert.ok(data.headings.every(e=>e.height>=44),JSON.stringify({width,height,panel,data}));
+     assert.ok(data.actions.every(e=>e.w>=44&&e.h>=44),JSON.stringify({width,height,panel,data}));
+     if(panel==='measure'){
+      assert.ok(data.columns&&data.columns!=='none');
+     }
+     await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence',
+      'web-r1b3-'+width+'x'+height+'-'+panel+'.png'));
+    }
+   }
+   await page.viewport(1440,900);
+   await page.openPanel('filters');
+   const initial=await page.evaluate('location.href');
+   const state=await page.evaluate('JSON.stringify({selected:qaApp.selectedEntityId,visible:[...qaApp.visibleEntityIds].sort()})');
+   await page.click('#filters-panel .filter-section > summary');
+   await page.click('#filters-panel .filter-section > summary');
+   assert.equal(await page.evaluate('location.href'),initial);
+   assert.equal(await page.evaluate('JSON.stringify({selected:qaApp.selectedEntityId,visible:[...qaApp.visibleEntityIds].sort()})'),state);
+  });
   await t.test('no runtime errors',async()=>{
    assert.deepEqual(page.errors,[]);
    assert.deepEqual(page.console.filter(x=>x.type==='error'||x.level==='error'),[]);
