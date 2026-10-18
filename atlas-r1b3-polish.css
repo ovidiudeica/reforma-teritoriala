@@ -1,0 +1,193 @@
+/*
+ * WEB-R1b.3 — controlled presentation refinement.
+ * No changes to panel ownership, focus, selection-card mobile sheet, map commands or ACTUAL data.
+ * Keep 44 CSS px targets, native disclosure semantics and scrolling intact.
+ */
+:root {
+ --atlas-r1b3-gap:8px;
+ --atlas-r1b3-rule:#dbe5de;
+ --atlas-r1b3-muted:#52645a;
+ --atlas-r1b3-soft:#f7f9f7;
+ --atlas-r1b3-radius:8px;
+}
+#atlas-controls .atlas-panel-heading {
+ min-height:52px;
+ padding:4px 12px;
+ gap:8px;
+ box-sizing:border-box;
+ border-bottom-color:var(--atlas-r1b3-rule);
+ box-shadow:0 1px 0 #19372a08;
+}
+#atlas-controls .atlas-panel-heading h2 {
+ margin:0;
+ font-size:16px;
+ line-height:1.35;
+ letter-spacing:normal;
+ font-weight:700;
+}
+#atlas-controls > :is(#filters-panel,#measure-panel,#identify-panel,#share-panel,#atlas-info-dialog,#atlas-advanced-dialog,#modules-panel,#neighbors-panel) {
+ padding:10px 12px;
+}
+#atlas-controls :is(.hint,.muted,.atlas-advanced-hint,.atlas-advanced-muted) {
+ color:var(--atlas-r1b3-muted);
+ line-height:1.55;
+}
+#atlas-controls :is(h3,h4) {
+ line-height:1.35;
+ overflow-wrap:break-word;
+}
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions) {
+ margin-block:6px 9px;
+ border-color:var(--atlas-r1b3-rule);
+ border-radius:var(--atlas-r1b3-radius);
+ box-shadow:none;
+}
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions) > summary {
+ padding:8px 11px;
+ min-height:var(--atlas-control-target,44px);
+ background:var(--atlas-r1b3-soft);
+ border-radius:var(--atlas-r1b3-radius);
+ line-height:1.35;
+ font-weight:650;
+}
+#atlas-controls .atlas-panel-disclosure[open] > summary {
+ border-radius:var(--atlas-r1b3-radius) var(--atlas-r1b3-radius) 0 0;
+}
+#atlas-controls .atlas-panel-disclosure .atlas-disclosure-body {
+ padding:8px 10px 10px;
+}
+#atlas-controls .atlas-panel-disclosure .atlas-disclosure-body > :is(p,.hint) {
+ margin-block:5px 9px;
+}
+#atlas-controls .filter-section {
+ margin:3px 0 10px;
+ border:0;
+ box-shadow:none;
+ padding:0;
+}
+#atlas-controls .filter-section > summary {
+ border-bottom:1px solid var(--atlas-r1b3-rule);
+ background:transparent;
+ padding-inline:4px 8px;
+}
+#atlas-controls .filter-section[open] > summary {border-radius:0}
+#atlas-controls .filter-actions {
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-block:7px 8px;
+}
+#atlas-controls .filter-actions button {
+ flex:1 1 110px;
+ min-width:var(--atlas-control-target,44px);
+ min-height:var(--atlas-control-target,44px);
+ margin:0;
+ padding:7px 10px;
+ box-shadow:none;
+}
+#atlas-controls .atlas-filter-group {
+ margin-block:5px;
+ padding:5px 8px;
+ border-color:var(--atlas-r1b3-rule);
+ border-radius:7px;
+ background:#fcfdfc;
+}
+#atlas-controls .atlas-filter-subtypes {
+ border-color:var(--atlas-r1b3-rule);
+ margin-block:4px;
+}
+#atlas-controls .filter-jurisdiction {
+ margin:7px 0 3px;
+ font-size:var(--atlas-type-caption,11px);
+ letter-spacing:normal;
+}
+#atlas-controls .atlas-filter-subtypes .filter-row {
+ margin:0;
+ border-bottom:1px solid #edf1ed;
+}
+#atlas-controls .atlas-filter-subtypes .filter-row:last-child {border-bottom:0}
+#atlas-controls .statistical-level-breakdown {color:var(--atlas-r1b3-muted)}
+#atlas-controls :is(.action-button,.filter-actions button,.mobile-control) {
+ border-color:#b8cabd;
+ border-radius:7px;
+ box-shadow:none;
+ font-weight:600;
+ line-height:1.35;
+ padding:8px 10px;
+}
+#atlas-controls :is(.action-button,.filter-actions button,.mobile-control):focus-visible,
+#atlas-controls :is(summary,input,select,textarea):focus-visible {
+ outline:3px solid var(--atlas-color-focus,#365b4a);
+ outline-offset:2px;
+}
+#atlas-controls .atlas-share-actions,
+#atlas-controls .atlas-advanced-row-actions,
+#atlas-controls .atlas-comparison-actions,
+#atlas-controls .identify-actions {
+ display:flex;
+ align-items:stretch;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-block:8px;
+}
+#atlas-controls .atlas-share-actions :is(a,button),
+#atlas-controls .atlas-advanced-row-actions :is(a,button),
+#atlas-controls .atlas-comparison-actions :is(a,button) {
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ box-sizing:border-box;
+ min-height:var(--atlas-control-target,44px);
+ padding:8px 10px;
+ border:1px solid #b8cabd;
+ border-radius:7px;
+ background:#fff;
+ color:#20573e;
+ text-decoration:none;
+ line-height:1.35;
+ max-width:100%;
+ white-space:normal;
+}
+#atlas-controls .atlas-advanced-row {padding-block:8px}
+#atlas-controls .atlas-comparison-card {padding:10px;border-color:var(--atlas-r1b3-rule)}
+#atlas-controls .atlas-comparison-card h3 {font-size:14px;letter-spacing:normal;text-transform:none}
+#atlas-controls .atlas-info-section p {line-height:1.55}
+#atlas-controls .atlas-release-states {margin-block:8px;padding:8px 10px}
+#measure-panel .atlas-disclosure-body > .action-button {
+ margin:3px 5px 3px 0;
+ max-width:100%;
+}
+#measure-panel #measure-form {
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:7px 9px;
+ margin-block:7px 10px;
+}
+#measure-panel #measure-form label {min-width:0;margin:0}
+#measure-panel #measure-form .action-button {
+ grid-column:1/-1;
+ justify-self:start;
+ margin:0;
+}
+#measure-panel :is(#measure-status,#measure-points,#measure-segments) {margin-block:6px}
+#identify-panel .identify-fields {gap:8px}
+#identify-panel :is(.atlas-disclosure-body,.identify-actions) > .action-button {max-width:100%}
+@container atlas (max-width:599px) {
+ #atlas-controls .atlas-panel-heading {min-height:52px}
+ #atlas-controls > :is(#filters-panel,#measure-panel,#identify-panel,#share-panel,#atlas-info-dialog,#atlas-advanced-dialog,#modules-panel,#neighbors-panel) {padding:8px 10px}
+ #measure-panel #measure-form {grid-template-columns:minmax(0,1fr)}
+ #measure-panel #measure-form .action-button {grid-column:1}
+}
+@container atlas (max-height:540px) and (min-width:600px) and (max-width:899px) {
+ /* Preserve P7.3 compact-landscape tree height and interaction plane. */
+ #atlas-controls .atlas-panel-heading {min-height:44px;padding-block:0}
+ #atlas-controls > #entities-panel {padding:2px 10px}
+ #atlas-controls > :is(#filters-panel,#measure-panel,#identify-panel,#share-panel,#atlas-info-dialog,#atlas-advanced-dialog,#modules-panel,#neighbors-panel) {padding:4px 10px}
+}
+@media (prefers-reduced-motion:reduce) {
+ #atlas-controls * {scroll-behavior:auto}
+}
+@media (forced-colors:active) {
+ #atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-group,.atlas-filter-subtypes,.atlas-comparison-card),
+ #atlas-controls :is(.atlas-share-actions,.atlas-advanced-row-actions,.atlas-comparison-actions) :is(a,button) {border-color:ButtonText}
+}
