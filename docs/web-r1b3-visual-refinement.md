@@ -16,7 +16,7 @@
 1. `scripts/audit/web-r1b-layout-browser.mjs` include capturi pentru Filtre, Măsurare, Partajare și Informații la 1440×900, 390×844, 844×390 și 640×360. Controlează dimensiunea de minimum 44×44 pentru comenzile active, antetele panourilor, lipsa overflowului orizontal și independența stării/URL la accordion.
 2. Rămân obligatorii toate suitele Chromium și Node existente: P7.2, P7.3, P7.4, P7.6, P9.0.9.5, WEB-R1b, CodeQL, integritatea ACTUAL, P8.2/3/4 și testele de proveniență.
 3. Capturile A/B trebuie inspectate și aprobate înaintea integrării. Textul mărit la 200%, navigarea din tastatură, focusul, Escape și responsive rămân criterii de acceptare.
-4. PR-ul este **stacked** pe WEB-R1b.2 / PR #371 și nu se integrează înaintea acceptării acestuia. Nicio modificare directă în `main`.
+4. PR-ul este **dependent semantic** de WEB-R1b.2 / PR #371. Pentru a declanșa CI, este orientat temporar spre `main` (workflow-urile rulează numai cu această bază); în consecință, diff-ul conține și schimbările #371 până la integrarea acestuia. PR #372 nu se integrează înaintea acceptării și integrării #371; apoi diff-ul se revalidează separat. Nicio modificare directă în `main`.
 
 ## Invariante
 
