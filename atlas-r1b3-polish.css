@@ -1,6 +1,6 @@
 /*
  * WEB-R1b.3 — controlled presentation refinement.
- * No changes to panel ownership, focus, map commands or ACTUAL data.
+ * No changes to panel ownership, focus, selection-card mobile sheet, map commands or ACTUAL data.
  * Keep 44 CSS px targets, native disclosure semantics and scrolling intact.
  */
 :root {
@@ -28,25 +28,21 @@
 #atlas-controls > :is(#filters-panel,#measure-panel,#identify-panel,#share-panel,#atlas-info-dialog,#atlas-advanced-dialog,#modules-panel,#neighbors-panel) {
  padding:10px 12px;
 }
-#atlas-controls :is(.hint,.muted,.atlas-advanced-hint,.atlas-advanced-muted),
-#details-panel :is(.hint,.muted) {
+#atlas-controls :is(.hint,.muted,.atlas-advanced-hint,.atlas-advanced-muted) {
  color:var(--atlas-r1b3-muted);
  line-height:1.55;
 }
-#atlas-controls :is(h3,h4),
-#details-panel :is(h3,h4) {
+#atlas-controls :is(h3,h4) {
  line-height:1.35;
  overflow-wrap:break-word;
 }
-#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions),
-#details-panel .atlas-panel-disclosure {
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions) {
  margin-block:6px 9px;
  border-color:var(--atlas-r1b3-rule);
  border-radius:var(--atlas-r1b3-radius);
  box-shadow:none;
 }
-#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions) > summary,
-#details-panel .atlas-panel-disclosure > summary {
+#atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions) > summary {
  padding:8px 11px;
  min-height:var(--atlas-control-target,44px);
  background:var(--atlas-r1b3-soft);
@@ -54,12 +50,10 @@
  line-height:1.35;
  font-weight:650;
 }
-#atlas-controls .atlas-panel-disclosure[open] > summary,
-#details-panel .atlas-panel-disclosure[open] > summary {
+#atlas-controls .atlas-panel-disclosure[open] > summary {
  border-radius:var(--atlas-r1b3-radius) var(--atlas-r1b3-radius) 0 0;
 }
-#atlas-controls .atlas-panel-disclosure .atlas-disclosure-body,
-#details-panel .atlas-panel-disclosure .atlas-disclosure-body {
+#atlas-controls .atlas-panel-disclosure .atlas-disclosure-body {
  padding:8px 10px 10px;
 }
 #atlas-controls .atlas-panel-disclosure .atlas-disclosure-body > :is(p,.hint) {
@@ -113,8 +107,7 @@
 }
 #atlas-controls .atlas-filter-subtypes .filter-row:last-child {border-bottom:0}
 #atlas-controls .statistical-level-breakdown {color:var(--atlas-r1b3-muted)}
-#atlas-controls :is(.action-button,.filter-actions button,.mobile-control),
-#details-panel :is(.action-button,.mobile-control) {
+#atlas-controls :is(.action-button,.filter-actions button,.mobile-control) {
  border-color:#b8cabd;
  border-radius:7px;
  box-shadow:none;
@@ -123,7 +116,6 @@
  padding:8px 10px;
 }
 #atlas-controls :is(.action-button,.filter-actions button,.mobile-control):focus-visible,
-#details-panel :is(.action-button,.mobile-control):focus-visible,
 #atlas-controls :is(summary,input,select,textarea):focus-visible {
  outline:3px solid var(--atlas-color-focus,#365b4a);
  outline-offset:2px;
@@ -180,8 +172,6 @@
 #measure-panel :is(#measure-status,#measure-points,#measure-segments) {margin-block:6px}
 #identify-panel .identify-fields {gap:8px}
 #identify-panel :is(.atlas-disclosure-body,.identify-actions) > .action-button {max-width:100%}
-#details-panel .atlas-panel-disclosure .atlas-disclosure-body {line-height:1.5}
-#details-panel .kv {column-gap:8px;row-gap:5px}
 @container atlas (max-width:599px) {
  #atlas-controls .atlas-panel-heading {min-height:52px}
  #atlas-controls > :is(#filters-panel,#measure-panel,#identify-panel,#share-panel,#atlas-info-dialog,#atlas-advanced-dialog,#modules-panel,#neighbors-panel) {padding:8px 10px}
