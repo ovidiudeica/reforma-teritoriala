@@ -4,7 +4,7 @@ import {formatEntityName} from './atlas-name-format.mjs';
 export function sharePayload(currentUrl,entity=null){
  const url=new URL(currentUrl);
  if(!['http:','https:'].includes(url.protocol))throw new TypeError('Unsupported atlas URL');
- if(entity){url.search='';url.hash='';url.searchParams.set('v','1');url.searchParams.set('e',entity.id);}
+ if(entity){url.search='';url.hash='';url.searchParams.set('v',entity.urlVersion===2?'2':'1');url.searchParams.set('e',entity.id);}
  const title=entity?'Reforma Teritorială — '+formatEntityName(entity.display_name):'Reforma Teritorială — vederea curentă';
  return {url:url.href,title,text:entity?'Explorează entitatea în atlas.':'Explorează această vedere a atlasului.'};
 }

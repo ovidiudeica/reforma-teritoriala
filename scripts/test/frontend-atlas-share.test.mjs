@@ -12,6 +12,13 @@ test('entity link resets only its own copy and encodes identifier as data',()=>{
  const data=sharePayload('https://example.test/atlas/?v=1&z=12&osm=0#old',entity),url=new URL(data.url);
  assert.deepEqual([...url.searchParams],[['v','1'],['e',entity.id]]);assert.equal(url.hash,'');assert.equal(url.pathname,'/atlas/');assert.equal(JSON.stringify(entity),before);
 });
+
+test('source-only outline entity links retain v2 defaults independently from ACTUAL links',()=>{
+ const entity={id:'view-nistrenia-group-osm-r1702216',display_name:'Camenca',urlVersion:2};
+ const url=new URL(sharePayload('https://example.test/atlas/?v=2&j=RO&x=old',entity).url);
+ assert.deepEqual([...url.searchParams],[['v','2'],['e',entity.id]]);
+ assert.equal(new URL(sharePayload(url.href,{id:'osm-r58974',display_name:'Moldova'}).url).searchParams.get('v'),'1');
+});
 test('unsafe URL schemes are rejected and email encodes text as a query value',()=>{
  for(const url of ['javascript:alert(1)','file:///tmp/a','data:text/html,test'])assert.throws(()=>sharePayload(url),TypeError);
  const payload={title:'A & B',text:'Atlas',url:'https://example.test/?e=a&z=4'};
