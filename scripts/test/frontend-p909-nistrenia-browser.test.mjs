@@ -67,10 +67,10 @@ try{
 
   await t.test('mobile hierarchy remains reachable, 44px reset target and no horizontal overflow',async()=>{
    await page.viewport(390,844);await page.openPanel('entities');
-   const state=await page.evaluate("({overflow:document.documentElement.scrollWidth>innerWidth,reset:document.getElementById('geometries-reset').getBoundingClientRect(),oldToggle:!!document.getElementById('nistrenia-osm-toggle'),tree:document.getElementById('hierarchy-tree').getBoundingClientRect()})");
+   const state=await page.evaluate("(()=>{const reset=document.getElementById('geometries-reset').getBoundingClientRect(),tree=document.getElementById('hierarchy-tree').getBoundingClientRect();return {overflow:document.documentElement.scrollWidth>innerWidth,reset:{width:reset.width,height:reset.height},oldToggle:!!document.getElementById('nistrenia-osm-toggle'),tree:{width:tree.width,height:tree.height}}})()");
    assert.equal(state.overflow,false);assert.equal(state.oldToggle,false);
-   assert(state.reset.width>=44&&state.reset.height>=44);
-   assert(state.tree.width>0&&state.tree.height>0);
+   assert(state.reset.width>=44&&state.reset.height>=44,JSON.stringify(state));
+   assert(state.tree.width>0&&state.tree.height>0,JSON.stringify(state));
   });
 
   await t.test('No extra OSM polygon resources or JavaScript failures',async()=>{
