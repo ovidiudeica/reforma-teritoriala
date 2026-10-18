@@ -50,7 +50,8 @@ try{
    await page.click('[data-kind=geometry-subtype][data-filter="'+sub+'"]');
    const levels=await page.evaluate("({level:document.querySelector('[data-kind=statistical]').dataset.filter,reset:document.querySelector('#filters-reset').disabled})");
    assert.equal(levels.reset,false);
-   await page.click('[data-kind=statistical][data-filter="'+levels.level+'"]');
+   await page.evaluate("document.querySelector('[data-kind=statistical]').closest('details').open=true");
+    await page.click('[data-kind=statistical][data-filter="'+levels.level+'"]');
    const before=await page.evaluate("({ids:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,baseline:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),count:document.querySelector('#filters-count').textContent})");
    assert.match(before.count,/dezactivate|dezactivat/);
    await page.click('#filters-reset');
