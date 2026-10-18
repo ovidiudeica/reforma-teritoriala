@@ -11,7 +11,7 @@
 #atlas-controls{grid-column:2;grid-row:1;min-width:0;min-height:0;padding:0;display:flex;flex-direction:column;background:#fff;border-right:1px solid #d9ddd9;overflow:auto;z-index:1400}
 #atlas-controls[hidden]{display:none}
 .atlas-panel-heading{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:8px;min-height:60px;padding:8px 12px;border-bottom:1px solid #dce4dd}
-.atlas-panel-heading h2{font-size:17px;margin:0;line-height:1.3}.atlas-panel-heading button{min-height:44px}
+.atlas-panel-heading h2{font-size:var(--atlas-type-panel-title,17px);margin:0;line-height:1.3}.atlas-panel-heading button{min-height:var(--atlas-control-target,44px)}
 #atlas-controls>section{min-height:0;overflow:auto;padding:12px 14px;overscroll-behavior:contain}
 #atlas-controls>section[hidden]{display:none}
 #atlas-controls>#search-panel{flex-shrink:0;padding-bottom:4px}
