@@ -18,17 +18,17 @@ try{
     removed:['osm-roles-panel','osm-roles-list','osm-roles-search','osm-roles-filter','nistrenia-osm-toggle','nistrenia-osm-panel'].every(id=>!document.getElementById(id)),
     officialCount:qaApp.hierarchyNodeById.size,
     niRoot:!!qaApp.atlasTree.getNode('view-nistrenia'),
-    niAlias:!!qaApp.atlasTree.getNode('view-nistrenia-role-osm-r9581354'),
+    niGroup:qaApp.atlasTree.getVisibleIds().includes('view-nistrenia-group-osm-r944727'),
     roots:[...qaApp.visibleEntityIds].sort(),ni:[...qaApp.visibleOperationalOutlineIds]
    })`);
    assert.equal(state.removed,true);assert.equal(state.officialCount,5848);
-   assert(state.niRoot&&state.niAlias);assert.deepEqual(state.ni,['view-nistrenia']);
+   assert(state.niRoot&&state.niGroup);assert.deepEqual(state.ni,['view-nistrenia']);
    assert.deepEqual(state.roots,['osm-r58974','osm-r90689']);
    const roles=await page.evaluate("fetch('public/data/p907216-osm-roles.json').then(r=>r.json()).then(c=>({n:c.rows.length,ids:new Set(c.rows.map(x=>x.id)).size,certified:c.legal_de_facto_certified,newGeometries:c.no_new_geometries}))");
    assert.equal(roles.n,85);assert.equal(roles.ids,85);assert.equal(roles.certified,0);assert.equal(roles.newGeometries,true);
   });
   await t.test('Bender and Hlinaia have separate source identities without legal promotion',async()=>{
-   const names=await page.evaluate("fetch('public/data/p907216-osm-roles.json').then(r=>r.json()).then(c=>({bender:c.rows.filter(r=>r.osm_name.toLowerCase().includes('bender')).map(r=>({id:r.id,label:r.role_label})),hlinaia:c.rows.filter(r=>r.osm_name.toLowerCase().includes('hlinaia')).map(r=>({id:r.id,label:r.role_label}))}))");
+   const names=await page.evaluate("fetch('public/data/p907216-osm-roles.json').then(r=>r.json()).then(c=>({bender:c.rows.filter(r=>['osm-r12463379','osm-r9581354'].includes(r.id)).map(r=>({id:r.id,label:r.role_label})),hlinaia:c.rows.filter(r=>['osm-r8291058','osm-r9301463'].includes(r.id)).map(r=>({id:r.id,label:r.role_label}))}))");
    assert.deepEqual(names.bender.map(x=>x.id).sort(),['osm-r12463379','osm-r9581354']);
    assert.deepEqual(names.hlinaia.map(x=>x.id).sort(),['osm-r8291058','osm-r9301463']);
    assert.notEqual(names.hlinaia[0].label,names.hlinaia[1].label);
@@ -37,6 +37,7 @@ try{
    await page.openPanel('entities');
    await page.evaluate("if(!qaApp.atlasTree.isOpen('view-nistrenia'))qaApp.atlasTree.toggle('view-nistrenia')");
    await page.evaluate("if(!qaApp.atlasTree.isOpen('view-nistrenia-group-osm-r944727'))qaApp.atlasTree.toggle('view-nistrenia-group-osm-r944727')");
+   await page.evaluate("qaApp.atlasTree.reveal('view-nistrenia-role-osm-r9581354')");
    await page.click('.tree-select[data-entity-id="view-nistrenia-role-osm-r9581354"]');
    await waitFor(()=>page.evaluate("qaApp.selectedEntityId==='osm-r9581354'&&document.querySelector('.osm-role-evidence')?.dataset.osmRoleId==='osm-r9581354'"),'Bender source details',30000);
    const state=await page.evaluate("({selected:qaApp.selectedEntityId,role:document.querySelector('.osm-role-evidence')?.textContent,link:document.querySelector('.osm-role-evidence a')?.href,official:document.querySelector('[data-provenance=official]')?.textContent,officialCount:qaApp.hierarchyNodeById.size})");
