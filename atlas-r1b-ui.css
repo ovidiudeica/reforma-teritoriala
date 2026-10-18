@@ -99,6 +99,7 @@
  box-shadow:var(--atlas-ui-shadow);
  cursor:pointer;
 }
+#atlas-controls #drawer-close > span {pointer-events:none}
 #atlas-controls #drawer-close:hover,#details-panel .atlas-close-button:hover {background:var(--atlas-ui-hover);border-color:var(--atlas-ui-border-strong)}
 /* Native, independently toggleable disclosures: keyboard/ARIA owned by <details>. */
 #atlas-controls .atlas-panel-disclosure,
