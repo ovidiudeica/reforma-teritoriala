@@ -9,7 +9,7 @@
 #results-panel .search-results{flex:1;min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain}
 #search-status,#search-empty{flex:none}
 #search-status{margin:4px 0;line-height:16px}
-#atlas-controls :is(.action-button,.filter-actions button,summary){min-height:44px;min-width:44px;box-sizing:border-box;padding:8px;display:inline-flex;align-items:center}
+#atlas-controls :is(.action-button,.filter-actions button,summary){min-height:var(--atlas-control-target,44px);min-width:var(--atlas-control-target,44px);box-sizing:border-box;padding:8px;display:inline-flex;align-items:center}
 #atlas-controls summary{display:list-item;align-content:center;cursor:pointer}
 #filters-panel label{min-height:44px;display:flex;align-items:center;gap:7px;cursor:pointer}
 #filters-panel input[type=checkbox],.atlas-share-target input{appearance:none;box-sizing:border-box;flex:none;width:44px;height:44px;margin:0;background:transparent;border:0;cursor:pointer}
@@ -25,7 +25,7 @@
 #share-url{box-sizing:border-box;display:block;width:100%;min-width:0;margin-top:6px;padding:8px;border:1px solid #c1cec6;border-radius:6px;resize:vertical;font:12px/1.5 monospace;overflow-wrap:anywhere}
 .atlas-info-section{border-bottom:1px solid #dce4dd;margin-bottom:12px}
 .atlas-info-section p{font-size:12px;line-height:1.6}
-#atlas-advanced-content button{min-width:44px;min-height:44px}
+#atlas-advanced-content button{min-width:var(--atlas-control-target,44px);min-height:var(--atlas-control-target,44px)}
 .atlas-advanced-hint{font-size:12px;color:#415f4a;line-height:1.5;margin:0 0 11px}
 .atlas-advanced-muted{font-size:12px;color:#466054}
 .atlas-advanced-list{padding:0;margin:0 0 10px;list-style:none}
