@@ -49,10 +49,18 @@ for(const id of expected)assert(ui.rows.some(r=>r.id===id));
 const html=readFileSync('index.html','utf8');
 const app=readFileSync('app.js','utf8');
 const component=readFileSync('atlas-osm-roles.mjs','utf8');
-for(const anchor of ['id="osm-roles-panel"','id="osm-roles-list"','id="osm-roles-search"','id="osm-roles-filter"'])assert(html.includes(anchor));
+// UI-only retirement: the immutable 85-role catalog still must validate and
+// render its source/legal evidence in ordinary ACTUAL entity cards.
+for(const anchor of ['id="osm-roles-panel"','id="osm-roles-list"','id="osm-roles-search"','id="osm-roles-filter"','id="nistrenia-osm-panel"','id="nistrenia-osm-toggle"'])assert(!html.includes(anchor),'redundant OSM UI still mounted: '+anchor);
+assert(html.includes('id="hierarchy-tree"'));
+assert(html.includes('id="geometries-reset"'));
+assert(html.includes('id="filters-reset"'));
+assert(html.includes('id="map-geometries-reset"'));
 assert(app.includes('validateOsmRolesCatalog('));
 assert(app.includes('renderOsmRoleDetails('));
-assert(app.includes('selectEntity(id,{zoom:true,source:\'osm-cartographic-existing\'})'));
+assert(app.includes('createNistreniaOperationalView('));
+assert(app.includes('osmRoleById=verified'));
+assert(!app.includes('createOsmRolesPanel('));
 assert(!component.includes('L.geoJSON('));
 assert(!component.includes('tileLayer('));
 assert(!app.includes("roots.PMR"));
