@@ -1,0 +1,299 @@
+{
+  "reviewedHead": "b9406560f6e0bed947752f6cf257e0bf23266327",
+  "registryOpenAlerts": 0,
+  "newDismissals": 0,
+  "codeChangesToSecurityControls": 0,
+  "initialPrAnalyses": [
+    1974222010,
+    1974221231
+  ],
+  "initialPrAnalysisResults": 0,
+  "scope": "Five historical HIGH path-injection alerts #12-16 reviewed individually; all ten fixed HIGH alerts #17-26 also checked individually to cover the unspecified historical report cohort. Final HEAD must receive fresh clean analyses before integration.",
+  "entries": [
+    {
+      "id": 12,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/12",
+      "rule": "js/path-injection",
+      "severity": "high",
+      "location": {
+        "path": "scripts/lib/actual-oci-builder.mjs",
+        "start_line": 117,
+        "end_line": 117,
+        "start_column": 37,
+        "end_column": 47
+      },
+      "registryState": "dismissed",
+      "dismissedAt": "2026-10-01T17:33:58Z",
+      "dismissedReason": "false positive",
+      "existingDismissal": "ACTUAL_BUILDX_PLUGIN_PATH is not supplied from user/PR input in production workflows. Runtime validation reads the fixed Docker CLI plugin location and verifies the exact pinned Buildx binary SHA-256 plus version/commit before use.",
+      "review": "Read-only Buildx plugin path from trusted operator environment, defaulting to the fixed Docker CLI plugin location. Production workflows expose no PR/dispatch path input. The exact binary SHA-256, Buildx version/commit and BuildKit image/digest are checked; the path is never executed as a command.",
+      "reviewVerdict": "ACCEPT_EXISTING_FALSE_POSITIVE_WITHIN_WORKFLOW_TRUST_BOUNDARY"
+    },
+    {
+      "id": 13,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/13",
+      "rule": "js/path-injection",
+      "severity": "high",
+      "location": {
+        "path": "scripts/process/audit-actual-host-trust.mjs",
+        "start_line": 36,
+        "end_line": 36,
+        "start_column": 13,
+        "end_column": 28
+      },
+      "registryState": "dismissed",
+      "dismissedAt": "2026-10-01T17:33:59Z",
+      "dismissedReason": "false positive",
+      "existingDismissal": "ACTUAL_HOST_TRUST_AUDIT_PATH is set only by repository-owned workflows to runner.temp/actual-host-trust-audit.json. No user or PR input controls the path; output is artifact-only audit evidence.",
+      "review": "Parent directory creation for the host-trust audit report. Production callers set ACTUAL_HOST_TRUST_AUDIT_PATH to runner.temp/actual-host-trust-audit.json; no PR or dispatch input feeds the destination.",
+      "reviewVerdict": "ACCEPT_EXISTING_FALSE_POSITIVE_WITHIN_WORKFLOW_TRUST_BOUNDARY"
+    },
+    {
+      "id": 14,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/14",
+      "rule": "js/path-injection",
+      "severity": "high",
+      "location": {
+        "path": "scripts/process/audit-actual-host-trust.mjs",
+        "start_line": 37,
+        "end_line": 37,
+        "start_column": 17,
+        "end_column": 23
+      },
+      "registryState": "dismissed",
+      "dismissedAt": "2026-10-01T17:34:00Z",
+      "dismissedReason": "false positive",
+      "existingDismissal": "ACTUAL_HOST_TRUST_AUDIT_PATH is set only by repository-owned workflows to runner.temp/actual-host-trust-audit.json. No user or PR input controls the path; output is artifact-only audit evidence.",
+      "review": "Writing the host-trust audit report to the same workflow-owned runner.temp destination. Output is artifact-only evidence and is not staged as release data. An attacker-controlled process environment would cross the trusted-operator boundary; it is not a remote application input.",
+      "reviewVerdict": "ACCEPT_EXISTING_FALSE_POSITIVE_WITHIN_WORKFLOW_TRUST_BOUNDARY"
+    },
+    {
+      "id": 15,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/15",
+      "rule": "js/path-injection",
+      "severity": "high",
+      "location": {
+        "path": "scripts/process/write-actual-candidate-execution-receipt.mjs",
+        "start_line": 28,
+        "end_line": 28,
+        "start_column": 13,
+        "end_column": 28
+      },
+      "registryState": "dismissed",
+      "dismissedAt": "2026-10-01T17:34:02Z",
+      "dismissedReason": "false positive",
+      "existingDismissal": "ACTUAL_CANDIDATE_EXECUTION_RECEIPT_PATH is fixed by the repository workflow to runner.temp/actual-candidate-execution-receipt.json. It is not a dispatch/PR input and the receipt is artifact-only, never staged into the ACTUAL release tree.",
+      "review": "Parent directory creation for the candidate execution receipt. actual-candidate.yml sets the destination to runner.temp/actual-candidate-execution-receipt.json, with no user-controlled path expression.",
+      "reviewVerdict": "ACCEPT_EXISTING_FALSE_POSITIVE_WITHIN_WORKFLOW_TRUST_BOUNDARY"
+    },
+    {
+      "id": 16,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/16",
+      "rule": "js/path-injection",
+      "severity": "high",
+      "location": {
+        "path": "scripts/process/write-actual-candidate-execution-receipt.mjs",
+        "start_line": 29,
+        "end_line": 29,
+        "start_column": 17,
+        "end_column": 23
+      },
+      "registryState": "dismissed",
+      "dismissedAt": "2026-10-01T17:34:03Z",
+      "dismissedReason": "false positive",
+      "existingDismissal": "ACTUAL_CANDIDATE_EXECUTION_RECEIPT_PATH is fixed by the repository workflow to runner.temp/actual-candidate-execution-receipt.json. It is not a dispatch/PR input and the receipt is artifact-only, never staged into the ACTUAL release tree.",
+      "review": "Writing the candidate execution receipt to that fixed workflow-owned destination. Receipt metadata is artifact-only and excluded from candidate/persisted ACTUAL release identity.",
+      "reviewVerdict": "ACCEPT_EXISTING_FALSE_POSITIVE_WITHIN_WORKFLOW_TRUST_BOUNDARY"
+    },
+    {
+      "id": 17,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/17",
+      "rule": "js/double-escaping",
+      "severity": "high",
+      "location": {
+        "path": "scripts/process/audit-ro-level9-exceptions.mjs",
+        "start_line": 33,
+        "end_line": 33,
+        "start_column": 8,
+        "end_column": 61
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "The XML entity decoder now performs one regex replacement with a callback. Encoded ampersands introduced in the result are not rescanned, preventing double-unescaping. Registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 18,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/18",
+      "rule": "js/double-escaping",
+      "severity": "high",
+      "location": {
+        "path": "scripts/process/audit-ro-official-exceptions.mjs",
+        "start_line": 74,
+        "end_line": 74,
+        "start_column": 7,
+        "end_column": 60
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "The official-exceptions XML decoder uses the same single-pass callback rather than chained entity replacements. Nested encodings remain single-decoded. Registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 19,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/19",
+      "rule": "js/resource-exhaustion",
+      "severity": "high",
+      "location": {
+        "path": "scripts/import/import-md-cuatm.mjs",
+        "start_line": 77,
+        "end_line": 77,
+        "start_column": 114,
+        "end_column": 132
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "CUATM timeout and retry durations are reviewed constants: 60000 ms request timeout, two attempts and 3000 ms retry backoff. They are not supplied by an HTTP, environment or PR value. The uncontrolled-duration resource-exhaustion cause is absent; registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 20,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/20",
+      "rule": "js/resource-exhaustion",
+      "severity": "high",
+      "location": {
+        "path": "scripts/import/import-osm.mjs",
+        "start_line": 102,
+        "end_line": 102,
+        "start_column": 50,
+        "end_column": 68
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "OSM transport uses fixed 30000 ms API and 90000 ms Overpass timeouts, two retries and 5000 ms backoff. Timer durations are not taken from user input. Registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 21,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/21",
+      "rule": "js/insecure-temporary-file",
+      "severity": "high",
+      "location": {
+        "path": "scripts/process/audit-actual-host-trust.mjs",
+        "start_line": 37,
+        "end_line": 37,
+        "start_column": 17,
+        "end_column": 23
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "Production host-trust audit callers explicitly supply a per-job runner.temp destination. This avoids the shared /tmp fallback in production. The review accepts the workflow use; it does not recommend the fallback for a hostile shared local host. Registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 22,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/22",
+      "rule": "js/remote-property-injection",
+      "severity": "high",
+      "location": {
+        "path": "scripts/process/audit-administrative.mjs",
+        "start_line": 12,
+        "end_line": 12,
+        "start_column": 27,
+        "end_column": 28
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "Dynamic property names feed administrative numeric counters, not executable code or authorization. Registry state is fixed; the current PR has zero CodeQL results. No security suppression or source change is made in this remediation.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 23,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/23",
+      "rule": "js/user-controlled-bypass",
+      "severity": "high",
+      "location": {
+        "path": "scripts/import/import-md-cuatm.mjs",
+        "start_line": 122,
+        "end_line": 122,
+        "start_column": 5,
+        "end_column": 13
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "CUATM fallback preservation branch uses an existing snapshot only after validateSnapshot. It preserves validated source data when the official download is unavailable; it does not grant application authorization or enable P9.1. Registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 24,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/24",
+      "rule": "js/user-controlled-bypass",
+      "severity": "high",
+      "location": {
+        "path": "scripts/import/import-md-cuatm.mjs",
+        "start_line": 139,
+        "end_line": 139,
+        "start_column": 4,
+        "end_column": 12
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "CUATM unchanged-snapshot branch compares canonical record hashes after validation and avoids an unnecessary rewrite. This is deterministic source deduplication, not an authorization bypass. Registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 25,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/25",
+      "rule": "js/user-controlled-bypass",
+      "severity": "high",
+      "location": {
+        "path": "scripts/import/import-ro-siruta.mjs",
+        "start_line": 212,
+        "end_line": 212,
+        "start_column": 5,
+        "end_column": 34
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "SIRUTA fallback checks an existing official CSV snapshot registry/reference year before preserving it. The local source snapshot is operator-owned and this branch does not bypass the production ACTUAL/P9.1 gates. Registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    },
+    {
+      "id": 26,
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/26",
+      "rule": "js/user-controlled-bypass",
+      "severity": "high",
+      "location": {
+        "path": "scripts/import/import-ro-siruta.mjs",
+        "start_line": 212,
+        "end_line": 212,
+        "start_column": 85,
+        "end_column": 131
+      },
+      "registryState": "fixed",
+      "dismissedAt": null,
+      "dismissedReason": null,
+      "existingDismissal": null,
+      "review": "Second operand of the same SIRUTA official-CSV fallback guard. The existing source is retained rather than promoted into a new jurisdiction; no authorization or semantic promotion flag is derived from this predicate. Registry state is fixed.",
+      "reviewVerdict": "FIXED_IN_REGISTRY_CURRENT_PR_SCAN_HAS_ZERO_RESULTS"
+    }
+  ]
+}

@@ -4,7 +4,8 @@ import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
 import {validateOsmRolesCatalog,createOsmRolesPanel,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
 import {validateNistreniaOsmNavigation,createNistreniaOsmNavigator} from './atlas-nistrenia-osm.mjs';
-import {createNistreniaOperationalView,nistreniaSearchEntities} from './atlas-nistrenia-jurisdiction.mjs';
+import {createNistreniaOperationalView,nistreniaSearchEntities,NISTR_EN_ROOT} from './atlas-nistrenia-jurisdiction.mjs';
+import {fetchVerifiedNistreniaOutlines,createNistreniaOutlineLayers,niOutlineIds} from './atlas-nistrenia-outlines.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
 import {createAtlasIdentify} from './atlas-identify-ui.mjs';
@@ -38,7 +39,7 @@ map.attributionControl?.setPosition?.('topright');
 let osmBasemapVisible=true;
 const statisticalPane=map.createPane?.('statistical-boundaries');
 if(statisticalPane?.style)statisticalPane.style.zIndex='450';
-const osmTiles=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+const osmTiles=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors · ODbL'}).addTo(map);
 function setOsmBasemapVisible(value){
  const visible=Boolean(value);
  if(visible!==osmBasemapVisible){if(visible)osmTiles.addTo(map);else map.removeLayer(osmTiles);osmBasemapVisible=visible;}
@@ -84,6 +85,10 @@ let osmRolesPanel=null;
 let nistreniaOsmNavigator=null;
 let nistreniaCatalog=null;
 let nistreniaView=null;
+let nistreniaOutlineFeatures=null;
+let nistreniaOutlineProof=null;
+let nistreniaOutlines=null;
+const visibleOperationalOutlineIds=new Set(); // OSM-only independent outline checkboxes, never ACTUAL IDs.
 const activeFilterGroups=new Set(Object.keys(geometryLabels));
 const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a second class state.
 const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
@@ -108,7 +113,7 @@ function updateFilterCount(){
   [...geometryFilterIndex?.subtypeMembers?.keys?.()||[]].filter(id=>!activeGeometrySubtypes.has(id)).length+
   [1,2,3,'unclassified'].filter(level=>!activeStatisticalLevels.has(level)).length+
   ['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase())?.checked===false).length+
-  Number(Boolean(document.getElementById('layer-ni')?.checked))+
+  Number(Boolean(nistreniaView&&!document.getElementById('layer-ni')?.checked))+
   Number(!separateStatisticalGeometry);
  count.textContent=inactive?'('+inactive+' '+(inactive===1?'dezactivat':'dezactivate')+')':'';
  const reset=document.getElementById('filters-reset');if(reset)reset.disabled=inactive===0;
@@ -218,6 +223,7 @@ function isVisible(entity){
 function syncJurisdictionRoots(){
  if(jurisdictionChecked('RO'))roots.RO.addTo(map);else map.removeLayer(roots.RO);
  if(jurisdictionChecked('MD')||jurisdictionChecked('NI'))roots.MD.addTo(map);else map.removeLayer(roots.MD);
+ nistreniaOutlines?.sync(visibleOperationalOutlineIds,jurisdictionChecked('NI'));
 }
 function enableNistreniaOperational(){
  const input=document.getElementById('layer-ni');
@@ -368,7 +374,7 @@ function resetGlobalFilters(){
   const input=document.getElementById('layer-'+jurisdiction.toLowerCase());
   if(input)input.checked=true;
  }
- const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=false;
+ const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=Boolean(nistreniaView);
  syncJurisdictionRoots();
  refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
 }
@@ -377,12 +383,13 @@ function refreshGeometryVisibility(){
  atlasFilters?.sync();
  updateFilterCount();
  rerenderLoadedTiers();
+ nistreniaOutlines?.sync(visibleOperationalOutlineIds,jurisdictionChecked('NI'));
  atlasTree?.refreshVisibility();
  updateSelectionVisibility();
  atlasAdvanced?.refresh();
 }
 function geometryResetDisabled(){
- return !hierarchyTree||(visibleEntityIds.size===hierarchyTree.root_ids.length&&hierarchyTree.root_ids.every(id=>visibleEntityIds.has(id)));
+ return !hierarchyTree||(visibleEntityIds.size===hierarchyTree.root_ids.length&&hierarchyTree.root_ids.every(id=>visibleEntityIds.has(id))&&visibleOperationalOutlineIds.size===(nistreniaOutlines?1:0)&&(!nistreniaOutlines||visibleOperationalOutlineIds.has(NISTR_EN_ROOT)));
 }
 function syncGeometryReset(){
  // ARIA disabling preserves native keyboard focus after reset (disabled blurs).
@@ -394,10 +401,11 @@ function resetGeometries(){
  if(geometryResetDisabled())return;
  visibleEntityIds.clear();
  for(const id of hierarchyTree.root_ids)visibleEntityIds.add(id);
+ visibleOperationalOutlineIds.clear();if(nistreniaOutlines)visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
  refreshGeometryVisibility();
  syncTiers().catch(console.error);
  atlasUrl?.commit('push');
- document.getElementById('geometries-reset-status').textContent='Geometriile au fost resetate la România și Moldova. Selecția și filtrele sunt păstrate.';
+ document.getElementById('geometries-reset-status').textContent='Geometriile au fost resetate la România, Moldova și Nistrenia. Selecția și filtrele sunt păstrate.';
 }
 for(const id of ['geometries-reset','map-geometries-reset'])document.getElementById(id)?.addEventListener('click',resetGeometries);
 function updateSelectionVisibility(){
@@ -426,19 +434,17 @@ function searchEntitiesWithNistrenia(){
 async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
  if(!nistreniaView?.isVirtual(id))return selectEntity(id,options);
  const actualId=nistreniaView.toActual.get(id);
- if(actualId){
-  await showExistingOsmRoles([actualId]);
-  atlasTree?.select(id);
-  return;
- }
- const ids=nistreniaView.aggregateIds(id);
- if(!ids)throw Error('Nistrenia: unknown virtual group');
- await showExistingOsmRoles(ids);
+ if(actualId){await selectEntity(actualId,options);atlasTree?.select(id);return;}
+ if(!nistreniaOutlines?.has(id))throw Error('Nistrenia: independent OSM outline unavailable '+id);
  atlasTree?.select(id);
+ // Parent selection never checks any descendant geometry.
+ if(options.zoom!==false)map.fitBounds(nistreniaOutlines.bounds(id),{padding:[30,30],maxZoom:12});
  const name=nistreniaView.nodes.get(id)?.display_name||'Nistrenia';
+ const osmId=nistreniaOutlineFeatures.get(id).properties.osm_relation_id;
+ const source=nistreniaOutlineProof.relations.find(item=>item.id===id);
  document.getElementById('details-title').textContent=name;
- document.getElementById('details-summary').textContent='Grupare operațională OSM (de facto)';
- document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Jurisdicție operațională</h3><p>Nistrenia este reprezentată în atlas ca entitate de facto nerecunoscută internațional. Teritoriul aparține Republicii Moldova potrivit recunoașterii internaționale. Gruparea nu certifică o nouă apartenență juridică.</p><p>'+ids.length+' geometrii existente ACTUAL, fără poligon juridic suplimentar.</p><p><a href="https://www.openstreetmap.org/relation/65335" target="_blank" rel="noopener noreferrer">Relația OSM 65335</a></p></section>';
+ document.getElementById('details-summary').textContent='Contur propriu OSM · grupare operațională de facto';
+ document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Perimetru OSM descriptiv</h3><p>Conturul OSM este independent de cele 85 de geometrii ACTUAL componente. Selectarea acestui nume nu activează descendenți. Nistrenia nu este stat recunoscut; teritoriul aparține juridic Republicii Moldova. Limita OSM nu certifică o nouă delimitare juridică.</p><p>Relația OSM '+osmId+' · versiunea '+source.relation_version+' · '+escapeHtml(source.relation_timestamp)+' · © OpenStreetMap contributors, ODbL.</p><p><a href="https://www.openstreetmap.org/relation/'+osmId+'" target="_blank" rel="noopener noreferrer">Sursă OSM</a></p></section>';
 }
 function wireSearch(){
   const input=document.getElementById('entity-search');
@@ -462,7 +468,11 @@ async function loadHierarchyTree(){
  hierarchyNodeById.clear();
  for(const [id,node] of validated)hierarchyNodeById.set(id,node);
  hierarchyTree=tree;
- nistreniaView=nistreniaCatalog?createNistreniaOperationalView({catalog:nistreniaCatalog,roles:osmRoleById,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
+ nistreniaView=nistreniaCatalog&&nistreniaOutlineFeatures?createNistreniaOperationalView({catalog:nistreniaCatalog,roles:osmRoleById,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
+  if(nistreniaView){
+   nistreniaOutlines=createNistreniaOutlineLayers({L,map,features:nistreniaOutlineFeatures,onSelect:id=>selectNistreniaNode(id,{zoom:false,source:'map'}).catch(console.error)});
+   visibleOperationalOutlineIds.clear();visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
+  }
  const niFilter=document.getElementById('layer-ni');if(niFilter)niFilter.disabled=!nistreniaView;
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
@@ -470,15 +480,18 @@ async function loadHierarchyTree(){
   syncGeometryReset();
  atlasSearch?.updateIndex(createSearchIndex(searchEntitiesWithNistrenia(),nistreniaView?.nodes||hierarchyNodeById));
  atlasAdvanced=createAtlasAdvancedNavigation({
-  document,panels:atlasPanels,entities:[...entityById.values()],getChecked:()=>visibleEntityIds,
+  document,panels:atlasPanels,entities:[...entityById.values(),...(nistreniaView?[NISTR_EN_ROOT,...nistreniaView.groupIds]:[]).map(id=>{
+    const node=nistreniaView.nodes.get(id),bounds=nistreniaOutlines.bounds(id),sw=bounds.getSouthWest(),ne=bounds.getNorthEast();
+    return {...node,map:{bbox:[sw.lng,sw.lat,ne.lng,ne.lat]},representation:{inferred_type:node.display_type,osm_relation_id:nistreniaOutlineFeatures.get(id).properties.osm_relation_id}};
+   })],getChecked:()=>new Set([...visibleEntityIds,...visibleOperationalOutlineIds]),
   storage:globalThis.window?.localStorage,
-  onGeometricCompare:(target,ids)=>geometricUi?.compare(target,ids),
+  onGeometricCompare:(target,ids)=>ids.some(id=>nistreniaOutlines?.has(id))?null:geometricUi?.compare(target,ids),
   onCheck:(id,checked)=>{
-   if(!entityById.has(id))return;
-   if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);
+   if(nistreniaOutlines?.has(id)){if(checked)visibleOperationalOutlineIds.add(id);else visibleOperationalOutlineIds.delete(id);}
+   else{if(!entityById.has(id))return;if(checked)visibleEntityIds.add(id);else visibleEntityIds.delete(id);}
    refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
   },
-  onSelect:id=>selectEntity(id,{zoom:true,source:'advanced'}),
+  onSelect:id=>(nistreniaOutlines?.has(id)?selectNistreniaNode(id,{zoom:true,source:'advanced'}):selectEntity(id,{zoom:true,source:'advanced'})),
   onZoomPair:entities=>{
    if(entities.length!==2||entities.some(entity=>!Array.isArray(entity?.map?.bbox)))return;
    const bounds=entities.map(entity=>entity.map.bbox);
@@ -492,14 +505,12 @@ function renderHierarchyTree(){
  const container=document.getElementById('hierarchy-tree');
  if(!container||!hierarchyTree)return;
  const isTreeGeometryVisible=id=>{
-  const ids=nistreniaView?.aggregateIds(id);
-  if(ids)return jurisdictionChecked('NI')&&ids.some(actualId=>isVisible(entityById.get(actualId)));
+  if(nistreniaOutlines?.has(id))return visibleOperationalOutlineIds.has(id)&&jurisdictionChecked('NI');
   const entity=entityById.get(nistreniaView?.actualId(id)||id);
   return Boolean(entity&&isVisible(entity));
  };
  const isTreeChecked=id=>{
-  const ids=nistreniaView?.aggregateIds(id);
-  if(ids)return ids.every(actualId=>visibleEntityIds.has(actualId));
+  if(nistreniaOutlines?.has(id))return visibleOperationalOutlineIds.has(id);
   return visibleEntityIds.has(nistreniaView?.actualId(id)||id);
  };
  atlasTree?.destroy();
@@ -507,10 +518,12 @@ function renderHierarchyTree(){
   container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
   isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
-   const aggregate=nistreniaView?.aggregateIds(id);
-   const ids=aggregate||(nistreniaView?.toActual.has(id)?[nistreniaView.toActual.get(id)]:[id]);
-   if(checked&&nistreniaView?.isVirtual(id))enableNistreniaOperational();
-   for(const actualId of ids){if(checked)visibleEntityIds.add(actualId);else visibleEntityIds.delete(actualId);}
+   if(nistreniaOutlines?.has(id)){
+    if(checked)visibleOperationalOutlineIds.add(id);else visibleOperationalOutlineIds.delete(id);
+   }else{
+    const actualId=nistreniaView?.toActual.get(id)||id;
+    if(checked)visibleEntityIds.add(actualId);else visibleEntityIds.delete(actualId);
+   }
    syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
   },
   onDisclosureChange:()=>atlasUrl?.commit('replace'),
@@ -813,11 +826,11 @@ async function applySelection(id,options=false,clickedLayer=null){
 function captureUrlState(){
  const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
  const center=map.wrapLatLng?.(current)||current;
- return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds};
+ return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds,visibleOperationalOutlineIds};
 }
 async function applyUrlState(state){
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
- replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
+ replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);replace(visibleOperationalOutlineIds,state.visibleOperationalOutlineIds||[]);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
  for(const j of ['RO','MD','NI']){const control=document.getElementById('layer-'+j.toLowerCase());if(control)control.checked=state.jurisdictions.includes(j)&&!(j==='NI'&&!nistreniaView);}syncJurisdictionRoots();
  atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
  if(!state.viewportExplicit&&!state.entityId&&typeof map.getSize==='function')fitRoMd(map,entityById);
@@ -828,7 +841,7 @@ async function applyUrlState(state){
 async function initializeUrlState(){
  const browser=globalThis.window;
  if(!browser?.location||!browser?.history||!browser.addEventListener)return;
- const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,filterIndex:geometryFilterIndex});
+ const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,treeRootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,operationalOutlineIds:nistreniaOutlines?niOutlineIds:[],filterIndex:geometryFilterIndex});
  atlasUrl=createAtlasUrlState({browser,config,capture:captureUrlState,apply:applyUrlState});await atlasUrl.restore();atlasShare?.refresh();
 }
 atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>entityById.get(selectedEntityId)||null});
@@ -874,7 +887,9 @@ const frontendReady=(async()=>{
  let phase='index';
  try{
   await loadIndex();
-  try{await loadOsmRoleCatalog();await loadNistreniaOsmNavigation();}
+  try{await loadOsmRoleCatalog();await loadNistreniaOsmNavigation();
+    const verified=await fetchVerifiedNistreniaOutlines((...args)=>fetch(...args),crypto.subtle,nistreniaCatalog);
+    nistreniaOutlineFeatures=verified.features;nistreniaOutlineProof=verified.proof;}
   catch(error){
    const status=document.getElementById('osm-roles-status');
    if(status){status.textContent='Catalogul descriptiv OSM nu poate fi verificat pentru acest release ACTUAL.';status.setAttribute('role','alert');}
@@ -899,4 +914,4 @@ const frontendReady=(async()=>{
  }
 })();
 
-export {atlasExport,exportSource,atlasNeighbors,neighborsEngine,atlasIdentify,pointIdentifier,geometryResources,atlasShare,atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell};
+export {atlasExport,exportSource,atlasNeighbors,neighborsEngine,atlasIdentify,pointIdentifier,geometryResources,atlasShare,atlasTree,atlasPanels,atlasLayout,atlasPreview,map,styleFor,atlasMobile,atlasUrl,captureUrlState,applyUrlState,atlasSearch,frontendReady,entityById,activeFilterGroups,activeGeometryClasses,activeGeometrySubtypes,activeStatisticalLevels,statisticalFeatureById,statisticalGeometryLoaded,statisticalGroups,selectedEntityId,selectEntity,clearSelection,hierarchyNodeById,visibleEntityIds,renderCollection,ensureChunk,ensureTier,syncTiers,chunkGroups,tierGroups,ensureStatisticalGeometry,refreshGeometryVisibility,setSeparateStatisticalGeometry,atlasAdvanced,atlasExplorerShell,visibleOperationalOutlineIds,nistreniaOutlines,nistreniaOutlineFeatures};

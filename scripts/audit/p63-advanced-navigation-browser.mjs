@@ -14,7 +14,7 @@ try{
    const before=await page.evaluate(idsState);
    await page.openPanel('visible');
    const state=await page.evaluate("({open:!document.querySelector('#atlas-advanced-dialog').hidden,focus:document.activeElement.id,rows:[...document.querySelectorAll('#atlas-advanced-content .atlas-advanced-row')].map(el=>el.textContent)})");
-   assert.equal(state.open,true);assert.equal(state.focus,'drawer-close');assert.equal(state.rows.length,2);
+   assert.equal(state.open,true);assert.equal(state.focus,'drawer-close');assert.equal(state.rows.length,3,'Straturi includes third independently checked Nistrenia root');
    await page.key('Escape');
    assert.equal(await page.evaluate("!document.querySelector('#atlas-advanced-dialog').hidden"),false);
    assert.equal(await page.evaluate('document.activeElement.id'),'advanced-visible');

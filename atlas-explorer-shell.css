@@ -26,19 +26,20 @@
 #details-panel{position:absolute;inset:auto var(--command-space) 14px auto;width:min(440px,calc(100% - var(--rail-width) - var(--pane-space) - var(--divider-space) - var(--command-space) - 14px));max-height:min(65cqh,580px,calc(100% - 38px));min-height:0;z-index:1100;padding:18px;background:#fff;border:1px solid #dce4dd;border-radius:12px;box-shadow:0 12px 40px #19372a35;overflow:auto}
 #details-panel[hidden]{display:none!important}
 @container atlas (max-width:899px){
- #atlas-main{display:block;--map-offset:56px;--sheet-bottom:var(--navigation-bottom,78px)}
+ #atlas-main{display:block;min-height:var(--map-content-min-height,0px);--map-offset:56px;--sheet-bottom:var(--navigation-bottom,78px)}
  #map{position:absolute;inset:0 0 0 var(--map-offset);width:calc(100% - var(--map-offset))}
  .atlas-navigation-rail{position:absolute;inset:0 auto 0 0;width:var(--rail-width)}
  #atlas-controls{position:absolute;inset:0 auto 0 var(--rail-width);width:min(420px,calc(100% - var(--rail-width) - 8px));border-radius:0 10px 10px 0;box-shadow:4px 0 20px #0003}
  .drawer-backdrop{display:block;position:absolute;inset:0;border:0;background:#0004;z-index:1300}
  .drawer-backdrop[hidden]{display:none}
  #explorer-resizer{display:none}
- #atlas-main #details-panel{inset:auto 8px var(--sheet-bottom) calc(var(--map-offset) + var(--command-space));width:auto;height:auto;max-height:calc(100% - var(--sheet-bottom) - var(--annotation-space,24px));min-height:min(88px,calc(100% - var(--sheet-bottom) - var(--annotation-space,24px)));padding:10px 12px;border-radius:12px;z-index:1200;overflow:auto}
- #atlas-main #details-panel{display:grid;grid-template-columns:44px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);column-gap:8px}
- #atlas-main #sheet-drag{grid-column:1;grid-row:1/3;width:44px;height:auto;min-height:44px;align-self:stretch;padding:0}
+ #atlas-main #details-panel{inset:auto 8px var(--sheet-bottom) calc(var(--map-offset) + var(--command-space));width:auto;height:var(--selection-min-height,88px);max-height:calc(100% - var(--sheet-bottom) - var(--annotation-space,24px));min-height:var(--selection-min-height,88px);padding:10px 12px;border-radius:12px;z-index:1200;overflow:clip}
+ #atlas-main #details-panel{display:grid;grid-template-columns:44px minmax(0,1fr);grid-template-rows:auto minmax(44px,1fr);column-gap:8px}
+ #atlas-main #sheet-drag{grid-column:1;grid-row:2;width:44px;height:44px;min-height:44px;align-self:start;padding:0}
  #atlas-main #sheet-drag span{width:5px;height:40px}
- #atlas-main #details-panel .details-head{grid-column:2;grid-row:1;margin:0}
+ #atlas-main #details-panel .details-head{grid-column:1/-1;grid-row:1;margin:0}
  #atlas-main #details-panel .details-head h2{line-height:1.2}
+ #atlas-main #details-panel .eyebrow{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
  #atlas-main #details-content{grid-column:2;grid-row:2}
  #atlas-main #details-panel.mobile-sheet-half{height:min(48cqh,calc(100% - var(--sheet-bottom) - var(--annotation-space,24px)));max-height:calc(100% - var(--sheet-bottom) - var(--annotation-space,24px))}
  #atlas-main #details-panel.mobile-sheet-expanded{height:calc(100% - var(--sheet-bottom) - var(--annotation-space,24px));max-height:calc(100% - var(--sheet-bottom) - var(--annotation-space,24px))}
@@ -58,10 +59,16 @@
 }
 @container atlas (max-height:540px) and (min-width:600px) and (max-width:899px){
  #atlas-main{--map-offset:0px;--sheet-bottom:var(--navigation-bottom,70px)}
+ /* Reserve the left map-scale corridor in compact landscape so the peek card never masks it. */
+ #atlas-main #details-panel{left:calc(var(--map-offset) + var(--command-space) + 110px)}
+ /* The complete selected name has its own row; touch actions remain 44px+. */
+ #atlas-main #details-panel .details-head{display:grid;grid-template-columns:minmax(64px,1fr) minmax(64px,1fr) 44px;gap:4px}
+ #atlas-main #details-panel .details-head>div{grid-column:1/-1}
+ #atlas-main #details-panel .details-head h2{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+ #atlas-main #details-panel.mobile-sheet-open:not(.mobile-sheet-half):not(.mobile-sheet-expanded) .details-summary{display:none}
  .atlas-navigation-rail{inset:auto 8px 8px var(--command-space);width:auto;flex-direction:row;justify-content:center;overflow:visible;border:1px solid #c5d5c9;border-radius:10px;padding:4px}
  .atlas-rail-button{min-width:44px;min-height:44px}
  #atlas-main #details-panel.mobile-sheet-half .details-summary,#atlas-main #details-panel.mobile-sheet-expanded .details-summary{display:none}
- #atlas-main #details-panel .eyebrow{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
  #atlas-controls{inset:0 0 calc(var(--navigation-bottom,70px) - 6px) auto;width:min(440px,calc(100% - 72px));border-radius:10px 0 0 10px}
 }
 @media(forced-colors:active){.atlas-rail-button[aria-pressed=true]{border:2px solid Highlight}#atlas-controls{border:1px solid CanvasText}.atlas-navigation-rail{border-color:CanvasText}}

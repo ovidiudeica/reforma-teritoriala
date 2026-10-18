@@ -2,8 +2,9 @@ import {geometryLabels,geometrySubtypeLabels,geometryParentState,setGeometryGrou
 const sorted=values=>[...new Set(values)].sort();
 const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 export const defaultViewport={lat:46.8,lon:26.6,z:6};
-export function createUrlConfig({entityById,nodeById,rootIds,filterIndex,minZoom=0,maxZoom=19}){
- return {entityIds:new Set(entityById.keys()),nodeById,rootIds:sorted(rootIds),groups:filterIndex.groups,classes:sorted(Object.keys(geometryLabels)),subtypes:sorted([...Object.keys(geometrySubtypeLabels),...filterIndex.subtypeMembers.keys()]),levels:[1,2,3,'unclassified'],minZoom,maxZoom};
+export function createUrlConfig({entityById,nodeById,rootIds,treeRootIds=rootIds,operationalOutlineIds=[],filterIndex,minZoom=0,maxZoom=19}){
+ const outlineIds=sorted(operationalOutlineIds);
+ return {entityIds:new Set(entityById.keys()),nodeById,rootIds:sorted(rootIds),treeRootIds:sorted(treeRootIds),outlineIds,defaultOutlineIds:outlineIds.includes('view-nistrenia')?['view-nistrenia']:[],groups:filterIndex.groups,classes:sorted(Object.keys(geometryLabels)),subtypes:sorted([...Object.keys(geometrySubtypeLabels),...filterIndex.subtypeMembers.keys()]),levels:[1,2,3,'unclassified'],minZoom,maxZoom};
 }
 export function validViewport(value,config){
  if(!value||[value.lat,value.lon,value.z].some(v=>v===null||v===undefined||String(v).trim()===''))return null;
@@ -22,7 +23,7 @@ export function normalizeUrlState(raw,config){
   if(!parent.checked&&!parent.indeterminate)classes.delete(group.id);
  }
  const viewport=validViewport(raw.viewport,config);
- return {entityId:config.entityIds.has(raw.entityId)?raw.entityId:null,viewport:viewport||{...defaultViewport},viewportExplicit:Boolean(viewport&&raw.viewportExplicit!==false),jurisdictions:sorted(raw.jurisdictions??['RO','MD']).filter(j=>['RO','MD','NI'].includes(j)),geometryClasses:sorted(classes),geometrySubtypes:sorted(subtypes),statisticalLevels:config.levels.filter(level=>new Set(raw.statisticalLevels??config.levels).has(level)),separateStatisticalGeometry:raw.separateStatisticalGeometry!==false,osmBasemapVisible:raw.osmBasemapVisible!==false,visibleEntityIds:sorted(raw.visibleEntityIds??config.rootIds).filter(id=>config.entityIds.has(id)),openIds:sorted(raw.openIds??config.rootIds).filter(id=>Boolean(config.nodeById.get(id)?.child_ids?.length))};
+ return {entityId:config.entityIds.has(raw.entityId)?raw.entityId:null,viewport:viewport||{...defaultViewport},viewportExplicit:Boolean(viewport&&raw.viewportExplicit!==false),jurisdictions:sorted(raw.jurisdictions??(config.outlineIds.length?['RO','MD','NI']:['RO','MD'])).filter(j=>['RO','MD','NI'].includes(j)),geometryClasses:sorted(classes),geometrySubtypes:sorted(subtypes),statisticalLevels:config.levels.filter(level=>new Set(raw.statisticalLevels??config.levels).has(level)),separateStatisticalGeometry:raw.separateStatisticalGeometry!==false,osmBasemapVisible:raw.osmBasemapVisible!==false,visibleEntityIds:sorted(raw.visibleEntityIds??config.rootIds).filter(id=>config.entityIds.has(id)),visibleOperationalOutlineIds:sorted(raw.visibleOperationalOutlineIds??config.defaultOutlineIds).filter(id=>config.outlineIds.includes(id)),openIds:sorted(raw.openIds??config.treeRootIds).filter(id=>Boolean(config.nodeById.get(id)?.child_ids?.length))};
 }
 export const defaultUrlState=config=>normalizeUrlState({viewport:defaultViewport,viewportExplicit:false},config);
 function fixedList(params,key,allowed,fallback=allowed){
@@ -33,16 +34,20 @@ function fixedList(params,key,allowed,fallback=allowed){
 }
 export function parseUrlState(search,config){
  const params=new URLSearchParams(search);
- if(params.get('v')!=='1')return defaultUrlState(config);
+ const version=params.get('v');if(version!=='1'&&version!=='2')return defaultUrlState(config);
+ const legacy=version==='1';
  const viewport=validViewport({lat:params.get('lat'),lon:params.get('lon'),z:params.get('z')},config);
  const disabled=new Set(params.getAll('f'));
  const visibleEntityIds=new Set(config.rootIds);
  for(const id of new Set(params.getAll('x')))if(config.entityIds.has(id)){if(visibleEntityIds.has(id))visibleEntityIds.delete(id);else visibleEntityIds.add(id);}
- return normalizeUrlState({visibleEntityIds,entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:params.has('j')?fixedList(params,'j',['RO','MD','NI'],['RO','MD']):['RO','MD'],geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):config.rootIds},config);
+ const outlines=new Set(legacy?[]:config.defaultOutlineIds);
+ if(!legacy)for(const id of new Set(params.getAll('o')))if(config.outlineIds.includes(id)){if(outlines.has(id))outlines.delete(id);else outlines.add(id);}
+ const fallbackJurisdictions=legacy?['RO','MD']:config.outlineIds.length?['RO','MD','NI']:['RO','MD'];
+ return normalizeUrlState({visibleEntityIds,visibleOperationalOutlineIds:[...outlines],entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:params.has('j')?fixedList(params,'j',['RO','MD','NI'],fallbackJurisdictions):fallbackJurisdictions,geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):(legacy?config.rootIds:config.treeRootIds)},config);
 }
 export function serializeUrlState(raw,config){
  const state=normalizeUrlState(raw,config),defaults=defaultUrlState(config),params=new URLSearchParams();
- params.set('v','1');if(state.entityId)params.set('e',state.entityId);
+ params.set('v',config.outlineIds.length?'2':'1');if(state.entityId)params.set('e',state.entityId);
  // Explicit default viewport matters for an entity link: otherwise restore would fitBounds.
  if(!equal(state.viewport,defaultViewport)||(state.entityId&&state.viewportExplicit))for(const key of ['lat','lon','z'])params.set(key,String(state.viewport[key]));
  if(!equal(state.jurisdictions,defaults.jurisdictions))params.set('j',state.jurisdictions.join(','));
@@ -53,6 +58,8 @@ export function serializeUrlState(raw,config){
  if(!equal(state.openIds,defaults.openIds)){if(!state.openIds.length)params.append('t','');else for(const id of state.openIds)params.append('t',id);}
  const toggles=sorted([...new Set([...state.visibleEntityIds,...defaults.visibleEntityIds])].filter(id=>state.visibleEntityIds.includes(id)!==defaults.visibleEntityIds.includes(id)));
  for(const id of toggles)params.append('x',id);
+ const outlineToggles=sorted([...new Set([...state.visibleOperationalOutlineIds,...defaults.visibleOperationalOutlineIds])].filter(id=>state.visibleOperationalOutlineIds.includes(id)!==defaults.visibleOperationalOutlineIds.includes(id)));
+ for(const id of outlineToggles)params.append('o',id);
  return [...params.keys()].length===1?'':params.toString();
 }
 export const canonicalizeUrlState=(search,config)=>serializeUrlState(parseUrlState(search,config),config);

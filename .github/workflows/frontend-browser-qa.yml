@@ -29,6 +29,10 @@ jobs:
           node --check scripts/test/frontend-p907216-osm-roles-browser.test.mjs
           node --check atlas-nistrenia-osm.mjs
           node --check atlas-nistrenia-jurisdiction.mjs
+          node --check atlas-nistrenia-outlines.mjs
+          node --check scripts/process/build-p9095-outline-evidence.mjs
+          node --check scripts/test/frontend-p9095-outline-parity.test.mjs
+          node --check scripts/test/frontend-p9095-outline-browser.test.mjs
           node --check scripts/test/frontend-p9094-operational-browser.test.mjs
           node --check scripts/test/frontend-p909-nistrenia-browser.test.mjs
           node --check atlas-tree-window.mjs
@@ -65,6 +69,12 @@ jobs:
         run: node --test scripts/test/frontend-p909-nistrenia-browser.test.mjs
       - name: P9.0.9.4 Nistrenia third operational jurisdiction — Chromium desktop/mobile
         run: node --test scripts/test/frontend-p9094-operational-browser.test.mjs
+      - name: P9.0.9.5 8 OSM source-only outline integrity, self-test, ACTUAL/P9.1 deny
+        run: |
+          node scripts/process/build-p9095-outline-evidence.mjs --self-test
+          node --test scripts/test/frontend-p9095-outline-parity.test.mjs
+      - name: P9.0.9.5 own outline/checkbox parity, URL, Straturi, desktop/mobile Chromium
+        run: node --test scripts/test/frontend-p9095-outline-browser.test.mjs
       - name: Run actual HTTP and Chromium UI regressions
         env:
           ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
@@ -109,6 +119,8 @@ jobs:
         run: node --test scripts/audit/p75-modules-map-controls-browser.mjs
       - name: P7.6 genuine mobile cold/warm and final accessibility supplements
         run: node --test scripts/audit/p76-final-acceptance-browser.mjs
+      - name: P9.0.9.5 structural sheet and complete attribution matrix
+        run: node --test scripts/audit/p9095-structural-layout-browser.mjs
       - name: P8.0.1 independent geometry reset and History
         run: node --test scripts/audit/p801-reset-geometries-browser.mjs
       - name: P8.0.2 synchronized panel and Leaflet geometry reset

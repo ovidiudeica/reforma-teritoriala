@@ -125,8 +125,8 @@ try{
      await page.call(function(snap){qaApp.atlasMobile.setSheet(snap);},snap);await delay(100);
      const state=await page.call(function(){
       const card=document.querySelector('#details-panel').getBoundingClientRect(),body=document.querySelector('#details-body');
-      const targets=[...document.querySelectorAll('#details-panel .details-head button,#sheet-drag')].filter(e=>!e.hidden).map(e=>{const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {id:e.id,name:e.getAttribute('aria-label')||e.textContent.trim(),width:r.width,height:r.height,inside:r.left>=card.left&&r.right<=card.right&&r.top>=card.top&&r.bottom<=card.bottom,clear:hit===e||e.contains(hit)};});
-      const title=document.querySelector('#details-title');return {fullTitle:title.scrollWidth<=title.clientWidth,targets,cardHeight:card.height,bodyHidden:body.hidden,bodyHeight:document.querySelector('#details-content').clientHeight};
+      const targets=[...document.querySelectorAll('#details-panel .details-head button,#sheet-drag')].filter(e=>!e.hidden).map(e=>{const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {id:e.id,name:e.getAttribute('aria-label')||e.textContent.trim(),left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height,inside:r.left>=card.left&&r.right<=card.right&&r.top>=card.top&&r.bottom<=card.bottom,clear:hit===e||e.contains(hit)};});
+      const title=document.querySelector('#details-title');return {fullTitle:title.scrollWidth<=title.clientWidth,targets,cardHeight:card.height,cardRect:{left:card.left,right:card.right,top:card.top,bottom:card.bottom},bodyHidden:body.hidden,bodyHeight:document.querySelector('#details-content').clientHeight};
      });
      const p=await page.call(placement);assert.deepEqual(p.issues,[],'control overlap at '+width+'x'+height+' '+snap);
      if(snap==='peek')peekHeight=state.cardHeight;else if(height>540)assert.ok(state.cardHeight>peekHeight,'expanded state must grow beyond peek at '+width+'x'+height);

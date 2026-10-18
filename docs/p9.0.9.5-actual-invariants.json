@@ -1,0 +1,30 @@
+{
+  "initialHead": "b9406560f6e0bed947752f6cf257e0bf23266327",
+  "referenceMain": "2125eb29e1ad0c79ad1ea70fb507eb5ab6ef32b6",
+  "identities": 5848,
+  "uniqueIdentities": 5848,
+  "releaseFingerprint": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+  "snapshotId": "actual-a9e5a4ddcb5277ef",
+  "protectedPaths": [
+    "data",
+    "public",
+    "docs/p9.0.4.3-promotion-policy.json",
+    "docs/p9.0.7.2.15-osm-semantic-reconciliation.json",
+    "docs/p9.0.7.2.19-acceptance-manifest.json"
+  ],
+  "protectedChangesSinceInitialHead": [],
+  "dataChangesSinceMain": [
+    "public/data/p9095-osm-outlines-manifest.json",
+    "public/data/p9095-osm-outlines.json"
+  ],
+  "p91_import_allowed": false,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "actual_mutation_allowed": [
+    {
+      "path": ".actual_mutation_allowed",
+      "value": false
+    }
+  ],
+  "protectedGitTreeSha256": "ebcfeb5a49c66b4a66308bc15ea5e843eac047afe8d9be30062a3059e722e9d4",
+  "verification": "git diff --name-only against both initial HEAD and reference main; complete protected Git tree preserved; source-only outline validator separately verifies 85 reused roles and eight non-ACTUAL outlines"
+}
