@@ -108,7 +108,7 @@ class Element{
 }
 function doc(){const elements=new Map();return {elements,getElementById(id){if(!elements.has(id))elements.set(id,new Element());return elements.get(id);},createElement:tag=>new Element(tag),querySelectorAll:()=>[]};}
 function filterHarness(){const document=doc(),container=new Element(),state=options();let changes=0;const controller=createAtlasFilters({document,container,index:filters,state,onSeparate:v=>{state.separateStatisticalGeometry=v;},onChange:()=>changes++});return {document,container,state,controller,get changes(){return changes;}};}
-const section=(container,title)=>container.children.find(e=>e.children.some(c=>c.tagName==='H3'&&c.textContent===title));
+const section=(container,title)=>container.children.find(e=>e.tagName==='DETAILS'&&e.children.some(c=>c.tagName==='SUMMARY'&&c.textContent===title));
 
 test('DOM parent checkbox follows all/none/mixed children; native indeterminate click selects all',async()=>{
  const {controller,state}=filterHarness(),parent=controller.parents.get('local_uat');
