@@ -84,6 +84,31 @@ try {
     await page.viewport(1440,900);
    }
   });
+  await t.test('R1b.4 retired OSM surfaces and aligned reset buttons preserve provenance',async()=>{
+   for(const [width,height] of [[1440,900],[390,844],[844,390]]){
+    await page.viewport(width,height);
+    const positions=[];
+    for(const [panel,id] of [['entities','geometries-reset'],['filters','filters-reset']]){
+     await page.openPanel(panel);
+     const result=await page.call(function(id){
+      const button=document.getElementById(id),r=button.getBoundingClientRect(),
+       head=document.querySelector('.atlas-panel-heading').getBoundingClientRect(),
+       hidden=Array.from(document.querySelectorAll('#nistrenia-osm-toggle,#osm-roles-panel'))
+        .map(e=>({id:e.id,visible:e.getClientRects().length>0,hidden:e.hidden}));
+      return {width:r.width,height:r.height,left:r.left,top:r.top,
+       relativeTop:r.top-head.bottom,hidden};
+     },id);
+     assert.ok(result.width>=44&&result.height>=44,JSON.stringify({width,height,panel,result}));
+     assert.ok(result.hidden.every(x=>!x.visible),JSON.stringify({width,height,panel,result}));
+     positions.push(result);
+    }
+    assert.ok(Math.abs(positions[0].left-positions[1].left)<=2,JSON.stringify({width,height,positions}));
+    assert.ok(Math.abs(positions[0].relativeTop-positions[1].relativeTop)<=2,JSON.stringify({width,height,positions}));
+    assert.ok(Math.abs(positions[0].width-positions[1].width)<=2,JSON.stringify({width,height,positions}));
+    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-r1b4-reset-'+width+'x'+height+'.png'));
+   }
+   await page.viewport(1440,900);
+  });
   await t.test('phone five primary targets, More focus, Escape and drawer close',async()=>{
    await page.viewport(390,844);await page.evaluate('qaApp.atlasPanels.close({focus:false})');
    const p=await page.evaluate(`[...document.querySelectorAll('#atlas-navigation-rail>button')]

@@ -191,3 +191,28 @@
  #atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-group,.atlas-filter-subtypes,.atlas-comparison-card),
  #atlas-controls :is(.atlas-share-actions,.atlas-advanced-row-actions,.atlas-comparison-actions) :is(a,button) {border-color:ButtonText}
 }
+
+/* WEB-R1b.4 — the catalog stays validated at runtime, not duplicated in navigation. */
+#entities-panel .atlas-tree-tools[hidden],
+#entities-panel .nistrenia-osm-anchor[hidden],
+#filters-panel #osm-roles-panel[hidden] {display:none!important}
+#atlas-controls .atlas-panel-reset-actions {
+ display:flex;
+ align-items:stretch;
+ justify-content:flex-start;
+ margin:0 0 10px;
+ min-height:var(--atlas-control-target,44px);
+}
+#atlas-controls .atlas-panel-reset-actions > .action-button {
+ box-sizing:border-box;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ min-height:var(--atlas-control-target,44px);
+ width:100%;
+ max-width:100%;
+ padding:8px 12px;
+ margin:0;
+ line-height:1.35;
+ text-align:center;
+}

@@ -13,14 +13,14 @@ try{
   await page.viewport(1280,800);
   await page.navigate(browser.server.url);
   await waitFor(()=>page.evaluate("document.querySelectorAll('#osm-roles-list li').length===85"),'85 OSM roles indexed',25000);
-  await t.test('85 visible only in collapsed optional catalog; default RO+MD unaffected',async()=>{
-   const state=await page.evaluate("({closed:!document.querySelector('#osm-roles-panel').open,items:document.querySelectorAll('#osm-roles-list li').length,defaultIds:[...qaApp.visibleEntityIds].sort(),status:document.querySelector('#osm-roles-status').textContent,tree:document.querySelector('.tree-select')!==null})");
-   assert.equal(state.closed,true);assert.equal(state.items,85);assert.equal(state.tree,true);
+  await t.test('85 verified roles remain indexed but both redundant catalogs are hidden; default RO+MD unaffected',async()=>{
+   const state=await page.evaluate("({closed:!document.querySelector('#osm-roles-panel').open,retired:document.querySelector('#osm-roles-panel').getClientRects().length===0&&document.querySelector('#nistrenia-osm-toggle').getClientRects().length===0,items:document.querySelectorAll('#osm-roles-list li').length,defaultIds:[...qaApp.visibleEntityIds].sort(),status:document.querySelector('#osm-roles-status').textContent,tree:document.querySelector('.tree-select')!==null})");
+   assert.equal(state.closed,true);assert.equal(state.retired,true);assert.equal(state.items,85);assert.equal(state.tree,true);
    assert.deepEqual(state.defaultIds,['osm-r58974','osm-r90689'].sort());assert.match(state.status,/85 de relații/);
    assert.equal(await page.evaluate("document.querySelectorAll('.osm-role-evidence').length"),0);
   });
   await page.openPanel('filters');
-  await page.click('#osm-roles-panel > summary');
+  // Catalog stays inaccessible to users, while the vetted metadata remains searchable for provenance tests.
   await t.test('name collision Bender has two distinct source roles and IDs',async()=>{
    await page.evaluate("(()=>{let el=document.getElementById('osm-roles-search');el.value='Bender';el.dispatchEvent(new Event('input',{bubbles:true}));})()");
    const states=await page.evaluate("[...document.querySelectorAll('#osm-roles-list li')].map(el=>({id:el.querySelector('button').dataset.osmRoleId,text:el.textContent}))");
@@ -30,7 +30,7 @@ try{
    assert(states.some(x=>x.text.includes('Limită de oraș')));
   });
   await t.test('explicit show selects exact released geometry and shows OSM provenance separately from legal card',async()=>{
-   await page.click('#osm-roles-list [data-osm-role-id="osm-r9581354"]');
+   await page.call(function(){document.querySelector('#osm-roles-list [data-osm-role-id="osm-r9581354"]').click();});
    await waitFor(()=>page.evaluate("qaApp.selectedEntityId==='osm-r9581354'&&document.querySelector('.osm-role-evidence')?.dataset.osmRoleId==='osm-r9581354'"),'select reused ACTUAL municipality',30000);
    const state=await page.evaluate("({checked:qaApp.visibleEntityIds.has('osm-r9581354'),card:document.querySelector('.osm-role-evidence')?.textContent,legal:document.querySelector('[data-provenance=official]')?.textContent,link:document.querySelector('.osm-role-evidence a')?.href,rows:document.querySelectorAll('#osm-roles-list li').length,rootCount:qaApp.hierarchyNodeById.size})");
    assert(state.checked);assert.match(state.card,/OpenStreetMap/);assert.match(state.card,/Neacordată/);
@@ -46,11 +46,11 @@ try{
    const matches=await page.evaluate("[...document.querySelectorAll('#osm-roles-list li')].map(e=>e.textContent)");
    assert.equal(matches.length,2);assert(matches.some(x=>x.includes('consiliu sătesc')));assert(matches.some(x=>x.includes('consiliu al așezării')));
   });
-  await t.test('mobile opt-in catalog preserves accessible controls and legal caveat',async()=>{
+  await t.test('mobile retired catalog remains unavailable while metadata and legal caveat survive',async()=>{
    await page.viewport(390,844);
    await page.openPanel('filters');
-   const state=await page.evaluate("({overflow:document.documentElement.scrollWidth>innerWidth,hasSearch:!!document.querySelector('#osm-roles-search'),hasFilters:!!document.querySelector('#osm-roles-filter'),label:document.querySelector('#osm-roles-panel .hint')?.textContent,remaining:document.querySelectorAll('#osm-roles-list li').length})");
-   assert.equal(state.overflow,false);assert(state.hasSearch&&state.hasFilters);
+   const state=await page.evaluate("({overflow:document.documentElement.scrollWidth>innerWidth,hiddenCatalog:document.querySelector('#osm-roles-panel').getClientRects().length===0,hasSearch:!!document.querySelector('#osm-roles-search'),hasFilters:!!document.querySelector('#osm-roles-filter'),label:document.querySelector('#osm-roles-panel .hint')?.textContent,remaining:document.querySelectorAll('#osm-roles-list li').length})");
+   assert.equal(state.overflow,false);assert.equal(state.hiddenCatalog,true);assert(state.hasSearch&&state.hasFilters);
    assert.match(state.label,/nu este certificată/i);assert.equal(state.remaining,2);
   });
   await t.test('no uncaught JavaScript, console or non-tile HTTP errors',async()=>{
