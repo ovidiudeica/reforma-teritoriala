@@ -61,7 +61,7 @@ Nu efectua cleanup și nu închide PR-uri Draft fără audit separat.
 | ID | Test | Criteriu |
 |---|---|---|
 | R4-01 | KML XML | Document KML valid, UTF-8, escapare XML, fără script/HTML nesigur |
-| R4-02 | Koordonate | EPSG:4326 `longitude,latitude`, lat/lon finite, ordonare și precizie sursă fără transformare |
+| R4-02 | Coordonate | EPSG:4326 `longitude,latitude`, lat/lon finite, ordonare și precizie sursă fără transformare |
 | R4-03 | Poligoane | Inele exterioare/interioare, multipart, puncte/închidere, fără simplificare sau reparare tacită |
 | R4-04 | KMZ | ZIP corect cu KML importabil, nume de intrări controlate și verificare decomprimare |
 | R4-05 | Preflight My Maps | KML necomprimat `<=5 MB`, max `2.000` elemente de import recomandate, avertisment MultiGeometry și incompatibilități; refuz sau partiționare explicată când depășește limita |
@@ -88,7 +88,7 @@ Schema observațiilor, indicator, valoare, unitate, an/perioadă, sursă/licenț
 - Un nou release **web** cu metadata/proveniență coerente fără schimbarea tagului/fingerprintului ACTUAL.
 - Suite completă Linux + browser cu **10 viewport-uri**: `360×640`, `390×844`, `430×932`, `600×390`, `640×360`, `844×390`, `768×1024`, `899×768`, `900×768`, `1440×900`; mobile peek/half/expanded, text 200%, forced colors, reduced motion, keyboard/touch, animație map, scroll, URL/history și raster OFF.
 - Required checks, CodeQL și registrul alertelor verificate individual; dovada `actual-change-reproducibility` și auditul diferențelor între Git source/Pages bytes; screenshoturi și coordonate comparabile A/B.
-- Nu integra PR dacă HEAD s-a schimbat după ultima execuție sau dacă existe checks FAIL/PENDING și dovezi lipsă. După merge, verifică Pages pe exact merge SHA, cu auditul de rețea și browser publicat.
+- Nu integra PR dacă HEAD s-a schimbat după ultima execuție sau dacă există checks FAIL/PENDING și dovezi lipsă. După merge, verifică Pages pe exact merge SHA, cu auditul de rețea și browser publicat.
 - Raport explicit ce a fost verificat automat, ce a fost verificat manual pe dispozitiv fizic și ce NU a fost verificat; nu pretinde certificare WCAG fără evaluare completă.
 - P9.1 rămâne `BLOCKED_INCOMPLETE`, independent de succesul release-ului web.
 
