@@ -49,10 +49,14 @@ for(const id of expected)assert(ui.rows.some(r=>r.id===id));
 const html=readFileSync('index.html','utf8');
 const app=readFileSync('app.js','utf8');
 const component=readFileSync('atlas-osm-roles.mjs','utf8');
-for(const anchor of ['id="osm-roles-panel"','id="osm-roles-list"','id="osm-roles-search"','id="osm-roles-filter"'])assert(html.includes(anchor));
+// Source-only role validation is mandatory even though the duplicate UI was removed.
+for(const anchor of ['id="osm-roles-panel"','id="osm-roles-list"','id="osm-roles-search"','id="osm-roles-filter"','id="nistrenia-osm-panel"','id="nistrenia-osm-toggle"'])assert(!html.includes(anchor),'redundant catalog UI '+anchor);
+assert(html.includes('id="nistrenia-catalog-error"'));
+assert(app.includes('validateNistreniaOsmNavigation('));
+assert(app.includes('loadNistreniaOsmNavigation()'));
 assert(app.includes('validateOsmRolesCatalog('));
 assert(app.includes('renderOsmRoleDetails('));
-assert(app.includes('selectEntity(id,{zoom:true,source:\'osm-cartographic-existing\'})'));
+assert(app.includes('createNistreniaOperationalView('));
 assert(!component.includes('L.geoJSON('));
 assert(!component.includes('tileLayer('));
 assert(!app.includes("roots.PMR"));
