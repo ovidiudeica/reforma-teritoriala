@@ -217,6 +217,8 @@
  margin:0;
  white-space:normal;
 }
+#atlas-controls #atlas-reset-toolbar #filters-reset,
+#atlas-controls #atlas-reset-toolbar #geometries-reset {margin:0}
 #atlas-controls[data-panel="entities"] .atlas-reset-toolbar #filters-reset,
 #atlas-controls[data-panel="filters"] .atlas-reset-toolbar #geometries-reset {display:none}
 @container atlas (max-height:540px) and (min-width:600px) and (max-width:899px) {
