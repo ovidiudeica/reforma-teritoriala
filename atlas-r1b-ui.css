@@ -147,6 +147,15 @@
 #details-panel .atlas-panel-disclosure[open]>summary::after {transform:rotate(225deg);margin-top:4px}
 #atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes,.osm-roles-panel,.atlas-info-section,.nistrenia-osm-panel,.atlas-export-actions)>summary:hover,
 #details-panel .atlas-panel-disclosure>summary:hover {background:var(--atlas-ui-hover)}
+#details-panel .atlas-panel-disclosure>summary h3 {
+ margin:0;
+ font-size:inherit;
+ line-height:inherit;
+ text-transform:none;
+ letter-spacing:normal;
+ color:inherit;
+ font-weight:inherit;
+}
 #atlas-controls .atlas-panel-disclosure .atlas-disclosure-body,
 #details-panel .atlas-panel-disclosure .atlas-disclosure-body {
  padding:10px 12px 12px;
