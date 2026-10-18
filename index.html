@@ -68,10 +68,12 @@
   </section>
   </section>
   <section id="measure-panel" hidden>
+<details class="atlas-panel-disclosure" open><summary>Instrumente de măsurare</summary><div class="atlas-disclosure-body">
     <label for="measure-mode">Tip măsurare<select id="measure-mode"><option value="distance">Distanță</option><option value="area">Suprafață</option></select></label>
     <button id="measure-start" class="action-button" type="button">Adaugă puncte pe hartă</button>
     <form id="measure-form" novalidate><label for="measure-lat">Latitudine WGS84<input id="measure-lat" inputmode="decimal" autocomplete="off" required></label><label for="measure-lon">Longitudine WGS84<input id="measure-lon" inputmode="decimal" autocomplete="off" required></label><button class="action-button" type="submit">Adaugă coordonate</button></form>
     <button id="measure-undo" class="action-button" type="button">Anulează ultimul punct</button><button id="measure-finish" class="action-button" type="button">Finalizează / închide poligonul</button><button id="measure-clear" class="action-button" type="button">Șterge măsurarea</button>
+</div></details>
     <p id="measure-status" role="status" aria-live="polite"></p><p id="measure-error" role="alert"></p><p id="measure-points"></p><p id="measure-segments"></p>
     <details><summary>Coordonatele vârfurilor</summary><p id="measure-coordinates"></p></details><details><summary>Metodă și limite</summary><p id="measure-method"></p></details>
   </section>
@@ -83,6 +85,7 @@
     <div id="neighbors-results" aria-label="Relații topologice" aria-busy="false"></div>
   </section>
   <section id="identify-panel" hidden>
+<details class="atlas-panel-disclosure" open><summary>Instrumente de identificare</summary><div class="atlas-disclosure-body">
     <p class="hint">Verificare geometrică ACTUAL, independentă de bife și filtre. Rezultatele nu reprezintă atribuirea unei identități legale.</p>
     <button id="identify-pick" type="button" class="action-button">Alege un punct pe hartă</button>
     <p class="hint">Instrumentul de click este explicit. Escape îl dezactivează; clickul obișnuit selectează în continuare poligoanele.</p>
@@ -93,6 +96,7 @@
     </form>
     <button id="identify-location" type="button" class="action-button" aria-describedby="identify-location-help">Folosește locația mea</button>
     <p id="identify-location-help" class="hint">O singură poziție, numai după permisiunea ta. Calcul local; fără urmărire sau transmiterea coordonatelor către servicii externe.</p>
+</div></details>
     <p id="identify-projection" class="hint" hidden>Punctul este în afara latitudinilor reprezentabile pe harta Web Mercator. Identificarea și copierea rămân disponibile; markerul și centrarea sunt indisponibile.</p><p id="identify-coordinates"></p><p id="identify-accuracy" class="hint"></p>
     <div class="identify-actions"><button id="identify-copy" type="button" class="action-button" disabled>Copiază coordonatele</button><button id="identify-center" type="button" class="action-button" disabled>Centrează pe punct</button></div>
     <input id="identify-copy-value" readonly hidden aria-label="Coordonate pentru copiere manuală">
@@ -100,15 +104,17 @@
     <div id="identify-results" aria-label="Unități identificate" aria-busy="false"></div>
   </section>
   <section id="modules-panel" hidden>
+<details class="atlas-panel-disclosure" open><summary>Corpusuri disponibile</summary><div class="atlas-disclosure-body">
     <p class="hint">Alege corpusul atlasului. Numai ACTUAL are un corpus publicat și validat.</p>
     <div class="atlas-module-entry"><button class="mode active action-button" data-mode="actual" type="button" aria-pressed="true" aria-describedby="module-actual-description">ACTUAL — activ</button><p id="module-actual-description" class="hint">Atlasul teritorial publicat, cu identitate și proveniență verificabile.</p></div>
     <div class="atlas-module-entry"><button class="mode action-button" data-mode="istoric" type="button" aria-pressed="false" disabled aria-describedby="module-istoric-description">ISTORIC — în pregătire</button><p id="module-istoric-description" class="hint">Indisponibil până la publicarea și validarea primului corpus istoric.</p></div>
     <div class="atlas-module-entry"><button class="mode action-button" data-mode="propuneri" type="button" aria-pressed="false" disabled aria-describedby="module-propuneri-description">PROPUNERI — în pregătire</button><p id="module-propuneri-description" class="hint">Indisponibil până la publicarea și validarea primului corpus de propuneri.</p></div>
     <p class="hint">Modulele viitoare vor apărea aici după publicarea corpusurilor lor. Vederea, selecția, filtrele și bifele curente sunt păstrate când deschizi sau închizi acest panou.</p>
+</div></details>
   </section>
   <section id="entities-panel">
     <h3 class="sr-only">Arbore</h3>
-    <div class="atlas-entities-actions">
+    <details class="atlas-panel-disclosure atlas-tree-tools" open><summary>Opțiuni arbore</summary><div class="atlas-disclosure-body"><div class="atlas-entities-actions">
       <button id="geometries-reset" class="action-button" type="button" aria-disabled="true">Resetează geometriile</button>
       <div class="nistrenia-osm-anchor">
         <button id="nistrenia-osm-toggle" class="action-button" type="button" aria-controls="nistrenia-osm-panel" aria-expanded="false" aria-pressed="false">Nistrenia · OSM</button>
@@ -120,6 +126,7 @@
       </div>
     </div>
 
+    </div></details>
     <p id="atlas-tree-help" class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
     <div id="hierarchy-tree" class="hierarchy-tree" aria-describedby="atlas-tree-help"><p class="muted">Se încarcă arborele teritorial…</p></div>
@@ -162,24 +169,24 @@
   <p>Atlasul prezintă organizarea teritorială a României și Republicii Moldova. Lista, selecția pentru detalii și afișarea geometriilor sunt independente.</p>
   <p>ACTUAL este corpusul publicat. Identitatea oficială și geometria OSM sunt prezentate separat; o reprezentare cartografică nu dovedește singură identitatea juridică.</p>
   <p>ISTORIC și PROPUNERI sunt în pregătire, fără corpus funcțional publicat.</p></details>
-  <section>
-    <h3>Nivel de detaliu</h3>
+  <details class="atlas-panel-disclosure"><summary>Nivel de detaliu</summary><div class="atlas-disclosure-body">
     <p class="hint">Limitele regionale sunt încărcate imediat. UAT-urile locale apar de la zoom 7, iar sectoarele și reprezentările de detaliu de la zoom 10.</p>
-  </section>
+</div></details>
 
-  <section id="atlas-legend" aria-label="Legenda hărții"></section>
-  <section class="status" aria-labelledby="provenance-heading">
+  <details class="atlas-panel-disclosure" open><summary>Legendă</summary><div class="atlas-disclosure-body"><section id="atlas-legend" aria-label="Legenda hărții"></section></div></details>
+<details class="atlas-panel-disclosure"><summary>Release și proveniență</summary><div class="atlas-disclosure-body"><section class="status" aria-labelledby="provenance-heading">
     <h3 id="provenance-heading">Release și proveniență</h3>
     <p>Identitatea juridică și reprezentarea geometrică sunt afișate separat. SIRUTA/CUATM furnizează identitatea oficială când există o reconciliere pozitivă; geometria publică păstrează coordonatele master ale snapshot-ului OSM validat, fără simplificare.</p>
     <div id="global-provenance"></div>
     <p id="actual-release-status" role="status" aria-live="polite">ACTUAL: verificare release…</p>
     <p id="ro-source-status">RO: verificare snapshot…</p>
     <p id="md-source-status">MD: verificare snapshot…</p>
-  </section>
+</section></div></details>
   </div>
 </section><section id="atlas-advanced-dialog" hidden inert>
 <section id="atlas-advanced-content" aria-label="Conținut navigare avansată"></section>
 </section><section id="share-panel" hidden inert>
+<details class="atlas-panel-disclosure" open><summary>Opțiuni de partajare</summary><div class="atlas-disclosure-body">
 <fieldset class="atlas-share-target"><legend>Ce distribui?</legend>
 <label><input id="share-view" type="radio" name="share-target" checked> <span>Vederea curentă</span></label>
 <label><input id="share-entity" type="radio" name="share-target" disabled> <span>Entitatea selectată</span></label></fieldset>
@@ -189,6 +196,7 @@
 <a id="share-email" class="action-button">E-mail</a><a id="share-open" class="action-button" target="_blank" rel="noopener noreferrer">Deschide linkul</a></div>
 <label for="share-url">Link de distribuit</label><textarea id="share-url" readonly rows="4" spellcheck="false"></textarea>
 <p class="hint">Opțiunile dispozitivului apar când browserul le oferă. Poți folosi linkul în orice aplicație.</p>
+</div></details>
 <p id="share-status" class="hint" role="status" aria-live="polite"></p></section>
 <p id="geometry-load-status" class="hint" role="alert"></p>
 </aside>
