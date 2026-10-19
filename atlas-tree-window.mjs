@@ -1,11 +1,11 @@
 // Visible hierarchy order is derived exclusively from validated child_ids.
 // This model owns expansion and height offsets; it never materializes DOM nodes.
-export function flattenVisibleTree(nodeById,rootIds,openIds){
+export function flattenVisibleTree(nodeById,rootIds,openIds,visibleIds=null){
  const rows=[],seen=new Set(),pending=rootIds.map((id,index)=>({id,depth:0,pos:index+1,size:rootIds.length})).reverse();
  while(pending.length){
   const row=pending.pop(),node=nodeById.get(row.id);
   if(!node||seen.has(row.id))throw new Error('Atlas hierarchy: missing or repeated node '+row.id);
-  seen.add(row.id);rows.push(row);
+  seen.add(row.id);if(visibleIds&&!visibleIds.has(row.id))continue;rows.push(row);
   if(!openIds.has(row.id))continue;
   const children=node.child_ids||[];
   for(let i=children.length-1;i>=0;i--)pending.push({id:children[i],depth:row.depth+1,pos:i+1,size:children.length});
