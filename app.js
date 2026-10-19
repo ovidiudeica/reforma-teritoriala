@@ -27,6 +27,7 @@ import {fitRoMd,attachRoMdZoomControl} from './atlas-ro-md-fit.mjs';
 import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs';
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
+import {osmLevelForTreeNode} from './atlas-osm-admin-badges.mjs';
 import {validateConsolidatedHierarchy} from './atlas-hierarchy-validate.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
 import {geometryClass,geometrySubtype,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
@@ -491,6 +492,7 @@ function renderHierarchyTree(){
  atlasTree?.destroy();
  atlasTree=createAtlasTree({
   container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
+  getOsmAdminLevel:node=>osmLevelForTreeNode(node,{entityById,osmRoleById}),
   isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
    if(nistreniaOutlines?.has(id)){
