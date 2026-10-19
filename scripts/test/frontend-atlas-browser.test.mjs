@@ -39,7 +39,7 @@ try{
     const before=await page.evaluate("(()=>{const panel=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');if(!panel)throw Error('OSM administrative filter missing');panel.open=true;return {checkboxes:[...qaApp.visibleEntityIds].sort(),outlines:[...document.querySelectorAll('#hierarchy-tree .tree-visibility-toggle:checked')].map(e=>e.dataset.entityId).sort(),statistical:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked),rows:qaApp.atlasTree.getVisibleCount()};})()");
     await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.querySelectorAll('button')[1].click();})()");
     assert.equal(await page.evaluate('qaApp.atlasTree.getVisibleCount()'),0,'no levels means no visible tree rows');
-    await page.evaluate("document.querySelector('input[data-kind=osm-admin-level][data-filter="3"]').click()");
+    await page.evaluate("(()=>{const input=[...document.querySelectorAll('input[data-kind=osm-admin-level]')].find(e=>e.dataset.filter==='3');input.click();})()");
     const filtered=await page.evaluate("({ids:qaApp.atlasTree.getVisibleIds(),checked:[...qaApp.visibleEntityIds].sort(),url:location.search,statistics:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked)})");
     assert.ok(filtered.ids.includes('view-nistrenia'),'NI root is level 3');
     assert.ok(filtered.ids.length<before.rows,'tree is restricted');
