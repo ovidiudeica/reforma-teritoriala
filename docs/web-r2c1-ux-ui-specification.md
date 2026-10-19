@@ -50,10 +50,10 @@ Tabelul este un criteriu de **non-regresie**: nu autorizează modificări de log
 
 ## 4. Semantica numărătorilor: UX-02
 
-Pentru un set de niveluri OSM selectate `L`, un corpus validat de noduri `N`, arborele afișat `V` și setul rădăcinilor:
+Pentru un set de niveluri OSM selectate `L`, un corpus validat de noduri `N`, mulțimea `V` a nodurilor permise de **filtrul OSM înainte de orice prezentare sau expansiune vizuală** și rădăcinile corespunzătoare:
 
 - **M — rânduri potrivite direct:** mulțimea ID-urilor de nod ale căror niveluri OSM verificate se află în `L`; pentru categoria `unknown`, se potrivesc doar nodurile fără nivel verificat. **Unitate:** rând de arbore. Un ID se numără o singură dată. Aliasurile NI pot constitui rânduri distincte de navigare, dar **nu** geometrii independente.
-- **A — strămoși de navigare:** `V \\ M`; rândurile păstrate exclusiv pentru a ajunge la descendenții potriviți, deduplicate după ID. **Unitate:** rând de arbore, nu geometrie. `|V|=|M|+|A|` numai pentru arborele complet permis (independent de ramurile extinse/virtualizarea DOM).
+- **A — strămoși de navigare:** `A = V minus M`; rândurile păstrate exclusiv pentru a ajunge la descendenții potriviți, deduplicate după ID. **Unitate:** rând de arbore, nu geometrie. `|V|=|M|+|A|` numai pentru arborele complet permis (independent de ramurile extinse/virtualizarea DOM).
 - **E — geometrii eligibile:** ID-uri ACTUAL RO/MD sau contururi NI cu nivel numeric confirmat în `L`, identitate geometrică de control unică, după excluderea aliasurilor NI și a `unknown`. **Unitate:** checkbox geometric distinct. Separat pe jurisdicții `E_RO`, `E_MD`, `E_NI`.
 - **C — geometrii care și-ar schimba efectiv bifa:** subsetul din E unde bifa curentă diferă de `show` / `hide`. Acesta este `plan.changed`; `C_RO+C_MD+C_NI=C_total`. Numărul `plan.skippedAliases` se raportează separat; nu se adună la E sau C.
 
