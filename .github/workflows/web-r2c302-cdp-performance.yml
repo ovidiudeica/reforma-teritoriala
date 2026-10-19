@@ -1,0 +1,40 @@
+name: WEB-R2c.3.0.2 Chromium CDP read-only performance
+on:
+  push:
+    branches: [audit/web-r2c3-0-performance-readonly]
+    paths:
+      - scripts/audit/web-r2c302-cdp-browser.mjs
+      - .github/workflows/web-r2c302-cdp-performance.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium-cdp-readonly:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      BROWSER_EXECUTABLE: /usr/bin/google-chrome
+      ATLAS_PERF_OUTPUT: outputs/web-r2c302-cdp
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Baseline source and Chrome provenance
+        run: |
+          git rev-parse HEAD
+          git status --porcelain
+          google-chrome --version
+          node --check scripts/audit/web-r2c302-cdp-browser.mjs
+      - name: Read-only Chromium/CDP performance matrix
+        run: node scripts/audit/web-r2c302-cdp-browser.mjs
+      - name: No tracked data or source mutation
+        if: always()
+        run: git diff --exit-code
+      - name: Upload CDP raw metrics and screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: web-r2c302-chromium-cdp-evidence
+          path: outputs/web-r2c302-cdp
+          retention-days: 14
