@@ -1,3 +1,4 @@
+import './frontend-web-r2b3-osm-actions.test.mjs'; // WEB-R2b.3 included in mandatory taxonomy regression suite
 import {allOsmLevelFilters} from '../../atlas-osm-admin-filter.mjs';
 import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
