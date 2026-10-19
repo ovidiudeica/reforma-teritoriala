@@ -79,3 +79,17 @@ header .atlas-modules-trigger span{margin:0;color:inherit;font-size:12px}
 .osm-level-action-confirm>.action-button{margin-inline-end:6px;margin-bottom:6px}
 .osm-level-geometry-actions button:focus-visible{outline:2px solid var(--atlas-focus,#365b4a);outline-offset:2px}
 @media(forced-colors:active){.osm-level-geometry-actions,.osm-level-action-confirm{border-color:CanvasText}}
+
+/* WEB-R2c.2: focusable inline scope and adaptive controls without a modal overlay. */
+.osm-level-action-confirm #osm-geometry-confirmation-scope:focus{outline:2px solid var(--atlas-focus,#365b4a);outline-offset:3px}
+.osm-level-action-confirm>.action-button{max-width:100%}
+.osm-level-geometry-actions [role=status]{min-height:1.3em;overflow-wrap:anywhere}
+@media(max-width:480px){
+ .osm-level-geometry-actions{padding:8px}
+ .osm-level-action-confirm{padding:8px}
+ .osm-level-action-confirm>.action-button{display:flex;width:100%;justify-content:center;margin-inline:0}
+}
+@media(forced-colors:active){
+ .osm-level-action-confirm #osm-geometry-confirmation-scope:focus{outline-color:Highlight}
+ .osm-level-geometry-actions button:focus-visible{outline:2px solid Highlight}
+}
