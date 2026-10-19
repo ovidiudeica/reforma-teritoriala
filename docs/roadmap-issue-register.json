@@ -1,0 +1,30 @@
+{
+  "schema": "roadmap-issue-register-v1",
+  "baseline_sha": "3471f7b1231e435f51e3ad719aa0a4a1786a5e79",
+  "issues": [
+    {
+      "id": "RM-001",
+      "severity": "P2",
+      "component": "Chromium benchmark provenance",
+      "entities": [],
+      "reproduction": "Dispatch web-r2c302-cdp-performance.yml on main after #389; compare report.sourceMain with the checked-out Git commit.",
+      "cause": "Hardcoded pre-merge SHA 55cccd747fa5e3f5d244b4a1044f1addd1535115.",
+      "change": "Resolve HEAD via Git; require full SHA; checkout PR head explicitly; verify report provenance in Actions.",
+      "pr": 390,
+      "regression": "Workflow step Verify report provenance matches the tested commit",
+      "verification_sha": null,
+      "evidence": ["https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39322322172"],
+      "verdict": "FIXED_PENDING_EXACT_HEAD_RETEST"
+    }
+  ],
+  "environment_incidents": [
+    {"id":"ENV-001","reproduction":"Windows clone with core.autocrlf=true; execute historical hash audit","cause":"Git LF to CRLF conversion","remedy":"Restore exact tracked blob bytes; do not alter accepted hashes","retest":"p907219 --audit and --self-test PASS","verdict":"RESOLVED"},
+    {"id":"ENV-002","reproduction":"Run Chromium benchmark under restricted local sandbox","cause":"CDP Page.enable timed out before samples; root cause beyond sandbox transport not proven","remedy":"Rerun with authorized local connection access","retest":"Chrome/155.0.8059.80 benchmark PASS","verdict":"RESOLVED_FOR_EXECUTION"}
+  ],
+  "open_evidence_gates": [
+    {"id":"GATE-001","stage":"WEB-R2c.3.1","description":"Complete comparable performance coverage before NO_CHANGE_REQUIRED or optimization verdict."},
+    {"id":"GATE-002","stage":"WEB-R2c.3.2","description":"Full viewport/state screenshots, text zoom, accessibility and classification of external network failures."},
+    {"id":"GATE-003","stage":"WEB-R2c.4","description":"Final published Pages E2E acceptance remains pending."},
+    {"id":"GATE-004","stage":"NI-JUR.0 through NI-JUR.4","description":"Individual contemporary inventory, geometry, documentary and independent-axis acceptance remain pending; historical dossier is not contemporary recertification."}
+  ]
+}

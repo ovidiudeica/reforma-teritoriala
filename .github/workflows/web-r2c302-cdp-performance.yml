@@ -1,5 +1,10 @@
 name: WEB-R2c.3.0.2 Chromium CDP read-only performance
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - scripts/audit/web-r2c302-cdp-browser.mjs
+      - .github/workflows/web-r2c302-cdp-performance.yml
   push:
     branches: [audit/web-r2c3-0-performance-readonly]
     paths:
@@ -17,6 +22,8 @@ jobs:
       ATLAS_PERF_OUTPUT: outputs/web-r2c302-cdp
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.21.0'
@@ -28,6 +35,9 @@ jobs:
           node --check scripts/audit/web-r2c302-cdp-browser.mjs
       - name: Read-only Chromium/CDP performance matrix
         run: node scripts/audit/web-r2c302-cdp-browser.mjs
+      - name: Verify report provenance matches the tested commit
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; import assert from 'node:assert/strict'; import {execFileSync} from 'node:child_process'; const report=JSON.parse(fs.readFileSync(process.env.ATLAS_PERF_OUTPUT+'/report.json')); assert.equal(report.sourceMain,execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()); assert.equal(report.status,'PASS');"
       - name: No tracked data or source mutation
         if: always()
         run: git diff --exit-code
