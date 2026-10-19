@@ -34,7 +34,7 @@ try{
    }
   });
   await t.test('unnamed identity has a human menu fallback without changing the corpus',async()=>{
-   const state=await page.call(function(){const id='osm-r12104636';qaApp.atlasTree.select(id);const button=qaApp.atlasTree.getNode(id).button;return {text:button.textContent,title:button.title,original:qaApp.hierarchyNodeById.get(id).display_name,id:button.dataset.entityId};});
+   const state=await page.call(function(){const id='osm-r12104636';qaApp.atlasTree.select(id);const button=qaApp.atlasTree.getNode(id).button;return {text:button.querySelector('.tree-name')?.textContent,title:button.title,original:qaApp.hierarchyNodeById.get(id).display_name,id:button.dataset.entityId};});
    assert.equal(state.text,'Entitate fără nume');assert.equal(state.title,'Entitate fără nume');assert.equal(state.original,'osm-r12104636');assert.equal(state.id,'osm-r12104636');
   });
   await t.test('native Enter Space and complete row-column keyboard commands keep independent intent',async()=>{
