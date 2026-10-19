@@ -108,11 +108,16 @@ async function exercise(page,profile,sample){
  await add('cancel');assert.deepEqual((await state(page)).ni,pre.ni,'cancel must not change geometry');
  await add('preview-show');await add('confirm');
  const committed=await state(page);assert.equal(committed.ni.length,8,'seven NI districts selected');
+ // Benchmark direct Undo separately from the documented History restoration path.
+ // Do not assume transaction Undo remains valid after intervening popstate.
+ await add('undo');const undone=await state(page);
+ assert.deepEqual(undone.ni,pre.ni,'direct Undo must recover NI');
+ assert.deepEqual(undone.roMd,pre.roMd,'Undo must not mutate RO/MD');
+ await add('preview-show');await add('confirm');
+ assert.equal((await state(page)).ni.length,8,'repeated confirm must select NI districts');
  await add('back');await waitFor(()=>state(page).then(x=>x.ni.length===1),'History Back NI',15000);
  await add('forward');await waitFor(()=>state(page).then(x=>x.ni.length===8),'History Forward NI',15000);
- await add('undo');const undone=await state(page);
- assert.deepEqual(undone.ni,pre.ni,'Undo must recover NI');
- assert.deepEqual(undone.roMd,pre.roMd,'Undo must not mutate RO/MD');
+ await add('back');await waitFor(()=>state(page).then(x=>x.ni.length===1),'History recovery before next sample',15000);
  await add('panel-close');
  for(const zoom of [7,10,6]){await add('zoom',zoom);await delay(500);}
  await add('basemap');await add('basemap');
