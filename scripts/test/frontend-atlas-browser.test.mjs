@@ -35,7 +35,7 @@ try{
   await scenario('WEB-R2b.2 Chromium desktop/mobile multi-select preserves geometry checkboxes and statistical levels',async()=>{
    for(const [w,h] of [[1440,900],[390,844]]){
     await page.viewport(w,h);
-    await page.click('#filters-toggle');
+    if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');
     const before=await page.evaluate("(()=>{const panel=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');if(!panel)throw Error('OSM administrative filter missing');panel.open=true;return {checkboxes:[...qaApp.visibleEntityIds].sort(),outlines:[...document.querySelectorAll('#hierarchy-tree .tree-visibility-toggle:checked')].map(e=>e.dataset.entityId).sort(),statistical:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked),rows:qaApp.atlasTree.getVisibleCount()};})()");
     await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.querySelectorAll('button')[1].click();})()");
     assert.equal(await page.evaluate('qaApp.atlasTree.getVisibleCount()'),0,'no levels means no visible tree rows');
