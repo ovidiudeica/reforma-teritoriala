@@ -63,7 +63,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
  for(const b of [showButton,hideButton,undoButton]){b.className='action-button';b.setAttribute('aria-label',b.textContent+' — Nivel administrativ OSM');actionButtons.appendChild(b);}
  geometryActions.appendChild(actionButtons);
  const confirmation=document.createElement('div');confirmation.className='osm-level-action-confirm';confirmation.id='osm-level-action-confirmation';confirmation.hidden=true;
- confirmation.setAttribute('role','group');confirmation.setAttribute('aria-label','Confirmarea domeniului acțiunii OSM');confirmation.setAttribute('aria-describedby','osm-level-action-scope');
+ confirmation.setAttribute('role','group');confirmation.setAttribute('aria-label','Confirmarea domeniului acțiunii OSM');confirmation.setAttribute('aria-describedby','osm-level-action-scope');confirmation.setAttribute('data-atlas-escape-owner','inline-confirmation');
  const scope=document.createElement('p');scope.id='osm-level-action-scope';confirmation.appendChild(scope);
  const accept=document.createElement('button');accept.type='button';accept.className='action-button';accept.textContent='Confirmă operațiunea';
  const cancel=document.createElement('button');cancel.type='button';cancel.className='action-button';cancel.textContent='Renunță';
@@ -109,7 +109,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   catch(error){actionStatus.textContent='Operațiunea nu a fost aplicată: '+error.message;}
  });
  undoButton.addEventListener('click',()=>{
-  dismiss();undoButton.focus?.();const result=onOsmGeometryUndo();actionStatus.textContent=result?.message||'Nu există o operațiune de anulat.';sync();
+  dismiss();const result=onOsmGeometryUndo();actionStatus.textContent=result?.message||'Nu există o operațiune de anulat.';sync();(undoButton.disabled?showButton:undoButton).focus?.();
  });
  const statKeys=[1,2,3,...(index.statisticalCounts.has('unclassified')?['unclassified']:[])];
  const {el:stats}=section('Niveluri statistice',enabled=>{for(const level of statKeys){if(enabled)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
