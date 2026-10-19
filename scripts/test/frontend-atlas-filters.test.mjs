@@ -1,4 +1,5 @@
 import './frontend-web-r2b3-osm-actions.test.mjs'; // WEB-R2b.3 included in mandatory taxonomy regression suite
+import './frontend-web-r2c11-ux-clarity.test.mjs'; // WEB-R2c.1.1 counted UX/empty-state tests run in mandatory taxonomy CI
 import {allOsmLevelFilters} from '../../atlas-osm-admin-filter.mjs';
 import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';

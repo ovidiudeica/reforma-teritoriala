@@ -32,6 +32,7 @@
 }
 #entities-panel .atlas-tree-hint{flex:none;margin:6px 0 10px}
 #hierarchy-error:empty{display:none}
+#hierarchy-empty:not([hidden]){flex:none;margin:6px 0 10px;padding:9px 10px;border:1px solid var(--atlas-border,#d9e1db);border-radius:6px;overflow-wrap:anywhere}
 @container atlas (max-height:540px) and (min-width:600px) and (max-width:899px){
  #entities-panel .atlas-tree-hint{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 }

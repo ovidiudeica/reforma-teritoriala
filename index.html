@@ -121,11 +121,12 @@
     <h3 class="sr-only">Arbore</h3>
     <p id="atlas-tree-help" class="hint atlas-tree-hint">Bifează geometria pentru afișare. Apasă numele pentru detalii.</p>
     <p id="hierarchy-error" class="hint" role="alert"></p>
+    <p id="hierarchy-empty" class="hint atlas-tree-empty" role="status" aria-live="polite" hidden></p>
     <div id="hierarchy-tree" class="hierarchy-tree" aria-describedby="atlas-tree-help"><p class="muted">Se încarcă arborele teritorial…</p></div>
   </section>
 
-  <section id="filters-panel" class="atlas-filters-panel" aria-label="Filtre geometrice" hidden inert>
-    <p class="hint">Filtrele limitează geometriile deja bifate în arbore; nu modifică bifele entităților.</p>
+  <section id="filters-panel" class="atlas-filters-panel" aria-label="Filtre pentru hartă și arbore" hidden inert>
+    <p class="hint">Filtrele pentru jurisdicții, tipuri și niveluri statistice controlează afișarea pe hartă fără să schimbe bifele entităților. Filtrul OSM controlează separat ce rânduri apar în arbore.</p>
     <details class="atlas-panel-disclosure" open>
     <summary>Jurisdicții</summary>
     <div class="atlas-disclosure-body">
