@@ -55,6 +55,36 @@ try{
    await page.viewport(1440,900);
    await page.click('#mobile-navigation');
   });
+  await scenario('WEB-R2b.3 Chromium desktop/mobile explicit level actions require preview and support scoped undo',async()=>{
+   await page.viewport(1440,900);
+   if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');
+   const baseline=await page.evaluate("({actual:[...qaApp.visibleEntityIds].sort(),ni:[...qaApp.visibleOperationalOutlineIds].sort(),selection:qaApp.selectedEntityId,stat:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked)})");
+   await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(e=>e.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.open=true;section.querySelectorAll('.filter-actions button')[1].click();const level=[...section.querySelectorAll('input[data-kind=osm-admin-level]')].find(e=>e.dataset.filter==='5');level.click();const show=section.querySelector('.osm-level-geometry-buttons button');show.click();section.querySelector('.osm-level-action-confirm').scrollIntoView({block:'nearest',behavior:'instant'});})()");
+   const preview=await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(e=>e.querySelector('summary')?.textContent==='Nivel administrativ OSM');return {text:section.querySelector('.osm-level-action-confirm').textContent,open:!section.querySelector('.osm-level-action-confirm').hidden,ni:[...qaApp.visibleOperationalOutlineIds].sort(),actual:[...qaApp.visibleEntityIds].sort()};})()");
+   assert.equal(preview.open,true,'explicit confirmation is displayed');
+   assert.match(preview.text,/contururi NI 7/);
+   assert.match(preview.text,/roluri NI reutilizate excluse/);
+   assert.deepEqual(preview.ni,baseline.ni,'preview does not change any geometries');
+   assert.deepEqual(preview.actual,baseline.actual);
+   await shot('web-r2b3-desktop-confirm-1440x900');
+   await page.evaluate("document.querySelector('.osm-level-action-confirm button').click()");
+   const shown=await page.evaluate("({actual:[...qaApp.visibleEntityIds].sort(),ni:[...qaApp.visibleOperationalOutlineIds].sort(),selection:qaApp.selectedEntityId,stat:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked),notice:document.querySelector('.osm-level-geometry-actions [role=status]').textContent})");
+   assert.equal(shown.ni.length,8,'seven independent NI districts explicitly enabled');
+   assert.deepEqual(shown.actual,baseline.actual,'NI does not bulk-toggle the 85 reused MD aliases');
+   assert.equal(shown.selection,baseline.selection);
+   assert.deepEqual(shown.stat,baseline.stat);
+   assert.match(shown.notice,/7 bife/);
+   await page.viewport(390,844);
+   if(await page.evaluate("document.querySelector('#filters-panel').hidden"))await page.click('#filters-toggle');
+   await page.evaluate("document.querySelector('.osm-level-geometry-actions').scrollIntoView({block:'center',behavior:'instant'})");
+   await shot('web-r2b3-mobile-actions-390x844');
+   await page.evaluate("document.querySelector('.osm-level-geometry-buttons button:nth-child(3)').click()");
+   assert.deepEqual(await page.evaluate("[...qaApp.visibleOperationalOutlineIds].sort()"),baseline.ni,'one-step undo restores NI-only outline checks');
+   assert.deepEqual(await page.evaluate("[...qaApp.visibleEntityIds].sort()"),baseline.actual);
+   await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(e=>e.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.querySelector('.filter-actions button').click();})()");
+   await page.viewport(1440,900);
+   await page.click('#mobile-navigation');
+  });
   // P4 cartographic regressions explicitly enable the entities under test.
   await page.evaluate('(()=>{for(const id of '+JSON.stringify([roCity.id,roCounty.id,md114.id,md115.id,md120.id])+')qaApp.visibleEntityIds.add(id);qaApp.refreshGeometryVisibility();qaApp.atlasUrl.commit("replace");})()');
  await scenario('desktop keyboard search normalization, identifiers, grouping and no result',async()=>{
