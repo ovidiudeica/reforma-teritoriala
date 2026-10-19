@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {navigatePerformanceProfile} from '../audit/helpers/performance-navigation.mjs';
 import {staticServer} from './helpers/atlas-browser.mjs';
 import {performanceSource} from '../audit/helpers/performance-source.mjs';
+import {performanceOutput} from '../audit/helpers/performance-output.mjs';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
@@ -44,4 +45,11 @@ test('an unchanged HEAD cannot certify modified tracked audit sources',async()=>
   const after=performanceSource(root,{ci:false});assert.equal(after.sha,before.sha);assert.equal(after.trackedSourcesClean,false);
   assert.throws(()=>performanceSource(root,{ci:true}),/clean tracked sources/);
  }finally{assert.ok(root.startsWith(prefix));await rm(root,{recursive:true,force:true});}
+});
+test('environment output paths cannot redirect CDP artifacts outside the reviewed fixture directory',()=>{
+ const root=path.resolve('fixture-root'),expected=path.join(root,'outputs','web-r2c302-cdp');
+ assert.equal(performanceOutput(root,undefined),expected);
+ assert.equal(performanceOutput(root,'outputs/web-r2c302-cdp'),expected);
+ assert.equal(performanceOutput(root,expected),expected);
+ for(const input of ['../escape','outputs/../../escape',path.resolve('outside'),'/etc/passwd','outputs/other'])assert.throws(()=>performanceOutput(root,input),/Unsupported benchmark output/);
 });

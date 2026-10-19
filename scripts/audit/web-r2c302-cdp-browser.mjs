@@ -7,9 +7,10 @@ import os from 'node:os';
 import {launchBrowser,delay,waitFor} from '../test/helpers/atlas-browser.mjs';
 import {navigatePerformanceProfile} from './helpers/performance-navigation.mjs';
 import {performanceSource} from './helpers/performance-source.mjs';
+import {performanceOutput} from './helpers/performance-output.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const output=process.env.ATLAS_PERF_OUTPUT||'outputs/web-r2c302-cdp';
+const output=performanceOutput(root,process.env.ATLAS_PERF_OUTPUT);
 const source=performanceSource(root),expected=source.sha;
 const report={schema:'web-r2c302-cdp-readonly-v1',sourceMain:expected,runnerSha:process.env.GITHUB_SHA||null,startedAt:new Date().toISOString(),browser:null,env:{platform:process.platform,node:process.version,cpu:os.cpus()[0]?.model,logicalCpus:os.cpus().length,totalMemoryBytes:os.totalmem(),cpuThrottle:1,networkThrottle:false},samples:[],failures:[],summary:null,status:'INCOMPLETE'};
 report.env.trackedSourcesClean=source.trackedSourcesClean;

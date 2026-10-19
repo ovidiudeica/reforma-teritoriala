@@ -25,6 +25,14 @@
       "verification_sha":null,"evidence":[],"verdict":"FIXED_PENDING_EXACT_HEAD_RETEST"
     },
     {
+      "id":"RM-004","severity":"P1","component":"CDP artifact output path","entities":[],
+      "reproduction":"CodeQL check 118330837784 on bcff2295b460b471ab7e22f5cfc77746637c3f86 reports four path-injection sinks because ATLAS_PERF_OUTPUT selects an arbitrary output directory.",
+      "cause":"Environment-derived artifact paths reached file writes without a fixed reviewed write target.",
+      "change":"The output directory is now a constant under the audit checkout; environment configuration may only confirm the same directory, never redirect writes.",
+      "pr":391,"regression":"Adversarial output paths (absolute external paths, traversal and alternate output directories) are rejected before writes.",
+      "verification_sha":null,"evidence":["https://github.com/ovidiudeica/reforma-teritoriala/runs/118330837784"],"verdict":"FIXED_PENDING_CODEQL_RETEST"
+    },
+    {
       "id":"RM-003","severity":"P2","component":"Performance report dirty-source provenance","entities":[],
       "reproduction":"Modify a tracked audit source without committing, then run the old benchmark; sourceMain still labels only HEAD without disclosing modified source bytes.",
       "cause":"Git commit identity alone did not prove clean tracked input sources.",
@@ -36,7 +44,8 @@
   "environment_incidents": [
     {"id":"ENV-001","reproduction":"Windows clone with core.autocrlf=true; execute historical hash audit","cause":"Git LF to CRLF conversion","remedy":"Restore exact tracked blob bytes; do not alter accepted hashes","retest":"p907219 --audit and --self-test PASS","verdict":"RESOLVED"},
     {"id":"ENV-002","reproduction":"Run Chromium benchmark under restricted local sandbox","cause":"CDP Page.enable timed out before samples; root cause beyond sandbox transport not proven","remedy":"Rerun with authorized local connection access","retest":"Chrome/155.0.8059.80 benchmark PASS","verdict":"RESOLVED_FOR_EXECUTION"},
-    {"id":"ENV-003","reproduction":"node --test scripts/test/workflow-write-boundaries.test.mjs on Windows without Bash","cause":"spawn bash ENOENT; existing platform-dependent adversarial preflight also skipped","remedy":"Use the existing mandatory Linux verify-persisted-release job, which invokes test:actual-candidate-lifecycle; no test altered or disabled","retest":"152 PASS, zero FAIL, zero SKIP on main 335234bdb7b8cec828d4d2ad11d42d5bc5f99642, Actions 39326818180","verdict":"RESOLVED_LINUX_CI"}
+    {"id":"ENV-003","reproduction":"node --test scripts/test/workflow-write-boundaries.test.mjs on Windows without Bash","cause":"spawn bash ENOENT; existing platform-dependent adversarial preflight also skipped","remedy":"Use the existing mandatory Linux verify-persisted-release job, which invokes test:actual-candidate-lifecycle; no test altered or disabled","retest":"152 PASS, zero FAIL, zero SKIP on main 335234bdb7b8cec828d4d2ad11d42d5bc5f99642, Actions 39326818180","verdict":"RESOLVED_LINUX_CI"},
+    {"id":"ENV-004","reproduction":"ACTUAL reproducibility B, Actions job 118330713332 on bcff2295b460b471ab7e22f5cfc77746637c3f86","cause":"GitHub allocated unapproved runner image 20261018.339.1, kernel 7.0.0-1017-azure, containerd v2.4.2, runc 1.5.2; runtime_host_profile_is_explicitly_approved correctly failed before ACTUAL execution","remedy":"Keep the host-trust contract unchanged; retest on an already approved profile, otherwise require a protected-contract decision","retest":"A failed-job rerun was refused while the parent workflow was still running (HTTP 403); pending complete workflow/new exact-head CI","verdict":"OPEN_INFRASTRUCTURE_GATE"}
   ],
   "open_evidence_gates": [
     {"id":"GATE-001","stage":"WEB-R2c.3.1","description":"Complete comparable performance coverage before NO_CHANGE_REQUIRED or optimization verdict."},
