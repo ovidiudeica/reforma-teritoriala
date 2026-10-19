@@ -1,0 +1,94 @@
+{
+  "schema": "web-r2a3-osm-admin-level-presentation-v1",
+  "status": "SPECIFICATION_ONLY",
+  "base_sha": "6b6f4fe2c974b72ef6e8a5d81c97dad48a7853ae",
+  "actual_snapshot": "actual-a9e5a4ddcb5277ef",
+  "actual_fingerprint": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+  "sources": {
+    "actual": "public/data/actual-entities.json",
+    "osm_reused": "public/data/p907216-osm-roles.json",
+    "ni_outlines": "public/data/p9095-osm-outlines.json",
+    "ni_verified": "docs/evidence/web-r2a2/osm-historical-admin-level.json",
+    "census": "docs/evidence/web-r2a1/distributions.json"
+  },
+  "precedence": [
+    "ACTUAL representation.admin_level for ACTUAL identity",
+    "NI historical-version-tag overlay for NI source-only outline only",
+    "OSM reused role tag in role-specific context, not an ACTUAL override"
+  ],
+  "normalized_levels": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    9
+  ],
+  "state_values": [
+    "valid",
+    "missing",
+    "null",
+    "multiple",
+    "invalid",
+    "conflict"
+  ],
+  "badge": {
+    "placement": "before-entity-name",
+    "display_only_when": "valid_and_provenance_verified",
+    "text": "numeric_admin_level",
+    "aria_label_template": "Nivel administrativ OSM {level}",
+    "not_nuts": true,
+    "not_legal_certification": true,
+    "show_for_explicit_null": false,
+    "show_for_missing": false,
+    "click_action": "none"
+  },
+  "filters": {
+    "name": "Nivel administrativ OSM",
+    "selection": "multiple",
+    "default": "all",
+    "scope": [
+      "RO",
+      "MD",
+      "NI"
+    ],
+    "value_semantics": "same-origin display record; no cross-context identity duplication",
+    "mode": "restrict_tree_or_results_only",
+    "no_mutation_on_filter": true,
+    "statistics_independent": true,
+    "unknown_option": "separate opt-in; never inferred",
+    "combination": "AND across independent filter dimensions, OR within selected admin levels"
+  },
+  "geometry": {
+    "initial_ro_md_ni_roots_on": true,
+    "initial_descendants_on": false,
+    "checkboxes_independent_from_filter": true,
+    "expansion_independent": true,
+    "selection_independent": true,
+    "level_group_actions_explicit": true,
+    "group_action_requires_confirmation_of_scope": true,
+    "undo_reset_separate": true,
+    "statistical_admin_same_geometry": "administrativeVisible OR statisticalVisible",
+    "no_implicit_network_fanout": true
+  },
+  "history": {
+    "schema_extension_required": true,
+    "backward_compatible": true,
+    "no_url_state_mutation_until_web_r2b": true
+  },
+  "security": {
+    "p91_import_allowed": false,
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "actual_mutation_allowed": false,
+    "source_only_not_juridical": true
+  },
+  "acceptance": {
+    "no_duplicate_actual_ids": true,
+    "no_inferred_level": true,
+    "no_default_descendant_enabling": true,
+    "keyboard_and_screen_reader_test_required": true,
+    "desktop_mobile_chromium_required": true,
+    "source_data_read_only": true
+  }
+}
