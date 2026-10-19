@@ -77,5 +77,12 @@ header .atlas-modules-trigger span{margin:0;color:inherit;font-size:12px}
 .osm-level-action-confirm[hidden]{display:none}
 .osm-level-action-confirm p{margin:0 0 8px;line-height:1.5;overflow-wrap:anywhere}
 .osm-level-action-confirm>.action-button{margin-inline-end:6px;margin-bottom:6px}
-.osm-level-geometry-actions button:focus-visible{outline:2px solid var(--atlas-focus,#365b4a);outline-offset:2px}
+/* WEB-R2c.2: inline confirmation stays within the scrolling panel at all widths. */
+.osm-level-geometry-actions{max-width:100%;overflow-wrap:anywhere}
+.osm-level-geometry-buttons>.action-button{min-width:0;max-width:100%;box-sizing:border-box}
+.osm-level-action-confirm{display:flex;flex-wrap:wrap;gap:8px;min-width:0;max-width:100%;box-sizing:border-box}
+.osm-level-action-confirm>p{flex:1 0 100%;min-width:0;margin:0}
+.osm-level-action-confirm>.action-button{box-sizing:border-box;flex:1 1 150px;min-width:0;margin:0;min-height:44px}
+.osm-level-geometry-actions button:focus-visible{outline:3px solid var(--atlas-focus,#365b4a);outline-offset:2px}
+@media(forced-colors:active){.osm-level-geometry-actions button:focus-visible{outline-color:Highlight;outline-style:solid}}
 @media(forced-colors:active){.osm-level-geometry-actions,.osm-level-action-confirm{border-color:CanvasText}}
