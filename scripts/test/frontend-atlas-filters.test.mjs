@@ -1,3 +1,4 @@
+import {allOsmLevelFilters} from '../../atlas-osm-admin-filter.mjs';
 import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -15,7 +16,7 @@ const expected={
  'ro.bucharest_sectors':6,'md.chisinau_sectors':5,'ro.component_villages':3,'ro.municipality_components':2,
  'md.component_localities':1446,'md.component_areas':3,'ro.context':1,'md.context':1,'md.auxiliary':122
 };
-const options=()=>({geometryClasses:new Set(Object.keys(geometryLabels)),geometrySubtypes:new Set(Object.keys(geometrySubtypeLabels)),statisticalLevels:new Set([1,2,3]),separateStatisticalGeometry:true});
+const options=()=>({geometryClasses:new Set(Object.keys(geometryLabels)),geometrySubtypes:new Set(Object.keys(geometrySubtypeLabels)),statisticalLevels:new Set([1,2,3]),osmAdminLevels:allOsmLevelFilters(),separateStatisticalGeometry:true});
 const breakdown=cls=>Object.fromEntries(filters.groups.filter(g=>g.id===cls).flatMap(g=>g.jurisdictions.flatMap(j=>j.subtypes.map(s=>[s.id,s.count]))));
 
 test('all 5848 representations have deterministic classes/subtypes; only 18 separate boundaries are exempt',()=>{
