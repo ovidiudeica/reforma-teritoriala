@@ -25,14 +25,14 @@ const setup=()=>{
  const zero={roles:0,reused:0,separate:0,jurisdictions:{RO:{roles:0,reused:0,separate:0},MD:{roles:0,reused:0,separate:0}}};
  const index={groups:[],statisticalCounts:new Map(),statisticalLevelStats:new Map([1,2,3].map(x=>[x,zero])),statisticalRoles:0,reusedStatistical:0,statisticalOnly:0};
  const state={geometryClasses:new Set(['regional']),geometrySubtypes:new Set(),statisticalLevels:new Set([1,2,3]),osmAdminLevels:new Set([2]),separateStatisticalGeometry:true};
- let applied=0,undone=0,plans=0;
+ const counters={applied:0,undone:0,plans:0};
  const plan={changed:2,levels:[2],eligible:{RO:2,MD:1,NI:0},counts:{RO:1,MD:1,NI:0},skippedAliases:85,hasUnknown:false,changes:[{id:'osm-r90689',to:false},{id:'osm-r58974',to:false}]};
  const ui=createAtlasFilters({container,document:doc,index,state,onChange:()=>{throw Error('OSM geometry action cannot change filters');},
-  onOsmGeometryPreview:()=>{plans++;return plan;},
-  onOsmGeometryApply:()=>{applied++;return {message:'Au fost modificate 2 bife geometrice.'};},
-  onOsmGeometryUndo:()=>{undone++;return {message:'Restabilite 2 bife; 0 modificări ulterioare păstrate.'};},
-  canUndoOsmGeometry:()=>undone===0&&applied>0});
- return {doc,state,ui,plan,get counters(){return {plans,applied,undone}}};
+  onOsmGeometryPreview:()=>{counters.plans++;return plan;},
+  onOsmGeometryApply:()=>{counters.applied++;return {message:'Au fost modificate 2 bife geometrice.'};},
+  onOsmGeometryUndo:()=>{counters.undone++;return {message:'Restabilite 2 bife; 0 modificări ulterioare păstrate.'};},
+  canUndoOsmGeometry:()=>counters.undone===0&&counters.applied>0});
+ return {doc,state,ui,plan,counters};
 };
 test('WEB-R2c.2: preview is an inline named group; accept is focused with explicit description',()=>{
  const {doc,state,ui,counters}=setup(),g=ui.geometryActions;
