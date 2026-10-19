@@ -29,6 +29,7 @@ import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
 import {osmLevelForTreeNode} from './atlas-osm-admin-badges.mjs';
 import {OSM_ADMIN_LEVELS,OSM_UNKNOWN,allOsmLevelFilters,osmTreeVisibleIds} from './atlas-osm-admin-filter.mjs';
+import {planOsmLevelGeometryAction,applyOsmLevelGeometryAction,undoOsmLevelGeometryAction} from './atlas-osm-level-geometry-actions.mjs';
 import {validateConsolidatedHierarchy} from './atlas-hierarchy-validate.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
 import {geometryClass,geometrySubtype,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
@@ -94,6 +95,7 @@ const activeGeometryClasses=activeFilterGroups; // Compatibility alias, not a se
 const activeGeometrySubtypes=new Set(Object.keys(geometrySubtypeLabels));
 let geometryFilterIndex=null;
 let atlasFilters=null;
+let lastOsmLevelGeometryAction=null;
 let filtersPanelOpen=false;
 let navigationTab='entities';
 function setNavigationTab(tab){
@@ -326,7 +328,11 @@ function renderFilters(){
  const state={geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,osmAdminLevels:activeOsmAdminLevels,
   get separateStatisticalGeometry(){return separateStatisticalGeometry;}};
  atlasFilters=createAtlasFilters({container:document.getElementById('filter-list'),document,index:geometryFilterIndex,state,
-  onSeparate:setSeparateStatisticalGeometry,onChange:()=>{refreshOsmAdminTree();refreshGeometryVisibility();atlasUrl?.commit('push');}});
+  onSeparate:setSeparateStatisticalGeometry,onChange:()=>{refreshOsmAdminTree();refreshGeometryVisibility();atlasUrl?.commit('push');},
+  onOsmGeometryPreview:(mode,levels)=>hierarchyTree?planOsmLevelGeometryAction({mode,levels,nodeById:nistreniaView?.nodes||hierarchyNodeById,entityById,osmRoleById,outlineIds:new Set(nistreniaOutlines?niOutlineIds:[]),visibleEntityIds,visibleOperationalOutlineIds}):null,
+  onOsmGeometryApply:plan=>{const transaction=applyOsmLevelGeometryAction(plan,{visibleEntityIds,visibleOperationalOutlineIds});lastOsmLevelGeometryAction=transaction;refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');return {message:'Au fost modificate '+transaction.changes.length+' bife geometrice. Filtrele și selecția au rămas neschimbate.'};},
+  onOsmGeometryUndo:()=>{if(!lastOsmLevelGeometryAction)return {message:'Nu există o operațiune de anulat.'};const result=undoOsmLevelGeometryAction(lastOsmLevelGeometryAction,{visibleEntityIds,visibleOperationalOutlineIds});lastOsmLevelGeometryAction=null;refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');return {message:'Restabilite '+result.reverted+' bife; '+result.conflicts+' modificări ulterioare păstrate.'};},
+  canUndoOsmGeometry:()=>Boolean(lastOsmLevelGeometryAction)});
 }
 function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boolean(value);}
 function refreshOsmAdminTree(){if(!atlasTree||!hierarchyTree)return;const all=activeOsmAdminLevels.size===OSM_ADMIN_LEVELS.length+1;const nodes=nistreniaView?.nodes||hierarchyNodeById;atlasTree.setVisibleIds(all?null:osmTreeVisibleIds(nodes,nistreniaView?.rootIds||hierarchyTree.root_ids,activeOsmAdminLevels,{entityById,osmRoleById}));}
@@ -366,6 +372,7 @@ function syncGeometryReset(){
 }
 function resetGeometries(){
  if(geometryResetDisabled())return;
+ lastOsmLevelGeometryAction=null;
  visibleEntityIds.clear();
  for(const id of hierarchyTree.root_ids)visibleEntityIds.add(id);
  visibleOperationalOutlineIds.clear();if(nistreniaOutlines)visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
@@ -815,6 +822,7 @@ function captureUrlState(){
  return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,osmAdminLevels:activeOsmAdminLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds,visibleOperationalOutlineIds};
 }
 async function applyUrlState(state){
+ lastOsmLevelGeometryAction=null;
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
  replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(activeOsmAdminLevels,state.osmAdminLevels);replace(visibleEntityIds,state.visibleEntityIds);replace(visibleOperationalOutlineIds,state.visibleOperationalOutlineIds||[]);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
  for(const j of ['RO','MD','NI']){const control=document.getElementById('layer-'+j.toLowerCase());if(control)control.checked=state.jurisdictions.includes(j)&&!(j==='NI'&&!nistreniaView);}syncJurisdictionRoots();
