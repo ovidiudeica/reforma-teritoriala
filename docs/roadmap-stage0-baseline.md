@@ -35,6 +35,8 @@ Rularea locală sandbox a eșuat la CDP Page.enable înainte de primul eșantion
 
 ## Remediere și reproducere
 
-Defectul RM-001: `sourceMain` era hardcodat la SHA-ul pre-#389. Acum citește `git rev-parse HEAD`, validează SHA complet, iar workflow-ul verifică egalitatea rezultatului cu commitul testat. La PR, benchmarkul face checkout explicit al head SHA. Report schema și scenariile existente rămân compatibile. Retestările sunt arhivate ca artifact Actions; raportul inițial rămâne dovadă istorică etichetată cu această limită.
+Defectul RM-001: `sourceMain` era hardcodat la SHA-ul pre-#389. Acum citește `git rev-parse HEAD`, validează SHA complet, iar workflow-ul verifică egalitatea rezultatului cu commitul testat. La PR, benchmarkul face checkout explicit al head SHA. Report schema și scenariile existente rămân compatibile. [Retestarea 39323200300](https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39323200300) PASS pe `17d68af5954e7e1851649db48432105aa71a909b`: raportul are sourceMain și runnerSha egale cu acel SHA. Raportul inițial rămâne dovadă istorică etichetată cu limita sa.
+
+Testele locale de workflow au 32 PASS, un eșec `spawn bash ENOENT` și un SKIP de platformă existent; acestea nu sunt prezentate drept suită PASS. Gate-ul obligatoriu Linux `verify-persisted-release` execută `test:actual-candidate-lifecycle`, care include acest fișier. Acceptarea PR-ului necesită PASS în acel mediu pe head-ul final. Nu s-au introdus excluderi sau relaxări de praguri.
 
 PR-ul nu modifică aplicația, datele, geometriile, relațiile juridice sau autorizațiile. Registrul unic inițial este `docs/roadmap-issue-register.json`. Nicio etapă dependentă nu trebuie marcată completă înainte de acceptarea etapei precedente. P9.1 rămâne blocat.

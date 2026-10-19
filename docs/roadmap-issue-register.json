@@ -12,14 +12,15 @@
       "change": "Resolve HEAD via Git; require full SHA; checkout PR head explicitly; verify report provenance in Actions.",
       "pr": 390,
       "regression": "Workflow step Verify report provenance matches the tested commit",
-      "verification_sha": null,
-      "evidence": ["https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39322322172"],
-      "verdict": "FIXED_PENDING_EXACT_HEAD_RETEST"
+      "verification_sha": "17d68af5954e7e1851649db48432105aa71a909b",
+      "evidence": ["https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39322322172", "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39323200300"],
+      "verdict": "CLOSED_RETEST_PASS"
     }
   ],
   "environment_incidents": [
     {"id":"ENV-001","reproduction":"Windows clone with core.autocrlf=true; execute historical hash audit","cause":"Git LF to CRLF conversion","remedy":"Restore exact tracked blob bytes; do not alter accepted hashes","retest":"p907219 --audit and --self-test PASS","verdict":"RESOLVED"},
-    {"id":"ENV-002","reproduction":"Run Chromium benchmark under restricted local sandbox","cause":"CDP Page.enable timed out before samples; root cause beyond sandbox transport not proven","remedy":"Rerun with authorized local connection access","retest":"Chrome/155.0.8059.80 benchmark PASS","verdict":"RESOLVED_FOR_EXECUTION"}
+    {"id":"ENV-002","reproduction":"Run Chromium benchmark under restricted local sandbox","cause":"CDP Page.enable timed out before samples; root cause beyond sandbox transport not proven","remedy":"Rerun with authorized local connection access","retest":"Chrome/155.0.8059.80 benchmark PASS","verdict":"RESOLVED_FOR_EXECUTION"},
+    {"id":"ENV-003","reproduction":"node --test scripts/test/workflow-write-boundaries.test.mjs on Windows without Bash","cause":"spawn bash ENOENT; existing platform-dependent adversarial preflight also skipped","remedy":"Use the existing mandatory Linux verify-persisted-release job, which invokes test:actual-candidate-lifecycle; no test altered or disabled","retest":"Required on final PR head before acceptance","verdict":"PENDING_LINUX_CI"}
   ],
   "open_evidence_gates": [
     {"id":"GATE-001","stage":"WEB-R2c.3.1","description":"Complete comparable performance coverage before NO_CHANGE_REQUIRED or optimization verdict."},
