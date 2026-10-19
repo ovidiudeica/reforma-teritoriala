@@ -62,19 +62,24 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
  const undoButton=document.createElement('button');undoButton.type='button';undoButton.textContent='Anulează ultima operațiune pe niveluri';
  for(const b of [showButton,hideButton,undoButton]){b.className='action-button';b.setAttribute('aria-label',b.textContent+' — Nivel administrativ OSM');actionButtons.appendChild(b);}
  geometryActions.appendChild(actionButtons);
- const confirmation=document.createElement('div');confirmation.className='osm-level-action-confirm';confirmation.hidden=true;
- confirmation.setAttribute('role','group');confirmation.setAttribute('aria-label','Confirmarea domeniului acțiunii OSM');
- const scope=document.createElement('p');confirmation.appendChild(scope);
+ const confirmation=document.createElement('div');confirmation.className='osm-level-action-confirm';confirmation.id='osm-level-action-confirmation';confirmation.hidden=true;
+ confirmation.setAttribute('role','group');confirmation.setAttribute('aria-label','Confirmarea domeniului acțiunii OSM');confirmation.setAttribute('aria-describedby','osm-level-action-scope');
+ const scope=document.createElement('p');scope.id='osm-level-action-scope';confirmation.appendChild(scope);
  const accept=document.createElement('button');accept.type='button';accept.className='action-button';accept.textContent='Confirmă operațiunea';
  const cancel=document.createElement('button');cancel.type='button';cancel.className='action-button';cancel.textContent='Renunță';
  for(const b of [accept,cancel])b.setAttribute('aria-label',b.textContent+' — confirmare Nivel administrativ OSM');
  confirmation.appendChild(accept);confirmation.appendChild(cancel);geometryActions.appendChild(confirmation);
  const actionStatus=document.createElement('p');actionStatus.className='hint';actionStatus.setAttribute('role','status');actionStatus.setAttribute('aria-live','polite');geometryActions.appendChild(actionStatus);
  osmSection.appendChild(geometryActions);
- let pending=null;
- const dismiss=()=>{pending=null;confirmation.hidden=true;};
- const preview=mode=>{
-  dismiss();
+ let pending=null,initiator=null;
+ for(const button of [showButton,hideButton]){button.setAttribute('aria-controls',confirmation.id);button.setAttribute('aria-expanded','false');}
+ const dismiss=({returnFocus=false}={})=>{
+  pending=null;confirmation.hidden=true;
+  for(const button of [showButton,hideButton])button.setAttribute('aria-expanded','false');
+  if(returnFocus)initiator?.focus?.();
+ };
+ const preview=(mode,source)=>{
+  dismiss();initiator=source;
   const chosen=[...state.osmAdminLevels],plan=onOsmGeometryPreview(mode,chosen);
   if(!plan){actionStatus.textContent='Catalogul geometric nu este încă disponibil.';return;}
   if(!plan.changed){actionStatus.textContent=plan.levels.length?'Pentru nivelurile numerice selectate, toate bifele eligibile sunt deja în starea cerută.':'Selectează cel puțin un nivel OSM numeric pentru o comandă asupra geometriilor. Categoria fără nivel verificat filtrează doar arborele.';return;}
@@ -82,14 +87,21 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   const levels=plan.levels.join(', ')||'niciunul';
   const eligible=plan.eligible.RO+plan.eligible.MD+plan.eligible.NI;
   scope.textContent=(mode==='show'?'Vor fi bifate ':'Vor fi debifate ')+plan.changed+' dintre '+eligible+' geometrii eligibile: RO '+plan.counts.RO+', MD '+plan.counts.MD+', contururi NI '+plan.counts.NI+'. Niveluri OSM: '+levels+'. '+plan.skippedAliases+' roluri NI reutilizate excluse. '+(plan.hasUnknown?'Categoria fără nivel verificat este exclusă. ':'')+'Filtrul arborelui și selecția nu se modifică. Confirmi?';
-  confirmation.hidden=false;actionStatus.textContent='';
+  confirmation.hidden=false;source.setAttribute('aria-expanded','true');actionStatus.textContent='';
+  accept.focus?.();
  };
- showButton.addEventListener('click',()=>preview('show'));
- hideButton.addEventListener('click',()=>preview('hide'));
- cancel.addEventListener('click',()=>{dismiss();actionStatus.textContent='Operațiunea a fost anulată. Bifele geometriilor nu s-au schimbat.';});
+ showButton.addEventListener('click',()=>preview('show',showButton));
+ hideButton.addEventListener('click',()=>preview('hide',hideButton));
+ cancel.addEventListener('click',()=>{dismiss({returnFocus:true});actionStatus.textContent='Operațiunea a fost anulată. Bifele geometriilor nu s-au schimbat.';});
+ confirmation.addEventListener('keydown',event=>{
+  if(event.key!=='Escape'||confirmation.hidden)return;
+  event.preventDefault();event.stopPropagation?.();
+  dismiss({returnFocus:true});
+  actionStatus.textContent='Previzualizarea a fost închisă. Bifele geometriilor nu s-au schimbat.';
+ });
  accept.addEventListener('click',()=>{
   if(!pending)return;
-  const {mode,chosen,plan}=pending;dismiss();
+  const {mode,chosen,plan}=pending;dismiss({returnFocus:true});
   if(chosen.some(level=>!state.osmAdminLevels.has(level))||state.osmAdminLevels.size!==chosen.length){actionStatus.textContent='Selecția nivelurilor s-a schimbat. Verifică din nou domeniul operațiunii.';return;}
   const latest=onOsmGeometryPreview(mode,chosen);
   if(!latest||JSON.stringify(latest.changes)!==JSON.stringify(plan.changes)){actionStatus.textContent='Bifele s-au schimbat. Verifică din nou domeniul operațiunii.';return;}
@@ -97,7 +109,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   catch(error){actionStatus.textContent='Operațiunea nu a fost aplicată: '+error.message;}
  });
  undoButton.addEventListener('click',()=>{
-  dismiss();const result=onOsmGeometryUndo();actionStatus.textContent=result?.message||'Nu există o operațiune de anulat.';sync();
+  dismiss();undoButton.focus?.();const result=onOsmGeometryUndo();actionStatus.textContent=result?.message||'Nu există o operațiune de anulat.';sync();
  });
  const statKeys=[1,2,3,...(index.statisticalCounts.has('unclassified')?['unclassified']:[])];
  const {el:stats}=section('Niveluri statistice',enabled=>{for(const level of statKeys){if(enabled)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
