@@ -20,9 +20,9 @@ jobs:
         run: node --check scripts/audit/web-r2a1-admin-level-census.mjs
       - name: Generate exhaustive read-only census from repository bytes
         run: node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir "${{ runner.temp }}/web-r2a1"
-      - name: Verify committed evidence is byte-for-byte reproducible
-        if: ${{ hashFiles('docs/evidence/web-r2a1/summary.json') != '' }}
-        run: node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir "${{ runner.temp }}/web-r2a1-check" --verify-dir docs/evidence/web-r2a1
+      - name: Verify committed SHA-256 evidence manifest is reproducible
+        if: ${{ hashFiles('docs/evidence/web-r2a1/sha256-manifest.json') != '' }}
+        run: node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir "${{ runner.temp }}/web-r2a1-check" --verify-manifest docs/evidence/web-r2a1/sha256-manifest.json
       - name: Existing NI role/navigation/outline contract regressions
         run: |
           node --test scripts/test/frontend-p907216-osm-roles.test.mjs
