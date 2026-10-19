@@ -67,3 +67,15 @@ header .atlas-modules-trigger span{margin:0;color:inherit;font-size:12px}
 .atlas-module-entry .mode:disabled{background:#f4f6f4;color:#59665e;cursor:default}
 #compare-selected{min-height:44px;margin:12px 0}
 @media(forced-colors:active){.atlas-modules-trigger[aria-pressed=true],.atlas-module-entry .mode.active{border:2px solid Highlight}.atlas-modules-trigger:focus-visible{outline-color:Highlight}}
+
+/* WEB-R2b.3: distinct, confirmable OSM-level geometry actions. */
+.osm-level-geometry-actions{margin:12px 0;padding:10px;border:1px solid var(--atlas-border,#d9e1db);border-radius:7px;background:var(--atlas-surface,#fff);min-width:0}
+.osm-level-geometry-actions>.hint{margin:0 0 8px;overflow-wrap:anywhere}
+.osm-level-geometry-buttons{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.osm-level-geometry-buttons>.action-button,.osm-level-action-confirm>.action-button{min-height:44px;white-space:normal;text-align:center;overflow-wrap:anywhere}
+.osm-level-action-confirm{margin:10px 0 4px;padding:9px;border:1px solid var(--atlas-secondary,#65716b);border-radius:6px}
+.osm-level-action-confirm[hidden]{display:none}
+.osm-level-action-confirm p{margin:0 0 8px;line-height:1.5;overflow-wrap:anywhere}
+.osm-level-action-confirm>.action-button{margin-inline-end:6px;margin-bottom:6px}
+.osm-level-geometry-actions button:focus-visible{outline:2px solid var(--atlas-focus,#365b4a);outline-offset:2px}
+@media(forced-colors:active){.osm-level-geometry-actions,.osm-level-action-confirm{border-color:CanvasText}}
