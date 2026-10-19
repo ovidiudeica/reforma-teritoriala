@@ -13,3 +13,19 @@ export function osmTreeVisibleIds(nodeById,roots,active,context){
  }
  return allowed;
 }
+
+/**
+ * WEB-R2c.1.1 — counted tree filter scope, not visible geometries.
+ * Matches are distinct directly matching tree-node IDs; ancestors are
+ * navigation-only IDs retained by the existing filter. Both are computed
+ * on the validated full tree, independently from expanded/virtual DOM rows.
+ */
+export function osmTreeFilterSummary(nodeById,roots,active,context){
+ const visibleIds=osmTreeVisibleIds(nodeById,roots,active,context),selected=new Set(active);
+ let matches=0;
+ for(const id of visibleIds){
+  const level=osmLevelForTreeNode(nodeById.get(id),context);
+  if(selected.has(level===null?OSM_UNKNOWN:level))matches++;
+ }
+ return {visibleIds,matches,ancestors:visibleIds.size-matches};
+}
