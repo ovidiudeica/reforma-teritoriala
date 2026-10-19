@@ -151,7 +151,10 @@ try{
     await delay(100);
     const net=networkSummary(network.data(),browser.server.url);
     report.samples.push({profile:label,sample:iteration,kind:'cold-load',metrics:loaded,heap:memory,network:net});
-    if(label==='desktop'||label==='mobile-portrait')await exercise(page,label,iteration);
+    if(label==='desktop'||label==='mobile-portrait'){
+     await exercise(page,label,iteration);
+     report.samples.push({profile:label,sample:iteration,kind:'post-interaction-network',network:networkSummary(network.data(),browser.server.url),heap:await heap(page)});
+    }
     if(page.errors.length)report.failures.push({profile:label,sample:iteration,errors:page.errors.map(e=>e.text||e.exception?.description).slice(0,5)});
     if(iteration===1&&label==='tablet-portrait'){
      // CDP page scale 2 is pinch/visual zoom; not browser text zoom.
@@ -167,6 +170,8 @@ try{
  const navigation=Object.fromEntries([...new Set(report.samples.filter(s=>s.kind==='cold-load').map(s=>s.profile))].map(p=>[p,stats(report.samples.filter(s=>s.kind==='cold-load'&&s.profile===p).map(s=>s.metrics.navigationMs))]));
  report.summary={actionLatency:Object.fromEntries([...groups].map(([name,values])=>[name,stats(values)])),navigation};
  report.status=report.failures.length?'FAIL':'PASS';
+ console.log('WEB-R2c.3.0.2 TELEMETRY '+JSON.stringify(report.samples.filter(x=>['cold-load','post-interaction-network'].includes(x.kind)).map(x=>({profile:x.profile,sample:x.sample,kind:x.kind,navMs:x.metrics?.navigationMs,resourceEntries:x.metrics?.resourceEntries,domNodes:x.metrics?.domNodes,treeMounted:x.metrics?.treeMounted,heapUsedBytes:x.heap?.usedSize,requestCount:x.network?.requestCount,transferBytesCDP:x.network?.transferBytesCDP,geometryRequests:x.network?.geometryRequestCount,geometryUniqueUrls:x.network?.geometryUniqueUrls,geometryRepeated:x.network?.geometryRepeatedUrls?.length,ownHttpErrors:x.network?.ownHttpErrors?.length}))));
+ console.log('WEB-R2c.3.0.2 MEMORY_CYCLES '+JSON.stringify(report.samples.filter(x=>x.kind==='interaction').map(x=>({profile:x.profile,sample:x.sample,heapAfterScenario:x.heapAfterScenario?.usedSize,heapAfterPanelCycles:x.heapAfterPanelCycles?.usedSize,deltaBytes:(x.heapAfterPanelCycles?.usedSize??0)-(x.heapAfterScenario?.usedSize??0)}))));
 }catch(error){report.status='FAIL';report.failures.push({stage:'runner',error:String(error?.stack||error)});process.exitCode=1;}
 finally{
  report.finishedAt=new Date().toISOString();
