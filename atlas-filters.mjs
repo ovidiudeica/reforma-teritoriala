@@ -46,14 +46,15 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
    wrapper.appendChild(disclosure);el.appendChild(wrapper);
   }
  }
- const {el:osmSection}=section('Nivel administrativ OSM',enabled=>{for(const level of [...OSM_ADMIN_LEVELS,OSM_UNKNOWN]){if(enabled)state.osmAdminLevels.add(level);else state.osmAdminLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
- const osmIntro=document.createElement('p');osmIntro.className='hint';osmIntro.textContent='Restrânge doar rândurile arborelui. Nu modifică bifele sau geometriile; nivelurile statistice sunt independente.';osmSection.appendChild(osmIntro);
+ const {el:osmSection}=section('Nivel administrativ OSM',enabled=>{for(const level of [...OSM_ADMIN_LEVELS,OSM_UNKNOWN]){if(enabled)state.osmAdminLevels.add(level);else state.osmAdminLevels.delete(level);}},[['Toate nivelurile în arbore',true],['Niciun nivel în arbore',false]]);
+ const osmIntro=document.createElement('p');osmIntro.className='hint';osmIntro.textContent='Alege nivelurile afișate în arbore. Nu modifică bifele sau geometriile; nivelurile statistice sunt independente.';osmSection.appendChild(osmIntro);
+ const treeSummary=document.createElement('p');treeSummary.className='hint osm-tree-summary';treeSummary.textContent='Numărătoarea arborelui va fi disponibilă după încărcarea ierarhiei.';osmSection.appendChild(treeSummary);
  for(const level of [...OSM_ADMIN_LEVELS,OSM_UNKNOWN]){const label=level===OSM_UNKNOWN?'Fără nivel OSM verificat':'Nivel OSM '+level;const item=row(label,'', 'osm-admin-level',level);osmLevels.set(level,item.input);item.input.addEventListener('change',()=>{if(item.input.checked)state.osmAdminLevels.add(level);else state.osmAdminLevels.delete(level);sync();onChange();});osmSection.appendChild(item.item);}
  // WEB-R2b.3: these controls are separate from the tree-only OSM filter above.
  const geometryActions=document.createElement('div');geometryActions.className='osm-level-geometry-actions';
  geometryActions.setAttribute('role','group');geometryActions.setAttribute('aria-label','Comenzi explicite pentru geometriile nivelurilor OSM');
  const actionHelp=document.createElement('p');actionHelp.className='hint';
- actionHelp.textContent='Comenzile se aplică nivelurilor numerice bifate mai sus, în RO, MD și contururile proprii NI. Nu schimbă filtrul, selecția sau nivelurile statistice. Cele 85 de roluri NI reutilizate nu sunt activate indirect.';
+ actionHelp.textContent='Comenzile schimbă bifele geometriilor pentru nivelurile OSM numerice selectate, numai după confirmare. Nu modifică filtrul arborelui, selecția sau nivelurile statistice. Cele 85 de roluri NI reutilizate și categoria fără nivel verificat sunt excluse.';
  geometryActions.appendChild(actionHelp);
  const actionButtons=document.createElement('div');actionButtons.className='osm-level-geometry-buttons';
  const showButton=document.createElement('button');showButton.type='button';showButton.textContent='Afișează geometriile nivelurilor selectate';
@@ -76,21 +77,22 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   dismiss();
   const chosen=[...state.osmAdminLevels],plan=onOsmGeometryPreview(mode,chosen);
   if(!plan){actionStatus.textContent='Catalogul geometric nu este încă disponibil.';return;}
-  if(!plan.changed){actionStatus.textContent='Nicio bifă geometrică de modificat pentru nivelurile numerice alese.';return;}
+  if(!plan.changed){actionStatus.textContent=plan.levels.length?'Pentru nivelurile numerice selectate, toate bifele eligibile sunt deja în starea cerută.':'Selectează cel puțin un nivel OSM numeric pentru o comandă asupra geometriilor. Categoria fără nivel verificat filtrează doar arborele.';return;}
   pending={mode,chosen,plan};
   const levels=plan.levels.join(', ')||'niciunul';
-  scope.textContent=(mode==='show'?'Afișezi':'Ascunzi')+' '+plan.changed+' geometrii: RO '+plan.counts.RO+', MD '+plan.counts.MD+', contururi NI '+plan.counts.NI+'. Niveluri OSM: '+levels+'. '+plan.skippedAliases+' roluri NI reutilizate excluse. '+(plan.hasUnknown?'Categoria fără nivel verificat este exclusă. ':'')+'Bifele filtrului și selecția nu se modifică. Confirmi?';
+  const eligible=plan.eligible.RO+plan.eligible.MD+plan.eligible.NI;
+  scope.textContent=(mode==='show'?'Vor fi bifate ':'Vor fi debifate ')+plan.changed+' dintre '+eligible+' geometrii eligibile: RO '+plan.counts.RO+', MD '+plan.counts.MD+', contururi NI '+plan.counts.NI+'. Niveluri OSM: '+levels+'. '+plan.skippedAliases+' roluri NI reutilizate excluse. '+(plan.hasUnknown?'Categoria fără nivel verificat este exclusă. ':'')+'Filtrul arborelui și selecția nu se modifică. Confirmi?';
   confirmation.hidden=false;actionStatus.textContent='';
  };
  showButton.addEventListener('click',()=>preview('show'));
  hideButton.addEventListener('click',()=>preview('hide'));
- cancel.addEventListener('click',()=>{dismiss();actionStatus.textContent='Operațiunea nu a modificat geometriile.';});
+ cancel.addEventListener('click',()=>{dismiss();actionStatus.textContent='Operațiunea a fost anulată. Bifele geometriilor nu s-au schimbat.';});
  accept.addEventListener('click',()=>{
   if(!pending)return;
   const {mode,chosen,plan}=pending;dismiss();
-  if(chosen.some(level=>!state.osmAdminLevels.has(level))||state.osmAdminLevels.size!==chosen.length){actionStatus.textContent='Nivelurile selectate s-au schimbat. Repetă previzualizarea.';return;}
+  if(chosen.some(level=>!state.osmAdminLevels.has(level))||state.osmAdminLevels.size!==chosen.length){actionStatus.textContent='Selecția nivelurilor s-a schimbat. Verifică din nou domeniul operațiunii.';return;}
   const latest=onOsmGeometryPreview(mode,chosen);
-  if(!latest||JSON.stringify(latest.changes)!==JSON.stringify(plan.changes)){actionStatus.textContent='Bifele s-au schimbat. Repetă previzualizarea.';return;}
+  if(!latest||JSON.stringify(latest.changes)!==JSON.stringify(plan.changes)){actionStatus.textContent='Bifele s-au schimbat. Verifică din nou domeniul operațiunii.';return;}
   try{const result=onOsmGeometryApply(latest);actionStatus.textContent=result?.message||'Operațiune aplicată.';sync();}
   catch(error){actionStatus.textContent='Operațiunea nu a fost aplicată: '+error.message;}
  });
@@ -124,5 +126,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   undoButton.disabled=!canUndoOsmGeometry();
  }
  sync();
- return {sync,parents,children,levels,osmLevels,separate,geometryActions:{showButton,hideButton,undoButton,confirmation,scope,accept,cancel,actionStatus}};
+ return {sync,parents,children,levels,osmLevels,separate,setOsmTreeSummary(summary){
+  treeSummary.textContent=summary?'În arbore (toate ramurile): '+summary.matches.toLocaleString('ro-RO')+' potriviri și '+summary.ancestors.toLocaleString('ro-RO')+' strămoși de navigare.':'Numărătoarea arborelui nu este încă disponibilă.';
+ },geometryActions:{showButton,hideButton,undoButton,confirmation,scope,accept,cancel,actionStatus}};
 }
