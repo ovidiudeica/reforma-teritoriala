@@ -3,38 +3,58 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import os from 'node:os';
 import {launchBrowser,delay,waitFor} from '../test/helpers/atlas-browser.mjs';
+import {navigatePerformanceProfile} from './helpers/performance-navigation.mjs';
+import {performanceSource} from './helpers/performance-source.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const output=process.env.ATLAS_PERF_OUTPUT||'outputs/web-r2c302-cdp';
-const expected=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim();
-assert.match(expected,/^[a-f0-9]{40}$/,'Audit requires an exact Git commit');
-const report={schema:'web-r2c302-cdp-readonly-v1',sourceMain:expected,runnerSha:process.env.GITHUB_SHA||null,startedAt:new Date().toISOString(),browser:null,env:{platform:process.platform,node:process.version},samples:[],failures:[],summary:null,status:'INCOMPLETE'};
+const source=performanceSource(root),expected=source.sha;
+const report={schema:'web-r2c302-cdp-readonly-v1',sourceMain:expected,runnerSha:process.env.GITHUB_SHA||null,startedAt:new Date().toISOString(),browser:null,env:{platform:process.platform,node:process.version,cpu:os.cpus()[0]?.model,logicalCpus:os.cpus().length,totalMemoryBytes:os.totalmem(),cpuThrottle:1,networkThrottle:false},samples:[],failures:[],summary:null,status:'INCOMPLETE'};
+report.env.trackedSourcesClean=source.trackedSourcesClean;
 const stats=values=>{const a=values.filter(Number.isFinite).sort((x,y)=>x-y);if(!a.length)return null;const quantile=p=>{const pos=(a.length-1)*p,lo=Math.floor(pos),hi=Math.ceil(pos);return a[lo]+(a[hi]-a[lo])*(pos-lo);};return {count:a.length,min:a[0],p50:quantile(.5),p95:quantile(.95),max:a.at(-1)};};
 function netObserver(page){
  const rows=new Map();const onEvent=event=>{
   let x;try{x=JSON.parse(event.data);}catch{return;}
   const p=x.params||{},id=p.requestId;
   if(x.method==='Network.requestWillBeSent'){
-   rows.set(id,{url:p.request?.url,method:p.request?.method,initiator:p.initiator?.type,start:p.timestamp,status:null,transferBytes:0,finished:false});
+   rows.set(id,{url:p.request?.url,method:p.request?.method,initiator:p.initiator,start:p.timestamp,status:null,transferBytes:0,finished:false});
   }else if(x.method==='Network.responseReceived'&&rows.has(id)){
    rows.get(id).status=p.response?.status;
    rows.get(id).mime=p.response?.mimeType;
+   rows.get(id).fromDiskCache=p.response?.fromDiskCache??false;
+   rows.get(id).fromServiceWorker=p.response?.fromServiceWorker??false;
   }else if(x.method==='Network.loadingFinished'&&rows.has(id)){
    const row=rows.get(id);row.transferBytes=p.encodedDataLength;row.finished=true;
   }else if(x.method==='Network.loadingFailed'&&rows.has(id)){
    rows.get(id).failure=p.errorText;
+   rows.get(id).canceled=p.canceled??false;
   }
  };
  page.socket.addEventListener('message',onEvent);
- return {data:()=>[...rows.values()].filter(x=>x.url),stop:()=>page.socket.removeEventListener('message',onEvent)};
+ return {data:()=>[...rows.values()].filter(x=>x.url),reset:()=>rows.clear(),stop:()=>page.socket.removeEventListener('message',onEvent)};
+}
+async function trace(page,file){
+ await page.send('Tracing.start',{categories:'devtools.timeline,v8,blink.user_timing,loading',transferMode:'ReturnAsStream'});
+ return async()=>{
+  let stream;
+  const listener=event=>{const value=JSON.parse(event.data);if(value.method==='Tracing.tracingComplete')stream=value.params.stream;};page.socket.addEventListener('message',listener);
+  try{
+   await page.send('Tracing.end');
+   await waitFor(()=>stream,'Trace completion',60000);
+   const chunks=[];let eof=false;
+   while(!eof){const r=await page.send('IO.read',{handle:stream});chunks.push(r.base64Encoded?Buffer.from(r.data,'base64'):Buffer.from(r.data));eof=r.eof;}
+   await page.send('IO.close',{handle:stream});
+   await writeFile(file,Buffer.concat(chunks));
+  }finally{page.socket.removeEventListener('message',listener);}
+ };
 }
 function networkSummary(rows,origin){
  const mine=rows.filter(x=>x.url.startsWith(origin));
  const geo=mine.filter(x=>/\/public\/geo\/actual\//.test(x.url));
  const counts=new Map();for(const r of geo)counts.set(r.url,(counts.get(r.url)||0)+1);
- return {requestCount:mine.length,externalRequestCount:rows.length-mine.length,transferBytesCDP:mine.reduce((v,r)=>v+(r.transferBytes||0),0),geometryRequestCount:geo.length,geometryUniqueUrls:counts.size,geometryRepeatedUrls:[...counts].filter(([,n])=>n>1).map(([url,count])=>({url,count})),ownHttpErrors:mine.filter(r=>r.status>=400||r.failure).map(r=>({url:r.url,status:r.status,failure:r.failure})),externalFailures:rows.filter(r=>!r.url.startsWith(origin)&&r.failure).length};
+ return {requestCount:mine.length,externalRequestCount:rows.length-mine.length,transferBytesCDP:mine.reduce((v,r)=>v+(r.transferBytes||0),0),geometryRequestCount:geo.length,geometryUniqueUrls:counts.size,geometryRepeatedUrls:[...counts].filter(([,n])=>n>1).map(([url,count])=>({url,count})),ownHttpErrors:mine.filter(r=>r.status>=400||r.failure).map(r=>({url:r.url,status:r.status,failure:r.failure,canceled:r.canceled})),externalFailures:rows.filter(r=>!r.url.startsWith(origin)&&(r.failure||r.status>=400)).map(r=>({url:r.url,status:r.status,failure:r.failure,canceled:r.canceled}))};
 }
 async function heap(page){
  await page.send('HeapProfiler.collectGarbage');
@@ -127,8 +147,8 @@ async function exercise(page,profile,sample){
  const beforeHeap=await heap(page);
  for(let k=0;k<10;k++){await add('panel-open','entities');await add('panel-close');}
  const afterHeap=await heap(page);
- report.samples.push({profile,sample,kind:'interaction',actions,heapAfterScenario:beforeHeap,heapAfterPanelCycles:afterHeap,finalMetrics:await browserMetrics(page),consoleExceptions:page.errors.length});
- if(['desktop','mobile-portrait'].includes(profile)&&sample===1)await page.screenshot(path.join(output,profile+'-after.png'));
+ report.samples.push({profile,sample,traceEnabled:sample===1,kind:'interaction',actions,heapAfterScenario:beforeHeap,heapAfterPanelCycles:afterHeap,finalMetrics:await browserMetrics(page),consoleExceptions:page.errors.length});
+ if(sample===1)await page.screenshot(path.join(output,profile+'-after.png'));
 }
 async function oneSelectedDetailGeometry(page,profile,network,appOrigin){
  const start=await state(page),out=[];
@@ -168,16 +188,18 @@ async function oneSelectedDetailGeometry(page,profile,network,appOrigin){
 let browser=null;
 try{
  await mkdir(output,{recursive:true});
- browser=await launchBrowser(root);report.browser=browser.version.Browser;
- const profiles=[['desktop',1440,900,5],['mobile-portrait',390,844,5],['tablet-portrait',768,1024,1],['mobile-landscape',844,390,1]];
+ browser=await launchBrowser(root,{cacheControl:'public, max-age=600'});report.browser=browser.version.Browser;
+ report.env.httpCacheControl='public, max-age=600';report.env.coldCache='Network.clearBrowserCache before each independent pair';report.env.warmCache='second navigation in the same tab with HTTP caching enabled';
+ const profiles=[['desktop',1440,900,6],['mobile-portrait',390,844,6],['tablet-portrait',768,1024,6],['mobile-landscape',844,390,6]];
  for(const [label,width,height,repeats] of profiles){
   for(let iteration=1;iteration<=repeats;iteration++){
-   const page=await browser.page(),network=netObserver(page);
+   const page=await browser.page(),network=netObserver(page);let stopTrace;
    try{
     await page.send('Network.clearBrowserCache');
+    await page.send('Network.setCacheDisabled',{cacheDisabled:false});
     await page.send('Performance.enable');
-    await page.navigate(browser.server.url+'/');
-    await page.viewport(width,height);
+    if(iteration===1)stopTrace=await trace(page,path.join(output,label+'-trace.json'));
+    const observedViewport=await navigatePerformanceProfile(page,browser.server.url+'/',width,height);
     await waitFor(()=>page.call(function(){return qaApp.entityById.size===5848&&qaApp.osmRoleById.size===85&&qaApp.nistreniaOutlines?.layers?.size===8;}),'RO/MD/NI ready');
     const loaded=await browserMetrics(page);
     assert.equal(loaded.entities,5848);assert.equal(loaded.roles,85);assert.equal(loaded.niOutlines,8);
@@ -187,26 +209,32 @@ try{
     const memory=await heap(page);
     await delay(100);
     const net=networkSummary(network.data(),browser.server.url);
-    report.samples.push({profile:label,sample:iteration,kind:'cold-load',metrics:loaded,heap:memory,network:net});
-    if(label==='desktop'||label==='mobile-portrait'){
+    assert.deepEqual(net.ownHttpErrors,[],'Self-hosted cold-load requests must succeed');
+    report.samples.push({profile:label,sample:iteration,traceEnabled:iteration===1,kind:'cold-load',documentViewport:observedViewport,metrics:loaded,heap:memory,network:net});
+    await writeFile(path.join(output,label+'-'+iteration+'-cold-network.json'),JSON.stringify(network.data(),null,2));
+    if(iteration===1)await page.screenshot(path.join(output,label+'-before.png'));
+    network.reset();
+    await navigatePerformanceProfile(page,browser.server.url+'/',width,height);
+    const warmNetwork=networkSummary(network.data(),browser.server.url);assert.deepEqual(warmNetwork.ownHttpErrors,[],'Self-hosted warm-load requests must succeed');
+    report.samples.push({profile:label,sample:iteration,traceEnabled:iteration===1,kind:'warm-load',metrics:await browserMetrics(page),heap:await heap(page),network:warmNetwork});
+    await writeFile(path.join(output,label+'-'+iteration+'-warm-network.json'),JSON.stringify(network.data(),null,2));
+    {
      await exercise(page,label,iteration);
      if(iteration===1)await oneSelectedDetailGeometry(page,label,network,browser.server.url);
      report.samples.push({profile:label,sample:iteration,kind:'post-interaction-network',network:networkSummary(network.data(),browser.server.url),heap:await heap(page)});
     }
     if(page.errors.length)report.failures.push({profile:label,sample:iteration,errors:page.errors.map(e=>e.text||e.exception?.description).slice(0,5)});
-    if(iteration===1&&label==='tablet-portrait'){
-     // CDP page scale 2 is pinch/visual zoom; not browser text zoom.
-     await page.send('Emulation.setPageScaleFactor',{pageScaleFactor:2});
-     report.samples.push({profile:label,sample:iteration,kind:'pinch-scale-2x',metrics:await browserMetrics(page)});
-     await page.send('Emulation.setPageScaleFactor',{pageScaleFactor:1});
-    }
+    await writeFile(path.join(output,label+'-'+iteration+'-interaction-network.json'),JSON.stringify(network.data(),null,2));
+    assert.deepEqual(networkSummary(network.data(),browser.server.url).ownHttpErrors,[],'Self-hosted interaction requests must succeed');
    }catch(error){report.failures.push({profile:label,sample:iteration,error:String(error?.stack||error)});throw error;}
-   finally{network.stop();await page.close();}
+   finally{try{if(stopTrace)await stopTrace();}finally{network.stop();await page.close();}}
   }
  }
- const groups=new Map();for(const s of report.samples)if(s.kind==='interaction')for(const a of s.actions){const name=s.profile+':'+a.type+(a.type==='filters'?':'+a.arg.join(','):'');if(!groups.has(name))groups.set(name,[]);groups.get(name).push(a.ms);}
- const navigation=Object.fromEntries([...new Set(report.samples.filter(s=>s.kind==='cold-load').map(s=>s.profile))].map(p=>[p,stats(report.samples.filter(s=>s.kind==='cold-load'&&s.profile===p).map(s=>s.metrics.navigationMs))]));
- report.summary={actionLatency:Object.fromEntries([...groups].map(([name,values])=>[name,stats(values)])),navigation};
+ const groups=new Map();for(const s of report.samples)if(s.kind==='interaction'&&!s.traceEnabled)for(const a of s.actions){const name=s.profile+':'+a.type+(a.type==='filters'?':'+a.arg.join(','):'');if(!groups.has(name))groups.set(name,[]);groups.get(name).push(a.ms);}
+ const navigation=Object.fromEntries([...new Set(report.samples.filter(s=>s.kind==='cold-load').map(s=>s.profile))].map(p=>[p,stats(report.samples.filter(s=>s.kind==='cold-load'&&!s.traceEnabled&&s.profile===p).map(s=>s.metrics.navigationMs))]));
+ const warmNavigation=Object.fromEntries([...new Set(report.samples.filter(s=>s.kind==='warm-load').map(s=>s.profile))].map(p=>[p,stats(report.samples.filter(s=>s.kind==='warm-load'&&!s.traceEnabled&&s.profile===p).map(s=>s.metrics.navigationMs))]));
+ report.env.percentilesExcludeTracedSamples=true;
+ report.summary={actionLatency:Object.fromEntries([...groups].map(([name,values])=>[name,stats(values)])),navigation,warmNavigation};
  report.status=report.failures.length?'FAIL':'PASS';
  console.log('WEB-R2c.3.0.2 TELEMETRY '+JSON.stringify(report.samples.filter(x=>['cold-load','post-interaction-network'].includes(x.kind)).map(x=>({profile:x.profile,sample:x.sample,kind:x.kind,navMs:x.metrics?.navigationMs,resourceEntries:x.metrics?.resourceEntries,domNodes:x.metrics?.domNodes,treeMounted:x.metrics?.treeMounted,heapUsedBytes:x.heap?.usedSize,requestCount:x.network?.requestCount,transferBytesCDP:x.network?.transferBytesCDP,geometryRequests:x.network?.geometryRequestCount,geometryUniqueUrls:x.network?.geometryUniqueUrls,geometryRepeated:x.network?.geometryRepeatedUrls?.length,ownHttpErrors:x.network?.ownHttpErrors?.length}))));
  console.log('WEB-R2c.3.0.2 MEMORY_CYCLES '+JSON.stringify(report.samples.filter(x=>x.kind==='interaction').map(x=>({profile:x.profile,sample:x.sample,heapAfterScenario:x.heapAfterScenario?.usedSize,heapAfterPanelCycles:x.heapAfterPanelCycles?.usedSize,deltaBytes:(x.heapAfterPanelCycles?.usedSize??0)-(x.heapAfterScenario?.usedSize??0)}))));

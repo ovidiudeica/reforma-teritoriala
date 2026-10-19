@@ -15,12 +15,28 @@
       "verification_sha": "17d68af5954e7e1851649db48432105aa71a909b",
       "evidence": ["https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39322322172", "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39323200300"],
       "verdict": "CLOSED_RETEST_PASS"
+    },
+    {
+      "id":"RM-002","severity":"P2","component":"Chromium performance viewport provenance","entities":[],
+      "reproduction":"Run the old benchmark with a mobile profile; it navigates before setting device metrics, so the initial document starts in the default desktop viewport.",
+      "cause":"Viewport configuration followed Page.navigate.",
+      "change":"Set device metrics before navigation and record/assert viewport at DOMContentLoaded; all four profiles now have five untraced independent cold/warm pairs plus a separately labeled trace pair.",
+      "pr":391,"regression":"frontend-performance-navigation.test.mjs rejects a desktop document reported as mobile and verifies device-before-navigation ordering.",
+      "verification_sha":null,"evidence":[],"verdict":"FIXED_PENDING_EXACT_HEAD_RETEST"
+    },
+    {
+      "id":"RM-003","severity":"P2","component":"Performance report dirty-source provenance","entities":[],
+      "reproduction":"Modify a tracked audit source without committing, then run the old benchmark; sourceMain still labels only HEAD without disclosing modified source bytes.",
+      "cause":"Git commit identity alone did not prove clean tracked input sources.",
+      "change":"Record trackedSourcesClean and reject dirty tracked sources during CI acceptance.",
+      "pr":391,"regression":"Temporary Git fixture modifies a tracked input while HEAD stays unchanged and verifies CI rejection.",
+      "verification_sha":null,"evidence":[],"verdict":"FIXED_PENDING_EXACT_HEAD_RETEST"
     }
   ],
   "environment_incidents": [
     {"id":"ENV-001","reproduction":"Windows clone with core.autocrlf=true; execute historical hash audit","cause":"Git LF to CRLF conversion","remedy":"Restore exact tracked blob bytes; do not alter accepted hashes","retest":"p907219 --audit and --self-test PASS","verdict":"RESOLVED"},
     {"id":"ENV-002","reproduction":"Run Chromium benchmark under restricted local sandbox","cause":"CDP Page.enable timed out before samples; root cause beyond sandbox transport not proven","remedy":"Rerun with authorized local connection access","retest":"Chrome/155.0.8059.80 benchmark PASS","verdict":"RESOLVED_FOR_EXECUTION"},
-    {"id":"ENV-003","reproduction":"node --test scripts/test/workflow-write-boundaries.test.mjs on Windows without Bash","cause":"spawn bash ENOENT; existing platform-dependent adversarial preflight also skipped","remedy":"Use the existing mandatory Linux verify-persisted-release job, which invokes test:actual-candidate-lifecycle; no test altered or disabled","retest":"Required on final PR head before acceptance","verdict":"PENDING_LINUX_CI"}
+    {"id":"ENV-003","reproduction":"node --test scripts/test/workflow-write-boundaries.test.mjs on Windows without Bash","cause":"spawn bash ENOENT; existing platform-dependent adversarial preflight also skipped","remedy":"Use the existing mandatory Linux verify-persisted-release job, which invokes test:actual-candidate-lifecycle; no test altered or disabled","retest":"152 PASS, zero FAIL, zero SKIP on main 335234bdb7b8cec828d4d2ad11d42d5bc5f99642, Actions 39326818180","verdict":"RESOLVED_LINUX_CI"}
   ],
   "open_evidence_gates": [
     {"id":"GATE-001","stage":"WEB-R2c.3.1","description":"Complete comparable performance coverage before NO_CHANGE_REQUIRED or optimization verdict."},
