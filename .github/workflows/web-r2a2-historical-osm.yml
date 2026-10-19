@@ -1,0 +1,33 @@
+name: WEB-R2a.2 historical OSM tag verification
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/evidence/web-r2a2/**'
+      - 'docs/web-r2a2-exception-reconciliation.md'
+      - 'scripts/audit/web-r2a2-verify-historical-osm.mjs'
+      - '.github/workflows/web-r2a2-historical-osm.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-historical-osm:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Validate syntax
+        run: node --check scripts/audit/web-r2a2-verify-historical-osm.mjs
+      - name: Validate historical OSM relation tags at pinned versions
+        run: node scripts/audit/web-r2a2-verify-historical-osm.mjs "${{ runner.temp }}/r2a2"
+      - name: Check immutable source trees
+        run: test -z "$(git diff --name-only 08a873a2030bebe55034792a93b5e146cf17a210...HEAD -- data public)"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: web-r2a2-historical-evidence
+          path: "${{ runner.temp }}/r2a2"
+          retention-days: 30
