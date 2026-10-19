@@ -1,6 +1,7 @@
 import {flattenVisibleTree,createTreeWindow} from './atlas-tree-window.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
 import {compactTreeName} from './atlas-tree-labels.mjs';
+import {createOsmLevelBadge} from './atlas-osm-admin-badges.mjs';
 // Navigation uses only actual-consolidated-hierarchy-v1 relationships.
 export function parentId(nodeById,id){
  const node=nodeById.get(id);
@@ -80,7 +81,7 @@ export function revealInTree(container,button){
  container.scrollTop+=row.top-top-(container.clientHeight-row.height)/2;
 }
 
-export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},isGeometryVisible=()=>true,isEntityChecked=isGeometryVisible,onVisibilityChange=()=>{}}){
+export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},isGeometryVisible=()=>true,isEntityChecked=isGeometryVisible,onVisibilityChange=()=>{},getOsmAdminLevel=()=>null}){
  const openIds=new Set(rootIds.filter(id=>hasChildren(nodeById,id))),rendered=new Map();
  const view=document.defaultView||globalThis;
  const layout=createTreeWindow(flattenVisibleTree(nodeById,rootIds,openIds));
@@ -135,6 +136,8 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   const shape=document.createElementNS?document.createElementNS('http://www.w3.org/2000/svg','path'):document.createElement('path');
   const path=node.parent_id===null?'M10 2a8 8 0 1 0 0 16a8 8 0 1 0 0-16M2 10h16M10 2c-4 4-4 12 0 16M10 2c4 4 4 12 0 16':statistical?'M3 3h5v5H3zM12 3h5v5h-5zM3 12h5v5H3zM12 12h5v5h-5z':branch?'M3 4h5l2 3h7v10H3z':'M10 18l-5-8a6 6 0 1 1 10 0zM8 7h4';
   shape.setAttribute('d',path);shape.setAttribute('fill','none');shape.setAttribute('stroke','currentColor');shape.setAttribute('stroke-width','1.4');svg.appendChild(shape);button.appendChild(svg);
+  const osmBadge=createOsmLevelBadge(document,getOsmAdminLevel(node));
+  if(osmBadge)button.appendChild(osmBadge);
   const label=document.createElement('span');label.className='tree-name';label.textContent=name;button.appendChild(label);button.addEventListener('click',()=>onSelect(id,{zoom:true,source:'tree'}));heading.appendChild(button);
   outer.appendChild(disclosure);outer.appendChild(visibility);outer.appendChild(heading);
   const entry={outer,wrapper:outer,button,checkbox,toggle:toggleButton,visibilityValue:null,updateVisibility(){const checked=Boolean(isEntityChecked(id)),shown=Boolean(isGeometryVisible(id)),changed=this.visibilityValue!==shown||checkbox.checked!==checked;this.visibilityValue=shown;checkbox.checked=checked;outer.classList.toggle('tree-geometry-hidden',!shown);checkbox.title=checked&&!shown?'Geometrie bifată, dar ascunsă de filtre: '+name:'Afișează sau ascunde geometria: '+name;return changed;}};
