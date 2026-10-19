@@ -79,7 +79,8 @@ class Element{
 test('WEB-R2c.1.1: UI summary and tree-only OSM buttons cannot toggle geometries/statistics',async()=>{
  const document={createElement:tag=>new Element(tag)},container=new Element();
  const state={geometryClasses:new Set(),geometrySubtypes:new Set(),statisticalLevels:new Set([1,2,3]),osmAdminLevels:allOsmLevelFilters(),separateStatisticalGeometry:true};
- const index={groups:[],statisticalCounts:new Map(),statisticalLevelStats:new Map(),statisticalRoles:0,reusedStatistical:0,statisticalOnly:0};
+ const zeroStat={roles:0,reused:0,separate:0,jurisdictions:{RO:{roles:0,reused:0,separate:0},MD:{roles:0,reused:0,separate:0}}};
+ const index={groups:[],statisticalCounts:new Map(),statisticalLevelStats:new Map([1,2,3].map(level=>[level,zeroStat])),statisticalRoles:0,reusedStatistical:0,statisticalOnly:0};
  let onChange=0;const ui=createAtlasFilters({container,document,index,state,onChange:()=>onChange++});
  assert.match(container.textContent,/Numărătoarea arborelui va fi disponibilă/);
  ui.setOsmTreeSummary({matches:3,ancestors:4});
