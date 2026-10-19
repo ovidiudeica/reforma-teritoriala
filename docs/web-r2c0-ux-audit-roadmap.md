@@ -72,3 +72,101 @@ Nu se combină filtrele statistice cu nivelurile OSM; nu se bifează descendenț
 **WEB-R2c.0 = READY FOR REVIEW (documentație).** Recomandarea este **WEB-R2c.1** ca următorul pas de specificație/claritate, inițial tot read-only: întâi definirea numărătorilor și a microcopy-ului, abia apoi orice modificare UI autorizată separat.
 
 Nu am implementat funcționalități și nu am identificat un defect confirmat ce ar cere hotfix imediat. Toate intervențiile de mai sus sunt propuneri cu criterii verificabile, nu acorduri pentru modificarea funcțiilor acceptate.
+
+
+## 7. Inventarul componentelor și al instrumentelor — trasabilitate la sursă
+
+Recensământ făcut prin inspecție statică pe \`main@18bf1440\`; enumerarea componentelor nu este dovadă a funcționării lor interactive. Definițiile canonice ale panourilor se află în [atlas-panels.mjs](https://github.com/ovidiudeica/reforma-teritoriala/blob/18bf1440267e0e76e657062e20050d4f60096d59/atlas-panels.mjs), iar structura HTML în [index.html](https://github.com/ovidiudeica/reforma-teritoriala/blob/18bf1440267e0e76e657062e20050d4f60096d59/index.html).
+
+| Panou / instrument | Element tehnic | Funcție și delimitare de responsabilitate |
+|---|---|---|
+| Entități | \`entities-panel\`, \`atlas-tree.mjs\` | Arbore cu extindere, checkbox geometric independent, selectare card și badge OSM; \`geometries-reset\` în rândul comun Reset |
+| Căutare | \`results-panel\`, \`atlas-search.mjs\` | Căutare contextuală și rezultate navigabile; nu este selector geometric global |
+| Filtre | \`filters-panel\`, \`atlas-filters.mjs\` | Jurisdicții, tipuri/subtipuri, niveluri statistice și OSM; \`filters-reset\` în același rând Reset |
+| Straturi vizibile | \`visible\`, \`atlas-advanced-dialog\` | Inventarul stării straturilor; distinct de bifa unei entități |
+| Entități recente | \`recent\`, \`atlas-advanced-dialog\` | Acces la selecțiile recente |
+| Compară entități | \`compare\`, \`atlas-advanced-dialog\` | Comparația vizuală a două entități |
+| Partajare | \`share-panel\`, \`atlas-share.mjs\` | URL partajabil și stare serializată |
+| Informații despre hartă | \`atlas-info-dialog\` | Metodologie, proveniență, nivel de detaliu și legendă |
+| Module atlas | \`modules-panel\` | ACTUAL activ; ISTORIC și PROPUNERI indisponibile, fără deblocare implicită |
+| Identifică teritoriul | \`identify-panel\` | Punct/coordonnate, separat de selectarea poligoanelor și de stabilirea identității legale |
+| Vecini | \`neighbors-panel\` | Contacte topologice și evidențiere |
+| Măsoară | \`measure-panel\` | Măsurare pe hartă și introducere WGS84 |
+| Controale hartă | \`atlas-map-controls.css\` și Leaflet | Zoom, încadrare, fundal OSM separat, resetare geometrie pe hartă, scară și atribuire |
+| Card entitate / sheet mobil | \`atlas-mobile-ui.mjs\`, \`atlas-identify-ui.mjs\` | Detalii contextualizate; \`peek\`/\`half\`/\`expanded\` pe mobil |
+| Arbore virtual | \`atlas-tree-window.mjs\` | Rânduri calculate, \`overscan=4\`, minim 44 CSS px, poziții măsurate; **deja virtualizat** |
+| URL / History | \`atlas-url-state.mjs\` | \`parse\`/\`normalize\`/\`serialize\`, \`pushState\`/\`replaceState\`, \`popstate\` și protecție la restaurări asincrone |
+| Acțiuni OSM | \`atlas-osm-level-geometry-actions.mjs\` | Preview, verificare stare stale, aplicare atomică la checkbox-uri, Undo cu protejarea editărilor ulterioare |
+| Prezentare | \`atlas-design-tokens.css\`, \`atlas-r1b-ui.css\`, \`atlas-panel-content.css\`, \`atlas-tree.css\` | Tipografie, culori, focus, \`forced-colors\`, targeturi de 44 px în zonele declarate; verificarea reală a contrastului rămâne deschisă |
+
+Nu se echivalează existența unui panou sau a unui atribut ARIA cu aprobarea unui scenariu complet. Recensământul de mai sus nu autorizează eliminarea ori reorganizarea funcțiilor.
+
+## 8. Matrice de conformitate cu contractele acceptate
+
+Legendă: **S** = susținut de sursă la SHA fix; **E** = scenariu trecut în auditul browser *precedent* #383 (nu rerulat în acest PR); **D** = verificare dinamică suplimentară încă deschisă.
+
+| Contract | Verificare | Evidență / limită |
+|---|---|---|
+| RO+MD+NI afișate implicit | E / S | Acoperit în baseline WEB-R2b; browserul curent nu a restaurat starea fresh |
+| Checkbox individual independent | S / E | \`atlas-tree.mjs\`; audit E2E #383 |
+| Deschidere/restrângere arbore fără bifare implicită | S / E | \`atlas-tree.mjs\`; matrice extinsă pentru tastatură D |
+| Buline numerice OSM, fără inferență | S / E | \`atlas-osm-admin-badges.mjs\` și \`docs/contracts/web-r2a3-osm-admin-level.json\` |
+| Filtru OSM multi-select separat de nivelul statistic | S / E | \`atlas-filters.mjs\`, \`atlas-osm-admin-filter.mjs\` |
+| Filtrarea OSM restrânge doar rândurile arborelui | S / E | \`osmTreeVisibleIds\`; mențiune explicită în UI |
+| Afișare / Ascundere numai prin comandă explicită | S / E | \`atlas-osm-level-geometry-actions.mjs\` |
+| Preview scope + confirmare + cancel | S / E | \`atlas-filters.mjs\`; focus/announcements D |
+| Undo fără suprascrierea editărilor manuale ulterioare | S / E | \`undoOsmLevelGeometryAction\`; cazuri complexe suplimentare D |
+| 85 aliasuri NI excluse din schimbările MD implicite | S / E | Guard \`view-nistrenia-role-\`; registrul OSM și #383 |
+| Filtru statistic independent | S / E | \`atlas-filters.mjs\`, #383 |
+| Reset în poziții consecvente | S / D | \`atlas-panels.mjs\` deține \`atlas-panel-reset-actions\`; capturi A/B noi D |
+| Fundal OSM separat de geometrii | S / E | \`atlas-map-controls.css\`, baseline browser anterior |
+| Back/Forward, stare serializată și URL vechi | S / E | \`atlas-url-state.mjs\`; reload, share URL și intervenții simultane D |
+| Responsive, targeturi, tastatură, screen reader | S / E parțial / D | CSS, focus și teste 1440×900/390×844; tabletă/zoom/contrast manual D |
+| ACTUAL imutabil, Nistrenia fără geometrii duplicate, P9.1 blocat | S / E | Gate-urile istorice și diff exclusiv documentar; recertificarea la fiecare PR viitor obligatorie |
+
+## 9. Registru diferențiat — defecte, inconsecvențe și preferințe
+
+**Defecte funcționale confirmate în WEB-R2c.0: 0.** Nu există reproducere nouă pentru o regresie de runtime. Un rezultat PASS istoric se raportează întotdeauna ca istoric.
+
+**Neconcordanță de copy confirmată prin surse — UX-08 / P1 / documentație UX:** în \`index.html\`, panoul Filtre afirmă „Filtrele limitează geometriile deja bifate în arbore”, iar \`atlas-filters.mjs\` descrie în aceeași interfață filtrul OSM: „Restrânge doar rândurile arborelui. Nu modifică bifele sau geometriile”. Aserțiunile nu au același domeniu, astfel pot genera o așteptare greșită, fără a demonstra vreo funcționare incorectă. **Criteriu:** specificația WEB-R2c.1 precizează scope-ul distinct al fiecărui filtru; modificarea textului din aplicație cere aprobare ulterioară.
+
+**Riscuri documentate, neconfirmate ca defecte:** UX-01…UX-07 și GOV-01 din §3; fiecare este condiționat de o reproducere sau măsurătoare clară. **Preferințe/opțiuni fără necesitate demonstrată:** schimbarea formelor bulinelor, culoarea iconurilor, mutarea panourilor, dialog modal în loc de confirmare inline, comasarea butoanelor, schimbarea modelului de virtualizare. Nu devin cerințe fără scenarii de utilizare și aprobare.
+
+## 10. Prioritizare P0/P1/P2 și dependențe
+
+| Nivel | Propunere | Beneficiu așteptat | Risc și dependență | Acceptare înaintea implementării |
+|---|---|---|---|---|
+| P0 | **Nicio schimbare de UI indicată de dovezile actuale** | Evită hotfixuri speculative | Apare P0 doar dacă reproducem blocaj, pierdere de selecție/date sau inaccesibilitate critică | Reproducere exactă + dovadă browser + acceptare separată |
+| P1 | Distincție terminologică Filtre / Geometrii, UX-01 + UX-08 | Mai puține ambiguități | Dependință: specificație semantică pe fiecare control; copy-only, fără schimbare logică | Textul explică „restrânge arborele” vs „limitează straturi” vs „bifează geometrii” |
+| P1 | Definire cardinalități și denominator UX-02 | Previzibilitate înainte de operații masive | Distincție între alias NI, nod strămoș și entitate eligibilă; fără număr dublat | Reconciliere pe corpusul complet; sume RO/MD/NI și exemple verificabile |
+| P1 | Specificație tastatură/focus pentru confirmare UX-03 | Predictibilitate accesibilitate | Nu transforma confirmarea în modal fără justificare; necesită traseu keyboard + SR | Focus vizibil, Tab, Escape/cancel și mesaje live validate interactiv |
+| P1 | Baseline performanță niveluri 8/9 UX-05 | Detectarea fan-out și latenței | Nu schimba worker, sursele ori virtualizarea fără profil măsurat | Metrici \`fetch\`, long tasks, memorie, input latency; buget fixat din baseline |
+| P1 | Supliment documentar GOV-01 | Elimină conflictul istoric/spec actuală | Nu rescrie registrul de proveniență istoric | Contractul implementat indică explicit versiunea și sursa |
+| P2 | Empty-state contextual UX-04 | Claritate când arborele e gol | Depinde de UX-01/UX-08 și date filtrate | Mesaj de recuperare; fără checkbox toggles suplimentare |
+| P2 | Teste tabletă/landscape/zoom/forced-colors UX-06 | Reduce riscul de clipping și focus ascuns | Necesită Chromium la fiecare viewport, evaluator a11y și A/B | Matrice completă §11 |
+| P2 | Explicarea duratei Undo vs History UX-07 | Așteptări corecte după reload/reset | Nu persista tranzacția Undo fără contract nou | Documentația și testele descriu explicit durata și invaliderile |
+
+## 11. Matrice regresii și dovada necesară
+
+| Context | Scenariu obligatoriu | Dovadă minimă |
+|---|---|---|
+| Desktop 1440×900, 1280×800 | Deschide Entități → extinde rădăcina și un județ/raion → bifează independent → Filtre OSM 3/5 → show/hide preview/cancel/confirm → Undo | Capturi A/B, DOM/ARIA, diferențe bife + URL, consolă/network |
+| Tabletă 900×768 și 768×1024 | Rail + drawer/sheet, panel switch, scroll arbore virtual, acțiuni de filtrare și map controls | Capturi A/B la ambele orientări, bounding boxes fără suprapuneri |
+| Mobil 430×932, 390×844, 360×800 | Deschide/închide panouri, focus-return, nume lung + bulină, căutare, confirma/anulează, sheet | Capturi A/B de stare inițială, panou, confirmare și după Undo |
+| Landscape compact 390×600 și 844×390 | Vizibilitatea comenzilor zoom/OSM/reset, panourilor și acțiunilor cu text lung | Capturi A/B + detectare clipping, scroll accesibil |
+| Tastatură 100% | Tab / Shift+Tab / Enter / Space / Esc, expandare arbore, selectare checkbox, închidere și focus return | Trace focus & accesibilitate; rezultatul narativ al pașilor |
+| Zoom 200% + forced-colors | Contrast text/focus, buline OSM numerice, targeturi 44 px, reflow | Capturi, computed styles și verificare manuală WCAG |
+| Istoric/URL | \`a\`/\`o\`/\`x\`, Back → Forward → refresh → share, reset și Undo independent | URL înainte/după, serializare canonică, invarianta checkbox |
+| Acțiuni masive 8/9 | Preview > cancel; confirm; Undo; modificare manuală după confirm; aliasuri NI excluse | Reconciliere număr de schimbări RO/MD/NI, trace fetch/long tasks |
+| Actualizare date absentă | Compare diff față de main: doar \`docs/\`, fără \`app.js\`, CSS, JS, geometrie/ACTUAL/P9.1 | Listă fișiere schimbate, SHA fișiere, check-uri exact SHA |
+
+**Regula de evaluare:** pentru fiecare caz se marchează PASS/FAIL/SKIP/BLOCKED separat. Capturile nu certifică singure semantica/performanța, iar testele statice nu devin probe interactive. Verificările deja executate în #383 constituie **baseline anterior**; toate cazurile suplimentare de mai sus sunt **planificate, nu executate** în această operațiune read-only.
+
+## 12. Proveniență și limite ale acestei completări
+
+- **Bază de cod fixată:** [\`main@18bf1440267e0e76e657062e20050d4f60096d59\`](https://github.com/ovidiudeica/reforma-teritoriala/commit/18bf1440267e0e76e657062e20050d4f60096d59). PR-ul documentar rămâne [#384](https://github.com/ovidiudeica/reforma-teritoriala/pull/384), fără permisiune de merge necondiționat.
+- **Surse inspectate direct prin GitHub:** \`index.html\`, \`atlas-panels.mjs\`, \`atlas-tree.mjs\`, \`atlas-tree-window.mjs\`, \`atlas-filters.mjs\`, \`atlas-osm-admin-filter.mjs\`, \`atlas-osm-admin-badges.mjs\`, \`atlas-osm-level-geometry-actions.mjs\`, \`atlas-url-state.mjs\`, \`atlas-mobile-ui.mjs\`, \`atlas-tree.css\`, \`atlas-panel-content.css\`, \`atlas-r1b-ui.css\`, \`atlas-design-tokens.css\`, \`atlas-map-controls.css\` și \`scripts/audit/web-r2b-final-pages-browser.mjs\`.
+- **Verificare live din sesiunea curentă:** extragere HTML/metadata pentru \`https://ovidiudeica.github.io/reforma-teritoriala/\` prin fetch web, cu titlul „Reforma Teritorială”, limba \`ro\` și meta viewport. **Nu** este test interactiv sau captură vizuală curentă.
+- **Browser interactiv curent:** Browser connector indisponibil fără contextul extensiei; Desktop Commander a răspuns cu limită de utilizare; automatizarea TinyFish nu a pornit (sold insuficient). Nu s-au obținut capturi Chromium noi. Capturile #383 și digestul artefactului sunt referințe istorice, nu pretindem o inspecție vizuală nouă a fiecărui fișier PNG.
+- **CI pentru #384:** se verifică separat check-runs pe HEAD-ul exact al PR-ului după orice commit nou; \`in_progress\` și \`skipped\` nu pot fi transformate în \`SUCCESS\`. Politica de merge impune toate check-urile obligatorii trecute și auditul diff.
+- **Conservare:** această completare este exclusiv documentație în PR #384. Niciun fișier de runtime sau date ACTUAL nu a fost atins. Autorizarea WEB-R2c.1+ rămâne explicit absentă.
