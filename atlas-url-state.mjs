@@ -1,10 +1,11 @@
+import {OSM_ADMIN_LEVELS,OSM_UNKNOWN} from './atlas-osm-admin-filter.mjs';
 import {geometryLabels,geometrySubtypeLabels,geometryParentState,setGeometryGroup} from './geometry-taxonomy.mjs';
 const sorted=values=>[...new Set(values)].sort();
 const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 export const defaultViewport={lat:46.8,lon:26.6,z:6};
 export function createUrlConfig({entityById,nodeById,rootIds,treeRootIds=rootIds,operationalOutlineIds=[],filterIndex,minZoom=0,maxZoom=19}){
  const outlineIds=sorted(operationalOutlineIds);
- return {entityIds:new Set(entityById.keys()),nodeById,rootIds:sorted(rootIds),treeRootIds:sorted(treeRootIds),outlineIds,defaultOutlineIds:outlineIds.includes('view-nistrenia')?['view-nistrenia']:[],groups:filterIndex.groups,classes:sorted(Object.keys(geometryLabels)),subtypes:sorted([...Object.keys(geometrySubtypeLabels),...filterIndex.subtypeMembers.keys()]),levels:[1,2,3,'unclassified'],minZoom,maxZoom};
+ return {entityIds:new Set(entityById.keys()),nodeById,rootIds:sorted(rootIds),treeRootIds:sorted(treeRootIds),outlineIds,defaultOutlineIds:outlineIds.includes('view-nistrenia')?['view-nistrenia']:[],groups:filterIndex.groups,classes:sorted(Object.keys(geometryLabels)),subtypes:sorted([...Object.keys(geometrySubtypeLabels),...filterIndex.subtypeMembers.keys()]),levels:[1,2,3,'unclassified'],osmAdminLevels:[...OSM_ADMIN_LEVELS,OSM_UNKNOWN],minZoom,maxZoom};
 }
 export function validViewport(value,config){
  if(!value||[value.lat,value.lon,value.z].some(v=>v===null||v===undefined||String(v).trim()===''))return null;
@@ -23,7 +24,7 @@ export function normalizeUrlState(raw,config){
   if(!parent.checked&&!parent.indeterminate)classes.delete(group.id);
  }
  const viewport=validViewport(raw.viewport,config);
- return {entityId:(config.entityIds.has(raw.entityId)||config.outlineIds.includes(raw.entityId))?raw.entityId:null,viewport:viewport||{...defaultViewport},viewportExplicit:Boolean(viewport&&raw.viewportExplicit!==false),jurisdictions:sorted(raw.jurisdictions??(config.outlineIds.length?['RO','MD','NI']:['RO','MD'])).filter(j=>['RO','MD','NI'].includes(j)),geometryClasses:sorted(classes),geometrySubtypes:sorted(subtypes),statisticalLevels:config.levels.filter(level=>new Set(raw.statisticalLevels??config.levels).has(level)),separateStatisticalGeometry:raw.separateStatisticalGeometry!==false,osmBasemapVisible:raw.osmBasemapVisible!==false,visibleEntityIds:sorted(raw.visibleEntityIds??config.rootIds).filter(id=>config.entityIds.has(id)),visibleOperationalOutlineIds:sorted(raw.visibleOperationalOutlineIds??config.defaultOutlineIds).filter(id=>config.outlineIds.includes(id)),openIds:sorted(raw.openIds??config.treeRootIds).filter(id=>Boolean(config.nodeById.get(id)?.child_ids?.length))};
+ return {entityId:(config.entityIds.has(raw.entityId)||config.outlineIds.includes(raw.entityId))?raw.entityId:null,viewport:viewport||{...defaultViewport},viewportExplicit:Boolean(viewport&&raw.viewportExplicit!==false),jurisdictions:sorted(raw.jurisdictions??(config.outlineIds.length?['RO','MD','NI']:['RO','MD'])).filter(j=>['RO','MD','NI'].includes(j)),geometryClasses:sorted(classes),geometrySubtypes:sorted(subtypes),statisticalLevels:config.levels.filter(level=>new Set(raw.statisticalLevels??config.levels).has(level)),osmAdminLevels:config.osmAdminLevels.filter(level=>new Set(raw.osmAdminLevels??config.osmAdminLevels).has(level)),separateStatisticalGeometry:raw.separateStatisticalGeometry!==false,osmBasemapVisible:raw.osmBasemapVisible!==false,visibleEntityIds:sorted(raw.visibleEntityIds??config.rootIds).filter(id=>config.entityIds.has(id)),visibleOperationalOutlineIds:sorted(raw.visibleOperationalOutlineIds??config.defaultOutlineIds).filter(id=>config.outlineIds.includes(id)),openIds:sorted(raw.openIds??config.treeRootIds).filter(id=>Boolean(config.nodeById.get(id)?.child_ids?.length))};
 }
 export const defaultUrlState=config=>normalizeUrlState({viewport:defaultViewport,viewportExplicit:false},config);
 function fixedList(params,key,allowed,fallback=allowed){
@@ -43,7 +44,7 @@ export function parseUrlState(search,config){
  const outlines=new Set(legacy?[]:config.defaultOutlineIds);
  if(!legacy)for(const id of new Set(params.getAll('o')))if(config.outlineIds.includes(id)){if(outlines.has(id))outlines.delete(id);else outlines.add(id);}
  const fallbackJurisdictions=legacy?['RO','MD']:config.outlineIds.length?['RO','MD','NI']:['RO','MD'];
- return normalizeUrlState({visibleEntityIds,visibleOperationalOutlineIds:[...outlines],entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:params.has('j')?fixedList(params,'j',['RO','MD','NI'],fallbackJurisdictions):fallbackJurisdictions,geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):(legacy?config.rootIds:config.treeRootIds)},config);
+ return normalizeUrlState({visibleEntityIds,visibleOperationalOutlineIds:[...outlines],entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:params.has('j')?fixedList(params,'j',['RO','MD','NI'],fallbackJurisdictions):fallbackJurisdictions,geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),osmAdminLevels:params.has('a')?config.osmAdminLevels.filter(level=>params.get('a').split(',').includes(String(level))):config.osmAdminLevels,separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):(legacy?config.rootIds:config.treeRootIds)},config);
 }
 export function serializeUrlState(raw,config){
  const state=normalizeUrlState(raw,config),defaults=defaultUrlState(config),params=new URLSearchParams();
@@ -53,6 +54,7 @@ export function serializeUrlState(raw,config){
  if(!equal(state.jurisdictions,defaults.jurisdictions))params.set('j',state.jurisdictions.join(','));
  for(const id of config.subtypes.filter(id=>!state.geometrySubtypes.includes(id)))params.append('f',id);
  if(!equal(state.statisticalLevels,defaults.statisticalLevels))params.set('s',state.statisticalLevels.join(','));
+ if(!equal(state.osmAdminLevels,defaults.osmAdminLevels))params.set('a',state.osmAdminLevels.join(','));
  if(!state.separateStatisticalGeometry)params.set('b','0');
  if(!state.osmBasemapVisible)params.set('m','0');
  if(!equal(state.openIds,defaults.openIds)){if(!state.openIds.length)params.append('t','');else for(const id of state.openIds)params.append('t',id);}
