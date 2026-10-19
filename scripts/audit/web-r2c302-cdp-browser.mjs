@@ -128,7 +128,7 @@ async function exercise(page,profile,sample){
  report.samples.push({profile,sample,kind:'interaction',actions,heapAfterScenario:beforeHeap,heapAfterPanelCycles:afterHeap,finalMetrics:await browserMetrics(page),consoleExceptions:page.errors.length});
  if(['desktop','mobile-portrait'].includes(profile)&&sample===1)await page.screenshot(path.join(output,profile+'-after.png'));
 }
-async function oneSelectedDetailGeometry(page,profile,network){
+async function oneSelectedDetailGeometry(page,profile,network,appOrigin){
  const start=await state(page),out=[];
  for(const level of [8,9]){
   await timed(page,'panel-open','filters');
@@ -141,14 +141,15 @@ async function oneSelectedDetailGeometry(page,profile,network){
    const id=candidate[0];qaApp.atlasTree.select(id);
    const entry=qaApp.atlasTree.getNode(id);if(!entry?.checkbox)throw Error('Selected virtual row missing');
    entry.checkbox.click();if(!qaApp.visibleEntityIds.has(id))throw Error('Detail checkbox failed to select '+id);
-   return {id,level};
+   const started=performance.now();await qaApp.selectEntity(id,{zoom:true,source:'tree'});
+   return {id,level,selectAndFitMs:performance.now()-started};
   },level);
   await timed(page,'zoom',10);
   await delay(1800);
-  const loaded=await browserMetrics(page),net=networkSummary(network.data(),page.endpoint),memory=await heap(page);
+  const loaded=await browserMetrics(page),net=networkSummary(network.data(),appOrigin),memory=await heap(page);
   const restored=await page.call(function(id){
    const entry=qaApp.atlasTree.getNode(id);if(!entry?.checkbox)throw Error('Detail row lost');
-   entry.checkbox.click();return {unchecked:!qaApp.visibleEntityIds.has(id)};
+   entry.checkbox.click();qaApp.clearSelection();return {unchecked:!qaApp.visibleEntityIds.has(id)};
   },chosen.id);
   assert.equal(restored.unchecked,true,'selected detail geometry must be reversible');
   out.push({target:chosen,loaded,network:net,memory});
@@ -160,7 +161,7 @@ async function oneSelectedDetailGeometry(page,profile,network){
  assert.deepEqual(finish.ni,start.ni,'detail geometry profiling altered NI');
  assert.deepEqual(finish.stat,start.stat,'detail geometry profiling altered statistics');
  report.samples.push({profile,sample:1,kind:'admin8-admin9-selected-geometry',results:out});
- console.log('WEB-R2c.3.0.2 DETAIL_GEOMETRY '+JSON.stringify({profile,results:out.map(x=>({id:x.target.id,level:x.target.level,svgPaths:x.loaded.svgPaths,heapUsedBytes:x.memory.usedSize,geometryRequests:x.network.geometryRequestCount,geometryUniqueUrls:x.network.geometryUniqueUrls,geometryRepeated:x.network.geometryRepeatedUrls.length,ownHttpErrors:x.network.ownHttpErrors.length}))}));
+ console.log('WEB-R2c.3.0.2 DETAIL_GEOMETRY '+JSON.stringify({profile,results:out.map(x=>({id:x.target.id,level:x.target.level,selectAndFitMs:x.target.selectAndFitMs,svgPaths:x.loaded.svgPaths,heapUsedBytes:x.memory.usedSize,geometryRequests:x.network.geometryRequestCount,geometryUniqueUrls:x.network.geometryUniqueUrls,geometryRepeated:x.network.geometryRepeatedUrls.length,ownHttpErrors:x.network.ownHttpErrors.length}))}));
 }
 let browser=null;
 try{
@@ -187,7 +188,7 @@ try{
     report.samples.push({profile:label,sample:iteration,kind:'cold-load',metrics:loaded,heap:memory,network:net});
     if(label==='desktop'||label==='mobile-portrait'){
      await exercise(page,label,iteration);
-     if(iteration===1)await oneSelectedDetailGeometry(page,label,network);
+     if(iteration===1)await oneSelectedDetailGeometry(page,label,network,browser.server.url);
      report.samples.push({profile:label,sample:iteration,kind:'post-interaction-network',network:networkSummary(network.data(),browser.server.url),heap:await heap(page)});
     }
     if(page.errors.length)report.failures.push({profile:label,sample:iteration,errors:page.errors.map(e=>e.text||e.exception?.description).slice(0,5)});
