@@ -3,11 +3,13 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {launchBrowser,delay,waitFor} from '../test/helpers/atlas-browser.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const output=process.env.ATLAS_PERF_OUTPUT||'outputs/web-r2c302-cdp';
-const expected='55cccd747fa5e3f5d244b4a1044f1addd1535115';
+const expected=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim();
+assert.match(expected,/^[a-f0-9]{40}$/,'Audit requires an exact Git commit');
 const report={schema:'web-r2c302-cdp-readonly-v1',sourceMain:expected,runnerSha:process.env.GITHUB_SHA||null,startedAt:new Date().toISOString(),browser:null,env:{platform:process.platform,node:process.version},samples:[],failures:[],summary:null,status:'INCOMPLETE'};
 const stats=values=>{const a=values.filter(Number.isFinite).sort((x,y)=>x-y);if(!a.length)return null;const quantile=p=>{const pos=(a.length-1)*p,lo=Math.floor(pos),hi=Math.ceil(pos);return a[lo]+(a[hi]-a[lo])*(pos-lo);};return {count:a.length,min:a[0],p50:quantile(.5),p95:quantile(.95),max:a.at(-1)};};
 function netObserver(page){
