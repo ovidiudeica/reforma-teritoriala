@@ -24,6 +24,9 @@ const argv=process.argv.slice(2);
 const arg=(name,def=null)=>{const i=argv.indexOf(name);return i<0?def:argv[i+1];};
 const OUT=arg('--out-dir','outputs/web-r2a1');
 const VERIFY=arg('--verify-dir');
+const VERIFY_MANIFEST=arg('--verify-manifest');
+const PERSISTED_ACTUAL_CSV='docs/evidence/web-r2a1-actual-admin-level-per-id.csv';
+const PERSISTED_ROLES_CSV='docs/evidence/web-r2a1-nistrenia-osm-roles-per-id.csv';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const own=(o,k)=>Object.prototype.hasOwnProperty.call(o??{},k);
 const die=m=>{throw Error('WEB-R2a.1: '+m);};
@@ -58,6 +61,23 @@ const bbox=v=>Array.isArray(v)&&v.length===4&&v.every(Number.isFinite);
 const polygon=g=>g&&['Polygon','MultiPolygon'].includes(g.type)&&Array.isArray(g.coordinates)&&g.coordinates.length>0;
 const exceptions=[];
 const ex=(id,category,severity,source,evidence,recommendation)=>exceptions.push({id,category,severity,source,evidence,recommendation});
+function csvObjects(text){
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){
+  const ch=text[i];
+  if(quoted){
+   if(ch==='"'&&text[i+1]==='"'){cell+='"';i++;}
+   else if(ch==='"')quoted=false;
+   else cell+=ch;
+  }else if(ch==='"')quoted=true;
+  else if(ch===','){row.push(cell);cell='';}
+  else if(ch==='\n'){row.push(cell);rows.push(row);row=[];cell='';}
+  else if(ch!=='\r')cell+=ch;
+ }
+ if(cell||row.length){row.push(cell);rows.push(row);}
+ const header=rows.shift()??[];
+ return rows.filter(r=>r.length>1||r[0]).map(r=>Object.fromEntries(header.map((h,i)=>[h,r[i]??''])));
+}
 const dist=rows=>{
  const by_level={},states={valid:0,missing:0,null:0,multiple:0,invalid:0,conflict:0};
  for(const r of rows){
@@ -115,6 +135,18 @@ for(const e of actual.entities){
 }
 if(ids.size!==5848)die('ACTUAL unique ID count != 5848');
 
+const persistedActualBytes=await readFile(PERSISTED_ACTUAL_CSV);
+const persistedActual=csvObjects(persistedActualBytes.toString('utf8'));
+if(persistedActual.length!==5848)die('persisted ACTUAL per-ID CSV count != 5848');
+const persistedActualIds=new Set();
+for(const r of persistedActual){
+ if(persistedActualIds.has(r.id))die('duplicate ID in persisted ACTUAL per-ID CSV: '+r.id);
+ persistedActualIds.add(r.id);
+ const e=byId.get(r.id);if(!e)die('persisted ACTUAL CSV references unknown ID '+r.id);
+ const a=level(e.representation?.admin_level,!!e.representation&&own(e.representation,'admin_level'));
+ if(r.jurisdiction!==e.jurisdiction||r.admin_level_status!==a.state.toUpperCase()||r.admin_level_raw!==(a.raw==null?'':String(a.raw))||r.osm_relation_id!==(e.representation?.osm_relation_id==null?'':String(e.representation.osm_relation_id)))die('persisted ACTUAL CSV semantic drift for '+r.id);
+}
+
 if(roles.contract!=='p907216-osm-role-ui-overlay-v1'||roles.rows?.length!==85||roles.relation_count!==85||roles.indexed_actual_entities!==85)die('85-role catalog contract/cardinality changed');
 if(roles.existing_actual_snapshot_id!==SNAPSHOT||roles.existing_actual_release_fingerprint_sha256!==FINGERPRINT)die('85-role catalog release binding mismatch');
 if(nav.group_count!==7||nav.entity_count!==85||nav.groups?.length!==7)die('NI navigation cardinality changed');
@@ -151,6 +183,17 @@ for(const r of roles.rows){
  });
 }
 if(roleIds.size!==85)die('unique role count != 85');
+
+const persistedRoleBytes=await readFile(PERSISTED_ROLES_CSV);
+const persistedRoles=csvObjects(persistedRoleBytes.toString('utf8'));
+if(persistedRoles.length!==85)die('persisted OSM-role per-ID CSV count != 85');
+const persistedRoleIds=new Set();
+for(const r of persistedRoles){
+ if(persistedRoleIds.has(r.role_id))die('duplicate ID in persisted role CSV: '+r.role_id);
+ persistedRoleIds.add(r.role_id);
+ const source=roles.rows.find(x=>x.id===r.role_id);if(!source)die('persisted role CSV references unknown role '+r.role_id);
+ if(r.actual_entity_id!==source.existing_actual_entity_id||r.osm_relation_id!==String(source.osm_relation_id)||r.osm_admin_level!==String(source.osm_admin_level)||r.group!==(groupByRole.get(source.id)??''))die('persisted role CSV semantic drift for '+r.role_id);
+}
 
 if(outlineManifest.relation_count!==8||outlines.features?.length!==8)die('NI outline count != 8');
 const outlineById=new Map(outlines.features.map(f=>[f.id,f]));
@@ -233,9 +276,16 @@ outputs['report.md']=report;
 for(const [n,c] of Object.entries(outputs))await writeFile(path.join(OUT,n),c);
 const inputHashes=Object.fromEntries(INPUTS.map(p=>[p,{sha256:sha(raw[p]),bytes:raw[p].length}]));
 const outputHashes=Object.fromEntries(Object.entries(outputs).map(([n,c])=>[n,{sha256:sha(Buffer.from(c)),bytes:Buffer.byteLength(c)}]));
-const hashManifest={schema:'web-r2a1-sha256-manifest-v1',base_sha:BASE,inputs:inputHashes,outputs:outputHashes};
+const hashManifest={schema:'web-r2a1-sha256-manifest-v1',base_sha:BASE,inputs:inputHashes,persisted_registries:{
+ [PERSISTED_ACTUAL_CSV]:{sha256:sha(persistedActualBytes),bytes:persistedActualBytes.length,records:persistedActual.length},
+ [PERSISTED_ROLES_CSV]:{sha256:sha(persistedRoleBytes),bytes:persistedRoleBytes.length,records:persistedRoles.length}
+},outputs:outputHashes};
 await writeFile(path.join(OUT,'sha256-manifest.json'),JSON.stringify(hashManifest,null,2)+'\n');
 
+if(VERIFY_MANIFEST){
+ const expected=JSON.parse(await readFile(VERIFY_MANIFEST,'utf8'));
+ if(JSON.stringify(expected)!==JSON.stringify(hashManifest))die('committed SHA-256 manifest differs from regenerated evidence');
+}
 if(VERIFY){
  const a=(await readdir(OUT)).sort(),b=(await readdir(VERIFY)).sort();
  if(JSON.stringify(a)!==JSON.stringify(b))die('committed evidence file set differs from regenerated output');
