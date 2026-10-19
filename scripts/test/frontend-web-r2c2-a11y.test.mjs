@@ -82,7 +82,7 @@ test('WEB-R2c.2: stale and valid confirmations restore focus without changing F/
  assert.equal(g.actionStatus.textContent,'Au fost modificate 2 bife geometrice.');
  assert.deepEqual([...state.statisticalLevels],stats);
  g.undoButton.click();
- assert.equal(doc.activeElement,g.undoButton);
+ assert.equal(doc.activeElement,g.showButton,'Undo disabled: focus moves to a stable enabled action');
  assert.equal(counters.undone,1);
  assert.match(g.actionStatus.textContent,/Restabilite 2 bife/);
 });
