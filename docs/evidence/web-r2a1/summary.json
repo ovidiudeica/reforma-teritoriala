@@ -1,0 +1,99 @@
+{
+  "schema": "web-r2a1-admin-level-census-summary-v1",
+  "base_sha": "073a1ee2a2098392df5891fb6b15e69b0eef2d9c",
+  "snapshot": "actual-a9e5a4ddcb5277ef",
+  "fingerprint": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+  "status": "PASS_WITH_EXCEPTIONS",
+  "exhaustive": true,
+  "source_data_mutated": false,
+  "p91_import_allowed": false,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "actual_mutation_allowed": false,
+  "counts": {
+    "actual": 5848,
+    "actual_ro": 3246,
+    "actual_md": 2602,
+    "osm_reused_roles": 85,
+    "ni_source_only_outlines": 8,
+    "registry_records": 5941,
+    "exceptions": 28,
+    "fatal": 0,
+    "errors": 0,
+    "warnings": 8,
+    "info": 20
+  },
+  "distributions": {
+    "schema": "web-r2a1-admin-level-distributions-v1",
+    "base_sha": "073a1ee2a2098392df5891fb6b15e69b0eef2d9c",
+    "snapshot": "actual-a9e5a4ddcb5277ef",
+    "fingerprint": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "counting_policy": {
+      "actual_identity_count": 5848,
+      "osm_roles_are_additional_actual_identities": false,
+      "ni_outlines_are_actual_identities": false,
+      "registry_records": 5941
+    },
+    "ACTUAL_RO": {
+      "total": 3246,
+      "by_level": {
+        "2": 1,
+        "4": 42,
+        "8": 3180,
+        "9": 11
+      },
+      "states": {
+        "valid": 3234,
+        "missing": 0,
+        "null": 12,
+        "multiple": 0,
+        "invalid": 0,
+        "conflict": 0
+      }
+    },
+    "ACTUAL_MD": {
+      "total": 2602,
+      "by_level": {
+        "2": 1,
+        "4": 37,
+        "7": 5,
+        "8": 982,
+        "9": 1571
+      },
+      "states": {
+        "valid": 2596,
+        "missing": 0,
+        "null": 6,
+        "multiple": 0,
+        "invalid": 0,
+        "conflict": 0
+      }
+    },
+    "NI_SOURCE_ONLY_OUTLINES": {
+      "total": 8,
+      "by_level": {},
+      "states": {
+        "valid": 0,
+        "missing": 8,
+        "null": 0,
+        "multiple": 0,
+        "invalid": 0,
+        "conflict": 0
+      }
+    },
+    "OSM_REUSED_ROLES": {
+      "total": 85,
+      "by_level": {
+        "4": 1,
+        "8": 84
+      },
+      "states": {
+        "valid": 85,
+        "missing": 0,
+        "null": 0,
+        "multiple": 0,
+        "invalid": 0,
+        "conflict": 0
+      }
+    }
+  }
+}
