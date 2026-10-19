@@ -45,8 +45,9 @@ try{
  for(const [width,height] of [[1440,900],[390,844]]){
   const page=await browser.page();
   try{
-   await page.viewport(width,height);
+   // A blank Chrome mobile tab has a 980px layout viewport until the site's meta viewport loads.
    await page.navigate(url);
+   await page.viewport(width,height);
    await waitFor(()=>page.call(function(){return qaApp.entityById.size===5848&&qaApp.osmRoleById.size===85&&qaApp.nistreniaOutlines?.layers?.size===8;}),'verified actual RO MD, NI outlines and reused roles');
    const start=await snapshot(page);
    assert.deepEqual(start.actual,['osm-r58974','osm-r90689']);
