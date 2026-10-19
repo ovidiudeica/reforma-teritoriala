@@ -48,7 +48,7 @@ try{
   const state=await evalState();
   assert.equal(state.title,formatted);
   assert.ok(state.breadcrumb.includes(formatted));
-  const treeLabel=await page.evaluate(`document.querySelector('.tree-select[data-entity-id="${target.id}"]').textContent`);
+  const treeLabel=await page.evaluate(`document.querySelector('.tree-select[data-entity-id="${target.id}"] .tree-name').textContent`);
   assert.ok(treeLabel.startsWith(compactTreeName({display_name:target.display_name,parent_id:target.hierarchy.consolidated_parent_id,jurisdiction:target.jurisdiction})));
   await page.query(target.id);
   const searchLabel=await page.evaluate("document.querySelector('[role=option] b').textContent");
