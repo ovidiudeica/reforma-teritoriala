@@ -1,0 +1,205 @@
+{
+  "schema": "web-r2c0-read-only-ux-evolution-plan-v1",
+  "status": "AUDIT_ONLY_NO_UI_CHANGES",
+  "based_on_main": "18bf1440267e0e76e657062e20050d4f60096d59",
+  "audited_at_utc_date": "2026-10-19",
+  "audited_site": "https://ovidiudeica.github.io/reforma-teritoriala/",
+  "evidence": {
+    "prior_merge_pr": 383,
+    "prior_tested_sha": "23d1eadb4685a41988abfffb303bf7801ab5d88d",
+    "prior_ci": {
+      "required": 13,
+      "successful": 13
+    },
+    "live_chromium_run_id": 39222867772,
+    "live_report": {
+      "pass_checks": 17,
+      "screenshots": 14,
+      "viewports": [
+        [
+          1440,
+          900
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "result": "PASS"
+    },
+    "live_artifact_sha256": "0514b8ff585d2bcb9728330db44b78b964be8d6ceefd4533368f19aa53df4f4b"
+  },
+  "protected_contract": {
+    "snapshot_id": "actual-a9e5a4ddcb5277ef",
+    "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "actual_records": {
+      "RO": 3246,
+      "MD": 2602
+    },
+    "ni_source_only_outlines": 8,
+    "osm_reused_roles": 85,
+    "total_registry_records": 5941,
+    "p91_import_allowed": false,
+    "actual_mutation_allowed": false,
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "accepted_features_immutable": [
+      "numeric_osm_badges",
+      "osm_level_tree_multiselect",
+      "explicit_show_hide_confirmation",
+      "one_step_bulk_undo",
+      "url_history",
+      "independent_geometry_checkboxes",
+      "independent_statistical_filter"
+    ]
+  },
+  "findings": [
+    {
+      "id": "UX-01",
+      "priority": "P1",
+      "kind": "UX_AMBIGUITY_TO_VALIDATE",
+      "scope": "filter_visibility_vs_geometry_visibility",
+      "status": "NOT_CONFIRMED_DEFECT",
+      "next_stage": "WEB-R2c.1"
+    },
+    {
+      "id": "UX-02",
+      "priority": "P1",
+      "kind": "COUNT_SCOPE_EXPLAINABILITY",
+      "scope": "matches_vs_navigation_ancestors_vs_eligible_geometry",
+      "status": "NOT_CONFIRMED_DEFECT",
+      "next_stage": "WEB-R2c.1"
+    },
+    {
+      "id": "UX-03",
+      "priority": "P1",
+      "kind": "ACCESSIBILITY_RESEARCH",
+      "scope": "confirmation_focus_and_aria_live",
+      "status": "NOT_CONFIRMED_DEFECT",
+      "next_stage": "WEB-R2c.2"
+    },
+    {
+      "id": "UX-04",
+      "priority": "P2",
+      "kind": "EMPTY_STATE_CANDIDATE",
+      "scope": "no_admin_levels_selected_tree_empty",
+      "status": "NOT_CONFIRMED_DEFECT",
+      "next_stage": "WEB-R2c.1"
+    },
+    {
+      "id": "UX-05",
+      "priority": "P1",
+      "kind": "PERFORMANCE_UNMEASURED",
+      "scope": "bulk_level_8_and_9",
+      "status": "NOT_CONFIRMED_DEFECT",
+      "next_stage": "WEB-R2c.3"
+    },
+    {
+      "id": "UX-06",
+      "priority": "P2",
+      "kind": "RESPONSIVE_A11Y_COVERAGE",
+      "scope": "zoom_200_forced_colors_keyboard_landscape",
+      "status": "NOT_YET_AUDITED",
+      "next_stage": "WEB-R2c.2"
+    },
+    {
+      "id": "GOV-01",
+      "priority": "P1",
+      "kind": "HISTORICAL_SPEC_CLARITY",
+      "scope": "specification_only_contract_vs_implemented_r2b",
+      "status": "DOCUMENTATION_DRIFT_RISK",
+      "next_stage": "WEB-R2c.1"
+    },
+    {
+      "id": "UX-07",
+      "priority": "P2",
+      "kind": "UNDO_LIFETIME_EXPLAINABILITY",
+      "scope": "undo_memory_state_vs_url_history",
+      "status": "NOT_CONFIRMED_DEFECT",
+      "next_stage": "WEB-R2c.2"
+    },
+    {
+      "id": "UX-08",
+      "priority": "P1",
+      "kind": "CONFIRMED_UI_COPY_SCOPE_INCONSISTENCY",
+      "scope": "filters_panel_generic_help_vs_osm_tree_only_help",
+      "status": "SOURCE_CONFIRMED_NOT_RUNTIME_DEFECT",
+      "evidence": [
+        "index.html:128",
+        "atlas-filters.mjs:50"
+      ],
+      "next_stage": "WEB-R2c.1"
+    }
+  ],
+  "roadmap": [
+    {
+      "id": "WEB-R2c.0.1",
+      "mode": "EVIDENCE_ONLY",
+      "requires_separate_approval_for_functional_changes": true
+    },
+    {
+      "id": "WEB-R2c.1",
+      "mode": "SPECIFICATION_FIRST",
+      "requires_separate_approval": true
+    },
+    {
+      "id": "WEB-R2c.2",
+      "mode": "ACCESSIBILITY_UI_SEPARATE_PR",
+      "requires_separate_approval": true
+    },
+    {
+      "id": "WEB-R2c.3",
+      "mode": "PERFORMANCE_HARDENING_SEPARATE_PR",
+      "requires_separate_approval": true
+    },
+    {
+      "id": "WEB-R2c.4",
+      "mode": "FINAL_PUBLIC_PAGES_ACCEPTANCE",
+      "requires_separate_approval": true
+    }
+  ],
+  "validation_gates": [
+    "diff_docs_only_in_r2c0",
+    "all_required_ci_success_on_exact_sha",
+    "protected_snapshot_immutable",
+    "no_osm_level_inference",
+    "no_ni_alias_geometry_duplication",
+    "no_default_descendant_activation",
+    "back_forward_and_undo_independent",
+    "desktop_mobile_a11y_regressions",
+    "published_pages_post_merge_verification"
+  ],
+  "expected_mutations": {
+    "application": 0,
+    "data": 0,
+    "geometry": 0,
+    "documentation": 2
+  },
+  "approval": "NO_IMPLEMENTATION_AUTHORIZED",
+  "audit_completion": {
+    "architecture_inventory": "SOURCE_INSPECTED",
+    "functional_regressions": "PRIOR_BROWSER_RUN_383_NOT_RERUN",
+    "source_ui_copy_inconsistencies_confirmed": 1,
+    "confirmed_runtime_defects": 0,
+    "live_site": "HTML_METADATA_FETCH_ONLY",
+    "live_interactive_browser": "BLOCKED_CONNECTORS_AND_WALLET",
+    "new_chromium_screenshots": 0,
+    "compliance_matrix": "docs/web-r2c0-ux-audit-roadmap.md#8-matrice-de-conformitate-cu-contractele-acceptate",
+    "regression_matrix": "docs/web-r2c0-ux-audit-roadmap.md#11-matrice-regresii-și-dovada-necesară",
+    "documentation_only": true,
+    "approvals": "WEB-R2c.1_NOT_AUTHORIZED",
+    "prior_chromium_archive_inspection": {
+      "downloaded_in_current_audit": true,
+      "artifact_id": 12172850445,
+      "archive_sha256_verified": "0514b8ff585d2bcb9728330db44b78b964be8d6ceefd4533368f19aa53df4f4b",
+      "report_json_read": true,
+      "screenshot_dimensions_verified": 14,
+      "contact_sheet_reviewed": 14,
+      "full_resolution_screenshots_reviewed": [
+        "start-390.png",
+        "confirm-ni-390.png",
+        "confirm-ni-1440.png"
+      ],
+      "historical_run_only": true
+    }
+  }
+}
