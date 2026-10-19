@@ -1,0 +1,42 @@
+name: WEB-R2a.1 admin-level census
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  web-r2a1-admin-level-census:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Validate audit script syntax
+        run: node --check scripts/audit/web-r2a1-admin-level-census.mjs
+      - name: Generate exhaustive read-only census from repository bytes
+        run: node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir "${{ runner.temp }}/web-r2a1"
+      - name: Verify committed SHA-256 evidence manifest is reproducible
+        if: ${{ hashFiles('docs/evidence/web-r2a1/sha256-manifest.json') != '' }}
+        run: node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir "${{ runner.temp }}/web-r2a1-check" --verify-manifest docs/evidence/web-r2a1/sha256-manifest.json
+      - name: Existing NI role/navigation/outline contract regressions
+        run: |
+          node --test scripts/test/frontend-p907216-osm-roles.test.mjs
+          node --test scripts/test/frontend-p909-nistrenia-menu.test.mjs
+          node --test scripts/test/frontend-p9095-outline-parity.test.mjs
+      - name: Confirm protected source data is untouched
+        run: |
+          test -z "$(git diff --name-only 073a1ee2a2098392df5891fb6b15e69b0eef2d9c...HEAD -- data public)"
+          git status --short
+      - name: Upload deterministic WEB-R2a.1 evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: web-r2a1-admin-level-census
+          path: ${{ runner.temp }}/web-r2a1
+          retention-days: 30
