@@ -6,7 +6,8 @@ import {mkdir} from 'node:fs/promises';
 import {launchBrowser,waitFor} from './helpers/atlas-browser.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const output=process.env.ATLAS_QA_OUTPUT||'/tmp/atlas-browser-evidence';
+// Only the pinned GitHub Actions Linux artifact directory is permitted; never use env-controlled paths.
+const output='/tmp/atlas-browser-evidence';
 const browser=await launchBrowser(root),page=await browser.page();
 async function osmControls(){
  return page.call(function(){
