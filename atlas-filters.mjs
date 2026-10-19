@@ -59,13 +59,14 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
  const showButton=document.createElement('button');showButton.type='button';showButton.textContent='Afișează geometriile nivelurilor selectate';
  const hideButton=document.createElement('button');hideButton.type='button';hideButton.textContent='Ascunde geometriile nivelurilor selectate';
  const undoButton=document.createElement('button');undoButton.type='button';undoButton.textContent='Anulează ultima operațiune pe niveluri';
- for(const b of [showButton,hideButton,undoButton]){b.className='action-button';actionButtons.appendChild(b);}
+ for(const b of [showButton,hideButton,undoButton]){b.className='action-button';b.setAttribute('aria-label',b.textContent+' — Nivel administrativ OSM');actionButtons.appendChild(b);}
  geometryActions.appendChild(actionButtons);
  const confirmation=document.createElement('div');confirmation.className='osm-level-action-confirm';confirmation.hidden=true;
  confirmation.setAttribute('role','group');confirmation.setAttribute('aria-label','Confirmarea domeniului acțiunii OSM');
  const scope=document.createElement('p');confirmation.appendChild(scope);
  const accept=document.createElement('button');accept.type='button';accept.className='action-button';accept.textContent='Confirmă operațiunea';
  const cancel=document.createElement('button');cancel.type='button';cancel.className='action-button';cancel.textContent='Renunță';
+ for(const b of [accept,cancel])b.setAttribute('aria-label',b.textContent+' — confirmare Nivel administrativ OSM');
  confirmation.appendChild(accept);confirmation.appendChild(cancel);geometryActions.appendChild(confirmation);
  const actionStatus=document.createElement('p');actionStatus.className='hint';actionStatus.setAttribute('role','status');actionStatus.setAttribute('aria-live','polite');geometryActions.appendChild(actionStatus);
  osmSection.appendChild(geometryActions);
