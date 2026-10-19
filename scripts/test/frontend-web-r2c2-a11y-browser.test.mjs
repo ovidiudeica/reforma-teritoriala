@@ -32,7 +32,7 @@ async function state(){
    scopeId:confirm.querySelector('p')?.id,scope:confirm.querySelector('p')?.textContent,
    notice:wrapper.querySelector('[role="status"]')?.textContent,
    geometry:[...qaApp.visibleEntityIds].sort(),ni:[...qaApp.visibleOperationalOutlineIds].sort(),
-   osm:[...qaApp.activeOsmAdminLevels].sort(),selection:qaApp.selectedEntityId,
+   osm:[...qaApp.captureUrlState().osmAdminLevels].sort(),selection:qaApp.selectedEntityId,
    width:innerWidth,globalOverflow:document.documentElement.scrollWidth>innerWidth+2,
    panelOverflow:document.querySelector('#filters-panel').scrollWidth>document.querySelector('#filters-panel').clientWidth+2,
    confirmationOverflow:!confirm.hidden&&confirm.scrollWidth>confirm.clientWidth+2,
@@ -115,6 +115,7 @@ try{
    assert.equal(before.confirmationOverflow,false);
    await page.screenshot(path.join(output,'web-r2c2-200pct-confirm.png'));
    await page.send('Emulation.setEmulatedMedia',{features:[{name:'forced-colors',value:'active'}]});
+   await page.key('Tab'); // keyboard modality makes :focus-visible unambiguous
    const contrast=await page.evaluate("({forced:matchMedia('(forced-colors:active)').matches,outline:getComputedStyle(document.activeElement).outlineWidth,style:getComputedStyle(document.activeElement).outlineStyle})");
    assert.equal(contrast.forced,true);
    assert.ok(parseFloat(contrast.outline)>=3&&contrast.style==='solid',JSON.stringify(contrast));
