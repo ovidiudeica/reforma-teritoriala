@@ -32,6 +32,28 @@ try{
    await page.evaluate("(()=>{qaApp.atlasTree.toggle('osm-r90689');qaApp.atlasTree.toggle('osm-r90689');})()");
    assert.deepEqual(await page.evaluate('[...qaApp.visibleEntityIds].sort()'),roots);await shot('desktop-hierarchy-p52');
   });
+  await scenario('WEB-R2b.2 Chromium desktop/mobile multi-select preserves geometry checkboxes and statistical levels',async()=>{
+   for(const [w,h] of [[1440,900],[390,844]]){
+    await page.viewport(w,h);
+    await page.click('#filters-toggle');
+    const before=await page.evaluate("(()=>{const panel=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');if(!panel)throw Error('OSM administrative filter missing');panel.open=true;return {checkboxes:[...qaApp.visibleEntityIds].sort(),outlines:[...document.querySelectorAll('#hierarchy-tree .tree-visibility-toggle:checked')].map(e=>e.dataset.entityId).sort(),statistical:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked),rows:qaApp.atlasTree.getVisibleCount()};})()");
+    await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.querySelectorAll('button')[1].click();})()");
+    assert.equal(await page.evaluate('qaApp.atlasTree.getVisibleCount()'),0,'no levels means no visible tree rows');
+    await page.evaluate("document.querySelector('input[data-kind=osm-admin-level][data-filter="3"]').click()");
+    const filtered=await page.evaluate("({ids:qaApp.atlasTree.getVisibleIds(),checked:[...qaApp.visibleEntityIds].sort(),url:location.search,statistics:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked)})");
+    assert.ok(filtered.ids.includes('view-nistrenia'),'NI root is level 3');
+    assert.ok(filtered.ids.length<before.rows,'tree is restricted');
+    assert.deepEqual(filtered.checked,before.checkboxes,'filter never changes geometry checkbox state');
+    assert.deepEqual(filtered.statistics,before.statistical,'statistical filters independent');
+    assert.ok(new URLSearchParams(filtered.url).has('a'),'filter has canonical URL state');
+    await shot('web-r2b2-osm-level-3-'+w+'x'+h);
+    await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.querySelectorAll('button')[0].click();})()");
+    assert.equal(await page.evaluate('qaApp.atlasTree.getVisibleCount()'),before.rows,'all levels restores expanded rows');
+    assert.deepEqual(await page.evaluate('[...qaApp.visibleEntityIds].sort()'),before.checkboxes);
+   }
+   await page.viewport(1440,900);
+   await page.click('#mobile-navigation');
+  });
   // P4 cartographic regressions explicitly enable the entities under test.
   await page.evaluate('(()=>{for(const id of '+JSON.stringify([roCity.id,roCounty.id,md114.id,md115.id,md120.id])+')qaApp.visibleEntityIds.add(id);qaApp.refreshGeometryVisibility();qaApp.atlasUrl.commit("replace");})()');
  await scenario('desktop keyboard search normalization, identifiers, grouping and no result',async()=>{
