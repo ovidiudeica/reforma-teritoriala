@@ -116,6 +116,18 @@
       "scope": "undo_memory_state_vs_url_history",
       "status": "NOT_CONFIRMED_DEFECT",
       "next_stage": "WEB-R2c.2"
+    },
+    {
+      "id": "UX-08",
+      "priority": "P1",
+      "kind": "CONFIRMED_UI_COPY_SCOPE_INCONSISTENCY",
+      "scope": "filters_panel_generic_help_vs_osm_tree_only_help",
+      "status": "SOURCE_CONFIRMED_NOT_RUNTIME_DEFECT",
+      "evidence": [
+        "index.html:128",
+        "atlas-filters.mjs:50"
+      ],
+      "next_stage": "WEB-R2c.1"
     }
   ],
   "roadmap": [
@@ -162,5 +174,18 @@
     "geometry": 0,
     "documentation": 2
   },
-  "approval": "NO_IMPLEMENTATION_AUTHORIZED"
+  "approval": "NO_IMPLEMENTATION_AUTHORIZED",
+  "audit_completion": {
+    "architecture_inventory": "SOURCE_INSPECTED",
+    "functional_regressions": "PRIOR_BROWSER_RUN_383_NOT_RERUN",
+    "source_ui_copy_inconsistencies_confirmed": 1,
+    "confirmed_runtime_defects": 0,
+    "live_site": "HTML_METADATA_FETCH_ONLY",
+    "live_interactive_browser": "BLOCKED_CONNECTORS_AND_WALLET",
+    "new_chromium_screenshots": 0,
+    "compliance_matrix": "docs/web-r2c0-ux-audit-roadmap.md#8-matrice-de-conformitate-cu-contractele-acceptate",
+    "regression_matrix": "docs/web-r2c0-ux-audit-roadmap.md#11-matrice-regresii-și-dovada-necesară",
+    "documentation_only": true,
+    "approvals": "WEB-R2c.1_NOT_AUTHORIZED"
+  }
 }
