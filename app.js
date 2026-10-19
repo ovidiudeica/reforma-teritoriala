@@ -28,7 +28,7 @@ import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs'
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
 import {osmLevelForTreeNode} from './atlas-osm-admin-badges.mjs';
-import {OSM_ADMIN_LEVELS,OSM_UNKNOWN,allOsmLevelFilters,osmTreeVisibleIds} from './atlas-osm-admin-filter.mjs';
+import {OSM_ADMIN_LEVELS,OSM_UNKNOWN,allOsmLevelFilters,osmTreeVisibleIds,osmTreeFilterSummary} from './atlas-osm-admin-filter.mjs';
 import {planOsmLevelGeometryAction,applyOsmLevelGeometryAction,undoOsmLevelGeometryAction} from './atlas-osm-level-geometry-actions.mjs';
 import {validateConsolidatedHierarchy} from './atlas-hierarchy-validate.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
@@ -335,7 +335,27 @@ function renderFilters(){
   canUndoOsmGeometry:()=>Boolean(lastOsmLevelGeometryAction)});
 }
 function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boolean(value);}
-function refreshOsmAdminTree(){if(!atlasTree||!hierarchyTree)return;const all=activeOsmAdminLevels.size===OSM_ADMIN_LEVELS.length+1;const nodes=nistreniaView?.nodes||hierarchyNodeById;atlasTree.setVisibleIds(all?null:osmTreeVisibleIds(nodes,nistreniaView?.rootIds||hierarchyTree.root_ids,activeOsmAdminLevels,{entityById,osmRoleById}));}
+// WEB-R2c.1.1: feedback reflects only validated full-tree node IDs, never checked polygons.
+function osmTreeFeedback(summary){
+ atlasFilters?.setOsmTreeSummary(summary);
+ const empty=document.getElementById('hierarchy-empty');
+ if(!empty)return;
+ const none=summary.visibleIds.size===0;
+ empty.hidden=!none;
+ empty.textContent=none?(activeOsmAdminLevels.size===0
+  ?'Niciun nivel OSM selectat. Arborele este gol, dar geometriile nu au fost șterse. Selectează un nivel sau apasă «Toate nivelurile în arbore».' 
+  :'Nu există rânduri potrivite filtrelor curente. Modifică nivelurile OSM sau celelalte filtre.'):'';
+}
+function osmTreeSummary(){
+ return osmTreeFilterSummary(nistreniaView?.nodes||hierarchyNodeById,nistreniaView?.rootIds||hierarchyTree.root_ids,activeOsmAdminLevels,{entityById,osmRoleById});
+}
+function refreshOsmAdminTree(){
+ if(!atlasTree||!hierarchyTree)return;
+ const summary=osmTreeSummary();
+ const all=activeOsmAdminLevels.size===OSM_ADMIN_LEVELS.length+1;
+ atlasTree.setVisibleIds(all?null:summary.visibleIds);
+ osmTreeFeedback(summary);
+}
 function resetGlobalFilters(){
  activeOsmAdminLevels.clear();for(const level of [...OSM_ADMIN_LEVELS,OSM_UNKNOWN])activeOsmAdminLevels.add(level);
  activeGeometryClasses.clear();for(const id of Object.keys(geometryLabels))activeGeometryClasses.add(id);
@@ -524,6 +544,7 @@ function renderHierarchyTree(){
   if(nistreniaOutlines?.has(selectedEntityId))renderNistreniaDetails(selectedEntityId);else renderDetails(entityById.get(selectedEntityId));
   updateSelectionVisibility();
  }
+ osmTreeFeedback(osmTreeSummary());
 }
 function selectedPath(id){
  if(!hierarchyTree)return [];
