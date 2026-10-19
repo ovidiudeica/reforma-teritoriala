@@ -165,6 +165,7 @@ try{
 }catch(error){report.status='FAIL';report.failures.push({stage:'runner',error:String(error?.stack||error)});process.exitCode=1;}
 finally{
  report.finishedAt=new Date().toISOString();
+ for(const failure of report.failures)console.error('WEB-R2c.3.0.2 DIAGNOSTIC '+JSON.stringify(failure));
  await mkdir(output,{recursive:true});
  await writeFile(path.join(output,'report.json'),JSON.stringify(report,null,2)+'\n');
  console.log('WEB-R2c.3.0.2 RESULT '+JSON.stringify({status:report.status,browser:report.browser,samples:report.samples.length,failures:report.failures.length,summary:report.summary}));
