@@ -100,7 +100,7 @@ try{
    assert.deepEqual(current.osm,initial.osm);
    assert.equal(current.selection,initial.selection);
    await clickAction(2);current=await state();
-   assert.equal(current.source,'undo');
+   assert.equal(current.source,'show','Undo is disabled after use; focus returns to a stable OSM command');
    assert.deepEqual(current.geometry,initial.geometry);
    assert.deepEqual(current.ni,initial.ni);
    assert.deepEqual(current.osm,initial.osm);
