@@ -4,6 +4,11 @@ on:
     branches: [main]
     paths:
       - scripts/audit/web-r2c302-cdp-browser.mjs
+      - scripts/audit/helpers/performance-navigation.mjs
+      - scripts/audit/helpers/performance-source.mjs
+      - scripts/audit/helpers/performance-output.mjs
+      - scripts/test/frontend-performance-navigation.test.mjs
+      - scripts/test/helpers/atlas-browser.mjs
       - .github/workflows/web-r2c302-cdp-performance.yml
   push:
     branches: [audit/web-r2c3-0-performance-readonly]
@@ -33,6 +38,7 @@ jobs:
           git status --porcelain
           google-chrome --version
           node --check scripts/audit/web-r2c302-cdp-browser.mjs
+          node --test scripts/test/frontend-performance-navigation.test.mjs
       - name: Read-only Chromium/CDP performance matrix
         run: node scripts/audit/web-r2c302-cdp-browser.mjs
       - name: Verify report provenance matches the tested commit

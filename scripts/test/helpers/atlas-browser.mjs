@@ -20,9 +20,10 @@ export function browserExecutable(){
  if(!found)throw Error('No installed Chromium browser at an allowed location. No automatic downloads.');
  return found;
 }
-export async function staticServer(root){
+export async function staticServer(root,{cacheControl='no-store'}={}){
+ if(!['no-store','public, max-age=600'].includes(cacheControl))throw Error('Unsupported audit cache policy');
  const mime={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.geojson':'application/geo+json','.png':'image/png','.svg':'image/svg+xml'};
- const server=createServer(async(req,res)=>{try{const url=new URL(req.url,'http://localhost');const file=path.resolve(root,'.'+decodeURIComponent(url.pathname));if(!file.startsWith(path.resolve(root)+path.sep)&&file!==path.resolve(root))throw Error('Outside root');const info=await stat(file);const target=info.isDirectory()?path.join(file,'index.html'):file;res.writeHead(200,{'Content-Type':mime[path.extname(target)]||'application/octet-stream','Cache-Control':'no-store'});res.end(await readFile(target));}catch{res.writeHead(404);res.end('Not found');}});
+ const server=createServer(async(req,res)=>{try{const url=new URL(req.url,'http://localhost');const file=path.resolve(root,'.'+decodeURIComponent(url.pathname));if(!file.startsWith(path.resolve(root)+path.sep)&&file!==path.resolve(root))throw Error('Outside root');const info=await stat(file);const target=info.isDirectory()?path.join(file,'index.html'):file;res.writeHead(200,{'Content-Type':mime[path.extname(target)]||'application/octet-stream','Cache-Control':cacheControl});res.end(await readFile(target));}catch{res.writeHead(404);res.end('Not found');}});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));return {url:'http://127.0.0.1:'+server.address().port,close:()=>new Promise(resolve=>server.close(resolve))};
 }
 export class Page{
@@ -109,8 +110,8 @@ export class Page{
  async screenshot(file){await mkdir(path.dirname(file),{recursive:true});const result=await this.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await writeFile(file,Buffer.from(result.data,'base64'));}
  async close(){if(this.closed)return;this.closed=true;await fetch(this.endpoint+'/json/close/'+this.targetId).catch(()=>{});this.socket.close();}
 }
-export async function launchBrowser(root){
- const executable=browserExecutable(),profile=await mkdtemp(path.join(tmpdir(),'atlas-browser-')),server=await staticServer(root);
+export async function launchBrowser(root,{cacheControl='no-store'}={}){
+ const executable=browserExecutable(),profile=await mkdtemp(path.join(tmpdir(),'atlas-browser-')),server=await staticServer(root,{cacheControl});
  if(!path.isAbsolute(profile)||!profile.startsWith(path.join(tmpdir(),'atlas-browser-')))throw Error('Unexpected temporary profile path');
  const child=spawn(executable,['--headless=new','--remote-debugging-port=0','--remote-allow-origins=*','--no-first-run','--no-default-browser-check','--disable-dev-shm-usage','--user-data-dir='+profile,'about:blank'],{windowsHide:true,stdio:['ignore','ignore','pipe']});let stderr='';child.stderr.on('data',data=>stderr+=data);
  const cleanup=async()=>{child.kill();await server.close();await delay(300);await rm(profile,{recursive:true,force:true,maxRetries:5,retryDelay:300}).catch(()=>{});};
