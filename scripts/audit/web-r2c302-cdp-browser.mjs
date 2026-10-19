@@ -141,13 +141,32 @@ async function exercise(page,profile,sample){
  await add('back');await waitFor(()=>state(page).then(x=>x.ni.length===1),'History Back NI',15000);
  await add('forward');await waitFor(()=>state(page).then(x=>x.ni.length===8),'History Forward NI',15000);
  await add('back');await waitFor(()=>state(page).then(x=>x.ni.length===1),'History recovery before next sample',15000);
+ if(sample===2){
+  const cycles=[];
+  for(let k=0;k<20;k++){
+   const start=performance.now();await timed(page,'forward');await waitFor(()=>state(page).then(x=>x.ni.length===8),'History stress Forward',15000);
+   const forwardVerifiedMs=performance.now()-start,backStart=performance.now();await timed(page,'back');await waitFor(()=>state(page).then(x=>x.ni.length===1),'History stress Back',15000);
+   cycles.push({cycle:k+1,forwardVerifiedMs,backVerifiedMs:performance.now()-backStart});
+  }
+  report.samples.push({profile,sample,kind:'history-stress',timingBasis:'driver call through verified state, includes CDP transport',cycles});
+ }
  await add('panel-close');
  for(const zoom of [7,10,6]){await add('zoom',zoom);await delay(500);}
  await add('basemap');await add('basemap');
  const post=await state(page);assert.deepEqual(post.roMd,pre.roMd);assert.deepEqual(post.ni,pre.ni);
- const beforeHeap=await heap(page);
- for(let k=0;k<10;k++){await add('panel-open','entities');await add('panel-close');}
+ await delay(300);const beforeHeap=await heap(page);
+ for(let k=0;k<20;k++){await add('panel-open','entities');await add('panel-close');}
+ await delay(300);
  const afterHeap=await heap(page);
+ if(sample===2){
+  const series=[{cycles:0,heap:beforeHeap},{cycles:20,heap:afterHeap}];let completed=20;
+  for(const total of [40,80,160]){
+   // One compiled CDP function per block isolates app retention from repeated driver-function compilation.
+   await page.call(async function(count){const frame=()=>new Promise(resolve=>requestAnimationFrame(resolve));for(let i=0;i<count;i++){qaApp.atlasPanels.open('entities',{focus:false});await frame();await frame();qaApp.atlasPanels.close({focus:false});await frame();await frame();}},total-completed);
+   await delay(300);series.push({cycles:total,heap:await heap(page),metrics:await browserMetrics(page)});completed=total;
+  }
+  report.samples.push({profile,sample,kind:'panel-memory-stress',series});
+ }
  report.samples.push({profile,sample,traceEnabled:sample===1,kind:'interaction',actions,heapAfterScenario:beforeHeap,heapAfterPanelCycles:afterHeap,finalMetrics:await browserMetrics(page),consoleExceptions:page.errors.length});
  if(sample===1)await page.screenshot(path.join(output,profile+'-after.png'));
 }
