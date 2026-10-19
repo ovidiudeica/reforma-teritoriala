@@ -79,7 +79,7 @@ if(!actualBind)die('release manifest does not bind public ACTUAL index');
 if(sha(raw[INPUTS[0]])!==actualBind.sha256)die('ACTUAL public index SHA-256 mismatch');
 if(actualBind.bytes!=null&&raw[INPUTS[0]].length!==actualBind.bytes)die('ACTUAL public index byte length mismatch');
 if(sha(raw[INPUTS[4]])!==outlineManifest.file_sha256)die('NI outline package SHA-256 mismatch');
-if(nav.source!=='docs/p9.0.7.2.15-osm-semantic-reconciliation.json'||nav.source_ledger_sha256!==sha(raw[INPUTS[10]]))die('NI navigation source ledger mismatch');
+if(nav.source!=='docs/p9.0.7.2.15-osm-semantic-reconciliation.json'||nav.source_ledger_sha256!==reconciliation.upstream_verified_geometry_ledger_sha256)die('NI navigation upstream verified geometry ledger mismatch');
 if(reconciliation.total!==85)die('semantic reconciliation total != 85');
 
 let changed=[];
