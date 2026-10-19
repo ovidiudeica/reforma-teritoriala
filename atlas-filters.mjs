@@ -1,7 +1,8 @@
+import {OSM_ADMIN_LEVELS,OSM_UNKNOWN} from './atlas-osm-admin-filter.mjs';
 import {geometryParentState,setGeometryGroup,setGeometrySubtype} from './geometry-taxonomy.mjs';
 
 export function createAtlasFilters({container,document,index,state,onChange,onSeparate}){
- const parents=new Map(),children=new Map(),levels=new Map();
+ const parents=new Map(),children=new Map(),levels=new Map(),osmLevels=new Map();
  let separate;
  const row=(label,count,kind,id)=>{
   const item=document.createElement('label');item.className='filter-row';
@@ -45,6 +46,9 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
    wrapper.appendChild(disclosure);el.appendChild(wrapper);
   }
  }
+ const {el:osmSection}=section('Nivel administrativ OSM',enabled=>{for(const level of [...OSM_ADMIN_LEVELS,OSM_UNKNOWN]){if(enabled)state.osmAdminLevels.add(level);else state.osmAdminLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
+ const osmIntro=document.createElement('p');osmIntro.className='hint';osmIntro.textContent='Restrânge doar rândurile arborelui. Nu modifică bifele sau geometriile; nivelurile statistice sunt independente.';osmSection.appendChild(osmIntro);
+ for(const level of [...OSM_ADMIN_LEVELS,OSM_UNKNOWN]){const label=level===OSM_UNKNOWN?'Fără nivel OSM verificat':'Nivel OSM '+level;const item=row(label,'', 'osm-admin-level',level);osmLevels.set(level,item.input);item.input.addEventListener('change',()=>{if(item.input.checked)state.osmAdminLevels.add(level);else state.osmAdminLevels.delete(level);sync();onChange();});osmSection.appendChild(item.item);}
  const statKeys=[1,2,3,...(index.statisticalCounts.has('unclassified')?['unclassified']:[])];
  const {el:stats}=section('Niveluri statistice',enabled=>{for(const level of statKeys){if(enabled)state.statisticalLevels.add(level);else state.statisticalLevels.delete(level);}},[['Toate nivelurile',true],['Niciun nivel',false]]);
  const intro=document.createElement('p');intro.className='hint statistical-filter-note';intro.textContent='Nivelurile controlează toate cele '+index.statisticalRoles+' entități cu rol statistic. Cele '+index.reusedStatistical+' entități coalesced reutilizează geometria administrativă existentă, fără duplicare; cele '+index.statisticalOnly+' limite separate sunt controlate și de comutatorul de mai jos.';stats.appendChild(intro);
@@ -67,8 +71,9 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
   for(const g of index.groups){const input=parents.get(g.id);Object.assign(input,geometryParentState(g,state));}
   for(const [id,{input,group}] of children)input.checked=state.geometryClasses.has(group.id)&&state.geometrySubtypes.has(id);
   for(const [level,input] of levels)input.checked=state.statisticalLevels.has(level);
+  for(const [level,input] of osmLevels)input.checked=state.osmAdminLevels.has(level);
   separate.checked=state.separateStatisticalGeometry;
  }
  sync();
- return {sync,parents,children,levels,separate};
+ return {sync,parents,children,levels,osmLevels,separate};
 }
