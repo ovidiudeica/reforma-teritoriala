@@ -63,11 +63,18 @@ async function heap(page){
  const m=await page.send('Performance.getMetrics');
  return {usedSize:h.usedSize,totalSize:h.totalSize,metrics:Object.fromEntries(m.metrics.filter(x=>['Nodes','JSHeapUsedSize','LayoutCount','RecalcStyleCount','TaskDuration'].includes(x.name)).map(x=>[x.name,x.value]))};
 }
+async function heapSnapshot(page,file){
+ const chunks=[],listener=event=>{const value=JSON.parse(event.data);if(value.method==='HeapProfiler.addHeapSnapshotChunk')chunks.push(value.params.chunk);};
+ page.socket.addEventListener('message',listener);
+ try{await page.send('HeapProfiler.takeHeapSnapshot');await writeFile(file,chunks.join(''));}
+ finally{page.socket.removeEventListener('message',listener);}
+}
 async function browserMetrics(page){
  return page.call(function(){
   const nav=performance.getEntriesByType('navigation')[0],paint=performance.getEntriesByType('paint');
   const tree=document.querySelector('#hierarchy-tree');
   return {navigationMs:nav?.duration??null,dclMs:nav?.domContentLoadedEventEnd??null,fcpMs:paint.find(x=>x.name==='first-contentful-paint')?.startTime??null,
+   frontendReadyObservedMs:globalThis.__atlasPerfReadyObservedMs??null,
    domNodes:document.querySelectorAll('*').length,treeMounted:tree?.querySelectorAll('.tree-node').length??null,treeVisible:qaApp.atlasTree.getVisibleCount(),
    svgPaths:document.querySelectorAll('.leaflet-overlay-pane path').length,
    resourceEntries:performance.getEntriesByType('resource').length,
@@ -166,6 +173,13 @@ async function exercise(page,profile,sample){
    await delay(300);series.push({cycles:total,heap:await heap(page),metrics:await browserMetrics(page)});completed=total;
   }
   report.samples.push({profile,sample,kind:'panel-memory-stress',series});
+  if(profile==='desktop'){
+   await heapSnapshot(page,path.join(output,'desktop-panel-160.heapsnapshot'));
+   await page.call(async function(){const frame=()=>new Promise(resolve=>requestAnimationFrame(resolve));for(let i=0;i<160;i++){qaApp.atlasPanels.open('entities',{focus:false});await frame();await frame();qaApp.atlasPanels.close({focus:false});await frame();await frame();}});
+   await delay(300);const at320={cycles:320,heap:await heap(page),metrics:await browserMetrics(page)};
+   await heapSnapshot(page,path.join(output,'desktop-panel-320.heapsnapshot'));
+   report.samples.push({profile,sample,kind:'panel-heap-snapshot-comparison',before:series.at(-1),after:at320,snapshots:['desktop-panel-160.heapsnapshot','desktop-panel-320.heapsnapshot']});
+  }
  }
  report.samples.push({profile,sample,traceEnabled:sample===1,kind:'interaction',actions,heapAfterScenario:beforeHeap,heapAfterPanelCycles:afterHeap,finalMetrics:await browserMetrics(page),consoleExceptions:page.errors.length});
  if(sample===1)await page.screenshot(path.join(output,profile+'-after.png'));
@@ -223,6 +237,7 @@ try{
     await waitFor(()=>page.call(function(){return qaApp.entityById.size===5848&&qaApp.osmRoleById.size===85&&qaApp.nistreniaOutlines?.layers?.size===8;}),'RO/MD/NI ready');
     const loaded=await browserMetrics(page);
     assert.equal(loaded.entities,5848);assert.equal(loaded.roles,85);assert.equal(loaded.niOutlines,8);
+    assert.ok(Number.isFinite(loaded.frontendReadyObservedMs),'Application readiness milestone was not observed');
     const initial=await state(page);
     assert.deepEqual(initial.roMd,['osm-r58974','osm-r90689']);
     assert.deepEqual(initial.ni,['view-nistrenia']);
@@ -236,7 +251,8 @@ try{
     network.reset();
     await navigatePerformanceProfile(page,browser.server.url+'/',width,height);
     const warmNetwork=networkSummary(network.data(),browser.server.url);assert.deepEqual(warmNetwork.ownHttpErrors,[],'Self-hosted warm-load requests must succeed');
-    report.samples.push({profile:label,sample:iteration,traceEnabled:iteration===1,kind:'warm-load',metrics:await browserMetrics(page),heap:await heap(page),network:warmNetwork});
+    const warmMetrics=await browserMetrics(page);assert.ok(Number.isFinite(warmMetrics.frontendReadyObservedMs),'Warm application readiness milestone was not observed');
+    report.samples.push({profile:label,sample:iteration,traceEnabled:iteration===1,kind:'warm-load',metrics:warmMetrics,heap:await heap(page),network:warmNetwork});
     await writeFile(path.join(output,label+'-'+iteration+'-warm-network.json'),JSON.stringify(network.data(),null,2));
     {
      await exercise(page,label,iteration);
@@ -254,7 +270,9 @@ try{
  const navigation=Object.fromEntries([...new Set(report.samples.filter(s=>s.kind==='cold-load').map(s=>s.profile))].map(p=>[p,stats(report.samples.filter(s=>s.kind==='cold-load'&&!s.traceEnabled&&s.profile===p).map(s=>s.metrics.navigationMs))]));
  const warmNavigation=Object.fromEntries([...new Set(report.samples.filter(s=>s.kind==='warm-load').map(s=>s.profile))].map(p=>[p,stats(report.samples.filter(s=>s.kind==='warm-load'&&!s.traceEnabled&&s.profile===p).map(s=>s.metrics.navigationMs))]));
  report.env.percentilesExcludeTracedSamples=true;
- report.summary={actionLatency:Object.fromEntries([...groups].map(([name,values])=>[name,stats(values)])),navigation,warmNavigation};
+ const ready=Object.fromEntries(['cold-load','warm-load'].map(kind=>[kind,Object.fromEntries(Object.keys(navigation).map(p=>[p,stats(report.samples.filter(s=>s.kind===kind&&!s.traceEnabled&&s.profile===p).map(s=>s.metrics.frontendReadyObservedMs))]))]));
+ report.summary={actionLatency:Object.fromEntries([...groups].map(([name,values])=>[name,stats(values)])),navigation,warmNavigation,frontendReadyObserved:ready};
+ report.env.readinessBasis='frontendReady observed after DOMContentLoaded via cached module import; upper bound on export readiness, not standardized TTI';
  report.status=report.failures.length?'FAIL':'PASS';
  console.log('WEB-R2c.3.0.2 TELEMETRY '+JSON.stringify(report.samples.filter(x=>['cold-load','post-interaction-network'].includes(x.kind)).map(x=>({profile:x.profile,sample:x.sample,kind:x.kind,navMs:x.metrics?.navigationMs,resourceEntries:x.metrics?.resourceEntries,domNodes:x.metrics?.domNodes,treeMounted:x.metrics?.treeMounted,heapUsedBytes:x.heap?.usedSize,requestCount:x.network?.requestCount,transferBytesCDP:x.network?.transferBytesCDP,geometryRequests:x.network?.geometryRequestCount,geometryUniqueUrls:x.network?.geometryUniqueUrls,geometryRepeated:x.network?.geometryRepeatedUrls?.length,ownHttpErrors:x.network?.ownHttpErrors?.length}))));
  console.log('WEB-R2c.3.0.2 MEMORY_CYCLES '+JSON.stringify(report.samples.filter(x=>x.kind==='interaction').map(x=>({profile:x.profile,sample:x.sample,heapAfterScenario:x.heapAfterScenario?.usedSize,heapAfterPanelCycles:x.heapAfterPanelCycles?.usedSize,deltaBytes:(x.heapAfterPanelCycles?.usedSize??0)-(x.heapAfterScenario?.usedSize??0)}))));

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 export async function navigatePerformanceProfile(page,url,width,height){
  for(const value of [width,height])assert.ok(Number.isSafeInteger(value)&&value>0&&value<=16384,'Invalid performance viewport');
  await page.send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<900});
- const {identifier}=await page.send('Page.addScriptToEvaluateOnNewDocument',{source:"document.addEventListener('DOMContentLoaded',()=>{globalThis.__atlasPerfDocumentViewport={width:innerWidth,height:innerHeight,mobile:matchMedia('(max-width: 899px)').matches};},{once:true});"});
+ const {identifier}=await page.send('Page.addScriptToEvaluateOnNewDocument',{source:"document.addEventListener('DOMContentLoaded',()=>{globalThis.__atlasPerfDocumentViewport={width:innerWidth,height:innerHeight,mobile:matchMedia('(max-width: 899px)').matches};import('./app.js').then(async module=>{await module.frontendReady;globalThis.__atlasPerfReadyObservedMs=performance.now();});},{once:true});"});
  try{
   await page.navigate(url);
   await page.viewport(width,height);

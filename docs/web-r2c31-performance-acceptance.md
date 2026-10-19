@@ -10,7 +10,13 @@ Matrice preliminară [39331515663](https://github.com/ovidiudeica/reforma-terito
 
 Nu există erori HTTP proprii sau cereri geometrice repetate în scenariile măsurate. Cele trei evenimente externe de eșec sunt `net::ERR_ABORTED` cu `canceled=true` în timpul înlocuirii tile-urilor OSM; datele brute sunt păstrate. Timpii History din distribuția inițială includ două frame-uri, iar verificarea restaurării urmează separat; seria de stres măsoară până la starea verificată și etichetează explicit costul transportului CDP.
 
-Trace-urile arată că o parte importantă a duratelor mari aparține GC forțat de audit, nu interacțiunilor utilizatorului. Primul profil desktop include evaluare inițială de modul ~338 ms și layout ~103 ms. Aceste eșantioane cu tracing sunt separate de percentile. Creșterile observate după primele cicluri de panouri sunt investigate prin seria de retenție; nu sunt declarate automat leak și nici eliminate din dovezi.
+Trace-urile arată că o parte importantă a duratelor mari aparține GC forțat de audit, nu interacțiunilor utilizatorului. Primul profil desktop include evaluare inițială de modul ~338 ms și layout ~103 ms. Aceste eșantioane cu tracing sunt separate de percentile.
+
+Matricea de stres [39332407197](https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39332407197) PASS pe `d72c1c15a44741baf6896fb0b4078266a59fa977`: 108 înregistrări, câte 20 cicluri History forward/back verificate în toate cele patru profiluri. Pentru seriile panourilor 0/20/40/80/160, numărul total Chrome Nodes rămâne exact 3179 desktop, 3064 mobil portrait, 3082 tabletă și 3064 landscape. Heap crește între 0 și 160 cu 489.740 / 104.364 / 102.852 / 120.412 octeți. DOM-ul montat rămâne 734 / 718 / 718 / 716. Acest rezultat nu dovedește un leak DOM; retenția JS este investigată suplimentar prin snapshoturi V8 desktop la 160 și 320 de cicluri. Verdictul aplicației rămâne OPEN până la atribuirea rezultatului.
+
+Au fost inspectate cele opt capturi before/after desktop, mobil portrait, tabletă portrait și mobil landscape. Starea after aplică intenționat zoomul 6 și închide panoul, deci nu este o diferență vizuală a codului aplicației față de before. Comenzile, contururile și navigarea sunt vizibile; nu s-a modificat UX.
+
+Măsurarea `frontendReadyObservedMs` observă promisiunea exportată de aplicație după DOMContentLoaded, separat de NavigationTiming și de întârzierile de stabilizare ale harness-ului. Este o limită observată a disponibilității exportului, nu o afirmație de TTI standardizat.
 
 RM-003 adaugă verificarea surselor urmărite curate. RM-004 remediază patru alerte CodeQL pentru căile artefactelor, cu țintă de scriere constantă și teste adversariale. CodeQL pe `e6322812daf98d256871e5d061758974f22689de` raportează zero alerte noi (check 118332554642).
 
