@@ -1,0 +1,41 @@
+name: WEB-R2b final live Pages E2E audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/web-r2b-final-live-e2e.yml'
+      - 'scripts/audit/web-r2b-final-pages-browser.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit-published-pages:
+    name: Read-only Chromium desktop/mobile live audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    env:
+      BROWSER_EXECUTABLE: /usr/bin/google-chrome
+      ATLAS_LIVE_URL: https://ovidiudeica.github.io/reforma-teritoriala/
+      ATLAS_E2E_OUTPUT: outputs/WEB-R2b-final-live
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Assert main and deployed ACTUAL stay immutable
+        run: |
+          node --check scripts/audit/web-r2b-final-pages-browser.mjs
+          google-chrome --version
+      - name: Audit actual published Pages in real Chromium
+        run: node scripts/audit/web-r2b-final-pages-browser.mjs
+      - name: Validate test run left all tracked files unchanged
+        if: always()
+        run: git diff --exit-code
+      - name: Preserve report and Chromium screenshots even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: web-r2b-final-pages-evidence
+          path: outputs/WEB-R2b-final-live/
+          if-no-files-found: warn
+          retention-days: 30
