@@ -28,6 +28,7 @@ import {createAtlasSearch,createSearchIndex,typeLabel} from './atlas-search.mjs'
 import {createAtlasFilters} from './atlas-filters.mjs';
 import {ancestorPath,createAtlasTree} from './atlas-tree.mjs';
 import {osmLevelForTreeNode} from './atlas-osm-admin-badges.mjs';
+import {OSM_ADMIN_LEVELS,OSM_UNKNOWN,allOsmLevelFilters,osmTreeVisibleIds} from './atlas-osm-admin-filter.mjs';
 import {validateConsolidatedHierarchy} from './atlas-hierarchy-validate.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
 import {geometryClass,geometrySubtype,geometryVisible,geometryLabels,geometrySubtypeLabels,createGeometryFilterIndex} from './geometry-taxonomy.mjs';
@@ -111,6 +112,7 @@ function updateFilterCount(){
  const inactive=(geometryFilterIndex?.groups||[]).filter(group=>!activeGeometryClasses.has(group.id)).length+
   [...geometryFilterIndex?.subtypeMembers?.keys?.()||[]].filter(id=>!activeGeometrySubtypes.has(id)).length+
   [1,2,3,'unclassified'].filter(level=>!activeStatisticalLevels.has(level)).length+
+  [...OSM_ADMIN_LEVELS,OSM_UNKNOWN].filter(level=>!activeOsmAdminLevels.has(level)).length+
   ['RO','MD'].filter(j=>document.getElementById('layer-'+j.toLowerCase())?.checked===false).length+
   Number(Boolean(nistreniaView&&!document.getElementById('layer-ni')?.checked))+
   Number(!separateStatisticalGeometry);
@@ -118,6 +120,7 @@ function updateFilterCount(){
  const reset=document.getElementById('filters-reset');if(reset)reset.disabled=inactive===0;
 }
 const activeStatisticalLevels=new Set([1,2,3,'unclassified']);
+const activeOsmAdminLevels=allOsmLevelFilters();
 let separateStatisticalGeometry=true;
 const statisticalGroups={RO:L.layerGroup(),MD:L.layerGroup()};
 let selectedEntityId=null;
@@ -320,13 +323,15 @@ function updateJurisdictionStatus(){
 }
 
 function renderFilters(){
- const state={geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,
+ const state={geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,osmAdminLevels:activeOsmAdminLevels,
   get separateStatisticalGeometry(){return separateStatisticalGeometry;}};
  atlasFilters=createAtlasFilters({container:document.getElementById('filter-list'),document,index:geometryFilterIndex,state,
-  onSeparate:setSeparateStatisticalGeometry,onChange:()=>{refreshGeometryVisibility();atlasUrl?.commit('push');}});
+  onSeparate:setSeparateStatisticalGeometry,onChange:()=>{refreshOsmAdminTree();refreshGeometryVisibility();atlasUrl?.commit('push');}});
 }
 function setSeparateStatisticalGeometry(value){separateStatisticalGeometry=Boolean(value);}
+function refreshOsmAdminTree(){if(!atlasTree||!hierarchyTree)return;const all=activeOsmAdminLevels.size===OSM_ADMIN_LEVELS.length+1;const nodes=nistreniaView?.nodes||hierarchyNodeById;atlasTree.setVisibleIds(all?null:osmTreeVisibleIds(nodes,nistreniaView?.rootIds||hierarchyTree.root_ids,activeOsmAdminLevels,{entityById,osmRoleById}));}
 function resetGlobalFilters(){
+ activeOsmAdminLevels.clear();for(const level of [...OSM_ADMIN_LEVELS,OSM_UNKNOWN])activeOsmAdminLevels.add(level);
  activeGeometryClasses.clear();for(const id of Object.keys(geometryLabels))activeGeometryClasses.add(id);
  activeGeometrySubtypes.clear();for(const id of Object.keys(geometrySubtypeLabels))activeGeometrySubtypes.add(id);
  for(const id of geometryFilterIndex?.subtypeMembers?.keys?.()||[])activeGeometrySubtypes.add(id);
@@ -338,7 +343,7 @@ function resetGlobalFilters(){
  }
  const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=Boolean(nistreniaView);
  syncJurisdictionRoots();
- refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
+ refreshOsmAdminTree();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
 }
 function refreshGeometryVisibility(){
  syncGeometryReset();
@@ -493,6 +498,7 @@ function renderHierarchyTree(){
  atlasTree=createAtlasTree({
   container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
   getOsmAdminLevel:node=>osmLevelForTreeNode(node,{entityById,osmRoleById}),
+  visibleIds:activeOsmAdminLevels.size===OSM_ADMIN_LEVELS.length+1?null:osmTreeVisibleIds(nistreniaView?.nodes||hierarchyNodeById,nistreniaView?.rootIds||hierarchyTree.root_ids,activeOsmAdminLevels,{entityById,osmRoleById}),
   isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
    if(nistreniaOutlines?.has(id)){
@@ -806,13 +812,13 @@ async function applySelection(id,options=false,clickedLayer=null){
 function captureUrlState(){
  const current=map.getCenter?.()||{lat:defaultViewport.lat,lng:defaultViewport.lon};
  const center=map.wrapLatLng?.(current)||current;
- return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds,visibleOperationalOutlineIds};
+ return {osmBasemapVisible,entityId:selectedEntityId,viewport:{lat:center.lat,lon:center.lng,z:map.getZoom()},viewportExplicit:true,jurisdictions:['RO','MD','NI'].filter(j=>Boolean(document.getElementById('layer-'+j.toLowerCase())?.checked)),geometryClasses:activeGeometryClasses,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,osmAdminLevels:activeOsmAdminLevels,separateStatisticalGeometry,openIds:atlasTree.getOpenIds(),visibleEntityIds,visibleOperationalOutlineIds};
 }
 async function applyUrlState(state){
  const replace=(target,values)=>{target.clear();for(const value of values)target.add(value);};
- replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(visibleEntityIds,state.visibleEntityIds);replace(visibleOperationalOutlineIds,state.visibleOperationalOutlineIds||[]);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
+ replace(activeGeometryClasses,state.geometryClasses);replace(activeGeometrySubtypes,state.geometrySubtypes);replace(activeStatisticalLevels,state.statisticalLevels);replace(activeOsmAdminLevels,state.osmAdminLevels);replace(visibleEntityIds,state.visibleEntityIds);replace(visibleOperationalOutlineIds,state.visibleOperationalOutlineIds||[]);setSeparateStatisticalGeometry(state.separateStatisticalGeometry);setOsmBasemapVisible(state.osmBasemapVisible);
  for(const j of ['RO','MD','NI']){const control=document.getElementById('layer-'+j.toLowerCase());if(control)control.checked=state.jurisdictions.includes(j)&&!(j==='NI'&&!nistreniaView);}syncJurisdictionRoots();
- atlasTree.setOpenIds(state.openIds);refreshGeometryVisibility();
+ atlasTree.setOpenIds(state.openIds);refreshOsmAdminTree();refreshGeometryVisibility();
  if(!state.viewportExplicit&&!state.entityId&&typeof map.getSize==='function')fitRoMd(map,entityById);
   else map.setView([state.viewport.lat,state.viewport.lon],state.viewport.z,{animate:false});
  if(state.entityId)await selectEntity(state.entityId,{source:'url',zoom:!state.viewportExplicit});else clearSelection();
