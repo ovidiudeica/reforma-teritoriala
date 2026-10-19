@@ -1,0 +1,392 @@
+{
+  "schema": "web-r2c1-ux-ui-specification-v1",
+  "stage": "WEB-R2c.1",
+  "status": "SPECIFICATION_PROPOSED_NOT_IMPLEMENTED",
+  "source_base_main_sha": "c2579eb593d7109fa7bbd94f55e02dcc441a61de",
+  "date_utc": "2026-10-19",
+  "historical_basis": {
+    "audit_report": "docs/web-r2c0-ux-audit-roadmap.md",
+    "audit_register": "docs/contracts/web-r2c0-ux-audit-register.json",
+    "prior_pr": 384,
+    "prior_merge_sha": "c2579eb593d7109fa7bbd94f55e02dcc441a61de",
+    "prior_ci_post_merge": {
+      "successful_workflows": 12,
+      "total_workflows": 12,
+      "successful_checks": 19,
+      "total_checks": 19
+    }
+  },
+  "interpretation": {
+    "existing_behaviors_are_not_new_features": true,
+    "proposed_copy_and_empty_state_are_not_deployed": true,
+    "prospective_acceptance_tests_are_not_executed": true,
+    "historic_browser_evidence_is_not_new_browser_validation": true,
+    "specification_does_not_authorize_implementation": true
+  },
+  "protected_semantics": {
+    "actual_snapshot_id": "actual-a9e5a4ddcb5277ef",
+    "actual_release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "actual_records": {
+      "RO": 3246,
+      "MD": 2602
+    },
+    "ni_operational_outlines": 8,
+    "ni_osm_reused_roles": 85,
+    "registered_records": 5941,
+    "actual_mutation_allowed": false,
+    "p91_import_allowed": false,
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "no_new_geometry": true,
+    "no_new_actual_identity": true,
+    "no_new_legal_attribution": true,
+    "no_admin_level_inference": true,
+    "default_selection_immutable": true
+  },
+  "domains": {
+    "F": {
+      "name": "osm_tree_row_filter",
+      "selected_levels": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        "unknown"
+      ],
+      "matching_rule": "OR within selected levels; keep ancestors required for navigation",
+      "changes_geometry_checkboxes": false,
+      "changes_statistical_filter": false
+    },
+    "G": {
+      "name": "geometry_checkbox_selection",
+      "eligible": "validated ACTUAL RO/MD geometries and NI owned outlines with selected numeric level",
+      "excluded": "85 NI reused-role aliases and unknown OSM level",
+      "requires_confirmed_plan": true,
+      "fail_closed_on_stale": true,
+      "atomic_application": true
+    },
+    "S": {
+      "name": "statistical_filter",
+      "independent_from_F": true,
+      "independent_from_G": true
+    },
+    "url": {
+      "osm_levels": "a",
+      "actual_checkbox_deltas": "x",
+      "ni_outline_checkbox_deltas": "o",
+      "statistical_levels": "s",
+      "tree_expansion": "t",
+      "selected_entity": "e",
+      "versions": [
+        1,
+        2
+      ],
+      "do_not_change_schema": true
+    }
+  },
+  "transitions": [
+    {
+      "event": "toggle_osm_level",
+      "may_change": [
+        "F",
+        "url.a"
+      ],
+      "must_not_change": [
+        "G",
+        "S",
+        "url.x",
+        "url.o"
+      ]
+    },
+    {
+      "event": "select_all_or_none_osm_levels",
+      "may_change": [
+        "F",
+        "url.a"
+      ],
+      "must_not_change": [
+        "G",
+        "S",
+        "url.x",
+        "url.o"
+      ]
+    },
+    {
+      "event": "expand_tree",
+      "may_change": [
+        "tree_navigation",
+        "url.t"
+      ],
+      "must_not_change": [
+        "G",
+        "S"
+      ]
+    },
+    {
+      "event": "select_entity",
+      "may_change": [
+        "selected_entity",
+        "url.e"
+      ],
+      "must_not_change": [
+        "G",
+        "S"
+      ]
+    },
+    {
+      "event": "preview_bulk_geometry",
+      "may_change": [
+        "ephemeral_preview"
+      ],
+      "must_not_change": [
+        "G",
+        "S",
+        "url.x",
+        "url.o"
+      ]
+    },
+    {
+      "event": "confirm_valid_bulk_geometry",
+      "may_change": [
+        "G",
+        "url.x",
+        "url.o",
+        "ephemeral_undo"
+      ],
+      "must_not_change": [
+        "F",
+        "S"
+      ]
+    },
+    {
+      "event": "cancel_or_stale_bulk_geometry",
+      "may_change": [
+        "status_message"
+      ],
+      "must_not_change": [
+        "G",
+        "S",
+        "url.x",
+        "url.o"
+      ]
+    },
+    {
+      "event": "undo_bulk_geometry",
+      "may_change": [
+        "G",
+        "url.x",
+        "url.o"
+      ],
+      "must_not_change": [
+        "F",
+        "S",
+        "later_manual_geometry_edits"
+      ]
+    },
+    {
+      "event": "back_forward_or_reload",
+      "may_change": [
+        "state_restored_from_url"
+      ],
+      "must_not_change": [
+        "actual_source",
+        "geometry_source"
+      ],
+      "invalidates_ephemeral_undo": true
+    }
+  ],
+  "counts": {
+    "M": {
+      "unit": "unique tree node ID",
+      "definition": "OSM level directly matches active numeric levels, or unknown when active",
+      "independent_of_tree_virtualization": true
+    },
+    "A": {
+      "unit": "unique tree node ID",
+      "definition": "ancestor included only to navigate to a matching descendant, excluding directly matching nodes",
+      "disjoint_from": "M"
+    },
+    "V": {
+      "unit": "unique tree node ID",
+      "definition": "union of matching nodes M and navigation-only ancestors A",
+      "invariant": "|V|=|M|+|A|",
+      "independent_of_expansion": true
+    },
+    "E": {
+      "unit": "unique checkbox geometry ID",
+      "definition": "eligible ACTUAL RO/MD + NI owned outline for confirmed numeric level; excludes NI aliases and unknown",
+      "breakdown": [
+        "RO",
+        "MD",
+        "NI"
+      ]
+    },
+    "C": {
+      "unit": "unique checkbox geometry ID",
+      "definition": "eligible geometries where checked differs from show/hide target",
+      "source": "planOsmLevelGeometryAction(...).changed",
+      "invariant": "C_RO + C_MD + C_NI = C_total",
+      "subset_of": "E"
+    },
+    "skipped_aliases": {
+      "unit": "reused NI role",
+      "not_eligible": true,
+      "not_geometry_change": true
+    },
+    "do_not_equate": [
+      "M",
+      "A",
+      "V",
+      "E",
+      "C",
+      "rendered_polygon_count",
+      "registered_records"
+    ],
+    "forbid_unvalidated_live_counter": true,
+    "label_tree": "În arbore: {M} potriviri și {A} strămoși de navigare",
+    "label_preview": "{C} bife de geometrie vor fi schimbate (RO {C_RO}, MD {C_MD}, contururi NI {C_NI})"
+  },
+  "copy_proposals": {
+    "status": "PROPOSED_NOT_DEPLOYED",
+    "filters_intro": "Filtrele pentru jurisdicții, tipuri și niveluri statistice controlează afișarea pe hartă fără să schimbe bifele entităților. Filtrul OSM controlează separat ce rânduri apar în arbore.",
+    "osm_intro": "Alege nivelurile afișate în arbore. Bifele geometriilor și nivelurile statistice nu se schimbă.",
+    "osm_select_all": "Toate nivelurile în arbore",
+    "osm_select_none": "Niciun nivel în arbore",
+    "osm_unknown": "Fără nivel OSM verificat",
+    "geometry_action_help": "Comenzile schimbă bifele geometriilor pentru nivelurile OSM numerice selectate, numai după confirmare. Sunt excluse rolurile NI reutilizate și categoria fără nivel verificat.",
+    "empty_no_osm_selection": "Niciun nivel OSM selectat. Arborele este gol, dar geometriile nu au fost șterse. Selectează un nivel sau apasă «Toate nivelurile în arbore».",
+    "empty_no_matches": "Nu există rânduri potrivite filtrelor curente. Modifică nivelurile OSM sau celelalte filtre.",
+    "stale": "Selecția sau bifele s-au schimbat. Verifică din nou domeniul operațiunii.",
+    "cancel": "Operațiunea a fost anulată. Bifele geometriilor nu s-au schimbat.",
+    "no_numeric_level": "Selectează cel puțin un nivel OSM numeric pentru o comandă asupra geometriilor. Categoria fără nivel verificat filtrează doar arborele."
+  },
+  "future_accessibility": {
+    "confirmation_is_currently_inline_group_not_modal": true,
+    "spec_requires_predictable_focus_entry_and_return": true,
+    "spec_requires_keyboard_trace": true,
+    "spec_requires_live_status_once": true,
+    "escape_implementation_not_assumed": true,
+    "include_zoom_200_percent": true,
+    "include_forced_colors": true,
+    "minimum_touch_target_css_px": 44,
+    "mobile_landscape_and_tablet_coverage_required": true
+  },
+  "future_performance": {
+    "tree_already_virtualized": true,
+    "baseline_before_budget": true,
+    "large_levels": [
+      8,
+      9
+    ],
+    "measurements": [
+      "preview_latency",
+      "confirm_latency",
+      "undo_latency",
+      "network_geometry_requests",
+      "duplicate_fetches",
+      "long_tasks",
+      "memory_if_available",
+      "changed_checkbox_count"
+    ],
+    "no_arbitrary_absolute_target": true
+  },
+  "finding_traceability": {
+    "UX-01": [
+      "domain F/G separation",
+      "copy_proposals",
+      "AC-01",
+      "AC-12"
+    ],
+    "UX-02": [
+      "counts M/A/V/E/C",
+      "AC-02",
+      "AC-03"
+    ],
+    "UX-03": [
+      "future_accessibility",
+      "AC-08"
+    ],
+    "UX-04": [
+      "copy_proposals.empty_no_osm_selection",
+      "copy_proposals.empty_no_matches",
+      "AC-07"
+    ],
+    "UX-05": [
+      "future_performance",
+      "AC-09"
+    ],
+    "UX-06": [
+      "future_accessibility",
+      "AC-08"
+    ],
+    "UX-07": [
+      "transitions.undo_bulk_geometry",
+      "transitions.back_forward_or_reload",
+      "AC-06"
+    ],
+    "UX-08": [
+      "copy_proposals.filters_intro",
+      "copy_proposals.osm_intro",
+      "AC-12"
+    ],
+    "GOV-01": [
+      "historical_basis",
+      "interpretation",
+      "AC-10"
+    ]
+  },
+  "acceptance_ids": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05",
+    "AC-06",
+    "AC-07",
+    "AC-08",
+    "AC-09",
+    "AC-10",
+    "AC-11",
+    "AC-12"
+  ],
+  "acceptance_status": "SPECIFIED_NOT_EXECUTED_FOR_NEW_UI",
+  "future_stages": [
+    {
+      "id": "WEB-R2c.1.1",
+      "kind": "copy_and_empty_state_optional",
+      "authorized": false
+    },
+    {
+      "id": "WEB-R2c.2",
+      "kind": "accessibility_and_responsive",
+      "authorized": false
+    },
+    {
+      "id": "WEB-R2c.3",
+      "kind": "performance_baseline_and_hardening",
+      "authorized": false
+    },
+    {
+      "id": "WEB-R2c.4",
+      "kind": "final_live_pages_acceptance",
+      "authorized": false
+    }
+  ],
+  "current_change_contract": {
+    "permitted_paths": [
+      "docs/web-r2c1-ux-ui-specification.md",
+      "docs/contracts/web-r2c1-ux-specification.json"
+    ],
+    "application_file_changes": 0,
+    "data_file_changes": 0,
+    "geometry_file_changes": 0,
+    "source_code_changes": 0,
+    "osmtags_changes": 0,
+    "approval": "SPECIFICATION_DOCUMENTATION_ONLY",
+    "merge_requires_exact_sha_ci_success": true,
+    "no_automatic_next_stage": true,
+    "no_paid_tinyfish": true
+  }
+}
