@@ -46,6 +46,7 @@ try{
     assert.deepEqual(filtered.checked,before.checkboxes,'filter never changes geometry checkbox state');
     assert.deepEqual(filtered.statistics,before.statistical,'statistical filters independent');
     assert.ok(new URLSearchParams(filtered.url).has('a'),'filter has canonical URL state');
+    await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.open=true;section.scrollIntoView({block:'center',behavior:'instant'});})()");
     await shot('web-r2b2-osm-level-3-'+w+'x'+h);
     await page.evaluate("(()=>{const section=[...document.querySelectorAll('#filter-list>details')].find(d=>d.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.querySelectorAll('button')[0].click();})()");
     assert.equal(await page.evaluate('qaApp.atlasTree.getVisibleCount()'),before.rows,'all levels restores expanded rows');
