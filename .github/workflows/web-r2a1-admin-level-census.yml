@@ -4,7 +4,7 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
   web-r2a1-admin-level-census:
     runs-on: ubuntu-24.04
@@ -33,18 +33,6 @@ jobs:
         run: |
           test -z "$(git diff --name-only 073a1ee2a2098392df5891fb6b15e69b0eef2d9c...HEAD -- data public)"
           git status --short
-      - name: Persist deterministic audit evidence once
-        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && hashFiles('docs/evidence/web-r2a1/sha256-manifest.json') == '' }}
-        env:
-          HEAD_REF: ${{ github.head_ref }}
-        run: |
-          mkdir -p docs/evidence/web-r2a1
-          cp "${{ runner.temp }}/web-r2a1/"* docs/evidence/web-r2a1/
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/evidence/web-r2a1
-          git commit -m "docs(web-r2a1): persist deterministic census evidence"
-          git push origin "HEAD:$HEAD_REF"
       - name: Upload deterministic WEB-R2a.1 evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
