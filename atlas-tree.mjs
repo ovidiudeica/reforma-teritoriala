@@ -81,10 +81,10 @@ export function revealInTree(container,button){
  container.scrollTop+=row.top-top-(container.clientHeight-row.height)/2;
 }
 
-export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},isGeometryVisible=()=>true,isEntityChecked=isGeometryVisible,onVisibilityChange=()=>{},getOsmAdminLevel=()=>null}){
+export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},isGeometryVisible=()=>true,isEntityChecked=isGeometryVisible,onVisibilityChange=()=>{},getOsmAdminLevel=()=>null,visibleIds=null}){
  const openIds=new Set(rootIds.filter(id=>hasChildren(nodeById,id))),rendered=new Map();
  const view=document.defaultView||globalThis;
- const layout=createTreeWindow(flattenVisibleTree(nodeById,rootIds,openIds));
+ const layout=createTreeWindow(flattenVisibleTree(nodeById,rootIds,openIds,visibleIds));
  let selected=null,active=rootIds[0],column=2,frame=null,width=0,destroyed=false;
  container.innerHTML='';container.setAttribute('role','treegrid');container.setAttribute('aria-label','Entități teritoriale');container.setAttribute('aria-colcount','3');
  const canvas=document.createElement('div');canvas.className='tree-window';container.appendChild(canvas);
@@ -106,7 +106,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   // Selection alone still scrolls only the virtual tree; enlarged text can make
   // its host overflow the contextual panel, which the height model cannot see.
   control.scrollIntoView?.({block:'nearest',inline:'nearest',behavior:'instant'});}
- function rebuild(){const saved=anchor(),focus=focused();layout.reset(flattenVisibleTree(nodeById,rootIds,openIds));
+ function rebuild(){const saved=anchor(),focus=focused();layout.reset(flattenVisibleTree(nodeById,rootIds,openIds,visibleIds));
   if(layout.indexOf(active)<0){let id=active;while(id&&layout.indexOf(id)<0)id=nodeById.get(id)?.parent_id;active=id||layout.rows[0]?.id;}
   restoreAnchor(saved);render();if(focus&&layout.indexOf(focus.id)<0&&active)focusRow(active,focus.col);}
  function toggle(id){if(!hasChildren(nodeById,id))return;if(openIds.has(id))openIds.delete(id);else openIds.add(id);rebuild();onDisclosureChange();}
@@ -183,6 +183,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   getOpenIds:()=>[...openIds].sort(),isOpen:id=>openIds.has(id),
   setOpenIds(ids){const requested=new Set();for(const id of ids)if(nodeById.get(id)?.child_ids?.length){ancestorPath(nodeById,rootIds,id);requested.add(id);}openIds.clear();for(const id of requested)openIds.add(id);rebuild();},
   toggle,
+  setVisibleIds(ids){visibleIds=ids;rebuild();},
   refreshVisibility(){let changed=0;for(const entry of rendered.values())if(entry.updateVisibility())changed++;return changed;},
   getRenderedCount:()=>rendered.size,getVisibleCount:()=>layout.rows.length,getVisibleIds:()=>layout.rows.map(row=>row.id),getNode:id=>rendered.get(id),
   openToDepth(value,{nodeBudget=550}={}){const depth=Number(value);if(!Number.isInteger(depth)||depth<0||depth>3)throw new RangeError('Atlas hierarchy: invalid expansion depth '+value);const requested=new Set(),pending=rootIds.map(id=>[id,0]);while(pending.length){const [id,level]=pending.pop();if(level>=depth||!hasChildren(nodeById,id))continue;requested.add(id);for(const child of nodeById.get(id).child_ids)pending.push([child,level+1]);}const count=flattenVisibleTree(nodeById,rootIds,requested).length;if(count>nodeBudget)return {applied:false,renderedNodes:count};this.setOpenIds(requested);return {applied:true,renderedNodes:count,openBranches:requested.size};},
