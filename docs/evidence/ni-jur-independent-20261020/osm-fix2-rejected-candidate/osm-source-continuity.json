@@ -1,0 +1,412 @@
+{
+  "schema": "osm-source-per-id-continuity-v1",
+  "status": "BLOCKED_UNADJUDICATED_OSM_RELATION_DRIFT",
+  "baseline_snapshot_at": "2026-10-05T23:50:05.218Z",
+  "candidate_snapshot_at": "2026-10-20T21:39:39.637Z",
+  "countries": {
+    "RO": {
+      "previous_selected_count": 3233,
+      "candidate_selected_count": 3233,
+      "missing_count": 0,
+      "added_count": 0,
+      "missing": [],
+      "added": [],
+      "recovered_by_api": [],
+      "retired_by_api": []
+    },
+    "MD": {
+      "previous_selected_count": 2596,
+      "candidate_selected_count": 2585,
+      "missing_count": 12,
+      "added_count": 1,
+      "missing": [
+        {
+          "relation_id": 18966859,
+          "entity_id": "osm-r18966859",
+          "osm_url": "https://www.openstreetmap.org/relation/18966859",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Bogăția Lacului",
+            "official_name": "întovărășirea pomicolă Bogăția Lacului",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Bogăția Lacului",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553002",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:33.361Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18966939,
+          "entity_id": "osm-r18966939",
+          "osm_url": "https://www.openstreetmap.org/relation/18966939",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Grădina-Rai",
+            "official_name": "întovărășirea pomicolă Grădina-Rai",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Grădina-Rai",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553003",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:33.918Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18967312,
+          "entity_id": "osm-r18967312",
+          "osm_url": "https://www.openstreetmap.org/relation/18967312",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Mesteacănul Alb",
+            "official_name": "întovărășirea pomicolă Mesteacănul Alb",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Mesteacănul Alb",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "552403",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:34.438Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18967475,
+          "entity_id": "osm-r18967475",
+          "osm_url": "https://www.openstreetmap.org/relation/18967475",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Struguraș",
+            "official_name": "întovărășirea pomicolă Struguraș",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Struguraș",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553008",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:34.630Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18967641,
+          "entity_id": "osm-r18967641",
+          "osm_url": "https://www.openstreetmap.org/relation/18967641",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Novinca-Eco",
+            "official_name": "întovărășirea pomicolă Novinca-Eco",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Novinca-Eco",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553005",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.133Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18967824,
+          "entity_id": "osm-r18967824",
+          "osm_url": "https://www.openstreetmap.org/relation/18967824",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Automobilist",
+            "official_name": "întovărășirea pomicolă Automobilist",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Automobilist",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553001",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.328Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18967907,
+          "entity_id": "osm-r18967907",
+          "osm_url": "https://www.openstreetmap.org/relation/18967907",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Boierul-Com",
+            "official_name": "întovărășirea pomicolă Boierul-Com",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Boierul-Com",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "552402",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.519Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18967934,
+          "entity_id": "osm-r18967934",
+          "osm_url": "https://www.openstreetmap.org/relation/18967934",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Pomsuragro",
+            "official_name": "întovărășirea pomicolă Pomsuragro",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Pomsuragro",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553006",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.710Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18968041,
+          "entity_id": "osm-r18968041",
+          "osm_url": "https://www.openstreetmap.org/relation/18968041",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Aluniș-Com",
+            "official_name": "întovărășirea pomicolă Aluniș-Com",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Aluniș-Com",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "552401",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.898Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18968051,
+          "entity_id": "osm-r18968051",
+          "osm_url": "https://www.openstreetmap.org/relation/18968051",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Romănița-Agro",
+            "official_name": "întovărășirea pomicolă Romănița-Agro",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Romănița-Agro",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "552405",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:36.091Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18968093,
+          "entity_id": "osm-r18968093",
+          "osm_url": "https://www.openstreetmap.org/relation/18968093",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Relief-Prim",
+            "official_name": "întovărășirea pomicolă Relief-Prim",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Relief-Prim",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553007",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:36.574Z"
+            }
+          ]
+        },
+        {
+          "relation_id": 18968144,
+          "entity_id": "osm-r18968144",
+          "osm_url": "https://www.openstreetmap.org/relation/18968144",
+          "cause_class": "missing_from_candidate_raw",
+          "previous": {
+            "name": "Sveazist IL",
+            "official_name": "întovărășirea pomicolă Sveazist IL",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Sveazist IL",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553009",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          },
+          "candidate": null,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:36.763Z"
+            }
+          ]
+        }
+      ],
+      "added": [
+        {
+          "relation_id": 21515245,
+          "entity_id": "osm-r21515245",
+          "candidate": {
+            "name": "Î.P. „Boierul-COM”",
+            "official_name": "Întovărășirea pomicolă „Boierul-COM”",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Boierul-Com",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": "allotments",
+            "type": "multipolygon",
+            "ref_cuatm_codunic": "552402",
+            "ref_rson_idno": "1007600041533",
+            "version": 1,
+            "changeset": 190081892,
+            "timestamp": "2026-10-06T10:23:05Z"
+          }
+        }
+      ],
+      "recovered_by_api": [],
+      "retired_by_api": [
+        18966859,
+        18966939,
+        18967312,
+        18967475,
+        18967641,
+        18967824,
+        18967907,
+        18967934,
+        18968041,
+        18968051,
+        18968093,
+        18968144
+      ]
+    }
+  },
+  "missing_total": 12,
+  "added_total": 1
+}

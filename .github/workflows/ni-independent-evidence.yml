@@ -1,0 +1,56 @@
+name: NI independent evidence preservation
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/ni-independent-evidence.yml'
+      - 'docs/evidence/ni-jur-independent-20261020/**'
+      - 'scripts/audit/ni-independent-evidence.mjs'
+      - 'scripts/audit/ni-evidence-docx-replay.py'
+      - 'scripts/lib/documentary-response.mjs'
+      - 'scripts/test/documentary-response.test.mjs'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ni-independent-evidence.yml'
+      - 'docs/evidence/ni-jur-independent-20261020/**'
+      - 'scripts/audit/ni-independent-evidence.mjs'
+      - 'scripts/audit/ni-evidence-docx-replay.py'
+      - 'scripts/lib/documentary-response.mjs'
+      - 'scripts/test/documentary-response.test.mjs'
+permissions:
+  contents: read
+jobs:
+  ni-independent-preservation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install pinned GIS dependencies from audited offline cache
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Reject false evidence, legal promotion and identity mutations
+        run: |
+          node --test scripts/test/documentary-response.test.mjs
+          node scripts/audit/ni-independent-evidence.mjs --self-test
+      - name: Reproduce source original DOCX paragraphs
+        run: python3 scripts/audit/ni-evidence-docx-replay.py
+      - name: Replay all 93 geometries and 4278 topology pairs offline
+        run: node scripts/audit/ni-independent-evidence.mjs --audit
+      - name: Prove all tracked source and protected data bytes remain untouched
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain --untracked-files=no)"
+      - name: Preserve exact-head evidence-only verdict
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ni-independent-evidence-${{ github.run_id }}
+          path: outputs/NI-INDEPENDENT-EVIDENCE/
+          if-no-files-found: error
+          retention-days: 30

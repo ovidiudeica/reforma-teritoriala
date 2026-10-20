@@ -1,0 +1,7 @@
+# Original HTTP response bodies are immutable binary evidence, including HTML.
+# Keep their exact bytes; the SHA-256 manifest and replay validators check them.
+*.original binary
+# Python extraction preserved CRLF in these derived evidence records.
+# Treat CR as an end-of-line byte while still checking other whitespace.
+documentary/PMR-ATD-ANNEX1-133268-text.json -text whitespace=cr-at-eol
+documentary/PMR-ATD-ANNEX2-133269-text.json -text whitespace=cr-at-eol

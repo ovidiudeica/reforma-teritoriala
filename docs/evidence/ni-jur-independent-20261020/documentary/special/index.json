@@ -1,0 +1,48 @@
+{
+  "schema": "ni-special-documentary-acquisition-v1",
+  "rows": [
+    {
+      "document_id": "LUNGA-ELECTION-2025",
+      "primary_source_url": "https://dubossary.ru/wp-content/uploads/2025/10/shema-izbir-uchastkov1.pdf",
+      "accessed_at": "2026-10-20T21:54:12.695Z",
+      "evidence_status": "BLOCKED_ACCESS",
+      "error": "fetch failed"
+    },
+    {
+      "document_id": "LUNGA-INSTITUTION-2023",
+      "primary_source_url": "https://www.vspmr.org/news/supreme-council/primer-otvetstvennogo-predannogo-i-bezzavetnogo-slujeniya-izbrannomu-delu.html",
+      "http_status": 200,
+      "accessed_at": "2026-10-20T21:54:18.806Z",
+      "response_file": "outputs/ni-jur-documentary-capture/special/116953f914ac9de3baea221a8a6972c9867dbc3e03e3db1ebf27bc67bdd5da51.original",
+      "response_sha256": "116953f914ac9de3baea221a8a6972c9867dbc3e03e3db1ebf27bc67bdd5da51",
+      "response_bytes": 69283,
+      "content_type": "text/html; charset=utf-8",
+      "evidence_status": "RETRIEVED_NOT_LEGAL_CERTIFICATION",
+      "binary": false
+    },
+    {
+      "document_id": "LUNGA-NEWS-2026",
+      "primary_source_url": "https://www.novostipmr.com/ru/news/26-07-17/dubossarskiy-dukhovoy-orkestr-budet-davat-koncerty-vsyo-leto",
+      "http_status": 200,
+      "accessed_at": "2026-10-20T21:54:19.575Z",
+      "response_file": "outputs/ni-jur-documentary-capture/special/edb01a7fa7e104d298cc22037772d406521ee50db9137b6233526b83df99109b.original",
+      "response_sha256": "edb01a7fa7e104d298cc22037772d406521ee50db9137b6233526b83df99109b",
+      "response_bytes": 63077,
+      "content_type": "text/html; charset=utf-8",
+      "evidence_status": "RETRIEVED_NOT_LEGAL_CERTIFICATION",
+      "binary": false,
+      "observed_publication_date": "2026-07-18",
+      "observed_publication_time_local": "12:27",
+      "previous_dossier_source_date": "2026-07-18",
+      "semantic_caveat": "Microdistrict wording in a cultural programme does not certify administrative status, boundaries or effective control.",
+      "cached_web_extract_publication_date": "2026-07-17",
+      "cached_web_extract_publication_time": "11:44",
+      "date_status": "CONTRADICTORY_EVIDENCE_BETWEEN_CACHED_WEB_EXTRACT_AND_CURRENT_ORIGINAL",
+      "original_html_supports_previous_dossier_date": true,
+      "no_historical_claim_date_overwritten": true,
+      "initial_acquisition_date_annotation_superseded": true,
+      "sidebar_times_not_used_as_article_date": true
+    }
+  ],
+  "semantic_acceptance": "BLOCKED_INCOMPLETE"
+}
