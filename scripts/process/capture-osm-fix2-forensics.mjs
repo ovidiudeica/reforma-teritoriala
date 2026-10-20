@@ -27,8 +27,8 @@ async function fetchText(url,{allowGone=false}={}){
   try{
    const target=officialOsmUrl(url);
    const response=await fetch(target,{redirect:'error',headers:{accept:'application/json','user-agent':'reforma-teritoriala-osm-fix2/1.0'},signal:controller.signal});
-   const body=await response.text();
-   const bytes=Buffer.from(body,'utf8'),key=sha256(Buffer.from(target.href+'\n'+body,'utf8'));
+   const bytes=Buffer.from(await response.arrayBuffer()),body=bytes.toString('utf8');
+   const key=sha256(Buffer.from(target.href+'\n'+sha256(bytes),'utf8'));
    const raw_receipt={url:target.href,http_status:response.status,accessed_at:new Date().toISOString(),attempt,body_sha256:sha256(bytes),body_bytes:bytes.length,body_path:RAW+'/'+key+'.response'};
    await writeFile(RAW+'/'+key+'.response',bytes);
    apiReceipts.push(raw_receipt);

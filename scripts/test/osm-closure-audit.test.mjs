@@ -21,3 +21,8 @@ test('nested geometric inner relation composes roles without treating subarea as
 test('diagnostics do not truncate anomalies after 100 records',()=>{
  const r={elements:[{type:'relation',id:1,members:Array.from({length:120},(_,i)=>({type:'relation',ref:i+2,role:'subarea'}))}]};assert.equal(audit(r,[1],'MD').missing_references.length,120);
 });
+test('coincident distinct node IDs are disclosed without silently welding the source graph',()=>{
+ const raw={elements:[{type:'relation',id:1,members:[{type:'way',ref:2,role:'outer'},{type:'way',ref:7,role:'outer'}]},{type:'way',id:2,nodes:[3,4]},{type:'way',id:7,nodes:[4,5,6]},n(3),{...n(4),lat:2},{...n(5),lon:3},n(6)]};
+ const before=structuredClone(raw),a=audit(raw,[1],'MD');
+ assert.equal(a.topology_issue_count,1);assert.deepEqual(a.topology_issues[0].coincident_distinct_endpoint_groups,[{role:'outer',coordinates:[2,1],node_ids:[3,6]}]);assert.deepEqual(raw,before);
+});

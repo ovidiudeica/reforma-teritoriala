@@ -32,7 +32,16 @@ export function auditOsmClosure(raw,selectedIds,code){
   };
   boundary(relationId);
   const odd=Object.fromEntries(Object.entries(endpoints).map(([role,degrees])=>[role,[...degrees].filter(([,degree])=>degree%2).map(([node_id,degree])=>({node_id,degree}))]));
-  if(odd.outer.length||odd.inner.length||invalid.length)topology.push({relation_id:relationId,relation_version:byKey.get(key('relation',relationId))?.version??null,odd_endpoints:odd,invalid_geometry_members:invalid});
+  if(odd.outer.length||odd.inner.length||invalid.length){
+   const coordinateGroups=new Map();
+   for(const [role,points] of Object.entries(odd))for(const point of points){
+    const node=byKey.get(key('node',point.node_id));if(!node||!Number.isFinite(node.lon)||!Number.isFinite(node.lat))continue;
+    const position=JSON.stringify([role,node.lon,node.lat]);
+    if(!coordinateGroups.has(position))coordinateGroups.set(position,{role,coordinates:[node.lon,node.lat],node_ids:[]});
+    coordinateGroups.get(position).node_ids.push(point.node_id);
+   }
+   topology.push({relation_id:relationId,relation_version:byKey.get(key('relation',relationId))?.version??null,odd_endpoints:odd,coincident_distinct_endpoint_groups:[...coordinateGroups.values()].filter(g=>g.node_ids.length>1),invalid_geometry_members:invalid});
+  }
  }
  return {code,selected_relation_count:selected.size,checked_dependency_count:checked.size,missing_reference_count:missing.length,missing_references:missing,invalid_coordinate_count:invalidCoordinates.length,invalid_coordinates:invalidCoordinates,topology_issue_count:topology.length,topology_issues:topology};
 }
