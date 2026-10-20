@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/web-r2b-final-live-e2e.yml'
       - 'scripts/audit/web-r2b-final-pages-browser.mjs'
+      - 'scripts/audit/helpers/published-source.mjs'
+      - 'scripts/test/frontend-published-source.test.mjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,14 +19,26 @@ jobs:
       BROWSER_EXECUTABLE: /usr/bin/google-chrome
       ATLAS_LIVE_URL: https://ovidiudeica.github.io/reforma-teritoriala/
       ATLAS_E2E_OUTPUT: outputs/WEB-R2b-final-live
+      ATLAS_PUBLISHED_BASE_SHA: ${{ github.event.pull_request.base.sha }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Checkout exact deployed PR baseline for source comparison
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: published-baseline
+          persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.21.0'
       - name: Assert main and deployed ACTUAL stay immutable
         run: |
           node --check scripts/audit/web-r2b-final-pages-browser.mjs
+          node --test scripts/test/frontend-published-source.test.mjs
           google-chrome --version
       - name: Audit actual published Pages in real Chromium
         run: node scripts/audit/web-r2b-final-pages-browser.mjs
