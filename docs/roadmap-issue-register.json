@@ -68,6 +68,38 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
       ],
       "verdict": "CLOSED_RETEST_PASS"
+    },
+    {
+      "id": "RM-005",
+      "severity": "P2",
+      "component": "Published Pages acceptance source provenance",
+      "entities": [],
+      "reproduction": "Run the historical WEB-R2b published audit after main has advanced; expectedMain remains hardcoded ed6d235ce48843164745fb6150f76c9a4a9c7c25 and no deployed source byte comparison is performed.",
+      "cause": "The acceptance report declared a historical expected SHA without binding the deployed resources to the audited checkout.",
+      "change": "Resolve exact Git HEAD, disclose/reject dirty tracked sources in CI, verify eight published resources byte-for-byte against the checkout, fix the output directory, and fail on own HTTP/network errors.",
+      "pr": 392,
+      "regression": "frontend-published-source.test.mjs rejects stale application bytes and missing resources; published live E2E will require all eight SHA-256 matches.",
+      "verification_sha": null,
+      "evidence": [
+        "scripts/test/frontend-published-source.test.mjs"
+      ],
+      "verdict": "IMPLEMENTED_PENDING_EXACT_SHA_CI"
+    },
+    {
+      "id": "RM-006",
+      "severity": "P2",
+      "component": "OSM inline confirmation keyboard focus",
+      "entities": [],
+      "reproduction": "Open Filters, choose OSM 5, preview Show, Tab from scope to Confirm, then press Escape in Chromium. The entire Filters pane closes and the initiating button does not regain focus.",
+      "cause": "The document capture-phase Escape handler closed the pane before the confirmation target/bubble-phase handler could consume Escape and restore focus. The existing isolated unit fixture did not reproduce event propagation.",
+      "change": "The inline confirmation declares ownership of its Escape interaction; the global pane handler lets that visible owner consume the event first. Existing scope cancellation, focus return and later pane dismissal remain intact.",
+      "pr": 392,
+      "regression": "web-r2c32-hardening-browser.mjs asserts real CDP keyboard Tab/Escape, pending=false, Filters remains active, initiating button focused, geometry state unchanged, across four viewport profiles.",
+      "verification_sha": null,
+      "evidence": [
+        "Baseline FAIL report and desktop before captures archived in outputs/stage2-392/rm006-before."
+      ],
+      "verdict": "IMPLEMENTED_PENDING_EXACT_SHA_CI"
     }
   ],
   "environment_incidents": [

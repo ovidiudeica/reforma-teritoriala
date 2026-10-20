@@ -9,3 +9,11 @@ Orice defect reproductibil intră în `docs/roadmap-issue-register.json`, prime�
 Integrarea necesită toate gate-urile obligatorii pe head-ul exact, capturi inspectate, audit de securitate/diff, apoi CI și Pages post-merge. ACTUAL, părinții juridici MD și geometriile rămân nemodificate, P9.1 blocat, `semantic_acceptance=BLOCKED_INCOMPLETE`.
 
 Stare: audit în curs, fără acceptare anticipată.
+
+## RM-006 — contractul Escape al confirmării OSM
+
+Reproducere Chromium: Filtre → nivel OSM 5 → Afișează → Tab de la domeniu la Confirmă → Escape. În baseline, panoul se închide și focusul nu revine la inițiator. Handlerul documentului în capture rulează înaintea handlerului inline în bubble.
+
+Comportament așteptat, deja specificat în WEB-R2c.2: prima apăsare Escape anulează doar confirmarea, nu modifică bifele, menține Filtre deschis și readuce focusul la comanda inițiatoare. O apăsare ulterioară poate închide panoul conform contractului existent. Remedierea marchează explicit componenta care gestionează Escape; panoul îi lasă prima tratare. Nu se schimbă modelul de selecție, URL sau datele.
+
+Regresie: matricea `web-r2c32-hardening-browser.mjs` verifică ordinea reală document-capture/target-bubble, focusul și bifele pe desktop/tabletă/mobil/landscape. Se păstrează raportul și captura baseline FAIL, apoi se compară capturile retestării pe SHA exact.

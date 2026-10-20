@@ -5,12 +5,16 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {launchBrowser,waitFor} from '../test/helpers/atlas-browser.mjs';
+import {performanceSource} from './helpers/performance-source.mjs';
+import {verifyPublishedSource} from './helpers/published-source.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const url=process.env.ATLAS_LIVE_URL||'https://ovidiudeica.github.io/reforma-teritoriala/';
 if(new URL(url).origin!=='https://ovidiudeica.github.io'||new URL(url).pathname!=='/reforma-teritoriala/')throw Error('Refuse non-public audit target');
-const out=process.env.ATLAS_E2E_OUTPUT||'outputs/WEB-R2b-final-live';
-const report={schema:'web-r2b-final-published-e2e-v1',url,expectedMain:'ed6d235ce48843164745fb6150f76c9a4a9c7c25',status:'FAIL',browser:null,checks:[],captures:[],errors:[],started_at:new Date().toISOString()};
+const out=path.join(root,'outputs','WEB-R2b-final-live');
+if(process.env.ATLAS_E2E_OUTPUT&&path.resolve(process.env.ATLAS_E2E_OUTPUT)!==out)throw Error('Published audit output must remain inside the fixed evidence directory');
+const source=performanceSource(root);
+const report={schema:'web-r2b-final-published-e2e-v2',url,expectedMain:source.sha,trackedSourcesClean:source.trackedSourcesClean,status:'FAIL',browser:null,checks:[],captures:[],errors:[],started_at:new Date().toISOString()};
 const mark=(name,result)=>{report.checks.push({name,status:'PASS',...result});console.log('PASS '+name);};
 let browser;
 async function screenshot(page,name){await page.screenshot(path.join(out,name+'.png'));report.captures.push(name+'.png');}
@@ -41,6 +45,8 @@ async function controls(page,action){return page.call(function(action){
  return {open:!wrap.querySelector('.osm-level-action-confirm').hidden,scope:wrap.querySelector('.osm-level-action-confirm p')?.textContent,notice:wrap.querySelector('[role="status"]')?.textContent,undoDisabled:wrap.querySelector('.osm-level-geometry-buttons button:nth-child(3)').disabled};
 },action);}
 try{
+ report.publishedSource=await verifyPublishedSource(root);
+ mark('published-source-matches-exact-checkout',{files:report.publishedSource.length,sha:source.sha});
  browser=await launchBrowser(root);report.browser=browser.version.Browser;
  for(const [width,height] of [[1440,900],[390,844]]){
   const page=await browser.page();
@@ -139,6 +145,8 @@ try{
    assert.equal(await page.evaluate('document.documentElement.scrollWidth<=innerWidth'),true,'no horizontal overflow');
    const consoleErrors=page.errors.map(x=>x.text||x.exception?.description);
    assert.deepEqual(consoleErrors,[],'no uncaught app exceptions');
+   assert.deepEqual(page.responses.filter(x=>x.url.startsWith(url)&&x.status>=400),[],'no own HTTP errors');
+   assert.deepEqual(page.failures.filter(x=>x.url?.startsWith(url)&&!x.canceled),[],'no own network failures');
    report.checks.push({name:'runtime-'+width,status:'PASS',consoleErrors:0,failedRequests:page.failures.filter(x=>x.url?.startsWith(url)).length});
   }finally{await page.close();}
  }

@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {verifyPublishedSource} from '../audit/helpers/published-source.mjs';
+const root=fileURLToPath(new URL('../../',import.meta.url));
+const fixture=async(url)=>{const name=new URL(url).pathname.slice('/reforma-teritoriala/'.length);return new Response(await readFile(new URL('../../'+name,import.meta.url)));};
+test('live acceptance fingerprints the actual published source bytes',async()=>{const rows=await verifyPublishedSource(root,{fetcher:fixture});assert.equal(rows.length,8);assert.ok(rows.every(r=>r.status==='PASS'&&/^[a-f0-9]{64}$/.test(r.sha256)));});
+test('a stale deployed application fails even if the local commit is correct',async()=>{await assert.rejects(verifyPublishedSource(root,{fetcher:async url=>url.endsWith('/app.js')?new Response('stale application'):fixture(url)}),/Published source differs.*app.js/);});
+test('missing published resources cannot be accepted',async()=>{await assert.rejects(verifyPublishedSource(root,{fetcher:async()=>new Response('missing',{status:404})}),/Published source HTTP/);});
