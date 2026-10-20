@@ -33,7 +33,12 @@
       "evidence": [
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
+      ]
     },
     {
       "id": "RM-004",
@@ -51,7 +56,12 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808",
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/118337370318"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
+      ]
     },
     {
       "id": "RM-003",
@@ -67,7 +77,12 @@
       "evidence": [
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
+      ]
     },
     {
       "id": "RM-005",
@@ -85,7 +100,12 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376540919",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376090765 (initial source-context failure preserved)"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "970ce9ad70273c3b34721c283075875b04e1a2a3",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39384630687",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39385100647"
+      ]
     },
     {
       "id": "RM-006",
@@ -102,7 +122,12 @@
         "Baseline FAIL report and desktop before captures archived in outputs/stage2-392/rm006-before.",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376540939"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "970ce9ad70273c3b34721c283075875b04e1a2a3",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39384630687",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39385100647"
+      ]
     },
     {
       "id": "RM-007",
@@ -121,7 +146,12 @@
         "atlas-tree.mjs: focusRow deliberately reveals clipping ancestors",
         "outputs/stage2-392/rm007-before/probe/probe.json: all three local recovery profiles PASS; final-head Actions admission still required"
       ],
-      "verdict": "CLOSED_EXPECTED_BEHAVIOR_RETEST_PASS"
+      "verdict": "CLOSED_EXPECTED_BEHAVIOR_RETEST_PASS",
+      "postmerge_verification_sha": "970ce9ad70273c3b34721c283075875b04e1a2a3",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39384630687",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39385100647"
+      ]
     }
   ],
   "environment_incidents": [
@@ -166,11 +196,6 @@
   ],
   "open_evidence_gates": [
     {
-      "id": "GATE-002",
-      "stage": "WEB-R2c.3.2",
-      "description": "Full viewport/state screenshots, text zoom, accessibility and classification of external network failures."
-    },
-    {
       "id": "GATE-003",
       "stage": "WEB-R2c.4",
       "description": "Final published Pages E2E acceptance remains pending."
@@ -188,6 +213,15 @@
       "measurement_sha": "94e912c37178eafecb5561d1ecfb43caf4ae2d6d",
       "verdict": "APPLICATION_NO_CHANGE_REQUIRED",
       "evidence": "Actions 39333466808; raw traces, network, heap snapshots, 109 records; integration admission remains mandatory."
+    },
+    {
+      "id": "GATE-002",
+      "stage": "WEB-R2c.3.2",
+      "description": "Full viewport/state screenshots, text zoom, accessibility and classification of external network failures.",
+      "verdict": "CLOSED_PASS",
+      "main": "970ce9ad70273c3b34721c283075875b04e1a2a3",
+      "pr": 392
     }
-  ]
+  ],
+  "updated_at": "2026-10-20T06:46:07.487Z"
 }
