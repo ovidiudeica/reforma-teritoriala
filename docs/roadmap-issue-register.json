@@ -33,7 +33,12 @@
       "evidence": [
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
+      ]
     },
     {
       "id": "RM-004",
@@ -51,7 +56,12 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808",
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/118337370318"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
+      ]
     },
     {
       "id": "RM-003",
@@ -67,7 +77,12 @@
       "evidence": [
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
+      ]
     },
     {
       "id": "RM-005",
@@ -85,7 +100,12 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376540919",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376090765 (initial source-context failure preserved)"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "970ce9ad70273c3b34721c283075875b04e1a2a3",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39384630687",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39385100647"
+      ]
     },
     {
       "id": "RM-006",
@@ -102,7 +122,12 @@
         "Baseline FAIL report and desktop before captures archived in outputs/stage2-392/rm006-before.",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376540939"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "970ce9ad70273c3b34721c283075875b04e1a2a3",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39384630687",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39385100647"
+      ]
     },
     {
       "id": "RM-007",
@@ -121,7 +146,46 @@
         "atlas-tree.mjs: focusRow deliberately reveals clipping ancestors",
         "outputs/stage2-392/rm007-before/probe/probe.json: all three local recovery profiles PASS; final-head Actions admission still required"
       ],
-      "verdict": "CLOSED_EXPECTED_BEHAVIOR_RETEST_PASS"
+      "verdict": "CLOSED_EXPECTED_BEHAVIOR_RETEST_PASS",
+      "postmerge_verification_sha": "970ce9ad70273c3b34721c283075875b04e1a2a3",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39384630687",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39385100647"
+      ]
+    },
+    {
+      "id": "RM-008",
+      "severity": "P2",
+      "component": "WEB-R2c.4 published Chromium scenario",
+      "entities": [],
+      "reproduction": "Run published matrix at 3f943b3215b6a5469dd7fbb80780737e2dba53e2; tablet selects NI card then tries individual checkbox while Entities drawer is closed.",
+      "cause": "The new audit assumed the desktop panel remained open after card selection; compact layouts close the drawer according to the existing UX contract.",
+      "change": "Reopen Entities using the public panel control before individual checkbox tests. No application behavior changes.",
+      "pr": 393,
+      "regression": "Published Chromium matrix: two actual root and eight independent operational checkbox pairs in all four viewport profiles.",
+      "verification_sha": "6216178a96cf0f790d1348d5a1108f0838fbc84d",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39389258992",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39390379936"
+      ],
+      "verdict": "CLOSED_RETEST_PASS"
+    },
+    {
+      "id": "RM-009",
+      "severity": "P2",
+      "component": "WEB-R2c.4 published runtime inventory",
+      "entities": [],
+      "reproduction": "Run worker GIS inventory and stale-library regression against e8f418c helper; root modules match, but vendor/gis engine and provenance manifest are omitted.",
+      "cause": "New inventory predicate included root JS/MJS/CSS but omitted the nested GIS dependency imported by atlas-geometric-worker.mjs.",
+      "change": "Include tracked vendor/gis JS and JSON resources; require their presence and fail on an HTTP200 stale worker dependency. No application or ACTUAL changes.",
+      "pr": 393,
+      "regression": "frontend-published-runtime.test.mjs: worker GIS presence and stale engine rejection; all nine source/runtime unit tests.",
+      "verification_sha": "310e05f6b8d871eaafc64e1f89df17b7584fb6af",
+      "evidence": [
+        "RM-009 before regression exit1; original e8f418c inventory contains433 resources and is superseded for complete-runtime acceptance.",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39393411861"
+      ],
+      "verdict": "CLOSED_RETEST_PASS"
     }
   ],
   "environment_incidents": [
@@ -166,11 +230,6 @@
   ],
   "open_evidence_gates": [
     {
-      "id": "GATE-002",
-      "stage": "WEB-R2c.3.2",
-      "description": "Full viewport/state screenshots, text zoom, accessibility and classification of external network failures."
-    },
-    {
       "id": "GATE-003",
       "stage": "WEB-R2c.4",
       "description": "Final published Pages E2E acceptance remains pending."
@@ -188,6 +247,15 @@
       "measurement_sha": "94e912c37178eafecb5561d1ecfb43caf4ae2d6d",
       "verdict": "APPLICATION_NO_CHANGE_REQUIRED",
       "evidence": "Actions 39333466808; raw traces, network, heap snapshots, 109 records; integration admission remains mandatory."
+    },
+    {
+      "id": "GATE-002",
+      "stage": "WEB-R2c.3.2",
+      "description": "Full viewport/state screenshots, text zoom, accessibility and classification of external network failures.",
+      "verdict": "CLOSED_PASS",
+      "main": "970ce9ad70273c3b34721c283075875b04e1a2a3",
+      "pr": 392
     }
-  ]
+  ],
+  "updated_at": "2026-10-20T06:46:07.487Z"
 }
