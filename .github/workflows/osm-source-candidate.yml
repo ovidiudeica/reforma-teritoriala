@@ -208,7 +208,8 @@ jobs:
           test "$(git rev-parse HEAD)" = "$CANDIDATE_COMMIT"
           AUTH_HEADER="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
           git -c http.https://github.com/.extraheader="AUTHORIZATION: basic $AUTH_HEADER" \
-            push origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
+            push --force-with-lease="refs/heads/$CANDIDATE_BRANCH:" \
+            origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
 
       - name: Publish candidate handoff summary
         run: |
