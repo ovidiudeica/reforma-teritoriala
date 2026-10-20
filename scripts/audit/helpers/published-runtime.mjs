@@ -8,7 +8,7 @@ const base='https://ovidiudeica.github.io/reforma-teritoriala/';
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 export function publishedRuntimeFiles(root){
  const tracked=execFileSync('git',['ls-files','-z'],{cwd:root,encoding:'utf8',maxBuffer:5000000}).split('\0').filter(Boolean);
- const files=tracked.filter(file=>file==='index.html'||/^[^/]+\.(?:mjs|js|css)$/.test(file)||/^public\/data\/.+\.json$/.test(file)||/^public\/geo\/.+\.geojson$/.test(file)||['data/current/actual-release-manifest.json','data/current/actual-release-gate.json'].includes(file)).sort();
+ const files=tracked.filter(file=>file==='index.html'||/^[^/]+\.(?:mjs|js|css)$/.test(file)||/^vendor\/gis\/.+\.(?:js|json)$/.test(file)||/^public\/data\/.+\.json$/.test(file)||/^public\/geo\/.+\.geojson$/.test(file)||['data/current/actual-release-manifest.json','data/current/actual-release-gate.json'].includes(file)).sort();
  assert.ok(files.includes('index.html')&&files.includes('app.js'),'Runtime source inventory is incomplete');
  for(const file of files)assert.ok(!path.isAbsolute(file)&&!file.includes('\\')&&file.split('/').every(s=>s!=='.'&&s!=='..'),'Unsafe tracked runtime path');
  return files;

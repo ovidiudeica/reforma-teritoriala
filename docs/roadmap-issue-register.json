@@ -169,6 +169,22 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39390379936"
       ],
       "verdict": "CLOSED_RETEST_PASS"
+    },
+    {
+      "id": "RM-009",
+      "severity": "P2",
+      "component": "WEB-R2c.4 published runtime inventory",
+      "entities": [],
+      "reproduction": "Run worker GIS inventory and stale-library regression against e8f418c helper; root modules match, but vendor/gis engine and provenance manifest are omitted.",
+      "cause": "New inventory predicate included root JS/MJS/CSS but omitted the nested GIS dependency imported by atlas-geometric-worker.mjs.",
+      "change": "Include tracked vendor/gis JS and JSON resources; require their presence and fail on an HTTP200 stale worker dependency. No application or ACTUAL changes.",
+      "pr": 393,
+      "regression": "frontend-published-runtime.test.mjs: worker GIS presence and stale engine rejection; all nine source/runtime unit tests.",
+      "verification_sha": null,
+      "evidence": [
+        "RM-009 before regression exit1; original e8f418c inventory contains433 resources and is superseded for complete-runtime acceptance."
+      ],
+      "verdict": "OPEN_PENDING_EXACT_HEAD_RETEST"
     }
   ],
   "environment_incidents": [
