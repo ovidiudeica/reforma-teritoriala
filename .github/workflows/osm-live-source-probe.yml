@@ -1,12 +1,9 @@
 name: OSM candidate source-only live probe
 
+# Diagnostic only: the candidate source may correctly FAIL when OSM retires IDs.
+# This does NOT replace the protected ACTUAL source promotion gate.
 on:
-  pull_request:
-    paths:
-      - 'scripts/import/import-osm.mjs'
-      - 'scripts/lib/osm-source-continuity.mjs'
-      - 'scripts/process/audit-osm-refresh-continuity.mjs'
-      - '.github/workflows/osm-live-source-probe.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
