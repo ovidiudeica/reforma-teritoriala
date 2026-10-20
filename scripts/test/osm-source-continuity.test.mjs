@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {assessOsmSourceContinuity,assessOsmSourceContinuityCountry,summarizeOsmSourceContinuity} from '../lib/osm-source-continuity.mjs';
+import {assessOsmSourceContinuity,assessOsmSourceContinuityCountry,summarizeOsmSourceContinuity,previousScopedRelationsNeedingLiveVerification} from '../lib/osm-source-continuity.mjs';
 
 const mkEntry=ids=>({selected_relation_ids:ids,selected_relation_count:ids.length,
   continuity_recovered_relation_ids:[],continuity_retired_relation_ids:[]});
@@ -72,4 +72,17 @@ test('cannot mark partial country evidence as PASS',()=>{
   const input=fixture();
   assert.throws(()=>summarizeOsmSourceContinuity({before:input.before,after:input.after,
     countries:{MD:{missing_count:0,added_count:0}}}),/Missing per-country/);
+});
+
+test('re-query official OSM API when previous relation survives Overpass but loses scope tags',()=>{
+  const old=raw([100,101,102]);
+  const current=raw([100,101,103],{101:{boundary:'historic',admin_level:'10'}});
+  const matches=element=>element?.tags?.boundary==='administrative'
+    &&['4','6','8','9'].includes(element?.tags?.admin_level);
+  assert.deepEqual(previousScopedRelationsNeedingLiveVerification(old,current,matches),[101,102]);
+});
+test('previously in-scope IDs unchanged in Overpass do not trigger unnecessary API calls',()=>{
+  const old=raw([100,101]),current=raw([100,101]);
+  const matches=element=>element?.tags?.boundary==='administrative';
+  assert.deepEqual(previousScopedRelationsNeedingLiveVerification(old,current,matches),[]);
 });
