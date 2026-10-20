@@ -76,14 +76,16 @@
       "entities": [],
       "reproduction": "Run the historical WEB-R2b published audit after main has advanced; expectedMain remains hardcoded ed6d235ce48843164745fb6150f76c9a4a9c7c25 and no deployed source byte comparison is performed.",
       "cause": "The acceptance report declared a historical expected SHA without binding the deployed resources to the audited checkout.",
-      "change": "Resolve exact Git HEAD, disclose/reject dirty tracked sources in CI, verify eight published resources byte-for-byte against the checkout, fix the output directory, and fail on own HTTP/network errors.",
+      "change": "Resolve exact Git HEAD, disclose/reject dirty tracked sources in CI, verify nine published resources byte-for-byte against the checkout, fix the output directory, and fail on own HTTP/network errors. PR audits compare the exact deployed base separately from the candidate auditor; post-merge audits require the exact main checkout.",
       "pr": 392,
       "regression": "frontend-published-source.test.mjs rejects stale application bytes and missing resources; published live E2E will require all eight SHA-256 matches.",
-      "verification_sha": null,
+      "verification_sha": "432a17381203f336d995452820877a80b321eed2",
       "evidence": [
-        "scripts/test/frontend-published-source.test.mjs"
+        "scripts/test/frontend-published-source.test.mjs",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376540919",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376090765 (initial source-context failure preserved)"
       ],
-      "verdict": "IMPLEMENTED_PENDING_EXACT_SHA_CI"
+      "verdict": "CLOSED_RETEST_PASS"
     },
     {
       "id": "RM-006",
@@ -95,11 +97,12 @@
       "change": "The inline confirmation declares ownership of its Escape interaction; the global pane handler lets that visible owner consume the event first. Existing scope cancellation, focus return and later pane dismissal remain intact.",
       "pr": 392,
       "regression": "web-r2c32-hardening-browser.mjs asserts real CDP keyboard Tab/Escape, pending=false, Filters remains active, initiating button focused, geometry state unchanged, across four viewport profiles.",
-      "verification_sha": null,
+      "verification_sha": "432a17381203f336d995452820877a80b321eed2",
       "evidence": [
-        "Baseline FAIL report and desktop before captures archived in outputs/stage2-392/rm006-before."
+        "Baseline FAIL report and desktop before captures archived in outputs/stage2-392/rm006-before.",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376540939"
       ],
-      "verdict": "IMPLEMENTED_PENDING_EXACT_SHA_CI"
+      "verdict": "CLOSED_RETEST_PASS"
     }
   ],
   "environment_incidents": [

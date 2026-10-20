@@ -13,7 +13,7 @@ export function publishedSourceContext(root,{eventName=process.env.GITHUB_EVENT_
  return {auditor,published,sourceRoot,coverage:'PR_PUBLISHED_BASELINE_ONLY'};
 }
 
-const files=['index.html','app.js','atlas-panels.mjs','atlas-tree.mjs','atlas-osm-roles.mjs','atlas-nistrenia-outlines.mjs','scripts/audit/web-r2b-final-pages-browser.mjs','data/current/actual-release-manifest.json'];
+const files=['index.html','app.js','atlas-panels.mjs','atlas-filters.mjs','atlas-tree.mjs','atlas-osm-roles.mjs','atlas-nistrenia-outlines.mjs','scripts/audit/web-r2b-final-pages-browser.mjs','data/current/actual-release-manifest.json'];
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
 export async function verifyPublishedSource(root,{fetcher=fetch}={}){
  const result=[];
