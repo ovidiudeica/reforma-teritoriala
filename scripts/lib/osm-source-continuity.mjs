@@ -21,10 +21,17 @@ const relations=raw=>{
 };
 const evidence=element=>element?{
   name:element.tags?.['name:ro']||element.tags?.name||null,
+  official_name:element.tags?.official_name||null,
+  full_name:element.tags?.full_name||null,
   boundary:element.tags?.boundary||null,
   admin_level:element.tags?.admin_level||null,
   place:element.tags?.place||null,
+  landuse:element.tags?.landuse||null,
+  type:element.tags?.type||null,
+  ref_cuatm_codunic:element.tags?.['ref:cuatm:codunic']||element.tags?.cuatm||null,
+  ref_rson_idno:element.tags?.['ref:rson:idno']||null,
   version:element.version??null,
+  changeset:element.changeset??null,
   timestamp:element.timestamp||null
 }:null;
 export function assessOsmSourceContinuityCountry({code,before,after,beforeRaw,afterRaw}){
