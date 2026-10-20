@@ -11,8 +11,13 @@ const policy={
  CUATM:Number(process.env.ACTUAL_CUATM_MAX_AGE_DAYS||45)
 };
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
+const contract=await read('data/sources/osm-source-contract.json');
+if(contract?.mode!=='OSM_SOURCE_ACTUAL_SEPARATION')throw new Error('Invalid OSM source/ACTUAL separation contract');
+const currentOsmPath=contract.current_osm?.manifest_path;
+const actualOsmPinPath=contract.actual_osm_pin?.manifest_path;
+if(!currentOsmPath||!actualOsmPinPath||currentOsmPath===actualOsmPinPath)throw new Error('OSM current source must remain distinct from ACTUAL pin');
 const [osm,siruta,cuatm]=await Promise.all([
- read('data/sources/osm-current.json'),
+ read(currentOsmPath),
  read('data/sources/ro-siruta-current.json'),
  read('data/sources/cuatm-current.json')
 ]);
@@ -28,8 +33,15 @@ const sources=[
 });
 const report={
  schema_version:1,
- mode:'ACTUAL_SOURCE_FRESHNESS',
+ mode:'SOURCE_FRESHNESS_WITH_ACTUAL_PIN_SEPARATION',
  checked_at:NOW.toISOString(),
+ osm_contract:{
+  current_source_manifest:currentOsmPath,
+  actual_pinned_manifest:actualOsmPinPath,
+  actual_mutation_allowed:contract.guards?.actual_mutation_allowed??null,
+  p91_import_allowed:contract.guards?.p91_import_allowed??null,
+  semantic_acceptance:contract.guards?.semantic_acceptance??null
+ },
  status:sources.every(item=>item.status==='PASS')?'PASS':'STALE',
  policy,
  sources
