@@ -65,3 +65,18 @@ export function assessOsmSourceContinuity({before,after,beforeRaw,afterRaw}){
     code,before,after,beforeRaw:beforeRaw[code],afterRaw:afterRaw[code]})]));
   return summarizeOsmSourceContinuity({before,after,countries});
 }
+
+
+// Authoritative reconciliation must also inspect relations PRESENT in an Overpass
+// reply but no longer matching the original scope, not just completely absent IDs.
+export function previousScopedRelationsNeedingLiveVerification(previousRaw,currentRaw,matchesScope){
+  if(typeof matchesScope!=='function')throw new Error('Missing OSM source scope classifier');
+  const previous=relations(previousRaw),current=relations(currentRaw);
+  const ids=[];
+  for(const [id,relation] of previous){
+    if(!matchesScope(relation))continue;
+    const candidate=current.get(id);
+    if(!candidate||!matchesScope(candidate))ids.push(id);
+  }
+  return ids.sort((a,b)=>a-b);
+}
