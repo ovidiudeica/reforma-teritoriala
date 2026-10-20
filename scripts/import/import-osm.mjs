@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import {resolveOsmSourceScopeConflicts} from '../lib/osm-source-scope-conflicts.mjs';
 import {fetchAdaptiveRelations,retryAfterMs} from '../lib/osm-adaptive-transport.mjs';
+import {previousScopedRelationsNeedingLiveVerification} from '../lib/osm-source-continuity.mjs';
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,rename,writeFile} from 'node:fs/promises';
 import {gzipSync,gunzipSync} from 'node:zlib';
@@ -156,9 +157,7 @@ async function fetchRelationFullFromOsmApi(relationId,code,{allowMissing=false}=
 async function recoverPreviousScopeRelations(raw,previousRaw,code,cfg){
  if(!previousRaw)return {raw,attempts:[],recovered_relation_ids:[],retired_relation_ids:[]};
  const byKey=new Map(raw.elements.map(x=>[`${x.type}/${x.id}`,x]));
- const currentRelationIds=new Set(raw.elements.filter(x=>x.type==='relation').map(x=>Number(x.id)));
- const previousRelations=previousRaw.elements.filter(x=>relationMatchesScope(x,cfg));
- const missingIds=previousRelations.map(x=>Number(x.id)).filter(id=>!currentRelationIds.has(id));
+ const missingIds=previousScopedRelationsNeedingLiveVerification(previousRaw,raw,relation=>relationMatchesScope(relation,cfg));
  const attempts=[],recovered_relation_ids=[],retired_relation_ids=[];
  for(const relationId of missingIds){
   const fetched=await fetchRelationFullFromOsmApi(relationId,code,{allowMissing:true});
@@ -168,7 +167,7 @@ async function recoverPreviousScopeRelations(raw,previousRaw,code,cfg){
   if(!relationMatchesScope(relation,cfg)){retired_relation_ids.push(relationId);continue;}
   for(const element of fetched.raw.elements)byKey.set(`${element.type}/${element.id}`,element);
   recovered_relation_ids.push(relationId);
-  console.warn(`OSM ${code}: recovered previous in-scope relation ${relationId} omitted by Overpass area index`);
+  console.warn(`OSM ${code}: recovered previous in-scope relation ${relationId} after Overpass omission or out-of-scope retag`);
  }
  return {raw:{...raw,elements:[...byKey.values()]},attempts,recovered_relation_ids,retired_relation_ids};
 }

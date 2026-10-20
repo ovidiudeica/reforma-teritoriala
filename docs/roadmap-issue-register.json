@@ -168,11 +168,7 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39389258992",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39390379936"
       ],
-      "verdict": "CLOSED_RETEST_PASS",
-      "postmerge_verification_sha": "1a6107594438d752e793df5dd57aed96272d4474",
-      "postmerge_evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39398274459"
-      ]
+      "verdict": "CLOSED_RETEST_PASS"
     },
     {
       "id": "RM-009",
@@ -189,11 +185,84 @@
         "RM-009 before regression exit1; original e8f418c inventory contains433 resources and is superseded for complete-runtime acceptance.",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39393411861"
       ],
-      "verdict": "CLOSED_RETEST_PASS",
-      "postmerge_verification_sha": "1a6107594438d752e793df5dd57aed96272d4474",
-      "postmerge_evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39398274459"
-      ]
+      "verdict": "CLOSED_RETEST_PASS"
+    },
+    {
+      "id": "RM-010",
+      "severity": "P0",
+      "component": "OSM-FIX.2 security / candidate publication and source paths",
+      "reproduction": "Inspect CodeQL check 118873508997 at a20c55036a66fad6a037d0fe9f898beea2f0b5bd: 1 critical privileged-checkout and 12 high path/SSRF annotations.",
+      "cause": "New workflow executes repository code with contents:write; new source tooling forwards environment paths and manifest-derived URLs/paths without a closed allowlist at all file/network sinks.",
+      "change": "Separate read-only candidate construction from a publisher that never checks out or executes repository/artifact code; publisher verifies exact base, regular-file modes and source-only diff. Restrict manifests, evidence paths, content-addressed snapshots and official API URL origin/path; disallow redirects.",
+      "regression": "osm-source-paths.test.mjs; workflow-write-boundaries.test.mjs; exact-head CodeQL required.",
+      "verdict": "OPEN_PENDING_EXACT_HEAD_CI",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/118873508997"
+      ],
+      "pr": 398,
+      "verification_sha": null
+    },
+    {
+      "id": "RM-011",
+      "severity": "P1",
+      "component": "OSM dependency expansion / closure diagnostics",
+      "entities": [
+        "relation/55466",
+        "node/140097206",
+        "relation/1699032",
+        "relation/1706978",
+        "relation/1706979",
+        "relation/7103068"
+      ],
+      "reproduction": "Run 39493585697: singleton authoritative relation/full fails on node/140097206. Candidate run 39490046141 omits three subarea relations beneath 1699032.",
+      "cause": "A relation/full response does not recursively expand child-relation ways/nodes. Bulk import did not enforce recursive closure. Closure audit checked only direct ways and truncated diagnostics; node coordinate presence was not tested.",
+      "change": "Recover only real API dependencies with a bounded request budget, cycle detection, no version drift and no change of selected inventory. Preserve full recursive missing-reference and coordinate diagnostics. Retain OSM relation versions via out meta.",
+      "regression": "osm-dependency-recovery.test.mjs; osm-closure-audit.test.mjs; existing adaptive transport regression tests.",
+      "verdict": "OPEN_PENDING_LIVE_RETEST",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39493585697",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39490046141",
+        "Live candidate39499124871 at ac95d6eb9e18ce3dae3037b1aa74ac00613175b8: RO/MD missing_reference_count=0,invalid_coordinate_count=0; only two independent real-source topology defects remain."
+      ],
+      "pr": 398,
+      "verification_sha": null
+    },
+    {
+      "id": "RM-012",
+      "severity": "P1",
+      "component": "Current OSM boundary closure / source evidence",
+      "entities": [
+        "relation/18967493",
+        "relation/18968082"
+      ],
+      "reproduction": "Audit archived current-source candidate 39490046141: Horești outer endpoints 12318728194/12318728593 and Buneți 11649857778/8265822008 each have odd degree 1.",
+      "cause": "CONFIRMED_EXTERNAL_OSM_DATA: official relation/full responses reproduce the same odd endpoint IDs with complete node coordinates/dependencies: Horești relation18967493 v6 (2026-01-08T17:48:30Z), Buneți relation18968082 v7 (2026-03-31T13:11:32Z). It is not a validator invention or a missing-node import artifact.",
+      "change": "No fabricated edge, relation resurrection, feature exclusion or ACTUAL mutation. Preserve failed source acceptance until the official source is legitimately corrected and recaptured.",
+      "regression": "osm-closure-audit.test.mjs keeps odd endpoints blocked even when a subarea ring is closed.",
+      "verdict": "BLOCKED_EXTERNAL_OSM_TOPOLOGY",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39490046141",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39499124871",
+        "GitHub artifact12299141401 sha256:f2417a9531715c0597400ba89c2626ad046e41b25a2a2dfdbabd708654e7299c"
+      ],
+      "pr": 398,
+      "verification_sha": null
+    },
+    {
+      "id": "RM-013",
+      "severity": "P1",
+      "component": "WEB-R2a.1 workflow YAML / OSM source-only data guard",
+      "entities": [],
+      "pr": 398,
+      "reproduction": "Push41b85f4d1fad79e4c356779f6e6eb983908894c8: workflow39499819107 fails before creating jobs; workflow source has an upload step inserted into a truncated while IFS= line and a stray unindented tab delimiter.",
+      "cause": "Earlier OSM-FIX.2 commit16f6ad104363ea8ba7cd6cced205f45a7c8a35e1 corrupted the YAML run scalar while replacing the data guard; duplicated upload block breaks workflow parsing.",
+      "change": "Restore a single complete tab-delimited Bash while loop with the existing strict source-only path/status checks and one evidence upload step. No allowlist or guard relaxation.",
+      "regression": "workflow-write-boundaries.test.mjs: complete indented data-guard scalar, single upload and retained rejection diagnostics; real GitHub workflow validation and execution required.",
+      "verification_sha": null,
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39499819107"
+      ],
+      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
     }
   ],
   "environment_incidents": [
@@ -203,7 +272,8 @@
       "cause": "Git LF to CRLF conversion",
       "remedy": "Restore exact tracked blob bytes; do not alter accepted hashes",
       "retest": "p907219 --audit and --self-test PASS",
-      "verdict": "RESOLVED"
+      "verdict": "RESOLVED",
+      "observations": []
     },
     {
       "id": "ENV-002",
@@ -211,7 +281,8 @@
       "cause": "CDP Page.enable timed out before samples; root cause beyond sandbox transport not proven",
       "remedy": "Rerun with authorized local connection access",
       "retest": "Chrome/155.0.8059.80 benchmark PASS",
-      "verdict": "RESOLVED_FOR_EXECUTION"
+      "verdict": "RESOLVED_FOR_EXECUTION",
+      "observations": []
     },
     {
       "id": "ENV-003",
@@ -219,7 +290,8 @@
       "cause": "spawn bash ENOENT; existing platform-dependent adversarial preflight also skipped",
       "remedy": "Use the existing mandatory Linux verify-persisted-release job, which invokes test:actual-candidate-lifecycle; no test altered or disabled",
       "retest": "152 PASS, zero FAIL, zero SKIP on main 335234bdb7b8cec828d4d2ad11d42d5bc5f99642, Actions 39326818180",
-      "verdict": "RESOLVED_LINUX_CI"
+      "verdict": "RESOLVED_LINUX_CI",
+      "observations": []
     },
     {
       "id": "ENV-004",
@@ -232,13 +304,7 @@
         118330713332,
         118332458878,
         118333769340,
-        118337163408,
-        118349531342,
-        118520295126,
-        118521596197,
-        118532245152,
-        118537246514,
-        118545209412
+        118337163408
       ],
       "observations": [
         {
@@ -337,11 +403,19 @@
     {
       "id": "GATE-003",
       "stage": "WEB-R2c.4",
-      "description": "Final published Pages E2E acceptance remains pending.",
+      "description": "Final published Pages E2E acceptance (completed and evidence-bound).",
       "verdict": "CLOSED_PASS",
       "main": "1a6107594438d752e793df5dd57aed96272d4474",
-      "pr": 393
+      "pr": 393,
+      "postmerge_workflows_pass": 14,
+      "postmerge_checks_pass": 21,
+      "published_runtime_resources_verified": 435,
+      "published_geojson_verified": 125,
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39397897942",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39398274459"
+      ]
     }
   ],
-  "updated_at": "2026-10-20T08:32:15.814Z"
+  "updated_at": "2026-10-20T21:27:05.158Z"
 }

@@ -1,0 +1,36 @@
+name: OSM source continuity fail-closed
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/actual-candidate.yml'
+      - '.github/workflows/osm-source-continuity.yml'
+      - 'scripts/import/import-osm.mjs'
+      - 'scripts/lib/osm-source-continuity.mjs'
+      - 'scripts/process/audit-osm-refresh-continuity.mjs'
+      - 'scripts/test/osm-source-continuity.test.mjs'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/actual-candidate.yml'
+      - '.github/workflows/osm-source-continuity.yml'
+      - 'scripts/import/import-osm.mjs'
+      - 'scripts/lib/osm-source-continuity.mjs'
+      - 'scripts/process/audit-osm-refresh-continuity.mjs'
+      - 'scripts/test/osm-source-continuity.test.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  source-continuity-negative-tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Reject missing and altered OSM relations
+        run: node --test scripts/test/osm-source-continuity.test.mjs
+      - name: Verify import OSM lifecycle guards
+        run: node --test scripts/test/osm-refresh-routing.test.mjs
