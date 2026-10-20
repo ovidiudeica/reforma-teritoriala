@@ -168,7 +168,11 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39389258992",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39390379936"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "1a6107594438d752e793df5dd57aed96272d4474",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39398274459"
+      ]
     },
     {
       "id": "RM-009",
@@ -185,7 +189,11 @@
         "RM-009 before regression exit1; original e8f418c inventory contains433 resources and is superseded for complete-runtime acceptance.",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39393411861"
       ],
-      "verdict": "CLOSED_RETEST_PASS"
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "1a6107594438d752e793df5dd57aed96272d4474",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39398274459"
+      ]
     }
   ],
   "environment_incidents": [
@@ -224,16 +232,86 @@
         118330713332,
         118332458878,
         118333769340,
-        118337163408
-      ]
+        118337163408,
+        118349531342,
+        118520295126,
+        118521596197,
+        118532245152,
+        118537246514,
+        118545209412
+      ],
+      "observations": [
+        {
+          "sha": "1a6107594438d752e793df5dd57aed96272d4474",
+          "job": 118545209412,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/1a6107594438d752e793df5dd57aed96272d4474/failure-118545209412.json",
+          "auditSha256": "c6192628152e79a31165c3e30c8c4715a51558c5ac83a30a41da8da5ebedd059",
+          "log": "outputs/ci-watch/1a6107594438d752e793df5dd57aed96272d4474/failure-118545209412.log",
+          "logSha256": "3d64726286311e7e634f36f089b48d081c94d878f6942f488ae6e140783a9bc8",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "6216178a96cf0f790d1348d5a1108f0838fbc84d",
+          "job": 118520295126,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/6216178a96cf0f790d1348d5a1108f0838fbc84d/failure-118520295126.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/6216178a96cf0f790d1348d5a1108f0838fbc84d/failure-118520295126.log",
+          "logSha256": "858cbbb0a9cd559e7c181dffa6d5e2d9b8bef5d07b429f001a907763e4b52945",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "861d78b232a1f99d92255201526fffe19a2b7558",
+          "job": 118532245152,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118532245152.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118532245152.log",
+          "logSha256": "b4f9301a3e50668d1a2eeabc2f542f71ffa70f20ad87655f3999a0b0c113acaa",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "861d78b232a1f99d92255201526fffe19a2b7558",
+          "job": 118537246514,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118537246514.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118537246514.log",
+          "logSha256": "775d7ef5bbf08963cccb13b13689ee45ef45a855e648b3db7702b94c3d624d9d",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+          "job": 118349531342,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/ad5073041d582cae9caa6f031684ffd0a427d938/failure-118349531342.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/ad5073041d582cae9caa6f031684ffd0a427d938/failure-118349531342.log",
+          "logSha256": "0d54f1c44a9cecae9b88b79e761cd5bf688b06487c26160e83a15806f571517d",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "e8f418c005396b2fbda8bf883867b6e745e83a7b",
+          "job": 118521596197,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/e8f418c005396b2fbda8bf883867b6e745e83a7b/failure-118521596197.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/e8f418c005396b2fbda8bf883867b6e745e83a7b/failure-118521596197.log",
+          "logSha256": "870e63ea7ea21d64931021a098cbfdf81fcd3e504fe28c7534c63fcac118fb92",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        }
+      ],
+      "note": "Historical original failures and bounded same-SHA retests are retained. Each final head and postmerge requires all gates PASS; no protected contract was changed."
     }
   ],
   "open_evidence_gates": [
-    {
-      "id": "GATE-003",
-      "stage": "WEB-R2c.4",
-      "description": "Final published Pages E2E acceptance remains pending."
-    },
     {
       "id": "GATE-004",
       "stage": "NI-JUR.0 through NI-JUR.4",
@@ -255,7 +333,15 @@
       "verdict": "CLOSED_PASS",
       "main": "970ce9ad70273c3b34721c283075875b04e1a2a3",
       "pr": 392
+    },
+    {
+      "id": "GATE-003",
+      "stage": "WEB-R2c.4",
+      "description": "Final published Pages E2E acceptance remains pending.",
+      "verdict": "CLOSED_PASS",
+      "main": "1a6107594438d752e793df5dd57aed96272d4474",
+      "pr": 393
     }
   ],
-  "updated_at": "2026-10-20T06:46:07.487Z"
+  "updated_at": "2026-10-20T08:32:15.814Z"
 }
