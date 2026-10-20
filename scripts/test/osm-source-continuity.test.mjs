@@ -86,3 +86,14 @@ test('previously in-scope IDs unchanged in Overpass do not trigger unnecessary A
   const matches=element=>element?.tags?.boundary==='administrative';
   assert.deepEqual(previousScopedRelationsNeedingLiveVerification(old,current,matches),[]);
 });
+
+test('authoritative HTTP 410 retirement remains visible as evidence, not as a synthetic source recovery',()=>{
+  const input=fixture();
+  input.after.countries.MD={...mkEntry([100,102]),continuity_retired_relation_ids:[101],
+    continuity_relation_attempts:[{relation_id:101,status:'not_found',http_status:410,started_at:'2026-10-20T12:00:22Z'}]};
+  input.afterRaw.MD=raw([100,102]);
+  const result=assessOsmSourceContinuity(input);
+  assert.equal(result.status,'BLOCKED_UNADJUDICATED_OSM_RELATION_DRIFT');
+  assert.deepEqual(result.countries.MD.missing[0].authoritative_probe.map(x=>x.http_status),[410]);
+  assert.deepEqual(result.countries.MD.retired_by_api,[101]);
+});
