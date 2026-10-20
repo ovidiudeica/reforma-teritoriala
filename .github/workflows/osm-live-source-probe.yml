@@ -10,6 +10,7 @@ on:
       - 'data/sources/osm-source-contract.json'
       - 'data/sources/osm-source-current.json'
       - 'data/sources/osm-source-transition-policy.json'
+      - 'data/sources/osm-source-refresh-request.json'
       - 'scripts/import/import-osm.mjs'
       - 'scripts/lib/osm-source-continuity.mjs'
       - 'scripts/lib/osm-source-transition.mjs'
@@ -20,6 +21,10 @@ on:
 
 permissions:
   contents: read
+
+concurrency:
+  group: osm-live-source-probe-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   source-only-replay:
