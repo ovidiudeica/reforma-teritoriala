@@ -224,10 +224,9 @@ jobs:
     steps:
       # No checkout and no repository/artifact code executes with this token.
       - name: Download only the bundle from the successful dependency in this run
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
-        with:
-          name: osm-source-publication-bundle
-          path: ${{ runner.temp }}/osm-source-publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name osm-source-publication-bundle --dir "$RUNNER_TEMP/osm-source-publication"
 
       - name: Validate candidate objects and exact source-only write surface
         run: |

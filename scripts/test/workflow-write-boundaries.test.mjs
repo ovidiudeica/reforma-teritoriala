@@ -67,7 +67,6 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
  const allowedUses=new Set([
   'actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09',
   'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02',
-  'actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0',
   './.github/workflows/actual-candidate.yml'
  ]);
  const allowedScheduledWrite=new Set([
@@ -141,6 +140,8 @@ test('OSM source candidate writer is workflow-run gated and never executes reque
  assert.match(publisher,/contents: write/);
  assert.doesNotMatch(publisher,/uses: actions\/checkout@|node scripts\/|npm |bash .*bundle/);
  assert.match(publisher,/git bundle verify/);
+ assert.match(publisher,/gh run download "\$GITHUB_RUN_ID" --repo "\$GITHUB_REPOSITORY"/);
+ assert.doesNotMatch(publisher,/uses:/);
  assert.match(publisher,/git show -s --format=%P/);
  assert.match(publisher,/100644/);
 });

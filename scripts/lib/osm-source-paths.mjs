@@ -21,5 +21,12 @@ export function osmSnapshotPath(entry,code){
 export function officialOsmUrl(value){
  const url=new URL(value);
  if(url.origin!=='https://api.openstreetmap.org'||url.username||url.password||url.search||url.hash||!/^\/api\/0\.6\/(?:relation\/[1-9]\d*(?:\/history|\/full)?|changeset\/[1-9]\d*)\.json$/.test(url.pathname))throw new Error('Forbidden official OSM URL');
- return url;
+ const match=/^\/api\/0\.6\/(relation|changeset)\/([1-9]\d*)(\/history|\/full)?\.json$/.exec(url.pathname);
+ const id=Number(match[2]);
+ if(!Number.isSafeInteger(id))throw new Error('Forbidden official OSM numeric identity');
+ const resource=match[1]==='relation'?'relation':'changeset';
+ const operation=match[3]==='/history'?'/history':match[3]==='/full'?'/full':'';
+ // Build the request from a constant authority, finite path segments and an
+ // integer. The caller-provided URL never becomes the outgoing authority/path.
+ return new URL('https://api.openstreetmap.org/api/0.6/'+resource+'/'+id+operation+'.json');
 }
