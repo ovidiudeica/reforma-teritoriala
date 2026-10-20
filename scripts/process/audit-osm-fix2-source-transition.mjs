@@ -167,7 +167,12 @@ async function main(){
  await mkdir('outputs',{recursive:true});
  await writeFile(REPORT,JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify({status,report:REPORT,closure_pass:closurePass,geometry_pass:geometryPass,
-  actual_invariants:report.actual_invariants.status,transition_status:transition.status},null,2));
+  actual_invariants:report.actual_invariants.status,transition_status:transition.status,
+  transition_failures:transition.failures,
+  closure_diagnostics:closure.map(({code,selected_relation_count,missing_reference_count,missing_references,topology_issue_count,topology_issues})=>({
+   code,selected_relation_count,missing_reference_count,topology_issue_count,
+   missing_references:missing_references.slice(0,12),topology_issues:topology_issues.slice(0,12)
+  }))},null,2));
  if(status!=='PASS_SOURCE_ONLY_TRANSITION')process.exitCode=1;
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});
