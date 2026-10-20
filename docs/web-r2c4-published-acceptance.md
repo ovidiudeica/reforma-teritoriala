@@ -8,4 +8,12 @@ Auditorul candidat și sursa publicată se identifică separat. În PR, domeniul
 
 Orice problemă reproductibilă nouă se înregistrează și se remediază cu regresie. Acceptarea finală necesită toate gate-urile, capturile relevante inspectate și zero defecte tehnice cunoscute deschise. Nu se schimbă UX fără un contract verificat. ACTUAL, părinții juridici MD, geometriile și P9.1 rămân protejate; acceptarea semantică rămâne BLOCKED_INCOMPLETE.
 
-Stare: audit în curs; etapele NI-JUR nu au început.
+Rularea [39390379936](https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39390379936), auditor `6216178a96cf0f790d1348d5a1108f0838fbc84d`, trece pe baseline-ul publicat `970ce9ad70273c3b34721c283075875b04e1a2a3`. Inventarul urmărit de Git cuprinde 433 resurse, 125 GeoJSON și 277.099.270 octeți comparați SHA-256. Se păstrează calea reală `public/` a resurselor; fișierele neurmărite nu sunt tratate drept resurse publicate. Verificarea este read-only, cu maximum șase cereri simultane și refuz la HTTP diferit de 200, redirect sau hash necorespunzător.
+
+Scenariile adăugate verifică prin pointer bifele celor două rădăcini ACTUAL și ale tuturor celor opt contururi NI, separat de selecția cardului; filtrul statistic 1 independent de OSM 8/9; cele trei comutatoare de jurisdicție; resetarea geometriilor fără resetarea filtrelor/selecției și resetarea filtrelor fără resetarea geometriilor/selecției. Matricea include patru porniri la viewport-ul declarat și două ferestre cu zoom nativ 200%. Regresiile unitare refuză resurse învechite chiar și cu HTTP 200 și păstrează diagnosticul unui 404.
+
+RM-008 a fost un defect al noului scenariu: după selecția unui card pe tabletă, panoul Entități se închide conform UX existent, dar auditorul încerca un checkbox ascuns. Originalul eșuat [39389258992](https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39389258992) se păstrează; remedierea redeschide panoul prin controlul public înainte de secvența individuală. Retestarea celor patru profiluri trece. Aplicația și corpusul nu au fost modificate în acest PR.
+
+Limitele rămân explicite: profiluri Chromium pe runner, nu dispozitive fizice; arbore AX, nu certificare cu cititor de ecran; zoom nativ de pagină separat de mărirea fonturilor P7.6 din suita locală obligatorie; comparație de resurse pe intervalul rulării, nu snapshot global atomic al CDN-ului.
+
+Stare: acceptarea integrării rămâne condiționată de toate gate-urile pe head-ul final, inspecția capturilor, auditul diff și verificarea post-merge CI/Pages cu `PUBLISHED_EXACT_CHECKOUT`. Etapele NI-JUR nu au început.
