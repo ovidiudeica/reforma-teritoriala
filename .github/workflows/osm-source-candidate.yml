@@ -9,7 +9,7 @@ on:
     types: [completed]
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: osm-source-candidate-${{ github.event.workflow_run.head_branch }}
@@ -17,6 +17,10 @@ concurrency:
 
 jobs:
   materialize-source-candidate:
+    outputs:
+      base: ${{ steps.base.outputs.sha }}
+      commit: ${{ steps.candidate.outputs.commit_sha }}
+      branch: ${{ steps.candidate.outputs.branch }}
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'pull_request' &&
@@ -194,31 +198,105 @@ jobs:
           echo "commit_sha=$CANDIDATE_COMMIT" >> "$GITHUB_OUTPUT"
           echo "branch=$CANDIDATE_BRANCH" >> "$GITHUB_OUTPUT"
 
+      - name: Package candidate objects without repository write credentials
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: git bundle create "$RUNNER_TEMP/osm-source-candidate.bundle" "$BASE_SHA..HEAD"
+
+      - name: Preserve candidate for isolated publisher in this workflow run
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: osm-source-publication-bundle
+          path: ${{ runner.temp }}/osm-source-candidate.bundle
+          if-no-files-found: error
+          retention-days: 30
+
+  publish-source-candidate:
+    needs: materialize-source-candidate
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      BASE_SHA: ${{ needs.materialize-source-candidate.outputs.base }}
+      CANDIDATE_COMMIT: ${{ needs.materialize-source-candidate.outputs.commit }}
+      CANDIDATE_BRANCH: ${{ needs.materialize-source-candidate.outputs.branch }}
+      LIVE_RUN_ID: ${{ github.event.workflow_run.id }}
+    steps:
+      # No checkout and no repository/artifact code executes with this token.
+      - name: Download only the bundle from the successful dependency in this run
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: osm-source-publication-bundle
+          path: ${{ runner.temp }}/osm-source-publication
+
+      - name: Validate candidate objects and exact source-only write surface
+        run: |
+          set -euo pipefail
+          [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$CANDIDATE_COMMIT" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$LIVE_RUN_ID" =~ ^[0-9]+$ ]]
+          test "$CANDIDATE_BRANCH" = "osm/source-candidate-$LIVE_RUN_ID"
+          git init .
+          git remote add origin "https://github.com/${{ github.repository }}.git"
+          git fetch --no-tags origin refs/heads/main:refs/remotes/origin/main
+          test "$(git rev-parse origin/main)" = "$BASE_SHA"
+          git bundle verify "$RUNNER_TEMP/osm-source-publication/osm-source-candidate.bundle"
+          git fetch "$RUNNER_TEMP/osm-source-publication/osm-source-candidate.bundle" HEAD
+          test "$(git rev-parse FETCH_HEAD)" = "$CANDIDATE_COMMIT"
+          test "$(git show -s --format=%P "$CANDIDATE_COMMIT")" = "$BASE_SHA"
+          EVIDENCE_DIR="docs/evidence/osm-fix2/source-candidate-$LIVE_RUN_ID"
+          mapfile -t changes < <(git diff --name-status "$BASE_SHA" "$CANDIDATE_COMMIT")
+          test "${#changes[@]}" -ge 7
+          manifest_seen=0
+          snapshot_count=0
+          for row in "${changes[@]}"; do
+            status="${row%%$'\t'*}"
+            path="${row#*$'\t'}"
+            case "$path" in
+              data/sources/osm-source-current.json)
+                test "$status" = M
+                manifest_seen=1
+                ;;
+              data/sources/osm-snapshots/*.json.gz)
+                test "$status" = A
+                [[ "$path" =~ ^data/sources/osm-snapshots/(ro|md)-[a-f0-9]{64}\.json\.gz$ ]]
+                snapshot_count=$((snapshot_count+1))
+                ;;
+              "$EVIDENCE_DIR"/*.json)
+                test "$status" = A
+                [[ "${path##*/}" =~ ^[a-z0-9-]+\.json$ ]]
+                ;;
+              *) exit 1 ;;
+            esac
+            test "$(git ls-tree "$CANDIDATE_COMMIT" -- "$path" | cut -d' ' -f1)" = 100644
+          done
+          test "$manifest_seen" -eq 1
+          test "$snapshot_count" -ge 1
+          git diff --check "$BASE_SHA" "$CANDIDATE_COMMIT"
+
       - name: Publish isolated candidate branch
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          CANDIDATE_BRANCH: ${{ steps.candidate.outputs.branch }}
-          CANDIDATE_COMMIT: ${{ steps.candidate.outputs.commit_sha }}
         run: |
           set -euo pipefail
           if git ls-remote --exit-code --heads origin "refs/heads/$CANDIDATE_BRANCH" >/dev/null 2>&1; then
             echo "Candidate branch already exists; refusing overwrite: $CANDIDATE_BRANCH" >&2
             exit 1
           fi
-          test "$(git rev-parse HEAD)" = "$CANDIDATE_COMMIT"
+          test "$(git rev-parse FETCH_HEAD)" = "$CANDIDATE_COMMIT"
           AUTH_HEADER="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH_HEADER" \
             push --force-with-lease="refs/heads/$CANDIDATE_BRANCH:" \
-            origin "HEAD:refs/heads/$CANDIDATE_BRANCH"
+            origin "$CANDIDATE_COMMIT:refs/heads/$CANDIDATE_BRANCH"
 
       - name: Publish candidate handoff summary
         run: |
           {
             echo "### OSM source candidate materialized"
             echo
-            echo "- Branch: ${{ steps.candidate.outputs.branch }}"
-            echo "- Commit: ${{ steps.candidate.outputs.commit_sha }}"
-            echo "- Trusted main base: ${{ steps.base.outputs.sha }}"
+            echo "- Branch: $CANDIDATE_BRANCH"
+            echo "- Commit: $CANDIDATE_COMMIT"
+            echo "- Trusted main base: $BASE_SHA"
             echo "- Triggering live probe: $LIVE_RUN_ID"
             echo "- ACTUAL mutation: denied"
             echo "- P9.1 import: denied"

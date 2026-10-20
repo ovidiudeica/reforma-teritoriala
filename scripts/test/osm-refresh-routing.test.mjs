@@ -81,7 +81,9 @@ test('OSM importer is the only networked OSM source step and writes durable cont
  assert.match(importer,/semantic_sha256/);
  assert.match(importer,/OSM_API_BASE='https:\/\/api\.openstreetmap\.org\/api\/0\.6'/);
  assert.match(importer,/refreshRequiredRelationsFromOsmApi/);
- assert.match(importer,/relation\/\$\{relationId\}\/full\.json/);
+ assert.match(importer,/allowMissing=false,type='relation'/);
+ assert.match(importer,/\$\{type\}\/\$\{Number\(relationId\)\}/);
+ assert.match(importer,/type==='node'\?'':'\/full'/);
  assert.match(importer,/authoritative_relation_source/);
  assert.match(importer,/authoritative_relation_ids/);
  assert.match(importer,/authoritative_relation_attempts/);
@@ -143,7 +145,8 @@ test('refreshed OSM source scope, not geometric containment, controls jurisdicti
  ]);
  assert.match(importer,/selected_relation_count/);
  assert.match(importer,/selected_relation_ids/);
- assert.match(importer,/selectedRelationIds:\[\.\.\.new Set\(raw\.elements\.filter\(x=>relationMatchesScope\(x,cfg\)\)/);
+ assert.match(importer,/const selectedRelationIds=\[\.\.\.new Set\(raw\.elements\.filter\(x=>relationMatchesScope\(x,cfg\)\)/);
+ assert.match(importer,/raw=await closeRawDependencies\(raw,selectedRelationIds,code,authoritative.attempts\)/);
  assert.match(builder,/Array\.isArray\(sourceEntry\.selected_relation_ids\)/);
  assert.match(builder,/source_scope_membership_applied/);
  assert.match(builder,/OSM source selection determines jurisdiction membership/);

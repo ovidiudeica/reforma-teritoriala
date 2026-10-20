@@ -3,19 +3,21 @@ import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import {assessOsmSourceTransition} from '../lib/osm-source-transition.mjs';
+import {osmManifestPath,osmEvidencePath,osmSnapshotPath} from '../lib/osm-source-paths.mjs';
+import {auditOsmClosure} from '../lib/osm-closure-audit.mjs';
 
-const BASELINE=process.env.OSM_ACTUAL_PIN_MANIFEST||'data/sources/osm-current.json';
-const CANDIDATE=process.env.OSM_CURRENT_SOURCE_MANIFEST||'data/sources/osm-source-current.json';
-const POLICY=process.env.OSM_SOURCE_TRANSITION_POLICY||'data/sources/osm-source-transition-policy.json';
-const CONTINUITY=process.env.OSM_SOURCE_CONTINUITY_REPORT||'outputs/osm-source-continuity.json';
-const REPORT=process.env.OSM_FIX2_REPORT||'outputs/osm-fix2-source-transition.json';
+const BASELINE=osmManifestPath(process.env.OSM_ACTUAL_PIN_MANIFEST||'data/sources/osm-current.json');
+const CANDIDATE=osmManifestPath(process.env.OSM_CURRENT_SOURCE_MANIFEST||'data/sources/osm-source-current.json');
+const POLICY=osmEvidencePath(process.env.OSM_SOURCE_TRANSITION_POLICY||'data/sources/osm-source-transition-policy.json','policy');
+const CONTINUITY=osmEvidencePath(process.env.OSM_SOURCE_CONTINUITY_REPORT||'outputs/osm-source-continuity.json','continuity');
+const REPORT=osmEvidencePath(process.env.OSM_FIX2_REPORT||'outputs/osm-fix2-source-transition.json','transition');
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 
 const readJson=async path=>JSON.parse(await readFile(path,'utf8'));
 const elementKey=(type,id)=>type+'/'+Number(id);
 
 async function loadSnapshot(entry,code){
- const compressed=await readFile(entry.snapshot_path);
+ const compressed=await readFile(osmSnapshotPath(entry,code.split(' ')[0]));
  if(sha256(compressed)!==entry.compressed_sha256)throw new Error(code+' compressed snapshot SHA-256 mismatch');
  const canonical=gunzipSync(compressed);
  if(sha256(canonical)!==entry.semantic_sha256)throw new Error(code+' semantic snapshot SHA-256 mismatch');
@@ -28,39 +30,6 @@ async function loadSnapshot(entry,code){
  }
  if((raw.elements||[]).length!==entry.element_count)throw new Error(code+' element count mismatch');
  return {raw,byKey};
-}
-
-function closureAudit(snapshot,entry,code){
- const selected=new Set((entry.selected_relation_ids||[]).map(Number));
- const missing=[];
- const topology=[];
- for(const relationId of selected){
-  const relation=snapshot.byKey.get(elementKey('relation',relationId));
-  if(!relation){missing.push({owner:'relation/'+relationId,missing:'relation/'+relationId});continue;}
-  const endpoints={outer:new Map(),inner:new Map()};
-  for(const member of relation.members||[]){
-   const key=elementKey(member.type,member.ref);
-   const child=snapshot.byKey.get(key);
-   if(!child){missing.push({owner:'relation/'+relationId,missing:key,role:member.role||''});continue;}
-   if(member.type!=='way')continue;
-   for(const nodeId of child.nodes||[]){
-    if(!snapshot.byKey.has(elementKey('node',nodeId)))missing.push({owner:key,missing:'node/'+nodeId});
-   }
-   if((member.role==='outer'||member.role==='inner')&&(child.nodes||[]).length>=2){
-    const nodes=child.nodes;
-    if(Number(nodes[0])!==Number(nodes[nodes.length-1])){
-     const degrees=endpoints[member.role];
-     for(const nodeId of [nodes[0],nodes[nodes.length-1]])degrees.set(Number(nodeId),(degrees.get(Number(nodeId))||0)+1);
-    }
-   }
-  }
-  const odd=Object.fromEntries(Object.entries(endpoints).map(([role,degrees])=>[
-   role,[...degrees.entries()].filter(([,degree])=>degree%2!==0).map(([node_id,degree])=>({node_id,degree}))
-  ]));
-  if(odd.outer.length||odd.inner.length)topology.push({relation_id:relationId,odd_endpoints:odd});
- }
- return {code,selected_relation_count:selected.size,missing_reference_count:missing.length,
-  missing_references:missing.slice(0,100),topology_issue_count:topology.length,topology_issues:topology.slice(0,100)};
 }
 
 const canonicalRing=coords=>{
@@ -121,7 +90,7 @@ async function main(){
  for(const code of ['RO','MD']){
   baselineRaw[code]=await loadSnapshot(baseline.countries[code],code+' baseline');
   candidateRaw[code]=await loadSnapshot(candidate.countries[code],code+' candidate');
-  closure.push(closureAudit(candidateRaw[code],candidate.countries[code],code));
+  closure.push(auditOsmClosure(candidateRaw[code].raw,candidate.countries[code].selected_relation_ids||[],code));
  }
  const transition=assessOsmSourceTransition({baseline,candidate,continuity,policy});
  const retiredGeometry=(policy.expected_transition.retired_relations||[]).map(row=>({
@@ -154,7 +123,7 @@ async function main(){
   && invariants.release_fingerprint_sha256==='a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446'
   && invariants.source_bundle_fingerprint_sha256==='af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b'
   && invariants.source_bundle_osm_manifest_path==='data/sources/osm-current.json';
- const closurePass=closure.every(x=>x.missing_reference_count===0&&x.topology_issue_count===0);
+ const closurePass=closure.every(x=>x.missing_reference_count===0&&x.invalid_coordinate_count===0&&x.topology_issue_count===0);
  const geometryPass=retiredGeometry.every(x=>x.previous)&&successorGeometry.every(x=>x.previous&&x.current);
  const status=transition.status==='PASS_SOURCE_ONLY_TRANSITION'&&closurePass&&geometryPass&&invariantPass
   ?'PASS_SOURCE_ONLY_TRANSITION':'BLOCKED_SOURCE_TRANSITION';

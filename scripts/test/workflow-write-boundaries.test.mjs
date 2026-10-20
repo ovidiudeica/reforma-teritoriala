@@ -67,6 +67,7 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
  const allowedUses=new Set([
   'actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09',
   'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02',
+  'actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0',
   './.github/workflows/actual-candidate.yml'
  ]);
  const allowedScheduledWrite=new Set([
@@ -133,6 +134,15 @@ test('OSM source candidate writer is workflow-run gated and never executes reque
  assert.match(workflow,/CANDIDATE_BRANCH="osm\/source-candidate-\$LIVE_RUN_ID"/);
  assert.doesNotMatch(workflow,/HEAD:refs\/heads\/main/);
  assert.doesNotMatch(workflow,/git\s+push\s+origin\s+(?:HEAD:)?main\b/);
+ const [builder,publisher]=workflow.split('  publish-source-candidate:');
+ assert.match(builder,/permissions:\s*\n  contents: read/);
+ assert.doesNotMatch(builder,/contents: write|GITHUB_TOKEN:/);
+ assert.match(publisher,/needs: materialize-source-candidate/);
+ assert.match(publisher,/contents: write/);
+ assert.doesNotMatch(publisher,/uses: actions\/checkout@|node scripts\/|npm |bash .*bundle/);
+ assert.match(publisher,/git bundle verify/);
+ assert.match(publisher,/git show -s --format=%P/);
+ assert.match(publisher,/100644/);
 });
 
 test('ACTUAL promotion respects repository PR-creation policy',async()=>{

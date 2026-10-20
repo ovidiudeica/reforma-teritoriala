@@ -7,9 +7,10 @@ import {execFileSync} from 'node:child_process';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import {assessOsmSourceContinuityCountry,summarizeOsmSourceContinuity} from '../lib/osm-source-continuity.mjs';
+import {osmManifestPath} from '../lib/osm-source-paths.mjs';
 
-const MANIFEST=process.env.OSM_CURRENT_SOURCE_MANIFEST||'data/sources/osm-current.json';
-const BASELINE_MANIFEST=process.env.OSM_CONTINUITY_BASELINE_MANIFEST||'';
+const MANIFEST=osmManifestPath(process.env.OSM_CURRENT_SOURCE_MANIFEST||'data/sources/osm-current.json');
+const BASELINE_MANIFEST=process.env.OSM_CONTINUITY_BASELINE_MANIFEST?osmManifestPath(process.env.OSM_CONTINUITY_BASELINE_MANIFEST):'';
 const REPORT='outputs/osm-source-continuity.json';
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
 const before=BASELINE_MANIFEST

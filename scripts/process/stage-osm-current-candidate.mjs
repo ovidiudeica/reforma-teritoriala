@@ -3,8 +3,9 @@ import {createHash} from 'node:crypto';
 import {copyFile,mkdir,readFile,writeFile} from 'node:fs/promises';
 import {basename} from 'node:path';
 import {gunzipSync} from 'node:zlib';
+import {osmManifestPath,osmSnapshotPath} from '../lib/osm-source-paths.mjs';
 
-const MANIFEST=process.env.OSM_CURRENT_SOURCE_MANIFEST||'data/sources/osm-source-current.json';
+const MANIFEST=osmManifestPath(process.env.OSM_CURRENT_SOURCE_MANIFEST||'data/sources/osm-source-current.json');
 const OUT='outputs/osm-source-candidate';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 
@@ -15,12 +16,13 @@ const staged=[];
 for(const code of ['RO','MD']){
  const entry=manifest.countries?.[code];
  if(!entry?.snapshot_path)throw new Error('Missing '+code+' snapshot path');
- const bytes=await readFile(entry.snapshot_path);
+ const path=osmSnapshotPath(entry,code);
+ const bytes=await readFile(path);
  if(sha256(bytes)!==entry.compressed_sha256)throw new Error(code+' staged compressed SHA-256 mismatch');
  const canonical=gunzipSync(bytes);
  if(sha256(canonical)!==entry.semantic_sha256)throw new Error(code+' staged semantic SHA-256 mismatch');
  const target=OUT+'/snapshots/'+basename(entry.snapshot_path);
- await copyFile(entry.snapshot_path,target);
+ await copyFile(path,target);
  staged.push({code,source_path:entry.snapshot_path,artifact_path:target,size_bytes:bytes.length,
   compressed_sha256:entry.compressed_sha256,semantic_sha256:entry.semantic_sha256});
 }

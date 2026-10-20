@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 import {resolveOsmSourceScopeConflicts} from '../lib/osm-source-scope-conflicts.mjs';
-import {fetchAdaptiveRelations,retryAfterMs} from '../lib/osm-adaptive-transport.mjs';
+import {fetchAdaptiveRelations,retryAfterMs,completeOsmDependencies} from '../lib/osm-adaptive-transport.mjs';
 import {previousScopedRelationsNeedingLiveVerification} from '../lib/osm-source-continuity.mjs';
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,rename,writeFile} from 'node:fs/promises';
 import {gzipSync,gunzipSync} from 'node:zlib';
+import {osmManifestPath} from '../lib/osm-source-paths.mjs';
 
-const MANIFEST=process.env.OSM_MANIFEST_PATH||'data/sources/osm-current.json';
+const MANIFEST=osmManifestPath(process.env.OSM_MANIFEST_PATH||'data/sources/osm-current.json');
 const SNAPSHOT_DIR='data/sources/osm-snapshots';
 const QUERY_VERSION=1;
 const MANIFEST_SCHEMA_VERSION=2;
@@ -48,9 +49,9 @@ const queryScopeFor=({iso,levels,requiredRelations=[]})=>{
  const required=requiredRelations.map(id=>`relation(${id});`).join('\n');
  return `relation["ISO3166-1"="${iso}"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;${filters}${required ? `\n${required}` : ''});`;
 };
-const queryFor=cfg=>`[out:json][timeout:300];${queryScopeFor(cfg)}out body;>;out skel qt;`;
-const inventoryQueryFor=cfg=>`[out:json][timeout:300];${queryScopeFor(cfg)}out body;`;
-const explicitRelationsQuery=ids=>`[out:json][timeout:300];relation(id:${ids.join(',')});out body;>;out skel qt;`;
+const queryFor=cfg=>`[out:json][timeout:300];${queryScopeFor(cfg)}out meta;>;out skel qt;`;
+const inventoryQueryFor=cfg=>`[out:json][timeout:300];${queryScopeFor(cfg)}out meta;`;
+const explicitRelationsQuery=ids=>`[out:json][timeout:300];relation(id:${ids.join(',')});out meta;>;out skel qt;`;
 function canonicalRaw(raw){
  const elements=[...raw.elements].sort((a,b)=>{
   const typeDelta=(typeOrder[a.type]??9)-(typeOrder[b.type]??9);
@@ -119,14 +120,15 @@ const relationMatchesScope=(relation,cfg)=>Boolean(
   || cfg.requiredRelations.includes(Number(relation.id))
  )
 );
-async function fetchRelationFullFromOsmApi(relationId,code,{allowMissing=false}={}){
+async function fetchRelationFullFromOsmApi(relationId,code,{allowMissing=false,type='relation'}={}){
+ if(!['relation','way','node'].includes(type)||!Number.isSafeInteger(Number(relationId))||Number(relationId)<=0)throw new Error('Invalid authoritative OSM element identity');
  const attempts=[];
  let lastError=null;
  for(let attempt=1;attempt<=OSM_API_RETRIES;attempt++){
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),OSM_API_REQUEST_TIMEOUT_MS);
   const startedAt=new Date().toISOString(),started=Date.now();
-  const url=`${OSM_API_BASE}/relation/${relationId}/full.json`;
+  const url=`${OSM_API_BASE}/${type}/${Number(relationId)}${type==='node'?'':'/full'}.json`;
   try{
    const response=await fetch(url,{headers:{accept:'application/json','user-agent':'reforma-teritoriala-osm-source/1.0'},signal:controller.signal});
    const retryDelay=retryAfterMs(response.headers.get('retry-after'));
@@ -138,7 +140,7 @@ async function fetchRelationFullFromOsmApi(relationId,code,{allowMissing=false}=
    }
    if(!response.ok)throw new Error(`HTTP ${response.status}: ${body.slice(0,240).replace(/\s+/g,' ')}`);
    const parsed=JSON.parse(body);
-   if(!Array.isArray(parsed?.elements)||!parsed.elements.some(x=>x.type==='relation'&&Number(x.id)===relationId))throw new Error('authoritative relation/full response is incomplete');
+   if(!Array.isArray(parsed?.elements)||!parsed.elements.some(x=>x.type===type&&Number(x.id)===Number(relationId)))throw new Error('authoritative element response is incomplete');
    attempts.push({relation_id:relationId,url,attempt,started_at:startedAt,duration_ms:Date.now()-started,status:'success',element_count:parsed.elements.length});
    console.log(`OSM API ${code}: authoritative relation ${relationId} accepted on attempt ${attempt}/${OSM_API_RETRIES}`);
    return {status:'success',raw:parsed,attempts};
@@ -153,6 +155,13 @@ async function fetchRelationFullFromOsmApi(relationId,code,{allowMissing=false}=
   }finally{clearTimeout(timer);}
  }
  throw new Error(`Authoritative OSM relation refresh failed closed for ${code} relation ${relationId}: ${lastError?.message||'unknown error'}`);
+}
+async function closeRawDependencies(raw,ids,code,attempts){
+ return completeOsmDependencies(raw,ids,{fetchMissing:async(type,id)=>{
+  const fetched=await fetchRelationFullFromOsmApi(id,code,{type});
+  attempts.push(...fetched.attempts.map(a=>({...a,element_type:type,purpose:'dependency_closure'})));
+  return fetched.raw;
+ }});
 }
 async function recoverPreviousScopeRelations(raw,previousRaw,code,cfg){
  if(!previousRaw)return {raw,attempts:[],recovered_relation_ids:[],retired_relation_ids:[]};
@@ -217,7 +226,11 @@ async function fetchCountryChunked(code,cfg,previousRaw,bulkAttempts=[]){
  const chunkAttempts=[];
  for(let i=0;i<relationIds.length;i+=OVERPASS_CHUNK_SIZE){
   const ids=relationIds.slice(i,i+OVERPASS_CHUNK_SIZE);
-  const part=await fetchAdaptiveRelations(ids,{fetchChunk:(part,purpose)=>fetchOverpassJson(explicitRelationsQuery(part),code,purpose),fetchFull:id=>fetchRelationFullFromOsmApi(id,code),attempts:chunkAttempts,purpose:`relations-${i/OVERPASS_CHUNK_SIZE+1}`});
+  const part=await fetchAdaptiveRelations(ids,{fetchChunk:(part,purpose)=>fetchOverpassJson(explicitRelationsQuery(part),code,purpose),fetchFull:async id=>{
+   const fetched=await fetchRelationFullFromOsmApi(id,code);
+   fetched.raw=await closeRawDependencies(fetched.raw,[id],code,fetched.attempts);
+   return fetched;
+  },attempts:chunkAttempts,purpose:`relations-${i/OVERPASS_CHUNK_SIZE+1}`});
   for(const element of part.elements)byKey.set(`${element.type}/${element.id}`,element);
  }
  for(const relationId of continuity.recovered_relation_ids){
@@ -231,13 +244,15 @@ async function fetchCountryChunked(code,cfg,previousRaw,bulkAttempts=[]){
  raw=finalContinuity.raw;
  const authoritative=await refreshRequiredRelationsFromOsmApi(raw,code,cfg);
  raw=authoritative.raw;
+ const selectedRelationIds=[...new Set(raw.elements.filter(x=>relationMatchesScope(x,cfg)).map(x=>Number(x.id)))].sort((a,b)=>a-b);
+ raw=await closeRawDependencies(raw,selectedRelationIds,code,authoritative.attempts);
  const counts=validateRaw(raw,code,cfg);
  const canonical=canonicalRaw(raw);
  const compressed=gzipSync(Buffer.from(canonical),{level:9,mtime:0});
  return {
   canonical,compressed,semanticSha:sha256(canonical),compressedSha:sha256(compressed),counts,
   endpoint:inventory.endpoint,querySha256:sha256(queryFor(cfg)),
-  selectedRelationIds:[...new Set(raw.elements.filter(x=>relationMatchesScope(x,cfg)).map(x=>Number(x.id)))].sort((a,b)=>a-b),
+  selectedRelationIds,
   attempts:[...bulkAttempts,...inventory.attempts,...chunkAttempts],
   authoritativeRelationAttempts:authoritative.attempts,
   continuityRelationAttempts:[...continuity.attempts,...finalContinuity.attempts],
@@ -285,6 +300,8 @@ async function fetchCountry(code,cfg,previousRaw){
     validateRaw(raw,code,cfg);
     const authoritative=await refreshRequiredRelationsFromOsmApi(raw,code,cfg);
     raw=authoritative.raw;
+    const selectedRelationIds=[...new Set(raw.elements.filter(x=>relationMatchesScope(x,cfg)).map(x=>Number(x.id)))].sort((a,b)=>a-b);
+    raw=await closeRawDependencies(raw,selectedRelationIds,code,authoritative.attempts);
     const counts=validateRaw(raw,code,cfg);
     const canonical=canonicalRaw(raw);
     const semanticSha=sha256(canonical);
@@ -294,7 +311,7 @@ async function fetchCountry(code,cfg,previousRaw){
     console.log(`Overpass ${code}: accepted ${counts.element_count} elements from ${endpoint} on attempt ${attempt}/${RETRIES_PER_ENDPOINT}`);
     return {
      canonical,compressed,semanticSha,compressedSha,counts,endpoint,querySha256:sha256(query),attempts,
-     selectedRelationIds:[...new Set(raw.elements.filter(x=>relationMatchesScope(x,cfg)).map(x=>Number(x.id)))].sort((a,b)=>a-b),
+     selectedRelationIds,
      authoritativeRelationAttempts:authoritative.attempts,
      continuityRelationAttempts:continuity.attempts,
      continuityRecoveredRelationIds:continuity.recovered_relation_ids,

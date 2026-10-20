@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {osmEvidencePath,officialOsmUrl} from '../lib/osm-source-paths.mjs';
 
 const POLICY='data/sources/osm-source-transition-policy.json';
-const REPORT=process.env.OSM_FIX2_FORENSICS_REPORT||'outputs/osm-fix2-per-id-forensics.json';
+const REPORT=osmEvidencePath(process.env.OSM_FIX2_FORENSICS_REPORT||'outputs/osm-fix2-per-id-forensics.json','forensics');
 const API='https://api.openstreetmap.org/api/0.6';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const canonicalize=value=>{
@@ -21,7 +22,8 @@ async function fetchText(url,{allowGone=false}={}){
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),30000);
   try{
-   const response=await fetch(url,{headers:{accept:'application/json','user-agent':'reforma-teritoriala-osm-fix2/1.0'},signal:controller.signal});
+   const target=officialOsmUrl(url);
+   const response=await fetch(target,{redirect:'error',headers:{accept:'application/json','user-agent':'reforma-teritoriala-osm-fix2/1.0'},signal:controller.signal});
    const body=await response.text();
    if(allowGone&&(response.status===404||response.status===410))return {status:response.status,body:null};
    if(!response.ok)throw new Error('HTTP '+response.status+' '+body.slice(0,160));

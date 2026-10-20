@@ -186,6 +186,64 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39393411861"
       ],
       "verdict": "CLOSED_RETEST_PASS"
+    },
+    {
+      "id": "RM-010",
+      "severity": "P0",
+      "component": "OSM-FIX.2 security / candidate publication and source paths",
+      "reproduction": "Inspect CodeQL check 118873508997 at a20c55036a66fad6a037d0fe9f898beea2f0b5bd: 1 critical privileged-checkout and 12 high path/SSRF annotations.",
+      "cause": "New workflow executes repository code with contents:write; new source tooling forwards environment paths and manifest-derived URLs/paths without a closed allowlist at all file/network sinks.",
+      "change": "Separate read-only candidate construction from a publisher that never checks out or executes repository/artifact code; publisher verifies exact base, regular-file modes and source-only diff. Restrict manifests, evidence paths, content-addressed snapshots and official API URL origin/path; disallow redirects.",
+      "regression": "osm-source-paths.test.mjs; workflow-write-boundaries.test.mjs; exact-head CodeQL required.",
+      "verdict": "OPEN_PENDING_EXACT_HEAD_CI",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/118873508997"
+      ],
+      "pr": 398,
+      "verification_sha": null
+    },
+    {
+      "id": "RM-011",
+      "severity": "P1",
+      "component": "OSM dependency expansion / closure diagnostics",
+      "entities": [
+        "relation/55466",
+        "node/140097206",
+        "relation/1699032",
+        "relation/1706978",
+        "relation/1706979",
+        "relation/7103068"
+      ],
+      "reproduction": "Run 39493585697: singleton authoritative relation/full fails on node/140097206. Candidate run 39490046141 omits three subarea relations beneath 1699032.",
+      "cause": "A relation/full response does not recursively expand child-relation ways/nodes. Bulk import did not enforce recursive closure. Closure audit checked only direct ways and truncated diagnostics; node coordinate presence was not tested.",
+      "change": "Recover only real API dependencies with a bounded request budget, cycle detection, no version drift and no change of selected inventory. Preserve full recursive missing-reference and coordinate diagnostics. Retain OSM relation versions via out meta.",
+      "regression": "osm-dependency-recovery.test.mjs; osm-closure-audit.test.mjs; existing adaptive transport regression tests.",
+      "verdict": "OPEN_PENDING_LIVE_RETEST",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39493585697",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39490046141"
+      ],
+      "pr": 398,
+      "verification_sha": null
+    },
+    {
+      "id": "RM-012",
+      "severity": "P1",
+      "component": "Current OSM boundary closure / source evidence",
+      "entities": [
+        "relation/18967493",
+        "relation/18968082"
+      ],
+      "reproduction": "Audit archived current-source candidate 39490046141: Horești outer endpoints 12318728194/12318728593 and Buneți 11649857778/8265822008 each have odd degree 1.",
+      "cause": "UNRESOLVED: original bulk capture lacks relation/way version metadata. Official current/historical comparison must distinguish real source defects from mixed-version capture.",
+      "change": "No geometry repair, omitted member or fabricated segment. Keep source gate blocked pending official per-ID evidence. New capture retains relation metadata.",
+      "regression": "osm-closure-audit.test.mjs keeps odd endpoints blocked even when a subarea ring is closed.",
+      "verdict": "OPEN_INVESTIGATION",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39490046141"
+      ],
+      "pr": 398,
+      "verification_sha": null
     }
   ],
   "environment_incidents": [
@@ -268,5 +326,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-20T11:18:53.268Z"
+  "updated_at": "2026-10-20T21:15:53.262Z"
 }
