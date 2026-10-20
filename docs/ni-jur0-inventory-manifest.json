@@ -1,0 +1,545 @@
+{
+  "schema": "ni-jur0-inventory-manifest-v1",
+  "registry": "docs/ni-jur0-individual-inventory.json",
+  "registry_sha256": "446eb04e353cc02b69c89f40eb4a6463d3bce4d17b9617e79c5931f287d7dcc7",
+  "roles": 85,
+  "outlines": 8,
+  "groups": [
+    {
+      "osm_relation_id": 1702216,
+      "label": "Camenca",
+      "roles": 13
+    },
+    {
+      "osm_relation_id": 1702217,
+      "label": "Rîbnița",
+      "roles": 23
+    },
+    {
+      "osm_relation_id": 1702215,
+      "label": "Dubăsari",
+      "roles": 10
+    },
+    {
+      "osm_relation_id": 1702214,
+      "label": "Grigoriopol",
+      "roles": 16
+    },
+    {
+      "osm_relation_id": 1702219,
+      "label": "Tiraspol",
+      "roles": 3
+    },
+    {
+      "osm_relation_id": 1702218,
+      "label": "Slobozia",
+      "roles": 16
+    },
+    {
+      "osm_relation_id": 944727,
+      "label": "Bender",
+      "roles": 4
+    }
+  ],
+  "sources": [
+    {
+      "key": "actual",
+      "file": "public/data/actual-entities.json",
+      "bytes": 15390013,
+      "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700"
+    },
+    {
+      "key": "tree",
+      "file": "public/data/actual-consolidated-tree.json",
+      "bytes": 2102707,
+      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+    },
+    {
+      "key": "release",
+      "file": "data/current/actual-release-manifest.json",
+      "bytes": 22513,
+      "sha256": "52ae583f284bac2d00bc3b5e4b96b6c429c659b8def297197d7f3f38dc042856"
+    },
+    {
+      "key": "policy",
+      "file": "docs/p9.0.4.3-promotion-policy.json",
+      "bytes": 1404,
+      "sha256": "878783683e4646f09fa4c0bd8d8ac5a86f2de122eff40a587d94220c197bff8c"
+    },
+    {
+      "key": "roles",
+      "file": "public/data/p907216-osm-roles.json",
+      "bytes": 78298,
+      "sha256": "1bd2f2eac7dd9a987c355cc459c4ce5299eb00ad3ffd74f2eab0149b695eefff"
+    },
+    {
+      "key": "navigation",
+      "file": "public/data/p909-nistrenia-osm-navigation.json",
+      "bytes": 4777,
+      "sha256": "64d90b0c5b16c71546f741b3a20181ac01ebf5106f70080522d8601d4bd83bae"
+    },
+    {
+      "key": "outlineProof",
+      "file": "public/data/p9095-osm-outlines-manifest.json",
+      "bytes": 6899,
+      "sha256": "85783ab5a82dd8a872ffa725f6af35fc86d53a8a5e715a1fb546260a1c50102b"
+    },
+    {
+      "key": "outlineBundle",
+      "file": "public/data/p9095-osm-outlines.json",
+      "bytes": 254316,
+      "sha256": "e48a34e31ede520a22b399d4ad07f48cd68303ecb937c78b6016c9993f41a2a6"
+    },
+    {
+      "key": "census",
+      "file": "docs/p9.0.7.2.15-osm-tag-census.json",
+      "bytes": 106217,
+      "sha256": "a45b48cbaf9c04fb6916b11fbbfe78c0a52321694acff12a798d5b6a76991c01"
+    },
+    {
+      "key": "raw",
+      "file": "docs/p9.0.7.2.15-raw-osm-relations.json.gz.b64",
+      "bytes": 17925,
+      "sha256": "c1a192a23d4dc2f2ac39e2d6b78f49d9530cc59ed8ff543debb4b015deeed70d"
+    },
+    {
+      "key": "semantic",
+      "file": "docs/p9.0.7.2.15-osm-semantic-reconciliation.json",
+      "bytes": 159888,
+      "sha256": "dd21c3d123382c38a82574ce068f07ab1c3edb923edfa1240342b2d137e21775"
+    },
+    {
+      "key": "claims",
+      "file": "docs/p9.0.6.3-final-semantic-matrix.json",
+      "bytes": 113049,
+      "sha256": "f1837bc9051c70902ed5f01c9a512634c5f8ee66e45646a74b3a71836767f505"
+    },
+    {
+      "key": "ledger",
+      "file": "docs/p9.0.6.2-verified-evidence-ledger.json",
+      "bytes": 192503,
+      "sha256": "b15f59e2cbd5f845d5d204961b3089ef850eda6f90548e7d0ebb94d6cf83c4c5"
+    },
+    {
+      "key": "acceptance",
+      "file": "docs/p9.0.7.2.19-acceptance-manifest.json",
+      "bytes": 4686,
+      "sha256": "2c5995a8d85e8fa4884ab339c041ff7e34e511f5e92a5975ab79983ba4927f27"
+    },
+    {
+      "key": "levels",
+      "file": "docs/evidence/web-r2a2/osm-historical-admin-level.json",
+      "bytes": 3566,
+      "sha256": "9caa8e11ee5e498b022f92efd21cbc1070dba94ac2b58475cabfd501206bdc31"
+    },
+    {
+      "key": "cuatm",
+      "file": "data/sources/cuatm-current.json",
+      "bytes": 611165,
+      "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575"
+    },
+    {
+      "key": "uiAliases",
+      "file": "atlas-nistrenia-jurisdiction.mjs",
+      "bytes": 3696,
+      "sha256": "ddc3f31dafa45785a19f41bc003c35f5e3ccdacb71b28820bbfe472c2d1b73b6"
+    },
+    {
+      "key": "generator",
+      "file": "scripts/audit/ni-jur0-inventory.mjs",
+      "bytes": 20334,
+      "sha256": "077532bb07dfb40848490e0fa28b1dfda5b838a1f72bd33616c4ddffc0156936"
+    },
+    {
+      "key": "outlineMetadata",
+      "file": "docs/ni-jur0-outline-metadata.json",
+      "bytes": 133910,
+      "sha256": "473908837b85036af48d394de54f0b86d5eb58fb10d22e2dd7ee5ee93f036869"
+    },
+    {
+      "key": "osmParser",
+      "file": "scripts/audit/helpers/ni-osm-relation.mjs",
+      "bytes": 1799,
+      "sha256": "e8abbdce43e04237192db909c29361fa746b21e83b6cc5fa15f5d1650d711fff"
+    }
+  ],
+  "role_records": [
+    {
+      "actual_id": "osm-r1216706",
+      "sha256": "2671be460564fd648539baf13a4e2ece56bb1db6d7fcee99a3b7403be1d3821b"
+    },
+    {
+      "actual_id": "osm-r12215667",
+      "sha256": "e42f3f9e201bcf8397be1608a69d8a4f3a4c538a8ac13fb189be22eca56694ec"
+    },
+    {
+      "actual_id": "osm-r12463378",
+      "sha256": "59b4c96796d06cb027b5cdda51c2f76b2e994ccc6943115bf1f66614dcd9b142"
+    },
+    {
+      "actual_id": "osm-r12463379",
+      "sha256": "00212af1449f4fdbc81686113aad1b82add5801983bd77b7578f943717c76174"
+    },
+    {
+      "actual_id": "osm-r18941889",
+      "sha256": "5c128b294b1601137a1364f55cc42e8258d3529cc8a1a383c2af65bac0c41e9f"
+    },
+    {
+      "actual_id": "osm-r18941890",
+      "sha256": "b5d6e37d7636713e8a0f9a5eb2d710b541789d6fd29ce7903e99a4f81b21c3a2"
+    },
+    {
+      "actual_id": "osm-r19001619",
+      "sha256": "1ac9c102af610ccd5755797c1fe7b31176af1ebca6a22fb512f324f0670f133b"
+    },
+    {
+      "actual_id": "osm-r19012105",
+      "sha256": "22a774453ba3a959ec76b8204db0584929098668c9711571540466bac10eeb46"
+    },
+    {
+      "actual_id": "osm-r19013328",
+      "sha256": "d663ee25672132dc7ac9a1cf26238868aa1616079d030cfb83be619e2d4d42e3"
+    },
+    {
+      "actual_id": "osm-r19013329",
+      "sha256": "4768dde2ea1f9cf1d7f899a19948b755816914f0f8c77d57f0cc795e2938fc14"
+    },
+    {
+      "actual_id": "osm-r19015106",
+      "sha256": "a8e31f55e40e0eadc50087097022033db72ae3141cfba02d5750c9416476a756"
+    },
+    {
+      "actual_id": "osm-r19015107",
+      "sha256": "d4f065979afd9fb0e9f52a3e439b2c7ba1e6c294c52897c8f4dfc45a146ba974"
+    },
+    {
+      "actual_id": "osm-r19015108",
+      "sha256": "7d69c97b69fe971b493f13083daec61718c8323f564b73ce6a46d0f0bbc0698f"
+    },
+    {
+      "actual_id": "osm-r19015109",
+      "sha256": "a20c72f9048e646941d86b123fd0f84a78f113df7b07b20024373b9f8225effa"
+    },
+    {
+      "actual_id": "osm-r19015110",
+      "sha256": "a81e5600e190260bfbe996ed97f9ed8c574025835f93618c770453c97f7bdb65"
+    },
+    {
+      "actual_id": "osm-r19015111",
+      "sha256": "eb5a406216c95e145e0af45892dd94de4a987e3f0470091c1bf8a19c0ea8459a"
+    },
+    {
+      "actual_id": "osm-r19015112",
+      "sha256": "ea89c8ae3d70497f7ff2e4b8b86b49652f151eb0a4064ab5b3584599f050dec6"
+    },
+    {
+      "actual_id": "osm-r19015113",
+      "sha256": "82c13ec5383acebf63ff9e91d34ee83f9916bf90f9e9d3e4d4bf3ad983a42ab2"
+    },
+    {
+      "actual_id": "osm-r19015114",
+      "sha256": "ab7090064d36916f9ac6f5f5a39e4307b6cd7605908a4b06c1e0c4926953ba82"
+    },
+    {
+      "actual_id": "osm-r19015115",
+      "sha256": "355552f880b9c53017633fb7305b22ea9b6a449476f2c3791c43078c68a57746"
+    },
+    {
+      "actual_id": "osm-r19015284",
+      "sha256": "fce698fe8d95eba31d41f5308bc8400a01401ffa9653bf55d92ea4df8b74d6f8"
+    },
+    {
+      "actual_id": "osm-r19015285",
+      "sha256": "4d526f0e6ae8976cf8b08793cb3b11680dc5e788d99743f44287ac4a9a34cd41"
+    },
+    {
+      "actual_id": "osm-r19015286",
+      "sha256": "1971d93ca7836b0564ed234c5abcdab71e9422179d63e428b273832c9b35740c"
+    },
+    {
+      "actual_id": "osm-r19015287",
+      "sha256": "65df5dc824f2b70944585e467d4b765bbd73aaff039081c469cf671636778ab2"
+    },
+    {
+      "actual_id": "osm-r19015304",
+      "sha256": "16323a8d22bf4f3c549359b52c7a5c492632fbebb4b09caa9b879fda21bd497b"
+    },
+    {
+      "actual_id": "osm-r19016165",
+      "sha256": "92e289b6ce01e29be723284642c239e8464cb4725a318db40e55c098dd78cda1"
+    },
+    {
+      "actual_id": "osm-r19016166",
+      "sha256": "3466b10b4d4911b8ed915215258309b5f9c155a060d6d4ce883cb90dc084d854"
+    },
+    {
+      "actual_id": "osm-r19016167",
+      "sha256": "0e0cff499c5d96f8620317abca66ffb4beb866488c021e452d8ea1319dc86fe9"
+    },
+    {
+      "actual_id": "osm-r19069840",
+      "sha256": "6366b72c8211b8a8a8c7d28ebef7765b337b6cab749969a8fb1766f71069ee8c"
+    },
+    {
+      "actual_id": "osm-r6879649",
+      "sha256": "947c9026a608f4e0d89b7b8f0af494d854acbc8ae263a6e32c43408561ce8f90"
+    },
+    {
+      "actual_id": "osm-r7427669",
+      "sha256": "5f0675e4d846d745163c8581a186d43fc81d89c45185908bb6cfafcd5b7e1f3e"
+    },
+    {
+      "actual_id": "osm-r7427680",
+      "sha256": "9e5d839ebaa3741450c67956c8b22adccdc2d3a6d2cbd318697bd5b230b0f062"
+    },
+    {
+      "actual_id": "osm-r7431238",
+      "sha256": "45a495c4d159afe9975394ad35c8f75dc0752e52403ad9c3c9e1ebf8b047fbcd"
+    },
+    {
+      "actual_id": "osm-r7431263",
+      "sha256": "64abeac8a6c0ad65a5c6bf735bf2ce85749e821ff5451f77646b4fa9f9ac9548"
+    },
+    {
+      "actual_id": "osm-r7432661",
+      "sha256": "959de7801e3a0d51d53393ffbd52a123cad29e44031266a751ea810083cd52c9"
+    },
+    {
+      "actual_id": "osm-r7432662",
+      "sha256": "f4b7ddb2114d07a4603a2a793146e00c5008806b8801399bb17fc48a3d7227fa"
+    },
+    {
+      "actual_id": "osm-r7432700",
+      "sha256": "9cd882c98987f1405a7bc1d1bcf04aead8bacc0361777e8dff2e8a3516b47ac5"
+    },
+    {
+      "actual_id": "osm-r7468724",
+      "sha256": "74185024ababbe0fce5eaabe8595bb641139f59b4faff2748025fcf3db29877a"
+    },
+    {
+      "actual_id": "osm-r7468791",
+      "sha256": "634e2c5b238f5f295bf025ecd31820dc0e92c24545554496b5334d8fb20fe51e"
+    },
+    {
+      "actual_id": "osm-r8289594",
+      "sha256": "263bbc097741f942c32c64ad1d8990b0de81231b90922b17ee5ca5b5fe0d6cb7"
+    },
+    {
+      "actual_id": "osm-r8289727",
+      "sha256": "bd4f8fb043499cdaf29e7ebe1908a58dbfc6e437ac8409eeaa90b5193039a961"
+    },
+    {
+      "actual_id": "osm-r8289751",
+      "sha256": "ced4ee3b2fda7b986bcc3e952a3eb03a2ca051eb3050279717722f6605513cb2"
+    },
+    {
+      "actual_id": "osm-r8290840",
+      "sha256": "e909752a418185516a5b9e70ddf6da570c046ad27febdd75c0d331ebced6e307"
+    },
+    {
+      "actual_id": "osm-r8290877",
+      "sha256": "a1ffc8e516e77ae617ae4eb073848c1cef8a5c527d8ebbe2b55cfedfeaa7cb9c"
+    },
+    {
+      "actual_id": "osm-r8290934",
+      "sha256": "c4a87430ef1bd793a8d0bb80c92f7de1bac2c5493788da7db251b907698d1469"
+    },
+    {
+      "actual_id": "osm-r8291057",
+      "sha256": "f07d4d992c937015880a077f5bc46019868cccc98fe5e5680b9b58ca785ba6b8"
+    },
+    {
+      "actual_id": "osm-r8291058",
+      "sha256": "1dcb8c7a2a103cb32bac398f917327afa4553bdb1d206413e949ab1f779a70a5"
+    },
+    {
+      "actual_id": "osm-r8292878",
+      "sha256": "3c026de8b9a8c37f7ecd2c1ff7b4fef7dec8eed4ac8bb8bcd29f6672358e23df"
+    },
+    {
+      "actual_id": "osm-r8292891",
+      "sha256": "41ecc616802b5dcb0677128191ef74a04f70a0cbe7f0d3e5ff3586799f6def94"
+    },
+    {
+      "actual_id": "osm-r8292898",
+      "sha256": "b5b0e64c6a0aeed78c390f94a95024532a22b1005373eada3308566662ed7632"
+    },
+    {
+      "actual_id": "osm-r8292909",
+      "sha256": "9935ab6d7153f4ba40d33b685e421b94af8ef9fd43566592be43a0ead4a1da60"
+    },
+    {
+      "actual_id": "osm-r8348605",
+      "sha256": "1185c33603a4e8fc47e98c89e18035ac51de21e01820827cdc5419a935147f6d"
+    },
+    {
+      "actual_id": "osm-r8348625",
+      "sha256": "c34933cbe617d580e7dee4bd83c1c22cbd2f5f479939116b4a0989bcd26ece6a"
+    },
+    {
+      "actual_id": "osm-r8348646",
+      "sha256": "6801bc8472a2661f4bbe30071de490ad113b786f23053630d2ff1c78b9a3b318"
+    },
+    {
+      "actual_id": "osm-r8348909",
+      "sha256": "c0cb4fd32028d0abd0e4876ac164fff7daac71f82f78465c2c4b56019ff13d27"
+    },
+    {
+      "actual_id": "osm-r8348920",
+      "sha256": "ccd85f1ba42eac2925bc24e2fab349143342f2f9294e95e230b5694e479f0169"
+    },
+    {
+      "actual_id": "osm-r8349002",
+      "sha256": "1a81712e5e3d350d89bf6c4b6757be1be9982627c9ca5b22db94342efaea9007"
+    },
+    {
+      "actual_id": "osm-r8349059",
+      "sha256": "b102f36b92ec638eac09e6d75d55b76416fdd672f923774c47eb6d17145cde74"
+    },
+    {
+      "actual_id": "osm-r8349093",
+      "sha256": "fc43aff163fa5081ed584397ee6ba671e34aab3bb193737e5adb5ec962098d19"
+    },
+    {
+      "actual_id": "osm-r8349094",
+      "sha256": "2bc0cee413cb252363206b0f343dc642bab26a343cf5437bd2908f1ea36d991f"
+    },
+    {
+      "actual_id": "osm-r8349307",
+      "sha256": "3074929ee6ec04662a70e3949b881e109694b8033001c04c08ab29d25935a1aa"
+    },
+    {
+      "actual_id": "osm-r8349338",
+      "sha256": "8cc165f8dc0fa8ccaee0397ae3a21a2dfa0a51a341eceebbb1c2a808f557383b"
+    },
+    {
+      "actual_id": "osm-r8539257",
+      "sha256": "6f37628ebbb3c89c089b6b4112876b61559747498c719a1a1672e3fa66a9ffd8"
+    },
+    {
+      "actual_id": "osm-r8539525",
+      "sha256": "feb3bf3a7c1d4256f8e01bb289b32156149660831b070cfa8a1cbf4cf8991e0b"
+    },
+    {
+      "actual_id": "osm-r8688504",
+      "sha256": "560b1ed0d89ef16dce5460faf42647cc1d669e1d77072db059cc8a324ad0754d"
+    },
+    {
+      "actual_id": "osm-r8710724",
+      "sha256": "9283a2ee7b5e76723699c6edda91b6b7b87229009ff9f9559d9e254ffbe5d6fa"
+    },
+    {
+      "actual_id": "osm-r8726395",
+      "sha256": "554d3d29bc8019ca2eff56a7bbedbd737e184effaeca9cb801c3a4f0df033c82"
+    },
+    {
+      "actual_id": "osm-r9288026",
+      "sha256": "99d6a5949433a2cb2351093bbfdb2932afd1130ae94587c667e6e6e37fc5eeb4"
+    },
+    {
+      "actual_id": "osm-r9288110",
+      "sha256": "4ad1635bf6d30a2a0fe3c1c125a86bf2a23fa050bf1512c553870715ec32958e"
+    },
+    {
+      "actual_id": "osm-r9288158",
+      "sha256": "90b1dded0378022337306f15116c23b950d374cef93d72835d632f848a643a7f"
+    },
+    {
+      "actual_id": "osm-r9288287",
+      "sha256": "3c035b5c12a7d873bf3475d9dd81453c64df2e430b16c4c2232906a78043601c"
+    },
+    {
+      "actual_id": "osm-r9288722",
+      "sha256": "c41b01ee6588fb9c02cc32e07599e161ffb12e7c7d370185b4eab69eb1ca84e9"
+    },
+    {
+      "actual_id": "osm-r9288756",
+      "sha256": "e1f949b31150475917a5205254d191b95f290d9512283a7e674de5c9009d4730"
+    },
+    {
+      "actual_id": "osm-r9294122",
+      "sha256": "08b6cd466a0a687fde40842dd414072aa5d1aef00893a4652de78ec131fb1592"
+    },
+    {
+      "actual_id": "osm-r9301463",
+      "sha256": "6db738c68935c535ca0311caf3c7f0fea16340002ca5bd7f2461120f5bb94059"
+    },
+    {
+      "actual_id": "osm-r9301464",
+      "sha256": "fc59ac1c026c44ebbf3aca998dc1ca54bcbcfcde6bf039ccd4e929001b443606"
+    },
+    {
+      "actual_id": "osm-r9581354",
+      "sha256": "73b0ff662407459959db910b3578ca06cddd1ee5cf3fafdd64cf708621478904"
+    },
+    {
+      "actual_id": "osm-r9656324",
+      "sha256": "9f49b7174a69f3b866f27140a2cd0a1d98682d77b14621fe17e955dbf3113da4"
+    },
+    {
+      "actual_id": "osm-r9656364",
+      "sha256": "85b06c79ce99563591db559ded207beef0a08fb155e930b010211fe231f193fd"
+    },
+    {
+      "actual_id": "osm-r9656413",
+      "sha256": "7b7f9f1084713e59a9a93f3de121b12baeb92fcf78645adc2309879b0d48ead8"
+    },
+    {
+      "actual_id": "osm-r9659709",
+      "sha256": "d99589b3d89b652a7c26cc15059e8efa3846dffa179ac835d90c1320dfaaca92"
+    },
+    {
+      "actual_id": "osm-r9659794",
+      "sha256": "2be346b18247b19e1debcbf655a0e1f93b2db26d65e7c44422adeaaf893a0b8d"
+    },
+    {
+      "actual_id": "osm-r9659979",
+      "sha256": "fa7c46e763a95f2ce38c4cff6f7ba0987b199f17a2fc0c21b2260b78eeee5105"
+    },
+    {
+      "actual_id": "osm-r9660049",
+      "sha256": "1737555ba9c5978713c0d74a66bf941f25b7cbaf0ad7beef90bee86ae469992e"
+    },
+    {
+      "actual_id": "osm-r9679382",
+      "sha256": "798cb865c1f31285616453044e246c90def587a94f970adde52dd845f0abd308"
+    }
+  ],
+  "outline_records": [
+    {
+      "id": "view-nistrenia",
+      "sha256": "3140eccd4ae42cb135d7cd5995e0a5b6b6892989cd2120808e7041f36258b950"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r1702216",
+      "sha256": "beabecc0a046b4bdf9c84e81de5e6ac3da4df0eae3b77be56633e248bf14592f"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r1702217",
+      "sha256": "405e9ee4525e186055594ae056ac09192c498ee20cdee5f568e14488344b8580"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r1702215",
+      "sha256": "7311c2327f933ff68514ba516c27a50ad6dc4f5960e3f9802bf9801d2bb67bfe"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r1702214",
+      "sha256": "b417ba02d01de5bd61c2afea9bd05008ab8b9d1641d2da1dbf905ef71f5e2642"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r1702219",
+      "sha256": "3779f0893a4d1ef81fa434c5909b2cb4e444a9798cd5383753dee0940ffea0d8"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r1702218",
+      "sha256": "aa3e6c1fcd0d327e8afd9cb1424394923d0f280b3d49d47479adce3665e58ca6"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r944727",
+      "sha256": "31dac2411f6e019f117df884dfe03bf263357e5cffbf19850f59efcd85af4ae5"
+    }
+  ],
+  "actual_mutation_allowed": false,
+  "p91_import_allowed": false,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE"
+}
