@@ -6,7 +6,7 @@ PR #398 rămâne Draft; gate-ul sursei este blocat de conectivitatea nodurilor O
 
 Nu se modifică ACTUAL, părinții MD, geometriile certificate, politicile runnerelor sau pragurile de prospețime. `actual_mutation_allowed=false`, `p91_import_allowed=false`, `semantic_acceptance=BLOCKED_INCOMPLETE`.
 
-Pachetul `docs/evidence/ni-jur-independent-20261020/` conservă 229 de fișiere, 53.619.616 octeți, cu manifest SHA-256: originalele OSM ale celor 85 de roluri și opt contururi, candidatul OSM respins, istoricul individual al celor 13 relații, documentele primare accesibile, dovezile blocajelor HTTP, dosarul individual pregătitor și cele 52 de capturi Chromium ale baseline-ului public. Nu sunt adăugate geometrii în corpus ori în website.
+Pachetul `docs/evidence/ni-jur-independent-20261020/` conservă 230 de fișiere, 53.620.079 octeți, cu manifest SHA-256: originalele OSM ale celor 85 de roluri și opt contururi, candidatul OSM respins, istoricul individual al celor 13 relații, documentele primare accesibile, dovezile blocajelor HTTP, dosarul individual pregătitor și cele 52 de capturi Chromium ale baseline-ului public. Nu sunt adăugate geometrii în corpus ori în website.
 
 Replay-ul folosește funcțiile existente `parseFull`, `polygon` și `segments`, legate de hashul implementării, și verifică sursele față de geometriile ACTUAL / contururile independente acceptate. Toate cele 93 de geometrii sunt valide; se verifică închiderea dependențelor și toate cele 4.278 de perechi topologice, fără egalități geometrice ori suprapuneri de interior. Relațiile de conținere și frontierele comune sunt observații geometrice și nu atribuie părinți administrativi.
 
