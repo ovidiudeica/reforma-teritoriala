@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {mkdir,readFile,rename,writeFile} from 'node:fs/promises';
 import {gzipSync,gunzipSync} from 'node:zlib';
 
-const MANIFEST='data/sources/osm-current.json';
+const MANIFEST=process.env.OSM_MANIFEST_PATH||'data/sources/osm-current.json';
 const SNAPSHOT_DIR='data/sources/osm-snapshots';
 const QUERY_VERSION=1;
 const MANIFEST_SCHEMA_VERSION=2;
