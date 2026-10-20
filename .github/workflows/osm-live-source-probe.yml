@@ -60,11 +60,11 @@ jobs:
           OSM_CONTINUITY_REPORT_ONLY: '1'
         run: node scripts/process/audit-osm-refresh-continuity.mjs
 
-      - name: Gate the explicitly approved source-only transition
-        run: node scripts/process/audit-osm-fix2-source-transition.mjs
-
       - name: Capture authoritative relation histories, CUATM context and changesets
         run: node scripts/process/capture-osm-fix2-forensics.mjs
+
+      - name: Gate the explicitly approved source-only transition
+        run: node scripts/process/audit-osm-fix2-source-transition.mjs
 
       - name: Stage exact candidate bytes and evidence
         if: always()
