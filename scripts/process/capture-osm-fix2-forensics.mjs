@@ -15,6 +15,9 @@ const canonicalize=value=>{
 const evidenceHash=elements=>sha256(Buffer.from(JSON.stringify(canonicalize(elements)),'utf8'));
 const readJson=async path=>JSON.parse(await readFile(path,'utf8'));
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const RAW='outputs/osm-fix2-official-api';
+const apiReceipts=[];
+await mkdir(RAW,{recursive:true});
 
 async function fetchText(url,{allowGone=false}={}){
  let last;
@@ -25,9 +28,14 @@ async function fetchText(url,{allowGone=false}={}){
    const target=officialOsmUrl(url);
    const response=await fetch(target,{redirect:'error',headers:{accept:'application/json','user-agent':'reforma-teritoriala-osm-fix2/1.0'},signal:controller.signal});
    const body=await response.text();
-   if(allowGone&&(response.status===404||response.status===410))return {status:response.status,body:null};
+   const bytes=Buffer.from(body,'utf8'),key=sha256(Buffer.from(target.href+'\n'+body,'utf8'));
+   const raw_receipt={url:target.href,http_status:response.status,accessed_at:new Date().toISOString(),attempt,body_sha256:sha256(bytes),body_bytes:bytes.length,body_path:RAW+'/'+key+'.response'};
+   await writeFile(RAW+'/'+key+'.response',bytes);
+   apiReceipts.push(raw_receipt);
+   await writeFile(RAW+'/receipts.json',JSON.stringify(apiReceipts,null,2)+'\n');
+   if(allowGone&&(response.status===404||response.status===410))return {status:response.status,body:null,raw_receipt};
    if(!response.ok)throw new Error('HTTP '+response.status+' '+body.slice(0,160));
-   return {status:response.status,body};
+   return {status:response.status,body,raw_receipt};
   }catch(error){
    last=error;
    if(attempt<3)await sleep(1000*attempt);
@@ -80,18 +88,19 @@ async function main(){
    relation_id:expected.relation_id,
    osm_history_url:API+'/relation/'+expected.relation_id+'/history.json',
    history_elements_sha256:evidenceHash(elements),
-   versions:elements.map(x=>({version:x.version,timestamp:x.timestamp,changeset:x.changeset,visible:x.visible!==false})),
+   versions:elements.map(x=>({version:x.version,timestamp:x.timestamp,changeset:x.changeset,visible:x.visible!==false,tags:x.tags||{},members:x.members||[]})),
+   history_raw_receipt:history.raw_receipt,
    last_visible:lastVisible?{version:lastVisible.version,timestamp:lastVisible.timestamp,changeset:lastVisible.changeset,tags:tags(lastVisible),
     member_ways:(lastVisible.members||[]).filter(x=>x.type==='way').map(x=>x.ref)}:null,
    deletion:last?.visible===false?{version:last.version,timestamp:last.timestamp,changeset:last.changeset}:null,
-   current_probe:{url:API+'/relation/'+expected.relation_id+'/full.json',http_status:current.status},
+   current_probe:{url:API+'/relation/'+expected.relation_id+'/full.json',http_status:current.status,raw_receipt:current.raw_receipt},
    cuatm_registry_context:cuatm?{
     raw_cuatm_unique_id:cuatm.raw_cuatm_unique_id,raw_cuatm_code:cuatm.raw_cuatm_code,
     legal_id:cuatm.legal_id,unmatched_reason:cuatm.unmatched_reason,
     verified_parent_legal_id:cuatm.verified_parent_legal_id,verified_parent_legal_name:cuatm.verified_parent_legal_name
    }:null,
    source_verdict:'RETIRED_FROM_CURRENT_OSM',
-   legal_verdict:'NO_LEGAL_SUCCESSION_INFERENCE',
+   legal_verdict:'UNRESOLVED',
    checks
   });
  }
@@ -134,20 +143,22 @@ async function main(){
   const response=await fetchJson(API+'/changeset/'+id+'.json');
   const element=(response.json?.elements||[]).find(x=>x.type==='changeset')||null;
   changesets.push({changeset_id:id,url:API+'/changeset/'+id+'.json',elements_sha256:evidenceHash(element?[element]:[]),
-   created_at:element?.created_at||null,closed_at:element?.closed_at||null,tags:element?.tags||null});
+   created_at:element?.created_at||null,closed_at:element?.closed_at||null,tags:element?.tags||null,raw_receipt:response.raw_receipt});
  }
  const report={
   schema:'osm-fix2-per-id-forensics-v1',
   status:failures.length?'BLOCKED_EVIDENCE':'PASS',
   transition_id:policy.transition_id,
   retired_relations:rows,
+  api_receipts:apiReceipts,
   added_relation:{
    relation_id:addedExpected.relation_id,
    osm_url:API+'/relation/'+addedExpected.relation_id+'.json',
    element_sha256:evidenceHash(currentRelation?[currentRelation]:[]),
    relation:currentRelation?{version:currentRelation.version,timestamp:currentRelation.timestamp,changeset:currentRelation.changeset,
     tags:tags(currentRelation),member_ways:(currentRelation.members||[]).filter(x=>x.type==='way').map(x=>x.ref)}:null,
-   source_verdict:'CURRENT_OSM_ADDITION',legal_verdict:'NO_LEGAL_IDENTITY_INFERENCE',checks:additionChecks
+   raw_receipt:added.raw_receipt,
+   source_verdict:'CURRENT_OSM_ADDITION',legal_verdict:'UNRESOLVED',checks:additionChecks
   },
   cartographic_successor:cartographicLink,
   changesets,

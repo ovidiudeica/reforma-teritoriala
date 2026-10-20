@@ -27,6 +27,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  per-id-forensics:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact candidate without write credentials
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Capture all thirteen relation histories and changesets independently
+        run: node scripts/process/capture-osm-fix2-forensics.mjs
+      - name: Preserve original per-ID HTTP evidence even if source import is blocked
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: osm-per-id-forensics-${{ github.run_id }}
+          path: |
+            outputs/osm-fix2-per-id-forensics.json
+            outputs/osm-fix2-official-api/
+          if-no-files-found: error
+          retention-days: 30
+
   closure-forensics:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
