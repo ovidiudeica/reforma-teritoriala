@@ -41,7 +41,10 @@ export function assessOsmSourceContinuityCountry({code,before,after,beforeRaw,af
     const prior=oldRels.get(id),current=newRels.get(id);
     return {relation_id:id,entity_id:'osm-r'+id,osm_url:'https://www.openstreetmap.org/relation/'+id,
       cause_class:current?'present_in_raw_but_excluded_from_selected_scope':'missing_from_candidate_raw',
-      previous:evidence(prior),candidate:evidence(current)};
+      previous:evidence(prior),candidate:evidence(current),
+      authoritative_probe:(after.countries[code].continuity_relation_attempts||[])
+        .filter(x=>Number(x.relation_id)===id)
+        .map(x=>({status:x.status,http_status:x.http_status??null,started_at:x.started_at||null}))};
   });
   const added=[...newIds].filter(id=>!oldIds.has(id)).sort((a,b)=>a-b).map(id=>({
     relation_id:id,entity_id:'osm-r'+id,candidate:evidence(newRels.get(id))
