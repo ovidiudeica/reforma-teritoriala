@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/actual-candidate.yml'
       - '.github/workflows/osm-source-continuity.yml'
+      - 'scripts/import/import-osm.mjs'
       - 'scripts/lib/osm-source-continuity.mjs'
       - 'scripts/process/audit-osm-refresh-continuity.mjs'
       - 'scripts/test/osm-source-continuity.test.mjs'
@@ -13,6 +14,7 @@ on:
     paths:
       - '.github/workflows/actual-candidate.yml'
       - '.github/workflows/osm-source-continuity.yml'
+      - 'scripts/import/import-osm.mjs'
       - 'scripts/lib/osm-source-continuity.mjs'
       - 'scripts/process/audit-osm-refresh-continuity.mjs'
       - 'scripts/test/osm-source-continuity.test.mjs'
@@ -30,3 +32,5 @@ jobs:
           persist-credentials: false
       - name: Reject missing and altered OSM relations
         run: node --test scripts/test/osm-source-continuity.test.mjs
+      - name: Verify import OSM lifecycle guards
+        run: node --test scripts/test/osm-refresh-routing.test.mjs
