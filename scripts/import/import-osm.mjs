@@ -167,7 +167,7 @@ async function recoverPreviousScopeRelations(raw,previousRaw,code,cfg){
   if(!relationMatchesScope(relation,cfg)){retired_relation_ids.push(relationId);continue;}
   for(const element of fetched.raw.elements)byKey.set(`${element.type}/${element.id}`,element);
   recovered_relation_ids.push(relationId);
-  console.warn(`OSM ${code}: authoritative in-scope relation ${relationId} recovered after Overpass omission or out-of-scope retag`);
+  console.warn(`OSM ${code}: recovered previous in-scope relation ${relationId} after Overpass omission or out-of-scope retag`);
  }
  return {raw:{...raw,elements:[...byKey.values()]},attempts,recovered_relation_ids,retired_relation_ids};
 }
