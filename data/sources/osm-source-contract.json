@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "mode": "OSM_SOURCE_ACTUAL_SEPARATION",
+  "current_osm": {
+    "manifest_path": "data/sources/osm-source-current.json",
+    "role": "CURRENT_OSM_SOURCE",
+    "freshness_authority": true,
+    "may_change_inventory": true
+  },
+  "actual_osm_pin": {
+    "manifest_path": "data/sources/osm-current.json",
+    "role": "ACTUAL_ACCEPTED_OSM_PIN",
+    "source_bundle_path": "data/current/actual-source-bundle-manifest.json",
+    "source_bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
+    "actual_fingerprint": "actual-a9e5a4ddcb5277ef",
+    "actual_semantic_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446"
+  },
+  "guards": {
+    "actual_mutation_allowed": false,
+    "p91_import_allowed": false,
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "current_source_refresh_must_not_update_actual_pin": true,
+    "current_source_retirement_must_not_delete_actual_identity": true,
+    "current_source_addition_must_not_create_legal_identity": true
+  },
+  "policy": "The current OSM source is independently refreshable and may reflect real OpenStreetMap relation retirement, addition or retagging. The protected ACTUAL source bundle remains bound to data/sources/osm-current.json until a separately authorized ACTUAL promotion passes its own gates. Freshness is measured against the current OSM source, never by backdating or rewriting the ACTUAL pin."
+}
