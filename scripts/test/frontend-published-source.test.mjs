@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {verifyPublishedSource,publishedSourceContext} from '../audit/helpers/published-source.mjs';
+import path from 'node:path';
+const root=fileURLToPath(new URL('../../',import.meta.url));
+const fixture=async(url)=>{const name=new URL(url).pathname.slice('/reforma-teritoriala/'.length);return new Response(await readFile(new URL('../../'+name,import.meta.url)));};
+test('live acceptance fingerprints the actual published source bytes',async()=>{const rows=await verifyPublishedSource(root,{fetcher:fixture});assert.equal(rows.length,9);assert.ok(rows.every(r=>r.status==='PASS'&&/^[a-f0-9]{64}$/.test(r.sha256)));});
+test('a stale deployed application fails even if the local commit is correct',async()=>{await assert.rejects(verifyPublishedSource(root,{fetcher:async url=>url.endsWith('/app.js')?new Response('stale application'):fixture(url)}),/Published source differs.*app.js/);});
+test('missing published resources cannot be accepted',async()=>{await assert.rejects(verifyPublishedSource(root,{fetcher:async()=>new Response('missing',{status:404})}),/Published source HTTP/);});
+test('PR audit identifies deployed base separately from the unpublished candidate auditor',()=>{const head='a'.repeat(40),base='b'.repeat(40),context=publishedSourceContext(root,{eventName:'pull_request',baseSha:base,readSource:p=>({sha:p===path.join(root,'published-baseline')?base:head,trackedSourcesClean:true})});assert.equal(context.auditor.sha,head);assert.equal(context.published.sha,base);assert.equal(context.coverage,'PR_PUBLISHED_BASELINE_ONLY');assert.throws(()=>publishedSourceContext(root,{eventName:'pull_request',baseSha:base,readSource:()=>({sha:head})}),/differs from PR base/);});
+test('post-merge/manual audit requires published bytes from the exact auditor checkout',()=>{const context=publishedSourceContext(root,{eventName:'workflow_dispatch',readSource:()=>({sha:'a'.repeat(40),trackedSourcesClean:true})});assert.equal(context.sourceRoot,root);assert.equal(context.published.sha,context.auditor.sha);assert.equal(context.coverage,'PUBLISHED_EXACT_CHECKOUT');});

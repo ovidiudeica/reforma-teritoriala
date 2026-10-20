@@ -63,6 +63,7 @@ export function createAtlasFilters({container,document,index,state,onChange,onSe
  for(const b of [showButton,hideButton,undoButton]){b.className='action-button';b.setAttribute('aria-label',b.textContent+' — Nivel administrativ OSM');actionButtons.appendChild(b);}
  geometryActions.appendChild(actionButtons);
  const confirmation=document.createElement('div');confirmation.className='osm-level-action-confirm';confirmation.hidden=true;
+ confirmation.setAttribute('data-atlas-escape-owner','');
  confirmation.setAttribute('role','group');confirmation.setAttribute('aria-label','Confirmarea domeniului acțiunii OSM');
  const scope=document.createElement('p');scope.id='osm-geometry-confirmation-scope';scope.tabIndex=-1;confirmation.setAttribute('aria-describedby',scope.id);confirmation.appendChild(scope);
  const accept=document.createElement('button');accept.type='button';accept.className='action-button';accept.textContent='Confirmă operațiunea';

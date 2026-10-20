@@ -66,6 +66,9 @@ export function createAtlasPanels({document,media,isSearchOpen=()=>false}){
  more?.addEventListener('click',()=>{const next=!menu;if(next&&active!==null)close({focus:false});menu=next;origin=more;sync();emit();if(menu)(buttons.identify||buttons.measure||buttons.visible)?.focus?.();});
  document.addEventListener?.('keydown',event=>{
   if(event.key!=='Escape'||event.isComposing||event.defaultPrevented)return;
+  // Inline components consume their own first Escape in the target/bubble phase.
+  // Do not close their containing pane before that handler can restore focus.
+  if(event.target?.closest?.('[data-atlas-escape-owner]:not([hidden])'))return;
   if(menu){event.preventDefault();menu=false;sync();emit();more.focus();return;}
   if(active===null||(['entities','search'].includes(active)&&isSearchOpen()))return;
   event.preventDefault();close();

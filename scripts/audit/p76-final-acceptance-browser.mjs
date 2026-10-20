@@ -109,6 +109,13 @@ try{
      }
      await page.openPanel('entities');await page.call(function(){qaApp.atlasTree.select('osm-r90689');qaApp.atlasTree.getNode('osm-r90689').button.focus();document.querySelector('#atlas-controls').scrollTop=0;});await page.key('ArrowDown');
      const target=await page.call(function(){const e=document.activeElement,r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return {height:document.querySelector('#hierarchy-tree').clientHeight,width:r.width,hit:e===hit||e.contains(hit),focused:e.classList.contains('tree-select'),panelScroll:document.querySelector('#atlas-controls').scrollTop};});assert.ok(target.height>=44&&target.width>=44&&target.hit&&target.focused,JSON.stringify(target));reports.text.push({width,height,tree:target});await page.screenshot(path.join(output,'p76-text200-tree-'+width+'x'+height+'.png'));await page.key('Escape');
+     // P7.6 deliberately scrolls the physical stage to reveal enlarged controls.
+     // The header may leave the viewport during navigation; its text must remain
+     // recoverable by keyboard. Do not replace that accepted behavior with a pinned header.
+     await page.call(function(){document.getElementById('modules-toggle').focus({preventScroll:true});});
+     for(const type of ['keyDown','keyUp'])await page.send('Input.dispatchKeyEvent',{type,key:'Home',code:'Home',windowsVirtualKeyCode:36,nativeVirtualKeyCode:36});
+     await waitFor(()=>page.call(function(){const r=document.querySelector('header h1').getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'text200 header title reachable after native Home',5000);
+     const recovery=await page.call(function(){const r=document.querySelector('header h1').getBoundingClientRect();return {title:{top:r.top,bottom:r.bottom,height:r.height},stageScroll:document.getElementById('atlas-stage').scrollTop,documentScroll:[scrollX,scrollY],focus:document.activeElement.id};});assert.deepEqual(recovery.documentScroll,[0,0]);assert.equal(recovery.focus,'modules-toggle');reports.text.push({width,height,headerRecovery:recovery});await page.screenshot(path.join(output,'p76-text200-header-restored-'+width+'x'+height+'.png'));
     }
    });
    assert.deepEqual(page.errors,[]);assert.deepEqual(page.responses.filter(r=>r.url.startsWith(targetUrl(browser))&&r.status>=400),[]);
