@@ -26,7 +26,8 @@ for(const code of ['RO','MD']){
 }
 await copyFile(MANIFEST,OUT+'/osm-source-current.json');
 for(const path of ['outputs/osm-source-continuity.json','outputs/osm-fix2-source-transition.json','outputs/osm-fix2-per-id-forensics.json']){
- await copyFile(path,OUT+'/'+basename(path));
+ try{await copyFile(path,OUT+'/'+basename(path));}
+ catch(error){if(error?.code!=='ENOENT')throw error;}
 }
 const receipt={
  schema:'osm-source-candidate-artifact-v1',
