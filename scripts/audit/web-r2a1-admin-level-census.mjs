@@ -105,8 +105,26 @@ if(reconciliation.total!==85)die('semantic reconciliation total != 85');
 let changed=[];
 try{changed=execFileSync('git',['diff','--name-only',BASE+'...HEAD'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);}
 catch(e){die('cannot compare audit branch to base SHA: '+e.message);}
-const protectedChanges=changed.filter(p=>p==='data'||p.startsWith('data/')||p==='public'||p.startsWith('public/'));
-if(protectedChanges.length)die('protected data/public changed: '+protectedChanges.join(', '));
+const sourceOnlyExact=new Set([
+ 'data/sources/osm-source-contract.json',
+ 'data/sources/osm-source-current.json',
+ 'data/sources/osm-source-transition-policy.json'
+]);
+const sourceSnapshotPattern=/^data\/sources\/osm-snapshots\/(?:ro|md)-[a-f0-9]{64}\.json\.gz$/;
+let changedStatus=[];
+try{
+ changedStatus=execFileSync('git',['diff','--name-status',BASE+'...HEAD'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean)
+  .map(line=>{const [status,...parts]=line.split('\t');return {status,path:parts.at(-1)};});
+}catch(e){die('cannot inspect protected source change status: '+e.message);}
+for(const row of changedStatus.filter(x=>sourceSnapshotPattern.test(x.path))){
+ if(row.status!=='A')die('existing OSM snapshot is immutable; source-only transition may add content-addressed snapshots only: '+row.status+' '+row.path);
+}
+const protectedChanges=changed.filter(p=>
+ (p==='data'||p.startsWith('data/')||p==='public'||p.startsWith('public/'))
+ && !sourceOnlyExact.has(p)
+ && !sourceSnapshotPattern.test(p)
+);
+if(protectedChanges.length)die('protected data/public changed outside OSM source-only allowlist: '+protectedChanges.join(', '));
 
 const actualRows=[],byId=new Map(),ids=new Set();
 for(const e of actual.entities){
