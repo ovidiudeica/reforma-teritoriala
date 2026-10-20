@@ -279,12 +279,13 @@
       "change": "Retain the initial index and original response; classify the placeholder BLOCKED_CONTENT. Validate binary magic/HTML structure and keep retrieval separate from legal certification.",
       "regression": "scripts/test/documentary-response.test.mjs: HTTP200 placeholder, HTML masquerading as PDF, HTTP403 and valid binary/HTML fixtures.",
       "pr": 399,
-      "verification_sha": null,
+      "verification_sha": "481f3fd5c493b27d2e7817ada8f1c404293031bf",
       "evidence": [
         "docs/evidence/ni-jur-independent-20261020/documentary/document-index.initial.json",
-        "docs/evidence/ni-jur-independent-20261020/documentary/document-index.json"
+        "docs/evidence/ni-jur-independent-20261020/documentary/document-index.json",
+        "NI independent evidence workflow39509713259 SUCCESS on481f3fd5c493b27d2e7817ada8f1c404293031bf; CodeQL118927740228 SUCCESS;3 response tests,2 import/node-identity regressions,6 negative dossier guards, original DOCX replay and93-polygon topology replay PASS."
       ],
-      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
     },
     {
       "id": "RM-015",
@@ -298,11 +299,12 @@
       "change": "Use static imports of existing geometry functions; make the live auditor safe to import by guarding its CLI entry point. Keep the historical pure function block byte-identical and assert its SHA256 without executing text.",
       "regression": "scripts/test/ni-geometry-import.test.mjs checks side-effect-free import and preserves rejection of open node-identity rings. Existing live-source self-test remains enabled.",
       "pr": 399,
-      "verification_sha": null,
+      "verification_sha": "481f3fd5c493b27d2e7817ada8f1c404293031bf",
       "evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/runs/118926200915"
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/118926200915",
+        "NI independent evidence workflow39509713259 SUCCESS on481f3fd5c493b27d2e7817ada8f1c404293031bf; CodeQL118927740228 SUCCESS;3 response tests,2 import/node-identity regressions,6 negative dossier guards, original DOCX replay and93-polygon topology replay PASS."
       ],
-      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
     }
   ],
   "environment_incidents": [
@@ -385,5 +387,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-20T22:28:35.412Z"
+  "updated_at": "2026-10-20T22:43:57.190Z"
 }
