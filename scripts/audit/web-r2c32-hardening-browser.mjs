@@ -59,6 +59,7 @@ try{
    await capture(p,label+'-ni-card');
    if(published){
     // Revealing a virtual row changes scroll only; selection remains a separate pointer action.
+    await p.openPanel('entities');
     const ids=await p.call(function(){if(!qaApp.atlasTree.isOpen('view-nistrenia'))qaApp.atlasTree.toggle('view-nistrenia');return ['osm-r90689','osm-r58974',...qaApp.nistreniaOutlineFeatures.keys()];});
     for(const id of ids){
      await p.call(function(id){qaApp.atlasTree.reveal(id);},id);

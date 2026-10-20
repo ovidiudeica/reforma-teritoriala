@@ -152,6 +152,22 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39384630687",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39385100647"
       ]
+    },
+    {
+      "id": "RM-008",
+      "severity": "P2",
+      "component": "WEB-R2c.4 published Chromium scenario",
+      "entities": [],
+      "reproduction": "Run published matrix at 3f943b3215b6a5469dd7fbb80780737e2dba53e2; tablet selects NI card then tries individual checkbox while Entities drawer is closed.",
+      "cause": "The new audit assumed the desktop panel remained open after card selection; compact layouts close the drawer according to the existing UX contract.",
+      "change": "Reopen Entities using the public panel control before individual checkbox tests. No application behavior changes.",
+      "pr": 393,
+      "regression": "Published Chromium matrix: two actual root and eight independent operational checkbox pairs in all four viewport profiles.",
+      "verification_sha": null,
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39389258992"
+      ],
+      "verdict": "OPEN_PENDING_EXACT_HEAD_RETEST"
     }
   ],
   "environment_incidents": [
