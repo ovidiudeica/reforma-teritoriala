@@ -234,8 +234,17 @@ jobs:
               npm run install:actual-offline-deps
               if [ "$REFRESH_RO_SIRUTA" = "true" ]; then npm run import:ro-siruta; fi
               if [ "$REFRESH_MD_CUATM" = "true" ]; then npm run import:md-cuatm; fi
-              if [ "$REFRESH_OSM" = "true" ]; then npm run import:osm; fi
+              if [ "$REFRESH_OSM" = "true" ]; then npm run import:osm; node scripts/process/audit-osm-refresh-continuity.mjs; fi
             '
+
+      - name: Preserve exact OSM source continuity decision (including rejected candidates)
+        if: always() && inputs.refresh_osm == true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: osm-source-continuity-${{ github.run_id }}
+          path: outputs/osm-source-continuity.json
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Apply explicitly requested ACTUAL v1.1 geometry policy migration
         if: inputs.migrate_geometry_policy_v1_1 == true
