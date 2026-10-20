@@ -5,11 +5,16 @@ import path from 'node:path';
 import {launchBrowser,waitFor,delay} from '../test/helpers/atlas-browser.mjs';
 import {performanceSource} from './helpers/performance-source.mjs';
 import {navigatePerformanceProfile} from './helpers/performance-navigation.mjs';
+import {publishedSourceContext,verifyPublishedSource} from './helpers/published-source.mjs';
+import {verifyPublishedRuntime} from './helpers/published-runtime.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const out=path.join(root,'outputs','web-r2c32-hardening');
-const source=performanceSource(root);
-const report={schema:'web-r2c32-hardening-v1',sourceSha:source.sha,trackedSourcesClean:source.trackedSourcesClean,status:'FAIL',startedAt:new Date().toISOString(),checks:[],captures:[],network:[],errors:[],limitations:['No physical screen reader is available; Chrome AX tree checks are not a screen reader certification.','Device viewport profiles run in real Chromium, not on physical mobile devices.']};
+const mode=process.env.ATLAS_HARDENING_MODE||'local';assert.ok(mode==='local'||mode==='published','Unsupported audit target mode');
+const published=mode==='published',context=published?publishedSourceContext(root):null;
+const out=published?path.join(root,'outputs','web-r2c4-published'):path.join(root,'outputs','web-r2c32-hardening');
+const source=context?.auditor||performanceSource(root);
+const target=browser=>published?'https://ovidiudeica.github.io/reforma-teritoriala/':browser.server.url;
+const report={schema:published?'web-r2c4-published-v1':'web-r2c32-hardening-v1',sourceSha:source.sha,trackedSourcesClean:source.trackedSourcesClean,mode,expectedPublishedSha:context?.published.sha,coverage:context?.coverage,status:'FAIL',startedAt:new Date().toISOString(),checks:[],captures:[],network:[],errors:[],limitations:['No physical screen reader is available; Chrome AX tree checks are not a screen reader certification.','Device viewport profiles run in real Chromium, not on physical mobile devices.']};
 await mkdir(out,{recursive:true});
 const mark=(name,data={})=>{report.checks.push({name,status:'PASS',...data});console.log('PASS '+name);};
 const state=function(){return {actual:[...qaApp.visibleEntityIds].sort(),ni:[...qaApp.visibleOperationalOutlineIds].sort(),selected:qaApp.selectedEntityId,stat:[...document.querySelectorAll('input[data-kind="statistical"]')].map(e=>[e.dataset.filter,e.checked]),levels:[...document.querySelectorAll('input[data-kind="osm-admin-level"]:checked')].map(e=>e.dataset.filter),url:location.href};};
@@ -39,11 +44,12 @@ async function contrast(p,label){
 async function network(p,label,url){const ownErrors=p.responses.filter(r=>r.url.startsWith(url)&&r.status>=400),ownFailures=p.failures.filter(r=>r.url?.startsWith(url)&&!r.canceled);report.network.push({label,requests:p.requests,responses:p.responses,failures:p.failures,externalTileWarnings:p.externalTileWarnings,console:p.console,exceptions:p.errors});assert.deepEqual(ownErrors,[]);assert.deepEqual(ownFailures,[]);assert.deepEqual(p.errors,[]);assert.deepEqual(p.console.filter(e=>e.type==='error'||e.level==='error'),[]);mark('network-'+label,{ownErrors:0,ownFailures:0,exceptions:0,externalTileWarnings:p.externalTileWarnings.length});}
 let browser;
 try{
+ if(published){report.publishedSource=await verifyPublishedSource(context.sourceRoot);report.publishedInventory=await verifyPublishedRuntime(context.sourceRoot);mark('published-runtime-integrity',{files:report.publishedInventory.checkedFiles,geojson:report.publishedInventory.geojsonFiles,bytes:report.publishedInventory.totalBytes,expectedPublishedSha:context.published.sha,coverage:context.coverage});}
  browser=await launchBrowser(root);report.browser=browser.version;
  for(const [label,width,height] of [['desktop',1440,900],['tablet',768,1024],['mobile',390,844],['landscape',844,390]]){
   const p=await browser.page();
   try{
-   await navigatePerformanceProfile(p,browser.server.url,width,height);await p.send('Accessibility.enable');
+   await navigatePerformanceProfile(p,target(browser),width,height);await p.send('Accessibility.enable');
    const baseline=await p.call(state);assert.deepEqual(baseline.actual,['osm-r58974','osm-r90689']);assert.deepEqual(baseline.ni,['view-nistrenia']);
    await accessible(p,label+'-initial');await contrast(p,label+'-initial');await capture(p,label+'-initial');
    await p.openPanel('entities');
@@ -51,7 +57,28 @@ try{
     await p.openPanel('entities');await p.click('.tree-select[data-entity-id="'+id+'"]');assert.equal((await p.call(state)).selected,id);
    }
    await capture(p,label+'-ni-card');
+   if(published){
+    // Revealing a virtual row changes scroll only; selection remains a separate pointer action.
+    const ids=await p.call(function(){if(!qaApp.atlasTree.isOpen('view-nistrenia'))qaApp.atlasTree.toggle('view-nistrenia');return ['osm-r90689','osm-r58974',...qaApp.nistreniaOutlineFeatures.keys()];});
+    for(const id of ids){
+     await p.call(function(id){qaApp.atlasTree.reveal(id);},id);
+     await waitFor(()=>p.call(function(id){return !!qaApp.atlasTree.getNode(id);},id),'mounted individual row '+id);
+     const before=await p.call(state),selector='.tree-visibility-toggle[data-entity-id="'+id+'"]';
+     await p.click(selector);const after=await p.call(state),actual=id.startsWith('osm-'),key=actual?'actual':'ni',other=actual?'ni':'actual';
+     const expected=new Set(before[key]);if(expected.has(id))expected.delete(id);else expected.add(id);
+     assert.deepEqual(after[key],[...expected].sort());assert.deepEqual(after[other],before[other]);assert.equal(after.selected,before.selected);
+     await p.click(selector);const restored=await p.call(state);assert.deepEqual(restored.actual,before.actual);assert.deepEqual(restored.ni,before.ni);
+    }
+    await capture(p,label+'-individual');mark('individual-geometry-'+label,{actualRoots:2,operationalOutlines:8,independent:true});
+   }
    await p.openPanel('filters');await p.call(levels,['8','9']);let filtered=await p.call(state);assert.deepEqual(filtered.levels,['8','9']);assert.deepEqual(filtered.actual,baseline.actual);assert.deepEqual(filtered.ni,baseline.ni);assert.deepEqual(filtered.stat,baseline.stat);assert.equal(filtered.selected,'view-nistrenia');
+   if(published){
+    const selector='input[data-kind="statistical"][data-filter="1"]';
+    await p.call(function(selector){document.querySelector(selector).closest('details').open=true;},selector);
+    await p.click(selector);const statistical=await p.call(state);assert.notDeepEqual(statistical.stat,baseline.stat);assert.deepEqual(statistical.levels,['8','9']);assert.deepEqual(statistical.actual,baseline.actual);assert.deepEqual(statistical.ni,baseline.ni);assert.equal(statistical.selected,filtered.selected);
+    await capture(p,label+'-statistical');await p.click(selector);assert.deepEqual((await p.call(state)).stat,baseline.stat);
+    await p.call(function(){document.querySelector('input[data-kind="osm-admin-level"][data-filter="8"]').scrollIntoView({block:'center',behavior:'instant'});});mark('statistical-filter-independence-'+label);
+   }
    await capture(p,label+'-osm89');
    await p.call(levels,['5']);let plan=await p.call(bulk,'show');assert.ok(plan.pending);assert.match(plan.scope,/contururi NI 7/);assert.match(plan.scope,/roluri NI reutilizate excluse/);
    await p.call(function(){document.querySelector('.osm-level-action-confirm').scrollIntoView({block:'center',behavior:'instant'});});
@@ -64,6 +91,15 @@ try{
    assert.deepEqual(escaped,{pending:false,panel:'filters',focused:true},'Escape cancels inline confirmation and returns focus without closing the filters panel');assert.deepEqual((await p.call(state)).ni,baseline.ni);
    await p.call(bulk,'show');await p.call(bulk,'cancel');assert.deepEqual((await p.call(state)).ni,baseline.ni);
    await p.call(bulk,'show');await p.call(bulk,'confirm');await waitFor(()=>p.call(function(){return qaApp.visibleOperationalOutlineIds.size===8;}),'eight independent NI outlines');let shown=await p.call(state);assert.deepEqual(shown.actual,baseline.actual);assert.deepEqual(shown.stat,baseline.stat);
+   if(published){
+    const before=await p.call(state);
+    for(const jurisdiction of ['ro','md','ni']){
+     await p.click('#layer-'+jurisdiction);const off=await p.call(state);assert.deepEqual(off.actual,before.actual);assert.deepEqual(off.ni,before.ni);assert.deepEqual(off.levels,before.levels);assert.deepEqual(off.stat,before.stat);assert.equal(off.selected,before.selected);
+     if(jurisdiction==='ni')assert.equal(await p.call(function(){return [...qaApp.nistreniaOutlines.layers.values()].filter(layer=>qaApp.map.hasLayer(layer)).length;}),0);
+     await p.click('#layer-'+jurisdiction);
+    }
+    assert.equal(await p.call(function(){return [...qaApp.nistreniaOutlines.layers.values()].filter(layer=>qaApp.map.hasLayer(layer)).length;}),8);mark('jurisdiction-filter-independence-'+label);
+   }
    await capture(p,label+'-shown');
    await p.call(bulk,'undo');assert.deepEqual((await p.call(state)).ni,baseline.ni);
    for(let i=0;i<12;i++){await p.call(bulk,'show');await p.call(bulk,'cancel');}assert.deepEqual((await p.call(state)).ni,baseline.ni);
@@ -81,7 +117,12 @@ try{
    const before=await p.call(state);await p.click(button.id?'#'+button.id:button.selector);assert.equal(await p.call(function(){return qaApp.captureUrlState().osmBasemapVisible;}),!basemap);await capture(p,label+'-basemap-off');const off=await p.call(state);assert.deepEqual(off.actual,before.actual);assert.deepEqual(off.ni,before.ni);await p.click(button.id?'#'+button.id:button.selector);assert.equal(await p.call(function(){return qaApp.captureUrlState().osmBasemapVisible;}),basemap);
    await p.send('Emulation.setEmulatedMedia',{features:[{name:'forced-colors',value:'active'},{name:'prefers-reduced-motion',value:'reduce'}]});await p.openPanel('entities');await p.call(function(){qaApp.atlasTree.select('osm-r90689');qaApp.atlasTree.getNode('osm-r90689').button.focus();});await p.key('ArrowDown');
    assert.ok(await p.call(function(){return document.activeElement.classList.contains('tree-select')&&getComputedStyle(document.activeElement).outlineStyle!=='none'&&matchMedia('(forced-colors: active)').matches;}));await capture(p,label+'-forced');await p.send('Emulation.setEmulatedMedia',{features:[]});
-   await network(p,label,browser.server.url);mark('combined-'+label,{rapidCancelCycles:12,basemapInitial:basemap,geometryIndependence:true,history:true,shareRefresh:true});
+   if(published){
+    await p.openPanel('entities');const before=await p.call(state);await p.click('#geometries-reset');const reset=await p.call(state);assert.deepEqual(reset.actual,baseline.actual);assert.deepEqual(reset.ni,baseline.ni);assert.equal(reset.selected,before.selected);assert.deepEqual(reset.levels,before.levels);assert.deepEqual(reset.stat,before.stat);
+    await p.openPanel('filters');await p.click('#filters-reset');const filters=await p.call(state);assert.deepEqual(filters.levels,baseline.levels);assert.deepEqual(filters.stat,baseline.stat);assert.deepEqual(filters.actual,reset.actual);assert.deepEqual(filters.ni,reset.ni);assert.equal(filters.selected,reset.selected);
+    await capture(p,label+'-reset');mark('independent-resets-'+label);
+   }
+   await network(p,label,target(browser));mark('combined-'+label,{rapidCancelCycles:12,basemapInitial:basemap,geometryIndependence:true,history:true,shareRefresh:true});
   }finally{await p.close();}
  }
  await browser.close();browser=null;
@@ -93,12 +134,12 @@ try{
  await delay(300);
  for(const [width,height] of [[1440,900],[1280,1024]]){
   const p=await browser.page();try{
-   const info=await p.send('Browser.getWindowForTarget',{targetId:p.targetId});await p.send('Browser.setWindowBounds',{windowId:info.windowId,bounds:{width,height,windowState:'normal'}});await p.navigate(browser.server.url);await p.send('Accessibility.enable');
+   const info=await p.send('Browser.getWindowForTarget',{targetId:p.targetId});await p.send('Browser.setWindowBounds',{windowId:info.windowId,bounds:{width,height,windowState:'normal'}});await p.navigate(target(browser));await p.send('Accessibility.enable');
    const metrics=await p.call(function(){return {dpr:devicePixelRatio,scale:visualViewport.scale,width:innerWidth,outerWidth};});assert.equal(metrics.dpr,2);assert.equal(metrics.scale,1);assert.ok(metrics.width<width*.6);mark('native-zoom200-'+width,{setting:zoom,...metrics});
    await accessible(p,'native200-layout-'+width);await capture(p,'native200-'+width+'-initial');await p.openPanel('entities');await accessible(p,'native200-tree-'+width);await capture(p,'native200-'+width+'-tree');await p.key('Escape');
-   await p.openPanel('modules');await p.key('Escape');assert.equal(await p.evaluate('document.activeElement.id'),'modules-toggle');await network(p,'native200-'+width,browser.server.url);
+   await p.openPanel('modules');await p.key('Escape');assert.equal(await p.evaluate('document.activeElement.id'),'modules-toggle');await network(p,'native200-'+width,target(browser));
   }finally{await p.close();}
  }
  report.status='PASS';
-}catch(e){report.errors.push(String(e.stack||e));console.error(e);process.exitCode=1;}
+}catch(e){if(e.inventory)report.publishedInventory=e.inventory;report.errors.push(String(e.stack||e));console.error(e);process.exitCode=1;}
 finally{report.completedAt=new Date().toISOString();await writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2)+'\n');if(browser)await browser.close();}
