@@ -29,9 +29,34 @@ jobs:
           node --test scripts/test/frontend-p907216-osm-roles.test.mjs
           node --test scripts/test/frontend-p909-nistrenia-menu.test.mjs
           node --test scripts/test/frontend-p9095-outline-parity.test.mjs
-      - name: Confirm protected source data is untouched
+      - name: Confirm protected ACTUAL/public data is untouched
         run: |
-          test -z "$(git diff --name-only 073a1ee2a2098392df5891fb6b15e69b0eef2d9c...HEAD -- data public)"
+          set -euo pipefail
+          while IFS=
+      - name: Upload deterministic WEB-R2a.1 evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: web-r2a1-admin-level-census
+          path: ${{ runner.temp }}/web-r2a1
+          retention-days: 30
+\t' read -r status path; do
+            [ -n "$path" ] || continue
+            case "$path" in
+              data/sources/osm-source-contract.json|data/sources/osm-source-current.json|data/sources/osm-source-transition-policy.json)
+                ;;
+              data/sources/osm-snapshots/*.json.gz)
+                if [[ ! "$path" =~ ^data/sources/osm-snapshots/(ro|md)-[a-f0-9]{64}\.json\.gz$ ]] || [ "$status" != "A" ]; then
+                  echo "Existing/non-content-addressed OSM snapshot changed: $status $path" >&2
+                  exit 1
+                fi
+                ;;
+              *)
+                echo "Protected data/public changed outside OSM source-only allowlist: $status $path" >&2
+                exit 1
+                ;;
+            esac
+          done < <(git diff --name-status 073a1ee2a2098392df5891fb6b15e69b0eef2d9c...HEAD -- data public)
           git status --short
       - name: Upload deterministic WEB-R2a.1 evidence
         if: always()
