@@ -30,5 +30,7 @@ jobs:
           path: |
             outputs/osm-source-continuity.json
             data/sources/osm-current.json
+            data/sources/osm-snapshots/ro-*.json.gz
+            data/sources/osm-snapshots/md-*.json.gz
           if-no-files-found: warn
           retention-days: 30
