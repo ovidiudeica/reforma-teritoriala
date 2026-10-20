@@ -117,8 +117,8 @@
     {
       "key": "generator",
       "file": "scripts/audit/ni-jur0-inventory.mjs",
-      "bytes": 20334,
-      "sha256": "077532bb07dfb40848490e0fa28b1dfda5b838a1f72bd33616c4ddffc0156936"
+      "bytes": 20511,
+      "sha256": "52c800849eff9d35c2576655ea32b482b4bc32eac9c1b4f0d8c163d0990e1108"
     },
     {
       "key": "outlineMetadata",
@@ -2065,6 +2065,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -2075,7 +2076,9 @@
           }
         ],
         "explicit_osm_parent_id": "1702219",
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -2108,7 +2111,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "2671be460564fd648539baf13a4e2ece56bb1db6d7fcee99a3b7403be1d3821b"
+      "row_sha256": "3336feea428dbd3f15e9e3ce6c46ee30c2771a28684648ad091f0f25249bb38f"
     },
     {
       "actual_id": "osm-r12215667",
@@ -2249,6 +2252,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -2259,7 +2263,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -2292,7 +2298,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "e42f3f9e201bcf8397be1608a69d8a4f3a4c538a8ac13fb189be22eca56694ec"
+      "row_sha256": "98a96f5206e7b575ae840f0d2367c26caf7f8f769ce98cfdbc21d68751c42c67"
     },
     {
       "actual_id": "osm-r12463378",
@@ -2450,6 +2456,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -2460,7 +2467,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -2493,7 +2502,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "59b4c96796d06cb027b5cdda51c2f76b2e994ccc6943115bf1f66614dcd9b142"
+      "row_sha256": "a4d5805c6bb6276c673ac80d136b14d1c77b2c01a9bc6e4b8b2f571a9a7b1e70"
     },
     {
       "actual_id": "osm-r12463379",
@@ -2675,6 +2684,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -2685,7 +2695,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -2718,7 +2730,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "00212af1449f4fdbc81686113aad1b82add5801983bd77b7578f943717c76174"
+      "row_sha256": "27d0196d5ff516d479402b4259763d9e9d890f2fc8739874d3d02256e59cec6d"
     },
     {
       "actual_id": "osm-r18941889",
@@ -2870,6 +2882,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -2880,7 +2893,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -2911,7 +2926,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "5c128b294b1601137a1364f55cc42e8258d3529cc8a1a383c2af65bac0c41e9f"
+      "row_sha256": "1271dc3c5349a1583dd20a60dc711bd91a9e7f0977ecf601257181bac8b0d0d1"
     },
     {
       "actual_id": "osm-r18941890",
@@ -3069,6 +3084,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -3079,7 +3095,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -3110,7 +3128,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "b5d6e37d7636713e8a0f9a5eb2d710b541789d6fd29ce7903e99a4f81b21c3a2"
+      "row_sha256": "b8af941ca0b631f8e91b3c2ce931be12ca3f9b146a8f34e58c9dc3c74e618f9d"
     },
     {
       "actual_id": "osm-r19001619",
@@ -3280,10 +3298,13 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "NO_EXACT_2023_NAME",
         "nominal_entries": [],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": {
           "classification": "2023_NORMATIVE_ABSENT_BUT_INSTITUTIONAL_MICRODISTRICT_CLAIM",
           "authority_url": "https://www.vspmr.org/news/supreme-council/primer-otvetstvennogo-predannogo-i-bezzavetnogo-slujeniya-izbrannomu-delu.html",
@@ -3337,7 +3358,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "1ac9c102af610ccd5755797c1fe7b31176af1ebca6a22fb512f324f0670f133b"
+      "row_sha256": "27b1fcad9128d439e11d7ef5be2cba8c665253460ad1389d9d83656b721903d9"
     },
     {
       "actual_id": "osm-r19012105",
@@ -3524,6 +3545,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -3534,7 +3556,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -3567,7 +3591,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "22a774453ba3a959ec76b8204db0584929098668c9711571540466bac10eeb46"
+      "row_sha256": "e21f13fbd66ba5ad62d1b410fd0724440385d54cd9ce0a449f228cd3f7f9aca0"
     },
     {
       "actual_id": "osm-r19013328",
@@ -3737,6 +3761,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "CURATED_ALIAS_POTENTIAL_MATCH",
         "nominal_entries": [
           {
@@ -3747,7 +3772,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": "OFFICIAL_ANNEX2_EXACT_COMPATIBLE_NAME",
         "amendment_chain_complete": false,
@@ -3782,7 +3809,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "d663ee25672132dc7ac9a1cf26238868aa1616079d030cfb83be619e2d4d42e3"
+      "row_sha256": "e6a3eb6c2af4f05a12d06407fd23a50df7ac73ca82a6c0d303c02bf82c2996a0"
     },
     {
       "actual_id": "osm-r19013329",
@@ -3958,6 +3985,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -3968,7 +3996,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -4001,7 +4031,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "4768dde2ea1f9cf1d7f899a19948b755816914f0f8c77d57f0cc795e2938fc14"
+      "row_sha256": "d09b43e51726222954db90036b011bb8f309c5246ffd7d4f78b1aa82684d8776"
     },
     {
       "actual_id": "osm-r19015106",
@@ -4171,6 +4201,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -4181,7 +4212,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -4214,7 +4247,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "a8e31f55e40e0eadc50087097022033db72ae3141cfba02d5750c9416476a756"
+      "row_sha256": "536760057440ffa7c559c4c0928f08f916c1bb28bf8e7b06d103ff7eb336cd00"
     },
     {
       "actual_id": "osm-r19015107",
@@ -4372,6 +4405,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -4382,7 +4416,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -4415,7 +4451,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "d4f065979afd9fb0e9f52a3e439b2c7ba1e6c294c52897c8f4dfc45a146ba974"
+      "row_sha256": "037ca23776f3c6d6841d4a7907827a079e7c8d1d4f8316510dc32f476ef9dbc0"
     },
     {
       "actual_id": "osm-r19015108",
@@ -4573,6 +4609,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -4583,7 +4620,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -4616,7 +4655,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "7d69c97b69fe971b493f13083daec61718c8323f564b73ce6a46d0f0bbc0698f"
+      "row_sha256": "8c8aea47d1aad48ba8698f54e70772c6517c17f5c61f0fa0802a1cfff461438f"
     },
     {
       "actual_id": "osm-r19015109",
@@ -4774,6 +4813,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -4784,7 +4824,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -4817,7 +4859,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "a20c72f9048e646941d86b123fd0f84a78f113df7b07b20024373b9f8225effa"
+      "row_sha256": "6efbc325c4b56c490207121903be12b96f39afa49d6c75972063f487402b02e7"
     },
     {
       "actual_id": "osm-r19015110",
@@ -4982,6 +5024,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -4998,7 +5041,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -5031,7 +5076,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "a81e5600e190260bfbe996ed97f9ed8c574025835f93618c770453c97f7bdb65"
+      "row_sha256": "7b9315a01e9f23c35b678b144ab3ecfc03efc6ab5244f5c1ef2a53ed25c9542f"
     },
     {
       "actual_id": "osm-r19015111",
@@ -5201,6 +5246,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -5211,7 +5257,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -5244,7 +5292,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "eb5a406216c95e145e0af45892dd94de4a987e3f0470091c1bf8a19c0ea8459a"
+      "row_sha256": "a09b0adebf81fd64193c1d1b9c6a634682e00699c4e157f7ed37553166773379"
     },
     {
       "actual_id": "osm-r19015112",
@@ -5420,6 +5468,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -5430,7 +5479,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -5463,7 +5514,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "ea89c8ae3d70497f7ff2e4b8b86b49652f151eb0a4064ab5b3584599f050dec6"
+      "row_sha256": "fcd2147d06399b78da73437a27824fd494cb111a186a9a828db05c5d131ce1cf"
     },
     {
       "actual_id": "osm-r19015113",
@@ -5633,6 +5684,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "CURATED_ALIAS_POTENTIAL_MATCH",
         "nominal_entries": [
           {
@@ -5643,7 +5695,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": "OFFICIAL_ANNEX2_EXACT_COMPATIBLE_NAME",
         "amendment_chain_complete": false,
@@ -5678,7 +5732,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "82c13ec5383acebf63ff9e91d34ee83f9916bf90f9e9d3e4d4bf3ad983a42ab2"
+      "row_sha256": "7b92b951bf66acf01ada8f16b38c8f7baab6ae4b9f594d5ecd37cb86a4a5bb7d"
     },
     {
       "actual_id": "osm-r19015114",
@@ -5853,6 +5907,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "CURATED_ALIAS_POTENTIAL_MATCH",
         "nominal_entries": [
           {
@@ -5863,7 +5918,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": "OFFICIAL_ANNEX2_EXACT_COMPATIBLE_NAME",
         "amendment_chain_complete": false,
@@ -5898,7 +5955,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "ab7090064d36916f9ac6f5f5a39e4307b6cd7605908a4b06c1e0c4926953ba82"
+      "row_sha256": "224bff09a39aaf32d819d6e22363ad60cadb805fe32174644210b1aba914b1a7"
     },
     {
       "actual_id": "osm-r19015115",
@@ -6068,6 +6125,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -6078,7 +6136,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -6111,7 +6171,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "355552f880b9c53017633fb7305b22ea9b6a449476f2c3791c43078c68a57746"
+      "row_sha256": "bee7f926d94a5f49c99d675b2feddd03aba509feee73c80f9c0fd411db7651a4"
     },
     {
       "actual_id": "osm-r19015284",
@@ -6281,6 +6341,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "CURATED_ALIAS_POTENTIAL_MATCH",
         "nominal_entries": [
           {
@@ -6291,7 +6352,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": "ANNEX2_LISTS_VADUL_TURKULUY_NOT_EXACT_LEGACY_TOKEN_REVIEW_REQUIRED",
         "amendment_chain_complete": false,
@@ -6326,7 +6389,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "fce698fe8d95eba31d41f5308bc8400a01401ffa9653bf55d92ea4df8b74d6f8"
+      "row_sha256": "274201d360a8b199e754397b7974a8d0bc9a70cca1431ccaf5b18554eef9ea74"
     },
     {
       "actual_id": "osm-r19015285",
@@ -6502,6 +6565,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -6512,7 +6576,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -6545,7 +6611,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "4d526f0e6ae8976cf8b08793cb3b11680dc5e788d99743f44287ac4a9a34cd41"
+      "row_sha256": "7cd7d49443a86d73b4d8c65903592ec19b23ef4721d84720bfc1c69bcf4cfbb3"
     },
     {
       "actual_id": "osm-r19015286",
@@ -6691,6 +6757,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -6701,7 +6768,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -6734,7 +6803,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "1971d93ca7836b0564ed234c5abcdab71e9422179d63e428b273832c9b35740c"
+      "row_sha256": "b9db43c88ced11bc8f683ba0f5b49d7c23160f306a8a7222e2c101f8d267a4e3"
     },
     {
       "actual_id": "osm-r19015287",
@@ -6880,6 +6949,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -6890,7 +6960,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -6923,7 +6995,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "65df5dc824f2b70944585e467d4b765bbd73aaff039081c469cf671636778ab2"
+      "row_sha256": "db2eaa3f11769d996a311eb3e1f73f153790046a36dc44153ac38698d4e81d56"
     },
     {
       "actual_id": "osm-r19015304",
@@ -7110,6 +7182,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -7120,7 +7193,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -7153,7 +7228,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "16323a8d22bf4f3c549359b52c7a5c492632fbebb4b09caa9b879fda21bd497b"
+      "row_sha256": "ef4d4d3857b2665097930b00ea84a09c789e8920ec3bc1656b77540245f84e87"
     },
     {
       "actual_id": "osm-r19016165",
@@ -7323,6 +7398,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -7333,7 +7409,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -7366,7 +7444,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "92e289b6ce01e29be723284642c239e8464cb4725a318db40e55c098dd78cda1"
+      "row_sha256": "524cdf3cbb4e46ded9814d4fa66f62ed3f6e4453099e5bee86144a25a25a4894"
     },
     {
       "actual_id": "osm-r19016166",
@@ -7536,6 +7614,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -7546,7 +7625,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -7579,7 +7660,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "3466b10b4d4911b8ed915215258309b5f9c155a060d6d4ce883cb90dc084d854"
+      "row_sha256": "59a714457666ffec8c5a921dd6b28aa3b2447087db026f7ba29c5b1791c331a7"
     },
     {
       "actual_id": "osm-r19016167",
@@ -7725,6 +7806,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -7735,7 +7817,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -7768,7 +7852,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "0e0cff499c5d96f8620317abca66ffb4beb866488c021e452d8ea1319dc86fe9"
+      "row_sha256": "bc52cf1f94c2dc35083986c6e2dac44168bc6145515a9ee883b4b2edfeb647d3"
     },
     {
       "actual_id": "osm-r19069840",
@@ -7920,6 +8004,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -7930,7 +8015,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -7963,7 +8050,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "6366b72c8211b8a8a8c7d28ebef7765b337b6cab749969a8fb1766f71069ee8c"
+      "row_sha256": "55145077cac08a7358b1d23a947081664fce7138d0aa23fe4a98c3df53860f91"
     },
     {
       "actual_id": "osm-r6879649",
@@ -8131,6 +8218,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -8141,7 +8229,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -8174,7 +8264,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "947c9026a608f4e0d89b7b8f0af494d854acbc8ae263a6e32c43408561ce8f90"
+      "row_sha256": "d9188e7caa0112fd8ffd164b4ba879243dd89b8993781883db6cc2abced86671"
     },
     {
       "actual_id": "osm-r7427669",
@@ -8337,6 +8427,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -8353,7 +8444,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -8387,7 +8480,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "5f0675e4d846d745163c8581a186d43fc81d89c45185908bb6cfafcd5b7e1f3e"
+      "row_sha256": "166294c7383adaa2d5614702ef3b45002e32ef956a2870ca9a7ea4188e3fca9d"
     },
     {
       "actual_id": "osm-r7427680",
@@ -8550,6 +8643,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -8560,7 +8654,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -8593,7 +8689,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "9e5d839ebaa3741450c67956c8b22adccdc2d3a6d2cbd318697bd5b230b0f062"
+      "row_sha256": "34cdf25294e47d108fb122957e6db5052369881f622fd9b778b772982413c558"
     },
     {
       "actual_id": "osm-r7431238",
@@ -8756,6 +8852,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -8766,7 +8863,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -8799,7 +8898,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "45a495c4d159afe9975394ad35c8f75dc0752e52403ad9c3c9e1ebf8b047fbcd"
+      "row_sha256": "1632e5274540569d6405576a1c62be9a9d43600fdd897be7adaa20df31a32a25"
     },
     {
       "actual_id": "osm-r7431263",
@@ -8962,6 +9061,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -8972,7 +9072,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -9005,7 +9107,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "64abeac8a6c0ad65a5c6bf735bf2ce85749e821ff5451f77646b4fa9f9ac9548"
+      "row_sha256": "dce7cc7cd05e3fa600677c8ae2790592fa0d1e7c0f9666757b87419909360984"
     },
     {
       "actual_id": "osm-r7432661",
@@ -9168,6 +9270,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -9178,7 +9281,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -9211,7 +9316,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "959de7801e3a0d51d53393ffbd52a123cad29e44031266a751ea810083cd52c9"
+      "row_sha256": "646e14ca09fa9d441d871e51a24e9ac96f254c65809ad098e636702663036631"
     },
     {
       "actual_id": "osm-r7432662",
@@ -9374,6 +9479,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -9384,7 +9490,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -9417,7 +9525,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "f4b7ddb2114d07a4603a2a793146e00c5008806b8801399bb17fc48a3d7227fa"
+      "row_sha256": "f3bcbed5dd4f31d8b7e3f1962ec3415914efaa656f780ea9e5701408017e3626"
     },
     {
       "actual_id": "osm-r7432700",
@@ -9569,6 +9677,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -9579,7 +9688,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -9612,7 +9723,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "9cd882c98987f1405a7bc1d1bcf04aead8bacc0361777e8dff2e8a3516b47ac5"
+      "row_sha256": "33fb115920ceb85cd59c2d068b99bca8be79449ef6ed027910c94b89188d41f5"
     },
     {
       "actual_id": "osm-r7468724",
@@ -9775,6 +9886,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -9785,7 +9897,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -9818,7 +9932,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "74185024ababbe0fce5eaabe8595bb641139f59b4faff2748025fcf3db29877a"
+      "row_sha256": "8b79711490aedad4e9bb7e587bd146fb8665fab790875b5b1f15fbe979827bb8"
     },
     {
       "actual_id": "osm-r7468791",
@@ -9981,6 +10095,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -9991,7 +10106,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -10024,7 +10141,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "634e2c5b238f5f295bf025ecd31820dc0e92c24545554496b5334d8fb20fe51e"
+      "row_sha256": "555c8cce8e252127fd7b2ba365fe22d4e361d3e50c1718806f890c1b6670e0a0"
     },
     {
       "actual_id": "osm-r8289594",
@@ -10187,6 +10304,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -10197,7 +10315,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -10230,7 +10350,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "263bbc097741f942c32c64ad1d8990b0de81231b90922b17ee5ca5b5fe0d6cb7"
+      "row_sha256": "5094686dd91d25fca252cd7f11122dd03c69d52caccd58c3e7b50c38ebcb2f80"
     },
     {
       "actual_id": "osm-r8289727",
@@ -10393,6 +10513,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -10403,7 +10524,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -10436,7 +10559,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "bd4f8fb043499cdaf29e7ebe1908a58dbfc6e437ac8409eeaa90b5193039a961"
+      "row_sha256": "1a5ebf7e0d5d193da58c2fca2199fac38be1b32f63eb4d6e653fd05ac6972795"
     },
     {
       "actual_id": "osm-r8289751",
@@ -10594,6 +10717,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -10610,7 +10734,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -10643,7 +10769,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "ced4ee3b2fda7b986bcc3e952a3eb03a2ca051eb3050279717722f6605513cb2"
+      "row_sha256": "4193e536dcfb7aaab491490123e14da63ea2ddbb3c55ecdde31f44fcde8086c3"
     },
     {
       "actual_id": "osm-r8290840",
@@ -10814,6 +10940,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -10824,7 +10951,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -10855,7 +10984,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "e909752a418185516a5b9e70ddf6da570c046ad27febdd75c0d331ebced6e307"
+      "row_sha256": "a683a958e664b0455ca7e8d277163aa9b3050f2252425d93d453c717828f0f93"
     },
     {
       "actual_id": "osm-r8290877",
@@ -11012,6 +11141,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -11028,7 +11158,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -11062,7 +11194,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "a1ffc8e516e77ae617ae4eb073848c1cef8a5c527d8ebbe2b55cfedfeaa7cb9c"
+      "row_sha256": "ff83c06197331673c39834d1d3ee43bb87eaf0852299b1543adeedb05d72a17a"
     },
     {
       "actual_id": "osm-r8290934",
@@ -11225,6 +11357,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -11235,7 +11368,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -11268,7 +11403,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "c4a87430ef1bd793a8d0bb80c92f7de1bac2c5493788da7db251b907698d1469"
+      "row_sha256": "2eca5e18a7d21a8f81f3d554d2ee670822b718abd5f262a89c334a3df91474e6"
     },
     {
       "actual_id": "osm-r8291057",
@@ -11455,6 +11590,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -11465,7 +11601,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -11498,7 +11636,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "f07d4d992c937015880a077f5bc46019868cccc98fe5e5680b9b58ca785ba6b8"
+      "row_sha256": "a6cd068989bf144ea87593a310d61b44207de8b8ba9519dc63a0021963707ae4"
     },
     {
       "actual_id": "osm-r8291058",
@@ -11685,6 +11823,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -11701,7 +11840,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -11736,7 +11877,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "1dcb8c7a2a103cb32bac398f917327afa4553bdb1d206413e949ab1f779a70a5"
+      "row_sha256": "d44ebc4fb41b10a4a67ef82c8d00a406fdfa48cf8758bd92c760d895c855e007"
     },
     {
       "actual_id": "osm-r8292878",
@@ -11899,6 +12040,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -11909,7 +12051,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -11942,7 +12086,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "3c026de8b9a8c37f7ecd2c1ff7b4fef7dec8eed4ac8bb8bcd29f6672358e23df"
+      "row_sha256": "0cece3eb4ff8a79cb769ac2e9bd3d174134f4b12ba6232298fd0b6563761ce0f"
     },
     {
       "actual_id": "osm-r8292891",
@@ -12105,6 +12249,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -12115,7 +12260,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -12148,7 +12295,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "41ecc616802b5dcb0677128191ef74a04f70a0cbe7f0d3e5ff3586799f6def94"
+      "row_sha256": "d1719e915b133d770f1a65199a9a12c505d0646ec92c7055e94644d1e8700346"
     },
     {
       "actual_id": "osm-r8292898",
@@ -12317,6 +12464,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -12327,7 +12475,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -12360,7 +12510,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "b5b0e64c6a0aeed78c390f94a95024532a22b1005373eada3308566662ed7632"
+      "row_sha256": "7cca78b46c308a21e33181d98826330f8bd50463fb71ac5a11a4cf56bbfff1ae"
     },
     {
       "actual_id": "osm-r8292909",
@@ -12523,6 +12673,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -12533,7 +12684,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -12566,7 +12719,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "9935ab6d7153f4ba40d33b685e421b94af8ef9fd43566592be43a0ead4a1da60"
+      "row_sha256": "f362d03f8b749b3941cfece795b036c21c1e2bac2c5d781d5703c646fe1c6cd3"
     },
     {
       "actual_id": "osm-r8348605",
@@ -12729,6 +12882,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -12739,7 +12893,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -12772,7 +12928,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "1185c33603a4e8fc47e98c89e18035ac51de21e01820827cdc5419a935147f6d"
+      "row_sha256": "20cf4dc409ebee89a040280d40d397ba9b14fa194fa7e707f6256d854e8e0f22"
     },
     {
       "actual_id": "osm-r8348625",
@@ -12935,6 +13091,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -12945,7 +13102,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -12978,7 +13137,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "c34933cbe617d580e7dee4bd83c1c22cbd2f5f479939116b4a0989bcd26ece6a"
+      "row_sha256": "3915da31efed30e24404fb81ee3ee0b03e3f420c5f486af93871bb0446b58e7f"
     },
     {
       "actual_id": "osm-r8348646",
@@ -13141,6 +13300,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -13151,7 +13311,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -13184,7 +13346,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "6801bc8472a2661f4bbe30071de490ad113b786f23053630d2ff1c78b9a3b318"
+      "row_sha256": "37c7e45470314a41d063d8ec49d9c8836055d803b8168271fe1c521560a468f4"
     },
     {
       "actual_id": "osm-r8348909",
@@ -13347,6 +13509,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -13357,7 +13520,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -13390,7 +13555,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "c0cb4fd32028d0abd0e4876ac164fff7daac71f82f78465c2c4b56019ff13d27"
+      "row_sha256": "f4f82737b1fd3aa8eb7f6314e244a8fad76ebb6e637732790a0e458ff87ca5f2"
     },
     {
       "actual_id": "osm-r8348920",
@@ -13553,6 +13718,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -13563,7 +13729,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -13596,7 +13764,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "ccd85f1ba42eac2925bc24e2fab349143342f2f9294e95e230b5694e479f0169"
+      "row_sha256": "b773240cf817d1c3abb949104ee8b8ee98094fb27287669ccd4063eb662e2eb4"
     },
     {
       "actual_id": "osm-r8349002",
@@ -13759,6 +13927,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -13769,7 +13938,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -13802,7 +13973,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "1a81712e5e3d350d89bf6c4b6757be1be9982627c9ca5b22db94342efaea9007"
+      "row_sha256": "8697f5f54d65db1787767de52313f3f1af58932f236ae81d48350fe8a931d779"
     },
     {
       "actual_id": "osm-r8349059",
@@ -13965,6 +14136,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -13975,7 +14147,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -14008,7 +14182,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "b102f36b92ec638eac09e6d75d55b76416fdd672f923774c47eb6d17145cde74"
+      "row_sha256": "26a795bd653bc67848e52ca1ecde4256993d9978344fce4e08ab8e0ea284ede7"
     },
     {
       "actual_id": "osm-r8349093",
@@ -14171,6 +14345,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -14181,7 +14356,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -14214,7 +14391,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "fc43aff163fa5081ed584397ee6ba671e34aab3bb193737e5adb5ec962098d19"
+      "row_sha256": "d0bb6b707ad6bb3c7a6d98b16887a34c2d8db81c8f111923ab72602463bd714e"
     },
     {
       "actual_id": "osm-r8349094",
@@ -14377,6 +14554,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -14387,7 +14565,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -14420,7 +14600,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "2bc0cee413cb252363206b0f343dc642bab26a343cf5437bd2908f1ea36d991f"
+      "row_sha256": "9c37cf7d6a153cb656e438565bfa2664f2af5245fd62b8156209a459df3d5b2d"
     },
     {
       "actual_id": "osm-r8349307",
@@ -14583,6 +14763,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -14593,7 +14774,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -14626,7 +14809,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "3074929ee6ec04662a70e3949b881e109694b8033001c04c08ab29d25935a1aa"
+      "row_sha256": "ba26e747433b48742296e249ea93fd12e45a3d8f7c255b949c8aa976b76f8126"
     },
     {
       "actual_id": "osm-r8349338",
@@ -14783,6 +14966,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -14793,7 +14977,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -14826,7 +15012,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "8cc165f8dc0fa8ccaee0397ae3a21a2dfa0a51a341eceebbb1c2a808f557383b"
+      "row_sha256": "5e39416cefe82fb7599baf71fa3053efdfd0c7806ed1e6e4aeadff5499998ec2"
     },
     {
       "actual_id": "osm-r8539257",
@@ -14978,6 +15164,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -14988,7 +15175,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -15021,7 +15210,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "6f37628ebbb3c89c089b6b4112876b61559747498c719a1a1672e3fa66a9ffd8"
+      "row_sha256": "db98c9ea157efc47ee6aad1ae7035b55a0d2f2d021e15cffbb8dedb4ba0cc373"
     },
     {
       "actual_id": "osm-r8539525",
@@ -15184,6 +15373,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -15194,7 +15384,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -15227,7 +15419,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "feb3bf3a7c1d4256f8e01bb289b32156149660831b070cfa8a1cbf4cf8991e0b"
+      "row_sha256": "630ea3d9b1335d76140fda3a28b8b669aabfd28e69b8de5550d3ba034086feaa"
     },
     {
       "actual_id": "osm-r8688504",
@@ -15390,6 +15582,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -15400,7 +15593,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -15433,7 +15628,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "560b1ed0d89ef16dce5460faf42647cc1d669e1d77072db059cc8a324ad0754d"
+      "row_sha256": "91d007308978043f3ad86844a77ab68feaca02af1b303b898f425511d977c18a"
     },
     {
       "actual_id": "osm-r8710724",
@@ -15608,6 +15803,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -15618,7 +15814,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -15651,7 +15849,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "9283a2ee7b5e76723699c6edda91b6b7b87229009ff9f9559d9e254ffbe5d6fa"
+      "row_sha256": "e538fb4a13f8fc8a5016850d24a987e798cd91314cede86980f5187a2004a75f"
     },
     {
       "actual_id": "osm-r8726395",
@@ -15814,6 +16012,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -15824,7 +16023,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -15857,7 +16058,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "554d3d29bc8019ca2eff56a7bbedbd737e184effaeca9cb801c3a4f0df033c82"
+      "row_sha256": "85cf2e2408a28f82f05a5e089f1db137b8b11c797138389b09d3e8ee8d367fde"
     },
     {
       "actual_id": "osm-r9288026",
@@ -16020,6 +16221,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -16030,7 +16232,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -16063,7 +16267,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "99d6a5949433a2cb2351093bbfdb2932afd1130ae94587c667e6e6e37fc5eeb4"
+      "row_sha256": "1e0c45f8a4de53bf488336ce0a44fa7291807b3e9084b3049c10dc8cbecf9727"
     },
     {
       "actual_id": "osm-r9288110",
@@ -16232,6 +16436,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -16242,7 +16447,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -16275,7 +16482,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "4ad1635bf6d30a2a0fe3c1c125a86bf2a23fa050bf1512c553870715ec32958e"
+      "row_sha256": "da28037c472b7cc525637849815ac5a7fb3d7e34c2cb4e6e2b4188291e3be7ed"
     },
     {
       "actual_id": "osm-r9288158",
@@ -16438,6 +16645,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -16448,7 +16656,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -16481,7 +16691,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "90b1dded0378022337306f15116c23b950d374cef93d72835d632f848a643a7f"
+      "row_sha256": "fb3835dfacfc6122061d2790e8be144c8257c1075e4ebb61fc6345a7627aa6d1"
     },
     {
       "actual_id": "osm-r9288287",
@@ -16674,6 +16884,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -16690,7 +16901,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -16724,7 +16937,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "3c035b5c12a7d873bf3475d9dd81453c64df2e430b16c4c2232906a78043601c"
+      "row_sha256": "7bc2cf0ab0fb60dcd656616ff7d7831c07b297f1cebbe333902da99bb0fef6ae"
     },
     {
       "actual_id": "osm-r9288722",
@@ -16887,6 +17100,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -16897,7 +17111,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -16930,7 +17146,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "c41b01ee6588fb9c02cc32e07599e161ffb12e7c7d370185b4eab69eb1ca84e9"
+      "row_sha256": "d5f8f0acc91627e890d8b097a8bcf00d6133403ebe194f94342c04f69c3c502f"
     },
     {
       "actual_id": "osm-r9288756",
@@ -17099,6 +17315,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -17109,7 +17326,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -17142,7 +17361,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "e1f949b31150475917a5205254d191b95f290d9512283a7e674de5c9009d4730"
+      "row_sha256": "136466038f8c99173f7896758e195650e4eb3a2c521c9c6315bfb5406122b7f5"
     },
     {
       "actual_id": "osm-r9294122",
@@ -17305,6 +17524,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -17315,7 +17535,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -17348,7 +17570,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "08b6cd466a0a687fde40842dd414072aa5d1aef00893a4652de78ec131fb1592"
+      "row_sha256": "ad7770fa37f73be71d1b19e28bea0b4e49c03ff72c27a988688c1ebbcaefceca"
     },
     {
       "actual_id": "osm-r9301463",
@@ -17500,6 +17722,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -17516,7 +17739,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -17551,7 +17776,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "6db738c68935c535ca0311caf3c7f0fea16340002ca5bd7f2461120f5bb94059"
+      "row_sha256": "0c54192899b3557eafd44862082c548a4e2e5481469374e1b55c21a313919c85"
     },
     {
       "actual_id": "osm-r9301464",
@@ -17685,6 +17910,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -17701,7 +17927,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -17734,7 +17962,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "fc59ac1c026c44ebbf3aca998dc1ca54bcbcfcde6bf039ccd4e929001b443606"
+      "row_sha256": "6fed792ae28bf4bdfed80637bfe711b8448177065948abd8aae9d96af7282882"
     },
     {
       "actual_id": "osm-r9581354",
@@ -17887,6 +18115,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -17897,7 +18126,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -17930,7 +18161,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "73b0ff662407459959db910b3578ca06cddd1ee5cf3fafdd64cf708621478904"
+      "row_sha256": "105baf0483402403279e6449e0a5bedba9e5a12a3f8a85092d589da4a63eec87"
     },
     {
       "actual_id": "osm-r9656324",
@@ -18088,6 +18319,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -18098,7 +18330,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -18131,7 +18365,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "9f49b7174a69f3b866f27140a2cd0a1d98682d77b14621fe17e955dbf3113da4"
+      "row_sha256": "1b8cb21c2d21c8d1273178fc6b37afc6e7a9fd7f9bd960147be78e435f0bbd60"
     },
     {
       "actual_id": "osm-r9656364",
@@ -18294,6 +18528,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -18304,7 +18539,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -18337,7 +18574,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "85b06c79ce99563591db559ded207beef0a08fb155e930b010211fe231f193fd"
+      "row_sha256": "a8d37661c1fdc0082b15e964c971f6d0360ba50445325ac627c14850ed22e7f6"
     },
     {
       "actual_id": "osm-r9656413",
@@ -18500,6 +18737,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -18510,7 +18748,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -18543,7 +18783,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "7b7f9f1084713e59a9a93f3de121b12baeb92fcf78645adc2309879b0d48ead8"
+      "row_sha256": "195e2338e83aaee7add2a941867a6804cf761c39804ed7fc92ff27e4ac5837c5"
     },
     {
       "actual_id": "osm-r9659709",
@@ -18706,6 +18946,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -18722,7 +18963,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -18756,7 +18999,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "d99589b3d89b652a7c26cc15059e8efa3846dffa179ac835d90c1320dfaaca92"
+      "row_sha256": "cdd27ed63ede964d5e51f7fecfdd990dcf122878a1714e5dd85e25c28f5ff389"
     },
     {
       "actual_id": "osm-r9659794",
@@ -18919,6 +19162,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -18929,7 +19173,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -18962,7 +19208,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "2be346b18247b19e1debcbf655a0e1f93b2db26d65e7c44422adeaaf893a0b8d"
+      "row_sha256": "1742cb08978492ce7e62905d400426b6793f047e3dab0faeb697f220042ff919"
     },
     {
       "actual_id": "osm-r9659979",
@@ -19127,6 +19373,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -19143,7 +19390,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -19177,7 +19426,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "fa7c46e763a95f2ce38c4cff6f7ba0987b199f17a2fc0c21b2260b78eeee5105"
+      "row_sha256": "7d8d83849233479ebd2ce26447b6d41ef7e3ef5bd1afc33eaa9b5e3ac0f5f89d"
     },
     {
       "actual_id": "osm-r9660049",
@@ -19340,6 +19589,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "UNIQUE_NAME_2023",
         "nominal_entries": [
           {
@@ -19350,7 +19600,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -19383,7 +19635,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "1737555ba9c5978713c0d74a66bf941f25b7cbaf0ad7beef90bee86ae469992e"
+      "row_sha256": "ad93f8ffcfae0323c56d72094f2c326b9dc42223db0160a722c50ce9456e619a"
     },
     {
       "actual_id": "osm-r9679382",
@@ -19535,6 +19787,7 @@
         "status": "HISTORICAL_CLAIM_NOT_CURRENTLY_CERTIFIED",
         "evidence_year": 2023,
         "source": "docs/p9.0.6.3-final-semantic-matrix.json",
+        "source_type": "HISTORICAL_PROJECT_LEDGER",
         "name_match": "HOMONYM_MULTIPLE_ENTRIES_2023",
         "nominal_entries": [
           {
@@ -19551,7 +19804,9 @@
           }
         ],
         "explicit_osm_parent_id": null,
-        "explicit_parent_id_not_inferred": true,
+        "parent_identifier_authority": "HISTORICAL_PROJECT_CROSSWALK_NOT_PRIMARY_SOURCE_IDENTIFIER",
+        "primary_source_parent_osm_id": null,
+        "explicit_parent_id_not_inferred_in_this_stage": true,
         "microdistrict_evidence": null,
         "alias_validation": null,
         "amendment_chain_complete": false,
@@ -19584,7 +19839,7 @@
       },
       "actual_mutation_allowed": false,
       "p91_import_allowed": false,
-      "row_sha256": "798cb865c1f31285616453044e246c90def587a94f970adde52dd845f0abd308"
+      "row_sha256": "b83a28ea4786e87398a33ee7a81f0665a98108c0856364f6edb784df82276882"
     }
   ]
 }
