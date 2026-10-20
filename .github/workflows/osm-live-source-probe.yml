@@ -27,6 +27,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  ni-outline-source-acquisition:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Acquire eight official outline sources without semantic acceptance
+        run: node scripts/process/capture-ni-outlines-current.mjs
+      - name: Prove acquisition is read-only
+        run: git diff --exit-code
+      - name: Preserve source bytes and real retrieval timestamps
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ni-outline-source-acquisition-${{ github.run_id }}
+          path: outputs/ni-outline-source-acquisition/
+          if-no-files-found: error
+          retention-days: 30
+
   per-id-forensics:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
