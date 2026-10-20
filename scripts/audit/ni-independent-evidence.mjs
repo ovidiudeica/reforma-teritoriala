@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
-import vm from 'node:vm';
+import {parseFull,polygon,segments} from './p907218-osm-live-85.mjs';
 import RelateOp from 'jsts/org/locationtech/jts/operation/relate/RelateOp.js';
 import {readTopologyGeometry,classifyMatrix} from '../lib/p82-topology.mjs';
 import {assertRelationClosure} from '../lib/osm-adaptive-transport.mjs';
@@ -36,8 +36,8 @@ export function validateDossier(d){
  assert.equal(d.rows.filter(r=>r.label==='Bender').length,2);assert.equal(d.rows.filter(r=>r.label==='Hlinaia').length,2);assert.deepEqual(d.security_zone_exceptions.map(r=>r.requested_name),['Roghi','Mahala','Pohrebea','Vasilievca']);assert.equal(d.security_zone_exceptions.find(r=>r.requested_name==='Vasilievca').cuatm_snapshot_candidates.length,2);
 }
 function replayGeometry(){
- const source=readFileSync(new URL('../../scripts/audit/p907218-osm-live-85.mjs',import.meta.url),'utf8');assert.equal(sha(source),'558ff0c24b646250744509a6c259cda7fba3fe3a933cca01956d465aa103f72a');
- const pure=source.slice(source.indexOf('const attr='),source.indexOf('async function full(')).replaceAll('export function ','function '),context=vm.createContext({assert,sha});vm.runInContext(pure+';globalThis.geometryApi={parseFull,polygon,segments};',context);const api=context.geometryApi;
+ const source=readFileSync(new URL('../../scripts/audit/p907218-osm-live-85.mjs',import.meta.url),'utf8');
+ const pure=source.slice(source.indexOf('const attr='),source.indexOf('async function full('));assert.equal(sha(pure),'68f5cfdc6136e0658af99db94ffad123494d6d71941957bc3d61817613a85cf3','Historical geometry functions changed');const api={parseFull,polygon,segments};
  const report=data('roles/live-source-85.json'),outlines=data('outlines/index.json'),provenance=data('provenance.json'),roles=json('public/data/p907216-osm-roles.json'),wanted=new Set(roles.rows.map(r=>r.id)),actualGeometry=new Map(),all=new Map(),shapes=[];
  for(const file of ['public/geo/actual/md-overview.geojson','public/geo/actual/md-local.geojson','public/geo/actual/md-detail.geojson'])for(const f of json(file).features)if(wanted.has(f.properties?.entity_id)){assert.ok(!actualGeometry.has(f.properties.entity_id));actualGeometry.set(f.properties.entity_id,f.geometry);}assert.equal(actualGeometry.size,85);
  const add=e=>{const key=e.type+'/'+e.id,p=all.get(key);if(p?.version&&e.version)assert.equal(p.version,e.version,'Concurrent version drift '+key);if(e.type==='node'){assert.ok(Number.isFinite(e.lon)&&Number.isFinite(e.lat));if(p){assert.equal(p.lon,e.lon);assert.equal(p.lat,e.lat);}}all.set(key,{...p,...e});};

@@ -285,6 +285,24 @@
         "docs/evidence/ni-jur-independent-20261020/documentary/document-index.json"
       ],
       "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "id": "RM-015",
+      "severity": "P0",
+      "component": "Independent geometry replay",
+      "entities": [
+        "NI independent evidence auditor"
+      ],
+      "reproduction": "CodeQL check118926200915 on3b04456ac2ef798fa555881570f5d259cceea7b9 reported code injection at dynamic VM execution of the historical source block.",
+      "cause": "Runtime code loading from a repository file, even with a pinned hash, introduced an unnecessary executable-text sink.",
+      "change": "Use static imports of existing geometry functions; make the live auditor safe to import by guarding its CLI entry point. Keep the historical pure function block byte-identical and assert its SHA256 without executing text.",
+      "regression": "scripts/test/ni-geometry-import.test.mjs checks side-effect-free import and preserves rejection of open node-identity rings. Existing live-source self-test remains enabled.",
+      "pr": 399,
+      "verification_sha": null,
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/118926200915"
+      ],
+      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
     }
   ],
   "environment_incidents": [

@@ -9,6 +9,8 @@ on:
       - 'scripts/audit/ni-evidence-docx-replay.py'
       - 'scripts/lib/documentary-response.mjs'
       - 'scripts/test/documentary-response.test.mjs'
+      - 'scripts/test/ni-geometry-import.test.mjs'
+      - 'scripts/audit/p907218-osm-live-85.mjs'
   push:
     branches: [main]
     paths:
@@ -18,6 +20,8 @@ on:
       - 'scripts/audit/ni-evidence-docx-replay.py'
       - 'scripts/lib/documentary-response.mjs'
       - 'scripts/test/documentary-response.test.mjs'
+      - 'scripts/test/ni-geometry-import.test.mjs'
+      - 'scripts/audit/p907218-osm-live-85.mjs'
 permissions:
   contents: read
 jobs:
@@ -36,7 +40,8 @@ jobs:
         run: node scripts/process/install-actual-npm-offline.mjs
       - name: Reject false evidence, legal promotion and identity mutations
         run: |
-          node --test scripts/test/documentary-response.test.mjs
+          node --test scripts/test/documentary-response.test.mjs scripts/test/ni-geometry-import.test.mjs
+          node scripts/audit/p907218-osm-live-85.mjs --self-test
           node scripts/audit/ni-independent-evidence.mjs --self-test
       - name: Reproduce source original DOCX paragraphs
         run: python3 scripts/audit/ni-evidence-docx-replay.py
