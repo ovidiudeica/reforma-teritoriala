@@ -103,6 +103,25 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39376540939"
       ],
       "verdict": "CLOSED_RETEST_PASS"
+    },
+    {
+      "id": "RM-007",
+      "severity": "P3",
+      "finding_type": "investigated_candidate_not_runtime_defect",
+      "component": "Text200 stage scrolling and header recovery",
+      "entities": [],
+      "reproduction": "At text200, open Entities and move focus with ArrowDown. The controlled stage can scroll, moving the top of the header outside the viewport.",
+      "cause": "Accepted P7.6 scrollIntoView behavior reveals the enlarged tree target through clipping ancestors. Initial visual classification confused controlled stage scrolling with intrinsic title clipping.",
+      "change": "No application runtime change. Preserve accepted scrolling and add a permanent P7.6 keyboard Home/header-title recovery assertion and three screenshots. Existing hit-testing and target assertions remain unchanged.",
+      "pr": 392,
+      "regression": "p76-final-acceptance-browser.mjs: after enlarged tree navigation, focus the reachable header command, dispatch native Home and require the complete title inside the viewport with document scroll [0,0].",
+      "verification_sha": "767f6c701bd006055daa7402ebd06dc7546a78fd",
+      "evidence": [
+        "docs/p7.6-final-acceptance.md: Măsurare reproductibilă",
+        "atlas-tree.mjs: focusRow deliberately reveals clipping ancestors",
+        "outputs/stage2-392/rm007-before/probe/probe.json: all three local recovery profiles PASS; final-head Actions admission still required"
+      ],
+      "verdict": "CLOSED_EXPECTED_BEHAVIOR_RETEST_PASS"
     }
   ],
   "environment_incidents": [

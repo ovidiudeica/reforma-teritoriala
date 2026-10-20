@@ -38,3 +38,9 @@ RM-005 corectează proveniența auditului Pages: SHA al auditorului separat de S
 Nu există mijloace pentru testarea unui cititor de ecran fizic; verificarea AX nu se prezintă drept certificare cu cititor de ecran. Contrastul este eșantionat în stările testate, fără declarație de certificare WCAG integrală. Profilurile sunt viewport-uri Chromium pe runner, nu dispozitive fizice. Logurile, capturile, artefactele ZIP originale și digesturile lor sunt păstrate în dosarul extern al etapei; datele ACTUAL nu se includ într-un nou import sau într-o promovare.
 
 Verdictul tehnic de integrare rămâne condiționat de toate gate-urile pe head-ul exact, inspecția capturilor finale, auditul diff-ului și dovada post-merge CI/Pages/ACTUAL. Etapa următoare nu începe înaintea acestui verdict.
+
+## RM-007 — constatare adjudecată prin contractul P7.6
+
+Capturile text200 după ArrowDown arată partea superioară a antetului în afara viewport-ului. Investigația a separat derularea controlată a `.atlas-stage` de decuparea intrinsecă a textului: `scrollX/scrollY` rămân zero, titlul rămâne conținut în propriul antet, iar cadrul este intenționat scrollabil pentru accesul la rânduri mărite. Acest comportament este documentat deja în `docs/p7.6-final-acceptance.md`, secțiunea „Măsurare reproductibilă”, și în `atlas-tree.mjs`/`atlas-layout.mjs`.
+
+Pe surse nemodificate ale aplicației, proba Chromium la 360×640, 640×360 și 1440×900 confirmă că focusul pe comanda accesibilă din antet și tasta nativă Home readuc întregul titlu în viewport. Clasificarea inițială ca defect a fost prematură; verdictul este `CLOSED_EXPECTED_BEHAVIOR_RETEST_PASS`. Nu se fixează antetul și nu se elimină derularea aprobată. Regresia P7.6 adaugă verificarea revenirii prin tastatură și trei capturi, păstrând toate aserțiunile anterioare pentru ținte, hit testing și text. Probele inițiale și adjudecarea sunt arhivate împreună.
