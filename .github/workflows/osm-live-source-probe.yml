@@ -1,9 +1,22 @@
-name: OSM candidate source-only live probe
+name: OSM current source reconciliation live probe
 
-# Diagnostic only: the candidate source may correctly FAIL when OSM retires IDs.
-# This does NOT replace the protected ACTUAL source promotion gate.
+# Network-enabled evidence capture for the independently refreshable current OSM source.
+# It never promotes or rewrites the protected ACTUAL OSM pin.
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/osm-live-source-probe.yml'
+      - 'data/sources/osm-source-contract.json'
+      - 'data/sources/osm-source-current.json'
+      - 'data/sources/osm-source-transition-policy.json'
+      - 'scripts/import/import-osm.mjs'
+      - 'scripts/lib/osm-source-continuity.mjs'
+      - 'scripts/lib/osm-source-transition.mjs'
+      - 'scripts/process/audit-osm-refresh-continuity.mjs'
+      - 'scripts/process/audit-osm-fix2-source-transition.mjs'
+      - 'scripts/process/capture-osm-fix2-forensics.mjs'
+      - 'scripts/process/stage-osm-current-candidate.mjs'
 
 permissions:
   contents: read
@@ -11,26 +24,52 @@ permissions:
 jobs:
   source-only-replay:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 35
+    env:
+      OSM_CURRENT_SOURCE_MANIFEST: data/sources/osm-source-current.json
+      OSM_ACTUAL_PIN_MANIFEST: data/sources/osm-current.json
     steps:
-      - name: Checkout candidate code; no repository writes
+      - name: Checkout exact candidate code; no repository writes
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           persist-credentials: false
-      - name: Capture verified current OSM relations (isolated ephemeral runner)
+          fetch-depth: 0
+
+      - name: Prove protected ACTUAL payload is untouched by this PR
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git diff --exit-code "$BASE_SHA" --             data/sources/osm-current.json             data/current             public/data/actual-entities.json             public/data/actual-geometry-chunks.json             public/geo/current             public/geo/actual
+
+      - name: Capture verified current OSM source
         timeout-minutes: 25
+        env:
+          OSM_MANIFEST_PATH: ${{ env.OSM_CURRENT_SOURCE_MANIFEST }}
         run: node scripts/import/import-osm.mjs
-      - name: Exact per-ID reconciliation against persisted baseline
+
+      - name: Build exact per-ID drift report against protected ACTUAL pin
+        env:
+          OSM_CONTINUITY_BASELINE_MANIFEST: ${{ env.OSM_ACTUAL_PIN_MANIFEST }}
+          OSM_CONTINUITY_REPORT_ONLY: '1'
         run: node scripts/process/audit-osm-refresh-continuity.mjs
-      - name: Preserve source-only candidate and per-ID evidence even on failure
+
+      - name: Gate the explicitly approved source-only transition
+        run: node scripts/process/audit-osm-fix2-source-transition.mjs
+
+      - name: Capture authoritative relation histories, CUATM context and changesets
+        run: node scripts/process/capture-osm-fix2-forensics.mjs
+
+      - name: Stage exact candidate bytes and evidence
+        if: always()
+        run: node scripts/process/stage-osm-current-candidate.mjs
+
+      - name: Preserve exact source candidate and OSM-FIX.2 evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: osm-source-only-drift-evidence
-          path: |
-            outputs/osm-source-continuity.json
-            data/sources/osm-current.json
-            data/sources/osm-snapshots/ro-*.json.gz
-            data/sources/osm-snapshots/md-*.json.gz
-          if-no-files-found: warn
+          name: osm-fix2-source-candidate-${{ github.run_id }}
+          path: outputs/osm-source-candidate/
+          if-no-files-found: error
           retention-days: 30
