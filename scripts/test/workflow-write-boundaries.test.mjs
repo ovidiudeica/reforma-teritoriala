@@ -43,6 +43,18 @@ test('ACTUAL topology audit is strictly read-only',async()=>{
  assert.match(content,/Prove topology audit is repository read-only/);
 });
 
+test('admin census data guard is a complete shell block and uploads evidence once',async()=>{
+ const workflow=await readFile(join(workflowsDir,'web-r2a1-admin-level-census.yml'),'utf8');
+ assert.equal((workflow.match(/- name: Upload deterministic WEB-R2a\.1 evidence/g)||[]).length,1);
+ const guard=workflow.split('      - name: Confirm protected ACTUAL/public data is untouched\n')[1]?.split('      - name: Upload')[0];
+ assert.ok(guard,'complete data guard step exists');
+ assert.match(guard,/while IFS=\$'\\t' read -r status path; do/);
+ assert.match(guard,/done < <\(git diff --name-status/);
+ for(const line of guard.trimEnd().split('\n'))if(line.trim())assert.match(line,/^ {8,}\S|^ {8,}$/,'shell scalar cannot escape YAML indentation');
+ assert.match(guard,/Existing\/non-content-addressed OSM snapshot changed/);
+ assert.match(guard,/Protected data\/public changed outside OSM source-only allowlist/);
+});
+
 test('all workflow-level git pushes are isolated-branch lifecycle writes',async()=>{
  const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
  for(const name of files){

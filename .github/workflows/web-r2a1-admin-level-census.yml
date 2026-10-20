@@ -32,15 +32,7 @@ jobs:
       - name: Confirm protected ACTUAL/public data is untouched
         run: |
           set -euo pipefail
-          while IFS=
-      - name: Upload deterministic WEB-R2a.1 evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: web-r2a1-admin-level-census
-          path: ${{ runner.temp }}/web-r2a1
-          retention-days: 30
-\t' read -r status path; do
+          while IFS=$'\t' read -r status path; do
             [ -n "$path" ] || continue
             case "$path" in
               data/sources/osm-source-contract.json|data/sources/osm-source-current.json|data/sources/osm-source-transition-policy.json)
