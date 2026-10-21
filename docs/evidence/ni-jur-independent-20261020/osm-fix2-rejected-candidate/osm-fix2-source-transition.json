@@ -1,0 +1,1035 @@
+{
+  "schema": "osm-fix2-source-transition-v1",
+  "status": "BLOCKED_SOURCE_TRANSITION",
+  "transition": {
+    "schema": "osm-source-transition-assessment-v1",
+    "transition_id": "OSM-FIX.2-2026-10-20",
+    "status": "PASS_SOURCE_ONLY_TRANSITION",
+    "baseline_snapshot_at": "2026-10-05T23:50:05.218Z",
+    "candidate_snapshot_at": "2026-10-20T21:39:39.637Z",
+    "current_osm_inventory": {
+      "RO": 3233,
+      "MD": 2585
+    },
+    "actual_contract": {
+      "mutation_allowed": false,
+      "p91_import_allowed": false,
+      "semantic_acceptance": "BLOCKED_INCOMPLETE"
+    },
+    "checks": [
+      {
+        "name": "baseline_snapshot_timestamp",
+        "ok": true,
+        "detail": {
+          "expected": "2026-10-05T23:50:05.218Z",
+          "actual": "2026-10-05T23:50:05.218Z"
+        }
+      },
+      {
+        "name": "baseline_RO_source_identity",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "selected_relation_count": 3233,
+            "semantic_sha256": "4a09c6cd6e41f4df814505a9813dde265e93b991752b44cb88545c4ed6a16d86",
+            "compressed_sha256": "f3ef2ffd15c286d443e6181a6a60bee2008233574550854764ca49e6a3ef5832"
+          },
+          "actual": {
+            "selected_relation_count": 3233,
+            "semantic_sha256": "4a09c6cd6e41f4df814505a9813dde265e93b991752b44cb88545c4ed6a16d86",
+            "compressed_sha256": "f3ef2ffd15c286d443e6181a6a60bee2008233574550854764ca49e6a3ef5832"
+          }
+        }
+      },
+      {
+        "name": "candidate_RO_cryptographic_snapshot",
+        "ok": true,
+        "detail": {
+          "snapshot_path": "data/sources/osm-snapshots/ro-87bea30819fd249675e3f265a0daf2ade41e38337f9e4a9fe45cf24ce85a294f.json.gz",
+          "semantic_sha256": "87bea30819fd249675e3f265a0daf2ade41e38337f9e4a9fe45cf24ce85a294f",
+          "compressed_sha256": "b0979fe09551936f10387ceccaff34effe04d128a67dc6f1dd41ce6b30442547"
+        }
+      },
+      {
+        "name": "baseline_MD_source_identity",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "selected_relation_count": 2596,
+            "semantic_sha256": "cd7e0ebb5dc9f691e4c160609c164915f7ebea4bcb4c4adbe0307e33f76bf417",
+            "compressed_sha256": "d4fb245c714038d4e9bbb5273074c6ee1ad23555441289244c1d97c0afdf72b0"
+          },
+          "actual": {
+            "selected_relation_count": 2596,
+            "semantic_sha256": "cd7e0ebb5dc9f691e4c160609c164915f7ebea4bcb4c4adbe0307e33f76bf417",
+            "compressed_sha256": "d4fb245c714038d4e9bbb5273074c6ee1ad23555441289244c1d97c0afdf72b0"
+          }
+        }
+      },
+      {
+        "name": "candidate_MD_cryptographic_snapshot",
+        "ok": true,
+        "detail": {
+          "snapshot_path": "data/sources/osm-snapshots/md-97695a8838039c4ce3b87470fe32d90c4faaa38396bf4b5d6d3e6dec0de5f6c5.json.gz",
+          "semantic_sha256": "97695a8838039c4ce3b87470fe32d90c4faaa38396bf4b5d6d3e6dec0de5f6c5",
+          "compressed_sha256": "54aec71c5101f7df1af04cd8255ed8b5a495b9f282130030210a462d14127b6f"
+        }
+      },
+      {
+        "name": "exact_retired_relation_set",
+        "ok": true,
+        "detail": {
+          "expected": [
+            18966859,
+            18966939,
+            18967312,
+            18967475,
+            18967641,
+            18967824,
+            18967907,
+            18967934,
+            18968041,
+            18968051,
+            18968093,
+            18968144
+          ],
+          "actual": [
+            18966859,
+            18966939,
+            18967312,
+            18967475,
+            18967641,
+            18967824,
+            18967907,
+            18967934,
+            18968041,
+            18968051,
+            18968093,
+            18968144
+          ]
+        }
+      },
+      {
+        "name": "exact_added_relation_set",
+        "ok": true,
+        "detail": {
+          "expected": [
+            21515245
+          ],
+          "actual": [
+            21515245
+          ]
+        }
+      },
+      {
+        "name": "retired_18966859_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:33.361Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18966859_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Bogăția Lacului",
+            "official_name": "întovărășirea pomicolă Bogăția Lacului",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Bogăția Lacului",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553002",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18966939_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:33.918Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18966939_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Grădina-Rai",
+            "official_name": "întovărășirea pomicolă Grădina-Rai",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Grădina-Rai",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553003",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18967312_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:34.438Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18967312_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Mesteacănul Alb",
+            "official_name": "întovărășirea pomicolă Mesteacănul Alb",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Mesteacănul Alb",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "552403",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18967475_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:34.630Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18967475_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Struguraș",
+            "official_name": "întovărășirea pomicolă Struguraș",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Struguraș",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553008",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18967641_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.133Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18967641_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Novinca-Eco",
+            "official_name": "întovărășirea pomicolă Novinca-Eco",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Novinca-Eco",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553005",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18967824_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.328Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18967824_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Automobilist",
+            "official_name": "întovărășirea pomicolă Automobilist",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Automobilist",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553001",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18967907_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.519Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18967907_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Boierul-Com",
+            "official_name": "întovărășirea pomicolă Boierul-Com",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Boierul-Com",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "552402",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18967934_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.710Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18967934_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Pomsuragro",
+            "official_name": "întovărășirea pomicolă Pomsuragro",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Pomsuragro",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553006",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18968041_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:35.898Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18968041_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Aluniș-Com",
+            "official_name": "întovărășirea pomicolă Aluniș-Com",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Aluniș-Com",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "552401",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18968051_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:36.091Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18968051_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Romănița-Agro",
+            "official_name": "întovărășirea pomicolă Romănița-Agro",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Romănița-Agro",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "552405",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18968093_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:36.574Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18968093_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Relief-Prim",
+            "official_name": "întovărășirea pomicolă Relief-Prim",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Relief-Prim",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553007",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "retired_18968144_authoritative_410",
+        "ok": true,
+        "detail": {
+          "retired_by_api": true,
+          "authoritative_probe": [
+            {
+              "status": "not_found",
+              "http_status": 410,
+              "started_at": "2026-10-20T21:41:36.763Z"
+            }
+          ]
+        }
+      },
+      {
+        "name": "retired_18968144_previous_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments"
+          },
+          "actual": {
+            "name": "Sveazist IL",
+            "official_name": "întovărășirea pomicolă Sveazist IL",
+            "full_name": "raionul Ialoveni, satul Suruceni, întovărășirea pomicolă Sveazist IL",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": null,
+            "type": "boundary",
+            "ref_cuatm_codunic": "553009",
+            "ref_rson_idno": null,
+            "version": null,
+            "changeset": null,
+            "timestamp": null
+          }
+        }
+      },
+      {
+        "name": "added_21515245_current_osm_semantics",
+        "ok": true,
+        "detail": {
+          "expected": {
+            "relation_id": 21515245,
+            "name": "Î.P. „Boierul-COM”",
+            "cuatm_unique_id": "552402",
+            "rson_idno": "1007600041533",
+            "expected_current": {
+              "boundary": "administrative",
+              "admin_level": "9",
+              "place": "allotments",
+              "type": "multipolygon"
+            },
+            "version": 1,
+            "timestamp": "2026-10-06T10:23:05Z",
+            "changeset": 190081892,
+            "source_disposition": "CURRENT_OSM_ADDITION",
+            "legal_disposition": "NO_LEGAL_INFERENCE"
+          },
+          "actual": {
+            "name": "Î.P. „Boierul-COM”",
+            "official_name": "Întovărășirea pomicolă „Boierul-COM”",
+            "full_name": "raionul Ialoveni, satul Nimoreni, întovărășirea pomicolă Boierul-Com",
+            "boundary": "administrative",
+            "admin_level": "9",
+            "place": "allotments",
+            "landuse": "allotments",
+            "type": "multipolygon",
+            "ref_cuatm_codunic": "552402",
+            "ref_rson_idno": "1007600041533",
+            "version": 1,
+            "changeset": 190081892,
+            "timestamp": "2026-10-06T10:23:05Z"
+          }
+        }
+      },
+      {
+        "name": "candidate_timestamp_is_newer",
+        "ok": true,
+        "detail": {
+          "baseline": "2026-10-05T23:50:05.218Z",
+          "candidate": "2026-10-20T21:39:39.637Z"
+        }
+      },
+      {
+        "name": "ro_inventory_membership_unchanged",
+        "ok": true,
+        "detail": {
+          "missing": 0,
+          "added": 0
+        }
+      },
+      {
+        "name": "md_inventory_delta_matches_policy",
+        "ok": true,
+        "detail": {
+          "baseline": 2596,
+          "candidate": 2585,
+          "retired": 12,
+          "added": 1
+        }
+      }
+    ],
+    "failures": []
+  },
+  "closure": [
+    {
+      "code": "RO",
+      "selected_relation_count": 3233,
+      "checked_dependency_count": 783094,
+      "missing_reference_count": 0,
+      "missing_references": [],
+      "invalid_coordinate_count": 0,
+      "invalid_coordinates": [],
+      "topology_issue_count": 0,
+      "topology_issues": []
+    },
+    {
+      "code": "MD",
+      "selected_relation_count": 2585,
+      "checked_dependency_count": 560062,
+      "missing_reference_count": 0,
+      "missing_references": [],
+      "invalid_coordinate_count": 0,
+      "invalid_coordinates": [],
+      "topology_issue_count": 2,
+      "topology_issues": [
+        {
+          "relation_id": 18967493,
+          "relation_version": 6,
+          "odd_endpoints": {
+            "outer": [
+              {
+                "node_id": 12318728194,
+                "degree": 1
+              },
+              {
+                "node_id": 12318728593,
+                "degree": 1
+              }
+            ],
+            "inner": []
+          },
+          "coincident_distinct_endpoint_groups": [
+            {
+              "role": "outer",
+              "coordinates": [
+                28.858393,
+                46.8331996
+              ],
+              "node_ids": [
+                12318728194,
+                12318728593
+              ]
+            }
+          ],
+          "invalid_geometry_members": []
+        },
+        {
+          "relation_id": 18968082,
+          "relation_version": 7,
+          "odd_endpoints": {
+            "outer": [
+              {
+                "node_id": 11649857778,
+                "degree": 1
+              },
+              {
+                "node_id": 8265822008,
+                "degree": 1
+              }
+            ],
+            "inner": []
+          },
+          "coincident_distinct_endpoint_groups": [
+            {
+              "role": "outer",
+              "coordinates": [
+                28.9073227,
+                47.0786791
+              ],
+              "node_ids": [
+                11649857778,
+                8265822008
+              ]
+            }
+          ],
+          "invalid_geometry_members": []
+        }
+      ]
+    }
+  ],
+  "retired_geometry": [
+    {
+      "relation_id": 18966859,
+      "previous": {
+        "relation_id": 18966859,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 3,
+        "coordinate_count": 35,
+        "bbox": [
+          28.706242,
+          46.9821295,
+          28.7092916,
+          46.9850954
+        ],
+        "coordinate_geometry_sha256": "7e61145909625b0eaa1ca88ac86c379d749bdafe8f6551e3d604f2bdd5e06956"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18966939,
+      "previous": {
+        "relation_id": 18966939,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 3,
+        "coordinate_count": 57,
+        "bbox": [
+          28.7051776,
+          46.9806129,
+          28.7087816,
+          46.9837215
+        ],
+        "coordinate_geometry_sha256": "88cbb7c8a1b1ef10fc0bdbe73543ab619e159620e5f6ea9a73a13d0f18841bcb"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18967312,
+      "previous": {
+        "relation_id": 18967312,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 4,
+        "coordinate_count": 59,
+        "bbox": [
+          28.6737739,
+          46.9891768,
+          28.6768357,
+          46.9933053
+        ],
+        "coordinate_geometry_sha256": "de56e30315bbb81defcffbef74b0f500065d5f760e4955d0ffa0ac38b6b5629d"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18967475,
+      "previous": {
+        "relation_id": 18967475,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 5,
+        "coordinate_count": 84,
+        "bbox": [
+          28.6987703,
+          46.9839396,
+          28.7057889,
+          46.9887952
+        ],
+        "coordinate_geometry_sha256": "489eb12fb444a24ac343b44ee30ba21a33bd50bc8070560a9f16f583165219b1"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18967641,
+      "previous": {
+        "relation_id": 18967641,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 2,
+        "coordinate_count": 69,
+        "bbox": [
+          28.7088571,
+          46.9819463,
+          28.7122671,
+          46.9854643
+        ],
+        "coordinate_geometry_sha256": "9727ca5f2b00e85ea2b61aefcfaf0b7e504428f3856391e6d17f729da7ea19b6"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18967824,
+      "previous": {
+        "relation_id": 18967824,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 2,
+        "coordinate_count": 69,
+        "bbox": [
+          28.7100221,
+          46.9850873,
+          28.7141115,
+          46.989967
+        ],
+        "coordinate_geometry_sha256": "fd683afa6d6788f991c6d6c864897e7100bec00904e49a883b9a34a95f46c670"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18967907,
+      "previous": {
+        "relation_id": 18967907,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 1,
+        "coordinate_count": 54,
+        "bbox": [
+          28.6848329,
+          46.9998227,
+          28.6882761,
+          47.0027
+        ],
+        "coordinate_geometry_sha256": "315cf1468b2f7d50d7f262d8ed4ec13224220d9b6522b71839ce29569135815c"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18967934,
+      "previous": {
+        "relation_id": 18967934,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 3,
+        "coordinate_count": 49,
+        "bbox": [
+          28.6965008,
+          46.9842372,
+          28.7014878,
+          46.9866233
+        ],
+        "coordinate_geometry_sha256": "9906cc0548f6e8f30cf9fe0c812dd4991e4ec323b9a22e5199632aa52b3e0ca6"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18968041,
+      "previous": {
+        "relation_id": 18968041,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 4,
+        "coordinate_count": 25,
+        "bbox": [
+          28.6737969,
+          46.9931625,
+          28.6757401,
+          46.9949529
+        ],
+        "coordinate_geometry_sha256": "426b6fae86609c89ccb7b9d3aed9f25d8c25cbbdacacaf07f9d4a522720ea27d"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18968051,
+      "previous": {
+        "relation_id": 18968051,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 2,
+        "coordinate_count": 63,
+        "bbox": [
+          28.6747654,
+          46.9873664,
+          28.681261,
+          46.99064
+        ],
+        "coordinate_geometry_sha256": "ea86cfa0e461e1d79d292ae14be4208bf87a31e5182d15237e5a387860625e70"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18968093,
+      "previous": {
+        "relation_id": 18968093,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 3,
+        "coordinate_count": 35,
+        "bbox": [
+          28.6970408,
+          46.9863131,
+          28.7004966,
+          46.989449
+        ],
+        "coordinate_geometry_sha256": "5f8c87a5a4df3dafd430beea6979c1bfdc1a7f8decf147dc5d417051930c93a2"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    },
+    {
+      "relation_id": 18968144,
+      "previous": {
+        "relation_id": 18968144,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 5,
+        "coordinate_count": 42,
+        "bbox": [
+          28.7048723,
+          46.9831066,
+          28.709391,
+          46.9859513
+        ],
+        "coordinate_geometry_sha256": "e41eade4f4e339c33bf259c3694a346a0c98d627fd7f9e88472944897145bfc9"
+      },
+      "current": null,
+      "verdict": "RETIRED_FROM_CURRENT_OSM_NO_CURRENT_GEOMETRY"
+    }
+  ],
+  "cartographic_successor_geometry": [
+    {
+      "from_relation_id": 18967907,
+      "to_relation_id": 21515245,
+      "previous": {
+        "relation_id": 18967907,
+        "relation_version": null,
+        "relation_timestamp": null,
+        "member_way_count": 1,
+        "coordinate_count": 54,
+        "bbox": [
+          28.6848329,
+          46.9998227,
+          28.6882761,
+          47.0027
+        ],
+        "coordinate_geometry_sha256": "315cf1468b2f7d50d7f262d8ed4ec13224220d9b6522b71839ce29569135815c"
+      },
+      "current": {
+        "relation_id": 21515245,
+        "relation_version": 1,
+        "relation_timestamp": "2026-10-06T10:23:05Z",
+        "member_way_count": 1,
+        "coordinate_count": 69,
+        "bbox": [
+          28.6848329,
+          46.9998227,
+          28.6882761,
+          47.0027
+        ],
+        "coordinate_geometry_sha256": "eea0f6cfb8b0f1599b3d847d1071e1583fbff37c3339d8297cde4badc2c858ac"
+      },
+      "exact_coordinate_geometry_match": false,
+      "verdict": "GEOMETRY_CHANGED_OR_RESEGMENTED"
+    }
+  ],
+  "actual_invariants": {
+    "snapshot_id": "actual-a9e5a4ddcb5277ef",
+    "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "source_bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
+    "source_bundle_osm_manifest_path": "data/sources/osm-current.json",
+    "actual_mutation_allowed": false,
+    "p91_import_allowed": false,
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "status": "PASS"
+  },
+  "policy": "Current OSM is reconciled independently. No result in this report authorizes mutation of ACTUAL, legal identity, administrative parentage or P9.1."
+}

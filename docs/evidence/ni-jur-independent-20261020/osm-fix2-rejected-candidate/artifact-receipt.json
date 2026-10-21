@@ -1,0 +1,24 @@
+{
+  "schema": "osm-source-candidate-artifact-v1",
+  "manifest_path": "data/sources/osm-source-current.json",
+  "manifest_sha256": "99111cee8f5b37367b695f9d0019b5698a124e1597ce4798c6ce379e21df2938",
+  "snapshot_at": "2026-10-20T21:39:39.637Z",
+  "staged_snapshots": [
+    {
+      "code": "RO",
+      "source_path": "data/sources/osm-snapshots/ro-87bea30819fd249675e3f265a0daf2ade41e38337f9e4a9fe45cf24ce85a294f.json.gz",
+      "artifact_path": "outputs/osm-source-candidate/snapshots/ro-87bea30819fd249675e3f265a0daf2ade41e38337f9e4a9fe45cf24ce85a294f.json.gz",
+      "size_bytes": 10759588,
+      "compressed_sha256": "b0979fe09551936f10387ceccaff34effe04d128a67dc6f1dd41ce6b30442547",
+      "semantic_sha256": "87bea30819fd249675e3f265a0daf2ade41e38337f9e4a9fe45cf24ce85a294f"
+    },
+    {
+      "code": "MD",
+      "source_path": "data/sources/osm-snapshots/md-97695a8838039c4ce3b87470fe32d90c4faaa38396bf4b5d6d3e6dec0de5f6c5.json.gz",
+      "artifact_path": "outputs/osm-source-candidate/snapshots/md-97695a8838039c4ce3b87470fe32d90c4faaa38396bf4b5d6d3e6dec0de5f6c5.json.gz",
+      "size_bytes": 7633208,
+      "compressed_sha256": "54aec71c5101f7df1af04cd8255ed8b5a495b9f282130030210a462d14127b6f",
+      "semantic_sha256": "97695a8838039c4ce3b87470fe32d90c4faaa38396bf4b5d6d3e6dec0de5f6c5"
+    }
+  ]
+}
