@@ -1,0 +1,19 @@
+{
+  "schema": "ni-jur1-derived-manifest-v1",
+  "status": "PREPARED_BLOCKED_DEPENDENCIES",
+  "file": "dossier.json",
+  "bytes": 1566268,
+  "sha256": "f7d6cfdef1bd43da8f9b360e045fa827417e72a0fbddda44b2169d617b41e397",
+  "source_manifests": {
+    "historical": {
+      "path": "docs/evidence/ni-jur-independent-20261020",
+      "sha256": "36cf1e036527acd3390e1e1c41badb64eea59df0e068c8845248c18adb3a5d45"
+    },
+    "current": {
+      "path": "docs/evidence/ni-jur-current-preparation-20261021",
+      "sha256": "a9747e956259e232239cbadd9ee766b5f906039f1cd03f3338bfdb5f256ecef5"
+    }
+  },
+  "actual_mutation_allowed": false,
+  "p91_import_allowed": false
+}
