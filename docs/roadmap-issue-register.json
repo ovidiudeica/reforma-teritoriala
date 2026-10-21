@@ -399,12 +399,14 @@
       "change": "Select all inventory inputs and imported modules, including all manifest components, on PR and main push. Keep the full existing validator.",
       "pr": 394,
       "regression": "scripts/test/ni-jur0-dependency-coverage.test.mjs enumerates actual generator paths and all frozen manifest components.",
-      "verification_sha": null,
+      "verification_sha": "f7b9f9c96383c0e1209268ea20285d6e094338d7",
       "evidence": [
         "Local before test FAIL: pull_request omits public/data/actual-entities.json",
-        "Local after dependency test PASS"
+        "Local after dependency test PASS",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39562198862",
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/119096178352"
       ],
-      "verdict": "FIXED_PENDING_EXACT_HEAD_CI_NOT_INTEGRATED"
+      "verdict": "FIXED_COMPONENT_RETEST_PASS_ON_DRAFT_PR394_FULL_CI_PENDING_NOT_INTEGRATED"
     },
     {
       "id": "RM-021",
@@ -414,14 +416,16 @@
       "reproduction": "Enumerate every component.path from actual-release-manifest.json in the NI workflow selection test. On main7b, isolated public/geo/current/ro-administrative.geojson is omitted.",
       "cause": "The earlier concrete dependency test covered only part of the manifest-referenced inputs; data/sources, data/p2, schemas and public/geo/current were omitted.",
       "change": "Cover data/**, schemas/** and public/geo/** and enumerate every manifest component in the regression for both PR and main push.",
-      "pr": null,
+      "pr": 401,
       "regression": "scripts/test/ni-evidence-dependency-coverage.test.mjs dynamically checks every actual frozen component",
-      "verification_sha": null,
+      "verification_sha": "5f7a0ec9e45ce88bf37405293cb5c8cd0b1703e4",
       "evidence": [
         "rm021-before.log FAIL",
-        "rm021-after.log PASS"
+        "rm021-after.log PASS",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39562533276",
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/119097240690"
       ],
-      "verdict": "FIXED_PENDING_EXACT_HEAD_CI_NOT_INTEGRATED"
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_INTEGRATION_REQUIRES_FINAL_HEAD_GATES"
     }
   ],
   "environment_incidents": [
