@@ -212,7 +212,7 @@ async function fetchCountryChunked(code,cfg,previousRaw,bulkAttempts=[]){
   captureBudget();let captured=await checkpoint.chunk(shard.ids);
   if(!captured){
    const firstAttempt=chunkAttempts.length;
-   const raw=await fetchAdaptiveRelations(shard.ids,{fetchChunk:(ids,purpose)=>fetchOverpassJson(explicitRelationsQuery(ids,checkpoint.state.epoch),code,purpose,{maxAttempts:Math.min(2,ENDPOINTS.length*OVERPASS_RETRIES_PER_ENDPOINT)}),fetchFull:async id=>{const fetched=await fetchRelationFullFromOsmApi(id,code);fetched.raw=await closeRawDependencies(fetched.raw,[id],code,fetched.attempts,deferredSubareas);return fetched;},attempts:chunkAttempts,purpose:'shard-'+(index+1)+'-'+shard.category,preferFullAtSingleton:true,deferredSubareas});
+   const raw=await fetchAdaptiveRelations(shard.ids,{fetchChunk:(ids,purpose)=>fetchOverpassJson(explicitRelationsQuery(ids,checkpoint.state.epoch),code,purpose,{maxAttempts:Math.min(2,ENDPOINTS.length*OVERPASS_RETRIES_PER_ENDPOINT)}),fetchFull:async id=>{const fetched=await fetchRelationFullFromOsmApi(id,code);fetched.raw=await closeRawDependencies(fetched.raw,[id],code,fetched.attempts,deferredSubareas);return fetched;},attempts:chunkAttempts,purpose:'shard-'+(index+1)+'-'+shard.category,preferFullAtSingleton:true,deferredSubareas,loadPart:ids=>checkpoint.subchunk(ids),savePart:(ids,raw,attempts)=>checkpoint.subchunk(ids,{raw,attempts})});
    assertCaptureEpoch(raw,checkpoint.state.epoch);captured={raw,attempts:chunkAttempts.slice(firstAttempt),endpoint:null};await checkpoint.chunk(shard.ids,captured);
   }
   allShardAttempts.push(...captured.attempts);

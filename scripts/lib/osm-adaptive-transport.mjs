@@ -45,7 +45,18 @@ export async function completeOsmDependencies(raw,ids,{fetchMissing,maxRequests=
  assertShardClosure(result,ids,deferredSubareas);
  return result;
 }
-export async function fetchAdaptiveRelations(ids,{fetchChunk,fetchFull,attempts,purpose='relations',preferFullAtSingleton=false,deferredSubareas=new Set()}) {
+export async function fetchAdaptiveRelations(ids,options) {
+ const {loadPart,savePart,attempts,deferredSubareas=new Set()}=options;
+ // Persistence errors must propagate, rather than being mistaken for an
+ // overloaded endpoint and silently falling back to an unverified capture.
+ const cached=await loadPart?.(ids);
+ if(cached){assertShardClosure(cached.raw,ids,deferredSubareas);attempts.push(...cached.attempts);return cached.raw;}
+ const first=attempts.length,raw=await fetchUncachedRelations(ids,options);
+ assertShardClosure(raw,ids,deferredSubareas);
+ await savePart?.(ids,raw,attempts.slice(first));
+ return raw;
+}
+async function fetchUncachedRelations(ids,{fetchChunk,fetchFull,attempts,purpose='relations',preferFullAtSingleton=false,deferredSubareas=new Set(),loadPart,savePart}) {
  if(ids.length===1&&preferFullAtSingleton){const result=await fetchFull(ids[0]);attempts.push(...result.attempts);assertShardClosure(result.raw,ids,deferredSubareas);return result.raw;}
  try {
   const result=await fetchChunk(ids,purpose);
@@ -63,7 +74,7 @@ export async function fetchAdaptiveRelations(ids,{fetchChunk,fetchFull,attempts,
   }
   const mid=Math.floor(ids.length/2),elements=new Map();
   for(const [index,part] of [ids.slice(0,mid),ids.slice(mid)].entries()){
-   const raw=await fetchAdaptiveRelations(part,{fetchChunk,fetchFull,attempts,purpose:`${purpose}.${index+1}`,preferFullAtSingleton,deferredSubareas});
+   const raw=await fetchAdaptiveRelations(part,{fetchChunk,fetchFull,attempts,purpose:`${purpose}.${index+1}`,preferFullAtSingleton,deferredSubareas,loadPart,savePart});
    mergeOsmElements(elements,raw.elements);
   }
   return {version:0.6,elements:[...elements.values()]};

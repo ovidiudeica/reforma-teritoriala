@@ -15,6 +15,13 @@ test('incomplete successful chunk cannot silently lose selected relations',async
 test('authoritative source failure remains fail closed',async()=>{
  await assert.rejects(fetchAdaptiveRelations([1],{attempts:[],fetchChunk:async()=>{throw Error('429');},fetchFull:async()=>{throw Error('authoritative unavailable');}}),/authoritative unavailable/);
 });
+
+test('corrupt recursive checkpoint and failed persistence never trigger a network fallback',async()=>{
+ let calls=0;const base={attempts:[],fetchChunk:async()=>{calls++;return {raw:raw(1),attempts:[]};},fetchFull:async()=>{calls++;return {raw:raw(1),attempts:[]};}};
+ await assert.rejects(fetchAdaptiveRelations([1],{...base,loadPart:async()=>{throw Error('checkpoint compressed hash mismatch');}}),/compressed hash/);assert.equal(calls,0);
+ await assert.rejects(fetchAdaptiveRelations([1],{...base,savePart:async()=>{throw Error('disk full');}}),/disk full/);assert.equal(calls,1);
+ await assert.rejects(fetchAdaptiveRelations([2],{...base,loadPart:async()=>({raw:raw(1),attempts:[]})}),/Incomplete OSM dependency/);assert.equal(calls,1);
+});
 test('singleton recovery bypasses an exhausted Overpass matrix and divergent shared objects cannot be overwritten',async()=>{
  const fetchChunk=async()=>{throw Error('overpass unavailable');};let calls=0;
  await fetchAdaptiveRelations([1],{attempts:[],preferFullAtSingleton:true,fetchChunk:async()=>{throw Error('must not query singleton');},fetchFull:async id=>{calls++;return {raw:raw(id),attempts:[]};}});assert.equal(calls,1);

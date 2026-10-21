@@ -41,6 +41,27 @@
       ]
     },
     {
+      "id": "RM-003",
+      "severity": "P2",
+      "component": "Performance report dirty-source provenance",
+      "entities": [],
+      "reproduction": "Modify a tracked audit source without committing, then run the old benchmark; sourceMain still labels only HEAD without disclosing modified source bytes.",
+      "cause": "Git commit identity alone did not prove clean tracked input sources.",
+      "change": "Record trackedSourcesClean and reject dirty tracked sources during CI acceptance.",
+      "pr": 391,
+      "regression": "Temporary Git fixture modifies a tracked input while HEAD stays unchanged and verifies CI rejection.",
+      "verification_sha": "94e912c37178eafecb5561d1ecfb43caf4ae2d6d",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
+      ],
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
+      ]
+    },
+    {
       "id": "RM-004",
       "severity": "P1",
       "component": "CDP artifact output path",
@@ -55,27 +76,6 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/118330837784",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808",
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/118337370318"
-      ],
-      "verdict": "CLOSED_RETEST_PASS",
-      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
-      "postmerge_evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
-      ]
-    },
-    {
-      "id": "RM-003",
-      "severity": "P2",
-      "component": "Performance report dirty-source provenance",
-      "entities": [],
-      "reproduction": "Modify a tracked audit source without committing, then run the old benchmark; sourceMain still labels only HEAD without disclosing modified source bytes.",
-      "cause": "Git commit identity alone did not prove clean tracked input sources.",
-      "change": "Record trackedSourcesClean and reject dirty tracked sources during CI acceptance.",
-      "pr": 391,
-      "regression": "Temporary Git fixture modifies a tracked input while HEAD stays unchanged and verifies CI rejection.",
-      "verification_sha": "94e912c37178eafecb5561d1ecfb43caf4ae2d6d",
-      "evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
       ],
       "verdict": "CLOSED_RETEST_PASS",
       "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
@@ -381,13 +381,19 @@
       "change": "Expand read-only workflow triggers to include its actual dependency/input domains; reuse a shared static geometry replay for both historical and current original captures. Preserve all tests and add negative prepared-dossier guards with separate legal/control axes.",
       "regression": "scripts/test/ni-evidence-dependency-coverage.test.mjs checks14 concrete isolated inputs for both PR/push; original test failure and repaired PASS are archived. Current93 geometry and4278-pair replay and generator negative guards run in the same read-only job.",
       "pr": 400,
-      "verification_sha": "a2d3672f8d4d2a2a92ff899575630d315bf8e1e3",
+      "verification_sha": "cf91fd43e7b1addf4082b18c0465a66a33840c71",
       "evidence": [
         "docs/evidence/ni-ci-dependency-coverage-20261021/before.log.gz",
         "docs/evidence/ni-ci-dependency-coverage-20261021/after.log.gz",
-        "NI preservation/current replay39556982026 SUCCESS and CodeQL119079174109 SUCCESS with0newalerts ona2d3672f8d4d2a2a92ff899575630d315bf8e1e3. Both93-geometry/4278-pair epochs, deterministic85-row generation,18unit/negative guards and original DOCX replay pass. Final full-head admission remains mandatory."
+        "NI preservation/current replay39556982026 SUCCESS and CodeQL119079174109 SUCCESS with0newalerts ona2d3672f8d4d2a2a92ff899575630d315bf8e1e3. Both93-geometry/4278-pair epochs, deterministic85-row generation,18unit/negative guards and original DOCX replay pass. Final full-head admission remains mandatory.",
+        "outputs/ni-evidence-coverage/premerge-admission.json",
+        "outputs/ni-evidence-coverage/merge.json",
+        "outputs/ci-watch/7b72844d5b65b42b08c7f79b57954532afdd72a7/verdict.json"
       ],
-      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
+      "verdict": "CLOSED_PASS_INTEGRATED_TECHNICAL_FIX_ONLY",
+      "historical_technical_verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED",
+      "integrated_main": "7b72844d5b65b42b08c7f79b57954532afdd72a7",
+      "formal_NI_JUR_stage_accepted": false
     },
     {
       "id": "RM-020",
@@ -399,15 +405,17 @@
       "change": "Select all inventory inputs and imported modules, including all manifest components, on PR and main push. Keep the full existing validator.",
       "pr": 394,
       "regression": "scripts/test/ni-jur0-dependency-coverage.test.mjs enumerates actual generator paths and all frozen manifest components.",
-      "verification_sha": "f7b9f9c96383c0e1209268ea20285d6e094338d7",
+      "verification_sha": "d1687be8df336635411664c9027ca8cdfa46dc09",
       "evidence": [
         "Local before test FAIL: pull_request omits public/data/actual-entities.json",
         "Local after dependency test PASS",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39562198862",
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/119096178352",
-        "Exact f7b9f9c96383c0e1209268ea20285d6e094338d7: 18 workflows and 25 checks PASS; zero conditional skips; ordered NI-JUR acceptance remains blocked"
+        "Exact f7b9f9c96383c0e1209268ea20285d6e094338d7: 18 workflows and 25 checks PASS; zero conditional skips; ordered NI-JUR acceptance remains blocked",
+        "outputs/ci-watch/d1687be8df336635411664c9027ca8cdfa46dc09/verdict.json"
       ],
-      "verdict": "CLOSED_RETEST_PASS_ON_DRAFT_PR_394_NOT_INTEGRATED"
+      "verdict": "CLOSED_RETEST_PASS_ON_DRAFT_PR_394_NOT_INTEGRATED",
+      "first_fix_verification_sha": "f7b9f9c96383c0e1209268ea20285d6e094338d7"
     },
     {
       "id": "RM-021",
@@ -419,14 +427,20 @@
       "change": "Cover data/**, schemas/** and public/geo/** and enumerate every manifest component in the regression for both PR and main push.",
       "pr": 401,
       "regression": "scripts/test/ni-evidence-dependency-coverage.test.mjs dynamically checks every actual frozen component",
-      "verification_sha": "5f7a0ec9e45ce88bf37405293cb5c8cd0b1703e4",
+      "verification_sha": "f213149ef13482254aedef01f983f6a6629cec0e",
       "evidence": [
         "rm021-before.log FAIL",
         "rm021-after.log PASS",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39562533276",
-        "https://github.com/ovidiudeica/reforma-teritoriala/runs/119097240690"
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/119097240690",
+        "outputs/ni-frozen-trigger-401/premerge-admission.json",
+        "outputs/ni-frozen-trigger-401/merge.json",
+        "outputs/ci-watch/11df48266f9662bfb0b6dc314948b0f231c9addc/verdict.json"
       ],
-      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_INTEGRATION_REQUIRES_FINAL_HEAD_GATES"
+      "verdict": "CLOSED_PASS_INTEGRATED_TECHNICAL_FIX_ONLY",
+      "historical_technical_verdict": "CLOSED_TECHNICAL_RETEST_PASS_INTEGRATION_REQUIRES_FINAL_HEAD_GATES",
+      "integrated_main": "11df48266f9662bfb0b6dc314948b0f231c9addc",
+      "formal_NI_JUR_stage_accepted": false
     },
     {
       "id": "RM-022",
@@ -454,12 +468,15 @@
       "change": "All four read-only source acquisition jobs check out github.event.pull_request.head.sha or the dispatch SHA explicitly.",
       "regression": "osm-live-probe-contract.test.mjs exact-head guard",
       "evidence": [
-        "docs/evidence/osm-fix2/transport-resume-20261021/contract-before.log.gz"
+        "docs/evidence/osm-fix2/transport-resume-20261021/contract-before.log.gz",
+        "outputs/ci-watch/135eb7882fe7a2fb6cdf8da9972d150c7368f3c0/observed-verdict.json",
+        "outputs/osm-resume-after1110/run-39596471051-full.log"
       ],
       "entities": [],
       "pr": 398,
-      "verification_sha": null,
-      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+      "verification_sha": "135eb7882fe7a2fb6cdf8da9972d150c7368f3c0",
+      "verdict": "FIXED_VERIFIED_EXACT_HEAD_NOT_INTEGRATED_SOURCE_STILL_BLOCKED",
+      "historical_technical_verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
     },
     {
       "id": "RM-024",
@@ -470,12 +487,15 @@
       "change": "Include OSM module/test wildcard paths and the data-only restore process; keep the complete live gate mandatory for these changes.",
       "regression": "osm-live-probe-contract.test.mjs isolated dependency selection",
       "evidence": [
-        "docs/evidence/osm-fix2/transport-resume-20261021/contract-before.log.gz"
+        "docs/evidence/osm-fix2/transport-resume-20261021/contract-before.log.gz",
+        "outputs/ci-watch/135eb7882fe7a2fb6cdf8da9972d150c7368f3c0/observed-verdict.json",
+        "outputs/osm-resume-after1110/run-39596471051-full.log"
       ],
       "entities": [],
       "pr": 398,
-      "verification_sha": null,
-      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+      "verification_sha": "135eb7882fe7a2fb6cdf8da9972d150c7368f3c0",
+      "verdict": "FIXED_VERIFIED_EXACT_HEAD_NOT_INTEGRATED_SOURCE_STILL_BLOCKED",
+      "historical_technical_verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
     },
     {
       "id": "RM-025",
@@ -487,12 +507,70 @@
       "change": "60s client budget with unchanged 25s server query, 22-minute session and workflow limits; existing bounded retry/cooldown and fail-closed inventory remain.",
       "regression": "osm-capture-session.test.mjs production client queue budget; all 63 source and 52 routing tests pass with no skips.",
       "pr": 398,
-      "verification_sha": null,
+      "verification_sha": "135eb7882fe7a2fb6cdf8da9972d150c7368f3c0",
       "evidence": [
         "docs/evidence/osm-fix2/queue-budget-20261021/sha256-manifest.json",
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39594795523"
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39594795523",
+        "outputs/ci-watch/135eb7882fe7a2fb6cdf8da9972d150c7368f3c0/observed-verdict.json",
+        "outputs/osm-resume-after1110/run-39596471051-full.log"
       ],
-      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+      "verdict": "FIXED_VERIFIED_EXACT_HEAD_NOT_INTEGRATED_SOURCE_STILL_BLOCKED",
+      "historical_technical_verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+    },
+    {
+      "id": "RM-026",
+      "severity": "P3",
+      "component": "New independent documentary review generator",
+      "entities": [
+        "PMR-ATD-133267"
+      ],
+      "reproduction": "New review generator --write rejects a valid preserved legacy Word/OLE original while accepting only PDF/ZIP signatures. Initial failure log is frozen before publication of the implementation.",
+      "cause": "New generator duplicated only a subset of the accepted binary classifier formats.",
+      "change": "Reuse the existing canonical classifyDocumentResponse with expectBinary=true; full generator regression covers the actual preserved OLE original and all19 document records.",
+      "regression": "ni-independent-review.mjs --write/--check on authenticated originals; ten negative provenance/identity/acceptance tests; existing binary/placeholder tests retained.",
+      "pr": 403,
+      "verification_sha": "c0fd04cfaccdabe071f328e981acaa86c15eef27",
+      "evidence": [
+        "docs/evidence/ni-jur-review-regression-20261021/manifest.json",
+        "outputs/ci-watch/c0fd04cfaccdabe071f328e981acaa86c15eef27/verdict.json"
+      ],
+      "verdict": "FIXED_VERIFIED_EXACT_HEAD_NOT_INTEGRATED_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "RM-027",
+      "component": "OSM recursive shard checkpoint durability",
+      "reproduction": "A shard [1,2] splits after HTTP504, leaf1 succeeds, leaf2 is interrupted. Before fix no recursive checkpoint exists and leaf1 must be fetched again.",
+      "cause": "Only the complete top-level shard was persisted; successful recursive leaves were discarded on parent failure.",
+      "change": "Persist each validated recursive subset before the next request; restore only hash/epoch/SHA/closure-verified subsets. Final whole-source exact coverage and closure remain mandatory.",
+      "regression": "Interrupted recursive acquisition resumes without re-requesting leaf1; incomplete top-level coverage, corrupt leaf, foreign metadata and persistence failures remain fail-closed.",
+      "severity": "P2",
+      "entities": [
+        "RO/MD current source acquisition"
+      ],
+      "pr": 398,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/recursive-resume-20261021/sha256-manifest.json"
+      ],
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_NOT_SOURCE_ACCEPTANCE"
+    },
+    {
+      "id": "RM-028",
+      "component": "Overpass endpoint health across shard queries",
+      "reproduction": "Three distinct one-attempt HTTP503 queries to the same endpoint produce cooldowns 2s/2s/2s rather than progressively reducing repeated requests.",
+      "cause": "Backoff used the attempt index local to each query rather than consecutive endpoint failures.",
+      "change": "Track consecutive failures per endpoint across queries, exponentially back off to a bounded 5-minute ceiling, reset only after a valid success; retain Retry-After, sequential requests and global deadline.",
+      "regression": "2s/4s/8s across queries and reset to2s after success; HTTP429/502/503/504, timeout and partial-body cases all covered.",
+      "severity": "P2",
+      "entities": [
+        "RO/MD current source acquisition"
+      ],
+      "pr": 398,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/recursive-resume-20261021/sha256-manifest.json"
+      ],
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_NOT_SOURCE_ACCEPTANCE"
     }
   ],
   "environment_incidents": [
@@ -502,7 +580,8 @@
       "cause": "Git LF to CRLF conversion",
       "remedy": "Restore exact tracked blob bytes; do not alter accepted hashes",
       "retest": "p907219 --audit and --self-test PASS",
-      "verdict": "RESOLVED"
+      "verdict": "RESOLVED",
+      "occurrences": []
     },
     {
       "id": "ENV-002",
@@ -510,7 +589,8 @@
       "cause": "CDP Page.enable timed out before samples; root cause beyond sandbox transport not proven",
       "remedy": "Rerun with authorized local connection access",
       "retest": "Chrome/155.0.8059.80 benchmark PASS",
-      "verdict": "RESOLVED_FOR_EXECUTION"
+      "verdict": "RESOLVED_FOR_EXECUTION",
+      "occurrences": []
     },
     {
       "id": "ENV-003",
@@ -518,7 +598,8 @@
       "cause": "spawn bash ENOENT; existing platform-dependent adversarial preflight also skipped",
       "remedy": "Use the existing mandatory Linux verify-persisted-release job, which invokes test:actual-candidate-lifecycle; no test altered or disabled",
       "retest": "152 PASS, zero FAIL, zero SKIP on main 335234bdb7b8cec828d4d2ad11d42d5bc5f99642, Actions 39326818180",
-      "verdict": "RESOLVED_LINUX_CI"
+      "verdict": "RESOLVED_LINUX_CI",
+      "occurrences": []
     },
     {
       "id": "ENV-004",
@@ -531,8 +612,628 @@
         118330713332,
         118332458878,
         118333769340,
-        118337163408
-      ]
+        118337163408,
+        118349531342,
+        118520295126,
+        118521596197,
+        118532245152,
+        118537246514,
+        118545209412,
+        118899340596,
+        118899340741,
+        118900602454,
+        118901039712,
+        118901039901,
+        118904890741,
+        118910034315,
+        118910034327,
+        118914009684,
+        118926031250,
+        118926032121,
+        118929515324,
+        118933138839,
+        118933453014,
+        118933746885,
+        119057189770,
+        119057189834,
+        119057838974,
+        119061116838,
+        119068499615,
+        119068499657,
+        119082061468,
+        119082061475,
+        119082779711,
+        119082780069,
+        119089710288,
+        119089710393,
+        119089985284,
+        119093080412,
+        119093192804,
+        119093192867,
+        119096222609,
+        119098785193,
+        119130896273,
+        119131671051,
+        119132034990,
+        119135243925,
+        119135350128,
+        119135697385,
+        119136080973,
+        119214765660,
+        119214765770,
+        119215072931,
+        119222401219
+      ],
+      "observations": [
+        {
+          "sha": "02541f189219293d0c2416fbfea7200b48c8fba6",
+          "job": 118929515324,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/02541f189219293d0c2416fbfea7200b48c8fba6/failure-118929515324.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/02541f189219293d0c2416fbfea7200b48c8fba6/failure-118929515324.log",
+          "logSha256": "4a9d4cd9685dbe35c9cadfb37b202e13fcd2a987f75f54b92518aa562b96f17f",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "02541f189219293d0c2416fbfea7200b48c8fba6",
+          "job": 118933138839,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/02541f189219293d0c2416fbfea7200b48c8fba6/failure-118933138839.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/02541f189219293d0c2416fbfea7200b48c8fba6/failure-118933138839.log",
+          "logSha256": "bab0432c2fa64918a3eec61e2d64ae745ab09ca4076062986c32c17ec3955647",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "02541f189219293d0c2416fbfea7200b48c8fba6",
+          "job": 118933453014,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/02541f189219293d0c2416fbfea7200b48c8fba6/failure-118933453014.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/02541f189219293d0c2416fbfea7200b48c8fba6/failure-118933453014.log",
+          "logSha256": "e9c091dcec51b3ba45812bb7c9a83174f19a50c86b032db05a9e05e84628b904",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "02541f189219293d0c2416fbfea7200b48c8fba6",
+          "job": 118933746885,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/02541f189219293d0c2416fbfea7200b48c8fba6/failure-118933746885.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/02541f189219293d0c2416fbfea7200b48c8fba6/failure-118933746885.log",
+          "logSha256": "e64e9364995473747aa8b5a6b99cb04fc670c7084d5221fc92cc7264225ac8c6",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "08bcd64e19a84e3a6a30274debad0fe653673130",
+          "job": 119093192804,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/08bcd64e19a84e3a6a30274debad0fe653673130/failure-119093192804.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/08bcd64e19a84e3a6a30274debad0fe653673130/failure-119093192804.log",
+          "logSha256": "484737e15169d9bcf5b015b3394c7c37604dc6f3cb8cfbc9ed2e2c21f758638b",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "08bcd64e19a84e3a6a30274debad0fe653673130",
+          "job": 119093192867,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/08bcd64e19a84e3a6a30274debad0fe653673130/failure-119093192867.json",
+          "auditSha256": "c6192628152e79a31165c3e30c8c4715a51558c5ac83a30a41da8da5ebedd059",
+          "log": "outputs/ci-watch/08bcd64e19a84e3a6a30274debad0fe653673130/failure-119093192867.log",
+          "logSha256": "f9ea2cceea75901bf2612ffa4d5a9ffe4b9955ab8047017085c42219f7d60aba",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "11df48266f9662bfb0b6dc314948b0f231c9addc",
+          "job": 119130896273,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/11df48266f9662bfb0b6dc314948b0f231c9addc/failure-119130896273.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/11df48266f9662bfb0b6dc314948b0f231c9addc/failure-119130896273.log",
+          "logSha256": "e1877e34baab1ac343bc0a97b21015fd8bc11437a6b57c0dd65d991521968cec",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "11df48266f9662bfb0b6dc314948b0f231c9addc",
+          "job": 119135243925,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/11df48266f9662bfb0b6dc314948b0f231c9addc/failure-119135243925.json",
+          "auditSha256": "8d7495f659572972b1731714c9303396a87124464e44a7c4bb495ccd57b1e425",
+          "log": "outputs/ci-watch/11df48266f9662bfb0b6dc314948b0f231c9addc/failure-119135243925.log",
+          "logSha256": "a43549ad21b695b87c90222e897961c503aa949b6aa52208f2b69e9b812f5be5",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "1a6107594438d752e793df5dd57aed96272d4474",
+          "job": 118545209412,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/1a6107594438d752e793df5dd57aed96272d4474/failure-118545209412.json",
+          "auditSha256": "c6192628152e79a31165c3e30c8c4715a51558c5ac83a30a41da8da5ebedd059",
+          "log": "outputs/ci-watch/1a6107594438d752e793df5dd57aed96272d4474/failure-118545209412.log",
+          "logSha256": "3d64726286311e7e634f36f089b48d081c94d878f6942f488ae6e140783a9bc8",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "3895a2ddcb88015b33eddb41b5533e7512ab9db2",
+          "job": 119093080412,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/3895a2ddcb88015b33eddb41b5533e7512ab9db2/failure-119093080412.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/3895a2ddcb88015b33eddb41b5533e7512ab9db2/failure-119093080412.log",
+          "logSha256": "61bd9583cd8da8446d9040983a0fb08c6037accbcfa31a56d454ec2ba95d4d3c",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "3b04456ac2ef798fa555881570f5d259cceea7b9",
+          "job": 118926031250,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/3b04456ac2ef798fa555881570f5d259cceea7b9/failure-118926031250.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/3b04456ac2ef798fa555881570f5d259cceea7b9/failure-118926031250.log",
+          "logSha256": "b7a599c5a09bb3900f999f334737eb5b1198b05299646471b4924a3d53ef7e99",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "3b04456ac2ef798fa555881570f5d259cceea7b9",
+          "job": 118926032121,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/3b04456ac2ef798fa555881570f5d259cceea7b9/failure-118926032121.json",
+          "auditSha256": "19fb0d36c9ccd350278ba9f09c0057a9f14240fe393a04c2d606fe4071466352",
+          "log": "outputs/ci-watch/3b04456ac2ef798fa555881570f5d259cceea7b9/failure-118926032121.log",
+          "logSha256": "491c3525197f28b8d880756fcd8b8ec69ea02cb575ed8651adbaa4b6524e918b",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "4143235290a95412e8fe01caa32dc376dab96538",
+          "job": 119098785193,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/4143235290a95412e8fe01caa32dc376dab96538/failure-119098785193.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/4143235290a95412e8fe01caa32dc376dab96538/failure-119098785193.log",
+          "logSha256": "d1c07bd4022a7ddbaa5aa03e77d41c6ac3ffb619566b7ddb7ab9806b3c305255",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "4481b0c7e9b28cf0f7e174125e3804dadd2cd589",
+          "job": 118910034315,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/4481b0c7e9b28cf0f7e174125e3804dadd2cd589/failure-118910034315.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/4481b0c7e9b28cf0f7e174125e3804dadd2cd589/failure-118910034315.log",
+          "logSha256": "650d85c0119713ceb487b9511f0e1cf96665a24eac596d6a610b3871355a98e0",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "4481b0c7e9b28cf0f7e174125e3804dadd2cd589",
+          "job": 118910034327,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/4481b0c7e9b28cf0f7e174125e3804dadd2cd589/failure-118910034327.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/4481b0c7e9b28cf0f7e174125e3804dadd2cd589/failure-118910034327.log",
+          "logSha256": "56c89e20eaec3fb22b15dfe2c0082b3de33dbe5ef696600cbfcd8b578d42d289",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "4481b0c7e9b28cf0f7e174125e3804dadd2cd589",
+          "job": 118914009684,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/4481b0c7e9b28cf0f7e174125e3804dadd2cd589/failure-118914009684.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/4481b0c7e9b28cf0f7e174125e3804dadd2cd589/failure-118914009684.log",
+          "logSha256": "a10d0b6f8e422d7e2d10672a26b95f10d34e90bc6e9e6a60fe963fc8115d7dd2",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "6216178a96cf0f790d1348d5a1108f0838fbc84d",
+          "job": 118520295126,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/6216178a96cf0f790d1348d5a1108f0838fbc84d/failure-118520295126.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/6216178a96cf0f790d1348d5a1108f0838fbc84d/failure-118520295126.log",
+          "logSha256": "858cbbb0a9cd559e7c181dffa6d5e2d9b8bef5d07b429f001a907763e4b52945",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "66a915b27a8ab8168df624749dc6d937295576af",
+          "job": 119068499615,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/66a915b27a8ab8168df624749dc6d937295576af/failure-119068499615.json",
+          "auditSha256": "c6192628152e79a31165c3e30c8c4715a51558c5ac83a30a41da8da5ebedd059",
+          "log": "outputs/ci-watch/66a915b27a8ab8168df624749dc6d937295576af/failure-119068499615.log",
+          "logSha256": "4fc4e13469ede15de4192879166535ad9a0074ff1ac101f5f4ab357f8a47d4ac",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "66a915b27a8ab8168df624749dc6d937295576af",
+          "job": 119068499657,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/66a915b27a8ab8168df624749dc6d937295576af/failure-119068499657.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/66a915b27a8ab8168df624749dc6d937295576af/failure-119068499657.log",
+          "logSha256": "87f4fb4474a97a96443f13e08daf52b000f0ea7e2a9473b3de18720ace48fb4c",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "7376491b2664e060ee647e1474d89c82ef1600a4",
+          "job": 119214765660,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/7376491b2664e060ee647e1474d89c82ef1600a4/failure-119214765660.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/7376491b2664e060ee647e1474d89c82ef1600a4/failure-119214765660.log",
+          "logSha256": "bb333184c429db208fac65ceca077af43056d78fb76a18592e6e12e39d18778c",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "7376491b2664e060ee647e1474d89c82ef1600a4",
+          "job": 119214765770,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/7376491b2664e060ee647e1474d89c82ef1600a4/failure-119214765770.json",
+          "auditSha256": "fbbbf9738d063abae600a40a42eb7cbc90880d9869fbfb2f41c751c0e0f0ca11",
+          "log": "outputs/ci-watch/7376491b2664e060ee647e1474d89c82ef1600a4/failure-119214765770.log",
+          "logSha256": "a3cd112a153a2e6f6b9e68c767480e1cb98034605bb767ccee6d10f7e0ca1254",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "7376491b2664e060ee647e1474d89c82ef1600a4",
+          "job": 119215072931,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/7376491b2664e060ee647e1474d89c82ef1600a4/failure-119215072931.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/7376491b2664e060ee647e1474d89c82ef1600a4/failure-119215072931.log",
+          "logSha256": "7d1e9b1824524917ac5d96a03fde28b2446336baaebcb752b380a3187cbd76b6",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "74742bd87149bf1844833502f6beff2bf08bc864",
+          "job": 118901039712,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/74742bd87149bf1844833502f6beff2bf08bc864/failure-118901039712.json",
+          "auditSha256": "19fb0d36c9ccd350278ba9f09c0057a9f14240fe393a04c2d606fe4071466352",
+          "log": "outputs/ci-watch/74742bd87149bf1844833502f6beff2bf08bc864/failure-118901039712.log",
+          "logSha256": "d74aa928640e60d48b48e733fe3cf76765ab73a4f0c8538f17b41553e74ee3e7",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "74742bd87149bf1844833502f6beff2bf08bc864",
+          "job": 118901039901,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/74742bd87149bf1844833502f6beff2bf08bc864/failure-118901039901.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/74742bd87149bf1844833502f6beff2bf08bc864/failure-118901039901.log",
+          "logSha256": "a253bb83770f29c2284a05452af1945988fbbecb9e002aacabd50cc20a1b338d",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "74742bd87149bf1844833502f6beff2bf08bc864",
+          "job": 118904890741,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/74742bd87149bf1844833502f6beff2bf08bc864/failure-118904890741.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/74742bd87149bf1844833502f6beff2bf08bc864/failure-118904890741.log",
+          "logSha256": "f096182153ed81afa031750b73c3ef05c548d1b1ed8daceac533305859e36715",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "7b72844d5b65b42b08c7f79b57954532afdd72a7",
+          "job": 119089710288,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/7b72844d5b65b42b08c7f79b57954532afdd72a7/failure-119089710288.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/7b72844d5b65b42b08c7f79b57954532afdd72a7/failure-119089710288.log",
+          "logSha256": "65bad3c69bcfe11986ee44c027d7dc7696ba03d5942f9a46a67747913b19efc8",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "7b72844d5b65b42b08c7f79b57954532afdd72a7",
+          "job": 119089710393,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/7b72844d5b65b42b08c7f79b57954532afdd72a7/failure-119089710393.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/7b72844d5b65b42b08c7f79b57954532afdd72a7/failure-119089710393.log",
+          "logSha256": "a197ea3cff301af86ba8197f81648f11fed8d1604937ab41c6d2b2a7c6d3dab3",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "7b72844d5b65b42b08c7f79b57954532afdd72a7",
+          "job": 119089985284,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/7b72844d5b65b42b08c7f79b57954532afdd72a7/failure-119089985284.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/7b72844d5b65b42b08c7f79b57954532afdd72a7/failure-119089985284.log",
+          "logSha256": "fc150724e7c8c938064c5347929ddf3e072f5813e7148386ac2710ed2879a2ca",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "861d78b232a1f99d92255201526fffe19a2b7558",
+          "job": 118532245152,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118532245152.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118532245152.log",
+          "logSha256": "b4f9301a3e50668d1a2eeabc2f542f71ffa70f20ad87655f3999a0b0c113acaa",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "861d78b232a1f99d92255201526fffe19a2b7558",
+          "job": 118537246514,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118537246514.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118537246514.log",
+          "logSha256": "775d7ef5bbf08963cccb13b13689ee45ef45a855e648b3db7702b94c3d624d9d",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "a28b597b44180d0dea18fed9bbed6a99ac4545ef",
+          "job": 119131671051,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/a28b597b44180d0dea18fed9bbed6a99ac4545ef/failure-119131671051.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/a28b597b44180d0dea18fed9bbed6a99ac4545ef/failure-119131671051.log",
+          "logSha256": "7fe88a062a7edf884601dbc5e0dbe9922f91212771706a9d3b254a5b544731c0",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "a28b597b44180d0dea18fed9bbed6a99ac4545ef",
+          "job": 119135350128,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/a28b597b44180d0dea18fed9bbed6a99ac4545ef/failure-119135350128.json",
+          "auditSha256": "8d7495f659572972b1731714c9303396a87124464e44a7c4bb495ccd57b1e425",
+          "log": "outputs/ci-watch/a28b597b44180d0dea18fed9bbed6a99ac4545ef/failure-119135350128.log",
+          "logSha256": "89e6b695e722f4483e67de32ee9008b5baa690d171cf0e8017d7d00993e48af4",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "a28b597b44180d0dea18fed9bbed6a99ac4545ef",
+          "job": 119135697385,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/a28b597b44180d0dea18fed9bbed6a99ac4545ef/failure-119135697385.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/a28b597b44180d0dea18fed9bbed6a99ac4545ef/failure-119135697385.log",
+          "logSha256": "1d6eaf1efd5e25918a9420fbef051ec2fa0bc6e96df255971cf1e1fc1f6e4f42",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "a28b597b44180d0dea18fed9bbed6a99ac4545ef",
+          "job": 119136080973,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/a28b597b44180d0dea18fed9bbed6a99ac4545ef/failure-119136080973.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/a28b597b44180d0dea18fed9bbed6a99ac4545ef/failure-119136080973.log",
+          "logSha256": "a7a3c1ae459b4e7040a0f6b7b917d9cebd2d981c02d8863d1bf21aa8802b647a",
+          "sameShaCiVerdict": "PENDING",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+          "job": 118349531342,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/ad5073041d582cae9caa6f031684ffd0a427d938/failure-118349531342.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/ad5073041d582cae9caa6f031684ffd0a427d938/failure-118349531342.log",
+          "logSha256": "0d54f1c44a9cecae9b88b79e761cd5bf688b06487c26160e83a15806f571517d",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "beeaf7b635d2e7b382c08069ceed0ab2919ab04f",
+          "job": 118899340596,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/beeaf7b635d2e7b382c08069ceed0ab2919ab04f/failure-118899340596.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/beeaf7b635d2e7b382c08069ceed0ab2919ab04f/failure-118899340596.log",
+          "logSha256": "71dbfee63ceee3d46847e18cee22629088a782aed4ef17904c32e823171e4f9d",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "beeaf7b635d2e7b382c08069ceed0ab2919ab04f",
+          "job": 118899340741,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/beeaf7b635d2e7b382c08069ceed0ab2919ab04f/failure-118899340741.json",
+          "auditSha256": "c6192628152e79a31165c3e30c8c4715a51558c5ac83a30a41da8da5ebedd059",
+          "log": "outputs/ci-watch/beeaf7b635d2e7b382c08069ceed0ab2919ab04f/failure-118899340741.log",
+          "logSha256": "3f7048e55fda7eaf4ca5c66607825ea92e50bce398b3a8dc0f4704b2f39b9f5b",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "beeaf7b635d2e7b382c08069ceed0ab2919ab04f",
+          "job": 118900602454,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/beeaf7b635d2e7b382c08069ceed0ab2919ab04f/failure-118900602454.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/beeaf7b635d2e7b382c08069ceed0ab2919ab04f/failure-118900602454.log",
+          "logSha256": "04d1e4bfa258cbc197461e4111e28928f568c716536a567de973480fd5cf569e",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "c0fd04cfaccdabe071f328e981acaa86c15eef27",
+          "job": 119222401219,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/c0fd04cfaccdabe071f328e981acaa86c15eef27/failure-119222401219.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/c0fd04cfaccdabe071f328e981acaa86c15eef27/failure-119222401219.log",
+          "logSha256": "37ec0cb76a906b57f2afc16b4069eb75490fbf61b9431df130b903e08b12414a",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "c8d57e850147376a79798e26de73d8e779403d47",
+          "job": 119057189770,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/c8d57e850147376a79798e26de73d8e779403d47/failure-119057189770.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/c8d57e850147376a79798e26de73d8e779403d47/failure-119057189770.log",
+          "logSha256": "b660194e98448fde610900bbb50113f507e0722183ebf8a79cc24d53b3118503",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "c8d57e850147376a79798e26de73d8e779403d47",
+          "job": 119057189834,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/c8d57e850147376a79798e26de73d8e779403d47/failure-119057189834.json",
+          "auditSha256": "52d84d5622fc34b91d5509f73f1a39659a1de4b99f4bb31b12a9afbf40c6166f",
+          "log": "outputs/ci-watch/c8d57e850147376a79798e26de73d8e779403d47/failure-119057189834.log",
+          "logSha256": "2eda90a2517b2e652cb3e9469c9dc82a51798a406ee7f700a8cc2aec660d3ed9",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "c8d57e850147376a79798e26de73d8e779403d47",
+          "job": 119057838974,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/c8d57e850147376a79798e26de73d8e779403d47/failure-119057838974.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/c8d57e850147376a79798e26de73d8e779403d47/failure-119057838974.log",
+          "logSha256": "a2737bd1ee2b5055c960d4887a7bcc07ccb93a7b283a3f49cdf10dc7bcc16253",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "c8d57e850147376a79798e26de73d8e779403d47",
+          "job": 119061116838,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/c8d57e850147376a79798e26de73d8e779403d47/failure-119061116838.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/c8d57e850147376a79798e26de73d8e779403d47/failure-119061116838.log",
+          "logSha256": "886e6116e2fec20a075b13191f4e90ab8da9e995721b04e1ad0c01f26337e361",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "cf91fd43e7b1addf4082b18c0465a66a33840c71",
+          "job": 119082061468,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/cf91fd43e7b1addf4082b18c0465a66a33840c71/failure-119082061468.json",
+          "auditSha256": "d5d3a9b8d55d771979c88653aa807a41f82590ee2b0abcd64b56737036e6a0d4",
+          "log": "outputs/ci-watch/cf91fd43e7b1addf4082b18c0465a66a33840c71/failure-119082061468.log",
+          "logSha256": "9a698721ab902a3c29a3ee345d6fc051f138af4fc937f4c14a0fa8ceb84b7339",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "cf91fd43e7b1addf4082b18c0465a66a33840c71",
+          "job": 119082061475,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/cf91fd43e7b1addf4082b18c0465a66a33840c71/failure-119082061475.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/cf91fd43e7b1addf4082b18c0465a66a33840c71/failure-119082061475.log",
+          "logSha256": "1db4bfe6b92b5ba9cf6a7a6227a6f6275e62b14a1dc6f6fea1ba873ad2c6ffd5",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "cf91fd43e7b1addf4082b18c0465a66a33840c71",
+          "job": 119082779711,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/cf91fd43e7b1addf4082b18c0465a66a33840c71/failure-119082779711.json",
+          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
+          "log": "outputs/ci-watch/cf91fd43e7b1addf4082b18c0465a66a33840c71/failure-119082779711.log",
+          "logSha256": "ec819b4a1b0a44a825e13c71bb5825b10fd28a14dc8c9d7e3b6a6ba47afd36b0",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "cf91fd43e7b1addf4082b18c0465a66a33840c71",
+          "job": 119082780069,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/cf91fd43e7b1addf4082b18c0465a66a33840c71/failure-119082780069.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/cf91fd43e7b1addf4082b18c0465a66a33840c71/failure-119082780069.log",
+          "logSha256": "0d2cd8e42fba99b4c6694a16223e1540733123b4310a380058d2330d3d62dd57",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "d1687be8df336635411664c9027ca8cdfa46dc09",
+          "job": 119132034990,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/d1687be8df336635411664c9027ca8cdfa46dc09/failure-119132034990.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/d1687be8df336635411664c9027ca8cdfa46dc09/failure-119132034990.log",
+          "logSha256": "e5128b479d59f7f3a713739c68badfebb870dcdc183d0aa032a0b8a965500ff3",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "e8f418c005396b2fbda8bf883867b6e745e83a7b",
+          "job": 118521596197,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/e8f418c005396b2fbda8bf883867b6e745e83a7b/failure-118521596197.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/e8f418c005396b2fbda8bf883867b6e745e83a7b/failure-118521596197.log",
+          "logSha256": "870e63ea7ea21d64931021a098cbfdf81fcd3e504fe28c7534c63fcac118fb92",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        },
+        {
+          "sha": "f7b9f9c96383c0e1209268ea20285d6e094338d7",
+          "job": 119096222609,
+          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
+          "audit": "outputs/ci-watch/f7b9f9c96383c0e1209268ea20285d6e094338d7/failure-119096222609.json",
+          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
+          "log": "outputs/ci-watch/f7b9f9c96383c0e1209268ea20285d6e094338d7/failure-119096222609.log",
+          "logSha256": "79649d2eb56f979055722c1e832e0e562e65341a7aa18689484400dfdc216907",
+          "sameShaCiVerdict": "PASS",
+          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+        }
+      ],
+      "note": "Historical original failures and bounded same-SHA retests are retained. Each final head and postmerge requires all gates PASS; no protected contract was changed."
+    },
+    {
+      "id": "ENV-005",
+      "severity": "P2",
+      "component": "GitHub Actions resumed acquisition cancellation",
+      "run": 39599890760,
+      "sha": "135eb7882fe7a2fb6cdf8da9972d150c7368f3c0",
+      "verdict": "BLOCKED_OPERATIONAL_CAUSE_NOT_ESTABLISHED",
+      "evidence": [
+        "outputs/osm-resume-after1110/run-39599890760-full.log",
+        "outputs/osm-resume-after1110/resume-cancellation-annotations.json",
+        "outputs/osm-fix2-resume-audit/run-39599890760/integrity.json"
+      ],
+      "observed": "Restore completed successfully. Existing inventory and two top-level shards reused. Capture interrupted at12:48:20Z with only The operation was canceled; job failure, no later competing source run, no head change; no new source checkpoint artifact uploaded. Three independent forensics artifacts retained.",
+      "cause": "UNKNOWN; not attributed to timeout, host drift or user cancellation without evidence.",
+      "accepted_progress_retained": "Prior verified checkpoint artifact12345078304 from39596471051 remains available.",
+      "next_action": "Inspect GitHub runner/service incident diagnostics and instrument bounded acquisition if needed. Future resume must satisfy same-SHA, epoch and age checks; expired checkpoint cannot be re-labelled fresh."
     }
   ],
   "open_evidence_gates": [
@@ -561,7 +1262,7 @@
     {
       "id": "GATE-003",
       "stage": "WEB-R2c.4",
-      "description": "Final published Pages E2E acceptance (completed and evidence-bound).",
+      "description": "Final published Pages E2E acceptance passed in PR393; subsequent unchanged-runtime main11 published audit retained.",
       "verdict": "CLOSED_PASS",
       "main": "1a6107594438d752e793df5dd57aed96272d4474",
       "pr": 393,
@@ -572,8 +1273,9 @@
       "evidence": [
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39397897942",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39398274459"
-      ]
+      ],
+      "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-21T12:02:09.853Z"
+  "updated_at": "2026-10-21T16:18:02.007Z"
 }

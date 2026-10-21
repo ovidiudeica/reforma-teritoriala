@@ -1,0 +1,20 @@
+{
+  "id": "ENV-005",
+  "verdict": "BLOCKED_OPERATIONAL_CAUSE_NOT_ESTABLISHED",
+  "run": 39599890760,
+  "sha": "135eb7882fe7a2fb6cdf8da9972d150c7368f3c0",
+  "observed": "Official operation-canceled message at 12:48:20.715Z, job failure. About 19m39 elapsed, below configured step25/job35. No demonstrated timeout, subsequent competing run or head change. Caller identity does not establish a cancellation actor. Original run and annotations retained.",
+  "limits": "Recursive checkpointing reduces controlled-interruption loss. Abrupt runner shutdown before artifact upload can still prevent export; no claim that ENV-005 is resolved.",
+  "originals": [
+    {
+      "file": "outputs/osm-resume-after1110/run-39599890760-full.log",
+      "bytes": 160376,
+      "sha256": "c7ba529f6c80545d950dc7ff8b09421f095ed1c1a657c605300b0893c3e4c42b"
+    },
+    {
+      "file": "outputs/osm-resume-after1110/resume-cancellation-annotations.json",
+      "bytes": 304,
+      "sha256": "a0a0c142e0844b536e9a18d107d560ef82379b43bf207aa42ec392356d608197"
+    }
+  ]
+}

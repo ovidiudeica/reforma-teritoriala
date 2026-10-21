@@ -1,0 +1,170 @@
+{
+  "verified_at": "2026-10-21T16:15:25.060Z",
+  "receipts": [
+    {
+      "url": "https://api.openstreetmap.org/api/0.6/way/1376180731/history.json",
+      "accessed_at": "2026-10-21T16:15:24.710Z",
+      "http_status": 200,
+      "mime": "application/json; charset=utf-8",
+      "file": "way-1376180731-history.json.response",
+      "bytes": 20641,
+      "sha256": "6b3eab08825a8662263cda9cc573b1f9fb13018f759daad2e554218aa30445a1"
+    },
+    {
+      "url": "https://api.openstreetmap.org/api/0.6/relation/18968082/full.json",
+      "accessed_at": "2026-10-21T16:15:24.956Z",
+      "http_status": 200,
+      "mime": "application/json; charset=utf-8",
+      "file": "relation-18968082-full.json.response",
+      "bytes": 70534,
+      "sha256": "a9ce03acb3e170f3fd9b89188536778d54485fbe2af88a65b892d52ca1c62a37"
+    }
+  ],
+  "relation_version": 7,
+  "members": [
+    {
+      "id": 1376180731,
+      "version": 6,
+      "nodes": 228,
+      "ends": [
+        13678342864,
+        11649857778
+      ]
+    },
+    {
+      "id": 1492661495,
+      "version": 1,
+      "nodes": 2,
+      "ends": [
+        13678342864,
+        12813030576
+      ]
+    },
+    {
+      "id": 1492661493,
+      "version": 1,
+      "nodes": 44,
+      "ends": [
+        11649275561,
+        12813030576
+      ]
+    },
+    {
+      "id": 1376180490,
+      "version": 4,
+      "nodes": 8,
+      "ends": [
+        11649275559,
+        11649275561
+      ]
+    },
+    {
+      "id": 1494605625,
+      "version": 1,
+      "nodes": 86,
+      "ends": [
+        13673940857,
+        11649275559
+      ]
+    },
+    {
+      "id": 1494605624,
+      "version": 1,
+      "nodes": 5,
+      "ends": [
+        8265822008,
+        13673940857
+      ]
+    }
+  ],
+  "odd_endpoints": [
+    {
+      "id": 11649857778,
+      "degree": 1,
+      "node": {
+        "type": "node",
+        "id": 11649857778,
+        "lat": 47.0786791,
+        "lon": 28.9073227,
+        "timestamp": "2024-02-21T19:01:28Z",
+        "version": 1,
+        "changeset": 147745485,
+        "user": "Mihai Spătaru",
+        "uid": 9020094
+      }
+    },
+    {
+      "id": 8265822008,
+      "degree": 1,
+      "node": {
+        "type": "node",
+        "id": 8265822008,
+        "lat": 47.0786791,
+        "lon": 28.9073227,
+        "timestamp": "2020-12-28T05:34:22Z",
+        "version": 1,
+        "changeset": 96510586,
+        "user": "Mihai Spătaru",
+        "uid": 9020094
+      }
+    }
+  ],
+  "way1376180731_history": [
+    {
+      "version": 1,
+      "timestamp": "2025-04-09T17:48:26Z",
+      "changeset": 164736346,
+      "ends": [
+        12742049030,
+        12742049031
+      ]
+    },
+    {
+      "version": 2,
+      "timestamp": "2026-03-20T13:12:51Z",
+      "changeset": 180159156,
+      "ends": [
+        11649275956,
+        11649275559
+      ]
+    },
+    {
+      "version": 3,
+      "timestamp": "2026-03-25T13:44:15Z",
+      "changeset": 180408307,
+      "ends": [
+        13678342864,
+        11649275559
+      ]
+    },
+    {
+      "version": 4,
+      "timestamp": "2026-03-31T13:11:32Z",
+      "changeset": 180673111,
+      "ends": [
+        13678342864,
+        11649857778
+      ]
+    },
+    {
+      "version": 5,
+      "timestamp": "2026-03-31T13:39:37Z",
+      "changeset": 180674501,
+      "ends": [
+        13678342864,
+        11649857778
+      ]
+    },
+    {
+      "version": 6,
+      "timestamp": "2026-04-10T06:12:32Z",
+      "changeset": 181128010,
+      "ends": [
+        13678342864,
+        11649857778
+      ]
+    }
+  ],
+  "verdict": "BLOCKED_SOURCE_TOPOLOGY",
+  "public_edits": false
+}
