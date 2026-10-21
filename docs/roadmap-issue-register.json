@@ -318,11 +318,12 @@
       "change": "Replace node -e and URL interpolation with a fixed static module fixture. Preserve the child process, --audit argument and network-failure guard. Include the fixture in workflow path triggers.",
       "regression": "scripts/test/ni-geometry-import.test.mjs: import must produce only IMPORT_ONLY, must not fetch or run the CLI; coincident distinct source nodes remain rejected.",
       "pr": 399,
-      "verification_sha": null,
+      "verification_sha": "2f3f8ab6ccea31c89441d771171aa73e84e9e211",
       "evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/92"
+        "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/92",
+        "NI evidence workflow39549197831 PASS and CodeQL119054472419 SUCCESS on2f3f8ab6ccea31c89441d771171aa73e84e9e211. The node -e construction was removed, not suppressed. Mandatory full admission remains separate."
       ],
-      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
     }
   ],
   "environment_incidents": [
@@ -405,5 +406,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T05:16:20.297Z"
+  "updated_at": "2026-10-21T05:30:32.425Z"
 }
