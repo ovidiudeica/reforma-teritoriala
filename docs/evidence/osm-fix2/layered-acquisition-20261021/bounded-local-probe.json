@@ -1,0 +1,38 @@
+{
+  "started_at": "2026-10-21T21:35:49.001Z",
+  "provenance": {
+    "base_commit": "f67b393ba5ec70c9cc0f04207f5eeee4b6e996df",
+    "tracked_sources_clean": false,
+    "working_tree_files": [
+      {
+        "file": "scripts/lib/osm-layered-acquisition.mjs",
+        "sha256": "79dc76ba2eef16deab6b05d3b74f3b7f987f276e70341439f534a26d4d333ac4"
+      },
+      {
+        "file": "scripts/import/import-osm.mjs",
+        "sha256": "a0d95372943769b9bcda308d5c682d83fea7a1a956e5ff1a67524cc59f9a457f"
+      }
+    ],
+    "purpose": "BOUNDED_ONE_RELATION_TRANSPORT_COMPARISON_NOT_A_SOURCE_CANDIDATE",
+    "source_promoted": false
+  },
+  "relation_id": 2367015,
+  "status": "BLOCKED_BOUNDED_DIAGNOSTIC_NOT_WHOLE_SOURCE_ACCEPTANCE",
+  "error": "Error: Overpass initial-one-relation-inventory failed after 1 bounded attempts: This operation was aborted",
+  "completed_at": "2026-10-21T21:36:09.262Z",
+  "attempts": [
+    {
+      "purpose": "initial-one-relation-inventory",
+      "endpoint": "https://overpass-api.de/api/interpreter",
+      "attempt": 1,
+      "started_at": "2026-10-21T21:35:49.202Z",
+      "duration_ms": 20059,
+      "status": "failure",
+      "timeout": true,
+      "consecutive_failures": 1,
+      "cooldown_ms": 2000,
+      "error": "This operation was aborted"
+    }
+  ],
+  "requests": 1
+}

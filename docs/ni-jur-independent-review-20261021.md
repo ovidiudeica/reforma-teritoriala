@@ -11,3 +11,5 @@ Fișiere: `docs/evidence/ni-jur-review-20261021/review.json`, `individual/osm-r*
 `PREPARED_BLOCKED_DEPENDENCIES`: OSM-FIX.2, NI-JUR.0 și NI-JUR.1 nu sunt acceptate formal. NI-JUR.2, NI-JUR.3 și NI-JUR.4 nu sunt declarate închise sau acceptate prin acest PR. Originalele lipsă, exhaustivitatea contemporană și controlul efectiv rămân blocaje independente, consemnate individual.
 
 ACTUAL, părinții MD și geometriile publicate rămân protejate. `actual_mutation_allowed=false`, `p91_import_allowed=false`, `semantic_acceptance=BLOCKED_INCOMPLETE`. Nu se modifică OSM public, host-trust, pragurile de prospețime sau gate-urile.
+
+Actualizare documentară ulterioară: [suplimentul din21octombrie](ni-jur-documentary-supplement-20261021.md) conservă originalul48/2023 recuperat complet și probe noi ale registrului. Eșecul HTTPS consemnat mai sus rămâne observația istorică a acelei încercări. Lacuna de acces la original nu mai este considerată actuală în supliment; verdictele contemporane ale celor85 de poligoane și dependențele de acceptare formală rămân blocate.

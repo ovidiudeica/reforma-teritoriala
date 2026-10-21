@@ -534,7 +534,8 @@
         "docs/evidence/ni-jur-review-regression-20261021/manifest.json",
         "outputs/ci-watch/c0fd04cfaccdabe071f328e981acaa86c15eef27/verdict.json"
       ],
-      "verdict": "FIXED_VERIFIED_EXACT_HEAD_NOT_INTEGRATED_NOT_STAGE_ACCEPTANCE"
+      "verdict": "FIXED_VERIFIED_INTEGRATED_EVIDENCE_ONLY_NOT_STAGE_ACCEPTANCE",
+      "integrated_main": "476307e2f86407166114ddcbcc2dd5be03ee16cf"
     },
     {
       "id": "RM-027",
@@ -548,11 +549,12 @@
         "RO/MD current source acquisition"
       ],
       "pr": 398,
-      "verification_sha": null,
+      "verification_sha": "f67b393ba5ec70c9cc0f04207f5eeee4b6e996df",
       "evidence": [
-        "docs/evidence/osm-fix2/recursive-resume-20261021/sha256-manifest.json"
+        "docs/evidence/osm-fix2/recursive-resume-20261021/sha256-manifest.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39638427311"
       ],
-      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_NOT_SOURCE_ACCEPTANCE"
+      "verdict": "FIXED_VERIFIED_EXACT_HEAD_SOURCE_CAPTURE_INCOMPLETE_NOT_SOURCE_ACCEPTANCE"
     },
     {
       "id": "RM-028",
@@ -566,18 +568,120 @@
         "RO/MD current source acquisition"
       ],
       "pr": 398,
-      "verification_sha": null,
+      "verification_sha": "f67b393ba5ec70c9cc0f04207f5eeee4b6e996df",
       "evidence": [
         "docs/evidence/osm-fix2/recursive-resume-20261021/sha256-manifest.json",
-        "docs/evidence/osm-fix2/endpoint-priority-20261021/sha256-manifest.json"
+        "docs/evidence/osm-fix2/endpoint-priority-20261021/sha256-manifest.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39638427311"
       ],
-      "verdict": "FOLLOWUP_FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_NEW_AUTHENTIC_CAPTURE",
+      "verdict": "FIXED_VERIFIED_EXACT_HEAD_SOURCE_CAPTURE_INCOMPLETE_NOT_SOURCE_ACCEPTANCE",
       "live_observation": {
         "run": 39633611181,
         "sha": "933fa40e40ae18a9413685812d67326a15b1ac1e",
         "result": "19/20 workflows success, A/B success, source incomplete; backoff alone does not prefer healthier ready endpoint"
       },
       "followup_change": "Prefer eligible endpoint with fewest consecutive failures; stable rotation only breaks equal-health ties. Retry-After/cooldown and strict capture rules unchanged."
+    },
+    {
+      "id": "RM-029",
+      "severity": "P2",
+      "component": "Published runtime audit retry isolation and mandatory regression coverage",
+      "entities": [
+        "GitHub Pages runtime verification"
+      ],
+      "reproduction": "Postmerge run39634353612 attempt1 fails on HTTP503 for public/data/topology-frontiers/chunks/md/detail/osm-r59002.json. Existing bounded retry and tests were present only in blocked PR398; retry test was absent from mandatory published workflow.",
+      "cause": "Audit transport had no bounded handling on main; independent remedy was coupled to blocked OSM source promotion and its dedicated regression was not wired into the published workflow.",
+      "change": "Extract unchanged implementation and tests by provenance-preserving cherry-picks from9c5fedb/a20c550 into PR404; add mandatory retry test invocation and503-then-stale200 full inventory negative regression.",
+      "regression": "Three test files: persistent503,404,nontransient failure and stale bytes remain fail-closed; mandatory Chromium published runtime remains exact-byte verified.",
+      "pr": 404,
+      "verification_sha": "2a59ffffb18ef03adb1544d0a3f1c052beabdd76",
+      "evidence": [
+        "docs/evidence/published-retry-20261021/sha256-manifest.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39635056717"
+      ],
+      "verdict": "FIXED_VERIFIED_EXACT_HEAD_INTEGRATED_POSTMERGE_ADMISSION_SEPARATE",
+      "integrated_main": "5a6b433616be034f69f32a6d65baf84a4d255919"
+    },
+    {
+      "id": "RM-030",
+      "severity": "P3",
+      "component": "New documentary amendment effective-date parser",
+      "entities": [
+        "PMR-2025-124",
+        "land-use amendment chain12/2024–236/2026"
+      ],
+      "reproduction": "Initial new supplement generation rejects the original124/2025 because it assumes every amendment enters force the day after publication. Other preserved text has harmless PDF extraction spacing inside words/digits.",
+      "cause": "New parser generalized the most common effective-date clause instead of distinguishing the explicit publication-day exception; literal extraction tokens were too strict.",
+      "change": "Parse only the two explicitly observed clauses independently per document; verify124/2025 as publication-day and all others as next-day. Normalize bounded extraction spacing only, preserving all original PDF bytes and hashes.",
+      "regression": "Full11-act timeline from verified originals; negative cases reject wrong sunset, missing/merged IDs, wrong scanned page, partial original, false exhaustiveness and legal/ACTUAL/P9.1 promotion.",
+      "pr": 405,
+      "verification_sha": "f7205cece7a5005abc68c396b08f2094321869a7",
+      "evidence": [
+        "docs/evidence/ni-documentary-supplement-regression-20261021/manifest.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39639663180"
+      ],
+      "verdict": "FIXED_VERIFIED_EXACT_HEAD_NOT_FORMAL_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "RM-031",
+      "severity": "P1",
+      "component": "OSM current-source acquisition",
+      "entities": [
+        "RO",
+        "MD"
+      ],
+      "reproduction": "Run39646938698:40/52RO complete; the40top-level payloads repeat818567node occurrences for620509unique nodes and12192ways for8667unique ways; recursive queries consume619691ms even when successful.",
+      "cause": "Relation-oriented recursive downloads repeatedly expand common referenced objects and amplify overload at recursive retry leaves.",
+      "change": "Current-source-only pinned-epoch unique relation/way/node layers, typed content-addressed resume, exact inventory/closure/version/SHA validation; no ACTUAL path change.",
+      "pr": 398,
+      "regression": "scripts/test/osm-layered-acquisition.test.mjs",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/historical-object-duplication.json",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/previous-transport-metrics.json",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log"
+      ],
+      "verdict": "IMPLEMENTED_LOCAL_REGRESSION_PASS_LIVE_ACCEPTANCE_PENDING"
+    },
+    {
+      "id": "RM-032",
+      "severity": "P1",
+      "component": "Overpass provider health selection",
+      "entities": [
+        "RO",
+        "MD"
+      ],
+      "reproduction": "After providerA times out and providerB succeeds then returns one fast502, a tied failure count selects timed-outA again; the new regression fails before the fix. Final prior resume spent600005ms in10Kumi/private.coffee timeouts.",
+      "cause": "Failure counts did not distinguish total route timeout from a transient HTTP response.",
+      "change": "Prefer eligible providers without timeout history; clear that history only after an actual valid response. Retry-After, bounded backoff, sequential traffic and total deadline remain intact.",
+      "pr": 398,
+      "regression": "timeout history is not equivalent to a transient fast HTTP error when choosing a provider",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/timeout-priority-before.log",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log"
+      ],
+      "verdict": "IMPLEMENTED_LOCAL_REGRESSION_PASS_EXACT_HEAD_CI_PENDING"
+    },
+    {
+      "id": "RM-033",
+      "severity": "P1",
+      "component": "New layered-checkpoint finalization before first push",
+      "entities": [
+        "SOURCE_CANDIDATE_ONLY"
+      ],
+      "reproduction": "In the first uncommitted layered implementation, supply a closed assembled graph without any stored way/node batches: finish accepted it. The retained counterexample fails before the fix.",
+      "cause": "Closure was checked but final objects were not independently reconstructed from persisted verified batch bytes.",
+      "change": "Rebuild backing from hash-verified inventory and every persisted typed batch, prove closure and exact final object-key coverage, then reject version/content conflicts before complete=true.",
+      "pr": 398,
+      "regression": "a closed assembled graph cannot replace a missing checkpoint batch",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/unbacked-checkpoint-before.log",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/unbacked-checkpoint-after.log",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log"
+      ],
+      "verdict": "FIXED_BEFORE_FIRST_PUSH_LOCAL_REGRESSION_PASS_CI_PENDING"
     }
   ],
   "environment_incidents": [
@@ -1241,6 +1345,32 @@
       "cause": "UNKNOWN; not attributed to timeout, host drift or user cancellation without evidence.",
       "accepted_progress_retained": "Prior verified checkpoint artifact12345078304 from39596471051 remains available.",
       "next_action": "Inspect GitHub runner/service incident diagnostics and instrument bounded acquisition if needed. Future resume must satisfy same-SHA, epoch and age checks; expired checkpoint cannot be re-labelled fresh."
+    },
+    {
+      "id": "ENV-006",
+      "scope": "Local evidence archiver, not website or GitHub source artifact",
+      "cause": "Artifact names repeat across workflow attempts; initial local helper keyed files by name and overwrote the earlier7819-byte failed-attempt ZIP with the successful26881259-byte ZIP.",
+      "remedy": "Use immutable numeric artifact ID plus name and exclusive creation; recover failed ZIP directly from official ID and preserve initial misleading receipt separately. No GitHub or original checkpoint evidence was deleted.",
+      "regression": "node --test work/artifact-target.test.cjs PASS",
+      "status": "RESOLVED_LOCALLY_ORIGINAL_IDS_AND_DIGESTS_RECONCILED",
+      "records": [
+        {
+          "id": 12360303109,
+          "name": "web-r2c4-published-evidence",
+          "file": "C:\\Users\\ovidi\\Documents\\Codex\\2026-10-19\\roadmap-master-pentru-codex-reforma-teritorial\\outputs\\resume-2026-10-21T16-08-19-927Z\\published-main476\\12360303109-web-r2c4-published-evidence.zip",
+          "digest": "sha256:b5ff55fb8c2d04b4b077fb9688ce4bbc622a9d4101e7745890aa1c4a0ea3209f",
+          "bytes": 7819,
+          "status": "ORIGINAL_ARTIFACT_BYTES_VERIFIED_NOT_ATTEMPT_VERDICT"
+        },
+        {
+          "id": 12359299957,
+          "name": "web-r2c4-published-evidence",
+          "file": "C:\\Users\\ovidi\\Documents\\Codex\\2026-10-19\\roadmap-master-pentru-codex-reforma-teritorial\\outputs\\resume-2026-10-21T16-08-19-927Z\\published-main476\\12359299957-web-r2c4-published-evidence.zip",
+          "digest": "sha256:613ddb50dd987420f532ec35ad26a2dcc723c5a1633b73d0c0a283b761c76bfe",
+          "bytes": 26881259,
+          "status": "ORIGINAL_ARTIFACT_BYTES_VERIFIED_NOT_ATTEMPT_VERDICT"
+        }
+      ]
     }
   ],
   "open_evidence_gates": [
@@ -1284,5 +1414,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-21T16:44:44.866Z"
+  "updated_at": "2026-10-21T17:24:13.761Z"
 }

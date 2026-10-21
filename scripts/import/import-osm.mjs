@@ -8,6 +8,7 @@ import {gzipSync,gunzipSync} from 'node:zlib';
 import {osmManifestPath} from '../lib/osm-source-paths.mjs';
 import {execFileSync} from 'node:child_process';
 import {createOverpassTransport,openCaptureCheckpoint,partitionInventory,mergeOsmElements,assertCaptureEpoch} from '../lib/osm-capture-session.mjs';
+import {acquireLayeredClosure,openObjectCheckpoint,objectQuery} from '../lib/osm-layered-acquisition.mjs';
 
 const MANIFEST=osmManifestPath(process.env.OSM_MANIFEST_PATH||'data/sources/osm-current.json');
 const SNAPSHOT_DIR='data/sources/osm-snapshots';
@@ -38,6 +39,9 @@ const captureBudget=()=>{if(Date.now()-captureStarted>=22*60000)throw Object.ass
 const checkpointDirectory='outputs/osm-capture-checkpoint';
 async function preserveHttpBody(record,body){await mkdir(checkpointDirectory+'/http',{recursive:true});const digest=createHash('sha256').update(body).digest('hex');await writeFile(checkpointDirectory+'/http/'+digest+'.response.gz',gzipSync(Buffer.from(body),{level:9}));await appendFile(checkpointDirectory+'/http/receipts.jsonl',JSON.stringify({...record,body_sha256:digest,body_bytes:Buffer.byteLength(body),stored_as:digest+'.response.gz'})+'\n');}
 const transport=createOverpassTransport({endpoints:ENDPOINTS,timeoutMs:OVERPASS_REQUEST_TIMEOUT_MS,onAttempt:record=>console.log(JSON.stringify({osm_transport:record})),onResponse:preserveHttpBody});
+// Explicit object lookups have no recursive expansion and a smaller request
+// budget. Verification and the total capture/restore boundaries are unchanged.
+const objectTransport=createOverpassTransport({endpoints:ENDPOINTS,timeoutMs:45000,onAttempt:record=>console.log(JSON.stringify({osm_transport:record})),onResponse:preserveHttpBody});
 const sha256=value=>createHash('sha256').update(value).digest('hex');
 const snapshotPath=(code,semanticSha)=>`${SNAPSHOT_DIR}/${code.toLowerCase()}-${semanticSha}.json.gz`;
 const maxIsoTimestamp=values=>{
@@ -242,9 +246,43 @@ async function refreshRequiredRelationsFromOsmApi(raw,code,cfg){
  return {raw:{...raw,elements:[...byKey.values()]},attempts};
 }
 async function fetchCountry(code,cfg,previousRaw){
+ if(MANIFEST==='data/sources/osm-source-current.json')return fetchCountryLayered(code,cfg,previousRaw);
  // Inventory first: the failed live run spent 25 minutes inside a recursive
  // monolithic retry matrix. Bounded category/regional shards retain progress.
  return fetchCountryChunked(code,cfg,previousRaw);
+}
+async function fetchCountryLayered(code,cfg,previousRaw){
+ let resume=process.env.OSM_CAPTURE_RESUME==='1';
+ if(resume)try{await readFile(checkpointDirectory+'/'+code+'/latest.json');}catch(error){if(error.code==='ENOENT')resume=false;else throw error;}
+ const scopeSha=sha256(JSON.stringify({manifest:MANIFEST,cfg,query:inventoryQueryFor(cfg),transport:'pinned_epoch_unique_object_layers_v1',relationSize:100,waySize:200,nodeSize:2000}));
+ const checkpoint=await openObjectCheckpoint({directory:checkpointDirectory,country:code,scopeSha,sourceSha,resume});
+ const request=async(query,purpose)=>{captureBudget();return objectTransport(query,code+':'+purpose,{maxAttempts:2});};
+ const inventory=resume?await checkpoint.inventory():await checkpoint.inventory(await request(inventoryQueryFor(cfg),'layered-inventory'));
+ captureEpochByCountry.set(code,checkpoint.state.epoch);
+ const continuity=await recoverPreviousScopeRelations(inventory.raw,previousRaw,code,cfg);
+ const seed={version:0.6,elements:continuity.raw.elements.filter(e=>e.type==='relation')};
+ const originalIds=new Set(inventory.raw.elements.map(r=>r.id)),extra=seed.elements.filter(r=>!originalIds.has(r.id));
+ if(extra.length)await checkpoint.objects('relation',extra.map(r=>r.id),{raw:{version:0.6,elements:extra},attempts:continuity.attempts});
+ const relationIds=seed.elements.filter(r=>relationMatchesScope(r,cfg)).map(r=>r.id).sort((a,b)=>a-b);
+ await checkpoint.plan(relationIds);let completedBatches=0;
+ let raw=await acquireLayeredClosure(seed,{
+  epoch:checkpoint.state.epoch,budget:captureBudget,
+  fetchObjects:(type,ids)=>request(objectQuery(type,ids,checkpoint.state.epoch),'layered-'+type+'-'+sha256(JSON.stringify(ids)).slice(0,16)),
+  fetchOne:(type,id)=>fetchRelationFullFromOsmApi(id,code,{type}),
+  loadPart:(type,ids)=>checkpoint.objects(type,ids),savePart:(type,ids,result)=>checkpoint.objects(type,ids,result),
+  onBatch:(type,ids)=>console.log('OSM '+code+': verified object batch '+(++completedBatches)+'; '+type+' '+ids.length+'; epoch '+checkpoint.state.epoch)
+ });
+ const authoritative=await refreshRequiredRelationsFromOsmApi(raw,code,cfg);raw=authoritative.raw;
+ const selectedRelationIds=[...new Set(raw.elements.filter(r=>relationMatchesScope(r,cfg)).map(r=>Number(r.id)))].sort((a,b)=>a-b);
+ raw=await closeRawDependencies(raw,selectedRelationIds,code,authoritative.attempts);assertCaptureEpoch(raw,checkpoint.state.epoch);
+ const counts=validateRaw(raw,code,cfg),canonical=canonicalRaw(raw),compressed=gzipSync(Buffer.from(canonical),{level:9,mtime:0});
+ await checkpoint.finish(relationIds,raw);
+ const objectAttempts=Object.values(checkpoint.state.objects).flatMap(r=>r.attempts);
+ console.log('OSM '+code+': COMPLETE unique object layers; '+selectedRelationIds.length+' selected relations; '+counts.element_count+' elements');
+ return {canonical,compressed,semanticSha:sha256(canonical),compressedSha:sha256(compressed),counts,endpoint:inventory.endpoint,querySha256:sha256(inventoryQueryFor(cfg)),selectedRelationIds,
+  attempts:[...inventory.attempts,...objectAttempts],authoritativeRelationAttempts:authoritative.attempts,continuityRelationAttempts:continuity.attempts,
+  continuityRecoveredRelationIds:continuity.recovered_relation_ids,continuityRetiredRelationIds:continuity.retired_relation_ids,
+  fetchMode:'pinned_epoch_unique_object_layers_v1',captureEpoch:checkpoint.state.epoch,captureStartedAt:checkpoint.state.started_at,captureResumed:resume};
 }
 async function writeAtomic(path,bytes){
  const tmp=`${path}.tmp-${process.pid}`;

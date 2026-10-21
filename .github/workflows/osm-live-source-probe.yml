@@ -131,7 +131,7 @@ jobs:
         run: node scripts/process/restore-osm-capture-checkpoint.mjs
 
       - name: Regression tests for transport, resume and exact-head provenance
-        run: node --test scripts/test/osm-capture-session.test.mjs scripts/test/osm-live-probe-contract.test.mjs
+        run: node --test scripts/test/osm-capture-session.test.mjs scripts/test/osm-layered-acquisition.test.mjs scripts/test/osm-live-probe-contract.test.mjs scripts/test/osm-layered-evidence.test.mjs
 
       - name: Capture verified current OSM source
         timeout-minutes: 25

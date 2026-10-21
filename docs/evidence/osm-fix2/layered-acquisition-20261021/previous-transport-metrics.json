@@ -1,0 +1,30 @@
+{
+  "run": 39646938698,
+  "job": 119384882160,
+  "decoded_job_log_sha256": "1a3d5d49a2c4cd8b18c7db07516c5b35c378ebef1ed4c15c4c69056c4e41c8b3",
+  "retrieved_at": "2026-10-21T21:53:00.266Z",
+  "attempts": 34,
+  "groups": {
+    "https://overpass-api.de/api/interpreter success": {
+      "requests": 17,
+      "duration_ms": 619691,
+      "body_bytes": 36201084
+    },
+    "https://overpass.kumi.systems/api/interpreter failure": {
+      "requests": 5,
+      "duration_ms": 300003,
+      "body_bytes": 0
+    },
+    "https://overpass.private.coffee/api/interpreter failure": {
+      "requests": 5,
+      "duration_ms": 300002,
+      "body_bytes": 0
+    },
+    "https://overpass-api.de/api/interpreter failure": {
+      "requests": 7,
+      "duration_ms": 89831,
+      "body_bytes": 4060
+    }
+  },
+  "scope": "FINAL_RESUME_ONLY_NOT_P50_OR_P95"
+}

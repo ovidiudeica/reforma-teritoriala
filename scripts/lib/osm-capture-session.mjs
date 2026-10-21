@@ -21,7 +21,7 @@ export function classifyStagedCapture(capture,sha){const complete=capture?.sourc
 // One sequential request at a time. A query has a total attempt budget, rather
 // than restarting the complete endpoint/retry matrix at every bisection.
 export function createOverpassTransport({endpoints,fetchFn=fetch,sleep=ms=>new Promise(r=>setTimeout(r,ms)),now=Date.now,timeoutMs=60000,maxSessionMs=22*60000,onAttempt=()=>{},onResponse=async()=>{}}){
- assert.ok(endpoints.length>0);let cursor=0;const started=now(),cooldown=new Map(),failures=new Map();
+ assert.ok(endpoints.length>0);let cursor=0;const started=now(),cooldown=new Map(),failures=new Map(),timedOut=new Set();
  return async function request(query,purpose,{maxAttempts=2}={}){
   const attempts=[];let last;
   for(let attempt=0;attempt<maxAttempts;attempt++){
@@ -29,7 +29,10 @@ export function createOverpassTransport({endpoints,fetchFn=fetch,sleep=ms=>new P
    const ordered=endpoints.map((_,i)=>endpoints[(cursor+i)%endpoints.length]);
    // Rotation breaks ties, but an expired cooldown does not erase a history
    // of failures when another eligible endpoint has actually succeeded.
-   let endpoint=ordered.filter(e=>(cooldown.get(e)||0)<=now()).sort((a,b)=>(failures.get(a)||0)-(failures.get(b)||0))[0];
+   // A complete client timeout is stronger evidence of an unusable route than
+   // a fast transient HTTP response. Only an actual successful response clears
+   // this history; an expired cooldown alone does not rehabilitate a dead route.
+   let endpoint=ordered.filter(e=>(cooldown.get(e)||0)<=now()).sort((a,b)=>Number(timedOut.has(a))-Number(timedOut.has(b))||(failures.get(a)||0)-(failures.get(b)||0))[0];
    if(!endpoint){endpoint=ordered.reduce((a,b)=>(cooldown.get(a)||0)<=(cooldown.get(b)||0)?a:b);const delay=cooldown.get(endpoint)-now();if(now()-started+delay>=maxSessionMs)throw Object.assign(Error('Endpoint cooldown exceeds capture deadline'),{transportBudgetExceeded:true,attempts});await sleep(delay);}
    cursor=(endpoints.indexOf(endpoint)+1)%endpoints.length;
    const controller=new AbortController(),at=now(),timer=setTimeout(()=>controller.abort(),timeoutMs);let wait=0,observed;
@@ -40,10 +43,10 @@ export function createOverpassTransport({endpoints,fetchFn=fetch,sleep=ms=>new P
     wait=retryAfterMs(response.headers.get('retry-after'),now());
     if(!response.ok){const error=Error(`Overpass HTTP ${response.status}`);error.record=record;error.retryable=[429,500,502,503,504].includes(response.status);throw error;}
     const raw=JSON.parse(body);assert.ok(Array.isArray(raw.elements)&&!raw.remark,'Partial Overpass response or missing elements');
-    failures.delete(endpoint);cooldown.delete(endpoint);
+    failures.delete(endpoint);cooldown.delete(endpoint);timedOut.delete(endpoint);
     Object.assign(record,{status:'success',element_count:raw.elements.length,osm_timestamp:raw.osm3s?.timestamp_osm_base??null});attempts.push(record);onAttempt(record);return {raw,body,endpoint,attempts};
    }catch(error){
-    last=error;const consecutive=(failures.get(endpoint)||0)+1;failures.set(endpoint,consecutive);const healthDelay=Math.max(wait,Math.min(300000,2000*2**Math.min(consecutive-1,8)));cooldown.set(endpoint,now()+healthDelay);const record={...observed,...error.record,purpose,endpoint,attempt:attempt+1,started_at:new Date(at).toISOString(),duration_ms:now()-at,status:'failure',timeout:controller.signal.aborted,consecutive_failures:consecutive,cooldown_ms:healthDelay,error:error.message};attempts.push(record);onAttempt(record);
+    last=error;if(controller.signal.aborted)timedOut.add(endpoint);const consecutive=(failures.get(endpoint)||0)+1;failures.set(endpoint,consecutive);const healthDelay=Math.max(wait,Math.min(300000,2000*2**Math.min(consecutive-1,8)));cooldown.set(endpoint,now()+healthDelay);const record={...observed,...error.record,purpose,endpoint,attempt:attempt+1,started_at:new Date(at).toISOString(),duration_ms:now()-at,status:'failure',timeout:controller.signal.aborted,consecutive_failures:consecutive,cooldown_ms:healthDelay,error:error.message};attempts.push(record);onAttempt(record);
     if(error.transportBudgetExceeded)throw Object.assign(error,{attempts});
     if(error.retryable===false)break;
    }finally{clearTimeout(timer);}

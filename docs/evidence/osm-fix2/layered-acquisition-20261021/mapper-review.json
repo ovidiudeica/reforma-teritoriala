@@ -1,0 +1,1076 @@
+{
+  "schema": "osm-minimal-boundary-reference-review-v1",
+  "started_at": "2026-10-21T21:44:45.433Z",
+  "completed_at": "2026-10-21T21:44:46.831Z",
+  "status": "REVIEW_COMPLETE_NOT_AN_OSM_EDIT_OR_ACCEPTANCE",
+  "requests": 27,
+  "rows": [
+    {
+      "relation_id": 18967493,
+      "version_probes": [
+        {
+          "type": "node",
+          "id": 12318728194,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "node",
+          "id": 12318728593,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "way",
+          "id": 1376179876,
+          "expected_version": 8,
+          "current_version": 8,
+          "unchanged": true
+        },
+        {
+          "type": "way",
+          "id": 1430569793,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "relation",
+          "id": 18967493,
+          "expected_version": 6,
+          "current_version": 6,
+          "unchanged": true
+        }
+      ],
+      "changed": [],
+      "old_full_body_sha256": "4a723a70c4795c1af555fcad91e4a89af1d44e247bac45c46d6540ba307d01bd",
+      "public_edit_performed": false,
+      "global_node_merge_proposed": false,
+      "selected_alternative": null,
+      "reverse_usages": [
+        {
+          "node_id": 12318728194,
+          "ways": [
+            {
+              "id": 996462603,
+              "version": 2,
+              "positions": [
+                3
+              ],
+              "tags": {
+                "leisure": "stadium",
+                "name": "Stadionul Horești"
+              }
+            },
+            {
+              "id": 1376179876,
+              "version": 8,
+              "positions": [
+                457
+              ],
+              "tags": {}
+            },
+            {
+              "id": 1430569791,
+              "version": 2,
+              "positions": [
+                4
+              ],
+              "tags": {}
+            },
+            {
+              "id": 1430569795,
+              "version": 2,
+              "positions": [
+                46
+              ],
+              "tags": {
+                "landuse": "meadow"
+              }
+            },
+            {
+              "id": 1431992242,
+              "version": 1,
+              "positions": [
+                5
+              ],
+              "tags": {
+                "landuse": "brownfield"
+              }
+            }
+          ]
+        },
+        {
+          "node_id": 12318728593,
+          "ways": [
+            {
+              "id": 1430569787,
+              "version": 2,
+              "positions": [
+                0
+              ],
+              "tags": {}
+            },
+            {
+              "id": 1430569788,
+              "version": 2,
+              "positions": [
+                45
+              ],
+              "tags": {}
+            },
+            {
+              "id": 1430569790,
+              "version": 2,
+              "positions": [
+                0
+              ],
+              "tags": {}
+            },
+            {
+              "id": 1430569793,
+              "version": 1,
+              "positions": [
+                4
+              ],
+              "tags": {}
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "way_id": 1376179876,
+          "way_version": 8,
+          "replace_reference_only": {
+            "from": 12318728194,
+            "to": 12318728593,
+            "node_index": 457,
+            "node_count": 458
+          },
+          "coordinate_sequence_sha256": "9aaa2f41ec716ac3a55cfe9e9b22a2347c22fee337064ddf789174033b3aba7b",
+          "coordinates_unchanged": true,
+          "geometry_reference": "PRESERVED_FULL_WITH_UNCHANGED_RELATION_WAY_AND_TERMINAL_NODE_VERSIONS_NOT_NEW_ATOMIC_GEOMETRY_CAPTURE",
+          "parent_relations": [
+            {
+              "id": 18967493,
+              "version": 6,
+              "tags": {
+                "admin_level": "9",
+                "boundary": "administrative",
+                "full_name": "raionul Ialoveni, satul Horești",
+                "name": "Horești",
+                "name:prefix": "satul",
+                "name:ro": "Horești",
+                "name:suffix:en": "village",
+                "official_name": "satul Horești",
+                "place": "village",
+                "ref:cuatm:codunic": "5518",
+                "type": "boundary"
+              }
+            }
+          ],
+          "parent_impacts": [
+            {
+              "relation_id": 18967493,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 465,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 18967493,
+                    "relation_version": 6,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 12318728194,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 12318728593,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.858393,
+                          46.8331996
+                        ],
+                        "node_ids": [
+                          12318728194,
+                          12318728593
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 464,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            }
+          ],
+          "no_other_parent_regression_observed": true
+        },
+        {
+          "way_id": 1430569793,
+          "way_version": 1,
+          "replace_reference_only": {
+            "from": 12318728593,
+            "to": 12318728194,
+            "node_index": 4,
+            "node_count": 5
+          },
+          "coordinate_sequence_sha256": "b0553ca368a25aec42e468bd4ea8b62e602d707f29dfafd89231ef6acbf47477",
+          "coordinates_unchanged": true,
+          "geometry_reference": "PRESERVED_FULL_WITH_UNCHANGED_RELATION_WAY_AND_TERMINAL_NODE_VERSIONS_NOT_NEW_ATOMIC_GEOMETRY_CAPTURE",
+          "parent_relations": [
+            {
+              "id": 13014028,
+              "version": 12,
+              "tags": {
+                "admin_level": "8",
+                "boundary": "administrative",
+                "name": "Zîmbreni",
+                "name:en": "Zimbreni",
+                "name:prefix": "comuna",
+                "name:ro": "Zîmbreni",
+                "official_name": "comuna Zîmbreni",
+                "place": "municipality",
+                "place:ro": "comună",
+                "type": "boundary",
+                "wikidata": "Q2443211",
+                "wikipedia": "ro:Zîmbreni, Ialoveni"
+              }
+            },
+            {
+              "id": 18822471,
+              "version": 8,
+              "tags": {
+                "admin_level": "8",
+                "boundary": "administrative",
+                "name": "Horești",
+                "name:en": "Horesti",
+                "name:prefix": "satul",
+                "name:ro": "Horești",
+                "official_name": "satul Horești",
+                "place": "municipality",
+                "place:ro": "sat",
+                "type": "boundary",
+                "wikidata": "Q2442817",
+                "wikipedia": "ro:Horești, Ialoveni"
+              }
+            },
+            {
+              "id": 18966832,
+              "version": 6,
+              "tags": {
+                "admin_level": "9",
+                "boundary": "administrative",
+                "full_name": "raionul Ialoveni, comuna Zîmbreni, satul Zîmbreni",
+                "name": "Zîmbreni",
+                "name:prefix": "satul",
+                "name:ro": "Zîmbreni",
+                "name:suffix:en": "village",
+                "official_name": "satul Zîmbreni",
+                "place": "village",
+                "ref:cuatm:codunic": "5536",
+                "type": "boundary"
+              }
+            },
+            {
+              "id": 18967493,
+              "version": 6,
+              "tags": {
+                "admin_level": "9",
+                "boundary": "administrative",
+                "full_name": "raionul Ialoveni, satul Horești",
+                "name": "Horești",
+                "name:prefix": "satul",
+                "name:ro": "Horești",
+                "name:suffix:en": "village",
+                "official_name": "satul Horești",
+                "place": "village",
+                "ref:cuatm:codunic": "5518",
+                "type": "boundary"
+              }
+            }
+          ],
+          "parent_impacts": [
+            {
+              "relation_id": 13014028,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 362,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 363,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 13014028,
+                    "relation_version": 12,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 12318728194,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 12318728593,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.858393,
+                          46.8331996
+                        ],
+                        "node_ids": [
+                          12318728194,
+                          12318728593
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            },
+            {
+              "relation_id": 18822471,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 495,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 496,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 18822471,
+                    "relation_version": 8,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 12318728194,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 12318728593,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.858393,
+                          46.8331996
+                        ],
+                        "node_ids": [
+                          12318728194,
+                          12318728593
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            },
+            {
+              "relation_id": 18966832,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 448,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 449,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 18966832,
+                    "relation_version": 6,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 12318728593,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 12318728194,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.858393,
+                          46.8331996
+                        ],
+                        "node_ids": [
+                          12318728593,
+                          12318728194
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            },
+            {
+              "relation_id": 18967493,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 465,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 18967493,
+                    "relation_version": 6,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 12318728194,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 12318728593,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.858393,
+                          46.8331996
+                        ],
+                        "node_ids": [
+                          12318728194,
+                          12318728593
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 464,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            }
+          ],
+          "no_other_parent_regression_observed": false
+        }
+      ],
+      "status": "UNCHANGED_UPSTREAM_BLOCKED_SOURCE_TRANSITION_REVIEW_ONLY",
+      "preserved_full_repository_path": "docs/evidence/osm-fix2/source-repair-review-20261021/closure/4a723a70c4795c1af555fcad91e4a89af1d44e247bac45c46d6540ba307d01bd.response",
+      "technically_minimal_conditional_proposal": {
+        "way_id": 1376179876,
+        "expected_way_version": 8,
+        "from": 12318728194,
+        "to": 12318728593,
+        "node_index": 457,
+        "node_count": 458,
+        "scope": "CHANGE_ONE_BOUNDARY_WAY_REFERENCE_ONLY_NEVER_MERGE_NODE_OBJECTS",
+        "mapper_original_source_review_required": true,
+        "public_edit_authorized": false
+      }
+    },
+    {
+      "relation_id": 18968082,
+      "version_probes": [
+        {
+          "type": "node",
+          "id": 8265822008,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "node",
+          "id": 11649857778,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "way",
+          "id": 1376180490,
+          "expected_version": 4,
+          "current_version": 4,
+          "unchanged": true
+        },
+        {
+          "type": "way",
+          "id": 1376180731,
+          "expected_version": 6,
+          "current_version": 6,
+          "unchanged": true
+        },
+        {
+          "type": "way",
+          "id": 1492661493,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "way",
+          "id": 1492661495,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "way",
+          "id": 1494605624,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "way",
+          "id": 1494605625,
+          "expected_version": 1,
+          "current_version": 1,
+          "unchanged": true
+        },
+        {
+          "type": "relation",
+          "id": 18968082,
+          "expected_version": 7,
+          "current_version": 7,
+          "unchanged": true
+        }
+      ],
+      "changed": [],
+      "old_full_body_sha256": "3615b35c5421b693dcb9621011eb26eb3731b5082d5897964b03558419fb2389",
+      "public_edit_performed": false,
+      "global_node_merge_proposed": false,
+      "selected_alternative": null,
+      "reverse_usages": [
+        {
+          "node_id": 11649857778,
+          "ways": [
+            {
+              "id": 1253279692,
+              "version": 11,
+              "positions": [
+                258
+              ],
+              "tags": {
+                "landuse": "residential",
+                "residential": "rural"
+              }
+            },
+            {
+              "id": 1376180731,
+              "version": 6,
+              "positions": [
+                227
+              ],
+              "tags": {}
+            }
+          ]
+        },
+        {
+          "node_id": 8265822008,
+          "ways": [
+            {
+              "id": 1492661536,
+              "version": 1,
+              "positions": [
+                1
+              ],
+              "tags": {
+                "landuse": "meadow"
+              }
+            },
+            {
+              "id": 1494605623,
+              "version": 1,
+              "positions": [
+                21
+              ],
+              "tags": {}
+            },
+            {
+              "id": 1494605624,
+              "version": 1,
+              "positions": [
+                0
+              ],
+              "tags": {}
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "way_id": 1376180731,
+          "way_version": 6,
+          "replace_reference_only": {
+            "from": 11649857778,
+            "to": 8265822008,
+            "node_index": 227,
+            "node_count": 228
+          },
+          "coordinate_sequence_sha256": "1cb2c1b6594b9030167fab97f2dcdf0cb91fd5cdcdd305d229abd7a6132bae25",
+          "coordinates_unchanged": true,
+          "geometry_reference": "PRESERVED_FULL_WITH_UNCHANGED_RELATION_WAY_AND_TERMINAL_NODE_VERSIONS_NOT_NEW_ATOMIC_GEOMETRY_CAPTURE",
+          "parent_relations": [
+            {
+              "id": 18968082,
+              "version": 7,
+              "tags": {
+                "admin_level": "9",
+                "boundary": "administrative",
+                "full_name": "municipiul Chișinău, comuna Tohatin, satul Buneți",
+                "name": "Buneți",
+                "name:prefix": "satul",
+                "name:ro": "Buneți",
+                "name:suffix:en": "village",
+                "official_name": "satul Buneți",
+                "place": "village",
+                "ref:cuatm:codunic": "0147",
+                "type": "boundary"
+              }
+            }
+          ],
+          "parent_impacts": [
+            {
+              "relation_id": 18968082,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 375,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 18968082,
+                    "relation_version": 7,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 11649857778,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 8265822008,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.9073227,
+                          47.0786791
+                        ],
+                        "node_ids": [
+                          11649857778,
+                          8265822008
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 374,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            }
+          ],
+          "no_other_parent_regression_observed": true
+        },
+        {
+          "way_id": 1494605624,
+          "way_version": 1,
+          "replace_reference_only": {
+            "from": 8265822008,
+            "to": 11649857778,
+            "node_index": 0,
+            "node_count": 5
+          },
+          "coordinate_sequence_sha256": "9ce28ef5f5427d92d7a5ccce12a63cb3c09e7a367b99a0b89aee4b6ed36a7827",
+          "coordinates_unchanged": true,
+          "geometry_reference": "PRESERVED_FULL_WITH_UNCHANGED_RELATION_WAY_AND_TERMINAL_NODE_VERSIONS_NOT_NEW_ATOMIC_GEOMETRY_CAPTURE",
+          "parent_relations": [
+            {
+              "id": 1752520,
+              "version": 28,
+              "tags": {
+                "admin_level": "8",
+                "boundary": "administrative",
+                "name": "Tohatin",
+                "name:en": "Tohatin",
+                "name:prefix": "comuna",
+                "name:ro": "Tohatin",
+                "name:ru": "Тохатин",
+                "name:uk": "Тохатін",
+                "official_name": "comuna Tohatin",
+                "place": "municipality",
+                "place:ro": "comună",
+                "ref:cuatm:2:codstatistic": "0100000",
+                "ref:cuatm:2:codunic": "0100",
+                "ref:cuatm:codstatistic": "0146000",
+                "ref:cuatm:codunic": "0146",
+                "ref:cuatm:statut": "8",
+                "type": "boundary",
+                "wikidata": "Q20858860",
+                "wikipedia": "ro:comuna Tohatin, Chișinău"
+              }
+            },
+            {
+              "id": 1782011,
+              "version": 39,
+              "tags": {
+                "admin_level": "8",
+                "boundary": "administrative",
+                "name": "Stăuceni",
+                "name:en": "Stăuceni",
+                "name:prefix": "orașul",
+                "name:ro": "Stăuceni",
+                "name:ru": "Ставчены",
+                "name:uk": "Ставчени",
+                "official_name": "orașul Stăuceni",
+                "place": "town",
+                "place:ro": "oraș",
+                "ref:cuatm:2:codstatistic": "0100000",
+                "ref:cuatm:2:codunic": "0100",
+                "ref:cuatm:codstatistic": "0154000",
+                "ref:cuatm:codunic": "3153",
+                "ref:cuatm:statut": "3",
+                "type": "boundary",
+                "wikidata": "Q2387813",
+                "wikipedia": "ro:Stăuceni"
+              }
+            },
+            {
+              "id": 18968082,
+              "version": 7,
+              "tags": {
+                "admin_level": "9",
+                "boundary": "administrative",
+                "full_name": "municipiul Chișinău, comuna Tohatin, satul Buneți",
+                "name": "Buneți",
+                "name:prefix": "satul",
+                "name:ro": "Buneți",
+                "name:suffix:en": "village",
+                "official_name": "satul Buneți",
+                "place": "village",
+                "ref:cuatm:codunic": "0147",
+                "type": "boundary"
+              }
+            }
+          ],
+          "parent_impacts": [
+            {
+              "relation_id": 1752520,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 262,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 263,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 1752520,
+                    "relation_version": 28,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 8265822008,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 11649857778,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.9073227,
+                          47.0786791
+                        ],
+                        "node_ids": [
+                          8265822008,
+                          11649857778
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            },
+            {
+              "relation_id": 1782011,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 931,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 932,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 1782011,
+                    "relation_version": 39,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 8265822008,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 11649857778,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.9073227,
+                          47.0786791
+                        ],
+                        "node_ids": [
+                          8265822008,
+                          11649857778
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            },
+            {
+              "relation_id": 18968082,
+              "before": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 375,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 1,
+                "topology_issues": [
+                  {
+                    "relation_id": 18968082,
+                    "relation_version": 7,
+                    "odd_endpoints": {
+                      "outer": [
+                        {
+                          "node_id": 11649857778,
+                          "degree": 1
+                        },
+                        {
+                          "node_id": 8265822008,
+                          "degree": 1
+                        }
+                      ],
+                      "inner": []
+                    },
+                    "coincident_distinct_endpoint_groups": [
+                      {
+                        "role": "outer",
+                        "coordinates": [
+                          28.9073227,
+                          47.0786791
+                        ],
+                        "node_ids": [
+                          11649857778,
+                          8265822008
+                        ]
+                      }
+                    ],
+                    "invalid_geometry_members": []
+                  }
+                ]
+              },
+              "after_simulated": {
+                "code": "MD",
+                "selected_relation_count": 1,
+                "checked_dependency_count": 374,
+                "missing_reference_count": 0,
+                "missing_references": [],
+                "invalid_coordinate_count": 0,
+                "invalid_coordinates": [],
+                "topology_issue_count": 0,
+                "topology_issues": []
+              },
+              "status": "SIMULATION_ONLY_NOT_SOURCE_CORRECTION"
+            }
+          ],
+          "no_other_parent_regression_observed": false
+        }
+      ],
+      "status": "UNCHANGED_UPSTREAM_BLOCKED_SOURCE_TRANSITION_REVIEW_ONLY",
+      "preserved_full_repository_path": "docs/evidence/osm-fix2/source-repair-review-20261021/closure/3615b35c5421b693dcb9621011eb26eb3731b5082d5897964b03558419fb2389.response",
+      "technically_minimal_conditional_proposal": {
+        "way_id": 1376180731,
+        "expected_way_version": 6,
+        "from": 11649857778,
+        "to": 8265822008,
+        "node_index": 227,
+        "node_count": 228,
+        "scope": "CHANGE_ONE_BOUNDARY_WAY_REFERENCE_ONLY_NEVER_MERGE_NODE_OBJECTS",
+        "mapper_original_source_review_required": true,
+        "public_edit_authorized": false
+      }
+    }
+  ],
+  "policy": "Two alternative per-boundary-way endpoint-reference substitutions are evaluated, not a global merge of coincident nodes. No alternative is selected. Qualified source and shared-use review plus separate public-edit authorization remain necessary.",
+  "source_atomic": false,
+  "public_edit_performed": false,
+  "source_promoted": false,
+  "actual_mutation_allowed": false,
+  "p91_import_allowed": false
+}
