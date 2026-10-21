@@ -568,9 +568,16 @@
       "pr": 398,
       "verification_sha": null,
       "evidence": [
-        "docs/evidence/osm-fix2/recursive-resume-20261021/sha256-manifest.json"
+        "docs/evidence/osm-fix2/recursive-resume-20261021/sha256-manifest.json",
+        "docs/evidence/osm-fix2/endpoint-priority-20261021/sha256-manifest.json"
       ],
-      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_NOT_SOURCE_ACCEPTANCE"
+      "verdict": "FOLLOWUP_FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_NEW_AUTHENTIC_CAPTURE",
+      "live_observation": {
+        "run": 39633611181,
+        "sha": "933fa40e40ae18a9413685812d67326a15b1ac1e",
+        "result": "19/20 workflows success, A/B success, source incomplete; backoff alone does not prefer healthier ready endpoint"
+      },
+      "followup_change": "Prefer eligible endpoint with fewest consecutive failures; stable rotation only breaks equal-health ties. Retry-After/cooldown and strict capture rules unchanged."
     }
   ],
   "environment_incidents": [
@@ -1277,5 +1284,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-21T16:18:02.007Z"
+  "updated_at": "2026-10-21T16:44:44.866Z"
 }

@@ -27,7 +27,9 @@ export function createOverpassTransport({endpoints,fetchFn=fetch,sleep=ms=>new P
   for(let attempt=0;attempt<maxAttempts;attempt++){
    if(now()-started>=maxSessionMs)throw Object.assign(Error('OSM acquisition session deadline exhausted; checkpoint retained'),{transportBudgetExceeded:true,attempts});
    const ordered=endpoints.map((_,i)=>endpoints[(cursor+i)%endpoints.length]);
-   let endpoint=ordered.find(e=>(cooldown.get(e)||0)<=now());
+   // Rotation breaks ties, but an expired cooldown does not erase a history
+   // of failures when another eligible endpoint has actually succeeded.
+   let endpoint=ordered.filter(e=>(cooldown.get(e)||0)<=now()).sort((a,b)=>(failures.get(a)||0)-(failures.get(b)||0))[0];
    if(!endpoint){endpoint=ordered.reduce((a,b)=>(cooldown.get(a)||0)<=(cooldown.get(b)||0)?a:b);const delay=cooldown.get(endpoint)-now();if(now()-started+delay>=maxSessionMs)throw Object.assign(Error('Endpoint cooldown exceeds capture deadline'),{transportBudgetExceeded:true,attempts});await sleep(delay);}
    cursor=(endpoints.indexOf(endpoint)+1)%endpoints.length;
    const controller=new AbortController(),at=now(),timer=setTimeout(()=>controller.abort(),timeoutMs);let wait=0,observed;
