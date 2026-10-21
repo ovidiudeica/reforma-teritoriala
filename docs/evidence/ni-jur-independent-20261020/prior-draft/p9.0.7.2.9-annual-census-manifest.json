@@ -1,0 +1,122 @@
+{
+  "schema_version": "p90729-annual-publication-census-proof-v1",
+  "snapshot_cutoff": "2026-10-15",
+  "central_official_register": "http://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.0",
+  "collection": "ALL_46_MONTH_GROUPS_BY_DATE_2023_2026",
+  "archive_path": "docs/p9.0.7.2.9-annual-census.json.gz",
+  "compressed_archive_sha256": "8acc0d75a35f65fdac3e5fa88e04f6ef494f5f89822efa85b8467f2108f0a3ad",
+  "compressed_archive_bytes": 855633,
+  "compressed_archive_git_blob_sha1": "c45e0a8b9884f9b08936b6b573aa28c5379d5cc9",
+  "decompressed_archive_sha256": "0269fb83e168f7943dc3fa5b05c0c44939a8eee3dae25088d44c6bb9cf2efeda",
+  "decompressed_archive_bytes": 7812213,
+  "annual_publication_totals": [
+    {
+      "year": 2023,
+      "expected": 2390,
+      "count": 2390,
+      "months": 12,
+      "types": {
+        "Приказ": 1042,
+        "Указ": 174,
+        "Распоряжение": 130,
+        "Постановление": 521,
+        "Указание": 64,
+        "Закон": 431,
+        "Конституционный закон": 5,
+        "Техническая ошибка": 23
+      },
+      "sequential_range": {
+        "first": "2023000001",
+        "last": "2023002390"
+      },
+      "zero_duplicate_publication_ids": true,
+      "zero_missing_publication_ids": true,
+      "month_pages_scanned": 12
+    },
+    {
+      "year": 2024,
+      "expected": 2659,
+      "count": 2659,
+      "months": 12,
+      "types": {
+        "Постановление": 590,
+        "Приказ": 1007,
+        "Закон": 361,
+        "Указ": 343,
+        "Распоряжение": 318,
+        "Техническая ошибка": 11,
+        "Указание": 24,
+        "Конституционный закон": 4,
+        "Положение": 1
+      },
+      "sequential_range": {
+        "first": "2024000001",
+        "last": "2024002659"
+      },
+      "zero_duplicate_publication_ids": true,
+      "zero_missing_publication_ids": true,
+      "month_pages_scanned": 12
+    },
+    {
+      "year": 2025,
+      "expected": 2479,
+      "count": 2479,
+      "months": 12,
+      "types": {
+        "Постановление": 519,
+        "Техническая ошибка": 25,
+        "Приказ": 1022,
+        "Указание": 51,
+        "Распоряжение": 301,
+        "Указ": 285,
+        "Закон": 270,
+        "Положение": 1,
+        "Конституционный закон": 5
+      },
+      "sequential_range": {
+        "first": "2025000001",
+        "last": "2025002479"
+      },
+      "zero_duplicate_publication_ids": true,
+      "zero_missing_publication_ids": true,
+      "month_pages_scanned": 12
+    },
+    {
+      "year": 2026,
+      "expected": 1726,
+      "count": 1726,
+      "months": 10,
+      "types": {
+        "Приказ": 744,
+        "Постановление": 282,
+        "Распоряжение": 214,
+        "Указ": 217,
+        "Закон": 228,
+        "Указание": 24,
+        "Техническая ошибка": 10,
+        "Конституционный закон": 6,
+        "Инструкция": 1
+      },
+      "sequential_range": {
+        "first": "2026000001",
+        "last": "2026001726"
+      },
+      "zero_duplicate_publication_ids": true,
+      "zero_missing_publication_ids": true,
+      "month_pages_scanned": 10
+    }
+  ],
+  "official_publication_total": 9254,
+  "issuer_entity_authenticity_for_each_document": "NOT_VERIFIED_FROM_ISSUER_PRIMARY_HEADER_ALL_9254",
+  "issuer_counts_available_by_document_kind": true,
+  "issuer_counts_as_distinct_juridical_issuers_certified": false,
+  "all_annual_central_index_rows_verified": true,
+  "complete_other_issuer_portals": false,
+  "complete_new_legislative_system_parity": false,
+  "all_local_de_facto_council_and_CIK_acts_reconciled": false,
+  "full_2023_2026_legal_normative_exhaustiveness_certified": false,
+  "identities_preserved_without_semantic_adjudication": 85,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE",
+  "p91_import_allowed": false,
+  "actual_mutation_allowed": false
+}

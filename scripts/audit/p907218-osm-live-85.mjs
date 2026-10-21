@@ -4,6 +4,7 @@ import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import RelateOp from 'jsts/org/locationtech/jts/operation/relate/RelateOp.js';
 import {readTopologyGeometry} from '../lib/p82-topology.mjs';
 
@@ -116,6 +117,7 @@ async function full(id){
  }
  throw Error('OSM_full_unavailable_'+id+'_'+error);
 }
+async function main(){
 if(process.argv.includes('--self-test')){
  const sample='<osm><node id="1" lon="0" lat="0" version="1" timestamp="2026-01-01T00:00:00Z"/><node id="2" lon="1" lat="0" version="1" timestamp="2026-01-01T00:00:00Z"/><node id="3" lon="1" lat="1" version="1" timestamp="2026-01-01T00:00:00Z"/><way id="8" version="1" timestamp="2026-01-01T00:00:00Z"><nd ref="1"/><nd ref="2"/><nd ref="3"/><nd ref="1"/></way><relation id="9" version="1" timestamp="2026-01-01T00:00:00Z"><member type="way" ref="8" role="outer"/><tag k="name" v="A &amp; B"/></relation></osm>';
  const f=parseFull(sample),g=polygon(f.relations.get('9'),f.ways,f.nodes);
@@ -226,3 +228,6 @@ writeFileSync(resolve(folder,'live-source-85.json'),JSON.stringify(report,null,2
 writeFileSync(resolve(folder,'summary.json'),JSON.stringify({verdict,counts,baseline:cutoff,capture:report.live_capture},null,2)+'\n');
 console.log('P907218_SUMMARY '+JSON.stringify({verdict,counts}));
 if(failed.length)process.exitCode=2;
+
+}
+if(process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url)) await main();

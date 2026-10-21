@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {classifyDocumentResponse as classify} from '../lib/documentary-response.mjs';
+test('HTTP200 anti-DDoS placeholder is not a retrieved issuer index',()=>{assert.equal(classify(200,'text/html',Buffer.from('ANTIDDOS')).evidence_status,'BLOCKED_CONTENT');});
+test('HTTP success and PDF MIME cannot certify an HTML challenge as an original binary',()=>{assert.equal(classify(200,'application/pdf',Buffer.from('<html>challenge</html>')).evidence_status,'BLOCKED_CONTENT');assert.equal(classify(403,'application/pdf',Buffer.from('%PDF-1.7')).evidence_status,'BLOCKED_ACCESS');});
+test('actual binary magic and HTML structure remain distinct from legal certification',()=>{assert.equal(classify(200,'application/pdf',Buffer.from('%PDF-1.7')).evidence_status,'RETRIEVED_NOT_LEGAL_CERTIFICATION');assert.equal(classify(200,'text/html',Buffer.from('<html><body>Official index</body></html>')).evidence_status,'RETRIEVED_NOT_LEGAL_CERTIFICATION');});

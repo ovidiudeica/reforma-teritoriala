@@ -339,12 +339,13 @@
       "change": "Normalize ordered type/ref/role tuples while comparing way node sequences and node coordinates separately. Preserve both initial and corrected reports and all immutable original responses.",
       "regression": "scripts/test/osm-closure-audit.test.mjs: decoration/key-order differences do not imply membership drift; changed member type/ref/role still differ. Both real official full graphs remain blocked individually.",
       "pr": 398,
-      "verification_sha": null,
+      "verification_sha": "10154ab024b59d3d8d4d247f895221259ad0f6be",
       "evidence": [
         "docs/evidence/osm-fix2/source-repair-review-20261021/source-repair-proposal.initial.json",
-        "docs/evidence/osm-fix2/source-repair-review-20261021/source-repair-proposal.json"
+        "docs/evidence/osm-fix2/source-repair-review-20261021/source-repair-proposal.json",
+        "OSM continuity workflow39549975932 SUCCESS on10154ab024b59d3d8d4d247f895221259ad0f6be;40 relevant OSM regressions passed. Source-only promotion remains blocked independently."
       ],
-      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
+      "verdict": "CLOSED_RETEST_PASS_ON_DRAFT_PR_398_NOT_INTEGRATED"
     },
     {
       "id": "RM-018",
@@ -359,11 +360,34 @@
       "change": "Include all osm-*.mjs library modules, osm-*.test.mjs regressions and OSM-FIX.2 evidence in PR/push triggers. No permissions, gates, thresholds or tests are removed.",
       "regression": "scripts/test/osm-closure-audit.test.mjs simulates isolated file changes for eight concrete audited modules/tests against each PR/push trigger and requires selection.",
       "pr": 398,
-      "verification_sha": null,
+      "verification_sha": "10154ab024b59d3d8d4d247f895221259ad0f6be",
       "evidence": [
-        ".github/workflows/osm-source-continuity.yml"
+        ".github/workflows/osm-source-continuity.yml",
+        "OSM continuity workflow39549975932 SUCCESS on10154ab024b59d3d8d4d247f895221259ad0f6be;40 relevant OSM regressions passed. Source-only promotion remains blocked independently."
       ],
-      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
+      "verdict": "CLOSED_RETEST_PASS_ON_DRAFT_PR_398_NOT_INTEGRATED"
+    },
+    {
+      "id": "RM-019",
+      "severity": "P2",
+      "component": "NI evidence replay workflow dependency coverage",
+      "entities": [
+        "NI original-source replay",
+        "OSM transport and topology libraries",
+        "Protected ACTUAL reference inputs"
+      ],
+      "reproduction": "Run scripts/test/ni-evidence-dependency-coverage.test.mjs against main66a915b27a8ab8168df624749dc6d937295576af: pull_request omits scripts/lib/osm-adaptive-transport.mjs. Isolated changes to imported libraries and references did not select the NI-specific replay.",
+      "cause": "Workflow path filters listed the initial entry points but omitted imported library/helper modules, protected references and pinned dependency inputs.",
+      "change": "Expand read-only workflow triggers to include its actual dependency/input domains; reuse a shared static geometry replay for both historical and current original captures. Preserve all tests and add negative prepared-dossier guards with separate legal/control axes.",
+      "regression": "scripts/test/ni-evidence-dependency-coverage.test.mjs checks14 concrete isolated inputs for both PR/push; original test failure and repaired PASS are archived. Current93 geometry and4278-pair replay and generator negative guards run in the same read-only job.",
+      "pr": 400,
+      "verification_sha": "a2d3672f8d4d2a2a92ff899575630d315bf8e1e3",
+      "evidence": [
+        "docs/evidence/ni-ci-dependency-coverage-20261021/before.log.gz",
+        "docs/evidence/ni-ci-dependency-coverage-20261021/after.log.gz",
+        "NI preservation/current replay39556982026 SUCCESS and CodeQL119079174109 SUCCESS with0newalerts ona2d3672f8d4d2a2a92ff899575630d315bf8e1e3. Both93-geometry/4278-pair epochs, deterministic85-row generation,18unit/negative guards and original DOCX replay pass. Final full-head admission remains mandatory."
+      ],
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
     }
   ],
   "environment_incidents": [
@@ -446,5 +470,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T05:30:32.428Z"
+  "updated_at": "2026-10-21T06:50:07.704Z"
 }

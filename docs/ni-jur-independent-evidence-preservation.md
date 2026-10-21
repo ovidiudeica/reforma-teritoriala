@@ -1,0 +1,25 @@
+# NI-JUR — conservarea independentă a dovezilor
+
+Domeniu: arhivarea surselor și a verificărilor read-only pregătite în timpul blocajului OSM-FIX.2, fără acceptarea etapelor NI-JUR și fără promovarea sursei OSM curente. Baseline: main `54a4ed95c9c80edc7406cbb9c52fdf906a67b9cd`.
+
+PR #398 rămâne Draft; gate-ul sursei este blocat de conectivitatea nodurilor OSM la Horești/Buneți. PR #394 păstrează inventarul distinct al celor 85 de roluri și opt contururi. Acest PR conservă probe independente pentru audit și reluare; nu înlocuiește niciunul dintre cele două PR-uri și nu declară NI-JUR.4 finalizat.
+
+Nu se modifică ACTUAL, părinții MD, geometriile certificate, politicile runnerelor sau pragurile de prospețime. `actual_mutation_allowed=false`, `p91_import_allowed=false`, `semantic_acceptance=BLOCKED_INCOMPLETE`.
+
+Pachetul `docs/evidence/ni-jur-independent-20261020/` conservă 276 de fișiere, 74.845.260 octeți, cu manifest SHA-256: originalele OSM ale celor 85 de roluri și opt contururi, candidatul OSM respins, istoricul individual al celor 13 relații, documentele primare accesibile, dovezile blocajelor HTTP, dosarul individual pregătitor și cele 52 de capturi Chromium ale baseline-ului public. Nu sunt adăugate geometrii în corpus ori în website.
+
+Replay-ul folosește funcțiile existente `parseFull`, `polygon` și `segments`, legate de hashul implementării, și verifică sursele față de geometriile ACTUAL / contururile independente acceptate. Toate cele 93 de geometrii sunt valide; se verifică închiderea dependențelor și toate cele 4.278 de perechi topologice, fără egalități geometrice ori suprapuneri de interior. Relațiile de conținere și frontierele comune sunt observații geometrice și nu atribuie părinți administrativi.
+
+Originalele anexelor au aceleași SHA-256 cu dovezile istorice. CI reproduce cele 762 de paragrafe ale anexei 1 și paragrafele/rândurile ordonate ale anexei 2, păstrând relațiile dintre aliasuri. Cele 84 de potriviri nominale istorice sunt reverificate individual; Lunga rămâne distinctă, cu probe instituționale de microraion și fără act de statut/poligon certificat. Articolul cultural are date diferite în extragerea web indexată și originalul HTML proaspăt; contradicția este păstrată, fără rescrierea istoricului.
+
+Arhiva normativă de 9.254 de publicații este probată numai pentru snapshotul istoric până la 15 octombrie 2026, din PR #347 neintegrat. Nu certifică exhaustivitatea registrelor curente, autenticitatea emitentului fiecărui act sau citirea tuturor textelor primare. Toate cele zece copii PDF conservate (nouă acte și a doua copie a legii 114/2026) au fost inspectate integral, 31 de pagini scanate. Nouă originale ministeriale au fost descărcate din nou din URL-urile emitentului și sunt byte-identice cu arhiva; a doua copie prezidențială rămâne probă istorică. Aceste acte tratează competențe și proceduri generale, fără atribuirea individuală a poligoanelor OSM. Pentru legea de facto 114/2026, clauza de intrare în vigoare amânată este separată de aplicabilitatea contemporană. Niciun act nu este transformat în dovadă de control efectiv al unui poligon OSM.
+
+Răspunsurile Legis 403 și placeholderul `ANTIDDOS` HTTP200 sunt păstrate ca blocaje, nu ca documente autentificate. Regresia `documentary-response.test.mjs` respinge confuzia dintre succesul HTTP și conținutul documentar. Roghi, Mahala, Pohrebea și Vasilievca sunt excepții distincte, în afara inventarului de 85; cele două Vasilievca din CUATM nu sunt comasate și nu creează identități ACTUAL noi.
+
+Auditul public păstrat a fost executat de `74742bd87149bf1844833502f6beff2bf08bc864` asupra site-ului publicat `54a4ed95c9c80edc7406cbb9c52fdf906a67b9cd`: 435 de resurse / 125 GeoJSON cu hash potrivit, 48 de capturi inspectate individual și patru byte-identice cu capturi inspectate anterior. Aceasta este proba baseline-ului public, nu publicarea PR #398 sau a acestui PR.
+
+Reproducere: instalarea npm offline pin-uită, `node --test scripts/test/documentary-response.test.mjs`, `node scripts/audit/ni-independent-evidence.mjs --self-test`, `python3 scripts/audit/ni-evidence-docx-replay.py`, apoi `node scripts/audit/ni-independent-evidence.mjs --audit` pe checkout Git curat. Verdictul CI permis este numai `PASS_EVIDENCE_PRESERVATION_ONLY`.
+
+Stare: Draft, verificările pe HEAD-ul exact rămân obligatorii. Replay-ul importă static funcțiile istorice, iar SHA-256 al blocului pur rămâne verificat; nu se execută text citit din fișiere. Integrarea arhivei independente nu promovează sursa OSM și nu declară NI-JUR.0–4 închise. Nicio concluzie juridică pozitivă nu este autorizată prin simpla existență a unui poligon ori a unei potriviri nominale. Atribuire OSM: © OpenStreetMap contributors, ODbL; documentele VSPMR păstrează proveniența și licența CC BY 4.0 declarată de emitent.
+
+Reverificare documentară suplimentară: fișa oficială a legii48/2023 este accesibilă și linkul PDF a fost extras din originalul HTML. Descărcarea PDF a expirat după30s și după un singur retry de60s; răspunsul original binar rămâne indisponibil, fără hash inventat. Aceste probe sunt acces parțial, nu certificarea lanțului normativ.
