@@ -511,6 +511,25 @@
         "docs/evidence/ni-jur-review-regression-20261021/manifest.json"
       ],
       "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "RM-030",
+      "severity": "P3",
+      "component": "New documentary amendment effective-date parser",
+      "entities": [
+        "PMR-2025-124",
+        "land-use amendment chain12/2024–236/2026"
+      ],
+      "reproduction": "Initial new supplement generation rejects the original124/2025 because it assumes every amendment enters force the day after publication. Other preserved text has harmless PDF extraction spacing inside words/digits.",
+      "cause": "New parser generalized the most common effective-date clause instead of distinguishing the explicit publication-day exception; literal extraction tokens were too strict.",
+      "change": "Parse only the two explicitly observed clauses independently per document; verify124/2025 as publication-day and all others as next-day. Normalize bounded extraction spacing only, preserving all original PDF bytes and hashes.",
+      "regression": "Full11-act timeline from verified originals; negative cases reject wrong sunset, missing/merged IDs, wrong scanned page, partial original, false exhaustiveness and legal/ACTUAL/P9.1 promotion.",
+      "pr": 405,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/ni-documentary-supplement-regression-20261021/manifest.json"
+      ],
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_NO_STAGE_ACCEPTANCE"
     }
   ],
   "environment_incidents": [
@@ -593,5 +612,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T12:26:42.354Z"
+  "updated_at": "2026-10-21T16:58:47.332Z"
 }
