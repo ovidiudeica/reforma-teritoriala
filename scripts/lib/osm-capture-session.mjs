@@ -20,7 +20,7 @@ export function validateResumeEnvelope(run,artifacts,{id,sha,repo}){
 export function classifyStagedCapture(capture,sha){const complete=capture?.source_sha===sha&&capture.status==='CAPTURE_COMPLETE_NOT_SOURCE_PROMOTED';return {capture_complete:complete,stage_kind:complete?'COMPLETE_CAPTURE_PENDING_SOURCE_VALIDATION':'HISTORICAL_INPUT_ONLY_CAPTURE_INCOMPLETE',capture_country_epochs:complete?capture.country_epochs:null,source_promoted:false};}
 // One sequential request at a time. A query has a total attempt budget, rather
 // than restarting the complete endpoint/retry matrix at every bisection.
-export function createOverpassTransport({endpoints,fetchFn=fetch,sleep=ms=>new Promise(r=>setTimeout(r,ms)),now=Date.now,timeoutMs=30000,maxSessionMs=22*60000,onAttempt=()=>{},onResponse=async()=>{}}){
+export function createOverpassTransport({endpoints,fetchFn=fetch,sleep=ms=>new Promise(r=>setTimeout(r,ms)),now=Date.now,timeoutMs=60000,maxSessionMs=22*60000,onAttempt=()=>{},onResponse=async()=>{}}){
  assert.ok(endpoints.length>0);let cursor=0;const started=now(),cooldown=new Map();
  return async function request(query,purpose,{maxAttempts=2}={}){
   const attempts=[];let last;

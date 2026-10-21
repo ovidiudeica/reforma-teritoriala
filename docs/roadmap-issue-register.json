@@ -476,6 +476,23 @@
       "pr": 398,
       "verification_sha": null,
       "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+    },
+    {
+      "id": "RM-025",
+      "severity": "P2",
+      "component": "Overpass client queue and execution budget",
+      "entities": [],
+      "reproduction": "Production importer uses 30s client timeout for a 25s server query that may queue for up to 15s. New regression simulates a valid 40s queued response and fails before the fix. Run39594795523 independently timed out all three inventory endpoints at 30s; its external availability is not inferred from this synthetic reproduction.",
+      "cause": "Client timeout omitted the server queue allowance.",
+      "change": "60s client budget with unchanged 25s server query, 22-minute session and workflow limits; existing bounded retry/cooldown and fail-closed inventory remain.",
+      "regression": "osm-capture-session.test.mjs production client queue budget; all 63 source and 52 routing tests pass with no skips.",
+      "pr": 398,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/queue-budget-20261021/sha256-manifest.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39594795523"
+      ],
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
     }
   ],
   "environment_incidents": [
@@ -558,5 +575,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T11:46:59.239Z"
+  "updated_at": "2026-10-21T12:02:09.853Z"
 }
