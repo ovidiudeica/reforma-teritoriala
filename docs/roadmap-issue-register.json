@@ -305,6 +305,24 @@
         "NI independent evidence workflow39509713259 SUCCESS on481f3fd5c493b27d2e7817ada8f1c404293031bf; CodeQL118927740228 SUCCESS;3 response tests,2 import/node-identity regressions,6 negative dossier guards, original DOCX replay and93-polygon topology replay PASS."
       ],
       "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
+    },
+    {
+      "id": "RM-016",
+      "severity": "P2",
+      "component": "Geometry import regression harness",
+      "entities": [
+        "PR399 static-import regression"
+      ],
+      "reproduction": "CodeQL alert92 reports js/bad-code-sanitization at scripts/test/ni-geometry-import.test.mjs:8 on02541f189219293d0c2416fbfea7200b48c8fba6. The test interpolates a module URL into a node -e script.",
+      "cause": "The subprocess regression used code construction for a filesystem-derived module URL although the imported target was fixed and no dynamic code was required.",
+      "change": "Replace node -e and URL interpolation with a fixed static module fixture. Preserve the child process, --audit argument and network-failure guard. Include the fixture in workflow path triggers.",
+      "regression": "scripts/test/ni-geometry-import.test.mjs: import must produce only IMPORT_ONLY, must not fetch or run the CLI; coincident distinct source nodes remain rejected.",
+      "pr": 399,
+      "verification_sha": null,
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/92"
+      ],
+      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
     }
   ],
   "environment_incidents": [
@@ -387,5 +405,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-20T22:43:57.190Z"
+  "updated_at": "2026-10-21T05:16:20.297Z"
 }

@@ -10,6 +10,7 @@ on:
       - 'scripts/lib/documentary-response.mjs'
       - 'scripts/test/documentary-response.test.mjs'
       - 'scripts/test/ni-geometry-import.test.mjs'
+      - 'scripts/test/fixtures/ni-geometry-import-only.mjs'
       - 'scripts/audit/p907218-osm-live-85.mjs'
   push:
     branches: [main]
@@ -21,6 +22,7 @@ on:
       - 'scripts/lib/documentary-response.mjs'
       - 'scripts/test/documentary-response.test.mjs'
       - 'scripts/test/ni-geometry-import.test.mjs'
+      - 'scripts/test/fixtures/ni-geometry-import-only.mjs'
       - 'scripts/audit/p907218-osm-live-85.mjs'
 permissions:
   contents: read
