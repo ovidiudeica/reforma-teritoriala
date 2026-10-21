@@ -8,6 +8,15 @@ on:
       - 'scripts/audit/helpers/ni-osm-relation.mjs'
       - 'scripts/test/ni-osm-relation.test.mjs'
       - 'docs/ni-jur0-*.json'
+      - 'scripts/test/ni-jur0-dependency-coverage.test.mjs'
+      - 'scripts/audit/helpers/**'
+      - 'atlas-nistrenia*.mjs'
+      - 'data/**'
+      - 'schemas/**'
+      - 'public/data/**'
+      - 'public/geo/**'
+      - 'docs/p9.0.*'
+      - 'docs/evidence/web-r2a2/**'
       - 'public/data/p907216-osm-roles.json'
       - 'public/data/p909-nistrenia-osm-navigation.json'
   push:
@@ -18,6 +27,15 @@ on:
       - 'scripts/audit/helpers/ni-osm-relation.mjs'
       - 'scripts/test/ni-osm-relation.test.mjs'
       - 'docs/ni-jur0-*.json'
+      - 'scripts/test/ni-jur0-dependency-coverage.test.mjs'
+      - 'scripts/audit/helpers/**'
+      - 'atlas-nistrenia*.mjs'
+      - 'data/**'
+      - 'schemas/**'
+      - 'public/data/**'
+      - 'public/geo/**'
+      - 'docs/p9.0.*'
+      - 'docs/evidence/web-r2a2/**'
 permissions:
   contents: read
 jobs:
@@ -34,7 +52,7 @@ jobs:
           node-version: '24.21.0'
       - name: Reject identity, metadata, legal-parent and source corruption
         run: |
-          node --test scripts/test/ni-osm-relation.test.mjs
+          node --test scripts/test/ni-osm-relation.test.mjs scripts/test/ni-jur0-dependency-coverage.test.mjs
           node scripts/audit/ni-jur0-inventory.mjs --self-test
       - name: Reproduce all 85 records and eight outline source proofs
         run: node scripts/audit/ni-jur0-inventory.mjs --audit

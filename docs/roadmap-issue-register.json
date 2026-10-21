@@ -388,6 +388,23 @@
         "NI preservation/current replay39556982026 SUCCESS and CodeQL119079174109 SUCCESS with0newalerts ona2d3672f8d4d2a2a92ff899575630d315bf8e1e3. Both93-geometry/4278-pair epochs, deterministic85-row generation,18unit/negative guards and original DOCX replay pass. Final full-head admission remains mandatory."
       ],
       "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
+    },
+    {
+      "id": "RM-020",
+      "severity": "P2",
+      "component": "NI-JUR.0 workflow dependency coverage",
+      "entities": [],
+      "reproduction": "Change only public/data/actual-entities.json or an imported atlas module/historical input/frozen component; original NI0 path filters omit the job. Before regression log: rm020-before.log.",
+      "cause": "Inventory workflow lists only part of the generator inputs and imports; push paths are narrower than PR paths.",
+      "change": "Select all inventory inputs and imported modules, including all manifest components, on PR and main push. Keep the full existing validator.",
+      "pr": 394,
+      "regression": "scripts/test/ni-jur0-dependency-coverage.test.mjs enumerates actual generator paths and all frozen manifest components.",
+      "verification_sha": null,
+      "evidence": [
+        "Local before test FAIL: pull_request omits public/data/actual-entities.json",
+        "Local after dependency test PASS"
+      ],
+      "verdict": "FIXED_PENDING_EXACT_HEAD_CI_NOT_INTEGRATED"
     }
   ],
   "environment_incidents": [
