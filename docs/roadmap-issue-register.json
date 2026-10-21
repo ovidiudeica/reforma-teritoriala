@@ -511,6 +511,24 @@
         "docs/evidence/ni-jur-review-regression-20261021/manifest.json"
       ],
       "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "RM-029",
+      "severity": "P2",
+      "component": "Published runtime audit retry isolation and mandatory regression coverage",
+      "entities": [
+        "GitHub Pages runtime verification"
+      ],
+      "reproduction": "Postmerge run39634353612 attempt1 fails on HTTP503 for public/data/topology-frontiers/chunks/md/detail/osm-r59002.json. Existing bounded retry and tests were present only in blocked PR398; retry test was absent from mandatory published workflow.",
+      "cause": "Audit transport had no bounded handling on main; independent remedy was coupled to blocked OSM source promotion and its dedicated regression was not wired into the published workflow.",
+      "change": "Extract unchanged implementation and tests by provenance-preserving cherry-picks from9c5fedb/a20c550 into PR404; add mandatory retry test invocation and503-then-stale200 full inventory negative regression.",
+      "regression": "Three test files: persistent503,404,nontransient failure and stale bytes remain fail-closed; mandatory Chromium published runtime remains exact-byte verified.",
+      "pr": 404,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/published-retry-20261021/sha256-manifest.json"
+      ],
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_POSTMERGE"
     }
   ],
   "environment_incidents": [
@@ -593,5 +611,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T12:26:42.354Z"
+  "updated_at": "2026-10-21T16:27:52.549Z"
 }
