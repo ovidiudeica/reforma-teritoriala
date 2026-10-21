@@ -13,6 +13,10 @@ on:
       - 'scripts/test/fixtures/ni-geometry-import-only.mjs'
       - 'scripts/audit/p907218-osm-live-85.mjs'
       - 'scripts/audit/ni-current-preparation.mjs'
+      - 'scripts/audit/ni-independent-review.mjs'
+      - 'docs/evidence/ni-jur-review-20261021/**'
+      - 'docs/evidence/ni-jur-review-regression-20261021/**'
+      - 'docs/ni-jur-independent-review-20261021.md'
       - 'scripts/audit/helpers/**'
       - 'scripts/lib/**'
       - 'scripts/test/ni-evidence-dependency-coverage.test.mjs'
@@ -37,6 +41,10 @@ on:
       - 'scripts/test/fixtures/ni-geometry-import-only.mjs'
       - 'scripts/audit/p907218-osm-live-85.mjs'
       - 'scripts/audit/ni-current-preparation.mjs'
+      - 'scripts/audit/ni-independent-review.mjs'
+      - 'docs/evidence/ni-jur-review-20261021/**'
+      - 'docs/evidence/ni-jur-review-regression-20261021/**'
+      - 'docs/ni-jur-independent-review-20261021.md'
       - 'scripts/audit/helpers/**'
       - 'scripts/lib/**'
       - 'scripts/test/ni-evidence-dependency-coverage.test.mjs'
@@ -70,12 +78,14 @@ jobs:
           node scripts/audit/p907218-osm-live-85.mjs --self-test
           node scripts/audit/ni-independent-evidence.mjs --self-test
           node scripts/audit/ni-current-preparation.mjs --self-test
+          node scripts/audit/ni-independent-review.mjs --self-test
       - name: Reproduce source original DOCX paragraphs
         run: python3 scripts/audit/ni-evidence-docx-replay.py
       - name: Replay all 93 geometries and 4278 topology pairs offline
         run: |
           node scripts/audit/ni-independent-evidence.mjs --audit
           node scripts/audit/ni-current-preparation.mjs --audit
+          node scripts/audit/ni-independent-review.mjs --check
       - name: Prove all tracked source and protected data bytes remain untouched
         run: |
           git diff --exit-code
@@ -88,5 +98,6 @@ jobs:
           path: |
             outputs/NI-INDEPENDENT-EVIDENCE/
             outputs/NI-CURRENT-PREPARATION/
+            outputs/NI-INDEPENDENT-REVIEW/
           if-no-files-found: error
           retention-days: 30
