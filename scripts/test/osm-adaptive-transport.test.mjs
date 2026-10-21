@@ -15,6 +15,11 @@ test('incomplete successful chunk cannot silently lose selected relations',async
 test('authoritative source failure remains fail closed',async()=>{
  await assert.rejects(fetchAdaptiveRelations([1],{attempts:[],fetchChunk:async()=>{throw Error('429');},fetchFull:async()=>{throw Error('authoritative unavailable');}}),/authoritative unavailable/);
 });
+test('singleton recovery bypasses an exhausted Overpass matrix and divergent shared objects cannot be overwritten',async()=>{
+ const fetchChunk=async()=>{throw Error('overpass unavailable');};let calls=0;
+ await fetchAdaptiveRelations([1],{attempts:[],preferFullAtSingleton:true,fetchChunk:async()=>{throw Error('must not query singleton');},fetchFull:async id=>{calls++;return {raw:raw(id),attempts:[]};}});assert.equal(calls,1);
+ await assert.rejects(fetchAdaptiveRelations([1,2],{attempts:[],preferFullAtSingleton:true,fetchChunk,fetchFull:async id=>({raw:{elements:[...raw(id).elements,{type:'node',id:9,version:1,lat:id,lon:0}]},attempts:[]})}),/content\/version drift/);
+});
 test('Retry-After seconds and dates respect bounded transport budget',()=>{
  assert.equal(retryAfterMs('5'),5000);assert.equal(retryAfterMs('Thu, 01 Jan 1970 00:00:10 GMT',0),10000);assert.throws(()=>retryAfterMs('120'),/bounded/);
 });

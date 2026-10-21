@@ -4,6 +4,11 @@ name: OSM current source reconciliation live probe
 # It never promotes or rewrites the protected ACTUAL OSM pin.
 on:
   workflow_dispatch:
+    inputs:
+      resume_run_id:
+        description: "Optional completed same-SHA run containing a verified capture checkpoint"
+        required: false
+        type: string
   pull_request:
     paths:
       - '.github/workflows/osm-live-source-probe.yml'
@@ -13,6 +18,9 @@ on:
       - 'data/sources/osm-source-refresh-request.json'
       - 'scripts/import/import-osm.mjs'
       - 'scripts/lib/osm-source-continuity.mjs'
+      - 'scripts/lib/osm-*.mjs'
+      - 'scripts/test/osm-*.test.mjs'
+      - 'scripts/process/restore-osm-capture-checkpoint.mjs'
       - 'scripts/lib/osm-source-transition.mjs'
       - 'scripts/process/audit-osm-refresh-continuity.mjs'
       - 'scripts/process/audit-osm-fix2-source-transition.mjs'
@@ -55,6 +63,7 @@ jobs:
       - name: Checkout exact candidate without write credentials
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - name: Capture all thirteen relation histories and changesets independently
         run: node scripts/process/capture-osm-fix2-forensics.mjs
@@ -76,6 +85,7 @@ jobs:
       - name: Checkout exact candidate without write credentials
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - name: Capture independent official per-ID closure evidence
         run: node scripts/process/capture-osm-closure-forensics.mjs
@@ -89,6 +99,9 @@ jobs:
           retention-days: 30
 
   source-only-replay:
+    permissions:
+      contents: read
+      actions: read # Optional same-head checkpoint download only; no write permission.
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     env:
@@ -98,6 +111,7 @@ jobs:
       - name: Checkout exact candidate code; no repository writes
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
           fetch-depth: 0
 
@@ -109,11 +123,31 @@ jobs:
           set -euo pipefail
           git diff --exit-code "$BASE_SHA" --             data/sources/osm-current.json             data/current             public/data/actual-entities.json             public/data/actual-geometry-chunks.json             public/geo/current             public/geo/actual
 
+      - name: Restore only authenticated same-head checkpoint data when requested
+        if: github.event_name == 'workflow_dispatch' && inputs.resume_run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OSM_RESUME_RUN_ID: ${{ inputs.resume_run_id }}
+        run: node scripts/process/restore-osm-capture-checkpoint.mjs
+
+      - name: Regression tests for transport, resume and exact-head provenance
+        run: node --test scripts/test/osm-capture-session.test.mjs scripts/test/osm-live-probe-contract.test.mjs
+
       - name: Capture verified current OSM source
         timeout-minutes: 25
         env:
           OSM_MANIFEST_PATH: ${{ env.OSM_CURRENT_SOURCE_MANIFEST }}
+          OSM_CAPTURE_RESUME: ${{ github.event_name == 'workflow_dispatch' && inputs.resume_run_id != '' && '1' || '0' }}
         run: node scripts/import/import-osm.mjs
+
+      - name: Preserve complete or incomplete capture checkpoint without promotion
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: osm-capture-checkpoint-${{ github.run_id }}
+          path: outputs/osm-capture-checkpoint/
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Build exact per-ID drift report against protected ACTUAL pin
         env:

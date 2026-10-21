@@ -4,6 +4,8 @@ import {copyFile,mkdir,readFile,writeFile} from 'node:fs/promises';
 import {basename} from 'node:path';
 import {gunzipSync} from 'node:zlib';
 import {osmManifestPath,osmSnapshotPath} from '../lib/osm-source-paths.mjs';
+import {execFileSync} from 'node:child_process';
+import {classifyStagedCapture} from '../lib/osm-capture-session.mjs';
 
 const MANIFEST=osmManifestPath(process.env.OSM_CURRENT_SOURCE_MANIFEST||'data/sources/osm-source-current.json');
 const OUT='outputs/osm-source-candidate';
@@ -31,8 +33,11 @@ for(const path of ['outputs/osm-source-continuity.json','outputs/osm-fix2-source
  try{await copyFile(path,OUT+'/'+basename(path));}
  catch(error){if(error?.code!=='ENOENT')throw error;}
 }
+const sourceSha=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();let capture=null;try{capture=JSON.parse(await readFile('outputs/osm-capture-checkpoint/capture-attempt.json','utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
 const receipt={
  schema:'osm-source-candidate-artifact-v1',
+ source_sha:sourceSha,
+ ...classifyStagedCapture(capture,sourceSha),
  manifest_path:MANIFEST,
  manifest_sha256:sha256(manifestBytes),
  snapshot_at:manifest.snapshot_at,

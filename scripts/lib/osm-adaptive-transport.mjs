@@ -1,6 +1,7 @@
 // Sequential and bounded: split a failed chunk, then use authoritative full
 // responses at leaves. Successful but incomplete responses also fail closed.
-export function assertRelationClosure(raw, ids) {
+import {mergeOsmElements} from './osm-element-merge.mjs';
+function checkRelationClosure(raw, ids, deferredSubareas) {
  const byKey=new Map((raw?.elements||[]).map(e=>[`${e.type}/${e.id}`,e]));
  const visit=(type,id,seen=new Set())=>{
   const key=`${type}/${id}`;
@@ -9,14 +10,18 @@ export function assertRelationClosure(raw, ids) {
   const e=byKey.get(key);
   if(!e)throw new Error(`Incomplete OSM dependency ${key}`);
   if(type==='node'&&(!Number.isFinite(e.lat)||!Number.isFinite(e.lon)))throw new Error(`Incomplete OSM coordinates ${key}`);
-  if(type==='relation')for(const m of e.members||[])visit(m.type,m.ref,seen);
+  if(type==='relation')for(const m of e.members||[]){if(m.type==='relation'&&m.role==='subarea'&&deferredSubareas.has(Number(m.ref)))continue;visit(m.type,m.ref,seen);}
   if(type==='way')for(const n of e.nodes||[])visit('node',n,seen);
  };
  for(const id of ids)visit('relation',id);
 }
+export function assertRelationClosure(raw,ids){checkRelationClosure(raw,ids,new Set());}
+// Only explicitly inventoried non-geometric subarea relations can wait for
+// their own shards. The final whole-source check never uses this deferral.
+export function assertShardClosure(raw,ids,deferredSubareas){checkRelationClosure(raw,ids,deferredSubareas);}
 // relation/full includes child relations without recursively expanding their
 // ways/nodes. Recover only real referenced objects; never invent closure.
-export async function completeOsmDependencies(raw,ids,{fetchMissing,maxRequests=1000}){
+export async function completeOsmDependencies(raw,ids,{fetchMissing,maxRequests=1000,deferredSubareas=new Set()}){
  const byKey=new Map((raw?.elements||[]).map(e=>[`${e.type}/${e.id}`,e]));
  const queue=ids.map(id=>({type:'relation',id})),seen=new Set();let requests=0;
  for(let i=0;i<queue.length;i++){
@@ -28,27 +33,24 @@ export async function completeOsmDependencies(raw,ids,{fetchMissing,maxRequests=
    if(++requests>maxRequests)throw new Error('OSM dependency recovery request budget exhausted at '+key);
    const fetched=await fetchMissing(type,Number(id));
    if(!fetched?.elements?.some(e=>e.type===type&&Number(e.id)===Number(id)))throw new Error('Incomplete authoritative OSM dependency '+key);
-   for(const e of fetched.elements){
-    const k=`${e.type}/${e.id}`,previous=byKey.get(k);
-    if(previous?.version!=null&&e.version!=null&&previous.version!==e.version)throw new Error('Concurrent OSM version drift '+k);
-    byKey.set(k,{...previous,...e});
-   }
+   mergeOsmElements(byKey,fetched.elements);
    element=byKey.get(key);
    if(type==='node'&&(!Number.isFinite(element.lat)||!Number.isFinite(element.lon)))throw new Error('Incomplete authoritative OSM coordinates '+key);
   }
   seen.add(key);
-  if(type==='relation')for(const m of element.members||[])queue.push({type:m.type,id:m.ref});
+  if(type==='relation')for(const m of element.members||[]){if(m.type==='relation'&&m.role==='subarea'&&deferredSubareas.has(Number(m.ref)))continue;queue.push({type:m.type,id:m.ref});}
   if(type==='way')for(const n of element.nodes||[])queue.push({type:'node',id:n});
  }
  const result={...raw,elements:[...byKey.values()]};
- assertRelationClosure(result,ids);
+ assertShardClosure(result,ids,deferredSubareas);
  return result;
 }
-export async function fetchAdaptiveRelations(ids,{fetchChunk,fetchFull,attempts,purpose='relations'}) {
+export async function fetchAdaptiveRelations(ids,{fetchChunk,fetchFull,attempts,purpose='relations',preferFullAtSingleton=false,deferredSubareas=new Set()}) {
+ if(ids.length===1&&preferFullAtSingleton){const result=await fetchFull(ids[0]);attempts.push(...result.attempts);assertShardClosure(result.raw,ids,deferredSubareas);return result.raw;}
  try {
   const result=await fetchChunk(ids,purpose);
   attempts.push(...result.attempts);
-  assertRelationClosure(result.raw,ids);
+  assertShardClosure(result.raw,ids,deferredSubareas);
   return result.raw;
  } catch(error) {
   if(error.transportBudgetExceeded)throw error;
@@ -56,13 +58,13 @@ export async function fetchAdaptiveRelations(ids,{fetchChunk,fetchFull,attempts,
   if(ids.length===1){
    const result=await fetchFull(ids[0]);
    attempts.push(...result.attempts);
-   assertRelationClosure(result.raw,ids);
+   assertShardClosure(result.raw,ids,deferredSubareas);
    return result.raw;
   }
   const mid=Math.floor(ids.length/2),elements=new Map();
   for(const [index,part] of [ids.slice(0,mid),ids.slice(mid)].entries()){
-   const raw=await fetchAdaptiveRelations(part,{fetchChunk,fetchFull,attempts,purpose:`${purpose}.${index+1}`});
-   for(const e of raw.elements)elements.set(`${e.type}/${e.id}`,e);
+   const raw=await fetchAdaptiveRelations(part,{fetchChunk,fetchFull,attempts,purpose:`${purpose}.${index+1}`,preferFullAtSingleton,deferredSubareas});
+   mergeOsmElements(elements,raw.elements);
   }
   return {version:0.6,elements:[...elements.values()]};
  }

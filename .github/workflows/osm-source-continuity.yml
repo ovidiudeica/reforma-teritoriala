@@ -47,6 +47,6 @@ jobs:
         with:
           persist-credentials: false
       - name: Reject missing, altered and unapproved OSM source transitions
-        run: node --test scripts/test/osm-source-continuity.test.mjs scripts/test/osm-source-transition.test.mjs scripts/test/osm-source-paths.test.mjs scripts/test/osm-dependency-recovery.test.mjs scripts/test/osm-closure-audit.test.mjs scripts/test/osm-adaptive-transport.test.mjs
+        run: node --test scripts/test/osm-source-continuity.test.mjs scripts/test/osm-source-transition.test.mjs scripts/test/osm-source-paths.test.mjs scripts/test/osm-dependency-recovery.test.mjs scripts/test/osm-closure-audit.test.mjs scripts/test/osm-adaptive-transport.test.mjs scripts/test/osm-capture-session.test.mjs scripts/test/osm-live-probe-contract.test.mjs
       - name: Verify import OSM lifecycle guards
         run: node --test scripts/test/osm-refresh-routing.test.mjs

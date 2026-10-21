@@ -427,6 +427,55 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/119097240690"
       ],
       "verdict": "CLOSED_TECHNICAL_RETEST_PASS_INTEGRATION_REQUIRES_FINAL_HEAD_GATES"
+    },
+    {
+      "id": "RM-022",
+      "severity": "P1",
+      "component": "Overpass bounded acquisition and checkpoint recovery",
+      "reproduction": "Run39572953654 on a28b597: repeated 502/504 and 90s timeouts at every adaptive split exhaust the 25-minute capture step.",
+      "cause": "Complete per-endpoint retry matrix is restarted at each bisection; partial progress is not resumable and temporal cross-fragment consistency is not certified.",
+      "change": "Inventory-first complete category/subarea transport buckets; total query retry budget, cooldown, pinned authentic epoch and all-element versions; verified same-head data-only checkpoint recovery; explicit incomplete historical staging.",
+      "regression": "osm-capture-session.test.mjs; osm-adaptive-transport.test.mjs; updated full inventory routing contract",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39572953654",
+        "docs/evidence/osm-fix2/transport-resume-20261021/sha256-manifest.json"
+      ],
+      "entities": [],
+      "pr": 398,
+      "verification_sha": null,
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+    },
+    {
+      "id": "RM-023",
+      "severity": "P2",
+      "component": "Exact-head source evidence provenance",
+      "reproduction": "The baseline closure/source jobs check out refs/pull/398/merge at a9720ee, while the PR head is a28b597. The new exact-head regression fails before the fix.",
+      "cause": "Three acquisition checkout steps omit explicit ref.",
+      "change": "All four read-only source acquisition jobs check out github.event.pull_request.head.sha or the dispatch SHA explicitly.",
+      "regression": "osm-live-probe-contract.test.mjs exact-head guard",
+      "evidence": [
+        "docs/evidence/osm-fix2/transport-resume-20261021/contract-before.log.gz"
+      ],
+      "entities": [],
+      "pr": 398,
+      "verification_sha": null,
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+    },
+    {
+      "id": "RM-024",
+      "severity": "P2",
+      "component": "Live probe dependency coverage",
+      "reproduction": "Isolated osm-adaptive-transport.mjs edits do not match the former live probe paths; new path regression fails.",
+      "cause": "Live workflow path list omits imported transport modules and their regression tests.",
+      "change": "Include OSM module/test wildcard paths and the data-only restore process; keep the complete live gate mandatory for these changes.",
+      "regression": "osm-live-probe-contract.test.mjs isolated dependency selection",
+      "evidence": [
+        "docs/evidence/osm-fix2/transport-resume-20261021/contract-before.log.gz"
+      ],
+      "entities": [],
+      "pr": 398,
+      "verification_sha": null,
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
     }
   ],
   "environment_incidents": [
@@ -509,5 +558,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T06:50:07.704Z"
+  "updated_at": "2026-10-21T11:46:59.239Z"
 }
