@@ -41,6 +41,27 @@
       ]
     },
     {
+      "id": "RM-003",
+      "severity": "P2",
+      "component": "Performance report dirty-source provenance",
+      "entities": [],
+      "reproduction": "Modify a tracked audit source without committing, then run the old benchmark; sourceMain still labels only HEAD without disclosing modified source bytes.",
+      "cause": "Git commit identity alone did not prove clean tracked input sources.",
+      "change": "Record trackedSourcesClean and reject dirty tracked sources during CI acceptance.",
+      "pr": 391,
+      "regression": "Temporary Git fixture modifies a tracked input while HEAD stays unchanged and verifies CI rejection.",
+      "verification_sha": "94e912c37178eafecb5561d1ecfb43caf4ae2d6d",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
+      ],
+      "verdict": "CLOSED_RETEST_PASS",
+      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
+      "postmerge_evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
+      ]
+    },
+    {
       "id": "RM-004",
       "severity": "P1",
       "component": "CDP artifact output path",
@@ -55,27 +76,6 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/118330837784",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808",
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/118337370318"
-      ],
-      "verdict": "CLOSED_RETEST_PASS",
-      "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
-      "postmerge_evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337220528",
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39337164034"
-      ]
-    },
-    {
-      "id": "RM-003",
-      "severity": "P2",
-      "component": "Performance report dirty-source provenance",
-      "entities": [],
-      "reproduction": "Modify a tracked audit source without committing, then run the old benchmark; sourceMain still labels only HEAD without disclosing modified source bytes.",
-      "cause": "Git commit identity alone did not prove clean tracked input sources.",
-      "change": "Record trackedSourcesClean and reject dirty tracked sources during CI acceptance.",
-      "pr": 391,
-      "regression": "Temporary Git fixture modifies a tracked input while HEAD stays unchanged and verifies CI rejection.",
-      "verification_sha": "94e912c37178eafecb5561d1ecfb43caf4ae2d6d",
-      "evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39333466808"
       ],
       "verdict": "CLOSED_RETEST_PASS",
       "postmerge_verification_sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
@@ -427,6 +427,90 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/runs/119097240690"
       ],
       "verdict": "CLOSED_TECHNICAL_RETEST_PASS_INTEGRATION_REQUIRES_FINAL_HEAD_GATES"
+    },
+    {
+      "id": "RM-022",
+      "severity": "P1",
+      "component": "Overpass bounded acquisition and checkpoint recovery",
+      "reproduction": "Run39572953654 on a28b597: repeated 502/504 and 90s timeouts at every adaptive split exhaust the 25-minute capture step.",
+      "cause": "Complete per-endpoint retry matrix is restarted at each bisection; partial progress is not resumable and temporal cross-fragment consistency is not certified.",
+      "change": "Inventory-first complete category/subarea transport buckets; total query retry budget, cooldown, pinned authentic epoch and all-element versions; verified same-head data-only checkpoint recovery; explicit incomplete historical staging.",
+      "regression": "osm-capture-session.test.mjs; osm-adaptive-transport.test.mjs; updated full inventory routing contract",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39572953654",
+        "docs/evidence/osm-fix2/transport-resume-20261021/sha256-manifest.json"
+      ],
+      "entities": [],
+      "pr": 398,
+      "verification_sha": null,
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+    },
+    {
+      "id": "RM-023",
+      "severity": "P2",
+      "component": "Exact-head source evidence provenance",
+      "reproduction": "The baseline closure/source jobs check out refs/pull/398/merge at a9720ee, while the PR head is a28b597. The new exact-head regression fails before the fix.",
+      "cause": "Three acquisition checkout steps omit explicit ref.",
+      "change": "All four read-only source acquisition jobs check out github.event.pull_request.head.sha or the dispatch SHA explicitly.",
+      "regression": "osm-live-probe-contract.test.mjs exact-head guard",
+      "evidence": [
+        "docs/evidence/osm-fix2/transport-resume-20261021/contract-before.log.gz"
+      ],
+      "entities": [],
+      "pr": 398,
+      "verification_sha": null,
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+    },
+    {
+      "id": "RM-024",
+      "severity": "P2",
+      "component": "Live probe dependency coverage",
+      "reproduction": "Isolated osm-adaptive-transport.mjs edits do not match the former live probe paths; new path regression fails.",
+      "cause": "Live workflow path list omits imported transport modules and their regression tests.",
+      "change": "Include OSM module/test wildcard paths and the data-only restore process; keep the complete live gate mandatory for these changes.",
+      "regression": "osm-live-probe-contract.test.mjs isolated dependency selection",
+      "evidence": [
+        "docs/evidence/osm-fix2/transport-resume-20261021/contract-before.log.gz"
+      ],
+      "entities": [],
+      "pr": 398,
+      "verification_sha": null,
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+    },
+    {
+      "id": "RM-025",
+      "severity": "P2",
+      "component": "Overpass client queue and execution budget",
+      "entities": [],
+      "reproduction": "Production importer uses 30s client timeout for a 25s server query that may queue for up to 15s. New regression simulates a valid 40s queued response and fails before the fix. Run39594795523 independently timed out all three inventory endpoints at 30s; its external availability is not inferred from this synthetic reproduction.",
+      "cause": "Client timeout omitted the server queue allowance.",
+      "change": "60s client budget with unchanged 25s server query, 22-minute session and workflow limits; existing bounded retry/cooldown and fail-closed inventory remain.",
+      "regression": "osm-capture-session.test.mjs production client queue budget; all 63 source and 52 routing tests pass with no skips.",
+      "pr": 398,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/queue-budget-20261021/sha256-manifest.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39594795523"
+      ],
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_AUTHENTIC_LIVE_CAPTURE"
+    },
+    {
+      "id": "RM-026",
+      "severity": "P3",
+      "component": "New independent documentary review generator",
+      "entities": [
+        "PMR-ATD-133267"
+      ],
+      "reproduction": "New review generator --write rejects a valid preserved legacy Word/OLE original while accepting only PDF/ZIP signatures. Initial failure log is frozen before publication of the implementation.",
+      "cause": "New generator duplicated only a subset of the accepted binary classifier formats.",
+      "change": "Reuse the existing canonical classifyDocumentResponse with expectBinary=true; full generator regression covers the actual preserved OLE original and all19 document records.",
+      "regression": "ni-independent-review.mjs --write/--check on authenticated originals; ten negative provenance/identity/acceptance tests; existing binary/placeholder tests retained.",
+      "pr": 403,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/ni-jur-review-regression-20261021/manifest.json"
+      ],
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_NOT_STAGE_ACCEPTANCE"
     }
   ],
   "environment_incidents": [
@@ -509,5 +593,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T06:50:07.704Z"
+  "updated_at": "2026-10-21T12:26:42.354Z"
 }
