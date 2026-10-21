@@ -1,0 +1,297 @@
+{
+  "scope": "Bounded transport and upstream-version qualification; not a complete snapshot",
+  "expected": [
+    {
+      "type": "node",
+      "id": 12318728194,
+      "version": 1
+    },
+    {
+      "type": "node",
+      "id": 12318728593,
+      "version": 1
+    },
+    {
+      "type": "way",
+      "id": 1376179876,
+      "version": 8
+    },
+    {
+      "type": "way",
+      "id": 1430569793,
+      "version": 1
+    },
+    {
+      "type": "relation",
+      "id": 18967493,
+      "version": 6
+    },
+    {
+      "type": "node",
+      "id": 8265822008,
+      "version": 1
+    },
+    {
+      "type": "node",
+      "id": 11649857778,
+      "version": 1
+    },
+    {
+      "type": "way",
+      "id": 1376180490,
+      "version": 4
+    },
+    {
+      "type": "way",
+      "id": 1376180731,
+      "version": 6
+    },
+    {
+      "type": "way",
+      "id": 1492661493,
+      "version": 1
+    },
+    {
+      "type": "way",
+      "id": 1492661495,
+      "version": 1
+    },
+    {
+      "type": "way",
+      "id": 1494605624,
+      "version": 1
+    },
+    {
+      "type": "way",
+      "id": 1494605625,
+      "version": 1
+    },
+    {
+      "type": "relation",
+      "id": 18968082,
+      "version": 7
+    }
+  ],
+  "rows": [
+    {
+      "name": "official-relation-18967493",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/18967493.json",
+      "started_at": "2026-10-21T23:28:23.220Z",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "content_range": null,
+      "etag": null,
+      "last_modified": null,
+      "bytes": 789,
+      "sha256": "9bad5b7b0d578666db9a91f423436aef5edbc76e5480cc1b9886813265ca3df1",
+      "file": "official-relation-18967493.response.gz",
+      "status": "RESPONSE_ONLY_NOT_SOURCE_ACCEPTANCE",
+      "versions": [
+        {
+          "type": "relation",
+          "id": 18967493,
+          "version": 6,
+          "timestamp": "2026-01-08T17:48:30Z",
+          "expected_version": 6
+        }
+      ],
+      "remark": null,
+      "completed_at": "2026-10-21T23:28:25.945Z"
+    },
+    {
+      "name": "official-relation-18968082",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/18968082.json",
+      "started_at": "2026-10-21T23:28:25.946Z",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "content_range": null,
+      "etag": null,
+      "last_modified": null,
+      "bytes": 1001,
+      "sha256": "a51d3299a84e8c901bcdca78e4f5b4e6f208f0dd3f86bdd03a76f2906f5d4e2f",
+      "file": "official-relation-18968082.response.gz",
+      "status": "RESPONSE_ONLY_NOT_SOURCE_ACCEPTANCE",
+      "versions": [
+        {
+          "type": "relation",
+          "id": 18968082,
+          "version": 7,
+          "timestamp": "2026-03-31T13:11:32Z",
+          "expected_version": 7
+        }
+      ],
+      "remark": null,
+      "completed_at": "2026-10-21T23:28:25.974Z"
+    },
+    {
+      "name": "official-way-versions",
+      "url": "https://api.openstreetmap.org/api/0.6/ways.json?ways=1376179876,1430569793,1376180490,1376180731,1492661493,1492661495,1494605624,1494605625",
+      "started_at": "2026-10-21T23:28:25.975Z",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "content_range": null,
+      "etag": null,
+      "last_modified": null,
+      "bytes": 11441,
+      "sha256": "ebd0d8afab4a4ee054b2c11951cc84fe60fac611edeb75cb572e368f218458a2",
+      "file": "official-way-versions.response.gz",
+      "status": "RESPONSE_ONLY_NOT_SOURCE_ACCEPTANCE",
+      "versions": [
+        {
+          "type": "way",
+          "id": 1376179876,
+          "version": 8,
+          "timestamp": "2025-09-23T12:18:04Z",
+          "expected_version": 8
+        },
+        {
+          "type": "way",
+          "id": 1376180490,
+          "version": 4,
+          "timestamp": "2026-03-31T13:11:32Z",
+          "expected_version": 4
+        },
+        {
+          "type": "way",
+          "id": 1376180731,
+          "version": 6,
+          "timestamp": "2026-04-10T06:12:32Z",
+          "expected_version": 6
+        },
+        {
+          "type": "way",
+          "id": 1430569793,
+          "version": 1,
+          "timestamp": "2025-09-17T14:07:13Z",
+          "expected_version": 1
+        },
+        {
+          "type": "way",
+          "id": 1492661493,
+          "version": 1,
+          "timestamp": "2026-03-25T13:44:15Z",
+          "expected_version": 1
+        },
+        {
+          "type": "way",
+          "id": 1492661495,
+          "version": 1,
+          "timestamp": "2026-03-25T13:44:15Z",
+          "expected_version": 1
+        },
+        {
+          "type": "way",
+          "id": 1494605624,
+          "version": 1,
+          "timestamp": "2026-03-31T13:11:32Z",
+          "expected_version": 1
+        },
+        {
+          "type": "way",
+          "id": 1494605625,
+          "version": 1,
+          "timestamp": "2026-03-31T13:11:32Z",
+          "expected_version": 1
+        }
+      ],
+      "remark": null,
+      "completed_at": "2026-10-21T23:28:26.008Z"
+    },
+    {
+      "name": "official-node-versions",
+      "url": "https://api.openstreetmap.org/api/0.6/nodes.json?nodes=12318728194,12318728593,8265822008,11649857778",
+      "started_at": "2026-10-21T23:28:26.009Z",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "content_range": null,
+      "etag": null,
+      "last_modified": null,
+      "bytes": 957,
+      "sha256": "7cd9563aacea5fbda5ce6873b09d0acdcca6533fb22219ba2ad815f8e5ca8dbf",
+      "file": "official-node-versions.response.gz",
+      "status": "RESPONSE_ONLY_NOT_SOURCE_ACCEPTANCE",
+      "versions": [
+        {
+          "type": "node",
+          "id": 8265822008,
+          "version": 1,
+          "timestamp": "2020-12-28T05:34:22Z",
+          "expected_version": 1
+        },
+        {
+          "type": "node",
+          "id": 11649857778,
+          "version": 1,
+          "timestamp": "2024-02-21T19:01:28Z",
+          "expected_version": 1
+        },
+        {
+          "type": "node",
+          "id": 12318728194,
+          "version": 1,
+          "timestamp": "2024-11-06T14:07:57Z",
+          "expected_version": 1
+        },
+        {
+          "type": "node",
+          "id": 12318728593,
+          "version": 1,
+          "timestamp": "2024-11-06T14:07:58Z",
+          "expected_version": 1
+        }
+      ],
+      "remark": null,
+      "completed_at": "2026-10-21T23:28:26.044Z"
+    },
+    {
+      "name": "geofabrik-dated-ro-header",
+      "url": "https://download.geofabrik.de/europe/romania-261020.osm.pbf",
+      "started_at": "2026-10-21T23:28:26.045Z",
+      "http_status": 206,
+      "content_type": "application/octet-stream",
+      "content_range": "bytes 0-65535/331337543",
+      "etag": "\"13bfcf47-65e4de4318314\"",
+      "last_modified": "Tue, 20 Oct 2026 23:21:34 GMT",
+      "bytes": 65536,
+      "sha256": "8b5eea608d28e958231801993cd4edf52783be5360574c2971f6a56e4ac83698",
+      "file": "geofabrik-dated-ro-header.response.gz",
+      "status": "RESPONSE_ONLY_NOT_SOURCE_ACCEPTANCE",
+      "completed_at": "2026-10-21T23:28:26.445Z"
+    },
+    {
+      "name": "geofabrik-dated-ro-checksum",
+      "url": "https://download.geofabrik.de/europe/romania-261020.osm.pbf.md5",
+      "started_at": "2026-10-21T23:28:26.447Z",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "content_range": null,
+      "etag": "\"39-65e4de43887f8\"",
+      "last_modified": "Tue, 20 Oct 2026 23:21:34 GMT",
+      "bytes": 57,
+      "sha256": "7b0237a1eb88005ad2a235ee5d821a0b868886954e50f8339230d6ad0acca9d2",
+      "file": "geofabrik-dated-ro-checksum.response.gz",
+      "status": "RESPONSE_ONLY_NOT_SOURCE_ACCEPTANCE",
+      "completed_at": "2026-10-21T23:28:26.613Z"
+    },
+    {
+      "name": "overpass-get-metadata-0",
+      "url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A5%5D%3Brelation(2367015)%3Bout%20meta%3B",
+      "started_at": "2026-10-21T23:28:26.615Z",
+      "status": "BLOCKED_PROBE",
+      "error": "TimeoutError: The operation was aborted due to timeout",
+      "cause": "",
+      "completed_at": "2026-10-21T23:28:41.658Z"
+    },
+    {
+      "name": "overpass-get-metadata-1",
+      "url": "https://overpass.private.coffee/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A5%5D%3Brelation(2367015)%3Bout%20meta%3B",
+      "started_at": "2026-10-21T23:28:41.660Z",
+      "status": "BLOCKED_PROBE",
+      "error": "TimeoutError: The operation was aborted due to timeout",
+      "cause": "",
+      "completed_at": "2026-10-21T23:28:56.665Z"
+    }
+  ],
+  "public_edit_performed": false,
+  "source_promoted": false
+}

@@ -1,0 +1,47 @@
+name: Geofabrik acquisition regressions
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/geofabrik-acquisition-qualification.yml'
+      - 'scripts/lib/geofabrik-acquisition.mjs'
+      - 'scripts/process/capture-geofabrik-extracts.mjs'
+      - 'scripts/test/geofabrik-acquisition.test.mjs'
+      - 'docs/evidence/osm-fix2/geofabrik-qualification-20261022/**'
+  workflow_dispatch:
+    inputs:
+      acquire_originals:
+        description: 'Explicitly acquire dated originals; never promote a source'
+        type: boolean
+        default: false
+      extract_date:
+        description: 'Explicit YYYYMMDD; required only for acquisition'
+        type: string
+        required: false
+permissions:
+  contents: read
+jobs:
+  geofabrik-acquisition-regressions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Fail-closed acquisition and existing-original replay regressions
+        run: node --test scripts/test/geofabrik-acquisition.test.mjs
+      - name: Prove tests did not change tracked data
+        run: git diff --exit-code
+      - name: Acquire explicitly requested dated originals without source promotion
+        if: github.event_name == 'workflow_dispatch' && inputs.acquire_originals
+        env:
+          EXTRACT_DATE: ${{ inputs.extract_date }}
+        run: node scripts/process/capture-geofabrik-extracts.mjs "$EXTRACT_DATE"
+      - name: Preserve receipts and incomplete originals on explicit acquisition
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.acquire_originals
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: dated-extract-acquisition-${{ github.run_id }}
+          path: outputs/geofabrik-extracts/
+          if-no-files-found: error
+          retention-days: 30
