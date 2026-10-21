@@ -639,7 +639,7 @@
       "evidence": [
         "docs/evidence/osm-fix2/layered-acquisition-20261021/historical-object-duplication.json",
         "docs/evidence/osm-fix2/layered-acquisition-20261021/previous-transport-metrics.json",
-        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log"
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log.gz"
       ],
       "verdict": "IMPLEMENTED_LOCAL_REGRESSION_PASS_LIVE_ACCEPTANCE_PENDING"
     },
@@ -658,8 +658,8 @@
       "regression": "timeout history is not equivalent to a transient fast HTTP error when choosing a provider",
       "verification_sha": null,
       "evidence": [
-        "docs/evidence/osm-fix2/layered-acquisition-20261021/timeout-priority-before.log",
-        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log"
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/timeout-priority-before.log.gz",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log.gz"
       ],
       "verdict": "IMPLEMENTED_LOCAL_REGRESSION_PASS_EXACT_HEAD_CI_PENDING"
     },
@@ -677,11 +677,30 @@
       "regression": "a closed assembled graph cannot replace a missing checkpoint batch",
       "verification_sha": null,
       "evidence": [
-        "docs/evidence/osm-fix2/layered-acquisition-20261021/unbacked-checkpoint-before.log",
-        "docs/evidence/osm-fix2/layered-acquisition-20261021/unbacked-checkpoint-after.log",
-        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log"
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/unbacked-checkpoint-before.log.gz",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/unbacked-checkpoint-after.log.gz",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log.gz"
       ],
       "verdict": "FIXED_BEFORE_FIRST_PUSH_LOCAL_REGRESSION_PASS_CI_PENDING"
+    },
+    {
+      "id": "RM-034",
+      "severity": "P1",
+      "component": "Layered-source evidence packaging",
+      "entities": [
+        "PR398_EVIDENCE_ONLY"
+      ],
+      "reproduction": "Run39683119963/job119510355310 on2ba11: local-source-suite.log was in the manifest but ignored by Git; the frozen-evidence test failed ENOENT and no source capture began.",
+      "cause": "Local content-hash validation did not prove that every manifested input was included in the committed tree.",
+      "change": "Preserve exact original bytes in gzip; retain the initial incomplete manifest and failed job log; assert Git-index membership and verify staged blob SHA-256 before commit.",
+      "pr": 398,
+      "regression": "frozen acquisition and mapper evidence matches each recorded SHA and original HTTP body",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/ci-2ba11-source-job.log.gz",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/initial-package-failure.json"
+      ],
+      "verdict": "FIX_IMPLEMENTED_PENDING_EXACT_HEAD_CI"
     }
   ],
   "environment_incidents": [
