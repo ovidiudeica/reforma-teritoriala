@@ -11,3 +11,5 @@ Replay-ul istoric și cel curent folosesc aceeași implementare statică, bazat�
 Originalele istorice rămân intacte. Diferențele dintre cele două capturi sunt păstrate cu hashuri distincte: 91 de răspunsuri diferă exclusiv prin metadatele generatorului API, nu prin elementele OSM. Aceste observații nu relaxează comparațiile de geometrie sau integritate și nu furnizează un verdict de prospețime globală.
 
 OSM-FIX.2 rămâne blocat de Horești/Buneți. NI-JUR.0–4 nu primesc acceptare prin integrarea acestui PR. Issue #396 rămâne OPEN. `actual_mutation_allowed=false`, `p91_import_allowed=false`, `semantic_acceptance=BLOCKED_INCOMPLETE`.
+
+Remedierea RM-019 este retestată pe `a2d3672f8d4d2a2a92ff899575630d315bf8e1e3`: workflow-ul NI39556982026 și CodeQL119079174109 sunt PASS, fără alerte noi. Admiterea PR-ului cere în continuare toate gate-urile pe HEAD-ul final; această probă nu închide OSM-FIX.2 sau NI-JUR.

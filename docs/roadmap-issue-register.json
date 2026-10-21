@@ -381,12 +381,13 @@
       "change": "Expand read-only workflow triggers to include its actual dependency/input domains; reuse a shared static geometry replay for both historical and current original captures. Preserve all tests and add negative prepared-dossier guards with separate legal/control axes.",
       "regression": "scripts/test/ni-evidence-dependency-coverage.test.mjs checks14 concrete isolated inputs for both PR/push; original test failure and repaired PASS are archived. Current93 geometry and4278-pair replay and generator negative guards run in the same read-only job.",
       "pr": 400,
-      "verification_sha": null,
+      "verification_sha": "a2d3672f8d4d2a2a92ff899575630d315bf8e1e3",
       "evidence": [
         "docs/evidence/ni-ci-dependency-coverage-20261021/before.log.gz",
-        "docs/evidence/ni-ci-dependency-coverage-20261021/after.log.gz"
+        "docs/evidence/ni-ci-dependency-coverage-20261021/after.log.gz",
+        "NI preservation/current replay39556982026 SUCCESS and CodeQL119079174109 SUCCESS with0newalerts ona2d3672f8d4d2a2a92ff899575630d315bf8e1e3. Both93-geometry/4278-pair epochs, deterministic85-row generation,18unit/negative guards and original DOCX replay pass. Final full-head admission remains mandatory."
       ],
-      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
     }
   ],
   "environment_incidents": [
@@ -469,5 +470,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-21T06:33:27.575Z"
+  "updated_at": "2026-10-21T06:50:07.704Z"
 }
