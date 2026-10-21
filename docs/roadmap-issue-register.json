@@ -191,16 +191,17 @@
       "id": "RM-010",
       "severity": "P0",
       "component": "OSM-FIX.2 security / candidate publication and source paths",
-      "reproduction": "Inspect CodeQL check 118873508997 at a20c55036a66fad6a037d0fe9f898beea2f0b5bd: 1 critical privileged-checkout and 12 high path/SSRF annotations.",
+      "reproduction": "Inspect CodeQL check118873508997 at a20c55036a66fad6a037d0fe9f898beea2f0b5bd:13 alerts involving privileged checkout, path sinks and SSRF; GitHub reported1critical and12high.",
       "cause": "New workflow executes repository code with contents:write; new source tooling forwards environment paths and manifest-derived URLs/paths without a closed allowlist at all file/network sinks.",
       "change": "Separate read-only candidate construction from a publisher that never checks out or executes repository/artifact code; publisher verifies exact base, regular-file modes and source-only diff. Restrict manifests, evidence paths, content-addressed snapshots and official API URL origin/path; disallow redirects.",
       "regression": "osm-source-paths.test.mjs; workflow-write-boundaries.test.mjs; exact-head CodeQL required.",
-      "verdict": "OPEN_PENDING_EXACT_HEAD_CI",
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED",
       "evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/runs/118873508997"
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/118873508997",
+        "CodeQL aggregate SUCCESS on74742bd87149bf1844833502f6beff2bf08bc864; source-continuity negative suite39501820260 PASS; trust-chain39501820316 PASS."
       ],
       "pr": 398,
-      "verification_sha": null
+      "verification_sha": "74742bd87149bf1844833502f6beff2bf08bc864"
     },
     {
       "id": "RM-011",
@@ -218,14 +219,15 @@
       "cause": "A relation/full response does not recursively expand child-relation ways/nodes. Bulk import did not enforce recursive closure. Closure audit checked only direct ways and truncated diagnostics; node coordinate presence was not tested.",
       "change": "Recover only real API dependencies with a bounded request budget, cycle detection, no version drift and no change of selected inventory. Preserve full recursive missing-reference and coordinate diagnostics. Retain OSM relation versions via out meta.",
       "regression": "osm-dependency-recovery.test.mjs; osm-closure-audit.test.mjs; existing adaptive transport regression tests.",
-      "verdict": "OPEN_PENDING_LIVE_RETEST",
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED",
       "evidence": [
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39493585697",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39490046141",
-        "Live candidate39499124871 at ac95d6eb9e18ce3dae3037b1aa74ac00613175b8: RO/MD missing_reference_count=0,invalid_coordinate_count=0; only two independent real-source topology defects remain."
+        "Live candidate39499124871 at ac95d6eb9e18ce3dae3037b1aa74ac00613175b8: RO/MD missing_reference_count=0,invalid_coordinate_count=0; only two independent real-source topology defects remain.",
+        "Latest live probe39501820447: RO/MD missing_reference_count0 and invalid_coordinate_count0. Remaining graph defects are tracked independently inRM-012."
       ],
       "pr": 398,
-      "verification_sha": null
+      "verification_sha": "74742bd87149bf1844833502f6beff2bf08bc864"
     },
     {
       "id": "RM-012",
@@ -236,14 +238,15 @@
         "relation/18968082"
       ],
       "reproduction": "Audit archived current-source candidate 39490046141: Horești outer endpoints 12318728194/12318728593 and Buneți 11649857778/8265822008 each have odd degree 1.",
-      "cause": "CONFIRMED_EXTERNAL_OSM_DATA: official relation/full responses reproduce the same odd endpoint IDs with complete node coordinates/dependencies: Horești relation18967493 v6 (2026-01-08T17:48:30Z), Buneți relation18968082 v7 (2026-03-31T13:11:32Z). It is not a validator invention or a missing-node import artifact.",
+      "cause": "CONFIRMED_EXTERNAL_OSM_DATA: official relation/full responses reproduce the same odd endpoint IDs with complete node coordinates/dependencies: Horești relation18967493 v6 (2026-01-08T17:48:30Z), Buneți relation18968082 v7 (2026-03-31T13:11:32Z). It is not a validator invention or a missing-node import artifact. The two odd endpoint node pairs have exactly coincident coordinates. This is disconnected source-node identity, not a measured coordinate gap. No automatic node welding is authorized.",
       "change": "No fabricated edge, relation resurrection, feature exclusion or ACTUAL mutation. Preserve failed source acceptance until the official source is legitimately corrected and recaptured.",
       "regression": "osm-closure-audit.test.mjs keeps odd endpoints blocked even when a subarea ring is closed.",
       "verdict": "BLOCKED_EXTERNAL_OSM_TOPOLOGY",
       "evidence": [
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39490046141",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39499124871",
-        "GitHub artifact12299141401 sha256:f2417a9531715c0597400ba89c2626ad046e41b25a2a2dfdbabd708654e7299c"
+        "GitHub artifact12299141401 sha256:f2417a9531715c0597400ba89c2626ad046e41b25a2a2dfdbabd708654e7299c",
+        "2026-10-21 official full/history recapture: unchanged relation18967493/v6 and18968082/v7, zero missing dependencies/invalid coordinates. Both defects also occur in the protected historical member/node sequences. Node reverse usages show9 Horesti ways and5 Buneti ways; no public edit performed."
       ],
       "pr": 398,
       "verification_sha": null
@@ -258,11 +261,133 @@
       "cause": "Earlier OSM-FIX.2 commit16f6ad104363ea8ba7cd6cced205f45a7c8a35e1 corrupted the YAML run scalar while replacing the data guard; duplicated upload block breaks workflow parsing.",
       "change": "Restore a single complete tab-delimited Bash while loop with the existing strict source-only path/status checks and one evidence upload step. No allowlist or guard relaxation.",
       "regression": "workflow-write-boundaries.test.mjs: complete indented data-guard scalar, single upload and retained rejection diagnostics; real GitHub workflow validation and execution required.",
-      "verification_sha": null,
+      "verification_sha": "74742bd87149bf1844833502f6beff2bf08bc864",
       "evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39499819107"
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39499819107",
+        "WEB-R2a.1 actual GitHub workflow39501820457 SUCCESS on74742bd87149bf1844833502f6beff2bf08bc864; no path/status allowlist relaxation."
       ],
-      "verdict": "OPEN_PENDING_EXACT_HEAD_CI"
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
+    },
+    {
+      "id": "RM-014",
+      "severity": "P2",
+      "component": "Documentary acquisition response classification",
+      "entities": [
+        "PMR-ISSUER-CURRENT-INDEX"
+      ],
+      "reproduction": "The issuer returned HTTP200 and the8-byte body ANTIDDOS (SHA2567aea52293b18567a1868136e11e0358227a37d88387311e09e7f8de86689e540). The initial local acquisition index recorded retrieval success based on HTTP alone.",
+      "cause": "HTTP success was treated as content retrieval without validating document structure or binary signature. No legal certification was issued.",
+      "change": "Retain the initial index and original response; classify the placeholder BLOCKED_CONTENT. Validate binary magic/HTML structure and keep retrieval separate from legal certification.",
+      "regression": "scripts/test/documentary-response.test.mjs: HTTP200 placeholder, HTML masquerading as PDF, HTTP403 and valid binary/HTML fixtures.",
+      "pr": 399,
+      "verification_sha": "481f3fd5c493b27d2e7817ada8f1c404293031bf",
+      "evidence": [
+        "docs/evidence/ni-jur-independent-20261020/documentary/document-index.initial.json",
+        "docs/evidence/ni-jur-independent-20261020/documentary/document-index.json",
+        "NI independent evidence workflow39509713259 SUCCESS on481f3fd5c493b27d2e7817ada8f1c404293031bf; CodeQL118927740228 SUCCESS;3 response tests,2 import/node-identity regressions,6 negative dossier guards, original DOCX replay and93-polygon topology replay PASS."
+      ],
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
+    },
+    {
+      "id": "RM-015",
+      "severity": "P0",
+      "component": "Independent geometry replay",
+      "entities": [
+        "NI independent evidence auditor"
+      ],
+      "reproduction": "CodeQL check118926200915 on3b04456ac2ef798fa555881570f5d259cceea7b9 reported code injection at dynamic VM execution of the historical source block.",
+      "cause": "Runtime code loading from a repository file, even with a pinned hash, introduced an unnecessary executable-text sink.",
+      "change": "Use static imports of existing geometry functions; make the live auditor safe to import by guarding its CLI entry point. Keep the historical pure function block byte-identical and assert its SHA256 without executing text.",
+      "regression": "scripts/test/ni-geometry-import.test.mjs checks side-effect-free import and preserves rejection of open node-identity rings. Existing live-source self-test remains enabled.",
+      "pr": 399,
+      "verification_sha": "481f3fd5c493b27d2e7817ada8f1c404293031bf",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/runs/118926200915",
+        "NI independent evidence workflow39509713259 SUCCESS on481f3fd5c493b27d2e7817ada8f1c404293031bf; CodeQL118927740228 SUCCESS;3 response tests,2 import/node-identity regressions,6 negative dossier guards, original DOCX replay and93-polygon topology replay PASS."
+      ],
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
+    },
+    {
+      "id": "RM-016",
+      "severity": "P2",
+      "component": "Geometry import regression harness",
+      "entities": [
+        "PR399 static-import regression"
+      ],
+      "reproduction": "CodeQL alert92 reports js/bad-code-sanitization at scripts/test/ni-geometry-import.test.mjs:8 on02541f189219293d0c2416fbfea7200b48c8fba6. The test interpolates a module URL into a node -e script.",
+      "cause": "The subprocess regression used code construction for a filesystem-derived module URL although the imported target was fixed and no dynamic code was required.",
+      "change": "Replace node -e and URL interpolation with a fixed static module fixture. Preserve the child process, --audit argument and network-failure guard. Include the fixture in workflow path triggers.",
+      "regression": "scripts/test/ni-geometry-import.test.mjs: import must produce only IMPORT_ONLY, must not fetch or run the CLI; coincident distinct source nodes remain rejected.",
+      "pr": 399,
+      "verification_sha": "2f3f8ab6ccea31c89441d771171aa73e84e9e211",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/security/code-scanning/92",
+        "NI evidence workflow39549197831 PASS and CodeQL119054472419 SUCCESS on2f3f8ab6ccea31c89441d771171aa73e84e9e211. The node -e construction was removed, not suppressed. Mandatory full admission remains separate."
+      ],
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
+    },
+    {
+      "id": "RM-017",
+      "severity": "P3",
+      "component": "Read-only historical OSM member comparison",
+      "entities": [
+        "18967493",
+        "18968082"
+      ],
+      "reproduction": "The first source-repair preparation compared raw JSON member objects. Overpass embedded geometry and object key order produced a false membership-drift result despite identical ordered type/ref/role tuples.",
+      "cause": "Transport-specific decoration was included in member identity comparison.",
+      "change": "Normalize ordered type/ref/role tuples while comparing way node sequences and node coordinates separately. Preserve both initial and corrected reports and all immutable original responses.",
+      "regression": "scripts/test/osm-closure-audit.test.mjs: decoration/key-order differences do not imply membership drift; changed member type/ref/role still differ. Both real official full graphs remain blocked individually.",
+      "pr": 398,
+      "verification_sha": "10154ab024b59d3d8d4d247f895221259ad0f6be",
+      "evidence": [
+        "docs/evidence/osm-fix2/source-repair-review-20261021/source-repair-proposal.initial.json",
+        "docs/evidence/osm-fix2/source-repair-review-20261021/source-repair-proposal.json",
+        "OSM continuity workflow39549975932 SUCCESS on10154ab024b59d3d8d4d247f895221259ad0f6be;40 relevant OSM regressions passed. Source-only promotion remains blocked independently."
+      ],
+      "verdict": "CLOSED_RETEST_PASS_ON_DRAFT_PR_398_NOT_INTEGRATED"
+    },
+    {
+      "id": "RM-018",
+      "severity": "P2",
+      "component": "OSM continuity workflow path coverage",
+      "entities": [
+        "OSM audit and transport modules",
+        "OSM closure/dependency regression tests"
+      ],
+      "reproduction": "An isolated change to scripts/lib/osm-closure-audit.mjs or its test did not match the PR/push paths declared by osm-source-continuity.yml, although that workflow is responsible for those regressions.",
+      "cause": "The workflow declared only selected source-continuity and transition filenames, omitting other modules in its actual test command.",
+      "change": "Include all osm-*.mjs library modules, osm-*.test.mjs regressions and OSM-FIX.2 evidence in PR/push triggers. No permissions, gates, thresholds or tests are removed.",
+      "regression": "scripts/test/osm-closure-audit.test.mjs simulates isolated file changes for eight concrete audited modules/tests against each PR/push trigger and requires selection.",
+      "pr": 398,
+      "verification_sha": "10154ab024b59d3d8d4d247f895221259ad0f6be",
+      "evidence": [
+        ".github/workflows/osm-source-continuity.yml",
+        "OSM continuity workflow39549975932 SUCCESS on10154ab024b59d3d8d4d247f895221259ad0f6be;40 relevant OSM regressions passed. Source-only promotion remains blocked independently."
+      ],
+      "verdict": "CLOSED_RETEST_PASS_ON_DRAFT_PR_398_NOT_INTEGRATED"
+    },
+    {
+      "id": "RM-019",
+      "severity": "P2",
+      "component": "NI evidence replay workflow dependency coverage",
+      "entities": [
+        "NI original-source replay",
+        "OSM transport and topology libraries",
+        "Protected ACTUAL reference inputs"
+      ],
+      "reproduction": "Run scripts/test/ni-evidence-dependency-coverage.test.mjs against main66a915b27a8ab8168df624749dc6d937295576af: pull_request omits scripts/lib/osm-adaptive-transport.mjs. Isolated changes to imported libraries and references did not select the NI-specific replay.",
+      "cause": "Workflow path filters listed the initial entry points but omitted imported library/helper modules, protected references and pinned dependency inputs.",
+      "change": "Expand read-only workflow triggers to include its actual dependency/input domains; reuse a shared static geometry replay for both historical and current original captures. Preserve all tests and add negative prepared-dossier guards with separate legal/control axes.",
+      "regression": "scripts/test/ni-evidence-dependency-coverage.test.mjs checks14 concrete isolated inputs for both PR/push; original test failure and repaired PASS are archived. Current93 geometry and4278-pair replay and generator negative guards run in the same read-only job.",
+      "pr": 400,
+      "verification_sha": "a2d3672f8d4d2a2a92ff899575630d315bf8e1e3",
+      "evidence": [
+        "docs/evidence/ni-ci-dependency-coverage-20261021/before.log.gz",
+        "docs/evidence/ni-ci-dependency-coverage-20261021/after.log.gz",
+        "NI preservation/current replay39556982026 SUCCESS and CodeQL119079174109 SUCCESS with0newalerts ona2d3672f8d4d2a2a92ff899575630d315bf8e1e3. Both93-geometry/4278-pair epochs, deterministic85-row generation,18unit/negative guards and original DOCX replay pass. Final full-head admission remains mandatory."
+      ],
+      "verdict": "CLOSED_TECHNICAL_RETEST_PASS_SOURCE_PROMOTION_STILL_BLOCKED"
     }
   ],
   "environment_incidents": [
@@ -272,8 +397,7 @@
       "cause": "Git LF to CRLF conversion",
       "remedy": "Restore exact tracked blob bytes; do not alter accepted hashes",
       "retest": "p907219 --audit and --self-test PASS",
-      "verdict": "RESOLVED",
-      "observations": []
+      "verdict": "RESOLVED"
     },
     {
       "id": "ENV-002",
@@ -281,8 +405,7 @@
       "cause": "CDP Page.enable timed out before samples; root cause beyond sandbox transport not proven",
       "remedy": "Rerun with authorized local connection access",
       "retest": "Chrome/155.0.8059.80 benchmark PASS",
-      "verdict": "RESOLVED_FOR_EXECUTION",
-      "observations": []
+      "verdict": "RESOLVED_FOR_EXECUTION"
     },
     {
       "id": "ENV-003",
@@ -290,8 +413,7 @@
       "cause": "spawn bash ENOENT; existing platform-dependent adversarial preflight also skipped",
       "remedy": "Use the existing mandatory Linux verify-persisted-release job, which invokes test:actual-candidate-lifecycle; no test altered or disabled",
       "retest": "152 PASS, zero FAIL, zero SKIP on main 335234bdb7b8cec828d4d2ad11d42d5bc5f99642, Actions 39326818180",
-      "verdict": "RESOLVED_LINUX_CI",
-      "observations": []
+      "verdict": "RESOLVED_LINUX_CI"
     },
     {
       "id": "ENV-004",
@@ -305,76 +427,7 @@
         118332458878,
         118333769340,
         118337163408
-      ],
-      "observations": [
-        {
-          "sha": "1a6107594438d752e793df5dd57aed96272d4474",
-          "job": 118545209412,
-          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
-          "audit": "outputs/ci-watch/1a6107594438d752e793df5dd57aed96272d4474/failure-118545209412.json",
-          "auditSha256": "c6192628152e79a31165c3e30c8c4715a51558c5ac83a30a41da8da5ebedd059",
-          "log": "outputs/ci-watch/1a6107594438d752e793df5dd57aed96272d4474/failure-118545209412.log",
-          "logSha256": "3d64726286311e7e634f36f089b48d081c94d878f6942f488ae6e140783a9bc8",
-          "sameShaCiVerdict": "PASS",
-          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
-        },
-        {
-          "sha": "6216178a96cf0f790d1348d5a1108f0838fbc84d",
-          "job": 118520295126,
-          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
-          "audit": "outputs/ci-watch/6216178a96cf0f790d1348d5a1108f0838fbc84d/failure-118520295126.json",
-          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
-          "log": "outputs/ci-watch/6216178a96cf0f790d1348d5a1108f0838fbc84d/failure-118520295126.log",
-          "logSha256": "858cbbb0a9cd559e7c181dffa6d5e2d9b8bef5d07b429f001a907763e4b52945",
-          "sameShaCiVerdict": "PASS",
-          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
-        },
-        {
-          "sha": "861d78b232a1f99d92255201526fffe19a2b7558",
-          "job": 118532245152,
-          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
-          "audit": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118532245152.json",
-          "auditSha256": "96b3a7d84062fb1e861f6a2216f0e8088214578f445376006cb48f6f57a5bbb3",
-          "log": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118532245152.log",
-          "logSha256": "b4f9301a3e50668d1a2eeabc2f542f71ffa70f20ad87655f3999a0b0c113acaa",
-          "sameShaCiVerdict": "PASS",
-          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
-        },
-        {
-          "sha": "861d78b232a1f99d92255201526fffe19a2b7558",
-          "job": 118537246514,
-          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
-          "audit": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118537246514.json",
-          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
-          "log": "outputs/ci-watch/861d78b232a1f99d92255201526fffe19a2b7558/failure-118537246514.log",
-          "logSha256": "775d7ef5bbf08963cccb13b13689ee45ef45a855e648b3db7702b94c3d624d9d",
-          "sameShaCiVerdict": "PASS",
-          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
-        },
-        {
-          "sha": "ad5073041d582cae9caa6f031684ffd0a427d938",
-          "job": 118349531342,
-          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
-          "audit": "outputs/ci-watch/ad5073041d582cae9caa6f031684ffd0a427d938/failure-118349531342.json",
-          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
-          "log": "outputs/ci-watch/ad5073041d582cae9caa6f031684ffd0a427d938/failure-118349531342.log",
-          "logSha256": "0d54f1c44a9cecae9b88b79e761cd5bf688b06487c26160e83a15806f571517d",
-          "sameShaCiVerdict": "PASS",
-          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
-        },
-        {
-          "sha": "e8f418c005396b2fbda8bf883867b6e745e83a7b",
-          "job": 118521596197,
-          "cause": "Unapproved hosted runtime profile; ACTUAL gate refused before execution",
-          "audit": "outputs/ci-watch/e8f418c005396b2fbda8bf883867b6e745e83a7b/failure-118521596197.json",
-          "auditSha256": "fd0c6c7aace1be84b4594583ed8d0aba287ee72ff2806f003bdb0d9ee4c57245",
-          "log": "outputs/ci-watch/e8f418c005396b2fbda8bf883867b6e745e83a7b/failure-118521596197.log",
-          "logSha256": "870e63ea7ea21d64931021a098cbfdf81fcd3e504fe28c7534c63fcac118fb92",
-          "sameShaCiVerdict": "PASS",
-          "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
-        }
-      ],
-      "note": "Historical original failures and bounded same-SHA retests are retained. Each final head and postmerge requires all gates PASS; no protected contract was changed."
+      ]
     }
   ],
   "open_evidence_gates": [
@@ -417,5 +470,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-20T21:27:05.158Z"
+  "updated_at": "2026-10-21T06:50:07.704Z"
 }
