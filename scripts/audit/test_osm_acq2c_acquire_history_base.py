@@ -1,7 +1,7 @@
 import unittest,tempfile,pathlib,hashlib,json,io,contextlib
 from unittest.mock import patch
 import osm_acq2c_acquire_history_base as module
-from osm_acq2c_acquire_history_base import validate_range,TOTAL,ETAG,exclusive_acquisition
+from osm_acq2c_acquire_history_base import validate_range,TOTAL,ETAG,exclusive_acquisition,storage_root
 class Tests(unittest.TestCase):
  def headers(self):return {'Content-Range':f'bytes 0-15/{TOTAL}','Content-Length':'16','ETag':ETAG}
  def test_valid(self):validate_range(206,self.headers(),0,15)
@@ -10,6 +10,11 @@ class Tests(unittest.TestCase):
  def test_wrong_range(self):self.assertRaises(ValueError,validate_range,206,self.headers(),1,16)
  def test_wrong_etag(self):h=self.headers();h['ETag']='new';self.assertRaises(ValueError,validate_range,206,h,0,15)
  def test_partial(self):h=self.headers();h['Content-Length']='15';self.assertRaises(ValueError,validate_range,206,h,0,15)
+ def test_arbitrary_destination_is_not_a_storage_slot(self):
+  for value in ('..','../..','C:\\Windows','/tmp','repository/../'):
+   with self.subTest(value=value),self.assertRaises(ValueError):storage_root(value)
+  self.assertEqual(storage_root('repository'),pathlib.Path(module.__file__).resolve().parents[2]/'work'/'osm-acq2c-bulk')
+  self.assertEqual(storage_root('workspace'),pathlib.Path(module.__file__).resolve().parents[3]/'osm-acq2c-bulk')
  def test_exclusive_lock_and_release(self):
   with tempfile.TemporaryDirectory()as d:
    root=pathlib.Path(d)

@@ -28,14 +28,14 @@ ACTUAL 3,246 RO + 2,602 MD = 5,848 / 32 protected components remains unchanged. 
 
 `osm_acq2c_acquire_history_base.py` requests only the fixed official immutable base URL, with its observed ETag and exact 64 MiB byte ranges. Each completely received segment is hashed before checkpointing. Complete length, the independently retrieved official MD5 and a full locally computed SHA-256 are required before renaming the partial original. No timestamp is relabelled and even a verified base remains unqualified for the later target epoch. The original publisher MD5 receipt is `0587abc2f5a3a29a81ce3b067357933b  history-261019.osm.pbf`.
 
-There are 19 additional offline acquisition tests (36 with the 17 replay tests), including partial/oversized responses, version drift, corrupted resume, uncommitted suffix preservation, bounded HTTP 429/502/503/504 retry, timeout recovery and exclusive locking. Fixtures are synthetic and never counted as acquired OSM evidence.
+There are 20 additional offline acquisition tests (37 with the 17 replay tests), including partial/oversized responses, version drift, corrupted resume, uncommitted suffix preservation, bounded HTTP 429/502/503/504 retry, timeout recovery, exclusive locking and rejection of arbitrary destination paths. Fixtures are synthetic and never counted as acquired OSM evidence.
 
 ```text
 python scripts/audit/test_osm_acq2c_acquire_history_base.py
-python scripts/audit/osm_acq2c_acquire_history_base.py --destination-directory PATH_TO_PRIVATE_BASE_DIRECTORY
+python scripts/audit/osm_acq2c_acquire_history_base.py --storage-slot repository
 ```
 
-Only after a prior acquisition has actually stopped, use `--resume` against the **same** directory. Every committed segment is rehashed, an unexpected suffix blocks restoration without truncation, and pre-existing originals are never replaced. Do not launch another acquisition while the checkpoint PID is active. The already running local session uses the separately checkpointed local helper and original directory; this repository does not contain or claim completion of that transfer.
+Only after a prior acquisition has actually stopped, use `--resume` against the **same** named slot. The repository slot is fixed at REPOSITORY/work/osm-acq2c-bulk; workspace is the fixed sibling REPOSITORY_PARENT/osm-acq2c-bulk used by the current local workspace. No arbitrary path components are accepted. Every committed segment is rehashed, an unexpected suffix blocks restoration without truncation, and pre-existing originals are never replaced. Do not launch another acquisition while the checkpoint PID is active. The already running local session uses the separately checkpointed local helper and original directory; this repository does not contain or claim completion of that transfer.
 
 ## PR #413 postmerge admission
 

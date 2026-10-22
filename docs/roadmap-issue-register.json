@@ -701,6 +701,22 @@
         "actual_repro_compare": "SUCCESS",
         "published_chromium_run": 39864196444
       }
+    },
+    {
+      "id": "RM-039",
+      "severity": "P1",
+      "component": "OSM-ACQ.2c acquisition CLI write-surface restriction",
+      "reproduction": "PR414 head bdf5f32c2aeca60cb1db940a218d7c7b65f2cceb: CodeQL check120125051866 reports four high uncontrolled-path alerts for destination-directory flowing into lock/directory/acquisition-state I/O.",
+      "cause": "An unrestricted destination-directory CLI option was used as a filesystem root without constraining the write surface.",
+      "change": "Remove arbitrary path input. Only named repository/workspace slots select statically constructed source-relative storage directories; no user value is a path component. No CodeQL settings or security threshold changed.",
+      "regression": "Reject traversal and absolute destination strings, prove exact two fixed roots; 20 acquisition and17 replay tests pass locally.",
+      "pr": 414,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-acq2c-replication-tail-20261022/codeql-original-alerts.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/414"
+      ],
+      "verdict": "FIXED_LOCAL_TESTS_PENDING_EXACT_HEAD_CODEQL_AND_CI"
     }
   ],
   "environment_incidents": [
@@ -1433,5 +1449,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-22T22:25:27.134Z"
+  "updated_at": "2026-10-22T22:30:30.963Z"
 }

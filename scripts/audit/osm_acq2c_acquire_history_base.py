@@ -6,6 +6,12 @@ ETAG='"5d9fe0daa39fee0a74e78c83582be15a-9769"'
 MD5='0587abc2f5a3a29a81ce3b067357933b'
 ROOT=pathlib.Path(__file__).resolve().parents[2]/'work'/'osm-acq2c-bulk'
 
+def storage_root(slot):
+    # User input selects a named slot, never any component of a filesystem path.
+    if slot=='repository':return pathlib.Path(__file__).resolve().parents[2]/'work'/'osm-acq2c-bulk'
+    if slot=='workspace':return pathlib.Path(__file__).resolve().parents[3]/'osm-acq2c-bulk'
+    raise ValueError('Only fixed repository/workspace acquisition slots are permitted')
+
 @contextlib.contextmanager
 def exclusive_acquisition(root):
     root.mkdir(parents=True,exist_ok=True)
@@ -69,6 +75,6 @@ def acquire(resume=False):
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument('--resume',action='store_true')
-    parser.add_argument('--destination-directory',type=pathlib.Path,required=True)
-    args=parser.parse_args();ROOT=args.destination_directory
+    parser.add_argument('--storage-slot',choices=('repository','workspace'),default='repository')
+    args=parser.parse_args();ROOT=storage_root(args.storage_slot)
     with exclusive_acquisition(ROOT):acquire(args.resume)
