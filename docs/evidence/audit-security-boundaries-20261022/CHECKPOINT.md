@@ -9,3 +9,5 @@ The historical integrity command previously tested only empty Git stdout; an una
 Validation:35 local tests PASS (9 boundary cases,6 source-integrity cases,20 published-source/runtime/retry cases). Raw native output remains in original-tests.txt.gz, readable output is explicitly normalized only for line endings and trailing whitespace. CodeQL rescan and full exact-head CI remain mandatory. No alert was dismissed and no analysis rule was disabled.
 
 Protected ACTUAL5848/32, legal MD parents, host-trust, source freshness14days and blocked P9.1 remain unchanged. No public OSM edits or source promotion.
+
+Exact PR ref refs/pull/416/head at70a4f13 has three completed CodeQL analyses (actions,python,JavaScript), each with zero results and no analysis error; open alert list on that analyzed ref is empty. Main is not claimed fixed until integration and a complete main rescan. The metadata update itself requires fresh exact-head CI before merge.
