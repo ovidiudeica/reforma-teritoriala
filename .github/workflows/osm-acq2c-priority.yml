@@ -7,6 +7,7 @@ on:
       - 'scripts/audit/osm_acq2c_priority.py'
       - 'scripts/audit/test_osm_acq2c_priority.py'
       - 'docs/evidence/osm-acq2a-incremental-20261022/registry.json.gz'
+      - 'docs/evidence/osm-acq2c-priority-pilot-20261022/**'
   workflow_dispatch:
 
 permissions:
@@ -37,5 +38,5 @@ jobs:
         with:
           name: osm-acq2c-historical-originals
           path: ${{ runner.temp }}/osm-acq2c-priority/
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 30
