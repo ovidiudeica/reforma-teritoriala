@@ -142,6 +142,8 @@ def run():
         'incomplete':sum(x['verdict']=='RETRIEVAL_INCOMPLETE' for x in captured),
         'rejected':sum(x['verdict']=='HISTORY_REJECTED' for x in captured),
         'new_relation_verdicts':0},sort_keys=True))
+    if any(x['verdict'] != 'HISTORICAL_VERSION_PROVEN' for x in captured):
+        raise SystemExit('FAIL CLOSED: incomplete or rejected historical captures; consult original XML artifact')
 
 if __name__=='__main__':
     run()
