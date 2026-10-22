@@ -1,0 +1,97 @@
+✔ live acceptance fingerprints the actual published source bytes (69.8604ms)
+✔ a stale deployed application fails even if the local commit is correct (6.73ms)
+✔ missing published resources cannot be accepted (0.6768ms)
+✔ PR audit identifies deployed base separately from the unpublished candidate auditor (0.9625ms)
+✔ post-merge/manual audit requires published bytes from the exact auditor checkout (0.2674ms)
+✖ initial published source manifest recovers from transient503 with exact bytes and history (24.1375ms)
+✖ source retry never admits HTTP200 stale manifest bytes (21.0382ms)
+✖ initial source persistent503 remains blocked after three attempts (0.9628ms)
+✔ initial source404 is never retried (0.5414ms)
+✖ initial source timeout can recover without bypassing byte verification (0.441ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 6
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 256.7926
+
+✖ failing tests:
+
+test at scripts\test\frontend-published-source.test.mjs:15:1
+✖ initial published source manifest recovers from transient503 with exact bytes and history (24.1375ms)
+  AssertionError [ERR_ASSERTION]: Published source HTTP data/current/actual-release-manifest.json
+
+  503 !== 200
+
+      at verifyPublishedSource (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/audit/helpers/published-source.mjs:23:63)
+      at async TestContext.<anonymous> (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/test/frontend-published-source.test.mjs:17:13)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 503,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\frontend-published-source.test.mjs:20:1
+✖ source retry never admits HTTP200 stale manifest bytes (21.0382ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Published source differs.*actual-release-manifest/. Input:
+
+  'AssertionError [ERR_ASSERTION]: Published source HTTP data/current/actual-release-manifest.json\n' +
+    '\n' +
+    '503 !== 200\n'
+
+      at async TestContext.<anonymous> (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/test/frontend-published-source.test.mjs:22:2)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: AssertionError [ERR_ASSERTION]: Published source HTTP data/current/actual-release-manifest.json
+
+    503 !== 200
+
+        at verifyPublishedSource (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/audit/helpers/published-source.mjs:23:63)
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async TestContext.<anonymous> (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/test/frontend-published-source.test.mjs:22:2)
+        at async Test.run (node:internal/test_runner/test:1409:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:974:7),
+    expected: /Published source differs.*actual-release-manifest/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at scripts\test\frontend-published-source.test.mjs:24:1
+✖ initial source persistent503 remains blocked after three attempts (0.9628ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  1 !== 3
+
+      at TestContext.<anonymous> (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/test/frontend-published-source.test.mjs:25:189)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\frontend-published-source.test.mjs:30:1
+✖ initial source timeout can recover without bypassing byte verification (0.441ms)
+  TimeoutError: fixture timeout
+      at new DOMException (node:internal/per_context/domexception:76:18)
+      at fetcher (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/test/frontend-published-source.test.mjs:31:118)
+      at verifyPublishedSource (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/audit/helpers/published-source.mjs:23:24)
+      at TestContext.<anonymous> (file:///C:/Users/ovidi/Documents/Codex/2026-10-19/roadmap-master-pentru-codex-reforma-teritorial/work/doc-supplement/scripts/test/frontend-published-source.test.mjs:31:31)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

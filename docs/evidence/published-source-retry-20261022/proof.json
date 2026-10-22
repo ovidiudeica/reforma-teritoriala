@@ -17,5 +17,11 @@
     "fail": 0
   },
   "http_200_and_exact_sha256_still_mandatory": true,
-  "source_promoted": false
+  "source_promoted": false,
+  "original_log_sha256": {
+    "before": "bab7fdb1410873fea3aceb7f485661dec61022d0ac7897d082fa7461d13c74cc",
+    "after": "b7e81dfe82ce71c2afe66df06ffb8657875c6f237587e588c2c3ece4f1f647a2"
+  },
+  "readable_log_normalization": "Trailing space/tab removed from readable text only; full original bytes preserved in .original.txt.gz",
+  "additional_tracked_manifest_regression": true
 }

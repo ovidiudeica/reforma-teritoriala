@@ -668,14 +668,15 @@
       "reproduction": "Run39865505650 fails at verifyPublishedSource on data/current/actual-release-manifest.json HTTP503 before full runtime retry is reached. Local before-fix regression:6 PASS/4FAIL.",
       "cause": "Nine-source early provenance verifier bypassed the existing bounded retry helper used by the full runtime inventory; live manifest returned503.",
       "change": "Reuse fetchPublishedWithRetry in the initial source check; retain strict HTTP200 and SHA256 checks and disclose attempt history. No threshold or UI behavior change.",
-      "regression": "503 recovery,503 then stale200 rejection,persistent503 fail-closed,404 no retry,timeout recovery;19/19 relevant tests PASS locally.",
-      "pr": null,
+      "regression": "Five transport/source scenarios plus tracked-manifest regression;20/20 relevant tests PASS locally. Historical runtime-fix before/after logs6PASS/4FAIL and19PASS are preserved without relabelling.",
+      "pr": 415,
       "verification_sha": null,
       "evidence": [
         "docs/evidence/published-source-retry-20261022/manifest-sha256.json",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39865505650"
       ],
-      "verdict": "FIXED_LOCAL_REGRESSION_PASS_PENDING_EXACT_HEAD_CI"
+      "verdict": "FIXED_LOCAL_REGRESSION_PASS_PENDING_EXACT_HEAD_CI",
+      "evidence_packaging": "Initial *.log copies were ignored by Git. Raw originals are preserved in deterministic GZIP; readable .txt has trailing whitespace trimmed explicitly. Mandatory tracked-file/hash test covers all six evidence files."
     }
   ],
   "environment_incidents": [

@@ -4,6 +4,8 @@ import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {verifyPublishedSource,publishedSourceContext} from '../audit/helpers/published-source.mjs';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const fixture=async(url)=>{const name=new URL(url).pathname.slice('/reforma-teritoriala/'.length);return new Response(await readFile(new URL('../../'+name,import.meta.url)));};
 test('live acceptance fingerprints the actual published source bytes',async()=>{const rows=await verifyPublishedSource(root,{fetcher:fixture});assert.equal(rows.length,9);assert.ok(rows.every(r=>r.status==='PASS'&&/^[a-f0-9]{64}$/.test(r.sha256)));});
@@ -29,4 +31,11 @@ test('initial source404 is never retried',async()=>{
 });
 test('initial source timeout can recover without bypassing byte verification',async()=>{
  let calls=0;const rows=await verifyPublishedSource(root,{pause:async()=>{},fetcher:async url=>{if(++calls===1)throw new DOMException('fixture timeout','TimeoutError');return fixture(url);}});assert.equal(rows.length,9);assert.equal(calls,10);assert.equal(rows[0].httpAttempts,2);
+});
+
+test('source retry evidence manifest references tracked byte-identical files',async()=>{
+ const base='docs/evidence/published-source-retry-20261022/';
+ const manifest=JSON.parse(await readFile(path.join(root,base,'manifest-sha256.json')));
+ const names=['before.txt','after.txt','before.original.txt.gz','after.original.txt.gz','failed-artifact-receipt.json','proof.json'];assert.equal(manifest.files.length,names.length);
+ for(const name of names){const relative=base+name,row=manifest.files.find(r=>r.name===name);assert.ok(row,'Missing manifest entry '+name);assert.equal(execFileSync('git',['ls-files','--',relative],{cwd:root,encoding:'utf8'}).trim(),relative,'Evidence is not tracked');const raw=await readFile(path.join(root,base,name));assert.equal(raw.length,row.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),row.sha256);}
 });
