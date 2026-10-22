@@ -5,6 +5,8 @@ on:
       - '.github/workflows/osm-acq2c-replication-tail.yml'
       - 'scripts/audit/osm_acq2c_replication_chain.py'
       - 'scripts/audit/test_osm_acq2c_replication_chain.py'
+      - 'scripts/audit/osm_acq2c_acquire_history_base.py'
+      - 'scripts/audit/test_osm_acq2c_acquire_history_base.py'
       - 'scripts/audit/osm_acq2c_bulk_preflight.py'
       - 'scripts/audit/osm_acq2c_full_batch.py'
       - 'scripts/audit/osm_acq2c_priority.py'
@@ -26,7 +28,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Negative integrity, sequence and full-version parser tests
-        run: python scripts/audit/test_osm_acq2c_replication_chain.py
+        run: |
+          python scripts/audit/test_osm_acq2c_replication_chain.py
+          python scripts/audit/test_osm_acq2c_acquire_history_base.py
       - name: Verify public evidence manifest; no network or original contributor data
         run: |
           python - <<'PY'

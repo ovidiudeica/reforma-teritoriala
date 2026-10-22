@@ -638,9 +638,11 @@
       "evidence": [
         "docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/native-regression-proof.json",
         "https://github.com/ovidiudeica/reforma-teritoriala/pull/413",
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39860526112"
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39860526112",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39862581241",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39864196444"
       ],
-      "verdict": "FIXED_EXACT_HEAD_CI_PASS_POSTMERGE_PENDING",
+      "verdict": "CLOSED_PASS",
       "exact_head_checks": {
         "success": 20,
         "conditional_skipped": 2,
@@ -648,7 +650,17 @@
         "codeql": "SUCCESS",
         "offline_preflight_run": 39860526112
       },
-      "merge_commit": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598"
+      "merge_commit": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+      "postmerge_verification": {
+        "sha": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+        "success": 22,
+        "failures": 0,
+        "pending": 0,
+        "actual_repro_A": "SUCCESS",
+        "actual_repro_B": "SUCCESS",
+        "actual_repro_compare": "SUCCESS",
+        "published_chromium_run": 39864196444
+      }
     },
     {
       "id": "RM-038",
@@ -666,9 +678,11 @@
       "evidence": [
         "docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/native-regression-proof.json",
         "https://github.com/ovidiudeica/reforma-teritoriala/pull/413",
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39860526112"
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39860526112",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39862581241",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39864196444"
       ],
-      "verdict": "FIXED_EXACT_HEAD_CI_PASS_POSTMERGE_PENDING",
+      "verdict": "CLOSED_PASS",
       "exact_head_checks": {
         "success": 20,
         "conditional_skipped": 2,
@@ -676,7 +690,17 @@
         "codeql": "SUCCESS",
         "offline_preflight_run": 39860526112
       },
-      "merge_commit": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598"
+      "merge_commit": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+      "postmerge_verification": {
+        "sha": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+        "success": 22,
+        "failures": 0,
+        "pending": 0,
+        "actual_repro_A": "SUCCESS",
+        "actual_repro_B": "SUCCESS",
+        "actual_repro_compare": "SUCCESS",
+        "published_chromium_run": 39864196444
+      }
     }
   ],
   "environment_incidents": [
@@ -1409,5 +1433,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-22T22:16:16.778Z"
+  "updated_at": "2026-10-22T22:25:27.134Z"
 }
