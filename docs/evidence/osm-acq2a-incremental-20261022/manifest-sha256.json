@@ -1,0 +1,73 @@
+{
+  "schema": "osm-acq2a-incremental-manifest-v1",
+  "epoch": "2026-10-20T20:23:47Z",
+  "files": [
+    {
+      "name": "registry.json.gz",
+      "bytes": 358112,
+      "sha256": "6ef70dbd2651b73d467e6a6b25650806e7eb7197bfff83f639c2649c29d003e7"
+    },
+    {
+      "name": "summary.json",
+      "bytes": 2152,
+      "sha256": "bb09cd0353d237256f0230290f580c527df71d377beeaef9b53cef3f644c088d"
+    },
+    {
+      "name": "acq2a_audit.py",
+      "bytes": 14780,
+      "sha256": "e25824a961faf641e0e11900a519f10556217267ed683d90edff88e4bc32a6c7"
+    },
+    {
+      "name": "test_acq2a_audit.py",
+      "bytes": 4165,
+      "sha256": "197698668483deddf745025c4d8310f067337aa4487ec9f3e2ecb5613824a54f"
+    },
+    {
+      "name": "tests.txt",
+      "bytes": 1443,
+      "sha256": "56309923cc19190c4f3c2b05e97199dac0b964487185a662b62b6cd1cb2a31f5"
+    },
+    {
+      "name": "regeneration.txt",
+      "bytes": 601,
+      "sha256": "e40f005a0cf19abc5427ccb0b58d77c7cab8a3b460a7bb3a6d0b5a6d0189a266"
+    },
+    {
+      "name": "CHECKPOINT.md",
+      "bytes": 7114,
+      "sha256": "ecd6924b53aad2d5c909c78741169c1d5576640eb65d78b038c5afea2db9d923"
+    }
+  ],
+  "input_evidence": [
+    {
+      "body_sha256": "c01c2826abcc2912893580ba3ac614264da72b2df730ea1e79fa1e23d430f0b2",
+      "domain": "RO",
+      "epoch": "2026-10-20T20:23:47Z",
+      "gzip_sha256": "b51ab1bd4016b1a5f665c42a8a930b51ea5487b14f4ab855909b8bd29f4d5805",
+      "matrix_sha256": "8c458c329bf16fcc974521b9e7edd08931917ea93f7f5087a76a9958bcf44e2f",
+      "raw_file": "ro-extract-candidates.json.gz"
+    },
+    {
+      "body_sha256": "f05f4b300af4689f2dfba507aaf8197aca436729b8563ee47a48453668387691",
+      "domain": "MD",
+      "epoch": "2026-10-20T20:23:47Z",
+      "gzip_sha256": "1ac0cd91582daf6c455529cbb3a579abb86692f915b3b20d55dfe9ddc28fa00b",
+      "matrix_sha256": "30af862712a80753e378bd8b5f5e717aa61005398e5e978ad416be3ffc7025f1",
+      "raw_file": "md-extract-candidates.json.gz"
+    }
+  ],
+  "original_local_log_sha256": [
+    {
+      "name": "tests.txt",
+      "bytes": 1462,
+      "sha256": "9cbd94daec63db543ac23978340f1450c756712ee10ddf03637d423b974c224a"
+    },
+    {
+      "name": "regeneration.txt",
+      "bytes": 602,
+      "sha256": "7a32ace270a51f1601be81955af52af9e020ca9263db66747c8f89b776f54b8e"
+    }
+  ],
+  "log_normalization": "Repository text logs CRLF to LF; original local logs unchanged.",
+  "uncompressed_registry_sha256": "833a25a36d4251c022ed84853207e90a71771498f4bd99c4189e901aacdd539e"
+}
