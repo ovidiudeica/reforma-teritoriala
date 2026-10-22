@@ -1,0 +1,129 @@
+{
+  "epoch": "2026-10-20T20:23:47Z",
+  "overpass_equivalence_certified": false,
+  "proofs": [
+    {
+      "current_sha256": "3adec5996a5ab845e3eda7f49f3649c76b4079f2d55ed2a9de6eafa2d52ca4d1",
+      "effective_from": "2024-10-22T19:48:00Z",
+      "effective_until": null,
+      "history_sha256": "a6dcf93b26866e4713a755cb08ffa8cc76f54fd84a871563e1d67bcb15335577",
+      "latest_version": 31,
+      "node_id": 30848693,
+      "object": {
+        "id": 30848693,
+        "lat": 46.1889728,
+        "lon": 20.4270576,
+        "tags": {
+          "ksh_ref": "26666",
+          "name": "Kiszombor",
+          "name:ru": "Кишзомбор",
+          "name:sr": "Кишзомбор",
+          "place": "village",
+          "place:hu": "nagyközség",
+          "population": "3621",
+          "population:date": "2024-01-01",
+          "postal_code": "6775",
+          "source:population": "KSH (www.ksh.hu)",
+          "source:population:date": "2024-01-01",
+          "source:postal_code": "Magyar Posta (posta.hu)",
+          "source:postal_code:date": "2009-03-01"
+        },
+        "timestamp": "2024-10-22T19:48:00Z",
+        "type": "node",
+        "version": 31
+      },
+      "relation_id": 1025098
+    },
+    {
+      "current_sha256": "9d6931a4d9d954418e435c31a997be3d8e106b8d70dce4113b55373629db0b60",
+      "effective_from": "2024-10-22T19:48:00Z",
+      "effective_until": null,
+      "history_sha256": "347aeef58182d0e9b8540142b91b63e13688b890affa7b31ba0ef3fde6090df3",
+      "latest_version": 31,
+      "node_id": 354700504,
+      "object": {
+        "id": 354700504,
+        "lat": 46.7347025,
+        "lon": 21.47905,
+        "tags": {
+          "ksh_ref": "06804",
+          "name": "Kötegyán",
+          "name:ru": "Кётедьян",
+          "name:sr": "Кетеђан",
+          "place": "village",
+          "place:hu": "község",
+          "population": "1158",
+          "population:date": "2024-01-01",
+          "postal_code": "5725",
+          "source:population": "KSH (www.ksh.hu)",
+          "source:population:date": "2024-01-01",
+          "source:postal_code": "Magyar Posta (posta.hu)",
+          "source:postal_code:date": "2009-03-01"
+        },
+        "timestamp": "2024-10-22T19:48:00Z",
+        "type": "node",
+        "version": 31
+      },
+      "relation_id": 1026139
+    }
+  ],
+  "rows": [
+    {
+      "domain": "RO",
+      "id": 1025098,
+      "inside_witness": null,
+      "missing": [],
+      "node_occurrence_states": {
+        "boundary": 65,
+        "outside": 54
+      },
+      "previous_verdict": "UNKNOWN_MISSING_DEPENDENCIES",
+      "recovered_node_id": 30848693,
+      "segment_count": 111,
+      "segment_interval_states": {
+        "boundary": 60,
+        "outside": 51
+      },
+      "timestamp": "2020-02-16T20:05:36Z",
+      "used_objects": 119,
+      "used_objects_sha256": "9d33d7aa97f1392b5ad88ec444a411d8084a14b30fbc9618041b1d8374c3da2b",
+      "verdict": "OUT_OF_SCOPE_PROVEN",
+      "version": 7,
+      "way_count": 7
+    },
+    {
+      "domain": "RO",
+      "id": 1026139,
+      "inside_witness": null,
+      "missing": [],
+      "node_occurrence_states": {
+        "boundary": 148,
+        "outside": 64
+      },
+      "previous_verdict": "UNKNOWN_MISSING_DEPENDENCIES",
+      "recovered_node_id": 354700504,
+      "segment_count": 206,
+      "segment_interval_states": {
+        "boundary": 143,
+        "outside": 63
+      },
+      "timestamp": "2020-08-09T19:00:32Z",
+      "used_objects": 212,
+      "used_objects_sha256": "569efae44b40770025d9f927c165480fdae85b76ad9f0d340ecaaaaf39036d76",
+      "verdict": "OUT_OF_SCOPE_PROVEN",
+      "version": 8,
+      "way_count": 5
+    }
+  ],
+  "scope": "Independent frozen spatial predicate, using authenticated official node histories for the two missing dependencies.",
+  "source_promoted": false,
+  "summary": {
+    "new_resolved_ids": [
+      1025098,
+      1026139
+    ],
+    "previous_resolved_ids": 131,
+    "remaining_unknown_ids": 258,
+    "total_resolved_ids": 133
+  }
+}
