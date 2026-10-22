@@ -1,0 +1,27 @@
+✔ published inventory covers tracked code, worker GIS dependencies, contracts, catalogs and geometry, excluding untracked bytes (2820.0632ms)
+✔ stale worker GIS dependency fails even when the root modules match (1357.5001ms)
+✔ an HTTP200 stale geometry fails with the exact mismatched resource and hashes (1237.7738ms)
+✔ missing runtime resources fail instead of being omitted from the inventory (1589.0799ms)
+✔ a transient 503 followed by HTTP200 stale geometry still fails the exact-byte gate (1926.3027ms)
+✔ live acceptance fingerprints the actual published source bytes (143.9709ms)
+✔ a stale deployed application fails even if the local commit is correct (9.7725ms)
+✔ missing published resources cannot be accepted (1.0406ms)
+✔ PR audit identifies deployed base separately from the unpublished candidate auditor (1.5752ms)
+✔ post-merge/manual audit requires published bytes from the exact auditor checkout (0.2445ms)
+✔ initial published source manifest recovers from transient503 with exact bytes and history (26.6719ms)
+✔ source retry never admits HTTP200 stale manifest bytes (20.8289ms)
+✔ initial source persistent503 remains blocked after three attempts (1.2753ms)
+✔ initial source404 is never retried (0.8746ms)
+✔ initial source timeout can recover without bypassing byte verification (131.7932ms)
+✔ transient public HTTP 503 is retried without becoming a PASS itself (62.3338ms)
+✔ persistent transient HTTP error is returned as failure for strict HTTP 200 caller (0.7518ms)
+✔ HTTP 404 is not retried or treated as transient (0.593ms)
+✔ nontransient fetch errors propagate without retry (2.006ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9177.4804

@@ -44,5 +44,6 @@ jobs:
               seen.add(name)
               raw=(root/name).read_bytes()
               assert len(raw)==row['bytes'] and hashlib.sha256(raw).hexdigest()==row['sha256']
+          assert seen=={p.name for p in root.iterdir() if p.is_file() and p.name!='manifest-sha256.json'}
           assert json.loads((root/'chain-audit.json').read_bytes())['source_qualified'] is False
           PY

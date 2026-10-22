@@ -40,3 +40,13 @@ Only after a prior acquisition has actually stopped, use `--resume` against the 
 ## PR #413 postmerge admission
 
 Main `f22d6bca280c6ceea61cc8c3deb1c7d238ff2598`: all 22 checks SUCCESS, including genuine A/B and deterministic comparison, three CodeQL analyses, Pages deployment and explicitly dispatched exact-main published Chromium run [39864196444](https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39864196444). The 32 ACTUAL component hashes and 5,848 identities were independently checked locally. RM-037 and RM-038 are closed with exact fix-head `93b5d22963816a1fe880eb1c759bfa1d49326b55` and postmerge evidence. This closes the preflight tooling admission, **not OSM-ACQ.2c or source promotion**.
+
+## Subsequent security and overlap audit
+
+RM-039 preserves the four original high CodeQL path-flow alerts on bdf5f32. The unrestricted destination argument was replaced with fixed named storage slots. CodeQL check120126851271 on8ff4047 reports SUCCESS with zero alert annotations; the reconciled local suite passes37 tests. This is security-defect closure only; complete PR admission still requires all gates on the new exact HEAD. No security configuration was weakened.
+
+The two tail way IDs are absent from the prior136: ordered indices246 and503, both needed by relations11951843/11951882. They remain observations, not authenticated full-history additions or new relation verdicts. See tail-prior-dedup.json.
+
+## PR #415 prerequisite closed
+
+The early nine-source HTTP503 failure is fixed separately in PR415 on e6cc5aa:25/25 exact-head checks SUCCESS and20 local source/runtime/evidence tests PASS. Merge8b052ec3 passed23/23 postmerge checks, genuine A/B/compare, CodeQL and exact-main published Chromium run39869009638. RM040 is closed with those immutable proofs. This reconciliation preserves both RM039 and RM040 and all historical failures. The new PR414 HEAD must pass its own complete admission again.

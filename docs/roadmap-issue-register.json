@@ -711,12 +711,53 @@
       "change": "Remove arbitrary path input. Only named repository/workspace slots select statically constructed source-relative storage directories; no user value is a path component. No CodeQL settings or security threshold changed.",
       "regression": "Reject traversal and absolute destination strings, prove exact two fixed roots; 20 acquisition and17 replay tests pass locally.",
       "pr": 414,
-      "verification_sha": null,
+      "verification_sha": "8ff4047c1da5f72c243d565e5ea72be6bfbde6fc",
       "evidence": [
         "docs/evidence/osm-acq2c-replication-tail-20261022/codeql-original-alerts.json",
-        "https://github.com/ovidiudeica/reforma-teritoriala/pull/414"
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/414",
+        "docs/evidence/osm-acq2c-replication-tail-20261022/codeql-rescan-proof.json"
       ],
-      "verdict": "FIXED_LOCAL_TESTS_PENDING_EXACT_HEAD_CODEQL_AND_CI"
+      "verdict": "CLOSED_CODEQL_RESCAN_PASS_PR_ADMISSION_SEPARATE",
+      "codeql_verification": {
+        "check": 120126851271,
+        "conclusion": "SUCCESS",
+        "alert_annotations": 0
+      }
+    },
+    {
+      "id": "RM-040",
+      "severity": "P2",
+      "component": "Published nine-source provenance preflight transient transport",
+      "related_issue": "RM-029",
+      "reproduction": "Run39865505650 fails at verifyPublishedSource on data/current/actual-release-manifest.json HTTP503 before full runtime retry is reached. Local before-fix regression:6 PASS/4FAIL.",
+      "cause": "Nine-source early provenance verifier bypassed the existing bounded retry helper used by the full runtime inventory; live manifest returned503.",
+      "change": "Reuse fetchPublishedWithRetry in the initial source check; retain strict HTTP200 and SHA256 checks and disclose attempt history. No threshold or UI behavior change.",
+      "regression": "Five transport/source scenarios plus tracked-manifest regression;20/20 relevant tests PASS locally. Historical runtime-fix before/after logs6PASS/4FAIL and19PASS are preserved without relabelling.",
+      "pr": 415,
+      "verification_sha": "e6cc5aa774788d07b30c9d264bf55d0092725cea",
+      "evidence": [
+        "docs/evidence/published-source-retry-20261022/manifest-sha256.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39865505650",
+        "docs/evidence/osm-acq2c-replication-tail-20261022/postmerge-pr415-proof.json"
+      ],
+      "verdict": "CLOSED_PASS",
+      "evidence_packaging": "Initial *.log copies were ignored by Git. Raw originals are preserved in deterministic GZIP; readable .txt has trailing whitespace trimmed explicitly. Mandatory tracked-file/hash test covers all six evidence files.",
+      "exact_head_checks": {
+        "success": 25,
+        "skipped": 0,
+        "codeql": "SUCCESS",
+        "mandatory_checks_success": 6
+      },
+      "postmerge_verification": {
+        "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+        "success": 23,
+        "pending": 0,
+        "failures": 0,
+        "actual_repro_A": "SUCCESS",
+        "actual_repro_B": "SUCCESS",
+        "actual_repro_compare": "SUCCESS",
+        "published_chromium_run": 39869009638
+      }
     }
   ],
   "environment_incidents": [
@@ -1449,5 +1490,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-22T22:30:30.963Z"
+  "updated_at": "2026-10-22T23:17:07.456Z"
 }
