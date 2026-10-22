@@ -31,12 +31,12 @@ jobs:
       - name: Plan deduplicated targets from pinned evidence
         run: python scripts/audit/osm_acq2c_priority.py --plan-only
       - name: Read-only bounded official OSM history capture
-        run: python scripts/audit/osm_acq2c_priority.py --output "$RUNNER_TEMP/osm-acq2c-priority"
+        run: python scripts/audit/osm_acq2c_priority.py
       - name: Preserve raw XML and SHA-256 receipts
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: osm-acq2c-historical-originals
-          path: ${{ runner.temp }}/osm-acq2c-priority/
+          path: outputs/osm-acq2c-priority-run/
           if-no-files-found: error
           retention-days: 30
