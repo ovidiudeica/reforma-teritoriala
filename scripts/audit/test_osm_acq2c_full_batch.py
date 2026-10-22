@@ -43,7 +43,8 @@ class InventoryTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             plan_registry({'rows':[row(72526,[['node',1]])]},strict=True)
     def test_pilot_set_does_not_label_any_relation_proven(self):
-        p=plan_registry({'rows':[row(72526,[list(next(iter(PILOT_OBJECTS))])])},strict=False)
+        obj=next(iter(PILOT_OBJECTS))
+        p=plan_registry({'rows':[row(72526,[list(obj)])]},strict=False)
         self.assertEqual(len(p['already_piloted']),1)
         self.assertEqual(p['unknown_distinct'],1)
 
