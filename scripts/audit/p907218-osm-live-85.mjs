@@ -7,6 +7,7 @@ import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import RelateOp from 'jsts/org/locationtech/jts/operation/relate/RelateOp.js';
 import {readTopologyGeometry} from '../lib/p82-topology.mjs';
+import {osmRelationFullUrl} from './helpers/audit-io-boundaries.mjs';
 
 const read=p=>JSON.parse(readFileSync(new URL('../../'+p,import.meta.url),'utf8'));
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -103,8 +104,8 @@ function segmentDiff(ref,cur){
 async function full(id){
  let error;
  for(let i=0;i<3;i++){
-  for(const host of ['https://api.openstreetmap.org','https://www.openstreetmap.org']){
-   const url=host+'/api/0.6/relation/'+id+'/full';
+  for(const mirror of [false,true]){
+   const url=osmRelationFullUrl(id,mirror);
    try{
     const start=new Date().toISOString();
     const response=await fetch(url,{headers:{Accept:'application/xml','User-Agent':'ReformaAdmin-P907218-OSM-Live-ReadOnly/1.0'},signal:AbortSignal.timeout(95000)});

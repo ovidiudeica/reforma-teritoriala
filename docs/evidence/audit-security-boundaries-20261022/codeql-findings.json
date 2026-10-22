@@ -1,0 +1,82 @@
+[
+  {
+    "number": 96,
+    "rule": "js/regex-injection",
+    "severity": "high",
+    "ref": "refs/heads/main",
+    "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+    "path": "scripts/audit/p903-nistrenia-exceptions.mjs",
+    "line": 91,
+    "message": "This regular expression is constructed from a user-provided value."
+  },
+  {
+    "number": 95,
+    "rule": "js/request-forgery",
+    "severity": "critical",
+    "ref": "refs/heads/main",
+    "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+    "path": "scripts/audit/p907218-osm-live-85.mjs",
+    "line": 110,
+    "message": "The URL of this request depends on a user-provided value."
+  },
+  {
+    "number": 94,
+    "rule": "js/request-forgery",
+    "severity": "critical",
+    "ref": "refs/heads/main",
+    "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+    "path": "scripts/audit/p9062-full-geometry.mjs",
+    "line": 80,
+    "message": "The URL of this request depends on a user-provided value."
+  },
+  {
+    "number": 93,
+    "rule": "js/request-forgery",
+    "severity": "critical",
+    "ref": "refs/heads/main",
+    "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+    "path": "scripts/audit/p903-nistrenia-exceptions.mjs",
+    "line": 88,
+    "message": "The URL of this request depends on a user-provided value."
+  },
+  {
+    "number": 66,
+    "rule": "js/request-forgery",
+    "severity": "critical",
+    "ref": "refs/heads/main",
+    "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+    "path": "scripts/audit/web-r2b-final-pages-browser.mjs",
+    "line": 152,
+    "message": "The URL of this request depends on a user-provided value."
+  },
+  {
+    "number": 65,
+    "rule": "js/path-injection",
+    "severity": "high",
+    "ref": "refs/heads/main",
+    "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+    "path": "scripts/audit/web-r2a2-verify-historical-osm.mjs",
+    "line": 44,
+    "message": "This path depends on a user-provided value."
+  },
+  {
+    "number": 64,
+    "rule": "js/path-injection",
+    "severity": "high",
+    "ref": "refs/heads/main",
+    "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+    "path": "scripts/audit/web-r2a2-verify-historical-osm.mjs",
+    "line": 43,
+    "message": "This path depends on a user-provided value."
+  },
+  {
+    "number": 63,
+    "rule": "js/request-forgery",
+    "severity": "critical",
+    "ref": "refs/heads/main",
+    "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+    "path": "scripts/audit/web-r2a2-verify-historical-osm.mjs",
+    "line": 19,
+    "message": "The URL of this request depends on a user-provided value."
+  }
+]
