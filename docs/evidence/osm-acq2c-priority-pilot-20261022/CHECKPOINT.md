@@ -10,9 +10,12 @@ Run:
 ```sh
 python scripts/audit/test_osm_acq2c_priority.py
 python scripts/audit/osm_acq2c_priority.py --plan-only
-python scripts/audit/osm_acq2c_priority.py --output <new-empty-directory>
+python scripts/audit/osm_acq2c_priority.py  # writes only to outputs/osm-acq2c-priority-run/
 ```
 
 No changes to ACTUAL (3,246 RO + 2,602 MD = 5,848, 32 protected components), legal MD parents, public geometry, 14-day freshness limit, host trust or P9.1. No OSM public changes, and no promotion of source. OSM-FIX.2 #398 remains Draft, issue #396 OPEN, NI-JUR #394/#402 gated.
 
 **Acceptance**: CI success of this pilot means only the bounded tests and requests completed; never upgrade OSM-ACQ.2c or 2d to CLOSED_PASS from this report alone. Inspect artifacts, preserve originals and complete remaining 242 independent dependency closures before source qualification.
+## Security remediation
+
+CodeQL on intermediate head `ebf55de64d35866cf316e10dcd9ccf894649386c` legitimately rejected six high-severity uncontrolled-path findings. The pilot now **rejects arbitrary destination paths** by removing `--output`, writes only to a fixed path under `outputs/`, uses fixed-format loop-indexed names rather than OSM identifiers as filesystem paths, and validates history directly from verified in-memory original bytes. This is a source change, not an alert dismissal; CodeQL on the new exact head must pass before merge. The earlier 8/8 pilot remains historical evidence but cannot substitute for the new-head CI gate.
