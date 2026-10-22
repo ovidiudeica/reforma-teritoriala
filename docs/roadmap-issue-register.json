@@ -634,12 +634,21 @@
       "change": "Require actual integer ID/length types and exact lowercase64-hex receipt identifiers. Independent receipt validation remains explicitly unqualified.",
       "regression": "Boolean IDs, boolean/float lengths, malformed/typed receipt IDs rejected.",
       "pr": 413,
-      "verification_sha": null,
+      "verification_sha": "93b5d22963816a1fe880eb1c759bfa1d49326b55",
       "evidence": [
         "docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/native-regression-proof.json",
-        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413"
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39860526112"
       ],
-      "verdict": "FIXED_NATIVE_REGRESSION_PASS_EXACT_HEAD_CI_REQUIRED"
+      "verdict": "FIXED_EXACT_HEAD_CI_PASS_POSTMERGE_PENDING",
+      "exact_head_checks": {
+        "success": 20,
+        "conditional_skipped": 2,
+        "mandatory_checks_success": 6,
+        "codeql": "SUCCESS",
+        "offline_preflight_run": 39860526112
+      },
+      "merge_commit": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598"
     },
     {
       "id": "RM-038",
@@ -653,12 +662,21 @@
       "change": "Write canonical ASCII ID bytes and UTF-8 JSON bytes; retain original evidence and fixed inventory.",
       "regression": "Native file digest must equal declared digest and pinned1911a146; two output directories must be byte-identical.",
       "pr": 413,
-      "verification_sha": null,
+      "verification_sha": "93b5d22963816a1fe880eb1c759bfa1d49326b55",
       "evidence": [
         "docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/native-regression-proof.json",
-        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413"
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39860526112"
       ],
-      "verdict": "FIXED_NATIVE_REGRESSION_PASS_EXACT_HEAD_CI_REQUIRED"
+      "verdict": "FIXED_EXACT_HEAD_CI_PASS_POSTMERGE_PENDING",
+      "exact_head_checks": {
+        "success": 20,
+        "conditional_skipped": 2,
+        "mandatory_checks_success": 6,
+        "codeql": "SUCCESS",
+        "offline_preflight_run": 39860526112
+      },
+      "merge_commit": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598"
     }
   ],
   "environment_incidents": [
@@ -1391,5 +1409,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-22T21:49:57.939Z"
+  "updated_at": "2026-10-22T22:16:16.778Z"
 }
