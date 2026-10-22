@@ -1,0 +1,21 @@
+{
+  "issue": "RM-040",
+  "related_issue": "RM-029",
+  "source_head": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+  "failed_head": "8ff4047c1da5f72c243d565e5ea72be6bfbde6fc",
+  "failed_run": 39865505650,
+  "failed_job": 120126567032,
+  "cause": "Nine-source early provenance verifier bypassed the existing bounded retry helper used by the full runtime inventory; live manifest returned503.",
+  "before": {
+    "tests": 10,
+    "pass": 6,
+    "fail": 4
+  },
+  "after": {
+    "tests": 19,
+    "pass": 19,
+    "fail": 0
+  },
+  "http_200_and_exact_sha256_still_mandatory": true,
+  "source_promoted": false
+}

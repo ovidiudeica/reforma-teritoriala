@@ -659,6 +659,23 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/pull/413"
       ],
       "verdict": "FIXED_NATIVE_REGRESSION_PASS_EXACT_HEAD_CI_REQUIRED"
+    },
+    {
+      "id": "RM-040",
+      "severity": "P2",
+      "component": "Published nine-source provenance preflight transient transport",
+      "related_issue": "RM-029",
+      "reproduction": "Run39865505650 fails at verifyPublishedSource on data/current/actual-release-manifest.json HTTP503 before full runtime retry is reached. Local before-fix regression:6 PASS/4FAIL.",
+      "cause": "Nine-source early provenance verifier bypassed the existing bounded retry helper used by the full runtime inventory; live manifest returned503.",
+      "change": "Reuse fetchPublishedWithRetry in the initial source check; retain strict HTTP200 and SHA256 checks and disclose attempt history. No threshold or UI behavior change.",
+      "regression": "503 recovery,503 then stale200 rejection,persistent503 fail-closed,404 no retry,timeout recovery;19/19 relevant tests PASS locally.",
+      "pr": null,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/published-source-retry-20261022/manifest-sha256.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39865505650"
+      ],
+      "verdict": "FIXED_LOCAL_REGRESSION_PASS_PENDING_EXACT_HEAD_CI"
     }
   ],
   "environment_incidents": [
@@ -1391,5 +1408,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-22T21:49:57.939Z"
+  "updated_at": "2026-10-22T22:36:45.679Z"
 }
