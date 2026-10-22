@@ -1,0 +1,96 @@
+{
+  "domain_verdict_counts": {
+    "OUT_OF_SCOPE_PROVEN": 15,
+    "UNKNOWN_INSUFFICIENT_SPATIAL_EVIDENCE": 116,
+    "UNKNOWN_MISSING_DEPENDENCIES": 262
+  },
+  "duplicate_domain_ids": [
+    72526,
+    72634
+  ],
+  "in_scope_proven_new_distinct_ids": 0,
+  "out_of_scope_proven_new_distinct_ids": 15,
+  "reported_unknown_initial_domain_rows": 393,
+  "unknown_domain_rows": 393,
+  "unknown_initial_distinct_ids": 391,
+  "unknown_remaining_distinct_ids": 376,
+  "unknown_resolved_distinct_ids": 15,
+  "unmodified_previously_nonunknown_domain_rows": 5894,
+  "resolved_ids": [
+    12593949,
+    18966787,
+    18966819,
+    18966826,
+    18967034,
+    18967055,
+    18967106,
+    18967153,
+    18967190,
+    18967254,
+    18967290,
+    18967898,
+    18968037,
+    19045259,
+    20181255
+  ],
+  "next_partially_recovered": [
+    {
+      "id": 72526,
+      "domain": "RO",
+      "remaining_missing": 108
+    },
+    {
+      "id": 72634,
+      "domain": "RO",
+      "remaining_missing": 43
+    },
+    {
+      "id": 72526,
+      "domain": "MD",
+      "remaining_missing": 108
+    },
+    {
+      "id": 72634,
+      "domain": "MD",
+      "remaining_missing": 43
+    },
+    {
+      "id": 11821462,
+      "domain": "MD",
+      "remaining_missing": 24
+    },
+    {
+      "id": 11905201,
+      "domain": "MD",
+      "remaining_missing": 24
+    }
+  ],
+  "minimum_exclusion_distance_degrees": 0.00036277091782084396,
+  "inventory": [
+    {
+      "candidate_not_historical": 413,
+      "domain": "RO",
+      "historical_ids": 3233,
+      "historical_not_candidate": 0,
+      "previous_status_counts": {
+        "EXPLICIT_QUERY_MEMBER": 1,
+        "NO_INTERIOR_WITNESS_COMPLETE_DIRECT_GEOMETRY": 75,
+        "PROPER_INTERIOR_WITNESS": 3233,
+        "UNKNOWN_MISSING_DIRECT_GEOMETRY": 337
+      },
+      "tag_candidates": 3646
+    },
+    {
+      "candidate_not_historical": 57,
+      "domain": "MD",
+      "historical_ids": 2596,
+      "historical_not_candidate": 12,
+      "previous_status_counts": {
+        "EXPLICIT_QUERY_MEMBER": 10,
+        "PROPER_INTERIOR_WITNESS": 2575,
+        "UNKNOWN_MISSING_DIRECT_GEOMETRY": 56
+      },
+      "tag_candidates": 2641
+    }
+  ]
+}
