@@ -98,7 +98,6 @@ def fetch(path):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--output')
     parser.add_argument('--plan-only',action='store_true')
     parser.add_argument('--limit-per-priority',type=int,default=2)
     parser.add_argument('--maximum',type=int,default=8)
@@ -110,25 +109,26 @@ def main():
     counts,selected=plan(json.loads(gzip.decompress(packed)),args.limit_per_priority,args.maximum)
     if args.plan_only:
         print(json.dumps({'missing':counts,'selected':selected,'source_promoted':False},indent=2));return
-    if not args.output:raise ValueError('Required --output')
-    out=pathlib.Path(args.output);out.mkdir(parents=True,exist_ok=False)
-    results=[]
-    for target in selected:
-        typ=target['type'];oid=target['id'];receipts={};error=None
+    out=ROOT/'outputs'/'osm-acq2c-priority-run'
+    out.mkdir(parents=True,exist_ok=False)
+    results=[];produced=[]
+    for index,target in enumerate(selected):
+        typ=target['type'];oid=target['id'];receipts={};originals={};error=None
         for mode,path in [('history',f'{typ}/{oid}/history'),('current',f'{typ}/{oid}')]:
             time.sleep(0.8)
             try:
                 data,receipt=fetch(path)
-                filename=f'{typ}-{oid}-{mode}.xml'
+                filename=f'object-{index:02d}-{mode}.xml'
                 (out/filename).write_bytes(data)
+                originals[mode]=data
+                produced.append({'name':filename,'bytes':len(data),'sha256':sha(data)})
                 receipts[mode]={**receipt,'file':filename}
             except (urllib.error.URLError,TimeoutError,ValueError) as e:
                 error=type(e).__name__+': '+str(e);receipts[mode]={'error':error};break
         verdict='RETRIEVAL_INCOMPLETE';proof=None
         if not error:
             try:
-                proof=verify_history((out/receipts['history']['file']).read_bytes(),
-                  (out/receipts['current']['file']).read_bytes(),typ,oid)
+                proof=verify_history(originals['history'],originals['current'],typ,oid)
                 verdict='HISTORICAL_VERSION_PROVEN'
             except (ValueError,ET.ParseError) as e:
                 verdict='HISTORY_REJECTED';proof={'error':str(e)}
@@ -136,11 +136,10 @@ def main():
     report={'epoch':'2026-10-20T20:23:47Z','scope':'Bounded raw XML read-only pilot only',
       'source_promoted':False,'overpass_equivalence_certified':False,'new_relation_verdicts':0,
       'parent_gzip_sha256':sha(packed),'priority_missing_counts':counts,'selected_count':len(selected),'rows':results}
-    (out/'capture.json').write_text(json.dumps(report,indent=2,ensure_ascii=False,sort_keys=True)+'\n',encoding='utf8')
-    files=[]
-    for f in sorted(out.iterdir()):
-        raw=f.read_bytes();files.append({'name':f.name,'bytes':len(raw),'sha256':sha(raw)})
-    (out/'manifest-sha256.json').write_text(json.dumps({'files':files},indent=2,sort_keys=True)+'\n',encoding='utf8')
+    capture_bytes=(json.dumps(report,indent=2,ensure_ascii=False,sort_keys=True)+'\n').encode('utf8')
+    (out/'capture.json').write_bytes(capture_bytes)
+    produced.append({'name':'capture.json','bytes':len(capture_bytes),'sha256':sha(capture_bytes)})
+    (out/'manifest-sha256.json').write_text(json.dumps({'files':sorted(produced,key=lambda x:x['name'])},indent=2,sort_keys=True)+'\n',encoding='utf8')
     print(json.dumps({'selected_count':len(selected),'historical_proven':sum(r['verdict']=='HISTORICAL_VERSION_PROVEN' for r in results),
       'retrieval_incomplete':sum(r['verdict']=='RETRIEVAL_INCOMPLETE' for r in results),
       'history_rejected':sum(r['verdict']=='HISTORY_REJECTED' for r in results),'new_relation_verdicts':0},indent=2))
