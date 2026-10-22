@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
-      - name: Eight negative/provenance and fixed cohort tests
+      - name: Negative provenance, native-byte determinism and fixed cohort tests
         run: python scripts/audit/test_osm_acq2c_bulk_preflight.py
       - name: Generate exact offline dependency IDs — never bulk-download OSM editing API
         run: python scripts/audit/osm_acq2c_bulk_preflight.py

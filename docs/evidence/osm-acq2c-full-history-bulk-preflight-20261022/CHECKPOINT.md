@@ -25,3 +25,11 @@ Only when the original and receipts are actually present, run python scripts/aud
 The resulting preflight does NOT verify the publisher receipt independently; a self-declared checksum alone is not source provenance. It does NOT verify every requested object exists (osmium getid history mode can return success despite missing IDs), continuity of all individual versions, full membership closure, topology/ring/hole reconstruction, the exact geometric spatial predicate, or Overpass generated-area equivalence. Those need independent per-ID verification and exhaustive byte-pinned replay with negative tests. Missing evidence preserves UNKNOWN. Neither PREPARED nor LOCAL_EXTRACTION_FINISHED_BUT_UNQUALIFIED is a PASS for OSM-ACQ.2c, OSM-ACQ.2d, OSM-FIX.2 or NI-JUR.
 
 Protected: ACTUAL 3,246 RO + 2,602 MD = 5,848 / 32 components; legal MD parents, public geometry, host trust and 14-day freshness unchanged. No live OSM edit. P9.1 blocked. Issue #396 open.
+
+## Native Windows and fail-closed audit regression
+
+RM-037: boolean IDs, boolean/float lengths, and malformed receipt SHA-256 identifiers are now rejected. This does not turn receipt presence into independent source qualification.
+
+RM-038: the original Windows generator wrote 3,208 CRLF lines but declared the LF digest. The actual native hash was beb1a0e06af1d1715f26362285fc76a119c4c574d89844c0189d7554d463efc3, whereas the declared and Linux artifact hash is 1911a146e69d54c46a960a21fbbc85dd55398d700d9560f1f9e67436e36ec3ac. Both ID and JSON files are now written as explicit canonical bytes. Native Windows tests compare actual files, declared digests and two independent output directories byte-for-byte.
+
+All 11 local tests pass. The exact-head CI must pass again before integration; this is still offline/tooling-only preflight, not OSM history qualification. See native-regression-proof.json for the immutable prior-head/artifact reproduction.

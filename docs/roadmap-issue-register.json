@@ -621,6 +621,44 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39639663180"
       ],
       "verdict": "FIXED_VERIFIED_EXACT_HEAD_NOT_FORMAL_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "RM-037",
+      "severity": "P3",
+      "component": "OSM-ACQ.2c preflight identity and provenance scalar validation",
+      "entities": [
+        "offline history preflight"
+      ],
+      "reproduction": "item_code(relation, True) returns rTrue; malformed receipt checksum not-a-digest is accepted; source_bytes=True compares equal to length1.",
+      "cause": "Python bool is an int subclass; receipt only checked for nonempty value; numeric equality accepts booleans/floats.",
+      "change": "Require actual integer ID/length types and exact lowercase64-hex receipt identifiers. Independent receipt validation remains explicitly unqualified.",
+      "regression": "Boolean IDs, boolean/float lengths, malformed/typed receipt IDs rejected.",
+      "pr": 413,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/native-regression-proof.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413"
+      ],
+      "verdict": "FIXED_NATIVE_REGRESSION_PASS_EXACT_HEAD_CI_REQUIRED"
+    },
+    {
+      "id": "RM-038",
+      "severity": "P2",
+      "component": "OSM-ACQ.2c native Windows byte reproducibility",
+      "entities": [
+        "3208-ID offline full-history plan"
+      ],
+      "reproduction": "Run offline execute(False) natively on Windows: actual ID-file hash beb1a0e06af1d1715f26362285fc76a119c4c574d89844c0189d7554d463efc3 differs from declared 1911a146e69d54c46a960a21fbbc85dd55398d700d9560f1f9e67436e36ec3ac due to3208 CRLF translations.",
+      "cause": "Path.write_text uses platform newline translation, while digest was computed before translation.",
+      "change": "Write canonical ASCII ID bytes and UTF-8 JSON bytes; retain original evidence and fixed inventory.",
+      "regression": "Native file digest must equal declared digest and pinned1911a146; two output directories must be byte-identical.",
+      "pr": 413,
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/native-regression-proof.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413"
+      ],
+      "verdict": "FIXED_NATIVE_REGRESSION_PASS_EXACT_HEAD_CI_REQUIRED"
     }
   ],
   "environment_incidents": [
@@ -1353,5 +1391,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-21T17:24:13.761Z"
+  "updated_at": "2026-10-22T21:49:57.939Z"
 }

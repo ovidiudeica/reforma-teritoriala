@@ -1,5 +1,11 @@
 """Offline fail-closed source provenance and exact-ID contract tests."""
 import unittest
+import hashlib
+import json
+import pathlib
+import tempfile
+from unittest.mock import patch
+import osm_acq2c_bulk_preflight as preflight
 from osm_acq2c_bulk_preflight import plan,evaluate_provenance,item_code,APPROVED_HOSTS,EPOCH
 
 GOOD={"publication_url":"https://planet.openstreetmap.org/pbf/full-history/history-261026.osm.pbf",
@@ -41,9 +47,35 @@ class BulkPreflightTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             evaluate_provenance(dict(GOOD,independent_publication_receipt_sha256=""),42,"a"*64)
     def test_invalid_ids(self):
-        for typ,id in (("relation",-1),("bad",5),("node","1"),("way",0)):
+        for typ,id in (("relation",-1),("bad",5),("node","1"),("way",0),("relation",True),("node",False)):
             with self.subTest(typ=typ,id=id),self.assertRaises(ValueError):
                 item_code(typ,id)
+
+    def test_malformed_publication_receipt_is_not_an_identifier(self):
+        for receipt in (None,"","not-a-digest","a"*63,"g"*64,True,{}):
+            with self.subTest(receipt=receipt),self.assertRaises(ValueError):
+                evaluate_provenance(dict(GOOD,independent_publication_receipt_sha256=receipt),42,"a"*64)
+
+    def test_lengths_require_integers_not_boolean_or_float(self):
+        for declared,actual in ((True,1),(42.0,42),(42,42.0),(1,True)):
+            with self.subTest(declared=declared,actual=actual),self.assertRaises(ValueError):
+                evaluate_provenance(dict(GOOD,source_bytes=declared),actual,"a"*64)
+
+    def test_written_bytes_match_declared_digest_and_repeat_identically(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            snapshots=[]
+            for index in range(2):
+                directory=pathlib.Path(temporary)/str(index)
+                with patch.object(preflight,"OUTPUT",directory):preflight.execute(False)
+                ids=(directory/"requested-object-ids.txt").read_bytes()
+                raw_plan=(directory/"plan.json").read_bytes()
+                metadata=json.loads(raw_plan)
+                self.assertNotIn(b"\r",ids)
+                self.assertNotIn(b"\r",raw_plan)
+                self.assertEqual(hashlib.sha256(ids).hexdigest(),metadata["ids_sha256"])
+                self.assertEqual(metadata["ids_sha256"],"1911a146e69d54c46a960a21fbbc85dd55398d700d9560f1f9e67436e36ec3ac")
+                snapshots.append((ids,raw_plan))
+            self.assertEqual(snapshots[0],snapshots[1])
 
 if __name__=="__main__":
     unittest.main(verbosity=2)

@@ -25,7 +25,7 @@ BATCH01_ZIP_SHA256="b13762100c9107bba0e08280a5c8efb6ebb5c546052e8d9effd4b94e929e
 BATCH02_ZIP_SHA256="b4aa2ef00237afa92b29e1785404a2b4901b8b81371f602db803598706a8c617"
 
 def item_code(typ,id):
-    if typ not in ("node","way","relation") or not isinstance(id,int) or id<=0:
+    if typ not in ("node","way","relation") or type(id) is not int or id<=0:
         raise ValueError("Bad immutable OSM identity")
     return {"node":"n","way":"w","relation":"r"}[typ]+str(id)
 
@@ -66,13 +66,14 @@ def evaluate_provenance(proof,bytes_count,actual_digest):
     if not isinstance(expected,str) or len(expected)!=64 or not all(c in "0123456789abcdef" for c in expected):
         raise ValueError("Missing published/independently verified SHA-256")
     if expected!=actual_digest:raise ValueError("Full original digest mismatch")
-    if proof.get("source_bytes")!=bytes_count or bytes_count<=0:
+    if type(proof.get("source_bytes")) is not int or type(bytes_count) is not int or proof["source_bytes"]!=bytes_count or bytes_count<=0:
         raise ValueError("Original length mismatch")
     through=dt.datetime.fromisoformat(str(proof.get("history_through","")).replace("Z","+00:00"))
     if through.tzinfo is None or through.astimezone(dt.timezone.utc)<dt.datetime.fromisoformat(EPOCH.replace("Z","+00:00")):
         raise ValueError("History source predates frozen exact epoch")
-    if proof.get("independent_publication_receipt_sha256") in (None,""):
-        raise ValueError("Independent original publication receipt absent")
+    receipt=proof.get("independent_publication_receipt_sha256")
+    if not isinstance(receipt,str) or len(receipt)!=64 or not all(c in "0123456789abcdef" for c in receipt):
+        raise ValueError("Independent original publication receipt SHA-256 absent or malformed")
     return {"local_integrity":"PASS",
             "publisher_receipt_crosscheck":"REQUIRES_INDEPENDENT_HUMAN_OR_SIGNED_VALIDATION",
             "history_epoch_covered_as_declared":True,"source_qualified":False}
@@ -85,14 +86,14 @@ def stream_sha256(path):
     return size,digest.hexdigest()
 
 def write_json(path,obj):
-    path.write_text(json.dumps(obj,ensure_ascii=False,sort_keys=True,indent=2)+"\n",encoding="utf8")
+    path.write_bytes((json.dumps(obj,ensure_ascii=False,sort_keys=True,indent=2)+"\n").encode("utf8"))
 
 def execute(do_process=False):
     if OUTPUT.exists():raise FileExistsError("Refuse to overwrite pinned evidence")
     OUTPUT.mkdir(parents=True)
     p=plan()
     ids="\n".join(p["required_history_object_ids"])+"\n"
-    (OUTPUT/"requested-object-ids.txt").write_text(ids,encoding="ascii")
+    (OUTPUT/"requested-object-ids.txt").write_bytes(ids.encode("ascii"))
     write_json(OUTPUT/"plan.json",{k:v for k,v in p.items() if k!="required_history_object_ids"} |
               {"ids_sha256":sha(ids.encode("ascii")),
                "original_history_required":True,"snapshot_adjudicated":False})
