@@ -1,0 +1,302 @@
+name: OSM source candidate materialization
+
+# Privileged source-byte writer. It never checks out or executes request-branch code.
+# The trigger PR is only an authenticated request envelope; source bytes are rebuilt
+# from trusted main after a read-only live probe succeeds.
+on:
+  workflow_run:
+    workflows: ['OSM current source reconciliation live probe']
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: osm-source-candidate-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: false
+
+jobs:
+  materialize-source-candidate:
+    outputs:
+      base: ${{ steps.base.outputs.sha }}
+      commit: ${{ steps.candidate.outputs.commit_sha }}
+      branch: ${{ steps.candidate.outputs.branch }}
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      startsWith(github.event.workflow_run.head_branch, 'osm/refresh-request-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    env:
+      OSM_CURRENT_SOURCE_MANIFEST: data/sources/osm-source-current.json
+      OSM_ACTUAL_PIN_MANIFEST: data/sources/osm-current.json
+      REQUEST_BRANCH: ${{ github.event.workflow_run.head_branch }}
+      REQUEST_SHA: ${{ github.event.workflow_run.head_sha }}
+      LIVE_RUN_ID: ${{ github.event.workflow_run.id }}
+    steps:
+      - name: Checkout trusted default branch only
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Validate refresh request without executing request code
+        run: |
+          set -euo pipefail
+          [[ "$REQUEST_BRANCH" =~ ^osm/refresh-request-[A-Za-z0-9._-]+$ ]]
+          git fetch --no-tags origin "refs/heads/$REQUEST_BRANCH:refs/remotes/origin/osm-refresh-request"
+          test "$(git rev-parse refs/remotes/origin/osm-refresh-request)" = "$REQUEST_SHA"
+          mapfile -t changed < <(git diff --name-only "origin/main...refs/remotes/origin/osm-refresh-request")
+          test "${#changed[@]}" -eq 1
+          test "${changed[0]}" = "data/sources/osm-source-refresh-request.json"
+          git show "$REQUEST_SHA:data/sources/osm-source-refresh-request.json" > "$RUNNER_TEMP/osm-source-refresh-request.json"
+          REQUEST_FILE="$RUNNER_TEMP/osm-source-refresh-request.json" node <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const request=JSON.parse(readFileSync(process.env.REQUEST_FILE,'utf8'));
+          const fail=m=>{throw new Error('OSM source refresh request rejected: '+m);};
+          if(request.schema_version!==1)fail('schema_version');
+          if(request.mode!=='OSM_SOURCE_REFRESH_REQUEST')fail('mode');
+          if(request.requested_scope!=='CURRENT_OSM_SOURCE_ONLY')fail('requested_scope');
+          if(request.actual_mutation_allowed!==false)fail('ACTUAL mutation must remain denied');
+          if(request.p91_import_allowed!==false)fail('P9.1 must remain denied');
+          if(request.semantic_acceptance!=='BLOCKED_INCOMPLETE')fail('semantic acceptance must remain blocked');
+          NODE
+
+      - name: Bind trusted main base
+        id: base
+        run: |
+          set -euo pipefail
+          BASE_SHA="$(git rev-parse HEAD)"
+          test "$BASE_SHA" = "$(git rev-parse origin/main)"
+          echo "sha=$BASE_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Rebuild current OSM source from trusted main
+        timeout-minutes: 25
+        env:
+          OSM_MANIFEST_PATH: ${{ env.OSM_CURRENT_SOURCE_MANIFEST }}
+        run: node scripts/import/import-osm.mjs
+
+      - name: Reconcile exact drift against protected ACTUAL pin
+        env:
+          OSM_CONTINUITY_BASELINE_MANIFEST: ${{ env.OSM_ACTUAL_PIN_MANIFEST }}
+          OSM_CONTINUITY_REPORT_ONLY: '1'
+        run: |
+          set -euo pipefail
+          node scripts/process/audit-osm-refresh-continuity.mjs
+          node scripts/process/audit-osm-fix2-source-transition.mjs
+          node scripts/process/capture-osm-fix2-forensics.mjs
+          node scripts/process/stage-osm-current-candidate.mjs
+
+      - name: Persist source-only evidence in candidate tree
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: |
+          set -euo pipefail
+          EVIDENCE_DIR="docs/evidence/osm-fix2/source-candidate-$LIVE_RUN_ID"
+          mkdir -p "$EVIDENCE_DIR"
+          cp outputs/osm-source-continuity.json "$EVIDENCE_DIR/"
+          cp outputs/osm-fix2-source-transition.json "$EVIDENCE_DIR/"
+          cp outputs/osm-fix2-per-id-forensics.json "$EVIDENCE_DIR/"
+          cp outputs/osm-source-candidate/artifact-receipt.json "$EVIDENCE_DIR/"
+          EVIDENCE_DIR="$EVIDENCE_DIR" BASE_SHA="$BASE_SHA" node <<'NODE'
+          import {readFileSync,writeFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const sha256=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+          const dir=process.env.EVIDENCE_DIR;
+          const paths=[
+            'osm-source-continuity.json',
+            'osm-fix2-source-transition.json',
+            'osm-fix2-per-id-forensics.json',
+            'artifact-receipt.json'
+          ].map(name=>dir+'/'+name);
+          const receipt={
+            schema:'osm-source-candidate-promotion-receipt-v1',
+            live_probe_run_id:Number(process.env.LIVE_RUN_ID),
+            request_branch:process.env.REQUEST_BRANCH,
+            request_sha:process.env.REQUEST_SHA,
+            trusted_main_base_sha:process.env.BASE_SHA,
+            guards:{
+              actual_mutation_allowed:false,
+              p91_import_allowed:false,
+              semantic_acceptance:'BLOCKED_INCOMPLETE'
+            },
+            evidence:Object.fromEntries(paths.map(path=>[path,sha256(path)]))
+          };
+          writeFileSync(dir+'/promotion-receipt.json',JSON.stringify(receipt,null,2)+'\n');
+          NODE
+
+      - name: Prove ACTUAL and public bytes remain untouched
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: |
+          set -euo pipefail
+          git diff --exit-code "$BASE_SHA" -- \
+            data/sources/osm-current.json \
+            data/current \
+            public/data/actual-entities.json \
+            public/data/actual-geometry-chunks.json \
+            public/geo/current \
+            public/geo/actual
+
+      - name: Stage exact source-only write surface
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: |
+          set -euo pipefail
+          EVIDENCE_DIR="docs/evidence/osm-fix2/source-candidate-$LIVE_RUN_ID"
+          git add -- \
+            data/sources/osm-source-current.json \
+            data/sources/osm-snapshots/ \
+            "$EVIDENCE_DIR/"
+          mapfile -t staged < <(git diff --cached --name-status "$BASE_SHA")
+          test "${#staged[@]}" -ge 7
+          manifest_seen=0
+          snapshot_count=0
+          for row in "${staged[@]}"; do
+            status="${row%%$'\t'*}"
+            path="${row#*$'\t'}"
+            case "$path" in
+              data/sources/osm-source-current.json)
+                test "$status" = "M"
+                manifest_seen=1
+                ;;
+              data/sources/osm-snapshots/*.json.gz)
+                test "$status" = "A"
+                [[ "$path" =~ ^data/sources/osm-snapshots/(ro|md)-[a-f0-9]{64}\.json\.gz$ ]]
+                snapshot_count=$((snapshot_count+1))
+                ;;
+              "$EVIDENCE_DIR"/*.json)
+                test "$status" = "A"
+                ;;
+              *)
+                echo "Forbidden staged source-candidate path: $status $path" >&2
+                exit 1
+                ;;
+            esac
+          done
+          test "$manifest_seen" -eq 1
+          test "$snapshot_count" -ge 1
+          git diff --cached --check
+          git status --short
+
+      - name: Commit isolated source candidate
+        id: candidate
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data(osm): materialize OSM-FIX.2 current-source candidate"
+          CANDIDATE_COMMIT="$(git rev-parse HEAD)"
+          test "$(git rev-parse HEAD^)" = "$BASE_SHA"
+          CANDIDATE_BRANCH="osm/source-candidate-$LIVE_RUN_ID"
+          echo "commit_sha=$CANDIDATE_COMMIT" >> "$GITHUB_OUTPUT"
+          echo "branch=$CANDIDATE_BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Package candidate objects without repository write credentials
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: git bundle create "$RUNNER_TEMP/osm-source-candidate.bundle" "$BASE_SHA..HEAD"
+
+      - name: Preserve candidate for isolated publisher in this workflow run
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: osm-source-publication-bundle
+          path: ${{ runner.temp }}/osm-source-candidate.bundle
+          if-no-files-found: error
+          retention-days: 30
+
+  publish-source-candidate:
+    needs: materialize-source-candidate
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      BASE_SHA: ${{ needs.materialize-source-candidate.outputs.base }}
+      CANDIDATE_COMMIT: ${{ needs.materialize-source-candidate.outputs.commit }}
+      CANDIDATE_BRANCH: ${{ needs.materialize-source-candidate.outputs.branch }}
+      LIVE_RUN_ID: ${{ github.event.workflow_run.id }}
+    steps:
+      # No checkout and no repository/artifact code executes with this token.
+      - name: Download only the bundle from the successful dependency in this run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name osm-source-publication-bundle --dir "$RUNNER_TEMP/osm-source-publication"
+
+      - name: Validate candidate objects and exact source-only write surface
+        run: |
+          set -euo pipefail
+          [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$CANDIDATE_COMMIT" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$LIVE_RUN_ID" =~ ^[0-9]+$ ]]
+          test "$CANDIDATE_BRANCH" = "osm/source-candidate-$LIVE_RUN_ID"
+          git init .
+          git remote add origin "https://github.com/${{ github.repository }}.git"
+          git fetch --no-tags origin refs/heads/main:refs/remotes/origin/main
+          test "$(git rev-parse origin/main)" = "$BASE_SHA"
+          git bundle verify "$RUNNER_TEMP/osm-source-publication/osm-source-candidate.bundle"
+          git fetch "$RUNNER_TEMP/osm-source-publication/osm-source-candidate.bundle" HEAD
+          test "$(git rev-parse FETCH_HEAD)" = "$CANDIDATE_COMMIT"
+          test "$(git show -s --format=%P "$CANDIDATE_COMMIT")" = "$BASE_SHA"
+          EVIDENCE_DIR="docs/evidence/osm-fix2/source-candidate-$LIVE_RUN_ID"
+          mapfile -t changes < <(git diff --name-status "$BASE_SHA" "$CANDIDATE_COMMIT")
+          test "${#changes[@]}" -ge 7
+          manifest_seen=0
+          snapshot_count=0
+          for row in "${changes[@]}"; do
+            status="${row%%$'\t'*}"
+            path="${row#*$'\t'}"
+            case "$path" in
+              data/sources/osm-source-current.json)
+                test "$status" = M
+                manifest_seen=1
+                ;;
+              data/sources/osm-snapshots/*.json.gz)
+                test "$status" = A
+                [[ "$path" =~ ^data/sources/osm-snapshots/(ro|md)-[a-f0-9]{64}\.json\.gz$ ]]
+                snapshot_count=$((snapshot_count+1))
+                ;;
+              "$EVIDENCE_DIR"/*.json)
+                test "$status" = A
+                [[ "${path##*/}" =~ ^[a-z0-9-]+\.json$ ]]
+                ;;
+              *) exit 1 ;;
+            esac
+            test "$(git ls-tree "$CANDIDATE_COMMIT" -- "$path" | cut -d' ' -f1)" = 100644
+          done
+          test "$manifest_seen" -eq 1
+          test "$snapshot_count" -ge 1
+          git diff --check "$BASE_SHA" "$CANDIDATE_COMMIT"
+
+      - name: Publish isolated candidate branch
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads origin "refs/heads/$CANDIDATE_BRANCH" >/dev/null 2>&1; then
+            echo "Candidate branch already exists; refusing overwrite: $CANDIDATE_BRANCH" >&2
+            exit 1
+          fi
+          test "$(git rev-parse FETCH_HEAD)" = "$CANDIDATE_COMMIT"
+          AUTH_HEADER="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH_HEADER" \
+            push --force-with-lease="refs/heads/$CANDIDATE_BRANCH:" \
+            origin "$CANDIDATE_COMMIT:refs/heads/$CANDIDATE_BRANCH"
+
+      - name: Publish candidate handoff summary
+        run: |
+          {
+            echo "### OSM source candidate materialized"
+            echo
+            echo "- Branch: $CANDIDATE_BRANCH"
+            echo "- Commit: $CANDIDATE_COMMIT"
+            echo "- Trusted main base: $BASE_SHA"
+            echo "- Triggering live probe: $LIVE_RUN_ID"
+            echo "- ACTUAL mutation: denied"
+            echo "- P9.1 import: denied"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,74 @@
+{
+  "code": "MD",
+  "selected_relation_count": 2585,
+  "checked_dependency_count": 560062,
+  "missing_reference_count": 0,
+  "missing_references": [],
+  "invalid_coordinate_count": 0,
+  "invalid_coordinates": [],
+  "topology_issue_count": 2,
+  "topology_issues": [
+    {
+      "relation_id": 18967493,
+      "relation_version": 6,
+      "odd_endpoints": {
+        "outer": [
+          {
+            "node_id": 12318728194,
+            "degree": 1
+          },
+          {
+            "node_id": 12318728593,
+            "degree": 1
+          }
+        ],
+        "inner": []
+      },
+      "coincident_distinct_endpoint_groups": [
+        {
+          "role": "outer",
+          "coordinates": [
+            28.858393,
+            46.8331996
+          ],
+          "node_ids": [
+            12318728194,
+            12318728593
+          ]
+        }
+      ],
+      "invalid_geometry_members": []
+    },
+    {
+      "relation_id": 18968082,
+      "relation_version": 7,
+      "odd_endpoints": {
+        "outer": [
+          {
+            "node_id": 11649857778,
+            "degree": 1
+          },
+          {
+            "node_id": 8265822008,
+            "degree": 1
+          }
+        ],
+        "inner": []
+      },
+      "coincident_distinct_endpoint_groups": [
+        {
+          "role": "outer",
+          "coordinates": [
+            28.9073227,
+            47.0786791
+          ],
+          "node_ids": [
+            11649857778,
+            8265822008
+          ]
+        }
+      ],
+      "invalid_geometry_members": []
+    }
+  ]
+}

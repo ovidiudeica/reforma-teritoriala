@@ -1,0 +1,29 @@
+{
+  "schema": "osm-queue-budget-evidence-v1",
+  "baseline_pr_head": "77bac358a09ddb327a052e6b0b7535772d5d8def",
+  "source_run": 39594795523,
+  "status": "LOCAL_FIX_NOT_AUTHENTIC_LIVE_CAPTURE_ACCEPTANCE",
+  "reference": "https://dev.overpass-api.de/overpass-doc/en/preface/commons.html",
+  "files": [
+    {
+      "file": "queue-budget-before.log.gz",
+      "bytes": 612,
+      "sha256": "122f1088b748e998f49e8b23e632e9c4830d2acb767c737e1078ab7ec96ff602",
+      "kind": "LOCAL_REGRESSION_OUTPUT"
+    },
+    {
+      "file": "queue-budget-source-suite.log.gz",
+      "bytes": 2478,
+      "sha256": "44514c14bd4aabfd74a3c01756506aee7894272f01e75c90a51a4d2bd9011242",
+      "kind": "LOCAL_REGRESSION_OUTPUT"
+    },
+    {
+      "file": "queue-budget-routing-suite.log.gz",
+      "bytes": 1992,
+      "sha256": "0870f093c5f90ed75c5499730eec0b15af977f1279bab820a35f51ced49a44fd",
+      "kind": "LOCAL_REGRESSION_OUTPUT"
+    }
+  ],
+  "actual_mutation_allowed": false,
+  "p91_import_allowed": false
+}

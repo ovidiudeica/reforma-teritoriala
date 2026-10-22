@@ -1,0 +1,11 @@
+{
+  "status": "INITIAL_EVIDENCE_PACKAGE_REJECTED_BEFORE_CAPTURE",
+  "sha": "2ba11a8cf089b1ac899f53f035f77b90ba189f87",
+  "run": 39683119963,
+  "job": 119510355310,
+  "cause": "Manifested plaintext .log inputs existed locally but were ignored by Git; CI failed ENOENT before importer execution.",
+  "original_manifest": "docs/evidence/osm-fix2/layered-acquisition-20261021/sha256-manifest.initial-incomplete.json",
+  "capture_started": false,
+  "original_local_logs_preserved": true,
+  "repair": "Gzip exact original log bytes; verify compressed and uncompressed hashes, Git-index membership, and staged blob hashes before committing."
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "osm-transport-repair-evidence-v1",
+  "baseline_main": "11df48266f9662bfb0b6dc314948b0f231c9addc",
+  "baseline_pr_head": "a28b597b44180d0dea18fed9bbed6a99ac4545ef",
+  "source_run": 39572953654,
+  "status": "LOCAL_IMPLEMENTATION_NOT_LIVE_SOURCE_ACCEPTANCE",
+  "files": [
+    {
+      "file": "baseline-live-run.log.gz",
+      "source": "outputs/reconciled-branches/run-39572953654-full.log",
+      "kind": "READ_ONLY_GITHUB_TEXT_EXPORT",
+      "bytes": 15357,
+      "sha256": "35ac276d2e073a6eae1869026c5300ee1e391dcc1b2d36303ef2a18b27c0fd51"
+    },
+    {
+      "file": "rejected-host.log.gz",
+      "source": "outputs/reconciled-branches/rejected-host-119136080973.log",
+      "kind": "READ_ONLY_GITHUB_TEXT_EXPORT",
+      "bytes": 14008,
+      "sha256": "3b4ec6735ed28e58e02df452072e86ce16f0b704f0c59baa5e5c88efab700394"
+    },
+    {
+      "file": "contract-before.log.gz",
+      "source": "outputs/osm-resume-after1110/live-contract-before.log",
+      "kind": "READ_ONLY_GITHUB_TEXT_EXPORT",
+      "bytes": 840,
+      "sha256": "8faa9d2e21ec341320173a90a362d14eb0ee65123f009ef7fd3be18827fbe9f3"
+    },
+    {
+      "file": "source-tests.log.gz",
+      "source": "outputs/osm-resume-after1110/local-source-tests.log",
+      "kind": "LOCAL_REGRESSION_OUTPUT",
+      "bytes": 2349,
+      "sha256": "0d2109dffe190eed4822b5fc53215eba4d15ce9d12a02ce40038699923e1212d"
+    },
+    {
+      "file": "routing-tests.log.gz",
+      "source": "outputs/osm-resume-after1110/local-routing-tests.log",
+      "kind": "LOCAL_REGRESSION_OUTPUT",
+      "bytes": 1859,
+      "sha256": "12b679a69be4b9bc1f0f195b23d0352bc812ce9ae986c7e742bdadbe8a197f68"
+    }
+  ],
+  "actual_mutation_allowed": false,
+  "p91_import_allowed": false,
+  "semantic_acceptance": "BLOCKED_INCOMPLETE"
+}

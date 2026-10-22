@@ -12,7 +12,8 @@ const workflowsDir='.github/workflows';
 const allowedPushWorkflows=new Set([
  'actual-candidate.yml',
  'actual-promote-candidate.yml',
- 'refresh-actual-review-evidence.yml'
+ 'refresh-actual-review-evidence.yml',
+ 'osm-source-candidate.yml'
 ]);
 
 test('only isolated ACTUAL lifecycle workflows may execute git push',async()=>{
@@ -42,6 +43,18 @@ test('ACTUAL topology audit is strictly read-only',async()=>{
  assert.match(content,/Prove topology audit is repository read-only/);
 });
 
+test('admin census data guard is a complete shell block and uploads evidence once',async()=>{
+ const workflow=await readFile(join(workflowsDir,'web-r2a1-admin-level-census.yml'),'utf8');
+ assert.equal((workflow.match(/- name: Upload deterministic WEB-R2a\.1 evidence/g)||[]).length,1);
+ const guard=workflow.split('      - name: Confirm protected ACTUAL/public data is untouched\n')[1]?.split('      - name: Upload')[0];
+ assert.ok(guard,'complete data guard step exists');
+ assert.match(guard,/while IFS=\$'\\t' read -r status path; do/);
+ assert.match(guard,/done < <\(git diff --name-status/);
+ for(const line of guard.trimEnd().split('\n'))if(line.trim())assert.match(line,/^ {8,}\S|^ {8,}$/,'shell scalar cannot escape YAML indentation');
+ assert.match(guard,/Existing\/non-content-addressed OSM snapshot changed/);
+ assert.match(guard,/Protected data\/public changed outside OSM source-only allowlist/);
+});
+
 test('all workflow-level git pushes are isolated-branch lifecycle writes',async()=>{
  const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
  for(const name of files){
@@ -60,7 +73,8 @@ test('write-capable workflows are manual or reusable only and cannot use alterna
   'refresh-actual-review-evidence.yml',
   'refresh-md-official.yml',
   'refresh-ro-official.yml',
-  'publish-actual-release.yml'
+  'publish-actual-release.yml',
+  'osm-source-candidate.yml'
  ]);
  const allowedUses=new Set([
   'actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09',
@@ -99,7 +113,8 @@ test('workflow write permissions match the exact audited matrix',async()=>{
   ['refresh-actual-review-evidence.yml',['contents','pull-requests']],
   ['refresh-md-official.yml',['contents']],
   ['refresh-ro-official.yml',['contents']],
-  ['publish-actual-release.yml',['contents']]
+  ['publish-actual-release.yml',['contents']],
+  ['osm-source-candidate.yml',['contents']]
  ]);
  const files=(await readdir(workflowsDir)).filter(name=>/\.ya?ml$/i.test(name)).sort();
  for(const name of files){
@@ -107,6 +122,40 @@ test('workflow write permissions match the exact audited matrix',async()=>{
   const actual=[...content.matchAll(/^\s+([a-z][a-z-]*):\s*write\s*$/gm)].map(match=>match[1]).sort();
   assert.deepEqual(actual,[...(expected.get(name)??[])].sort(),name+' write permission matrix drift');
  }
+});
+
+test('OSM source candidate writer is workflow-run gated and never executes request-branch code',async()=>{
+ const workflow=await readFile(join(workflowsDir,'osm-source-candidate.yml'),'utf8');
+ assert.match(workflow,/workflow_run:/);
+ assert.match(workflow,/workflows: \['OSM current source reconciliation live probe'\]/);
+ assert.match(workflow,/types: \[completed\]/);
+ assert.match(workflow,/github\.event\.workflow_run\.conclusion == 'success'/);
+ assert.match(workflow,/github\.event\.workflow_run\.event == 'pull_request'/);
+ assert.match(workflow,/startsWith\(github\.event\.workflow_run\.head_branch, 'osm\/refresh-request-'\)/);
+ assert.match(workflow,/ref: main/);
+ assert.match(workflow,/persist-credentials:\s*false/);
+ assert.doesNotMatch(workflow,/ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha/);
+ assert.match(workflow,/git show "\$REQUEST_SHA:data\/sources\/osm-source-refresh-request\.json"/);
+ assert.match(workflow,/data\/sources\/osm-source-refresh-request\.json/);
+ assert.match(workflow,/node scripts\/import\/import-osm\.mjs/);
+ assert.match(workflow,/node scripts\/process\/audit-osm-fix2-source-transition\.mjs/);
+ assert.match(workflow,/node scripts\/process\/capture-osm-fix2-forensics\.mjs/);
+ assert.match(workflow,/git diff --exit-code "\$BASE_SHA"/);
+ assert.match(workflow,/data\/sources\/osm-current\.json/);
+ assert.match(workflow,/CANDIDATE_BRANCH="osm\/source-candidate-\$LIVE_RUN_ID"/);
+ assert.doesNotMatch(workflow,/HEAD:refs\/heads\/main/);
+ assert.doesNotMatch(workflow,/git\s+push\s+origin\s+(?:HEAD:)?main\b/);
+ const [builder,publisher]=workflow.split('  publish-source-candidate:');
+ assert.match(builder,/permissions:\s*\n  contents: read/);
+ assert.doesNotMatch(builder,/contents: write|GITHUB_TOKEN:/);
+ assert.match(publisher,/needs: materialize-source-candidate/);
+ assert.match(publisher,/contents: write/);
+ assert.doesNotMatch(publisher,/uses: actions\/checkout@|node scripts\/|npm |bash .*bundle/);
+ assert.match(publisher,/git bundle verify/);
+ assert.match(publisher,/gh run download "\$GITHUB_RUN_ID" --repo "\$GITHUB_REPOSITORY"/);
+ assert.doesNotMatch(publisher,/uses:/);
+ assert.match(publisher,/git show -s --format=%P/);
+ assert.match(publisher,/100644/);
 });
 
 test('ACTUAL promotion respects repository PR-creation policy',async()=>{
@@ -121,7 +170,8 @@ test('repository and package write jobs never persist checkout credentials',asyn
  const repositoryPushWorkflows=[
   'actual-candidate.yml',
   'actual-promote-candidate.yml',
-  'refresh-actual-review-evidence.yml'
+  'refresh-actual-review-evidence.yml',
+  'osm-source-candidate.yml'
  ];
  for(const name of repositoryPushWorkflows){
   const content=await readFile(join(workflowsDir,name),'utf8');

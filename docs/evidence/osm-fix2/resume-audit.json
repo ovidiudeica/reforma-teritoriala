@@ -1,0 +1,2193 @@
+{
+  "schema": "osm-fix2-resume-audit-v1",
+  "observed_at": "2026-10-20T21:15:53.262Z",
+  "main_sha": "54a4ed95c9c80edc7406cbb9c52fdf906a67b9cd",
+  "pr": 398,
+  "pr_head": "a20c55036a66fad6a037d0fe9f898beea2f0b5bd",
+  "pr_draft": true,
+  "issue396": "OPEN",
+  "pr394": {
+    "head": "6b7caf431b6ad03fb3bd1b258776f8c7c0c0d431",
+    "draft": true,
+    "mergeable": "CONFLICTING",
+    "local_uncommitted_work_preserved_in": "work/execution"
+  },
+  "host": {
+    "manifest_sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167",
+    "A": {
+      "schema_version": 1,
+      "mode": "ACTUAL_HOST_TRUST_AUDIT",
+      "status": "PASS",
+      "host_trust_path": "data/current/actual-host-trust-manifest.json",
+      "host_trust_manifest_sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167",
+      "host_trust_fingerprint_sha256": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
+      "policy": "Fail closed before deterministic ACTUAL execution unless the hosted runner image, kernel, Docker/containerd/runc stack and CPU compatibility contract match the committed host-trust manifest. CPU vendor/model are recorded as evidence but are not semantic release identity.",
+      "checks": [
+        {
+          "name": "schema_and_mode",
+          "ok": true,
+          "detail": {
+            "schema_version": 1,
+            "mode": "ACTUAL_HOST_TRUST"
+          }
+        },
+        {
+          "name": "contract_is_exact",
+          "ok": true,
+          "detail": {
+            "expected": {
+              "runner": {
+                "label": "ubuntu-24.04",
+                "image_os": "ubuntu24",
+                "image_version": "20261004.327.1",
+                "os": "Linux",
+                "arch": "X64"
+              },
+              "kernel": {
+                "release": "6.17.0-1022-azure",
+                "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                "machine": "x86_64"
+              },
+              "docker": {
+                "client_version": "28.0.4",
+                "server_version": "28.0.4",
+                "api_version": "1.48",
+                "min_api_version": "1.24",
+                "git_commit": "6430e49",
+                "components": {
+                  "Engine": {
+                    "version": "28.0.4",
+                    "git_commit": "6430e49"
+                  },
+                  "containerd": {
+                    "version": "v2.3.6",
+                    "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                  },
+                  "runc": {
+                    "version": "1.5.1",
+                    "git_commit": "v1.5.1-0-g8f2685a4"
+                  },
+                  "docker-init": {
+                    "version": "0.19.0",
+                    "git_commit": "de40ad0"
+                  }
+                }
+              },
+              "engine": {
+                "storage_driver": "overlay2",
+                "cgroup_driver": "systemd",
+                "cgroup_version": "2",
+                "operating_system": "Ubuntu 24.04.5 LTS",
+                "os_type": "linux",
+                "architecture": "x86_64",
+                "kernel_version": "6.17.0-1022-azure"
+              },
+              "accepted_runtime_profiles": [
+                {
+                  "id": "github-ubuntu24-20260920.314.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20260920.314.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.5",
+                        "git_commit": "1294c24a7da8e5a793ed378161673abe94118892"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20260927.320.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20260927.320.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.6",
+                        "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20261004.327.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20261004.327.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.6",
+                        "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20261012.334.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20261012.334.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.4.1",
+                        "git_commit": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+                      },
+                      "runc": {
+                        "version": "1.5.2",
+                        "git_commit": "v1.5.2-0-g29dd3dc2"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                }
+              ],
+              "cpu_contract": {
+                "architecture": "x86_64",
+                "op_modes": "32-bit, 64-bit",
+                "hypervisor": "Microsoft",
+                "virtualization": "full",
+                "accepted_vendors": [
+                  "AuthenticAMD",
+                  "GenuineIntel"
+                ],
+                "required_flags": [
+                  "aes",
+                  "avx",
+                  "avx2",
+                  "bmi1",
+                  "bmi2",
+                  "cx16",
+                  "f16c",
+                  "fma",
+                  "fpu",
+                  "fxsr",
+                  "lahf_lm",
+                  "lm",
+                  "mmx",
+                  "movbe",
+                  "pclmulqdq",
+                  "popcnt",
+                  "rdseed",
+                  "rdtscp",
+                  "sse",
+                  "sse2",
+                  "sse4_1",
+                  "sse4_2",
+                  "ssse3",
+                  "xsave",
+                  "xsaveopt"
+                ],
+                "execution_profile": {
+                  "platform": "linux/amd64",
+                  "cpuset_cpus": "0",
+                  "node_options": "--jitless",
+                  "uv_threadpool_size": "1",
+                  "timezone": "UTC",
+                  "locale": "C.UTF-8"
+                }
+              }
+            },
+            "actual": {
+              "runner": {
+                "label": "ubuntu-24.04",
+                "image_os": "ubuntu24",
+                "image_version": "20261004.327.1",
+                "os": "Linux",
+                "arch": "X64"
+              },
+              "kernel": {
+                "release": "6.17.0-1022-azure",
+                "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                "machine": "x86_64"
+              },
+              "docker": {
+                "client_version": "28.0.4",
+                "server_version": "28.0.4",
+                "api_version": "1.48",
+                "min_api_version": "1.24",
+                "git_commit": "6430e49",
+                "components": {
+                  "Engine": {
+                    "version": "28.0.4",
+                    "git_commit": "6430e49"
+                  },
+                  "containerd": {
+                    "version": "v2.3.6",
+                    "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                  },
+                  "runc": {
+                    "version": "1.5.1",
+                    "git_commit": "v1.5.1-0-g8f2685a4"
+                  },
+                  "docker-init": {
+                    "version": "0.19.0",
+                    "git_commit": "de40ad0"
+                  }
+                }
+              },
+              "engine": {
+                "storage_driver": "overlay2",
+                "cgroup_driver": "systemd",
+                "cgroup_version": "2",
+                "operating_system": "Ubuntu 24.04.5 LTS",
+                "os_type": "linux",
+                "architecture": "x86_64",
+                "kernel_version": "6.17.0-1022-azure"
+              },
+              "accepted_runtime_profiles": [
+                {
+                  "id": "github-ubuntu24-20260920.314.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20260920.314.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.5",
+                        "git_commit": "1294c24a7da8e5a793ed378161673abe94118892"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20260927.320.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20260927.320.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.6",
+                        "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20261004.327.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20261004.327.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.6",
+                        "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20261012.334.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20261012.334.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.4.1",
+                        "git_commit": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+                      },
+                      "runc": {
+                        "version": "1.5.2",
+                        "git_commit": "v1.5.2-0-g29dd3dc2"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                }
+              ],
+              "cpu_contract": {
+                "architecture": "x86_64",
+                "op_modes": "32-bit, 64-bit",
+                "hypervisor": "Microsoft",
+                "virtualization": "full",
+                "accepted_vendors": [
+                  "AuthenticAMD",
+                  "GenuineIntel"
+                ],
+                "required_flags": [
+                  "aes",
+                  "avx",
+                  "avx2",
+                  "bmi1",
+                  "bmi2",
+                  "cx16",
+                  "f16c",
+                  "fma",
+                  "fpu",
+                  "fxsr",
+                  "lahf_lm",
+                  "lm",
+                  "mmx",
+                  "movbe",
+                  "pclmulqdq",
+                  "popcnt",
+                  "rdseed",
+                  "rdtscp",
+                  "sse",
+                  "sse2",
+                  "sse4_1",
+                  "sse4_2",
+                  "ssse3",
+                  "xsave",
+                  "xsaveopt"
+                ],
+                "execution_profile": {
+                  "platform": "linux/amd64",
+                  "cpuset_cpus": "0",
+                  "node_options": "--jitless",
+                  "uv_threadpool_size": "1",
+                  "timezone": "UTC",
+                  "locale": "C.UTF-8"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "fingerprint_recomputes",
+          "ok": true,
+          "detail": {
+            "expected": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
+            "actual": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86"
+          }
+        },
+        {
+          "name": "runtime_host_profile_is_explicitly_approved",
+          "ok": true,
+          "detail": {
+            "accepted_profile_ids": [
+              "github-ubuntu24-20260920.314.1",
+              "github-ubuntu24-20260927.320.1",
+              "github-ubuntu24-20261004.327.1",
+              "github-ubuntu24-20261012.334.1"
+            ],
+            "matched_profile_ids": [
+              "github-ubuntu24-20261012.334.1"
+            ],
+            "observed": {
+              "runner": {
+                "image_os": "ubuntu24",
+                "image_version": "20261012.334.1",
+                "arch": "X64",
+                "os": "Linux"
+              },
+              "kernel": {
+                "release": "6.17.0-1022-azure",
+                "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                "machine": "x86_64"
+              },
+              "docker": {
+                "client_version": "28.0.4",
+                "server_version": "28.0.4",
+                "api_version": "1.48",
+                "min_api_version": "1.24",
+                "git_commit": "6430e49",
+                "components": {
+                  "Engine": {
+                    "version": "28.0.4",
+                    "git_commit": "6430e49"
+                  },
+                  "containerd": {
+                    "version": "v2.4.1",
+                    "git_commit": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+                  },
+                  "runc": {
+                    "version": "1.5.2",
+                    "git_commit": "v1.5.2-0-g29dd3dc2"
+                  },
+                  "docker-init": {
+                    "version": "0.19.0",
+                    "git_commit": "de40ad0"
+                  }
+                }
+              },
+              "engine": {
+                "storage_driver": "overlay2",
+                "cgroup_driver": "systemd",
+                "cgroup_version": "2",
+                "operating_system": "Ubuntu 24.04.5 LTS",
+                "os_type": "linux",
+                "architecture": "x86_64",
+                "kernel_version": "6.17.0-1022-azure"
+              }
+            }
+          }
+        },
+        {
+          "name": "cpu_architecture_exact",
+          "ok": true,
+          "detail": {
+            "expected": "x86_64",
+            "actual": "x86_64"
+          }
+        },
+        {
+          "name": "cpu_op_modes_exact",
+          "ok": true,
+          "detail": {
+            "expected": "32-bit, 64-bit",
+            "actual": "32-bit, 64-bit"
+          }
+        },
+        {
+          "name": "cpu_hypervisor_exact",
+          "ok": true,
+          "detail": {
+            "expected": "Microsoft",
+            "actual": "Microsoft"
+          }
+        },
+        {
+          "name": "cpu_virtualization_exact",
+          "ok": true,
+          "detail": {
+            "expected": "full",
+            "actual": "full"
+          }
+        },
+        {
+          "name": "cpu_vendor_allowed",
+          "ok": true,
+          "detail": {
+            "accepted": [
+              "AuthenticAMD",
+              "GenuineIntel"
+            ],
+            "actual": "AuthenticAMD",
+            "model_name": "AMD EPYC 9V74 80-Core Processor"
+          }
+        },
+        {
+          "name": "cpu_required_flags_present",
+          "ok": true,
+          "detail": {
+            "required": [
+              "aes",
+              "avx",
+              "avx2",
+              "bmi1",
+              "bmi2",
+              "cx16",
+              "f16c",
+              "fma",
+              "fpu",
+              "fxsr",
+              "lahf_lm",
+              "lm",
+              "mmx",
+              "movbe",
+              "pclmulqdq",
+              "popcnt",
+              "rdseed",
+              "rdtscp",
+              "sse",
+              "sse2",
+              "sse4_1",
+              "sse4_2",
+              "ssse3",
+              "xsave",
+              "xsaveopt"
+            ],
+            "missing": [],
+            "actual_vendor": "AuthenticAMD",
+            "actual_model_name": "AMD EPYC 9V74 80-Core Processor"
+          }
+        }
+      ],
+      "failures": [],
+      "observed": {
+        "runner": {
+          "image_os": "ubuntu24",
+          "image_version": "20261012.334.1",
+          "arch": "X64",
+          "os": "Linux"
+        },
+        "kernel": {
+          "release": "6.17.0-1022-azure",
+          "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+          "machine": "x86_64"
+        },
+        "docker": {
+          "client_version": "28.0.4",
+          "server_version": "28.0.4",
+          "api_version": "1.48",
+          "min_api_version": "1.24",
+          "git_commit": "6430e49",
+          "components": {
+            "Engine": {
+              "version": "28.0.4",
+              "git_commit": "6430e49"
+            },
+            "containerd": {
+              "version": "v2.4.1",
+              "git_commit": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+            },
+            "runc": {
+              "version": "1.5.2",
+              "git_commit": "v1.5.2-0-g29dd3dc2"
+            },
+            "docker-init": {
+              "version": "0.19.0",
+              "git_commit": "de40ad0"
+            }
+          }
+        },
+        "engine": {
+          "storage_driver": "overlay2",
+          "cgroup_driver": "systemd",
+          "cgroup_version": "2",
+          "operating_system": "Ubuntu 24.04.5 LTS",
+          "os_type": "linux",
+          "architecture": "x86_64",
+          "kernel_version": "6.17.0-1022-azure"
+        },
+        "cpu": {
+          "architecture": "x86_64",
+          "op_modes": "32-bit, 64-bit",
+          "vendor": "AuthenticAMD",
+          "model_name": "AMD EPYC 9V74 80-Core Processor",
+          "hypervisor": "Microsoft",
+          "virtualization": "full",
+          "flags": [
+            "3dnowprefetch",
+            "abm",
+            "adx",
+            "aes",
+            "aperfmperf",
+            "apic",
+            "arat",
+            "avx",
+            "avx2",
+            "bmi1",
+            "bmi2",
+            "clflush",
+            "clflushopt",
+            "clwb",
+            "clzero",
+            "cmov",
+            "cmp_legacy",
+            "constant_tsc",
+            "cpuid",
+            "cr8_legacy",
+            "cx16",
+            "cx8",
+            "de",
+            "decodeassists",
+            "erms",
+            "extd_apicid",
+            "f16c",
+            "flushbyasid",
+            "fma",
+            "fpu",
+            "fsgsbase",
+            "fsrm",
+            "fxsr",
+            "fxsr_opt",
+            "ht",
+            "hypervisor",
+            "invpcid",
+            "lahf_lm",
+            "lm",
+            "mca",
+            "mce",
+            "misalignsse",
+            "mmx",
+            "mmxext",
+            "movbe",
+            "msr",
+            "mtrr",
+            "nonstop_tsc",
+            "nopl",
+            "npt",
+            "nrip_save",
+            "nx",
+            "osvw",
+            "pae",
+            "pat",
+            "pausefilter",
+            "pcid",
+            "pclmulqdq",
+            "pdpe1gb",
+            "pfthreshold",
+            "pge",
+            "pni",
+            "popcnt",
+            "pse",
+            "pse36",
+            "rdpid",
+            "rdpru",
+            "rdrand",
+            "rdseed",
+            "rdtscp",
+            "rep_good",
+            "sep",
+            "sha_ni",
+            "smap",
+            "smep",
+            "sse",
+            "sse2",
+            "sse4_1",
+            "sse4_2",
+            "sse4a",
+            "ssse3",
+            "svm",
+            "syscall",
+            "topoext",
+            "tsc",
+            "tsc_known_freq",
+            "tsc_reliable",
+            "tsc_scale",
+            "umip",
+            "user_shstk",
+            "v_vmsave_vmload",
+            "vaes",
+            "vmcb_clean",
+            "vme",
+            "vmmcall",
+            "vpclmulqdq",
+            "xgetbv1",
+            "xsave",
+            "xsavec",
+            "xsaveerptr",
+            "xsaveopt",
+            "xsaves"
+          ]
+        }
+      }
+    },
+    "B": {
+      "schema_version": 1,
+      "mode": "ACTUAL_HOST_TRUST_AUDIT",
+      "status": "FAIL",
+      "host_trust_path": "data/current/actual-host-trust-manifest.json",
+      "host_trust_manifest_sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167",
+      "host_trust_fingerprint_sha256": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
+      "policy": "Fail closed before deterministic ACTUAL execution unless the hosted runner image, kernel, Docker/containerd/runc stack and CPU compatibility contract match the committed host-trust manifest. CPU vendor/model are recorded as evidence but are not semantic release identity.",
+      "checks": [
+        {
+          "name": "schema_and_mode",
+          "ok": true,
+          "detail": {
+            "schema_version": 1,
+            "mode": "ACTUAL_HOST_TRUST"
+          }
+        },
+        {
+          "name": "contract_is_exact",
+          "ok": true,
+          "detail": {
+            "expected": {
+              "runner": {
+                "label": "ubuntu-24.04",
+                "image_os": "ubuntu24",
+                "image_version": "20261004.327.1",
+                "os": "Linux",
+                "arch": "X64"
+              },
+              "kernel": {
+                "release": "6.17.0-1022-azure",
+                "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                "machine": "x86_64"
+              },
+              "docker": {
+                "client_version": "28.0.4",
+                "server_version": "28.0.4",
+                "api_version": "1.48",
+                "min_api_version": "1.24",
+                "git_commit": "6430e49",
+                "components": {
+                  "Engine": {
+                    "version": "28.0.4",
+                    "git_commit": "6430e49"
+                  },
+                  "containerd": {
+                    "version": "v2.3.6",
+                    "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                  },
+                  "runc": {
+                    "version": "1.5.1",
+                    "git_commit": "v1.5.1-0-g8f2685a4"
+                  },
+                  "docker-init": {
+                    "version": "0.19.0",
+                    "git_commit": "de40ad0"
+                  }
+                }
+              },
+              "engine": {
+                "storage_driver": "overlay2",
+                "cgroup_driver": "systemd",
+                "cgroup_version": "2",
+                "operating_system": "Ubuntu 24.04.5 LTS",
+                "os_type": "linux",
+                "architecture": "x86_64",
+                "kernel_version": "6.17.0-1022-azure"
+              },
+              "accepted_runtime_profiles": [
+                {
+                  "id": "github-ubuntu24-20260920.314.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20260920.314.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.5",
+                        "git_commit": "1294c24a7da8e5a793ed378161673abe94118892"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20260927.320.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20260927.320.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.6",
+                        "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20261004.327.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20261004.327.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.6",
+                        "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20261012.334.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20261012.334.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.4.1",
+                        "git_commit": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+                      },
+                      "runc": {
+                        "version": "1.5.2",
+                        "git_commit": "v1.5.2-0-g29dd3dc2"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                }
+              ],
+              "cpu_contract": {
+                "architecture": "x86_64",
+                "op_modes": "32-bit, 64-bit",
+                "hypervisor": "Microsoft",
+                "virtualization": "full",
+                "accepted_vendors": [
+                  "AuthenticAMD",
+                  "GenuineIntel"
+                ],
+                "required_flags": [
+                  "aes",
+                  "avx",
+                  "avx2",
+                  "bmi1",
+                  "bmi2",
+                  "cx16",
+                  "f16c",
+                  "fma",
+                  "fpu",
+                  "fxsr",
+                  "lahf_lm",
+                  "lm",
+                  "mmx",
+                  "movbe",
+                  "pclmulqdq",
+                  "popcnt",
+                  "rdseed",
+                  "rdtscp",
+                  "sse",
+                  "sse2",
+                  "sse4_1",
+                  "sse4_2",
+                  "ssse3",
+                  "xsave",
+                  "xsaveopt"
+                ],
+                "execution_profile": {
+                  "platform": "linux/amd64",
+                  "cpuset_cpus": "0",
+                  "node_options": "--jitless",
+                  "uv_threadpool_size": "1",
+                  "timezone": "UTC",
+                  "locale": "C.UTF-8"
+                }
+              }
+            },
+            "actual": {
+              "runner": {
+                "label": "ubuntu-24.04",
+                "image_os": "ubuntu24",
+                "image_version": "20261004.327.1",
+                "os": "Linux",
+                "arch": "X64"
+              },
+              "kernel": {
+                "release": "6.17.0-1022-azure",
+                "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                "machine": "x86_64"
+              },
+              "docker": {
+                "client_version": "28.0.4",
+                "server_version": "28.0.4",
+                "api_version": "1.48",
+                "min_api_version": "1.24",
+                "git_commit": "6430e49",
+                "components": {
+                  "Engine": {
+                    "version": "28.0.4",
+                    "git_commit": "6430e49"
+                  },
+                  "containerd": {
+                    "version": "v2.3.6",
+                    "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                  },
+                  "runc": {
+                    "version": "1.5.1",
+                    "git_commit": "v1.5.1-0-g8f2685a4"
+                  },
+                  "docker-init": {
+                    "version": "0.19.0",
+                    "git_commit": "de40ad0"
+                  }
+                }
+              },
+              "engine": {
+                "storage_driver": "overlay2",
+                "cgroup_driver": "systemd",
+                "cgroup_version": "2",
+                "operating_system": "Ubuntu 24.04.5 LTS",
+                "os_type": "linux",
+                "architecture": "x86_64",
+                "kernel_version": "6.17.0-1022-azure"
+              },
+              "accepted_runtime_profiles": [
+                {
+                  "id": "github-ubuntu24-20260920.314.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20260920.314.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.5",
+                        "git_commit": "1294c24a7da8e5a793ed378161673abe94118892"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20260927.320.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20260927.320.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.6",
+                        "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20261004.327.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20261004.327.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.3.6",
+                        "git_commit": "ee2735368117d2eb259779949d5e75cdafec9761"
+                      },
+                      "runc": {
+                        "version": "1.5.1",
+                        "git_commit": "v1.5.1-0-g8f2685a4"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                },
+                {
+                  "id": "github-ubuntu24-20261012.334.1",
+                  "runner": {
+                    "image_os": "ubuntu24",
+                    "image_version": "20261012.334.1",
+                    "arch": "X64",
+                    "os": "Linux"
+                  },
+                  "kernel": {
+                    "release": "6.17.0-1022-azure",
+                    "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+                    "machine": "x86_64"
+                  },
+                  "docker": {
+                    "client_version": "28.0.4",
+                    "server_version": "28.0.4",
+                    "api_version": "1.48",
+                    "min_api_version": "1.24",
+                    "git_commit": "6430e49",
+                    "components": {
+                      "Engine": {
+                        "version": "28.0.4",
+                        "git_commit": "6430e49"
+                      },
+                      "containerd": {
+                        "version": "v2.4.1",
+                        "git_commit": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+                      },
+                      "runc": {
+                        "version": "1.5.2",
+                        "git_commit": "v1.5.2-0-g29dd3dc2"
+                      },
+                      "docker-init": {
+                        "version": "0.19.0",
+                        "git_commit": "de40ad0"
+                      }
+                    }
+                  },
+                  "engine": {
+                    "storage_driver": "overlay2",
+                    "cgroup_driver": "systemd",
+                    "cgroup_version": "2",
+                    "operating_system": "Ubuntu 24.04.5 LTS",
+                    "os_type": "linux",
+                    "architecture": "x86_64",
+                    "kernel_version": "6.17.0-1022-azure"
+                  }
+                }
+              ],
+              "cpu_contract": {
+                "architecture": "x86_64",
+                "op_modes": "32-bit, 64-bit",
+                "hypervisor": "Microsoft",
+                "virtualization": "full",
+                "accepted_vendors": [
+                  "AuthenticAMD",
+                  "GenuineIntel"
+                ],
+                "required_flags": [
+                  "aes",
+                  "avx",
+                  "avx2",
+                  "bmi1",
+                  "bmi2",
+                  "cx16",
+                  "f16c",
+                  "fma",
+                  "fpu",
+                  "fxsr",
+                  "lahf_lm",
+                  "lm",
+                  "mmx",
+                  "movbe",
+                  "pclmulqdq",
+                  "popcnt",
+                  "rdseed",
+                  "rdtscp",
+                  "sse",
+                  "sse2",
+                  "sse4_1",
+                  "sse4_2",
+                  "ssse3",
+                  "xsave",
+                  "xsaveopt"
+                ],
+                "execution_profile": {
+                  "platform": "linux/amd64",
+                  "cpuset_cpus": "0",
+                  "node_options": "--jitless",
+                  "uv_threadpool_size": "1",
+                  "timezone": "UTC",
+                  "locale": "C.UTF-8"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "fingerprint_recomputes",
+          "ok": true,
+          "detail": {
+            "expected": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
+            "actual": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86"
+          }
+        },
+        {
+          "name": "runtime_host_profile_is_explicitly_approved",
+          "ok": false,
+          "detail": {
+            "accepted_profile_ids": [
+              "github-ubuntu24-20260920.314.1",
+              "github-ubuntu24-20260927.320.1",
+              "github-ubuntu24-20261004.327.1",
+              "github-ubuntu24-20261012.334.1"
+            ],
+            "matched_profile_ids": [],
+            "observed": {
+              "runner": {
+                "image_os": "ubuntu24",
+                "image_version": "20261018.339.1",
+                "arch": "X64",
+                "os": "Linux"
+              },
+              "kernel": {
+                "release": "7.0.0-1017-azure",
+                "version": "#17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026",
+                "machine": "x86_64"
+              },
+              "docker": {
+                "client_version": "28.0.4",
+                "server_version": "28.0.4",
+                "api_version": "1.48",
+                "min_api_version": "1.24",
+                "git_commit": "6430e49",
+                "components": {
+                  "Engine": {
+                    "version": "28.0.4",
+                    "git_commit": "6430e49"
+                  },
+                  "containerd": {
+                    "version": "v2.4.2",
+                    "git_commit": "b7a25261e029d68978bbf290df0a62fc819b3c51"
+                  },
+                  "runc": {
+                    "version": "1.5.2",
+                    "git_commit": "v1.5.2-0-g29dd3dc2"
+                  },
+                  "docker-init": {
+                    "version": "0.19.0",
+                    "git_commit": "de40ad0"
+                  }
+                }
+              },
+              "engine": {
+                "storage_driver": "overlay2",
+                "cgroup_driver": "systemd",
+                "cgroup_version": "2",
+                "operating_system": "Ubuntu 24.04.5 LTS",
+                "os_type": "linux",
+                "architecture": "x86_64",
+                "kernel_version": "7.0.0-1017-azure"
+              }
+            }
+          }
+        },
+        {
+          "name": "cpu_architecture_exact",
+          "ok": true,
+          "detail": {
+            "expected": "x86_64",
+            "actual": "x86_64"
+          }
+        },
+        {
+          "name": "cpu_op_modes_exact",
+          "ok": true,
+          "detail": {
+            "expected": "32-bit, 64-bit",
+            "actual": "32-bit, 64-bit"
+          }
+        },
+        {
+          "name": "cpu_hypervisor_exact",
+          "ok": true,
+          "detail": {
+            "expected": "Microsoft",
+            "actual": "Microsoft"
+          }
+        },
+        {
+          "name": "cpu_virtualization_exact",
+          "ok": true,
+          "detail": {
+            "expected": "full",
+            "actual": "full"
+          }
+        },
+        {
+          "name": "cpu_vendor_allowed",
+          "ok": true,
+          "detail": {
+            "accepted": [
+              "AuthenticAMD",
+              "GenuineIntel"
+            ],
+            "actual": "AuthenticAMD",
+            "model_name": "AMD EPYC 9V74 80-Core Processor"
+          }
+        },
+        {
+          "name": "cpu_required_flags_present",
+          "ok": true,
+          "detail": {
+            "required": [
+              "aes",
+              "avx",
+              "avx2",
+              "bmi1",
+              "bmi2",
+              "cx16",
+              "f16c",
+              "fma",
+              "fpu",
+              "fxsr",
+              "lahf_lm",
+              "lm",
+              "mmx",
+              "movbe",
+              "pclmulqdq",
+              "popcnt",
+              "rdseed",
+              "rdtscp",
+              "sse",
+              "sse2",
+              "sse4_1",
+              "sse4_2",
+              "ssse3",
+              "xsave",
+              "xsaveopt"
+            ],
+            "missing": [],
+            "actual_vendor": "AuthenticAMD",
+            "actual_model_name": "AMD EPYC 9V74 80-Core Processor"
+          }
+        }
+      ],
+      "failures": [
+        {
+          "name": "runtime_host_profile_is_explicitly_approved",
+          "detail": {
+            "accepted_profile_ids": [
+              "github-ubuntu24-20260920.314.1",
+              "github-ubuntu24-20260927.320.1",
+              "github-ubuntu24-20261004.327.1",
+              "github-ubuntu24-20261012.334.1"
+            ],
+            "matched_profile_ids": [],
+            "observed": {
+              "runner": {
+                "image_os": "ubuntu24",
+                "image_version": "20261018.339.1",
+                "arch": "X64",
+                "os": "Linux"
+              },
+              "kernel": {
+                "release": "7.0.0-1017-azure",
+                "version": "#17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026",
+                "machine": "x86_64"
+              },
+              "docker": {
+                "client_version": "28.0.4",
+                "server_version": "28.0.4",
+                "api_version": "1.48",
+                "min_api_version": "1.24",
+                "git_commit": "6430e49",
+                "components": {
+                  "Engine": {
+                    "version": "28.0.4",
+                    "git_commit": "6430e49"
+                  },
+                  "containerd": {
+                    "version": "v2.4.2",
+                    "git_commit": "b7a25261e029d68978bbf290df0a62fc819b3c51"
+                  },
+                  "runc": {
+                    "version": "1.5.2",
+                    "git_commit": "v1.5.2-0-g29dd3dc2"
+                  },
+                  "docker-init": {
+                    "version": "0.19.0",
+                    "git_commit": "de40ad0"
+                  }
+                }
+              },
+              "engine": {
+                "storage_driver": "overlay2",
+                "cgroup_driver": "systemd",
+                "cgroup_version": "2",
+                "operating_system": "Ubuntu 24.04.5 LTS",
+                "os_type": "linux",
+                "architecture": "x86_64",
+                "kernel_version": "7.0.0-1017-azure"
+              }
+            }
+          }
+        }
+      ],
+      "observed": {
+        "runner": {
+          "image_os": "ubuntu24",
+          "image_version": "20261018.339.1",
+          "arch": "X64",
+          "os": "Linux"
+        },
+        "kernel": {
+          "release": "7.0.0-1017-azure",
+          "version": "#17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026",
+          "machine": "x86_64"
+        },
+        "docker": {
+          "client_version": "28.0.4",
+          "server_version": "28.0.4",
+          "api_version": "1.48",
+          "min_api_version": "1.24",
+          "git_commit": "6430e49",
+          "components": {
+            "Engine": {
+              "version": "28.0.4",
+              "git_commit": "6430e49"
+            },
+            "containerd": {
+              "version": "v2.4.2",
+              "git_commit": "b7a25261e029d68978bbf290df0a62fc819b3c51"
+            },
+            "runc": {
+              "version": "1.5.2",
+              "git_commit": "v1.5.2-0-g29dd3dc2"
+            },
+            "docker-init": {
+              "version": "0.19.0",
+              "git_commit": "de40ad0"
+            }
+          }
+        },
+        "engine": {
+          "storage_driver": "overlay2",
+          "cgroup_driver": "systemd",
+          "cgroup_version": "2",
+          "operating_system": "Ubuntu 24.04.5 LTS",
+          "os_type": "linux",
+          "architecture": "x86_64",
+          "kernel_version": "7.0.0-1017-azure"
+        },
+        "cpu": {
+          "architecture": "x86_64",
+          "op_modes": "32-bit, 64-bit",
+          "vendor": "AuthenticAMD",
+          "model_name": "AMD EPYC 9V74 80-Core Processor",
+          "hypervisor": "Microsoft",
+          "virtualization": "full",
+          "flags": [
+            "3dnowprefetch",
+            "abm",
+            "adx",
+            "aes",
+            "aperfmperf",
+            "apic",
+            "arat",
+            "avx",
+            "avx2",
+            "avx512_bf16",
+            "avx512_bitalg",
+            "avx512_vbmi2",
+            "avx512_vnni",
+            "avx512_vpopcntdq",
+            "avx512bw",
+            "avx512cd",
+            "avx512dq",
+            "avx512f",
+            "avx512ifma",
+            "avx512vbmi",
+            "avx512vl",
+            "bmi1",
+            "bmi2",
+            "clflush",
+            "clflushopt",
+            "clwb",
+            "clzero",
+            "cmov",
+            "cmp_legacy",
+            "constant_tsc",
+            "cpuid",
+            "cr8_legacy",
+            "cx16",
+            "cx8",
+            "de",
+            "decodeassists",
+            "erms",
+            "extd_apicid",
+            "f16c",
+            "flushbyasid",
+            "fma",
+            "fpu",
+            "fsgsbase",
+            "fsrm",
+            "fxsr",
+            "fxsr_opt",
+            "gfni",
+            "ht",
+            "hypervisor",
+            "invpcid",
+            "lahf_lm",
+            "lm",
+            "mca",
+            "mce",
+            "misalignsse",
+            "mmx",
+            "mmxext",
+            "movbe",
+            "msr",
+            "mtrr",
+            "nonstop_tsc",
+            "nopl",
+            "npt",
+            "nrip_save",
+            "nx",
+            "osvw",
+            "pae",
+            "pat",
+            "pausefilter",
+            "pcid",
+            "pclmulqdq",
+            "pdpe1gb",
+            "pfthreshold",
+            "pge",
+            "pni",
+            "popcnt",
+            "pse",
+            "pse36",
+            "rdpid",
+            "rdpru",
+            "rdrand",
+            "rdseed",
+            "rdtscp",
+            "rep_good",
+            "sep",
+            "sha_ni",
+            "smap",
+            "smep",
+            "sse",
+            "sse2",
+            "sse4_1",
+            "sse4_2",
+            "sse4a",
+            "ssse3",
+            "svm",
+            "syscall",
+            "topoext",
+            "tsc",
+            "tsc_known_freq",
+            "tsc_reliable",
+            "tsc_scale",
+            "umip",
+            "user_shstk",
+            "v_vmsave_vmload",
+            "vaes",
+            "vmcb_clean",
+            "vme",
+            "vmmcall",
+            "vpclmulqdq",
+            "xgetbv1",
+            "xsave",
+            "xsavec",
+            "xsaveerptr",
+            "xsaveopt",
+            "xsaves",
+            "xtopology"
+          ]
+        }
+      }
+    },
+    "retry_run": 39493585025,
+    "retry_attempt": 3,
+    "retry_status": "IN_PROGRESS_AT_CHECKPOINT"
+  },
+  "protected_integrity": {
+    "status": "PASS",
+    "sha": "a20c55036a66fad6a037d0fe9f898beea2f0b5bd",
+    "baseline": "335234bdb7b8cec828d4d2ad11d42d5bc5f99642",
+    "checkedAt": "2026-10-20T21:15:10.256Z",
+    "snapshot": "actual-a9e5a4ddcb5277ef",
+    "fingerprint": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "counts": {
+      "RO": 3246,
+      "MD": 2602
+    },
+    "total": 5848,
+    "uniqueIdentities": 5848,
+    "components": [
+      {
+        "name": "catalog",
+        "path": "data/current/entities.json",
+        "sha256": "af6e09317d75fea663e6be425bf0a5c252fc756b6bb1c8055e564af913148504",
+        "bytes": 8761869
+      },
+      {
+        "name": "inventory",
+        "path": "data/current/administrative-inventory.json",
+        "sha256": "affb0bf50c66378723229ae36f593db5a13ef0f2b5020514a8a3800624d955e6",
+        "bytes": 1636
+      },
+      {
+        "name": "ro_geojson",
+        "path": "public/geo/current/ro-administrative.geojson",
+        "sha256": "47fd6765e4b8768b5daccb19849f12d7dab3fe2b4fd0ee2a29fa682b888275fa",
+        "bytes": 46393968
+      },
+      {
+        "name": "md_geojson",
+        "path": "public/geo/current/md-administrative.geojson",
+        "sha256": "e5db08df6b32b458f5c2451d4b685a34815778181cc23b903c38abd0fa7731c1",
+        "bytes": 21029858
+      },
+      {
+        "name": "public_index",
+        "path": "public/data/actual-entities.json",
+        "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
+        "bytes": 15390013
+      },
+      {
+        "name": "public_chunks",
+        "path": "public/data/actual-geometry-chunks.json",
+        "sha256": "f09bdc0fff9e63185020ede4b83d1d359b2e03f2d35834e91170b507dd12136d",
+        "bytes": 35786
+      },
+      {
+        "name": "ro_overview",
+        "path": "public/geo/actual/ro-overview.geojson",
+        "sha256": "d2cd172869befc38ad90614b44201da428ed68cd825de6f2683d36f566f4414b",
+        "bytes": 5761171
+      },
+      {
+        "name": "ro_local",
+        "path": "public/geo/actual/ro-local.geojson",
+        "sha256": "6fd4fed8d11664e475d962b33085665982b785dd88f7273cd9232ad32169d771",
+        "bytes": 37689294
+      },
+      {
+        "name": "ro_detail",
+        "path": "public/geo/actual/ro-detail.geojson",
+        "sha256": "c28d4b350d75001bf1843ba95bb8ace70ea9edef0b9def43209f28ff9183c8a9",
+        "bytes": 189101
+      },
+      {
+        "name": "md_overview",
+        "path": "public/geo/actual/md-overview.geojson",
+        "sha256": "833aed09237fcebecc1e15bfa33c59e3ba5e685603df64c7fb321d37ab88b5fb",
+        "bytes": 1977139
+      },
+      {
+        "name": "md_local",
+        "path": "public/geo/actual/md-local.geojson",
+        "sha256": "f037d148065475b486cb6a6165db4e350966add1ef5b1c49e9d0a0b2270ea649",
+        "bytes": 6821018
+      },
+      {
+        "name": "md_detail",
+        "path": "public/geo/actual/md-detail.geojson",
+        "sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe",
+        "bytes": 10993096
+      },
+      {
+        "name": "ro_gate",
+        "path": "data/current/ro-release-gate.json",
+        "sha256": "a51cf0425eecc01dce70aa3ca71bb905f515bc6de2fa1b3f23193eee84bfb028",
+        "bytes": 267015
+      },
+      {
+        "name": "md_gate",
+        "path": "data/current/md-release-gate.json",
+        "sha256": "7b3444d94b19cd2affabde31e1726fd62158a4d0f5077d051aec97bc4938b8f3",
+        "bytes": 1884
+      },
+      {
+        "name": "ro_official",
+        "path": "data/sources/ro-siruta-current.json",
+        "sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f",
+        "bytes": 6080569
+      },
+      {
+        "name": "md_official",
+        "path": "data/sources/cuatm-current.json",
+        "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575",
+        "bytes": 611165
+      },
+      {
+        "name": "md_individual_review",
+        "path": "data/sources/md-cuatm-individual-review.json",
+        "sha256": "0f66223006c5efc658ae50d0a53f63dfe6e7768417d4b08d05e287cf257030af",
+        "bytes": 3093
+      },
+      {
+        "name": "md_semantic_bridge",
+        "path": "data/current/md-cuatm-semantic-bridge.json",
+        "sha256": "b587bd9a00563ba34123030ef0a1748b4218b1c9427302492b0043034a044f42",
+        "bytes": 346815
+      },
+      {
+        "name": "topology_audit",
+        "path": "data/current/actual-topology-audit.json",
+        "sha256": "02cde46761ff8be0d40bc931d5989e0b65cb2cdf5be98f32430a055b1123ae23",
+        "bytes": 6443
+      },
+      {
+        "name": "regression_audit",
+        "path": "data/current/actual-regression-audit.json",
+        "sha256": "8e9191ead323f2513eb2cd2c16cf745f8a296862b3aab7729d6e301da97d1c02",
+        "bytes": 973
+      },
+      {
+        "name": "structural_completeness_audit",
+        "path": "data/current/actual-structural-completeness-audit.json",
+        "sha256": "7a9705bb60b337bec5fe9e9ffb609a021cff1810899fbf9416a0da25624974e5",
+        "bytes": 27681
+      },
+      {
+        "name": "official_identity_audit",
+        "path": "data/current/actual-official-identity-audit.json",
+        "sha256": "c95573ff6b1b69bad4e2e7d2436ce2380db1cf6dd908e07de7875c1fbf03612a",
+        "bytes": 2846418
+      },
+      {
+        "name": "settlement_policy",
+        "path": "data/sources/actual-settlement-policy.json",
+        "sha256": "27c3e9fb1b1b3c87d2489320268ad5c85bf26dc53368d19d098fda476fbe2d2d",
+        "bytes": 8259
+      },
+      {
+        "name": "statistical_policy",
+        "path": "data/sources/actual-statistical-policy.json",
+        "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662",
+        "bytes": 3904
+      },
+      {
+        "name": "statistical_contract",
+        "path": "schemas/actual-statistical-hierarchy-contract.json",
+        "sha256": "1e3d2c68a22d7e25c48915157e717fa8d0a8169fc851cbe4ce064d0d35e1517f",
+        "bytes": 2615
+      },
+      {
+        "name": "statistical_source_bundle",
+        "path": "data/sources/actual-statistical-source-bundle.json",
+        "sha256": "3aee28691f87451768335988f9306a7e6fd5c4f5595ab0207562579877c0af94",
+        "bytes": 740
+      },
+      {
+        "name": "ro_statistical_layer",
+        "path": "data/p2/actual-statistical-ro.json",
+        "sha256": "cbf0d68a549bcc24774ccd8548436f7e51c5e0376c9139beab72460daecca2b8",
+        "bytes": 50143
+      },
+      {
+        "name": "md_statistical_layer",
+        "path": "data/p2/actual-statistical-md.json",
+        "sha256": "2f78320c41b5a957b4a854eaade0fafae88ef3dc66e80f98aec77d7bce1a9f6e",
+        "bytes": 26162
+      },
+      {
+        "name": "consolidated_tree",
+        "path": "public/data/actual-consolidated-tree.json",
+        "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f",
+        "bytes": 2102707
+      },
+      {
+        "name": "ro_statistical_geometry",
+        "path": "public/geo/actual/ro-statistical.geojson",
+        "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7",
+        "bytes": 3755486
+      },
+      {
+        "name": "md_statistical_geometry",
+        "path": "public/geo/actual/md-statistical.geojson",
+        "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc",
+        "bytes": 1085802
+      },
+      {
+        "name": "geometry_role_contract",
+        "path": "schemas/actual-geometry-role-contract.json",
+        "sha256": "9a73dbecbdb94fc0a9a6615fd9b51695cb7f5590c5dcbc24b32549670d1bd6bd",
+        "bytes": 1905
+      }
+    ],
+    "niRoles": 85,
+    "niGroupCounts": [
+      {
+        "name": "Camenca",
+        "count": 13
+      },
+      {
+        "name": "Rîbnița",
+        "count": 23
+      },
+      {
+        "name": "Dubăsari",
+        "count": 10
+      },
+      {
+        "name": "Grigoriopol",
+        "count": 16
+      },
+      {
+        "name": "Tiraspol",
+        "count": 3
+      },
+      {
+        "name": "Slobozia",
+        "count": 16
+      },
+      {
+        "name": "Bender",
+        "count": 4
+      }
+    ],
+    "actual_mutation_allowed": false,
+    "p91_import_allowed": false,
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "protectedDiffFiles": []
+  },
+  "local_evidence": [
+    {
+      "file": "outputs/osm-fix2-resume-audit/actual-run.log",
+      "sha256": "4d8534db5ee1cc97f2dbb895c93aae17aa0207ea09339d8fb1a67f9a6bc8a79b"
+    },
+    {
+      "file": "outputs/osm-fix2-resume-audit/source-run.log",
+      "sha256": "529ec5267b72686cf3bee6c617b20d9ea2743beca49cc45402597e34179c3ce9"
+    },
+    {
+      "file": "outputs/osm-fix2-resume-audit/codeql-check.json",
+      "sha256": "f63255b58b6dd289b15286e359fd42a4dbb1edf52b6a3c1afcf89f9f0732944e"
+    },
+    {
+      "file": "outputs/osm-fix2-resume-audit/codeql-annotations.json",
+      "sha256": "51735e8f1f5cd8ad8956f9d4ec5213f0560f851d79dc233c540ebdf302a200fa"
+    },
+    {
+      "file": "outputs/osm-fix2-resume-audit/actual-change-repro-A-host.json",
+      "sha256": "e8341d64239eac402f0c72ce78e826351321928f28ad263f84dcf7937b23e7ca"
+    },
+    {
+      "file": "outputs/osm-fix2-resume-audit/actual-change-repro-B-host.json",
+      "sha256": "55c24ebd2b13d6712c7cd28d92b70e9253fbc6acd0160f2a956edc87368714ad"
+    },
+    {
+      "file": "outputs/osm-fix2-resume-audit/diagnosis.log",
+      "sha256": "5ef17305b374b5854fedc7a47ad59818c8ee7e9f7da8bfe4eaf47ed52267cd6c"
+    },
+    {
+      "file": "outputs/osm-fix2-resume-audit/security-local-tests.log",
+      "sha256": "10931827b4e3315997527e3143d9f1cd675f883b1a5d3b780f516f524464443f"
+    },
+    {
+      "file": "outputs/osm-fix2-resume-audit/osm-local-tests.log",
+      "sha256": "892e73a1df360df8b0dc7294154b6c5cbb50a66ebbc78f9e23aa9cacaeb526eb"
+    }
+  ],
+  "verdict": "BLOCKED_PENDING_FIX_VALIDATION_NO_SOURCE_PROMOTION"
+}

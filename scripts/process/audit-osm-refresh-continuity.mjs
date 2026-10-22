@@ -7,11 +7,15 @@ import {execFileSync} from 'node:child_process';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import {assessOsmSourceContinuityCountry,summarizeOsmSourceContinuity} from '../lib/osm-source-continuity.mjs';
+import {osmManifestPath} from '../lib/osm-source-paths.mjs';
 
-const MANIFEST='data/sources/osm-current.json';
+const MANIFEST=osmManifestPath(process.env.OSM_CURRENT_SOURCE_MANIFEST||'data/sources/osm-current.json');
+const BASELINE_MANIFEST=process.env.OSM_CONTINUITY_BASELINE_MANIFEST?osmManifestPath(process.env.OSM_CONTINUITY_BASELINE_MANIFEST):'';
 const REPORT='outputs/osm-source-continuity.json';
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
-const before=JSON.parse(execFileSync('git',['show','HEAD:'+MANIFEST],{encoding:'utf8',maxBuffer:16*1024*1024}));
+const before=BASELINE_MANIFEST
+ ? JSON.parse(await readFile(BASELINE_MANIFEST,'utf8'))
+ : JSON.parse(execFileSync('git',['show','HEAD:'+MANIFEST],{encoding:'utf8',maxBuffer:16*1024*1024}));
 const after=JSON.parse(await readFile(MANIFEST,'utf8'));
 const loadRaw=async(code,entry)=>{
   const semantic=String(entry?.semantic_sha256||'');
@@ -50,4 +54,4 @@ console.log(JSON.stringify({status:report.status,report_path:REPORT,
   missing_total:report.missing_total??null,added_total:report.added_total??null,
   missing_by_country:Object.fromEntries(Object.entries(report.countries||{}).map(([code,c])=>[code,c.missing.map(x=>x.relation_id)])),
   error:report.error||null},null,2));
-if(report.status!=='PASS')process.exitCode=1;
+if(report.status!=='PASS'&&process.env.OSM_CONTINUITY_REPORT_ONLY!=='1')process.exitCode=1;

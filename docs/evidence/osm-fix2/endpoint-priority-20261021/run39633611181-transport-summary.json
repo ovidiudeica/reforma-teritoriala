@@ -1,0 +1,38 @@
+{
+  "run": 39633611181,
+  "sha": "933fa40e40ae18a9413685812d67326a15b1ac1e",
+  "source_promoted": false,
+  "verdict": "INCOMPLETE_CHECKPOINT_NOT_ACCEPTED",
+  "top_level_shards": [
+    "OSM RO: verified shard 1/52; 1 relations; epoch 2026-10-21T16:18:40Z",
+    "OSM RO: verified shard 2/52; 42 relations; epoch 2026-10-21T16:18:40Z"
+  ],
+  "endpoints": [
+    {
+      "endpoint": "https://overpass-api.de/api/interpreter",
+      "requests": 11,
+      "success": 8,
+      "timeouts": 0,
+      "http502": 3,
+      "duration_ms": 330770
+    },
+    {
+      "endpoint": "https://overpass.kumi.systems/api/interpreter",
+      "requests": 8,
+      "success": 0,
+      "timeouts": 8,
+      "http502": 0,
+      "duration_ms": 480010
+    },
+    {
+      "endpoint": "https://overpass.private.coffee/api/interpreter",
+      "requests": 8,
+      "success": 0,
+      "timeouts": 8,
+      "http502": 0,
+      "duration_ms": 480006
+    }
+  ],
+  "log_sha256": "6c7d12b365b065509582ca2d243cb5ce1afa22f566c5fb4e273fa29c6a10f6eb",
+  "reason": "Round-robin selected cooled-down repeatedly failing endpoints despite a healthy eligible endpoint. New regression fails on933 and65-test suite passes after health-ranked selection. No relaxation of closure, identity, epoch, timeout or acceptance."
+}

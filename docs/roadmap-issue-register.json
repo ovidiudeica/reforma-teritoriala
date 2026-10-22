@@ -621,6 +621,125 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39639663180"
       ],
       "verdict": "FIXED_VERIFIED_EXACT_HEAD_NOT_FORMAL_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "RM-031",
+      "severity": "P1",
+      "component": "OSM current-source acquisition",
+      "entities": [
+        "RO",
+        "MD"
+      ],
+      "reproduction": "Run39646938698:40/52RO complete; the40top-level payloads repeat818567node occurrences for620509unique nodes and12192ways for8667unique ways; recursive queries consume619691ms even when successful.",
+      "cause": "Relation-oriented recursive downloads repeatedly expand common referenced objects and amplify overload at recursive retry leaves.",
+      "change": "Current-source-only pinned-epoch unique relation/way/node layers, typed content-addressed resume, exact inventory/closure/version/SHA validation; no ACTUAL path change.",
+      "pr": 398,
+      "regression": "scripts/test/osm-layered-acquisition.test.mjs",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/historical-object-duplication.json",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/previous-transport-metrics.json",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log.gz"
+      ],
+      "verdict": "IMPLEMENTED_LOCAL_REGRESSION_PASS_LIVE_ACCEPTANCE_PENDING",
+      "alternative_transport_qualification": {
+        "date": "2026-10-21T23:45:27.851Z",
+        "evidence": "docs/evidence/osm-fix2/geofabrik-qualification-20261022",
+        "originals": "Complete dated RO/MD public PBF originals captured and hashed independently; source epoch2026-10-20T20:23:47Z",
+        "reference_closure": "3233RO and2585MD reference IDs: zero missing dependencies; MD retains two topology defects",
+        "scope": "All tag-matching candidates in extracts are3646RO/2641MD, not a certified replacement of Overpass area selection",
+        "source_promoted": false
+      }
+    },
+    {
+      "id": "RM-032",
+      "severity": "P1",
+      "component": "Overpass provider health selection",
+      "entities": [
+        "RO",
+        "MD"
+      ],
+      "reproduction": "After providerA times out and providerB succeeds then returns one fast502, a tied failure count selects timed-outA again; the new regression fails before the fix. Final prior resume spent600005ms in10Kumi/private.coffee timeouts.",
+      "cause": "Failure counts did not distinguish total route timeout from a transient HTTP response.",
+      "change": "Prefer eligible providers without timeout history; clear that history only after an actual valid response. Retry-After, bounded backoff, sequential traffic and total deadline remain intact.",
+      "pr": 398,
+      "regression": "timeout history is not equivalent to a transient fast HTTP error when choosing a provider",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/timeout-priority-before.log.gz",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log.gz"
+      ],
+      "verdict": "IMPLEMENTED_LOCAL_REGRESSION_PASS_EXACT_HEAD_CI_PENDING"
+    },
+    {
+      "id": "RM-033",
+      "severity": "P1",
+      "component": "New layered-checkpoint finalization before first push",
+      "entities": [
+        "SOURCE_CANDIDATE_ONLY"
+      ],
+      "reproduction": "In the first uncommitted layered implementation, supply a closed assembled graph without any stored way/node batches: finish accepted it. The retained counterexample fails before the fix.",
+      "cause": "Closure was checked but final objects were not independently reconstructed from persisted verified batch bytes.",
+      "change": "Rebuild backing from hash-verified inventory and every persisted typed batch, prove closure and exact final object-key coverage, then reject version/content conflicts before complete=true.",
+      "pr": 398,
+      "regression": "a closed assembled graph cannot replace a missing checkpoint batch",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/unbacked-checkpoint-before.log.gz",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/unbacked-checkpoint-after.log.gz",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/local-source-suite.log.gz"
+      ],
+      "verdict": "FIXED_BEFORE_FIRST_PUSH_LOCAL_REGRESSION_PASS_CI_PENDING"
+    },
+    {
+      "id": "RM-034",
+      "severity": "P1",
+      "component": "Layered-source evidence packaging",
+      "entities": [
+        "PR398_EVIDENCE_ONLY"
+      ],
+      "reproduction": "Run39683119963/job119510355310 on2ba11: local-source-suite.log was in the manifest but ignored by Git; the frozen-evidence test failed ENOENT and no source capture began.",
+      "cause": "Local content-hash validation did not prove that every manifested input was included in the committed tree.",
+      "change": "Preserve exact original bytes in gzip; retain the initial incomplete manifest and failed job log; assert Git-index membership and verify staged blob SHA-256 before commit.",
+      "pr": 398,
+      "regression": "frozen acquisition and mapper evidence matches each recorded SHA and original HTTP body",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/ci-2ba11-source-job.log.gz",
+        "docs/evidence/osm-fix2/layered-acquisition-20261021/initial-package-failure.json"
+      ],
+      "verdict": "FIX_IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "id": "RM-035",
+      "severity": "P2",
+      "component": "Dated-extract evidence preservation",
+      "reproduction": "New unpublished acquisition prototype invoked twice with the same output path overwrote its existing receipt before encountering an already existing checksum file. The regression runs all20tests against the original prototype and fails preservation.",
+      "cause": "The initial receipt write used overwrite semantics before checking whether an attempt already existed.",
+      "change": "Create the initial receipt exclusively; reject repeat attempts before any network request or overwrite. Preserve partial failures; verify existing original files separately without downloading again.",
+      "pr": 398,
+      "regression": "scripts/test/geofabrik-acquisition.test.mjs",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/geofabrik-qualification-20261022/preservation-before.log.gz",
+        "docs/evidence/osm-fix2/geofabrik-qualification-20261022/transport-tests-after.log.gz"
+      ],
+      "verdict": "FIXED_BEFORE_FIRST_PUBLICATION_LOCAL_PASS_CI_PENDING"
+    },
+    {
+      "id": "RM-036",
+      "severity": "P2",
+      "component": "Geofabrik qualification evidence packaging",
+      "reproduction": "git diff --cached --check rejected CRLF lines in the JSON reports emitted by the Windows Python prototype before any commit.",
+      "cause": "Original JSON report bytes were staged as text in a repository requiring LF, without separating exact original bytes from readable rendering.",
+      "change": "Preserve every affected original byte-for-byte in gzip, record both SHA-256 values, and create LF JSON renderings with identical parsed content. Keep git diff --check enabled.",
+      "pr": 398,
+      "regression": "scripts/test/geofabrik-acquisition.test.mjs",
+      "verification_sha": null,
+      "evidence": [
+        "docs/evidence/osm-fix2/geofabrik-qualification-20261022/text-representations.json"
+      ],
+      "verdict": "FIXED_BEFORE_FIRST_PUBLICATION_LOCAL_PASS_CI_PENDING"
     }
   ],
   "environment_incidents": [
@@ -1353,5 +1472,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-21T17:24:13.761Z"
+  "updated_at": "2026-10-21T23:45:27.853Z"
 }

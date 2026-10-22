@@ -81,7 +81,9 @@ test('OSM importer is the only networked OSM source step and writes durable cont
  assert.match(importer,/semantic_sha256/);
  assert.match(importer,/OSM_API_BASE='https:\/\/api\.openstreetmap\.org\/api\/0\.6'/);
  assert.match(importer,/refreshRequiredRelationsFromOsmApi/);
- assert.match(importer,/relation\/\$\{relationId\}\/full\.json/);
+ assert.match(importer,/allowMissing=false,type='relation'/);
+ assert.match(importer,/\$\{type\}\/\$\{Number\(relationId\)\}/);
+ assert.match(importer,/type==='node'\?'':'\/full'/);
  assert.match(importer,/authoritative_relation_source/);
  assert.match(importer,/authoritative_relation_ids/);
  assert.match(importer,/authoritative_relation_attempts/);
@@ -143,7 +145,8 @@ test('refreshed OSM source scope, not geometric containment, controls jurisdicti
  ]);
  assert.match(importer,/selected_relation_count/);
  assert.match(importer,/selected_relation_ids/);
- assert.match(importer,/selectedRelationIds:\[\.\.\.new Set\(raw\.elements\.filter\(x=>relationMatchesScope\(x,cfg\)\)/);
+ assert.match(importer,/const selectedRelationIds=\[\.\.\.new Set\(raw\.elements\.filter\(x=>relationMatchesScope\(x,cfg\)\)/);
+ assert.match(importer,/raw=await closeRawDependencies\(raw,selectedRelationIds,code,authoritative.attempts\)/);
  assert.match(builder,/Array\.isArray\(sourceEntry\.selected_relation_ids\)/);
  assert.match(builder,/source_scope_membership_applied/);
  assert.match(builder,/OSM source selection determines jurisdiction membership/);
@@ -242,15 +245,17 @@ test('OSM refresh recovers previous in-scope relations omitted by Overpass area 
  assert.ok(continuityIndex>=0&&validateIndex>continuityIndex,'continuity recovery must precede validation so false-negative area-index omissions cannot silently shrink ACTUAL');
 });
 
-test('OSM refresh falls back from monolithic Overpass to explicit relation chunks without changing source scope',async()=>{
+test('OSM refresh uses complete inventory-first pinned category shards without changing source scope',async()=>{
  const importer=await readFile(importerPath,'utf8');
- assert.match(importer,/const OVERPASS_CHUNK_SIZE=300/);
+ assert.match(importer,/const OVERPASS_CHUNK_SIZE=100/);
  assert.match(importer,/inventoryQueryFor/);
  assert.match(importer,/explicitRelationsQuery/);
  assert.match(importer,/fetchCountryChunked/);
- assert.match(importer,/const part=await fetchAdaptiveRelations\(ids,/);
- assert.match(importer,/All monolithic Overpass endpoints failed/);
- assert.match(importer,/fetchMode:'chunked_explicit_relations'/);
+ assert.match(importer,/const raw=await fetchAdaptiveRelations\(shard\.ids,/);
+ assert.match(importer,/partitionInventory\(relations,OVERPASS_CHUNK_SIZE\)/);
+ assert.match(importer,/explicitRelationsQuery\(ids,checkpoint\.state\.epoch\)/);
+ assert.match(importer,/await checkpoint\.finish\(relationIds,raw\)/);
+ assert.match(importer,/fetchMode:'categorized_pinned_epoch_shards'/);
  assert.match(importer,/querySha256:sha256\(queryFor\(cfg\)\)/);
  assert.doesNotMatch(importer,/Promise\.all\([^)]*fetchOverpassJson/);
 });

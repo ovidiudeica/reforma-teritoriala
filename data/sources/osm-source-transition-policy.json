@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "mode": "OSM_SOURCE_TRANSITION_POLICY",
+  "transition_id": "OSM-FIX.2-2026-10-20",
+  "baseline": {
+    "manifest_path": "data/sources/osm-current.json",
+    "snapshot_at": "2026-10-05T23:50:05.218Z",
+    "countries": {
+      "RO": {
+        "selected_relation_count": 3233,
+        "semantic_sha256": "4a09c6cd6e41f4df814505a9813dde265e93b991752b44cb88545c4ed6a16d86",
+        "compressed_sha256": "f3ef2ffd15c286d443e6181a6a60bee2008233574550854764ca49e6a3ef5832"
+      },
+      "MD": {
+        "selected_relation_count": 2596,
+        "semantic_sha256": "cd7e0ebb5dc9f691e4c160609c164915f7ebea4bcb4c4adbe0307e33f76bf417",
+        "compressed_sha256": "d4fb245c714038d4e9bbb5273074c6ee1ad23555441289244c1d97c0afdf72b0"
+      }
+    }
+  },
+  "candidate": {
+    "manifest_path": "data/sources/osm-source-current.json"
+  },
+  "expected_transition": {
+    "retired_relations": [
+      {
+        "relation_id": 18966859,
+        "name": "Bogăția Lacului",
+        "cuatm_unique_id": "553002",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-12T10:26:56Z",
+        "deletion_changeset": 190392676,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18966939,
+        "name": "Grădina-Rai",
+        "cuatm_unique_id": "553003",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-12T10:26:56Z",
+        "deletion_changeset": 190392676,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18967312,
+        "name": "Mesteacănul Alb",
+        "cuatm_unique_id": "552403",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-08T10:30:08Z",
+        "deletion_changeset": 190191900,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18967475,
+        "name": "Struguraș",
+        "cuatm_unique_id": "553008",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-12T10:26:56Z",
+        "deletion_changeset": 190392676,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18967641,
+        "name": "Novinca-Eco",
+        "cuatm_unique_id": "553005",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-12T10:26:56Z",
+        "deletion_changeset": 190392676,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18967824,
+        "name": "Automobilist",
+        "cuatm_unique_id": "553001",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-12T10:26:56Z",
+        "deletion_changeset": 190392676,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18967907,
+        "name": "Boierul-Com",
+        "cuatm_unique_id": "552402",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-06T10:23:05Z",
+        "deletion_changeset": 190081892,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18967934,
+        "name": "Pomsuragro",
+        "cuatm_unique_id": "553006",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-12T10:26:56Z",
+        "deletion_changeset": 190392676,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18968041,
+        "name": "Aluniș-Com",
+        "cuatm_unique_id": "552401",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-08T10:30:08Z",
+        "deletion_changeset": 190191900,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18968051,
+        "name": "Romănița-Agro",
+        "cuatm_unique_id": "552405",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-08T10:30:08Z",
+        "deletion_changeset": 190191900,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18968093,
+        "name": "Relief-Prim",
+        "cuatm_unique_id": "553007",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-12T10:26:56Z",
+        "deletion_changeset": 190392676,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      },
+      {
+        "relation_id": 18968144,
+        "name": "Sveazist IL",
+        "cuatm_unique_id": "553009",
+        "expected_previous": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments"
+        },
+        "required_current_api_status": 410,
+        "deletion_timestamp": "2026-10-12T12:08:18Z",
+        "deletion_changeset": 190398165,
+        "source_disposition": "RETIRED_FROM_CURRENT_OSM",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      }
+    ],
+    "added_relations": [
+      {
+        "relation_id": 21515245,
+        "name": "Î.P. „Boierul-COM”",
+        "cuatm_unique_id": "552402",
+        "rson_idno": "1007600041533",
+        "expected_current": {
+          "boundary": "administrative",
+          "admin_level": "9",
+          "place": "allotments",
+          "type": "multipolygon"
+        },
+        "version": 1,
+        "timestamp": "2026-10-06T10:23:05Z",
+        "changeset": 190081892,
+        "source_disposition": "CURRENT_OSM_ADDITION",
+        "legal_disposition": "NO_LEGAL_INFERENCE"
+      }
+    ],
+    "cartographic_successor_links": [
+      {
+        "from_relation_id": 18967907,
+        "to_relation_id": 21515245,
+        "required_shared_cuatm_unique_id": "552402",
+        "required_shared_changeset": 190081892,
+        "required_shared_timestamp": "2026-10-06T10:23:05Z",
+        "cartographic_verdict": "OSM_CARTOGRAPHIC_SUCCESSOR_SUPPORTED",
+        "legal_successor_verdict": "UNRESOLVED"
+      }
+    ]
+  },
+  "acceptance": {
+    "require_exact_retired_set": true,
+    "require_exact_added_set": true,
+    "require_authoritative_http_410_for_each_retired": true,
+    "require_candidate_snapshot_sha256": true,
+    "require_relation_way_node_closure": true,
+    "require_no_duplicate_elements": true,
+    "require_geometry_evidence": true,
+    "require_actual_unchanged": true,
+    "permitted_scope": "CURRENT_OSM_SOURCE_ONLY"
+  },
+  "guards": {
+    "actual_mutation_allowed": false,
+    "p91_import_allowed": false,
+    "semantic_acceptance": "BLOCKED_INCOMPLETE"
+  }
+}
