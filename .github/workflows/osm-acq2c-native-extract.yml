@@ -4,12 +4,29 @@ on:
     paths:
       - '.github/workflows/osm-acq2c-native-extract.yml'
       - 'scripts/audit/osm_acq2c_native_extract.py'
+      - 'scripts/audit/osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
       - 'scripts/audit/test_osm_acq2c_native_*.py'
       - 'scripts/audit/osm_acq2c_acquire_history_base.py'
       - 'scripts/audit/osm_acq2c_bulk_preflight.py'
       - 'scripts/audit/osm_acq2c_full_batch.py'
       - 'scripts/audit/osm_acq2c_priority.py'
       - 'docs/evidence/osm-acq2c-native-extract-20261023/**'
+      - 'docs/evidence/osm-acq2c-typed-reader-20261023/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-acq2c-native-extract.yml'
+      - 'scripts/audit/osm_acq2c_native_extract.py'
+      - 'scripts/audit/osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/test_osm_acq2c_native_*.py'
+      - 'scripts/audit/osm_acq2c_acquire_history_base.py'
+      - 'scripts/audit/osm_acq2c_bulk_preflight.py'
+      - 'scripts/audit/osm_acq2c_full_batch.py'
+      - 'scripts/audit/osm_acq2c_priority.py'
+      - 'docs/evidence/osm-acq2c-native-extract-20261023/**'
+      - 'docs/evidence/osm-acq2c-typed-reader-20261023/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,6 +47,23 @@ jobs:
         run: |
           python scripts/audit/test_osm_acq2c_native_extract.py
           python scripts/audit/test_osm_acq2c_native_pbf.py
+          python scripts/audit/test_osm_acq2c_pbf_blocks.py
+      - name: Verify typed-reader probe remains explicitly unqualified
+        run: |
+          python - <<'PY'
+          import pathlib,sys,json
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_selected_epoch_replay import verify_manifest
+          root=pathlib.Path('docs/evidence/osm-acq2c-typed-reader-20261023')
+          verify_manifest(root)
+          report=json.loads((root/'probe.json').read_bytes())
+          assert report['probe_status']=='STOPPED_WITHOUT_COMPLETED_EXTRACTION'
+          assert report['source_qualified'] is False and report['source_promoted'] is False
+          assert report['performance_improvement_demonstrated'] is False
+          assert report['selected_output_bytes']==0 and report['requested']==3959
+          assert report['previous_frontier']==237019
+          assert sum(report['previous_frontier_types'].values())==report['previous_frontier']
+          PY
       - name: Verify complete public test evidence manifest
         run: |
           python - <<'PY'
