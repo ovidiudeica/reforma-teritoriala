@@ -1,0 +1,103 @@
+name: OSM observed historical gaps offline validation
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-gap-state.yml'
+      - 'scripts/audit/osm_acq2c_gap_state.py'
+      - 'scripts/audit/verify_osm_acq2c_gap_state.py'
+      - 'scripts/audit/test_osm_acq2c_gap_state.py'
+      - 'scripts/audit/test_osm_acq2c_gap_capsule.py'
+      - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/osm_acq2c_integer_reference.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'docs/evidence/osm-acq2c-gap-state-20261023/**'
+      - 'docs/evidence/osm-upstream-evening-20261023/**'
+      - 'docs/evidence/osm-upstream-reverse-20261023/**'
+      - 'docs/evidence/osm-acq2c-complete-spatial-20261023/all-candidate-frontier.json.gz'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-acq2c-gap-state.yml'
+      - 'scripts/audit/osm_acq2c_gap_state.py'
+      - 'scripts/audit/verify_osm_acq2c_gap_state.py'
+      - 'scripts/audit/test_osm_acq2c_gap_state.py'
+      - 'scripts/audit/test_osm_acq2c_gap_capsule.py'
+      - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/osm_acq2c_integer_reference.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'docs/evidence/osm-acq2c-gap-state-20261023/**'
+      - 'docs/evidence/osm-upstream-evening-20261023/**'
+      - 'docs/evidence/osm-upstream-reverse-20261023/**'
+      - 'docs/evidence/osm-acq2c-complete-spatial-20261023/all-candidate-frontier.json.gz'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gap-state-offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Gap and adversarial real-capsule regressions
+        run: |
+          python scripts/audit/test_osm_acq2c_gap_state.py
+          python scripts/audit/test_osm_acq2c_gap_capsule.py
+          python scripts/audit/test_osm_acq2c_evidence_paths.py
+      - name: All102 observed gap states without continuity admission
+        run: python scripts/audit/verify_osm_acq2c_gap_state.py --directory docs/evidence/osm-acq2c-gap-state-20261023
+      - name: Exact recursive second-round input inventory
+        run: |
+          python - <<'PY'
+          import json,gzip,pathlib,hashlib,collections
+          root=pathlib.Path('docs/evidence')
+          plan=json.loads((root/'osm-acq2c-gap-state-20261023/round2-plan.json').read_bytes())
+          raw=gzip.decompress((root/'osm-acq2c-complete-spatial-20261023/all-candidate-frontier.json.gz').read_bytes())
+          previous=json.loads(raw);ids=sorted(x['code'] for x in previous['missing'])
+          assert len(ids)==len(set(ids))==plan['count']==32333
+          assert dict(collections.Counter(x[0] for x in ids))==plan['types']=={'n':29763,'w':2170,'r':400}
+          assert hashlib.sha256(raw).hexdigest()==plan['parent_report_sha256']
+          assert hashlib.sha256(('\n'.join(ids)+'\n').encode('ascii')).hexdigest()==plan['sha256']=='40410cea341ca16f19664d4cf744c9202c88c332abc753cc86243c2a66ec6860'
+          assert plan['source_qualified'] is False
+          PY
+      - name: Frozen upstream metadata and reverse-use scope without upload approval
+        run: |
+          python - <<'PY'
+          import sys,pathlib,json,decimal
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_selected_epoch_replay import verify_manifest
+          base=pathlib.Path('docs/evidence')
+          fresh=base/'osm-upstream-evening-20261023';reverse=base/'osm-upstream-reverse-20261023'
+          verify_manifest(fresh);verify_manifest(reverse)
+          metadata=json.loads((fresh/'summary.json').read_bytes(),parse_float=decimal.Decimal)
+          comparison=json.loads((fresh/'canonical-comparison.json').read_bytes())
+          assert metadata['versions_unchanged'] and metadata['terminal_refs_unchanged'] and metadata['coordinate_pairs_identical']
+          assert metadata['source_qualified'] is False and metadata['public_osm_edited'] is False and metadata['public_edit_authorized'] is False
+          assert comparison['objects']==8 and comparison['canonical_payloads_unchanged'] and len(comparison['rows'])==8
+          assert comparison['source_qualified'] is False and comparison['public_osm_edited'] is False
+          report=json.loads((reverse/'summary.json').read_bytes())
+          assert report['complete'] and len(report['rows'])==6 and report['source_qualified'] is False and report['public_osm_edited'] is False
+          assert report['mapper_intent_review']=='REQUIRED_NOT_SELF_APPROVED'
+          assert all(r['status']==200 and r['observation']=='CURRENT_REVERSE_REFERENCES_OBSERVED_ONLY' for r in report['rows'])
+          assert [len(r['parents']) for r in report['rows'][:4]]==[5,4,2,3]
+          assert [[p['id'] for p in r['parents']] for r in report['rows'][4:]]==[[18967493],[18968082]]
+          way_uses=[p for r in report['rows'][:4] for p in r['parents']]
+          assert len({p['id'] for p in way_uses})==14
+          by_id={p['id']:p for p in way_uses}
+          assert (by_id[1376179876]['version'],by_id[1376179876]['node_count'],by_id[1376179876]['reference_positions'])==(8,458,[457])
+          assert (by_id[1376180731]['version'],by_id[1376180731]['node_count'],by_id[1376180731]['reference_positions'])==(6,228,[227])
+          chain=json.loads((reverse/'relation-parent-chain.json').read_bytes())
+          assert chain['reverse_traversal_complete'] and chain['requests']==2 and len(chain['rows'])==2 and chain['pending']==[]
+          assert set(chain['roots'])=={18967493,18968082}
+          assert all(r['status']==200 and r['parents']==[] for r in chain['rows'])
+          assert chain['source_qualified'] is False and chain['public_osm_edited'] is False
+          print('8 unchanged canonical objects, 14 endpoint-way uses and2 affected relations observed; no public edit or source admission')
+          PY

@@ -12,14 +12,36 @@ def file_sha(path):
         for raw in iter(lambda:source.read(8*1024*1024),b''):h.update(raw);size+=len(raw)
     return size,h.hexdigest()
 def verify_manifest(root):
-    manifest=json.loads((root/'manifest-sha256.json').read_bytes());seen=set()
+    root=pathlib.Path(root)
+    if root.is_symlink():raise ValueError('Symlink evidence root is forbidden')
+    # Only physical entries discovered inside the trusted root can be opened.
+    # Untrusted manifest names are lookup keys, never path expressions.
+    entries={}
+    for member in root.iterdir():
+        if member.is_symlink():raise ValueError('Symlink evidence member is forbidden')
+        if member.is_file():entries[member.name]=member
+    manifest_path=entries.get('manifest-sha256.json')
+    if manifest_path is None:raise FileNotFoundError('Evidence manifest missing')
+    def unique(pairs):
+        result={}
+        for key,value in pairs:
+            if key in result:raise ValueError('Duplicate evidence JSON key')
+            result[key]=value
+        return result
+    manifest=json.loads(manifest_path.read_bytes(),object_pairs_hook=unique);seen=set()
+    if not isinstance(manifest.get('files'),list):raise ValueError('Invalid evidence manifest')
+    devices={'CON','PRN','AUX','NUL'}|{'COM'+str(i) for i in range(1,10)}|{'LPT'+str(i) for i in range(1,10)}
     for row in manifest['files']:
         name=row['name']
-        if not isinstance(name,str) or not name or name in ('.','..') or pathlib.Path(name).name!=name or name in seen:raise ValueError('Unsafe/duplicate evidence name')
-        seen.add(name)
-        if file_sha(root/name)!=(row['bytes'],row['sha256']):raise ValueError('Evidence digest mismatch: '+name)
-    if seen!={p.name for p in root.iterdir() if p.is_file() and p.name!='manifest-sha256.json'}:raise ValueError('Incomplete evidence manifest')
+        if not isinstance(name,str) or not name or name in ('.','..') or any(c in name for c in ('/','\\',':','\0')) or any(ord(c)<32 for c in name) or name.endswith(('.', ' ')) or name.split('.')[0].upper() in devices or name in seen:raise ValueError('Unsafe/duplicate evidence name')
+        if type(row['bytes']) is not int or row['bytes']<0 or not isinstance(row['sha256'],str) or len(row['sha256'])!=64 or any(c not in '0123456789abcdef' for c in row['sha256']):raise ValueError('Invalid evidence digest metadata')
+        seen.add(name);member=entries.get(name)
+        if member is None:raise FileNotFoundError('Listed evidence member missing')
+        if member.is_symlink() or member.resolve().parent!=root.resolve():raise ValueError('Evidence member escapes root')
+        if file_sha(member)!=(row['bytes'],row['sha256']):raise ValueError('Evidence digest mismatch: '+name)
+    if seen!=set(entries)-{'manifest-sha256.json'}:raise ValueError('Incomplete evidence manifest')
     return manifest
+
 def emit(path,value):path.write_bytes((json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False)+'\n').encode())
 
 def run():

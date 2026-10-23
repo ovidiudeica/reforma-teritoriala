@@ -13,6 +13,26 @@ on:
       - 'scripts/audit/test_osm_acq2c_preserved_history.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_frontier.py'
+      - 'docs/evidence/osm-acq2c-complete-spatial-20261023/**'
+      - 'docs/evidence/osm-acq2b-node-history-20261022/**'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-acq2c-complete-spatial.yml'
+      - 'docs/roadmap-issue-register.json'
+      - 'docs/osm-acq2c-complete-spatial-20261023.md'
+      - 'scripts/audit/osm_acq2c_integer_reference.py'
+      - 'scripts/audit/test_osm_acq2c_integer_reference.py'
+      - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/test_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/osm_acq2c_preserved_history.py'
+      - 'scripts/audit/test_osm_acq2c_preserved_history.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
       - 'scripts/audit/osm_acq2c_frontier.py'
       - 'docs/evidence/osm-acq2c-complete-spatial-20261023/**'
       - 'docs/evidence/osm-acq2b-node-history-20261022/**'
@@ -36,6 +56,7 @@ jobs:
           python scripts/audit/test_osm_acq2c_integer_reference.py
           python scripts/audit/test_osm_acq2c_numeric_certificate.py
           python scripts/audit/test_osm_acq2c_preserved_history.py
+          python scripts/audit/test_osm_acq2c_evidence_paths.py
       - name: Complete evidence manifest
         run: |
           python - <<'PY'
