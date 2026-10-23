@@ -6,10 +6,10 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {launchBrowser,waitFor} from '../test/helpers/atlas-browser.mjs';
 import {verifyPublishedSource,publishedSourceContext} from './helpers/published-source.mjs';
+import {publishedAuditUrl} from './helpers/audit-io-boundaries.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const url=process.env.ATLAS_LIVE_URL||'https://ovidiudeica.github.io/reforma-teritoriala/';
-if(new URL(url).origin!=='https://ovidiudeica.github.io'||new URL(url).pathname!=='/reforma-teritoriala/')throw Error('Refuse non-public audit target');
+const url=publishedAuditUrl(process.env.ATLAS_LIVE_URL||undefined);
 const out=path.join(root,'outputs','WEB-R2b-final-live');
 if(process.env.ATLAS_E2E_OUTPUT&&path.resolve(process.env.ATLAS_E2E_OUTPUT)!==out)throw Error('Published audit output must remain inside the fixed evidence directory');
 const provenance=publishedSourceContext(root),source=provenance.auditor;

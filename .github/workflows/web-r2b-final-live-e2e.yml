@@ -6,6 +6,8 @@ on:
       - '.github/workflows/web-r2b-final-live-e2e.yml'
       - 'scripts/audit/web-r2b-final-pages-browser.mjs'
       - 'scripts/audit/helpers/published-source.mjs'
+      - 'scripts/audit/helpers/audit-io-boundaries.mjs'
+      - 'scripts/test/audit-io-boundaries.test.mjs'
       - 'scripts/test/frontend-published-source.test.mjs'
   workflow_dispatch:
 permissions:
@@ -39,6 +41,7 @@ jobs:
         run: |
           node --check scripts/audit/web-r2b-final-pages-browser.mjs
           node --test scripts/test/frontend-published-source.test.mjs
+          node --test scripts/test/audit-io-boundaries.test.mjs
           google-chrome --version
       - name: Audit actual published Pages in real Chromium
         run: node scripts/audit/web-r2b-final-pages-browser.mjs
