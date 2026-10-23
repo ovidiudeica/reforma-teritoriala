@@ -33,6 +33,7 @@ jobs:
           google-chrome --version
           node --check scripts/audit/web-r2c32-hardening-browser.mjs
           node --test scripts/test/frontend-published-source.test.mjs scripts/test/frontend-published-runtime.test.mjs scripts/test/published-runtime-retry.test.mjs
+          node --test scripts/test/frontend-navigation-failure-evidence.test.mjs scripts/test/frontend-performance-navigation.test.mjs
       - name: Published runtime inventory and Chromium matrix
         run: node scripts/audit/web-r2c32-hardening-browser.mjs
       - name: Exact source admission

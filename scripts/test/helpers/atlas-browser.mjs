@@ -4,6 +4,7 @@ import {existsSync} from 'node:fs';
 import {spawn} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
+import {navigationFailureEvidence} from './navigation-evidence.mjs';
 
 export const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 export async function waitFor(check,label,timeout=60000){const until=Date.now()+timeout;let last;while(Date.now()<until){try{last=await check();if(last)return last;}catch(error){last=error.message;}await delay(100);}throw Error('Timeout: '+label+'; last='+JSON.stringify(last));}
@@ -63,7 +64,21 @@ export class Page{
   await delay(200);
  }
 
- async navigate(url){await this.send('Page.navigate',{url});await waitFor(()=>this.evaluate("document.readyState==='complete' && !!document.querySelector('#filter-list input') && !!document.querySelector('.tree-select')"),'app ready',90000);await this.evaluate("import('./app.js').then(async m=>{await m.frontendReady;window.qaApp=m;return true;})");await delay(250);}
+ async navigate(url){
+  this.lastNavigationReadiness=null;
+  try{
+  await this.send('Page.navigate',{url});
+  await waitFor(async()=>{
+   const observed=await this.evaluate("({readyState:document.readyState,url:location.href,title:document.title,width:innerWidth,height:innerHeight,filters:!!document.querySelector('#filter-list input'),tree:!!document.querySelector('.tree-select')})");
+   this.lastNavigationReadiness=observed;
+   return observed.readyState==='complete'&&observed.filters&&observed.tree;
+  },'app ready',90000);
+  await this.evaluate("import('./app.js').then(async m=>{await m.frontendReady;window.qaApp=m;return true;})");await delay(250);
+  }catch(error){
+   const failure=error instanceof Error?error:new Error(String(error));
+   failure.navigationFailure=navigationFailureEvidence(this,url);throw failure;
+  }
+ }
  async click(selector){const box=await this.call(function(selector){const e=document.querySelector(selector);if(!e)throw Error('Missing '+selector);e.scrollIntoView({block:'nearest',inline:'nearest'});const r=e.getBoundingClientRect();if(!r.width||!r.height)throw Error('Hidden '+selector);return {x:r.x+r.width/2,y:r.y+r.height/2};},selector);await this.send('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',clickCount:1,...box});await this.send('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',clickCount:1,...box});await delay(150);}
  async key(key){const code={ArrowDown:40,ArrowUp:38,ArrowLeft:37,ArrowRight:39,Enter:13,Escape:27,Tab:9,' ':32}[key]||0;await this.send('Input.dispatchKeyEvent',{type:'keyDown',key,code:key===' '?'Space':key,windowsVirtualKeyCode:code,nativeVirtualKeyCode:code,...(key==='Enter'?{text:'\r',unmodifiedText:'\r'}:key===' '?{text:' ',unmodifiedText:' '}:{})});await this.send('Input.dispatchKeyEvent',{type:'keyUp',key,windowsVirtualKeyCode:code,nativeVirtualKeyCode:code});await delay(100);}
  async openPanel(key){
