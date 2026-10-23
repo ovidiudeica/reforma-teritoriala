@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-10-23T21:12:43.457Z",
+  "requested": 3959,
+  "entity_kind": "r",
+  "plan_sha256": "957d71d23a3aac3c687f4328d7f74856029f7501c0f7951b50ad47737009e82f",
+  "previous_frontier": 237019,
+  "previous_frontier_types": {
+    "n": 230277,
+    "w": 2783,
+    "r": 3959
+  },
+  "original_downloaded": false,
+  "original_rehashed": false,
+  "source_qualified": false,
+  "source_promoted": false,
+  "process": 13476,
+  "process_identity_verified": "python.exe work/relation-first-worker.py",
+  "termination": "WMIC own-process terminate returned0; executor exit1",
+  "exact_termination_time_available": false,
+  "selected_output_bytes": 0,
+  "probe_status": "STOPPED_WITHOUT_COMPLETED_EXTRACTION",
+  "performance_improvement_demonstrated": false,
+  "reason": "Stopped during severe observed local-tool latency; causality is not established. No second original reader was launched.",
+  "local_tests": {
+    "native_pbf": 15,
+    "native_core": 25
+  },
+  "limits": "The reader mask does not prove that the PBF transport skips compressed bytes. No throughput improvement or completed relation capture is claimed."
+}

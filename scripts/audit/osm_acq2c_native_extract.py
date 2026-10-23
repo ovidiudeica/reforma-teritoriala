@@ -71,12 +71,18 @@ def check_versions(rows,requested):
     gaps=sorted(code for code,versions in counts.items() if versions[0]!=1 or any(b!=a+1 for a,b in zip(versions,versions[1:])))
     return {'requested':len(requested),'observed':len(counts),'versions':len(seen),'missing_ids':missing,'gapped_ids':gaps,'source_qualified':False,'dependency_closure_certified':False,'unknown_adjudicated':0}
 
-def read_selection(path,requested,expected_epoch=None):
+def read_selection(path,requested,expected_epoch=None,entity_kind=None):
     import osmium
+    requested=request_ids(list(requested))
+    # An optional native reader mask skips unrelated entity decoding. Refuse a
+    # mixed request rather than silently dropping IDs outside the chosen mask.
+    masks={'n':osmium.osm.NODE,'w':osmium.osm.WAY,'r':osmium.osm.RELATION}
+    if entity_kind is not None and entity_kind not in masks:raise ValueError('Unknown native entity mask')
+    if entity_kind is not None and any(code[0]!=entity_kind for code in requested):raise ValueError('Entity mask would omit requested identities')
     # The C++ filter drops unrelated IDs before the Python iterator. Since IDs
     # overlap across types, retain a second exact typed check, never numeric-only.
     native=osmium.filter.IdFilter({int(code[1:]) for code in requested})
-    processor=osmium.FileProcessor(str(path)).with_filter(native)
+    processor=osmium.FileProcessor(str(path),entities=osmium.osm.ALL if entity_kind is None else masks[entity_kind]).with_filter(native)
     if not processor.header.has_multiple_object_versions:raise ValueError('Current-only PBF is not full history')
     if expected_epoch is not None and processor.header.get('osmosis_replication_timestamp')!=expected_epoch:raise ValueError('Historical base header epoch mismatch')
     for obj in processor:

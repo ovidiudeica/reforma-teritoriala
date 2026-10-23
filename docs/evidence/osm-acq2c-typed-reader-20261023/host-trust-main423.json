@@ -1,0 +1,160 @@
+{
+  "recorded_at": "2026-10-23T21:24:20.058117+00:00",
+  "head": "43e6e4c29ce81a05088ba11312c64cb18c650dfd",
+  "job": 120658612847,
+  "raw_log_sha256": "8bda1fa9e7c6f4d1b226394f75c3c5f9b398ee19090d8656646b77e462ccba24",
+  "host_manifest_sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167",
+  "observed": {
+    "runner": {
+      "image_os": "ubuntu24",
+      "image_version": "20261023.334.3",
+      "arch": "X64",
+      "os": "Linux"
+    },
+    "kernel": {
+      "release": "6.17.0-1022-azure",
+      "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+      "machine": "x86_64"
+    },
+    "docker": {
+      "client_version": "28.0.4",
+      "server_version": "28.0.4",
+      "api_version": "1.48",
+      "min_api_version": "1.24",
+      "git_commit": "6430e49",
+      "components": {
+        "Engine": {
+          "version": "28.0.4",
+          "git_commit": "6430e49"
+        },
+        "containerd": {
+          "version": "v2.4.1",
+          "git_commit": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+        },
+        "runc": {
+          "version": "1.5.2",
+          "git_commit": "v1.5.2-0-g29dd3dc2"
+        },
+        "docker-init": {
+          "version": "0.19.0",
+          "git_commit": "de40ad0"
+        }
+      }
+    },
+    "engine": {
+      "storage_driver": "overlay2",
+      "cgroup_driver": "systemd",
+      "cgroup_version": "2",
+      "operating_system": "Ubuntu 24.04.5 LTS",
+      "os_type": "linux",
+      "architecture": "x86_64",
+      "kernel_version": "6.17.0-1022-azure"
+    }
+  },
+  "approved_profiles": [
+    {
+      "id": "github-ubuntu24-20260920.314.1",
+      "differences": [
+        {
+          "field": "docker.components.containerd.git_commit",
+          "approved": "1294c24a7da8e5a793ed378161673abe94118892",
+          "observed": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+        },
+        {
+          "field": "docker.components.containerd.version",
+          "approved": "v2.3.5",
+          "observed": "v2.4.1"
+        },
+        {
+          "field": "docker.components.runc.git_commit",
+          "approved": "v1.5.1-0-g8f2685a4",
+          "observed": "v1.5.2-0-g29dd3dc2"
+        },
+        {
+          "field": "docker.components.runc.version",
+          "approved": "1.5.1",
+          "observed": "1.5.2"
+        },
+        {
+          "field": "runner.image_version",
+          "approved": "20260920.314.1",
+          "observed": "20261023.334.3"
+        }
+      ]
+    },
+    {
+      "id": "github-ubuntu24-20260927.320.1",
+      "differences": [
+        {
+          "field": "docker.components.containerd.git_commit",
+          "approved": "ee2735368117d2eb259779949d5e75cdafec9761",
+          "observed": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+        },
+        {
+          "field": "docker.components.containerd.version",
+          "approved": "v2.3.6",
+          "observed": "v2.4.1"
+        },
+        {
+          "field": "docker.components.runc.git_commit",
+          "approved": "v1.5.1-0-g8f2685a4",
+          "observed": "v1.5.2-0-g29dd3dc2"
+        },
+        {
+          "field": "docker.components.runc.version",
+          "approved": "1.5.1",
+          "observed": "1.5.2"
+        },
+        {
+          "field": "runner.image_version",
+          "approved": "20260927.320.1",
+          "observed": "20261023.334.3"
+        }
+      ]
+    },
+    {
+      "id": "github-ubuntu24-20261004.327.1",
+      "differences": [
+        {
+          "field": "docker.components.containerd.git_commit",
+          "approved": "ee2735368117d2eb259779949d5e75cdafec9761",
+          "observed": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+        },
+        {
+          "field": "docker.components.containerd.version",
+          "approved": "v2.3.6",
+          "observed": "v2.4.1"
+        },
+        {
+          "field": "docker.components.runc.git_commit",
+          "approved": "v1.5.1-0-g8f2685a4",
+          "observed": "v1.5.2-0-g29dd3dc2"
+        },
+        {
+          "field": "docker.components.runc.version",
+          "approved": "1.5.1",
+          "observed": "1.5.2"
+        },
+        {
+          "field": "runner.image_version",
+          "approved": "20261004.327.1",
+          "observed": "20261023.334.3"
+        }
+      ]
+    },
+    {
+      "id": "github-ubuntu24-20261012.334.1",
+      "differences": [
+        {
+          "field": "runner.image_version",
+          "approved": "20261012.334.1",
+          "observed": "20261023.334.3"
+        }
+      ]
+    }
+  ],
+  "verdict": "BLOCKED_UNAPPROVED_RUNTIME_PROFILE",
+  "policy_changed": false,
+  "new_profile_authorized": false,
+  "ab_pass": false
+}

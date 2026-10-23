@@ -860,12 +860,30 @@
       "reproduction": "CodeQL check120631660239 reports high py/path-injection alerts107/108 at selected_epoch_replay.py11/15 from the new unrestricted --directory caller. The original helper joined untrusted manifest names and followed filesystem symlinks.",
       "cause": "The public frozen-proof CLI exposed arbitrary directory authority; shared manifest reads were not restricted to physical entries within the declared artifact root.",
       "change": "Public proof CLIs accept only their declared repository packets and return trusted constant paths. Shared manifest validation enumerates physical entries, refuses symlinks and portable traversal/drive/stream/device names, rejects duplicate JSON keys and validates size/digest types; manifest names are lookup keys, never path expressions.",
-      "regression": "Six existing loader cases, nine new path tests with11portable-name subcases and real Linux symlink isolation (restricted Windows uses a mocked rejection branch), nine real-capsule adversarial tests, real102-case replay and6287-case numeric validation pass locally. No rule disabled and no alert dismissed.",
+      "regression": "Six unchanged loader tests,11security tests,17gap-state fixtures,9adversarial capsules and actual102/6287replays PASS. Exact PR423 had19workflow SUCCESS,23check SUCCESS and2scope SKIP; individual CodeQL107–110fixed with no dismiss, PR-ref open alerts0. Main Python/Actions/JS CodeQL and gap-state replay PASS.",
       "pr": 423,
-      "verification_sha": null,
-      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CODEQL_AND_ADMISSION",
+      "verification_sha": "07f47a8c293f98e78dddbc288b9214188414a4bd",
+      "verdict": "CLOSED_PASS",
       "evidence": [
         "docs/evidence/osm-acq2c-evidence-security-20261023/manifest-sha256.json"
+      ],
+      "postmerge_verification_sha": "43e6e4c29ce81a05088ba11312c64cb18c650dfd",
+      "followup": "The initial root guard still resolved user text (109/110); replaced with literal spelling comparison returning only trusted constants. Main A/B host-profile failure remains an independent blocked operational gate."
+    },
+    {
+      "id": "RM-047",
+      "severity": "P2",
+      "component": "Native reader historical test receipt binding",
+      "reproduction_sha": "c6f5c97ede7fbdb07322e472f0c47c6f1d1efa3b",
+      "reproduction": "Native workflow40026796009 job120664891443 passed current fixtures, then failed comparing the original32-test source receipt against legitimately updated current files.",
+      "cause": "The historical code hashes were treated as a pin for mutable current source paths instead of their own frozen producer sources.",
+      "change": "Preserve all original receipt bytes; archive its three exact Git sources, independently verify their original SHA256 values, replay the old32fixtures in an isolated directory, and bind/test current reader sources separately.",
+      "regression": "Five negative provenance cases plus actual old32/current64fixtures; altered, missing or extra source bytes fail.",
+      "pr": 424,
+      "verification_sha": null,
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI",
+      "evidence": [
+        "docs/evidence/osm-acq2c-typed-reader-20261023/historical-source-binding.json"
       ]
     }
   ],
@@ -1512,7 +1530,21 @@
           "hostTrustManifestSha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
         }
       ],
-      "note": "Historical original failures and bounded same-SHA retests are retained. Each final head and postmerge requires all gates PASS; no protected contract was changed."
+      "note": "Historical original failures and bounded same-SHA retests are retained. Each final head and postmerge requires all gates PASS; no protected contract was changed.",
+      "current_observation": {
+        "main": "43e6e4c29ce81a05088ba11312c64cb18c650dfd",
+        "run": 40024889420,
+        "job": 120658612847,
+        "image_version": "20261023.334.3",
+        "closest_approved": "github-ubuntu24-20261012.334.1",
+        "differences_from_closest": [
+          "runner.image_version"
+        ],
+        "policy_changed": false,
+        "verdict": "BLOCKED_UNAPPROVED_RUNTIME_PROFILE",
+        "bounded_reruns_requested": 1,
+        "evidence": "docs/evidence/osm-acq2c-typed-reader-20261023/host-trust-main423.json"
+      }
     },
     {
       "id": "ENV-005",
@@ -1571,6 +1603,16 @@
       ],
       "observed": "Independent exact-main Pages audit passed; focused local desktop/mobile real Chromium initialized successfully. Neither observation proves the original timeout cause or closes the incident.",
       "next_action": "Use the corrected failure collector on a bounded exact-head CI validation; preserve any subsequent failure and inspect actual HTTP/console/DOM evidence."
+    },
+    {
+      "id": "ENV-008",
+      "severity": "P2",
+      "component": "Local typed-history operational probe",
+      "observed": "The3959relation probe wrote0selected bytes before being stopped; several local tool startups were delayed. Own PID13476command was verified immediately before WMIC termination returned0; executor exit1.",
+      "cause": "UNKNOWN; no causal proof that the source reader caused tool latency.",
+      "verdict": "PROBE_STOPPED_WITHOUT_ACCEPTED_EXTRACTION",
+      "evidence": "docs/evidence/osm-acq2c-typed-reader-20261023/probe.json",
+      "next_action": "Evaluate bounded framing-index results; do not relaunch an identical full native read or claim a transport gain from the mask alone."
     }
   ],
   "open_evidence_gates": [
@@ -1584,7 +1626,11 @@
       "stage": "OSM-ACQ.2c historical continuity",
       "description": "102 observed gapped histories contain250 missing versions. All102 public current states match the frozen replay version and canonical contents in two authenticated read-only batches. This is not missing-version recovery, continuity certification or human/signed approval. Eight earlier403samples remain;94missing-version endpoints were not queried. No bypass.",
       "verdict": "BLOCKED_EVIDENCE",
-      "evidence": "docs/evidence/osm-acq2c-gap-state-20261023/report.json"
+      "evidence": "docs/evidence/osm-acq2c-gap-state-20261023/report.json",
+      "additional_observed_gapped_histories": 5,
+      "observed_total_gapped_histories": 107,
+      "original_fixed_ledger_scope": 102,
+      "additional_evidence": "docs/evidence/osm-acq2c-typed-reader-20261023/round2-recovery.json"
     },
     {
       "id": "GATE-006",
@@ -1635,5 +1681,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-23T20:39:35.452Z"
+  "updated_at": "2026-10-23T21:31:25.797Z"
 }

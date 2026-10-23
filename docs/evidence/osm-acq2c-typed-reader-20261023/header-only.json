@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-10-23T21:14:19.788910+00:00",
+  "source_bytes": 163893678040,
+  "source_stat_unchanged": true,
+  "bytes_read": 210,
+  "required_features": [
+    "OsmSchema-V0.6",
+    "HistoricalInformation",
+    "DenseNodes"
+  ],
+  "optional_features": [
+    "Has_Metadata",
+    "Sort.Type_then_ID"
+  ],
+  "writing_program": [
+    "planet-dump-ng 1.2.4"
+  ],
+  "declared_source": [
+    "http://www.openstreetmap.org/api/0.6"
+  ],
+  "replication_timestamps": [
+    1792368004
+  ],
+  "source_qualified": false,
+  "original_rehashed": false,
+  "whole_file_sorting_verified": false,
+  "format_sources": [
+    "https://github.com/openstreetmap/OSM-binary/blob/master/osmpbf/fileformat.proto",
+    "https://github.com/openstreetmap/OSM-binary/blob/master/osmpbf/osmformat.proto"
+  ],
+  "header_sha256": "2f7052cfd92e08ca28fed1467fe24e6bd7428e6f4a83c08d855509cd9bda51b7"
+}

@@ -29,5 +29,39 @@ class Tests(unittest.TestCase):
         self.assertEqual(check_versions(list(read_selection(self.pbf,{'w5'})),{'w5'})['missing_ids'],['w5'])
     def test_epoch_header_required_when_requested(self):
         with self.assertRaises(ValueError):list(read_selection(self.pbf,{'w4'},'2026-10-19T00:00:04Z'))
+    def test_native_masks_equal_unrestricted_union(self):
+        all_rows=list(read_selection(self.pbf,{'n4','w4','r4'}))
+        typed=[]
+        for kind in ('n','w','r'):typed.extend(read_selection(self.pbf,{kind+'4'},entity_kind=kind))
+        self.assertEqual(canonical(all_rows),canonical(typed))
+    def test_mask_keeps_all_versions_and_members(self):
+        ways=list(read_selection(self.pbf,{'w4'},entity_kind='w'))
+        self.assertEqual([r['version'] for r in ways],[1,2])
+        self.assertEqual(ways[-1]['nodes'],[4,5])
+        relation=list(read_selection(self.pbf,{'r4'},entity_kind='r'))[0]
+        self.assertEqual(relation['members'],[['w',4,'outer']])
+    def test_mask_never_hides_mixed_request(self):
+        for kind in ('n','w','r'):
+            with self.subTest(kind=kind):
+                with self.assertRaises(ValueError):list(read_selection(self.pbf,{'n4','w4','r4'},entity_kind=kind))
+    def test_invalid_mask(self):
+        for kind in ('ALL','node','x',True):
+            with self.subTest(kind=kind):
+                with self.assertRaises(ValueError):list(read_selection(self.pbf,{'n4'},entity_kind=kind))
+    def test_mask_does_not_bypass_history_header(self):
+        with self.assertRaises(ValueError):list(read_selection(self.xml,{'n4'},entity_kind='n'))
+    def test_mask_does_not_bypass_epoch(self):
+        with self.assertRaises(ValueError):list(read_selection(self.pbf,{'r4'},'2026-10-19T00:00:04Z',entity_kind='r'))
+    def test_mask_missing_id_is_explicit(self):
+        rows=list(read_selection(self.pbf,{'r5'},entity_kind='r'))
+        self.assertEqual(check_versions(rows,{'r5'})['missing_ids'],['r5'])
+    def test_mask_repeat_is_byte_identical(self):
+        self.assertEqual(canonical(list(read_selection(self.pbf,{'r4'},entity_kind='r'))),canonical(list(read_selection(self.pbf,{'r4'},entity_kind='r'))))
+    def test_framing_index_accepts_real_native_history_fixture(self):
+        from osm_acq2c_pbf_blocks import scan
+        with self.pbf.open('rb') as source:result=scan(source,self.pbf.stat().st_size)
+        self.assertTrue(result['complete']);self.assertEqual(result['blocks'][0]['kind'],'OSMHeader')
+        self.assertTrue(all(r['kind']=='OSMData' for r in result['blocks'][1:]))
+        self.assertEqual(result['next_offset'],self.pbf.stat().st_size)
 
 if __name__=='__main__':unittest.main()
