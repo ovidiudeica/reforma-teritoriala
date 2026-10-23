@@ -6,6 +6,10 @@ on:
       - 'docs/evidence/web-r2a2/**'
       - 'docs/web-r2a2-exception-reconciliation.md'
       - 'scripts/audit/web-r2a2-verify-historical-osm.mjs'
+      - 'scripts/audit/helpers/audit-io-boundaries.mjs'
+      - 'scripts/audit/helpers/audit-source-integrity.mjs'
+      - 'scripts/test/audit-io-boundaries.test.mjs'
+      - 'scripts/test/audit-source-integrity.test.mjs'
       - '.github/workflows/web-r2a2-historical-osm.yml'
   workflow_dispatch:
 permissions:
@@ -16,18 +20,36 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.21.0'
       - name: Validate syntax
-        run: node --check scripts/audit/web-r2a2-verify-historical-osm.mjs
+        run: |
+          node --check scripts/audit/web-r2a2-verify-historical-osm.mjs
+          node --test scripts/test/audit-io-boundaries.test.mjs
+          node --test scripts/test/audit-source-integrity.test.mjs
+      - name: Resolve exact approved base without changing source trees
+        env:
+          AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
+        run: |
+          [[ "$AUDIT_BASE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          if ! git cat-file -e "$AUDIT_BASE_SHA^{commit}" 2>/dev/null; then
+            git fetch --no-tags --depth=1 https://github.com/ovidiudeica/reforma-teritoriala.git "$AUDIT_BASE_SHA"
+          fi
+          git cat-file -e "$AUDIT_BASE_SHA^{commit}"
       - name: Validate historical OSM relation tags at pinned versions
-        run: node scripts/audit/web-r2a2-verify-historical-osm.mjs "${{ runner.temp }}/r2a2"
+        run: node scripts/audit/web-r2a2-verify-historical-osm.mjs --output-slot repository
       - name: Check immutable source trees
-        run: test -z "$(git diff --name-only 08a873a2030bebe55034792a93b5e146cf17a210...HEAD -- data public)"
+        env:
+          AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
+          AUDIT_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/audit/helpers/audit-source-integrity.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: web-r2a2-historical-evidence
-          path: "${{ runner.temp }}/r2a2"
+          path: outputs/WEB-R2a2-historical
           retention-days: 30

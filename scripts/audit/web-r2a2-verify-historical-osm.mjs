@@ -3,6 +3,9 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
+import {osmRelationVersionUrl,historicalAuditOutput} from './helpers/audit-io-boundaries.mjs';
+
+const dir=historicalAuditOutput(process.argv.slice(2));
 
 const manifest = JSON.parse(readFileSync('public/data/p9095-osm-outlines-manifest.json','utf8'));
 const prior = JSON.parse(readFileSync('docs/evidence/web-r2a2/osm-historical-admin-level.json','utf8'));
@@ -13,7 +16,7 @@ let failed=false;
 for(const source of manifest.relations){
   const expected=byId.get(source.osm_relation_id);
   if(!expected || expected.version !== source.relation_version || expected.timestamp !== source.relation_timestamp || expected.id !== source.id) throw Error('Pinned identity/version/timestamp mismatch: '+source.id);
-  const url=`https://api.openstreetmap.org/api/0.6/relation/${source.osm_relation_id}/${source.relation_version}`;
+  const url=osmRelationVersionUrl(source.osm_relation_id,source.relation_version);
   const result={id:source.id, relation_id:source.osm_relation_id, version:source.relation_version, expected_admin_level:expected.admin_level_normalized, historical_version_url:url, pinned_full_xml_sha256:source.source_xml_sha256, status:'UNVERIFIED'};
   try {
     const response=await fetch(url,{signal:AbortSignal.timeout(25000),headers:{'Accept':'application/xml','User-Agent':'Reforma-Teritoriala-WEB-R2a2-audit/1.0'}});
@@ -39,7 +42,6 @@ for(const source of manifest.relations){
   results.push(result);
 }
 const output={schema:'web-r2a2-raw-historical-version-verification-v1',base_sha:prior.base_sha,note:'The pinned source_xml_sha256 binds /relation/id/full (dependent ways and nodes). A version-specific /relation/id/version XML response is not byte-equivalent to that /full response; hashes must not be compared as if they represented identical resources.',results,verified:!failed};
-const dir=resolve(process.argv[2]??'/tmp/web-r2a2');
 mkdirSync(dir,{recursive:true});
 writeFileSync(resolve(dir,'historical-relation-validation.json'),JSON.stringify(output,null,2)+'\n');
 console.log(JSON.stringify({verified:!failed,results:results.map(({relation_id,status,observed_admin_level,xml_sha256})=>({relation_id,status,observed_admin_level,xml_sha256}))},null,2));

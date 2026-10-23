@@ -1,0 +1,43 @@
+✔ only canonical positive safe OSM integers become URL components (3.2011ms)
+✔ OSM full endpoints keep two fixed approved origins and exact numeric paths (0.3345ms)
+✔ all eight frozen historical relation URLs remain byte-identical (9.874ms)
+✔ all85 reused OSM roles retain exact full URLs without changing identities (2.5943ms)
+✔ all84 frozen exception relation URLs remain byte-identical (70.0636ms)
+✔ published audit returns a fixed literal canonical target (0.5037ms)
+✔ published audit refuses alternate origins credentials routes queries and fragments (0.4881ms)
+✔ historical output slots are fixed paths and preserve Linux temporary default (0.6146ms)
+✔ historical output rejects arbitrary paths traversal and surplus arguments (0.4156ms)
+✔ approved current base accepts code-only changes (3954.6741ms)
+✔ missing base fails although the legacy empty-stdout predicate would pass (1360.6571ms)
+✔ candidate data changes against approved base fail (2063.2062ms)
+✔ runtime mutations of checked-out public bytes fail (1202.6194ms)
+✔ wrong tested head cannot be certified (964.4822ms)
+✔ missing or malformed immutable refs fail before Git use (813.0721ms)
+✔ published inventory covers tracked code, worker GIS dependencies, contracts, catalogs and geometry, excluding untracked bytes (2760.7442ms)
+✔ stale worker GIS dependency fails even when the root modules match (1978.1754ms)
+✔ an HTTP200 stale geometry fails with the exact mismatched resource and hashes (1130.4042ms)
+✔ missing runtime resources fail instead of being omitted from the inventory (1136.2387ms)
+✔ a transient 503 followed by HTTP200 stale geometry still fails the exact-byte gate (1461.7057ms)
+✔ live acceptance fingerprints the actual published source bytes (2077.7401ms)
+✔ a stale deployed application fails even if the local commit is correct (17.9625ms)
+✔ missing published resources cannot be accepted (1.1709ms)
+✔ PR audit identifies deployed base separately from the unpublished candidate auditor (1.455ms)
+✔ post-merge/manual audit requires published bytes from the exact auditor checkout (0.8142ms)
+✔ initial published source manifest recovers from transient503 with exact bytes and history (554.45ms)
+✔ source retry never admits HTTP200 stale manifest bytes (13.4553ms)
+✔ initial source persistent503 remains blocked after three attempts (1.0729ms)
+✔ initial source404 is never retried (0.7536ms)
+✔ initial source timeout can recover without bypassing byte verification (234.6436ms)
+✔ source retry evidence manifest references tracked byte-identical files (791.0051ms)
+✔ transient public HTTP 503 is retried without becoming a PASS itself (3.4258ms)
+✔ persistent transient HTTP error is returned as failure for strict HTTP 200 caller (2.1352ms)
+✔ HTTP 404 is not retried or treated as transient (0.4437ms)
+✔ nontransient fetch errors propagate without retry (1.527ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10539.0268

@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import readline from 'node:readline';
 import RelateOp from 'jsts/org/locationtech/jts/operation/relate/RelateOp.js';
 import {readTopologyGeometry} from '../lib/p82-topology.mjs';
+import {osmRelationFullUrl} from './helpers/audit-io-boundaries.mjs';
 const root=new URL('../../',import.meta.url),out=new URL('../../outputs/P9.0.6.2/',import.meta.url);
 const read=p=>JSON.parse(readFileSync(new URL(p,root),'utf8'));
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -74,8 +75,8 @@ async function sourceGeom(){
  return m;
 }
 async function getFull(id){
- let err;for(let attempt=0;attempt<3;attempt++)for(const host of ['https://api.openstreetmap.org','https://www.openstreetmap.org']){
-  const url=host+'/api/0.6/relation/'+id+'/full';
+ let err;for(let attempt=0;attempt<3;attempt++)for(const mirror of [false,true]){
+  const url=osmRelationFullUrl(id,mirror);
   try{
    const rsp=await fetch(url,{headers:{Accept:'application/xml','User-Agent':'ReformaAdmin-P9062-FullGeometry-Evidence/1.0'},signal:AbortSignal.timeout(100000)});
    if(!rsp.ok)throw Error('HTTP_'+rsp.status);

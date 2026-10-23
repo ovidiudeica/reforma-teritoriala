@@ -1,0 +1,31 @@
+name: Audit network and file boundary regression
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit/helpers/audit-io-boundaries.mjs'
+      - 'scripts/audit/helpers/audit-source-integrity.mjs'
+      - 'scripts/test/audit-io-boundaries.test.mjs'
+      - 'scripts/test/audit-source-integrity.test.mjs'
+      - 'scripts/audit/p903-nistrenia-exceptions.mjs'
+      - 'scripts/audit/p9062-full-geometry.mjs'
+      - 'scripts/audit/p907218-osm-live-85.mjs'
+      - 'scripts/audit/web-r2a2-verify-historical-osm.mjs'
+      - 'scripts/audit/web-r2b-final-pages-browser.mjs'
+      - '.github/workflows/audit-io-security.yml'
+      - '.github/workflows/web-r2a2-historical-osm.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-boundaries:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Offline negative boundaries and immutable source-ref tests
+        run: node --test scripts/test/audit-io-boundaries.test.mjs scripts/test/audit-source-integrity.test.mjs

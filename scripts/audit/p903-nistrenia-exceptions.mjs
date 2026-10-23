@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import RelateOp from 'jsts/org/locationtech/jts/operation/relate/RelateOp.js';
 import {readTopologyGeometry} from '../lib/p82-topology.mjs';
+import {osmRelationFullUrl,canonicalOsmInteger} from './helpers/audit-io-boundaries.mjs';
 
 const ROOT=new URL('../../',import.meta.url);
 const OUT=new URL('../../outputs/P9.0.3/',import.meta.url);
@@ -82,14 +83,15 @@ async function fetchOSM(id){
  if(!numID(id))throw Error('invalid_osm_id');
  let error;
  for(let attempt=0;attempt<3;attempt++){
-  for(const host of ['https://api.openstreetmap.org','https://www.openstreetmap.org']){
-   const url=host+'/api/0.6/relation/'+id+'/full';
+  for(const mirror of [false,true]){
+   const url=osmRelationFullUrl(id,mirror);
    try{
     const response=await fetch(url,{headers:{Accept:'application/xml','User-Agent':'ReformaTerritoriala-P903-ReadOnly/1.0 (OSM audit)'},signal:AbortSignal.timeout(85000)});
     if(!response.ok)throw Error('HTTP_'+response.status);
     const xml=await response.text();
-    if(!xml.includes('</osm>')||!new RegExp('<relation\\s+id="'+id+'"').test(xml))throw Error('missing_or_truncated_xml');
-    return {parsed:parse(xml),url,sha256:hash(xml),bytes:Buffer.byteLength(xml)};
+    const parsed=parse(xml);
+    if(!xml.includes('</osm>')||!parsed.relations.has(String(canonicalOsmInteger(id))))throw Error('missing_or_truncated_xml');
+    return {parsed,url,sha256:hash(xml),bytes:Buffer.byteLength(xml)};
    }catch(e){error=String(e);}
   }
   await wait(1800*(attempt+1));
