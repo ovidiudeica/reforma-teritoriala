@@ -1544,6 +1544,13 @@
       "description": "Eight observed object histories contain version gaps. One missing version per identity returnsHTTP403/empty body; cause and all omitted versions remain unadjudicated. No override or invented version.",
       "verdict": "BLOCKED_EVIDENCE",
       "evidence": "docs/evidence/osm-acq2c-selected-epoch-20261023/history-gaps.json"
+    },
+    {
+      "id": "GATE-006",
+      "stage": "OSM-ACQ.2c recursive dependency closure",
+      "verdict": "BLOCKED_INCOMPLETE_DEPENDENCIES",
+      "description": "Frozen union plus selected epoch objects yields a next frontier of199295nodes,448ways,228relations. Missing objects are not deletions or outside verdicts; recovered relations/ways may reveal more descendants. No spatial UNKNOWN adjudicated.",
+      "evidence": "docs/evidence/osm-acq2c-recursive-frontier-20261023/summary.json"
     }
   ],
   "closed_evidence_gates": [
@@ -1580,5 +1587,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-23T10:11:48.451Z"
+  "updated_at": "2026-10-23T12:20:28.965056+00:00"
 }

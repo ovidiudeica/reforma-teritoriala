@@ -1,0 +1,50 @@
+{
+  "available_regional_objects": 1375272,
+  "epoch": "2026-10-20T20:23:47Z",
+  "graph_scope": "All relation member roles and recursive available descendants; missing objects are the next expansion frontier, not the final transitive closure.",
+  "history_gaps_unresolved": 8,
+  "identical_overlaps": 242,
+  "independent_regeneration_byte_identical": true,
+  "inputs": [
+    {
+      "body_sha256": "c01c2826abcc2912893580ba3ac614264da72b2df730ea1e79fa1e23d430f0b2",
+      "epoch": "2026-10-20T20:23:47Z",
+      "path": "C:\\Users\\ovidi\\Documents\\Codex\\2026-10-19\\roadmap-master-pentru-codex-reforma-teritorial\\outputs\\osmfix2-resume-2026-10-21T23-26-54-398Z\\extract-replay-v2\\ro-extract-candidates.json.gz",
+      "sha256": "b51ab1bd4016b1a5f665c42a8a930b51ea5487b14f4ab855909b8bd29f4d5805"
+    },
+    {
+      "body_sha256": "f05f4b300af4689f2dfba507aaf8197aca436729b8563ee47a48453668387691",
+      "epoch": "2026-10-20T20:23:47Z",
+      "path": "C:\\Users\\ovidi\\Documents\\Codex\\2026-10-19\\roadmap-master-pentru-codex-reforma-teritorial\\outputs\\osmfix2-resume-2026-10-21T23-26-54-398Z\\extract-replay-v2\\md-extract-candidates.json.gz",
+      "sha256": "1ac0cd91582daf6c455529cbb3a579abb86692f915b3b20d55dfe9ddc28fa00b"
+    },
+    {
+      "path": "C:\\Users\\ovidi\\Documents\\Codex\\2026-10-19\\roadmap-master-pentru-codex-reforma-teritorial\\work\\osm-acq2c-bulk\\selected-epoch-published-20261023\\selected-target.json",
+      "sha256": "a61b2366e6c55762a2e8056c5dc082bfd2f8cd7b6ae75fe8fa376819f8982798"
+    },
+    {
+      "path": "C:\\Users\\ovidi\\Documents\\Codex\\2026-10-19\\roadmap-master-pentru-codex-reforma-teritorial\\outputs\\osmfix2-resume-2026-10-21T23-26-54-398Z\\extract-replay-v2\\report.json",
+      "sha256": "5ddcde3803f84fb9057ccafb01561c8f6ee7d8adc500208b2d1883068f2c3f2d"
+    }
+  ],
+  "missing_counts": {
+    "n": 199295,
+    "r": 228,
+    "w": 448
+  },
+  "missing_distinct_ids": 199971,
+  "missing_ids_sha256": "644b645b64f073010c0ea573ac4500f14e52dccbc99eff4c790f93bafc8940e3",
+  "overpass_equivalence_certified": false,
+  "reachable_available": 58160,
+  "root_count": 242,
+  "scope": "Recursive member and way-node frontier only; not spatial acceptance or proof of full graph closure",
+  "selected_objects": 3208,
+  "source_code_sha256": {
+    "outputs\\OSM-ACQ2b-EXACT-20261022\\acq2a_audit.py": "e25824a961faf641e0e11900a519f10556217267ed683d90edff88e4bc32a6c7",
+    "work\\derive-selected-frontier.py": "98dc9352e7a9a0e528c8751d51e898a42bf3ce5a54a5df386eb1771172530f55",
+    "work\\doc-supplement\\scripts\\audit\\osm_acq2c_frontier.py": "cf5db58bb716a00bffab24539c2fe3b6ffb2acb4fae8f633abd1f04d4db9f406"
+  },
+  "source_promoted": false,
+  "source_qualified": false,
+  "spatial_unknown_adjudicated": 0
+}
