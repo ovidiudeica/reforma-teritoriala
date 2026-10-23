@@ -26,6 +26,7 @@ jobs:
           google-chrome --version
           node --check scripts/audit/web-r2c32-hardening-browser.mjs
           node --test scripts/test/frontend-published-source.test.mjs
+          node --test scripts/test/frontend-navigation-failure-evidence.test.mjs scripts/test/frontend-performance-navigation.test.mjs
       - name: Combined responsive, accessibility, native zoom and network matrix
         run: node scripts/audit/web-r2c32-hardening-browser.mjs
       - name: Verify report source and protected tracked files

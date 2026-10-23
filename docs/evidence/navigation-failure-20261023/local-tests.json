@@ -1,0 +1,14 @@
+{
+  "tests": 12,
+  "exit": 0,
+  "code_sha256": {
+    "scripts/audit/helpers/performance-navigation.mjs": "90a9d91007cd5def2e9d22b9144599077a934bc7e66474b4ac515776925007e0",
+    "scripts/audit/web-r2c32-hardening-browser.mjs": "75677ebbc66e7bf1b0335b4148c0c8e31d9c13f9e0759e0cd8627436413be1f4",
+    "scripts/test/helpers/atlas-browser.mjs": "374642b44e7a877a9943a8118d6a7e95ba14de05546741958b660a31302e3dd6",
+    "scripts/test/helpers/navigation-evidence.mjs": "01f17e990c743c7187d8e97e12822f96370644e336f363862cd4362af6b63975",
+    "scripts/test/frontend-navigation-failure-evidence.test.mjs": "cb3bdf69b55d7f47f0b3e8d29f372f527eb624d6d4879cb4ea060b6d569b5a63"
+  },
+  "original_log_sha256": "4effaeb2afe46e9c9513dc49ea08b9503d100d43ea84111b8638dc7e71e00625",
+  "text": "✔ failed navigation retains the original exception and exact network evidence (4.0081ms)\n✔ closing or later updating the page cannot empty the captured event arrays (0.2894ms)\n✔ the final readiness observation is retained independently of later page updates (0.4521ms)\n✔ cleanup failure cannot mask the original navigation failure (0.7729ms)\n✔ infrastructure cleanup errors still fail a successful navigation (0.7284ms)\n✔ direct Page navigation failures also retain evidence outside performance profiles (0.4849ms)\n✔ performance loads configure the device before navigation and verify the document-start viewport (4.4812ms)\n✔ a desktop initial document cannot be reported as a mobile load (3.4284ms)\n✔ invalid device dimensions fail before any browser mutation (0.4686ms)\n✔ only the performance fixture enables HTTP caching; ordinary browser QA remains no-store (67.8585ms)\nhint: Using 'master' as the name for the initial branch. This default branch name\nhint: will change to \"main\" in Git 3.0. To configure the initial branch name\nhint: to use in all of your new repositories, which will suppress this warning,\nhint: call:\nhint:\nhint: \tgit config --global init.defaultBranch <name>\nhint:\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\nhint: 'development'. The just-created branch can be renamed via this command:\nhint:\nhint: \tgit branch -m <name>\nhint:\nhint: Disable this message with \"git config set advice.defaultBranchName false\"\n✔ an unchanged HEAD cannot certify modified tracked audit sources (966.878ms)\n✔ environment output paths cannot redirect CDP artifacts outside the reviewed fixture directory (1.1802ms)\nℹ tests 12\nℹ suites 0\nℹ pass 12\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1277.2584\n",
+  "original_timeout_cause": "NOT_ESTABLISHED"
+}
