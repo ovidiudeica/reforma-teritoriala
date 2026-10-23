@@ -3,6 +3,17 @@
 This tooling does not qualify the source, reconstruct the target epoch, certify
 dependency closure or adjudicate any UNKNOWN relation.
 
+The complete base was downloaded on 23 October 2026, then independently reread
+from disk: 163,893,678,040 bytes and all 2,443 contiguous segment digests matched.
+Published MD5: `0587abc2f5a3a29a81ce3b067357933b`.
+Independently reproduced SHA-256:
+`149ce6e8d1d4aad41e94fddb8f9721f80697d42d51e5f612879c98d1c236e5a9`.
+See `docs/evidence/osm-acq2c-native-extract-20261023/base-byte-scope.json`,
+the original acquisition ledger and independent integrity receipt in that same
+directory. The binary remains private local storage, not a repository upload.
+This byte verification does not satisfy independent human/signed publication
+validation, temporal reconstruction, dependency closure or spatial qualification.
+
 The official full-history base ends at `2026-10-19T00:00:04Z`. The target remains
 `2026-10-20T20:23:47Z`, requiring the independently conserved replication chain.
 Do not give the base the target timestamp. Publication/provenance qualification
