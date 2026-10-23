@@ -20,7 +20,9 @@ output paths, URL selection, downloads or promotion are exposed by this CLI.
 
 The command rejects an incomplete receipt, wrong source URL/ETag/length/MD5,
 missing SHA-256, a current-only file or a mismatched PBF epoch header. It performs
-an independent full SHA-256 and published MD5 pass before parsing. The native C++
+an independent full SHA-256 and published MD5 pass before parsing. In the same
+bounded-memory pass, it verifies every segment's SHA-256, exact offset and length
+against the complete contiguous acquisition ledger. The native C++
 ID filter avoids Python callbacks for unrelated planetary objects. A second typed
 identity check prevents node/way/relation ID collisions. All versions of the
 3,208 requested typed identities are retained in the selected base JSONL.

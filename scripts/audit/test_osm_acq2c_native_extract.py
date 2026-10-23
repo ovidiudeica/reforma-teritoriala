@@ -28,7 +28,7 @@ class Tests(unittest.TestCase):
     def original_case(self,change=None,corrupt=False):
         raw=b'small full-original fixture'
         digest=hashlib.sha256(raw).hexdigest();md5=hashlib.md5(raw).hexdigest()
-        receipt=dict(status='FULL_BASE_BYTES_VERIFIED_NOT_SOURCE_QUALIFIED',url=module.URL,expected_bytes=len(raw),etag=module.ETAG,base_epoch=module.BASE_EPOCH,verified_downloaded_bytes=len(raw),actual_md5=md5,source_sha256=digest)
+        receipt=dict(status='FULL_BASE_BYTES_VERIFIED_NOT_SOURCE_QUALIFIED',url=module.URL,expected_bytes=len(raw),etag=module.ETAG,base_epoch=module.BASE_EPOCH,verified_downloaded_bytes=len(raw),actual_md5=md5,source_sha256=digest,chunks=[dict(offset=0,bytes=len(raw),sha256=digest)])
         if change:receipt.update(change)
         with tempfile.TemporaryDirectory() as d,patch.multiple(module,TOTAL=len(raw),MD5=md5):
             path=pathlib.Path(d)/'fixture.pbf';path.write_bytes(b'X'*len(raw) if corrupt else raw)
@@ -40,5 +40,8 @@ class Tests(unittest.TestCase):
     def test_wrong_length(self):self.assertRaises(ValueError,self.original_case,{'verified_downloaded_bytes':1})
     def test_wrong_epoch(self):self.assertRaises(ValueError,self.original_case,{'base_epoch':'2026-10-20T20:23:47Z'})
     def test_wrong_publisher(self):self.assertRaises(ValueError,self.original_case,{'url':'https://example.invalid/fixture.pbf'})
+    def test_missing_segments(self):self.assertRaises(ValueError,self.original_case,{'chunks':[]})
+    def test_segment_offset_gap(self):self.assertRaises(ValueError,self.original_case,{'chunks':[dict(offset=1,bytes=27,sha256='0'*64)]})
+    def test_segment_hash_conflict(self):self.assertRaises(ValueError,self.original_case,{'chunks':[dict(offset=0,bytes=len(b'small full-original fixture'),sha256='0'*64)]})
 
 if __name__=='__main__':unittest.main()

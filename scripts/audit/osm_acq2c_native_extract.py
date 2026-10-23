@@ -23,11 +23,26 @@ def verify_original(path,receipt):
     if receipt.get('verified_downloaded_bytes')!=TOTAL or receipt.get('actual_md5')!=MD5:raise ValueError('Incomplete base length or MD5')
     if not re.fullmatch('[0-9a-f]{64}',receipt.get('source_sha256','')):raise ValueError('Missing source SHA-256')
     if path.stat().st_size!=TOTAL:raise ValueError('Original length mismatch')
+    chunks=receipt.get('chunks')
+    if not isinstance(chunks,list) or not chunks:raise ValueError('Missing original segment ledger')
+    offset=0
+    for chunk in chunks:
+        if type(chunk.get('offset')) is not int or chunk['offset']!=offset or type(chunk.get('bytes')) is not int or chunk['bytes']!=min(64*1024*1024,TOTAL-offset) or chunk['bytes']<=0:raise ValueError('Noncontiguous original segment ledger')
+        if not re.fullmatch('[0-9a-f]{64}',chunk.get('sha256','')):raise ValueError('Invalid segment digest')
+        offset+=chunk['bytes']
+    if offset!=TOTAL:raise ValueError('Incomplete original segment ledger')
     sha=hashlib.sha256();md5=hashlib.md5()
     with path.open('rb') as source:
-        for block in iter(lambda:source.read(8*1024*1024),b''):sha.update(block);md5.update(block)
+        for chunk in chunks:
+            remaining=chunk['bytes'];segment=hashlib.sha256()
+            while remaining:
+                block=source.read(min(8*1024*1024,remaining))
+                if not block:raise ValueError('Truncated original segment')
+                sha.update(block);md5.update(block);segment.update(block);remaining-=len(block)
+            if segment.hexdigest()!=chunk['sha256']:raise ValueError('Original segment digest mismatch')
+        if source.read(1):raise ValueError('Unexpected original suffix')
     if sha.hexdigest()!=receipt['source_sha256'] or md5.hexdigest()!=MD5:raise ValueError('Independent full original digest mismatch')
-    return {'bytes':TOTAL,'sha256':sha.hexdigest(),'md5':md5.hexdigest(),'source_qualified':False}
+    return {'bytes':TOTAL,'sha256':sha.hexdigest(),'md5':md5.hexdigest(),'segments_verified':len(chunks),'source_qualified':False}
 
 def object_record(obj):
     typ=obj.type_str()
