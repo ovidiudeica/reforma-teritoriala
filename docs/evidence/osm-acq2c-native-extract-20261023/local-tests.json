@@ -1,0 +1,22 @@
+{
+  "runs": [
+    {
+      "test": "test_osm_acq2c_native_extract.py",
+      "exit": 0,
+      "original_log_sha256": "6fb81a3bbae4c7a713cb7b362bed81ae3ab414e3bbd27075ec8d60c27fd6c00b",
+      "text": "..............\n----------------------------------------------------------------------\nRan 14 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "test": "test_osm_acq2c_native_pbf.py",
+      "exit": 0,
+      "original_log_sha256": "45374b5a1e191543b4bca2404a10ce797c969fb2a43cfc206642fbbf4d06e7fa",
+      "text": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.112s\n\nOK\n"
+    }
+  ],
+  "total_tests": 21,
+  "real_native_fixture": true,
+  "pyosmium": "4.3.2",
+  "full_planet_extraction_executed": false,
+  "source_qualified": false,
+  "unknown_adjudicated": 0
+}
