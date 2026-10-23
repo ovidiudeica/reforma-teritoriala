@@ -840,13 +840,17 @@
       "change": "Temporarily add the manifest-verified sibling directory; reject conflicting cached module contents and restore import paths/caches. Normal historical GIS dependencies remain explicit.",
       "regression": "19 receipt/import fixtures and all42 real preserved objects pass on exact786c90a in Actions39979455990. Path restoration and conflicting cached module guards pass; no source qualification.",
       "pr": 422,
-      "verification_sha": "786c90a35478810b1bc16626ad30ac30131f001a",
-      "verdict": "FIXED_VERIFIED",
+      "verification_sha": "0b4238e2ddd90455bd080125494c15c70dbe2208",
+      "verdict": "CLOSED_PASS",
       "evidence": [
         "docs/osm-acq2c-complete-spatial-20261023.md",
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39979455990"
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39979455990",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39980307157",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40006002563",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40006987317"
       ],
-      "integration": "Separate PR422 tooling/evidence-only admission is required; no OSM-stage acceptance is asserted."
+      "integration": "PR422 merged tooling/evidence-only after all16workflows SUCCESS;20check-run SUCCESS and2scope-onlySKIPPED. Main genuineA/B+compare and publishedPages pass; source freshness remains a separate legitimateFAIL.",
+      "merged_main": "5df714fe661152c41f66cb41461ec3ead4154f93"
     }
   ],
   "environment_incidents": [
@@ -1562,15 +1566,15 @@
     {
       "id": "GATE-005",
       "stage": "OSM-ACQ.2c historical continuity",
-      "description": "102 distinct observed history gaps (8 initial plus 94 recursive); only eight earlier missing-version API samples returned HTTP403. The additional94 were not queried. Zero selected-source roots traverse these gapped target records, but global publication/continuity qualification and human/signed provenance remain pending. No redaction cause is presumed.",
+      "description": "102 observed gapped histories contain250 missing versions. All102 public current states match the frozen replay version and canonical contents in two authenticated read-only batches. This is not missing-version recovery, continuity certification or human/signed approval. Eight earlier403samples remain;94missing-version endpoints were not queried. No bypass.",
       "verdict": "BLOCKED_EVIDENCE",
-      "evidence": "docs/evidence/osm-acq2c-complete-spatial-20261023/history-gaps.json"
+      "evidence": "docs/evidence/osm-acq2c-gap-state-20261023/report.json"
     },
     {
       "id": "GATE-006",
       "stage": "OSM-ACQ.2c recursive dependency closure",
       "verdict": "BLOCKED_INCOMPLETE_DEPENDENCIES",
-      "description": "The recovered199971-object frontier closes selected-source recursive graphs for5818 roots, missing0. Across all6108 raw candidate roots, further descendants remain missing:29763 nodes,2170 ways,400 relations. Direct-member exact PBF decisions are prepared for242 remaining cohort IDs but neither universal polygon closure nor source admission is certified.",
+      "description": "The recovered199971-object frontier closes selected-source recursive graphs for5818 roots, missing0. Across all6108 raw candidate roots, further descendants remain missing:29763 nodes,2170 ways,400 relations. Direct-member exact PBF decisions are prepared for242 remaining cohort IDs but neither universal polygon closure nor source admission is certified. A new native round for exactly32333typed missing IDs started2026-10-23T18:47UTC from the existing immutable original; this plan alone does not certify its completion or recursive closure.",
       "evidence": "docs/evidence/osm-acq2c-complete-spatial-20261023/all-candidate-frontier.json.gz"
     },
     {
@@ -1615,5 +1619,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-23T15:40:26.747Z"
+  "updated_at": "2026-10-23T19:31:24.506Z"
 }

@@ -1,0 +1,146 @@
+{
+  "scope": "Version/end-reference/coordinate refresh only. Existing reverse-use and simulation evidence remains historical; recheck all reverse uses before any separately authorized upload.",
+  "rows": [
+    {
+      "kind": "relations",
+      "url": "https://api.openstreetmap.org/api/0.6/relations.json?relations=18967493,18968082",
+      "requested_at": "2026-10-23T19:34:19.920Z",
+      "requested_ids": [
+        18967493,
+        18968082
+      ],
+      "source_qualified": false,
+      "public_raw_upload": false,
+      "status": 200,
+      "final_url": "https://api.openstreetmap.org/api/0.6/relations.json?relations=18967493,18968082",
+      "date": "Fri, 23 Oct 2026 19:34:25 GMT",
+      "content_type": "application/json; charset=utf-8",
+      "retry_after": null,
+      "bytes": 1527,
+      "sha256": "bcde25cb6fed99a1d28a389b09cfa53eb905f211bb092b2e1dacc50056341e44",
+      "private_original_reference": "outputs/ROADMAP-20261023/upstream-metadata-refresh-evening-20261023/relations-original.json",
+      "original_reused": false,
+      "elements": [
+        {
+          "id": 18967493,
+          "type": "relation",
+          "version": 6,
+          "timestamp": "2026-01-08T17:48:30Z"
+        },
+        {
+          "id": 18968082,
+          "type": "relation",
+          "version": 7,
+          "timestamp": "2026-03-31T13:11:32Z"
+        }
+      ],
+      "observation": "AUTHENTIC_CURRENT_METADATA_ONLY",
+      "completed_at": "2026-10-23T19:34:25.601Z"
+    },
+    {
+      "kind": "ways",
+      "url": "https://api.openstreetmap.org/api/0.6/ways.json?ways=1376179876,1376180731",
+      "requested_at": "2026-10-23T19:34:25.602Z",
+      "requested_ids": [
+        1376179876,
+        1376180731
+      ],
+      "source_qualified": false,
+      "public_raw_upload": false,
+      "status": 200,
+      "final_url": "https://api.openstreetmap.org/api/0.6/ways.json?ways=1376179876,1376180731",
+      "date": "Fri, 23 Oct 2026 19:34:26 GMT",
+      "content_type": "application/json; charset=utf-8",
+      "retry_after": null,
+      "bytes": 8768,
+      "sha256": "4e42d4108af8781afe846857c2ac0d8c2f9dd9fb31a4e7b19501f643cb7f6784",
+      "private_original_reference": "outputs/ROADMAP-20261023/upstream-metadata-refresh-evening-20261023/ways-original.json",
+      "original_reused": false,
+      "elements": [
+        {
+          "id": 1376179876,
+          "type": "way",
+          "version": 8,
+          "timestamp": "2025-09-23T12:18:04Z",
+          "node_count": 458,
+          "last_node": 12318728194
+        },
+        {
+          "id": 1376180731,
+          "type": "way",
+          "version": 6,
+          "timestamp": "2026-04-10T06:12:32Z",
+          "node_count": 228,
+          "last_node": 11649857778
+        }
+      ],
+      "observation": "AUTHENTIC_CURRENT_METADATA_ONLY",
+      "completed_at": "2026-10-23T19:34:25.820Z"
+    },
+    {
+      "kind": "nodes",
+      "url": "https://api.openstreetmap.org/api/0.6/nodes.json?nodes=12318728194,12318728593,11649857778,8265822008",
+      "requested_at": "2026-10-23T19:34:25.821Z",
+      "requested_ids": [
+        12318728194,
+        12318728593,
+        11649857778,
+        8265822008
+      ],
+      "source_qualified": false,
+      "public_raw_upload": false,
+      "status": 200,
+      "final_url": "https://api.openstreetmap.org/api/0.6/nodes.json?nodes=12318728194,12318728593,11649857778,8265822008",
+      "date": "Fri, 23 Oct 2026 19:34:26 GMT",
+      "content_type": "application/json; charset=utf-8",
+      "retry_after": null,
+      "bytes": 957,
+      "sha256": "e6b477942f4de816e75ad10d3a28489851f2c947832c461cf9c0b02fe1a5ae76",
+      "private_original_reference": "outputs/ROADMAP-20261023/upstream-metadata-refresh-evening-20261023/nodes-original.json",
+      "original_reused": false,
+      "elements": [
+        {
+          "id": 8265822008,
+          "type": "node",
+          "version": 1,
+          "timestamp": "2020-12-28T05:34:22Z",
+          "lat": 47.0786791,
+          "lon": 28.9073227
+        },
+        {
+          "id": 11649857778,
+          "type": "node",
+          "version": 1,
+          "timestamp": "2024-02-21T19:01:28Z",
+          "lat": 47.0786791,
+          "lon": 28.9073227
+        },
+        {
+          "id": 12318728194,
+          "type": "node",
+          "version": 1,
+          "timestamp": "2024-11-06T14:07:57Z",
+          "lat": 46.8331996,
+          "lon": 28.858393
+        },
+        {
+          "id": 12318728593,
+          "type": "node",
+          "version": 1,
+          "timestamp": "2024-11-06T14:07:58Z",
+          "lat": 46.8331996,
+          "lon": 28.858393
+        }
+      ],
+      "observation": "AUTHENTIC_CURRENT_METADATA_ONLY",
+      "completed_at": "2026-10-23T19:34:25.918Z"
+    }
+  ],
+  "public_osm_edited": false,
+  "source_qualified": false,
+  "versions_unchanged": true,
+  "terminal_refs_unchanged": true,
+  "coordinate_pairs_identical": true,
+  "public_edit_authorized": false,
+  "mapper_intent_review": "REQUIRED_NOT_SELF_APPROVED"
+}
