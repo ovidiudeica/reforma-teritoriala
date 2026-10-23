@@ -1,0 +1,13 @@
+[out:json][timeout:25][date:"2026-10-20T20:23:47Z"];relation["ISO3166-1"="MD"]["boundary"="administrative"]->.countryRel;.countryRel map_to_area ->.country;(.countryRel;relation(area.country)["boundary"="administrative"]["admin_level"="4"];
+relation(area.country)["boundary"="administrative"]["admin_level"="6"];
+relation(area.country)["boundary"="administrative"]["admin_level"="8"];
+relation(area.country)["boundary"="administrative"]["admin_level"="9"];
+relation(1813306);
+relation(1813297);
+relation(58512);
+relation(1813315);
+relation(1813316);
+relation(18968071);
+relation(1691800);
+relation(1691801);
+relation(18822134););out meta;
