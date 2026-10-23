@@ -838,13 +838,15 @@
       "reproduction": "Invoke load_preserved from repository root without adding the historical evidence directory to sys.path; it raises ModuleNotFoundError for acq2b_exact.",
       "cause": "The dynamically loaded validator imports sibling modules, but the new reader did not establish their verified directory as an import root.",
       "change": "Temporarily add the manifest-verified sibling directory; reject conflicting cached module contents and restore import paths/caches. Normal historical GIS dependencies remain explicit.",
-      "regression": "Sibling import and path restoration fixture plus actual42-object replay,16 duplicate observations; dedicated CI now verifies originals and covers both source directories.",
+      "regression": "19 receipt/import fixtures and all42 real preserved objects pass on exact786c90a in Actions39979455990. Path restoration and conflicting cached module guards pass; no source qualification.",
       "pr": 422,
-      "verification_sha": null,
-      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI_AND_ADMISSION",
+      "verification_sha": "786c90a35478810b1bc16626ad30ac30131f001a",
+      "verdict": "FIXED_VERIFIED",
       "evidence": [
-        "docs/osm-acq2c-complete-spatial-20261023.md"
-      ]
+        "docs/osm-acq2c-complete-spatial-20261023.md",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39979455990"
+      ],
+      "integration": "Separate PR422 tooling/evidence-only admission is required; no OSM-stage acceptance is asserted."
     }
   ],
   "environment_incidents": [
@@ -1613,5 +1615,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-23T15:33:39.687Z"
+  "updated_at": "2026-10-23T15:40:26.747Z"
 }

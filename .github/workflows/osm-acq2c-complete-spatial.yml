@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - '.github/workflows/osm-acq2c-complete-spatial.yml'
+      - 'docs/roadmap-issue-register.json'
+      - 'docs/osm-acq2c-complete-spatial-20261023.md'
       - 'scripts/audit/osm_acq2c_integer_reference.py'
       - 'scripts/audit/test_osm_acq2c_integer_reference.py'
       - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
