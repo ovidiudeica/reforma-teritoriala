@@ -11,6 +11,8 @@ class Tests(unittest.TestCase):
  def test_hole(self):self.assertEqual(IntegerArea(SQUARE+ring([(3,3),(7,3),(7,7),(3,7)]),2).point((5,5)),'outside')
  def test_disconnected(self):self.assertEqual(IntegerArea(SQUARE+ring([(20,0),(30,0),(30,10),(20,10)]),4).point((25,5)),'inside')
  def test_crossing_without_inside_vertices(self):self.assertTrue(self.a.segment_has_interior((-1,5),(11,5)))
+ def test_boundary_endpoints_interior_chord(self):self.assertTrue(self.a.segment_has_interior((0,0),(10,10)))
+ def test_disjoint_segment_bounds(self):self.assertFalse(self.a.segment_has_interior((-20,-20),(-10,-10)))
  def test_boundary_segment(self):self.assertFalse(self.a.segment_has_interior((0,0),(10,0)))
  def test_corner_touch(self):self.assertFalse(self.a.segment_has_interior((-1,1),(1,-1)))
  def test_partial_collinear(self):self.assertFalse(self.a.segment_has_interior((-5,0),(5,0)))
@@ -19,7 +21,7 @@ class Tests(unittest.TestCase):
  def test_degenerate_inside(self):self.assertTrue(self.a.segment_has_interior((5,5),(5,5)))
  def test_degenerate_boundary(self):self.assertFalse(self.a.segment_has_interior((0,5),(0,5)))
  def test_index_width_changes_no_predicate(self):
-  areas=[IntegerArea(SQUARE,w) for w in (1,3,1000000)]
+  areas=[IntegerArea(SQUARE,w) for w in (1,3,100000,1000000)]
   for p in [(-1,5),(0,0),(5,5),(10,5),(11,11)]:self.assertEqual(len({a.point(p) for a in areas}),1)
   for p,q in [((-1,5),(11,5)),((-1,1),(1,-1)),((-5,0),(5,0))]:self.assertEqual(len({a.segment_has_interior(p,q) for a in areas}),1)
  def test_exact_intersection(self):self.assertIn(Fraction(1,3),intersection_parameters((0,0),(3,0),(1,-1),(1,1)))

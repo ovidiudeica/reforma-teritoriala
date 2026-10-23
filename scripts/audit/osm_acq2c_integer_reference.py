@@ -22,7 +22,7 @@ def intersection_parameters(p,q,a,b):
     return [lo,hi] if lo<=hi else []
 
 class IntegerArea:
-    def __init__(self,edges,bin_width=1000000):
+    def __init__(self,edges,bin_width=100000):
         if type(bin_width) is not int or bin_width<=0:raise ValueError('Invalid index width')
         self.width=bin_width;self.edges=[];self.y_bins={};self.xy_bins={};self.point_cache={};self.segment_cache={}
         for a,b in edges:
@@ -62,6 +62,8 @@ class IntegerArea:
                 for y in range(lo_y//self.width,hi_y//self.width+1):candidates.update(self.xy_bins.get((x,y),()))
         cuts={Fraction(0),Fraction(1)}
         for i in candidates:cuts.update(intersection_parameters(p,q,*self.edges[i]))
+        if len(cuts)==2 and self.point(p)=='outside' and self.point(q)=='outside':
+            self.segment_cache[key]=False;return False
         parameters=sorted(cuts);answer=False
         for a,b in zip(parameters,parameters[1:]):
             mid=(a+b)/2;sample=(p[0]+(q[0]-p[0])*mid,p[1]+(q[1]-p[1])*mid)
