@@ -1,0 +1,3231 @@
+{
+  "epoch": "2026-10-20T20:23:47Z",
+  "by_domain": {
+    "RO": {
+      "raw_tag_candidates": 3646,
+      "historical_selected": 3233,
+      "historical_missing_in_regional_candidates": [],
+      "additional_to_historical": 413,
+      "raw_geometric_selected": 3234,
+      "resolved_source_selected": 3233,
+      "added_to_historical": [],
+      "absent_historical": [],
+      "raw_outside": 412
+    },
+    "MD": {
+      "raw_tag_candidates": 2641,
+      "historical_selected": 2596,
+      "historical_missing_in_regional_candidates": [
+        18966859,
+        18966939,
+        18967312,
+        18967475,
+        18967641,
+        18967824,
+        18967907,
+        18967934,
+        18968041,
+        18968051,
+        18968093,
+        18968144
+      ],
+      "additional_to_historical": 57,
+      "raw_geometric_selected": 2585,
+      "resolved_source_selected": 2585,
+      "added_to_historical": [
+        21515245
+      ],
+      "absent_historical": [
+        18966859,
+        18966939,
+        18967312,
+        18967475,
+        18967641,
+        18967824,
+        18967907,
+        18967934,
+        18968041,
+        18968051,
+        18968093,
+        18968144
+      ],
+      "raw_outside": 56
+    }
+  },
+  "raw_domain_rows": 6287,
+  "raw_distinct_relation_ids": 6108,
+  "resolved_source_distinct_ids": 5818,
+  "raw_additional_domain_rows": 470,
+  "preclassified_complete_outside_domain_rows": 75,
+  "known_additional_inside_domain_rows": [
+    {
+      "id": 18967922,
+      "domain": "RO",
+      "owner": "MD"
+    },
+    {
+      "id": 21515245,
+      "domain": "MD",
+      "owner": "MD"
+    }
+  ],
+  "cohort_distinct_ids": 391,
+  "cohort_domain_rows": 393,
+  "cohort_retained_in_other_source_domain": 131,
+  "cohort_excluded_from_both_source_domains": 260,
+  "cohort_initially_unresolved_distinct": 242,
+  "cohort_initially_unresolved_retained_elsewhere": 0,
+  "cohort_rows": [
+    {
+      "id": 58984,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 58985,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 58990,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 58991,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 59000,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 59002,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 72488,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 72489,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 72526,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 72526,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 72634,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 72634,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 90726,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025047,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025052,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025061,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025070,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025091,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025097,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025098,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025105,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1025109,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026135,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026139,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026153,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026159,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026160,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026161,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026162,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026168,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026169,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026174,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026177,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026178,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026196,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026199,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1026202,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1279074,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1280351,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1443816,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1443911,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1443912,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1444153,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1444154,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1444157,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1444158,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1444159,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1447713,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1447717,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1447720,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452114,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452131,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452135,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452147,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452156,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452161,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452162,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452163,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452427,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452428,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452432,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452435,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452442,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452471,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1452488,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1456960,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1456961,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1456962,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1456963,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1463578,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1639498,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1639502,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1639619,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1639822,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1639824,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1639825,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1643249,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1643269,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1658166,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1661171,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1661173,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1692448,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1692523,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1693874,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1693908,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1699022,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1699023,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1699034,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1706478,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1706482,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1706486,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1706494,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1706500,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1706501,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1706508,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1708279,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1708280,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1739524,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1739525,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1739526,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1739528,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1739532,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1739535,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1739538,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 1739539,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 2256729,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 2256747,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 2256753,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 2260192,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 2367044,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 2870056,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 2870060,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 3353671,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5925794,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5925822,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5925833,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5925864,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5925886,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5925917,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5925952,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5925991,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5928031,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 5928035,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6302913,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6302945,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6302955,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6302965,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6302994,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6302998,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6303074,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6304776,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6304785,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6304933,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6304939,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6304942,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6304946,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305051,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305186,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305189,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305196,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305251,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305252,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305262,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305267,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305355,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305385,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6305386,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6403128,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 6502766,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 7290072,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 7446674,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 8133064,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 8133065,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 8133067,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9622330,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9802175,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9802305,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9811217,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9811355,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9814564,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9814584,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9814595,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9814671,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9814685,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9814686,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9814698,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9814725,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9815000,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9822445,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9822891,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9822892,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9822937,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9822968,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9823017,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9823018,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9826706,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9831447,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9831596,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9831651,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9838225,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9856745,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9856765,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9856772,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9857161,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9857175,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9857272,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9858119,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9864401,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9864423,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9864695,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9864741,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9864742,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 9882104,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10363626,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10487103,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10576554,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10576555,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10624569,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10628686,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10628687,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10628801,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10628802,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 10715634,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11160276,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11321072,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11321073,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11321090,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11321091,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11321092,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11321093,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11821462,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11883401,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11883402,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11884966,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11885532,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11886169,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11900029,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11905201,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11951843,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 11951882,
+      "domain": "MD",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12299982,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12314334,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12314335,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12319725,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12320294,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12320555,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12323541,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12325811,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12409260,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12545303,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12545304,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12545305,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12545306,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12545307,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12545308,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593528,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593529,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593677,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593678,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593679,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593682,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593683,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593684,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593685,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593739,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593744,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593947,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593948,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593949,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593951,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12593954,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12594103,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12594104,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12594105,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12594106,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12594109,
+      "domain": "MD",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "RO",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629288,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629289,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629299,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629396,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629397,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629405,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629621,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629623,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629627,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629628,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629645,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12629646,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643828,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643841,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643843,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643859,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643864,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643873,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643879,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643885,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643902,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643904,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643911,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643916,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12643918,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999732,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999734,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999743,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999744,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999745,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999774,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999775,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999801,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999802,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999857,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999858,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999859,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999860,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999861,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999862,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999863,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 12999864,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 13431109,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 13431110,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 13431111,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 13431112,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 13431113,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 13431117,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 13431119,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 13477191,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 17349399,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 17649515,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 17649516,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18176298,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18541213,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18547704,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18547706,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18566998,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18568529,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18568530,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18608912,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18610531,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18673357,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18673358,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18966787,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18966819,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18966826,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18967034,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18967055,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18967106,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18967153,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18967190,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18967254,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18967290,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18967898,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 18968037,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19034078,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19034086,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19034089,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19034090,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19034091,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19034101,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19034102,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19038966,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19038967,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19038969,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19038970,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19038979,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19038982,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19045245,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19045248,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19045259,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19105108,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19105110,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19105111,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19105122,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19110229,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19110235,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19110237,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19110241,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19110243,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19110247,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19110253,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19110263,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19113664,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19114005,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19114011,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19114023,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19114024,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19114029,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115688,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115691,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115692,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115694,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115695,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115698,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115704,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115710,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115711,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115714,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115715,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115716,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115718,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19115723,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19127891,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19314570,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19314571,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19463700,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 19463726,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 20181255,
+      "domain": "RO",
+      "previously_resolved": true,
+      "source_owner_elsewhere": "MD",
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 20743144,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 20743146,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 20743147,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 20800950,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 20802221,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 21149589,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    },
+    {
+      "id": 21263722,
+      "domain": "RO",
+      "previously_resolved": false,
+      "source_owner_elsewhere": null,
+      "observed_geometry_verdict": "OUT_OF_SCOPE_PROVEN",
+      "formal_source_admission": false
+    }
+  ],
+  "raw_selector_sha256": "acad86117390afa1aae0fdfba903a8808aa432b1bb19d9241b258bc17bd8a39b",
+  "parent_cohort_gzip_sha256": "f893c3ba01fc870be5dfedb72381d47367ae4cdcacd0093fd56270a547bc36dd",
+  "source_qualified": false,
+  "source_promoted": false,
+  "overpass_equivalence_certified": false,
+  "formal_unknown_registry_overwritten": false,
+  "scope": "Country-domain mathematical verdicts only. An outside verdict for one domain never deletes an identity retained in the other source inventory."
+}

@@ -1,0 +1,22 @@
+{
+  "result": {
+    "counts": {
+      "EXPLICIT_QUERY_MEMBER": 11,
+      "IN_SCOPE_PROVEN": 5808,
+      "OUT_OF_SCOPE_PROVEN": 468
+    },
+    "distinct_relations": 6108,
+    "domain_rows": 6287,
+    "overpass_equivalence_certified": false,
+    "source_qualified": false,
+    "status": "NUMERIC_DECISIONS_VERIFIED_NOT_SOURCE_ADMISSION",
+    "topology_certified": false
+  },
+  "code_sha256": {
+    "osm_acq2c_integer_reference.py": "2042c024b1f476a4b6d18a43d255b517419efa0bf9bb17b1b12aff710b59364a",
+    "verify_osm_acq2c_numeric_certificate.py": "21ac89e228230d42984c428f9c71338d31f0e4b39763e7a797213956e672082c"
+  },
+  "original_local_log_sha256": "e2acd5fd6d994f487624de8b1401f34e33a206cf5f25c86c5a88f3be64f5dc34",
+  "scope": "Independent exact real-data verification; no original publisher validation, full polygon topology or source admission.",
+  "earlier_reference_trials": "Two slower exploratory reference runs were manually interrupted, exit1, without acceptance. No input or contract relaxation. Exact bounding-box rejection and conservative finer integer bins reduced work."
+}

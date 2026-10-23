@@ -1,0 +1,62 @@
+name: OSM complete spatial numeric evidence
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-complete-spatial.yml'
+      - 'docs/roadmap-issue-register.json'
+      - 'docs/osm-acq2c-complete-spatial-20261023.md'
+      - 'scripts/audit/osm_acq2c_integer_reference.py'
+      - 'scripts/audit/test_osm_acq2c_integer_reference.py'
+      - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/test_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/osm_acq2c_preserved_history.py'
+      - 'scripts/audit/test_osm_acq2c_preserved_history.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/osm_acq2c_frontier.py'
+      - 'docs/evidence/osm-acq2c-complete-spatial-20261023/**'
+      - 'docs/evidence/osm-acq2b-node-history-20261022/**'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  complete-spatial-offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Negative evidence and independent exact predicate tests
+        run: |
+          python scripts/audit/test_osm_acq2c_integer_reference.py
+          python scripts/audit/test_osm_acq2c_numeric_certificate.py
+          python scripts/audit/test_osm_acq2c_preserved_history.py
+      - name: Complete evidence manifest
+        run: |
+          python - <<'PY'
+          import sys,pathlib
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_selected_epoch_replay import verify_manifest
+          verify_manifest(pathlib.Path('docs/evidence/osm-acq2c-complete-spatial-20261023'))
+          PY
+      - name: Independent integer and rational verification of all real cases
+        run: python -u scripts/audit/verify_osm_acq2c_numeric_certificate.py --directory docs/evidence/osm-acq2c-complete-spatial-20261023
+      - name: Historical validator GIS dependencies
+        run: python -m pip install --disable-pip-version-check shapely==2.2.0 numpy==2.5.4
+      - name: Verify the 42 actual preserved historical objects
+        run: |
+          python - <<'PY'
+          import sys,pathlib
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_preserved_history import load_preserved
+          root=pathlib.Path('docs/evidence')
+          objects,proof=load_preserved(root/'osm-acq2b-node-history-20261022',root/'osm-acq2b-way-history-20261022','2026-10-20T20:23:47Z')
+          assert len(objects)==42 and proof['distinct_objects']==42 and proof['duplicate_observations']==16
+          assert proof['source_qualified'] is False
+          print('42 authentic historical objects verified; 16 duplicate observations deduplicated; no source admission')
+          PY
