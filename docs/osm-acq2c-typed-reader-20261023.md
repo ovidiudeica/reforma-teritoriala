@@ -17,3 +17,7 @@ The bounded pilot indexed2000headers in15.937seconds:34017actual header bytes re
 The actual210-byte first block declares HistoricalInformation and Sort.Type_then_ID. These are publisher declarations; global object sorting was not independently verified. The original unchanged stat and previous complete digest are referenced without gratuitous rehash. A future indexed lookup needs its own validation before it can replace the unrestricted reader.
 
 Primary format sources: https://github.com/openstreetmap/OSM-binary/blob/master/osmpbf/fileformat.proto and https://github.com/openstreetmap/OSM-binary/blob/master/osmpbf/osmformat.proto . No source admission, legal attribution or freshness change.
+
+## RM047 — preserve the historical producer binding
+
+Workflow40026796009 passed the new fixtures but failed at the original receipt's code hashes: those hashes describe the previous32-test producer, not the newly changed reader. The old receipt is unchanged. Its three exact Git43e6e4c sources are archived, byte-hashed against that original receipt, and its32fixtures replayed in isolation. The current seven source files have a separate binding and64tests (25core,16native,18framing,5provenance). A changed byte, missing or extra producer fails. The historical gate is retained, with its original meaning, rather than repinned to fabricated historical bytes. New exact-head CI is mandatory.

@@ -6,6 +6,8 @@ on:
       - 'scripts/audit/osm_acq2c_native_extract.py'
       - 'scripts/audit/osm_acq2c_pbf_blocks.py'
       - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/osm_acq2c_reader_provenance.py'
+      - 'scripts/audit/test_osm_acq2c_reader_provenance.py'
       - 'scripts/audit/test_osm_acq2c_native_*.py'
       - 'scripts/audit/osm_acq2c_acquire_history_base.py'
       - 'scripts/audit/osm_acq2c_bulk_preflight.py'
@@ -20,6 +22,8 @@ on:
       - 'scripts/audit/osm_acq2c_native_extract.py'
       - 'scripts/audit/osm_acq2c_pbf_blocks.py'
       - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/osm_acq2c_reader_provenance.py'
+      - 'scripts/audit/test_osm_acq2c_reader_provenance.py'
       - 'scripts/audit/test_osm_acq2c_native_*.py'
       - 'scripts/audit/osm_acq2c_acquire_history_base.py'
       - 'scripts/audit/osm_acq2c_bulk_preflight.py'
@@ -48,6 +52,7 @@ jobs:
           python scripts/audit/test_osm_acq2c_native_extract.py
           python scripts/audit/test_osm_acq2c_native_pbf.py
           python scripts/audit/test_osm_acq2c_pbf_blocks.py
+          python scripts/audit/test_osm_acq2c_reader_provenance.py
       - name: Verify typed-reader probe remains explicitly unqualified
         run: |
           python - <<'PY'
@@ -80,7 +85,32 @@ jobs:
           assert seen=={p.name for p in root.iterdir() if p.is_file() and p.name!='manifest-sha256.json'}
           result=json.loads((root/'current-local-tests.json').read_bytes())
           assert result['source_qualified'] is False and result['unknown_adjudicated']==0
-          for name,expected in result['code_sha256'].items():
-              assert pathlib.Path(name).name==name
-              assert hashlib.sha256((pathlib.Path('scripts/audit')/name).read_bytes()).hexdigest()==expected
+          import sys,gzip,io,tempfile,subprocess,os
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_reader_provenance import verify_sources
+          from osm_acq2c_selected_epoch_replay import verify_manifest
+          packet=pathlib.Path('docs/evidence/osm-acq2c-typed-reader-20261023')
+          verify_manifest(packet)
+          binding=json.loads((packet/'historical-source-binding.json').read_bytes())
+          assert binding['git_commit']=='43e6e4c29ce81a05088ba11312c64cb18c650dfd'
+          assert binding['historical_receipt_sha256']==hashlib.sha256((root/'current-local-tests.json').read_bytes()).hexdigest()
+          names=('osm_acq2c_native_extract.py','test_osm_acq2c_native_extract.py','test_osm_acq2c_native_pbf.py')
+          assert len(binding['sources'])==len(names) and {r['name'] for r in binding['sources']}==set(names)
+          archived={}
+          for name in names:
+              row=next(r for r in binding['sources'] if r['name']==name)
+              assert row['archive']=='previous-'+name+'.gz'
+              with gzip.open(packet/('previous-'+name+'.gz'),'rb') as archive:raw=archive.read(1048577)
+              assert len(raw)<=1048576 and len(raw)==row['bytes']
+              assert hashlib.sha256(raw).hexdigest()==row['sha256']
+              archived[name]=raw
+          verify_sources(result,archived)
+          with tempfile.TemporaryDirectory() as temp:
+              for name in names:(pathlib.Path(temp)/name).write_bytes(archived[name])
+              env={**os.environ,'PYTHONPATH':temp+os.pathsep+str(pathlib.Path('scripts/audit').resolve())+os.pathsep+os.environ.get('PYTHONPATH','')}
+              for name in names[1:]:subprocess.run([sys.executable,str(pathlib.Path(temp)/name)],cwd=temp,env=env,check=True)
+          current=json.loads((packet/'current-source-binding.json').read_bytes())
+          current_names=(*names,'osm_acq2c_pbf_blocks.py','test_osm_acq2c_pbf_blocks.py','osm_acq2c_reader_provenance.py','test_osm_acq2c_reader_provenance.py')
+          assert set(current['code_sha256'])==set(current_names)
+          verify_sources(current,{name:(pathlib.Path('scripts/audit')/name).read_bytes() for name in current_names})
           PY
