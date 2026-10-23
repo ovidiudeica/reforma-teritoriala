@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python",
+    "outputs/OSM-ACQ2b-EXACT-20261022/test_acq2b_exact.py"
+  ],
+  "exit_code": 0,
+  "tests": 15,
+  "coverage": [
+    "holes",
+    "rational intersections",
+    "collinear/shared boundaries",
+    "missing-node nonbridging",
+    "no snapping"
+  ],
+  "evidence_scope": "Actual separate local fixture execution; not GitHub CI or source admission",
+  "original_helper_sha256": "26f014b1aa0d738761c3a702774e3a6f2f9c47f592f5b4d96c75a9e6b78f5ecb"
+}

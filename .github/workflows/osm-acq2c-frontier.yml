@@ -5,9 +5,12 @@ on:
       - '.github/workflows/osm-acq2c-frontier.yml'
       - 'scripts/audit/osm_acq2c_frontier.py'
       - 'scripts/audit/test_osm_acq2c_frontier.py'
+      - 'scripts/audit/osm_acq2c_grouped_epoch.py'
+      - 'scripts/audit/test_osm_acq2c_grouped_epoch.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
       - 'docs/evidence/osm-acq2c-recursive-frontier-20261023/**'
+      - 'docs/evidence/osm-acq2c-grouped-readiness-20261023/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,7 +26,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Recursive frontier negative tests
-        run: python scripts/audit/test_osm_acq2c_frontier.py
+        run: |
+          python scripts/audit/test_osm_acq2c_frontier.py
+          python scripts/audit/test_osm_acq2c_grouped_epoch.py
       - name: Complete manifest and distinct frontier inventory
         run: |
           python - <<'PY'
@@ -42,4 +47,24 @@ jobs:
           assert hashlib.sha256(raw).hexdigest()==summary['missing_ids_sha256']
           assert summary['source_qualified'] is False and summary['source_promoted'] is False
           assert summary['spatial_unknown_adjudicated']==0 and summary['overpass_equivalence_certified'] is False
+          PY
+      - name: Verify provisional readiness evidence without source admission
+        run: |
+          python - <<'PY'
+          import sys,pathlib,json
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_selected_epoch_replay import verify_manifest
+          root=pathlib.Path('docs/evidence/osm-acq2c-grouped-readiness-20261023')
+          verify_manifest(root)
+          report=json.loads((root/'readiness-summary.json').read_bytes())
+          assert len(report['complete_rows'])==5
+          assert {r['id'] for r in report['complete_rows']}=={1025097,1452161,1456962,12319725,19463700}
+          assert report['counts']=={'UNKNOWN_MISSING_DEPENDENCIES':237,'PROVISIONAL_EXACT_PBF_PREDICATE_NOT_SOURCE_ADMISSION':5}
+          assert report['source_qualified'] is False and report['source_promoted'] is False
+          assert report['formal_unknown_adjudicated']==0 and report['history_gaps_resolved']==0
+          assert report['overpass_equivalence_certified'] is False
+          for row in report['complete_rows']:
+              assert row['missing_direct_geometry']==[] and row['source_admission'] is False
+              for audit in row['exact_predicate'].values():
+                  assert audit['verdict']=='OUT_OF_SCOPE_PROVEN' and audit['missing']==[]
           PY
