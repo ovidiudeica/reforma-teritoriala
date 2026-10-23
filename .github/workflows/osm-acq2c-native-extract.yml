@@ -44,6 +44,9 @@ jobs:
               raw=(root/name).read_bytes()
               assert len(raw)==row['bytes'] and hashlib.sha256(raw).hexdigest()==row['sha256']
           assert seen=={p.name for p in root.iterdir() if p.is_file() and p.name!='manifest-sha256.json'}
-          result=json.loads((root/'local-tests.json').read_bytes())
+          result=json.loads((root/'current-local-tests.json').read_bytes())
           assert result['source_qualified'] is False and result['unknown_adjudicated']==0
+          for name,expected in result['code_sha256'].items():
+              assert pathlib.Path(name).name==name
+              assert hashlib.sha256((pathlib.Path('scripts/audit')/name).read_bytes()).hexdigest()==expected
           PY

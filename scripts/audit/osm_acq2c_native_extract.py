@@ -53,7 +53,7 @@ def check_versions(rows,requested):
         if code in last and (version<=last[code][0] or row['timestamp']<last[code][1]):raise ValueError('Non-monotonic object history')
         last[code]=(version,row['timestamp']);counts.setdefault(code,[]).append(version)
     missing=sorted(requested-counts.keys())
-    gaps=sorted(code for code,versions in counts.items() if versions!=list(range(1,versions[-1]+1)))
+    gaps=sorted(code for code,versions in counts.items() if versions[0]!=1 or any(b!=a+1 for a,b in zip(versions,versions[1:])))
     return {'requested':len(requested),'observed':len(counts),'versions':len(seen),'missing_ids':missing,'gapped_ids':gaps,'source_qualified':False,'dependency_closure_certified':False,'unknown_adjudicated':0}
 
 def read_selection(path,requested,expected_epoch=None):
