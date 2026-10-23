@@ -36,6 +36,26 @@ jobs:
           node --test scripts/test/frontend-navigation-failure-evidence.test.mjs scripts/test/frontend-performance-navigation.test.mjs
       - name: Published runtime inventory and Chromium matrix
         run: node scripts/audit/web-r2c32-hardening-browser.mjs
+      - name: Verify preserved navigation failure evidence
+        run: |
+          python - <<'PY'
+          import pathlib,json,hashlib
+          root=pathlib.Path('docs/evidence/navigation-failure-20261023')
+          manifest=json.loads((root/'manifest-sha256.json').read_bytes())
+          seen=set()
+          for row in manifest['files']:
+              name=row['name']
+              assert pathlib.Path(name).name==name and name not in seen
+              seen.add(name)
+              raw=(root/name).read_bytes()
+              assert len(raw)==row['bytes'] and hashlib.sha256(raw).hexdigest()==row['sha256']
+          assert seen=={p.name for p in root.iterdir() if p.is_file() and p.name!='manifest-sha256.json'}
+          result=json.loads((root/'local-tests.json').read_bytes())
+          reviewed={'scripts/audit/helpers/performance-navigation.mjs','scripts/audit/web-r2c32-hardening-browser.mjs','scripts/test/helpers/atlas-browser.mjs','scripts/test/helpers/navigation-evidence.mjs','scripts/test/frontend-navigation-failure-evidence.test.mjs'}
+          assert set(result['code_sha256'])==reviewed
+          for name in reviewed:
+              assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest()==result['code_sha256'][name]
+          PY
       - name: Exact source admission
         run: |
           node --input-type=module -e "import fs from 'node:fs'; import assert from 'node:assert/strict'; import {execFileSync} from 'node:child_process'; const r=JSON.parse(fs.readFileSync('outputs/web-r2c4-published/report.json')); assert.equal(r.status,'PASS'); assert.equal(r.trackedSourcesClean,true); assert.equal(r.sourceSha,execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()); assert.equal(r.mode,'published'); assert.equal(r.publishedInventory.status,'PASS'); assert.equal(r.publishedInventory.checkedFiles,r.publishedInventory.expectedFiles); const pr=process.env.GITHUB_EVENT_NAME==='pull_request'; assert.equal(r.coverage,pr?'PR_PUBLISHED_BASELINE_ONLY':'PUBLISHED_EXACT_CHECKOUT'); assert.equal(r.expectedPublishedSha,pr?process.env.ATLAS_PUBLISHED_BASE_SHA:r.sourceSha);"
