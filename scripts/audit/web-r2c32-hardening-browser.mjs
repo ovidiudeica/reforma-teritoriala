@@ -142,5 +142,5 @@ try{
   }finally{await p.close();}
  }
  report.status='PASS';
-}catch(e){if(e.inventory)report.publishedInventory=e.inventory;report.errors.push(String(e.stack||e));console.error(e);process.exitCode=1;}
+}catch(e){if(e.inventory)report.publishedInventory=e.inventory;if(e.navigationFailure)report.network.push({label:'navigation-failure',...e.navigationFailure});report.errors.push(String(e.stack||e));console.error(e);process.exitCode=1;}
 finally{report.completedAt=new Date().toISOString();await writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2)+'\n');if(browser)await browser.close();}

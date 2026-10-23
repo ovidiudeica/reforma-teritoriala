@@ -1,0 +1,186 @@
+{
+  "main": "86d254aacc99020e0ab7962356c78f02924dc1c1",
+  "checks": [
+    {
+      "name": "actual-change-reproducibility",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "actual-change-repro-compare",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "published-chromium",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "report-build-status",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "deploy",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "actual-change-repro-A",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "actual-change-repro-B",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Analyze (javascript-typescript)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Analyze (actions)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Analyze (python)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "p83-geometric-validation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "p2-statistical-foundation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "frontend-geometry-taxonomy",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "detect-change-repro-scope",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "p907216-osm-ui-fail-closed",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "p82-derived-topology",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify-persisted-release",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "chromium-hardening",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "actual-release-trust-chain",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "p84-export-validation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "frontend-browser-qa",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "analyses": [
+    {
+      "commit_sha": "86d254aacc99020e0ab7962356c78f02924dc1c1",
+      "ref": "refs/heads/main",
+      "error": "",
+      "category": "/language:javascript-typescript"
+    },
+    {
+      "commit_sha": "86d254aacc99020e0ab7962356c78f02924dc1c1",
+      "ref": "refs/heads/main",
+      "error": "",
+      "category": "/language:actions"
+    },
+    {
+      "commit_sha": "86d254aacc99020e0ab7962356c78f02924dc1c1",
+      "ref": "refs/heads/main",
+      "error": "",
+      "category": "/language:python"
+    }
+  ],
+  "open_main_alerts": [],
+  "eight_individual_alerts": [
+    {
+      "number": 63,
+      "state": "fixed",
+      "fixed_at": "2026-10-23T05:06:24Z",
+      "last_detected_commit": "8b052ec378ec11e2d896c80491578f58a7e54de4"
+    },
+    {
+      "number": 64,
+      "state": "fixed",
+      "fixed_at": "2026-10-23T05:06:24Z",
+      "last_detected_commit": "8b052ec378ec11e2d896c80491578f58a7e54de4"
+    },
+    {
+      "number": 65,
+      "state": "fixed",
+      "fixed_at": "2026-10-23T05:06:24Z",
+      "last_detected_commit": "8b052ec378ec11e2d896c80491578f58a7e54de4"
+    },
+    {
+      "number": 66,
+      "state": "fixed",
+      "fixed_at": "2026-10-23T05:06:24Z",
+      "last_detected_commit": "8b052ec378ec11e2d896c80491578f58a7e54de4"
+    },
+    {
+      "number": 93,
+      "state": "fixed",
+      "fixed_at": "2026-10-23T05:06:24Z",
+      "last_detected_commit": "8b052ec378ec11e2d896c80491578f58a7e54de4"
+    },
+    {
+      "number": 94,
+      "state": "fixed",
+      "fixed_at": "2026-10-23T05:06:24Z",
+      "last_detected_commit": "8b052ec378ec11e2d896c80491578f58a7e54de4"
+    },
+    {
+      "number": 95,
+      "state": "fixed",
+      "fixed_at": "2026-10-23T05:06:24Z",
+      "last_detected_commit": "8b052ec378ec11e2d896c80491578f58a7e54de4"
+    },
+    {
+      "number": 96,
+      "state": "fixed",
+      "fixed_at": "2026-10-23T05:06:24Z",
+      "last_detected_commit": "8b052ec378ec11e2d896c80491578f58a7e54de4"
+    }
+  ]
+}
