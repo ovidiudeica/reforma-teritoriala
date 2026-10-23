@@ -1,5 +1,5 @@
 """Read-only verification of already captured official history/current originals."""
-import pathlib,hashlib,email.utils,xml.etree.ElementTree as ET,json,importlib.util
+import pathlib,hashlib,email.utils,xml.etree.ElementTree as ET,json,importlib.util,sys
 from osm_acq2c_selected_epoch_core import moment
 
 def read_receipt(receipt,directories,kind,oid,suffix,epoch):
@@ -40,8 +40,7 @@ def load_preserved(node_dir,way_dir,epoch):
     from osm_acq2c_frontier import normalize_regional
     node_dir,way_dir=pathlib.Path(node_dir),pathlib.Path(way_dir)
     for folder in (node_dir,way_dir):verify_manifest(folder)
-    spec=importlib.util.spec_from_file_location('preserved_way_history_validator',way_dir/'acq2b_history_validation.py')
-    validator=importlib.util.module_from_spec(spec);spec.loader.exec_module(validator)
+    validator=load_validator(way_dir)
     objects={};proofs={};validated={};duplicates=0;unused=[]
     batches=[(node_dir,'capture.json','node'),(node_dir,'capture-batch2.json','node'),
              (way_dir,'capture.json','way'),(way_dir,'capture-waynodes.json','node')]
@@ -61,3 +60,24 @@ def load_preserved(node_dir,way_dir,epoch):
             else:objects[key]=obj
             proofs[key]=dict(type=kind,id=key[1],version=obj['version'],timestamp=obj['timestamp'],effective_from=proof['effective_from'],effective_until=proof['effective_until'],history_sha256=row['history_receipt']['sha256'],current_sha256=row['current_receipt']['sha256'],source_directory=str(folder),capture_file=name)
     return list(objects.values()),dict(proofs=list(proofs.values()),distinct_objects=len(objects),duplicate_observations=duplicates,unused_nonproof_rows=unused,source_qualified=False)
+
+
+def load_validator(way_dir):
+    """Load manifest-verified historical siblings with normal GIS dependencies."""
+    way_dir=pathlib.Path(way_dir).resolve()
+    names=('acq2b_exact','acq2a_audit');previous={n:sys.modules.get(n) for n in names}
+    for name,module in previous.items():
+        if module is not None:
+            origin=getattr(module,'__file__',None)
+            if not origin or hashlib.sha256(pathlib.Path(origin).read_bytes()).digest()!=hashlib.sha256((way_dir/(name+'.py')).read_bytes()).digest():
+                raise ValueError('Conflicting cached historical module')
+    old_path=sys.path[:]
+    try:
+        sys.path.insert(0,str(way_dir))
+        spec=importlib.util.spec_from_file_location('preserved_way_history_validator',way_dir/'acq2b_history_validation.py')
+        validator=importlib.util.module_from_spec(spec);spec.loader.exec_module(validator)
+        return validator
+    finally:
+        sys.path[:]=old_path
+        for name,module in previous.items():
+            if module is None:sys.modules.pop(name,None)

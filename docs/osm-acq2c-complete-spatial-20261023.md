@@ -28,3 +28,5 @@ Reproduce offline from repository root:
     python scripts/audit/verify_osm_acq2c_numeric_certificate.py --directory docs/evidence/osm-acq2c-complete-spatial-20261023
 
 OSM data: © OpenStreetMap contributors, ODbL 1.0; https://www.openstreetmap.org/copyright. ACTUAL unchanged; P9.1 blocked; Issue396 open. All source-admission, semantic-admission, topology and Overpass-equivalence flags remain false. NI-JUR dependencies remain unsatisfied.
+
+The preserved-original reader loads the unchanged, manifest-verified historical validator and its sibling modules. It requires the original GIS dependencies (Shapely 2.2.0, NumPy 2.5.4), checks cached-module content, and restores the import path. The dedicated workflow exercises all 42 real preserved objects in addition to synthetic receipt fixtures.

@@ -13,6 +13,8 @@ on:
       - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
       - 'scripts/audit/osm_acq2c_frontier.py'
       - 'docs/evidence/osm-acq2c-complete-spatial-20261023/**'
+      - 'docs/evidence/osm-acq2b-node-history-20261022/**'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -42,3 +44,17 @@ jobs:
           PY
       - name: Independent integer and rational verification of all real cases
         run: python -u scripts/audit/verify_osm_acq2c_numeric_certificate.py --directory docs/evidence/osm-acq2c-complete-spatial-20261023
+      - name: Historical validator GIS dependencies
+        run: python -m pip install --disable-pip-version-check shapely==2.2.0 numpy==2.5.4
+      - name: Verify the 42 actual preserved historical objects
+        run: |
+          python - <<'PY'
+          import sys,pathlib
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_preserved_history import load_preserved
+          root=pathlib.Path('docs/evidence')
+          objects,proof=load_preserved(root/'osm-acq2b-node-history-20261022',root/'osm-acq2b-way-history-20261022','2026-10-20T20:23:47Z')
+          assert len(objects)==42 and proof['distinct_objects']==42 and proof['duplicate_observations']==16
+          assert proof['source_qualified'] is False
+          print('42 authentic historical objects verified; 16 duplicate observations deduplicated; no source admission')
+          PY

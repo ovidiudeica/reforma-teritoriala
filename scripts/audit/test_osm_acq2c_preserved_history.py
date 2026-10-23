@@ -1,5 +1,5 @@
 import pathlib,sys,tempfile,unittest,hashlib
-from osm_acq2c_preserved_history import read_receipt,recover_row
+from osm_acq2c_preserved_history import read_receipt,recover_row,load_validator
 E='2026-10-20T20:23:47Z';URL='https://api.openstreetmap.org/api/0.6/node/1/history'
 class Tests(unittest.TestCase):
  def setUp(self):
@@ -35,4 +35,26 @@ class Tests(unittest.TestCase):
   current=dict(self.r,url=URL.removesuffix('/history'),final_url=URL.removesuffix('/history'))
   row=dict(object={'id':1},history_receipt=self.r,current_receipt=current)
   with self.assertRaises(ValueError):recover_row(row,[self.path],'node',lambda h,c,e:{'object':{'id':2}},E)
+class LoaderTests(unittest.TestCase):
+ def test_sibling_loader_restores_import_path(self):
+  with tempfile.TemporaryDirectory() as t:
+   p=pathlib.Path(t);before=sys.path[:]
+   (p/'acq2b_exact.py').write_text('EPOCH="frozen"\ngrid=lambda x:x\n')
+   (p/'acq2a_audit.py').write_text('EPOCH="frozen"\n')
+   (p/'acq2b_history_validation.py').write_text('from acq2b_exact import grid,EPOCH\n')
+   self.assertEqual(load_validator(p).EPOCH,'frozen');self.assertEqual(sys.path,before)
+ def test_import_failure_restores_path(self):
+  with tempfile.TemporaryDirectory() as t:
+   p=pathlib.Path(t);before=sys.path[:]
+   (p/'acq2b_history_validation.py').write_text('raise RuntimeError("expected failure")\n')
+   self.assertRaises(RuntimeError,load_validator,p);self.assertEqual(sys.path,before)
+ def test_conflicting_cached_module_rejected(self):
+  import types
+  with tempfile.TemporaryDirectory() as t:
+   p=pathlib.Path(t);(p/'acq2b_exact.py').write_text('x=1\n');other=p/'different.py';other.write_text('x=2\n')
+   old=sys.modules.get('acq2b_exact');sys.modules['acq2b_exact']=types.SimpleNamespace(__file__=str(other))
+   try:self.assertRaises(ValueError,load_validator,p)
+   finally:
+    if old is None:sys.modules.pop('acq2b_exact',None)
+    else:sys.modules['acq2b_exact']=old
 if __name__=='__main__':unittest.main()
