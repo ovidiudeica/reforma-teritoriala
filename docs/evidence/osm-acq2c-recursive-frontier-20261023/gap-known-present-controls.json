@@ -1,0 +1,23 @@
+{
+  "rows": [
+    {
+      "accessed_at": "2026-10-23T12:15:37.078Z",
+      "body_file": "node-174639032-v74.bin",
+      "bytes": 427,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "e3a4183c6c9403dad20726de772bac614354732fc35714c99270f4f733fe115e",
+      "status": 429,
+      "url": "https://api.openstreetmap.org/api/0.6/node/174639032/74.json"
+    },
+    {
+      "accessed_at": "2026-10-23T12:15:44.670Z",
+      "body_file": "way-48452359-v25.bin",
+      "bytes": 569,
+      "content_type": "application/json; charset=utf-8",
+      "sha256": "8f2119b11087bd3d90cc93fc868333188e303b45fbd3f95e9d7ebcfcc0efd0b2",
+      "status": 200,
+      "url": "https://api.openstreetmap.org/api/0.6/way/48452359/25.json"
+    }
+  ],
+  "scope": "Known-present controls only. HTTP429 node control not retried; way control HTTP200. These do not establish why the eight missing-version samples returned403 and do not resolve a history gap. Original bodies are private, not mirrored here."
+}
