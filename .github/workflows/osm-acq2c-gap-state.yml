@@ -10,6 +10,7 @@ on:
       - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
       - 'scripts/audit/osm_acq2c_integer_reference.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
       - 'docs/evidence/osm-acq2c-gap-state-20261023/**'
       - 'docs/evidence/osm-upstream-evening-20261023/**'
@@ -26,6 +27,7 @@ on:
       - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
       - 'scripts/audit/osm_acq2c_integer_reference.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
       - 'docs/evidence/osm-acq2c-gap-state-20261023/**'
       - 'docs/evidence/osm-upstream-evening-20261023/**'
@@ -49,6 +51,7 @@ jobs:
         run: |
           python scripts/audit/test_osm_acq2c_gap_state.py
           python scripts/audit/test_osm_acq2c_gap_capsule.py
+          python scripts/audit/test_osm_acq2c_evidence_paths.py
       - name: All102 observed gap states without continuity admission
         run: python scripts/audit/verify_osm_acq2c_gap_state.py --directory docs/evidence/osm-acq2c-gap-state-20261023
       - name: Exact recursive second-round input inventory

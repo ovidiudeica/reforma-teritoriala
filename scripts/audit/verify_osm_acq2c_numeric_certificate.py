@@ -70,8 +70,17 @@ def verify(certificate,selector):
         if sorted(ids)!=selector['selection'][domain]['ids']:raise ValueError('Raw selection inventory differs')
     return dict(status='NUMERIC_DECISIONS_VERIFIED_NOT_SOURCE_ADMISSION',domain_rows=len(seen),distinct_relations=len(certificate['relations']),counts=dict(counts),source_qualified=False,topology_certified=False,overpass_equivalence_certified=False)
 
+REPOSITORY=pathlib.Path(__file__).resolve().parents[2]
+FIXED_DIRECTORY=REPOSITORY/'docs/evidence/osm-acq2c-complete-spatial-20261023'
+def approved_directory(raw):
+    # A frozen-proof CLI cannot grant arbitrary filesystem-read authority.
+    for part in (REPOSITORY/'docs',REPOSITORY/'docs/evidence',FIXED_DIRECTORY):
+        if part.is_symlink():raise ValueError('Symlink proof directory is forbidden')
+    if pathlib.Path(raw).resolve()!=FIXED_DIRECTORY.resolve():raise ValueError('CLI accepts only the declared repository proof packet')
+    return FIXED_DIRECTORY
+
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--directory',type=pathlib.Path,required=True);args=parser.parse_args()
-    result=verify(packed_json(args.directory/'numeric-certificate.json.gz'),packed_json(args.directory/'all-candidate-selector.json.gz'))
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--directory',required=True);args=parser.parse_args()
+    result=verify(packed_json(approved_directory(args.directory)/'numeric-certificate.json.gz'),packed_json(approved_directory(args.directory)/'all-candidate-selector.json.gz'))
     print(json.dumps(result,sort_keys=True))
 if __name__=='__main__':main()

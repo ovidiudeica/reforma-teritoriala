@@ -5,6 +5,7 @@ on:
       - '.github/workflows/osm-acq2c-selected-epoch.yml'
       - 'scripts/audit/osm_acq2c_selected_epoch_*.py'
       - 'scripts/audit/test_osm_acq2c_selected_epoch_*.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
       - 'scripts/audit/osm_acq2c_replication_chain.py'
       - 'scripts/audit/osm_acq2c_bulk_preflight.py'
       - 'scripts/audit/osm_acq2c_full_batch.py'
@@ -28,6 +29,7 @@ jobs:
         run: |
           python scripts/audit/test_osm_acq2c_selected_epoch_core.py
           python scripts/audit/test_osm_acq2c_selected_epoch_loader.py
+          python scripts/audit/test_osm_acq2c_evidence_paths.py
       - name: Verify complete public evidence manifest
         run: |
           python - <<'PY'

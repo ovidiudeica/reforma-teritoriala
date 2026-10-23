@@ -851,6 +851,22 @@
       ],
       "integration": "PR422 merged tooling/evidence-only after all16workflows SUCCESS;20check-run SUCCESS and2scope-onlySKIPPED. Main genuineA/B+compare and publishedPages pass; source freshness remains a separate legitimateFAIL.",
       "merged_main": "5df714fe661152c41f66cb41461ec3ead4154f93"
+    },
+    {
+      "id": "RM-046",
+      "severity": "P1",
+      "component": "Evidence CLI directory authority and shared manifest path handling",
+      "reproduction_sha": "c55664aa19db300a684b02aa7261fe6d81a9b79d",
+      "reproduction": "CodeQL check120631660239 reports high py/path-injection alerts107/108 at selected_epoch_replay.py11/15 from the new unrestricted --directory caller. The original helper joined untrusted manifest names and followed filesystem symlinks.",
+      "cause": "The public frozen-proof CLI exposed arbitrary directory authority; shared manifest reads were not restricted to physical entries within the declared artifact root.",
+      "change": "Public proof CLIs accept only their declared repository packets and return trusted constant paths. Shared manifest validation enumerates physical entries, refuses symlinks and portable traversal/drive/stream/device names, rejects duplicate JSON keys and validates size/digest types; manifest names are lookup keys, never path expressions.",
+      "regression": "Six existing loader cases, nine new path tests with11portable-name subcases and real Linux symlink isolation (restricted Windows uses a mocked rejection branch), nine real-capsule adversarial tests, real102-case replay and6287-case numeric validation pass locally. No rule disabled and no alert dismissed.",
+      "pr": 423,
+      "verification_sha": null,
+      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CODEQL_AND_ADMISSION",
+      "evidence": [
+        "docs/evidence/osm-acq2c-evidence-security-20261023/manifest-sha256.json"
+      ]
     }
   ],
   "environment_incidents": [
@@ -1619,5 +1635,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-23T19:31:24.506Z"
+  "updated_at": "2026-10-23T20:39:35.452Z"
 }

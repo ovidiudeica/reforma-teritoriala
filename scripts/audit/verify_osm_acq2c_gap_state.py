@@ -27,6 +27,15 @@ def verify(root):
     if dict(counts)!=report['counts'] or missing!=report['missing_observed_versions']:raise ValueError('Gap totals differ')
     return dict(status='OBSERVED_GAP_STATE_REPLAY_VERIFIED_NOT_CONTINUITY_ADMISSION',objects=len(codes),counts=dict(counts),missing_observed_versions=missing,history_gaps_resolved=0,source_qualified=False)
 
+REPOSITORY=pathlib.Path(__file__).resolve().parents[2]
+FIXED_DIRECTORY=REPOSITORY/'docs/evidence/osm-acq2c-gap-state-20261023'
+def approved_directory(raw):
+    # A frozen-proof CLI cannot grant arbitrary filesystem-read authority.
+    for part in (REPOSITORY/'docs',REPOSITORY/'docs/evidence',FIXED_DIRECTORY):
+        if part.is_symlink():raise ValueError('Symlink proof directory is forbidden')
+    if pathlib.Path(raw).resolve()!=FIXED_DIRECTORY.resolve():raise ValueError('CLI accepts only the declared repository proof packet')
+    return FIXED_DIRECTORY
+
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--directory',type=pathlib.Path,required=True)
-    print(json.dumps(verify(p.parse_args().directory),sort_keys=True))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--directory',required=True)
+    print(json.dumps(verify(approved_directory(p.parse_args().directory)),sort_keys=True))
