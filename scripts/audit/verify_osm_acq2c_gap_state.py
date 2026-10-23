@@ -33,7 +33,9 @@ def approved_directory(raw):
     # A frozen-proof CLI cannot grant arbitrary filesystem-read authority.
     for part in (REPOSITORY/'docs',REPOSITORY/'docs/evidence',FIXED_DIRECTORY):
         if part.is_symlink():raise ValueError('Symlink proof directory is forbidden')
-    if pathlib.Path(raw).resolve()!=FIXED_DIRECTORY.resolve():raise ValueError('CLI accepts only the declared repository proof packet')
+    # Never interpret untrusted CLI text as a filesystem path, even for validation.
+    allowed={str(FIXED_DIRECTORY),FIXED_DIRECTORY.as_posix(),FIXED_DIRECTORY.relative_to(REPOSITORY).as_posix()}
+    if not isinstance(raw,str) or raw not in allowed:raise ValueError('CLI accepts only the declared repository proof packet')
     return FIXED_DIRECTORY
 
 if __name__=='__main__':

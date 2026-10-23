@@ -53,6 +53,14 @@ class Tests(unittest.TestCase):
             for root in (self.root,cli.FIXED_DIRECTORY.parent/(cli.FIXED_DIRECTORY.name+'-other')):
                 with self.subTest(cli=cli.__name__,root=str(root)):
                     self.assertRaises(ValueError,cli.approved_directory,str(root))
+    def test_cli_raw_text_never_reaches_path_resolution(self):
+        for cli in (gap_cli,numeric_cli):
+            for text in ('../outside','C:\\outside','file:///etc/passwd','bad\0name',str(cli.FIXED_DIRECTORY)+'/../'+cli.FIXED_DIRECTORY.name):
+                with self.subTest(cli=cli.__name__,text=text):
+                    with mock.patch.object(pathlib.Path,'resolve',side_effect=AssertionError('Untrusted path interpretation')):
+                        self.assertRaises(ValueError,cli.approved_directory,text)
+    def test_cli_relative_documented_packet(self):
+        for cli in (gap_cli,numeric_cli):self.assertEqual(cli.approved_directory(cli.FIXED_DIRECTORY.relative_to(cli.REPOSITORY).as_posix()),cli.FIXED_DIRECTORY)
     def test_cli_accepts_declared_frozen_packets(self):
         for cli in (gap_cli,numeric_cli):self.assertEqual(cli.approved_directory(str(cli.FIXED_DIRECTORY)),cli.FIXED_DIRECTORY)
 if __name__=='__main__':unittest.main()
