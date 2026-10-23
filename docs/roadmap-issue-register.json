@@ -634,12 +634,33 @@
       "change": "Require actual integer ID/length types and exact lowercase64-hex receipt identifiers. Independent receipt validation remains explicitly unqualified.",
       "regression": "Boolean IDs, boolean/float lengths, malformed/typed receipt IDs rejected.",
       "pr": 413,
-      "verification_sha": null,
+      "verification_sha": "93b5d22963816a1fe880eb1c759bfa1d49326b55",
       "evidence": [
         "docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/native-regression-proof.json",
-        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413"
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39860526112",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39862581241",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39864196444"
       ],
-      "verdict": "FIXED_NATIVE_REGRESSION_PASS_EXACT_HEAD_CI_REQUIRED"
+      "verdict": "CLOSED_PASS",
+      "exact_head_checks": {
+        "success": 20,
+        "conditional_skipped": 2,
+        "mandatory_checks_success": 6,
+        "codeql": "SUCCESS",
+        "offline_preflight_run": 39860526112
+      },
+      "merge_commit": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+      "postmerge_verification": {
+        "sha": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+        "success": 22,
+        "failures": 0,
+        "pending": 0,
+        "actual_repro_A": "SUCCESS",
+        "actual_repro_B": "SUCCESS",
+        "actual_repro_compare": "SUCCESS",
+        "published_chromium_run": 39864196444
+      }
     },
     {
       "id": "RM-038",
@@ -653,12 +674,55 @@
       "change": "Write canonical ASCII ID bytes and UTF-8 JSON bytes; retain original evidence and fixed inventory.",
       "regression": "Native file digest must equal declared digest and pinned1911a146; two output directories must be byte-identical.",
       "pr": 413,
-      "verification_sha": null,
+      "verification_sha": "93b5d22963816a1fe880eb1c759bfa1d49326b55",
       "evidence": [
         "docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/native-regression-proof.json",
-        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413"
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/413",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39860526112",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39862581241",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39864196444"
       ],
-      "verdict": "FIXED_NATIVE_REGRESSION_PASS_EXACT_HEAD_CI_REQUIRED"
+      "verdict": "CLOSED_PASS",
+      "exact_head_checks": {
+        "success": 20,
+        "conditional_skipped": 2,
+        "mandatory_checks_success": 6,
+        "codeql": "SUCCESS",
+        "offline_preflight_run": 39860526112
+      },
+      "merge_commit": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+      "postmerge_verification": {
+        "sha": "f22d6bca280c6ceea61cc8c3deb1c7d238ff2598",
+        "success": 22,
+        "failures": 0,
+        "pending": 0,
+        "actual_repro_A": "SUCCESS",
+        "actual_repro_B": "SUCCESS",
+        "actual_repro_compare": "SUCCESS",
+        "published_chromium_run": 39864196444
+      }
+    },
+    {
+      "id": "RM-039",
+      "severity": "P1",
+      "component": "OSM-ACQ.2c acquisition CLI write-surface restriction",
+      "reproduction": "PR414 head bdf5f32c2aeca60cb1db940a218d7c7b65f2cceb: CodeQL check120125051866 reports four high uncontrolled-path alerts for destination-directory flowing into lock/directory/acquisition-state I/O.",
+      "cause": "An unrestricted destination-directory CLI option was used as a filesystem root without constraining the write surface.",
+      "change": "Remove arbitrary path input. Only named repository/workspace slots select statically constructed source-relative storage directories; no user value is a path component. No CodeQL settings or security threshold changed.",
+      "regression": "Reject traversal and absolute destination strings, prove exact two fixed roots; 20 acquisition and17 replay tests pass locally.",
+      "pr": 414,
+      "verification_sha": "8ff4047c1da5f72c243d565e5ea72be6bfbde6fc",
+      "evidence": [
+        "docs/evidence/osm-acq2c-replication-tail-20261022/codeql-original-alerts.json",
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/414",
+        "docs/evidence/osm-acq2c-replication-tail-20261022/codeql-rescan-proof.json"
+      ],
+      "verdict": "CLOSED_CODEQL_RESCAN_PASS_PR_ADMISSION_SEPARATE",
+      "codeql_verification": {
+        "check": 120126851271,
+        "conclusion": "SUCCESS",
+        "alert_annotations": 0
+      }
     },
     {
       "id": "RM-040",
@@ -670,13 +734,30 @@
       "change": "Reuse fetchPublishedWithRetry in the initial source check; retain strict HTTP200 and SHA256 checks and disclose attempt history. No threshold or UI behavior change.",
       "regression": "Five transport/source scenarios plus tracked-manifest regression;20/20 relevant tests PASS locally. Historical runtime-fix before/after logs6PASS/4FAIL and19PASS are preserved without relabelling.",
       "pr": 415,
-      "verification_sha": null,
+      "verification_sha": "e6cc5aa774788d07b30c9d264bf55d0092725cea",
       "evidence": [
         "docs/evidence/published-source-retry-20261022/manifest-sha256.json",
-        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39865505650"
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/39865505650",
+        "docs/evidence/osm-acq2c-replication-tail-20261022/postmerge-pr415-proof.json"
       ],
-      "verdict": "FIXED_LOCAL_REGRESSION_PASS_PENDING_EXACT_HEAD_CI",
-      "evidence_packaging": "Initial *.log copies were ignored by Git. Raw originals are preserved in deterministic GZIP; readable .txt has trailing whitespace trimmed explicitly. Mandatory tracked-file/hash test covers all six evidence files."
+      "verdict": "CLOSED_PASS",
+      "evidence_packaging": "Initial *.log copies were ignored by Git. Raw originals are preserved in deterministic GZIP; readable .txt has trailing whitespace trimmed explicitly. Mandatory tracked-file/hash test covers all six evidence files.",
+      "exact_head_checks": {
+        "success": 25,
+        "skipped": 0,
+        "codeql": "SUCCESS",
+        "mandatory_checks_success": 6
+      },
+      "postmerge_verification": {
+        "sha": "8b052ec378ec11e2d896c80491578f58a7e54de4",
+        "success": 23,
+        "pending": 0,
+        "failures": 0,
+        "actual_repro_A": "SUCCESS",
+        "actual_repro_B": "SUCCESS",
+        "actual_repro_compare": "SUCCESS",
+        "published_chromium_run": 39869009638
+      }
     },
     {
       "id": "RM-041",
@@ -1441,5 +1522,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-22T23:50:44.800Z"
+  "updated_at": "2026-10-23T05:08:34.551Z"
 }
