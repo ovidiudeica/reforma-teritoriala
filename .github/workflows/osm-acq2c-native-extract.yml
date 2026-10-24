@@ -6,6 +6,9 @@ on:
       - 'scripts/audit/osm_acq2c_native_extract.py'
       - 'scripts/audit/osm_acq2c_pbf_blocks.py'
       - 'scripts/audit/osm_acq2c_relation_closure.py'
+      - 'scripts/audit/osm_acq2c_native_order.py'
+      - 'scripts/audit/test_osm_acq2c_native_order.py'
+      - 'docs/evidence/osm-acq2c-native-order-20261024/**'
       - 'scripts/audit/test_osm_acq2c_relation_closure.py'
       - 'docs/evidence/osm-acq2c-indexed-recovery-20261024/**'
       - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
@@ -25,6 +28,9 @@ on:
       - 'scripts/audit/osm_acq2c_native_extract.py'
       - 'scripts/audit/osm_acq2c_pbf_blocks.py'
       - 'scripts/audit/osm_acq2c_relation_closure.py'
+      - 'scripts/audit/osm_acq2c_native_order.py'
+      - 'scripts/audit/test_osm_acq2c_native_order.py'
+      - 'docs/evidence/osm-acq2c-native-order-20261024/**'
       - 'scripts/audit/test_osm_acq2c_relation_closure.py'
       - 'docs/evidence/osm-acq2c-indexed-recovery-20261024/**'
       - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
@@ -59,7 +65,21 @@ jobs:
           python scripts/audit/test_osm_acq2c_native_pbf.py
           python scripts/audit/test_osm_acq2c_pbf_blocks.py
           python scripts/audit/test_osm_acq2c_relation_closure.py
+          python scripts/audit/test_osm_acq2c_native_order.py
           python scripts/audit/test_osm_acq2c_reader_provenance.py
+      - name: Verify independent native order evidence
+        run: |
+          python - <<'PY'
+          import pathlib,json,sys
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_selected_epoch_replay import verify_manifest
+          from osm_acq2c_native_order import validate_order
+          root=pathlib.Path('docs/evidence/osm-acq2c-native-order-20261024')
+          verify_manifest(root)
+          read=lambda name:json.loads((root/name).read_bytes())
+          assert validate_order(read('native-stdout-presentation.json'),read('native-order-receipt.json'),read('expected-bindings.json'))==read('validated-order.json')
+          assert read('summary.json')['source_qualified'] is False
+          PY
       - name: Verify indexed relation evidence remains partial
         run: |
           python - <<'PY'
