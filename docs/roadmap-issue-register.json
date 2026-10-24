@@ -898,16 +898,18 @@
       "change": "Return only a fixed repository proof directory after pure-string allowlisting; reject symlink directory components before reads. Never interpret untrusted CLI text as a path.",
       "regression": "Extend all11portable path-authority/security fixtures to the leaf CLI, including traversal,foreign roots,prefix siblings,URIs,streams and symlink rejection; actual sparse proof replay still passes.",
       "pr": 431,
-      "verification_sha": "955151c73307dedbc924e74d9d28714f883631f9",
-      "verdict": "FIX_VERIFIED_PENDING_FULL_CI_AND_INTEGRATION",
+      "verification_sha": "446d1334cedadbcb0d37ca21c5bebfcb9c9ac452",
+      "verdict": "FIX_VERIFIED_INTEGRATED",
       "evidence": [
         "CodeQL alerts111,112,113,114 on85a698e8b409302095fadbffc78a0112949c2e36",
         "Local11path/security fixtures PASS; sparse leaf proof PASS_CONDITIONAL_STRUCTURAL_PROOF",
         "scripts/audit/test_osm_acq2c_evidence_paths.py",
         "CodeQL SUCCESS on955151c73307dedbc924e74d9d28714f883631f9; open alerts for refs/pull/431/head=0",
         "Individual alerts111-114: most_recent_instance.state=fixed, dismissed_at=null; global state metadata is nullable and is not asserted CLOSED_PASS",
-        "Local11security/path fixtures PASS across all three frozen-proof CLIs; actual sparse leaf replay PASS_CONDITIONAL_STRUCTURAL_PROOF"
-      ]
+        "Local11security/path fixtures PASS across all three frozen-proof CLIs; actual sparse leaf replay PASS_CONDITIONAL_STRUCTURAL_PROOF",
+        "PR431 exact head:23SUCCESS/2scope-conditionalSKIPPED; mergef08372ff4032182eac41fe1aa15f22977b735d03. Main Python/Actions/JS CodeQLSUCCESS, main-ref open alerts0. Postmerge host-trust BFAIL is preserved separately, not a code-fix PASS."
+      ],
+      "postmerge_verification_sha": "f08372ff4032182eac41fe1aa15f22977b735d03"
     }
   ],
   "environment_incidents": [
@@ -1653,14 +1655,21 @@
       "additional_observed_gapped_histories": 5,
       "observed_total_gapped_histories": 107,
       "original_fixed_ledger_scope": 102,
-      "additional_evidence": "docs/evidence/osm-acq2c-typed-reader-20261023/round2-recovery.json"
+      "additional_evidence": "docs/evidence/osm-acq2c-typed-reader-20261023/round2-recovery.json",
+      "latest_observed_gapped_histories": 159,
+      "latest_absent_observed_versions": 641,
+      "latest_history_gaps_resolved": 0,
+      "latest_evidence": "docs/evidence/osm-acq2c-exact242-proposals-20261024/observed-gaps.json"
     },
     {
       "id": "GATE-006",
       "stage": "OSM-ACQ.2c recursive dependency closure",
-      "verdict": "BLOCKED_INCOMPLETE_DEPENDENCIES",
-      "description": "The recovered199971-object frontier closes selected-source recursive graphs for5818 roots, missing0. Across all6108 raw candidate roots, further descendants remain missing:29763 nodes,2170 ways,400 relations. Direct-member exact PBF decisions are prepared for242 remaining cohort IDs but neither universal polygon closure nor source admission is certified. A new native round for exactly32333typed missing IDs started2026-10-23T18:47UTC from the existing immutable original; this plan alone does not certify its completion or recursive closure.",
-      "evidence": "docs/evidence/osm-acq2c-complete-spatial-20261023/all-candidate-frontier.json.gz"
+      "verdict": "CONDITIONAL_STRUCTURAL_PROOF_PENDING_PROVENANCE",
+      "description": "All251088requested IDs recovered; recursive target2227912identities/2936781versions independently replayed. All6108relation roots have conditional structural closure after4authenticated post-base leaf creates. Structural missing0 does not certify topology, historical continuity or human/signed publication provenance.",
+      "evidence": "docs/evidence/osm-acq2c-complete-spatial-20261023/all-candidate-frontier.json.gz",
+      "historical_description": "The recovered199971-object frontier closes selected-source recursive graphs for5818 roots, missing0. Across all6108 raw candidate roots, further descendants remain missing:29763 nodes,2170 ways,400 relations. Direct-member exact PBF decisions are prepared for242 remaining cohort IDs but neither universal polygon closure nor source admission is certified. A new native round for exactly32333typed missing IDs started2026-10-23T18:47UTC from the existing immutable original; this plan alone does not certify its completion or recursive closure.",
+      "latest_structural_missing": 0,
+      "conditional_leaf_evidence": "docs/evidence/osm-acq2c-leaf-closure-20261024/certificate.json"
     },
     {
       "id": "GATE-007",
@@ -1704,5 +1713,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-24T11:09:54.001894Z"
+  "updated_at": "2026-10-24T13:50:21.415925+00:00"
 }

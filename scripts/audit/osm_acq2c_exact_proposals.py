@@ -57,6 +57,21 @@ def build(reports, expected, bindings):
 def encoded(value):
     return (json.dumps(value,sort_keys=True,indent=2)+'\n').encode()
 
+def verify_gap_observations(gaps, rows):
+    if gaps['source_qualified'] is not False or gaps['history_gaps_resolved'] != 0 or gaps['overlap_conflicts']:
+        raise ValueError('Gap acceptance or overlap guard differs')
+    by_code={r['code']:r for r in gaps['rows']}
+    if len(by_code)!=len(gaps['rows']) or len(by_code)!=gaps['objects']:
+        raise ValueError('Duplicate gap identity or count differs')
+    for row in by_code.values():
+        versions=row['missing_versions']
+        if not versions or len(set(versions))!=len(versions) or any(type(v) is not int or v<1 for v in versions) or row['source_qualified'] is not False or row['historical_continuity']!='BLOCKED_VERSION_GAPS':
+            raise ValueError('Invalid missing-version observation')
+    if sum(len(r['missing_versions']) for r in by_code.values())!=gaps['absent_observed_versions']:
+        raise ValueError('Missing version count differs')
+    if any(set(r['history_gap_dependencies'])-set(by_code) for r in rows):
+        raise ValueError('Unbound relation gap dependency')
+
 def validate():
     verify_manifest(PACKET)
     read = lambda n: json.loads((PACKET/n).read_bytes())
@@ -81,6 +96,10 @@ def validate():
     regenerated = encoded(build(reports,unknown,registry['inputs']))
     if regenerated != (PACKET/'registry.json').read_bytes():
         raise ValueError('Byte-identical registry replay differs')
+    gaps=read('observed-gaps.json')
+    verify_gap_observations(gaps,registry['rows'])
+    if (gaps['objects'],gaps['absent_observed_versions'])!=(159,641):
+        raise ValueError('Frozen observed gap cohort differs')
     return dict(status='PASS_OBSERVATION_REPLAY_ONLY',**registry['summary'],source_qualified=False,overpass_equivalence_certified=False,topology_certified=False)
 
 if __name__ == '__main__':

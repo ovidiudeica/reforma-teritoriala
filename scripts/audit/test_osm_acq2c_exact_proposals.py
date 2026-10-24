@@ -1,6 +1,6 @@
 import copy
 import unittest
-from osm_acq2c_exact_proposals import build, encoded, EPOCH
+from osm_acq2c_exact_proposals import build, encoded, verify_gap_observations, EPOCH
 
 class Tests(unittest.TestCase):
     def setUp(self):
@@ -32,5 +32,14 @@ class Tests(unittest.TestCase):
         self.row['history_gap_dependencies']=['n1'];r=self.run_build();self.assertEqual(r['summary']['relations_with_observed_history_gaps'],1);self.assertFalse(r['source_qualified']);self.assertEqual(r['summary']['formal_unknown_remaining'],1)
     def test_shared_domains_count_identity_once(self):
         self.expected[7]=['RO','MD'];self.row['domains'].append('MD');self.row['exact_predicate']['MD']=copy.deepcopy(self.row['exact_predicate']['RO']);r=self.run_build();self.assertEqual(r['summary']['domain_observations'],2);self.assertEqual(r['summary']['distinct_relations'],1)
+    def gaps(self):return dict(source_qualified=False,history_gaps_resolved=0,overlap_conflicts=[],objects=1,absent_observed_versions=1,rows=[dict(code='n1',missing_versions=[2],source_qualified=False,historical_continuity='BLOCKED_VERSION_GAPS')])
+    def test_gap_reference_bound(self):
+        self.row['history_gap_dependencies']=['n1'];verify_gap_observations(self.gaps(),[self.row])
+    def test_unbound_gap(self):
+        self.row['history_gap_dependencies']=['n2'];self.assertRaises(ValueError,verify_gap_observations,self.gaps(),[self.row])
+    def test_gap_boolean_version(self):
+        g=self.gaps();g['rows'][0]['missing_versions']=[True];self.assertRaises(ValueError,verify_gap_observations,g,[self.row])
+    def test_gap_duplicate(self):
+        g=self.gaps();g['rows'].append(copy.deepcopy(g['rows'][0]));self.assertRaises(ValueError,verify_gap_observations,g,[self.row])
 
 if __name__=='__main__':unittest.main()
