@@ -910,6 +910,22 @@
         "PR431 exact head:23SUCCESS/2scope-conditionalSKIPPED; mergef08372ff4032182eac41fe1aa15f22977b735d03. Main Python/Actions/JS CodeQLSUCCESS, main-ref open alerts0. Postmerge host-trust BFAIL is preserved separately, not a code-fix PASS."
       ],
       "postmerge_verification_sha": "f08372ff4032182eac41fe1aa15f22977b735d03"
+    },
+    {
+      "id": "RM-049",
+      "severity": "P2",
+      "component": "Exact proposal observation acceptance guards",
+      "reproduction_sha": "86269029cc60dc2aab3493b8cf5514dc795204c9",
+      "reproduction": "A report with overpass_equivalence_certified=true was accepted by build and its conflicting input flag silently replaced with false; booleanFalse also passed numeric-zero guards. No source was promoted.",
+      "cause": "The observational aggregate checked source/topology flags but omitted report equivalence and relied on Python boolean/numeric equality for zero counts.",
+      "change": "Reject any positive input equivalence flag and require exact integer zero/count types for adjudication and gap-resolution observations.",
+      "regression": "Three new negative cases: contradictory equivalence flag, boolean adjudication count, boolean gap-resolution count;19fixtures and actual242ledger replay PASS locally.",
+      "pr": 437,
+      "verdict": "FIX_IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "evidence": [
+        "scripts/audit/test_osm_acq2c_exact_proposals.py",
+        "scripts/audit/osm_acq2c_exact_proposals.py"
+      ]
     }
   ],
   "environment_incidents": [
@@ -1713,5 +1729,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-24T13:50:21.415925+00:00"
+  "updated_at": "2026-10-24T14:01:54.191456+00:00"
 }

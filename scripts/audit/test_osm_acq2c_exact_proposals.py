@@ -6,7 +6,7 @@ class Tests(unittest.TestCase):
     def setUp(self):
         self.expected={7:['RO']}
         self.row=dict(id=7,domains=['RO'],version=1,timestamp=EPOCH,formal_adjudication=False,source_qualified=False,status='PROVISIONAL_EXACT_PBF_NOT_SOURCE_ACCEPTANCE',missing_direct_geometry=[],history_gap_dependencies=[],exact_predicate={'RO':dict(verdict='OUT_OF_SCOPE_PROVEN',missing=[],inside_witness=None,node_occurrence_states={'boundary':1},segment_interval_states={'outside':2})})
-        self.report=dict(epoch=EPOCH,source_qualified=False,topology_certified=False,unknown_adjudicated=0,country_boundaries={'RO':{'root':90689}},rows=[self.row])
+        self.report=dict(epoch=EPOCH,source_qualified=False,topology_certified=False,overpass_equivalence_certified=False,unknown_adjudicated=0,formal_unknown_relations=1,country_boundaries={'RO':{'root':90689}},rows=[self.row])
     def run_build(self):return build([self.report],self.expected,[])
     def test_deterministic(self):self.assertEqual(encoded(self.run_build()),encoded(self.run_build()))
     def test_duplicate(self):
@@ -41,5 +41,11 @@ class Tests(unittest.TestCase):
         g=self.gaps();g['rows'][0]['missing_versions']=[True];self.assertRaises(ValueError,verify_gap_observations,g,[self.row])
     def test_gap_duplicate(self):
         g=self.gaps();g['rows'].append(copy.deepcopy(g['rows'][0]));self.assertRaises(ValueError,verify_gap_observations,g,[self.row])
+    def test_contradictory_equivalence_flag(self):
+        self.report['overpass_equivalence_certified']=True;self.assertRaises(ValueError,self.run_build)
+    def test_boolean_adjudicated_count(self):
+        self.report['unknown_adjudicated']=False;self.assertRaises(ValueError,self.run_build)
+    def test_boolean_gap_resolved_count(self):
+        g=self.gaps();g['history_gaps_resolved']=False;self.assertRaises(ValueError,verify_gap_observations,g,[self.row])
 
 if __name__=='__main__':unittest.main()

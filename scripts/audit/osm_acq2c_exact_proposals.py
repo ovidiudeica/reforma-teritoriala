@@ -18,7 +18,7 @@ def build(reports, expected, bindings):
     rows = []
     boundaries = None
     for report in reports:
-        if report['epoch'] != EPOCH or report['source_qualified'] is not False or report['topology_certified'] is not False or report['unknown_adjudicated'] != 0:
+        if report['epoch'] != EPOCH or report['source_qualified'] is not False or report['topology_certified'] is not False or report['overpass_equivalence_certified'] is not False or type(report['unknown_adjudicated']) is not int or report['unknown_adjudicated'] != 0 or type(report['formal_unknown_relations']) is not int or report['formal_unknown_relations'] != len(expected):
             raise ValueError('Report epoch or acceptance guard differs')
         if boundaries is None:
             boundaries = report['country_boundaries']
@@ -58,7 +58,7 @@ def encoded(value):
     return (json.dumps(value,sort_keys=True,indent=2)+'\n').encode()
 
 def verify_gap_observations(gaps, rows):
-    if gaps['source_qualified'] is not False or gaps['history_gaps_resolved'] != 0 or gaps['overlap_conflicts']:
+    if gaps['source_qualified'] is not False or type(gaps['history_gaps_resolved']) is not int or gaps['history_gaps_resolved'] != 0 or gaps['overlap_conflicts']:
         raise ValueError('Gap acceptance or overlap guard differs')
     by_code={r['code']:r for r in gaps['rows']}
     if len(by_code)!=len(gaps['rows']) or len(by_code)!=gaps['objects']:
