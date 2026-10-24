@@ -880,10 +880,12 @@
       "change": "Preserve all original receipt bytes; archive its three exact Git sources, independently verify their original SHA256 values, replay the old32fixtures in an isolated directory, and bind/test current reader sources separately.",
       "regression": "Five negative provenance cases plus actual old32/current64fixtures; altered, missing or extra source bytes fail.",
       "pr": 424,
-      "verification_sha": null,
-      "verdict": "FIXED_LOCALLY_PENDING_EXACT_HEAD_CI",
+      "verification_sha": "bacba44f476183e84f7d2571a5e71c8c8527f8c8",
+      "verdict": "CLOSED_PASS",
       "evidence": [
-        "docs/evidence/osm-acq2c-typed-reader-20261023/historical-source-binding.json"
+        "docs/evidence/osm-acq2c-typed-reader-20261023/historical-source-binding.json",
+        "Actions40027645567: current64 plus original32fixtures PASS on exact424HEAD",
+        "Actions40042099422: native offline postmerge PASS on main33ec2ced6d6ebbd8a330f40b5da0f4c1b50cb934"
       ]
     }
   ],
@@ -1681,5 +1683,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-23T21:31:25.797Z"
+  "updated_at": "2026-10-24T00:24:01.312Z"
 }
