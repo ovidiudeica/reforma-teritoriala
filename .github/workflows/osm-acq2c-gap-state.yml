@@ -4,6 +4,9 @@ on:
     paths:
       - '.github/workflows/osm-acq2c-gap-state.yml'
       - 'scripts/audit/osm_acq2c_gap_state.py'
+      - 'scripts/audit/osm_acq2c_gap_cohort.py'
+      - 'scripts/audit/test_osm_acq2c_gap_cohort.py'
+      - 'docs/evidence/osm-acq2c-gap-cohort107-20261024/**'
       - 'scripts/audit/verify_osm_acq2c_gap_state.py'
       - 'scripts/audit/test_osm_acq2c_gap_state.py'
       - 'scripts/audit/test_osm_acq2c_gap_capsule.py'
@@ -21,6 +24,9 @@ on:
     paths:
       - '.github/workflows/osm-acq2c-gap-state.yml'
       - 'scripts/audit/osm_acq2c_gap_state.py'
+      - 'scripts/audit/osm_acq2c_gap_cohort.py'
+      - 'scripts/audit/test_osm_acq2c_gap_cohort.py'
+      - 'docs/evidence/osm-acq2c-gap-cohort107-20261024/**'
       - 'scripts/audit/verify_osm_acq2c_gap_state.py'
       - 'scripts/audit/test_osm_acq2c_gap_state.py'
       - 'scripts/audit/test_osm_acq2c_gap_capsule.py'
@@ -50,10 +56,37 @@ jobs:
       - name: Gap and adversarial real-capsule regressions
         run: |
           python scripts/audit/test_osm_acq2c_gap_state.py
+          python scripts/audit/test_osm_acq2c_gap_cohort.py
           python scripts/audit/test_osm_acq2c_gap_capsule.py
           python scripts/audit/test_osm_acq2c_evidence_paths.py
       - name: All102 observed gap states without continuity admission
         run: python scripts/audit/verify_osm_acq2c_gap_state.py --directory docs/evidence/osm-acq2c-gap-state-20261023
+      - name: Five additional observed histories; no continuity admission
+        run: |
+          python - <<'PY'
+          import json,gzip,pathlib,sys,hashlib
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_selected_epoch_replay import verify_manifest
+          from osm_acq2c_gap_cohort import extend_cohort
+          from osm_acq2c_gap_state import inspect_gap
+          old=pathlib.Path('docs/evidence/osm-acq2c-gap-state-20261023')
+          new=pathlib.Path('docs/evidence/osm-acq2c-gap-cohort107-20261024')
+          verify_manifest(old);verify_manifest(new)
+          prior=json.loads((old/'report.json').read_bytes());delta=json.loads((new/'delta.json').read_bytes())
+          assert hashlib.sha256((old/'manifest-sha256.json').read_bytes()).hexdigest()==delta['previous_cohort_manifest_sha256']
+          capsule=json.loads(gzip.decompress((new/'sparse-capsule.json.gz').read_bytes()))
+          codes={r['code'] for r in delta['rows']}
+          assert len(codes)==5 and set(capsule['histories'])==set(capsule['targets'])==set(capsule['current'])==codes
+          for row in delta['rows']:
+              c=row['code'];actual=inspect_gap(c,capsule['histories'][c],capsule['targets'][c],capsule['current'][c],capsule['epoch'])
+              assert actual=={k:v for k,v in row.items() if k not in ('missing_versions','missing_version_access')}
+          merged=extend_cohort(prior,delta)
+          assert merged['objects']==107 and merged['missing_observed_versions']==262
+          assert merged['source_qualified'] is False and merged['history_gaps_resolved']==0
+          assert sum(r['missing_observed_versions'] for r in delta['rows'])==12
+          assert all(r['current_observation']=='CURRENT_EQUALS_REPLAY_TARGET' for r in delta['rows'])
+          assert delta['private_originals_uploaded'] is False
+          PY
       - name: Exact recursive second-round input inventory
         run: |
           python - <<'PY'
