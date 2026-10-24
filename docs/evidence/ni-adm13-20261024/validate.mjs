@@ -1,0 +1,55 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+
+const read = name => JSON.parse(readFileSync(new URL(name, import.meta.url), 'utf8'));
+const d = read('originals-18.json');
+const l = read('local-register-coverage.json');
+const e = read('exceptions-followup.json');
+const upstream = read('../ni-adm12-20261024/law-effects-20.json');
+
+assert.equal(d.schema, 'ni-adm13-official-original-reconciliation-18-v1');
+assert.equal(d.cutoff, '2026-10-24');
+assert.equal(d.rows.length, 18);
+const enacted = upstream.law_rows.filter(x => x.operational_category === 'ENACTED_LAW_INDEXED');
+assert.equal(enacted.length, 18);
+assert.equal(new Set(d.rows.map(x => x.publication_id)).size, 18);
+assert.deepEqual(d.rows.map(x => x.publication_id).sort(), enacted.map(x => x.publication_id).sort());
+const archived = d.rows.filter(x => x.primary_original);
+const absent = d.rows.filter(x => !x.primary_original);
+assert.equal(archived.length, 4);
+assert.equal(absent.length, 14);
+assert.equal(d.totals.primary_binaries_newly_downloaded_in_this_stage, 0);
+assert.equal(d.totals.all_signed_primary_originals_2023_2026_certified, false);
+assert.equal(d.totals.qualified_digital_signatures_verified, 0);
+assert.equal(d.totals.per_act_geometric_promotions, 0);
+const expectedExisting = ['2026000086','2026000091','2026000438','2026000691'];
+assert.deepEqual(archived.map(x => x.publication_id).sort(), expectedExisting);
+for (const row of archived) {
+  const pdf = row.primary_original;
+  const path = pdf.repository_original_path;
+  assert.ok(path.startsWith('docs/evidence/ni-jur-independent-20261020/documentary/primary-review/'));
+  const localFile = new URL('../ni-jur-independent-20261020/documentary/primary-review/' + path.split('/').at(-1), import.meta.url);
+  const binary = readFileSync(localFile);
+  assert.equal(binary.length, pdf.bytes, 'PDF byte count mismatch: ' + row.publication_id);
+  assert.equal(createHash('sha256').update(binary).digest('hex'), pdf.prior_sha256, 'PDF SHA256 mismatch: ' + row.publication_id);
+  assert.equal(pdf.recapture_response_sha256, pdf.prior_sha256, 'Prior recapture drift: ' + row.publication_id);
+  assert.equal(row.exact_2026_10_24_territorial_administrative_effect_certified, false);
+  assert.equal(row.no_2026_de_facto_parent_promoted, true);
+}
+assert.ok(absent.every(x => x.primary_evidence_status === 'BLOCKED_SIGNED_PRIMARY_UNRECOVERED'));
+assert.equal(d.verdict.NI_ADM_1_3_FINAL_CERTIFICATION, 'BLOCKED_EVIDENCE');
+assert.equal(d.verdict.P9_1_ALLOWED, false);
+assert.equal(d.verdict.ACTUAL_MUTATION_ALLOWED, false);
+assert.equal(l.schema, 'ni-adm13-local-registry-discovery-v1');
+assert.equal(l.grigoriopol.folder_links.length, 14);
+assert.equal(new Set(l.grigoriopol.folder_links.map(x => x.url)).size, 14);
+assert.ok(l.grigoriopol.folder_links.every(x => x.public_top_level_opened && !x.child_year_contents_fully_enumerated));
+assert.ok(l.grigoriopol.folder_links.every(x => JSON.stringify(x.visible_year_directories) === JSON.stringify(['2025','2026'])));
+assert.equal(l.verdict.local_legislative_corpus_complete, false);
+assert.equal(e.total_inherited, 9);
+assert.equal(e.still_open, 8);
+assert.equal(e.all_closed, false);
+assert.equal(e.final_gate.P9_1, 'BLOCKED');
+assert.equal(e.final_gate.ACTUAL_modified, false);
+console.log('PASS NI-ADM.1.3: four original PDF SHA-256 checked, 14 still blocked, local archives incomplete.');
