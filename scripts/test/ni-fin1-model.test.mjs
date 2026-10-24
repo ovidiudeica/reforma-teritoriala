@@ -31,3 +31,12 @@ test('browser loader rejects corrupt body and missing resources',async()=>{
  await assert.rejects(fetchNistreniaAdministrativeModel(async path=>path.endsWith('manifest.json')?fetcher(path):{ok:true,text:async()=>'{"bad":true}'},webcrypto.subtle));
  await assert.rejects(fetchNistreniaAdministrativeModel(async()=>({ok:false}),webcrypto.subtle));
 });
+
+for(const [label,mutate] of [
+ ['HTML in OSM version',m=>m.geometry_resources[0].osm_version='<img src=x onerror=alert(1)>'],
+ ['invalid OSM timestamp',m=>m.geometry_resources[0].osm_timestamp='not a date'],
+ ['legal promotion in a single node',m=>m.nodes[1].legal_certification='CONFIRMED'],
+ ['contemporary year in a single node',m=>m.nodes[1].baseline_year=2026],
+ ['role alias rebound outside canonical resources',m=>m.compatibility_role_aliases['view-nistrenia-role-osm-r1216706']='osm-r1'],
+ ['missing original name list',m=>m.nodes[1].original_names=null]
+])test('reject '+label,()=>{const m=fixture();mutate(m);assert.throws(()=>validateNistreniaAdministrativeModel(m),/NI-FIN model/);});
