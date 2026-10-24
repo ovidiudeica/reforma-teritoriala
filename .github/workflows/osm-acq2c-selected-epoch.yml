@@ -28,6 +28,7 @@ jobs:
       - name: Exact epoch, overlap, deletion and negative manifest tests
         run: |
           python scripts/audit/test_osm_acq2c_selected_epoch_core.py
+          python scripts/audit/test_osm_acq2c_selected_epoch_store.py
           python scripts/audit/test_osm_acq2c_selected_epoch_loader.py
           python scripts/audit/test_osm_acq2c_evidence_paths.py
       - name: Verify complete public evidence manifest
