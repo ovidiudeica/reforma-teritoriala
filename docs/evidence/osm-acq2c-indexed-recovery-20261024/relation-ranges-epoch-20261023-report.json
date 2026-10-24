@@ -1,0 +1,40 @@
+{
+  "base_epoch": "2026-10-19T00:00:04+00:00",
+  "base_manifest_sha256": "f99616b623efd599bb577eb6037389d9a428edbb5a366c6ce6ba59a761d2653a",
+  "chain": {
+    "base_original_verified": false,
+    "diff_bytes": 227897803,
+    "diff_count": 45,
+    "limits": [
+      "GZIP/XML completion is checked during capture; this audit independently checks original byte hashes.",
+      "Base full-history original is still required.",
+      "No per-object temporal completeness, dependency closure, topology or spatial equivalence is certified."
+    ],
+    "selected_versions_observed": 2,
+    "source_qualified": false,
+    "transport_chain": "CONTIGUOUS_STATE_AND_DIFF_BYTES_VERIFIED",
+    "unknown_adjudicated": 0
+  },
+  "code_sha256": {
+    "work\\doc-supplement\\scripts\\audit\\osm_acq2c_selected_epoch_core.py": "902c12fc5b959e018d0f9d878231f8a90bdbae37fddbe4ae3fb26abfb3158a0a",
+    "work\\frontier_stream_replay.py": "fc6ccacade03e4685022789691e3999c3eda44629cd799cce0512bbf45c715d5",
+    "work\\replay-relation-ranges-epoch.py": "b1af0821569b49c8573113d9648ab412de2c732e98a21674c9aa1087fedb4d79"
+  },
+  "dependency_closure_certified": false,
+  "duplicate_observations_deduplicated": 0,
+  "gapped_ids": [],
+  "geometry_validated": false,
+  "global_sorting_verified": false,
+  "index_window_metadata_sha256": "a2524301519eb46e3dacae45c337da064c4826e91348d2ed4118f39cbcab6a0d",
+  "missing_ids": [],
+  "overpass_equivalence_certified": false,
+  "post_target_versions_retained": 0,
+  "publisher_receipt_crosscheck": "REQUIRES_INDEPENDENT_HUMAN_OR_SIGNED_VALIDATION",
+  "publisher_sort_order_used_as_unverified_assumption": true,
+  "requested": 3959,
+  "requested_ids_sha256": "957d71d23a3aac3c687f4328d7f74856029f7501c0f7951b50ad47737009e82f",
+  "source_qualified": false,
+  "target_epoch": "2026-10-20T20:23:47+00:00",
+  "unknown_adjudicated": 0,
+  "versions": 35844
+}

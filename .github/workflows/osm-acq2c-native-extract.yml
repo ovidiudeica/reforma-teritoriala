@@ -5,6 +5,9 @@ on:
       - '.github/workflows/osm-acq2c-native-extract.yml'
       - 'scripts/audit/osm_acq2c_native_extract.py'
       - 'scripts/audit/osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/osm_acq2c_relation_closure.py'
+      - 'scripts/audit/test_osm_acq2c_relation_closure.py'
+      - 'docs/evidence/osm-acq2c-indexed-recovery-20261024/**'
       - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
       - 'scripts/audit/osm_acq2c_reader_provenance.py'
       - 'scripts/audit/test_osm_acq2c_reader_provenance.py'
@@ -21,6 +24,9 @@ on:
       - '.github/workflows/osm-acq2c-native-extract.yml'
       - 'scripts/audit/osm_acq2c_native_extract.py'
       - 'scripts/audit/osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/osm_acq2c_relation_closure.py'
+      - 'scripts/audit/test_osm_acq2c_relation_closure.py'
+      - 'docs/evidence/osm-acq2c-indexed-recovery-20261024/**'
       - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
       - 'scripts/audit/osm_acq2c_reader_provenance.py'
       - 'scripts/audit/test_osm_acq2c_reader_provenance.py'
@@ -52,7 +58,25 @@ jobs:
           python scripts/audit/test_osm_acq2c_native_extract.py
           python scripts/audit/test_osm_acq2c_native_pbf.py
           python scripts/audit/test_osm_acq2c_pbf_blocks.py
+          python scripts/audit/test_osm_acq2c_relation_closure.py
           python scripts/audit/test_osm_acq2c_reader_provenance.py
+      - name: Verify indexed relation evidence remains partial
+        run: |
+          python - <<'PY'
+          import json,pathlib,sys
+          sys.path.insert(0,'scripts/audit')
+          from osm_acq2c_selected_epoch_replay import verify_manifest
+          root=pathlib.Path('docs/evidence/osm-acq2c-indexed-recovery-20261024')
+          verify_manifest(root)
+          report=json.loads((root/'summary.json').read_bytes())
+          assert report['relation_projection']['known_relations']==11301
+          assert report['relation_projection']['missing_relations']==0
+          assert report['formal_unknowns_remaining']==242
+          assert report['global_sorting_verified'] is False
+          assert report['source_qualified'] is False
+          assert report['all_dependency_closure_certified'] is False
+          assert report['independent_human_or_signed_validation_pending'] is True
+          PY
       - name: Verify typed-reader probe remains explicitly unqualified
         run: |
           python - <<'PY'
