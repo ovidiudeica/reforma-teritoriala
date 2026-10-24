@@ -1,0 +1,61 @@
+{
+  "schema": "ni-adm12-local-evidence-v1",
+  "cutoff": "2026-10-24",
+  "portals": [
+    {
+      "name": "Grigoriopol",
+      "url": "https://grig-rsnd.idknet.com/home/sel-sovet",
+      "observed": "PAGE_READABLE_13_RURAL_LINKS_PLUS_MAYAK"
+    },
+    {
+      "name": "Ribnita",
+      "url": "https://rybnsovet.idknet.com/",
+      "observed": "PAGE_READABLE_LOCAL_RESOLUTIONS"
+    },
+    {
+      "name": "Bender",
+      "url": "https://benderygs.gospmr.org/?cat=4",
+      "observed": "PAGE_READABLE_CITY_COUNCIL"
+    },
+    {
+      "name": "Dubasari",
+      "url": "https://dubossary.ru/sovet/",
+      "observed": "FETCH_UNAVAILABLE"
+    },
+    {
+      "name": "Slobozia",
+      "url": "https://slobodzeya.org/",
+      "observed": "FETCH_UNAVAILABLE"
+    },
+    {
+      "name": "Tiraspol",
+      "url": "https://tirgorsovet.org/",
+      "observed": "FETCH_UNAVAILABLE"
+    },
+    {
+      "name": "Camenca",
+      "url": "https://kamsovet.gospmr.org/",
+      "observed": "FETCH_TIMEOUT"
+    }
+  ],
+  "regulation_example": {
+    "issuer": "Ribnita district and city council",
+    "source": "https://rybnsovet.idknet.com/reglament-rybnickogo-gorodskogo-i-rajonnogo-soveta-narodnyx-deputatov",
+    "decision": "2026-02-13 no.3/1",
+    "archive_clauses": [
+      "74.3",
+      "74.4"
+    ],
+    "publication_clauses": [
+      "75.1",
+      "75.2"
+    ],
+    "default_normative_days_after_publication": 7,
+    "exception_if_another_date_stated": true,
+    "limit": "This norm belongs to this council only; its full annual published and archival corpus is not certified."
+  },
+  "all_local_originals_collected": false,
+  "all_annual_editions_reviewed": false,
+  "verified_de_facto_territorial_boundaries": false,
+  "verdict": "NONEXHAUSTIVE_LOCAL_SOURCE_INSPECTION"
+}
