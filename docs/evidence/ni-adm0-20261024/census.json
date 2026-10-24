@@ -1,0 +1,4856 @@
+{
+  "schema": "ni-adm0-2023-annex-de-facto-claim-census-v1",
+  "snapshot": "2026-10-24",
+  "base_main_sha": "fe77df8f38c1e6195220422a18264f799065a41e",
+  "scope": "COMPLETE_2023_RUSSIAN_ANNEX_NOT_CURRENT_2026_LEGAL_EXHAUSTIVENESS",
+  "legal_acceptance": "BLOCKED_EVIDENCE",
+  "source": {
+    "annex_path": "docs/evidence/ni-jur-independent-20261020/documentary/PMR-ATD-ANNEX1-133268-text.json",
+    "annex_blob_sha": "011649d5376eac5cb3c8365f7070ffcf0dbf9adb",
+    "annex_primary_sha256": "43b8270b4e04c8922af551a72dc494d7bc02628fe827a8ec28bb2802a9f94b5b",
+    "annex_russian_indices": [
+      11,
+      257
+    ],
+    "NI_JUR_path": "docs/evidence/ni-jur-review-20261021/review.json",
+    "NI_JUR_blob_sha": "df83770c48cf4f37f48a56b94ca84c814fac9645",
+    "navigation_path": "public/data/p909-nistrenia-osm-navigation.json",
+    "navigation_blob_sha": "01f3bd94d80625ccecf09385653a8a45d2df0000"
+  },
+  "counts": {
+    "top_level": 9,
+    "raions": 5,
+    "independent_cities": 4,
+    "rural_councils": 74,
+    "place_mentions": 162,
+    "place_types": {
+      "город": 7,
+      "село": 142,
+      "город-спутник": 1,
+      "поселок": 12
+    },
+    "osm_roles": 85,
+    "NI_JUR_2023_references": 95,
+    "NI_JUR_2023_reference_kinds": {
+      "LOCALITY": 90,
+      "RAYON_CENTRE_REFERENCE": 5
+    },
+    "NI_JUR_match_classes": {
+      "UNIQUE_NAME_2023": 69,
+      "NO_EXACT_2023_NAME": 1,
+      "CURATED_ALIAS_POTENTIAL_MATCH": 4,
+      "HOMONYM_MULTIPLE_ENTRIES_2023": 11
+    }
+  },
+  "upper_units": [
+    {
+      "id": "unit-11",
+      "type": "independent_city",
+      "name_ru": "Бендеры",
+      "annex_index": 11
+    },
+    {
+      "id": "unit-15",
+      "type": "independent_city",
+      "name_ru": "Дубоссары",
+      "annex_index": 15
+    },
+    {
+      "id": "unit-16",
+      "type": "independent_city",
+      "name_ru": "Рыбница",
+      "annex_index": 16
+    },
+    {
+      "id": "unit-17",
+      "type": "independent_city",
+      "name_ru": "Тирасполь",
+      "annex_index": 17
+    },
+    {
+      "id": "unit-22",
+      "type": "rayon",
+      "name_ru": "Григориопольский район",
+      "annex_index": 22
+    },
+    {
+      "id": "unit-66",
+      "type": "rayon",
+      "name_ru": "Дубоссарский район",
+      "annex_index": 66
+    },
+    {
+      "id": "unit-108",
+      "type": "rayon",
+      "name_ru": "Каменский район",
+      "annex_index": 108
+    },
+    {
+      "id": "unit-145",
+      "type": "rayon",
+      "name_ru": "Рыбницкий район",
+      "annex_index": 145
+    },
+    {
+      "id": "unit-216",
+      "type": "rayon",
+      "name_ru": "Слободзейский район",
+      "annex_index": 216
+    }
+  ],
+  "rayon_rollup": [
+    {
+      "id": "unit-22",
+      "type": "rayon",
+      "name_ru": "Григориопольский район",
+      "annex_index": 22,
+      "council_count": 13,
+      "place_count": 29
+    },
+    {
+      "id": "unit-66",
+      "type": "rayon",
+      "name_ru": "Дубоссарский район",
+      "annex_index": 66,
+      "council_count": 13,
+      "place_count": 27
+    },
+    {
+      "id": "unit-108",
+      "type": "rayon",
+      "name_ru": "Каменский район",
+      "annex_index": 108,
+      "council_count": 12,
+      "place_count": 23
+    },
+    {
+      "id": "unit-145",
+      "type": "rayon",
+      "name_ru": "Рыбницкий район",
+      "annex_index": 145,
+      "council_count": 23,
+      "place_count": 46
+    },
+    {
+      "id": "unit-216",
+      "type": "rayon",
+      "name_ru": "Слободзейский район",
+      "annex_index": 216,
+      "council_count": 13,
+      "place_count": 27
+    }
+  ],
+  "independent_city_rollup": [
+    {
+      "id": "unit-11",
+      "type": "independent_city",
+      "name_ru": "Бендеры",
+      "annex_index": 11,
+      "place_count": 4
+    },
+    {
+      "id": "unit-15",
+      "type": "independent_city",
+      "name_ru": "Дубоссары",
+      "annex_index": 15,
+      "place_count": 1
+    },
+    {
+      "id": "unit-16",
+      "type": "independent_city",
+      "name_ru": "Рыбница",
+      "annex_index": 16,
+      "place_count": 1
+    },
+    {
+      "id": "unit-17",
+      "type": "independent_city",
+      "name_ru": "Тирасполь",
+      "annex_index": 17,
+      "place_count": 4
+    }
+  ],
+  "councils": [
+    {
+      "id": "council-29",
+      "name_ru": "Буторский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 29
+    },
+    {
+      "id": "council-32",
+      "name_ru": "Бычковский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 32
+    },
+    {
+      "id": "council-35",
+      "name_ru": "Винограднянский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 35
+    },
+    {
+      "id": "council-37",
+      "name_ru": "Глинойский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 37
+    },
+    {
+      "id": "council-39",
+      "name_ru": "Гыртопский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 39
+    },
+    {
+      "id": "council-42",
+      "name_ru": "Кармановский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 42
+    },
+    {
+      "id": "council-47",
+      "name_ru": "Колосовский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 47
+    },
+    {
+      "id": "council-51",
+      "name_ru": "Красногорский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 51
+    },
+    {
+      "id": "council-53",
+      "name_ru": "Малаештский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 53
+    },
+    {
+      "id": "council-56",
+      "name_ru": "Спейский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 56
+    },
+    {
+      "id": "council-58",
+      "name_ru": "Ташлыкский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 58
+    },
+    {
+      "id": "council-60",
+      "name_ru": "Тейский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 60
+    },
+    {
+      "id": "council-63",
+      "name_ru": "Шипкинский сельсовет",
+      "parent_id": "unit-22",
+      "annex_index": 63
+    },
+    {
+      "id": "council-68",
+      "name_ru": "Дзержинский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 68
+    },
+    {
+      "id": "council-70",
+      "name_ru": "Дойбанский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 70
+    },
+    {
+      "id": "council-74",
+      "name_ru": "Дороцкий сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 74
+    },
+    {
+      "id": "council-76",
+      "name_ru": "Дубовский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 76
+    },
+    {
+      "id": "council-79",
+      "name_ru": "Гармацкий сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 79
+    },
+    {
+      "id": "council-81",
+      "name_ru": "Гоянский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 81
+    },
+    {
+      "id": "council-84",
+      "name_ru": "Кочиерский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 84
+    },
+    {
+      "id": "council-88",
+      "name_ru": "Кошницкий сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 88
+    },
+    {
+      "id": "council-91",
+      "name_ru": "Красновиноградарский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 91
+    },
+    {
+      "id": "council-97",
+      "name_ru": "Ново-Комиссаровский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 97
+    },
+    {
+      "id": "council-102",
+      "name_ru": "Пырытский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 102
+    },
+    {
+      "id": "council-104",
+      "name_ru": "Роговский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 104
+    },
+    {
+      "id": "council-106",
+      "name_ru": "Цыбулевский сельсовет",
+      "parent_id": "unit-66",
+      "annex_index": 106
+    },
+    {
+      "id": "council-112",
+      "name_ru": "Валя-Адынкский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 112
+    },
+    {
+      "id": "council-115",
+      "name_ru": "Грушковский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 115
+    },
+    {
+      "id": "council-118",
+      "name_ru": "Катериновский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 118
+    },
+    {
+      "id": "council-121",
+      "name_ru": "Краснооктябрьский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 121
+    },
+    {
+      "id": "council-124",
+      "name_ru": "Кузьминский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 124
+    },
+    {
+      "id": "council-127",
+      "name_ru": "Окницкий сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 127
+    },
+    {
+      "id": "council-129",
+      "name_ru": "Подойменский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 129
+    },
+    {
+      "id": "council-132",
+      "name_ru": "Рашковский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 132
+    },
+    {
+      "id": "council-135",
+      "name_ru": "Ротарский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 135
+    },
+    {
+      "id": "council-139",
+      "name_ru": "Севериновский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 139
+    },
+    {
+      "id": "council-141",
+      "name_ru": "Слобода-Рашковский сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 141
+    },
+    {
+      "id": "council-143",
+      "name_ru": "Хрустовской сельсовет",
+      "parent_id": "unit-108",
+      "annex_index": 143
+    },
+    {
+      "id": "council-147",
+      "name_ru": "Андреевский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 147
+    },
+    {
+      "id": "council-151",
+      "name_ru": "Белочинский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 151
+    },
+    {
+      "id": "council-153",
+      "name_ru": "Большемолокишский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 153
+    },
+    {
+      "id": "council-155",
+      "name_ru": "Броштянский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 155
+    },
+    {
+      "id": "council-157",
+      "name_ru": "Бутучанский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 157
+    },
+    {
+      "id": "council-159",
+      "name_ru": "Вадатурковский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 159
+    },
+    {
+      "id": "council-161",
+      "name_ru": "Воронковский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 161
+    },
+    {
+      "id": "council-165",
+      "name_ru": "Выхватинецкий сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 165
+    },
+    {
+      "id": "council-168",
+      "name_ru": "Гарабский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 168
+    },
+    {
+      "id": "council-170",
+      "name_ru": "Гидиримский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 170
+    },
+    {
+      "id": "council-172",
+      "name_ru": "Ержовский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 172
+    },
+    {
+      "id": "council-175",
+      "name_ru": "Журский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 175
+    },
+    {
+      "id": "council-177",
+      "name_ru": "Колбаснянский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 177
+    },
+    {
+      "id": "council-181",
+      "name_ru": "Красненьский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 181
+    },
+    {
+      "id": "council-185",
+      "name_ru": "Ленинский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 185
+    },
+    {
+      "id": "council-190",
+      "name_ru": "Мало-Молокишский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 190
+    },
+    {
+      "id": "council-192",
+      "name_ru": "Михайловский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 192
+    },
+    {
+      "id": "council-194",
+      "name_ru": "Мокрянский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 194
+    },
+    {
+      "id": "council-199",
+      "name_ru": "Плотьянский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 199
+    },
+    {
+      "id": "council-201",
+      "name_ru": "Попенкский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 201
+    },
+    {
+      "id": "council-206",
+      "name_ru": "Советский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 206
+    },
+    {
+      "id": "council-209",
+      "name_ru": "Строенецкий сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 209
+    },
+    {
+      "id": "council-211",
+      "name_ru": "Ульманский сельсовет",
+      "parent_id": "unit-145",
+      "annex_index": 211
+    },
+    {
+      "id": "council-222",
+      "name_ru": "Ближне-Хуторской сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 222
+    },
+    {
+      "id": "council-224",
+      "name_ru": "Владимировский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 224
+    },
+    {
+      "id": "council-228",
+      "name_ru": "Глинойский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 228
+    },
+    {
+      "id": "council-230",
+      "name_ru": "Карагашский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 230
+    },
+    {
+      "id": "council-232",
+      "name_ru": "Кицканский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 232
+    },
+    {
+      "id": "council-235",
+      "name_ru": "Копанский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 235
+    },
+    {
+      "id": "council-237",
+      "name_ru": "Коротнянский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 237
+    },
+    {
+      "id": "council-239",
+      "name_ru": "Незавертайловский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 239
+    },
+    {
+      "id": "council-241",
+      "name_ru": "Парканский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 241
+    },
+    {
+      "id": "council-243",
+      "name_ru": "Суклейский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 243
+    },
+    {
+      "id": "council-245",
+      "name_ru": "Терновский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 245
+    },
+    {
+      "id": "council-247",
+      "name_ru": "Фрунзенский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 247
+    },
+    {
+      "id": "council-255",
+      "name_ru": "Чобручский сельсовет",
+      "parent_id": "unit-216",
+      "annex_index": 255
+    }
+  ],
+  "place_mentions": [
+    {
+      "id": "place-11",
+      "name_ru": "Бендеры",
+      "kind_ru": "город",
+      "parent_id": null,
+      "upper_id": "unit-11",
+      "annex_index": 11,
+      "annex_text": "а) город Бендеры:",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-12",
+      "name_ru": "Варница",
+      "kind_ru": "село",
+      "parent_id": "unit-11",
+      "upper_id": "unit-11",
+      "annex_index": 12,
+      "annex_text": "1) село Варница;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-13",
+      "name_ru": "Гыска",
+      "kind_ru": "село",
+      "parent_id": "unit-11",
+      "upper_id": "unit-11",
+      "annex_index": 13,
+      "annex_text": "2) село Гыска;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-14",
+      "name_ru": "Протягайловка",
+      "kind_ru": "село",
+      "parent_id": "unit-11",
+      "upper_id": "unit-11",
+      "annex_index": 14,
+      "annex_text": "3) село Протягайловка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-15",
+      "name_ru": "Дубоссары",
+      "kind_ru": "город",
+      "parent_id": null,
+      "upper_id": "unit-15",
+      "annex_index": 15,
+      "annex_text": "б) город Дубоссары;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-16",
+      "name_ru": "Рыбница",
+      "kind_ru": "город",
+      "parent_id": null,
+      "upper_id": "unit-16",
+      "annex_index": 16,
+      "annex_text": "в) город Рыбница;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-17",
+      "name_ru": "Тирасполь",
+      "kind_ru": "город",
+      "parent_id": null,
+      "upper_id": "unit-17",
+      "annex_index": 17,
+      "annex_text": "г) город Тирасполь:",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-18",
+      "name_ru": "Днестровск",
+      "kind_ru": "город-спутник",
+      "parent_id": "unit-17",
+      "upper_id": "unit-17",
+      "annex_index": 18,
+      "annex_text": "1) город-спутник Днестровск;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-19",
+      "name_ru": "Ново-Тираспольский",
+      "kind_ru": "поселок",
+      "parent_id": "unit-17",
+      "upper_id": "unit-17",
+      "annex_index": 19,
+      "annex_text": "2) поселок Ново-Тираспольский;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-20",
+      "name_ru": "Кременчуг",
+      "kind_ru": "село",
+      "parent_id": "unit-17",
+      "upper_id": "unit-17",
+      "annex_index": 20,
+      "annex_text": "3) село Кременчуг.",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-24",
+      "name_ru": "Григориополь",
+      "kind_ru": "город",
+      "parent_id": "unit-22",
+      "upper_id": "unit-22",
+      "annex_index": 24,
+      "annex_text": "1) город Григориополь:",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-25",
+      "name_ru": "Делакеу",
+      "kind_ru": "село",
+      "parent_id": "place-24",
+      "upper_id": "unit-22",
+      "annex_index": 25,
+      "annex_text": "а) село Делакеу;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-26",
+      "name_ru": "Красное",
+      "kind_ru": "село",
+      "parent_id": "place-24",
+      "upper_id": "unit-22",
+      "annex_index": 26,
+      "annex_text": "б) село Красное;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-27",
+      "name_ru": "Красная Горка",
+      "kind_ru": "село",
+      "parent_id": "place-24",
+      "upper_id": "unit-22",
+      "annex_index": 27,
+      "annex_text": "в) село Красная Горка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-28",
+      "name_ru": "Маяк",
+      "kind_ru": "поселок",
+      "parent_id": "place-24",
+      "upper_id": "unit-22",
+      "annex_index": 28,
+      "annex_text": "2) поселок Маяк;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-30",
+      "name_ru": "Бутор",
+      "kind_ru": "село",
+      "parent_id": "council-29",
+      "upper_id": "unit-22",
+      "annex_index": 30,
+      "annex_text": "а) село Бутор – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-31",
+      "name_ru": "Индия",
+      "kind_ru": "село",
+      "parent_id": "council-29",
+      "upper_id": "unit-22",
+      "annex_index": 31,
+      "annex_text": "б) село Индия;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-33",
+      "name_ru": "Бычок",
+      "kind_ru": "село",
+      "parent_id": "council-32",
+      "upper_id": "unit-22",
+      "annex_index": 33,
+      "annex_text": "а) село Бычок – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-34",
+      "name_ru": "Ново-Владимировка",
+      "kind_ru": "село",
+      "parent_id": "council-32",
+      "upper_id": "unit-22",
+      "annex_index": 34,
+      "annex_text": "б) село Ново-Владимировка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-36",
+      "name_ru": "Виноградное",
+      "kind_ru": "село",
+      "parent_id": "council-35",
+      "upper_id": "unit-22",
+      "annex_index": 36,
+      "annex_text": "село Виноградное – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-38",
+      "name_ru": "Глиное",
+      "kind_ru": "поселок",
+      "parent_id": "council-37",
+      "upper_id": "unit-22",
+      "annex_index": 38,
+      "annex_text": "поселок Глиное – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-40",
+      "name_ru": "Гыртоп",
+      "kind_ru": "село",
+      "parent_id": "council-39",
+      "upper_id": "unit-22",
+      "annex_index": 40,
+      "annex_text": "а) село Гыртоп – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-41",
+      "name_ru": "Мариян",
+      "kind_ru": "село",
+      "parent_id": "council-39",
+      "upper_id": "unit-22",
+      "annex_index": 41,
+      "annex_text": "б) село Мариян;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-43",
+      "name_ru": "Карманово",
+      "kind_ru": "поселок",
+      "parent_id": "council-42",
+      "upper_id": "unit-22",
+      "annex_index": 43,
+      "annex_text": "а) поселок Карманово – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-44",
+      "name_ru": "Котовка",
+      "kind_ru": "село",
+      "parent_id": "council-42",
+      "upper_id": "unit-22",
+      "annex_index": 44,
+      "annex_text": "б) село Котовка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-45",
+      "name_ru": "Мочаровка",
+      "kind_ru": "село",
+      "parent_id": "council-42",
+      "upper_id": "unit-22",
+      "annex_index": 45,
+      "annex_text": "в) село Мочаровка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-46",
+      "name_ru": "Федосеевка",
+      "kind_ru": "село",
+      "parent_id": "council-42",
+      "upper_id": "unit-22",
+      "annex_index": 46,
+      "annex_text": "г) село Федосеевка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-48",
+      "name_ru": "Колосово",
+      "kind_ru": "поселок",
+      "parent_id": "council-47",
+      "upper_id": "unit-22",
+      "annex_index": 48,
+      "annex_text": "а) поселок Колосово – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-49",
+      "name_ru": "Красная Бессарабия",
+      "kind_ru": "село",
+      "parent_id": "council-47",
+      "upper_id": "unit-22",
+      "annex_index": 49,
+      "annex_text": "б) село Красная Бессарабия;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-50",
+      "name_ru": "Победа",
+      "kind_ru": "село",
+      "parent_id": "council-47",
+      "upper_id": "unit-22",
+      "annex_index": 50,
+      "annex_text": "в) село Победа;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-52",
+      "name_ru": "Красногорка",
+      "kind_ru": "село",
+      "parent_id": "council-51",
+      "upper_id": "unit-22",
+      "annex_index": 52,
+      "annex_text": "село Красногорка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-54",
+      "name_ru": "Малаешты",
+      "kind_ru": "село",
+      "parent_id": "council-53",
+      "upper_id": "unit-22",
+      "annex_index": 54,
+      "annex_text": "а) село Малаешты – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-55",
+      "name_ru": "Черница",
+      "kind_ru": "село",
+      "parent_id": "council-53",
+      "upper_id": "unit-22",
+      "annex_index": 55,
+      "annex_text": "б) село Черница;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-57",
+      "name_ru": "Спея",
+      "kind_ru": "село",
+      "parent_id": "council-56",
+      "upper_id": "unit-22",
+      "annex_index": 57,
+      "annex_text": "село Спея – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-59",
+      "name_ru": "Ташлык",
+      "kind_ru": "село",
+      "parent_id": "council-58",
+      "upper_id": "unit-22",
+      "annex_index": 59,
+      "annex_text": "село Ташлык – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-61",
+      "name_ru": "Тея",
+      "kind_ru": "село",
+      "parent_id": "council-60",
+      "upper_id": "unit-22",
+      "annex_index": 61,
+      "annex_text": "а) село Тея – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-62",
+      "name_ru": "Токмазея",
+      "kind_ru": "село",
+      "parent_id": "council-60",
+      "upper_id": "unit-22",
+      "annex_index": 62,
+      "annex_text": "б) село Токмазея;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-64",
+      "name_ru": "Веселое",
+      "kind_ru": "село",
+      "parent_id": "council-63",
+      "upper_id": "unit-22",
+      "annex_index": 64,
+      "annex_text": "а) село Веселое;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-65",
+      "name_ru": "Шипка",
+      "kind_ru": "село",
+      "parent_id": "council-63",
+      "upper_id": "unit-22",
+      "annex_index": 65,
+      "annex_text": "б) село Шипка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-69",
+      "name_ru": "Дзержинское",
+      "kind_ru": "село",
+      "parent_id": "council-68",
+      "upper_id": "unit-66",
+      "annex_index": 69,
+      "annex_text": "село Дзержинское – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-71",
+      "name_ru": "Дойбаны I",
+      "kind_ru": "село",
+      "parent_id": "council-70",
+      "upper_id": "unit-66",
+      "annex_index": 71,
+      "annex_text": "а) село Дойбаны I – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-72",
+      "name_ru": "Дойбаны II",
+      "kind_ru": "село",
+      "parent_id": "council-70",
+      "upper_id": "unit-66",
+      "annex_index": 72,
+      "annex_text": "б) село Дойбаны II;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-73",
+      "name_ru": "Койково",
+      "kind_ru": "село",
+      "parent_id": "council-70",
+      "upper_id": "unit-66",
+      "annex_index": 73,
+      "annex_text": "в) село Койково;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-75",
+      "name_ru": "Дороцкое",
+      "kind_ru": "село",
+      "parent_id": "council-74",
+      "upper_id": "unit-66",
+      "annex_index": 75,
+      "annex_text": "село Дороцкое – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-77",
+      "name_ru": "Дубово",
+      "kind_ru": "село",
+      "parent_id": "council-76",
+      "upper_id": "unit-66",
+      "annex_index": 77,
+      "annex_text": "а) село Дубово – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-78",
+      "name_ru": "Новые Гояны",
+      "kind_ru": "село",
+      "parent_id": "council-76",
+      "upper_id": "unit-66",
+      "annex_index": 78,
+      "annex_text": "б) село Новые Гояны;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-80",
+      "name_ru": "Гармацкое",
+      "kind_ru": "село",
+      "parent_id": "council-79",
+      "upper_id": "unit-66",
+      "annex_index": 80,
+      "annex_text": "село Гармацкое – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-82",
+      "name_ru": "Гояны",
+      "kind_ru": "село",
+      "parent_id": "council-81",
+      "upper_id": "unit-66",
+      "annex_index": 82,
+      "annex_text": "а) село Гояны – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-83",
+      "name_ru": "Ягорлык",
+      "kind_ru": "село",
+      "parent_id": "council-81",
+      "upper_id": "unit-66",
+      "annex_index": 83,
+      "annex_text": "б) село Ягорлык;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-85",
+      "name_ru": "Васильевка",
+      "kind_ru": "село",
+      "parent_id": "council-84",
+      "upper_id": "unit-66",
+      "annex_index": 85,
+      "annex_text": "а) село Васильевка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-86",
+      "name_ru": "Кочиеры",
+      "kind_ru": "село",
+      "parent_id": "council-84",
+      "upper_id": "unit-66",
+      "annex_index": 86,
+      "annex_text": "б) село Кочиеры – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-87",
+      "name_ru": "Новая Моловата",
+      "kind_ru": "село",
+      "parent_id": "council-84",
+      "upper_id": "unit-66",
+      "annex_index": 87,
+      "annex_text": "в) село Новая Моловата;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-89",
+      "name_ru": "Кошница",
+      "kind_ru": "село",
+      "parent_id": "council-88",
+      "upper_id": "unit-66",
+      "annex_index": 89,
+      "annex_text": "а) село Кошница – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-90",
+      "name_ru": "Погребя",
+      "kind_ru": "село",
+      "parent_id": "council-88",
+      "upper_id": "unit-66",
+      "annex_index": 90,
+      "annex_text": "б) село Погребя;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-92",
+      "name_ru": "Афанасьевка",
+      "kind_ru": "село",
+      "parent_id": "council-91",
+      "upper_id": "unit-66",
+      "annex_index": 92,
+      "annex_text": "а) село Афанасьевка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-93",
+      "name_ru": "Калиновка",
+      "kind_ru": "село",
+      "parent_id": "council-91",
+      "upper_id": "unit-66",
+      "annex_index": 93,
+      "annex_text": "б) село Калиновка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-94",
+      "name_ru": "Красный Виноградарь",
+      "kind_ru": "село",
+      "parent_id": "council-91",
+      "upper_id": "unit-66",
+      "annex_index": 94,
+      "annex_text": "в) село Красный Виноградарь – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-95",
+      "name_ru": "Новая Александровка",
+      "kind_ru": "село",
+      "parent_id": "council-91",
+      "upper_id": "unit-66",
+      "annex_index": 95,
+      "annex_text": "г) село Новая Александровка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-96",
+      "name_ru": "Новая Лунга",
+      "kind_ru": "село",
+      "parent_id": "council-91",
+      "upper_id": "unit-66",
+      "annex_index": 96,
+      "annex_text": "д) село Новая Лунга;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-98",
+      "name_ru": "Боска",
+      "kind_ru": "село",
+      "parent_id": "council-97",
+      "upper_id": "unit-66",
+      "annex_index": 98,
+      "annex_text": "а) село Боска;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-99",
+      "name_ru": "Ново-Комиссаровка",
+      "kind_ru": "село",
+      "parent_id": "council-97",
+      "upper_id": "unit-66",
+      "annex_index": 99,
+      "annex_text": "б) село Ново-Комиссаровка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-100",
+      "name_ru": "Новая Кошница",
+      "kind_ru": "село",
+      "parent_id": "council-97",
+      "upper_id": "unit-66",
+      "annex_index": 100,
+      "annex_text": "в) село Новая Кошница;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-101",
+      "name_ru": "Новая Погребя",
+      "kind_ru": "село",
+      "parent_id": "council-97",
+      "upper_id": "unit-66",
+      "annex_index": 101,
+      "annex_text": "г) село Новая Погребя;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-103",
+      "name_ru": "Пырыта",
+      "kind_ru": "село",
+      "parent_id": "council-102",
+      "upper_id": "unit-66",
+      "annex_index": 103,
+      "annex_text": "село Пырыта – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-105",
+      "name_ru": "Роги",
+      "kind_ru": "село",
+      "parent_id": "council-104",
+      "upper_id": "unit-66",
+      "annex_index": 105,
+      "annex_text": "село Роги – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-107",
+      "name_ru": "Цыбулевка",
+      "kind_ru": "село",
+      "parent_id": "council-106",
+      "upper_id": "unit-66",
+      "annex_index": 107,
+      "annex_text": "село Цыбулевка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-110",
+      "name_ru": "Каменка",
+      "kind_ru": "город",
+      "parent_id": "unit-108",
+      "upper_id": "unit-108",
+      "annex_index": 110,
+      "annex_text": "1) город Каменка:",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-111",
+      "name_ru": "Солнечный",
+      "kind_ru": "поселок",
+      "parent_id": "place-110",
+      "upper_id": "unit-108",
+      "annex_index": 111,
+      "annex_text": "поселок Солнечный;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-113",
+      "name_ru": "Валя-Адынка",
+      "kind_ru": "село",
+      "parent_id": "council-112",
+      "upper_id": "unit-108",
+      "annex_index": 113,
+      "annex_text": "а) село Валя-Адынка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-114",
+      "name_ru": "Константиновка",
+      "kind_ru": "село",
+      "parent_id": "council-112",
+      "upper_id": "unit-108",
+      "annex_index": 114,
+      "annex_text": "б) село Константиновка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-116",
+      "name_ru": "Грушка",
+      "kind_ru": "село",
+      "parent_id": "council-115",
+      "upper_id": "unit-108",
+      "annex_index": 116,
+      "annex_text": "а) село Грушка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-117",
+      "name_ru": "Фрунзовка",
+      "kind_ru": "село",
+      "parent_id": "council-115",
+      "upper_id": "unit-108",
+      "annex_index": 117,
+      "annex_text": "б) село Фрунзовка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-119",
+      "name_ru": "Катериновка",
+      "kind_ru": "село",
+      "parent_id": "council-118",
+      "upper_id": "unit-108",
+      "annex_index": 119,
+      "annex_text": "а) село Катериновка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-120",
+      "name_ru": "Садки",
+      "kind_ru": "село",
+      "parent_id": "council-118",
+      "upper_id": "unit-108",
+      "annex_index": 120,
+      "annex_text": "б) село Садки;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-122",
+      "name_ru": "Александровка",
+      "kind_ru": "село",
+      "parent_id": "council-121",
+      "upper_id": "unit-108",
+      "annex_index": 122,
+      "annex_text": "а) село Александровка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-123",
+      "name_ru": "Красный Октябрь",
+      "kind_ru": "село",
+      "parent_id": "council-121",
+      "upper_id": "unit-108",
+      "annex_index": 123,
+      "annex_text": "б) село Красный Октябрь – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-125",
+      "name_ru": "Войтовка",
+      "kind_ru": "село",
+      "parent_id": "council-124",
+      "upper_id": "unit-108",
+      "annex_index": 125,
+      "annex_text": "а) село Войтовка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-126",
+      "name_ru": "Кузьмин",
+      "kind_ru": "село",
+      "parent_id": "council-124",
+      "upper_id": "unit-108",
+      "annex_index": 126,
+      "annex_text": "б) село Кузьмин – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-128",
+      "name_ru": "Окница",
+      "kind_ru": "село",
+      "parent_id": "council-127",
+      "upper_id": "unit-108",
+      "annex_index": 128,
+      "annex_text": "село Окница – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-130",
+      "name_ru": "Подойма",
+      "kind_ru": "село",
+      "parent_id": "council-129",
+      "upper_id": "unit-108",
+      "annex_index": 130,
+      "annex_text": "а) село Подойма – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-131",
+      "name_ru": "Подоймица",
+      "kind_ru": "село",
+      "parent_id": "council-129",
+      "upper_id": "unit-108",
+      "annex_index": 131,
+      "annex_text": "б) село Подоймица;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-133",
+      "name_ru": "Рашков",
+      "kind_ru": "село",
+      "parent_id": "council-132",
+      "upper_id": "unit-108",
+      "annex_index": 133,
+      "annex_text": "а) село Рашков – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-134",
+      "name_ru": "Янтарное",
+      "kind_ru": "село",
+      "parent_id": "council-132",
+      "upper_id": "unit-108",
+      "annex_index": 134,
+      "annex_text": "б) село Янтарное;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-136",
+      "name_ru": "Боданы",
+      "kind_ru": "село",
+      "parent_id": "council-135",
+      "upper_id": "unit-108",
+      "annex_index": 136,
+      "annex_text": "а) село Боданы;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-137",
+      "name_ru": "Ротар",
+      "kind_ru": "село",
+      "parent_id": "council-135",
+      "upper_id": "unit-108",
+      "annex_index": 137,
+      "annex_text": "б) село Ротар – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-138",
+      "name_ru": "Соколовка",
+      "kind_ru": "село",
+      "parent_id": "council-135",
+      "upper_id": "unit-108",
+      "annex_index": 138,
+      "annex_text": "в) село Соколовка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-140",
+      "name_ru": "Севериновка",
+      "kind_ru": "село",
+      "parent_id": "council-139",
+      "upper_id": "unit-108",
+      "annex_index": 140,
+      "annex_text": "село Севериновка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-142",
+      "name_ru": "Слобода-Рашково",
+      "kind_ru": "село",
+      "parent_id": "council-141",
+      "upper_id": "unit-108",
+      "annex_index": 142,
+      "annex_text": "село Слобода-Рашково – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-144",
+      "name_ru": "Хрустовая",
+      "kind_ru": "село",
+      "parent_id": "council-143",
+      "upper_id": "unit-108",
+      "annex_index": 144,
+      "annex_text": "село Хрустовая – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-148",
+      "name_ru": "Андреевка",
+      "kind_ru": "село",
+      "parent_id": "council-147",
+      "upper_id": "unit-145",
+      "annex_index": 148,
+      "annex_text": "а) село Андреевка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-149",
+      "name_ru": "Пыкалово",
+      "kind_ru": "село",
+      "parent_id": "council-147",
+      "upper_id": "unit-145",
+      "annex_index": 149,
+      "annex_text": "б) село Пыкалово;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-150",
+      "name_ru": "Шмалена",
+      "kind_ru": "село",
+      "parent_id": "council-147",
+      "upper_id": "unit-145",
+      "annex_index": 150,
+      "annex_text": "в) село Шмалена;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-152",
+      "name_ru": "Белочи",
+      "kind_ru": "село",
+      "parent_id": "council-151",
+      "upper_id": "unit-145",
+      "annex_index": 152,
+      "annex_text": "село Белочи – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-154",
+      "name_ru": "Большой Молокиш",
+      "kind_ru": "село",
+      "parent_id": "council-153",
+      "upper_id": "unit-145",
+      "annex_index": 154,
+      "annex_text": "село Большой Молокиш – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-156",
+      "name_ru": "Броштяны",
+      "kind_ru": "село",
+      "parent_id": "council-155",
+      "upper_id": "unit-145",
+      "annex_index": 156,
+      "annex_text": "село Броштяны – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-158",
+      "name_ru": "Бутучаны",
+      "kind_ru": "село",
+      "parent_id": "council-157",
+      "upper_id": "unit-145",
+      "annex_index": 158,
+      "annex_text": "село Бутучаны – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-160",
+      "name_ru": "Вадатурково",
+      "kind_ru": "село",
+      "parent_id": "council-159",
+      "upper_id": "unit-145",
+      "annex_index": 160,
+      "annex_text": "село Вадатурково – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-162",
+      "name_ru": "Буськи",
+      "kind_ru": "село",
+      "parent_id": "council-161",
+      "upper_id": "unit-145",
+      "annex_index": 162,
+      "annex_text": "а) село Буськи;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-163",
+      "name_ru": "Воронково",
+      "kind_ru": "село",
+      "parent_id": "council-161",
+      "upper_id": "unit-145",
+      "annex_index": 163,
+      "annex_text": "б) село Воронково – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-164",
+      "name_ru": "Гершуновка",
+      "kind_ru": "село",
+      "parent_id": "council-161",
+      "upper_id": "unit-145",
+      "annex_index": 164,
+      "annex_text": "в) село Гершуновка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-166",
+      "name_ru": "Выхватинцы",
+      "kind_ru": "село",
+      "parent_id": "council-165",
+      "upper_id": "unit-145",
+      "annex_index": 166,
+      "annex_text": "а) село Выхватинцы – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-167",
+      "name_ru": "Новая Жизнь",
+      "kind_ru": "село",
+      "parent_id": "council-165",
+      "upper_id": "unit-145",
+      "annex_index": 167,
+      "annex_text": "б) село Новая Жизнь;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-169",
+      "name_ru": "Гараба",
+      "kind_ru": "село",
+      "parent_id": "council-168",
+      "upper_id": "unit-145",
+      "annex_index": 169,
+      "annex_text": "село Гараба – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-171",
+      "name_ru": "Гидирим",
+      "kind_ru": "село",
+      "parent_id": "council-170",
+      "upper_id": "unit-145",
+      "annex_index": 171,
+      "annex_text": "село Гидирим – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-173",
+      "name_ru": "Ержово",
+      "kind_ru": "село",
+      "parent_id": "council-172",
+      "upper_id": "unit-145",
+      "annex_index": 173,
+      "annex_text": "а) село Ержово – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-174",
+      "name_ru": "Сарацей",
+      "kind_ru": "село",
+      "parent_id": "council-172",
+      "upper_id": "unit-145",
+      "annex_index": 174,
+      "annex_text": "б) село Сарацей;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-176",
+      "name_ru": "Жура",
+      "kind_ru": "село",
+      "parent_id": "council-175",
+      "upper_id": "unit-145",
+      "annex_index": 176,
+      "annex_text": "село Жура – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-178",
+      "name_ru": "ж/д станции Колбасна",
+      "kind_ru": "поселок",
+      "parent_id": "council-177",
+      "upper_id": "unit-145",
+      "annex_index": 178,
+      "annex_text": "а) поселок ж/д станции Колбасна;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-179",
+      "name_ru": "Колбасна",
+      "kind_ru": "село",
+      "parent_id": "council-177",
+      "upper_id": "unit-145",
+      "annex_index": 179,
+      "annex_text": "б) село Колбасна – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-180",
+      "name_ru": "Сухая Рыбница",
+      "kind_ru": "село",
+      "parent_id": "council-177",
+      "upper_id": "unit-145",
+      "annex_index": 180,
+      "annex_text": "в) село Сухая Рыбница;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-182",
+      "name_ru": "Димитрово",
+      "kind_ru": "село",
+      "parent_id": "council-181",
+      "upper_id": "unit-145",
+      "annex_index": 182,
+      "annex_text": "а) село Димитрово;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-183",
+      "name_ru": "Ивановка",
+      "kind_ru": "село",
+      "parent_id": "council-181",
+      "upper_id": "unit-145",
+      "annex_index": 183,
+      "annex_text": "б) село Ивановка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-184",
+      "name_ru": "Красненькое",
+      "kind_ru": "село",
+      "parent_id": "council-181",
+      "upper_id": "unit-145",
+      "annex_index": 184,
+      "annex_text": "в) село Красненькое – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-186",
+      "name_ru": "Ленино",
+      "kind_ru": "село",
+      "parent_id": "council-185",
+      "upper_id": "unit-145",
+      "annex_index": 186,
+      "annex_text": "а) село Ленино;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-187",
+      "name_ru": "Первомайск",
+      "kind_ru": "село",
+      "parent_id": "council-185",
+      "upper_id": "unit-145",
+      "annex_index": 187,
+      "annex_text": "б) село Первомайск;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-188",
+      "name_ru": "Победа",
+      "kind_ru": "село",
+      "parent_id": "council-185",
+      "upper_id": "unit-145",
+      "annex_index": 188,
+      "annex_text": "в) село Победа;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-189",
+      "name_ru": "Станиславка",
+      "kind_ru": "село",
+      "parent_id": "council-185",
+      "upper_id": "unit-145",
+      "annex_index": 189,
+      "annex_text": "г) село Станиславка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-191",
+      "name_ru": "Малый Молокиш",
+      "kind_ru": "село",
+      "parent_id": "council-190",
+      "upper_id": "unit-145",
+      "annex_index": 191,
+      "annex_text": "село Малый Молокиш – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-193",
+      "name_ru": "Михайловка",
+      "kind_ru": "село",
+      "parent_id": "council-192",
+      "upper_id": "unit-145",
+      "annex_index": 193,
+      "annex_text": "село Михайловка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-195",
+      "name_ru": "Бессарабка",
+      "kind_ru": "село",
+      "parent_id": "council-194",
+      "upper_id": "unit-145",
+      "annex_index": 195,
+      "annex_text": "а) село Бессарабка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-196",
+      "name_ru": "Запорожец",
+      "kind_ru": "село",
+      "parent_id": "council-194",
+      "upper_id": "unit-145",
+      "annex_index": 196,
+      "annex_text": "б) село Запорожец;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-197",
+      "name_ru": "Мокра",
+      "kind_ru": "село",
+      "parent_id": "council-194",
+      "upper_id": "unit-145",
+      "annex_index": 197,
+      "annex_text": "в) село Мокра – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-198",
+      "name_ru": "Шевченко",
+      "kind_ru": "село",
+      "parent_id": "council-194",
+      "upper_id": "unit-145",
+      "annex_index": 198,
+      "annex_text": "г) село Шевченко;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-200",
+      "name_ru": "Плоть",
+      "kind_ru": "село",
+      "parent_id": "council-199",
+      "upper_id": "unit-145",
+      "annex_index": 200,
+      "annex_text": "село Плоть – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-202",
+      "name_ru": "Владимировка",
+      "kind_ru": "село",
+      "parent_id": "council-201",
+      "upper_id": "unit-145",
+      "annex_index": 202,
+      "annex_text": "а) село Владимировка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-203",
+      "name_ru": "Зозуляны",
+      "kind_ru": "село",
+      "parent_id": "council-201",
+      "upper_id": "unit-145",
+      "annex_index": 203,
+      "annex_text": "б) село Зозуляны;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-204",
+      "name_ru": "Кирово",
+      "kind_ru": "село",
+      "parent_id": "council-201",
+      "upper_id": "unit-145",
+      "annex_index": 204,
+      "annex_text": "в) село Кирово;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-205",
+      "name_ru": "Попенки",
+      "kind_ru": "село",
+      "parent_id": "council-201",
+      "upper_id": "unit-145",
+      "annex_index": 205,
+      "annex_text": "г) село Попенки – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-207",
+      "name_ru": "Васильевка",
+      "kind_ru": "село",
+      "parent_id": "council-206",
+      "upper_id": "unit-145",
+      "annex_index": 207,
+      "annex_text": "а) село Васильевка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-208",
+      "name_ru": "Советское",
+      "kind_ru": "село",
+      "parent_id": "council-206",
+      "upper_id": "unit-145",
+      "annex_index": 208,
+      "annex_text": "б) село Советское – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-210",
+      "name_ru": "Строенцы",
+      "kind_ru": "село",
+      "parent_id": "council-209",
+      "upper_id": "unit-145",
+      "annex_index": 210,
+      "annex_text": "село Строенцы – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-212",
+      "name_ru": "Лысая Гора",
+      "kind_ru": "село",
+      "parent_id": "council-211",
+      "upper_id": "unit-145",
+      "annex_index": 212,
+      "annex_text": "а) село Лысая Гора;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-213",
+      "name_ru": "Малая Ульма",
+      "kind_ru": "село",
+      "parent_id": "council-211",
+      "upper_id": "unit-145",
+      "annex_index": 213,
+      "annex_text": "б) село Малая Ульма;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-214",
+      "name_ru": "Новая Михайловка",
+      "kind_ru": "село",
+      "parent_id": "council-211",
+      "upper_id": "unit-145",
+      "annex_index": 214,
+      "annex_text": "в) село Новая Михайловка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-215",
+      "name_ru": "Ульма",
+      "kind_ru": "село",
+      "parent_id": "council-211",
+      "upper_id": "unit-145",
+      "annex_index": 215,
+      "annex_text": "г) село Ульма – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-218",
+      "name_ru": "Слободзея",
+      "kind_ru": "город",
+      "parent_id": "unit-216",
+      "upper_id": "unit-216",
+      "annex_index": 218,
+      "annex_text": "1) город Слободзея;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-219",
+      "name_ru": "Красное",
+      "kind_ru": "поселок",
+      "parent_id": "unit-216",
+      "upper_id": "unit-216",
+      "annex_index": 219,
+      "annex_text": "2) поселок Красное;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-220",
+      "name_ru": "Первомайск",
+      "kind_ru": "поселок",
+      "parent_id": "unit-216",
+      "upper_id": "unit-216",
+      "annex_index": 220,
+      "annex_text": "3) поселок Первомайск:",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-221",
+      "name_ru": "ж/д станции Ливада",
+      "kind_ru": "поселок",
+      "parent_id": "place-220",
+      "upper_id": "unit-216",
+      "annex_index": 221,
+      "annex_text": "поселок ж/д станции Ливада;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-223",
+      "name_ru": "Ближний Хутор",
+      "kind_ru": "село",
+      "parent_id": "council-222",
+      "upper_id": "unit-216",
+      "annex_index": 223,
+      "annex_text": "село Ближний Хутор – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-225",
+      "name_ru": "Владимировка",
+      "kind_ru": "село",
+      "parent_id": "council-224",
+      "upper_id": "unit-216",
+      "annex_index": 225,
+      "annex_text": "а) село Владимировка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-226",
+      "name_ru": "Константиновка",
+      "kind_ru": "село",
+      "parent_id": "council-224",
+      "upper_id": "unit-216",
+      "annex_index": 226,
+      "annex_text": "б) село Константиновка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-227",
+      "name_ru": "Никольское",
+      "kind_ru": "село",
+      "parent_id": "council-224",
+      "upper_id": "unit-216",
+      "annex_index": 227,
+      "annex_text": "в) село Никольское;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-229",
+      "name_ru": "Глиное",
+      "kind_ru": "село",
+      "parent_id": "council-228",
+      "upper_id": "unit-216",
+      "annex_index": 229,
+      "annex_text": "село Глиное – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-231",
+      "name_ru": "Карагаш",
+      "kind_ru": "село",
+      "parent_id": "council-230",
+      "upper_id": "unit-216",
+      "annex_index": 231,
+      "annex_text": "село Карагаш – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-233",
+      "name_ru": "Кицканы",
+      "kind_ru": "село",
+      "parent_id": "council-232",
+      "upper_id": "unit-216",
+      "annex_index": 233,
+      "annex_text": "а) село Кицканы – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-234",
+      "name_ru": "Меренешты",
+      "kind_ru": "село",
+      "parent_id": "council-232",
+      "upper_id": "unit-216",
+      "annex_index": 234,
+      "annex_text": "б) село Меренешты;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-236",
+      "name_ru": "Копанка",
+      "kind_ru": "село",
+      "parent_id": "council-235",
+      "upper_id": "unit-216",
+      "annex_index": 236,
+      "annex_text": "село Копанка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-238",
+      "name_ru": "Коротное",
+      "kind_ru": "село",
+      "parent_id": "council-237",
+      "upper_id": "unit-216",
+      "annex_index": 238,
+      "annex_text": "село Коротное – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-240",
+      "name_ru": "Незавертайловка",
+      "kind_ru": "село",
+      "parent_id": "council-239",
+      "upper_id": "unit-216",
+      "annex_index": 240,
+      "annex_text": "село Незавертайловка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-242",
+      "name_ru": "Парканы",
+      "kind_ru": "село",
+      "parent_id": "council-241",
+      "upper_id": "unit-216",
+      "annex_index": 242,
+      "annex_text": "село Парканы – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-244",
+      "name_ru": "Суклея",
+      "kind_ru": "село",
+      "parent_id": "council-243",
+      "upper_id": "unit-216",
+      "annex_index": 244,
+      "annex_text": "село Суклея – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-246",
+      "name_ru": "Терновка",
+      "kind_ru": "село",
+      "parent_id": "council-245",
+      "upper_id": "unit-216",
+      "annex_index": 246,
+      "annex_text": "село Терновка – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-248",
+      "name_ru": "ж/д станции Новосавицкая",
+      "kind_ru": "поселок",
+      "parent_id": "council-247",
+      "upper_id": "unit-216",
+      "annex_index": 248,
+      "annex_text": "а) поселок ж/д станции Новосавицкая;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-249",
+      "name_ru": "Ново-Котовск",
+      "kind_ru": "село",
+      "parent_id": "council-247",
+      "upper_id": "unit-216",
+      "annex_index": 249,
+      "annex_text": "б) село Ново-Котовск;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-250",
+      "name_ru": "Новая Андрияшевка",
+      "kind_ru": "село",
+      "parent_id": "council-247",
+      "upper_id": "unit-216",
+      "annex_index": 250,
+      "annex_text": "в) село Новая Андрияшевка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-251",
+      "name_ru": "Приозерное",
+      "kind_ru": "село",
+      "parent_id": "council-247",
+      "upper_id": "unit-216",
+      "annex_index": 251,
+      "annex_text": "г) село Приозерное;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-252",
+      "name_ru": "Старая Андрияшевка",
+      "kind_ru": "село",
+      "parent_id": "council-247",
+      "upper_id": "unit-216",
+      "annex_index": 252,
+      "annex_text": "д) село Старая Андрияшевка;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-253",
+      "name_ru": "Уютное",
+      "kind_ru": "село",
+      "parent_id": "council-247",
+      "upper_id": "unit-216",
+      "annex_index": 253,
+      "annex_text": "е) село Уютное;",
+      "admin_centre_note": false
+    },
+    {
+      "id": "place-254",
+      "name_ru": "Фрунзе",
+      "kind_ru": "село",
+      "parent_id": "council-247",
+      "upper_id": "unit-216",
+      "annex_index": 254,
+      "annex_text": "ж) село Фрунзе – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-256",
+      "name_ru": "Чобручи",
+      "kind_ru": "село",
+      "parent_id": "council-255",
+      "upper_id": "unit-216",
+      "annex_index": 256,
+      "annex_text": "а) село Чобручи – административный центр;",
+      "admin_centre_note": true
+    },
+    {
+      "id": "place-257",
+      "name_ru": "ж/д станции 47 км",
+      "kind_ru": "поселок",
+      "parent_id": "council-255",
+      "upper_id": "unit-216",
+      "annex_index": 257,
+      "annex_text": "б) поселок ж/д станции 47 км.",
+      "admin_centre_note": false
+    }
+  ],
+  "OSM_85_crosswalk": [
+    {
+      "actual_id": "osm-r1216706",
+      "osm_relation_id": 1216706,
+      "name": "Cremenciug",
+      "osm_role": "OSM_VILLAGE_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Căușeni",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 20,
+          "annex_line_1_based": 21,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-20",
+          "claimed_region": "Тирасполь",
+          "council": null,
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "GEOMETRIC_PARENT_DIFFERS_FROM_HISTORIC_DE_FACTO_CLAIM",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r12215667",
+      "osm_relation_id": 12215667,
+      "name": "Gîsca",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Bender",
+      "CUATM_protected_parent": "Căușeni",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 13,
+          "annex_line_1_based": 14,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-13",
+          "claimed_region": "Бендеры",
+          "council": null,
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r12463378",
+      "osm_relation_id": 12463378,
+      "name": "Proteagailovca",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Bender",
+      "CUATM_protected_parent": "Bender",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 14,
+          "annex_line_1_based": 15,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-14",
+          "claimed_region": "Бендеры",
+          "council": null,
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r12463379",
+      "osm_relation_id": 12463379,
+      "name": "Bender",
+      "osm_role": "OSM_CITY_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Bender",
+      "CUATM_protected_parent": null,
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 11,
+          "annex_line_1_based": 12,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-11",
+          "claimed_region": "Бендеры",
+          "council": null,
+          "role_ru": "город"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "DISPLAY_NAME_COLLISION_USE_OSM_ID_AND_ROLE",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r18941889",
+      "osm_relation_id": 18941889,
+      "name": "Tiraspolul Nou",
+      "osm_role": "OSM_TOWN_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Tiraspol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 19,
+          "annex_line_1_based": 20,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-19",
+          "claimed_region": "Тирасполь",
+          "council": null,
+          "role_ru": "поселок"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": []
+    },
+    {
+      "actual_id": "osm-r18941890",
+      "osm_relation_id": 18941890,
+      "name": "Tiraspol",
+      "osm_role": "OSM_CITY_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Tiraspol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 17,
+          "annex_line_1_based": 18,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-17",
+          "claimed_region": "Тирасполь",
+          "council": null,
+          "role_ru": "город"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": []
+    },
+    {
+      "actual_id": "osm-r19001619",
+      "osm_relation_id": 19001619,
+      "name": "Lunga",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "NO_EXACT_2023_NAME",
+      "hits": [],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        },
+        {
+          "code": "LUNGA_MICRODISTRICT_VS_OSM_MUNICIPALITY_TAG_UNRESOLVED",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19012105",
+      "osm_relation_id": 19012105,
+      "name": "Țîbuleuca",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 107,
+          "annex_line_1_based": 108,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-107",
+          "claimed_region": "Дубоссарский район",
+          "council": "Цыбулевский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19013328",
+      "osm_relation_id": 19013328,
+      "name": "Goian",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "hits": [
+        {
+          "annex_index": 82,
+          "annex_line_1_based": 83,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-82",
+          "claimed_region": "Дубоссарский район",
+          "council": "Гоянский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        },
+        {
+          "code": "NAME_ALIAS_NOT_EQUAL_TO_CURRENT_LEGAL_IDENTITY",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19013329",
+      "osm_relation_id": 19013329,
+      "name": "Doibani I",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 71,
+          "annex_line_1_based": 72,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-71",
+          "claimed_region": "Дубоссарский район",
+          "council": "Дойбанский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015106",
+      "osm_relation_id": 19015106,
+      "name": "Cuzmin",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 126,
+          "annex_line_1_based": 127,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-126",
+          "claimed_region": "Каменский район",
+          "council": "Кузьминский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015107",
+      "osm_relation_id": 19015107,
+      "name": "Hristovaia",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 144,
+          "annex_line_1_based": 145,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-144",
+          "claimed_region": "Каменский район",
+          "council": "Хрустовской сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015108",
+      "osm_relation_id": 19015108,
+      "name": "Severinovca",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 140,
+          "annex_line_1_based": 141,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-140",
+          "claimed_region": "Каменский район",
+          "council": "Севериновский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015109",
+      "osm_relation_id": 19015109,
+      "name": "Crasnîi Octeabri",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 123,
+          "annex_line_1_based": 124,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-123",
+          "claimed_region": "Каменский район",
+          "council": "Краснооктябрьский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015110",
+      "osm_relation_id": 19015110,
+      "name": "Camenca",
+      "osm_role": "OSM_TOWN_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 109,
+          "annex_line_1_based": 110,
+          "reference_kind": "RAYON_CENTRE_REFERENCE",
+          "place_id": null,
+          "claimed_region": "Каменский район",
+          "council": null,
+          "role_ru": "город"
+        },
+        {
+          "annex_index": 110,
+          "annex_line_1_based": 111,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-110",
+          "claimed_region": "Каменский район",
+          "council": null,
+          "role_ru": "город"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015111",
+      "osm_relation_id": 19015111,
+      "name": "Podoima",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 130,
+          "annex_line_1_based": 131,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-130",
+          "claimed_region": "Каменский район",
+          "council": "Подойменский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015112",
+      "osm_relation_id": 19015112,
+      "name": "Rotari",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 137,
+          "annex_line_1_based": 138,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-137",
+          "claimed_region": "Каменский район",
+          "council": "Ротарский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015113",
+      "osm_relation_id": 19015113,
+      "name": "Valea Adîncă",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "hits": [
+        {
+          "annex_index": 113,
+          "annex_line_1_based": 114,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-113",
+          "claimed_region": "Каменский район",
+          "council": "Валя-Адынкский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        },
+        {
+          "code": "NAME_ALIAS_NOT_EQUAL_TO_CURRENT_LEGAL_IDENTITY",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015114",
+      "osm_relation_id": 19015114,
+      "name": "Rașcov",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "hits": [
+        {
+          "annex_index": 133,
+          "annex_line_1_based": 134,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-133",
+          "claimed_region": "Каменский район",
+          "council": "Рашковский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        },
+        {
+          "code": "NAME_ALIAS_NOT_EQUAL_TO_CURRENT_LEGAL_IDENTITY",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015115",
+      "osm_relation_id": 19015115,
+      "name": "Caterinovca",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 119,
+          "annex_line_1_based": 120,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-119",
+          "claimed_region": "Каменский район",
+          "council": "Катериновский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015284",
+      "osm_relation_id": 19015284,
+      "name": "Vadul Turcului",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "CURATED_ALIAS_POTENTIAL_MATCH",
+      "hits": [
+        {
+          "annex_index": 160,
+          "annex_line_1_based": 161,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-160",
+          "claimed_region": "Рыбницкий район",
+          "council": "Вадатурковский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        },
+        {
+          "code": "NAME_ALIAS_NOT_EQUAL_TO_CURRENT_LEGAL_IDENTITY",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015285",
+      "osm_relation_id": 19015285,
+      "name": "Beloci",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 152,
+          "annex_line_1_based": 153,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-152",
+          "claimed_region": "Рыбницкий район",
+          "council": "Белочинский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015286",
+      "osm_relation_id": 19015286,
+      "name": "Plopi",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 200,
+          "annex_line_1_based": 201,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-200",
+          "claimed_region": "Рыбницкий район",
+          "council": "Плотьянский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015287",
+      "osm_relation_id": 19015287,
+      "name": "Sovietscoe",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 208,
+          "annex_line_1_based": 209,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-208",
+          "claimed_region": "Рыбницкий район",
+          "council": "Советский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19015304",
+      "osm_relation_id": 19015304,
+      "name": "Stroiești",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 210,
+          "annex_line_1_based": 211,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-210",
+          "claimed_region": "Рыбницкий район",
+          "council": "Строенецкий сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19016165",
+      "osm_relation_id": 19016165,
+      "name": "Andreevca",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 148,
+          "annex_line_1_based": 149,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-148",
+          "claimed_region": "Рыбницкий район",
+          "council": "Андреевский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19016166",
+      "osm_relation_id": 19016166,
+      "name": "Ulmu",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 215,
+          "annex_line_1_based": 216,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-215",
+          "claimed_region": "Рыбницкий район",
+          "council": "Ульманский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19016167",
+      "osm_relation_id": 19016167,
+      "name": "Vărăncău",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 163,
+          "annex_line_1_based": 164,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-163",
+          "claimed_region": "Рыбницкий район",
+          "council": "Воронковский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r19069840",
+      "osm_relation_id": 19069840,
+      "name": "Delacău",
+      "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 25,
+          "annex_line_1_based": 26,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-25",
+          "claimed_region": "Григориопольский район",
+          "council": null,
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "NO_OSM_PROOF_OF_DISTINCT_SETTLEMENT_STATUS",
+          "verdict": "BLOCKED_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r6879649",
+      "osm_relation_id": 6879649,
+      "name": "Chițcani",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Căușeni",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 233,
+          "annex_line_1_based": 234,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-233",
+          "claimed_region": "Слободзейский район",
+          "council": "Кицканский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7427669",
+      "osm_relation_id": 7427669,
+      "name": "Vladimirovca",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 202,
+          "annex_line_1_based": 203,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-202",
+          "claimed_region": "Рыбницкий район",
+          "council": "Попенкский сельсовет",
+          "role_ru": "село"
+        },
+        {
+          "annex_index": 225,
+          "annex_line_1_based": 226,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-225",
+          "claimed_region": "Слободзейский район",
+          "council": "Владимировский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        },
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7427680",
+      "osm_relation_id": 7427680,
+      "name": "Frunză",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 254,
+          "annex_line_1_based": 255,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-254",
+          "claimed_region": "Слободзейский район",
+          "council": "Фрунзенский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7431238",
+      "osm_relation_id": 7431238,
+      "name": "Bîcioc",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 33,
+          "annex_line_1_based": 34,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-33",
+          "claimed_region": "Григориопольский район",
+          "council": "Бычковский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7431263",
+      "osm_relation_id": 7431263,
+      "name": "Parcani",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 242,
+          "annex_line_1_based": 243,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-242",
+          "claimed_region": "Слободзейский район",
+          "council": "Парканский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7432661",
+      "osm_relation_id": 7432661,
+      "name": "Crasnogorca",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 52,
+          "annex_line_1_based": 53,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-52",
+          "claimed_region": "Григориопольский район",
+          "council": "Красногорский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7432662",
+      "osm_relation_id": 7432662,
+      "name": "Teiu",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 61,
+          "annex_line_1_based": 62,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-61",
+          "claimed_region": "Григориопольский район",
+          "council": "Тейский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7432700",
+      "osm_relation_id": 7432700,
+      "name": "Vinogradnoe",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 36,
+          "annex_line_1_based": 37,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-36",
+          "claimed_region": "Григориопольский район",
+          "council": "Винограднянский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7468724",
+      "osm_relation_id": 7468724,
+      "name": "Blijnii Hutor",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 223,
+          "annex_line_1_based": 224,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-223",
+          "claimed_region": "Слободзейский район",
+          "council": "Ближне-Хуторской сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r7468791",
+      "osm_relation_id": 7468791,
+      "name": "Sucleia",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 244,
+          "annex_line_1_based": 245,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-244",
+          "claimed_region": "Слободзейский район",
+          "council": "Суклейский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8289594",
+      "osm_relation_id": 8289594,
+      "name": "Caragaș",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 231,
+          "annex_line_1_based": 232,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-231",
+          "claimed_region": "Слободзейский район",
+          "council": "Карагашский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8289727",
+      "osm_relation_id": 8289727,
+      "name": "Cioburciu",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 256,
+          "annex_line_1_based": 257,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-256",
+          "claimed_region": "Слободзейский район",
+          "council": "Чобручский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8289751",
+      "osm_relation_id": 8289751,
+      "name": "Slobozia",
+      "osm_role": "OSM_TOWN_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 217,
+          "annex_line_1_based": 218,
+          "reference_kind": "RAYON_CENTRE_REFERENCE",
+          "place_id": null,
+          "claimed_region": "Слободзейский район",
+          "council": null,
+          "role_ru": "город"
+        },
+        {
+          "annex_index": 218,
+          "annex_line_1_based": 219,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-218",
+          "claimed_region": "Слободзейский район",
+          "council": null,
+          "role_ru": "город"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8290840",
+      "osm_relation_id": 8290840,
+      "name": "Dnestrovsc",
+      "osm_role": "OSM_TOWN_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Tiraspol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 18,
+          "annex_line_1_based": 19,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-18",
+          "claimed_region": "Тирасполь",
+          "council": null,
+          "role_ru": "город-спутник"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": []
+    },
+    {
+      "actual_id": "osm-r8290877",
+      "osm_relation_id": 8290877,
+      "name": "Pervomaisc",
+      "osm_role": "OSM_SETTLEMENT_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 187,
+          "annex_line_1_based": 188,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-187",
+          "claimed_region": "Рыбницкий район",
+          "council": "Ленинский сельсовет",
+          "role_ru": "село"
+        },
+        {
+          "annex_index": 220,
+          "annex_line_1_based": 221,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-220",
+          "claimed_region": "Слободзейский район",
+          "council": null,
+          "role_ru": "поселок"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        },
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8290934",
+      "osm_relation_id": 8290934,
+      "name": "Nezavertailovca",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 240,
+          "annex_line_1_based": 241,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-240",
+          "claimed_region": "Слободзейский район",
+          "council": "Незавертайловский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8291057",
+      "osm_relation_id": 8291057,
+      "name": "Corotna",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 238,
+          "annex_line_1_based": 239,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-238",
+          "claimed_region": "Слободзейский район",
+          "council": "Коротнянский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8291058",
+      "osm_relation_id": 8291058,
+      "name": "Hlinaia",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 38,
+          "annex_line_1_based": 39,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-38",
+          "claimed_region": "Григориопольский район",
+          "council": "Глинойский сельсовет",
+          "role_ru": "поселок"
+        },
+        {
+          "annex_index": 229,
+          "annex_line_1_based": 230,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-229",
+          "claimed_region": "Слободзейский район",
+          "council": "Глинойский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        },
+        {
+          "code": "DISPLAY_NAME_COLLISION_USE_OSM_ID_AND_ROLE",
+          "verdict": "PASS"
+        },
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8292878",
+      "osm_relation_id": 8292878,
+      "name": "Tîrnauca",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 246,
+          "annex_line_1_based": 247,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-246",
+          "claimed_region": "Слободзейский район",
+          "council": "Терновский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8292891",
+      "osm_relation_id": 8292891,
+      "name": "Mălăiești",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 54,
+          "annex_line_1_based": 55,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-54",
+          "claimed_region": "Григориопольский район",
+          "council": "Малаештский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8292898",
+      "osm_relation_id": 8292898,
+      "name": "Hrușca",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 116,
+          "annex_line_1_based": 117,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-116",
+          "claimed_region": "Каменский район",
+          "council": "Грушковский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8292909",
+      "osm_relation_id": 8292909,
+      "name": "Ocnița",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 128,
+          "annex_line_1_based": 129,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-128",
+          "claimed_region": "Каменский район",
+          "council": "Окницкий сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8348605",
+      "osm_relation_id": 8348605,
+      "name": "Tașlîc",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 59,
+          "annex_line_1_based": 60,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-59",
+          "claimed_region": "Григориопольский район",
+          "council": "Ташлыкский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8348625",
+      "osm_relation_id": 8348625,
+      "name": "Butor",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 30,
+          "annex_line_1_based": 31,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-30",
+          "claimed_region": "Григориопольский район",
+          "council": "Буторский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8348646",
+      "osm_relation_id": 8348646,
+      "name": "Speia",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 57,
+          "annex_line_1_based": 58,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-57",
+          "claimed_region": "Григориопольский район",
+          "council": "Спейский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8348909",
+      "osm_relation_id": 8348909,
+      "name": "Mihailovca",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 193,
+          "annex_line_1_based": 194,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-193",
+          "claimed_region": "Рыбницкий район",
+          "council": "Михайловский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8348920",
+      "osm_relation_id": 8348920,
+      "name": "Harmațca",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 80,
+          "annex_line_1_based": 81,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-80",
+          "claimed_region": "Дубоссарский район",
+          "council": "Гармацкий сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8349002",
+      "osm_relation_id": 8349002,
+      "name": "Dubău",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 77,
+          "annex_line_1_based": 78,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-77",
+          "claimed_region": "Дубоссарский район",
+          "council": "Дубовский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8349059",
+      "osm_relation_id": 8349059,
+      "name": "Lenin",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 186,
+          "annex_line_1_based": 187,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-186",
+          "claimed_region": "Рыбницкий район",
+          "council": "Ленинский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8349093",
+      "osm_relation_id": 8349093,
+      "name": "Butuceni",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 158,
+          "annex_line_1_based": 159,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-158",
+          "claimed_region": "Рыбницкий район",
+          "council": "Бутучанский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8349094",
+      "osm_relation_id": 8349094,
+      "name": "Jura",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 176,
+          "annex_line_1_based": 177,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-176",
+          "claimed_region": "Рыбницкий район",
+          "council": "Журский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8349307",
+      "osm_relation_id": 8349307,
+      "name": "Mocra",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 197,
+          "annex_line_1_based": 198,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-197",
+          "claimed_region": "Рыбницкий район",
+          "council": "Мокрянский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8349338",
+      "osm_relation_id": 8349338,
+      "name": "Popencu",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 205,
+          "annex_line_1_based": 206,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-205",
+          "claimed_region": "Рыбницкий район",
+          "council": "Попенкский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8539257",
+      "osm_relation_id": 8539257,
+      "name": "Maiac",
+      "osm_role": "OSM_SETTLEMENT_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 28,
+          "annex_line_1_based": 29,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-28",
+          "claimed_region": "Григориопольский район",
+          "council": null,
+          "role_ru": "поселок"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8539525",
+      "osm_relation_id": 8539525,
+      "name": "Colosova",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 48,
+          "annex_line_1_based": 49,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-48",
+          "claimed_region": "Григориопольский район",
+          "council": "Колосовский сельсовет",
+          "role_ru": "поселок"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8688504",
+      "osm_relation_id": 8688504,
+      "name": "Broșteni",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 156,
+          "annex_line_1_based": 157,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-156",
+          "claimed_region": "Рыбницкий район",
+          "council": "Броштянский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8710724",
+      "osm_relation_id": 8710724,
+      "name": "Slobozia-Rașcov",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Camenca",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 142,
+          "annex_line_1_based": 143,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-142",
+          "claimed_region": "Каменский район",
+          "council": "Слобода-Рашковский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r8726395",
+      "osm_relation_id": 8726395,
+      "name": "Șipca",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 65,
+          "annex_line_1_based": 66,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-65",
+          "claimed_region": "Григориопольский район",
+          "council": "Шипкинский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9288026",
+      "osm_relation_id": 9288026,
+      "name": "Carmanova",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 43,
+          "annex_line_1_based": 44,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-43",
+          "claimed_region": "Григориопольский район",
+          "council": "Кармановский сельсовет",
+          "role_ru": "поселок"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9288110",
+      "osm_relation_id": 9288110,
+      "name": "Hîrtop",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 40,
+          "annex_line_1_based": 41,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-40",
+          "claimed_region": "Григориопольский район",
+          "council": "Гыртопский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9288158",
+      "osm_relation_id": 9288158,
+      "name": "Dzerjinscoe",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 69,
+          "annex_line_1_based": 70,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-69",
+          "claimed_region": "Дубоссарский район",
+          "council": "Дзержинский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9288287",
+      "osm_relation_id": 9288287,
+      "name": "Dubăsari",
+      "osm_role": "OSM_CITY_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 15,
+          "annex_line_1_based": 16,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-15",
+          "claimed_region": "Дубоссары",
+          "council": null,
+          "role_ru": "город"
+        },
+        {
+          "annex_index": 67,
+          "annex_line_1_based": 68,
+          "reference_kind": "RAYON_CENTRE_REFERENCE",
+          "place_id": null,
+          "claimed_region": "Дубоссарский район",
+          "council": null,
+          "role_ru": "город"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        },
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9288722",
+      "osm_relation_id": 9288722,
+      "name": "Comisarovca Nouă",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 99,
+          "annex_line_1_based": 100,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-99",
+          "claimed_region": "Дубоссарский район",
+          "council": "Ново-Комиссаровский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9288756",
+      "osm_relation_id": 9288756,
+      "name": "Crasnîi Vinogradari",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Dubăsari",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 94,
+          "annex_line_1_based": 95,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-94",
+          "claimed_region": "Дубоссарский район",
+          "council": "Красновиноградарский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9294122",
+      "osm_relation_id": 9294122,
+      "name": "Ghidirim",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 171,
+          "annex_line_1_based": 172,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-171",
+          "claimed_region": "Рыбницкий район",
+          "council": "Гидиримский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9301463",
+      "osm_relation_id": 9301463,
+      "name": "Hlinaia",
+      "osm_role": "OSM_SETTLEMENT_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 38,
+          "annex_line_1_based": 39,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-38",
+          "claimed_region": "Григориопольский район",
+          "council": "Глинойский сельсовет",
+          "role_ru": "поселок"
+        },
+        {
+          "annex_index": 229,
+          "annex_line_1_based": 230,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-229",
+          "claimed_region": "Слободзейский район",
+          "council": "Глинойский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        },
+        {
+          "code": "DISPLAY_NAME_COLLISION_USE_OSM_ID_AND_ROLE",
+          "verdict": "PASS"
+        },
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9301464",
+      "osm_relation_id": 9301464,
+      "name": "Grigoriopol",
+      "osm_role": "OSM_TOWN_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Grigoriopol",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 23,
+          "annex_line_1_based": 24,
+          "reference_kind": "RAYON_CENTRE_REFERENCE",
+          "place_id": null,
+          "claimed_region": "Григориопольский район",
+          "council": null,
+          "role_ru": "город"
+        },
+        {
+          "annex_index": 24,
+          "annex_line_1_based": 25,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-24",
+          "claimed_region": "Григориопольский район",
+          "council": null,
+          "role_ru": "город"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9581354",
+      "osm_relation_id": 9581354,
+      "name": "Bender",
+      "osm_role": "OSM_LEVEL4_MUNICIPALITY_BOUNDARY",
+      "osm_level": 4,
+      "OSM_geometric_group": "Bender",
+      "CUATM_protected_parent": null,
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 11,
+          "annex_line_1_based": 12,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-11",
+          "claimed_region": "Бендеры",
+          "council": null,
+          "role_ru": "город"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "DISPLAY_NAME_COLLISION_USE_OSM_ID_AND_ROLE",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9656324",
+      "osm_relation_id": 9656324,
+      "name": "Haraba",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 169,
+          "annex_line_1_based": 170,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-169",
+          "claimed_region": "Рыбницкий район",
+          "council": "Гарабский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9656364",
+      "osm_relation_id": 9656364,
+      "name": "Crasnencoe",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 184,
+          "annex_line_1_based": 185,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-184",
+          "claimed_region": "Рыбницкий район",
+          "council": "Красненьский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9656413",
+      "osm_relation_id": 9656413,
+      "name": "Molochișul Mare",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 154,
+          "annex_line_1_based": 155,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-154",
+          "claimed_region": "Рыбницкий район",
+          "council": "Большемолокишский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9659709",
+      "osm_relation_id": 9659709,
+      "name": "Cobasna",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 178,
+          "annex_line_1_based": 179,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-178",
+          "claimed_region": "Рыбницкий район",
+          "council": "Колбаснянский сельсовет",
+          "role_ru": "поселок"
+        },
+        {
+          "annex_index": 179,
+          "annex_line_1_based": 180,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-179",
+          "claimed_region": "Рыбницкий район",
+          "council": "Колбаснянский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        },
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9659794",
+      "osm_relation_id": 9659794,
+      "name": "Hîrjău",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 173,
+          "annex_line_1_based": 174,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-173",
+          "claimed_region": "Рыбницкий район",
+          "council": "Ержовский сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9659979",
+      "osm_relation_id": 9659979,
+      "name": "Rîbnița",
+      "osm_role": "OSM_CITY_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 16,
+          "annex_line_1_based": 17,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-16",
+          "claimed_region": "Рыбница",
+          "council": null,
+          "role_ru": "город"
+        },
+        {
+          "annex_index": 146,
+          "annex_line_1_based": 147,
+          "reference_kind": "RAYON_CENTRE_REFERENCE",
+          "place_id": null,
+          "claimed_region": "Рыбницкий район",
+          "council": null,
+          "role_ru": "город"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "URBAN_LINE_VS_CADASTRAL_ZONE_NOT_LEGALLY_RECONCILED",
+          "verdict": "BLOCKED_EVIDENCE"
+        },
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9660049",
+      "osm_relation_id": 9660049,
+      "name": "Ofatinți",
+      "osm_role": "OSM_RURAL_COUNCIL_AREA",
+      "osm_level": 8,
+      "OSM_geometric_group": "Rîbnița",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "UNIQUE_NAME_2023",
+      "hits": [
+        {
+          "annex_index": 166,
+          "annex_line_1_based": 167,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-166",
+          "claimed_region": "Рыбницкий район",
+          "council": "Выхватинецкий сельсовет",
+          "role_ru": "село"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "COUNCIL_BOUNDARY_NOT_EQUIVALENT_TO_SETTLEMENT_FOOTPRINT",
+          "verdict": "PASS"
+        }
+      ]
+    },
+    {
+      "actual_id": "osm-r9679382",
+      "osm_relation_id": 9679382,
+      "name": "Crasnoe",
+      "osm_role": "OSM_TOWN_BOUNDARY",
+      "osm_level": 8,
+      "OSM_geometric_group": "Slobozia",
+      "CUATM_protected_parent": "Unitățile administrativ-teritoriale din stînga Nistrului",
+      "historical_2023_match_type": "HOMONYM_MULTIPLE_ENTRIES_2023",
+      "hits": [
+        {
+          "annex_index": 26,
+          "annex_line_1_based": 27,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-26",
+          "claimed_region": "Григориопольский район",
+          "council": null,
+          "role_ru": "село"
+        },
+        {
+          "annex_index": 219,
+          "annex_line_1_based": 220,
+          "reference_kind": "LOCALITY",
+          "place_id": "place-219",
+          "claimed_region": "Слободзейский район",
+          "council": null,
+          "role_ru": "поселок"
+        }
+      ],
+      "effective_whole_polygon_control_status": "BLOCKED_EVIDENCE",
+      "documentary_2026_status": "BLOCKED_EVIDENCE",
+      "contradictions": [
+        {
+          "code": "2023_LEGAL_HOMONYM_NOT_AUTOMATIC_OSM_BINDING",
+          "verdict": "UNRESOLVED"
+        }
+      ]
+    }
+  ],
+  "uncertainties": [
+    "2023 Annex describes territorial claims, not actual full-polygon control.",
+    "This is source-scoped historical completeness, not contemporary 2026 legal completeness.",
+    "The chain of 2023-2026 amendments and local issuer registries is not fully certified.",
+    "Law 114-ZID-VIII from 2026-05-29 has a delayed 6-month commencement and must not be treated as operative on 2026-10-24.",
+    "A rayon centre named in a descriptive clause is not an extra locality entity.",
+    "The 85 OSM roles, the 74 councils, and the 162 locality mentions are different categories.",
+    "Five NI-JUR matches refer to rayon-centre clauses rather than separately numbered localities.",
+    "Claimed affiliation to Bender, Tiraspol, Dubasari etc. does not modify legal CUATM hierarchy.",
+    "No correspondence between 2023 legal boundary and complete current OSM polygons is certified.",
+    "The Romanian/Moldovan and Ukrainian-language sections have not been declared fully equivalent by this procedure."
+  ],
+  "controls": {
+    "actual_mutation_allowed": false,
+    "p91_import_allowed": false,
+    "osm_public_edit_allowed": false,
+    "NI_JUR_formal_accepted": false
+  }
+}
