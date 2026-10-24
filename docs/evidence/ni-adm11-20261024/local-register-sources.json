@@ -1,0 +1,98 @@
+{
+  "schema": "ni-adm11-local-registry-discovery-v1",
+  "cutoff": "2026-10-24",
+  "scope": "OFFICIAL_DIRECTORY_DISCOVERY_NOT_ALL_LOCAL_NORMATIVE_TEXTS",
+  "national_council_index": "https://vspmr.org/soveti-narodnih-deputatov/",
+  "portals": [
+    {
+      "name": "Slobozia",
+      "url": "https://slobodzeya.org/",
+      "verification_status": "OFFICIAL_LEGISLATIVE_DIRECTORY_LINK__DIRECT_FETCH_TIMEOUT",
+      "complete_2023_2026_local_original_corpus_collected": false,
+      "territorial_boundary_effect_adjudicated": false
+    },
+    {
+      "name": "Tiraspol",
+      "url": "https://tirgorsovet.org/",
+      "verification_status": "OFFICIAL_LEGISLATIVE_DIRECTORY_LINK__DIRECT_FETCH_TIMEOUT",
+      "complete_2023_2026_local_original_corpus_collected": false,
+      "territorial_boundary_effect_adjudicated": false
+    },
+    {
+      "name": "Bender",
+      "url": "https://benderygs.gospmr.org/",
+      "verification_status": "LIVE_OFFICIAL_PORTAL_SECTIONS_VISIBLE",
+      "complete_2023_2026_local_original_corpus_collected": false,
+      "territorial_boundary_effect_adjudicated": false
+    },
+    {
+      "name": "Ribnita",
+      "url": "https://rybnsovet.idknet.com/",
+      "verification_status": "SEARCH_INDEXED_LOCAL_NORMATIVE_ACTS_PAGE_VISIBLE",
+      "complete_2023_2026_local_original_corpus_collected": false,
+      "territorial_boundary_effect_adjudicated": false
+    },
+    {
+      "name": "Dubasari",
+      "url": "https://dubossary.ru/sovet/",
+      "verification_status": "OFFICIAL_LEGISLATIVE_DIRECTORY_LINK__DIRECT_FETCH_TIMEOUT",
+      "complete_2023_2026_local_original_corpus_collected": false,
+      "territorial_boundary_effect_adjudicated": false
+    },
+    {
+      "name": "Camenca",
+      "url": "https://kamsovet.gospmr.org/",
+      "verification_status": "OFFICIAL_LEGISLATIVE_DIRECTORY_LINK__DIRECT_FETCH_TIMEOUT",
+      "complete_2023_2026_local_original_corpus_collected": false,
+      "territorial_boundary_effect_adjudicated": false
+    },
+    {
+      "name": "Grigoriopol",
+      "url": "https://grig-rsnd.idknet.com/home/sel-sovet",
+      "verification_status": "LIVE_OFFICIAL_LOCAL_COUNCILS_DIRECTORY_VISIBLE",
+      "complete_2023_2026_local_original_corpus_collected": false,
+      "territorial_boundary_effect_adjudicated": false
+    }
+  ],
+  "local_grigoriopol": {
+    "source_url": "https://grig-rsnd.idknet.com/home/sel-sovet",
+    "rural_council_document_links_observed": 13,
+    "named_councils": [
+      "Буторский",
+      "Бычковский",
+      "Винограднянский",
+      "Глинойский",
+      "Гыртопский",
+      "Кармановский",
+      "Колосовский",
+      "Красногорский",
+      "Малаештский",
+      "Спейский",
+      "Ташлыкский",
+      "Тейский",
+      "Шипкинский"
+    ],
+    "additional_urban_type_Mayak_portal_link": true,
+    "link_destinations_include_public_google_drive": true,
+    "individual_document_files_enumerated": false,
+    "full_2023_2026_document_set_covered": false
+  },
+  "local_bender": {
+    "source_url": "https://benderygs.gospmr.org/?cat=4",
+    "villages_with_explicit_local_council_sessions_sections": [
+      "Гыска",
+      "Протягайловка"
+    ],
+    "official_publications_link_present": true,
+    "complete_source_binaries_reviewed": false
+  },
+  "scope_note": "The seven portals are councils of cities/districts; they must not be conflated with the 74 rural councils of Annex1. Source links are administrative discovery, not claims of certified ATU changes.",
+  "verdict": "DISCOVERED_NONEXHAUSTIVE_LOCAL_REGISTERS",
+  "blocked": [
+    "No per-issuer complete document lists and signature/date inventory from 2023-2026",
+    "No regional and rural council source-level completeness certification",
+    "No adjudication of delegation/powers or local act legal competence to amend ATU law",
+    "No full 2026 local legal notice archive",
+    "No proof of effective territorial control"
+  ]
+}
