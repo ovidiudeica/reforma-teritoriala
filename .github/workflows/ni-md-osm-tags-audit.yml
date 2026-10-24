@@ -1,0 +1,38 @@
+name: NI-TAGS.0 — read-only full MD/NI OSM tag census
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/md-ni-osm-tags-20261024.mjs'
+      - '.github/workflows/ni-md-osm-tags-audit.yml'
+      - 'docs/evidence/ni-md-tags-20261024/**'
+permissions:
+  contents: read
+jobs:
+  ni-md-tag-census:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Validate census script syntax
+        run: node --check scripts/audit/md-ni-osm-tags-20261024.mjs
+      - name: Inventory all raw OSM tags in MD snapshot and NI 85
+        run: node scripts/audit/md-ni-osm-tags-20261024.mjs --output "${{ runner.temp }}/ni-md-tags-audit"
+      - name: Require complete offline evidence
+        run: |
+          test -s "${{ runner.temp }}/ni-md-tags-audit/summary.json"
+          test -s "${{ runner.temp }}/ni-md-tags-audit/md-all-2596-tags.jsonl"
+          test -s "${{ runner.temp }}/ni-md-tags-audit/ni-reused-85-tags.jsonl"
+          node -e "const s=require('${{ runner.temp }}/ni-md-tags-audit/summary.json');if(s.scope.MD_OSM_RELATIONS!==2596||s.scope.NI_REUSED_OSM_RELATIONS!==85||s.protected.p91_import_allowed!==false)process.exit(1)"
+      - name: Upload reproducible OSM tag evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ni-md-osm-tags-audit
+          path: ${{ runner.temp }}/ni-md-tags-audit
+          retention-days: 30
