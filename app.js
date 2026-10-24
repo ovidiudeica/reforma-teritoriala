@@ -87,6 +87,7 @@ const entityById=new Map();
 let osmRoleById=new Map();
 let nistreniaCatalog=null;
 let nistreniaView=null;
+let nistreniaAdministrativeModel=null;
 let nistreniaOutlineFeatures=null;
 let nistreniaOutlineProof=null;
 let nistreniaOutlines=null;
@@ -490,12 +491,12 @@ async function loadHierarchyTree(){
  hierarchyNodeById.clear();
  for(const [id,node] of validated)hierarchyNodeById.set(id,node);
  hierarchyTree=tree;
- nistreniaView=nistreniaCatalog&&nistreniaOutlineFeatures?createNistreniaAdministrativeView({model:(await fetchNistreniaAdministrativeModel((...args)=>fetch(...args),crypto.subtle,{actualIds:new Set(entityById.keys())})).model,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
+ nistreniaView=nistreniaCatalog&&nistreniaOutlineFeatures&&nistreniaAdministrativeModel?createNistreniaAdministrativeView({model:nistreniaAdministrativeModel,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
   if(nistreniaView){
    nistreniaOutlines=createNistreniaOutlineLayers({L,map,features:nistreniaOutlineFeatures,onSelect:id=>selectNistreniaNode(id,{zoom:false,source:'map'}).catch(console.error)});
    visibleOperationalOutlineIds.clear();visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
   }
- const niFilter=document.getElementById('layer-ni');if(niFilter)niFilter.disabled=!nistreniaView;
+ const niFilter=document.getElementById('layer-ni');if(niFilter){niFilter.disabled=!nistreniaView;niFilter.title=nistreniaView?'Organizare declarată în 2023; actualizarea contemporană este provizorie.':'Prezentarea NI este indisponibilă: sursa nu a putut fi validată.';}
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
   renderHierarchyTree();
@@ -904,7 +905,8 @@ const frontendReady=(async()=>{
   await loadIndex();
   try{await loadOsmRoleCatalog();await loadNistreniaOsmNavigation();
     const verified=await fetchVerifiedNistreniaOutlines((...args)=>fetch(...args),crypto.subtle,nistreniaCatalog);
-    nistreniaOutlineFeatures=verified.features;nistreniaOutlineProof=verified.proof;}
+    nistreniaOutlineFeatures=verified.features;nistreniaOutlineProof=verified.proof;
+    nistreniaAdministrativeModel=(await fetchNistreniaAdministrativeModel((...args)=>fetch(...args),crypto.subtle,{actualIds:new Set(entityById.keys())})).model;}
   catch(error){
    console.warn('Catalogul cartografic OSM a fost blocat',error);
   }

@@ -18,7 +18,7 @@ Specificație16teste;model26teste, inclusiv6negative suplimentare;vizualizare/UR
 
 Chromium local:23regresii NIexistente;34scenarii frontend desktop/mobil;7teste pentru noua acceptare NI și cardurile OSM. Toate au trecut. Au fost inspectate capturi desktop, mobil portret și landscape, inclusiv carduri extinse. Sunt păstrate separat primele eșecuri CI, capturile și rapoartele locale; existența acestora local nu înseamnă publicarea lor integrală în GitHub.
 
-CI inițial pe6497d522:4probleme reparabile (suprafață data/public, aserțiuni vechi7unități, factory-name în test, audit sintetic prea rapid pentru protecția Chromium IPC) au fost investigate și corectate. Protecția IPC rămâne activă. Validarea cardurilor păstrează verificarea tuturor242nodurilor, cu ritmare125ms. NIF-001–006 sunt în registrul NI-FIN, fără închidere fictivă înaintea CI corectat.
+CI inițial pe6497d522:4probleme reparabile (suprafață data/public, aserțiuni vechi7unități, factory-name în test, audit sintetic prea rapid pentru protecția Chromium IPC) au fost investigate și corectate. Protecția IPC rămâne activă. Validarea cardurilor păstrează verificarea tuturor242nodurilor, cu ritmare125ms. NIF-001–008 sunt în registrul NI-FIN, fără închidere fictivă înaintea CI corectat.
 
 ## Gate și publicare
 
@@ -33,3 +33,5 @@ ACTUAL verificat:RO3246/MD2602/total5848,32componente,85referințe NI. Fingerpri
 ## Decizie
 
 NI-FIN.3 este pregătire de acceptare, nu acceptare formală. PR-urile rămân Draft până la închiderea tuturor gate-urilor aplicabile, integrarea în ordinea dependențelor și validarea noii publicări Pages. Nu se declară NI_FUNCTIONAL_COMPLETE și nu se închide taskul funcțional. Restanțele globale OSM și juridice nu au fost transformate în prerechizite noi pentru afișarea textuală NI și nu au fost declarate rezolvate.
+
+Verificări suplimentare: modelele NI corupte sau indisponibile sunt respinse separat, fără blocarea arborelui RO/MD. Destinația artifactelor browser este un subdirector literal al namespace-ului de audit existent; NI_FIN_OUTPUT a fost eliminat ca intrare necontrolată. Cele două alerte CodeQL inițiale sunt păstrate și necesită confirmarea închiderii pe noul SHA.

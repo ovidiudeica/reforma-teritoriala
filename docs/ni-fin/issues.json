@@ -61,6 +61,26 @@
       "fix": "Reject malformed version/timestamp/level metadata, missing source-name lists, per-node authority/epoch promotion and aliases outside the85canonical resources.",
       "regression": "Six negative model tests added;26model tests PASS.",
       "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-007",
+      "severity": "P1",
+      "component": "NI acquisition fault isolation",
+      "reproduction": "RealChromium corrupt200and503NI model responses leave ACTUAL tree uninitialized and root selection empty.",
+      "cause": "Optional NI model acquisition occurred inside the mandatory hierarchy initialization phase.",
+      "fix": "Validate NI model in the existing optional OSM/NI acquisition boundary; reject NI only, then initialize official RO/MD hierarchy, geometry and URL normally.",
+      "regression": "Two realChromium negative scenarios require5848ACTUAL records, functionaltree, selectedRO/MDroots, NI disabled and canonicalMDselection.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-008",
+      "severity": "P1",
+      "component": "Audit artifact write boundary",
+      "reproduction": "CodeQL check121001867307 reports two high path-expression alerts on environment-selected NI_FIN_OUTPUT.",
+      "cause": "New browser audit accepted arbitrary environment-selected artifact output paths.",
+      "fix": "Use existing fixed auditEvidenceDirectory namespace and a literal ni-fin subdirectory; remove custom destination environment input.",
+      "regression": "CodeQL exactHEAD plus existing browsersecurity helper tests; no rule suppression or dismissal.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
     }
   ]
 }

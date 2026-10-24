@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {fileURLToPath} from 'node:url';import {mkdir,writeFile} from 'node:fs/promises';import path from 'node:path';import {tmpdir} from 'node:os';
+import {fileURLToPath} from 'node:url';import {mkdir,writeFile} from 'node:fs/promises';import path from 'node:path';import {auditEvidenceDirectory} from './helpers/atlas-evidence.mjs';
 import {launchBrowser,waitFor} from './helpers/atlas-browser.mjs';
-const out=process.env.NI_FIN_OUTPUT||path.join(tmpdir(),'ni-fin-browser-evidence');await mkdir(out,{recursive:true});
+const out=path.join(auditEvidenceDirectory(),'ni-fin');await mkdir(out,{recursive:true});
 const b=await launchBrowser(fileURLToPath(new URL('../../',import.meta.url))),p=await b.page(),report={browser:b.version.Browser,scenarios:[],screenshots:[]};
 try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL and responsive cards',{timeout:240000},async()=>{
  await p.viewport(1440,900);await p.navigate(b.server.url);
