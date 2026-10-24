@@ -8,6 +8,8 @@ export function validateNistreniaAdministrativeModel(model,{actualIds=null}={}){
  const nodes=new Map(),resources=new Map();
  for(const resource of model.geometry_resources){
   if(typeof resource.canonical_id!=='string'||resources.has(resource.canonical_id)||!['ACTUAL','OSM_OUTLINE'].includes(resource.kind)||resource.geometry_status!=='GEOMETRY_VERIFIED'||!Number.isInteger(resource.osm_relation_id))fail('resource identity');
+  if(!Number.isSafeInteger(resource.osm_relation_id)||resource.osm_relation_id<=0||!Number.isSafeInteger(resource.osm_version)||resource.osm_version<=0||typeof resource.osm_timestamp!=='string'||!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$/.test(resource.osm_timestamp)||!Number.isFinite(Date.parse(resource.osm_timestamp)))fail('resource version/timestamp');
+  if(resource.osm_admin_level!=null&&(!Number.isInteger(resource.osm_admin_level)||resource.osm_admin_level<1||resource.osm_admin_level>12))fail('resource admin level');
   if(resource.kind==='ACTUAL'&&(resource.canonical_id!=='osm-r'+resource.osm_relation_id||(actualIds&&!actualIds.has(resource.canonical_id))))fail('unavailable canonical ACTUAL reference');
   if('geometry' in resource||'coordinates' in resource)fail('copied polygon');
   resources.set(resource.canonical_id,resource);
@@ -15,6 +17,7 @@ export function validateNistreniaAdministrativeModel(model,{actualIds=null}={}){
  if(resources.size!==93||model.geometry_resources.filter(x=>x.kind==='ACTUAL').length!==85||model.geometry_resources.filter(x=>x.kind==='OSM_OUTLINE').length!==8)fail('resource coverage');
  for(const node of model.nodes){
   if(typeof node.id!=='string'||!node.id.startsWith('view-nistrenia')||nodes.has(node.id)||!Array.isArray(node.child_ids)||!Array.isArray(node.source_refs)||!Array.isArray(node.geometry_candidates)||!NI_GEOMETRY_STATUSES.includes(node.geometry_status)||node.administrative_status!=='SOURCE_SCOPED_CONFIRMED'||node.contemporary_status!=='PROVISIONAL')fail('presentation identity/status');
+  if(typeof node.display_name!=='string'||!node.display_name.trim()||!Array.isArray(node.original_names)||node.original_names.some(x=>typeof x!=='string')||typeof node.temporal_notice!=='string'||node.baseline_year!==2023||node.effective_control!=='UNDETERMINED'||node.legal_certification!=='PENDING'||node.source_refs.some(x=>typeof x!=='string'))fail('node documentary authority');
   if('geometry' in node||'coordinates' in node||'source_actual_id' in node)fail('polygon or legal identity copied into documentary node');
   if(node.geometry_ref!==null&&!resources.has(node.geometry_ref))fail('missing own geometry resource');
   if(node.geometry_candidates.some(id=>!resources.has(id))||new Set(node.geometry_candidates).size!==node.geometry_candidates.length)fail('invalid candidate reference');
@@ -25,6 +28,8 @@ export function validateNistreniaAdministrativeModel(model,{actualIds=null}={}){
   if(node.geometry_ref===null&&node.additional_md_name_candidates.length&&node.geometry_status!=='GEOMETRY_CANDIDATE')fail('name discovery promoted');
   nodes.set(node.id,node);
  }
+ const roleAliases=Object.entries(model.compatibility_role_aliases||{}),actualResources=model.geometry_resources.filter(x=>x.kind==='ACTUAL').map(x=>x.canonical_id);
+ if(roleAliases.length!==85||new Set(roleAliases.map(([,id])=>id)).size!==85||roleAliases.some(([alias,id])=>alias!=='view-nistrenia-role-'+id||!actualResources.includes(id)))fail('unbound canonical role alias');
  const root=nodes.get('view-nistrenia');
  if(!root||root.parent_id!==null||root.child_ids.length!==9||root.geometry_ref!=='view-nistrenia')fail('root');
  const counts=kind=>model.nodes.filter(x=>x.kind===kind).length;
