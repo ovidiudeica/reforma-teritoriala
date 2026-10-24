@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "exit_code": 0,
+      "label": "recursive",
+      "requested": "w17",
+      "rows": [
+        [
+          "n1",
+          1
+        ],
+        [
+          "n1",
+          2
+        ],
+        [
+          "n2",
+          1
+        ],
+        [
+          "n3",
+          1
+        ],
+        [
+          "w17",
+          1
+        ],
+        [
+          "w17",
+          2
+        ]
+      ]
+    },
+    {
+      "exit_code": 0,
+      "label": "missing",
+      "requested": "w999",
+      "rows": []
+    }
+  ],
+  "manual_url": "https://docs.osmcode.org/osmium/latest/osmium-getid.html",
+  "missing_ids_must_be_detected_independently": true,
+  "original_read": false,
+  "status": "PASS",
+  "warning": "With-history exit0 is not completeness proof"
+}
