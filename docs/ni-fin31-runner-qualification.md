@@ -1,6 +1,6 @@
 # NI-FIN.3.1 — calificarea propusă a runnerului GitHub
 
-Status: `WAITING_OWNER_AUTHORIZATION`. Profilul nu este aprobat. Nicio modificare host-trust sau de proveniență ACTUAL nu a fost aplicată.
+Status: `OWNER_AUTHORIZED_PENDING_REAL_REPRODUCIBILITY`. Autorizarea expresă este conservată în `owner-authorization.json`, legată de propunerea `6c877af` și fingerprintul exact. Profilul poate fi adăugat; rebindul și execuția efectivă A/B trebuie încă validate. Nu este o certificare de reproductibilitate.
 
 ## Dovezi și rezultat tehnic
 
