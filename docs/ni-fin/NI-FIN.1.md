@@ -8,7 +8,7 @@ aplicabile. Nu schimbă ACTUAL, CUATM, părinții MD sau website-ul activ.
 Generator: `node scripts/audit/build-ni-fin-model.mjs`; verificare byte-identică:
 `node scripts/audit/build-ni-fin-model.mjs --check`.
 
-Registrul `public/data/ni-fin-administration.json` are 242 de noduri accesibile:
+Registrul `views/nistrenia/administration.json` are 242 de noduri accesibile:
 rădăcină, 5 raioane, 4 orașe superioare, 74 consilii și alte 158 de mențiuni.
 Cele patru orașe au câte două referințe documentare în același nod. Toate cele
 245 de referințe unit/council/place au mapare reciprocă verificată. Sursa originală
@@ -51,3 +51,5 @@ fără modificarea identităților ACTUAL.
 rolurilor comune, interdicția de copiere a poligoanelor, statutul candidaților,
 părinții, aliasurile, epoca și încărcătorul WebCrypto cu răspuns corupt/lipsă.
 Aceste teste nu substituie integrarea, Chromium sau publicarea din NI-FIN.2–3.
+
+Modelul virtual este publicabil static din `views/nistrenia/`, separat de directoarele protejate `data/` și `public/`. Auditul WEB-R2a.1 și limitele sale de scriere rămân nemodificate.

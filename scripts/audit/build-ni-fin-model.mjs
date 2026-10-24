@@ -1,4 +1,4 @@
-import {readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {loadSpec,effectiveCensus,validateDisk} from './ni-fin0-spec.mjs';
@@ -64,8 +64,9 @@ export function buildModel(packet,annex,navigation,outlineProof,semantic,catalog
 
 export function generateModel(){validateDisk();return buildModel(loadSpec(),read('docs/evidence/ni-jur-independent-20261020/documentary/PMR-ATD-ANNEX1-133268-text.json'),read('public/data/p909-nistrenia-osm-navigation.json'),read('public/data/p9095-osm-outlines-manifest.json'),read('docs/p9.0.7.2.15-osm-semantic-reconciliation.json'),read('public/data/actual-entities.json'));}
 export function writeOrCheck(check=false){
- const model=generateModel(),body=bytes(model),proof=bytes({schema:'ni-fin-model-manifest-v1',model_file:'public/data/ni-fin-administration.json',bytes:body.length,sha256:hash(body),source_provenance:model.source_provenance,actual_mutation_allowed:false,p91_import_allowed:false});
- for(const [path,raw] of [['public/data/ni-fin-administration.json',body],['public/data/ni-fin-administration-manifest.json',proof]]){const file=new URL(path,root);if(check){if(!readFileSync(file).equals(raw))throw Error('NI-FIN deterministic output differs: '+path);}else writeFileSync(file,raw);}
+ if(!check)mkdirSync(new URL('views/nistrenia/',root),{recursive:true});
+ const model=generateModel(),body=bytes(model),proof=bytes({schema:'ni-fin-model-manifest-v1',model_file:'views/nistrenia/administration.json',bytes:body.length,sha256:hash(body),source_provenance:model.source_provenance,actual_mutation_allowed:false,p91_import_allowed:false});
+ for(const [path,raw] of [['views/nistrenia/administration.json',body],['views/nistrenia/manifest.json',proof]]){const file=new URL(path,root);if(check){if(!readFileSync(file).equals(raw))throw Error('NI-FIN deterministic output differs: '+path);}else writeFileSync(file,raw);}
  return {status:check?'PASS_BYTE_IDENTICAL':'GENERATED',...validateNistreniaAdministrativeModel(model).counts,geometry_status_counts:Object.fromEntries(['GEOMETRY_VERIFIED','GEOMETRY_CANDIDATE','NO_GEOMETRY_EVIDENCE'].map(k=>[k,model.nodes.filter(x=>x.geometry_status===k).length]))};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){if(process.argv.slice(2).some(x=>x!=='--check'))throw Error('Only --check is accepted');console.log(JSON.stringify(writeOrCheck(process.argv.includes('--check'))));}
