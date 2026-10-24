@@ -1,0 +1,202 @@
+{
+  "code_sha256": {
+    "acq2a_audit.py": "e25824a961faf641e0e11900a519f10556217267ed683d90edff88e4bc32a6c7",
+    "acq2b_exact.py": "26f014b1aa0d738761c3a702774e3a6f2f9c47f592f5b4d96c75a9e6b78f5ecb",
+    "audit-native-priority-exact-pbf.py": "97b9a7e956a2d7b128a94ffcdc0ca366b84f630622c444a6f07c34afc33f1bfb",
+    "missing_only_frontier.py": "08f711c1b9410ef3deaaf0405064cf8817c4ba6963bfde919f0ce87a6a0f8764",
+    "osm_acq2c_frontier.py": "cf5db58bb716a00bffab24539c2fe3b6ffb2acb4fae8f633abd1f04d4db9f406",
+    "osm_acq2c_selected_epoch_replay.py": "0671c95fd8bbf0bfdf3649b7d871511920182634d7797a1b9d1a0b647bdf0f4f",
+    "preserved_history_overlay.py": "fc42bbee236e4b40f3ef2c1d41049c02a72469e36c65146c872e9fcf0b676a02"
+  },
+  "country_boundaries": {
+    "MD": {
+      "edges_sha256": "f9113f282c4a103e6a949d9249c3d7c216a984d6688e18878e26eebf32d67bef",
+      "root": 58974,
+      "version": 504,
+      "ways_sha256": "6c1d980fc00d789c2531d98f93360028132ea9c91f7dbeac8a124b2b680daa2e"
+    },
+    "RO": {
+      "edges_sha256": "9b47d52c20a504c6748875e1d497bb020824e5785ea6d2dd0689a3c504f9776e",
+      "root": 90689,
+      "version": 569,
+      "ways_sha256": "337b132cf0587d81b5bec4c7bab110956d1dd9ab21cdadf68ab2fdcdedcfebf4"
+    }
+  },
+  "epoch": "2026-10-20T20:23:47Z",
+  "formal_unknown_relations": 242,
+  "four_leaf_manifest_sha256": "4eb9011e3884aa4d6f16484030c3e30a5c5c445f1ec5fdd61a9937c80f2a9935",
+  "native_epoch_manifest_sha256": "d908c2c6611e2c18f1b019c580fc28bf02756e651355ff941fbb1a924daffc76",
+  "overpass_equivalence_certified": false,
+  "rows": [
+    {
+      "domains": [
+        "MD",
+        "RO"
+      ],
+      "exact_predicate": {
+        "MD": {
+          "inside_witness": null,
+          "missing": [],
+          "node_occurrence_states": {
+            "boundary": 1443,
+            "outside": 6295
+          },
+          "segment_count": 7519,
+          "segment_interval_states": {
+            "boundary": 1383,
+            "outside": 6136
+          },
+          "used_objects": 7738,
+          "used_objects_sha256": "84a261b97a7f2b11fc361567858913d7c63d3d547b5af11119d4683f578bac5b",
+          "verdict": "OUT_OF_SCOPE_PROVEN",
+          "way_count": 217
+        },
+        "RO": {
+          "inside_witness": null,
+          "missing": [],
+          "node_occurrence_states": {
+            "boundary": 1437,
+            "outside": 6301
+          },
+          "segment_count": 7519,
+          "segment_interval_states": {
+            "boundary": 1384,
+            "outside": 6135
+          },
+          "used_objects": 7738,
+          "used_objects_sha256": "84a261b97a7f2b11fc361567858913d7c63d3d547b5af11119d4683f578bac5b",
+          "verdict": "OUT_OF_SCOPE_PROVEN",
+          "way_count": 217
+        }
+      },
+      "formal_adjudication": false,
+      "history_gap_dependencies": [],
+      "id": 72526,
+      "missing_direct_geometry": [],
+      "source_qualified": false,
+      "status": "PROVISIONAL_EXACT_PBF_NOT_SOURCE_ACCEPTANCE",
+      "timestamp": "2025-12-14T13:41:24Z",
+      "version": 232
+    },
+    {
+      "domains": [
+        "MD",
+        "RO"
+      ],
+      "exact_predicate": {
+        "MD": {
+          "inside_witness": null,
+          "missing": [],
+          "node_occurrence_states": {
+            "boundary": 4228,
+            "outside": 3381
+          },
+          "segment_count": 7313,
+          "segment_interval_states": {
+            "boundary": 4033,
+            "outside": 3280
+          },
+          "used_objects": 7609,
+          "used_objects_sha256": "b0d6fb89eaff51d25b220b7f570e420e4d8a0ba5667a13e799b59c1d0fef12d6",
+          "verdict": "OUT_OF_SCOPE_PROVEN",
+          "way_count": 294
+        },
+        "RO": {
+          "inside_witness": null,
+          "missing": [],
+          "node_occurrence_states": {
+            "boundary": 635,
+            "outside": 6974
+          },
+          "segment_count": 7313,
+          "segment_interval_states": {
+            "boundary": 575,
+            "outside": 6738
+          },
+          "used_objects": 7609,
+          "used_objects_sha256": "b0d6fb89eaff51d25b220b7f570e420e4d8a0ba5667a13e799b59c1d0fef12d6",
+          "verdict": "OUT_OF_SCOPE_PROVEN",
+          "way_count": 294
+        }
+      },
+      "formal_adjudication": false,
+      "history_gap_dependencies": [
+        "n26150437"
+      ],
+      "id": 72634,
+      "missing_direct_geometry": [],
+      "source_qualified": false,
+      "status": "PROVISIONAL_EXACT_PBF_NOT_SOURCE_ACCEPTANCE",
+      "timestamp": "2025-05-11T13:22:42Z",
+      "version": 268
+    },
+    {
+      "domains": [
+        "MD"
+      ],
+      "exact_predicate": {
+        "MD": {
+          "inside_witness": null,
+          "missing": [],
+          "node_occurrence_states": {
+            "boundary": 229,
+            "outside": 3074
+          },
+          "segment_count": 3211,
+          "segment_interval_states": {
+            "boundary": 213,
+            "outside": 2998
+          },
+          "used_objects": 3303,
+          "used_objects_sha256": "315713ca27ba43e61677e302fbebb77c4f34c2eebd18e5cd593fdb614ab36d8c",
+          "verdict": "OUT_OF_SCOPE_PROVEN",
+          "way_count": 91
+        }
+      },
+      "formal_adjudication": false,
+      "history_gap_dependencies": [],
+      "id": 11821462,
+      "missing_direct_geometry": [],
+      "source_qualified": false,
+      "status": "PROVISIONAL_EXACT_PBF_NOT_SOURCE_ACCEPTANCE",
+      "timestamp": "2025-07-28T05:47:00Z",
+      "version": 36
+    },
+    {
+      "domains": [
+        "MD"
+      ],
+      "exact_predicate": {
+        "MD": {
+          "inside_witness": null,
+          "missing": [],
+          "node_occurrence_states": {
+            "boundary": 1443,
+            "outside": 1799
+          },
+          "segment_count": 3154,
+          "segment_interval_states": {
+            "boundary": 1383,
+            "outside": 1771
+          },
+          "used_objects": 3242,
+          "used_objects_sha256": "45f5ba98075228b7cc7245a87a61fd5750d3531da173f40f2187a00376e7c7d5",
+          "verdict": "OUT_OF_SCOPE_PROVEN",
+          "way_count": 87
+        }
+      },
+      "formal_adjudication": false,
+      "history_gap_dependencies": [],
+      "id": 11905201,
+      "missing_direct_geometry": [],
+      "source_qualified": false,
+      "status": "PROVISIONAL_EXACT_PBF_NOT_SOURCE_ACCEPTANCE",
+      "timestamp": "2025-04-25T18:08:08Z",
+      "version": 64
+    }
+  ],
+  "scope": "Existing exact E7/rational direct node-way predicate only; no GEOS containment verdict, no legal attribution or Overpass-area equivalence.",
+  "source_qualified": false,
+  "topology_certified": false,
+  "unknown_adjudicated": 0
+}
