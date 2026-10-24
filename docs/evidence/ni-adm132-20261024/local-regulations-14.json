@@ -20,7 +20,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Буторы",
@@ -39,7 +40,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Бычок",
@@ -58,7 +60,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Виноградное",
@@ -70,10 +73,11 @@
       "dates_in_first_950": [],
       "territorial_keywords_count": 0,
       "keyword_contexts": [],
-      "content_read": true,
+      "content_read": false,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NO_TEXT_RETURNED_REQUIRES_BINARY_INSPECTION"
     },
     {
       "area": "Глиное",
@@ -92,7 +96,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Гыртоп",
@@ -109,7 +114,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Карманово",
@@ -129,7 +135,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Колосово",
@@ -148,7 +155,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Красногорка",
@@ -168,7 +176,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Малаешты",
@@ -187,7 +196,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Спея",
@@ -207,7 +217,8 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     },
     {
       "area": "Тея",
@@ -219,10 +230,11 @@
       "dates_in_first_950": [],
       "territorial_keywords_count": 0,
       "keyword_contexts": [],
-      "content_read": true,
+      "content_read": false,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NO_TEXT_RETURNED_REQUIRES_BINARY_INSPECTION"
     },
     {
       "area": "Ташлык",
@@ -234,10 +246,11 @@
       "dates_in_first_950": [],
       "territorial_keywords_count": 0,
       "keyword_contexts": [],
-      "content_read": true,
+      "content_read": false,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NO_TEXT_RETURNED_REQUIRES_BINARY_INSPECTION"
     },
     {
       "area": "Шипка",
@@ -258,13 +271,20 @@
       "content_read": true,
       "binary_SHA256": null,
       "qualified_signature_checked": false,
-      "administrative_boundary_effect_certified": false
+      "administrative_boundary_effect_certified": false,
+      "text_extraction_status": "NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY"
     }
   ],
   "total": 14,
-  "read": 14,
-  "scope": "Content text access to all fourteen 2026-listed regulation files; NOT full issuer archive or digitally-signed binary verification",
+  "read": 11,
+  "scope": "11/14 nonempty text extractions; three have no extracted text and are NOT reviewed for content. None of 14 has qualified signed-primary verification.",
   "all_dates_qualified": false,
   "all_originals_cryptographically_certified": false,
-  "no_new_legal_parent_promotions": true
+  "no_new_legal_parent_promotions": true,
+  "no_text_returned": 3,
+  "empty_file_ids": [
+    "1aFtSJ_f-ZzUu90f5ASI-463K_NGYcJ56",
+    "1GvwOoSOdqUVgkN0qGgV5bNKOgtTvOhL-",
+    "14hdBOzQFThFWt9dl6db5HO4vdx3cbnc0"
+  ]
 }
