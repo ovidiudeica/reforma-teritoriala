@@ -1,0 +1,16 @@
+{
+  "schema": "ni-fin-issue-register-v1",
+  "issues": [
+    {
+      "id": "NIF-001",
+      "severity": "P2",
+      "component": "Documentary virtual parent extraction",
+      "reproduction_source_sha256": "ee74422be15877a1d96e2bb888d21f821e2a522da3b195227e0eb1896c83f3af",
+      "source_id": "place-28",
+      "cause": "Active urban parent was retained across a new numbered sibling item.",
+      "fix": "Source-bound correction of virtual parent only, preserving original census and officialMDparent.",
+      "regression": "Mayak effectiveparentunit22; lettered25-27underplace24; nestedlocalities allowed and cycles rejected.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    }
+  ]
+}

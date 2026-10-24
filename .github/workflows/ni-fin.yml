@@ -1,0 +1,38 @@
+name: NI-FIN virtual presentation acceptance
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ni-fin.yml'
+      - 'docs/ni-fin/**'
+      - 'scripts/audit/ni-fin*.mjs'
+      - 'scripts/test/ni-fin*.mjs'
+      - 'atlas-nistrenia-*.mjs'
+      - 'public/data/ni-fin*'
+      - 'public/data/p909-nistrenia-osm-navigation.json'
+      - 'public/data/p9095-osm-outlines*.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ni-fin.yml'
+      - 'docs/ni-fin/**'
+      - 'scripts/audit/ni-fin*.mjs'
+      - 'scripts/test/ni-fin*.mjs'
+      - 'atlas-nistrenia-*.mjs'
+      - 'public/data/ni-fin*'
+      - 'public/data/p909-nistrenia-osm-navigation.json'
+      - 'public/data/p9095-osm-outlines*.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ni-fin:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: node --test scripts/test/ni-fin*.test.mjs

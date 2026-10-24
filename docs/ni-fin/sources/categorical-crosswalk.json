@@ -1,0 +1,3393 @@
+{
+  "schema": "ni-tags0-ni-adm0-categorical-crosswalk-v1",
+  "date": "2026-10-24",
+  "mode": "READ_ONLY_EVIDENCE_ONLY",
+  "source": {
+    "ni_adm0_census": {
+      "path": "docs/evidence/ni-adm0-20261024/census.json",
+      "commit": "27454b3d78671880cb41929f0e3d9c5240c5e018",
+      "blob_sha": "ba8c4c6f1f3e5fcda7df0a04c65f9026667db357",
+      "primary_annex_sha256": "43b8270b4e04c8922af551a72dc494d7bc02628fe827a8ec28bb2802a9f94b5b"
+    },
+    "NI_OSM85": {
+      "path": "docs/p9.0.7.2.15-osm-tag-census.json",
+      "evidence_type": "OSM_TAGS_AND_2023_NI_ADM_PREEXISTING_CROSSWALK"
+    },
+    "OSM_ROOT_OUTLINES": {
+      "path": "docs/evidence/ni-md-tags-20261024/ten-osm-root-and-subdivision-tags.json",
+      "blob_sha": "2159a2c51fd834cd0a3d70dd0dbc060eae38bccd"
+    }
+  },
+  "method": "Reuse NI-ADM.0 OSM_85_crosswalk.hits; include reference_kind=LOCALITY only; aggregate unique place_id; do not equate councils/localities/relations/polygons; classify 9 de facto upper-unit claims separately from 8 OSM NI root/outlines.",
+  "summary": {
+    "source_upper_claims": 9,
+    "upper_outline_matches": 7,
+    "upper_without_distinct_outline_in_eight": 2,
+    "rural_council_claims": 74,
+    "councils_geometrically_certified_here": 0,
+    "locality_mentions": 162,
+    "locality_mentions_with_reference_in_osm85": 87,
+    "locality_mentions_without_reference_in_osm85": 75,
+    "missing_reference_by_upper": {
+      "unit-11": 1,
+      "unit-15": 0,
+      "unit-16": 0,
+      "unit-17": 0,
+      "unit-22": 12,
+      "unit-66": 19,
+      "unit-108": 10,
+      "unit-145": 21,
+      "unit-216": 12
+    },
+    "warn": "No reference within OSM85 is not proof of OSM geometry absence; matches are not certified individual polygons or current legal membership."
+  },
+  "upper_units": [
+    {
+      "id": "unit-11",
+      "name_ru": "Бендеры",
+      "claim_kind_2023": "independent_city",
+      "annex_index": 11,
+      "osm_level5_or_equivalent_outline": 944727,
+      "top_outline_status": "OSM_GEOMETRIC_ROLE_ONLY",
+      "known_osm85_locality_candidates": [
+        12463379,
+        9581354
+      ],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "unit-15",
+      "name_ru": "Дубоссары",
+      "claim_kind_2023": "independent_city",
+      "annex_index": 15,
+      "osm_level5_or_equivalent_outline": null,
+      "top_outline_status": "NO_SEPARATE_UPPER_OUTLINE_IN_THE_EIGHT",
+      "known_osm85_locality_candidates": [
+        9288287
+      ],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "unit-16",
+      "name_ru": "Рыбница",
+      "claim_kind_2023": "independent_city",
+      "annex_index": 16,
+      "osm_level5_or_equivalent_outline": null,
+      "top_outline_status": "NO_SEPARATE_UPPER_OUTLINE_IN_THE_EIGHT",
+      "known_osm85_locality_candidates": [
+        9659979
+      ],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "unit-17",
+      "name_ru": "Тирасполь",
+      "claim_kind_2023": "independent_city",
+      "annex_index": 17,
+      "osm_level5_or_equivalent_outline": 1702219,
+      "top_outline_status": "OSM_GEOMETRIC_ROLE_ONLY",
+      "known_osm85_locality_candidates": [
+        18941890
+      ],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "unit-22",
+      "name_ru": "Григориопольский район",
+      "claim_kind_2023": "rayon",
+      "annex_index": 22,
+      "osm_level5_or_equivalent_outline": 1702214,
+      "top_outline_status": "OSM_GEOMETRIC_ROLE_ONLY",
+      "known_osm85_locality_candidates": [],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "unit-66",
+      "name_ru": "Дубоссарский район",
+      "claim_kind_2023": "rayon",
+      "annex_index": 66,
+      "osm_level5_or_equivalent_outline": 1702215,
+      "top_outline_status": "OSM_GEOMETRIC_ROLE_ONLY",
+      "known_osm85_locality_candidates": [],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "unit-108",
+      "name_ru": "Каменский район",
+      "claim_kind_2023": "rayon",
+      "annex_index": 108,
+      "osm_level5_or_equivalent_outline": 1702216,
+      "top_outline_status": "OSM_GEOMETRIC_ROLE_ONLY",
+      "known_osm85_locality_candidates": [],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "unit-145",
+      "name_ru": "Рыбницкий район",
+      "claim_kind_2023": "rayon",
+      "annex_index": 145,
+      "osm_level5_or_equivalent_outline": 1702217,
+      "top_outline_status": "OSM_GEOMETRIC_ROLE_ONLY",
+      "known_osm85_locality_candidates": [],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "unit-216",
+      "name_ru": "Слободзейский район",
+      "claim_kind_2023": "rayon",
+      "annex_index": 216,
+      "osm_level5_or_equivalent_outline": 1702218,
+      "top_outline_status": "OSM_GEOMETRIC_ROLE_ONLY",
+      "known_osm85_locality_candidates": [],
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    }
+  ],
+  "councils": [
+    {
+      "id": "council-29",
+      "name_ru": "Буторский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 29,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-32",
+      "name_ru": "Бычковский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 32,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-35",
+      "name_ru": "Винограднянский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 35,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-37",
+      "name_ru": "Глинойский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 37,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-39",
+      "name_ru": "Гыртопский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 39,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-42",
+      "name_ru": "Кармановский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 42,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-47",
+      "name_ru": "Колосовский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 47,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-51",
+      "name_ru": "Красногорский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 51,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-53",
+      "name_ru": "Малаештский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 53,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-56",
+      "name_ru": "Спейский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 56,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-58",
+      "name_ru": "Ташлыкский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 58,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-60",
+      "name_ru": "Тейский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 60,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-63",
+      "name_ru": "Шипкинский сельсовет",
+      "parent_2023": "unit-22",
+      "annex_index": 63,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-68",
+      "name_ru": "Дзержинский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 68,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-70",
+      "name_ru": "Дойбанский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 70,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-74",
+      "name_ru": "Дороцкий сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 74,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-76",
+      "name_ru": "Дубовский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 76,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-79",
+      "name_ru": "Гармацкий сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 79,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-81",
+      "name_ru": "Гоянский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 81,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-84",
+      "name_ru": "Кочиерский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 84,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-88",
+      "name_ru": "Кошницкий сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 88,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-91",
+      "name_ru": "Красновиноградарский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 91,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-97",
+      "name_ru": "Ново-Комиссаровский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 97,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-102",
+      "name_ru": "Пырытский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 102,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-104",
+      "name_ru": "Роговский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 104,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-106",
+      "name_ru": "Цыбулевский сельсовет",
+      "parent_2023": "unit-66",
+      "annex_index": 106,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-112",
+      "name_ru": "Валя-Адынкский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 112,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-115",
+      "name_ru": "Грушковский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 115,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-118",
+      "name_ru": "Катериновский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 118,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-121",
+      "name_ru": "Краснооктябрьский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 121,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-124",
+      "name_ru": "Кузьминский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 124,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-127",
+      "name_ru": "Окницкий сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 127,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-129",
+      "name_ru": "Подойменский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 129,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-132",
+      "name_ru": "Рашковский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 132,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-135",
+      "name_ru": "Ротарский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 135,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-139",
+      "name_ru": "Севериновский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 139,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-141",
+      "name_ru": "Слобода-Рашковский сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 141,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-143",
+      "name_ru": "Хрустовской сельсовет",
+      "parent_2023": "unit-108",
+      "annex_index": 143,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-147",
+      "name_ru": "Андреевский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 147,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-151",
+      "name_ru": "Белочинский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 151,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-153",
+      "name_ru": "Большемолокишский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 153,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-155",
+      "name_ru": "Броштянский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 155,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-157",
+      "name_ru": "Бутучанский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 157,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-159",
+      "name_ru": "Вадатурковский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 159,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-161",
+      "name_ru": "Воронковский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 161,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-165",
+      "name_ru": "Выхватинецкий сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 165,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-168",
+      "name_ru": "Гарабский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 168,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-170",
+      "name_ru": "Гидиримский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 170,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-172",
+      "name_ru": "Ержовский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 172,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-175",
+      "name_ru": "Журский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 175,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-177",
+      "name_ru": "Колбаснянский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 177,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-181",
+      "name_ru": "Красненьский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 181,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-185",
+      "name_ru": "Ленинский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 185,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-190",
+      "name_ru": "Мало-Молокишский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 190,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-192",
+      "name_ru": "Михайловский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 192,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-194",
+      "name_ru": "Мокрянский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 194,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-199",
+      "name_ru": "Плотьянский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 199,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-201",
+      "name_ru": "Попенкский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 201,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-206",
+      "name_ru": "Советский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 206,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-209",
+      "name_ru": "Строенецкий сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 209,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-211",
+      "name_ru": "Ульманский сельсовет",
+      "parent_2023": "unit-145",
+      "annex_index": 211,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-222",
+      "name_ru": "Ближне-Хуторской сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 222,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-224",
+      "name_ru": "Владимировский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 224,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-228",
+      "name_ru": "Глинойский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 228,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-230",
+      "name_ru": "Карагашский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 230,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-232",
+      "name_ru": "Кицканский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 232,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-235",
+      "name_ru": "Копанский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 235,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-237",
+      "name_ru": "Коротнянский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 237,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-239",
+      "name_ru": "Незавертайловский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 239,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-241",
+      "name_ru": "Парканский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 241,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-243",
+      "name_ru": "Суклейский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 243,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-245",
+      "name_ru": "Терновский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 245,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-247",
+      "name_ru": "Фрунзенский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 247,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "council-255",
+      "name_ru": "Чобручский сельсовет",
+      "parent_2023": "unit-216",
+      "annex_index": 255,
+      "osm85_role_crosswalk_status": "NOT_MAPPED_AS_SEPARATE_COUNCIL_UNIT",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    }
+  ],
+  "localities": [
+    {
+      "id": "place-11",
+      "name_ru": "Бендеры",
+      "kind_ru": "город",
+      "parent_2023": null,
+      "upper_2023": "unit-11",
+      "annex_index": 11,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 12463379,
+          "osm_role": "OSM_CITY_BOUNDARY",
+          "geometric_group": "Bender",
+          "match_class": "UNIQUE_NAME_2023"
+        },
+        {
+          "osm_relation_id": 9581354,
+          "osm_role": "OSM_LEVEL4_MUNICIPALITY_BOUNDARY",
+          "geometric_group": "Bender",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-12",
+      "name_ru": "Варница",
+      "kind_ru": "село",
+      "parent_2023": "unit-11",
+      "upper_2023": "unit-11",
+      "annex_index": 12,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-13",
+      "name_ru": "Гыска",
+      "kind_ru": "село",
+      "parent_2023": "unit-11",
+      "upper_2023": "unit-11",
+      "annex_index": 13,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 12215667,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Bender",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-14",
+      "name_ru": "Протягайловка",
+      "kind_ru": "село",
+      "parent_2023": "unit-11",
+      "upper_2023": "unit-11",
+      "annex_index": 14,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 12463378,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Bender",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-15",
+      "name_ru": "Дубоссары",
+      "kind_ru": "город",
+      "parent_2023": null,
+      "upper_2023": "unit-15",
+      "annex_index": 15,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9288287,
+          "osm_role": "OSM_CITY_COUNCIL_AREA",
+          "geometric_group": "Dubăsari",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-16",
+      "name_ru": "Рыбница",
+      "kind_ru": "город",
+      "parent_2023": null,
+      "upper_2023": "unit-16",
+      "annex_index": 16,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9659979,
+          "osm_role": "OSM_CITY_BOUNDARY",
+          "geometric_group": "Rîbnița",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-17",
+      "name_ru": "Тирасполь",
+      "kind_ru": "город",
+      "parent_2023": null,
+      "upper_2023": "unit-17",
+      "annex_index": 17,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 18941890,
+          "osm_role": "OSM_CITY_BOUNDARY",
+          "geometric_group": "Tiraspol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-18",
+      "name_ru": "Днестровск",
+      "kind_ru": "город-спутник",
+      "parent_2023": "unit-17",
+      "upper_2023": "unit-17",
+      "annex_index": 18,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8290840,
+          "osm_role": "OSM_TOWN_BOUNDARY",
+          "geometric_group": "Tiraspol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-19",
+      "name_ru": "Ново-Тираспольский",
+      "kind_ru": "поселок",
+      "parent_2023": "unit-17",
+      "upper_2023": "unit-17",
+      "annex_index": 19,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 18941889,
+          "osm_role": "OSM_TOWN_BOUNDARY",
+          "geometric_group": "Tiraspol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-20",
+      "name_ru": "Кременчуг",
+      "kind_ru": "село",
+      "parent_2023": "unit-17",
+      "upper_2023": "unit-17",
+      "annex_index": 20,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 1216706,
+          "osm_role": "OSM_VILLAGE_BOUNDARY",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-24",
+      "name_ru": "Григориополь",
+      "kind_ru": "город",
+      "parent_2023": "unit-22",
+      "upper_2023": "unit-22",
+      "annex_index": 24,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9301464,
+          "osm_role": "OSM_TOWN_BOUNDARY",
+          "geometric_group": "Grigoriopol",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-25",
+      "name_ru": "Делакеу",
+      "kind_ru": "село",
+      "parent_2023": "place-24",
+      "upper_2023": "unit-22",
+      "annex_index": 25,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19069840,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-26",
+      "name_ru": "Красное",
+      "kind_ru": "село",
+      "parent_2023": "place-24",
+      "upper_2023": "unit-22",
+      "annex_index": 26,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9679382,
+          "osm_role": "OSM_TOWN_BOUNDARY",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-27",
+      "name_ru": "Красная Горка",
+      "kind_ru": "село",
+      "parent_2023": "place-24",
+      "upper_2023": "unit-22",
+      "annex_index": 27,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-28",
+      "name_ru": "Маяк",
+      "kind_ru": "поселок",
+      "parent_2023": "place-24",
+      "upper_2023": "unit-22",
+      "annex_index": 28,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8539257,
+          "osm_role": "OSM_SETTLEMENT_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-30",
+      "name_ru": "Бутор",
+      "kind_ru": "село",
+      "parent_2023": "council-29",
+      "upper_2023": "unit-22",
+      "annex_index": 30,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8348625,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-31",
+      "name_ru": "Индия",
+      "kind_ru": "село",
+      "parent_2023": "council-29",
+      "upper_2023": "unit-22",
+      "annex_index": 31,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-33",
+      "name_ru": "Бычок",
+      "kind_ru": "село",
+      "parent_2023": "council-32",
+      "upper_2023": "unit-22",
+      "annex_index": 33,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7431238,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-34",
+      "name_ru": "Ново-Владимировка",
+      "kind_ru": "село",
+      "parent_2023": "council-32",
+      "upper_2023": "unit-22",
+      "annex_index": 34,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-36",
+      "name_ru": "Виноградное",
+      "kind_ru": "село",
+      "parent_2023": "council-35",
+      "upper_2023": "unit-22",
+      "annex_index": 36,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7432700,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-38",
+      "name_ru": "Глиное",
+      "kind_ru": "поселок",
+      "parent_2023": "council-37",
+      "upper_2023": "unit-22",
+      "annex_index": 38,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8291058,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        },
+        {
+          "osm_relation_id": 9301463,
+          "osm_role": "OSM_SETTLEMENT_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-40",
+      "name_ru": "Гыртоп",
+      "kind_ru": "село",
+      "parent_2023": "council-39",
+      "upper_2023": "unit-22",
+      "annex_index": 40,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9288110,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-41",
+      "name_ru": "Мариян",
+      "kind_ru": "село",
+      "parent_2023": "council-39",
+      "upper_2023": "unit-22",
+      "annex_index": 41,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-43",
+      "name_ru": "Карманово",
+      "kind_ru": "поселок",
+      "parent_2023": "council-42",
+      "upper_2023": "unit-22",
+      "annex_index": 43,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9288026,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-44",
+      "name_ru": "Котовка",
+      "kind_ru": "село",
+      "parent_2023": "council-42",
+      "upper_2023": "unit-22",
+      "annex_index": 44,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-45",
+      "name_ru": "Мочаровка",
+      "kind_ru": "село",
+      "parent_2023": "council-42",
+      "upper_2023": "unit-22",
+      "annex_index": 45,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-46",
+      "name_ru": "Федосеевка",
+      "kind_ru": "село",
+      "parent_2023": "council-42",
+      "upper_2023": "unit-22",
+      "annex_index": 46,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-48",
+      "name_ru": "Колосово",
+      "kind_ru": "поселок",
+      "parent_2023": "council-47",
+      "upper_2023": "unit-22",
+      "annex_index": 48,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8539525,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-49",
+      "name_ru": "Красная Бессарабия",
+      "kind_ru": "село",
+      "parent_2023": "council-47",
+      "upper_2023": "unit-22",
+      "annex_index": 49,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-50",
+      "name_ru": "Победа",
+      "kind_ru": "село",
+      "parent_2023": "council-47",
+      "upper_2023": "unit-22",
+      "annex_index": 50,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-52",
+      "name_ru": "Красногорка",
+      "kind_ru": "село",
+      "parent_2023": "council-51",
+      "upper_2023": "unit-22",
+      "annex_index": 52,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7432661,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-54",
+      "name_ru": "Малаешты",
+      "kind_ru": "село",
+      "parent_2023": "council-53",
+      "upper_2023": "unit-22",
+      "annex_index": 54,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8292891,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-55",
+      "name_ru": "Черница",
+      "kind_ru": "село",
+      "parent_2023": "council-53",
+      "upper_2023": "unit-22",
+      "annex_index": 55,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-57",
+      "name_ru": "Спея",
+      "kind_ru": "село",
+      "parent_2023": "council-56",
+      "upper_2023": "unit-22",
+      "annex_index": 57,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8348646,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-59",
+      "name_ru": "Ташлык",
+      "kind_ru": "село",
+      "parent_2023": "council-58",
+      "upper_2023": "unit-22",
+      "annex_index": 59,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8348605,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-61",
+      "name_ru": "Тея",
+      "kind_ru": "село",
+      "parent_2023": "council-60",
+      "upper_2023": "unit-22",
+      "annex_index": 61,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7432662,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-62",
+      "name_ru": "Токмазея",
+      "kind_ru": "село",
+      "parent_2023": "council-60",
+      "upper_2023": "unit-22",
+      "annex_index": 62,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-64",
+      "name_ru": "Веселое",
+      "kind_ru": "село",
+      "parent_2023": "council-63",
+      "upper_2023": "unit-22",
+      "annex_index": 64,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-65",
+      "name_ru": "Шипка",
+      "kind_ru": "село",
+      "parent_2023": "council-63",
+      "upper_2023": "unit-22",
+      "annex_index": 65,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8726395,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-69",
+      "name_ru": "Дзержинское",
+      "kind_ru": "село",
+      "parent_2023": "council-68",
+      "upper_2023": "unit-66",
+      "annex_index": 69,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9288158,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Dubăsari",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-71",
+      "name_ru": "Дойбаны I",
+      "kind_ru": "село",
+      "parent_2023": "council-70",
+      "upper_2023": "unit-66",
+      "annex_index": 71,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19013329,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Dubăsari",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-72",
+      "name_ru": "Дойбаны II",
+      "kind_ru": "село",
+      "parent_2023": "council-70",
+      "upper_2023": "unit-66",
+      "annex_index": 72,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-73",
+      "name_ru": "Койково",
+      "kind_ru": "село",
+      "parent_2023": "council-70",
+      "upper_2023": "unit-66",
+      "annex_index": 73,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-75",
+      "name_ru": "Дороцкое",
+      "kind_ru": "село",
+      "parent_2023": "council-74",
+      "upper_2023": "unit-66",
+      "annex_index": 75,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-77",
+      "name_ru": "Дубово",
+      "kind_ru": "село",
+      "parent_2023": "council-76",
+      "upper_2023": "unit-66",
+      "annex_index": 77,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8349002,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Dubăsari",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-78",
+      "name_ru": "Новые Гояны",
+      "kind_ru": "село",
+      "parent_2023": "council-76",
+      "upper_2023": "unit-66",
+      "annex_index": 78,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-80",
+      "name_ru": "Гармацкое",
+      "kind_ru": "село",
+      "parent_2023": "council-79",
+      "upper_2023": "unit-66",
+      "annex_index": 80,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8348920,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Dubăsari",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-82",
+      "name_ru": "Гояны",
+      "kind_ru": "село",
+      "parent_2023": "council-81",
+      "upper_2023": "unit-66",
+      "annex_index": 82,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19013328,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Dubăsari",
+          "match_class": "CURATED_ALIAS_POTENTIAL_MATCH"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-83",
+      "name_ru": "Ягорлык",
+      "kind_ru": "село",
+      "parent_2023": "council-81",
+      "upper_2023": "unit-66",
+      "annex_index": 83,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-85",
+      "name_ru": "Васильевка",
+      "kind_ru": "село",
+      "parent_2023": "council-84",
+      "upper_2023": "unit-66",
+      "annex_index": 85,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-86",
+      "name_ru": "Кочиеры",
+      "kind_ru": "село",
+      "parent_2023": "council-84",
+      "upper_2023": "unit-66",
+      "annex_index": 86,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-87",
+      "name_ru": "Новая Моловата",
+      "kind_ru": "село",
+      "parent_2023": "council-84",
+      "upper_2023": "unit-66",
+      "annex_index": 87,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-89",
+      "name_ru": "Кошница",
+      "kind_ru": "село",
+      "parent_2023": "council-88",
+      "upper_2023": "unit-66",
+      "annex_index": 89,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-90",
+      "name_ru": "Погребя",
+      "kind_ru": "село",
+      "parent_2023": "council-88",
+      "upper_2023": "unit-66",
+      "annex_index": 90,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-92",
+      "name_ru": "Афанасьевка",
+      "kind_ru": "село",
+      "parent_2023": "council-91",
+      "upper_2023": "unit-66",
+      "annex_index": 92,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-93",
+      "name_ru": "Калиновка",
+      "kind_ru": "село",
+      "parent_2023": "council-91",
+      "upper_2023": "unit-66",
+      "annex_index": 93,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-94",
+      "name_ru": "Красный Виноградарь",
+      "kind_ru": "село",
+      "parent_2023": "council-91",
+      "upper_2023": "unit-66",
+      "annex_index": 94,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9288756,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Dubăsari",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-95",
+      "name_ru": "Новая Александровка",
+      "kind_ru": "село",
+      "parent_2023": "council-91",
+      "upper_2023": "unit-66",
+      "annex_index": 95,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-96",
+      "name_ru": "Новая Лунга",
+      "kind_ru": "село",
+      "parent_2023": "council-91",
+      "upper_2023": "unit-66",
+      "annex_index": 96,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-98",
+      "name_ru": "Боска",
+      "kind_ru": "село",
+      "parent_2023": "council-97",
+      "upper_2023": "unit-66",
+      "annex_index": 98,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-99",
+      "name_ru": "Ново-Комиссаровка",
+      "kind_ru": "село",
+      "parent_2023": "council-97",
+      "upper_2023": "unit-66",
+      "annex_index": 99,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9288722,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Dubăsari",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-100",
+      "name_ru": "Новая Кошница",
+      "kind_ru": "село",
+      "parent_2023": "council-97",
+      "upper_2023": "unit-66",
+      "annex_index": 100,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-101",
+      "name_ru": "Новая Погребя",
+      "kind_ru": "село",
+      "parent_2023": "council-97",
+      "upper_2023": "unit-66",
+      "annex_index": 101,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-103",
+      "name_ru": "Пырыта",
+      "kind_ru": "село",
+      "parent_2023": "council-102",
+      "upper_2023": "unit-66",
+      "annex_index": 103,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-105",
+      "name_ru": "Роги",
+      "kind_ru": "село",
+      "parent_2023": "council-104",
+      "upper_2023": "unit-66",
+      "annex_index": 105,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-107",
+      "name_ru": "Цыбулевка",
+      "kind_ru": "село",
+      "parent_2023": "council-106",
+      "upper_2023": "unit-66",
+      "annex_index": 107,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19012105,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Dubăsari",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-110",
+      "name_ru": "Каменка",
+      "kind_ru": "город",
+      "parent_2023": "unit-108",
+      "upper_2023": "unit-108",
+      "annex_index": 110,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015110,
+          "osm_role": "OSM_TOWN_BOUNDARY",
+          "geometric_group": "Camenca",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-111",
+      "name_ru": "Солнечный",
+      "kind_ru": "поселок",
+      "parent_2023": "place-110",
+      "upper_2023": "unit-108",
+      "annex_index": 111,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-113",
+      "name_ru": "Валя-Адынка",
+      "kind_ru": "село",
+      "parent_2023": "council-112",
+      "upper_2023": "unit-108",
+      "annex_index": 113,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015113,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "CURATED_ALIAS_POTENTIAL_MATCH"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-114",
+      "name_ru": "Константиновка",
+      "kind_ru": "село",
+      "parent_2023": "council-112",
+      "upper_2023": "unit-108",
+      "annex_index": 114,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-116",
+      "name_ru": "Грушка",
+      "kind_ru": "село",
+      "parent_2023": "council-115",
+      "upper_2023": "unit-108",
+      "annex_index": 116,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8292898,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-117",
+      "name_ru": "Фрунзовка",
+      "kind_ru": "село",
+      "parent_2023": "council-115",
+      "upper_2023": "unit-108",
+      "annex_index": 117,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-119",
+      "name_ru": "Катериновка",
+      "kind_ru": "село",
+      "parent_2023": "council-118",
+      "upper_2023": "unit-108",
+      "annex_index": 119,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015115,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-120",
+      "name_ru": "Садки",
+      "kind_ru": "село",
+      "parent_2023": "council-118",
+      "upper_2023": "unit-108",
+      "annex_index": 120,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-122",
+      "name_ru": "Александровка",
+      "kind_ru": "село",
+      "parent_2023": "council-121",
+      "upper_2023": "unit-108",
+      "annex_index": 122,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-123",
+      "name_ru": "Красный Октябрь",
+      "kind_ru": "село",
+      "parent_2023": "council-121",
+      "upper_2023": "unit-108",
+      "annex_index": 123,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015109,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-125",
+      "name_ru": "Войтовка",
+      "kind_ru": "село",
+      "parent_2023": "council-124",
+      "upper_2023": "unit-108",
+      "annex_index": 125,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-126",
+      "name_ru": "Кузьмин",
+      "kind_ru": "село",
+      "parent_2023": "council-124",
+      "upper_2023": "unit-108",
+      "annex_index": 126,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015106,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-128",
+      "name_ru": "Окница",
+      "kind_ru": "село",
+      "parent_2023": "council-127",
+      "upper_2023": "unit-108",
+      "annex_index": 128,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8292909,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-130",
+      "name_ru": "Подойма",
+      "kind_ru": "село",
+      "parent_2023": "council-129",
+      "upper_2023": "unit-108",
+      "annex_index": 130,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015111,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-131",
+      "name_ru": "Подоймица",
+      "kind_ru": "село",
+      "parent_2023": "council-129",
+      "upper_2023": "unit-108",
+      "annex_index": 131,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-133",
+      "name_ru": "Рашков",
+      "kind_ru": "село",
+      "parent_2023": "council-132",
+      "upper_2023": "unit-108",
+      "annex_index": 133,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015114,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "CURATED_ALIAS_POTENTIAL_MATCH"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-134",
+      "name_ru": "Янтарное",
+      "kind_ru": "село",
+      "parent_2023": "council-132",
+      "upper_2023": "unit-108",
+      "annex_index": 134,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-136",
+      "name_ru": "Боданы",
+      "kind_ru": "село",
+      "parent_2023": "council-135",
+      "upper_2023": "unit-108",
+      "annex_index": 136,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-137",
+      "name_ru": "Ротар",
+      "kind_ru": "село",
+      "parent_2023": "council-135",
+      "upper_2023": "unit-108",
+      "annex_index": 137,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015112,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-138",
+      "name_ru": "Соколовка",
+      "kind_ru": "село",
+      "parent_2023": "council-135",
+      "upper_2023": "unit-108",
+      "annex_index": 138,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-140",
+      "name_ru": "Севериновка",
+      "kind_ru": "село",
+      "parent_2023": "council-139",
+      "upper_2023": "unit-108",
+      "annex_index": 140,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015108,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-142",
+      "name_ru": "Слобода-Рашково",
+      "kind_ru": "село",
+      "parent_2023": "council-141",
+      "upper_2023": "unit-108",
+      "annex_index": 142,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8710724,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-144",
+      "name_ru": "Хрустовая",
+      "kind_ru": "село",
+      "parent_2023": "council-143",
+      "upper_2023": "unit-108",
+      "annex_index": 144,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015107,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Camenca",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-148",
+      "name_ru": "Андреевка",
+      "kind_ru": "село",
+      "parent_2023": "council-147",
+      "upper_2023": "unit-145",
+      "annex_index": 148,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19016165,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-149",
+      "name_ru": "Пыкалово",
+      "kind_ru": "село",
+      "parent_2023": "council-147",
+      "upper_2023": "unit-145",
+      "annex_index": 149,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-150",
+      "name_ru": "Шмалена",
+      "kind_ru": "село",
+      "parent_2023": "council-147",
+      "upper_2023": "unit-145",
+      "annex_index": 150,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-152",
+      "name_ru": "Белочи",
+      "kind_ru": "село",
+      "parent_2023": "council-151",
+      "upper_2023": "unit-145",
+      "annex_index": 152,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015285,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-154",
+      "name_ru": "Большой Молокиш",
+      "kind_ru": "село",
+      "parent_2023": "council-153",
+      "upper_2023": "unit-145",
+      "annex_index": 154,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9656413,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-156",
+      "name_ru": "Броштяны",
+      "kind_ru": "село",
+      "parent_2023": "council-155",
+      "upper_2023": "unit-145",
+      "annex_index": 156,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8688504,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-158",
+      "name_ru": "Бутучаны",
+      "kind_ru": "село",
+      "parent_2023": "council-157",
+      "upper_2023": "unit-145",
+      "annex_index": 158,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8349093,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-160",
+      "name_ru": "Вадатурково",
+      "kind_ru": "село",
+      "parent_2023": "council-159",
+      "upper_2023": "unit-145",
+      "annex_index": 160,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015284,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Rîbnița",
+          "match_class": "CURATED_ALIAS_POTENTIAL_MATCH"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-162",
+      "name_ru": "Буськи",
+      "kind_ru": "село",
+      "parent_2023": "council-161",
+      "upper_2023": "unit-145",
+      "annex_index": 162,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-163",
+      "name_ru": "Воронково",
+      "kind_ru": "село",
+      "parent_2023": "council-161",
+      "upper_2023": "unit-145",
+      "annex_index": 163,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19016167,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-164",
+      "name_ru": "Гершуновка",
+      "kind_ru": "село",
+      "parent_2023": "council-161",
+      "upper_2023": "unit-145",
+      "annex_index": 164,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-166",
+      "name_ru": "Выхватинцы",
+      "kind_ru": "село",
+      "parent_2023": "council-165",
+      "upper_2023": "unit-145",
+      "annex_index": 166,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9660049,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-167",
+      "name_ru": "Новая Жизнь",
+      "kind_ru": "село",
+      "parent_2023": "council-165",
+      "upper_2023": "unit-145",
+      "annex_index": 167,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-169",
+      "name_ru": "Гараба",
+      "kind_ru": "село",
+      "parent_2023": "council-168",
+      "upper_2023": "unit-145",
+      "annex_index": 169,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9656324,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-171",
+      "name_ru": "Гидирим",
+      "kind_ru": "село",
+      "parent_2023": "council-170",
+      "upper_2023": "unit-145",
+      "annex_index": 171,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9294122,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-173",
+      "name_ru": "Ержово",
+      "kind_ru": "село",
+      "parent_2023": "council-172",
+      "upper_2023": "unit-145",
+      "annex_index": 173,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9659794,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-174",
+      "name_ru": "Сарацей",
+      "kind_ru": "село",
+      "parent_2023": "council-172",
+      "upper_2023": "unit-145",
+      "annex_index": 174,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-176",
+      "name_ru": "Жура",
+      "kind_ru": "село",
+      "parent_2023": "council-175",
+      "upper_2023": "unit-145",
+      "annex_index": 176,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8349094,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-178",
+      "name_ru": "ж/д станции Колбасна",
+      "kind_ru": "поселок",
+      "parent_2023": "council-177",
+      "upper_2023": "unit-145",
+      "annex_index": 178,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9659709,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-179",
+      "name_ru": "Колбасна",
+      "kind_ru": "село",
+      "parent_2023": "council-177",
+      "upper_2023": "unit-145",
+      "annex_index": 179,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9659709,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-180",
+      "name_ru": "Сухая Рыбница",
+      "kind_ru": "село",
+      "parent_2023": "council-177",
+      "upper_2023": "unit-145",
+      "annex_index": 180,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-182",
+      "name_ru": "Димитрово",
+      "kind_ru": "село",
+      "parent_2023": "council-181",
+      "upper_2023": "unit-145",
+      "annex_index": 182,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-183",
+      "name_ru": "Ивановка",
+      "kind_ru": "село",
+      "parent_2023": "council-181",
+      "upper_2023": "unit-145",
+      "annex_index": 183,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-184",
+      "name_ru": "Красненькое",
+      "kind_ru": "село",
+      "parent_2023": "council-181",
+      "upper_2023": "unit-145",
+      "annex_index": 184,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9656364,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-186",
+      "name_ru": "Ленино",
+      "kind_ru": "село",
+      "parent_2023": "council-185",
+      "upper_2023": "unit-145",
+      "annex_index": 186,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8349059,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-187",
+      "name_ru": "Первомайск",
+      "kind_ru": "село",
+      "parent_2023": "council-185",
+      "upper_2023": "unit-145",
+      "annex_index": 187,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8290877,
+          "osm_role": "OSM_SETTLEMENT_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-188",
+      "name_ru": "Победа",
+      "kind_ru": "село",
+      "parent_2023": "council-185",
+      "upper_2023": "unit-145",
+      "annex_index": 188,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-189",
+      "name_ru": "Станиславка",
+      "kind_ru": "село",
+      "parent_2023": "council-185",
+      "upper_2023": "unit-145",
+      "annex_index": 189,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-191",
+      "name_ru": "Малый Молокиш",
+      "kind_ru": "село",
+      "parent_2023": "council-190",
+      "upper_2023": "unit-145",
+      "annex_index": 191,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-193",
+      "name_ru": "Михайловка",
+      "kind_ru": "село",
+      "parent_2023": "council-192",
+      "upper_2023": "unit-145",
+      "annex_index": 193,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8348909,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-195",
+      "name_ru": "Бессарабка",
+      "kind_ru": "село",
+      "parent_2023": "council-194",
+      "upper_2023": "unit-145",
+      "annex_index": 195,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-196",
+      "name_ru": "Запорожец",
+      "kind_ru": "село",
+      "parent_2023": "council-194",
+      "upper_2023": "unit-145",
+      "annex_index": 196,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-197",
+      "name_ru": "Мокра",
+      "kind_ru": "село",
+      "parent_2023": "council-194",
+      "upper_2023": "unit-145",
+      "annex_index": 197,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8349307,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-198",
+      "name_ru": "Шевченко",
+      "kind_ru": "село",
+      "parent_2023": "council-194",
+      "upper_2023": "unit-145",
+      "annex_index": 198,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-200",
+      "name_ru": "Плоть",
+      "kind_ru": "село",
+      "parent_2023": "council-199",
+      "upper_2023": "unit-145",
+      "annex_index": 200,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015286,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-202",
+      "name_ru": "Владимировка",
+      "kind_ru": "село",
+      "parent_2023": "council-201",
+      "upper_2023": "unit-145",
+      "annex_index": 202,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7427669,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-203",
+      "name_ru": "Зозуляны",
+      "kind_ru": "село",
+      "parent_2023": "council-201",
+      "upper_2023": "unit-145",
+      "annex_index": 203,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-204",
+      "name_ru": "Кирово",
+      "kind_ru": "село",
+      "parent_2023": "council-201",
+      "upper_2023": "unit-145",
+      "annex_index": 204,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-205",
+      "name_ru": "Попенки",
+      "kind_ru": "село",
+      "parent_2023": "council-201",
+      "upper_2023": "unit-145",
+      "annex_index": 205,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8349338,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-207",
+      "name_ru": "Васильевка",
+      "kind_ru": "село",
+      "parent_2023": "council-206",
+      "upper_2023": "unit-145",
+      "annex_index": 207,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-208",
+      "name_ru": "Советское",
+      "kind_ru": "село",
+      "parent_2023": "council-206",
+      "upper_2023": "unit-145",
+      "annex_index": 208,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015287,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-210",
+      "name_ru": "Строенцы",
+      "kind_ru": "село",
+      "parent_2023": "council-209",
+      "upper_2023": "unit-145",
+      "annex_index": 210,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19015304,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-212",
+      "name_ru": "Лысая Гора",
+      "kind_ru": "село",
+      "parent_2023": "council-211",
+      "upper_2023": "unit-145",
+      "annex_index": 212,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-213",
+      "name_ru": "Малая Ульма",
+      "kind_ru": "село",
+      "parent_2023": "council-211",
+      "upper_2023": "unit-145",
+      "annex_index": 213,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-214",
+      "name_ru": "Новая Михайловка",
+      "kind_ru": "село",
+      "parent_2023": "council-211",
+      "upper_2023": "unit-145",
+      "annex_index": 214,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-215",
+      "name_ru": "Ульма",
+      "kind_ru": "село",
+      "parent_2023": "council-211",
+      "upper_2023": "unit-145",
+      "annex_index": 215,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 19016166,
+          "osm_role": "OSM_LEVEL8_MUNICIPALITY_AREA_UNSPECIFIED",
+          "geometric_group": "Rîbnița",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-218",
+      "name_ru": "Слободзея",
+      "kind_ru": "город",
+      "parent_2023": "unit-216",
+      "upper_2023": "unit-216",
+      "annex_index": 218,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8289751,
+          "osm_role": "OSM_TOWN_BOUNDARY",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-219",
+      "name_ru": "Красное",
+      "kind_ru": "поселок",
+      "parent_2023": "unit-216",
+      "upper_2023": "unit-216",
+      "annex_index": 219,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 9679382,
+          "osm_role": "OSM_TOWN_BOUNDARY",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-220",
+      "name_ru": "Первомайск",
+      "kind_ru": "поселок",
+      "parent_2023": "unit-216",
+      "upper_2023": "unit-216",
+      "annex_index": 220,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8290877,
+          "osm_role": "OSM_SETTLEMENT_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-221",
+      "name_ru": "ж/д станции Ливада",
+      "kind_ru": "поселок",
+      "parent_2023": "place-220",
+      "upper_2023": "unit-216",
+      "annex_index": 221,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-223",
+      "name_ru": "Ближний Хутор",
+      "kind_ru": "село",
+      "parent_2023": "council-222",
+      "upper_2023": "unit-216",
+      "annex_index": 223,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7468724,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-225",
+      "name_ru": "Владимировка",
+      "kind_ru": "село",
+      "parent_2023": "council-224",
+      "upper_2023": "unit-216",
+      "annex_index": 225,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7427669,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-226",
+      "name_ru": "Константиновка",
+      "kind_ru": "село",
+      "parent_2023": "council-224",
+      "upper_2023": "unit-216",
+      "annex_index": 226,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-227",
+      "name_ru": "Никольское",
+      "kind_ru": "село",
+      "parent_2023": "council-224",
+      "upper_2023": "unit-216",
+      "annex_index": 227,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-229",
+      "name_ru": "Глиное",
+      "kind_ru": "село",
+      "parent_2023": "council-228",
+      "upper_2023": "unit-216",
+      "annex_index": 229,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8291058,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        },
+        {
+          "osm_relation_id": 9301463,
+          "osm_role": "OSM_SETTLEMENT_COUNCIL_AREA",
+          "geometric_group": "Grigoriopol",
+          "match_class": "HOMONYM_MULTIPLE_ENTRIES_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-231",
+      "name_ru": "Карагаш",
+      "kind_ru": "село",
+      "parent_2023": "council-230",
+      "upper_2023": "unit-216",
+      "annex_index": 231,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8289594,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-233",
+      "name_ru": "Кицканы",
+      "kind_ru": "село",
+      "parent_2023": "council-232",
+      "upper_2023": "unit-216",
+      "annex_index": 233,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 6879649,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-234",
+      "name_ru": "Меренешты",
+      "kind_ru": "село",
+      "parent_2023": "council-232",
+      "upper_2023": "unit-216",
+      "annex_index": 234,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-236",
+      "name_ru": "Копанка",
+      "kind_ru": "село",
+      "parent_2023": "council-235",
+      "upper_2023": "unit-216",
+      "annex_index": 236,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-238",
+      "name_ru": "Коротное",
+      "kind_ru": "село",
+      "parent_2023": "council-237",
+      "upper_2023": "unit-216",
+      "annex_index": 238,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8291057,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-240",
+      "name_ru": "Незавертайловка",
+      "kind_ru": "село",
+      "parent_2023": "council-239",
+      "upper_2023": "unit-216",
+      "annex_index": 240,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8290934,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-242",
+      "name_ru": "Парканы",
+      "kind_ru": "село",
+      "parent_2023": "council-241",
+      "upper_2023": "unit-216",
+      "annex_index": 242,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7431263,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-244",
+      "name_ru": "Суклея",
+      "kind_ru": "село",
+      "parent_2023": "council-243",
+      "upper_2023": "unit-216",
+      "annex_index": 244,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7468791,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-246",
+      "name_ru": "Терновка",
+      "kind_ru": "село",
+      "parent_2023": "council-245",
+      "upper_2023": "unit-216",
+      "annex_index": 246,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8292878,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-248",
+      "name_ru": "ж/д станции Новосавицкая",
+      "kind_ru": "поселок",
+      "parent_2023": "council-247",
+      "upper_2023": "unit-216",
+      "annex_index": 248,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-249",
+      "name_ru": "Ново-Котовск",
+      "kind_ru": "село",
+      "parent_2023": "council-247",
+      "upper_2023": "unit-216",
+      "annex_index": 249,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-250",
+      "name_ru": "Новая Андрияшевка",
+      "kind_ru": "село",
+      "parent_2023": "council-247",
+      "upper_2023": "unit-216",
+      "annex_index": 250,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-251",
+      "name_ru": "Приозерное",
+      "kind_ru": "село",
+      "parent_2023": "council-247",
+      "upper_2023": "unit-216",
+      "annex_index": 251,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-252",
+      "name_ru": "Старая Андрияшевка",
+      "kind_ru": "село",
+      "parent_2023": "council-247",
+      "upper_2023": "unit-216",
+      "annex_index": 252,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-253",
+      "name_ru": "Уютное",
+      "kind_ru": "село",
+      "parent_2023": "council-247",
+      "upper_2023": "unit-216",
+      "annex_index": 253,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-254",
+      "name_ru": "Фрунзе",
+      "kind_ru": "село",
+      "parent_2023": "council-247",
+      "upper_2023": "unit-216",
+      "annex_index": 254,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 7427680,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-256",
+      "name_ru": "Чобручи",
+      "kind_ru": "село",
+      "parent_2023": "council-255",
+      "upper_2023": "unit-216",
+      "annex_index": 256,
+      "osm85_relation_candidates": [
+        {
+          "osm_relation_id": 8289727,
+          "osm_role": "OSM_RURAL_COUNCIL_AREA",
+          "geometric_group": "Slobozia",
+          "match_class": "UNIQUE_NAME_2023"
+        }
+      ],
+      "match_status": "REFERENCE_ONLY_NOT_CERTIFIED",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    },
+    {
+      "id": "place-257",
+      "name_ru": "ж/д станции 47 км",
+      "kind_ru": "поселок",
+      "parent_2023": "council-255",
+      "upper_2023": "unit-216",
+      "annex_index": 257,
+      "osm85_relation_candidates": [],
+      "match_status": "NO_REFERENCE_WITHIN_OSM85",
+      "proof_of_missing_geometry": false,
+      "contemporary_legal_status": "BLOCKED_EVIDENCE"
+    }
+  ],
+  "protection": {
+    "ACTUAL": false,
+    "CUATM_changes": false,
+    "OSM_edits": false,
+    "geometry_duplication": false,
+    "P9_1": false
+  }
+}
