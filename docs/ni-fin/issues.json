@@ -81,6 +81,16 @@
       "fix": "Use existing fixed auditEvidenceDirectory namespace and a literal ni-fin subdirectory; remove custom destination environment input.",
       "regression": "CodeQL exactHEAD plus existing browsersecurity helper tests; no rule suppression or dismissal.",
       "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-009",
+      "severity": "P2",
+      "component": "Administrative card semantics",
+      "reproduction": "New card metadata used dt/dd rows without their dl container.",
+      "cause": "Existing detailRow helper requires an explicit definition-list wrapper from the caller.",
+      "fix": "Wrap documentary parent/geometry/status/source rows in the existing kv definition-list component.",
+      "regression": "All242cards require every dt/dd to have a dl ancestor in realChromium.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
     }
   ]
 }
