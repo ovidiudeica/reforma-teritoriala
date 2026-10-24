@@ -1,0 +1,30 @@
+name: OSM exact PBF proposal observation replay
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-exact-proposals.yml'
+      - 'scripts/audit/osm_acq2c_exact_proposals.py'
+      - 'scripts/audit/test_osm_acq2c_exact_proposals.py'
+      - 'scripts/audit/osm_acq2c_full_batch.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/combined-registry.json.gz'
+      - 'docs/evidence/osm-acq2c-exact242-proposals-20261024/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  observation-replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Guard tests and byte-identical observation replay
+        run: |
+          python scripts/audit/test_osm_acq2c_exact_proposals.py
+          python scripts/audit/osm_acq2c_exact_proposals.py
