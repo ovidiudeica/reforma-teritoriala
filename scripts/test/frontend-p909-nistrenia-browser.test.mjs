@@ -11,13 +11,13 @@ try{
  await test('P9.0.9 Chromium: Nistrenia lives only in the hierarchy with independent geometry controls',{timeout:180000},async t=>{
   await page.viewport(1280,800);
   await page.navigate(browser.server.url);
-  await waitFor(()=>page.evaluate("qaApp.nistreniaView?.groupIds?.length===7&&qaApp.nistreniaView?.roleIds?.size===85&&qaApp.nistreniaOutlines?.has('view-nistrenia')"),'Nistrenia hierarchy ready',30000);
+  await waitFor(()=>page.evaluate("qaApp.nistreniaView?.groupIds?.length===9&&qaApp.nistreniaView?.roleIds?.size===85&&qaApp.nistreniaOutlines?.has('view-nistrenia')"),'Nistrenia hierarchy ready',30000);
 
   await t.test('redundant Nistrenia OSM presentation is absent and operational tree contract remains complete',async()=>{
    const state=await page.evaluate("({toggle:!!document.getElementById('nistrenia-osm-toggle'),panel:!!document.getElementById('nistrenia-osm-panel'),rootIds:qaApp.nistreniaView.rootIds,groups:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,nodes:qaApp.nistreniaView.nodes.size,official:qaApp.nistreniaView.officialNodeCount,rootName:qaApp.nistreniaView.root.display_name,defaultOperational:[...qaApp.visibleOperationalOutlineIds]})");
    assert.equal(state.toggle,false);assert.equal(state.panel,false);
-   assert.equal(state.rootName,'Nistrenia');assert.equal(state.groups,7);assert.equal(state.roles,85);
-   assert.equal(state.nodes,5848+1+7+85);assert.equal(state.official,5848);
+   assert.equal(state.rootName,'Nistrenia');assert.equal(state.groups,9);assert.equal(state.roles,85);
+   assert.equal(state.nodes,5848+242);assert.equal(state.official,5848);
    assert.deepEqual(state.rootIds.slice(0,2).sort(),['osm-r58974','osm-r90689'].sort());
    assert.equal(state.rootIds[2],'view-nistrenia');
    assert.deepEqual(state.defaultOperational,['view-nistrenia']);
@@ -28,7 +28,7 @@ try{
    await page.call(async function(){await qaApp.selectEntity('view-nistrenia',{zoom:false,source:'p909-regression'});});
    let state=await page.evaluate("({selected:qaApp.selectedEntityId,actual:[...qaApp.visibleEntityIds].sort(),operational:[...qaApp.visibleOperationalOutlineIds].sort(),title:document.querySelector('#details-title').textContent,body:document.querySelector('#details-body').textContent})");
    assert.equal(state.selected,'view-nistrenia');assert.deepEqual(state.actual,before.actual);assert.deepEqual(state.operational,before.operational);
-   assert.match(state.title,/Nistrenia/);assert.match(state.body,/Conturul OSM este independent de cele 85 de geometrii ACTUAL componente/);
+   assert.match(state.title,/Nistrenia/);assert.match(state.body,/conturul OSM nu demonstrează controlul efectiv/);
 
    const group=await page.evaluate("qaApp.nistreniaView.groupIds[0]");
    await page.call(async function(group){await qaApp.selectEntity(group,{zoom:false,source:'p909-regression'});},group);
@@ -36,25 +36,20 @@ try{
    assert.equal(state.selected,group);assert.deepEqual(state.actual,before.actual);assert.deepEqual(state.operational,before.operational);
   });
 
-  await t.test('root, district and role checkboxes remain independent in the tree',async()=>{
+  await t.test('root, district and canonical resource controls remain independent',async()=>{
    await page.openPanel('entities');
-   const ids=await page.evaluate("(()=>{const group=qaApp.nistreniaView.groupIds[0],actual=qaApp.nistreniaView.groups[0].role_ids[0];return {root:'view-nistrenia',group,actual,alias:'view-nistrenia-role-'+actual}})()");
-   await page.call(function(ids){qaApp.atlasTree.setOpenIds([ids.root,ids.group]);document.querySelector('#hierarchy-tree').scrollTop=0;},ids);
-   await delay(120);
-   await waitFor(()=>page.call(function(ids){return Boolean(document.querySelector('.tree-visibility-toggle[data-entity-id="'+ids.alias+'"]'));},ids),'role checkbox mounted',10000);
-
-   const before=await page.call(function(ids){return {root:qaApp.visibleOperationalOutlineIds.has(ids.root),group:qaApp.visibleOperationalOutlineIds.has(ids.group),role:qaApp.visibleEntityIds.has(ids.actual),actualSize:qaApp.visibleEntityIds.size};},ids);
-   assert.equal(before.root,true);assert.equal(before.group,false);assert.equal(before.role,false);
-
-   await page.click('.tree-visibility-toggle[data-entity-id="'+ids.group+'"]');
-   await page.click('.tree-visibility-toggle[data-entity-id="'+ids.alias+'"]');
-   const after=await page.call(function(ids){return {root:qaApp.visibleOperationalOutlineIds.has(ids.root),group:qaApp.visibleOperationalOutlineIds.has(ids.group),role:qaApp.visibleEntityIds.has(ids.actual),actualSize:qaApp.visibleEntityIds.size};},ids);
-   assert.equal(after.root,true);assert.equal(after.group,true);assert.equal(after.role,true);
-   assert.equal(after.actualSize,before.actualSize+1);
-
-   await page.click('.tree-visibility-toggle[data-entity-id="'+ids.alias+'"]');
-   const final=await page.call(function(ids){return {root:qaApp.visibleOperationalOutlineIds.has(ids.root),group:qaApp.visibleOperationalOutlineIds.has(ids.group),role:qaApp.visibleEntityIds.has(ids.actual)};},ids);
-   assert.deepEqual(final,{root:true,group:true,role:false});
+   await page.call(async function(){await qaApp.selectEntity('view-nistrenia',{zoom:false});});
+   const before=await page.evaluate('({actual:[...qaApp.visibleEntityIds].sort(),own:[...qaApp.visibleOperationalOutlineIds].sort()})');
+   await page.click('[data-ni-resource="osm-r9581354"]');
+   const after=await page.evaluate('({actual:[...qaApp.visibleEntityIds].sort(),own:[...qaApp.visibleOperationalOutlineIds].sort()})');
+   assert.deepEqual(after.own,before.own);assert.deepEqual(after.actual,[...before.actual,'osm-r9581354'].sort());
+   await page.click('[data-ni-resource="osm-r9581354"]');
+   assert.deepEqual(await page.evaluate('[...qaApp.visibleEntityIds].sort()'),before.actual);
+   await page.openPanel('entities');
+   await page.call(function(){qaApp.atlasTree.select('view-nistrenia-group-osm-r1702216');});
+   await page.click('.tree-visibility-toggle[data-entity-id="view-nistrenia-group-osm-r1702216"]');
+   assert.deepEqual(await page.evaluate('[...qaApp.visibleOperationalOutlineIds].sort()'),['view-nistrenia','view-nistrenia-group-osm-r1702216']);
+   assert.deepEqual(await page.evaluate('[...qaApp.visibleEntityIds].sort()'),before.actual);
   });
 
   await t.test('Bender homonyms remain separate source roles and provenance survives ordinary entity selection',async()=>{

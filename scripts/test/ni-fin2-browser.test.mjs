@@ -1,0 +1,38 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';import {mkdir,writeFile} from 'node:fs/promises';import path from 'node:path';import {tmpdir} from 'node:os';
+import {launchBrowser,waitFor} from './helpers/atlas-browser.mjs';
+const out=process.env.NI_FIN_OUTPUT||path.join(tmpdir(),'ni-fin-browser-evidence');await mkdir(out,{recursive:true});
+const b=await launchBrowser(fileURLToPath(new URL('../../',import.meta.url))),p=await b.page(),report={browser:b.version.Browser,scenarios:[],screenshots:[]};
+try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL and responsive cards',{timeout:240000},async()=>{
+ await p.viewport(1440,900);await p.navigate(b.server.url);
+ assert.deepEqual(await p.evaluate('({actual:qaApp.entityById.size,official:qaApp.hierarchyNodeById.size,nodes:qaApp.nistreniaView.virtualIds.size,units:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,outlines:qaApp.nistreniaOutlines.layers.size,checked:[...qaApp.visibleEntityIds].sort(),own:[...qaApp.visibleOperationalOutlineIds]})'),{actual:5848,official:5848,nodes:242,units:9,roles:85,outlines:8,checked:['osm-r58974','osm-r90689'],own:['view-nistrenia']});
+ report.scenarios.push('5848 official + 242 documentary nodes; 9 units, 85 roles, 8 independent outlines; three roots only');
+ const checked=await p.evaluate('[...qaApp.visibleEntityIds].sort()');
+ await p.evaluate("(async()=>{for(const id of qaApp.nistreniaView.virtualIds){await qaApp.selectEntity(id,{zoom:false});if(!document.getElementById('details-body').textContent.includes('2023'))throw Error('missing provenance '+id);}return true;})()");
+ assert.deepEqual(await p.evaluate('[...qaApp.visibleEntityIds].sort()'),checked);assert.deepEqual(await p.evaluate('[...qaApp.visibleOperationalOutlineIds]'),['view-nistrenia']);
+ report.scenarios.push('all242cards select without checking any descendant or candidate');
+ await p.evaluate("qaApp.selectEntity('view-nistrenia-council-29',{zoom:false})");await p.openPanel('entities');
+ assert.equal(await p.evaluate("qaApp.atlasTree.getNode('view-nistrenia-council-29').checkbox.disabled"),true);
+ await p.evaluate("qaApp.atlasTree.getNode('view-nistrenia-council-29').button.focus()");await p.key('ArrowLeft');
+ assert.equal(await p.evaluate("document.activeElement===qaApp.atlasTree.getNode('view-nistrenia-council-29').toggle"),true);
+ await p.key('ArrowRight');assert.equal(await p.evaluate("document.activeElement===qaApp.atlasTree.getNode('view-nistrenia-council-29').button"),true);
+ report.scenarios.push('no-polygon checkbox disabled; keyboard skips it in both directions');
+ const url=await p.evaluate('location.href');await p.navigate(url);assert.equal(await p.evaluate('qaApp.selectedEntityId'),'view-nistrenia-council-29');
+ await p.evaluate("qaApp.selectEntity('view-nistrenia-unit-15',{zoom:false})");await p.evaluate('history.back()');await waitFor(()=>p.evaluate("qaApp.selectedEntityId==='view-nistrenia-council-29'"),'documentary Back');await p.evaluate('history.forward()');await waitFor(()=>p.evaluate("qaApp.selectedEntityId==='view-nistrenia-unit-15'"),'documentary Forward');
+ report.scenarios.push('text-only URL hydration, Back/Forward');
+ await p.evaluate("qaApp.selectEntity('view-nistrenia',{zoom:false})");
+ assert.equal(await p.evaluate("document.querySelectorAll('[data-ni-resource]').length"),85);
+ await p.click('[data-ni-resource="osm-r9581354"]');assert.equal(await p.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),true);assert.equal(await p.evaluate('qaApp.selectedEntityId'),'view-nistrenia');await p.click('[data-ni-resource="osm-r9581354"]');
+ assert.deepEqual(await p.evaluate('[...qaApp.visibleEntityIds].sort()'),checked);
+ report.scenarios.push('85 canonical resource buttons; explicit Bender toggle without duplicate or administrative identity promotion');
+ for(const [w,h] of [[1440,900],[900,768],[390,844],[844,390],[360,800]]){
+  await p.viewport(w,h);await p.evaluate("qaApp.selectEntity('view-nistrenia-council-29',{zoom:false})");
+  assert.equal(await p.evaluate('document.documentElement.scrollWidth<=innerWidth'),true,'overflow '+w+'x'+h);
+  const file='council-'+w+'x'+h+'.png';await p.screenshot(path.join(out,file));report.screenshots.push(file);
+  if(w<900){await p.click('#sheet-expand');const expanded='expanded-'+w+'x'+h+'.png';await p.screenshot(path.join(out,expanded));report.screenshots.push(expanded);}
+ }
+ report.scenarios.push('desktop/tablet/mobile portrait+landscape without horizontal overflow');
+ for(const id of ['osm-r58974','osm-r90689']){await p.call(async function(id){await qaApp.selectEntity(id,{zoom:false});},id);assert.equal(await p.evaluate('qaApp.selectedEntityId'),id);}
+ assert.deepEqual(p.errors,[]);assert.deepEqual(p.console.filter(x=>x.type==='error'||x.level==='error'),[]);
+ report.scenarios.push('RO/MD canonical selection intact; zero JavaScript/console errors');
+ });}finally{report.errors=p.errors;report.console=p.console;report.responses=p.responses;await writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2));await b.close();}

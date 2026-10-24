@@ -81,7 +81,7 @@ export function revealInTree(container,button){
  container.scrollTop+=row.top-top-(container.clientHeight-row.height)/2;
 }
 
-export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},isGeometryVisible=()=>true,isEntityChecked=isGeometryVisible,onVisibilityChange=()=>{},getOsmAdminLevel=()=>null,visibleIds=null}){
+export function createAtlasTree({container,nodeById,rootIds,document,onSelect,onDisclosureChange=()=>{},isGeometryAvailable=()=>true,isGeometryVisible=()=>true,isEntityChecked=isGeometryVisible,onVisibilityChange=()=>{},getOsmAdminLevel=()=>null,visibleIds=null}){
  const openIds=new Set(rootIds.filter(id=>hasChildren(nodeById,id))),rendered=new Map();
  const view=document.defaultView||globalThis;
  const layout=createTreeWindow(flattenVisibleTree(nodeById,rootIds,openIds,visibleIds));
@@ -101,7 +101,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   // This bounded read batch uses the same height model as ResizeObserver.
   let changed=false;for(const [rowId,entry] of rendered)if(layout.measure(rowId,entry.outer.getBoundingClientRect?.().height))changed=true;
   if(changed){layout.remeasure();render();}alignRow(id);render();}
- function focusRow(id,col){active=id;column=col;show(id);const control=controls(rendered.get(id))[col];control.focus?.({preventScroll:true});
+ function focusRow(id,col){active=id;column=col;show(id);const entry=rendered.get(id);if(entry.checkbox.disabled&&col===1)col=2;column=col;const control=controls(entry)[col];control.focus?.({preventScroll:true});
   // Keyboard navigation must reveal the target through every clipping ancestor.
   // Selection alone still scrolls only the virtual tree; enlarged text can make
   // its host overflow the contextual panel, which the height model cannot see.
@@ -114,8 +114,8 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   switch(event.key){
    case 'ArrowDown':target=Math.min(layout.rows.length-1,index+1);break;
    case 'ArrowUp':target=Math.max(0,index-1);break;
-   case 'ArrowRight':nextColumn=Math.min(2,col+1);break;
-   case 'ArrowLeft':nextColumn=Math.max(0,col-1);break;
+   case 'ArrowRight':nextColumn=Math.min(2,col+1);if(nextColumn===1&&rendered.get(id)?.checkbox.disabled)nextColumn=2;break;
+   case 'ArrowLeft':nextColumn=Math.max(0,col-1);if(nextColumn===1&&rendered.get(id)?.checkbox.disabled)nextColumn=0;break;
    case 'Home':if(event.ctrlKey)target=0;else nextColumn=0;break;
    case 'End':if(event.ctrlKey)target=layout.rows.length-1;else nextColumn=2;break;
    case 'PageDown':target=layout.indexAt(layout.offset(index)+(container.clientHeight||300));break;
@@ -129,7 +129,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   const disclosure=document.createElement('div');disclosure.setAttribute('role','gridcell');disclosure.setAttribute('aria-colindex','1');
   const toggleButton=branch?document.createElement('button'):disclosure;toggleButton.className='tree-toggle';toggleButton.dataset.entityId=id;toggleButton.setAttribute('aria-label',branch?'Extinde sau restrânge '+name:'Fără subniveluri: '+name);if(branch){toggleButton.type='button';toggleButton.addEventListener('click',()=>toggle(id));}if(branch)disclosure.appendChild(toggleButton);
   const visibility=document.createElement('div');visibility.setAttribute('role','gridcell');visibility.setAttribute('aria-colindex','2');
-  const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.className='tree-visibility-toggle';checkbox.dataset.entityId=id;checkbox.setAttribute('aria-label','Afișează geometria pentru '+name);checkbox.addEventListener('change',()=>onVisibilityChange(id,checkbox.checked));visibility.appendChild(checkbox);
+  const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.className='tree-visibility-toggle';checkbox.dataset.entityId=id;checkbox.disabled=!isGeometryAvailable(id);checkbox.setAttribute('aria-label','Afișează geometria pentru '+name);checkbox.addEventListener('change',()=>onVisibilityChange(id,checkbox.checked));visibility.appendChild(checkbox);
   const heading=document.createElement('div');heading.setAttribute('role','rowheader');heading.setAttribute('aria-colindex','3');
   const button=document.createElement('button');button.type='button';button.className='tree-select';button.dataset.entityId=id;button.title=name==='Entitate fără nume'?name:formatEntityName(node.display_name);button.setAttribute('aria-label','Selectează '+name);
   const svg=document.createElementNS?document.createElementNS('http://www.w3.org/2000/svg','svg'):document.createElement('svg');svg.setAttribute('viewBox','0 0 20 20');svg.setAttribute('aria-hidden','true');svg.setAttribute('class','tree-kind-icon');
@@ -140,10 +140,10 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   if(osmBadge){button.appendChild(osmBadge);button.setAttribute('aria-label','Selectează '+name+' · Nivel administrativ OSM '+osmBadge.textContent);}
   const label=document.createElement('span');label.className='tree-name';label.textContent=name;button.appendChild(label);button.addEventListener('click',()=>onSelect(id,{zoom:true,source:'tree'}));heading.appendChild(button);
   outer.appendChild(disclosure);outer.appendChild(visibility);outer.appendChild(heading);
-  const entry={outer,wrapper:outer,button,checkbox,toggle:toggleButton,visibilityValue:null,updateVisibility(){const checked=Boolean(isEntityChecked(id)),shown=Boolean(isGeometryVisible(id)),changed=this.visibilityValue!==shown||checkbox.checked!==checked;this.visibilityValue=shown;checkbox.checked=checked;outer.classList.toggle('tree-geometry-hidden',!shown);checkbox.title=checked&&!shown?'Geometrie bifată, dar ascunsă de filtre: '+name:'Afișează sau ascunde geometria: '+name;return changed;}};
+  const entry={outer,wrapper:outer,button,checkbox,toggle:toggleButton,visibilityValue:null,updateVisibility(){const checked=Boolean(isEntityChecked(id)),shown=Boolean(isGeometryVisible(id)),changed=this.visibilityValue!==shown||checkbox.checked!==checked;this.visibilityValue=shown;checkbox.checked=checked;outer.classList.toggle('tree-geometry-hidden',!shown);checkbox.title=checkbox.disabled?'Fără contur propriu certificat; detaliile administrative rămân disponibile.':checked&&!shown?'Geometrie bifată, dar ascunsă de filtre: '+name:'Afișează sau ascunde geometria: '+name;return changed;}};
   controls(entry).forEach((control,col)=>{control.addEventListener('focus',()=>{active=id;column=col;updateTabStops();});control.addEventListener('keydown',event=>keydown(event,id,col));});entry.updateVisibility();observer?.observe(outer);return entry;
  }
- function updateTabStops(){for(const [id,entry] of rendered)controls(entry).forEach(control=>control.tabIndex=id===active?0:-1);}
+ function updateTabStops(){for(const [id,entry] of rendered)controls(entry).forEach(control=>control.tabIndex=id===active&&!control.disabled?0:-1);}
  function render(){if(destroyed)return;const focus=focused(),range=layout.range(container.scrollTop||0,container.clientHeight||300),ids=new Set(layout.rows.slice(range.start,range.end).map(row=>row.id));
   if(focus&&layout.indexOf(focus.id)>=0)ids.add(focus.id);
   if(selected&&layout.indexOf(selected)>=0)ids.add(selected);
