@@ -1,0 +1,74 @@
+{
+  "schema": "ni-adm12-exception-ledger-v1",
+  "as_of": "2026-10-24",
+  "total": 9,
+  "closed_classification": 1,
+  "open_or_carried": 8,
+  "all_normative_exceptions_closed": false,
+  "exceptions": [
+    {
+      "code": "EXC-20-DRAFT",
+      "status": "CLOSED_CLASSIFICATION_ONLY",
+      "ids": [
+        "2024001732",
+        "2025001798"
+      ],
+      "reason": "These are public acts about legislative proposals, not themselves enacted amendments; underlying future bills remain independently reviewable."
+    },
+    {
+      "code": "EXC-18-OPERATIVE",
+      "status": "OPEN_BLOCKED_PRIMARY_EVIDENCE",
+      "ids": [],
+      "reason": "18 enacted-amendment titles; complete signed originals and effective-date impacts not independently audited."
+    },
+    {
+      "code": "EXC-INDIRECT-189",
+      "status": "OPEN_BLOCKED_PRIMARY_EVIDENCE",
+      "ids": [
+        "2024001548"
+      ],
+      "reason": "Separate statute about representative councils is outside the strict 20-title corpus."
+    },
+    {
+      "code": "EXC-LOCAL-ISSUERS",
+      "status": "OPEN_BLOCKED_LOCAL_ARCHIVES",
+      "ids": [],
+      "reason": "7 known higher-council portals cannot certify all local acts or the 74 rural councils."
+    },
+    {
+      "code": "EXC-LOCAL-PUBLICATION",
+      "status": "OPEN_BLOCKED_LOCAL_ARCHIVES",
+      "ids": [],
+      "reason": "Ribnita 2026 council regulation references normative newspaper/website publication and archive originals."
+    },
+    {
+      "code": "EXC-BOUNDARY-MANDATE",
+      "status": "OPEN_BLOCKED_SEMANTICS",
+      "ids": [],
+      "reason": "Local organizational or financial powers do not automatically establish a territorial legal unit or its OSM polygon."
+    },
+    {
+      "code": "EXC-SOURCE-VERSIONS",
+      "status": "OPEN_BLOCKED_CONSOLIDATION",
+      "ids": [],
+      "reason": "1994 local authorities law has May 2026 edition, not a fully reviewed October edition."
+    },
+    {
+      "code": "EXC-LATE-19",
+      "status": "OPEN_CARRIED_FROM_NI_ADM11",
+      "ids": [],
+      "reason": "NI-ADM.1.1 classified late 19 publication titles but not all their primary originals."
+    },
+    {
+      "code": "EXC-CONTROL",
+      "status": "OPEN_BLOCKED_GEOMETRY_AND_CONTROL",
+      "ids": [],
+      "reason": "No de facto polygon-control or legal CUATM-parent mutation can be inferred from these publications."
+    }
+  ],
+  "controls": {
+    "actual_modification": false,
+    "p91_import": false,
+    "website_tree_change": false
+  }
+}
