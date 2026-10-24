@@ -887,6 +887,27 @@
         "Actions40027645567: current64 plus original32fixtures PASS on exact424HEAD",
         "Actions40042099422: native offline postmerge PASS on main33ec2ced6d6ebbd8a330f40b5da0f4c1b50cb934"
       ]
+    },
+    {
+      "id": "RM-048",
+      "severity": "P2",
+      "component": "Leaf proof CLI filesystem authority",
+      "reproduction_sha": "85a698e8b409302095fadbffc78a0112949c2e36",
+      "reproduction": "PR431 CodeQL alerts111-114 trace argv1 through a caller-selected evidence root to proof and manifest reads.",
+      "cause": "The new CLI accepted an arbitrary filesystem root even though it serves one frozen repository proof packet; member checks alone did not constrain root authority.",
+      "change": "Return only a fixed repository proof directory after pure-string allowlisting; reject symlink directory components before reads. Never interpret untrusted CLI text as a path.",
+      "regression": "Extend all11portable path-authority/security fixtures to the leaf CLI, including traversal,foreign roots,prefix siblings,URIs,streams and symlink rejection; actual sparse proof replay still passes.",
+      "pr": 431,
+      "verification_sha": "955151c73307dedbc924e74d9d28714f883631f9",
+      "verdict": "FIX_VERIFIED_PENDING_FULL_CI_AND_INTEGRATION",
+      "evidence": [
+        "CodeQL alerts111,112,113,114 on85a698e8b409302095fadbffc78a0112949c2e36",
+        "Local11path/security fixtures PASS; sparse leaf proof PASS_CONDITIONAL_STRUCTURAL_PROOF",
+        "scripts/audit/test_osm_acq2c_evidence_paths.py",
+        "CodeQL SUCCESS on955151c73307dedbc924e74d9d28714f883631f9; open alerts for refs/pull/431/head=0",
+        "Individual alerts111-114: most_recent_instance.state=fixed, dismissed_at=null; global state metadata is nullable and is not asserted CLOSED_PASS",
+        "Local11security/path fixtures PASS across all three frozen-proof CLIs; actual sparse leaf replay PASS_CONDITIONAL_STRUCTURAL_PROOF"
+      ]
     }
   ],
   "environment_incidents": [
@@ -1683,5 +1704,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-24T00:24:01.312Z"
+  "updated_at": "2026-10-24T11:09:54.001894Z"
 }
