@@ -6,6 +6,7 @@ on:
       - 'scripts/audit/osm_acq2c_selected_epoch_leaf.py'
       - 'scripts/audit/test_osm_acq2c_selected_epoch_leaf.py'
       - 'scripts/audit/validate_osm_acq2c_leaf_capsule.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
       - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
       - 'scripts/audit/osm_acq2c_frontier.py'
@@ -27,4 +28,5 @@ jobs:
       - name: Negative tests and sparse proof replay
         run: |
           python scripts/audit/test_osm_acq2c_selected_epoch_leaf.py
+          python scripts/audit/test_osm_acq2c_evidence_paths.py
           python scripts/audit/validate_osm_acq2c_leaf_capsule.py docs/evidence/osm-acq2c-leaf-closure-20261024
