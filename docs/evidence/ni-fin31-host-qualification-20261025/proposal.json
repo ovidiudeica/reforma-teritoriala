@@ -1,0 +1,589 @@
+{
+  "schema": "ni-fin31-host-qualification-proposal-v1",
+  "status": "TECHNICALLY_COMPATIBLE_PENDING_OWNER_AUTHORIZATION",
+  "runtime_authorized": false,
+  "owner_authorization": "WAITING_OWNER_AUTHORIZATION",
+  "actual_manifest_changes_applied": false,
+  "reproducibility_A_B": "NOT_EXECUTED_ON_PROPOSED_PROFILE",
+  "previous_profile_id": "github-ubuntu24-20261012.334.1",
+  "proposed_profile": {
+    "id": "github-ubuntu24-20261023.334.3",
+    "runner": {
+      "image_os": "ubuntu24",
+      "image_version": "20261023.334.3",
+      "arch": "X64",
+      "os": "Linux"
+    },
+    "kernel": {
+      "release": "6.17.0-1022-azure",
+      "version": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+      "machine": "x86_64"
+    },
+    "docker": {
+      "client_version": "28.0.4",
+      "server_version": "28.0.4",
+      "api_version": "1.48",
+      "min_api_version": "1.24",
+      "git_commit": "6430e49",
+      "components": {
+        "Engine": {
+          "version": "28.0.4",
+          "git_commit": "6430e49"
+        },
+        "containerd": {
+          "version": "v2.4.1",
+          "git_commit": "f2551031d7276a770f65f98c9b52e57e7dad07e8"
+        },
+        "runc": {
+          "version": "1.5.2",
+          "git_commit": "v1.5.2-0-g29dd3dc2"
+        },
+        "docker-init": {
+          "version": "0.19.0",
+          "git_commit": "de40ad0"
+        }
+      }
+    },
+    "engine": {
+      "storage_driver": "overlay2",
+      "cgroup_driver": "systemd",
+      "cgroup_version": "2",
+      "operating_system": "Ubuntu 24.04.5 LTS",
+      "os_type": "linux",
+      "architecture": "x86_64",
+      "kernel_version": "6.17.0-1022-azure"
+    }
+  },
+  "preserved_approved_profile_ids": [
+    "github-ubuntu24-20260920.314.1",
+    "github-ubuntu24-20260927.320.1",
+    "github-ubuntu24-20261004.327.1",
+    "github-ubuntu24-20261012.334.1"
+  ],
+  "current_host_trust_fingerprint": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
+  "proposed_contract_fingerprint": "f3a11ed754cbd66758169ec1943653c33ebb5d4e7350e88d5db26b0e1044ebbf",
+  "official_release": {
+    "id": 422010717,
+    "url": "https://github.com/actions/runner-images/releases/tag/ubuntu24/20261023.334",
+    "published_at": "2026-10-23T15:33:17Z",
+    "prerelease": true,
+    "target_commitish": "bf62c713fd9c48247e2a4d3ce99a9f0554cd745e"
+  },
+  "setup_job_release_url_discrepancy": "Set up job links 20261012.334; independent official20261023release and immutable README corroborate observed20261023.334.3. Discrepancy retained, not silently rewritten.",
+  "A": {
+    "differences": [
+      {
+        "field": "runner.image_version",
+        "approved": "20261012.334.1",
+        "observed": "20261023.334.3",
+        "match": false
+      }
+    ],
+    "contract_field_comparison": [
+      {
+        "field": "docker.api_version",
+        "approved": "1.48",
+        "observed": "1.48",
+        "match": true
+      },
+      {
+        "field": "docker.client_version",
+        "approved": "28.0.4",
+        "observed": "28.0.4",
+        "match": true
+      },
+      {
+        "field": "docker.components.Engine.git_commit",
+        "approved": "6430e49",
+        "observed": "6430e49",
+        "match": true
+      },
+      {
+        "field": "docker.components.Engine.version",
+        "approved": "28.0.4",
+        "observed": "28.0.4",
+        "match": true
+      },
+      {
+        "field": "docker.components.containerd.git_commit",
+        "approved": "f2551031d7276a770f65f98c9b52e57e7dad07e8",
+        "observed": "f2551031d7276a770f65f98c9b52e57e7dad07e8",
+        "match": true
+      },
+      {
+        "field": "docker.components.containerd.version",
+        "approved": "v2.4.1",
+        "observed": "v2.4.1",
+        "match": true
+      },
+      {
+        "field": "docker.components.docker-init.git_commit",
+        "approved": "de40ad0",
+        "observed": "de40ad0",
+        "match": true
+      },
+      {
+        "field": "docker.components.docker-init.version",
+        "approved": "0.19.0",
+        "observed": "0.19.0",
+        "match": true
+      },
+      {
+        "field": "docker.components.runc.git_commit",
+        "approved": "v1.5.2-0-g29dd3dc2",
+        "observed": "v1.5.2-0-g29dd3dc2",
+        "match": true
+      },
+      {
+        "field": "docker.components.runc.version",
+        "approved": "1.5.2",
+        "observed": "1.5.2",
+        "match": true
+      },
+      {
+        "field": "docker.git_commit",
+        "approved": "6430e49",
+        "observed": "6430e49",
+        "match": true
+      },
+      {
+        "field": "docker.min_api_version",
+        "approved": "1.24",
+        "observed": "1.24",
+        "match": true
+      },
+      {
+        "field": "docker.server_version",
+        "approved": "28.0.4",
+        "observed": "28.0.4",
+        "match": true
+      },
+      {
+        "field": "engine.architecture",
+        "approved": "x86_64",
+        "observed": "x86_64",
+        "match": true
+      },
+      {
+        "field": "engine.cgroup_driver",
+        "approved": "systemd",
+        "observed": "systemd",
+        "match": true
+      },
+      {
+        "field": "engine.cgroup_version",
+        "approved": "2",
+        "observed": "2",
+        "match": true
+      },
+      {
+        "field": "engine.kernel_version",
+        "approved": "6.17.0-1022-azure",
+        "observed": "6.17.0-1022-azure",
+        "match": true
+      },
+      {
+        "field": "engine.operating_system",
+        "approved": "Ubuntu 24.04.5 LTS",
+        "observed": "Ubuntu 24.04.5 LTS",
+        "match": true
+      },
+      {
+        "field": "engine.os_type",
+        "approved": "linux",
+        "observed": "linux",
+        "match": true
+      },
+      {
+        "field": "engine.storage_driver",
+        "approved": "overlay2",
+        "observed": "overlay2",
+        "match": true
+      },
+      {
+        "field": "kernel.machine",
+        "approved": "x86_64",
+        "observed": "x86_64",
+        "match": true
+      },
+      {
+        "field": "kernel.release",
+        "approved": "6.17.0-1022-azure",
+        "observed": "6.17.0-1022-azure",
+        "match": true
+      },
+      {
+        "field": "kernel.version",
+        "approved": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+        "observed": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+        "match": true
+      },
+      {
+        "field": "runner.arch",
+        "approved": "X64",
+        "observed": "X64",
+        "match": true
+      },
+      {
+        "field": "runner.image_os",
+        "approved": "ubuntu24",
+        "observed": "ubuntu24",
+        "match": true
+      },
+      {
+        "field": "runner.image_version",
+        "approved": "20261012.334.1",
+        "observed": "20261023.334.3",
+        "match": false
+      },
+      {
+        "field": "runner.os",
+        "approved": "Linux",
+        "observed": "Linux",
+        "match": true
+      }
+    ],
+    "cpu_checks": [
+      {
+        "name": "cpu_architecture_exact",
+        "ok": true,
+        "detail": {
+          "expected": "x86_64",
+          "actual": "x86_64"
+        }
+      },
+      {
+        "name": "cpu_op_modes_exact",
+        "ok": true,
+        "detail": {
+          "expected": "32-bit, 64-bit",
+          "actual": "32-bit, 64-bit"
+        }
+      },
+      {
+        "name": "cpu_hypervisor_exact",
+        "ok": true,
+        "detail": {
+          "expected": "Microsoft",
+          "actual": "Microsoft"
+        }
+      },
+      {
+        "name": "cpu_virtualization_exact",
+        "ok": true,
+        "detail": {
+          "expected": "full",
+          "actual": "full"
+        }
+      },
+      {
+        "name": "cpu_vendor_allowed",
+        "ok": true,
+        "detail": {
+          "accepted": [
+            "AuthenticAMD",
+            "GenuineIntel"
+          ],
+          "actual": "AuthenticAMD",
+          "model_name": "AMD EPYC 7763 64-Core Processor"
+        }
+      },
+      {
+        "name": "cpu_required_flags_present",
+        "ok": true,
+        "detail": {
+          "required": [
+            "aes",
+            "avx",
+            "avx2",
+            "bmi1",
+            "bmi2",
+            "cx16",
+            "f16c",
+            "fma",
+            "fpu",
+            "fxsr",
+            "lahf_lm",
+            "lm",
+            "mmx",
+            "movbe",
+            "pclmulqdq",
+            "popcnt",
+            "rdseed",
+            "rdtscp",
+            "sse",
+            "sse2",
+            "sse4_1",
+            "sse4_2",
+            "ssse3",
+            "xsave",
+            "xsaveopt"
+          ],
+          "missing": [],
+          "actual_vendor": "AuthenticAMD",
+          "actual_model_name": "AMD EPYC 7763 64-Core Processor"
+        }
+      }
+    ],
+    "approved_validator_status": "FAIL",
+    "counterfactual_previous_image_only": "PASS_SYNTHETIC_CONTROL_NOT_RUNTIME_APPROVAL"
+  },
+  "B": {
+    "differences": [
+      {
+        "field": "runner.image_version",
+        "approved": "20261012.334.1",
+        "observed": "20261023.334.3",
+        "match": false
+      }
+    ],
+    "contract_field_comparison": [
+      {
+        "field": "docker.api_version",
+        "approved": "1.48",
+        "observed": "1.48",
+        "match": true
+      },
+      {
+        "field": "docker.client_version",
+        "approved": "28.0.4",
+        "observed": "28.0.4",
+        "match": true
+      },
+      {
+        "field": "docker.components.Engine.git_commit",
+        "approved": "6430e49",
+        "observed": "6430e49",
+        "match": true
+      },
+      {
+        "field": "docker.components.Engine.version",
+        "approved": "28.0.4",
+        "observed": "28.0.4",
+        "match": true
+      },
+      {
+        "field": "docker.components.containerd.git_commit",
+        "approved": "f2551031d7276a770f65f98c9b52e57e7dad07e8",
+        "observed": "f2551031d7276a770f65f98c9b52e57e7dad07e8",
+        "match": true
+      },
+      {
+        "field": "docker.components.containerd.version",
+        "approved": "v2.4.1",
+        "observed": "v2.4.1",
+        "match": true
+      },
+      {
+        "field": "docker.components.docker-init.git_commit",
+        "approved": "de40ad0",
+        "observed": "de40ad0",
+        "match": true
+      },
+      {
+        "field": "docker.components.docker-init.version",
+        "approved": "0.19.0",
+        "observed": "0.19.0",
+        "match": true
+      },
+      {
+        "field": "docker.components.runc.git_commit",
+        "approved": "v1.5.2-0-g29dd3dc2",
+        "observed": "v1.5.2-0-g29dd3dc2",
+        "match": true
+      },
+      {
+        "field": "docker.components.runc.version",
+        "approved": "1.5.2",
+        "observed": "1.5.2",
+        "match": true
+      },
+      {
+        "field": "docker.git_commit",
+        "approved": "6430e49",
+        "observed": "6430e49",
+        "match": true
+      },
+      {
+        "field": "docker.min_api_version",
+        "approved": "1.24",
+        "observed": "1.24",
+        "match": true
+      },
+      {
+        "field": "docker.server_version",
+        "approved": "28.0.4",
+        "observed": "28.0.4",
+        "match": true
+      },
+      {
+        "field": "engine.architecture",
+        "approved": "x86_64",
+        "observed": "x86_64",
+        "match": true
+      },
+      {
+        "field": "engine.cgroup_driver",
+        "approved": "systemd",
+        "observed": "systemd",
+        "match": true
+      },
+      {
+        "field": "engine.cgroup_version",
+        "approved": "2",
+        "observed": "2",
+        "match": true
+      },
+      {
+        "field": "engine.kernel_version",
+        "approved": "6.17.0-1022-azure",
+        "observed": "6.17.0-1022-azure",
+        "match": true
+      },
+      {
+        "field": "engine.operating_system",
+        "approved": "Ubuntu 24.04.5 LTS",
+        "observed": "Ubuntu 24.04.5 LTS",
+        "match": true
+      },
+      {
+        "field": "engine.os_type",
+        "approved": "linux",
+        "observed": "linux",
+        "match": true
+      },
+      {
+        "field": "engine.storage_driver",
+        "approved": "overlay2",
+        "observed": "overlay2",
+        "match": true
+      },
+      {
+        "field": "kernel.machine",
+        "approved": "x86_64",
+        "observed": "x86_64",
+        "match": true
+      },
+      {
+        "field": "kernel.release",
+        "approved": "6.17.0-1022-azure",
+        "observed": "6.17.0-1022-azure",
+        "match": true
+      },
+      {
+        "field": "kernel.version",
+        "approved": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+        "observed": "#22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026",
+        "match": true
+      },
+      {
+        "field": "runner.arch",
+        "approved": "X64",
+        "observed": "X64",
+        "match": true
+      },
+      {
+        "field": "runner.image_os",
+        "approved": "ubuntu24",
+        "observed": "ubuntu24",
+        "match": true
+      },
+      {
+        "field": "runner.image_version",
+        "approved": "20261012.334.1",
+        "observed": "20261023.334.3",
+        "match": false
+      },
+      {
+        "field": "runner.os",
+        "approved": "Linux",
+        "observed": "Linux",
+        "match": true
+      }
+    ],
+    "cpu_checks": [
+      {
+        "name": "cpu_architecture_exact",
+        "ok": true,
+        "detail": {
+          "expected": "x86_64",
+          "actual": "x86_64"
+        }
+      },
+      {
+        "name": "cpu_op_modes_exact",
+        "ok": true,
+        "detail": {
+          "expected": "32-bit, 64-bit",
+          "actual": "32-bit, 64-bit"
+        }
+      },
+      {
+        "name": "cpu_hypervisor_exact",
+        "ok": true,
+        "detail": {
+          "expected": "Microsoft",
+          "actual": "Microsoft"
+        }
+      },
+      {
+        "name": "cpu_virtualization_exact",
+        "ok": true,
+        "detail": {
+          "expected": "full",
+          "actual": "full"
+        }
+      },
+      {
+        "name": "cpu_vendor_allowed",
+        "ok": true,
+        "detail": {
+          "accepted": [
+            "AuthenticAMD",
+            "GenuineIntel"
+          ],
+          "actual": "AuthenticAMD",
+          "model_name": "AMD EPYC 9V74 80-Core Processor"
+        }
+      },
+      {
+        "name": "cpu_required_flags_present",
+        "ok": true,
+        "detail": {
+          "required": [
+            "aes",
+            "avx",
+            "avx2",
+            "bmi1",
+            "bmi2",
+            "cx16",
+            "f16c",
+            "fma",
+            "fpu",
+            "fxsr",
+            "lahf_lm",
+            "lm",
+            "mmx",
+            "movbe",
+            "pclmulqdq",
+            "popcnt",
+            "rdseed",
+            "rdtscp",
+            "sse",
+            "sse2",
+            "sse4_1",
+            "sse4_2",
+            "ssse3",
+            "xsave",
+            "xsaveopt"
+          ],
+          "missing": [],
+          "actual_vendor": "AuthenticAMD",
+          "actual_model_name": "AMD EPYC 9V74 80-Core Processor"
+        }
+      }
+    ],
+    "approved_validator_status": "FAIL",
+    "counterfactual_previous_image_only": "PASS_SYNTHETIC_CONTROL_NOT_RUNTIME_APPROVAL"
+  }
+}
