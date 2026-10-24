@@ -52,12 +52,12 @@ export function nistreniaNodeGeometry(modelNode){
 
 export async function fetchNistreniaAdministrativeModel(fetcher,subtle,options={}){
  const [bodyResponse,proofResponse]=await Promise.all([
-  fetcher('public/data/ni-fin-administration.json',{cache:'no-cache'}),
-  fetcher('public/data/ni-fin-administration-manifest.json',{cache:'no-cache'})
+  fetcher('views/nistrenia/administration.json',{cache:'no-cache'}),
+  fetcher('views/nistrenia/manifest.json',{cache:'no-cache'})
  ]);
  if(!bodyResponse.ok||!proofResponse.ok)fail('model resource unavailable');
  const [body,proof]=await Promise.all([bodyResponse.text(),proofResponse.json()]);
- if(!subtle?.digest||proof.schema!=='ni-fin-model-manifest-v1'||proof.model_file!=='public/data/ni-fin-administration.json'||proof.actual_mutation_allowed!==false||proof.p91_import_allowed!==false)fail('manifest authority');
+ if(!subtle?.digest||proof.schema!=='ni-fin-model-manifest-v1'||proof.model_file!=='views/nistrenia/administration.json'||proof.actual_mutation_allowed!==false||proof.p91_import_allowed!==false)fail('manifest authority');
  const bytes=new TextEncoder().encode(body),digest=await subtle.digest('SHA-256',bytes);
  const hash=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
  if(bytes.length!==proof.bytes||hash!==proof.sha256)fail('model hash mismatch');
