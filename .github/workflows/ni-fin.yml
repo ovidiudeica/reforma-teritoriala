@@ -10,7 +10,8 @@ on:
       - 'app.js'
       - 'atlas-tree.mjs'
       - 'atlas-url-state.mjs'
-      - 'public/data/ni-fin*'
+      - 'atlas-search.mjs'
+      - 'views/nistrenia/**'
       - 'public/data/p909-nistrenia-osm-navigation.json'
       - 'public/data/p9095-osm-outlines*.json'
   push:
@@ -24,7 +25,8 @@ on:
       - 'app.js'
       - 'atlas-tree.mjs'
       - 'atlas-url-state.mjs'
-      - 'public/data/ni-fin*'
+      - 'atlas-search.mjs'
+      - 'views/nistrenia/**'
       - 'public/data/p909-nistrenia-osm-navigation.json'
       - 'public/data/p9095-osm-outlines*.json'
   workflow_dispatch:

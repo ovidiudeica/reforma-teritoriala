@@ -6,7 +6,7 @@ import {createUrlConfig,normalizeUrlState,serializeUrlState,parseUrlState} from 
 import {createGeometryFilterIndex} from '../../geometry-taxonomy.mjs';
 import {ancestorPath} from '../../atlas-tree.mjs';
 const read=p=>JSON.parse(readFileSync(new URL('../../'+p,import.meta.url),'utf8'));
-const model=read('public/data/ni-fin-administration.json'),actual=read('public/data/actual-entities.json').entities,tree=read('public/data/actual-consolidated-tree.json');
+const model=read('views/nistrenia/administration.json'),actual=read('public/data/actual-entities.json').entities,tree=read('public/data/actual-consolidated-tree.json');
 const entityById=new Map(actual.map(e=>[e.id,e])),officialNodes=new Map(tree.nodes.map(n=>[n.id,n]));
 const before=JSON.stringify([...officialNodes]);
 const view=createNistreniaAdministrativeView({model,entityById,officialNodes,officialRoots:tree.root_ids});

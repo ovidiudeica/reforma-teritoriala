@@ -53,7 +53,8 @@ test('P9.0.9 source menu is deterministic and drives the operational tree withou
  assert.doesNotMatch(html,/id="nistrenia-osm-panel"/);
  assert.doesNotMatch(html,/id="nistrenia-osm-toggle"/);
  assert.match(js,/loadNistreniaOsmNavigation/);
- assert.match(js,/createNistreniaOperationalView/);
+ assert.match(js,/createNistreniaAdministrativeView/);
+ assert.match(js,/fetchNistreniaAdministrativeModel/);
  assert.doesNotMatch(js,/showExistingOsmRoles/);
  const module=readFileSync('atlas-nistrenia-osm.mjs','utf8');
  const tree=readFileSync('atlas-nistrenia-jurisdiction.mjs','utf8');

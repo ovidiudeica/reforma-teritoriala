@@ -11,6 +11,56 @@
       "fix": "Source-bound correction of virtual parent only, preserving original census and officialMDparent.",
       "regression": "Mayak effectiveparentunit22; lettered25-27underplace24; nestedlocalities allowed and cycles rejected.",
       "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-002",
+      "severity": "P1",
+      "component": "Virtual model write surface",
+      "reproduction": "CI40136595233 on6497d52 rejects added public/data/ni-fin files.",
+      "cause": "The existing read-only census forbids any data/public diff, including virtual presentation data.",
+      "fix": "Move derived model and manifest to views/nistrenia; update loader/generator bindings; preserve gate and protected directories unchanged.",
+      "regression": "Model byte regeneration and SHA loader; existing WEB-R2a.1 gate remains mandatory.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-003",
+      "severity": "P2",
+      "component": "Approved administrative tree regression contracts",
+      "reproduction": "CI40136595275 expects7 UIgroups;40136595306 expects previous factory name.",
+      "cause": "Legacy runtime assertions describe the replaced geometric-group tree rather than the approved9unit documentary tree.",
+      "fix": "Update only runtime expectations to9 units and verified administrative loader; retain old7group catalog/85role invariants and every existing test.",
+      "regression": "P907216/P909/P9094 browser and menu tests; new242node reciprocal-path tests.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-004",
+      "severity": "P2",
+      "component": "Chromium exhaustive-card audit pacing",
+      "reproduction": "CI40136595350 artifact12577485510 records Throttling navigation to prevent the browser from hanging after bulk242 sequential selections.",
+      "cause": "The exhaustive audit exceeds Chromium IPC navigation flood protection on the faster hosted runner; local Windows did not hit that rate.",
+      "fix": "Pace the synthetic all-card traversal by125ms per selection; keep browser flood protection active; assert no throttling diagnostics.",
+      "regression": "All242 cards remain checked; URL hydration and Back/Forward after traversal still required.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-005",
+      "severity": "P2",
+      "component": "Documentary card scroll lifecycle",
+      "reproduction": "Scroll a long NI resource card then select a council; the new title can remain above the retained scroll position.",
+      "cause": "Card content was replaced without resetting the contextual scrolling elements for a changed documentary selection.",
+      "fix": "Reset details-panel/content/body scroll only when selected ID changes; resource toggles inside the same card preserve position.",
+      "regression": "Real Chromium scroll500 then council selection must start at scrollTop0.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-006",
+      "severity": "P2",
+      "component": "Runtime model validation",
+      "reproduction": "A model with nonnumeric OSM version, missing original_names, altered per-node year/legal status or rebound compatibility alias passed the initial structural validator.",
+      "cause": "The first validator checked registry shape but did not bind all display metadata and per-node authority fields.",
+      "fix": "Reject malformed version/timestamp/level metadata, missing source-name lists, per-node authority/epoch promotion and aliases outside the85canonical resources.",
+      "regression": "Six negative model tests added;26model tests PASS.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
     }
   ]
 }

@@ -8,10 +8,11 @@ try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL
  assert.deepEqual(await p.evaluate('({actual:qaApp.entityById.size,official:qaApp.hierarchyNodeById.size,nodes:qaApp.nistreniaView.virtualIds.size,units:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,outlines:qaApp.nistreniaOutlines.layers.size,checked:[...qaApp.visibleEntityIds].sort(),own:[...qaApp.visibleOperationalOutlineIds]})'),{actual:5848,official:5848,nodes:242,units:9,roles:85,outlines:8,checked:['osm-r58974','osm-r90689'],own:['view-nistrenia']});
  report.scenarios.push('5848 official + 242 documentary nodes; 9 units, 85 roles, 8 independent outlines; three roots only');
  const checked=await p.evaluate('[...qaApp.visibleEntityIds].sort()');
- await p.evaluate("(async()=>{for(const id of qaApp.nistreniaView.virtualIds){await qaApp.selectEntity(id,{zoom:false});if(!document.getElementById('details-body').textContent.includes('2023'))throw Error('missing provenance '+id);}return true;})()");
+ await p.evaluate("(async()=>{for(const id of qaApp.nistreniaView.virtualIds){await qaApp.selectEntity(id,{zoom:false});if(!document.getElementById('details-body').textContent.includes('2023'))throw Error('missing provenance '+id);await new Promise(resolve=>setTimeout(resolve,125));}return true;})()");
  assert.deepEqual(await p.evaluate('[...qaApp.visibleEntityIds].sort()'),checked);assert.deepEqual(await p.evaluate('[...qaApp.visibleOperationalOutlineIds]'),['view-nistrenia']);
- report.scenarios.push('all242cards select without checking any descendant or candidate');
- await p.evaluate("qaApp.selectEntity('view-nistrenia-council-29',{zoom:false})");await p.openPanel('entities');
+ report.scenarios.push('all242cards select without checking any descendant or candidate; paced below Chromium IPC flooding protection');
+ await p.evaluate("document.getElementById('details-panel').scrollTop=500;qaApp.selectEntity('view-nistrenia-council-29',{zoom:false})");await p.openPanel('entities');
+ assert.equal(await p.evaluate("document.getElementById('details-panel').scrollTop"),0,'new documentary card starts at its heading');
  assert.equal(await p.evaluate("qaApp.atlasTree.getNode('view-nistrenia-council-29').checkbox.disabled"),true);
  await p.evaluate("qaApp.atlasTree.getNode('view-nistrenia-council-29').button.focus()");await p.key('ArrowLeft');
  assert.equal(await p.evaluate("document.activeElement===qaApp.atlasTree.getNode('view-nistrenia-council-29').toggle"),true);
@@ -33,6 +34,6 @@ try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL
  }
  report.scenarios.push('desktop/tablet/mobile portrait+landscape without horizontal overflow');
  for(const id of ['osm-r58974','osm-r90689']){await p.call(async function(id){await qaApp.selectEntity(id,{zoom:false});},id);assert.equal(await p.evaluate('qaApp.selectedEntityId'),id);}
- assert.deepEqual(p.errors,[]);assert.deepEqual(p.console.filter(x=>x.type==='error'||x.level==='error'),[]);
+ assert.deepEqual(p.errors,[]);assert.ok(!p.console.some(x=>/Throttling navigation/.test(x.text||'')),'audit must respect Chromium flooding protection');assert.deepEqual(p.console.filter(x=>x.type==='error'||x.level==='error'),[]);
  report.scenarios.push('RO/MD canonical selection intact; zero JavaScript/console errors');
  });}finally{report.errors=p.errors;report.console=p.console;report.responses=p.responses;await writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2));await b.close();}

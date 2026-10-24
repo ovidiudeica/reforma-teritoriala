@@ -455,11 +455,11 @@ async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
  const apply=()=>{
   if(!nistreniaView.nodes.has(id))throw Error('Nistrenia: administrative record unavailable '+id);
   atlasTree?.select(id);
-  selectedEntityId=id;
+  const changed=selectedEntityId!==id;selectedEntityId=id;
   if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
   document.getElementById('geometry-status').textContent='';
   atlasMobile.selection(id,{source:options.source});
-  renderNistreniaDetails(id);updateSelectionVisibility();rerenderLoadedTiers();
+  renderNistreniaDetails(id);if(changed)for(const key of ['details-panel','details-content','details-body'])document.getElementById(key).scrollTop=0;updateSelectionVisibility();rerenderLoadedTiers();
   if(nistreniaOutlines?.has(id))atlasAdvanced?.record(id);
   if(atlasPanels.state.active==='share')atlasShare?.refresh();
   // A parent name selects only its own UI/source identity, never its descendants.

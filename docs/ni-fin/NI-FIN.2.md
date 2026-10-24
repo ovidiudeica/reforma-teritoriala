@@ -13,3 +13,5 @@ Cardurile arată sursa 2023, incertitudinea contemporană, părintele documentar
 Teste: ni-fin2-view.test.mjs; ni-fin2-browser.test.mjs; contractele Chromium P909/P9094 au fost actualizate pentru schimbarea comportamentală explicit autorizată. Regresiile P9095 păstrează verificarea contururilor, filtrelor, Undo, Reset, URL/Share și ciclului de selecție. Niciun test obligatoriu nu a fost exclus.
 
 NI_FUNCTIONAL_COMPLETE=false până la acceptarea dependențelor, CI pe SHA exact, merge și publicarea Pages verificată. NI_LEGAL_CERTIFICATION_PENDING și OSM_SOURCE_PENDING rămân distincte și adevărate.
+
+Remedieri CI inițial: modelul a fost izolat sub `views/nistrenia/`, păstrând integral interdicția WEB-R2a.1 pentru data/public; verificările vechi de șapte grupări au fost actualizate la cele nouă unități aprobate; parcurgerea automată a celor 242 de carduri este ritmată fără dezactivarea protecției Chromium IPC. Schimbarea unei înregistrări NI resetează derularea cardului la titlu, fără resetarea cardului la bifarea unei resurse din interior.
