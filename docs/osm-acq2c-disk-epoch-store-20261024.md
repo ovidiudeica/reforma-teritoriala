@@ -1,0 +1,5 @@
+# Epoch selection with an external store
+
+The authenticated recursive base contains 2,227,912 observed identities and 2,936,779 versions for a requested frontier of 251,088 objects. The original in-memory selected-object map would retain all objects on an 8 GB workstation. The new callback-based replay emits selected records to a caller-owned store while retaining identity sets and one history group, rather than every selected payload. It reuses the exact existing epoch reconciliation core, including gap, overlap, deletion and timestamp checks.
+
+Nine focused tests compare the stream with the existing core and reject conflicting or noncontiguous observations. Production local replay uses SQLite and newline-delimited selected records; the complete result and manifest remain pending. This tooling change does not certify data completeness, topology, provenance publication, spatial equivalence, source freshness or any UNKNOWN relation. No source promotion, ACTUAL mutation, host-trust change or public OSM edit is authorized here.
