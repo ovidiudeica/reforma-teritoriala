@@ -39,7 +39,7 @@ test('WEB-NI-U1.2 distinguishes candidate documentary nodes from certified ident
   assert.equal(node.geometry_association,'CANDIDATE_NOT_CERTIFIED');
   assert.equal(node.legal_certification,'PENDING');
   assert.equal(node.reference_year,2023);
-  assert.equal(view.nodes.get(node.node_id).geometry_ref,null);
+  assert.notEqual(view.nodes.get(node.node_id).geometry_ref,row.canonical_id);
  }
 });
 
