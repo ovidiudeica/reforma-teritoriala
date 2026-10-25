@@ -1,0 +1,166 @@
+{
+  "status": "PASS",
+  "scope": "REAL_PUBLISHED_SITE_WITH_BROWSER_ONLY_SYNTHETIC_NI_FAILURES",
+  "source": {
+    "sha": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+    "trackedSourcesClean": true
+  },
+  "sourceProof": [
+    {
+      "file": "index.html",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/index.html",
+      "bytes": 28198,
+      "sha256": "162c40eb208e3eab1a05237f6f23e129e14fe921d229709c7af7a4d92967534e",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "app.js",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/app.js",
+      "bytes": 65132,
+      "sha256": "83d6af2b8257609e27810d3f8a01141a982212021caf026cbf4d862a9079d1ec",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-panels.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-panels.mjs",
+      "bytes": 6310,
+      "sha256": "cdd47afb821f1e080a7182922b10ab5b5014b91c70097422f9cae79a6264cd65",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-filters.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-filters.mjs",
+      "bytes": 14723,
+      "sha256": "3059e22325214fb1fa4adc44bbe509f3823ed251b15ed11604f38b5ec728b4fb",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-tree.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-tree.mjs",
+      "bytes": 17038,
+      "sha256": "b0c054b3ef7dff193ffee9bf1e7cf03ffcf04a3d7f14539de9febe8f377c0969",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-osm-roles.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-osm-roles.mjs",
+      "bytes": 6067,
+      "sha256": "1c0fb1227b7224bd85e860ac220a32d055ef8733e1ea54f46baa17ac2c4f9aac",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-nistrenia-outlines.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-nistrenia-outlines.mjs",
+      "bytes": 5184,
+      "sha256": "30997f139f5a3ec1aaf70fbebe5e02f325c0d8856239fed8c7d37d0ade869010",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "scripts/audit/web-r2b-final-pages-browser.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/scripts/audit/web-r2b-final-pages-browser.mjs",
+      "bytes": 11398,
+      "sha256": "03af61d7b7fd16b0259acad601694a93488b8191093837eff785a54e8c9d3280",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "data/current/actual-release-manifest.json",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/data/current/actual-release-manifest.json",
+      "bytes": 22513,
+      "sha256": "cc604a8fe88a9b4e044f3dea3032eedf020ee3d102a1b944aaf626da73abf1a5",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    }
+  ],
+  "cases": [
+    {
+      "syntheticResponseCode": 404,
+      "request": "https://ovidiudeica.github.io/reforma-teritoriala/views/nistrenia/administration.json",
+      "state": {
+        "actual": 5848,
+        "official": 5848,
+        "tree": true,
+        "ni": null,
+        "disabled": true,
+        "checked": [
+          "osm-r58974",
+          "osm-r90689"
+        ]
+      },
+      "canonicalSelections": "PASS",
+      "uncaughtErrors": [],
+      "status": "PASS"
+    },
+    {
+      "syntheticResponseCode": 200,
+      "request": "https://ovidiudeica.github.io/reforma-teritoriala/views/nistrenia/administration.json",
+      "state": {
+        "actual": 5848,
+        "official": 5848,
+        "tree": true,
+        "ni": null,
+        "disabled": true,
+        "checked": [
+          "osm-r58974",
+          "osm-r90689"
+        ]
+      },
+      "canonicalSelections": "PASS",
+      "uncaughtErrors": [],
+      "status": "PASS"
+    },
+    {
+      "syntheticResponseCode": 503,
+      "request": "https://ovidiudeica.github.io/reforma-teritoriala/views/nistrenia/administration.json",
+      "state": {
+        "actual": 5848,
+        "official": 5848,
+        "tree": true,
+        "ni": null,
+        "disabled": true,
+        "checked": [
+          "osm-r58974",
+          "osm-r90689"
+        ]
+      },
+      "canonicalSelections": "PASS",
+      "uncaughtErrors": [],
+      "status": "PASS"
+    }
+  ],
+  "browser": "Edg/156.0.4314.42"
+}
