@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_SOURCE_FRESHNESS",
+  "checked_at": "2026-10-25T18:58:33.459Z",
+  "status": "STALE",
+  "policy": {
+    "OSM": 14,
+    "SIRUTA": 45,
+    "CUATM": 45
+  },
+  "sources": [
+    {
+      "name": "OSM",
+      "timestamp": "2026-10-05T23:50:05.218Z",
+      "max_age_days": 14,
+      "age_days": 19.798,
+      "status": "STALE"
+    },
+    {
+      "name": "SIRUTA",
+      "timestamp": "2026-09-26T11:58:48.000Z",
+      "max_age_days": 45,
+      "age_days": 29.291,
+      "status": "PASS"
+    },
+    {
+      "name": "CUATM",
+      "timestamp": "2026-09-27T20:37:24.316Z",
+      "max_age_days": 45,
+      "age_days": 27.931,
+      "status": "PASS"
+    }
+  ]
+}

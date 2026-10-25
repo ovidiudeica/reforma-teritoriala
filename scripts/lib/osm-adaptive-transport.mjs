@@ -1,7 +1,8 @@
+import {osmElementIndex,mergeOsmElements} from './osm-element-index.mjs';
 // Sequential and bounded: split a failed chunk, then use authoritative full
 // responses at leaves. Successful but incomplete responses also fail closed.
 export function assertRelationClosure(raw, ids) {
- const byKey=new Map((raw?.elements||[]).map(e=>[`${e.type}/${e.id}`,e]));
+ const byKey=osmElementIndex(raw);
  const visit=(type,id,seen=new Set())=>{
   const key=`${type}/${id}`;
   if(seen.has(key))return;
@@ -14,6 +15,7 @@ export function assertRelationClosure(raw, ids) {
  for(const id of ids)visit('relation',id);
 }
 export async function fetchAdaptiveRelations(ids,{fetchChunk,fetchFull,attempts,purpose='relations'}) {
+ if(!Array.isArray(ids)||ids.length===0||!ids.every(id=>Number.isSafeInteger(id)&&id>0)||new Set(ids).size!==ids.length)throw new Error('OSM selection must be non-empty distinct positive integer IDs');
  try {
   const result=await fetchChunk(ids,purpose);
   attempts.push(...result.attempts);
@@ -31,7 +33,7 @@ export async function fetchAdaptiveRelations(ids,{fetchChunk,fetchFull,attempts,
   const mid=Math.floor(ids.length/2),elements=new Map();
   for(const [index,part] of [ids.slice(0,mid),ids.slice(mid)].entries()){
    const raw=await fetchAdaptiveRelations(part,{fetchChunk,fetchFull,attempts,purpose:`${purpose}.${index+1}`});
-   for(const e of raw.elements)elements.set(`${e.type}/${e.id}`,e);
+   mergeOsmElements(elements,raw.elements);
   }
   return {version:0.6,elements:[...elements.values()]};
  }

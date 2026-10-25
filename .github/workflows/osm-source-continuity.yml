@@ -7,6 +7,13 @@ on:
       - '.github/workflows/osm-source-continuity.yml'
       - 'scripts/import/import-osm.mjs'
       - 'scripts/lib/osm-source-continuity.mjs'
+      - 'scripts/lib/osm-adaptive-transport.mjs'
+      - 'scripts/lib/osm-element-index.mjs'
+      - 'scripts/lib/osm-closure-audit.mjs'
+      - 'scripts/test/osm-adaptive-transport.test.mjs'
+      - 'scripts/test/osm-fix3-*.test.mjs'
+      - 'scripts/process/audit-osm-fix3-current.mjs'
+      - 'docs/osm-fix3/**'
       - 'scripts/process/audit-osm-refresh-continuity.mjs'
       - 'scripts/test/osm-source-continuity.test.mjs'
   push:
@@ -16,6 +23,13 @@ on:
       - '.github/workflows/osm-source-continuity.yml'
       - 'scripts/import/import-osm.mjs'
       - 'scripts/lib/osm-source-continuity.mjs'
+      - 'scripts/lib/osm-adaptive-transport.mjs'
+      - 'scripts/lib/osm-element-index.mjs'
+      - 'scripts/lib/osm-closure-audit.mjs'
+      - 'scripts/test/osm-adaptive-transport.test.mjs'
+      - 'scripts/test/osm-fix3-*.test.mjs'
+      - 'scripts/process/audit-osm-fix3-current.mjs'
+      - 'docs/osm-fix3/**'
       - 'scripts/process/audit-osm-refresh-continuity.mjs'
       - 'scripts/test/osm-source-continuity.test.mjs'
 
@@ -29,8 +43,9 @@ jobs:
       - name: Checkout exact PR head
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - name: Reject missing and altered OSM relations
-        run: node --test scripts/test/osm-source-continuity.test.mjs
+        run: node --test scripts/test/osm-source-continuity.test.mjs scripts/test/osm-adaptive-transport.test.mjs scripts/test/osm-fix3-*.test.mjs
       - name: Verify import OSM lifecycle guards
         run: node --test scripts/test/osm-refresh-routing.test.mjs
