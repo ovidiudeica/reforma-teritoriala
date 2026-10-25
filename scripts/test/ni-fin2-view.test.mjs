@@ -16,7 +16,7 @@ test('242 documentary nodes are reciprocal/reachable without modifying 5848 offi
  assert.equal(JSON.stringify([...officialNodes]),before);
 });
 test('all documentary nodes are searchable and city/raion labels remain distinct',()=>{
- const rows=nistreniaSearchEntities(view,entityById);assert.equal(rows.length,242);assert.equal(new Set(rows.map(x=>x.id)).size,242);
+ const rows=nistreniaSearchEntities(view,entityById);assert.equal(rows.length,242+86);assert.equal(new Set(rows.map(x=>x.id)).size,242+86);assert.equal(rows.filter(x=>view.virtualIds.has(x.id)).length,242);
  assert.match(view.nodes.get('view-nistrenia-unit-15').display_name,/oraș/);
  assert.match(view.nodes.get('view-nistrenia-group-osm-r1702215').display_name,/raion/);
 });
