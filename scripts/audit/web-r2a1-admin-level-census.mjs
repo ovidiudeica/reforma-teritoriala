@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {mkdir,readFile,writeFile,readdir} from 'node:fs/promises';
 import path from 'node:path';
+import {auditProvenanceBoundary} from './web-r2a1-provenance-boundary.mjs';
 
 const BASE='073a1ee2a2098392df5891fb6b15e69b0eef2d9c';
 const SNAPSHOT='actual-a9e5a4ddcb5277ef';
@@ -103,10 +104,11 @@ if(nav.source!=='docs/p9.0.7.2.15-osm-semantic-reconciliation.json'||nav.source_
 if(reconciliation.total!==85)die('semantic reconciliation total != 85');
 
 let changed=[];
-try{changed=execFileSync('git',['diff','--name-only',BASE+'...HEAD'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);}
+try{changed=execFileSync('git',['diff','--name-only',BASE,'HEAD'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);}
 catch(e){die('cannot compare audit branch to base SHA: '+e.message);}
 const protectedChanges=changed.filter(p=>p==='data'||p.startsWith('data/')||p==='public'||p.startsWith('public/'));
-if(protectedChanges.length)die('protected data/public changed: '+protectedChanges.join(', '));
+const provenanceBoundary=auditProvenanceBoundary(BASE);
+if(protectedChanges.length&&provenanceBoundary.mode!=='OWNER_AUTHORIZED_EXACT_P905_PROVENANCE')die('protected changes not admitted');
 
 const actualRows=[],byId=new Map(),ids=new Set();
 for(const e of actual.entities){
@@ -270,7 +272,7 @@ const report='# WEB-R2a.1 — recensământ exhaustiv admin_level OSM\n\n'
  +'- Excepții: **'+summary.counts.exceptions+'** (fatal '+fatal+', error '+errors+', warning '+summary.counts.warnings+', info '+summary.counts.info+')\n\n'
  +'## Metodologie\n\nValidatorul citește numai octeții din checkout-ul Git, verifică bindingurile SHA-256 ale ACTUAL și NI, cardinalitățile, unicitatea și referințele dintre contracte. Unitățile de numărare sunt separate: ACTUAL RO, ACTUAL MD, cele 8 contururi NI source-only și cele 85 roluri OSM reutilizate. Valorile admin_level nu sunt deduse din nume, tip, părinte, NUTS, SIRUTA sau CUATM.\n\n'
  +'## Rezultate și excepții\n\n`distributions.json` este sursa canonică pentru fiecare nivel și stările missing/null/multiple/invalid/conflict. `exceptions.json` este registrul exhaustiv per-ID. Excepțiile non-fatale sunt intrarea pentru WEB-R2a.2 și nu autorizează corecții automate.\n\n'
- +'## Invariante\n\n`data/` și `public/` rămân neschimbate față de base SHA. Cele 85 roluri nu cresc cardinalitatea ACTUAL; cele 8 contururi NI sunt source-only. P9.1 rămâne blocat: p91_import_allowed=false, semantic_acceptance=BLOCKED_INCOMPLETE, actual_mutation_allowed=false.\n\n'
+ +'## Invariante\n\nDatele canonice `data/` și `public/` rămân neschimbate; singura excepție autorizată privește șase manifeste P9.0.5 de proveniență cu hashuri exacte, validate separat. Cele 85 roluri nu cresc cardinalitatea ACTUAL; cele 8 contururi NI sunt source-only. P9.1 rămâne blocat: p91_import_allowed=false, semantic_acceptance=BLOCKED_INCOMPLETE, actual_mutation_allowed=false.\n\n'
  +'## Reproducere\n\n`node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir <director>`\n';
 outputs['report.md']=report;
 for(const [n,c] of Object.entries(outputs))await writeFile(path.join(OUT,n),c);

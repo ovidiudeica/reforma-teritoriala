@@ -1,0 +1,51 @@
+name: NI-FIN.3.1 runner qualification evidence (not admission)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/ni-fin31-runner-qualification.yml'
+      - 'scripts/audit/ni-fin31-host-qualification.mjs'
+      - 'scripts/test/ni-fin31-host-qualification.test.mjs'
+      - 'docs/ni-fin31-runner-qualification.md'
+      - 'docs/evidence/ni-fin31-host-qualification-20261025/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualification-evidence:
+    name: qualification-evidence-${{ matrix.proof }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        proof: [A, B]
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify frozen evidence and positive/negative validator probes
+        run: |
+          node scripts/audit/ni-fin31-host-qualification.mjs --check
+          node --test scripts/test/ni-fin31-host-qualification.test.mjs
+      - name: Capture authentic runner without authorizing or executing ACTUAL
+        env:
+          PROOF: ${{ matrix.proof }}
+        run: |
+          case "$PROOF" in
+            A) node scripts/audit/ni-fin31-host-qualification.mjs --capture-live=A ;;
+            B) node scripts/audit/ni-fin31-host-qualification.mjs --capture-live=B ;;
+            *) exit 1 ;;
+          esac
+      - name: Verify protected and tracked bytes unchanged
+        run: git diff --exit-code
+      - name: Preserve qualification evidence even when observation differs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ni-fin31-live-${{ matrix.proof }}-${{ github.sha }}
+          path: outputs/ni-fin31-live
+          if-no-files-found: error
