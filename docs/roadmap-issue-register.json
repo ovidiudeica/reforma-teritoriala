@@ -926,6 +926,58 @@
         "scripts/audit/test_osm_acq2c_exact_proposals.py",
         "scripts/audit/osm_acq2c_exact_proposals.py"
       ]
+    },
+    {
+      "id": "RM-050",
+      "severity": "P1",
+      "component": "OSM adaptive shard graph merge",
+      "reproduction_sha": "d35f89a434260288bd3cde7c61e606d21907d8c7",
+      "reproduction": "Two negative cases accept contradictory duplicate versions and overwrite a shared node payload across successful fallback shards. Original3-test lot has2FAIL/1PASS.",
+      "cause": "Map construction and Map.set use last-writer-wins without identity/payload consistency validation.",
+      "change": "Shared strict typed-ID index accepts only semantically identical duplicates and rejects version/payload conflicts within and across shards.",
+      "regression": "osm-fix3-graph.test.mjs; existing adaptive fallback regressions remain enabled.",
+      "verdict": "FIX_IMPLEMENTED_LOCAL_RETEST_PASS",
+      "evidence": [
+        "docs/osm-fix3/osm-fix3-graph-before.log.gz",
+        "docs/osm-fix3/osm-fix3-focused-after.log.gz"
+      ],
+      "limitations": [
+        "No historical accepted ACTUAL corruption is inferred from this counterexample.",
+        "This does not resolve external Overpass timeouts or upstream topology."
+      ]
+    },
+    {
+      "id": "RM-051",
+      "severity": "P2",
+      "component": "OSM adaptive empty selection recursion",
+      "reproduction_sha": "d35f89a434260288bd3cde7c61e606d21907d8c7",
+      "reproduction": "Legacy empty selection recurses on the same empty subset; a mock oracle deliberately stops after3calls without network.",
+      "cause": "Fallback termination checks len1 but never rejects len0 or duplicate/invalid requested IDs.",
+      "change": "Reject empty, duplicate, unsafe and nonpositive IDs before the first fetch.",
+      "regression": "Empty/duplicate/invalid selection test asserts zero fetch calls.",
+      "verdict": "FIX_IMPLEMENTED_LOCAL_RETEST_PASS",
+      "evidence": [
+        "docs/osm-fix3/empty-selection-counterexample.json",
+        "docs/osm-fix3/osm-fix3-focused-after.log.gz"
+      ],
+      "limitations": [
+        "Not established as the cause of any historical GitHub cancellation."
+      ]
+    },
+    {
+      "id": "RM-052",
+      "severity": "P2",
+      "component": "New offline review input byte binding",
+      "reproduction": "First unpublished generator hashes JSON Buffer wrappers instead of raw input bytes; the dedicated hash regression fails before publication.",
+      "cause": "Generic object hashing did not special-case Buffer values.",
+      "change": "Hash Buffer input bytes directly; retain JSON canonicalization only for derived objects.",
+      "regression": "Frozen-input byte binding test and byte-identical regeneration.",
+      "verdict": "FIX_IMPLEMENTED_LOCAL_RETEST_PASS",
+      "evidence": [
+        "docs/osm-fix3/osm-fix3-evidence-before.log.gz",
+        "docs/osm-fix3/analysis.initial-invalid-input-binding.json",
+        "docs/osm-fix3/osm-fix3-focused-after.log.gz"
+      ]
     }
   ],
   "environment_incidents": [
@@ -1729,5 +1781,5 @@
       "historical_description": "Final published Pages E2E acceptance (completed and evidence-bound)."
     }
   ],
-  "updated_at": "2026-10-24T14:01:54.191456+00:00"
+  "updated_at": "2026-10-25T18:57:21.483210+00:00"
 }

@@ -1,0 +1,981 @@
+{
+  "schema": "osm-fix3-current-review-v1",
+  "scope": "13 identities and bounded current topology/impact diagnostic; not full RO/MD source qualification",
+  "input_sha256": {
+    "observations": "d332f0fe72f3f26ace749e00e16c20b1b765f28c62c75c6c460182948e1a9836",
+    "baseline": "759893143aa788efb38a1883e46f31e8776ce6900116b282b7be647464641eac"
+  },
+  "baseline_snapshot_at": "2026-10-05T23:50:05.218Z",
+  "current_observation_window": {
+    "from": "2026-10-25T16:46:46.668669+00:00",
+    "to": "2026-10-25T16:46:59.764995+00:00"
+  },
+  "snapshot_atomic_certified": false,
+  "matrix": [
+    {
+      "relation_id": 18966859,
+      "name": "Bogăția Lacului",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:39Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-12T10:26:56Z",
+      "last_changeset": 190392676,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "553002",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376178802,
+        1376178395,
+        1376178379
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 36,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18966859/history.json",
+      "history_raw_sha256": "1c534c43166a3ff4841ba0e9f98d44bcd63515ebcdbc464e8ee757a40a1a0dfc",
+      "history_sanitized_sha256": "a8801b86b2356d006317e968f7839338d0f2ac3b7b3b8dcf27c49ca32e9ef95f",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18966939,
+      "name": "Grădina-Rai",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:39Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-12T10:26:56Z",
+      "last_changeset": 190392676,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "553003",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376178906,
+        1376178396,
+        1376178395
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 58,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18966939/history.json",
+      "history_raw_sha256": "d76ce568f9a9111ec2d4e0b5b75eaf312a79d6f2d78e52797d8d3e09cd0dbd49",
+      "history_sanitized_sha256": "cb69c974a2cd0a585b347857207e6a9cdd4e6b54144c515345b6913e2bf335d2",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18967312,
+      "name": "Mesteacănul Alb",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:39Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-08T10:30:08Z",
+      "last_changeset": 190191900,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "552403",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376179430,
+        1376178512,
+        1376178674,
+        1376178511
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 60,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18967312/history.json",
+      "history_raw_sha256": "5bdea45363ee2162d5158ed13221f0175a062c33664a27c8add97c573a89c72c",
+      "history_sanitized_sha256": "9274bfa8b37e2ac836333ad41ab50dff49058fd1d7501dc0af5375e097c2a741",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18967475,
+      "name": "Struguraș",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:39Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-12T10:26:56Z",
+      "last_changeset": 190392676,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "553008",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376179857,
+        1376178562,
+        1376178660,
+        1376178678,
+        1376178561
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 85,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18967475/history.json",
+      "history_raw_sha256": "a3416b68659454e9ddb80cf005af00cff61cd5c3653aabcf27ca82c0d201bd4f",
+      "history_sanitized_sha256": "5a4273e4b025d28890a87e04e11f318fdd65fa27184072f50a4d6dd2ea4e8d59",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18967641,
+      "name": "Novinca-Eco",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:47Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-12T10:26:56Z",
+      "last_changeset": 190392676,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "553005",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376180087,
+        1376178597
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 70,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18967641/history.json",
+      "history_raw_sha256": "fd4c5ceceadfca2045c2b4e5f738374d0d531405e0617843caa08fe3bc0a7888",
+      "history_sanitized_sha256": "392957730742ab5cbf572e9169e1e2a88380cbdc2661e8afc220225c6499d78e",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18967824,
+      "name": "Automobilist",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:47Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-12T10:26:56Z",
+      "last_changeset": 190392676,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "553001",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376180087,
+        1376180353
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 70,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18967824/history.json",
+      "history_raw_sha256": "a864485ed8d74ab90be97269e11e1b2bd9065809315888d1e4416b5828da97fd",
+      "history_sanitized_sha256": "75d499d5eb2ff6511a28e05ae66e1042fe3aaa6228a32cbf32aff8cc51cf065e",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18967907,
+      "name": "Boierul-Com",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:47Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-06T10:23:05Z",
+      "last_changeset": 190081892,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "552402",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376180476
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 55,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18967907/history.json",
+      "history_raw_sha256": "d52b2c7715448742a0f17cdf604453c6c2103e5f135eab486efe46294ebcf38a",
+      "history_sanitized_sha256": "7b633b31690ddac41cbb7a8ecd597fd6237bee8813feb43fa7a40cb93c63b06c",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18967934,
+      "name": "Pomsuragro",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:47Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-12T10:26:56Z",
+      "last_changeset": 190392676,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "553006",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376180517,
+        1376178661,
+        1376178660
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 50,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18967934/history.json",
+      "history_raw_sha256": "639c2b5069af69ccef6bb055282e815c1d1ed4bb028d2ad2ed33bc61e5f2d2df",
+      "history_sanitized_sha256": "c5e315128d60dc077c550f2814834f79c6433f3d1a1ad1b2eeaa1a40bf597661",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18968041,
+      "name": "Aluniș-Com",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:47Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-08T10:30:08Z",
+      "last_changeset": 190191900,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "552401",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376178674,
+        1376180672,
+        1376178827,
+        1376178673
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 26,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18968041/history.json",
+      "history_raw_sha256": "a70052a5a333eef54c0447001c320efe977a2e76dfde08dad190b05009a9d853",
+      "history_sanitized_sha256": "5f20b011b691a7464855a072a3874b58c2d995b65b778f0d053f0123b855f2da",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18968051,
+      "name": "Romănița-Agro",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:47Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-08T10:30:08Z",
+      "last_changeset": 190191900,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "552405",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376179430,
+        1376180685
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 64,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18968051/history.json",
+      "history_raw_sha256": "85359b175802fd03f03085df8392288bbf8f4be7f6ebcb08334a320dc7d65470",
+      "history_sanitized_sha256": "e07962d6650ae16e13d7ba8bd6b62cf46384e1818edc8ebd9a9ad25ffcb69baa",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18968093,
+      "name": "Relief-Prim",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 4,
+      "last_visible_timestamp": "2025-06-14T18:03:47Z",
+      "last_visible_changeset": 167623335,
+      "last_version": 5,
+      "last_timestamp": "2026-10-12T10:26:56Z",
+      "last_changeset": 190392676,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "553007",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376180517,
+        1376178678,
+        1376180748
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 36,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18968093/history.json",
+      "history_raw_sha256": "a567e8d1299f52708816733b0827a4b5cde61e9664cae9b06e26a986bb157e66",
+      "history_sanitized_sha256": "d6e9cc519d87a6470dc0db26931c99fb6321e75913b0ad931b61f44f7496cd53",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 18968144,
+      "name": "Sveazist IL",
+      "accepted_epoch": "2026-10-05T23:50:05.218Z",
+      "normalized_snapshot_contains_relation": true,
+      "relation_version_at_accepted_epoch": 4,
+      "accepted_members_and_tags_match_history": true,
+      "accepted_way_node_versions": "NOT_PRESENT_IN_NORMALIZED_ACCEPTED_SNAPSHOT",
+      "last_visible_version": 5,
+      "last_visible_timestamp": "2026-10-12T10:26:56Z",
+      "last_visible_changeset": 190392676,
+      "last_version": 6,
+      "last_timestamp": "2026-10-12T12:08:18Z",
+      "last_changeset": 190398165,
+      "current_http": 410,
+      "current_state": "OFFICIALLY_RETIRED",
+      "cuatm": "553009",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1376180827
+      ],
+      "accepted_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 43,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "current_geometry": "NONE_FOR_DELETED_RELATION; HISTORICAL_GEOMETRY_NOT_RESTORED",
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/18968144/history.json",
+      "history_raw_sha256": "94d25275570d19d4f791eb4ced24140ff287b403870acc95a0cca83af838de67",
+      "history_sanitized_sha256": "5cc26e9e50b75f458f83c15c1b723db54bb5075e63666b6d9cc7b9c5b706169e",
+      "current_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cartographic_verdict": "RETIRED_FROM_CURRENT_OSM",
+      "legal_verdict": "UNRESOLVED"
+    },
+    {
+      "relation_id": 21515245,
+      "name": "Î.P. „Boierul-COM”",
+      "current_state": "CURRENT_OSM_ADDITION",
+      "version": 1,
+      "timestamp": "2026-10-06T10:23:05Z",
+      "changeset": 190081892,
+      "cuatm": "552402",
+      "boundary": "administrative",
+      "admin_level": "9",
+      "place": "allotments",
+      "member_ways": [
+        1565477265
+      ],
+      "current_graph": {
+        "scope": "dependency-and-node-incidence-only",
+        "full_topology_certified": false,
+        "code": "MD",
+        "selected_relation_count": 1,
+        "checked_dependency_count": 70,
+        "missing_reference_count": 0,
+        "missing_references": [],
+        "invalid_coordinate_count": 0,
+        "invalid_coordinates": [],
+        "topology_issue_count": 0,
+        "topology_issues": []
+      },
+      "official_history": "https://api.openstreetmap.org/api/0.6/relation/21515245/history.json",
+      "current_raw_sha256": "37bc62d1ad0ffee85e25592a958cc1316136671ada270f2a1d9b208302e10d13",
+      "cartographic_verdict": "CURRENT_OSM_ADDITION_NOT_ACTUAL_IDENTITY",
+      "legal_verdict": "UNRESOLVED"
+    }
+  ],
+  "successor": {
+    "from": 18967907,
+    "to": 21515245,
+    "same_cuatm": true,
+    "same_changeset": true,
+    "same_timestamp": true,
+    "old_ring": {
+      "vertices": 53,
+      "coordinate_cycle_sha256": "533f215698e84e00f0c74c16461f58bc9cf74ce87beb08194f2301bea21d0adf"
+    },
+    "new_ring": {
+      "vertices": 68,
+      "coordinate_cycle_sha256": "27d36eda4cb63fe801eba762d3ab450ae1470338d1556e512c660774e7596de7"
+    },
+    "coordinate_cycles_equal": false,
+    "method": "Exact coordinate cycles, rotation/orientation invariant, no tolerance or snapping; only single-way rings supported",
+    "cartographic_verdict": "CARTOGRAPHIC_SUCCESSOR_LINK_SUPPORTED_NOT_AUTOMATIC_ALIAS",
+    "legal_verdict": "UNRESOLVED",
+    "actual_mutation_allowed": false
+  },
+  "proposals": [
+    {
+      "relation": 18967493,
+      "relation_version": 6,
+      "way": 1376179876,
+      "way_version": 8,
+      "index": 457,
+      "from": 12318728194,
+      "to": 12318728593,
+      "coordinate": [
+        28.858393,
+        46.8331996
+      ],
+      "version_and_endpoint_preconditions": true,
+      "coordinate_sequence_unchanged": true,
+      "orientation_preserved_by_identical_coordinate_order": true,
+      "coordinate_sequence_sha256": "9aaa2f41ec716ac3a55cfe9e9b22a2347c22fee337064ddf789174033b3aba7b",
+      "direct_parent_relations": [
+        {
+          "id": 18967493,
+          "version": 6
+        }
+      ],
+      "parent_chains": [
+        {
+          "relation": 18967493,
+          "parents": []
+        }
+      ],
+      "reverse_uses": [
+        {
+          "node_id": 12318728194,
+          "ways": [
+            {
+              "id": 996462603,
+              "version": 2,
+              "positions": [
+                3
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1376179876,
+              "version": 8,
+              "positions": [
+                457
+              ],
+              "edited_by_proposal": true
+            },
+            {
+              "id": 1430569791,
+              "version": 2,
+              "positions": [
+                4
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1430569795,
+              "version": 2,
+              "positions": [
+                46
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1431992242,
+              "version": 1,
+              "positions": [
+                5
+              ],
+              "edited_by_proposal": false
+            }
+          ]
+        },
+        {
+          "node_id": 12318728593,
+          "ways": [
+            {
+              "id": 1430569787,
+              "version": 2,
+              "positions": [
+                0
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1430569788,
+              "version": 2,
+              "positions": [
+                45
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1430569790,
+              "version": 2,
+              "positions": [
+                0
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1430569793,
+              "version": 1,
+              "positions": [
+                4
+              ],
+              "edited_by_proposal": false
+            }
+          ]
+        }
+      ],
+      "before": [
+        {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 465,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 1,
+          "topology_issues": [
+            {
+              "relation_id": 18967493,
+              "relation_version": 6,
+              "odd_endpoints": {
+                "outer": [
+                  {
+                    "node_id": 12318728194,
+                    "degree": 1
+                  },
+                  {
+                    "node_id": 12318728593,
+                    "degree": 1
+                  }
+                ],
+                "inner": []
+              },
+              "coincident_distinct_endpoint_groups": [
+                {
+                  "role": "outer",
+                  "coordinates": [
+                    28.858393,
+                    46.8331996
+                  ],
+                  "node_ids": [
+                    12318728194,
+                    12318728593
+                  ]
+                }
+              ],
+              "invalid_geometry_members": []
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 464,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        }
+      ],
+      "impact_complete_for_observed_direct_parents": true,
+      "conditional_simulation_pass": true,
+      "mapper_intent_review": "REQUIRED_NOT_SELF_APPROVED",
+      "public_edit_authorization": "NOT_GRANTED",
+      "upload_performed": false
+    },
+    {
+      "relation": 18968082,
+      "relation_version": 7,
+      "way": 1376180731,
+      "way_version": 6,
+      "index": 227,
+      "from": 11649857778,
+      "to": 8265822008,
+      "coordinate": [
+        28.9073227,
+        47.0786791
+      ],
+      "version_and_endpoint_preconditions": true,
+      "coordinate_sequence_unchanged": true,
+      "orientation_preserved_by_identical_coordinate_order": true,
+      "coordinate_sequence_sha256": "1cb2c1b6594b9030167fab97f2dcdf0cb91fd5cdcdd305d229abd7a6132bae25",
+      "direct_parent_relations": [
+        {
+          "id": 18968082,
+          "version": 7
+        }
+      ],
+      "parent_chains": [
+        {
+          "relation": 18968082,
+          "parents": []
+        }
+      ],
+      "reverse_uses": [
+        {
+          "node_id": 11649857778,
+          "ways": [
+            {
+              "id": 1253279692,
+              "version": 11,
+              "positions": [
+                258
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1376180731,
+              "version": 6,
+              "positions": [
+                227
+              ],
+              "edited_by_proposal": true
+            }
+          ]
+        },
+        {
+          "node_id": 8265822008,
+          "ways": [
+            {
+              "id": 1492661536,
+              "version": 1,
+              "positions": [
+                1
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1494605623,
+              "version": 1,
+              "positions": [
+                21
+              ],
+              "edited_by_proposal": false
+            },
+            {
+              "id": 1494605624,
+              "version": 1,
+              "positions": [
+                0
+              ],
+              "edited_by_proposal": false
+            }
+          ]
+        }
+      ],
+      "before": [
+        {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 375,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 1,
+          "topology_issues": [
+            {
+              "relation_id": 18968082,
+              "relation_version": 7,
+              "odd_endpoints": {
+                "outer": [
+                  {
+                    "node_id": 11649857778,
+                    "degree": 1
+                  },
+                  {
+                    "node_id": 8265822008,
+                    "degree": 1
+                  }
+                ],
+                "inner": []
+              },
+              "coincident_distinct_endpoint_groups": [
+                {
+                  "role": "outer",
+                  "coordinates": [
+                    28.9073227,
+                    47.0786791
+                  ],
+                  "node_ids": [
+                    11649857778,
+                    8265822008
+                  ]
+                }
+              ],
+              "invalid_geometry_members": []
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 374,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        }
+      ],
+      "impact_complete_for_observed_direct_parents": true,
+      "conditional_simulation_pass": true,
+      "mapper_intent_review": "REQUIRED_NOT_SELF_APPROVED",
+      "public_edit_authorization": "NOT_GRANTED",
+      "upload_performed": false
+    }
+  ],
+  "joint_simulation": {
+    "unchanged_other_objects": true,
+    "audit": {
+      "scope": "dependency-and-node-incidence-only",
+      "full_topology_certified": false,
+      "code": "MD",
+      "selected_relation_count": 3,
+      "checked_dependency_count": 908,
+      "missing_reference_count": 0,
+      "missing_references": [],
+      "invalid_coordinate_count": 0,
+      "invalid_coordinates": [],
+      "topology_issue_count": 0,
+      "topology_issues": []
+    },
+    "status": "PASS_FOR_ISOLATED_CONDITIONAL_SUBGRAPH"
+  },
+  "OSM_SOURCE_CANDIDATE_VALIDATED": false,
+  "OSM_SOURCE_PROMOTED": false,
+  "OSM_FRESHNESS_PASS": false,
+  "ISSUE_396_RESOLVED": false,
+  "READY_FOR_UA_CV0": false,
+  "guards": {
+    "actual_mutation_allowed": false,
+    "p91_import_allowed": false,
+    "semantic_acceptance": "BLOCKED_INCOMPLETE",
+    "public_osm_edit_performed": false
+  },
+  "limitations": [
+    "Coordinate-preserving simulation is not an authorized OSM edit or proof of original mapper intent",
+    "Dependency/node-incidence checks do not certify self-intersections or every global polygon",
+    "Independent selection and historical/provenance exceptions remain unresolved",
+    "No complete contemporary RO/MD snapshot was captured by this per-ID diagnostic"
+  ]
+}
