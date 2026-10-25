@@ -91,6 +91,54 @@
       "fix": "Wrap documentary parent/geometry/status/source rows in the existing kv definition-list component.",
       "regression": "All242cards require every dt/dd to have a dl ancestor in realChromium.",
       "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-010",
+      "severity": "P1",
+      "component": "Exact runner qualification",
+      "reproduction": "A/B on 6e322386793b8d9b86a53d37b709198ae1accfff fail runtime_host_profile_is_explicitly_approved for GitHub image 20261023.334.3.",
+      "cause": "New image was outside the explicitly approved profile list; fail-closed behavior was correct.",
+      "fix": "Owner-authorized exact profile append and authenticated P9.0.5 provenance rebind; all previous profiles retained.",
+      "regression": "Positive/negative host tests, actual A/B, independent artifact byte comparison and post-merge validation.",
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 444,
+      "verification_sha": "f8e26ace2a161bb56022700387dec3d545342ff0",
+      "postmerge_sha": "b74890be128db84b6c84da1fe3ebbaee9e47b298",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40173753136",
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/444#issuecomment-6395301867"
+      ]
+    },
+    {
+      "id": "NIF-011",
+      "severity": "P1",
+      "component": "Provenance admission compatibility",
+      "reproduction": "WEB-R2a.1 rejects the six authorized provenance manifests; publication gate rejects the initial audit/ branch prefix.",
+      "cause": "The historical read-only census boundary had no exact provenance admission; the initial branch did not use existing actual/provenance- policy.",
+      "fix": "Separately owner-authorized exact six-file hash admission with semantic checks and preserved historical evidence; existing actual/provenance- branch path used without changing publication whitelist.",
+      "regression": "Reject changed or extra protected files, missing/altered approval, incorrect bytes and semantic drift; real census and trust-chain CI.",
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 444,
+      "verification_sha": "f8e26ace2a161bb56022700387dec3d545342ff0",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/444#issuecomment-6395147036"
+      ]
+    },
+    {
+      "id": "NIF-012",
+      "severity": "P2",
+      "component": "Provenance unit-test isolation",
+      "reproduction": "P8.4 complete suite on 5820f8d fails git show historical release in its temporary repository.",
+      "cause": "New unit-test fixture depended on Git history absent from the isolated complete suite.",
+      "fix": "Freeze the original release bytes with independently verified SHA256; remove Git dependency from unit fixture while operational gate retains real tree comparison.",
+      "regression": "21 tests pass with Git absent from PATH and no repository history; corrected complete P8.2/P8.4 pass.",
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 444,
+      "verification_sha": "f8e26ace2a161bb56022700387dec3d545342ff0",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40172878418",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40173753178"
+      ]
     }
   ]
 }
