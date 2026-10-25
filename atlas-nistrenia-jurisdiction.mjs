@@ -1,4 +1,5 @@
 import {validateNistreniaAdministrativeModel} from './atlas-nistrenia-administrative.mjs';
+import {compactNistreniaDocumentaryName} from './atlas-tree-labels.mjs';
 // P9.0.9.4: operational UI jurisdiction only. NEVER a legal ACTUAL entity/parent or a new polygon.
 import {validateNistreniaOsmNavigation} from './atlas-nistrenia-osm.mjs';
 export const NISTR_EN_ROOT='view-nistrenia';
@@ -54,7 +55,7 @@ export function createNistreniaAdministrativeView({model,entityById,officialNode
  const checked=validateNistreniaAdministrativeModel(model,{actualIds:new Set(entityById.keys())});
  if(officialNodes.size!==5848||officialRoots.length!==2)throw Error('Nistrenia: invalid ACTUAL hierarchy');
  const nodes=new Map(officialNodes);
- for(const [id,node] of checked.nodes){if(nodes.has(id))throw Error('Nistrenia: presentation ID collision');nodes.set(id,{...node,display_name:node.kind==='raion'?node.display_name+' (raion)':node.kind==='upper_city'?node.display_name+' (oraș)':node.display_name});}
+ for(const [id,node] of checked.nodes){if(nodes.has(id))throw Error('Nistrenia: presentation ID collision');nodes.set(id,{...node,display_name:compactNistreniaDocumentaryName(node)});}
  const roleIds=new Set(Object.values(model.compatibility_role_aliases));
  if(roleIds.size!==85)throw Error('Nistrenia: canonical geometry role coverage');
  return {model,nodes,resources:checked.resources,root:checked.root,rootIds:[...officialRoots,NISTR_EN_ROOT],
