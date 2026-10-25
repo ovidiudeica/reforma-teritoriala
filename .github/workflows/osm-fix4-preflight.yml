@@ -1,0 +1,52 @@
+name: OSM-FIX.4 bounded mapper preflight
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/osm-fix4-preflight.yml'
+      - 'scripts/lib/osm-fix4-preflight.mjs'
+      - 'scripts/lib/osm-element-index.mjs'
+      - 'scripts/lib/osm-closure-audit.mjs'
+      - 'scripts/lib/p82-topology.mjs'
+      - 'atlas-point-geometry.mjs'
+      - 'scripts/process/audit-osm-fix4-preflight.mjs'
+      - 'scripts/test/osm-fix4-*.test.mjs'
+      - 'docs/osm-fix4/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-fix4-preflight.yml'
+      - 'scripts/lib/osm-fix4-preflight.mjs'
+      - 'scripts/lib/osm-element-index.mjs'
+      - 'scripts/lib/osm-closure-audit.mjs'
+      - 'scripts/lib/p82-topology.mjs'
+      - 'atlas-point-geometry.mjs'
+      - 'scripts/process/audit-osm-fix4-preflight.mjs'
+      - 'scripts/test/osm-fix4-*.test.mjs'
+      - 'docs/osm-fix4/**'
+permissions:
+  contents: read
+jobs:
+  osm-fix4-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: npm ci --ignore-scripts
+      - name: Offline technical and no-upload regressions
+        run: node --test scripts/test/osm-fix4-*.test.mjs
+      - name: Deterministic proof regeneration
+        run: |
+          node scripts/process/audit-osm-fix4-preflight.mjs
+          git diff --exit-code
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: osm-fix4-preflight-${{ github.event.pull_request.head.sha || github.sha }}
+          path: docs/osm-fix4/preflight.json
+          if-no-files-found: error
