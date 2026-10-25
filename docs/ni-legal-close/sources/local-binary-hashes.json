@@ -1,0 +1,36 @@
+{
+  "schema": "ni-adm132-local-raw-binary-digests-v1",
+  "as_of": "2026-10-24",
+  "method": "Google Drive raw-file fetch of public council-linked PDF, SHA256 calculated on exact raw input before any conversion or rendering",
+  "examples": [
+    {
+      "source": "https://drive.google.com/file/d/1Ivwiyl5q9r8vcmat74u1mQtU2wUBArYS/view",
+      "issuer_area": "Бычок (Bîcioc)",
+      "title": "Регламент.pdf",
+      "type": "application/pdf",
+      "source_bytes": 808115,
+      "original_raw_sha256": "16af5bc5e193813ccf2770d07be8e631ed4fb7232ed419ca346287042982250e",
+      "pages": 25,
+      "pdf_producer": "iLovePDF",
+      "embedded_text_subject": "Regulament local, ediție declarată la 20.11.2024",
+      "raw_downloads_with_same_sha256": 2,
+      "qualified_signature_authenticated": false
+    },
+    {
+      "source": "https://drive.google.com/file/d/1IYRFaaOwjT8NC0dwOcCaE6B7JSy2jTUo/view",
+      "issuer_area": "Глиное (Hlinaia)",
+      "title": "Регламент.pdf",
+      "type": "application/pdf",
+      "source_bytes": 494587,
+      "original_raw_sha256": "f01e88902e6c83d38d1d7fa7285081763520838650ac5430174050b6136db1f7",
+      "pages": 25,
+      "pdf_producer": "Microsoft Word 2010",
+      "embedded_text_subject": "Regulament local cu antet în mai multe limbi",
+      "raw_downloads_with_same_sha256": 1,
+      "qualified_signature_authenticated": false
+    }
+  ],
+  "scope": "BINARIES_VERIFIED_BY_DIGEST_AND_LENGTH_ONLY_NOT_QUALIFIED_AUTHENTICITY_OR_CONTEMPORARY_VALIDITY",
+  "global_originals_recovered_from_14_central_laws": 0,
+  "original_legal_hierarchy_effects_accepted": 0
+}
