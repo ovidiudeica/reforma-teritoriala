@@ -802,7 +802,7 @@ function renderDetails(entity){
  title.textContent=formatEntityName(entity.display_name);
  document.getElementById('details-summary').textContent=typeLabel(entity.representation.inferred_type);
  body.innerHTML=
-  '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
+  '<section class="details-section">'+(nistreniaView?.roleIds.has(entity.id)?'<h3>Republica Moldova</h3>':'')+'<span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
   detailRow('Jurisdicție',entity.jurisdiction)+(nistreniaView?.roleIds.has(entity.id)?detailRow('Jurisdicție operațională (OSM)','Nistrenia · de facto, fără recunoaștere internațională'):'')+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
   '</dl></section>'+entityProvenanceHtml(entity,{typeLabel,statusLabel:value=>statusLabels[value]||value})+nistreniaGeometricPerspectiveHtml(entity);
  renderOsmRoleDetails({container:body,document,row:osmRoleById.get(entity.id)});
