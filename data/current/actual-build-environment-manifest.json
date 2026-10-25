@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "de8841a7ea8a6249c5b9f036b25a839bd1246c37c0fb8c71b614151b9fa5eb19",
+  "environment_fingerprint_sha256": "2e46296ea8bf294962f32a2a3e9ed45265cee404e5a143aee2164695c0cee91d",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -34,9 +34,9 @@
     },
     "host_trust": {
       "manifest_path": "data/current/actual-host-trust-manifest.json",
-      "manifest_sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167",
+      "manifest_sha256": "cdd9315d1b701f3983cf841945b6593f4b3005b0c5ce97b3851f79dacd0b561f",
       "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
-      "host_trust_fingerprint_sha256": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
+      "host_trust_fingerprint_sha256": "f3a11ed754cbd66758169ec1943653c33ebb5d4e7350e88d5db26b0e1044ebbf",
       "runner_image_version": "20261004.327.1",
       "kernel_release": "6.17.0-1022-azure",
       "docker_server_version": "28.0.4",
@@ -100,7 +100,7 @@
       "scripts/lib/actual-oci-builder.mjs": "54770d758d55b4ccbfebdf75e76883b436bdf123b42a30826c90f15fbc77454c",
       "scripts/process/build-actual-oci-builder-manifest.mjs": "70ec6a6edbd613d461e8a3dc06f4fcc465657b392253de1b1c987bd249a0aac6",
       "scripts/process/audit-actual-oci-builder.mjs": "a55c222ff3f2d4cf0da6b2e3adc3e5c04ae0786435288d8f916341ac3cf7fa97",
-      "scripts/lib/actual-host-trust.mjs": "7005661c500568d850403542552b9722e07793551fa2fac6000741db28034da6",
+      "scripts/lib/actual-host-trust.mjs": "32f0cc09ace427432f6404ba669b3058be4f10d9d8e45288833008a2b429026d",
       "scripts/process/build-actual-host-trust-manifest.mjs": "1fc82422329b8040d22df3c48994d78d4c8831d6559cf7b0a752f62399747405",
       "scripts/process/audit-actual-host-trust.mjs": "93fa81438ae47b29553d7a73d55e0f7c501e54ec5d3e1ee93e1b3736c1cf5a5e",
       "scripts/lib/actual-review-evidence-bundle.mjs": "30cbba94bf216003e9e07ac8df591b8e2b7ba95e68a4ac5ebb7cfb73fee33123",

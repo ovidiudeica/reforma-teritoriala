@@ -45,3 +45,7 @@ Precedentul este [PR #313](https://github.com/ovidiudeica/reforma-teritoriala/pu
 7. Numai după admiterea legitimă continuă integrarea #439 → #440 → #441 și auditul Pages. #396 și #442 rămân deschise.
 
 Până atunci: `NI_FUNCTIONAL_COMPLETE=false`, `NI_LEGAL_CERTIFICATION_PENDING=true`, `OSM_SOURCE_PENDING=true`. PR-ul de calificare rămâne Draft.
+
+## Rebind autentic aplicat
+
+Run P9.0.5 `40142346381` pe `61a09bd59d81a5d7549d6fac618efee8b252d2fd`: SUCCESS. Cele șase fișiere din artifactul `12578889574` au fost verificate individual și aplicate fără regenerare locală. Snapshotul, fingerprinturile semantice, cele 32 de componente, geometriile și bundle-urile sursă/review sunt identice cu release-ul anterior. `verify-actual-persisted-base`: PASS local. Reproductibilitatea reală A/B trebuie executată pe noul HEAD; rezultatele anterioare nu sunt reutilizate.

@@ -4,7 +4,7 @@
   "mode": "ACTUAL",
   "snapshot_id": "actual-a9e5a4ddcb5277ef",
   "manifest_path": "data/current/actual-release-manifest.json",
-  "manifest_sha256": "52ae583f284bac2d00bc3b5e4b96b6c429c659b8def297197d7f3f38dc042856",
+  "manifest_sha256": "cc604a8fe88a9b4e044f3dea3032eedf020ee3d102a1b944aaf626da73abf1a5",
   "status": "PASS",
   "policy": "The public ACTUAL RO+MD release is publishable only when the exact OSM/SIRUTA/CUATM source bundle, frozen review-evidence bundle, kernel-enforced network-denial proof and exact GitHub Actions execution environment are cryptographically bound by the release manifest, master topology has no blocking structural corruption, both jurisdiction gates pass, exact master/public bytes remain bound, and public geometry preserves master coordinates without simplification. Any source, evidence, network-policy, environment or release drift fails closed.",
   "checks": [
@@ -309,7 +309,7 @@
       "detail": {
         "status": "PASS",
         "failures": [],
-        "fingerprint": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86"
+        "fingerprint": "f3a11ed754cbd66758169ec1943653c33ebb5d4e7350e88d5db26b0e1044ebbf"
       }
     },
     {
@@ -321,7 +321,7 @@
           "schema_version": 1,
           "mode": "ACTUAL_HOST_TRUST",
           "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
-          "host_trust_fingerprint_sha256": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
+          "host_trust_fingerprint_sha256": "f3a11ed754cbd66758169ec1943653c33ebb5d4e7350e88d5db26b0e1044ebbf",
           "runner_image_version": "20261004.327.1",
           "kernel_release": "6.17.0-1022-azure",
           "docker_server_version": "28.0.4",
@@ -335,12 +335,12 @@
             "timezone": "UTC",
             "locale": "C.UTF-8"
           },
-          "sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+          "sha256": "cdd9315d1b701f3983cf841945b6593f4b3005b0c5ce97b3851f79dacd0b561f"
         },
         "actual": {
           "path": "data/current/actual-host-trust-manifest.json",
-          "fingerprint": "8c6961e3b85b600cb216554f2a1895bb5f2da4ffb295b8d8de9267a7bf38cf86",
-          "sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167",
+          "fingerprint": "f3a11ed754cbd66758169ec1943653c33ebb5d4e7350e88d5db26b0e1044ebbf",
+          "sha256": "cdd9315d1b701f3983cf841945b6593f4b3005b0c5ce97b3851f79dacd0b561f",
           "runner_image_version": "20261004.327.1",
           "kernel_release": "6.17.0-1022-azure",
           "docker_server_version": "28.0.4",
@@ -414,8 +414,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20261004.327.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "de8841a7ea8a6249c5b9f036b25a839bd1246c37c0fb8c71b614151b9fa5eb19",
-          "sha256": "0fa89270f8bb6c5c0a4e329b26c18697733b65509aff9d7041c5aa04d34ce7ee"
+          "environment_fingerprint_sha256": "2e46296ea8bf294962f32a2a3e9ed45265cee404e5a143aee2164695c0cee91d",
+          "sha256": "dc24120098e32e084b67b196d8ffbb46d0eb50274a4285e67dfbeda330eca098"
         },
         "actual": {
           "path": "data/current/actual-build-environment-manifest.json",
@@ -424,8 +424,8 @@
           "runner_label": "ubuntu-24.04",
           "runner_image_version": "20261004.327.1",
           "environment_fingerprint_algorithm": "actual-build-environment-v1",
-          "environment_fingerprint_sha256": "de8841a7ea8a6249c5b9f036b25a839bd1246c37c0fb8c71b614151b9fa5eb19",
-          "sha256": "0fa89270f8bb6c5c0a4e329b26c18697733b65509aff9d7041c5aa04d34ce7ee"
+          "environment_fingerprint_sha256": "2e46296ea8bf294962f32a2a3e9ed45265cee404e5a143aee2164695c0cee91d",
+          "sha256": "dc24120098e32e084b67b196d8ffbb46d0eb50274a4285e67dfbeda330eca098"
         }
       }
     },
