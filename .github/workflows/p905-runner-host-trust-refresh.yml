@@ -32,7 +32,7 @@ jobs:
           import fs from 'node:fs';
           import {validateObservedHost} from './scripts/lib/actual-host-trust.mjs';
           const m=JSON.parse(fs.readFileSync('data/current/actual-host-trust-manifest.json','utf8'));
-          const p=m.contract.accepted_runtime_profiles.find(p=>p.id==='github-ubuntu24-20261012.334.1');
+          const p=m.contract.accepted_runtime_profiles.find(p=>p.id==='github-ubuntu24-20261023.334.3');
           assert.ok(p);
           const cpu=m.contract.cpu_contract;
           const observed={...structuredClone(p),cpu:{

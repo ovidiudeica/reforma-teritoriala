@@ -1,0 +1,75 @@
+{
+  "baseline_commit": "447f9bdbca5eb2869d107641a14398f7a273165e",
+  "inputs": [
+    {
+      "path": "scripts/lib/actual-host-trust.mjs",
+      "bytes": 11970,
+      "sha256": "7005661c500568d850403542552b9722e07793551fa2fac6000741db28034da6"
+    },
+    {
+      "path": "data/current/actual-host-trust-manifest.json",
+      "bytes": 8653,
+      "sha256": "3db3344241b7de70ab6e254d2df63b495c046005b3d90b0b4c045601cb22f167"
+    },
+    {
+      "path": "scripts/process/audit-actual-host-trust.mjs",
+      "bytes": 1702,
+      "sha256": "93fa81438ae47b29553d7a73d55e0f7c501e54ec5d3e1ee93e1b3736c1cf5a5e"
+    },
+    {
+      "path": "scripts/process/build-actual-host-trust-manifest.mjs",
+      "bytes": 657,
+      "sha256": "1fc82422329b8040d22df3c48994d78d4c8831d6559cf7b0a752f62399747405"
+    },
+    {
+      "path": "scripts/lib/actual-build-environment.mjs",
+      "bytes": 21873,
+      "sha256": "c3b315a2414f4401ea4ef3ce5dd36d00d3a867540e42e5b1c2ed41d74145d3ef"
+    },
+    {
+      "path": "scripts/process/build-actual-build-environment-manifest.mjs",
+      "bytes": 1193,
+      "sha256": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db"
+    },
+    {
+      "path": "scripts/process/audit-actual-build-environment-gate.mjs",
+      "bytes": 1364,
+      "sha256": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c"
+    },
+    {
+      "path": "scripts/process/build-actual-release-manifest.mjs",
+      "bytes": 27658,
+      "sha256": "42cb2034f993e58186107dc355b20db03d0e6aa4707e50849f3f8d370fc40d43"
+    },
+    {
+      "path": "scripts/process/audit-actual-release-gate.mjs",
+      "bytes": 44951,
+      "sha256": "b179b1a2d00852ee66dba8a65c1ec3fd1b80b983756ac6d475714f4079e7e26e"
+    },
+    {
+      "path": "scripts/process/prepare-p905-runner-provenance.mjs",
+      "bytes": 3404,
+      "sha256": "95c61474cbb0d7511af646e6606de03d5cfad4dacc6f54255e2015e42c97adfb"
+    },
+    {
+      "path": "scripts/process/verify-actual-persisted-base.mjs",
+      "bytes": 3185,
+      "sha256": "8cc25b64647178b09569fc782ae000914c39dcf7d51137b05efd6348bd45a85c"
+    },
+    {
+      "path": ".github/workflows/p905-runner-host-trust-refresh.yml",
+      "bytes": 3655,
+      "sha256": "f41f3266ee2a044fe0608d3439c5fd3d590ed6f463ee2e34eda8212b34857968"
+    },
+    {
+      "path": ".github/workflows/actual-change-reproducibility-gate.yml",
+      "bytes": 15257,
+      "sha256": "040d02da2891f9417d852adc729e0c88a9e9a97414bc0a29c3a0b8060301e328"
+    },
+    {
+      "path": "docs/actual-v1-trust-boundary.md",
+      "bytes": 2158,
+      "sha256": "2180b2713b788a2fa786fb0ed5c7c4b4dc758fbfc1ceddb150b4456c5fef963c"
+    }
+  ]
+}

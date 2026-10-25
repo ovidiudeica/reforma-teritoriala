@@ -1,0 +1,96 @@
+{
+  "schema": "web-r2a1-sha256-manifest-v1",
+  "base_sha": "073a1ee2a2098392df5891fb6b15e69b0eef2d9c",
+  "inputs": {
+    "public/data/actual-entities.json": {
+      "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
+      "bytes": 15390013
+    },
+    "public/data/actual-consolidated-tree.json": {
+      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f",
+      "bytes": 2102707
+    },
+    "public/data/p907216-osm-roles.json": {
+      "sha256": "1bd2f2eac7dd9a987c355cc459c4ce5299eb00ad3ffd74f2eab0149b695eefff",
+      "bytes": 78298
+    },
+    "public/data/p909-nistrenia-osm-navigation.json": {
+      "sha256": "64d90b0c5b16c71546f741b3a20181ac01ebf5106f70080522d8601d4bd83bae",
+      "bytes": 4777
+    },
+    "public/data/p9095-osm-outlines.json": {
+      "sha256": "e48a34e31ede520a22b399d4ad07f48cd68303ecb937c78b6016c9993f41a2a6",
+      "bytes": 254316
+    },
+    "public/data/p9095-osm-outlines-manifest.json": {
+      "sha256": "85783ab5a82dd8a872ffa725f6af35fc86d53a8a5e715a1fb546260a1c50102b",
+      "bytes": 6899
+    },
+    "data/current/actual-release-manifest.json": {
+      "sha256": "cc604a8fe88a9b4e044f3dea3032eedf020ee3d102a1b944aaf626da73abf1a5",
+      "bytes": 22513
+    },
+    "data/current/actual-release-gate.json": {
+      "sha256": "697b4dcf86128cc31f2e81b8977ef0b701778389079192f1be0f066e4f019b77",
+      "bytes": 39860
+    },
+    "data/current/actual-release-persisted.json": {
+      "sha256": "572240919f5680f797f79632533cc4e125ced25a7991cd2c58e8d50c63b86e9e",
+      "bytes": 2133
+    },
+    "docs/p9.0.4.3-promotion-policy.json": {
+      "sha256": "878783683e4646f09fa4c0bd8d8ac5a86f2de122eff40a587d94220c197bff8c",
+      "bytes": 1404
+    },
+    "docs/p9.0.7.2.15-osm-semantic-reconciliation.json": {
+      "sha256": "dd21c3d123382c38a82574ce068f07ab1c3edb923edfa1240342b2d137e21775",
+      "bytes": 159888
+    }
+  },
+  "persisted_registries": {
+    "docs/evidence/web-r2a1-actual-admin-level-per-id.csv": {
+      "sha256": "3d7e1ceba5e760e458e251b687caa41a184ce8ee5ef39b7a270057e9c189fe85",
+      "bytes": 1039090,
+      "records": 5848
+    },
+    "docs/evidence/web-r2a1-nistrenia-osm-roles-per-id.csv": {
+      "sha256": "44572b693a9013ec80b0a673aa8fa025dece4d456a4594f67dba657e949a2b4d",
+      "bytes": 12182,
+      "records": 85
+    }
+  },
+  "outputs": {
+    "registry-actual-ro.jsonl": {
+      "sha256": "0fe39607ec03e6d0cc002d70b024b21fdfaeb8c68649ec6ff0b90cbb3ed520e2",
+      "bytes": 2111979
+    },
+    "registry-actual-md.jsonl": {
+      "sha256": "ab75064382e42844ef3cfd718629bcd78c5e9b210adb7d6bec9345469989b90d",
+      "bytes": 1701163
+    },
+    "registry-ni-source-only.jsonl": {
+      "sha256": "c3f51205590c56fc9152b95e42909bbe1d82a483bd64dd1d5f4fa1588beb8407",
+      "bytes": 6543
+    },
+    "registry-osm-reused-roles.jsonl": {
+      "sha256": "86b3a6d7a6b4e26d8bd1b81c5bec51a68c4173c6fb38176fc6a8a5ad03a4beb8",
+      "bytes": 62092
+    },
+    "distributions.json": {
+      "sha256": "1567b0c7d35b78fa60b819ef527b8b1c3c22a83aeb2c66f7edd680f166fdddda",
+      "bytes": 1435
+    },
+    "exceptions.json": {
+      "sha256": "5572a52818ce368908916b6d8c665d21aa442573029a036afdcf819cc17f5180",
+      "bytes": 9556
+    },
+    "summary.json": {
+      "sha256": "26e9793a65a765ac0d13129e5d00431e9b32ac5784c98fc967ebc54536d7fc42",
+      "bytes": 2312
+    },
+    "report.md": {
+      "sha256": "54669a38f4a85fad5fbe78a4c7cd44a7461bfdda4b289b9a47fddd63cb31ed5c",
+      "bytes": 1649
+    }
+  }
+}

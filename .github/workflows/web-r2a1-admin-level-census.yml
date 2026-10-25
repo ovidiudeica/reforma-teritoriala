@@ -19,11 +19,12 @@ jobs:
           node-version: '24.21.0'
       - name: Validate audit script syntax
         run: node --check scripts/audit/web-r2a1-admin-level-census.mjs
+      - name: Test exact provenance admission and negative cases
+        run: node --test scripts/test/web-r2a1-provenance-boundary.test.mjs
       - name: Generate exhaustive read-only census from repository bytes
         run: node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir "${{ runner.temp }}/web-r2a1"
       - name: Verify committed SHA-256 evidence manifest is reproducible
-        if: ${{ hashFiles('docs/evidence/web-r2a1/sha256-manifest.json') != '' }}
-        run: node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir "${{ runner.temp }}/web-r2a1-check" --verify-manifest docs/evidence/web-r2a1/sha256-manifest.json
+        run: node scripts/audit/web-r2a1-admin-level-census.mjs --out-dir "${{ runner.temp }}/web-r2a1-check" --verify-manifest docs/evidence/ni-fin31-web-r2a1/sha256-manifest.json
       - name: Existing NI role/navigation/outline contract regressions
         run: |
           node --test scripts/test/frontend-p907216-osm-roles.test.mjs
@@ -31,7 +32,7 @@ jobs:
           node --test scripts/test/frontend-p9095-outline-parity.test.mjs
       - name: Confirm protected source data is untouched
         run: |
-          test -z "$(git diff --name-only 073a1ee2a2098392df5891fb6b15e69b0eef2d9c...HEAD -- data public)"
+          node scripts/audit/web-r2a1-provenance-boundary.mjs
           git status --short
       - name: Upload deterministic WEB-R2a.1 evidence
         if: always()

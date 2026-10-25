@@ -1,0 +1,59 @@
+# NI-FIN.3.1 — calificarea propusă a runnerului GitHub
+
+Status: `OWNER_AUTHORIZED_PENDING_REAL_REPRODUCIBILITY`. Autorizarea expresă este conservată în `owner-authorization.json`, legată de propunerea `6c877af` și fingerprintul exact. Profilul poate fi adăugat; rebindul și execuția efectivă A/B trebuie încă validate. Nu este o certificare de reproductibilitate.
+
+## Dovezi și rezultat tehnic
+
+Domeniu: profilul exact `github-ubuntu24-20261023.334.3`. Baza este main `447f9bdbca5eb2869d107641a14398f7a273165e`.
+
+Auditurile originale A/B sunt extrase fără modificarea conținutului din run `40138566219`, HEAD `6e322386793b8d9b86a53d37b709198ae1accfff`. Logul complet este conservat comprimat, împreună cu manifestul SHA-256. Validatorul și manifestul aprobate la data observației sunt conservate byte-identic pentru replay istoric; aceste copii nu sunt importate de gate-ul de admitere ACTUAL și nu autorizează runnerul.
+
+Comparația individuală include 27 de câmpuri: imagine, arhitectură, OS, kernel, Docker Engine/client/API, containerd, runc, docker-init, storage și cgroup. 26 coincid cu `github-ubuntu24-20261012.334.1`; diferența unică este `runner.image_version`. Toate cele șase verificări CPU ale validatorului existent trec pentru A și B. Modelul/vendorul și surplusul de flags sunt probe, nu identitate semantică.
+
+Proveniență primară: [release oficial GitHub](https://github.com/actions/runner-images/releases/tag/ubuntu24/20261023.334), publicat la 2026-10-23T15:33:17Z, `draft=false`, **prerelease=true**. README-ul este legat de commitul `bf62c713fd9c48247e2a4d3ce99a9f0554cd745e`; SHA-1 Git blob și SHA-256 au fost verificate. Release-ul indică versiunea exactă observată și actualizarea Bazel 9.3.0 → 9.3.1. Aceasta nu dovedește că toate programele imaginii sunt identice; numai câmpurile contractului au fost comparate individual.
+
+Neconcordanța conservată: secțiunile Set up job A/B trimit încă la release-ul 20261012.334. Aceste URL-uri nu au fost rescrise. Confirmarea independentă a noii versiuni vine din API-ul oficial și README-ul imuabil, nu din presupunerea că acele linkuri sunt actualizate.
+
+Propunerea exactă este în `docs/evidence/ni-fin31-host-qualification-20261025/proposal.json`. Fingerprintul contractual propus, după adăugarea unui singur profil și păstrarea tuturor celor patru existente, este:
+
+`f3a11ed754cbd66758169ec1943653c33ebb5d4e7350e88d5db26b0e1044ebbf`
+
+Acest fingerprint este o propunere, nu un manifest aprobat.
+
+## Probe
+
+17 teste locale verifică reproducerea byte-identică, legarea la manifest, diferența unică și respingerea driftului kernel/Docker/containerd/runc/storage/cgroup, CPU insuficient, altă versiune, publicație lipsă/draft/placeholder și modificarea politicii aprobate. Proba pozitivă înlocuiește numai versiunea imaginii cu cea deja aprobată: este un control sintetic explicit, nu executarea reproductibilității ACTUAL pe noul profil.
+
+Workflow-ul dedicat read-only capturează două medii autentice noi, A/B, aplicând validatorul ACTUAL curent și păstrând rezultatul său real. Numele acestor probe este `qualification-evidence-*`, nu `actual-change-repro-*`. Nu construiește release-ul, nu modifică lista de încredere și nu produce un PASS de reproductibilitate. Un mediu diferit de profilul analizat este păstrat și respins, fără retry de alocare.
+
+## Autorizarea necesară
+
+`docs/actual-v1-trust-boundary.md` stabilește: „trust root-ul administrativ este proprietarul/adminul GitHub al repository-ului”. Mandatul NI-FIN.3.1 cere separat aprobarea explicită a noului profil; nu o considerăm acordată prin cererea de pregătire a calificării.
+
+Decizia solicitată: autorizarea exactă a profilului de mai sus și a rebindului P9.0.5 strict de proveniență, păstrând identitatea semantică, componentele canonice, geometriile, părinții MD, CUATM și toate profilurile existente. Fără wildcard, bypass, continue-on-error sau modificarea required checks.
+
+## Procedura după autorizare
+
+Precedentul este [PR #313](https://github.com/ovidiudeica/reforma-teritoriala/pull/313), merge `6d29c4905a2587cfa164d25a4c2f1ff60c90f713`. Procedura existentă este `.github/workflows/p905-runner-host-trust-refresh.yml`; `prepare-p905-runner-provenance.mjs` verifică explicit componentele canonice, geometria, source bundle, review bundle și identitatea semantică înaintea rebindului markerului.
+
+1. Conservă decizia proprietarului și SHA-ul propunerii. Adaugă numai profilul exact în `EXPECTED_HOST_TRUST.accepted_runtime_profiles`; păstrează cele patru profiluri existente și toate celelalte atribute.
+2. Adaptează numai referința explicită la profil din probele/helperul P9.0.5. Nu selecta dinamic un profil nou pe baza mediului alocat.
+3. Generează prin runtime-ul/procedura aprobate cele șase fișiere de proveniență: actual-host-trust-manifest.json, actual-build-environment-manifest.json, actual-build-environment-gate.json, actual-release-manifest.json, actual-release-gate.json și actual-release-persisted.json. Verifică fingerprinturile dependente, hashurile și legătura previous_manifest_sha256. Nu genera local cu alt toolchain un înlocuitor prezentat drept rezultat GitHub.
+4. Aplică numai artefactele autentice verificate ale procedurii read-only. Compară independent identitatea semantică și toate componentele canonice; nu modifica cele 5.848 de identități sau geometrii.
+5. Rulează efectiv `actual-change-repro-A`, B și comparația pe HEAD-ul candidat. Gate-ul folosește host-trust de la TEST_COMMIT, deci o calificare corect legată nu necesită un PASS inventat pe vechiul manifest. Persisted-base și lanțul de proveniență rămân obligatorii.
+6. Verifică toate condițiile de admitere pe SHA exact. Auditul WEB-R2a.1 este actualmente read-only și refuză orice diff în data/public; un rebind de proveniență atinge data/current. Această aplicabilitate trebuie adjudecată prin politica administrativă, nu ascunsă prin dezactivarea auditului sau raportarea unui PASS fals. Nu este inventată aici o excepție de merge.
+7. Numai după admiterea legitimă continuă integrarea #439 → #440 → #441 și auditul Pages. #396 și #442 rămân deschise.
+
+Până atunci: `NI_FUNCTIONAL_COMPLETE=false`, `NI_LEGAL_CERTIFICATION_PENDING=true`, `OSM_SOURCE_PENDING=true`. PR-ul de calificare rămâne Draft.
+
+## Rebind autentic aplicat
+
+Run P9.0.5 `40142346381` pe `61a09bd59d81a5d7549d6fac618efee8b252d2fd`: SUCCESS. Cele șase fișiere din artifactul `12578889574` au fost verificate individual și aplicate fără regenerare locală. Snapshotul, fingerprinturile semantice, cele 32 de componente, geometriile și bundle-urile sursă/review sunt identice cu release-ul anterior. `verify-actual-persisted-base`: PASS local. Reproductibilitatea reală A/B trebuie executată pe noul HEAD; rezultatele anterioare nu sunt reutilizate.
+
+## Adaptare WEB-R2a.1 autorizată separat
+
+Proprietarul a răspuns «Autorizez adaptarea strictă descrisă». Înregistrarea aprobării și lista celor șase hashuri sunt conservate și legate de SHA-256 în validator. Alte modificări data/public rămân fatale. Comparația directă a arborilor cu baza fixă funcționează și într-un checkout shallow fără a reduce domeniul verificat. Manifestul istoric WEB-R2a.1 rămâne intact; noua legătură de proveniență este păstrată separat. Niciun required check nu este eliminat sau redenumit. Ramura de admitere folosește prefixul existent `actual/provenance-`; PR #443 conservă istoricul calificării.
+
+## Regresie de izolare a testelor, identificată prin P8.4
+
+Pe `5820f8d`, testele noi consultau prin git un commit absent din repository-ul temporar al suitei complete. Eșecul autentic este conservat în run `40172878418`. Fixture-ul original release a fost extras byte-identic și legat de SHA-256 `52ae583f284bac2d00bc3b5e4b96b6c429c659b8def297197d7f3f38dc042856`; testele unitare nu mai depind de istoricul Git. Validatorul operațional păstrează comparația reală cu baza fixă. Niciun test nu este exclus sau relaxat. CI trebuie reluat pe noul HEAD.

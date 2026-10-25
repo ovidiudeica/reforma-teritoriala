@@ -25,7 +25,7 @@ die(JSON.stringify(now.review_evidence_bundle)===JSON.stringify(old.review_evide
 die(now.host_trust?.sha256===sha(hostBytes)&&now.host_trust?.host_trust_fingerprint_sha256===host.host_trust_fingerprint_sha256,'host trust binding');
 die(now.build_environment?.sha256===sha(envBytes)&&now.build_environment?.environment_fingerprint_sha256===env.environment_fingerprint_sha256,'build environment binding');
 die(releaseGate.status==='PASS'&&envGate.status==='PASS','release or environment gate failed');
-die(host.contract.accepted_runtime_profiles.some(x=>x.id==='github-ubuntu24-20261012.334.1'),'new profile missing');
+die(host.contract.accepted_runtime_profiles.some(x=>x.id==='github-ubuntu24-20261023.334.3'),'new profile missing');
 const marker={
  ...oldPersisted,
  manifest_sha256:sha(bytes),
@@ -34,7 +34,7 @@ const marker={
  provenance_hardening:{
   previous_manifest_sha256:oldPersisted.manifest_sha256,
   change_type:'P9.0.5_runner_host_trust_explicit_refresh',
-  host_profile_id:'github-ubuntu24-20261012.334.1',
+  host_profile_id:'github-ubuntu24-20261023.334.3',
   method:'provenance_only_no_semantic_change',
   semantic_identity_unchanged:true
  }

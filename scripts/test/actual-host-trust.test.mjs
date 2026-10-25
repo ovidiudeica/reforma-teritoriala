@@ -19,7 +19,8 @@ test('committed ACTUAL host trust manifest exactly matches pinned contract',asyn
   'github-ubuntu24-20260920.314.1',
   'github-ubuntu24-20260927.320.1',
   'github-ubuntu24-20261004.327.1',
-  'github-ubuntu24-20261012.334.1'
+  'github-ubuntu24-20261012.334.1',
+  'github-ubuntu24-20261023.334.3'
  ]);
  assert.equal(EXPECTED_HOST_TRUST.cpu_contract.execution_profile.node_options,'--jitless');
  assert.equal(EXPECTED_HOST_TRUST.cpu_contract.execution_profile.cpuset_cpus,'0');
