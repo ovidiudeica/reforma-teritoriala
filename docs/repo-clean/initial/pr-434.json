@@ -1,0 +1,883 @@
+{
+  "number": 434,
+  "detail": {
+    "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/434",
+    "id": 4995097796,
+    "node_id": "PR_kwDOUr2T3s8AAAABKbskxA",
+    "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/434",
+    "diff_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/434.diff",
+    "patch_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/434.patch",
+    "issue_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/434",
+    "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/434/commits",
+    "review_comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/434/comments",
+    "review_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/comments{/number}",
+    "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/434/comments",
+    "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+    "number": 434,
+    "state": "open",
+    "locked": false,
+    "title": "NI-ADM.1.3: 18 originale normative — 4 reutilizate, 14 lipsă; arhive locale investigate",
+    "user": {
+      "login": "ovidiudeica",
+      "id": 61658017,
+      "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ovidiudeica",
+      "html_url": "https://github.com/ovidiudeica",
+      "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+      "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+      "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+      "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+      "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "**PR read-only, stacked peste #433 → #432 → #430 → #428.** Numai artefacte `docs/evidence/ni-adm13-20261024/`.\n\nAm reconciliat per-ID toate cele **18 legi promulgate** din NI-ADM.1.2. Patru PDF-uri oficiale din 2026 (1, 6, 53, 91) există deja în repository cu blob-uri Git, SHA-256 documentat, recaptură anterioară byte-identică și toate paginile inspectate vizual; nu se pretinde descărcare nouă sau semnătură digitală calificată. **14 originale încă nu sunt recuperate/certificate** în această etapă. `validate.mjs` verifică la checkout SHA-256 și lungimea celor patru PDF-uri existente, 18/4/14 și gate-urile conservatoare.\n\nCercetare locală: șapte jurisdicții de consilii superioare, pagini oficiale Grigoriopol/Rîbnița/Bender. Directorul Grigoriopol are **14 dosare publice** de acte locale, toate inspectate la nivel superior cu subdosare vizibile `2025`/`2026`; nu există certificare arhivistică pentru 2023/24 sau exhaustivitate pentru 2025/26. Rîbnița are arhivă de articole și secțiuni pentru consiliile rurale, dar acestea nu constituie registre complete ale actelor originale semnate. Accesul la alte patru portaluri rămâne blocat de eroare sau timeout.\n\n9 excepții moștenite: **1 închisă doar pentru clasificarea proiectelor, 8 deschise**. \n\n**Verdict NI-ADM.1.3: BLOCKED_INCOMPLETE pentru închiderea juridică globală**; lipsesc 14 originale primare și certificarea integrală a registrelor locale. Fără promovări administrative per-ID, fără ACTUAL/MD legal/OSM/UI mutații, fără relaxări CI; `P9.1=BLOCKED`. Nu integrați fără CI pe SHA, verificări documentare și autorizare separată.",
+    "labels": [],
+    "milestone": null,
+    "active_lock_reason": null,
+    "created_at": "2026-10-24T11:44:35Z",
+    "updated_at": "2026-10-24T11:44:35Z",
+    "closed_at": null,
+    "merged_at": null,
+    "merge_commit_sha": "45ce310659582064911a10bd154fe76e698c73f7",
+    "assignee": null,
+    "assignees": [],
+    "requested_reviewers": [],
+    "requested_teams": [],
+    "head": {
+      "label": "ovidiudeica:audit/ni-adm13-primary-and-local-registries-20261024",
+      "ref": "audit/ni-adm13-primary-and-local-registries-20261024",
+      "repo": {
+        "id": 1388155870,
+        "node_id": "R_kgDOUr2T3g",
+        "name": "reforma-teritoriala",
+        "full_name": "ovidiudeica/reforma-teritoriala",
+        "owner": {
+          "login": "ovidiudeica",
+          "id": 61658017,
+          "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ovidiudeica",
+          "html_url": "https://github.com/ovidiudeica",
+          "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+          "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+          "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+          "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+          "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "private": false,
+        "fork": false,
+        "archived": false,
+        "disabled": false,
+        "description": "Atlas teritorial ACTUAL pentru România și Republica Moldova; ISTORIC și PROPUNERI în roadmap",
+        "homepage": "https://ovidiudeica.github.io/reforma-teritoriala/",
+        "language": "JavaScript",
+        "visibility": "public",
+        "is_template": false,
+        "topics": [],
+        "forks_count": 0,
+        "forks": 0,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "watchers": 0,
+        "open_issues_count": 43,
+        "open_issues": 43,
+        "size": 248674,
+        "default_branch": "main",
+        "has_issues": true,
+        "has_projects": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "has_downloads": false,
+        "has_discussions": false,
+        "has_pull_requests": true,
+        "pushed_at": "2026-10-25T14:01:33Z",
+        "created_at": "2026-09-25T20:26:58Z",
+        "updated_at": "2026-10-25T14:01:35Z",
+        "allow_forking": true,
+        "web_commit_signoff_required": false,
+        "pull_request_creation_policy": "all",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "url": "https://api.github.com/licenses/mit",
+          "spdx_id": "MIT",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala",
+        "archive_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/{archive_format}{/ref}",
+        "assignees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/assignees{/user}",
+        "blobs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/blobs{/sha}",
+        "branches_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/branches{/branch}",
+        "collaborators_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/collaborators{/collaborator}",
+        "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/comments{/number}",
+        "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits{/sha}",
+        "compare_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/compare/{base}...{head}",
+        "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/{+path}",
+        "contributors_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contributors",
+        "deployments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/deployments",
+        "downloads_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/downloads",
+        "events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/events",
+        "forks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/forks",
+        "git_commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits{/sha}",
+        "git_refs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/refs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/tags{/sha}",
+        "git_url": "git://github.com/ovidiudeica/reforma-teritoriala.git",
+        "issue_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/comments{/number}",
+        "issue_events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/events{/number}",
+        "issues_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues{/number}",
+        "keys_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/keys{/key_id}",
+        "labels_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/labels{/name}",
+        "languages_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/languages",
+        "merges_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/merges",
+        "milestones_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/notifications{?since,all,participating}",
+        "pulls_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls{/number}",
+        "releases_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/releases{/id}",
+        "ssh_url": "git@github.com:ovidiudeica/reforma-teritoriala.git",
+        "stargazers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/stargazers",
+        "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/{sha}",
+        "subscribers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscribers",
+        "subscription_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscription",
+        "tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/tags",
+        "teams_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/teams",
+        "trees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees{/sha}",
+        "clone_url": "https://github.com/ovidiudeica/reforma-teritoriala.git",
+        "mirror_url": null,
+        "hooks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/hooks",
+        "svn_url": "https://github.com/ovidiudeica/reforma-teritoriala"
+      },
+      "sha": "4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "user": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    },
+    "base": {
+      "label": "ovidiudeica:audit/ni-adm12-local-law-effect-review-20261024",
+      "ref": "audit/ni-adm12-local-law-effect-review-20261024",
+      "repo": {
+        "id": 1388155870,
+        "node_id": "R_kgDOUr2T3g",
+        "name": "reforma-teritoriala",
+        "full_name": "ovidiudeica/reforma-teritoriala",
+        "owner": {
+          "login": "ovidiudeica",
+          "id": 61658017,
+          "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ovidiudeica",
+          "html_url": "https://github.com/ovidiudeica",
+          "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+          "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+          "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+          "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+          "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "private": false,
+        "fork": false,
+        "archived": false,
+        "disabled": false,
+        "description": "Atlas teritorial ACTUAL pentru România și Republica Moldova; ISTORIC și PROPUNERI în roadmap",
+        "homepage": "https://ovidiudeica.github.io/reforma-teritoriala/",
+        "language": "JavaScript",
+        "visibility": "public",
+        "is_template": false,
+        "topics": [],
+        "forks_count": 0,
+        "forks": 0,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "watchers": 0,
+        "open_issues_count": 43,
+        "open_issues": 43,
+        "size": 248674,
+        "default_branch": "main",
+        "has_issues": true,
+        "has_projects": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "has_downloads": false,
+        "has_discussions": false,
+        "has_pull_requests": true,
+        "pushed_at": "2026-10-25T14:01:33Z",
+        "created_at": "2026-09-25T20:26:58Z",
+        "updated_at": "2026-10-25T14:01:35Z",
+        "allow_forking": true,
+        "web_commit_signoff_required": false,
+        "pull_request_creation_policy": "all",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "url": "https://api.github.com/licenses/mit",
+          "spdx_id": "MIT",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala",
+        "archive_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/{archive_format}{/ref}",
+        "assignees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/assignees{/user}",
+        "blobs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/blobs{/sha}",
+        "branches_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/branches{/branch}",
+        "collaborators_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/collaborators{/collaborator}",
+        "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/comments{/number}",
+        "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits{/sha}",
+        "compare_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/compare/{base}...{head}",
+        "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/{+path}",
+        "contributors_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contributors",
+        "deployments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/deployments",
+        "downloads_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/downloads",
+        "events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/events",
+        "forks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/forks",
+        "git_commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits{/sha}",
+        "git_refs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/refs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/tags{/sha}",
+        "git_url": "git://github.com/ovidiudeica/reforma-teritoriala.git",
+        "issue_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/comments{/number}",
+        "issue_events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/events{/number}",
+        "issues_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues{/number}",
+        "keys_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/keys{/key_id}",
+        "labels_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/labels{/name}",
+        "languages_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/languages",
+        "merges_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/merges",
+        "milestones_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/notifications{?since,all,participating}",
+        "pulls_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls{/number}",
+        "releases_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/releases{/id}",
+        "ssh_url": "git@github.com:ovidiudeica/reforma-teritoriala.git",
+        "stargazers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/stargazers",
+        "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/{sha}",
+        "subscribers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscribers",
+        "subscription_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscription",
+        "tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/tags",
+        "teams_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/teams",
+        "trees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees{/sha}",
+        "clone_url": "https://github.com/ovidiudeica/reforma-teritoriala.git",
+        "mirror_url": null,
+        "hooks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/hooks",
+        "svn_url": "https://github.com/ovidiudeica/reforma-teritoriala"
+      },
+      "sha": "6951be70e0a2a6808a2d7e6704f43eb01cf7e67c",
+      "user": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    },
+    "_links": {
+      "comments": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/434/comments"
+      },
+      "commits": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/434/commits"
+      },
+      "statuses": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/4faafc9ca12e7ece441209b4dc77886e215fb7c2"
+      },
+      "html": {
+        "href": "https://github.com/ovidiudeica/reforma-teritoriala/pull/434"
+      },
+      "issue": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/434"
+      },
+      "review_comments": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/434/comments"
+      },
+      "review_comment": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/comments{/number}"
+      },
+      "self": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/434"
+      }
+    },
+    "author_association": "OWNER",
+    "auto_merge": null,
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "rebaseable": true,
+    "mergeable_state": "clean",
+    "merged_by": null,
+    "comments": 0,
+    "review_comments": 0,
+    "maintainer_can_modify": false,
+    "commits": 5,
+    "additions": 841,
+    "deletions": 0,
+    "changed_files": 5
+  },
+  "files": [
+    {
+      "sha": "36f094c1d7d530121d2e5109290ac0707ac5510c",
+      "filename": "docs/evidence/ni-adm13-20261024/README.md",
+      "status": "added",
+      "additions": 33,
+      "deletions": 0,
+      "changes": 33,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2FREADME.md",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2FREADME.md",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm13-20261024%2FREADME.md?ref=4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "patch": "@@ -0,0 +1,33 @@\n+# NI-ADM.1.3 — recuperarea originalelor și certificarea registrelor locale\n+\n+**Cutoff:** 24 octombrie 2026. **Scope:** EVIDENCE_ONLY / READ_ONLY. PR stacked peste NI-ADM.1.2 #433 → NI-ADM.1.1 #432 → NI-ADM.1 #430 → NI-ADM.0 #428.\n+\n+## Rezultatul reconcilerii tuturor celor 18 legi (fără reluarea recensămintelor)\n+\n+Am verificat matricea **18/18** a actelor promulgate deja identificată în [NI-ADM.1.2](../ni-adm12-20261024/law-effects-20.json).\n+\n+- **4 originale PDF deja existente pe `main`**: publicațiile `2026000086` (nr. 1-ЗИ-VIII), `2026000091` (nr. 6-ЗД-VIII), `2026000438` (nr. 53-ЗИД-VIII), `2026000691` (nr. 91-ЗД-VIII). Fiecare are în dosarul NI-JUR fișier PDF cu Git blob și dimensiune concordante cu acquis-ul anterior, hash SHA-256 publicat, recaptură anterioară byte-identică și dovezi de examinare vizuală a **tuturor** paginilor. **Nu sunt documente descărcate pentru prima dată în NI-ADM.1.3** și nu sunt certificate drept semnături digitale calificate.\n+- **14 acte încă fără original binar certificat aici**: lista completă per publicare apare în [originals-18.json](originals-18.json), cu câmpuri `primary_evidence_status`, `primary_original` și cauze exacte ale blocajului. Pentru ele, publicarea unui titlu în indexul oficial sau apariția unei transcrieri în baza de date juridică terță nu certifică PDF-ul original ori dispozițiile operative complete.\n+- Datările din sursele păstrate indică pentru cele 4 legi din 2026 regulile de efect: 1/2026 din 30.01, 6/2026 condiționată de Legea 4/2026, 53/2026 din 26.03 și 91/2026 condiționată de Legea 89/2026. Aceste constatări sunt **sursa probatorie anterioară**, nu un verdict nou privind cele 85 de părinți/contururi.\n+\n+Pentru o verificare independentă, validatorul `validate.mjs` verifică *la checkout complet al repository-ului* SHA-256 pentru fiecare dintre cele patru PDF-uri existente, plus structura și controalele fail-closed. Nu pretindem că acest validator a rulat în CI dacă GitHub nu raportează un rezultat pe commitul exact.\n+\n+**Atenție:** în materialul secundar sunt disponibile unele dispoziții ale Legilor 216-ЗИ-VII/2023 și 276-ЗД-VII/2024, dar astfel de transcrieri nu înlocuiesc verificarea originarului semnat și nu permit marcarea celor două acte ca originale certificate.\n+\n+## Registrele locale — proveniență și lacune\n+\n+[local-register-coverage.json](local-register-coverage.json) consemnează recapturarea paginilor oficiale Grigoriopol, Rîbnița și Bender, respectiv erorile de conectare la Slobozia, Dubăsari, Tiraspol și Camenca.\n+\n+**Grigoriopol:** [directorul oficial](https://grig-rsnd.idknet.com/home/sel-sovet) conține legături către **14 dosare publice Google Drive**, asociate secțiunilor consiliilor (13 rurale și Maiac). La inspectarea directă a *tuturor celor 14 dosare de nivel superior*, fiecare afișa subdosare **2025 și 2026**. Această observație nu dovedește inexistența originalelor din 2023–2024 în alte locații și nu certifică vreun inventar de acte semnate. Linkurile exacte sunt salvate fără atribuirea nesusținută a fiecăruia unui consiliu individual.\n+\n+**Rîbnița:** [secțiunea consiliilor sătești](https://rybnsovet.idknet.com/struktura/selskie-sovety.html) afișează acte/anunțuri contemporane, inclusiv convocări pentru Gărăba (22.10.2026) și Erjovo (20.10.2026); [arhiva lunară](https://rybnsovet.idknet.com/arhiv) conține numărări de articole, nu un registru de hotărâri normative verificate. Conform [regulamentului din 13.02.2026](https://rybnsovet.idknet.com/reglament-rybnickogo-gorodskogo-i-rajonnogo-soveta-narodnyx-deputatov), deciziile normative pot necesita dovada din ziarul „Новости”, website și arhiva originalelor. Nu se extrapolează regulile sale la ceilalți emitenți.\n+\n+**Bender:** [website-ul consiliului](https://benderygs.gospmr.org/?cat=4) oferă pagini și legături documentare; nu rezultă exhaustivitatea publicațiilor normative și a originalelor 2023–2026.\n+\n+## Excepțiile și verdictul obligatoriu\n+\n+[exceptions-followup.json](exceptions-followup.json) păstrează cele 9 clase moștenite din #433: o clasificare închisă strict pentru două acte de proiect, **8 deschise**. EXC-18-OPERATIVE este redusă la **14 originale lipsă** (plus necesitatea controlului normativ final), dar **nu se închide**. EXC-LOCAL-ISSUERS și EXC-LOCAL-PUBLICATION primesc localizări concrete și continuă să rămână deschise.\n+\n+**NI-ADM.1.3 final:** `BLOCKED_INCOMPLETE`. Condițiile rămase sunt originale complete pentru 14 acte, verificarea efectelor și a intrării în vigoare per act, arhive locale numerotate și complete per emitent/per an, delimitarea competențelor legale și dovezi individuale pentru orice corespondență OSM.\n+\n+**Nu au fost modificate:** `public/data`, ACTUAL, părinții juridici MD, OSM public, website sau pragurile de CI. `P9.1=BLOCKED`; fără încorporare în arbore înainte de gate separat."
+    },
+    {
+      "sha": "ddd377b70945e848dcedea27478fbd815a90eaca",
+      "filename": "docs/evidence/ni-adm13-20261024/exceptions-followup.json",
+      "status": "added",
+      "additions": 98,
+      "deletions": 0,
+      "changes": 98,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2Fexceptions-followup.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2Fexceptions-followup.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm13-20261024%2Fexceptions-followup.json?ref=4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "patch": "@@ -0,0 +1,98 @@\n+{\n+  \"schema\": \"ni-adm13-exception-followup-v1\",\n+  \"as_of\": \"2026-10-24\",\n+  \"source_exception_path\": \"docs/evidence/ni-adm12-20261024/exceptions.json\",\n+  \"source_blob_sha\": \"752f9d8d25681b60915d281fbfd8fa76a4678d62\",\n+  \"total_inherited\": 9,\n+  \"closed_as_classification_only\": 1,\n+  \"still_open\": 8,\n+  \"all_closed\": false,\n+  \"exceptions\": [\n+    {\n+      \"code\": \"EXC-20-DRAFT\",\n+      \"status\": \"CLOSED_CLASSIFICATION_ONLY\",\n+      \"ids\": [\n+        \"2024001732\",\n+        \"2025001798\"\n+      ],\n+      \"reason\": \"These are public acts about legislative proposals, not themselves enacted amendments; underlying future bills remain independently reviewable.\",\n+      \"status_after_NI_ADM13\": \"CLOSED_CLASSIFICATION_ONLY\",\n+      \"progress_note\": \"Both draft-related administrative publications remain classified as non-promulgated amendments\"\n+    },\n+    {\n+      \"code\": \"EXC-18-OPERATIVE\",\n+      \"status\": \"OPEN_BLOCKED_PRIMARY_EVIDENCE\",\n+      \"ids\": [],\n+      \"reason\": \"18 enacted-amendment titles; complete signed originals and effective-date impacts not independently audited.\",\n+      \"status_after_NI_ADM13\": \"OPEN_EVIDENCE\",\n+      \"progress_note\": \"4 of the 18 official signed-scan original PDF copies were already preserved, SHA256-documented and visually reviewed by NI-JUR; 14 still lack independently secured primary binaries; no full legal chain accepted\"\n+    },\n+    {\n+      \"code\": \"EXC-INDIRECT-189\",\n+      \"status\": \"OPEN_BLOCKED_PRIMARY_EVIDENCE\",\n+      \"ids\": [\n+        \"2024001548\"\n+      ],\n+      \"reason\": \"Separate statute about representative councils is outside the strict 20-title corpus.\",\n+      \"status_after_NI_ADM13\": \"OPEN_EVIDENCE\",\n+      \"progress_note\": \"2024001548 original and indirect administrative effect remain unverified\"\n+    },\n+    {\n+      \"code\": \"EXC-LOCAL-ISSUERS\",\n+      \"status\": \"OPEN_BLOCKED_LOCAL_ARCHIVES\",\n+      \"ids\": [],\n+      \"reason\": \"7 known higher-council portals cannot certify all local acts or the 74 rural councils.\",\n+      \"status_after_NI_ADM13\": \"OPEN_EVIDENCE\",\n+      \"progress_note\": \"7 high-level councils inventoried, 14 public Grigoriopol folders probed; signed 2023–2026 local acts not exhaustively inventoried\"\n+    },\n+    {\n+      \"code\": \"EXC-LOCAL-PUBLICATION\",\n+      \"status\": \"OPEN_BLOCKED_LOCAL_ARCHIVES\",\n+      \"ids\": [],\n+      \"reason\": \"Ribnita 2026 council regulation references normative newspaper/website publication and archive originals.\",\n+      \"status_after_NI_ADM13\": \"OPEN_EVIDENCE\",\n+      \"progress_note\": \"Ribnita 2026 normative newspaper+website publication rule identified; actual 2023–2026 editions and published decisions unverified\"\n+    },\n+    {\n+      \"code\": \"EXC-BOUNDARY-MANDATE\",\n+      \"status\": \"OPEN_BLOCKED_SEMANTICS\",\n+      \"ids\": [],\n+      \"reason\": \"Local organizational or financial powers do not automatically establish a territorial legal unit or its OSM polygon.\",\n+      \"status_after_NI_ADM13\": \"OPEN_EVIDENCE\",\n+      \"progress_note\": \"No proven legal act authorizing any ATU polygon mutation or OSM legal parent\"\n+    },\n+    {\n+      \"code\": \"EXC-SOURCE-VERSIONS\",\n+      \"status\": \"OPEN_BLOCKED_CONSOLIDATION\",\n+      \"ids\": [],\n+      \"reason\": \"1994 local authorities law has May 2026 edition, not a fully reviewed October edition.\",\n+      \"status_after_NI_ADM13\": \"OPEN_EVIDENCE\",\n+      \"progress_note\": \"No official legally certified Oct 24 2026 consolidated 1994 local-government statute\"\n+    },\n+    {\n+      \"code\": \"EXC-LATE-19\",\n+      \"status\": \"OPEN_CARRIED_FROM_NI_ADM11\",\n+      \"ids\": [],\n+      \"reason\": \"NI-ADM.1.1 classified late 19 publication titles but not all their primary originals.\",\n+      \"status_after_NI_ADM13\": \"OPEN_EVIDENCE\",\n+      \"progress_note\": \"19 October title reviews exist, full original archive still incomplete\"\n+    },\n+    {\n+      \"code\": \"EXC-CONTROL\",\n+      \"status\": \"OPEN_BLOCKED_GEOMETRY_AND_CONTROL\",\n+      \"ids\": [],\n+      \"reason\": \"No de facto polygon-control or legal CUATM-parent mutation can be inferred from these publications.\",\n+      \"status_after_NI_ADM13\": \"OPEN_EVIDENCE\",\n+      \"progress_note\": \"Effective control and MD legal relations are different axes, neither accepted\"\n+    }\n+  ],\n+  \"final_gate\": {\n+    \"NI_ADM_1_3_CERTIFICATION\": \"BLOCKED_INCOMPLETE\",\n+    \"NI_ADM_1_2_PRIOR_ACCEPTANCE\": \"BLOCKED_INCOMPLETE\",\n+    \"P9_1\": \"BLOCKED\",\n+    \"legal_MD_parents_changed\": false,\n+    \"ACTUAL_modified\": false,\n+    \"website_tree_changed\": false,\n+    \"public_OSM_modified\": false\n+  }\n+}"
+    },
+    {
+      "sha": "60fd118a3cd1346a5f1987f268d2edc5d95eac08",
+      "filename": "docs/evidence/ni-adm13-20261024/local-register-coverage.json",
+      "status": "added",
+      "additions": 254,
+      "deletions": 0,
+      "changes": 254,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2Flocal-register-coverage.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2Flocal-register-coverage.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm13-20261024%2Flocal-register-coverage.json?ref=4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "patch": "@@ -0,0 +1,254 @@\n+{\n+  \"schema\": \"ni-adm13-local-registry-discovery-v1\",\n+  \"as_of\": \"2026-10-24\",\n+  \"portals\": [\n+    {\n+      \"jurisdiction\": \"Grigoriopol\",\n+      \"url\": \"https://grig-rsnd.idknet.com/home/sel-sovet\",\n+      \"state\": \"200_READABLE_PUBLIC_DIRECTORY\",\n+      \"observed_type\": \"PUBLIC_OFFICIAL_RURAL_COUNCIL_DOCUMENT_FOLDER_DIRECTORY\"\n+    },\n+    {\n+      \"jurisdiction\": \"Ribnita\",\n+      \"url\": \"https://rybnsovet.idknet.com/struktura/selskie-sovety.html\",\n+      \"state\": \"200_READABLE_PUBLIC_SITE\",\n+      \"observed_type\": \"RURAL_COUNCIL_NEWS_AND_RESOLUTIONS_CURRENT\"\n+    },\n+    {\n+      \"jurisdiction\": \"Ribnita archive\",\n+      \"url\": \"https://rybnsovet.idknet.com/arhiv\",\n+      \"state\": \"200_READABLE_PUBLIC_SITE\",\n+      \"observed_type\": \"MONTHLY_SITE_POSTS_NOT_CERTIFIED_NORMATIVE_GAZETTE\"\n+    },\n+    {\n+      \"jurisdiction\": \"Ribnita council activity\",\n+      \"url\": \"https://rybnsovet.idknet.com/v_sovetah/dejatelnosti_starnitsa.html\",\n+      \"state\": \"200_READABLE_PUBLIC_SITE\",\n+      \"observed_type\": \"COUNCIL_ACTIVITY_AND_NORMATIVE_OFFICIAL_PUBLICATION_NAV\"\n+    },\n+    {\n+      \"jurisdiction\": \"Bender\",\n+      \"url\": \"https://benderygs.gospmr.org/?cat=4\",\n+      \"state\": \"200_READABLE_PUBLIC_SITE\",\n+      \"observed_type\": \"CITY_COUNCIL_POSTS_AND_DOCUMENT_LINKS\"\n+    },\n+    {\n+      \"jurisdiction\": \"Slobozia\",\n+      \"url\": \"https://slobodzeya.org/\",\n+      \"state\": \"FETCH_PROXY_ERROR\",\n+      \"observed_type\": \"UNKNOWN\"\n+    },\n+    {\n+      \"jurisdiction\": \"Dubasari\",\n+      \"url\": \"https://dubossary.ru/sovet/\",\n+      \"state\": \"FETCH_PROXY_ERROR\",\n+      \"observed_type\": \"UNKNOWN\"\n+    },\n+    {\n+      \"jurisdiction\": \"Tiraspol\",\n+      \"url\": \"https://tirgorsovet.org/\",\n+      \"state\": \"FETCH_PROXY_ERROR\",\n+      \"observed_type\": \"UNKNOWN\"\n+    },\n+    {\n+      \"jurisdiction\": \"Camenca\",\n+      \"url\": \"https://kamsovet.gospmr.org/\",\n+      \"state\": \"FETCH_TIMEOUT\",\n+      \"observed_type\": \"UNKNOWN\"\n+    }\n+  ],\n+  \"grigoriopol\": {\n+    \"source_url\": \"https://grig-rsnd.idknet.com/home/sel-sovet\",\n+    \"linked_public_folder_count\": 14,\n+    \"rural_council_document_directories\": 13,\n+    \"mayak_separate_directory\": 1,\n+    \"folder_links\": [\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1V9uiuon8c8_xG_9xAqGFt8L5YcBL_mSG?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1wRDwwh7sMPYFHCk8yGTnRIOgqUgEBjt2?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1cG266a8cfB3WnRoZSI771131MG0znPPw?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1abdQjzOumqQxxv54XKmPYBxqPt2jIDyy?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1Gbyb7b-Jfct5KkUWZ8ufBLK6n_N6My7i?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1usNRhYXFSjh5JnZKSRsJ7eTnvUi_lnj_?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1q7uj70DgLu2UGc38GpCBL1vhEGBV2Yyj?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1j9wWy72kqz32dp-nWhvusiDRUcX6mc1X?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1hko72V6hb3U51_kBwPcxzy5bOnTpeyzO?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1px7SMJx2UL5UQfIkwYW8VjlEhc8jmEYo?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1Pnq7pxj6pe5KKhsihyiXJbRi1D6cD2ss?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1sqy5n2NEQT5uvGXOq_qVe_PhwnLhuQUE?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1S-GnXA9S9xHKY7eqCgANYZo1oTXoL2o1?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      },\n+      {\n+        \"url\": \"https://drive.google.com/drive/folders/1AU-EQ00g0ire3suuVqStJseiE2P3A7kh?usp=drive_link\",\n+        \"public_top_level_opened\": true,\n+        \"visible_year_directories\": [\n+          \"2025\",\n+          \"2026\"\n+        ],\n+        \"child_year_contents_fully_enumerated\": false,\n+        \"individual_signed_decisions_verified\": false,\n+        \"named_council_mapping_independently_certified\": false\n+      }\n+    ],\n+    \"top_level_visible_2023_2024_year_folder_count\": 0,\n+    \"warning\": \"No 2023 or 2024 folder observed in these public top-level folder listings; this does not prove that no older local decisions exist elsewhere.\",\n+    \"complete_2023_2026_local_repository_certified\": false\n+  },\n+  \"ribnita\": {\n+    \"village_council_site\": \"https://rybnsovet.idknet.com/struktura/selskie-sovety.html\",\n+    \"examples_of_recent_public_titles\": [\n+      \"Гараба 2026-10-22 meeting convocation\",\n+      \"Ержово 2026-10-20 meeting convocation\"\n+    ],\n+    \"site_archive\": \"https://rybnsovet.idknet.com/arhiv\",\n+    \"archive_type\": \"SITE_POST_ARCHIVE_WITH_MONTHLY_COUNTS_NOT_A_COMPLETE_REGISTER_OF_SIGNED_ACTS\",\n+    \"official_publication_policy_source\": \"https://rybnsovet.idknet.com/reglament-rybnickogo-gorodskogo-i-rajonnogo-soveta-narodnyx-deputatov\",\n+    \"corpus_2023_2026_all_local_signed_decisions_certified\": false\n+  },\n+  \"bender\": {\n+    \"site\": \"https://benderygs.gospmr.org/?cat=4\",\n+    \"posts_visible\": true,\n+    \"some_doc_links_visible\": true,\n+    \"all_annual_signed_acts_certified\": false\n+  },\n+  \"source_caveats\": [\n+    \"A public Drive directory displaying years 2025 and 2026 is not per-document archival completeness for those years.\",\n+    \"An official blog post archive cannot be equated with published legal decisions.\",\n+    \"Local archival review requires issued, numbered, signed acts plus publication/effective date and repeal chain.\",\n+    \"De facto administrative assertion is not the same as actual physical control or Moldova de jure jurisdiction.\"\n+  ],\n+  \"verdict\": {\n+    \"public_source_locations_discovered\": true,\n+    \"local_legislative_corpus_complete\": false,\n+    \"local_normative_effect_fully_adjudicated\": false,\n+    \"effective_control_certified\": false\n+  }\n+}"
+    },
+    {
+      "sha": "dd9cd5be114afa2f2aaa1fcad22482ad829bc840",
+      "filename": "docs/evidence/ni-adm13-20261024/originals-18.json",
+      "status": "added",
+      "additions": 401,
+      "deletions": 0,
+      "changes": 401,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2Foriginals-18.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2Foriginals-18.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm13-20261024%2Foriginals-18.json?ref=4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "patch": "@@ -0,0 +1,401 @@\n+{\n+  \"schema\": \"ni-adm13-official-original-reconciliation-18-v1\",\n+  \"cutoff\": \"2026-10-24\",\n+  \"source_ni_adm12_path\": \"docs/evidence/ni-adm12-20261024/law-effects-20.json\",\n+  \"source_ni_adm12_blob_sha\": \"960e7a76d5062080ca292ac19842985cf7f9e198\",\n+  \"source_existing_evidence\": [\n+    {\n+      \"path\": \"docs/evidence/ni-jur-independent-20261020/prior-draft/p9.0.7.2.9-2026-primary-evidence.json\",\n+      \"sha\": \"1b7479736e24ee105389bed32620b5413ab63b7f\"\n+    },\n+    {\n+      \"path\": \"docs/evidence/ni-jur-independent-20261020/documentary/primary-review/visual-review.json\",\n+      \"sha\": \"f7f7a8869b8e2c30aab94af60ba2d9233bdd71f7\"\n+    },\n+    {\n+      \"path\": \"docs/evidence/ni-jur-independent-20261020/documentary/primary-review/current-original-recapture.json\",\n+      \"sha\": \"715ef1bf8a53734e2edf0cd5cc36677c6c9dc095\"\n+    }\n+  ],\n+  \"totals\": {\n+    \"original_laws_requested\": 18,\n+    \"primary_binaries_already_pinned_and_previously_visually_reviewed\": 4,\n+    \"missing_primary_binaries\": 14,\n+    \"primary_binaries_newly_downloaded_in_this_stage\": 0,\n+    \"all_signed_primary_originals_2023_2026_certified\": false,\n+    \"qualified_digital_signatures_verified\": 0,\n+    \"per_act_geometric_promotions\": 0\n+  },\n+  \"rows\": [\n+    {\n+      \"publication_id\": \"2026000691\",\n+      \"act_number\": \"91-ЗД-VIII\",\n+      \"publication_date\": \"06.05.2026\",\n+      \"index_source_body_sha256\": \"12ff52821de7cb1f00824f63a94ee3159da48a1a3aae9fd6582771dc8f2de739\",\n+      \"primary_evidence_status\": \"REUSED_PRESERVED_OFFICIAL_ORIGINAL_WITH_PRIOR_SHA256_AND_FULL_VISUAL_REVIEW_NOT_QUALIFIED_SIGNATURE\",\n+      \"prior_or_current_source_category\": \"PREVIOUSLY_VERIFIED_PRIMARY_BINARIES_IN_REPOSITORY\",\n+      \"primary_original\": {\n+        \"repository_original_path\": \"docs/evidence/ni-jur-independent-20261020/documentary/primary-review/PMR-2026-91-ZD-VIII.pdf\",\n+        \"git_blob_sha1\": \"e59ac282a20e805c9fdb9a46fd2ba5cf43f68dfb\",\n+        \"bytes\": 1938286,\n+        \"prior_sha256\": \"cd2bd623624c7bee1b5f3c7bb5bd9363ae948144031ec5f8031e92e19b504d09\",\n+        \"official_source_url\": \"http://www.minjust.gospmr.org/publication/docs/2026000691.html/$file/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD%20%E2%84%96%2091-%D0%97%D0%94-VIII.pdf\",\n+        \"recapture_response_sha256\": \"cd2bd623624c7bee1b5f3c7bb5bd9363ae948144031ec5f8031e92e19b504d09\",\n+        \"pages_visually_reviewed\": 3,\n+        \"all_pages_visually_reviewed\": true,\n+        \"law_effective_rule_from_prior_review\": \"CONDITIONAL_ON_PM2026_89_ZI_VIII\",\n+        \"operative_date_from_prior_review\": \"2026-05-07\",\n+        \"prior_evidence_document_ids\": [\n+          \"PMR-2026-91-ZD-VIII\"\n+        ],\n+        \"prior_siginature_qualified_certification\": false\n+      },\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2026000438\",\n+      \"act_number\": \"53-ЗИД-VIII\",\n+      \"publication_date\": \"25.03.2026\",\n+      \"index_source_body_sha256\": \"0970429d412174e32d546c0f0d1288b077f5613532e617a9c21bff233307621b\",\n+      \"primary_evidence_status\": \"REUSED_PRESERVED_OFFICIAL_ORIGINAL_WITH_PRIOR_SHA256_AND_FULL_VISUAL_REVIEW_NOT_QUALIFIED_SIGNATURE\",\n+      \"prior_or_current_source_category\": \"PREVIOUSLY_VERIFIED_PRIMARY_BINARIES_IN_REPOSITORY\",\n+      \"primary_original\": {\n+        \"repository_original_path\": \"docs/evidence/ni-jur-independent-20261020/documentary/primary-review/PMR-2026-53-ZID-VIII.pdf\",\n+        \"git_blob_sha1\": \"9841f03152da9225ee56acd288e885b1c1edb2b8\",\n+        \"bytes\": 2278954,\n+        \"prior_sha256\": \"a5eb1f4bd593c5d1b364ac8875e036777f77766dd37a757e5023eecfe3af5f37\",\n+        \"official_source_url\": \"http://www.minjust.gospmr.org/publication/docs/2026000438.html/$file/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD%20%E2%84%96%2053-%D0%97%D0%98%D0%94-VIII.pdf\",\n+        \"recapture_response_sha256\": \"a5eb1f4bd593c5d1b364ac8875e036777f77766dd37a757e5023eecfe3af5f37\",\n+        \"pages_visually_reviewed\": 3,\n+        \"all_pages_visually_reviewed\": true,\n+        \"law_effective_rule_from_prior_review\": \"DAY_AFTER_PUBLICATION\",\n+        \"operative_date_from_prior_review\": \"2026-03-26\",\n+        \"prior_evidence_document_ids\": [\n+          \"PMR-2026-53-ZID-VIII\"\n+        ],\n+        \"prior_siginature_qualified_certification\": false\n+      },\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2026000091\",\n+      \"act_number\": \"6-ЗД-VIII\",\n+      \"publication_date\": \"29.01.2026\",\n+      \"index_source_body_sha256\": \"33205f8ed8602b2408780baf22333488bd412b3c85daa413917ffc8659274a8a\",\n+      \"primary_evidence_status\": \"REUSED_PRESERVED_OFFICIAL_ORIGINAL_WITH_PRIOR_SHA256_AND_FULL_VISUAL_REVIEW_NOT_QUALIFIED_SIGNATURE\",\n+      \"prior_or_current_source_category\": \"PREVIOUSLY_VERIFIED_PRIMARY_BINARIES_IN_REPOSITORY\",\n+      \"primary_original\": {\n+        \"repository_original_path\": \"docs/evidence/ni-jur-independent-20261020/documentary/primary-review/PMR-2026-6-ZD-VIII.pdf\",\n+        \"git_blob_sha1\": \"9bc7146e2a9ea3398a2bdc18715c27af6672d326\",\n+        \"bytes\": 2002247,\n+        \"prior_sha256\": \"673b0d0bd60bfe472e8af13149f95c2370697afab1514e6eabcc2ffc62362122\",\n+        \"official_source_url\": \"http://www.minjust.gospmr.org/publication/docs/2026000091.html/$file/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD%20%E2%84%96%206-%D0%97%D0%94-VIII.pdf\",\n+        \"recapture_response_sha256\": \"673b0d0bd60bfe472e8af13149f95c2370697afab1514e6eabcc2ffc62362122\",\n+        \"pages_visually_reviewed\": 3,\n+        \"all_pages_visually_reviewed\": true,\n+        \"law_effective_rule_from_prior_review\": \"CONDITIONAL_ON_PM2026_4_ZI_VIII\",\n+        \"operative_date_from_prior_review\": \"2026-01-30\",\n+        \"prior_evidence_document_ids\": [\n+          \"PMR-2026-6-ZD-VIII\"\n+        ],\n+        \"prior_siginature_qualified_certification\": false\n+      },\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2026000086\",\n+      \"act_number\": \"1-ЗИ-VIII\",\n+      \"publication_date\": \"29.01.2026\",\n+      \"index_source_body_sha256\": \"33205f8ed8602b2408780baf22333488bd412b3c85daa413917ffc8659274a8a\",\n+      \"primary_evidence_status\": \"REUSED_PRESERVED_OFFICIAL_ORIGINAL_WITH_PRIOR_SHA256_AND_FULL_VISUAL_REVIEW_NOT_QUALIFIED_SIGNATURE\",\n+      \"prior_or_current_source_category\": \"PREVIOUSLY_VERIFIED_PRIMARY_BINARIES_IN_REPOSITORY\",\n+      \"primary_original\": {\n+        \"repository_original_path\": \"docs/evidence/ni-jur-independent-20261020/documentary/primary-review/PMR-2026-1-ZI-VIII.pdf\",\n+        \"git_blob_sha1\": \"8c6e8c67a90bcceb08fd05b9aa7c715a6f940351\",\n+        \"bytes\": 2509016,\n+        \"prior_sha256\": \"1dfed5a9ad884666f3f52d25bf483e25e811a70973d3d9cfa6cc68077bb1c0ae\",\n+        \"official_source_url\": \"http://www.minjust.gospmr.org/publication/docs/2026000086.html/$file/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD%20%E2%84%96%201-%D0%97%D0%98-VIII.pdf\",\n+        \"recapture_response_sha256\": \"1dfed5a9ad884666f3f52d25bf483e25e811a70973d3d9cfa6cc68077bb1c0ae\",\n+        \"pages_visually_reviewed\": 3,\n+        \"all_pages_visually_reviewed\": true,\n+        \"law_effective_rule_from_prior_review\": \"DAY_AFTER_PUBLICATION\",\n+        \"operative_date_from_prior_review\": \"2026-01-30\",\n+        \"prior_evidence_document_ids\": [\n+          \"PMR-2026-1-ZI-VIII\"\n+        ],\n+        \"prior_siginature_qualified_certification\": false\n+      },\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2025002031\",\n+      \"act_number\": \"223-ЗИ-VII\",\n+      \"publication_date\": \"18.11.2025\",\n+      \"index_source_body_sha256\": \"3029e50e8fc7cec053293c8219c8d4079cca7e7abfc9a440d0e0e1031ed697b1\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2025001392\",\n+      \"act_number\": \"187-ЗИ-VII\",\n+      \"publication_date\": \"19.08.2025\",\n+      \"index_source_body_sha256\": \"5e27b95b90a6013d1232640fe7c4bfaa10bbb1d5157af7dd20abef01345f702f\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2025000896\",\n+      \"act_number\": \"97-ЗИ-VII\",\n+      \"publication_date\": \"09.06.2025\",\n+      \"index_source_body_sha256\": \"45aedd6dbfe946dac47baa6bc1f09c5b4f866d132976c2f5c40cc7d8c7ea766a\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2024002593\",\n+      \"act_number\": \"340-ЗИ-VII\",\n+      \"publication_date\": \"26.12.2024\",\n+      \"index_source_body_sha256\": \"d0b20403382f8db4b63b2431d18c9f7d8bf976d3a51267840d8377c71204b98c\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2024002387\",\n+      \"act_number\": \"287-ЗИД-VII\",\n+      \"publication_date\": \"29.11.2024\",\n+      \"index_source_body_sha256\": \"8006bc365621bd69b47893417cccdd5a858a39d87242f71583d87481c0ea01e5\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2024002326\",\n+      \"act_number\": \"276-ЗД-VII\",\n+      \"publication_date\": \"22.11.2024\",\n+      \"index_source_body_sha256\": \"8006bc365621bd69b47893417cccdd5a858a39d87242f71583d87481c0ea01e5\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2024001014\",\n+      \"act_number\": \"97-ЗД-VII\",\n+      \"publication_date\": \"30.05.2024\",\n+      \"index_source_body_sha256\": \"2202eb69709f5ac55230b93d4228cd8d3089a8aed0f4bbb8dad9e1d5f9cce2e4\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2024000427\",\n+      \"act_number\": \"48-ЗИ-VII\",\n+      \"publication_date\": \"05.03.2024\",\n+      \"index_source_body_sha256\": \"c301e98cff6c04fb1b2b58442e59eafae18330e1a9931f7875e931fe37687e76\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2023001591\",\n+      \"act_number\": \"291-ЗИ-VII\",\n+      \"publication_date\": \"29.09.2023\",\n+      \"index_source_body_sha256\": \"3d4292bc16431670e34dd9c31cc95eec589091850f84573be824d686f889e8a3\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2023001134\",\n+      \"act_number\": \"216-ЗИ-VII\",\n+      \"publication_date\": \"14.07.2023\",\n+      \"index_source_body_sha256\": \"4571560465ea4662fd14bc9c94ed02a9ba8d76aa759bdff75dca781c9950d478\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2023000621\",\n+      \"act_number\": \"85-ЗИ-VII\",\n+      \"publication_date\": \"19.04.2023\",\n+      \"index_source_body_sha256\": \"22f3f406cdd63e882506a45d3e8d67b64a951d922bd71223d04bf9297fe26594\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2023000620\",\n+      \"act_number\": \"84-ЗИ-VII\",\n+      \"publication_date\": \"19.04.2023\",\n+      \"index_source_body_sha256\": \"22f3f406cdd63e882506a45d3e8d67b64a951d922bd71223d04bf9297fe26594\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2023000117\",\n+      \"act_number\": \"7-ЗД-VII\",\n+      \"publication_date\": \"30.01.2023\",\n+      \"index_source_body_sha256\": \"0ff7e5a1de85892dd606070a9b325914198f257886b8d81cff54a6dd6c18685a\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    },\n+    {\n+      \"publication_id\": \"2023000001\",\n+      \"act_number\": \"1-ЗИД-VII\",\n+      \"publication_date\": \"09.01.2023\",\n+      \"index_source_body_sha256\": \"0ff7e5a1de85892dd606070a9b325914198f257886b8d81cff54a6dd6c18685a\",\n+      \"primary_evidence_status\": \"BLOCKED_SIGNED_PRIMARY_UNRECOVERED\",\n+      \"prior_or_current_source_category\": \"CENTRAL_PUBLICATION_INDEX_ONLY\",\n+      \"primary_original\": null,\n+      \"other_signed_original_url_verified\": null,\n+      \"exact_2026_10_24_territorial_administrative_effect_certified\": false,\n+      \"no_2026_de_facto_parent_promoted\": true,\n+      \"unresolved_if_no_primary\": [\n+        \"Official original binary not recovered/pinned in current NI-ADM.1.3 audit\",\n+        \"Original complete legal text and per-act commencement clauses not independently certified\"\n+      ],\n+      \"notes\": \"An official publication title, secondary legal database, or issuer website is not a signed original.\"\n+    }\n+  ],\n+  \"documentary_warnings\": [\n+    \"All four present originals were independently captured and byte-reconciled previously, not freshly downloaded in NI-ADM.1.3.\",\n+    \"Binary SHA256 values in ledger are from prior stored acquisition; the checked git blob SHA1 and file size match current main.\",\n+    \"A historical scanned signature is not a qualified cryptographic signature verification.\",\n+    \"14 remaining laws have index evidence and potentially secondary text, not validated primary original copies in the current repository.\",\n+    \"The complete 1994 local-government act and all effective dates are not globally certified by this partial recovery.\",\n+    \"The central index remains only an observed publication corpus; local authority decisions are separately sourced.\"\n+  ],\n+  \"verdict\": {\n+    \"originals_complete\": false,\n+    \"NI_ADM_1_3_FINAL_CERTIFICATION\": \"BLOCKED_EVIDENCE\",\n+    \"ACTUAL_MUTATION_ALLOWED\": false,\n+    \"P9_1_ALLOWED\": false,\n+    \"OSM_PUBLIC_EDIT_ALLOWED\": false,\n+    \"NEW_DEF_FACTO_PARENTS_CERTIFIED\": 0\n+  }\n+}"
+    },
+    {
+      "sha": "7a7187fd3df7d5bdf39b6251a94c7c288dd84a6f",
+      "filename": "docs/evidence/ni-adm13-20261024/validate.mjs",
+      "status": "added",
+      "additions": 55,
+      "deletions": 0,
+      "changes": 55,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2Fvalidate.mjs",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/4faafc9ca12e7ece441209b4dc77886e215fb7c2/docs%2Fevidence%2Fni-adm13-20261024%2Fvalidate.mjs",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm13-20261024%2Fvalidate.mjs?ref=4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "patch": "@@ -0,0 +1,55 @@\n+import assert from 'node:assert/strict';\n+import {readFileSync} from 'node:fs';\n+import {createHash} from 'node:crypto';\n+\n+const read = name => JSON.parse(readFileSync(new URL(name, import.meta.url), 'utf8'));\n+const d = read('originals-18.json');\n+const l = read('local-register-coverage.json');\n+const e = read('exceptions-followup.json');\n+const upstream = read('../ni-adm12-20261024/law-effects-20.json');\n+\n+assert.equal(d.schema, 'ni-adm13-official-original-reconciliation-18-v1');\n+assert.equal(d.cutoff, '2026-10-24');\n+assert.equal(d.rows.length, 18);\n+const enacted = upstream.law_rows.filter(x => x.operational_category === 'ENACTED_LAW_INDEXED');\n+assert.equal(enacted.length, 18);\n+assert.equal(new Set(d.rows.map(x => x.publication_id)).size, 18);\n+assert.deepEqual(d.rows.map(x => x.publication_id).sort(), enacted.map(x => x.publication_id).sort());\n+const archived = d.rows.filter(x => x.primary_original);\n+const absent = d.rows.filter(x => !x.primary_original);\n+assert.equal(archived.length, 4);\n+assert.equal(absent.length, 14);\n+assert.equal(d.totals.primary_binaries_newly_downloaded_in_this_stage, 0);\n+assert.equal(d.totals.all_signed_primary_originals_2023_2026_certified, false);\n+assert.equal(d.totals.qualified_digital_signatures_verified, 0);\n+assert.equal(d.totals.per_act_geometric_promotions, 0);\n+const expectedExisting = ['2026000086','2026000091','2026000438','2026000691'];\n+assert.deepEqual(archived.map(x => x.publication_id).sort(), expectedExisting);\n+for (const row of archived) {\n+  const pdf = row.primary_original;\n+  const path = pdf.repository_original_path;\n+  assert.ok(path.startsWith('docs/evidence/ni-jur-independent-20261020/documentary/primary-review/'));\n+  const localFile = new URL('../ni-jur-independent-20261020/documentary/primary-review/' + path.split('/').at(-1), import.meta.url);\n+  const binary = readFileSync(localFile);\n+  assert.equal(binary.length, pdf.bytes, 'PDF byte count mismatch: ' + row.publication_id);\n+  assert.equal(createHash('sha256').update(binary).digest('hex'), pdf.prior_sha256, 'PDF SHA256 mismatch: ' + row.publication_id);\n+  assert.equal(pdf.recapture_response_sha256, pdf.prior_sha256, 'Prior recapture drift: ' + row.publication_id);\n+  assert.equal(row.exact_2026_10_24_territorial_administrative_effect_certified, false);\n+  assert.equal(row.no_2026_de_facto_parent_promoted, true);\n+}\n+assert.ok(absent.every(x => x.primary_evidence_status === 'BLOCKED_SIGNED_PRIMARY_UNRECOVERED'));\n+assert.equal(d.verdict.NI_ADM_1_3_FINAL_CERTIFICATION, 'BLOCKED_EVIDENCE');\n+assert.equal(d.verdict.P9_1_ALLOWED, false);\n+assert.equal(d.verdict.ACTUAL_MUTATION_ALLOWED, false);\n+assert.equal(l.schema, 'ni-adm13-local-registry-discovery-v1');\n+assert.equal(l.grigoriopol.folder_links.length, 14);\n+assert.equal(new Set(l.grigoriopol.folder_links.map(x => x.url)).size, 14);\n+assert.ok(l.grigoriopol.folder_links.every(x => x.public_top_level_opened && !x.child_year_contents_fully_enumerated));\n+assert.ok(l.grigoriopol.folder_links.every(x => JSON.stringify(x.visible_year_directories) === JSON.stringify(['2025','2026'])));\n+assert.equal(l.verdict.local_legislative_corpus_complete, false);\n+assert.equal(e.total_inherited, 9);\n+assert.equal(e.still_open, 8);\n+assert.equal(e.all_closed, false);\n+assert.equal(e.final_gate.P9_1, 'BLOCKED');\n+assert.equal(e.final_gate.ACTUAL_modified, false);\n+console.log('PASS NI-ADM.1.3: four original PDF SHA-256 checked, 14 still blocked, local archives incomplete.');"
+    }
+  ],
+  "checks": [
+    {
+      "total_count": 0,
+      "check_runs": []
+    }
+  ],
+  "commits": [
+    {
+      "sha": "7155e4601bbe26521b91844cff7fd801aca76b4b",
+      "node_id": "C_kwDOUr2T3toAKDcxNTVlNDYwMWJiZTI2NTIxYjkxODQ0Y2ZmN2ZkODAxYWNhNzZiNGI",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:41:42Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:41:42Z"
+        },
+        "message": "NI-ADM.1.3: reconcile four existing primary originals and isolate fourteen missing binaries",
+        "tree": {
+          "sha": "392bec2706ffa8ec5914a2ed5375b637c31fed00",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/392bec2706ffa8ec5914a2ed5375b637c31fed00"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/7155e4601bbe26521b91844cff7fd801aca76b4b",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/7155e4601bbe26521b91844cff7fd801aca76b4b",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/7155e4601bbe26521b91844cff7fd801aca76b4b",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/7155e4601bbe26521b91844cff7fd801aca76b4b/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "6951be70e0a2a6808a2d7e6704f43eb01cf7e67c",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/6951be70e0a2a6808a2d7e6704f43eb01cf7e67c",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/6951be70e0a2a6808a2d7e6704f43eb01cf7e67c"
+        }
+      ]
+    },
+    {
+      "sha": "bb3f2a213771e5a611e1dcb9b8853278c19ef51c",
+      "node_id": "C_kwDOUr2T3toAKGJiM2YyYTIxMzc3MWU1YTYxMWUxZGNiOWI4ODUzMjc4YzE5ZWY1MWM",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:41:45Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:41:45Z"
+        },
+        "message": "NI-ADM.1.3: document 14 public local folders and surviving registry completeness gaps",
+        "tree": {
+          "sha": "a9c12fcd98b33288d652fe7bcfdff08b1fd333e0",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/a9c12fcd98b33288d652fe7bcfdff08b1fd333e0"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/bb3f2a213771e5a611e1dcb9b8853278c19ef51c",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bb3f2a213771e5a611e1dcb9b8853278c19ef51c",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/bb3f2a213771e5a611e1dcb9b8853278c19ef51c",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bb3f2a213771e5a611e1dcb9b8853278c19ef51c/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "7155e4601bbe26521b91844cff7fd801aca76b4b",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/7155e4601bbe26521b91844cff7fd801aca76b4b",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/7155e4601bbe26521b91844cff7fd801aca76b4b"
+        }
+      ]
+    },
+    {
+      "sha": "68dea92ce44c1e2b324e275d3520d647351f3c37",
+      "node_id": "C_kwDOUr2T3toAKDY4ZGVhOTJjZTQ0YzFlMmIzMjRlMjc1ZDM1MjBkNjQ3MzUxZjNjMzc",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:42:35Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:42:35Z"
+        },
+        "message": "NI-ADM.1.3: preserve eight unresolved exceptions without artificial acceptance",
+        "tree": {
+          "sha": "73019c9984f71ef88789871dac6ce8ff03255103",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/73019c9984f71ef88789871dac6ce8ff03255103"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/68dea92ce44c1e2b324e275d3520d647351f3c37",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/68dea92ce44c1e2b324e275d3520d647351f3c37",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/68dea92ce44c1e2b324e275d3520d647351f3c37",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/68dea92ce44c1e2b324e275d3520d647351f3c37/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "bb3f2a213771e5a611e1dcb9b8853278c19ef51c",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bb3f2a213771e5a611e1dcb9b8853278c19ef51c",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/bb3f2a213771e5a611e1dcb9b8853278c19ef51c"
+        }
+      ]
+    },
+    {
+      "sha": "fb8439af4dca83bc2406707ec56a8b3041f9e14c",
+      "node_id": "C_kwDOUr2T3toAKGZiODQzOWFmNGRjYTgzYmMyNDA2NzA3ZWM1NmE4YjMwNDFmOWUxNGM",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:43:32Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:43:32Z"
+        },
+        "message": "NI-ADM.1.3: report four reused originals and bounded local-registry archival proof",
+        "tree": {
+          "sha": "751c40695a0ecbe7ede3a94d550939d44da41efd",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/751c40695a0ecbe7ede3a94d550939d44da41efd"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/fb8439af4dca83bc2406707ec56a8b3041f9e14c",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/fb8439af4dca83bc2406707ec56a8b3041f9e14c",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/fb8439af4dca83bc2406707ec56a8b3041f9e14c",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/fb8439af4dca83bc2406707ec56a8b3041f9e14c/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "68dea92ce44c1e2b324e275d3520d647351f3c37",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/68dea92ce44c1e2b324e275d3520d647351f3c37",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/68dea92ce44c1e2b324e275d3520d647351f3c37"
+        }
+      ]
+    },
+    {
+      "sha": "4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "node_id": "C_kwDOUr2T3toAKDRmYWFmYzljYTEyZTdlY2U0NDEyMDliNGRjNzc4ODZlMjE1ZmI3YzI",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:44:04Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T11:44:04Z"
+        },
+        "message": "NI-ADM.1.3: add fail-closed binary SHA256 verification for four prior originals",
+        "tree": {
+          "sha": "006819180045dd960b1d6547bef7bdcf988acb8a",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/006819180045dd960b1d6547bef7bdcf988acb8a"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/4faafc9ca12e7ece441209b4dc77886e215fb7c2/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "fb8439af4dca83bc2406707ec56a8b3041f9e14c",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/fb8439af4dca83bc2406707ec56a8b3041f9e14c",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/fb8439af4dca83bc2406707ec56a8b3041f9e14c"
+        }
+      ]
+    }
+  ],
+  "file_comparison": [
+    {
+      "path": "docs/evidence/ni-adm13-20261024/README.md",
+      "status": "added",
+      "head_blob": "36f094c1d7d530121d2e5109290ac0707ac5510c",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm13-20261024/exceptions-followup.json",
+      "status": "added",
+      "head_blob": "ddd377b70945e848dcedea27478fbd815a90eaca",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm13-20261024/local-register-coverage.json",
+      "status": "added",
+      "head_blob": "60fd118a3cd1346a5f1987f268d2edc5d95eac08",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm13-20261024/originals-18.json",
+      "status": "added",
+      "head_blob": "dd9cd5be114afa2f2aaa1fcad22482ad829bc840",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm13-20261024/validate.mjs",
+      "status": "added",
+      "head_blob": "7a7187fd3df7d5bdf39b6251a94c7c288dd84a6f",
+      "main_blob": null,
+      "identical_main": false
+    }
+  ]
+}

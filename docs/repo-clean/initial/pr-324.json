@@ -1,0 +1,927 @@
+{
+  "number": 324,
+  "detail": {
+    "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/324",
+    "id": 4878447520,
+    "node_id": "PR_kwDOUr2T3s8AAAABIsczoA",
+    "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/324",
+    "diff_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/324.diff",
+    "patch_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/324.patch",
+    "issue_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/324",
+    "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/324/commits",
+    "review_comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/324/comments",
+    "review_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/comments{/number}",
+    "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/324/comments",
+    "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/a04df8a59e48e3b43f84a5a19983819a21a157da",
+    "number": 324,
+    "state": "open",
+    "locked": false,
+    "title": "P9.0.7.2.2 (audit-only): primary-act coverage, missing 2023 Law 292, and 85-case evidence gate",
+    "user": {
+      "login": "ovidiudeica",
+      "id": 61658017,
+      "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ovidiudeica",
+      "html_url": "https://github.com/ovidiudeica",
+      "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+      "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+      "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+      "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+      "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "Stacked on PR #323 → #322 → #321 → #320. This step rechecks official sources and adds previously omitted 2023 Law 292-ЗИ-VII (publication 2023001593), cross-verifies 2023 Law 291 and 2024 Laws 47/48 publication identifiers, and records the official baseline Law 155 full-file SHA256 (194560 bytes) fetched directly. Introduces a seven-law index and a distinct 85-identity fail-closed evidence matrix, four annual coverage checks, and a Node validator. The Ministry of Justice individual primary PDF retrieval failed TLS verification; do NOT claim those documents' hashes, operative dates or individual effects. Legacy/new archive complete enumeration and 2025 absence proof remain unresolved. Validator executed successfully locally. No ACTUAL geometry or Moldova CUATM legal parent mutations. Draft pending full primary source corpus, exhaustive archive audit, and required CI.",
+    "labels": [],
+    "milestone": null,
+    "active_lock_reason": null,
+    "created_at": "2026-10-15T19:05:19Z",
+    "updated_at": "2026-10-15T19:07:20Z",
+    "closed_at": null,
+    "merged_at": null,
+    "merge_commit_sha": "8362d1d37de68f9248d5345c4183be24bd97360c",
+    "assignee": null,
+    "assignees": [],
+    "requested_reviewers": [],
+    "requested_teams": [],
+    "head": {
+      "label": "ovidiudeica:audit/p9.0.7.2.2-primary-acts-and-archive-coverage",
+      "ref": "audit/p9.0.7.2.2-primary-acts-and-archive-coverage",
+      "repo": {
+        "id": 1388155870,
+        "node_id": "R_kgDOUr2T3g",
+        "name": "reforma-teritoriala",
+        "full_name": "ovidiudeica/reforma-teritoriala",
+        "owner": {
+          "login": "ovidiudeica",
+          "id": 61658017,
+          "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ovidiudeica",
+          "html_url": "https://github.com/ovidiudeica",
+          "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+          "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+          "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+          "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+          "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "private": false,
+        "fork": false,
+        "archived": false,
+        "disabled": false,
+        "description": "Atlas teritorial ACTUAL pentru România și Republica Moldova; ISTORIC și PROPUNERI în roadmap",
+        "homepage": "https://ovidiudeica.github.io/reforma-teritoriala/",
+        "language": "JavaScript",
+        "visibility": "public",
+        "is_template": false,
+        "topics": [],
+        "forks_count": 0,
+        "forks": 0,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "watchers": 0,
+        "open_issues_count": 43,
+        "open_issues": 43,
+        "size": 248674,
+        "default_branch": "main",
+        "has_issues": true,
+        "has_projects": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "has_downloads": false,
+        "has_discussions": false,
+        "has_pull_requests": true,
+        "pushed_at": "2026-10-25T14:01:33Z",
+        "created_at": "2026-09-25T20:26:58Z",
+        "updated_at": "2026-10-25T14:01:35Z",
+        "allow_forking": true,
+        "web_commit_signoff_required": false,
+        "pull_request_creation_policy": "all",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "url": "https://api.github.com/licenses/mit",
+          "spdx_id": "MIT",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala",
+        "archive_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/{archive_format}{/ref}",
+        "assignees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/assignees{/user}",
+        "blobs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/blobs{/sha}",
+        "branches_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/branches{/branch}",
+        "collaborators_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/collaborators{/collaborator}",
+        "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/comments{/number}",
+        "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits{/sha}",
+        "compare_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/compare/{base}...{head}",
+        "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/{+path}",
+        "contributors_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contributors",
+        "deployments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/deployments",
+        "downloads_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/downloads",
+        "events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/events",
+        "forks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/forks",
+        "git_commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits{/sha}",
+        "git_refs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/refs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/tags{/sha}",
+        "git_url": "git://github.com/ovidiudeica/reforma-teritoriala.git",
+        "issue_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/comments{/number}",
+        "issue_events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/events{/number}",
+        "issues_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues{/number}",
+        "keys_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/keys{/key_id}",
+        "labels_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/labels{/name}",
+        "languages_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/languages",
+        "merges_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/merges",
+        "milestones_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/notifications{?since,all,participating}",
+        "pulls_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls{/number}",
+        "releases_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/releases{/id}",
+        "ssh_url": "git@github.com:ovidiudeica/reforma-teritoriala.git",
+        "stargazers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/stargazers",
+        "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/{sha}",
+        "subscribers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscribers",
+        "subscription_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscription",
+        "tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/tags",
+        "teams_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/teams",
+        "trees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees{/sha}",
+        "clone_url": "https://github.com/ovidiudeica/reforma-teritoriala.git",
+        "mirror_url": null,
+        "hooks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/hooks",
+        "svn_url": "https://github.com/ovidiudeica/reforma-teritoriala"
+      },
+      "sha": "a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "user": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    },
+    "base": {
+      "label": "ovidiudeica:audit/p9.0.7.2.1-cross-register-act-reconciliation",
+      "ref": "audit/p9.0.7.2.1-cross-register-act-reconciliation",
+      "repo": {
+        "id": 1388155870,
+        "node_id": "R_kgDOUr2T3g",
+        "name": "reforma-teritoriala",
+        "full_name": "ovidiudeica/reforma-teritoriala",
+        "owner": {
+          "login": "ovidiudeica",
+          "id": 61658017,
+          "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ovidiudeica",
+          "html_url": "https://github.com/ovidiudeica",
+          "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+          "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+          "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+          "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+          "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "private": false,
+        "fork": false,
+        "archived": false,
+        "disabled": false,
+        "description": "Atlas teritorial ACTUAL pentru România și Republica Moldova; ISTORIC și PROPUNERI în roadmap",
+        "homepage": "https://ovidiudeica.github.io/reforma-teritoriala/",
+        "language": "JavaScript",
+        "visibility": "public",
+        "is_template": false,
+        "topics": [],
+        "forks_count": 0,
+        "forks": 0,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "watchers": 0,
+        "open_issues_count": 43,
+        "open_issues": 43,
+        "size": 248674,
+        "default_branch": "main",
+        "has_issues": true,
+        "has_projects": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "has_downloads": false,
+        "has_discussions": false,
+        "has_pull_requests": true,
+        "pushed_at": "2026-10-25T14:01:33Z",
+        "created_at": "2026-09-25T20:26:58Z",
+        "updated_at": "2026-10-25T14:01:35Z",
+        "allow_forking": true,
+        "web_commit_signoff_required": false,
+        "pull_request_creation_policy": "all",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "url": "https://api.github.com/licenses/mit",
+          "spdx_id": "MIT",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala",
+        "archive_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/{archive_format}{/ref}",
+        "assignees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/assignees{/user}",
+        "blobs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/blobs{/sha}",
+        "branches_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/branches{/branch}",
+        "collaborators_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/collaborators{/collaborator}",
+        "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/comments{/number}",
+        "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits{/sha}",
+        "compare_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/compare/{base}...{head}",
+        "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/{+path}",
+        "contributors_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contributors",
+        "deployments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/deployments",
+        "downloads_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/downloads",
+        "events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/events",
+        "forks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/forks",
+        "git_commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits{/sha}",
+        "git_refs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/refs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/tags{/sha}",
+        "git_url": "git://github.com/ovidiudeica/reforma-teritoriala.git",
+        "issue_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/comments{/number}",
+        "issue_events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/events{/number}",
+        "issues_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues{/number}",
+        "keys_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/keys{/key_id}",
+        "labels_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/labels{/name}",
+        "languages_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/languages",
+        "merges_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/merges",
+        "milestones_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/notifications{?since,all,participating}",
+        "pulls_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls{/number}",
+        "releases_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/releases{/id}",
+        "ssh_url": "git@github.com:ovidiudeica/reforma-teritoriala.git",
+        "stargazers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/stargazers",
+        "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/{sha}",
+        "subscribers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscribers",
+        "subscription_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscription",
+        "tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/tags",
+        "teams_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/teams",
+        "trees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees{/sha}",
+        "clone_url": "https://github.com/ovidiudeica/reforma-teritoriala.git",
+        "mirror_url": null,
+        "hooks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/hooks",
+        "svn_url": "https://github.com/ovidiudeica/reforma-teritoriala"
+      },
+      "sha": "cdf56d75eb8b548112940b2a02f2b15475976f13",
+      "user": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    },
+    "_links": {
+      "comments": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/324/comments"
+      },
+      "commits": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/324/commits"
+      },
+      "statuses": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/a04df8a59e48e3b43f84a5a19983819a21a157da"
+      },
+      "html": {
+        "href": "https://github.com/ovidiudeica/reforma-teritoriala/pull/324"
+      },
+      "issue": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/324"
+      },
+      "review_comments": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/324/comments"
+      },
+      "review_comment": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/comments{/number}"
+      },
+      "self": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/324"
+      }
+    },
+    "author_association": "OWNER",
+    "auto_merge": null,
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "rebaseable": true,
+    "mergeable_state": "clean",
+    "merged_by": null,
+    "comments": 1,
+    "review_comments": 0,
+    "maintainer_can_modify": false,
+    "commits": 6,
+    "additions": 1307,
+    "deletions": 0,
+    "changed_files": 3
+  },
+  "files": [
+    {
+      "sha": "c660439319a7218b5f691ab68be7b2a386be23d3",
+      "filename": "docs/p9.0.7.2.2-findings.md",
+      "status": "added",
+      "additions": 46,
+      "deletions": 0,
+      "changes": 46,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/a04df8a59e48e3b43f84a5a19983819a21a157da/docs%2Fp9.0.7.2.2-findings.md",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/a04df8a59e48e3b43f84a5a19983819a21a157da/docs%2Fp9.0.7.2.2-findings.md",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fp9.0.7.2.2-findings.md?ref=a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "patch": "@@ -0,0 +1,46 @@\n+# P9.0.7.2.2 — recuperare primare și reconciliere arhivistică (15.10.2026)\n+\n+**Executat: extindere verificabilă a inventarului și reconciliere individuală 85/85. Nu este demonstrată exhaustivitatea 2023–2026.**\n+\n+## Noul act descoperit\n+- **29.09.2023 — Legea nr. 292-ЗИ-VII**, modificare a legii privind statutul orașului-satelit. Registru oficial al Ministerului Justiției de facto: **publicarea 2023001593**; [fișa actului](https://www.minjust.gospmr.org/oo/Publication.nsf/9306298df912e905c2258221004d4624/78af406fc94b0f85c2258a390049cbdf!OpenDocument). Această lege lipsea din registrul P9.0.7.2.1. Este conexă modificării legii administrației locale nr. 291-ЗИ-VII din aceeași zi și modificării nr. 47-ЗИ-VII din 05.03.2024. **Nu există încă dovadă de transfer individual al vreunei localități.**\n+\n+## Confirmări încrucișate ale publicărilor\n+- 2023-03-24: nr. 48-ЗИ-VII, **2023000445**; nr. 49-ЗИ-VII, **2023000446**, [index Minjust](https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.0).\n+- 2023-09-29: nr. 291-ЗИ-VII, **2023001591**; nr. 292-ЗИ-VII, **2023001593**, [index Minjust](https://www.minjust.gospmr.org/web.nsf/All/publication2!OpenDocument&Start=3.11&Count=200&Expand=4.4).\n+- 2024-03-05: nr. 47-ЗИ-VII, **2024000426**; nr. 48-ЗИ-VII, **2024000427**, [index Minjust](https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=3.10&TableRow=1.0).\n+- 2026-05-29: nr. 114-ЗИД-VIII, **2026000856**, [index Minjust](https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.0). PDF original și SHA-256 au fost fixate în P9.0.7.2. Legea 114 este prospectivă la 15.10.2026.\n+\n+## Verificare primară suplimentară\n+Am recuperat din nou **fișierul oficial al textului de bază** [133267](https://www.vspmr.org/file.xp?file=133267): **194560 bytes**, SHA-256 `cca7a2ce713770b841d45643ba616b7bbdfe4a19bac49a152f560a5de116225f`; pagina autorității îl etichetează drept redacția din 19.03.2022. SHA este calculat din bytes descărcați, dar fișierul nu a fost adăugat încă în Git: nu echivalăm un hash în registru cu o copie versionată în Git.\n+\n+Pentru **celelalte fișiere primare indexate**, accesul la paginile de download ale Ministerului Justiției a eșuat la negocierea TLS din desktop-ul autorizat. De aceea, acestea sunt documentate ca `INDEX_VERIFIED`, însă **nu** ca texte primare SHA-256 certificate. Nu trebuie să inventăm checksums, articole, efecte sau date de intrare în vigoare.\n+\n+## Statut pe ani și pe identitate\n+Registrul [p9.0.7.2.2-primary-archive-coverage.json](p9.0.7.2.2-primary-archive-coverage.json) cuprinde **7 legi** cu categorii de relevanță distincte și **85 de dosare**. Pentru fiecare ID se păstrează numele, tipul de potrivire din 2023, părintele juridic MD, obligativitatea examinării actelor privind orașul-satelit și lipsa certificării apartenenței contemporane; niciun caz nu este promovat. Cele trei acte procedurale CIK rămân în P9.0.7.2.1, distincte de cele șapte legi.\n+\n+Exhaustivitatea registrului oficial pentru 2023, 2024, 2025 și până la 15.10.2026 **NU** este stabilită: nu există un export complet al numerelor gazetei, cu acte individuale SHA-256 verificate, verificare a abrogărilor, publicațiilor locale, diferențelor între `ulpmr.ru` și `ul-test.gospmr.org` și dovada de zero omisiuni. Anul 2025 nu poate fi declarat an fără modificări relevante.\n+\n+## Ce condiționează închiderea\n+1. Recuperarea PDF-urilor autentice 48/49 (2023), 291/292 (2023), 47/48 (2024), plus actele CIK; SHA-256, text, articol și efect temporal.\n+2. Inventar exhaustiv al tuturor publicărilor administrative, inclusiv decizii privind așezări individuale, per an și emitent, verificat independent.\n+3. Analiza per ID asupra denumirilor, rolurilor, părinților revendicați, Lunga/Cremenciug, fără folosirea topologiei OSM ca probă de administrație efectivă.\n+4. Revalidarea CI în condițiile protecției `main`; workflow-urile curente `pull_request: branches: [main]` nu rulează pentru PR-urile stacked.\n+\n+**Gate final:** `complete_normative_chain=false`, `semantic_acceptance=BLOCKED_INCOMPLETE`, `p91_import_allowed=false`. ACTUAL, geometriile, CUATM și candidatul de promovare rămân nemodificate.\n+\n+## Extinderea verificată a registrului, în special 2024 și 2025\n+\n+Căutarea textuală a legii administrației locale a evidențiat acte **suplimentare** față de cele șapte legi „core” anterior inventariate:\n+\n+- 30.05.2024 — **97-ЗД-VII**, [text disponibil](https://pravopmr.ru/views.aspx?id=8TBcBgEMeevb9xul%2FavRsQ%3D%3D): competență instituțională, art. 34.\n+- 22.11.2024 — **276-ЗД-VII**, [text disponibil](https://pravopmr.ru/views.aspx?id=afJgzMS4HmBfzZ4d9wR0tA%3D%3D): completare art. 41 privind evidența bunurilor imobile.\n+- 29.11.2024 — **287-ЗИД-VII**, [text disponibil](https://pravopmr.ru/views.aspx?id=3DdXuhhBUAYH6%2Bet9sDPPw%3D%3D): modificări ale legii administrației locale, de adjudecat la nivel de articol.\n+- 09.06.2025 — **97-ЗИ-VII**, [text disponibil](https://pravopmr.ru/views.aspx?id=mP8sEzxEYMRQeTIpDxSm1w%3D%3D): reformulează art. 32-4 alin. (1) și (2), privind conducerea administrației satului/orașelului.\n+- 18.11.2025 — **223-ЗИ-VII**, [registru oficial](https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.1): modificare a legii administrației locale, fără text primar hash-uit în acest audit.\n+\n+Preambulul unui text legislativ mai recent indică suplimentar **340-ЗИ-VII (26.12.2024)**, **187-ЗИ-VII (19.08.2025)** și **6-ЗД-VIII (29.01.2026)**. Acestea sunt candidați pentru recuperare și confruntare individuală, nu acte ale căror conținut și aplicabilitate au fost certificate aici.\n+\n+**Rectificare a inventarului anterior:** 2025 are cel puțin două modificări ale legii administrației locale identificate în surse publice. Aceasta întărește necesitatea clasificării separate a actelor despre competența instituțională față de actele care mută unități administrative. Niciun text de mai sus nu este folosit pentru a inventa transferul unuia dintre cele 85 de poligoane.\n+\n+SHA-256 pentru textele online din pravopmr nu este încă fixat pe bytes primari de publicare. Ordinea publicării oficiale, datele de intrare în vigoare și efectul per ID trebuie verificate înainte de orice acceptare."
+    },
+    {
+      "sha": "dd1c4f6a2d85db28945ab259a3296b6c275a9c56",
+      "filename": "docs/p9.0.7.2.2-primary-archive-coverage.json",
+      "status": "added",
+      "additions": 1225,
+      "deletions": 0,
+      "changes": 1225,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/a04df8a59e48e3b43f84a5a19983819a21a157da/docs%2Fp9.0.7.2.2-primary-archive-coverage.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/a04df8a59e48e3b43f84a5a19983819a21a157da/docs%2Fp9.0.7.2.2-primary-archive-coverage.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fp9.0.7.2.2-primary-archive-coverage.json?ref=a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "patch": "@@ -0,0 +1,1225 @@\n+{\n+  \"schema_version\": \"p90722-primary-archive-coverage-v1\",\n+  \"asof\": \"2026-10-15\",\n+  \"base_commit\": \"cdf56d75eb8b548112940b2a02f2b15475976f13\",\n+  \"source_2002_law\": {\n+    \"url\": \"https://www.vspmr.org/file.xp?file=133267\",\n+    \"source_label\": \"current wording 2022-03-19\",\n+    \"bytes\": 194560,\n+    \"sha256\": \"cca7a2ce713770b841d45643ba616b7bbdfe4a19bac49a152f560a5de116225f\",\n+    \"archived_in_repo\": false\n+  },\n+  \"acts\": [\n+    {\n+      \"id\": \"PMR-2023-48-ZI-VII\",\n+      \"date\": \"2023-03-24\",\n+      \"official_publication_id\": \"2023000445\",\n+      \"class\": \"DIRECT_FRAMEWORK_AMENDMENT\",\n+      \"official_record_url\": \"https://www.minjust.gospmr.org/oo/Publication.nsf/805c7c76d1c2ddb8c2258213005be80f/4391b9419959e04ac225897c0048c9b2!OpenDocument\",\n+      \"sha256\": null,\n+      \"primary_original_text_verified\": false,\n+      \"identity_specific_impact_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2023-49-ZI-VII\",\n+      \"date\": \"2023-03-24\",\n+      \"official_publication_id\": \"2023000446\",\n+      \"class\": \"RELATED_TOPONYM_LANGUAGE\",\n+      \"official_record_url\": \"https://www.minjust.gospmr.org/oo/Publication.nsf/9306298df912e905c2258221004d4624/67674d72aae2791ac225897c004912f3!OpenDocument\",\n+      \"sha256\": null,\n+      \"primary_original_text_verified\": false,\n+      \"identity_specific_impact_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2023-291-ZI-VII\",\n+      \"date\": \"2023-09-29\",\n+      \"official_publication_id\": \"2023001591\",\n+      \"class\": \"RELATED_LOCAL_GOVERNANCE_COMPETENCE\",\n+      \"official_record_url\": \"https://president.gospmr.org/pravovye-akty/rasporyajenie-prezidenta-pmr-15rp-o-nagrajdenii-gramotoy-prezidenta-pridnestrovskoy-moldavskoy-respubliki-gurjiya-pf-jenarya-ip.html?page=135\",\n+      \"sha256\": null,\n+      \"primary_original_text_verified\": false,\n+      \"identity_specific_impact_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2024-47-ZI-VII\",\n+      \"date\": \"2024-03-05\",\n+      \"official_publication_id\": \"2024000426\",\n+      \"class\": \"RELATED_ADMINISTRATIVE_ROLE\",\n+      \"official_record_url\": \"https://president.gospmr.org/pravovye-akty/rasporyajenie-prezidenta-pmr-15rp-o-nagrajdenii-gramotoy-prezidenta-pridnestrovskoy-moldavskoy-respubliki-gurjiya-pf-jenarya-ip.html?page=113\",\n+      \"sha256\": null,\n+      \"primary_original_text_verified\": false,\n+      \"identity_specific_impact_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2024-48-ZI-VII\",\n+      \"date\": \"2024-03-05\",\n+      \"official_publication_id\": \"2024000427\",\n+      \"class\": \"RELATED_LOCAL_GOVERNANCE_COMPETENCE\",\n+      \"official_record_url\": \"https://president.gospmr.org/pravovye-akty/rasporyajenie-prezidenta-pmr-15rp-o-nagrajdenii-gramotoy-prezidenta-pridnestrovskoy-moldavskoy-respubliki-gurjiya-pf-jenarya-ip.html?page=113\",\n+      \"sha256\": null,\n+      \"primary_original_text_verified\": false,\n+      \"identity_specific_impact_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2026-114-ZID-VIII\",\n+      \"date\": \"2026-05-29\",\n+      \"official_publication_id\": \"2026000856\",\n+      \"class\": \"DIRECT_FRAMEWORK_AMENDMENT_PROSPECTIVE_AT_AUDIT\",\n+      \"official_record_url\": \"https://president.gospmr.org/pravovye-akty/zakoni/?page=7\",\n+      \"sha256\": \"c9d05f579677f176007bd6987bf11031c986299e180d9e98577715f7cb1cc566\",\n+      \"primary_original_text_verified\": true,\n+      \"identity_specific_impact_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2023-292-ZI-VII\",\n+      \"date\": \"2023-09-29\",\n+      \"official_publication_id\": \"2023001593\",\n+      \"class\": \"RELATED_SATELLITE_CITY_STATUS\",\n+      \"official_record_url\": \"https://www.minjust.gospmr.org/oo/Publication.nsf/9306298df912e905c2258221004d4624/78af406fc94b0f85c2258a390049cbdf!OpenDocument\",\n+      \"sha256\": null,\n+      \"primary_original_text_verified\": false,\n+      \"identity_specific_impact_certified\": false\n+    }\n+  ],\n+  \"yearly_completeness\": [\n+    {\n+      \"year\": 2023,\n+      \"official_gazette_complete\": false,\n+      \"all_acts_identified\": false,\n+      \"primary_pdf_sha256_complete\": false,\n+      \"all_effective_dates_verified\": false,\n+      \"all_85_impact_verified\": false\n+    },\n+    {\n+      \"year\": 2024,\n+      \"official_gazette_complete\": false,\n+      \"all_acts_identified\": false,\n+      \"primary_pdf_sha256_complete\": false,\n+      \"all_effective_dates_verified\": false,\n+      \"all_85_impact_verified\": false\n+    },\n+    {\n+      \"year\": 2025,\n+      \"official_gazette_complete\": false,\n+      \"all_acts_identified\": false,\n+      \"primary_pdf_sha256_complete\": false,\n+      \"all_effective_dates_verified\": false,\n+      \"all_85_impact_verified\": false,\n+      \"official_publication_register_index_checked_partially\": true\n+    },\n+    {\n+      \"year\": 2026,\n+      \"official_gazette_complete\": false,\n+      \"all_acts_identified\": false,\n+      \"primary_pdf_sha256_complete\": false,\n+      \"all_effective_dates_verified\": false,\n+      \"all_85_impact_verified\": false\n+    }\n+  ],\n+  \"archive_blockers\": [\n+    \"Ministry of Justice individual-act download fails TLS negotiation; official publication index readable\",\n+    \"ulpmr old vs ul-test new legislative archive no complete dated inventory\",\n+    \"2025 absence of relevant amendment acts not demonstrated\",\n+    \"2024 and 2025 local-government amendment texts and official listings now known beyond seven core laws; primary SHA-256 and identity-level impacts unverified\"\n+  ],\n+  \"additional_official_evidence\": {\n+    \"new_law\": \"PMR-2023-292-ZI-VII\",\n+    \"publication_id\": \"2023001593\",\n+    \"year2024_laws\": {\n+      \"PMR-2024-47-ZI-VII\": \"2024000426\",\n+      \"PMR-2024-48-ZI-VII\": \"2024000427\"\n+    },\n+    \"year2023_local_government\": \"2023001591\"\n+  },\n+  \"rows\": [\n+    {\n+      \"actual_id\": \"osm-r1216706\",\n+      \"name_ro\": \"Cremenciug\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r12215667\",\n+      \"name_ro\": \"Gîsca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r12463378\",\n+      \"name_ro\": \"Proteagailovca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r12463379\",\n+      \"name_ro\": \"Bender\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r18941889\",\n+      \"name_ro\": \"Tiraspolul Nou\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r18941890\",\n+      \"name_ro\": \"Tiraspol\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19001619\",\n+      \"name_ro\": \"Lunga\",\n+      \"baseline_match_type\": \"NO_EXACT_2023_NAME\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19012105\",\n+      \"name_ro\": \"Țîbuleuca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19013328\",\n+      \"name_ro\": \"Goian\",\n+      \"baseline_match_type\": \"CURATED_ALIAS_POTENTIAL_MATCH\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_ANNEX_2_COMPATIBILITY_BINDING\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19013329\",\n+      \"name_ro\": \"Doibani I\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015106\",\n+      \"name_ro\": \"Cuzmin\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015107\",\n+      \"name_ro\": \"Hristovaia\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015108\",\n+      \"name_ro\": \"Severinovca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015109\",\n+      \"name_ro\": \"Crasnîi Octeabri\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015110\",\n+      \"name_ro\": \"Camenca\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015111\",\n+      \"name_ro\": \"Podoima\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015112\",\n+      \"name_ro\": \"Rotari\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015113\",\n+      \"name_ro\": \"Valea Adîncă\",\n+      \"baseline_match_type\": \"CURATED_ALIAS_POTENTIAL_MATCH\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_ANNEX_2_COMPATIBILITY_BINDING\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015114\",\n+      \"name_ro\": \"Rașcov\",\n+      \"baseline_match_type\": \"CURATED_ALIAS_POTENTIAL_MATCH\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_ANNEX_2_COMPATIBILITY_BINDING\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015115\",\n+      \"name_ro\": \"Caterinovca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015284\",\n+      \"name_ro\": \"Vadul Turcului\",\n+      \"baseline_match_type\": \"CURATED_ALIAS_POTENTIAL_MATCH\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_ANNEX_2_COMPATIBILITY_BINDING\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015285\",\n+      \"name_ro\": \"Beloci\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015286\",\n+      \"name_ro\": \"Plopi\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015287\",\n+      \"name_ro\": \"Sovietscoe\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19015304\",\n+      \"name_ro\": \"Stroiești\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19016165\",\n+      \"name_ro\": \"Andreevca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19016166\",\n+      \"name_ro\": \"Ulmu\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19016167\",\n+      \"name_ro\": \"Vărăncău\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r19069840\",\n+      \"name_ro\": \"Delacău\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r6879649\",\n+      \"name_ro\": \"Chițcani\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7427669\",\n+      \"name_ro\": \"Vladimirovca\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7427680\",\n+      \"name_ro\": \"Frunză\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7431238\",\n+      \"name_ro\": \"Bîcioc\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7431263\",\n+      \"name_ro\": \"Parcani\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7432661\",\n+      \"name_ro\": \"Crasnogorca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7432662\",\n+      \"name_ro\": \"Teiu\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7432700\",\n+      \"name_ro\": \"Vinogradnoe\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7468724\",\n+      \"name_ro\": \"Blijnii Hutor\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r7468791\",\n+      \"name_ro\": \"Sucleia\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8289594\",\n+      \"name_ro\": \"Caragaș\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8289727\",\n+      \"name_ro\": \"Cioburciu\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8289751\",\n+      \"name_ro\": \"Slobozia\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8290840\",\n+      \"name_ro\": \"Dnestrovsc\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8290877\",\n+      \"name_ro\": \"Pervomaisc\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8290934\",\n+      \"name_ro\": \"Nezavertailovca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8291057\",\n+      \"name_ro\": \"Corotna\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8291058\",\n+      \"name_ro\": \"Hlinaia\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8292878\",\n+      \"name_ro\": \"Tîrnauca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8292891\",\n+      \"name_ro\": \"Mălăiești\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8292898\",\n+      \"name_ro\": \"Hrușca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8292909\",\n+      \"name_ro\": \"Ocnița\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8348605\",\n+      \"name_ro\": \"Tașlîc\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8348625\",\n+      \"name_ro\": \"Butor\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8348646\",\n+      \"name_ro\": \"Speia\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8348909\",\n+      \"name_ro\": \"Mihailovca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8348920\",\n+      \"name_ro\": \"Harmațca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8349002\",\n+      \"name_ro\": \"Dubău\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8349059\",\n+      \"name_ro\": \"Lenin\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8349093\",\n+      \"name_ro\": \"Butuceni\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8349094\",\n+      \"name_ro\": \"Jura\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8349307\",\n+      \"name_ro\": \"Mocra\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8349338\",\n+      \"name_ro\": \"Popencu\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8539257\",\n+      \"name_ro\": \"Maiac\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8539525\",\n+      \"name_ro\": \"Colosova\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8688504\",\n+      \"name_ro\": \"Broșteni\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8710724\",\n+      \"name_ro\": \"Slobozia-Rașcov\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r8726395\",\n+      \"name_ro\": \"Șipca\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9288026\",\n+      \"name_ro\": \"Carmanova\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9288110\",\n+      \"name_ro\": \"Hîrtop\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9288158\",\n+      \"name_ro\": \"Dzerjinscoe\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9288287\",\n+      \"name_ro\": \"Dubăsari\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9288722\",\n+      \"name_ro\": \"Comisarovca Nouă\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9288756\",\n+      \"name_ro\": \"Crasnîi Vinogradari\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9294122\",\n+      \"name_ro\": \"Ghidirim\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9301463\",\n+      \"name_ro\": \"Hlinaia\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9301464\",\n+      \"name_ro\": \"Grigoriopol\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9581354\",\n+      \"name_ro\": \"Bender\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9656324\",\n+      \"name_ro\": \"Haraba\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9656364\",\n+      \"name_ro\": \"Crasnencoe\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9656413\",\n+      \"name_ro\": \"Molochișul Mare\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9659709\",\n+      \"name_ro\": \"Cobasna\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9659794\",\n+      \"name_ro\": \"Hîrjău\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9659979\",\n+      \"name_ro\": \"Rîbnița\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9660049\",\n+      \"name_ro\": \"Ofatinți\",\n+      \"baseline_match_type\": \"UNIQUE_NAME_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"NO_INDIVIDUAL_STATUS_CERTIFICATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    },\n+    {\n+      \"actual_id\": \"osm-r9679382\",\n+      \"name_ro\": \"Crasnoe\",\n+      \"baseline_match_type\": \"HOMONYM_MULTIPLE_ENTRIES_2023\",\n+      \"legal_md_parent_preserved\": true,\n+      \"case_type\": \"REQUIRE_DISTRICT_AND_ROLE_DISAMBIGUATION\",\n+      \"satellite_city_amendments_checked_for_name_and_parent\": false,\n+      \"certified_2023_2026_administrative_parent\": false,\n+      \"certified_full_polygon_control\": false,\n+      \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+      \"p91_import_allowed\": false\n+    }\n+  ],\n+  \"scope_count\": 85,\n+  \"certified_individual_parent_changes\": 0,\n+  \"complete_normative_chain\": false,\n+  \"semantic_acceptance\": \"BLOCKED_INCOMPLETE\",\n+  \"p91_import_allowed\": false,\n+  \"supplemental_local_government_act_leads\": [\n+    {\n+      \"id\": \"PMR-2024-97-ZD-VII\",\n+      \"date\": \"2024-05-30\",\n+      \"target\": \"local government law\",\n+      \"text_url\": \"https://pravopmr.ru/views.aspx?id=8TBcBgEMeevb9xul%2FavRsQ%3D%3D\",\n+      \"evidence\": \"PUBLIC_LEGISLATIVE_TEXT_AVAILABLE\",\n+      \"affected_provision\": \"art.34 additional administrative competence\",\n+      \"individual_jurisdiction_change_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2024-276-ZD-VII\",\n+      \"date\": \"2024-11-22\",\n+      \"target\": \"local government law\",\n+      \"text_url\": \"https://pravopmr.ru/views.aspx?id=afJgzMS4HmBfzZ4d9wR0tA%3D%3D\",\n+      \"evidence\": \"PUBLIC_LEGISLATIVE_TEXT_AVAILABLE\",\n+      \"affected_provision\": \"art.41 add 15-2 property inventory administrative competence\",\n+      \"individual_jurisdiction_change_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2024-287-ZID-VII\",\n+      \"date\": \"2024-11-29\",\n+      \"target\": \"local government law\",\n+      \"text_url\": \"https://pravopmr.ru/views.aspx?id=3DdXuhhBUAYH6%2Bet9sDPPw%3D%3D\",\n+      \"evidence\": \"PUBLIC_LEGISLATIVE_TEXT_AVAILABLE\",\n+      \"affected_provision\": \"see full text for exact amendment, no identity transfer presumed\",\n+      \"individual_jurisdiction_change_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2025-97-ZI-VII\",\n+      \"date\": \"2025-06-09\",\n+      \"target\": \"local government law\",\n+      \"text_url\": \"https://pravopmr.ru/views.aspx?id=mP8sEzxEYMRQeTIpDxSm1w%3D%3D\",\n+      \"evidence\": \"PUBLIC_LEGISLATIVE_TEXT_AVAILABLE\",\n+      \"affected_provision\": \"art.32-4 (1)(2) local village/settlement administrator role\",\n+      \"individual_jurisdiction_change_certified\": false\n+    },\n+    {\n+      \"id\": \"PMR-2025-223-ZI-VII\",\n+      \"date\": \"2025-11-18\",\n+      \"target\": \"local government law\",\n+      \"text_url\": \"https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.1\",\n+      \"evidence\": \"OFFICIAL_PUBLICATION_INDEX_ONLY\",\n+      \"affected_provision\": null,\n+      \"individual_jurisdiction_change_certified\": false\n+    }\n+  ],\n+  \"further_amendment_candidates\": [\n+    {\n+      \"id\": \"PMR-2024-340-ZI-VII\",\n+      \"date\": \"2024-12-26\",\n+      \"evidence\": \"cited in law's preamble, separate authenticated copy pending\"\n+    },\n+    {\n+      \"id\": \"PMR-2025-187-ZI-VII\",\n+      \"date\": \"2025-08-19\",\n+      \"evidence\": \"cited in later legislative preamble, separate authenticated copy pending\"\n+    },\n+    {\n+      \"id\": \"PMR-2026-6-ZD-VIII\",\n+      \"date\": \"2026-01-29\",\n+      \"evidence\": \"cited in 2026 legislative preamble, separate authenticated copy pending\"\n+    }\n+  ]\n+}"
+    },
+    {
+      "sha": "e4f18998b3a12b3b24c53a055a6c13551bc9bd35",
+      "filename": "docs/p9.0.7.2.2-validate.mjs",
+      "status": "added",
+      "additions": 36,
+      "deletions": 0,
+      "changes": 36,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/a04df8a59e48e3b43f84a5a19983819a21a157da/docs%2Fp9.0.7.2.2-validate.mjs",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/a04df8a59e48e3b43f84a5a19983819a21a157da/docs%2Fp9.0.7.2.2-validate.mjs",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fp9.0.7.2.2-validate.mjs?ref=a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "patch": "@@ -0,0 +1,36 @@\n+import assert from 'node:assert/strict';\n+import { readFileSync } from 'node:fs';\n+const read=p=>JSON.parse(readFileSync(p,'utf8'));\n+const x=read('docs/p9.0.7.2.2-primary-archive-coverage.json');\n+const prior=read('docs/p9.0.7.2.1-cross-register-ledger.json');\n+const policy=read('docs/p9.0.4.3-promotion-policy.json');\n+assert.equal(x.scope_count,85);\n+assert.equal(x.rows.length,85);\n+assert.equal(new Set(x.rows.map(r=>r.actual_id)).size,85);\n+assert.deepEqual(x.rows.map(r=>r.actual_id).sort(),prior.rows.map(r=>r.actual_id).sort());\n+assert.equal(x.acts.length,7);\n+assert.equal(x.supplemental_local_government_act_leads.length,5);\n+assert.equal(x.further_amendment_candidates.length,3);\n+assert(x.supplemental_local_government_act_leads.some(a=>a.id==='PMR-2025-97-ZI-VII'));\n+assert(x.supplemental_local_government_act_leads.some(a=>a.id==='PMR-2025-223-ZI-VII'));\n+assert(x.supplemental_local_government_act_leads.every(a=>a.individual_jurisdiction_change_certified===false));\n+assert.equal(new Set(x.acts.map(a=>a.id)).size,7);\n+const newAct=x.acts.find(a=>a.id==='PMR-2023-292-ZI-VII');\n+assert.equal(newAct.official_publication_id,'2023001593');\n+assert.equal(newAct.primary_original_text_verified,false);\n+assert.equal(newAct.identity_specific_impact_certified,false);\n+assert.equal(x.acts.find(a=>a.id==='PMR-2023-291-ZI-VII').official_publication_id,'2023001591');\n+assert.equal(x.acts.find(a=>a.id==='PMR-2024-47-ZI-VII').official_publication_id,'2024000426');\n+assert.equal(x.acts.find(a=>a.id==='PMR-2024-48-ZI-VII').official_publication_id,'2024000427');\n+assert.equal(x.source_2002_law.sha256,'cca7a2ce713770b841d45643ba616b7bbdfe4a19bac49a152f560a5de116225f');\n+assert.equal(x.source_2002_law.archived_in_repo,false);\n+assert.deepEqual(x.yearly_completeness.map(y=>y.year),[2023,2024,2025,2026]);\n+assert(x.yearly_completeness.every(y=>!y.official_gazette_complete&&!y.all_acts_identified&&!y.primary_pdf_sha256_complete&&!y.all_effective_dates_verified&&!y.all_85_impact_verified));\n+assert(x.rows.every(r=>r.legal_md_parent_preserved && !r.satellite_city_amendments_checked_for_name_and_parent&&!r.certified_2023_2026_administrative_parent&&!r.certified_full_polygon_control&&r.semantic_acceptance==='BLOCKED_INCOMPLETE'&&r.p91_import_allowed===false));\n+assert.equal(x.certified_individual_parent_changes,0);\n+assert.equal(x.complete_normative_chain,false);\n+assert.equal(x.semantic_acceptance,'BLOCKED_INCOMPLETE');\n+assert.equal(x.p91_import_allowed,false);\n+assert.equal(policy.semantic_acceptance,'BLOCKED_INCOMPLETE');\n+assert.equal(policy.p91_import_allowed,false);\n+console.log('P90722_PRIMARY_ARCHIVE_FAIL_CLOSED_PASS: 7 official law entries, 85 identities, 4 incomplete yearly inventories, P9.1 DENIED');"
+    }
+  ],
+  "checks": [
+    {
+      "total_count": 0,
+      "check_runs": []
+    }
+  ],
+  "commits": [
+    {
+      "sha": "031d5d327aa5be10534b6cc0d5bf2482f9d16726",
+      "node_id": "C_kwDOUr2T3toAKDAzMWQ1ZDMyN2FhNWJlMTA1MzRiNmNjMGQ1YmYyNDgyZjlkMTY3MjY",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:04:20Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:04:20Z"
+        },
+        "message": "P9.0.7.2.2: record seventh official act and annual fail-closed primary archive coverage",
+        "tree": {
+          "sha": "5486e66a0fa01f0e57f3f735d39990432936c199",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/5486e66a0fa01f0e57f3f735d39990432936c199"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/031d5d327aa5be10534b6cc0d5bf2482f9d16726",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/031d5d327aa5be10534b6cc0d5bf2482f9d16726",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/031d5d327aa5be10534b6cc0d5bf2482f9d16726",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/031d5d327aa5be10534b6cc0d5bf2482f9d16726/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "cdf56d75eb8b548112940b2a02f2b15475976f13",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/cdf56d75eb8b548112940b2a02f2b15475976f13",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/cdf56d75eb8b548112940b2a02f2b15475976f13"
+        }
+      ]
+    },
+    {
+      "sha": "cac2a94e0dd8b5e5fa60fca96d1e4e04aed17222",
+      "node_id": "C_kwDOUr2T3toAKGNhYzJhOTRlMGRkOGI1ZTVmYTYwZmNhOTZkMWU0ZTA0YWVkMTcyMjI",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:04:46Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:04:46Z"
+        },
+        "message": "P9.0.7.2.2: document seventh law, primary checksums and honest archival blockers",
+        "tree": {
+          "sha": "a3be90a5fcc6823b26767ebdada5524149ced139",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/a3be90a5fcc6823b26767ebdada5524149ced139"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/cac2a94e0dd8b5e5fa60fca96d1e4e04aed17222",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/cac2a94e0dd8b5e5fa60fca96d1e4e04aed17222",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/cac2a94e0dd8b5e5fa60fca96d1e4e04aed17222",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/cac2a94e0dd8b5e5fa60fca96d1e4e04aed17222/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "031d5d327aa5be10534b6cc0d5bf2482f9d16726",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/031d5d327aa5be10534b6cc0d5bf2482f9d16726",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/031d5d327aa5be10534b6cc0d5bf2482f9d16726"
+        }
+      ]
+    },
+    {
+      "sha": "35cb44395f14dc72ce55dc7aed08a187a0d109fe",
+      "node_id": "C_kwDOUr2T3toAKDM1Y2I0NDM5NWYxNGRjNzJjZTU1ZGM3YWVkMDhhMTg3YTBkMTA5ZmU",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:04:59Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:04:59Z"
+        },
+        "message": "P9.0.7.2.2: enforce seventh-act evidence and 85-case fail-closed baseline",
+        "tree": {
+          "sha": "477a06aad052f880535cae7b47ccb4a0f7a84da4",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/477a06aad052f880535cae7b47ccb4a0f7a84da4"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/35cb44395f14dc72ce55dc7aed08a187a0d109fe",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/35cb44395f14dc72ce55dc7aed08a187a0d109fe",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/35cb44395f14dc72ce55dc7aed08a187a0d109fe",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/35cb44395f14dc72ce55dc7aed08a187a0d109fe/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "cac2a94e0dd8b5e5fa60fca96d1e4e04aed17222",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/cac2a94e0dd8b5e5fa60fca96d1e4e04aed17222",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/cac2a94e0dd8b5e5fa60fca96d1e4e04aed17222"
+        }
+      ]
+    },
+    {
+      "sha": "75d68f32c8abb713fd818b22c2df38ff9aef2c4d",
+      "node_id": "C_kwDOUr2T3toAKDc1ZDY4ZjMyYzhhYmI3MTNmZDgxOGIyMmMyZGYzOGZmOWFlZjJjNGQ",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:06:19Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:06:19Z"
+        },
+        "message": "P9.0.7.2.2: identify verified 2024/2025 local-government amendments and later candidates",
+        "tree": {
+          "sha": "5e48a28025228f5e59953ce4d555ea72e9d82361",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/5e48a28025228f5e59953ce4d555ea72e9d82361"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/75d68f32c8abb713fd818b22c2df38ff9aef2c4d",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/75d68f32c8abb713fd818b22c2df38ff9aef2c4d",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/75d68f32c8abb713fd818b22c2df38ff9aef2c4d",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/75d68f32c8abb713fd818b22c2df38ff9aef2c4d/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "35cb44395f14dc72ce55dc7aed08a187a0d109fe",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/35cb44395f14dc72ce55dc7aed08a187a0d109fe",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/35cb44395f14dc72ce55dc7aed08a187a0d109fe"
+        }
+      ]
+    },
+    {
+      "sha": "f0d39c71fd24c60fcc17b018734b45c57669a9ab",
+      "node_id": "C_kwDOUr2T3toAKGYwZDM5YzcxZmQyNGM2MGZjYzE3YjAxODczNGI0NWM1NzY2OWE5YWI",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:06:37Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:06:37Z"
+        },
+        "message": "P9.0.7.2.2: document additional 2024–2026 amendments and 2025 correction",
+        "tree": {
+          "sha": "cb6e136b847c633c0c72b0d20b31d935873855c2",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/cb6e136b847c633c0c72b0d20b31d935873855c2"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/f0d39c71fd24c60fcc17b018734b45c57669a9ab",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/f0d39c71fd24c60fcc17b018734b45c57669a9ab",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/f0d39c71fd24c60fcc17b018734b45c57669a9ab",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/f0d39c71fd24c60fcc17b018734b45c57669a9ab/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "75d68f32c8abb713fd818b22c2df38ff9aef2c4d",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/75d68f32c8abb713fd818b22c2df38ff9aef2c4d",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/75d68f32c8abb713fd818b22c2df38ff9aef2c4d"
+        }
+      ]
+    },
+    {
+      "sha": "a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "node_id": "C_kwDOUr2T3toAKGEwNGRmOGE1OWU0OGUzYjQzZjg0YTVhMTk5ODM4MTlhMjFhMTU3ZGE",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:06:47Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-15T19:06:47Z"
+        },
+        "message": "P9.0.7.2.2: enforce 2024–2026 additional-act leads without premature certification",
+        "tree": {
+          "sha": "0a21193039f4f7831769355acb454c8d990853c5",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/0a21193039f4f7831769355acb454c8d990853c5"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/a04df8a59e48e3b43f84a5a19983819a21a157da",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/a04df8a59e48e3b43f84a5a19983819a21a157da",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/a04df8a59e48e3b43f84a5a19983819a21a157da/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "f0d39c71fd24c60fcc17b018734b45c57669a9ab",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/f0d39c71fd24c60fcc17b018734b45c57669a9ab",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/f0d39c71fd24c60fcc17b018734b45c57669a9ab"
+        }
+      ]
+    }
+  ],
+  "file_comparison": [
+    {
+      "path": "docs/p9.0.7.2.2-findings.md",
+      "status": "added",
+      "head_blob": "c660439319a7218b5f691ab68be7b2a386be23d3",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/p9.0.7.2.2-primary-archive-coverage.json",
+      "status": "added",
+      "head_blob": "dd1c4f6a2d85db28945ab259a3296b6c275a9c56",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/p9.0.7.2.2-validate.mjs",
+      "status": "added",
+      "head_blob": "e4f18998b3a12b3b24c53a055a6c13551bc9bd35",
+      "main_blob": null,
+      "identical_main": false
+    }
+  ]
+}

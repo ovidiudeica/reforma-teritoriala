@@ -1,0 +1,883 @@
+{
+  "number": 432,
+  "detail": {
+    "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/432",
+    "id": 4994785304,
+    "node_id": "PR_kwDOUr2T3s8AAAABKbZgGA",
+    "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/432",
+    "diff_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/432.diff",
+    "patch_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/432.patch",
+    "issue_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/432",
+    "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/432/commits",
+    "review_comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/432/comments",
+    "review_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/comments{/number}",
+    "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/432/comments",
+    "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/a229030b08e72f99e747949757040c3168cd4fc7",
+    "number": 432,
+    "state": "open",
+    "locked": false,
+    "title": "NI-ADM.1.1: replay 9.275 titluri, 19 publicații târzii și registre locale (read-only)",
+    "user": {
+      "login": "ovidiudeica",
+      "id": 61658017,
+      "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ovidiudeica",
+      "html_url": "https://github.com/ovidiudeica",
+      "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+      "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+      "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+      "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+      "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "**PR stacked peste NI-ADM.1 #430, care depinde de NI-ADM.0 #428.** Exclusiv dovezi/audit în `docs/evidence/ni-adm11-20261024/`.\n\nRecitit și decomprimat registrul central original `census.json.gz`: 9.275/9.275 titluri cu identificatori anuali unici și continui. 57 candidați prin regex-uri reproductibile, 3 mențiuni ale legii ATU (48/2023 și 114/2026 direct, 49/2023 conex); 20 mențiuni legea administrației locale. Cele 19 titluri 2026001748..2026001766 observate în sursele indexului oficial, fără amendament direct ATU în titlu; 2026001751 este doar o **opinie pe proiect**, nu lege nouă.\n\nInventar surse: directorul oficial a șapte consilii, 13 legături spre consilii sătești Grigoriopol + Maiac, consiliile Gîsca și Proteagailovca vizibile în Bender. **Nu sunt certificate toate actele primare locale sau amendamentele cu efect indirect.** \n\n`PASS_FULL_9275_CENTRAL_TITLE_REPLAY_ONLY` / `CURRENT_NORMATIVE_EXHAUSTIVENESS_BLOCKED`. `P9.1=BLOCKED`, ACTUAL/MD legal/OSM/website neschimbate. Nu integrați fără acceptare documentară completă și verificarea CI pe SHA exact.",
+    "labels": [],
+    "milestone": null,
+    "active_lock_reason": null,
+    "created_at": "2026-10-24T10:56:07Z",
+    "updated_at": "2026-10-24T10:56:07Z",
+    "closed_at": null,
+    "merged_at": null,
+    "merge_commit_sha": "c58fa2c408a163a2c4ee124eb34f8cd5453040cd",
+    "assignee": null,
+    "assignees": [],
+    "requested_reviewers": [],
+    "requested_teams": [],
+    "head": {
+      "label": "ovidiudeica:audit/ni-adm11-20261024-exhaustive-title-screen",
+      "ref": "audit/ni-adm11-20261024-exhaustive-title-screen",
+      "repo": {
+        "id": 1388155870,
+        "node_id": "R_kgDOUr2T3g",
+        "name": "reforma-teritoriala",
+        "full_name": "ovidiudeica/reforma-teritoriala",
+        "owner": {
+          "login": "ovidiudeica",
+          "id": 61658017,
+          "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ovidiudeica",
+          "html_url": "https://github.com/ovidiudeica",
+          "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+          "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+          "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+          "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+          "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "private": false,
+        "fork": false,
+        "archived": false,
+        "disabled": false,
+        "description": "Atlas teritorial ACTUAL pentru România și Republica Moldova; ISTORIC și PROPUNERI în roadmap",
+        "homepage": "https://ovidiudeica.github.io/reforma-teritoriala/",
+        "language": "JavaScript",
+        "visibility": "public",
+        "is_template": false,
+        "topics": [],
+        "forks_count": 0,
+        "forks": 0,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "watchers": 0,
+        "open_issues_count": 43,
+        "open_issues": 43,
+        "size": 248674,
+        "default_branch": "main",
+        "has_issues": true,
+        "has_projects": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "has_downloads": false,
+        "has_discussions": false,
+        "has_pull_requests": true,
+        "pushed_at": "2026-10-25T14:01:33Z",
+        "created_at": "2026-09-25T20:26:58Z",
+        "updated_at": "2026-10-25T14:01:35Z",
+        "allow_forking": true,
+        "web_commit_signoff_required": false,
+        "pull_request_creation_policy": "all",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "url": "https://api.github.com/licenses/mit",
+          "spdx_id": "MIT",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala",
+        "archive_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/{archive_format}{/ref}",
+        "assignees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/assignees{/user}",
+        "blobs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/blobs{/sha}",
+        "branches_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/branches{/branch}",
+        "collaborators_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/collaborators{/collaborator}",
+        "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/comments{/number}",
+        "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits{/sha}",
+        "compare_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/compare/{base}...{head}",
+        "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/{+path}",
+        "contributors_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contributors",
+        "deployments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/deployments",
+        "downloads_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/downloads",
+        "events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/events",
+        "forks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/forks",
+        "git_commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits{/sha}",
+        "git_refs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/refs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/tags{/sha}",
+        "git_url": "git://github.com/ovidiudeica/reforma-teritoriala.git",
+        "issue_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/comments{/number}",
+        "issue_events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/events{/number}",
+        "issues_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues{/number}",
+        "keys_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/keys{/key_id}",
+        "labels_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/labels{/name}",
+        "languages_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/languages",
+        "merges_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/merges",
+        "milestones_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/notifications{?since,all,participating}",
+        "pulls_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls{/number}",
+        "releases_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/releases{/id}",
+        "ssh_url": "git@github.com:ovidiudeica/reforma-teritoriala.git",
+        "stargazers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/stargazers",
+        "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/{sha}",
+        "subscribers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscribers",
+        "subscription_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscription",
+        "tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/tags",
+        "teams_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/teams",
+        "trees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees{/sha}",
+        "clone_url": "https://github.com/ovidiudeica/reforma-teritoriala.git",
+        "mirror_url": null,
+        "hooks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/hooks",
+        "svn_url": "https://github.com/ovidiudeica/reforma-teritoriala"
+      },
+      "sha": "a229030b08e72f99e747949757040c3168cd4fc7",
+      "user": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    },
+    "base": {
+      "label": "ovidiudeica:audit/ni-adm1-20261024-applicability",
+      "ref": "audit/ni-adm1-20261024-applicability",
+      "repo": {
+        "id": 1388155870,
+        "node_id": "R_kgDOUr2T3g",
+        "name": "reforma-teritoriala",
+        "full_name": "ovidiudeica/reforma-teritoriala",
+        "owner": {
+          "login": "ovidiudeica",
+          "id": 61658017,
+          "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ovidiudeica",
+          "html_url": "https://github.com/ovidiudeica",
+          "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+          "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+          "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+          "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+          "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "private": false,
+        "fork": false,
+        "archived": false,
+        "disabled": false,
+        "description": "Atlas teritorial ACTUAL pentru România și Republica Moldova; ISTORIC și PROPUNERI în roadmap",
+        "homepage": "https://ovidiudeica.github.io/reforma-teritoriala/",
+        "language": "JavaScript",
+        "visibility": "public",
+        "is_template": false,
+        "topics": [],
+        "forks_count": 0,
+        "forks": 0,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "watchers": 0,
+        "open_issues_count": 43,
+        "open_issues": 43,
+        "size": 248674,
+        "default_branch": "main",
+        "has_issues": true,
+        "has_projects": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "has_downloads": false,
+        "has_discussions": false,
+        "has_pull_requests": true,
+        "pushed_at": "2026-10-25T14:01:33Z",
+        "created_at": "2026-09-25T20:26:58Z",
+        "updated_at": "2026-10-25T14:01:35Z",
+        "allow_forking": true,
+        "web_commit_signoff_required": false,
+        "pull_request_creation_policy": "all",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "url": "https://api.github.com/licenses/mit",
+          "spdx_id": "MIT",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala",
+        "archive_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/{archive_format}{/ref}",
+        "assignees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/assignees{/user}",
+        "blobs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/blobs{/sha}",
+        "branches_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/branches{/branch}",
+        "collaborators_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/collaborators{/collaborator}",
+        "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/comments{/number}",
+        "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits{/sha}",
+        "compare_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/compare/{base}...{head}",
+        "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/{+path}",
+        "contributors_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contributors",
+        "deployments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/deployments",
+        "downloads_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/downloads",
+        "events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/events",
+        "forks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/forks",
+        "git_commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits{/sha}",
+        "git_refs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/refs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/tags{/sha}",
+        "git_url": "git://github.com/ovidiudeica/reforma-teritoriala.git",
+        "issue_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/comments{/number}",
+        "issue_events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/events{/number}",
+        "issues_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues{/number}",
+        "keys_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/keys{/key_id}",
+        "labels_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/labels{/name}",
+        "languages_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/languages",
+        "merges_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/merges",
+        "milestones_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/notifications{?since,all,participating}",
+        "pulls_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls{/number}",
+        "releases_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/releases{/id}",
+        "ssh_url": "git@github.com:ovidiudeica/reforma-teritoriala.git",
+        "stargazers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/stargazers",
+        "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/{sha}",
+        "subscribers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscribers",
+        "subscription_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscription",
+        "tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/tags",
+        "teams_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/teams",
+        "trees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees{/sha}",
+        "clone_url": "https://github.com/ovidiudeica/reforma-teritoriala.git",
+        "mirror_url": null,
+        "hooks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/hooks",
+        "svn_url": "https://github.com/ovidiudeica/reforma-teritoriala"
+      },
+      "sha": "23260e7c8300173092cf20d704b593f7da09fab3",
+      "user": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    },
+    "_links": {
+      "comments": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/432/comments"
+      },
+      "commits": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/432/commits"
+      },
+      "statuses": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/a229030b08e72f99e747949757040c3168cd4fc7"
+      },
+      "html": {
+        "href": "https://github.com/ovidiudeica/reforma-teritoriala/pull/432"
+      },
+      "issue": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/432"
+      },
+      "review_comments": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/432/comments"
+      },
+      "review_comment": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/comments{/number}"
+      },
+      "self": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/432"
+      }
+    },
+    "author_association": "OWNER",
+    "auto_merge": null,
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "rebaseable": true,
+    "mergeable_state": "clean",
+    "merged_by": null,
+    "comments": 0,
+    "review_comments": 0,
+    "maintainer_can_modify": false,
+    "commits": 5,
+    "additions": 956,
+    "deletions": 0,
+    "changed_files": 5
+  },
+  "files": [
+    {
+      "sha": "fa056ae05de087dc621c877da36d782da7c197f9",
+      "filename": "docs/evidence/ni-adm11-20261024/README.md",
+      "status": "added",
+      "additions": 26,
+      "deletions": 0,
+      "changes": 26,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2FREADME.md",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2FREADME.md",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm11-20261024%2FREADME.md?ref=a229030b08e72f99e747949757040c3168cd4fc7",
+      "patch": "@@ -0,0 +1,26 @@\n+# NI-ADM.1.1 — închiderea ecranării corpusului central, 24.10.2026\n+\n+**Verdict:** verificarea titlurilor din corpusul central *observat* este PASS; **exhaustivitatea juridică contemporană rămâne BLOCKED_EVIDENCE.**\n+\n+PR separat, stacked peste NI-ADM.1 #430, care depinde de NI-ADM.0 #428.\n+\n+## Executat efectiv\n+\n+- Decomprimare verificată prin format gzip și ISIZE a `contemporary-months/census.json.gz` păstrat în `main`.\n+- **9.275/9.275** titluri examinate, cu ID-uri unice și serii continue în fiecare an: 2023=2390, 2024=2659, 2025=2479, 2026=1747 (observate până la 21 octombrie).\n+- **57 titluri** selectate de filtre explicite, documentate și reproductibile. 3 menționează legea administrativ-teritorială de facto: nr.48/2023 (amendament direct, aplicabil), nr.114/2026 (amendament direct, efect amânat șase luni din 29.05.2026) și nr.49/2023 (modifică legea limbilor *ca urmare* a unui amendament ATU).\n+- **20 titluri** menționează legea organelor locale, printre care 18 legi și două documente privind proiecte; nu se afirmă că schimbă granițe ori lista ATU. Alte titluri cu referiri la localități se păstrează în registrul de candidați.\n+- Examinarea celor **19 titluri suplimentare din 22–23 octombrie**, identificate în pagina indexului oficial: 0 titluri cu modificarea directă a legii ATU, 1 document (`2026001751`) de **opinie oficială asupra unui proiect** de lege privind autoritățile locale, care nu trebuie prezentat drept lege promulgată. Cele 19 titluri sunt parafrazate în [late-19-title-review.json](late-19-title-review.json); originalele semnate și răspunsurile HTML complete încă nu sunt toate conservate cu hash.\n+- Descoperirea directorului celor **șapte consilii teritoriale** de nivel superior din sursa oficială a legislativului de facto, inclusiv surse de hotărâri. Pentru Grigoriopol sunt vizibile **13** legături către documentele consiliilor sătești și una suplimentară pentru Maiac; pentru Bender sunt vizibile secțiuni pentru Gîsca și Proteagailovca. Aceste portaluri nu certifică exhaustivitatea tuturor actelor locale.\n+\n+## Interpretare corectă\n+\n+Nu există în titlurile verificate un alt **amendament direct identificabil după numele legii 155-З-III** decât actele 48/2023 și 114/2026; această constatare se referă numai la **titlurile observate**, nu la conținutul integral al actelor, competențele altor emitenți, nepublicare sau registre locale. De asemenea, unele acte de organizare a autorităților locale pot afecta atribuții, nu automat unități și limite administrative.\n+\n+`all-9275-title-screen.json` prezintă reguli de căutare, numărătoare și cele 57 de rezultate. `late-19-title-review.json` conține observațiile despre cele 19 publicații noi. `local-register-sources.json` inventariază cele șapte portaluri, fără o pretinsă examinare completă a documentelor originale.\n+\n+**Normative completeness at 24.10.2026:** `BLOCKED_EVIDENCE`. Lipsesc auditul integral al textelor primare relevante, consultarea registrelor locale și o certificare de aplicabilitate pe fiecare act. Nu există autorizare pentru reclasificarea celor 85 roluri, relocarea părinților MD sau modificarea arborelui.\n+\n+`ACTUAL_mutation_allowed=false`, `P9.1=BLOCKED`, `NI-ADM.1.1 formal closure=BLOCKED`. CI trebuie verificat pe SHA exact înaintea oricărei integrări.\n+\n+Surse: [legislația ATU de facto](https://www.vspmr.org/legislation/laws/zakonodateljnie-akti-pridnestrovskoy-moldavskoy-respubliki-v-sfere-konstitutsionnogo-stroya-osnov-pravoporyadka-a-takje-deyateljnosti-organov-gosudarstvennoy-vlasti-i-upravleniya/zakon-pridnestrovskoy-moldavskoy-respubliki-ob-administrativno-territorialjnom-ustroystve-pridnestrovskoy-moldavskoy-respubliki.html), [index oficial consilii](https://vspmr.org/soveti-narodnih-deputatov/), [publicații centralizate](https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.0)."
+    },
+    {
+      "sha": "ba027b4f07c6d6fd035a82210d6727cc526bbbc8",
+      "filename": "docs/evidence/ni-adm11-20261024/all-9275-title-screen.json",
+      "status": "added",
+      "additions": 573,
+      "deletions": 0,
+      "changes": 573,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2Fall-9275-title-screen.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2Fall-9275-title-screen.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm11-20261024%2Fall-9275-title-screen.json?ref=a229030b08e72f99e747949757040c3168cd4fc7",
+      "patch": "@@ -0,0 +1,573 @@\n+{\n+  \"schema\": \"ni-adm11-all-monthly-title-replay-v1\",\n+  \"audited_at\": \"2026-10-24\",\n+  \"reference_cutoff\": \"2026-10-21\",\n+  \"source\": {\n+    \"path\": \"docs/evidence/ni-jur-documentary-supplement-20261021/contemporary-months/census.json.gz\",\n+    \"git_blob_sha\": \"b4d80f3ee51e1c884db660151954fd00bb9560bb\",\n+    \"gzip_bytes\": 676265,\n+    \"gzip_isize_verified\": true,\n+    \"fully_decompressed_rows\": true,\n+    \"monthly_archival_capture\": \"2026-10-21\"\n+  },\n+  \"checks\": {\n+    \"unique\": 9275,\n+    \"count\": 9275,\n+    \"per_year\": {\n+      \"2023\": 2390,\n+      \"2024\": 2659,\n+      \"2025\": 2479,\n+      \"2026\": 1747\n+    },\n+    \"all_years_contiguous_from_1\": true,\n+    \"screened_each_title\": true,\n+    \"complete_title_scope\": \"OBSERVED_CENTRAL_INDEX_ONLY\",\n+    \"content_originals_read\": false\n+  },\n+  \"classification_method\": {\n+    \"patterns\": {\n+      \"ATU_LAW\": \"Об административно[\\\\s\\\\-–—]*территориальном устройстве\",\n+      \"LOCAL_GOVERNMENT_LAW\": \"Об органах местной власти, местного самоуправления и государственной администрации\",\n+      \"LOCAL_REPRESENTATIVES_LAW\": \"О представительных органах государственной власти и местного самоуправления\",\n+      \"RURAL_COUNCIL\": \"сельсовет|сельск(?:их|ого|ие|ий|ими|ими|ому)\\\\s+совет|поселков(?:ый|ого) совет\",\n+      \"TERRITORY_NAMES\": \"переименовани(?:е|я)|наименовани(?:е|я)\\\\s+(?:населенн|город|район)|административн(?:ые|ых|ых)\\\\s+границ|границ(?:ы|ах)\\\\s+(?:город|район|сельс|насел)\",\n+      \"SETTLEMENT_CLASS\": \"насел[её]нн(?:ый|ого|ых|ые|ом)\\\\s+пункт\"\n+    },\n+    \"description\": \"Keyword filtering over the full index title; pattern hits are candidates, not adjudicated source-law effects\",\n+    \"false_negative_risk\": \"Titles may not mention the ATU law or referenced paragraph; sources outside central index and primary contents are not covered.\"\n+  },\n+  \"matches_count\": 57,\n+  \"category_counts\": {\n+    \"ATU_LAW\": 3,\n+    \"LOCAL_GOVERNMENT_LAW\": 20,\n+    \"LOCAL_REPRESENTATIVES_LAW\": 1,\n+    \"RURAL_COUNCIL\": 0,\n+    \"TERRITORY_NAMES\": 1,\n+    \"SETTLEMENT_CLASS\": 33\n+  },\n+  \"role_matches\": [\n+    {\n+      \"id\": \"2026001679\",\n+      \"year\": 2026,\n+      \"title\": \"2026001679 09.10.2026 Постановление №01-08/34 от 06.10.2026 О проведении голосования вне помещения для голосования для групп избирателей, которые проживают (находятся) в населенных пунктах, где отсутствуют помещения для голосования, на выборах Президента Приднестровской Молдавской Республики 13 декабря 2026 года\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"d618158f33ae1c56cc02f3c18376222fca910f10f63e4fc3a42ba300b29917c7\"\n+    },\n+    {\n+      \"id\": \"2026001188\",\n+      \"year\": 2026,\n+      \"title\": \"2026001188 21.07.2026 Закон №171-ЗИ-VIII от 21.07.2026 О внесении изменений в Закон Приднестровской Молдавской Республики «Об утверждении государственной целевой программы «Развитие системы питьевого водоснабжения населенных пунктов Приднестровской Молдавской Республики на 2024–2028 годы»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"0eb2c65b14314c96e2d5452b55fd091eb0e4f064d994199b0e1f9ae8ff9b18c4\"\n+    },\n+    {\n+      \"id\": \"2026001033\",\n+      \"year\": 2026,\n+      \"title\": \"2026001033 30.06.2026 Постановление №171 от 29.06.2026 О внесении изменения и дополнения в Постановление Правительства Приднестровской Молдавской Республики от 14 марта 2023 года № 84 «Об утверждении Порядка проведения компенсационного озеленения на землях Государственного лесного фонда Приднестровской Молдавской Республики, в защитных лесных насаждениях на землях сельскохозяйственного назначения, озеленительных насаждений и групп деревьев в населенных пунктах, парках, скверах, дендрариях, ботанических садах, рощах, бульварах»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"0d402cd2d6d4452fc6c20c3c77e7dc10977f1e540b32383fbbff76b3d936fd66\"\n+    },\n+    {\n+      \"id\": \"2026000856\",\n+      \"year\": 2026,\n+      \"title\": \"2026000856 29.05.2026 Закон №114-ЗИД-VIII от 29.05.2026 О внесении изменений и дополнений в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»\",\n+      \"category_hits\": [\n+        \"ATU_LAW\"\n+      ],\n+      \"source_body_sha256\": \"12ff52821de7cb1f00824f63a94ee3159da48a1a3aae9fd6582771dc8f2de739\"\n+    },\n+    {\n+      \"id\": \"2026000691\",\n+      \"year\": 2026,\n+      \"title\": \"2026000691 06.05.2026 Закон №91-ЗД-VIII от 06.05.2026 О внесении дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"12ff52821de7cb1f00824f63a94ee3159da48a1a3aae9fd6582771dc8f2de739\"\n+    },\n+    {\n+      \"id\": \"2026000574\",\n+      \"year\": 2026,\n+      \"title\": \"2026000574 17.04.2026 Приказ №362 от 08.04.2026 Об упорядочении работы систем централизованного питьевого водоснабжения населенных пунктов Приднестровской Молдавской Республики в весенне-осенний период 2026 года\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"42ccf76e64be807805c5e558a9e66f341f379582178cfba2f8c5a1aab58fb8d8\"\n+    },\n+    {\n+      \"id\": \"2026000438\",\n+      \"year\": 2026,\n+      \"title\": \"2026000438 25.03.2026 Закон №53-ЗИД-VIII от 25.03.2026 О внесении изменения и дополнений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"0970429d412174e32d546c0f0d1288b077f5613532e617a9c21bff233307621b\"\n+    },\n+    {\n+      \"id\": \"2026000091\",\n+      \"year\": 2026,\n+      \"title\": \"2026000091 29.01.2026 Закон №6-ЗД-VIII от 29.01.2026 О внесении дополнений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"33205f8ed8602b2408780baf22333488bd412b3c85daa413917ffc8659274a8a\"\n+    },\n+    {\n+      \"id\": \"2026000086\",\n+      \"year\": 2026,\n+      \"title\": \"2026000086 29.01.2026 Закон №1-ЗИ-VIII от 29.01.2026 О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"33205f8ed8602b2408780baf22333488bd412b3c85daa413917ffc8659274a8a\"\n+    },\n+    {\n+      \"id\": \"2025002469\",\n+      \"year\": 2025,\n+      \"title\": \"2025002469 31.12.2025 Приказ №1318 от 30.12.2025 О внесении изменения в Приказ Министерства экономического развития Приднестровской Молдавской Республики от 7 августа 2025 года № 757 «Об отмене Приказа Министерства экономического развития Приднестровской Молдавской Республики от 22 октября 2003 года № 949 «Об утверждении норм накопления бытовых и жидких отходов на одного жителя в городах и населенных пунктах Приднестровской Молдавской Республики» (регистрационный № 13323 от 21 августа 2025 года) (САЗ 25-33)\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"4149fe05591ce29db984ca9dce4c35e651ba10d6a2df178c925c6ec9a178dcc7\"\n+    },\n+    {\n+      \"id\": \"2025002468\",\n+      \"year\": 2025,\n+      \"title\": \"2025002468 31.12.2025 Приказ №1319/456 от 30.12.2025 О внесении изменения в Приказ Министерства экономического развития Приднестровской Молдавской Республики и Государственной службы экологического контроля и охраны окружающей среды Приднестровской Молдавской Республики от 19 мая 2025 года № 457/152 «Об утверждении норм накопления твердых бытовых отходов в населенных пунктах Приднестровской Молдавской Республики» (регистрационный № 13291 от 5 августа 2025 года) (САЗ 25-31)\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"4149fe05591ce29db984ca9dce4c35e651ba10d6a2df178c925c6ec9a178dcc7\"\n+    },\n+    {\n+      \"id\": \"2025002341\",\n+      \"year\": 2025,\n+      \"title\": \"2025002341 23.12.2025 Распоряжение №743р от 22.12.2025 Об определении границ и площадей земельных участков, предназначенных для предоставления гражданам, ведущим крестьянское (фермерское) хозяйство в области животноводства, осуществляющим (осуществлявшим) деятельность на земельных участках, предоставленных в границах населенных пунктов для ведения личного подсобного хозяйства, жилищного или иного строительства\",\n+      \"category_hits\": [\n+        \"TERRITORY_NAMES\",\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"4149fe05591ce29db984ca9dce4c35e651ba10d6a2df178c925c6ec9a178dcc7\"\n+    },\n+    {\n+      \"id\": \"2025002031\",\n+      \"year\": 2025,\n+      \"title\": \"2025002031 18.11.2025 Закон №223-ЗИ-VII от 18.11.2025 О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"3029e50e8fc7cec053293c8219c8d4079cca7e7abfc9a440d0e0e1031ed697b1\"\n+    },\n+    {\n+      \"id\": \"2025001798\",\n+      \"year\": 2025,\n+      \"title\": \"2025001798 21.10.2025 Распоряжение №378рп от 21.10.2025 Об Официальном заключении Президента Приднестровской Молдавской Республики на проект закона Приднестровской Молдавской Республики «О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"1db8069e81022fde2eff09d5b6e2109bb3e82cead292c4cb8a1feb2f630067c1\"\n+    },\n+    {\n+      \"id\": \"2025001409\",\n+      \"year\": 2025,\n+      \"title\": \"2025001409 21.08.2025 Приказ №757 от 07.08.2025 Об отмене Приказа Министерства экономического развития Приднестровской Молдавской Республики от 22 октября 2003 года № 949 «Об утверждении норм накопления бытовых и жидких отходов на одного жителя в городах и населенных пунктах Приднестровской Молдавской Республики» (регистрационный № 2505 от 16 декабря 2003 года) (САЗ 03-51)\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"5e27b95b90a6013d1232640fe7c4bfaa10bbb1d5157af7dd20abef01345f702f\"\n+    },\n+    {\n+      \"id\": \"2025001392\",\n+      \"year\": 2025,\n+      \"title\": \"2025001392 19.08.2025 Закон №187-ЗИ-VII от 19.08.2025 О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"5e27b95b90a6013d1232640fe7c4bfaa10bbb1d5157af7dd20abef01345f702f\"\n+    },\n+    {\n+      \"id\": \"2025001314\",\n+      \"year\": 2025,\n+      \"title\": \"2025001314 06.08.2025 Приказ №457/152 от 19.05.2025 Об утверждении норм накопления твердых бытовых отходов в населенных пунктах Приднестровской Молдавской Республики\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"5e27b95b90a6013d1232640fe7c4bfaa10bbb1d5157af7dd20abef01345f702f\"\n+    },\n+    {\n+      \"id\": \"2025001169\",\n+      \"year\": 2025,\n+      \"title\": \"2025001169 17.07.2025 Постановление №4080 от 16.07.2025 Об утверждении отчета об исполнении государственной целевой программы «Развитие системы питьевого водоснабжения населенных пунктов Приднестровской Молдавской Республики на 2024–2028 годы» за 2024 год\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"a8163a1222fc4c71ac78c2664010b22338f44369167571388b9a7591254d43d0\"\n+    },\n+    {\n+      \"id\": \"2025001161\",\n+      \"year\": 2025,\n+      \"title\": \"2025001161 16.07.2025 Приказ №188/508 от 20.06.2025 О внесении изменения в Приказ Государственной службы экологического контроля и охраны окружающей среды Приднестровской Молдавской Республики и Министерства здравоохранения Приднестровской Молдавской Республики от 25 сентября 2017 года № 122/506 «Об утверждении перечня временных объектов размещения твердых бытовых отходов, образующихся в населенных пунктах Приднестровской Молдавской Республики, и порядка их эксплуатации» (регистрационный № 8192 от 23 марта 2018 года) (САЗ 18-12)\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"a8163a1222fc4c71ac78c2664010b22338f44369167571388b9a7591254d43d0\"\n+    },\n+    {\n+      \"id\": \"2025000896\",\n+      \"year\": 2025,\n+      \"title\": \"2025000896 09.06.2025 Закон №97-ЗИ-VII от 09.06.2025 О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"45aedd6dbfe946dac47baa6bc1f09c5b4f866d132976c2f5c40cc7d8c7ea766a\"\n+    },\n+    {\n+      \"id\": \"2025000530\",\n+      \"year\": 2025,\n+      \"title\": \"2025000530 08.04.2025 Постановление №97 от 07.04.2025 О внесении изменения в Постановление Правительства Приднестровской Молдавской Республики от 14 марта 2023 года № 84 «Об утверждении Порядка проведения компенсационного озеленения на землях Государственного лесного фонда Приднестровской Молдавской Республики, в защитных лесных насаждениях на землях сельскохозяйственного назначения, озеленительных насаждений и групп деревьев в населенных пунктах, парках, скверах, дендрариях, ботанических садах, рощах, бульварах»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"d202b5e7df88956890257cc7e91a7e05fd645c7947c64dc0249e405d783d3547\"\n+    },\n+    {\n+      \"id\": \"2025000460\",\n+      \"year\": 2025,\n+      \"title\": \"2025000460 27.03.2025 Приказ №278 от 21.03.2025 Об упорядочении работы систем централизованного питьевого водоснабжения населенных пунктов Приднестровской Молдавской Республики в весенне-осенний период 2025 года\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"64e532357a318b80724948a55c8982edaf12f1b288672bdf74200cb652cf3aa7\"\n+    },\n+    {\n+      \"id\": \"2025000084\",\n+      \"year\": 2025,\n+      \"title\": \"2025000084 28.01.2025 Постановление №10 от 27.01.2025 О порядке применения упрощенной процедуры формирования земельных участков категории «земли населенных пунктов»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"bba453dfef22f8cd4f276a7569b55d470b40a6f2c26d9f338a75f35103c72a4e\"\n+    },\n+    {\n+      \"id\": \"2024002615\",\n+      \"year\": 2024,\n+      \"title\": \"2024002615 27.12.2024 Закон №347-ЗИ-VII от 27.12.2024 О внесении изменения в Закон Приднестровской Молдавской Республики «О системе государственной регистрации прав на домовладения, расположенные в сельских населенных пунктах Приднестровской Молдавской Республики, и сделок с ними»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"d0b20403382f8db4b63b2431d18c9f7d8bf976d3a51267840d8377c71204b98c\"\n+    },\n+    {\n+      \"id\": \"2024002593\",\n+      \"year\": 2024,\n+      \"title\": \"2024002593 26.12.2024 Закон №340-ЗИ-VII от 26.12.2024 О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"d0b20403382f8db4b63b2431d18c9f7d8bf976d3a51267840d8377c71204b98c\"\n+    },\n+    {\n+      \"id\": \"2024002417\",\n+      \"year\": 2024,\n+      \"title\": \"2024002417 03.12.2024 Постановление №471 от 02.12.2024 Об утверждении Положения о порядке принудительного прекращения прав на земельные участки категории «земли населенных пунктов», предназначенные для жилищного или иного строительства\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"d0b20403382f8db4b63b2431d18c9f7d8bf976d3a51267840d8377c71204b98c\"\n+    },\n+    {\n+      \"id\": \"2024002387\",\n+      \"year\": 2024,\n+      \"title\": \"2024002387 29.11.2024 Закон №287-ЗИД-VII от 29.11.2024 О внесении изменения и дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"8006bc365621bd69b47893417cccdd5a858a39d87242f71583d87481c0ea01e5\"\n+    },\n+    {\n+      \"id\": \"2024002326\",\n+      \"year\": 2024,\n+      \"title\": \"2024002326 22.11.2024 Закон №276-ЗД-VII от 22.11.2024 О внесении дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"8006bc365621bd69b47893417cccdd5a858a39d87242f71583d87481c0ea01e5\"\n+    },\n+    {\n+      \"id\": \"2024002258\",\n+      \"year\": 2024,\n+      \"title\": \"2024002258 13.11.2024 Постановление №449 от 11.11.2024 О внесении изменений и дополнений в Постановление Правительства Приднестровской Молдавской Республики от 14 июня 2023 года № 205 «Об утверждении Порядка принятия решений Советами народных депутатов сел (поселков) о предоставлении земельного участка (земельных участков) для целей жилой и общественной застройки из состава земель населенного пункта (населенных пунктов)»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"8006bc365621bd69b47893417cccdd5a858a39d87242f71583d87481c0ea01e5\"\n+    },\n+    {\n+      \"id\": \"2024001732\",\n+      \"year\": 2024,\n+      \"title\": \"2024001732 27.08.2024 Распоряжение №295рп от 27.08.2024 О проектах законов Приднестровской Молдавской Республики «О внесении изменения и дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике», «О внесении изменений и дополнения в Закон Приднестровской Молдавской Республики «О миграционном учете иностранных граждан и лиц без гражданства в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"d8f9d25061cef7c5d13ad5e39fc94bd256e9cb03e662bb9d86b726eb83334994\"\n+    },\n+    {\n+      \"id\": \"2024001548\",\n+      \"year\": 2024,\n+      \"title\": \"2024001548 30.07.2024 Закон №189-ЗД-VII от 30.07.2024 О внесении дополнения в Закон Приднестровской Молдавской Республики «О представительных органах государственной власти и местного самоуправления»\",\n+      \"category_hits\": [\n+        \"LOCAL_REPRESENTATIVES_LAW\"\n+      ],\n+      \"source_body_sha256\": \"a2ee89dfd5131b34a836f90ac94f4d40dc5a55f60a44908da50507d29fcfa1f8\"\n+    },\n+    {\n+      \"id\": \"2024001014\",\n+      \"year\": 2024,\n+      \"title\": \"2024001014 30.05.2024 Закон №97-ЗД-VII от 30.05.2024 О внесении дополнений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"2202eb69709f5ac55230b93d4228cd8d3089a8aed0f4bbb8dad9e1d5f9cce2e4\"\n+    },\n+    {\n+      \"id\": \"2024000655\",\n+      \"year\": 2024,\n+      \"title\": \"2024000655 08.04.2024 Приказ №333 от 05.04.2024 Об упорядочении работы систем централизованного питьевого водоснабжения населенных пунктов Приднестровской Молдавской Республики в весенне-осенний период 2024 года\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"e3a46f587fb00b55f91b78616b483c875e93b0ce68fbbadb7200f54251ecd06e\"\n+    },\n+    {\n+      \"id\": \"2024000433\",\n+      \"year\": 2024,\n+      \"title\": \"2024000433 06.03.2024 Постановление №120 от 04.03.2024 О внесении изменений и дополнений в Постановление Правительства Приднестровской Молдавской Республики от 14 марта 2023 года № 84 «Об утверждении Порядка проведения компенсационного озеленения на землях Государственного лесного фонда Приднестровской Молдавской Республики, в защитных лесных насаждениях на землях сельскохозяйственного назначения, озеленительных насаждений и групп деревьев в населенных пунктах, парках, скверах, дендрариях, ботанических садах, рощах, бульварах»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"c301e98cff6c04fb1b2b58442e59eafae18330e1a9931f7875e931fe37687e76\"\n+    },\n+    {\n+      \"id\": \"2024000427\",\n+      \"year\": 2024,\n+      \"title\": \"2024000427 05.03.2024 Закон №48-ЗИ-VII от 05.03.2024 О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"c301e98cff6c04fb1b2b58442e59eafae18330e1a9931f7875e931fe37687e76\"\n+    },\n+    {\n+      \"id\": \"2024000176\",\n+      \"year\": 2024,\n+      \"title\": \"2024000176 31.01.2024 Постановление №61 от 31.01.2024 Об отмене Постановления Правительства Приднестровской Молдавской Республики от 8 декабря 2016 года № 313 «Об установлении дополнительных категорий потребителей услуг в сфере электроэнергетики, которые приравнены к категории потребителей в сфере электроэнергетики «население на бытовые нужды», «население сельских населенных пунктов (сельских поселений) на бытовые нужды»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"fc08a6379536cac3ce40db4fc4182135b43faf1689e6618226f322fa63ddee0e\"\n+    },\n+    {\n+      \"id\": \"2024000175\",\n+      \"year\": 2024,\n+      \"title\": \"2024000175 31.01.2024 Постановление №60 от 31.01.2024 Об отмене Постановления Правительства Приднестровской Молдавской Республики от 8 декабря 2016 года № 307 «Об установлении дополнительных категорий потребителей услуг газоснабжения, которые приравнены к категории потребителей в сфере газоснабжения «бытовые потребители (абоненты)», «бытовые потребители (абоненты) сельских населенных пунктов (сельских поселений)»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"fc08a6379536cac3ce40db4fc4182135b43faf1689e6618226f322fa63ddee0e\"\n+    },\n+    {\n+      \"id\": \"2024000174\",\n+      \"year\": 2024,\n+      \"title\": \"2024000174 31.01.2024 Постановление №59 от 31.01.2024 Об отмене Постановления Правительства Приднестровской Молдавской Республики от 28 июля 2016 года № 205 «Об определении категории потребителей, которая приравнена к категории потребителей услуг в сфере электроэнергетики «население сельских населенных пунктов (сельских поселений) за объем электроэнергии, потребленный до 150 кВт. ч в месяц (включительно)»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"fc08a6379536cac3ce40db4fc4182135b43faf1689e6618226f322fa63ddee0e\"\n+    },\n+    {\n+      \"id\": \"2023002305\",\n+      \"year\": 2023,\n+      \"title\": \"2023002305 26.12.2023 Закон №397-З-VII от 26.12.2023 Об утверждении государственной целевой программы «Развитие системы питьевого водоснабжения населенных пунктов Приднестровской Молдавской Республики на 2024–2028 годы»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"4eb215b12a68fab86ef531f556891f169c3a4f3a5abd7357756c33c6effbcda5\"\n+    },\n+    {\n+      \"id\": \"2023001591\",\n+      \"year\": 2023,\n+      \"title\": \"2023001591 29.09.2023 Закон №291-ЗИ-VII от 29.09.2023 О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"3d4292bc16431670e34dd9c31cc95eec589091850f84573be824d686f889e8a3\"\n+    },\n+    {\n+      \"id\": \"2023001471\",\n+      \"year\": 2023,\n+      \"title\": \"2023001471 01.09.2023 Постановление №295 от 31.08.2023 О внесении изменений в Постановление Правительства Приднестровской Молдавской Республики от 14 июня 2023 года № 205 «Об утверждении Порядка принятия решений Советами народных депутатов сел (поселков) о предоставлении земельного участка (земельных участков) для целей жилой и общественной застройки из состава земель населенного пункта (населенных пунктов)»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"3d4292bc16431670e34dd9c31cc95eec589091850f84573be824d686f889e8a3\"\n+    },\n+    {\n+      \"id\": \"2023001450\",\n+      \"year\": 2023,\n+      \"title\": \"2023001450 29.08.2023 Приказ №667 от 24.08.2023 О введении в действие Методических указаний МУ МЗ ПМР 3.2.2568 - 23 «Контроль численности кровососущих комаров р. Culex, места выплода которых находятся в населенных пунктах»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"7bac7df7b8010d7b2ff590d583f6586ffa314a2d4adbd2244a7c50619d61ed7e\"\n+    },\n+    {\n+      \"id\": \"2023001134\",\n+      \"year\": 2023,\n+      \"title\": \"2023001134 14.07.2023 Закон №216-ЗИ-VII от 13.07.2023 О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"4571560465ea4662fd14bc9c94ed02a9ba8d76aa759bdff75dca781c9950d478\"\n+    },\n+    {\n+      \"id\": \"2023001084\",\n+      \"year\": 2023,\n+      \"title\": \"2023001084 10.07.2023 Приказ №584 от 19.06.2023 О внесении изменений и дополнения в Приказ Министерства экономического развития Приднестровской Молдавской Республики от 29 марта 2023 года № 266 «Об упорядочении работы систем централизованного питьевого водоснабжения населенных пунктов Приднестровской Молдавской Республики в весенне-осенний период 2023 года» (регистрационный № 11659 от 6 апреля 2023 года) (САЗ 23-14)\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"4571560465ea4662fd14bc9c94ed02a9ba8d76aa759bdff75dca781c9950d478\"\n+    },\n+    {\n+      \"id\": \"2023000979\",\n+      \"year\": 2023,\n+      \"title\": \"2023000979 23.06.2023 Постановление №211 от 22.06.2023 О внесении изменений в Постановление Правительства Приднестровской Молдавской Республики от 30 ноября 2021 года № 373 «Об утверждении Программы озеленения населенных пунктов и создания массивных защитных насаждений в промышленных зонах, на территориях полигонов и местах размещения отходов Приднестровской Молдавской Республики с 2022 по 2027 годы»\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"678388d00d544d1e0597400acf64bd50c1020e7633af364b19d51095afbf746b\"\n+    },\n+    {\n+      \"id\": \"2023000937\",\n+      \"year\": 2023,\n+      \"title\": \"2023000937 15.06.2023 Постановление №205 от 14.06.2023 Об утверждении Порядка принятия решений Советами народных депутатов сел (поселков) о предоставлении земельного участка (земельных участков) для целей жилой и общественной застройки из состава земель населенного пункта (населенных пунктов)\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"678388d00d544d1e0597400acf64bd50c1020e7633af364b19d51095afbf746b\"\n+    },\n+    {\n+      \"id\": \"2023000801\",\n+      \"year\": 2023,\n+      \"title\": \"2023000801 25.05.2023 Постановление №170 от 25.05.2023 Об утверждении Положения о порядке выделения субсидий местным бюджетам городов (районов) Приднестровской Молдавской Республики, направляемых на финансирование мероприятий по благоустройству сельских территорий, ремонту и строительству объектов социально-культурной сферы и автомобильных дорог общего пользования и их составных частей, находящихся в муниципальной собственности, расположенных в сельских населенных пунктах, за счет средств Фонда по обеспечению государственных гарантий по расчетам с гражданами, имеющими право на земельную долю (пай), и иными работниками сельскохозяйственных предприятий\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"aa18f65256448875666e32235ad7fe96dc5cb195dacd6610c6aa81dc834d3963\"\n+    },\n+    {\n+      \"id\": \"2023000651\",\n+      \"year\": 2023,\n+      \"title\": \"2023000651 26.04.2023 Указ №134 от 26.04.2023 Об утверждении Перечня населенных пунктов Приднестровской Молдавской Республики, составляющих территорию Приднестровской Молдавской Республики и находящихся за пределами таможенных и пограничных пунктов пропуска Приднестровской Молдавской Республики\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"22f3f406cdd63e882506a45d3e8d67b64a951d922bd71223d04bf9297fe26594\"\n+    },\n+    {\n+      \"id\": \"2023000621\",\n+      \"year\": 2023,\n+      \"title\": \"2023000621 19.04.2023 Закон №85-ЗИ-VII от 19.04.2023 О внесении изменений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"22f3f406cdd63e882506a45d3e8d67b64a951d922bd71223d04bf9297fe26594\"\n+    },\n+    {\n+      \"id\": \"2023000620\",\n+      \"year\": 2023,\n+      \"title\": \"2023000620 19.04.2023 Закон №84-ЗИ-VII от 19.04.2023 О внесении изменения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"22f3f406cdd63e882506a45d3e8d67b64a951d922bd71223d04bf9297fe26594\"\n+    },\n+    {\n+      \"id\": \"2023000554\",\n+      \"year\": 2023,\n+      \"title\": \"2023000554 06.04.2023 Приказ №266 от 29.03.2023 Об упорядочении работы систем централизованного питьевого водоснабжения населенных пунктов Приднестровской Молдавской Республики в весенне-осенний период 2023 года\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"22f3f406cdd63e882506a45d3e8d67b64a951d922bd71223d04bf9297fe26594\"\n+    },\n+    {\n+      \"id\": \"2023000446\",\n+      \"year\": 2023,\n+      \"title\": \"2023000446 24.03.2023 Закон №49-ЗИ-VII от 24.03.2023 О внесении изменения в Закон Приднестровской Молдавской Республики «О языках в Приднестровской Молдавской Республике» в связи с принятием Закона Приднестровской Молдавской Республики «О внесении изменения в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»\",\n+      \"category_hits\": [\n+        \"ATU_LAW\"\n+      ],\n+      \"source_body_sha256\": \"b28f2753fed1a0e3b79a31d807468b9099536b5e00082fb2d3b5830b81258abf\"\n+    },\n+    {\n+      \"id\": \"2023000445\",\n+      \"year\": 2023,\n+      \"title\": \"2023000445 24.03.2023 Закон №48-ЗИ-VII от 24.03.2023 О внесении изменения в Закон Приднестровской Молдавской Республики «Об административно-территориальном устройстве Приднестровской Молдавской Республики»\",\n+      \"category_hits\": [\n+        \"ATU_LAW\"\n+      ],\n+      \"source_body_sha256\": \"b28f2753fed1a0e3b79a31d807468b9099536b5e00082fb2d3b5830b81258abf\"\n+    },\n+    {\n+      \"id\": \"2023000392\",\n+      \"year\": 2023,\n+      \"title\": \"2023000392 16.03.2023 Постановление №84 от 14.03.2023 Об утверждении Порядка проведения компенсационного озеленения на землях Государственного лесного фонда Приднестровской Молдавской Республики, в защитных лесных насаждениях на землях сельскохозяйственного назначения, озеленительных насаждений и групп деревьев в населенных пунктах, парках, скверах, дендрариях, ботанических садах, рощах, бульварах\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"b28f2753fed1a0e3b79a31d807468b9099536b5e00082fb2d3b5830b81258abf\"\n+    },\n+    {\n+      \"id\": \"2023000383\",\n+      \"year\": 2023,\n+      \"title\": \"2023000383 15.03.2023 Постановление №77 от 14.03.2023 Об утверждении Положения о порядке ведения реестра парковок и стоянок транспортных средств, расположенных на территории населенных пунктов административно-территориальных единиц Приднестровской Молдавской Республики\",\n+      \"category_hits\": [\n+        \"SETTLEMENT_CLASS\"\n+      ],\n+      \"source_body_sha256\": \"b28f2753fed1a0e3b79a31d807468b9099536b5e00082fb2d3b5830b81258abf\"\n+    },\n+    {\n+      \"id\": \"2023000117\",\n+      \"year\": 2023,\n+      \"title\": \"2023000117 30.01.2023 Закон №7-ЗД-VII от 30.01.2023 О внесении дополнения в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"0ff7e5a1de85892dd606070a9b325914198f257886b8d81cff54a6dd6c18685a\"\n+    },\n+    {\n+      \"id\": \"2023000001\",\n+      \"year\": 2023,\n+      \"title\": \"2023000001 09.01.2023 Закон №1-ЗИД-VII от 09.01.2023 О внесении изменений и дополнений в Закон Приднестровской Молдавской Республики «Об органах местной власти, местного самоуправления и государственной администрации в Приднестровской Молдавской Республике»\",\n+      \"category_hits\": [\n+        \"LOCAL_GOVERNMENT_LAW\"\n+      ],\n+      \"source_body_sha256\": \"0ff7e5a1de85892dd606070a9b325914198f257886b8d81cff54a6dd6c18685a\"\n+    }\n+  ],\n+  \"direct_law_phrase_ids\": [\n+    \"2026000856\",\n+    \"2023000446\",\n+    \"2023000445\"\n+  ],\n+  \"verdict\": \"PASS_FULL_9275_CENTRAL_TITLE_REPLAY_ONLY__CURRENT_NORMATIVE_EXHAUSTIVENESS_BLOCKED\",\n+  \"late_2026_october_new_publications_range\": \"2026001748–2026001766\",\n+  \"late_19_originals_hashed_and_reviewed\": false,\n+  \"local_registries_exhausted\": false\n+}"
+    },
+    {
+      "sha": "e7276b664a4ca4d4c0d833c4f6ae406170c044f1",
+      "filename": "docs/evidence/ni-adm11-20261024/late-19-title-review.json",
+      "status": "added",
+      "additions": 233,
+      "deletions": 0,
+      "changes": 233,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2Flate-19-title-review.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2Flate-19-title-review.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm11-20261024%2Flate-19-title-review.json?ref=a229030b08e72f99e747949757040c3168cd4fc7",
+      "patch": "@@ -0,0 +1,233 @@\n+{\n+  \"schema\": \"ni-adm11-late-publications-web-observation-v1\",\n+  \"reference_date\": \"2026-10-24\",\n+  \"central_index_url\": \"https://www.minjust.gospmr.org/web.nsf/All/publication2?Count=1000&ExpandView=&OpenDocument=&Start=1&TableRow=1.0\",\n+  \"cross_checked_web_caches\": [\n+    \"https://www.minjust.gospmr.org/web.nsf/All/publication2!OpenDocument&Start=1&Count=200&Expand=1.1&TableRow=1.0\",\n+    \"https://minjust.org/web.nsf/All/publication2!OpenDocument&Start=1&Count=200&Expand=1.1&TableRow=1.0\"\n+  ],\n+  \"index_crawl_scope\": \"19 additional visible publication ids 2026001748..2026001766 since archived index cutoff 2026001747\",\n+  \"records_are_paraphrased_for_scope_screening\": true,\n+  \"publication_ids\": [\n+    {\n+      \"publication_id\": \"2026001766\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Закон №249-ЗИ-VIII\",\n+      \"index_title_summary_ru\": \"Изменение закона о всеобщей воинской обязанности и военной службе в связи с изменением закона об актах гражданского состояния\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001765\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Закон №248-ЗИД-VIII\",\n+      \"index_title_summary_ru\": \"Изменение и дополнения закона об актах гражданского состояния\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001764\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Закон №247-ЗИ-VIII\",\n+      \"index_title_summary_ru\": \"Изменение Кодекса о браке и семье\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001763\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Закон №246-ЗИД-VIII\",\n+      \"index_title_summary_ru\": \"Изменение и дополнения закона о Государственной налоговой службе\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001762\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Приказ №951\",\n+      \"index_title_summary_ru\": \"Изменения положения о присвоении звания «Образцовый детский коллектив»\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001761\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Приказ №1026\",\n+      \"index_title_summary_ru\": \"Об учреждении медали «За заслуги перед отечественным здравоохранением»\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001760\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Распоряжение №414рп\",\n+      \"index_title_summary_ru\": \"Изменение распоряжения Президента №380рп о награждениях\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001759\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Указ №429\",\n+      \"index_title_summary_ru\": \"О награждении государственными наградами\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001758\",\n+      \"publication_date\": \"23.10.2026\",\n+      \"source_act\": \"Распоряжение №397рп\",\n+      \"index_title_summary_ru\": \"О награждении Грамотой и вручении Благодарственного письма\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001757\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Приказ №947\",\n+      \"index_title_summary_ru\": \"Об экспертных советах Высшей аттестационной комиссии при Министерстве просвещения\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001756\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Указ №442\",\n+      \"index_title_summary_ru\": \"Изменение положения и структуры Министерства обороны\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001755\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Приказ №1046\",\n+      \"index_title_summary_ru\": \"Изменение оплаты жилищно-коммунальных услуг населением\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001754\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Приказ №1119\",\n+      \"index_title_summary_ru\": \"Дополнение порядка применения индикативных цен на масличные и зерновые культуры\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001753\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Приказ №1118\",\n+      \"index_title_summary_ru\": \"Индикативные цены на масличные и зерновые культуры 23–26 октября\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001752\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Постановление №614\",\n+      \"index_title_summary_ru\": \"Государственный доклад о положении детей в 2025 году\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001751\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Распоряжение №410рп\",\n+      \"index_title_summary_ru\": \"Официальное заключение Президента на ПРОЕКТ закона о внесении дополнений в закон об органах местной власти, местного самоуправления и государственной администрации\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DRAFT_OFFICIAL_OPINION_NOT_ENACTED_LAW\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001750\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Распоряжение №409рп\",\n+      \"index_title_summary_ru\": \"Официальное заключение Президента на ПРОЕКТ закона о государственной пошлине\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001749\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Распоряжение №408рп\",\n+      \"index_title_summary_ru\": \"Официальное заключение Президента на ПРОЕКТ изменения и дополнения Гражданского кодекса\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    },\n+    {\n+      \"publication_id\": \"2026001748\",\n+      \"publication_date\": \"22.10.2026\",\n+      \"source_act\": \"Указ №439\",\n+      \"index_title_summary_ru\": \"Изменение указа о награждениях от 7 октября 2026 года №409\",\n+      \"is_full_verbatim_title\": false,\n+      \"direct_ATU_155_2002_amendment_from_title\": false,\n+      \"status\": \"DIFFERENT_SUBJECT_FROM_INDEX_TITLE\",\n+      \"primary_original_content_reviewed\": false,\n+      \"primary_binary_sha256\": null\n+    }\n+  ],\n+  \"observations\": {\n+    \"count\": 19,\n+    \"all_titles_observed_from_index_search_cache\": true,\n+    \"all_19_source_html_archived_and_hashed\": false,\n+    \"all_19_signed_primary_originals_examined\": false,\n+    \"direct_ATU_155_amendments_observed_by_title\": 0,\n+    \"local_government_related_DRAFT_OPINION\": 1,\n+    \"direct_legal_effect_rejected_from_title_only\": false,\n+    \"coverage_exhaustive_issuers\": false\n+  },\n+  \"verdict\": \"PASS_VISIBLE_19_ID_TITLE_SCREEN__NOT_PRIMARY_CONTENT_CERTIFICATION\"\n+}"
+    },
+    {
+      "sha": "7b02493f8b1d78bcea30ce008af24dcd9697761d",
+      "filename": "docs/evidence/ni-adm11-20261024/local-register-sources.json",
+      "status": "added",
+      "additions": 98,
+      "deletions": 0,
+      "changes": 98,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2Flocal-register-sources.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2Flocal-register-sources.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm11-20261024%2Flocal-register-sources.json?ref=a229030b08e72f99e747949757040c3168cd4fc7",
+      "patch": "@@ -0,0 +1,98 @@\n+{\n+  \"schema\": \"ni-adm11-local-registry-discovery-v1\",\n+  \"cutoff\": \"2026-10-24\",\n+  \"scope\": \"OFFICIAL_DIRECTORY_DISCOVERY_NOT_ALL_LOCAL_NORMATIVE_TEXTS\",\n+  \"national_council_index\": \"https://vspmr.org/soveti-narodnih-deputatov/\",\n+  \"portals\": [\n+    {\n+      \"name\": \"Slobozia\",\n+      \"url\": \"https://slobodzeya.org/\",\n+      \"verification_status\": \"OFFICIAL_LEGISLATIVE_DIRECTORY_LINK__DIRECT_FETCH_TIMEOUT\",\n+      \"complete_2023_2026_local_original_corpus_collected\": false,\n+      \"territorial_boundary_effect_adjudicated\": false\n+    },\n+    {\n+      \"name\": \"Tiraspol\",\n+      \"url\": \"https://tirgorsovet.org/\",\n+      \"verification_status\": \"OFFICIAL_LEGISLATIVE_DIRECTORY_LINK__DIRECT_FETCH_TIMEOUT\",\n+      \"complete_2023_2026_local_original_corpus_collected\": false,\n+      \"territorial_boundary_effect_adjudicated\": false\n+    },\n+    {\n+      \"name\": \"Bender\",\n+      \"url\": \"https://benderygs.gospmr.org/\",\n+      \"verification_status\": \"LIVE_OFFICIAL_PORTAL_SECTIONS_VISIBLE\",\n+      \"complete_2023_2026_local_original_corpus_collected\": false,\n+      \"territorial_boundary_effect_adjudicated\": false\n+    },\n+    {\n+      \"name\": \"Ribnita\",\n+      \"url\": \"https://rybnsovet.idknet.com/\",\n+      \"verification_status\": \"SEARCH_INDEXED_LOCAL_NORMATIVE_ACTS_PAGE_VISIBLE\",\n+      \"complete_2023_2026_local_original_corpus_collected\": false,\n+      \"territorial_boundary_effect_adjudicated\": false\n+    },\n+    {\n+      \"name\": \"Dubasari\",\n+      \"url\": \"https://dubossary.ru/sovet/\",\n+      \"verification_status\": \"OFFICIAL_LEGISLATIVE_DIRECTORY_LINK__DIRECT_FETCH_TIMEOUT\",\n+      \"complete_2023_2026_local_original_corpus_collected\": false,\n+      \"territorial_boundary_effect_adjudicated\": false\n+    },\n+    {\n+      \"name\": \"Camenca\",\n+      \"url\": \"https://kamsovet.gospmr.org/\",\n+      \"verification_status\": \"OFFICIAL_LEGISLATIVE_DIRECTORY_LINK__DIRECT_FETCH_TIMEOUT\",\n+      \"complete_2023_2026_local_original_corpus_collected\": false,\n+      \"territorial_boundary_effect_adjudicated\": false\n+    },\n+    {\n+      \"name\": \"Grigoriopol\",\n+      \"url\": \"https://grig-rsnd.idknet.com/home/sel-sovet\",\n+      \"verification_status\": \"LIVE_OFFICIAL_LOCAL_COUNCILS_DIRECTORY_VISIBLE\",\n+      \"complete_2023_2026_local_original_corpus_collected\": false,\n+      \"territorial_boundary_effect_adjudicated\": false\n+    }\n+  ],\n+  \"local_grigoriopol\": {\n+    \"source_url\": \"https://grig-rsnd.idknet.com/home/sel-sovet\",\n+    \"rural_council_document_links_observed\": 13,\n+    \"named_councils\": [\n+      \"Буторский\",\n+      \"Бычковский\",\n+      \"Винограднянский\",\n+      \"Глинойский\",\n+      \"Гыртопский\",\n+      \"Кармановский\",\n+      \"Колосовский\",\n+      \"Красногорский\",\n+      \"Малаештский\",\n+      \"Спейский\",\n+      \"Ташлыкский\",\n+      \"Тейский\",\n+      \"Шипкинский\"\n+    ],\n+    \"additional_urban_type_Mayak_portal_link\": true,\n+    \"link_destinations_include_public_google_drive\": true,\n+    \"individual_document_files_enumerated\": false,\n+    \"full_2023_2026_document_set_covered\": false\n+  },\n+  \"local_bender\": {\n+    \"source_url\": \"https://benderygs.gospmr.org/?cat=4\",\n+    \"villages_with_explicit_local_council_sessions_sections\": [\n+      \"Гыска\",\n+      \"Протягайловка\"\n+    ],\n+    \"official_publications_link_present\": true,\n+    \"complete_source_binaries_reviewed\": false\n+  },\n+  \"scope_note\": \"The seven portals are councils of cities/districts; they must not be conflated with the 74 rural councils of Annex1. Source links are administrative discovery, not claims of certified ATU changes.\",\n+  \"verdict\": \"DISCOVERED_NONEXHAUSTIVE_LOCAL_REGISTERS\",\n+  \"blocked\": [\n+    \"No per-issuer complete document lists and signature/date inventory from 2023-2026\",\n+    \"No regional and rural council source-level completeness certification\",\n+    \"No adjudication of delegation/powers or local act legal competence to amend ATU law\",\n+    \"No full 2026 local legal notice archive\",\n+    \"No proof of effective territorial control\"\n+  ]\n+}"
+    },
+    {
+      "sha": "b233df394b077bcaa1d9cde4b4416fc300065597",
+      "filename": "docs/evidence/ni-adm11-20261024/validate.mjs",
+      "status": "added",
+      "additions": 26,
+      "deletions": 0,
+      "changes": 26,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2Fvalidate.mjs",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/a229030b08e72f99e747949757040c3168cd4fc7/docs%2Fevidence%2Fni-adm11-20261024%2Fvalidate.mjs",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm11-20261024%2Fvalidate.mjs?ref=a229030b08e72f99e747949757040c3168cd4fc7",
+      "patch": "@@ -0,0 +1,26 @@\n+import assert from 'node:assert/strict';\n+import {readFileSync} from 'node:fs';\n+import {gunzipSync} from 'node:zlib';\n+const folder=new URL('./',import.meta.url),load=n=>JSON.parse(readFileSync(new URL(n,folder),'utf8'));\n+const b=load('all-9275-title-screen.json'),l=load('late-19-title-review.json'),s=load('local-register-sources.json');\n+const p=new URL('../ni-jur-documentary-supplement-20261021/contemporary-months/census.json.gz',folder);\n+const original=JSON.parse(gunzipSync(readFileSync(p)).toString('utf8'));\n+assert.equal(original.rows.length,9275);\n+assert.equal(b.checks.unique,9275);assert.equal(b.matches_count,57);\n+for(const [year,total] of Object.entries({2023:2390,2024:2659,2025:2479,2026:1747})){\n+ const ids=new Set(original.rows.filter(x=>String(x.year)===year).map(x=>x.publication_id));\n+ assert.equal(ids.size,total);for(let i=1;i<=total;i++)assert.ok(ids.has(year+String(i).padStart(6,'0')));\n+}\n+const filters=Object.entries(b.classification_method.patterns).map(([k,v])=>[k,new RegExp(v,'i')]);\n+const matches=original.rows.map(x=>({r:x,c:filters.filter(([,p])=>p.test(x.text)).map(([k])=>k)})).filter(x=>x.c.length);\n+assert.equal(matches.length,b.matches_count);\n+assert.deepEqual(matches.map(x=>x.r.publication_id),b.role_matches.map(x=>x.id));\n+assert.deepEqual(matches.map(x=>x.c),b.role_matches.map(x=>x.category_hits));\n+assert.deepEqual(b.direct_law_phrase_ids,['2026000856','2023000446','2023000445']);\n+assert.equal(l.publication_ids.length,19);\n+assert.deepEqual(l.publication_ids.map(x=>x.publication_id),Array.from({length:19},(_,i)=>'202600'+String(1766-i).padStart(4,'0')));\n+assert.equal(l.observations.direct_ATU_155_amendments_observed_by_title,0);\n+assert.equal(s.portals.length,7);assert.equal(s.local_grigoriopol.rural_council_document_links_observed,13);\n+assert.equal(s.verdict,'DISCOVERED_NONEXHAUSTIVE_LOCAL_REGISTERS');\n+assert.equal(b.verdict,'PASS_FULL_9275_CENTRAL_TITLE_REPLAY_ONLY__CURRENT_NORMATIVE_EXHAUSTIVENESS_BLOCKED');\n+console.log('PASS NI-ADM.1.1 central title replay, 19 late titles and local registry discovery; normative close remains BLOCKED');"
+    }
+  ],
+  "checks": [
+    {
+      "total_count": 0,
+      "check_runs": []
+    }
+  ],
+  "commits": [
+    {
+      "sha": "8fcc33bee8ad9d15e9a752fac758e6a7b037f867",
+      "node_id": "C_kwDOUr2T3toAKDhmY2MzM2JlZThhZDlkMTVlOWE3NTJmYWM3NThlNmE3YjAzN2Y4Njc",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:52:15Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:52:15Z"
+        },
+        "message": "NI-ADM.1.1: replay full preserved central title index, 9275 IDs, without modifying ACTUAL",
+        "tree": {
+          "sha": "3313763c13527e25cf187cbe280bb01b3df7a37f",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/3313763c13527e25cf187cbe280bb01b3df7a37f"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/8fcc33bee8ad9d15e9a752fac758e6a7b037f867",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/8fcc33bee8ad9d15e9a752fac758e6a7b037f867",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/8fcc33bee8ad9d15e9a752fac758e6a7b037f867",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/8fcc33bee8ad9d15e9a752fac758e6a7b037f867/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "23260e7c8300173092cf20d704b593f7da09fab3",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/23260e7c8300173092cf20d704b593f7da09fab3",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/23260e7c8300173092cf20d704b593f7da09fab3"
+        }
+      ]
+    },
+    {
+      "sha": "5e94bd32ca18960e85deb1d15bb64edeb9404ebd",
+      "node_id": "C_kwDOUr2T3toAKDVlOTRiZDMyY2ExODk2MGU4NWRlYjFkMTViYjY0ZWRlYjk0MDRlYmQ",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:55:29Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:55:29Z"
+        },
+        "message": "NI-ADM.1.1: add late-19-title-review.json source-scoped audit evidence",
+        "tree": {
+          "sha": "da2e0bf1f0584de6e4504daeda93aad54e767ada",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/da2e0bf1f0584de6e4504daeda93aad54e767ada"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/5e94bd32ca18960e85deb1d15bb64edeb9404ebd",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/5e94bd32ca18960e85deb1d15bb64edeb9404ebd",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/5e94bd32ca18960e85deb1d15bb64edeb9404ebd",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/5e94bd32ca18960e85deb1d15bb64edeb9404ebd/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "8fcc33bee8ad9d15e9a752fac758e6a7b037f867",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/8fcc33bee8ad9d15e9a752fac758e6a7b037f867",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/8fcc33bee8ad9d15e9a752fac758e6a7b037f867"
+        }
+      ]
+    },
+    {
+      "sha": "bf581f13260128b37de0efc3b741955106cb0ac4",
+      "node_id": "C_kwDOUr2T3toAKGJmNTgxZjEzMjYwMTI4YjM3ZGUwZWZjM2I3NDE5NTUxMDZjYjBhYzQ",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:55:31Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:55:31Z"
+        },
+        "message": "NI-ADM.1.1: add local-register-sources.json source-scoped audit evidence",
+        "tree": {
+          "sha": "1585ef9a4d5bd052ee86455ae420e339e37a5eeb",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/1585ef9a4d5bd052ee86455ae420e339e37a5eeb"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/bf581f13260128b37de0efc3b741955106cb0ac4",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bf581f13260128b37de0efc3b741955106cb0ac4",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/bf581f13260128b37de0efc3b741955106cb0ac4",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bf581f13260128b37de0efc3b741955106cb0ac4/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "5e94bd32ca18960e85deb1d15bb64edeb9404ebd",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/5e94bd32ca18960e85deb1d15bb64edeb9404ebd",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/5e94bd32ca18960e85deb1d15bb64edeb9404ebd"
+        }
+      ]
+    },
+    {
+      "sha": "eaa0317eff11b3389011dc43cb8beca85b32b6c6",
+      "node_id": "C_kwDOUr2T3toAKGVhYTAzMTdlZmYxMWIzMzg5MDExZGM0M2NiOGJlY2E4NWIzMmI2YzY",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:55:33Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:55:33Z"
+        },
+        "message": "NI-ADM.1.1: add README.md source-scoped audit evidence",
+        "tree": {
+          "sha": "3a4ed704eda28a7c30ce0578ce56cd1252b5d37b",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/3a4ed704eda28a7c30ce0578ce56cd1252b5d37b"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/eaa0317eff11b3389011dc43cb8beca85b32b6c6",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/eaa0317eff11b3389011dc43cb8beca85b32b6c6",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/eaa0317eff11b3389011dc43cb8beca85b32b6c6",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/eaa0317eff11b3389011dc43cb8beca85b32b6c6/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "bf581f13260128b37de0efc3b741955106cb0ac4",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bf581f13260128b37de0efc3b741955106cb0ac4",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/bf581f13260128b37de0efc3b741955106cb0ac4"
+        }
+      ]
+    },
+    {
+      "sha": "a229030b08e72f99e747949757040c3168cd4fc7",
+      "node_id": "C_kwDOUr2T3toAKGEyMjkwMzBiMDhlNzJmOTllNzQ3OTQ5NzU3MDQwYzMxNjhjZDRmYzc",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:55:50Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T10:55:50Z"
+        },
+        "message": "NI-ADM.1.1: add validate.mjs source-scoped audit evidence",
+        "tree": {
+          "sha": "984d2ed0890226dbcf3c9f9e1f5da7c819b6c3cd",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/984d2ed0890226dbcf3c9f9e1f5da7c819b6c3cd"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/a229030b08e72f99e747949757040c3168cd4fc7",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/a229030b08e72f99e747949757040c3168cd4fc7",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/a229030b08e72f99e747949757040c3168cd4fc7",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/a229030b08e72f99e747949757040c3168cd4fc7/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "eaa0317eff11b3389011dc43cb8beca85b32b6c6",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/eaa0317eff11b3389011dc43cb8beca85b32b6c6",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/eaa0317eff11b3389011dc43cb8beca85b32b6c6"
+        }
+      ]
+    }
+  ],
+  "file_comparison": [
+    {
+      "path": "docs/evidence/ni-adm11-20261024/README.md",
+      "status": "added",
+      "head_blob": "fa056ae05de087dc621c877da36d782da7c197f9",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm11-20261024/all-9275-title-screen.json",
+      "status": "added",
+      "head_blob": "ba027b4f07c6d6fd035a82210d6727cc526bbbc8",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm11-20261024/late-19-title-review.json",
+      "status": "added",
+      "head_blob": "e7276b664a4ca4d4c0d833c4f6ae406170c044f1",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm11-20261024/local-register-sources.json",
+      "status": "added",
+      "head_blob": "7b02493f8b1d78bcea30ce008af24dcd9697761d",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm11-20261024/validate.mjs",
+      "status": "added",
+      "head_blob": "b233df394b077bcaa1d9cde4b4416fc300065597",
+      "main_blob": null,
+      "identical_main": false
+    }
+  ]
+}

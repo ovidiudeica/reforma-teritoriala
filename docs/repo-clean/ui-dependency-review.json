@@ -1,0 +1,195 @@
+{
+  "schema": "repo-clean-ui-dependency-readonly-review-v1",
+  "main_sha": "5e1870a1a7fdc5dda2801862b7a53b8fdb6cbc62",
+  "checked_at": "2026-10-25T15:27:08.547702+00:00",
+  "pr_reviews": [
+    {
+      "number": 365,
+      "head_sha": "d94740383fbb009e32b487cfe8a3618e55eca5ec",
+      "decision": "SUPERSEDED",
+      "replacement_pr": 366,
+      "replacement_merge_sha": "bd4bd5b1a2165e95bdb1d6ea5630b0bb997681d2",
+      "reason": "Audit-only diagnosis: NI own outlines/independent selections/three root defaults implemented by #366 and accepted NI-FIN #441. Unique audit text still requires archive.",
+      "unique_evidence_archive_required": true,
+      "files": [
+        "docs/p9.0.9.5-nistrenia-geometry-toggle-parity-audit.md"
+      ],
+      "ci_summary": {
+        "SUCCESS": 15,
+        "FAILURE": 0,
+        "SKIPPED": 2
+      },
+      "diff_sha256": "ac5f4b2435f21260defe96a43961109fb0470edfaee633f7b32acb2bcfe834d2"
+    },
+    {
+      "number": 373,
+      "head_sha": "fc6f901488be78a9a50dac5b1cd739a52ee00e6c",
+      "decision": "SUPERSEDED",
+      "replacement_pr": 376,
+      "replacement_merge_sha": "073a1ee2a2098392df5891fb6b15e69b0eef2d9c",
+      "reason": "Same redundant OSM catalogue removal and shared reset toolbar delivered by #376; main lacks old nistrenia-osm-toggle/osm-roles-panel controls.",
+      "unique_evidence_archive_required": true,
+      "files": [
+        "app.js",
+        "atlas-r1b3-polish.css",
+        "docs/p9.0.7.2.16-validate.mjs",
+        "docs/web-r1b3-1-simplification.md",
+        "index.html",
+        "scripts/audit/web-r1b-layout-browser.mjs",
+        "scripts/test/frontend-p907216-osm-roles-browser.test.mjs",
+        "scripts/test/frontend-p907216-osm-roles.test.mjs",
+        "scripts/test/frontend-p909-nistrenia-browser.test.mjs",
+        "scripts/test/frontend-p909-nistrenia-menu.test.mjs"
+      ],
+      "ci_summary": {
+        "SUCCESS": 19,
+        "FAILURE": 0,
+        "SKIPPED": 0
+      },
+      "diff_sha256": "741c4df3bf86397103f59dc21c23a60046c0ec77750cd5992b2376e176b63315"
+    },
+    {
+      "number": 374,
+      "head_sha": "097e2f26743fc108b681b5be8223ee06eb3e785a",
+      "decision": "SUPERSEDED",
+      "replacement_pr": 376,
+      "replacement_merge_sha": "073a1ee2a2098392df5891fb6b15e69b0eef2d9c",
+      "reason": "Alternative draft of accepted #376; main has atlas-panel-reset-row and independent reset actions.",
+      "unique_evidence_archive_required": true,
+      "files": [
+        "app.js",
+        "atlas-r1b3-polish.css",
+        "docs/p9.0.7.2.16-validate.mjs",
+        "docs/web-r1b4-osm-ui-reset-alignment.md",
+        "index.html",
+        "scripts/audit/web-r1b-layout-browser.mjs",
+        "scripts/test/frontend-p907216-osm-roles-browser.test.mjs",
+        "scripts/test/frontend-p907216-osm-roles.test.mjs",
+        "scripts/test/frontend-p909-nistrenia-browser.test.mjs",
+        "scripts/test/frontend-p909-nistrenia-menu.test.mjs"
+      ],
+      "ci_summary": {
+        "SUCCESS": 18,
+        "FAILURE": 1,
+        "SKIPPED": 0
+      },
+      "diff_sha256": "ee36f252ee198e99dbc1d43e8be5fcb0d0a825385f2bea8718b8d5740e913d4d"
+    },
+    {
+      "number": 375,
+      "head_sha": "3809c3da17e7f91a34bab929d6df7d83c9d5d8c2",
+      "decision": "SUPERSEDED",
+      "replacement_pr": 376,
+      "replacement_merge_sha": "073a1ee2a2098392df5891fb6b15e69b0eef2d9c",
+      "reason": "Simplification/reset payload superseded by #376; preserve draft docs/patch history, do not restore old optional catalog UI.",
+      "unique_evidence_archive_required": true,
+      "files": [
+        "atlas-r1b3-polish.css",
+        "index.html",
+        "scripts/audit/web-r1b-layout-browser.mjs",
+        "scripts/test/frontend-p907216-osm-roles-browser.test.mjs",
+        "scripts/test/frontend-p909-nistrenia-browser.test.mjs"
+      ],
+      "ci_summary": {
+        "SUCCESS": 18,
+        "FAILURE": 1,
+        "SKIPPED": 0
+      },
+      "diff_sha256": "d7a00cd05257a37d690a10fae8a421363dfa49c847725db732f8be22137cb3cd"
+    },
+    {
+      "number": 387,
+      "head_sha": "571cc9257029c7cf205c947e7956c5d5a0f8f20a",
+      "decision": "SUPERSEDED",
+      "replacement_pr": 388,
+      "replacement_merge_sha": "55cccd747fa5e3f5d244b4a1044f1addd1535115",
+      "reason": "Accepted #388 implements ARIA-controlled inline confirmation, focus lifecycle, Escape ownership, 44px targets and forced-colors; subsequent main tests preserve improved contract.",
+      "unique_evidence_archive_required": true,
+      "files": [
+        ".github/workflows/frontend-browser-qa.yml",
+        "atlas-filters.mjs",
+        "atlas-panel-content.css",
+        "atlas-panels.mjs",
+        "docs/web-r2c2-accessibility-responsive-implementation.md",
+        "scripts/test/frontend-atlas-filters.test.mjs",
+        "scripts/test/frontend-web-r2c2-a11y-browser.test.mjs",
+        "scripts/test/frontend-web-r2c2-a11y.test.mjs"
+      ],
+      "ci_summary": {
+        "SUCCESS": 20,
+        "FAILURE": 0,
+        "SKIPPED": 0
+      },
+      "diff_sha256": "1ec4e6b5f64f0d9c5eb7dcd32b8d0ba30cbfea56f5755690b660f640cbe06c69",
+      "targeted_main_test": {
+        "command": "node --test scripts/test/frontend-web-r2c2-a11y.test.mjs",
+        "log": "outputs/repo-clean-ui-deps/a11y-targeted-test.log"
+      }
+    },
+    {
+      "number": 294,
+      "head_sha": "4e49387cc02de832e6bc8990e85177d8057207f3",
+      "decision": "SECURITY_OR_COMPATIBILITY_REVIEW",
+      "already_superseded": false,
+      "current_pin": "249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "target_pin": "949feb2413d6458794dcd2491c4babbbce0c15c1",
+      "target_release": "https://github.com/actions/setup-node/releases/tag/v7.1.0",
+      "target_release_prerelease": false,
+      "action_runtime": "node24",
+      "target_SHA_pinned": true,
+      "reason": "Major v7 migrates ESM/removes dummy NODE_AUTH_TOKEN fallback. Existing configured Node24.21.0 remains explicit; no registry-url use was found. Benefit: version validation/retry and maintenance; no confirmed old-pin vulnerability established in this read-only review.",
+      "required_validation": [
+        "Review action runtime/runner compatibility and ESM/cache/auth changes",
+        "Run exact-head required gates and actual build/provenance checks"
+      ],
+      "recommendation": "Keep as explicit compatibility work unless owner chooses documented deferral; do not close as already integrated and do not update solely for zero open PRs. No migration or CI was executed by this read-only reviewer.",
+      "branch_recommendation": "ACTIVE_REQUIRED: retain compatibility-review branch and PR, not abandoned",
+      "next_minimal_regression": "Offline workflow-contract/action-input audit, exact-pin checks, then one authentic artifact upload/download roundtrip and required exact-HEAD CI; any protected provenance change requires applicable explicit approval."
+    },
+    {
+      "number": 295,
+      "head_sha": "1022b913aafdee9f655c3967675de852e5a039a4",
+      "decision": "SECURITY_OR_COMPATIBILITY_REVIEW",
+      "already_superseded": false,
+      "current_pin": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "target_pin": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+      "target_release": "https://github.com/actions/upload-artifact/releases/tag/v7.0.2",
+      "target_release_prerelease": false,
+      "action_runtime": "node24",
+      "target_SHA_pinned": true,
+      "reason": "Major artifact transport migration to node24 and @actions/artifact6.3.1 includes HTTP429 Retry-After handling. Existing artifact pin is NOT superseded. Upload pin is part of actual-build-environment and release-trust-chain contract; do not blindly replace workflow strings or approve fingerprint rebind automatically.",
+      "required_validation": [
+        "Review scripts/lib/actual-build-environment.mjs and actual-release-trust-chain-gate.yml protected exact-pin contract",
+        "Preserve host trust; any required protected provenance rebind needs separately applicable authorization",
+        "Run authentic upload/download A/B artifacts and compare byte identity",
+        "Run exact-head required checks/CodeQL"
+      ],
+      "recommendation": "Keep as explicit compatibility work unless owner chooses documented deferral; do not close as already integrated and do not update solely for zero open PRs. No migration or CI was executed by this read-only reviewer.",
+      "branch_recommendation": "ACTIVE_REQUIRED: retain compatibility-review branch and PR, not abandoned",
+      "next_minimal_regression": "Offline workflow-contract/action-input audit, exact-pin checks, then one authentic artifact upload/download roundtrip and required exact-HEAD CI; any protected provenance change requires applicable explicit approval."
+    },
+    {
+      "number": 296,
+      "head_sha": "0172f97ff24fba4b15ce8602afc717b07cbb19ed",
+      "decision": "SECURITY_OR_COMPATIBILITY_REVIEW",
+      "already_superseded": false,
+      "current_pin": "634f93cb2916e3fdff6788551b99b062d0335ce0",
+      "target_pin": "9000827ccba6bdab643e8b6fd33ac0654aef8333",
+      "target_release": "https://github.com/actions/download-artifact/releases/tag/v8.0.2",
+      "target_release_prerelease": false,
+      "action_runtime": "node24",
+      "target_SHA_pinned": true,
+      "reason": "Major download migration to node24/@actions/artifact6.3.1 adds bounded HTTP429 handling. Must test against chosen uploader with named A/B proofs and byte comparison, preserving artifact integrity.",
+      "required_validation": [
+        "Review scripts/lib/actual-build-environment.mjs and actual-release-trust-chain-gate.yml protected exact-pin contract",
+        "Preserve host trust; any required protected provenance rebind needs separately applicable authorization",
+        "Run authentic upload/download A/B artifacts and compare byte identity",
+        "Run exact-head required checks/CodeQL"
+      ],
+      "recommendation": "Keep as explicit compatibility work unless owner chooses documented deferral; do not close as already integrated and do not update solely for zero open PRs. No migration or CI was executed by this read-only reviewer.",
+      "branch_recommendation": "ACTIVE_REQUIRED: retain compatibility-review branch and PR, not abandoned",
+      "next_minimal_regression": "Offline workflow-contract/action-input audit, exact-pin checks, then one authentic artifact upload/download roundtrip and required exact-HEAD CI; any protected provenance change requires applicable explicit approval."
+    }
+  ],
+  "method": "GitHub PR diff/body/file inventory, main source patterns, merged PR metadata, official action release/action.yml/README. No refs/PRs/versions modified and no fresh CI triggered."
+}
