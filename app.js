@@ -6,6 +6,7 @@ import {createGeometryResources} from './atlas-geometry-resources.mjs';
 import {validateOsmRolesCatalog,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
 import {validateNistreniaOsmNavigation} from './atlas-nistrenia-osm.mjs';
 import {createNistreniaAdministrativeView,nistreniaSearchEntities,NISTR_EN_ROOT} from './atlas-nistrenia-jurisdiction.mjs';
+import {jurisdictionAllowsCanonicalGeometry} from './atlas-ni-jurisdiction-visibility.mjs';
 import {fetchVerifiedNistreniaOutlines,createNistreniaOutlineLayers,niOutlineIds} from './atlas-nistrenia-outlines.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
@@ -222,9 +223,14 @@ const statusLabels={
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function filterGroup(entity){return geometryClass(entity);}
 function jurisdictionChecked(j){const input=document.getElementById('layer-'+String(j||'md').toLowerCase());return j==='NI'?Boolean(input?.checked&&!input.disabled):input?.checked!==false;}
-function operationalJurisdiction(entity){return nistreniaView?.roleIds.has(entity?.id)?'NI':entity?.jurisdiction;}
+function isGeometryJurisdictionAllowed(entity){
+ return jurisdictionAllowsCanonicalGeometry(entity,{
+  isChecked:jurisdictionChecked,
+  isSharedNiGeometry:id=>Boolean(nistreniaView?.roleIds.has(id))
+ });
+}
 function isVisible(entity){
- return Boolean(entity&&visibleEntityIds.has(entity.id)&&jurisdictionChecked(operationalJurisdiction(entity))&&geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry}));
+ return Boolean(entity&&visibleEntityIds.has(entity.id)&&isGeometryJurisdictionAllowed(entity)&&geometryVisible(entity,{geometryClasses:activeFilterGroups,geometrySubtypes:activeGeometrySubtypes,statisticalLevels:activeStatisticalLevels,separateStatisticalGeometry}));
 }
 function syncJurisdictionRoots(){
  if(jurisdictionChecked('RO'))roots.RO.addTo(map);else map.removeLayer(roots.RO);
@@ -414,7 +420,7 @@ function updateSelectionVisibility(){
  if(!entity){status.textContent='';return;}
  if(!ownOutline&&!entity.map?.bbox){status.textContent='Această înregistrare nu are un contur propriu certificat. Consultați separat eventualele referințe OSM.';return;}
  const checked=(ownOutline?visibleOperationalOutlineIds:visibleEntityIds).has(entity.id);
- const jurisdictionAllowed=jurisdictionChecked(ownOutline?'NI':operationalJurisdiction(entity));
+ const jurisdictionAllowed=ownOutline?jurisdictionChecked('NI'):isGeometryJurisdictionAllowed(entity);
  if((ownOutline?checked:isVisible(entity))&&jurisdictionAllowed){status.textContent='';return;}
  if(!checked){
   status.textContent='Geometria este ascunsă. Activează explicit această entitate pentru afișare; filtrele rămân independente.';
@@ -430,7 +436,7 @@ function searchEntitiesWithNistrenia(){
 }
 function renderNistreniaDetails(id){
  const node=nistreniaView.nodes.get(id),parent=nistreniaView.nodes.get(node.parent_id);
- const types={root:'Jurisdicție virtuală',raion:'Raion',upper_city:'Oraș distinct',council:'Consiliu sătesc',place:'Localitate'};
+ const types={root:'Jurisdicție virtuală',raion:'Raion',upper_city:'Oraș distinct',council:'Consiliu sătesc',place:'Localitate',geometry_navigation:'Catalog cartografic',geometry_reference:'Referință OSM'};
  const statuses={GEOMETRY_VERIFIED:'Contur OSM verificat în snapshotul conservat',GEOMETRY_CANDIDATE:'Corespondență geometrică propusă; identitatea nu este certificată',NO_GEOMETRY_EVIDENCE:'Fără geometrie individuală probată',TOPOLOGY_CONFLICT:'Conflict topologic'};
  document.getElementById('details-title').textContent=node.display_name;
  document.getElementById('details-summary').textContent=types[node.kind]+' · organizare declarată în 2023';
@@ -541,7 +547,7 @@ function renderHierarchyTree(){
   container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
   getOsmAdminLevel:node=>osmLevelForTreeNode(node,{entityById,osmRoleById}),
   visibleIds:activeOsmAdminLevels.size===OSM_ADMIN_LEVELS.length+1?null:osmTreeVisibleIds(nistreniaView?.nodes||hierarchyNodeById,nistreniaView?.rootIds||hierarchyTree.root_ids,activeOsmAdminLevels,{entityById,osmRoleById}),
-  isGeometryAvailable:id=>Boolean(nistreniaOutlines?.has(id)||entityById.has(id)),
+  isGeometryAvailable:id=>Boolean(nistreniaOutlines?.has(id)||entityById.has(nistreniaView?.actualId(id)||id)),
   isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
    if(nistreniaOutlines?.has(id)){
@@ -873,7 +879,7 @@ async function applyUrlState(state){
 async function initializeUrlState(){
  const browser=globalThis.window;
  if(!browser?.location||!browser?.history||!browser.addEventListener)return;
- const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,treeRootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,operationalOutlineIds:nistreniaOutlines?niOutlineIds:[],virtualEntityIds:nistreniaView?.virtualIds||[],filterIndex:geometryFilterIndex});
+ const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,treeRootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,operationalOutlineIds:nistreniaOutlines?niOutlineIds:[],virtualEntityIds:[...(nistreniaView?.virtualIds||[]),...(nistreniaView?.geometryNavigationIds||[])],filterIndex:geometryFilterIndex});
  atlasUrl=createAtlasUrlState({browser,config,capture:captureUrlState,apply:applyUrlState});await atlasUrl.restore();atlasShare?.refresh();
 }
 atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>nistreniaView?.isVirtual(selectedEntityId)?{...nistreniaView.nodes.get(selectedEntityId),urlVersion:2}:entityById.get(selectedEntityId)||null});
