@@ -139,6 +139,17 @@
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40172878418",
         "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40173753178"
       ]
+    },
+    {
+      "id": "NIF-013",
+      "severity": "P1",
+      "component": "Published runtime virtual-model coverage",
+      "reproduction": "On reconciled UI, publishedRuntimeFiles returns 436 resources and omits tracked views/nistrenia/administration.json and manifest.json.",
+      "cause": "The runtime inventory covered root modules, public catalogs/geometry and release metadata, but did not include the new virtual-view JSON location.",
+      "fix": "Include both exact NI JSON paths and require both tracked assets whenever the administrative module is present. Preserve all existing inventory and integrity checks.",
+      "regression": "Positive exact-byte model/manifest coverage, untracked required manifest, stale HTTP200 and missing404 for either JSON. Local related suite:26PASS; inventory becomes438.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI",
+      "pr": 441
     }
   ]
 }

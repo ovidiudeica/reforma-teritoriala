@@ -45,3 +45,7 @@ Issue #442 rămâne deschis pentru certificarea juridică contemporană; #396 pe
 ## Validare locală după reconcilierea UI
 
 Lotul selectat RO/MD/NI, arbore, URL și securitate browser: 118/118 PASS în execuția autorizată. Lotul Chromium real (securitate + NI + două cazuri corupt/503): 9/9 PASS; cele șase teste de securitate se suprapun primului lot și nu sunt numărate ca nouă teste unice suplimentare. Capturi desktop/mobil/landscape inspectate. Prima execuție restricționată a păstrat 117 PASS și un ECONNRESET CDP; cauza exactă a resetului nu este adjudecată, iar în mediul autorizat sursa nemodificată trece integral. Logul inițial este conservat local. Nu s-a aplicat un retry în aplicație sau o slăbire a testului. Noile gate-uri CI trebuie să confirme noul SHA.
+
+## Acoperirea resurselor publicate — NIF-013
+
+Pregătirea auditului a demonstrat că inventarul existent omitea cele două JSON-uri critice sub views/nistrenia. Acestea sunt acum incluse explicit, iar prezența modulului administrativ impune urmărirea ambelor fișiere. 26 teste locale pentru inventar/sursă/retry au trecut, inclusiv 404 și HTTP200 cu model/manifest învechit. Inventarul local calculat este 438 resurse, cu 125 GeoJSON neschimbate; această numărătoare trebuie verificată pe release-ul publicat, nu impusă arbitrar. Acceptarea live rămâne în așteptare.
