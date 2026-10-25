@@ -52,6 +52,6 @@ PR #398 rămâne OPEN/Draft; Issue #396 OPEN. Nu se creează alias ACTUAL pentru
 
 `node scripts/process/audit-osm-fix4-preflight.mjs`
 
-Zece teste locale au trecut, inclusiv deschiderea unei limite vecine printr-o corecție aparent validă, lipsuri inverse HTTP200, versiuni contradictorii, geometrie autointersectată și interdicția autoaprobării. Workflow-ul dedicat regenerează raportul offline și impune diff gol. CI pe commitul publicat trebuie verificat separat; niciun rezultat viitor nu este declarat aici.
+Douăsprezece teste locale au trecut, inclusiv deschiderea unei limite vecine printr-o corecție aparent validă, lipsuri inverse HTTP200, versiuni contradictorii, geometrie autointersectată și interdicția autoaprobării. Workflow-ul dedicat regenerează raportul offline și impune diff gol. CI pe commitul publicat trebuie verificat separat; niciun rezultat viitor nu este declarat aici.
 
 La colectarea nepublicată, parserul experimental a presupus greșit `elements` în locul obiectului `changeset`, respectiv `discussion` în loc de `comments`. Originalele deja descărcate au fost reinterpretate offline; extragerile inițiale goale sunt păstrate separat în gzip. Testele resping acum extragerea goală/ambiguă și discuția incompletă. Nu a fost un defect al datelor OSM și nu s-au repetat cererile pentru a ascunde eroarea.
