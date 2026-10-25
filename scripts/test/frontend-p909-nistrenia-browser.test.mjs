@@ -17,7 +17,9 @@ try{
    const state=await page.evaluate("({toggle:!!document.getElementById('nistrenia-osm-toggle'),panel:!!document.getElementById('nistrenia-osm-panel'),rootIds:qaApp.nistreniaView.rootIds,groups:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,nodes:qaApp.nistreniaView.nodes.size,official:qaApp.nistreniaView.officialNodeCount,rootName:qaApp.nistreniaView.root.display_name,defaultOperational:[...qaApp.visibleOperationalOutlineIds]})");
    assert.equal(state.toggle,false);assert.equal(state.panel,false);
    assert.equal(state.rootName,'Nistrenia');assert.equal(state.groups,9);assert.equal(state.roles,85);
-   assert.equal(state.nodes,5848+242);assert.equal(state.official,5848);
+   // U1.4 adds one explicitly non-administrative navigation folder plus 85 aliases,
+   // not 86 administrative units or copies of ACTUAL geometry.
+   assert.equal(state.nodes,5848+242+86);assert.equal(state.official,5848);
    assert.deepEqual(state.rootIds.slice(0,2).sort(),['osm-r58974','osm-r90689'].sort());
    assert.equal(state.rootIds[2],'view-nistrenia');
    assert.deepEqual(state.defaultOperational,['view-nistrenia']);
