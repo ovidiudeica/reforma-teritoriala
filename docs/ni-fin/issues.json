@@ -10,7 +10,14 @@
       "cause": "Active urban parent was retained across a new numbered sibling item.",
       "fix": "Source-bound correction of virtual parent only, preserving original census and officialMDparent.",
       "regression": "Mayak effectiveparentunit22; lettered25-27underplace24; nestedlocalities allowed and cycles rejected.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-002",
@@ -20,7 +27,14 @@
       "cause": "The existing read-only census forbids any data/public diff, including virtual presentation data.",
       "fix": "Move derived model and manifest to views/nistrenia; update loader/generator bindings; preserve gate and protected directories unchanged.",
       "regression": "Model byte regeneration and SHA loader; existing WEB-R2a.1 gate remains mandatory.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-003",
@@ -30,7 +44,14 @@
       "cause": "Legacy runtime assertions describe the replaced geometric-group tree rather than the approved9unit documentary tree.",
       "fix": "Update only runtime expectations to9 units and verified administrative loader; retain old7group catalog/85role invariants and every existing test.",
       "regression": "P907216/P909/P9094 browser and menu tests; new242node reciprocal-path tests.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-004",
@@ -40,7 +61,14 @@
       "cause": "The exhaustive audit exceeds Chromium IPC navigation flood protection on the faster hosted runner; local Windows did not hit that rate.",
       "fix": "Pace the synthetic all-card traversal by125ms per selection; keep browser flood protection active; assert no throttling diagnostics.",
       "regression": "All242 cards remain checked; URL hydration and Back/Forward after traversal still required.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-005",
@@ -50,7 +78,14 @@
       "cause": "Card content was replaced without resetting the contextual scrolling elements for a changed documentary selection.",
       "fix": "Reset details-panel/content/body scroll only when selected ID changes; resource toggles inside the same card preserve position.",
       "regression": "Real Chromium scroll500 then council selection must start at scrollTop0.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-006",
@@ -60,7 +95,14 @@
       "cause": "The first validator checked registry shape but did not bind all display metadata and per-node authority fields.",
       "fix": "Reject malformed version/timestamp/level metadata, missing source-name lists, per-node authority/epoch promotion and aliases outside the85canonical resources.",
       "regression": "Six negative model tests added;26model tests PASS.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-007",
@@ -70,7 +112,14 @@
       "cause": "Optional NI model acquisition occurred inside the mandatory hierarchy initialization phase.",
       "fix": "Validate NI model in the existing optional OSM/NI acquisition boundary; reject NI only, then initialize official RO/MD hierarchy, geometry and URL normally.",
       "regression": "Two realChromium negative scenarios require5848ACTUAL records, functionaltree, selectedRO/MDroots, NI disabled and canonicalMDselection.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-008",
@@ -80,7 +129,14 @@
       "cause": "New browser audit accepted arbitrary environment-selected artifact output paths.",
       "fix": "Use existing fixed auditEvidenceDirectory namespace and a literal ni-fin subdirectory; remove custom destination environment input.",
       "regression": "CodeQL exactHEAD plus existing browsersecurity helper tests; no rule suppression or dismissal.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-009",
@@ -90,7 +146,14 @@
       "cause": "Existing detailRow helper requires an explicit definition-list wrapper from the caller.",
       "fix": "Wrap documentary parent/geometry/status/source rows in the existing kv definition-list component.",
       "regression": "All242cards require every dt/dd to have a dl ancestor in realChromium.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI"
+      "status": "CLOSED_RETEST_PASS",
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-010",
@@ -148,8 +211,15 @@
       "cause": "The runtime inventory covered root modules, public catalogs/geometry and release metadata, but did not include the new virtual-view JSON location.",
       "fix": "Include both exact NI JSON paths and require both tracked assets whenever the administrative module is present. Preserve all existing inventory and integrity checks.",
       "regression": "Positive exact-byte model/manifest coverage, untracked required manifest, stale HTTP200 and missing404 for either JSON. Local related suite:26PASS; inventory becomes438.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI",
-      "pr": 441
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 441,
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-014",
@@ -159,8 +229,15 @@
       "cause": "Dedicated acceptance did not bind checkout, report provenance and fixed published target as independent requirements.",
       "fix": "Explicit exact PR-head checkout and artifact naming; report includes committed source SHA, clean state, status and enumerated mode; manual fixed Pages mode verifies nine source hashes plus exact model/manifest bytes, then exercises the same NI scenarios.",
       "regression": "Four invalid modes fail before browser launch; local positive scenario passes with approved Edge/Chromium. CI report admission checks exact expected SHA, clean state, PASS and selected mode. Published positive scenario remains mandatory after UI publication.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI",
-      "pr": 441
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 441,
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     },
     {
       "id": "NIF-015",
@@ -170,8 +247,15 @@
       "cause": "The acceptance test did not distinguish stable interior overflow from font/animation capture timing; no stable application clipping reproduced in the local settled Edge measurement.",
       "fix": "Preserve CSS; wait for fonts, finite panel animations and two layout frames, then assert visible expanded content and no interior horizontal overflow before screenshots. Store actual layout measurements in the report.",
       "regression": "1440/900/390/844/360 viewport card measurements and expanded mobile cases; new local Chromium scenario PASS. Exact-HEAD Linux Chrome CI remains required.",
-      "status": "FIX_IMPLEMENTED_PENDING_CI",
-      "pr": 441
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 441,
+      "verified_head": "77187a976e08659873342adf12deedff524e088e",
+      "accepted_main": "6e6e3b1cc56168e52a0c1dd99af011d7ac87232e",
+      "published_evidence": "docs/evidence/ni-fin-closure-20261025/",
+      "verification_runs": [
+        40196584156,
+        40196586784
+      ]
     }
   ]
 }
