@@ -49,3 +49,7 @@ Până atunci: `NI_FUNCTIONAL_COMPLETE=false`, `NI_LEGAL_CERTIFICATION_PENDING=t
 ## Rebind autentic aplicat
 
 Run P9.0.5 `40142346381` pe `61a09bd59d81a5d7549d6fac618efee8b252d2fd`: SUCCESS. Cele șase fișiere din artifactul `12578889574` au fost verificate individual și aplicate fără regenerare locală. Snapshotul, fingerprinturile semantice, cele 32 de componente, geometriile și bundle-urile sursă/review sunt identice cu release-ul anterior. `verify-actual-persisted-base`: PASS local. Reproductibilitatea reală A/B trebuie executată pe noul HEAD; rezultatele anterioare nu sunt reutilizate.
+
+## Adaptare WEB-R2a.1 autorizată separat
+
+Proprietarul a răspuns «Autorizez adaptarea strictă descrisă». Înregistrarea aprobării și lista celor șase hashuri sunt conservate și legate de SHA-256 în validator. Alte modificări data/public rămân fatale. Comparația directă a arborilor cu baza fixă funcționează și într-un checkout shallow fără a reduce domeniul verificat. Manifestul istoric WEB-R2a.1 rămâne intact; noua legătură de proveniență este păstrată separat. Niciun required check nu este eliminat sau redenumit. Ramura de admitere folosește prefixul existent `actual/provenance-`; PR #443 conservă istoricul calificării.
