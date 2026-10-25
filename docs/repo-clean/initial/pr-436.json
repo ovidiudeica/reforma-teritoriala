@@ -1,0 +1,1268 @@
+{
+  "number": 436,
+  "detail": {
+    "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/436",
+    "id": 4995620632,
+    "node_id": "PR_kwDOUr2T3s8AAAABKcMfGA",
+    "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/436",
+    "diff_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/436.diff",
+    "patch_url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/436.patch",
+    "issue_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/436",
+    "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/436/commits",
+    "review_comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/436/comments",
+    "review_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/comments{/number}",
+    "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/436/comments",
+    "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+    "number": 436,
+    "state": "open",
+    "locked": false,
+    "title": "NI-ADM.1.3.2: 14 ediții oficiale datate, acte locale inspectate și originale PDF încă blocate",
+    "user": {
+      "login": "ovidiudeica",
+      "id": 61658017,
+      "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ovidiudeica",
+      "html_url": "https://github.com/ovidiudeica",
+      "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+      "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+      "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+      "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+      "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "**PR evidence-only, stacked peste #435 → #434 → #433 → #432 → #430 → #428.** ACTUAL/CUATM/OSM/website/arbore Nistrenia neschimbate.\n\nSursă oficială alternativă identificată: https://ul-test.gospmr.org (migrare a bazei «Юридическая литература»). Am reconciliat toate cele 14 legi rămase la fișele lor originale de metadate și ediții HTML: 7 dispoziții vizibile de intrare în vigoare în ziua următoare publicării, 4 date fixe și **3 condiții normative nerezolvate**. Legea 216/2023 are data actului 13 iulie, publicarea 14 iulie. Legea 223/2025 are efect declarativ retroactiv pentru raporturi juridice începând din 9 iulie 2025. **PDF-urile originale sunt în continuare restricționate la descărcare prin abonament: 0/14 originale recuperate și SHA-256 certificate**, iar previzualizarea publică poate omite textul operativ al articolului 1. Nu revendicăm certificarea efectelor asupra ierarhiei.\n\nPe baza celor 307 fișiere locale deja inventariate, au fost citite 14 regulamente (11 lizibile, 3 fără text) și 18 hotărâri/documente normative selectate (15 lizibile, 3 fără text); niciun efect asupra limitelor ori părinților administrativi nu a fost acceptat. Pentru **două PDF-uri locale brute** sunt consemnate hashuri SHA-256 și dimensiuni reale, fără a pretinde autentificarea semnăturii emitentului. `validate.mjs` menține gate-urile fail-closed.\n\nVerdict: **PARTIAL_PASS_SOURCE_METADATA** / **BLOCKED_PRIMARY_BINARY_AND_NORMATIVE_EFFECT**. PR Draft, fără merge până la accesul justificat la originale, review-ul juridic și CI pe SHA exact. `P9.1=BLOCKED`.",
+    "labels": [],
+    "milestone": null,
+    "active_lock_reason": null,
+    "created_at": "2026-10-24T13:03:19Z",
+    "updated_at": "2026-10-24T13:03:19Z",
+    "closed_at": null,
+    "merged_at": null,
+    "merge_commit_sha": "3a1362618a66eefcb0d1dbd4125616dae1f59a23",
+    "assignee": null,
+    "assignees": [],
+    "requested_reviewers": [],
+    "requested_teams": [],
+    "head": {
+      "label": "ovidiudeica:audit/ni-adm132-public-edition-and-local-effects-20261024",
+      "ref": "audit/ni-adm132-public-edition-and-local-effects-20261024",
+      "repo": {
+        "id": 1388155870,
+        "node_id": "R_kgDOUr2T3g",
+        "name": "reforma-teritoriala",
+        "full_name": "ovidiudeica/reforma-teritoriala",
+        "owner": {
+          "login": "ovidiudeica",
+          "id": 61658017,
+          "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ovidiudeica",
+          "html_url": "https://github.com/ovidiudeica",
+          "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+          "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+          "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+          "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+          "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "private": false,
+        "fork": false,
+        "archived": false,
+        "disabled": false,
+        "description": "Atlas teritorial ACTUAL pentru România și Republica Moldova; ISTORIC și PROPUNERI în roadmap",
+        "homepage": "https://ovidiudeica.github.io/reforma-teritoriala/",
+        "language": "JavaScript",
+        "visibility": "public",
+        "is_template": false,
+        "topics": [],
+        "forks_count": 0,
+        "forks": 0,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "watchers": 0,
+        "open_issues_count": 43,
+        "open_issues": 43,
+        "size": 248674,
+        "default_branch": "main",
+        "has_issues": true,
+        "has_projects": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "has_downloads": false,
+        "has_discussions": false,
+        "has_pull_requests": true,
+        "pushed_at": "2026-10-25T14:01:33Z",
+        "created_at": "2026-09-25T20:26:58Z",
+        "updated_at": "2026-10-25T14:01:35Z",
+        "allow_forking": true,
+        "web_commit_signoff_required": false,
+        "pull_request_creation_policy": "all",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "url": "https://api.github.com/licenses/mit",
+          "spdx_id": "MIT",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala",
+        "archive_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/{archive_format}{/ref}",
+        "assignees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/assignees{/user}",
+        "blobs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/blobs{/sha}",
+        "branches_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/branches{/branch}",
+        "collaborators_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/collaborators{/collaborator}",
+        "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/comments{/number}",
+        "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits{/sha}",
+        "compare_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/compare/{base}...{head}",
+        "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/{+path}",
+        "contributors_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contributors",
+        "deployments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/deployments",
+        "downloads_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/downloads",
+        "events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/events",
+        "forks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/forks",
+        "git_commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits{/sha}",
+        "git_refs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/refs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/tags{/sha}",
+        "git_url": "git://github.com/ovidiudeica/reforma-teritoriala.git",
+        "issue_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/comments{/number}",
+        "issue_events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/events{/number}",
+        "issues_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues{/number}",
+        "keys_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/keys{/key_id}",
+        "labels_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/labels{/name}",
+        "languages_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/languages",
+        "merges_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/merges",
+        "milestones_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/notifications{?since,all,participating}",
+        "pulls_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls{/number}",
+        "releases_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/releases{/id}",
+        "ssh_url": "git@github.com:ovidiudeica/reforma-teritoriala.git",
+        "stargazers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/stargazers",
+        "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/{sha}",
+        "subscribers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscribers",
+        "subscription_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscription",
+        "tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/tags",
+        "teams_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/teams",
+        "trees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees{/sha}",
+        "clone_url": "https://github.com/ovidiudeica/reforma-teritoriala.git",
+        "mirror_url": null,
+        "hooks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/hooks",
+        "svn_url": "https://github.com/ovidiudeica/reforma-teritoriala"
+      },
+      "sha": "cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "user": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    },
+    "base": {
+      "label": "ovidiudeica:audit/ni-adm131-legal-evidence-20261024",
+      "ref": "audit/ni-adm131-legal-evidence-20261024",
+      "repo": {
+        "id": 1388155870,
+        "node_id": "R_kgDOUr2T3g",
+        "name": "reforma-teritoriala",
+        "full_name": "ovidiudeica/reforma-teritoriala",
+        "owner": {
+          "login": "ovidiudeica",
+          "id": 61658017,
+          "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ovidiudeica",
+          "html_url": "https://github.com/ovidiudeica",
+          "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+          "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+          "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+          "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+          "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "private": false,
+        "fork": false,
+        "archived": false,
+        "disabled": false,
+        "description": "Atlas teritorial ACTUAL pentru România și Republica Moldova; ISTORIC și PROPUNERI în roadmap",
+        "homepage": "https://ovidiudeica.github.io/reforma-teritoriala/",
+        "language": "JavaScript",
+        "visibility": "public",
+        "is_template": false,
+        "topics": [],
+        "forks_count": 0,
+        "forks": 0,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "watchers": 0,
+        "open_issues_count": 43,
+        "open_issues": 43,
+        "size": 248674,
+        "default_branch": "main",
+        "has_issues": true,
+        "has_projects": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "has_downloads": false,
+        "has_discussions": false,
+        "has_pull_requests": true,
+        "pushed_at": "2026-10-25T14:01:33Z",
+        "created_at": "2026-09-25T20:26:58Z",
+        "updated_at": "2026-10-25T14:01:35Z",
+        "allow_forking": true,
+        "web_commit_signoff_required": false,
+        "pull_request_creation_policy": "all",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "url": "https://api.github.com/licenses/mit",
+          "spdx_id": "MIT",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala",
+        "archive_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/{archive_format}{/ref}",
+        "assignees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/assignees{/user}",
+        "blobs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/blobs{/sha}",
+        "branches_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/branches{/branch}",
+        "collaborators_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/collaborators{/collaborator}",
+        "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/comments{/number}",
+        "commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits{/sha}",
+        "compare_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/compare/{base}...{head}",
+        "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/{+path}",
+        "contributors_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contributors",
+        "deployments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/deployments",
+        "downloads_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/downloads",
+        "events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/events",
+        "forks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/forks",
+        "git_commits_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits{/sha}",
+        "git_refs_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/refs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/tags{/sha}",
+        "git_url": "git://github.com/ovidiudeica/reforma-teritoriala.git",
+        "issue_comment_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/comments{/number}",
+        "issue_events_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/events{/number}",
+        "issues_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues{/number}",
+        "keys_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/keys{/key_id}",
+        "labels_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/labels{/name}",
+        "languages_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/languages",
+        "merges_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/merges",
+        "milestones_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/notifications{?since,all,participating}",
+        "pulls_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls{/number}",
+        "releases_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/releases{/id}",
+        "ssh_url": "git@github.com:ovidiudeica/reforma-teritoriala.git",
+        "stargazers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/stargazers",
+        "statuses_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/{sha}",
+        "subscribers_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscribers",
+        "subscription_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/subscription",
+        "tags_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/tags",
+        "teams_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/teams",
+        "trees_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees{/sha}",
+        "clone_url": "https://github.com/ovidiudeica/reforma-teritoriala.git",
+        "mirror_url": null,
+        "hooks_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/hooks",
+        "svn_url": "https://github.com/ovidiudeica/reforma-teritoriala"
+      },
+      "sha": "ae676b67c0f30f9cb93972dd9d5a71a5898b6934",
+      "user": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    },
+    "_links": {
+      "comments": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/436/comments"
+      },
+      "commits": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/436/commits"
+      },
+      "statuses": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/statuses/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64"
+      },
+      "html": {
+        "href": "https://github.com/ovidiudeica/reforma-teritoriala/pull/436"
+      },
+      "issue": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/issues/436"
+      },
+      "review_comments": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/436/comments"
+      },
+      "review_comment": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/comments{/number}"
+      },
+      "self": {
+        "href": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/pulls/436"
+      }
+    },
+    "author_association": "OWNER",
+    "auto_merge": null,
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "rebaseable": true,
+    "mergeable_state": "clean",
+    "merged_by": null,
+    "comments": 0,
+    "review_comments": 0,
+    "maintainer_can_modify": false,
+    "commits": 9,
+    "additions": 1300,
+    "deletions": 0,
+    "changed_files": 8
+  },
+  "files": [
+    {
+      "sha": "ce870f8d6c9ac0c4a488bd90a233142c0f22cc86",
+      "filename": "docs/evidence/ni-adm132-20261024/README.md",
+      "status": "added",
+      "additions": 43,
+      "deletions": 0,
+      "changes": 43,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2FREADME.md",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2FREADME.md",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm132-20261024%2FREADME.md?ref=cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "patch": "@@ -0,0 +1,43 @@\n+# NI-ADM.1.3.2 — surse oficiale alternative și trierea documentelor normative locale\n+\n+**Referință:** 24.10.2026. **PR probatoriu stacked** peste #435 → #434 → #433 → #432 → #430 → #428. `P9.1=BLOCKED`; fără mutații ACTUAL/MD/OSM/UI.\n+\n+## 14 legi centrale: ce este verificat acum\n+\n+Am identificat **14/14 fișe și ediții inițiale** individuale ale legilor rămase din NI-ADM.1.3.1 în noua bază oficială publică [Юридическая литература](https://ul-test.gospmr.org/documents/search/). Fiecare are ID de document, URL de ediție, număr, dată și sursă oficială SÁZ în `official-editions-01.json` și `official-editions-02.json`.\n+\n+**Important:** portalul arată versiuni HTML publice, dar **descărcarea PDF este restricționată de tarif**, iar previzualizarea unor articole operative este incompletă. Nu am obținut sau certificat 14/14 PDF-uri originale. **Zero noi originale PDF, zero SHA-256 de original legislativ, zero semnături calificate certificate.** Nu se poate înlocui originalul cu PDF creat din text HTML.\n+\n+Regulile de intrare în vigoare vizibile din articolul final, verificate individual și păstrate în `law-effective-dates.json`:\n+- **7 legi**: ziua următoare publicării oficiale;\n+- **4 legi**: dată calendaristică explicită (01.01.2024, 01.01.2025 sau 01.01.2026);\n+- **3 legi**: efect condiționat de un alt act de modificare a Constituției, statutului deputaților locali, respectiv Codului civil. Aceste condiții **nu sunt încă adjudecate**, deci nu se presupune aplicabilitatea.\n+- **223-ЗИ-VII / 18.11.2025**: articolul 2 indică intrare în vigoare în ziua următoare publicării și aplicare raporturilor juridice apărute din 09.07.2025. Efectul retroactiv nu certifică întregul conținut al articolului 1.\n+- **216-ЗИ-VII / 2023**: lege emisă la 13.07.2023, publicată la 14.07.2023, regulă de intrare în vigoare în ziua următoare.\n+- **48-ЗИ-VII / 05.03.2024**: fișa oficială afișează titlul legii-cadru a autorităților locale, spre deosebire de titlul de amendament din indexul anterior; diferența se conservă ca excepție, nu se cosmetizează.\n+\n+Pentru 11 legi regula temporală poate fi derivată aritmetic din data oficială centrală; **nu este o certificare a articolului 1 integral sau a efectelor asupra ierarhiei**, care rămân `UNDETERMINED`.\n+\n+## Arhive locale: 307 ID-uri deja inventariate, fără reluarea enumerării\n+\n+Am folosit exclusiv identificatorii fișierelor conservați în NI-ADM.1.3.1. În `local-regulations-14.json` am verificat conținutul a 14 regulamente/fișiere cu rol de regulament: **11** au text lizibil, **3** nu au produs text extras (Vinogradnoe, Teia, Tașlîc).\n+\n+În `selected-decisions-18.json` au fost citite și clasificate 18 hotărâri/documente din dosarele locale: **15** cu text lizibil, **3** fără text extras (Vinogradnoe, Crasnogorca, Carmanova). Categoriile identificate includ comisii permanente, petiții, deputați și bugete. **Fără certificat de original semnat** sau dovadă de schimbare a subordonării ori limitelor administrative. Nu afirmăm că celelalte fișiere din lista de 307 au fost revizuite integral.\n+\n+`local-binary-hashes.json` conservă SHA-256 calculat pentru **două fișiere PDF locale reale** furnizate de sursa publică Google Drive a consiliului:\n+- Bîcioc: 808.115 bytes, 25 pagini, SHA-256 `16af5bc5e193813ccf2770d07be8e631ed4fb7232ed419ca346287042982250e` (verificat prin două descărcări);\n+- Hlinaia: 494.587 bytes, 25 pagini, SHA-256 `f01e88902e6c83d38d1d7fa7285081763520838650ac5430174050b6136db1f7`.\n+Digestul verifică **integritatea binară a exemplarului accesat**, nu autentificarea semnăturii, calificarea sursei drept registru complet sau aplicabilitatea la 24 octombrie.\n+\n+## GATE: blocaje specifice, nu generalizări\n+\n+Nu există în acest audit certitudinea asupra conținutului complet al articolului 1 pentru cele 14 legi, a validării condițiilor de intrare în vigoare pentru trei dintre ele ori a exhaustivității originalelor locale semnate (2023–2026). În special un regulament local nu substituie legea administrativ-teritorială sau geometria OSM.\n+\n+**Verdict:** `SOURCE_DISCOVERY_14=PASS`, `UNCONDITIONAL_DATE_RULES_11=PASS_SOURCE_SCOPED`, `LOCAL_TEXT_26=PASS_SCOPED`; `PDF_ORIGINALS_14=BLOCKED`, `CONDITIONS_3=BLOCKED`, `ART1_EFFECTS_14=BLOCKED`, `LOCAL_REGISTER_EXHAUSTIVENESS=BLOCKED`.\n+\n+Protecții explicite: `ACTUAL_mutation_allowed=false`, `P9.1=BLOCKED`, `website_tree_change_allowed=false`, `local_parent_promotions=0`, fără relaxare CI. Niciun PR nu se integrează automat.\n+\n+### Referințe principale\n+- [Noua bază oficială de facto](https://ul-test.gospmr.org/).\n+- [Directorul oficial Grigoriopol](https://grig-rsnd.idknet.com/home/sel-sovet).\n+- Evidența exactă per-ID din dosarul părinte `docs/evidence/ni-adm131-20261024/`."
+    },
+    {
+      "sha": "230b0ef292cf1d1bb13590c0b21c658a7d45cffe",
+      "filename": "docs/evidence/ni-adm132-20261024/law-effective-dates.json",
+      "status": "added",
+      "additions": 293,
+      "deletions": 0,
+      "changes": 293,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Flaw-effective-dates.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Flaw-effective-dates.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm132-20261024%2Flaw-effective-dates.json?ref=cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "patch": "@@ -0,0 +1,293 @@\n+{\n+  \"schema\": \"ni-adm132-official-commencement-determination-v1\",\n+  \"cutoff\": \"2026-10-24\",\n+  \"source_documentation\": [\n+    {\n+      \"path\": \"docs/evidence/ni-adm132-20261024/official-editions-01.json\",\n+      \"blob\": \"ee9abcf9afdd40ce441ee8d6c1abe7e12e672e1d\"\n+    },\n+    {\n+      \"path\": \"docs/evidence/ni-adm132-20261024/official-editions-02.json\",\n+      \"blob\": \"98470ecdd6d52ae58719c9f4208cc066060e64ab\"\n+    }\n+  ],\n+  \"rows\": [\n+    {\n+      \"publication_id\": \"2025002031\",\n+      \"law_number\": \"223-ЗИ-VII\",\n+      \"act_date\": \"2025-11-18\",\n+      \"official_publication_day\": \"2025-11-18\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/a9111e0d-ca73-4369-b8f3-2e478223de36/2f979b64-1188-4752-81bd-036b9aa99262/html/\",\n+      \"saz\": \"25-46\",\n+      \"effective_rule\": \"NEXT_DAY_AFTER_OFFICIAL_PUBLICATION\",\n+      \"derived_effective_date\": \"2025-11-19\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": \"2025-07-09\",\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2025001392\",\n+      \"law_number\": \"187-ЗИ-VII\",\n+      \"act_date\": \"2025-08-19\",\n+      \"official_publication_day\": \"2025-08-19\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/d7f16bf5-1fe8-48d6-9b05-c40a56fe79bd/f9f69dc4-498e-4a00-a721-563309c36991/html/\",\n+      \"saz\": \"25-33\",\n+      \"effective_rule\": \"FIXED_COMMENCEMENT\",\n+      \"derived_effective_date\": \"2026-01-01\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2025000896\",\n+      \"law_number\": \"97-ЗИ-VII\",\n+      \"act_date\": \"2025-06-09\",\n+      \"official_publication_day\": \"2025-06-09\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/1318f391-1d7d-4517-827a-951bb483ca8d/41afdaa8-3a69-404c-8355-d7a0af4484f6/html/\",\n+      \"saz\": \"25-23\",\n+      \"effective_rule\": \"CONDITIONAL_COMMENCEMENT\",\n+      \"derived_effective_date\": null,\n+      \"condition_unresolved\": true,\n+      \"condition_description_ru\": \"Статья 2. Настоящий Закон вступает в силу со дня вступления в силу Конституционного закона Приднестровской Молдавской Республики «О внесении изменения и дополнения в Конституцию Приднестровской Молдавской Республики», закрепляющего в Конституции Приднестровской Молдавской Республики норму об установлении законом условий проведения выборов (формирования) представительных органов местного самоуправления.\",\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": null,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2024002593\",\n+      \"law_number\": \"340-ЗИ-VII\",\n+      \"act_date\": \"2024-12-26\",\n+      \"official_publication_day\": \"2024-12-26\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/103dc4de-8178-4b3c-8b81-6d924d5c412d/dd3bd3d9-454a-4535-9185-60888f691949/html/\",\n+      \"saz\": \"24-52\",\n+      \"effective_rule\": \"CONDITIONAL_COMMENCEMENT\",\n+      \"derived_effective_date\": null,\n+      \"condition_unresolved\": true,\n+      \"condition_description_ru\": \"Статья 2. Настоящий Закон вступает в силу со дня вступления в силу Закона Приднестровской Молдавской Республики «О внесении изменения в Закон Приднестровской Молдавской Республики «О статусе народных депутатов местных Советов народных депутатов Приднестровской Молдавской Республики», предусматривающего информирование народными депутатами местных Советов о проделанной работе по рассмотрению предложений, заявлений и жалоб граждан за календарный год\",\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": null,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2024002387\",\n+      \"law_number\": \"287-ЗИД-VII\",\n+      \"act_date\": \"2024-11-29\",\n+      \"official_publication_day\": \"2024-11-29\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/5003d3b1-5445-4834-b626-f3846b01e21d/f8c615e1-2eff-464e-999e-aaef3044f8c3/html/\",\n+      \"saz\": \"24-48\",\n+      \"effective_rule\": \"FIXED_COMMENCEMENT\",\n+      \"derived_effective_date\": \"2025-01-01\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2024002326\",\n+      \"law_number\": \"276-ЗД-VII\",\n+      \"act_date\": \"2024-11-22\",\n+      \"official_publication_day\": \"2024-11-22\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/ca9d82d0-5f63-4adb-a145-897e11628471/f0c7fb77-e443-4a32-a2fb-aabe3fba066a/html/\",\n+      \"saz\": \"24-47\",\n+      \"effective_rule\": \"FIXED_COMMENCEMENT\",\n+      \"derived_effective_date\": \"2025-01-01\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2024001014\",\n+      \"law_number\": \"97-ЗД-VII\",\n+      \"act_date\": \"2024-05-30\",\n+      \"official_publication_day\": \"2024-05-30\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/9cadc92a-456a-4e08-a131-32a845d6076e/9677c9fd-d30e-4cc4-afbb-57931885c691/html/\",\n+      \"saz\": \"24-23\",\n+      \"effective_rule\": \"CONDITIONAL_COMMENCEMENT\",\n+      \"derived_effective_date\": null,\n+      \"condition_unresolved\": true,\n+      \"condition_description_ru\": \"Статья 2. Настоящий Закон вступает в силу со дня вступления в силу Закона Приднестровской Молдавской Республики «О внесении изменений в Гражданский кодекс Приднестровской Молдавской Республики», предусматривающего возможность возложения обязанности по осуществлению ликвидации юридических лиц на органы местного государственного управления.\",\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": null,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2024000427\",\n+      \"law_number\": \"48-ЗИ-VII\",\n+      \"act_date\": \"2024-03-05\",\n+      \"official_publication_day\": \"2024-03-05\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/8650bb22-e4bb-47b8-877c-360961e5854f/0a27a4fb-d922-4083-9d54-8ed6c05bde30/html/\",\n+      \"saz\": \"24-11\",\n+      \"effective_rule\": \"NEXT_DAY_AFTER_OFFICIAL_PUBLICATION\",\n+      \"derived_effective_date\": \"2024-03-06\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2023001591\",\n+      \"law_number\": \"291-ЗИ-VII\",\n+      \"act_date\": \"2023-09-29\",\n+      \"official_publication_day\": \"2023-09-29\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/b459f5ad-a11a-45f8-9abf-ff322147acf8/ec42cccf-fde3-4cc2-923c-660a8b40f848/html/\",\n+      \"saz\": \"23-39\",\n+      \"effective_rule\": \"FIXED_COMMENCEMENT\",\n+      \"derived_effective_date\": \"2024-01-01\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2023001134\",\n+      \"law_number\": \"216-ЗИ-VII\",\n+      \"act_date\": \"2023-07-13\",\n+      \"official_publication_day\": \"2023-07-14\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/98d01069-c5a1-44dd-a5ca-d6bb9d6aa505/e937629c-4b1f-4feb-a233-4b9aa5f8d7e9/html/\",\n+      \"saz\": \"23-28\",\n+      \"effective_rule\": \"NEXT_DAY_AFTER_OFFICIAL_PUBLICATION\",\n+      \"derived_effective_date\": \"2023-07-15\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2023000621\",\n+      \"law_number\": \"85-ЗИ-VII\",\n+      \"act_date\": \"2023-04-19\",\n+      \"official_publication_day\": \"2023-04-19\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/409ab6b0-6469-483f-8ef1-b654af266a5a/0c8549fc-f34c-4c47-bc9c-4a8b519a5fa3/html/\",\n+      \"saz\": \"23-16\",\n+      \"effective_rule\": \"NEXT_DAY_AFTER_OFFICIAL_PUBLICATION\",\n+      \"derived_effective_date\": \"2023-04-20\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2023000620\",\n+      \"law_number\": \"84-ЗИ-VII\",\n+      \"act_date\": \"2023-04-19\",\n+      \"official_publication_day\": \"2023-04-19\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/0c38cca7-670b-4a3f-b225-d4a612dcaa37/8af97340-aca1-4b02-91a4-e86bea93bde5/html/\",\n+      \"saz\": \"23-16\",\n+      \"effective_rule\": \"NEXT_DAY_AFTER_OFFICIAL_PUBLICATION\",\n+      \"derived_effective_date\": \"2023-04-20\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2023000117\",\n+      \"law_number\": \"7-ЗД-VII\",\n+      \"act_date\": \"2023-01-30\",\n+      \"official_publication_day\": \"2023-01-30\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/c3fa55a2-8c2d-4352-a123-ad7302204dbb/76b890ba-742b-45eb-b24f-3cf1a92f27cd/html/\",\n+      \"saz\": \"23-5\",\n+      \"effective_rule\": \"NEXT_DAY_AFTER_OFFICIAL_PUBLICATION\",\n+      \"derived_effective_date\": \"2023-01-31\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    },\n+    {\n+      \"publication_id\": \"2023000001\",\n+      \"law_number\": \"1-ЗИД-VII\",\n+      \"act_date\": \"2023-01-09\",\n+      \"official_publication_day\": \"2023-01-09\",\n+      \"official_edition_url\": \"https://ul-test.gospmr.org/documents/6b6c6e17-cfff-45bc-869d-9c4392becfd4/cfc5c409-b946-4dd1-9505-44cd00e2f5d2/html/\",\n+      \"saz\": \"23-2\",\n+      \"effective_rule\": \"NEXT_DAY_AFTER_OFFICIAL_PUBLICATION\",\n+      \"derived_effective_date\": \"2023-01-10\",\n+      \"condition_unresolved\": false,\n+      \"condition_description_ru\": null,\n+      \"retroactive_relationships_start\": null,\n+      \"effective_as_of_2026_10_24\": true,\n+      \"signed_original_pdf_available\": false,\n+      \"original_pdf_sha256\": null,\n+      \"complete_article_1_legislative_effect_certified\": false,\n+      \"territorial_boundaries_effect_certified\": false\n+    }\n+  ],\n+  \"counts\": {\n+    \"NEXT_DAY_AFTER_OFFICIAL_PUBLICATION\": 7,\n+    \"FIXED_COMMENCEMENT\": 4,\n+    \"CONDITIONAL_COMMENCEMENT\": 3\n+  },\n+  \"legal_effects\": {\n+    \"eleven_nonconditional_acts_effective_by_cutoff\": 11,\n+    \"three_conditional_acts_unadjudicated\": 3,\n+    \"fully_certified_article1_changes\": 0,\n+    \"new_PDF_originals\": 0,\n+    \"original_digital_signatures_verified\": 0\n+  },\n+  \"flags\": [\n+    \"Official new website exposes readable previews and edition identifiers; PDF download remains subscriber restricted for 14/14.\",\n+    \"Start dates derived from central original-publication day in NI-ADM.1.1 and visible Art.2 of the official edition.\",\n+    \"For conditional laws, condition must be separately traced to an enacted primary law and its commencement; not automatically in force.\",\n+    \"Law 216/2023 signed/issued 2023-07-13 versus published 2023-07-14.\",\n+    \"Law 48/2024 card title misleadingly matches the base local-government law; manually verify correspondence and Article 1 before treating as complete.\",\n+    \"Some public previews omit substantive text of Article 1; neither changes nor unaffected boundaries are formally accepted.\"\n+  ],\n+  \"accept_gate\": {\n+    \"NI_ADM_1_3_2_STATUS\": \"PARTIAL_CHRONOLOGY_PASS_ORIGINALS_BLOCKED\",\n+    \"P9_1\": \"BLOCKED\",\n+    \"ACTUAL_mutation_allowed\": false\n+  }\n+}"
+    },
+    {
+      "sha": "26fd16467a97079dc61a057796e046356497894c",
+      "filename": "docs/evidence/ni-adm132-20261024/local-binary-hashes.json",
+      "status": "added",
+      "additions": 36,
+      "deletions": 0,
+      "changes": 36,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Flocal-binary-hashes.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Flocal-binary-hashes.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm132-20261024%2Flocal-binary-hashes.json?ref=cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "patch": "@@ -0,0 +1,36 @@\n+{\n+  \"schema\": \"ni-adm132-local-raw-binary-digests-v1\",\n+  \"as_of\": \"2026-10-24\",\n+  \"method\": \"Google Drive raw-file fetch of public council-linked PDF, SHA256 calculated on exact raw input before any conversion or rendering\",\n+  \"examples\": [\n+    {\n+      \"source\": \"https://drive.google.com/file/d/1Ivwiyl5q9r8vcmat74u1mQtU2wUBArYS/view\",\n+      \"issuer_area\": \"Бычок (Bîcioc)\",\n+      \"title\": \"Регламент.pdf\",\n+      \"type\": \"application/pdf\",\n+      \"source_bytes\": 808115,\n+      \"original_raw_sha256\": \"16af5bc5e193813ccf2770d07be8e631ed4fb7232ed419ca346287042982250e\",\n+      \"pages\": 25,\n+      \"pdf_producer\": \"iLovePDF\",\n+      \"embedded_text_subject\": \"Regulament local, ediție declarată la 20.11.2024\",\n+      \"raw_downloads_with_same_sha256\": 2,\n+      \"qualified_signature_authenticated\": false\n+    },\n+    {\n+      \"source\": \"https://drive.google.com/file/d/1IYRFaaOwjT8NC0dwOcCaE6B7JSy2jTUo/view\",\n+      \"issuer_area\": \"Глиное (Hlinaia)\",\n+      \"title\": \"Регламент.pdf\",\n+      \"type\": \"application/pdf\",\n+      \"source_bytes\": 494587,\n+      \"original_raw_sha256\": \"f01e88902e6c83d38d1d7fa7285081763520838650ac5430174050b6136db1f7\",\n+      \"pages\": 25,\n+      \"pdf_producer\": \"Microsoft Word 2010\",\n+      \"embedded_text_subject\": \"Regulament local cu antet în mai multe limbi\",\n+      \"raw_downloads_with_same_sha256\": 1,\n+      \"qualified_signature_authenticated\": false\n+    }\n+  ],\n+  \"scope\": \"BINARIES_VERIFIED_BY_DIGEST_AND_LENGTH_ONLY_NOT_QUALIFIED_AUTHENTICITY_OR_CONTEMPORARY_VALIDITY\",\n+  \"global_originals_recovered_from_14_central_laws\": 0,\n+  \"original_legal_hierarchy_effects_accepted\": 0\n+}"
+    },
+    {
+      "sha": "24db958c9a27c21ca0e552316355459cc0bd83bc",
+      "filename": "docs/evidence/ni-adm132-20261024/local-regulations-14.json",
+      "status": "added",
+      "additions": 290,
+      "deletions": 0,
+      "changes": 290,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Flocal-regulations-14.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Flocal-regulations-14.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm132-20261024%2Flocal-regulations-14.json?ref=cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "patch": "@@ -0,0 +1,290 @@\n+{\n+  \"schema\": \"ni-adm132-14-local-council-regulation-text-review-v1\",\n+  \"as_of\": \"2026-10-24\",\n+  \"source\": \"Grigoriopol publicly linked rural council regulatory files\",\n+  \"records\": [\n+    {\n+      \"area\": \"Маяк\",\n+      \"file_id\": \"1oM6NCm8vnBkYktWiMWbxS0Q_YgDOuQrR\",\n+      \"name\": \"Регламент .pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"readable_chars\": 80057,\n+      \"lead\": \"Приложение\\r\\nк решению внеочередной 2 сессии \\r\\nСовета народных депутатов поселка \\r\\nМаяк Григориопольского района 26 \\r\\nсозыва № 2/2 от 16.12. 2020 года\\r\\nРЕГЛАМЕНТ РАБОТЫ\\r\\nСовета народных депутатов поселка Маяк Григориопольского района.\\r\\n Настоящий Регламент определяет организационное устройство Совета народных \\r\\nдепутатов поселка Маяк Григориопольско\",\n+      \"dates_in_first_950\": [\n+        \"16.12. 2020\"\n+      ],\n+      \"territorial_keywords_count\": 1,\n+      \"keyword_contexts\": [\n+        \"й Республики; о) осуществляет подготовку и вносит на рассмотрение Совета предложения по вопросам административно-территориального деления; п) регулярно информирует Совет о положении дел на его территории и по другим вопросам, не менее одног\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Буторы\",\n+      \"file_id\": \"1HEfO2-6ugM4EtafKz6jBXzWSHRm9Gkg_\",\n+      \"name\": \"Регламент\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"readable_chars\": 60332,\n+      \"lead\": \"Приложение\\nк решению внеочередной 2 сессии Совета народных депутатов села Бутор Григориопольского района   26 созыва № 2/2  от 16.12. 2020 года\\nРЕГЛАМЕНТ РАБОТЫ\\nСовета народных депутатов села Бутор Григориопольского района.\\n  \\tНастоящий Регламент определяет организационное устройство Совета народных депутатов села Бутор Григориопольского района пол\",\n+      \"dates_in_first_950\": [\n+        \"16.12. 2020\"\n+      ],\n+      \"territorial_keywords_count\": 1,\n+      \"keyword_contexts\": [\n+        \"й (объединений), организаций и учреждений, относящихся к коммунальной собственности соответствующей административно-территориальной единицы; 7) входят с предложениями в Совет или к его председателю о внесении на предварительное обсуждение г\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Бычок\",\n+      \"file_id\": \"1Ivwiyl5q9r8vcmat74u1mQtU2wUBArYS\",\n+      \"name\": \"Регламент.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"readable_chars\": 69477,\n+      \"lead\": \"РЕГЛАМЕНТ РАБОТЫ\\r\\nСовета народных депутатов села Бычок Григориопольского района\\r\\nв текущей редакции по состоянию на 20.11.2024г.\\r\\n Настоящий Регламент определяет организационное устройство Совета народных \\r\\nдепутатов села Бычок Григориопольского района полномочия его органов и должностных \\r\\nлиц, формы методы, порядок деятельности Совета народных де\",\n+      \"dates_in_first_950\": [\n+        \"20.11.2024\"\n+      ],\n+      \"territorial_keywords_count\": 1,\n+      \"keyword_contexts\": [\n+        \"й Республики; о) осуществляет подготовку и вносит на рассмотрение Совета предложения по вопросам административно-территориального деления; п) регулярно информирует Совет о положении дел на его территории и по другим вопросам, не менее одног\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Виноградное\",\n+      \"file_id\": \"1aFtSJ_f-ZzUu90f5ASI-463K_NGYcJ56\",\n+      \"name\": \" Регламент.doc\",\n+      \"mime\": \"application/msword\",\n+      \"readable_chars\": 0,\n+      \"lead\": \"\",\n+      \"dates_in_first_950\": [],\n+      \"territorial_keywords_count\": 0,\n+      \"keyword_contexts\": [],\n+      \"content_read\": false,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NO_TEXT_RETURNED_REQUIRES_BINARY_INSPECTION\"\n+    },\n+    {\n+      \"area\": \"Глиное\",\n+      \"file_id\": \"1IYRFaaOwjT8NC0dwOcCaE6B7JSy2jTUo\",\n+      \"name\": \"Регламент.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"readable_chars\": 74868,\n+      \"lead\": \"СОВЕТУЛ ДЕ ДЕПУТАЦЬ АЙ ПОПОРУЛУЙ \\r\\nАЛ ОРЭШЕЛУЛУЙ ХЛИНАЯ\\r\\nА РАЙОНУЛУЙ ГРИГОРИОПОЛ\\r\\nАЛ РЕПУБЛИЧИЙ МОЛДОВЕНЕШТЬ НИСТРЕНЕ\\r\\nРАДА НАРОДНИХ ДЕПУТАТIВ\\r\\nСЕЛИЩА ГЛИНЕ \\r\\nГРИГОРIОПОЛЬСЬКОГО РАЙОНУ\\r\\nПРИДНIСТРОВСЬКОI МОЛДАВСЬКОI РЕСПУБЛIКI\\r\\nСОВЕТ НАРОДНЫХ ДЕПУТАТОВ \\r\\nПОСЕЛКА ГЛИНОЕ\\r\\nГРИГОРИОПОЛЬСКОГО РАЙОНА \\r\\nПРИДНЕСТРОВСКОЙ МОЛДАВСКОЙ РЕСПУБЛИКИ\\r\\n \\r\\nРЕШЕНИЕ № 1\",\n+      \"dates_in_first_950\": [\n+        \"2025 года\"\n+      ],\n+      \"territorial_keywords_count\": 1,\n+      \"keyword_contexts\": [\n+        \"й Республики; о) осуществляет подготовку и вносит на рассмотрение Совета предложения по вопросам административно-территориального деления; п) регулярно информирует Совет о положении дел на его территории и по другим вопросам, не менее одног\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Гыртоп\",\n+      \"file_id\": \"1QbDhQvJMjraORr8tBHZp0YK0yMpvhilK\",\n+      \"name\": \"Регламент.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"readable_chars\": 62660,\n+      \"lead\": \"СОВЕТУЯ ДЕ ДЕПУТАЦЬ АЙ ПОПОРУЛУЙ \\r\\nАЛ САТУЛУЙ ХЫРТОП\\r\\nАРАЙОНУЛУЙ ГРИГОРИОПОЛ \\r\\nАЛ РЕПУБЛИЧИЙ МОЛДОВЕНЕШТЬ НИСТРЕНЕ\\r\\nРАДА НАРОДНИХ ДЕПУТАТ1В \\r\\nСЕЛА ГИРТОП\\r\\nГРИГОРЮПОЛЬСЬКОГО РАЙОНУ \\r\\nПРИДШСТРОВСЬКО! МОЛДАВСЬКО! РЕСПУБЛ1К1\\r\\nСОВЕТ НАРОДНЫХ ДЕПУТАТОВ \\r\\nСЕЛА ГЫРТОП\\r\\nГРИГОРИОПОЛЬСКОГО РАЙОНА \\r\\nПРИДНЕСТРОВСКОЙ МОЛДАВСКОЙ РЕСПУБЛИКИ\\r\\nРЕШЕНИЕ № 2/2\\r\\nВнеочер\",\n+      \"dates_in_first_950\": [\n+        \"2020 года\"\n+      ],\n+      \"territorial_keywords_count\": 0,\n+      \"keyword_contexts\": [],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Карманово\",\n+      \"file_id\": \"1R1vkPYnqms8wzjU7kQOLqhqC7SN72z50\",\n+      \"name\": \"Регламент .docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"readable_chars\": 69607,\n+      \"lead\": \"\\t                                                                                    Приложение\\n                                                                                                к решению внеочередной 2 сессии\\n                                                                                                Совета народных депутатов \\n   \",\n+      \"dates_in_first_950\": [\n+        \"2025 года\"\n+      ],\n+      \"territorial_keywords_count\": 2,\n+      \"keyword_contexts\": [\n+        \" о) осуществляет подготовку и вносит на рассмотрение Совета предложения по вопросам административно-территориального деления; п) регулярно информирует Совет о положении дел на е\",\n+        \"й (объединений), организаций и учреждений, относящихся к коммунальной собственности соответствующей административно-территориальной единицы; 7) входят с предложениями в Совет или к его председателю о внесении на предварительное обсуждение г\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Колосово\",\n+      \"file_id\": \"1EKGDf2Pc8jrt8COQ4d1LCVlsAnftMipx\",\n+      \"name\": \"Регламент.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"readable_chars\": 63730,\n+      \"lead\": \"РЕШЕНИЕ № 2/2\\nВнеочередная 2 сессия 26 созыва                                                         16 декабря 2020 года\\nп. Колосово\\nОб утверждении Регламента \\nСовета народных депутатов поселка Колосово \\n Григориопольского района  \\nРуководствуясь частью  первой статьи 7, подпунктом 5 части первой статьи 19 Закона Приднестровской Молдавской Респуб\",\n+      \"dates_in_first_950\": [\n+        \"2020 года\"\n+      ],\n+      \"territorial_keywords_count\": 1,\n+      \"keyword_contexts\": [\n+        \"й (объединений), организаций и учреждений, относящихся к коммунальной собственности соответствующей административно-территориальной единицы; 7) входят с предложениями в Совет или к его председателю о внесении на предварительное обсуждение г\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Красногорка\",\n+      \"file_id\": \"1k6l5kXIWhOHkNAsNeHO58b3NhpafD0jz\",\n+      \"name\": \"Регламент работы Совета.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"readable_chars\": 71121,\n+      \"lead\": \"УТВЕРЖДЕНО\\r\\nрешением внеочередной 2 сессии \\r\\nСовета народных депутатов села \\r\\nКрасногорка Григориопольского \\r\\nрайона 26 созыва № 2/2 \\r\\nот 16.12.2020 года\\r\\nРЕГЛАМЕНТ РАБОТЫ\\r\\nСовета народных депутатов села Красногорка Григориопольского района\\r\\n(Текущая редакция по состоянию на 23.12.2025года) \\r\\n Настоящий Регламент определяет организационное устройст\",\n+      \"dates_in_first_950\": [\n+        \"16.12.2020\",\n+        \"23.12.2025\"\n+      ],\n+      \"territorial_keywords_count\": 1,\n+      \"keyword_contexts\": [\n+        \"й Республики; о) осуществляет подготовку и вносит на рассмотрение Совета предложения по вопросам административно-территориального деления; п) регулярно информирует Совет о положении дел на его территории и по другим вопросам, не менее одног\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Малаешты\",\n+      \"file_id\": \"1c2HJqIuq_JJE4oZVqEj2V5Cs5Hty0ysY\",\n+      \"name\": \"Регламент Приложение.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"readable_chars\": 60383,\n+      \"lead\": \"Приложение\\nк решению внеочередной 2 сессии Совета народных депутатов села Малаешты      Григориопольского района   26 созыва № 2/2  от 16.12. 2020 года\\nРЕГЛАМЕНТ РАБОТЫ\\nСовета народных депутатов села Малаешты  Григориопольского района.\\n  \\tНастоящий Регламент определяет организационное устройство Совета народных депутатов села Малаешты Григориопольс\",\n+      \"dates_in_first_950\": [\n+        \"16.12. 2020\"\n+      ],\n+      \"territorial_keywords_count\": 1,\n+      \"keyword_contexts\": [\n+        \"й (объединений), организаций и учреждений, относящихся к коммунальной собственности соответствующей административно-территориальной единицы; 7) входят с предложениями в Совет или к его председателю о внесении на предварительное обсуждение г\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Спея\",\n+      \"file_id\": \"1jaUa4vgBgYf98zwwShNun2sullibcrJQ\",\n+      \"name\": \"Регламент.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"readable_chars\": 63931,\n+      \"lead\": \"РЕШЕНИЕ №2/1\\nВнеочередная 2  сессия 26 созыва                                            16 декабря 2020 года\\n                        с.  Спея\\nОб утверждении Структуры \\nСовета народных депутатов села \\nСпея Григориопольского района \\n\\tВ  соответствии  со  статьей  3 Закона Приднестровской Молдавской Республики «О  представительных  органах  государст\",\n+      \"dates_in_first_950\": [\n+        \"2020 года\",\n+        \"2015 года\"\n+      ],\n+      \"territorial_keywords_count\": 1,\n+      \"keyword_contexts\": [\n+        \"й (объединений), организаций и учреждений, относящихся к коммунальной собственности соответствующей административно-территориальной единицы; 7) входят с предложениями в Совет или к его председателю о внесении на предварительное обсуждение г\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    },\n+    {\n+      \"area\": \"Тея\",\n+      \"file_id\": \"1GvwOoSOdqUVgkN0qGgV5bNKOgtTvOhL-\",\n+      \"name\": \"Регламент.doc\",\n+      \"mime\": \"application/msword\",\n+      \"readable_chars\": 0,\n+      \"lead\": \"\",\n+      \"dates_in_first_950\": [],\n+      \"territorial_keywords_count\": 0,\n+      \"keyword_contexts\": [],\n+      \"content_read\": false,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NO_TEXT_RETURNED_REQUIRES_BINARY_INSPECTION\"\n+    },\n+    {\n+      \"area\": \"Ташлык\",\n+      \"file_id\": \"14hdBOzQFThFWt9dl6db5HO4vdx3cbnc0\",\n+      \"name\": \" Регламент.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"readable_chars\": 0,\n+      \"lead\": \"\",\n+      \"dates_in_first_950\": [],\n+      \"territorial_keywords_count\": 0,\n+      \"keyword_contexts\": [],\n+      \"content_read\": false,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NO_TEXT_RETURNED_REQUIRES_BINARY_INSPECTION\"\n+    },\n+    {\n+      \"area\": \"Шипка\",\n+      \"file_id\": \"1HL5i_ERW6O3KzKN8gaYLto_pDvR_Z3bx\",\n+      \"name\": \"Регламент с.Шипка.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"readable_chars\": 70630,\n+      \"lead\": \"РЕШЕНИЕ № 2/2\\n Внеочередная 2 сессия 27 созыва                                                               16 декабря 2025 года\\nс.Шипка\\nО внесении изменения в решение внеочередной\\n2 сессии Совета народных депутатов села Шипка\\nГригориопольского района 26 созыва № 2/2 от \\n16 декабря 2020 года «Об утверждении Регламента\\nработы Совета народных депута\",\n+      \"dates_in_first_950\": [\n+        \"2025 года\",\n+        \"2020 года\"\n+      ],\n+      \"territorial_keywords_count\": 2,\n+      \"keyword_contexts\": [\n+        \"ской Республики; о) осуществляет подготовку и вносит на рассмотрение Совета предложения по вопросам административно-территориального деления; п) регулярно информирует Совет о положении дел на его территории и по другим вопросам, не менее од\",\n+        \"й (объединений), организаций и учреждений, относящихся к коммунальной собственности соответствующей административно-территориальной единицы; 7) входят с предложениями в Совет или к его председателю о внесении на предварительное обсуждение г\"\n+      ],\n+      \"content_read\": true,\n+      \"binary_SHA256\": null,\n+      \"qualified_signature_checked\": false,\n+      \"administrative_boundary_effect_certified\": false,\n+      \"text_extraction_status\": \"NONEMPTY_TEXT_READ_CONTENT_SCOPE_ONLY\"\n+    }\n+  ],\n+  \"total\": 14,\n+  \"read\": 11,\n+  \"scope\": \"11/14 nonempty text extractions; three have no extracted text and are NOT reviewed for content. None of 14 has qualified signed-primary verification.\",\n+  \"all_dates_qualified\": false,\n+  \"all_originals_cryptographically_certified\": false,\n+  \"no_new_legal_parent_promotions\": true,\n+  \"no_text_returned\": 3,\n+  \"empty_file_ids\": [\n+    \"1aFtSJ_f-ZzUu90f5ASI-463K_NGYcJ56\",\n+    \"1GvwOoSOdqUVgkN0qGgV5bNKOgtTvOhL-\",\n+    \"14hdBOzQFThFWt9dl6db5HO4vdx3cbnc0\"\n+  ]\n+}"
+    },
+    {
+      "sha": "ee9abcf9afdd40ce441ee8d6c1abe7e12e672e1d",
+      "filename": "docs/evidence/ni-adm132-20261024/official-editions-01.json",
+      "status": "added",
+      "additions": 129,
+      "deletions": 0,
+      "changes": 129,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Fofficial-editions-01.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Fofficial-editions-01.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm132-20261024%2Fofficial-editions-01.json?ref=cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "patch": "@@ -0,0 +1,129 @@\n+{\n+  \"schema\": \"ni-adm132-official-law-editions-v1\",\n+  \"batch\": \"2024-2025\",\n+  \"as_of\": \"2026-10-24\",\n+  \"rows\": [\n+    {\n+      \"id\": \"2025002031\",\n+      \"law_number\": \"223-ЗИ-VII\",\n+      \"issue_date\": \"2025-11-18\",\n+      \"published_on_central_index\": \"2025-11-18\",\n+      \"source_week\": \"25-46\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/a9111e0d-ca73-4369-b8f3-2e478223de36/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/a9111e0d-ca73-4369-b8f3-2e478223de36/2f979b64-1188-4752-81bd-036b9aa99262/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5997,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня, следующего за днем официального опубликования, и распространяет свое действие на правоотношения, возникшие с 9 июля 2025 года.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2025001392\",\n+      \"law_number\": \"187-ЗИ-VII\",\n+      \"issue_date\": \"2025-08-19\",\n+      \"published_on_central_index\": \"2025-08-19\",\n+      \"source_week\": \"25-33\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/d7f16bf5-1fe8-48d6-9b05-c40a56fe79bd/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/d7f16bf5-1fe8-48d6-9b05-c40a56fe79bd/f9f69dc4-498e-4a00-a721-563309c36991/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5835,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу с 1 января 2026 года.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2025000896\",\n+      \"law_number\": \"97-ЗИ-VII\",\n+      \"issue_date\": \"2025-06-09\",\n+      \"published_on_central_index\": \"2025-06-09\",\n+      \"source_week\": \"25-23\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/1318f391-1d7d-4517-827a-951bb483ca8d/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/1318f391-1d7d-4517-827a-951bb483ca8d/41afdaa8-3a69-404c-8355-d7a0af4484f6/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 6129,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня вступления в силу Конституционного закона Приднестровской Молдавской Республики «О внесении изменения и дополнения в Конституцию Приднестровской Молдавской Республики», закрепляющего в Конституции Приднестровской Молдавской Республики норму об установлении законом условий проведения выборов (формирования) представительных органов местного самоуправления.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2024002593\",\n+      \"law_number\": \"340-ЗИ-VII\",\n+      \"issue_date\": \"2024-12-26\",\n+      \"published_on_central_index\": \"2024-12-26\",\n+      \"source_week\": \"24-52\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/103dc4de-8178-4b3c-8b81-6d924d5c412d/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/103dc4de-8178-4b3c-8b81-6d924d5c412d/dd3bd3d9-454a-4535-9185-60888f691949/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 6164,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня вступления в силу Закона Приднестровской Молдавской Республики «О внесении изменения в Закон Приднестровской Молдавской Республики «О статусе народных депутатов местных Советов народных депутатов Приднестровской Молдавской Республики», предусматривающего информирование народными депутатами местных Советов о проделанной работе по рассмотрению предложений, заявлений и жалоб граждан за календарный год\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2024002387\",\n+      \"law_number\": \"287-ЗИД-VII\",\n+      \"issue_date\": \"2024-11-29\",\n+      \"published_on_central_index\": \"2024-11-29\",\n+      \"source_week\": \"24-48\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/5003d3b1-5445-4834-b626-f3846b01e21d/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/5003d3b1-5445-4834-b626-f3846b01e21d/f8c615e1-2eff-464e-999e-aaef3044f8c3/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5696,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу с 1 января 2025 года.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2024002326\",\n+      \"law_number\": \"276-ЗД-VII\",\n+      \"issue_date\": \"2024-11-22\",\n+      \"published_on_central_index\": \"2024-11-22\",\n+      \"source_week\": \"24-47\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/ca9d82d0-5f63-4adb-a145-897e11628471/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/ca9d82d0-5f63-4adb-a145-897e11628471/f0c7fb77-e443-4a32-a2fb-aabe3fba066a/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5645,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу с 1 января 2025 года.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2024001014\",\n+      \"law_number\": \"97-ЗД-VII\",\n+      \"issue_date\": \"2024-05-30\",\n+      \"published_on_central_index\": \"2024-05-30\",\n+      \"source_week\": \"24-23\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/9cadc92a-456a-4e08-a131-32a845d6076e/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/9cadc92a-456a-4e08-a131-32a845d6076e/9677c9fd-d30e-4cc4-afbb-57931885c691/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5874,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня вступления в силу Закона Приднестровской Молдавской Республики «О внесении изменений в Гражданский кодекс Приднестровской Молдавской Республики», предусматривающего возможность возложения обязанности по осуществлению ликвидации юридических лиц на органы местного государственного управления.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    }\n+  ],\n+  \"source\": \"official migrated legal database\",\n+  \"claim\": \"official preview, NOT recovered original PDF\",\n+  \"no_ACTUAL_mutation\": true\n+}"
+    },
+    {
+      "sha": "98470ecdd6d52ae58719c9f4208cc066060e64ab",
+      "filename": "docs/evidence/ni-adm132-20261024/official-editions-02.json",
+      "status": "added",
+      "additions": 129,
+      "deletions": 0,
+      "changes": 129,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Fofficial-editions-02.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Fofficial-editions-02.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm132-20261024%2Fofficial-editions-02.json?ref=cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "patch": "@@ -0,0 +1,129 @@\n+{\n+  \"schema\": \"ni-adm132-official-law-editions-v1\",\n+  \"batch\": \"2023-2024\",\n+  \"as_of\": \"2026-10-24\",\n+  \"rows\": [\n+    {\n+      \"id\": \"2024000427\",\n+      \"law_number\": \"48-ЗИ-VII\",\n+      \"issue_date\": \"2024-03-05\",\n+      \"published_on_central_index\": \"2024-03-05\",\n+      \"source_week\": \"24-11\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/8650bb22-e4bb-47b8-877c-360961e5854f/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/8650bb22-e4bb-47b8-877c-360961e5854f/0a27a4fb-d922-4083-9d54-8ed6c05bde30/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5368,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня, следующего за днем официального опубликования.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2023001591\",\n+      \"law_number\": \"291-ЗИ-VII\",\n+      \"issue_date\": \"2023-09-29\",\n+      \"published_on_central_index\": \"2023-09-29\",\n+      \"source_week\": \"23-39\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/b459f5ad-a11a-45f8-9abf-ff322147acf8/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/b459f5ad-a11a-45f8-9abf-ff322147acf8/ec42cccf-fde3-4cc2-923c-660a8b40f848/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 6242,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу с 1 января 2024 года. Президент Приднестровской Молдавской Республики                                                              В. Н. Красносельский\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2023001134\",\n+      \"law_number\": \"216-ЗИ-VII\",\n+      \"issue_date\": \"2023-07-13\",\n+      \"published_on_central_index\": \"2023-07-14\",\n+      \"source_week\": \"23-28\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/98d01069-c5a1-44dd-a5ca-d6bb9d6aa505/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/98d01069-c5a1-44dd-a5ca-d6bb9d6aa505/e937629c-4b1f-4feb-a233-4b9aa5f8d7e9/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5472,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня, следующего за днем официального опубликования.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2023000621\",\n+      \"law_number\": \"85-ЗИ-VII\",\n+      \"issue_date\": \"2023-04-19\",\n+      \"published_on_central_index\": \"2023-04-19\",\n+      \"source_week\": \"23-16\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/409ab6b0-6469-483f-8ef1-b654af266a5a/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/409ab6b0-6469-483f-8ef1-b654af266a5a/0c8549fc-f34c-4c47-bc9c-4a8b519a5fa3/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5373,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня, следующего за днем официального опубликования.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2023000620\",\n+      \"law_number\": \"84-ЗИ-VII\",\n+      \"issue_date\": \"2023-04-19\",\n+      \"published_on_central_index\": \"2023-04-19\",\n+      \"source_week\": \"23-16\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/0c38cca7-670b-4a3f-b225-d4a612dcaa37/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/0c38cca7-670b-4a3f-b225-d4a612dcaa37/8af97340-aca1-4b02-91a4-e86bea93bde5/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 7454,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня, следующего за днем официального опубликования.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2023000117\",\n+      \"law_number\": \"7-ЗД-VII\",\n+      \"issue_date\": \"2023-01-30\",\n+      \"published_on_central_index\": \"2023-01-30\",\n+      \"source_week\": \"23-5\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/c3fa55a2-8c2d-4352-a123-ad7302204dbb/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/c3fa55a2-8c2d-4352-a123-ad7302204dbb/76b890ba-742b-45eb-b24f-3cf1a92f27cd/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 5326,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня, следующего за днем официального опубликования.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    },\n+    {\n+      \"id\": \"2023000001\",\n+      \"law_number\": \"1-ЗИД-VII\",\n+      \"issue_date\": \"2023-01-09\",\n+      \"published_on_central_index\": \"2023-01-09\",\n+      \"source_week\": \"23-2\",\n+      \"card\": \"https://ul-test.gospmr.org/documents/card/6b6c6e17-cfff-45bc-869d-9c4392becfd4/\",\n+      \"edition_url\": \"https://ul-test.gospmr.org/documents/6b6c6e17-cfff-45bc-869d-9c4392becfd4/cfc5c409-b946-4dd1-9505-44cd00e2f5d2/html/\",\n+      \"public_html_accessible\": true,\n+      \"preview_chars\": 9884,\n+      \"visible_end_articles\": \"Статья 2. Настоящий Закон вступает в силу со дня, следующего за днем официального опубликования.\",\n+      \"original_pdf_download_restricted\": true,\n+      \"signed_original_pdf_saved\": false,\n+      \"sha256_signed_original\": null,\n+      \"operative_article1_fully_certified\": false,\n+      \"border_or_parent_change_certified\": false\n+    }\n+  ],\n+  \"source\": \"official migrated legal database\",\n+  \"claim\": \"official HTML preview NOT recovered original PDF\",\n+  \"no_ACTUAL_mutation\": true\n+}"
+    },
+    {
+      "sha": "fe845276a5370e73a20594adfc8d0fb75cd488be",
+      "filename": "docs/evidence/ni-adm132-20261024/selected-decisions-18.json",
+      "status": "added",
+      "additions": 340,
+      "deletions": 0,
+      "changes": 340,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Fselected-decisions-18.json",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Fselected-decisions-18.json",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm132-20261024%2Fselected-decisions-18.json?ref=cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "patch": "@@ -0,0 +1,340 @@\n+{\n+  \"schema\": \"ni-adm132-selected-local-decisions-review-v1\",\n+  \"as_of\": \"2026-10-24\",\n+  \"method\": \"18 priority decisions and regulatory documents selected from existing 307-ID folder inventory; text extraction examined and legal decisions preserved without assuming qualified signatures\",\n+  \"rows\": [\n+    {\n+      \"name\": \"Маяк\",\n+      \"id\": \"1NSVDPG2kREpceOK4-63tnwN0hoLtpUUM\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"положения о постоянных  комиссиях и депутатской этики.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"extracted_length\": 21755,\n+      \"readable\": true,\n+      \"opening\": \"Приложение\\r\\nк решению внеочередной 2 сессии\\r\\nСовета народных депутатов поселка \\r\\nМаяк Григориопольского района 26 \\r\\nсозыва № 2/3 от 16.12. 2020 года\\r\\nПОЛОЖЕНИЕ \\r\\nо постоянных комиссиях\\r\\nСовета народных депутатов поселка Маяк Григориопольского района \\r\\nI. Общие\",\n+      \"dates_in_first_1700\": [\n+        \"16.12. 2020\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Буторы\",\n+      \"id\": \"1-RHJjMaWbApmnc6h3_HYLb3VNM8GFxw0\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение №3/1 от 27.01.2026 г о внесении изменений в сметы.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 7289,\n+      \"readable\": true,\n+      \"opening\": \"          РЕШЕНИЕ № 3/1\\nВнеочередная 3 сессия 27 созыва                                                        27 января 2026 года\\nс.Бутор\\nО внесении изменений в решение 38 сессии \\nСовета народных депутатов села Бутор Григориопольского\\nрайона 26 созыва от 11 а\",\n+      \"dates_in_first_1700\": [\n+        \"27 января 2026\",\n+        \"11 апреля 2025\",\n+        \"13 февраля 2025\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Бычок\",\n+      \"id\": \"1Tc5hcCnbaEO4r9uxvtMVcZY49D39qwlX\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение 2-3 от 16.12.2025 Положение о постоянных комиссиях.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"extracted_length\": 7573,\n+      \"readable\": true,\n+      \"opening\": \"СОВЕТУЛ ДЕ ДЕПУТАЦЬ АЙ \\r\\nПОПОРУЛУЙ АЛ САТУЛУЙ БЫЧОК\\r\\nА РАЙОНУЛУЙ ГРИГОРИОПОЛ\\r\\nАЛ РЕПУБЛИЧИЙ МОЛДОВЕНЕШТЬ НИСТРЕНЕ\\r\\nРАДА НАРОДНИХ ДЕПУТАТIВ\\r\\nСЕЛА БИЧОК \\r\\nГРИГОРIОПОЛЬСЬКОГО РАЙОНУ\\r\\nПРИДНIСТРОВСЬКОI МОЛДАВСЬКОI РЕСПУБЛIКI\\r\\nСОВЕТ НАРОДНЫХ ДЕПУТАТОВ \\r\\nСЕЛА БЫЧОК\\r\\n\",\n+      \"dates_in_first_1700\": [\n+        \"16 декабря 2025\",\n+        \"16.12. 2025\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Виноградное\",\n+      \"id\": \"1dCwX3s0DlNxwNlzsKPQmeBnj_H9IcbDG\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение 2-3 от 29.12.2025г. Положение о постояянных комиссиях.doc\",\n+      \"mime\": \"application/msword\",\n+      \"extracted_length\": 0,\n+      \"readable\": false,\n+      \"opening\": \"\",\n+      \"dates_in_first_1700\": [],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Глиное\",\n+      \"id\": \"1DPfgBR2ke0YyXnKjtwk71tgKLAwvV4qR\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение 1-7 от 09.12.2025г. Положение о постоянных комиссиях.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 7691,\n+      \"readable\": true,\n+      \"opening\": \"РЕШЕНИЕ № 1/7\\n1 сессия   27 созыва                                                                                         09 декабря 2025 года\\nп. Глиное\\nОб утверждении Положения о постоянных комиссиях \\nСовета народных депутатов поселка  Глиное \\nГригориопольск\",\n+      \"dates_in_first_1700\": [\n+        \"09 декабря 2025\",\n+        \"09.12.2025\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Гыртоп\",\n+      \"id\": \"137T4n-wwEI1fnsxEGG4zU2FXJcdGoEg7\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение 2-4 от 16.12.2025г. Положение о депутатской этике.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"extracted_length\": 16768,\n+      \"readable\": true,\n+      \"opening\": \"СОВЕТУЯ ДЕ ДЕПУТАЦЬ АЙ ПОПОРУЛУЙ \\r\\nАЛ САТУЛУЙ ХЫРТОП\\r\\nАРАЙОНУЛУЙ ГРИГОРИОПОЛ \\r\\nАЛ РЕПУБЛИЧИЙ МОЛДОВЕНЕШТЬ НИСТРЕНЕ\\r\\nРАДА НАРОДНИХ ДЕПУТАТ1В \\r\\nСЕЛА ГИРТОП\\r\\nГРИГОРЮПОЛЬСЬКОГО РАЙОНУ \\r\\nПРИДН1СТР0ВСЬК01 МОЛДАВСЬКО! РЕСПУБЛ1К1\\r\\nСОВЕТ НАРОДНЫХ ДЕПУТАТОВ \\r\\nСЕЛА ГЫРТО\",\n+      \"dates_in_first_1700\": [\n+        \"16 декабря 2020\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Карманово\",\n+      \"id\": \"1u1lEgijQyNUlJT7i06zr4cAGDR-ngO_w\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Положение о постоянных комиссиях и депутатской этикей .docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 26227,\n+      \"readable\": true,\n+      \"opening\": \"РЕШЕНИЕ № 2/3\\nВнеочередная 2 сессия 27 созыва                                                             25 декабря 2025 года\\n                                                                 поселка  Карманово\\nОб утверждении Положения о постоянных комиссиях \\n\",\n+      \"dates_in_first_1700\": [\n+        \"25 декабря 2025\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Колосово\",\n+      \"id\": \"1wTAmc-iPTeDR1PtaLC52cYlmgUsgC1c4\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение 2-3 от 16.12.2020г. Положение о постоянных комиссиях.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 7696,\n+      \"readable\": true,\n+      \"opening\": \"РЕШЕНИЕ № 2/3\\nВнеочередная 2 сессия 26 созыва                                                         16 декабря 2020 года\\nп. Колосово\\nОб утверждении Положения о постоянных комиссиях \\nСовета народных депутатов поселка Колосово\\nГригориопольского района  \\n     Р\",\n+      \"dates_in_first_1700\": [\n+        \"16 декабря 2020\",\n+        \"16.12. 2020\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Красногорка\",\n+      \"id\": \"1D41MyQLjsBkbNL76DH1sTYSz3BR1CrFR\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение 3-2 от 30.01.2026г. изменения в сметы на 2026 год.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"extracted_length\": 0,\n+      \"readable\": false,\n+      \"opening\": \"\",\n+      \"dates_in_first_1700\": [],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Малаешты\",\n+      \"id\": \"1_-uSFGRZBFJt1E7BCzo4WaLjs7PYJkio\",\n+      \"folder_year\": \"2025\",\n+      \"title\": \"Малаешты.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 4758,\n+      \"readable\": true,\n+      \"opening\": \" РЕШЕНИЕ  № 29/1 \\nВнеочередная  29 сессия 26 созыва                                                              20  марта 2024 года\\nс.Малаешты\\nОб утверждении смет расходования  \\nмуниципальных средств на 2024 год\\nРуководствуясь статьями 8, 10 Закона Приднестро\",\n+      \"dates_in_first_1700\": [\n+        \"20  марта 2024\",\n+        \"13.02.2024\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Спея\",\n+      \"id\": \"1uKt5zu8w09WyTHdXlFwu6PX4VRd2HmfP\",\n+      \"folder_year\": \"2025\",\n+      \"title\": \"Положение Спея о порядке рассмотрения предложений.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 11602,\n+      \"readable\": true,\n+      \"opening\": \"Внеочередная  13 сессия 26 созыва                                                     04 ноября 2022 года\\nс. Спея\\nОб утверждении Положения «О порядке рассмотрения предложений, заявлений и жалоб граждан, поступивших в адрес Совета народных депутатов села Спея  \",\n+      \"dates_in_first_1700\": [\n+        \"04 ноября 2022\",\n+        \"05 октября 2022\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Тея\",\n+      \"id\": \"1g-q2q1Bq5NbWkGm--DSQ6xGCw7tyh0M1\",\n+      \"folder_year\": \"2025\",\n+      \"title\": \"Решение и положение Тея о порядке рассмотерния жалоб, предложений и тд.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 13942,\n+      \"readable\": true,\n+      \"opening\": \"РЕШЕНИЕ № 21/1\\nс. Тея\\n Об утверждении Положения «О порядке рассмотрения\\n предложений, заявлений и жалоб граждан, поступивших\\n в адрес народных депутатов Совета народных депутатов\\n села Тея Григориопольского района»\\nРуководствуясь Законом Приднестровской Молдав\",\n+      \"dates_in_first_1700\": [\n+        \"05 октября 2022\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Ташлык\",\n+      \"id\": \"1tAm857ZqWczTFDEasZdc6Ri7PnEl1-42\",\n+      \"folder_year\": \"2025\",\n+      \"title\": \"Ташлык решение.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 5395,\n+      \"readable\": true,\n+      \"opening\": \"РЕШЕНИЕ № 32/1\\nВнеочередная 32 сессия 26 созыва                                                         26 марта 2025  года\\nс. Ташлык\\nОб утверждении смет расходования  \\nмуниципальных средств на 2025 год\\n           Руководствуясь статьей 17 Закона Приднестровск\",\n+      \"dates_in_first_1700\": [\n+        \"26 марта 2025\",\n+        \"28 декабря 2024\",\n+        \"13 февраля 2025\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Шипка\",\n+      \"id\": \"144Q4kAhIFy7Aha-yFxikukvZNIpe3UCb\",\n+      \"folder_year\": \"2025\",\n+      \"title\": \"Решения для сайта.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 10620,\n+      \"readable\": true,\n+      \"opening\": \"РЕШЕНИЕ № 35/1\\n35 сессия 26 созыва                                                                                         30 мая  2025 года\\nс. Шипка\\nО внесении изменений в решение внеочередной 10 сессии \\nСовета народных депутатов села Шипка Григориопольского \",\n+      \"dates_in_first_1700\": [\n+        \"30 мая  2025\",\n+        \"21.12.2021\",\n+        \"8 декабря 2003\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Бычок\",\n+      \"id\": \"1NUBxIXX_KFE-lED3OldaNNNh5NKFqPSq\",\n+      \"folder_year\": \"2025\",\n+      \"title\": \"Решение по целевым сборам (1).pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"extracted_length\": 2314,\n+      \"readable\": true,\n+      \"opening\": \"Приложение 1 \\r\\nк решению 37 сессии \\r\\nСовета народных депутатов села Бычок \\r\\nГригориопольского района 26 созыва \\r\\n№ 37/1от 17 апреля 2025 года\\r\\n \\r\\nСМЕТА\\r\\nрасходования средств целевого сбора на благоустройство территорий \\r\\nсел Бычок, Ново-Владимировка на 2025 го\",\n+      \"dates_in_first_1700\": [\n+        \"17 апреля 2025\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Карманово\",\n+      \"id\": \"1PQHx1y84oa-EiclJMj4I6pzuKWHfu6Iy\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение №3-1 от 12.02.2026 г. Об отчете председателя Совета-главы администрации п.Карманово о работе в 2025 году.pdf\",\n+      \"mime\": \"application/pdf\",\n+      \"extracted_length\": 0,\n+      \"readable\": false,\n+      \"opening\": \"\",\n+      \"dates_in_first_1700\": [],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Глиное\",\n+      \"id\": \"1dSq9moWNowpYCDzMi32XjZ8AtG8DQ08_\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"Решение 4-1 от 17.02.2026г. Отчет председателя Совета - главы администрации  за 2025 г.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 21247,\n+      \"readable\": true,\n+      \"opening\": \"РЕШЕНИЕ № 4/1\\nп.Глиное\\nОб отчете о деятельности Совета народных депутатов - администрации поселка Глиное Григориопольского района за 2025 год\\nНа основании п.6 ст. 19, п.1 ст.32-5 Закона Приднестровской Молдавской Республики «Об органах местной власти, местного\",\n+      \"dates_in_first_1700\": [],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    },\n+    {\n+      \"name\": \"Спея\",\n+      \"id\": \"1ynhTnNihqC-M6S_yPjMzs_ABj04d4izp\",\n+      \"folder_year\": \"2026\",\n+      \"title\": \"НАКАЗЫ ДЕПУТАТОВ 2026 ГОД.docx\",\n+      \"mime\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n+      \"extracted_length\": 4659,\n+      \"readable\": true,\n+      \"opening\": \"41 сессия 26 созыва                                                                                    13 октября 2025 года\\nс. Спея\\nОб утверждении Перечня наказов избирателей депутатам  \\nСовета народных депутатов села Спея Григориопольского \\nрайона на 2026 год\",\n+      \"dates_in_first_1700\": [\n+        \"13 октября 2025\"\n+      ],\n+      \"strong_boundary_wording_hits\": [],\n+      \"full_original_signed_certificate\": false,\n+      \"exact_effective_date_certified\": false,\n+      \"de_facto_polygon_boundary_change_accepted\": false,\n+      \"content_access_type\": \"DRIVE_TEXT_EXTRACTION_NOT_SIGNED_ORIGINAL\"\n+    }\n+  ],\n+  \"count\": 18,\n+  \"nonempty_text\": 15,\n+  \"empty_text\": 3,\n+  \"all_original_binary_verified\": false,\n+  \"no_boundaries_or_administrative_parents_promoted\": true,\n+  \"limits\": \"Other files not examined by this batch; no claim of exhaustive local acts or global no-effect conclusion.\"\n+}"
+    },
+    {
+      "sha": "58fda8dead30d7360b9c2a4afadb5c6a0c591569",
+      "filename": "docs/evidence/ni-adm132-20261024/validate.mjs",
+      "status": "added",
+      "additions": 40,
+      "deletions": 0,
+      "changes": 40,
+      "blob_url": "https://github.com/ovidiudeica/reforma-teritoriala/blob/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Fvalidate.mjs",
+      "raw_url": "https://github.com/ovidiudeica/reforma-teritoriala/raw/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/docs%2Fevidence%2Fni-adm132-20261024%2Fvalidate.mjs",
+      "contents_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/contents/docs%2Fevidence%2Fni-adm132-20261024%2Fvalidate.mjs?ref=cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "patch": "@@ -0,0 +1,40 @@\n+import assert from 'node:assert/strict';\n+import {readFileSync} from 'node:fs';\n+const read=n=>JSON.parse(readFileSync(new URL(n,import.meta.url),'utf8'));\n+\n+const official=[...read('official-editions-01.json').rows,...read('official-editions-02.json').rows];\n+const dates=read('law-effective-dates.json');\n+const regulations=read('local-regulations-14.json');\n+const decisions=read('selected-decisions-18.json');\n+const pdfs=read('local-binary-hashes.json');\n+const previous=read('../ni-adm131-20261024/local-inventory-summary.json');\n+\n+assert.equal(official.length,14);\n+assert.equal(new Set(official.map(x=>x.id)).size,14);\n+assert.ok(official.every(x=>x.public_html_accessible && x.original_pdf_download_restricted));\n+assert.ok(official.every(x=>x.signed_original_pdf_saved===false && x.sha256_signed_original===null));\n+assert.ok(official.every(x=>x.operative_article1_fully_certified===false && x.border_or_parent_change_certified===false));\n+assert.equal(dates.rows.length,14);\n+assert.deepEqual(new Set(dates.rows.map(x=>x.publication_id)),new Set(official.map(x=>x.id)));\n+assert.equal(dates.counts.NEXT_DAY_AFTER_OFFICIAL_PUBLICATION,7);\n+assert.equal(dates.counts.FIXED_COMMENCEMENT,4);\n+assert.equal(dates.counts.CONDITIONAL_COMMENCEMENT,3);\n+assert.equal(dates.legal_effects.three_conditional_acts_unadjudicated,3);\n+assert.equal(dates.legal_effects.fully_certified_article1_changes,0);\n+assert.ok(dates.rows.filter(x=>x.condition_unresolved).every(x=>x.derived_effective_date===null));\n+assert.ok(dates.rows.every(x=>x.territorial_boundaries_effect_certified===false));\n+assert.equal(regulations.records.length,14);\n+assert.equal(regulations.records.filter(x=>x.content_read).length,11);\n+assert.equal(regulations.no_text_returned,3);\n+assert.equal(decisions.rows.length,18);\n+assert.equal(decisions.rows.filter(x=>x.readable).length,15);\n+assert.equal(decisions.rows.filter(x=>!x.readable).length,3);\n+assert.ok(decisions.rows.every(x=>x.de_facto_polygon_boundary_change_accepted===false));\n+assert.equal(pdfs.examples.length,2);\n+assert.deepEqual(pdfs.examples.map(x=>x.source_bytes),[808115,494587]);\n+assert.ok(pdfs.examples.every(x=>/^[0-9a-f]{64}$/.test(x.original_raw_sha256) && x.qualified_signature_authenticated===false));\n+assert.equal(pdfs.global_originals_recovered_from_14_central_laws,0);\n+assert.equal(previous.unique_files,307);\n+assert.equal(previous.P9_1,'BLOCKED');\n+assert.equal(previous.protected_ACTUAL_unchanged,true);\n+console.log('PASS scoped NI-ADM.1.3.2: 14 official editions, 11 unconditional dates, 3 blocked triggers, 26 local readable texts');"
+    }
+  ],
+  "checks": [
+    {
+      "total_count": 0,
+      "check_runs": []
+    }
+  ],
+  "commits": [
+    {
+      "sha": "bd56c05d955ce3f963f5322376905c8dad68f67d",
+      "node_id": "C_kwDOUr2T3toAKGJkNTZjMDVkOTU1Y2UzZjk2M2Y1MzIyMzc2OTA1YzhkYWQ2OGY2N2Q",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:51:30Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:51:30Z"
+        },
+        "message": "NI-ADM.1.3.2: verify seven official 2024-2025 HTML editions and effect-date clauses",
+        "tree": {
+          "sha": "f2940865cf785ddf173e476e99d4c7b555f1b2c1",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/f2940865cf785ddf173e476e99d4c7b555f1b2c1"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/bd56c05d955ce3f963f5322376905c8dad68f67d",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bd56c05d955ce3f963f5322376905c8dad68f67d",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/bd56c05d955ce3f963f5322376905c8dad68f67d",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bd56c05d955ce3f963f5322376905c8dad68f67d/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "ae676b67c0f30f9cb93972dd9d5a71a5898b6934",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/ae676b67c0f30f9cb93972dd9d5a71a5898b6934",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/ae676b67c0f30f9cb93972dd9d5a71a5898b6934"
+        }
+      ]
+    },
+    {
+      "sha": "2cce288b7334358570a3683e6ca2cc24be25741e",
+      "node_id": "C_kwDOUr2T3toAKDJjY2UyODhiNzMzNDM1ODU3MGEzNjgzZTZjYTJjYzI0YmUyNTc0MWU",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:52:05Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:52:05Z"
+        },
+        "message": "NI-ADM.1.3.2: verify seven official 2023-2024 HTML editions and effect-date clauses",
+        "tree": {
+          "sha": "ac9e37ff5795eec56a1df68ed8780ae7a009d3ba",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/ac9e37ff5795eec56a1df68ed8780ae7a009d3ba"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/2cce288b7334358570a3683e6ca2cc24be25741e",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/2cce288b7334358570a3683e6ca2cc24be25741e",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/2cce288b7334358570a3683e6ca2cc24be25741e",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/2cce288b7334358570a3683e6ca2cc24be25741e/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "bd56c05d955ce3f963f5322376905c8dad68f67d",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/bd56c05d955ce3f963f5322376905c8dad68f67d",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/bd56c05d955ce3f963f5322376905c8dad68f67d"
+        }
+      ]
+    },
+    {
+      "sha": "60264e85891cbaf1566e6b37f7b9fd2d87223273",
+      "node_id": "C_kwDOUr2T3toAKDYwMjY0ZTg1ODkxY2JhZjE1NjZlNmIzN2Y3YjlmZDJkODcyMjMyNzM",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:53:34Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:53:34Z"
+        },
+        "message": "NI-ADM.1.3.2: inspect 14 public local council regulation texts and flag adoption-date uncertainty",
+        "tree": {
+          "sha": "445e0f4bfc4384c50a556fa3f021d56b66456a89",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/445e0f4bfc4384c50a556fa3f021d56b66456a89"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/60264e85891cbaf1566e6b37f7b9fd2d87223273",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/60264e85891cbaf1566e6b37f7b9fd2d87223273",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/60264e85891cbaf1566e6b37f7b9fd2d87223273",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/60264e85891cbaf1566e6b37f7b9fd2d87223273/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "2cce288b7334358570a3683e6ca2cc24be25741e",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/2cce288b7334358570a3683e6ca2cc24be25741e",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/2cce288b7334358570a3683e6ca2cc24be25741e"
+        }
+      ]
+    },
+    {
+      "sha": "0e90a49d2a1d438cbd553584ec9ec6a8f229c877",
+      "node_id": "C_kwDOUr2T3toAKDBlOTBhNDlkMmExZDQzOGNiZDU1MzU4NGVjOWVjNmE4ZjIyOWM4Nzc",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:54:28Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:54:28Z"
+        },
+        "message": "NI-ADM.1.3.2: correct three non-readable local regulations; fail closed for absent extracted text",
+        "tree": {
+          "sha": "dffbf926dbd12b272484f69002874e9249495cab",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/dffbf926dbd12b272484f69002874e9249495cab"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/0e90a49d2a1d438cbd553584ec9ec6a8f229c877",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/0e90a49d2a1d438cbd553584ec9ec6a8f229c877",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/0e90a49d2a1d438cbd553584ec9ec6a8f229c877",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/0e90a49d2a1d438cbd553584ec9ec6a8f229c877/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "60264e85891cbaf1566e6b37f7b9fd2d87223273",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/60264e85891cbaf1566e6b37f7b9fd2d87223273",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/60264e85891cbaf1566e6b37f7b9fd2d87223273"
+        }
+      ]
+    },
+    {
+      "sha": "184ba765e134c3ee8f5fca7da0d3e176fcab1272",
+      "node_id": "C_kwDOUr2T3toAKDE4NGJhNzY1ZTEzNGMzZWU4ZjVmY2E3ZGEwZDNlMTc2ZmNhYjEyNzI",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:55:38Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:55:38Z"
+        },
+        "message": "NI-ADM.1.3.2: content-screen eighteen prioritized local council decisions without boundary assumptions",
+        "tree": {
+          "sha": "d009ceb496d32f27e9db127f1698201c49d3afeb",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/d009ceb496d32f27e9db127f1698201c49d3afeb"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/184ba765e134c3ee8f5fca7da0d3e176fcab1272",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/184ba765e134c3ee8f5fca7da0d3e176fcab1272",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/184ba765e134c3ee8f5fca7da0d3e176fcab1272",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/184ba765e134c3ee8f5fca7da0d3e176fcab1272/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "0e90a49d2a1d438cbd553584ec9ec6a8f229c877",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/0e90a49d2a1d438cbd553584ec9ec6a8f229c877",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/0e90a49d2a1d438cbd553584ec9ec6a8f229c877"
+        }
+      ]
+    },
+    {
+      "sha": "4011b4548b4564fe30e1f931f8c1aa7e28b2df15",
+      "node_id": "C_kwDOUr2T3toAKDQwMTFiNDU0OGI0NTY0ZmUzMGUxZjkzMWY4YzFhYTdlMjhiMmRmMTU",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:59:21Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T12:59:21Z"
+        },
+        "message": "NI-ADM.1.3.2: certify visible commencement rules for 11 laws, retain three conditional triggers blocked",
+        "tree": {
+          "sha": "513daaffbfdc4ed21d7a6be38319a8a2aa8ea43f",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/513daaffbfdc4ed21d7a6be38319a8a2aa8ea43f"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/4011b4548b4564fe30e1f931f8c1aa7e28b2df15",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/4011b4548b4564fe30e1f931f8c1aa7e28b2df15",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/4011b4548b4564fe30e1f931f8c1aa7e28b2df15",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/4011b4548b4564fe30e1f931f8c1aa7e28b2df15/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "184ba765e134c3ee8f5fca7da0d3e176fcab1272",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/184ba765e134c3ee8f5fca7da0d3e176fcab1272",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/184ba765e134c3ee8f5fca7da0d3e176fcab1272"
+        }
+      ]
+    },
+    {
+      "sha": "1a3cf6e87f605d6b8000737dd75f578acc01ff1c",
+      "node_id": "C_kwDOUr2T3toAKDFhM2NmNmU4N2Y2MDVkNmI4MDAwNzM3ZGQ3NWY1NzhhY2MwMWZmMWM",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T13:00:24Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T13:00:24Z"
+        },
+        "message": "NI-ADM.1.3.2: record reproducible raw SHA256 for two local regulatory PDFs",
+        "tree": {
+          "sha": "4a6ac3d707bbe562b5ce0e13cdb61b4461cfd2af",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/4a6ac3d707bbe562b5ce0e13cdb61b4461cfd2af"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/1a3cf6e87f605d6b8000737dd75f578acc01ff1c",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/1a3cf6e87f605d6b8000737dd75f578acc01ff1c",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/1a3cf6e87f605d6b8000737dd75f578acc01ff1c",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/1a3cf6e87f605d6b8000737dd75f578acc01ff1c/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "4011b4548b4564fe30e1f931f8c1aa7e28b2df15",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/4011b4548b4564fe30e1f931f8c1aa7e28b2df15",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/4011b4548b4564fe30e1f931f8c1aa7e28b2df15"
+        }
+      ]
+    },
+    {
+      "sha": "8698ba9cdf6f464c15962ba7242ff7926a5e02f5",
+      "node_id": "C_kwDOUr2T3toAKDg2OThiYTljZGY2ZjQ2NGMxNTk2MmJhNzI0MmZmNzkyNmE1ZTAyZjU",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T13:01:56Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T13:01:56Z"
+        },
+        "message": "NI-ADM.1.3.2: document official 14-law editions, scoped local content inspection and remaining gates",
+        "tree": {
+          "sha": "904384b56f4386852758889c1b07cbf599a1801d",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/904384b56f4386852758889c1b07cbf599a1801d"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/8698ba9cdf6f464c15962ba7242ff7926a5e02f5",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/8698ba9cdf6f464c15962ba7242ff7926a5e02f5",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/8698ba9cdf6f464c15962ba7242ff7926a5e02f5",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/8698ba9cdf6f464c15962ba7242ff7926a5e02f5/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "1a3cf6e87f605d6b8000737dd75f578acc01ff1c",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/1a3cf6e87f605d6b8000737dd75f578acc01ff1c",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/1a3cf6e87f605d6b8000737dd75f578acc01ff1c"
+        }
+      ]
+    },
+    {
+      "sha": "cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "node_id": "C_kwDOUr2T3toAKGNmMGE2OGQ4MzdjODBlOGMxYzc4OWVjZTdhZDgyYjNmNzRkMjdmNjQ",
+      "commit": {
+        "author": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T13:02:24Z"
+        },
+        "committer": {
+          "name": "Ovidiu",
+          "email": "ovidiu.deica@yahoo.com",
+          "date": "2026-10-24T13:02:24Z"
+        },
+        "message": "NI-ADM.1.3.2: add validator for official editions, temporal gates and scoped local checks",
+        "tree": {
+          "sha": "cbbae6bdd63c090e0936b1cc1a8220df24939802",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/trees/cbbae6bdd63c090e0936b1cc1a8220df24939802"
+        },
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/git/commits/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "comments_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/cf0a68d837c80e8c1c789ece7ad82b3f74d27f64/comments",
+      "author": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "ovidiudeica",
+        "id": 61658017,
+        "node_id": "MDQ6VXNlcjYxNjU4MDE3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/61658017?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ovidiudeica",
+        "html_url": "https://github.com/ovidiudeica",
+        "followers_url": "https://api.github.com/users/ovidiudeica/followers",
+        "following_url": "https://api.github.com/users/ovidiudeica/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ovidiudeica/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ovidiudeica/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ovidiudeica/subscriptions",
+        "organizations_url": "https://api.github.com/users/ovidiudeica/orgs",
+        "repos_url": "https://api.github.com/users/ovidiudeica/repos",
+        "events_url": "https://api.github.com/users/ovidiudeica/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ovidiudeica/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "8698ba9cdf6f464c15962ba7242ff7926a5e02f5",
+          "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/8698ba9cdf6f464c15962ba7242ff7926a5e02f5",
+          "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/commit/8698ba9cdf6f464c15962ba7242ff7926a5e02f5"
+        }
+      ]
+    }
+  ],
+  "file_comparison": [
+    {
+      "path": "docs/evidence/ni-adm132-20261024/README.md",
+      "status": "added",
+      "head_blob": "ce870f8d6c9ac0c4a488bd90a233142c0f22cc86",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm132-20261024/law-effective-dates.json",
+      "status": "added",
+      "head_blob": "230b0ef292cf1d1bb13590c0b21c658a7d45cffe",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm132-20261024/local-binary-hashes.json",
+      "status": "added",
+      "head_blob": "26fd16467a97079dc61a057796e046356497894c",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm132-20261024/local-regulations-14.json",
+      "status": "added",
+      "head_blob": "24db958c9a27c21ca0e552316355459cc0bd83bc",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm132-20261024/official-editions-01.json",
+      "status": "added",
+      "head_blob": "ee9abcf9afdd40ce441ee8d6c1abe7e12e672e1d",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm132-20261024/official-editions-02.json",
+      "status": "added",
+      "head_blob": "98470ecdd6d52ae58719c9f4208cc066060e64ab",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm132-20261024/selected-decisions-18.json",
+      "status": "added",
+      "head_blob": "fe845276a5370e73a20594adfc8d0fb75cd488be",
+      "main_blob": null,
+      "identical_main": false
+    },
+    {
+      "path": "docs/evidence/ni-adm132-20261024/validate.mjs",
+      "status": "added",
+      "head_blob": "58fda8dead30d7360b9c2a4afadb5c6a0c591569",
+      "main_blob": null,
+      "identical_main": false
+    }
+  ]
+}

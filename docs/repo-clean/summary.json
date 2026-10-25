@@ -1,0 +1,40 @@
+{
+  "schema": "repo-clean-reconciliation-v1",
+  "at": "2026-10-25T15:36:36.829641+00:00",
+  "baseline_main": "5e1870a1a7fdc5dda2801862b7a53b8fdb6cbc62",
+  "prs": {
+    "initial": 41,
+    "merged": 0,
+    "closed": 37,
+    "retained_active": [
+      294,
+      295,
+      296,
+      398
+    ]
+  },
+  "issues": {
+    "initial": 2,
+    "closed": 0,
+    "retained": [
+      396,
+      442
+    ]
+  },
+  "branches": {
+    "initial": 56,
+    "deleted": 51,
+    "retained": 5,
+    "durable_annotated_archive_refs": 55
+  },
+  "tracked_runtime_changed": false,
+  "ACTUAL_RO": 3246,
+  "ACTUAL_MD": 2602,
+  "ACTUAL_TOTAL": 5848,
+  "ACTUAL_COMPONENTS": 32,
+  "NI_FUNCTIONAL_COMPLETE": true,
+  "P91_IMPORT_ALLOWED": false,
+  "REPO_TECHNICAL_DEBT_RESOLVED": false,
+  "READY_FOR_UA_CV0": false,
+  "hygiene_admission": "Operational cleanup complete; final certification requires exact-HEAD CI and report merge/post-merge."
+}
