@@ -53,3 +53,7 @@ Pregătirea auditului a demonstrat că inventarul existent omitea cele două JSO
 ## Proveniența și ținta acceptării NI — NIF-014
 
 Workflow-ul dedicat fixează acum checkout-ul și numele artifactului pe HEAD-ul exact al PR-ului. Raportul include SHA, starea surselor urmărite, verdict și mod; un pas distinct verifică aceste valori. Dispatch-ul manual admite numai local/published; ținta published este URL-ul Pages fix și verifică nouă surse și cei doi JSON NI byte-identic înaintea acelorași scenarii. Cele patru ținte nepermise sunt respinse înainte de browser. Probele locale noi trec 5/5 cu alternativa Edge/Chromium deja permisă; o pornire Chrome a expirat înainte de încărcarea aplicației, cu diagnostic păstrat separat și cauză exactă neadjudecată. CI Google Chrome și proba published rămân obligatorii pe SHA-urile finale.
+
+## Lizibilitatea interioară a cardului — NIF-015
+
+Inspecția capturilor mobile a indicat o posibilă tăiere laterală. Măsurătorile locale Edge după stabilizare nu au reprodus overflow persistent; nu s-a modificat CSS-ul. Testul a fost întărit pentru a aștepta fonturile, animațiile finite și două cadre de layout, apoi verifică interiorul cardului și vizibilitatea corpului extins pe toate profilele, înainte de captură. Datele brute și limitele acestei concluzii sunt conservate. Proba locală trece; confirmarea Linux Chrome este obligatorie pe noul HEAD.

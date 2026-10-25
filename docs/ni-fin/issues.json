@@ -161,6 +161,17 @@
       "regression": "Four invalid modes fail before browser launch; local positive scenario passes with approved Edge/Chromium. CI report admission checks exact expected SHA, clean state, PASS and selected mode. Published positive scenario remains mandatory after UI publication.",
       "status": "FIX_IMPLEMENTED_PENDING_CI",
       "pr": 441
+    },
+    {
+      "id": "NIF-015",
+      "severity": "P2",
+      "component": "NI card interior layout acceptance",
+      "reproduction": "A497126 mobile capture suggests lateral clipping, while the prior test checks only document width and captures immediately after viewport/expansion changes.",
+      "cause": "The acceptance test did not distinguish stable interior overflow from font/animation capture timing; no stable application clipping reproduced in the local settled Edge measurement.",
+      "fix": "Preserve CSS; wait for fonts, finite panel animations and two layout frames, then assert visible expanded content and no interior horizontal overflow before screenshots. Store actual layout measurements in the report.",
+      "regression": "1440/900/390/844/360 viewport card measurements and expanded mobile cases; new local Chromium scenario PASS. Exact-HEAD Linux Chrome CI remains required.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI",
+      "pr": 441
     }
   ]
 }

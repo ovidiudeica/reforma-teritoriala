@@ -9,6 +9,27 @@ assert.ok(['local','published'].includes(mode),'Unsupported NI acceptance mode')
 const source=performanceSource(root),publishedBase='https://ovidiudeica.github.io/reforma-teritoriala/';
 const out=path.join(auditEvidenceDirectory(),'ni-fin');await mkdir(out,{recursive:true});
 const b=await launchBrowser(root),p=await b.page(),target=mode==='published'?publishedBase:b.server.url,report={status:'FAIL',sourceSha:source.sha,trackedSourcesClean:source.trackedSourcesClean,mode,browser:b.version.Browser,scenarios:[],screenshots:[]};
+async function inspectCardLayout(label,requireBody=false){
+ const layout=await p.call(async function(){
+  await document.fonts.ready;
+  const panel=document.getElementById('details-panel');
+  await Promise.all(panel.getAnimations({subtree:true}).filter(a=>a.effect?.getTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{})));
+  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  const content=document.getElementById('details-content'),body=document.getElementById('details-body');
+  const box=e=>{const r=e.getBoundingClientRect();return {id:e.id||e.tagName,left:r.left,right:r.right,clientWidth:e.clientWidth,scrollWidth:e.scrollWidth};};
+  const containers=[panel,content,body].map(box),bodyVisible=body.clientWidth>0&&body.getBoundingClientRect().height>0,overflows=[];
+  if(content.getBoundingClientRect().right>panel.getBoundingClientRect().right+1)overflows.push({issue:'content exceeds panel',...box(content)});
+  if(bodyVisible){
+   if(body.getBoundingClientRect().right>content.getBoundingClientRect().left+content.clientWidth+1)overflows.push({issue:'body exceeds content viewport',...box(body)});
+   for(const e of [content,body,...body.querySelectorAll('.details-section,p,dl')])if(e.scrollWidth>e.clientWidth+1)overflows.push({issue:'horizontal content overflow',...box(e)});
+  }
+  return {bodyVisible,containers,overflows};
+ });
+ (report.cardLayouts??=[]).push({label,...layout});
+ if(requireBody)assert.equal(layout.bodyVisible,true,'expanded card body must be visible '+label);
+ assert.deepEqual(layout.overflows,[],'NI card text must fit its interior viewport '+label);
+}
+
 try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL and responsive cards',{timeout:240000},async()=>{
  if(mode==='published'){
   assert.equal(source.trackedSourcesClean,true,'Published NI acceptance requires exact committed sources');
@@ -44,8 +65,9 @@ try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL
  for(const [w,h] of [[1440,900],[900,768],[390,844],[844,390],[360,800]]){
   await p.viewport(w,h);await p.evaluate("qaApp.selectEntity('view-nistrenia-council-29',{zoom:false})");
   assert.equal(await p.evaluate('document.documentElement.scrollWidth<=innerWidth'),true,'overflow '+w+'x'+h);
+  await inspectCardLayout(w+'x'+h,w>=900);
   const file='council-'+w+'x'+h+'.png';await p.screenshot(path.join(out,file));report.screenshots.push(file);
-  if(w<900){await p.click('#sheet-expand');const expanded='expanded-'+w+'x'+h+'.png';await p.screenshot(path.join(out,expanded));report.screenshots.push(expanded);}
+  if(w<900){await p.click('#sheet-expand');await inspectCardLayout('expanded-'+w+'x'+h,true);const expanded='expanded-'+w+'x'+h+'.png';await p.screenshot(path.join(out,expanded));report.screenshots.push(expanded);}
  }
  report.scenarios.push('desktop/tablet/mobile portrait+landscape without horizontal overflow');
  for(const id of ['osm-r58974','osm-r90689']){await p.call(async function(id){await qaApp.selectEntity(id,{zoom:false});},id);assert.equal(await p.evaluate('qaApp.selectedEntityId'),id);}
