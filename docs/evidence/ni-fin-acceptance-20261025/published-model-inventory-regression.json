@@ -1,0 +1,27 @@
+{
+  "before": {
+    "status": "REPRODUCED_INVENTORY_GAP",
+    "trackedRuntimeCount": 436,
+    "missing": [
+      "views/nistrenia/administration.json",
+      "views/nistrenia/manifest.json"
+    ]
+  },
+  "after": {
+    "status": "PASS",
+    "count": 438,
+    "views": [
+      "views/nistrenia/administration.json",
+      "views/nistrenia/manifest.json"
+    ]
+  },
+  "tests": {
+    "pass": 26,
+    "fail": 0,
+    "scope": "local runtime/source/retry regressions; not a published website PASS"
+  },
+  "changed_code_sha256": {
+    "scripts/audit/helpers/published-runtime.mjs": "b9a7331a2eb2b0cb9682105dfe9624233ad11b377c426baa3c0c371ec877a751",
+    "scripts/test/frontend-published-runtime.test.mjs": "d667a5c54c2c78b38d28d69d604a87784f3f01ec196a1453c4bb7ead661cae62"
+  }
+}

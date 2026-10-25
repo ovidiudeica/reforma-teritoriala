@@ -1,0 +1,27 @@
+{
+  "original_workflow_commit": "6e322386793b8d9b86a53d37b709198ae1accfff",
+  "original_workflow_sha256": "23258f2d1bc61ee82a19d938d25e4fc356bb92b96d326462935381252a0539c9",
+  "original_explicit_checkout_ref_present": false,
+  "new_source_sha256": {
+    ".github/workflows/ni-fin.yml": "7bf8f759bbb435c42a14339fe3278e90e04e2e17154a601431f357f445d7bb50",
+    "scripts/test/ni-fin2-browser.test.mjs": "1bd0dfae1ac4b92821c362f7459a0b90e535cdf1bf9e6bf387aa986007be22fa",
+    "scripts/test/ni-fin2-acceptance-mode.test.mjs": "d234e2e65e3fa361094588e9f8175f5327db8e29a4d05e1eab6d891115d361e3"
+  },
+  "allowed_targets": [
+    "local",
+    "published"
+  ],
+  "published_base": "https://ovidiudeica.github.io/reforma-teritoriala/",
+  "local_new_probes": {
+    "pass": 5,
+    "fail": 0,
+    "engine": "Approved Edge/Chromium alternative"
+  },
+  "local_chrome_startup_diagnostic": {
+    "failure": "Timeout browser launch before application navigation",
+    "root_cause": "UNDETERMINED",
+    "raw_log_retained_locally": true,
+    "test_disabled": false
+  },
+  "published_validation": "PENDING_PUBLICATION; no positive result claimed"
+}

@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "run": 40173753136,
+  "tested_head": "f8e26ace2a161bb56022700387dec3d545342ff0",
+  "independent_zip_digest_and_byte_comparison": true,
+  "artifacts": [
+    {
+      "label": "A",
+      "artifact_id": 12591048726,
+      "zip_bytes": 209517472,
+      "zip_sha256": "6e8a1345f60da157d1413e1d9702429e0b4e7a3facc7b05130039a7a5c731f67"
+    },
+    {
+      "label": "B",
+      "artifact_id": 12591921591,
+      "zip_bytes": 209517472,
+      "zip_sha256": "6e8a1345f60da157d1413e1d9702429e0b4e7a3facc7b05130039a7a5c731f67"
+    }
+  ],
+  "compared_fields": [
+    "base_commit_sha",
+    "tested_commit_sha",
+    "snapshot_id",
+    "tree_sha",
+    "commit_sha",
+    "candidate_tree_tar_sha256",
+    "ls_tree_sha256",
+    "release_manifest_sha256",
+    "candidate_diff_sha256",
+    "candidate_marker_sha256"
+  ],
+  "proof": {
+    "schema_version": 1,
+    "mode": "ACTUAL_CHANGE_REPRODUCIBILITY_PROOF",
+    "base_commit_sha": "447f9bdbca5eb2869d107641a14398f7a273165e",
+    "tested_commit_sha": "f8e26ace2a161bb56022700387dec3d545342ff0",
+    "snapshot_id": "actual-9b941fdd5b51eaef",
+    "tree_sha": "15a5dffa503d9c327c86d9fdeb8f4181613b6529",
+    "commit_sha": "c4ca2c3a721916fb87b877238af65eb69945dcae",
+    "candidate_tree_tar_sha256": "01236b7d656047d5ae584ce417c845462663ac86f440d6f93f25d8423f279064",
+    "ls_tree_sha256": "4e9162862b28cf2f296c30a73fdd4f9d000b0f1050468af03d0679721814e734",
+    "release_manifest_sha256": "2ecd04bd42035f17acd3164be8638b73c0d59bb68798a45b26343c3baca4bc77",
+    "candidate_diff_sha256": "5f2dcf469802c0a30498fd5e7b0afb65a3859f771bc018451907cca1c82b6ad9",
+    "candidate_marker_sha256": "dc415c427cbd78b316c46aee0ef7b3bb825ef4a29456d3a5d5b1c02612af0cf3"
+  }
+}

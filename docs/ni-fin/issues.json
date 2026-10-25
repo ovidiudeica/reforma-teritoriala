@@ -11,6 +11,167 @@
       "fix": "Source-bound correction of virtual parent only, preserving original census and officialMDparent.",
       "regression": "Mayak effectiveparentunit22; lettered25-27underplace24; nestedlocalities allowed and cycles rejected.",
       "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-002",
+      "severity": "P1",
+      "component": "Virtual model write surface",
+      "reproduction": "CI40136595233 on6497d52 rejects added public/data/ni-fin files.",
+      "cause": "The existing read-only census forbids any data/public diff, including virtual presentation data.",
+      "fix": "Move derived model and manifest to views/nistrenia; update loader/generator bindings; preserve gate and protected directories unchanged.",
+      "regression": "Model byte regeneration and SHA loader; existing WEB-R2a.1 gate remains mandatory.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-003",
+      "severity": "P2",
+      "component": "Approved administrative tree regression contracts",
+      "reproduction": "CI40136595275 expects7 UIgroups;40136595306 expects previous factory name.",
+      "cause": "Legacy runtime assertions describe the replaced geometric-group tree rather than the approved9unit documentary tree.",
+      "fix": "Update only runtime expectations to9 units and verified administrative loader; retain old7group catalog/85role invariants and every existing test.",
+      "regression": "P907216/P909/P9094 browser and menu tests; new242node reciprocal-path tests.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-004",
+      "severity": "P2",
+      "component": "Chromium exhaustive-card audit pacing",
+      "reproduction": "CI40136595350 artifact12577485510 records Throttling navigation to prevent the browser from hanging after bulk242 sequential selections.",
+      "cause": "The exhaustive audit exceeds Chromium IPC navigation flood protection on the faster hosted runner; local Windows did not hit that rate.",
+      "fix": "Pace the synthetic all-card traversal by125ms per selection; keep browser flood protection active; assert no throttling diagnostics.",
+      "regression": "All242 cards remain checked; URL hydration and Back/Forward after traversal still required.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-005",
+      "severity": "P2",
+      "component": "Documentary card scroll lifecycle",
+      "reproduction": "Scroll a long NI resource card then select a council; the new title can remain above the retained scroll position.",
+      "cause": "Card content was replaced without resetting the contextual scrolling elements for a changed documentary selection.",
+      "fix": "Reset details-panel/content/body scroll only when selected ID changes; resource toggles inside the same card preserve position.",
+      "regression": "Real Chromium scroll500 then council selection must start at scrollTop0.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-006",
+      "severity": "P2",
+      "component": "Runtime model validation",
+      "reproduction": "A model with nonnumeric OSM version, missing original_names, altered per-node year/legal status or rebound compatibility alias passed the initial structural validator.",
+      "cause": "The first validator checked registry shape but did not bind all display metadata and per-node authority fields.",
+      "fix": "Reject malformed version/timestamp/level metadata, missing source-name lists, per-node authority/epoch promotion and aliases outside the85canonical resources.",
+      "regression": "Six negative model tests added;26model tests PASS.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-007",
+      "severity": "P1",
+      "component": "NI acquisition fault isolation",
+      "reproduction": "RealChromium corrupt200and503NI model responses leave ACTUAL tree uninitialized and root selection empty.",
+      "cause": "Optional NI model acquisition occurred inside the mandatory hierarchy initialization phase.",
+      "fix": "Validate NI model in the existing optional OSM/NI acquisition boundary; reject NI only, then initialize official RO/MD hierarchy, geometry and URL normally.",
+      "regression": "Two realChromium negative scenarios require5848ACTUAL records, functionaltree, selectedRO/MDroots, NI disabled and canonicalMDselection.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-008",
+      "severity": "P1",
+      "component": "Audit artifact write boundary",
+      "reproduction": "CodeQL check121001867307 reports two high path-expression alerts on environment-selected NI_FIN_OUTPUT.",
+      "cause": "New browser audit accepted arbitrary environment-selected artifact output paths.",
+      "fix": "Use existing fixed auditEvidenceDirectory namespace and a literal ni-fin subdirectory; remove custom destination environment input.",
+      "regression": "CodeQL exactHEAD plus existing browsersecurity helper tests; no rule suppression or dismissal.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-009",
+      "severity": "P2",
+      "component": "Administrative card semantics",
+      "reproduction": "New card metadata used dt/dd rows without their dl container.",
+      "cause": "Existing detailRow helper requires an explicit definition-list wrapper from the caller.",
+      "fix": "Wrap documentary parent/geometry/status/source rows in the existing kv definition-list component.",
+      "regression": "All242cards require every dt/dd to have a dl ancestor in realChromium.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI"
+    },
+    {
+      "id": "NIF-010",
+      "severity": "P1",
+      "component": "Exact runner qualification",
+      "reproduction": "A/B on 6e322386793b8d9b86a53d37b709198ae1accfff fail runtime_host_profile_is_explicitly_approved for GitHub image 20261023.334.3.",
+      "cause": "New image was outside the explicitly approved profile list; fail-closed behavior was correct.",
+      "fix": "Owner-authorized exact profile append and authenticated P9.0.5 provenance rebind; all previous profiles retained.",
+      "regression": "Positive/negative host tests, actual A/B, independent artifact byte comparison and post-merge validation.",
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 444,
+      "verification_sha": "f8e26ace2a161bb56022700387dec3d545342ff0",
+      "postmerge_sha": "b74890be128db84b6c84da1fe3ebbaee9e47b298",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40173753136",
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/444#issuecomment-6395301867"
+      ]
+    },
+    {
+      "id": "NIF-011",
+      "severity": "P1",
+      "component": "Provenance admission compatibility",
+      "reproduction": "WEB-R2a.1 rejects the six authorized provenance manifests; publication gate rejects the initial audit/ branch prefix.",
+      "cause": "The historical read-only census boundary had no exact provenance admission; the initial branch did not use existing actual/provenance- policy.",
+      "fix": "Separately owner-authorized exact six-file hash admission with semantic checks and preserved historical evidence; existing actual/provenance- branch path used without changing publication whitelist.",
+      "regression": "Reject changed or extra protected files, missing/altered approval, incorrect bytes and semantic drift; real census and trust-chain CI.",
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 444,
+      "verification_sha": "f8e26ace2a161bb56022700387dec3d545342ff0",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/444#issuecomment-6395147036"
+      ]
+    },
+    {
+      "id": "NIF-012",
+      "severity": "P2",
+      "component": "Provenance unit-test isolation",
+      "reproduction": "P8.4 complete suite on 5820f8d fails git show historical release in its temporary repository.",
+      "cause": "New unit-test fixture depended on Git history absent from the isolated complete suite.",
+      "fix": "Freeze the original release bytes with independently verified SHA256; remove Git dependency from unit fixture while operational gate retains real tree comparison.",
+      "regression": "21 tests pass with Git absent from PATH and no repository history; corrected complete P8.2/P8.4 pass.",
+      "status": "CLOSED_RETEST_PASS",
+      "pr": 444,
+      "verification_sha": "f8e26ace2a161bb56022700387dec3d545342ff0",
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40172878418",
+        "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40173753178"
+      ]
+    },
+    {
+      "id": "NIF-013",
+      "severity": "P1",
+      "component": "Published runtime virtual-model coverage",
+      "reproduction": "On reconciled UI, publishedRuntimeFiles returns 436 resources and omits tracked views/nistrenia/administration.json and manifest.json.",
+      "cause": "The runtime inventory covered root modules, public catalogs/geometry and release metadata, but did not include the new virtual-view JSON location.",
+      "fix": "Include both exact NI JSON paths and require both tracked assets whenever the administrative module is present. Preserve all existing inventory and integrity checks.",
+      "regression": "Positive exact-byte model/manifest coverage, untracked required manifest, stale HTTP200 and missing404 for either JSON. Local related suite:26PASS; inventory becomes438.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI",
+      "pr": 441
+    },
+    {
+      "id": "NIF-014",
+      "severity": "P1",
+      "component": "NI browser acceptance provenance and published coverage",
+      "reproduction": "Original NI workflow has no explicit PR-head checkout ref; original browser report lacks sourceSha/mode and runs only local target. It cannot independently certify exact-HEAD published NI acceptance.",
+      "cause": "Dedicated acceptance did not bind checkout, report provenance and fixed published target as independent requirements.",
+      "fix": "Explicit exact PR-head checkout and artifact naming; report includes committed source SHA, clean state, status and enumerated mode; manual fixed Pages mode verifies nine source hashes plus exact model/manifest bytes, then exercises the same NI scenarios.",
+      "regression": "Four invalid modes fail before browser launch; local positive scenario passes with approved Edge/Chromium. CI report admission checks exact expected SHA, clean state, PASS and selected mode. Published positive scenario remains mandatory after UI publication.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI",
+      "pr": 441
+    },
+    {
+      "id": "NIF-015",
+      "severity": "P2",
+      "component": "NI card interior layout acceptance",
+      "reproduction": "A497126 mobile capture suggests lateral clipping, while the prior test checks only document width and captures immediately after viewport/expansion changes.",
+      "cause": "The acceptance test did not distinguish stable interior overflow from font/animation capture timing; no stable application clipping reproduced in the local settled Edge measurement.",
+      "fix": "Preserve CSS; wait for fonts, finite panel animations and two layout frames, then assert visible expanded content and no interior horizontal overflow before screenshots. Store actual layout measurements in the report.",
+      "regression": "1440/900/390/844/360 viewport card measurements and expanded mobile cases; new local Chromium scenario PASS. Exact-HEAD Linux Chrome CI remains required.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI",
+      "pr": 441
     }
   ]
 }

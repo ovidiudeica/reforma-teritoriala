@@ -11,3 +11,31 @@ test('an HTTP200 stale geometry fails with the exact mismatched resource and has
 test('missing runtime resources fail instead of being omitted from the inventory',()=>fixture(async({root})=>{await assert.rejects(verifyPublishedRuntime(root,{fetcher:async()=>new Response('not found',{status:404})}),e=>{assert.match(e.message,/Published runtime HTTP/);assert.ok(e.inventory.records.some(r=>r.httpStatus===404&&r.status==='FAIL'));return true;});}));
 
 test('a transient 503 followed by HTTP200 stale geometry still fails the exact-byte gate',()=>fixture(async({root,fetcher})=>{let calls=0;await assert.rejects(verifyPublishedRuntime(root,{fetcher:async url=>{if(!url.endsWith('shape.geojson'))return fetcher(url);return ++calls===1?new Response('busy',{status:503}):new Response('stale geometry');}}),e=>{assert.match(e.message,/bytes differ.*shape.geojson/);const record=e.inventory.records.find(r=>r.file==='public/geo/shape.geojson');assert.deepEqual(record.httpHistory,[503,200]);assert.equal(record.httpAttempts,2);assert.equal(record.status,'FAIL');return true;});assert.equal(calls,2);}));
+
+async function addVirtualModel(root){
+ const files={'atlas-nistrenia-administrative.mjs':'export const virtual=true;','views/nistrenia/administration.json':'{"schema":"fixture-model"}','views/nistrenia/manifest.json':'{"schema":"fixture-manifest"}'};
+ for(const [name,body] of Object.entries(files)){await mkdir(path.dirname(path.join(root,name)),{recursive:true});await writeFile(path.join(root,name),body);}
+ execFileSync('git',['add','--',...Object.keys(files)],{cwd:root});
+}
+test('NI virtual model and manifest are both hashed as deployed runtime assets',()=>fixture(async({root,fetcher})=>{
+ await addVirtualModel(root);const files=publishedRuntimeFiles(root);
+ assert.equal(files.length,13);for(const name of ['views/nistrenia/administration.json','views/nistrenia/manifest.json'])assert.ok(files.includes(name));
+ const report=await verifyPublishedRuntime(root,{fetcher});assert.equal(report.status,'PASS');assert.equal(report.checkedFiles,13);
+ assert.ok(report.records.filter(r=>r.file.startsWith('views/nistrenia/')).every(r=>r.sha256===r.expectedSha256));
+}));
+test('NI module cannot silently omit its tracked model or manifest',()=>fixture(async({root})=>{
+ await addVirtualModel(root);execFileSync('git',['rm','--cached','--','views/nistrenia/manifest.json'],{cwd:root});
+ assert.throws(()=>publishedRuntimeFiles(root),/must both be tracked/);
+}));
+for(const file of ['views/nistrenia/administration.json','views/nistrenia/manifest.json']){
+ test('HTTP200 stale NI asset fails exact bytes: '+file,()=>fixture(async({root,fetcher})=>{
+  await addVirtualModel(root);await assert.rejects(verifyPublishedRuntime(root,{fetcher:async url=>url.endsWith(file)?new Response('stale virtual asset'):fetcher(url)}),e=>{
+   assert.match(e.message,/Published runtime bytes differ/);assert.ok(e.inventory.records.some(r=>r.file===file&&r.status==='FAIL'&&r.sha256!==r.expectedSha256));return true;
+  });
+ }));
+ test('missing NI asset fails rather than narrowing inventory: '+file,()=>fixture(async({root,fetcher})=>{
+  await addVirtualModel(root);await assert.rejects(verifyPublishedRuntime(root,{fetcher:async url=>url.endsWith(file)?new Response('not found',{status:404}):fetcher(url)}),e=>{
+   assert.ok(e.inventory.records.some(r=>r.file===file&&r.httpStatus===404&&r.status==='FAIL'));return true;
+  });
+ }));
+}

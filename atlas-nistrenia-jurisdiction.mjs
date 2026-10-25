@@ -1,3 +1,4 @@
+import {validateNistreniaAdministrativeModel} from './atlas-nistrenia-administrative.mjs';
 // P9.0.9.4: operational UI jurisdiction only. NEVER a legal ACTUAL entity/parent or a new polygon.
 import {validateNistreniaOsmNavigation} from './atlas-nistrenia-osm.mjs';
 export const NISTR_EN_ROOT='view-nistrenia';
@@ -37,6 +38,7 @@ export function createNistreniaOperationalView({catalog,roles,entityById,officia
 }
 export function nistreniaSearchEntities(view,entityById){
  if(!view)return [];
+ if(view.model)return [...view.virtualIds].map(id=>{const node=view.nodes.get(id);return {...node,representation:{inferred_type:node.display_type},hierarchy:{consolidated_parent_id:node.parent_id},searchable_names:[node.display_name,...node.original_names]};});
  return [view.root,...view.groupIds.map(id=>view.nodes.get(id)),...[...view.toActual.entries()].map(([alias,id])=>{
   const original=entityById.get(id),node=view.nodes.get(alias);
   return {...original,id:alias,display_name:node.display_name,jurisdiction:'NI',roles:['operational_osm'],official_name:original.official_name,representation:{...(original.representation||{}),inferred_type:original.display_type}};
@@ -45,4 +47,18 @@ export function nistreniaSearchEntities(view,entityById){
   hierarchy:{...(node.hierarchy||{}),consolidated_parent_id:node.parent_id},
   searchable_names:[...(node.searchable_names||[]),...(node.id===NISTR_EN_ROOT?['Nistrenia','Transnistria','Republica Moldovenească Nistreană']:[])]
  }));
+}
+
+// Administrative presentation only; canonical objects stay in the legal ACTUAL tree.
+export function createNistreniaAdministrativeView({model,entityById,officialNodes,officialRoots}){
+ const checked=validateNistreniaAdministrativeModel(model,{actualIds:new Set(entityById.keys())});
+ if(officialNodes.size!==5848||officialRoots.length!==2)throw Error('Nistrenia: invalid ACTUAL hierarchy');
+ const nodes=new Map(officialNodes);
+ for(const [id,node] of checked.nodes){if(nodes.has(id))throw Error('Nistrenia: presentation ID collision');nodes.set(id,{...node,display_name:node.kind==='raion'?node.display_name+' (raion)':node.kind==='upper_city'?node.display_name+' (oraș)':node.display_name});}
+ const roleIds=new Set(Object.values(model.compatibility_role_aliases));
+ if(roleIds.size!==85)throw Error('Nistrenia: canonical geometry role coverage');
+ return {model,nodes,resources:checked.resources,root:checked.root,rootIds:[...officialRoots,NISTR_EN_ROOT],
+  groupIds:checked.root.child_ids,virtualIds:new Set(checked.nodes.keys()),roleIds,toActual:new Map(),
+  officialNodeCount:officialNodes.size,isVirtual:id=>checked.nodes.has(id),actualId:id=>id,
+  operationalJurisdiction:id=>roleIds.has(id)?'NI':entityById.get(id)?.jurisdiction,aggregateIds:()=>null};
 }

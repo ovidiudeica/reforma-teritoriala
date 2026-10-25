@@ -16,7 +16,7 @@ try{
   await t.test('catalog/search/filter presentation is absent while runtime contract stays intact',async()=>{
    const state=await page.evaluate("({panel:!!document.querySelector('#osm-roles-panel'),search:!!document.querySelector('#osm-roles-search'),filter:!!document.querySelector('#osm-roles-filter'),list:!!document.querySelector('#osm-roles-list'),roles:qaApp.osmRoleById.size,nistreniaRoles:qaApp.nistreniaView.roleIds.size,groups:qaApp.nistreniaView.groupIds.length,officialNodes:qaApp.nistreniaView.officialNodeCount,defaultIds:[...qaApp.visibleEntityIds].sort(),defaultOperational:[...qaApp.visibleOperationalOutlineIds].sort(),p91:qaApp.nistreniaCatalog.p91_import_allowed,semantic:qaApp.nistreniaCatalog.legal_semantic_acceptance,actualMutation:qaApp.nistreniaCatalog.actual_mutation_allowed})");
    assert.deepEqual([state.panel,state.search,state.filter,state.list],[false,false,false,false]);
-   assert.equal(state.roles,85);assert.equal(state.nistreniaRoles,85);assert.equal(state.groups,7);assert.equal(state.officialNodes,5848);
+   assert.equal(state.roles,85);assert.equal(state.nistreniaRoles,85);assert.equal(state.groups,9);assert.equal(state.officialNodes,5848);
    assert.deepEqual(state.defaultIds,['osm-r58974','osm-r90689'].sort());
    assert.deepEqual(state.defaultOperational,['view-nistrenia']);
    assert.equal(state.p91,false);assert.equal(state.semantic,'BLOCKED_INCOMPLETE');assert.equal(state.actualMutation,false);

@@ -1,10 +1,11 @@
+import {fetchNistreniaAdministrativeModel} from './atlas-nistrenia-administrative.mjs';
 import {createAtlasExport} from './atlas-export-ui.mjs';
 import {mapSvg,printSvg} from './atlas-export-visual.mjs';
 import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
 import {validateOsmRolesCatalog,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
 import {validateNistreniaOsmNavigation} from './atlas-nistrenia-osm.mjs';
-import {createNistreniaOperationalView,nistreniaSearchEntities,NISTR_EN_ROOT} from './atlas-nistrenia-jurisdiction.mjs';
+import {createNistreniaAdministrativeView,nistreniaSearchEntities,NISTR_EN_ROOT} from './atlas-nistrenia-jurisdiction.mjs';
 import {fetchVerifiedNistreniaOutlines,createNistreniaOutlineLayers,niOutlineIds} from './atlas-nistrenia-outlines.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
@@ -86,6 +87,7 @@ const entityById=new Map();
 let osmRoleById=new Map();
 let nistreniaCatalog=null;
 let nistreniaView=null;
+let nistreniaAdministrativeModel=null;
 let nistreniaOutlineFeatures=null;
 let nistreniaOutlineProof=null;
 let nistreniaOutlines=null;
@@ -404,13 +406,13 @@ function resetGeometries(){
 for(const id of ['geometries-reset','map-geometries-reset'])document.getElementById(id)?.addEventListener('click',resetGeometries);
 function updateSelectionVisibility(){
  const ownOutline=nistreniaOutlines?.has(selectedEntityId);
- const entity=ownOutline?nistreniaView.nodes.get(selectedEntityId):entityById.get(selectedEntityId);
+ const entity=nistreniaView?.isVirtual(selectedEntityId)?nistreniaView.nodes.get(selectedEntityId):entityById.get(selectedEntityId);
  const status=document.getElementById('selection-visibility');
  const action=document.getElementById('selection-visibility-action');
  if(!status)return;
  if(action)action.hidden=true;
  if(!entity){status.textContent='';return;}
- if(!ownOutline&&!entity.map?.bbox){status.textContent='Geometria acestei entități nu este disponibilă în snapshot.';return;}
+ if(!ownOutline&&!entity.map?.bbox){status.textContent='Această înregistrare nu are un contur propriu certificat. Consultați separat eventualele referințe OSM.';return;}
  const checked=(ownOutline?visibleOperationalOutlineIds:visibleEntityIds).has(entity.id);
  const jurisdictionAllowed=jurisdictionChecked(ownOutline?'NI':operationalJurisdiction(entity));
  if((ownOutline?checked:isVisible(entity))&&jurisdictionAllowed){status.textContent='';return;}
@@ -427,29 +429,42 @@ function searchEntitiesWithNistrenia(){
  return [...entityById.values(),...nistreniaSearchEntities(nistreniaView,entityById)];
 }
 function renderNistreniaDetails(id){
- const name=nistreniaView.nodes.get(id)?.display_name||'Nistrenia';
- const osmId=nistreniaOutlineFeatures.get(id).properties.osm_relation_id;
- const source=nistreniaOutlineProof.relations.find(item=>item.id===id);
- document.getElementById('details-title').textContent=name;
- document.getElementById('details-summary').textContent='Contur propriu OSM · grupare operațională de facto';
- document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Perimetru OSM descriptiv</h3><p>Conturul OSM este independent de cele 85 de geometrii ACTUAL componente. Selectarea acestui nume nu activează descendenți. Nistrenia nu este stat recunoscut; teritoriul aparține juridic Republicii Moldova. Limita OSM nu certifică o nouă delimitare juridică.</p><p>Relația OSM '+osmId+' · versiunea '+source.relation_version+' · '+escapeHtml(source.relation_timestamp)+' · © OpenStreetMap contributors, ODbL.</p><p><a href="https://www.openstreetmap.org/relation/'+osmId+'" target="_blank" rel="noopener noreferrer">Sursă OSM</a></p></section>';
+ const node=nistreniaView.nodes.get(id),parent=nistreniaView.nodes.get(node.parent_id);
+ const types={root:'Jurisdicție virtuală',raion:'Raion',upper_city:'Oraș distinct',council:'Consiliu sătesc',place:'Localitate'};
+ const statuses={GEOMETRY_VERIFIED:'Contur OSM verificat în snapshotul conservat',GEOMETRY_CANDIDATE:'Corespondență geometrică propusă; identitatea nu este certificată',NO_GEOMETRY_EVIDENCE:'Fără geometrie individuală probată',TOPOLOGY_CONFLICT:'Conflict topologic'};
+ document.getElementById('details-title').textContent=node.display_name;
+ document.getElementById('details-summary').textContent=types[node.kind]+' · organizare declarată în 2023';
+ const resources=node.kind==='root'?[...nistreniaView.roleIds]:node.geometry_candidates;
+ const resourceRows=resources.map(ref=>{
+  const actual=entityById.get(ref),source=nistreniaView.resources.get(ref),role=osmRoleById.get(ref);
+  const legalParent=entityById.get(actual.hierarchy?.consolidated_parent_id)?.display_name;
+  const geometricParent=[...nistreniaView.resources.values()].find(x=>x.osm_relation_id===source.geometric_osm_parent_id)?.display_name;
+  return '<li><strong>'+escapeHtml(actual.display_name)+'</strong> · '+escapeHtml(role?.role_label||'Rol cartografic OSM')+'<p>OSM '+source.osm_relation_id+' · nivel '+escapeHtml(String(source.osm_admin_level??'nedocumentat'))+' · versiunea '+source.osm_version+' · '+escapeHtml(source.osm_timestamp)+'</p>'+(legalParent?'<p>Părinte oficial MD păstrat: '+escapeHtml(legalParent)+'.</p>':'')+(geometricParent?'<p>Grupare geometrică OSM: '+escapeHtml(geometricParent)+'; nu stabilește apartenența administrativă sau controlul efectiv.</p>':'')+'<p><a href="https://www.openstreetmap.org/relation/'+source.osm_relation_id+'" target="_blank" rel="noopener noreferrer">Relația OSM</a> · <button type="button" data-ni-resource="'+escapeHtml(ref)+'">'+(visibleEntityIds.has(ref)?'Ascunde':'Arată')+' conturul OSM</button></p></li>';
+ }).join('');
+ const outline=nistreniaOutlineProof.relations.find(item=>item.id===id);
+ document.getElementById('details-body').innerHTML='<section class="details-section"><h3>Organizare administrativă documentată</h3><p>'+escapeHtml(node.temporal_notice)+'</p><dl class="kv">'+detailRow('Părinte documentar',parent?.display_name||'—')+detailRow('Geometrie',statuses[node.geometry_status])+detailRow('Statut documentar','Confirmat numai pentru sursa din 2023; actualizare contemporană provizorie')+'</dl><p>Prezentare descriptivă separată de organizarea juridică a Republicii Moldova. Apartenența declarată și conturul OSM nu demonstrează controlul efectiv sau o jurisdicție juridică nouă.</p><dl class="kv">'+detailRow('Referințe în anexă',node.source_refs.join(', ')||'Anexa integrală')+'</dl><p><a href="https://github.com/ovidiudeica/reforma-teritoriala/blob/447f9bdbca5eb2869d107641a14398f7a273165e/docs/evidence/ni-jur-independent-20261020/documentary/PMR-ATD-ANNEX1-133268-text.json" target="_blank" rel="noopener noreferrer">Anexa documentară conservată</a></p>'+(outline?'<p>Contur OSM '+outline.osm_relation_id+' · versiunea '+outline.relation_version+' · '+escapeHtml(outline.relation_timestamp)+' · © OpenStreetMap contributors, ODbL.</p>':'')+'</section>'+(resourceRows?'<section class="details-section"><h3>Contururi OSM de consultat separat</h3><p>Aceste referințe nu certifică poligonul administrativ al unității selectate.</p><ul>'+resourceRows+'</ul></section>':'')+(node.additional_md_name_candidates?.length?'<section class="details-section"><h3>Omonime în catalogul MD</h3><p>Potriviri nominale, fără confirmarea identității sau a geometriei.</p><ul>'+node.additional_md_name_candidates.map(x=>'<li>'+escapeHtml(x.display_name)+' · '+escapeHtml(x.official_md_parent||'')+' · '+escapeHtml(x.actual_id)+'</li>').join('')+'</ul></section>':'');
+ for(const button of document.querySelectorAll('[data-ni-resource]'))button.addEventListener('click',()=>{
+  const ref=button.dataset.niResource;if(!nistreniaView.roleIds.has(ref))return;
+  if(visibleEntityIds.has(ref))visibleEntityIds.delete(ref);else visibleEntityIds.add(ref);
+  refreshGeometryVisibility();syncTiers().catch(console.error);renderNistreniaDetails(id);atlasUrl?.commit('push');
+ });
 }
 async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
  if(!nistreniaView?.isVirtual(id))return selectEntity(id,options);
  const actualId=nistreniaView.toActual.get(id);
  if(actualId){await selectEntity(actualId,options);atlasTree?.select(id);return;}
  const apply=()=>{
-  if(!nistreniaOutlines?.has(id))throw Error('Nistrenia: independent OSM outline unavailable '+id);
+  if(!nistreniaView.nodes.has(id))throw Error('Nistrenia: administrative record unavailable '+id);
   atlasTree?.select(id);
-  selectedEntityId=id;
+  const changed=selectedEntityId!==id;selectedEntityId=id;
   if(selectedLayer){selectedLayer.setStyle(styleFor(selectedLayer.feature));selectedLayer=null;}
   document.getElementById('geometry-status').textContent='';
   atlasMobile.selection(id,{source:options.source});
-  renderNistreniaDetails(id);updateSelectionVisibility();rerenderLoadedTiers();
-  atlasAdvanced?.record(id);
+  renderNistreniaDetails(id);if(changed)for(const key of ['details-panel','details-content','details-body'])document.getElementById(key).scrollTop=0;updateSelectionVisibility();rerenderLoadedTiers();
+  if(nistreniaOutlines?.has(id))atlasAdvanced?.record(id);
   if(atlasPanels.state.active==='share')atlasShare?.refresh();
   // A parent name selects only its own UI/source identity, never its descendants.
-  if(options.zoom!==false)map.fitBounds(nistreniaOutlines.bounds(id),{padding:[30,30],maxZoom:12,...(options.source==='url'?{animate:false}:{})});
+  if(options.zoom!==false&&nistreniaOutlines?.has(id))map.fitBounds(nistreniaOutlines.bounds(id),{padding:[30,30],maxZoom:12,...(options.source==='url'?{animate:false}:{})});
  };
  return atlasUrl?atlasUrl.action('push',apply):apply();
 }
@@ -476,19 +491,19 @@ async function loadHierarchyTree(){
  hierarchyNodeById.clear();
  for(const [id,node] of validated)hierarchyNodeById.set(id,node);
  hierarchyTree=tree;
- nistreniaView=nistreniaCatalog&&nistreniaOutlineFeatures?createNistreniaOperationalView({catalog:nistreniaCatalog,roles:osmRoleById,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
+ nistreniaView=nistreniaCatalog&&nistreniaOutlineFeatures&&nistreniaAdministrativeModel?createNistreniaAdministrativeView({model:nistreniaAdministrativeModel,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
   if(nistreniaView){
    nistreniaOutlines=createNistreniaOutlineLayers({L,map,features:nistreniaOutlineFeatures,onSelect:id=>selectNistreniaNode(id,{zoom:false,source:'map'}).catch(console.error)});
    visibleOperationalOutlineIds.clear();visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
   }
- const niFilter=document.getElementById('layer-ni');if(niFilter)niFilter.disabled=!nistreniaView;
+ const niFilter=document.getElementById('layer-ni');if(niFilter){niFilter.disabled=!nistreniaView;niFilter.title=nistreniaView?'Organizare declarată în 2023; actualizarea contemporană este provizorie.':'Prezentarea NI este indisponibilă: sursa nu a putut fi validată.';}
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
   renderHierarchyTree();
   syncGeometryReset();
  atlasSearch?.updateIndex(createSearchIndex(searchEntitiesWithNistrenia(),nistreniaView?.nodes||hierarchyNodeById));
  atlasAdvanced=createAtlasAdvancedNavigation({
-  document,panels:atlasPanels,entities:[...entityById.values(),...(nistreniaView?[NISTR_EN_ROOT,...nistreniaView.groupIds]:[]).map(id=>{
+  document,panels:atlasPanels,entities:[...entityById.values(),...(nistreniaView?niOutlineIds:[]).map(id=>{
     const node=nistreniaView.nodes.get(id),bounds=nistreniaOutlines.bounds(id),sw=bounds.getSouthWest(),ne=bounds.getNorthEast();
     return {...node,map:{bbox:[sw.lng,sw.lat,ne.lng,ne.lat]},representation:{inferred_type:node.display_type,osm_relation_id:nistreniaOutlineFeatures.get(id).properties.osm_relation_id}};
    })],getChecked:()=>new Set([...visibleEntityIds,...visibleOperationalOutlineIds]),
@@ -526,12 +541,14 @@ function renderHierarchyTree(){
   container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
   getOsmAdminLevel:node=>osmLevelForTreeNode(node,{entityById,osmRoleById}),
   visibleIds:activeOsmAdminLevels.size===OSM_ADMIN_LEVELS.length+1?null:osmTreeVisibleIds(nistreniaView?.nodes||hierarchyNodeById,nistreniaView?.rootIds||hierarchyTree.root_ids,activeOsmAdminLevels,{entityById,osmRoleById}),
+  isGeometryAvailable:id=>Boolean(nistreniaOutlines?.has(id)||entityById.has(id)),
   isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
    if(nistreniaOutlines?.has(id)){
     if(checked)visibleOperationalOutlineIds.add(id);else visibleOperationalOutlineIds.delete(id);
    }else{
     const actualId=nistreniaView?.toActual.get(id)||id;
+    if(!entityById.has(actualId))return;
     if(checked)visibleEntityIds.add(actualId);else visibleEntityIds.delete(actualId);
    }
    syncJurisdictionRoots();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
@@ -541,7 +558,7 @@ function renderHierarchyTree(){
  });
  if(selectedEntityId){
   atlasTree.select(selectedEntityId);
-  if(nistreniaOutlines?.has(selectedEntityId))renderNistreniaDetails(selectedEntityId);else renderDetails(entityById.get(selectedEntityId));
+  if(nistreniaView?.isVirtual(selectedEntityId))renderNistreniaDetails(selectedEntityId);else renderDetails(entityById.get(selectedEntityId));
   updateSelectionVisibility();
  }
  osmTreeFeedback(osmTreeSummary());
@@ -780,7 +797,7 @@ function zoomToEntity(entity,options={}){
  if(Array.isArray(b)&&b.length===4)map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[30,30],maxZoom:12,...options});
 }
 async function selectEntity(id,options=false,clickedLayer=null){
- if(nistreniaOutlines?.has(id)&&nistreniaView?.isVirtual(id))return selectNistreniaNode(id,typeof options==='boolean'?{zoom:options}:options);
+ if(nistreniaView?.isVirtual(id))return selectNistreniaNode(id,typeof options==='boolean'?{zoom:options}:options);
  try{return await (atlasUrl?atlasUrl.action('push',()=>applySelection(id,options,clickedLayer)):applySelection(id,options,clickedLayer));}
  catch(error){if(selectedEntityId===id)document.getElementById('geometry-status').textContent='Geometria nu a putut fi încărcată pentru '+id+'. Identitatea și selecția rămân disponibile.';throw error;}
 }
@@ -856,10 +873,10 @@ async function applyUrlState(state){
 async function initializeUrlState(){
  const browser=globalThis.window;
  if(!browser?.location||!browser?.history||!browser.addEventListener)return;
- const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,treeRootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,operationalOutlineIds:nistreniaOutlines?niOutlineIds:[],filterIndex:geometryFilterIndex});
+ const config=createUrlConfig({entityById,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:hierarchyTree.root_ids,treeRootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,operationalOutlineIds:nistreniaOutlines?niOutlineIds:[],virtualEntityIds:nistreniaView?.virtualIds||[],filterIndex:geometryFilterIndex});
  atlasUrl=createAtlasUrlState({browser,config,capture:captureUrlState,apply:applyUrlState});await atlasUrl.restore();atlasShare?.refresh();
 }
-atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>nistreniaOutlines?.has(selectedEntityId)?{...nistreniaView.nodes.get(selectedEntityId),urlVersion:2}:entityById.get(selectedEntityId)||null});
+atlasShare=createAtlasShare({document,getCurrentUrl:()=>atlasUrl?.shareUrl()||null,getSelectedEntity:()=>nistreniaView?.isVirtual(selectedEntityId)?{...nistreniaView.nodes.get(selectedEntityId),urlVersion:2}:entityById.get(selectedEntityId)||null});
 
 
 document.getElementById('details-close').addEventListener('click',()=>atlasMobile.clear());
@@ -868,7 +885,7 @@ document.getElementById('basemap-toggle')?.addEventListener('click',()=>{setOsmB
 document.getElementById('filters-reset')?.addEventListener('click',resetGlobalFilters);
 document.getElementById('selection-visibility-action')?.addEventListener('click',()=>{
  const ownOutline=nistreniaOutlines?.has(selectedEntityId);
- const entity=ownOutline?nistreniaView.nodes.get(selectedEntityId):entityById.get(selectedEntityId);if(!entity)return;
+ const entity=nistreniaView?.isVirtual(selectedEntityId)?nistreniaView.nodes.get(selectedEntityId):entityById.get(selectedEntityId);if(!entity)return;
  const action=document.getElementById('selection-visibility-action');
  if(action?.dataset.action==='show'){
   (ownOutline?visibleOperationalOutlineIds:visibleEntityIds).add(entity.id);refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
@@ -888,7 +905,8 @@ const frontendReady=(async()=>{
   await loadIndex();
   try{await loadOsmRoleCatalog();await loadNistreniaOsmNavigation();
     const verified=await fetchVerifiedNistreniaOutlines((...args)=>fetch(...args),crypto.subtle,nistreniaCatalog);
-    nistreniaOutlineFeatures=verified.features;nistreniaOutlineProof=verified.proof;}
+    nistreniaOutlineFeatures=verified.features;nistreniaOutlineProof=verified.proof;
+    nistreniaAdministrativeModel=(await fetchNistreniaAdministrativeModel((...args)=>fetch(...args),crypto.subtle,{actualIds:new Set(entityById.keys())})).model;}
   catch(error){
    console.warn('Catalogul cartografic OSM a fost blocat',error);
   }

@@ -1,0 +1,48 @@
+{
+  "scope": "LOCAL_VALIDATION_BEFORE_CI; runtime bytes bound below; documentation edits uncommitted at capture",
+  "browser": "Chrome/155.0.8059.86",
+  "selected_suite": {
+    "tests": 118,
+    "pass": 118,
+    "fail": 0
+  },
+  "browser_suite": {
+    "tests": 9,
+    "pass": 9,
+    "fail": 0,
+    "overlaps_selected_security_tests": true
+  },
+  "initial_restricted_attempt": {
+    "tests": 118,
+    "pass": 117,
+    "fail": 1,
+    "failure": "Chrome CDP fetch ECONNRESET",
+    "application_code_changed_for_this_failure": false,
+    "exact_reset_cause": "UNDETERMINED; authorized execution succeeds; raw initial log retained locally"
+  },
+  "scenarios": [
+    "5848 official + 242 documentary nodes; 9 units, 85 roles, 8 independent outlines; three roots only",
+    "all242cards select without checking any descendant or candidate; paced below Chromium IPC flooding protection",
+    "no-polygon checkbox disabled; keyboard skips it in both directions",
+    "text-only URL hydration, Back/Forward",
+    "85 canonical resource buttons; explicit Bender toggle without duplicate or administrative identity promotion",
+    "desktop/tablet/mobile portrait+landscape without horizontal overflow",
+    "RO/MD canonical selection intact; zero JavaScript/console errors"
+  ],
+  "runtime_sha256": {
+    "app.js": "83d6af2b8257609e27810d3f8a01141a982212021caf026cbf4d862a9079d1ec",
+    "atlas-nistrenia-administrative.mjs": "409ef04c13113f800c2927e75ced23274ed71b147504330a84863a0fb3a886b8",
+    "atlas-nistrenia-jurisdiction.mjs": "4a90a0a0e8bf9bdf8f6eeab7d5fe4a23ddf3443425e776874ca300ef75fb7670",
+    "atlas-tree.mjs": "b0c054b3ef7dff193ffee9bf1e7cf03ffcf04a3d7f14539de9febe8f377c0969",
+    "atlas-url-state.mjs": "2a823679583ef614a6ab1e2ae58e574b566f03186d4e809b40ad5666d39ac800",
+    "atlas-search.mjs": "5d8624bfd5320b223e7d559e52055d7aac2903d335ff4655de628101364fba38",
+    "views/nistrenia/administration.json": "3b92136c285a242131d52b86a0645ef85dbb091722d2d7574501f5fc7ed992f3",
+    "views/nistrenia/manifest.json": "5f8dc6d09cbaadc16c3f23fc70b39f91ffcfbb6d182ed21d040960a7b1c7a615"
+  },
+  "screenshots_inspected": [
+    "council-1440x900.png",
+    "expanded-390x844.png",
+    "expanded-844x390.png"
+  ],
+  "NI_FUNCTIONAL_COMPLETE": false
+}

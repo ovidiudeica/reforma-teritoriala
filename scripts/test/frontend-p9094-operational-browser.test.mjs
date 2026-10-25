@@ -19,12 +19,12 @@ try{
    assert.deepEqual(s.selected,['osm-r58974','osm-r90689']);
     assert.deepEqual(await page.evaluate("[...qaApp.visibleOperationalOutlineIds]"),['view-nistrenia']);
   });
-  await t.test('Nistrenia has seven nested descriptive OSM groups with 85 nonduplicate underlying identities',async()=>{
+  await t.test('Nistrenia has nine documentary units and 85 nonduplicate geometry resources',async()=>{
    await page.evaluate("if(!qaApp.atlasTree.isOpen('view-nistrenia'))qaApp.atlasTree.toggle('view-nistrenia')");
-   const visible=await page.evaluate("qaApp.atlasTree.getVisibleIds().filter(id=>id.startsWith('view-nistrenia-group-'))");
-   assert.equal(visible.length,7);
+   const visible=await page.evaluate("qaApp.nistreniaView.root.child_ids");
+   assert.equal(visible.length,9);
    await page.evaluate("qaApp.atlasTree.toggle('view-nistrenia-group-osm-r1702219')");
-   const children=await page.evaluate("qaApp.atlasTree.getVisibleIds().filter(id=>id.startsWith('view-nistrenia-role-'))");
+   const children=await page.evaluate("qaApp.nistreniaView.nodes.get('view-nistrenia-group-osm-r1702219').child_ids");
    assert.equal(children.length,3);
   });
   await t.test('NI jurisdiction can be turned on without enabling Moldova, and state is in URL',async()=>{
@@ -38,8 +38,8 @@ try{
    assert.match(enabled.query,/NI/);
    await page.openPanel('entities');
    await page.evaluate("qaApp.atlasTree.toggle('view-nistrenia')"); // collapse for stable root selection
-   await page.query('view-nistrenia-role-osm-r9581354');
-   await page.click('[role=option][data-entity-id="view-nistrenia-role-osm-r9581354"]');
+   await page.query('osm-r9581354');
+   await page.click('[role=option][data-entity-id="osm-r9581354"]');
    await waitFor(()=>page.evaluate("qaApp.selectedEntityId==='osm-r9581354'"),'NI alias selects existing ACTUAL polygon');
    const result=await page.evaluate("({selected:qaApp.selectedEntityId,ni:document.getElementById('layer-ni').checked,md:document.getElementById('layer-md').checked,legal:document.querySelector('#details-body')?.textContent||'',checked:qaApp.visibleEntityIds.has('osm-r9581354')})");
    assert.equal(result.checked,false,'selecting an alias never automatically checks geometry');assert.equal(result.ni,true);assert.equal(result.md,false);

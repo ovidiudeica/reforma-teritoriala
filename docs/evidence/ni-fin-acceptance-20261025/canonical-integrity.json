@@ -1,0 +1,205 @@
+{
+  "status": "PASS",
+  "release_semantic_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+  "component_count": 32,
+  "total_component_bytes": 172273728,
+  "entities": {
+    "RO": 3246,
+    "MD": 2602,
+    "total": 5848
+  },
+  "components": [
+    {
+      "component": "catalog",
+      "path": "data/current/entities.json",
+      "bytes": 8761869,
+      "sha256": "af6e09317d75fea663e6be425bf0a5c252fc756b6bb1c8055e564af913148504"
+    },
+    {
+      "component": "inventory",
+      "path": "data/current/administrative-inventory.json",
+      "bytes": 1636,
+      "sha256": "affb0bf50c66378723229ae36f593db5a13ef0f2b5020514a8a3800624d955e6"
+    },
+    {
+      "component": "ro_geojson",
+      "path": "public/geo/current/ro-administrative.geojson",
+      "bytes": 46393968,
+      "sha256": "47fd6765e4b8768b5daccb19849f12d7dab3fe2b4fd0ee2a29fa682b888275fa"
+    },
+    {
+      "component": "md_geojson",
+      "path": "public/geo/current/md-administrative.geojson",
+      "bytes": 21029858,
+      "sha256": "e5db08df6b32b458f5c2451d4b685a34815778181cc23b903c38abd0fa7731c1"
+    },
+    {
+      "component": "public_index",
+      "path": "public/data/actual-entities.json",
+      "bytes": 15390013,
+      "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700"
+    },
+    {
+      "component": "public_chunks",
+      "path": "public/data/actual-geometry-chunks.json",
+      "bytes": 35786,
+      "sha256": "f09bdc0fff9e63185020ede4b83d1d359b2e03f2d35834e91170b507dd12136d"
+    },
+    {
+      "component": "ro_overview",
+      "path": "public/geo/actual/ro-overview.geojson",
+      "bytes": 5761171,
+      "sha256": "d2cd172869befc38ad90614b44201da428ed68cd825de6f2683d36f566f4414b"
+    },
+    {
+      "component": "ro_local",
+      "path": "public/geo/actual/ro-local.geojson",
+      "bytes": 37689294,
+      "sha256": "6fd4fed8d11664e475d962b33085665982b785dd88f7273cd9232ad32169d771"
+    },
+    {
+      "component": "ro_detail",
+      "path": "public/geo/actual/ro-detail.geojson",
+      "bytes": 189101,
+      "sha256": "c28d4b350d75001bf1843ba95bb8ace70ea9edef0b9def43209f28ff9183c8a9"
+    },
+    {
+      "component": "md_overview",
+      "path": "public/geo/actual/md-overview.geojson",
+      "bytes": 1977139,
+      "sha256": "833aed09237fcebecc1e15bfa33c59e3ba5e685603df64c7fb321d37ab88b5fb"
+    },
+    {
+      "component": "md_local",
+      "path": "public/geo/actual/md-local.geojson",
+      "bytes": 6821018,
+      "sha256": "f037d148065475b486cb6a6165db4e350966add1ef5b1c49e9d0a0b2270ea649"
+    },
+    {
+      "component": "md_detail",
+      "path": "public/geo/actual/md-detail.geojson",
+      "bytes": 10993096,
+      "sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe"
+    },
+    {
+      "component": "ro_gate",
+      "path": "data/current/ro-release-gate.json",
+      "bytes": 267015,
+      "sha256": "a51cf0425eecc01dce70aa3ca71bb905f515bc6de2fa1b3f23193eee84bfb028"
+    },
+    {
+      "component": "md_gate",
+      "path": "data/current/md-release-gate.json",
+      "bytes": 1884,
+      "sha256": "7b3444d94b19cd2affabde31e1726fd62158a4d0f5077d051aec97bc4938b8f3"
+    },
+    {
+      "component": "ro_official",
+      "path": "data/sources/ro-siruta-current.json",
+      "bytes": 6080569,
+      "sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f"
+    },
+    {
+      "component": "md_official",
+      "path": "data/sources/cuatm-current.json",
+      "bytes": 611165,
+      "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575"
+    },
+    {
+      "component": "md_individual_review",
+      "path": "data/sources/md-cuatm-individual-review.json",
+      "bytes": 3093,
+      "sha256": "0f66223006c5efc658ae50d0a53f63dfe6e7768417d4b08d05e287cf257030af"
+    },
+    {
+      "component": "md_semantic_bridge",
+      "path": "data/current/md-cuatm-semantic-bridge.json",
+      "bytes": 346815,
+      "sha256": "b587bd9a00563ba34123030ef0a1748b4218b1c9427302492b0043034a044f42"
+    },
+    {
+      "component": "topology_audit",
+      "path": "data/current/actual-topology-audit.json",
+      "bytes": 6443,
+      "sha256": "02cde46761ff8be0d40bc931d5989e0b65cb2cdf5be98f32430a055b1123ae23"
+    },
+    {
+      "component": "regression_audit",
+      "path": "data/current/actual-regression-audit.json",
+      "bytes": 973,
+      "sha256": "8e9191ead323f2513eb2cd2c16cf745f8a296862b3aab7729d6e301da97d1c02"
+    },
+    {
+      "component": "structural_completeness_audit",
+      "path": "data/current/actual-structural-completeness-audit.json",
+      "bytes": 27681,
+      "sha256": "7a9705bb60b337bec5fe9e9ffb609a021cff1810899fbf9416a0da25624974e5"
+    },
+    {
+      "component": "official_identity_audit",
+      "path": "data/current/actual-official-identity-audit.json",
+      "bytes": 2846418,
+      "sha256": "c95573ff6b1b69bad4e2e7d2436ce2380db1cf6dd908e07de7875c1fbf03612a"
+    },
+    {
+      "component": "settlement_policy",
+      "path": "data/sources/actual-settlement-policy.json",
+      "bytes": 8259,
+      "sha256": "27c3e9fb1b1b3c87d2489320268ad5c85bf26dc53368d19d098fda476fbe2d2d"
+    },
+    {
+      "component": "statistical_policy",
+      "path": "data/sources/actual-statistical-policy.json",
+      "bytes": 3904,
+      "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662"
+    },
+    {
+      "component": "statistical_contract",
+      "path": "schemas/actual-statistical-hierarchy-contract.json",
+      "bytes": 2615,
+      "sha256": "1e3d2c68a22d7e25c48915157e717fa8d0a8169fc851cbe4ce064d0d35e1517f"
+    },
+    {
+      "component": "statistical_source_bundle",
+      "path": "data/sources/actual-statistical-source-bundle.json",
+      "bytes": 740,
+      "sha256": "3aee28691f87451768335988f9306a7e6fd5c4f5595ab0207562579877c0af94"
+    },
+    {
+      "component": "ro_statistical_layer",
+      "path": "data/p2/actual-statistical-ro.json",
+      "bytes": 50143,
+      "sha256": "cbf0d68a549bcc24774ccd8548436f7e51c5e0376c9139beab72460daecca2b8"
+    },
+    {
+      "component": "md_statistical_layer",
+      "path": "data/p2/actual-statistical-md.json",
+      "bytes": 26162,
+      "sha256": "2f78320c41b5a957b4a854eaade0fafae88ef3dc66e80f98aec77d7bce1a9f6e"
+    },
+    {
+      "component": "consolidated_tree",
+      "path": "public/data/actual-consolidated-tree.json",
+      "bytes": 2102707,
+      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+    },
+    {
+      "component": "ro_statistical_geometry",
+      "path": "public/geo/actual/ro-statistical.geojson",
+      "bytes": 3755486,
+      "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7"
+    },
+    {
+      "component": "md_statistical_geometry",
+      "path": "public/geo/actual/md-statistical.geojson",
+      "bytes": 1085802,
+      "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc"
+    },
+    {
+      "component": "geometry_role_contract",
+      "path": "schemas/actual-geometry-role-contract.json",
+      "bytes": 1905,
+      "sha256": "9a73dbecbdb94fc0a9a6615fd9b51695cb7f5590c5dcbc24b32549670d1bd6bd"
+    }
+  ]
+}
