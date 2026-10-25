@@ -30,6 +30,13 @@ on:
       - 'public/data/p909-nistrenia-osm-navigation.json'
       - 'public/data/p9095-osm-outlines*.json'
   workflow_dispatch:
+    inputs:
+      target:
+        description: Exact local candidate or published Pages acceptance
+        type: choice
+        required: true
+        default: local
+        options: [local, published]
 permissions:
   contents: read
 jobs:
@@ -39,6 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
@@ -46,10 +54,28 @@ jobs:
       - run: node --test scripts/test/ni-fin*.test.mjs
         env:
           TMPDIR: ${{ runner.temp }}
+          NI_FIN_BROWSER_MODE: ${{ inputs.target || 'local' }}
+      - name: Verify exact NI report provenance and acceptance mode
+        env:
+          TMPDIR: ${{ runner.temp }}
+          NI_FIN_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          NI_FIN_BROWSER_MODE: ${{ inputs.target || 'local' }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile} from 'node:fs/promises';
+          import path from 'node:path';
+          import {auditEvidenceDirectory} from './scripts/test/helpers/atlas-evidence.mjs';
+          const r=JSON.parse(await readFile(path.join(auditEvidenceDirectory(),'ni-fin','report.json'),'utf8'));
+          assert.equal(r.status,'PASS');assert.equal(r.trackedSourcesClean,true);
+          assert.equal(r.sourceSha,process.env.NI_FIN_EXPECTED_SHA);
+          assert.equal(r.mode,process.env.NI_FIN_BROWSER_MODE);
+          if(r.mode==='published'){assert.equal(r.virtualAssets.length,2);assert.equal(r.publishedSource.length,9);}
+          NODE
       - name: Preserve NI-FIN Chromium evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: ni-fin-browser-${{ github.sha }}
+          name: ni-fin-browser-${{ github.event.pull_request.head.sha || github.sha }}
           path: ${{ runner.temp }}/atlas-browser-evidence/ni-fin
           if-no-files-found: error

@@ -150,6 +150,17 @@
       "regression": "Positive exact-byte model/manifest coverage, untracked required manifest, stale HTTP200 and missing404 for either JSON. Local related suite:26PASS; inventory becomes438.",
       "status": "FIX_IMPLEMENTED_PENDING_CI",
       "pr": 441
+    },
+    {
+      "id": "NIF-014",
+      "severity": "P1",
+      "component": "NI browser acceptance provenance and published coverage",
+      "reproduction": "Original NI workflow has no explicit PR-head checkout ref; original browser report lacks sourceSha/mode and runs only local target. It cannot independently certify exact-HEAD published NI acceptance.",
+      "cause": "Dedicated acceptance did not bind checkout, report provenance and fixed published target as independent requirements.",
+      "fix": "Explicit exact PR-head checkout and artifact naming; report includes committed source SHA, clean state, status and enumerated mode; manual fixed Pages mode verifies nine source hashes plus exact model/manifest bytes, then exercises the same NI scenarios.",
+      "regression": "Four invalid modes fail before browser launch; local positive scenario passes with approved Edge/Chromium. CI report admission checks exact expected SHA, clean state, PASS and selected mode. Published positive scenario remains mandatory after UI publication.",
+      "status": "FIX_IMPLEMENTED_PENDING_CI",
+      "pr": 441
     }
   ]
 }

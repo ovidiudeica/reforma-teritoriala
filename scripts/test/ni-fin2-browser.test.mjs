@@ -1,10 +1,25 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {fileURLToPath} from 'node:url';import {mkdir,writeFile} from 'node:fs/promises';import path from 'node:path';import {auditEvidenceDirectory} from './helpers/atlas-evidence.mjs';
+import {fileURLToPath} from 'node:url';import {mkdir,writeFile,readFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import path from 'node:path';import {auditEvidenceDirectory} from './helpers/atlas-evidence.mjs';
 import {launchBrowser,waitFor} from './helpers/atlas-browser.mjs';
+import {performanceSource} from '../audit/helpers/performance-source.mjs';
+import {verifyPublishedSource} from '../audit/helpers/published-source.mjs';
+import {fetchPublishedWithRetry} from '../audit/helpers/published-runtime.mjs';
+const root=fileURLToPath(new URL('../../',import.meta.url)),mode=process.env.NI_FIN_BROWSER_MODE||'local';
+assert.ok(['local','published'].includes(mode),'Unsupported NI acceptance mode');
+const source=performanceSource(root),publishedBase='https://ovidiudeica.github.io/reforma-teritoriala/';
 const out=path.join(auditEvidenceDirectory(),'ni-fin');await mkdir(out,{recursive:true});
-const b=await launchBrowser(fileURLToPath(new URL('../../',import.meta.url))),p=await b.page(),report={browser:b.version.Browser,scenarios:[],screenshots:[]};
+const b=await launchBrowser(root),p=await b.page(),target=mode==='published'?publishedBase:b.server.url,report={status:'FAIL',sourceSha:source.sha,trackedSourcesClean:source.trackedSourcesClean,mode,browser:b.version.Browser,scenarios:[],screenshots:[]};
 try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL and responsive cards',{timeout:240000},async()=>{
- await p.viewport(1440,900);await p.navigate(b.server.url);
+ if(mode==='published'){
+  assert.equal(source.trackedSourcesClean,true,'Published NI acceptance requires exact committed sources');
+  report.publishedSource=await verifyPublishedSource(root);report.virtualAssets=[];
+  for(const file of ['views/nistrenia/administration.json','views/nistrenia/manifest.json']){
+   const {response,attempts,httpHistory}=await fetchPublishedWithRetry(new URL(file,publishedBase).href);assert.equal(response.status,200,'Published NI asset '+file);
+   const remote=Buffer.from(await response.arrayBuffer()),local=await readFile(path.join(root,file));assert.deepEqual(remote,local,'Published NI asset bytes '+file);
+   report.virtualAssets.push({file,bytes:remote.length,sha256:createHash('sha256').update(remote).digest('hex'),attempts,httpHistory});
+  }
+ }
+ await p.viewport(1440,900);await p.navigate(target);
  assert.deepEqual(await p.evaluate('({actual:qaApp.entityById.size,official:qaApp.hierarchyNodeById.size,nodes:qaApp.nistreniaView.virtualIds.size,units:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,outlines:qaApp.nistreniaOutlines.layers.size,checked:[...qaApp.visibleEntityIds].sort(),own:[...qaApp.visibleOperationalOutlineIds]})'),{actual:5848,official:5848,nodes:242,units:9,roles:85,outlines:8,checked:['osm-r58974','osm-r90689'],own:['view-nistrenia']});
  report.scenarios.push('5848 official + 242 documentary nodes; 9 units, 85 roles, 8 independent outlines; three roots only');
  const checked=await p.evaluate('[...qaApp.visibleEntityIds].sort()');
@@ -35,5 +50,5 @@ try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL
  report.scenarios.push('desktop/tablet/mobile portrait+landscape without horizontal overflow');
  for(const id of ['osm-r58974','osm-r90689']){await p.call(async function(id){await qaApp.selectEntity(id,{zoom:false});},id);assert.equal(await p.evaluate('qaApp.selectedEntityId'),id);}
  assert.deepEqual(p.errors,[]);assert.ok(!p.console.some(x=>/Throttling navigation/.test(x.text||'')),'audit must respect Chromium flooding protection');assert.deepEqual(p.console.filter(x=>x.type==='error'||x.level==='error'),[]);
- report.scenarios.push('RO/MD canonical selection intact; zero JavaScript/console errors');
+ report.scenarios.push('RO/MD canonical selection intact; zero JavaScript/console errors');report.status='PASS';
  });}finally{report.errors=p.errors;report.console=p.console;report.responses=p.responses;await writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2));await b.close();}

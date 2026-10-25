@@ -49,3 +49,7 @@ Lotul selectat RO/MD/NI, arbore, URL și securitate browser: 118/118 PASS în ex
 ## Acoperirea resurselor publicate — NIF-013
 
 Pregătirea auditului a demonstrat că inventarul existent omitea cele două JSON-uri critice sub views/nistrenia. Acestea sunt acum incluse explicit, iar prezența modulului administrativ impune urmărirea ambelor fișiere. 26 teste locale pentru inventar/sursă/retry au trecut, inclusiv 404 și HTTP200 cu model/manifest învechit. Inventarul local calculat este 438 resurse, cu 125 GeoJSON neschimbate; această numărătoare trebuie verificată pe release-ul publicat, nu impusă arbitrar. Acceptarea live rămâne în așteptare.
+
+## Proveniența și ținta acceptării NI — NIF-014
+
+Workflow-ul dedicat fixează acum checkout-ul și numele artifactului pe HEAD-ul exact al PR-ului. Raportul include SHA, starea surselor urmărite, verdict și mod; un pas distinct verifică aceste valori. Dispatch-ul manual admite numai local/published; ținta published este URL-ul Pages fix și verifică nouă surse și cei doi JSON NI byte-identic înaintea acelorași scenarii. Cele patru ținte nepermise sunt respinse înainte de browser. Probele locale noi trec 5/5 cu alternativa Edge/Chromium deja permisă; o pornire Chrome a expirat înainte de încărcarea aplicației, cu diagnostic păstrat separat și cauză exactă neadjudecată. CI Google Chrome și proba published rămân obligatorii pe SHA-urile finale.
