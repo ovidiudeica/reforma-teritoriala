@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {validateProvenanceBoundary} from '../audit/web-r2a1-provenance-boundary.mjs';
 const dir='docs/evidence/ni-fin31-host-qualification-20261025/';
 function fixture(){
@@ -9,7 +9,7 @@ function fixture(){
  const admission=JSON.parse(admissionBytes);
  const buffers=Object.fromEntries(Object.keys(admission.files).map(p=>[p,readFileSync(p)]));
  return {changed:Object.keys(buffers),read:p=>buffers[p],buffers,admissionBytes,
- baseline:JSON.parse(execFileSync('git',['show',admission.historical_base+':data/current/actual-release-manifest.json'])),
+ baseline:JSON.parse(readFileSync(dir+'baseline-release-manifest.json')),
  authorizationBytes:Object.fromEntries(Object.keys(admission.authorizations).map(n=>[n,readFileSync(dir+n)]))};
 }
 test('exact owner-authorized six-file rebind passes',()=>assert.equal(validateProvenanceBoundary(fixture()).mode,'OWNER_AUTHORIZED_EXACT_P905_PROVENANCE'));
@@ -21,3 +21,5 @@ test('reject missing profile authorization',()=>{const x=fixture();delete x.auth
 test('reject altered census authorization',()=>{const x=fixture();x.authorizationBytes['census-owner-authorization.json']=Buffer.from('{}');assert.throws(()=>validateProvenanceBoundary(x),/authorization binding/);});
 for(const field of ['snapshot_id','components','geometry','source_bundle','review_evidence_bundle'])test('reject semantic baseline drift '+field,()=>{const x=fixture();x.baseline[field]=null;assert.throws(()=>validateProvenanceBoundary(x),/semantic drift/);});
 test('missing required bytes fail closed',()=>{const x=fixture();delete x.buffers['data/current/actual-host-trust-manifest.json'];assert.throws(()=>validateProvenanceBoundary(x));});
+
+test('historical fixture is independently hash-bound and needs no Git history',()=>assert.equal(createHash('sha256').update(readFileSync(dir+'baseline-release-manifest.json')).digest('hex'),'52ae583f284bac2d00bc3b5e4b96b6c429c659b8def297197d7f3f38dc042856'));

@@ -53,3 +53,7 @@ Run P9.0.5 `40142346381` pe `61a09bd59d81a5d7549d6fac618efee8b252d2fd`: SUCCESS.
 ## Adaptare WEB-R2a.1 autorizată separat
 
 Proprietarul a răspuns «Autorizez adaptarea strictă descrisă». Înregistrarea aprobării și lista celor șase hashuri sunt conservate și legate de SHA-256 în validator. Alte modificări data/public rămân fatale. Comparația directă a arborilor cu baza fixă funcționează și într-un checkout shallow fără a reduce domeniul verificat. Manifestul istoric WEB-R2a.1 rămâne intact; noua legătură de proveniență este păstrată separat. Niciun required check nu este eliminat sau redenumit. Ramura de admitere folosește prefixul existent `actual/provenance-`; PR #443 conservă istoricul calificării.
+
+## Regresie de izolare a testelor, identificată prin P8.4
+
+Pe `5820f8d`, testele noi consultau prin git un commit absent din repository-ul temporar al suitei complete. Eșecul autentic este conservat în run `40172878418`. Fixture-ul original release a fost extras byte-identic și legat de SHA-256 `52ae583f284bac2d00bc3b5e4b96b6c429c659b8def297197d7f3f38dc042856`; testele unitare nu mai depind de istoricul Git. Validatorul operațional păstrează comparația reală cu baza fixă. Niciun test nu este exclus sau relaxat. CI trebuie reluat pe noul HEAD.
