@@ -1,0 +1,94 @@
+{
+  "schema": "ni-fin-contract-v1",
+  "stage": "NI-FIN.0_SPECIFICATION_ONLY",
+  "baseline_year": 2023,
+  "root_id": "view-nistrenia",
+  "upper_units": [
+    {
+      "source_id": "unit-108",
+      "label_ro": "Camenca",
+      "type": "raion",
+      "osm_outline_relation_id": 1702216
+    },
+    {
+      "source_id": "unit-145",
+      "label_ro": "Rîbnița",
+      "type": "raion",
+      "osm_outline_relation_id": 1702217
+    },
+    {
+      "source_id": "unit-66",
+      "label_ro": "Dubăsari",
+      "type": "raion",
+      "osm_outline_relation_id": 1702215
+    },
+    {
+      "source_id": "unit-22",
+      "label_ro": "Grigoriopol",
+      "type": "raion",
+      "osm_outline_relation_id": 1702214
+    },
+    {
+      "source_id": "unit-216",
+      "label_ro": "Slobozia",
+      "type": "raion",
+      "osm_outline_relation_id": 1702218
+    },
+    {
+      "source_id": "unit-17",
+      "label_ro": "Tiraspol",
+      "type": "oraș",
+      "osm_outline_relation_id": 1702219
+    },
+    {
+      "source_id": "unit-11",
+      "label_ro": "Bender",
+      "type": "oraș",
+      "osm_outline_relation_id": 944727
+    },
+    {
+      "source_id": "unit-15",
+      "label_ro": "Dubăsari — oraș",
+      "type": "oraș",
+      "osm_outline_relation_id": null
+    },
+    {
+      "source_id": "unit-16",
+      "label_ro": "Rîbnița — oraș",
+      "type": "oraș",
+      "osm_outline_relation_id": null
+    }
+  ],
+  "counts": {
+    "raions": 5,
+    "upper_cities": 4,
+    "councils": 74,
+    "place_mentions": 162,
+    "shared_city_place_mentions": 4,
+    "cartographic_roles": 85,
+    "independent_outlines": 8
+  },
+  "geometry_statuses": [
+    "GEOMETRY_VERIFIED",
+    "GEOMETRY_CANDIDATE",
+    "NO_GEOMETRY_EVIDENCE",
+    "TOPOLOGY_CONFLICT"
+  ],
+  "administrative_statuses": [
+    "SOURCE_SCOPED_CONFIRMED",
+    "PROVISIONAL",
+    "CONTRADICTED",
+    "UNDETERMINED"
+  ],
+  "temporal_notice": "Organizare declarată în sursa din 2023; actualizarea pentru 2024–2026 nu este certificată integral.",
+  "name_only_match_is_geometry_certification": false,
+  "council_inherits_centre_polygon": false,
+  "select_parent_selects_descendants": false,
+  "initial_geometry_selection": "Two official roots and independent Nistrenia root only",
+  "actual_mutation_allowed": false,
+  "p91_import_allowed": false,
+  "osm_public_edit_allowed": false,
+  "NI_FUNCTIONAL_COMPLETE": false,
+  "NI_LEGAL_CERTIFICATION_PENDING": true,
+  "OSM_SOURCE_PENDING": true
+}

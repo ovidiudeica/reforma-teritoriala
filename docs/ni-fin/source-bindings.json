@@ -1,0 +1,112 @@
+{
+  "schema": "ni-fin0-source-bindings-v1",
+  "base_main": "447f9bdbca5eb2869d107641a14398f7a273165e",
+  "adoption_scope": "2023 document-scoped virtual presentation only; no legal or whole-polygon control certification",
+  "immutable_pr_references": [
+    {
+      "pr": 394,
+      "commit": "d1687be8df336635411664c9027ca8cdfa46dc09",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 402,
+      "commit": "7376491b2664e060ee647e1474d89c82ef1600a4",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 428,
+      "commit": "27454b3d78671880cb41929f0e3d9c5240c5e018",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 430,
+      "commit": "23260e7c8300173092cf20d704b593f7da09fab3",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 432,
+      "commit": "a229030b08e72f99e747949757040c3168cd4fc7",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 433,
+      "commit": "6951be70e0a2a6808a2d7e6704f43eb01cf7e67c",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 434,
+      "commit": "4faafc9ca12e7ece441209b4dc77886e215fb7c2",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 435,
+      "commit": "ae676b67c0f30f9cb93972dd9d5a71a5898b6934",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 436,
+      "commit": "cf0a68d837c80e8c1c789ece7ad82b3f74d27f64",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    },
+    {
+      "pr": 438,
+      "commit": "c900b9c0b9583514df547f5ef7bcb30065a6ba16",
+      "scope": "Immutable evidence reference, not formal NI-JUR/legal acceptance"
+    }
+  ],
+  "adopted_sources": [
+    {
+      "path": "docs/ni-fin/sources/categorical-crosswalk.json",
+      "bytes": 111057,
+      "sha256": "3fcb27fd3efc1cb13ffff084f5ed663be19b644ec1e42b7d538b4733a3192a53"
+    },
+    {
+      "path": "docs/ni-fin/sources/census-2023.json",
+      "bytes": 155487,
+      "sha256": "ee74422be15877a1d96e2bb888d21f821e2a522da3b195227e0eb1896c83f3af"
+    },
+    {
+      "path": "docs/ni-fin/parent-corrections.json",
+      "bytes": 525,
+      "sha256": "a95df636f3d78338055cf6c235fd7c2db1e09bafb742092cf89973dd4058e449"
+    }
+  ],
+  "existing_sources": [
+    {
+      "path": "atlas-nistrenia-jurisdiction.mjs",
+      "sha256": "ddc3f31dafa45785a19f41bc003c35f5e3ccdacb71b28820bbfe472c2d1b73b6"
+    },
+    {
+      "path": "atlas-nistrenia-osm.mjs",
+      "sha256": "177558c6a7ab58c1ca06963cd38059ac928fad060c64f8991b731a7d59ebea36"
+    },
+    {
+      "path": "atlas-nistrenia-outlines.mjs",
+      "sha256": "30997f139f5a3ec1aaf70fbebe5e02f325c0d8856239fed8c7d37d0ade869010"
+    },
+    {
+      "path": "public/data/p909-nistrenia-osm-navigation.json",
+      "sha256": "64d90b0c5b16c71546f741b3a20181ac01ebf5106f70080522d8601d4bd83bae"
+    },
+    {
+      "path": "public/data/p9095-osm-outlines.json",
+      "sha256": "e48a34e31ede520a22b399d4ad07f48cd68303ecb937c78b6016c9993f41a2a6"
+    },
+    {
+      "path": "public/data/p9095-osm-outlines-manifest.json",
+      "sha256": "85783ab5a82dd8a872ffa725f6af35fc86d53a8a5e715a1fb546260a1c50102b"
+    },
+    {
+      "path": "docs/p9.0.7.2.15-osm-semantic-reconciliation.json",
+      "sha256": "dd21c3d123382c38a82574ce068f07ab1c3edb923edfa1240342b2d137e21775"
+    },
+    {
+      "path": "docs/evidence/ni-jur-independent-20261020/documentary/PMR-ATD-ANNEX1-133268-text.json",
+      "sha256": "273a1a67662c950c424483590e61f90790984da121acc342f267986ec6b66e35"
+    }
+  ],
+  "actual_mutation_allowed": false,
+  "p91_import_allowed": false,
+  "legal_certification": "PENDING",
+  "global_osm_source": "PENDING"
+}
