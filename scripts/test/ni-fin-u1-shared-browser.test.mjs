@@ -24,6 +24,10 @@ await test('U1.4 all85 shared geometries have canonical cards, names and four-wa
    const a=qaApp,v=a.nistreniaView,pause=()=>new Promise(r=>setTimeout(r,170));
    if(v.toActual.size!==85||v.root.child_ids.length!==9||v.navigationRoot.child_ids.length!==10)throw Error('documentary/navigation contracts');
    const before=JSON.stringify([...a.visibleEntityIds].sort()),official=JSON.stringify([...a.entityById]),rows=[];
+   await a.selectEntity(v.cartographicNavigationId,{zoom:false});
+   const catalog=document.getElementById('details-body');
+   if(!catalog.querySelector('[data-ni-cartographic]')||catalog.querySelectorAll('[data-ni-resource]').length!==85||catalog.textContent.includes('Organizare administrativă documentată')||catalog.textContent.includes('Părinte documentar')||!a.atlasTree.getNode(v.cartographicNavigationId).checkbox.disabled)throw Error('cartographic folder presented as an administrative unit');
+   await pause();
    const entry=id=>{a.atlasTree.select(id);const e=a.atlasTree.getNode(id);if(!e||e.checkbox.disabled)throw Error('unavailable reference '+id);return e;};
    for(const [alias,id] of v.toActual){
     const state=JSON.stringify([...a.visibleEntityIds].sort());
