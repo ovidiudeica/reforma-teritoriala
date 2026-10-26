@@ -1,0 +1,61 @@
+{
+  "schema": "web-ni-u1-acceptance-failure-history-v1",
+  "historical_results_preserved": true,
+  "attempts": [
+    {
+      "run_id": 40411037336,
+      "head": "da8f1db1943203f4411e890fb71f3f02e7b7d313",
+      "status": "FAILURE",
+      "kind": "AUDIT_ASSERTION_DEFECT",
+      "observed": "The OSM-level-5 preview reported seven of seven NI outlines and zero matching reusable aliases; the new audit wrongly expected 85 excluded aliases.",
+      "resolution": "Corrected only the level-scoped expectation; preserved all85 alias synchronization coverage.",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40411037336"
+    },
+    {
+      "run_id": 40411536272,
+      "head": "1f7fbb630a8886ea93e2db6f9214771d49d44eb0",
+      "application_sha": "3e34df56fe1fbf9343ae46b566fd28d2972fc320",
+      "status": "FAILURE",
+      "kind": "FUNCTIONAL_REGRESSION",
+      "observed": "Atlas URL restore failed: TypeError reading toggle from undefined when History removes a focused NI reference row.",
+      "resolution": "Reproduced by the DOM-ordering unit fixture; product fix in #455. Individual successful checks did not turn this failed run into PASS.",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40411536272"
+    },
+    {
+      "run_id": 40413201092,
+      "head": "ac9c5f2c5ef032df7bb4e913ee71927ba9dc535c",
+      "status": "FAILURE",
+      "kind": "BROWSER_TEST_SETUP_DEFECT",
+      "artifact_id": 12694525340,
+      "zip_sha256": "9c9d8a62bff9ab2a0cbe9c5041532d0b1eb14bc24505e2d0da0559d1d5b69cd6",
+      "observed": "viewport update timed out on the initial mobile about:blank without the application responsive metadata.",
+      "resolution": "Load the application before applying the mobile viewport.",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40413201092"
+    },
+    {
+      "run_id": 40413808070,
+      "head": "ce7d03a1a2ddcfa44b6e2684514ae83b9ef2393f",
+      "status": "FAILURE",
+      "kind": "BROWSER_ASSERTION_DEFECT",
+      "artifact_id": 12694149096,
+      "zip_sha256": "4151687fd6b7e2f9593912c3da606189cb981bfd1eaa3a2f68f56afd3e9a6fe3",
+      "observed": "The new test required tree focus after mobile URL restoration legitimately closed the drawer.",
+      "resolution": "Await History completion; require connected, enabled, visible focus. Desktop still requires tree focus. Mobile returns focus to the navigation button.",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40413808070"
+    },
+    {
+      "stage": "LOCAL_DOSSIER_GENERATION",
+      "status": "FAILURE",
+      "kind": "AUDIT_INPUT_SELECTION_DEFECT",
+      "observed": "The new audit initially read the 5830-row administrative import instead of the 5848-identity consolidated public contract.",
+      "resolution": "Read the cryptographically pinned public_contract.path; verify its digest, 5848 identities and RO/MD counts. No source data were modified."
+    },
+    {
+      "stage": "LOCAL_DOSSIER_GENERATION",
+      "status": "FAILURE",
+      "kind": "AUDIT_PATH_MAPPING_DEFECT",
+      "observed": "A new cross-check stripped the public/ prefix although the authenticated Pages inventory retains repository-relative public/ paths.",
+      "resolution": "Compare the exact canonical source_path to the exact published inventory key and digest; no website resource was missing or modified."
+    }
+  ]
+}

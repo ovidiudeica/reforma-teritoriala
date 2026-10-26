@@ -1,0 +1,613 @@
+{
+  "status": "PASS",
+  "sourceSha": "f4cb0ce97887ec395204380f8bf435fdaca92c22",
+  "trackedSourcesClean": true,
+  "mode": "published",
+  "scenarios": [
+    "all85 canonical cards retain MD identity and one scoped NI section, without checking geometry",
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "layout": {
+        "page": true,
+        "body": true,
+        "selected": "osm-r9581354",
+        "ni": 1
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "layout": {
+        "page": true,
+        "body": true,
+        "selected": "osm-r9581354",
+        "ni": 1
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "layout": {
+        "page": true,
+        "body": true,
+        "selected": "osm-r9581354",
+        "ni": 1
+      }
+    }
+  ],
+  "captures": [
+    "unified-card-1440x900.png",
+    "unified-card-390x844.png",
+    "unified-card-844x390.png"
+  ],
+  "browser": "Chrome/155.0.8059.39",
+  "publishedSource": [
+    {
+      "file": "index.html",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/index.html",
+      "bytes": 28198,
+      "sha256": "162c40eb208e3eab1a05237f6f23e129e14fe921d229709c7af7a4d92967534e",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "app.js",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/app.js",
+      "bytes": 68205,
+      "sha256": "5c2ab19fe938f640fef34a6bd2c1cfc8cbb3ab3ee48b35d540c6cfb180a88f92",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-panels.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-panels.mjs",
+      "bytes": 6310,
+      "sha256": "cdd47afb821f1e080a7182922b10ab5b5014b91c70097422f9cae79a6264cd65",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-filters.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-filters.mjs",
+      "bytes": 14723,
+      "sha256": "3059e22325214fb1fa4adc44bbe509f3823ed251b15ed11604f38b5ec728b4fb",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-tree.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-tree.mjs",
+      "bytes": 17440,
+      "sha256": "9d803ebf208515e80a3e35ec57d405d20bfc5fbea5d9b050def34fddcb2195ba",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-osm-roles.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-osm-roles.mjs",
+      "bytes": 6067,
+      "sha256": "1c0fb1227b7224bd85e860ac220a32d055ef8733e1ea54f46baa17ac2c4f9aac",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "atlas-nistrenia-outlines.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/atlas-nistrenia-outlines.mjs",
+      "bytes": 5184,
+      "sha256": "30997f139f5a3ec1aaf70fbebe5e02f325c0d8856239fed8c7d37d0ade869010",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "scripts/audit/web-r2b-final-pages-browser.mjs",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/scripts/audit/web-r2b-final-pages-browser.mjs",
+      "bytes": 11398,
+      "sha256": "03af61d7b7fd16b0259acad601694a93488b8191093837eff785a54e8c9d3280",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    },
+    {
+      "file": "data/current/actual-release-manifest.json",
+      "url": "https://ovidiudeica.github.io/reforma-teritoriala/data/current/actual-release-manifest.json",
+      "bytes": 22513,
+      "sha256": "cc604a8fe88a9b4e044f3dea3032eedf020ee3d102a1b944aaf626da73abf1a5",
+      "httpAttempts": 1,
+      "httpHistory": [
+        200
+      ],
+      "status": "PASS"
+    }
+  ],
+  "cards": [
+    {
+      "id": "osm-r1216706",
+      "niSections": 1,
+      "title": "Cremenciug"
+    },
+    {
+      "id": "osm-r12215667",
+      "niSections": 1,
+      "title": "Gîsca"
+    },
+    {
+      "id": "osm-r12463378",
+      "niSections": 1,
+      "title": "Proteagailovca"
+    },
+    {
+      "id": "osm-r12463379",
+      "niSections": 1,
+      "title": "Bender"
+    },
+    {
+      "id": "osm-r18941889",
+      "niSections": 1,
+      "title": "Tiraspolul Nou"
+    },
+    {
+      "id": "osm-r18941890",
+      "niSections": 1,
+      "title": "Tiraspol"
+    },
+    {
+      "id": "osm-r19001619",
+      "niSections": 1,
+      "title": "Lunga"
+    },
+    {
+      "id": "osm-r19012105",
+      "niSections": 1,
+      "title": "Țîbuleuca"
+    },
+    {
+      "id": "osm-r19013328",
+      "niSections": 1,
+      "title": "Goian"
+    },
+    {
+      "id": "osm-r19013329",
+      "niSections": 1,
+      "title": "Doibani I"
+    },
+    {
+      "id": "osm-r19015106",
+      "niSections": 1,
+      "title": "Cuzmin"
+    },
+    {
+      "id": "osm-r19015107",
+      "niSections": 1,
+      "title": "Hristovaia"
+    },
+    {
+      "id": "osm-r19015108",
+      "niSections": 1,
+      "title": "Severinovca"
+    },
+    {
+      "id": "osm-r19015109",
+      "niSections": 1,
+      "title": "Crasnîi Octeabri"
+    },
+    {
+      "id": "osm-r19015110",
+      "niSections": 1,
+      "title": "Camenca"
+    },
+    {
+      "id": "osm-r19015111",
+      "niSections": 1,
+      "title": "Podoima"
+    },
+    {
+      "id": "osm-r19015112",
+      "niSections": 1,
+      "title": "Rotari"
+    },
+    {
+      "id": "osm-r19015113",
+      "niSections": 1,
+      "title": "Valea Adîncă"
+    },
+    {
+      "id": "osm-r19015114",
+      "niSections": 1,
+      "title": "Rașcov"
+    },
+    {
+      "id": "osm-r19015115",
+      "niSections": 1,
+      "title": "Caterinovca"
+    },
+    {
+      "id": "osm-r19015284",
+      "niSections": 1,
+      "title": "Vadul Turcului"
+    },
+    {
+      "id": "osm-r19015285",
+      "niSections": 1,
+      "title": "Beloci"
+    },
+    {
+      "id": "osm-r19015286",
+      "niSections": 1,
+      "title": "Plopi"
+    },
+    {
+      "id": "osm-r19015287",
+      "niSections": 1,
+      "title": "Sovietscoe"
+    },
+    {
+      "id": "osm-r19015304",
+      "niSections": 1,
+      "title": "Stroiești"
+    },
+    {
+      "id": "osm-r19016165",
+      "niSections": 1,
+      "title": "Andreevca"
+    },
+    {
+      "id": "osm-r19016166",
+      "niSections": 1,
+      "title": "Ulmu"
+    },
+    {
+      "id": "osm-r19016167",
+      "niSections": 1,
+      "title": "Vărăncău"
+    },
+    {
+      "id": "osm-r19069840",
+      "niSections": 1,
+      "title": "Delacău"
+    },
+    {
+      "id": "osm-r6879649",
+      "niSections": 1,
+      "title": "Chițcani"
+    },
+    {
+      "id": "osm-r7427669",
+      "niSections": 1,
+      "title": "Vladimirovca"
+    },
+    {
+      "id": "osm-r7427680",
+      "niSections": 1,
+      "title": "Frunză"
+    },
+    {
+      "id": "osm-r7431238",
+      "niSections": 1,
+      "title": "Bîcioc"
+    },
+    {
+      "id": "osm-r7431263",
+      "niSections": 1,
+      "title": "Parcani"
+    },
+    {
+      "id": "osm-r7432661",
+      "niSections": 1,
+      "title": "Crasnogorca"
+    },
+    {
+      "id": "osm-r7432662",
+      "niSections": 1,
+      "title": "Teiu"
+    },
+    {
+      "id": "osm-r7432700",
+      "niSections": 1,
+      "title": "Vinogradnoe"
+    },
+    {
+      "id": "osm-r7468724",
+      "niSections": 1,
+      "title": "Blijnii Hutor"
+    },
+    {
+      "id": "osm-r7468791",
+      "niSections": 1,
+      "title": "Sucleia"
+    },
+    {
+      "id": "osm-r8289594",
+      "niSections": 1,
+      "title": "Caragaș"
+    },
+    {
+      "id": "osm-r8289727",
+      "niSections": 1,
+      "title": "Cioburciu"
+    },
+    {
+      "id": "osm-r8289751",
+      "niSections": 1,
+      "title": "Slobozia"
+    },
+    {
+      "id": "osm-r8290840",
+      "niSections": 1,
+      "title": "Dnestrovsc"
+    },
+    {
+      "id": "osm-r8290877",
+      "niSections": 1,
+      "title": "Pervomaisc"
+    },
+    {
+      "id": "osm-r8290934",
+      "niSections": 1,
+      "title": "Nezavertailovca"
+    },
+    {
+      "id": "osm-r8291057",
+      "niSections": 1,
+      "title": "Corotna"
+    },
+    {
+      "id": "osm-r8291058",
+      "niSections": 1,
+      "title": "Hlinaia"
+    },
+    {
+      "id": "osm-r8292878",
+      "niSections": 1,
+      "title": "Tîrnauca"
+    },
+    {
+      "id": "osm-r8292891",
+      "niSections": 1,
+      "title": "Mălăiești"
+    },
+    {
+      "id": "osm-r8292898",
+      "niSections": 1,
+      "title": "Hrușca"
+    },
+    {
+      "id": "osm-r8292909",
+      "niSections": 1,
+      "title": "Ocnița"
+    },
+    {
+      "id": "osm-r8348605",
+      "niSections": 1,
+      "title": "Tașlîc"
+    },
+    {
+      "id": "osm-r8348625",
+      "niSections": 1,
+      "title": "Butor"
+    },
+    {
+      "id": "osm-r8348646",
+      "niSections": 1,
+      "title": "Speia"
+    },
+    {
+      "id": "osm-r8348909",
+      "niSections": 1,
+      "title": "Mihailovca"
+    },
+    {
+      "id": "osm-r8348920",
+      "niSections": 1,
+      "title": "Harmațca"
+    },
+    {
+      "id": "osm-r8349002",
+      "niSections": 1,
+      "title": "Dubău"
+    },
+    {
+      "id": "osm-r8349059",
+      "niSections": 1,
+      "title": "Lenin"
+    },
+    {
+      "id": "osm-r8349093",
+      "niSections": 1,
+      "title": "Butuceni"
+    },
+    {
+      "id": "osm-r8349094",
+      "niSections": 1,
+      "title": "Jura"
+    },
+    {
+      "id": "osm-r8349307",
+      "niSections": 1,
+      "title": "Mocra"
+    },
+    {
+      "id": "osm-r8349338",
+      "niSections": 1,
+      "title": "Popencu"
+    },
+    {
+      "id": "osm-r8539257",
+      "niSections": 1,
+      "title": "Maiac"
+    },
+    {
+      "id": "osm-r8539525",
+      "niSections": 1,
+      "title": "Colosova"
+    },
+    {
+      "id": "osm-r8688504",
+      "niSections": 1,
+      "title": "Broșteni"
+    },
+    {
+      "id": "osm-r8710724",
+      "niSections": 1,
+      "title": "Slobozia-Rașcov"
+    },
+    {
+      "id": "osm-r8726395",
+      "niSections": 1,
+      "title": "Șipca"
+    },
+    {
+      "id": "osm-r9288026",
+      "niSections": 1,
+      "title": "Carmanova"
+    },
+    {
+      "id": "osm-r9288110",
+      "niSections": 1,
+      "title": "Hîrtop"
+    },
+    {
+      "id": "osm-r9288158",
+      "niSections": 1,
+      "title": "Dzerjinscoe"
+    },
+    {
+      "id": "osm-r9288287",
+      "niSections": 1,
+      "title": "Dubăsari"
+    },
+    {
+      "id": "osm-r9288722",
+      "niSections": 1,
+      "title": "Comisarovca Nouă"
+    },
+    {
+      "id": "osm-r9288756",
+      "niSections": 1,
+      "title": "Crasnîi Vinogradari"
+    },
+    {
+      "id": "osm-r9294122",
+      "niSections": 1,
+      "title": "Ghidirim"
+    },
+    {
+      "id": "osm-r9301463",
+      "niSections": 1,
+      "title": "Hlinaia"
+    },
+    {
+      "id": "osm-r9301464",
+      "niSections": 1,
+      "title": "Grigoriopol"
+    },
+    {
+      "id": "osm-r9581354",
+      "niSections": 1,
+      "title": "Bender"
+    },
+    {
+      "id": "osm-r9656324",
+      "niSections": 1,
+      "title": "Haraba"
+    },
+    {
+      "id": "osm-r9656364",
+      "niSections": 1,
+      "title": "Crasnencoe"
+    },
+    {
+      "id": "osm-r9656413",
+      "niSections": 1,
+      "title": "Molochișul Mare"
+    },
+    {
+      "id": "osm-r9659709",
+      "niSections": 1,
+      "title": "Cobasna"
+    },
+    {
+      "id": "osm-r9659794",
+      "niSections": 1,
+      "title": "Hîrjău"
+    },
+    {
+      "id": "osm-r9659979",
+      "niSections": 1,
+      "title": "Rîbnița"
+    },
+    {
+      "id": "osm-r9660049",
+      "niSections": 1,
+      "title": "Ofatinți"
+    },
+    {
+      "id": "osm-r9679382",
+      "niSections": 1,
+      "title": "Crasnoe"
+    }
+  ],
+  "labels": [
+    {
+      "id": "view-nistrenia-unit-15",
+      "name": "Dubăsari",
+      "context": "Oraș enumerat distinct · organizare documentată Nistrenia, 2023"
+    },
+    {
+      "id": "view-nistrenia-unit-16",
+      "name": "Rîbnița",
+      "context": "Oraș enumerat distinct · organizare documentată Nistrenia, 2023"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r1702215",
+      "name": "Dubăsari",
+      "context": "Raion · organizare documentată Nistrenia, 2023"
+    },
+    {
+      "id": "view-nistrenia-group-osm-r1702217",
+      "name": "Rîbnița",
+      "context": "Raion · organizare documentată Nistrenia, 2023"
+    }
+  ],
+  "outlines": [
+    "view-nistrenia",
+    "view-nistrenia-group-osm-r1702216",
+    "view-nistrenia-group-osm-r1702217",
+    "view-nistrenia-group-osm-r1702215",
+    "view-nistrenia-group-osm-r1702214",
+    "view-nistrenia-group-osm-r1702219",
+    "view-nistrenia-group-osm-r1702218",
+    "view-nistrenia-group-osm-r944727"
+  ],
+  "errors": [],
+  "console": []
+}
