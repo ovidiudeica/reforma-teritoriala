@@ -13,7 +13,7 @@ const mode=process.env.NI_FIN_BROWSER_MODE||'local';assert(['local','published']
 const source=performanceSource(root),out=path.join(auditEvidenceDirectory(),'ni-fin','u1-acceptance');
 const id='osm-r9581354',alias='view-nistrenia-role-'+id;
 const report={schema:'web-ni-u1-coupled-browser-v1',status:'FAIL',sourceSha:source.sha,
- trackedSourcesClean:source.trackedSourcesClean,applicationBaselineSha:'3e34df56fe1fbf9343ae46b566fd28d2972fc320',mode,checks:[],captures:[],
+ trackedSourcesClean:source.trackedSourcesClean,applicationBaselineSha:'e8373371aa7504a206fa6c8020ed421060fc84e4',mode,checks:[],captures:[],
  limitations:['Real Chromium viewports, not physical phones. Chrome accessibility tree is not a physical screen-reader certification.','An audit-tool commit is not claimed to be the published application commit; published application bytes are checked independently.']};
 const mark=(name,data={})=>report.checks.push({name,status:'PASS',...data});
 const state=()=>({actual:[...qaApp.visibleEntityIds].sort(),ni:[...qaApp.visibleOperationalOutlineIds].sort(),selected:qaApp.selectedEntityId});
