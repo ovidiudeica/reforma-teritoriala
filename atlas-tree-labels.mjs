@@ -16,3 +16,22 @@ export function compactTreeName(node){
  if(node?.jurisdiction==='RO' && /^jude(?:ț|t)ul\s+/i.test(official))return official.replace(/^jude(?:ț|t)ul\s+/i,'');
  return official;
 }
+
+
+// U1.3 only affects the display caption, never the 2023 documentary name,
+// source alias, parent, geometry or the statutory classifications.
+// Context, accessible description and the informative card retain the node kind.
+export function compactNistreniaDocumentaryName(node){
+ const name=String(node?.display_name??'');
+ if(node?.kind==='upper_city')return name.replace(/\s+[—–-]\s*oraș\s*$/iu,'');
+ return name;
+}
+
+// The visible names stay compact; assistive technology retains the documentary
+// role of homonymous NI cities and districts without changing legal identity.
+export function nistreniaTreeContext(node){
+ if(node?.jurisdiction!=='NI')return null;
+ if(node.kind==='raion')return 'Raion · organizare documentată Nistrenia, 2023';
+ if(node.kind==='upper_city')return 'Oraș enumerat distinct · organizare documentată Nistrenia, 2023';
+ return null;
+}

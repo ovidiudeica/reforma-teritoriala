@@ -17,8 +17,13 @@ test('242 documentary nodes are reciprocal/reachable without modifying 5848 offi
 });
 test('all documentary nodes are searchable and city/raion labels remain distinct',()=>{
  const rows=nistreniaSearchEntities(view,entityById);assert.equal(rows.length,242);assert.equal(new Set(rows.map(x=>x.id)).size,242);
- assert.match(view.nodes.get('view-nistrenia-unit-15').display_name,/oraș/);
- assert.match(view.nodes.get('view-nistrenia-group-osm-r1702215').display_name,/raion/);
+ assert.equal(view.nodes.get('view-nistrenia-unit-15').display_name,'Dubăsari');
+ assert.equal(view.nodes.get('view-nistrenia-group-osm-r1702215').display_name,'Dubăsari');
+ assert.equal(view.nodes.get('view-nistrenia-unit-16').display_name,'Rîbnița');
+ assert.equal(view.nodes.get('view-nistrenia-group-osm-r1702217').display_name,'Rîbnița');
+ assert.notEqual(view.nodes.get('view-nistrenia-unit-15').id,view.nodes.get('view-nistrenia-group-osm-r1702215').id);
+ assert.notEqual(view.nodes.get('view-nistrenia-unit-16').kind,view.nodes.get('view-nistrenia-group-osm-r1702217').kind);
+ assert.equal(model.nodes.find(x=>x.id==='view-nistrenia-unit-15').display_name,'Dubăsari — oraș');
 });
 test('URL selects a documentary council but cannot turn it into checked geometry',()=>{
  const config=createUrlConfig({entityById,nodeById:view.nodes,rootIds:tree.root_ids,treeRootIds:view.rootIds,virtualEntityIds:view.virtualIds,operationalOutlineIds:model.nodes.filter(n=>n.geometry_ref).map(n=>n.geometry_ref),filterIndex:createGeometryFilterIndex(actual)});
