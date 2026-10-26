@@ -1,0 +1,210 @@
+{
+  "schema": "web-ni-u1-final-acceptance-v1",
+  "application_sha": "e8373371aa7504a206fa6c8020ed421060fc84e4",
+  "scope": "Functional presentation, not legal certification or OSM source promotion",
+  "status": "PASS",
+  "browser": "Chrome/155.0.8059.39",
+  "checks": [
+    {
+      "name": "three-default-roots-without-descendants",
+      "status": "PASS"
+    },
+    {
+      "name": "alias-selection-canonical-url-and-back-forward",
+      "status": "PASS"
+    },
+    {
+      "name": "md-only-ni-only-both-and-neither-preserve-one-checkbox",
+      "status": "PASS"
+    },
+    {
+      "name": "no-duplicate-map-feature-with-both-perspectives-and-no-basemap",
+      "status": "PASS"
+    },
+    {
+      "name": "real-geojson-export-canonical-and-byte-equal-geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "osm-filter-explicit-action-and-undo-preserve-shared-geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "shared-reset-and-history-preserve-card-filters-and-basemap",
+      "status": "PASS"
+    },
+    {
+      "name": "human-name-search-for-unassociated-lunga",
+      "status": "PASS"
+    },
+    {
+      "name": "keyboard-canonical-reference-without-checking",
+      "status": "PASS"
+    },
+    {
+      "name": "map-feature-click-resolves-canonical-card",
+      "status": "PASS",
+      "input": "MouseEvent on the actual Leaflet SVG feature"
+    },
+    {
+      "name": "shared-card-measurements",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical-neighbors",
+      "status": "PASS",
+      "id": "osm-r9581354",
+      "neighbors": 3,
+      "anomalies": 0
+    },
+    {
+      "name": "same-geometry-from-both-perspectives-does-not-duplicate-comparison",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical-comparison-and-report-export",
+      "status": "PASS"
+    },
+    {
+      "name": "vector-map-export-preserves-state",
+      "status": "PASS",
+      "bytes": 288545,
+      "sha256": "fbb5f4c41136647879bfe944b2891bfec1a25b9a7e0ac4291d5f0d51b76364e7",
+      "unchanged": true
+    },
+    {
+      "name": "ni-section-visible-1440x900",
+      "status": "PASS",
+      "heading": "Nistrenia · organizare declarată",
+      "headingVisible": true,
+      "pageOverflow": false,
+      "bodyOverflow": false,
+      "canonical": "osm-r9581354"
+    },
+    {
+      "name": "ni-section-visible-900x768",
+      "status": "PASS",
+      "heading": "Nistrenia · organizare declarată",
+      "headingVisible": true,
+      "pageOverflow": false,
+      "bodyOverflow": false,
+      "canonical": "osm-r9581354"
+    },
+    {
+      "name": "ni-section-visible-390x844",
+      "status": "PASS",
+      "heading": "Nistrenia · organizare declarată",
+      "headingVisible": true,
+      "pageOverflow": false,
+      "bodyOverflow": false,
+      "canonical": "osm-r9581354"
+    },
+    {
+      "name": "ni-section-visible-844x390",
+      "status": "PASS",
+      "heading": "Nistrenia · organizare declarată",
+      "headingVisible": true,
+      "pageOverflow": false,
+      "bodyOverflow": false,
+      "canonical": "osm-r9581354"
+    },
+    {
+      "name": "no-own-network-or-javascript-errors",
+      "status": "PASS"
+    }
+  ],
+  "captures": {
+    "status": "PASS",
+    "method": "Codex direct visual inspection of authenticated Chromium PNGs, distinct from test exit codes",
+    "artifact_id": 12694434363,
+    "captures": [
+      {
+        "file": "ni-section-1440x900.png",
+        "viewport": "1440x900",
+        "sha256": "c5076b17e49582afebaea82ad1dd148a3c13f6664af8bf25dc09ad08d90069c8",
+        "bytes": 151375,
+        "ni_section_actually_visible": true,
+        "inspection": "Direct image inspection: NI heading and scoped warning visible; readable text, vertical scrolling, no horizontal overflow or inaccessible close controls. Landscape shows the beginning of the section and requires vertical scrolling for remaining content."
+      },
+      {
+        "file": "ni-section-900x768.png",
+        "viewport": "900x768",
+        "sha256": "fe233d3d9ace8de162203f3068304a6f526f61e33a6a2a2f30d77c1ecc85a7eb",
+        "bytes": 136315,
+        "ni_section_actually_visible": true,
+        "inspection": "Direct image inspection: NI heading and scoped warning visible; readable text, vertical scrolling, no horizontal overflow or inaccessible close controls. Landscape shows the beginning of the section and requires vertical scrolling for remaining content."
+      },
+      {
+        "file": "ni-section-390x844.png",
+        "viewport": "390x844",
+        "sha256": "82c83c38c3e4c3eb8ab0944e7571fd1774e8cc4e8d739de7e9fbac5c65a93a3c",
+        "bytes": 85220,
+        "ni_section_actually_visible": true,
+        "inspection": "Direct image inspection: NI heading and scoped warning visible; readable text, vertical scrolling, no horizontal overflow or inaccessible close controls. Landscape shows the beginning of the section and requires vertical scrolling for remaining content."
+      },
+      {
+        "file": "ni-section-844x390.png",
+        "viewport": "844x390",
+        "sha256": "bdde5adbf0e7b680be6e50143c8434d06cb9254fb98ce32a159304a8f7e9991d",
+        "bytes": 50065,
+        "ni_section_actually_visible": true,
+        "inspection": "Direct image inspection: NI heading and scoped warning visible; readable text, vertical scrolling, no horizontal overflow or inaccessible close controls. Landscape shows the beginning of the section and requires vertical scrolling for remaining content."
+      }
+    ],
+    "limitations": [
+      "Simulated Chromium viewports, not physical devices.",
+      "No certification with physical screen readers."
+    ]
+  },
+  "source_receipts": [
+    {
+      "id": 12694434363,
+      "node_id": "MDg6QXJ0aWZhY3QxMjY5NDQzNDM2Mw==",
+      "name": "ni-fin-browser-f4cb0ce97887ec395204380f8bf435fdaca92c22",
+      "size_in_bytes": 6353509,
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/actions/artifacts/12694434363",
+      "archive_download_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/actions/artifacts/12694434363/zip",
+      "expired": false,
+      "digest": "sha256:20dbd0a093c02899a9d2da4dfb34834b01a365e3aab4d75341b0cec4a5464f9e",
+      "created_at": "2026-10-26T23:06:18Z",
+      "updated_at": "2026-10-26T23:06:18Z",
+      "expires_at": "2027-01-24T23:03:50Z",
+      "workflow_run": {
+        "id": 40417082708,
+        "repository_id": 1388155870,
+        "head_repository_id": 1388155870,
+        "head_branch": "audit/web-ni-u1-5-final-acceptance",
+        "head_sha": "f4cb0ce97887ec395204380f8bf435fdaca92c22"
+      },
+      "independently_verified_zip_sha256": "20dbd0a093c02899a9d2da4dfb34834b01a365e3aab4d75341b0cec4a5464f9e"
+    },
+    {
+      "id": 12695748220,
+      "node_id": "MDg6QXJ0aWZhY3QxMjY5NTc0ODIyMA==",
+      "name": "web-r2c4-published-evidence",
+      "size_in_bytes": 25968442,
+      "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/actions/artifacts/12695748220",
+      "archive_download_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/actions/artifacts/12695748220/zip",
+      "expired": false,
+      "digest": "sha256:a56acf0c19d0109484d696c4443ec170961e03a16e59a8e5a9afccbcc1642367",
+      "created_at": "2026-10-26T23:05:57Z",
+      "updated_at": "2026-10-26T23:05:57Z",
+      "expires_at": "2026-11-25T23:05:54Z",
+      "workflow_run": {
+        "id": 40417086901,
+        "repository_id": 1388155870,
+        "head_repository_id": 1388155870,
+        "head_branch": "main",
+        "head_sha": "e8373371aa7504a206fa6c8020ed421060fc84e4"
+      },
+      "independently_verified_zip_sha256": "a56acf0c19d0109484d696c4443ec170961e03a16e59a8e5a9afccbcc1642367"
+    }
+  ],
+  "limitations": [
+    "Real Chromium viewports, not physical phones. Chrome accessibility tree is not a physical screen-reader certification.",
+    "An audit-tool commit is not claimed to be the published application commit; published application bytes are checked independently."
+  ],
+  "errors": [],
+  "networkFailures": [],
+  "externalTileWarnings": []
+}

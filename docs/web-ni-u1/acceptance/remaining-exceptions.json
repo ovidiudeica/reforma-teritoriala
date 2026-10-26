@@ -1,0 +1,101 @@
+{
+  "schema": "web-ni-u1-final-acceptance-v1",
+  "application_sha": "e8373371aa7504a206fa6c8020ed421060fc84e4",
+  "scope": "Functional presentation, not legal certification or OSM source promotion",
+  "NI_LEGAL_CERTIFICATION_COMPLETE": false,
+  "OSM_FRESHNESS_PASS": false,
+  "P91_IMPORT_ALLOWED": false,
+  "READY_FOR_UA_CV0": false,
+  "issue_396": "OPEN; OSM stale source and #398 remain separate",
+  "issue_442": "Administratively CLOSED/not_planned; legal certification is not obtained",
+  "exceptions": [
+    {
+      "type": "TOP_TIER_CLASSIFICATION",
+      "status": "PENDING_ADDITIONAL_PRIMARY_NORMATIVE_VALIDATION",
+      "ids": [
+        "view-nistrenia-unit-15",
+        "view-nistrenia-unit-16"
+      ]
+    },
+    {
+      "type": "NI_ROLE_NOT_ASSOCIATED_TO_DOCUMENTARY_NODE",
+      "geometry_ids": [
+        "osm-r19001619"
+      ]
+    },
+    {
+      "type": "MULTIPLE_NOMINAL_ASSOCIATIONS_NOT_IDENTITY_PROOF",
+      "geometries": [
+        {
+          "geometry_id": "osm-r7427669",
+          "candidates": [
+            "view-nistrenia-place-202",
+            "view-nistrenia-place-225"
+          ]
+        },
+        {
+          "geometry_id": "osm-r8290877",
+          "candidates": [
+            "view-nistrenia-place-187",
+            "view-nistrenia-place-220"
+          ]
+        },
+        {
+          "geometry_id": "osm-r8291058",
+          "candidates": [
+            "view-nistrenia-place-229",
+            "view-nistrenia-place-38"
+          ]
+        },
+        {
+          "geometry_id": "osm-r9301463",
+          "candidates": [
+            "view-nistrenia-place-229",
+            "view-nistrenia-place-38"
+          ]
+        },
+        {
+          "geometry_id": "osm-r9659709",
+          "candidates": [
+            "view-nistrenia-place-178",
+            "view-nistrenia-place-179"
+          ]
+        },
+        {
+          "geometry_id": "osm-r9679382",
+          "candidates": [
+            "view-nistrenia-place-219",
+            "view-nistrenia-place-26"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "MD_NOMINAL_MATCHES_OUTSIDE_OSM85_NOT_IDENTITY_PROOF",
+      "node_ids": [
+        "view-nistrenia-place-12",
+        "view-nistrenia-place-44",
+        "view-nistrenia-place-55",
+        "view-nistrenia-place-75",
+        "view-nistrenia-place-86",
+        "view-nistrenia-place-89",
+        "view-nistrenia-place-103",
+        "view-nistrenia-place-114",
+        "view-nistrenia-place-182",
+        "view-nistrenia-place-183",
+        "view-nistrenia-place-226",
+        "view-nistrenia-place-236"
+      ]
+    }
+  ],
+  "global_osm": {
+    "formal_unknown_relations": 242,
+    "lacunary_histories": 159,
+    "missing_versions": 641
+  },
+  "scope_limits": [
+    "7 versus 9 classification remains documented; no speculative reparenting.",
+    "No public OSM edits, source promotion, ACTUAL/CUATM or MD parent changes.",
+    "234 documentary nodes do not gain a polygon through a nominal match."
+  ]
+}
