@@ -3,7 +3,7 @@ import {createAtlasExport} from './atlas-export-ui.mjs';
 import {mapSvg,printSvg} from './atlas-export-visual.mjs';
 import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
-import {validateOsmRolesCatalog,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
+import {validateOsmRolesCatalog,renderOsmRoleDetails,osmRoleLabels} from './atlas-osm-roles.mjs';
 import {validateNistreniaOsmNavigation} from './atlas-nistrenia-osm.mjs';
 import {createNistreniaAdministrativeView,nistreniaSearchEntities,NISTR_EN_ROOT} from './atlas-nistrenia-jurisdiction.mjs';
 import {nistreniaPerspectiveForGeometry} from './atlas-nistrenia-unified-card.mjs';
@@ -783,15 +783,15 @@ function nistreniaGeometricPerspectiveHtml(entity){
   '<dl class="kv">'+detailRow('Părinte documentar NI',node.parent_name||'Nedeterminat')+
   detailRow('Referințe 2023',node.source_refs.join(', '))+
   detailRow('Asociere geometrică','Candidatură; identitatea administrativă nu este certificată')+
-  detailRow('Actualizare contemporană',node.contemporary_status)+'</dl></li>').join('');
+  detailRow('Actualizare contemporană',node.contemporary_status==='PROVISIONAL'?'Actualizare contemporană provizorie':'Statut contemporan nedeterminat')+'</dl></li>').join('');
  return '<section class="details-section" data-card-perspective="NI"><h3>Nistrenia · organizare declarată</h3>'+
   '<p>Perspectivă administrativă de facto, limitată la sursa din '+escapeHtml(x.source_year)+'. Apartenența juridică a întregului poligon și controlul efectiv nu sunt certificate.</p>'+
   '<dl class="kv">'+detailRow('ID geometric canonic',x.canonical_id)+
   detailRow('Relație OpenStreetMap',String(x.osm_relation_id))+
   detailRow('Versiune / moment OSM',String(x.osm_version)+' · '+x.osm_timestamp)+
-  detailRow('Rol cartografic NI',x.role||'Referință OSM')+
+  detailRow('Rol cartografic NI',osmRoleLabels[x.role]||'Referință OSM neclasificată')+
   detailRow('Nivel OSM',x.osm_admin_level??'Nedocumentat')+
-  detailRow('Statut contemporan',x.contemporary_legal_certification)+'</dl>'+
+  detailRow('Statut contemporan','Certificare juridică nefinalizată')+'</dl>'+
   (associations?'<h4>Asocieri documentare candidate</h4><ul>'+associations+'</ul>':
    '<p>Rol OSM NI existent, fără corespondent administrativ individual atribuit în registrul din 2023.</p>')+
   '</section>';
