@@ -3,9 +3,10 @@ import {createAtlasExport} from './atlas-export-ui.mjs';
 import {mapSvg,printSvg} from './atlas-export-visual.mjs';
 import {legendEntries} from './atlas-presentation.mjs';
 import {createGeometryResources} from './atlas-geometry-resources.mjs';
-import {validateOsmRolesCatalog,renderOsmRoleDetails} from './atlas-osm-roles.mjs';
+import {validateOsmRolesCatalog,renderOsmRoleDetails,osmRoleLabels} from './atlas-osm-roles.mjs';
 import {validateNistreniaOsmNavigation} from './atlas-nistrenia-osm.mjs';
 import {createNistreniaAdministrativeView,nistreniaSearchEntities,NISTR_EN_ROOT} from './atlas-nistrenia-jurisdiction.mjs';
+import {nistreniaPerspectiveForGeometry} from './atlas-nistrenia-unified-card.mjs';
 import {fetchVerifiedNistreniaOutlines,createNistreniaOutlineLayers,niOutlineIds} from './atlas-nistrenia-outlines.mjs';
 export {atlasMeasure,geometricClient,geometricUi};
 import {createPointIdentifier} from './atlas-point-identification.mjs';
@@ -773,15 +774,37 @@ function clearSelection(){
 function detailRow(label,value){
  return '<dt>'+escapeHtml(label)+'</dt><dd>'+escapeHtml(value==null||value===''?'—':value)+'</dd>';
 }
+// One geometric card per canonical ID: NI information never replaces MD identity.
+function nistreniaGeometricPerspectiveHtml(entity){
+ const x=nistreniaPerspectiveForGeometry(nistreniaView,entity.id);
+ if(!x)return '';
+ const associations=x.associated_documentary_nodes.map(node=>
+  '<li><strong>'+escapeHtml(node.name)+'</strong> · '+escapeHtml(({raion:'Raion',upper_city:'Oraș',place:'Localitate',council:'Consiliu sătesc'})[node.documentary_kind]||node.documentary_kind)+
+  '<dl class="kv">'+detailRow('Părinte documentar NI',node.parent_name||'Nedeterminat')+
+  detailRow('Referințe 2023',node.source_refs.join(', '))+
+  detailRow('Asociere geometrică','Candidatură; identitatea administrativă nu este certificată')+
+  detailRow('Actualizare contemporană',node.contemporary_status==='PROVISIONAL'?'Actualizare contemporană provizorie':'Statut contemporan nedeterminat')+'</dl></li>').join('');
+ return '<section class="details-section" data-card-perspective="NI"><h3>Nistrenia · organizare declarată</h3>'+
+  '<p>Perspectivă administrativă de facto, limitată la sursa din '+escapeHtml(x.source_year)+'. Apartenența juridică a întregului poligon și controlul efectiv nu sunt certificate.</p>'+
+  '<dl class="kv">'+detailRow('ID geometric canonic',x.canonical_id)+
+  detailRow('Relație OpenStreetMap',String(x.osm_relation_id))+
+  detailRow('Versiune / moment OSM',String(x.osm_version)+' · '+x.osm_timestamp)+
+  detailRow('Rol cartografic NI',osmRoleLabels[x.role]||'Referință OSM neclasificată')+
+  detailRow('Nivel OSM',x.osm_admin_level??'Nedocumentat')+
+  detailRow('Statut contemporan','Certificare juridică nefinalizată')+'</dl>'+
+  (associations?'<h4>Asocieri documentare candidate</h4><ul>'+associations+'</ul>':
+   '<p>Rol OSM NI existent, fără corespondent administrativ individual atribuit în registrul din 2023.</p>')+
+  '</section>';
+}
 function renderDetails(entity){
  const title=document.getElementById('details-title');
  const body=document.getElementById('details-body');
  title.textContent=formatEntityName(entity.display_name);
  document.getElementById('details-summary').textContent=typeLabel(entity.representation.inferred_type);
  body.innerHTML=
-  '<section class="details-section"><span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
+  '<section class="details-section">'+(nistreniaView?.roleIds.has(entity.id)?'<h3>Republica Moldova</h3>':'')+'<span class="tag'+(entity.validation.legal_identity_status==='unresolved'?' warning-tag':'')+'">'+escapeHtml(statusLabels[entity.validation.legal_identity_status]||entity.validation.legal_identity_status)+'</span><dl class="kv" style="margin-top:10px">'+
   detailRow('Jurisdicție',entity.jurisdiction)+(nistreniaView?.roleIds.has(entity.id)?detailRow('Jurisdicție operațională (OSM)','Nistrenia · de facto, fără recunoaștere internațională'):'')+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
-  '</dl></section>'+entityProvenanceHtml(entity,{typeLabel,statusLabel:value=>statusLabels[value]||value});
+  '</dl></section>'+entityProvenanceHtml(entity,{typeLabel,statusLabel:value=>statusLabels[value]||value})+nistreniaGeometricPerspectiveHtml(entity);
  renderOsmRoleDetails({container:body,document,row:osmRoleById.get(entity.id)});
  renderBreadcrumb(entity);
  const zoomButton=body.querySelector('#zoom-selected');

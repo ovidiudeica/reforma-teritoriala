@@ -1,0 +1,43 @@
+name: WEB-NI-U1 read-only inventory gate
+on:
+  pull_request:
+    paths:
+      - 'docs/web-ni-u1/**'
+      - 'scripts/test/web-ni-u1-*.test.mjs'
+      - '.github/workflows/web-ni-u1-audit.yml'
+      - 'views/nistrenia/**'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/web-ni-u1/**'
+      - 'scripts/test/web-ni-u1-*.test.mjs'
+      - '.github/workflows/web-ni-u1-audit.yml'
+      - 'views/nistrenia/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ni-u1-registry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify 242 NI nodes, 93 canonical geometry roles and exceptions
+        run: node --test scripts/test/web-ni-u1-registry.test.mjs
+      - name: Reject ACTUAL and source mutation in audit-only PR
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git diff --name-only "$BASE_SHA" HEAD > changed-paths.txt
+          if grep -E '^(data/|public/|views/|docs/ni-fin/sources/|docs/evidence/)' changed-paths.txt; then
+            echo 'Audit-only change includes protected source paths' >&2
+            exit 1
+          fi
