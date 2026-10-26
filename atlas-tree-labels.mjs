@@ -26,3 +26,12 @@ export function compactNistreniaDocumentaryName(node){
  if(node?.kind==='upper_city')return name.replace(/\s+[—–-]\s*oraș\s*$/iu,'');
  return name;
 }
+
+// The visible names stay compact; assistive technology retains the documentary
+// role of homonymous NI cities and districts without changing legal identity.
+export function nistreniaTreeContext(node){
+ if(node?.jurisdiction!=='NI')return null;
+ if(node.kind==='raion')return 'Raion · organizare documentată Nistrenia, 2023';
+ if(node.kind==='upper_city')return 'Oraș enumerat distinct · organizare documentată Nistrenia, 2023';
+ return null;
+}

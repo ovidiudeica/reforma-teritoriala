@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {compactNistreniaDocumentaryName,compactTreeName} from '../../atlas-tree-labels.mjs';
+import {compactNistreniaDocumentaryName,compactTreeName,nistreniaTreeContext} from '../../atlas-tree-labels.mjs';
 import {createNistreniaAdministrativeView} from '../../atlas-nistrenia-jurisdiction.mjs';
 
 const get=p=>JSON.parse(readFileSync(new URL('../../'+p,import.meta.url),'utf8'));
@@ -23,7 +23,7 @@ test('U1.3 removes only visual suffixes, never mutates NI-FIN originals',()=>{
   assert.equal(v.parent_id,n.parent_id);
   assert.deepEqual(v.child_ids,n.child_ids);
   assert.equal(v.geometry_ref,n.geometry_ref);
-  assert.ok(!/\\((?:raion|oraș)\\)$/iu.test(v.display_name));
+  assert.ok(!/\((?:raion|oraș)\)$/iu.test(v.display_name));
   if(n.kind==='council')assert.ok(v.display_name.startsWith('Consiliul sătesc '));
  }
 });
@@ -33,4 +33,12 @@ test('U1.3 leaves RO/MD labels and all verified geometry references unchanged',(
  for(const n of m.nodes.filter(n=>n.geometry_ref))assert.equal(view.nodes.get(n.id).geometry_ref,n.geometry_ref);
  assert.equal(view.virtualIds.size,242);
  assert.equal(compactTreeName({id:'test',jurisdiction:'RO',display_name:'Județul Cluj'}),'Cluj');
+});
+
+test('U1.3 preserves authentic non-city names and exposes homonym context',()=>{
+ for(const kind of ['place','council','raion'])assert.equal(compactNistreniaDocumentaryName({kind,display_name:'Nume — oraș'}),'Nume — oraș');
+ assert.equal(compactNistreniaDocumentaryName({kind:'upper_city',display_name:'Orașul nou'}),'Orașul nou');
+ for(const id of ['view-nistrenia-unit-15','view-nistrenia-unit-16'])assert.match(nistreniaTreeContext(view.nodes.get(id)),/^Oraș enumerat distinct/);
+ for(const id of ['view-nistrenia-group-osm-r1702215','view-nistrenia-group-osm-r1702217'])assert.match(nistreniaTreeContext(view.nodes.get(id)),/^Raion/);
+ assert.equal(nistreniaTreeContext({jurisdiction:'MD',kind:'upper_city'}),null);
 });

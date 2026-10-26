@@ -1,6 +1,6 @@
 import {flattenVisibleTree,createTreeWindow} from './atlas-tree-window.mjs';
 import {formatEntityName} from './atlas-name-format.mjs';
-import {compactTreeName} from './atlas-tree-labels.mjs';
+import {compactTreeName,nistreniaTreeContext} from './atlas-tree-labels.mjs';
 import {createOsmLevelBadge} from './atlas-osm-admin-badges.mjs';
 // Navigation uses only actual-consolidated-hierarchy-v1 relationships.
 export function parentId(nodeById,id){
@@ -132,6 +132,7 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
   const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.className='tree-visibility-toggle';checkbox.dataset.entityId=id;checkbox.disabled=!isGeometryAvailable(id);checkbox.setAttribute('aria-label','Afișează geometria pentru '+name);checkbox.addEventListener('change',()=>onVisibilityChange(id,checkbox.checked));visibility.appendChild(checkbox);
   const heading=document.createElement('div');heading.setAttribute('role','rowheader');heading.setAttribute('aria-colindex','3');
   const button=document.createElement('button');button.type='button';button.className='tree-select';button.dataset.entityId=id;button.title=name==='Entitate fără nume'?name:formatEntityName(node.display_name);button.setAttribute('aria-label','Selectează '+name);
+  const documentaryContext=nistreniaTreeContext(node);if(documentaryContext)for(const control of [toggleButton,checkbox,button])control.setAttribute('aria-description',documentaryContext);
   const svg=document.createElementNS?document.createElementNS('http://www.w3.org/2000/svg','svg'):document.createElement('svg');svg.setAttribute('viewBox','0 0 20 20');svg.setAttribute('aria-hidden','true');svg.setAttribute('class','tree-kind-icon');
   const shape=document.createElementNS?document.createElementNS('http://www.w3.org/2000/svg','path'):document.createElement('path');
   const path=node.parent_id===null?'M10 2a8 8 0 1 0 0 16a8 8 0 1 0 0-16M2 10h16M10 2c-4 4-4 12 0 16M10 2c4 4 4 12 0 16':statistical?'M3 3h5v5H3zM12 3h5v5h-5zM3 12h5v5H3zM12 12h5v5h-5z':branch?'M3 4h5l2 3h7v10H3z':'M10 18l-5-8a6 6 0 1 1 10 0zM8 7h4';
