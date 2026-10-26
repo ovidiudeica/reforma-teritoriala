@@ -64,7 +64,9 @@ await test('WEB-NI-U1.5 coupled canonical navigation, History, filters, Undo, ex
   },id);mark('real-geojson-export-canonical-and-byte-equal-geometry');
 
   await p.call(function(){const section=[...document.querySelectorAll('#filter-list>details')].find(e=>e.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.open=true;section.querySelector('.filter-actions button:nth-child(2)').click();section.querySelector('input[data-filter="5"]').click();const b=document.querySelector('.osm-level-geometry-buttons button');b.click();});
-  assert.match(await p.evaluate("document.getElementById('osm-geometry-confirmation-scope').textContent"),/85 roluri NI reutilizate excluse/);
+  const scope=await p.evaluate("document.getElementById('osm-geometry-confirmation-scope').textContent");
+  assert.match(scope,/7 dintre 7 geometrii eligibile/);assert.match(scope,/contururi NI 7/);
+  assert.match(scope,/Niveluri OSM: 5\. 0 roluri NI reutilizate excluse/);
   await p.call(function(){document.querySelector('.osm-level-action-confirm button').click();});
   await waitFor(()=>p.evaluate('qaApp.visibleOperationalOutlineIds.size===8'),'all independent NI outlines');
   assert.deepEqual((await p.call(state)).actual,checked.actual);
