@@ -22,6 +22,15 @@ class Element{
  set open(value){if(this._open===value)return;this._open=value;this.togglePending=true;} get open(){return this._open;}
  remove(){if(this.parentElement)this.parentElement.children=this.parentElement.children.filter(child=>child!==this);this.parentElement=null;}
  appendChild(child){this.children.push(child);child.parentElement=this;return child;}
+ get firstChild(){return this.children[0]??null;}
+ get nextSibling(){return this.parentElement?.children[this.parentElement.children.indexOf(this)+1]??null;}
+ insertBefore(child,before){
+  if(before&&before.parentElement!==this)throw Error('Invalid insertion reference');
+  if(child===before)return child;
+  child.remove();const index=before?this.children.indexOf(before):this.children.length;
+  this.children.splice(index,0,child);child.parentElement=this;return child;
+ }
+
  setAttribute(k,v){this.attributes[k]=v;} getAttribute(k){return this.attributes[k]??null;}
  addEventListener(k,fn){(this.listeners[k]??=[]).push(fn);}
  async dispatch(k){for(const fn of this.listeners[k]??[])await fn({target:this,preventDefault(){},stopPropagation(){}});}
@@ -283,4 +292,19 @@ test('NI homonymous city and district retain separate accessible descriptions',(
   const e=ctrl.getNode(id);assert.equal(e.button.textContent,'Dubăsari');
   for(const control of [e.button,e.checkbox,e.toggle])assert.ok(control.getAttribute('aria-description').startsWith(role));
  }
+});
+
+test('History collapse removes a focused descendant without dereferencing a removed row',()=>{
+ const root={id:'root',parent_id:null,child_ids:['folder'],display_name:'Root'};
+ const folder={id:'folder',parent_id:'root',child_ids:['leaf'],display_name:'Folder'};
+ const leaf={id:'leaf',parent_id:'folder',child_ids:[],display_name:'Leaf'};
+ const fixture=new Map([root,folder,leaf].map(n=>[n.id,n])),document=documentFactory(),container=new Element();
+ const ctrl=createAtlasTree({document,container,nodeById:fixture,rootIds:['root'],onSelect(){}});
+ ctrl.select('leaf');
+ for(const id of ['root','folder','leaf'])for(const control of [ctrl.getNode(id).toggle,ctrl.getNode(id).checkbox,ctrl.getNode(id).button])control.focus=()=>{document.activeElement=control;};
+ document.activeElement=ctrl.getNode('leaf').button;
+ assert.doesNotThrow(()=>ctrl.setOpenIds(['root']));
+ assert.equal(ctrl.getVisibleIds().includes('leaf'),false);
+ assert.equal(ctrl.isOpen('folder'),false);
+ assert.equal(document.activeElement,ctrl.getNode('folder').button);
 });

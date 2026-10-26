@@ -167,7 +167,10 @@ export function createAtlasTree({container,nodeById,rootIds,document,onSelect,on
     else if(canvas.moveBefore)canvas.moveBefore(row,cursor);
     else canvas.insertBefore(row,cursor);
    }
-   if(focus&&document.activeElement!==controls(rendered.get(focus.id))[focus.col])controls(rendered.get(focus.id))[focus.col].focus?.({preventScroll:true});
+   // A History collapse can remove the previously focused descendant.
+   // rebuild() moves focus to its surviving ancestor after this render.
+   const retainedFocus=focus?rendered.get(focus.id):null;
+   if(retainedFocus&&document.activeElement!==controls(retainedFocus)[focus.col])controls(retainedFocus)[focus.col].focus?.({preventScroll:true});
   }
   updateTabStops();
  }
