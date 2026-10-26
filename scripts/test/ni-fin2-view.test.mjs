@@ -11,12 +11,12 @@ const entityById=new Map(actual.map(e=>[e.id,e])),officialNodes=new Map(tree.nod
 const before=JSON.stringify([...officialNodes]);
 const view=createNistreniaAdministrativeView({model,entityById,officialNodes,officialRoots:tree.root_ids});
 test('242 documentary nodes are reciprocal/reachable without modifying 5848 official nodes',()=>{
- assert.equal(view.nodes.size,5848+242);assert.equal(view.groupIds.length,9);assert.equal(view.roleIds.size,85);
+ assert.equal(view.nodes.size,5848+242+1+85);assert.equal(view.groupIds.length,9);assert.equal(view.roleIds.size,85);assert.equal(view.virtualIds.size,242);assert.equal(view.geometryNavigationIds.size,86);
  for(const id of view.virtualIds)assert.equal(ancestorPath(view.nodes,view.rootIds,id)[0],'view-nistrenia');
  assert.equal(JSON.stringify([...officialNodes]),before);
 });
 test('all documentary nodes are searchable and city/raion labels remain distinct',()=>{
- const rows=nistreniaSearchEntities(view,entityById);assert.equal(rows.length,242);assert.equal(new Set(rows.map(x=>x.id)).size,242);
+ const rows=nistreniaSearchEntities(view,entityById);assert.equal(rows.length,242+86);assert.equal(new Set(rows.map(x=>x.id)).size,242+86);assert.equal(rows.filter(x=>view.virtualIds.has(x.id)).length,242);
  assert.equal(view.nodes.get('view-nistrenia-unit-15').display_name,'Dubăsari');
  assert.equal(view.nodes.get('view-nistrenia-group-osm-r1702215').display_name,'Dubăsari');
  assert.equal(view.nodes.get('view-nistrenia-unit-16').display_name,'Rîbnița');

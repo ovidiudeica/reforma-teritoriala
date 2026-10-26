@@ -17,7 +17,9 @@ try{
    const state=await page.evaluate("({toggle:!!document.getElementById('nistrenia-osm-toggle'),panel:!!document.getElementById('nistrenia-osm-panel'),rootIds:qaApp.nistreniaView.rootIds,groups:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,nodes:qaApp.nistreniaView.nodes.size,official:qaApp.nistreniaView.officialNodeCount,rootName:qaApp.nistreniaView.root.display_name,defaultOperational:[...qaApp.visibleOperationalOutlineIds]})");
    assert.equal(state.toggle,false);assert.equal(state.panel,false);
    assert.equal(state.rootName,'Nistrenia');assert.equal(state.groups,9);assert.equal(state.roles,85);
-   assert.equal(state.nodes,5848+242);assert.equal(state.official,5848);
+   // U1.4 adds one explicitly non-administrative navigation folder plus 85 aliases,
+   // not 86 administrative units or copies of ACTUAL geometry.
+   assert.equal(state.nodes,5848+242+86);assert.equal(state.official,5848);
    assert.deepEqual(state.rootIds.slice(0,2).sort(),['osm-r58974','osm-r90689'].sort());
    assert.equal(state.rootIds[2],'view-nistrenia');
    assert.deepEqual(state.defaultOperational,['view-nistrenia']);
@@ -50,6 +52,36 @@ try{
    await page.click('.tree-visibility-toggle[data-entity-id="view-nistrenia-group-osm-r1702216"]');
    assert.deepEqual(await page.evaluate('[...qaApp.visibleOperationalOutlineIds].sort()'),['view-nistrenia','view-nistrenia-group-osm-r1702216']);
    assert.deepEqual(await page.evaluate('[...qaApp.visibleEntityIds].sort()'),before.actual);
+  });
+
+  await t.test('U1.4 shared NI/MD tree checkboxes reuse one canonical visibility state across filters',async()=>{
+   await page.viewport(1280,800);await page.openPanel('entities');
+   const alias='view-nistrenia-role-osm-r9581354',canonical='osm-r9581354';
+   await page.call(function(alias){qaApp.atlasTree.select(alias);},alias);
+   const initial=await page.evaluate("(()=>{const n=qaApp.nistreniaView,alias='view-nistrenia-role-osm-r9581354',id=n.toActual.get(alias),entry=qaApp.atlasTree.getNode(alias);return {id,visible:qaApp.visibleEntityIds.has(id),available:!entry?.checkbox.disabled,navigation:n.nodes.get(alias)?.parent_id,roleCount:n.roleIds.size,official:n.nodes.get(id)?.jurisdiction}})()");
+   assert.equal(initial.id,canonical);
+   assert.equal(initial.visible,false);
+   assert.equal(initial.available,true);
+   assert.equal(initial.official,'MD');
+   assert.equal(initial.navigation,'view-nistrenia-cartographic-navigation');
+   assert.equal(initial.roleCount,85);
+   const before=await page.evaluate('[...qaApp.visibleOperationalOutlineIds].sort()');
+   await page.click('.tree-visibility-toggle[data-entity-id="'+alias+'"]');
+   assert.equal(await page.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),true);
+   assert.deepEqual(await page.evaluate('[...qaApp.visibleOperationalOutlineIds].sort()'),before);
+   // Disable MD, NI stays on: the shared MD/NI geometry must remain shown.
+   await page.call(function(){const el=document.getElementById('layer-md');el.checked=false;el.dispatchEvent(new Event('change',{bubbles:true}));});
+   assert.equal(await page.evaluate("qaApp.atlasTree.getNode('view-nistrenia-role-osm-r9581354')?.outer.classList.contains('tree-geometry-hidden')"),false);
+   assert.equal(await page.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),true);
+   await page.call(function(){const el=document.getElementById('layer-ni');el.checked=false;el.dispatchEvent(new Event('change',{bubbles:true}));});
+   assert.equal(await page.evaluate("qaApp.atlasTree.getNode('view-nistrenia-role-osm-r9581354')?.outer.classList.contains('tree-geometry-hidden')"),true);
+   assert.equal(await page.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),true);
+   await page.call(function(){const el=document.getElementById('layer-md');el.checked=true;el.dispatchEvent(new Event('change',{bubbles:true}));});
+   assert.equal(await page.evaluate("qaApp.atlasTree.getNode('view-nistrenia-role-osm-r9581354')?.outer.classList.contains('tree-geometry-hidden')"),false);
+   await page.click('.tree-visibility-toggle[data-entity-id="'+alias+'"]');
+   assert.equal(await page.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),false);
+   await page.call(function(){const el=document.getElementById('layer-ni');el.checked=true;el.dispatchEvent(new Event('change',{bubbles:true}));});
+   assert.deepEqual(await page.evaluate('[...qaApp.visibleOperationalOutlineIds].sort()'),before);
   });
 
   await t.test('Bender homonyms remain separate source roles and provenance survives ordinary entity selection',async()=>{

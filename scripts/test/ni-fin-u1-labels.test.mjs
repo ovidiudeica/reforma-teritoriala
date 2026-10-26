@@ -21,7 +21,10 @@ test('U1.3 removes only visual suffixes, never mutates NI-FIN originals',()=>{
   const v=view.nodes.get(n.id);
   assert.equal(v.kind,n.kind);
   assert.equal(v.parent_id,n.parent_id);
-  assert.deepEqual(v.child_ids,n.child_ids);
+  // The tree projection may append only the explicit cartographic catalog.
+  const expectedChildren=n.id==='view-nistrenia'&&view.cartographicNavigationId?[...n.child_ids,view.cartographicNavigationId]:n.child_ids;
+  assert.deepEqual(v.child_ids,expectedChildren);
+  if(view.documentaryNodes)assert.deepEqual(view.documentaryNodes.get(n.id).child_ids,n.child_ids);
   assert.equal(v.geometry_ref,n.geometry_ref);
   assert.ok(!/\((?:raion|oraș)\)$/iu.test(v.display_name));
   if(n.kind==='council')assert.ok(v.display_name.startsWith('Consiliul sătesc '));
