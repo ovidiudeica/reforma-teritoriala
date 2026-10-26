@@ -272,3 +272,15 @@ test('virtual rows release observations, scroll listener and pending animation o
  container.listeners.scroll[0]();assert.equal(callbacks.size,1);controller.destroy();assert.equal(disconnected,1);assert.equal(cancelled,1);assert.equal(removed,1);assert.equal(watched.size,0);assert.equal(callbacks.size,0);assert.equal(container.listeners.scroll.length,0);
  observer.callback([]);assert.equal(callbacks.size,0);
 });
+
+test('NI homonymous city and district retain separate accessible descriptions',()=>{
+ const root={id:'ni',jurisdiction:'NI',parent_id:null,child_ids:['district','city'],display_name:'Nistrenia'};
+ const district={id:'district',jurisdiction:'NI',kind:'raion',parent_id:'ni',child_ids:[],display_name:'Dubăsari'};
+ const city={id:'city',jurisdiction:'NI',kind:'upper_city',parent_id:'ni',child_ids:[],display_name:'Dubăsari'};
+ const fixture=new Map([root,district,city].map(n=>[n.id,n])),document=documentFactory(),container=new Element();
+ const ctrl=createAtlasTree({document,container,nodeById:fixture,rootIds:['ni'],onSelect(){}});
+ for(const [id,role] of [['district','Raion'],['city','Oraș enumerat distinct']]){
+  const e=ctrl.getNode(id);assert.equal(e.button.textContent,'Dubăsari');
+  for(const control of [e.button,e.checkbox,e.toggle])assert.ok(control.getAttribute('aria-description').startsWith(role));
+ }
+});

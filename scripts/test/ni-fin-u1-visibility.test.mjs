@@ -17,7 +17,12 @@ test('U1.4 exposes all 85 MD canonical NI roles directly in a non-administrative
  assert.equal(view.virtualIds.size,242);
  assert.equal(view.geometryNavigationIds.size,86);
  assert.equal(view.toActual.size,85);
- assert.equal(view.root.child_ids.length,10);
+ assert.equal(view.root.child_ids.length,9);
+ assert.equal(view.navigationRoot.child_ids.length,10);
+ assert.deepEqual(view.root.child_ids,model.nodes.find(n=>n.id==='view-nistrenia').child_ids);
+ assert.equal(view.nodes.get('view-nistrenia'),view.navigationRoot);
+ assert.deepEqual(view.navigationRoot.child_ids,[...view.root.child_ids,view.cartographicNavigationId]);
+ assert.ok(!view.virtualIds.has(view.cartographicNavigationId));
  assert.equal(view.groupIds.length,9);
  const nav=view.nodes.get(view.cartographicNavigationId);
  assert.equal(nav.kind,'geometry_navigation');
