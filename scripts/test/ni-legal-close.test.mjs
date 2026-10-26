@@ -15,3 +15,6 @@ test('protected parents, historic axes and 7/9 distinctions survive unchanged',(
 test('unsafe evidence paths are rejected before any read',()=>{for(const p of ['../secret','/etc/passwd','C:/secret','docs/../secret','docs\\secret','docs//secret'])assert.throws(()=>safePath(p));});
 test('corrupt bytes, incorrect length and HTML disguised as PDF fail closed',()=>{const b=Buffer.from('%PDF-example'),r={bytes:b.length,sha256:sha(b),format:'PDF'};verifyBytes(b,r);assert.throws(()=>verifyBytes(Buffer.from('%PDF-corrupt'),r));assert.throws(()=>verifyBytes(b,{...r,bytes:1}));const h=Buffer.from('<html>subscription</html>');assert.throws(()=>verifyBytes(h,{bytes:h.length,sha256:sha(h),format:'PDF'}));});
 test('dossier generation and complete manifest check are byte-identical',async()=>{assert.deepEqual(derive(fresh()),derive(fresh()));const result=await run('--check');assert.equal(result.status,'PASS_DOCUMENTARY_DOSSIER_ONLY');assert.equal(result.legal_certification_complete,false);});
+
+import {readFile} from 'node:fs/promises';
+test('Romanian closure report preserves real UTF-8 diacritics',async()=>{const s=await readFile(new URL('../../docs/ni-legal-close/NI-LEGAL-CLOSURE.md',import.meta.url),'utf8');assert(s.includes('Constitu\u021bie'));assert(s.includes('\u00cenchiderea'));assert(!s.includes('\u00c3'));assert(!s.includes('\u00c8'));});
