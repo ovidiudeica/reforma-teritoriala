@@ -19,7 +19,9 @@ await test('History closes a focused NI reference branch and restores canonical 
   for(const [width,height] of [[1440,900],[390,844]]){
    const p=await browser.page();
    try{
-    await p.viewport(width,height);await p.navigate(mode==='published'?'https://ovidiudeica.github.io/reforma-teritoriala/':browser.server.url);
+    // A fresh about:blank page has no responsive viewport meta tag. Load the
+    // application before requesting a mobile viewport and its layout checks.
+    await p.navigate(mode==='published'?'https://ovidiudeica.github.io/reforma-teritoriala/':browser.server.url);await p.viewport(width,height);
     await p.call(async function(){await qaApp.selectEntity('view-nistrenia-role-osm-r9581354',{zoom:false});});
     await p.openPanel('entities');await p.click('.tree-visibility-toggle[data-entity-id="view-nistrenia-role-osm-r9581354"]');
     const before=await p.evaluate("({focused:document.activeElement?.dataset.entityId,checked:qaApp.visibleEntityIds.has('osm-r9581354'),open:qaApp.atlasTree.isOpen(qaApp.nistreniaView.cartographicNavigationId)})");
