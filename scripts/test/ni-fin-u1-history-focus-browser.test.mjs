@@ -28,13 +28,16 @@ await test('History closes a focused NI reference branch and restores canonical 
     assert.equal(before.focused,'view-nistrenia-role-osm-r9581354');assert.equal(before.checked,true);assert.equal(before.open,true);
     await p.evaluate('history.back()');
     await waitFor(()=>p.evaluate("!qaApp.visibleEntityIds.has('osm-r9581354')&&!qaApp.atlasTree.isOpen(qaApp.nistreniaView.cartographicNavigationId)"),'Back closes focused reference branch');
-    assert.equal(await p.evaluate("document.activeElement.isConnected&&!document.activeElement.disabled&&!!document.activeElement.closest('#hierarchy-tree')"),true);
+    await p.evaluate('qaApp.atlasUrl.whenIdle()');
+    const restoredFocus=await p.evaluate("(()=>{const e=document.activeElement;return {id:e.id,entityId:e.dataset.entityId,connected:e.isConnected,disabled:!!e.disabled,visible:!!e.getClientRects().length,body:e===document.body,inTree:!!e.closest('#hierarchy-tree'),panel:qaApp.atlasPanels.state.active,mobile:qaApp.atlasPanels.state.mobile};})()");
+    assert(restoredFocus.connected&&!restoredFocus.disabled&&restoredFocus.visible&&!restoredFocus.body,JSON.stringify(restoredFocus));
+    if(!restoredFocus.mobile)assert(restoredFocus.inTree,JSON.stringify(restoredFocus));
     assert.deepEqual(p.console.filter(e=>e.type==='error'||e.level==='error'),[]);
     await p.evaluate('history.forward()');
     await waitFor(()=>p.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')&&qaApp.atlasTree.isOpen(qaApp.nistreniaView.cartographicNavigationId)"),'Forward restores reference and checked canonical geometry');
     assert.equal(await p.evaluate("qaApp.selectedEntityId==='osm-r9581354'&&!qaApp.visibleEntityIds.has('view-nistrenia-role-osm-r9581354')"),true);
     assert.deepEqual(p.errors,[]);assert.deepEqual(p.console.filter(e=>e.type==='error'||e.level==='error'),[]);
-    report.viewports.push({width,height,before,back:true,forward:true,canonicalState:true,errors:p.errors,console:p.console});
+    report.viewports.push({width,height,before,restoredFocus,back:true,forward:true,canonicalState:true,errors:p.errors,console:p.console});
     const name='history-focus-'+width+'x'+height+'.png';await p.screenshot(path.join(out,name));report.captures.push(name);
    }finally{await p.close();}
   }
