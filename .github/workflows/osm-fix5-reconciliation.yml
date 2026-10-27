@@ -1,0 +1,49 @@
+name: OSM-FIX.5 bounded source reconciliation
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/osm-fix5-reconciliation.yml'
+      - 'docs/osm-fix5/**'
+      - 'scripts/audit/osm-fix5*'
+      - 'scripts/lib/osm-fix5*'
+      - 'scripts/test/osm-fix5*'
+      - 'scripts/test/osm_fix5*'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-fix5-reconciliation.yml'
+      - 'docs/osm-fix5/**'
+      - 'scripts/audit/osm-fix5*'
+      - 'scripts/lib/osm-fix5*'
+      - 'scripts/test/osm-fix5*'
+      - 'scripts/test/osm_fix5*'
+permissions:
+  contents: read
+jobs:
+  osm-fix5-reconciliation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install locked geometry dependencies
+        run: npm ci
+      - name: Offline acquisition budgets and no-network regressions
+        run: python3 scripts/test/osm_fix5_capture_test.py
+      - name: Per-ID, drift, provenance and no-promotion regressions
+        run: node --test scripts/test/osm-fix5-*.test.mjs
+      - name: Deterministic read-only dossier and ACTUAL verification
+        run: |
+          node scripts/audit/osm-fix5.mjs --check
+          git diff --exit-code
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: osm-fix5-evidence-${{ github.event.pull_request.head.sha || github.sha }}
+          path: docs/osm-fix5
+          if-no-files-found: error

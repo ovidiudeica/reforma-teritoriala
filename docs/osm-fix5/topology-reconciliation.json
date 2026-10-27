@@ -1,0 +1,757 @@
+{
+  "schema": "osm-fix5-bounded-reconciliation-v1",
+  "base_main": "afb190ab29c0b87526f9065e95159176c1630049",
+  "observation_window": {
+    "from": "2026-10-27T17:45:31.658609+00:00",
+    "to": "2026-10-27T17:48:12.767827+00:00"
+  },
+  "global_source_admission": false,
+  "reuse": {
+    "scope": "Only the previously observed bounded inverse/neighbor domain",
+    "paths": [
+      {
+        "path": "relation/18967493/full.json",
+        "previous_elements_sha256": "b845b44fe0beb3a0c99b7fecb5dc0db7211f5688ec75bfabaa26150a5e9264c0",
+        "current_elements_sha256": "b845b44fe0beb3a0c99b7fecb5dc0db7211f5688ec75bfabaa26150a5e9264c0",
+        "identical": true
+      },
+      {
+        "path": "relation/18968082/full.json",
+        "previous_elements_sha256": "4e8d85efc89e0f1a969683295426f1097315c1d24298bf884ecd5702a5f48436",
+        "current_elements_sha256": "4e8d85efc89e0f1a969683295426f1097315c1d24298bf884ecd5702a5f48436",
+        "identical": true
+      },
+      {
+        "path": "node/12318728194/ways.json",
+        "previous_elements_sha256": "5e33ca08fa68086683427e02a031bb834734ef6dfa5b9ede95302dc7fc15826e",
+        "current_elements_sha256": "5e33ca08fa68086683427e02a031bb834734ef6dfa5b9ede95302dc7fc15826e",
+        "identical": true
+      },
+      {
+        "path": "node/12318728593/ways.json",
+        "previous_elements_sha256": "0eedf79c450001e14dc0e6bb3e3f2a7facbc8f8b7bf72ef85276b39efcf44551",
+        "current_elements_sha256": "0eedf79c450001e14dc0e6bb3e3f2a7facbc8f8b7bf72ef85276b39efcf44551",
+        "identical": true
+      },
+      {
+        "path": "node/11649857778/ways.json",
+        "previous_elements_sha256": "f17a2fd3ee41c039a9ef433a73ae81801edf625008cd461732028ea2b7e29b47",
+        "current_elements_sha256": "f17a2fd3ee41c039a9ef433a73ae81801edf625008cd461732028ea2b7e29b47",
+        "identical": true
+      },
+      {
+        "path": "node/8265822008/ways.json",
+        "previous_elements_sha256": "e7de0ea87d6b375e71b99d39fc52841a43b681c0418eb5225fdcba4008ed893d",
+        "current_elements_sha256": "e7de0ea87d6b375e71b99d39fc52841a43b681c0418eb5225fdcba4008ed893d",
+        "identical": true
+      },
+      {
+        "path": "way/996462603/relations.json",
+        "previous_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "identical": true
+      },
+      {
+        "path": "way/1253279692/relations.json",
+        "previous_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "identical": true
+      },
+      {
+        "path": "way/1376179876/relations.json",
+        "previous_elements_sha256": "7621a3f844ace176638013e94f4c79b868ec10cde84d5feacc1a16db1962bd7e",
+        "current_elements_sha256": "7621a3f844ace176638013e94f4c79b868ec10cde84d5feacc1a16db1962bd7e",
+        "identical": true
+      },
+      {
+        "path": "way/1376180731/relations.json",
+        "previous_elements_sha256": "da5b8254eadd013c3d63295dbfe96413527d151abdef9abb8b8bcb1231776d26",
+        "current_elements_sha256": "da5b8254eadd013c3d63295dbfe96413527d151abdef9abb8b8bcb1231776d26",
+        "identical": true
+      },
+      {
+        "path": "way/1430569787/relations.json",
+        "previous_elements_sha256": "844e3380ebdb848bf33fc65e7907204323ebddb1a3037d78ab5f55b4b65120de",
+        "current_elements_sha256": "844e3380ebdb848bf33fc65e7907204323ebddb1a3037d78ab5f55b4b65120de",
+        "identical": true
+      },
+      {
+        "path": "way/1430569788/relations.json",
+        "previous_elements_sha256": "878784140fa834dc0634a0e033e177b3df5f8eef249daac5d39b40c738b45ab5",
+        "current_elements_sha256": "878784140fa834dc0634a0e033e177b3df5f8eef249daac5d39b40c738b45ab5",
+        "identical": true
+      },
+      {
+        "path": "way/1430569790/relations.json",
+        "previous_elements_sha256": "878784140fa834dc0634a0e033e177b3df5f8eef249daac5d39b40c738b45ab5",
+        "current_elements_sha256": "878784140fa834dc0634a0e033e177b3df5f8eef249daac5d39b40c738b45ab5",
+        "identical": true
+      },
+      {
+        "path": "way/1430569791/relations.json",
+        "previous_elements_sha256": "d3ebd4277be25b66969cbaaa1792fe55fd2e0fcef1e2c7783406a80a2585cdba",
+        "current_elements_sha256": "d3ebd4277be25b66969cbaaa1792fe55fd2e0fcef1e2c7783406a80a2585cdba",
+        "identical": true
+      },
+      {
+        "path": "way/1430569793/relations.json",
+        "previous_elements_sha256": "4c5ff02b814673bdd6936be02666e26ff60f77c534a9eeaba3243a2488da67e3",
+        "current_elements_sha256": "4c5ff02b814673bdd6936be02666e26ff60f77c534a9eeaba3243a2488da67e3",
+        "identical": true
+      },
+      {
+        "path": "way/1430569795/relations.json",
+        "previous_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "identical": true
+      },
+      {
+        "path": "way/1431992242/relations.json",
+        "previous_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "identical": true
+      },
+      {
+        "path": "way/1492661536/relations.json",
+        "previous_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "identical": true
+      },
+      {
+        "path": "way/1494605623/relations.json",
+        "previous_elements_sha256": "ce1fbd8acc73791e258a6ac0e6d089a3b40ec5c08ee560674806c21898534940",
+        "current_elements_sha256": "ce1fbd8acc73791e258a6ac0e6d089a3b40ec5c08ee560674806c21898534940",
+        "identical": true
+      },
+      {
+        "path": "way/1494605624/relations.json",
+        "previous_elements_sha256": "36d51c1ae43c926744555d35e018134897c376ba24302e0052f6e2d4ce2d436f",
+        "current_elements_sha256": "36d51c1ae43c926744555d35e018134897c376ba24302e0052f6e2d4ce2d436f",
+        "identical": true
+      },
+      {
+        "path": "relation/1752520/full.json",
+        "previous_elements_sha256": "e33c70a5783cd7cda40d94a2dc79d2492de71f6ae6ba6c2e51d6697d689786be",
+        "current_elements_sha256": "e33c70a5783cd7cda40d94a2dc79d2492de71f6ae6ba6c2e51d6697d689786be",
+        "identical": true
+      },
+      {
+        "path": "relation/1782011/full.json",
+        "previous_elements_sha256": "d804eb30017e193965236419ee65aae269a419a6d7a3e30c368394de4a5846e2",
+        "current_elements_sha256": "d804eb30017e193965236419ee65aae269a419a6d7a3e30c368394de4a5846e2",
+        "identical": true
+      },
+      {
+        "path": "relation/13014028/full.json",
+        "previous_elements_sha256": "e9307fd25bcf408bbb0e97f26b916447f8c74f87eb88df8894e7f933c70008bf",
+        "current_elements_sha256": "e9307fd25bcf408bbb0e97f26b916447f8c74f87eb88df8894e7f933c70008bf",
+        "identical": true
+      },
+      {
+        "path": "relation/18256679/full.json",
+        "previous_elements_sha256": "9d73b3aa9d8ef14e191b791c28b0e81b5e84a88bc908903096a985f8eb59303d",
+        "current_elements_sha256": "9d73b3aa9d8ef14e191b791c28b0e81b5e84a88bc908903096a985f8eb59303d",
+        "identical": true
+      },
+      {
+        "path": "relation/18256680/full.json",
+        "previous_elements_sha256": "bdef4f308e888d4e07b9a6aabe63a88a3a1f25640bb6cca2162006ea7a50160a",
+        "current_elements_sha256": "bdef4f308e888d4e07b9a6aabe63a88a3a1f25640bb6cca2162006ea7a50160a",
+        "identical": true
+      },
+      {
+        "path": "relation/18822471/full.json",
+        "previous_elements_sha256": "f69ee339ccf43dbf98e400ca6bc5a548f73b8df04be1def9b27e59d955d9b7f1",
+        "current_elements_sha256": "f69ee339ccf43dbf98e400ca6bc5a548f73b8df04be1def9b27e59d955d9b7f1",
+        "identical": true
+      },
+      {
+        "path": "relation/18966832/full.json",
+        "previous_elements_sha256": "1a2c5de09fdf3e127adf0dde54a9ec6200ef8c0944a7ae650967ad558b7c73be",
+        "current_elements_sha256": "1a2c5de09fdf3e127adf0dde54a9ec6200ef8c0944a7ae650967ad558b7c73be",
+        "identical": true
+      },
+      {
+        "path": "relation/18967493/relations.json",
+        "previous_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "identical": true
+      },
+      {
+        "path": "relation/18968082/relations.json",
+        "previous_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current_elements_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "identical": true
+      }
+    ],
+    "changed_paths": [],
+    "unchanged": true,
+    "replay_required": false,
+    "simulation_reexecuted": false,
+    "source_atomic": false
+  },
+  "prior_preflight": {
+    "path": "docs/osm-fix4/preflight.json",
+    "sha256": "4f81fcce462a387c6d18e99cc1ecfd1d338200c9671fc64cc9c99a8789698826"
+  },
+  "simulation_reexecuted": false,
+  "bounded_result": {
+    "object_count": 3218,
+    "geometry_relation_ids": [
+      1752520,
+      1782011,
+      13014028,
+      18256679,
+      18256680,
+      18822471,
+      18966832,
+      18967493,
+      18968082
+    ],
+    "before": [
+      {
+        "id": 1752520,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 262,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "1d940b5e5c6e637992541cfca1c75028b1b349004bf0d515a1e12e775e38f903",
+        "error": null
+      },
+      {
+        "id": 1782011,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 931,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "55e207497d697f88d04e2cd42ebd0f491be852943dda7526005f18003a5bee25",
+        "error": null
+      },
+      {
+        "id": 13014028,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 362,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "abda83237de925e2af1d369f5578935644431ce718c1b5fca3cb61727b4f4053",
+        "error": null
+      },
+      {
+        "id": 18256679,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 483,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "73335845c98388fc78f5a55a250d5fa4076fa56954710f216370283b9e23c0e0",
+        "error": null
+      },
+      {
+        "id": 18256680,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 510,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "3d5566ac808ab537e1aa4c11f5c3f95895ca602b9cf0c24647f21e940c903763",
+        "error": null
+      },
+      {
+        "id": 18822471,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 495,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "5235f2f4d5a7c010c20f2bb49a4726c1656035c2b4191e7ad283281a79bd86e9",
+        "error": null
+      },
+      {
+        "id": 18966832,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 448,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "c7d87fd1326ab384c351b1e009fec38516d6b9ade1084d1ce2e3e7d0a01281f8",
+        "error": null
+      },
+      {
+        "id": 18967493,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 465,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 1,
+          "topology_issues": [
+            {
+              "relation_id": 18967493,
+              "relation_version": 6,
+              "odd_endpoints": {
+                "outer": [
+                  {
+                    "node_id": 12318728194,
+                    "degree": 1
+                  },
+                  {
+                    "node_id": 12318728593,
+                    "degree": 1
+                  }
+                ],
+                "inner": []
+              },
+              "coincident_distinct_endpoint_groups": [
+                {
+                  "role": "outer",
+                  "coordinates": [
+                    28.858393,
+                    46.8331996
+                  ],
+                  "node_ids": [
+                    12318728194,
+                    12318728593
+                  ]
+                }
+              ],
+              "invalid_geometry_members": []
+            }
+          ]
+        },
+        "geometry_valid": false,
+        "geometry_sha256": null,
+        "error": "NODE_INCIDENCE_OR_DEPENDENCY_FAILURE"
+      },
+      {
+        "id": 18968082,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 375,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 1,
+          "topology_issues": [
+            {
+              "relation_id": 18968082,
+              "relation_version": 7,
+              "odd_endpoints": {
+                "outer": [
+                  {
+                    "node_id": 11649857778,
+                    "degree": 1
+                  },
+                  {
+                    "node_id": 8265822008,
+                    "degree": 1
+                  }
+                ],
+                "inner": []
+              },
+              "coincident_distinct_endpoint_groups": [
+                {
+                  "role": "outer",
+                  "coordinates": [
+                    28.9073227,
+                    47.0786791
+                  ],
+                  "node_ids": [
+                    11649857778,
+                    8265822008
+                  ]
+                }
+              ],
+              "invalid_geometry_members": []
+            }
+          ]
+        },
+        "geometry_valid": false,
+        "geometry_sha256": null,
+        "error": "NODE_INCIDENCE_OR_DEPENDENCY_FAILURE"
+      }
+    ],
+    "after": [
+      {
+        "id": 1752520,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 262,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "1d940b5e5c6e637992541cfca1c75028b1b349004bf0d515a1e12e775e38f903",
+        "error": null
+      },
+      {
+        "id": 1782011,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 931,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "55e207497d697f88d04e2cd42ebd0f491be852943dda7526005f18003a5bee25",
+        "error": null
+      },
+      {
+        "id": 13014028,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 362,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "abda83237de925e2af1d369f5578935644431ce718c1b5fca3cb61727b4f4053",
+        "error": null
+      },
+      {
+        "id": 18256679,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 483,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "73335845c98388fc78f5a55a250d5fa4076fa56954710f216370283b9e23c0e0",
+        "error": null
+      },
+      {
+        "id": 18256680,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 510,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "3d5566ac808ab537e1aa4c11f5c3f95895ca602b9cf0c24647f21e940c903763",
+        "error": null
+      },
+      {
+        "id": 18822471,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 495,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "5235f2f4d5a7c010c20f2bb49a4726c1656035c2b4191e7ad283281a79bd86e9",
+        "error": null
+      },
+      {
+        "id": 18966832,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 448,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "c7d87fd1326ab384c351b1e009fec38516d6b9ade1084d1ce2e3e7d0a01281f8",
+        "error": null
+      },
+      {
+        "id": 18967493,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 464,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "231f5689c1ec77504db50662d27414de7c1634885bd76919c146719a9aba55e7",
+        "error": null
+      },
+      {
+        "id": 18968082,
+        "closure": {
+          "scope": "dependency-and-node-incidence-only",
+          "full_topology_certified": false,
+          "code": "MD",
+          "selected_relation_count": 1,
+          "checked_dependency_count": 374,
+          "missing_reference_count": 0,
+          "missing_references": [],
+          "invalid_coordinate_count": 0,
+          "invalid_coordinates": [],
+          "topology_issue_count": 0,
+          "topology_issues": []
+        },
+        "geometry_valid": true,
+        "geometry_sha256": "c195e964c8cee78639dfcf43bf4e005e5ae5a7d1307e217b250dd15c8b92960e",
+        "error": null
+      }
+    ],
+    "proposals": [
+      {
+        "relation": 18967493,
+        "relation_version": 6,
+        "way": 1376179876,
+        "way_version": 8,
+        "index": 457,
+        "from": 12318728194,
+        "to": 12318728593,
+        "current_way_version": 8,
+        "current_relation_version": 6,
+        "current_node_index": 457,
+        "proposal_differs_from_reference": false,
+        "technical_preconditions": true,
+        "ordered_coordinates_identical": true,
+        "only_one_reference_changed": true,
+        "way_tags_unchanged": true,
+        "nodes_preserved": true,
+        "source_before_sha256": "22b2340f680f72a9e19bfa646cb6b5e218f6dd3f8b705cfc9afbb8278c307239",
+        "proposed_after_sha256": "8acc73d3043c77273e3782ca96b426ce111d35a264a87e50de34292ed204bbfb",
+        "mapper_intent": "MAPPER_INTENT_UNRESOLVED",
+        "mapper_review_record": null,
+        "upload_authorization": null
+      },
+      {
+        "relation": 18968082,
+        "relation_version": 7,
+        "way": 1376180731,
+        "way_version": 6,
+        "index": 227,
+        "from": 11649857778,
+        "to": 8265822008,
+        "current_way_version": 6,
+        "current_relation_version": 7,
+        "current_node_index": 227,
+        "proposal_differs_from_reference": false,
+        "technical_preconditions": true,
+        "ordered_coordinates_identical": true,
+        "only_one_reference_changed": true,
+        "way_tags_unchanged": true,
+        "nodes_preserved": true,
+        "source_before_sha256": "53da22dd52814c31ffbb7bb6748a52177c3f0c705b81976155b80f3dd59d7fdb",
+        "proposed_after_sha256": "3b7721a7405c42922dcf77efc830ccd6829dbc8e8c7412a318b1a33c34212b38",
+        "mapper_intent": "MAPPER_INTENT_UNRESOLVED",
+        "mapper_review_record": null,
+        "upload_authorization": null
+      }
+    ],
+    "neighbors_identical": true,
+    "conditional_simulation_pass": true
+  },
+  "historical_alternative_witnesses": [
+    {
+      "relation_id": 18967493,
+      "connectivity_unchanged_since": "2026-01-08T17:48:30Z",
+      "observed_at": "2026-10-27T17:48:12.767827+00:00",
+      "freshness_window_start": "2026-10-13T17:48:12.767Z",
+      "objects": [
+        {
+          "type": "relation",
+          "id": 18967493,
+          "version": 6,
+          "timestamp": "2026-01-08T17:48:30Z"
+        },
+        {
+          "type": "way",
+          "id": 1376179876,
+          "version": 8,
+          "timestamp": "2025-09-23T12:18:04Z"
+        },
+        {
+          "type": "way",
+          "id": 1430569793,
+          "version": 1,
+          "timestamp": "2025-09-17T14:07:13Z"
+        }
+      ],
+      "connectivity_signature_sha256": "795228c85613b3e91b4a106e1896ef8e791394a3d2427b56fec68ea6e75d5f72",
+      "current_connectivity_predates_freshness_window": true,
+      "scope": "Relation membership and way node-ID order; not a global geometric or legal certificate"
+    },
+    {
+      "relation_id": 18968082,
+      "connectivity_unchanged_since": "2026-04-10T06:12:32Z",
+      "observed_at": "2026-10-27T17:48:12.767827+00:00",
+      "freshness_window_start": "2026-10-13T17:48:12.767Z",
+      "objects": [
+        {
+          "type": "relation",
+          "id": 18968082,
+          "version": 7,
+          "timestamp": "2026-03-31T13:11:32Z"
+        },
+        {
+          "type": "way",
+          "id": 1376180731,
+          "version": 6,
+          "timestamp": "2026-04-10T06:12:32Z"
+        },
+        {
+          "type": "way",
+          "id": 1492661495,
+          "version": 1,
+          "timestamp": "2026-03-25T13:44:15Z"
+        },
+        {
+          "type": "way",
+          "id": 1492661493,
+          "version": 1,
+          "timestamp": "2026-03-25T13:44:15Z"
+        },
+        {
+          "type": "way",
+          "id": 1376180490,
+          "version": 4,
+          "timestamp": "2026-03-31T13:11:32Z"
+        },
+        {
+          "type": "way",
+          "id": 1494605625,
+          "version": 1,
+          "timestamp": "2026-03-31T13:11:32Z"
+        },
+        {
+          "type": "way",
+          "id": 1494605624,
+          "version": 1,
+          "timestamp": "2026-03-31T13:11:32Z"
+        }
+      ],
+      "connectivity_signature_sha256": "a4b57ca96115dcdf9dafa5b629117a966338fe7bccb7c0f0b52efc0db8083d07",
+      "current_connectivity_predates_freshness_window": true,
+      "scope": "Relation membership and way node-ID order; not a global geometric or legal certificate"
+    }
+  ],
+  "OSM_TOPOLOGY_VALIDATED": false
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "osm-fix5-bounded-reconciliation-v1",
+  "base_main": "afb190ab29c0b87526f9065e95159176c1630049",
+  "observation_window": {
+    "from": "2026-10-27T17:45:31.658609+00:00",
+    "to": "2026-10-27T17:48:12.767827+00:00"
+  },
+  "global_source_admission": false,
+  "tools_status": "IMPLEMENTED_REQUIRES_EXACT_HEAD_CI_AND_CONTROLLED_MERGE",
+  "candidate_validated": false,
+  "promotion_ready": false,
+  "protected_promotion_authorized": false,
+  "exact_candidate_sha": null,
+  "exact_candidate_manifest": null,
+  "reason": "No complete qualified candidate exists; requesting promotion approval now would be premature",
+  "required_before_request": [
+    {
+      "id": "FX5-02",
+      "cause": "Two original current relations remain open by node identity",
+      "evidence": "topology-reconciliation.json",
+      "domain": "Country source topology",
+      "allowed": "Read-only review and conditional simulations",
+      "external": "Mapper intent and separately authorized public correction",
+      "gate": "TOPOLOGY_BLOCKED"
+    },
+    {
+      "id": "FX5-03",
+      "cause": "No mapper confirmation for the exact two substitutions",
+      "evidence": "mapper-intent-status.json",
+      "domain": "Public OSM edits",
+      "allowed": "Prepare exact diff; no upload or contact",
+      "external": "Competent mapper review and separate user authorization",
+      "gate": "MAPPER_INTENT_UNRESOLVED"
+    },
+    {
+      "id": "FX5-04",
+      "cause": "Geofabrik reference scope is not an exhaustive qualified Overpass-area selection",
+      "evidence": "candidate-source-validation.json",
+      "domain": "RO/MD selection",
+      "allowed": "Exact per-ID qualification with authentic complete evidence",
+      "external": "Complete dependency/history and area-equivalence evidence",
+      "gate": "SELECTION_UNQUALIFIED"
+    },
+    {
+      "id": "FX5-05",
+      "cause": "Historical gaps/provenance and formal UNKNOWN remain unaccepted",
+      "evidence": "sources/historical-source-availability.json",
+      "domain": "Temporal/source qualification",
+      "allowed": "Reuse verified originals; resolve individual missing versions without bypassing redactions",
+      "external": "Authentic historical originals and applicable provenance admission",
+      "gate": "TEMPORAL_PROVENANCE_INCOMPLETE"
+    },
+    {
+      "id": "FX5-06",
+      "cause": "Bounded per-ID observations are not one atomic complete RO/MD snapshot",
+      "evidence": "upstream-status.json",
+      "domain": "Current source candidate",
+      "allowed": "Acquire a complete coherent candidate after technical gates become satisfiable",
+      "external": "Qualified acquisition transport and source data",
+      "gate": "NO_COMPLETE_CANDIDATE"
+    },
+    {
+      "id": "FX5-07",
+      "cause": "No separate protected promotion approval; candidate not yet eligible",
+      "evidence": "promotion-readiness.json",
+      "domain": "Protected source promotion",
+      "allowed": "Prepare exact promotion/rollback dossier only for a fully valid candidate",
+      "external": "Specific owner authorization after qualification",
+      "gate": "PROMOTION_NOT_READY"
+    }
+  ],
+  "rollback": "No promotion executed; protected source and ACTUAL remain the unchanged baseline"
+}

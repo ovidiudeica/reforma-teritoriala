@@ -1,0 +1,48 @@
+{
+  "schema": "osm-fix5-bounded-reconciliation-v1",
+  "base_main": "afb190ab29c0b87526f9065e95159176c1630049",
+  "observation_window": {
+    "from": "2026-10-27T17:45:31.658609+00:00",
+    "to": "2026-10-27T17:48:12.767827+00:00"
+  },
+  "global_source_admission": false,
+  "reused_manifests": [
+    {
+      "path": "docs/osm-fix3/manifest.json",
+      "sha256": "c045ac7d124facffc07dfe271027c6ed5293024d219038162c6245401593166c",
+      "verified_files": 19
+    },
+    {
+      "path": "docs/osm-fix4/manifest-sha256.json",
+      "sha256": "8160da09da27e42cd213b45893d6b4e15e56c65d88dea973cb0ae8d260fbbdaf",
+      "verified_files": 13
+    }
+  ],
+  "source_files": [
+    {
+      "path": "sources/official-observations.json",
+      "bytes": 1323201,
+      "sha256": "f5db83a663c515fff9eba13cdc88d53735e07307b511fd2be55ce463896bf966"
+    },
+    {
+      "path": "sources/addition-full.json",
+      "bytes": 16586,
+      "sha256": "b58bbd67f3f1f485eb4d80b3c0fcf0229dcd02213cd7a92d3071c4a104cd6d68"
+    },
+    {
+      "path": "sources/raw-original-verification.json",
+      "bytes": 10708,
+      "sha256": "8703f21e5965230d3bc7050383539635a357a62d553e635bf8836e8843983ae6"
+    },
+    {
+      "path": "sources/historical-source-availability.json",
+      "bytes": 2613,
+      "sha256": "ef08efd2fcfda17684c5ae2d81e469acc51a99dbcd310c1a0f4ac6f5a5edc9fb"
+    },
+    {
+      "path": "sources/oct18-artifact-availability.json",
+      "bytes": 277,
+      "sha256": "e16db011f546fcf93b15919b093071bda91c533f0a6e7e89528a19d830354283"
+    }
+  ]
+}

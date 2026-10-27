@@ -1,0 +1,139 @@
+{
+  "schema": "osm-fix5-bounded-reconciliation-v1",
+  "base_main": "afb190ab29c0b87526f9065e95159176c1630049",
+  "observation_window": {
+    "from": "2026-10-27T17:45:31.658609+00:00",
+    "to": "2026-10-27T17:48:12.767827+00:00"
+  },
+  "global_source_admission": false,
+  "status": "BLOCKED_SOURCE_QUALIFICATION",
+  "accepted_actual_pin": {
+    "path": "data/sources/osm-current.json",
+    "sha256": "bc005e361efe419b8e64df972f181378e8411a0c8295cce15595cb9037d104f3",
+    "snapshot_at": "2026-10-05T23:50:05.218Z"
+  },
+  "independent_source_current_manifest": {
+    "status": "PROPOSED_IN_DRAFT_398_NOT_PROMOTED",
+    "path": "data/sources/osm-source-current.json"
+  },
+  "historical_source_receipts": {
+    "full_history": {
+      "url": "https://planet.openstreetmap.org/pbf/full-history/history-261019.osm.pbf",
+      "expected_bytes": 163893678040,
+      "etag": "\"5d9fe0daa39fee0a74e78c83582be15a-9769\"",
+      "published_md5": "0587abc2f5a3a29a81ce3b067357933b",
+      "base_epoch": "2026-10-19T00:00:04Z",
+      "target_epoch": "2026-10-20T20:23:47Z",
+      "source_qualified": false,
+      "status": "FULL_BASE_BYTES_VERIFIED_NOT_SOURCE_QUALIFIED",
+      "pid": 19052,
+      "verified_downloaded_bytes": 163893678040,
+      "updated_at_utc": "2026-10-23T08:00:52.646724+00:00",
+      "source_sha256": "149ce6e8d1d4aad41e94fddb8f9721f80697d42d51e5f612879c98d1c236e5a9",
+      "actual_md5": "0587abc2f5a3a29a81ce3b067357933b",
+      "receipt_sha256": "1f686b6b768b957bc8161e9afce476c93a46561e2c7fc33fadc8a42967f3a517",
+      "original_present_now": true,
+      "observed_bytes_now": 163893678040,
+      "binary_rehashed_this_session": false
+    },
+    "historical_graph": {
+      "report_sha256": "335e69cd06fc4b7492852f86548fd6cd2dbfe7d9874bf5ffa2bd7bb3f50acf6a",
+      "history_gap_ids": 63,
+      "missing_versions": 393,
+      "dependency_closure_certified": false,
+      "source_qualified": false,
+      "scope": "Historical report, not fresh source admission",
+      "subset_only": true
+    },
+    "extracts": [
+      {
+        "country": "RO",
+        "name": "romania-261020.osm.pbf",
+        "original_exists_now": true,
+        "observed_bytes": 331337543,
+        "historically_verified_sha256": "426fa4124f784d33001395804fbcca526329c18abd2dd39a7204f67bf3c9966a",
+        "epoch": "2026-10-20T20:23:47Z",
+        "tag_candidates": 3646,
+        "replay_report_sha256": "5ddcde3803f84fb9057ccafb01561c8f6ee7d8adc500208b2d1883068f2c3f2d",
+        "original_rehashed_this_session": false
+      },
+      {
+        "country": "MD",
+        "name": "moldova-261020.osm.pbf",
+        "original_exists_now": true,
+        "observed_bytes": 101391048,
+        "historically_verified_sha256": "17288ab89aa7f07cfeefb35749a9d562127ffd74f9bae6ffc402af470fb4f18f",
+        "epoch": "2026-10-20T20:23:47Z",
+        "tag_candidates": 2641,
+        "replay_report_sha256": "5ddcde3803f84fb9057ccafb01561c8f6ee7d8adc500208b2d1883068f2c3f2d",
+        "original_rehashed_this_session": false
+      }
+    ],
+    "not_source_qualification": true,
+    "recorded_global_open_exceptions": {
+      "source": "docs/web-ni-u1/acceptance/remaining-exceptions.json",
+      "sha256": "ac15c8c713b66b7915e1301fec07209f89dbd273160e33f8f9f0f1871f31f365",
+      "formal_unknown_relations": 242,
+      "lacunary_histories": 159,
+      "missing_versions": 641,
+      "scope": "Previously accepted open-exception register, not a new global census"
+    }
+  },
+  "current_addition_bounded_graph": {
+    "closure": {
+      "scope": "dependency-and-node-incidence-only",
+      "full_topology_certified": false,
+      "code": "MD",
+      "selected_relation_count": 1,
+      "checked_dependency_count": 70,
+      "missing_reference_count": 0,
+      "missing_references": [],
+      "invalid_coordinate_count": 0,
+      "invalid_coordinates": [],
+      "topology_issue_count": 0,
+      "topology_issues": []
+    },
+    "geometry_valid": true,
+    "geometry_sha256": "76dea9997158b9248d57bb8d16622c3dee99ff01ee710a59be908da36482a1de",
+    "scope": "One current relation only; not a complete country source"
+  },
+  "blockers": [
+    {
+      "id": "FX5-02",
+      "cause": "Two original current relations remain open by node identity",
+      "evidence": "topology-reconciliation.json",
+      "domain": "Country source topology",
+      "allowed": "Read-only review and conditional simulations",
+      "external": "Mapper intent and separately authorized public correction",
+      "gate": "TOPOLOGY_BLOCKED"
+    },
+    {
+      "id": "FX5-04",
+      "cause": "Geofabrik reference scope is not an exhaustive qualified Overpass-area selection",
+      "evidence": "candidate-source-validation.json",
+      "domain": "RO/MD selection",
+      "allowed": "Exact per-ID qualification with authentic complete evidence",
+      "external": "Complete dependency/history and area-equivalence evidence",
+      "gate": "SELECTION_UNQUALIFIED"
+    },
+    {
+      "id": "FX5-05",
+      "cause": "Historical gaps/provenance and formal UNKNOWN remain unaccepted",
+      "evidence": "sources/historical-source-availability.json",
+      "domain": "Temporal/source qualification",
+      "allowed": "Reuse verified originals; resolve individual missing versions without bypassing redactions",
+      "external": "Authentic historical originals and applicable provenance admission",
+      "gate": "TEMPORAL_PROVENANCE_INCOMPLETE"
+    },
+    {
+      "id": "FX5-06",
+      "cause": "Bounded per-ID observations are not one atomic complete RO/MD snapshot",
+      "evidence": "upstream-status.json",
+      "domain": "Current source candidate",
+      "allowed": "Acquire a complete coherent candidate after technical gates become satisfiable",
+      "external": "Qualified acquisition transport and source data",
+      "gate": "NO_COMPLETE_CANDIDATE"
+    }
+  ],
+  "OSM_SOURCE_CANDIDATE_VALIDATED": false
+}

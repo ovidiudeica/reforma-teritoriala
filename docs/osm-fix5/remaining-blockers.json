@@ -1,0 +1,98 @@
+{
+  "schema": "osm-fix5-bounded-reconciliation-v1",
+  "base_main": "afb190ab29c0b87526f9065e95159176c1630049",
+  "observation_window": {
+    "from": "2026-10-27T17:45:31.658609+00:00",
+    "to": "2026-10-27T17:48:12.767827+00:00"
+  },
+  "global_source_admission": false,
+  "blockers": [
+    {
+      "id": "FX5-01",
+      "cause": "Original Oct18 candidate is not available in the Actions artifact API",
+      "evidence": "sources/oct18-artifact-availability.json",
+      "domain": "Exact Oct18 byte/inventory replay",
+      "allowed": "Recover an authentic original or retain the limitation; never substitute Oct20 bytes",
+      "external": "Original artifact/cache owner",
+      "gate": "DIRECT_OCT18_REPLAY_NOT_DEMONSTRATED"
+    },
+    {
+      "id": "FX5-02",
+      "cause": "Two original current relations remain open by node identity",
+      "evidence": "topology-reconciliation.json",
+      "domain": "Country source topology",
+      "allowed": "Read-only review and conditional simulations",
+      "external": "Mapper intent and separately authorized public correction",
+      "gate": "TOPOLOGY_BLOCKED"
+    },
+    {
+      "id": "FX5-03",
+      "cause": "No mapper confirmation for the exact two substitutions",
+      "evidence": "mapper-intent-status.json",
+      "domain": "Public OSM edits",
+      "allowed": "Prepare exact diff; no upload or contact",
+      "external": "Competent mapper review and separate user authorization",
+      "gate": "MAPPER_INTENT_UNRESOLVED"
+    },
+    {
+      "id": "FX5-04",
+      "cause": "Geofabrik reference scope is not an exhaustive qualified Overpass-area selection",
+      "evidence": "candidate-source-validation.json",
+      "domain": "RO/MD selection",
+      "allowed": "Exact per-ID qualification with authentic complete evidence",
+      "external": "Complete dependency/history and area-equivalence evidence",
+      "gate": "SELECTION_UNQUALIFIED"
+    },
+    {
+      "id": "FX5-05",
+      "cause": "Historical gaps/provenance and formal UNKNOWN remain unaccepted",
+      "evidence": "sources/historical-source-availability.json",
+      "domain": "Temporal/source qualification",
+      "allowed": "Reuse verified originals; resolve individual missing versions without bypassing redactions",
+      "external": "Authentic historical originals and applicable provenance admission",
+      "gate": "TEMPORAL_PROVENANCE_INCOMPLETE"
+    },
+    {
+      "id": "FX5-06",
+      "cause": "Bounded per-ID observations are not one atomic complete RO/MD snapshot",
+      "evidence": "upstream-status.json",
+      "domain": "Current source candidate",
+      "allowed": "Acquire a complete coherent candidate after technical gates become satisfiable",
+      "external": "Qualified acquisition transport and source data",
+      "gate": "NO_COMPLETE_CANDIDATE"
+    },
+    {
+      "id": "FX5-07",
+      "cause": "No separate protected promotion approval; candidate not yet eligible",
+      "evidence": "promotion-readiness.json",
+      "domain": "Protected source promotion",
+      "allowed": "Prepare exact promotion/rollback dossier only for a fully valid candidate",
+      "external": "Specific owner authorization after qualification",
+      "gate": "PROMOTION_NOT_READY"
+    }
+  ],
+  "flags": {
+    "OSM_FIX5_AUDIT_COMPLETE": true,
+    "OSM_11_MISSING_MD_RECONCILED": false,
+    "OSM_RETIREMENT_TRANSITIONS_VALIDATED": true,
+    "OSM_CANDIDATE_SELECTION_COMPLETE": false,
+    "OSM_RELATION_WAY_NODE_CLOSURE_PASS": false,
+    "OSM_TOPOLOGY_VALIDATED": false,
+    "OSM_SOURCE_CANDIDATE_VALIDATED": false,
+    "HORESTI_MAPPER_INTENT_CONFIRMED": false,
+    "BUNETI_MAPPER_INTENT_CONFIRMED": false,
+    "CONDITIONAL_SIMULATION_PASS": true,
+    "UPSTREAM_TOPOLOGY_FIXED": false,
+    "PUBLIC_OSM_EDIT_AUTHORIZED": false,
+    "PUBLIC_OSM_EDIT_EXECUTED": false,
+    "OSM_SOURCE_PROMOTION_READY": false,
+    "OSM_SOURCE_PROMOTED": false,
+    "OSM_FRESHNESS_PASS": false,
+    "ACTUAL_INTEGRITY_PASS": true,
+    "NI_FUNCTIONAL_COMPLETE": true,
+    "WEB_NI_U1_ROADMAP_CLOSED": true,
+    "ISSUE_396_RESOLVED": false,
+    "P91_IMPORT_ALLOWED": false,
+    "READY_FOR_UA_CV0": false
+  }
+}

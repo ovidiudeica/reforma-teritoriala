@@ -1,0 +1,63 @@
+{
+  "full_history": {
+    "url": "https://planet.openstreetmap.org/pbf/full-history/history-261019.osm.pbf",
+    "expected_bytes": 163893678040,
+    "etag": "\"5d9fe0daa39fee0a74e78c83582be15a-9769\"",
+    "published_md5": "0587abc2f5a3a29a81ce3b067357933b",
+    "base_epoch": "2026-10-19T00:00:04Z",
+    "target_epoch": "2026-10-20T20:23:47Z",
+    "source_qualified": false,
+    "status": "FULL_BASE_BYTES_VERIFIED_NOT_SOURCE_QUALIFIED",
+    "pid": 19052,
+    "verified_downloaded_bytes": 163893678040,
+    "updated_at_utc": "2026-10-23T08:00:52.646724+00:00",
+    "source_sha256": "149ce6e8d1d4aad41e94fddb8f9721f80697d42d51e5f612879c98d1c236e5a9",
+    "actual_md5": "0587abc2f5a3a29a81ce3b067357933b",
+    "receipt_sha256": "1f686b6b768b957bc8161e9afce476c93a46561e2c7fc33fadc8a42967f3a517",
+    "original_present_now": true,
+    "observed_bytes_now": 163893678040,
+    "binary_rehashed_this_session": false
+  },
+  "historical_graph": {
+    "report_sha256": "335e69cd06fc4b7492852f86548fd6cd2dbfe7d9874bf5ffa2bd7bb3f50acf6a",
+    "history_gap_ids": 63,
+    "missing_versions": 393,
+    "dependency_closure_certified": false,
+    "source_qualified": false,
+    "scope": "Historical report, not fresh source admission",
+    "subset_only": true
+  },
+  "extracts": [
+    {
+      "country": "RO",
+      "name": "romania-261020.osm.pbf",
+      "original_exists_now": true,
+      "observed_bytes": 331337543,
+      "historically_verified_sha256": "426fa4124f784d33001395804fbcca526329c18abd2dd39a7204f67bf3c9966a",
+      "epoch": "2026-10-20T20:23:47Z",
+      "tag_candidates": 3646,
+      "replay_report_sha256": "5ddcde3803f84fb9057ccafb01561c8f6ee7d8adc500208b2d1883068f2c3f2d",
+      "original_rehashed_this_session": false
+    },
+    {
+      "country": "MD",
+      "name": "moldova-261020.osm.pbf",
+      "original_exists_now": true,
+      "observed_bytes": 101391048,
+      "historically_verified_sha256": "17288ab89aa7f07cfeefb35749a9d562127ffd74f9bae6ffc402af470fb4f18f",
+      "epoch": "2026-10-20T20:23:47Z",
+      "tag_candidates": 2641,
+      "replay_report_sha256": "5ddcde3803f84fb9057ccafb01561c8f6ee7d8adc500208b2d1883068f2c3f2d",
+      "original_rehashed_this_session": false
+    }
+  ],
+  "not_source_qualification": true,
+  "recorded_global_open_exceptions": {
+    "source": "docs/web-ni-u1/acceptance/remaining-exceptions.json",
+    "sha256": "ac15c8c713b66b7915e1301fec07209f89dbd273160e33f8f9f0f1871f31f365",
+    "formal_unknown_relations": 242,
+    "lacunary_histories": 159,
+    "missing_versions": 641,
+    "scope": "Previously accepted open-exception register, not a new global census"
+  }
+}
