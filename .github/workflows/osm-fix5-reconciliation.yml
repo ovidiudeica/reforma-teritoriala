@@ -31,6 +31,8 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.21.0'
+      - name: Install locked geometry dependencies
+        run: npm ci
       - name: Offline acquisition budgets and no-network regressions
         run: python3 scripts/test/osm_fix5_capture_test.py
       - name: Per-ID, drift, provenance and no-promotion regressions
