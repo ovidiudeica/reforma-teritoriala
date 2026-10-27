@@ -14,6 +14,10 @@ Prima probă negativă a capturii a demonstrat că verificarea plafonului numai 
 
 Noul gate de reutilizare respinge un witness absent, versiuni/coordonate contradictorii și driftul dependențelor chiar dacă versiunile celor două ways nu s-au schimbat. Istoricele trebuie să fie consecutive, să corespundă epocii acceptate și payloadului pinuit. HTTP410 fără istoric terminal invizibil nu demonstrează automat retragerea.
 
+## Remedierea tehnică RM-054
+
+O probă negativă suplimentară a demonstrat că graful `/full` al relației noi putea avea o versiune a rădăcinii diferită de răspunsul curent/istoric. Validatorul compară acum explicit versiunea, timestampul, changesetul, vizibilitatea, tagurile și membrii rădăcinii înainte de evaluarea geometriei. Logurile înainte/după sunt conservate în `sources/full-root-*.log.gz`; sursa reală nu avea această contradicție.
+
 ## Deficitul net de 11 și limitele inventarului din 18 octombrie
 
 Registrul per-ID este `source-transition-register.json`: 12 retrageri demonstrate și adăugarea `21515245`, cu versiuni, changeseturi, CUATM, timestampuri și hashuri individuale.

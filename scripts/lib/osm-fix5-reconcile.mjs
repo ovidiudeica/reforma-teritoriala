@@ -6,7 +6,7 @@ import {auditOsmClosure} from './osm-closure-audit.mjs';
 import {relationGeometry} from './osm-fix4-preflight.mjs';
 const stable=x=>Array.isArray(x)?x.map(stable):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,stable(x[k])])):x;
 export const sha=x=>createHash('sha256').update(Buffer.isBuffer(x)||typeof x==='string'?x:JSON.stringify(stable(x))).digest('hex');
-export const equal=(a,b)=>sha(a)===sha(b);
+export const equal=(a,b)=>a===b||(a!==undefined&&b!==undefined&&sha(a)===sha(b));
 export function indexRows(rows){
  assert(Array.isArray(rows));const index=new Map();
  for(const r of rows){assert.match(r.path,/^(relation|way|node)\/[1-9][0-9]*(\/(history|full|ways|relations))?\.json$|^changeset\/164736346\.json\?include_discussion=true$/);assert.equal(r.url,'https://api.openstreetmap.org/api/0.6/'+r.path);assert.match(r.raw_sha256,/^[a-f0-9]{64}$/);assert(Number.isFinite(Date.parse(r.accessed_at)));assert(Number.isSafeInteger(r.bytes)&&r.bytes>=0);assert(Array.isArray(r.elements));
@@ -39,7 +39,8 @@ export function reconcileTransitions(prior,rows,acceptedRaw){
  }
  assert.equal(matrix.length,13);assert.equal(new Set(matrix.map(x=>x.relation_id)).size,13);assert.equal(matrix.filter(x=>x.current_http===410).length,12);
  const current=matrix.find(x=>x.relation_id===21515245),old=matrix.find(x=>x.relation_id===18967907);assert(current&&old);
- const graph=requireRow(index,'relation/21515245/full.json'),closure=auditOsmClosure({elements:graph.elements},[21515245],'MD');assert.equal(closure.missing_reference_count,0);assert.equal(closure.invalid_coordinate_count,0);assert.equal(closure.topology_issue_count,0);const geometry=relationGeometry(osmElementIndex({elements:graph.elements}),21515245);
+ const graph=requireRow(index,'relation/21515245/full.json'),graphRoot=graph.elements.find(e=>e.type==='relation'&&e.id===21515245),currentRoot=requireRow(index,'relation/21515245.json').elements.find(e=>e.type==='relation'&&e.id===21515245);assert(graphRoot&&currentRoot);for(const k of ['version','timestamp','changeset','visible','tags','members'])assert(equal(graphRoot[k],currentRoot[k]),'Addition full graph/current root disagreement: '+k);
+ const closure=auditOsmClosure({elements:graph.elements},[21515245],'MD');assert.equal(closure.missing_reference_count,0);assert.equal(closure.invalid_coordinate_count,0);assert.equal(closure.topology_issue_count,0);const geometry=relationGeometry(osmElementIndex({elements:graph.elements}),21515245);
  return {matrix,accounting:{accepted_md_master:2596,candidate_md_master_observed:2585,retired:12,added:1,net_deficit:11,equation:'2596 - 12 + 1 = 2585',exact_oct18_candidate_replayed:false},successor:{from:18967907,to:21515245,same_cuatm:old.cuatm_context===current.cuatm_context,same_changeset:old.changeset_id===current.changeset_id,same_timestamp:old.source_timestamp===current.source_timestamp,verdict:old.cuatm_context===current.cuatm_context&&old.changeset_id===current.changeset_id&&old.source_timestamp===current.source_timestamp?'CARTOGRAPHIC_LINK_SUPPORTED_NOT_LEGAL_SUCCESSION':'UNRESOLVED',legal_identity_status:'UNRESOLVED'},addition_graph:{closure,geometry_valid:true,geometry_sha256:sha(geometry),scope:'One current relation only; not a complete country source'}};
 }
 export function connectivityWitness(rows,id,observedAt){

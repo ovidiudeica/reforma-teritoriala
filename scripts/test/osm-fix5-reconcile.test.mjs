@@ -15,6 +15,7 @@ for(const [name,mutate]of [
  ['historical payload different from accepted bytes',r=>r.find(x=>x.path==='relation/18966859/history.json').elements[3].tags.name='tampered'],
  ['current addition disagrees with history',r=>r.find(x=>x.path==='relation/21515245.json').elements[0].version++],
  ['missing addition node',r=>{const x=r.find(x=>x.path==='relation/21515245/full.json');x.elements.splice(x.elements.findIndex(e=>e.type==='node'),1);}],
+ ['addition full graph disagrees with current root version',r=>r.find(x=>x.path==='relation/21515245/full.json').elements.find(e=>e.type==='relation'&&e.id===21515245).version++],
  ['future object timestamp',r=>r.find(x=>x.path==='relation/21515245.json').elements[0].timestamp='2099-01-01T00:00:00Z'],
  ['invalid original digest',r=>r[0].raw_sha256='administrative-pass']
 ])test('reject '+name,()=>{const r=structuredClone(rows);mutate(r);assert.throws(()=>reconcileTransitions(prior,r,base));});
