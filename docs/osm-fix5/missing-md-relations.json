@@ -1,0 +1,67 @@
+{
+  "schema": "osm-fix5-bounded-reconciliation-v1",
+  "base_main": "afb190ab29c0b87526f9065e95159176c1630049",
+  "observation_window": {
+    "from": "2026-10-27T17:45:31.658609+00:00",
+    "to": "2026-10-27T17:48:12.767827+00:00"
+  },
+  "global_source_admission": false,
+  "accepted_md_master": 2596,
+  "candidate_md_master_observed": 2585,
+  "retired": 12,
+  "added": 1,
+  "net_deficit": 11,
+  "equation": "2596 - 12 + 1 = 2585",
+  "exact_oct18_candidate_replayed": false,
+  "retired_ids": [
+    18966859,
+    18966939,
+    18967312,
+    18967475,
+    18967641,
+    18967824,
+    18967907,
+    18967934,
+    18968041,
+    18968051,
+    18968093,
+    18968144
+  ],
+  "added_ids": [
+    21515245
+  ],
+  "original_oct18": {
+    "run_id": 39113587430,
+    "checked_at": "2026-10-27T17:53:22.307162+00:00",
+    "available_artifacts": [],
+    "direct_candidate_bytes_recovered": false,
+    "source": "GitHub Actions artifacts API and docs/repo-clean/issue-review.json; Oct20 is not a direct Oct18 byte replay"
+  },
+  "count_domains": {
+    "master_accepted": {
+      "RO": 3234,
+      "MD": 2596,
+      "total": 5830
+    },
+    "master_candidate_logged_oct18": {
+      "RO": 3234,
+      "MD": 2585,
+      "total": 5819
+    },
+    "accepted_selected_manifest": {
+      "RO": 3233,
+      "MD": 2596
+    },
+    "geofabrik_reference_scope": {
+      "RO": 3233,
+      "MD": 2585,
+      "total": 5818
+    },
+    "actual_identities": {
+      "RO": 3246,
+      "MD": 2602,
+      "total": 5848
+    }
+  },
+  "limitation": "Net deficit 11 is not a list of 11 deleted IDs. The thirteen current transitions do not reconstruct unavailable original Oct18 bytes."
+}

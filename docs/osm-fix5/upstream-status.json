@@ -1,0 +1,40 @@
+{
+  "schema": "osm-fix5-bounded-reconciliation-v1",
+  "base_main": "afb190ab29c0b87526f9065e95159176c1630049",
+  "observation_window": {
+    "from": "2026-10-27T17:45:31.658609+00:00",
+    "to": "2026-10-27T17:48:12.767827+00:00"
+  },
+  "global_source_admission": false,
+  "request_count": 57,
+  "http200": 45,
+  "http410": 12,
+  "errors": [],
+  "topology_observations_semantically_unchanged": true,
+  "atomic_snapshot": false,
+  "source_promoted": false,
+  "flags": {
+    "OSM_FIX5_AUDIT_COMPLETE": true,
+    "OSM_11_MISSING_MD_RECONCILED": false,
+    "OSM_RETIREMENT_TRANSITIONS_VALIDATED": true,
+    "OSM_CANDIDATE_SELECTION_COMPLETE": false,
+    "OSM_RELATION_WAY_NODE_CLOSURE_PASS": false,
+    "OSM_TOPOLOGY_VALIDATED": false,
+    "OSM_SOURCE_CANDIDATE_VALIDATED": false,
+    "HORESTI_MAPPER_INTENT_CONFIRMED": false,
+    "BUNETI_MAPPER_INTENT_CONFIRMED": false,
+    "CONDITIONAL_SIMULATION_PASS": true,
+    "UPSTREAM_TOPOLOGY_FIXED": false,
+    "PUBLIC_OSM_EDIT_AUTHORIZED": false,
+    "PUBLIC_OSM_EDIT_EXECUTED": false,
+    "OSM_SOURCE_PROMOTION_READY": false,
+    "OSM_SOURCE_PROMOTED": false,
+    "OSM_FRESHNESS_PASS": false,
+    "ACTUAL_INTEGRITY_PASS": true,
+    "NI_FUNCTIONAL_COMPLETE": true,
+    "WEB_NI_U1_ROADMAP_CLOSED": true,
+    "ISSUE_396_RESOLVED": false,
+    "P91_IMPORT_ALLOWED": false,
+    "READY_FOR_UA_CV0": false
+  }
+}
