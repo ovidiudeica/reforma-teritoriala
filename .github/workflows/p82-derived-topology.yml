@@ -21,3 +21,23 @@ jobs:
       - name: Full regression suite on Linux including Git preflight and exact toolchain
         run: node scripts/audit/p82-full-validation.mjs
       - run: git diff --exit-code
+
+  rt-audit1-parent-child:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Generate and verify RT-AUDIT.1 evidence
+        run: |
+          node scripts/audit/rt-audit1-parent-child.mjs --write
+          node scripts/audit/rt-audit1-parent-child.mjs --check
+          git diff --exit-code -- data/current public
+      - name: Store 5846-link RT-AUDIT.1 evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: rt-audit-1-parent-child
+          path: docs/rt-audit-1/
+          if-no-files-found: error
