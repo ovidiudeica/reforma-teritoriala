@@ -1,37 +1,31 @@
 name: RT-AUDIT.1 parent-child evidence
 on:
+  pull_request:
+    branches: [main]
   push:
-    branches:
-      - audit/rt-audit-1-parent-child-20261028
-    paths:
-      - scripts/audit/rt-audit1-parent-child.mjs
-      - .github/workflows/rt-audit-1.yml
-      - docs/rt-audit-1/**
+    branches: [audit/rt-audit-1-parent-child-20261028]
 permissions:
-  contents: write
+  contents: read
 jobs:
   reconcile:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
-      - name: Checkout exact branch
+      - name: Checkout tested commit
         uses: actions/checkout@v4
         with:
-          persist-credentials: true
-      - name: Verify and produce read-only evidence
+          persist-credentials: false
+      - name: Generate independent read-only audit
         run: |
           node --version
           node scripts/audit/rt-audit1-parent-child.mjs --write
           node scripts/audit/rt-audit1-parent-child.mjs --check
-      - name: Ensure ACTUAL and application inputs unchanged
+      - name: Ensure no source file changed
         run: |
           git diff --exit-code -- data/current public/geo public/data/actual-entities.json public/data/actual-consolidated-tree.json public/data/actual-topology-index.json public/data/topology public/data/topology-frontiers
-      - name: Commit derived audit outputs only
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/rt-audit-1/
-          if ! git diff --cached --quiet; then
-            git commit -m "audit: publish RT-AUDIT.1 5846-row evidence"
-            git push origin HEAD:audit/rt-audit-1-parent-child-20261028
-          fi
+      - name: Upload audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: rt-audit-1-parent-child-register
+          path: docs/rt-audit-1/
+          if-no-files-found: error
