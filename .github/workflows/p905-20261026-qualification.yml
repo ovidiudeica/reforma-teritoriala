@@ -1,0 +1,65 @@
+name: P9.0.5 qualify Ubuntu 20261026 runner (evidence only)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p905-20261026-runner-qualification.mjs'
+      - 'scripts/audit/p905-20261026-compare.mjs'
+      - '.github/workflows/p905-20261026-qualification.yml'
+      - 'docs/evidence/p905-20261026/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [A, B]
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Capture live host and reject unapproved profile without mutation
+        env:
+          QUALIFICATION_LANE: ${{ matrix.lane }}
+        run: node scripts/audit/p905-20261026-runner-qualification.mjs
+      - name: Ensure no tracked file modified
+        run: git diff --exit-code
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: p905-20261026-observation-${{ matrix.lane }}
+          path: outputs/p905-runner-qualification/${{ matrix.lane }}.json
+          if-no-files-found: error
+  compare:
+    needs: observe
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: p905-20261026-observation-A
+          path: outputs/p905-runner-qualification/A/
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: p905-20261026-observation-B
+          path: outputs/p905-runner-qualification/B/
+      - name: Compare independently observed profiles, fail closed on drift
+        run: node scripts/audit/p905-20261026-compare.mjs
+      - name: Ensure no tracked file modified
+        run: git diff --exit-code
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: p905-20261026-qualification-comparison
+          path: outputs/p905-runner-qualification/comparison.json
+          if-no-files-found: error
