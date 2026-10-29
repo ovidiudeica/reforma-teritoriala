@@ -1,0 +1,144 @@
+{
+  "head": "34ce7cead13296d6420be797ee37f500d4db625d",
+  "status": "TERMINAL",
+  "counts": {
+    "success": 20,
+    "skipped": 2
+  },
+  "checks": [
+    {
+      "name": "CodeQL",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/runs/123689390652"
+    },
+    {
+      "name": "actual-change-repro-compare",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427875/job/123689129145"
+    },
+    {
+      "name": "actual-change-repro-${{ matrix.proof }}",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427875/job/123689128413"
+    },
+    {
+      "name": "actual-change-reproducibility",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427875/job/123689126950"
+    },
+    {
+      "name": "p83-geometric-validation",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942428010/job/123688994792"
+    },
+    {
+      "name": "verify-persisted-release",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427854/job/123688994244"
+    },
+    {
+      "name": "actual-release-trust-chain",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427922/job/123688994205"
+    },
+    {
+      "name": "frontend-browser-qa",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427872/job/123688994186"
+    },
+    {
+      "name": "published-chromium",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942428105/job/123688994155"
+    },
+    {
+      "name": "p2-statistical-foundation",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427871/job/123688994081"
+    },
+    {
+      "name": "p907216-osm-ui-fail-closed",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427877/job/123688994059"
+    },
+    {
+      "name": "p84-export-validation",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427867/job/123688994007"
+    },
+    {
+      "name": "chromium-hardening",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427860/job/123688993970"
+    },
+    {
+      "name": "preservation",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427925/job/123688993958"
+    },
+    {
+      "name": "frontend-geometry-taxonomy",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942428004/job/123688993878"
+    },
+    {
+      "name": "detect-change-repro-scope",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427875/job/123688993868"
+    },
+    {
+      "name": "web-r2a1-admin-level-census",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427884/job/123688993494"
+    },
+    {
+      "name": "p82-derived-topology",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427820/job/123688993193"
+    },
+    {
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942427729/job/123688993071"
+    },
+    {
+      "name": "Analyze (javascript-typescript)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942420373/job/123688971099"
+    },
+    {
+      "name": "Analyze (python)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942420373/job/123688970773"
+    },
+    {
+      "name": "Analyze (actions)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/40942420373/job/123688970360"
+    }
+  ],
+  "skipped_are_not_pass": true,
+  "scope_note": "Detectia existenta actual-change-repro considera modificarile exclusiv de audit neaplicabile probelor ACTUAL A/B; gate-ul agregat a trecut prin acest contract, nu prin executarea A/B."
+}

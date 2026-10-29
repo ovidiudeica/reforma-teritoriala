@@ -3,10 +3,9 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'scripts/audit/rt-audit1-parent-child.mjs'
-      - 'scripts/audit/rt-audit1-overlap-investigation.mjs'
-      - 'scripts/audit/rt-audit1-causal-certification.mjs'
-      - 'scripts/audit/rt-audit1-2-source-forensics.mjs'
+      - 'scripts/audit/rt-audit1*'
+      - 'docs/audits/rt-audit1*/**'
+      - 'docs/audits/rt-audit1*.md'
       - '.github/workflows/rt-audit1.yml'
   workflow_dispatch:
 permissions:
@@ -18,18 +17,19 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.21.0'
-      - name: Reconcile all parent-child links and topology shards
-        run: node scripts/audit/rt-audit1-parent-child.mjs
-      - name: Quantify 254 overlaps and examine three equalities
-        run: node scripts/audit/rt-audit1-overlap-investigation.mjs
-      - name: Trace all 254 cases to frozen OSM source members and CUATM
-        run: node --max-old-space-size=4096 scripts/audit/rt-audit1-2-source-forensics.mjs
-      - name: Certify per-ID official evidence without legal inference
-        run: node scripts/audit/rt-audit1-causal-certification.mjs
+      - name: Install locked offline workbook parser
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Negative evidence and exact arithmetic regressions
+        run: node --test scripts/audit/rt-audit1-evidence.test.mjs
+      - name: Complete read-only audit, independent validation and byte-identical replay
+        run: node scripts/audit/rt-audit1-2-run.mjs --reproduce
+      - name: Assert no tracked data or website mutation
+        run: git diff --exit-code
       - name: Publish evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -38,4 +38,5 @@ jobs:
           path: |
             outputs/RT-AUDIT.1/
             outputs/RT-AUDIT.1.2/
-          if-no-files-found: warn
+            docs/audits/rt-audit1-2/evidence/
+          if-no-files-found: error
