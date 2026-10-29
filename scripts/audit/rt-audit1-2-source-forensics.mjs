@@ -47,6 +47,16 @@ const historyById=new Map();
 for(const group of hist.groups||[])for(const rel of group.relations||[])
  if(rel?.relation_id)historyById.set(rel.relation_id,{group_legal_id:group.legal_id,source:histPath,first_seen:rel.created_at,last_recorded:rel.last_modified_at,version:rel.current_version,number_of_archived_versions:rel.versions?.length??null,archived_change_events:(rel.versions||[]).filter(v=>v.members?.added?.length||v.members?.removed?.length).length});
 const reviews=new Map((review.cases||[]).map(x=>[x.osm_id,x]));
+// Immutable known limitations as documented in docs/actual-v1-known-limitations.md.
+const acceptedBBox=new Map(Object.entries({
+ 'osm-r18967259':'osm-r19113736','osm-r18967626':'osm-r12207955',
+ 'osm-r18966913':'osm-r19100177','osm-r18967052':'osm-r19115707',
+ 'osm-r18967249':'osm-r19114022','osm-r18967274':'osm-r10624608',
+ 'osm-r18967755':'osm-r19115707','osm-r18967196':'osm-r19055801',
+ 'osm-r18967786':'osm-r19068255','osm-r18966972':'osm-r10628594',
+ 'osm-r18967825':'osm-r19072238','osm-r18968068':'osm-r12496849',
+ 'osm-r18967148':'osm-r19038433','osm-r18967694':'osm-r10624608'
+}));
 const idNum=id=>/^osm-r[0-9]+$/.test(id)?Number(id.slice(5)):null;
 const relationRow=(id)=>{
  const n=idNum(id);if(n===null)return null;
@@ -114,6 +124,7 @@ const legalRelation=(child,parent)=>{
  return 'UNRESOLVED';
 };
 const evidences=[],reject=[],legalStatusCounts=new Map(),sourceCounts=new Map(),precisionCounts=new Map(),historicalEvidenceCounts=new Map();
+const boundarySharingCounts=new Map(),metadataCoverage=new Map();
 const bump=(m,k)=>m.set(k,(m.get(k)||0)+1);
 for(const pair of geo){
  const c=relationRecord(pair.child_id),p=relationRecord(pair.parent_id);
@@ -127,6 +138,12 @@ for(const pair of geo){
  const residual=pair.child_outside_parent_m2;
  const precision=residual<=numericTol?'AREA_WITHIN_COMPUTATION_TOLERANCE':residual<=1?'SUB_ONE_SQUARE_METRE_ABOVE_TOLERANCE':'AREA_ABOVE_ONE_SQUARE_METRE';
  const historical=(cHistory||pHistory)?'ARCHIVED_RELATION_HISTORY_AVAILABLE':'ARCHIVED_RELATION_HISTORY_NOT_AVAILABLE';
+ if(acceptedBBox.has(pair.child_id)&&acceptedBBox.get(pair.child_id)!==pair.parent_id)fail('prior accepted bbox parent drift '+pair.child_id);
+ const previouslyDocumented=acceptedBBox.has(pair.child_id);
+ const boundarySharing=source.status==='DISTINCT_SOURCE_WAY_MEMBER_SETS'
+   ?source.shared_way_count?'SOME_COMMON_DIRECT_WAYS':'NO_COMMON_DIRECT_WAY'
+   :source.status==='SOURCE_MEMBERS_NOT_COMPARABLE'?'STATISTICAL_PARENT_NOT_IN_MD_ADMIN_SNAPSHOT':'SAME_WAY_SET';
+ const metadataAvailable=Boolean(rawChild?.version&&rawChild?.timestamp&&rawParent?.version&&rawParent?.timestamp);
  const provenMechanism=source.status==='DISTINCT_SOURCE_WAY_MEMBER_SETS'
   ?'DIFFERENT_OSM_WAY_MEMBERS_AT_FROZEN_SNAPSHOT'
   :source.status==='SAME_SOURCE_WAY_MEMBER_SETS'?'SAME_OSM_WAY_MEMBERS_AT_FROZEN_SNAPSHOT'
@@ -146,6 +163,11 @@ for(const pair of geo){
  const item={child_id:pair.child_id,parent_id:pair.parent_id,
   child_name:pair.child_name,parent_name:pair.parent_name,
   overlap_area_m2:pair.intersection_area_m2,child_outside_parent_m2:residual,
+  previously_accepted_bbox_observation:previouslyDocumented?{
+   status:'DOCUMENTED_NONBLOCKING_BBOX_OBSERVATION',source:'docs/actual-v1-known-limitations.md',
+   issue:'child_bbox_exceeds_parent_bbox',reviewed_not_automatically_geometry_error:true}:null,
+  exact_direct_boundary_way_sharing:boundarySharing,
+  both_raw_relation_versions_and_timestamps_available:metadataAvailable,
   child_outside_parent_percent:pair.percent_child_outside_parent,
   numeric_tolerance_m2:numericTol,precision_class:precision,
   topology_relation:pair.geometry_relation,observed_pattern:pair.observed_pattern,
@@ -168,9 +190,11 @@ for(const pair of geo){
     :['Trace differing source way/node versions to timestamped edit history','Validate legally authoritative geometry against an official boundary source','Review CUATM legal assignment separately from OSM geometric footprint']};
  evidences.push(item);
  bump(legalStatusCounts,legal);bump(sourceCounts,source.status);bump(precisionCounts,precision);bump(historicalEvidenceCounts,historical);
+ bump(boundarySharingCounts,boundarySharing);bump(metadataCoverage,metadataAvailable?'BOTH_RELATIONS_HAVE_VERSION_AND_TIMESTAMP':'FROZEN_SOURCE_LACKS_COMPLETE_HISTORY_METADATA');
  if(source.status==='SOURCE_MEMBERS_NOT_COMPARABLE'&&pair.hierarchy_boundary_context!=='ADMINISTRATIVE_CHILD_VS_STATISTICAL_PARENT')reject.push({id:pair.child_id,problem:'unexpected missing administrative raw relation',source});
 }
 if(evidences.length!==254)fail('Not all overlap cases processed');
+if(evidences.filter(x=>x.previously_accepted_bbox_observation).length!==14)fail('14 known bbox observations not reconciled');
 const equality=[];
 for(const x of equal){
  const c=relationRecord(x.child_id),p=relationRecord(x.parent_id),source=memberComparison(c,p);
@@ -209,6 +233,8 @@ const summaryOut={
  cases:254,equalities:3,failed_source_case_count:reject.length,
  by_source_membership:obj(sourceCounts),by_legal_hierarchy:obj(legalStatusCounts),
  by_precision:obj(precisionCounts),by_archived_history_coverage:obj(historicalEvidenceCounts),
+ by_direct_way_sharing:obj(boundarySharingCounts),by_relation_metadata_coverage:obj(metadataCoverage),
+ previously_accepted_bbox_observations:14,
  legal_certification_not_automatic:true,geometry_mutated:false,hierarchy_mutated:false,
  limitation:'Source way/member differences and CUATM reconciled identity prove observable evidence only. Causal historic boundary-edit attribution or official legal-border equivalence requires corresponding dated primary evidence.',
  reject};
@@ -246,6 +272,9 @@ const mdLines=[
  'Apartenență CUATM: '+JSON.stringify(summaryOut.by_legal_hierarchy),
  'Precizie: '+JSON.stringify(summaryOut.by_precision),
  'Istoric OSM arhivat: '+JSON.stringify(summaryOut.by_archived_history_coverage),
+ 'Membri way comuni: '+JSON.stringify(summaryOut.by_direct_way_sharing),
+ 'Versiuni OSM complete: '+JSON.stringify(summaryOut.by_relation_metadata_coverage),
+ 'Observatii bbox nonblocking deja publicate: '+summaryOut.previously_accepted_bbox_observations,
  'Cauzele istorice specifice nu sunt certificate fără versiunile way/node datate la momentul modificărilor.',
  'Recomandarea rămâne NONE_AUTOMATIC pentru toate cazurile. Nicio schimbare în ACTUAL.'
 ];
