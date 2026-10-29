@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/audit/rt-audit1-parent-child.mjs'
       - 'scripts/audit/rt-audit1-overlap-investigation.mjs'
+      - 'scripts/audit/rt-audit1-causal-certification.mjs'
       - 'scripts/audit/rt-audit1-2-source-forensics.mjs'
       - '.github/workflows/rt-audit1.yml'
   workflow_dispatch:
@@ -27,6 +28,8 @@ jobs:
         run: node scripts/audit/rt-audit1-overlap-investigation.mjs
       - name: Trace all 254 cases to frozen OSM source members and CUATM
         run: node --max-old-space-size=4096 scripts/audit/rt-audit1-2-source-forensics.mjs
+      - name: Certify per-ID official evidence without legal inference
+        run: node scripts/audit/rt-audit1-causal-certification.mjs
       - name: Publish evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
