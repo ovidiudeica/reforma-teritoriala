@@ -52,6 +52,8 @@ const reviewCases=new Map((reviewed.cases||[]).map(x=>[x.osm_id,x]));
 const statistical=await j('data/p2/actual-statistical-md.json');
 const statEntries=new Map((statistical.statistical_entities||[]).map(x=>[x.id,x]));
 const policy=await j('data/sources/actual-statistical-policy.json');
+const officialNuts=await j('data/sources/md-nuts-2017.json');
+const cuatm=await j('data/sources/cuatm-current.json');
 const bridge=await j('data/current/md-cuatm-semantic-bridge.json');
 const legalBinds=new Map((bridge.municipality_validation?.municipalities||[]).map(x=>[normalize(x.legal_name),x]));
 const info=(id)=>{
@@ -64,7 +66,8 @@ const info=(id)=>{
 };
 const signature=(row,inside,outside,percentOutside)=>{
  const child=info(row.child_id),parent=info(row.parent_id);
- if(child.roles.includes('statistical')||parent.roles.includes('statistical'))return 'STATISTICAL_FOOTPRINT_CROSSES_PARENT';
+ if(child.category==='statistical'||parent.category==='statistical')return 'STATISTICAL_ONLY_PARENT_GEOMETRY_CROSSING';
+ if(child.roles.includes('statistical')||parent.roles.includes('statistical'))return 'ADMINISTRATIVE_UAT_WITH_REUSED_STATISTICAL_ROLE';
  if(['non_administrative_or_auxiliary_area','subdivision_or_component_area'].includes(child.type))return 'AUXILIARY_OR_UNCERTAIN_OSM_AREA';
  if(normalize(child.name)===normalize(parent.name))return 'SAME_NAMED_DIFFERENT_OSM_FOOTPRINTS';
  if(percentOutside<=0.1)return 'TRACE_OUTSIDE_PARENT_MAX_0_1_PERCENT';
@@ -84,13 +87,14 @@ for(const row of candidates){
   const insidePct=r.overlapB,outsidePct=100*r.exclusiveBM2/r.b.areaM2;
   const caseEvidence=reviewCases.get(row.child_id);
   const observed=signature(row,r.intersectionM2,r.exclusiveBM2,outsidePct);
+  const context=parent.category==='statistical'?'ADMINISTRATIVE_CHILD_VS_STATISTICAL_PARENT':`OSM_ADMIN_LEVEL_${child.representation?.admin_level??'UNKNOWN'}_TO_${parent.representation?.admin_level??'UNKNOWN'}`;
   const caseRow={
    child_id:row.child_id,parent_id:row.parent_id,jurisdiction:'MD',
    child_name:child.name,parent_name:parent.name,child_type:child.type,parent_type:parent.type,
    child_roles:child.roles,parent_roles:parent.roles,child_osm_admin_level:child.representation?.admin_level??null,
    parent_osm_admin_level:parent.representation?.admin_level??null,
    same_normalized_name:normalize(child.name)===normalize(parent.name),
-   matrix:r.matrix,geometry_relation:r.relation,observed_pattern:observed,
+   matrix:r.matrix,geometry_relation:r.relation,observed_pattern:observed,hierarchy_boundary_context:context,
    computed_parent_area_m2:round(r.a.areaM2,3),computed_child_area_m2:round(r.b.areaM2,3),
    intersection_area_m2:round(r.intersectionM2,3),
    child_outside_parent_m2:round(r.exclusiveBM2,3),
@@ -125,8 +129,13 @@ for(const row of equalRows){
  const statisticalCoextensive=c.roles.includes('statistical')&&p.roles.includes('statistical');
  const sameName=normalize(c.name)===normalize(p.name);
  const bridgeBind=legalBinds.get(normalize(c.name));
+ const exactCuatmNameCandidates=(cuatm.records||[]).filter(x=>normalize(x.name)===normalize(c.name)).map(x=>({legal_id:x.code,parent_code:x.parent_code,status_code:x.status_code,legal_name:x.name,source:'data/sources/cuatm-current.json'}));
+ const officialStatParent=statisticalCoextensive?(officialNuts.units||[]).find(x=>x.code===p.statistical?.code):null;
+ const officialStatChild=statisticalCoextensive?(officialNuts.units||[]).find(x=>x.code===c.statistical?.code):null;
+ const officialStatSiblings=statisticalCoextensive?(officialNuts.units||[]).filter(x=>x.parent_code===p.statistical?.code).map(x=>x.code):null;
  equality.push({child_id:row.child_id,parent_id:row.parent_id,
-  child:c,parent:p,measured,evaluation_error:error,
+  child:c,parent:p,measured,evaluation_error:error,cuatm_exact_name_candidates:statisticalCoextensive?[]:exactCuatmNameCandidates,
+  official_nuts_lineage:statisticalCoextensive?{source:'data/sources/md-nuts-2017.json',parent:officialStatParent,child:officialStatChild,children_of_parent:officialStatSiblings}:null,
   semantic_pattern:statisticalCoextensive?'COEXTENSIVE_STATISTICAL_TIERS':sameName?'SAME_NAME_AND_TYPE_WITH_DISTINCT_OSM_RELATIONS':'UNRESOLVED',
   official_statistical_policy:statisticalCoextensive?{path:'data/sources/actual-statistical-policy.json',md120:policy.jurisdictions?.MD?.special_rules?.MD120||null,child:statEntries.get(c.id)||null,parent:statEntries.get(p.id)||null}:null,
   municipality_policy_reference:normalize(c.name)==='orhei'?{path:'data/current/md-cuatm-semantic-bridge.json',binding:bridgeBind||null}:null,
@@ -148,6 +157,7 @@ const result={
  counts:{expected_overlaps:254,computed_overlaps:quantified.length,errors:failures.length,equalities:3,
   successfully_measured_equalities:equality.filter(r=>r.measured).length},
  observed_patterns:counts(quantified.map(r=>r.observed_pattern)),
+ hierarchy_boundary_contexts:counts(quantified.map(r=>r.hierarchy_boundary_context)),
  child_types:counts(quantified.map(r=>r.child_type)),
  parent_types:counts(quantified.map(r=>r.parent_type)),
  same_name_count:quantified.filter(r=>r.same_normalized_name).length,
@@ -189,6 +199,7 @@ const report=[
  'Suma ariilor copilului in afara parintelui: '+result.pairwise_areas_km2.sum_child_outside_parent+' km².',
  '**Atentie:** aceste sume nu sunt reuniuni spatiale si nu se pot interpreta drept suprafata unica afectata.',
  'Clasificari observabile: '+JSON.stringify(result.observed_patterns),
+ 'Niveluri topologice copil/parinte: '+JSON.stringify(result.hierarchy_boundary_contexts),
  'Cauza administrativa sau istorica nu este demonstrata automat din topologie.',
  'Egalitati: '+equality.map(x=>x.child_id+' / '+x.parent_id+' = '+x.semantic_pattern).join('; '),
  'Metoda: P8.3 JSTS OverlayOp fara snapping, cu validare a identitatilor de arie; arie sferica IUGG 6.371.008,8 m.',
