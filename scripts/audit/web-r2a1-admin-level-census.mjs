@@ -108,7 +108,7 @@ try{changed=execFileSync('git',['diff','--name-only',BASE,'HEAD'],{encoding:'utf
 catch(e){die('cannot compare audit branch to base SHA: '+e.message);}
 const protectedChanges=changed.filter(p=>p==='data'||p.startsWith('data/')||p==='public'||p.startsWith('public/'));
 const provenanceBoundary=auditProvenanceBoundary(BASE);
-if(protectedChanges.length&&provenanceBoundary.mode!=='OWNER_AUTHORIZED_EXACT_P905_PROVENANCE')die('protected changes not admitted');
+if(protectedChanges.length&&!['OWNER_AUTHORIZED_EXACT_P905_PROVENANCE','OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V2'].includes(provenanceBoundary.mode))die('protected changes not admitted');
 
 const actualRows=[],byId=new Map(),ids=new Set();
 for(const e of actual.entities){
