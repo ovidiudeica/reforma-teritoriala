@@ -6,6 +6,8 @@ on:
       - 'scripts/audit/rt-audit1*'
       - 'docs/audits/rt-audit1*/**'
       - 'docs/audits/rt-audit1*.md'
+      - 'scripts/audit/rt-adm2-verify.mjs'
+      - 'docs/audits/rt-adm2/**'
       - '.github/workflows/rt-audit1.yml'
   workflow_dispatch:
 permissions:
@@ -28,6 +30,8 @@ jobs:
         run: node --test scripts/audit/rt-audit1-evidence.test.mjs
       - name: Complete read-only audit, independent validation and byte-identical replay
         run: node scripts/audit/rt-audit1-2-run.mjs --reproduce
+      - name: Verify RT-ADM.2 identity decisions and fail-closed controls
+        run: node scripts/audit/rt-adm2-verify.mjs
       - name: Assert no tracked data or website mutation
         run: git diff --exit-code
       - name: Publish evidence
