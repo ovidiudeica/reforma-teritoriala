@@ -1,0 +1,18 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {asOfHistory,memberDelta,geometryEdges,exactBoundaryComparison,verifyUniquePairs,parseCsv,semanticEqual,verifySourceManifest,sha} from './rt-audit1-evidence-lib.mjs';
+const polygon=r=>({type:'Polygon',coordinates:[r]});
+test('frontiere egale cu segmentare diferita, fara modificarea poligoanelor',()=>{const a=polygon([[0,0],[2,0],[2,2],[0,2],[0,0]]),b=polygon([[2,2],[2,0],[1,0],[0,0],[0,2],[2,2]]),copy=JSON.stringify([a,b]);assert(exactBoundaryComparison(geometryEdges(a),geometryEdges(b)).boundary_sets_equal);assert.equal(JSON.stringify([a,b]),copy);});
+test('abatere arbitrara mica nu este eliminata prin toleranta sau snapping',()=>{const a=polygon([[0,0],[2,0],[2,2],[0,2],[0,0]]),b=structuredClone(a);b.coordinates[0][1][1]=1e-12;assert.equal(exactBoundaryComparison(geometryEdges(a),geometryEdges(b)).boundary_sets_equal,false);});
+test('gaurile sunt incluse in frontiera si nu pot disparea',()=>{const a=polygon([[0,0],[4,0],[4,4],[0,4],[0,0]]),b=structuredClone(a);b.coordinates.push([[1,1],[2,1],[2,2],[1,2],[1,1]]);assert.equal(exactBoundaryComparison(geometryEdges(a),geometryEdges(b)).boundary_sets_equal,false);});
+test('intervale coliniare disjuncte nu acopera o lacuna',()=>assert.equal(exactBoundaryComparison([[[0,0],[3,0]]],[[[0,0],[1,0]],[[2,0],[3,0]]]).boundary_sets_equal,false));
+test('inelul neinchis este respins',()=>assert.throws(()=>geometryEdges(polygon([[0,0],[1,0],[1,1],[0,1]]))));
+const history=[{type:'way',id:1,version:1,timestamp:'2026-10-01T00:00:00Z',nodes:[1,2]},{type:'way',id:1,version:2,timestamp:'2026-10-10T00:00:00Z',nodes:[1,3]}];
+test('alegere strict la epoca, fara versiuni ulterioare',()=>assert.equal(asOfHistory(history,'way',1,'2026-10-05T23:50:05.218Z').version,1));
+test('istoricul lacunar nu devine istoric certificat',()=>assert.throws(()=>asOfHistory([history[1]],'way',1,'2026-10-20T00:00:00Z')));
+test('versiunile contradictorii/duplicate sunt respinse',()=>assert.throws(()=>asOfHistory([history[0],history[0]],'way',1,'2026-10-20T00:00:00Z')));
+test('modificarea ordinii nu este confundata cu membri adaugati',()=>{const a={members:[{type:'way',ref:1,role:'outer'},{type:'way',ref:2,role:'outer'}]},b={members:[...a.members].reverse()},d=memberDelta(a,b);assert(d.order_changed);assert.deepEqual(d.added,[]);assert.deepEqual(d.removed,[]);});
+test('CSV suporta virgule, ghilimele si linii in campuri',()=>assert.deepEqual(parseCsv('id,name\na,"B, ""C""\nD"\n'),[['id','name'],['a','B, "C"\nD']]));
+test('duplicate per-ID nu pot satisface cardinalitatea',()=>assert.throws(()=>verifyUniquePairs([{child_id:'a',parent_id:'b'},{child_id:'a',parent_id:'b'}],2)));
+test('ordinea cheilor JSON nu produce un conflict istoric fals; ordinea membrilor ramane relevanta',()=>{assert(semanticEqual([{ref:1,role:'outer',type:'way'}],[{type:'way',ref:1,role:'outer'}]));assert(!semanticEqual([1,2],[2,1]));});
+test('manifestul respinge o sursa lipsa sau modificata, nu numai un numar incorect de fisiere',async()=>{const row={path:'sursa.json',bytes:2,sha256:sha('{}')};assert.equal(await verifySourceManifest([row],async()=>Buffer.from('{}')),1);await assert.rejects(()=>verifySourceManifest([row],async()=>Buffer.from('[]')));await assert.rejects(()=>verifySourceManifest([row],async()=>{throw Error('ENOENT');}));});
+test('calea unei dovezi nu poate iesi din workspace sau dubla un fisier',async()=>{const row={path:'../secret',bytes:2,sha256:sha('{}')};let reads=0;await assert.rejects(()=>verifySourceManifest([row],async()=>{reads++;return Buffer.from('{}');}));assert.equal(reads,0);row.path='a';await assert.rejects(()=>verifySourceManifest([row,row],async()=>Buffer.from('{}')));});

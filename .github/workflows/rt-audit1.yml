@@ -1,0 +1,42 @@
+name: RT-AUDIT.1 parent-child reconciliation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/rt-audit1*'
+      - 'docs/audits/rt-audit1*/**'
+      - 'docs/audits/rt-audit1*.md'
+      - '.github/workflows/rt-audit1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Install locked offline workbook parser
+        run: node scripts/process/install-actual-npm-offline.mjs
+      - name: Negative evidence and exact arithmetic regressions
+        run: node --test scripts/audit/rt-audit1-evidence.test.mjs
+      - name: Complete read-only audit, independent validation and byte-identical replay
+        run: node scripts/audit/rt-audit1-2-run.mjs --reproduce
+      - name: Assert no tracked data or website mutation
+        run: git diff --exit-code
+      - name: Publish evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rt-audit1-evidence
+          path: |
+            outputs/RT-AUDIT.1/
+            outputs/RT-AUDIT.1.2/
+            docs/audits/rt-audit1-2/evidence/
+          if-no-files-found: error
