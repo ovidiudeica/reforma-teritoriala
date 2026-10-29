@@ -62,3 +62,9 @@ Surse:
 - https://legislatie.just.ro/public/detaliidocument/190
 - https://legislatie.just.ro/Public/DetaliiDocument/208652
 - https://legislatie.just.ro/Public/DetaliiDocumentAfis/217004
+
+### Surse suplimentare identificate — de folosit numai conform rolului lor
+
+O descriere enciclopedică a localității Bondareuca o plasează în comuna Zgărdești (https://moldovenii.md/city/details/id/1474). Este o **coroborare secundară** a relației de localitate; nu dovedește că întreg poligonul OSM `osm-r18967570` reprezintă exact satul juridic. Nu poate singură autoriza reparentarea.
+
+Documente administrative ale Republicii Moldova folosesc distinct denumirile «Etulia, loc.st.c.f.» și «Cișmichioi»; o arondare operațională la o unitate de intervenție din Cișmichioi nu trebuie confundată cu parentajul CUATM. Verificarea unei eventuale neconcordanțe OSM trebuie făcută pe baza identității juridice și nu a districtului unui serviciu public.
