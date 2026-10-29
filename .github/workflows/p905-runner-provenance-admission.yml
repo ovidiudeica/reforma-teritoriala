@@ -14,16 +14,18 @@ on:
       - 'data/current/actual-release-persisted.json'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   proposal:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'ovidiudeica/reforma-teritoriala' && github.event.pull_request.head.ref == 'audit/p905-runner-20261026-authorized-admission-20261029'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          persist-credentials: false
+          persist-credentials: true
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.21.0'
@@ -58,3 +60,29 @@ jobs:
             data/current/actual-release-manifest.json
             data/current/actual-release-gate.json
             data/current/actual-release-persisted.json
+      - name: Commit only the six provenance files to the authorized PR branch
+        env:
+          AUTHORIZED_BRANCH: audit/p905-runner-20261026-authorized-admission-20261029
+        run: |
+          set -euo pipefail
+          test "$GITHUB_HEAD_REF" = "$AUTHORIZED_BRANCH"
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+          git add -- data/current/actual-host-trust-manifest.json data/current/actual-build-environment-manifest.json data/current/actual-build-environment-gate.json data/current/actual-release-manifest.json data/current/actual-release-gate.json data/current/actual-release-persisted.json
+          node --input-type=module <<'NODE'
+          import {execFileSync} from 'node:child_process';
+          const permitted=new Set([
+           'data/current/actual-host-trust-manifest.json',
+           'data/current/actual-build-environment-manifest.json',
+           'data/current/actual-build-environment-gate.json',
+           'data/current/actual-release-manifest.json',
+           'data/current/actual-release-gate.json',
+           'data/current/actual-release-persisted.json']);
+          const changed=execFileSync('git',['diff','--cached','--name-only'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+          if(changed.some(x=>!permitted.has(x)))throw Error('Unexpected staged path');
+          if(changed.length!==permitted.size)throw Error('Incomplete provenance chain: '+JSON.stringify(changed));
+          console.log('PROVENANCE_SCOPE_EXACT_6 '+JSON.stringify(changed));
+          NODE
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "provenance(p905): rebind authorized 20261026 runner without semantic ACTUAL changes"
+          git push origin "HEAD:refs/heads/$AUTHORIZED_BRANCH"
