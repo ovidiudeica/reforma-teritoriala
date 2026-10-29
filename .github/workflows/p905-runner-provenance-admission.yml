@@ -1,0 +1,60 @@
+name: P9.0.5 authorized runner provenance rebind proposal
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/actual-host-trust.mjs'
+      - 'scripts/process/prepare-p905-runner-provenance.mjs'
+      - '.github/workflows/p905-runner-provenance-admission.yml'
+      - 'data/current/actual-host-trust-manifest.json'
+      - 'data/current/actual-build-environment-manifest.json'
+      - 'data/current/actual-build-environment-gate.json'
+      - 'data/current/actual-release-manifest.json'
+      - 'data/current/actual-release-gate.json'
+      - 'data/current/actual-release-persisted.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proposal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Build precise authorized host trust manifest
+        run: |
+          set -euo pipefail
+          node scripts/process/build-actual-host-trust-manifest.mjs
+          node -e "const a=require('./data/current/actual-host-trust-manifest.json');if(a.host_trust_fingerprint_sha256!=='90137aeb9032a2612a9414fe595213ac9daa0f0af8c28bcd4fce3c5341456b8d')throw Error('Candidate fingerprint mismatch')"
+          node scripts/process/audit-actual-host-trust.mjs
+      - name: Rebuild complete execution environment and its gate
+        run: |
+          set -euo pipefail
+          node scripts/process/build-actual-build-environment-manifest.mjs
+          node scripts/process/audit-actual-build-environment-gate.mjs
+      - name: Rebind release, quality gate and previous persisted semantic identity
+        run: |
+          set -euo pipefail
+          node scripts/process/build-actual-release-manifest.mjs
+          node scripts/process/audit-actual-release-gate.mjs
+          node scripts/process/prepare-p905-runner-provenance.mjs
+          node scripts/process/verify-actual-persisted-base.mjs
+      - name: Upload exact provenance proposal bytes (no write credentials)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p905-20261026-authorized-provenance-proposal
+          if-no-files-found: warn
+          path: |
+            data/current/actual-host-trust-manifest.json
+            data/current/actual-build-environment-manifest.json
+            data/current/actual-build-environment-gate.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-gate.json
+            data/current/actual-release-persisted.json
