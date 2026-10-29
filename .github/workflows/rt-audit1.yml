@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/audit/rt-audit1-parent-child.mjs'
+      - 'scripts/audit/rt-audit1-overlap-investigation.mjs'
       - '.github/workflows/rt-audit1.yml'
   workflow_dispatch:
 permissions:
@@ -21,6 +22,8 @@ jobs:
           node-version: '24.21.0'
       - name: Reconcile all parent-child links and topology shards
         run: node scripts/audit/rt-audit1-parent-child.mjs
+      - name: Quantify 254 overlaps and examine three equalities
+        run: node scripts/audit/rt-audit1-overlap-investigation.mjs
       - name: Publish evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
