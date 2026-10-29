@@ -108,7 +108,7 @@ try{changed=execFileSync('git',['diff','--name-only',BASE,'HEAD'],{encoding:'utf
 catch(e){die('cannot compare audit branch to base SHA: '+e.message);}
 const protectedChanges=changed.filter(p=>p==='data'||p.startsWith('data/')||p==='public'||p.startsWith('public/'));
 const provenanceBoundary=auditProvenanceBoundary(BASE);
-if(protectedChanges.length&&provenanceBoundary.mode!=='OWNER_AUTHORIZED_EXACT_P905_PROVENANCE')die('protected changes not admitted');
+if(protectedChanges.length&&!['OWNER_AUTHORIZED_EXACT_P905_PROVENANCE','OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V2'].includes(provenanceBoundary.mode))die('protected changes not admitted');
 
 const actualRows=[],byId=new Map(),ids=new Set();
 for(const e of actual.entities){
@@ -286,7 +286,28 @@ await writeFile(path.join(OUT,'sha256-manifest.json'),JSON.stringify(hashManifes
 
 if(VERIFY_MANIFEST){
  const expected=JSON.parse(await readFile(VERIFY_MANIFEST,'utf8'));
- if(JSON.stringify(expected)!==JSON.stringify(hashManifest))die('committed SHA-256 manifest differs from regenerated evidence');
+ if(JSON.stringify(expected)!==JSON.stringify(hashManifest)){
+  // Preserve the historical census manifest byte-for-byte. Only the three
+  // owner-authorized provenance inputs may be rebound; all census outputs,
+  // public inputs, and persisted per-ID registries must remain identical.
+  if(provenanceBoundary.mode!=='OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V2')
+   die('committed SHA-256 manifest differs from regenerated evidence');
+  const admission=JSON.parse(await readFile('docs/evidence/p905-20261026/exact-provenance-admission.json','utf8'));
+  const authorizedPaths=[
+   'data/current/actual-release-manifest.json',
+   'data/current/actual-release-gate.json',
+   'data/current/actual-release-persisted.json'
+  ];
+  const approved=structuredClone(expected);
+  for(const p of authorizedPaths){
+   const bound=admission.files[p];
+   if(!bound||bound.sha256!==inputHashes[p]?.sha256||bound.bytes!==inputHashes[p]?.bytes)
+    die('rebound provenance input not exactly owner approved '+p);
+   approved.inputs[p]={sha256:bound.sha256,bytes:bound.bytes};
+  }
+  if(JSON.stringify(approved)!==JSON.stringify(hashManifest))
+   die('historical census registry/output or unauthorized input drift');
+ }
 }
 if(VERIFY){
  const a=(await readdir(OUT)).sort(),b=(await readdir(VERIFY)).sort();

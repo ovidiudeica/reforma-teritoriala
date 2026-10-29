@@ -13,7 +13,8 @@ const manifest=JSON.parse(original);
 const a=await captureObservedHost();
 const current=validateObservedHost(manifest,a);
 const approved=manifest.contract.accepted_runtime_profiles;
-const latest=approved.at(-1);
+const alreadyApproved=approved.some(x=>x.id==='github-ubuntu24-20261026.354.1');
+const latest=alreadyApproved?approved.at(-2):approved.at(-1);
 const actual=profileOf(a);
 const old=profileOf(latest);
 const differences=[];
@@ -24,7 +25,7 @@ function diff(x,y,path=''){
 }
 diff(old,actual);
 requireTrue(a.runner.image_version==='20261026.354.1','unexpected new runner version');
-requireTrue(current.status==='FAIL'&&current.failures.length===1&&current.failures[0].name==='runtime_host_profile_is_explicitly_approved','unexpected static/CPU failure');
+requireTrue(alreadyApproved?(current.status==='PASS'):(current.status==='FAIL'&&current.failures.length===1&&current.failures[0].name==='runtime_host_profile_is_explicitly_approved'),'unexpected host-trust validation for admission state');
 requireTrue(differences.some(x=>x.field==='kernel.release'),'kernel difference not recorded');
 requireTrue(differences.some(x=>x.field==='docker.components.containerd.version'),'containerd difference not recorded');
 const positive=structuredClone(a);
@@ -36,7 +37,8 @@ requireTrue(validateObservedHost(manifest,negative).status==='FAIL','unapproved 
 const tampered=structuredClone(positive);tampered.cpu.vendor='UNAPPROVED_VENDOR';
 requireTrue(validateObservedHost(manifest,tampered).status==='FAIL','unapproved CPU vendor accepted');
 const candidate=structuredClone(manifest);
-candidate.contract.accepted_runtime_profiles.push({id:'github-ubuntu24-20261026.354.1',...actual});
+if(!alreadyApproved)candidate.contract.accepted_runtime_profiles.push({id:'github-ubuntu24-20261026.354.1',...actual});
+else requireTrue(JSON.stringify(approved.at(-1))===JSON.stringify({id:'github-ubuntu24-20261026.354.1',...actual}),'approved profile differs from observed profile');
 const proposedFingerprint=hostTrustFingerprint(candidate).sha256;
 const currentBytesAfter=await readFile('data/current/actual-host-trust-manifest.json');
 requireTrue(original.equals(currentBytesAfter),'protected manifest mutated');
@@ -50,7 +52,7 @@ const result={
  differences, current_validator_status:current.status,current_failures:current.failures.map(x=>x.name),
  positive_existing_approved_profile:'PASS',negative_mutated_containerd:'REJECTED',negative_mutated_cpu_vendor:'REJECTED',
  proposed_profile_id:'github-ubuntu24-20261026.354.1',proposed_fingerprint:proposedFingerprint,
- proposal_status:'TECHNICAL_EVIDENCE_ONLY_NOT_AUTHORIZED',host_profile_approved:false,
+ proposal_status:alreadyApproved?'POST_ADMISSION_EXACT_PROFILE_VERIFIED':'TECHNICAL_EVIDENCE_ONLY_NOT_AUTHORIZED',host_profile_approved:alreadyApproved,
  actual_manifests_modified:false,actual_reproducibility_A_B_executed:false,
  next_gate:'Independent A/B comparison, owner approval, separate provenance rebind, actual A/B reproduction'
 };

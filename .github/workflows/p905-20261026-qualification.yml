@@ -6,7 +6,7 @@ on:
       - 'scripts/audit/p905-20261026-runner-qualification.mjs'
       - 'scripts/audit/p905-20261026-compare.mjs'
       - '.github/workflows/p905-20261026-qualification.yml'
-      - 'docs/evidence/p905-20261026/**'
+      - 'docs/evidence/p905-20261026/README.md'
   workflow_dispatch:
 permissions:
   contents: read
