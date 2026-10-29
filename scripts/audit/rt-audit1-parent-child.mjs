@@ -2,6 +2,7 @@
 // RT-AUDIT.1: derived evidence only. Never writes to ACTUAL, topology or public/.
 import {readFile, mkdir, writeFile, stat} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {validateConsolidatedHierarchy} from '../../atlas-hierarchy-validate.mjs';
 const root=new URL('../../',import.meta.url);
 const load=async p=>readFile(new URL(p,root));
 const digest=b=>createHash('sha256').update(b).digest('hex');
@@ -30,6 +31,10 @@ for(const [name,entry] of Object.entries(components)){
 if(!sourceProof.some(x=>x.name==='ro_geojson')||!sourceProof.some(x=>x.name==='md_geojson'))fail('lipsesc fisierele ACTUAL RO/MD');
 const byId=new Map();
 for(const e of publicEntities){if(byId.has(e.id))fail('ID duplicat '+e.id);byId.set(e.id,e)}
+const hierarchyBytes=await load('public/data/actual-consolidated-tree.json');
+if(digest(hierarchyBytes)!==components.consolidated_tree?.sha256)fail('SHA arbore consolidat invalid');
+const validatedNodes=validateConsolidatedHierarchy(JSON.parse(hierarchyBytes),byId,{expectedCount:5848});
+if(validatedNodes.size!==5848)fail('acoperire ierarhie incompleta');
 const addresses=topology.addresses||{},resources=topology.resources||{};
 const relationPaths=[...new Set(Object.values(addresses))].sort();
 if(relationPaths.length!==119)fail('numar sharduri '+relationPaths.length+' in loc de 119');
@@ -47,12 +52,14 @@ for(const path of relationPaths){
 const unreferenced=Object.keys(resources).filter(p=>p.startsWith('public/data/topology/')&&!shards.has(p));
 if(unreferenced.length)fail('sharduri neprocesate: '+unreferenced.length);
 const legalEvidence=[]; // not inferred from geometric or OSM tags
-const register=[],geo=[],adm=[],doc=[],counts={OK:0,GEO:0,ADM:0,DOC:0};
+const register=[],geo=[],adm=[],doc=[],counts={OK:0,GEO:0,ADM:0,DOC:0},relations={};
 for(const child of [...publicEntities].sort((a,b)=>a.id.localeCompare(b.id,'en'))){
  const parentId=child.hierarchy?.consolidated_parent_id??null;
  if(parentId===null)continue;
  const parent=byId.get(parentId);
  if(!parent)fail('parinte necunoscut '+child.id);
+ const validatedNode=validatedNodes.get(child.id);
+ if(validatedNode?.parent_id!==parentId||!validatedNodes.get(parentId)?.child_ids.includes(child.id))fail('muchie neconfirmata reciproc '+child.id);
  const p=addresses[parentId],c=addresses[child.id];
  if(!p||!c)fail('geometrie neindexata '+child.id);
  const pEntry=shards.get(p)?.[parentId],cEntry=shards.get(c)?.[child.id];
@@ -70,19 +77,20 @@ for(const child of [...publicEntities].sort((a,b)=>a.id.localeCompare(b.id,'en')
  const geometryStatus=relation==='contains'?'CONTAINED':relation==='equal'?'EQUAL':relation==='within'?'REVERSED_CONTAINMENT':relation==='disjoint'?'DISJOINT':relation==='uncertain'?'UNDETERMINED':relation==='boundary'?'BOUNDARY_ONLY':relation==='point'?'POINT_ONLY':relation==='overlap'?'PARTIAL_OVERLAP':'UNCLASSIFIED';
  // No source-certified administrative contradiction is asserted without a legal-evidence registry.
  const administrativeStatus='NOT_ADJUDICATED';
- const documentationStatus=geometryStatus==='CONTAINED'?'GEOMETRY_SUPPORTED_LEGAL_NOT_INFERRED':'REQUIRES_REVIEW';
- const category=geometryStatus==='CONTAINED'?'OK':geometryStatus==='UNDETERMINED'||geometryStatus==='UNCLASSIFIED'?'DOC':'GEO';
- const row={child_id:child.id,parent_id:parentId,jurisdiction:child.jurisdiction,child_name:child.display_name,parent_name:parent.display_name,child_type:child.display_type,parent_type:parent.display_type,geometry_relation:relation,geometry_status:geometryStatus,administrative_status:administrativeStatus,documentation_status:documentationStatus,category,topology_matrix:matrix,topology_shards:[p,c],legal_evidence_ids:[],notes:category==='GEO'?'Anomalie geometrica; nu constituie dovada de neconcordanta juridica':category==='DOC'?'Date insuficiente pentru verdict geometric':null};
+ const documentationStatus=geometryStatus==='CONTAINED'?'GEOMETRY_SUPPORTED_LEGAL_NOT_INFERRED':geometryStatus==='EQUAL'?'COEXTENSIVE_ROLES_REVIEW_REQUIRED':'REQUIRES_REVIEW';
+ const category=geometryStatus==='CONTAINED'?'OK':['EQUAL','UNDETERMINED','UNCLASSIFIED'].includes(geometryStatus)?'DOC':'GEO';
+ relations[relation]=(relations[relation]||0)+1;
+ const row={child_id:child.id,parent_id:parentId,jurisdiction:child.jurisdiction,child_name:child.display_name,parent_name:parent.display_name,child_type:child.display_type,parent_type:parent.display_type,geometry_relation:relation,geometry_status:geometryStatus,administrative_status:administrativeStatus,documentation_status:documentationStatus,category,topology_matrix:matrix,topology_shards:[p,c],legal_evidence_ids:[],notes:category==='GEO'?'Suprapunere geometrica partiala; nu constituie dovada de neconcordanta juridica':geometryStatus==='EQUAL'?'Geometrii egale: evaluarea rolurilor semantice si a dovezilor administrative este necesara':category==='DOC'?'Date insuficiente pentru verdict geometric':null};
  register.push(row);counts[category]++;if(category==='GEO')geo.push(row);if(category==='ADM')adm.push(row);if(category==='DOC')doc.push(row);
 }
 if(register.length!==5846)fail('acoperire relatii: '+register.length+' in loc de 5846');
 if(new Set(register.map(r=>r.child_id)).size!==5846)fail('duplicat in registru');
 if(Object.values(counts).reduce((a,b)=>a+b,0)!==5846)fail('suma categorii invalida');
-const summary={contract:'rt-audit1-parent-child-v1',status:'GEOMETRIC_RECONCILIATION_COMPLETE_ADMINISTRATIVE_NOT_ADJUDICATED',snapshot_id:manifest.snapshot_id,topology_index_sha256:digest(topBytes),entity_index_sha256:digest(entityBytes),total_relations:register.length,total_shards:shards.size,counts,source_proof:sourceProof,shard_proof:resourceProof,limitations:['Faptul ca geometria este continuta nu certifica juridic relatia.','Nu au fost furnizate dovezi juridice individuale structurate; ADM nu este evaluat ca zero contradictii demonstrate.','Perechile disjuncte pot lipsi din sharduri deoarece indexul retine doar perechi intersectate.','Nicio geometrie sau relatie parinte-copil nu a fost modificata.']};
+const summary={contract:'rt-audit1-parent-child-v1',status:'GEOMETRIC_RECONCILIATION_COMPLETE_ADMINISTRATIVE_NOT_ADJUDICATED',snapshot_id:manifest.snapshot_id,topology_index_sha256:digest(topBytes),entity_index_sha256:digest(entityBytes),total_relations:register.length,total_shards:shards.size,counts,relations,hierarchy_sha256:digest(hierarchyBytes),hierarchy_validation:'PASS_PARENT_CHILD_RECIPROCITY',administrative_review:'NOT_PERFORMED',source_proof:sourceProof,shard_proof:resourceProof,limitations:['Faptul ca geometria este continuta nu certifica juridic relatia.','Nu au fost furnizate dovezi juridice individuale structurate; ADM nu este evaluat ca zero contradictii demonstrate.','Perechile disjuncte pot lipsi din sharduri deoarece indexul retine doar perechi intersectate.','Nicio geometrie sau relatie parinte-copil nu a fost modificata.']};
 await mkdir(new URL(output,root),{recursive:true});
 const files={'parent-child-register.json':register,'geometric-exceptions.json':geo,'administrative-exceptions.json':adm,'insufficient-evidence.json':doc,'summary.json':summary};
 const checks=[];
 for(const [name,data] of Object.entries(files)){const buffer=Buffer.from(JSON.stringify(data,null,2)+'\n');await writeFile(new URL(output+name,root),buffer);checks.push(digest(buffer)+'  '+name)}
 await writeFile(new URL(output+'checksums.sha256',root),checks.join('\n')+'\n');
-await writeFile(new URL(output+'reconciliation-summary.md',root),'# RT-AUDIT.1 — rezultat\n\nSnapshot: '+manifest.snapshot_id+'\n\nRelatii: '+register.length+'; sharduri validate: '+shards.size+'; OK: '+counts.OK+'; GEO: '+counts.GEO+'; DOC: '+counts.DOC+'; ADM certificate: **neevaluate**.\n\nClasificarea GEO nu implica diferenta administrativa. Registrul administrativ este gol deoarece nu s-a adjudecat nicio contradictie in baza unor dovezi juridice individuale. Fisierele ACTUAL au fost doar citite.\n');
+await writeFile(new URL(output+'reconciliation-summary.md',root),'# RT-AUDIT.1 — rezultat\n\nSnapshot: '+manifest.snapshot_id+'\n\nRelatii: '+register.length+'; sharduri validate: '+shards.size+'; OK: '+counts.OK+'; GEO: '+counts.GEO+'; DOC: '+counts.DOC+'; ADM certificate: **neevaluate**. Arbore consolidat: reciprocitate PASS. Topologie: '+JSON.stringify(relations)+'.\n\nClasificarea GEO nu implica diferenta administrativa. Registrul administrativ este gol deoarece nu s-a adjudecat nicio contradictie in baza unor dovezi juridice individuale. Fisierele ACTUAL au fost doar citite.\n');
 console.log(JSON.stringify({status:summary.status,relations:register.length,shards:shards.size,counts}));
