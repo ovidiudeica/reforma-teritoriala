@@ -45,7 +45,11 @@ jobs:
           set -euo pipefail
           node scripts/process/build-actual-release-manifest.mjs
           node scripts/process/audit-actual-release-gate.mjs
-          node scripts/process/prepare-p905-runner-provenance.mjs
+          if node -e "const m=require('./data/current/actual-release-persisted.json');process.exit(m.provenance_hardening?.host_profile_id==='github-ubuntu24-20261026.354.1'?0:1)"; then
+            echo 'Previously generated provenance already committed; verify it without a second rebind'
+          else
+            node scripts/process/prepare-p905-runner-provenance.mjs
+          fi
           node scripts/process/verify-actual-persisted-base.mjs
       - name: Upload exact provenance proposal bytes (no write credentials)
         if: always()
@@ -68,6 +72,10 @@ jobs:
           test "$GITHUB_HEAD_REF" = "$AUTHORIZED_BRANCH"
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
           git add -- data/current/actual-host-trust-manifest.json data/current/actual-build-environment-manifest.json data/current/actual-build-environment-gate.json data/current/actual-release-manifest.json data/current/actual-release-gate.json data/current/actual-release-persisted.json
+          if git diff --cached --quiet; then
+            echo 'P905_PROVENANCE_ALREADY_COMMITTED_NO_REWRITE'
+            exit 0
+          fi
           node --input-type=module <<'NODE'
           import {execFileSync} from 'node:child_process';
           const permitted=new Set([
