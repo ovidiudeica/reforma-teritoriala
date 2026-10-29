@@ -55,5 +55,6 @@ const result={
  next_gate:'Independent A/B comparison, owner approval, separate provenance rebind, actual A/B reproduction'
 };
 await mkdir('outputs/p905-runner-qualification',{recursive:true});
-await writeFile('outputs/p905-runner-qualification/'+lane+'.json',asJson(result));
+const evidencePath=lane==='A'?'outputs/p905-runner-qualification/A.json':'outputs/p905-runner-qualification/B.json';
+await writeFile(evidencePath,asJson(result));
 console.log(JSON.stringify({lane,status:result.proposal_status,image:a.runner.image_version,baseline:latest.id,differences:differences.map(x=>x.field),proposed_fingerprint:proposedFingerprint,positive:'PASS',negative:'REJECTED',manifest_unchanged:true}));
