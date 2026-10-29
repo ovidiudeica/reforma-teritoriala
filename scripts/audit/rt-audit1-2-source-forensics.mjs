@@ -17,12 +17,14 @@ const officialPath='data/sources/cuatm-current.json';
 const reviewPath='data/sources/md-cuatm-individual-review.json';
 const policyPath='data/sources/actual-statistical-policy.json';
 const statPath='data/sources/md-nuts-2017.json';
+const nonCuatmPath='data/current/md-cuatm-non-cuatm-allotments.json';
 const geoPath='outputs/RT-AUDIT.1/overlap-254-per-id.json';
 const equalPath='outputs/RT-AUDIT.1/semantic-equalities-3.json';
-const [geo,equal,summary,sourceBundle,reconciliation,official,review,policy,stat,hist]=await Promise.all([
+const [geo,equal,summary,sourceBundle,reconciliation,official,review,policy,stat,hist,nonCuatm]=await Promise.all([
  json(geoPath),json(equalPath),json('outputs/RT-AUDIT.1/overlap-investigation-summary.json'),
- json(sourcePath),json(reconPath),json(officialPath),json(reviewPath),json(policyPath),json(statPath),json(histPath)
+ json(sourcePath),json(reconPath),json(officialPath),json(reviewPath),json(policyPath),json(statPath),json(histPath),json(nonCuatmPath)
 ]);
+if(nonCuatm.count!==123||nonCuatm.items.length!==123||nonCuatm.reconciliation_class!=='non_cuatm_allotment_boundary')fail('non-CUATM evidence class drift');
 if(geo.length!==254||equal.length!==3||summary.counts.computed_overlaps!==254||summary.baseline.snapshot_id!=='actual-a9e5a4ddcb5277ef')fail('baseline counts/snapshot drift');
 if(reconciliation.entity_count!==2596||reconciliation.official_snapshot_records!==1721||reconciliation.jurisdiction!=='MD')fail('official reconciliation mismatch');
 if(official.record_count!==1721||official.records.length!==1721)fail('CUATM snapshot mismatch');
@@ -43,6 +45,7 @@ for(const element of raw.elements){
 }
 const matches=new Map((reconciliation.matches||[]).map(x=>[x.id,x]));
 const officialById=new Map(official.records.map(x=>[x.code,x]));
+const auxiliaryById=new Map(nonCuatm.items.map(x=>[x.id,x]));
 const historyById=new Map();
 for(const group of hist.groups||[])for(const rel of group.relations||[])
  if(rel?.relation_id)historyById.set(rel.relation_id,{group_legal_id:group.legal_id,source:histPath,first_seen:rel.created_at,last_recorded:rel.last_modified_at,version:rel.current_version,number_of_archived_versions:rel.versions?.length??null,archived_change_events:(rel.versions||[]).filter(v=>v.members?.added?.length||v.members?.removed?.length).length});
@@ -116,8 +119,24 @@ const memberComparison=(a,b)=>{
   child_only_way_refs_sha256:sha(Buffer.from(JSON.stringify(onlyChild))),
   parent_only_way_refs_sha256:sha(Buffer.from(JSON.stringify(onlyParent)))};
 };
-const legalRelation=(child,parent)=>{
- if(!child.legal_id||!parent.legal_id)return 'LEGAL_LINK_NOT_CERTIFIABLE_FROM_RECONCILIATION';
+const legalRelation=(child,parent,childId,parentId)=>{
+ if(parentId==='stat-MD112'){
+  const component=officialById.get(child.legal_id)?.statistical_code;
+  const region=stat.units.find(x=>x.code==='MD112');
+  if(!component||!region?.component_statistical_codes.includes(component))fail('unverified BNS region member '+childId);
+  return 'VERIFIED_BNS_STATISTICAL_COMPONENT_PARENT';
+ }
+ if(auxiliaryById.has(childId)){
+  const auxiliary=auxiliaryById.get(childId);
+  if(auxiliary.reconciliation_class!=='non_cuatm_allotment_boundary'||String(auxiliary.verified_parent_legal_id)!==String(parent.legal_id))fail('non-CUATM legal-parent evidence mismatch '+childId);
+  return 'DOCUMENTED_NON_CUATM_AUXILIARY_WITH_VERIFIED_UAT_PARENT';
+ }
+ if(childId==='osm-r12104636'){
+  const caseEntry=reviews.get(childId);
+  if(caseEntry?.review_status!=='unresolved_identity'||String(caseEntry.verified_parent_legal_id)!==String(parent.legal_id))fail('unresolved identity review drift');
+  return 'DOCUMENTED_UNRESOLVED_POSITIVE_IDENTITY';
+ }
+ if(!child.legal_id||!parent.legal_id)return 'UNRECONCILED_IDENTITY_NEEDS_INDIVIDUAL_REVIEW';
  if(child.legal_id===parent.legal_id)return 'BOTH_OSM_RELATIONS_MATCH_SAME_CUATM_CODE';
  if(child.official_parent_id===parent.legal_id)return 'DISTINCT_CUATM_CODES_WITH_OFFICIAL_DIRECT_PARENT';
  if(child.official_parent_id!==parent.legal_id)return 'CURRENT_TREE_PARENT_DIFFERS_FROM_OFFICIAL_CUATM_PARENT';
@@ -130,7 +149,7 @@ for(const pair of geo){
  const c=relationRecord(pair.child_id),p=relationRecord(pair.parent_id);
  const source=memberComparison(c,p);
  const childLegal=officialBinding(pair.child_id),parentLegal=officialBinding(pair.parent_id);
- const legal=legalRelation(childLegal,parentLegal);
+ const legal=legalRelation(childLegal,parentLegal,pair.child_id,pair.parent_id);
  const rawChild=c.available?c.metadata:null,rawParent=p.available?p.metadata:null;
  const cHistory=historyById.get(rawChild?.id),pHistory=historyById.get(rawParent?.id);
  const caseReview=reviews.get(pair.child_id)||reviews.get(pair.parent_id)||null;
@@ -160,7 +179,18 @@ for(const pair of geo){
           ?'CUATM_TREE_PARENT_REVIEW_REQUIRED'
           :'OSM_TOPOLOGY_WITHOUT_OFFICIAL_CAUSE_EVIDENCE';
  const evidenceStatus='SOURCE_STRUCTURE_CONFIRMED_HISTORICAL_CAUSE_NOT_PROVEN';
+ const nonCuatmCase=auxiliaryById.get(pair.child_id);
+ const statisticalEvidence=legal==='VERIFIED_BNS_STATISTICAL_COMPONENT_PARENT'
+  ?{source:statPath,region_code:'MD112',child_official_cuatm_code:childLegal.legal_id,
+    component_statistical_code:officialById.get(childLegal.legal_id)?.statistical_code,
+    official_membership_confirmed:true}:null;
  const item={child_id:pair.child_id,parent_id:pair.parent_id,
+  optional_statistical_parent_evidence:statisticalEvidence,
+  non_cuatm_auxiliary_evidence:nonCuatmCase?{
+   source:nonCuatmPath,classification:nonCuatmCase.reconciliation_class,
+   method:nonCuatmCase.classification_method,
+   verified_parent_legal_id:nonCuatmCase.verified_parent_legal_id,
+   legal_uat_identity_claimed:false}:null,
   child_name:pair.child_name,parent_name:pair.parent_name,
   overlap_area_m2:pair.intersection_area_m2,child_outside_parent_m2:residual,
   previously_accepted_bbox_observation:previouslyDocumented?{
@@ -195,6 +225,13 @@ for(const pair of geo){
 }
 if(evidences.length!==254)fail('Not all overlap cases processed');
 if(evidences.filter(x=>x.previously_accepted_bbox_observation).length!==14)fail('14 known bbox observations not reconciled');
+for(const [key,expected] of Object.entries({
+ BOTH_OSM_RELATIONS_MATCH_SAME_CUATM_CODE:162,
+ DISTINCT_CUATM_CODES_WITH_OFFICIAL_DIRECT_PARENT:76,
+ DOCUMENTED_NON_CUATM_AUXILIARY_WITH_VERIFIED_UAT_PARENT:13,
+ VERIFIED_BNS_STATISTICAL_COMPONENT_PARENT:2,
+ DOCUMENTED_UNRESOLVED_POSITIVE_IDENTITY:1
+}))if((legalStatusCounts.get(key)||0)!==expected)fail('legal classification drift '+key);
 const equality=[];
 for(const x of equal){
  const c=relationRecord(x.child_id),p=relationRecord(x.parent_id),source=memberComparison(c,p);
@@ -229,7 +266,7 @@ const summaryOut={
  source_snapshot_semantic_sha256:md.semantic_sha256,
  input_evidence_sha256:{geometry:sha(await read(geoPath)),equalities:sha(await read(equalPath)),
   cuatm:sha(await read(officialPath)),reconciliation:sha(await read(reconPath)),history:sha(await read(histPath)),
-  statistical:sha(await read(statPath)),statistical_policy:sha(await read(policyPath))},
+  statistical:sha(await read(statPath)),statistical_policy:sha(await read(policyPath)),non_cuatm:sha(await read(nonCuatmPath))},
  cases:254,equalities:3,failed_source_case_count:reject.length,
  by_source_membership:obj(sourceCounts),by_legal_hierarchy:obj(legalStatusCounts),
  by_precision:obj(precisionCounts),by_archived_history_coverage:obj(historicalEvidenceCounts),
@@ -271,6 +308,7 @@ const mdLines=[
  'Membri OSM: '+JSON.stringify(summaryOut.by_source_membership),
  'Apartenență CUATM: '+JSON.stringify(summaryOut.by_legal_hierarchy),
  'Precizie: '+JSON.stringify(summaryOut.by_precision),
+ 'Registre administrative si statistice: '+JSON.stringify(summaryOut.by_legal_hierarchy),
  'Istoric OSM arhivat: '+JSON.stringify(summaryOut.by_archived_history_coverage),
  'Membri way comuni: '+JSON.stringify(summaryOut.by_direct_way_sharing),
  'Versiuni OSM complete: '+JSON.stringify(summaryOut.by_relation_metadata_coverage),
