@@ -1,0 +1,86 @@
+{
+  "schema": "p905-postmerge-certification-v1",
+  "status": "POST_MERGE_CI_CERTIFIED",
+  "certified_date_utc": "2026-10-29",
+  "repository": "ovidiudeica/reforma-teritoriala",
+  "incident_issue": 461,
+  "integrated_pr": 464,
+  "certified_commit": "9fbc07321c6a76df5463cb4420c4f25a91a14f7a",
+  "source_pr_head": "0063bee97f27ba578bb16af11a6aadd9a60907ec",
+  "checks": {
+    "total": 22,
+    "success": 22,
+    "failure": 0,
+    "skipped": 0,
+    "pending": 0,
+    "source": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/commits/9fbc07321c6a76df5463cb4420c4f25a91a14f7a/check-runs",
+    "repro_workflow_run": 40974123534,
+    "required_repro_jobs": [
+      "detect-change-repro-scope",
+      "actual-change-repro-A",
+      "actual-change-repro-B",
+      "actual-change-repro-compare",
+      "actual-change-reproducibility"
+    ],
+    "conclusions": "ALL_SUCCESS",
+    "other_evidence": [
+      "CodeQL actions/python/javascript-typescript SUCCESS",
+      "verify-persisted-release SUCCESS",
+      "actual-release-trust-chain SUCCESS",
+      "p82-derived-topology SUCCESS",
+      "p83-geometric-validation SUCCESS",
+      "p84-export-validation SUCCESS",
+      "frontend-browser-qa SUCCESS",
+      "chromium-hardening SUCCESS",
+      "Pages build/deploy SUCCESS"
+    ]
+  },
+  "actual_reproducibility": {
+    "status": "BYTE_IDENTICAL_INDEPENDENTLY_VERIFIED",
+    "artifacts": [
+      {
+        "lane": "A",
+        "id": 12943000090,
+        "name": "actual-change-repro-40974123534-A",
+        "zip_sha256": "bdba94d0ed8890e8152180eb823b4c72f7dde3a5653f09392405564f1f2fc934"
+      },
+      {
+        "lane": "B",
+        "id": 12942650992,
+        "name": "actual-change-repro-40974123534-B",
+        "zip_sha256": "c67e359ff32a94e5b3dcd1f9a4de837ffd1ab3c8d9d6f90559ff9adf39b19068"
+      }
+    ],
+    "identical_members": {
+      "candidate-tree.tar": {
+        "bytes": 498903040,
+        "sha256": "8377452f7d740e4c222355c08d319ff942f54d9928bdb1ca79e1f2404c52ed73"
+      },
+      "candidate-ls-tree.txt": {
+        "bytes": 281353,
+        "sha256": "8153240a4d822a25d6cff0a11ef50c1f486c5dd3770fa91de8b7bd48933967a1"
+      },
+      "proof.json": {
+        "bytes": 845,
+        "sha256": "cab398ee542129d72262f6c69712e8ca40fccd1961a6177b8937a4c708139430"
+      }
+    },
+    "verification": "independently streamed SHA-256 of decompressed member bytes, all three members equal A/B; ZIP digests match GitHub artifacts"
+  },
+  "binding": {
+    "profile_id": "github-ubuntu24-20261026.354.1",
+    "host_trust_fingerprint_sha256": "90137aeb9032a2612a9414fe595213ac9daa0f0af8c28bcd4fce3c5341456b8d",
+    "actual_release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "build_environment_fingerprint_sha256": "5c384d69f6e73897af368a4dc67795778a7e2561f9dfab3d3abf62a0446f92fa",
+    "release_manifest_sha256": "c26aae69a60a305f21163feeb19bfc35be221b67c4659cb3eca7139de52be60f",
+    "persisted_release_status": "PASS"
+  },
+  "constraints": {
+    "actual_administrative_tree_unchanged": true,
+    "geometry_unchanged": true,
+    "semantic_identity_unchanged": true,
+    "p91_import_allowed": false,
+    "automatic_admin_corrections_allowed": false
+  },
+  "interpretation": "Certifies ACTUAL post-merge CI for the exact merge SHA, not any future runner image or future commit. Admission evidence remains in PR #464; no P9.1 permission or administrative semantic adjudication."
+}
