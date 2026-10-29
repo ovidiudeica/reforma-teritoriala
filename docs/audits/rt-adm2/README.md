@@ -53,3 +53,12 @@ Legea nr. 290/2018 și Decretul nr. 284/1979 confirmă existența și organizare
 ## Stare și protecții
 
 **RT-ADM.2: registrul inițial de decizii complet; certificarea juridică a footprinturilor: deschisă.** Modificările sunt doar documente de audit într-un branch nou; ACTUAL, geometriile, parentajele și P9.1 rămân nemodificate. Branch-ul de bază al PR #459 și `main` nu sunt modificate de RT-ADM.2. Orice CI aferent unui nou commit trebuie verificat separat; nu se declară PASS fără verificare.
+
+### Coroborare normativă suplimentară RO — localitățile Târgu Mureș
+
+Anexa consolidată a Legii nr. 2/1968 și anexa Legii nr. 290/2018 consemnează explicit **Mureșeni** și **Remetea** ca localități componente ale municipiului **Târgu Mureș**. O normă de inscripționare administrativă confirmă și denumirile locale. Este astfel stabilit **rolul juridic al localităților nominale**, dar nu este certificat că poligoanele OSM `osm-r11283027` și `osm-r11283576` au exact limitele legale și nici nu se poate atribui un cod SIRUTA din simpla potrivire nominală.
+
+Surse:
+- https://legislatie.just.ro/public/detaliidocument/190
+- https://legislatie.just.ro/Public/DetaliiDocument/208652
+- https://legislatie.just.ro/Public/DetaliiDocumentAfis/217004
