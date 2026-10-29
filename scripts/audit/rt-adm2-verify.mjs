@@ -21,6 +21,10 @@ if(statuses.CODE_PARENT_CONFLICT_FOOTPRINT_ID_UNCERTIFIED!==2||
    statuses.POSITIVE_IDENTITY_NOT_ESTABLISHED!==1||
    statuses.OSM_FOOTPRINT_IDENTITY_NOT_CERTIFIED!==5||
    statuses.OFFICIAL_SECTOR_EXISTS_OSM_BOUNDARY_NOT_CERTIFIED!==6)fail('status distribution drift');
-if(doc.validation_summary.verified_legal_roles_or_parent_codes!==13||
-   doc.validation_summary.certified_osm_footprints!==0)fail('certification drift');
+const observedRoleCount=doc.records.filter(x=>x.legal_role_evidence_status!=='NO_POSITIVE_IDENTITY').length;
+if(observedRoleCount!==13||doc.records.filter(x=>x.legal_footprint_certified===true).length!==0)fail('case evidence drift');
+if(doc.validation_summary.total!==doc.records.length||doc.validation_summary.unique_ids!==new Set(doc.records.map(x=>x.id)).size||
+   doc.validation_summary.verified_legal_roles_or_parent_codes!==observedRoleCount||
+   doc.validation_summary.certified_osm_footprints!==0||doc.validation_summary.proposed_tree_edits!==0||doc.validation_summary.all_no_change!==true)fail('certification summary drift');
+if(doc.records.filter(x=>x.status==='POSITIVE_IDENTITY_NOT_ESTABLISHED').some(x=>x.legal_role_evidence_status!=='NO_POSITIVE_IDENTITY'))fail('unresolved identity silently promoted');
 console.log(JSON.stringify({status:'RT_ADM2_DECISION_REGISTER_VERIFIED',cases:14,legal_role_or_parent_evidence:13,positive_identity_missing:1,certified_osm_footprints:0,automatic_actions:0}));
