@@ -2,12 +2,12 @@
   "schema_version": 1,
   "snapshot_id": "actual-a9e5a4ddcb5277ef",
   "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
-  "manifest_sha256": "cc604a8fe88a9b4e044f3dea3032eedf020ee3d102a1b944aaf626da73abf1a5",
+  "manifest_sha256": "c26aae69a60a305f21163feeb19bfc35be221b67c4659cb3eca7139de52be60f",
   "source_bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
   "review_evidence_bundle_fingerprint_sha256": "63d90eaac122f2264414b4c26a1545cc95bad58732498335419205e29330ae79",
   "network_denial_sha256": "905e74dc6b0fd879c419cdeb9032f4dd870fa374e2857895f2012553c53e49aa",
-  "host_trust_fingerprint_sha256": "f3a11ed754cbd66758169ec1943653c33ebb5d4e7350e88d5db26b0e1044ebbf",
-  "build_environment_fingerprint_sha256": "2e46296ea8bf294962f32a2a3e9ed45265cee404e5a143aee2164695c0cee91d",
+  "host_trust_fingerprint_sha256": "90137aeb9032a2612a9414fe595213ac9daa0f0af8c28bcd4fce3c5341456b8d",
+  "build_environment_fingerprint_sha256": "5c384d69f6e73897af368a4dc67795778a7e2561f9dfab3d3abf62a0446f92fa",
   "validated_release_gate_status": "PASS",
   "promoted_from_candidate": {
     "base_snapshot_id": "actual-6a7eac47d66d6701",
@@ -21,9 +21,9 @@
   },
   "policy": "Persisted ACTUAL release marker written only by explicit candidate promotion after exact deterministic candidate validation, exact source-bundle, frozen review-evidence, host-trust contract, kernel network-denial and execution-environment binding, and unchanged-base verification. Volatile workflow execution metadata is intentionally excluded from persisted release bytes.",
   "provenance_hardening": {
-    "previous_manifest_sha256": "52ae583f284bac2d00bc3b5e4b96b6c429c659b8def297197d7f3f38dc042856",
+    "previous_manifest_sha256": "cc604a8fe88a9b4e044f3dea3032eedf020ee3d102a1b944aaf626da73abf1a5",
     "change_type": "P9.0.5_runner_host_trust_explicit_refresh",
-    "host_profile_id": "github-ubuntu24-20261023.334.3",
+    "host_profile_id": "github-ubuntu24-20261026.354.1",
     "method": "provenance_only_no_semantic_change",
     "semantic_identity_unchanged": true
   }
