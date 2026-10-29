@@ -1,0 +1,43 @@
+{
+  "schema": "p905-exact-provenance-admission-v2",
+  "historical_base": "073a1ee2a2098392df5891fb6b15e69b0eef2d9c",
+  "source_provenance_base": "91ebb643ea5539d8710f86f2a64aef0b348d85c2",
+  "profile": "github-ubuntu24-20261026.354.1",
+  "fingerprint": "90137aeb9032a2612a9414fe595213ac9daa0f0af8c28bcd4fce3c5341456b8d",
+  "run": 40965474111,
+  "artifact_id": 12937472925,
+  "qualification_run": 40961263063,
+  "owner_authorization_sha256": "b59822bd9a947cd5e8d5d6c5f97e0f7f18584c6aa4852e62ee393323f6caa831",
+  "files": {
+    "data/current/actual-build-environment-gate.json": {
+      "sha256": "91b7402ad0267c544b4560e754e5ea8905638ea6b576a5e4959768339722ff0f",
+      "bytes": 12340
+    },
+    "data/current/actual-build-environment-manifest.json": {
+      "sha256": "58a4e6a5166a9316a493ea9aae5c527b547e1c9e5579c0bc014cf29cf1f01843",
+      "bytes": 11963
+    },
+    "data/current/actual-host-trust-manifest.json": {
+      "sha256": "26a6465534d47aedd275b75a3507d2e79b2e9658ac24cbd6cf2ea3b4dc1d3d25",
+      "bytes": 11565
+    },
+    "data/current/actual-release-gate.json": {
+      "sha256": "fd4af560b4c6a37ce420cb0415e1ca65e8b26e47d214b7e13a51431c3cb741ec",
+      "bytes": 39860
+    },
+    "data/current/actual-release-manifest.json": {
+      "sha256": "c26aae69a60a305f21163feeb19bfc35be221b67c4659cb3eca7139de52be60f",
+      "bytes": 22513
+    },
+    "data/current/actual-release-persisted.json": {
+      "sha256": "a299387b13edad7f6c0793dac1c15fe140b028b3219a5e569b7f26444a234242",
+      "bytes": 2133
+    }
+  },
+  "assertions": {
+    "semantic_fingerprint_unchanged": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "geometry_and_administrative_data_unchanged": true,
+    "release_and_environment_gates": "PASS",
+    "actual_A_B_must_run": true
+  }
+}
