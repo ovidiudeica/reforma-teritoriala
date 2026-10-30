@@ -1,0 +1,86 @@
+{
+  "schema": "rt-adm2-5-osmb-cartographic-closure-v1",
+  "date": "2026-10-30",
+  "policy": "OSMB_CARTOGRAPHIC_ACCEPTANCE_SEPARATE_FROM_LEGAL_CERTIFICATION",
+  "base_main_sha": "b72d6279b218e220d8ea1f26e38510fec0f51f2e",
+  "decision_scope": "Existing imported OSMB shapes in ACTUAL accepted for mapping, without replacing polygons or editing sources",
+  "source_chain": [
+    "docs/audits/rt-adm2-1/individual-evidence-register.json (PR 466, not merged at audit time)",
+    "docs/audits/rt-adm2-2/targeted-primary-evidence-register.json (PR 467, not merged at audit time)",
+    "docs/audits/rt-adm2-3/EXECUTION-VERIFICATION.md (PR 468, not merged at audit time)",
+    "docs/audits/rt-adm2-4/ARTIFACT-EXAMINATION.md (PR 469, not merged at audit time)"
+  ],
+  "osmb_snapshot_sha256_certified_this_step": false,
+  "osmb_geometries_reimported": false,
+  "access_to_legal_cadastre_required_for_cartographic_acceptance": false,
+  "official_cadastral_status": "NOT_ACQUIRED_NOT_REQUIRED_FOR_CARTOGRAPHIC_ACCEPTANCE",
+  "cases": [
+    {
+      "id": "osm-r18967570",
+      "name": "Bondareuca",
+      "way_ids": [
+        1376179980
+      ],
+      "cuatm": "8961",
+      "official_parent": "8960",
+      "tree_parent": "7433",
+      "semantic_status": "CODE_PARENT_DISCREPANCY_UNRESOLVED",
+      "cartographic_decision": "ACCEPT_EXISTING_OSMB_REPRESENTATION_AS_IS",
+      "legal_boundary_equivalence_certified": false,
+      "legal_identity_and_parentage_changed": false,
+      "geometry_edit_authorized": false,
+      "cuatm_binding_edit_authorized": false,
+      "administrative_reparent_authorized": false,
+      "issue_closure": "CARTOGRAPHIC_ONLY",
+      "remaining_gate": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r18968043",
+      "name": "Etulia, loc. st. c. f.",
+      "way_ids": [
+        1376179909,
+        1376180675
+      ],
+      "cuatm": "9639",
+      "official_parent": "9629",
+      "tree_parent": "9621",
+      "semantic_status": "CODE_PARENT_DISCREPANCY_UNRESOLVED",
+      "cartographic_decision": "ACCEPT_EXISTING_OSMB_REPRESENTATION_AS_IS",
+      "legal_boundary_equivalence_certified": false,
+      "legal_identity_and_parentage_changed": false,
+      "geometry_edit_authorized": false,
+      "cuatm_binding_edit_authorized": false,
+      "administrative_reparent_authorized": false,
+      "issue_closure": "CARTOGRAPHIC_ONLY",
+      "remaining_gate": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r12104636",
+      "name": null,
+      "way_ids": [
+        889101842
+      ],
+      "cuatm": null,
+      "official_parent": null,
+      "tree_parent": "3136",
+      "semantic_status": "POSITIVE_IDENTITY_UNRESOLVED",
+      "cartographic_decision": "ACCEPT_EXISTING_OSMB_REPRESENTATION_AS_IS",
+      "legal_boundary_equivalence_certified": false,
+      "legal_identity_and_parentage_changed": false,
+      "geometry_edit_authorized": false,
+      "cuatm_binding_edit_authorized": false,
+      "administrative_reparent_authorized": false,
+      "issue_closure": "CARTOGRAPHIC_ONLY",
+      "remaining_gate": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    }
+  ],
+  "global_invariants": {
+    "no_actual_edits": true,
+    "no_reparent": true,
+    "no_cuatm_binding_change": true,
+    "no_geometry_edit": true,
+    "no_status_claim_of_legal_certification": true,
+    "p9_1_blocked": true
+  },
+  "result": "THREE_CARTOGRAPHIC_CASES_CLOSED_LEGAL_EXCEPTIONS_OPEN"
+}
