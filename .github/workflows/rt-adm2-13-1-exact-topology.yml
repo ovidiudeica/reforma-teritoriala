@@ -6,11 +6,6 @@ on:
     paths:
       - scripts/audit/rt-adm2-13-1-exact-topology.py
       - .github/workflows/rt-adm2-13-1-exact-topology.yml
-  pull_request:
-    paths:
-      - scripts/audit/rt-adm2-13-1-exact-topology.py
-      - .github/workflows/rt-adm2-13-1-exact-topology.yml
-  workflow_dispatch:
 permissions:
   contents: read
 jobs:
