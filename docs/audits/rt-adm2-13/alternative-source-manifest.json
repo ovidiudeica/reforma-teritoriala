@@ -1,0 +1,153 @@
+{
+  "schema": "rt-adm2-13-alternative-official-documentary-v1",
+  "reference_date": "2026-10-30",
+  "base_main": "f8a3d11410868c4d786ef8f2e4df92d6120b0866",
+  "sources": [
+    {
+      "id": "D284_1979",
+      "url": "https://legislatie.just.ro/Public/FormaPrintabila/00000G2EQS2F040U8L11D6AZZNTD0Y4X",
+      "type": "historical_decree_boundary_appendix"
+    },
+    {
+      "id": "L2_1981_REPUBLICATION",
+      "url": "https://legislatie.just.ro/Public/FormaPrintabila/00000G0D6XQ66EROUQG1J17G6C2C6XTS",
+      "type": "republication_sector_enumeration_not_verified_boundary_description"
+    },
+    {
+      "id": "L2_CONSOLIDATED",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+      "type": "consolidated_act_status"
+    }
+  ],
+  "known_limitations": [
+    "Un URL de formă printabilă nu identifică toate versiunile consolidate 1979–2026.",
+    "Diferențele textuale nu demonstrează modificări de hotar fără expertiza efectelor actelor.",
+    "Erorile HTTP ori extragerea incompletă se clasifică drept excepții, nu egalități.",
+    "Niciun contur OSM nu este comparat sau certificat juridic.",
+    "Pagina republicării Legii 2/1968 indică existența sectoarelor, dar nu furnizează demonstrat aceleași șase descrieri de delimitare ca anexa 1 a Decretului 284/1979; nu se poate impune o comparație text-la-text între surse juridic diferite."
+  ],
+  "per_sector": [
+    {
+      "sector": 1,
+      "required_sources": [
+        "D284_1979",
+        "VERIFIED_LATER_BOUNDARY_MODIFYING_ACT_IF_ANY"
+      ],
+      "status": "BASELINE_INDEXED_AMENDMENT_TEXT_NOT_RECOVERED",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false,
+      "baseline_1979_downloaded": false,
+      "later_boundary_modifying_act_found": false
+    },
+    {
+      "sector": 2,
+      "required_sources": [
+        "D284_1979",
+        "VERIFIED_LATER_BOUNDARY_MODIFYING_ACT_IF_ANY"
+      ],
+      "status": "BASELINE_INDEXED_AMENDMENT_TEXT_NOT_RECOVERED",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false,
+      "baseline_1979_downloaded": false,
+      "later_boundary_modifying_act_found": false
+    },
+    {
+      "sector": 3,
+      "required_sources": [
+        "D284_1979",
+        "VERIFIED_LATER_BOUNDARY_MODIFYING_ACT_IF_ANY"
+      ],
+      "status": "BASELINE_INDEXED_AMENDMENT_TEXT_NOT_RECOVERED",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false,
+      "baseline_1979_downloaded": false,
+      "later_boundary_modifying_act_found": false
+    },
+    {
+      "sector": 4,
+      "required_sources": [
+        "D284_1979",
+        "VERIFIED_LATER_BOUNDARY_MODIFYING_ACT_IF_ANY"
+      ],
+      "status": "BASELINE_INDEXED_AMENDMENT_TEXT_NOT_RECOVERED",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false,
+      "baseline_1979_downloaded": false,
+      "later_boundary_modifying_act_found": false
+    },
+    {
+      "sector": 5,
+      "required_sources": [
+        "D284_1979",
+        "VERIFIED_LATER_BOUNDARY_MODIFYING_ACT_IF_ANY"
+      ],
+      "status": "BASELINE_INDEXED_AMENDMENT_TEXT_NOT_RECOVERED",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false,
+      "baseline_1979_downloaded": false,
+      "later_boundary_modifying_act_found": false
+    },
+    {
+      "sector": 6,
+      "required_sources": [
+        "D284_1979",
+        "VERIFIED_LATER_BOUNDARY_MODIFYING_ACT_IF_ANY"
+      ],
+      "status": "BASELINE_INDEXED_AMENDMENT_TEXT_NOT_RECOVERED",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false,
+      "baseline_1979_downloaded": false,
+      "later_boundary_modifying_act_found": false
+    }
+  ],
+  "certification": {
+    "official_versions_fully_retrieved": 0,
+    "sector_pairs_automatically_compared_and_verified": 0,
+    "exhaustive_1979_2026_amendments": false,
+    "osm_legal_equivalences": 0
+  },
+  "restrictions": {
+    "ACTUAL_edits": false,
+    "reparent": false,
+    "code_assignment": false,
+    "P9_1_authorized": false,
+    "external_requests": false
+  },
+  "verified_alternative_url_basis": [
+    {
+      "id": "D284_1979",
+      "status": "SEARCH_INDEX_VISIBLE_ORIGIN_HTTP_502",
+      "route": "official printable source"
+    },
+    {
+      "id": "L2_1981_REPUBLICATION",
+      "status": "SEARCH_INDEX_VISIBLE_ORIGIN_HTTP_502",
+      "route": "official printable source"
+    }
+  ],
+  "legal_boundary_evidence_model": {
+    "baseline": {
+      "act": "Decret 284/1979",
+      "publication": "Buletinul Oficial nr. 69, 1 august 1979",
+      "effective_date_official_index": "1979-08-01",
+      "article": "Art. 1, Art. 5, Anexa 1",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+      "official_index_verified": true,
+      "official_binary_original_recovered": false,
+      "full_page_binary_hash": null
+    },
+    "approval": {
+      "act": "Legea 31/1979",
+      "publication": "Buletinul Oficial nr. 103, 19 decembrie 1979",
+      "article": "Articolul unic",
+      "url": "https://legislatie.just.ro/public/DetaliiDocument/28169",
+      "effect": "APPROVES_DECREE_NO_SEPARATE_BOUNDARY_ANNEX_DEMONSTRATED"
+    },
+    "corroboration": {
+      "act": "Legea 2/1968 republicată",
+      "effect": "SECTOR_ENUMERATION_NOT_INDEPENDENT_BOUNDARY_TEXT"
+    },
+    "required_comparison_rule": "Compare the six normative descriptions in Annex 1 of Decree 284/1979 only against later explicitly identified modifying boundary provisions; do not compare sector enumeration with a boundary description.",
+    "amending_boundary_provisions_recovered": 0
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schema": "rt-adm2-13-osmb-cartographic-handoff-v1",
+  "reference_date": "2026-10-30",
+  "source": "OSM-Boundaries",
+  "documentation_url": "https://osm-boundaries.com/about/api",
+  "source_requirements": {
+    "api_key_required": true,
+    "downloads_consume_credits": true,
+    "download_authorized_without_charge": false,
+    "actual_download_executed": false
+  },
+  "identity_basis": "RT-ADM.2.11 approved RO sector OSM relation identifiers and SIRUTA 2026 codes; neither is a boundary polygon",
+  "sector_crosswalk": [
+    {
+      "sector": 1,
+      "osm_relation_id": 7960954,
+      "siruta_2026": "179141",
+      "osmb_export_obtained": false,
+      "osmb_geometry_sha256": null,
+      "cartographic_identity_certified": false,
+      "legal_boundary_equivalence_certified": false,
+      "legal_amendment_exhaustiveness_certified": false,
+      "status": "OSMB_ID_CROSSWALK_ONLY_PENDING_GEOMETRY_ACQUISITION"
+    },
+    {
+      "sector": 2,
+      "osm_relation_id": 7960953,
+      "siruta_2026": "179150",
+      "osmb_export_obtained": false,
+      "osmb_geometry_sha256": null,
+      "cartographic_identity_certified": false,
+      "legal_boundary_equivalence_certified": false,
+      "legal_amendment_exhaustiveness_certified": false,
+      "status": "OSMB_ID_CROSSWALK_ONLY_PENDING_GEOMETRY_ACQUISITION"
+    },
+    {
+      "sector": 3,
+      "osm_relation_id": 7960937,
+      "siruta_2026": "179169",
+      "osmb_export_obtained": false,
+      "osmb_geometry_sha256": null,
+      "cartographic_identity_certified": false,
+      "legal_boundary_equivalence_certified": false,
+      "legal_amendment_exhaustiveness_certified": false,
+      "status": "OSMB_ID_CROSSWALK_ONLY_PENDING_GEOMETRY_ACQUISITION"
+    },
+    {
+      "sector": 4,
+      "osm_relation_id": 7960957,
+      "siruta_2026": "179178",
+      "osmb_export_obtained": false,
+      "osmb_geometry_sha256": null,
+      "cartographic_identity_certified": false,
+      "legal_boundary_equivalence_certified": false,
+      "legal_amendment_exhaustiveness_certified": false,
+      "status": "OSMB_ID_CROSSWALK_ONLY_PENDING_GEOMETRY_ACQUISITION"
+    },
+    {
+      "sector": 5,
+      "osm_relation_id": 7960956,
+      "siruta_2026": "179187",
+      "osmb_export_obtained": false,
+      "osmb_geometry_sha256": null,
+      "cartographic_identity_certified": false,
+      "legal_boundary_equivalence_certified": false,
+      "legal_amendment_exhaustiveness_certified": false,
+      "status": "OSMB_ID_CROSSWALK_ONLY_PENDING_GEOMETRY_ACQUISITION"
+    },
+    {
+      "sector": 6,
+      "osm_relation_id": 7960955,
+      "siruta_2026": "179196",
+      "osmb_export_obtained": false,
+      "osmb_geometry_sha256": null,
+      "cartographic_identity_certified": false,
+      "legal_boundary_equivalence_certified": false,
+      "legal_amendment_exhaustiveness_certified": false,
+      "status": "OSMB_ID_CROSSWALK_ONLY_PENDING_GEOMETRY_ACQUISITION"
+    }
+  ],
+  "classification": {
+    "cartographic_gate": "BLOCKED_NO_OSMB_GEOMETRY_BYTES",
+    "normative_gate": "BLOCKED_NO_ARCHIVAL_ORIGINAL_AND_AMENDMENT_EXHAUSTIVENESS",
+    "full_legal_acceptance": false,
+    "read_only_registry_allowed": true
+  },
+  "constraints": {
+    "ACTUAL_modified": false,
+    "automatic_legal_equivalence": false,
+    "P9_1_authorized": false,
+    "orders": false,
+    "payments": false
+  }
+}
