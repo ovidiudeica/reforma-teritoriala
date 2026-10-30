@@ -1,0 +1,11 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const d=JSON.parse(fs.readFileSync('docs/audits/rt-adm2-12/version-by-version-review.json','utf8'));
+assert.equal(d.versions.length,10);assert.equal(new Set(d.versions.map(v=>v.date)).size,10);
+assert(d.versions.every(v=>v.individual_version_indexed&&!v.full_version_text_retrieved_in_this_step&&!v.annex_sector_boundary_text_diff_verified&&v.effect_on_six_sector_boundaries==='UNDETERMINED'));
+assert.equal(d.sectors.length,6);assert.equal(new Set(d.sectors.map(x=>x.id)).size,6);
+assert(d.sectors.every(x=>x.version_boundary_diff_certified===0&&!x.legal_boundary_2026_certified&&!x.osm_polygon_legal_equivalence));
+assert.equal(d.completeness.full_text_versions_individually_diffed,0);
+assert.equal(d.completeness.negative_exhaustiveness_certifications,0);
+assert.equal(d.completeness.official_full_corpus_complete,false);
+assert(Object.values(d.restrictions).every(x=>x===false));
+console.log('RT-ADM.2.12 PASS — indexed versions and evidence gaps preserved; no unsupported boundary certification');
