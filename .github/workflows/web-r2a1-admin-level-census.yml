@@ -34,6 +34,10 @@ jobs:
         run: |
           node scripts/audit/web-r2a1-provenance-boundary.mjs
           git status --short
+      - name: Install OSMB geometric replay dependencies
+        run: python -m pip install 'shapely==2.1.2' 'pyproj==3.7.2'
+      - name: Verify RT-ADM.2.13.1 OSMB replay and SHA-256 evidence
+        run: python scripts/audit/rt-adm2-13-1-verify-osmb.py
       - name: Upload deterministic WEB-R2a.1 evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
