@@ -23,6 +23,7 @@ for(let sector=1;sector<=6;sector++){
  const x=result.sources[0].sections[sector],y=result.sources[1].sections[sector];
  result.per_sector.push({sector,comparison_status:x&&y?'TEXT_COMPARISON_AVAILABLE':'NOT_COMPARABLE_SOURCE_OR_SECTION_MISSING',normalized_text_equal:x&&y?x.text===y.text:null,legal_boundary_equal:null,missing_sources:[...(!x?['D284_1979']:[]),...(!y?['L2_1981_REPUBLICATION']:[])]});
 }
+result.evidence_status=result.per_sector.every(x=>x.comparison_status==='TEXT_COMPARISON_AVAILABLE')?'ALL_SIX_TEXT_PAIRS_AVAILABLE':result.sources.every(s=>s.status.startsWith('EXCEPTION_'))?'ALL_OFFICIAL_FETCHES_FAILED':'PARTIAL_OR_INCOMPLETE_EVIDENCE';
 fs.mkdirSync('outputs/RT-ADM.2.13',{recursive:true});fs.writeFileSync('outputs/RT-ADM.2.13/extraction-and-comparison.json',JSON.stringify(result,null,2)+'\n');
-result.evidence_status=result.per_sector.every(x=>x.comparison_status==='TEXT_COMPARISON_AVAILABLE')?'ALL_SIX_TEXT_PAIRS_AVAILABLE':result.sources.every(s=>s.status.startsWith('EXCEPTION_'))?'ALL_OFFICIAL_FETCHES_FAILED':'PARTIAL_OR_INCOMPLETE_EVIDENCE';console.log('EVIDENCE STATUS: '+result.evidence_status);console.log(JSON.stringify({sources:result.sources.map(s=>({id:s.id,status:s.status,sha256:s.sha256})),sectors:result.per_sector.map(x=>({sector:x.sector,status:x.comparison_status,text_equal:x.normalized_text_equal}))},null,2));
+console.log('EVIDENCE STATUS: '+result.evidence_status);console.log(JSON.stringify({sources:result.sources.map(s=>({id:s.id,status:s.status,sha256:s.sha256})),sectors:result.per_sector.map(x=>({sector:x.sector,status:x.comparison_status,text_equal:x.normalized_text_equal}))},null,2));
 assert(result.per_sector.every(x=>x.legal_boundary_equal===null));assert.equal(result.exhaustive,false);
