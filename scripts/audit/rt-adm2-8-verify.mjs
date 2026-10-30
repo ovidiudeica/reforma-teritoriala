@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const d=JSON.parse(fs.readFileSync('docs/audits/rt-adm2-8/consolidated-legal-exceptions.json','utf8'));
+const a=JSON.parse(fs.readFileSync('docs/audits/rt-adm2-6/legal-exceptions-resumption.json','utf8'));
+const b=JSON.parse(fs.readFileSync('docs/audits/rt-adm2-7/normative-identity-register.json','utf8'));
+assert.equal(d.cases.length,14);
+assert.equal(new Set(d.cases.map(x=>x.id)).size,14);
+assert.deepEqual(d.cases.map(x=>x.id).sort(),b.per_id.map(x=>x.id).sort());
+assert.deepEqual(d.cases.map(x=>x.id).sort(),a.cases.map(x=>x.id).sort());
+assert.equal(d.cases.filter(x=>x.jurisdiction==='MD').length,3);
+assert.equal(d.cases.filter(x=>x.reference_code_class==='INS_SIRUTA_S1_2026_NORMALIZED').length,5);
+assert.equal(d.cases.filter(x=>x.reference_code_class==='NRSIRUTA_2021_REDUCED').length,6);
+assert.equal(d.cases.filter(x=>x.cartographic_status==='OSMB_ACCEPTED_BY_PR471').length,3);
+assert(d.cases.every(x=>x.missing_primary_evidence.length>=2&&!x.legal_osm_boundary_equivalence_certified&&!x.administrative_change_authorized&&x.decision==='NO_CHANGE_PENDING_PRIMARY_EVIDENCE'));
+assert.equal(d.summary.legal_boundary_certifications,0);
+assert.equal(d.summary.authorized_admin_changes,0);
+assert(Object.values(d.restrictions).every(x=>x===false));
+console.log('RT-ADM.2.8 PASS — 14 legal dossiers, 28 primary-evidence gaps; no ACTUAL changes');
