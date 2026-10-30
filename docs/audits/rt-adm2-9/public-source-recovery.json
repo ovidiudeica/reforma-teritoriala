@@ -1,0 +1,162 @@
+{
+  "schema": "rt-adm2-9-public-primary-source-recovery-v1",
+  "reference_date": "2026-10-30",
+  "based_on_main": "1884ede70f5e90588c3be1bd4924decc4ea46981",
+  "sources": [
+    {
+      "id": "INS_2026_RAW_THIRD_PARTY_ARCHIVE",
+      "url": "https://github.com/romania/siruta/blob/main/sources/current/siruta.csv",
+      "git_blob_sha": "6bb94fed34c7e88c15be4eda63b2d8097ff9a8f3",
+      "status": "RAW_REPRODUCTION_FETCHED_AND_ROWS_INSPECTED_NOT_OFFICIAL_HOST_BINARY_VERIFIED",
+      "publisher_asserted_official_sha256": "f443e49af2f9c9dce8ea515ae53090a18fb476547466b6cd804051424eaf72c6",
+      "official_url": "https://data.gov.ro/dataset/721c9059-5f87-4c79-9854-a1d5c18f58d5/resource/dac903f0-32b5-489a-89e7-2c80d96cf68d/download/siruta_s1_2026.csv",
+      "direct_official_access": "FAILED_UNAVAILABLE"
+    },
+    {
+      "id": "BUCHAREST_DECREE_1979",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+      "status": "PUBLIC_OFFICIAL_LEGAL_TEXT_READ",
+      "appendix": "Anexa 1: descrieri textuale pentru sectoarele 1–6; nu constituie automat geometrie GIS contemporană"
+    },
+    {
+      "id": "BUCHAREST_APPROVAL_LAW_1979",
+      "url": "https://legislatie.just.ro/public/DetaliiDocument/28169",
+      "status": "PUBLIC_OFFICIAL_APPROVAL_TEXT_IDENTIFIED"
+    }
+  ],
+  "localities": [
+    {
+      "id": "osm-r11283027",
+      "name": "Mureșeni",
+      "siruta_2026": "114337",
+      "siruta_parent_2026": "114319",
+      "raw_record_checked": true,
+      "direct_official_binary_certified": false,
+      "osm_legal_boundary_certified": false
+    },
+    {
+      "id": "osm-r11283576",
+      "name": "Remetea",
+      "siruta_2026": "114346",
+      "siruta_parent_2026": "114319",
+      "raw_record_checked": true,
+      "direct_official_binary_certified": false,
+      "osm_legal_boundary_certified": false
+    },
+    {
+      "id": "osm-r11366846",
+      "name": "Vălureni",
+      "siruta_2026": "114373",
+      "siruta_parent_2026": "114355",
+      "raw_record_checked": true,
+      "direct_official_binary_certified": false,
+      "osm_legal_boundary_certified": false
+    },
+    {
+      "id": "osm-r11366847",
+      "name": "Cristești",
+      "siruta_2026": "114364",
+      "siruta_parent_2026": "114355",
+      "raw_record_checked": true,
+      "direct_official_binary_certified": false,
+      "osm_legal_boundary_certified": false
+    },
+    {
+      "id": "osm-r12557978",
+      "name": "Bărdești",
+      "siruta_2026": "114471",
+      "siruta_parent_2026": "114453",
+      "raw_record_checked": true,
+      "direct_official_binary_certified": false,
+      "osm_legal_boundary_certified": false
+    }
+  ],
+  "sectors": [
+    {
+      "id": "osm-r7960954",
+      "sector": 1,
+      "siruta_2026": "179141",
+      "siruta_parent_2026": "179132",
+      "raw_record_checked": true,
+      "statutory_boundary_text": "DECREE_284_1979_APPENDIX_1_PRESENT",
+      "current_official_geometry_identified": false,
+      "osm_boundary_legal_equivalence_certified": false
+    },
+    {
+      "id": "osm-r7960953",
+      "sector": 2,
+      "siruta_2026": "179150",
+      "siruta_parent_2026": "179132",
+      "raw_record_checked": true,
+      "statutory_boundary_text": "DECREE_284_1979_APPENDIX_1_PRESENT",
+      "current_official_geometry_identified": false,
+      "osm_boundary_legal_equivalence_certified": false
+    },
+    {
+      "id": "osm-r7960937",
+      "sector": 3,
+      "siruta_2026": "179169",
+      "siruta_parent_2026": "179132",
+      "raw_record_checked": true,
+      "statutory_boundary_text": "DECREE_284_1979_APPENDIX_1_PRESENT",
+      "current_official_geometry_identified": false,
+      "osm_boundary_legal_equivalence_certified": false
+    },
+    {
+      "id": "osm-r7960957",
+      "sector": 4,
+      "siruta_2026": "179178",
+      "siruta_parent_2026": "179132",
+      "raw_record_checked": true,
+      "statutory_boundary_text": "DECREE_284_1979_APPENDIX_1_PRESENT",
+      "current_official_geometry_identified": false,
+      "osm_boundary_legal_equivalence_certified": false
+    },
+    {
+      "id": "osm-r7960956",
+      "sector": 5,
+      "siruta_2026": "179187",
+      "siruta_parent_2026": "179132",
+      "raw_record_checked": true,
+      "statutory_boundary_text": "DECREE_284_1979_APPENDIX_1_PRESENT",
+      "current_official_geometry_identified": false,
+      "osm_boundary_legal_equivalence_certified": false
+    },
+    {
+      "id": "osm-r7960955",
+      "sector": 6,
+      "siruta_2026": "179196",
+      "siruta_parent_2026": "179132",
+      "raw_record_checked": true,
+      "statutory_boundary_text": "DECREE_284_1979_APPENDIX_1_PRESENT",
+      "current_official_geometry_identified": false,
+      "osm_boundary_legal_equivalence_certified": false
+    }
+  ],
+  "remaining_primary_evidence": [
+    "Independent acquisition of INS-hosted 2026 CSV and SHA-256 verification against raw archive",
+    "Legal analysis of subsequent amendments to 1979 sector delimitations and correspondence of historic street names/landmarks",
+    "Authoritative modern certified sector boundary geometries and per-OSM polygon equivalence test",
+    "For 5 Mureș localities, certified legal delimitation and comparison with OSM footprints",
+    "Three MD legal exceptions remain open as defined in RT-ADM.2.8"
+  ],
+  "summary": {
+    "raw_2026_rows_checked": 11,
+    "localities": 5,
+    "sectors": 6,
+    "official_1979_sector_boundary_descriptions": 6,
+    "direct_INS_original_binary_verified": 0,
+    "modern_official_sector_geometries_certified": 0,
+    "legal_OSM_boundary_matches": 0
+  },
+  "restrictions": {
+    "external_requests": false,
+    "external_emails": false,
+    "payments": false,
+    "ACTUAL_edits": false,
+    "administrative_reparent": false,
+    "code_binding_edits": false,
+    "P9_1_authorized": false
+  },
+  "outcome": "PUBLIC_PRIMARY_TEXT_RECOVERED_RAW_INS_ARCHIVE_CROSSCHECKED_NO_BOUNDARY_CERTIFICATION"
+}
