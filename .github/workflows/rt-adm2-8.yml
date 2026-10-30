@@ -1,0 +1,19 @@
+name: RT-ADM.2.8 consolidated legal evidence guard
+on:
+  pull_request:
+    paths:
+      - 'docs/audits/rt-adm2-8/**'
+      - 'scripts/audit/rt-adm2-8-verify.mjs'
+      - '.github/workflows/rt-adm2-8.yml'
+  workflow_dispatch:
+jobs:
+  legal-evidence:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/audit/rt-adm2-8-verify.mjs
