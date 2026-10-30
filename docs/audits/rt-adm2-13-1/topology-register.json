@@ -1,0 +1,65 @@
+{
+  "schema": "RT-ADM.2.13.1-OSMB-exact-v1",
+  "snapshot": "2026-10-05",
+  "source_path": "OSMB-Romania-2026-10-05.geojson.gz",
+  "source_archive_sha256": "cc4fd15940550054d90fcadf907ed98352b68882735680093f77a624e3e04897",
+  "method": "shapely 2.1.2 + pyproj 3.7.2 EPSG:4326 to EPSG:3844; geometries source OSMB, independent municipality polygon",
+  "municipality_id": 377733,
+  "sector_ids": [
+    7960954,
+    7960953,
+    7960937,
+    7960957,
+    7960956,
+    7960955
+  ],
+  "validity": {
+    "377733": {
+      "valid": true,
+      "reason": "Valid Geometry",
+      "type": "Polygon"
+    },
+    "7960954": {
+      "valid": true,
+      "reason": "Valid Geometry",
+      "type": "Polygon"
+    },
+    "7960953": {
+      "valid": true,
+      "reason": "Valid Geometry",
+      "type": "Polygon"
+    },
+    "7960937": {
+      "valid": true,
+      "reason": "Valid Geometry",
+      "type": "Polygon"
+    },
+    "7960957": {
+      "valid": true,
+      "reason": "Valid Geometry",
+      "type": "Polygon"
+    },
+    "7960956": {
+      "valid": true,
+      "reason": "Valid Geometry",
+      "type": "Polygon"
+    },
+    "7960955": {
+      "valid": true,
+      "reason": "Valid Geometry",
+      "type": "Polygon"
+    }
+  },
+  "metrics_m2": {
+    "municipality": 239037172.75459433,
+    "sectors_union": 239037172.75459474,
+    "sectors_sum": 239037172.7545945,
+    "gap": 0.0,
+    "outside_parent": 0.0,
+    "symmetric_difference": 0.0,
+    "overlap_pair_sum": 0.0
+  },
+  "anomaly_count": 0,
+  "anomalies": [],
+  "legal_certification": false
+}
