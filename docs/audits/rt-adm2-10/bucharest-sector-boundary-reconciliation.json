@@ -1,0 +1,238 @@
+{
+  "schema": "rt-adm2-10-bucharest-documentary-reconciliation-v1",
+  "date": "2026-10-30",
+  "based_on_main": "cfcb1cb0dd2ae635fd9c5545769a770bbb0f0d8b",
+  "evidence": [
+    {
+      "id": "LAW_2_1968_HISTORICAL",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocumentAfis/46045",
+      "scope": "Versiune istorică cu 8 sectoare; NU se folosește pentru delimitările celor 6 sectoare din 1979",
+      "classification": "HISTORICAL_PRE_1979"
+    },
+    {
+      "id": "DECREE_284_1979",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+      "scope": "Art. 1 și anexa 1 definesc 6 sectoare și delimitări textuale",
+      "classification": "PRIMARY_HISTORICAL_BOUNDARY_TEXT"
+    },
+    {
+      "id": "LAW_31_1979",
+      "url": "https://legislatie.just.ro/public/DetaliiDocument/28169",
+      "scope": "Aprobă Decretul 284/1979, fără hartă GIS vectorială",
+      "classification": "PRIMARY_APPROVAL"
+    },
+    {
+      "id": "LAW_2_1968_1981_REPUBLICATION",
+      "url": "https://legislatie.just.ro/public/detaliidocument/190",
+      "scope": "Republicare în 1981, cu anexă pentru șase sectoare; textul istoric nu este singur probă a conturului contemporan",
+      "classification": "POST_1979_DOCUMENTARY_CORROBORATION"
+    },
+    {
+      "id": "LAW_290_2018",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+      "scope": "Clarifică în art. 2 statutul sectoarelor drept subdiviziuni administrativ-teritoriale; nu s-a demonstrat o modificare individuală de contur prin această referință",
+      "classification": "SUBSEQUENT_STATUS_UPDATE"
+    },
+    {
+      "id": "OUG_57_2019",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/215925",
+      "scope": "Codul administrativ și ajustări legate de statut; nu este considerată hartă oficială a limitelor sectoriale",
+      "classification": "SUBSEQUENT_GENERAL_FRAMEWORK"
+    },
+    {
+      "id": "SIRUTA_S1_2026_REPRODUCTION",
+      "url": "https://github.com/romania/siruta/blob/main/sources/current/siruta.csv",
+      "scope": "Coduri și părinte statistic 179132; nu include delimitări de poligon certificate",
+      "classification": "STATISTICAL_IDENTIFIERS_ONLY"
+    },
+    {
+      "id": "OSM_SECTOR_RELATIONS",
+      "url": "https://www.openstreetmap.org/",
+      "scope": "Reprezentări cartografice publice; nu sunt certificări ale limitelor legale",
+      "classification": "CARTOGRAPHIC_UNCERTIFIED"
+    }
+  ],
+  "sectors": [
+    {
+      "id": "osm-r7960954",
+      "sector": 1,
+      "siruta_2026": "179141",
+      "siruta_parent": "179132",
+      "decree_1979_appendix_1": "TEXT_PRESENT",
+      "law_1981_republication": "SIX_SECTOR_FRAMEWORK_REPUBLISHED",
+      "historical_boundary_description": "Nord-vest; limite cu sectoarele 2 și 6; Dâmbovița, calea ferată de centură, zona Băneasa",
+      "subsequent_statutory_status": "ADMINISTRATIVE_SUBDIVISION_2018",
+      "later_boundary_amendments_exhaustively_excluded": false,
+      "contemporary_authoritative_GIS_boundary_verified": false,
+      "OSM_legal_boundary_equivalent": false,
+      "decision": "NO_GEOMETRIC_OR_ADMINISTRATIVE_CHANGE",
+      "missing_primary_evidence": [
+        "Reconciliere exhaustivă a modificărilor normative de contur ulterioare 1979, cu efect temporal",
+        "Hartă/plan oficial contemporan, origine autoritativă și georeferențiere verificabilă",
+        "Corespondență per-segment între textul juridic, denumiri istorice/actuale și poligonul OSM"
+      ],
+      "evidence_refs": [
+        "DECREE_284_1979",
+        "LAW_31_1979",
+        "LAW_2_1968_1981_REPUBLICATION",
+        "LAW_290_2018",
+        "SIRUTA_S1_2026_REPRODUCTION",
+        "OSM_SECTOR_RELATIONS"
+      ]
+    },
+    {
+      "id": "osm-r7960953",
+      "sector": 2,
+      "siruta_2026": "179150",
+      "siruta_parent": "179132",
+      "decree_1979_appendix_1": "TEXT_PRESENT",
+      "law_1981_republication": "SIX_SECTOR_FRAMEWORK_REPUBLISHED",
+      "historical_boundary_description": "Nord-est; limite cu sectoarele 1 și 3; calea ferată București–Constanța, Colentina, Pantelimon",
+      "subsequent_statutory_status": "ADMINISTRATIVE_SUBDIVISION_2018",
+      "later_boundary_amendments_exhaustively_excluded": false,
+      "contemporary_authoritative_GIS_boundary_verified": false,
+      "OSM_legal_boundary_equivalent": false,
+      "decision": "NO_GEOMETRIC_OR_ADMINISTRATIVE_CHANGE",
+      "missing_primary_evidence": [
+        "Reconciliere exhaustivă a modificărilor normative de contur ulterioare 1979, cu efect temporal",
+        "Hartă/plan oficial contemporan, origine autoritativă și georeferențiere verificabilă",
+        "Corespondență per-segment între textul juridic, denumiri istorice/actuale și poligonul OSM"
+      ],
+      "evidence_refs": [
+        "DECREE_284_1979",
+        "LAW_31_1979",
+        "LAW_2_1968_1981_REPUBLICATION",
+        "LAW_290_2018",
+        "SIRUTA_S1_2026_REPRODUCTION",
+        "OSM_SECTOR_RELATIONS"
+      ]
+    },
+    {
+      "id": "osm-r7960937",
+      "sector": 3,
+      "siruta_2026": "179169",
+      "siruta_parent": "179132",
+      "decree_1979_appendix_1": "TEXT_PRESENT",
+      "law_1981_republication": "SIX_SECTOR_FRAMEWORK_REPUBLISHED",
+      "historical_boundary_description": "Est/sud-est; limite cu sectoarele 2 și 4; analiza segmentelor de stradă și Dâmbovița necesară",
+      "subsequent_statutory_status": "ADMINISTRATIVE_SUBDIVISION_2018",
+      "later_boundary_amendments_exhaustively_excluded": false,
+      "contemporary_authoritative_GIS_boundary_verified": false,
+      "OSM_legal_boundary_equivalent": false,
+      "decision": "NO_GEOMETRIC_OR_ADMINISTRATIVE_CHANGE",
+      "missing_primary_evidence": [
+        "Reconciliere exhaustivă a modificărilor normative de contur ulterioare 1979, cu efect temporal",
+        "Hartă/plan oficial contemporan, origine autoritativă și georeferențiere verificabilă",
+        "Corespondență per-segment între textul juridic, denumiri istorice/actuale și poligonul OSM"
+      ],
+      "evidence_refs": [
+        "DECREE_284_1979",
+        "LAW_31_1979",
+        "LAW_2_1968_1981_REPUBLICATION",
+        "LAW_290_2018",
+        "SIRUTA_S1_2026_REPRODUCTION",
+        "OSM_SECTOR_RELATIONS"
+      ]
+    },
+    {
+      "id": "osm-r7960957",
+      "sector": 4,
+      "siruta_2026": "179178",
+      "siruta_parent": "179132",
+      "decree_1979_appendix_1": "TEXT_PRESENT",
+      "law_1981_republication": "SIX_SECTOR_FRAMEWORK_REPUBLISHED",
+      "historical_boundary_description": "Sud; limite cu sectoarele 3 și 5; Dâmbovița, șoseaua Berceni, linii convenționale",
+      "subsequent_statutory_status": "ADMINISTRATIVE_SUBDIVISION_2018",
+      "later_boundary_amendments_exhaustively_excluded": false,
+      "contemporary_authoritative_GIS_boundary_verified": false,
+      "OSM_legal_boundary_equivalent": false,
+      "decision": "NO_GEOMETRIC_OR_ADMINISTRATIVE_CHANGE",
+      "missing_primary_evidence": [
+        "Reconciliere exhaustivă a modificărilor normative de contur ulterioare 1979, cu efect temporal",
+        "Hartă/plan oficial contemporan, origine autoritativă și georeferențiere verificabilă",
+        "Corespondență per-segment între textul juridic, denumiri istorice/actuale și poligonul OSM"
+      ],
+      "evidence_refs": [
+        "DECREE_284_1979",
+        "LAW_31_1979",
+        "LAW_2_1968_1981_REPUBLICATION",
+        "LAW_290_2018",
+        "SIRUTA_S1_2026_REPRODUCTION",
+        "OSM_SECTOR_RELATIONS"
+      ]
+    },
+    {
+      "id": "osm-r7960956",
+      "sector": 5,
+      "siruta_2026": "179187",
+      "siruta_parent": "179132",
+      "decree_1979_appendix_1": "TEXT_PRESENT",
+      "law_1981_republication": "SIX_SECTOR_FRAMEWORK_REPUBLISHED",
+      "historical_boundary_description": "Sud-vest; limite cu sectoarele 4 și 6; strada Fabrica de Chibrituri, șoseaua Giurgiului, trasee convenționale",
+      "subsequent_statutory_status": "ADMINISTRATIVE_SUBDIVISION_2018",
+      "later_boundary_amendments_exhaustively_excluded": false,
+      "contemporary_authoritative_GIS_boundary_verified": false,
+      "OSM_legal_boundary_equivalent": false,
+      "decision": "NO_GEOMETRIC_OR_ADMINISTRATIVE_CHANGE",
+      "missing_primary_evidence": [
+        "Reconciliere exhaustivă a modificărilor normative de contur ulterioare 1979, cu efect temporal",
+        "Hartă/plan oficial contemporan, origine autoritativă și georeferențiere verificabilă",
+        "Corespondență per-segment între textul juridic, denumiri istorice/actuale și poligonul OSM"
+      ],
+      "evidence_refs": [
+        "DECREE_284_1979",
+        "LAW_31_1979",
+        "LAW_2_1968_1981_REPUBLICATION",
+        "LAW_290_2018",
+        "SIRUTA_S1_2026_REPRODUCTION",
+        "OSM_SECTOR_RELATIONS"
+      ]
+    },
+    {
+      "id": "osm-r7960955",
+      "sector": 6,
+      "siruta_2026": "179196",
+      "siruta_parent": "179132",
+      "decree_1979_appendix_1": "TEXT_PRESENT",
+      "law_1981_republication": "SIX_SECTOR_FRAMEWORK_REPUBLISHED",
+      "historical_boundary_description": "Vest; limite cu sectoarele 1 și 5; necesară reconcilierea traseului istoric",
+      "subsequent_statutory_status": "ADMINISTRATIVE_SUBDIVISION_2018",
+      "later_boundary_amendments_exhaustively_excluded": false,
+      "contemporary_authoritative_GIS_boundary_verified": false,
+      "OSM_legal_boundary_equivalent": false,
+      "decision": "NO_GEOMETRIC_OR_ADMINISTRATIVE_CHANGE",
+      "missing_primary_evidence": [
+        "Reconciliere exhaustivă a modificărilor normative de contur ulterioare 1979, cu efect temporal",
+        "Hartă/plan oficial contemporan, origine autoritativă și georeferențiere verificabilă",
+        "Corespondență per-segment între textul juridic, denumiri istorice/actuale și poligonul OSM"
+      ],
+      "evidence_refs": [
+        "DECREE_284_1979",
+        "LAW_31_1979",
+        "LAW_2_1968_1981_REPUBLICATION",
+        "LAW_290_2018",
+        "SIRUTA_S1_2026_REPRODUCTION",
+        "OSM_SECTOR_RELATIONS"
+      ]
+    }
+  ],
+  "conclusions": {
+    "six_sector_structure_corroborated": true,
+    "sector_identifiers_2026_correspond_to_six_sectors": true,
+    "contemporary_legal_boundary_certifications": 0,
+    "OSM_automatic_equivalences": 0,
+    "exhaustive_post_1979_boundary_amendment_audit_completed": false,
+    "legal_reparenting_or_geometry_updates_authorized": false
+  },
+  "restrictions": {
+    "ACTUAL_edits": false,
+    "reparent": false,
+    "osm_automatic_equivalence": false,
+    "cuatm_siruta_binding_edits": false,
+    "institutional_emails": false,
+    "institutional_requests": false,
+    "payments": false,
+    "P9_1_authorized": false
+  },
+  "outcome": "DOCUMENTARY_CORROBORATION_SIX_SECTORS_OPEN_BOUNDARY_EVIDENCE"
+}
