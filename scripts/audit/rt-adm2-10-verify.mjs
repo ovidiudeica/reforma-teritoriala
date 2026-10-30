@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const d=JSON.parse(fs.readFileSync('docs/audits/rt-adm2-10/bucharest-sector-boundary-reconciliation.json','utf8'));
+assert.equal(d.sectors.length,6);assert.equal(new Set(d.sectors.map(x=>x.id)).size,6);
+assert.deepEqual(d.sectors.map(x=>x.sector),[1,2,3,4,5,6]);
+assert(d.sectors.every(x=>x.siruta_parent==='179132'&&x.decree_1979_appendix_1==='TEXT_PRESENT'&&!x.contemporary_authoritative_GIS_boundary_verified&&!x.OSM_legal_boundary_equivalent&&!x.later_boundary_amendments_exhaustively_excluded));
+assert(d.sectors.every(x=>x.missing_primary_evidence.length===3&&x.decision==='NO_GEOMETRIC_OR_ADMINISTRATIVE_CHANGE'));
+assert.equal(d.conclusions.contemporary_legal_boundary_certifications,0);
+assert.equal(d.conclusions.OSM_automatic_equivalences,0);
+assert(Object.values(d.restrictions).every(x=>x===false));
+console.log('RT-ADM.2.10 PASS — 6 sector dossiers; no legal GIS equivalence or administrative edits');
