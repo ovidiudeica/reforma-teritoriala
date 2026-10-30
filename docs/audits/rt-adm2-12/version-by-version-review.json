@@ -213,7 +213,9 @@
     "official_full_corpus_complete": false,
     "source_fetch_errors": [
       "LEGISLATIE_JUST_RO_502_WHEN_OPENING_CONSOLIDATION"
-    ]
+    ],
+    "official_historical_boundary_text_sources_read": 1,
+    "consolidated_sector_list_sources_read": 1
   },
   "restrictions": {
     "ACTUAL_edits": false,
@@ -225,5 +227,25 @@
     "payments": false,
     "P9_1_authorized": false
   },
-  "outcome": "TEN_VERSION_INDEX_ENTRIES_RECONCILED_WITH_LEGAL_EFFECT_GATES_FULL_DIFF_PENDING"
+  "outcome": "OFFICIAL_1979_BOUNDARY_TEXT_AND_1981_SECTOR_LIST_VERIFIED_TEN_CONSOLIDATION_DIFFS_UNAVAILABLE",
+  "verified_official_texts": [
+    {
+      "act": "Decret 284/1979",
+      "url": "https://legislatie.just.ro/Public/FormaPrintabila/00000G2EQS2F040U8L11D6AZZNTD0Y4X",
+      "finding": "Anexa 1 descrie textual delimitările celor șase sectoare",
+      "boundary_level": "TEXTUAL_BOUNDARIES_PRESENT"
+    },
+    {
+      "act": "Legea 2/1968 republicată în 1981",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/190",
+      "finding": "Secțiunea MUNICIPIUL BUCUREȘTI enumeră cele șase sectoare; în pasajul consultat nu se află trasee de frontieră per-sector",
+      "boundary_level": "SIX_SECTOR_LIST_NOT_BOUNDARY_EQUIVALENCE"
+    },
+    {
+      "act": "Legea 2/1968, formă consolidată accesibilă",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+      "finding": "Note de modificare pentru art. 2 (Legea 290/2018), art. 3 și 4 (OUG 57/2019); nu reprezintă o comparație per-sector între toate versiunile",
+      "boundary_level": "STATUS_AND_ORGANIZATION"
+    }
+  ]
 }
