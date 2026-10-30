@@ -1,0 +1,151 @@
+{
+  "schema": "rt-adm2-13-actual-sector-source-geometry-comparison-v1",
+  "reference_date": "2026-10-30",
+  "source_path": "public/geo/actual/ro-detail.geojson",
+  "source_git_blob_sha": "db88591cf73f120957d06406f8c9e86ddd2e7a3c",
+  "source_release": "ACTUAL v1.2 OSM-derived",
+  "status": "EXISTING_LOCAL_ARCHIVE_GEOMETRY_FOUND_NOT_OSMB_EXPORT",
+  "area_method": "spherical ring area using R=6371008.8 metres, EPSG:4326, approximate, not equal-area certified",
+  "segment_method": "undirected endpoint pairs, coordinates rounded to 7 decimal digits; counts shared segments, not polygon overlay",
+  "sectors": [
+    {
+      "id": 7960937,
+      "name": "Sector 3",
+      "area_km2": 34.022018,
+      "rings": 1,
+      "all_rings_closed": true,
+      "vertex_segments": 1133
+    },
+    {
+      "id": 7960953,
+      "name": "Sector 2",
+      "area_km2": 31.733793,
+      "rings": 1,
+      "all_rings_closed": true,
+      "vertex_segments": 1152
+    },
+    {
+      "id": 7960954,
+      "name": "Sector 1",
+      "area_km2": 69.865141,
+      "rings": 1,
+      "all_rings_closed": true,
+      "vertex_segments": 1593
+    },
+    {
+      "id": 7960955,
+      "name": "Sector 6",
+      "area_km2": 41.094789,
+      "rings": 1,
+      "all_rings_closed": true,
+      "vertex_segments": 1048
+    },
+    {
+      "id": 7960956,
+      "name": "Sector 5",
+      "area_km2": 28.773675,
+      "rings": 1,
+      "all_rings_closed": true,
+      "vertex_segments": 1222
+    },
+    {
+      "id": 7960957,
+      "name": "Sector 4",
+      "area_km2": 33.057454,
+      "rings": 1,
+      "all_rings_closed": true,
+      "vertex_segments": 765
+    }
+  ],
+  "pairwise": [
+    {
+      "osm_a": 7960937,
+      "osm_b": 7960953,
+      "shared_exact_segments": 529
+    },
+    {
+      "osm_a": 7960937,
+      "osm_b": 7960954,
+      "shared_exact_segments": 57
+    },
+    {
+      "osm_a": 7960937,
+      "osm_b": 7960955,
+      "shared_exact_segments": 0
+    },
+    {
+      "osm_a": 7960937,
+      "osm_b": 7960956,
+      "shared_exact_segments": 50
+    },
+    {
+      "osm_a": 7960937,
+      "osm_b": 7960957,
+      "shared_exact_segments": 186
+    },
+    {
+      "osm_a": 7960953,
+      "osm_b": 7960954,
+      "shared_exact_segments": 449
+    },
+    {
+      "osm_a": 7960953,
+      "osm_b": 7960955,
+      "shared_exact_segments": 0
+    },
+    {
+      "osm_a": 7960953,
+      "osm_b": 7960956,
+      "shared_exact_segments": 0
+    },
+    {
+      "osm_a": 7960953,
+      "osm_b": 7960957,
+      "shared_exact_segments": 0
+    },
+    {
+      "osm_a": 7960954,
+      "osm_b": 7960955,
+      "shared_exact_segments": 467
+    },
+    {
+      "osm_a": 7960954,
+      "osm_b": 7960956,
+      "shared_exact_segments": 189
+    },
+    {
+      "osm_a": 7960954,
+      "osm_b": 7960957,
+      "shared_exact_segments": 0
+    },
+    {
+      "osm_a": 7960955,
+      "osm_b": 7960956,
+      "shared_exact_segments": 407
+    },
+    {
+      "osm_a": 7960955,
+      "osm_b": 7960957,
+      "shared_exact_segments": 0
+    },
+    {
+      "osm_a": 7960956,
+      "osm_b": 7960957,
+      "shared_exact_segments": 453
+    }
+  ],
+  "coverage": {
+    "matched_rels": 6,
+    "all_rings_closed": true,
+    "exact_shared_border_pairs": 9,
+    "nonadjacent_pairs": 6,
+    "polygon_intersection_area_verified": false,
+    "legal_identity_verified": false
+  },
+  "constraints": {
+    "ACTUAL_changed": false,
+    "P9_1_authorized": false,
+    "osmb_file_downloaded": false,
+    "legal_equivalence_asserted": false
+  }
+}
