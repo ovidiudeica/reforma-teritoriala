@@ -121,9 +121,106 @@
     }
   ],
   "next_primary_evidence": [
-    "Binary reparse of archived CUATM and official current DOC with per-record provenance and dates",
-    "Retrieve XML for all versions of the three OSM relations, member way history and changeset metadata",
-    "Positive independent crosswalk for full OSM identity and role; geometry verification from contemporary authoritative boundary"
+    "Retrieve member way histories and geometries at matching timestamps",
+    "Find independent legal/cadastral positive identification of OSM footprints",
+    "Check full boundary equivalence with dated authoritative geometry; do not infer administrative changes"
   ],
-  "overall_verdict": "PARTIAL_PRIMARY_ACQUISITION_CUATM_ARCHIVED_BINARY_FETCHED_OSM_HISTORIES_UNAVAILABLE_NO_SUBSTANTIVE_CLOSURE"
+  "overall_verdict": "PRIMARY_CUATM_2025_IDENTICAL_AND_OSM_RELATION_HISTORIES_RECOVERED_SUBSTANTIVE_GEOMETRY_AND_LEGAL_IDENTITY_OPEN_NO_ACTUAL_CHANGE",
+  "execution": {
+    "run_id": 40982652182,
+    "head_sha": "7fbb027a3aeb5e347c66b181baf3721e70709ff0",
+    "job": "acquire",
+    "conclusion": "success",
+    "artifact_id": 12944992975,
+    "artifact_github_digest": "sha256:5383a3a078619ee86fb3ba0b695dffe063936a13cb4a76593f4dce5a043ac9e0",
+    "artifact_files": {
+      "CUATM_25_official_download.xlsx": "21ff5525a7f22f04f0d3f1517ebc1f02401613665fdfe385258aa4c35c92d705",
+      "execution-report.json": "5d6e7161cb65c8dc4ff254a74c04cd306395b07e7b597275900cc61682583af3",
+      "CUATM_row_differences.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "relation_18967570_history.xml": "839bb1139427e04e1a17f71cfe4417e604e300eed6d6b23c5be4a25add4fdbb1",
+      "relation_18968043_history.xml": "0655beb965409e22cfe14b206025d76ee57faa7732bfad185b5d7e0a3e11617c",
+      "relation_12104636_history.xml": "bdb3f3396f6ddebba698d809cd0d493e7af02672a8a9eeb5273ae6eda157ed5c"
+    }
+  },
+  "cuatm_actual_verification": {
+    "archived_and_official_2025_are_binary_identical": true,
+    "both_sha256": "21ff5525a7f22f04f0d3f1517ebc1f02401613665fdfe385258aa4c35c92d705",
+    "nonempty_rows_per_copy": 1722,
+    "sheet": "Sheet 1",
+    "row_differences": 0,
+    "comparison_of_different_years": false,
+    "verified_rows": {
+      "3136": {
+        "row": 412,
+        "name": "Hrușova",
+        "ParentCodUnic": "3100"
+      },
+      "8961": {
+        "row": 1465,
+        "name": "Bondareuca",
+        "ParentCodUnic": "8960"
+      },
+      "9639": {
+        "row": 1567,
+        "name": "Etulia, loc.st.c.f.",
+        "ParentCodUnic": "9629"
+      }
+    }
+  },
+  "osm_recovered": {
+    "source": "https://api.openstreetmap.org/api/0.6/relation/{id}/history",
+    "relation_versions_total": 16,
+    "relation_only_member_way_histories_not_yet_acquired": true,
+    "per_id": [
+      {
+        "id": 18967570,
+        "versions": 5,
+        "first": "2025-04-09T17:48:35Z",
+        "last": "2026-01-31T14:33:41Z",
+        "last_tags": {
+          "name": "Bondareuca",
+          "full_name": "raionul Telenești, comuna Zgărdești, satul Bondareuca",
+          "ref:cuatm:codunic": "8961"
+        },
+        "constant_member_ways": [
+          "1376179980"
+        ],
+        "interpretation": "OSM author-entered naming supports a candidate nominal match; no independent legal polygon equivalence"
+      },
+      {
+        "id": 18968043,
+        "versions": 6,
+        "first": "2025-04-09T17:48:40Z",
+        "last": "2026-02-01T22:27:39Z",
+        "last_tags": {
+          "name": "Etulia",
+          "official_name": "localitatea stație cale ferată Etulia",
+          "ref:cuatm:codunic": "9639"
+        },
+        "constant_member_ways": [
+          "1376179909",
+          "1376180675"
+        ],
+        "interpretation": "OSM author-entered role supports a candidate nominal match; polygon and legal role not certified"
+      },
+      {
+        "id": 12104636,
+        "versions": 5,
+        "first": "2020-12-28T16:51:17Z",
+        "last": "2026-08-31T12:01:53Z",
+        "former_tag": "Întovărășire Pomilegumicolă (neautorizată)",
+        "former_tag_date": "2023-09-26T12:49:34Z",
+        "last_tags": {
+          "admin_level": "9",
+          "boundary": "administrative",
+          "landuse": "allotments",
+          "type": "boundary"
+        },
+        "constant_member_ways": [
+          "889101842"
+        ],
+        "interpretation": "Historical allotment association labeling; not an official identity, legal status or CUATM match"
+      }
+    ]
+  }
 }
