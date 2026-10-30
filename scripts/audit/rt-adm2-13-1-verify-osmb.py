@@ -2,7 +2,7 @@
 """Verify archived OSMB evidence byte-for-byte; fail closed if source bundle unavailable."""
 import hashlib,json,pathlib,sys
 BASE=pathlib.Path('docs/audits/rt-adm2-13-1')
-SOURCE=pathlib.Path('data/audit/rt-adm2-13-1/osmb-bucharest-seven.geojson')
+SOURCE=pathlib.Path('docs/audits/rt-adm2-13-1/osmb-bucharest-seven.geojson')
 EXPECTED='f63bc4644c81dfa6c41011c6bc3f48ca33c626aa97a19cf994d7f22672a85eba'
 for name in ('topology-register.json','anomalies-epsg3844.geojson'):
     file=BASE/name
