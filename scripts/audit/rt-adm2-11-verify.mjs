@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const d=JSON.parse(fs.readFileSync('docs/audits/rt-adm2-11/post1979-normative-triage.json','utf8'));
+assert.equal(d.per_sector.length,6);
+assert.equal(new Set(d.per_sector.map(x=>x.id)).size,6);
+assert.deepEqual(d.per_sector.map(x=>x.sector),[1,2,3,4,5,6]);
+assert.equal(d.summary.post1979_acts_reviewed,4);
+assert(d.per_sector.every(x=>x.positive_boundary_amendments_demonstrated.length===0&&!x.absence_of_other_amendments_certified&&!x.public_cartographic_data_legal_equivalence_certified&&x.unresolved_gates.length===4));
+assert(!d.search_pass.exhaustive_official_gazette_scan_completed);
+assert(d.search_pass.not_found_is_not_proof_of_absence);
+assert.equal(d.summary.exhaustive_absence_certifications,0);
+assert(Object.values(d.restrictions).every(x=>x===false));
+console.log('RT-ADM.2.11 PASS — targeted post-1979 review; exhaustive absence NOT certified');
