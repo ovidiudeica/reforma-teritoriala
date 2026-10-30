@@ -10,8 +10,8 @@
     },
     {
       "id": "L2_1981_REPUBLICATION",
-      "url": "https://legislatie.just.ro/Public/FormaPrintabila/00000G006MECTABEER702U9T7T2042VK",
-      "type": "republication_sector_annex"
+      "url": "https://legislatie.just.ro/Public/FormaPrintabila/00000G0D6XQ66EROUQG1J17G6C2C6XTS",
+      "type": "republication_sector_enumeration_not_verified_boundary_description"
     },
     {
       "id": "L2_CONSOLIDATED",
@@ -23,7 +23,8 @@
     "Un URL de formă printabilă nu identifică toate versiunile consolidate 1979–2026.",
     "Diferențele textuale nu demonstrează modificări de hotar fără expertiza efectelor actelor.",
     "Erorile HTTP ori extragerea incompletă se clasifică drept excepții, nu egalități.",
-    "Niciun contur OSM nu este comparat sau certificat juridic."
+    "Niciun contur OSM nu este comparat sau certificat juridic.",
+    "Pagina republicării Legii 2/1968 indică existența sectoarelor, dar nu furnizează demonstrat aceleași șase descrieri de delimitare ca anexa 1 a Decretului 284/1979; nu se poate impune o comparație text-la-text între surse juridic diferite."
   ],
   "per_sector": [
     {
@@ -99,5 +100,17 @@
     "code_assignment": false,
     "P9_1_authorized": false,
     "external_requests": false
-  }
+  },
+  "verified_alternative_url_basis": [
+    {
+      "id": "D284_1979",
+      "status": "SEARCH_INDEX_VISIBLE_ORIGIN_HTTP_502",
+      "route": "official printable source"
+    },
+    {
+      "id": "L2_1981_REPUBLICATION",
+      "status": "SEARCH_INDEX_VISIBLE_ORIGIN_HTTP_502",
+      "route": "official printable source"
+    }
+  ]
 }
