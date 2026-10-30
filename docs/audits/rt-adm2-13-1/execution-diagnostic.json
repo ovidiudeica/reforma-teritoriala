@@ -1,0 +1,32 @@
+{
+  "schema": "rt-adm2-13-1-2-execution-diagnostic-v1",
+  "date": "2026-10-30",
+  "pr": 480,
+  "examined_sha": "ae6d8e36dc5eb30bae3d27eebca3c17ba6e3dc39",
+  "workflow_run": {
+    "id": 41129394339,
+    "conclusion": "startup_failure",
+    "jobs_started": 0,
+    "root_cause": "UNDETERMINED_BY_AVAILABLE_EVIDENCE"
+  },
+  "checks_observed": {
+    "actual_release_trust_chain": "success",
+    "verify_persisted_actual_release": "success",
+    "actual_change_reproducibility": "success"
+  },
+  "geometries": {
+    "sector_source": "public/geo/actual/chunks/ro/detail/osm-r377733.geojson",
+    "sector_feature_count": 6,
+    "parent_entity_id": "osm-r377733",
+    "independent_parent_geometry": "NOT_RETRIEVED_AND_HASHED",
+    "topology_exact_execution": "NOT_EXECUTED",
+    "anomaly_register": "NOT_GENERATED"
+  },
+  "restrictions": {
+    "alter_actual": false,
+    "legal_boundary_equivalence": false,
+    "claim_zero_anomalies": false,
+    "merge_authorized": false
+  },
+  "next_gate": "First confirm workflow startup and separately hash/validate independent parent polygon before computing exact overlay."
+}
