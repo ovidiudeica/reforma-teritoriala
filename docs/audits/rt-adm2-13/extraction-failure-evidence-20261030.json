@@ -86,5 +86,30 @@
   ],
   "resolution": "BLOCKED_OFFICIAL_SOURCE_UNREACHABLE_NO_CERTIFICATION",
   "merge_authorized": false,
-  "ACTUAL_modified": false
+  "ACTUAL_modified": false,
+  "latest_run": {
+    "head": "2fbb6035d0cb3bf4eda6e105475d9f300c232929",
+    "run_id": 41045297947,
+    "artifact_id": 12973145663,
+    "artifact_digest": "sha256:5b3835da8c22b3cac34ed32645c0fb2067b9c51c380f5bafff758b81e7c01267",
+    "total_checks": 15,
+    "passed_checks": 14,
+    "failed_checks": [
+      "RT-ADM.2.13 alternative official sector text comparison"
+    ],
+    "sources_failed": [
+      "D284_1979",
+      "L2_1981_REPUBLICATION",
+      "L2_CONSOLIDATED"
+    ],
+    "sectors_baseline_unavailable": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "certification": "NOT_CERTIFIED"
+  }
 }
