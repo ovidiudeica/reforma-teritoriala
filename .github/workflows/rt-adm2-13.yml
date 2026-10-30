@@ -25,3 +25,7 @@ jobs:
         with:
           name: rt-adm2-13-official-text-comparison
           path: outputs/RT-ADM.2.13/extraction-and-comparison.json
+
+      - name: Gate six-sector documentary comparison
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; const r=JSON.parse(fs.readFileSync('outputs/RT-ADM.2.13/extraction-and-comparison.json','utf8')); if(r.evidence_status!=='ALL_SIX_TEXT_PAIRS_AVAILABLE'){console.error('UNRESOLVED_OFFICIAL_DOCUMENTARY_EVIDENCE: '+r.evidence_status);process.exit(1)}"
