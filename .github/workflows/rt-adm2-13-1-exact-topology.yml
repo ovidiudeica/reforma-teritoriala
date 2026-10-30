@@ -4,8 +4,11 @@ on:
     branches:
       - audit/rt-adm-2-13-1-exact-topology
     paths:
+      - scripts/audit/rt-adm2-13-1-verify-osmb.py
       - scripts/audit/rt-adm2-13-1-exact-topology.py
       - .github/workflows/rt-adm2-13-1-exact-topology.yml
+      - docs/audits/rt-adm2-13-1/**
+      - data/audit/rt-adm2-13-1/**
 permissions:
   contents: read
 jobs:
@@ -21,14 +24,5 @@ jobs:
           python-version: '3.12'
       - name: Install pinned geometry dependencies
         run: python -m pip install 'shapely==2.1.2' 'pyproj==3.7.2'
-      - name: Exact municipal sector audit
-        run: python scripts/audit/rt-adm2-13-1-exact-topology.py
-      - name: Preserve diagnostic evidence as runner output
-        if: always()
-        run: |
-          if [ -f docs/audits/rt-adm2-13-1/topology-register.json ]; then
-            cat docs/audits/rt-adm2-13-1/topology-register.json
-            cat docs/audits/rt-adm2-13-1/artifact-receipt.json
-          else
-            echo "RT-ADM.2.13.1: no validated topology register generated"
-          fi
+      - name: Reproduce OSMB report with canonical seven-feature input
+        run: python scripts/audit/rt-adm2-13-1-verify-osmb.py
