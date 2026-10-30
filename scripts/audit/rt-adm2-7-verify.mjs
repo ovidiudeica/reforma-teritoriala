@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const d=JSON.parse(fs.readFileSync('docs/audits/rt-adm2-7/normative-identity-register.json','utf8'));
+assert.equal(d.per_id.length,14);assert.equal(new Set(d.per_id.map(x=>x.id)).size,14);
+assert.equal(d.per_id.filter(x=>x.jurisdiction==='RO').length,11);
+assert.equal(d.per_id.filter(x=>x.reference_code_class==='NRSIRUTA_2021_REDUCED').length,6);
+assert.equal(d.per_id.filter(x=>x.jurisdiction==='MD').length,3);
+assert.equal(d.per_id.filter(x=>x.reference_code_class==='INS_SIRUTA_S1_2026_NORMALIZED').length,5);
+assert.equal(d.verified_counts.individually_newly_verified_RO_locality_SIRUTA_codes,5);
+assert(d.per_id.every(x=>!x.legal_identity_osm_polygon_certified&&!x.permit_administrative_change&&x.decision==='NO_CHANGE_PENDING_PRIMARY_EVIDENCE'));
+assert.equal(d.verified_counts.official_OSM_geometry_legal_matches,0);
+assert(Object.values(d.restrictions).every(x=>x===false));
+console.log('RT-ADM.2.7 PASS — 11 RO plus 3 MD legal cases, no administrative edits');
