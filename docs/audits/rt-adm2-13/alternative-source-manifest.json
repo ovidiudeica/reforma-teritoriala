@@ -1,0 +1,103 @@
+{
+  "schema": "rt-adm2-13-alternative-official-documentary-v1",
+  "reference_date": "2026-10-30",
+  "base_main": "f8a3d11410868c4d786ef8f2e4df92d6120b0866",
+  "sources": [
+    {
+      "id": "D284_1979",
+      "url": "https://legislatie.just.ro/Public/FormaPrintabila/00000G2EQS2F040U8L11D6AZZNTD0Y4X",
+      "type": "historical_decree_boundary_appendix"
+    },
+    {
+      "id": "L2_1981_REPUBLICATION",
+      "url": "https://legislatie.just.ro/Public/FormaPrintabila/00000G006MECTABEER702U9T7T2042VK",
+      "type": "republication_sector_annex"
+    },
+    {
+      "id": "L2_CONSOLIDATED",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+      "type": "consolidated_act_status"
+    }
+  ],
+  "known_limitations": [
+    "Un URL de formă printabilă nu identifică toate versiunile consolidate 1979–2026.",
+    "Diferențele textuale nu demonstrează modificări de hotar fără expertiza efectelor actelor.",
+    "Erorile HTTP ori extragerea incompletă se clasifică drept excepții, nu egalități.",
+    "Niciun contur OSM nu este comparat sau certificat juridic."
+  ],
+  "per_sector": [
+    {
+      "sector": 1,
+      "required_sources": [
+        "D284_1979",
+        "L2_1981_REPUBLICATION"
+      ],
+      "status": "PENDING_LIVE_EXTRACTION_AND_COMPARISON",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false
+    },
+    {
+      "sector": 2,
+      "required_sources": [
+        "D284_1979",
+        "L2_1981_REPUBLICATION"
+      ],
+      "status": "PENDING_LIVE_EXTRACTION_AND_COMPARISON",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false
+    },
+    {
+      "sector": 3,
+      "required_sources": [
+        "D284_1979",
+        "L2_1981_REPUBLICATION"
+      ],
+      "status": "PENDING_LIVE_EXTRACTION_AND_COMPARISON",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false
+    },
+    {
+      "sector": 4,
+      "required_sources": [
+        "D284_1979",
+        "L2_1981_REPUBLICATION"
+      ],
+      "status": "PENDING_LIVE_EXTRACTION_AND_COMPARISON",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false
+    },
+    {
+      "sector": 5,
+      "required_sources": [
+        "D284_1979",
+        "L2_1981_REPUBLICATION"
+      ],
+      "status": "PENDING_LIVE_EXTRACTION_AND_COMPARISON",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false
+    },
+    {
+      "sector": 6,
+      "required_sources": [
+        "D284_1979",
+        "L2_1981_REPUBLICATION"
+      ],
+      "status": "PENDING_LIVE_EXTRACTION_AND_COMPARISON",
+      "osm_boundary_legal_certified": false,
+      "administrative_change_authorized": false
+    }
+  ],
+  "certification": {
+    "official_versions_fully_retrieved": 0,
+    "sector_pairs_automatically_compared_and_verified": 0,
+    "exhaustive_1979_2026_amendments": false,
+    "osm_legal_equivalences": 0
+  },
+  "restrictions": {
+    "ACTUAL_edits": false,
+    "reparent": false,
+    "code_assignment": false,
+    "P9_1_authorized": false,
+    "external_requests": false
+  }
+}
