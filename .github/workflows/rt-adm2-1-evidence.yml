@@ -1,0 +1,29 @@
+name: RT-ADM.2.1 individual evidentiary guard
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-1/**'
+      - 'docs/audits/rt-adm2/identity-decision-register.json'
+      - 'scripts/audit/rt-adm2-1-verify.mjs'
+      - '.github/workflows/rt-adm2-1-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  per-id-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify original RT-ADM.2 immutable decisions
+        run: node scripts/audit/rt-adm2-verify.mjs
+      - name: Verify individual RT-ADM.2.1 cases, roles and no-mutation invariants
+        run: node scripts/audit/rt-adm2-1-verify.mjs
+      - name: Ensure no generated changes or writeback
+        run: git diff --exit-code

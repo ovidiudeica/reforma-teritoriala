@@ -1,0 +1,576 @@
+{
+  "schema": "rt-adm2-1-individual-primary-evidence-v1",
+  "audit": "RT-ADM.2.1",
+  "reference_main_sha": "b72d6279b218e220d8ea1f26e38510fec0f51f2e",
+  "source": "docs/audits/rt-adm2/identity-decision-register.json",
+  "policy": "READ_ONLY_NO_REPARENT_NO_GEOMETRY_OR_CODE_BINDING",
+  "review_note": "Fourteen case dossiers were reassessed using available archival primary sources and accessible official references. No authoritative individual OSM-boundary crosswalk was obtained. Archival CUATM spreadsheet was not independently binary-reparsed in this session; its prior audit result is preserved without presenting a new verification.",
+  "source_access_limitations": [
+    "OSM relation 12104636 direct API request was inaccessible; no current tags/history verified",
+    "No authoritative official GIS polygon data acquired for eleven RO relations or three MD relations",
+    "Historical decree sector delimitations cannot be treated as exact modern geometry",
+    "Existing official CUATM binary was archived and previously audited but not independently re-parsed this execution"
+  ],
+  "cases": [
+    {
+      "id": "osm-r18967570",
+      "jurisdiction": "MD",
+      "name": "Bondareuca",
+      "existing_parent_id": "osm-r19076879",
+      "existing_parent_name": "Grigorăuca",
+      "source_register_status": "CODE_PARENT_CONFLICT_FOOTPRINT_ID_UNCERTIFIED",
+      "group": "MD_CODE_PARENTAGE_DISCREPANCY",
+      "primary_source_assessment": [
+        {
+          "uri": "docs/audits/rt-audit1-2/evidence/CUATM_25.xlsx",
+          "access_status": "OFFICIAL_BINARY_ARCHIVED_PREVIOUS_AUDIT_NOT_REPARSED_THIS_RUN",
+          "evidentiary_scope": "Code parentage only (archived)"
+        }
+      ],
+      "verified_statement": "The archived CUATM evidence assigns parent code 8960 while the stored ACTUAL parent is 7433. Neither side is independently established as the correct parent of the entire OSM footprint.",
+      "code_context": {
+        "stored_code": "8961",
+        "official_parent_code": "8960",
+        "tree_parent_code": "7433",
+        "official_sector_code_reference": null
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Independent identity evidence for OSM relation geometry",
+        "Current primary legal parentage confirmed against relation identity",
+        "Time-applicable official boundary or explicitly documented non-boundary representational role"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r18967570"
+    },
+    {
+      "id": "osm-r18968043",
+      "jurisdiction": "MD",
+      "name": "Etulia, loc.st.c.f.",
+      "existing_parent_id": "osm-r19117344",
+      "existing_parent_name": "Cișmichioi",
+      "source_register_status": "CODE_PARENT_CONFLICT_FOOTPRINT_ID_UNCERTIFIED",
+      "group": "MD_CODE_PARENTAGE_DISCREPANCY",
+      "primary_source_assessment": [
+        {
+          "uri": "docs/audits/rt-audit1-2/evidence/CUATM_25.xlsx",
+          "access_status": "OFFICIAL_BINARY_ARCHIVED_PREVIOUS_AUDIT_NOT_REPARSED_THIS_RUN",
+          "evidentiary_scope": "Code parentage only (archived)"
+        }
+      ],
+      "verified_statement": "The archived CUATM evidence assigns parent code 9629 while the stored ACTUAL parent is 9621. Neither side is independently established as the correct parent of the entire OSM footprint.",
+      "code_context": {
+        "stored_code": "9639",
+        "official_parent_code": "9629",
+        "tree_parent_code": "9621",
+        "official_sector_code_reference": null
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Independent identity evidence for OSM relation geometry",
+        "Current primary legal parentage confirmed against relation identity",
+        "Time-applicable official boundary or explicitly documented non-boundary representational role"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r18968043"
+    },
+    {
+      "id": "osm-r12104636",
+      "jurisdiction": "MD",
+      "name": null,
+      "existing_parent_id": "osm-r19090918",
+      "existing_parent_name": "Hrușova",
+      "source_register_status": "POSITIVE_IDENTITY_NOT_ESTABLISHED",
+      "group": "MD_NO_POSITIVE_IDENTITY",
+      "primary_source_assessment": [
+        {
+          "uri": "data/sources/md-cuatm-individual-review.json",
+          "access_status": "PROJECT_REVIEW_RECORD_RETRIEVED",
+          "evidentiary_scope": "Negative identity review only"
+        }
+      ],
+      "verified_statement": "The existing MD review explicitly records unnamed admin_level=9 relation under Hrușova and leaves identity unresolved; no fresh official or OSM relation identification was recovered.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": "3136",
+        "official_sector_code_reference": null
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Time-stamped OSM relation metadata and member history",
+        "Independent primary identity or operator/cadastral identifier",
+        "Evidence for administrative versus auxiliary/allotment role"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r12104636"
+    },
+    {
+      "id": "osm-r11283027",
+      "jurisdiction": "RO",
+      "name": "Mureșeni",
+      "existing_parent_id": "osm-r8334767",
+      "existing_parent_name": "Târgu Mureș",
+      "source_register_status": "OSM_FOOTPRINT_IDENTITY_NOT_CERTIFIED",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Primary legal annex supports the named locality and nominal administrative relationship, not the exact OSM boundary.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": null
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Positive relation-to-SIRUTA identity crosswalk from authoritative source",
+        "Official current boundary geometry or a legally defensible boundary reconstruction",
+        "Full geometry comparison at same reference date"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r11283027"
+    },
+    {
+      "id": "osm-r11283576",
+      "jurisdiction": "RO",
+      "name": "Remetea",
+      "existing_parent_id": "osm-r8334767",
+      "existing_parent_name": "Târgu Mureș",
+      "source_register_status": "OSM_FOOTPRINT_IDENTITY_NOT_CERTIFIED",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Primary legal annex supports the named locality and nominal administrative relationship, not the exact OSM boundary.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": null
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Positive relation-to-SIRUTA identity crosswalk from authoritative source",
+        "Official current boundary geometry or a legally defensible boundary reconstruction",
+        "Full geometry comparison at same reference date"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r11283576"
+    },
+    {
+      "id": "osm-r11366846",
+      "jurisdiction": "RO",
+      "name": "Sat Vălureni",
+      "existing_parent_id": "osm-r11318838",
+      "existing_parent_name": "Cristești",
+      "source_register_status": "OSM_FOOTPRINT_IDENTITY_NOT_CERTIFIED",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Primary legal annex supports nominal village membership within the commune, not the exact OSM relation footprint.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": null
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Positive relation-to-SIRUTA identity crosswalk from authoritative source",
+        "Official current boundary geometry or a legally defensible boundary reconstruction",
+        "Full geometry comparison at same reference date"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r11366846"
+    },
+    {
+      "id": "osm-r11366847",
+      "jurisdiction": "RO",
+      "name": "Sat Cristești",
+      "existing_parent_id": "osm-r11318838",
+      "existing_parent_name": "Cristești",
+      "source_register_status": "OSM_FOOTPRINT_IDENTITY_NOT_CERTIFIED",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Primary legal annex supports nominal village membership within the commune, not the exact OSM relation footprint.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": null
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Positive relation-to-SIRUTA identity crosswalk from authoritative source",
+        "Official current boundary geometry or a legally defensible boundary reconstruction",
+        "Full geometry comparison at same reference date"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r11366847"
+    },
+    {
+      "id": "osm-r12557978",
+      "jurisdiction": "RO",
+      "name": "Bărdești",
+      "existing_parent_id": "osm-r11318833",
+      "existing_parent_name": "Sântana de Mureș",
+      "source_register_status": "OSM_FOOTPRINT_IDENTITY_NOT_CERTIFIED",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+          "access_status": "OFFICIAL_LEGAL_TEXT_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Primary legal annex supports nominal village membership within the commune, not the exact OSM relation footprint.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": null
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Positive relation-to-SIRUTA identity crosswalk from authoritative source",
+        "Official current boundary geometry or a legally defensible boundary reconstruction",
+        "Full geometry comparison at same reference date"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r12557978"
+    },
+    {
+      "id": "osm-r7960954",
+      "jurisdiction": "RO",
+      "name": "Sector 1",
+      "existing_parent_id": "osm-r377733",
+      "existing_parent_name": "București",
+      "source_register_status": "OFFICIAL_SECTOR_EXISTS_OSM_BOUNDARY_NOT_CERTIFIED",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+          "access_status": "OFFICIAL_HISTORICAL_BOUNDARY_DESCRIPTION_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf",
+          "access_status": "PUBLIC_NRSIRUTA_CODES_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Decree 284/1979 defines sector 1 and historical boundary descriptions; NRSIRUTA lists reference sector code 179141. Neither establishes equivalence with the 2026 OSM boundary.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": "179141"
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Applicable 2026 statutory boundary and revisions",
+        "Current authoritative GIS/cadastral sector polygon",
+        "Exact OSM polygon equivalence test with topology and tolerance protocol"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r7960954"
+    },
+    {
+      "id": "osm-r7960953",
+      "jurisdiction": "RO",
+      "name": "Sector 2",
+      "existing_parent_id": "osm-r377733",
+      "existing_parent_name": "București",
+      "source_register_status": "OFFICIAL_SECTOR_EXISTS_OSM_BOUNDARY_NOT_CERTIFIED",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+          "access_status": "OFFICIAL_HISTORICAL_BOUNDARY_DESCRIPTION_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf",
+          "access_status": "PUBLIC_NRSIRUTA_CODES_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Decree 284/1979 defines sector 2 and historical boundary descriptions; NRSIRUTA lists reference sector code 179150. Neither establishes equivalence with the 2026 OSM boundary.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": "179150"
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Applicable 2026 statutory boundary and revisions",
+        "Current authoritative GIS/cadastral sector polygon",
+        "Exact OSM polygon equivalence test with topology and tolerance protocol"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r7960953"
+    },
+    {
+      "id": "osm-r7960937",
+      "jurisdiction": "RO",
+      "name": "Sector 3",
+      "existing_parent_id": "osm-r377733",
+      "existing_parent_name": "București",
+      "source_register_status": "OFFICIAL_SECTOR_EXISTS_OSM_BOUNDARY_NOT_CERTIFIED",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+          "access_status": "OFFICIAL_HISTORICAL_BOUNDARY_DESCRIPTION_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf",
+          "access_status": "PUBLIC_NRSIRUTA_CODES_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Decree 284/1979 defines sector 3 and historical boundary descriptions; NRSIRUTA lists reference sector code 179169. Neither establishes equivalence with the 2026 OSM boundary.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": "179169"
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Applicable 2026 statutory boundary and revisions",
+        "Current authoritative GIS/cadastral sector polygon",
+        "Exact OSM polygon equivalence test with topology and tolerance protocol"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r7960937"
+    },
+    {
+      "id": "osm-r7960957",
+      "jurisdiction": "RO",
+      "name": "Sector 4",
+      "existing_parent_id": "osm-r377733",
+      "existing_parent_name": "București",
+      "source_register_status": "OFFICIAL_SECTOR_EXISTS_OSM_BOUNDARY_NOT_CERTIFIED",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+          "access_status": "OFFICIAL_HISTORICAL_BOUNDARY_DESCRIPTION_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf",
+          "access_status": "PUBLIC_NRSIRUTA_CODES_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Decree 284/1979 defines sector 4 and historical boundary descriptions; NRSIRUTA lists reference sector code 179178. Neither establishes equivalence with the 2026 OSM boundary.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": "179178"
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Applicable 2026 statutory boundary and revisions",
+        "Current authoritative GIS/cadastral sector polygon",
+        "Exact OSM polygon equivalence test with topology and tolerance protocol"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r7960957"
+    },
+    {
+      "id": "osm-r7960956",
+      "jurisdiction": "RO",
+      "name": "Sector 5",
+      "existing_parent_id": "osm-r377733",
+      "existing_parent_name": "București",
+      "source_register_status": "OFFICIAL_SECTOR_EXISTS_OSM_BOUNDARY_NOT_CERTIFIED",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+          "access_status": "OFFICIAL_HISTORICAL_BOUNDARY_DESCRIPTION_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf",
+          "access_status": "PUBLIC_NRSIRUTA_CODES_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Decree 284/1979 defines sector 5 and historical boundary descriptions; NRSIRUTA lists reference sector code 179187. Neither establishes equivalence with the 2026 OSM boundary.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": "179187"
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Applicable 2026 statutory boundary and revisions",
+        "Current authoritative GIS/cadastral sector polygon",
+        "Exact OSM polygon equivalence test with topology and tolerance protocol"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r7960956"
+    },
+    {
+      "id": "osm-r7960955",
+      "jurisdiction": "RO",
+      "name": "Sector 6",
+      "existing_parent_id": "osm-r377733",
+      "existing_parent_name": "București",
+      "source_register_status": "OFFICIAL_SECTOR_EXISTS_OSM_BOUNDARY_NOT_CERTIFIED",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "primary_source_assessment": [
+        {
+          "uri": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+          "access_status": "OFFICIAL_HISTORICAL_BOUNDARY_DESCRIPTION_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        },
+        {
+          "uri": "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf",
+          "access_status": "PUBLIC_NRSIRUTA_CODES_RETRIEVED",
+          "evidentiary_scope": "Nominal statutory identity/code, not geometry"
+        }
+      ],
+      "verified_statement": "Decree 284/1979 defines sector 6 and historical boundary descriptions; NRSIRUTA lists reference sector code 179196. Neither establishes equivalence with the 2026 OSM boundary.",
+      "code_context": {
+        "stored_code": null,
+        "official_parent_code": null,
+        "tree_parent_code": null,
+        "official_sector_code_reference": "179196"
+      },
+      "positive_osm_identity_independently_certified": false,
+      "authoritative_osm_footprint_equivalence_certified": false,
+      "administrative_edit_proven": false,
+      "missing_required_evidence": [
+        "Applicable 2026 statutory boundary and revisions",
+        "Current authoritative GIS/cadastral sector polygon",
+        "Exact OSM polygon equivalence test with topology and tolerance protocol"
+      ],
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+      "record_closure": "EVIDENTIARY_REVIEW_COMPLETE_OPEN_SUBSTANTIVE_EXCEPTION",
+      "allow_automatic_edit": false,
+      "source_record": "docs/audits/rt-adm2/identity-decision-register.json#osm-r7960955"
+    }
+  ],
+  "counts": {
+    "total": 14,
+    "md": 3,
+    "ro": 11,
+    "nominal_or_code_primary_evidence_available_from_prior_and_current_references": 13,
+    "no_positive_identity": 1,
+    "certified_osm_boundaries": 0,
+    "proven_administrative_edits": 0,
+    "protected_no_change": 14,
+    "review_complete": 14,
+    "substantive_exceptions_open": 14
+  },
+  "decision": "PROBATIVE_CASE_DOSSIERS_COMPLETE_LEGAL_FOOTPRINT_CERTIFICATION_REMAINS_OPEN",
+  "authorization_required_before_mutation": true,
+  "p91_authorized": false
+}
