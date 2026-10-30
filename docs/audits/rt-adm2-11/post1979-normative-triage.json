@@ -1,0 +1,220 @@
+{
+  "schema": "rt-adm2-11-normative-corpus-triage-v1",
+  "reference_date": "2026-10-30",
+  "based_on_main": "6eea01bc3161b837efc6a3f5345ce81b21ee5847",
+  "scope": "POST_1979_DIRECT_AND_INDIRECT_SECTOR_BOUNDARY_AMENDMENTS",
+  "evidence_standard": "No negative evidence claim until the complete official act corpus and each consolidated amendment history have been exhaustively reviewed.",
+  "search_pass": {
+    "public_portal_search_terms": [
+      "delimitarea sectoarelor municipiului București",
+      "modificarea limitelor sectoarelor București",
+      "limitele administrativ-teritoriale ale sectoarelor"
+    ],
+    "found_direct_post1979_boundary_amending_act": false,
+    "not_found_is_not_proof_of_absence": true,
+    "exhaustive_official_gazette_scan_completed": false
+  },
+  "acts_reviewed": [
+    {
+      "key": "D284_1979",
+      "year": 1979,
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+      "class": "BASELINE_SECTOR_BOUNDARY_TEXT",
+      "impact": "DIRECT_SIX_SECTOR_GEOMETRIC_DESCRIPTION",
+      "evidence": "Anexa 1 individualizează limitele textuale ale celor șase sectoare"
+    },
+    {
+      "key": "L31_1979",
+      "year": 1979,
+      "url": "https://legislatie.just.ro/public/DetaliiDocument/28169",
+      "class": "APPROVAL",
+      "impact": "APPROVAL_NOT_NEW_BOUNDARY",
+      "evidence": "Aprobarea decretului; comparația anexelor rămâne necesară"
+    },
+    {
+      "key": "L2_1968_REPUBLISHED_1981",
+      "year": 1981,
+      "url": "https://legislatie.just.ro/public/detaliidocument/190",
+      "class": "POST_1979_REPUBLICATION",
+      "impact": "SIX_SECTOR_ORGANIZATION_CORROBORATED",
+      "evidence": "Republicarea atestă configurația cu șase sectoare; nu se inferă echivalență GIS"
+    },
+    {
+      "key": "HG64_2011",
+      "year": 2011,
+      "url": "https://legislatie.just.ro/Public/DetaliiDocumentAfis/126502",
+      "class": "ARCHIVAL_METHOD_AND_HISTORICAL_RENAMING",
+      "impact": "HISTORY_NO_BOUNDARY_CHANGE_IDENTIFIED_IN_REVIEWED_PASSAGE",
+      "evidence": "Anexa metodologică descrie trecerea de la opt la șase sectoare la 4 august 1979"
+    },
+    {
+      "key": "L290_2018",
+      "year": 2018,
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+      "class": "SUBDIVISION_LEGAL_STATUS",
+      "impact": "STATUS_NOT_BOUNDARY_GEOMETRY",
+      "evidence": "Statutul sectoarelor ca subdiviziuni; fără delimitare GIS pe baza pasajului examinat"
+    },
+    {
+      "key": "OUG57_2019",
+      "year": 2019,
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/215925",
+      "class": "GENERAL_ADMINISTRATIVE_CODE",
+      "impact": "GENERAL_STATUS_NO_BOUNDARY_CHANGE_DEMONSTRATED",
+      "evidence": "Norme administrative generale; nu s-a constatat în analiza țintită un articol individual de mutare a limitei"
+    }
+  ],
+  "per_sector": [
+    {
+      "id": "osm-r7960954",
+      "sector": 1,
+      "siruta_2026": "179141",
+      "baseline_decree": "D284_1979",
+      "reviewed_post1979": [
+        "L2_1968_REPUBLISHED_1981",
+        "HG64_2011",
+        "L290_2018",
+        "OUG57_2019"
+      ],
+      "positive_boundary_amendments_demonstrated": [],
+      "absence_of_other_amendments_certified": false,
+      "public_cartographic_data_legal_equivalence_certified": false,
+      "unresolved_gates": [
+        "Monitorul Oficial corpus scan 1979–2026 for direct and indirect amendments to Annex 1",
+        "Full official amendment history and effective dates for sector boundary descriptions",
+        "Any later formally adopted delimitation plans and gazette appendices",
+        "Certified contemporary vector boundaries and per-segment comparison"
+      ],
+      "decision": "NO_CHANGE_PENDING_EXHAUSTIVE_PRIMARY_CORPUS"
+    },
+    {
+      "id": "osm-r7960953",
+      "sector": 2,
+      "siruta_2026": "179150",
+      "baseline_decree": "D284_1979",
+      "reviewed_post1979": [
+        "L2_1968_REPUBLISHED_1981",
+        "HG64_2011",
+        "L290_2018",
+        "OUG57_2019"
+      ],
+      "positive_boundary_amendments_demonstrated": [],
+      "absence_of_other_amendments_certified": false,
+      "public_cartographic_data_legal_equivalence_certified": false,
+      "unresolved_gates": [
+        "Monitorul Oficial corpus scan 1979–2026 for direct and indirect amendments to Annex 1",
+        "Full official amendment history and effective dates for sector boundary descriptions",
+        "Any later formally adopted delimitation plans and gazette appendices",
+        "Certified contemporary vector boundaries and per-segment comparison"
+      ],
+      "decision": "NO_CHANGE_PENDING_EXHAUSTIVE_PRIMARY_CORPUS"
+    },
+    {
+      "id": "osm-r7960937",
+      "sector": 3,
+      "siruta_2026": "179169",
+      "baseline_decree": "D284_1979",
+      "reviewed_post1979": [
+        "L2_1968_REPUBLISHED_1981",
+        "HG64_2011",
+        "L290_2018",
+        "OUG57_2019"
+      ],
+      "positive_boundary_amendments_demonstrated": [],
+      "absence_of_other_amendments_certified": false,
+      "public_cartographic_data_legal_equivalence_certified": false,
+      "unresolved_gates": [
+        "Monitorul Oficial corpus scan 1979–2026 for direct and indirect amendments to Annex 1",
+        "Full official amendment history and effective dates for sector boundary descriptions",
+        "Any later formally adopted delimitation plans and gazette appendices",
+        "Certified contemporary vector boundaries and per-segment comparison"
+      ],
+      "decision": "NO_CHANGE_PENDING_EXHAUSTIVE_PRIMARY_CORPUS"
+    },
+    {
+      "id": "osm-r7960957",
+      "sector": 4,
+      "siruta_2026": "179178",
+      "baseline_decree": "D284_1979",
+      "reviewed_post1979": [
+        "L2_1968_REPUBLISHED_1981",
+        "HG64_2011",
+        "L290_2018",
+        "OUG57_2019"
+      ],
+      "positive_boundary_amendments_demonstrated": [],
+      "absence_of_other_amendments_certified": false,
+      "public_cartographic_data_legal_equivalence_certified": false,
+      "unresolved_gates": [
+        "Monitorul Oficial corpus scan 1979–2026 for direct and indirect amendments to Annex 1",
+        "Full official amendment history and effective dates for sector boundary descriptions",
+        "Any later formally adopted delimitation plans and gazette appendices",
+        "Certified contemporary vector boundaries and per-segment comparison"
+      ],
+      "decision": "NO_CHANGE_PENDING_EXHAUSTIVE_PRIMARY_CORPUS"
+    },
+    {
+      "id": "osm-r7960956",
+      "sector": 5,
+      "siruta_2026": "179187",
+      "baseline_decree": "D284_1979",
+      "reviewed_post1979": [
+        "L2_1968_REPUBLISHED_1981",
+        "HG64_2011",
+        "L290_2018",
+        "OUG57_2019"
+      ],
+      "positive_boundary_amendments_demonstrated": [],
+      "absence_of_other_amendments_certified": false,
+      "public_cartographic_data_legal_equivalence_certified": false,
+      "unresolved_gates": [
+        "Monitorul Oficial corpus scan 1979–2026 for direct and indirect amendments to Annex 1",
+        "Full official amendment history and effective dates for sector boundary descriptions",
+        "Any later formally adopted delimitation plans and gazette appendices",
+        "Certified contemporary vector boundaries and per-segment comparison"
+      ],
+      "decision": "NO_CHANGE_PENDING_EXHAUSTIVE_PRIMARY_CORPUS"
+    },
+    {
+      "id": "osm-r7960955",
+      "sector": 6,
+      "siruta_2026": "179196",
+      "baseline_decree": "D284_1979",
+      "reviewed_post1979": [
+        "L2_1968_REPUBLISHED_1981",
+        "HG64_2011",
+        "L290_2018",
+        "OUG57_2019"
+      ],
+      "positive_boundary_amendments_demonstrated": [],
+      "absence_of_other_amendments_certified": false,
+      "public_cartographic_data_legal_equivalence_certified": false,
+      "unresolved_gates": [
+        "Monitorul Oficial corpus scan 1979–2026 for direct and indirect amendments to Annex 1",
+        "Full official amendment history and effective dates for sector boundary descriptions",
+        "Any later formally adopted delimitation plans and gazette appendices",
+        "Certified contemporary vector boundaries and per-segment comparison"
+      ],
+      "decision": "NO_CHANGE_PENDING_EXHAUSTIVE_PRIMARY_CORPUS"
+    }
+  ],
+  "summary": {
+    "sectors": 6,
+    "reviewed_acts": 6,
+    "post1979_acts_reviewed": 4,
+    "positive_boundary_amending_acts_established": 0,
+    "exhaustive_absence_certifications": 0,
+    "legal_OSM_boundary_equivalences": 0
+  },
+  "restrictions": {
+    "ACTUAL_edit": false,
+    "reparent": false,
+    "SIRUTA_binding": false,
+    "automatic_OSM_equivalence": false,
+    "institutional_requests": false,
+    "emails": false,
+    "payments": false,
+    "P9_1_authorized": false
+  },
+  "outcome": "TARGETED_LEGAL_TRIAGE_COMPLETE_EXHAUSTIVE_CORPUS_NOT_CERTIFIED"
+}
