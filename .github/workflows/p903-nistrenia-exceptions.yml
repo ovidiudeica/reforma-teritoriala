@@ -31,7 +31,7 @@ jobs:
         run: node scripts/audit/p903-nistrenia-exceptions.mjs --shard=${{ matrix.shard }}
       - name: Preserve per-ID provenance and failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: p903-nistrenia-shard-${{ matrix.shard }}
           if-no-files-found: warn
@@ -61,7 +61,7 @@ jobs:
         run: node scripts/audit/p903-nistrenia-exceptions.mjs --combine
       - name: Publish summary, 84 rows, and unresolved exceptions even when PARTIAL
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: p903-nistrenia-complete-reconciliation
           if-no-files-found: warn
