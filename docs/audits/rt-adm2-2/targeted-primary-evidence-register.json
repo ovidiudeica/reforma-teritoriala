@@ -1,0 +1,129 @@
+{
+  "schema": "rt-adm2-2-targeted-primary-evidence-v1",
+  "audit": "RT-ADM.2.2",
+  "date_utc": "2026-10-30",
+  "base_main_sha": "b72d6279b218e220d8ea1f26e38510fec0f51f2e",
+  "pr466_head_sha": "a3fc49745158ca4410557f831d1d84f8aa36ce15",
+  "policy": "READ_ONLY_FAIL_CLOSED_NO_ACTUAL_NO_REPARENT_NO_BINDINGS_P9_1_BLOCKED",
+  "ci": {
+    "p82_run_id": 40979737682,
+    "p82_status": "completed",
+    "p82_conclusion": "success",
+    "associated_workflows_total": 15,
+    "associated_workflows_completed_success": 15,
+    "pr466_state_at_observation": "OPEN_DRAFT_UNMERGED"
+  },
+  "sources": [
+    {
+      "id": "cuatm_archived_original",
+      "uri": "docs/audits/rt-audit1-2/evidence/CUATM_25.xlsx",
+      "kind": "archived_official_xlsx",
+      "retrieval": "GITHUB_FETCH_FILE_BASE64_SUCCESS",
+      "git_blob_sha": "768562c6967f054d2934e7e0cea1727eec5ca76a",
+      "base64_character_count": 139581,
+      "content_binary_row_reparse_this_run": false,
+      "scope": "The binary file was fetched; per-row values are inherited from prior audited registers, not independently re-parsed in this run."
+    },
+    {
+      "id": "cuatm_bns_2025",
+      "uri": "https://statistica.gov.md/files/files/Clasificatoare/CUATM_2003_2025_rom.doc",
+      "kind": "official_cuatm_doc",
+      "retrieval": "OFFICIAL_LINK_LOCATED_BINARY_DOWNLOAD_NOT_VERIFIED",
+      "scope": "Primary official current-version candidate; not treated as parsed."
+    },
+    {
+      "id": "cuatm_bns_order106",
+      "uri": "https://statistica.gov.md/files/files/Clasificatoare/Ordin_106_modific_CUATM_17_10_2025.pdf",
+      "kind": "official_amendment_pdf",
+      "retrieval": "OFFICIAL_LINK_LOCATED_FETCH_TIMEOUT",
+      "scope": "2025 amendments reported by BNS to affect Falesti and Leova; not extrapolated to case parentage."
+    },
+    {
+      "id": "cuatm_bns_page",
+      "uri": "https://statistica.gov.md/ro/clasificatorul-unitatilor-administrativ-teritoriale-al-republicii-moldova-cuatm--12_62048.html",
+      "kind": "official_notice",
+      "retrieval": "TEXT_RETRIEVED",
+      "scope": "Notice dated 2025-10-21, modification order 106 dated 2025-10-17."
+    }
+  ],
+  "osm_history_attempts": [
+    {
+      "relation_id": 12104636,
+      "url": "https://api.openstreetmap.org/api/0.6/relation/12104636/history",
+      "web_api_result": "INACCESSIBLE",
+      "openstreetmap_html_result": "INACCESSIBLE",
+      "history_xml_saved": false,
+      "versions_verified": 0,
+      "latest_tags_verified": false,
+      "member_diffs_verified": false
+    },
+    {
+      "relation_id": 18967570,
+      "url": "https://api.openstreetmap.org/api/0.6/relation/18967570/history",
+      "web_api_result": "INACCESSIBLE",
+      "openstreetmap_html_result": "INACCESSIBLE",
+      "history_xml_saved": false,
+      "versions_verified": 0,
+      "latest_tags_verified": false,
+      "member_diffs_verified": false
+    },
+    {
+      "relation_id": 18968043,
+      "url": "https://api.openstreetmap.org/api/0.6/relation/18968043/history",
+      "web_api_result": "INACCESSIBLE",
+      "openstreetmap_html_result": "INACCESSIBLE",
+      "history_xml_saved": false,
+      "versions_verified": 0,
+      "latest_tags_verified": false,
+      "member_diffs_verified": false
+    }
+  ],
+  "cases": [
+    {
+      "osm_id": "osm-r18967570",
+      "name": "Bondareuca",
+      "existing_parent": "osm-r19076879",
+      "existing_parent_name": "Grigorăuca",
+      "stored_cuatm": "8961",
+      "historical_register_official_parent_code": "8960",
+      "historical_register_official_parent_name": "Zgărdești",
+      "tree_parent_cuatm": "7433",
+      "discrepancy": "CONFIRMED_IN_PRIOR_AUDIT_NOT_INDEPENDENTLY_REPARSED",
+      "positive_osm_identity_certified": false,
+      "boundary_equivalence_certified": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "osm_id": "osm-r18968043",
+      "name": "Etulia, loc.st.c.f.",
+      "existing_parent": "osm-r19117344",
+      "existing_parent_name": "Cișmichioi",
+      "stored_cuatm": "9639",
+      "historical_register_official_parent_code": "9629",
+      "historical_register_official_parent_name": "Etulia",
+      "tree_parent_cuatm": "9621",
+      "discrepancy": "CONFIRMED_IN_PRIOR_AUDIT_NOT_INDEPENDENTLY_REPARSED",
+      "positive_osm_identity_certified": false,
+      "boundary_equivalence_certified": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "osm_id": "osm-r12104636",
+      "name": null,
+      "existing_parent": "osm-r19090918",
+      "existing_parent_name": "Hrușova",
+      "parent_cuatm": "3136",
+      "known_member_way_from_prior_snapshot": 889101842,
+      "positive_osm_identity_certified": false,
+      "osm_history_fetched": false,
+      "source": "data/sources/md-cuatm-individual-review.json",
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    }
+  ],
+  "next_primary_evidence": [
+    "Binary reparse of archived CUATM and official current DOC with per-record provenance and dates",
+    "Retrieve XML for all versions of the three OSM relations, member way history and changeset metadata",
+    "Positive independent crosswalk for full OSM identity and role; geometry verification from contemporary authoritative boundary"
+  ],
+  "overall_verdict": "PARTIAL_PRIMARY_ACQUISITION_CUATM_ARCHIVED_BINARY_FETCHED_OSM_HISTORIES_UNAVAILABLE_NO_SUBSTANTIVE_CLOSURE"
+}
