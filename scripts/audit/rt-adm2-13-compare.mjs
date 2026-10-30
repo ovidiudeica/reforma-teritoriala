@@ -17,12 +17,12 @@ for(const s of m.sources){
   for(let i=0;i<matches.length;i++){const n=Number(matches[i][1]);if(record.sections[n])continue;const end=i+1<matches.length?matches[i+1].index:Math.min(annex.length,matches[i].index+35000);const part=annex.slice(matches[i].index,end).trim();if(part.length>120)record.sections[n]={sha256:crypto.createHash('sha256').update(part).digest('hex'),length:part.length,text:part};}
   record.status=Object.keys(record.sections).length===6?'SIX_SECTIONS_EXTRACTED':'PARTIAL_SECTOR_EXTRACTION';
  }else record.status='TEXT_RETRIEVED_NO_ANNEX_ASSUMED';
- }catch(e){record.status='EXCEPTION_'+String(e.message).slice(0,100)}result.sources.push(record);
+ }catch(e){record.status='EXCEPTION_'+String(e.message).slice(0,100);record.network_cause=e.cause?String(e.cause.code||e.cause.message||e.cause):null}result.sources.push(record);
 }
 for(let sector=1;sector<=6;sector++){
  const x=result.sources[0].sections[sector],y=result.sources[1].sections[sector];
  result.per_sector.push({sector,comparison_status:x&&y?'TEXT_COMPARISON_AVAILABLE':'NOT_COMPARABLE_SOURCE_OR_SECTION_MISSING',normalized_text_equal:x&&y?x.text===y.text:null,legal_boundary_equal:null,missing_sources:[...(!x?['D284_1979']:[]),...(!y?['L2_1981_REPUBLICATION']:[])]});
 }
 fs.mkdirSync('outputs/RT-ADM.2.13',{recursive:true});fs.writeFileSync('outputs/RT-ADM.2.13/extraction-and-comparison.json',JSON.stringify(result,null,2)+'\n');
-console.log(JSON.stringify({sources:result.sources.map(s=>({id:s.id,status:s.status,sha256:s.sha256})),sectors:result.per_sector.map(x=>({sector:x.sector,status:x.comparison_status,text_equal:x.normalized_text_equal}))},null,2));
+result.evidence_status=result.per_sector.every(x=>x.comparison_status==='TEXT_COMPARISON_AVAILABLE')?'ALL_SIX_TEXT_PAIRS_AVAILABLE':result.sources.every(s=>s.status.startsWith('EXCEPTION_'))?'ALL_OFFICIAL_FETCHES_FAILED':'PARTIAL_OR_INCOMPLETE_EVIDENCE';console.log('EVIDENCE STATUS: '+result.evidence_status);console.log(JSON.stringify({sources:result.sources.map(s=>({id:s.id,status:s.status,sha256:s.sha256})),sectors:result.per_sector.map(x=>({sector:x.sector,status:x.comparison_status,text_equal:x.normalized_text_equal}))},null,2));
 assert(result.per_sector.every(x=>x.legal_boundary_equal===null));assert.equal(result.exhaustive,false);
