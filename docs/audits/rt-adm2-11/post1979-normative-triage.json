@@ -13,7 +13,8 @@
     "found_direct_post1979_boundary_amending_act": false,
     "not_found_is_not_proof_of_absence": true,
     "exhaustive_official_gazette_scan_completed": false,
-    "official_consolidation_dates_recovered": 10
+    "official_consolidation_dates_recovered": 10,
+    "content_of_every_consolidated_version_diffed": false
   },
   "acts_reviewed": [
     {
@@ -205,7 +206,8 @@
     "post1979_acts_reviewed": 4,
     "positive_boundary_amending_acts_established": 0,
     "exhaustive_absence_certifications": 0,
-    "legal_OSM_boundary_equivalences": 0
+    "legal_OSM_boundary_equivalences": 0,
+    "act_by_act_entries": 8
   },
   "restrictions": {
     "ACTUAL_edit": false,
@@ -217,7 +219,7 @@
     "payments": false,
     "P9_1_authorized": false
   },
-  "outcome": "TARGETED_REVIEW_AND_OFFICIAL_CONSOLIDATION_DATES_RECOVERED_EXHAUSTIVENESS_NOT_CERTIFIED",
+  "outcome": "EIGHT_ACT_DOCUMENTARY_RECONCILIATION_ENTRIES_COMPLETED_EXHAUSTIVE_CORPUS_UNCERTIFIED",
   "official_consolidation_history": {
     "source": "https://legislatie.just.ro/Public/DetaliiDocument/194890",
     "law": "Legea nr. 2/1968",
@@ -236,5 +238,71 @@
     "review_status": "DATES_RECOVERED_FROM_OFFICIAL_PORTAL_CONTENT_OF_EACH_VERSION_NOT_EXHAUSTIVELY_DIFFED",
     "boundary_effect": "UNDETERMINED_FOR_ALL_VERSIONS",
     "notes": "Portalul oferă istoricul consolidărilor; lista de date vizibile este un inventar de versiuni, nu o listă exhaustivă de acte modificatoare ori dovadă a lipsei schimbărilor de contur."
-  }
+  },
+  "act_by_act_reconciliation": [
+    {
+      "act": "Decret 284/1979",
+      "date": "1979-07-31",
+      "source": "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+      "specific_provision": "Art. 1 și anexa 1",
+      "effect": "DIRECT_BOUNDARY_DEFINITION",
+      "finding": "Șase delimitări textuale de bază; pentru orice comparație GIS trebuie reconstruit traseul istoric."
+    },
+    {
+      "act": "Legea 31/1979",
+      "date": "1979",
+      "source": "https://legislatie.just.ro/public/DetaliiDocument/28169",
+      "specific_provision": "Aprobarea decretului",
+      "effect": "APPROVAL",
+      "finding": "Nu se deduce singură o nouă delimitare vectorială."
+    },
+    {
+      "act": "Decret 15/1981 și republicarea Legii 2/1968",
+      "date": "1981-01-23",
+      "source": "https://legislatie.just.ro/Public/DetaliiDocumentAfis/194890",
+      "specific_provision": "Temei de republicare și anexa A Municipiul București",
+      "effect": "REPUBLICATION_OF_SIX_SECTOR_TEXT",
+      "finding": "Textul republicat reproduce delimitările, dar egalitatea exhaustivă per-segment nu a fost demonstrată."
+    },
+    {
+      "act": "Modificări administrative privind Ilfov 1997",
+      "date": "1997",
+      "source": "https://legislatie.just.ro/Public/DetaliiDocumentAfis/194890",
+      "specific_provision": "Nota privind sectorul agricol Ilfov",
+      "effect": "TERRITORIAL_CONTEXT_NOT_PROVEN_SECTOR_1_TO_6_CHANGE",
+      "finding": "Modificarea statutului Ilfov trebuie ținută distinctă de limitele interne ale sectoarelor 1–6."
+    },
+    {
+      "act": "HG 64/2011 / metodologia de stare civilă",
+      "date": "2011",
+      "source": "https://legislatie.just.ro/Public/DetaliiDocument/267966",
+      "specific_provision": "Anexa istorică a sectoarelor",
+      "effect": "HISTORICAL_CORROBORATION",
+      "finding": "Confirmă tranziția din 1979; nu este act de mutare a unui contur."
+    },
+    {
+      "act": "Legea 290/2018",
+      "date": "2018-11-29",
+      "source": "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+      "specific_provision": "Art. I, modificare art. 2 Legea 2/1968",
+      "effect": "SECTOR_LEGAL_STATUS",
+      "finding": "Reglementează sectoarele ca subdiviziuni; nu se dovedește din acest articol modificarea anexei de limită."
+    },
+    {
+      "act": "OUG 57/2019",
+      "date": "2019",
+      "source": "https://legislatie.just.ro/Public/DetaliiDocument/215925",
+      "specific_provision": "Cod administrativ",
+      "effect": "GENERAL_LEGAL_FRAMEWORK",
+      "finding": "Nu se poate deduce din cadrul general o schimbare de delimitare individuală."
+    },
+    {
+      "act": "Versiunile consolidate 2017–2026 ale Legii 2/1968",
+      "date": "2017–2026",
+      "source": "https://legislatie.just.ro/Public/DetaliiDocument/194890",
+      "specific_provision": "Cronologie versiuni (10 date colectate)",
+      "effect": "VERSION_INDEX_ONLY",
+      "finding": "Indexul versiunilor nu este un recensământ complet al actelor modificatoare și nu a fost comparat integral per anexă."
+    }
+  ]
 }
