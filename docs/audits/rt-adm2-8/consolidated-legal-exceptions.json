@@ -1,0 +1,368 @@
+{
+  "schema": "rt-adm2-8-consolidated-legal-exceptions-v1",
+  "date": "2026-10-30",
+  "based_on_main": "a4b5210890a97134e9e86c57359c873d33184e6c",
+  "source_registers": [
+    {
+      "path": "docs/audits/rt-adm2-6/legal-exceptions-resumption.json",
+      "git_blob_sha": "a39c18b345973c278c31ceeffde3753c84239caf"
+    },
+    {
+      "path": "docs/audits/rt-adm2-7/normative-identity-register.json",
+      "git_blob_sha": "ab6037fc1f89ff5fefd9ca6abf2e07dc1ff9a412"
+    },
+    {
+      "path": "docs/audits/rt-adm2-5/osmb-cartographic-closure.json",
+      "git_blob_sha": "7df9bfea11c05cb9e332d958f3e20509e202a9de"
+    }
+  ],
+  "summary": {
+    "cases": 14,
+    "MD": 3,
+    "RO_localities": 5,
+    "RO_sectors": 6,
+    "legal_boundary_certifications": 0,
+    "authorized_admin_changes": 0,
+    "cartographically_accepted_MD": 3
+  },
+  "provenance_caveats": [
+    "SIRUTA 2026: codurile celor cinci localități provin din reproducerea normalizată INS; originalul binar oficial nu este verificat direct aici.",
+    "Cele șase coduri de sector provin din NRSIRUTA 2021, fără reconfirmare față de SIRUTA 2026.",
+    "CUATM 2025 certifică perechi nominale; nu certifică limite OSM sau obligația de reparentare.",
+    "OSMB acceptat numai cartografic pentru trei relații MD; nu reprezintă aprobare juridică."
+  ],
+  "cases": [
+    {
+      "id": "osm-r18967570",
+      "name": "Bondareuca",
+      "jurisdiction": "MD",
+      "group": "MD_CODE_PARENTAGE_DISCREPANCY",
+      "current_tree_parent": "osm-r19076879",
+      "reference_code": "8961",
+      "reference_code_class": "CUATM_2025",
+      "nominal_parent": "Zgărdești",
+      "nominal_status": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "cartographic_status": "OSMB_ACCEPTED_BY_PR471",
+      "available_evidence": [
+        "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+        "docs/audits/rt-adm2-2/targeted-primary-evidence-register.json"
+      ],
+      "missing_primary_evidence": [
+        "Act competent care clarifică apartenența și efectele juridice ale divergenței dintre părintele CUATM nominal și părintele din ACTUAL",
+        "Delimitare administrativă oficială autentificată, cu corespondență demonstrată cu poligonul OSM"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r18968043",
+      "name": "Etulia, loc.st.c.f.",
+      "jurisdiction": "MD",
+      "group": "MD_CODE_PARENTAGE_DISCREPANCY",
+      "current_tree_parent": "osm-r19117344",
+      "reference_code": "9639",
+      "reference_code_class": "CUATM_2025",
+      "nominal_parent": "Etulia",
+      "nominal_status": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "cartographic_status": "OSMB_ACCEPTED_BY_PR471",
+      "available_evidence": [
+        "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+        "docs/audits/rt-adm2-2/targeted-primary-evidence-register.json"
+      ],
+      "missing_primary_evidence": [
+        "Act competent care clarifică apartenența și efectele juridice ale divergenței dintre părintele CUATM nominal și părintele din ACTUAL",
+        "Delimitare administrativă oficială autentificată, cu corespondență demonstrată cu poligonul OSM"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r12104636",
+      "name": null,
+      "jurisdiction": "MD",
+      "group": "MD_NO_POSITIVE_IDENTITY",
+      "current_tree_parent": "osm-r19090918",
+      "reference_code": null,
+      "reference_code_class": "CUATM_2025",
+      "nominal_parent": "Hrușova",
+      "nominal_status": "NO_IDENTIFIED_LEGAL_ENTITY",
+      "cartographic_status": "OSMB_ACCEPTED_BY_PR471",
+      "available_evidence": [
+        "https://statistica.gov.md/files/files/Clasificatoare/CUATM_25.xlsx",
+        "docs/audits/rt-adm2-2/targeted-primary-evidence-register.json"
+      ],
+      "missing_primary_evidence": [
+        "Act primar sau registru oficial care să demonstreze existența unei unități administrative identificabile și codul său; în lipsa sa, nu se atribuie identitate juridică",
+        "Delimitare oficială autentificată și corespondență individuală cu relația OSM, numai dacă există o entitate juridică relevantă"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r11283027",
+      "name": "Mureșeni",
+      "jurisdiction": "RO",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "current_tree_parent": "osm-r8334767",
+      "reference_code": "114337",
+      "reference_code_class": "INS_SIRUTA_S1_2026_NORMALIZED",
+      "nominal_parent": "Târgu Mureș",
+      "nominal_status": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+        "https://github.com/romania/siruta/blob/main/data/latest/localitati.csv"
+      ],
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r11283576",
+      "name": "Remetea",
+      "jurisdiction": "RO",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "current_tree_parent": "osm-r8334767",
+      "reference_code": "114346",
+      "reference_code_class": "INS_SIRUTA_S1_2026_NORMALIZED",
+      "nominal_parent": "Târgu Mureș",
+      "nominal_status": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+        "https://github.com/romania/siruta/blob/main/data/latest/localitati.csv"
+      ],
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r11366846",
+      "name": "Sat Vălureni",
+      "jurisdiction": "RO",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "current_tree_parent": "osm-r11318838",
+      "reference_code": "114373",
+      "reference_code_class": "INS_SIRUTA_S1_2026_NORMALIZED",
+      "nominal_parent": "Cristești",
+      "nominal_status": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+        "https://github.com/romania/siruta/blob/main/data/latest/localitati.csv"
+      ],
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r11366847",
+      "name": "Sat Cristești",
+      "jurisdiction": "RO",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "current_tree_parent": "osm-r11318838",
+      "reference_code": "114364",
+      "reference_code_class": "INS_SIRUTA_S1_2026_NORMALIZED",
+      "nominal_parent": "Cristești",
+      "nominal_status": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+        "https://github.com/romania/siruta/blob/main/data/latest/localitati.csv"
+      ],
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r12557978",
+      "name": "Bărdești",
+      "jurisdiction": "RO",
+      "group": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "current_tree_parent": "osm-r11318833",
+      "reference_code": "114471",
+      "reference_code_class": "INS_SIRUTA_S1_2026_NORMALIZED",
+      "nominal_parent": "Sântana de Mureș",
+      "nominal_status": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/208652",
+        "https://github.com/romania/siruta/blob/main/data/latest/localitati.csv"
+      ],
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r7960954",
+      "name": "Sector 1",
+      "jurisdiction": "RO",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "current_tree_parent": "osm-r377733",
+      "reference_code": "179141",
+      "reference_code_class": "NRSIRUTA_2021_REDUCED",
+      "nominal_parent": "București",
+      "nominal_status": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf"
+      ],
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r7960953",
+      "name": "Sector 2",
+      "jurisdiction": "RO",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "current_tree_parent": "osm-r377733",
+      "reference_code": "179150",
+      "reference_code_class": "NRSIRUTA_2021_REDUCED",
+      "nominal_parent": "București",
+      "nominal_status": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf"
+      ],
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r7960937",
+      "name": "Sector 3",
+      "jurisdiction": "RO",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "current_tree_parent": "osm-r377733",
+      "reference_code": "179169",
+      "reference_code_class": "NRSIRUTA_2021_REDUCED",
+      "nominal_parent": "București",
+      "nominal_status": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf"
+      ],
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r7960957",
+      "name": "Sector 4",
+      "jurisdiction": "RO",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "current_tree_parent": "osm-r377733",
+      "reference_code": "179178",
+      "reference_code_class": "NRSIRUTA_2021_REDUCED",
+      "nominal_parent": "București",
+      "nominal_status": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf"
+      ],
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r7960956",
+      "name": "Sector 5",
+      "jurisdiction": "RO",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "current_tree_parent": "osm-r377733",
+      "reference_code": "179187",
+      "reference_code_class": "NRSIRUTA_2021_REDUCED",
+      "nominal_parent": "București",
+      "nominal_status": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf"
+      ],
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    },
+    {
+      "id": "osm-r7960955",
+      "name": "Sector 6",
+      "jurisdiction": "RO",
+      "group": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "current_tree_parent": "osm-r377733",
+      "reference_code": "179196",
+      "reference_code_class": "NRSIRUTA_2021_REDUCED",
+      "nominal_parent": "București",
+      "nominal_status": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "cartographic_status": "OSMB_NOT_ADJUDICATED_IN_RT_ADM2_5",
+      "available_evidence": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://www.recensamantromania.ro/wp-content/uploads/2021/11/SIRUTA.pdf"
+      ],
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "legal_osm_boundary_equivalence_certified": false,
+      "administrative_change_authorized": false,
+      "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+    }
+  ],
+  "restrictions": {
+    "external_emails": false,
+    "external_requests": false,
+    "payments": false,
+    "ACTUAL_edits": false,
+    "reparent": false,
+    "code_rebinding": false,
+    "P9_1_authorized": false
+  },
+  "outcome": "EVIDENCE_CONSOLIDATED_14_OPEN_LEGAL_CASES_NO_AUTOMATIC_EDITS"
+}
