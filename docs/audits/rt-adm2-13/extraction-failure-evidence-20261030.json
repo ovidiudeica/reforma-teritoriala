@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-30",
+  "head_examined": "e24307d70496b4f5562d6c3f23714393a47326ce",
+  "workflow_run": 41044146732,
+  "artifact_id": 12971317710,
+  "artifact_digest": "sha256:3095fc172536aa6011caacce6d5edcfad0284404c1434190503e68d8b64d7097",
+  "workflow_conclusion": "failure",
+  "evidence_status": "ALL_OFFICIAL_FETCHES_FAILED",
+  "official_source_results": [
+    {
+      "source": "D284_1979",
+      "status": "EXCEPTION_fetch failed"
+    },
+    {
+      "source": "L2_1981_REPUBLICATION",
+      "status": "EXCEPTION_fetch failed"
+    },
+    {
+      "source": "L2_CONSOLIDATED",
+      "status": "EXCEPTION_fetch failed"
+    }
+  ],
+  "independent_attempts": [
+    {
+      "client": "web direct",
+      "urls": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://legislatie.just.ro/Public/DetaliiDocument/190"
+      ],
+      "result": "HTTP 502 / oversized content"
+    },
+    {
+      "client": "Tavily extract advanced",
+      "urls": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://legislatie.just.ro/Public/DetaliiDocument/190"
+      ],
+      "result": "Failed to fetch url"
+    },
+    {
+      "client": "TinyFish fetch",
+      "urls": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/28216",
+        "https://legislatie.just.ro/Public/DetaliiDocument/190"
+      ],
+      "result": "target_unreachable"
+    }
+  ],
+  "sectors": [
+    {
+      "sector": 1,
+      "comparison": "NOT_COMPARABLE",
+      "textual_identity": null,
+      "legal_identity": null
+    },
+    {
+      "sector": 2,
+      "comparison": "NOT_COMPARABLE",
+      "textual_identity": null,
+      "legal_identity": null
+    },
+    {
+      "sector": 3,
+      "comparison": "NOT_COMPARABLE",
+      "textual_identity": null,
+      "legal_identity": null
+    },
+    {
+      "sector": 4,
+      "comparison": "NOT_COMPARABLE",
+      "textual_identity": null,
+      "legal_identity": null
+    },
+    {
+      "sector": 5,
+      "comparison": "NOT_COMPARABLE",
+      "textual_identity": null,
+      "legal_identity": null
+    },
+    {
+      "sector": 6,
+      "comparison": "NOT_COMPARABLE",
+      "textual_identity": null,
+      "legal_identity": null
+    }
+  ],
+  "resolution": "BLOCKED_OFFICIAL_SOURCE_UNREACHABLE_NO_CERTIFICATION",
+  "merge_authorized": false,
+  "ACTUAL_modified": false
+}
