@@ -1,0 +1,32 @@
+name: RT-ADM.2.3 historical OSM way reconstruction
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/rt-adm2-3-reconstruct.py'
+      - '.github/workflows/rt-adm2-3-history.yml'
+      - 'docs/audits/rt-adm2-3/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  historical-reconstruction:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Recover full way and node histories at historical reference dates
+        run: python scripts/audit/rt-adm2-3-reconstruct.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: rt-adm2-3-way-node-historical-reconstruction
+          path: outputs/RT-ADM.2.3/
+          retention-days: 90
+          if-no-files-found: error
+      - run: git diff --exit-code
