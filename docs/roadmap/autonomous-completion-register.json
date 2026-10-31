@@ -6,6 +6,24 @@
   "p91_authorized": false,
   "tasks": [
     {
+      "id": "PRODUCT-LAUNCH",
+      "description": "L1–L6: atlas ACTUAL funcțional, calitate, publicare și acceptare cu amânări explicite",
+      "status": "POST_MERGE_VERIFIED",
+      "priority": 0,
+      "dependencies": [],
+      "pr": 488,
+      "tested_head": "1832047d05ea108b5c84a0a2e1aa17ce28ae9e3c",
+      "merge_commit": "45f497093897a8995c6777ccadd53a1f89e9985d",
+      "evidence": [
+        "docs/audits/product-launch-20261031/README.md",
+        "docs/audits/product-launch-20261031/acceptance.json",
+        "docs/audits/product-launch-20261031/report.json",
+        "docs/audits/product-launch-20261031/sha256-manifest.json"
+      ],
+      "acceptance": "24 PR checks/17 workflows PASS; 27 postmerge checks/19 observed runs PASS including 4 separate Dependabot runs; exact published 440 runtime resources/125 GeoJSON/69 audit records PASS; no ACTUAL changes; no P9.1 authorization.",
+      "next_action": "Maintain published functional scope; declared post-launch extensions do not block this release."
+    },
+    {
       "id": "AUTO-1",
       "description": "Certificare CI push post-merge #480",
       "status": "POST_MERGE_VERIFIED",
@@ -219,13 +237,13 @@
     "full_legal_closure_claimed": false,
     "actual_changes": 0,
     "p91_authorized": false,
-    "active_task": "PRODUCT-LAUNCH"
+    "active_task": "PRODUCT-LAUNCH-ACCEPTED"
   },
   "execution_priority": "FUNCTIONAL_PRODUCT_LAUNCH",
   "product_launch": {
     "baseline_commit": "9a4d364cff45e3d1431f7c8d5ee9ea8e3f3d4db0",
     "roadmap": "docs/roadmap/product-launch-20261031.md",
-    "status": "CANDIDATE_PENDING_CI_AND_PUBLICATION",
+    "status": "READY_ACTUAL_WITH_DECLARED_DEFERRALS",
     "scope": [
       "ACTUAL_RO_MD",
       "NI_OSM_SOURCE_ONLY"
@@ -239,6 +257,13 @@
     "legal_exhaustiveness_is_launch_gate": false,
     "actual_mutation_allowed": false,
     "p91_authorized": false,
-    "next_action": "Exact-head CI, separate PR integration, push checks and exact-runtime published E2E; READY only after acceptance."
+    "next_action": "Minimal launch complete for declared ACTUAL scope; preserve documented post-launch corpus/territory backlog and resume legal cases only for demonstrated critical product impact.",
+    "accepted_runtime_commit": "45f497093897a8995c6777ccadd53a1f89e9985d",
+    "implementation_pr": 488,
+    "tested_head": "1832047d05ea108b5c84a0a2e1aa17ce28ae9e3c",
+    "acceptance_evidence": "docs/audits/product-launch-20261031/acceptance.json",
+    "published_ci_run": 41232324618,
+    "published_runtime_resources": 440,
+    "published_geojson_resources": 125
   }
 }
