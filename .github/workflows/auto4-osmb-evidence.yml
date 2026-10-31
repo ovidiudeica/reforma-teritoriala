@@ -4,12 +4,14 @@ on:
     branches: [main]
     paths:
       - 'docs/audits/auto4-osmb-109/**'
+      - 'docs/audits/auto4-history-followup-20261031/**'
       - 'scripts/audit/auto4-osmb-*'
       - '.github/workflows/auto4-osmb-evidence.yml'
   push:
     branches: [main]
     paths:
       - 'docs/audits/auto4-osmb-109/**'
+      - 'docs/audits/auto4-history-followup-20261031/**'
       - 'scripts/audit/auto4-osmb-*'
       - '.github/workflows/auto4-osmb-evidence.yml'
 permissions:
@@ -28,4 +30,5 @@ jobs:
       - run: node scripts/audit/auto4-osmb-verify.mjs
       - run: python -m pip install shapely==2.2.0 pyproj==3.8.0 numpy==2.5.4
       - run: python scripts/audit/auto4-osmb-geometry.py
+      - run: python scripts/audit/auto4-osmb-history-followup.py
       - run: git diff --exit-code
