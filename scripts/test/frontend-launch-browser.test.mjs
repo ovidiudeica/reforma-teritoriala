@@ -6,6 +6,11 @@ import {launchBrowser,waitFor} from './helpers/atlas-browser.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const index=JSON.parse(await readFile(new URL('../../public/data/actual-entities.json',import.meta.url),'utf8'));
+const cuatm=JSON.parse(await readFile(new URL('../../data/sources/cuatm-current.json',import.meta.url),'utf8'));
+const siruta=JSON.parse(await readFile(new URL('../../data/sources/ro-siruta-current.json',import.meta.url),'utf8'));
+const documentary=JSON.parse(await readFile(new URL('../../views/nistrenia/administration.json',import.meta.url),'utf8'));
+const mdIds=new Set(index.entities.filter(e=>e.jurisdiction==='MD').map(e=>e.legal?.id));
+const niCounts=Object.fromEntries(['GEOMETRY_CANDIDATE','NO_GEOMETRY_EVIDENCE'].map(status=>[status,documentary.nodes.filter(n=>n.geometry_status===status).length]));
 test('launch: direct selection framing and honest coverage on desktop and mobile',{timeout:180000},async()=>{
  const browser=await launchBrowser(root);
  try{
@@ -19,6 +24,7 @@ test('launch: direct selection framing and honest coverage on desktop and mobile
    await page.openPanel('modules');
    const coverage=await page.call(function(){return document.querySelector('#launch-coverage').textContent;});
    for(const n of [index.entity_count,...Object.values(index.entity_count_by_jurisdiction)])assert.ok(coverage.includes(new Intl.NumberFormat('ro-RO').format(n)));
+   for(const n of [siruta.records.filter(r=>r.level===3).length,cuatm.records.filter(r=>!mdIds.has(r.code)).length,...Object.values(niCounts),Object.values(niCounts).reduce((a,b)=>a+b,0)])assert.ok(coverage.includes(new Intl.NumberFormat('ro-RO').format(n)));
    assert.match(coverage,/fără a afirma acoperirea juridică exhaustivă/);
    assert.match(await page.call(function(){return document.querySelector('#module-istoric-description').textContent;}),/Amânat/);
    assert.equal(await page.call(function(){return document.querySelector('[data-mode=istoric]').disabled;}),true);

@@ -17,6 +17,8 @@ ISTORIC este amânat explicit. Repository-ul nu are un corpus publicat de unită
 5. Corpusul ACTUAL și controalele sale existente acoperă 123 de resurse geometrice și 5.848 de ID-uri. Validarea de corpus existentă verifică legătura la resurse și identificarea spațială. Nu repetăm inventarul OSMB de 6.129, auditul celor 298 ori investigațiile celor 109.
 6. Auditul vizual inițial include desktop și previzualizare telefon; acceptarea responsive folosește suplimentar viewporturi native în Chromium. Capturile nu constituie certificare WCAG sau test pe dispozitive fizice. Nu s-a identificat un defect critic reproductibil al interfeței în aceste fluxuri; absența unei observații nu dovedește absența tuturor defectelor.
 
+Acoperire precisă din registrele deja acceptate, fără investigarea vreunui caz AUTO-4: **13.755** înregistrări SIRUTA de nivel 3 fără fișă cu același ID oficial în ACTUAL; **102** coduri din snapshotul CUATM fără legătură directă `legal.id` într-o fișă MD. Lipsa unei legături directe nu certifică absența geometrică, inexistența localității sau o identitate alternativă. Acestea sunt extinderi documentate ale corpusului, nu defecte de încărcare. În modelul documentar NI există **242** noduri: **8** cu contur propriu verificat, **97** numai candidate și **137** fără dovezi geometrice. Cele **234** de noduri fără contur propriu acceptat rămân în arbore, cu statutul lor existent; cele 85 de roluri geometrice ACTUAL nu sunt transformate în identități documentare certificate. Registrul per-ID al acoperirii este pregătit separat pentru dosarul final.
+
 ## Roadmap minim, în ordinea dependențelor
 
 | Etapă | Criteriu obligatoriu | Dovadă |
