@@ -25,7 +25,7 @@ def main():
   b=subprocess.check_output(git+['show',BASE+':'+p]);inputs[p]={'sha256':sha(b),'bytes':len(b),'git_commit':BASE};return b
  def load(p):return json.loads(blob(p))
  def put(p,d):
-  q=out/p;q.parent.mkdir(exist_ok=True,parents=True);q.write_bytes(json.dumps(d,ensure_ascii=False,indent=2,allow_nan=False).encode('utf8')+b'\n')
+  q=out/p;q.parent.mkdir(exist_ok=True,parents=True);q.write_bytes(json.dumps(d,ensure_ascii=False,indent=2,allow_nan=False,sort_keys=p=='sha256-manifest.json').encode('utf8')+b'\n')
  def csvout(p,rows):
   with (out/p).open('w',encoding='utf8',newline='') as f:
    w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader()

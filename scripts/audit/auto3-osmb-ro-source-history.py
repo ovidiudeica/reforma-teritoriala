@@ -76,7 +76,7 @@ def main():
     if task['id']=='AUTO-3-FOLLOWUP':task['description']=f'Dovezi suplimentare pentru cele {pending} cazuri REVIEW_REQUIRED'
    roadmap.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
   manifest={p.relative_to(OUT).as_posix():{'sha256':sha(p.read_bytes()),'bytes':p.stat().st_size} for p in sorted(OUT.rglob('*')) if p.is_file() and p.name!='sha256-manifest.json'}
-  (OUT/'sha256-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
+  (OUT/'sha256-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf8',newline='\n')
  else:
   assert load(proofpath)==result
   assert all(r['cause_status']=='OFFICIAL_OSM_NODE_AND_WAY_VERSION_DIVERGENCE_DEMONSTRATED' for r in geometries['records'] if r['case_id'] in {x['case_id'] for x in proofs})

@@ -11,11 +11,15 @@ const j=async p=>JSON.parse(await readFile(new URL(p,dir)));
 const fail=m=>{throw Error('AUTO-3: '+m)};
 const check=(v,m)=>{if(!v)fail(m)};
 const manifest=await j('sha256-manifest.json');
+const staged=process.argv.includes('--staged');
+const indexBlob=p=>execFileSync('git',['-c',`safe.directory=${root.replaceAll('\\','/')}`,'-C',root,'show',`:docs/audits/auto3-osmb/${p}`],{maxBuffer:200*1024*1024});
+if(staged)check(sha(indexBlob('sha256-manifest.json'))===sha(await readFile(new URL('sha256-manifest.json',dir))),'manifest differs from staged bytes');
 const files=(await readdir(dir,{recursive:true,withFileTypes:true})).filter(x=>x.isFile()).map(x=>`${x.parentPath??x.path}/${x.name}`);
 check(Object.keys(manifest).length+1===files.length,'unmanifested or missing evidence file');
 for(const [p,spec] of Object.entries(manifest)){
  check(!p.startsWith('/')&&!p.includes('..')&&!p.includes('\\'),'unsafe evidence path');
  const b=await readFile(new URL(p,dir));check(sha(b)===spec.sha256&&b.length===spec.bytes,'artifact integrity '+p);
+ if(staged){const committed=indexBlob(p);check(sha(committed)===spec.sha256&&committed.length===spec.bytes,'staged artifact integrity '+p);}
 }
 const register=await j('register.json'),baseline=await j('baseline-exceptions.json'),stats=await j('statistics.json');
 const records=register.records,ids=new Set(records.map(x=>x.case_id));
