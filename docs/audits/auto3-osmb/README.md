@@ -80,7 +80,7 @@ RT-ADM este reutilizat explicit pentru Brețcu/Ojdula, Malcoci și relația făr
 | AUTO3-osm-r15966571 | RO | Decanatul Satu Mare | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r16394664 | RO | Transylvanian Plateau | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r1691800 | MD | Raionul Ialoveni | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
-| AUTO3-osm-r1691801 | MD | Municipiul Chișinău | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r1691801 | MD | Municipiul Chișinău | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_20261005_OSM_CONTOUR_EXCLUDE_LATER_NODE_EDIT |
 | AUTO3-osm-r1692515 | MD | Chetriș | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r1692516 | MD | Călinești | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r1692518 | MD | Hîncești | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
@@ -95,7 +95,7 @@ RT-ADM este reutilizat explicit pentru Brețcu/Ojdula, Malcoci și relația făr
 | AUTO3-osm-r17605527 | RO | Calcarul numulitic de la Albești | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r17605567 | RO | Poiana cu narcise Negrași | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r17630182 | RO | Microrelieful carstic de la Cetățeni | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
-| AUTO3-osm-r1813319 | MD | Condrița | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r1813319 | MD | Condrița | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_20261005_OSM_CONTOUR_EXCLUDE_LATER_NODE_EDIT |
 | AUTO3-osm-r18201459 | RO | Dieceza de Timișoara | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r18693061 | RO | Dieceza de Satu Mare | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r18694346 | RO | Dealul Vulpii - Botoaia (Ochiul de stepă) | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
@@ -344,4 +344,12 @@ Controlul Ojdula/Brețcu găsește zero suprapunere interioară și un reziduu d
 
 Istoriile API OSM originale (HTTP 200, SHA-256) ale nodurilor 7251357104/14251631333 și ale căii 777134710 demonstrează changesetul 190023879 din 2026-10-05T09:41:11Z. Mutarea primului nod și inserarea celui de-al doilea reconstruiesc exact ambele geometrii ACTUAL Săvinești/Roznov din contururile OSMB, cu toate celelalte coordonate păstrate. Ora exactă a exportului OSMB nu este dedusă din acest rezultat. Verificare: `python scripts/audit/auto3-osmb-ro-source-history.py`.
 
-După această probă nouă, 180 de cazuri au mecanism/proveniență cartografică documentată, iar 118 rămân REVIEW_REQUIRED. Nicio certificare juridică nouă și nicio modificare ACTUAL.
+Bilanțul curent al registrului: 182 de cazuri au mecanism/proveniență cartografică documentată, iar 116 rămân REVIEW_REQUIRED. Nicio certificare juridică nouă și nicio modificare ACTUAL.
+
+## Istoric comun Condrița / Chișinău
+
+Istoriile API OSM originale arată changesetul 190022801 din 2026-10-05T09:21:08Z: două noduri de capăt mutate, două noduri eliminate, două inserate pe calea 69469001 și un nod inserat pe calea 123810097. Aplicarea exclusivă a acestor operații în memorie reconstruiește exact ambele contururi ACTUAL, fără alte coordonate schimbate. Pentru nodul 1379403420 este folosită versiunea 2 din 5 octombrie; versiunea 3 din 12 octombrie este păstrată ca probă de istoric, dar exclusă din reconstrucție. Nu se deduce ora exportului OSMB și nu se certifică hotarul juridic.
+
+Verificare fără rețea: `python scripts/audit/auto3-osmb-md-source-history.py`. Bilanțul actualizat este 182 mecanisme/proveniențe cartografice documentate și 116 cazuri REVIEW_REQUIRED.
+
+Date cartografice și istorii: © OpenStreetMap contributors, ODbL; răspunsurile API originale păstrează informațiile de atribuire și proveniență.
