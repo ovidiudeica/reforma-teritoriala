@@ -3,12 +3,17 @@ import re,json,hashlib,difflib,unicodedata,argparse,gzip
 from pathlib import Path
 ap=argparse.ArgumentParser();ap.add_argument('--evidence-dir',type=Path,default=Path(__file__).resolve().parents[2]/'docs/audits/auto2-bucharest-text-20261031');root=ap.parse_args().evidence_dir
 all_lines={};decree_lines={}
-for p in root.glob('web-extracted-*.txt.gz'):
+def retain_complete_line(target,n,text):
+ previous=target.get(n)
+ if previous is not None:
+  assert previous.startswith(text) or text.startswith(previous),f'Conflicting captured source line {n}'
+ if previous is None or len(text)>len(previous):target[n]=text
+for p in sorted(root.glob('web-extracted-*.txt.gz'),key=lambda p:p.name):
  text=gzip.decompress(p.read_bytes()).decode('utf8')
  for n,t in re.findall(r'^L(\d+): (.*)$',text,re.M):
   n=int(n)
-  if 8997<=n<=9039:all_lines[n]=t
-  if 48<=n<=72:decree_lines[n]=t
+  if 8997<=n<=9039:retain_complete_line(all_lines,n,t)
+  if 48<=n<=72:retain_complete_line(decree_lines,n,t)
 current='\n'.join(all_lines[n] for n in sorted(all_lines))
 starts=list(re.finditer(r'(?:- )?Sectorul ([1-6])\s+Situat',current))
 assert [int(m.group(1)) for m in starts]==list(range(1,7))
@@ -36,6 +41,6 @@ for i,m in enumerate(starts):
   clauses.append({'id':f'AUTO2-S{sector}-C{n:02d}','sector':sector,'original_clause':part,'inclusion_exclusion_text':re.findall(r'\([^)]*(?:inclusiv|exclusiv)[^)]*\)',part),'water_axis_mentioned':bool(re.search(r'firul|riului|râului',part,re.I)),'conventional_line_mentioned':bool(re.search(r'conventional',normalize(part))),'historical_landmarks_modern_ids':[],'modern_geocoding':'REQUIRES_DATED_INDEPENDENT_EVIDENCE','legal_osmb_match':'NOT_CERTIFIED'})
 out={'audit':'AUTO-2-TEXTUAL-CONTINUATION','source_kind':'Normalized web-tool transcriptions of official pages; original HTML/PDF not acquired','comparison':'Two visible official-page forms, not a certified complete amendment chain','sectors':rows,'directional_clause_index':clauses,'actual_modified':False,'p91_authorized':False}
 (root/'six-route-text-comparison.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
-manifest={p.name:{'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size} for p in sorted(root.iterdir()) if p.is_file() and p.name!='sha256-manifest.json'}
+manifest={p.name:{'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size} for p in sorted(root.iterdir(),key=lambda p:p.name) if p.is_file() and p.name!='sha256-manifest.json'}
 (root/'sha256-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
 print(json.dumps({'sectors':len(rows),'directional_clauses':len(clauses),'normalized_equal_sectors':sum(x['normalized_text_equal'] for x in rows),'lexical_difference_groups':sum(len(x['lexical_differences']) for x in rows),'legal_effects_certified':0}))
