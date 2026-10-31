@@ -1,5 +1,7 @@
 # AUTO-4 — dosare probatorii pentru cele109 excepții rămase
 
+Supliment oficial: ghidul ASP al sistemului de adrese, p.21 §4.1.1, separă întovărășirile pomicole de UAT; BNS explică atribuirea lor statistică la localități. Aceste reguli generale sunt citate individual pentru cele95 ways, dar nu înlocuiesc identificarea pozitivă a fiecăruia, actul delimitator sau dovada statutului actual. Originalele HTML sunt păstrate lossless în gzip; manifestul de recuperare verifică atât arhiva, cât și octeții originali. Cele două arhive OSMB originale au fost rehashuite, cu valori identice bazei acceptate, fără repetarea inventarului.
+
 Au fost analizate exclusiv109 ID-uri din baza integrată prin PR481–484:10 România și99 Republica Moldova. Cele189 explicații anterioare sunt protejate prin hashuri individuale; inventarul6129 nu este repetat. ACTUAL rămâne neschimbat, P9.1 neautorizat.
 
 **Rezultat:109 REVIEW_REQUIRED; zero închideri complete.** Dovezile noi stabilesc aspecte individuale, fără a elimina lacunele privind identitatea juridică, actualitatea actelor sau corespondența perimetrului. Acest pachet nu declară AUTO-4 încheiat.
