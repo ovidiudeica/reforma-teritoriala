@@ -4,12 +4,14 @@ on:
     branches: [main]
     paths:
       - 'docs/audits/auto2-bucharest-text-20261031/**'
+      - 'docs/audits/auto2-bucharest-chain-20261031/**'
       - 'scripts/audit/auto2-bucharest-text-*'
       - '.github/workflows/auto2-bucharest-text.yml'
   push:
     branches: [main]
     paths:
       - 'docs/audits/auto2-bucharest-text-20261031/**'
+      - 'docs/audits/auto2-bucharest-chain-20261031/**'
       - 'scripts/audit/auto2-bucharest-text-*'
       - '.github/workflows/auto2-bucharest-text.yml'
 permissions:
@@ -20,10 +22,13 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.21.0'
       - run: python scripts/audit/auto2-bucharest-text-compare.py
       - run: node scripts/audit/auto2-bucharest-text-verify.mjs
+      - run: python -m pip install pypdf==6.10.0
+      - run: python scripts/audit/auto2-bucharest-text-chain-verify.py
       - run: git diff --exit-code

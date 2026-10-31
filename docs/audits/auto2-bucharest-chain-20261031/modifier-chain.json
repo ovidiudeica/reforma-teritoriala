@@ -1,0 +1,169 @@
+{
+  "schema": "auto2-provisional-normative-chain-v1",
+  "status": "REVIEW_REQUIRED",
+  "chain_complete": false,
+  "original_decree284_gazette_acquired": false,
+  "original_law31_gazette_acquired": false,
+  "route_amendment_absence_certified": false,
+  "legal_geometry_certified": false,
+  "actual_mutation_allowed": false,
+  "p91_authorized": false,
+  "nodes": [
+    {
+      "id": "L2-1968",
+      "role": "BASE_ORGANISATION_ACT",
+      "source": "../auto2-bucharest-text-20261031/web-extracted-routes.txt.gz",
+      "original_gazette_binary_acquired": false,
+      "status": "VERSION_AND_REPUBLICATION_CHAIN_OPEN"
+    },
+    {
+      "id": "D284-1979",
+      "date": "1979-07-31",
+      "publication": "Buletinul Oficial69/01.08.1979",
+      "role": "SIX_SECTOR_DELIMITATION_ANNEX1",
+      "source": "../auto2-bucharest-text-20261031/web-extracted-decree-tail.txt.gz",
+      "locator": "Official-page normalized lines45,47,48 onward; art1 and annex1",
+      "original_gazette_binary_acquired": false,
+      "status": "OFFICIAL_NORMALIZED_TEXT_ONLY"
+    },
+    {
+      "id": "L31-1979",
+      "date": "1979-12-14",
+      "publication": "Buletinul Oficial103/19.12.1979",
+      "role": "APPROVAL_OF_D284",
+      "source": "normalized/auto2-normalized-foundation.json",
+      "locator": "Law31/1979 single article; normalized search result, not original response bytes",
+      "original_gazette_binary_acquired": false,
+      "status": "OFFICIAL_NORMALIZED_TEXT_ONLY"
+    },
+    {
+      "id": "D15-1981",
+      "date": "1981-01-23",
+      "publication": "Buletinul Oficial3/23.01.1981",
+      "role": "BUCHAREST_ILFOV_STRUCTURAL_REORGANISATION",
+      "source": "normalized/auto2-normalized-web-capture.json",
+      "locator": "Normalized official-page lines44-46, arts1-4",
+      "original_gazette_binary_acquired": false,
+      "status": "OFFICIAL_NORMALIZED_TEXT_ONLY"
+    },
+    {
+      "id": "L69-1991",
+      "role": "LOCAL_ADMINISTRATION_FRAMEWORK_REFERENCED",
+      "source": "originals/pmb-h015-95.pdf",
+      "locator": "p1 preamble; art21(m),29. This is a reference, not acquisition of Law69 original.",
+      "original_gazette_binary_acquired": false,
+      "status": "REFERENCED_ACT_ORIGINAL_NOT_ACQUIRED"
+    },
+    {
+      "id": "HCL15-1995",
+      "date": "1995-03-30",
+      "role": "LOCAL_URBANISM_REGULATION_APPROVAL",
+      "source": "originals/pmb-h015-95.pdf",
+      "locator": "p1 single operative article and listed annex1; remaining pages contain headings, not the boundary map",
+      "original_gazette_binary_acquired": false,
+      "official_publisher_binary_acquired": true,
+      "status": "BINARY_PUBLICATION_ACQUIRED_BOUNDARY_ANNEX_MISSING"
+    },
+    {
+      "id": "L24-1996",
+      "date": "1996-04-12",
+      "role": "LOCAL_ADMINISTRATION_AMENDMENT_CANDIDATE",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/8043",
+      "source": "retrieval.json",
+      "original_gazette_binary_acquired": false,
+      "status": "CANDIDATE_SCOPE_NOT_ADJUDICATED_NO_ROUTE_EDGE_INFERRED"
+    },
+    {
+      "id": "L50-1997",
+      "date": "1997-04-09",
+      "publication": "Monitorul Oficial61/10.04.1997",
+      "role": "ILFOV_COUNTY_STATUS_ART126",
+      "source": "normalized/auto2-normalized-web-capture.json",
+      "locator": "Normalized official printable page lines0-16; single article",
+      "original_gazette_binary_acquired": false,
+      "status": "OFFICIAL_NORMALIZED_TEXT_ONLY"
+    },
+    {
+      "id": "HCGMB269-2000",
+      "date": "2000-12-21",
+      "role": "PUG_APPROVAL_WITH_GENERAL_URBANISM_REPEAL_CLAUSE",
+      "source": "originals/pmb-h269-2000.pdf",
+      "locator": "p2 arts1-5; pp3-4 list opinions, not boundary plans",
+      "original_gazette_binary_acquired": false,
+      "official_publisher_binary_acquired": true,
+      "status": "BINARY_PUBLICATION_ACQUIRED_PLAN_MAPS_MISSING"
+    }
+  ],
+  "edges": [
+    {
+      "from": "D284-1979",
+      "to": "L2-1968",
+      "type": "AMENDS_ANNEX",
+      "evidence": "D284-1979 art1",
+      "scope": "Annex1 defines six-sector delimitation; body modifies Law2 annex correspondingly",
+      "internal_sector_route_change_demonstrated": true,
+      "evidence_level": "NORMALIZED_OFFICIAL_TEXT_NOT_ORIGINAL_GAZETTE"
+    },
+    {
+      "from": "L31-1979",
+      "to": "D284-1979",
+      "type": "APPROVES",
+      "evidence": "single article",
+      "scope": "Approves decree; no independent route substitution asserted",
+      "internal_sector_route_change_demonstrated": false,
+      "evidence_level": "NORMALIZED_OFFICIAL_TEXT_NOT_ORIGINAL_GAZETTE"
+    },
+    {
+      "from": "D15-1981",
+      "to": "L2-1968",
+      "type": "AMENDS_ART8_AND_ANNEX_STRUCTURAL",
+      "evidence": "arts1-3",
+      "scope": "County reorganisation and Sectorul agricol Ilfov subordination; not proof of altered internal six-sector routes",
+      "internal_sector_route_change_demonstrated": false,
+      "evidence_level": "NORMALIZED_OFFICIAL_TEXT_NOT_ORIGINAL_GAZETTE"
+    },
+    {
+      "from": "D15-1981",
+      "to": "L2-1968",
+      "type": "ORDERS_REPUBLICATION",
+      "evidence": "art4",
+      "scope": "Republication ordered; exact resulting source edition remains to be authenticated",
+      "internal_sector_route_change_demonstrated": false,
+      "evidence_level": "NORMALIZED_OFFICIAL_TEXT_NOT_ORIGINAL_GAZETTE"
+    },
+    {
+      "from": "HCL15-1995",
+      "to": "L69-1991",
+      "type": "REFERS_TO_AUTHORITY",
+      "evidence": "p1 preamble",
+      "scope": "Urbanism regulation legal basis; not an amendment to Law69 or decree284",
+      "internal_sector_route_change_demonstrated": false,
+      "evidence_level": "OFFICIAL_BINARY_PUBLICATION"
+    },
+    {
+      "from": "L50-1997",
+      "to": "L69-1991",
+      "type": "AMENDS_ART126_STRUCTURAL",
+      "evidence": "single article",
+      "scope": "Agricultural sector Ilfov receives county status/name; not proof of new internal six-sector route text",
+      "internal_sector_route_change_demonstrated": false,
+      "evidence_level": "NORMALIZED_OFFICIAL_TEXT_NOT_ORIGINAL_GAZETTE"
+    },
+    {
+      "from": "HCGMB269-2000",
+      "to": "HCL15-1995",
+      "type": "POSSIBLE_EFFECT_REQUIRES_CLAUSE_COMPARISON",
+      "evidence": "HCGMB269 art3 general contrary-urbanism-provisions repeal",
+      "scope": "General contrary-provisions clause; no express named repeal of HCL15 or amendment of decree284 inferred",
+      "internal_sector_route_change_demonstrated": false,
+      "evidence_level": "OFFICIAL_BINARY_PUBLICATION"
+    }
+  ],
+  "missing_chain_evidence": [
+    "Authentic Buletinul Oficial69/01.08.1979 original decree284 and all annexes, matched to official transcription",
+    "Authentic Buletinul Oficial103/19.12.1979 Law31 and approval form",
+    "All applicable corrections/amendments/republications affecting specific six-sector route clauses; validate effective versions from gazette/version records, not search-result absence",
+    "Boundary annex1 listed by HCL15/1995 and approved PUG2000 plan sheets, with legal force/supersession analysis; headings/urbanism validity are insufficient",
+    "Dated official historical landmark/street renaming and axis evidence for every clause before geometric alignment"
+  ]
+}
