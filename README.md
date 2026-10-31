@@ -23,7 +23,7 @@ Geometriile ACTUAL folosesc WGS84 / EPSG:4326. OpenStreetMap este sursa geometri
 Aplicația este statică: `index.html` și resursele urmărite în Git sunt site-ul publicabil; nu există un bundler frontend obligatoriu. Pentru explorare locală, din rădăcina clonei:
 
 ```sh
-git -c core.autocrlf=false -c core.longpaths=true clone https://github.com/ovidiudeica/reforma-teritoriala.git
+git clone -c core.autocrlf=false -c core.longpaths=true https://github.com/ovidiudeica/reforma-teritoriala.git
 cd reforma-teritoriala
 python -m http.server --bind 127.0.0.1 8000
 ```
