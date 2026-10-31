@@ -1,0 +1,31 @@
+name: AUTO-3 OSMB exception evidence
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto3-osmb/**'
+      - 'scripts/audit/auto3-osmb-*'
+      - '.github/workflows/auto3-osmb-reconciliation.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto3-osmb/**'
+      - 'scripts/audit/auto3-osmb-*'
+      - '.github/workflows/auto3-osmb-reconciliation.yml'
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: node scripts/audit/auto3-osmb-verify.mjs
+      - run: python -m pip install shapely==2.2.0 pyproj==3.8.0 numpy==2.5.4
+      - run: python scripts/audit/auto3-osmb-geometry-check.py
+      - run: git diff --exit-code

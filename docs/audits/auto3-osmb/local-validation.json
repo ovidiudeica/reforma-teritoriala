@@ -1,0 +1,11 @@
+{
+  "scope": "Fixed AUTO-3 exception evidence, not a repeat of the original census",
+  "date": "2026-10-31",
+  "checks": [
+    {"command":"node scripts/audit/auto3-osmb-verify.mjs","exit_code":0,"status":"PASS","cases":298,"RO":154,"MD":144,"geometry_differences":13,"osmb_only":283,"actual_only":2,"committed_sources":94},
+    {"command":"python scripts/audit/auto3-osmb-geometry-check.py","exit_code":0,"status":"PASS","cases":298,"differences_reproduced":13,"alternative_equivalences_verified":1,"shapely":"2.2.0","pyproj":"3.8.0"}
+  ],
+  "actual_modified": false,
+  "p91_authorized": false,
+  "github_pr_ci_status": "NOT_YET_OBSERVED"
+}

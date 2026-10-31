@@ -1,0 +1,60 @@
+{
+  "total": 298,
+  "by_jurisdiction": {
+    "RO": {
+      "total": 154,
+      "exception_kinds": {
+        "ACTUAL_ONLY": 1,
+        "GEOMETRY_DIFFERENCE": 3,
+        "OSMB_ONLY": 150
+      },
+      "categories": {
+        "ADMINISTRATIVE_TAGGED_LEVEL_OUTSIDE_SELECTED_SCOPE": 10,
+        "GEOMETRIC_DIFFERENCE": 3,
+        "NON_ADMINISTRATIVE_OSM_LAYER": 140,
+        "REVIEWED_OFFICIAL_ID_WITHOUT_DISTINCT_OSM_RELATION": 1
+      },
+      "cartographic_status": {
+        "CARTOGRAPHIC_RECONCILED": 2,
+        "CARTOGRAPHIC_SCOPE_EXPLAINED": 140,
+        "REVIEW_REQUIRED": 12
+      }
+    },
+    "MD": {
+      "total": 144,
+      "exception_kinds": {
+        "ACTUAL_ONLY": 1,
+        "GEOMETRY_DIFFERENCE": 10,
+        "OSMB_ONLY": 133
+      },
+      "categories": {
+        "ADMINISTRATIVE_TAGGED_LEVEL_OUTSIDE_SELECTED_SCOPE": 3,
+        "ADMINISTRATIVE_TAGGED_WAY_NOT_SELECTED_AS_RELATION": 95,
+        "ALTERNATE_OSM_OBJECT_SAME_CARTOGRAPHIC_FOOTPRINT": 1,
+        "GEOMETRIC_DIFFERENCE": 10,
+        "NISTRENIA_SOURCE_ONLY_VIRTUAL_GROUP": 8,
+        "NON_ADMINISTRATIVE_OSM_LAYER": 26,
+        "UNNAMED_ACCEPTED_RELATION_IDENTITY_REMAINS_OPEN": 1
+      },
+      "cartographic_status": {
+        "CARTOGRAPHIC_PROVENANCE_EXPLAINED": 1,
+        "CARTOGRAPHIC_RECONCILED": 1,
+        "CARTOGRAPHIC_SCOPE_EXPLAINED": 34,
+        "REVIEW_REQUIRED": 108
+      }
+    }
+  },
+  "legal_geometry_certifications": 0,
+  "globally_resolved": 0,
+  "actual_changes": 0,
+  "p91_authorizations": 0,
+  "tools": {
+    "python": "3.12.14",
+    "shapely": "2.2.0",
+    "geos": "3.14.1",
+    "pyproj": "3.8.0"
+  },
+  "area_crs": "EPSG:3035",
+  "operations_crs": "EPSG:4326",
+  "threshold": "No area threshold, no snap, no make_valid, no geometry edits"
+}
