@@ -815,7 +815,13 @@ function renderDetails(entity){
  renderOsmRoleDetails({container:body,document,row:osmRoleById.get(entity.id)});
  renderBreadcrumb(entity);
  const zoomButton=body.querySelector('#zoom-selected');
- if(zoomButton)zoomButton.addEventListener('click',()=>zoomToEntity(entity));
+ if(zoomButton){
+  // Navigation belongs to the selection card, independently of provenance disclosure.
+  const actions=document.createElement('div');actions.className='details-actions';
+  zoomButton.textContent='Încadrează entitatea pe hartă';
+  actions.appendChild(zoomButton);body.prepend(actions);
+  zoomButton.addEventListener('click',()=>zoomToEntity(entity));
+ }
  const compare=document.createElement('button');compare.type='button';compare.id='compare-selected';compare.className='action-button';compare.textContent='Adaugă la comparație';compare.addEventListener('click',()=>atlasAdvanced?.addCompare(entity.id));body.appendChild(compare);
  if(atlasNeighbors){const neighbors=document.createElement('button');neighbors.type='button';neighbors.id='neighbors-toggle';neighbors.className='action-button';neighbors.textContent='Arată vecinii';neighbors.addEventListener('click',()=>atlasNeighbors.open(entity.id,neighbors));body.appendChild(neighbors);}
  geometricUi?.card(body,entity.id);
