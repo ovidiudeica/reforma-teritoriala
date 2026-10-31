@@ -217,4 +217,5 @@ def main():
  put('sha256-manifest.json',{p.relative_to(out).as_posix():{'sha256':sha(p.read_bytes()),'bytes':p.stat().st_size} for p in sorted(out.rglob('*')) if p.is_file() and p.name!='sha256-manifest.json'})
  print(json.dumps(stats,ensure_ascii=False),flush=True)
  subprocess.check_call([sys.executable,str(ROOT/'scripts/audit/auto3-osmb-enrich.py'),'--baseline',str(a.baseline.resolve())])
+ if (out/'ro-shared-node-history/retrieval.json').exists():subprocess.check_call([sys.executable,str(ROOT/'scripts/audit/auto3-osmb-ro-source-history.py'),'--apply-evidence'])
 if __name__=='__main__':main()

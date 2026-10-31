@@ -240,7 +240,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_AND_WAY_VERSION_DIVERGENCE_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -302,6 +302,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Only the moved/inserted nodes of changeset 190023879 are needed to reconstruct this ACTUAL polygon exactly from the OSMB contour",
+          "proof": "docs/audits/auto3-osmb/ro-shared-node-history/cartographic-cause.json",
+          "proof_sha256": "93ec267bef3edb348c841934efd2444459a8b644095db6f62aa9b3a5183c02cc"
         }
       ],
       "existing_audit_evidence": [
@@ -310,15 +315,19 @@
           "line": 1158,
           "sha256": "bc005e361efe419b8e64df972f181378e8411a0c8295cce15595cb9037d104f3",
           "excerpt": "10761201,"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/ro-shared-node-history/cartographic-cause.json",
+          "sha256": "93ec267bef3edb348c841934efd2444459a8b644095db6f62aa9b3a5183c02cc"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_LATER_OSM_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp is not supplied; legal-boundary equivalence remains outside this cartographic finding."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
@@ -6412,7 +6421,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_AND_WAY_VERSION_DIVERGENCE_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -6474,6 +6483,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Only the moved/inserted nodes of changeset 190023879 are needed to reconstruct this ACTUAL polygon exactly from the OSMB contour",
+          "proof": "docs/audits/auto3-osmb/ro-shared-node-history/cartographic-cause.json",
+          "proof_sha256": "93ec267bef3edb348c841934efd2444459a8b644095db6f62aa9b3a5183c02cc"
         }
       ],
       "existing_audit_evidence": [
@@ -6482,15 +6496,19 @@
           "line": 2780,
           "sha256": "bc005e361efe419b8e64df972f181378e8411a0c8295cce15595cb9037d104f3",
           "excerpt": "14772881,"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/ro-shared-node-history/cartographic-cause.json",
+          "sha256": "93ec267bef3edb348c841934efd2444459a8b644095db6f62aa9b3a5183c02cc"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_LATER_OSM_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp is not supplied; legal-boundary equivalence remains outside this cartographic finding."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,

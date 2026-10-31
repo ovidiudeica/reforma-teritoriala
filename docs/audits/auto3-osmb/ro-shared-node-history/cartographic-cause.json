@@ -1,0 +1,69 @@
+{
+  "cases": [
+    {
+      "case_id": "AUTO3-osm-r10761201",
+      "shared_way": 777134710,
+      "removed_old_node_coordinate": [
+        26.4941608,
+        46.8443263
+      ],
+      "node_7251357104_version_2_coordinate": [
+        26.4941323,
+        46.8443321
+      ],
+      "inserted_node_14251631333_coordinate": [
+        26.4943999,
+        46.844581
+      ],
+      "unique_ring_order_reproducing_actual": [
+        [
+          26.4943999,
+          46.844581
+        ],
+        [
+          26.4941323,
+          46.8443321
+        ]
+      ],
+      "all_other_source_coordinates_preserved": true,
+      "reconstructed_geometry_equals_actual": true,
+      "source_geometry_modified": false
+    },
+    {
+      "case_id": "AUTO3-osm-r14772881",
+      "shared_way": 777134710,
+      "removed_old_node_coordinate": [
+        26.4941608,
+        46.8443263
+      ],
+      "node_7251357104_version_2_coordinate": [
+        26.4941323,
+        46.8443321
+      ],
+      "inserted_node_14251631333_coordinate": [
+        26.4943999,
+        46.844581
+      ],
+      "unique_ring_order_reproducing_actual": [
+        [
+          26.4941323,
+          46.8443321
+        ],
+        [
+          26.4943999,
+          46.844581
+        ]
+      ],
+      "all_other_source_coordinates_preserved": true,
+      "reconstructed_geometry_equals_actual": true,
+      "source_geometry_modified": false
+    }
+  ],
+  "causal_changeset": 190023879,
+  "edit_timestamp": "2026-10-05T09:41:11Z",
+  "finding": "OSMB contours match the earlier shared-way node configuration; ACTUAL contours match the later configuration, and changing only these two node positions reconstructs both ACTUAL polygons exactly.",
+  "osmb_exact_export_timestamp_certified": false,
+  "legal_boundary_certified": false,
+  "actual_modified": false,
+  "p91_authorized": false
+}

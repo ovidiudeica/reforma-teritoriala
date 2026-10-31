@@ -25,7 +25,7 @@ RT-ADM este reutilizat explicit pentru Brețcu/Ojdula, Malcoci și relația făr
 
 | Caz | Țară | Nume | Categorie | Statut cartografic | Decizie |
 |---|---|---|---|---|---|
-| AUTO3-osm-r10761201 | RO | Roznov | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r10761201 | RO | Roznov | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_LATER_OSM_CONTOUR_NO_LEGAL_INFERENCE |
 | AUTO3-osm-r10946091 | RO | Peneș Curcanul | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r10947923 | RO | Ienăchiță Văcărescu | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r11282896 | RO | Dâmbul Pietros | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
@@ -61,7 +61,7 @@ RT-ADM este reutilizat explicit pentru Brețcu/Ojdula, Malcoci și relația făr
 | AUTO3-osm-r13655462 | RO | Parcul Natural Comana | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r14673362 | RO | Zona Metropolitană Brașov | ADMINISTRATIVE_TAGGED_LEVEL_OUTSIDE_SELECTED_SCOPE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
 | AUTO3-osm-r14735731 | RO | Ojdula | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | REUSE_REVIEWED_BRETCU_OJDULA_PARTITION |
-| AUTO3-osm-r14772881 | RO | Săvinești | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r14772881 | RO | Săvinești | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_LATER_OSM_CONTOUR_NO_LEGAL_INFERENCE |
 | AUTO3-osm-r14941141 | RO | Zona Metropolitană Timișoara | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r15327766 | RO | Sóvidék-Hegyalja | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r15327767 | RO | Hegyalja | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
@@ -339,3 +339,9 @@ Părinții sursă sunt contextualizați nominal și pe nivel, cu bindingurile AC
 Cele 95 de way-uri MD cu boundary=administrative au toate place=allotments; această contradicție de rol este vizibilă per-ID și nu este convertită automat în statut de UAT. Singurul contur OSMB-only egal topologic cu ACTUAL este regiunea statistică UTA Găgăuzia (relația 18972669) față de relația administrativă 1699032: egalitatea geometriilor nu comasează identitățile și rolurile.
 
 Controlul Ojdula/Brețcu găsește zero suprapunere interioară și un reziduu de aproximativ 0,0124 m² între reuniunea ACTUAL și anvelopa OSMB. Reziduul nenul este păstrat, fără certificare de egalitate exactă sau juridică. Diferențele Săvinești/Roznov au exact același footprint modificat (283,5825 m²); Condrița/Chișinău și Scoreni/Strășeni au, de asemenea, arii modificate comune, documentate în raportul de cuplare. Aceste relații explică mecanismul cartografic, fără a certifica istoricul necunoscut al exportului OSMB.
+
+## Istoric OSM suplimentar
+
+Istoriile API OSM originale (HTTP 200, SHA-256) ale nodurilor 7251357104/14251631333 și ale căii 777134710 demonstrează changesetul 190023879 din 2026-10-05T09:41:11Z. Mutarea primului nod și inserarea celui de-al doilea reconstruiesc exact ambele geometrii ACTUAL Săvinești/Roznov din contururile OSMB, cu toate celelalte coordonate păstrate. Ora exactă a exportului OSMB nu este dedusă din acest rezultat. Verificare: `python scripts/audit/auto3-osmb-ro-source-history.py`.
+
+După această probă nouă, 180 de cazuri au mecanism/proveniență cartografică documentată, iar 118 rămân REVIEW_REQUIRED. Nicio certificare juridică nouă și nicio modificare ACTUAL.

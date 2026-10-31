@@ -24,6 +24,11 @@ check(records.length===298&&ids.size===298,'exact fixed exception coverage');
 check(baseline.exception_ids.length===298&&baseline.exception_ids.every(x=>ids.has(x)),'fixed baseline ID drift');
 check(register.source_commit===baseline.base_commit,'source commit drift');
 check(stats.total===298&&stats.by_jurisdiction.RO.total===154&&stats.by_jurisdiction.MD.total===144,'jurisdiction census');
+for(const country of ['RO','MD']){
+ const observed={};for(const row of records.filter(x=>x.jurisdiction===country))observed[row.cartographic_status]=(observed[row.cartographic_status]??0)+1;
+ for(const [status,n] of Object.entries(stats.by_jurisdiction[country].cartographic_status))check(observed[status]===n,'cartographic statistics drift '+country+' '+status);
+}
+check(records.filter(x=>x.cartographic_status==='REVIEW_REQUIRED').length===118,'unresolved case coverage after two demonstrated OSM history causes');
 for(const [kind,n] of Object.entries({GEOMETRY_DIFFERENCE:13,OSMB_ONLY:283,ACTUAL_ONLY:2}))check(records.filter(x=>x.exception_kind===kind).length===n,'exception kind '+kind);
 check(register.policy.actual_mutation_allowed===false&&register.policy.p91_import_allowed===false,'global protection');
 const postmerge=await j('auto1-postmerge-ci.json'),postchecks=await j('auto1-postmerge-checks.json');
