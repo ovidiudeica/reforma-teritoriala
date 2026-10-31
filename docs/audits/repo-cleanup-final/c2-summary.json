@@ -1,0 +1,37 @@
+{
+  "schema": "cleanup-file-usage-v1",
+  "commit": "8c8cb123c0e8c363268886aba863131e33f3e1a4",
+  "tracked_files": 3468,
+  "logical_tree_bytes": 526602530,
+  "text_sources": 2466,
+  "edges": 126487,
+  "classifications": {
+    "KEEP_DOCUMENTATION": 349,
+    "KEEP_CI": 209,
+    "KEEP_RUNTIME": 440,
+    "KEEP_SOURCE": 371,
+    "KEEP_FUTURE_MODULE": 2,
+    "KEEP_EVIDENCE": 2093,
+    "ARCHIVE_CANDIDATE": 4
+  },
+  "allowed_classifications": [
+    "KEEP_RUNTIME",
+    "KEEP_SOURCE",
+    "KEEP_EVIDENCE",
+    "KEEP_CI",
+    "KEEP_DOCUMENTATION",
+    "KEEP_FUTURE_MODULE",
+    "REFACTOR_CANDIDATE",
+    "ARCHIVE_CANDIDATE",
+    "SAFE_TO_DELETE",
+    "UNRESOLVED"
+  ],
+  "protected_failures": [],
+  "unresolved_reader_locations": 1240,
+  "limitations": [
+    "Static graph records literal imports, relative paths, manifests, shell/YAML paths, Python modules, directory/glob possibilities and operational reachability.",
+    "Environment, computed strings, network responses and external consumers cannot be exhaustively proven by static analysis. Listed dynamic readers require retention.",
+    "No absence of references permits deletion; historical inventories are separate from executable consumers.",
+    "All blobs are hashed, including binary/large/compressed blobs. Binary contents are not executed or interpreted."
+  ]
+}

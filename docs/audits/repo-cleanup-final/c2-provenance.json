@@ -1,0 +1,23 @@
+{
+  "schema": "cleanup-c2-provenance-v1",
+  "snapshot": "8c8cb123c0e8c363268886aba863131e33f3e1a4",
+  "analyzer": "scripts/audit/cleanup-file-usage.py",
+  "analyzer_sha256": "ec628ed61ae5873f591140407c6fb7176d0fdc66141ac0d7ceaf308fe3bdf6bc",
+  "prior_artifact": {
+    "run_id": 41239515359,
+    "artifact_id": 13057216032,
+    "head": "ecbc324c9828950e056867b3783b327e39a77088",
+    "archive_sha256": "f10f4fbb77db417bc1caa2a39b580db2a6c8e33636d2fe3509155eac87c8a8ab"
+  },
+  "reconciled_candidates": 258,
+  "decisions": {
+    "KEEP_DOCUMENTATION": 192,
+    "KEEP_CI": 31,
+    "KEEP_FUTURE_MODULE": 2,
+    "ARCHIVE_CANDIDATE": 3,
+    "KEEP_SOURCE": 30
+  },
+  "deleted": 0,
+  "actual_changes": 0,
+  "p91_authorized": false
+}

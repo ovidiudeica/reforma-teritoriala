@@ -1,0 +1,11 @@
+{
+  "schema":"cleanup-c1-integration-v1",
+  "baseline":"656bf2165d58efcbb3443aa70d56c313990d1b67",
+  "pull_requests":[
+    {"number":491,"tested_head":"ecbc324c9828950e056867b3783b327e39a77088","merge_commit":"8c8cb123c0e8c363268886aba863131e33f3e1a4","pr_executed_success":19,"existing_conditional_skips":2,"pr_successful_workflows":15,"post_merge_successful_checks":25,"post_merge_successful_runs":17,"post_merge_status":"PASS","infra_incident":"Proof A attempt 1 rejected unapproved runner 20261018.96.1/KVM; failed jobs rerun on same SHA, attempt 2 all terminal success; no host policy edits","branch":"GitHub removed merged source branch; commit reachable from main"},
+    {"number":490,"tested_head":"e403833eaafbc3c6a318caad4ab90df45674153c","merge_commit":"0716b1b9bada1a8390511d02f03bbeceb8b17922","pr_executed_success":19,"existing_conditional_skips":2,"pr_successful_workflows":15,"post_merge_status":"PENDING","decision":"Complementary baseline documents merged after exact-head checks and 491 post-merge success; not superseded"}
+  ],
+  "actual_changes":0,
+  "p91_authorized":false,
+  "protection_changes":0
+}

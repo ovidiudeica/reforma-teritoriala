@@ -6,6 +6,21 @@
   "p91_authorized": false,
   "tasks": [
     {
+      "id": "CLEANUP-FINAL",
+      "description": "C0–C9: cleanup, mentenabilitate și certificare, ACTUAL înghețat",
+      "status": "IN_PROGRESS",
+      "priority": 0,
+      "dependencies": [],
+      "baseline_commit": "656bf2165d58efcbb3443aa70d56c313990d1b67",
+      "actual_mutation_allowed": false,
+      "p91_authorized": false,
+      "evidence": [
+        "docs/audits/repo-cleanup-final/README.md",
+        "docs/audits/repo-cleanup-final/progress.json"
+      ],
+      "next_action": "Închide C1 și integrează separat registrul de dependențe, igiena sigură și optimizarea CI numai după verificările obligatorii."
+    },
+    {
       "id": "PRODUCT-LAUNCH",
       "description": "L1–L6: atlas ACTUAL funcțional, calitate, publicare și acceptare cu amânări explicite",
       "status": "POST_MERGE_VERIFIED",
