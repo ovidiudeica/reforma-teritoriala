@@ -21,7 +21,7 @@
     {
       "id": "AUTO-3",
       "description": "Registru exhaustiv al celor 298 de excepții OSMB–ACTUAL",
-      "status": "MERGED",
+      "status": "POST_MERGE_VERIFIED",
       "priority": 1,
       "dependencies": [],
       "evidence": [
@@ -31,10 +31,11 @@
       ],
       "acceptance": "298 unique records, 154 RO/144 MD, reproducible geometry, unchanged ACTUAL, protected P9.1, successful PR checks and post-merge verification",
       "local_validation": "PASS: evidence guard and independent targeted geometry verification",
-      "next_action": "Verify push runs for this exact merge commit; source cause follow-up is PR 482",
+      "next_action": "Follow up remaining individual evidence requirements; PR 482 supplies two additional exact MD causes",
       "pr": 481,
       "tested_head": "af39456331cb7f102d03c5ee422dc4ddbcca9c39",
-      "merge_commit": "7ab58ab9ca7c6cc0afbf8ff0384e3b18de1241e4"
+      "merge_commit": "7ab58ab9ca7c6cc0afbf8ff0384e3b18de1241e4",
+      "postmerge_evidence": "docs/audits/auto2-bucharest-text-20261031/auto3-postmerge-verification.json"
     },
     {
       "id": "AUTO-3-FOLLOWUP",
