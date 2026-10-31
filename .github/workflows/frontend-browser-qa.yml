@@ -65,6 +65,8 @@ jobs:
         run: node --test scripts/test/atlas-browser-security.test.mjs
       - name: Launch coverage and independent selection framing — desktop/mobile
         run: node --test scripts/test/frontend-launch-browser.test.mjs
+      - name: Accepted launch evidence hashes and exact coverage replay
+        run: python scripts/audit/product-launch-evidence-guard.py
       - name: P9.0.7.2.16 85 source-linked ACTUAL/OSM role tests
         run: node --test scripts/test/frontend-p907216-osm-roles.test.mjs
       - name: P9.0.7.2.16 real Chromium existing-geometry, mobile and OSM attribution

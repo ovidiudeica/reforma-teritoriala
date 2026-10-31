@@ -26,6 +26,13 @@ test('launch: direct selection framing and honest coverage on desktop and mobile
    for(const n of [index.entity_count,...Object.values(index.entity_count_by_jurisdiction)])assert.ok(coverage.includes(new Intl.NumberFormat('ro-RO').format(n)));
    for(const n of [siruta.records.filter(r=>r.level===3).length,cuatm.records.filter(r=>!mdIds.has(r.code)).length,...Object.values(niCounts),Object.values(niCounts).reduce((a,b)=>a+b,0)])assert.ok(coverage.includes(new Intl.NumberFormat('ro-RO').format(n)));
    assert.match(coverage,/fără a afirma acoperirea juridică exhaustivă/);
+   // Sector 1 has a cartographic card without a direct level-3 SIRUTA ID
+   // binding: an ID-join gap must never be described as an absent card.
+   assert.ok(siruta.records.some(r=>r.siruta==='179141'&&r.level===3));
+   assert.ok(index.entities.some(e=>e.id==='osm-r7960954'));
+   assert.match(coverage,/înregistrări SIRUTA de nivel 3 fără legătură directă prin ID-ul oficial/);
+   assert.match(coverage,/nu dovedește absența unei fișe cartografice sau a unei geometrii/);
+   assert.ok(!coverage.includes('nu au fișe proprii'));
    assert.match(await page.call(function(){return document.querySelector('#module-istoric-description').textContent;}),/Amânat/);
    assert.equal(await page.call(function(){return document.querySelector('[data-mode=istoric]').disabled;}),true);
    await page.openPanel('search');await page.selectQuery('Sector 1');

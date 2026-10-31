@@ -1,0 +1,95 @@
+{
+  "schema": "product-launch-coverage-v1",
+  "method": "Exact identifier join against committed catalogs; no spatial inference or legal assignment",
+  "inputs": {
+    "public/data/actual-entities.json": {
+      "bytes": 15390013,
+      "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700"
+    },
+    "data/sources/ro-siruta-current.json": {
+      "bytes": 6080569,
+      "sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f"
+    },
+    "data/sources/cuatm-current.json": {
+      "bytes": 611165,
+      "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575"
+    },
+    "views/nistrenia/administration.json": {
+      "bytes": 376111,
+      "sha256": "3b92136c285a242131d52b86a0645ef85dbb091722d2d7574501f5fc7ed992f3"
+    },
+    "data/current/ro-official-reconciliation.json": {
+      "bytes": 2385831,
+      "sha256": "38e3db2ee3e8483eb9a8ed3b44adfe3c0ce283a04430b6acbcfe5cf184935e2a"
+    }
+  },
+  "published_entities": 5848,
+  "entities_by_jurisdiction": {
+    "MD": 2602,
+    "RO": 3246
+  },
+  "public_legal_statuses": {
+    "not_bound_to_official_registry": 13,
+    "outside_current_legal_registry": 123,
+    "reconciled": 5693,
+    "statistical_identity": 18,
+    "unresolved": 1
+  },
+  "ro_uat_existing_reconciliation": {
+    "osm_admin_level_8_count": 3179,
+    "official_uat_count": 3181,
+    "matched_count": 3179,
+    "unmatched_osm_count": 0,
+    "official_only_count": 0,
+    "reviewed_official_only_resolution_count": 1,
+    "reviewed_other_level_resolution_count": 1,
+    "reviewed_semantic_type_resolution_count": 3,
+    "represented_at_other_osm_level_count": 0,
+    "duplicate_legal_mapping_count": 0,
+    "parent_mismatch_count": 0,
+    "type_mismatch_count": 0,
+    "reviewed_override_count": 15,
+    "match_methods": {
+      "exact_normalized_name_and_county": 3158,
+      "reviewed_siruta_override": 15,
+      "explicit_siruta_code": 2,
+      "explicit_siruta_locality_code_to_parent_uat": 4
+    },
+    "unmatched_by_reason": {}
+  },
+  "ro_component_localities_without_direct_binding": 13755,
+  "md_official_records_without_direct_binding": 102,
+  "md_unbound_by_source_status_code": {
+    "6": 4,
+    "9": 98
+  },
+  "ni_documentary_nodes": 242,
+  "ni_geometry_statuses": {
+    "GEOMETRY_CANDIDATE": 97,
+    "GEOMETRY_VERIFIED": 8,
+    "NO_GEOMETRY_EVIDENCE": 137
+  },
+  "ni_nodes_without_own_accepted_geometry": 234,
+  "limitations": [
+    "No direct legal.id binding does not prove geometric absence or absence of a same-name search result.",
+    "Parent coverage and candidate/name matches do not establish an independent unit geometry or identity.",
+    "NI statuses are copied, not resolved; documentary nodes are not new ACTUAL entities.",
+    "These are product coverage limits, not a repeat of the OSMB inventory or the 109 AUTO-4 investigations."
+  ],
+  "actual_changes": 0,
+  "p91_authorized": false,
+  "files": {
+    "ro-component-localities.csv": {
+      "bytes": 483181,
+      "sha256": "70bc8c6375fb1c1d9f340d94da8c6e9241fb3e294effc361551ace523617a4e7"
+    },
+    "md-without-direct-binding.csv": {
+      "bytes": 4043,
+      "sha256": "fc49c16483247abce333c3e09535bc1b83d0533936456063e6aec847c2cfaf5b"
+    },
+    "ni-without-own-geometry.json": {
+      "bytes": 73897,
+      "sha256": "a368352f23a97c8d9da9e4027be858a95996629a8db2f939a3e9a2422cde229d"
+    }
+  }
+}

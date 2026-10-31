@@ -6,6 +6,8 @@ Atlas teritorial pentru România și Republica Moldova.
 
 Prioritatea curentă: [lansarea funcțională a atlasului](docs/roadmap/product-launch-20261031.md), cu criterii de acceptare web separate de cercetarea juridică. ISTORIC și extinderile de teritorii sunt amânări explicite; cele 109 cazuri documentare rămân în revizuire fără să condiționeze lansarea ACTUAL.
 
+Lansarea funcțională ACTUAL este [acceptată pe versiunea publicată după PR #488](docs/audits/product-launch-20261031/README.md), cu acoperire și amânări declarate, CI post-merge și E2E Pages reușite. Datele ACTUAL și autorizarea P9.1 rămân neschimbate.
+
 **ACTUAL v1.2** și interfața **web-v1.2** sunt baseline-urile publice curente. `ISTORIC` și `PROPUNERI` rămân faze separate de roadmap; interfața nu le prezintă ca date publicate.
 
 ## Arhitectură
