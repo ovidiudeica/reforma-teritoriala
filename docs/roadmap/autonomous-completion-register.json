@@ -65,7 +65,8 @@
         "docs/audits/auto2-bucharest-text-20261031/README.md",
         "docs/audits/auto2-bucharest-text-20261031/six-route-text-comparison.json",
         "docs/audits/auto2-bucharest-chain-20261031/README.md",
-        "docs/audits/auto2-bucharest-chain-20261031/modifier-chain.json"
+        "docs/audits/auto2-bucharest-chain-20261031/modifier-chain.json",
+        "docs/audits/auto4-history-followup-20261031/auto2-pr486-postmerge-verification.json"
       ],
       "acceptance": "Complete applicable modifier/rectification chain, official texts, all six extracted routes, sourced historical landmarks, segment-level comparison; no assumed legal equivalence with OSMB",
       "next_action": "Recover authentic gazette editions for D284/1979/L31/1979, complete effective modifier chain, obtain boundary annex1 of HCL15/1995 and applicable approved PUG sheets; structural Ilfov acts and urbanism repeal clauses do not prove internal sector route amendments.",
@@ -90,7 +91,14 @@
         "complete_chain_certified": false,
         "sector_cases_review_required": 6
       },
-      "normative_chain_integration_status": "LOCAL_VERIFIED_PENDING_PR_CI"
+      "normative_chain_integration_status": "POST_MERGE_VERIFIED",
+      "normative_chain_integration": {
+        "pr": 486,
+        "tested_head": "c99deb026d2b81f20075da827aa0cd6c8ef55ea8",
+        "merge_commit": "ecd30384e1cf5aff4066882c27596256ea974fbf",
+        "postmerge_evidence": "docs/audits/auto4-history-followup-20261031/auto2-pr486-postmerge-verification.json",
+        "status": "POST_MERGE_VERIFIED"
+      }
     },
     {
       "id": "AUTO-3-MD-HISTORY",
@@ -144,7 +152,11 @@
       "evidence": [
         "docs/audits/auto4-osmb-109/register.json",
         "docs/audits/auto4-osmb-109/geometry-results.json",
-        "docs/audits/auto4-osmb-109/sha256-manifest.json"
+        "docs/audits/auto4-osmb-109/sha256-manifest.json",
+        "docs/audits/auto4-history-followup-20261031/auto4-pr485-postmerge-verification.json",
+        "docs/audits/auto4-history-followup-20261031/identity-history-index.json",
+        "docs/audits/auto4-history-followup-20261031/reconstruction-proofs.json",
+        "docs/audits/auto4-history-followup-20261031/decision-matrix.csv"
       ],
       "acceptance": "Dated independent identity/role/hierarchy/footprint evidence for each case; insufficient evidence remains REVIEW_REQUIRED. Separate read-only PR, exact head CI and exact merge post-checks.",
       "progress": {
@@ -159,10 +171,24 @@
         "deleted_osm_ways": 4,
         "legal_geometry_certifications": 0
       },
-      "integration_status": "LOCAL_VERIFIED_PENDING_PR_CI",
-      "next_action": "Integrate only the evidence after exact-head CI; verify exact merge SHA. Continue official RSUD identity/footprint, local-law modifier chains and metropolitan membership evidence; no inferred closures.",
+      "integration_status": "POST_MERGE_VERIFIED",
+      "next_action": "Continue individual official identity/status, current applicable role/hierarchy and authoritative footprint evidence.109 remain REVIEW_REQUIRED;189 explained cases are not reopened. History follow-up is separate evidence, not legal closure.",
       "actual_mutation_allowed": false,
-      "p91_authorized": false
+      "p91_authorized": false,
+      "pr": 485,
+      "tested_head": "f71ad0b8bc2a7face054b396c11877287bb20430",
+      "merge_commit": "1d06fd8632beb7db95a9535a39d0592c4210a33d",
+      "postmerge_evidence": "docs/audits/auto4-history-followup-20261031/auto4-pr485-postmerge-verification.json",
+      "history_followup": {
+        "scope": 109,
+        "original_history_timelines": 109,
+        "exact_current_delta_mechanisms": 3,
+        "additional_original_responses": 24,
+        "full_closures": 0,
+        "all_cases_remain_review_required": true,
+        "evidence": "docs/audits/auto4-history-followup-20261031/README.md",
+        "acceptance": "Separate read-only PR with its own CI and exact post-merge verification; no legal identity/geometry certification"
+      }
     },
     {
       "id": "P9.1",
@@ -177,5 +203,18 @@
       "acceptance": "Separate authorization and all existing entry gates",
       "next_action": "No execution authorized"
     }
-  ]
+  ],
+  "current_exception_state": {
+    "total_original_exceptions": 298,
+    "cartographic_explained": 189,
+    "review_required": 109,
+    "review_by_jurisdiction": {
+      "RO": 10,
+      "MD": 99
+    },
+    "full_legal_closure_claimed": false,
+    "actual_changes": 0,
+    "p91_authorized": false,
+    "active_task": "AUTO-4"
+  }
 }

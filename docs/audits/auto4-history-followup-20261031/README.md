@@ -1,5 +1,9 @@
 # AUTO-4 — istorice individuale și trei mecanisme geometrice exacte
 
+Formularul public `date.gov.md/open/company-details` a fost verificat și în browser: afișează depășirea cotei reCAPTCHA Enterprise. `public-registry-browser-observation.json` păstrează observația normalizată și limitele ei. Nu s-au transmis identificatori sau interogări și nu s-a rezolvat/ocolit CAPTCHA. Nicio absență de entitate nu este dedusă din această limitare.
+
+Originea referinței este precizată per-ID:108 geometrii OSMB și1 geometrie ACTUAL acceptată. Cele105 reconstrucții curente din PR485 includ104 referințe OSMB și1 ACTUAL; cele102 egalități exacte sunt101 OSMB și1 ACTUAL. Pentru relația12104636 nu este inventată o geometrie OSMB absentă. Fiecare caz are evaluări și lipsuri explicite pentru identitate,geometrie,nivel/rol administrativ,relații părinte–copil și proveniență/cronologie.
+
 Pachetul continuă exclusiv cohorta109 din PR485. Nu reia inventarul6129 și nu redeschide189 cazuri explicate. **Toate109 rămân REVIEW_REQUIRED; nicio identitate sau geometrie juridică nouă nu este certificată.** ACTUAL este neschimbat, P9.1 neautorizat.
 
 `identity-history-index.json` descompune reproductibil toate109 istorice originale deja recuperate: fiecare versiune,numele,referințele,rolurile și diferențele de etichete au dată și changeset.84 ID-uri au mai multe denumiri istorice. Nicio valoare istorică rson cu13 cifre nu este identificată ca pierdută sau diferită de valoarea curentă în acest lot; aceasta nu validează vreun IDNO și nu înlocuiește RSON. Fișele `cases/` și matricea păstrează statutul de revizuire.
