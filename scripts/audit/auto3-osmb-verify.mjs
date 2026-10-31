@@ -32,7 +32,9 @@ for(const country of ['RO','MD']){
  const observed={};for(const row of records.filter(x=>x.jurisdiction===country))observed[row.cartographic_status]=(observed[row.cartographic_status]??0)+1;
  for(const [status,n] of Object.entries(stats.by_jurisdiction[country].cartographic_status))check(observed[status]===n,'cartographic statistics drift '+country+' '+status);
 }
-check(records.filter(x=>x.cartographic_status==='REVIEW_REQUIRED').length===116,'unresolved case coverage after four demonstrated OSM history causes');
+check(records.filter(x=>x.cartographic_status==='REVIEW_REQUIRED').length===109,'unresolved case coverage after seven additional attested MD histories');
+const mdAdditional=new Set(['AUTO3-osm-r1691800','AUTO3-osm-r18822134','AUTO3-osm-r18822135','AUTO3-osm-r18967099','AUTO3-osm-r19100157','AUTO3-osm-r85827','AUTO3-stat-MD112']);
+check(records.filter(x=>mdAdditional.has(x.case_id)&&x.cartographic_status==='CARTOGRAPHIC_RECONCILED'&&x.cause_status==='OFFICIAL_OSM_NODE_WAY_HISTORY_AND_TEMPORAL_EDGES_DEMONSTRATED').length===7,'seven MD causes must remain individually attested');
 for(const [kind,n] of Object.entries({GEOMETRY_DIFFERENCE:13,OSMB_ONLY:283,ACTUAL_ONLY:2}))check(records.filter(x=>x.exception_kind===kind).length===n,'exception kind '+kind);
 check(register.policy.actual_mutation_allowed===false&&register.policy.p91_import_allowed===false,'global protection');
 const postmerge=await j('auto1-postmerge-ci.json'),postchecks=await j('auto1-postmerge-checks.json');

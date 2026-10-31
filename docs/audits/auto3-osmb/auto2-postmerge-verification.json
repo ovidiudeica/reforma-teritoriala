@@ -1,0 +1,372 @@
+{
+  "schema": "exact-postmerge-verification-v1",
+  "pr": 483,
+  "tested_head": "56eb50e0f7744e479c86a8081f4367077c1d8d22",
+  "merge_commit": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+  "verified_at": "2026-10-31 07:36:21 UTC",
+  "checks": {
+    "total_count": 22,
+    "check_runs": [
+      {
+        "id": 124477102198,
+        "name": "actual-change-reproducibility",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861712/job/124477102198",
+        "started_at": "2026-10-31T07:26:41Z",
+        "completed_at": "2026-10-31T07:26:45Z"
+      },
+      {
+        "id": 124477037760,
+        "name": "actual-change-repro-compare",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861712/job/124477037760",
+        "started_at": "2026-10-31T07:26:20Z",
+        "completed_at": "2026-10-31T07:26:39Z"
+      },
+      {
+        "id": 124475061626,
+        "name": "deploy",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861625/job/124475061626",
+        "started_at": "2026-10-31T07:16:14Z",
+        "completed_at": "2026-10-31T07:16:34Z"
+      },
+      {
+        "id": 124475061569,
+        "name": "report-build-status",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861625/job/124475061569",
+        "started_at": "2026-10-31T07:16:13Z",
+        "completed_at": "2026-10-31T07:16:17Z"
+      },
+      {
+        "id": 124474944845,
+        "name": "actual-change-repro-A",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861712/job/124474944845",
+        "started_at": "2026-10-31T07:15:35Z",
+        "completed_at": "2026-10-31T07:24:42Z"
+      },
+      {
+        "id": 124474944843,
+        "name": "actual-change-repro-B",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861712/job/124474944843",
+        "started_at": "2026-10-31T07:15:35Z",
+        "completed_at": "2026-10-31T07:26:18Z"
+      },
+      {
+        "id": 124474883131,
+        "name": "Analyze (python)",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861983/job/124474883131",
+        "started_at": "2026-10-31T07:15:17Z",
+        "completed_at": "2026-10-31T07:16:15Z"
+      },
+      {
+        "id": 124474883089,
+        "name": "Analyze (actions)",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861983/job/124474883089",
+        "started_at": "2026-10-31T07:15:18Z",
+        "completed_at": "2026-10-31T07:16:05Z"
+      },
+      {
+        "id": 124474883019,
+        "name": "Analyze (javascript-typescript)",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861983/job/124474883019",
+        "started_at": "2026-10-31T07:15:17Z",
+        "completed_at": "2026-10-31T07:17:28Z"
+      },
+      {
+        "id": 124474882344,
+        "name": "build",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861625/job/124474882344",
+        "started_at": "2026-10-31T07:15:17Z",
+        "completed_at": "2026-10-31T07:16:10Z"
+      },
+      {
+        "id": 124474879966,
+        "name": "p84-export-validation",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861855/job/124474879966",
+        "started_at": "2026-10-31T07:15:17Z",
+        "completed_at": "2026-10-31T07:30:53Z"
+      },
+      {
+        "id": 124474879934,
+        "name": "p82-derived-topology",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861713/job/124474879934",
+        "started_at": "2026-10-31T07:15:16Z",
+        "completed_at": "2026-10-31T07:35:14Z"
+      },
+      {
+        "id": 124474879924,
+        "name": "frontend-browser-qa",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861773/job/124474879924",
+        "started_at": "2026-10-31T07:15:17Z",
+        "completed_at": "2026-10-31T07:25:47Z"
+      },
+      {
+        "id": 124474879913,
+        "name": "verify-persisted-release",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861834/job/124474879913",
+        "started_at": "2026-10-31T07:15:16Z",
+        "completed_at": "2026-10-31T07:16:58Z"
+      },
+      {
+        "id": 124474879850,
+        "name": "frontend-geometry-taxonomy",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861804/job/124474879850",
+        "started_at": "2026-10-31T07:15:16Z",
+        "completed_at": "2026-10-31T07:15:52Z"
+      },
+      {
+        "id": 124474879826,
+        "name": "actual-release-trust-chain",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861756/job/124474879826",
+        "started_at": "2026-10-31T07:15:17Z",
+        "completed_at": "2026-10-31T07:15:37Z"
+      },
+      {
+        "id": 124474879740,
+        "name": "detect-change-repro-scope",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861712/job/124474879740",
+        "started_at": "2026-10-31T07:15:16Z",
+        "completed_at": "2026-10-31T07:15:33Z"
+      },
+      {
+        "id": 124474879690,
+        "name": "chromium-hardening",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861719/job/124474879690",
+        "started_at": "2026-10-31T07:15:17Z",
+        "completed_at": "2026-10-31T07:16:46Z"
+      },
+      {
+        "id": 124474879677,
+        "name": "auto2-text-evidence",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861711/job/124474879677",
+        "started_at": "2026-10-31T07:15:17Z",
+        "completed_at": "2026-10-31T07:15:45Z"
+      },
+      {
+        "id": 124474879652,
+        "name": "p907216-osm-ui-fail-closed",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861714/job/124474879652",
+        "started_at": "2026-10-31T07:15:16Z",
+        "completed_at": "2026-10-31T07:15:42Z"
+      },
+      {
+        "id": 124474879638,
+        "name": "p2-statistical-foundation",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861696/job/124474879638",
+        "started_at": "2026-10-31T07:15:16Z",
+        "completed_at": "2026-10-31T07:15:48Z"
+      },
+      {
+        "id": 124474879577,
+        "name": "p83-geometric-validation",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861693/job/124474879577",
+        "started_at": "2026-10-31T07:15:16Z",
+        "completed_at": "2026-10-31T07:16:22Z"
+      }
+    ]
+  },
+  "runs": {
+    "total_count": 12,
+    "workflow_runs": [
+      {
+        "id": 41179861711,
+        "name": "AUTO-2 Bucharest text evidence",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861711",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:15:46Z"
+      },
+      {
+        "id": 41179861693,
+        "name": "P8.3 geometric measurement validation",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861693",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:16:23Z"
+      },
+      {
+        "id": 41179861804,
+        "name": "Frontend geometry taxonomy",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861804",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:15:52Z"
+      },
+      {
+        "id": 41179861714,
+        "name": "P9.0.7.2.16 source-only OSM role UI gate",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861714",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:15:43Z"
+      },
+      {
+        "id": 41179861696,
+        "name": "Gate P2 statistical foundation",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861696",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:15:48Z"
+      },
+      {
+        "id": 41179861756,
+        "name": "Gate ACTUAL release trust chain",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861756",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:15:37Z"
+      },
+      {
+        "id": 41179861719,
+        "name": "WEB-R2c.3.2 Chromium hardening",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861719",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:16:46Z"
+      },
+      {
+        "id": 41179861834,
+        "name": "Verify persisted ACTUAL release",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861834",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:16:59Z"
+      },
+      {
+        "id": 41179861773,
+        "name": "Frontend browser QA",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861773",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:25:48Z"
+      },
+      {
+        "id": 41179861712,
+        "name": "Gate ACTUAL CHANGE reproducibility",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861712",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:26:45Z"
+      },
+      {
+        "id": 41179861855,
+        "name": "P8.4 export print report validation",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861855",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:30:54Z"
+      },
+      {
+        "id": 41179861713,
+        "name": "P8.2 derived topology reproducibility",
+        "head_sha": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41179861713",
+        "created_at": "2026-10-31T07:15:14Z",
+        "updated_at": "2026-10-31T07:35:15Z"
+      }
+    ]
+  },
+  "legal_boundary_certified": false,
+  "actual_modified": false,
+  "p91_authorized": false
+}

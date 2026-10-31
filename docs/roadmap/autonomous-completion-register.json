@@ -39,7 +39,7 @@
     },
     {
       "id": "AUTO-3-FOLLOWUP",
-      "description": "Dovezi suplimentare pentru cele 116 cazuri REVIEW_REQUIRED",
+      "description": "Dovezi suplimentare pentru cele 109 cazuri REVIEW_REQUIRED",
       "status": "TODO",
       "priority": 2,
       "dependencies": [
@@ -73,7 +73,12 @@
         "lexical_difference_groups": 35,
         "original_binary_acquired": false,
         "modifier_chain_certified": false
-      }
+      },
+      "textual_integration_status": "POST_MERGE_VERIFIED",
+      "pr": 483,
+      "tested_head": "56eb50e0f7744e479c86a8081f4367077c1d8d22",
+      "merge_commit": "65ef9a17ca262ca159755d131f10a9ccdd580461",
+      "postmerge_evidence": "docs/audits/auto3-osmb/auto2-postmerge-verification.json"
     },
     {
       "id": "AUTO-3-MD-HISTORY",
@@ -94,6 +99,22 @@
       "tested_head": "7fdd546bf456ea7a0a43508722576d86a90587d2",
       "merge_commit": "8d7a8585340ebf83f06a7ee0d6aca8a34b1df322",
       "postmerge_evidence": "docs/audits/auto2-bucharest-text-20261031/auto3-md-postmerge-verification.json"
+    },
+    {
+      "id": "AUTO-3-MD-SEVEN-HISTORIES",
+      "description": "Seven exact MD reconstructions with temporally compatible node/way edge witnesses",
+      "status": "REVIEW_REQUIRED",
+      "dependencies": [
+        "AUTO-3"
+      ],
+      "source_branch": "audit/auto3-md-seven-exact-histories-20261031",
+      "proposed_cartographic_documented": 189,
+      "proposed_review_required": 109,
+      "evidence": [
+        "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json"
+      ],
+      "acceptance": "Original history SHA-256, exact seven reconstructions, all affected old edges temporally attested, all inserted edges in pinned source networks, successful CI and post-merge verification; no ACTUAL or legal changes",
+      "next_action": "Verify exact PR head CI; integrate only accepted evidence and verify exact merge SHA push runs"
     },
     {
       "id": "P9.1",

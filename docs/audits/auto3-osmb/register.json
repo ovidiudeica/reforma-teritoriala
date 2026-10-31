@@ -9062,7 +9062,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_WAY_HISTORY_AND_TEMPORAL_EDGES_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -9180,6 +9180,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Every changed source coordinate is matched to an original node history; every affected old edge has node/way versions with overlapping validity intervals; every inserted edge is in the pinned accepted way network; reconstruction equals ACTUAL exactly",
+          "proof": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "proof_sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "existing_audit_evidence": [
@@ -9206,15 +9211,19 @@
           "line": 7,
           "sha256": "e5ae19cd3747888e22abe4f1d6830744a68a0c6de8b16454b2caf2b2c85294bf",
           "excerpt": "1691800,"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp remains uncertified; the demonstrated history and exact reconstruction do not certify administrative or legal boundaries."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
@@ -13755,7 +13764,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_WAY_HISTORY_AND_TEMPORAL_EDGES_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -13873,6 +13882,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Every changed source coordinate is matched to an original node history; every affected old edge has node/way versions with overlapping validity intervals; every inserted edge is in the pinned accepted way network; reconstruction equals ACTUAL exactly",
+          "proof": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "proof_sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "existing_audit_evidence": [
@@ -13887,15 +13901,19 @@
           "line": 9,
           "sha256": "e5ae19cd3747888e22abe4f1d6830744a68a0c6de8b16454b2caf2b2c85294bf",
           "excerpt": "18822134"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp remains uncertified; the demonstrated history and exact reconstruction do not certify administrative or legal boundaries."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
@@ -14148,7 +14166,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_WAY_HISTORY_AND_TEMPORAL_EDGES_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -14234,6 +14252,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Every changed source coordinate is matched to an original node history; every affected old edge has node/way versions with overlapping validity intervals; every inserted edge is in the pinned accepted way network; reconstruction equals ACTUAL exactly",
+          "proof": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "proof_sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "existing_audit_evidence": [
@@ -14242,15 +14265,19 @@
           "line": 3687,
           "sha256": "bc005e361efe419b8e64df972f181378e8411a0c8295cce15595cb9037d104f3",
           "excerpt": "18822135,"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp remains uncertified; the demonstrated history and exact reconstruction do not certify administrative or legal boundaries."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
@@ -15000,7 +15027,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_WAY_HISTORY_AND_TEMPORAL_EDGES_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -15053,6 +15080,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Every changed source coordinate is matched to an original node history; every affected old edge has node/way versions with overlapping validity intervals; every inserted edge is in the pinned accepted way network; reconstruction equals ACTUAL exactly",
+          "proof": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "proof_sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "existing_audit_evidence": [
@@ -15061,15 +15093,19 @@
           "line": 4023,
           "sha256": "bc005e361efe419b8e64df972f181378e8411a0c8295cce15595cb9037d104f3",
           "excerpt": "18967099,"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp remains uncertified; the demonstrated history and exact reconstruction do not certify administrative or legal boundaries."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
@@ -16000,7 +16036,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_WAY_HISTORY_AND_TEMPORAL_EDGES_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -16118,6 +16154,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Every changed source coordinate is matched to an original node history; every affected old edge has node/way versions with overlapping validity intervals; every inserted edge is in the pinned accepted way network; reconstruction equals ACTUAL exactly",
+          "proof": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "proof_sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "existing_audit_evidence": [
@@ -16126,15 +16167,19 @@
           "line": 5584,
           "sha256": "bc005e361efe419b8e64df972f181378e8411a0c8295cce15595cb9037d104f3",
           "excerpt": "19100157,"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp remains uncertified; the demonstrated history and exact reconstruction do not certify administrative or legal boundaries."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
@@ -19903,7 +19948,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_WAY_HISTORY_AND_TEMPORAL_EDGES_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -20021,6 +20066,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Every changed source coordinate is matched to an original node history; every affected old edge has node/way versions with overlapping validity intervals; every inserted edge is in the pinned accepted way network; reconstruction equals ACTUAL exactly",
+          "proof": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "proof_sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "existing_audit_evidence": [
@@ -20041,15 +20091,19 @@
           "line": 475,
           "sha256": "6685cdaf2cb17494d83f4ddb6a3a3e778b15652800145044c10ca626ef1ca639",
           "excerpt": "\"path\": \"relation/85827/history.json\","
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp remains uncertified; the demonstrated history and exact reconstruction do not certify administrative or legal boundaries."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
@@ -59124,7 +59178,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_NODE_WAY_HISTORY_AND_TEMPORAL_EDGES_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -59239,6 +59293,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "Every changed source coordinate is matched to an original node history; every affected old edge has node/way versions with overlapping validity intervals; every inserted edge is in the pinned accepted way network; reconstruction equals ACTUAL exactly",
+          "proof": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "proof_sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "existing_audit_evidence": [
@@ -59247,15 +59306,19 @@
           "line": 59,
           "sha256": "31c81cfa8a30577b4047e40cbefadbee0f999ea6ffdcd6f9232c5e297cd7d510",
           "excerpt": "\"relation_id\": 11092080,"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json",
+          "sha256": "4737636c7158a40b7a66580d6703feb578ac0648a51f6d1da36b35d8af2a6cd6"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export/version timestamp remains uncertified; the demonstrated history and exact reconstruction do not certify administrative or legal boundaries."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
