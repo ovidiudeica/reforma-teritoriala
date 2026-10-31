@@ -63,6 +63,8 @@ jobs:
           node --check scripts/audit/web-r1b-layout-browser.mjs
       - name: CDP code/data separation security regressions
         run: node --test scripts/test/atlas-browser-security.test.mjs
+      - name: Launch coverage and independent selection framing — desktop/mobile
+        run: node --test scripts/test/frontend-launch-browser.test.mjs
       - name: P9.0.7.2.16 85 source-linked ACTUAL/OSM role tests
         run: node --test scripts/test/frontend-p907216-osm-roles.test.mjs
       - name: P9.0.7.2.16 real Chromium existing-geometry, mobile and OSM attribution
