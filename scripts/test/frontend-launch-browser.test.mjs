@@ -11,8 +11,11 @@ test('launch: direct selection framing and honest coverage on desktop and mobile
  try{
   for(const [width,height] of [[1440,900],[390,844]]){
    const page=await browser.page();
-   try{await page.viewport(width,height);}catch(error){error.message+='; observed='+JSON.stringify(await page.call(function(){return {width:innerWidth,height:innerHeight,mobile:matchMedia('(max-width: 899px)').matches};}));throw error;}
    await page.navigate(browser.server.url+'/');
+   // about:blank has no viewport meta and uses a 980px mobile layout viewport.
+   // Resize only after the atlas document exists; cold-device startup is covered
+   // independently by the existing performance/navigation acceptance matrix.
+   await page.viewport(width,height);
    await page.openPanel('modules');
    const coverage=await page.call(function(){return document.querySelector('#launch-coverage').textContent;});
    for(const n of [index.entity_count,...Object.values(index.entity_count_by_jurisdiction)])assert.ok(coverage.includes(new Intl.NumberFormat('ro-RO').format(n)));
