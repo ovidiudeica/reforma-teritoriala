@@ -57,8 +57,8 @@ for row in reg['records']:
   pg=shape(actual[key]['geometry']);assert pg.is_valid;outside=g.difference(pg);parents.append({'parent_id':key,'status':'COMPUTED_AGAINST_ACCEPTED_CARTOGRAPHY_ONLY','covered':pg.covers(g),'outside_area_m2':area(outside),'outside_empty':outside.is_empty,'legal_parentage_certified':False})
  rows.append({'case_id':row['case_id'],'geometry_key':row['geometry_key'],'archived_geometry_canonical_sha256':hashlib.sha256(canon(feature['geometry'])).hexdigest(),'archived_area_m2':area(g),'archived_bbox':list(g.bounds),'archived_valid':g.is_valid,'accepted_parent_cartography':parents,'current_osm_comparison':detail,'legal_geometry_certified':False})
 result={'schema':'auto4-targeted-geometry-v1','scope':109,'input_crs':'EPSG:4326','area_crs':'EPSG:3035','operations':'Exact predicates and unsnapped difference in4326, then project difference to3035 for area. No repair/simplification. Current OSM is observational evidence only.','software':{'shapely':shapely.__version__,'geos':shapely.geos_version_string,'pyproj':pyproj.__version__,'proj':pyproj.proj_version_str},'records':rows}
-if '--output' in sys.argv:
- path=Path(sys.argv[sys.argv.index('--output')+1]);path.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
+if '--emit-json' in sys.argv:
+ print(json.dumps(result,ensure_ascii=False,indent=2));raise SystemExit(0)
 else:
  expected=json.loads((root/'geometry-results.json').read_bytes());assert expected['scope']==109
  def compare(a,b):

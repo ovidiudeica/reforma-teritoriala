@@ -40,7 +40,7 @@ for(const r of Object.values(osm))if(r.status===200){
  const b=await read('osm/'+r.file),raw=gunzipSync(b);check(hash(b)===r.compressed_sha256&&hash(raw)===r.sha256&&raw.length===r.bytes,'original OSM response '+r.file);successful++;if(r.kind==='history')histories++;
 }
 check(successful===214&&histories===109,'original response coverage');
-for(const [name,r] of Object.entries(await j('retrieval.json')))if(r.status===200){const b=await read('originals/'+name);check(hash(b)===r.sha256,'official original '+name);if(name.endsWith('.pdf'))check(b.subarray(0,5).toString()==='%PDF-','HTML mislabelled PDF '+name);}
+for(const [name,r] of Object.entries(await j('retrieval.json')))if(r.status===200){let b=await read('originals/'+(r.evidence_file??name));if(r.encoding==='gzip'){check(hash(b)===r.compressed_sha256,'compressed original '+name);b=gunzipSync(b);}check(hash(b)===r.sha256,'official original '+name);if(name.endsWith('.pdf'))check(b.subarray(0,5).toString()==='%PDF-','HTML mislabelled PDF '+name);}
 const geometry=await j('geometry-results.json');check(geometry.records.length===109&&geometry.records.every(r=>ids.includes(r.case_id)&&!r.legal_geometry_certified),'geometry coverage');
 check(geometry.records.filter(r=>r.current_osm_comparison.equals_archive).length===102,'exact equality statistics');
 const protectedPaths=['public','data','views','schemas'];
