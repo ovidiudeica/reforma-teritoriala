@@ -63,10 +63,12 @@
       "source_branch": "audit/rt-adm-2-14-legal-boundaries-bucharest",
       "evidence": [
         "docs/audits/auto2-bucharest-text-20261031/README.md",
-        "docs/audits/auto2-bucharest-text-20261031/six-route-text-comparison.json"
+        "docs/audits/auto2-bucharest-text-20261031/six-route-text-comparison.json",
+        "docs/audits/auto2-bucharest-chain-20261031/README.md",
+        "docs/audits/auto2-bucharest-chain-20261031/modifier-chain.json"
       ],
       "acceptance": "Complete applicable modifier/rectification chain, official texts, all six extracted routes, sourced historical landmarks, segment-level comparison; no assumed legal equivalence with OSMB",
-      "next_action": "Recover verifiable official originals, certify source versions and full modifier chain; do not interpret lexical differences as boundary amendments",
+      "next_action": "Recover authentic gazette editions for D284/1979/L31/1979, complete effective modifier chain, obtain boundary annex1 of HCL15/1995 and applicable approved PUG sheets; structural Ilfov acts and urbanism repeal clauses do not prove internal sector route amendments.",
       "textual_progress": {
         "sector_pairs": 6,
         "directional_clauses": 24,
@@ -78,7 +80,17 @@
       "pr": 483,
       "tested_head": "56eb50e0f7744e479c86a8081f4367077c1d8d22",
       "merge_commit": "65ef9a17ca262ca159755d131f10a9ccdd580461",
-      "postmerge_evidence": "docs/audits/auto3-osmb/auto2-postmerge-verification.json"
+      "postmerge_evidence": "docs/audits/auto3-osmb/auto2-postmerge-verification.json",
+      "normative_chain_progress": {
+        "official_publisher_binary_reproductions": 2,
+        "original_decree284_gazette_acquired": false,
+        "original_law31_gazette_acquired": false,
+        "normative_nodes_and_candidates": 9,
+        "typed_edges": 7,
+        "complete_chain_certified": false,
+        "sector_cases_review_required": 6
+      },
+      "normative_chain_integration_status": "LOCAL_VERIFIED_PENDING_PR_CI"
     },
     {
       "id": "AUTO-3-MD-HISTORY",
