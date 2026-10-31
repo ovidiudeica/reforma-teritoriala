@@ -21,7 +21,7 @@
     {
       "id": "AUTO-3",
       "description": "Registru exhaustiv al celor 298 de excepții OSMB–ACTUAL",
-      "status": "REVIEW_REQUIRED",
+      "status": "MERGED",
       "priority": 1,
       "dependencies": [],
       "evidence": [
@@ -31,7 +31,10 @@
       ],
       "acceptance": "298 unique records, 154 RO/144 MD, reproducible geometry, unchanged ACTUAL, protected P9.1, successful PR checks and post-merge verification",
       "local_validation": "PASS: evidence guard and independent targeted geometry verification",
-      "next_action": "Publish separate evidence PR, verify exact head CI, merge only if accepted, verify push CI"
+      "next_action": "Verify push runs for this exact merge commit; source cause follow-up is PR 482",
+      "pr": 481,
+      "tested_head": "af39456331cb7f102d03c5ee422dc4ddbcca9c39",
+      "merge_commit": "7ab58ab9ca7c6cc0afbf8ff0384e3b18de1241e4"
     },
     {
       "id": "AUTO-3-FOLLOWUP",
@@ -58,10 +61,34 @@
       ],
       "source_branch": "audit/rt-adm-2-14-legal-boundaries-bucharest",
       "evidence": [
-        "docs/audits/rt-adm2-12/version-by-version-review.json"
+        "docs/audits/auto2-bucharest-text-20261031/README.md",
+        "docs/audits/auto2-bucharest-text-20261031/six-route-text-comparison.json"
       ],
       "acceptance": "Complete applicable modifier/rectification chain, official texts, all six extracted routes, sourced historical landmarks, segment-level comparison; no assumed legal equivalence with OSMB",
-      "next_action": "Recheck primary official sources and reuse existing branch evidence; keep incomplete findings open"
+      "next_action": "Recover verifiable official originals, certify source versions and full modifier chain; do not interpret lexical differences as boundary amendments",
+      "textual_progress": {
+        "sector_pairs": 6,
+        "directional_clauses": 24,
+        "lexical_difference_groups": 35,
+        "original_binary_acquired": false,
+        "modifier_chain_certified": false
+      }
+    },
+    {
+      "id": "AUTO-3-MD-HISTORY",
+      "description": "Exact causal reconstruction for Condrita/Chisinau from original OSM histories",
+      "status": "REVIEW_REQUIRED",
+      "pr": 482,
+      "dependencies": [
+        "AUTO-3"
+      ],
+      "proposed_cartographic_documented": 182,
+      "proposed_review_required": 116,
+      "evidence": [
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/482"
+      ],
+      "acceptance": "Original response SHA-256, exact reconstruction, successful CI and merge without ACTUAL changes",
+      "next_action": "Verify PR 482 exact head CI, merge only if accepted, verify push runs"
     },
     {
       "id": "P9.1",
