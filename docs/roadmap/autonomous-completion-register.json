@@ -40,7 +40,7 @@
     {
       "id": "AUTO-3-FOLLOWUP",
       "description": "Dovezi suplimentare pentru cele 109 cazuri REVIEW_REQUIRED",
-      "status": "TODO",
+      "status": "SUPERSEDED_BY_AUTO4",
       "priority": 2,
       "dependencies": [
         "AUTO-3"
@@ -50,7 +50,7 @@
         "docs/audits/auto3-osmb/register.json"
       ],
       "acceptance": "Each remaining_evidence item supported by dated independent evidence; classification alone must not close legal gaps",
-      "next_action": "Use the individual evidence requirements; do not import OSMB-only objects automatically"
+      "next_action": "Continue the fixed109 cases in AUTO-4;189 explained cases are immutable inputs."
     },
     {
       "id": "AUTO-2",
@@ -103,7 +103,7 @@
     {
       "id": "AUTO-3-MD-SEVEN-HISTORIES",
       "description": "Seven exact MD reconstructions with temporally compatible node/way edge witnesses",
-      "status": "REVIEW_REQUIRED",
+      "status": "POST_MERGE_VERIFIED",
       "dependencies": [
         "AUTO-3"
       ],
@@ -114,7 +114,43 @@
         "docs/audits/auto3-osmb/md-remaining-boundary-history/reconstruction-proofs.json"
       ],
       "acceptance": "Original history SHA-256, exact seven reconstructions, all affected old edges temporally attested, all inserted edges in pinned source networks, successful CI and post-merge verification; no ACTUAL or legal changes",
-      "next_action": "Verify exact PR head CI; integrate only accepted evidence and verify exact merge SHA push runs"
+      "next_action": "No further investigation of these seven explained cartographic causes absent demonstrable contradiction; legal scope remains separate.",
+      "pr": 484,
+      "tested_head": "718abc2e23de8d685dd83716e1b5d3ad84135ad1",
+      "merge_commit": "58859246713989227ebac98fcddc8729a92765b1",
+      "postmerge_evidence": "docs/audits/auto4-osmb-109/pr484-accepted-integration.json"
+    },
+    {
+      "id": "AUTO-4",
+      "description": "Închidere probatorie individuală a celor109 excepții rămase după PR481–484",
+      "status": "IN_PROGRESS",
+      "priority": 2,
+      "dependencies": [
+        "AUTO-3",
+        "AUTO-3-MD-SEVEN-HISTORIES"
+      ],
+      "evidence": [
+        "docs/audits/auto4-osmb-109/register.json",
+        "docs/audits/auto4-osmb-109/geometry-results.json",
+        "docs/audits/auto4-osmb-109/sha256-manifest.json"
+      ],
+      "acceptance": "Dated independent identity/role/hierarchy/footprint evidence for each case; insufficient evidence remains REVIEW_REQUIRED. Separate read-only PR, exact head CI and exact merge post-checks.",
+      "progress": {
+        "review_required": 109,
+        "RO": 10,
+        "MD": 99,
+        "complete_closures": 0,
+        "prior_explained_preserved": 189,
+        "original_osm_histories": 109,
+        "current_geometries_reconstructed": 105,
+        "current_geometries_equal_archive": 102,
+        "deleted_osm_ways": 4,
+        "legal_geometry_certifications": 0
+      },
+      "integration_status": "LOCAL_VERIFIED_PENDING_PR_CI",
+      "next_action": "Integrate only the evidence after exact-head CI; verify exact merge SHA. Continue official RSUD identity/footprint, local-law modifier chains and metropolitan membership evidence; no inferred closures.",
+      "actual_mutation_allowed": false,
+      "p91_authorized": false
     },
     {
       "id": "P9.1",

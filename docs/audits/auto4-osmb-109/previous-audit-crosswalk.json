@@ -1,0 +1,511 @@
+{
+  "policy": "Only exact case IDs in existing top-level RT-AUDIT/RT-ADM JSON decision registers. Prior decisions reused; absence of a match is not a closed or legally resolved case.189 prior explained records are untouched.",
+  "inputs": {
+    "docs/audits/rt-adm2/identity-decision-register.json": "34ad1bfbbeeff79c200ca83a62814efbe9ee1f763017087cc09f66cd8ef5c721",
+    "docs/audits/rt-adm2-5/osmb-cartographic-closure.json": "c88b605a9f3622e487b2e8fdec0c1d39eb73026d492cb60fc4bd6526214b70e1",
+    "docs/audits/rt-adm2-6/legal-exceptions-resumption.json": "1ddcf9efc75747e50287467ec2f2087be9c91aa2084f098cb4f57dc82a00f08b",
+    "docs/audits/rt-adm2-7/normative-identity-register.json": "7a68941b38df8b1fd72b6e29ad35bff4314adbb2f0f458b32fb63f9e5e3e0df9",
+    "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json": "dcf720ea5236322acaa03d29f9a5d2ac4493c7015eefbad2d6d5250b64a18873"
+  },
+  "records": [
+    {
+      "case_id": "AUTO3-osm-r11299776",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r11318324",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r11318878",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r11320929",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r11321153",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r11572971",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r11793466",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r12104636",
+      "matches": [
+        {
+          "path": "docs/audits/rt-adm2/identity-decision-register.json",
+          "json_pointer": "/records/2",
+          "sha256": "34ad1bfbbeeff79c200ca83a62814efbe9ee1f763017087cc09f66cd8ef5c721",
+          "classification": "EXACT_ID_PREVIOUS_DECISION_REUSED",
+          "decision_excerpt": {
+            "id": "osm-r12104636",
+            "name": null,
+            "status": "POSITIVE_IDENTITY_NOT_ESTABLISHED",
+            "required_evidence": [
+              "Independent positive identification of precise OSM footprint",
+              "Time-applicable primary official identity/parentage record",
+              "Authoritative boundary evidence if footprint equivalence is claimed"
+            ],
+            "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE",
+            "automatic_action_allowed": false,
+            "legal_role_evidence_status": "NO_POSITIVE_IDENTITY",
+            "legal_footprint_certified": false
+          }
+        },
+        {
+          "path": "docs/audits/rt-adm2-5/osmb-cartographic-closure.json",
+          "json_pointer": "/cases/2",
+          "sha256": "c88b605a9f3622e487b2e8fdec0c1d39eb73026d492cb60fc4bd6526214b70e1",
+          "classification": "EXACT_ID_PREVIOUS_DECISION_REUSED",
+          "decision_excerpt": {
+            "id": "osm-r12104636",
+            "name": null
+          }
+        },
+        {
+          "path": "docs/audits/rt-adm2-6/legal-exceptions-resumption.json",
+          "json_pointer": "/cases/2",
+          "sha256": "1ddcf9efc75747e50287467ec2f2087be9c91aa2084f098cb4f57dc82a00f08b",
+          "classification": "EXACT_ID_PREVIOUS_DECISION_REUSED",
+          "decision_excerpt": {
+            "id": "osm-r12104636",
+            "name": null
+          }
+        },
+        {
+          "path": "docs/audits/rt-adm2-7/normative-identity-register.json",
+          "json_pointer": "/per_id/2",
+          "sha256": "7a68941b38df8b1fd72b6e29ad35bff4314adbb2f0f458b32fb63f9e5e3e0df9",
+          "classification": "EXACT_ID_PREVIOUS_DECISION_REUSED",
+          "decision_excerpt": {
+            "id": "osm-r12104636",
+            "name": null,
+            "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+          }
+        },
+        {
+          "path": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json",
+          "json_pointer": "/cases/2",
+          "sha256": "dcf720ea5236322acaa03d29f9a5d2ac4493c7015eefbad2d6d5250b64a18873",
+          "classification": "EXACT_ID_PREVIOUS_DECISION_REUSED",
+          "decision_excerpt": {
+            "id": "osm-r12104636",
+            "name": null,
+            "decision": "NO_CHANGE_PENDING_PRIMARY_EVIDENCE"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "AUTO3-osm-r14673362",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r1706978",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r1706979",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r18936990",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r7103068",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-r8863573",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1210987597",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1211558191",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1211558192",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683771",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683809",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683834",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683835",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683837",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683868",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683871",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683876",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w1474683878",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101560",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101566",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101567",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101586",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101590",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101606",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101611",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101614",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101624",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101630",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101641",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101644",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101652",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101668",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101683",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101688",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101689",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101692",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101700",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101705",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101711",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101713",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101714",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101725",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101726",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101730",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101746",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101751",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101756",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101765",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101770",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101775",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101778",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101788",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101793",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101794",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101795",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101807",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101812",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101813",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101817",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101828",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101833",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101838",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101841",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101852",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101858",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101859",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101869",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101872",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101879",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101896",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101897",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101916",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101917",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101920",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101933",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101939",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101950",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101953",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101966",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101977",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101985",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101990",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101995",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889101999",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102002",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102012",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102016",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102018",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102019",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102030",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102031",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102035",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102036",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102067",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102075",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102080",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102083",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102084",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102094",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102099",
+      "matches": []
+    },
+    {
+      "case_id": "AUTO3-osm-w889102102",
+      "matches": []
+    }
+  ]
+}
