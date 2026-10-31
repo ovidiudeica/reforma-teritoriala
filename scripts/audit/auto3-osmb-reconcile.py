@@ -219,4 +219,5 @@ def main():
  subprocess.check_call([sys.executable,str(ROOT/'scripts/audit/auto3-osmb-enrich.py'),'--baseline',str(a.baseline.resolve())])
  if (out/'ro-shared-node-history/retrieval.json').exists():subprocess.check_call([sys.executable,str(ROOT/'scripts/audit/auto3-osmb-ro-source-history.py'),'--apply-evidence'])
  if (out/'md-shared-boundary-history/condrita-history-retrieval.json').exists():subprocess.check_call([sys.executable,str(ROOT/'scripts/audit/auto3-osmb-md-source-history.py'),'--apply-evidence'])
+ if (out/'md-remaining-boundary-history/retrieval.json').exists():subprocess.check_call([sys.executable,str(ROOT/'scripts/audit/auto3-osmb-md-remaining-histories.py'),'--apply-evidence'])
 if __name__=='__main__':main()

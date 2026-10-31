@@ -30,4 +30,5 @@ jobs:
       - run: python scripts/audit/auto3-osmb-geometry-check.py
       - run: python scripts/audit/auto3-osmb-ro-source-history.py
       - run: python scripts/audit/auto3-osmb-md-source-history.py
+      - run: python scripts/audit/auto3-osmb-md-remaining-histories.py
       - run: git diff --exit-code

@@ -79,7 +79,7 @@ RT-ADM este reutilizat explicit pentru Brețcu/Ojdula, Malcoci și relația făr
 | AUTO3-osm-r15434511 | RO | Háromszék | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r15966571 | RO | Decanatul Satu Mare | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r16394664 | RO | Transylvanian Plateau | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
-| AUTO3-osm-r1691800 | MD | Raionul Ialoveni | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r1691800 | MD | Raionul Ialoveni | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE |
 | AUTO3-osm-r1691801 | MD | Municipiul Chișinău | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_20261005_OSM_CONTOUR_EXCLUDE_LATER_NODE_EDIT |
 | AUTO3-osm-r1692515 | MD | Chetriș | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r1692516 | MD | Călinești | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
@@ -102,14 +102,14 @@ RT-ADM este reutilizat explicit pentru Brețcu/Ojdula, Malcoci și relația făr
 | AUTO3-osm-r18694359 | RO | Rezervația forestieră Dobreni | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r18694373 | RO | Rezervația forestieră Pângărați | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r18732279 | RO | Dealul cu Lilieci Cernătești | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
-| AUTO3-osm-r18822134 | MD | Malcoci | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
-| AUTO3-osm-r18822135 | MD | Nimoreni | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r18822134 | MD | Malcoci | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE |
+| AUTO3-osm-r18822135 | MD | Nimoreni | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE |
 | AUTO3-osm-r18936990 | RO | Gruia | ADMINISTRATIVE_TAGGED_LEVEL_OUTSIDE_SELECTED_SCOPE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
 | AUTO3-osm-r18965597 | MD | Regiunea de dezvoltare municipiul Chișinău | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
-| AUTO3-osm-r18967099 | MD | Nimoreni | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r18967099 | MD | Nimoreni | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE |
 | AUTO3-osm-r18968071 | MD | Malcoci | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_PROVENANCE_EXPLAINED | REUSE_REVIEWED_MALCOCI_CONTRACT |
 | AUTO3-osm-r18972669 | MD | Regiunea de Dezvoltare UTA Găgăuzia | ALTERNATE_OSM_OBJECT_SAME_CARTOGRAPHIC_FOOTPRINT | CARTOGRAPHIC_RECONCILED | RETAIN_BOTH_SOURCE_IDENTITIES_NO_IMPORT |
-| AUTO3-osm-r19100157 | MD | Scoreni | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r19100157 | MD | Scoreni | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE |
 | AUTO3-osm-r19113641 | MD | Tochile-Răducani | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r19113653 | MD | Leova | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r19113654 | MD | Sîrma | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
@@ -134,7 +134,7 @@ RT-ADM este reutilizat explicit pentru Brețcu/Ojdula, Malcoci și relația făr
 | AUTO3-osm-r65335 | MD | Нистрения / Приднестровье / Придністров'я | NISTRENIA_SOURCE_ONLY_VIRTUAL_GROUP | CARTOGRAPHIC_SCOPE_EXPLAINED | REUSE_EXISTING_GROUP_EVIDENCE_KEEP_P91_BLOCKED |
 | AUTO3-osm-r7103068 | MD | raionul Vulcănești / Valkaneş dolayı / Вулканештский район | ADMINISTRATIVE_TAGGED_LEVEL_OUTSIDE_SELECTED_SCOPE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
 | AUTO3-osm-r8115626 | MD | Zona Ramsar „Nistrul de Jos“ | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
-| AUTO3-osm-r85827 | MD | Raionul Strășeni | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-osm-r85827 | MD | Raionul Strășeni | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE |
 | AUTO3-osm-r8863573 | RO | Seaca | ADMINISTRATIVE_TAGGED_LEVEL_OUTSIDE_SELECTED_SCOPE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
 | AUTO3-osm-r8887229 | MD | Parcul Național Orhei | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-osm-r9215691 | MD | Huțuleuca | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
@@ -322,7 +322,7 @@ RT-ADM este reutilizat explicit pentru Brețcu/Ojdula, Malcoci și relația făr
 | AUTO3-osm-w889102102 | MD | Î.P. „Buruiană” | ADMINISTRATIVE_TAGGED_WAY_NOT_SELECTED_AS_RELATION | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
 | AUTO3-osm-w954957601 | RO | Zona de protecţie sanitară | NON_ADMINISTRATIVE_OSM_LAYER | CARTOGRAPHIC_SCOPE_EXPLAINED | RETAIN_SOURCE_OUTSIDE_ADMINISTRATIVE_IMPORT |
 | AUTO3-siruta-u64096 | RO | BREȚCU | REVIEWED_OFFICIAL_ID_WITHOUT_DISTINCT_OSM_RELATION | CARTOGRAPHIC_RECONCILED | REUSE_REVIEWED_BRETCU_PARTITION |
-| AUTO3-stat-MD112 | MD | Regiunea de dezvoltare Centru | GEOMETRIC_DIFFERENCE | REVIEW_REQUIRED | HOLD_NO_ACTUAL_CHANGE |
+| AUTO3-stat-MD112 | MD | Regiunea de dezvoltare Centru | GEOMETRIC_DIFFERENCE | CARTOGRAPHIC_RECONCILED | RETAIN_ACCEPTED_SNAPSHOT_CONTOUR_NO_LEGAL_INFERENCE |
 
 ## Reproducere
 
@@ -344,12 +344,18 @@ Controlul Ojdula/Brețcu găsește zero suprapunere interioară și un reziduu d
 
 Istoriile API OSM originale (HTTP 200, SHA-256) ale nodurilor 7251357104/14251631333 și ale căii 777134710 demonstrează changesetul 190023879 din 2026-10-05T09:41:11Z. Mutarea primului nod și inserarea celui de-al doilea reconstruiesc exact ambele geometrii ACTUAL Săvinești/Roznov din contururile OSMB, cu toate celelalte coordonate păstrate. Ora exactă a exportului OSMB nu este dedusă din acest rezultat. Verificare: `python scripts/audit/auto3-osmb-ro-source-history.py`.
 
-Bilanțul curent al registrului: 182 de cazuri au mecanism/proveniență cartografică documentată, iar 116 rămân REVIEW_REQUIRED. Nicio certificare juridică nouă și nicio modificare ACTUAL.
+Bilanțul curent al registrului: 189 de cazuri au mecanism/proveniență cartografică documentată, iar 109 rămân REVIEW_REQUIRED. Nicio certificare juridică nouă și nicio modificare ACTUAL.
 
 ## Istoric comun Condrița / Chișinău
 
 Istoriile API OSM originale arată changesetul 190022801 din 2026-10-05T09:21:08Z: două noduri de capăt mutate, două noduri eliminate, două inserate pe calea 69469001 și un nod inserat pe calea 123810097. Aplicarea exclusivă a acestor operații în memorie reconstruiește exact ambele contururi ACTUAL, fără alte coordonate schimbate. Pentru nodul 1379403420 este folosită versiunea 2 din 5 octombrie; versiunea 3 din 12 octombrie este păstrată ca probă de istoric, dar exclusă din reconstrucție. Nu se deduce ora exportului OSMB și nu se certifică hotarul juridic.
 
-Verificare fără rețea: `python scripts/audit/auto3-osmb-md-source-history.py`. Bilanțul actualizat este 182 mecanisme/proveniențe cartografice documentate și 116 cazuri REVIEW_REQUIRED.
+Verificare fără rețea: `python scripts/audit/auto3-osmb-md-source-history.py`. Bilanțul actualizat este 189 mecanisme/proveniențe cartografice documentate și 109 cazuri REVIEW_REQUIRED.
 
 Date cartografice și istorii: © OpenStreetMap contributors, ODbL; răspunsurile API originale păstrează informațiile de atribuire și proveniență.
+
+## Încă șapte istorii MD
+
+Șapte contururi sunt reconstruite exact din geometriile OSMB folosind istoriile originale ale nodurilor și căilor: Ialoveni 1691800, Malcoci 18822134, Nimoreni 18822135 și 18967099, Scoreni 19100157, Strășeni 85827 și regiunea statistică Centru MD112. Fiecare muchie istorică afectată are versiuni de noduri și cale cu intervale de valabilitate suprapuse; muchiile introduse sunt atestate de snapshotul acceptat. Sunt excluse versiunile ulterioare fiecărui snapshot. Nu se deduce ora exactă a exportului OSMB, nu se certifică hotare juridice și nu se schimbă ACTUAL.
+
+Reproducere fără rețea: `python scripts/audit/auto3-osmb-md-remaining-histories.py`. Registrul are acum 189 cazuri cu mecanism/proveniență cartografică documentată și 109 REVIEW_REQUIRED; toate păstrează separat verdictul juridic și `resolved_globally=false`.
