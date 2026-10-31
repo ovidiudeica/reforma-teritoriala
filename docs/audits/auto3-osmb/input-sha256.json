@@ -1,0 +1,472 @@
+{
+  "public/data/actual-entities.json": {
+    "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
+    "bytes": 15390013,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/geo/actual/ro-overview.geojson": {
+    "sha256": "d2cd172869befc38ad90614b44201da428ed68cd825de6f2683d36f566f4414b",
+    "bytes": 5761171,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/geo/actual/ro-local.geojson": {
+    "sha256": "6fd4fed8d11664e475d962b33085665982b785dd88f7273cd9232ad32169d771",
+    "bytes": 37689294,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/geo/actual/ro-detail.geojson": {
+    "sha256": "c28d4b350d75001bf1843ba95bb8ace70ea9edef0b9def43209f28ff9183c8a9",
+    "bytes": 189101,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/geo/actual/ro-statistical.geojson": {
+    "sha256": "04668ce52cd230f7e9f592f7334c37ac4a0161c9417131d1c8bf0d9392af71e7",
+    "bytes": 3755486,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/geo/actual/md-overview.geojson": {
+    "sha256": "833aed09237fcebecc1e15bfa33c59e3ba5e685603df64c7fb321d37ab88b5fb",
+    "bytes": 1977139,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/geo/actual/md-local.geojson": {
+    "sha256": "f037d148065475b486cb6a6165db4e350966add1ef5b1c49e9d0a0b2270ea649",
+    "bytes": 6821018,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/geo/actual/md-detail.geojson": {
+    "sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe",
+    "bytes": 10993096,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/geo/actual/md-statistical.geojson": {
+    "sha256": "bcbc2f81c4949c35b1b841db8da97ce12d89ac8bfcd12cbad46a79df8a1bf8bc",
+    "bytes": 1085802,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/osm-current.json": {
+    "sha256": "bc005e361efe419b8e64df972f181378e8411a0c8295cce15595cb9037d104f3",
+    "bytes": 112800,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/process/build-osm-actual.mjs": {
+    "sha256": "3ffcfdfb90b9ebe6d23ef318cc3d0767c1eaff3d21365ad34252f7b5355d87fc",
+    "bytes": 20767,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/actual-settlement-policy.json": {
+    "sha256": "27c3e9fb1b1b3c87d2489320268ad5c85bf26dc53368d19d098fda476fbe2d2d",
+    "bytes": 8259,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/actual-statistical-policy.json": {
+    "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662",
+    "bytes": 3904,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-official-only-reviewed-resolutions.json": {
+    "sha256": "f636286282bf96f52750b8049ce0d02f59b105981ec15b2c43a1d9f3a6aafb6a",
+    "bytes": 2526,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-bretcu-ojdula-terminal-closure-reviewed.json": {
+    "sha256": "f6457965f9003ff25d1d22663dd646d6569e9e7cd9aa24e276f7e7b4be3ee5cf",
+    "bytes": 3847,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/md-cuatm-individual-review.json": {
+    "sha256": "0f66223006c5efc658ae50d0a53f63dfe6e7768417d4b08d05e287cf257030af",
+    "bytes": 3093,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/md-malcoci-reviewed-current-osm.json": {
+    "sha256": "e5ae19cd3747888e22abe4f1d6830744a68a0c6de8b16454b2caf2b2c85294bf",
+    "bytes": 2168,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/md-current-osm-boundary-derivation.mjs": {
+    "sha256": "66ce46afc5d52b6d7ab9a6b5c8f94d15e70978cafe811b90be41d0bd55f3af02",
+    "bytes": 6633,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "public/data/p909-nistrenia-osm-navigation.json": {
+    "sha256": "64d90b0c5b16c71546f741b3a20181ac01ebf5106f70080522d8601d4bd83bae",
+    "bytes": 4777,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2/identity-decision-register.json": {
+    "sha256": "bbf7460d31a9fa85f13cbf901056048d50f6e54774124d0803737d0b3be24a24",
+    "bytes": 18171,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-5/osmb-cartographic-closure.json": {
+    "sha256": "36e391562944b0114ab3689217ca1c51fd057d3b7cf9aedf07316b300e9935c2",
+    "bytes": 3408,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/actual-statistical-source-bundle.json": {
+    "sha256": "3aee28691f87451768335988f9306a7e6fd5c4f5595ab0207562579877c0af94",
+    "bytes": 740,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/administrative-official-sources.json": {
+    "sha256": "cae8f390b10cc6e233d219620ff838f354482703a97ff4345e84146b61d6ea7b",
+    "bytes": 3316,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/md-balti-city-boundary-changeset-semantics.json": {
+    "sha256": "2394a3eab68a14b40f143a105bed6f183ee83c61b9d45b7c76d8947ae62a1da7",
+    "bytes": 64571,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/md-balti-city-boundary-way-history.json": {
+    "sha256": "2c6b6b7117f2995917a76c079fe25069534b2d210aaede23cdc3b631bbfeb73e",
+    "bytes": 27747,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/md-cuatm-reviewed-non-cuatm-overrides.json": {
+    "sha256": "b4862537dd0d7dc3b45aa8e2f097941c7041eaff58bb023cc20cb4e27c963252",
+    "bytes": 1062,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/md-cuatm-reviewed-overrides.json": {
+    "sha256": "06dd3ad01c379f7b72fe3210bbffde6d69699b9f80ded9a69c3076e2dd526a30",
+    "bytes": 2983,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/md-cuatm-semantic-policy.json": {
+    "sha256": "7d4b43d38f542e8de284d6aa47f66ed0cbf9e0a7abe82f4edc8bb23b6a9b933e",
+    "bytes": 2584,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/md-nuts-2017.json": {
+    "sha256": "894b804f981ef3a9d02e5e1564bae39951ae06e7e12f99c7597051ea89e67a5b",
+    "bytes": 3223,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/md-statistical-osm-current.json": {
+    "sha256": "31c81cfa8a30577b4047e40cbefadbee0f999ea6ffdcd6f9232c5e297cd7d510",
+    "bytes": 5056,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-ancpi-ojdula-reviewed.json": {
+    "sha256": "eb1da452381b921b4addc7733dd8a6ed992b46d12691b8f69c527f9f31e4e084",
+    "bytes": 172550,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-level9-exception-evidence.json": {
+    "sha256": "bfb41fbe928c475c0671ae9857f2501762fe42fdba10580e7fafc58b7349618c",
+    "bytes": 2438,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-nuts-2024.json": {
+    "sha256": "c2ddd30974beb9a9b4bc540823ec9052f89d73e01c05a1a3cc8f828554d49962",
+    "bytes": 8173,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-official-reconciliation-exceptions.json": {
+    "sha256": "79bf983b1bae1ddbff48aaec0e983e64c6aa836fef0754fdba62db50d6e6bfca",
+    "bytes": 468,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-osm-level9-exception-history.json": {
+    "sha256": "d1af6837791fb681bc2be172b9ec15584aa6034fd07f611115f02d41bd934c01",
+    "bytes": 7761,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-osm-ojdula-14735731-reviewed-shell.json": {
+    "sha256": "cb40ccd13ab0d521781a7d1d1cc476d3c7421447f4a1bed81f34ffac9d227e9e",
+    "bytes": 143856,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-other-level-reviewed-resolutions.json": {
+    "sha256": "7ee38f5d93ce539f36a7fa026b14a009da904d3742f6030cc5e60717c307be79",
+    "bytes": 2191,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-parent-assignment-reviewed-resolutions.json": {
+    "sha256": "2e6317598c42950c6ff8611ee47a82f85bd3c249c6d72686ba117567ce4a87dc",
+    "bytes": 2704,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-release-gate-exceptions.json": {
+    "sha256": "0b57bc9ab43aaac1d8c966d168bfa5156435ba17fe8308792503073359487cc7",
+    "bytes": 174,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-semantic-type-reviewed-resolutions.json": {
+    "sha256": "d8a3ba143c5a94ad12500545ae75a048cbb9958fd75dcfb08a705f8f20d51d2f",
+    "bytes": 3094,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-siruta-reviewed-overrides.json": {
+    "sha256": "b058081a7ccb56a7cc5ba73094648bc8d0c6967beb04da051a3778051bdd86cc",
+    "bytes": 3833,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-statistical-osm-current.json": {
+    "sha256": "c35312742603fe66ade29d70029e29875071f8e58aa1f33cbdcd0b74ec1ee00c",
+    "bytes": 6011,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-10/bucharest-sector-boundary-reconciliation.json": {
+    "sha256": "7fc11db10dd529caa7d37f38bfaac1cdb6d0b52b3ff4423829badbb365963605",
+    "bytes": 10778,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-11/post1979-normative-triage.json": {
+    "sha256": "d0d97984d7aee2ab7b28ad49084d49b5fb6437ae77178ced9575717fb5e905ea",
+    "bytes": 12817,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-12/version-by-version-review.json": {
+    "sha256": "1dacabf37dbb3a31a8718ed526703b5bc23f9d61e96df97a1d188e816141c2ac",
+    "bytes": 10280,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-13-1/artifact-receipt.json": {
+    "sha256": "557fb02330cd92e3fe1defd48fc06b8f41827bd0ee26b911f517107c5490f65c",
+    "bytes": 221,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-13-1/execution-diagnostic.json": {
+    "sha256": "ad4fecb47bf183796e4060157be25036a5732f1778bb0a3b922f04e605d87574",
+    "bytes": 1107,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-13-1/topology-register.json": {
+    "sha256": "1013bc9de39f668c94e462efc7d3ca5a247c6d7997a07a5adfb60385ce315c20",
+    "bytes": 1537,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-5/README.md": {
+    "sha256": "ff28fd67a57462c4f99563574fb594d11df46a5b0f209fd3bad327ad674b476e",
+    "bytes": 1663,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-6/legal-exceptions-resumption.json": {
+    "sha256": "7e16c9666d057e97b11e7eff6234943403d593dbcf04a1570abbc4ceb5e43b36",
+    "bytes": 11216,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-7/normative-identity-register.json": {
+    "sha256": "4ce49d63506c7f7392a826bdec7df2c471a1a4e761490dd54aac312889f032f1",
+    "bytes": 15314,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json": {
+    "sha256": "51e73ee6359593a0e222fe27066252c02c2bf105741954ef47f46a06e4024ad8",
+    "bytes": 17724,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2-9/public-source-recovery.json": {
+    "sha256": "1499780c7f66d237f491d761e19cc277404bcf970ae29ae924f9b55ba2eff4e7",
+    "bytes": 5879,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2/FINAL-ACCEPTANCE.md": {
+    "sha256": "c08cc16ab8040863b110d72ce25231f9ded6a78be97422063b46ae0466ed5d9d",
+    "bytes": 4743,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-adm2/README.md": {
+    "sha256": "09d3a9ce12f38c9c1ee7b82c767a9e16ec1b6358a9dd8487a2edf199a7532435",
+    "bytes": 7526,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-audit1-2-1-independent-verification-20261029.md": {
+    "sha256": "e0e2dfbc817872ef40ca2122da4e6b505aaeae6411071dddcf24d1691b764fa6",
+    "bytes": 3989,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-audit1-2/README.md": {
+    "sha256": "3a05b564b82d7b55f98fc6842c99de4204908a9bb4f10a1ce8e916b4b25af0b0",
+    "bytes": 8083,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-audit1-2/evidence/ci-initial.json": {
+    "sha256": "07671653cdeb2d08654fd6639ed7682391e47c7d8f1c81b01134847772c3746f",
+    "bytes": 5224,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-audit1-2/evidence/local-history-cache.json": {
+    "sha256": "745b2021e45dfbba50055fe536f2b5956b769456eda2696c6cf7733c168ac2d6",
+    "bytes": 8564,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-audit1-2/evidence/official-retrieval.json": {
+    "sha256": "aca162b9be577b5c411895c793c21c97bdb691aa725779cde2b85d9f19357149",
+    "bytes": 1027,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-audit1-2/evidence/raw-original-verification.json": {
+    "sha256": "6685cdaf2cb17494d83f4ddb6a3a3e778b15652800145044c10ca626ef1ca639",
+    "bytes": 118567,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "docs/audits/rt-audit1-2/evidence/sha256-manifest.json": {
+    "sha256": "8b4215c8dcf7772424e81ac999c2f6777e6159458e5b2d21d5046fdd735e71d7",
+    "bytes": 1139,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-build-environment.mjs": {
+    "sha256": "c3b315a2414f4401ea4ef3ce5dd36d00d3a867540e42e5b1c2ed41d74145d3ef",
+    "bytes": 21873,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-byte-stability.mjs": {
+    "sha256": "2f5dbdefe3697fc25ee8c40bd49134b7d7b056f2352a9b59c714a695c65f92cb",
+    "bytes": 3652,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-candidate-lifecycle.mjs": {
+    "sha256": "26a7a552a2db52208dbf960f6b0f4e90066d1e85052211f36fe79792c7802807",
+    "bytes": 10742,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-completeness.mjs": {
+    "sha256": "9e2ff49b1efe0a5bc37a741bc59b9cc56f0a2c59d4fec766ee8014bc34d4fb64",
+    "bytes": 342,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-host-trust.mjs": {
+    "sha256": "680f335639ff92f48c8f5becbd98d510369bcb8640f2cf8a433d9909c7776e94",
+    "bytes": 14100,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-npm-dependency-bundle.mjs": {
+    "sha256": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
+    "bytes": 5547,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-oci-builder.mjs": {
+    "sha256": "54770d758d55b4ccbfebdf75e76883b436bdf123b42a30826c90f15fbc77454c",
+    "bytes": 8869,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-osm-fidelity.mjs": {
+    "sha256": "f39c200b9db06eb67f74677965a1aaa0fc406f6ab44ccdf4d34ef4e4f00f1f8d",
+    "bytes": 5069,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-p9-jurisdiction-promotion-gate.mjs": {
+    "sha256": "7ac3e217eb0015a83f6673f3c29fde254fdd2765b4787ffdd979b7188e1af6d5",
+    "bytes": 5938,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-review-evidence-bundle.mjs": {
+    "sha256": "30cbba94bf216003e9e07ac8df591b8e2b7ba95e68a4ac5ebb7cfb73fee33123",
+    "bytes": 4935,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-runtime-image.mjs": {
+    "sha256": "be4a9ee64e87651b439d26d72740cd0efe68950ef0445b5ca1d90ad031266acb",
+    "bytes": 7246,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-semantic-fingerprint.mjs": {
+    "sha256": "32c7652274b9c7c5836ca9708fb84c3280c970efb021cd3dd2fd7214e29db423",
+    "bytes": 4961,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-source-bundle.mjs": {
+    "sha256": "f0e18da18533e0ff3e69b61bf6b8be7811de8d454757abadad177debe41b58de",
+    "bytes": 9005,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/actual-statistical-public.mjs": {
+    "sha256": "a881884e85cc4c2081af6b7c7a71bb2dc8c94b5ed4ed99b892e508c3d26af227",
+    "bytes": 19605,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/bretcu-ojdula-hybrid-partition.mjs": {
+    "sha256": "89e895e07d2661851a635c7a73f57228ab160ab6b61f29efe1cf632498353cfc",
+    "bytes": 15704,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/documentary-response.mjs": {
+    "sha256": "ba952918305c0537742e51343dfadbfd47a89728a11fd085ca6952c25cee9598",
+    "bytes": 704,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/md-osm-invalid-geometry-fallback.mjs": {
+    "sha256": "224d21a8c831821ceb2f9170e5ef349492410541e486eebe97a6648991274cca",
+    "bytes": 9573,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/md-parent-hierarchy-overrides.mjs": {
+    "sha256": "32489e20d3b89d0c2f7414d6aaa0eb56967f1ff313fe0060440409653b4da434",
+    "bytes": 3072,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/ni-evidence-replay.mjs": {
+    "sha256": "b888a2f297111770caab9578b9751d8f8b981e60fd3f6d7f8b3f5830f7d697fd",
+    "bytes": 5578,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/ni-independent-review.mjs": {
+    "sha256": "139c483b3d5ec8ead7a0a6ed54950d42d94a3a8263b7c4bbebab6b8e851119eb",
+    "bytes": 11988,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/osm-adaptive-transport.mjs": {
+    "sha256": "95bae6a81c749d920484dd3fe41eb7b7ad62646e9af351bc8e72853bda5be94c",
+    "bytes": 2331,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/osm-closure-audit.mjs": {
+    "sha256": "f3c65a3d0a07ac2b0748a9aeb6f6bac9aa229fe4f454d7f0e63b99c935732c31",
+    "bytes": 3767,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/osm-element-index.mjs": {
+    "sha256": "da082a573f849b0b8c82ac907d01913f7119e05b2c6300d230877c99a20a15c4",
+    "bytes": 1006,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/osm-fix4-preflight.mjs": {
+    "sha256": "535ce135b3d138e65a00d82d34210498f04cc55c65bf086921f506f137cc5d63",
+    "bytes": 12854,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/osm-fix5-reconcile.mjs": {
+    "sha256": "4d9233c47db9f591079feb68b284d47da1851d1dafde43cd850147463aa2fc57",
+    "bytes": 9139,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/osm-source-continuity.mjs": {
+    "sha256": "f66f1e183d8f6deb4ca88d5a1dd8239d7fbe78795de0ca5eafc57d3f72d50d5b",
+    "bytes": 4926,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/osm-source-scope-conflicts.mjs": {
+    "sha256": "fba53eeaef6db241d23307fbdb4972b30dd1895cf433f62c129d649089c093fe",
+    "bytes": 3296,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "scripts/lib/p82-topology.mjs": {
+    "sha256": "e3de90e14c74d9f01981ebcfaaf699e1007ccd99767fd11d4cbcf21980c8a3be",
+    "bytes": 4056,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/osm-snapshots/ro-4a09c6cd6e41f4df814505a9813dde265e93b991752b44cb88545c4ed6a16d86.json.gz": {
+    "sha256": "f3ef2ffd15c286d443e6181a6a60bee2008233574550854764ca49e6a3ef5832",
+    "semantic_sha256": "4a09c6cd6e41f4df814505a9813dde265e93b991752b44cb88545c4ed6a16d86",
+    "snapshot_at": "2026-10-05T23:50:05.218Z"
+  },
+  "data/sources/osm-snapshots/md-cd7e0ebb5dc9f691e4c160609c164915f7ebea4bcb4c4adbe0307e33f76bf417.json.gz": {
+    "sha256": "d4fb245c714038d4e9bbb5273074c6ee1ad23555441289244c1d97c0afdf72b0",
+    "semantic_sha256": "cd7e0ebb5dc9f691e4c160609c164915f7ebea4bcb4c4adbe0307e33f76bf417",
+    "snapshot_at": "2026-10-05T23:50:05.218Z"
+  },
+  "data/sources/cuatm-current.json": {
+    "sha256": "02e367e8c830ea9f286610fc49409cd4cc6ed5f9ec53af281b6566ad0f3b7575",
+    "bytes": 611165,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  },
+  "data/sources/ro-siruta-current.json": {
+    "sha256": "022875143436eb89e01467a65ff36d4f67841b7199e4bb0a9a65f0662b469c0f",
+    "bytes": 6080569,
+    "git_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd"
+  }
+}

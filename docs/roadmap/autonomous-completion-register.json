@@ -1,0 +1,80 @@
+{
+  "schema": "autonomous-completion-register-v1",
+  "date": "2026-10-31",
+  "baseline_commit": "f38e6b81c2da03644e5558b9b25c0481c3f17dbd",
+  "actual_mutation_allowed": false,
+  "p91_authorized": false,
+  "tasks": [
+    {
+      "id": "AUTO-1",
+      "description": "Certificare CI push post-merge #480",
+      "status": "POST_MERGE_VERIFIED",
+      "priority": 1,
+      "dependencies": [],
+      "evidence": [
+        "docs/audits/auto3-osmb/auto1-postmerge-ci.json",
+        "docs/audits/auto3-osmb/auto1-postmerge-checks.json"
+      ],
+      "acceptance": "11 push runs and 25 exact-commit checks completed successfully, including all six required checks",
+      "next_action": "None for this pinned baseline; independently verify any later merge"
+    },
+    {
+      "id": "AUTO-3",
+      "description": "Registru exhaustiv al celor 298 de excepții OSMB–ACTUAL",
+      "status": "REVIEW_REQUIRED",
+      "priority": 1,
+      "dependencies": [],
+      "evidence": [
+        "docs/audits/auto3-osmb/register.json",
+        "docs/audits/auto3-osmb/decision-matrix.csv",
+        "docs/audits/auto3-osmb/sha256-manifest.json"
+      ],
+      "acceptance": "298 unique records, 154 RO/144 MD, reproducible geometry, unchanged ACTUAL, protected P9.1, successful PR checks and post-merge verification",
+      "local_validation": "PASS: evidence guard and independent targeted geometry verification",
+      "next_action": "Publish separate evidence PR, verify exact head CI, merge only if accepted, verify push CI"
+    },
+    {
+      "id": "AUTO-3-FOLLOWUP",
+      "description": "Dovezi suplimentare pentru cele 118 cazuri REVIEW_REQUIRED",
+      "status": "TODO",
+      "priority": 2,
+      "dependencies": [
+        "AUTO-3"
+      ],
+      "risk": "Administrative and legal identity/footprint inference",
+      "evidence": [
+        "docs/audits/auto3-osmb/register.json"
+      ],
+      "acceptance": "Each remaining_evidence item supported by dated independent evidence; classification alone must not close legal gaps",
+      "next_action": "Use the individual evidence requirements; do not import OSMB-only objects automatically"
+    },
+    {
+      "id": "AUTO-2",
+      "description": "Continuare RT-ADM.2.14.1: modificatori, repere istorice și confruntare juridică liniară București",
+      "status": "IN_PROGRESS",
+      "priority": 2,
+      "dependencies": [
+        "AUTO-1"
+      ],
+      "source_branch": "audit/rt-adm-2-14-legal-boundaries-bucharest",
+      "evidence": [
+        "docs/audits/rt-adm2-12/version-by-version-review.json"
+      ],
+      "acceptance": "Complete applicable modifier/rectification chain, official texts, all six extracted routes, sourced historical landmarks, segment-level comparison; no assumed legal equivalence with OSMB",
+      "next_action": "Recheck primary official sources and reuse existing branch evidence; keep incomplete findings open"
+    },
+    {
+      "id": "P9.1",
+      "description": "Intervenții protejate asupra ACTUAL",
+      "status": "BLOCKED",
+      "priority": 0,
+      "dependencies": [
+        "separate explicit authorization",
+        "complete required evidence and gates"
+      ],
+      "risk": "Protected administrative/geometric mutation",
+      "acceptance": "Separate authorization and all existing entry gates",
+      "next_action": "No execution authorized"
+    }
+  ]
+}
