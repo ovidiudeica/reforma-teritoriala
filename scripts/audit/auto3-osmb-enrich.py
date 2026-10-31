@@ -44,6 +44,6 @@ def main():
  (out/'README.md').write_text(report,encoding='utf8',newline='\n')
  # Bundle integrity includes the updated evidence, not a recursive hash of the manifest itself.
  m={p.relative_to(out).as_posix():{'sha256':sha(p.read_bytes()),'bytes':p.stat().st_size} for p in sorted(out.rglob('*')) if p.is_file() and p.name!='sha256-manifest.json'}
- (out/'sha256-manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
+ (out/'sha256-manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf8',newline='\n')
  print(json.dumps({'status':'PASS','cases_enriched':len(reg['records']),'official_inputs':len(inputs),'manifest_files':len(m)}))
 if __name__=='__main__':main()

@@ -66,15 +66,17 @@ def main():
    if line.startswith('| AUTO3-'):
     cid=line.split('|')[1].strip();row=byid[cid];lines[i]='| '+' | '.join(str(row[k]).replace('|','/') for k in ['case_id','jurisdiction','name','category','cartographic_status','decision'])+' |'
   readme='\n'.join(lines)+'\n\n## Istoric OSM suplimentar\n\nIstoriile API OSM originale (HTTP 200, SHA-256) ale nodurilor 7251357104/14251631333 și ale căii 777134710 demonstrează changesetul 190023879 din 2026-10-05T09:41:11Z. Mutarea primului nod și inserarea celui de-al doilea reconstruiesc exact ambele geometrii ACTUAL Săvinești/Roznov din contururile OSMB, cu toate celelalte coordonate păstrate. Ora exactă a exportului OSMB nu este dedusă din acest rezultat. Verificare: `python scripts/audit/auto3-osmb-ro-source-history.py`.\n\nDupă această probă nouă, 180 de cazuri au mecanism/proveniență cartografică documentată, iar 118 rămân REVIEW_REQUIRED. Nicio certificare juridică nouă și nicio modificare ACTUAL.\n'
+  pending=sum(x['cartographic_status']=='REVIEW_REQUIRED' for x in geometries['records'])
+  readme=readme.replace('După această probă nouă, ','Bilanțul curent al registrului: ').replace('180 de cazuri',f'{len(geometries["records"])-pending} de cazuri').replace('118 rămân',f'{pending} rămân')
   (OUT/'README.md').write_text(readme,encoding='utf8',newline='\n')
   roadmap=ROOT/'docs/roadmap/autonomous-completion-register.json'
   if roadmap.exists():
    state=load(roadmap)
    for task in state['tasks']:
-    if task['id']=='AUTO-3-FOLLOWUP':task['description']='Dovezi suplimentare pentru cele 118 cazuri REVIEW_REQUIRED'
+    if task['id']=='AUTO-3-FOLLOWUP':task['description']=f'Dovezi suplimentare pentru cele {pending} cazuri REVIEW_REQUIRED'
    roadmap.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
   manifest={p.relative_to(OUT).as_posix():{'sha256':sha(p.read_bytes()),'bytes':p.stat().st_size} for p in sorted(OUT.rglob('*')) if p.is_file() and p.name!='sha256-manifest.json'}
-  (OUT/'sha256-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
+  (OUT/'sha256-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf8',newline='\n')
  else:
   assert load(proofpath)==result
   assert all(r['cause_status']=='OFFICIAL_OSM_NODE_AND_WAY_VERSION_DIVERGENCE_DEMONSTRATED' for r in geometries['records'] if r['case_id'] in {x['case_id'] for x in proofs})

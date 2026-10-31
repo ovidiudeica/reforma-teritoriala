@@ -9438,7 +9438,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_SHARED_BOUNDARY_REVISION_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -9548,6 +9548,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "The moved endpoints, removed nodes and inserted nodes of changeset 190022801 reconstruct ACTUAL exactly; the 2026-10-12 node revision is excluded",
+          "proof": "docs/audits/auto3-osmb/md-shared-boundary-history/condrita-exact-cause.json",
+          "proof_sha256": "0688b4d3078f22987ca2897ec41dda1952595d9229c64a4732177dd35503762b"
         }
       ],
       "existing_audit_evidence": [
@@ -9574,15 +9579,19 @@
           "line": 2,
           "sha256": "32489e20d3b89d0c2f7414d6aaa0eb56967f1ff313fe0060440409653b4da434",
           "excerpt": "const CHISINAU_MUNICIPALITY_RELATION_ID=1691801;"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-shared-boundary-history/condrita-exact-cause.json",
+          "sha256": "0688b4d3078f22987ca2897ec41dda1952595d9229c64a4732177dd35503762b"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_20261005_OSM_CONTOUR_EXCLUDE_LATER_NODE_EDIT",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export timestamp remains uncertified; this is a cartographic cause, not legal boundary certification."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,
@@ -12538,7 +12547,7 @@
         ]
       },
       "category": "GEOMETRIC_DIFFERENCE",
-      "cause_status": "DIFFERENT_SOURCE_CONTOURS_WITH_MEASURED_SHARED_CHANGES",
+      "cause_status": "OFFICIAL_OSM_SHARED_BOUNDARY_REVISION_DEMONSTRATED",
       "demonstrated_findings": [
         {
           "finding": "Symmetric difference reproduced against the exact committed ACTUAL public geometry",
@@ -12648,6 +12657,11 @@
         },
         {
           "causal_scope": "Cartographic mechanism/import selection only; it does not demonstrate applicable legal boundary or every historical edit."
+        },
+        {
+          "finding": "The moved endpoints, removed nodes and inserted nodes of changeset 190022801 reconstruct ACTUAL exactly; the 2026-10-12 node revision is excluded",
+          "proof": "docs/audits/auto3-osmb/md-shared-boundary-history/condrita-exact-cause.json",
+          "proof_sha256": "0688b4d3078f22987ca2897ec41dda1952595d9229c64a4732177dd35503762b"
         }
       ],
       "existing_audit_evidence": [
@@ -12662,15 +12676,19 @@
           "line": 3468,
           "sha256": "bc005e361efe419b8e64df972f181378e8411a0c8295cce15595cb9037d104f3",
           "excerpt": "1813319,"
+        },
+        {
+          "path": "docs/audits/auto3-osmb/md-shared-boundary-history/condrita-exact-cause.json",
+          "sha256": "0688b4d3078f22987ca2897ec41dda1952595d9229c64a4732177dd35503762b"
         }
       ],
       "geometry_bundle": "geometry-cases.json.gz",
-      "cartographic_status": "REVIEW_REQUIRED",
+      "cartographic_status": "CARTOGRAPHIC_RECONCILED",
       "administrative_verdict": "EXISTING_ACCEPTED_IDENTITY_PRESERVED",
       "legal_verdict": "NO_NEW_LEGAL_CERTIFICATION",
-      "decision": "HOLD_NO_ACTUAL_CHANGE",
+      "decision": "RETAIN_ACCEPTED_20261005_OSM_CONTOUR_EXCLUDE_LATER_NODE_EDIT",
       "remaining_evidence": [
-        "Dated OSMB per-object version or independent edit/node history linking each changed segment to a source epoch; do not infer a chronology from the filename."
+        "Exact OSMB per-object export timestamp remains uncertified; this is a cartographic cause, not legal boundary certification."
       ],
       "resolved_globally": false,
       "actual_mutation_allowed": false,

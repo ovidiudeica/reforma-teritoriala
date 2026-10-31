@@ -1,0 +1,8 @@
+# Preserve evidence bytes and SHA-256 fidelity on Windows and Linux.
+/docs/audits/auto3-osmb/** -text
+/docs/audits/auto2-bucharest-text-20261031/** -text
+/scripts/audit/auto3-osmb-* text eol=lf
+/scripts/audit/auto2-bucharest-text-* text eol=lf
+/.github/workflows/auto3-osmb-reconciliation.yml text eol=lf
+/.github/workflows/auto2-bucharest-text.yml text eol=lf
+/docs/roadmap/autonomous-completion-register.json text eol=lf
