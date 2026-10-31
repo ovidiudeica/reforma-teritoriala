@@ -78,18 +78,22 @@
     {
       "id": "AUTO-3-MD-HISTORY",
       "description": "Exact causal reconstruction for Condrita/Chisinau from original OSM histories",
-      "status": "REVIEW_REQUIRED",
+      "status": "POST_MERGE_VERIFIED",
       "pr": 482,
       "dependencies": [
         "AUTO-3"
       ],
-      "proposed_cartographic_documented": 182,
-      "proposed_review_required": 116,
       "evidence": [
-        "https://github.com/ovidiudeica/reforma-teritoriala/pull/482"
+        "https://github.com/ovidiudeica/reforma-teritoriala/pull/482",
+        "docs/audits/auto2-bucharest-text-20261031/auto3-md-postmerge-verification.json"
       ],
       "acceptance": "Original response SHA-256, exact reconstruction, successful CI and merge without ACTUAL changes",
-      "next_action": "Verify PR 482 exact head CI, merge only if accepted, verify push runs"
+      "next_action": "No further cartographic reconstruction needed for these two pinned revisions; administrative/legal gaps remain separate",
+      "cartographic_documented": 182,
+      "review_required": 116,
+      "tested_head": "7fdd546bf456ea7a0a43508722576d86a90587d2",
+      "merge_commit": "8d7a8585340ebf83f06a7ee0d6aca8a34b1df322",
+      "postmerge_evidence": "docs/audits/auto2-bucharest-text-20261031/auto3-md-postmerge-verification.json"
     },
     {
       "id": "P9.1",
