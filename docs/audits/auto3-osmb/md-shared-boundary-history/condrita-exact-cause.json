@@ -1,0 +1,93 @@
+{
+  "cases": [
+    {
+      "case_id": "AUTO3-osm-r1813319",
+      "reconstructed_geometry_equals_actual": true,
+      "reverse_changed_way_subchain_for_ring_orientation": true,
+      "source_geometry_modified": false
+    },
+    {
+      "case_id": "AUTO3-osm-r1691801",
+      "reconstructed_geometry_equals_actual": true,
+      "reverse_changed_way_subchain_for_ring_orientation": true,
+      "source_geometry_modified": false
+    }
+  ],
+  "changeset": 190022801,
+  "timestamp": "2026-10-05T09:21:08Z",
+  "coordinate_changes": [
+    {
+      "node": 353223870,
+      "old_version": 2,
+      "new_version": 3,
+      "old_coordinate": [
+        28.6177033,
+        47.0342546
+      ],
+      "new_coordinate": [
+        28.6176407,
+        47.0341981
+      ],
+      "changeset": 190022801
+    },
+    {
+      "node": 1379403420,
+      "old_version": 1,
+      "new_version": 2,
+      "old_coordinate": [
+        28.6177618,
+        47.0343772
+      ],
+      "new_coordinate": [
+        28.617828,
+        47.0343526
+      ],
+      "changeset": 190022801
+    },
+    {
+      "removed_node": 12313798520,
+      "inserted_nodes": [],
+      "old_coordinate": [
+        28.616273,
+        47.0350707
+      ],
+      "new_coordinates": [],
+      "changeset": 190022801
+    },
+    {
+      "removed_node": 7298612264,
+      "inserted_nodes": [
+        14251506233,
+        14251506234
+      ],
+      "old_coordinate": [
+        28.6164133,
+        47.0351756
+      ],
+      "new_coordinates": [
+        [
+          28.6164168,
+          47.0351841
+        ],
+        [
+          28.6177658,
+          47.0343892
+        ]
+      ],
+      "changeset": 190022801
+    }
+  ],
+  "inserted_connector_node": 14251506230,
+  "inserted_connector_coordinate": [
+    28.6177012,
+    47.034248
+  ],
+  "later_node_version_excluded": {
+    "node": 1379403420,
+    "version": 3,
+    "timestamp": "2026-10-12T17:52:07Z"
+  },
+  "osmb_exact_export_time_certified": false,
+  "actual_modified": false,
+  "legal_boundary_certified": false
+}
