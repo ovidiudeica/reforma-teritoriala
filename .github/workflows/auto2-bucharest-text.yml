@@ -1,0 +1,29 @@
+name: AUTO-2 Bucharest text evidence
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto2-bucharest-text-20261031/**'
+      - 'scripts/audit/auto2-bucharest-text-*'
+      - '.github/workflows/auto2-bucharest-text.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto2-bucharest-text-20261031/**'
+      - 'scripts/audit/auto2-bucharest-text-*'
+      - '.github/workflows/auto2-bucharest-text.yml'
+permissions:
+  contents: read
+jobs:
+  auto2-text-evidence:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: python scripts/audit/auto2-bucharest-text-compare.py
+      - run: node scripts/audit/auto2-bucharest-text-verify.mjs
+      - run: git diff --exit-code
