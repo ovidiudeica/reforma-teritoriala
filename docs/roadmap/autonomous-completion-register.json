@@ -258,12 +258,14 @@
     "actual_mutation_allowed": false,
     "p91_authorized": false,
     "next_action": "Minimal launch complete for declared ACTUAL scope; preserve documented post-launch corpus/territory backlog and resume legal cases only for demonstrated critical product impact.",
-    "accepted_runtime_commit": "45f497093897a8995c6777ccadd53a1f89e9985d",
     "implementation_pr": 488,
     "tested_head": "1832047d05ea108b5c84a0a2e1aa17ce28ae9e3c",
     "acceptance_evidence": "docs/audits/product-launch-20261031/acceptance.json",
     "published_ci_run": 41232324618,
     "published_runtime_resources": 440,
-    "published_geojson_resources": 125
+    "published_geojson_resources": 125,
+    "accepted_core_runtime_commit": "45f497093897a8995c6777ccadd53a1f89e9985d",
+    "coverage_wording_clarification_pr": 489,
+    "publication_policy": "Core acceptance is pinned to PR488. Later UI wording changes require their own exact-head CI and post-merge published verification; a direct-ID binding gap is not a missing-card or missing-geometry proof."
   }
 }

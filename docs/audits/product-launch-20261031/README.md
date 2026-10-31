@@ -1,6 +1,6 @@
 # Acceptarea lansării funcționale ACTUAL
 
-**READY pentru domeniul ACTUAL declarat, cu amânările explicite.** Versiunea publicată acceptată este `45f497093897a8995c6777ccadd53a1f89e9985d`, PR [#488](https://github.com/ovidiudeica/reforma-teritoriala/pull/488), head testat `1832047d05ea108b5c84a0a2e1aa17ce28ae9e3c`.
+**READY pentru domeniul ACTUAL declarat, cu amânările explicite.** Versiunea de bază publicată și verificată este `45f497093897a8995c6777ccadd53a1f89e9985d`, PR [#488](https://github.com/ovidiudeica/reforma-teritoriala/pull/488), head testat `1832047d05ea108b5c84a0a2e1aa17ce28ae9e3c`.
 
 24/24 checks și 17/17 workflow-uri PR reușite. După merge: 12 workflow-uri push, CodeQL și Pages reușite; patru rulări Dependabot sunt păstrate separat în registru, fără a substitui controalele produsului. Auditul [Pages 41232324618](https://github.com/ovidiudeica/reforma-teritoriala/actions/runs/41232324618) a verificat exact commitul integrat: **440 resurse, 125 GeoJSON, 278.001.285 octeți**, 69 înregistrări de verificare și zero erori de aplicație. Toate cele 27 de check-runs și 19 rulări observate pe acest SHA sunt reușite, inclusiv auditul publicat și cele patru rulări Dependabot.
 
@@ -23,3 +23,5 @@ Cele 109 AUTO-4 rămân REVIEW_REQUIRED. CAPTCHA RNONG și documentele normative
 `python scripts/audit/product-launch-evidence-guard.py` verifică hashurile, legăturile CI/publicare și regenerează cele patru artefacte de acoperire pentru comparație byte-for-byte. Reproducerul citește octeții comiși prin Git, evitând conversiile CRLF locale. Scrie numai în `outputs/product-launch-coverage`; nu construiește, importă sau atribuie geometrii/identități.
 
 Această admitere nu certifică toate limitele juridice, dispozitive mobile fizice sau conformitate WCAG integrală. CI Chromium acoperă desktop, mobil, tabletă, landscape și text zoom nativ 200%; capturile sunt dovezi vizuale suplimentare. Politicile de publicare și verificările obligatorii rămân neschimbate. Un PR ulterior exclusiv de dovezi/roadmap necesită propriile verificări CI înainte și după merge.
+
+PR #489 clarifică suplimentar textul interfeței: absența unei legături SIRUTA directe nu înseamnă absența unei fișe cartografice (de exemplu Sectorul 1 are fișă). Registrele per-ID și datele nu se schimbă. Dovezile înghețate de aici rămân legate explicit de baza #488; modificarea de text necesită CI și verificare Pages proprie după merge.
