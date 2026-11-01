@@ -31,7 +31,13 @@ assert sum(r['path'].endswith('.geojson') for r in runtime) == 125
 summary = json.loads((EVIDENCE / 'c2-summary.json').read_bytes())
 provenance = json.loads((EVIDENCE / 'c2-provenance.json').read_bytes())
 assert summary['commit'] == provenance['snapshot']
-assert hashlib.sha256((ROOT / provenance['analyzer']).read_bytes()).hexdigest() == provenance['analyzer_sha256']
+# The receipt identifies the original analyzer, not every future implementation.
+# Preserve and verify its exact source bytes while allowing a portable successor.
+assert hashlib.sha256((EVIDENCE / 'c2-analyzer-v1.py.txt').read_bytes()).hexdigest() == provenance['analyzer_sha256']
+portable = json.loads((EVIDENCE / 'c2-portability-proof.json').read_bytes())
+assert hashlib.sha256((ROOT / portable['analyzer']).read_bytes()).hexdigest() == portable['analyzer_sha256']
+assert portable['legacy_replay_exact'] and portable['analyzer_regression_tests_passed'] == 4
+assert not portable['actual_changes'] and not portable['p91_authorized']
 with gzip.open(EVIDENCE / 'c2-per-file.csv.gz', 'rt', encoding='utf8', newline='') as handle:
     rows = list(csv.DictReader(handle))
 assert len(rows) == len({r['path'] for r in rows}) == summary['tracked_files']

@@ -47,11 +47,14 @@ Reproducere, într-o clonă cu commitul snapshotului disponibil:
 python scripts/audit/test_cleanup_file_usage.py
 python scripts/audit/cleanup-file-usage.py \
   --ref 8c8cb123c0e8c363268886aba863131e33f3e1a4 \
+  --json-line-endings legacy-crlf \
   --baseline docs/audits/repo-cleanup-final/c0-protected.json \
   --out outputs/cleanup-final/replay
 ```
 
 Compară `SHA256SUMS` rezultat cu `c2-uncompressed-SHA256SUMS`. Pentru o versiune nouă folosește `--ref HEAD`; diferențele față de snapshotul istoric sunt normale și trebuie examinate. Graful acoperă importuri JS literale/dinamice literale, module Python locale, căi shell/npm/YAML/HTML/CSS, manifeste, directoare/globuri și rădăcini operaționale. Expresiile calculate arbitrar, răspunsurile de rețea și consumatorii externi nu pot fi dovediți exhaustiv prin analiză statică. Aceste limite impun păstrarea, nu ștergerea.
+
+Snapshotul original Windows păstrează JSON/checksums CRLF și CSV LF. Analizorul curent emite implicit LF pe toate platformele; `legacy-crlf` reproduce exact snapshotul vechi, fără să îl rescrie. Sursa v1 originală este arhivată byte-identic în `c2-analyzer-v1.py.txt`, iar guard-ul verifică separat hashul ei și hashul implementării portabile aprobate. Vezi [remedierea și dovezile de compatibilitate](C2-PORTABILITY.md).
 
 ## C5 — branchuri și PR #398
 

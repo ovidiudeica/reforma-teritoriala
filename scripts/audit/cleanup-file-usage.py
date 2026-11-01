@@ -156,7 +156,10 @@ def main():
     parser.add_argument('--ref', default='HEAD')
     parser.add_argument('--out', type=pathlib.Path, default=ROOT / 'outputs/cleanup-final/usage')
     parser.add_argument('--baseline', type=pathlib.Path, help='Canonical protected-file JSON; exits nonzero on any missing/changed blob')
+    parser.add_argument('--json-line-endings', choices=('lf', 'legacy-crlf'), default='lf',
+                        help='LF is portable; legacy-crlf replays the original Windows evidence without changing it')
     args = parser.parse_args()
+    json_newline = '\r\n' if args.json_line_endings == 'legacy-crlf' else '\n'
     ref = git('rev-parse', args.ref + '^{commit}').decode().strip()
     rows, texts = snapshot(ref)
     edges, unresolved = graph(rows, texts)
@@ -203,13 +206,13 @@ def main():
                      'All blobs are hashed, including binary/large/compressed blobs. Binary contents are not executed or interpreted.'])
     args.out.mkdir(parents=True, exist_ok=True)
     for name, value in [('summary.json', summary), ('dynamic-readers.json', unresolved)]:
-        (args.out / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+        (args.out / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf8', newline=json_newline)
     for name, fields, values in [('per-file.csv', list(register[0]), register),
                                  ('dependencies.csv', ['source', 'target', 'kind'], [dict(zip(('source', 'target', 'kind'), e)) for e in edges])]:
         with (args.out / name).open('w', newline='', encoding='utf8') as handle:
             writer = csv.DictWriter(handle, fieldnames=fields, lineterminator='\n'); writer.writeheader(); writer.writerows(values)
     products = sorted(p for p in args.out.iterdir() if p.name in {'summary.json', 'dynamic-readers.json', 'per-file.csv', 'dependencies.csv'})
-    (args.out / 'SHA256SUMS').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest() + '  ' + p.name + '\n' for p in products), encoding='ascii')
+    (args.out / 'SHA256SUMS').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest() + '  ' + p.name + '\n' for p in products), encoding='ascii', newline=json_newline)
     print(json.dumps(summary, ensure_ascii=False))
     return int(bool(failures))
 
