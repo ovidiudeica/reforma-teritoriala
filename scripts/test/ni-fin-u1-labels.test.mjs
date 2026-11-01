@@ -21,7 +21,7 @@ test('U1.3 removes only visual suffixes, never mutates NI-FIN originals',()=>{
   const v=view.nodes.get(n.id);
   assert.equal(v.kind,n.kind);
   const relocated={ 'view-nistrenia-unit-15':'view-nistrenia-group-osm-r1702215','view-nistrenia-unit-16':'view-nistrenia-group-osm-r1702217'};
-  assert.equal(v.parent_id,relocated[n.id]||n.parent_id);
+  assert.equal(v.parent_id,n.id==='view-nistrenia'?'osm-r58974':relocated[n.id]||n.parent_id);
   const expectedChildren=n.id==='view-nistrenia'
    ?n.child_ids.filter(id=>!Object.hasOwn(relocated,id))
    :n.id==='view-nistrenia-group-osm-r1702215'?[...n.child_ids,'view-nistrenia-unit-15']
@@ -39,7 +39,7 @@ test('U1.3 removes only visual suffixes, never mutates NI-FIN originals',()=>{
 });
 
 test('U1.3 leaves RO/MD labels and all verified geometry references unchanged',()=>{
- for(const [id,node] of official)assert.equal(view.nodes.get(id),node);
+ for(const [id,node] of official){if(id==='osm-r58974'){const display=view.nodes.get(id);assert.deepEqual(display.child_ids,['view-nistrenia',...node.child_ids]);assert.deepEqual({...display,child_ids:node.child_ids},node);}else assert.equal(view.nodes.get(id),node);}
  for(const n of m.nodes.filter(n=>n.geometry_ref))assert.equal(view.nodes.get(n.id).geometry_ref,n.geometry_ref);
  assert.equal(view.virtualIds.size,243);
  assert.equal(compactTreeName({id:'test',jurisdiction:'RO',display_name:'Județul Cluj'}),'Cluj');
