@@ -10,6 +10,8 @@ Lansarea funcțională ACTUAL este [acceptată pe versiunea publicată după PR 
 
 **ACTUAL v1.2** și interfața **web-v1.2** sunt baseline-urile publice curente. `ISTORIC` și `PROPUNERI` rămân faze separate de roadmap; interfața nu le prezintă ca date publicate.
 
+Cleanup-ul core este [acceptat cu excepții documentate](docs/audits/repo-cleanup-final/RAPORT-FINAL.md): CI consolidat fără pierdere de acoperire, surse și dovezi păstrate, instalare reproductibilă și toate cele 440 de resurse publicate identice. Raportul separă alertele istorice și dependențele externe de verificările obligatorii; propria integrare documentară are același protocol CI/publicare.
+
 ## Arhitectură
 
 - **ACTUAL** — unități administrativ-teritoriale și alte reprezentări teritoriale curente.

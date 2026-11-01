@@ -1,0 +1,29 @@
+{
+  "schema": "cleanup-c9-alert-observation-v1",
+  "observed_at": "2026-11-01T03:34:37.314351+00:00",
+  "observed_after_commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+  "summary": {
+    "dependabot": {
+      "total": 18,
+      "states": {
+        "fixed": 18
+      }
+    },
+    "code-scanning": {
+      "total": 43,
+      "states": {
+        "fixed": 30,
+        "dismissed": 13
+      }
+    },
+    "secret-scanning": {
+      "total": 5,
+      "states": {
+        "open": 5
+      }
+    }
+  },
+  "secret_values_recorded": false,
+  "alerts_dismissed": 0,
+  "policy": "Five original expired third-party signed-download alerts explicitly remain open; no key revocation claimed"
+}

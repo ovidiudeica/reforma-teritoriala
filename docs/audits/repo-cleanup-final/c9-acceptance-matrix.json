@@ -1,0 +1,106 @@
+{
+  "schema": "cleanup-c9-acceptance-matrix-v1",
+  "accepted_core_commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+  "verdict": "CLEANUP_ACCEPTED_WITH_DOCUMENTED_EXCEPTIONS",
+  "criteria": [
+    {
+      "id": 1,
+      "criterion": "Clonare conform README",
+      "status": "PASS",
+      "evidence": "c9-clean-clone.json"
+    },
+    {
+      "id": 2,
+      "criterion": "Instalare verificată, fără lifecycle scripts",
+      "status": "PASS",
+      "evidence": "c9-clean-clone.json"
+    },
+    {
+      "id": 3,
+      "criterion": "Build static și reproducibilitate Linux/OCI",
+      "status": "PASS",
+      "evidence": "c8-post-admission.json"
+    },
+    {
+      "id": 4,
+      "criterion": "Teste obligatorii executate",
+      "status": "PASS",
+      "evidence": "c8-post-full-admission.json"
+    },
+    {
+      "id": 5,
+      "criterion": "Manifeste ACTUAL identice",
+      "status": "PASS",
+      "evidence": "c8-integrity.json"
+    },
+    {
+      "id": 6,
+      "criterion": "Identități, ierarhii și geometrii identice",
+      "status": "PASS",
+      "evidence": "c8-integrity.json"
+    },
+    {
+      "id": 7,
+      "criterion": "Fără regresii cartografice",
+      "status": "PASS",
+      "evidence": "c8-post-admission.json; c8-published-admission.json"
+    },
+    {
+      "id": 8,
+      "criterion": "Workflow-uri și protecții funcționale",
+      "status": "PASS",
+      "evidence": "c8-workflow-supply-chain.json; c8-post-admission.json"
+    },
+    {
+      "id": 9,
+      "criterion": "Pages core publică versiunea corectă",
+      "status": "PASS",
+      "evidence": "496-published-marker.json; c9-pages-config.json"
+    },
+    {
+      "id": 10,
+      "criterion": "Website desktop/mobil funcțional",
+      "status": "PASS",
+      "evidence": "c8-published-admission.json"
+    },
+    {
+      "id": 11,
+      "criterion": "Toate440resurse/125GeoJSON identice",
+      "status": "PASS",
+      "evidence": "c8-published-admission.json"
+    },
+    {
+      "id": 12,
+      "criterion": "Nicio ștergere nejustificată",
+      "status": "PASS",
+      "evidence": "c3-deletion-proof.json; c7-final-core.json"
+    },
+    {
+      "id": 13,
+      "criterion": "Niciun PR cleanup rămas neintenționat",
+      "status": "PASS",
+      "evidence": "c5-final-open-prs.json; acest PR documentar este intenționat și supus aceluiași protocol"
+    },
+    {
+      "id": 14,
+      "criterion": "Branchuri clasificate și tratate",
+      "status": "PASS",
+      "evidence": "c5-final-reconciliation.json; c5-local-branch-treatment.json; c5-local-security-branch-treatment.json"
+    },
+    {
+      "id": 15,
+      "criterion": "README reflectă structura și utilizarea",
+      "status": "PASS",
+      "evidence": "README.md; c9-clean-clone.json"
+    },
+    {
+      "id": 16,
+      "criterion": "Excepții explicite, fără reclasificări artificiale",
+      "status": "PASS",
+      "evidence": "RAPORT-FINAL.md secțiunea8; scheduled-workflow-decisions.json; c9-security-alerts.json"
+    }
+  ],
+  "actual_changes": 0,
+  "p91_authorized": false,
+  "final_metadata_policy": "This evidence-only PR must independently pass exact-head CI, expected-SHA merge, all relevant post-controls and exact published acceptance before final completion is reported"
+}
