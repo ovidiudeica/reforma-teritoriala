@@ -134,3 +134,8 @@ header h1{font-size:13px}
 .statistical-level-breakdown{margin:-2px 0 8px 24px}
 .filter-actions button:disabled{opacity:.5;cursor:not-allowed;text-decoration:none}
 .filter-row input:disabled~span,.filter-row input:disabled~small{opacity:.6}
+/* WEB-CARD.1: reflow compact și valori externe fără overflow. */
+.web-card-audit summary{min-height:44px;cursor:pointer;overflow-wrap:anywhere}
+.web-card-audit .kv dd,.web-card-audit a{overflow-wrap:anywhere;word-break:break-word;min-width:0}
+.web-card-audit .atlas-panel-disclosure{margin-top:10px}
+.web-card-audit .hint{line-height:1.5}
