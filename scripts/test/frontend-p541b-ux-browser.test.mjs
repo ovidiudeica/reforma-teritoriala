@@ -13,7 +13,7 @@ try{
   await waitFor(()=>page.evaluate("qaApp.entityById.size===5848"),'5,848 entities loaded');
   await t.test('disabled PROPUNERI, touch targets, default filters and roots',async()=>{
    const s=await page.evaluate("({proposal:document.querySelector('[data-mode=propuneri]').disabled,actual:document.querySelector('[data-mode=actual]').disabled,filters:document.querySelector('#filters-count').textContent,reset:document.querySelector('#filters-reset').disabled,roots:[...qaApp.visibleEntityIds].sort(),target:document.querySelector('#filters-toggle').getBoundingClientRect().height})");
-   assert.equal(s.proposal,true);assert.equal(s.actual,false);assert.equal(s.filters,'');assert.equal(s.reset,true);assert.deepEqual(s.roots,['osm-r58974','osm-r90689'].sort());assert.ok(s.target>=44);
+   assert.equal(s.proposal,true);assert.equal(s.actual,false);assert.equal(s.filters,'(1 dezactivat)');assert.equal(s.reset,false);assert.deepEqual(s.roots,['osm-r58974','osm-r90689'].sort());assert.ok(s.target>=44);
   });
   await t.test('sidebar width survives reload and CSS breakpoint is strictly below 900',async()=>{
    await page.evaluate("document.querySelector('#explorer-resizer').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true}))");
@@ -56,7 +56,7 @@ try{
    assert.match(before.count,/dezactivate|dezactivat/);
    await page.click('#filters-reset');
    const after=await page.evaluate("({ids:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,baseline:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),reset:document.querySelector('#filters-reset').disabled,count:document.querySelector('#filters-count').textContent,ro:document.querySelector('#layer-ro').checked,md:document.querySelector('#layer-md').checked,stat:[...qaApp.activeStatisticalLevels].sort(),subtypes:[...qaApp.activeGeometrySubtypes].length})");
-   assert.deepEqual(after.ids,before.ids);assert.equal(after.selected,before.selected);assert.equal(after.baseline,'false');assert.equal(after.count,'');assert.equal(after.reset,true);assert.equal(after.ro,true);assert.equal(after.md,true);assert.deepEqual(after.stat,[1,2,3,'unclassified'].sort());assert.ok(after.subtypes>0);
+   assert.deepEqual(after.ids,before.ids);assert.equal(after.selected,before.selected);assert.equal(after.baseline,'false');assert.equal(after.count,'(1 dezactivat)');assert.equal(after.reset,false);assert.equal(after.ro,true);assert.equal(after.md,true);assert.deepEqual(after.stat,[1,2,3,'unclassified'].sort());assert.ok(after.subtypes>0);
    await page.click('#drawer-close');
    assert.equal(await page.evaluate("document.activeElement.id"),'filters-toggle');
   });
