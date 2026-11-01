@@ -1,3 +1,5 @@
+Stare curentă: [raport final și matrice de acceptare core](RAPORT-FINAL.md), commit `ce14dd73f223b32ad9a9149314ba75379a6a2018`. Descrierile C3/C6/C8 originale păstrează starea lor istorică; registrul de progres și raportul final prevalează pentru acceptarea curentă. ACTUAL este intact, P9.1 neautorizat.
+
 # CLEANUP FINAL — registru probatoriu
 
 Stare: **IN_PROGRESS**. Acesta este baseline-ul și registrul de lucru C0–C9, nu o certificare finală. ACTUAL este înghețat; P9.1 nu este autorizat. Nu au fost eliminate fișiere de produs, surse sau dovezi în această etapă.
@@ -27,7 +29,7 @@ PR #491 a fost verificat pe `ecbc324c9828950e056867b3783b327e39a77088`, trecut R
 
 În verificarea push post-merge, un runner cu profil neaprobat (`20261018.96.1`, KVM) a fost respins de gate-ul host trust. Nu s-a schimbat lista aprobată; verificarea eșuată a fost reluată pe același SHA. Rezultatul terminal după reluare: **25/25 checks și 17/17 runs reușite**, inclusiv probele A/B, compararea lor și deploymentul Pages. Incidentul și răspunsurile integrale sunt păstrate în dovezile `c1-*`.
 
-PR #490 păstrează cele trei documente inițiale ale inventarului, complementare celor din #491. Branchul a fost actualizat prin merge normal cu `main`, fără rebase/force push; SHA-ul nou `e403833eaafbc3c6a318caad4ab90df45674153c` a trecut cele 19 verificări executate și toate cele 15 workflow-uri. A fost trecut Ready și integrat cu verificarea head SHA, ca `0716b1b9bada1a8390511d02f03bbeceb8b17922`; controalele post-merge sunt încă în execuție. `c1-integrity.json` confirmă identitatea tuturor celor **478 de fișiere protejate și 440 de resurse runtime**, atât Git blob SHA, cât și SHA-256, la acest commit.
+PR #490 păstrează cele trei documente inițiale ale inventarului, complementare celor din #491. Branchul a fost actualizat prin merge normal cu `main`, fără rebase/force push; SHA-ul nou `e403833eaafbc3c6a318caad4ab90df45674153c` a trecut cele 19 verificări executate și toate cele 15 workflow-uri. A fost trecut Ready și integrat cu verificarea head SHA, ca `0716b1b9bada1a8390511d02f03bbeceb8b17922`; controalele post-merge au trecut 21/21 checks și 13/13 rulări, conform c1-completion.json. `c1-integrity.json` confirmă identitatea tuturor celor **478 de fișiere protejate și 440 de resurse runtime**, atât Git blob SHA, cât și SHA-256, la acest commit.
 
 ## C2 — registru per-fișier și matrice
 
@@ -68,4 +70,4 @@ Snapshotul alertelor GitHub: zero alerte Dependabot deschise, zero alerte CodeQL
 
 ## Registru și verdict
 
-Vezi `progress.json` și registrul central `docs/roadmap/autonomous-completion-register.json`. C3–C9 nu sunt certificate prin acest raport intermediar. Verdictul final rămâne **PENDING**, până la verificarea tuturor criteriilor obligatorii. `sha256-manifest.json` fixează dovezile acestui snapshot; nu este un manifest ACTUAL și nu modifică manifestele canonice ale produsului.
+Vezi `progress.json` și registrul central `docs/roadmap/autonomous-completion-register.json`. Acest index păstrează descrierile istorice la data redactării. C3–C9 sunt evaluate pentru core în [raportul final](RAPORT-FINAL.md) și în matricea C9; propria publicare documentară urmează același protocol CI/post-merge. `sha256-manifest.json` fixează dovezile acestui snapshot; nu este un manifest ACTUAL și nu modifică manifestele canonice ale produsului.

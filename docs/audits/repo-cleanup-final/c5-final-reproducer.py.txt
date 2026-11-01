@@ -1,0 +1,36 @@
+import argparse,collections,csv,hashlib,json,pathlib,subprocess,sys
+parser=argparse.ArgumentParser();parser.add_argument('--repository',type=pathlib.Path,required=True);parser.add_argument('--ref-prefix',required=True);parser.add_argument('--main',required=True);parser.add_argument('--out',type=pathlib.Path,required=True);args=parser.parse_args()
+out=args.out.resolve();out.mkdir(parents=True,exist_ok=True);root=args.repository.resolve()
+g=['git','-c','safe.directory='+root.as_posix()]
+def git(*a):return subprocess.check_output(g+list(a),cwd=root)
+def tree(ref):
+    result={}
+    for item in git('ls-tree','-rlz',ref).split(b'\0'):
+        if not item:continue
+        meta,p=item.split(b'\t',1);mode,kind,oid,size=meta.decode().split()
+        if kind=='blob':result[p.decode()]=dict(blob=oid,bytes=int(size))
+    return result
+prefix=args.ref_prefix
+main=git('rev-parse',args.main).decode().strip();mt=tree(main);blobs={r['blob'] for r in mt.values()}
+branches=[];exclusive=[]
+for line in git('for-each-ref','--format=%(refname) %(objectname)',prefix).decode().splitlines():
+    ref,sha=line.split(' ')
+    if ref==prefix+'main':continue
+    name=ref.removeprefix(prefix);bt=tree(sha)
+    behind,ahead=map(int,git('rev-list','--left-right','--count',main+'...'+sha).split())
+    ancestor=subprocess.run(g+['merge-base','--is-ancestor',sha,main],cwd=root).returncode==0
+    unique=[p for p,r in bt.items() if r['blob'] not in blobs]
+    cls='MERGED_SAFE_TO_REMOVE' if ancestor else 'ACTIVE' if name.startswith('dependabot/') else 'PRESERVE_EVIDENCE'
+    branches.append(dict(branch=name,sha=sha,main=main,behind=behind,ahead=ahead,last_commit=git('show','-s','--format=%cI',sha).decode().strip(),classification=cls,exclusive_blob_paths=len(unique),decision='RETAIN_PENDING_FRESH_REFERENCE_AND_PR_CHECK' if ancestor else 'RETAIN',reason='All commits reachable from main' if ancestor else 'Active dependency update' if name.startswith('dependabot/') else 'Unmerged code or source/evidence; age is not proof of dispensability'))
+    base=git('merge-base',main,sha).decode().strip()
+    base_tree=tree(base)
+    changed=git('diff','--no-renames','--name-only','-z',base,sha).split(b'\0')
+    for raw in changed:
+        if not raw:continue
+        p=raw.decode();r=bt.get(p)
+        exclusive.append(dict(branch=name,path=p,base_blob=base_tree.get(p,{}).get('blob',''),head_blob=r['blob'] if r else '',main_same_path_blob=mt.get(p,{}).get('blob',''),head_bytes=r['bytes'] if r else 0,blob_anywhere_main=r['blob'] in blobs if r else False,role='EVIDENCE' if p.startswith(('docs/evidence/','docs/audits/')) else 'FUNCTIONAL_OR_POLICY' if p.startswith(('.github/','scripts/','data/')) else 'DOCUMENTATION'))
+stem=''
+(out/(stem+'branches.json')).write_text(json.dumps(dict(main=main,history_complete=git('rev-parse','--is-shallow-repository').decode().strip()=='false',branches=branches),indent=2)+'\n',encoding='utf8',newline='\n')
+with (out/(stem+'branch-per-file.csv')).open('w',newline='',encoding='utf8') as f:
+    w=csv.DictWriter(f,fieldnames=list(exclusive[0]),lineterminator='\n');w.writeheader();w.writerows(exclusive)
+print(json.dumps(branches))

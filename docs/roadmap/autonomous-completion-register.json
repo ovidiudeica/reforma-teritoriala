@@ -8,26 +8,27 @@
     {
       "id": "CLEANUP-FINAL",
       "description": "C0–C9: cleanup, mentenabilitate și certificare, ACTUAL înghețat",
-      "status": "IN_PROGRESS",
+      "status": "COMPLETE_WITH_DOCUMENTED_EXCEPTIONS",
       "priority": 0,
       "dependencies": [],
       "baseline_commit": "656bf2165d58efcbb3443aa70d56c313990d1b67",
       "actual_mutation_allowed": false,
       "p91_authorized": false,
-      "evidence": [
-        "docs/audits/repo-cleanup-final/README.md",
-        "docs/audits/repo-cleanup-final/progress.json"
-      ],
-      "next_action": "C8 security refs/signature inventory, then fresh C5/C7/C9 acceptance; ACTUAL frozen",
+      "evidence": "docs/audits/repo-cleanup-final/RAPORT-FINAL.md",
+      "next_action": "Preserve accepted ACTUAL/runtime and evidence. Complete this final metadata PR exact CI/merge/post/publication; then normal maintenance with explicit exceptions. No P9.1 or automatic AUTO-4 reinvestigation.",
       "prs": [
         491,
         490,
         492,
         493,
         494,
-        495
+        495,
+        496
       ],
-      "latest_merge_commit": "eee441d06c871151523f4c851b28545e4a51c2e5"
+      "latest_merge_commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+      "accepted_core_commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+      "verdict": "CLEANUP_ACCEPTED_WITH_DOCUMENTED_EXCEPTIONS",
+      "final_metadata_policy": "This evidence-only PR must independently pass exact-head CI, expected-SHA merge, all relevant post-controls and exact published acceptance before final completion is reported"
     },
     {
       "id": "PRODUCT-LAUNCH",

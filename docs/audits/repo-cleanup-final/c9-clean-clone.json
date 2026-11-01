@@ -1,0 +1,46 @@
+{
+  "schema": "cleanup-c9-fresh-clone-v1",
+  "observed_at": "2026-11-01T03:20:37.040432+00:00",
+  "commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+  "transport": "Fresh GitHub HTTPS clone --depth 1 --branch cleanup/security-provenance; persistent -c core.autocrlf=false -c core.longpaths=true supplied to git clone",
+  "canonical_tracked_files_compared": 3546,
+  "canonical_tracked_bytes": 529340072,
+  "all_disk_sizes_and_git_blob_sha_equal": true,
+  "protected_runtime_sha256_comparisons": {
+    "c0-protected.json": 478,
+    "c0-runtime.json": 440
+  },
+  "tracked_sources_clean": true,
+  "windows_extended_paths_used": true,
+  "python": "3.12.14",
+  "node": "v24.21.0",
+  "offline_install": {
+    "status": "PASS",
+    "entries": 185,
+    "bundle_fingerprint": "c38977022b4c7cedcbf7bab4ac501038417a60f6612bfb82cddd44092a53ac81",
+    "lifecycle_scripts": false,
+    "registry_and_proxy": "127.0.0.1:9",
+    "empty_cache": true,
+    "executed_source_commit": "38bc80c0a38256d97e020b6f946be2340096f8de"
+  },
+  "executed_local_checks": {
+    "browser_security": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    "portable_analyzer": {
+      "passed": 4,
+      "failed": 0
+    },
+    "launch_evidence_guard": "PASS"
+  },
+  "limitations": [
+    "Complete Linux/OCI build and browser matrix are admitted separately from exact-SHA hosted CI, not certified by Windows alone"
+  ],
+  "actual_changes": 0,
+  "p91_authorized": false,
+  "initial_clone_commit": "38bc80c0a38256d97e020b6f946be2340096f8de",
+  "local_test_execution_commit": "38bc80c0a38256d97e020b6f946be2340096f8de",
+  "subsequent_update": "Read-only GitHub main fetch and detached checkout; all current tracked disk bytes reverified, protected package/lock/runtime remain identical"
+}

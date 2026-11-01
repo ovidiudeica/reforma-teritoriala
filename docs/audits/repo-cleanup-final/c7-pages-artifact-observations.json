@@ -1,0 +1,35 @@
+{
+  "schema": "cleanup-c7-pages-artifact-observation-v1",
+  "baseline": {
+    "commit": "656bf2165d58efcbb3443aa70d56c313990d1b67",
+    "run_id": 41235602301,
+    "id": 13055446136,
+    "bytes": 229823793,
+    "digest": "sha256:3097fc57aa300a5a7809ba18d95471bfda4e1ed755c2105526a6c34cd6178671"
+  },
+  "c6": {
+    "commit": "eee441d06c871151523f4c851b28545e4a51c2e5",
+    "run_id": 41266700974,
+    "id": 13067875447,
+    "bytes": 231566060,
+    "digest": "sha256:b3db091af1eb7907d922e9e146faf4b4362681f154c7e695daed4de5b28fa0ea"
+  },
+  "digest_source": "Official GitHub artifact metadata; ZIPs not locally downloaded in this observation",
+  "runtime_independently_verified_https": {
+    "files": 440,
+    "geojson": 125,
+    "bytes": 278001389,
+    "sha256_fingerprint": "c8952e27c8680aef43f82b7f9691eaab162758ccd079d27fbde9fa7de547d502"
+  },
+  "notes": [
+    "Published artifact ZIP bytes and runtime logical bytes are different metrics",
+    "Evidence/metadata add to the site artifact; runtime resources and URLs remain unchanged"
+  ],
+  "core": {
+    "commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+    "run_id": 41268633613,
+    "id": 13068765169,
+    "bytes": 231578801,
+    "digest": "sha256:dd155cbb2bce738c913dd79000245a0c8efd232f73bfd6f5c5a510dc652e30d1"
+  }
+}

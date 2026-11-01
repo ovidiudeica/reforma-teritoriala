@@ -1,0 +1,231 @@
+{
+  "schema": "cleanup-exact-ci-admission-v1",
+  "observed_at": "2026-11-01T03:18:04.976982+00:00",
+  "commit": "38bc80c0a38256d97e020b6f946be2340096f8de",
+  "executed_success_checks": 21,
+  "existing_conditional_skips": [
+    "actual-change-repro-compare",
+    "actual-change-repro-${{ matrix.proof }}"
+  ],
+  "successful_runs": 13,
+  "required_contexts": [
+    "verify-persisted-release",
+    "actual-change-reproducibility",
+    "actual-release-trust-chain",
+    "p2-statistical-foundation",
+    "frontend-geometry-taxonomy",
+    "frontend-browser-qa"
+  ],
+  "checks": [
+    {
+      "id": 124736437244,
+      "name": "frontend-browser-qa",
+      "conclusion": "success"
+    },
+    {
+      "id": 124732977076,
+      "name": "actual-change-repro-compare",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 124732976554,
+      "name": "actual-change-repro-${{ matrix.proof }}",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 124732976077,
+      "name": "actual-change-reproducibility",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731814232,
+      "name": "CodeQL",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731456007,
+      "name": "browser-tests",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455946,
+      "name": "p82-derived-topology",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455934,
+      "name": "full-linux-regression",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455883,
+      "name": "p83-geometric-validation",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455843,
+      "name": "verify-persisted-release",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455803,
+      "name": "p84-export-validation",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455784,
+      "name": "p907216-osm-ui-fail-closed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455773,
+      "name": "published-chromium",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455701,
+      "name": "p2-statistical-foundation",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455661,
+      "name": "detect-change-repro-scope",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455600,
+      "name": "chromium-hardening",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455552,
+      "name": "frontend-geometry-taxonomy",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455535,
+      "name": "preservation",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455394,
+      "name": "web-r2a1-admin-level-census",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731455376,
+      "name": "actual-release-trust-chain",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731450948,
+      "name": "Analyze (javascript-typescript)",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731450937,
+      "name": "Analyze (actions)",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731450783,
+      "name": "Analyze (python)",
+      "conclusion": "success"
+    }
+  ],
+  "runs": [
+    {
+      "id": 41266894138,
+      "name": "Frontend geometry taxonomy",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894163,
+      "name": "Gate P2 statistical foundation",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894134,
+      "name": "WEB-R2a.1 admin-level census",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894243,
+      "name": "P8.3 geometric measurement validation",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894203,
+      "name": "Verify persisted ACTUAL release",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894124,
+      "name": "Gate ACTUAL release trust chain",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894226,
+      "name": "P9.0.7.2.16 source-only OSM role UI gate",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894197,
+      "name": "WEB-R2c.4 published website acceptance",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894162,
+      "name": "P9.0.8 evidence preservation",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894172,
+      "name": "Gate ACTUAL CHANGE reproducibility",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894177,
+      "name": "WEB-R2c.3.2 Chromium hardening",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266894210,
+      "name": "Frontend browser QA",
+      "event": "pull_request",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266891896,
+      "name": "PR #496",
+      "event": "dynamic",
+      "conclusion": "success",
+      "attempt": 1
+    }
+  ],
+  "status": "PASS",
+  "warning": "Full-suite artifact body and published runtime are admitted separately; green check status alone is insufficient"
+}

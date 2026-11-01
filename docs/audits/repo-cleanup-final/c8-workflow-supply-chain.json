@@ -1,0 +1,1386 @@
+{
+  "schema": "cleanup-c8-workflow-supply-chain-v1",
+  "commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+  "observed_at": "2026-11-01T03:19:21.620990+00:00",
+  "tracked_definitions": 80,
+  "uses_count": 210,
+  "mutable_external_uses": 0,
+  "all_current_declared_uses_immutable_or_local": true,
+  "protection_exactly_equal_c0": true,
+  "uses": [
+    {
+      "path": ".github/workflows/actual-candidate.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-candidate.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-change-reproducibility-gate.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-change-reproducibility-gate.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-change-reproducibility-gate.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-change-reproducibility-gate.yml",
+      "uses": "actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-change-reproducibility-gate.yml",
+      "uses": "actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-promote-candidate.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-release-trust-chain-gate.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-source-freshness.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-source-freshness.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-topology-audit.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/actual-topology-audit.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/audit-io-security.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/audit-io-security.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/auto2-bucharest-text.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/auto2-bucharest-text.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/auto3-osmb-reconciliation.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/auto3-osmb-reconciliation.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/auto4-osmb-evidence.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/auto4-osmb-evidence.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/build-actual-runtime-image.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/frontend-geometry-taxonomy.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/import-osm.yml",
+      "uses": "./.github/workflows/actual-candidate.yml",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-fin.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-fin.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-fin.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-fin31-runner-qualification.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-fin31-runner-qualification.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-fin31-runner-qualification.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-independent-evidence.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-independent-evidence.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/ni-independent-evidence.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2b-independent.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2b-independent.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-bulk-preflight.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-bulk-preflight.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-bulk-preflight.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-complete-spatial.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-complete-spatial.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-exact-proposals.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-exact-proposals.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-frontier.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-frontier.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-full-batch01.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-full-batch01.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-full-batch01.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-full-batch02.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-full-batch02.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-full-batch02.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-gap-state.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-gap-state.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-leaf-closure.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-leaf-closure.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-native-extract.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-native-extract.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-priority.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-priority.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-priority.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-replication-tail.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-replication-tail.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-selected-epoch.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-selected-epoch.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-fix4-preflight.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-fix4-preflight.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-fix4-preflight.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-fix5-reconciliation.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-fix5-reconciliation.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-fix5-reconciliation.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-live-source-probe.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-live-source-probe.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-source-continuity.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-upstream2-recheck.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-upstream2-recheck.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/osm-upstream2-recheck.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p2-statistical-foundation.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p82-derived-topology.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p82-derived-topology.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p83-geometric-validation.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p83-geometric-validation.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p84-export-validation.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p84-export-validation.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p84-export-validation.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p901-nistrenia-audit.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p901-nistrenia-audit.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p901-nistrenia-audit.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p902-geofabrik-reconciliation.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p902-geofabrik-reconciliation.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p902-geofabrik-reconciliation.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p902-nistrenia-unlinked.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p902-nistrenia-unlinked.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p902-nistrenia-unlinked.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p903-nistrenia-exceptions.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p903-nistrenia-exceptions.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p903-nistrenia-exceptions.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p903-nistrenia-exceptions.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p903-nistrenia-exceptions.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p903-nistrenia-exceptions.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p904-nistrenia-semantic.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p904-nistrenia-semantic.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p904-nistrenia-semantic.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9041-nistrenia-membership.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9041-nistrenia-membership.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9041-nistrenia-membership.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9042-nistrenia-acceptance.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9042-nistrenia-acceptance.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9042-nistrenia-acceptance.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9043-actual-promotion-boundary.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9043-actual-promotion-boundary.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9043-actual-promotion-boundary.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9043-provenance-evidence.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9043-provenance-evidence.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9043-provenance-evidence.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-20261026-qualification.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-20261026-qualification.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-20261026-qualification.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-20261026-qualification.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-20261026-qualification.yml",
+      "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-20261026-qualification.yml",
+      "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-20261026-qualification.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-runner-host-trust-refresh.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-runner-host-trust-refresh.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-runner-host-trust-refresh.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-runner-provenance-admission.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-runner-provenance-admission.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p905-runner-provenance-admission.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9062-osm-source-compare.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9062-osm-source-compare.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p9062-osm-source-compare.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p90621-historical-border.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p90621-historical-border.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p90621-historical-border.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907216-osm-cartographic-ui.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907216-osm-cartographic-ui.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907217-geometry-fidelity.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907217-geometry-fidelity.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907217-geometry-fidelity.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907218-osm-live-85.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907218-osm-live-85.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907218-osm-live-85.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907219-cartographic-dossier.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907219-cartographic-dossier.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p907219-cartographic-dossier.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p908-evidence-retention.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p908-evidence-retention.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/p908-evidence-retention.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/publish-actual-release.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/refresh-actual-review-evidence.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/refresh-md-official.yml",
+      "uses": "./.github/workflows/actual-candidate.yml",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/refresh-ro-official.yml",
+      "uses": "./.github/workflows/actual-candidate.yml",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-10.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-10.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-11.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-11.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-12.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-12.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-13-1-exact-topology.yml",
+      "uses": "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-13-1-exact-topology.yml",
+      "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-5.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-5.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-6.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-6.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-7.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-7.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-8.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-8.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-9.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-adm2-9.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-audit1.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-audit1.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/rt-audit1.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/verify-persisted-actual-release.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-ni-u1-audit.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-ni-u1-audit.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2a1-admin-level-census.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2a1-admin-level-census.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2a1-admin-level-census.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2a2-historical-osm.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2a2-historical-osm.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2a2-historical-osm.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2b-final-live-e2e.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2b-final-live-e2e.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2b-final-live-e2e.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2b-final-live-e2e.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c302-cdp-performance.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c302-cdp-performance.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c302-cdp-performance.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c32-hardening.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c32-hardening.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c32-hardening.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c4-published.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c4-published.yml",
+      "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c4-published.yml",
+      "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "immutable_or_local": true
+    },
+    {
+      "path": ".github/workflows/web-r2c4-published.yml",
+      "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "immutable_or_local": true
+    }
+  ],
+  "definition_sha256": [
+    {
+      "path": ".github/workflows/actual-candidate.yml",
+      "sha256": "4f1dbb51ac0c0dec74b7ae03ba34d66024fa1ed5c6182db4e2bb1b8fa2f0f816"
+    },
+    {
+      "path": ".github/workflows/actual-change-reproducibility-gate.yml",
+      "sha256": "040d02da2891f9417d852adc729e0c88a9e9a97414bc0a29c3a0b8060301e328"
+    },
+    {
+      "path": ".github/workflows/actual-promote-candidate.yml",
+      "sha256": "8d904dbed87ab7fc4bda6db0af5fe3833b3da33fd2db78f96204344ec47dbacc"
+    },
+    {
+      "path": ".github/workflows/actual-release-trust-chain-gate.yml",
+      "sha256": "181e1d8622de6f96bf7ad707cdead783c96b489ab1be6a5d7c20e1baf3589ce1"
+    },
+    {
+      "path": ".github/workflows/actual-source-freshness.yml",
+      "sha256": "9f3fac49eabf56b888d660ef1fe789f59ff1eec066e4b839d939a007e12287e6"
+    },
+    {
+      "path": ".github/workflows/actual-topology-audit.yml",
+      "sha256": "9636d1d3c9e8d343e8213a2abbfbcef102026c694693729f6abba2f0119df1b1"
+    },
+    {
+      "path": ".github/workflows/audit-io-security.yml",
+      "sha256": "3453e35382a02836a23532a0bf8827f348d60c0a4972d25ee5517399eee1636f"
+    },
+    {
+      "path": ".github/workflows/auto2-bucharest-text.yml",
+      "sha256": "798c0ce621158986f693e06091bd6f0b0bf3797bb08f9ac8576a4cf2979d61ba"
+    },
+    {
+      "path": ".github/workflows/auto3-osmb-reconciliation.yml",
+      "sha256": "f482fd0795f7b22f0cf4861d7d92c764ee2df3299ab18467ace3caf804558b04"
+    },
+    {
+      "path": ".github/workflows/auto4-osmb-evidence.yml",
+      "sha256": "a5b4586a9b849d8b653504375b7fe3f155bc9affc82501393be3af8ef538378f"
+    },
+    {
+      "path": ".github/workflows/build-actual-runtime-image.yml",
+      "sha256": "405d54ae5ff0a401453284c9954465d6f0a37384777bfad7a024f76b21012a87"
+    },
+    {
+      "path": ".github/workflows/frontend-browser-qa.yml",
+      "sha256": "f296e00e9851ea053e339d17fea2bc596a9ec8e6b34063cde15d5bb19378719a"
+    },
+    {
+      "path": ".github/workflows/frontend-geometry-taxonomy.yml",
+      "sha256": "8a46f742af3be78a22f069e73c52abdf33e3bf9f5098397cb0a17ce087a1cec0"
+    },
+    {
+      "path": ".github/workflows/import-osm.yml",
+      "sha256": "c173d78b133879301ced1035395a74358b386ff2e45804c7d2f11fc5bf031d7d"
+    },
+    {
+      "path": ".github/workflows/ni-fin.yml",
+      "sha256": "7bf8f759bbb435c42a14339fe3278e90e04e2e17154a601431f357f445d7bb50"
+    },
+    {
+      "path": ".github/workflows/ni-fin31-runner-qualification.yml",
+      "sha256": "c212df1f152aac79bc0ee6bd07d79cfcfc8e6383fc21106f896f92690512b086"
+    },
+    {
+      "path": ".github/workflows/ni-independent-evidence.yml",
+      "sha256": "38e3acff5ed10126491b91053d59abadfb980f12fbc33b1ab7f5f71d61938022"
+    },
+    {
+      "path": ".github/workflows/osm-acq2b-independent.yml",
+      "sha256": "11c8e34ba632da38c311b051d172777816e196083b81bb4ba4cfa3eb99cc0078"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-bulk-preflight.yml",
+      "sha256": "e1af61f5f2517881cc0b7bc9168785104993dc95a0725ce2fe6ea524ac1f671c"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-complete-spatial.yml",
+      "sha256": "ec02246a2361205fda86279568f2ea00469fa0ee48eb237e729b13eb74a0f06a"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-exact-proposals.yml",
+      "sha256": "4aa0cf30a4a885b435d6485d23f6232c60bfef352fac261a5c5c050e308bc0b0"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-frontier.yml",
+      "sha256": "d768153106593d2534c51d810154b503e7f27249d10a9ecc3e52f5b849135179"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-full-batch01.yml",
+      "sha256": "211c20d7023f04f9ef280cf00ca475ca3958b9f1a8819c68c78efd8510a426c5"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-full-batch02.yml",
+      "sha256": "42a85ae422b15c90196fbbec730670737c440fb327f7405e103c922d648fe2d6"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-gap-state.yml",
+      "sha256": "b2410461db4647bbd235b87420e9d546c583b8809b9e94d303ecf44b371d6ed0"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-leaf-closure.yml",
+      "sha256": "a6cf8264ebf1d3cceb2682c1fff07873c9a726f017291964dede0494ca4074d7"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-native-extract.yml",
+      "sha256": "af24aab088cd30dc2cb2a06395f6ef6c88dfb5f9ab28da9de235d15f1e1f8260"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-priority.yml",
+      "sha256": "07902fe9f7c7b30485350e1f12381fda04fcb11e011fb8e9b5e41673ce1dae5c"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-replication-tail.yml",
+      "sha256": "511ab4c0c7d205ae50144ed91a58e47e48d60cde3031646642ca39038a1303d3"
+    },
+    {
+      "path": ".github/workflows/osm-acq2c-selected-epoch.yml",
+      "sha256": "72a2daaf350cf2f5c318e09f4593f092fbc16a7a803e5c82723e861ff156c5f3"
+    },
+    {
+      "path": ".github/workflows/osm-fix4-preflight.yml",
+      "sha256": "bdd595c48f2db09a4385e39eaf6f7acca948f7bc749dc451c4a0e082637dd65e"
+    },
+    {
+      "path": ".github/workflows/osm-fix5-reconciliation.yml",
+      "sha256": "9c06c4f45bd25cd9bc00b7bca9c1595f2642d0078fdf937590e52ebb5a43b5f6"
+    },
+    {
+      "path": ".github/workflows/osm-live-source-probe.yml",
+      "sha256": "4a8b576819ed1d314cfc93fac17a62b450f92a99d941667a756c9e58b782e750"
+    },
+    {
+      "path": ".github/workflows/osm-source-continuity.yml",
+      "sha256": "af30606dabab097e944878fa5bb41df62ff04e7ab6a7ea2243545a0c8f0d72ea"
+    },
+    {
+      "path": ".github/workflows/osm-upstream2-recheck.yml",
+      "sha256": "9ec86941165eda1f18f0f47a0c2ed13b91dcdcc650d573e1ace8f9ac6397ee8f"
+    },
+    {
+      "path": ".github/workflows/p2-statistical-foundation.yml",
+      "sha256": "6533a9c4586183c9d0df596941496b4b206b4588467cb91a764adb21f692a109"
+    },
+    {
+      "path": ".github/workflows/p82-derived-topology.yml",
+      "sha256": "5bfdd4065edcef9269cc047d833437f7b64edb12cc8e1f60dc12b2d8dc6fbc56"
+    },
+    {
+      "path": ".github/workflows/p83-geometric-validation.yml",
+      "sha256": "277427789302f60fcc5a0f37cda5b8ebe0a3d2e942577b65aa9ef40c0e4d1b25"
+    },
+    {
+      "path": ".github/workflows/p84-export-validation.yml",
+      "sha256": "c4e41566cbb2499d5eecc82c1c0a7d12106c9075bce7a8040d3f557895135869"
+    },
+    {
+      "path": ".github/workflows/p901-nistrenia-audit.yml",
+      "sha256": "e56467cd22e5134b6fe49b55f08b7ef296ab7499f5b7f14e9de17c6281cc75fd"
+    },
+    {
+      "path": ".github/workflows/p902-geofabrik-reconciliation.yml",
+      "sha256": "bd005ab119d2f603b730181c9009e236381dd0aa44f5ff9bbedc8ad0b72deadc"
+    },
+    {
+      "path": ".github/workflows/p902-nistrenia-unlinked.yml",
+      "sha256": "718dcc719a0b922268140c3d71017d69b56121aaa841c94243224836735eace9"
+    },
+    {
+      "path": ".github/workflows/p903-nistrenia-exceptions.yml",
+      "sha256": "534951f4a53e047bf682cacd1bd90d86ccbbade52df0af2312ba35e213ed9a3d"
+    },
+    {
+      "path": ".github/workflows/p904-nistrenia-semantic.yml",
+      "sha256": "3b5452593632cdcc4550336422631a007832db39f9c56c422ce3f09c48f23f4a"
+    },
+    {
+      "path": ".github/workflows/p9041-nistrenia-membership.yml",
+      "sha256": "12034247d54ee4c3344902d4e14cb3f79438d2f54dfbec65a37b04cc4c7226cd"
+    },
+    {
+      "path": ".github/workflows/p9042-nistrenia-acceptance.yml",
+      "sha256": "bc57e339279815954e0693517c312f4548c6f6183a46f727557250cff40661f3"
+    },
+    {
+      "path": ".github/workflows/p9043-actual-promotion-boundary.yml",
+      "sha256": "c9effcc8088156884b1fc2ac8624c7e02e2777c74636a3409d65d02b908309c4"
+    },
+    {
+      "path": ".github/workflows/p9043-provenance-evidence.yml",
+      "sha256": "78d99bb012a0dc11ab072243d119719fedb6d2fcdd5385601dc4128fba0e2833"
+    },
+    {
+      "path": ".github/workflows/p905-20261026-qualification.yml",
+      "sha256": "17389feceed57c94b017bbd8611ddd1ce4eea34acc29c31f14aedced048095ad"
+    },
+    {
+      "path": ".github/workflows/p905-runner-host-trust-refresh.yml",
+      "sha256": "edbc15a402b3abba7c553a78cdf979091feca20fde0fdb4eb64583d45aa2284a"
+    },
+    {
+      "path": ".github/workflows/p905-runner-provenance-admission.yml",
+      "sha256": "6dae660b355f3227297c0daf0e97107c19a019b5dcc7afba86c391c1fc753104"
+    },
+    {
+      "path": ".github/workflows/p9062-osm-source-compare.yml",
+      "sha256": "36b97ba4a4b882ad74c8fc22c84a4fed802583707d8e79f4222279860607334a"
+    },
+    {
+      "path": ".github/workflows/p90621-historical-border.yml",
+      "sha256": "c895c60605f8d9ac214abc01e857d85edbe2f1da915aa11dee511c9b010ac474"
+    },
+    {
+      "path": ".github/workflows/p907216-osm-cartographic-ui.yml",
+      "sha256": "ed5bbc023d74050bb6c88c4e3af6a467fee6c4da3bc4cba3e61649b4f8a67f99"
+    },
+    {
+      "path": ".github/workflows/p907217-geometry-fidelity.yml",
+      "sha256": "1fa71b4bba2ebd4dee976dc3ab17526d778f61be0a5387150448c2cf9b184381"
+    },
+    {
+      "path": ".github/workflows/p907218-osm-live-85.yml",
+      "sha256": "c7b56e90a61c875225052decb629000100eeac903eef12159dd324773c39da84"
+    },
+    {
+      "path": ".github/workflows/p907219-cartographic-dossier.yml",
+      "sha256": "39b0c90469e3aad7cbf867a52211ff6b3fe6d89741474a240ca30cac7c3c0f80"
+    },
+    {
+      "path": ".github/workflows/p908-evidence-retention.yml",
+      "sha256": "e04e78af1f1f1c90e6efc85f34eab9e1efad17494b95bbbc236ba1f4fc5a6538"
+    },
+    {
+      "path": ".github/workflows/publish-actual-release.yml",
+      "sha256": "3fd39694439c4e4888127ce6923cd7725978fb93e59ddd65b6ba15eed0b1f5a6"
+    },
+    {
+      "path": ".github/workflows/refresh-actual-review-evidence.yml",
+      "sha256": "2cc7205dfb3cf41aa78181d7c5a00c14f83553dfb5bc826f27e5e43b6e03350a"
+    },
+    {
+      "path": ".github/workflows/refresh-md-official.yml",
+      "sha256": "46d5e7a0e20216e5f8122d207816da18949524e4e3c61f7ea5121e5c0434ee97"
+    },
+    {
+      "path": ".github/workflows/refresh-ro-official.yml",
+      "sha256": "3095f785989b03d935ea1c1acbbe822849ab5023566d884a4b22878d692214b9"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-10.yml",
+      "sha256": "8a39755324ad100fbdd5c0742c7fb3eb25c7da8169d7db7395c994d4e47ce9d3"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-11.yml",
+      "sha256": "54f015cd8b4b9fe5b270127e227ae4d5d408ca7e8daefa0e0dfc8c6819b69db7"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-12.yml",
+      "sha256": "6d2c8dcd6ec1fee98433f8756fa9c6e0cfb33028fcb0c2c31605121b61006eda"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-13-1-exact-topology.yml",
+      "sha256": "24f01c3f6f116f06340e37be99ab567d9619dd4d54e8d1d214fdc9716bda93d1"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-5.yml",
+      "sha256": "424812f7455199e183f6d3d1a5fb26f2043192b284e57268bddaf7879441c9da"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-6.yml",
+      "sha256": "603902d327c51d0b8ba3b8ca131f3fb1bc625686befa758e01e484adf62ec259"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-7.yml",
+      "sha256": "a5378f9739ebdd2739328343ff74ca1870bfcb2648638d41dc13cd274a4398e4"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-8.yml",
+      "sha256": "05e253404357dbfc6abf8961c0b2ef468811fd4d7db0b4afb8c8da8bb161d833"
+    },
+    {
+      "path": ".github/workflows/rt-adm2-9.yml",
+      "sha256": "9ab2ccd9a14f668ff844bd524d8c5b48d2dd2f7751828d3bd7c1e0d14adba4e5"
+    },
+    {
+      "path": ".github/workflows/rt-audit1.yml",
+      "sha256": "3084b22c9347270661a22ed60e6c5b600bc09269af8a97bddd04bd49f22d030f"
+    },
+    {
+      "path": ".github/workflows/verify-persisted-actual-release.yml",
+      "sha256": "9325d5aa1274e09f3d760e08a4feeea55ae084313446746120510375f891ff19"
+    },
+    {
+      "path": ".github/workflows/web-ni-u1-audit.yml",
+      "sha256": "3b1768a4e9ad7f50d8f61ec936b08f4f414e1d427eb943a30c47df31e37aad23"
+    },
+    {
+      "path": ".github/workflows/web-r2a1-admin-level-census.yml",
+      "sha256": "035549ad6302543a73d638e7ee749321ebcadfb0579772940f06129af7de5483"
+    },
+    {
+      "path": ".github/workflows/web-r2a2-historical-osm.yml",
+      "sha256": "1768d874eb3058d3900b83ea5c5a7ddbe7d1f228a5a3acf229d96b11e58dc49f"
+    },
+    {
+      "path": ".github/workflows/web-r2b-final-live-e2e.yml",
+      "sha256": "c2b08a1228fabf231504d5fffe6259c51d7a73ef4eeba9bde1e1f06d6f69b50a"
+    },
+    {
+      "path": ".github/workflows/web-r2c302-cdp-performance.yml",
+      "sha256": "4cb06765818e2a46793a220eac0d71447ff9c997d8f251b32d75e375ca899d61"
+    },
+    {
+      "path": ".github/workflows/web-r2c32-hardening.yml",
+      "sha256": "ab3fe2bd3f74451b630bca49ff1473c9d80ebaba751ee75e4986b4bdf90a5ddd"
+    },
+    {
+      "path": ".github/workflows/web-r2c4-published.yml",
+      "sha256": "9b794eb62de7f8e4508cd83925b54e682a6dcc9b2e23f10f4c0eb89c340ecdfb"
+    }
+  ],
+  "status": "PASS",
+  "scope": "Tracked workflow definitions only; historical GitHub registry records preserved separately"
+}

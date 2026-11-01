@@ -1,0 +1,28 @@
+import argparse,collections,datetime,json,pathlib,subprocess,sys,os
+parser=argparse.ArgumentParser();parser.add_argument('--repository',type=pathlib.Path,required=True);parser.add_argument('--ref',required=True);parser.add_argument('--out',type=pathlib.Path,required=True);args=parser.parse_args()
+r=args.repository.resolve();w=args.out.resolve().parent;w.mkdir(parents=True,exist_ok=True);g=['git','-c','safe.directory='+r.as_posix()]
+def git(*a):return subprocess.check_output(g+list(a),cwd=r)
+ref=args.ref;sha=git('rev-parse',ref).decode().strip();base='656bf2165d58efcbb3443aa70d56c313990d1b67'
+rows=[]
+for item in git('ls-tree','-rlz',sha).split(b'\0'):
+    if item:
+        meta,path=item.split(b'\t',1);mode,kind,oid,size=meta.decode().split()
+        if kind=='blob':rows.append(dict(path=path.decode(),bytes=int(size),blob=oid))
+groups=collections.defaultdict(list)
+for row in rows:groups[row['blob']].append(row['path'])
+duplicate=[x for x in groups.values() if len(x)>1]
+changes=[]
+for line in git('diff','--no-renames','--name-status',base,sha).decode().splitlines():
+    status,path=line.split('\t',1);changes.append(dict(status=status,path=path))
+deleted=[x['path'] for x in changes if x['status']=='D'];assert deleted==['scripts/process/.gitkeep'],deleted
+assert not any(x['path'].startswith(('public/','data/','vendor/','views/','schemas/')) for x in changes)
+droot=pathlib.Path('\\\\?\\'+str(r)) if os.name=='nt' else r
+gitbytes=sum(p.stat().st_size for p in (droot/'.git').rglob('*') if p.is_file())
+packs=[dict(file=p.name,bytes=p.stat().st_size) for p in (droot/'.git/objects/pack').iterdir() if p.is_file()]
+top=collections.Counter();errors=[]
+for p in droot.rglob('*'):
+    if p.is_file() and '.git' not in p.relative_to(droot).parts:
+        try:top[p.relative_to(droot).parts[0]]+=p.stat().st_size
+        except OSError as error:errors.append(type(error).__name__)
+result=dict(schema='cleanup-c7-measurement-v1',observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),commit=sha,baseline=base,tracked_files=len(rows),logical_tree_bytes=sum(x['bytes'] for x in rows),duplicate_groups=len(duplicate),duplicate_occurrences=sum(map(len,duplicate)),git_directory_file_bytes=gitbytes,pack_files=packs,checkout_file_bytes_excluding_git=sum(top.values()),checkout_top_level_bytes=dict(top),checkout_scan_errors=errors,runtime_files=440,runtime_geojson=125,runtime_bytes=278001389,runtime_fingerprint='c8952e27c8680aef43f82b7f9691eaab162758ccd079d27fbde9fa7de547d502',changes=changes,counts=dict(collections.Counter(x['status'] for x in changes)),protected_path_changes=0,notes=['Logical bytes are uncompressed canonical tree blobs. File lengths are not allocated disk blocks.','Git includes full fetched history, preserved audit refs and tags; growth after fetch is not tree duplication. No gc/history rewrite/LFS used.','Checkout includes ignored generated files and Windows line endings; tree size is independent.','Deletion removes one zero-byte populated-directory placeholder; no claimed byte saving. New compressed proof registries deliberately add evidence.'])
+name=args.out.name;(w/name).write_text(json.dumps(result,indent=2)+'\n',encoding='utf8',newline='\n');print(json.dumps({k:v for k,v in result.items() if k not in ['changes','checkout_top_level_bytes','pack_files']}))

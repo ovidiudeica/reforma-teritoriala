@@ -1,0 +1,31 @@
+{
+  "schema": "cleanup-c57-replay-proof-v1",
+  "commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+  "branch_registry_and_per_file_csv_byte_exact": true,
+  "canonical_metric_fields_reproduced": [
+    "commit",
+    "tracked_files",
+    "logical_tree_bytes",
+    "duplicate_groups",
+    "duplicate_occurrences",
+    "changes",
+    "counts",
+    "protected_path_changes"
+  ],
+  "windows_extended_paths": true,
+  "reproducer_sha256": {
+    "c5-final-reproducer.py.txt": "623d6545ceeb812e6aebcb8d858ca9dfe420d0be9dd16ddeca301d36cc6f7747",
+    "c7-final-reproducer.py.txt": "512e25da36645d308c8213c6214a5d75138b6a35aa56c9906ea0e206faa57395"
+  },
+  "original_names": [
+    "c5-final-branches.json",
+    "c5-final-branch-per-file.csv",
+    "c7-final-core.json"
+  ],
+  "replay_names": [
+    "c5-portable-replay/branches.json",
+    "c5-portable-replay/branch-per-file.csv",
+    "c7-portable-replay.json"
+  ],
+  "status": "PASS"
+}

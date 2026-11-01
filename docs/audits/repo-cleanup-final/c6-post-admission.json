@@ -1,0 +1,274 @@
+{
+  "schema": "cleanup-exact-ci-admission-v1",
+  "observed_at": "2026-11-01T03:04:36.899912+00:00",
+  "commit": "eee441d06c871151523f4c851b28545e4a51c2e5",
+  "executed_success_checks": 28,
+  "existing_conditional_skips": [],
+  "successful_runs": 16,
+  "required_contexts": [
+    "verify-persisted-release",
+    "actual-change-reproducibility",
+    "actual-release-trust-chain",
+    "p2-statistical-foundation",
+    "frontend-geometry-taxonomy",
+    "frontend-browser-qa"
+  ],
+  "checks": [
+    {
+      "id": 124733522235,
+      "name": "actual-change-reproducibility",
+      "conclusion": "success"
+    },
+    {
+      "id": 124733284490,
+      "name": "frontend-browser-qa",
+      "conclusion": "success"
+    },
+    {
+      "id": 124733157857,
+      "name": "actual-change-repro-compare",
+      "conclusion": "success"
+    },
+    {
+      "id": 124732475150,
+      "name": "published-chromium",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731135725,
+      "name": "Dependabot",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731132674,
+      "name": "Dependabot",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731129971,
+      "name": "Dependabot",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731129262,
+      "name": "Dependabot",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731033953,
+      "name": "report-build-status",
+      "conclusion": "success"
+    },
+    {
+      "id": 124731033938,
+      "name": "deploy",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730928179,
+      "name": "actual-change-repro-B",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730928166,
+      "name": "actual-change-repro-A",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730880924,
+      "name": "Analyze (python)",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730880901,
+      "name": "Analyze (actions)",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730880754,
+      "name": "Analyze (javascript-typescript)",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730880489,
+      "name": "build",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730878157,
+      "name": "actual-release-trust-chain",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730878129,
+      "name": "p84-export-validation",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730878077,
+      "name": "full-linux-regression",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730878046,
+      "name": "p82-derived-topology",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730878024,
+      "name": "frontend-geometry-taxonomy",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730878019,
+      "name": "p2-statistical-foundation",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730878017,
+      "name": "chromium-hardening",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730877939,
+      "name": "verify-persisted-release",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730877915,
+      "name": "browser-tests",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730877873,
+      "name": "p83-geometric-validation",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730877869,
+      "name": "p907216-osm-ui-fail-closed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124730877841,
+      "name": "detect-change-repro-scope",
+      "conclusion": "success"
+    }
+  ],
+  "runs": [
+    {
+      "id": 41267235447,
+      "name": "WEB-R2c.4 published website acceptance",
+      "event": "workflow_dispatch",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266786226,
+      "name": "github_actions in / for actions/download-artifact - Update #1669175416",
+      "event": "dynamic",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266785130,
+      "name": "github_actions in / for actions/setup-python - Update #1669175400",
+      "event": "dynamic",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266783809,
+      "name": "github_actions in / for actions/setup-node - Update #1669175357",
+      "event": "dynamic",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266784020,
+      "name": "github_actions in / for actions/upload-artifact - Update #1669175378",
+      "event": "dynamic",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266701004,
+      "name": "Frontend geometry taxonomy",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700968,
+      "name": "P9.0.7.2.16 source-only OSM role UI gate",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700992,
+      "name": "Gate P2 statistical foundation",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700964,
+      "name": "Gate ACTUAL release trust chain",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700972,
+      "name": "P8.3 geometric measurement validation",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700974,
+      "name": "pages build and deployment",
+      "event": "dynamic",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700963,
+      "name": "Verify persisted ACTUAL release",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700973,
+      "name": "Push on main",
+      "event": "dynamic",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700965,
+      "name": "WEB-R2c.3.2 Chromium hardening",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700966,
+      "name": "Frontend browser QA",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41266700967,
+      "name": "Gate ACTUAL CHANGE reproducibility",
+      "event": "push",
+      "conclusion": "success",
+      "attempt": 1
+    }
+  ],
+  "status": "PASS",
+  "warning": "Full-suite artifact body and published runtime are admitted separately; green check status alone is insufficient"
+}

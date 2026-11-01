@@ -3,11 +3,11 @@
   "baseline_commit": "656bf2165d58efcbb3443aa70d56c313990d1b67",
   "actual_mutation_allowed": false,
   "p91_authorized": false,
-  "final_verdict": "PENDING",
+  "final_verdict": "CLEANUP_ACCEPTED_WITH_DOCUMENTED_EXCEPTIONS",
   "stages": [
     {
       "id": "C0",
-      "status": "BASELINE_CAPTURED",
+      "status": "CERTIFIED_BASELINE",
       "base": "656bf2165d58efcbb3443aa70d56c313990d1b67",
       "pr": null,
       "files": [
@@ -21,7 +21,7 @@
       "tests": "3464 canonical blobs SHA-256; 478 protected files; 440 runtime resources /125 GeoJSON",
       "decision": "Preserve exact accepted corpus",
       "blockers": [],
-      "next": "C1 exact-SHA CI and post-merge"
+      "next": "Preserve canonical baseline"
     },
     {
       "id": "C1",
@@ -35,7 +35,6 @@
         "pr491-ci.json",
         "c1-integration.json",
         "c1-integrity.json",
-        "c1-completion.json",
         "c1-completion.json"
       ],
       "tests": "491 post-merge 25/25 checks,17/17 runs PASS; 490 post-merge21/21 checks,13/13 runs PASS; protected478/runtime440 unchanged",
@@ -78,10 +77,10 @@
         "c3-decisions.csv",
         "c3-deletion-proof.json"
       ],
-      "tests": "494 exact-head22 executed checks/15 runs and post-merge21 checks/13 runs PASS; published unique marker verified",
+      "tests": "494exacthead22checks/15runs andpost21checks/13runsPASS; all71modules retained; unique public marker verified",
       "decision": "Delete only empty populated-directory placeholder; retain future corpora and all other historical candidates",
       "blockers": [],
-      "next": "Admit all exact66a34d1d post-merge controls before C6 merge",
+      "next": "Keep retained evidence and cache policy",
       "tested_head": "0041d36a177897d35820f41fafddd957e551ecc0",
       "merge_commit": "66a34d1d231c1296b44c84e688c62cc74b670ed5"
     },
@@ -107,21 +106,21 @@
     },
     {
       "id": "C5",
-      "status": "CLASSIFIED_PENDING_FINAL_REFRESH",
-      "base": "8c8cb123c0e8c363268886aba863131e33f3e1a4",
+      "status": "COMPLETE_WITH_PRESERVATION_DECISIONS",
+      "base": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
       "pr": null,
       "files": [
         "branches.json",
         "branch-per-file.csv.gz"
       ],
-      "tests": "Full Git history, per-branch divergence and per-file blob comparison",
-      "decision": "398 and unmerged RT evidence preserved; active Dependabot preserved",
+      "tests": "15remoteheads/API/fetchedSHAs agree; allreachablemainhistory compared;12intentionalPRs;14mergedlocalrefs safelyremoved; portable exactreplay PASS",
+      "decision": "Retain10unmerged provenance/evidence branches and4activeDependabot branches;398Draft preserved",
       "blockers": [],
-      "next": "Fresh reference/PR/consumer check before any branch removal"
+      "next": "No branch deletion without renewed exact-reference and evidence conservation check"
     },
     {
       "id": "C6",
-      "status": "POST_MERGE_IN_PROGRESS",
+      "status": "POST_MERGE_VERIFIED",
       "base": "66a34d1d231c1296b44c84e688c62cc74b670ed5",
       "pr": 495,
       "files": [
@@ -134,48 +133,59 @@
         "c6-coverage-proof.json",
         "workflow-roles-registered.csv"
       ],
-      "tests": "PR:21 executed checks/13 runs PASS; see c6-pr-admission.json and c6-current-full-admission.json; exact132 files/1074 tests,0 skips; effective protection unchanged",
+      "tests": "495post28checks/16runsPASS;132exactfiles1074tests0skip; required rollup and full artifact admitted; effective protection identicalC0",
       "decision": "Execute unchanged full suite once; same required frontend context fails unless all4 real jobs succeed; retain standalone manual jobs/artifacts",
       "blockers": [],
-      "next": "Admit all exact merge commit controls before C8 merge",
+      "next": "Maintain coverage and unchanged required contexts",
       "merge_commit": "eee441d06c871151523f4c851b28545e4a51c2e5"
     },
     {
       "id": "C7",
-      "status": "BASELINE_CAPTURED",
-      "base": "656bf2165d58efcbb3443aa70d56c313990d1b67",
+      "status": "MEASURED_AND_REPRODUCIBLE",
+      "base": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
       "pr": null,
       "files": [
-        "c0-baseline.json"
+        "c7-final-core.json",
+        "c7-pages-artifact-observations.json",
+        "c7-final-reproducer.py.txt"
       ],
-      "tests": "Logical tree, pack, checkout and runtime measured separately",
+      "tests": "Canonical tree, full-historyGitpack, extendedpathcheckout, runtime and PagesZIP measured separately; portable method replay PASS",
       "decision": "Identical Git blobs are already deduplicated; no history rewrite or artificial compression of runtime URLs",
       "blockers": [],
-      "next": "Measure final tree, published artifact and actual CI durations"
+      "next": "No runtime URL compression or Git history rewrite"
     },
     {
       "id": "C8",
-      "status": "LOCAL_VERIFIED_PENDING_CI",
+      "status": "POST_MERGE_VERIFIED_WITH_DOCUMENTED_ALERTS",
       "base": "eee441d06c871151523f4c851b28545e4a51c2e5",
-      "pr": null,
+      "pr": 496,
       "files": [
         "download-receipts-security.json"
       ],
-      "tests": "Signature scan3471 blobs+544934925 expanded bytes:6 expired third-party signed-URL key IDs, no other configured signatures; npm audit0; Chrome security6/6 PASS",
+      "tests": "28postchecks/16runsPASS; actualsignatureinventory0unknown/0limits;2redactiontests;210immutable/localuses;5legacyGitHubalerts remainOPEN",
       "decision": "Pin last two mutable action refs; preserve original expired third-party receipts and open alerts; add bounded read-only signature scan and redaction regressions",
       "blockers": [],
-      "next": "Exact-head CI and post-merge security verification"
+      "next": "Retain original receipts and explicit external alert status",
+      "merge_commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018"
     },
     {
       "id": "C9",
-      "status": "PENDING",
-      "base": null,
+      "status": "CORE_ACCEPTED_FINAL_METADATA_GATED",
+      "base": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
       "pr": null,
-      "files": [],
-      "tests": "Not yet executed on final cleanup revision",
-      "decision": "No acceptance verdict until all mandatory checks succeed",
+      "files": [
+        "RAPORT-FINAL.md",
+        "c9-acceptance-matrix.json",
+        "c9-clean-clone.json",
+        "c8-post-admission.json",
+        "c8-published-admission.json"
+      ],
+      "tests": "All16corecriteria PASS;1074Linuxregressions0skip;440publicresources125GeoJSON exactSHA;53assertedChromechecks/52captures; cloneall3546canonicalfiles match",
+      "decision": "CLEANUP_ACCEPTED_WITH_DOCUMENTED_EXCEPTIONS",
       "blockers": [],
-      "next": "Fresh clone/install/full CI/ACTUAL hashes/440 public resources/desktop-mobile E2E/final report"
+      "next": "Admit this metadata PR exact-head CI, merge, post controls and published exactcheckout before final completion"
     }
-  ]
+  ],
+  "accepted_core_commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+  "final_metadata_publication": "Requires the same exact-SHA CI/merge/post/publication protocol; final external admission receipt records the actual documentation merge SHA"
 }

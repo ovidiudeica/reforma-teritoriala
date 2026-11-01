@@ -1,0 +1,28 @@
+import argparse,collections,csv,datetime,gzip,hashlib,io,json,pathlib,subprocess
+parser=argparse.ArgumentParser();parser.add_argument('--repository',type=pathlib.Path,required=True);parser.add_argument('--inputs',type=pathlib.Path,required=True);parser.add_argument('--out',type=pathlib.Path,required=True);args=parser.parse_args()
+w=args.inputs.resolve();out=args.out.resolve();out.mkdir(parents=True,exist_ok=True);r=args.repository.resolve();g=['git','-c','safe.directory='+r.as_posix()]
+def input_csv():
+    p=w/'c5-final-branch-per-file.csv'
+    return p.read_bytes() if p.exists() else gzip.decompress((w/'c5-final-branch-per-file.csv.gz').read_bytes())
+def git(*a):return subprocess.check_output(g+list(a),cwd=r)
+raw=json.loads((w/'c5-final-branches.json').read_bytes());main=raw['main'];prs=json.loads((w/'c5-final-open-prs.json').read_bytes());remote=json.loads((w/'c5-final-github-branches.json').read_bytes())
+assert {x['branch']:x['sha'] for x in remote}=={'main':main,**{x['branch']:x['sha'] for x in raw['branches']}}
+reachable={line.split(b' ',1)[0].decode() for line in git('rev-list','--objects',main).splitlines()}
+branches=[]
+for row in raw['branches']:
+    paths=[]
+    for line in git('ls-tree','-rz',row['sha']).split(b'\0'):
+        if line:
+            meta,p=line.split(b'\t',1);mode,kind,oid=meta.decode().split()
+            if kind=='blob' and oid not in reachable:paths.append(p.decode())
+    associated=[p['number'] for p in prs if p['head_branch']==row['branch']]
+    for p in prs:
+        if p['head_branch']==row['branch']:assert p['head_sha']==row['sha']
+    commits=git('rev-list',main+'..'+row['sha']).decode().splitlines()
+    branches.append(dict(branch=row['branch'],head=row['sha'],classification=row['classification'],decision='RETAIN',open_prs=associated,head_blobs_absent_current_main_tree=row['exclusive_blob_paths'],head_blob_paths_absent_all_main_history=paths,history_exclusive_paths=len(paths),all_head_commits_reachable_main=row['ahead']==0,commits_not_reachable_main=commits,retention_basis='ACTIVE_DEPENDENCY_UPDATE' if row['classification']=='ACTIVE' else 'UNMERGED_CODE_OR_EVIDENCE_BLOBS' if paths else 'UNMERGED_ORIGINAL_COMMIT_PROVENANCE; content duplication alone does not prove commit identities dispensable'))
+rows=list(csv.DictReader(io.StringIO(input_csv().decode('utf8'))))
+for row in rows:row['head_blob_absent_all_main_history']=bool(row['head_blob'] and row['head_blob'] not in reachable)
+with (out/'c5-final-history-per-file.csv').open('w',newline='',encoding='utf8') as f:
+    writer=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');writer.writeheader();writer.writerows(rows)
+report=dict(schema='cleanup-c5-full-history-reconciliation-v1',observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),main=main,full_history=True,github_and_fetched_ref_snapshot_identical=True,remote_branches_including_main=len(remote),intentional_open_prs=[p['number'] for p in prs],open_cleanup_prs=0,classes=dict(collections.Counter(row['classification'] for row in branches)),branches=branches,raw_registry_sha256=hashlib.sha256((w/'c5-final-branches.json').read_bytes()).hexdigest(),raw_per_file_sha256=hashlib.sha256(input_csv()).hexdigest(),history_per_file_sha256=hashlib.sha256((out/'c5-final-history-per-file.csv').read_bytes()).hexdigest(),history_method='git rev-list --objects MAIN; compare every branch-head blob against all reachable objects, separately from HEAD-tree comparison',notes=['The older exclusive_blob_paths column compares current main tree only. It is not a claim of exclusion from main history.','All unmerged RT/398 evidence and active dependency branches retained; age and absent imports never justify deletion.'])
+(out/'c5-final-reconciliation.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf8',newline='\n');print(json.dumps(dict(main=main,classes=report['classes'],remote=len(remote),prs=len(prs),history_exclusives=[dict(branch=x['branch'],paths=x['history_exclusive_paths']) for x in branches])))

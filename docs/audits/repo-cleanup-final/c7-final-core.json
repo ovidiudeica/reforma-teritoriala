@@ -1,0 +1,521 @@
+{
+  "schema": "cleanup-c7-measurement-v1",
+  "observed_at": "2026-11-01T03:22:04.396013+00:00",
+  "commit": "ce14dd73f223b32ad9a9149314ba75379a6a2018",
+  "baseline": "656bf2165d58efcbb3443aa70d56c313990d1b67",
+  "tracked_files": 3546,
+  "logical_tree_bytes": 529340072,
+  "duplicate_groups": 21,
+  "duplicate_occurrences": 59,
+  "git_directory_file_bytes": 380245850,
+  "pack_files": [
+    {
+      "file": "pack-27acf7652ce55d4e4405e13993d7215d824d525f.idx",
+      "bytes": 74460
+    },
+    {
+      "file": "pack-27acf7652ce55d4e4405e13993d7215d824d525f.pack",
+      "bytes": 198667546
+    },
+    {
+      "file": "pack-27acf7652ce55d4e4405e13993d7215d824d525f.rev",
+      "bytes": 10536
+    },
+    {
+      "file": "pack-77a59d78eb7ee335fdb01fc51d9934e99cb47ed0.idx",
+      "bytes": 298488
+    },
+    {
+      "file": "pack-77a59d78eb7ee335fdb01fc51d9934e99cb47ed0.pack",
+      "bytes": 79816697
+    },
+    {
+      "file": "pack-77a59d78eb7ee335fdb01fc51d9934e99cb47ed0.rev",
+      "bytes": 42540
+    },
+    {
+      "file": "pack-905107f187b2e681922f6b6c7c60d293686b8324.idx",
+      "bytes": 274072
+    },
+    {
+      "file": "pack-905107f187b2e681922f6b6c7c60d293686b8324.pack",
+      "bytes": 78690686
+    },
+    {
+      "file": "pack-905107f187b2e681922f6b6c7c60d293686b8324.rev",
+      "bytes": 39052
+    }
+  ],
+  "checkout_file_bytes_excluding_git": 531131322,
+  "checkout_top_level_bytes": {
+    ".gitattributes": 1053,
+    ".gitignore": 115,
+    "app.js": 68500,
+    "atlas-advanced-navigation.mjs": 8703,
+    "atlas-design-tokens.css": 1691,
+    "atlas-explorer-shell.css": 8623,
+    "atlas-explorer-shell.mjs": 3594,
+    "atlas-export-ui.mjs": 6832,
+    "atlas-export-visual.mjs": 9398,
+    "atlas-export.css": 892,
+    "atlas-export.mjs": 11748,
+    "atlas-filters.mjs": 14723,
+    "atlas-geographic-measurement.mjs": 3861,
+    "atlas-geometric-client.mjs": 2651,
+    "atlas-geometric-overlay.mjs": 2692,
+    "atlas-geometric-ui.mjs": 6786,
+    "atlas-geometric-worker.mjs": 420,
+    "atlas-geometric.css": 2337,
+    "atlas-geometry-resources.mjs": 1614,
+    "atlas-hierarchy-validate.mjs": 4737,
+    "atlas-identify-ui.mjs": 9519,
+    "atlas-identify.css": 1417,
+    "atlas-layout.css": 2162,
+    "atlas-layout.mjs": 4691,
+    "atlas-map-controls.css": 3261,
+    "atlas-measure-ui.mjs": 4966,
+    "atlas-mobile-ui.mjs": 4641,
+    "atlas-name-format.mjs": 1311,
+    "atlas-neighbors-ui.mjs": 6940,
+    "atlas-neighbors.css": 1045,
+    "atlas-neighbors.mjs": 5897,
+    "atlas-ni-jurisdiction-visibility.mjs": 445,
+    "atlas-nistrenia-administrative.mjs": 7515,
+    "atlas-nistrenia-jurisdiction.mjs": 7613,
+    "atlas-nistrenia-osm.mjs": 2440,
+    "atlas-nistrenia-outlines.mjs": 5184,
+    "atlas-nistrenia-unified-card.mjs": 1774,
+    "atlas-osm-admin-badges.mjs": 1385,
+    "atlas-osm-admin-filter.mjs": 1490,
+    "atlas-osm-level-geometry-actions.mjs": 3468,
+    "atlas-osm-roles.css": 234,
+    "atlas-osm-roles.mjs": 6067,
+    "atlas-p5.3.css": 507,
+    "atlas-p6.2.css": 1396,
+    "atlas-panel-content.css": 8129,
+    "atlas-panels.mjs": 6310,
+    "atlas-point-geometry.mjs": 3926,
+    "atlas-point-identification.mjs": 3874,
+    "atlas-presentation.mjs": 10437,
+    "atlas-preview.mjs": 4180,
+    "atlas-r1b-ui.css": 14591,
+    "atlas-r1b3-polish.css": 7268,
+    "atlas-ro-md-fit.mjs": 2176,
+    "atlas-search.mjs": 11721,
+    "atlas-share.mjs": 3433,
+    "atlas-topology-frontier-codec.mjs": 1702,
+    "atlas-topology-policy.mjs": 1412,
+    "atlas-tree-labels.mjs": 2234,
+    "atlas-tree-window.mjs": 2371,
+    "atlas-tree.css": 4234,
+    "atlas-tree.mjs": 17440,
+    "atlas-url-state.mjs": 8667,
+    "DATA-LICENSING.md": 2802,
+    "geometry-taxonomy.mjs": 8659,
+    "index.html": 30098,
+    "LICENSE": 1114,
+    "package-lock.json": 104056,
+    "package.json": 6538,
+    "README.md": 15001,
+    "SECURITY.md": 1175,
+    "style.css": 10354,
+    ".github": 263863,
+    "docs": 175172216,
+    "schemas": 21096,
+    "container": 628,
+    "data": 66130134,
+    "prototypes": 25856,
+    "public": 276653459,
+    "scripts": 2789336,
+    "tools": 55558,
+    "vendor": 9102117,
+    "views": 376819
+  },
+  "checkout_scan_errors": [],
+  "runtime_files": 440,
+  "runtime_geojson": 125,
+  "runtime_bytes": 278001389,
+  "runtime_fingerprint": "c8952e27c8680aef43f82b7f9691eaab162758ccd079d27fbde9fa7de547d502",
+  "changes": [
+    {
+      "status": "M",
+      "path": ".gitattributes"
+    },
+    {
+      "status": "M",
+      "path": ".github/workflows/frontend-browser-qa.yml"
+    },
+    {
+      "status": "M",
+      "path": ".github/workflows/p82-derived-topology.yml"
+    },
+    {
+      "status": "M",
+      "path": ".github/workflows/p84-export-validation.yml"
+    },
+    {
+      "status": "M",
+      "path": ".github/workflows/rt-adm2-13-1-exact-topology.yml"
+    },
+    {
+      "status": "M",
+      "path": ".gitignore"
+    },
+    {
+      "status": "M",
+      "path": "README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-20261031/CLEANUP-1.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-20261031/CLEANUP-2-1-1-results.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-20261031/CLEANUP-2-1-2.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-20261031/CLEANUP-2-1.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-20261031/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-20261031/git-tree-per-file.csv"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/492-post-integrity.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/C2-PORTABILITY.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/C3.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/C6.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/C8.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/branch-per-file.csv.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/branch-protection.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/branches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c0-baseline.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c0-github-state.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c0-protected.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c0-runtime.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c0-tree.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c1-490-final-checks.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c1-490-final-runs.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c1-491-post-checks.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c1-491-post-runs.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c1-completion.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c1-integration.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c1-integrity.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-258-reconciliation.csv"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-analyzer-v1.py.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-dependencies.csv.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-dynamic-readers.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-per-file.csv.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-portability-proof.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-provenance.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c2-uncompressed-SHA256SUMS"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-490-post-checks.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-490-post-runs.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-492checks.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-492postchecks.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-492postruns.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-492runs.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-493checks.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-493runs.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-base-integrity.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-decisions.csv"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c3-deletion-proof.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-493postchecks.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-493postruns.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-494checks.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-494runs.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-c6-baseline-jobs-41242423873.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-c6-baseline-jobs-41242423974.json.gz"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-coverage-proof.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-current-full-admission.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-original-full-suite.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-pr-admission.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-protection-after.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c6-protection-before.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c8-action-pin-proof.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c8-alert-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c8-npm-audit.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c8-provenance.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/c8-security-report.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/download-receipts-security.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/pages-config.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/pr491-ci.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/pr492-admission.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/pr493-admission.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/pr494-admission.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/progress.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/scheduled-workflow-decisions.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/sha256-manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/workflow-metadata-reconciliation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/audits/repo-cleanup-final/workflow-roles-registered.csv"
+    },
+    {
+      "status": "M",
+      "path": "docs/roadmap/autonomous-completion-register.json"
+    },
+    {
+      "status": "A",
+      "path": "scripts/audit/cleanup-2-1-reference-graph.py"
+    },
+    {
+      "status": "A",
+      "path": "scripts/audit/cleanup-evidence-guard.py"
+    },
+    {
+      "status": "A",
+      "path": "scripts/audit/cleanup-file-usage.py"
+    },
+    {
+      "status": "A",
+      "path": "scripts/audit/cleanup-security-signatures.py"
+    },
+    {
+      "status": "A",
+      "path": "scripts/audit/test_cleanup_file_usage.py"
+    },
+    {
+      "status": "A",
+      "path": "scripts/audit/test_cleanup_security_signatures.py"
+    },
+    {
+      "status": "A",
+      "path": "scripts/ci/check-job-results.mjs"
+    },
+    {
+      "status": "A",
+      "path": "scripts/ci/check-job-results.test.mjs"
+    },
+    {
+      "status": "D",
+      "path": "scripts/process/.gitkeep"
+    }
+  ],
+  "counts": {
+    "M": 8,
+    "A": 83,
+    "D": 1
+  },
+  "protected_path_changes": 0,
+  "notes": [
+    "Logical bytes are uncompressed canonical tree blobs. File lengths are not allocated disk blocks.",
+    "Git includes full fetched history, preserved audit refs and tags; growth after fetch is not tree duplication. No gc/history rewrite/LFS used.",
+    "Checkout includes ignored generated files and Windows line endings; tree size is independent.",
+    "Deletion removes one zero-byte populated-directory placeholder; no claimed byte saving. New compressed proof registries deliberately add evidence."
+  ]
+}
