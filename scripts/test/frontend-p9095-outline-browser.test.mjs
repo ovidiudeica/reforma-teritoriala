@@ -22,7 +22,10 @@ try{
    assert.deepEqual(state.checked,[true,true,false]);
    assert.deepEqual(state.sourceLayers,[]);
   });
-  // Activate NI deliberately after verifying the RO/MD-only initial state.\n  await page.call(function(){const c=document.getElementById('layer-ni');c.checked=true;c.dispatchEvent(new Event('change',{bubbles:true}));});\n  await page.openPanel('entities');await page.click('.tree-visibility-toggle[data-entity-id=\"view-nistrenia\"]');\n  await t.test('OSM attribution is deduplicated and persists when the raster basemap is off',async()=>{
+  // Activate NI deliberately after verifying the RO/MD-only initial state.
+  await page.call(function(){const c=document.getElementById('layer-ni');c.checked=true;c.dispatchEvent(new Event('change',{bubbles:true}));});
+  await page.openPanel('entities');await page.click('.tree-visibility-toggle[data-entity-id=\"view-nistrenia\"]');
+  await t.test('OSM attribution is deduplicated and persists when the raster basemap is off',async()=>{
    const count=()=>page.evaluate("(document.querySelector('.leaflet-control-attribution')?.textContent.match(/© OpenStreetMap contributors · ODbL/g)||[]).length");
    assert.equal(await count(),1,'one shared OSM/ODbL attribution while raster and NI outlines are active');
    await page.evaluate("document.getElementById('basemap-toggle').click()");
