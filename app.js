@@ -442,7 +442,7 @@ function renderNistreniaDetails(id){
  document.getElementById('details-title').textContent=node.display_name;
  const cartographic=node.kind==='geometry_navigation';
  document.getElementById('details-summary').textContent=cartographic?'Referințe OSM · catalog cartografic auxiliar':types[node.kind]+' · organizare declarată în 2023';
- const resources=node.kind==='root'||cartographic?[...nistreniaView.roleIds]:node.geometry_candidates;
+ const resources=nistreniaView.geometryByNode?.get(id)||[];
  const resourceRows=resources.map(ref=>{
   const actual=entityById.get(ref),source=nistreniaView.resources.get(ref),role=osmRoleById.get(ref);
   const legalParent=entityById.get(actual.hierarchy?.consolidated_parent_id)?.display_name;
@@ -450,7 +450,7 @@ function renderNistreniaDetails(id){
   return '<li><strong>'+escapeHtml(actual.display_name)+'</strong> · '+escapeHtml(role?.role_label||'Rol cartografic OSM')+'<p>OSM '+source.osm_relation_id+' · nivel '+escapeHtml(String(source.osm_admin_level??'nedocumentat'))+' · versiunea '+source.osm_version+' · '+escapeHtml(source.osm_timestamp)+'</p>'+(legalParent?'<p>Părinte oficial MD păstrat: '+escapeHtml(legalParent)+'.</p>':'')+(geometricParent?'<p>Grupare geometrică OSM: '+escapeHtml(geometricParent)+'; nu stabilește apartenența administrativă sau controlul efectiv.</p>':'')+'<p><a href="https://www.openstreetmap.org/relation/'+source.osm_relation_id+'" target="_blank" rel="noopener noreferrer">Relația OSM</a> · <button type="button" data-ni-resource="'+escapeHtml(ref)+'">'+(visibleEntityIds.has(ref)?'Ascunde':'Arată')+' conturul OSM</button></p></li>';
  }).join('');
  const outline=nistreniaOutlineProof.relations.find(item=>item.id===id);
- document.getElementById('details-body').innerHTML=cartographic?'<section class="details-section" data-ni-cartographic><h3>Catalog cartografic auxiliar</h3><p>Acest catalog nu este o unitate administrativă și nu are poligon propriu. Referințele reutilizează geometriile canonice MD, cu aceeași stare de afișare și același card geometric.</p><p>Poziția în catalog nu stabilește apartenența administrativă, certificarea juridică sau controlul efectiv. Asocierile documentare candidate rămân necertificate.</p><ul>'+resourceRows+'</ul></section>':'<section class="details-section"><h3>Organizare administrativă documentată</h3><p>'+escapeHtml(node.temporal_notice)+'</p><dl class="kv">'+detailRow('Părinte documentar',parent?.display_name||'—')+detailRow('Geometrie',statuses[node.geometry_status])+detailRow('Statut documentar','Confirmat numai pentru sursa din 2023; actualizare contemporană provizorie')+'</dl><p>Prezentare descriptivă separată de organizarea juridică a Republicii Moldova. Apartenența declarată și conturul OSM nu demonstrează controlul efectiv sau o jurisdicție juridică nouă.</p><dl class="kv">'+detailRow('Referințe în anexă',node.source_refs.join(', ')||'Anexa integrală')+'</dl><p><a href="https://github.com/ovidiudeica/reforma-teritoriala/blob/447f9bdbca5eb2869d107641a14398f7a273165e/docs/evidence/ni-jur-independent-20261020/documentary/PMR-ATD-ANNEX1-133268-text.json" target="_blank" rel="noopener noreferrer">Anexa documentară conservată</a></p>'+(outline?'<p>Contur OSM '+outline.osm_relation_id+' · versiunea '+outline.relation_version+' · '+escapeHtml(outline.relation_timestamp)+' · © OpenStreetMap contributors, ODbL.</p>':'')+'</section>'+(resourceRows?'<section class="details-section"><h3>Contururi OSM de consultat separat</h3><p>Aceste referințe nu certifică poligonul administrativ al unității selectate.</p><ul>'+resourceRows+'</ul></section>':'')+(node.additional_md_name_candidates?.length?'<section class="details-section"><h3>Omonime în catalogul MD</h3><p>Potriviri nominale, fără confirmarea identității sau a geometriei.</p><ul>'+node.additional_md_name_candidates.map(x=>'<li>'+escapeHtml(x.display_name)+' · '+escapeHtml(x.official_md_parent||'')+' · '+escapeHtml(x.actual_id)+'</li>').join('')+'</ul></section>':'');
+ document.getElementById('details-body').innerHTML=cartographic?'<section class="details-section" data-ni-cartographic><h3>Catalog cartografic auxiliar</h3><p>Acest catalog nu este o unitate administrativă și nu are poligon propriu. Referințele reutilizează geometriile canonice MD, cu aceeași stare de afișare și același card geometric.</p><p>Poziția în catalog nu stabilește apartenența administrativă, certificarea juridică sau controlul efectiv. Asocierile documentare candidate rămân necertificate.</p><ul>'+resourceRows+'</ul></section>':'<section class="details-section"><h3>Organizare administrativă documentată</h3><p>'+escapeHtml(node.temporal_notice)+'</p><dl class="kv">'+detailRow('Părinte documentar',parent?.display_name||'—')+detailRow('Geometrie',statuses[node.geometry_status])+detailRow('Statut documentar','Confirmat numai pentru sursa din 2023; actualizare contemporană provizorie')+'</dl><p>Prezentare descriptivă separată de organizarea juridică a Republicii Moldova. Apartenența declarată și conturul OSM nu demonstrează controlul efectiv sau o jurisdicție juridică nouă.</p><dl class="kv">'+detailRow('Referințe în anexă',node.source_refs.join(', ')||'Anexa integrală')+'</dl><p><a href="https://github.com/ovidiudeica/reforma-teritoriala/blob/447f9bdbca5eb2869d107641a14398f7a273165e/docs/evidence/ni-jur-independent-20261020/documentary/PMR-ATD-ANNEX1-133268-text.json" target="_blank" rel="noopener noreferrer">Anexa documentară conservată</a></p>'+(outline?'<p>Contur OSM '+outline.osm_relation_id+' · versiunea '+outline.relation_version+' · '+escapeHtml(outline.relation_timestamp)+' · © OpenStreetMap contributors, ODbL.</p>':'')+'</section>'+(resourceRows?'<section class="details-section"><h3>Referințe OSM ale acestei unități</h3><p>Aceste referințe nu certifică poligonul administrativ al unității selectate.</p><ul>'+resourceRows+'</ul></section>':'')+(node.additional_md_name_candidates?.length?'<section class="details-section"><h3>Omonime în catalogul MD</h3><p>Potriviri nominale, fără confirmarea identității sau a geometriei.</p><ul>'+node.additional_md_name_candidates.map(x=>'<li>'+escapeHtml(x.display_name)+' · '+escapeHtml(x.official_md_parent||'')+' · '+escapeHtml(x.actual_id)+'</li>').join('')+'</ul></section>':'');
  for(const button of document.querySelectorAll('[data-ni-resource]'))button.addEventListener('click',()=>{
   const ref=button.dataset.niResource;if(!nistreniaView.roleIds.has(ref))return;
   if(visibleEntityIds.has(ref))visibleEntityIds.delete(ref);else visibleEntityIds.add(ref);
@@ -472,7 +472,14 @@ async function selectNistreniaNode(id,options={zoom:true,source:'tree'}){
   if(nistreniaOutlines?.has(id))atlasAdvanced?.record(id);
   if(atlasPanels.state.active==='share')atlasShare?.refresh();
   // A parent name selects only its own UI/source identity, never its descendants.
-  if(options.zoom!==false&&nistreniaOutlines?.has(id))map.fitBounds(nistreniaOutlines.bounds(id),{padding:[30,30],maxZoom:12,...(options.source==='url'?{animate:false}:{})});
+  if(options.zoom!==false){
+   if(nistreniaOutlines?.has(id))map.fitBounds(nistreniaOutlines.bounds(id),{padding:[30,30],maxZoom:12,...(options.source==='url'?{animate:false}:{})});
+   else{
+    const geometryId=nistreniaView.primaryGeometryForNode?.(id);
+    const bounds=entityById.get(geometryId)?.map?.bbox;
+    if(Array.isArray(bounds)&&bounds.length===4)map.fitBounds([[bounds[1],bounds[0]],[bounds[3],bounds[2]]],{padding:[30,30],maxZoom:12,...(options.source==='url'?{animate:false}:{})});
+   }
+  }
  };
  return atlasUrl?atlasUrl.action('push',apply):apply();
 }
@@ -537,25 +544,25 @@ function renderHierarchyTree(){
  if(!container||!hierarchyTree)return;
  const isTreeGeometryVisible=id=>{
   if(nistreniaOutlines?.has(id))return visibleOperationalOutlineIds.has(id)&&jurisdictionChecked('NI');
-  const entity=entityById.get(nistreniaView?.actualId(id)||id);
+  const entity=entityById.get(nistreniaView?.primaryGeometryForNode?.(id)||nistreniaView?.actualId(id)||id);
   return Boolean(entity&&isVisible(entity));
  };
  const isTreeChecked=id=>{
   if(nistreniaOutlines?.has(id))return visibleOperationalOutlineIds.has(id);
-  return visibleEntityIds.has(nistreniaView?.actualId(id)||id);
+  return visibleEntityIds.has(nistreniaView?.primaryGeometryForNode?.(id)||nistreniaView?.actualId(id)||id);
  };
  atlasTree?.destroy();
  atlasTree=createAtlasTree({
   container,nodeById:nistreniaView?.nodes||hierarchyNodeById,rootIds:nistreniaView?.rootIds||hierarchyTree.root_ids,document,typeLabel,
   getOsmAdminLevel:node=>osmLevelForTreeNode(node,{entityById,osmRoleById}),
   visibleIds:activeOsmAdminLevels.size===OSM_ADMIN_LEVELS.length+1?null:osmTreeVisibleIds(nistreniaView?.nodes||hierarchyNodeById,nistreniaView?.rootIds||hierarchyTree.root_ids,activeOsmAdminLevels,{entityById,osmRoleById}),
-  isGeometryAvailable:id=>Boolean(nistreniaOutlines?.has(id)||entityById.has(nistreniaView?.actualId(id)||id)),
+  isGeometryAvailable:id=>Boolean(nistreniaOutlines?.has(id)||entityById.has(nistreniaView?.primaryGeometryForNode?.(id)||nistreniaView?.actualId(id)||id)),
   isGeometryVisible:isTreeGeometryVisible,isEntityChecked:isTreeChecked,
   onVisibilityChange:(id,checked)=>{
    if(nistreniaOutlines?.has(id)){
     if(checked)visibleOperationalOutlineIds.add(id);else visibleOperationalOutlineIds.delete(id);
    }else{
-    const actualId=nistreniaView?.toActual.get(id)||id;
+    const actualId=nistreniaView?.primaryGeometryForNode?.(id)||nistreniaView?.toActual.get(id)||id;
     if(!entityById.has(actualId))return;
     if(checked)visibleEntityIds.add(actualId);else visibleEntityIds.delete(actualId);
    }

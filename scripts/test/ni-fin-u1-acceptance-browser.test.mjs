@@ -11,7 +11,7 @@ import {verifyPublishedSource} from '../audit/helpers/published-source.mjs';
 const root=path.resolve(fileURLToPath(new URL('../../',import.meta.url)));
 const mode=process.env.NI_FIN_BROWSER_MODE||'local';assert(['local','published'].includes(mode));
 const source=performanceSource(root),out=path.join(auditEvidenceDirectory(),'ni-fin','u1-acceptance');
-const id='osm-r9581354',alias='view-nistrenia-role-'+id;
+const id='osm-r9581354',alias='view-nistrenia-group-osm-r944727'; // NI-TREE.1: Bender document node, no obsolete geometry alias
 const report={schema:'web-ni-u1-coupled-browser-v1',status:'FAIL',sourceSha:source.sha,
  trackedSourcesClean:source.trackedSourcesClean,applicationBaselineSha:'e8373371aa7504a206fa6c8020ed421060fc84e4',mode,checks:[],captures:[],
  limitations:['Real Chromium viewports, not physical phones. Chrome accessibility tree is not a physical screen-reader certification.','An audit-tool commit is not claimed to be the published application commit; published application bytes are checked independently.']};
@@ -24,25 +24,25 @@ await test('WEB-NI-U1.5 coupled canonical navigation, History, filters, Undo, ex
   if(mode==='published'){assert(source.trackedSourcesClean);report.publishedSource=await verifyPublishedSource(root);}
   await p.viewport(1440,900);await p.navigate(mode==='published'?'https://ovidiudeica.github.io/reforma-teritoriala/':browser.server.url);
   assert.deepEqual(await p.call(state),{actual:['osm-r58974','osm-r90689'],ni:['view-nistrenia'],selected:null});mark('three-default-roots-without-descendants');
-  await p.call(async function(alias){await qaApp.selectEntity(alias,{zoom:false});},alias);
+  await p.call(async function(id){await qaApp.selectEntity(id,{zoom:false});},id);
   assert.equal((await p.call(state)).selected,id);assert.equal(await p.call(function(id){return qaApp.visibleEntityIds.has(id);},id),false);
-  await p.openPanel('entities');await p.click('.tree-visibility-toggle[data-entity-id="'+alias+'"]');
+  await p.openPanel('entities');await p.click('.tree-visibility-toggle[data-entity-id="'+id+'"]');
   await waitFor(()=>p.call(function(id){return qaApp.visibleEntityIds.has(id)&&new URL(location.href).searchParams.getAll('x').includes(id);},id),'canonical checkbox and URL');
   assert.equal(await p.call(function(alias){return new URL(location.href).searchParams.getAll('x').includes(alias);},alias),false);
   await p.evaluate('history.back()');await waitFor(()=>p.call(function(id){return !qaApp.visibleEntityIds.has(id);},id),'Back restores shared checkbox');
   await p.evaluate('history.forward()');await waitFor(()=>p.call(function(id){return qaApp.visibleEntityIds.has(id);},id),'Forward restores shared checkbox');
-  mark('alias-selection-canonical-url-and-back-forward');
+  mark('canonical-selection-url-and-back-forward-without-duplicate-alias');
 
   const checked=await p.call(state);await p.openPanel('filters');
   for(const [control,shown] of [['md',true],['ni',false],['md',true],['ni',true]]){
    await p.click('#layer-'+control);
-   const result=await p.call(function(alias){qaApp.atlasTree.select(alias);const e=qaApp.atlasTree.getNode(alias);return {shown:!e.outer.classList.contains('tree-geometry-hidden'),checked:e.checkbox.checked,actual:[...qaApp.visibleEntityIds].sort()};},alias);
+   const result=await p.call(function(id){qaApp.atlasTree.select(id);const e=qaApp.atlasTree.getNode(id);return {shown:!e.outer.classList.contains('tree-geometry-hidden'),checked:e.checkbox.checked,actual:[...qaApp.visibleEntityIds].sort()};},id);
    assert.equal(result.shown,shown);assert.equal(result.checked,true);assert.deepEqual(result.actual,checked.actual);
   }
   mark('md-only-ni-only-both-and-neither-preserve-one-checkbox');
   await p.call(function(){document.getElementById('basemap-toggle').click();});
   assert.equal(await p.evaluate('qaApp.captureUrlState().osmBasemapVisible'),false);
-  await p.call(async function(alias){await qaApp.selectEntity(alias,{zoom:false});await qaApp.syncTiers();},alias);
+  await p.call(async function(id){await qaApp.selectEntity(id,{zoom:false});await qaApp.syncTiers();},id);
   await waitFor(()=>p.call(function(id){let n=0;qaApp.map.eachLayer(l=>{if(l.feature?.properties?.entity_id===id)n++;});return n===1;},id),'one canonical Bender map feature');
   mark('no-duplicate-map-feature-with-both-perspectives-and-no-basemap');
 
@@ -85,10 +85,10 @@ await test('WEB-NI-U1.5 coupled canonical navigation, History, filters, Undo, ex
   await p.query('Lunga');await p.click('[role=option][data-entity-id="view-nistrenia-role-osm-r19001619"]');
   await waitFor(()=>p.evaluate("qaApp.selectedEntityId==='osm-r19001619'"),'unassociated Lunga search canonical card');
   assert.deepEqual((await p.call(state)).actual,['osm-r58974','osm-r90689']);mark('human-name-search-for-unassociated-lunga');
-  await p.openPanel('entities');await p.call(function(alias){qaApp.atlasTree.select(alias);qaApp.atlasTree.getNode(alias).button.focus();},alias);await p.key('Enter');
+  await p.openPanel('entities');await p.call(function(id){qaApp.atlasTree.select(id);qaApp.atlasTree.getNode(id).button.focus();},id);await p.key('Enter');
   await waitFor(()=>p.call(function(id){return qaApp.selectedEntityId===id;},id),'keyboard canonical shared card');mark('keyboard-canonical-reference-without-checking');
 
-  await p.call(async function(alias){qaApp.atlasTree.select(alias);qaApp.atlasTree.getNode(alias).checkbox.click();await qaApp.syncTiers();},alias);
+  await p.call(async function(id){qaApp.atlasTree.select(id);qaApp.atlasTree.getNode(id).checkbox.click();await qaApp.syncTiers();},id);
   await waitFor(()=>p.call(function(id){let found=false;qaApp.map.eachLayer(l=>{if(l.feature?.properties?.entity_id===id&&l.getElement?.())found=true;});return found;},id),'canonical SVG map feature');
   await p.call(function(id){qaApp.clearSelection();let target;qaApp.map.eachLayer(l=>{if(l.feature?.properties?.entity_id===id&&l.getElement?.())target=l.getElement();});const r=target.getBoundingClientRect();target.dispatchEvent(new MouseEvent('click',{bubbles:true,clientX:r.x+r.width/2,clientY:r.y+r.height/2}));},id);
   await waitFor(()=>p.call(function(id){return qaApp.selectedEntityId===id;},id),'canonical selection from SVG map event');mark('map-feature-click-resolves-canonical-card',{input:'MouseEvent on the actual Leaflet SVG feature'});
@@ -97,8 +97,8 @@ await test('WEB-NI-U1.5 coupled canonical navigation, History, filters, Undo, ex
   await p.call(function(){document.getElementById('neighbors-toggle').click();});
   await waitFor(()=>p.call(function(id){return qaApp.atlasNeighbors.state.report?.id===id;},id),'canonical shared neighbors',120000);
   report.neighbors=await p.call(function(){const r=qaApp.atlasNeighbors.state.report;if(r.neighbors.some(n=>!qaApp.entityById.has(n.other)))throw Error('noncanonical neighbor');return {id:r.id,neighbors:r.neighbors.length,anomalies:r.anomalies.length};});mark('canonical-neighbors',report.neighbors);
-  await p.call(async function(alias,id){await qaApp.selectEntity(alias,{zoom:false});qaApp.atlasAdvanced.addCompare(qaApp.selectedEntityId);await qaApp.selectEntity(id,{zoom:false});qaApp.atlasAdvanced.addCompare(qaApp.selectedEntityId);},alias,id);
-  assert.deepEqual(await p.evaluate('qaApp.atlasAdvanced.state.pair'),[id]);mark('same-geometry-from-both-perspectives-does-not-duplicate-comparison');
+  await p.call(async function(alias,id){await qaApp.selectEntity(alias,{zoom:false});if(qaApp.selectedEntityId!==alias)throw Error('documentary Bender card lost');await qaApp.selectEntity(id,{zoom:false});qaApp.atlasAdvanced.addCompare(qaApp.selectedEntityId);await qaApp.selectEntity(id,{zoom:false});qaApp.atlasAdvanced.addCompare(qaApp.selectedEntityId);},alias,id);
+  assert.deepEqual(await p.evaluate('qaApp.atlasAdvanced.state.pair'),[id]);mark('documentary-Bender-and-canonical-geometry-do-not-duplicate-comparison');
   await p.call(function(){qaApp.atlasAdvanced.addCompare('osm-r12463379');[...document.querySelectorAll('.geometric-comparison button')].find(b=>b.textContent==='Calculează comparația').click();});
   await waitFor(()=>p.evaluate("!![...document.querySelectorAll('.geometric-comparison button')].find(b=>b.textContent==='Exportă rezultatele JSON')"),'shared comparison export',120000);
   report.comparison=await p.call(async function(){const blobs=[],create=URL.createObjectURL;URL.createObjectURL=b=>{blobs.push(b);return create(b);};try{const b=[...document.querySelectorAll('.geometric-comparison button')].find(b=>b.textContent==='Exportă rezultatele JSON');b.click();while(b.disabled)await new Promise(r=>setTimeout(r,20));const r=JSON.parse(await blobs[0].text());return {a:r.a.entity.id,b:r.b.entity.id,validation:r.validation};}finally{URL.createObjectURL=create;}});

@@ -1,3 +1,4 @@
+import {buildNistreniaUnifiedTree,NI_TREE1_LUNGA} from './atlas-ni-tree1.mjs';
 import {validateNistreniaAdministrativeModel} from './atlas-nistrenia-administrative.mjs';
 import {compactNistreniaDocumentaryName} from './atlas-tree-labels.mjs';
 // P9.0.9.4: operational UI jurisdiction only. NEVER a legal ACTUAL entity/parent or a new polygon.
@@ -39,7 +40,7 @@ export function createNistreniaOperationalView({catalog,roles,entityById,officia
 }
 export function nistreniaSearchEntities(view,entityById){
  if(!view)return [];
- if(view.model)return [...view.virtualIds,...(view.geometryNavigationIds||[])].map(id=>{const node=view.nodes.get(id);return {...node,representation:{inferred_type:node.display_type},hierarchy:{consolidated_parent_id:node.parent_id},searchable_names:[node.display_name,...(node.original_names||[])]};});
+ if(view.model)return [...new Set([...view.virtualIds,...(view.geometryNavigationIds||[])])].map(id=>{const node=view.nodes.get(id);return {...node,representation:{inferred_type:node.display_type},hierarchy:{consolidated_parent_id:node.parent_id},searchable_names:[node.display_name,...(node.original_names||[])]};});
  return [view.root,...view.groupIds.map(id=>view.nodes.get(id)),...[...view.toActual.entries()].map(([alias,id])=>{
   const original=entityById.get(id),node=view.nodes.get(alias);
   return {...original,id:alias,display_name:node.display_name,jurisdiction:'NI',roles:['operational_osm'],official_name:original.official_name,representation:{...(original.representation||{}),inferred_type:original.display_type}};
@@ -50,44 +51,44 @@ export function nistreniaSearchEntities(view,entityById){
  }));
 }
 
-// Administrative presentation only; canonical objects stay in the legal ACTUAL tree.
+// Administrative presentation only; canonical ACTUAL nodes and polygons remain unchanged.
+// NI-TREE.1: seven documentary branches, with OSM geometry references on their
+// corresponding documentary nodes, not an eighth cartographic-only sub-tree.
 export function createNistreniaAdministrativeView({model,entityById,officialNodes,officialRoots}){
  const checked=validateNistreniaAdministrativeModel(model,{actualIds:new Set(entityById.keys())});
  if(officialNodes.size!==5848||officialRoots.length!==2)throw Error('Nistrenia: invalid ACTUAL hierarchy');
+ const unified=buildNistreniaUnifiedTree(model,checked);
  const nodes=new Map(officialNodes);
- for(const [id,node] of checked.nodes){if(nodes.has(id))throw Error('Nistrenia: presentation ID collision');nodes.set(id,{...node,display_name:compactNistreniaDocumentaryName(node)});}
- // Visual geometry navigation is not part of the 242 documentary identities.
- // No geometry is copied, nor is an administrative parent inferred from OSM.
- const cartographicNavigationId='view-nistrenia-cartographic-navigation';
- if(nodes.has(cartographicNavigationId))throw Error('Nistrenia: navigation collision');
- const toActual=new Map(),geometryNavigationIds=new Set([cartographicNavigationId]);
- const navigationChildren=[];
- for(const [alias,id] of Object.entries(model.compatibility_role_aliases)){
-  const actual=entityById.get(id),official=officialNodes.get(id);
-  if(!actual||!official||actual.jurisdiction!=='MD'||!Array.isArray(actual.map?.bbox)||nodes.has(alias))throw Error('Nistrenia: invalid shared canonical geometry '+id);
-  navigationChildren.push(alias);geometryNavigationIds.add(alias);toActual.set(alias,id);
-  nodes.set(alias,{id:alias,display_name:official.display_name,kind:'geometry_reference',jurisdiction:'NI',
-   display_type:official.display_type,parent_id:cartographicNavigationId,child_ids:[],depth:2,
-   roles:['cartographic_reference'],source_actual_id:id,geometry_canonical_id:id,
-   original_names:[],source_refs:[],geometry_candidates:[],geometry_ref:null,
-   geometry_status:'GEOMETRY_CANDIDATE',baseline_year:model.baseline_year,
-   temporal_notice:'Referință geometrică OSM; nu reprezintă o unitate administrativă suplimentară.',
-   view_only:true});
+ for(const [id,node] of unified.nodes){
+  if(nodes.has(id))throw Error('Nistrenia: presentation ID collision '+id);
+  nodes.set(id,{...node,child_ids:[...node.child_ids],
+   display_name:node.kind==='geometry_reference'?node.display_name:compactNistreniaDocumentaryName(node)});
  }
- nodes.set(cartographicNavigationId,{id:cartographicNavigationId,display_name:'Geometrii OSM · referințe',
-  kind:'geometry_navigation',jurisdiction:'NI',display_type:'section',
-  parent_id:NISTR_EN_ROOT,child_ids:navigationChildren,depth:1,roles:['navigation_only'],
-  original_names:[],source_refs:[],geometry_candidates:[],geometry_ref:null,
-  geometry_status:'NO_GEOMETRY_EVIDENCE',baseline_year:model.baseline_year,
-  temporal_notice:'Catalog cartografic pentru consultare, separat de ierarhia administrativă.',
-  view_only:true});
- const root={...nodes.get(NISTR_EN_ROOT),child_ids:[...nodes.get(NISTR_EN_ROOT).child_ids,cartographicNavigationId]};
- nodes.set(NISTR_EN_ROOT,root);
- const roleIds=new Set(Object.values(model.compatibility_role_aliases));
- if(roleIds.size!==85)throw Error('Nistrenia: canonical geometry role coverage');
- return {model,nodes,resources:checked.resources,documentaryNodes:checked.nodes,root:checked.root,navigationRoot:root,rootIds:[...officialRoots,NISTR_EN_ROOT],
-  groupIds:checked.root.child_ids,virtualIds:new Set(checked.nodes.keys()),geometryNavigationIds,cartographicNavigationId,roleIds,toActual,
-  officialNodeCount:officialNodes.size,isVirtual:id=>checked.nodes.has(id)||geometryNavigationIds.has(id),
+ const toActual=new Map([[NI_TREE1_LUNGA,'osm-r19001619']]);
+ for(const [alias,canonical] of toActual){
+  const actual=entityById.get(canonical),source=officialNodes.get(canonical);
+  if(!actual||!source||actual.jurisdiction!=='MD'||!Array.isArray(actual.map?.bbox)||actual.map.bbox.length!==4)throw Error('Nistrenia: missing canonical geometry '+canonical);
+ }
+ const root=nodes.get(NISTR_EN_ROOT);
+ const roleIds=unified.roleIds;
+ // The sole reference-only leaf (Lunga) is an explicit unresolved cartographic
+ // association, never a new administrative identity.
+ const geometryNavigationIds=new Set([NI_TREE1_LUNGA]);
+ const virtualIds=new Set(unified.nodes.keys());
+ const primaryGeometryForNode=id=>{
+  const ids=unified.geometryByNode.get(id)||[];
+  return ids.length===1?ids[0]:null;
+ };
+ return {model,nodes,resources:checked.resources,documentaryNodes:checked.nodes,
+  root,navigationRoot:root,rootIds:[...officialRoots,NISTR_EN_ROOT],
+  groupIds:[...unified.groupIds],virtualIds,geometryNavigationIds,
+  cartographicNavigationId:null,roleIds,toActual,
+  geometryByNode:unified.geometryByNode,
+  associationByResource:unified.associationByResource,
+  mappedGeometryToNode:unified.mappedGeometryToNode,
+  primaryGeometryForNode,
+  officialNodeCount:officialNodes.size,
+  isVirtual:id=>virtualIds.has(id),
   actualId:id=>toActual.get(id)||id,
   operationalJurisdiction:id=>entityById.get(toActual.get(id)||id)?.jurisdiction||(nodes.has(id)?'NI':undefined),
   aggregateIds:()=>null};

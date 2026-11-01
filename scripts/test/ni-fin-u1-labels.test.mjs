@@ -20,10 +20,17 @@ test('U1.3 removes only visual suffixes, never mutates NI-FIN originals',()=>{
  for(const n of m.nodes){
   const v=view.nodes.get(n.id);
   assert.equal(v.kind,n.kind);
-  assert.equal(v.parent_id,n.parent_id);
-  // The tree projection may append only the explicit cartographic catalog.
-  const expectedChildren=n.id==='view-nistrenia'&&view.cartographicNavigationId?[...n.child_ids,view.cartographicNavigationId]:n.child_ids;
-  assert.deepEqual(v.child_ids,expectedChildren);
+  const relocated={ 'view-nistrenia-unit-15':'view-nistrenia-group-osm-r1702215','view-nistrenia-unit-16':'view-nistrenia-group-osm-r1702217'};
+  assert.equal(v.parent_id,relocated[n.id]||n.parent_id);
+  const expectedChildren=n.id==='view-nistrenia'
+   ?n.child_ids.filter(id=>!Object.hasOwn(relocated,id))
+   :n.id==='view-nistrenia-group-osm-r1702215'?[...n.child_ids,'view-nistrenia-unit-15']
+   :n.id==='view-nistrenia-group-osm-r1702217'?[...n.child_ids,'view-nistrenia-unit-16']
+   :n.child_ids;
+  // NI-TREE.1: only those two presentation edges change; original documentary
+  // indices, identities, geometry and all other edges remain unchanged.
+  const extra= n.id==='view-nistrenia-group-osm-r1702215'?'view-nistrenia-role-osm-r19001619':null;
+  assert.deepEqual(v.child_ids,extra?[...expectedChildren,extra]:expectedChildren);
   if(view.documentaryNodes)assert.deepEqual(view.documentaryNodes.get(n.id).child_ids,n.child_ids);
   assert.equal(v.geometry_ref,n.geometry_ref);
   assert.ok(!/\((?:raion|oraș)\)$/iu.test(v.display_name));
@@ -34,7 +41,7 @@ test('U1.3 removes only visual suffixes, never mutates NI-FIN originals',()=>{
 test('U1.3 leaves RO/MD labels and all verified geometry references unchanged',()=>{
  for(const [id,node] of official)assert.equal(view.nodes.get(id),node);
  for(const n of m.nodes.filter(n=>n.geometry_ref))assert.equal(view.nodes.get(n.id).geometry_ref,n.geometry_ref);
- assert.equal(view.virtualIds.size,242);
+ assert.equal(view.virtualIds.size,243);
  assert.equal(compactTreeName({id:'test',jurisdiction:'RO',display_name:'Județul Cluj'}),'Cluj');
 });
 

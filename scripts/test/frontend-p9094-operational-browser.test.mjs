@@ -19,10 +19,10 @@ try{
    assert.deepEqual(s.selected,['osm-r58974','osm-r90689']);
     assert.deepEqual(await page.evaluate("[...qaApp.visibleOperationalOutlineIds]"),['view-nistrenia']);
   });
-  await t.test('Nistrenia has nine documentary units and 85 nonduplicate geometry resources',async()=>{
+  await t.test('Nistrenia has seven documentary branches and 85 nonduplicate geometry resources',async()=>{
    await page.evaluate("if(!qaApp.atlasTree.isOpen('view-nistrenia'))qaApp.atlasTree.toggle('view-nistrenia')");
    const visible=await page.evaluate("qaApp.nistreniaView.root.child_ids");
-   assert.equal(visible.length,9);
+   assert.equal(visible.length,7);
    await page.evaluate("qaApp.atlasTree.toggle('view-nistrenia-group-osm-r1702219')");
    const children=await page.evaluate("qaApp.nistreniaView.nodes.get('view-nistrenia-group-osm-r1702219').child_ids");
    assert.equal(children.length,3);

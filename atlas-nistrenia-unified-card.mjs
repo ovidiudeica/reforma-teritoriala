@@ -36,6 +36,12 @@ export function nistreniaPerspectiveForGeometry(view,canonicalId){
   source_year:view.model.baseline_year,
   contemporary_legal_certification:view.model.legal_certification,
   associated_documentary_nodes:associations,
+  tree_placement:view.associationByResource?.has(canonicalId)?{
+   node_id:view.associationByResource.get(canonicalId).nodeId,
+   evidence:view.associationByResource.get(canonicalId).evidence,
+   cartographic_reference_only:view.nodes.get(view.associationByResource.get(canonicalId).nodeId)?.kind==='geometry_reference',
+   legal_boundary_equivalence:false
+  }:null,
   no_documentary_candidate:associations.length===0,
   full_polygon_control_certified:false,
   md_official_identity_changed:false
