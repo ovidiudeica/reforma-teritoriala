@@ -41,12 +41,12 @@ try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL
   }
  }
  await p.viewport(1440,900);await p.navigate(target);
- assert.deepEqual(await p.evaluate('({actual:qaApp.entityById.size,official:qaApp.hierarchyNodeById.size,nodes:qaApp.nistreniaView.virtualIds.size,units:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,outlines:qaApp.nistreniaOutlines.layers.size,checked:[...qaApp.visibleEntityIds].sort(),own:[...qaApp.visibleOperationalOutlineIds]})'),{actual:5848,official:5848,nodes:242,units:9,roles:85,outlines:8,checked:['osm-r58974','osm-r90689'],own:['view-nistrenia']});
- report.scenarios.push('5848 official + 242 documentary nodes; 9 units, 85 roles, 8 independent outlines; three roots only');
+ assert.deepEqual(await p.evaluate('({actual:qaApp.entityById.size,official:qaApp.hierarchyNodeById.size,nodes:qaApp.nistreniaView.virtualIds.size,units:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,outlines:qaApp.nistreniaOutlines.layers.size,checked:[...qaApp.visibleEntityIds].sort(),own:[...qaApp.visibleOperationalOutlineIds]})'),{actual:5848,official:5848,nodes:243,units:7,roles:85,outlines:8,checked:['osm-r58974','osm-r90689'],own:['view-nistrenia']});
+ report.scenarios.push('5848 official + 243 NI presentation nodes; 7 branches, 85 roles, 8 independent outlines; three roots only');
  const checked=await p.evaluate('[...qaApp.visibleEntityIds].sort()');
- await p.evaluate("(async()=>{for(const id of qaApp.nistreniaView.virtualIds){await qaApp.selectEntity(id,{zoom:false});if(!document.getElementById('details-body').textContent.includes('2023'))throw Error('missing provenance '+id);if([...document.querySelectorAll('#details-body dt,#details-body dd')].some(x=>!x.closest('dl')))throw Error('invalid definition list '+id);await new Promise(resolve=>setTimeout(resolve,125));}return true;})()");
+ await p.evaluate("(async()=>{for(const id of qaApp.nistreniaView.virtualIds){if(qaApp.nistreniaView.nodes.get(id).kind==='geometry_reference')continue;await qaApp.selectEntity(id,{zoom:false});if(!document.getElementById('details-body').textContent.includes('2023'))throw Error('missing provenance '+id);if([...document.querySelectorAll('#details-body dt,#details-body dd')].some(x=>!x.closest('dl')))throw Error('invalid definition list '+id);await new Promise(resolve=>setTimeout(resolve,125));}return true;})()");
  assert.deepEqual(await p.evaluate('[...qaApp.visibleEntityIds].sort()'),checked);assert.deepEqual(await p.evaluate('[...qaApp.visibleOperationalOutlineIds]'),['view-nistrenia']);
- report.scenarios.push('all242cards select without checking any descendant or candidate; paced below Chromium IPC flooding protection');
+ report.scenarios.push('all 242 original documentary cards select without checking descendants; one reference-only Lunga node remains separate');
  await p.evaluate("document.getElementById('details-panel').scrollTop=500;qaApp.selectEntity('view-nistrenia-council-29',{zoom:false})");await p.openPanel('entities');
  assert.equal(await p.evaluate("document.getElementById('details-panel').scrollTop"),0,'new documentary card starts at its heading');
  assert.equal(await p.evaluate("qaApp.atlasTree.getNode('view-nistrenia-council-29').checkbox.disabled"),true);
@@ -58,10 +58,12 @@ try{await test('NI-FIN real Chromium documentary tree, independent geometry, URL
  await p.evaluate("qaApp.selectEntity('view-nistrenia-unit-15',{zoom:false})");await p.evaluate('history.back()');await waitFor(()=>p.evaluate("qaApp.selectedEntityId==='view-nistrenia-council-29'"),'documentary Back');await p.evaluate('history.forward()');await waitFor(()=>p.evaluate("qaApp.selectedEntityId==='view-nistrenia-unit-15'"),'documentary Forward');
  report.scenarios.push('text-only URL hydration, Back/Forward');
  await p.evaluate("qaApp.selectEntity('view-nistrenia',{zoom:false})");
- assert.equal(await p.evaluate("document.querySelectorAll('[data-ni-resource]').length"),85);
- await p.click('[data-ni-resource="osm-r9581354"]');assert.equal(await p.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),true);assert.equal(await p.evaluate('qaApp.selectedEntityId'),'view-nistrenia');await p.click('[data-ni-resource="osm-r9581354"]');
+ assert.equal(await p.evaluate("document.querySelectorAll('[data-ni-resource]').length"),0,'Nistrenia card must not list descendant geometry');
+ await p.evaluate("qaApp.selectEntity('view-nistrenia-group-osm-r944727',{zoom:false})");
+ assert.equal(await p.evaluate("document.querySelectorAll('[data-ni-resource]').length"),2,'Bender card owns its two OSM roles');
+ await p.click('[data-ni-resource="osm-r9581354"]');assert.equal(await p.evaluate("qaApp.visibleEntityIds.has('osm-r9581354')"),true);assert.equal(await p.evaluate('qaApp.selectedEntityId'),'view-nistrenia-group-osm-r944727');await p.click('[data-ni-resource="osm-r9581354"]');
  assert.deepEqual(await p.evaluate('[...qaApp.visibleEntityIds].sort()'),checked);
- report.scenarios.push('85 canonical resource buttons; explicit Bender toggle without duplicate or administrative identity promotion');
+ report.scenarios.push('85 resources distributed per entity; root empty, explicit Bender 2-role toggle, no identity promotion');
  for(const [w,h] of [[1440,900],[900,768],[390,844],[844,390],[360,800]]){
   await p.viewport(w,h);await p.evaluate("qaApp.selectEntity('view-nistrenia-council-29',{zoom:false})");
   assert.equal(await p.evaluate('document.documentElement.scrollWidth<=innerWidth'),true,'overflow '+w+'x'+h);
