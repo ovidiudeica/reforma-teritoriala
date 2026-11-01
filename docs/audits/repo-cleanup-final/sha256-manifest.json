@@ -1,5 +1,7 @@
 {
   "schema": "cleanup-evidence-sha256-v1",
+  "previous_index_sha256": "7ad44bb8612ce529c43a1448d265f1589661a49d0f875caadb3ac0aaa56768a9",
+  "previous_index_commit": "65bb8267afe3964971ba402d78d4021b14cc8141",
   "files": [
     {
       "file": "branch-per-file.csv.gz",
@@ -77,6 +79,11 @@
       "sha256": "1746bd986fd8445a0a500e110700ff4770d05586c3d97cea2d3aefdf19dcc3fe"
     },
     {
+      "file": "c2-analyzer-v1.py.txt",
+      "bytes": 12931,
+      "sha256": "ec628ed61ae5873f591140407c6fb7176d0fdc66141ac0d7ceaf308fe3bdf6bc"
+    },
+    {
       "file": "c2-dependencies.csv.gz",
       "bytes": 814643,
       "sha256": "6937c5f710f26a7c03a67c39cc2521eb5332030eb59de2c9f363b6d1d83aac7a"
@@ -90,6 +97,16 @@
       "file": "c2-per-file.csv.gz",
       "bytes": 277387,
       "sha256": "83390cf99c06d31aac602b12b8309ec0fd34f277845f347d533aee42775d8e8d"
+    },
+    {
+      "file": "c2-portability-proof.json",
+      "bytes": 2287,
+      "sha256": "74a35c2afb106b1a8ecea57106d5a1a6d14157affbf8c59be9b543f0eca4e686"
+    },
+    {
+      "file": "C2-PORTABILITY.md",
+      "bytes": 2045,
+      "sha256": "c8e30d4c06c111e2832ab1d46373832a40c993abb27e6828e1096ffbd699f52e"
     },
     {
       "file": "c2-provenance.json",

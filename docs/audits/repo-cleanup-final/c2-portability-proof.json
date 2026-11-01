@@ -1,0 +1,56 @@
+{
+  "schema": "cleanup-c2-portability-v1",
+  "client_date": "2026-11-01",
+  "base": "65bb8267afe3964971ba402d78d4021b14cc8141",
+  "snapshot": "8c8cb123c0e8c363268886aba863131e33f3e1a4",
+  "analyzer": "scripts/audit/cleanup-file-usage.py",
+  "analyzer_sha256": "6b047f6ca28ee9dde764664d253ee02e929445304d5b4003638d4b740133a996",
+  "original_analyzer_commit": "85a2224a1ab96632f94912246395972ed0bb418c",
+  "original_analyzer_sha256": "ec628ed61ae5873f591140407c6fb7176d0fdc66141ac0d7ceaf308fe3bdf6bc",
+  "archived_original": "c2-analyzer-v1.py.txt",
+  "legacy_replay_exact": true,
+  "products": [
+    {
+      "file": "summary.json",
+      "bytes": 1358,
+      "original_sha256": "3506a57f6a270c68c33c8fb0e1eae340ecc85ae5dd3d35fb833fea0489c6e4a3",
+      "replay_sha256": "3506a57f6a270c68c33c8fb0e1eae340ecc85ae5dd3d35fb833fea0489c6e4a3",
+      "identical": true
+    },
+    {
+      "file": "dynamic-readers.json",
+      "bytes": 169585,
+      "original_sha256": "a842a1ad2fd3443daf56313c360e356c43f635511e3ea557d04037df0288d504",
+      "replay_sha256": "a842a1ad2fd3443daf56313c360e356c43f635511e3ea557d04037df0288d504",
+      "identical": true
+    },
+    {
+      "file": "per-file.csv",
+      "bytes": 1645651,
+      "original_sha256": "0a48685c7f43a761879f2062ba8f1af8f67d05a2121a51cf48a121e643e11918",
+      "replay_sha256": "0a48685c7f43a761879f2062ba8f1af8f67d05a2121a51cf48a121e643e11918",
+      "identical": true
+    },
+    {
+      "file": "dependencies.csv",
+      "bytes": 17682088,
+      "original_sha256": "cf0b3705af3f527bfe512bb7ed3310b990d1f5527fe0682ed1c14da33cd58711",
+      "replay_sha256": "cf0b3705af3f527bfe512bb7ed3310b990d1f5527fe0682ed1c14da33cd58711",
+      "identical": true
+    },
+    {
+      "file": "SHA256SUMS",
+      "bytes": 332,
+      "original_sha256": "2b6f128a601d1ebc52710ddeaf740b2db78b2bba5267ef40d95605bbbf92614a",
+      "replay_sha256": "2b6f128a601d1ebc52710ddeaf740b2db78b2bba5267ef40d95605bbbf92614a",
+      "identical": true
+    }
+  ],
+  "analyzer_regression_tests_passed": 4,
+  "default_json_line_endings": "LF on every platform",
+  "legacy_mode": "legacy-crlf reproduces the original Windows JSON/checksum bytes",
+  "old_snapshot_products_changed": 0,
+  "actual_changes": 0,
+  "p91_authorized": false,
+  "status": "LOCAL_VERIFIED_PENDING_CI"
+}
