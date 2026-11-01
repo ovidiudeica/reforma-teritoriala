@@ -5,22 +5,9 @@ export function nistreniaPerspectiveForGeometry(view,canonicalId){
  const resource=view.resources?.get(canonicalId);
  if(!resource||resource.kind!=='ACTUAL'||resource.canonical_id!==canonicalId)throw Error('NI card: unexpected resource identity '+canonicalId);
  const associations=[];
- const treeAssociation=view.associationByResource?.get(canonicalId);
- if(treeAssociation){
-  const n=view.nodes.get(treeAssociation.nodeId);
-  const p=view.nodes.get(n?.parent_id);
-  if(!n)throw Error('NI card: missing mapped documentary node '+canonicalId);
-  associations.push({
-   node_id:n.id,name:n.display_name,documentary_kind:n.kind,parent_id:n.parent_id,
-   parent_name:p?.display_name||null,source_refs:[...(n.source_refs||[])],
-   reference_year:n.baseline_year,contemporary_status:n.contemporary_status,
-   geometry_association:treeAssociation.evidence,
-   legal_certification:'PENDING'
-  });
- }
  for(const id of view.virtualIds){
   const n=view.nodes.get(id);
-  if(!n?.geometry_candidates?.includes(canonicalId)||associations.some(a=>a.node_id===n.id))continue;
+  if(!n?.geometry_candidates?.includes(canonicalId))continue;
   const p=view.nodes.get(n.parent_id);
   associations.push({
    node_id:n.id,
@@ -49,6 +36,12 @@ export function nistreniaPerspectiveForGeometry(view,canonicalId){
   source_year:view.model.baseline_year,
   contemporary_legal_certification:view.model.legal_certification,
   associated_documentary_nodes:associations,
+  tree_placement:view.associationByResource?.has(canonicalId)?{
+   node_id:view.associationByResource.get(canonicalId).nodeId,
+   evidence:view.associationByResource.get(canonicalId).evidence,
+   cartographic_reference_only:view.nodes.get(view.associationByResource.get(canonicalId).nodeId)?.kind==='geometry_reference',
+   legal_boundary_equivalence:false
+  }:null,
   no_documentary_candidate:associations.length===0,
   full_polygon_control_certified:false,
   md_official_identity_changed:false
