@@ -5,9 +5,9 @@ import {createHash} from 'node:crypto';
 import {cardAuditBinding,cardAuditBucket,publicOsmTags,validateCardAudit} from '../../atlas-card-audit.mjs';
 const root=new URL('../../',import.meta.url),read=async p=>JSON.parse(await readFile(new URL(p,root),'utf8'));
 test('WEB-CARD.1: exact 5848 bindings, 64 chunks and complete hash verification',async()=>{
- const index=await read('public/data/actual-entities.json'),manifest=await read('data/current/actual-release-manifest.json'),audit=await read('public/data/web-card-audit/manifest.json');
+ const index=await read('public/data/actual-entities.json'),manifest=await read('data/current/actual-release-manifest.json'),audit=await read('assets/web-card-audit/manifest.json');
  assert.equal(audit.record_count,5848);assert.equal(audit.files.length,64);const found=new Map();
- for(const f of audit.files){const b=await readFile(new URL('public/data/web-card-audit/'+f.path,root));assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);const j=JSON.parse(b);for(const [id,r]of Object.entries(j.records)){assert(!found.has(id));found.set(id,j);assert.equal(r.geometry.valid,true);assert(r.geometry.area_m2>0);assert(r.geometry.perimeter_m>0);assert.equal(cardAuditBucket(id),f.path.slice(3,5));assert(!Object.keys(r.osmb_tags).some(k=>/idno|rson|rsud|contact|email|phone|operator|owner/.test(k)));}}
+ for(const f of audit.files){const b=await readFile(new URL('assets/web-card-audit/'+f.path,root));assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);const j=JSON.parse(b);for(const [id,r]of Object.entries(j.records)){assert(!found.has(id));found.set(id,j);assert.equal(r.geometry.valid,true);assert(r.geometry.area_m2>0);assert(r.geometry.perimeter_m>0);assert.equal(cardAuditBucket(id),f.path.slice(3,5));assert(!Object.keys(r.osmb_tags).some(k=>/idno|rson|rsud|contact|email|phone|operator|owner/.test(k)));}}
  assert.equal(found.size,5848);for(const e of index.entities)assert.equal(validateCardAudit(found.get(e.id),e,manifest).id,e.id);
  const bond=found.get('osm-r18967570').records['osm-r18967570'];assert(bond.parent_conflict);assert.equal(bond.geometric_parent_id,'osm-r19076879');assert.equal(index.entities.find(e=>e.id===bond.id).legal.parent_id,'8960');
 });

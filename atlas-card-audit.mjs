@@ -19,7 +19,7 @@ export function createCardAudit({document,fetch,getManifest,getEntity}){
  const cache=new Map();
  async function read(entity){
   if(!['RO','MD'].includes(entity.jurisdiction)||!/^([a-z]+-[A-Za-z0-9-]+)$/.test(entity.id))throw Error('Identificator neacceptat');
-  const path='public/data/web-card-audit/'+entity.jurisdiction.toLowerCase()+'-'+cardAuditBucket(entity.id)+'.json';
+  const path='assets/web-card-audit/'+entity.jurisdiction.toLowerCase()+'-'+cardAuditBucket(entity.id)+'.json';
   if(!cache.has(path))cache.set(path,Promise.resolve().then(async()=>{const r=await fetch(path);if(!r.ok)throw Error('Datele de audit nu au putut fi încărcate');return r.json();}).catch(e=>{cache.delete(path);throw e;}));
   return validateCardAudit(await cache.get(path),entity,getManifest());
  }
