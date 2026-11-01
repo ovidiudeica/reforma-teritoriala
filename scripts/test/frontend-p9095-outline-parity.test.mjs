@@ -42,22 +42,22 @@ test('P9.0.9.5 source bundle refuses missing/duplicate and uncertified features'
  const unrestricted=structuredClone(proof);unrestricted.p91_import_allowed=true;
  assert.throws(()=>validateNistreniaOutlinePackage(geo,unrestricted,nav),/untrusted source manifest/);
 });
-test('P9.0.9.5 URLs default to 3 outlines RO MD NI, while NI districts and 85 children stay off',()=>{
+test('P9.0.9.5 URLs default to RO and MD only, while NI districts and 85 children stay off',()=>{
  const config=createUrlConfig({entityById:byId,nodeById:view.nodes,rootIds:tree.root_ids,treeRootIds:view.rootIds,operationalOutlineIds:niOutlineIds,filterIndex:createGeometryFilterIndex(index.entities)});
  const def=parseUrlState('',config);
- assert.deepEqual(def.jurisdictions,['MD','NI','RO']);
+ assert.deepEqual(def.jurisdictions,['MD','RO']);
  assert.deepEqual(def.visibleEntityIds.slice().sort(),tree.root_ids.slice().sort());
- assert.deepEqual(def.visibleOperationalOutlineIds,['view-nistrenia']);
+ assert.deepEqual(def.visibleOperationalOutlineIds,[]);
  assert.equal(def.openIds.length,3);
  assert.equal(serializeUrlState(def,config),'');
  const custom=normalizeUrlState({...def,visibleOperationalOutlineIds:['view-nistrenia-group-osm-r1702216'],jurisdictions:['NI'],visibleEntityIds:tree.root_ids},config);
  const encoded=serializeUrlState(custom,config);
- assert.match(encoded,/v=2/);assert.match(encoded,/o=view-nistrenia/);assert.match(encoded,/o=view-nistrenia-group-osm-r1702216/);
+ assert.match(encoded,/v=2/);assert.doesNotMatch(encoded,/(?:^|&)o=view-nistrenia(?:&|$)/);assert.match(encoded,/o=view-nistrenia-group-osm-r1702216/);
  assert.deepEqual(parseUrlState(encoded,config),custom);
  assert.deepEqual(parseUrlState('v=1',config).jurisdictions,['MD','RO']);
  assert.deepEqual(parseUrlState('v=1',config).visibleOperationalOutlineIds,[]);
  assert.deepEqual(parseUrlState('v=1&j=NI',config).jurisdictions,['NI']);
- assert.equal(parseUrlState('v=2&j=NI',config).visibleOperationalOutlineIds[0],'view-nistrenia');
+ assert.deepEqual(parseUrlState('v=2&j=NI',config).visibleOperationalOutlineIds,[]);
 });
 
 test('P9.0.9.5 selected source outlines round-trip without entering ACTUAL visibility or identities',()=>{
@@ -66,7 +66,7 @@ test('P9.0.9.5 selected source outlines round-trip without entering ACTUAL visib
   const state=parseUrlState('v=2&e='+id+'&x='+id,config);
   assert.equal(state.entityId,id);
   assert.deepEqual(state.visibleEntityIds.slice().sort(),tree.root_ids.slice().sort());
-  assert.deepEqual(state.visibleOperationalOutlineIds,['view-nistrenia']);
+  assert.deepEqual(state.visibleOperationalOutlineIds,[]);
   assert.deepEqual(parseUrlState(serializeUrlState(state,config),config),state);
   assert.equal(config.entityIds.has(id),false);
  }

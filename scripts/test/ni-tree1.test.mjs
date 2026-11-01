@@ -38,7 +38,7 @@ test('NI-TREE.1 exposes exactly seven top-level UI branches without changing pro
  for(const [id,parent] of originalParentIds)assert.equal(model.nodes.find(n=>n.id===id).parent_id,parent);
  assert.deepEqual(readFileSync(new URL('../../views/nistrenia/administration.json',import.meta.url)),sourceBytes);
  assert.equal(view.nodes.has('view-nistrenia-cartographic-navigation'),false);
- for(const id of view.virtualIds)assert.equal(ancestorPath(view.nodes,view.rootIds,id)[0],'view-nistrenia');
+ for(const id of view.virtualIds)assert.equal(ancestorPath(view.nodes,view.rootIds,id)[0],'osm-r58974');
 });
 test('NI-TREE.1 binds all 85 canonical shared geometries once, without duplicate navigation aliases or new polygons',()=>{
  assert.equal(view.roleIds.size,85);

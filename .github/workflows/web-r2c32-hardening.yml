@@ -24,11 +24,11 @@ jobs:
         run: |
           git rev-parse HEAD
           google-chrome --version
-          node --check scripts/audit/web-r2c32-hardening-browser.mjs
+          node --check scripts/audit/ni-tree2-hardening-browser.mjs
           node --test scripts/test/frontend-published-source.test.mjs
           node --test scripts/test/frontend-navigation-failure-evidence.test.mjs scripts/test/frontend-performance-navigation.test.mjs
       - name: Combined responsive, accessibility, native zoom and network matrix
-        run: node scripts/audit/web-r2c32-hardening-browser.mjs
+        run: node scripts/audit/ni-tree2-hardening-browser.mjs
       - name: Verify report source and protected tracked files
         run: |
           node --input-type=module -e "import fs from 'node:fs'; import assert from 'node:assert/strict'; import {execFileSync} from 'node:child_process'; const r=JSON.parse(fs.readFileSync('outputs/web-r2c32-hardening/report.json')); assert.equal(r.status,'PASS'); assert.equal(r.trackedSourcesClean,true); assert.equal(r.sourceSha,execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim());"

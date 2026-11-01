@@ -12,7 +12,7 @@ const before=JSON.stringify([...officialNodes]);
 const view=createNistreniaAdministrativeView({model,entityById,officialNodes,officialRoots:tree.root_ids});
 test('243 unified NI presentation nodes are reciprocal/reachable without modifying 5848 official nodes',()=>{
  assert.equal(view.nodes.size,5848+243);assert.equal(view.groupIds.length,7);assert.equal(view.roleIds.size,85);assert.equal(view.virtualIds.size,243);assert.equal(view.geometryNavigationIds.size,1);
- for(const id of view.virtualIds)assert.equal(ancestorPath(view.nodes,view.rootIds,id)[0],'view-nistrenia');
+ for(const id of view.virtualIds)assert.equal(ancestorPath(view.nodes,view.rootIds,id)[0],'osm-r58974');
  assert.equal(JSON.stringify([...officialNodes]),before);
 });
 test('all documentary nodes are searchable and city/raion labels remain distinct',()=>{

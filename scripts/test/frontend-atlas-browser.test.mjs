@@ -23,7 +23,7 @@ try{
    await page.viewport(1440,900);
    const initial=await page.evaluate("({checked:[...document.querySelectorAll('#hierarchy-tree .tree-visibility-toggle')].filter(e=>e.checked).map(e=>e.dataset.entityId).sort(),explicit:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,rendered:document.querySelectorAll('#hierarchy-tree .tree-select').length,details:document.querySelector('#details-panel').hidden,technical:document.querySelector('#hierarchy-tree .tree-role')})");
    const roots=['osm-r90689','osm-r58974'].sort();
-   assert.deepEqual(initial.checked,[...roots,'view-nistrenia'].sort(),'three visible state outlines selected by default');assert.deepEqual(initial.explicit,roots,'ACTUAL retains only its two canonical state roots');
+   assert.deepEqual(initial.checked,roots,'NI-TREE.2 defaults to the two state outlines, NI remains opt-in');assert.deepEqual(initial.explicit,roots,'ACTUAL retains only its two canonical state roots');
    assert.equal(initial.selected,null);assert.equal(initial.details,true);assert.ok(initial.rendered<100);assert.equal(initial.technical,null);
    const root=await page.evaluate("(()=>{const b=document.querySelector('.tree-branch .tree-select'),r=b.closest('.tree-node');return{arrow:r.querySelector('button.tree-toggle')!==null,checkbox:r.querySelector('input.tree-visibility-toggle')!==null,name:b.querySelector('.tree-name').textContent};})()");
    assert.ok(root.arrow&&root.checkbox);assert.ok(root.name==='România'||root.name==='Moldova');
@@ -69,7 +69,7 @@ try{
    await shot('web-r2b3-desktop-confirm-1440x900');
    await page.evaluate("document.querySelector('.osm-level-action-confirm button').click()");
    const shown=await page.evaluate("({actual:[...qaApp.visibleEntityIds].sort(),ni:[...qaApp.visibleOperationalOutlineIds].sort(),selection:qaApp.selectedEntityId,stat:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked),notice:document.querySelector('.osm-level-geometry-actions [role=status]').textContent})");
-   assert.equal(shown.ni.length,8,'seven independent NI districts explicitly enabled');
+   assert.equal(shown.ni.length,7,'seven NI district outlines enabled; NI root remains off by default');
    assert.deepEqual(shown.actual,baseline.actual,'NI does not bulk-toggle the 85 reused MD aliases');
    assert.equal(shown.selection,baseline.selection);
    assert.deepEqual(shown.stat,baseline.stat);

@@ -69,6 +69,19 @@ export function createNistreniaAdministrativeView({model,entityById,officialNode
   const actual=entityById.get(canonical),source=officialNodes.get(canonical);
   if(!actual||!source||actual.jurisdiction!=='MD'||!Array.isArray(actual.map?.bbox)||actual.map.bbox.length!==4)throw Error('Nistrenia: missing canonical geometry '+canonical);
  }
+ // NI-TREE.2 is a presentation-only projection: Moldova remains the sole
+ // ACTUAL MD root; NI is its first display child before both statistical parts.
+ const mdRootId='osm-r58974',md=nodes.get(mdRootId);
+ if(!md||md.parent_id!==null||md.jurisdiction!=='MD'
+    ||md.child_ids.length!==2||md.child_ids[0]!=='stat-MD11'||md.child_ids[1]!=='stat-MD12')
+  throw Error('NI-TREE.2: unexpected immutable Moldova root layout');
+ const niRoot=nodes.get(NISTR_EN_ROOT);
+ nodes.set(NISTR_EN_ROOT,{...niRoot,parent_id:mdRootId,depth:1});
+ for(const [id,node] of unified.nodes){
+  if(id===NISTR_EN_ROOT)continue;
+  nodes.set(id,{...nodes.get(id),depth:node.depth+1});
+ }
+ nodes.set(mdRootId,{...md,child_ids:[NISTR_EN_ROOT,...md.child_ids]});
  const root=nodes.get(NISTR_EN_ROOT);
  const roleIds=unified.roleIds;
  // The sole reference-only leaf (Lunga) is an explicit unresolved cartographic
@@ -80,7 +93,7 @@ export function createNistreniaAdministrativeView({model,entityById,officialNode
   return ids.length===1?ids[0]:null;
  };
  return {model,nodes,resources:checked.resources,documentaryNodes:checked.nodes,
-  root,navigationRoot:root,rootIds:[...officialRoots,NISTR_EN_ROOT],
+  root,navigationRoot:root,rootIds:[...officialRoots],
   groupIds:[...unified.groupIds],virtualIds,geometryNavigationIds,
   cartographicNavigationId:null,roleIds,toActual,
   geometryByNode:unified.geometryByNode,

@@ -376,7 +376,7 @@ function resetGlobalFilters(){
   const input=document.getElementById('layer-'+jurisdiction.toLowerCase());
   if(input)input.checked=true;
  }
- const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=Boolean(nistreniaView);
+ const niReset=document.getElementById('layer-ni');if(niReset)niReset.checked=false;
  syncJurisdictionRoots();
  refreshOsmAdminTree();refreshGeometryVisibility();syncTiers().catch(console.error);atlasUrl?.commit('push');
 }
@@ -391,7 +391,7 @@ function refreshGeometryVisibility(){
  atlasAdvanced?.refresh();
 }
 function geometryResetDisabled(){
- return !hierarchyTree||(visibleEntityIds.size===hierarchyTree.root_ids.length&&hierarchyTree.root_ids.every(id=>visibleEntityIds.has(id))&&visibleOperationalOutlineIds.size===(nistreniaOutlines?1:0)&&(!nistreniaOutlines||visibleOperationalOutlineIds.has(NISTR_EN_ROOT)));
+ return !hierarchyTree||(visibleEntityIds.size===hierarchyTree.root_ids.length&&hierarchyTree.root_ids.every(id=>visibleEntityIds.has(id))&&visibleOperationalOutlineIds.size===0);
 }
 function syncGeometryReset(){
  // ARIA disabling preserves native keyboard focus after reset (disabled blurs).
@@ -404,11 +404,11 @@ function resetGeometries(){
  lastOsmLevelGeometryAction=null;
  visibleEntityIds.clear();
  for(const id of hierarchyTree.root_ids)visibleEntityIds.add(id);
- visibleOperationalOutlineIds.clear();if(nistreniaOutlines)visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
+ visibleOperationalOutlineIds.clear();
  refreshGeometryVisibility();
  syncTiers().catch(console.error);
  atlasUrl?.commit('push');
- document.getElementById('geometries-reset-status').textContent='Geometriile au fost resetate la România, Moldova și Nistrenia. Selecția și filtrele sunt păstrate.';
+ document.getElementById('geometries-reset-status').textContent='Geometriile au fost resetate la România și Moldova. Selecția și filtrele sunt păstrate.';
 }
 for(const id of ['geometries-reset','map-geometries-reset'])document.getElementById(id)?.addEventListener('click',resetGeometries);
 function updateSelectionVisibility(){
@@ -509,9 +509,9 @@ async function loadHierarchyTree(){
  nistreniaView=nistreniaCatalog&&nistreniaOutlineFeatures&&nistreniaAdministrativeModel?createNistreniaAdministrativeView({model:nistreniaAdministrativeModel,entityById,officialNodes:hierarchyNodeById,officialRoots:tree.root_ids}):null;
   if(nistreniaView){
    nistreniaOutlines=createNistreniaOutlineLayers({L,map,features:nistreniaOutlineFeatures,onSelect:id=>selectNistreniaNode(id,{zoom:false,source:'map'}).catch(console.error)});
-   visibleOperationalOutlineIds.clear();visibleOperationalOutlineIds.add(NISTR_EN_ROOT);
+   visibleOperationalOutlineIds.clear();
   }
- const niFilter=document.getElementById('layer-ni');if(niFilter){niFilter.disabled=!nistreniaView;niFilter.title=nistreniaView?'Organizare declarată în 2023; actualizarea contemporană este provizorie.':'Prezentarea NI este indisponibilă: sursa nu a putut fi validată.';}
+ const niFilter=document.getElementById('layer-ni');if(niFilter){niFilter.checked=false;niFilter.disabled=!nistreniaView;niFilter.title=nistreniaView?'Organizare declarată în 2023; actualizarea contemporană este provizorie.':'Prezentarea NI este indisponibilă: sursa nu a putut fi validată.';}
   visibleEntityIds.clear();
   for(const id of tree.root_ids)visibleEntityIds.add(id);
   renderHierarchyTree();

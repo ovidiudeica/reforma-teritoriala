@@ -9,6 +9,7 @@ on:
       - 'atlas-nistrenia-*.mjs'
       - 'atlas-ni-tree1.mjs'
       - 'scripts/test/ni-tree1.test.mjs'
+      - 'scripts/test/ni-tree2.test.mjs'
       - 'app.js'
       - 'atlas-tree.mjs'
       - 'atlas-url-state.mjs'
@@ -26,6 +27,7 @@ on:
       - 'atlas-nistrenia-*.mjs'
       - 'atlas-ni-tree1.mjs'
       - 'scripts/test/ni-tree1.test.mjs'
+      - 'scripts/test/ni-tree2.test.mjs'
       - 'app.js'
       - 'atlas-tree.mjs'
       - 'atlas-url-state.mjs'
@@ -56,7 +58,7 @@ jobs:
         with:
           node-version: '24.21.0'
       - name: NI-TREE.1 seven branches, 85 canonicals, zero ACTUAL changes
-        run: node --test scripts/test/ni-tree1.test.mjs
+        run: node --test scripts/test/ni-tree1.test.mjs scripts/test/ni-tree2.test.mjs
         env:
           TMPDIR: ${{ runner.temp }}
       - run: node --test scripts/test/ni-fin*.test.mjs
