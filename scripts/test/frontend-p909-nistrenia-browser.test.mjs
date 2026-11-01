@@ -19,7 +19,8 @@ try{
    assert.equal(state.nodes,5848+243);assert.equal(state.official,5848);
    assert.equal(state.rootChildren.length,7);assert.equal(state.hasCatalog,false);
    assert.deepEqual(state.roots.slice(0,2).sort(),['osm-r58974','osm-r90689'].sort());
-   assert.equal(state.roots.length,2);\n   assert.deepEqual(await page.evaluate("qaApp.nistreniaView.nodes.get('osm-r58974').child_ids.slice(0,3)"),['view-nistrenia','stat-MD11','stat-MD12']);
+   assert.equal(state.roots.length,2);
+   assert.deepEqual(await page.evaluate("qaApp.nistreniaView.nodes.get('osm-r58974').child_ids.slice(0,3)"),['view-nistrenia','stat-MD11','stat-MD12']);
    assert.deepEqual(state.defaultOperational,[]);
   });
 
@@ -47,7 +48,9 @@ try{
    await page.click('.tree-visibility-toggle[data-entity-id="'+node+'"]');
    assert.equal(await page.evaluate("qaApp.visibleEntityIds.has('osm-r19015110')"),true);
    assert.deepEqual(await page.evaluate('[...qaApp.visibleOperationalOutlineIds].sort()'),before);
-   // Explicitly enable NI: the default now contains only RO and MD.\n   await page.call(function(){const el=document.getElementById('layer-ni');el.checked=true;el.dispatchEvent(new Event('change',{bubbles:true}));});\n   // A shared MD canonical polygon is still visible if MD is unchecked but NI stays on.
+   // Explicitly enable NI: the default now contains only RO and MD.
+   await page.call(function(){const el=document.getElementById('layer-ni');el.checked=true;el.dispatchEvent(new Event('change',{bubbles:true}));});
+   // A shared MD canonical polygon is still visible if MD is unchecked but NI stays on.
    await page.call(function(){const el=document.getElementById('layer-md');el.checked=false;el.dispatchEvent(new Event('change',{bubbles:true}));});
    assert.equal(await page.evaluate("qaApp.atlasTree.getNode('view-nistrenia-place-110')?.outer.classList.contains('tree-geometry-hidden')"),false);
    await page.call(function(){const el=document.getElementById('layer-ni');el.checked=false;el.dispatchEvent(new Event('change',{bubbles:true}));});
