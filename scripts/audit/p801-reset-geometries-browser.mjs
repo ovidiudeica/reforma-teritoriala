@@ -29,7 +29,7 @@ try{await test('P8.0.1 geometry reset preserves independent atlas state',{timeou
   assert.deepEqual(await page.call(preserved),before);assert.equal(await page.evaluate('history.length'),length+1);
   assert.equal(await page.evaluate("document.querySelector('#geometries-reset').getAttribute('aria-disabled')==='true'"),true);
   assert.equal(await page.evaluate('qaApp.map===window.p801Map&&qaApp.atlasTree===window.p801Tree'),true);
-  assert.ok(await page.call(checks));assert.match(await page.evaluate("document.querySelector('#geometries-reset-status').textContent"),/România, Moldova și Nistrenia/);
+  assert.ok(await page.call(checks));assert.match(await page.evaluate("document.querySelector('#geometries-reset-status').textContent"),/România și Moldova/);
  });
  await t.test('Back restores all prior checks; Forward resets them and updates disabled state',async()=>{
   await page.evaluate('history.back()');await delay(100);await page.evaluate('qaApp.atlasUrl.whenIdle()');
