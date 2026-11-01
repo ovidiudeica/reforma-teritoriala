@@ -4,11 +4,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 const model=JSON.parse(fs.readFileSync('views/nistrenia/administration.json','utf8'));
 const nodes=new Map(model.nodes.map(n=>[n.id,n]));
-const normalize=s=>s.toLocaleLowerCase('ro').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\\s*—\\s*oras$/u,'').trim();
+const normalize=s=>s.toLocaleLowerCase('ro').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s*—\s*oras$/u,'').trim();
 const parents=new Map();
 function topGroup(n){let seen=new Set();while(n?.parent_id&&n.parent_id!=='view-nistrenia'){if(seen.has(n.id))throw Error('cycle '+n.id);seen.add(n.id);n=nodes.get(n.parent_id);}return n?.id;}
 for(const n of model.nodes)if(n.kind==='raion'||n.kind==='upper_city'||n.kind==='place'){const k=normalize(n.display_name);if(!parents.has(k))parents.set(k,[]);parents.get(k).push(n)}
-const groups=new Map(model.nodes.filter(n=>n.kind==='raion'||n.kind==='upper_city').map(n=>[Number((n.id.match(/osm-r(\\d+)/)||[])[1]),n.id]));
+const groups=new Map(model.nodes.filter(n=>n.kind==='raion'||n.kind==='upper_city').map(n=>[Number((n.id.match(/osm-r(\d+)/)||[])[1]),n.id]));
 const rows=[];
 for(const r of model.geometry_resources.filter(r=>r.kind==='ACTUAL')){
  const candidates=parents.get(normalize(r.display_name))||[];
