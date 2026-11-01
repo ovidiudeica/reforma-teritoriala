@@ -100,7 +100,7 @@ if(nodes.get(NISTR_EN_ROOT).child_ids.length!==7)throw Error('Nistrenia: seven t
  const roleIds=new Set(Object.values(model.compatibility_role_aliases));
  if(roleIds.size!==85)throw Error('Nistrenia: canonical geometry role coverage');
  return {model,nodes,resources:checked.resources,documentaryNodes:checked.nodes,root:checked.root,navigationRoot:root,rootIds:[...officialRoots,NISTR_EN_ROOT],
-  groupIds:checked.root.child_ids,virtualIds:new Set(checked.nodes.keys()),geometryNavigationIds,cartographicNavigationId,roleIds,toActual,
+  groupIds:nodes.get(NISTR_EN_ROOT).child_ids.filter(id=>id!==cartographicNavigationId),virtualIds:new Set(checked.nodes.keys()),geometryNavigationIds,cartographicNavigationId,roleIds,toActual,
   officialNodeCount:officialNodes.size,isVirtual:id=>checked.nodes.has(id)||geometryNavigationIds.has(id),
   actualId:id=>toActual.get(id)||id,
   operationalJurisdiction:id=>entityById.get(toActual.get(id)||id)?.jurisdiction||(nodes.has(id)?'NI':undefined),
