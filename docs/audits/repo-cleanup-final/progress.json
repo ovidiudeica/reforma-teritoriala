@@ -45,7 +45,7 @@
     },
     {
       "id": "C2",
-      "status": "POST_MERGE_IN_PROGRESS",
+      "status": "POST_MERGE_VERIFIED",
       "base": "8c8cb123c0e8c363268886aba863131e33f3e1a4",
       "pr": [
         492,
@@ -57,10 +57,10 @@
         "c2-dynamic-readers.json.gz",
         "c2-258-reconciliation.csv"
       ],
-      "tests": "492 PR19checks/15runs and post25checks/17runs PASS. 493 PR19checks/15runs PASS; Linux artifact SHA-256/LF and5exact legacy replay products verified; 493 post-merge pending",
+      "tests": "492post25checks/17runs and493post21checks/13runs PASS; all old evidence hashes preserved; portable LF/legacy exact replay verified",
       "decision": "All 3468 snapshot files retained; all 258 historical candidates reconciled conservatively",
       "blockers": [],
-      "next": "Admit 493 post-merge controls; preserve all original snapshots",
+      "next": "Maintain accepted graph and documentation; no repeated territorial inventory",
       "tested_head": "85a2224a1ab96632f94912246395972ed0bb418c",
       "merge_commit": "65bb8267afe3964971ba402d78d4021b14cc8141",
       "portability_tested_head": "6c93855e0d5782c2b9ffa5deffc82ebd1ed69cfe",
@@ -68,9 +68,9 @@
     },
     {
       "id": "C3",
-      "status": "LOCAL_VERIFIED_PENDING_CI",
+      "status": "POST_MERGE_IN_PROGRESS",
       "base": "7162aee271936d628b2501c7bfeedd3db9f59798",
-      "pr": null,
+      "pr": 494,
       "files": [
         ".gitignore",
         "scripts/process/.gitkeep",
@@ -78,14 +78,16 @@
         "c3-decisions.csv",
         "c3-deletion-proof.json"
       ],
-      "tests": "4 analyzer regressions PASS; exact empty-blob,71modules,3reference dispositions,3ignore/3source examples;478protected/440runtime identical toC0",
+      "tests": "22/22 executed PRchecks,15/15 workflows PASS,0SKIP; actualA/B+compare executed; archive/innerhashes and3519file register verified;71processmodules+2futureplaceholders kept",
       "decision": "Delete only empty populated-directory placeholder; retain future corpora and all other historical candidates",
       "blockers": [],
-      "next": "Separate exact-head PR CI; merge only after493post and ownCI PASS"
+      "next": "Admit all exact66a34d1d post-merge controls before C6 merge",
+      "tested_head": "0041d36a177897d35820f41fafddd957e551ecc0",
+      "merge_commit": "66a34d1d231c1296b44c84e688c62cc74b670ed5"
     },
     {
       "id": "C4",
-      "status": "POST_MERGE_IN_PROGRESS",
+      "status": "POST_MERGE_VERIFIED",
       "base": "8c8cb123c0e8c363268886aba863131e33f3e1a4",
       "pr": [
         492,
@@ -94,10 +96,10 @@
       "files": [
         "README.md"
       ],
-      "tests": "492 PR19checks/15runs and post25checks/17runs PASS. 493 PR19checks/15runs PASS; Linux artifact SHA-256/LF and5exact legacy replay products verified; 493 post-merge pending",
+      "tests": "492post25checks/17runs and493post21checks/13runs PASS; all old evidence hashes preserved; portable LF/legacy exact replay verified",
       "decision": "Index existing paths rather than relocate evidence",
       "blockers": [],
-      "next": "Admit 493 post-merge controls; preserve all original snapshots",
+      "next": "Maintain accepted graph and documentation; no repeated territorial inventory",
       "tested_head": "85a2224a1ab96632f94912246395972ed0bb418c",
       "merge_commit": "65bb8267afe3964971ba402d78d4021b14cc8141",
       "portability_tested_head": "6c93855e0d5782c2b9ffa5deffc82ebd1ed69cfe",
@@ -119,14 +121,23 @@
     },
     {
       "id": "C6",
-      "status": "INVESTIGATING",
-      "base": "8c8cb123c0e8c363268886aba863131e33f3e1a4",
+      "status": "LOCAL_VERIFIED_PENDING_CI",
+      "base": "66a34d1d231c1296b44c84e688c62cc74b670ed5",
       "pr": null,
-      "files": [],
-      "tests": "Identified duplicate full Linux regression invocation in P8.2 and P8.4",
-      "decision": "No check removed; consolidation requires unchanged runner/test list and fail-closed required gate",
+      "files": [
+        ".github/workflows/frontend-browser-qa.yml",
+        ".github/workflows/p82-derived-topology.yml",
+        ".github/workflows/p84-export-validation.yml",
+        "scripts/ci/check-job-results.mjs",
+        "scripts/ci/check-job-results.test.mjs",
+        "C6.md",
+        "c6-coverage-proof.json",
+        "workflow-roles-registered.csv"
+      ],
+      "tests": "22 gate regressions PASS;132 original testfileSHA256+unmodifiedrunnerSHA256 verified; commandmultiset coverage preserved; branchprotection exactlyequalC0;80trackedactiveworkflows/145APIrecords reconciled",
+      "decision": "Execute unchanged full suite once; same required frontend context fails unless all4 real jobs succeed; retain standalone manual jobs/artifacts",
       "blockers": [],
-      "next": "Separate CI PR with failure/cancel/skip propagation regressions"
+      "next": "All exact-head CI, full-suite report/list, same-context check and post-merge controls; measure actual duration"
     },
     {
       "id": "C7",

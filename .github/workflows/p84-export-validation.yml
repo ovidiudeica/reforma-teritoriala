@@ -1,9 +1,7 @@
 name: P8.4 export print report validation
 on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [main]
+  # Manual standalone reproducer; automatic jobs now run inside Frontend browser QA.
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:

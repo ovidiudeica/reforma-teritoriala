@@ -1,7 +1,7 @@
 {
   "schema": "cleanup-evidence-sha256-v1",
-  "previous_index_sha256": "d030e0cf6b94713a5c44f28ad18f7f93628eac51dfe2a7c54563edf37636a57b",
-  "previous_index_commit": "7162aee271936d628b2501c7bfeedd3db9f59798",
+  "previous_index_sha256": "7a432f8519a44b784f696d31a9de966add0465658716b2e5229c4afc15c290e7",
+  "previous_index_commit": "66a34d1d231c1296b44c84e688c62cc74b670ed5",
   "files": [
     {
       "file": "492-post-integrity.json",
@@ -194,6 +194,56 @@
       "sha256": "f8c490d66c3d0b2bd3bf106e8580068a5814d6ac18538a9cad11117567b8112c"
     },
     {
+      "file": "c6-493postchecks.json.gz",
+      "bytes": 3670,
+      "sha256": "418918968dfac27fb2bc1f2a46354a1aabfac0059762817e874fa38abec81283"
+    },
+    {
+      "file": "c6-493postruns.json.gz",
+      "bytes": 4813,
+      "sha256": "1b9550fa653206dbd899c8409a03dc9438eff6e6c065c7ceba21df723c5f90e5"
+    },
+    {
+      "file": "c6-494checks.json.gz",
+      "bytes": 4149,
+      "sha256": "e7814d23d94840d3f753c93e4057b578c628c75e45dad44a2870a2102ee1663f"
+    },
+    {
+      "file": "c6-494runs.json.gz",
+      "bytes": 5524,
+      "sha256": "a4110dca281230f18bd96bf088ea31d37e9606fc4d66b76c6d26c7bc3b8d30bb"
+    },
+    {
+      "file": "c6-c6-baseline-jobs-41242423873.json.gz",
+      "bytes": 928,
+      "sha256": "e5b2de0cb77198f0be9ecf0e82c552b20f2a148008e392ebe35ee722bff78def"
+    },
+    {
+      "file": "c6-c6-baseline-jobs-41242423974.json.gz",
+      "bytes": 870,
+      "sha256": "25ef539857a5c3416a27aaeb4c2d44d85046874e57a1e26ab8a1c4acb0e90b5c"
+    },
+    {
+      "file": "c6-coverage-proof.json",
+      "bytes": 22355,
+      "sha256": "6f0631555318f7c0b982a181b1a4b9ac8fa539812724e3513e7ae48438118cbb"
+    },
+    {
+      "file": "c6-original-full-suite.json",
+      "bytes": 423,
+      "sha256": "5f62c26af669fe94af9b9d04ab8eddd8e35d5b93c32cb9a7122adca3d6de85f8"
+    },
+    {
+      "file": "c6-protection-before.json",
+      "bytes": 2243,
+      "sha256": "ef610b62ef1a227fbe2d414c8a363835078e204f2117597eb481a97e98bf6b1d"
+    },
+    {
+      "file": "C6.md",
+      "bytes": 4271,
+      "sha256": "54da1cfe0c7e42f2fe70122384efd2cd0e4b11c2f25e2de384d83be37271c961"
+    },
+    {
       "file": "download-receipts-security.json",
       "bytes": 4971,
       "sha256": "49a174d743cb18a831d12b53b155d532b7e669762ff428a44a4d1fef50f69397"
@@ -217,6 +267,26 @@
       "file": "pr493-admission.json",
       "bytes": 592,
       "sha256": "709e9ced2969fb0e43a1ff7e30ec1ffcd177310dac85584a3b869cd95af7c9f0"
+    },
+    {
+      "file": "pr494-admission.json",
+      "bytes": 677,
+      "sha256": "e17eb7c3f3597e24ff63b2bb01a85f3922f163da4fa8be1b23cd21f6708b8d30"
+    },
+    {
+      "file": "scheduled-workflow-decisions.json",
+      "bytes": 1926,
+      "sha256": "ebeb8f330f4dd0a6d27c8e2a0cd0bd5e9d44f91029e69f8bba7c7186227a384b"
+    },
+    {
+      "file": "workflow-metadata-reconciliation.json",
+      "bytes": 24782,
+      "sha256": "3cfece6f73d707cddd1db0077762b97695871e6f9da7952456371397c185d459"
+    },
+    {
+      "file": "workflow-roles-registered.csv",
+      "bytes": 77912,
+      "sha256": "150f315bed17c8b84837bdcd0492ffd870919e4a5e85e76633a9ad8bb33b79e4"
     }
   ]
 }

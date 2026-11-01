@@ -1,9 +1,7 @@
 name: P8.2 derived topology reproducibility
 on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [main]
+  # Manual standalone reproducer; automatic jobs now run inside Frontend browser QA.
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
