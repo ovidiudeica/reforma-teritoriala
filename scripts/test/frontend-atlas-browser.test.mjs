@@ -23,7 +23,7 @@ try{
    await page.viewport(1440,900);
    const initial=await page.evaluate("({checked:[...document.querySelectorAll('#hierarchy-tree .tree-visibility-toggle')].filter(e=>e.checked).map(e=>e.dataset.entityId).sort(),explicit:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,rendered:document.querySelectorAll('#hierarchy-tree .tree-select').length,details:document.querySelector('#details-panel').hidden,technical:document.querySelector('#hierarchy-tree .tree-role')})");
    const roots=['osm-r90689','osm-r58974'].sort();
-   assert.deepEqual(initial.checked,[...roots,'view-nistrenia'].sort(),'three visible state outlines selected by default');assert.deepEqual(initial.explicit,roots,'ACTUAL retains only its two canonical state roots');
+   assert.deepEqual(initial.checked,roots,'NI-TREE.2 defaults to the two state outlines, NI remains opt-in');assert.deepEqual(initial.explicit,roots,'ACTUAL retains only its two canonical state roots');
    assert.equal(initial.selected,null);assert.equal(initial.details,true);assert.ok(initial.rendered<100);assert.equal(initial.technical,null);
    const root=await page.evaluate("(()=>{const b=document.querySelector('.tree-branch .tree-select'),r=b.closest('.tree-node');return{arrow:r.querySelector('button.tree-toggle')!==null,checkbox:r.querySelector('input.tree-visibility-toggle')!==null,name:b.querySelector('.tree-name').textContent};})()");
    assert.ok(root.arrow&&root.checkbox);assert.ok(root.name==='România'||root.name==='Moldova');
