@@ -1,4 +1,5 @@
 import {fetchNistreniaAdministrativeModel} from './atlas-nistrenia-administrative.mjs';
+import {createCardAudit} from './atlas-card-audit.mjs';
 import {createAtlasExport} from './atlas-export-ui.mjs';
 import {mapSvg,printSvg} from './atlas-export-visual.mjs';
 import {legendEntries} from './atlas-presentation.mjs';
@@ -810,6 +811,7 @@ function nistreniaGeometricPerspectiveHtml(entity){
    '<p>Rol OSM NI existent, fără corespondent administrativ individual atribuit în registrul din 2023.</p>')+
   '</section>';
 }
+let cardAuditUi=null;
 function renderDetails(entity){
  const title=document.getElementById('details-title');
  const body=document.getElementById('details-body');
@@ -820,6 +822,8 @@ function renderDetails(entity){
   detailRow('Jurisdicție',entity.jurisdiction)+(nistreniaView?.roleIds.has(entity.id)?detailRow('Jurisdicție operațională (OSM)','Nistrenia · de facto, fără recunoaștere internațională'):'')+detailRow('Clasă geometrică',filterLabels[geometryClass(entity)]||'Limită statistică separată')+
   '</dl></section>'+entityProvenanceHtml(entity,{typeLabel,statusLabel:value=>statusLabels[value]||value})+nistreniaGeometricPerspectiveHtml(entity);
  renderOsmRoleDetails({container:body,document,row:osmRoleById.get(entity.id)});
+ cardAuditUi??=createCardAudit({document,fetch:(...args)=>fetch(...args),getManifest:()=>releaseData.manifest,getEntity:id=>entityById.get(id)});
+ cardAuditUi.render(body,entity);
  renderBreadcrumb(entity);
  const zoomButton=body.querySelector('#zoom-selected');
  if(zoomButton){

@@ -117,7 +117,8 @@ try {
    await waitFor(()=>page.evaluate("!document.querySelector('#details-panel').hidden"),'card');
    const d=await page.evaluate(`[...document.querySelectorAll('#details-body details.details-section')]
      .map(e=>({tag:e.tagName,summary:e.querySelector('summary')?.textContent.trim()}))`);
-   assert.equal(d.length,3);assert.ok(d.every(x=>x.tag==='DETAILS'&&x.summary));
+   assert.equal(d.length,4);assert.ok(d.every(x=>x.tag==='DETAILS'&&x.summary));
+   assert.equal(d.filter(x=>x.summary==='Geometrie, OSMB și audit').length,1);
    await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','web-r1b-desktop-card.png'));
   });
   await t.test('R1b.3 panel density, controls and typography preserve responsive reachability',async()=>{

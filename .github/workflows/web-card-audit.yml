@@ -1,0 +1,23 @@
+name: WEB-CARD.1 audit cards
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  cards:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5, identic cu workflow-urile existente
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Contract, privacy and all 5848 immutable bindings
+        run: node --test scripts/test/web-card-audit.test.mjs
+      - name: Chromium desktop and mobile, state, XSS and accessibility
+        env:
+          WEB_CARD_QA_OUTPUT: ${{ runner.temp }}/web-card-qa
+        run: node --test scripts/test/web-card-audit-browser.test.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: web-card-qa
+          path: ${{ runner.temp }}/web-card-qa
