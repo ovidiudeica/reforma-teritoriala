@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createNistreniaAdministrativeView} from '../../atlas-nistrenia-jurisdiction.mjs';
-import {createUrlConfig,defaultUrlState} from '../../atlas-url-state.mjs';
+import {createUrlConfig,defaultUrlState,parseUrlState,serializeUrlState} from '../../atlas-url-state.mjs';
 import {createGeometryFilterIndex} from '../../geometry-taxonomy.mjs';
 import {ancestorPath} from '../../atlas-tree.mjs';
 const read=p=>JSON.parse(readFileSync(new URL('../../'+p,import.meta.url),'utf8'));
@@ -31,4 +31,8 @@ test('NI-TREE.2 default URL activates only RO and MD, never an NI outline',()=>{
  assert.deepEqual(state.visibleOperationalOutlineIds,[]);
  assert.deepEqual(state.visibleEntityIds,[...tree.root_ids].sort());
  assert.deepEqual(state.openIds,[...tree.root_ids].sort());
+ assert.deepEqual(parseUrlState('v=2',config).jurisdictions,['MD','RO']);
+ const niEnabled={...state,jurisdictions:['NI','RO']};
+ assert.deepEqual(parseUrlState(serializeUrlState(niEnabled,config),config).jurisdictions,['NI','RO']);
+ assert.deepEqual(parseUrlState(serializeUrlState(state,config),config).jurisdictions,['MD','RO']);
 });
