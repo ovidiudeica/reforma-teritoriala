@@ -43,7 +43,7 @@ export function parseUrlState(search,config){
  for(const id of new Set(params.getAll('x')))if(config.entityIds.has(id)){if(visibleEntityIds.has(id))visibleEntityIds.delete(id);else visibleEntityIds.add(id);}
  const outlines=new Set(legacy?[]:config.defaultOutlineIds);
  if(!legacy)for(const id of new Set(params.getAll('o')))if(config.outlineIds.includes(id)){if(outlines.has(id))outlines.delete(id);else outlines.add(id);}
- const fallbackJurisdictions=legacy?['RO','MD']:config.outlineIds.length?['RO','MD','NI']:['RO','MD'];
+ const fallbackJurisdictions=['RO','MD']; // NI-TREE.2: explicit opt-in survives only when encoded in j
  return normalizeUrlState({visibleEntityIds,visibleOperationalOutlineIds:[...outlines],entityId:params.get('e'),viewport,viewportExplicit:Boolean(viewport),jurisdictions:params.has('j')?fixedList(params,'j',['RO','MD','NI'],fallbackJurisdictions):fallbackJurisdictions,geometrySubtypes:config.subtypes.filter(id=>!disabled.has(id)),statisticalLevels:fixedList(params,'s',config.levels),osmAdminLevels:params.has('a')?config.osmAdminLevels.filter(level=>params.get('a').split(',').includes(String(level))):config.osmAdminLevels,separateStatisticalGeometry:params.get('b')!=='0',osmBasemapVisible:params.get('m')!=='0',openIds:params.has('t')?params.getAll('t'):(legacy?config.rootIds:config.treeRootIds)},config);
 }
 export function serializeUrlState(raw,config){
