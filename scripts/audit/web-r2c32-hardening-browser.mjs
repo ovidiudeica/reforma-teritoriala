@@ -91,7 +91,7 @@ try{
    report.checks.push({name:'confirmation-escape-'+label,...escaped});await capture(p,label+'-escape');
    assert.deepEqual(escaped,{pending:false,panel:'filters',focused:true},'Escape cancels inline confirmation and returns focus without closing the filters panel');assert.deepEqual((await p.call(state)).ni,baseline.ni);
    await p.call(bulk,'show');await p.call(bulk,'cancel');assert.deepEqual((await p.call(state)).ni,baseline.ni);
-   await p.call(bulk,'show');await p.call(bulk,'confirm');await waitFor(()=>p.call(function(){return qaApp.visibleOperationalOutlineIds.size===(published?8:7);},published),'selected NI outlines for current baseline');let shown=await p.call(state);assert.deepEqual(shown.actual,baseline.actual);assert.deepEqual(shown.stat,baseline.stat);
+   await p.call(bulk,'show');await p.call(bulk,'confirm');await waitFor(()=>p.call(function(isPublished){return qaApp.visibleOperationalOutlineIds.size===(isPublished?8:7);},published),'selected NI outlines for current baseline');let shown=await p.call(state);assert.deepEqual(shown.actual,baseline.actual);assert.deepEqual(shown.stat,baseline.stat);
    if(published){
     const before=await p.call(state);
     for(const jurisdiction of ['ro','md','ni']){
@@ -104,7 +104,7 @@ try{
    await capture(p,label+'-shown');
    await p.call(bulk,'undo');assert.deepEqual((await p.call(state)).ni,baseline.ni);
    for(let i=0;i<12;i++){await p.call(bulk,'show');await p.call(bulk,'cancel');}assert.deepEqual((await p.call(state)).ni,baseline.ni);
-   await p.call(bulk,'show');await p.call(bulk,'confirm');await p.evaluate('history.back()');await waitFor(()=>p.call(function(){return qaApp.visibleOperationalOutlineIds.size===(published?1:0);},published),'Back NI');await p.evaluate('history.forward()');await waitFor(()=>p.call(function(){return qaApp.visibleOperationalOutlineIds.size===(published?8:7);},published),'Forward NI');
+   await p.call(bulk,'show');await p.call(bulk,'confirm');await p.evaluate('history.back()');await waitFor(()=>p.call(function(isPublished){return qaApp.visibleOperationalOutlineIds.size===(isPublished?1:0);},published),'Back NI');await p.evaluate('history.forward()');await waitFor(()=>p.call(function(isPublished){return qaApp.visibleOperationalOutlineIds.size===(isPublished?8:7);},published),'Forward NI');
    await p.call(levels,['2']);await p.call(bulk,'hide');await p.call(bulk,'confirm');assert.deepEqual((await p.call(state)).actual,[]);assert.equal((await p.call(state)).ni.length,published?8:7);await p.call(bulk,'undo');assert.deepEqual((await p.call(state)).actual,baseline.actual);
    const shared=(await p.call(state)).url;await p.navigate(shared);const restored=await p.call(state);assert.deepEqual(restored.actual,baseline.actual);assert.equal(restored.ni.length,published?8:7);assert.equal(restored.selected,'view-nistrenia');
    await p.openPanel('share');await p.click('#share-entity');const link=await p.evaluate("document.querySelector('#share-url').value");assert.equal(new URL(link).searchParams.get('e'),'view-nistrenia');await p.navigate(link);assert.equal((await p.call(state)).selected,'view-nistrenia');
