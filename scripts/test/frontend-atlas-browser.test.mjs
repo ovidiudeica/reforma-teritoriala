@@ -69,7 +69,7 @@ try{
    await shot('web-r2b3-desktop-confirm-1440x900');
    await page.evaluate("document.querySelector('.osm-level-action-confirm button').click()");
    const shown=await page.evaluate("({actual:[...qaApp.visibleEntityIds].sort(),ni:[...qaApp.visibleOperationalOutlineIds].sort(),selection:qaApp.selectedEntityId,stat:[...document.querySelectorAll('input[data-kind=statistical]')].map(e=>e.checked),notice:document.querySelector('.osm-level-geometry-actions [role=status]').textContent})");
-   assert.equal(shown.ni.length,8,'seven independent NI districts explicitly enabled');
+   assert.equal(shown.ni.length,7,'seven NI district outlines enabled; NI root remains off by default');
    assert.deepEqual(shown.actual,baseline.actual,'NI does not bulk-toggle the 85 reused MD aliases');
    assert.equal(shown.selection,baseline.selection);
    assert.deepEqual(shown.stat,baseline.stat);
