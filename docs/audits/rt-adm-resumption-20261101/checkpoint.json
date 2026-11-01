@@ -1,0 +1,48 @@
+{
+  "schema": "rt-adm-evidentiary-resumption-v1",
+  "date": "2026-11-01",
+  "baseline_commit": "35d25d38182bd8453a7bd9ba1819e4ed842eebb5",
+  "preceding_ui_merge_pr": 499,
+  "scope": "Read-only administrative evidentiary reconciliation, no ACTUAL modification",
+  "constraints": {
+    "actual_mutation_allowed": false,
+    "p91_authorized": false,
+    "legal_equivalence_from_osm": false,
+    "payments_allowed": false
+  },
+  "existing_legal_exceptions": {
+    "total": 14,
+    "MD": 3,
+    "RO_localities": 5,
+    "RO_bucharest_sectors": 6,
+    "legal_boundary_certified": 0,
+    "authorized_edits": 0,
+    "source": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json",
+    "verdict": "OPEN_PENDING_PRIMARY_LEGAL_BOUNDARY_EVIDENCE"
+  },
+  "bucharest_topology": {
+    "source": "docs/audits/rt-adm2-13-1/topology-register.json",
+    "snapshot": "2026-10-05",
+    "sector_count": 6,
+    "municipality_relation": 377733,
+    "zero_gap": true,
+    "zero_overlap": true,
+    "zero_symmetric_difference": true,
+    "legal_certification": false
+  },
+  "normative_chain": {
+    "source": "docs/audits/auto2-bucharest-chain-20261031/modifier-chain.json",
+    "original_decree284_gazette_acquired": false,
+    "original_law31_gazette_acquired": false,
+    "route_amendment_absence_certified": false,
+    "missing_hcl15_1995_boundary_annex": true
+  },
+  "next_evidence_actions": [
+    "Verify individually each of the 14 legal exceptions using competent primary normative and boundary evidence; do not assign IDs or reparent based on nominal matches",
+    "Acquire verifiable archival originals for D284/1979 and L31/1979 and applicable amendments, with provenance and hash",
+    "Acquire HCL15/1995 relevant boundary annex and approved PUG sheets where applicable",
+    "Compare legal directional segment descriptions to observed OSMB topology without inferring legal equivalence"
+  ],
+  "status": "EVIDENTIARY_AUDIT_RESUMED_OPEN",
+  "certification": "This register is a checkpoint on pre-existing verified evidence; it does not certify new legal facts or close exceptions."
+}

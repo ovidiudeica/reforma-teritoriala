@@ -1,0 +1,231 @@
+{
+  "schema": "p91a-readonly-prepromotion-v1",
+  "date": "2026-11-01",
+  "baseline_main": "35d25d38182bd8453a7bd9ba1819e4ed842eebb5",
+  "source_commit": "35d25d38182bd8453a7bd9ba1819e4ed842eebb5",
+  "scope": "Fourteen RT-ADM individual open exceptions; not a full global promotion inventory",
+  "counts": {
+    "records": 14,
+    "MD": 3,
+    "RO_localities": 5,
+    "RO_sectors": 6,
+    "operations_authorized": 0,
+    "p91b_eligible": 0
+  },
+  "p91a_only": true,
+  "p91b_authorized": false,
+  "actual_mutation_allowed": false,
+  "strict_promotion_gate": "DENY_ALL_UNTIL_INDIVIDUAL_AUTHORIZATION_AND_PRIMARY_BOUNDARY_CERTIFICATION",
+  "records": [
+    {
+      "id": "osm-r18967570",
+      "jurisdiction": "MD",
+      "category": "MD_CODE_PARENTAGE_DISCREPANCY",
+      "nominal_identity": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Act competent care clarifică apartenența și efectele juridice ale divergenței dintre părintele CUATM nominal și părintele din ACTUAL",
+        "Delimitare administrativă oficială autentificată, cu corespondență demonstrată cu poligonul OSM"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r18968043",
+      "jurisdiction": "MD",
+      "category": "MD_CODE_PARENTAGE_DISCREPANCY",
+      "nominal_identity": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Act competent care clarifică apartenența și efectele juridice ale divergenței dintre părintele CUATM nominal și părintele din ACTUAL",
+        "Delimitare administrativă oficială autentificată, cu corespondență demonstrată cu poligonul OSM"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r12104636",
+      "jurisdiction": "MD",
+      "category": "MD_NO_POSITIVE_IDENTITY",
+      "nominal_identity": "NO_IDENTIFIED_LEGAL_ENTITY",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Act primar sau registru oficial care să demonstreze existența unei unități administrative identificabile și codul său; în lipsa sa, nu se atribuie identitate juridică",
+        "Delimitare oficială autentificată și corespondență individuală cu relația OSM, numai dacă există o entitate juridică relevantă"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r11283027",
+      "jurisdiction": "RO",
+      "category": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "nominal_identity": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r11283576",
+      "jurisdiction": "RO",
+      "category": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "nominal_identity": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r11366846",
+      "jurisdiction": "RO",
+      "category": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "nominal_identity": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r11366847",
+      "jurisdiction": "RO",
+      "category": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "nominal_identity": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r12557978",
+      "jurisdiction": "RO",
+      "category": "RO_OFFICIAL_NOMINAL_LOCALITY_OSM_UNBOUND",
+      "nominal_identity": "SIRUTA_2026_CODE_AND_PARENT_VERIFIED_OSM_BOUNDARY_UNCERTIFIED",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Fișierul oficial INS SIRUTA S1 2026 verificat direct ca original, cu hash și rând individual pentru cod și părinte",
+        "Act și/sau delimitare oficială contemporană care demonstrează identitatea juridică a conturului OSM cu teritoriul localității"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r7960954",
+      "jurisdiction": "RO",
+      "category": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "nominal_identity": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r7960953",
+      "jurisdiction": "RO",
+      "category": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "nominal_identity": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r7960937",
+      "jurisdiction": "RO",
+      "category": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "nominal_identity": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r7960957",
+      "jurisdiction": "RO",
+      "category": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "nominal_identity": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r7960956",
+      "jurisdiction": "RO",
+      "category": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "nominal_identity": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    },
+    {
+      "id": "osm-r7960955",
+      "jurisdiction": "RO",
+      "category": "RO_SECTOR_OFFICIAL_IDENTITY_UNBOUND",
+      "nominal_identity": "NOMINAL_STATUS_CORROBORATED_NO_OSM_BOUNDARY_EQUIVALENCE",
+      "geometry_legal_equivalence": false,
+      "proposed_operation": "NO_CHANGE",
+      "p91a_status": "HOLD_MISSING_PRIMARY_EVIDENCE",
+      "p91b_eligible": false,
+      "missing_primary_evidence": [
+        "Sursă primară actuală pentru codul și statutul sectorului, verificată individual pentru anul de referință",
+        "Delimitare oficială contemporană a sectorului și probă de echivalență cu conturul OSM, inclusiv analiza efectelor actelor ulterioare decretului din 1979"
+      ],
+      "source_register": "docs/audits/rt-adm2-8/consolidated-legal-exceptions.json"
+    }
+  ]
+}
