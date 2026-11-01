@@ -55,7 +55,21 @@ export function createNistreniaAdministrativeView({model,entityById,officialNode
  const checked=validateNistreniaAdministrativeModel(model,{actualIds:new Set(entityById.keys())});
  if(officialNodes.size!==5848||officialRoots.length!==2)throw Error('Nistrenia: invalid ACTUAL hierarchy');
  const nodes=new Map(officialNodes);
- for(const [id,node] of checked.nodes){if(nodes.has(id))throw Error('Nistrenia: presentation ID collision');nodes.set(id,{...node,display_name:compactNistreniaDocumentaryName(node)});}
+ for(const [id,node] of checked.nodes){if(nodes.has(id))throw Error('Nistrenia: presentation ID collision');nodes.set(id,{...node,child_ids:[...node.child_ids],display_name:compactNistreniaDocumentaryName(node)});}
+// NI-TREE.1: presentation-only reparenting; immutable 2023 source model is unchanged.
+// These two documentary city nodes belong under their namesake districts in the UI.
+for(const [city,district] of [
+ ['view-nistrenia-unit-15','view-nistrenia-group-osm-r1702215'],
+ ['view-nistrenia-unit-16','view-nistrenia-group-osm-r1702217']
+]){
+ const child=nodes.get(city),parent=nodes.get(district);
+ if(!child||!parent||child.parent_id!==NISTR_EN_ROOT||parent.kind!=='raion')throw Error('Nistrenia: city reparent precondition');
+ nodes.set(city,{...child,parent_id:district,depth:parent.depth+1});
+ nodes.set(district,{...parent,child_ids:[...parent.child_ids,city]});
+}
+const sourceRoot=nodes.get(NISTR_EN_ROOT);
+nodes.set(NISTR_EN_ROOT,{...sourceRoot,child_ids:sourceRoot.child_ids.filter(id=>id!=='view-nistrenia-unit-15'&&id!=='view-nistrenia-unit-16')});
+if(nodes.get(NISTR_EN_ROOT).child_ids.length!==7)throw Error('Nistrenia: seven top-level branches expected');
  // Visual geometry navigation is not part of the 242 documentary identities.
  // No geometry is copied, nor is an administrative parent inferred from OSM.
  const cartographicNavigationId='view-nistrenia-cartographic-navigation';
