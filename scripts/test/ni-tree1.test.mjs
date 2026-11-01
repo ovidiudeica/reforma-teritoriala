@@ -73,6 +73,10 @@ test('NI-TREE.1 preserves one geometry toggle per known node and canonical MD vi
  assert.equal(view.primaryGeometryForNode('view-nistrenia-place-110'),'osm-r19015110');
  assert.equal(view.primaryGeometryForNode('view-nistrenia-place-218'),'osm-r8289751');
  assert.equal(view.primaryGeometryForNode('view-nistrenia-place-24'),'osm-r9301464');
+ assert.equal(view.primaryGeometryForNode('view-nistrenia-unit-15'),'osm-r9288287');
+ assert.equal(view.primaryGeometryForNode('view-nistrenia-unit-16'),'osm-r9659979');
+ assert.equal(view.primaryGeometryForNode('view-nistrenia-group-osm-r1702215'),null);
+ assert.equal(view.primaryGeometryForNode('view-nistrenia-group-osm-r1702217'),null);
  assert.equal(view.primaryGeometryForNode('view-nistrenia'),null);
  assert.equal(officialNodes.size,5848);
  assert.deepEqual(tree.root_ids,['osm-r58974','osm-r90689']);
