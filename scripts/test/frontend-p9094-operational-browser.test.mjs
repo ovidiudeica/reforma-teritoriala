@@ -31,8 +31,7 @@ try{
    await page.openPanel('filters');
    await page.click('#layer-md');
    assert.equal(await page.evaluate("document.getElementById('layer-md').checked"),false);
-   await page.click('#layer-ni'); // NI off (default is on)
-   await page.click('#layer-ni'); // NI on, MD remains off
+   await page.click('#layer-ni'); // NI on from NI-TREE.2 default off, MD remains off
    const enabled=await page.evaluate("({md:document.getElementById('layer-md').checked,ni:document.getElementById('layer-ni').checked,query:new URL(location.href).searchParams.get('j')})");
    assert.equal(enabled.md,false);assert.equal(enabled.ni,true);
    assert.match(enabled.query,/NI/);
