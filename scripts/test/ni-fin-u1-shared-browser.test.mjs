@@ -65,7 +65,7 @@ await test('NI-TREE.1: all 85 canonical geometries appear in the correct NI docu
   }
   assert.equal(report.references.length,85);
   assert.equal(new Set(report.references.map(x=>x.canonical_id)).size,85);
-  assert.equal(report.references.filter(x=>x.association!=='UNIQUE_NAME_IN_OSM_GEOMETRIC_GROUP').length,5);
+  assert.equal(report.references.filter(x=>x.association!=='UNIQUE_NAME_IN_OSM_GEOMETRIC_GROUP').length,7);
   assert.equal(await p.evaluate(`(()=>{const a=qaApp,b=globalThis.__webNiSharedBefore;const same=b.visible===JSON.stringify([...a.visibleEntityIds].sort())&&b.official===JSON.stringify([...a.entityById]);delete globalThis.__webNiSharedBefore;return same;})()`),true,'canonical state and official corpus remain intact');
   // Bender's two canonical roles are deliberately visible in one Bender card.
   await p.call(async function(){await qaApp.selectEntity('view-nistrenia-group-osm-r944727',{zoom:false});});
