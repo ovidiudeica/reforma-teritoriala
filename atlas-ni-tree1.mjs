@@ -5,6 +5,8 @@ export const NI_TREE1_LUNGA='view-nistrenia-role-osm-r19001619';
 export const NI_TREE1_EXPLICIT_ASSOCIATIONS=Object.freeze({
  'osm-r1216706':{node:'view-nistrenia-place-20',reason:'DOCUMENTARY_OSM_PARENT_CONFLICT'},
  'osm-r19001619':{node:NI_TREE1_LUNGA,reason:'OSM_REFERENCE_ONLY_NO_DOCUMENTARY_UNIT'},
+ 'osm-r9288287':{node:'view-nistrenia-unit-15',reason:'CITY_COUNCIL_AREA_IN_NAMESAKE_RAION'},
+ 'osm-r9659979':{node:'view-nistrenia-unit-16',reason:'CITY_BOUNDARY_IN_NAMESAKE_RAION'},
  'osm-r19015110':{node:'view-nistrenia-place-110',reason:'HOMONYMOUS_TOWN_NOT_RAION'},
  'osm-r8289751':{node:'view-nistrenia-place-218',reason:'HOMONYMOUS_TOWN_NOT_RAION'},
  'osm-r9301464':{node:'view-nistrenia-place-24',reason:'HOMONYMOUS_TOWN_NOT_RAION'}
