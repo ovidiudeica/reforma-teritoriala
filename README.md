@@ -18,17 +18,43 @@ Lansarea funcțională ACTUAL este [acceptată pe versiunea publicată după PR 
 
 Geometriile ACTUAL folosesc WGS84 / EPSG:4326. OpenStreetMap este sursa geometrică principală; SIRUTA (INS, România) și CUATM (BNS, Republica Moldova) sunt folosite pentru identitate legală/oficială și reconciliere.
 
-## Modernizarea website-ului — WEB-R0
+## Utilizare locală și verificări
+
+Aplicația este statică: `index.html` și resursele urmărite în Git sunt site-ul publicabil; nu există un bundler frontend obligatoriu. Pentru explorare locală, din rădăcina clonei:
+
+```sh
+git clone -c core.autocrlf=false -c core.longpaths=true https://github.com/ovidiudeica/reforma-teritoriala.git
+cd reforma-teritoriala
+python -m http.server --bind 127.0.0.1 8000
+```
+
+Deschide `http://127.0.0.1:8000/`. Pentru scripturile Node și verificările de dezvoltare sunt fixate Node **24.21.0** și npm **11.19.0**. Python 3 este necesar pentru audituri; Google Chrome/Chromium este necesar pentru testele CDP. CI folosește Ubuntu 24.04; reproducerea release-ului ACTUAL are suplimentar un runtime OCI și un profil de host aprobate, fixate în `data/current/`.
+
+```sh
+npm ci --ignore-scripts
+node --test scripts/test/atlas-browser-security.test.mjs
+python scripts/audit/product-launch-evidence-guard.py
+python scripts/audit/test_cleanup_file_usage.py
+python scripts/audit/cleanup-file-usage.py --ref HEAD
+# Suita completă, în mediul Linux și toolchain-ul cerute de teste:
+node scripts/audit/p82-full-validation.mjs
+```
+
+Alternativa de instalare offline, cu tarball-uri verificate din `vendor/npm/`, este `node scripts/process/install-actual-npm-offline.mjs`. Nu rulează scripturi npm de instalare. Clonează cu `core.autocrlf=false`: o clonă Windows care convertește lockfile-ul în CRLF este respinsă corect de verificarea sa SHA-256; folosește o clonă nouă cu octeții canonici, fără rescrierea manifestelor. Ieșirile locale apar în `outputs/`; nu le adăuga în Git fără revizuirea provenienței, a dimensiunii și a eventualelor date sensibile. Pe Windows folosește o cale scurtă de checkout și suport Git pentru căi lungi; testele Linux/OCI nu sunt certificate prin simpla rulare a serverului local Windows.
+
+Comenzile `import:*`, `apply:*`, `reconcile:*`, `build:actual-*` și workflow-urile de candidate/promotion nu sunt comenzi de pornire a website-ului: pot modifica date și au propria procedură de autorizare. ACTUAL este înghețat pentru cleanup; P9.1 nu este autorizat.
+
+## Interfață și roadmap
 
 După integrarea P9.0.9.5 prin PR #366/#367, interfața include conturul propriu Nistrenia și cele șapte grupări OSM independente de subgeometriile deja reutilizate. La pornire sunt bifate numai contururile proprii România, Moldova și Nistrenia; descendenții sunt debifați. Aceste contururi NI sunt **source-only**, nu identități juridice ACTUAL; P9.1 rămâne **BLOCKED_INCOMPLETE**.
 
-Modernizarea UI/UX, bulinele numerice și filtrele OSM `admin_level`, panourile extensibile, exporturile KML/KMZ pentru Google My Maps, limba engleză și indicatorii statistici sunt **planificate, nu implementate** prin WEB-R0:
+WEB-R0 este specificația istorică, anterioară implementărilor ulterioare. Interfața publicată include arborele administrativ, căutare/filtre, rolurile OSM, panouri responsive, identificare spațială, vecinătăți și exporturi. Disponibilitatea și limitările acceptate sunt consemnate în [raportul de lansare](docs/audits/product-launch-20261031/README.md); o funcționalitate propusă în documentele de mai jos nu devine automat funcționalitate publicată:
 
 - [Specificație și roadmap](docs/web-modernization-roadmap.md)
 - [Audit al interfeței și al lacunelor](docs/web-r0-interface-audit.md)
 - [Matrice de acceptare și regresii](docs/web-r0-acceptance-matrix.md)
 
-WEB-R0 este documentar; fiecare implementare ulterioară necesită branch/PR și testare separată, cu ACTUAL nemodificat.
+ISTORIC, PROPUNERI și extinderile declarate în roadmap rămân faze separate. Orice implementare nouă necesită branch/PR, testare și autorizarea corespunzătoare datelor afectate.
 
 ## Structura repository-ului
 
@@ -44,7 +70,25 @@ public/data/                      contractul public de entități
 scripts/import/                   refresh/import din surse externe
 scripts/process/                  build, reconciliere și gate-uri deterministe
 scripts/test/                     regression și security tests
+scripts/audit/                    audituri și reproducerea dovezilor
+scripts/lib/                      biblioteci comune pentru pipeline și audit
+tools/p2/                         instrumente și teste ale bazei statistice
+views/                            corpusuri și vederi tematice publicate
+vendor/                           dependențe offline și GIS, cu manifeste
+container/                        runtime-ul de reproducere ACTUAL
+docs/audits/ / docs/evidence/      rapoarte istorice și dovezi cu proveniență
+docs/roadmap/                     registrul central și roadmap-ul produsului
+prototypes/                       prototipuri păstrate, separate de aplicație
+.github/                          workflow-uri, Dependabot și template-uri
 ```
+
+### Publicare și păstrarea dovezilor
+
+GitHub Pages publică site-ul static din `main`, rădăcina repository-ului, după integrarea controlată a PR-ului. Configurația și starea efectivă a deploymentului trebuie reverificate la fiecare certificare. Publicarea aplicației este separată de publicarea unui release imuabil de date ACTUAL.
+
+Sunt obligatorii protecțiile efective GitHub, verificarea SHA-ului exact al PR-ului și controalele post-merge. Cele șase contexte obligatorii observate la baseline-ul cleanup sunt `verify-persisted-release`, `actual-change-reproducibility`, `actual-release-trust-chain`, `p2-statistical-foundation`, `frontend-geometry-taxonomy` și `frontend-browser-qa`; lista nu înlocuiește citirea protecțiilor curente.
+
+Dovezile originale, snapshoturile, manifestele și căile înregistrate în registre SHA se păstrează. Un fișier fără import textual, vechi, duplicat sau mare nu este implicit inutil. Nu rescrie hashuri pentru a valida o schimbare și nu muta dovezi doar pentru aspectul arborelui. Registrele cleanup separă referințele active de inventarele istorice și rețin explicit dependențele dinamice neelucidate: [registru și metodă](docs/audits/repo-cleanup-final/README.md).
 
 ## Surse ACTUAL
 

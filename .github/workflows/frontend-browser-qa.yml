@@ -75,6 +75,11 @@ jobs:
         run: node --test scripts/test/frontend-launch-browser.test.mjs
       - name: Accepted launch evidence hashes and exact coverage replay
         run: python scripts/audit/product-launch-evidence-guard.py
+      - name: Conservative file usage graph and relative-reference regressions
+        run: |
+          python scripts/audit/test_cleanup_file_usage.py
+          python scripts/audit/cleanup-evidence-guard.py
+          python scripts/audit/cleanup-file-usage.py --ref HEAD
       - name: P9.0.7.2.16 85 source-linked ACTUAL/OSM role tests
         run: node --test scripts/test/frontend-p907216-osm-roles.test.mjs
       - name: P9.0.7.2.16 real Chromium existing-geometry, mobile and OSM attribution
@@ -160,6 +165,14 @@ jobs:
         with:
           name: atlas-cartography-p42-evidence
           path: /tmp/atlas-browser-evidence/p42-*
+          retention-days: 14
+      - name: Upload canonical per-file usage and dependency matrix
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cleanup-final-file-usage
+          path: outputs/cleanup-final/usage/
+          if-no-files-found: error
           retention-days: 14
       - name: Upload screenshots and console/network evidence
         if: always()

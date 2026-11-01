@@ -1,0 +1,247 @@
+{
+  "schema": "cleanup-c0-github-state-v1",
+  "observed_at": "2026-10-31T21:11:12.086Z",
+  "main": "656bf2165d58efcbb3443aa70d56c313990d1b67",
+  "branches": [
+    {
+      "name": "audit/cleanup-2-1-reference-graph-20261031",
+      "sha": "ecbc324c9828950e056867b3783b327e39a77088"
+    },
+    {
+      "name": "audit/repo-cleanup-baseline-20261031",
+      "sha": "49b009bde2c2f82fae58ea5bfe913c7c1e91c2f1"
+    },
+    {
+      "name": "audit/rt-adm2-1-individual-evidence-20261030",
+      "sha": "a3fc49745158ca4410557f831d1d84f8aa36ce15"
+    },
+    {
+      "name": "audit/rt-adm2-2-targeted-primary-20261030",
+      "sha": "4199561cd7671e2a75683f63168e4028257f8c4a"
+    },
+    {
+      "name": "audit/rt-adm2-3-official-boundary-sources-20261030",
+      "sha": "c9630e7080f5cdd6bb4735317b797679c1a6722b"
+    },
+    {
+      "name": "audit/rt-adm2-3-way-history-20261030",
+      "sha": "345632817088f21ab6db17aa77978596186d2aa5"
+    },
+    {
+      "name": "audit/rt-adm2-4-ipcbi-access-route-20261030",
+      "sha": "a752235965d2331e22ec6f8dfca1d17b6c18bf9d"
+    },
+    {
+      "name": "audit/rt-adm2-7-rebased-20261030",
+      "sha": "eb1936391c9da4c2bdecad4f3c8134bd5810c2d0"
+    },
+    {
+      "name": "audit/rt-adm2-13-alternative-official-sector-comparison-20261030",
+      "sha": "c4e79e42a8c44db3daec60488b8631820719aa56"
+    },
+    {
+      "name": "audit/rt-adm-2-14-legal-boundaries-bucharest",
+      "sha": "fe881e456e44a9b22bb70c23091a278bee54e1d7"
+    },
+    {
+      "name": "audit/rt-audit-1-parent-child-20261028",
+      "sha": "873b15395dddd1ee7e6425513de5e84a11b5538a"
+    },
+    {
+      "name": "dependabot/github_actions/actions/download-artifact-8.0.2",
+      "sha": "3c8b63281ebcc06085f40159008ba6bec9243dc7"
+    },
+    {
+      "name": "dependabot/github_actions/actions/setup-node-7.1.0",
+      "sha": "b5c7e73714f9a6419b3d163e059adafdef2dacc2"
+    },
+    {
+      "name": "dependabot/github_actions/actions/setup-python-7.1.0",
+      "sha": "2dc20a6c4ba9fe83861d3c747c4ff6930ea27694"
+    },
+    {
+      "name": "dependabot/github_actions/actions/upload-artifact-7.0.2",
+      "sha": "6fd338e5019d1ca8f400a53a6397bc86e38f3f34"
+    },
+    {
+      "name": "fix/osm-fix2-source-reconciliation",
+      "sha": "027d66f6f08296fd9006938a010f8e18265aca36"
+    },
+    {
+      "name": "main",
+      "sha": "656bf2165d58efcbb3443aa70d56c313990d1b67"
+    }
+  ],
+  "open_prs": [
+    {
+      "number": 491,
+      "title": "CLEANUP-2.1 — graf de referințe read-only per fișier și dovadă CI",
+      "state": "open",
+      "draft": true,
+      "head": "ecbc324c9828950e056867b3783b327e39a77088",
+      "head_branch": "audit/cleanup-2-1-reference-graph-20261031",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/491"
+    },
+    {
+      "number": 490,
+      "title": "Audit read-only: inventar și controale pentru cleanup sigur",
+      "state": "open",
+      "draft": true,
+      "head": "49b009bde2c2f82fae58ea5bfe913c7c1e91c2f1",
+      "head_branch": "audit/repo-cleanup-baseline-20261031",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/490"
+    },
+    {
+      "number": 479,
+      "title": "RT-ADM.2.13 — extragere alternativă și comparație automată a textelor oficiale ale sectoarelor (read-only)",
+      "state": "open",
+      "draft": true,
+      "head": "c4e79e42a8c44db3daec60488b8631820719aa56",
+      "head_branch": "audit/rt-adm2-13-alternative-official-sector-comparison-20261030",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/479"
+    },
+    {
+      "number": 470,
+      "title": "RT-ADM.2.4 — acces oficial IPCBI și cerere țintită pentru delimitări (read-only)",
+      "state": "open",
+      "draft": true,
+      "head": "a752235965d2331e22ec6f8dfca1d17b6c18bf9d",
+      "head_branch": "audit/rt-adm2-4-ipcbi-access-route-20261030",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/470"
+    },
+    {
+      "number": 469,
+      "title": "RT-ADM.2.3 — revizie țintită surse oficiale de delimitare (read-only)",
+      "state": "open",
+      "draft": true,
+      "head": "c9630e7080f5cdd6bb4735317b797679c1a6722b",
+      "head_branch": "audit/rt-adm2-3-official-boundary-sources-20261030",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/469"
+    },
+    {
+      "number": 468,
+      "title": "RT-ADM.2.3 — reconstrucția istorică țintită a celor patru way OSM",
+      "state": "open",
+      "draft": true,
+      "head": "345632817088f21ab6db17aa77978596186d2aa5",
+      "head_branch": "audit/rt-adm2-3-way-history-20261030",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/468"
+    },
+    {
+      "number": 467,
+      "title": "RT-ADM.2.2 — achiziție CUATM și lacune istoric OSM (read-only)",
+      "state": "open",
+      "draft": true,
+      "head": "4199561cd7671e2a75683f63168e4028257f8c4a",
+      "head_branch": "audit/rt-adm2-2-targeted-primary-20261030",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/467"
+    },
+    {
+      "number": 466,
+      "title": "RT-ADM.2.1 — registrul probatoriu individual al celor 14 excepții (read-only)",
+      "state": "open",
+      "draft": true,
+      "head": "a3fc49745158ca4410557f831d1d84f8aa36ce15",
+      "head_branch": "audit/rt-adm2-1-individual-evidence-20261030",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/466"
+    },
+    {
+      "number": 458,
+      "title": "RT-AUDIT.1: reconciliere exhaustivă părinte–copil, dovezi read-only",
+      "state": "open",
+      "draft": true,
+      "head": "873b15395dddd1ee7e6425513de5e84a11b5538a",
+      "head_branch": "audit/rt-audit-1-parent-child-20261028",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/458"
+    },
+    {
+      "number": 453,
+      "title": "build(deps): bump actions/setup-python from 5 to 7",
+      "state": "open",
+      "draft": false,
+      "head": "2dc20a6c4ba9fe83861d3c747c4ff6930ea27694",
+      "head_branch": "dependabot/github_actions/actions/setup-python-7.1.0",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/453"
+    },
+    {
+      "number": 398,
+      "title": "OSM-FIX.2: separate current OSM source from protected ACTUAL",
+      "state": "open",
+      "draft": true,
+      "head": "027d66f6f08296fd9006938a010f8e18265aca36",
+      "head_branch": "fix/osm-fix2-source-reconciliation",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/398"
+    },
+    {
+      "number": 296,
+      "title": "build(deps): bump actions/download-artifact from 4.3.0 to 8.0.2",
+      "state": "open",
+      "draft": false,
+      "head": "3c8b63281ebcc06085f40159008ba6bec9243dc7",
+      "head_branch": "dependabot/github_actions/actions/download-artifact-8.0.2",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/296"
+    },
+    {
+      "number": 295,
+      "title": "build(deps): bump actions/upload-artifact from 4.6.2 to 7.0.2",
+      "state": "open",
+      "draft": false,
+      "head": "6fd338e5019d1ca8f400a53a6397bc86e38f3f34",
+      "head_branch": "dependabot/github_actions/actions/upload-artifact-7.0.2",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/295"
+    },
+    {
+      "number": 294,
+      "title": "build(deps): bump actions/setup-node from 6.5.0 to 7.1.0",
+      "state": "open",
+      "draft": false,
+      "head": "b5c7e73714f9a6419b3d163e059adafdef2dacc2",
+      "head_branch": "dependabot/github_actions/actions/setup-node-7.1.0",
+      "base": "main",
+      "url": "https://github.com/ovidiudeica/reforma-teritoriala/pull/294"
+    }
+  ],
+  "pr491_artifact": {
+    "artifacts": [
+      {
+        "id": 13057216032,
+        "name": "cleanup-2-1-reference-graph",
+        "size_in_bytes": 185062,
+        "url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/actions/artifacts/13057216032",
+        "archive_download_url": "https://api.github.com/repos/ovidiudeica/reforma-teritoriala/actions/artifacts/13057216032/zip",
+        "expired": false,
+        "created_at": "2026-10-31T20:36:45Z",
+        "expires_at": "2026-11-30T20:36:44Z",
+        "updated_at": "2026-10-31T20:36:45Z",
+        "digest": "sha256:f10f4fbb77db417bc1caa2a39b580db2a6c8e33636d2fe3509155eac87c8a8ab",
+        "workflow_run": {
+          "id": 41239515359,
+          "repository_id": 1388155870,
+          "head_repository_id": 1388155870,
+          "head_branch": "audit/cleanup-2-1-reference-graph-20261031",
+          "head_sha": "ecbc324c9828950e056867b3783b327e39a77088"
+        }
+      }
+    ]
+  },
+  "protected_settings_file": "branch-protection.json",
+  "pages_config_file": "pages-config.json",
+  "policy": {
+    "actual_frozen": true,
+    "p91_authorized": false,
+    "history_rewrite_allowed": false
+  }
+}
