@@ -9,7 +9,7 @@ try{
  await test('P9.0.9.5 Chromium: OSM root/district one-checkbox/one-own-feature parity with RO/MD',{timeout:180000},async t=>{
   await page.viewport(1440,900);await page.navigate(browser.server.url);
   await waitFor(()=>page.evaluate("qaApp.nistreniaOutlines?.layers?.size===8&&qaApp.atlasTree?.getVisibleIds().includes('view-nistrenia')"),'eight verified independent source outlines');
-  await t.test('default has three country outlines selected and NI has no checked subdivisions',async()=>{
+  await t.test('default has only RO and MD country outlines selected, with NI opt-in',async()=>{
    const state=await page.evaluate(`({
     root:qaApp.visibleOperationalOutlineIds.has('view-nistrenia'),
     others:[...qaApp.visibleOperationalOutlineIds].filter(x=>x!=='view-nistrenia'),
@@ -17,12 +17,12 @@ try{
     checked:['ro','md','ni'].map(j=>document.querySelector('#layer-'+j).checked),
     sourceLayers:[...qaApp.nistreniaOutlines.layers].filter(([id,l])=>qaApp.map.hasLayer(l)).map(([id])=>id)
    })`);
-   assert.equal(state.root,true);assert.deepEqual(state.others,[]);
+   assert.equal(state.root,false);assert.deepEqual(state.others,[]);
    assert.deepEqual(state.act,['osm-r58974','osm-r90689']);
-   assert.deepEqual(state.checked,[true,true,true]);
-   assert.deepEqual(state.sourceLayers,['view-nistrenia']);
+   assert.deepEqual(state.checked,[true,true,false]);
+   assert.deepEqual(state.sourceLayers,[]);
   });
-  await t.test('OSM attribution is deduplicated and persists when the raster basemap is off',async()=>{
+  // Activate NI deliberately after verifying the RO/MD-only initial state.\n  await page.call(function(){const c=document.getElementById('layer-ni');c.checked=true;c.dispatchEvent(new Event('change',{bubbles:true}));});\n  await page.openPanel('entities');await page.click('.tree-visibility-toggle[data-entity-id=\"view-nistrenia\"]');\n  await t.test('OSM attribution is deduplicated and persists when the raster basemap is off',async()=>{
    const count=()=>page.evaluate("(document.querySelector('.leaflet-control-attribution')?.textContent.match(/© OpenStreetMap contributors · ODbL/g)||[]).length");
    assert.equal(await count(),1,'one shared OSM/ODbL attribution while raster and NI outlines are active');
    await page.evaluate("document.getElementById('basemap-toggle').click()");
@@ -58,7 +58,7 @@ try{
    const text=await page.evaluate("document.getElementById('atlas-advanced-content')?.textContent||''");
    assert.match(text,/Nistrenia/);assert.match(text,/Camenca/);
   });
-  await t.test('Reset returns to RO+MD+NI root only; URL roundtrip of district and independent filters',async()=>{
+  await t.test('Reset returns to RO+MD roots only; URL roundtrip of district and independent filters',async()=>{
    await page.evaluate("qaApp.atlasTree.getNode('view-nistrenia-group-osm-r1702216')?.checkbox.click()");
    await page.evaluate("qaApp.atlasTree.getNode('view-nistrenia-group-osm-r1702216')?.checkbox.click()");
    const url=await page.evaluate("new URL(location.href).search");
@@ -66,7 +66,7 @@ try{
    await page.openPanel('entities');
    await page.click('#geometries-reset');
    const after=await page.evaluate("({out:[...qaApp.visibleOperationalOutlineIds],act:[...qaApp.visibleEntityIds].sort()})");
-   assert.deepEqual(after.out,['view-nistrenia']);assert.deepEqual(after.act,['osm-r58974','osm-r90689']);
+   assert.deepEqual(after.out,[]);assert.deepEqual(after.act,['osm-r58974','osm-r90689']);
   });
   await t.test('portrait and landscape mobile: visible NI root/raion and independent filters',async()=>{
    for(const [w,h]of [[390,844],[844,390]]){
