@@ -23,7 +23,13 @@ await test('WEB-NI-U1.5 coupled canonical navigation, History, filters, Undo, ex
   const p=await browser.page();
   if(mode==='published'){assert(source.trackedSourcesClean);report.publishedSource=await verifyPublishedSource(root);}
   await p.viewport(1440,900);await p.navigate(mode==='published'?'https://ovidiudeica.github.io/reforma-teritoriala/':browser.server.url);
-  assert.deepEqual(await p.call(state),{actual:['osm-r58974','osm-r90689'],ni:['view-nistrenia'],selected:null});mark('three-default-roots-without-descendants');
+  assert.deepEqual(await p.call(state),{actual:['osm-r58974','osm-r90689'],ni:[],selected:null});mark('two-default-roots-without-NI-descendants');
+  // Opt into NI intentionally for legacy coupled checks. This is not the initial state.
+  await p.call(function(){
+   const filter=document.getElementById('layer-ni');filter.checked=true;filter.dispatchEvent(new Event('change',{bubbles:true}));
+   qaApp.atlasTree.getNode('view-nistrenia').checkbox.click();
+  });
+  await waitFor(()=>p.evaluate("qaApp.visibleOperationalOutlineIds.has('view-nistrenia')&&document.getElementById('layer-ni').checked"),'NI explicitly enabled for coupled regression');
   await p.call(async function(id){await qaApp.selectEntity(id,{zoom:false});},id);
   assert.equal((await p.call(state)).selected,id);assert.equal(await p.call(function(id){return qaApp.visibleEntityIds.has(id);},id),false);
   await p.openPanel('entities');await p.click('.tree-visibility-toggle[data-entity-id="'+id+'"]');
