@@ -1,0 +1,539 @@
+{
+  "schema": "cleanup-workflow-metadata-v1",
+  "registered_records": 145,
+  "current_tracked_files": 80,
+  "registered_current_records": 80,
+  "missing_current_metadata": [],
+  "current_state_counts": {
+    "active": 80
+  },
+  "historical_or_other_branch_records": 65,
+  "all_registered_state_counts": {
+    "disabled_manually": 38,
+    "active": 107
+  },
+  "states_changed": 0,
+  "history": [
+    {
+      "id": 368799318,
+      "name": "ACTUAL byte reproducibility proof",
+      "path": ".github/workflows/actual-byte-repro-proof.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369814737,
+      "name": "Prove real ACTUAL CHANGE reproducibility",
+      "path": ".github/workflows/actual-change-repro-proof.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 367616325,
+      "name": "Audit RO level 9 exceptions",
+      "path": ".github/workflows/audit-ro-level9-exceptions.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369608848,
+      "name": "Bootstrap ACTUAL host trust provenance",
+      "path": ".github/workflows/bootstrap-actual-host-trust.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369449478,
+      "name": "Bootstrap ACTUAL OCI environment binding",
+      "path": ".github/workflows/bootstrap-actual-oci-environment.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369636592,
+      "name": "Bootstrap deterministic ACTUAL candidate metadata",
+      "path": ".github/workflows/bootstrap-deterministic-candidate-metadata.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369570270,
+      "name": "Bootstrap hermetic ACTUAL candidate",
+      "path": ".github/workflows/bootstrap-hermetic-candidate.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369585739,
+      "name": "Bootstrap hermetic preflight hotfix",
+      "path": ".github/workflows/bootstrap-hermetic-preflight-hotfix.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369585315,
+      "name": "Bootstrap hermetic ACTUAL verifier fix",
+      "path": ".github/workflows/bootstrap-hermetic-verifier-fix.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369646926,
+      "name": "Bootstrap immutable ACTUAL base provenance",
+      "path": ".github/workflows/bootstrap-immutable-candidate-base.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369657738,
+      "name": "Bootstrap pinned ACTUAL OCI builder provenance",
+      "path": ".github/workflows/bootstrap-pinned-actual-oci-builder.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369550724,
+      "name": "Bootstrap ACTUAL review evidence binding",
+      "path": ".github/workflows/bootstrap-review-evidence.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369437729,
+      "name": "Diagnose ACTUAL OCI reproducibility",
+      "path": ".github/workflows/diagnose-actual-runtime-repro.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 375570374,
+      "name": "Diagnostic OSM polygon drop",
+      "path": ".github/workflows/diagnose-osm-polygon-drop.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 375541767,
+      "name": "Diagnostic MD OSM refresh identity drift",
+      "path": ".github/workflows/diagnose-osm-refresh-md-id-drift.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 375718764,
+      "name": "Diagnostic MD live inventory diff",
+      "path": ".github/workflows/diagnostic-md-live-inventory-diff.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 375727509,
+      "name": "Diagnostic resilient OSM refresh E2E",
+      "path": ".github/workflows/diagnostic-osm-resilient-refresh.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 375735022,
+      "name": "Diagnostic OSM source-scope refresh E2E",
+      "path": ".github/workflows/diagnostic-osm-source-scope-refresh.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 373441401,
+      "name": "Dispatch ACTUAL P0 geometry policy migration r2",
+      "path": ".github/workflows/dispatch-p0-geometry-policy-v1-1-r2.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 373001969,
+      "name": "Dispatch ACTUAL P0 geometry policy migration",
+      "path": ".github/workflows/dispatch-p0-geometry-policy-v1-1.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 373449638,
+      "name": "Dispatch ACTUAL P0 geometry policy promotion r2",
+      "path": ".github/workflows/dispatch-promote-p0-geometry-policy-v1-1-r2.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 373427424,
+      "name": "Dispatch ACTUAL P0 geometry policy promotion",
+      "path": ".github/workflows/dispatch-promote-p0-geometry-policy-v1-1.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369443092,
+      "name": "Generate ACTUAL OCI runtime manifest",
+      "path": ".github/workflows/generate-actual-runtime-manifest.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 392293188,
+      "name": "Geofabrik acquisition regressions",
+      "path": ".github/workflows/geofabrik-acquisition-qualification.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 391043308,
+      "name": "NI-JUR.0 individual identity inventory",
+      "path": ".github/workflows/ni-jur0-inventory.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 395149729,
+      "name": "NI-TAGS.0 — read-only full MD/NI OSM tag census",
+      "path": ".github/workflows/ni-md-osm-tags-audit.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 393183214,
+      "name": "OSM-ACQ.2c private OSH ingest offline guards",
+      "path": ".github/workflows/osm-acq2c-bulk-osh.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 374890835,
+      "name": "Diagnostic OSM geometry fidelity audit",
+      "path": ".github/workflows/osm-geometry-fidelity-audit.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 379759382,
+      "name": "P5 navigation prototype",
+      "path": ".github/workflows/p5-navigation-prototype.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 383747789,
+      "name": "P9.0.4.2 Nistrenia contemporary semantic acceptance (audit-only)",
+      "path": ".github/workflows/p9042-nistrenia-contemporary.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 385344568,
+      "name": "P9.0.6.3 final semantic review (audit only)",
+      "path": ".github/workflows/p9063-semantic-review.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 385941151,
+      "name": "P9.0.7 normative evidence fail-closed",
+      "path": ".github/workflows/p907-normative-evidence.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 386612627,
+      "name": "P9.0.7.2.10.2.1 official issuer-card access pilot (nonpromoting)",
+      "path": ".github/workflows/p907-official-access-pilot.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369654999,
+      "name": "Probe ACTUAL OCI builder toolchain",
+      "path": ".github/workflows/probe-actual-oci-builder.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369603913,
+      "name": "Probe ACTUAL host trust boundary",
+      "path": ".github/workflows/probe-host-trust.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369580216,
+      "name": "Probe ACTUAL network namespace",
+      "path": ".github/workflows/probe-network-namespace.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369637362,
+      "name": "Prove deterministic ACTUAL candidate metadata",
+      "path": ".github/workflows/proof-deterministic-candidate-metadata.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369644842,
+      "name": "Prove immutable ACTUAL candidate base",
+      "path": ".github/workflows/proof-immutable-candidate-base.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369672030,
+      "name": "Prove real ACTUAL CHANGE reproducibility",
+      "path": ".github/workflows/proof-real-actual-change-repro.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369612253,
+      "name": "Prove ACTUAL host trust E2E",
+      "path": ".github/workflows/prove-actual-host-trust-e2e.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369583789,
+      "name": "Prove ACTUAL network denial E2E",
+      "path": ".github/workflows/prove-actual-network-denial-e2e.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369534257,
+      "name": "Prove ACTUAL OCI E2E",
+      "path": ".github/workflows/prove-actual-oci-e2e.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369553504,
+      "name": "Prove frozen ACTUAL review evidence E2E",
+      "path": ".github/workflows/prove-frozen-review-evidence-e2e.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369583883,
+      "name": "Prove hermetic ACTUAL network denial E2E",
+      "path": ".github/workflows/prove-hermetic-network-denial-e2e.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 370012791,
+      "name": "Prove real ACTUAL CHANGE reproducibility",
+      "path": ".github/workflows/prove-real-actual-change-reproducibility.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 371585219,
+      "name": "Publish ACTUAL v1.0.0",
+      "path": ".github/workflows/publish-actual-v1.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 374901168,
+      "name": "Temporary rebind ACTUAL build environment",
+      "path": ".github/workflows/rebind-actual-build-environment.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 374902772,
+      "name": "Temporary ACTUAL provenance rebind",
+      "path": ".github/workflows/rebind-actual-provenance.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 369659982,
+      "name": "Rebootstrap pinned ACTUAL OCI builder provenance",
+      "path": ".github/workflows/rebootstrap-pinned-actual-oci-builder.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 401236668,
+      "name": "RT-ADM.2.1 individual evidentiary guard",
+      "path": ".github/workflows/rt-adm2-1-evidence.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 402027642,
+      "name": "RT-ADM.2.13 geometric overlay validation",
+      "path": ".github/workflows/rt-adm2-13-topology.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 401639741,
+      "name": "RT-ADM.2.13 alternative official sector text comparison",
+      "path": ".github/workflows/rt-adm2-13.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 401252852,
+      "name": "RT-ADM.2.2 targeted CUATM and OSM evidence",
+      "path": ".github/workflows/rt-adm2-2-evidence.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 401259268,
+      "name": "RT-ADM.2.3 historical OSM way reconstruction",
+      "path": ".github/workflows/rt-adm2-3-history.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 401270652,
+      "name": "RT-ADM.2.4 official cadastral WFS acquisition",
+      "path": ".github/workflows/rt-adm2-4-cadastral.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 400000659,
+      "name": "RT-AUDIT.1 parent-child evidence",
+      "path": ".github/workflows/rt-audit-1.yml",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 370522488,
+      "name": "Temporary rebind ACTUAL hardening provenance",
+      "path": ".github/workflows/temp-actual-hardening-rebind.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 370554902,
+      "name": "Temporary ACTUAL provenance rebind",
+      "path": ".github/workflows/temp-actual-provenance-rebind.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 373526421,
+      "name": "Fetch Brețcu ANCPI evidence",
+      "path": ".github/workflows/temp-fetch-bretcu-ancpi.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 373468104,
+      "name": "Trigger ACTUAL P0 geometry policy migration",
+      "path": ".github/workflows/temp-p0-geometry-migration-trigger.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 373783507,
+      "name": "Dispatch P1.2 Brețcu candidate",
+      "path": ".github/workflows/temp-p12-dispatch-bretcu.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 373538423,
+      "name": "Probe ANCPI Brețcu UAT geometry",
+      "path": ".github/workflows/temp-probe-ancpi-bretcu.yml",
+      "state": "disabled_manually",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 371604378,
+      "name": "Dependabot Updates",
+      "path": "dynamic/dependabot/dependabot-updates",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 371604357,
+      "name": "CodeQL",
+      "path": "dynamic/github-code-scanning/codeql",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    },
+    {
+      "id": 367295998,
+      "name": "pages-build-deployment",
+      "path": "dynamic/pages/pages-build-deployment",
+      "state": "active",
+      "decision": "PRESERVE_GITHUB_HISTORY_OR_OTHER_BRANCH_DEFINITION",
+      "reason": "Absent from current main is not proof of uselessness; deleting run history would lose evidence"
+    }
+  ],
+  "not_currently_active": []
+}

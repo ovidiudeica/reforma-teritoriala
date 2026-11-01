@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 jobs:
-  frontend-browser-qa:
+  browser-tests:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -195,3 +195,82 @@ jobs:
             /tmp/atlas-browser-evidence/p81-*
             /tmp/atlas-browser-evidence/p82-*
           retention-days: 14
+
+  full-linux-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: npm ci --ignore-scripts
+      - name: Required gate failure propagation regressions
+        run: node --test scripts/ci/check-job-results.test.mjs
+      - name: Unmodified complete Linux regression runner
+        run: node scripts/audit/p82-full-validation.mjs
+      - run: git diff --exit-code
+      - name: Preserve complete suite log and exact discovered test list
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cleanup-full-linux-regression
+          path: |
+            outputs/P8.2/local/full-suite.*
+            outputs/P8.4/
+          if-no-files-found: error
+
+  p82-derived-topology:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: npm ci --ignore-scripts
+      - run: node --max-old-space-size=4096 scripts/process/build-p82-topology.mjs --check
+      - run: node --test scripts/test/frontend-neighbors-geometry.test.mjs scripts/test/frontend-neighbors-engine.test.mjs scripts/test/frontend-neighbors-corpus.test.mjs
+      - run: git diff --exit-code
+
+  p84-export-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - run: node scripts/process/install-actual-npm-offline.mjs
+      - name: On-demand export performance
+        run: node scripts/audit/p84-performance.mjs
+      - name: Validate immutable geometry, topology and GIS toolchain
+        run: |
+          node scripts/audit/p83-source-audit.mjs
+          node scripts/process/build-p83-gis-vendor.mjs --check
+          git diff --exit-code
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p84-browser-evidence
+          path: outputs/P8.4/
+
+  frontend-browser-qa:
+    # Preserve the required check name; reject every non-success dependency.
+    if: always()
+    needs: [browser-tests, full-linux-regression, p82-derived-topology, p84-export-validation]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Admit only executed successful suites
+        env:
+          CLEANUP_BROWSER_RESULT: ${{ needs.browser-tests.result }}
+          CLEANUP_FULL_RESULT: ${{ needs.full-linux-regression.result }}
+          CLEANUP_TOPOLOGY_RESULT: ${{ needs.p82-derived-topology.result }}
+          CLEANUP_EXPORT_RESULT: ${{ needs.p84-export-validation.result }}
+        run: node scripts/ci/check-job-results.mjs

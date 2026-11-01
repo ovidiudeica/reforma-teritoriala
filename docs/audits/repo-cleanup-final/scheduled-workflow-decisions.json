@@ -1,0 +1,51 @@
+{
+  "schema": "cleanup-scheduled-workflow-review-v1",
+  "client_date": "2026-11-01",
+  "workflow_states_changed": 0,
+  "source_refresh_dispatched": false,
+  "actual_changes": 0,
+  "p91_authorized": false,
+  "cases": [
+    {
+      "run_id": 41194709137,
+      "job_id": 124518436286,
+      "head": "58859246713989227ebac98fcddc8729a92765b1",
+      "result": "FAIL_CLOSED_STALE_SOURCE_ALARM",
+      "evidence": {
+        "osm_age_days": 25.462,
+        "osm_max_age_days": 14,
+        "ro_age_days": 34.956,
+        "md_age_days": 33.596,
+        "official_max_age_days": 45
+      },
+      "decision": "KEEP_MONITOR_AND_THRESHOLD; source refresh requires separate accepted-data authorization"
+    },
+    {
+      "run_id": 40180106205,
+      "job_id": 121129156661,
+      "head": "9266d478da04c0810797464fdc3521a8645ad62f",
+      "result": "FAIL_CLOSED_CANDIDATE_COUNT_DRIFT",
+      "evidence": {
+        "expected_md_admin_master": 2596,
+        "actual_md_admin_master": 2584,
+        "expected_admin_master_total": 5830,
+        "actual_admin_master_total": 5818
+      },
+      "decision": "KEEP_GATE; candidate not accepted; do not reopen individual geographic/legal cases during cleanup"
+    },
+    {
+      "run_id": 36996927731,
+      "job_id": 110805663257,
+      "head": "67be59e9c9ca7e13b703c01e1373f3efa7a7ed6c",
+      "result": "HISTORICAL_CONTROL_PHASE_HOME_CONFIGURATION_ERROR",
+      "decision": "Current actual-candidate.yml already sets HOME=/tmp/actual-home and creates it before git config in source control phase; do not rerun data-writing refresh under freeze"
+    },
+    {
+      "run_id": 36997202077,
+      "job_id": 110806544979,
+      "head": "67be59e9c9ca7e13b703c01e1373f3efa7a7ed6c",
+      "result": "HISTORICAL_CONTROL_PHASE_HOME_CONFIGURATION_ERROR",
+      "decision": "Same existing HOME mitigation in current main; configuration verified, no claim that a new network refresh succeeded"
+    }
+  ]
+}

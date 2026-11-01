@@ -71,6 +71,7 @@ scripts/import/                   refresh/import din surse externe
 scripts/process/                  build, reconciliere și gate-uri deterministe
 scripts/test/                     regression și security tests
 scripts/audit/                    audituri și reproducerea dovezilor
+scripts/ci/                       admiterea rezultatelor joburilor CI
 scripts/lib/                      biblioteci comune pentru pipeline și audit
 tools/p2/                         instrumente și teste ale bazei statistice
 views/                            corpusuri și vederi tematice publicate
@@ -87,6 +88,8 @@ prototypes/                       prototipuri păstrate, separate de aplicație
 GitHub Pages publică site-ul static din `main`, rădăcina repository-ului, după integrarea controlată a PR-ului. Configurația și starea efectivă a deploymentului trebuie reverificate la fiecare certificare. Publicarea aplicației este separată de publicarea unui release imuabil de date ACTUAL.
 
 Sunt obligatorii protecțiile efective GitHub, verificarea SHA-ului exact al PR-ului și controalele post-merge. Cele șase contexte obligatorii observate la baseline-ul cleanup sunt `verify-persisted-release`, `actual-change-reproducibility`, `actual-release-trust-chain`, `p2-statistical-foundation`, `frontend-geometry-taxonomy` și `frontend-browser-qa`; lista nu înlocuiește citirea protecțiilor curente.
+
+Workflow-ul frontend coordonează QA browser, suita integrală Linux și verificările țintite P8.2/P8.4. Contextul obligatoriu `frontend-browser-qa` acceptă numai succesul tuturor celor patru joburi; suita integrală rulează o singură dată automat. Workflow-urile P8.2/P8.4 separate rămân reproducători manuali. [Matricea CI și dovada de acoperire](docs/audits/repo-cleanup-final/C6.md) explică această structură; [registrul workflow-urilor](docs/audits/repo-cleanup-final/workflow-roles-registered.csv) include roluri, evenimente și stări, distinct de istoricul păstrat de GitHub.
 
 Dovezile originale, snapshoturile, manifestele și căile înregistrate în registre SHA se păstrează. Un fișier fără import textual, vechi, duplicat sau mare nu este implicit inutil. Nu rescrie hashuri pentru a valida o schimbare și nu muta dovezi doar pentru aspectul arborelui. Registrele cleanup separă referințele active de inventarele istorice și rețin explicit dependențele dinamice neelucidate: [registru și metodă](docs/audits/repo-cleanup-final/README.md).
 

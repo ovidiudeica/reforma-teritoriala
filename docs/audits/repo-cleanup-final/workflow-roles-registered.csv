@@ -1,0 +1,1069 @@
+path,name,base,git_sha256,known_role,trigger_configuration,events_before,events_proposed,permissions,uses_count,unpinned_uses,decision,proof,github_workflow_ids,github_registered_states,metadata_decision
+.github/workflows/actual-candidate.yml,Build ACTUAL candidate snapshot,66a34d1d231c1296b44c84e688c62cc74b670ed5,4f1dbb51ac0c0dec74b7ae03ba34d66024fa1ed5c6182db4e2bb1b8fa2f0f816,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  workflow_dispatch:
+    inputs:
+      base_release_commit:
+        description: 'Exact 40-hex persisted-base commit SHA (leave empty to bind github.sha at dispatch time)'
+        required: false
+        type: string
+        default: ''
+      candidate_branch:
+        description: 'New branch for this candidate (leave empty for actual/candidate-<run_id>)'
+        required: false
+        type: string
+        default: ''
+      refresh_ro_siruta:
+        description: 'Refresh official RO SIRUTA source before reconciliation'
+        required: false
+        type: boolean
+        default: false
+      refresh_md_cuatm:
+        description: 'Refresh official MD CUATM source before reconciliation'
+        required: false
+        type: boolean
+        default: false
+      refresh_osm:
+        description: 'Refresh raw OSM source through Overpass before deterministic build'
+        required: false
+        type: boolean
+        default: false
+      migrate_geometry_policy_v1_1:
+        description: 'Apply the deterministic ACTUAL v1.1 geometry coverage policy migration'
+        required: false
+        type: boolean
+        default: false
+      activate_statistical_p2_3:
+        description: 'Activate P2.3 statistical public contract v3 and consolidated hierarchy'
+        required: false
+        type: boolean
+        default: false
+      source_trigger:
+        description: 'Audit label for the source that requested this candidate build'
+        required: false
+        type: string
+        default: 'manual'
+  workflow_call:
+    inputs:
+      base_release_commit:
+        required: true
+        type: string
+      candidate_branch:
+        required: false
+        type: string
+        default: ''
+      refresh_ro_siruta:
+        required: false
+        type: boolean
+        default: false
+      refresh_md_cuatm:
+        required: false
+        type: boolean
+        default: false
+      refresh_osm:
+        required: false
+        type: boolean
+        default: false
+      migrate_geometry_policy_v1_1:
+        required: false
+        type: boolean
+        default: false
+      activate_statistical_p2_3:
+        required: false
+        type: boolean
+        default: false
+      source_trigger:
+        required: false
+        type: string
+        default: 'reusable'
+
+",workflow_dispatch,workflow_dispatch,permissions: contents: write packages: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,368590447,active,PRESERVE_CURRENT_STATE
+.github/workflows/actual-change-reproducibility-gate.yml,Gate ACTUAL CHANGE reproducibility,66a34d1d231c1296b44c84e688c62cc74b670ed5,040d02da2891f9417d852adc729e0c88a9e9a97414bc0a29c3a0b8060301e328,AUTOMATIC_PR_OR_MAIN,"  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read packages: read,5,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,370489962,active,PRESERVE_CURRENT_STATE
+.github/workflows/actual-promote-candidate.yml,Promote ACTUAL candidate,66a34d1d231c1296b44c84e688c62cc74b670ed5,8d904dbed87ab7fc4bda6db0af5fe3833b3da33fd2db78f96204344ec47dbacc,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  workflow_dispatch:
+    inputs:
+      candidate_branch:
+        description: 'Candidate branch created by Build ACTUAL candidate snapshot'
+        required: true
+        type: string
+      expected_candidate_snapshot:
+        description: 'Exact candidate snapshot id, e.g. actual-0123456789abcdef'
+        required: true
+        type: string
+      expected_candidate_commit:
+        description: 'Exact 40-hex candidate commit SHA produced by Build ACTUAL candidate snapshot'
+        required: true
+        type: string
+      confirmation:
+        description: 'Type PROMOTE <snapshot_id>'
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      candidate_branch:
+        required: true
+        type: string
+      expected_candidate_snapshot:
+        required: true
+        type: string
+      expected_candidate_commit:
+        required: true
+        type: string
+      confirmation:
+        required: true
+        type: string
+
+",workflow_dispatch,workflow_dispatch,permissions: contents: read packages: read | permissions: contents: write packages: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,368587411,active,PRESERVE_CURRENT_STATE
+.github/workflows/actual-release-trust-chain-gate.yml,Gate ACTUAL release trust chain,66a34d1d231c1296b44c84e688c62cc74b670ed5,181e1d8622de6f96bf7ad707cdead783c96b489ab1be6a5d7c20e1baf3589ce1,AUTOMATIC_PR_OR_MAIN,"  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,370522487,active,PRESERVE_CURRENT_STATE
+.github/workflows/actual-source-freshness.yml,Monitor ACTUAL source freshness,66a34d1d231c1296b44c84e688c62cc74b670ed5,9f3fac49eabf56b888d660ef1fe789f59ff1eec066e4b839d939a007e12287e6,SCHEDULED_MONITOR_OR_CANDIDATE,"  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * *'
+
+",schedule;workflow_dispatch,schedule;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,371654037,active,PRESERVE_CURRENT_STATE
+.github/workflows/actual-topology-audit.yml,ACTUAL topology audit,66a34d1d231c1296b44c84e688c62cc74b670ed5,9636d1d3c9e8d343e8213a2abbfbcef102026c694693729f6abba2f0119df1b1,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - 'public/geo/current/**'
+      - 'data/current/entities.json'
+      - 'data/current/actual-release-manifest.json'
+      - 'data/current/actual-release-persisted.json'
+      - 'scripts/process/audit-actual-topology.mjs'
+      - 'scripts/process/audit-actual-release-gate.mjs'
+      - 'scripts/import/import-osm.mjs'
+      - 'scripts/process/build-osm-actual.mjs'
+      - 'data/sources/osm-current.json'
+      - 'data/sources/osm-snapshots/**'
+      - 'scripts/test/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vendor/npm/**'
+      - 'scripts/lib/actual-npm-dependency-bundle.mjs'
+      - 'scripts/lib/actual-build-environment.mjs'
+      - 'scripts/process/audit-actual-npm-dependency-bundle.mjs'
+      - 'scripts/process/install-actual-npm-offline.mjs'
+      - 'data/current/actual-build-environment-manifest.json'
+      - 'data/current/actual-build-environment-gate.json'
+      - 'data/current/actual-runtime-image.json'
+      - 'container/actual-runtime/**'
+      - 'scripts/lib/actual-runtime-image.mjs'
+      - 'scripts/process/build-actual-runtime-image-manifest.mjs'
+      - 'scripts/process/audit-actual-runtime-image.mjs'
+      - '.github/workflows/build-actual-runtime-image.yml'
+      - '.github/workflows/actual-topology-audit.yml'
+  workflow_dispatch:
+
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read packages: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,368338656,active,PRESERVE_CURRENT_STATE
+.github/workflows/audit-io-security.yml,Audit network and file boundary regression,66a34d1d231c1296b44c84e688c62cc74b670ed5,3453e35382a02836a23532a0bf8827f348d60c0a4972d25ee5517399eee1636f,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - 'scripts/audit/helpers/audit-io-boundaries.mjs'
+      - 'scripts/audit/helpers/audit-source-integrity.mjs'
+      - 'scripts/test/audit-io-boundaries.test.mjs'
+      - 'scripts/test/audit-source-integrity.test.mjs'
+      - 'scripts/audit/p903-nistrenia-exceptions.mjs'
+      - 'scripts/audit/p9062-full-geometry.mjs'
+      - 'scripts/audit/p907218-osm-live-85.mjs'
+      - 'scripts/audit/web-r2a2-verify-historical-osm.mjs'
+      - 'scripts/audit/web-r2b-final-pages-browser.mjs'
+      - '.github/workflows/audit-io-security.yml'
+      - '.github/workflows/web-r2a2-historical-osm.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,393476186,active,PRESERVE_CURRENT_STATE
+.github/workflows/auto2-bucharest-text.yml,AUTO-2 Bucharest text evidence,66a34d1d231c1296b44c84e688c62cc74b670ed5,798c0ce621158986f693e06091bd6f0b0bf3797bb08f9ac8576a4cf2979d61ba,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto2-bucharest-text-20261031/**'
+      - 'docs/audits/auto2-bucharest-chain-20261031/**'
+      - 'scripts/audit/auto2-bucharest-text-*'
+      - '.github/workflows/auto2-bucharest-text.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto2-bucharest-text-20261031/**'
+      - 'docs/audits/auto2-bucharest-chain-20261031/**'
+      - 'scripts/audit/auto2-bucharest-text-*'
+      - '.github/workflows/auto2-bucharest-text.yml'
+",pull_request;push,pull_request;push,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,402388325,active,PRESERVE_CURRENT_STATE
+.github/workflows/auto3-osmb-reconciliation.yml,AUTO-3 OSMB exception evidence,66a34d1d231c1296b44c84e688c62cc74b670ed5,f482fd0795f7b22f0cf4861d7d92c764ee2df3299ab18467ace3caf804558b04,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto3-osmb/**'
+      - 'scripts/audit/auto3-osmb-*'
+      - '.github/workflows/auto3-osmb-reconciliation.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto3-osmb/**'
+      - 'scripts/audit/auto3-osmb-*'
+      - '.github/workflows/auto3-osmb-reconciliation.yml'
+",pull_request;push,pull_request;push,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,402367545,active,PRESERVE_CURRENT_STATE
+.github/workflows/auto4-osmb-evidence.yml,AUTO-4 individual OSMB evidence,66a34d1d231c1296b44c84e688c62cc74b670ed5,a5b4586a9b849d8b653504375b7fe3f155bc9affc82501393be3af8ef538378f,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto4-osmb-109/**'
+      - 'docs/audits/auto4-history-followup-20261031/**'
+      - 'scripts/audit/auto4-osmb-*'
+      - '.github/workflows/auto4-osmb-evidence.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/audits/auto4-osmb-109/**'
+      - 'docs/audits/auto4-history-followup-20261031/**'
+      - 'scripts/audit/auto4-osmb-*'
+      - '.github/workflows/auto4-osmb-evidence.yml'
+",pull_request;push,pull_request;push,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,402608553,active,PRESERVE_CURRENT_STATE
+.github/workflows/build-actual-runtime-image.yml,Build ACTUAL OCI runtime,66a34d1d231c1296b44c84e688c62cc74b670ed5,405d54ae5ff0a401453284c9954465d6f0a37384777bfad7a024f76b21012a87,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  push:
+    branches:
+      - 'actual/pin-oci-runtime'
+    paths:
+      - 'container/actual-runtime/**'
+      - '.github/workflows/build-actual-runtime-image.yml'
+  workflow_dispatch:
+
+",push;workflow_dispatch,push;workflow_dispatch,permissions: contents: read packages: write,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,369429003,active,PRESERVE_CURRENT_STATE
+.github/workflows/frontend-browser-qa.yml,Frontend browser QA,66a34d1d231c1296b44c84e688c62cc74b670ed5,3d6dc35da0f11cfc124c29bf06391d5e1949e3488b61b0ac95a53d7c175fdcf9,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+",pull_request;push,pull_request;push,permissions: contents: read,16,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,378363778,active,PRESERVE_CURRENT_STATE
+.github/workflows/frontend-geometry-taxonomy.yml,Frontend geometry taxonomy,66a34d1d231c1296b44c84e688c62cc74b670ed5,8a46f742af3be78a22f069e73c52abdf33e3bf9f5098397cb0a17ce087a1cec0,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+",pull_request;push,pull_request;push,permissions: contents: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,377807169,active,PRESERVE_CURRENT_STATE
+.github/workflows/import-osm.yml,Refresh OSM administrative source snapshot,66a34d1d231c1296b44c84e688c62cc74b670ed5,c173d78b133879301ced1035395a74358b386ff2e45804c7d2f11fc5bf031d7d,SCHEDULED_MONITOR_OR_CANDIDATE,"  workflow_dispatch:
+  schedule:
+    - cron: '29 4 * * 0'
+
+",schedule;workflow_dispatch,schedule;workflow_dispatch,permissions: contents: write packages: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,367310459,active,PRESERVE_CURRENT_STATE
+.github/workflows/ni-fin.yml,NI-FIN virtual presentation acceptance,66a34d1d231c1296b44c84e688c62cc74b670ed5,7bf8f759bbb435c42a14339fe3278e90e04e2e17154a601431f357f445d7bb50,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/ni-fin.yml'
+      - 'docs/ni-fin/**'
+      - 'scripts/audit/ni-fin*.mjs'
+      - 'scripts/test/ni-fin*.mjs'
+      - 'atlas-nistrenia-*.mjs'
+      - 'app.js'
+      - 'atlas-tree.mjs'
+      - 'atlas-url-state.mjs'
+      - 'atlas-search.mjs'
+      - 'views/nistrenia/**'
+      - 'public/data/p909-nistrenia-osm-navigation.json'
+      - 'public/data/p9095-osm-outlines*.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ni-fin.yml'
+      - 'docs/ni-fin/**'
+      - 'scripts/audit/ni-fin*.mjs'
+      - 'scripts/test/ni-fin*.mjs'
+      - 'atlas-nistrenia-*.mjs'
+      - 'app.js'
+      - 'atlas-tree.mjs'
+      - 'atlas-url-state.mjs'
+      - 'atlas-search.mjs'
+      - 'views/nistrenia/**'
+      - 'public/data/p909-nistrenia-osm-navigation.json'
+      - 'public/data/p9095-osm-outlines*.json'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Exact local candidate or published Pages acceptance
+        type: choice
+        required: true
+        default: local
+        options: [local, published]
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,395432464,active,PRESERVE_CURRENT_STATE
+.github/workflows/ni-fin31-runner-qualification.yml,NI-FIN.3.1 runner qualification evidence (not admission),66a34d1d231c1296b44c84e688c62cc74b670ed5,c212df1f152aac79bc0ee6bd07d79cfcfc8e6383fc21106f896f92690512b086,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/ni-fin31-runner-qualification.yml'
+      - 'scripts/audit/ni-fin31-host-qualification.mjs'
+      - 'scripts/test/ni-fin31-host-qualification.test.mjs'
+      - 'docs/ni-fin31-runner-qualification.md'
+      - 'docs/evidence/ni-fin31-host-qualification-20261025/**'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,395497990,active,PRESERVE_CURRENT_STATE
+.github/workflows/ni-independent-evidence.yml,NI independent evidence preservation,66a34d1d231c1296b44c84e688c62cc74b670ed5,38e3acff5ed10126491b91053d59abadfb980f12fbc33b1ab7f5f71d61938022,AUTOMATIC_PR_OR_MAIN,"  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/ni-independent-evidence.yml'
+      - 'docs/evidence/ni-jur-independent-20261020/**'
+      - 'scripts/audit/ni-independent-evidence.mjs'
+      - 'scripts/audit/ni-evidence-docx-replay.py'
+      - 'scripts/lib/documentary-response.mjs'
+      - 'scripts/test/documentary-response.test.mjs'
+      - 'scripts/test/ni-geometry-import.test.mjs'
+      - 'scripts/test/fixtures/ni-geometry-import-only.mjs'
+      - 'scripts/audit/p907218-osm-live-85.mjs'
+      - 'scripts/audit/ni-current-preparation.mjs'
+      - 'scripts/audit/ni-independent-review.mjs'
+      - 'scripts/audit/ni-documentary-supplement.mjs'
+      - 'docs/evidence/ni-jur-documentary-supplement-20261021/**'
+      - 'docs/evidence/ni-documentary-supplement-regression-20261021/**'
+      - 'docs/ni-jur-documentary-supplement-20261021.md'
+      - 'docs/evidence/ni-jur-review-20261021/**'
+      - 'docs/evidence/ni-jur-review-regression-20261021/**'
+      - 'docs/ni-jur-independent-review-20261021.md'
+      - 'scripts/audit/helpers/**'
+      - 'scripts/lib/**'
+      - 'scripts/test/ni-evidence-dependency-coverage.test.mjs'
+      - 'scripts/process/install-actual-npm-offline.mjs'
+      - 'docs/evidence/ni-jur-current-preparation-20261021/**'
+      - 'data/**'
+      - 'schemas/**'
+      - 'public/data/**'
+      - 'public/geo/**'
+      - 'package.json'
+      - 'package-lock.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ni-independent-evidence.yml'
+      - 'docs/evidence/ni-jur-independent-20261020/**'
+      - 'scripts/audit/ni-independent-evidence.mjs'
+      - 'scripts/audit/ni-evidence-docx-replay.py'
+      - 'scripts/lib/documentary-response.mjs'
+      - 'scripts/test/documentary-response.test.mjs'
+      - 'scripts/test/ni-geometry-import.test.mjs'
+      - 'scripts/test/fixtures/ni-geometry-import-only.mjs'
+      - 'scripts/audit/p907218-osm-live-85.mjs'
+      - 'scripts/audit/ni-current-preparation.mjs'
+      - 'scripts/audit/ni-independent-review.mjs'
+      - 'scripts/audit/ni-documentary-supplement.mjs'
+      - 'docs/evidence/ni-jur-documentary-supplement-20261021/**'
+      - 'docs/evidence/ni-documentary-supplement-regression-20261021/**'
+      - 'docs/ni-jur-documentary-supplement-20261021.md'
+      - 'docs/evidence/ni-jur-review-20261021/**'
+      - 'docs/evidence/ni-jur-review-regression-20261021/**'
+      - 'docs/ni-jur-independent-review-20261021.md'
+      - 'scripts/audit/helpers/**'
+      - 'scripts/lib/**'
+      - 'scripts/test/ni-evidence-dependency-coverage.test.mjs'
+      - 'scripts/process/install-actual-npm-offline.mjs'
+      - 'docs/evidence/ni-jur-current-preparation-20261021/**'
+      - 'data/**'
+      - 'schemas/**'
+      - 'public/data/**'
+      - 'public/geo/**'
+      - 'package.json'
+      - 'package-lock.json'
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,391087977,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2b-independent.yml,OSM-ACQ.2b independent geometric and evidence gate,66a34d1d231c1296b44c84e688c62cc74b670ed5,11c8e34ba632da38c311b051d172777816e196083b81bb4ba4cfa3eb99cc0078,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2b-independent.yml'
+      - 'docs/evidence/osm-acq2a-incremental-20261022/**'
+      - 'docs/evidence/osm-acq2b-*/**'
+  workflow_dispatch:
+
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,392878165,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-bulk-preflight.yml,OSM-ACQ.2c full-history bulk preflight (offline only),66a34d1d231c1296b44c84e688c62cc74b670ed5,e1af61f5f2517881cc0b7bc9168785104993dc95a0725ce2fe6ea524ac1f671c,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-bulk-preflight.yml'
+      - 'scripts/audit/osm_acq2c_bulk_preflight.py'
+      - 'scripts/audit/test_osm_acq2c_bulk_preflight.py'
+      - 'docs/evidence/osm-acq2c-full-history-bulk-preflight-20261022/**'
+  workflow_dispatch:
+
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,393361253,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-complete-spatial.yml,OSM complete spatial numeric evidence,66a34d1d231c1296b44c84e688c62cc74b670ed5,ec02246a2361205fda86279568f2ea00469fa0ee48eb237e729b13eb74a0f06a,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-complete-spatial.yml'
+      - 'docs/roadmap-issue-register.json'
+      - 'docs/osm-acq2c-complete-spatial-20261023.md'
+      - 'scripts/audit/osm_acq2c_integer_reference.py'
+      - 'scripts/audit/test_osm_acq2c_integer_reference.py'
+      - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/test_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/osm_acq2c_preserved_history.py'
+      - 'scripts/audit/test_osm_acq2c_preserved_history.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_frontier.py'
+      - 'docs/evidence/osm-acq2c-complete-spatial-20261023/**'
+      - 'docs/evidence/osm-acq2b-node-history-20261022/**'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-acq2c-complete-spatial.yml'
+      - 'docs/roadmap-issue-register.json'
+      - 'docs/osm-acq2c-complete-spatial-20261023.md'
+      - 'scripts/audit/osm_acq2c_integer_reference.py'
+      - 'scripts/audit/test_osm_acq2c_integer_reference.py'
+      - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/test_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/osm_acq2c_preserved_history.py'
+      - 'scripts/audit/test_osm_acq2c_preserved_history.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_frontier.py'
+      - 'docs/evidence/osm-acq2c-complete-spatial-20261023/**'
+      - 'docs/evidence/osm-acq2b-node-history-20261022/**'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/**'
+  workflow_dispatch:
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,394199415,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-exact-proposals.yml,OSM exact PBF proposal observation replay,66a34d1d231c1296b44c84e688c62cc74b670ed5,4aa0cf30a4a885b435d6485d23f6232c60bfef352fac261a5c5c050e308bc0b0,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-exact-proposals.yml'
+      - 'scripts/audit/osm_acq2c_exact_proposals.py'
+      - 'scripts/audit/test_osm_acq2c_exact_proposals.py'
+      - 'scripts/audit/osm_acq2c_full_batch.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/combined-registry.json.gz'
+      - 'docs/evidence/osm-acq2c-exact242-proposals-20261024/**'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,395138660,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-frontier.yml,OSM recursive frontier offline validation,66a34d1d231c1296b44c84e688c62cc74b670ed5,d768153106593d2534c51d810154b503e7f27249d10a9ecc3e52f5b849135179,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-frontier.yml'
+      - 'scripts/audit/osm_acq2c_frontier.py'
+      - 'scripts/audit/test_osm_acq2c_frontier.py'
+      - 'scripts/audit/osm_acq2c_grouped_epoch.py'
+      - 'scripts/audit/test_osm_acq2c_grouped_epoch.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'docs/evidence/osm-acq2c-recursive-frontier-20261023/**'
+      - 'docs/evidence/osm-acq2c-grouped-readiness-20261023/**'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,394013840,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-full-batch01.yml,OSM-ACQ.2c full UNKNOWN inventory and authenticated batch 01,66a34d1d231c1296b44c84e688c62cc74b670ed5,211c20d7023f04f9ef280cf00ca475ca3958b9f1a8819c68c78efd8510a426c5,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-full-batch01.yml'
+      - 'scripts/audit/osm_acq2c_full_batch.py'
+      - 'scripts/audit/test_osm_acq2c_full_batch.py'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/combined-registry.json.gz'
+  workflow_dispatch:
+
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,393067979,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-full-batch02.yml,OSM-ACQ.2c batch02 non-overlapping historical acquisition,66a34d1d231c1296b44c84e688c62cc74b670ed5,42a85ae422b15c90196fbbec730670737c440fb327f7405e103c922d648fe2d6,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-full-batch02.yml'
+      - 'scripts/audit/osm_acq2c_full_batch02.py'
+      - 'scripts/audit/test_osm_acq2c_full_batch02.py'
+  workflow_dispatch:
+
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,393080050,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-gap-state.yml,OSM observed historical gaps offline validation,66a34d1d231c1296b44c84e688c62cc74b670ed5,b2410461db4647bbd235b87420e9d546c583b8809b9e94d303ecf44b371d6ed0,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-gap-state.yml'
+      - 'scripts/audit/osm_acq2c_gap_state.py'
+      - 'scripts/audit/osm_acq2c_gap_cohort.py'
+      - 'scripts/audit/test_osm_acq2c_gap_cohort.py'
+      - 'docs/evidence/osm-acq2c-gap-cohort107-20261024/**'
+      - 'scripts/audit/verify_osm_acq2c_gap_state.py'
+      - 'scripts/audit/test_osm_acq2c_gap_state.py'
+      - 'scripts/audit/test_osm_acq2c_gap_capsule.py'
+      - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/osm_acq2c_integer_reference.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'docs/evidence/osm-acq2c-gap-state-20261023/**'
+      - 'docs/evidence/osm-upstream-evening-20261023/**'
+      - 'docs/evidence/osm-upstream-reverse-20261023/**'
+      - 'docs/evidence/osm-acq2c-complete-spatial-20261023/all-candidate-frontier.json.gz'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-acq2c-gap-state.yml'
+      - 'scripts/audit/osm_acq2c_gap_state.py'
+      - 'scripts/audit/osm_acq2c_gap_cohort.py'
+      - 'scripts/audit/test_osm_acq2c_gap_cohort.py'
+      - 'docs/evidence/osm-acq2c-gap-cohort107-20261024/**'
+      - 'scripts/audit/verify_osm_acq2c_gap_state.py'
+      - 'scripts/audit/test_osm_acq2c_gap_state.py'
+      - 'scripts/audit/test_osm_acq2c_gap_capsule.py'
+      - 'scripts/audit/verify_osm_acq2c_numeric_certificate.py'
+      - 'scripts/audit/osm_acq2c_integer_reference.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'docs/evidence/osm-acq2c-gap-state-20261023/**'
+      - 'docs/evidence/osm-upstream-evening-20261023/**'
+      - 'docs/evidence/osm-upstream-reverse-20261023/**'
+      - 'docs/evidence/osm-acq2c-complete-spatial-20261023/all-candidate-frontier.json.gz'
+  workflow_dispatch:
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,394507862,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-leaf-closure.yml,OSM-ACQ.2c conditional leaf closure offline validation,66a34d1d231c1296b44c84e688c62cc74b670ed5,a6cf8264ebf1d3cceb2682c1fff07873c9a726f017291964dede0494ca4074d7,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-leaf-closure.yml'
+      - 'scripts/audit/osm_acq2c_selected_epoch_leaf.py'
+      - 'scripts/audit/test_osm_acq2c_selected_epoch_leaf.py'
+      - 'scripts/audit/validate_osm_acq2c_leaf_capsule.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_core.py'
+      - 'scripts/audit/osm_acq2c_selected_epoch_replay.py'
+      - 'scripts/audit/osm_acq2c_frontier.py'
+      - 'docs/evidence/osm-acq2c-leaf-closure-20261024/**'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,395023255,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-native-extract.yml,OSM-ACQ.2c native history extraction tests,66a34d1d231c1296b44c84e688c62cc74b670ed5,af24aab088cd30dc2cb2a06395f6ef6c88dfb5f9ab28da9de235d15f1e1f8260,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-native-extract.yml'
+      - 'scripts/audit/osm_acq2c_native_extract.py'
+      - 'scripts/audit/osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/osm_acq2c_relation_closure.py'
+      - 'scripts/audit/osm_acq2c_native_order.py'
+      - 'scripts/audit/test_osm_acq2c_native_order.py'
+      - 'docs/evidence/osm-acq2c-native-order-20261024/**'
+      - 'scripts/audit/test_osm_acq2c_relation_closure.py'
+      - 'docs/evidence/osm-acq2c-indexed-recovery-20261024/**'
+      - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/osm_acq2c_reader_provenance.py'
+      - 'scripts/audit/test_osm_acq2c_reader_provenance.py'
+      - 'scripts/audit/test_osm_acq2c_native_*.py'
+      - 'scripts/audit/osm_acq2c_acquire_history_base.py'
+      - 'scripts/audit/osm_acq2c_bulk_preflight.py'
+      - 'scripts/audit/osm_acq2c_full_batch.py'
+      - 'scripts/audit/osm_acq2c_priority.py'
+      - 'docs/evidence/osm-acq2c-native-extract-20261023/**'
+      - 'docs/evidence/osm-acq2c-typed-reader-20261023/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-acq2c-native-extract.yml'
+      - 'scripts/audit/osm_acq2c_native_extract.py'
+      - 'scripts/audit/osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/osm_acq2c_relation_closure.py'
+      - 'scripts/audit/osm_acq2c_native_order.py'
+      - 'scripts/audit/test_osm_acq2c_native_order.py'
+      - 'docs/evidence/osm-acq2c-native-order-20261024/**'
+      - 'scripts/audit/test_osm_acq2c_relation_closure.py'
+      - 'docs/evidence/osm-acq2c-indexed-recovery-20261024/**'
+      - 'scripts/audit/test_osm_acq2c_pbf_blocks.py'
+      - 'scripts/audit/osm_acq2c_reader_provenance.py'
+      - 'scripts/audit/test_osm_acq2c_reader_provenance.py'
+      - 'scripts/audit/test_osm_acq2c_native_*.py'
+      - 'scripts/audit/osm_acq2c_acquire_history_base.py'
+      - 'scripts/audit/osm_acq2c_bulk_preflight.py'
+      - 'scripts/audit/osm_acq2c_full_batch.py'
+      - 'scripts/audit/osm_acq2c_priority.py'
+      - 'docs/evidence/osm-acq2c-native-extract-20261023/**'
+      - 'docs/evidence/osm-acq2c-typed-reader-20261023/**'
+  workflow_dispatch:
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,393753485,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-priority.yml,OSM-ACQ.2c bounded historical dependency pilot,66a34d1d231c1296b44c84e688c62cc74b670ed5,07902fe9f7c7b30485350e1f12381fda04fcb11e011fb8e9b5e41673ce1dae5c,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-priority.yml'
+      - 'scripts/audit/osm_acq2c_priority.py'
+      - 'scripts/audit/test_osm_acq2c_priority.py'
+      - 'docs/evidence/osm-acq2a-incremental-20261022/registry.json.gz'
+      - 'docs/evidence/osm-acq2c-priority-pilot-20261022/**'
+  workflow_dispatch:
+
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,392900266,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-replication-tail.yml,OSM-ACQ.2c replication tail offline validation,66a34d1d231c1296b44c84e688c62cc74b670ed5,511ab4c0c7d205ae50144ed91a58e47e48d60cde3031646642ca39038a1303d3,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-replication-tail.yml'
+      - 'scripts/audit/osm_acq2c_replication_chain.py'
+      - 'scripts/audit/test_osm_acq2c_replication_chain.py'
+      - 'scripts/audit/osm_acq2c_acquire_history_base.py'
+      - 'scripts/audit/test_osm_acq2c_acquire_history_base.py'
+      - 'scripts/audit/osm_acq2c_bulk_preflight.py'
+      - 'scripts/audit/osm_acq2c_full_batch.py'
+      - 'scripts/audit/osm_acq2c_priority.py'
+      - 'docs/evidence/osm-acq2b-way-history-20261022/combined-registry.json.gz'
+      - 'docs/evidence/osm-acq2c-replication-tail-20261022/**'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,393421246,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-acq2c-selected-epoch.yml,OSM-ACQ.2c selected epoch replay offline validation,66a34d1d231c1296b44c84e688c62cc74b670ed5,72a2daaf350cf2f5c318e09f4593f092fbc16a7a803e5c82723e861ff156c5f3,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-acq2c-selected-epoch.yml'
+      - 'scripts/audit/osm_acq2c_selected_epoch_*.py'
+      - 'scripts/audit/test_osm_acq2c_selected_epoch_*.py'
+      - 'scripts/audit/test_osm_acq2c_evidence_paths.py'
+      - 'scripts/audit/osm_acq2c_replication_chain.py'
+      - 'scripts/audit/osm_acq2c_bulk_preflight.py'
+      - 'scripts/audit/osm_acq2c_full_batch.py'
+      - 'scripts/audit/osm_acq2c_priority.py'
+      - 'docs/evidence/osm-acq2c-selected-epoch-20261023/**'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,393896579,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-fix4-preflight.yml,OSM-FIX.4 bounded mapper preflight,66a34d1d231c1296b44c84e688c62cc74b670ed5,bdd595c48f2db09a4385e39eaf6f7acca948f7bc749dc451c4a0e082637dd65e,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-fix4-preflight.yml'
+      - 'scripts/lib/osm-fix4-preflight.mjs'
+      - 'scripts/lib/osm-element-index.mjs'
+      - 'scripts/lib/osm-closure-audit.mjs'
+      - 'scripts/lib/p82-topology.mjs'
+      - 'atlas-point-geometry.mjs'
+      - 'scripts/process/audit-osm-fix4-preflight.mjs'
+      - 'scripts/test/osm-fix4-*.test.mjs'
+      - 'docs/osm-fix4/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-fix4-preflight.yml'
+      - 'scripts/lib/osm-fix4-preflight.mjs'
+      - 'scripts/lib/osm-element-index.mjs'
+      - 'scripts/lib/osm-closure-audit.mjs'
+      - 'scripts/lib/p82-topology.mjs'
+      - 'atlas-point-geometry.mjs'
+      - 'scripts/process/audit-osm-fix4-preflight.mjs'
+      - 'scripts/test/osm-fix4-*.test.mjs'
+      - 'docs/osm-fix4/**'
+",pull_request;push,pull_request;push,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,396384049,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-fix5-reconciliation.yml,OSM-FIX.5 bounded source reconciliation,66a34d1d231c1296b44c84e688c62cc74b670ed5,9c06c4f45bd25cd9bc00b7bca9c1595f2642d0078fdf937590e52ebb5a43b5f6,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-fix5-reconciliation.yml'
+      - 'docs/osm-fix5/**'
+      - 'scripts/audit/osm-fix5*'
+      - 'scripts/lib/osm-fix5*'
+      - 'scripts/test/osm-fix5*'
+      - 'scripts/test/osm_fix5*'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osm-fix5-reconciliation.yml'
+      - 'docs/osm-fix5/**'
+      - 'scripts/audit/osm-fix5*'
+      - 'scripts/lib/osm-fix5*'
+      - 'scripts/test/osm-fix5*'
+      - 'scripts/test/osm_fix5*'
+",pull_request;push,pull_request;push,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,398572808,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-live-source-probe.yml,OSM candidate source-only live probe,66a34d1d231c1296b44c84e688c62cc74b670ed5,4a8b576819ed1d314cfc93fac17a62b450f92a99d941667a756c9e58b782e750,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  workflow_dispatch:
+
+",workflow_dispatch,workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,390480626,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-source-continuity.yml,OSM source continuity fail-closed,66a34d1d231c1296b44c84e688c62cc74b670ed5,af30606dabab097e944878fa5bb41df62ff04e7ab6a7ea2243545a0c8f0d72ea,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/actual-candidate.yml'
+      - '.github/workflows/osm-source-continuity.yml'
+      - 'scripts/import/import-osm.mjs'
+      - 'scripts/lib/osm-source-continuity.mjs'
+      - 'scripts/lib/osm-adaptive-transport.mjs'
+      - 'scripts/lib/osm-element-index.mjs'
+      - 'scripts/lib/osm-closure-audit.mjs'
+      - 'scripts/test/osm-adaptive-transport.test.mjs'
+      - 'scripts/test/osm-fix3-*.test.mjs'
+      - 'scripts/process/audit-osm-fix3-current.mjs'
+      - 'docs/osm-fix3/**'
+      - 'scripts/process/audit-osm-refresh-continuity.mjs'
+      - 'scripts/test/osm-source-continuity.test.mjs'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/actual-candidate.yml'
+      - '.github/workflows/osm-source-continuity.yml'
+      - 'scripts/import/import-osm.mjs'
+      - 'scripts/lib/osm-source-continuity.mjs'
+      - 'scripts/lib/osm-adaptive-transport.mjs'
+      - 'scripts/lib/osm-element-index.mjs'
+      - 'scripts/lib/osm-closure-audit.mjs'
+      - 'scripts/test/osm-adaptive-transport.test.mjs'
+      - 'scripts/test/osm-fix3-*.test.mjs'
+      - 'scripts/process/audit-osm-fix3-current.mjs'
+      - 'docs/osm-fix3/**'
+      - 'scripts/process/audit-osm-refresh-continuity.mjs'
+      - 'scripts/test/osm-source-continuity.test.mjs'
+
+",pull_request;push,pull_request;push,permissions: contents: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,390476060,active,PRESERVE_CURRENT_STATE
+.github/workflows/osm-upstream2-recheck.yml,OSM-UPSTREAM.2 read-only Horesti and Buneti verification,66a34d1d231c1296b44c84e688c62cc74b670ed5,9ec86941165eda1f18f0f47a0c2ed13b91dcdcc650d573e1ace8f9ac6397ee8f,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - '.github/workflows/osm-upstream2-recheck.yml'
+      - 'scripts/audit/osm_upstream2_recheck.py'
+      - 'scripts/audit/test_osm_upstream2_recheck.py'
+  workflow_dispatch:
+
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,393073231,active,PRESERVE_CURRENT_STATE
+.github/workflows/p2-statistical-foundation.yml,Gate P2 statistical foundation,66a34d1d231c1296b44c84e688c62cc74b670ed5,6533a9c4586183c9d0df596941496b4b206b4588467cb91a764adb21f692a109,AUTOMATIC_PR_OR_MAIN,"  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,376786931,active,PRESERVE_CURRENT_STATE
+.github/workflows/p82-derived-topology.yml,P8.2 derived topology reproducibility,66a34d1d231c1296b44c84e688c62cc74b670ed5,5dc2093cb50fc5e90592bfcc722e068acbe979596136de5a53dd5a5b2d848471,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  # Manual standalone reproducer; automatic jobs now run inside Frontend browser QA.
+  workflow_dispatch:
+",pull_request;push,workflow_dispatch,permissions: contents: read,2,,RETAIN_MANUAL_REPRODUCER_AND_CONSOLIDATE_AUTOMATIC_JOB,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,382121561,active,PRESERVE_CURRENT_STATE
+.github/workflows/p83-geometric-validation.yml,P8.3 geometric measurement validation,66a34d1d231c1296b44c84e688c62cc74b670ed5,277427789302f60fcc5a0f37cda5b8ebe0a3d2e942577b65aa9ef40c0e4d1b25,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+",pull_request;push,pull_request;push,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,382510253,active,PRESERVE_CURRENT_STATE
+.github/workflows/p84-export-validation.yml,P8.4 export print report validation,66a34d1d231c1296b44c84e688c62cc74b670ed5,214da2b7c75e15bab1cd17c42026ca2e499624c9e53868d3e292a324744bd5eb,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  # Manual standalone reproducer; automatic jobs now run inside Frontend browser QA.
+  workflow_dispatch:
+",pull_request;push,workflow_dispatch,permissions: contents: read,3,,RETAIN_MANUAL_REPRODUCER_AND_CONSOLIDATE_AUTOMATIC_JOB,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,382667726,active,PRESERVE_CURRENT_STATE
+.github/workflows/p901-nistrenia-audit.yml,P9.0.1 Nistrenia OSM reconciliation (read-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,e56467cd22e5134b6fe49b55f08b7ef296ab7499f5b7f14e9de17c6281cc75fd,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p901-nistrenia-inventory.mjs'
+      - '.github/workflows/p901-nistrenia-audit.yml'
+      - 'docs/p9.0.1-nistrenia-audit.md'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,382922321,active,PRESERVE_CURRENT_STATE
+.github/workflows/p902-geofabrik-reconciliation.yml,P9.0.2 Geofabrik PBF Nistrenia audit (read-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,bd005ab119d2f603b730181c9009e236381dd0aa44f5ff9bbedc8ad0b72deadc,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [audit/p9.0.1-nistrenia-inventory]
+    paths:
+      - 'scripts/audit/p902-geofabrik-fallback.mjs'
+      - '.github/workflows/p902-geofabrik-reconciliation.yml'
+      - 'docs/p9.0.2-nistrenia-unlinked-reconciliation.md'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,383007414,active,PRESERVE_CURRENT_STATE
+.github/workflows/p902-nistrenia-unlinked.yml,P9.0.2 Nistrenia unlinked OSM audit (read-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,718dcc719a0b922268140c3d71017d69b56121aaa841c94243224836735eace9,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [audit/p9.0.1-nistrenia-inventory]
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,382999186,active,PRESERVE_CURRENT_STATE
+.github/workflows/p903-nistrenia-exceptions.yml,P9.0.3 Nistrenia OSM exception reconciliation (audit-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,534951f4a53e047bf682cacd1bd90d86ccbbade52df0af2312ba35e213ed9a3d,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [audit/p9.0.2-nistrenia-unlinked-reconciliation]
+    paths:
+      - 'docs/p9.0.3-*'
+      - 'scripts/audit/p903-nistrenia-exceptions.mjs'
+      - '.github/workflows/p903-nistrenia-exceptions.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read actions: read,6,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,383718024,active,PRESERVE_CURRENT_STATE
+.github/workflows/p904-nistrenia-semantic.yml,P9.0.4 Nistrenia semantic reconciliation (audit-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,3b5452593632cdcc4550336422631a007832db39f9c56c422ce3f09c48f23f4a,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [audit/p9.0.3-nistrenia-osm-exceptions]
+    paths:
+      - 'docs/p9.0.4-*'
+      - 'scripts/audit/p904-nistrenia-semantic.mjs'
+      - '.github/workflows/p904-nistrenia-semantic.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,383727781,active,PRESERVE_CURRENT_STATE
+.github/workflows/p9041-nistrenia-membership.yml,P9.0.4.1 Nistrenia individual membership review (audit-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,12034247d54ee4c3344902d4e14cb3f79438d2f54dfbec65a37b04cc4c7226cd,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [audit/p9.0.4-nistrenia-semantic-reconciliation]
+    paths:
+      - 'docs/p9.0.4.1-*'
+      - 'scripts/audit/p9041-nistrenia-membership.mjs'
+      - '.github/workflows/p9041-nistrenia-membership.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,383735281,active,PRESERVE_CURRENT_STATE
+.github/workflows/p9042-nistrenia-acceptance.yml,P9.0.4.2 Nistrenia contemporary evidence and final semantic acceptance (audit-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,bc57e339279815954e0693517c312f4548c6f6183a46f727557250cff40661f3,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [audit/p9.0.4.1-nistrenia-individual-membership]
+    paths:
+      - 'docs/p9.0.4.2-*'
+      - 'scripts/audit/p9042-nistrenia-acceptance.mjs'
+      - '.github/workflows/p9042-nistrenia-acceptance.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,383744198,active,PRESERVE_CURRENT_STATE
+.github/workflows/p9043-actual-promotion-boundary.yml,P9.0.4.3 ACTUAL production promotion boundary (audit-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,c9effcc8088156884b1fc2ac8624c7e02e2777c74636a3409d65d02b908309c4,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [audit/p9.0.4.2-nistrenia-current-semantic-acceptance]
+    paths:
+      - 'docs/p9.0.4.3-*'
+      - 'scripts/lib/actual-p9-jurisdiction-promotion-gate.mjs'
+      - 'scripts/process/audit-actual-p9-jurisdiction-promotion.mjs'
+      - 'scripts/process/run-actual-deterministic-candidate.sh'
+      - 'scripts/process/prepare-actual-candidate-promotion.mjs'
+      - 'scripts/test/actual-p9-jurisdiction-gate.test.mjs'
+      - '.github/workflows/actual-promote-candidate.yml'
+      - '.github/workflows/actual-release-trust-chain-gate.yml'
+      - '.github/workflows/p9043-actual-promotion-boundary.yml'
+      - 'package.json'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,383752655,active,PRESERVE_CURRENT_STATE
+.github/workflows/p9043-provenance-evidence.yml,"P9.0.4.3 provenance-only rebind preparation (evidence, no push)",66a34d1d231c1296b44c84e688c62cc74b670ed5,78d99bb012a0dc11ab072243d119719fedb6d2fcdd5385601dc4128fba0e2833,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [audit/p9.0.4.2-nistrenia-current-semantic-acceptance]
+    paths:
+      - '.github/workflows/actual-promote-candidate.yml'
+      - '.github/workflows/actual-release-trust-chain-gate.yml'
+      - 'scripts/process/run-actual-deterministic-candidate.sh'
+      - 'scripts/process/prepare-actual-candidate-promotion.mjs'
+      - 'scripts/process/prepare-p9043-provenance-evidence.mjs'
+      - 'package.json'
+      - '.github/workflows/p9043-provenance-evidence.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,383757302,active,PRESERVE_CURRENT_STATE
+.github/workflows/p905-20261026-qualification.yml,P9.0.5 qualify Ubuntu 20261026 runner (evidence only),66a34d1d231c1296b44c84e688c62cc74b670ed5,17389feceed57c94b017bbd8611ddd1ce4eea34acc29c31f14aedced048095ad,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p905-20261026-runner-qualification.mjs'
+      - 'scripts/audit/p905-20261026-compare.mjs'
+      - '.github/workflows/p905-20261026-qualification.yml'
+      - 'docs/evidence/p905-20261026/README.md'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,7,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401135616,active,PRESERVE_CURRENT_STATE
+.github/workflows/p905-runner-host-trust-refresh.yml,P9.0.5 runner host-trust provenance rebind (read-only evidence),66a34d1d231c1296b44c84e688c62cc74b670ed5,edbc15a402b3abba7c553a78cdf979091feca20fde0fdb4eb64583d45aa2284a,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/actual-host-trust.mjs'
+      - 'scripts/process/prepare-p905-runner-provenance.mjs'
+      - '.github/workflows/p905-runner-host-trust-refresh.yml'
+      - 'data/current/actual-host-trust-manifest.json'
+      - 'data/current/actual-build-environment-manifest.json'
+      - 'data/current/actual-release-manifest.json'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,384577064,active,PRESERVE_CURRENT_STATE
+.github/workflows/p905-runner-provenance-admission.yml,P9.0.5 authorized runner provenance rebind proposal,66a34d1d231c1296b44c84e688c62cc74b670ed5,6dae660b355f3227297c0daf0e97107c19a019b5dcc7afba86c391c1fc753104,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/actual-host-trust.mjs'
+      - 'scripts/process/prepare-p905-runner-provenance.mjs'
+      - '.github/workflows/p905-runner-provenance-admission.yml'
+      - 'data/current/actual-host-trust-manifest.json'
+      - 'data/current/actual-build-environment-manifest.json'
+      - 'data/current/actual-build-environment-gate.json'
+      - 'data/current/actual-release-manifest.json'
+      - 'data/current/actual-release-gate.json'
+      - 'data/current/actual-release-persisted.json'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401161083,active,PRESERVE_CURRENT_STATE
+.github/workflows/p9062-osm-source-compare.yml,P9.0.6.2 OSM source/geometry reconciliation (audit only),66a34d1d231c1296b44c84e688c62cc74b670ed5,36b97ba4a4b882ad74c8fc22c84a4fed802583707d8e79f4222279860607334a,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/p9.0.6.2-*'
+      - 'scripts/audit/p9062-osm-source-diff.mjs'
+      - '.github/workflows/p9062-osm-source-compare.yml'
+",pull_request,pull_request,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,385193631,active,PRESERVE_CURRENT_STATE
+.github/workflows/p90621-historical-border.yml,P9.0.6.2.1 historical OSM way/node reconstruction (audit-only),66a34d1d231c1296b44c84e688c62cc74b670ed5,c895c60605f8d9ac214abc01e857d85edbe2f1da915aa11dee511c9b010ac474,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main, audit/p9.0.6.2-osm-version-geometry-reconciliation]
+    paths:
+      - 'docs/p9.0.6.2.1-*'
+      - 'scripts/audit/p90621-historical-border.mjs'
+      - '.github/workflows/p90621-historical-border.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,385238215,active,PRESERVE_CURRENT_STATE
+.github/workflows/p907216-osm-cartographic-ui.yml,P9.0.7.2.16 source-only OSM role UI gate,66a34d1d231c1296b44c84e688c62cc74b670ed5,ed5bbc023d74050bb6c88c4e3af6a467fee6c4da3bc4cba3e61649b4f8a67f99,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+",pull_request;push,pull_request;push,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,387015975,active,PRESERVE_CURRENT_STATE
+.github/workflows/p907217-geometry-fidelity.yml,P9.0.7.2.17 OSM-ACTUAL geometry fidelity (read only),66a34d1d231c1296b44c84e688c62cc74b670ed5,1fa71b4bba2ebd4dee976dc3ab17526d778f61be0a5387150448c2cf9b184381,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p907217-geometry-fidelity.mjs'
+      - '.github/workflows/p907217-geometry-fidelity.yml'
+      - 'docs/p9.0.7.2.17-findings.md'
+      - 'public/geo/actual/**'
+      - 'public/data/p907216-osm-roles.json'
+      - 'docs/p9.0.6.2-verified-evidence-ledger.json'
+      - 'docs/p9.0.7.2.15-osm-semantic-reconciliation.json'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p907217-geometry-fidelity.mjs'
+      - '.github/workflows/p907217-geometry-fidelity.yml'
+      - 'public/geo/actual/**'
+      - 'public/data/p907216-osm-roles.json'
+",pull_request;push,pull_request;push,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,387139979,active,PRESERVE_CURRENT_STATE
+.github/workflows/p907218-osm-live-85.yml,P9.0.7.2.18 live OSM 85-way-node read-only audit,66a34d1d231c1296b44c84e688c62cc74b670ed5,c7b56e90a61c875225052decb629000100eeac903eef12159dd324773c39da84,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/p907218-osm-live-85.mjs'
+      - '.github/workflows/p907218-osm-live-85.yml'
+      - 'docs/p9.0.7.2.18-findings.md'
+      - 'docs/p9.0.6.2-verified-evidence-ledger.json'
+      - 'docs/p9.0.7.2.15-osm-tag-census.json'
+      - 'public/geo/actual/**'
+      - 'public/data/p907216-osm-roles.json'
+",pull_request,pull_request,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,387160833,active,PRESERVE_CURRENT_STATE
+.github/workflows/p907219-cartographic-dossier.yml,P9.0.7.2.19 cartographic acceptance dossier read only,66a34d1d231c1296b44c84e688c62cc74b670ed5,39b0c90469e3aad7cbf867a52211ff6b3fe6d89741474a240ca30cac7c3c0f80,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/p907219-cartographic-dossier.yml'
+      - 'scripts/audit/p907219-acceptance-dossier.mjs'
+      - 'docs/p9.0.7.2.19-*'
+      - 'docs/p9.0.4.3-promotion-policy.json'
+      - 'docs/p9.0.6.3-final-semantic-matrix.json'
+      - 'docs/p9.0.6.2-verified-evidence-ledger.json'
+      - 'docs/p9.0.7.2.15-*'
+      - 'public/data/p907216-osm-roles.json'
+      - 'public/data/actual-entities.json'
+      - 'data/current/actual-release-manifest.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/p907219-cartographic-dossier.yml'
+      - 'scripts/audit/p907219-acceptance-dossier.mjs'
+      - 'docs/p9.0.7.2.19-*'
+",pull_request;push,pull_request;push,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,387186179,active,PRESERVE_CURRENT_STATE
+.github/workflows/p908-evidence-retention.yml,P9.0.8 evidence preservation,66a34d1d231c1296b44c84e688c62cc74b670ed5,e04e78af1f1f1c90e6efc85f34eab9e1efad17494b95bbbc236ba1f4fc5a6538,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+",pull_request,pull_request,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,387387775,active,PRESERVE_CURRENT_STATE
+.github/workflows/publish-actual-release.yml,Publish immutable ACTUAL release,66a34d1d231c1296b44c84e688c62cc74b670ed5,3fd39694439c4e4888127ce6923cd7725978fb93e59ddd65b6ba15eed0b1f5a6,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  workflow_dispatch:
+    inputs:
+      tag:
+        description: ""Release tag, e.g. actual-v1.1.0""
+        required: true
+        type: string
+      expected_main_sha:
+        description: ""Exact main commit SHA to release""
+        required: true
+        type: string
+
+",workflow_dispatch,workflow_dispatch,permissions: contents: write packages: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,371654038,active,PRESERVE_CURRENT_STATE
+.github/workflows/refresh-actual-review-evidence.yml,Refresh ACTUAL review evidence,66a34d1d231c1296b44c84e688c62cc74b670ed5,2cc7205dfb3cf41aa78181d7c5a00c14f83553dfb5bc826f27e5e43b6e03350a,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  workflow_dispatch:
+
+",workflow_dispatch,workflow_dispatch,permissions: contents: read packages: read | permissions: contents: write packages: read | permissions: contents: read pull-requests: write,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,369552970,active,PRESERVE_CURRENT_STATE
+.github/workflows/refresh-md-official.yml,Refresh official Moldova CUATM snapshot,66a34d1d231c1296b44c84e688c62cc74b670ed5,46d5e7a0e20216e5f8122d207816da18949524e4e3c61f7ea5121e5c0434ee97,SCHEDULED_MONITOR_OR_CANDIDATE,"  workflow_dispatch:
+  schedule:
+    - cron: '53 4 2 * *'
+
+",schedule;workflow_dispatch,schedule;workflow_dispatch,permissions: contents: write packages: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,368639547,active,PRESERVE_CURRENT_STATE
+.github/workflows/refresh-ro-official.yml,Refresh official Romania SIRUTA snapshot,66a34d1d231c1296b44c84e688c62cc74b670ed5,3095f785989b03d935ea1c1acbbe822849ab5023566d884a4b22878d692214b9,SCHEDULED_MONITOR_OR_CANDIDATE,"  workflow_dispatch:
+  schedule:
+    - cron: '41 4 2 * *'
+
+",schedule;workflow_dispatch,schedule;workflow_dispatch,permissions: contents: write packages: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,367646442,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-10.yml,RT-ADM.2.10 Bucharest documentary reconciliation guard,66a34d1d231c1296b44c84e688c62cc74b670ed5,8a39755324ad100fbdd5c0742c7fb3eb25c7da8169d7db7395c994d4e47ce9d3,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-10/**'
+      - 'scripts/audit/rt-adm2-10-verify.mjs'
+      - '.github/workflows/rt-adm2-10.yml'
+",pull_request,pull_request,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401560535,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-11.yml,RT-ADM.2.11 post-1979 legal corpus guard,66a34d1d231c1296b44c84e688c62cc74b670ed5,54f015cd8b4b9fe5b270127e227ae4d5d408ca7e8daefa0e0dfc8c6819b69db7,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-11/**'
+      - 'scripts/audit/rt-adm2-11-verify.mjs'
+      - '.github/workflows/rt-adm2-11.yml'
+",pull_request,pull_request,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401587930,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-12.yml,RT-ADM.2.12 consolidated version evidence guard,66a34d1d231c1296b44c84e688c62cc74b670ed5,6d2c8dcd6ec1fee98433f8756fa9c6e0cfb33028fcb0c2c31605121b61006eda,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-12/**'
+      - 'scripts/audit/rt-adm2-12-verify.mjs'
+      - '.github/workflows/rt-adm2-12.yml'
+",pull_request,pull_request,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401615757,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-13-1-exact-topology.yml,RT-ADM.2.13.1 exact topology evidence,66a34d1d231c1296b44c84e688c62cc74b670ed5,b138535ec3321765b43cab8fe5bf7fa616747e1803741f69ef3ab84304808ea6,MANUAL_OR_BRANCH_SPECIFIC_REPRODUCER,"  push:
+    branches:
+      - audit/rt-adm-2-13-1-exact-topology
+    paths:
+      - scripts/audit/rt-adm2-13-1-verify-osmb.py
+      - scripts/audit/rt-adm2-13-1-exact-topology.py
+      - .github/workflows/rt-adm2-13-1-exact-topology.yml
+      - docs/audits/rt-adm2-13-1/**
+      - docs/audits/rt-adm2-13-1/**
+",push,push,permissions: contents: read,2,actions/checkout@v4;actions/setup-python@v5,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,402239277,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-5.yml,RT-ADM.2.5 OSMB cartographic closure guard,66a34d1d231c1296b44c84e688c62cc74b670ed5,424812f7455199e183f6d3d1a5fb26f2043192b284e57268bddaf7879441c9da,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-5/**'
+      - 'scripts/audit/rt-adm2-5-verify.mjs'
+      - '.github/workflows/rt-adm2-5.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401275656,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-6.yml,RT-ADM.2.6 legal resumption guard,66a34d1d231c1296b44c84e688c62cc74b670ed5,603902d327c51d0b8ba3b8ca131f3fb1bc625686befa758e01e484adf62ec259,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-6/**'
+      - 'scripts/audit/rt-adm2-6-verify.mjs'
+      - '.github/workflows/rt-adm2-6.yml'
+",pull_request,pull_request,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401428934,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-7.yml,RT-ADM.2.7 legal normative evidence guard,66a34d1d231c1296b44c84e688c62cc74b670ed5,a5378f9739ebdd2739328343ff74ca1870bfcb2648638d41dc13cd274a4398e4,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-7/**'
+      - 'scripts/audit/rt-adm2-7-verify.mjs'
+      - '.github/workflows/rt-adm2-7.yml'
+",pull_request,pull_request,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401434536,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-8.yml,RT-ADM.2.8 consolidated legal evidence guard,66a34d1d231c1296b44c84e688c62cc74b670ed5,05e253404357dbfc6abf8961c0b2ef468811fd4d7db0b4afb8c8da8bb161d833,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-8/**'
+      - 'scripts/audit/rt-adm2-8-verify.mjs'
+      - '.github/workflows/rt-adm2-8.yml'
+",pull_request,pull_request,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401486271,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-adm2-9.yml,RT-ADM.2.9 public original evidence guard,66a34d1d231c1296b44c84e688c62cc74b670ed5,9ab2ccd9a14f668ff844bd524d8c5b48d2dd2f7751828d3bd7c1e0d14adba4e5,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/audits/rt-adm2-9/**'
+      - 'scripts/audit/rt-adm2-9-verify.mjs'
+      - '.github/workflows/rt-adm2-9.yml'
+",pull_request,pull_request,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,401533416,active,PRESERVE_CURRENT_STATE
+.github/workflows/rt-audit1.yml,RT-AUDIT.1 parent-child reconciliation,66a34d1d231c1296b44c84e688c62cc74b670ed5,3084b22c9347270661a22ed60e6c5b600bc09269af8a97bddd04bd49f22d030f,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/audit/rt-audit1*'
+      - 'docs/audits/rt-audit1*/**'
+      - 'docs/audits/rt-audit1*.md'
+      - 'scripts/audit/rt-adm2-verify.mjs'
+      - 'docs/audits/rt-adm2/**'
+      - '.github/workflows/rt-audit1.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,400255181,active,PRESERVE_CURRENT_STATE
+.github/workflows/verify-persisted-actual-release.yml,Verify persisted ACTUAL release,66a34d1d231c1296b44c84e688c62cc74b670ed5,9325d5aa1274e09f3d760e08a4feeea55ae084313446746120510375f891ff19,AUTOMATIC_PR_OR_MAIN,"  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read packages: read,1,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,368575391,active,PRESERVE_CURRENT_STATE
+.github/workflows/web-ni-u1-audit.yml,WEB-NI-U1 read-only inventory gate,66a34d1d231c1296b44c84e688c62cc74b670ed5,3b1768a4e9ad7f50d8f61ec936b08f4f414e1d427eb943a30c47df31e37aad23,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    paths:
+      - 'docs/web-ni-u1/**'
+      - 'scripts/test/web-ni-u1-*.test.mjs'
+      - '.github/workflows/web-ni-u1-audit.yml'
+      - 'views/nistrenia/**'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/web-ni-u1/**'
+      - 'scripts/test/web-ni-u1-*.test.mjs'
+      - '.github/workflows/web-ni-u1-audit.yml'
+      - 'views/nistrenia/**'
+  workflow_dispatch:
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,2,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,396418667,active,PRESERVE_CURRENT_STATE
+.github/workflows/web-r2a1-admin-level-census.yml,WEB-R2a.1 admin-level census,66a34d1d231c1296b44c84e688c62cc74b670ed5,035549ad6302543a73d638e7ee749321ebcadfb0579772940f06129af7de5483,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,388863486,active,PRESERVE_CURRENT_STATE
+.github/workflows/web-r2a2-historical-osm.yml,WEB-R2a.2 historical OSM tag verification,66a34d1d231c1296b44c84e688c62cc74b670ed5,1768d874eb3058d3900b83ea5c5a7ddbe7d1f228a5a3acf229d96b11e58dc49f,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/evidence/web-r2a2/**'
+      - 'docs/web-r2a2-exception-reconciliation.md'
+      - 'scripts/audit/web-r2a2-verify-historical-osm.mjs'
+      - 'scripts/audit/helpers/audit-io-boundaries.mjs'
+      - 'scripts/audit/helpers/audit-source-integrity.mjs'
+      - 'scripts/test/audit-io-boundaries.test.mjs'
+      - 'scripts/test/audit-source-integrity.test.mjs'
+      - '.github/workflows/web-r2a2-historical-osm.yml'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,388903901,active,PRESERVE_CURRENT_STATE
+.github/workflows/web-r2b-final-live-e2e.yml,WEB-R2b final live Pages E2E audit,66a34d1d231c1296b44c84e688c62cc74b670ed5,c2b08a1228fabf231504d5fffe6259c51d7a73ef4eeba9bde1e1f06d6f69b50a,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/web-r2b-final-live-e2e.yml'
+      - 'scripts/audit/web-r2b-final-pages-browser.mjs'
+      - 'scripts/audit/helpers/published-source.mjs'
+      - 'scripts/audit/helpers/audit-io-boundaries.mjs'
+      - 'scripts/test/audit-io-boundaries.test.mjs'
+      - 'scripts/test/frontend-published-source.test.mjs'
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,4,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,389170368,active,PRESERVE_CURRENT_STATE
+.github/workflows/web-r2c302-cdp-performance.yml,WEB-R2c.3.0.2 Chromium CDP read-only performance,66a34d1d231c1296b44c84e688c62cc74b670ed5,4cb06765818e2a46793a220eac0d71447ff9c997d8f251b32d75e375ca899d61,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+    paths:
+      - scripts/audit/web-r2c302-cdp-browser.mjs
+      - scripts/audit/helpers/performance-navigation.mjs
+      - scripts/audit/helpers/performance-source.mjs
+      - scripts/audit/helpers/performance-output.mjs
+      - scripts/test/frontend-performance-navigation.test.mjs
+      - scripts/test/helpers/atlas-browser.mjs
+      - .github/workflows/web-r2c302-cdp-performance.yml
+  push:
+    branches: [audit/web-r2c3-0-performance-readonly]
+    paths:
+      - scripts/audit/web-r2c302-cdp-browser.mjs
+      - .github/workflows/web-r2c302-cdp-performance.yml
+  workflow_dispatch:
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,389722007,active,PRESERVE_CURRENT_STATE
+.github/workflows/web-r2c32-hardening.yml,WEB-R2c.3.2 Chromium hardening,66a34d1d231c1296b44c84e688c62cc74b670ed5,ab3fe2bd3f74451b630bca49ff1473c9d80ebaba751ee75e4986b4bdf90a5ddd,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+",pull_request;push;workflow_dispatch,pull_request;push;workflow_dispatch,permissions: contents: read,3,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,390175704,active,PRESERVE_CURRENT_STATE
+.github/workflows/web-r2c4-published.yml,WEB-R2c.4 published website acceptance,66a34d1d231c1296b44c84e688c62cc74b670ed5,9b794eb62de7f8e4508cd83925b54e682a6dcc9b2e23f10f4c0eb89c340ecdfb,AUTOMATIC_PR_OR_MAIN,"  pull_request:
+    branches: [main]
+  workflow_dispatch:
+",pull_request;workflow_dispatch,pull_request;workflow_dispatch,permissions: contents: read,4,,RETAIN_BY_EVENT_CONTRACT_OR_EVIDENCE_ROLE,Existing mandatory CI/security/write-boundary tests; event filters retained for human verification; not all push workflows run on main,390276939,active,PRESERVE_CURRENT_STATE
