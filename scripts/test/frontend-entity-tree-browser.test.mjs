@@ -15,9 +15,9 @@ try{
   await page.viewport(1440,900);
   await page.navigate(browser.server.url);
   await waitFor(()=>page.evaluate("qaApp.entityById.size===5848&&document.querySelectorAll('.tree-select').length>0"),'released entities and tree');
-  await t.test('three UI roots checked; ACTUAL remains legally RO/MD; name-only rows and no selection',async()=>{
+  await t.test('two default UI roots checked; ACTUAL remains legally RO/MD; name-only rows and no selection',async()=>{
    const s=await page.evaluate("({ids:[...qaApp.visibleEntityIds].sort(),checked:[...document.querySelectorAll('#hierarchy-tree .tree-visibility-toggle')].filter(e=>e.checked).map(e=>e.dataset.entityId).sort(),selected:qaApp.selectedEntityId,card:document.querySelector('#details-panel').hidden,labels:document.querySelectorAll('#hierarchy-tree .tree-role,#hierarchy-tree .tree-code,#hierarchy-tree .tree-identity').length,rendered:document.querySelectorAll('.tree-select').length})");
-   assert.deepEqual(s.ids,roots);assert.deepEqual(s.checked,[...roots,'view-nistrenia'].sort());
+   assert.deepEqual(s.ids,roots);assert.deepEqual(s.checked,roots,'NI is opt-in under MD and not checked by default');
    assert.equal(s.selected,null);assert.equal(s.card,true);assert.equal(s.labels,0);assert.ok(s.rendered<100);
   });
   await t.test('hidden name selection keeps geometry unchecked and official card intact',async()=>{
