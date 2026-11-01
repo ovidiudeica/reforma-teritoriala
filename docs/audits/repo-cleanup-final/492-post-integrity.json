@@ -1,0 +1,26 @@
+{
+  "schema": "cleanup-integrity-comparison-v1",
+  "commit": "65bb8267afe3964971ba402d78d4021b14cc8141",
+  "canonical_git_blobs": true,
+  "comparison_fields": [
+    "path",
+    "mode",
+    "git_blob_sha",
+    "bytes",
+    "sha256"
+  ],
+  "sets": {
+    "c0-protected.json": {
+      "expected": 478,
+      "compared": 478,
+      "differences": []
+    },
+    "c0-runtime.json": {
+      "expected": 440,
+      "compared": 440,
+      "differences": []
+    }
+  },
+  "actual_changes": 0,
+  "p91_authorized": false
+}

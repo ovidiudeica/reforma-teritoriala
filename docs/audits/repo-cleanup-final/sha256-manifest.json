@@ -1,8 +1,13 @@
 {
   "schema": "cleanup-evidence-sha256-v1",
-  "previous_index_sha256": "7ad44bb8612ce529c43a1448d265f1589661a49d0f875caadb3ac0aaa56768a9",
-  "previous_index_commit": "65bb8267afe3964971ba402d78d4021b14cc8141",
+  "previous_index_sha256": "d030e0cf6b94713a5c44f28ad18f7f93628eac51dfe2a7c54563edf37636a57b",
+  "previous_index_commit": "7162aee271936d628b2501c7bfeedd3db9f59798",
   "files": [
+    {
+      "file": "492-post-integrity.json",
+      "bytes": 509,
+      "sha256": "69fd0308f077fa7ba52e32638dfc841183269ef1acb6a46a20549d288d6c39a9"
+    },
     {
       "file": "branch-per-file.csv.gz",
       "bytes": 18773,
@@ -62,6 +67,11 @@
       "file": "c1-491-post-runs.json.gz",
       "bytes": 5961,
       "sha256": "50e45935da6fecf1d66484872375a5f02ac1f33c24efdf9c0570d48b96a27075"
+    },
+    {
+      "file": "c1-completion.json",
+      "bytes": 727,
+      "sha256": "278666056f4c4c5679e48826db9dc69fb1aad08aad692930fc53180d0969114b"
     },
     {
       "file": "c1-integration.json",
@@ -124,6 +134,66 @@
       "sha256": "2b6f128a601d1ebc52710ddeaf740b2db78b2bba5267ef40d95605bbbf92614a"
     },
     {
+      "file": "c3-490-post-checks.json.gz",
+      "bytes": 3662,
+      "sha256": "1f9580b831fa5075b9f322c40124837a3bb315c3ea6714e48218faf47fa69fbc"
+    },
+    {
+      "file": "c3-490-post-runs.json.gz",
+      "bytes": 4772,
+      "sha256": "83ac7cbd97a095aa78026db595bc6a34c78ce9bdb1f6a121be7ed710cf2c7a2b"
+    },
+    {
+      "file": "c3-492checks.json.gz",
+      "bytes": 4066,
+      "sha256": "49f183166a312e793716572bbd0d393e4462f75443f1a5332fd284d757caf8f6"
+    },
+    {
+      "file": "c3-492postchecks.json.gz",
+      "bytes": 4101,
+      "sha256": "6abadc7d1cc0f3285e69f8e92d290fefaace1e482b70d1d6e61be13ed420af86"
+    },
+    {
+      "file": "c3-492postruns.json.gz",
+      "bytes": 5938,
+      "sha256": "1948272aae2593f906e450e8719592e0d7baa66b7682a15d209a24b23b93fd08"
+    },
+    {
+      "file": "c3-492runs.json.gz",
+      "bytes": 5593,
+      "sha256": "216d65fa859038ae730ba317ca7d23cacf65b9a1a79a3ef5fb06cfc313f5f634"
+    },
+    {
+      "file": "c3-493checks.json.gz",
+      "bytes": 4154,
+      "sha256": "7353bd383763cbd2f6f277932bd312576c8119ba1356d4409c911ed543349fe8"
+    },
+    {
+      "file": "c3-493runs.json.gz",
+      "bytes": 5559,
+      "sha256": "b09cc5aaeba0e77084ed01c0bf4866e2d239274161b6d0eb3256c37517dd78c0"
+    },
+    {
+      "file": "c3-base-integrity.json",
+      "bytes": 509,
+      "sha256": "c6d8c7354434f8b9eb42dc49a6fb49f0ff3d5d169ac4d8990e74a68d7c5bfb1d"
+    },
+    {
+      "file": "c3-decisions.csv",
+      "bytes": 539,
+      "sha256": "21177cfa6d8797f176a95f8b962740f4dd6193b8519e7194cc70e551066ce147"
+    },
+    {
+      "file": "c3-deletion-proof.json",
+      "bytes": 4694,
+      "sha256": "b45a93dde360d1aeb4c51c849257076435103602f51e098f7c5633889ab6f466"
+    },
+    {
+      "file": "C3.md",
+      "bytes": 3363,
+      "sha256": "f8c490d66c3d0b2bd3bf106e8580068a5814d6ac18538a9cad11117567b8112c"
+    },
+    {
       "file": "download-receipts-security.json",
       "bytes": 4971,
       "sha256": "49a174d743cb18a831d12b53b155d532b7e669762ff428a44a4d1fef50f69397"
@@ -137,6 +207,16 @@
       "file": "pr491-ci.json",
       "bytes": 12577,
       "sha256": "0318f8f24b1d7c9a92d1d1abe312f9d7ba539d7958a61e791fb7cbde9aefcfa2"
+    },
+    {
+      "file": "pr492-admission.json",
+      "bytes": 514,
+      "sha256": "71ab372135e4007c82d52fc4b4d43e5714a5581d741124eba5285e422aa546d4"
+    },
+    {
+      "file": "pr493-admission.json",
+      "bytes": 592,
+      "sha256": "709e9ced2969fb0e43a1ff7e30ec1ffcd177310dac85584a3b869cd95af7c9f0"
     }
   ]
 }
