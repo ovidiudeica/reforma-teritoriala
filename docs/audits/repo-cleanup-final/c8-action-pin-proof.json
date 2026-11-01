@@ -1,0 +1,42 @@
+{
+  "schema": "cleanup-c8-pin-proof-v1",
+  "base": "eee441d06c871151523f4c851b28545e4a51c2e5",
+  "workflow": ".github/workflows/rt-adm2-13-1-exact-topology.yml",
+  "old_sha256": "b138535ec3321765b43cab8fe5bf7fa616747e1803741f69ef3ab84304808ea6",
+  "new_sha256": "24f01c3f6f116f06340e37be99ab567d9619dd4d54e8d1d214fdc9716bda93d1",
+  "only_two_resolved_action_refs_changed": true,
+  "events_permissions_commands_unchanged": true,
+  "source_bundle_present": true,
+  "historic_audit_not_dispatched": true,
+  "receipts": {
+    "schema": "cleanup-action-pin-receipts-v1",
+    "observed_at": "2026-10-31T22:08:18.546Z",
+    "workflow": ".github/workflows/rt-adm2-13-1-exact-topology.yml",
+    "pins": [
+      {
+        "repo": "actions/checkout",
+        "ref": "refs/tags/v4",
+        "node_id": "MDM6UmVmMTk3ODE0NjI5OnJlZnMvdGFncy92NA==",
+        "url": "https://api.github.com/repos/actions/checkout/git/refs/tags/v4",
+        "object": {
+          "sha": "11d5960a326750d5838078e36cf38b85af677262",
+          "type": "commit",
+          "url": "https://api.github.com/repos/actions/checkout/git/commits/11d5960a326750d5838078e36cf38b85af677262"
+        }
+      },
+      {
+        "repo": "actions/setup-python",
+        "ref": "refs/tags/v5",
+        "node_id": "MDM6UmVmMTkyNjI1NTI1OnJlZnMvdGFncy92NQ==",
+        "url": "https://api.github.com/repos/actions/setup-python/git/refs/tags/v5",
+        "object": {
+          "sha": "a26af69be951a213d495a4c3e4e4022e16d87065",
+          "type": "commit",
+          "url": "https://api.github.com/repos/actions/setup-python/git/commits/a26af69be951a213d495a4c3e4e4022e16d87065"
+        }
+      }
+    ],
+    "policy": "Pin the exact currently resolved existing major, no permissions/events/test changes and no historic geographic audit dispatch"
+  },
+  "hash_basis": "canonical Git blobs; LF YAML"
+}
