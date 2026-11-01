@@ -1,6 +1,15 @@
 """Extensie RT-CANON.5–8. Citește baseline-ul și pachetul anterior; nu scrie în ACTUAL."""
-import argparse,collections,gzip,hashlib,json,pathlib,subprocess,sys,zipfile
-P=argparse.ArgumentParser();P.add_argument('--repo',required=True);P.add_argument('--prior',required=True);P.add_argument('--runtime',required=True);P.add_argument('--out',required=True);P.add_argument('--ro',required=True);P.add_argument('--md',required=True);A=P.parse_args()
+import argparse,collections,gzip,hashlib,json,pathlib,subprocess,sys,zipfile,types
+P=argparse.ArgumentParser();P.add_argument('--repo',required=True);P.add_argument('--prior',required=True);P.add_argument('--runtime',required=True);P.add_argument('--out',required=True);P.add_argument('--ro',required=True);P.add_argument('--md',required=True);requested=P.parse_args()
+# Layout explicit, fără căi arbitrare din CLI. Directorul curent este workspace-ul
+# de reproducere; snapshoturile externe sunt exclusiv cele două fișiere numite.
+workspace=pathlib.Path.cwd().resolve()
+safe_paths={'repo':workspace/'work/rt-canon-source','prior':workspace/'outputs/RT-CANON-20261101.zip','runtime':workspace/'work/rt-canon-runtime','out':workspace/'outputs/p91-continuare-20261101','ro':pathlib.Path.home()/'OneDrive/Desktop/OSMB-Romania-2026-10-05.geojson.gz','md':pathlib.Path.home()/'OneDrive/Desktop/OSMB-Moldova-2026-10-05.geojson.gz'}
+for key,expected in safe_paths.items():
+ if pathlib.Path(getattr(requested,key)).resolve()!=expected.resolve():P.error('Cale nepermisă pentru --'+key+'; consultați layout-ul documentat.')
+for key in ('repo','prior','runtime','out'):
+ if not safe_paths[key].resolve().is_relative_to(workspace):P.error('Cale ieșită din workspace: '+key)
+A=types.SimpleNamespace(**safe_paths)
 sys.path.insert(0,str(pathlib.Path(A.runtime).resolve()))
 from shapely.geometry import shape,mapping
 from shapely.ops import transform,unary_union

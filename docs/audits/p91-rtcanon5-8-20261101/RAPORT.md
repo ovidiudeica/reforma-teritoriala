@@ -10,6 +10,8 @@ OSMB România: `cc4fd15940550054d90fcadf907ed98352b68882735680093f77a624e3e04897
 
 `audit.py` citește arhiva verificată, geometriile ACTUAL din obiectele Git ale baseline-ului și arhivele OSMB originale. Reutilizează registrele și probele istorice existente, fără a rescrie recensământul. Dependențe: Shapely 2.1.2, pyproj 3.7.2. Argumente: `--repo`, `--prior`, `--runtime`, `--out`, `--ro`, `--md`. Sursele Git individuale și hashurile lor sunt în `source-provenance.json`. Verificările executate sunt în `verification.json`.
 
+Layout-ul de reproducere este restrâns explicit: din workspace, `work/rt-canon-source`, `work/rt-canon-runtime`, `outputs/RT-CANON-20261101.zip`, `outputs/p91-continuare-20261101`; cele două arhive OSMB sunt în `~/OneDrive/Desktop/`, cu numele fixate. Argumentele CLI trebuie să corespundă acestor căi; nu controlează arbitrar directoarele de scriere sau importul Python. O a doua execuție a scriptului restrâns a reprodus registrele fără diferențe de bytes față de prima execuție.
+
 ## RT-CANON.5 — 13 comparații independente
 
 Toate cele 13 perechi au fost recalculate din coordonatele originale, fără snap, rotunjire sau make_valid. Sunt raportate suprafețele înainte/după, intersecția, ambele diferențe, diferența simetrică, perimetrul, componentele, golurile, validitatea, distanța Hausdorff densificată și distanța minimă între frontiere. România: EPSG:3844; Moldova: EPSG:32635. EPSG:6933 este raportat separat pentru comparabilitatea cu auditul anterior. Unități: metri și metri pătrați. Proiecțiile diferite nu produc valori numeric identice.
