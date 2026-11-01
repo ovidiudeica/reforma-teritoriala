@@ -1,0 +1,108 @@
+{
+  "baseline": "35d25d38182bd8453a7bd9ba1819e4ed842eebb5",
+  "canonical_promotions": 0,
+  "case_verdicts": [
+    {
+      "count": 2,
+      "verdict": "BLOCKED_CONFLICT"
+    },
+    {
+      "count": 135,
+      "verdict": "BLOCKED_INCOMPLETE"
+    },
+    {
+      "count": 167,
+      "verdict": "KEEP_VERIFIED"
+    }
+  ],
+  "independent_comparisons": 13,
+  "individual_cases": 304,
+  "limitations": [
+    "KEEP_VERIFIED privește păstrarea cartografică, fără certificarea hotarului.",
+    "Datele topologice exhaustive inițiale sunt reutilizate; cele 13 comparații sunt recalculate independent.",
+    "Registrele enumerate includ excepții documentare; nu reprezintă certificare juridică integrală."
+  ],
+  "national_distribution": [
+    {
+      "adjudication": "BLOCKED_INCOMPLETE",
+      "count": 4,
+      "jurisdiction": "MD",
+      "role": "administrative_uat_or_sector"
+    },
+    {
+      "adjudication": "REUSE_VERIFIED",
+      "count": 1011,
+      "jurisdiction": "MD",
+      "role": "administrative_uat_or_sector"
+    },
+    {
+      "adjudication": "BLOCKED_INCOMPLETE",
+      "count": 103,
+      "jurisdiction": "MD",
+      "role": "component_locality"
+    },
+    {
+      "adjudication": "REUSE_VERIFIED",
+      "count": 602,
+      "jurisdiction": "MD",
+      "role": "component_locality"
+    },
+    {
+      "adjudication": "REUSE_VERIFIED",
+      "count": 1,
+      "jurisdiction": "MD",
+      "role": "official_context_group"
+    },
+    {
+      "adjudication": "BLOCKED_INCOMPLETE",
+      "count": 6,
+      "jurisdiction": "RO",
+      "role": "administrative_sector"
+    },
+    {
+      "adjudication": "BLOCKED_INCOMPLETE",
+      "count": 1,
+      "jurisdiction": "RO",
+      "role": "administrative_uat_or_sector"
+    },
+    {
+      "adjudication": "REUSE_VERIFIED",
+      "count": 3180,
+      "jurisdiction": "RO",
+      "role": "administrative_uat_or_sector"
+    },
+    {
+      "adjudication": "BLOCKED_INCOMPLETE",
+      "count": 13749,
+      "jurisdiction": "RO",
+      "role": "component_locality"
+    },
+    {
+      "adjudication": "REUSE_VERIFIED",
+      "count": 42,
+      "jurisdiction": "RO",
+      "role": "county_or_capital"
+    }
+  ],
+  "official_records": 18699,
+  "p91_complete": false,
+  "p91b": "BLOCKED",
+  "partition_findings": 706,
+  "partition_verdicts": [
+    {
+      "count": 2,
+      "verdict": "BLOCKED_CONFLICT"
+    },
+    {
+      "count": 215,
+      "verdict": "BLOCKED_INCOMPLETE"
+    },
+    {
+      "count": 489,
+      "verdict": "KEEP_VERIFIED"
+    }
+  ],
+  "ready_canonical_batches": 0,
+  "ui_pr": 501,
+  "ui_sha": "516d2d528ca1396bdfe0b1253a0f43417280cbca"
+}
