@@ -50,7 +50,7 @@ try{
   const p=await browser.page();
   try{
    await navigatePerformanceProfile(p,target(browser),width,height);await p.send('Accessibility.enable');
-   const baseline=await p.call(state);assert.deepEqual(baseline.actual,['osm-r58974','osm-r90689']);assert.deepEqual(baseline.ni,['view-nistrenia']);
+   const baseline=await p.call(state);assert.deepEqual(baseline.actual,['osm-r58974','osm-r90689']);assert.deepEqual(baseline.ni,[]);
    await accessible(p,label+'-initial');await contrast(p,label+'-initial');await capture(p,label+'-initial');
    await p.openPanel('entities');
    for(const id of ['osm-r90689','osm-r58974','view-nistrenia']){
