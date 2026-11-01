@@ -1,7 +1,7 @@
 {
   "schema": "cleanup-evidence-sha256-v1",
-  "previous_index_sha256": "7a432f8519a44b784f696d31a9de966add0465658716b2e5229c4afc15c290e7",
-  "previous_index_commit": "66a34d1d231c1296b44c84e688c62cc74b670ed5",
+  "previous_index_sha256": "c2f41ae38c4e53f7767bd79a493ef386c598dc9885fd07f60ba2d1cf12f024f2",
+  "previous_index_commit": "eee441d06c871151523f4c851b28545e4a51c2e5",
   "files": [
     {
       "file": "492-post-integrity.json",
@@ -229,9 +229,24 @@
       "sha256": "6f0631555318f7c0b982a181b1a4b9ac8fa539812724e3513e7ae48438118cbb"
     },
     {
+      "file": "c6-current-full-admission.json",
+      "bytes": 545,
+      "sha256": "0c907147be78eb5534495ba21bf9e960e82b5347f756cd2a589709e5691a90e4"
+    },
+    {
       "file": "c6-original-full-suite.json",
       "bytes": 423,
       "sha256": "5f62c26af669fe94af9b9d04ab8eddd8e35d5b93c32cb9a7122adca3d6de85f8"
+    },
+    {
+      "file": "c6-pr-admission.json",
+      "bytes": 596,
+      "sha256": "f4dcff522cd6c30f4fd718702c11fae3bd9b2f7d439a0a9ddc5c7a4ecddffd02"
+    },
+    {
+      "file": "c6-protection-after.json",
+      "bytes": 2243,
+      "sha256": "ef610b62ef1a227fbe2d414c8a363835078e204f2117597eb481a97e98bf6b1d"
     },
     {
       "file": "c6-protection-before.json",
@@ -242,6 +257,36 @@
       "file": "C6.md",
       "bytes": 4271,
       "sha256": "54da1cfe0c7e42f2fe70122384efd2cd0e4b11c2f25e2de384d83be37271c961"
+    },
+    {
+      "file": "c8-action-pin-proof.json",
+      "bytes": 1840,
+      "sha256": "ce5877e722b336324e247f5973721c67e3eb9d7879786ee4b487ec23af098303"
+    },
+    {
+      "file": "c8-alert-summary.json",
+      "bytes": 659,
+      "sha256": "58ef4d33c3708622f5acc296db5aae81f0e666a9d805580c8afeefefa17b0841"
+    },
+    {
+      "file": "c8-npm-audit.json",
+      "bytes": 362,
+      "sha256": "4efe082b23709aa6a61e93fe3946a192d455f1f205a134cbd38987e2a6be1457"
+    },
+    {
+      "file": "c8-provenance.json",
+      "bytes": 544,
+      "sha256": "e911ebec69d2438675f5e2594ba6d9ecc31750d9e141c7da4e97fd6981b2e6b0"
+    },
+    {
+      "file": "c8-security-report.json",
+      "bytes": 2184,
+      "sha256": "394bb2930b8ff2ac4b4ca2153660d5e2b067d66c564f330c5a4f7c2bcf10ac34"
+    },
+    {
+      "file": "C8.md",
+      "bytes": 1692,
+      "sha256": "11079c9f798ec4c8cd47dc8ca7903897c845cdd18f54744547658db54a0a27bd"
     },
     {
       "file": "download-receipts-security.json",

@@ -80,6 +80,10 @@ jobs:
           python scripts/audit/test_cleanup_file_usage.py
           python scripts/audit/cleanup-evidence-guard.py
           python scripts/audit/cleanup-file-usage.py --ref HEAD
+      - name: Read-only credential inventory and output redaction regressions
+        run: |
+          python scripts/audit/test_cleanup_security_signatures.py
+          python scripts/audit/cleanup-security-signatures.py --ref HEAD
       - name: P9.0.7.2.16 85 source-linked ACTUAL/OSM role tests
         run: node --test scripts/test/frontend-p907216-osm-roles.test.mjs
       - name: P9.0.7.2.16 real Chromium existing-geometry, mobile and OSM attribution

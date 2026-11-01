@@ -68,7 +68,7 @@
     },
     {
       "id": "C3",
-      "status": "POST_MERGE_IN_PROGRESS",
+      "status": "POST_MERGE_VERIFIED",
       "base": "7162aee271936d628b2501c7bfeedd3db9f59798",
       "pr": 494,
       "files": [
@@ -78,7 +78,7 @@
         "c3-decisions.csv",
         "c3-deletion-proof.json"
       ],
-      "tests": "22/22 executed PRchecks,15/15 workflows PASS,0SKIP; actualA/B+compare executed; archive/innerhashes and3519file register verified;71processmodules+2futureplaceholders kept",
+      "tests": "494 exact-head22 executed checks/15 runs and post-merge21 checks/13 runs PASS; published unique marker verified",
       "decision": "Delete only empty populated-directory placeholder; retain future corpora and all other historical candidates",
       "blockers": [],
       "next": "Admit all exact66a34d1d post-merge controls before C6 merge",
@@ -121,9 +121,9 @@
     },
     {
       "id": "C6",
-      "status": "LOCAL_VERIFIED_PENDING_CI",
+      "status": "POST_MERGE_IN_PROGRESS",
       "base": "66a34d1d231c1296b44c84e688c62cc74b670ed5",
-      "pr": null,
+      "pr": 495,
       "files": [
         ".github/workflows/frontend-browser-qa.yml",
         ".github/workflows/p82-derived-topology.yml",
@@ -134,10 +134,11 @@
         "c6-coverage-proof.json",
         "workflow-roles-registered.csv"
       ],
-      "tests": "22 gate regressions PASS;132 original testfileSHA256+unmodifiedrunnerSHA256 verified; commandmultiset coverage preserved; branchprotection exactlyequalC0;80trackedactiveworkflows/145APIrecords reconciled",
+      "tests": "PR:21 executed checks/13 runs PASS; see c6-pr-admission.json and c6-current-full-admission.json; exact132 files/1074 tests,0 skips; effective protection unchanged",
       "decision": "Execute unchanged full suite once; same required frontend context fails unless all4 real jobs succeed; retain standalone manual jobs/artifacts",
       "blockers": [],
-      "next": "All exact-head CI, full-suite report/list, same-context check and post-merge controls; measure actual duration"
+      "next": "Admit all exact merge commit controls before C8 merge",
+      "merge_commit": "eee441d06c871151523f4c851b28545e4a51c2e5"
     },
     {
       "id": "C7",
@@ -154,16 +155,16 @@
     },
     {
       "id": "C8",
-      "status": "IN_PROGRESS",
-      "base": "8c8cb123c0e8c363268886aba863131e33f3e1a4",
+      "status": "LOCAL_VERIFIED_PENDING_CI",
+      "base": "eee441d06c871151523f4c851b28545e4a51c2e5",
       "pr": null,
       "files": [
         "download-receipts-security.json"
       ],
       "tests": "Signature scan3471 blobs+544934925 expanded bytes:6 expired third-party signed-URL key IDs, no other configured signatures; npm audit0; Chrome security6/6 PASS",
-      "decision": "Preserve historical receipts and explicitly retain open-alert exception",
+      "decision": "Pin last two mutable action refs; preserve original expired third-party receipts and open alerts; add bounded read-only signature scan and redaction regressions",
       "blockers": [],
-      "next": "Separate PR pinning two mutable action tags in historical branch-specific workflow; preserve trigger and audit evidence"
+      "next": "Exact-head CI and post-merge security verification"
     },
     {
       "id": "C9",

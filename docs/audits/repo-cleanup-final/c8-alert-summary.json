@@ -1,0 +1,29 @@
+{
+  "schema": "cleanup-c8-alert-summary-v1",
+  "observed_at": "2026-11-01T02:49:43.568100+00:00",
+  "summary": {
+    "dependabot": {
+      "total": 18,
+      "states": {
+        "fixed": 18
+      }
+    },
+    "code-scanning": {
+      "total": 43,
+      "states": {
+        "fixed": 30,
+        "dismissed": 13
+      }
+    },
+    "secret-scanning": {
+      "total": 5,
+      "states": {
+        "open": 5
+      }
+    }
+  },
+  "secret_values_recorded": false,
+  "alerts_dismissed": 0,
+  "protection_exactly_equal_c0": true,
+  "policy": "Five historical third-party signed-download alerts remain explicitly open; URL expiration is not proof of key revocation"
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "cleanup-security-signatures-v2",
+  "commit": "eee441d06c871151523f4c851b28545e4a51c2e5",
+  "observed_at": "2026-11-01T02:50:00+00:00",
+  "tracked_blobs": 3535,
+  "logical_bytes": 529319943,
+  "expanded_bytes_scanned": 568248354,
+  "findings": [
+    {
+      "path": "docs/evidence/osm-acq2c-native-order-20261024/dependency-download-receipts.json",
+      "line": 6,
+      "rule": "aws_access_key_id",
+      "disposition": "KNOWN_EXPIRED_THIRD_PARTY_SIGNED_DOWNLOAD_RECEIPT"
+    },
+    {
+      "path": "docs/evidence/osm-acq2c-native-order-20261024/dependency-download-receipts.json",
+      "line": 15,
+      "rule": "aws_access_key_id",
+      "disposition": "KNOWN_EXPIRED_THIRD_PARTY_SIGNED_DOWNLOAD_RECEIPT"
+    },
+    {
+      "path": "docs/evidence/osm-acq2c-native-order-20261024/dependency-download-receipts.json",
+      "line": 24,
+      "rule": "aws_access_key_id",
+      "disposition": "KNOWN_EXPIRED_THIRD_PARTY_SIGNED_DOWNLOAD_RECEIPT"
+    },
+    {
+      "path": "docs/evidence/osm-acq2c-native-order-20261024/dependency-download-receipts.json",
+      "line": 33,
+      "rule": "aws_access_key_id",
+      "disposition": "KNOWN_EXPIRED_THIRD_PARTY_SIGNED_DOWNLOAD_RECEIPT"
+    },
+    {
+      "path": "docs/evidence/osm-acq2c-native-order-20261024/dependency-download-receipts.json",
+      "line": 42,
+      "rule": "aws_access_key_id",
+      "disposition": "KNOWN_EXPIRED_THIRD_PARTY_SIGNED_DOWNLOAD_RECEIPT"
+    },
+    {
+      "path": "docs/evidence/osm-acq2c-native-order-20261024/package-receipt.json",
+      "line": 5,
+      "rule": "aws_access_key_id",
+      "disposition": "KNOWN_EXPIRED_THIRD_PARTY_SIGNED_DOWNLOAD_RECEIPT"
+    }
+  ],
+  "limits": [],
+  "review_required": 0,
+  "acknowledged_legacy_findings": 6,
+  "values_printed": false,
+  "status": "NO_UNACKNOWLEDGED_SIGNATURES",
+  "limitations": [
+    "Signature scan is not proof that every possible secret, PII or vulnerability is absent",
+    "Gzip and tar payloads bounded to 64 MiB each; nested archives and binary/OCR content are not exhaustively interpreted",
+    "Acknowledgement requires the exact immutable receipt SHA-256 and expired timestamp; GitHub alerts remain explicitly open"
+  ]
+}
