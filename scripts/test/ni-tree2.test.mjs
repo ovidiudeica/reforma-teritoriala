@@ -1,0 +1,34 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createNistreniaAdministrativeView} from '../../atlas-nistrenia-jurisdiction.mjs';
+import {createUrlConfig,defaultUrlState} from '../../atlas-url-state.mjs';
+import {createGeometryFilterIndex} from '../../geometry-taxonomy.mjs';
+import {ancestorPath} from '../../atlas-tree.mjs';
+const read=p=>JSON.parse(readFileSync(new URL('../../'+p,import.meta.url),'utf8'));
+const model=read('views/nistrenia/administration.json'),tree=read('public/data/actual-consolidated-tree.json'),entities=read('public/data/actual-entities.json').entities;
+const entityById=new Map(entities.map(x=>[x.id,x])),officialNodes=new Map(tree.nodes.map(x=>[x.id,x]));
+const before=JSON.stringify([...officialNodes]);
+const view=createNistreniaAdministrativeView({model,entityById,officialNodes,officialRoots:tree.root_ids});
+test('NI-TREE.2 has two tree roots and Nistrenia first within Moldova before West and East',()=>{
+ assert.deepEqual(view.rootIds,tree.root_ids);
+ assert.equal(view.root.parent_id,'osm-r58974');
+ assert.equal(view.root.depth,1);
+ assert.deepEqual(view.nodes.get('osm-r58974').child_ids,['view-nistrenia','stat-MD11','stat-MD12']);
+ assert.equal(view.nodes.get('osm-r58974').parent_id,null);
+ assert.equal(view.root.child_ids.length,7);
+ assert.equal(ancestorPath(view.nodes,view.rootIds,'view-nistrenia-place-110')[0],'osm-r58974');
+ assert.deepEqual(ancestorPath(view.nodes,view.rootIds,'view-nistrenia-unit-15').slice(0,3),['osm-r58974','view-nistrenia','view-nistrenia-group-osm-r1702215']);
+ assert.equal(view.nodes.size,5848+243);
+ assert.equal(view.roleIds.size,85);
+ assert.equal(JSON.stringify([...officialNodes]),before);
+ assert.deepEqual(model.nodes.find(n=>n.id==='view-nistrenia').child_ids.length,9);
+});
+test('NI-TREE.2 default URL activates only RO and MD, never an NI outline',()=>{
+ const config=createUrlConfig({entityById,nodeById:view.nodes,rootIds:tree.root_ids,treeRootIds:view.rootIds,operationalOutlineIds:['view-nistrenia',...view.groupIds],virtualEntityIds:[...view.virtualIds],filterIndex:createGeometryFilterIndex(entities)});
+ const state=defaultUrlState(config);
+ assert.deepEqual(state.jurisdictions,['MD','RO']);
+ assert.deepEqual(state.visibleOperationalOutlineIds,[]);
+ assert.deepEqual(state.visibleEntityIds,[...tree.root_ids].sort());
+ assert.deepEqual(state.openIds,[...tree.root_ids].sort());
+});
