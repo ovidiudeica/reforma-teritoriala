@@ -31,11 +31,11 @@ jobs:
       - name: Provenance and resource failure regressions
         run: |
           google-chrome --version
-          node --check scripts/audit/web-r2c32-hardening-browser.mjs
+          node --check scripts/audit/web-r2c5-ni-tree2-browser.mjs
           node --test scripts/test/frontend-published-source.test.mjs scripts/test/frontend-published-runtime.test.mjs scripts/test/published-runtime-retry.test.mjs
-          node --test scripts/test/frontend-navigation-failure-evidence.test.mjs scripts/test/frontend-performance-navigation.test.mjs
+          node --test scripts/test/ni-tree2-published-contract.test.mjs scripts/test/ni-tree2.test.mjs scripts/test/frontend-navigation-failure-evidence.test.mjs scripts/test/frontend-performance-navigation.test.mjs
       - name: Published runtime inventory and Chromium matrix
-        run: node scripts/audit/web-r2c32-hardening-browser.mjs
+        run: node scripts/audit/web-r2c5-ni-tree2-browser.mjs
       - name: Verify preserved navigation failure evidence
         run: |
           python - <<'PY'
@@ -58,12 +58,12 @@ jobs:
           PY
       - name: Exact source admission
         run: |
-          node --input-type=module -e "import fs from 'node:fs'; import assert from 'node:assert/strict'; import {execFileSync} from 'node:child_process'; const r=JSON.parse(fs.readFileSync('outputs/web-r2c4-published/report.json')); assert.equal(r.status,'PASS'); assert.equal(r.trackedSourcesClean,true); assert.equal(r.sourceSha,execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()); assert.equal(r.mode,'published'); assert.equal(r.publishedInventory.status,'PASS'); assert.equal(r.publishedInventory.checkedFiles,r.publishedInventory.expectedFiles); const pr=process.env.GITHUB_EVENT_NAME==='pull_request'; assert.equal(r.coverage,pr?'PR_PUBLISHED_BASELINE_ONLY':'PUBLISHED_EXACT_CHECKOUT'); assert.equal(r.expectedPublishedSha,pr?process.env.ATLAS_PUBLISHED_BASE_SHA:r.sourceSha);"
+          node --input-type=module -e "import fs from 'node:fs'; import assert from 'node:assert/strict'; import {execFileSync} from 'node:child_process'; const r=JSON.parse(fs.readFileSync('outputs/web-r2c5-published/report.json')); assert.equal(r.status,'PASS'); assert.equal(r.trackedSourcesClean,true); assert.equal(r.sourceSha,execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()); assert.equal(r.mode,'published'); assert.equal(r.niTreeContract.id,'NI-TREE.2/published-acceptance-v1'); assert.equal(r.publishedInventory.status,'PASS'); assert.equal(r.publishedInventory.checkedFiles,r.publishedInventory.expectedFiles); const pr=process.env.GITHUB_EVENT_NAME==='pull_request'; assert.equal(r.coverage,pr?'PR_PUBLISHED_BASELINE_ONLY':'PUBLISHED_EXACT_CHECKOUT'); assert.equal(r.expectedPublishedSha,pr?process.env.ATLAS_PUBLISHED_BASE_SHA:r.sourceSha);"
           git diff --exit-code
       - name: Preserve runtime hashes, raw diagnostics and captures
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: web-r2c4-published-evidence
-          path: outputs/web-r2c4-published
+          path: outputs/web-r2c5-published
           retention-days: 30
