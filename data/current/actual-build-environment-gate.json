@@ -269,6 +269,84 @@
         "expected": "40d13cfb387a03f97c31d896f496d219224bae46681712065e62feeabfc70687",
         "actual": "40d13cfb387a03f97c31d896f496d219224bae46681712065e62feeabfc70687"
       }
+    },
+    {
+      "name": "runtime_node_exact",
+      "ok": true,
+      "detail": {
+        "expected": "24.21.0",
+        "actual": "24.21.0"
+      }
+    },
+    {
+      "name": "runtime_npm_exact",
+      "ok": true,
+      "detail": {
+        "expected": "11.19.0",
+        "actual": "11.19.0"
+      }
+    },
+    {
+      "name": "runtime_runner_os_linux",
+      "ok": true,
+      "detail": {
+        "expected": "Linux",
+        "actual": "Linux"
+      }
+    },
+    {
+      "name": "host_runner_identity_is_explicitly_approved_provenance",
+      "ok": true,
+      "detail": {
+        "policy": "GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match exactly one explicitly approved host-trust runtime profile.",
+        "expected": {
+          "label": "ubuntu-24.04",
+          "accepted_runtime_profiles": [
+            {
+              "id": "github-ubuntu24-20260920.314.1",
+              "image_os": "ubuntu24",
+              "image_version": "20260920.314.1"
+            },
+            {
+              "id": "github-ubuntu24-20260927.320.1",
+              "image_os": "ubuntu24",
+              "image_version": "20260927.320.1"
+            },
+            {
+              "id": "github-ubuntu24-20261004.327.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261004.327.1"
+            },
+            {
+              "id": "github-ubuntu24-20261012.334.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261012.334.1"
+            },
+            {
+              "id": "github-ubuntu24-20261023.334.3",
+              "image_os": "ubuntu24",
+              "image_version": "20261023.334.3"
+            },
+            {
+              "id": "github-ubuntu24-20261026.354.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261026.354.1"
+            },
+            {
+              "id": "github-ubuntu24-20261101.360.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261101.360.1"
+            }
+          ]
+        },
+        "matched_profile_ids": [
+          "github-ubuntu24-20261101.360.1"
+        ],
+        "actual": {
+          "image_os": "ubuntu24",
+          "image_version": "20261101.360.1"
+        }
+      }
     }
   ],
   "failures": []

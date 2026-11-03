@@ -42,7 +42,7 @@ function validateAuthorizedProvenance20261026({changed,read,baseline,admissionBy
 }
 
 
-export const ADMISSION_SHA_20261101='892d795992ca4838225d5caba542a5c6fa08cdd3e6024123a84d594e7b6df9f1';
+export const ADMISSION_SHA_20261101='7848d2bbee9a3f72058a7d7ccd0e9c614e2e333a80066bd449a1b43fa885c87f';
 const P905_PROFILE_ID_20261101='github-ubuntu24-20261101.360.1';
 const P905_FINGERPRINT_20261101='d67648e3eee23c2a2a5f3f3b68aca71afbf5d3910467bd5fae81f6fc0274c73f';
 function validateAuthorizedProvenance20261101({changed,read,baseline,admissionBytes,authorizationBytes}){
