@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {selectCanonicalVariantA} from '../lib/actual-canonical-scope-variant-a.mjs';
 
 const policy=JSON.parse(await readFile('docs/evidence/rt-va1-semantic-exclusion/actual-variant-a-exclusions.json','utf8'));
@@ -54,4 +55,26 @@ test('RT-VA1 blocks silently importing a new allotment outside the vetted 123',(
 test('RT-VA1 does not accept an incomplete or duplicated reviewed roster',()=>{
  const bad={...policy,exclusions:policy.exclusions.slice(1)};
  assert.throws(()=>selectCanonicalVariantA(policy.exclusions.map(feature),bad,options),/missing|population/i);
+});
+
+test('RT-VA1 binds all 123 reviewed IDs to archived raw evidence and current MD OSM selection',async()=>{
+ const evidenceBytes=await readFile(policy.source_evidence.path);
+ assert.equal(createHash('sha256').update(evidenceBytes).digest('hex'),policy.source_evidence.sha256);
+ const evidence=JSON.parse(evidenceBytes);
+ assert.equal(evidence.count,123);
+ const archived=new Set(evidence.items.map(x=>x.id));
+ assert.equal(archived.size,123);
+ assert.deepEqual([...archived].sort(),policy.exclusions.map(x=>x.id).sort());
+ const osm=JSON.parse(await readFile('data/sources/osm-current.json','utf8'));
+ const mdIds=new Set(osm.countries.MD.selected_relation_ids.map(Number));
+ for(const row of policy.exclusions)assert.ok(mdIds.has(row.osm_relation_id),'missing OSM selection '+row.id);
+});
+
+test('RT-VA1 importer executes the reviewed selector before materializing canonical entities',async()=>{
+ const source=await readFile('scripts/process/build-osm-actual.mjs','utf8');
+ const selector=source.indexOf('selectCanonicalVariantA(polygons,policy,');
+ const entityBuild=source.indexOf('const entities=polygons.map(');
+ assert.ok(selector>0&&entityBuild>selector,'semantic selector must precede canonical materialization');
+ assert.match(source,/evidenceSha!==policy\.source_evidence\.sha256/);
+ assert.match(source,/if\(code==='MD'\)/);
 });
