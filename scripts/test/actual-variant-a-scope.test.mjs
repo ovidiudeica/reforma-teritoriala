@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {selectCanonicalVariantA} from '../lib/actual-canonical-scope-variant-a.mjs';
 
-const policy=JSON.parse(await readFile('data/sources/actual-variant-a-exclusions.json','utf8'));
+const policy=JSON.parse(await readFile('docs/evidence/rt-va1-semantic-exclusion/actual-variant-a-exclusions.json','utf8'));
 const feature=x=>({
  type:'Feature',
  id:'relation/'+x.osm_relation_id,

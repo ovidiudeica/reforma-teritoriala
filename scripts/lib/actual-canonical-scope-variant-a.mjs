@@ -1,6 +1,6 @@
 // RT-VA1: explicit semantic exclusion at the OSM canonical-import boundary.
 // Preserve OSM source, historical evidence, and all non-excluded official UATs.
-export const VARIANT_A_SCOPE_PATH='data/sources/actual-variant-a-exclusions.json';
+export const VARIANT_A_SCOPE_PATH='docs/evidence/rt-va1-semantic-exclusion/actual-variant-a-exclusions.json';
 
 export function selectCanonicalVariantA(polygons,policy,{jurisdiction,relationId,readTags}){
  if(!policy||policy.contract!=='actual-canonical-variant-a-exclusions-v1'||policy.schema_version!==1||policy.status!=='APPROVED_SCOPE')throw Error('RT-VA1 scope contract invalid');
