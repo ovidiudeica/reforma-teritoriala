@@ -17,13 +17,13 @@ const expected={
  'ro.municipalities':100,'ro.towns':217,'ro.communes':2862,'ro.local_unspecified':1,
  'md.municipalities':14,'md.towns':48,'md.rural_uat':372,'md.level1_unspecified':548,
  'ro.bucharest_sectors':6,'md.chisinau_sectors':5,'ro.component_villages':3,'ro.municipality_components':2,
- 'md.component_localities':1446,'md.component_areas':3,'ro.context':1,'md.context':1,'md.auxiliary':122
+ 'md.component_localities':1446,'md.component_areas':2,'ro.context':1,'md.context':1
 };
 const options=()=>({geometryClasses:new Set(Object.keys(geometryLabels)),geometrySubtypes:new Set(Object.keys(geometrySubtypeLabels)),statisticalLevels:new Set([1,2,3]),osmAdminLevels:allOsmLevelFilters(),separateStatisticalGeometry:true});
 const breakdown=cls=>Object.fromEntries(filters.groups.filter(g=>g.id===cls).flatMap(g=>g.jurisdictions.flatMap(j=>j.subtypes.map(s=>[s.id,s.count]))));
 
-test('all 5848 representations have deterministic classes/subtypes; only 18 separate boundaries are exempt',()=>{
- assert.equal(index.entities.length,5848);
+test('all 5725 representations have deterministic classes/subtypes; only 18 separate boundaries are exempt',()=>{
+ assert.equal(index.entities.length,5725);
  for(const e of index.entities){
   assert.ok(geometryClass(e) in geometryLabels);assert.notEqual(geometryClass(e),'unclassified');
   assert.equal(geometrySubtype(e),geometrySubtype(structuredClone(e)));
@@ -33,7 +33,7 @@ test('all 5848 representations have deterministic classes/subtypes; only 18 sepa
  assert.deepEqual(Object.fromEntries([...filters.subtypeMembers].map(([id,members])=>[id,members.size])),expected);
 });
 test('large classes retain exact 2/79/4162/11/1454/122/18 population',()=>{
- assert.deepEqual(Object.fromEntries(Object.keys(geometryLabels).map(k=>[k,filters.classCounts.get(k)||0])),{regional:79,local_uat:4162,sector:11,component_locality:1454,context:2,auxiliary:122,statistical_only:18,unclassified:0});
+ assert.deepEqual(Object.fromEntries(Object.keys(geometryLabels).map(k=>[k,filters.classCounts.get(k)||0])),{regional:79,local_uat:4162,sector:11,component_locality:1453,context:2,auxiliary:0,statistical_only:18,unclassified:0});
 });
 test('regional subtypes reflect actual representations: RO 42, MD 32+3+2',()=>{
  assert.deepEqual(breakdown('regional'),{'ro.counties':42,'md.districts':32,'md.level2_municipalities':3,'md.special_units':2});
@@ -48,7 +48,7 @@ test('local UAT counts come from inferred_type, including explicit unspecified g
  assert.equal(Object.values(breakdown('local_uat')).reduce((a,b)=>a+b),4162);
 });
 test('all four component representation types map explicitly; current RO 5 and MD 1449',()=>{
- assert.deepEqual(breakdown('component_locality'),{'ro.component_villages':3,'ro.municipality_components':2,'md.component_localities':1446,'md.component_areas':3});
+ assert.deepEqual(breakdown('component_locality'),{'ro.component_villages':3,'ro.municipality_components':2,'md.component_localities':1446,'md.component_areas':2});
  for(const [j,type,id] of [['MD','component_locality','md.component_localities'],['MD','subdivision_or_component_area','md.component_areas'],['RO','component_village_boundary_representation','ro.component_villages'],['RO','municipality_component_locality_boundary_representation','ro.municipality_components']])assert.equal(geometrySubtype({jurisdiction:j,representation:{inferred_type:type}}),id);
 });
 test('unknown types stay explicit; legal/display/admin_level cannot override the geometry taxonomy',()=>{
@@ -83,13 +83,13 @@ test('45 coalesced roles retain one polygon and are visible through either admin
  assert.deepEqual([l3.jurisdictions.RO.roles,l3.jurisdictions.RO.separate,l3.jurisdictions.MD.roles,l3.jurisdictions.MD.separate],[42,0,6,4]);
 });
 test('current public/hierarchy contract and official MD120/OSM-only MD121 stay intact',()=>{
- assert.equal(index.contract,'actual-public-entity-v3');assert.equal(index.entity_count,5848);assert.equal(tree.node_count,5848);
+ assert.equal(index.contract,'actual-public-entity-v3');assert.equal(index.entity_count,5725);assert.equal(tree.node_count,5725);
  const md=index.entities.find(e=>e.id==='stat-MD120');assert.equal(md.statistical.code,'MD120');assert.equal(md.representation.osm_statistical_ref,'MD121');assert.equal(md.representation.osm_ref_is_identity_authority,false);
  assert.ok(!index.entities.some(e=>e.statistical?.code==='MD121'));
 });
 test('semantic manifest and all bound protected component bytes match immutable ACTUAL baseline',async()=>{
  const manifest=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
- assert.equal(manifest.snapshot_id,'actual-a9e5a4ddcb5277ef');assert.equal(manifest.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
+ assert.equal(manifest.snapshot_id,'actual-903b934850711dc7');assert.equal(manifest.release_fingerprint_sha256,'903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e');
  for(const c of Object.values(manifest.components))assert.equal(createHash('sha256').update(await readFile(c.path)).digest('hex'),c.sha256,c.path);
 });
 
@@ -157,7 +157,7 @@ test('real frontend filters integrate late chunks/tiers, jurisdictions, hidden s
  const town=index.entities.find(e=>e.jurisdiction==='RO'&&e.representation.inferred_type==='town'&&e.map.tier==='local');
  let root=town;while(root.map.tier!=='overview')root=index.entities.find(e=>e.id===root.hierarchy.parent_catalog_id);
  const entry={jurisdiction:'RO',tier:'local',root_entity_id:root.id,feature_count:1,path:'late-chunk'};
- const manifest={snapshot_id:'fixture',public_contract:{contract:index.contract,path:'index',entity_count:5848,hierarchy:{path:'tree'},geometry_chunks:{path:'chunks'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(level=>[level,{path:j+'/'+level}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
+ const manifest={snapshot_id:'fixture',public_contract:{contract:index.contract,path:'index',entity_count:5725,hierarchy:{path:'tree'},geometry_chunks:{path:'chunks'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(level=>[level,{path:j+'/'+level}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
  const payload=path=>{
   if(path==='data/current/actual-release-manifest.json')return manifest;
   if(path==='data/current/actual-release-gate.json')return {status:'PASS',snapshot_id:'fixture'};

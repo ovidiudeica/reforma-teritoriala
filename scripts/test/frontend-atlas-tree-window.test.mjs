@@ -6,9 +6,9 @@ const corpus=JSON.parse(await readFile('public/data/actual-consolidated-tree.jso
 const nodes=new Map(corpus.nodes.map(node=>[node.id,node]));
 const branches=new Set(corpus.nodes.filter(node=>node.child_ids.length).map(node=>node.id));
 
-test('virtual traversal preserves all 5848 identities and validated sibling order',()=>{
+test('virtual traversal preserves all 5725 identities and validated sibling order',()=>{
  const rows=flattenVisibleTree(nodes,corpus.root_ids,branches);
- assert.equal(rows.length,5848);assert.equal(new Set(rows.map(row=>row.id)).size,5848);
+ assert.equal(rows.length,5725);assert.equal(new Set(rows.map(row=>row.id)).size,5725);
  for(const row of rows){assert.equal(row.depth,nodes.get(row.id).depth);const parent=nodes.get(row.id).parent_id;const siblings=parent?nodes.get(parent).child_ids:corpus.root_ids;assert.equal(row.pos,siblings.indexOf(row.id)+1);assert.equal(row.size,siblings.length);}
 });
 
@@ -17,10 +17,10 @@ test('closing a parent preserves independent descendant expansion intent',()=>{
  open.delete(parent.id);assert.ok(open.has(child));assert.ok(!flattenVisibleTree(nodes,corpus.root_ids,open).some(row=>row.id===child));open.add(parent.id);assert.ok(flattenVisibleTree(nodes,corpus.root_ids,open).some(row=>row.id===child));
 });
 
-test('5848 rows have bounded windows and every index can be reached without gaps',()=>{
+test('5725 rows have bounded windows and every index can be reached without gaps',()=>{
  const rows=flattenVisibleTree(nodes,corpus.root_ids,branches),window=createTreeWindow(rows),covered=new Set();
  for(let top=0;top<window.totalHeight;top+=300){const range=window.range(top,300);assert.ok(range.end-range.start<=17);for(let i=range.start;i<range.end;i++)covered.add(i);assert.equal(window.indexAt(window.offset(range.start)),range.start);}
- assert.equal(covered.size,5848);assert.equal(window.indexAt(1e9),5847);
+ assert.equal(covered.size,5725);assert.equal(window.indexAt(1e9),5724);
 });
 
 test('measured wrapped rows update offsets and scroll anchoring deterministically',()=>{

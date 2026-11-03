@@ -3,8 +3,8 @@
   "mode": "ACTUAL_SOURCE_BUNDLE",
   "source_watermark": "2026-10-05T23:50:05.218Z",
   "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
-  "bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
-  "policy": "Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, and materialized ANCPI/RELUAT RO UAT fallback geometries. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.",
+  "bundle_fingerprint_sha256": "0bf09553f30f41acef3923b04c10ef9892dc63ff3771f8bb15f746643403017b",
+  "policy": "Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, the reviewed RT-VA1 per-ID exclusions and archival evidence, and materialized ANCPI/RELUAT RO UAT fallback geometries. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.",
   "sources": {
     "osm": {
       "manifest_path": "data/sources/osm-current.json",
@@ -40,6 +40,15 @@
       "semantic_sha256": "6f2b1af0dd8b53546eaf146444427b6451b3396ee5efd408b1b80ebed9a6ad8f",
       "fetched_at": "2026-09-26T11:58:48.000Z",
       "record_count": 16978
+    },
+    "variant_a_canonical_scope": {
+      "policy_path": "data/sources/actual-variant-a-exclusions.json",
+      "policy_sha256": "2d9c16761103c434940bf0181764bf7bad5d106a31b338ca6f3bf3b7809964cc",
+      "evidence_path": "data/sources/actual-variant-a-original-allotments-123.json",
+      "evidence_sha256": "20a03333a9485218da6b552ce9af77b929f6163826c4af4f3936eb374f150c63",
+      "excluded_count": 123,
+      "reviewed_osm_relation_id": 12104738,
+      "scope_mode": "PER_ID_SEMANTIC_PROOF"
     },
     "cuatm": {
       "path": "data/sources/cuatm-current.json",

@@ -9,13 +9,13 @@ try{
  await test('P9.0.9.4 Chromium: operational Nistrenia root, map, filters, search and touch viewports',{timeout:180000},async t=>{
   await page.viewport(1440,900);
   await page.navigate(browser.server.url);
-  await waitFor(()=>page.evaluate("qaApp.hierarchyNodeById.size===5848&&qaApp.atlasTree?.getVisibleIds()?.includes('view-nistrenia')"),'operational root + validated legal hierarchy');
+  await waitFor(()=>page.evaluate("qaApp.hierarchyNodeById.size===5725&&qaApp.atlasTree?.getVisibleIds()?.includes('view-nistrenia')"),'operational root + validated legal hierarchy');
   await t.test('ACTUAL unchanged, three UI jurisdictions, NI initially off, under MD with RO MD default',async()=>{
    const s=await page.evaluate("({root:qaApp.atlasTree.getVisibleIds().includes('view-nistrenia'),roots:qaApp.atlasTree.getVisibleIds().filter(id=>id==='view-nistrenia'||id==='osm-r58974'||id==='osm-r90689'),labels:[...document.querySelectorAll('#filters-panel input[id^=layer-]')].map(n=>({id:n.id,checked:n.checked,disabled:n.disabled})),real:qaApp.hierarchyNodeById.size,selected:[...qaApp.visibleEntityIds].sort()})");
    assert(s.root);
    assert.deepEqual(s.roots.sort(),['osm-r58974','osm-r90689','view-nistrenia'].sort());
    assert.deepEqual(s.labels,[{id:'layer-ro',checked:true,disabled:false},{id:'layer-md',checked:true,disabled:false},{id:'layer-ni',checked:false,disabled:false}]);
-   assert.equal(s.real,5848);
+   assert.equal(s.real,5725);
    assert.deepEqual(s.selected,['osm-r58974','osm-r90689']);
     assert.deepEqual(await page.evaluate("[...qaApp.visibleOperationalOutlineIds]"),[]);
   });
@@ -58,7 +58,7 @@ try{
     assert.equal(state.overflow,false,width+' viewport overflow');
     assert.equal(state.hasNistrenia,true,width+' NI filter');
     assert.equal(state.root,true,width+' NI root');
-    assert.equal(state.legalCount,5848);
+    assert.equal(state.legalCount,5725);
    }
   });
   await t.test('no browser exceptions or new geometry sources',async()=>{

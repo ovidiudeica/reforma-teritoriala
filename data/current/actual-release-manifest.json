@@ -1,14 +1,14 @@
 {
   "schema_version": 10,
   "mode": "ACTUAL",
-  "snapshot_id": "actual-a9e5a4ddcb5277ef",
-  "generated_at": "2026-09-27T20:37:27.458Z",
-  "release_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
-  "content_fingerprint_sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
-  "component_byte_fingerprint_sha256": "596a7fa13222f9e5126a49ab6b7e4c402d1e6c133750ced132f664a5ad98234c",
+  "snapshot_id": "actual-903b934850711dc7",
+  "generated_at": "2026-10-05T23:50:05.218Z",
+  "release_fingerprint_sha256": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e",
+  "content_fingerprint_sha256": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e",
+  "component_byte_fingerprint_sha256": "f7b202e856477f22dc7d5f54d0767f294ed719c99d112ab9fd6b261ab3a9a5a7",
   "content_identity": {
     "algorithm": "actual-semantic-v3",
-    "sha256": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "sha256": "903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e",
     "release_identity_basis": "semantic_content_v3",
     "reused_base_release": false
   },
@@ -23,8 +23,8 @@
     "mode": "ACTUAL_SOURCE_BUNDLE",
     "source_watermark": "2026-10-05T23:50:05.218Z",
     "bundle_fingerprint_algorithm": "actual-source-bundle-v1",
-    "bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
-    "sha256": "3509b50e34b2597bc6cbd41b2a0a49a63e9a3c6e5d77dcfb43c94b83e965f2b1"
+    "bundle_fingerprint_sha256": "0bf09553f30f41acef3923b04c10ef9892dc63ff3771f8bb15f746643403017b",
+    "sha256": "05fd2fb5c4ee99334e35128c549219a1d7669bb841121f10f48c686abd70f6c3"
   },
   "review_evidence_bundle": {
     "path": "data/current/actual-review-evidence-bundle.json",
@@ -78,17 +78,17 @@
   "catalog": {
     "path": "data/current/entities.json",
     "schema_version": 2,
-    "generated_at": "2026-09-27T20:37:24.316Z",
+    "generated_at": "2026-10-05T23:50:05.218Z",
     "classifier_version": "2.3",
     "source": "OpenStreetMap via Overpass API",
     "license": "ODbL",
-    "entity_count": 5830,
-    "declared_entity_count": 5830,
+    "entity_count": 5707,
+    "declared_entity_count": 5707,
     "entity_count_by_jurisdiction": {
       "RO": 3234,
-      "MD": 2596
+      "MD": 2473
     },
-    "sha256": "af6e09317d75fea663e6be425bf0a5c252fc756b6bb1c8055e564af913148504"
+    "sha256": "f2a5b5f1e41f29a4896690b8f7d374bc2cde8ed520e4766af3ef74d91e47430a"
   },
   "administrative_model": {
     "path": "data/current/administrative-inventory.json",
@@ -162,8 +162,8 @@
     },
     "MD": {
       "path": "public/geo/current/md-administrative.geojson",
-      "feature_count": 2596,
-      "sha256": "e5db08df6b32b458f5c2451d4b685a34815778181cc23b903c38abd0fa7731c1"
+      "feature_count": 2473,
+      "sha256": "43f79bf9b63a56143144fadd4a3c157474341f5404d860054c0265b2d0126799"
     }
   },
   "statistical_model": {
@@ -171,7 +171,7 @@
       "path": "data/sources/actual-statistical-policy.json",
       "phase": "P2_ACTIVATED",
       "activated": true,
-      "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662"
+      "sha256": "591e8937019ec87492f964414d94fffdf4c3ae2b2fef3a1e49423ab50fe806fb"
     },
     "contract": {
       "path": "schemas/actual-statistical-hierarchy-contract.json",
@@ -204,12 +204,12 @@
     "hierarchy": {
       "path": "public/data/actual-consolidated-tree.json",
       "contract": "actual-consolidated-hierarchy-v1",
-      "node_count": 5848,
+      "node_count": 5725,
       "root_ids": [
         "osm-r90689",
         "osm-r58974"
       ],
-      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+      "sha256": "b2424b552f5b0a5af196021f16c0c41fbba2ecd380e9b85c736c1648528febf1"
     },
     "geometry": {
       "RO": {
@@ -231,25 +231,24 @@
     "contract": "actual-public-entity-v3",
     "schema_version": 3,
     "generated_at": "2026-10-05T23:50:05.218Z",
-    "entity_count": 5848,
+    "entity_count": 5725,
     "entity_count_by_jurisdiction": {
       "RO": 3246,
-      "MD": 2602
+      "MD": 2479
     },
     "legal_identity_status_counts": {
       "reconciled": 5693,
-      "outside_current_legal_registry": 123,
       "unresolved": 1,
       "statistical_identity": 18,
       "not_bound_to_official_registry": 13
     },
-    "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
+    "sha256": "6cd9561bddb08ef80b673c083b7dc20e1979e4b4a5215651faff230768035741",
     "geometry_chunks": {
       "path": "public/data/actual-geometry-chunks.json",
       "contract": "actual-public-geometry-chunks-v1",
       "schema_version": 1,
       "chunk_count": 115,
-      "sha256": "f09bdc0fff9e63185020ede4b83d1d359b2e03f2d35834e91170b507dd12136d"
+      "sha256": "63d7e018b5e4c793eebdf2e8fdc93231f9cac8d5ef4bc8c412d345eba149254b"
     },
     "geometry_tiers": {
       "RO": {
@@ -282,20 +281,20 @@
         },
         "detail": {
           "path": "public/geo/actual/md-detail.geojson",
-          "feature_count": 1571,
-          "sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe"
+          "feature_count": 1448,
+          "sha256": "d7d4a52ea50f1f908e063252d165d6a4e6f7a81f4c3f5299f2ac99d7b3dd7384"
         }
       }
     },
     "hierarchy": {
       "path": "public/data/actual-consolidated-tree.json",
       "contract": "actual-consolidated-hierarchy-v1",
-      "node_count": 5848,
+      "node_count": 5725,
       "root_ids": [
         "osm-r90689",
         "osm-r58974"
       ],
-      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f"
+      "sha256": "b2424b552f5b0a5af196021f16c0c41fbba2ecd380e9b85c736c1648528febf1"
     },
     "statistical_geometry": {
       "RO": {
@@ -336,13 +335,13 @@
       "path": "data/current/actual-topology-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "02cde46761ff8be0d40bc931d5989e0b65cb2cdf5be98f32430a055b1123ae23"
+      "sha256": "761ce19ecabf7cd9e59a95cb7ab67c8a8b4ad3d9f95d44f451d694559b25a7b7"
     },
     "regression": {
       "path": "data/current/actual-regression-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "8e9191ead323f2513eb2cd2c16cf745f8a296862b3aab7729d6e301da97d1c02"
+      "sha256": "4b209dd2481b044bd7902db09c0652fdb412925dc66bccefd9fac5de7526edb9"
     },
     "structural_completeness": {
       "path": "data/current/actual-structural-completeness-audit.json",
@@ -356,7 +355,7 @@
       "path": "data/current/actual-official-identity-audit.json",
       "status": "PASS",
       "blocking_issue_count": 0,
-      "sha256": "c95573ff6b1b69bad4e2e7d2436ce2380db1cf6dd908e07de7875c1fbf03612a"
+      "sha256": "9247073b8b6367fd58d099ce6c32f330679c8a0a1b0cb70f62db4499c7a4e4af"
     }
   },
   "jurisdiction_gates": {
@@ -398,8 +397,8 @@
   "components": {
     "catalog": {
       "path": "data/current/entities.json",
-      "sha256": "af6e09317d75fea663e6be425bf0a5c252fc756b6bb1c8055e564af913148504",
-      "bytes": 8761869
+      "sha256": "f2a5b5f1e41f29a4896690b8f7d374bc2cde8ed520e4766af3ef74d91e47430a",
+      "bytes": 8615958
     },
     "inventory": {
       "path": "data/current/administrative-inventory.json",
@@ -413,18 +412,18 @@
     },
     "md_geojson": {
       "path": "public/geo/current/md-administrative.geojson",
-      "sha256": "e5db08df6b32b458f5c2451d4b685a34815778181cc23b903c38abd0fa7731c1",
-      "bytes": 21029858
+      "sha256": "43f79bf9b63a56143144fadd4a3c157474341f5404d860054c0265b2d0126799",
+      "bytes": 20806865
     },
     "public_index": {
       "path": "public/data/actual-entities.json",
-      "sha256": "014ce7ad76c20f07de64f5ed3db0debcd676db78c25e25cd3abefe98fcfe5700",
-      "bytes": 15390013
+      "sha256": "6cd9561bddb08ef80b673c083b7dc20e1979e4b4a5215651faff230768035741",
+      "bytes": 15093652
     },
     "public_chunks": {
       "path": "public/data/actual-geometry-chunks.json",
-      "sha256": "f09bdc0fff9e63185020ede4b83d1d359b2e03f2d35834e91170b507dd12136d",
-      "bytes": 35786
+      "sha256": "63d7e018b5e4c793eebdf2e8fdc93231f9cac8d5ef4bc8c412d345eba149254b",
+      "bytes": 35785
     },
     "ro_overview": {
       "path": "public/geo/actual/ro-overview.geojson",
@@ -453,8 +452,8 @@
     },
     "md_detail": {
       "path": "public/geo/actual/md-detail.geojson",
-      "sha256": "25efa0c5078dccdeb3f3bca94c4c788dc951f4b2212e0844f30038784014e2fe",
-      "bytes": 10993096
+      "sha256": "d7d4a52ea50f1f908e063252d165d6a4e6f7a81f4c3f5299f2ac99d7b3dd7384",
+      "bytes": 10792719
     },
     "ro_gate": {
       "path": "data/current/ro-release-gate.json",
@@ -488,13 +487,13 @@
     },
     "topology_audit": {
       "path": "data/current/actual-topology-audit.json",
-      "sha256": "02cde46761ff8be0d40bc931d5989e0b65cb2cdf5be98f32430a055b1123ae23",
-      "bytes": 6443
+      "sha256": "761ce19ecabf7cd9e59a95cb7ab67c8a8b4ad3d9f95d44f451d694559b25a7b7",
+      "bytes": 6061
     },
     "regression_audit": {
       "path": "data/current/actual-regression-audit.json",
-      "sha256": "8e9191ead323f2513eb2cd2c16cf745f8a296862b3aab7729d6e301da97d1c02",
-      "bytes": 973
+      "sha256": "4b209dd2481b044bd7902db09c0652fdb412925dc66bccefd9fac5de7526edb9",
+      "bytes": 783
     },
     "structural_completeness_audit": {
       "path": "data/current/actual-structural-completeness-audit.json",
@@ -503,8 +502,8 @@
     },
     "official_identity_audit": {
       "path": "data/current/actual-official-identity-audit.json",
-      "sha256": "c95573ff6b1b69bad4e2e7d2436ce2380db1cf6dd908e07de7875c1fbf03612a",
-      "bytes": 2846418
+      "sha256": "9247073b8b6367fd58d099ce6c32f330679c8a0a1b0cb70f62db4499c7a4e4af",
+      "bytes": 2785832
     },
     "settlement_policy": {
       "path": "data/sources/actual-settlement-policy.json",
@@ -513,8 +512,8 @@
     },
     "statistical_policy": {
       "path": "data/sources/actual-statistical-policy.json",
-      "sha256": "6ba562c768c2806f205798878fceb872ccc9a0b574f70cfadaa4c8ffc46f0662",
-      "bytes": 3904
+      "sha256": "591e8937019ec87492f964414d94fffdf4c3ae2b2fef3a1e49423ab50fe806fb",
+      "bytes": 4021
     },
     "statistical_contract": {
       "path": "schemas/actual-statistical-hierarchy-contract.json",
@@ -538,8 +537,8 @@
     },
     "consolidated_tree": {
       "path": "public/data/actual-consolidated-tree.json",
-      "sha256": "b44b7b4eea0abec975ad01d8b7209568df0c83a1e5764c440ed893b960f49b1f",
-      "bytes": 2102707
+      "sha256": "b2424b552f5b0a5af196021f16c0c41fbba2ecd380e9b85c736c1648528febf1",
+      "bytes": 2051536
     },
     "ro_statistical_geometry": {
       "path": "public/geo/actual/ro-statistical.geojson",

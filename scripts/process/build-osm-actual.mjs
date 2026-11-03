@@ -6,6 +6,7 @@ import {gunzipSync} from 'node:zlib';
 import osmtogeojson from 'osmtogeojson';
 import { area, intersect, featureCollection, pointOnFeature, booleanPointInPolygon } from '@turf/turf';
 import {applyMdReviewedParentHierarchyOverrides} from '../lib/md-parent-hierarchy-overrides.mjs';
+import {selectCanonicalVariantA,VARIANT_A_SCOPE_PATH} from '../lib/actual-canonical-scope-variant-a.mjs';
 
 const OSM_MANIFEST='data/sources/osm-current.json';
 const OSM_SNAPSHOT_DIR='data/sources/osm-snapshots';
@@ -234,7 +235,10 @@ function finalizeAfterParents(entities){
 }
 async function main(){
  await mkdir('data/current',{recursive:true}); await mkdir('public/geo/current',{recursive:true});
- const osmSource=await loadOsmSourceManifest();
+  const osmSource=await loadOsmSourceManifest();
+  const variantA=JSON.parse(await readFile(VARIANT_A_SCOPE_PATH,'utf8'));
+  const archivedBytes=await readFile(variantA.source_evidence.path);
+  if(sha256(archivedBytes)!==variantA.source_evidence.sha256)throw Error('RT-VA1 original archival evidence SHA drift');
  const all=[], report={
   generated_at:osmSource.snapshot_at,
   classifier_version:CLASSIFIER_VERSION,
@@ -289,7 +293,10 @@ async function main(){
    const excluded=allPolygons.filter(f=>f!==countryFeature&&!contained.includes(f)).map(f=>relationId(f));
    if(excluded.length) report.warnings.push({type:'outside_country_boundary_excluded',jurisdiction:code,relation_ids:excluded});
   }
-  const entities=polygons.map(f=>entity(code,f,osmSource.snapshot_at));
+   const scope=selectCanonicalVariantA(polygons,variantA,{jurisdiction:code,relationId,readTags:f=>f.properties?.tags||f.properties||{}});
+   polygons=scope.polygons;
+   if(code==='MD')report.canonical_scope_variant_a={contract:variantA.contract,excluded_count:scope.excluded.length,excluded_ids:scope.excluded.map(x=>x.id),archive_evidence:variantA.source_evidence.path,archive_sha256:variantA.source_evidence.sha256};
+   const entities=polygons.map(f=>entity(code,f,osmSource.snapshot_at));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));
   assignParents(entities,byId,report.warnings);
   if(code==='MD')applyMdReviewedParentHierarchyOverrides(entities,report.warnings);

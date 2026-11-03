@@ -10,7 +10,9 @@ export const SOURCE_PATHS={
  osm:'data/sources/osm-current.json',
  siruta:'data/sources/ro-siruta-current.json',
  cuatm:'data/sources/cuatm-current.json',
- ancpi_ro_uat_fallbacks:'data/sources/ro-ancpi-uat-fallbacks.json'
+ ancpi_ro_uat_fallbacks:'data/sources/ro-ancpi-uat-fallbacks.json',
+ variant_a_exclusions:'data/sources/actual-variant-a-exclusions.json',
+ variant_a_evidence:'data/sources/actual-variant-a-original-allotments-123.json'
 };
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 
@@ -40,16 +42,22 @@ const iso=value=>{
 };
 
 export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
- const [osmBytes,sirutaBytes,cuatmBytes,policyBytes]=await Promise.all([
+ const [osmBytes,sirutaBytes,cuatmBytes,policyBytes,variantABytes,variantAEvidenceBytes]=await Promise.all([
   readFileFn(SOURCE_PATHS.osm),
   readFileFn(SOURCE_PATHS.siruta),
   readFileFn(SOURCE_PATHS.cuatm),
-  readFileFn(SETTLEMENT_POLICY_PATH)
+  readFileFn(SETTLEMENT_POLICY_PATH),
+  readFileFn(SOURCE_PATHS.variant_a_exclusions),
+  readFileFn(SOURCE_PATHS.variant_a_evidence)
  ]);
  const osm=JSON.parse(osmBytes.toString('utf8'));
  const siruta=JSON.parse(sirutaBytes.toString('utf8'));
  const cuatm=JSON.parse(cuatmBytes.toString('utf8'));
  const policy=JSON.parse(policyBytes.toString('utf8'));
+ const variantA=JSON.parse(variantABytes.toString('utf8'));
+ const reviewed=JSON.parse(variantAEvidenceBytes.toString('utf8'));
+ if(variantA.contract!=='actual-canonical-variant-a-exclusions-v1'||variantA.expected_exclusion_count!==123||variantA.exclusions?.length!==123)throw Error('RT-VA1 source bundle scope contract drift');
+ if(reviewed.count!==123||reviewed.items?.length!==123||variantA.source_evidence?.sha256!==sha256(variantAEvidenceBytes))throw Error('RT-VA1 source bundle archival SHA mismatch');
  const ancpiBinding=policy?.administrative_geometry_fallbacks?.RO??null;
  let ancpiBytes=null,ancpi=null,ancpiFeatures=[],ancpiLegalIds=new Set();
  if(ancpiBinding){
@@ -119,6 +127,15 @@ export async function inspectCurrentSourceInputs({readFileFn=readFile}={}){
     fetched_at:siruta.fetched_at??null,
     record_count:siruta.record_count??(Array.isArray(siruta.records)?siruta.records.length:null)
    },
+   variant_a_canonical_scope:{
+    policy_path:SOURCE_PATHS.variant_a_exclusions,
+    policy_sha256:sha256(variantABytes),
+    evidence_path:SOURCE_PATHS.variant_a_evidence,
+    evidence_sha256:sha256(variantAEvidenceBytes),
+    excluded_count:123,
+    reviewed_osm_relation_id:12104738,
+    scope_mode:'PER_ID_SEMANTIC_PROOF'
+   },
    cuatm:{
     path:SOURCE_PATHS.cuatm,
     sha256:sha256(cuatmBytes),
@@ -149,7 +166,7 @@ export function buildSourceBundleManifest(inspected){
   schema_version:1,
   mode:'ACTUAL_SOURCE_BUNDLE',
   source_watermark:inspected.source_watermark,
-  policy:'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, and materialized ANCPI/RELUAT RO UAT fallback geometries. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.',
+  policy:'Exact provenance binding for ACTUAL inputs. The bundle cryptographically binds the OSM manifest and both durable raw OSM snapshots, the official RO SIRUTA snapshot, the official MD CUATM snapshot, the reviewed RT-VA1 per-ID exclusions and archival evidence, and materialized ANCPI/RELUAT RO UAT fallback geometries. Runtime clocks are excluded; identical source bytes reproduce identical bundle bytes.',
   sources:inspected.sources
  };
  const fingerprint=sourceBundleFingerprint(draft);

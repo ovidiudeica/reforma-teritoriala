@@ -46,8 +46,8 @@ const documentFactory=()=>{
 };
 function harness(){const document=documentFactory(),container=new Element();return {document,container,controller:createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,typeLabel,onSelect(){}})};}
 
-test('all 5848 consolidated paths are rooted, reciprocal, unique and match public parents',()=>{
- assert.equal(nodes.size,5848);assert.equal(entities.size,5848);
+test('all 5725 consolidated paths are rooted, reciprocal, unique and match public parents',()=>{
+ assert.equal(nodes.size,5725);assert.equal(entities.size,5725);
  for(const node of nodes.values()){
   const path=ancestorPath(nodes,tree.root_ids,node.id);
   assert.ok(tree.root_ids.includes(path[0]));assert.equal(path.at(-1),node.id);
@@ -95,9 +95,9 @@ test('known RO/MD hierarchy examples include coalesced MD114/MD115 and official 
  assert.deepEqual(ancestorPath(nodes,tree.root_ids,'stat-MD120'),['osm-r58974','stat-MD12','stat-MD120']);
 });
 
-test('P3.2 counts descendants once from the complete 5848-node contract without DOM expansion',()=>{
+test('P3.2 counts descendants once from the complete 5725-node contract without DOM expansion',()=>{
  const counts=countDescendants(nodes,tree.root_ids);
- assert.equal(counts.size,5848);
+ assert.equal(counts.size,5725);
  for(const root of tree.root_ids){
   const members=tree.nodes.filter(n=>n.jurisdiction===nodes.get(root).jurisdiction).length;
   assert.equal(counts.get(root),members-1);
@@ -208,7 +208,7 @@ test('real frontend controller synchronizes map/search/tree/breadcrumb/details a
    config.onEachFeature(feature,layer);result.addLayer(layer);layers.push(layer);
   }result.addTo=target=>{target.addLayer(result);return result;};return result;}
  };
- const manifest={snapshot_id:'fixture',public_contract:{contract:index.contract,path:'index',entity_count:5848,hierarchy:{path:'tree'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
+ const manifest={snapshot_id:'fixture',public_contract:{contract:index.contract,path:'index',entity_count:5725,hierarchy:{path:'tree'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
  let resolveHierarchy,notifyHierarchy;
  const hierarchyRequested=new Promise(resolve=>{notifyHierarchy=resolve;});
  const hierarchyPayload=new Promise(resolve=>{resolveHierarchy=resolve;});

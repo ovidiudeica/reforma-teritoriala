@@ -24,7 +24,7 @@ test('P9.0.9 virtual Nistrenia root has exactly seven geographic groups and reus
  assert.equal(menu.legal_semantic_acceptance,'BLOCKED_INCOMPLETE');
  assert.equal(menu.actual_mutation_allowed,false);
  assert.equal(menu.p91_import_allowed,false);
- assert.equal(index.entity_count,5848);
+ assert.equal(index.entity_count,5725);
  // Homonyms must remain distinct OSM relations, never coalesced.
  const bender=validated.find(g=>g.label==='Bender').role_ids;
  assert(bender.includes('osm-r12463379'));

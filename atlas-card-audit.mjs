@@ -1,5 +1,5 @@
 // WEB-CARD.1: numai prezentare; identitățile și geometriile ACTUAL rămân imuabile.
-export const cardAuditBinding=Object.freeze({snapshot:'actual-a9e5a4ddcb5277ef',fingerprint:'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446'});
+export const cardAuditBinding=Object.freeze({snapshot:'actual-903b934850711dc7',fingerprint:'903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e'});
 export function cardAuditBucket(id){let hash=2166136261;for(const c of String(id))hash=Math.imul(hash^c.charCodeAt(0),16777619)>>>0;return String(hash%32).padStart(2,'0');}
 export function publicOsmTags(tags){
  const allowed=/^(?:name(?::[a-z-]+)?|alt_name(?::[a-z-]+)?|official_name(?::[a-z-]+)?|short_name(?::[a-z-]+)?|full_name|admin_level|boundary|place|type|wikidata|wikipedia|ref:cuatm:(?:codunic|codstatistic|statut)|ref:siruta|ref:nuts(?::[123])?)$/;

@@ -10,7 +10,7 @@ try{
  await test('P5.3 real Chrome: filters, search tabs, OSM tiles and history',{timeout:180000},async t=>{
   await page.viewport(1440,900);
   await page.navigate(browser.server.url);
-  await waitFor(()=>page.evaluate("qaApp.entityById.size===5848&&document.querySelectorAll('.tree-select').length>0"),'ACTUAL ready');
+  await waitFor(()=>page.evaluate("qaApp.entityById.size===5725&&document.querySelectorAll('.tree-select').length>0"),'ACTUAL ready');
   await t.test('initial P5.2 geometry and P5.3 controls remain independent',async()=>{
    const s=await page.evaluate("({roots:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,filters:document.querySelector('#filters-panel').hidden,tab:document.querySelector('#mobile-navigation').getAttribute('aria-pressed'),basemap:document.querySelector('#basemap-toggle').getAttribute('aria-pressed'),tiles:document.querySelectorAll('.leaflet-tile-pane img').length})");
    assert.deepEqual(s.roots,['osm-r58974','osm-r90689'].sort());assert.equal(s.selected,null);assert.equal(s.filters,true);assert.equal(s.tab,'true');assert.equal(s.basemap,'true');

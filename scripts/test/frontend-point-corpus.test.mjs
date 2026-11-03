@@ -8,5 +8,5 @@ test('P8.1 verified RO MD results equal exhaustive 123-resource scan',{timeout:1
  for(const x of probes){const r=await engine.identify(...x.p);assert.equal(r.partial,false);assert.deepEqual(r.matches.map(m=>m.entity.id),x.ids);assert.ok(r.resources.length<=5);const before=requests;await engine.identify(...x.p);assert.equal(requests,before);}
  const full=probes.map(()=>new Set()),seen=new Set(),files=(await readdir(new URL('public/geo/actual/',root),{recursive:true})).filter(p=>p.endsWith('.geojson'));assert.equal(files.length,123);
  for(const p of files){const data=await json('public/geo/actual/'+p.replaceAll('\\','/'));for(const f of data.features){seen.add(f.properties.entity_id);for(let i=0;i<probes.length;i++)if(pointInGeometry(probes[i].p,f.geometry)!=='outside')full[i].add(f.properties.entity_id);}}
- assert.equal(seen.size,5848);for(let i=0;i<probes.length;i++)assert.deepEqual([...full[i]].sort(),probes[i].ids);const before=requests;assert.equal((await engine.identify(0,0)).matches.length,0);assert.equal(requests,before);
+ assert.equal(seen.size,5725);for(let i=0;i<probes.length;i++)assert.deepEqual([...full[i]].sort(),probes[i].ids);const before=requests;assert.equal((await engine.identify(0,0)).matches.length,0);assert.equal(requests,before);
 });

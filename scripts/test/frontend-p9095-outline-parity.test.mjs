@@ -15,12 +15,12 @@ const index=read('public/data/actual-entities.json'),tree=read('public/data/actu
 const manifest=read('data/current/actual-release-manifest.json');
 const byId=new Map(index.entities.map(e=>[e.id,e]));
 const roles=validateOsmRolesCatalog(read('public/data/p907216-osm-roles.json'),byId,{snapshotId:manifest.snapshot_id,releaseFingerprint:manifest.release_fingerprint_sha256});
-const official=validateConsolidatedHierarchy(tree,byId,{expectedCount:5848});
+const official=validateConsolidatedHierarchy(tree,byId,{expectedCount:5725});
 const view=createNistreniaOperationalView({catalog:nav,roles,entityById:byId,officialNodes:official,officialRoots:tree.root_ids});
 const sha=x=>createHash('sha256').update(x).digest('hex');
 
 test('P9.0.9.5 eight individual source-only OSM outlines, no ACTUAL mutation or duplicate IDs',()=>{
- assert.equal(index.entity_count,5848);assert.equal(official.size,5848);
+ assert.equal(index.entity_count,5725);assert.equal(official.size,5725);
  assert.equal(sha(raw('public/data/p9095-osm-outlines.json')),proof.file_sha256);
  const map=validateNistreniaOutlinePackage(geo,proof,nav);
  assert.deepEqual([...map.keys()],niOutlineIds);
@@ -71,5 +71,5 @@ test('P9.0.9.5 selected source outlines round-trip without entering ACTUAL visib
   assert.equal(config.entityIds.has(id),false);
  }
  assert.equal(parseUrlState('v=2&e=view-nistrenia-unverified',config).entityId,null);
- assert.equal(byId.size,5848);assert.equal(official.size,5848);
+ assert.equal(byId.size,5725);assert.equal(official.size,5725);
 });

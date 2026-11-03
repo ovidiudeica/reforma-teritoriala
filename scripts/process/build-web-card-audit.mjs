@@ -6,7 +6,7 @@ import {cardAuditBucket,cardAuditBinding,publicOsmTags} from '../../atlas-card-a
 const input=process.argv[2];if(!input)throw Error('Indică web-card-data.jsonl verificat; nu se generează din potriviri nominale');
 const bytes=await readFile(input),records=bytes.toString('utf8').trim().split('\n').map(JSON.parse);
 const root=new URL('../../',import.meta.url),catalog=JSON.parse(await readFile(new URL('public/data/actual-entities.json',root),'utf8'));
-const entities=new Map(catalog.entities.map(e=>[e.id,e]));if(records.length!==5848||entities.size!==5848)throw Error('Inventar incomplet');
+const entities=new Map(catalog.entities.map(e=>[e.id,e]));if(catalog.entity_count!==5725||records.length!==catalog.entity_count||entities.size!==catalog.entity_count)throw Error('RT-VA1 incomplete certified card population');
 const groups=new Map(),seen=new Set();
 for(const r of records){
  const e=entities.get(r.id);if(!e||seen.has(r.id)||r.jurisdiction!==e.jurisdiction)throw Error('Identitate duplicată/incompatibilă');seen.add(r.id);

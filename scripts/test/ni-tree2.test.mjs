@@ -19,7 +19,7 @@ test('NI-TREE.2 has two tree roots and Nistrenia first within Moldova before Wes
  assert.equal(view.root.child_ids.length,7);
  assert.equal(ancestorPath(view.nodes,view.rootIds,'view-nistrenia-place-110')[0],'osm-r58974');
  assert.deepEqual(ancestorPath(view.nodes,view.rootIds,'view-nistrenia-unit-15').slice(0,3),['osm-r58974','view-nistrenia','view-nistrenia-group-osm-r1702215']);
- assert.equal(view.nodes.size,5848+243);
+ assert.equal(view.nodes.size,5725+243);
  assert.equal(view.roleIds.size,85);
  assert.equal(JSON.stringify([...officialNodes]),before);
  assert.deepEqual(model.nodes.find(n=>n.id==='view-nistrenia').child_ids.length,9);

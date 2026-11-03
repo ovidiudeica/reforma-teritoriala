@@ -160,12 +160,16 @@ const unmatchedGeneral=legalUnmatched.map(m=>{
 const unmatchedGeneralByReason=unmatchedGeneral.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const unmatchedGroups=Object.fromEntries(Object.entries(unmatchedGeneralByReason).sort().map(([reason,count])=>[reason,{count,items:unmatchedGeneral.filter(x=>x.unmatched_reason===reason)}]));
 await writeFile('data/current/md-cuatm-unmatched-review.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'Unreconciled general catalog entities only; resolved edge cases are excluded.',count:unmatchedGeneral.length,by_reason:unmatchedGeneralByReason,groups:unmatchedGroups},null,2)+'\n');
+const canonicalScope=JSON.parse(await readFile('data/sources/actual-variant-a-exclusions.json','utf8'));
+if(canonicalScope.contract!=='actual-canonical-variant-a-exclusions-v1'||nonCuatmAllotments.length!==0)throw Error('RT-VA1 excluded relation re-entered canonical CUATM reconciliation');
+const archived=JSON.parse(await readFile(canonicalScope.source_evidence.path,'utf8'));
+const expectedExcluded=new Set(canonicalScope.exclusions.map(x=>x.id));
+if(archived.count!==123||archived.items.length!==123||archived.items.some(x=>!expectedExcluded.has(x.id))||expectedExcluded.size!==123)throw Error('RT-VA1 archived register inconsistent with reviewed 123-ID source');
 await writeFile('data/current/md-cuatm-non-cuatm-allotments.json',JSON.stringify({
- generated_at:new Date().toISOString(),jurisdiction:'MD',
- reconciliation_class:'non_cuatm_allotment_boundary',
- policy:'Retained geographic entities outside current legal CUATM reconciliation. Raw OSM identifiers, geometry linkage and verified legal parent are preserved.',
- count:nonCuatmAllotments.length,
- items:nonCuatmAllotments
+ ...archived,archival_status:'EXCLUDED_FROM_CANONICAL_ACTUAL_VARIANT_A',canonical_import_count:0,
+ archival_evidence_sha256:canonicalScope.source_evidence.sha256,
+ policy:'123 reviewed OSM non-CUATM allotment polygons remain archival source evidence, not canonical ACTUAL administrative entities.',
+ count:archived.items.length,items:archived.items
 },null,2)+'\n');
 const nameAbsent=unmatchedGeneral.filter(x=>x.unmatched_reason==='name_absent_from_official_snapshot');
 const namePattern=x=>{

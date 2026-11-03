@@ -48,11 +48,11 @@ function policyExpected(entity,state,cls,sub,level){
  return (state.classes.includes(cls)&&state.subtypes.includes(sub))||statistical;
 }
 
-test('P4.1 per-ID visibility matrix: 5848 identities × 170 filter states, independent policy oracle',()=>{
+test('P4.1 per-ID visibility matrix: 5725 identities × 170 filter states, independent policy oracle',()=>{
  assert.equal(index.contract,'actual-public-entity-v3');
- assert.equal(index.entity_count,5848);
- assert.equal(entities.length,5848);
- assert.equal(byId.size,5848,'duplicate public identity');
+ assert.equal(index.entity_count,5725);
+ assert.equal(entities.length,5725);
+ assert.equal(byId.size,5725,'duplicate public identity');
  assert.deepEqual(index.entity_count_by_jurisdiction,{RO:3246,MD:2602});
  assert.equal(roles.length,63);
  assert.equal(roles.filter(e=>e.category!=='statistical').length,45);
@@ -81,7 +81,7 @@ test('P4.1 per-ID visibility matrix: 5848 identities × 170 filter states, indep
    comparisons++;
   }
  }
- assert.equal(comparisons,994160);
+ assert.equal(comparisons,973250);
  assert.equal([...seenVisible.values()].filter(count=>count===0).length,0,'identity never eligible');
  console.log('P4.1 matrix PASS: '+entities.length+' IDs × '+states.length+' states = '+comparisons+' checks; zero mismatches');
 });
@@ -89,7 +89,7 @@ test('P4.1 per-ID visibility matrix: 5848 identities × 170 filter states, indep
 test('P4.1 all identities resolve uniquely into SHA-bound geometry tiers and partitioned chunks',async()=>{
  const manifest=await json('data/current/actual-release-manifest.json');
  const publicContract=manifest.public_contract;
- assert.equal(publicContract.entity_count,5848);
+ assert.equal(publicContract.entity_count,5725);
  assert.equal(publicContract.geometry_chunks.chunk_count,115);
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
  const tierDescriptors=Object.values(publicContract.geometry_tiers).flatMap(byTier=>Object.values(byTier));
@@ -116,7 +116,7 @@ test('P4.1 all identities resolve uniquely into SHA-bound geometry tiers and par
    }
   }
  }
- assert.equal(publicCount.size,5848,'missing public geometry');
+ assert.equal(publicCount.size,5725,'missing public geometry');
  for(const entity of entities)assert.equal(publicCount.get(entity.id),1,'duplicate/missing geometry '+entity.id);
  const chunks=await json(publicContract.geometry_chunks.path);
  assert.equal(chunks.chunk_count,115);
@@ -147,5 +147,5 @@ test('P4.1 all identities resolve uniquely into SHA-bound geometry tiers and par
   assert.equal(chunkCount.get(entity.id)||0,['local','detail'].includes(entity.map.tier)?1:0,'chunk binding '+entity.id);
  }
  assert.equal(entities.length-chunkCount.size,99,'overview/statistical complement drift');
- console.log('P4.1 geometry PASS: 5848 unique bindings; 115/115 chunk SHA, bytes and feature counts; 8/8 layers');
+ console.log('P4.1 geometry PASS: 5725 unique bindings; 115/115 chunk SHA, bytes and feature counts; 8/8 layers');
 });
