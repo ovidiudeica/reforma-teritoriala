@@ -3,9 +3,16 @@ import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {cardAuditBucket,cardAuditBinding,publicOsmTags} from '../../atlas-card-audit.mjs';
-const input=process.argv[2];if(!input)throw Error('Indică web-card-data.jsonl verificat; nu se generează din potriviri nominale');
-const bytes=await readFile(input),originalRecords=bytes.toString('utf8').trim().split('\n').map(JSON.parse);
-const root=new URL('../../',import.meta.url),catalog=JSON.parse(await readFile(new URL('public/data/actual-entities.json',root),'utf8'));
+const root=new URL('../../',import.meta.url);
+// Restrict the CLI to one pinned, repository-local evidence input. Untrusted path
+// arguments must never become filesystem paths (CodeQL js/path-injection).
+const verifiedInput='docs/evidence/web-card-audit-input/web-card-data.jsonl';
+if(process.argv.length!==3||process.argv[2]!==verifiedInput)throw Error('RT-CANON: stage the verified source at '+verifiedInput+' and pass that exact literal path');
+const bytes=await readFile(new URL('docs/evidence/web-card-audit-input/web-card-data.jsonl',root));
+const expectedInputSha256='0a94d3e913593c213fbc2631893915bf4a14ecb2c8b296f690740d79cf8ec3ae';
+if(createHash('sha256').update(bytes).digest('hex')!==expectedInputSha256)throw Error('RT-CANON: exact archived source SHA-256 mismatch');
+const originalRecords=bytes.toString('utf8').trim().split('\n').map(JSON.parse);
+const catalog=JSON.parse(await readFile(new URL('public/data/actual-entities.json',root),'utf8'));
 const entities=new Map(catalog.entities.map(e=>[e.id,e]));
 const expected=catalog.entity_count;
 if(![5848,5725].includes(expected)||catalog.entities.length!==expected||entities.size!==expected)throw Error('RT-VA1 invalid public entity count');

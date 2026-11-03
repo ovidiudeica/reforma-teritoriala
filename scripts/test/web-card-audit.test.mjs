@@ -19,3 +19,13 @@ test('WEB-CARD.1: no guessed identity or incompatible release is accepted',()=>{
 test('WEB-CARD.1: privacy allowlist excludes arbitrary external fields and limits size',()=>{
  assert.deepEqual(publicOsmTags({name:'<img src=x onerror=alert(1)>',boundary:'administrative',email:'private@example.test',user:'person',uid:'1','ref:rson:idno':'1234567890123',operator:'person',note:'x','contact:phone':'x','name:ro':'Localitate',full_name:'a'.repeat(2001)}),{boundary:'administrative',name:'<img src=x onerror=alert(1)>','name:ro':'Localitate'});
 });
+
+
+test('WEB-CARD.1: RT-CANON generator refuses arbitrary CLI source paths before reading',async()=>{
+ const {spawnSync}=await import('node:child_process');
+ for(const malicious of ['../../etc/passwd','C:/Windows/win.ini','docs/evidence/web-card-audit-input/../web-card-data.jsonl']){
+  const result=spawnSync(process.execPath,['scripts/process/build-web-card-audit.mjs',malicious],{encoding:'utf8'});
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/stage the verified source/);
+ }
+});
