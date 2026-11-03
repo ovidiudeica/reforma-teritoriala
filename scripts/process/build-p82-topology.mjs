@@ -12,7 +12,12 @@ const target=p=>'public/data/topology/'+p.slice('public/geo/actual/'.length).rep
 for(const p of files){const raw=await read(p);sources[p]=hash(raw);for(const f of JSON.parse(raw).features){const id=f.properties.entity_id;if(!byId.has(id))throw Error('Identitate necunoscută '+id);if(geometries.has(id))continue;const g=readTopologyGeometry(f.geometry);geometries.set(id,g);addresses[id]=target(p);if(!shards.has(target(p)))shards.set(target(p),{contract:'actual-topology-shard-v1',entities:{}});const polygons=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;
  const parent=polygons.map((_,i)=>i),find=i=>parent[i]===i?i:parent[i]=find(parent[i]);for(let i=0;i<polygons.length;i++)for(let j=i+1;j<polygons.length;j++){const a=g.getGeometryN(i),b=g.getGeometryN(j);if(a.getEnvelopeInternal().intersects(b.getEnvelopeInternal())&&!RelateOp.relate(a,b).isDisjoint())parent[find(i)]=find(j);}
  shards.get(target(p)).entities[id]={components:polygons.length,connectedComponents:new Set(parent.map((_,i)=>find(i))).size,holes:polygons.reduce((n,r)=>n+r.length-1,0),relations:[]};}}
-if(files.length!==123||geometries.size!==5848)throw Error('Acoperire geometrică neașteptată');
+const statPolicy=await json('data/sources/actual-statistical-policy.json');
+const expectedPopulation=statPolicy?.progress?.P2_3_PUBLIC?.public_entity_count;
+const allowedPopulation=(expectedPopulation===5848&&statPolicy.p1_invariants?.expected_entity_count===5830)
+ ||(expectedPopulation===5725&&statPolicy.p1_invariants?.expected_entity_count===5707
+ &&statPolicy.scope_change==='RT-VA1 reviewed exclusion of 123 non-CUATM allotment relations; 63 statistical roles unchanged.');
+if(files.length!==123||!allowedPopulation||entities.length!==expectedPopulation||geometries.size!==expectedPopulation)throw Error('Acoperire geometrică neașteptată: contract semantic 5848/5725');
 for(const e of entities)tree.insert(geometries.get(e.id).getEnvelopeInternal(),e);
 let candidates=0;
 for(let i=0;i<entities.length;i++){const a=entities[i],ga=geometries.get(a.id),items=tree.query(ga.getEnvelopeInternal()).toArray().filter(b=>sort(b.id,a.id)>0).sort((a,b)=>sort(a.id,b.id));

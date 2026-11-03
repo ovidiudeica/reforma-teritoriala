@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {evaluateP9JurisdictionGate,parseAddedGitDiff} from '../lib/actual-p9-jurisdiction-promotion-gate.mjs';
+import {evaluateP9JurisdictionGate,parseAddedGitDiff,verifyPureReviewedGeometryRemoval} from '../lib/actual-p9-jurisdiction-promotion-gate.mjs';
 
 const policy={schema_version:'actual-p9-jurisdiction-promotion-policy-v1',
  status:'BLOCKED_PENDING_CONTEMPORARY_EVIDENCE',p91_import_allowed:false,
@@ -87,4 +87,18 @@ test('P9-adjacent MD entity cannot smuggle a generic unreviewed administrative f
  const a=gate(changed);
  assert.equal(a.status,'FAIL');
  assert.ok(a.prohibited_changes.some(x=>x.issue==='sensitive_md_new_semantic_field'));
+});
+
+test('RT-VA1 P9 geometry exception accepts only the 123 approved removed polygons',()=>{
+ const removed=Array.from({length:123},(_,i)=>'osm-r'+(300000+i));
+ const toFeature=id=>({type:'Feature',properties:{entity_id:id,geometry_role:'administrative_boundary'},geometry:{type:'Polygon',coordinates:[[[0,0],[0,1],[1,1],[0,0]]]}});
+ const retained=[toFeature('osm-r1001'),toFeature('osm-r1002')];
+ const before={type:'FeatureCollection',metadata:{feature_count:125},features:[...removed.map(toFeature),...retained]};
+ const after={type:'FeatureCollection',metadata:{feature_count:2},features:structuredClone(retained)};
+ assert.equal(verifyPureReviewedGeometryRemoval(before,after,removed).verified,true);
+ const tampered=structuredClone(after);tampered.features[0].geometry.coordinates[0][1][1]=2;
+ assert.equal(verifyPureReviewedGeometryRemoval(before,tampered,removed).verified,false);
+ assert.equal(verifyPureReviewedGeometryRemoval(before,after,removed.slice(1)).verified,false);
+ const altered=structuredClone(after);altered.features.push(toFeature('osm-r9999'));
+ assert.equal(verifyPureReviewedGeometryRemoval(before,altered,removed).verified,false);
 });

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import {applyReviewedMalcociCurrentOsmGeometry} from '../lib/md-current-osm-boundary-derivation.mjs';
+import {selectCanonicalVariantA,VARIANT_A_SCOPE_PATH,rebindVariantAStatisticalPolicy} from '../lib/actual-canonical-scope-variant-a.mjs';
 import {createHash} from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
@@ -288,6 +289,29 @@ async function main(){
    polygons=[countryFeature,...contained];
    const excluded=allPolygons.filter(f=>f!==countryFeature&&!contained.includes(f)).map(f=>relationId(f));
    if(excluded.length) report.warnings.push({type:'outside_country_boundary_excluded',jurisdiction:code,relation_ids:excluded});
+  }
+  // RT-VA1: exclude only the 123 individually reviewed MD non-CUATM horticultural allotments.
+  // The content-addressed OSM source, archival roster and legal parents remain untouched.
+  if(code==='MD'){
+   const policy=JSON.parse(await readFile(VARIANT_A_SCOPE_PATH,'utf8'));
+   const evidencePath='docs/evidence/rt-va1-semantic-exclusion/original-allotments-123.json';
+   if(policy?.source_evidence?.path!==evidencePath)throw new Error('RT-VA1 archival source path mismatch');
+   const evidenceSha=createHash('sha256').update(await readFile(evidencePath)).digest('hex');
+   if(evidenceSha!==policy.source_evidence.sha256)throw new Error('RT-VA1 archival source SHA-256 mismatch');
+   const selection=selectCanonicalVariantA(polygons,policy,{
+    jurisdiction:code,relationId,readTags:f=>f.properties?.tags||f.properties||{}
+   });
+   polygons=selection.polygons;
+   const statsPath='data/sources/actual-statistical-policy.json';
+   const statsBytes=await readFile(statsPath,'utf8');
+   const migratedStats=rebindVariantAStatisticalPolicy(JSON.parse(statsBytes));
+   const migratedBytes=JSON.stringify(migratedStats,null,2)+'\n';
+   if(migratedBytes!==statsBytes)await writeFile(statsPath,migratedBytes);
+   report.warnings.push({
+    type:'rt_va1_non_cuatm_allotments_excluded',jurisdiction:code,
+    excluded_count:selection.excluded.length,archival_source_sha256:evidenceSha,
+    excluded_ids:selection.excluded.map(x=>x.id)
+   });
   }
   const entities=polygons.map(f=>entity(code,f,osmSource.snapshot_at));
   const byId=new Map(polygons.map(f=>[`osm-r${relationId(f)}`,f]));

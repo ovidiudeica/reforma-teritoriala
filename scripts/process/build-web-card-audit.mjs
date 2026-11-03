@@ -3,10 +3,28 @@ import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {cardAuditBucket,cardAuditBinding,publicOsmTags} from '../../atlas-card-audit.mjs';
-const input=process.argv[2];if(!input)throw Error('Indică web-card-data.jsonl verificat; nu se generează din potriviri nominale');
-const bytes=await readFile(input),records=bytes.toString('utf8').trim().split('\n').map(JSON.parse);
-const root=new URL('../../',import.meta.url),catalog=JSON.parse(await readFile(new URL('public/data/actual-entities.json',root),'utf8'));
-const entities=new Map(catalog.entities.map(e=>[e.id,e]));if(records.length!==5848||entities.size!==5848)throw Error('Inventar incomplet');
+const root=new URL('../../',import.meta.url);
+// Restrict the CLI to one pinned, repository-local evidence input. Untrusted path
+// arguments must never become filesystem paths (CodeQL js/path-injection).
+const verifiedInput='docs/evidence/web-card-audit-input/web-card-data.jsonl';
+if(process.argv.length!==3||process.argv[2]!==verifiedInput)throw Error('RT-CANON: stage the verified source at '+verifiedInput+' and pass that exact literal path');
+const bytes=await readFile(new URL('docs/evidence/web-card-audit-input/web-card-data.jsonl',root));
+const expectedInputSha256='0a94d3e913593c213fbc2631893915bf4a14ecb2c8b296f690740d79cf8ec3ae';
+if(createHash('sha256').update(bytes).digest('hex')!==expectedInputSha256)throw Error('RT-CANON: exact archived source SHA-256 mismatch');
+const originalRecords=bytes.toString('utf8').trim().split('\n').map(JSON.parse);
+const catalog=JSON.parse(await readFile(new URL('public/data/actual-entities.json',root),'utf8'));
+const entities=new Map(catalog.entities.map(e=>[e.id,e]));
+const expected=catalog.entity_count;
+if(![5848,5725].includes(expected)||catalog.entities.length!==expected||entities.size!==expected)throw Error('RT-VA1 invalid public entity count');
+const records=originalRecords.filter(r=>entities.has(r.id));
+const archived=originalRecords.filter(r=>!entities.has(r.id));
+if(records.length!==expected)throw Error('RT-VA1 original card evidence coverage incomplete');
+if(expected===5848&&archived.length)throw Error('RT-VA1 unexpected historical card IDs');
+if(expected===5725){
+ const scope=JSON.parse(await readFile(new URL('docs/evidence/rt-va1-semantic-exclusion/actual-variant-a-exclusions.json',root),'utf8'));
+ const ids=new Set(scope.exclusions.map(x=>x.id));
+ if(scope.expected_exclusion_count!==123||ids.size!==123||(archived.length!==123&&archived.length!==0)||archived.some(x=>!ids.has(x.id)))throw Error('RT-VA1 historical card rows not exact 123 reviewed exclusions');
+}
 const groups=new Map(),seen=new Set();
 for(const r of records){
  const e=entities.get(r.id);if(!e||seen.has(r.id)||r.jurisdiction!==e.jurisdiction)throw Error('Identitate duplicată/incompatibilă');seen.add(r.id);
