@@ -56,6 +56,11 @@ npm run audit:actual-regression
 npm run stabilize:actual-bytes
 npm run build:actual-release-manifest
 npm run audit:actual-release-gate
+# Deterministic, hash-bound delivery derivatives of the exact release.
+# Never generate them before the release gate fixes the semantic snapshot.
+node scripts/process/build-p907216-osm-role-ui.mjs
+node --max-old-space-size=4096 scripts/process/build-p82-topology.mjs
+node scripts/process/rebind-rt-va1-card-audit.mjs
 npm run build:actual-candidate-diff
 
 # Reject unapproved P9 jurisdiction semantics before any isolated candidate branch can be promoted.

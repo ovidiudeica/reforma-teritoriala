@@ -1,4 +1,5 @@
 import {replayNiGeometry} from '../lib/ni-evidence-replay.mjs';
+import {trustedActualRelease} from '../lib/rt-va1-release-identity.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync,mkdirSync,readdirSync,lstatSync,realpathSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -18,7 +19,7 @@ const data=p=>JSON.parse(readEvidence(p));
 const manifest=data('sha256-manifest.json');
 assert.equal(manifest.status,'PRESERVED_NOT_STAGE_ACCEPTANCE');assert.equal(manifest.actual_mutation_allowed,false);assert.equal(manifest.p91_import_allowed,false);assert.equal(manifest.semantic_acceptance,'BLOCKED_INCOMPLETE');
 const actual=json('public/data/actual-entities.json'),release=json('data/current/actual-release-manifest.json'),byActual=new Map(actual.entities.map(e=>[e.id,e]));
-assert.equal(actual.entities.length,5848);assert.equal(byActual.size,5848);assert.deepEqual(['RO','MD'].map(j=>actual.entities.filter(e=>e.jurisdiction===j).length),[3246,2602]);assert.equal(release.snapshot_id,'actual-a9e5a4ddcb5277ef');assert.equal(release.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
+const accepted=trustedActualRelease(release,actual);assert.equal(actual.entities.length,accepted.entityCount);assert.equal(byActual.size,accepted.entityCount);assert.deepEqual(['RO','MD'].map(j=>actual.entities.filter(e=>e.jurisdiction===j).length),[accepted.RO,accepted.MD]);
 assert.equal(sha(readFileSync(new URL('../../public/data/actual-entities.json',import.meta.url))),release.public_contract.sha256);
 for(const c of Object.values(release.components))if(c.path&&c.sha256)assert.equal(sha(readFileSync(safeProjectPath(c.path))),c.sha256,c.path);
 function verifyManifest(){
@@ -40,5 +41,5 @@ if(process.argv.includes('--self-test')){
  }
  console.log('NI_INDEPENDENT_NEGATIVE_TESTS_PASS');
 }else if(process.argv.includes('--audit')){
- const geometry=replayGeometry(),source=performanceSource(root);assert.equal(source.trackedSourcesClean,true);const folder=new URL('../../outputs/NI-INDEPENDENT-EVIDENCE/',import.meta.url);mkdirSync(folder,{recursive:true});writeFileSync(new URL('verdict.json',folder),JSON.stringify({status:'PASS_EVIDENCE_PRESERVATION_ONLY',sourceSha:source.sha,trackedSourcesClean:true,geometry,documentary_certification:'BLOCKED_INCOMPLETE',formal_NI_JUR4_completed:false,actual_counts:{RO:3246,MD:2602,total:5848},actual_snapshot:release.snapshot_id,actual_mutation_allowed:false,p91_import_allowed:false,semantic_acceptance:'BLOCKED_INCOMPLETE'},null,2)+'\n');console.log('NI_INDEPENDENT_EVIDENCE_REPLAY_PASS '+JSON.stringify({roles:geometry.roles,outlines:geometry.outlines,valid:geometry.valid,pairs:geometry.pairs,overlaps:geometry.overlaps,equalities:geometry.equalities,missing_dependencies:geometry.missing_dependencies}));
+ const geometry=replayGeometry(),source=performanceSource(root);assert.equal(source.trackedSourcesClean,true);const folder=new URL('../../outputs/NI-INDEPENDENT-EVIDENCE/',import.meta.url);mkdirSync(folder,{recursive:true});writeFileSync(new URL('verdict.json',folder),JSON.stringify({status:'PASS_EVIDENCE_PRESERVATION_ONLY',sourceSha:source.sha,trackedSourcesClean:true,geometry,documentary_certification:'BLOCKED_INCOMPLETE',formal_NI_JUR4_completed:false,actual_counts:{RO:accepted.RO,MD:accepted.MD,total:accepted.entityCount},actual_snapshot:release.snapshot_id,actual_mutation_allowed:false,p91_import_allowed:false,semantic_acceptance:'BLOCKED_INCOMPLETE'},null,2)+'\n');console.log('NI_INDEPENDENT_EVIDENCE_REPLAY_PASS '+JSON.stringify({roles:geometry.roles,outlines:geometry.outlines,valid:geometry.valid,pairs:geometry.pairs,overlaps:geometry.overlaps,equalities:geometry.equalities,missing_dependencies:geometry.missing_dependencies}));
 }else throw Error('Use --self-test or --audit');

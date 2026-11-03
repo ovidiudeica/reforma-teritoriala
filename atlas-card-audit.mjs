@@ -1,5 +1,10 @@
 // WEB-CARD.1: numai prezentare; identitățile și geometriile ACTUAL rămân imuabile.
 export const cardAuditBinding=Object.freeze({snapshot:'actual-a9e5a4ddcb5277ef',fingerprint:'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446'});
+// Exact approved release identities; unknown or modified profiles remain rejected.
+export const approvedCardAuditBindings=Object.freeze([
+ cardAuditBinding,
+ Object.freeze({snapshot:'actual-903b934850711dc7',fingerprint:'903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e'})
+]);
 export function cardAuditBucket(id){let hash=2166136261;for(const c of String(id))hash=Math.imul(hash^c.charCodeAt(0),16777619)>>>0;return String(hash%32).padStart(2,'0');}
 export function publicOsmTags(tags){
  const allowed=/^(?:name(?::[a-z-]+)?|alt_name(?::[a-z-]+)?|official_name(?::[a-z-]+)?|short_name(?::[a-z-]+)?|full_name|admin_level|boundary|place|type|wikidata|wikipedia|ref:cuatm:(?:codunic|codstatistic|statut)|ref:siruta|ref:nuts(?::[123])?)$/;
@@ -9,8 +14,9 @@ const append=(doc,parent,tag,text,cls)=>{const el=doc.createElement(tag);if(text
 const number=(v,unit)=>Number.isFinite(v)?new Intl.NumberFormat('ro-RO',{maximumFractionDigits:unit==='km²'?6:3}).format(v)+(unit?' '+unit:''):'Nedisponibil';
 const table=(doc,parent,entries)=>{const dl=append(doc,parent,'dl',null,'kv');for(const [label,value] of entries){append(doc,dl,'dt',label);append(doc,dl,'dd',value==null||value===''?'Nedisponibil':value);}return dl;};
 export function validateCardAudit(doc,entity,manifest){
- if(manifest?.snapshot_id!==cardAuditBinding.snapshot||manifest?.release_fingerprint_sha256!==cardAuditBinding.fingerprint)throw Error('Auditul nu corespunde snapshotului ACTUAL');
- if(doc?.schema!=='web-card-audit-v1'||doc.snapshot!==cardAuditBinding.snapshot||doc.fingerprint!==cardAuditBinding.fingerprint)throw Error('Contract de audit incompatibil');
+ const approved=approvedCardAuditBindings.find(b=>b.snapshot===manifest?.snapshot_id&&b.fingerprint===manifest?.release_fingerprint_sha256);
+ if(!approved)throw Error('Auditul nu corespunde niciunui snapshot ACTUAL autorizat');
+ if(doc?.schema!=='web-card-audit-v1'||doc.snapshot!==approved.snapshot||doc.fingerprint!==approved.fingerprint)throw Error('Contract de audit incompatibil');
  const row=doc.records?.[entity.id];if(!row||row.id!==entity.id||row.jurisdiction!==entity.jurisdiction)throw Error('Identitate de audit incompatibilă');
  if(row.legal_registry!==(entity.legal?.registry||null)||row.legal_id!==(entity.legal?.id||null))throw Error('Binding oficial diferit de contractul ACTUAL');
  return row;
@@ -42,7 +48,7 @@ export function createCardAudit({document,fetch,getManifest,getEntity}){
     append(document,osm,'p',row.osmb_present?'Tagurile sunt date cartografice necertificate juridic. Câmpurile personale, de contact și cele neincluse în lista publică sunt omise.':'Obiectul nu are corespondent în arhiva OSMB fixată; nu sunt inventate taguri sau metadate.','hint');
     append(document,osm,'p','© OpenStreetMap contributors · ODbL. OSMB este un snapshot cartografic, nu un registru juridic.','hint');
     const audit=append(document,body,'details',null,'atlas-panel-disclosure');append(document,audit,'summary','Proveniență și verificare');
-    table(document,audit,[['Clasificator',row.classifier],['Ultima verificare documentată','01.11.2026'],['Snapshot ACTUAL',cardAuditBinding.snapshot],['Sursa geometriei',entity.representation?.geometry_source||entity.representation?.source],['Reconciliere',entity.validation?.legal_identity_status],['Încrederea bindingului oficial',entity.legal?.confidence],['SHA-256 geometrie ACTUAL',row.geometry_sha256],['SHA-256 arhivă OSMB',row.osmb_archive_sha256],['Baseline probatoriu',row.baseline],['Starea promovării','Nicio promovare autorizată prin card']]);
+    table(document,audit,[['Clasificator',row.classifier],['Ultima verificare documentată','01.11.2026'],['Snapshot ACTUAL',getManifest()?.snapshot_id],['Sursa geometriei',entity.representation?.geometry_source||entity.representation?.source],['Reconciliere',entity.validation?.legal_identity_status],['Încrederea bindingului oficial',entity.legal?.confidence],['SHA-256 geometrie ACTUAL',row.geometry_sha256],['SHA-256 arhivă OSMB',row.osmb_archive_sha256],['Baseline probatoriu',row.baseline],['Starea promovării','Nicio promovare autorizată prin card']]);
    }catch(error){status.textContent='Dovezile suplimentare nu sunt disponibile pentru acest snapshot. Identitatea și acțiunile cardului rămân disponibile.';status.dataset.auditUnavailable='true';}
    finally{body.removeAttribute('aria-busy');}
   });return panel;

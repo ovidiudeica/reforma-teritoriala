@@ -2,13 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {validateProvenanceBoundary} from '../audit/web-r2a1-provenance-boundary.mjs';
 const dir='docs/evidence/ni-fin31-host-qualification-20261025/';
 const current='docs/evidence/p905-20261101/';
+const previousMain='b005f2cf2e5842eae33fc575c84617fac960e507';
+const previousBytes=p=>execFileSync('git',['show',previousMain+':'+p]);
 function fixture(){
  const admissionBytes=readFileSync(current+'exact-provenance-admission.json');
  const admission=JSON.parse(admissionBytes);
- const buffers=Object.fromEntries(Object.keys(admission.files).map(p=>[p,readFileSync(p)]));
+ const buffers=Object.fromEntries(Object.keys(admission.files).map(p=>[p,previousBytes(p)]));
  return {changed:Object.keys(buffers),read:p=>buffers[p],buffers,admissionBytes,
  baseline:JSON.parse(readFileSync(dir+'baseline-release-manifest.json')),
  authorizationBytes:{'owner-authorization.json':readFileSync(current+'owner-authorization.json')}};

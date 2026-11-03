@@ -210,7 +210,7 @@ export async function validateActualStatisticalContract({readFileFn=readFile}={}
   activated
    ? publicIndex?.contract==='actual-public-entity-v3'
      &&Number(publicIndex?.schema_version)===3
-     &&publicIndex?.entity_count===5848
+     &&publicIndex?.entity_count===Number(policy?.progress?.P2_3_PUBLIC?.public_entity_count??policy?.progress?.public_entity_count)
      &&statOnly.length===18
      &&statRole.length===63
    : publicIndex?.contract===expected.expected_public_contract
