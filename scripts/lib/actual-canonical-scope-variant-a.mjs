@@ -43,3 +43,32 @@ export function selectCanonicalVariantA(polygons,policy,{jurisdiction,relationId
  if(polygons.length-scoped.length!==123)throw Error('RT-VA1 excluded-count drift');
  return {polygons:scoped,excluded};
 }
+
+const VARIANT_A_STATISTICAL_SCOPE_NOTE='RT-VA1 reviewed exclusion of 123 non-CUATM allotment relations; 63 statistical roles unchanged.';
+
+export function rebindVariantAStatisticalPolicy(policy){
+ if(policy?.mode!=='ACTUAL_STATISTICAL_POLICY'||policy.phase!=='P2_ACTIVATED'||policy.activated!==true||
+ policy.progress?.P2_3_PUBLIC?.status!=='active'||policy.progress.P2_3_PUBLIC.public_contract!=='actual-public-entity-v3')throw Error('RT-VA1 statistical policy contract invalid');
+ const before=[
+  policy.p1_invariants?.expected_entity_count,
+  policy.p1_invariants?.expected_entity_count_by_jurisdiction?.RO,
+  policy.p1_invariants?.expected_entity_count_by_jurisdiction?.MD,
+  policy.progress.P2_3_PUBLIC.public_entity_count,
+  policy.progress.P2_3_PUBLIC.entity_count_by_jurisdiction?.RO,
+  policy.progress.P2_3_PUBLIC.entity_count_by_jurisdiction?.MD,
+  policy.progress.P2_3_PUBLIC.statistical_role_entity_count
+ ];
+ const old=[5830,3234,2596,5848,3246,2602,63];
+ const activated=[5707,3234,2473,5725,3246,2479,63];
+ const isOld=JSON.stringify(before)===JSON.stringify(old);
+ const isActivated=JSON.stringify(before)===JSON.stringify(activated)&&policy.scope_change===VARIANT_A_STATISTICAL_SCOPE_NOTE;
+ if(!isOld&&!isActivated)throw Error('RT-VA1 statistical population differs from reviewed baseline');
+ if(isActivated)return policy;
+ const next=structuredClone(policy);
+ next.p1_invariants.expected_entity_count=5707;
+ next.p1_invariants.expected_entity_count_by_jurisdiction.MD=2473;
+ next.progress.P2_3_PUBLIC.public_entity_count=5725;
+ next.progress.P2_3_PUBLIC.entity_count_by_jurisdiction.MD=2479;
+ next.scope_change=VARIANT_A_STATISTICAL_SCOPE_NOTE;
+ return next;
+}
