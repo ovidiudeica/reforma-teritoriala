@@ -108,7 +108,7 @@ try{changed=execFileSync('git',['diff','--name-only',BASE,'HEAD'],{encoding:'utf
 catch(e){die('cannot compare audit branch to base SHA: '+e.message);}
 const protectedChanges=changed.filter(p=>p==='data'||p.startsWith('data/')||p==='public'||p.startsWith('public/'));
 const provenanceBoundary=auditProvenanceBoundary(BASE);
-if(protectedChanges.length&&!['OWNER_AUTHORIZED_EXACT_P905_PROVENANCE','OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V2'].includes(provenanceBoundary.mode))die('protected changes not admitted');
+if(protectedChanges.length&&!['OWNER_AUTHORIZED_EXACT_P905_PROVENANCE','OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V2','OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V3'].includes(provenanceBoundary.mode))die('protected changes not admitted');
 
 const actualRows=[],byId=new Map(),ids=new Set();
 for(const e of actual.entities){
@@ -290,9 +290,10 @@ if(VERIFY_MANIFEST){
   // Preserve the historical census manifest byte-for-byte. Only the three
   // owner-authorized provenance inputs may be rebound; all census outputs,
   // public inputs, and persisted per-ID registries must remain identical.
-  if(provenanceBoundary.mode!=='OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V2')
+  if(!['OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V2','OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V3'].includes(provenanceBoundary.mode))
    die('committed SHA-256 manifest differs from regenerated evidence');
-  const admission=JSON.parse(await readFile('docs/evidence/p905-20261026/exact-provenance-admission.json','utf8'));
+  const admissionPath=provenanceBoundary.mode==='OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V3'?'docs/evidence/p905-20261101/exact-provenance-admission.json':'docs/evidence/p905-20261026/exact-provenance-admission.json';
+  const admission=JSON.parse(await readFile(admissionPath,'utf8'));
   const authorizedPaths=[
    'data/current/actual-release-manifest.json',
    'data/current/actual-release-gate.json',

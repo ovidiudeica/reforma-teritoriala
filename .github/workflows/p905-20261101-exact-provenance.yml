@@ -1,0 +1,59 @@
+name: P9.0.5 exact 20261101 provenance Linux receipt
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/actual-host-trust.mjs'
+      - 'scripts/audit/web-r2a1-provenance-boundary.mjs'
+      - 'scripts/test/actual-host-trust.test.mjs'
+      - 'scripts/test/web-r2a1-provenance-boundary.test.mjs'
+      - 'data/current/actual-host-trust-manifest.json'
+      - 'data/current/actual-build-environment-manifest.json'
+      - 'data/current/actual-build-environment-gate.json'
+      - 'data/current/actual-release-manifest.json'
+      - 'data/current/actual-release-gate.json'
+      - 'data/current/actual-release-persisted.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux-receipt:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'ovidiudeica/reforma-teritoriala' && github.event.pull_request.head.ref == 'actual/provenance-20261101-3601-20261103'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Regenerate true Linux host, environment, release and quality proofs
+        run: |
+          set -euo pipefail
+          node scripts/process/build-actual-host-trust-manifest.mjs > /tmp/p905-host.json
+          node scripts/process/build-actual-build-environment-manifest.mjs > /tmp/p905-environment.json
+          node scripts/process/audit-actual-build-environment-gate.mjs > /tmp/p905-environment-gate.json
+          node scripts/process/build-actual-release-manifest.mjs > /tmp/p905-release.json
+          node scripts/process/audit-actual-release-gate.mjs > /tmp/p905-release-gate.json
+          node scripts/process/verify-actual-persisted-base.mjs
+          node --test scripts/test/actual-host-trust.test.mjs scripts/test/web-r2a1-provenance-boundary.test.mjs
+      - name: Compare Linux-generated six manifest bytes to approved branch
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- data/current/actual-build-environment-gate.json data/current/actual-build-environment-manifest.json data/current/actual-host-trust-manifest.json data/current/actual-release-gate.json data/current/actual-release-manifest.json data/current/actual-release-persisted.json
+      - name: Upload runtime-authentic candidate provenance
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: p905-20261101-linux-provenance-receipt
+          if-no-files-found: error
+          path: |
+            data/current/actual-build-environment-gate.json
+            data/current/actual-build-environment-manifest.json
+            data/current/actual-host-trust-manifest.json
+            data/current/actual-release-gate.json
+            data/current/actual-release-manifest.json
+            data/current/actual-release-persisted.json
