@@ -84,12 +84,12 @@ async function computeMatrix(){
 
 try{
  await test('P4.2 Chrome/CDP RO+MD cartographic matrix',{timeout:840000},async t=>{
-  await check(t,'exhaustive runtime per-ID matrix: 5848 x 170',async()=>{
+  await check(t,'exhaustive runtime per-ID matrix: 5725 x 170',async()=>{
    await page.viewport(1440,900);await page.navigate(browser.server.url);
    const data=await page.evaluate('('+computeMatrix.toString()+')()');
    evidence.matrix=data;
    assert.deepEqual([data.identities,data.states,data.checks,data.mismatches,data.everVisible],
-    [5848,170,994160,0,5848],JSON.stringify(data.first));
+    [5725,170,973250,0,5725],JSON.stringify(data.first));
    assert.deepEqual(data.jurisdictions,{RO:3246,MD:2602});
   });
   await check(t,'14 real polygon selections and zoom across 7 viewports RO/MD',async()=>{

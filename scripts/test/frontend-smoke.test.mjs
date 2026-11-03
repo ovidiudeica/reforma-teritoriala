@@ -26,8 +26,8 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
  assert.equal(buildInfo.app_version,'web-v1.2');
  assert.equal(buildInfo.app_commit,'54e6673141ec21fb3a68cca41ce1e747256eef21');
  assert.equal(buildInfo.actual_release_tag,'actual-v1.2.0');
- assert.equal(buildInfo.actual_snapshot_id,'actual-a9e5a4ddcb5277ef');
- assert.equal(buildInfo.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
+ assert.equal(buildInfo.actual_snapshot_id,'actual-903b934850711dc7');
+ assert.equal(buildInfo.release_fingerprint_sha256,'903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e');
  assert.equal(buildInfo.actual_snapshot_id,manifest.snapshot_id);
  assert.equal(buildInfo.release_fingerprint_sha256,manifest.release_fingerprint_sha256);
  assert.doesNotMatch(app,/Build metadata nu corespunde snapshot-ului ACTUAL/);
@@ -68,10 +68,10 @@ test('ACTUAL v3 public contract exposes a consolidated statistical hierarchy whe
  if(manifest.public_contract?.contract!=='actual-public-entity-v3')return;
  const index=JSON.parse(await readFile(manifest.public_contract.path,'utf8'));
  const tree=JSON.parse(await readFile(manifest.public_contract.hierarchy.path,'utf8'));
- assert.equal(index.entity_count,5848);
+ assert.equal(index.entity_count,5725);
  assert.equal(index.statistical_only_entity_count,18);
  assert.equal(index.statistical_role_entity_count,63);
  assert.equal(tree.contract,'actual-consolidated-hierarchy-v1');
- assert.equal(tree.node_count,5848);
+ assert.equal(tree.node_count,5725);
  assert.deepEqual(tree.root_ids,['osm-r90689','osm-r58974']);
 });

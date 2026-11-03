@@ -16,9 +16,9 @@ const corrupt=(mutation,pattern)=>{
 };
 const byNode=(data,id)=>data.nodes.find(node=>node.id===id);
 
-test('P3.3 valid 5848-node RO+MD ACTUAL release tree passes exact frontend contract',()=>{
+test('P3.3 valid 5725-node RO+MD ACTUAL release tree passes exact frontend contract',()=>{
  const result=validate();
- assert.equal(result.size,5848);
+ assert.equal(result.size,5725);
  assert.deepEqual(tree.root_ids,['osm-r90689','osm-r58974']);
  assert.equal(result.get(tree.root_ids[0]).depth,0);
  assert.equal(result.get(tree.root_ids[1]).depth,0);

@@ -10,7 +10,7 @@ try{
  await test('P5.4.1b real UX remediation: strict 900px, filters reset, hidden geometry and persistence',{timeout:180000},async t=>{
   await page.viewport(1440,900);
   await page.navigate(browser.server.url);
-  await waitFor(()=>page.evaluate("qaApp.entityById.size===5848"),'5,848 entities loaded');
+  await waitFor(()=>page.evaluate("qaApp.entityById.size===5725"),'5,848 entities loaded');
   await t.test('disabled PROPUNERI, touch targets, default filters and roots',async()=>{
    const s=await page.evaluate("({proposal:document.querySelector('[data-mode=propuneri]').disabled,actual:document.querySelector('[data-mode=actual]').disabled,filters:document.querySelector('#filters-count').textContent,reset:document.querySelector('#filters-reset').disabled,roots:[...qaApp.visibleEntityIds].sort(),target:document.querySelector('#filters-toggle').getBoundingClientRect().height})");
    assert.equal(s.proposal,true);assert.equal(s.actual,false);assert.equal(s.filters,'(1 dezactivat)');assert.equal(s.reset,false);assert.deepEqual(s.roots,['osm-r58974','osm-r90689'].sort());assert.ok(s.target>=44);

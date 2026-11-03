@@ -30,7 +30,7 @@ test('NI-TREE.1 has seven administrative first-level branches and 85 associated 
  assert.equal(view.nodes.get('view-nistrenia-unit-16').parent_id,'view-nistrenia-group-osm-r1702217');
  assert.equal(view.nodes.get('view-nistrenia-role-osm-r19001619').parent_id,'view-nistrenia-group-osm-r1702215');
  assert.equal(nistreniaSearchEntities(view,entityById).length,243);
- assert.equal(officialNodes.size,5848);
+ assert.equal(officialNodes.size,5725);
  assert.equal(model.nodes.find(x=>x.id==='view-nistrenia').child_ids.length,9,'original 2023 evidence must stay untouched');
 });
 

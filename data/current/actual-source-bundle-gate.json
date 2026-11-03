@@ -3,8 +3,8 @@
   "mode": "ACTUAL_SOURCE_BUNDLE_GATE",
   "generated_at": "2026-10-05T23:50:05.218Z",
   "source_bundle_path": "data/current/actual-source-bundle-manifest.json",
-  "source_bundle_sha256": "3509b50e34b2597bc6cbd41b2a0a49a63e9a3c6e5d77dcfb43c94b83e965f2b1",
-  "bundle_fingerprint_sha256": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
+  "source_bundle_sha256": "05fd2fb5c4ee99334e35128c549219a1d7669bb841121f10f48c686abd70f6c3",
+  "bundle_fingerprint_sha256": "0bf09553f30f41acef3923b04c10ef9892dc63ff3771f8bb15f746643403017b",
   "status": "PASS",
   "policy": "Fail closed unless the source-bundle manifest exactly matches all currently activated ACTUAL sources: OSM, SIRUTA, CUATM and any explicitly policy-bound ANCPI/RELUAT fallback bytes. Both durable OSM raw snapshots and every activated fallback source must remain cryptographically exact.",
   "checks": [
@@ -28,7 +28,7 @@
       "name": "bundle_sources_match_current_sources",
       "ok": true,
       "detail": {
-        "source_count": 4,
+        "source_count": 5,
         "osm_country_count": 2
       }
     },
@@ -37,8 +37,8 @@
       "ok": true,
       "detail": {
         "algorithm": "actual-source-bundle-v1",
-        "expected": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b",
-        "actual": "af47dea86743da4fe6dc95928b5b3e311b83f392b1bc094568a47a2af27c657b"
+        "expected": "0bf09553f30f41acef3923b04c10ef9892dc63ff3771f8bb15f746643403017b",
+        "actual": "0bf09553f30f41acef3923b04c10ef9892dc63ff3771f8bb15f746643403017b"
       }
     }
   ],

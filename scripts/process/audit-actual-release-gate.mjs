@@ -492,7 +492,7 @@ if(publicContractV3){
  const statOnly=publicEntities.filter(x=>String(x.id).startsWith('stat-'));
  const reusedStat=publicEntities.filter(x=>!String(x.id).startsWith('stat-')&&x.roles?.includes('statistical'));
  check('statistical_public_contract_counts_are_exact',
-  publicIndex.administrative_entity_count===5830
+  publicIndex.administrative_entity_count===statPolicy.p1_invariants.expected_entity_count
   &&publicIndex.statistical_only_entity_count===18
   &&publicIndex.statistical_role_entity_count===63
   &&statOnly.length===18&&reusedStat.length===45,
@@ -510,8 +510,8 @@ if(publicContractV3){
   {model:manifest.statistical_model??null});
  check('consolidated_tree_is_exact_and_bound',
   tree.contract==='actual-consolidated-hierarchy-v1'
-  &&tree.node_count===5848&&(tree.nodes||[]).length===5848
-  &&new Set((tree.nodes||[]).map(n=>n.id)).size===5848
+  &&tree.node_count===publicIndex.entity_count&&(tree.nodes||[]).length===publicIndex.entity_count
+  &&new Set((tree.nodes||[]).map(n=>n.id)).size===publicIndex.entity_count
   &&manifest.public_contract?.hierarchy?.path===paths.consolidated_tree
   &&manifest.public_contract?.hierarchy?.contract===tree.contract
   &&manifest.public_contract?.hierarchy?.node_count===tree.node_count

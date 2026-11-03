@@ -36,13 +36,13 @@ test('permanent Romanian casing for RO and MD: proper words, particles, hyphen, 
  assert.equal(formatEntityName('<img src=x>'),'<img src=x>');
 });
 
-test('casing is idempotent on all 5848 released names and hierarchy labels; public bytes untouched',async()=>{
+test('casing is idempotent on all 5725 released names and hierarchy labels; public bytes untouched',async()=>{
  const [rawIndex,rawHierarchy]=await Promise.all([
   readFile('public/data/actual-entities.json','utf8'),
   readFile('public/data/actual-consolidated-tree.json','utf8')
  ]);
  const entities=JSON.parse(rawIndex).entities,nodes=JSON.parse(rawHierarchy).nodes;
- assert.equal(entities.length,5848);assert.equal(nodes.length,5848);
+ assert.equal(entities.length,5725);assert.equal(nodes.length,5725);
  let changed=0;
  for(const record of [...entities,...nodes]){
   const name=record.display_name,formatted=formatEntityName(name);

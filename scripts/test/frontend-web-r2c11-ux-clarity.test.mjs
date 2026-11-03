@@ -118,7 +118,7 @@ test('WEB-R2c.1.1: empty state is distinct from loading/errors and URL/Undo impl
 test('WEB-R2c.1.1: public ACTUAL corpus counts are independent of DOM virtualization',async()=>{
  const [index,tree]=await Promise.all(['public/data/actual-entities.json','public/data/actual-consolidated-tree.json'].map(async p=>JSON.parse(await readFile(p,'utf8'))));
  const nodeById=new Map(tree.nodes.map(n=>[n.id,n])),entityById=new Map(index.entities.map(e=>[e.id,e]));
- assert.equal(entityById.size,5848);
+ assert.equal(entityById.size,5725);
  const context={entityById,osmRoleById:new Map()};
  const all=osmTreeFilterSummary(nodeById,tree.root_ids,allOsmLevelFilters(),context);
  assert.equal(all.matches+all.ancestors,all.visibleIds.size);

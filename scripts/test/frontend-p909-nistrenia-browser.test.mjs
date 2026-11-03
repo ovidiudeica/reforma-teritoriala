@@ -16,7 +16,7 @@ try{
    const state=await page.evaluate("({toggle:!!document.getElementById('nistrenia-osm-toggle'),panel:!!document.getElementById('nistrenia-osm-panel'),roots:qaApp.nistreniaView.rootIds,groups:qaApp.nistreniaView.groupIds.length,roles:qaApp.nistreniaView.roleIds.size,mapped:qaApp.nistreniaView.associationByResource.size,nodes:qaApp.nistreniaView.nodes.size,official:qaApp.nistreniaView.officialNodeCount,rootChildren:qaApp.nistreniaView.root.child_ids,hasCatalog:qaApp.nistreniaView.nodes.has('view-nistrenia-cartographic-navigation'),defaultOperational:[...qaApp.visibleOperationalOutlineIds]})");
    assert.equal(state.toggle,false);assert.equal(state.panel,false);
    assert.equal(state.groups,7);assert.equal(state.roles,85);assert.equal(state.mapped,85);
-   assert.equal(state.nodes,5848+243);assert.equal(state.official,5848);
+   assert.equal(state.nodes,5725+243);assert.equal(state.official,5725);
    assert.equal(state.rootChildren.length,7);assert.equal(state.hasCatalog,false);
    assert.deepEqual(state.roots.slice(0,2).sort(),['osm-r58974','osm-r90689'].sort());
    assert.equal(state.roots.length,2);

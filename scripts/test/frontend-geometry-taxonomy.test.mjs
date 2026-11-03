@@ -10,11 +10,11 @@ const options=()=>({geometryClasses:new Set(Object.keys(geometryLabels)),statist
 
 test('v3 geometry taxonomy covers the exact audited ACTUAL population',()=>{
  assert.equal(index.contract,'actual-public-entity-v3');
- assert.equal(index.entity_count,5848);
- assert.equal(entities.length,5848);
+ assert.equal(index.entity_count,5725);
+ assert.equal(entities.length,5725);
  const counts={context:0,regional:0,local_uat:0,sector:0,component_locality:0,auxiliary:0,statistical_only:0,unclassified:0};
  for(const entity of entities)counts[geometryClass(entity)]++;
- assert.deepEqual(counts,{context:2,regional:79,local_uat:4162,sector:11,component_locality:1454,auxiliary:122,statistical_only:18,unclassified:0});
+ assert.deepEqual(counts,{context:2,regional:79,local_uat:4162,sector:11,component_locality:1453,auxiliary:0,statistical_only:18,unclassified:0});
 });
 
 test('representation overrides legal and display types; unknown types stay explicit',()=>{
@@ -29,7 +29,7 @@ test('representation overrides legal and display types; unknown types stay expli
   assert.equal(geometryClass(entity),'component_locality');
   assert.ok(!['commune','town','municipality','regional','local_uat'].includes(geometryClass(entity)));
  }
- for(const [type,expected,count] of [['chisinau_sector','sector',5],['sector','sector',6],['non_administrative_or_auxiliary_area','auxiliary',122],['state','context',2]]){
+ for(const [type,expected,count] of [['chisinau_sector','sector',5],['sector','sector',6],['non_administrative_or_auxiliary_area','auxiliary',0],['state','context',2]]){
   const matches=entities.filter(e=>e.representation.inferred_type===type);
   assert.equal(matches.length,count);
   for(const entity of matches)assert.equal(geometryClass(entity),expected);
@@ -106,8 +106,8 @@ test('statistical levels expose all 63 statistical entities through reused or se
 
 test('release identity and every bound ACTUAL component retain exact bytes',async()=>{
  const manifest=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
- assert.equal(manifest.snapshot_id,'actual-a9e5a4ddcb5277ef');
- assert.equal(manifest.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
+ assert.equal(manifest.snapshot_id,'actual-903b934850711dc7');
+ assert.equal(manifest.release_fingerprint_sha256,'903b934850711dc7418e25087cb151a2c8d68f4746fdf761d0749ae63c52fd2e');
  for(const component of Object.values(manifest.components)){
   const bytes=await readFile(component.path);
   assert.equal(createHash('sha256').update(bytes).digest('hex'),component.sha256,component.path);
@@ -145,7 +145,7 @@ test('actual frontend rendering and selection respect filters, including async s
  const fixtures={
   'data/current/actual-release-manifest.json':{
    snapshot_id:'fixture',public_contract:{
-    contract:index.contract,path:'index',entity_count:5848,
+    contract:index.contract,path:'index',entity_count:5725,
     geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),
     statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}
    }

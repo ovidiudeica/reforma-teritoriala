@@ -23,7 +23,7 @@ test('NI-TREE.1 exposes exactly seven top-level UI branches without changing pro
  assert.equal(view.root.child_ids.length,7);
  assert.equal(view.groupIds.length,7);
  assert.equal(view.virtualIds.size,243);
- assert.equal(view.nodes.size,5848+243);
+ assert.equal(view.nodes.size,5725+243);
  assert.deepEqual(view.root.child_ids,[
   'view-nistrenia-group-osm-r1702216',
   'view-nistrenia-group-osm-r1702217',
@@ -78,6 +78,6 @@ test('NI-TREE.1 preserves one geometry toggle per known node and canonical MD vi
  assert.equal(view.primaryGeometryForNode('view-nistrenia-group-osm-r1702215'),null);
  assert.equal(view.primaryGeometryForNode('view-nistrenia-group-osm-r1702217'),null);
  assert.equal(view.primaryGeometryForNode('view-nistrenia'),null);
- assert.equal(officialNodes.size,5848);
+ assert.equal(officialNodes.size,5725);
  assert.deepEqual([...tree.root_ids].sort(),['osm-r58974','osm-r90689'].sort());
 });

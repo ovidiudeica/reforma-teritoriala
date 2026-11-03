@@ -106,3 +106,26 @@ export function parseAddedGitDiff(diff){
  }
  return rows;
 }
+
+// RT-VA1: protect P9 despite line-oriented diffs of serialized GeoJSON.
+// Allow only exact removal of individually vetted non-CUATM source polygons.
+// All retained feature objects and all non-count metadata must be unchanged.
+export function verifyPureReviewedGeometryRemoval(before,after,expectedRemovedIds){
+ if(before?.type!=='FeatureCollection'||after?.type!=='FeatureCollection')return {verified:false};
+ if(!Array.isArray(before.features)||!Array.isArray(after.features))return {verified:false};
+ const ids=Array.isArray(expectedRemovedIds)?expectedRemovedIds:[];
+ if(ids.length!==123||new Set(ids).size!==123)return {verified:false};
+ const id=f=>f?.properties?.catalog_id||f?.properties?.entity_id||null;
+ const old=new Map(before.features.map(f=>[id(f),f]));
+ const next=new Map(after.features.map(f=>[id(f),f]));
+ if(old.size!==before.features.length||next.size!==after.features.length||[...old.keys()].some(k=>!k))return {verified:false};
+ if(old.size-next.size!==123)return {verified:false};
+ const removed=[...old.keys()].filter(k=>!next.has(k)),required=new Set(ids);
+ if(removed.length!==123||removed.some(k=>!required.has(k)))return {verified:false};
+ for(const [key,value] of next)if(!old.has(key)||JSON.stringify(old.get(key))!==JSON.stringify(value))return {verified:false};
+ const meta=structuredClone(before),newMeta=structuredClone(after);
+ delete meta.features;delete newMeta.features;
+ if(meta.metadata?.feature_count!==undefined)meta.metadata.feature_count=after.features.length;
+ if(JSON.stringify(meta)!==JSON.stringify(newMeta))return {verified:false};
+ return {verified:true,removed_count:removed.length,retained_count:next.size,proof:'exact_feature_identity_plus_reviewed_123_roster'};
+}

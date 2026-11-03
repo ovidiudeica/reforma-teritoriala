@@ -16,7 +16,7 @@ try{
   await t.test('catalog/search/filter presentation is absent while runtime contract stays intact',async()=>{
    const state=await page.evaluate("({panel:!!document.querySelector('#osm-roles-panel'),search:!!document.querySelector('#osm-roles-search'),filter:!!document.querySelector('#osm-roles-filter'),list:!!document.querySelector('#osm-roles-list'),roles:qaApp.osmRoleById.size,nistreniaRoles:qaApp.nistreniaView.roleIds.size,groups:qaApp.nistreniaView.groupIds.length,officialNodes:qaApp.nistreniaView.officialNodeCount,defaultIds:[...qaApp.visibleEntityIds].sort(),defaultOperational:[...qaApp.visibleOperationalOutlineIds].sort(),p91:qaApp.nistreniaCatalog.p91_import_allowed,semantic:qaApp.nistreniaCatalog.legal_semantic_acceptance,actualMutation:qaApp.nistreniaCatalog.actual_mutation_allowed})");
    assert.deepEqual([state.panel,state.search,state.filter,state.list],[false,false,false,false]);
-   assert.equal(state.roles,85);assert.equal(state.nistreniaRoles,85);assert.equal(state.groups,7);assert.equal(state.officialNodes,5848);
+   assert.equal(state.roles,85);assert.equal(state.nistreniaRoles,85);assert.equal(state.groups,7);assert.equal(state.officialNodes,5725);
    assert.deepEqual(state.defaultIds,['osm-r58974','osm-r90689'].sort());
    assert.deepEqual(state.defaultOperational,[]);
    assert.equal(state.p91,false);assert.equal(state.semantic,'BLOCKED_INCOMPLETE');assert.equal(state.actualMutation,false);
@@ -38,7 +38,7 @@ try{
    assert.match(state.card,/OpenStreetMap/);assert.match(state.card,/Neacordată/);
    assert.match(state.legal,/Identitate oficială/);
    assert.equal(state.link,'https://www.openstreetmap.org/relation/9581354');
-   assert.equal(state.rootCount,5848);
+   assert.equal(state.rootCount,5725);
    const requests=page.requests.map(x=>new URL(x.url).pathname).filter(x=>x.endsWith('.geojson'));
    assert(requests.every(url=>url.startsWith('/public/geo/actual/')),'Fetched an additional P9 geometry resource');
   });

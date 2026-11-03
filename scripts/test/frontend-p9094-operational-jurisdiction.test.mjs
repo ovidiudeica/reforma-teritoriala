@@ -13,13 +13,13 @@ const tree=read('public/data/actual-consolidated-tree.json');
 const catalog=read('public/data/p909-nistrenia-osm-navigation.json');
 const byId=new Map(index.entities.map(e=>[e.id,e]));
 const roles=validateOsmRolesCatalog(read('public/data/p907216-osm-roles.json'),byId,{snapshotId:manifest.snapshot_id,releaseFingerprint:manifest.release_fingerprint_sha256});
-const official=validateConsolidatedHierarchy(tree,byId,{expectedCount:5848});
+const official=validateConsolidatedHierarchy(tree,byId,{expectedCount:5725});
 const make=()=>createNistreniaOperationalView({catalog,roles,entityById:byId,officialNodes:official,officialRoots:tree.root_ids});
 
 test('P9.0.9.4 exactly 3 UI jurisdictions, 7 geometric groups and 85 aliases without a new ACTUAL polygon',()=>{
  const view=make();
- assert.equal(index.entity_count,5848);
- assert.equal(official.size,5848);
+ assert.equal(index.entity_count,5725);
+ assert.equal(official.size,5725);
  assert.equal(view.nodes.size,5941);
  assert.deepEqual(view.rootIds,[...tree.root_ids,NISTR_EN_ROOT]);
  assert.equal(view.nodes.get(NISTR_EN_ROOT).display_name,'Nistrenia');
@@ -55,7 +55,7 @@ test('P9.0.9.4 search indexes third operational group without changing legal ACT
  assert(search.some(x=>x.searchable_names.includes('Transnistria')));
  assert.equal(index.entities.find(e=>e.id==='osm-r9581354').jurisdiction,'MD');
  assert.equal(official.get('osm-r9581354').jurisdiction,'MD');
- assert.equal(byId.size,5848);
+ assert.equal(byId.size,5725);
 });
 test('P9.0.9.4 NI URL filter is independent and survives sharing, old URL defaults unchanged',()=>{
  const view=make();
