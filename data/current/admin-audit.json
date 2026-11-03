@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-10-05T23:50:05.218Z",
   "source_generated_at": "2026-10-05T23:50:05.218Z",
-  "entity_count": 5830,
+  "entity_count": 5707,
   "countries": {
     "RO": {
       "feature_count": 3234,
@@ -163,32 +163,30 @@
       ]
     },
     "MD": {
-      "feature_count": 2596,
-      "review_required": 267,
+      "feature_count": 2473,
+      "review_required": 144,
       "distributions": {
         "admin_level": {
           "2": 1,
           "4": 37,
           "7": 5,
           "8": 982,
-          "9": 1571
+          "9": 1448
         },
         "place": {
-          "∅": 150,
+          "∅": 149,
           "municipality": 410,
           "district": 32,
           "village": 1763,
           "region": 2,
           "city": 24,
-          "town": 93,
-          "allotments": 122
+          "town": 93
         },
         "designation": {
-          "∅": 2596
+          "∅": 2473
         },
         "osm_type": {
-          "boundary": 2542,
-          "multipolygon": 54
+          "boundary": 2473
         },
         "entity_type": {
           "unclassified": 1,
@@ -201,8 +199,7 @@
           "municipality_or_city_uat": 14,
           "town_uat": 48,
           "chisinau_sector": 4,
-          "non_administrative_or_auxiliary_area": 122,
-          "subdivision_or_component_area": 3,
+          "subdivision_or_component_area": 2,
           "component_locality": 1446
         }
       },
@@ -238,22 +235,6 @@
           "osm_type": "boundary",
           "entity_type": "level_1_uat",
           "count": 141
-        },
-        {
-          "admin_level": "9",
-          "place": "allotments",
-          "designation": "∅",
-          "osm_type": "boundary",
-          "entity_type": "non_administrative_or_auxiliary_area",
-          "count": 69
-        },
-        {
-          "admin_level": "9",
-          "place": "allotments",
-          "designation": "∅",
-          "osm_type": "multipolygon",
-          "entity_type": "non_administrative_or_auxiliary_area",
-          "count": 53
         },
         {
           "admin_level": "8",
@@ -342,14 +323,6 @@
           "osm_type": "boundary",
           "entity_type": "state",
           "count": 1
-        },
-        {
-          "admin_level": "9",
-          "place": "∅",
-          "designation": "∅",
-          "osm_type": "multipolygon",
-          "entity_type": "subdivision_or_component_area",
-          "count": 1
         }
       ]
     }
@@ -371,11 +344,11 @@
       "issue_count": 0
     },
     "MD": {
-      "checked": 2595,
+      "checked": 2472,
       "context_excluded": 1,
       "root_parent": 37,
       "unexpected_root": 0,
-      "entity_parent": 2558,
+      "entity_parent": 2435,
       "null_parent": 0,
       "missing_parent": 0,
       "parent_wrong_jurisdiction": 0,
