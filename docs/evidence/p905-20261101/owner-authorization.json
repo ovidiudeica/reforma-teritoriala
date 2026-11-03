@@ -1,0 +1,27 @@
+{
+  "schema": "p905-owner-authorization-v3",
+  "authorization_source": "explicit_user_chat_instruction",
+  "preceding_conditional_request": "Fă obținerea unei calificări independente A/B reușite pentru profilul exact 20261101.360.1. Abia după aceea putem admite profilul, reconstrui proveniența ACTUAL și executa fluxul oficial actual/candidate-* → promovare → CI → integrare → audit GitHub Pages.",
+  "exact_reply": "Fă următoarea etapă permisă.",
+  "baseline_main_sha": "2928118c871d1d02ef7d2f364b6bd2e9d0344adb",
+  "approved_profile_id": "github-ubuntu24-20261101.360.1",
+  "approved_contract_fingerprint": "d67648e3eee23c2a2a5f3f3b68aca71afbf5d3910467bd5fae81f6fc0274c73f",
+  "authorization_scope": "host_profile_admission_provenance_rebind_and_real_A_B_only",
+  "forbidden_scope": [
+    "administrative_reparenting",
+    "geometry_mutation",
+    "P9.1_authorization",
+    "source_mutation",
+    "direct_main_push"
+  ],
+  "qualification": {
+    "pr": 506,
+    "commit": "d03d7740ce7f88c27f32c57d78ac492bc15debe2",
+    "run_id": 41691671042,
+    "attempt": 3,
+    "conclusion": "success",
+    "A_artifact": 13262131723,
+    "B_artifact": 13262487602,
+    "comparison_artifact": 13261317488
+  }
+}
