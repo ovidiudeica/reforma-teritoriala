@@ -41,9 +41,51 @@ function validateAuthorizedProvenance20261026({changed,read,baseline,admissionBy
  return {status:'PASS',mode:'OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V2',admission_sha256:ADMISSION_SHA_20261026,protected_changes:protectedChanges};
 }
 
+
+export const ADMISSION_SHA_20261101='892d795992ca4838225d5caba542a5c6fa08cdd3e6024123a84d594e7b6df9f1';
+const P905_PROFILE_ID_20261101='github-ubuntu24-20261101.360.1';
+const P905_FINGERPRINT_20261101='d67648e3eee23c2a2a5f3f3b68aca71afbf5d3910467bd5fae81f6fc0274c73f';
+function validateAuthorizedProvenance20261101({changed,read,baseline,admissionBytes,authorizationBytes}){
+ const protectedChanges=changed.filter(p=>p==='data'||p.startsWith('data/')||p==='public'||p.startsWith('public/'));
+ if(sha(admissionBytes)!==ADMISSION_SHA_20261101)fail('20261101 admission sha256');
+ const admission=JSON.parse(admissionBytes);
+ if(admission.schema!=='p905-exact-provenance-admission-v3'||admission.baseline_main_sha!=='2928118c871d1d02ef7d2f364b6bd2e9d0344adb')fail('20261101 base');
+ if(admission.profile!==P905_PROFILE_ID_20261101||admission.fingerprint!==P905_FINGERPRINT_20261101)fail('20261101 exact profile');
+ if(JSON.stringify(Object.keys(admission.files).sort())!==JSON.stringify(files))fail('20261101 six-file surface');
+ const authorization=authorizationBytes['owner-authorization.json'];
+ if(!authorization||sha(authorization)!==admission.owner_authorization_sha256)fail('20261101 owner hash');
+ const owner=JSON.parse(authorization);
+ if(owner.schema!=='p905-owner-authorization-v3'||owner.authorization_source!=='explicit_user_chat_instruction'||
+ owner.exact_reply!=='Fă următoarea etapă permisă.'||owner.baseline_main_sha!=='2928118c871d1d02ef7d2f364b6bd2e9d0344adb'||
+ owner.approved_profile_id!==P905_PROFILE_ID_20261101||owner.approved_contract_fingerprint!==P905_FINGERPRINT_20261101||
+ owner.authorization_scope!=='host_profile_admission_provenance_rebind_and_real_A_B_only'||
+ owner.qualification?.pr!==506||owner.qualification?.run_id!==41691671042||owner.qualification?.attempt!==3||owner.qualification?.conclusion!=='success'||
+ JSON.stringify(owner.forbidden_scope)!==JSON.stringify(['administrative_reparenting','geometry_mutation','P9.1_authorization','source_mutation','direct_main_push']))fail('20261101 authorization');
+ for(const p of protectedChanges)if(!files.includes(p))fail('20261101 unauthorized protected change '+p);
+ for(const p of files){const b=read(p),v=admission.files[p];if(!b||!v||b.length!==v.bytes||sha(b)!==v.sha256)fail('20261101 exact bytes '+p);}
+ const release=JSON.parse(read('data/current/actual-release-manifest.json'));
+ for(const k of ['snapshot_id','release_fingerprint_sha256','content_fingerprint_sha256','components','geometry','source_bundle','review_evidence_bundle'])
+   if(JSON.stringify(release[k])!==JSON.stringify(baseline[k]))fail('20261101 semantic drift '+k);
+ if(release.content_fingerprint_sha256!==admission.assertions.semantic_fingerprint_unchanged||
+ release.snapshot_id!==admission.assertions.snapshot_id_unchanged)fail('20261101 recorded identity');
+ const host=JSON.parse(read('data/current/actual-host-trust-manifest.json'));
+ const envGate=JSON.parse(read('data/current/actual-build-environment-gate.json'));
+ const releaseGate=JSON.parse(read('data/current/actual-release-gate.json'));
+ const persisted=JSON.parse(read('data/current/actual-release-persisted.json'));
+ if(host.host_trust_fingerprint_sha256!==P905_FINGERPRINT_20261101||release.host_trust?.host_trust_fingerprint_sha256!==P905_FINGERPRINT_20261101||
+ persisted.host_trust_fingerprint_sha256!==P905_FINGERPRINT_20261101)fail('20261101 bound fingerprint');
+ if(host.contract.accepted_runtime_profiles.filter(x=>x.id===P905_PROFILE_ID_20261101&&x.runner.image_version==='20261101.360.1').length!==1)
+   fail('20261101 approved profile cardinality');
+ if(envGate.status!=='PASS'||releaseGate.status!=='PASS'||persisted.validated_release_gate_status!=='PASS')fail('20261101 gates');
+ if(persisted.provenance_hardening?.host_profile_id!==P905_PROFILE_ID_20261101||
+ persisted.provenance_hardening?.semantic_identity_unchanged!==true)fail('20261101 marker');
+ return {status:'PASS',mode:'OWNER_AUTHORIZED_EXACT_P905_PROVENANCE_V3',admission_sha256:ADMISSION_SHA_20261101,protected_changes:protectedChanges};
+}
+
 export function validateProvenanceBoundary({changed,read,baseline,admissionBytes,authorizationBytes}){
  const protectedChanges=changed.filter(p=>p==='data'||p.startsWith('data/')||p==='public'||p.startsWith('public/'));
  if(!protectedChanges.length)return {status:'PASS',mode:'NO_PROTECTED_CHANGES'};
+ if(sha(admissionBytes)===ADMISSION_SHA_20261101)return validateAuthorizedProvenance20261101({changed,read,baseline,admissionBytes,authorizationBytes});
  if(sha(admissionBytes)===ADMISSION_SHA_20261026)return validateAuthorizedProvenance20261026({changed,read,baseline,admissionBytes,authorizationBytes});
  if(sha(admissionBytes)!==ADMISSION_SHA)fail('admission record hash');
  const admission=JSON.parse(admissionBytes);
@@ -67,7 +109,7 @@ export function validateProvenanceBoundary({changed,read,baseline,admissionBytes
 export function auditProvenanceBoundary(base){
  const changed=execFileSync('git',['diff','--name-only',base,'HEAD'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
  const baseline=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json']));
- const newDirectory='docs/evidence/p905-20261026/';
+ const newDirectory=changed.includes('docs/evidence/p905-20261101/exact-provenance-admission.json')?'docs/evidence/p905-20261101/':'docs/evidence/p905-20261026/';
  return validateProvenanceBoundary({changed,read:p=>readFileSync(p),baseline,admissionBytes:readFileSync(newDirectory+'exact-provenance-admission.json'),authorizationBytes:{'owner-authorization.json':readFileSync(newDirectory+'owner-authorization.json')}});
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1])console.log(JSON.stringify(auditProvenanceBoundary('073a1ee2a2098392df5891fb6b15e69b0eef2d9c')));

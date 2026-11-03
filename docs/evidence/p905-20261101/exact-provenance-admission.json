@@ -1,0 +1,53 @@
+{
+  "schema": "p905-exact-provenance-admission-v3",
+  "baseline_main_sha": "2928118c871d1d02ef7d2f364b6bd2e9d0344adb",
+  "profile": "github-ubuntu24-20261101.360.1",
+  "fingerprint": "d67648e3eee23c2a2a5f3f3b68aca71afbf5d3910467bd5fae81f6fc0274c73f",
+  "qualification": {
+    "pr": 506,
+    "commit": "d03d7740ce7f88c27f32c57d78ac492bc15debe2",
+    "run_id": 41691671042,
+    "attempt": 3,
+    "conclusion": "success",
+    "A_artifact": 13262131723,
+    "B_artifact": 13262487602,
+    "comparison_artifact": 13261317488
+  },
+  "owner_authorization_sha256": "826a2c33001da0f3e77c797defa7115b2e01181855afdc2ffb39732ab6982f6c",
+  "files": {
+    "data/current/actual-build-environment-gate.json": {
+      "sha256": "c7aef427cd424fac40ab25dac084c7b40b8c782f2b56c0c19e352786acfd9805",
+      "bytes": 10157
+    },
+    "data/current/actual-build-environment-manifest.json": {
+      "sha256": "0a086c77484b8ce18362f5a35e56baddae180ec7a90ca5adad06faa10a8fa129",
+      "bytes": 11963
+    },
+    "data/current/actual-host-trust-manifest.json": {
+      "sha256": "9c499706702bce314554735dbde2e361fed5b77136bb1b4bf9cb04c2f6561ee9",
+      "bytes": 13028
+    },
+    "data/current/actual-release-gate.json": {
+      "sha256": "b5b4851d679d7f8767b71b0010606d69e24b1a193f8988af9fee53dc936cead9",
+      "bytes": 39860
+    },
+    "data/current/actual-release-manifest.json": {
+      "sha256": "1dae063b857571eaac2fd572882a547f24201d2897c70cd6b42909339f915171",
+      "bytes": 22513
+    },
+    "data/current/actual-release-persisted.json": {
+      "sha256": "7e8af638252a2aa8dd93b63e69db866e50114047a41e46d77a109e7194c144ba",
+      "bytes": 2133
+    }
+  },
+  "assertions": {
+    "semantic_fingerprint_unchanged": "a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446",
+    "snapshot_id_unchanged": "actual-a9e5a4ddcb5277ef",
+    "administrative_and_geometry_components_unchanged": true,
+    "source_and_review_evidence_unchanged": true,
+    "release_and_environment_gates": "PASS",
+    "actual_A_B_required": true,
+    "runner_observations_A_B_matching": true,
+    "runtime_environment_gate_recheck_required_on_github_runner": true
+  }
+}
