@@ -11,7 +11,6 @@ const json=p=>JSON.parse(readFileSync(p,'utf8'));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const git=(...args)=>execFileSync('git',args,{encoding:'utf8',maxBuffer:300*1024*1024}).trim();
 const historic=p=>execFileSync('git',['show',baseSha+':'+p],{maxBuffer:300*1024*1024});
-const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const requireExact=(test,msg)=>{if(!test)throw Error('RT-VA1 current census: '+msg);};
 const BOUNDARY_ALLOW=[
  /^data\/current\/[A-Za-z0-9._/-]+$/,
@@ -19,7 +18,7 @@ const BOUNDARY_ALLOW=[
  /^public\/data\/(?:actual-entities|actual-geometry-chunks|actual-consolidated-tree|actual-topology-index|p907216-osm-roles)\.json$/,
  /^public\/data\/topology(?:-frontiers)?\/[A-Za-z0-9._/-]+\.json$/,
  /^public\/geo\/(?:current|actual)\/[A-Za-z0-9._/-]+\.geojson$/,
- /^assets\/web-card-audit\/(?:manifest|(?:ro|md)-[0-3][0-9])\.json$/
+ /^assets\/web-card-audit\/(?:manifest|(?:ro|md)-(?:0[0-9]|[12][0-9]|3[01]))\.json$/
 ];
 export function validateRtVa1Candidate(){
  const release=json('data/current/actual-release-manifest.json'),index=json('public/data/actual-entities.json'),
@@ -49,14 +48,24 @@ export function validateRtVa1Candidate(){
  requireExact(cards.record_count===profile.entityCount&&cards.snapshot===profile.snapshot&&cards.fingerprint===profile.fingerprint&&
  cards.files?.length===64&&cards.derivation?.source_record_count===5848&&cards.derivation?.removed_reviewed_ids===123,'WEB-CARD not rebound');
  const marker=persisted.promoted_from_candidate;
- requireExact(marker?.base_commit_sha===baseSha&&/^[0-9a-f]{40}$/.test(marker.candidate_commit_sha??'')&&
+ const candidateBase=marker?.base_commit_sha;
+ requireExact(/^[0-9a-f]{40}$/.test(candidateBase??'')&&/^[0-9a-f]{40}$/.test(marker?.candidate_commit_sha??'')&&
  marker.base_snapshot_id===HISTORICAL_ACTUAL.snapshot,'unapproved promotion marker/base');
+ // Pipeline/provenance upgrades may move main, but the old semantic publication is immutable.
+ requireExact(git('merge-base',baseSha,candidateBase)===baseSha,'candidate base not descended from RT-VA1 admitted main');
+ const candidateBaseManifest=JSON.parse(execFileSync('git',['show',candidateBase+':data/current/actual-release-manifest.json']));
+ requireExact(candidateBaseManifest.snapshot_id===HISTORICAL_ACTUAL.snapshot&&
+ candidateBaseManifest.release_fingerprint_sha256===HISTORICAL_ACTUAL.fingerprint,'candidate base not the historical semantic release');
+ for(const path of ['public/data/actual-entities.json','data/current/entities.json',
+  'public/geo/current/md-administrative.geojson','public/geo/current/ro-administrative.geojson'])
+  requireExact(sha(execFileSync('git',['show',candidateBase+':'+path],{maxBuffer:300*1024*1024}))===sha(historic(path)),
+  'candidate base mutated the retained historical publication '+path);
  const head=git('rev-parse','HEAD');
  const parents=git('rev-list','--parents','-n','1',head).split(' ');
  const candidate=marker.candidate_commit_sha;
  requireExact(parents.length===2&&parents[1]===candidate,'promotion must be direct child of exact candidate');
- requireExact(git('rev-list','--parents','-n','1',candidate).split(' ')[1]===baseSha,'candidate not a direct child of immutable base');
- const changed=git('diff','--name-only',baseSha,head).split(/\r?\n/).filter(Boolean);
+ requireExact(git('rev-list','--parents','-n','1',candidate).split(' ')[1]===candidateBase,'candidate not a direct child of its exact base');
+ const changed=git('diff','--name-only',candidateBase,head).split(/\r?\n/).filter(Boolean);
  requireExact(changed.length>0&&changed.every(p=>BOUNDARY_ALLOW.some(rx=>rx.test(p))),'unapproved promoted file paths');
  const history=json('docs/evidence/ni-fin31-web-r2a1/sha256-manifest.json');
  requireExact(sha(historic('docs/evidence/ni-fin31-web-r2a1/sha256-manifest.json'))===
@@ -67,7 +76,7 @@ export function validateRtVa1Candidate(){
  }
  const policy=json('docs/p9.0.4.3-promotion-policy.json');
  requireExact(policy.semantic_acceptance==='BLOCKED_INCOMPLETE'&&policy.p91_import_allowed===false,'P9.1 unblocked');
- return {status:'PASS_RT_VA1_CURRENT_ONLY',base_sha:baseSha,head_sha:head,snapshot:profile.snapshot,semantic_fingerprint:profile.fingerprint,
+ return {status:'PASS_RT_VA1_CURRENT_ONLY',historic_anchor_sha:baseSha,base_sha:candidateBase,head_sha:head,snapshot:profile.snapshot,semantic_fingerprint:profile.fingerprint,
  removed_exact:roster.excluded,retained:roster.retained,counts:{RO:profile.RO,MD:profile.MD,total:profile.entityCount},
  ni_roles:roles.rows.length,ni_nav_groups:nav.groups.length,topology_resources:Object.keys(topology.resources).length,
  card_fragments:cards.files.length,historical_registry_count:Object.keys(history.persisted_registries??{}).length,
