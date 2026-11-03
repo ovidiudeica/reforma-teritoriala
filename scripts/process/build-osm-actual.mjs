@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import {applyReviewedMalcociCurrentOsmGeometry} from '../lib/md-current-osm-boundary-derivation.mjs';
-import {selectCanonicalVariantA,VARIANT_A_SCOPE_PATH} from '../lib/actual-canonical-scope-variant-a.mjs';
+import {selectCanonicalVariantA,VARIANT_A_SCOPE_PATH,rebindVariantAStatisticalPolicy} from '../lib/actual-canonical-scope-variant-a.mjs';
 import {createHash} from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
@@ -302,6 +302,11 @@ async function main(){
     jurisdiction:code,relationId,readTags:f=>f.properties?.tags||f.properties||{}
    });
    polygons=selection.polygons;
+   const statsPath='data/sources/actual-statistical-policy.json';
+   const statsBytes=await readFile(statsPath,'utf8');
+   const migratedStats=rebindVariantAStatisticalPolicy(JSON.parse(statsBytes));
+   const migratedBytes=JSON.stringify(migratedStats,null,2)+'\n';
+   if(migratedBytes!==statsBytes)await writeFile(statsPath,migratedBytes);
    report.warnings.push({
     type:'rt_va1_non_cuatm_allotments_excluded',jurisdiction:code,
     excluded_count:selection.excluded.length,archival_source_sha256:evidenceSha,
