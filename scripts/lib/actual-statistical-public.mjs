@@ -300,8 +300,16 @@ export async function validateActivatedStatisticalPublic({readFileFn=readFile}={
  const statOnly=entities.filter(e=>String(e.id).startsWith('stat-'));
  const reused=entities.filter(e=>!String(e.id).startsWith('stat-')&&e.roles?.includes('statistical'));
  check('public_contract_v3',index.contract===PUBLIC_CONTRACT&&index.schema_version===3,{contract:index.contract,schema_version:index.schema_version});
- check('public_counts_exact',index.entity_count===5848&&index.administrative_entity_count===5830&&index.statistical_only_entity_count===18&&index.statistical_role_entity_count===63&&index.entity_count_by_jurisdiction?.RO===3246&&index.entity_count_by_jurisdiction?.MD===2602,{entity_count:index.entity_count,counts:index.entity_count_by_jurisdiction});
- check('public_ids_unique',entities.length===5848&&new Set(entities.map(e=>e.id)).size===5848,{count:entities.length,unique:new Set(entities.map(e=>e.id)).size});
+ const approvedP2=policy?.progress?.P2_3_PUBLIC;
+ const expectedTotal=approvedP2?.public_entity_count;
+ const expectedAdmin=policy?.p1_invariants?.expected_entity_count;
+ const expectedRO=approvedP2?.entity_count_by_jurisdiction?.RO;
+ const expectedMD=approvedP2?.entity_count_by_jurisdiction?.MD;
+ const countsApproved=(expectedTotal===5848&&expectedAdmin===5830&&expectedRO===3246&&expectedMD===2602)
+  ||(expectedTotal===5725&&expectedAdmin===5707&&expectedRO===3246&&expectedMD===2479
+  &&policy?.scope_change==='RT-VA1 reviewed exclusion of 123 non-CUATM allotment relations; 63 statistical roles unchanged.');
+ check('public_counts_exact',countsApproved&&index.entity_count===expectedTotal&&index.administrative_entity_count===expectedAdmin&&index.statistical_only_entity_count===18&&index.statistical_role_entity_count===63&&index.entity_count_by_jurisdiction?.RO===expectedRO&&index.entity_count_by_jurisdiction?.MD===expectedMD,{expectedTotal,expectedAdmin,expectedRO,expectedMD,entity_count:index.entity_count,counts:index.entity_count_by_jurisdiction});
+ check('public_ids_unique',entities.length===expectedTotal&&new Set(entities.map(e=>e.id)).size===expectedTotal,{count:entities.length,unique:new Set(entities.map(e=>e.id)).size});
  check('statistical_only_ids_exact',statOnly.length===18&&new Set(statOnly.map(e=>e.id)).size===18,{ids:statOnly.map(e=>e.id)});
  check('reused_statistical_entities_exact',reused.length===45,{count:reused.length});
  check('roles_are_explicit',entities.every(e=>Array.isArray(e.roles)&&e.roles.length>=1),{missing:entities.filter(e=>!Array.isArray(e.roles)||!e.roles.length).slice(0,20).map(e=>e.id)});
@@ -319,9 +327,9 @@ export async function validateActivatedStatisticalPublic({readFileFn=readFile}={
   return expected&&JSON.stringify(feature.geometry)===JSON.stringify(expected)?[]:[{id,issue:expected?'coordinate_drift':'missing_source_geometry'}];
  });
  check('statistical_geometry_exact_osm_fidelity',geometryDrift.length===0,{issues:geometryDrift});
- check('tree_contract_exact',tree.contract===TREE_CONTRACT&&tree.node_count===5848&&tree.root_ids?.length===2&&tree.nodes?.length===5848,{node_count:tree.node_count,roots:tree.root_ids});
+ check('tree_contract_exact',tree.contract===TREE_CONTRACT&&tree.node_count===expectedTotal&&tree.root_ids?.length===2&&tree.nodes?.length===expectedTotal,{node_count:tree.node_count,roots:tree.root_ids});
  const treeIds=new Set((tree.nodes||[]).map(n=>n.id));
- check('tree_covers_public_contract_once',treeIds.size===5848&&entities.every(e=>treeIds.has(e.id)),{tree_unique:treeIds.size});
+ check('tree_covers_public_contract_once',treeIds.size===expectedTotal&&entities.every(e=>treeIds.has(e.id)),{tree_unique:treeIds.size});
  const nodeById=new Map((tree.nodes||[]).map(n=>[n.id,n]));
  check('tree_ro_chain_exact',['stat-RO1','stat-RO2','stat-RO3','stat-RO4'].every(id=>nodeById.get(id)?.parent_id===rootIds.RO),{});
  check('tree_md_level2_chain_exact',['stat-MD11','stat-MD12'].every(id=>nodeById.get(id)?.parent_id===rootIds.MD),{});

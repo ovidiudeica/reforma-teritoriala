@@ -8,7 +8,7 @@ export const NISTR_EN_GROUP_PREFIX='view-nistrenia-group-';
 export const NISTR_EN_ROLE_PREFIX='view-nistrenia-role-';
 export function createNistreniaOperationalView({catalog,roles,entityById,officialNodes,officialRoots}){
  const groups=validateNistreniaOsmNavigation(catalog,roles);
- if(!(entityById instanceof Map)||!(officialNodes instanceof Map)||officialNodes.size!==5848)throw Error('Nistrenia: invalid immutable ACTUAL baseline');
+ if(!(entityById instanceof Map)||!(officialNodes instanceof Map)||![5848,5725].includes(officialNodes.size))throw Error('Nistrenia: invalid immutable ACTUAL baseline');
  if(officialRoots.length!==2||officialRoots.some(id=>!officialNodes.has(id)))throw Error('Nistrenia: expected two legal ACTUAL roots');
  const nodes=new Map(officialNodes),toActual=new Map(),aggregates=new Map(),roleIds=new Set();
  const root={id:NISTR_EN_ROOT,display_name:'Nistrenia',jurisdiction:'NI',parent_id:null,child_ids:[],roles:['operational_osm'],display_type:'state',depth:0,view_only:true};
@@ -56,7 +56,7 @@ export function nistreniaSearchEntities(view,entityById){
 // corresponding documentary nodes, not an eighth cartographic-only sub-tree.
 export function createNistreniaAdministrativeView({model,entityById,officialNodes,officialRoots}){
  const checked=validateNistreniaAdministrativeModel(model,{actualIds:new Set(entityById.keys())});
- if(officialNodes.size!==5848||officialRoots.length!==2)throw Error('Nistrenia: invalid ACTUAL hierarchy');
+ if(![5848,5725].includes(officialNodes.size)||officialRoots.length!==2)throw Error('Nistrenia: invalid ACTUAL hierarchy');
  const unified=buildNistreniaUnifiedTree(model,checked);
  const nodes=new Map(officialNodes);
  for(const [id,node] of unified.nodes){

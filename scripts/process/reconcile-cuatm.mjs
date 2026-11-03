@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { readFile, writeFile } from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {rebindVariantAStatisticalPolicy,VARIANT_A_SCOPE_PATH} from '../lib/actual-canonical-scope-variant-a.mjs';
 
 const SNAPSHOT='data/sources/cuatm-current.json', OUTPUT='data/current/md-cuatm-reconciliation.json', OVERRIDES='data/sources/md-cuatm-reviewed-overrides.json', NON_CUATM_OVERRIDES='data/sources/md-cuatm-reviewed-non-cuatm-overrides.json';
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[„”"'’]/g,'').replace(/\b(municipiul|municipiu|orasul|oras|comuna|satul|sat|raionul|raion|sectorul|sector)\b/g,' ').replace(/[^a-z0-9ăâîșț]+/gi,' ').trim().replace(/\s+/g,' ');
@@ -160,13 +162,25 @@ const unmatchedGeneral=legalUnmatched.map(m=>{
 const unmatchedGeneralByReason=unmatchedGeneral.reduce((a,x)=>(a[x.unmatched_reason]=(a[x.unmatched_reason]||0)+1,a),{});
 const unmatchedGroups=Object.fromEntries(Object.entries(unmatchedGeneralByReason).sort().map(([reason,count])=>[reason,{count,items:unmatchedGeneral.filter(x=>x.unmatched_reason===reason)}]));
 await writeFile('data/current/md-cuatm-unmatched-review.json',JSON.stringify({generated_at:new Date().toISOString(),jurisdiction:'MD',scope:'Unreconciled general catalog entities only; resolved edge cases are excluded.',count:unmatchedGeneral.length,by_reason:unmatchedGeneralByReason,groups:unmatchedGroups},null,2)+'\n');
-await writeFile('data/current/md-cuatm-non-cuatm-allotments.json',JSON.stringify({
- generated_at:new Date().toISOString(),jurisdiction:'MD',
+const statisticalPolicy=JSON.parse(await readFile('data/sources/actual-statistical-policy.json','utf8'));
+const variantAActive=rebindVariantAStatisticalPolicy(statisticalPolicy)===statisticalPolicy;
+let nonCuatmEvidence={generated_at:new Date().toISOString(),jurisdiction:'MD',
  reconciliation_class:'non_cuatm_allotment_boundary',
  policy:'Retained geographic entities outside current legal CUATM reconciliation. Raw OSM identifiers, geometry linkage and verified legal parent are preserved.',
- count:nonCuatmAllotments.length,
- items:nonCuatmAllotments
-},null,2)+'\n');
+ count:nonCuatmAllotments.length,items:nonCuatmAllotments};
+if(variantAActive){
+ if(nonCuatmAllotments.length!==0)throw Error('RT-VA1 excluded relation re-entered current CUATM reconciliation');
+ const scope=JSON.parse(await readFile(VARIANT_A_SCOPE_PATH,'utf8'));
+ const raw=await readFile(scope.source_evidence.path);
+ const digest=createHash('sha256').update(raw).digest('hex');
+ const archive=JSON.parse(raw);
+ const approved=new Set(scope.exclusions.map(x=>x.id)),actual=new Set(archive.items.map(x=>x.id));
+ if(scope.status!=='APPROVED_SCOPE'||scope.expected_exclusion_count!==123||scope.source_evidence.sha256!==digest||archive.count!==123||archive.items.length!==123||approved.size!==123||actual.size!==123||[...approved].some(id=>!actual.has(id)))throw Error('RT-VA1 archival 123-register mismatch');
+ nonCuatmEvidence={...archive,archival_status:'EXCLUDED_FROM_CANONICAL_ACTUAL_VARIANT_A',canonical_import_count:0,archival_evidence_sha256:digest,
+ policy:'123 reviewed OSM non-CUATM allotment polygons remain archival source evidence, not canonical ACTUAL administrative entities.',
+ count:archive.items.length,items:archive.items};
+}
+await writeFile('data/current/md-cuatm-non-cuatm-allotments.json',JSON.stringify(nonCuatmEvidence,null,2)+'\n');
 const nameAbsent=unmatchedGeneral.filter(x=>x.unmatched_reason==='name_absent_from_official_snapshot');
 const namePattern=x=>{
  const n=(x.name||'').normalize('NFC').trim();
