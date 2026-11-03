@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {selectCanonicalVariantA} from '../lib/actual-canonical-scope-variant-a.mjs';
+import {selectCanonicalVariantA,rebindVariantAStatisticalPolicy} from '../lib/actual-canonical-scope-variant-a.mjs';
 
 const policy=JSON.parse(await readFile('docs/evidence/rt-va1-semantic-exclusion/actual-variant-a-exclusions.json','utf8'));
 const feature=x=>({
@@ -77,4 +77,20 @@ test('RT-VA1 importer executes the reviewed selector before materializing canoni
  assert.ok(selector>0&&entityBuild>selector,'semantic selector must precede canonical materialization');
  assert.match(source,/evidenceSha!==policy\.source_evidence\.sha256/);
  assert.match(source,/if\(code==='MD'\)/);
+});
+
+test('RT-VA1 changes only four exact P2 census fields and is idempotent',async()=>{
+ const baseline=JSON.parse(await readFile('data/sources/actual-statistical-policy.json','utf8'));
+ const migrated=rebindVariantAStatisticalPolicy(baseline);
+ assert.notStrictEqual(migrated,baseline);
+ assert.equal(baseline.progress.P2_3_PUBLIC.public_entity_count,5848);
+ assert.equal(migrated.progress.P2_3_PUBLIC.public_entity_count,5725);
+ assert.equal(migrated.p1_invariants.expected_entity_count,5707);
+ assert.equal(migrated.p1_invariants.expected_entity_count_by_jurisdiction.MD,2473);
+ assert.equal(migrated.progress.P2_3_PUBLIC.entity_count_by_jurisdiction.MD,2479);
+ assert.equal(migrated.progress.P2_3_PUBLIC.statistical_role_entity_count,63);
+ assert.equal(migrated.progress.P2_3_PUBLIC.entity_count_by_jurisdiction.RO,3246);
+ assert.strictEqual(rebindVariantAStatisticalPolicy(migrated),migrated);
+ const reverted=structuredClone(migrated);reverted.progress.P2_3_PUBLIC.public_entity_count=5848;
+ assert.throws(()=>rebindVariantAStatisticalPolicy(reverted),/population/);
 });
