@@ -133,11 +133,6 @@ jobs:
                   or path == 'public/data/actual-entities.json'
                   or path == 'public/data/actual-geometry-chunks.json'
                   or path == 'public/data/actual-consolidated-tree.json'
-                  or path == 'public/data/p907216-osm-roles.json'
-                  or path == 'public/data/actual-topology-index.json'
-                  or path.startswith('public/data/topology/')
-                  or path.startswith('public/data/topology-frontiers/')
-                  or path.startswith('assets/web-card-audit/')
                   or path.startswith('public/geo/current/')
                   or path.startswith('public/geo/actual/')
                   or path == 'data/sources/actual-settlement-policy.json'
