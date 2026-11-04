@@ -1,6 +1,8 @@
 import {readFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {VARIANT_A_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
+import {validateRtVa1Candidate} from './rt-va1-current-census.mjs';
 import {fileURLToPath} from 'node:url';
 const directory='docs/evidence/ni-fin31-host-qualification-20261025/';
 export const ADMISSION_SHA='ac62e242b6fed4ceaf2490705291aa43933d1d19eef5daba4b63d9998c48ff2c';
@@ -107,6 +109,11 @@ export function validateProvenanceBoundary({changed,read,baseline,admissionBytes
  return {status:'PASS',mode:'OWNER_AUTHORIZED_EXACT_P905_PROVENANCE',admission_sha256:ADMISSION_SHA,protected_changes:protectedChanges};
 }
 export function auditProvenanceBoundary(base){
+ const live=JSON.parse(readFileSync('data/current/actual-release-manifest.json'));
+ if(live.snapshot_id===VARIANT_A_ACTUAL.snapshot){
+  const audit=validateRtVa1Candidate();
+  return {status:'PASS',mode:'EXACT_PROMOTED_RT_VA1_SEMANTIC_CHANGE',audit};
+ }
  const changed=execFileSync('git',['diff','--name-only',base,'HEAD'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
  const baseline=JSON.parse(execFileSync('git',['show',base+':data/current/actual-release-manifest.json']));
  const newDirectory=changed.includes('docs/evidence/p905-20261101/exact-provenance-admission.json')?'docs/evidence/p905-20261101/':'docs/evidence/p905-20261026/';

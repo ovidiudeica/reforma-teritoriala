@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {validateOsmRolesCatalog,osmRoleLabels} from '../../atlas-osm-roles.mjs';
+import {trustedActualRelease} from '../lib/rt-va1-release-identity.mjs';
 
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
 const catalog=read('public/data/p907216-osm-roles.json');
@@ -14,7 +15,7 @@ const inputs={snapshotId:release.snapshot_id,releaseFingerprint:release.release_
 test('P9.0.7.2.16 85 OSM roles are bound to all existing ACTUAL geometry IDs without extra polygons',()=>{
  const verified=validateOsmRolesCatalog(catalog,entities,inputs);
  assert.equal(verified.size,85);
- assert.equal(index.entity_count,5848);
+ assert.equal(index.entity_count,trustedActualRelease(release,index).entityCount);
  assert.equal(catalog.indexed_actual_entities,85);
  assert.equal(catalog.no_new_geometries,true);
  assert.equal(catalog.existing_actual_legal_parent_unchanged,true);

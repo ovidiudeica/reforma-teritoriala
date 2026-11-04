@@ -3,6 +3,17 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {mkdir,readFile,writeFile,readdir} from 'node:fs/promises';
 import path from 'node:path';
+import {readFileSync} from 'node:fs';
+import {VARIANT_A_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
+import {runRtVa1Census} from './rt-va1-current-census.mjs';
+// Historic WEB-R2a.1 stays byte-bound to 5848. A promoted 5725 release is audited
+// by an independent strict ledger; the historical outputs are never regenerated.
+if(JSON.parse(readFileSync('data/current/actual-release-manifest.json','utf8')).snapshot_id===VARIANT_A_ACTUAL.snapshot){
+ const args=process.argv.slice(2),lookup=(name,def)=>{const i=args.indexOf(name);return i<0?def:args[i+1];};
+ if(args.includes('--verify-dir'))throw Error('RT-VA1 current release cannot reuse historical output directory');
+ await runRtVa1Census({outDir:lookup('--out-dir','outputs/web-r2a1-current-rt-va1'),verifyManifest:lookup('--verify-manifest',null)});
+ process.exit(0);
+}
 import {auditProvenanceBoundary} from './web-r2a1-provenance-boundary.mjs';
 
 const BASE='073a1ee2a2098392df5891fb6b15e69b0eef2d9c';

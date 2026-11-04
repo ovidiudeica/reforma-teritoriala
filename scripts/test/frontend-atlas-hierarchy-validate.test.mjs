@@ -1,11 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {trustedActualRelease,VARIANT_A_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
 import {validateConsolidatedHierarchy} from '../../atlas-hierarchy-validate.mjs';
 
 const tree=JSON.parse(await readFile('public/data/actual-consolidated-tree.json','utf8'));
 const index=JSON.parse(await readFile('public/data/actual-entities.json','utf8'));
 const byId=new Map(index.entities.map(entity=>[entity.id,entity]));
+const exact=trustedActualRelease(JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8')),index);
 const clone=()=>structuredClone(tree);
 const validate=(candidate=tree,entities=byId,expectedCount=index.entity_count)=>
  validateConsolidatedHierarchy(candidate,entities,{expectedCount});
@@ -16,9 +18,9 @@ const corrupt=(mutation,pattern)=>{
 };
 const byNode=(data,id)=>data.nodes.find(node=>node.id===id);
 
-test('P3.3 valid 5848-node RO+MD ACTUAL release tree passes exact frontend contract',()=>{
+test('P3.3 valid current RO+MD ACTUAL release tree passes exact frontend contract',()=>{
  const result=validate();
- assert.equal(result.size,5848);
+ assert.equal(result.size,exact.entityCount);
  assert.deepEqual(tree.root_ids,['osm-r90689','osm-r58974']);
  assert.equal(result.get(tree.root_ids[0]).depth,0);
  assert.equal(result.get(tree.root_ids[1]).depth,0);

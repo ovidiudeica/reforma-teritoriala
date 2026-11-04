@@ -3,6 +3,7 @@ import {compactTreeName} from '../../atlas-tree-labels.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {trustedActualRelease,VARIANT_A_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
 import {ancestorPath,parentId,hasChildren,createAtlasTree,revealInTree,treeRoleLabel,ambiguousSiblingIds,countDescendants} from '../../atlas-tree.mjs';
 import {typeLabel} from '../../atlas-search.mjs';
 import {geometryClass} from '../../geometry-taxonomy.mjs';
@@ -10,6 +11,7 @@ const tree=JSON.parse(await readFile('public/data/actual-consolidated-tree.json'
 const index=JSON.parse(await readFile('public/data/actual-entities.json','utf8'));
 const nodes=new Map(tree.nodes.map(n=>[n.id,n]));
 const entities=new Map(index.entities.map(e=>[e.id,e]));
+const exact=trustedActualRelease(JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8')),index);
 const deep=tree.nodes.find(n=>n.depth===5&&n.jurisdiction==='MD');
 
 // Minimal event-capable DOM: no dependencies and no string/regex selection tests.
@@ -46,8 +48,8 @@ const documentFactory=()=>{
 };
 function harness(){const document=documentFactory(),container=new Element();return {document,container,controller:createAtlasTree({document,container,nodeById:nodes,rootIds:tree.root_ids,typeLabel,onSelect(){}})};}
 
-test('all 5848 consolidated paths are rooted, reciprocal, unique and match public parents',()=>{
- assert.equal(nodes.size,5848);assert.equal(entities.size,5848);
+test('all current consolidated paths are rooted, reciprocal, unique and match public parents',()=>{
+ assert.equal(nodes.size,exact.entityCount);assert.equal(entities.size,exact.entityCount);
  for(const node of nodes.values()){
   const path=ancestorPath(nodes,tree.root_ids,node.id);
   assert.ok(tree.root_ids.includes(path[0]));assert.equal(path.at(-1),node.id);
@@ -95,9 +97,9 @@ test('known RO/MD hierarchy examples include coalesced MD114/MD115 and official 
  assert.deepEqual(ancestorPath(nodes,tree.root_ids,'stat-MD120'),['osm-r58974','stat-MD12','stat-MD120']);
 });
 
-test('P3.2 counts descendants once from the complete 5848-node contract without DOM expansion',()=>{
+test('P3.2 counts descendants once from the complete current release without DOM expansion',()=>{
  const counts=countDescendants(nodes,tree.root_ids);
- assert.equal(counts.size,5848);
+ assert.equal(counts.size,exact.entityCount);
  for(const root of tree.root_ids){
   const members=tree.nodes.filter(n=>n.jurisdiction===nodes.get(root).jurisdiction).length;
   assert.equal(counts.get(root),members-1);
@@ -208,7 +210,7 @@ test('real frontend controller synchronizes map/search/tree/breadcrumb/details a
    config.onEachFeature(feature,layer);result.addLayer(layer);layers.push(layer);
   }result.addTo=target=>{target.addLayer(result);return result;};return result;}
  };
- const manifest={snapshot_id:'fixture',public_contract:{contract:index.contract,path:'index',entity_count:5848,hierarchy:{path:'tree'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
+ const manifest={snapshot_id:'fixture',public_contract:{contract:index.contract,path:'index',entity_count:exact.entityCount,hierarchy:{path:'tree'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
  let resolveHierarchy,notifyHierarchy;
  const hierarchyRequested=new Promise(resolve=>{notifyHierarchy=resolve;});
  const hierarchyPayload=new Promise(resolve=>{resolveHierarchy=resolve;});

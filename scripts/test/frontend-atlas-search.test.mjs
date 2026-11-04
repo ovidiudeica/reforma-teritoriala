@@ -2,8 +2,10 @@ import {formatEntityName} from '../../atlas-name-format.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {trustedActualRelease,VARIANT_A_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
 import {normalizeSearch,createSearchIndex,searchEntities,rankSearchResult,groupSearchResults,createAtlasSearch,searchOptionId,revealSearchOption} from '../../atlas-search.mjs';
 const data=JSON.parse(readFileSync('public/data/actual-entities.json','utf8')),tree=JSON.parse(readFileSync('public/data/actual-consolidated-tree.json','utf8'));
+const exact=trustedActualRelease(JSON.parse(readFileSync('data/current/actual-release-manifest.json','utf8')),data);
 const nodes=new Map(tree.nodes.map(n=>[n.id,n])),index=createSearchIndex(data.entities,nodes);
 const byId=new Map(data.entities.map(e=>[e.id,e]));
 class Element{
@@ -104,8 +106,8 @@ test('blur and Tab close simply; safe text rendering and late hierarchy index pr
  h.controller.updateIndex(index);await query(h,'Victoria');h.controller.updateIndex(createSearchIndex(data.entities,nodes));assert.equal(h.controller.state.query,'Victoria');assert.ok(options(h).length>0);
 });
 test('ACTUAL/P2 identities and counts remain intact',()=>{
- const manifest=JSON.parse(readFileSync('data/current/actual-release-manifest.json','utf8'));assert.equal(data.contract,'actual-public-entity-v3');assert.equal(data.entities.length,5848);assert.equal(tree.nodes.length,5848);assert.equal(data.entities.filter(e=>e.roles.includes('statistical')).length,63);assert.equal(data.entities.filter(e=>e.category==='statistical').length,18);
- assert.equal(manifest.snapshot_id,'actual-a9e5a4ddcb5277ef');assert.equal(manifest.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');const md=byId.get('stat-MD120');assert.equal(md.statistical.code,'MD120');assert.equal(md.representation.osm_statistical_ref,'MD121');assert.equal(md.representation.osm_ref_is_identity_authority,false);
+ const manifest=JSON.parse(readFileSync('data/current/actual-release-manifest.json','utf8'));assert.equal(data.contract,'actual-public-entity-v3');assert.equal(data.entities.length,exact.entityCount);assert.equal(tree.nodes.length,exact.entityCount);assert.equal(data.entities.filter(e=>e.roles.includes('statistical')).length,63);assert.equal(data.entities.filter(e=>e.category==='statistical').length,18);
+ assert.equal(trustedActualRelease(manifest,data),exact);const md=byId.get('stat-MD120');assert.equal(md.statistical.code,'MD120');assert.equal(md.representation.osm_statistical_ref,'MD121');assert.equal(md.representation.osm_ref_is_identity_authority,false);
 });
 
 test('real keyboard search retains map/tree/details/breadcrumb synchronization and all filter invariants',async t=>{
@@ -114,7 +116,7 @@ test('real keyboard search retains map/tree/details/breadcrumb synchronization a
  const map={setView(){return this;},addLayer:g=>mounted.add(g),removeLayer:g=>mounted.delete(g),fitBounds(...args){fitBounds.push(args);zoom=12;},getZoom:()=>zoom,on(){}};
  const walk=g=>g.layers.flatMap(l=>l.layers?walk(l):[l]),visible=()=>groups.slice(0,2).filter(g=>mounted.has(g)).flatMap(walk);
  const L={map:()=>map,tileLayer:()=>({addTo(){}}),control:{scale:()=>({addTo(){}})},layerGroup:group,geoJSON:(data,config)=>{const g=group();for(const feature of data.features.filter(config.filter)){const layer={feature,bindTooltip(){return this;},on(){},setStyle(style){this.style=style;}};config.onEachFeature(feature,layer);g.addLayer(layer);}g.addTo=target=>{target.addLayer(g);return g;};return g;}};
- const manifest={snapshot_id:'fixture',public_contract:{contract:data.contract,path:'index',entity_count:5848,hierarchy:{path:'tree'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
+ const manifest={snapshot_id:'fixture',public_contract:{contract:data.contract,path:'index',entity_count:exact.entityCount,hierarchy:{path:'tree'},geometry_tiers:Object.fromEntries(['RO','MD'].map(j=>[j,Object.fromEntries(['overview','local','detail'].map(t=>[t,{path:j+'/'+t}]))])),statistical_geometry:{RO:{path:'RO/stat'},MD:{path:'MD/stat'}}}};
  const fetch=async path=>({ok:true,json:async()=>{if(path==='data/current/actual-release-manifest.json')return manifest;if(path==='data/current/actual-release-gate.json')return {status:'PASS',snapshot_id:'fixture'};if(path==='public/data/app-build-info.json')return null;if(path==='index')return data;if(path==='tree')return tree;const [jurisdiction,tier]=path.split('/');return {metadata:tier==='stat'?{contract:'actual-public-statistical-geometry-v1',jurisdiction}:{jurisdiction,tier},features:data.entities.filter(e=>e.jurisdiction===jurisdiction&&(tier==='stat'?e.category==='statistical':e.category!=='statistical'&&e.map.tier===tier)).map(e=>({properties:{entity_id:e.id}}))};}});
  const previous={document:globalThis.document,L:globalThis.L,fetch:globalThis.fetch};
  try{

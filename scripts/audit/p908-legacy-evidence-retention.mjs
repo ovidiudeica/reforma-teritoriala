@@ -1,5 +1,6 @@
 // P9.0.8 — offline proof-retention gate. Never touches legacy PRs/ACTUAL; never authorizes P9.1.
 import assert from 'node:assert/strict';
+import {trustedActualRelease,HISTORICAL_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 
@@ -178,8 +179,10 @@ function verifyCI(a,s,c){
  return {transientArtifacts,directRunAbsence:c.primary_head_records.filter(x=>x.run_count===0).map(x=>x.pr)};
 }
 expectedPolicy(m,policy);
-assert.equal(release.snapshot_id,'actual-a9e5a4ddcb5277ef');
-assert.equal(release.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
+// The historical evidence in m/arrays remains bound to HISTORICAL_ACTUAL;
+// the independently promoted current release may have a different exact identity.
+assert.equal(HISTORICAL_ACTUAL.snapshot,'actual-a9e5a4ddcb5277ef');
+trustedActualRelease(release);
 assert.equal(carto.cartographic.relation_roles,85);
 assert.equal(carto.cartographic.status,'CLOSED_EVIDENCE_BOUND');
 const refs=verifySnapshots(m,arrays);

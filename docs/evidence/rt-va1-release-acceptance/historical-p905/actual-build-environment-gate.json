@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "mode": "ACTUAL_BUILD_ENVIRONMENT_GATE",
+  "build_environment_path": "data/current/actual-build-environment-manifest.json",
+  "build_environment_sha256": "0a086c77484b8ce18362f5a35e56baddae180ec7a90ca5adad06faa10a8fa129",
+  "environment_fingerprint_sha256": "40d13cfb387a03f97c31d896f496d219224bae46681712065e62feeabfc70687",
+  "status": "PASS",
+  "policy": "Fail closed unless repository workflow bytes, runner image plus host-trust contract (kernel, Docker/containerd/runc and CPU execution profile), the digest-pinned ACTUAL OCI runtime, Node/npm, package files, the complete vendored offline npm dependency bundle and GitHub Action commit pins exactly match the committed ACTUAL build-environment manifest.",
+  "checks": [
+    {
+      "name": "manifest_schema_and_mode",
+      "ok": true,
+      "detail": {
+        "schema_version": 1,
+        "mode": "ACTUAL_BUILD_ENVIRONMENT"
+      }
+    },
+    {
+      "name": "manifest_matches_repository_environment",
+      "ok": true,
+      "detail": {
+        "workflow_count": 4,
+        "action_count": 2,
+        "support_file_count": 26
+      }
+    },
+    {
+      "name": "runner_label_is_exact",
+      "ok": true,
+      "detail": {
+        "expected": "ubuntu-24.04",
+        "actual": {
+          "candidate": [
+            "ubuntu-24.04"
+          ],
+          "topology": [
+            "ubuntu-24.04"
+          ],
+          "promotion": [
+            "ubuntu-24.04"
+          ],
+          "verify": [
+            "ubuntu-24.04"
+          ]
+        }
+      }
+    },
+    {
+      "name": "runtime_container_is_exact",
+      "ok": true,
+      "detail": {
+        "expected": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
+        "actual": {
+          "candidate": {
+            "container_images": [],
+            "runtime_env_refs": [
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
+            ]
+          },
+          "topology": {
+            "container_images": [
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
+            ],
+            "runtime_env_refs": []
+          },
+          "promotion": {
+            "container_images": [
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
+            ],
+            "runtime_env_refs": []
+          },
+          "verify": {
+            "container_images": [
+              "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a"
+            ],
+            "runtime_env_refs": []
+          }
+        },
+        "manifest": {
+          "manifest_path": "data/current/actual-runtime-image.json",
+          "manifest_sha256": "465a286c1e386cb938eccf3ae293a992a2ec9c92d2c9ef977931b30ad7bc83a2",
+          "runtime_fingerprint_sha256": "c403316ae786d543f664cae9964d058f7c3e1af1b0e53afa04d151b68ef461f4",
+          "ref": "ghcr.io/ovidiudeica/reforma-teritoriala-actual-runtime@sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
+          "digest": "sha256:67fd65aa8fba6bb2555741a485f06149793d24c67424d373eae4db818850a95a",
+          "platform": "linux/amd64",
+          "base_ref": "node:24.21.0-bookworm@sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4",
+          "base_digest": "sha256:64af3819f9275802414d7cdc38c27e9d82bd564dec4d4da87d008255d36c63b4"
+        }
+      }
+    },
+    {
+      "name": "deterministic_network_isolation_is_exact",
+      "ok": true,
+      "detail": {
+        "candidate": {
+          "docker_network_none_count": 5,
+          "docker_network_bridge_count": 1,
+          "cap_drop_all_count": 5,
+          "no_new_privileges_count": 5,
+          "docker_socket_mounted": false
+        },
+        "policy": {
+          "enforcement": "docker-network-namespace",
+          "deterministic_network": "none",
+          "privilege_drop": "ALL",
+          "no_new_privileges": true,
+          "docker_socket_mounted": false,
+          "proof_script": "scripts/process/prove-actual-network-denial.mjs",
+          "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
+        }
+      }
+    },
+    {
+      "name": "host_trust_contract_is_exact",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "fingerprint": "d67648e3eee23c2a2a5f3f3b68aca71afbf5d3910467bd5fae81f6fc0274c73f",
+        "failures": [],
+        "current": {
+          "manifest_path": "data/current/actual-host-trust-manifest.json",
+          "manifest_sha256": "9c499706702bce314554735dbde2e361fed5b77136bb1b4bf9cb04c2f6561ee9",
+          "host_trust_fingerprint_algorithm": "actual-host-trust-v1",
+          "host_trust_fingerprint_sha256": "d67648e3eee23c2a2a5f3f3b68aca71afbf5d3910467bd5fae81f6fc0274c73f",
+          "runner_image_version": "20261004.327.1",
+          "kernel_release": "6.17.0-1022-azure",
+          "docker_server_version": "28.0.4",
+          "containerd_version": "v2.3.6",
+          "runc_version": "1.5.1",
+          "cpu_execution_profile": {
+            "platform": "linux/amd64",
+            "cpuset_cpus": "0",
+            "node_options": "--jitless",
+            "uv_threadpool_size": "1",
+            "timezone": "UTC",
+            "locale": "C.UTF-8"
+          }
+        }
+      }
+    },
+    {
+      "name": "deterministic_cpu_profile_is_exact",
+      "ok": true,
+      "detail": {
+        "candidate": {
+          "cpuset_cpu_zero_count": 4,
+          "node_jitless_count": 4,
+          "uv_threadpool_one_count": 4,
+          "timezone_utc_count": 4,
+          "locale_c_utf8_count": 8
+        },
+        "profile": {
+          "platform": "linux/amd64",
+          "cpuset_cpus": "0",
+          "node_options": "--jitless",
+          "uv_threadpool_size": "1",
+          "timezone": "UTC",
+          "locale": "C.UTF-8"
+        }
+      }
+    },
+    {
+      "name": "dynamic_node_setup_is_absent",
+      "ok": true,
+      "detail": {
+        "node_versions": {
+          "candidate": [],
+          "topology": [],
+          "promotion": [],
+          "verify": []
+        },
+        "actions": {
+          "actions/checkout": "fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+        }
+      }
+    },
+    {
+      "name": "runtime_image_manifest_valid",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "fingerprint": "c403316ae786d543f664cae9964d058f7c3e1af1b0e53afa04d151b68ef461f4",
+        "failures": []
+      }
+    },
+    {
+      "name": "oci_builder_manifest_valid",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "fingerprint": "51fd904d569aed1d18e925c30b814037e7f0c75719429552b6b8b1c02624f48a",
+        "failures": [],
+        "current": {
+          "manifest_path": "data/current/actual-oci-builder.json",
+          "manifest_sha256": "97dddc0baac41e966850054add89cdacc04817bcfebcbb52b9689d161fb2c12f",
+          "builder_fingerprint_algorithm": "actual-oci-builder-v1",
+          "builder_fingerprint_sha256": "51fd904d569aed1d18e925c30b814037e7f0c75719429552b6b8b1c02624f48a",
+          "buildx_version": "v0.37.1",
+          "buildx_commit": "0b265a9f62db554fa9aba6dd19e1bd5704bc7d8a",
+          "buildx_binary_sha256": "9447199cdb435f25880548343c128a4b6650e8891ee598905d8d29d39a8e359b",
+          "buildkit_version": "v0.33.0",
+          "buildkit_ref": "moby/buildkit:v0.33.0@sha256:6c2fa84a6b61ccd72899dde4239f8d5717f05f9a8ca6f3cad185fb1a95a94de3",
+          "driver": "docker-container"
+        }
+      }
+    },
+    {
+      "name": "github_actions_are_exact_commit_shas",
+      "ok": true,
+      "detail": {
+        "expected": {
+          "actions/checkout": "fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+        },
+        "actual": {
+          "actions/checkout": "fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+        }
+      }
+    },
+    {
+      "name": "package_toolchain_matches_expected",
+      "ok": true,
+      "detail": {
+        "expected": {
+          "node": "24.21.0",
+          "npm": "11.19.0",
+          "package_manager": "npm@11.19.0"
+        },
+        "actual": {
+          "node": "24.21.0",
+          "npm": "11.19.0",
+          "package_manager": "npm@11.19.0",
+          "package_json": {
+            "path": "package.json",
+            "sha256": "3bf6193bc7ffc2223b3887886f870ffb84ad86c6014f56991856cd1ebdf1d3ac"
+          },
+          "package_lock": {
+            "path": "package-lock.json",
+            "sha256": "e32fc58a9f1e5fcd0c308d76a60adc39fdc3597d135ec4a2bcad06db1314b977",
+            "lockfile_version": 3
+          },
+          "dependency_bundle": {
+            "manifest_path": "vendor/npm/manifest.json",
+            "manifest_sha256": "ae9a7222300062606bbfecdeedb60bd039ea5d182ac7d66ebf1d7917bfdfee4f",
+            "archive_path": "vendor/npm/npm-dependency-bundle.tar",
+            "archive_sha256": "ea1a5686041b17ac677bfd2eabdaae4a0ab6e354e0c117361f24f988a0c847dc",
+            "bundle_fingerprint_sha256": "c38977022b4c7cedcbf7bab4ac501038417a60f6612bfb82cddd44092a53ac81",
+            "package_entry_count": 185
+          }
+        }
+      }
+    },
+    {
+      "name": "npm_dependency_bundle_valid",
+      "ok": true,
+      "detail": {
+        "status": "PASS",
+        "fingerprint": "c38977022b4c7cedcbf7bab4ac501038417a60f6612bfb82cddd44092a53ac81",
+        "failures": []
+      }
+    },
+    {
+      "name": "environment_fingerprint_recomputes",
+      "ok": true,
+      "detail": {
+        "algorithm": "actual-build-environment-v1",
+        "expected": "40d13cfb387a03f97c31d896f496d219224bae46681712065e62feeabfc70687",
+        "actual": "40d13cfb387a03f97c31d896f496d219224bae46681712065e62feeabfc70687"
+      }
+    },
+    {
+      "name": "runtime_node_exact",
+      "ok": true,
+      "detail": {
+        "expected": "24.21.0",
+        "actual": "24.21.0"
+      }
+    },
+    {
+      "name": "runtime_npm_exact",
+      "ok": true,
+      "detail": {
+        "expected": "11.19.0",
+        "actual": "11.19.0"
+      }
+    },
+    {
+      "name": "runtime_runner_os_linux",
+      "ok": true,
+      "detail": {
+        "expected": "Linux",
+        "actual": "Linux"
+      }
+    },
+    {
+      "name": "host_runner_identity_is_explicitly_approved_provenance",
+      "ok": true,
+      "detail": {
+        "policy": "GitHub does not propagate ImageOS/ImageVersion into jobs.container. Host runner family is enforced by exact runs-on workflow bytes; when host image variables are available they must match exactly one explicitly approved host-trust runtime profile.",
+        "expected": {
+          "label": "ubuntu-24.04",
+          "accepted_runtime_profiles": [
+            {
+              "id": "github-ubuntu24-20260920.314.1",
+              "image_os": "ubuntu24",
+              "image_version": "20260920.314.1"
+            },
+            {
+              "id": "github-ubuntu24-20260927.320.1",
+              "image_os": "ubuntu24",
+              "image_version": "20260927.320.1"
+            },
+            {
+              "id": "github-ubuntu24-20261004.327.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261004.327.1"
+            },
+            {
+              "id": "github-ubuntu24-20261012.334.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261012.334.1"
+            },
+            {
+              "id": "github-ubuntu24-20261023.334.3",
+              "image_os": "ubuntu24",
+              "image_version": "20261023.334.3"
+            },
+            {
+              "id": "github-ubuntu24-20261026.354.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261026.354.1"
+            },
+            {
+              "id": "github-ubuntu24-20261101.360.1",
+              "image_os": "ubuntu24",
+              "image_version": "20261101.360.1"
+            }
+          ]
+        },
+        "matched_profile_ids": [
+          "github-ubuntu24-20261101.360.1"
+        ],
+        "actual": {
+          "image_os": "ubuntu24",
+          "image_version": "20261101.360.1"
+        }
+      }
+    }
+  ],
+  "failures": []
+}

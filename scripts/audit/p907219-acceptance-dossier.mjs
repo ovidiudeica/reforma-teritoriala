@@ -1,6 +1,7 @@
 // P9.0.7.2.19 — immutable evidence-consolidation gate, NOT geometry recertification or legal promotion.
 // Network-free, read-only, 85 OSM descriptive roles; no ACTUAL mutation or live OSM requests.
 import assert from 'node:assert/strict';
+import {trustedActualRelease,HISTORICAL_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
@@ -175,8 +176,9 @@ assert.equal(semantic.upstream_tag_census_sha256,hash('docs/p9.0.7.2.15-osm-tag-
 assert.equal(semantic.upstream_verified_geometry_ledger_sha256,hash('docs/p9.0.6.2-verified-evidence-ledger.json'));
 assert.equal(roles.existing_actual_snapshot_id,actual.snapshot_id);
 assert.equal(roles.existing_actual_release_fingerprint_sha256,actual.release_fingerprint_sha256);
-assert.equal(actual.snapshot_id,manifest.source.actual_snapshot);
-assert.equal(actual.release_fingerprint_sha256,manifest.source.actual_release_fingerprint_sha256);
+assert.equal(manifest.source.actual_snapshot,HISTORICAL_ACTUAL.snapshot);
+assert.equal(manifest.source.actual_release_fingerprint_sha256,HISTORICAL_ACTUAL.fingerprint);
+trustedActualRelease(actual,index);
 assert.equal(roles.relation_count,85);
 assert.equal(roles.indexed_actual_entities,85);
 assert.equal(index.entity_count,roles.existing_actual_entity_count);
