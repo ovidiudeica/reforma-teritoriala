@@ -108,8 +108,60 @@ export function validateProvenanceBoundary({changed,read,baseline,admissionBytes
  if(host.host_trust_fingerprint_sha256!==admission.fingerprint)fail('profile fingerprint');
  return {status:'PASS',mode:'OWNER_AUTHORIZED_EXACT_P905_PROVENANCE',admission_sha256:ADMISSION_SHA,protected_changes:protectedChanges};
 }
+
+// Exact RT-VA1 provenance-only Linux receipt: no semantic, canonical or historical reclassification.
+const VA1_PROVENANCE_BASE='cdbae72d6dc7a4428ecb9862f43daf3bfff454fd';
+const VA1_EXACT_FILES={
+ 'data/current/actual-build-environment-manifest.json':['02e099e7f0fce9976eef9590b2d6cb66fab748cd74c29bfbd584e33fdae04cc3',11963],
+ 'data/current/actual-build-environment-gate.json':['6bb16830a893b814e282cd5a41a54776aefc13c275d251a9ea9a382652562fbb',12509],
+ 'data/current/actual-release-manifest.json':['31206cef042615aa91548d75a51a1f3cf4b517686a46934110a264bed34e06d2',22513],
+ 'data/current/actual-release-gate.json':['c9461f8dd2828baa7f3719f6126d5a603a4fe42314fdf48fb180e7c6722929b8',39860],
+ 'data/current/actual-release-persisted.json':['09b9ca73bc03932d8df8c062745310ddc19c654fd78b1630d9b451916cb98331',2228]
+};
+function auditExactVariantAProvenance(){
+ const expected=[
+ '.github/workflows/actual-candidate.yml','.github/workflows/actual-promote-candidate.yml',
+ '.github/workflows/rt-va1-provenance-proposal.yml','scripts/process/run-actual-deterministic-candidate.sh',
+ 'scripts/process/prepare-rt-va1-provenance-only.mjs',
+ 'scripts/audit/web-r2a1-provenance-boundary.mjs','scripts/audit/web-r2a1-admin-level-census.mjs',
+ ...Object.keys(VA1_EXACT_FILES)
+ ].sort();
+ const changed=execFileSync('git',['diff','--name-only',VA1_PROVENANCE_BASE,'HEAD'],{encoding:'utf8'}).trim().split(String.fromCharCode(10)).filter(Boolean).sort();
+ if(JSON.stringify(changed)!==JSON.stringify(expected))fail('RT-VA1 provenance write boundary differs from approved file list');
+ for(const [path,[digest,size]]of Object.entries(VA1_EXACT_FILES)){
+  const content=readFileSync(path);if(content.length!==size||sha(content)!==digest)fail('RT-VA1 Linux artifact bytes mismatch '+path);
+ }
+ const priorPath=p=>JSON.parse(execFileSync('git',['show',VA1_PROVENANCE_BASE+':'+p]));
+ const old=priorPath('data/current/actual-release-manifest.json');
+ const oldPersisted=priorPath('data/current/actual-release-persisted.json');
+ const current=JSON.parse(readFileSync('data/current/actual-release-manifest.json'));
+ const persisted=JSON.parse(readFileSync('data/current/actual-release-persisted.json'));
+ const env=JSON.parse(readFileSync('data/current/actual-build-environment-manifest.json'));
+ const envGate=JSON.parse(readFileSync('data/current/actual-build-environment-gate.json'));
+ const releaseGate=JSON.parse(readFileSync('data/current/actual-release-gate.json'));
+ for(const key of ['snapshot_id','release_fingerprint_sha256','content_fingerprint_sha256','components','geometry','source_bundle','review_evidence_bundle','public_contract','content_identity']){
+  if(JSON.stringify(current[key])!==JSON.stringify(old[key]))fail('RT-VA1 canonical semantic drift '+key);
+ }
+ if(current.snapshot_id!=='actual-a9e5a4ddcb5277ef'||persisted.snapshot_id!==oldPersisted.snapshot_id||
+  persisted.release_fingerprint_sha256!==oldPersisted.release_fingerprint_sha256||
+  persisted.provenance_hardening?.previous_manifest_sha256!==oldPersisted.manifest_sha256||
+  persisted.provenance_hardening?.change_type!=='RT-VA1_deterministic_derivative_pipeline_rebind'||
+  persisted.provenance_hardening?.semantic_identity_unchanged!==true)fail('RT-VA1 historical marker drift');
+ const envBytes=readFileSync('data/current/actual-build-environment-manifest.json'),manifestBytes=readFileSync('data/current/actual-release-manifest.json');
+ if(envGate.status!=='PASS'||releaseGate.status!=='PASS'||persisted.validated_release_gate_status!=='PASS'||
+   envGate.build_environment_sha256!==sha(envBytes)||releaseGate.manifest_sha256!==sha(manifestBytes)||
+   persisted.manifest_sha256!==sha(manifestBytes)||persisted.build_environment_fingerprint_sha256!==env.environment_fingerprint_sha256||
+   current.build_environment?.sha256!==sha(envBytes)||
+   current.build_environment?.environment_fingerprint_sha256!==env.environment_fingerprint_sha256||
+   current.host_trust?.sha256!==old.host_trust?.sha256)fail('RT-VA1 provenance chain mismatch');
+ const policy=JSON.parse(readFileSync('docs/p9.0.4.3-promotion-policy.json'));
+ if(policy.p91_import_allowed!==false||policy.semantic_acceptance!=='BLOCKED_INCOMPLETE')fail('RT-VA1 P9.1 gate changed');
+ return {status:'PASS',mode:'RT_VA1_EXACT_PROVENANCE_REBIND',historical_snapshot:current.snapshot_id,base:VA1_PROVENANCE_BASE};
+}
+
 export function auditProvenanceBoundary(base){
  const live=JSON.parse(readFileSync('data/current/actual-release-manifest.json'));
+ if(sha(readFileSync('data/current/actual-release-manifest.json'))===VA1_EXACT_FILES['data/current/actual-release-manifest.json'][0])return auditExactVariantAProvenance();
  if(live.snapshot_id===VARIANT_A_ACTUAL.snapshot){
   const audit=validateRtVa1Candidate();
   return {status:'PASS',mode:'EXACT_PROMOTED_RT_VA1_SEMANTIC_CHANGE',audit};
