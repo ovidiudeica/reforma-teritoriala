@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "ACTUAL_BUILD_ENVIRONMENT",
   "environment_fingerprint_algorithm": "actual-build-environment-v1",
-  "environment_fingerprint_sha256": "01489b02ff21c4dd3d1297b5a0318cf7d5ba822fcc516a2d76653562a6f2e858",
+  "environment_fingerprint_sha256": "d95917e10a4cbceb2dc8a187c8ae4d83da3c2740d2999342adeed516599c712d",
   "policy": "Exact ACTUAL execution-environment binding. GitHub-hosted runner image plus explicit host-trust contract, digest-pinned ACTUAL OCI runtime, pinned Buildx binary and digest-pinned BuildKit builder, OS-enforced Docker network isolation, JIT-less single-CPU deterministic execution, Node/npm, package files, vendored offline npm dependencies, workflow bytes and GitHub Action commit SHAs are pinned. Any silent environment, builder-toolchain, host-stack, CPU-profile or network-policy drift fails closed.",
   "environment": {
     "runner": {
@@ -87,7 +87,7 @@
       "deterministic_runner": "scripts/process/run-actual-deterministic-candidate.sh"
     },
     "support_files": {
-      "scripts/lib/actual-build-environment.mjs": "c3b315a2414f4401ea4ef3ce5dd36d00d3a867540e42e5b1c2ed41d74145d3ef",
+      "scripts/lib/actual-build-environment.mjs": "9ebdb11a06f21a8c1cc16e63cced7c6c32a88784a45b58ca6dd17dd13cecd2db",
       "scripts/lib/actual-npm-dependency-bundle.mjs": "4767f27ce18426057d92bf778049c45c8b2a37459843324a52e7018e6842d054",
       "scripts/process/build-actual-build-environment-manifest.mjs": "5093063f5f49e5a6a3232e10a3ddde43f827d1ff1d2036355563ff7ce5be91db",
       "scripts/process/audit-actual-build-environment-gate.mjs": "2061c336d2ec54d189a9682ee8297aa13e3fed9ee83127d6596e00fe30e1525c",
@@ -109,6 +109,9 @@
       "scripts/process/prove-actual-network-denial.mjs": "60e1845aa5a0caf0f9cd065c737f6d0718018fef088d93093e0b1a8977ae74ff",
       "scripts/process/verify-actual-persisted-base.mjs": "8cc25b64647178b09569fc782ae000914c39dcf7d51137b05efd6348bd45a85c",
       "scripts/process/run-actual-deterministic-candidate.sh": "6d82f244f31c102eadcee453ab166d3c00ea42c5a534af6544b8dcebcc9e8a02",
+      "scripts/process/build-p907216-osm-role-ui.mjs": "5f56528c1618cb62ebe3acae43b5e96062903315a142b3bbe7cc02be600f0a41",
+      "scripts/process/build-p82-topology.mjs": "d5341d2dcd9f259381b76865c7fe47c02d3753aa90b3a0a5971892316408d095",
+      "scripts/process/rebind-rt-va1-card-audit.mjs": "f004d8d933c765afdc8e1c3752eb2bd8d2628c838e67e96274c347ea7b6a16ed",
       "scripts/lib/actual-candidate-lifecycle.mjs": "26a7a552a2db52208dbf960f6b0f4e90066d1e85052211f36fe79792c7802807",
       "scripts/process/build-actual-candidate-diff.mjs": "605ea90d02c40192530fffad39c08c41eb3ebb76094e4b0ea8885213d1e5e997",
       "scripts/process/prepare-actual-candidate-promotion.mjs": "e569dc42d01ced65f9dcb4f5f107880d0bc6408f15cfc80eb1fe876678088470",
