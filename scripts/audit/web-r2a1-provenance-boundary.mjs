@@ -124,6 +124,8 @@ function auditExactVariantAProvenance(){
  '.github/workflows/rt-va1-provenance-proposal.yml','scripts/process/run-actual-deterministic-candidate.sh',
  'scripts/process/prepare-rt-va1-provenance-only.mjs',
  'scripts/audit/web-r2a1-provenance-boundary.mjs','scripts/audit/web-r2a1-admin-level-census.mjs',
+ '.github/workflows/actual-change-reproducibility-gate.yml','scripts/lib/actual-build-environment.mjs',
+ 'scripts/process/audit-actual-publication-path.mjs','scripts/process/rebind-rt-va1-card-audit.mjs',
  ...Object.keys(VA1_EXACT_FILES)
  ].sort();
  const changed=execFileSync('git',['diff','--name-only',VA1_PROVENANCE_BASE,'HEAD'],{encoding:'utf8'}).trim().split(String.fromCharCode(10)).filter(Boolean).sort();
