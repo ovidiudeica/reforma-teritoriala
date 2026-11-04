@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {trustedActualRelease} from '../lib/rt-va1-release-identity.mjs';
 import {osmTreeFilterSummary,OSM_UNKNOWN,allOsmLevelFilters} from '../../atlas-osm-admin-filter.mjs';
 import {planOsmLevelGeometryAction} from '../../atlas-osm-level-geometry-actions.mjs';
 import {createAtlasFilters} from '../../atlas-filters.mjs';
@@ -118,7 +119,8 @@ test('WEB-R2c.1.1: empty state is distinct from loading/errors and URL/Undo impl
 test('WEB-R2c.1.1: public ACTUAL corpus counts are independent of DOM virtualization',async()=>{
  const [index,tree]=await Promise.all(['public/data/actual-entities.json','public/data/actual-consolidated-tree.json'].map(async p=>JSON.parse(await readFile(p,'utf8'))));
  const nodeById=new Map(tree.nodes.map(n=>[n.id,n])),entityById=new Map(index.entities.map(e=>[e.id,e]));
- assert.equal(entityById.size,5848);
+ const release=JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8'));
+ assert.equal(entityById.size,trustedActualRelease(release,index).entityCount);
  const context={entityById,osmRoleById:new Map()};
  const all=osmTreeFilterSummary(nodeById,tree.root_ids,allOsmLevelFilters(),context);
  assert.equal(all.matches+all.ancestors,all.visibleIds.size);

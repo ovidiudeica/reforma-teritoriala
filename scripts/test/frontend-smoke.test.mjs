@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {access,readFile} from 'node:fs/promises';
+import {trustedActualRelease,VARIANT_A_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
 
 test('ACTUAL frontend validates current snapshot while tracking published release independently',async()=>{
  const [html,app,manifestText,gateText,buildInfoText]=await Promise.all([
@@ -12,6 +13,7 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
   readFile('public/data/app-build-info.json','utf8')
  ]);
  const manifest=JSON.parse(manifestText);
+ const exact=trustedActualRelease(manifest);
  const gate=JSON.parse(gateText);
  const buildInfo=JSON.parse(buildInfoText);
  assert.equal(gate.status,'PASS');
@@ -28,8 +30,9 @@ test('ACTUAL frontend validates current snapshot while tracking published releas
  assert.equal(buildInfo.actual_release_tag,'actual-v1.2.0');
  assert.equal(buildInfo.actual_snapshot_id,'actual-a9e5a4ddcb5277ef');
  assert.equal(buildInfo.release_fingerprint_sha256,'a9e5a4ddcb5277ef614858c477be42bf1fe32e2ab1ca214ccad94fb9f42a6446');
- assert.equal(buildInfo.actual_snapshot_id,manifest.snapshot_id);
- assert.equal(buildInfo.release_fingerprint_sha256,manifest.release_fingerprint_sha256);
+ // App-build-info is independently bound to the last published release.
+ // A new candidate must not be mislabeled as already published.
+ if(exact===VARIANT_A_ACTUAL)assert.notEqual(buildInfo.actual_snapshot_id,manifest.snapshot_id);
  assert.doesNotMatch(app,/Build metadata nu corespunde snapshot-ului ACTUAL/);
  assert.match(app,/ACTUAL curent:/);
  assert.match(app,/publicat:/);
@@ -68,10 +71,10 @@ test('ACTUAL v3 public contract exposes a consolidated statistical hierarchy whe
  if(manifest.public_contract?.contract!=='actual-public-entity-v3')return;
  const index=JSON.parse(await readFile(manifest.public_contract.path,'utf8'));
  const tree=JSON.parse(await readFile(manifest.public_contract.hierarchy.path,'utf8'));
- assert.equal(index.entity_count,5848);
+ assert.equal(index.entity_count,trustedActualRelease(manifest,index).entityCount);
  assert.equal(index.statistical_only_entity_count,18);
  assert.equal(index.statistical_role_entity_count,63);
  assert.equal(tree.contract,'actual-consolidated-hierarchy-v1');
- assert.equal(tree.node_count,5848);
+ assert.equal(tree.node_count,trustedActualRelease(manifest,index).entityCount);
  assert.deepEqual(tree.root_ids,['osm-r90689','osm-r58974']);
 });

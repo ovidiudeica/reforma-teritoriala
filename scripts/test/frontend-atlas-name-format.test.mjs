@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {trustedActualRelease,VARIANT_A_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
 import {formatEntityName} from '../../atlas-name-format.mjs';
 import {createSearchIndex,searchEntities} from '../../atlas-search.mjs';
 import {entityProvenance} from '../../atlas-presentation.mjs';
@@ -36,13 +37,14 @@ test('permanent Romanian casing for RO and MD: proper words, particles, hyphen, 
  assert.equal(formatEntityName('<img src=x>'),'<img src=x>');
 });
 
-test('casing is idempotent on all 5848 released names and hierarchy labels; public bytes untouched',async()=>{
+test('casing is idempotent on every released name and hierarchy label; public bytes untouched',async()=>{
  const [rawIndex,rawHierarchy]=await Promise.all([
   readFile('public/data/actual-entities.json','utf8'),
   readFile('public/data/actual-consolidated-tree.json','utf8')
  ]);
  const entities=JSON.parse(rawIndex).entities,nodes=JSON.parse(rawHierarchy).nodes;
- assert.equal(entities.length,5848);assert.equal(nodes.length,5848);
+ const exact=trustedActualRelease(JSON.parse(await readFile('data/current/actual-release-manifest.json','utf8')),{entities,entity_count:entities.length});
+ assert.equal(entities.length,exact.entityCount);assert.equal(nodes.length,exact.entityCount);
  let changed=0;
  for(const record of [...entities,...nodes]){
   const name=record.display_name,formatted=formatEntityName(name);

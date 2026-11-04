@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {trustedActualRelease,VARIANT_A_ACTUAL} from '../lib/rt-va1-release-identity.mjs';
 import {fileURLToPath} from 'node:url';
 import {join} from 'node:path';
 import {
@@ -12,6 +13,7 @@ const root=fileURLToPath(new URL('../../',import.meta.url));
 const read=async file=>readFile(join(root,file));
 const json=async file=>JSON.parse(await read(file));
 const index=await json('public/data/actual-entities.json');
+const exact=trustedActualRelease(await json('data/current/actual-release-manifest.json'),index);
 const entities=index.entities;
 const byId=new Map(entities.map(entity=>[entity.id,entity]));
 const allClasses=Object.keys(geometryLabels).filter(cls=>cls!=='statistical_only');
@@ -48,19 +50,19 @@ function policyExpected(entity,state,cls,sub,level){
  return (state.classes.includes(cls)&&state.subtypes.includes(sub))||statistical;
 }
 
-test('P4.1 per-ID visibility matrix: 5848 identities × 170 filter states, independent policy oracle',()=>{
+test('P4.1 per-ID visibility matrix: exact current release identities and admissible filter states',()=>{
  assert.equal(index.contract,'actual-public-entity-v3');
- assert.equal(index.entity_count,5848);
- assert.equal(entities.length,5848);
- assert.equal(byId.size,5848,'duplicate public identity');
- assert.deepEqual(index.entity_count_by_jurisdiction,{RO:3246,MD:2602});
+ assert.equal(index.entity_count,exact.entityCount);
+ assert.equal(entities.length,exact.entityCount);
+ assert.equal(byId.size,exact.entityCount,'duplicate public identity');
+ assert.deepEqual(index.entity_count_by_jurisdiction,{RO:exact.RO,MD:exact.MD});
  assert.equal(roles.length,63);
  assert.equal(roles.filter(e=>e.category!=='statistical').length,45);
  assert.equal(roles.filter(e=>e.category==='statistical').length,18);
  assert.deepEqual([1,2,3].map(level=>roles.filter(e=>statisticalLevel(e)===level).length),[5,10,48]);
- assert.equal(allSubtypes.length,21,'review matrix coverage for changed taxonomy');
+ assert.equal(allSubtypes.length,exact===VARIANT_A_ACTUAL?20:21,'review matrix coverage for changed taxonomy');
  const states=matrixStates();
- assert.equal(states.length,170,'P4.0 filter-state contract drift');
+ assert.equal(states.length,exact===VARIANT_A_ACTUAL?168:170,'P4.0 filter-state contract drift');
  const seenVisible=new Map(entities.map(e=>[e.id,0]));
  const classified=entities.map(entity=>({
   entity,cls:geometryClass(entity),sub:geometrySubtype(entity),level:statisticalLevel(entity)
@@ -81,7 +83,7 @@ test('P4.1 per-ID visibility matrix: 5848 identities × 170 filter states, indep
    comparisons++;
   }
  }
- assert.equal(comparisons,994160);
+ assert.equal(comparisons,exact.entityCount*(exact===VARIANT_A_ACTUAL?168:170));
  assert.equal([...seenVisible.values()].filter(count=>count===0).length,0,'identity never eligible');
  console.log('P4.1 matrix PASS: '+entities.length+' IDs × '+states.length+' states = '+comparisons+' checks; zero mismatches');
 });
@@ -89,7 +91,7 @@ test('P4.1 per-ID visibility matrix: 5848 identities × 170 filter states, indep
 test('P4.1 all identities resolve uniquely into SHA-bound geometry tiers and partitioned chunks',async()=>{
  const manifest=await json('data/current/actual-release-manifest.json');
  const publicContract=manifest.public_contract;
- assert.equal(publicContract.entity_count,5848);
+ assert.equal(publicContract.entity_count,exact.entityCount);
  assert.equal(publicContract.geometry_chunks.chunk_count,115);
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
  const tierDescriptors=Object.values(publicContract.geometry_tiers).flatMap(byTier=>Object.values(byTier));
@@ -116,7 +118,7 @@ test('P4.1 all identities resolve uniquely into SHA-bound geometry tiers and par
    }
   }
  }
- assert.equal(publicCount.size,5848,'missing public geometry');
+ assert.equal(publicCount.size,exact.entityCount,'missing public geometry');
  for(const entity of entities)assert.equal(publicCount.get(entity.id),1,'duplicate/missing geometry '+entity.id);
  const chunks=await json(publicContract.geometry_chunks.path);
  assert.equal(chunks.chunk_count,115);
@@ -141,11 +143,11 @@ test('P4.1 all identities resolve uniquely into SHA-bound geometry tiers and par
    chunkCount.set(id,(chunkCount.get(id)||0)+1);
   }
  }
- assert.equal(totalFeatures,5749,'P4.0 chunk population drift');
- assert.equal(chunkCount.size,5749,'duplicate chunk feature and missing chunk identity');
+ assert.equal(totalFeatures,exact.entityCount-99,'P4.0 chunk population drift');
+ assert.equal(chunkCount.size,exact.entityCount-99,'duplicate chunk feature and missing chunk identity');
  for(const entity of entities){
   assert.equal(chunkCount.get(entity.id)||0,['local','detail'].includes(entity.map.tier)?1:0,'chunk binding '+entity.id);
  }
  assert.equal(entities.length-chunkCount.size,99,'overview/statistical complement drift');
- console.log('P4.1 geometry PASS: 5848 unique bindings; 115/115 chunk SHA, bytes and feature counts; 8/8 layers');
+ console.log('P4.1 geometry PASS: '+exact.entityCount+' unique bindings; 115/115 chunk SHA, bytes and feature counts; 8/8 layers');
 });

@@ -273,6 +273,22 @@ const actualReleasePromise=(async()=>{
  }
 })();
 
+function renderLaunchCoverage(index){
+ const paragraph=document.getElementById('launch-coverage')?.querySelector?.('p');
+ if(!paragraph)return;
+ const counts=index.entity_count_by_jurisdiction;
+ if(!counts||!Number.isInteger(index.entity_count)||counts.RO+counts.MD!==index.entity_count||
+ !Array.isArray(index.entities)||index.entities.length!==index.entity_count||
+ index.entities.filter(e=>e.jurisdiction==='RO').length!==counts.RO||
+ index.entities.filter(e=>e.jurisdiction==='MD').length!==counts.MD)
+  throw Error('Acoperirea ACTUAL nu corespunde inventarului oficial public');
+ const n=new Intl.NumberFormat('ro-RO');
+ paragraph.textContent='ACTUAL conține '+n.format(index.entity_count)+
+  ' de înregistrări teritoriale și statistice: '+n.format(counts.RO)+
+  ' pentru România și '+n.format(counts.MD)+
+  ' pentru Republica Moldova. Aceste numere descriu corpusul ACTUAL curent, fără a afirma acoperirea juridică exhaustivă.';
+}
+
 async function loadIndex(){
  const release=await actualReleasePromise;
  const response=await fetch(release.manifest.public_contract.path,{cache:'no-cache'});
@@ -286,6 +302,7 @@ async function loadIndex(){
  renderFilters();
  renderLegend({container:document.getElementById('atlas-legend'),document,entities:index.entities});
  renderGlobalProvenance({container:document.getElementById('global-provenance'),document,...releaseData,index});
+ renderLaunchCoverage(index);
  wireSearch();
  updateJurisdictionStatus();
  return index;
