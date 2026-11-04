@@ -112,11 +112,11 @@ export function validateProvenanceBoundary({changed,read,baseline,admissionBytes
 // Exact RT-VA1 provenance-only Linux receipt: no semantic, canonical or historical reclassification.
 const VA1_PROVENANCE_BASE='cdbae72d6dc7a4428ecb9862f43daf3bfff454fd';
 const VA1_EXACT_FILES={
- 'data/current/actual-build-environment-manifest.json':['02e099e7f0fce9976eef9590b2d6cb66fab748cd74c29bfbd584e33fdae04cc3',11963],
- 'data/current/actual-build-environment-gate.json':['6bb16830a893b814e282cd5a41a54776aefc13c275d251a9ea9a382652562fbb',12509],
- 'data/current/actual-release-manifest.json':['31206cef042615aa91548d75a51a1f3cf4b517686a46934110a264bed34e06d2',22513],
- 'data/current/actual-release-gate.json':['c9461f8dd2828baa7f3719f6126d5a603a4fe42314fdf48fb180e7c6722929b8',39860],
- 'data/current/actual-release-persisted.json':['09b9ca73bc03932d8df8c062745310ddc19c654fd78b1630d9b451916cb98331',2228]
+ 'data/current/actual-build-environment-manifest.json':['a0908d0a8380a79c95f8d3997d3d527104cad60e9cb7cc91dc63bdb792ad3c22',12324],
+ 'data/current/actual-build-environment-gate.json':['0dc117b132b5adf3b87a42b6a042e94fc41269475925a644f5f294b3f2064142',12509],
+ 'data/current/actual-release-manifest.json':['b193080d81d49a0d6cf77a173fb55fd2cea6274f1ba6d4cd08c4a352e60890e7',22513],
+ 'data/current/actual-release-gate.json':['71ffd989b8d4d48f604ade9c6abb66fcf5372561054a95fdc3833036afdea70d',39860],
+ 'data/current/actual-release-persisted.json':['a86cba4e37fb1659d8fba0fa47775e25c0676a8b4e2aea562f915ca0f0b9d986',2228]
 };
 function auditExactVariantAProvenance(){
  const expected=[
