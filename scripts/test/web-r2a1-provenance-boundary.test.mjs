@@ -2,16 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {execFileSync} from 'node:child_process';
 import {validateProvenanceBoundary} from '../audit/web-r2a1-provenance-boundary.mjs';
 const dir='docs/evidence/ni-fin31-host-qualification-20261025/';
 const current='docs/evidence/p905-20261101/';
-const previousMain='b005f2cf2e5842eae33fc575c84617fac960e507';
-const previousBytes=p=>execFileSync('git',['show',previousMain+':'+p]);
+const archivalRoot='docs/evidence/rt-va1-release-acceptance/historical-p905/';
+const hash=b=>createHash('sha256').update(b).digest('hex');
+const previousBytes=(p,descriptor)=>{
+ if(!p.startsWith('data/current/')||p.split('/').length!==3)throw Error('Unexpected historic fixture path '+p);
+ const bytes=readFileSync(archivalRoot+p.split('/').at(-1));
+ if(bytes.length!==descriptor.bytes||hash(bytes)!==descriptor.sha256)throw Error('Historical P9.0.5 fixture hash mismatch '+p);
+ return bytes;
+};
 function fixture(){
  const admissionBytes=readFileSync(current+'exact-provenance-admission.json');
  const admission=JSON.parse(admissionBytes);
- const buffers=Object.fromEntries(Object.keys(admission.files).map(p=>[p,previousBytes(p)]));
+ const buffers=Object.fromEntries(Object.entries(admission.files).map(([p,descriptor])=>[p,previousBytes(p,descriptor)]));
  return {changed:Object.keys(buffers),read:p=>buffers[p],buffers,admissionBytes,
  baseline:JSON.parse(readFileSync(dir+'baseline-release-manifest.json')),
  authorizationBytes:{'owner-authorization.json':readFileSync(current+'owner-authorization.json')}};
