@@ -19,6 +19,11 @@ const publicationSurface=path=>
  || path==='public/data/actual-entities.json'
  || path==='public/data/actual-geometry-chunks.json'
  || path==='public/data/actual-consolidated-tree.json'
+ || path==='public/data/p907216-osm-roles.json'
+ || path==='public/data/actual-topology-index.json'
+ || path.startsWith('public/data/topology/')
+ || path.startsWith('public/data/topology-frontiers/')
+ || path.startsWith('assets/web-card-audit/')
  || path.startsWith('public/geo/current/')
  || path.startsWith('public/geo/actual/')
  || path==='data/sources/actual-settlement-policy.json'
