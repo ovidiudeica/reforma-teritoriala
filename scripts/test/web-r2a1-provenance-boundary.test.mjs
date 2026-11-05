@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {validateProvenanceBoundary} from '../audit/web-r2a1-provenance-boundary.mjs';
+import {validateProvenanceBoundary,certifyLaterReadOnlyPaths} from '../audit/web-r2a1-provenance-boundary.mjs';
 const dir='docs/evidence/ni-fin31-host-qualification-20261025/';
 const current='docs/evidence/p905-20261101/';
 const archivalRoot='docs/evidence/rt-va1-release-acceptance/historical-p905/';
@@ -34,3 +34,14 @@ test('missing required bytes fail closed',()=>{const x=fixture();delete x.buffer
 test('historical fixture is independently hash-bound and needs no Git history',()=>assert.equal(createHash('sha256').update(readFileSync(dir+'baseline-release-manifest.json')).digest('hex'),'52ae583f284bac2d00bc3b5e4b96b6c429c659b8def297197d7f3f38dc042856'));
 
 test('legacy admission cannot silently validate newly rebound bytes',()=>{const x=fixture();x.admissionBytes=readFileSync(dir+'exact-provenance-admission.json');x.authorizationBytes={'owner-authorization.json':readFileSync(dir+'owner-authorization.json'),'census-owner-authorization.json':readFileSync(dir+'census-owner-authorization.json')};assert.throws(()=>validateProvenanceBoundary(x),/approved bytes/);});
+
+test('RT-VA1 exact historical provenance remains certified after unrelated read-only changes',()=>{
+ const changed=['scripts/lib/rt-host-qualification.mjs','.github/workflows/rt-host-qualification.yml','docs/rt-host-qualification.md'];
+ assert.deepEqual(certifyLaterReadOnlyPaths(changed),{status:'PASS',mode:'POST_CERTIFICATION_READ_ONLY',changed_count:3});
+});
+for(const p of ['data/current/actual-release-manifest.json','data/sources/osm-current.json',
+ 'public/data/actual-entities.json','assets/web-card-audit/manifest.json']){
+ test('RT-VA1 post-certification guard refuses altered protected bytes '+p,()=>{
+  assert.throws(()=>certifyLaterReadOnlyPaths(['docs/a.md',p]),/protected paths changed after provenance/);
+ });
+}

@@ -1,0 +1,102 @@
+name: RT-HOST.2 review-only admission evidence gate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/rt-host-admission-gate.yml'
+      - 'scripts/lib/rt-host-qualification.mjs'
+      - 'scripts/audit/rt-host-qualification.mjs'
+      - 'scripts/lib/actual-host-trust.mjs'
+      - 'data/current/actual-host-trust-manifest.json'
+      - 'docs/evidence/rt-host-admission/**'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  admission-review:
+    name: rt-host-admission-review
+    if: github.event.pull_request.head.repo.full_name == 'ovidiudeica/reforma-teritoriala'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Detect an exact host-manifest admission proposal
+        id: scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$HEAD_SHA"
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > "$RUNNER_TEMP/rt-host-paths.txt"
+          if grep -qx 'data/current/actual-host-trust-manifest.json' "$RUNNER_TEMP/rt-host-paths.txt"; then
+            echo "applicable=true" >> "$GITHUB_OUTPUT"
+            node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const lines=readFileSync(process.env.RUNNER_TEMP+'/rt-host-paths.txt','utf8').trim().split('\n');
+          const allowed=/^(scripts\/lib\/actual-host-trust\.mjs|scripts\/process\/prepare-p905-runner-provenance\.mjs|scripts\/test\/actual-host-trust\.test\.mjs|data\/current\/(actual-host-trust-manifest|actual-build-environment-manifest|actual-build-environment-gate|actual-release-manifest|actual-release-gate|actual-release-persisted)\.json|docs\/evidence\/rt-host-admission\/(proposal|A|B|comparison)\.json|docs\/rt-host-qualification\.md)$/;
+          const bad=lines.filter(x=>!allowed.test(x));
+          if(bad.length)throw Error('RT_HOST_PROPOSAL_FORBIDDEN_PATHS '+bad.join(','));
+          NODE
+          else
+            echo "applicable=false" >> "$GITHUB_OUTPUT"
+            echo "RT_HOST_ADMISSION_GATE NOT_APPLICABLE: no production manifest change"
+          fi
+      - name: Verify pinned and immutable GitHub qualification artifacts
+        if: steps.scope.outputs.applicable == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/rt-host-remote-A" "$RUNNER_TEMP/rt-host-remote-B"
+          git show "$BASE_SHA:data/current/actual-host-trust-manifest.json" > "$RUNNER_TEMP/rt-host-baseline.json"
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const dir='docs/evidence/rt-host-admission/';
+          const proposal=JSON.parse(readFileSync(dir+'proposal.json','utf8'));
+          if(proposal.schema!=='rt-host-admission-source-v1'||!/^20\d{6}\.\d+\.\d+$/.test(proposal.target_image))
+            throw Error('RT_HOST_INVALID_ADMISSION_PROPOSAL');
+          for(const lane of ['A','B']){
+            const receipt=JSON.parse(readFileSync(dir+lane+'.json','utf8'));
+            if(!Number.isSafeInteger(proposal.runs[lane])||proposal.runs[lane]<1||
+               receipt.source.run_id!==proposal.runs[lane]||
+               receipt.source.event!=='workflow_dispatch'||receipt.source.ref!=='refs/heads/main')
+              throw Error('RT_HOST_RUN_BINDING_INVALID '+lane);
+          }
+          NODE
+          TARGET="$(node -p "JSON.parse(require('fs').readFileSync('docs/evidence/rt-host-admission/proposal.json')).target_image")"
+          for LANE in A B; do
+            RUN_ID="$(LANE="$LANE" node -p "JSON.parse(require('fs').readFileSync('docs/evidence/rt-host-admission/proposal.json')).runs[process.env.LANE]")"
+            GH_RUN="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID")"
+            GH_RUN="$GH_RUN" LANE="$LANE" node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const receipt=JSON.parse(readFileSync('docs/evidence/rt-host-admission/'+process.env.LANE+'.json','utf8'));
+          const r=JSON.parse(process.env.GH_RUN);
+          if(r.id!==receipt.source.run_id||r.head_sha!==receipt.source.commit_sha||
+             r.event!=='workflow_dispatch'||r.conclusion!=='success'||
+             r.run_attempt!==receipt.source.run_attempt||
+             r.path!=='.github/workflows/rt-host-qualification.yml'||
+             r.head_branch!=='main'||r.repository?.full_name!=='ovidiudeica/reforma-teritoriala')
+            throw Error('RT_HOST_UNTRUSTED_GITHUB_RUN '+process.env.LANE);
+          NODE
+            gh run download "$RUN_ID" --repo "$GITHUB_REPOSITORY" --name "rt-host-observation-$LANE" --dir "$RUNNER_TEMP/rt-host-remote-$LANE"
+            cmp "$RUNNER_TEMP/rt-host-remote-$LANE/observation.json" "docs/evidence/rt-host-admission/$LANE.json"
+          done
+          node scripts/audit/rt-host-qualification.mjs compare --base "$RUNNER_TEMP/rt-host-baseline.json" --a docs/evidence/rt-host-admission/A.json --b docs/evidence/rt-host-admission/B.json --target "$TARGET" --out "$RUNNER_TEMP/rt-host-comparison.json" --require-qualified
+          cmp "$RUNNER_TEMP/rt-host-comparison.json" docs/evidence/rt-host-admission/comparison.json
+          node scripts/audit/rt-host-qualification.mjs admission --base "$RUNNER_TEMP/rt-host-baseline.json" --proposed data/current/actual-host-trust-manifest.json --a docs/evidence/rt-host-admission/A.json --b docs/evidence/rt-host-admission/B.json --comparison docs/evidence/rt-host-admission/comparison.json --out "$RUNNER_TEMP/rt-host-admission-review.json"
+          echo "RT_HOST_ADMISSION_GATE: Evidence verified, NO automatic admission. Review separately and require complete CI plus provenance rebind."
+      - name: Verify repository remains unmodified
+        run: git diff --exit-code

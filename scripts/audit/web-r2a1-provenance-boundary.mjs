@@ -111,6 +111,8 @@ export function validateProvenanceBoundary({changed,read,baseline,admissionBytes
 
 // Exact RT-VA1 provenance-only Linux receipt: no semantic, canonical or historical reclassification.
 const VA1_PROVENANCE_BASE='cdbae72d6dc7a4428ecb9862f43daf3bfff454fd';
+// Immutable integrated provenance snapshot: later read-only PRs are not part of the historical receipt.
+const VA1_CERTIFIED_COMMIT='252ac975129436d2991da564232c576d23b7803b';
 const VA1_EXACT_FILES={
  'data/current/actual-build-environment-manifest.json':['a0908d0a8380a79c95f8d3997d3d527104cad60e9cb7cc91dc63bdb792ad3c22',12324],
  'data/current/actual-build-environment-gate.json':['0dc117b132b5adf3b87a42b6a042e94fc41269475925a644f5f294b3f2064142',12509],
@@ -118,7 +120,17 @@ const VA1_EXACT_FILES={
  'data/current/actual-release-gate.json':['71ffd989b8d4d48f604ade9c6abb66fcf5372561054a95fdc3833036afdea70d',39860],
  'data/current/actual-release-persisted.json':['a86cba4e37fb1659d8fba0fa47775e25c0676a8b4e2aea562f915ca0f0b9d986',2228]
 };
+export function certifyLaterReadOnlyPaths(changed){
+ const protectedPaths=changed.filter(p=>
+   p==='data'||p.startsWith('data/')||
+   p==='public'||p.startsWith('public/')||
+   p==='assets'||p.startsWith('assets/'));
+ if(protectedPaths.length)fail('RT-VA1 certified release protected paths changed after provenance: '+protectedPaths.join(','));
+ return {status:'PASS',mode:'POST_CERTIFICATION_READ_ONLY',changed_count:changed.length};
+}
 function auditExactVariantAProvenance(){
+ try{execFileSync('git',['merge-base','--is-ancestor',VA1_CERTIFIED_COMMIT,'HEAD']);}
+ catch{fail('RT-VA1 certified provenance commit is not an ancestor of HEAD');}
  const expected=[
  '.github/workflows/actual-candidate.yml','.github/workflows/actual-promote-candidate.yml',
  '.github/workflows/rt-va1-provenance-proposal.yml','scripts/process/run-actual-deterministic-candidate.sh',
@@ -128,8 +140,10 @@ function auditExactVariantAProvenance(){
  'scripts/process/audit-actual-publication-path.mjs','scripts/process/rebind-rt-va1-card-audit.mjs',
  ...Object.keys(VA1_EXACT_FILES)
  ].sort();
- const changed=execFileSync('git',['diff','--name-only',VA1_PROVENANCE_BASE,'HEAD'],{encoding:'utf8'}).trim().split(String.fromCharCode(10)).filter(Boolean).sort();
+ const changed=execFileSync('git',['diff','--name-only',VA1_PROVENANCE_BASE,VA1_CERTIFIED_COMMIT],{encoding:'utf8'}).trim().split(String.fromCharCode(10)).filter(Boolean).sort();
  if(JSON.stringify(changed)!==JSON.stringify(expected))fail('RT-VA1 provenance write boundary differs from approved file list');
+ const changedAfterCertification=execFileSync('git',['diff','--name-only',VA1_CERTIFIED_COMMIT,'HEAD'],{encoding:'utf8'}).trim().split(String.fromCharCode(10)).filter(Boolean).sort();
+ certifyLaterReadOnlyPaths(changedAfterCertification);
  for(const [path,[digest,size]]of Object.entries(VA1_EXACT_FILES)){
   const content=readFileSync(path);if(content.length!==size||sha(content)!==digest)fail('RT-VA1 Linux artifact bytes mismatch '+path);
  }
@@ -158,7 +172,7 @@ function auditExactVariantAProvenance(){
    current.host_trust?.sha256!==old.host_trust?.sha256)fail('RT-VA1 provenance chain mismatch');
  const policy=JSON.parse(readFileSync('docs/p9.0.4.3-promotion-policy.json'));
  if(policy.p91_import_allowed!==false||policy.semantic_acceptance!=='BLOCKED_INCOMPLETE')fail('RT-VA1 P9.1 gate changed');
- return {status:'PASS',mode:'RT_VA1_EXACT_PROVENANCE_REBIND',historical_snapshot:current.snapshot_id,base:VA1_PROVENANCE_BASE};
+ return {status:'PASS',mode:'RT_VA1_EXACT_PROVENANCE_REBIND',historical_snapshot:current.snapshot_id,base:VA1_PROVENANCE_BASE,certified_commit:VA1_CERTIFIED_COMMIT,post_certification_read_only:true};
 }
 
 export function auditProvenanceBoundary(base){

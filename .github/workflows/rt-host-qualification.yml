@@ -1,0 +1,105 @@
+name: RT-HOST.1 independent runner evidence (no admission)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/rt-host-qualification.mjs'
+      - 'scripts/audit/rt-host-qualification.mjs'
+      - 'scripts/test/rt-host-qualification.test.mjs'
+      - '.github/workflows/rt-host-qualification.yml'
+      - '.github/workflows/rt-host-admission-gate.yml'
+      - 'docs/rt-host-qualification.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: rt-host-infrastructure-tests
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Verify RT-HOST qualification and admission negative controls
+        run: node --test scripts/test/rt-host-qualification.test.mjs scripts/test/actual-host-trust.test.mjs
+      - name: Verify tracked data have not changed
+        run: git diff --exit-code
+
+  observe:
+    name: rt-host-observation-${{ matrix.lane }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [A, B]
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - name: Capture authentic runner, kernel, Docker, containerd, runc and CPU
+        env:
+          RT_HOST_LANE: ${{ matrix.lane }}
+          RT_HOST_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/audit/rt-host-qualification.mjs capture --out outputs/rt-host/observation.json
+      - name: Enforce read-only observation
+        run: git diff --exit-code
+      - name: Publish content-addressable authentic observation
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rt-host-observation-${{ matrix.lane }}
+          path: outputs/rt-host/observation.json
+          if-no-files-found: error
+
+  compare:
+    name: rt-host-pair-record-only
+    needs: [observe]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: rt-host-observation-A
+          path: outputs/rt-host/A
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: rt-host-observation-B
+          path: outputs/rt-host/B
+      - name: Record independent comparison; mismatch never means qualification
+        run: node scripts/audit/rt-host-qualification.mjs compare --a outputs/rt-host/A/observation.json --b outputs/rt-host/B/observation.json --out outputs/rt-host/comparison.json --record-only
+      - name: Confirm unqualified receipts cannot be promoted by infrastructure CI
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';
+          const x=JSON.parse(await readFile('outputs/rt-host/comparison.json','utf8'));
+          if(!['NOT_QUALIFIED','ALREADY_APPROVED','QUALIFIED_PENDING_SEPARATE_ADMISSION'].includes(x.status))
+            throw Error('Unexpected RT-HOST comparison disposition');
+          if(x.host_profile_admitted!==false||x.semantic_data_modified!==false)
+            throw Error('Observation attempted admission or ACTUAL mutation');
+          console.log('RT_HOST_OBSERVATION_ONLY '+x.status);
+          NODE
+      - name: Preserve cross-run-ready comparison receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rt-host-comparison
+          path: outputs/rt-host/comparison.json
+          if-no-files-found: error
