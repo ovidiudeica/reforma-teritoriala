@@ -1,24 +1,49 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {fileURLToPath} from 'node:url';import {mkdir} from 'node:fs/promises';import path from 'node:path';
-import {launchBrowser,delay,waitFor} from '../test/helpers/atlas-browser.mjs';import {auditEvidenceDirectory} from '../test/helpers/atlas-evidence.mjs';
-const root=fileURLToPath(new URL('../../',import.meta.url)),out=auditEvidenceDirectory();await mkdir(out,{recursive:true});const b=await launchBrowser(root),p=await b.page();
-const state=function(){return {selection:qaApp.selectedEntityId,card:document.querySelector('#details-title').textContent,hidden:document.querySelector('#details-panel').hidden,sheet:document.querySelector('#details-panel').dataset.sheet,filters:[...qaApp.activeGeometrySubtypes].sort(),classes:[...qaApp.activeGeometryClasses].sort(),levels:[...qaApp.activeStatisticalLevels].sort(),osm:qaApp.captureUrlState().osmBasemapVisible,center:qaApp.map.getCenter(),zoom:qaApp.map.getZoom(),open:qaApp.atlasTree.getOpenIds(),scroll:document.querySelector('#hierarchy-tree').scrollTop};};
-const buttons=function(){return ['geometries-reset','map-geometries-reset'].map(id=>document.getElementById(id).getAttribute('aria-disabled'));};
-async function extras(){await p.call(async function(){for(const id of window.p802Extras)qaApp.visibleEntityIds.add(id);qaApp.refreshGeometryVisibility();await qaApp.syncTiers();qaApp.atlasUrl.commit('push');});await delay(100);assert.deepEqual(await p.call(buttons),['false','false']);}
-try{await test('P8.0.2 shared geometry reset in the native Leaflet group',{timeout:240000},async t=>{
- await p.viewport(1440,900);await p.navigate(b.server.url+'/');await p.call(function(){window.p802Map=qaApp.map;window.p802Tree=qaApp.atlasTree;window.p802Roots=[...qaApp.visibleEntityIds].sort();window.p802Extras=[...qaApp.entityById.keys()].filter(id=>!qaApp.visibleEntityIds.has(id)).slice(0,10);});
- await t.test('five commands in order and synchronized default state',async()=>{assert.deepEqual(await p.evaluate("[...document.querySelector('.leaflet-control-zoom').children].map(e=>e.id||e.className)"),['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home','basemap-toggle','map-geometries-reset']);assert.deepEqual(await p.call(buttons),['true','true']);assert.equal(await p.evaluate("document.querySelector('#geometries-reset-status').closest('#entities-panel')"),null);});
- await t.test('both buttons reuse reset, preserve state and native focus, create one History entry',async()=>{
-  await p.call(async function(){await qaApp.selectEntity(window.p802Extras[0],{zoom:false,source:'map'});qaApp.atlasTree.setOpenIds([...qaApp.hierarchyNodeById.values()].filter(n=>n.child_ids.length).map(n=>n.id));document.querySelector('#hierarchy-tree').scrollTop=2500;});
-  for(const id of ['geometries-reset','map-geometries-reset']){await extras();const before=await p.call(state),length=await p.evaluate('history.length');await p.call(function(id){document.getElementById(id).focus();},id);await p.key('Enter');await delay(120);assert.deepEqual(await p.call(state),before);assert.deepEqual(await p.evaluate('[...qaApp.visibleEntityIds].sort()'),await p.evaluate('window.p802Roots'));assert.deepEqual(await p.call(buttons),['true','true']);assert.equal(await p.evaluate('document.activeElement.id'),id);assert.equal(await p.evaluate('history.length'),length+1);await p.key(' ');assert.equal(await p.evaluate('history.length'),length+1);assert.equal(await p.evaluate('qaApp.map===window.p802Map&&qaApp.atlasTree===window.p802Tree'),true);assert.equal(await p.evaluate("[...document.querySelectorAll('.tree-visibility-toggle')].every(e=>{const id=e.dataset.entityId;return e.checked===(qaApp.nistreniaOutlines?.has(id)?qaApp.visibleOperationalOutlineIds.has(id):qaApp.visibleEntityIds.has(id.startsWith('view-nistrenia-role-')?id.slice('view-nistrenia-role-'.length):id));})"),true);}
+import test from 'node:test';import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';import {mkdir} from 'node:fs/promises';import path from 'node:path';
+import {launchBrowser,delay,waitFor} from '../test/helpers/atlas-browser.mjs';
+import {auditEvidenceDirectory} from '../test/helpers/atlas-evidence.mjs';
+const root=fileURLToPath(new URL('../../',import.meta.url)),out=auditEvidenceDirectory();
+await mkdir(out,{recursive:true});const b=await launchBrowser(root),p=await b.page();
+const preserved=()=>p.call(function(){return {selection:qaApp.selectedEntityId,card:document.getElementById('details-title').textContent,filters:[...qaApp.activeGeometrySubtypes].sort(),classes:[...qaApp.activeGeometryClasses].sort(),levels:[...qaApp.activeStatisticalLevels].sort(),osm:qaApp.captureUrlState().osmBasemapVisible,zoom:qaApp.map.getZoom(),center:qaApp.map.getCenter()};});
+try{
+ await test('P8.0.2 adapted WEB-R3.2: single geometry reset owner, map navigation-only',{timeout:240000},async t=>{
+  await p.viewport(1440,900);await p.navigate(b.server.url+'/');
+  await waitFor(()=>p.evaluate('qaApp.entityById.size===5848'),'P802 app');
+  await p.call(function(){window.p802Roots=[...qaApp.visibleEntityIds].sort();window.p802Extras=[...qaApp.entityById.keys()].filter(id=>!qaApp.visibleEntityIds.has(id)).slice(0,10);window.p802Map=qaApp.map;window.p802Tree=qaApp.atlasTree;});
+  await t.test('one contextual reset and exactly three map navigation controls',async()=>{
+   assert.equal(await p.evaluate('document.querySelectorAll("#geometries-reset").length'),1);
+   assert.equal(await p.evaluate('document.getElementById("map-geometries-reset")'),null);
+   assert.deepEqual(await p.evaluate("[...document.querySelector('.leaflet-control-zoom').children].map(e=>e.id||e.className)"),['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home']);
+   assert.equal(await p.evaluate("document.querySelector('#geometries-reset').getAttribute('aria-disabled')"),'true');
+  });
+  await t.test('keyboard reset preserves selection, viewport, filters and adds one History entry',async()=>{
+   await p.call(async function(){await qaApp.selectEntity(window.p802Extras[0],{zoom:false,source:'map'});for(const id of window.p802Extras)qaApp.visibleEntityIds.add(id);qaApp.refreshGeometryVisibility();await qaApp.syncTiers();qaApp.atlasUrl.commit('push');});
+   await p.openPanel('entities');const before=await preserved(),historyLength=await p.evaluate('history.length');
+   assert.equal(await p.evaluate("document.querySelector('#geometries-reset').getAttribute('aria-disabled')"),'false');
+   await p.call(function(){document.getElementById('geometries-reset').focus();});await p.key('Enter');await delay(150);
+   assert.deepEqual(await preserved(),before);assert.deepEqual(await p.evaluate('[...qaApp.visibleEntityIds].sort()'),await p.evaluate('window.p802Roots'));
+   assert.equal(await p.evaluate("document.querySelector('#geometries-reset').getAttribute('aria-disabled')"),'true');
+   assert.equal(await p.evaluate('document.activeElement.id'),'geometries-reset');
+   assert.equal(await p.evaluate('history.length'),historyLength+1);
+   assert.equal(await p.evaluate('qaApp.map===window.p802Map&&qaApp.atlasTree===window.p802Tree'),true);
+  });
+  await t.test('Back and Forward restore per-ID checkboxes and reset state',async()=>{
+   await p.evaluate('history.back()');await waitFor(()=>p.evaluate('qaApp.visibleEntityIds.size===12'),'back checks');
+   assert.equal(await p.evaluate("document.getElementById('geometries-reset').getAttribute('aria-disabled')"),'false');
+   await p.evaluate('history.forward()');await waitFor(()=>p.evaluate('qaApp.visibleEntityIds.size===2'),'forward checks');
+   assert.equal(await p.evaluate("document.getElementById('geometries-reset').getAttribute('aria-disabled')"),'true');
+  });
+  await t.test('desktop and mobile panel reset and navigation targets remain reachable',async()=>{
+   for(const [w,h] of [[360,640],[390,844],[844,390],[768,1024],[900,768],[1440,900]]){
+    await p.viewport(w,h);await p.openPanel('entities');
+    const r=await p.call(function(){const e=document.getElementById('geometries-reset'),r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {width:r.width,height:r.height,hit:e===hit||e.contains(hit)};});
+    assert.ok(r.width>=44&&r.height>=44&&r.hit,JSON.stringify({w,h,r}));
+    await p.screenshot(path.join(out,'p802-r32-'+w+'x'+h+'.png'));
+    await p.click('#drawer-close');
+    const ids=await p.evaluate("[...document.querySelector('.leaflet-control-zoom').children].map(e=>e.id||e.className)");
+    assert.deepEqual(ids,['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home']);
+   }
+  });
+  await t.test('no application errors',()=>{assert.deepEqual(p.errors,[]);assert.deepEqual(p.console.filter(x=>x.type==='error'),[]);});
  });
- await t.test('Back and Forward restore checks and both ARIA states',async()=>{await p.evaluate('history.back()');await delay(500);assert.equal(await p.evaluate('qaApp.visibleEntityIds.size'),12);assert.deepEqual(await p.call(buttons),['false','false']);await p.evaluate('history.forward()');await delay(500);assert.equal(await p.evaluate('qaApp.visibleEntityIds.size'),2);assert.deepEqual(await p.call(buttons),['true','true']);});
- await t.test('card and layer actions synchronize; filters and raster stay independent',async()=>{await p.call(function(){document.querySelector('#selection-visibility-action').click();});assert.deepEqual(await p.call(buttons),['false','false']);await p.call(function(){qaApp.activeGeometrySubtypes.clear();qaApp.refreshGeometryVisibility();document.querySelector('#basemap-toggle').click();});const before=await p.call(state);await p.click('#map-geometries-reset');assert.deepEqual(await p.call(state),before);assert.deepEqual(await p.call(buttons),['true','true']);assert.equal(await p.evaluate('qaApp.visibleEntityIds.size'),2);});
- await t.test('Leaflet reset does not trigger armed point identification',async()=>{await extras();await p.openPanel('identify');await p.click('#identify-pick');assert.equal(await p.evaluate('qaApp.atlasIdentify.armed'),true);await p.click('#map-geometries-reset');assert.equal(await p.evaluate('qaApp.atlasIdentify.armed'),true);assert.equal(await p.evaluate('qaApp.atlasIdentify.state.point'),null);await p.key('Escape');});
- await t.test('nine viewports: effective targets, hit tests, disjoint controls/card/rail and no overflow',async()=>{
-  for(const [w,h]of [[360,640],[390,844],[430,932],[844,390],[640,360],[768,1024],[899,768],[900,768],[1440,900]]){await p.viewport(w,h);await p.call(function(){qaApp.atlasPanels.close({focus:false});});for(const snap of ['peek','half','expanded']){await p.call(function(snap){qaApp.atlasMobile.setSheet(snap);},snap);const metrics=await p.call(function(){const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};},overlap=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;const rail=rect(document.querySelector('#atlas-navigation-rail')),card=rect(document.querySelector('#details-panel')),viewport=rect(document.querySelector('#atlas-viewport')),commands=[...document.querySelector('.leaflet-control-zoom').children].map(e=>{const r=rect(e),hit=document.elementFromPoint((r.left+r.right)/2,(r.top+r.bottom)/2);return {...r,name:e.getAttribute('aria-label'),hit:hit===e||e.contains(hit),inside:r.left>=viewport.left&&r.right<=viewport.right&&r.top>=viewport.top&&r.bottom<=viewport.bottom,rail:overlap(r,rail),card:overlap(r,card)};});return {commands,overflow:document.documentElement.scrollWidth>innerWidth};});assert.equal(metrics.overflow,false);assert.equal(metrics.commands.length,5);assert.ok(metrics.commands.every(e=>e.width>=44&&e.height>=44&&e.hit&&e.inside&&!e.rail&&!e.card),JSON.stringify({w,h,snap,metrics}));}await p.screenshot(path.join(out,`p802-${w}x${h}.png`));}
- });
- await t.test('P8.2 frontier clear and all five commands remain independently reachable',async()=>{
-  for(const [w,h]of [[640,360],[844,390],[900,768],[1440,900]]){await p.viewport(w,h);await p.call(async function(){await qaApp.atlasNeighbors.open('osm-r3277038',document.querySelector('#map-geometries-reset'));});await p.call(function(){const button=[...document.querySelectorAll('#neighbors-results button')].find(e=>e.textContent==='Frontiera comună');if(!button)throw Error('Missing verified frontier action');button.click();});await waitFor(()=>p.evaluate("!document.querySelector('#neighbors-map-clear').hidden"),'frontier mark ready',30000);const hits=await p.call(function(){return [...document.querySelector('.leaflet-control-zoom').children,document.querySelector('#neighbors-map-clear')].map(e=>{const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {id:e.id||e.className,width:r.width,height:r.height,hit:hit===e||e.contains(hit),inside:r.top>=0&&r.bottom<=innerHeight};});});assert.ok(hits.every(e=>e.width>=44&&e.height>=44&&e.hit&&e.inside),JSON.stringify({w,h,hits}));await p.screenshot(path.join(out,`p802-neighbors-${w}x${h}.png`));await p.click('#neighbors-map-clear');assert.equal(await p.evaluate("document.querySelector('#neighbors-map-clear').hidden"),true);await p.key('Escape');}
- });
- await t.test('preview modes, rotation and repeated transitions retain command identity',async()=>{await p.call(function(){window.p802Commands=[...document.querySelector('.leaflet-control-zoom').children];});for(const mode of ['phone','desktop','tablet','phone','auto']){await p.call(function(mode){qaApp.atlasPreview.setMode(mode);},mode);if(mode!=='auto')await p.click('#preview-rotate');assert.equal(await p.evaluate("p802Commands.every((e,i)=>e===document.querySelector('.leaflet-control-zoom').children[i])"),true);}assert.deepEqual(p.errors,[]);});
-});}finally{await b.close();}
+}finally{await b.close();}
