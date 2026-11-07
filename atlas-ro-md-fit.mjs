@@ -27,17 +27,13 @@ export function attachRoMdZoomControl(document,Leaflet){
  // Legacy Node unit tests supply a small DOM double without selectors or real Leaflet controls.
  if(typeof document.querySelector!=='function'||!Leaflet?.DomEvent?.disableClickPropagation)return null;
  const button=document.getElementById('map-home');
- const basemap=document.getElementById('basemap-toggle');
- const reset=document.getElementById('map-geometries-reset');
  const zoom=document.querySelector('.leaflet-control-zoom');
- if(!button||!basemap||!reset||!zoom)throw new Error('Controalele Leaflet de zoom, OSM sau resetare lipsesc');
- // Native zoom pair, country fit, independent raster, then geometry reset.
- zoom.append(button,basemap,reset);
+ if(!button||!zoom)throw new Error('Controalele Leaflet pentru zoom sau reîncadrare lipsesc');
+ // WEB-R3.2: only map navigation stays in the native Leaflet command group.
+ // Raster and geometry resets belong to the contextual panels.
+ zoom.append(button);
  button.classList.add('leaflet-control-zoom-home');
- basemap.classList.add('leaflet-control-zoom-basemap');
- for(const control of [button,basemap,reset]){
-  Leaflet.DomEvent.disableClickPropagation(control);
-  Leaflet.DomEvent.disableScrollPropagation?.(control);
- }
+ Leaflet.DomEvent.disableClickPropagation(button);
+ Leaflet.DomEvent.disableScrollPropagation?.(button);
  return button;
 }

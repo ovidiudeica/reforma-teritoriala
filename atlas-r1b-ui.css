@@ -264,7 +264,7 @@
 #atlas-main .leaflet-control-zoom>button {color:var(--atlas-ui-ink)}
 #atlas-main .leaflet-control-zoom>a:hover,
 #atlas-main .leaflet-control-zoom>button:hover {background:var(--atlas-ui-hover)}
-#atlas-main .leaflet-control-zoom>#map-geometries-reset {border-top:2px solid var(--atlas-ui-border-strong)}
+/* WEB-R3.2: reset is available once, in Entități, not in the map toolbar. */
 @container atlas (max-width:599px){
  /* Four frequent tools and an explicit More control, all keyboard reachable. */
  #atlas-main .atlas-navigation-rail {grid-template-columns:repeat(5,minmax(44px,1fr));gap:3px}
@@ -321,5 +321,15 @@
  #atlas-controls :is(.action-button,.filter-actions button) {border-color:ButtonText}
  #atlas-main .atlas-rail-button[aria-pressed=true] {border:2px solid Highlight;background:Canvas;color:CanvasText}
  #atlas-controls :is(.atlas-panel-disclosure,.atlas-filter-subtypes)>summary {background:Canvas;color:CanvasText}
- #atlas-main .leaflet-control-zoom>#map-geometries-reset {border-top-color:ButtonText}
+ 
+}
+
+/* WEB-R3.2 — compact desktop rail; secondary commands open only on demand. */
+@container atlas (min-width:900px){
+ #atlas-main #navigation-more{display:flex}
+ #atlas-main .atlas-navigation-rail>.atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)){display:none}
+ #atlas-main.atlas-navigation-more .atlas-navigation-rail>.atlas-rail-button{display:flex}
+ #atlas-main.atlas-navigation-more .atlas-navigation-rail{overflow-y:auto}
+ #atlas-main .atlas-rail-button[data-rail-break=true]{margin-top:0}
+ #atlas-main .atlas-rail-button[data-rail-break=true]::before{display:none}
 }

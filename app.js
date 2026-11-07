@@ -414,7 +414,7 @@ function geometryResetDisabled(){
 function syncGeometryReset(){
  // ARIA disabling preserves native keyboard focus after reset (disabled blurs).
  const disabled=geometryResetDisabled();
- for(const id of ['geometries-reset','map-geometries-reset'])document.getElementById(id)?.setAttribute('aria-disabled',String(disabled));
+ for(const id of ['geometries-reset'])document.getElementById(id)?.setAttribute('aria-disabled',String(disabled));
  if(!disabled)document.getElementById('geometries-reset-status').textContent='';
 }
 function resetGeometries(){
