@@ -1,0 +1,23 @@
+name: WEB-R3.3 CodeQL annotation diagnostic (temporary, read-only)
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+  checks: read
+  security-events: read
+jobs:
+  inspect-pr514:
+    if: github.event.pull_request.number == 514
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Show exact CodeQL alert annotation for independent remediation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PRIOR_CODEQL_RUN_ID: "128230138026"
+        run: |
+          set -euo pipefail
+          echo "CodeQL check annotations (prior exact SHA; read-only)"
+          gh api "repos/${GH_REPO}/check-runs/${PRIOR_CODEQL_RUN_ID}/annotations?per_page=100" --jq '.[] | {path,start_line,end_line,title,message,annotation_level,raw_details}'
