@@ -1,3 +1,4 @@
+import {toggleSecondaryBasemap} from './helpers/web-r32-basemap.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
@@ -42,7 +43,7 @@ try{
    assert.equal(await page.evaluate("document.querySelector('#selection-visibility-action').hidden"),true);
   });
   await t.test('reset restores jurisdiction, class, subtype, statistical level; never changes per-ID or raster preference',async()=>{
-   await page.click('#basemap-toggle');
+   await toggleSecondaryBasemap(page);
    await page.click('#filters-toggle');
    await page.click('#layer-ro');
    const sub=await page.evaluate("document.querySelector('[data-kind=geometry-subtype]').dataset.filter");

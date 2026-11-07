@@ -81,7 +81,7 @@ await test('WEB-NI-U1.5 coupled canonical navigation, History, filters, Undo, ex
   await p.call(function(){const section=[...document.querySelectorAll('#filter-list>details')].find(e=>e.querySelector('summary')?.textContent==='Nivel administrativ OSM');section.querySelector('.filter-actions button').click();});
   mark('osm-filter-explicit-action-and-undo-preserve-shared-geometry');
 
-  await p.openPanel('entities');await p.click('#map-geometries-reset');
+  await p.openPanel('entities');await p.click('#geometries-reset');
   assert.deepEqual((await p.call(state)).actual,['osm-r58974','osm-r90689']);assert.equal((await p.call(state)).selected,id);
   assert.equal(await p.evaluate('qaApp.captureUrlState().osmBasemapVisible'),false);
   await p.evaluate('history.back()');await waitFor(()=>p.call(function(id){return qaApp.visibleEntityIds.has(id);},id),'Back reverses shared reset');

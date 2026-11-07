@@ -1,3 +1,4 @@
+import {toggleSecondaryBasemap} from './helpers/web-r32-basemap.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
@@ -16,12 +17,12 @@ try{
    assert.deepEqual(s.roots,['osm-r58974','osm-r90689'].sort());assert.equal(s.selected,null);assert.equal(s.filters,true);assert.equal(s.tab,'true');assert.equal(s.basemap,'true');
   });
   await t.test('basemap toggles independently and History restores without checkbox changes',async()=>{
-   await page.click('#basemap-toggle');
+   await toggleSecondaryBasemap(page);
    assert.equal(await page.evaluate("document.querySelector('#basemap-toggle').getAttribute('aria-pressed')"),'false');
    assert.equal(await page.evaluate("new URL(location.href).searchParams.get('m')"),'0');
    assert.deepEqual(await page.evaluate("[...qaApp.visibleEntityIds].sort()"),['osm-r58974','osm-r90689'].sort());
    assert.equal(await page.evaluate("document.querySelector('#map .leaflet-tile-pane').querySelectorAll('img').length"),0);
-   await page.click('#basemap-toggle');
+   await toggleSecondaryBasemap(page);
    assert.equal(await page.evaluate("document.querySelector('#basemap-toggle').getAttribute('aria-pressed')"),'true');
    assert.equal(await page.evaluate("new URL(location.href).searchParams.get('m')"),null);
    await page.evaluate('history.back()');

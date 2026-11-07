@@ -34,8 +34,8 @@ try{
    await page.evaluate("window.p72Map=qaApp.map;qaApp.selectEntity('osm-r58974',{source:'map',zoom:false})");await delay(200);
    const before=await semantic(),url=await page.evaluate('location.href'),requests=page.requests.filter(x=>x.url.includes('/public/geo/actual/')).length;
    for(const key of ['entities','search','filters','visible','recent','compare','share','info']){
-    if((await snapshot()).state.active===key)await page.click('[data-panel='+key+']');
-    await page.click('[data-panel='+key+']');await delay(150);const s=await snapshot();clear(s);assert.equal(s.state.active,key);assert.equal(s.panes.filter(p=>!p.hidden).length,1);assert.ok(s.panes.filter(p=>p.hidden).every(p=>p.inert));
+    if((await snapshot()).state.active===key)await page.call(function(){qaApp.atlasPanels.close({focus:false});});
+    await page.openPanel(key);await delay(150);const s=await snapshot();clear(s);assert.equal(s.state.active,key);assert.equal(s.panes.filter(p=>!p.hidden).length,1);assert.ok(s.panes.filter(p=>p.hidden).every(p=>p.inert));
     const placement=await page.evaluate("(()=>{const c=document.querySelector('#atlas-controls').getBoundingClientRect(),p=[...document.querySelectorAll('#atlas-controls>section,#results-panel')].find(e=>!e.hidden&&e.id!=='search-panel'),r=p.getBoundingClientRect();return {inside:r.left>=c.left&&r.right<=c.right&&r.top>=c.top&&r.bottom<=c.bottom,position:getComputedStyle(p).position}})()");
     assert.ok(placement.inside,'content escapes shared pane: '+key);assert.equal(placement.position,'static');
 

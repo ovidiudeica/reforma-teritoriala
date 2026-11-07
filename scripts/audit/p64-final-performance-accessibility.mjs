@@ -1,3 +1,4 @@
+import {toggleSecondaryBasemap} from '../test/helpers/web-r32-basemap.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
@@ -88,9 +89,9 @@ try{
    await page.click('#atlas-advanced-content > button');
    assert.deepEqual(await provenance(),before);
    await page.click('#drawer-close');
-   await page.click('#basemap-toggle');
+   await toggleSecondaryBasemap(page);
    const changed=await provenance();assert.equal(changed.basemap,'false');assert.deepEqual(changed.checked,before.checked);
-   await page.click('#basemap-toggle');assert.deepEqual(await provenance(),before);
+   await toggleSecondaryBasemap(page);assert.deepEqual(await provenance(),before);
   });
   await t.test('final browser accessibility and resource errors are empty',async()=>{failNoAppErrors('P6.4');});
   await mkdir(output,{recursive:true});await writeFile(path.join(output,'p64-performance-accessibility.json'),JSON.stringify(evidence,null,2)+'\n');

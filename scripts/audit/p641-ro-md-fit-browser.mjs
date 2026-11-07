@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {launchBrowser,waitFor} from '../test/helpers/atlas-browser.mjs';
 import {roMdBounds} from '../../atlas-ro-md-fit.mjs';
+import {toggleSecondaryBasemap} from '../test/helpers/web-r32-basemap.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const browser=await launchBrowser(root),page=await browser.page();
@@ -12,7 +13,7 @@ const fits=(state,label)=>{
  assert.ok(state.nw.y>=24 && state.se.y<=state.height-24,label+' vertical roots '+JSON.stringify(state));
  assert.ok(state.icon.parent&&state.icon.svg,label+' icon integrated into zoom bar');
  assert.ok(state.icon.width>=44&&state.icon.height>=44,label+' accessible icon target');
- assert.deepEqual(state.icon.children,['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home','basemap-toggle','map-geometries-reset'],label+' zoom order');
+ assert.deepEqual(state.icon.children,['leaflet-control-zoom-in','leaflet-control-zoom-out','map-home'],label+' zoom order');
  assert.deepEqual(state.checked,['osm-r58974','osm-r90689'].sort());
 };
 try{
@@ -38,7 +39,7 @@ try{
   await t.test('recenter after panning, zooming and hiding OSM fits RO+MD without touching checked state',async()=>{
     await page.viewport(390,844);await page.navigate(browser.server.url+'/');
     await page.evaluate("(()=>{qaApp.map.setView([40,38],8,{animate:false});return true;})()");
-    await page.click('#basemap-toggle');
+    await toggleSecondaryBasemap(page);
     const before=await page.evaluate("({visible:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,osm:document.querySelector('#basemap-toggle').getAttribute('aria-pressed')})");
     await page.click('#map-home');
     const state=await points();fits(state,'mobile click');assert.equal(state.osm,'false');
