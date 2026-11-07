@@ -21,7 +21,7 @@ try{
    assert.equal(s.open,true);assert.equal(s.focused,'drawer-close');assert.ok(s.legend>0&&s.provenance>0);
    await page.key('Escape');
    assert.equal(await page.evaluate("!document.querySelector('#atlas-info-dialog').hidden"),false);
-   assert.equal(await page.evaluate('document.activeElement.id'),'info-toggle');
+   assert.equal(await page.evaluate('document.activeElement.id'),'navigation-more');
   });
   await t.test('opening information closes filters without changing checked geometries',async()=>{
    await page.click('#filters-toggle');
@@ -45,7 +45,7 @@ try{
     assert.equal(await page.evaluate('document.activeElement.id'),'drawer-close');
     await page.key('Escape');
     assert.equal(await page.evaluate("!document.querySelector('#atlas-info-dialog').hidden"),false);
-    assert.equal(await page.evaluate('document.activeElement.id'),width<600?'navigation-more':'info-toggle');
+    assert.equal(await page.evaluate('document.activeElement.id'),'navigation-more');
    }
   });
   await t.test('no application JS errors or own resource 404',async()=>{

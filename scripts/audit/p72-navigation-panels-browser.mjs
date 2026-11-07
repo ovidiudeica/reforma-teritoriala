@@ -43,7 +43,7 @@ try{
     await page.screenshot(path.join(tmpdir(),'atlas-browser-evidence','p72-panel-'+key+'.png'));
    }
    assert.equal(page.requests.filter(x=>x.url.includes('/public/geo/actual/')).length,requests);
-   await page.key('Escape');assert.equal((await snapshot()).state.active,null);assert.equal((await snapshot()).focus,'info-toggle');assert.equal(await semantic(),before);
+   await page.key('Escape');assert.equal((await snapshot()).state.active,null);assert.equal((await snapshot()).focus,'navigation-more');assert.equal(await semantic(),before);
   });
   await t.test('native keyboard search and Escape restore a reachable origin',async()=>{
    await page.evaluate("document.querySelector('#mobile-search').focus()");await page.key('Enter');assert.equal((await snapshot()).state.active,'search');assert.equal((await snapshot()).focus,'entity-search');
