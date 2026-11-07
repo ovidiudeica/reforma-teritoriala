@@ -111,11 +111,24 @@ try{
    const selected=await p.selectQuery('Cremenciug');assert.ok(selected);await capture(p,label+'-search-card');
    await p.call(function(){qaApp.atlasPanels.close({focus:false});});
    const basemap=await p.call(function(){return qaApp.captureUrlState().osmBasemapVisible;});
-   // The public basemap control is exercised by pointer; no geometry reset is coupled to it.
-   const mapButton=await p.call(function(){return [...document.querySelectorAll('.leaflet-control-zoom button,.leaflet-control-zoom a')].find(e=>/OSM|fundal/i.test((e.title||'')+' '+(e.getAttribute('aria-label')||'')))?.className;});
-   if(!mapButton)throw Error('Missing OSM map command');
-   const button=await p.call(function(){const e=[...document.querySelectorAll('.leaflet-control-zoom button,.leaflet-control-zoom a')].find(e=>/OSM|fundal/i.test((e.title||'')+' '+(e.getAttribute('aria-label')||'')));return {id:e.id,selector:e.tagName.toLowerCase()+'.'+[...e.classList].join('.')};});
-   const before=await p.call(state);await p.click(button.id?'#'+button.id:button.selector);assert.equal(await p.call(function(){return qaApp.captureUrlState().osmBasemapVisible;}),!basemap);await capture(p,label+'-basemap-off');const off=await p.call(state);assert.deepEqual(off.actual,before.actual);assert.deepEqual(off.ni,before.ni);await p.click(button.id?'#'+button.id:button.selector);assert.equal(await p.call(function(){return qaApp.captureUrlState().osmBasemapVisible;}),basemap);
+   // WEB-R3.2 candidate: OSM belongs to a retractable Filters disclosure.
+   // The published baseline still has its legacy map button until merge.
+   const contextual=await p.call(function(){return Boolean(document.getElementById('map-secondary-tools'));});
+   const toggleRaster=async()=>{
+    if(contextual){
+     await p.openPanel('filters');
+     await p.call(function(){document.getElementById('map-secondary-tools').open=true;});
+     await p.click('#basemap-toggle');
+     await p.click('#drawer-close');
+    }else{
+     const control=await p.call(function(){return [...document.querySelectorAll('.leaflet-control-zoom button,.leaflet-control-zoom a')].find(e=>/OSM|fundal/i.test((e.title||'')+' '+(e.getAttribute('aria-label')||'')))?.id;});
+     if(!control)throw Error('Missing published OSM map command');
+     await p.click('#'+control);
+    }
+   };
+   const before=await p.call(state);await toggleRaster();assert.equal(await p.call(function(){return qaApp.captureUrlState().osmBasemapVisible;}),!basemap);await capture(p,label+'-basemap-off');
+   const off=await p.call(state);assert.deepEqual(off.actual,before.actual);assert.deepEqual(off.ni,before.ni);
+   await toggleRaster();assert.equal(await p.call(function(){return qaApp.captureUrlState().osmBasemapVisible;}),basemap);
    await p.send('Emulation.setEmulatedMedia',{features:[{name:'forced-colors',value:'active'},{name:'prefers-reduced-motion',value:'reduce'}]});await p.openPanel('entities');await p.call(function(){qaApp.atlasTree.select('osm-r90689');qaApp.atlasTree.getNode('osm-r90689').button.focus();});await p.key('ArrowDown');
    assert.ok(await p.call(function(){return document.activeElement.classList.contains('tree-select')&&getComputedStyle(document.activeElement).outlineStyle!=='none'&&matchMedia('(forced-colors: active)').matches;}));await capture(p,label+'-forced');await p.send('Emulation.setEmulatedMedia',{features:[]});
    if(published){
