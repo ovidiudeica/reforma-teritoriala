@@ -428,7 +428,7 @@ function resetGeometries(){
  atlasUrl?.commit('push');
  document.getElementById('geometries-reset-status').textContent='Geometriile au fost resetate la România și Moldova. Selecția și filtrele sunt păstrate.';
 }
-for(const id of ['geometries-reset','map-geometries-reset'])document.getElementById(id)?.addEventListener('click',resetGeometries);
+for(const id of ['geometries-reset'])document.getElementById(id)?.addEventListener('click',resetGeometries);
 function updateSelectionVisibility(){
  const ownOutline=nistreniaOutlines?.has(selectedEntityId);
  const entity=nistreniaView?.isVirtual(selectedEntityId)?nistreniaView.nodes.get(selectedEntityId):entityById.get(selectedEntityId);

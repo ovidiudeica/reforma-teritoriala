@@ -67,6 +67,7 @@ jobs:
           node --check atlas-share.mjs
           node --check scripts/audit/p74-contextual-content-browser.mjs
           node --check scripts/audit/p75-modules-map-controls-browser.mjs
+          node --check scripts/audit/web-r33-functional-visual-browser.mjs
           node --check scripts/audit/p76-final-acceptance-browser.mjs
           node --check scripts/audit/web-r1b-layout-browser.mjs
       - name: CDP code/data separation security regressions
@@ -142,6 +143,10 @@ jobs:
         run: |
           node --test scripts/test/frontend-atlas-share.test.mjs scripts/test/frontend-atlas-search.test.mjs
           node --test scripts/audit/p74-contextual-content-browser.mjs
+      - name: WEB-R3.3 desktop/mobile functional, visual and accessibility audit
+        env:
+          ATLAS_QA_OUTPUT: ${{ runner.temp }}/atlas-browser-evidence
+        run: node --test scripts/audit/web-r33-functional-visual-browser.mjs
       - name: P7.5 module availability and adaptive Leaflet command owner
         run: node --test scripts/audit/p75-modules-map-controls-browser.mjs
       - name: P7.6 genuine mobile cold/warm and final accessibility supplements
@@ -192,6 +197,7 @@ jobs:
             /tmp/atlas-browser-evidence/p73-*
             /tmp/atlas-browser-evidence/p74-*
             /tmp/atlas-browser-evidence/p75-*
+            ${{ runner.temp }}/atlas-browser-evidence/web-r33-*
             /tmp/atlas-browser-evidence/p76-*
             /tmp/atlas-browser-evidence/p9095-*
             /tmp/atlas-browser-evidence/p801-*
