@@ -56,8 +56,8 @@ try{
   await t.test('seven viewports preserve map and controls; no runtime errors',async()=>{
    for(const [w,h] of [[1440,900],[1280,800],[900,768],[360,800],[390,844],[430,932],[390,600]]){
     await page.viewport(w,h);
-    const s=await page.evaluate("({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,map:document.querySelector('#map').getBoundingClientRect().width,basemap:document.querySelector('#basemap-toggle').getBoundingClientRect().width})");
-    assert.equal(s.width,w);assert.equal(s.overflow,false,w+' overflow');assert.ok(s.map>0&&s.basemap>0);
+    const s=await page.evaluate("({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,map:document.querySelector('#map').getBoundingClientRect().width,basemapInFilters:!!document.querySelector('#filters-panel #basemap-toggle')})");
+    assert.equal(s.width,w);assert.equal(s.overflow,false,w+' overflow');assert.ok(s.map>0&&s.basemapInFilters);
    }
    assert.deepEqual(page.errors,[]);
    assert.deepEqual(page.console.filter(x=>x.type==='error'||x.level==='error'),[]);
