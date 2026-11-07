@@ -9,7 +9,7 @@ const browser=await launchBrowser(root),page=await browser.page();
 const snapshot=()=>page.call(function(){
  const controls=[...document.querySelector('.leaflet-control-zoom').children].map(e=>e.id||e.className);
  const button=document.getElementById('basemap-toggle');
- const tiles=Object.values(qaApp.map._layers).filter(layer=>typeof layer._url==='string'&&layer._url.includes('tile.openstreetmap.org')).length;
+ const tiles=Object.values(qaApp.map._layers).filter(layer=>{if(typeof layer._url!=='string')return false;try{return new URL(layer._url.replace('{s}','a')).hostname==='a.tile.openstreetmap.org';}catch{return false;}}).length;
  return {controls,osm:button.getAttribute('aria-pressed'),tiles,location:location.href,
   ids:[...qaApp.visibleEntityIds].sort(),selected:qaApp.selectedEntityId,
   center:qaApp.map.getCenter(),zoom:qaApp.map.getZoom(),secondaryParent:!!button.closest('#map-secondary-tools'),
