@@ -325,7 +325,7 @@
 }
 
 /* WEB-R3.2 — compact desktop rail; secondary commands open only on demand. */
-@container atlas (min-width:900px){
+@container atlas (min-width:600px){
  #atlas-main #navigation-more{display:flex}
  #atlas-main .atlas-navigation-rail>.atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)){display:none}
  #atlas-main.atlas-navigation-more .atlas-navigation-rail>.atlas-rail-button:not(:is(#mobile-navigation,#mobile-search,#advanced-visible,#filters-toggle,#navigation-more)){display:flex}
